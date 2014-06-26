@@ -11,6 +11,71 @@
 		<execute macro="Page#tearDownPG" />
 	</tear-down>
 
+	<command name="AddWikiFrontPageWithImageViaAttachments" priority="4" >
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Wiki" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="WikiPage#addAttachmentPG">
+			<var name="attachmentFileName" value="Document_1.jpg" />
+			<var name="wikiPageTitle" value="FrontPage" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="PGWiki#assertClick" locator-key1="ADD_FRONTPAGE" value1="This page is empty. Edit it to add some text." />
+
+		<execute action="PGWikiWikipageDetails#assertClick" locator-key1="NAVIGATION_CONTENT" value1="Content" />
+
+		<execute macro="DMDocument#linkImageWiki">
+			<var name="documentName" value="Document_1.jpg" />
+		</execute>
+
+		<execute action="PGWikiEditpage#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+
+		<var name="key_htmlTags" value="p/img[contains(@src,'Document_1.jpg')]" />
+
+		<execute action="PGWikiWikipage#assertElementPresent" locator-key1="WIKI_PAGE_HTML_BODY" />
+	</command>
+
+	<command name="AddWikiFrontPageWithImageViaURL" priority="4">
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Wiki" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="PGWiki#assertClick" locator-key1="ADD_FRONTPAGE" value1="This page is empty. Edit it to add some text." />
+
+		<execute action="CKEditor#click" locator-key1="CONTENT_IMAGE_LINK" />
+
+		<execute action="CKEditor#type" locator-key1="CONTENT_IMAGE_LINK_URL_FIELD" value1="https://raw.githubusercontent.com/liferay/liferay-portal/master/portal-web/test/functional/com/liferay/portalweb/dependencies/Document_1.jpg" />
+
+		<execute action="CKEditor#assertClick" locator-key1="CONTENT_IMAGE_LINK_OK_BUTTON" value1="OK" />
+		
+		<execute action="PGWikiEditpage#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+
+		<var name="key_htmlTags" value="p/img[contains(@src,'Document_1.jpg')]" />
+
+		<execute action="PGWikiWikipage#assertElementPresent" locator-key1="WIKI_PAGE_HTML_BODY" />
+	</command>
+
 	<command name="ViewCKEditorsInheritanceNo" priority="5">
 		<var name="ckEditorFormatOptionsInvalid" value="Heading,Heading 2,Heading 3,Heading 4,Heading 5,Heading 6" />
 		<var name="ckEditorFormatOptionsValid" value="Normal,Formatted" />
@@ -89,5 +154,104 @@
 		</for>
 
 		<execute action="CKEditor#selectFrame" value1="relative=top" />
+	</command>
+
+	<command name="ViewWikiFrontPageLTR" priority="4">
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Wiki" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="PGWiki#assertClick" locator-key1="ADD_FRONTPAGE" value1="This page is empty. Edit it to add some text." />
+
+		<execute action="CKEditor#type" locator-key1="BODY_FIELD_LOCALIZED" value1="Wiki LTR Content" />
+
+		<execute action="CKEditor#selectFrame" locator-key1="BODY_FIELD_LOCALIZED" />
+
+		<execute action="CKEditor#assertElementPresent" locator1="//html[@dir='ltr']" />
+
+		<execute action="CKEditor#selectFrame" locator1="relative=top" />
+
+		<execute action="PGWikiEditpage#click" locator-key1="PUBLISH_BUTTON_LOCALIZED" />
+
+		<execute action="PGWikiAddpage#assertTextEquals" locator-key1="SUCCESS_MESSAGE_LOCALIZED" value1="Your request completed successfully." />
+
+		<execute action="PGWiki#assertElementPresent" locator1="//html[@dir='ltr']" />
+
+		<var name="key_htmlTags" value="p" />
+
+		<execute action="PGWikiWikipage#assertTextEquals" locator-key1="WIKI_PAGE_HTML_BODY" value1="Wiki LTR Content" />
+	</command>
+
+	<command name="ViewWikiFrontPageRTL" priority="4">
+		<var name="currentPortalLanguages" value="English (United States),Arabic (Saudi Arabia)" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Portal Settings" />
+		</execute>
+
+		<execute macro="PortalSettings#configureCurrentLanguagesCP">
+			<var name="currentPortalLanguages" value="${currentPortalLanguages}" />
+			<var name="displaySettings" value="Display Settings" />
+		</execute>
+
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Language" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Wiki" />
+		</execute>
+
+		<execute macro="LanguagePortlet#selectLanguagePG">
+			<var name="language" value="Arabic (Saudi Arabia)" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="PGWiki#click" locator-key1="ADD_FRONTPAGE" value1="سيتم إنشاء نسخة جديدة تلقائيا إذا تم تعديل هذا المحتوى." />
+
+		<execute action="CKEditor#type" locator-key1="BODY_FIELD_LOCALIZED" value1="Wiki RTL محتوى" />
+
+		<execute action="CKEditor#selectFrame" locator-key1="BODY_FIELD_LOCALIZED" />
+
+		<execute action="CKEditor#assertElementPresent" locator1="//html[@dir='rtl']" />
+
+		<execute action="CKEditor#selectFrame" locator1="relative=top" />
+
+		<execute action="PGWikiEditpage#click" locator-key1="PUBLISH_BUTTON_LOCALIZED" />
+
+		<execute action="PGWikiAddpage#assertTextEquals" locator-key1="SUCCESS_MESSAGE_LOCALIZED" value1="تم تنفيذ طلبك بنجاح." />
+
+		<execute action="PGWiki#assertElementPresent" locator1="//html[@dir='rtl']" />
+
+		<var name="key_htmlTags" value="p" />
+
+		<execute action="PGWikiWikipage#assertTextEquals" locator-key1="WIKI_PAGE_HTML_BODY" value1="Wiki RTL محتوى" />
+
+		<execute macro="LanguagePortlet#selectLanguagePG">
+			<var name="language" value="English (United States)" />
+		</execute>
 	</command>
 </definition>
