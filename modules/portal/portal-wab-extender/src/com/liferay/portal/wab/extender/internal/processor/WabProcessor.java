@@ -978,6 +978,8 @@ public class WabProcessor {
 		processWebXML("WEB-INF/liferay-web.xml");
 
 		processDeclarativeReferences();
+
+		processPackageNames(analyzer);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WabProcessor.class);
