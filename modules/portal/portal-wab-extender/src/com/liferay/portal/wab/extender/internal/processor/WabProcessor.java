@@ -1124,21 +1124,21 @@ public class WabProcessor {
 	}
 
 	protected void writeJarPaths(
-			File file, URI uri, JarOutputStream jarOutputStream,
+			File dir, URI uri, JarOutputStream jarOutputStream,
 			Set<String> paths)
 		throws IOException {
 
-		for (File curFile : file.listFiles()) {
-			URI relativize = uri.relativize(curFile.toURI());
+		for (File file : dir.listFiles()) {
+			URI relativizedURI = uri.relativize(file.toURI());
 
-			String path = relativize.getPath();
+			String path = relativizedURI.getPath();
 
-			if (curFile.isDirectory()) {
+			if (file.isDirectory()) {
 				jarOutputStream.putNextEntry(new ZipEntry(path));
 
 				jarOutputStream.closeEntry();
 
-				writeJarPaths(curFile, uri, jarOutputStream, paths);
+				writeJarPaths(file, uri, jarOutputStream, paths);
 
 				continue;
 			}
@@ -1157,7 +1157,7 @@ public class WabProcessor {
 				continue;
 			}
 
-			writeFile(curFile, jarOutputStream, paths, path);
+			writeFile(file, jarOutputStream, paths, path);
 		}
 	}
 
