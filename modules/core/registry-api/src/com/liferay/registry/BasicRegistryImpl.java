@@ -28,11 +28,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -609,14 +609,14 @@ public class BasicRegistryImpl implements Registry {
 		public void setProperties(Map<String, Object> properties) {
 			_basicServiceReference._properties.putAll(properties);
 
-			BasicRegistryImpl.this._modifiedService(_basicServiceReference);
+			_modifiedService(_basicServiceReference);
 		}
 
 		@Override
 		public void unregister() {
 			_services.remove(_basicServiceReference);
 
-			BasicRegistryImpl.this._removedService(_basicServiceReference);
+			_removedService(_basicServiceReference);
 		}
 
 		private BasicServiceReference<S> _basicServiceReference;
@@ -726,8 +726,9 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public ServiceReference<S>[] getServiceReferences() {
-			return _trackedServices.keySet().toArray(
-				new ServiceReference[_trackedServices.size()]);
+			Set<S> set = (Set<S>)_trackedServices.keySet();
+			
+			return set.toArray(new ServiceReference[_trackedServices.size()]);
 		}
 
 		@Override
@@ -839,9 +840,8 @@ public class BasicRegistryImpl implements Registry {
 		private Filter _filter;
 		private ServiceTrackerCustomizer<S, T> _serviceTrackerCustomizer;
 		private AtomicInteger _stateCounter = new AtomicInteger();
-		private ConcurrentNavigableMap<ServiceReference<S>, T>
-			_trackedServices =
-				new ConcurrentSkipListMap<ServiceReference<S>, T>();
+		private NavigableMap<ServiceReference<S>, T> _trackedServices =
+			new ConcurrentSkipListMap<ServiceReference<S>, T>();
 
 	}
 
