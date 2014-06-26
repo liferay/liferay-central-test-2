@@ -21,6 +21,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -443,10 +444,10 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public boolean matches(Map<String, Object> properties) {
-			UnmodifiableMapDictionary<String, Object> umMapDictionary =
+			Dictionary<String, Object> dictionary =
 				new UnmodifiableMapDictionary<String, Object>(properties);
 
-			return _filter.match(umMapDictionary);
+			return _filter.match(dictionary);
 		}
 
 		@Override
@@ -454,11 +455,11 @@ public class BasicRegistryImpl implements Registry {
 			BasicServiceReference<?> basicServiceReference =
 				(BasicServiceReference<?>)serviceReference;
 
-			UnmodifiableMapDictionary<String, Object> umMapDictionary =
+			Dictionary<String, Object> dictionary =
 				new UnmodifiableMapDictionary<String, Object>(
 					basicServiceReference._properties);
 
-			return _filter.match(umMapDictionary);
+			return _filter.match(dictionary);
 		}
 
 		@Override
