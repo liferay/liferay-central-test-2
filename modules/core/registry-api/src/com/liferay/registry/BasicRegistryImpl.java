@@ -342,7 +342,7 @@ public class BasicRegistryImpl implements Registry {
 		return true;
 	}
 
-	public class BasicServiceReference<T> implements ServiceReference<T> {
+	private class BasicServiceReference<T> implements ServiceReference<T> {
 
 		public BasicServiceReference(
 			String className, long id, int ranking,
@@ -462,7 +462,7 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
-	public class BasicServiceRegistration<S> implements ServiceRegistration<S> {
+	private class BasicServiceRegistration<S> implements ServiceRegistration<S> {
 
 		public BasicServiceRegistration(
 			BasicServiceReference<S> basicServiceReference) {
