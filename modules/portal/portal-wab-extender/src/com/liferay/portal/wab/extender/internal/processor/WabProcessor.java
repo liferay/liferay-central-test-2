@@ -1123,8 +1123,8 @@ public class WabProcessor {
 	}
 
 	protected void writeJarPath(
-		JarOutputStream jarOutputStream, Set<String> paths,
-		String path, InputStream inputStream) {
+		JarOutputStream jarOutputStream, Set<String> paths, String path,
+		InputStream inputStream) {
 
 		if (paths.contains(path)) {
 			return;
