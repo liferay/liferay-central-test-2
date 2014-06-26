@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.registry;
 
 import com.liferay.registry.util.StringPlus;
@@ -471,19 +472,6 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
-	private class LowerCaseKeyTreeMap extends TreeMap<String, Object> {
-
-		public LowerCaseKeyTreeMap() {
-			super();
-		}
-
-		@Override
-		public Object put(String key, Object value) {
-			return super.put(key.toLowerCase(), value);
-		}
-
-	}
-
 	private class BasicServiceReference<T> implements ServiceReference<T> {
 
 		public BasicServiceReference(
@@ -636,6 +624,19 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
+	private class LowerCaseKeyTreeMap extends TreeMap<String, Object> {
+
+		public LowerCaseKeyTreeMap() {
+			super();
+		}
+
+		@Override
+		public Object put(String key, Object value) {
+			return super.put(key.toLowerCase(), value);
+		}
+
+	}
+
 	private class BasicServiceTracker<S, T> implements ServiceTracker<S, T> {
 
 		public BasicServiceTracker(Filter filter) {
@@ -708,7 +709,9 @@ public class BasicRegistryImpl implements Registry {
 			BasicServiceReference<S> basicServiceReference =
 				(BasicServiceReference<S>)serviceReference;
 
-			for (ServiceReference<S> curServiceReference : _trackedServices.keySet()) {
+			for (ServiceReference<S> curServiceReference :
+					_trackedServices.keySet()) {
+
 				if (basicServiceReference.matches(curServiceReference)) {
 					return _trackedServices.get(curServiceReference);
 				}
@@ -837,8 +840,9 @@ public class BasicRegistryImpl implements Registry {
 		private Filter _filter;
 		private ServiceTrackerCustomizer<S, T> _serviceTrackerCustomizer;
 		private AtomicInteger _stateCounter = new AtomicInteger();
-		private ConcurrentNavigableMap<ServiceReference<S>, T> _trackedServices =
-			new ConcurrentSkipListMap<ServiceReference<S>, T>();
+		private ConcurrentNavigableMap<ServiceReference<S>, T>
+			_trackedServices =
+				new ConcurrentSkipListMap<ServiceReference<S>, T>();
 
 	}
 
