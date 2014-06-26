@@ -53,7 +53,7 @@ public class SidebarNode extends SuperNode {
 
 	private String _getAlt(Node node) {
 		if (node == null) {
-			return _BLANK;
+			return "";
 		}
 
 		List<Node> nodes = node.getChildren();
@@ -66,10 +66,8 @@ public class SidebarNode extends SuperNode {
 			return textNode.getText();
 		}
 
-		return _BLANK;
+		return "";
 	}
-
-	private static final String _BLANK = "";
 
 	private String _alt;
 	private String _src;
