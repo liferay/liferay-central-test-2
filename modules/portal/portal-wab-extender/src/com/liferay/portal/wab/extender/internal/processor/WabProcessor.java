@@ -464,9 +464,7 @@ public class WabProcessor {
 		}
 	}
 
-	protected void processExportPackageNames(Analyzer analyzer)
-		throws IOException {
-
+	protected void processExportPackageNames(Analyzer analyzer) {
 		StringBundler sb = new StringBundler(13);
 
 		sb.append(StringUtil.merge(_exportPackageNames.toArray()));
@@ -583,9 +581,7 @@ public class WabProcessor {
 		}
 	}
 
-	protected void processImportPackageNames(Analyzer analyzer)
-		throws IOException {
-
+	protected void processImportPackageNames(Analyzer analyzer) {
 		String packageName = MapUtil.getString(
 			_parameters, Constants.IMPORT_PACKAGE);
 
