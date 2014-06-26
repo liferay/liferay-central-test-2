@@ -32,7 +32,6 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CountDownLatch;
@@ -431,9 +430,9 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	private AtomicLong _serviceIdCounter = new AtomicLong();
-	private ConcurrentMap<ServiceReference<?>, Object> _services =
+	private Map<ServiceReference<?>, Object> _services =
 		new ConcurrentSkipListMap<ServiceReference<?>, Object>();
-	private ConcurrentMap<ServiceTracker<?, ?>, Filter> _serviceTrackers =
+	private Map<ServiceTracker<?, ?>, Filter> _serviceTrackers =
 		new ConcurrentHashMap<ServiceTracker<?, ?>, Filter>();
 
 	private class BasicFilter implements Filter {
