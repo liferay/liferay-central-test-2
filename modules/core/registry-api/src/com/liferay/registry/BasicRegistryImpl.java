@@ -477,16 +477,14 @@ public class BasicRegistryImpl implements Registry {
 		public void setProperties(Map<String, Object> properties) {
 			_basicServiceReference._properties.putAll(properties);
 
-			BasicRegistryImpl.this._modifiedService(
-				_basicServiceReference);
+			BasicRegistryImpl.this._modifiedService(_basicServiceReference);
 		}
 
 		@Override
 		public void unregister() {
 			_services.remove(_basicServiceReference);
 
-			BasicRegistryImpl.this._removedService(
-				_basicServiceReference);
+			BasicRegistryImpl.this._removedService(_basicServiceReference);
 		}
 
 		private BasicServiceReference<S> _basicServiceReference;

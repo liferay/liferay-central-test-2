@@ -37,8 +37,13 @@ public class UnmodifiableMapDictionary <K, V> extends Dictionary<K, V> {
 	}
 
 	@Override
-	public int size() {
-		return _map.size();
+	public Enumeration<V> elements() {
+		return _elements;
+	}
+
+	@Override
+	public V get(Object key) {
+		return _map.get(key);
 	}
 
 	@Override
@@ -52,16 +57,6 @@ public class UnmodifiableMapDictionary <K, V> extends Dictionary<K, V> {
 	}
 
 	@Override
-	public Enumeration<V> elements() {
-		return _elements;
-	}
-
-	@Override
-	public V get(Object key) {
-		return _map.get(key);
-	}
-
-	@Override
 	public V put(K key, V value) {
 		throw new UnsupportedOperationException();
 	}
@@ -71,8 +66,13 @@ public class UnmodifiableMapDictionary <K, V> extends Dictionary<K, V> {
 		throw new UnsupportedOperationException();
 	}
 
-	private Enumeration<K> _keys;
+	@Override
+	public int size() {
+		return _map.size();
+	}
+
 	private Enumeration<V> _elements;
+	private Enumeration<K> _keys;
 	private Map<K, V> _map;
 
 }

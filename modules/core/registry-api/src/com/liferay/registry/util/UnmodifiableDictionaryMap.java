@@ -44,13 +44,8 @@ public class UnmodifiableDictionaryMap <K, V> implements Map<K, V> {
 	}
 
 	@Override
-	public int size() {
-		return _map.size();
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return _map.isEmpty();
+	public void clear() {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -64,17 +59,27 @@ public class UnmodifiableDictionaryMap <K, V> implements Map<K, V> {
 	}
 
 	@Override
+	public Set<Map.Entry<K, V>> entrySet() {
+		return _map.entrySet();
+	}
+
+	@Override
 	public V get(Object key) {
 		return _map.get(key);
 	}
 
 	@Override
-	public V put(K key, V value) {
-		throw new UnsupportedOperationException();
+	public boolean isEmpty() {
+		return _map.isEmpty();
 	}
 
 	@Override
-	public V remove(Object key) {
+	public Set<K> keySet() {
+		return _map.keySet();
+	}
+
+	@Override
+	public V put(K key, V value) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -84,23 +89,18 @@ public class UnmodifiableDictionaryMap <K, V> implements Map<K, V> {
 	}
 
 	@Override
-	public void clear() {
+	public V remove(Object key) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Set<K> keySet() {
-		return _map.keySet();
+	public int size() {
+		return _map.size();
 	}
 
 	@Override
 	public Collection<V> values() {
 		return _map.values();
-	}
-
-	@Override
-	public Set<Map.Entry<K, V>> entrySet() {
-		return _map.entrySet();
 	}
 
 	private Map<K, V> _map;
