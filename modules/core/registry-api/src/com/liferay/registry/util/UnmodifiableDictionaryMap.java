@@ -31,8 +31,10 @@ public class UnmodifiableDictionaryMap <K, V> implements Map<K, V> {
 		Map<K, V> map = new HashMap<K, V>();
 
 		if (dictionary != null) {
-			for (Enumeration<K> em = dictionary.keys(); em.hasMoreElements();) {
-				K key = em.nextElement();
+			for (Enumeration<K> enumeration = dictionary.keys();
+					enumeration.hasMoreElements();) {
+
+				K key = enumeration.nextElement();
 
 				map.put(key, dictionary.get(key));
 			}
@@ -97,10 +99,10 @@ public class UnmodifiableDictionaryMap <K, V> implements Map<K, V> {
 	}
 
 	@Override
-	public Set<java.util.Map.Entry<K, V>> entrySet() {
+	public Set<Map.Entry<K, V>> entrySet() {
 		return _map.entrySet();
 	}
 
-	private final Map<K, V> _map;
+	private Map<K, V> _map;
 
 }

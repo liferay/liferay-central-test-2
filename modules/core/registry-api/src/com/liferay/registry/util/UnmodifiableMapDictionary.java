@@ -71,8 +71,8 @@ public class UnmodifiableMapDictionary <K, V> extends Dictionary<K, V> {
 		throw new UnsupportedOperationException();
 	}
 
-	private final Enumeration<K> _keys;
-	private final Enumeration<V> _elements;
-	private final Map<K, V> _map;
+	private Enumeration<K> _keys;
+	private Enumeration<V> _elements;
+	private Map<K, V> _map;
 
 }
