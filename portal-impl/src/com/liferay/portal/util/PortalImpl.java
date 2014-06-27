@@ -1930,9 +1930,10 @@ public class PortalImpl implements Portal {
 		LiferayPortletResponse liferayPortletResponse =
 			getLiferayPortletResponse(portletResponse);
 
-		currentPortletURL = String.valueOf(
-			PortletURLUtil.getCurrent(
-				liferayPortletRequest, liferayPortletResponse));
+		PortletURL currentURLObj = PortletURLUtil.getCurrent(
+			liferayPortletRequest, liferayPortletResponse);
+
+		currentPortletURL = currentURLObj.toString();
 
 		portletRequest.setAttribute(
 			WebKeys.CURRENT_PORTLET_URL, currentPortletURL);
