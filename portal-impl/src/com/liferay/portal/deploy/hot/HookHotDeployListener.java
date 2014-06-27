@@ -612,9 +612,6 @@ public class HookHotDeployListener
 
 		Element rootElement = document.getRootElement();
 
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-
 		ClassLoader portletClassLoader = hotDeployEvent.getContextClassLoader();
 
 		initPortalProperties(
@@ -675,8 +672,8 @@ public class HookHotDeployListener
 			String eventClassName = eventElement.elementText("event-class");
 
 			initEvent(
-				eventName, eventClassName, portletClassLoader,
-				serviceRegistrations);
+				servletContextName, portletClassLoader, eventName,
+				eventClassName);
 		}
 
 		// End backwards compatibility for 5.1.0
@@ -887,12 +884,13 @@ public class HookHotDeployListener
 	}
 
 	protected void initAuthenticators(
-			ClassLoader portletClassLoader, Properties portalProperties,
-			String key,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties, String key)
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
 
 		String[] authenticatorClassNames = StringUtil.split(
 			portalProperties.getProperty(key));
@@ -920,24 +918,22 @@ public class HookHotDeployListener
 			Properties portalProperties)
 		throws Exception {
 
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-
 		initAuthenticators(
-			portletClassLoader, portalProperties, AUTH_PIPELINE_PRE,
-			serviceRegistrations);
+			servletContextName, portletClassLoader, portalProperties,
+			AUTH_PIPELINE_PRE);
 		initAuthenticators(
-			portletClassLoader, portalProperties, AUTH_PIPELINE_POST,
-			serviceRegistrations);
+			servletContextName, portletClassLoader, portalProperties,
+			AUTH_PIPELINE_POST);
 	}
 
 	protected void initAuthFailures(
-			ClassLoader portletClassLoader, Properties portalProperties,
-			String key,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties, String key)
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
 
 		String[] authFailureClassNames = StringUtil.split(
 			portalProperties.getProperty(key));
@@ -964,15 +960,12 @@ public class HookHotDeployListener
 			Properties portalProperties)
 		throws Exception {
 
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-
 		initAuthFailures(
-			portletClassLoader, portalProperties, AUTH_FAILURE,
-			serviceRegistrations);
+			servletContextName, portletClassLoader, portalProperties,
+			AUTH_FAILURE);
 		initAuthFailures(
-			portletClassLoader, portalProperties, AUTH_MAX_FAILURES,
-			serviceRegistrations);
+			servletContextName, portletClassLoader, portalProperties,
+			AUTH_MAX_FAILURES);
 	}
 
 	protected void initAuthPublicPaths(
@@ -1042,10 +1035,9 @@ public class HookHotDeployListener
 			return;
 		}
 
+		Registry registry = RegistryUtil.getRegistry();
 		Map<Object, ServiceRegistration<?>> serviceRegistrations =
 			getServiceRegistrations(servletContextName);
-
-		Registry registry = RegistryUtil.getRegistry();
 
 		for (String autoDeployListenerClassName :
 				autoDeployListenerClassNames) {
@@ -1070,7 +1062,6 @@ public class HookHotDeployListener
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
-
 		Map<Object, ServiceRegistration<?>> serviceRegistrations =
 			getServiceRegistrations(servletContextName);
 
@@ -1188,9 +1179,8 @@ public class HookHotDeployListener
 	}
 
 	protected void initEvent(
-			String eventName, String eventClassName,
-			ClassLoader portletClassLoader,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			String servletContextName, ClassLoader portletClassLoader,
+			String eventName, String eventClassName)
 		throws Exception {
 
 		if (eventName.equals(APPLICATION_STARTUP_EVENTS)) {
@@ -1219,6 +1209,8 @@ public class HookHotDeployListener
 		}
 
 		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
 
 		if (_propsKeysEvents.contains(eventName)) {
 			Class<?> clazz = portletClassLoader.loadClass(eventClassName);
@@ -1263,9 +1255,6 @@ public class HookHotDeployListener
 			Properties portalProperties)
 		throws Exception {
 
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-
 		for (Map.Entry<Object, Object> entry : portalProperties.entrySet()) {
 			String key = (String)entry.getKey();
 
@@ -1282,8 +1271,8 @@ public class HookHotDeployListener
 
 			for (String eventClassName : eventClassNames) {
 				initEvent(
-					eventName, eventClassName, portletClassLoader,
-					serviceRegistrations);
+					servletContextName, portletClassLoader, eventName,
+					eventClassName);
 			}
 		}
 	}
@@ -1323,7 +1312,6 @@ public class HookHotDeployListener
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
-
 		Map<Object, ServiceRegistration<?>> serviceRegistrations =
 			getServiceRegistrations(servletContextName);
 
@@ -1601,7 +1589,6 @@ public class HookHotDeployListener
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
-
 		Map<Object, ServiceRegistration<?>> serviceRegistrations =
 			getServiceRegistrations(servletContextName);
 
@@ -2144,9 +2131,8 @@ public class HookHotDeployListener
 
 			if (ProxyUtil.isProxyClass(serviceProxy.getClass())) {
 				initServices(
-					portletClassLoader, serviceType,
-					serviceTypeClass, serviceImplConstructor, serviceProxy,
-					serviceRegistrations);
+					servletContextName, portletClassLoader, serviceType,
+					serviceTypeClass, serviceImplConstructor, serviceProxy);
 			}
 			else {
 				_log.error(
@@ -2157,13 +2143,14 @@ public class HookHotDeployListener
 	}
 
 	protected void initServices(
-			ClassLoader portletClassLoader,
+			String servletContextName, ClassLoader portletClassLoader,
 			String serviceType, Class<?> serviceTypeClass,
-			Constructor<?> serviceImplConstructor, Object serviceProxy,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			Constructor<?> serviceImplConstructor, Object serviceProxy)
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
 
 		AdvisedSupport advisedSupport = ServiceBeanAopProxy.getAdvisedSupport(
 			serviceProxy);
@@ -2332,14 +2319,15 @@ public class HookHotDeployListener
 	}
 
 	protected void initStrutsAction(
-			String strutsActionPath, String strutsActionClassName,
-			ClassLoader portletClassLoader,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			String servletContextName, ClassLoader portletClassLoader,
+			String strutsActionPath, String strutsActionClassName)
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
 
-		Object strutsActionObj = InstanceFactory.newInstance(
+		Object strutsActionObject = InstanceFactory.newInstance(
 			portletClassLoader, strutsActionClassName);
 
 		Map<String, Object> properties = new HashMap<String, Object>();
@@ -2348,12 +2336,12 @@ public class HookHotDeployListener
 
 		ServiceRegistration<?> serviceRegistration = null;
 
-		if (strutsActionObj instanceof StrutsAction) {
+		if (strutsActionObject instanceof StrutsAction) {
 			StrutsAction strutsAction =
 				(StrutsAction)ProxyUtil.newProxyInstance(
 					portletClassLoader, new Class[] {StrutsAction.class},
 					new ClassLoaderBeanHandler(
-						strutsActionObj, portletClassLoader));
+						strutsActionObject, portletClassLoader));
 
 			serviceRegistration = registry.registerService(
 				StrutsAction.class, strutsAction, properties);
@@ -2363,7 +2351,7 @@ public class HookHotDeployListener
 				(StrutsPortletAction)ProxyUtil.newProxyInstance(
 					portletClassLoader, new Class[] {StrutsPortletAction.class},
 					new ClassLoaderBeanHandler(
-						strutsActionObj, portletClassLoader));
+						strutsActionObject, portletClassLoader));
 
 			serviceRegistration = registry.registerService(
 				StrutsPortletAction.class, strutsPortletAction, properties);
@@ -2376,9 +2364,6 @@ public class HookHotDeployListener
 			String servletContextName, ClassLoader portletClassLoader,
 			Element parentElement)
 		throws Exception {
-
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
 
 		List<Element> strutsActionElements = parentElement.elements(
 			"struts-action");
@@ -2399,8 +2384,8 @@ public class HookHotDeployListener
 				"struts-action-impl");
 
 			initStrutsAction(
-				strutsActionPath, strutsActionImpl, portletClassLoader,
-				serviceRegistrations);
+				servletContextName, portletClassLoader, strutsActionPath,
+				strutsActionImpl);
 		}
 	}
 
