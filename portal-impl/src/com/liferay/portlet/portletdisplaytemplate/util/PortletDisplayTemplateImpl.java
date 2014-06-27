@@ -65,6 +65,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
