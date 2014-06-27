@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceTracker;
@@ -38,9 +36,6 @@ public class EmailAddressGeneratorFactory {
 
 		_serviceTracker.open();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		EmailAddressGeneratorFactory.class);
 
 	private static EmailAddressGeneratorFactory _instance =
 		new EmailAddressGeneratorFactory();
