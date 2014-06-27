@@ -34,8 +34,7 @@ public class EmailAddressValidatorFactory {
 	private EmailAddressValidatorFactory() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		_serviceTracker = registry.trackServices(
-			EmailAddressValidator.class);
+		_serviceTracker = registry.trackServices(EmailAddressValidator.class);
 
 		_serviceTracker.open();
 	}

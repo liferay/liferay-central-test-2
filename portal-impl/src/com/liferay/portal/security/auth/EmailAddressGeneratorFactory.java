@@ -34,8 +34,7 @@ public class EmailAddressGeneratorFactory {
 	private EmailAddressGeneratorFactory() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		_serviceTracker = registry.trackServices(
-			EmailAddressGenerator.class);
+		_serviceTracker = registry.trackServices(EmailAddressGenerator.class);
 
 		_serviceTracker.open();
 	}
@@ -45,7 +44,7 @@ public class EmailAddressGeneratorFactory {
 
 	private static EmailAddressGeneratorFactory _instance =
 		new EmailAddressGeneratorFactory();
-	
+
 	private ServiceTracker<?, EmailAddressGenerator> _serviceTracker;
 
 }
