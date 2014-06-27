@@ -26,6 +26,7 @@
 	<classpathentry kind="lib" path="lib/development/ant-ext.jar"/>
 	<classpathentry kind="lib" path="lib/development/ant-installer.jar"/>
 	<classpathentry kind="lib" path="lib/development/antelope.jar"/>
+	<classpathentry kind="lib" path="lib/development/appium.jar"/>
 	<classpathentry kind="lib" path="lib/development/catalina.jar"/>
 	<classpathentry kind="lib" path="lib/development/cobertura.jar"/>
 	<classpathentry kind="lib" path="lib/development/com.liferay.ant.bnd.jar"/>
@@ -47,7 +48,6 @@
 	<classpathentry kind="lib" path="lib/development/jargs.jar"/>
 	<classpathentry kind="lib" path="lib/development/jarjar.jar"/>
 	<classpathentry kind="lib" path="lib/development/jasper.jar"/>
-	<classpathentry kind="lib" path="lib/development/java-client.jar"/>
 	<classpathentry kind="lib" path="lib/development/jaxb-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/jbi_rt.jar"/>
 	<classpathentry kind="lib" path="lib/development/jetty-server.jar"/>
