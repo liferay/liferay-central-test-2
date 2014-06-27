@@ -161,8 +161,11 @@ public class BasicRegistryImpl implements Registry {
 			return null;
 		}
 
-		T[] array = (T[])Array.newInstance(
-			services.get(0).getClass(), services.size());
+		T service = services.get(0);
+
+		Class<?> clazz = service.getClass();
+
+		T[] array = (T[])Array.newInstance(clazz, services.size());
 
 		return services.toArray(array);
 	}
@@ -560,11 +563,15 @@ public class BasicRegistryImpl implements Registry {
 
 				Object[] array = null;
 
-				if (value.getClass().isArray()) {
+				Class<?> clazz = value.getClass();
+
+				if (clazz.isArray()) {
 					array = (Object[])value;
 				}
 				else if (Collection.class.isInstance(value)) {
-					array = ((Collection<?>)value).toArray();
+					Collection<?> collection = (Collection<?>)value;
+
+					array = collection.toArray();
 				}
 				else {
 					array = new Object[] {value};
@@ -685,8 +692,10 @@ public class BasicRegistryImpl implements Registry {
 		public void close() {
 			_serviceTrackers.remove(this);
 
-			Iterator<Entry<ServiceReference<S>, T>> iterator =
-				_trackedServices.entrySet().iterator();
+			Set<Entry<ServiceReference<S>, T>> set =
+				_trackedServices.entrySet();
+
+			Iterator<Entry<ServiceReference<S>, T>> iterator = set.iterator();
 
 			while (iterator.hasNext()) {
 				Entry<ServiceReference<S>, T> entry = iterator.next();
@@ -734,12 +743,16 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public Object[] getServices() {
-			return _trackedServices.values().toArray();
+			Collection<T> values = _trackedServices.values();
+
+			return values.toArray();
 		}
 
 		@Override
 		public T[] getServices(T[] services) {
-			return _trackedServices.values().toArray(services);
+			Collection<T> values = _trackedServices.values();
+
+			return values.toArray(services);
 		}
 
 		@Override
@@ -776,8 +789,10 @@ public class BasicRegistryImpl implements Registry {
 		public void open() {
 			_serviceTrackers.put(this, _filter);
 
+			Set<Entry<ServiceReference<?>, Object>> set = _services.entrySet();
+
 			Iterator<Entry<ServiceReference<?>, Object>> iterator =
-				_services.entrySet().iterator();
+				set.iterator();
 
 			while (iterator.hasNext()) {
 				Entry<ServiceReference<?>, Object> entry = iterator.next();
