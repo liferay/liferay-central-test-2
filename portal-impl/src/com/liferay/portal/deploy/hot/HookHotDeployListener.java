@@ -885,6 +885,19 @@ public class HookHotDeployListener
 
 	protected void initAuthenticators(
 			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		initAuthenticators(
+			servletContextName, portletClassLoader, portalProperties,
+			AUTH_PIPELINE_PRE);
+		initAuthenticators(
+			servletContextName, portletClassLoader, portalProperties,
+			AUTH_PIPELINE_POST);
+	}
+
+	protected void initAuthenticators(
+			String servletContextName, ClassLoader portletClassLoader,
 			Properties portalProperties, String key)
 		throws Exception {
 
@@ -913,17 +926,17 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void initAuthenticators(
+	protected void initAuthFailures(
 			String servletContextName, ClassLoader portletClassLoader,
 			Properties portalProperties)
 		throws Exception {
 
-		initAuthenticators(
+		initAuthFailures(
 			servletContextName, portletClassLoader, portalProperties,
-			AUTH_PIPELINE_PRE);
-		initAuthenticators(
+			AUTH_FAILURE);
+		initAuthFailures(
 			servletContextName, portletClassLoader, portalProperties,
-			AUTH_PIPELINE_POST);
+			AUTH_MAX_FAILURES);
 	}
 
 	protected void initAuthFailures(
@@ -950,22 +963,8 @@ public class HookHotDeployListener
 				registry.registerService(
 					AuthFailure.class, authFailure, properties);
 
-			serviceRegistrations.put(
-				authFailureClassName, serviceRegistration);
+			serviceRegistrations.put(authFailureClassName, serviceRegistration);
 		}
-	}
-
-	protected void initAuthFailures(
-			String servletContextName, ClassLoader portletClassLoader,
-			Properties portalProperties)
-		throws Exception {
-
-		initAuthFailures(
-			servletContextName, portletClassLoader, portalProperties,
-			AUTH_FAILURE);
-		initAuthFailures(
-			servletContextName, portletClassLoader, portalProperties,
-			AUTH_MAX_FAILURES);
 	}
 
 	protected void initAuthPublicPaths(
@@ -2163,11 +2162,10 @@ public class HookHotDeployListener
 			(ServiceWrapper<?>)serviceImplConstructor.newInstance(
 				previousService);
 
-		ServiceRegistration<?> serviceRegistration =
-			registry.registerService(ServiceWrapper.class, serviceWrapper);
+		ServiceRegistration<?> serviceRegistration = registry.registerService(
+			ServiceWrapper.class, serviceWrapper);
 
 		serviceRegistrations.put(serviceImplConstructor, serviceRegistration);
-
 	}
 
 	protected Filter initServletFilter(
