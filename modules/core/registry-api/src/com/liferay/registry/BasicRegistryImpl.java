@@ -494,7 +494,8 @@ public class BasicRegistryImpl implements Registry {
 			BasicServiceReference<?> otherServiceReference =
 				(BasicServiceReference<?>)serviceReference;
 
-			int thisServiceRanking = (Integer)_properties.get("service.ranking");
+			int thisServiceRanking = (Integer)_properties.get(
+				"service.ranking");
 
 			Map<String, Object> otherProperties =
 				otherServiceReference._properties;
