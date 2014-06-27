@@ -64,7 +64,7 @@ public class UserScreenNameException extends PortalException {
 			super(
 				"Screen Name must be alpha-numeric. Only the following " +
 					"additional special characters are allowed: " +
-						validSpecialChars);
+						new String(validSpecialChars));
 		}
 	}
 
