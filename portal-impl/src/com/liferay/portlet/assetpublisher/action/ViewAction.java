@@ -15,7 +15,6 @@
 package com.liferay.portlet.assetpublisher.action;
 
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.journalcontent.action.WebContentAction;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
