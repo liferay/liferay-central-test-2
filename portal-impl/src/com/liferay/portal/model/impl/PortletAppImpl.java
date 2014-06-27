@@ -243,8 +243,8 @@ public class PortletAppImpl implements PortletApp {
 	private Map<String, PublicRenderParameter>
 		_publicRenderParametersByIdentifier =
 			new HashMap<String, PublicRenderParameter>();
-	private String _servletContextName = StringPool.BLANK;
 	private ServletContext _servletContext;
+	private String _servletContextName = StringPool.BLANK;
 	private Set<String> _servletURLPatterns = new LinkedHashSet<String>();
 	private Map<String, SpriteImage> _spriteImagesMap =
 		new HashMap<String, SpriteImage>();
