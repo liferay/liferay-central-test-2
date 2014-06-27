@@ -286,8 +286,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Portlet deployRemotePortlet(
-			Portlet portlet, String[] categoryNames)
+	public Portlet deployRemotePortlet(Portlet portlet, String[] categoryNames)
 		throws PortalException {
 
 		return deployRemotePortlet(portlet, categoryNames, true);
