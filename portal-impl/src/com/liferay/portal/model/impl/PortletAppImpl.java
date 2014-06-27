@@ -195,8 +195,6 @@ public class PortletAppImpl implements PortletApp {
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
 
-		// Make sure the path is correct
-
 		_contextPath = _servletContext.getContextPath();
 	}
 
