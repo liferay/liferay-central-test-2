@@ -66,6 +66,7 @@ public class UserScreenNameException extends PortalException {
 					"additional special characters are allowed: " +
 						new String(validSpecialChars));
 		}
+
 	}
 
 	public static class MustNotBeNull extends UserScreenNameException {
@@ -77,6 +78,7 @@ public class UserScreenNameException extends PortalException {
 		public MustNotBeNull(String fullName) {
 			super("Screen Name must not be null for " + fullName);
 		}
+
 	}
 
 	public static class MustNotBeNumeric extends UserScreenNameException {
@@ -87,6 +89,7 @@ public class UserScreenNameException extends PortalException {
 					"property " + PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC +
 						" is enabled");
 		}
+
 	}
 
 	public static class MustNotBeReservedForAnonymous
@@ -105,6 +108,7 @@ public class UserScreenNameException extends PortalException {
 		}
 
 		private final String[] _reservedScreenNames;
+
 	}
 
 	public static class MustNotBeUsedByGroup extends UserScreenNameException {
@@ -128,6 +132,7 @@ public class UserScreenNameException extends PortalException {
 
 		private final Group _group;
 		private final String _screenName;
+
 	}
 
 	public static class MustProduceValidFriendlyURL
@@ -155,6 +160,7 @@ public class UserScreenNameException extends PortalException {
 
 		private final int _exceptionType;
 		private final String _screenName;
+
 	}
 
 	public static class MustValidate extends UserScreenNameException {
@@ -180,6 +186,7 @@ public class UserScreenNameException extends PortalException {
 
 		private final String _screenName;
 		private final ScreenNameValidator _screenNameValidator;
+
 	}
 
 }
