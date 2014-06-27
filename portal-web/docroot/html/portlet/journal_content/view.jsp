@@ -109,7 +109,7 @@ boolean expired = true;
 											</aui:script>
 										</c:when>
 										<c:otherwise>
-											<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="printPageURL" >
+											<portlet:renderURL var="printPageURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 												<portlet:param name="struts_action" value="/journal_content/view" />
 												<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
 												<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
@@ -143,7 +143,7 @@ boolean expired = true;
 											for (String extension : extensions) {
 											%>
 
-												<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportArticleURL">
+												<portlet:actionURL var="exportArticleURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 													<portlet:param name="struts_action" value="/journal_content/export_article" />
 													<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
 													<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
@@ -293,7 +293,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && !layout.isLayoutPrototyp
 <c:if test="<%= showIconsActions && !print && hasViewPermission %>">
 	<div class="icons-container lfr-meta-actions">
 		<div class="lfr-icon-actions">
-			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="redirectURL">
+			<portlet:renderURL var="redirectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 				<portlet:param name="struts_action" value="/journal_content/add_asset_redirect" />
 				<portlet:param name="referringPortletResource" value="<%= portletDisplay.getId() %>" />
 			</portlet:renderURL>
