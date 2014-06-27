@@ -62,9 +62,8 @@ public class UserScreenNameException extends PortalException {
 
 		public MustBeAlphaNumeric(char ... validSpecialChars) {
 			super(
-				"Screen Name must be alpha-numeric. Only the following " +
-					"additional special characters are allowed: " +
-						new String(validSpecialChars));
+				"Screen name must be alphanumeric or one the following " +
+					"special characters: " + new String(validSpecialChars));
 		}
 
 	}
@@ -72,11 +71,11 @@ public class UserScreenNameException extends PortalException {
 	public static class MustNotBeNull extends UserScreenNameException {
 
 		public MustNotBeNull() {
-			super("Screen Name must not be null");
+			super("Screen name must not be null");
 		}
 
 		public MustNotBeNull(String fullName) {
-			super("Screen Name must not be null for " + fullName);
+			super("Screen name must not be null for the full name " + fullName);
 		}
 
 	}
@@ -85,7 +84,7 @@ public class UserScreenNameException extends PortalException {
 
 		public MustNotBeNumeric(String screenName) {
 			super(
-				"Screen Name " + screenName + " is numeric but the portal " +
+				"Screen name " + screenName + " is numeric but the portal " +
 					"property " + PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC +
 						" is enabled");
 		}
@@ -97,8 +96,8 @@ public class UserScreenNameException extends PortalException {
 
 		public MustNotBeReservedForAnonymous(String[] reservedScreenNames) {
 			super(
-				"Screen Name must not be a reserved name for anonymous users " +
-					"such as " + StringUtil.merge(reservedScreenNames));
+				"Screen name must not be a reserved name for anonymous users " +
+					"such as: " + StringUtil.merge(reservedScreenNames));
 
 			_reservedScreenNames = reservedScreenNames;
 		}
@@ -115,8 +114,8 @@ public class UserScreenNameException extends PortalException {
 
 		public MustNotBeUsedByGroup(String screenName, Group group) {
 			super(
-				"Screen Name " + screenName + " is already being used by " +
-					" group " + group.getGroupId());
+				"Screen name " + screenName + " is already used by group " +
+					group.getGroupId());
 
 			_group = group;
 			_screenName = screenName;
@@ -142,8 +141,8 @@ public class UserScreenNameException extends PortalException {
 			String screenName, int exceptionType) {
 
 			super(
-				"Screen Name " + screenName + " cannot be used to build a " +
-					"valid friendlyURL",
+				"Screen name " + screenName +
+					" does not produce a valid friendly URL",
 				new GroupFriendlyURLException(exceptionType));
 
 			_exceptionType = exceptionType;
@@ -169,7 +168,7 @@ public class UserScreenNameException extends PortalException {
 			String screenName, ScreenNameValidator screenNameValidator) {
 
 			super(
-				"Screen Name " + screenName + " is not valid according to " +
+				"Screen name " + screenName + " does not validate with " +
 					ClassUtil.getClassName(screenNameValidator));
 
 			_screenName = screenName;
