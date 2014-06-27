@@ -735,13 +735,6 @@ public class PortalUtil {
 		return getPortal().getCurrentCompleteURL(request);
 	}
 
-	public static String getCurrentPortletURL(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
-
-		return getPortal().getCurrentPortletURL(
-			portletRequest, portletResponse);
-	}
-
 	public static String getCurrentURL(HttpServletRequest request) {
 		return getPortal().getCurrentURL(request);
 	}
