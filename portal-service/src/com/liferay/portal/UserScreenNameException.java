@@ -86,7 +86,7 @@ public class UserScreenNameException extends PortalException {
 			super(
 				"Screen name " + screenName + " is numeric but the portal " +
 					"property " + PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC +
-						" is enabled");
+						" is disabled");
 		}
 
 	}
