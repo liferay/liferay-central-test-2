@@ -1727,6 +1727,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsEntry.class.getName(), entry.getEntryId(), entry,
 				serviceContext, workflowContext);
 
+		// Asset
+
 		updateAsset(
 			userId, updatedEntry, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames(),
