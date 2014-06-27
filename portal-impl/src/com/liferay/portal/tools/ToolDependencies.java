@@ -48,7 +48,6 @@ import com.liferay.portal.util.PortalImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.xml.SAXReaderImpl;
 import com.liferay.registry.BasicRegistryImpl;
-import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 
 /**
