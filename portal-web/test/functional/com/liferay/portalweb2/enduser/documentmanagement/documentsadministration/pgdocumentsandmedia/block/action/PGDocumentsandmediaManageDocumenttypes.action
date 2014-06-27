@@ -1,4 +1,10 @@
 <definition>
+	<command name="assertClick">
+		<case locator-key1="TOOLBAR_ADD">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
 	<command name="confirm">
 		<case locator-key1="CONFIRMATION">
 			<execute function="Confirm#waitForConfirmation" />
