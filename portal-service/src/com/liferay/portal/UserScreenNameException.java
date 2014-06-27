@@ -107,7 +107,7 @@ public class UserScreenNameException extends PortalException {
 			return _reservedScreenNames;
 		}
 
-		private final String[] _reservedScreenNames;
+		private String[] _reservedScreenNames;
 
 	}
 
@@ -130,8 +130,8 @@ public class UserScreenNameException extends PortalException {
 			return _screenName;
 		}
 
-		private final Group _group;
-		private final String _screenName;
+		private Group _group;
+		private String _screenName;
 
 	}
 
@@ -158,8 +158,8 @@ public class UserScreenNameException extends PortalException {
 			return _screenName;
 		}
 
-		private final int _exceptionType;
-		private final String _screenName;
+		private int _exceptionType;
+		private String _screenName;
 
 	}
 
@@ -184,8 +184,8 @@ public class UserScreenNameException extends PortalException {
 			return _screenNameValidator;
 		}
 
-		private final String _screenName;
-		private final ScreenNameValidator _screenNameValidator;
+		private String _screenName;
+		private ScreenNameValidator _screenNameValidator;
 
 	}
 
