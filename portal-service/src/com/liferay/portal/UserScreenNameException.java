@@ -85,8 +85,8 @@ public class UserScreenNameException extends PortalException {
 		public MustNotBeNumeric(String screenName) {
 			super(
 				"Screen name " + screenName + " is numeric but the portal " +
-					"property " + PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC +
-						" is disabled");
+					"property \"" + PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC +
+						"\" is disabled");
 		}
 
 	}
