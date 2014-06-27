@@ -117,8 +117,8 @@ public class UserScreenNameException extends PortalException {
 				"Screen name " + screenName + " is already used by group " +
 					group.getGroupId());
 
-			_group = group;
 			_screenName = screenName;
+			_group = group;
 		}
 
 		public Group getGroup() {
@@ -145,8 +145,8 @@ public class UserScreenNameException extends PortalException {
 					" does not produce a valid friendly URL",
 				new GroupFriendlyURLException(exceptionType));
 
-			_exceptionType = exceptionType;
 			_screenName = screenName;
+			_exceptionType = exceptionType;
 		}
 
 		public int getExceptionType() {
