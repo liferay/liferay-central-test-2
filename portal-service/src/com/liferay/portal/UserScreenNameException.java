@@ -27,7 +27,7 @@ import com.liferay.portal.security.auth.ScreenNameValidator;
 public class UserScreenNameException extends PortalException {
 
 	/**
-	 * @deprecated As of 7.0.0. Use one of the specific inner classes instead.
+	 * @deprecated As of 7.0.0, replaced by the inner classes
 	 */
 	@Deprecated
 	public UserScreenNameException() {
@@ -35,7 +35,7 @@ public class UserScreenNameException extends PortalException {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0. Use one of the specific inner classes instead.
+	 * @deprecated As of 7.0.0, replaced by the inner classes
 	 */
 	@Deprecated
 	public UserScreenNameException(String msg) {
@@ -43,7 +43,7 @@ public class UserScreenNameException extends PortalException {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0. Use one of the specific inner classes instead.
+	 * @deprecated As of 7.0.0, replaced by the inner classes
 	 */
 	@Deprecated
 	public UserScreenNameException(String msg, Throwable cause) {
@@ -51,7 +51,7 @@ public class UserScreenNameException extends PortalException {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0. Use one of the specific inner classes instead.
+	 * @deprecated As of 7.0.0, replaced by the inner classes
 	 */
 	@Deprecated
 	public UserScreenNameException(Throwable cause) {
