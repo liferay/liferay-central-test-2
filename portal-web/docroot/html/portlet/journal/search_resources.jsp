@@ -23,8 +23,6 @@ long folderId = ParamUtil.getLong(request, "folderId");
 
 long searchFolderId = ParamUtil.getLong(request, "searchFolderId", folderId);
 
-String displayStyle = JournalUtil.getDisplayStyle(liferayPortletRequest, displayViews);
-
 JournalFolder folder = null;
 
 if (searchFolderId > 0) {
@@ -32,6 +30,8 @@ if (searchFolderId > 0) {
 }
 
 String keywords = ParamUtil.getString(request, "keywords");
+
+String displayStyle = JournalUtil.getDisplayStyle(liferayPortletRequest, displayViews);
 
 int total = 0;
 

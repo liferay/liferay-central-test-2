@@ -61,18 +61,18 @@ if (!structureId.equals("0")) {
 
 <%!
 private String _getIcon(String displayStyle) {
-	String displayStyleIcon = displayStyle;
+	String icon = displayStyle;
 
 	if (displayStyle.equals("descriptive")) {
-		displayStyleIcon = "th-list";
+		icon = "th-list";
 	}
 	else if (displayStyle.equals("icon")) {
-		displayStyleIcon = "th-large";
+		icon = "th-large";
 	}
 	else if (displayStyle.equals("list")) {
-		displayStyleIcon = "align-justify";
+		icon = "align-justify";
 	}
 
-	return displayStyleIcon;
+	return icon;
 }
 %>
