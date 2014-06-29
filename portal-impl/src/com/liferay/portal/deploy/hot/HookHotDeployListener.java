@@ -321,6 +321,35 @@ public class HookHotDeployListener
 		}
 	}
 
+	public <T> void registerService(
+		String servletContextName, String serviceRegistrationKey,
+		Class<T> clazz, T service, Object... propertyKVPs) {
+
+		Registry registry = RegistryUtil.getRegistry();
+
+		Map<String, Object> properties = new HashMap<String, Object>();
+
+		if ((propertyKVPs.length % 2) != 0) {
+			throw new IllegalArgumentException(
+				"Properties length is not an even number");
+		}
+
+		for (int i = 0; i < propertyKVPs.length; i += 2) {
+			String propertyName = String.valueOf(propertyKVPs[i]);
+			Object propertyValue = propertyKVPs[i + 1];
+
+			properties.put(propertyName, propertyValue);
+		}
+
+		ServiceRegistration<T> serviceRegistration = registry.registerService(
+			clazz, service, properties);
+
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
+		serviceRegistrations.put(serviceRegistrationKey, serviceRegistration);
+	}
+
 	protected boolean checkPermission(
 		String name, ClassLoader portletClassLoader, Object subject,
 		String message) {
@@ -1260,10 +1289,6 @@ public class HookHotDeployListener
 			String servletContextName, ClassLoader portletClassLoader,
 			Element parentElement)
 		throws Exception {
-
-		Registry registry = RegistryUtil.getRegistry();
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
 
 		List<Element> indexerPostProcessorElements = parentElement.elements(
 			"indexer-post-processor");
@@ -2330,35 +2355,6 @@ public class HookHotDeployListener
 
 	protected <S, T> Map<S, T> newMap() {
 		return new ConcurrentHashMap<S, T>();
-	}
-
-	public <T> void registerService(
-		String servletContextName, String serviceRegistrationKey,
-		Class<T> clazz, T service, String... propertyKVPs) {
-		
-		Registry registry = RegistryUtil.getRegistry();
-
-		Map<String, Object> properties = new HashMap<String, Object>();
-		
-		if ((propertyKVPs.length % 2) != 0) {
-			throw new IllegalArgumentException(
-				"Properties length is not an even number");
-		}
-
-		for (int i = 0; i < propertyKVPs.length; i += 2) {
-			String propertyName = String.valueOf(propertyKVPs[i]);
-			Object propertyValue = propertyKVPs[i + 1];
-
-			properties.put(propertyName, propertyValue);
-		}
-
-		ServiceRegistration<T> serviceRegistration = registry.registerService(
-			clazz, service, properties);
-
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-			
-		serviceRegistrations.put(serviceRegistrationKey, serviceRegistration);
 	}
 
 	protected void resetPortalProperties(
