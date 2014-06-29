@@ -322,7 +322,7 @@ public class HookHotDeployListener
 	}
 
 	public <T> void registerService(
-		String servletContextName, String serviceRegistrationKey,
+		String servletContextName, Object serviceRegistrationKey,
 		Class<T> clazz, T service, Object... propertyKVPs) {
 
 		Registry registry = RegistryUtil.getRegistry();
@@ -2092,10 +2092,6 @@ public class HookHotDeployListener
 			Constructor<?> serviceImplConstructor, Object serviceProxy)
 		throws Exception {
 
-		Registry registry = RegistryUtil.getRegistry();
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-
 		AdvisedSupport advisedSupport = ServiceBeanAopProxy.getAdvisedSupport(
 			serviceProxy);
 
@@ -2107,10 +2103,9 @@ public class HookHotDeployListener
 			(ServiceWrapper<?>)serviceImplConstructor.newInstance(
 				previousService);
 
-		ServiceRegistration<?> serviceRegistration = registry.registerService(
-			ServiceWrapper.class, serviceWrapper);
-
-		serviceRegistrations.put(serviceImplConstructor, serviceRegistration);
+		registerService(
+			servletContextName, serviceImplConstructor, ServiceWrapper.class,
+			serviceWrapper);
 	}
 
 	protected Filter initServletFilter(
