@@ -491,7 +491,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	@Override
 	public List<DLFolder> getFolders(
 		long groupId, long parentFolderId, boolean includeMountfolders,
-		int start, int end, OrderByComparator obc) {
+		int start, int end, OrderByComparator<DLFolder> obc) {
 
 		if (includeMountfolders) {
 			return dlFolderPersistence.findByG_P(
@@ -506,7 +506,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	@Override
 	public List<DLFolder> getFolders(
 		long groupId, long parentFolderId, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<DLFolder> obc) {
 
 		return getFolders(groupId, parentFolderId, true, start, end, obc);
 	}
@@ -640,7 +640,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	@Override
 	public List<DLFolder> getMountFolders(
 		long groupId, long parentFolderId, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<DLFolder> obc) {
 
 		return dlFolderPersistence.findByG_M_P_H(
 			groupId, true, parentFolderId, false, start, end, obc);

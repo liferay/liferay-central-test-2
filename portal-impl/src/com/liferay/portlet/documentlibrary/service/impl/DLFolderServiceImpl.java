@@ -179,7 +179,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public List<DLFolder> getFolders(
 			long groupId, long parentFolderId, int status,
 			boolean includeMountfolders, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFolder> obc)
 		throws PortalException {
 
 		if (!DLFolderPermission.contains(
@@ -202,7 +202,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	@Override
 	public List<DLFolder> getFolders(
 			long groupId, long parentFolderId, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFolder> obc)
 		throws PortalException {
 
 		return getFolders(
@@ -320,7 +320,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	@Override
 	public List<DLFolder> getMountFolders(
 			long groupId, long parentFolderId, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFolder> obc)
 		throws PortalException {
 
 		if (!DLFolderPermission.contains(

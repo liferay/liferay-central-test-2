@@ -907,7 +907,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	@Override
 	public List<FileEntry> getFileEntries(
 			long repositoryId, long folderId, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<FileEntry> obc)
 		throws PortalException {
 
 		Repository repository = getRepository(repositoryId);
@@ -974,7 +974,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	@Override
 	public List<FileEntry> getFileEntries(
 			long repositoryId, long folderId, long fileEntryTypeId, int start,
-			int end, OrderByComparator obc)
+			int end, OrderByComparator<FileEntry> obc)
 		throws PortalException {
 
 		Repository repository = getRepository(repositoryId);
@@ -1344,7 +1344,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	@Override
 	public List<Folder> getFolders(
 			long repositoryId, long parentFolderId, boolean includeMountFolders,
-			int start, int end, OrderByComparator obc)
+			int start, int end, OrderByComparator<Folder> obc)
 		throws PortalException {
 
 		Repository repository = getRepository(repositoryId);
@@ -1384,7 +1384,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	public List<Folder> getFolders(
 			long repositoryId, long parentFolderId, int status,
 			boolean includeMountFolders, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<Folder> obc)
 		throws PortalException {
 
 		Repository repository = getRepository(repositoryId);
@@ -1448,7 +1448,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	@Override
 	public List<Folder> getFolders(
 			long repositoryId, long parentFolderId, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<Folder> obc)
 		throws PortalException {
 
 		Repository repository = getRepository(repositoryId);

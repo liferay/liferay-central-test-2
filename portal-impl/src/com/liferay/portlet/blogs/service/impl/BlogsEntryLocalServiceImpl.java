@@ -437,7 +437,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	@Override
 	public List<BlogsEntry> getCompanyEntries(
 		long companyId, Date displayDate, int status, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<BlogsEntry> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);
@@ -538,7 +538,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	@Override
 	public List<BlogsEntry> getGroupEntries(
 		long groupId, Date displayDate, int status, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<BlogsEntry> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);
@@ -586,7 +586,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	@Deprecated
 	@Override
 	public List<BlogsEntry> getGroupEntries(
-		long groupId, int status, int start, int end, OrderByComparator obc) {
+		long groupId, int status, int start, int end,
+		OrderByComparator<BlogsEntry> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);
@@ -717,7 +718,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	@Override
 	public List<BlogsEntry> getGroupUserEntries(
 		long groupId, long userId, Date displayDate, int status, int start,
-		int end, OrderByComparator obc) {
+		int end, OrderByComparator<BlogsEntry> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);
@@ -804,7 +805,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	@Override
 	public List<BlogsEntry> getOrganizationEntries(
 		long organizationId, Date displayDate, int status, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<BlogsEntry> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);

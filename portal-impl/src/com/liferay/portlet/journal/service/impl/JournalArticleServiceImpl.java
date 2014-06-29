@@ -722,7 +722,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	@Override
 	public List<JournalArticle> getArticles(
 		long groupId, long folderId, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<JournalArticle> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY, start, end, obc);
@@ -762,7 +762,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	@Override
 	public List<JournalArticle> getArticlesByArticleId(
 		long groupId, String articleId, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<JournalArticle> obc) {
 
 		return journalArticlePersistence.filterFindByG_A(
 			groupId, articleId, start, end, obc);
@@ -818,7 +818,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	@Override
 	public List<JournalArticle> getArticlesByStructureId(
 		long groupId, long classNameId, String ddmStructureKey, int status,
-		int start, int end, OrderByComparator obc) {
+		int start, int end, OrderByComparator<JournalArticle> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);
@@ -855,7 +855,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	@Override
 	public List<JournalArticle> getArticlesByStructureId(
 		long groupId, String ddmStructureKey, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<JournalArticle> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY, start, end, obc);
@@ -992,7 +992,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	@Override
 	public List<JournalArticle> getGroupArticles(
 			long groupId, long userId, long rootFolderId, int status, int start,
-			int end, OrderByComparator orderByComparator)
+			int end, OrderByComparator<JournalArticle> orderByComparator)
 		throws PortalException {
 
 		List<Long> folderIds = new ArrayList<Long>();
@@ -1033,7 +1033,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	@Override
 	public List<JournalArticle> getGroupArticles(
 			long groupId, long userId, long rootFolderId, int start, int end,
-			OrderByComparator orderByComparator)
+			OrderByComparator<JournalArticle> orderByComparator)
 		throws PortalException {
 
 		return getGroupArticles(
@@ -1451,7 +1451,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		String keywords, Double version, String type, String ddmStructureKey,
 		String ddmTemplateKey, Date displayDateGT, Date displayDateLT,
 		int status, Date reviewDate, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<JournalArticle> obc) {
 
 		return journalArticleFinder.filterFindByKeywords(
 			companyId, groupId, folderIds, classNameId, keywords, version, type,
@@ -1529,7 +1529,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		String content, String type, String ddmStructureKey,
 		String ddmTemplateKey, Date displayDateGT, Date displayDateLT,
 		int status, Date reviewDate, boolean andOperator, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<JournalArticle> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);
@@ -1613,7 +1613,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		String content, String type, String[] ddmStructureKeys,
 		String[] ddmTemplateKeys, Date displayDateGT, Date displayDateLT,
 		int status, Date reviewDate, boolean andOperator, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<JournalArticle> obc) {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, obc);

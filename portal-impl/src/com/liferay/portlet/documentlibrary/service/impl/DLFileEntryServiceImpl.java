@@ -299,7 +299,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, int status, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		DLFolderPermission.check(
@@ -319,7 +319,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		return getFileEntries(
@@ -330,7 +330,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, long fileEntryTypeId, int start,
-			int end, OrderByComparator obc)
+			int end, OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		DLFolderPermission.check(
@@ -343,7 +343,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, String[] mimeTypes, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		DLFolderPermission.check(
@@ -471,7 +471,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, long rootFolderId, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		List<Long> folderIds = dlFolderService.getFolderIds(
@@ -495,7 +495,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, long repositoryId, long rootFolderId,
 			String[] mimeTypes, int status, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		List<Long> repositoryIds = new ArrayList<Long>();
@@ -528,7 +528,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, long rootFolderId, String[] mimeTypes,
-			int status, int start, int end, OrderByComparator obc)
+			int status, int start, int end, OrderByComparator<DLFileEntry> obc)
 		throws PortalException {
 
 		return getGroupFileEntries(

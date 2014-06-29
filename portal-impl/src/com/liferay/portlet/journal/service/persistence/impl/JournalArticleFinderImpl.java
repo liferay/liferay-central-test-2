@@ -329,7 +329,7 @@ public class JournalArticleFinderImpl
 		String keywords, Double version, String type, String ddmStructureKey,
 		String ddmTemplateKey, Date displayDateGT, Date displayDateLT,
 		int status, Date reviewDate, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<JournalArticle> orderByComparator) {
 
 		String[] articleIds = null;
 		String[] titles = null;
@@ -485,7 +485,7 @@ public class JournalArticleFinderImpl
 		String keywords, Double version, String type, String ddmStructureKey,
 		String ddmTemplateKey, Date displayDateGT, Date displayDateLT,
 		int status, Date reviewDate, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<JournalArticle> orderByComparator) {
 
 		String[] articleIds = null;
 		String[] titles = null;

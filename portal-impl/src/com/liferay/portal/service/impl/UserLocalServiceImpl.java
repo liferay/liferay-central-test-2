@@ -2154,7 +2154,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> getInheritedRoleUsers(
-			long roleId, int start, int end, OrderByComparator obc)
+			long roleId, int start, int end, OrderByComparator<User> obc)
 		throws PortalException {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
@@ -2306,7 +2306,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	@Override
 	public List<User> getSocialUsers(
 			long userId, int socialRelationType, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<User> obc)
 		throws PortalException {
 
 		return getSocialUsers(
@@ -2342,7 +2342,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	@Deprecated
 	@Override
 	public List<User> getSocialUsers(
-			long userId, int start, int end, OrderByComparator obc)
+			long userId, int start, int end, OrderByComparator<User> obc)
 		throws PortalException {
 
 		return getSocialUsers(
@@ -2354,7 +2354,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public List<User> getSocialUsers(
 			long userId, int socialRelationType,
 			String socialRelationTypeComparator, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<User> obc)
 		throws PortalException {
 
 		if (!socialRelationTypeComparator.equals(StringPool.EQUAL) &&
@@ -2438,7 +2438,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	@Override
 	public List<User> getSocialUsers(
 			long userId1, long userId2, int socialRelationType, int start,
-			int end, OrderByComparator obc)
+			int end, OrderByComparator<User> obc)
 		throws PortalException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -2483,7 +2483,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	@Override
 	public List<User> getSocialUsers(
 			long userId1, long userId2, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<User> obc)
 		throws PortalException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -3025,7 +3025,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public List<User> search(
 		long companyId, String keywords, int status,
 		LinkedHashMap<String, Object> params, int start, int end,
-		OrderByComparator obc) {
+		OrderByComparator<User> obc) {
 
 		return userFinder.findByKeywords(
 			companyId, keywords, status, params, start, end, obc);
@@ -3160,7 +3160,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long companyId, String firstName, String middleName, String lastName,
 		String screenName, String emailAddress, int status,
 		LinkedHashMap<String, Object> params, boolean andSearch, int start,
-		int end, OrderByComparator obc) {
+		int end, OrderByComparator<User> obc) {
 
 		return userFinder.findByC_FN_MN_LN_SN_EA_S(
 			companyId, firstName, middleName, lastName, screenName,
