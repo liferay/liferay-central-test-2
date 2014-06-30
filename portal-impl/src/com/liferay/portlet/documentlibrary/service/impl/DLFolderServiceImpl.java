@@ -214,7 +214,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long groupId, long folderId, int status,
 			boolean includeMountFolders, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<?> obc)
 		throws PortalException {
 
 		if (!DLFolderPermission.contains(
@@ -234,7 +234,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long groupId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator<?> obc)
 		throws PortalException {
 
 		if (!DLFolderPermission.contains(
