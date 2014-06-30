@@ -83,10 +83,13 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				verifyModel(role, model[0], model[1], model[2]);
 			}
 
-			for (ModelResource modelResource : _modelResources) {
+			for (VerifiableModelResource verifiableModelResource :
+					_verifiableModelResources) {
+
 				verifyModel(
-					role, modelResource.getName(), modelResource.getModelName(),
-					modelResource.getPkColumnName());
+					role, verifiableModelResource.getName(),
+					verifiableModelResource.getModelName(),
+					verifiableModelResource.getPrimaryKeyColumnName());
 			}
 
 			verifyLayout(role);
@@ -308,7 +311,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 	private static Log _log = LogFactoryUtil.getLog(
 		VerifyResourcePermissions.class);
 
-	private ServiceTrackerList<ModelResource> _modelResources =
-		ServiceTrackerCollections.list(ModelResource.class);
+	private ServiceTrackerList<VerifiableModelResource>
+		_verifiableModelResources = ServiceTrackerCollections.list(
+			VerifiableModelResource.class);
 
 }
