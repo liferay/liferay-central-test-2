@@ -299,7 +299,7 @@ public class ExportImportConfigurationLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.ExportImportConfiguration> getExportImportConfigurations(
 		long groupId, int type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.ExportImportConfiguration> orderByComparator) {
 		return getService()
 				   .getExportImportConfigurations(groupId, type, start, end,
 			orderByComparator);

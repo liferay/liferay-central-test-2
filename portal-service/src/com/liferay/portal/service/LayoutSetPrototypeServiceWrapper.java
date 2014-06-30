@@ -95,7 +95,7 @@ public class LayoutSetPrototypeServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> search(
 		long companyId, java.lang.Boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutSetPrototype> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _layoutSetPrototypeService.search(companyId, active, obc);
 	}

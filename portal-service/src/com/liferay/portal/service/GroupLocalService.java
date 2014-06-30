@@ -947,7 +947,7 @@ public interface GroupLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getLayoutsGroups(
 		long companyId, long parentGroupId, boolean site, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns the number of groups that are children or the parent group and
@@ -1388,7 +1388,8 @@ public interface GroupLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long parentGroupId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the site groups belonging to the parent
@@ -1473,7 +1474,7 @@ public interface GroupLocalService extends BaseLocalService,
 		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the groups belonging to the parent group
@@ -1557,7 +1558,8 @@ public interface GroupLocalService extends BaseLocalService,
 		long companyId, long[] classNameIds, long parentGroupId,
 		java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the groups belonging to the parent group
@@ -1648,7 +1650,7 @@ public interface GroupLocalService extends BaseLocalService,
 		java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the groups that match the class name IDs
@@ -1726,7 +1728,8 @@ public interface GroupLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the groups that match the class name IDs,
@@ -1815,7 +1818,7 @@ public interface GroupLocalService extends BaseLocalService,
 		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the groups that match the keywords,
@@ -1887,7 +1890,8 @@ public interface GroupLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns an ordered range of all the site groups and organization groups
@@ -1968,7 +1972,7 @@ public interface GroupLocalService extends BaseLocalService,
 		long companyId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc);
 
 	/**
 	* Returns the number of groups belonging to the parent group that match the

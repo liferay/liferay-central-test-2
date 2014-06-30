@@ -91,7 +91,7 @@ public interface LayoutSetPrototypeService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> search(
 		long companyId, java.lang.Boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutSetPrototype> obc)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(

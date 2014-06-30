@@ -727,7 +727,8 @@ public class UserGroupLocalServiceUtil {
 	public static java.util.List<com.liferay.portal.model.UserGroup> search(
 		long companyId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroup> obc) {
 		return getService().search(companyId, keywords, params, start, end, obc);
 	}
 
@@ -802,7 +803,7 @@ public class UserGroupLocalServiceUtil {
 		long companyId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroup> obc) {
 		return getService()
 				   .search(companyId, name, description, params, andOperator,
 			start, end, obc);

@@ -410,7 +410,7 @@ public class PasswordPolicyLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> search(
 		long companyId, java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.PasswordPolicy> obc) {
 		return _passwordPolicyLocalService.search(companyId, name, start, end,
 			obc);
 	}

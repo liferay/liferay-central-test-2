@@ -896,7 +896,8 @@ public interface RoleLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String keywords, java.lang.Integer[] types,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc);
 
 	/**
 	* Returns an ordered range of all the roles that match the keywords, types,
@@ -932,7 +933,8 @@ public interface RoleLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String keywords, java.lang.Integer[] types,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc);
 
 	/**
 	* Returns an ordered range of all the roles that match the name,
@@ -965,7 +967,7 @@ public interface RoleLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc);
 
 	/**
 	* Returns an ordered range of all the roles that match the name,
@@ -1002,7 +1004,8 @@ public interface RoleLocalService extends BaseLocalService,
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc);
 
 	/**
 	* Returns the number of roles that match the keywords and types.

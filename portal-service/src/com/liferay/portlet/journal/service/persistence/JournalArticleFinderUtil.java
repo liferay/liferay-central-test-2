@@ -202,7 +202,7 @@ public class JournalArticleFinderUtil {
 		java.lang.String ddmTemplateKey, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getFinder()
 				   .filterFindByKeywords(companyId, groupId, folderIds,
 			classNameId, keywords, version, type, ddmStructureKey,
@@ -298,7 +298,7 @@ public class JournalArticleFinderUtil {
 		java.lang.String ddmTemplateKey, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, folderIds, classNameId,
 			keywords, version, type, ddmStructureKey, ddmTemplateKey,

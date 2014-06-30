@@ -1248,7 +1248,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.Group> getLayoutsGroups(
 		long companyId, long parentGroupId, boolean site, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.getLayoutsGroups(companyId, parentGroupId,
 			site, start, end, obc);
 	}
@@ -1749,7 +1749,8 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long parentGroupId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, parentGroupId, keywords,
 			params, start, end, obc);
 	}
@@ -1840,7 +1841,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, parentGroupId, name,
 			description, params, andOperator, start, end, obc);
 	}
@@ -1930,7 +1931,8 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		long companyId, long[] classNameIds, long parentGroupId,
 		java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, classNameIds,
 			parentGroupId, keywords, params, start, end, obc);
 	}
@@ -2027,7 +2029,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, classNameIds,
 			parentGroupId, name, description, params, andOperator, start, end,
 			obc);
@@ -2112,7 +2114,8 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, classNameIds, keywords,
 			params, start, end, obc);
 	}
@@ -2207,7 +2210,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, classNameIds, name,
 			description, params, andOperator, start, end, obc);
 	}
@@ -2284,7 +2287,8 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, keywords, params, start,
 			end, obc);
 	}
@@ -2371,7 +2375,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		long companyId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _groupLocalService.search(companyId, name, description, params,
 			andOperator, start, end, obc);
 	}

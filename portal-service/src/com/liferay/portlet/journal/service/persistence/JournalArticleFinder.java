@@ -130,7 +130,7 @@ public interface JournalArticleFinder {
 		java.lang.String ddmTemplateKey, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator);
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_F(
 		long groupId, java.util.List<java.lang.Long> folderIds,
@@ -188,7 +188,7 @@ public interface JournalArticleFinder {
 		java.lang.String ddmTemplateKey, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator);
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByReviewDate(
 		long classNameId, java.util.Date reviewDateLT,

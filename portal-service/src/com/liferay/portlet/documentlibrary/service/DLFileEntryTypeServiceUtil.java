@@ -116,7 +116,7 @@ public class DLFileEntryTypeServiceUtil {
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> search(
 		long companyId, long[] groupIds, java.lang.String keywords,
 		boolean includeBasicFileEntryType, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntryType> orderByComparator) {
 		return getService()
 				   .search(companyId, groupIds, keywords,
 			includeBasicFileEntryType, start, end, orderByComparator);

@@ -157,13 +157,13 @@ public class AssetVocabularyServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc) {
 		return getService().getGroupVocabularies(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId, java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc) {
 		return getService().getGroupVocabularies(groupId, name, start, end, obc);
 	}
 
@@ -188,7 +188,7 @@ public class AssetVocabularyServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetVocabularyDisplay getGroupVocabulariesDisplay(
 		long groupId, java.lang.String name, int start, int end,
 		boolean addDefaultVocabulary,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getGroupVocabulariesDisplay(groupId, name, start, end,
@@ -197,7 +197,7 @@ public class AssetVocabularyServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetVocabularyDisplay getGroupVocabulariesDisplay(
 		long groupId, java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getGroupVocabulariesDisplay(groupId, name, start, end, obc);
@@ -209,7 +209,7 @@ public class AssetVocabularyServiceUtil {
 	@Deprecated
 	public static com.liferay.portal.kernel.json.JSONObject getJSONGroupVocabularies(
 		long groupId, java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getJSONGroupVocabularies(groupId, name, start, end, obc);

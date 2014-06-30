@@ -461,7 +461,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
 		long groupId, long categoryId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService()
 				   .getCategoryMessages(groupId, categoryId, status, start,
 			end, obc);
@@ -479,7 +479,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
 		long companyId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService()
 				   .getCompanyMessages(companyId, status, start, end, obc);
 	}
@@ -529,7 +529,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
 		long groupId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService().getGroupMessages(groupId, status, start, end, obc);
 	}
 
@@ -540,7 +540,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
 		long groupId, long userId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService()
 				   .getGroupMessages(groupId, userId, status, start, end, obc);
 	}
@@ -620,7 +620,8 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getUserDiscussionMessages(
 		long userId, long classNameId, long classPK, int status, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService()
 				   .getUserDiscussionMessages(userId, classNameId, classPK,
 			status, start, end, obc);
@@ -628,7 +629,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getUserDiscussionMessages(
 		long userId, long[] classNameIds, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService()
 				   .getUserDiscussionMessages(userId, classNameIds, status,
 			start, end, obc);
@@ -636,7 +637,8 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getUserDiscussionMessages(
 		long userId, java.lang.String className, long classPK, int status,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> obc) {
 		return getService()
 				   .getUserDiscussionMessages(userId, className, classPK,
 			status, start, end, obc);

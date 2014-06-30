@@ -887,7 +887,7 @@ public class DDMStructureLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
 		long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return getService()
 				   .getClassStructures(companyId, classNameId, orderByComparator);
 	}
@@ -899,7 +899,7 @@ public class DDMStructureLocalServiceUtil {
 	@Deprecated
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
 		long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return getService().getClassStructures(classNameId, orderByComparator);
 	}
 
@@ -1131,7 +1131,7 @@ public class DDMStructureLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getStructures(
 		long groupId, long classNameId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return getService()
 				   .getStructures(groupId, classNameId, start, end,
 			orderByComparator);
@@ -1260,7 +1260,7 @@ public class DDMStructureLocalServiceUtil {
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> search(
 		long companyId, long[] groupIds, long[] classNameIds,
 		java.lang.String keywords, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return getService()
 				   .search(companyId, groupIds, classNameIds, keywords, start,
 			end, orderByComparator);
@@ -1305,7 +1305,7 @@ public class DDMStructureLocalServiceUtil {
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageType, int type, boolean andOperator, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return getService()
 				   .search(companyId, groupIds, classNameIds, name,
 			description, storageType, type, andOperator, start, end,

@@ -589,7 +589,8 @@ public interface UserGroupLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.UserGroup> search(
 		long companyId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroup> obc);
 
 	/**
 	* Returns an ordered range of all the user groups that match the keywords,
@@ -662,7 +663,7 @@ public interface UserGroupLocalService extends BaseLocalService,
 		long companyId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroup> obc);
 
 	/**
 	* Returns an ordered range of all the user groups that match the name and

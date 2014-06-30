@@ -85,7 +85,7 @@ public class DDLRecordSetServiceUtil {
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> search(
 		long companyId, long groupId, java.lang.String keywords, int scope,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> orderByComparator) {
 		return getService()
 				   .search(companyId, groupId, keywords, scope, start, end,
 			orderByComparator);
@@ -95,7 +95,7 @@ public class DDLRecordSetServiceUtil {
 		long companyId, long groupId, java.lang.String name,
 		java.lang.String description, int scope, boolean andOperator,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> orderByComparator) {
 		return getService()
 				   .search(companyId, groupId, name, description, scope,
 			andOperator, start, end, orderByComparator);

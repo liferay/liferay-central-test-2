@@ -638,7 +638,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	@Override
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
 		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.getArticles(groupId, folderId, start,
 			end, obc);
 	}
@@ -670,7 +670,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	@Override
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByArticleId(
 		long groupId, java.lang.String articleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.getArticlesByArticleId(groupId,
 			articleId, start, end, obc);
 	}
@@ -726,7 +726,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByStructureId(
 		long groupId, long classNameId, java.lang.String ddmStructureKey,
 		int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.getArticlesByStructureId(groupId,
 			classNameId, ddmStructureKey, status, start, end, obc);
 	}
@@ -759,7 +759,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	@Override
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByStructureId(
 		long groupId, java.lang.String ddmStructureKey, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.getArticlesByStructureId(groupId,
 			ddmStructureKey, start, end, obc);
 	}
@@ -876,7 +876,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getGroupArticles(
 		long groupId, long userId, long rootFolderId, int status, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _journalArticleService.getGroupArticles(groupId, userId,
 			rootFolderId, status, start, end, orderByComparator);
@@ -905,7 +905,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	@Override
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getGroupArticles(
 		long groupId, long userId, long rootFolderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _journalArticleService.getGroupArticles(groupId, userId,
 			rootFolderId, start, end, orderByComparator);
@@ -1246,7 +1246,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 		java.lang.String type, java.lang.String ddmStructureKey,
 		java.lang.String ddmTemplateKey, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.search(companyId, groupId, folderIds,
 			classNameId, keywords, version, type, ddmStructureKey,
 			ddmTemplateKey, displayDateGT, displayDateLT, status, reviewDate,
@@ -1325,7 +1326,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 		java.lang.String ddmStructureKey, java.lang.String ddmTemplateKey,
 		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
 		java.util.Date reviewDate, boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.search(companyId, groupId, folderIds,
 			classNameId, articleId, version, title, description, content, type,
 			ddmStructureKey, ddmTemplateKey, displayDateGT, displayDateLT,
@@ -1407,7 +1408,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 		java.lang.String[] ddmTemplateKeys, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return _journalArticleService.search(companyId, groupId, folderIds,
 			classNameId, articleId, version, title, description, content, type,
 			ddmStructureKeys, ddmTemplateKeys, displayDateGT, displayDateLT,

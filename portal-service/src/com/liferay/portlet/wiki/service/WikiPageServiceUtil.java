@@ -248,7 +248,8 @@ public class WikiPageServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long groupId, long nodeId, boolean head, int status, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.wiki.model.WikiPage> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getPages(groupId, nodeId, head, status, start, end, obc);

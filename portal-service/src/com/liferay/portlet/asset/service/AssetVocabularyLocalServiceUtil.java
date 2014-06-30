@@ -424,7 +424,7 @@ public class AssetVocabularyLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId, java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc) {
 		return getService().getGroupVocabularies(groupId, name, start, end, obc);
 	}
 

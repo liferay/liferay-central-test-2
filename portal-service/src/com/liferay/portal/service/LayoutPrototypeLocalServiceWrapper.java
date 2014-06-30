@@ -370,7 +370,7 @@ public class LayoutPrototypeLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portal.model.LayoutPrototype> search(
 		long companyId, java.lang.Boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutPrototype> obc) {
 		return _layoutPrototypeLocalService.search(companyId, active, start,
 			end, obc);
 	}

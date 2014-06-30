@@ -428,7 +428,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.softwarecatalog.model.SCProductEntry> obc) {
 		return getService().getProductEntries(groupId, start, end, obc);
 	}
 
@@ -439,7 +439,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.softwarecatalog.model.SCProductEntry> obc) {
 		return getService().getProductEntries(groupId, userId, start, end, obc);
 	}
 

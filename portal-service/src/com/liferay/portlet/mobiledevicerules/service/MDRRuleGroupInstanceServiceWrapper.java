@@ -83,7 +83,7 @@ public class MDRRuleGroupInstanceServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance> getRuleGroupInstances(
 		java.lang.String className, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance> orderByComparator) {
 		return _mdrRuleGroupInstanceService.getRuleGroupInstances(className,
 			classPK, start, end, orderByComparator);
 	}

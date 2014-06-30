@@ -274,7 +274,7 @@ public class ContactLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Contact> getContacts(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Contact> orderByComparator) {
 		return getService()
 				   .getContacts(classNameId, classPK, start, end,
 			orderByComparator);

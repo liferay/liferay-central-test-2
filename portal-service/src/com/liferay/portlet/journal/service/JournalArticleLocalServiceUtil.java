@@ -1367,7 +1367,7 @@ public class JournalArticleLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return getService().getArticles(groupId, start, end, obc);
 	}
 
@@ -1440,7 +1440,7 @@ public class JournalArticleLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
 		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getService()
 				   .getArticles(groupId, folderId, start, end, orderByComparator);
 	}
@@ -1459,7 +1459,7 @@ public class JournalArticleLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
 		long groupId, java.lang.String articleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getService()
 				   .getArticles(groupId, articleId, start, end,
 			orderByComparator);
@@ -1897,7 +1897,7 @@ public class JournalArticleLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getStructureArticles(
 		long groupId, java.lang.String ddmStructureKey, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return getService()
 				   .getStructureArticles(groupId, ddmStructureKey, start, end,
 			obc);
@@ -1961,7 +1961,7 @@ public class JournalArticleLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getTemplateArticles(
 		long groupId, java.lang.String ddmTemplateKey, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return getService()
 				   .getTemplateArticles(groupId, ddmTemplateKey, start, end, obc);
 	}
@@ -2251,7 +2251,8 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String type, java.lang.String ddmStructureKey,
 		java.lang.String ddmTemplateKey, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return getService()
 				   .search(companyId, groupId, folderIds, classNameId,
 			keywords, version, type, ddmStructureKey, ddmTemplateKey,
@@ -2332,7 +2333,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String ddmStructureKey, java.lang.String ddmTemplateKey,
 		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
 		java.util.Date reviewDate, boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return getService()
 				   .search(companyId, groupId, folderIds, classNameId,
 			articleId, version, title, description, content, type,
@@ -2414,7 +2415,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String[] ddmTemplateKeys, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> obc) {
 		return getService()
 				   .search(companyId, groupId, folderIds, classNameId,
 			articleId, version, title, description, content, type,

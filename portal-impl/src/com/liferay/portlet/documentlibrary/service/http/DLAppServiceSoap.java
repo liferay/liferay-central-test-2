@@ -633,7 +633,7 @@ public class DLAppServiceSoap {
 	*/
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap[] getFileEntries(
 		long repositoryId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.kernel.repository.model.FileEntry> obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
@@ -721,7 +721,8 @@ public class DLAppServiceSoap {
 	*/
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap[] getFileEntries(
 		long repositoryId, long folderId, long fileEntryTypeId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.kernel.repository.model.FileEntry> obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
@@ -1109,7 +1110,8 @@ public class DLAppServiceSoap {
 	*/
 	public static com.liferay.portal.kernel.repository.model.FolderSoap[] getFolders(
 		long repositoryId, long parentFolderId, boolean includeMountFolders,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.kernel.repository.model.Folder> obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =
@@ -1155,7 +1157,7 @@ public class DLAppServiceSoap {
 	public static com.liferay.portal.kernel.repository.model.FolderSoap[] getFolders(
 		long repositoryId, long parentFolderId, int status,
 		boolean includeMountFolders, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.kernel.repository.model.Folder> obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =
@@ -1234,7 +1236,7 @@ public class DLAppServiceSoap {
 	*/
 	public static com.liferay.portal.kernel.repository.model.FolderSoap[] getFolders(
 		long repositoryId, long parentFolderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.kernel.repository.model.Folder> obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =

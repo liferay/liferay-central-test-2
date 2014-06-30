@@ -1585,7 +1585,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.User> getInheritedRoleUsers(
 		long roleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _userLocalService.getInheritedRoleUsers(roleId, start, end, obc);
 	}
@@ -1711,7 +1711,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
 		long userId, int socialRelationType, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _userLocalService.getSocialUsers(userId, socialRelationType,
 			start, end, obc);
@@ -1747,7 +1747,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _userLocalService.getSocialUsers(userId, start, end, obc);
 	}
@@ -1756,7 +1756,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
 		long userId, int socialRelationType,
 		java.lang.String socialRelationTypeComparator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _userLocalService.getSocialUsers(userId, socialRelationType,
 			socialRelationTypeComparator, start, end, obc);
@@ -1792,7 +1792,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
 		long userId1, long userId2, int socialRelationType, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _userLocalService.getSocialUsers(userId1, userId2,
 			socialRelationType, start, end, obc);
@@ -1825,7 +1825,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
 		long userId1, long userId2, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _userLocalService.getSocialUsers(userId1, userId2, start, end,
 			obc);
@@ -2216,7 +2216,8 @@ public class UserLocalServiceWrapper implements UserLocalService,
 	public java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc) {
 		return _userLocalService.search(companyId, keywords, status, params,
 			start, end, obc);
 	}
@@ -2306,7 +2307,7 @@ public class UserLocalServiceWrapper implements UserLocalService,
 		java.lang.String screenName, java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.User> obc) {
 		return _userLocalService.search(companyId, firstName, middleName,
 			lastName, screenName, emailAddress, status, params, andSearch,
 			start, end, obc);

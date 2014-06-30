@@ -373,7 +373,7 @@ public class ShoppingItemLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
 		long groupId, long categoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.shopping.model.ShoppingItem> obc) {
 		return getService().getItems(groupId, categoryId, start, end, obc);
 	}
 
@@ -382,7 +382,8 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
-		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long itemId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.shopping.model.ShoppingItem> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getItemsPrevAndNext(itemId, obc);
 	}

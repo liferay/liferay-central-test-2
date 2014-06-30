@@ -519,7 +519,7 @@ public class AssetCategoryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
 		long parentCategoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService().getChildCategories(parentCategoryId, start, end, obc);
 	}
 
@@ -539,14 +539,14 @@ public class AssetCategoryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
 		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService()
 				   .getVocabularyCategories(vocabularyId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
 		long parentCategoryId, long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService()
 				   .getVocabularyCategories(parentCategoryId, vocabularyId,
 			start, end, obc);
@@ -558,7 +558,7 @@ public class AssetCategoryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
 		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService()
 				   .getVocabularyRootCategories(vocabularyId, start, end, obc);
 	}

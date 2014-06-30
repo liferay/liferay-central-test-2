@@ -556,7 +556,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Organization> obc)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
@@ -915,7 +915,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 		java.lang.String type, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc);
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Organization> obc);
 
 	/**
 	* Returns a name ordered range of all the organizations with the type,
@@ -1023,7 +1024,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Organization> obc);
 
 	/**
 	* Returns an ordered range of all the organizations whose name, type, or

@@ -395,7 +395,7 @@ public class DDMStructureServiceWrapper implements DDMStructureService,
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> search(
 		long companyId, long[] groupIds, long[] classNameIds,
 		java.lang.String keywords, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return _ddmStructureService.search(companyId, groupIds, classNameIds,
 			keywords, start, end, orderByComparator);
 	}
@@ -440,7 +440,7 @@ public class DDMStructureServiceWrapper implements DDMStructureService,
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageType, int type, boolean andOperator, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> orderByComparator) {
 		return _ddmStructureService.search(companyId, groupIds, classNameIds,
 			name, description, storageType, type, andOperator, start, end,
 			orderByComparator);

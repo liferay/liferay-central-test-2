@@ -342,7 +342,7 @@ public class LayoutRevisionLocalServiceWrapper
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getChildLayoutRevisions(
 		long layoutSetBranchId, long parentLayoutRevision, long plid,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutRevision> orderByComparator) {
 		return _layoutRevisionLocalService.getChildLayoutRevisions(layoutSetBranchId,
 			parentLayoutRevision, plid, start, end, orderByComparator);
 	}
@@ -407,7 +407,7 @@ public class LayoutRevisionLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
 		long layoutSetBranchId, long plid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutRevision> orderByComparator) {
 		return _layoutRevisionLocalService.getLayoutRevisions(layoutSetBranchId,
 			plid, start, end, orderByComparator);
 	}
@@ -416,7 +416,7 @@ public class LayoutRevisionLocalServiceWrapper
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
 		long layoutSetBranchId, long layoutBranchId, long plid, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutRevision> orderByComparator) {
 		return _layoutRevisionLocalService.getLayoutRevisions(layoutSetBranchId,
 			layoutBranchId, plid, start, end, orderByComparator);
 	}

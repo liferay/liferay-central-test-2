@@ -197,7 +197,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getFileEntries(groupId, folderId, status,
 			start, end, obc);
@@ -206,7 +206,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getFileEntries(groupId, folderId, start,
 			end, obc);
@@ -215,7 +215,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId, long fileEntryTypeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getFileEntries(groupId, folderId,
 			fileEntryTypeId, start, end, obc);
@@ -224,7 +224,8 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId, java.lang.String[] mimeTypes, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getFileEntries(groupId, folderId, mimeTypes,
 			start, end, obc);
@@ -290,7 +291,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
 		long groupId, long userId, long rootFolderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getGroupFileEntries(groupId, userId,
 			rootFolderId, start, end, obc);
@@ -300,7 +301,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
 		long groupId, long userId, long repositoryId, long rootFolderId,
 		java.lang.String[] mimeTypes, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getGroupFileEntries(groupId, userId,
 			repositoryId, rootFolderId, mimeTypes, status, start, end, obc);
@@ -310,7 +311,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService,
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
 		long groupId, long userId, long rootFolderId,
 		java.lang.String[] mimeTypes, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntry> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFileEntryService.getGroupFileEntries(groupId, userId,
 			rootFolderId, mimeTypes, status, start, end, obc);

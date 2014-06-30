@@ -388,7 +388,7 @@ public class TrashEntryLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portlet.trash.model.TrashEntry> getEntries(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.trash.model.TrashEntry> obc) {
 		return getService().getEntries(groupId, start, end, obc);
 	}
 

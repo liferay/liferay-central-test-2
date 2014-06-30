@@ -414,7 +414,7 @@ public class SubscriptionLocalServiceUtil {
 	*/
 	public static java.util.List<com.liferay.portal.model.Subscription> getUserSubscriptions(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Subscription> orderByComparator) {
 		return getService()
 				   .getUserSubscriptions(userId, start, end, orderByComparator);
 	}

@@ -284,7 +284,7 @@ public class LayoutBranchLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.LayoutBranch> getLayoutBranches(
 		long layoutSetBranchId, long plid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutBranch> orderByComparator) {
 		return getService()
 				   .getLayoutBranches(layoutSetBranchId, plid, start, end,
 			orderByComparator);

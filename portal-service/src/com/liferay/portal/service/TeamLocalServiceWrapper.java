@@ -497,7 +497,8 @@ public class TeamLocalServiceWrapper implements TeamLocalService,
 	public java.util.List<com.liferay.portal.model.Team> search(long groupId,
 		java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Team> obc) {
 		return _teamLocalService.search(groupId, name, description, params,
 			start, end, obc);
 	}

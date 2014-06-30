@@ -125,7 +125,7 @@ public class AssetCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
 		long parentCategoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getChildCategories(parentCategoryId, start, end, obc);
 	}
@@ -150,7 +150,7 @@ public class AssetCategoryServiceUtil {
 	@Deprecated
 	public static com.liferay.portal.kernel.json.JSONObject getJSONVocabularyCategories(
 		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getJSONVocabularyCategories(vocabularyId, start, end, obc);
@@ -164,7 +164,8 @@ public class AssetCategoryServiceUtil {
 	@Deprecated
 	public static com.liferay.portal.kernel.json.JSONObject getJSONVocabularyCategories(
 		long groupId, java.lang.String name, long vocabularyId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getJSONVocabularyCategories(groupId, name, vocabularyId,
@@ -173,7 +174,7 @@ public class AssetCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
 		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getVocabularyCategories(vocabularyId, start, end, obc);
@@ -181,7 +182,7 @@ public class AssetCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
 		long parentCategoryId, long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getVocabularyCategories(parentCategoryId, vocabularyId,
@@ -190,7 +191,8 @@ public class AssetCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
 		long groupId, java.lang.String name, long vocabularyId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService()
 				   .getVocabularyCategories(groupId, name, vocabularyId, start,
 			end, obc);
@@ -209,7 +211,7 @@ public class AssetCategoryServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetCategoryDisplay getVocabularyCategoriesDisplay(
 		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getVocabularyCategoriesDisplay(vocabularyId, start, end, obc);
@@ -217,7 +219,8 @@ public class AssetCategoryServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetCategoryDisplay getVocabularyCategoriesDisplay(
 		long groupId, java.lang.String name, long vocabularyId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getVocabularyCategoriesDisplay(groupId, name, vocabularyId,
@@ -232,7 +235,7 @@ public class AssetCategoryServiceUtil {
 	@Deprecated
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
 		long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getVocabularyRootCategories(vocabularyId, start, end, obc);
@@ -240,7 +243,7 @@ public class AssetCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
 		long groupId, long vocabularyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService()
 				   .getVocabularyRootCategories(groupId, vocabularyId, start,
 			end, obc);
@@ -263,7 +266,8 @@ public class AssetCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> search(
 		long groupId, java.lang.String keywords, long vocabularyId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> obc) {
 		return getService()
 				   .search(groupId, keywords, vocabularyId, start, end, obc);
 	}

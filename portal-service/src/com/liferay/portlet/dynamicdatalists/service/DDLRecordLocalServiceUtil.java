@@ -363,7 +363,7 @@ public class DDLRecordLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getCompanyRecords(
 		long companyId, int status, int scope, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecord> orderByComparator) {
 		return getService()
 				   .getCompanyRecords(companyId, status, scope, start, end,
 			orderByComparator);
@@ -376,7 +376,7 @@ public class DDLRecordLocalServiceUtil {
 	@Deprecated
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getCompanyRecords(
 		long companyId, int scope, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecord> orderByComparator) {
 		return getService()
 				   .getCompanyRecords(companyId, scope, start, end,
 			orderByComparator);
@@ -429,7 +429,7 @@ public class DDLRecordLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords(
 		long recordSetId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecord> orderByComparator) {
 		return getService()
 				   .getRecords(recordSetId, status, start, end,
 			orderByComparator);
@@ -458,7 +458,7 @@ public class DDLRecordLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> getRecordVersions(
 		long recordId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> orderByComparator) {
 		return getService()
 				   .getRecordVersions(recordId, start, end, orderByComparator);
 	}

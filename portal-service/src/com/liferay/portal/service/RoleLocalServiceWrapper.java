@@ -1110,7 +1110,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String keywords, java.lang.Integer[] types,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc) {
 		return _roleLocalService.search(companyId, keywords, types, start, end,
 			obc);
 	}
@@ -1149,7 +1150,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String keywords, java.lang.Integer[] types,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc) {
 		return _roleLocalService.search(companyId, keywords, types, params,
 			start, end, obc);
 	}
@@ -1185,7 +1187,7 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc) {
 		return _roleLocalService.search(companyId, name, description, types,
 			start, end, obc);
 	}
@@ -1225,7 +1227,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc) {
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Role> obc) {
 		return _roleLocalService.search(companyId, name, description, types,
 			params, start, end, obc);
 	}
