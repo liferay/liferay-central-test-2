@@ -28,14 +28,13 @@ public class DummyCommentManagerImplTest {
 
 	@Test
 	public void testAllCallsDoNothing() throws PortalException {
-		String body = RandomTestUtil.randomString();
+		long userId = RandomTestUtil.randomLong();
+		long groupId = RandomTestUtil.randomLong();
 		String className = RandomTestUtil.randomString();
 		long classPK = RandomTestUtil.randomLong();
-		long commentId = RandomTestUtil.randomLong();
-		long groupId = RandomTestUtil.randomLong();
-		String subject = RandomTestUtil.randomString();
-		long userId = RandomTestUtil.randomLong();
 		String userName = RandomTestUtil.randomString();
+		String subject = RandomTestUtil.randomString();
+		String body = RandomTestUtil.randomString();
 
 		Assert.assertEquals(
 			0,
@@ -45,6 +44,8 @@ public class DummyCommentManagerImplTest {
 
 		_commentManager.addDiscussion(
 			userId, groupId, className, classPK, userName);
+
+		long commentId = RandomTestUtil.randomLong();
 
 		_commentManager.deleteComment(commentId);
 
