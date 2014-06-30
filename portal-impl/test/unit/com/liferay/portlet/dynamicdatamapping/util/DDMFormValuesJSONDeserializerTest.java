@@ -139,8 +139,6 @@ public class DDMFormValuesJSONDeserializerTest extends BaseDDMTest {
 		Map<String, DDMFormFieldValue> ddmFormFieldValuesMap =
 			ddmFormValues.getDDMFormFieldValuesMap();
 
-		// Boolean Field
-
 		DDMFormFieldValue booleanDDMFormFieldValue = ddmFormFieldValuesMap.get(
 			"Boolean2282");
 
@@ -149,8 +147,6 @@ public class DDMFormValuesJSONDeserializerTest extends BaseDDMTest {
 		Assert.assertFalse(booleanValue.isLocalized());
 		Assert.assertEquals("false", booleanValue.getValue(LocaleUtil.US));
 		Assert.assertEquals("false", booleanValue.getValue(LocaleUtil.BRAZIL));
-
-		// Document Library Field
 
 		DDMFormFieldValue documentLibraryDDMFormFieldValue =
 			ddmFormFieldValuesMap.get("Documents_and_Media4036");
