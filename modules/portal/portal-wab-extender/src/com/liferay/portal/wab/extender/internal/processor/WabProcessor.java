@@ -925,7 +925,7 @@ public class WabProcessor {
 	}
 
 	protected void processWebXML(
-		Element element, List<Element> elements, Class<?> clazz) {
+		Element element, List<Element> initParamElements, Class<?> clazz) {
 
 		String elementText = element.getTextTrim();
 
@@ -933,7 +933,7 @@ public class WabProcessor {
 			return;
 		}
 
-		for (Element initParamElement : elements) {
+		for (Element initParamElement : initParamElements) {
 			Element paramNameElement = initParamElement.element("param-name");
 
 			String paramNameValue = paramNameElement.getTextTrim();
