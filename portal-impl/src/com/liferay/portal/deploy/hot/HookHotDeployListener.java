@@ -130,6 +130,7 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ServiceWrapper;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.spring.aop.ServiceBeanAopCacheManagerUtil;
 import com.liferay.portal.spring.aop.ServiceBeanAopProxy;
 import com.liferay.portal.struts.AuthPublicPathRegistry;
 import com.liferay.portal.util.CustomJspRegistryUtil;
@@ -584,6 +585,23 @@ public class HookHotDeployListener
 		}
 	}
 
+	protected void destroyServices(String servletContextName) throws Exception {
+		synchronized (_servicesContainer) {
+			Map<String, ServiceBag> serviceBags =
+				_servicesContainer._serviceBags.remove(servletContextName);
+
+			if (serviceBags == null) {
+				return;
+			}
+
+			for (ServiceBag serviceBag : serviceBags.values()) {
+				serviceBag.replace();
+			}
+
+			ServiceBeanAopCacheManagerUtil.reset();
+		}
+	}
+
 	protected void doInvokeDeploy(HotDeployEvent hotDeployEvent)
 		throws Exception {
 
@@ -756,6 +774,8 @@ public class HookHotDeployListener
 		if (portalProperties != null) {
 			destroyPortalProperties(servletContextName, portalProperties);
 		}
+
+		destroyServices(servletContextName);
 
 		ServletFiltersContainer servletFiltersContainer =
 			_servletFiltersContainerMap.remove(servletContextName);
@@ -2113,9 +2133,6 @@ public class HookHotDeployListener
 			Element parentElement)
 		throws Exception {
 
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-
 		List<Element> serviceElements = parentElement.elements("service");
 
 		for (Element serviceElement : serviceElements) {
@@ -2144,9 +2161,8 @@ public class HookHotDeployListener
 
 			if (ProxyUtil.isProxyClass(serviceProxy.getClass())) {
 				initServices(
-					portletClassLoader, serviceType,
-					serviceTypeClass, serviceImplConstructor, serviceProxy,
-					serviceRegistrations);
+					servletContextName, portletClassLoader, serviceType,
+					serviceTypeClass, serviceImplConstructor, serviceProxy);
 			}
 			else {
 				_log.error(
@@ -2157,13 +2173,10 @@ public class HookHotDeployListener
 	}
 
 	protected void initServices(
-			ClassLoader portletClassLoader,
+			String servletContextName, ClassLoader portletClassLoader,
 			String serviceType, Class<?> serviceTypeClass,
-			Constructor<?> serviceImplConstructor, Object serviceProxy,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			Constructor<?> serviceImplConstructor, Object serviceProxy)
 		throws Exception {
-
-		Registry registry = RegistryUtil.getRegistry();
 
 		AdvisedSupport advisedSupport = ServiceBeanAopProxy.getAdvisedSupport(
 			serviceProxy);
@@ -2176,11 +2189,13 @@ public class HookHotDeployListener
 			(ServiceWrapper<?>)serviceImplConstructor.newInstance(
 				previousService);
 
-		ServiceRegistration<?> serviceRegistration =
-			registry.registerService(ServiceWrapper.class, serviceWrapper);
+		synchronized (_servicesContainer) {
+			_servicesContainer.addServiceBag(
+				servletContextName, portletClassLoader, advisedSupport,
+				serviceType, serviceTypeClass, serviceWrapper);
+		}
 
-		serviceRegistrations.put(serviceImplConstructor, serviceRegistration);
-
+		ServiceBeanAopCacheManagerUtil.reset();
 	}
 
 	protected Filter initServletFilter(
@@ -2853,6 +2868,7 @@ public class HookHotDeployListener
 		new HashMap<String, SanitizerContainer>();
 	private Map<String, Map<Object, ServiceRegistration<?>>>
 		_serviceRegistrations = newMap();
+	private ServicesContainer _servicesContainer = new ServicesContainer();
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
 		new HashMap<String, ServletFiltersContainer>();
@@ -3201,6 +3217,34 @@ public class HookHotDeployListener
 		}
 
 		private List<Sanitizer> _sanitizers = new ArrayList<Sanitizer>();
+
+	}
+
+	private class ServicesContainer {
+
+		public void addServiceBag(
+			String servletContextName, ClassLoader portletClassLoader,
+			AdvisedSupport advisedSupport, String serviceType,
+			Class<?> serviceTypeClass, ServiceWrapper<?> serviceWrapper) {
+
+			Map<String, ServiceBag> serviceBags = _serviceBags.get(
+				servletContextName);
+
+			if (serviceBags == null) {
+				serviceBags = new HashMap<String, ServiceBag>();
+
+				_serviceBags.put(servletContextName, serviceBags);
+			}
+
+			serviceBags.put(
+				serviceType,
+				new ServiceBag(
+					portletClassLoader, advisedSupport, serviceTypeClass,
+					serviceWrapper));
+		}
+
+		private Map<String, Map<String, ServiceBag>> _serviceBags =
+			new HashMap<String, Map<String, ServiceBag>>();
 
 	}
 
