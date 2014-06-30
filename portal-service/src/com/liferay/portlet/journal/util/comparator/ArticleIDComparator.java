@@ -21,8 +21,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ArticleIDComparator
-	extends OrderByComparator<JournalArticle> {
+public class ArticleIDComparator extends OrderByComparator<JournalArticle> {
 
 	public static final String ORDER_BY_ASC =
 		"JournalArticle.articleId ASC, JournalArticle.version ASC";

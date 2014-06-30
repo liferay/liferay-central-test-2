@@ -267,7 +267,8 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 	@Override
 	public AssetVocabularyDisplay getGroupVocabulariesDisplay(
 			long groupId, String name, int start, int end,
-			boolean addDefaultVocabulary, OrderByComparator<AssetVocabulary> obc)
+			boolean addDefaultVocabulary,
+			OrderByComparator<AssetVocabulary> obc)
 		throws PortalException {
 
 		List<AssetVocabulary> vocabularies;
