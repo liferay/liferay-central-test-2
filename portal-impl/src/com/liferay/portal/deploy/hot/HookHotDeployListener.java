@@ -2279,8 +2279,8 @@ public class HookHotDeployListener
 
 			registerService(
 				servletContextName, strutsActionClassName,
-				StrutsPortletAction.class, strutsPortletAction, "path",
-				strutsActionPath);
+				StrutsPortletAction.class, strutsPortletAction,
+				"path", strutsActionPath);
 		}
 	}
 
