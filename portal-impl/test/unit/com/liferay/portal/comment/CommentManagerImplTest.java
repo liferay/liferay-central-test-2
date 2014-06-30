@@ -115,14 +115,14 @@ public class CommentManagerImplTest extends Mockito {
 	protected void testAllCallsAreDelegated(CommentManager commentManager)
 		throws PortalException {
 
-		String body = RandomTestUtil.randomString();
+		long userId = RandomTestUtil.randomLong();
+		long groupId = RandomTestUtil.randomLong();
 		String className = RandomTestUtil.randomString();
 		long classPK = RandomTestUtil.randomLong();
-		long commentId = RandomTestUtil.randomLong();
-		long groupId = RandomTestUtil.randomLong();
-		String subject = RandomTestUtil.randomString();
-		long userId = RandomTestUtil.randomLong();
 		String userName = RandomTestUtil.randomString();
+		String subject = RandomTestUtil.randomString();
+		String body = RandomTestUtil.randomString();
+		long commentId = RandomTestUtil.randomLong();
 
 		when(
 			commentManager.addComment(
