@@ -1737,9 +1737,12 @@ public class HookHotDeployListener
 					portletClassLoader, AttributesTransformer.class,
 					attributesTransformerClassName);
 
-			registerService(
-				servletContextName, attributesTransformerClassName,
-				AttributesTransformer.class, attributesTransformer);
+			ServiceRegistration<AttributesTransformer> serviceRegistration =
+				registry.registerService(
+					AttributesTransformer.class, attributesTransformer);
+
+			serviceRegistrations.put(
+				attributesTransformerClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(LOCK_LISTENERS)) {
@@ -1930,9 +1933,12 @@ public class HookHotDeployListener
 					portletClassLoader, EmailAddressGenerator.class,
 					emailAddressGeneratorClassName);
 
-			registerService(
-				servletContextName, emailAddressGeneratorClassName,
-				EmailAddressGenerator.class, emailAddressGenerator);
+			ServiceRegistration<EmailAddressGenerator> serviceRegistration =
+				registry.registerService(
+					EmailAddressGenerator.class, emailAddressGenerator);
+
+			serviceRegistrations.put(
+				emailAddressGeneratorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(
@@ -1947,9 +1953,12 @@ public class HookHotDeployListener
 					portletClassLoader, EmailAddressValidator.class,
 					emailAddressValidatorClassName);
 
-			registerService(
-				servletContextName, emailAddressValidatorClassName,
-				EmailAddressValidator.class, emailAddressValidator);
+			ServiceRegistration<EmailAddressValidator> serviceRegistration =
+				registry.registerService(
+					EmailAddressValidator.class, emailAddressValidator);
+
+			serviceRegistrations.put(
+				emailAddressValidatorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_GENERATOR)) {
@@ -1961,9 +1970,12 @@ public class HookHotDeployListener
 					portletClassLoader, FullNameGenerator.class,
 					fullNameGeneratorClassName);
 
-			registerService(
-				servletContextName, fullNameGeneratorClassName,
-				FullNameGenerator.class, fullNameGenerator);
+			ServiceRegistration<FullNameGenerator> serviceRegistration =
+				registry.registerService(
+					FullNameGenerator.class, fullNameGenerator);
+
+			serviceRegistrations.put(
+				fullNameGeneratorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
@@ -1975,9 +1987,12 @@ public class HookHotDeployListener
 					portletClassLoader, FullNameValidator.class,
 					fullNameValidatorClassName);
 
-			registerService(
-				servletContextName, fullNameValidatorClassName,
-				FullNameValidator.class, fullNameValidator);
+			ServiceRegistration<FullNameValidator> serviceRegistration =
+				registry.registerService(
+					FullNameValidator.class, fullNameValidator);
+
+			serviceRegistrations.put(
+				fullNameValidatorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(
@@ -1991,9 +2006,12 @@ public class HookHotDeployListener
 					portletClassLoader, ScreenNameGenerator.class,
 					screenNameGeneratorClassName);
 
-			registerService(
-				servletContextName, screenNameGeneratorClassName,
-				ScreenNameGenerator.class, screenNameGenerator);
+			ServiceRegistration<ScreenNameGenerator> serviceRegistration =
+				registry.registerService(
+					ScreenNameGenerator.class, screenNameGenerator);
+
+			serviceRegistrations.put(
+				screenNameGeneratorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(
@@ -2007,9 +2025,12 @@ public class HookHotDeployListener
 					portletClassLoader, ScreenNameValidator.class,
 					screenNameValidatorClassName);
 
-			registerService(
-				servletContextName, screenNameValidatorClassName,
-				ScreenNameValidator.class, screenNameValidator);
+			ServiceRegistration<ScreenNameValidator> serviceRegistration =
+				registry.registerService(
+					ScreenNameValidator.class, screenNameValidator);
+
+			serviceRegistrations.put(
+				screenNameValidatorClassName, serviceRegistration);
 		}
 
 		Set<String> liferayFilterClassNames =
@@ -2266,8 +2287,18 @@ public class HookHotDeployListener
 			String strutsActionPath, String strutsActionClassName)
 		throws Exception {
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		Object strutsActionObject = InstanceFactory.newInstance(
 			portletClassLoader, strutsActionClassName);
+
+		Map<String, Object> properties = new HashMap<String, Object>();
+
+		properties.put("path", strutsActionPath);
+
+		ServiceRegistration<?> serviceRegistration = null;
 
 		if (strutsActionObject instanceof StrutsAction) {
 			StrutsAction strutsAction =
@@ -2276,9 +2307,8 @@ public class HookHotDeployListener
 					new ClassLoaderBeanHandler(
 						strutsActionObject, portletClassLoader));
 
-			registerService(
-				servletContextName, strutsActionClassName, StrutsAction.class,
-				strutsAction, "path", strutsActionPath);
+			serviceRegistration = registry.registerService(
+				StrutsAction.class, strutsAction, properties);
 		}
 		else {
 			StrutsPortletAction strutsPortletAction =
@@ -2287,11 +2317,11 @@ public class HookHotDeployListener
 					new ClassLoaderBeanHandler(
 						strutsActionObject, portletClassLoader));
 
-			registerService(
-				servletContextName, strutsActionClassName,
-				StrutsPortletAction.class, strutsPortletAction,
-				"path", strutsActionPath);
+			serviceRegistration = registry.registerService(
+				StrutsPortletAction.class, strutsPortletAction, properties);
 		}
+
+		serviceRegistrations.put(strutsActionClassName, serviceRegistration);
 	}
 
 	protected void initStrutsActions(
