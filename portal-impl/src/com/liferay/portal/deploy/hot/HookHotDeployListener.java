@@ -747,6 +747,13 @@ public class HookHotDeployListener
 			authenticatorsContainer.unregisterAuthenticators();
 		}
 
+		AuthFailuresContainer authFailuresContainer =
+			_authFailuresContainerMap.remove(servletContextName);
+
+		if (authFailuresContainer != null) {
+			authFailuresContainer.unregisterAuthFailures();
+		}
+
 		AuthPublicPathsContainer authPublicPathsContainer =
 			_authPublicPathsContainerMap.remove(servletContextName);
 
@@ -994,11 +1001,8 @@ public class HookHotDeployListener
 
 	protected void initAuthFailures(
 			ClassLoader portletClassLoader, Properties portalProperties,
-			String key,
-			Map<Object, ServiceRegistration<?>> serviceRegistrations)
+			String key, AuthFailuresContainer authFailuresContainer)
 		throws Exception {
-
-		Registry registry = RegistryUtil.getRegistry();
 
 		String[] authFailureClassNames = StringUtil.split(
 			portalProperties.getProperty(key));
@@ -1007,16 +1011,7 @@ public class HookHotDeployListener
 			AuthFailure authFailure = (AuthFailure)newInstance(
 				portletClassLoader, AuthFailure.class, authFailureClassName);
 
-			Map<String, Object> properties = new HashMap<String, Object>();
-
-			properties.put("key", key);
-
-			ServiceRegistration<AuthFailure> serviceRegistration =
-				registry.registerService(
-					AuthFailure.class, authFailure, properties);
-
-			serviceRegistrations.put(
-				authFailureClassName, serviceRegistration);
+			authFailuresContainer.registerAuthFailure(key, authFailure);
 		}
 	}
 
@@ -1025,15 +1020,18 @@ public class HookHotDeployListener
 			Properties portalProperties)
 		throws Exception {
 
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
+		AuthFailuresContainer authFailuresContainer =
+			new AuthFailuresContainer();
+
+		_authFailuresContainerMap.put(
+			servletContextName, authFailuresContainer);
 
 		initAuthFailures(
 			portletClassLoader, portalProperties, AUTH_FAILURE,
-			serviceRegistrations);
+			authFailuresContainer);
 		initAuthFailures(
 			portletClassLoader, portalProperties, AUTH_MAX_FAILURES,
-			serviceRegistrations);
+			authFailuresContainer);
 	}
 
 	protected void initAuthPublicPaths(
@@ -2860,6 +2858,8 @@ public class HookHotDeployListener
 
 	private Map<String, AuthenticatorsContainer> _authenticatorsContainerMap =
 		new HashMap<String, AuthenticatorsContainer>();
+	private Map<String, AuthFailuresContainer> _authFailuresContainerMap =
+		new HashMap<String, AuthFailuresContainer>();
 	private Map<String, AuthPublicPathsContainer> _authPublicPathsContainerMap =
 		new HashMap<String, AuthPublicPathsContainer>();
 	private Map<String, AuthVerifierConfigurationContainer>
@@ -2944,6 +2944,40 @@ public class HookHotDeployListener
 
 		private Map<String, List<Authenticator>> _authenticators =
 			new HashMap<String, List<Authenticator>>();
+
+	}
+
+	private class AuthFailuresContainer {
+
+		public void registerAuthFailure(String key, AuthFailure authFailure) {
+			List<AuthFailure> authFailures = _authFailures.get(key);
+
+			if (authFailures == null) {
+				authFailures = new ArrayList<AuthFailure>();
+
+				_authFailures.put(key, authFailures);
+			}
+
+			AuthPipeline.registerAuthFailure(key, authFailure);
+
+			authFailures.add(authFailure);
+		}
+
+		public void unregisterAuthFailures() {
+			for (Map.Entry<String, List<AuthFailure>> entry :
+					_authFailures.entrySet()) {
+
+				String key = entry.getKey();
+				List<AuthFailure> authFailures = entry.getValue();
+
+				for (AuthFailure authFailure : authFailures) {
+					AuthPipeline.unregisterAuthFailure(key, authFailure);
+				}
+			}
+		}
+
+		private Map<String, List<AuthFailure>> _authFailures =
+			new HashMap<String, List<AuthFailure>>();
 
 	}
 
