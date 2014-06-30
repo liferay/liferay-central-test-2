@@ -65,15 +65,11 @@ public class RenderPortletAction extends Action {
 		String columnId = ParamUtil.getString(request, "p_p_col_id");
 		int columnPos = ParamUtil.getInteger(request, "p_p_col_pos");
 		int columnCount = ParamUtil.getInteger(request, "p_p_col_count");
-		String boundaryParam = ParamUtil.getString(
-			request, "p_p_boundary", null);
-		String decorateParam = ParamUtil.getString(
-			request, "p_p_decorate", null);
-		boolean staticPortlet = ParamUtil.getBoolean(request, "p_p_static");
-		boolean staticStartPortlet = ParamUtil.getBoolean(
-			request, "p_p_static_start");
 
 		Boolean boundary = null;
+
+		String boundaryParam = ParamUtil.getString(
+			request, "p_p_boundary", null);
 
 		if (boundaryParam != null) {
 			boundary = GetterUtil.getBoolean(boundaryParam);
@@ -81,9 +77,16 @@ public class RenderPortletAction extends Action {
 
 		Boolean decorate = null;
 
+		String decorateParam = ParamUtil.getString(
+			request, "p_p_decorate", null);
+
 		if (decorateParam != null) {
 			decorate = GetterUtil.getBoolean(decorateParam);
 		}
+
+		boolean staticPortlet = ParamUtil.getBoolean(request, "p_p_static");
+		boolean staticStartPortlet = ParamUtil.getBoolean(
+			request, "p_p_static_start");
 
 		if (staticPortlet) {
 			portlet = (Portlet)portlet.clone();
