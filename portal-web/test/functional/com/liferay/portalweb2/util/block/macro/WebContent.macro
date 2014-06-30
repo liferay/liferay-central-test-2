@@ -321,7 +321,7 @@
 				<execute action="PGWebcontentdisplay#assertClick" locator-key1="ADD_BASIC_WEB_CONTENT" value1="Basic Web Content" />
 
 				<execute action="PGWebcontentdisplayAddwebcontent#selectFrame" locator-key1="WEB_CONTENT_IFRAME" />
-				
+
 				<execute action="PGWebcontentdisplayAddwebcontent#type" locator-key1="TITLE_FIELD" value1="${webContentTitle}" />
 				<execute action="PGWebcontentdisplayAddwebcontent#type" locator-key1="CONTENT_FIELD" value1="${webContentContent}" />
 				<execute action="PGWebcontentdisplayAddwebcontent#click" locator-key1="PUBLISH_BUTTON" />
