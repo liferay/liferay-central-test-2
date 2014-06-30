@@ -1617,7 +1617,7 @@ public class HookHotDeployListener
 				portletClassLoader, AuthToken.class, authTokenClassName);
 
 			ServiceRegistration<AuthToken> serviceRegistration =
-				registry.registerService(AuthToken.class, authToken);
+				registry.registerService(authTokenClassName, authToken);
 
 			serviceRegistrations.put(authTokenClassName, serviceRegistration);
 		}
