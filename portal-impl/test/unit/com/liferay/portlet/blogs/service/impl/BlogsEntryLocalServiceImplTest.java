@@ -47,12 +47,12 @@ public class BlogsEntryLocalServiceImplTest {
 
 	@Test
 	public void testAddDiscussion() throws Exception {
-		long entryId = RandomTestUtil.randomLong();
+		long blogsEntryId = RandomTestUtil.randomLong();
 
 		Mockito.when(
 			_blogsEntry.getEntryId()
 		).thenReturn(
-			entryId
+			blogsEntryId
 		);
 
 		String userName = RandomTestUtil.randomString();
@@ -71,7 +71,8 @@ public class BlogsEntryLocalServiceImplTest {
 		Mockito.verify(
 			_commentManager
 		).addDiscussion(
-			userId, groupId, BlogsEntry.class.getName(), entryId, userName);
+			userId, groupId, BlogsEntry.class.getName(), blogsEntryId,
+			userName);
 	}
 
 	@Test
@@ -96,12 +97,12 @@ public class BlogsEntryLocalServiceImplTest {
 
 	@Test
 	public void testDeleteDiscussion() throws Exception {
-		long entryId = RandomTestUtil.randomLong();
+		long blogsEntryId = RandomTestUtil.randomLong();
 
 		Mockito.when(
 			_blogsEntry.getEntryId()
 		).thenReturn(
-			entryId
+			blogsEntryId
 		);
 
 		_blogsEntryLocalServiceImpl.deleteDiscussion(_blogsEntry);
@@ -109,7 +110,7 @@ public class BlogsEntryLocalServiceImplTest {
 		Mockito.verify(
 			_commentManager
 		).deleteDiscussion(
-			BlogsEntry.class.getName(), entryId
+			BlogsEntry.class.getName(), blogsEntryId
 		);
 	}
 
