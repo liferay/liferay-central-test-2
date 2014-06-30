@@ -79,7 +79,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 
 			Assert.fail();
 		}
-		catch (NoSuchJSONWebServiceException re) {
+		catch (NoSuchJSONWebServiceException jsjsonwse) {
 		}
 
 		mockHttpServletRequest = createHttpRequest(
@@ -336,7 +336,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 
 			Assert.fail();
 		}
-		catch (NoSuchJSONWebServiceException re) {
+		catch (NoSuchJSONWebServiceException jsjsonwse) {
 		}
 
 		mockHttpServletRequest = createHttpRequest("/foo/hello");
@@ -361,7 +361,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 
 			Assert.fail();
 		}
-		catch (NoSuchJSONWebServiceException re) {
+		catch (NoSuchJSONWebServiceException jsjsonwse) {
 		}
 
 		mockHttpServletRequest = createHttpRequest("/camelfoo/cool-new-world");

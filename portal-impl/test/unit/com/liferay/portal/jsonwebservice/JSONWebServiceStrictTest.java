@@ -62,7 +62,7 @@ public class JSONWebServiceStrictTest extends BaseJSONWebServiceTestCase {
 
 			Assert.fail();
 		}
-		catch (NoSuchJSONWebServiceException re) {
+		catch (NoSuchJSONWebServiceException nsjsonwse) {
 		}
 
 		mockHttpServletRequest = createHttpRequest(
