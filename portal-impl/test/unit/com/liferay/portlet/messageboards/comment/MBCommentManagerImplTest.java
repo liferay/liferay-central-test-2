@@ -71,12 +71,12 @@ public class MBCommentManagerImplTest extends Mockito {
 			threadId
 		);
 
-		String body = RandomTestUtil.randomString();
-		long classPK = RandomTestUtil.randomLong();
-		long groupId = RandomTestUtil.randomLong();
-		String subject = RandomTestUtil.randomString();
 		long userId = RandomTestUtil.randomLong();
+		long groupId = RandomTestUtil.randomLong();
+		long classPK = RandomTestUtil.randomLong();
 		String userName = RandomTestUtil.randomString();
+		String subject = RandomTestUtil.randomString();
+		String body = RandomTestUtil.randomString();
 
 		Assert.assertEquals(
 			mbMessageId,
@@ -101,9 +101,9 @@ public class MBCommentManagerImplTest extends Mockito {
 
 	@Test
 	public void testAddDiscussion() throws Exception {
-		long classPK = RandomTestUtil.randomLong();
-		long groupId = RandomTestUtil.randomLong();
 		long userId = RandomTestUtil.randomLong();
+		long groupId = RandomTestUtil.randomLong();
+		long classPK = RandomTestUtil.randomLong();
 		String userName = RandomTestUtil.randomString();
 
 		_mbCommentManagerImpl.addDiscussion(

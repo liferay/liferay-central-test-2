@@ -126,10 +126,10 @@ public class TrackbackImplTest extends PowerMockito {
 		trackback.setCommentManager(_commentManager);
 		trackback.setLinkbackConsumer(_linkbackConsumer);
 
-		String blogName = RandomTestUtil.randomString();
 		String excerpt = RandomTestUtil.randomString();
-		String title = RandomTestUtil.randomString();
 		String url = RandomTestUtil.randomString();
+		String blogName = RandomTestUtil.randomString();
+		String title = RandomTestUtil.randomString();
 
 		trackback.addTrackback(
 			_blogsEntry, _themeDisplay, excerpt, url, blogName, title,
