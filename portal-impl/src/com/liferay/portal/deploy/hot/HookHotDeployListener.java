@@ -1556,6 +1556,10 @@ public class HookHotDeployListener
 			Properties portalProperties, Properties unfilteredPortalProperties)
 		throws Exception {
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		PropsUtil.addProperties(portalProperties);
 
 		if (_log.isDebugEnabled() && portalProperties.containsKey(LOCALES)) {
@@ -1612,9 +1616,10 @@ public class HookHotDeployListener
 			AuthToken authToken = (AuthToken)newInstance(
 				portletClassLoader, AuthToken.class, authTokenClassName);
 
-			registerService(
-				servletContextName, authTokenClassName, AuthToken.class,
-				authToken);
+			ServiceRegistration<AuthToken> serviceRegistration =
+				registry.registerService(AuthToken.class, authToken);
+
+			serviceRegistrations.put(authTokenClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.CAPTCHA_ENGINE_IMPL)) {
