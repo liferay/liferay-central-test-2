@@ -901,6 +901,10 @@ public class HookHotDeployListener
 			Properties portalProperties, String key)
 		throws Exception {
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		String[] authenticatorClassNames = StringUtil.split(
 			portalProperties.getProperty(key));
 
@@ -909,9 +913,16 @@ public class HookHotDeployListener
 				portletClassLoader, Authenticator.class,
 				authenticatorClassName);
 
-			registerService(
-				servletContextName, authenticatorClassName, Authenticator.class,
-				authenticator, "key", key);
+			Map<String, Object> properties = new HashMap<String, Object>();
+
+			properties.put("key", key);
+
+			ServiceRegistration<Authenticator> serviceRegistration =
+				registry.registerService(
+					Authenticator.class, authenticator, properties);
+
+			serviceRegistrations.put(
+				authenticatorClassName, serviceRegistration);
 		}
 	}
 
@@ -933,6 +944,10 @@ public class HookHotDeployListener
 			Properties portalProperties, String key)
 		throws Exception {
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		String[] authFailureClassNames = StringUtil.split(
 			portalProperties.getProperty(key));
 
@@ -940,9 +955,15 @@ public class HookHotDeployListener
 			AuthFailure authFailure = (AuthFailure)newInstance(
 				portletClassLoader, AuthFailure.class, authFailureClassName);
 
-			registerService(
-				servletContextName, authFailureClassName, AuthFailure.class,
-				authFailure, "key", key);
+			Map<String, Object> properties = new HashMap<String, Object>();
+
+			properties.put("key", key);
+
+			ServiceRegistration<AuthFailure> serviceRegistration =
+				registry.registerService(
+					AuthFailure.class, authFailure, properties);
+
+			serviceRegistrations.put(authFailureClassName, serviceRegistration);
 		}
 	}
 
@@ -1013,6 +1034,10 @@ public class HookHotDeployListener
 			return;
 		}
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		for (String autoDeployListenerClassName :
 				autoDeployListenerClassNames) {
 
@@ -1021,9 +1046,12 @@ public class HookHotDeployListener
 					portletClassLoader, AutoDeployListener.class,
 					autoDeployListenerClassName);
 
-			registerService(
-				servletContextName, autoDeployListenerClassName,
-				AutoDeployListener.class, autoDeployListener);
+			ServiceRegistration<AutoDeployListener> serviceRegistration =
+				registry.registerService(
+					AutoDeployListener.class, autoDeployListener);
+
+			serviceRegistrations.put(
+				autoDeployListenerClassName, serviceRegistration);
 		}
 	}
 
@@ -1032,6 +1060,10 @@ public class HookHotDeployListener
 			Properties portalProperties)
 		throws Exception {
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		String[] autoLoginClassNames = StringUtil.split(
 			portalProperties.getProperty(AUTO_LOGIN_HOOKS));
 
@@ -1039,9 +1071,10 @@ public class HookHotDeployListener
 			AutoLogin autoLogin = (AutoLogin)newInstance(
 				portletClassLoader, AutoLogin.class, autoLoginClassName);
 
-			registerService(
-				servletContextName, autoLoginClassName, AutoLogin.class,
-				autoLogin);
+			ServiceRegistration<AutoLogin> serviceRegistration =
+				registry.registerService(AutoLogin.class, autoLogin);
+
+			serviceRegistrations.put(autoLoginClassName, serviceRegistration);
 		}
 	}
 
@@ -1174,6 +1207,10 @@ public class HookHotDeployListener
 			}
 		}
 
+		Registry registry = RegistryUtil.getRegistry();
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		if (_propsKeysEvents.contains(eventName)) {
 			Class<?> clazz = portletClassLoader.loadClass(eventClassName);
 
@@ -1181,9 +1218,15 @@ public class HookHotDeployListener
 
 			action = new InvokerAction(action, portletClassLoader);
 
-			registerService(
-				servletContextName, eventClassName, LifecycleAction.class,
-				action, "key", eventName);
+			Map<String, Object> properties = new HashMap<String, Object>();
+
+			properties.put("key", eventName);
+
+			ServiceRegistration<LifecycleAction> serviceRegistration =
+				registry.registerService(
+					LifecycleAction.class, action, properties);
+
+			serviceRegistrations.put(eventClassName, serviceRegistration);
 		}
 
 		if (_propsKeysSessionEvents.contains(eventName)) {
@@ -1194,9 +1237,15 @@ public class HookHotDeployListener
 			sessionAction = new InvokerSessionAction(
 				sessionAction, portletClassLoader);
 
-			registerService(
-				servletContextName, eventClassName, LifecycleAction.class,
-				sessionAction, "key", eventName);
+			Map<String, Object> properties = new HashMap<String, Object>();
+
+			properties.put("key", eventName);
+
+			ServiceRegistration<LifecycleAction> serviceRegistration =
+				registry.registerService(
+					LifecycleAction.class, sessionAction, properties);
+
+			serviceRegistrations.put(eventClassName, serviceRegistration);
 		}
 	}
 
@@ -1290,10 +1339,17 @@ public class HookHotDeployListener
 				(IndexerPostProcessor)InstanceFactory.newInstance(
 					portletClassLoader, indexerPostProcessorImpl);
 
-			registerService(
-				servletContextName, indexerPostProcessorImpl,
-				IndexerPostProcessor.class, indexerPostProcessor,
-				"indexer.class.name", indexerClassName);
+			Map<String, Object> properties = new HashMap<String, Object>();
+
+			properties.put("indexer.class.name", indexerClassName);
+
+			ServiceRegistration<IndexerPostProcessor> serviceRegistration =
+				registry.registerService(
+					IndexerPostProcessor.class, indexerPostProcessor,
+					properties);
+
+			serviceRegistrations.put(
+				indexerPostProcessorImpl, serviceRegistration);
 		}
 	}
 
@@ -2043,6 +2099,9 @@ public class HookHotDeployListener
 			Element parentElement)
 		throws Exception {
 
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		List<Element> serviceElements = parentElement.elements("service");
 
 		for (Element serviceElement : serviceElements) {
@@ -2330,35 +2389,6 @@ public class HookHotDeployListener
 
 	protected <S, T> Map<S, T> newMap() {
 		return new ConcurrentHashMap<S, T>();
-	}
-
-	public <T> void registerService(
-		String servletContextName, String serviceRegistrationKey,
-		Class<T> clazz, T service, String... propertyKVPs) {
-		
-		Registry registry = RegistryUtil.getRegistry();
-
-		Map<String, Object> properties = new HashMap<String, Object>();
-		
-		if ((propertyKVPs.length % 2) != 0) {
-			throw new IllegalArgumentException(
-				"Properties length is not an even number");
-		}
-
-		for (int i = 0; i < propertyKVPs.length; i += 2) {
-			String propertyName = String.valueOf(propertyKVPs[i]);
-			Object propertyValue = propertyKVPs[i + 1];
-
-			properties.put(propertyName, propertyValue);
-		}
-
-		ServiceRegistration<T> serviceRegistration = registry.registerService(
-			clazz, service, properties);
-
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
-			
-		serviceRegistrations.put(serviceRegistrationKey, serviceRegistration);
 	}
 
 	protected void resetPortalProperties(
