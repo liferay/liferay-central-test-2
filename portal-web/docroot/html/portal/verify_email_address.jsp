@@ -46,14 +46,14 @@ String ticketKey = ParamUtil.getString(request, "ticketKey");
 					<liferay-ui:message key="the-email-address-you-requested-is-reserved" />
 				</div>
 			</c:when>
-			<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.MustNotBeDuplicate.class.getName()) %>">
-				<div class="alert alert-danger">
-					<liferay-ui:message key="the-email-address-you-requested-is-already-taken" />
-				</div>
-			</c:when>
 			<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
 				<div class="alert alert-danger">
 					<liferay-ui:message key="please-enter-a-valid-email-address" />
+				</div>
+			</c:when>
+			<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.MustNotBeDuplicate.class.getName()) %>">
+				<div class="alert alert-danger">
+					<liferay-ui:message key="the-email-address-you-requested-is-already-taken" />
 				</div>
 			</c:when>
 			<c:otherwise>
