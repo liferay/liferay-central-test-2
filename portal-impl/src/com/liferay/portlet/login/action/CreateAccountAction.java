@@ -127,8 +127,41 @@ public class CreateAccountAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof UserEmailAddressException.MustNotBeDuplicate ||
-				e instanceof UserScreenNameException.MustNotBeDuplicate) {
+			if (e instanceof AddressCityException ||
+				e instanceof AddressStreetException ||
+				e instanceof AddressZipException ||
+				e instanceof CaptchaMaxChallengesException ||
+				e instanceof CaptchaTextException ||
+				e instanceof CompanyMaxUsersException ||
+				e instanceof ContactFirstNameException ||
+				e instanceof ContactFullNameException ||
+				e instanceof ContactLastNameException ||
+				e instanceof DuplicateOpenIdException ||
+				e instanceof EmailAddressException ||
+				e instanceof GroupFriendlyURLException ||
+				e instanceof NoSuchCountryException ||
+				e instanceof NoSuchListTypeException ||
+				e instanceof NoSuchOrganizationException ||
+				e instanceof NoSuchRegionException ||
+				e instanceof OrganizationParentException ||
+				e instanceof PhoneNumberException ||
+				e instanceof RequiredFieldException ||
+				e instanceof RequiredUserException ||
+				e instanceof ReservedUserEmailAddressException ||
+				e instanceof ReservedUserScreenNameException ||
+				e instanceof TermsOfUseException ||
+				e instanceof UserEmailAddressException ||
+				e instanceof UserIdException ||
+				e instanceof UserPasswordException ||
+				e instanceof UserScreenNameException ||
+				e instanceof UserSmsException ||
+				e instanceof WebsiteURLException) {
+
+				SessionErrors.add(actionRequest, e.getClass(), e);
+			}
+			else if (e instanceof
+						UserEmailAddressException.MustNotBeDuplicate ||
+					 e instanceof UserScreenNameException.MustNotBeDuplicate) {
 
 				String emailAddress = ParamUtil.getString(
 					actionRequest, "emailAddress");
@@ -144,38 +177,6 @@ public class CreateAccountAction extends PortletAction {
 				else {
 					setForward(actionRequest, "portlet.login.update_account");
 				}
-			}
-			else if (e instanceof AddressCityException ||
-					 e instanceof AddressStreetException ||
-					 e instanceof AddressZipException ||
-					 e instanceof CaptchaMaxChallengesException ||
-					 e instanceof CaptchaTextException ||
-					 e instanceof CompanyMaxUsersException ||
-					 e instanceof ContactFirstNameException ||
-					 e instanceof ContactFullNameException ||
-					 e instanceof ContactLastNameException ||
-					 e instanceof DuplicateOpenIdException ||
-					 e instanceof EmailAddressException ||
-					 e instanceof GroupFriendlyURLException ||
-					 e instanceof NoSuchCountryException ||
-					 e instanceof NoSuchListTypeException ||
-					 e instanceof NoSuchOrganizationException ||
-					 e instanceof NoSuchRegionException ||
-					 e instanceof OrganizationParentException ||
-					 e instanceof PhoneNumberException ||
-					 e instanceof RequiredFieldException ||
-					 e instanceof RequiredUserException ||
-					 e instanceof ReservedUserEmailAddressException ||
-					 e instanceof ReservedUserScreenNameException ||
-					 e instanceof TermsOfUseException ||
-					 e instanceof UserEmailAddressException ||
-					 e instanceof UserIdException ||
-					 e instanceof UserPasswordException ||
-					 e instanceof UserScreenNameException ||
-					 e instanceof UserSmsException ||
-					 e instanceof WebsiteURLException) {
-
-				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				throw e;
