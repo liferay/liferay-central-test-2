@@ -129,6 +129,7 @@ public class UserScreenNameException extends PortalException {
 		public MustNotBeNull(long userId) {
 			super("Screen name must not be null for the user " + userId);
 		}
+
 	}
 
 	public static class MustNotBeNumeric extends UserScreenNameException {
@@ -163,10 +164,11 @@ public class UserScreenNameException extends PortalException {
 		public MustNotBeReservedForAnonymous(
 			long userId, String screenName, String[] reservedScreenNames) {
 			super(
-				"Screen name " + screenName + " for user " + userId + " is " +
-					"not valid because it must not be a reserved name for " +
-						"anonymous users such as: " +
-							StringUtil.merge(reservedScreenNames));
+				String.format(
+					"Screen name %s for user %s is invalid because it must " +
+						"not be a reserved name for anonymous users such as: " +
+							"%s",
+					StringUtil.merge(reservedScreenNames)));
 
 			_userId = userId;
 			_screenName = screenName;
@@ -186,8 +188,8 @@ public class UserScreenNameException extends PortalException {
 		}
 
 		private String[] _reservedScreenNames;
-		private final String _screenName;
-		private final long _userId;
+		private String _screenName;
+		private long _userId;
 
 	}
 

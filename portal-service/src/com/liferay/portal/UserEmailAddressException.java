@@ -56,7 +56,7 @@ public class UserEmailAddressException extends PortalException {
 			User user, String emailAddress1, String emailAddress2) {
 
 			super(
-				"The user email name addresses for user " + user.getUserId() +
+				"User email name addresses for user " + user.getUserId() +
 					" are not equal: " + emailAddress1 + " vs " +
 						emailAddress2);
 
@@ -110,14 +110,14 @@ public class UserEmailAddressException extends PortalException {
 	public static class MustNotBeNull extends UserEmailAddressException {
 
 		public MustNotBeNull() {
-			super("User email address must not be null");
+			super("Email address must not be null");
 		}
 
 		public MustNotBeNull(String fullName) {
 			super(
-				"User email address must not be null for the full name " +
-					fullName);
+				"Email address must not be null for the full name " + fullName);
 		}
+
 	}
 
 	public static class MustValidate extends UserEmailAddressException {
@@ -126,9 +126,10 @@ public class UserEmailAddressException extends PortalException {
 			String emailAddress, EmailAddressValidator emailAddressValidator) {
 
 			super(
-				"User email name address " + emailAddress + " does not " +
-					"validate with " +
-						ClassUtil.getClassName(emailAddressValidator));
+				String.format(
+					"Email name address %s does not validate with %s",
+					emailAddress,
+					ClassUtil.getClassName(emailAddressValidator)));
 
 			_emailAddress = emailAddress;
 			_emailAddressValidator = emailAddressValidator;
