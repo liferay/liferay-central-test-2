@@ -123,15 +123,17 @@ public class OpenIdAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof UserEmailAddressException.MustNotBeDuplicate) {
-				SessionErrors.add(actionRequest, e.getClass());
-			}
-			else if (e instanceof OpenIDException) {
+			if (e instanceof OpenIDException) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Error communicating with OpenID provider: " +
 							e.getMessage());
 				}
+
+				SessionErrors.add(actionRequest, e.getClass());
+			}
+			else if (e instanceof
+						UserEmailAddressException.MustNotBeDuplicate) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
