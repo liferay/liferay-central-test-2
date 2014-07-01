@@ -81,7 +81,6 @@ public class ComboServlet extends HttpServlet {
 
 	public static final String COMBO_SERVLET_BYTES_CACHE_KEY =
 		ComboServlet.class.getName();
-
 	public static final String COMBO_SERVLET_FILES_CACHE_KEY =
 		FileContentBag.class.getName();
 
@@ -251,13 +250,14 @@ public class ComboServlet extends HttpServlet {
 			URL resourceURL, String modulePath, String minifierType)
 		throws IOException {
 
-		String resourcePath = getResourcePath(modulePath);
-
 		String portletId = getModulePortletId(modulePath);
+		String resourcePath = getResourcePath(modulePath);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 
-		resourcePath = portlet.getContextPath().concat(resourcePath);
+		String moduleContextPath = portlet.getContextPath();
+
+		resourcePath = moduleContextPath.concat(resourcePath);
 
 		String fileContentKey = resourcePath.concat(StringPool.QUESTION).concat(
 			minifierType);
@@ -362,6 +362,7 @@ public class ComboServlet extends HttpServlet {
 
 	protected URL getResourceURL(String modulePath) throws Exception {
 		String portletId = getModulePortletId(modulePath);
+		String resourcePath = getResourcePath(modulePath);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 
@@ -373,14 +374,12 @@ public class ComboServlet extends HttpServlet {
 
 		ServletContext servletContext = portletApp.getServletContext();
 
-		String resourcePath = getResourcePath(modulePath);
-
 		URL url = servletContext.getResource(resourcePath);
 
 		if (url == null) {
 			throw new ServletException(
-				"Resource " + resourcePath + " does not exist in " +
-					portlet.getContextPath());
+				"Resource " + resourcePath + " does not exist in '" +
+					portlet.getContextPath() + "'");
 		}
 
 		return url;
