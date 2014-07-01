@@ -133,12 +133,12 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 	}
 
 	@ExpectedLogs(
-		loggerClass = JDBCExceptionReporter.class, level = "ERROR",
 		expectedLogs = {
 			@ExpectedLog(
-				expectedType = ExpectedType.PREFIX,
-				expectedLog = "Duplicate entry ")
-		}
+				expectedLog = "Duplicate entry ",
+				expectedType = ExpectedType.PREFIX)
+		},
+		level = "ERROR", loggerClass = JDBCExceptionReporter.class
 	)
 	@Test
 	public void testAddFileEntriesConcurrently() throws Exception {
