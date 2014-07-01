@@ -460,8 +460,6 @@ public class EditFileEntryAction extends PortletAction {
 		long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
 		String sourceFileName = uploadPortletRequest.getFileName("file");
 
-		String title = sourceFileName;
-
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(FileUtil.stripExtension(sourceFileName));
@@ -476,6 +474,8 @@ public class EditFileEntryAction extends PortletAction {
 		}
 
 		sourceFileName = sb.toString();
+
+		String title = sourceFileName;
 
 		InputStream inputStream = null;
 
