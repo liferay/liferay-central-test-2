@@ -1382,13 +1382,14 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle fetchLatestArticle(
 		long resourcePrimKey, int[] statuses) {
 
-		OrderByComparator orderByComparator = new ArticleVersionComparator();
+		OrderByComparator<JournalArticle> orderByComparator =
+			new ArticleVersionComparator();
 
-		List<JournalArticle> list = journalArticlePersistence.findByR_ST(
+		List<JournalArticle> articles = journalArticlePersistence.findByR_ST(
 			resourcePrimKey, statuses, 0, 1, orderByComparator);
 
-		if (!list.isEmpty()) {
-			return list.get(0);
+		if (!articles.isEmpty()) {
+			return articles.get(0);
 		}
 
 		return null;
