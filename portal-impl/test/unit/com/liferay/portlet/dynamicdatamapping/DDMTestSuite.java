@@ -34,8 +34,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses(
 	{
-		DDMFormValuesJSONDeserializerTest.class, DDMFormValuesTest.class,
 		DDMFormJSONDeserializerTest.class, DDMFormJSONSerializerTest.class,
+		DDMFormValuesJSONDeserializerTest.class, DDMFormValuesTest.class,
 		DDMFormXSDDeserializerTest.class, DDMFormXSDDeserializerTest.class,
 		DDMStructureImplTest.class, DDMXMLImplTest.class, DDMXSDImplTest.class,
 		GeolocationFieldRendererTest.class
