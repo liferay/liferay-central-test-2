@@ -236,7 +236,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 			return new String[][] {
 				new String[] {_PORTLET_IDS[0], _PORTLET_IDS[0] + "_test"},
 				new String[] {_PORTLET_IDS[1], _PORTLET_IDS[1] + "_test"},
-				new String[] {_PORTLET_IDS[2], _PORTLET_IDS[2] + "_test"},
+				new String[] {_PORTLET_IDS[2], _PORTLET_IDS[2] + "_test"}
 			};
 		}
 
