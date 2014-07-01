@@ -39,35 +39,14 @@ public class ExpectedLogsUtil {
 		}
 
 		try {
-			loggingEvent:
 			for (LoggingEvent loggingEvent :
 					captureAppender.getLoggingEvents()) {
+					
+				String renderedMessage = loggingEvent.getRenderedMessage();
 
-				String eventMessage = loggingEvent.getRenderedMessage();
-
-				for (ExpectedLog expectedLog : expectedLogs.expectedLogs()) {
-					ExpectedType expectedType = expectedLog.expectedType();
-
-					if (expectedType == ExpectedType.EXACT) {
-						if (eventMessage.equals(expectedLog.expectedLog())) {
-							continue loggingEvent;
-						}
-					}
-					else if (expectedType == ExpectedType.POSTFIX) {
-						if (eventMessage.endsWith(expectedLog.expectedLog())) {
-							continue loggingEvent;
-						}
-					}
-					else if (expectedType == ExpectedType.PREFIX) {
-						if (eventMessage.startsWith(
-								expectedLog.expectedLog())) {
-
-							continue loggingEvent;
-						}
-					}
+				if (!_isExpected(expectedLogs, renderedMessage)) {
+					Assert.fail(renderedMessage);
 				}
-
-				Assert.fail(eventMessage);
 			}
 		}
 		finally {
@@ -86,6 +65,34 @@ public class ExpectedLogsUtil {
 
 		return Log4JLoggerTestUtil.configureLog4JLogger(
 			clazz.getName(), Level.toLevel(expectedLogs.level()));
+	}
+
+	private static boolean _isExpected(
+		ExpectedLogs expectedLogs, String renderedMessage) {
+	
+		for (ExpectedLog expectedLog : expectedLogs.expectedLogs()) {
+			ExpectedType expectedType = expectedLog.expectedType();
+	
+			if (expectedType == ExpectedType.EXACT) {
+				if (renderedMessage.equals(expectedLog.expectedLog())) {
+					return true;
+				}
+			}
+			else if (expectedType == ExpectedType.POSTFIX) {
+				if (renderedMessage.endsWith(expectedLog.expectedLog())) {
+					return true;
+				}
+			}
+			else if (expectedType == ExpectedType.PREFIX) {
+				if (renderedMessage.startsWith(
+						expectedLog.expectedLog())) {
+	
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 
 }
