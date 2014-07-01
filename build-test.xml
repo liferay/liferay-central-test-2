@@ -2862,7 +2862,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		</if>
 	</target>
 
-	<target name="record-git-commit-bottom-ext-jsp">
+	<target name="record-git-commit-bottom-test-jsp">
 		<exec dir="${project.dir}" executable="git" outputproperty="git.commit.portal.rev.parse">
 			<arg line="rev-parse HEAD" />
 		</exec>
@@ -2873,9 +2873,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 
 		<loadfile property="copyright.content" srcFile="${project.dir}/portal-impl/src/com/liferay/portal/tools/servicebuilder/dependencies/copyright.txt" />
 
-		<var name="bottom.ext.jsp" value="${app.server.dir}/webapps/ROOT/html/common/themes/bottom-ext.jsp" />
-
-		<echo file="${bottom.ext.jsp}"><![CDATA[<%--
+		<echo file="${app.server.dir}/webapps/ROOT/html/common/themes/bottom-test.jsp"><![CDATA[<%--
 ${copyright.content}
 --%>
 
@@ -2895,7 +2893,7 @@ if (ppstate.equals("normal")) {
 }
 %>]]></echo>
 
-		<echo>Updated ${bottom.ext.jsp}.</echo>
+		<echo>Updated ${app.server.dir}/webapps/ROOT/html/common/themes/bottom-test.jsp.</echo>
 	</target>
 
 	<target name="record-test-package-names">
