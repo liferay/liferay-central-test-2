@@ -79,11 +79,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ComboServlet extends HttpServlet {
 
-	public static final String COMBO_SERVLET_BYTES_CACHE_KEY =
-		ComboServlet.class.getName();
-	public static final String COMBO_SERVLET_FILES_CACHE_KEY =
-		FileContentBag.class.getName();
-
 	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
@@ -444,9 +439,9 @@ public class ComboServlet extends HttpServlet {
 	private static Log _log = LogFactoryUtil.getLog(ComboServlet.class);
 
 	private PortalCache<String, byte[][]> _bytesArrayPortalCache =
-		SingleVMPoolUtil.getCache(COMBO_SERVLET_BYTES_CACHE_KEY);
+		SingleVMPoolUtil.getCache(ComboServlet.class.getName());
 	private PortalCache<String, FileContentBag> _fileContentBagPortalCache =
-		SingleVMPoolUtil.getCache(COMBO_SERVLET_FILES_CACHE_KEY);
+		SingleVMPoolUtil.getCache(FileContentBag.class.getName());
 	private Set<String> _protectedParameters = SetUtil.fromArray(
 		new String[] {
 			"b", "browserId", "minifierType", "languageId", "t", "themeId"
