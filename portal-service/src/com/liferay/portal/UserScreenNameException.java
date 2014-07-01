@@ -193,10 +193,13 @@ public class UserScreenNameException extends PortalException {
 
 	public static class MustNotBeUsedByGroup extends UserScreenNameException {
 
-		public MustNotBeUsedByGroup(long userId, String screenName, Group group) {
+		public MustNotBeUsedByGroup(
+			long userId, String screenName, Group group) {
+
 			super(
-				"Screen name " + screenName + " for user " + userId + " is " +
-					"already used by group " + group.getGroupId());
+				String.format(
+					"Screen name %s for user %s is already used by group %s",
+					screenName, userId, group.getGroupId()));
 
 			_userId = userId;
 			_screenName = screenName;
@@ -228,8 +231,10 @@ public class UserScreenNameException extends PortalException {
 			long userId, String screenName, int exceptionType) {
 
 			super(
-				"Screen name " + screenName + " for user " + userId +
-					" does not produce a valid friendly URL",
+				String.format(
+					"Screen name %s for user %s  does not produce a valid " +
+						"friendly URL",
+					screenName, userId),
 				new GroupFriendlyURLException(exceptionType));
 
 			_userId = userId;
@@ -262,9 +267,10 @@ public class UserScreenNameException extends PortalException {
 			ScreenNameValidator screenNameValidator) {
 
 			super(
-				"Screen name " + screenName + " for user " + userId + " does " +
-					"not validate with " +
-						ClassUtil.getClassName(screenNameValidator));
+				String.format(
+					"Screen name %s for user %s does not validate with %s" +
+					screenName, userId,
+					ClassUtil.getClassName(screenNameValidator)));
 
 			_userId = userId;
 			_screenName = screenName;
