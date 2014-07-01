@@ -229,17 +229,16 @@ public class ComboServletTest extends PowerMockito {
 
 	private ComboServlet _comboServlet;
 	private MockServletContext _pluginServletContext;
-
-	@Mock
-	private Portlet _portalPortlet;
+	private MockServletContext _portalServletContext;
 
 	@Mock
 	private PortletApp _portalPortletApp;
 
-	private MockServletContext _portalServletContext;
-
 	@Mock
 	private PortletLocalService _portletLocalService;
+
+	@Mock
+	private Portlet _portalPortlet;
 
 	@Mock
 	private Portlet _portletUndeployed;
