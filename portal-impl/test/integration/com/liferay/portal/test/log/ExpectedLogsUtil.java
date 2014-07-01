@@ -41,7 +41,7 @@ public class ExpectedLogsUtil {
 		try {
 			for (LoggingEvent loggingEvent :
 					captureAppender.getLoggingEvents()) {
-					
+
 				String renderedMessage = loggingEvent.getRenderedMessage();
 
 				if (!_isExpected(expectedLogs, renderedMessage)) {
@@ -69,10 +69,10 @@ public class ExpectedLogsUtil {
 
 	private static boolean _isExpected(
 		ExpectedLogs expectedLogs, String renderedMessage) {
-	
+
 		for (ExpectedLog expectedLog : expectedLogs.expectedLogs()) {
 			ExpectedType expectedType = expectedLog.expectedType();
-	
+
 			if (expectedType == ExpectedType.EXACT) {
 				if (renderedMessage.equals(expectedLog.expectedLog())) {
 					return true;
@@ -84,14 +84,12 @@ public class ExpectedLogsUtil {
 				}
 			}
 			else if (expectedType == ExpectedType.PREFIX) {
-				if (renderedMessage.startsWith(
-						expectedLog.expectedLog())) {
-	
+				if (renderedMessage.startsWith(expectedLog.expectedLog())) {
 					return true;
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
