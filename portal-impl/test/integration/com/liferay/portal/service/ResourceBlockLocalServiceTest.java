@@ -70,16 +70,17 @@ public class ResourceBlockLocalServiceTest {
 	}
 
 	@ExpectedLogs(
-		loggerClass = JDBCExceptionReporter.class, level = "ERROR",
 		expectedLogs = {
 			@ExpectedLog(
-				expectedType = ExpectedType.EXACT, expectedLog =
+				expectedLog =
 					"Deadlock found when trying to get lock; try restarting " +
-						"transaction"),
+						"transaction",
+				expectedType = ExpectedType.EXACT),
 			@ExpectedLog(
-				expectedType = ExpectedType.PREFIX,
-				expectedLog = "Duplicate entry ")
-		}
+				expectedLog = "Duplicate entry ",
+				expectedType = ExpectedType.PREFIX)
+		},
+		level = "ERROR", loggerClass = JDBCExceptionReporter.class
 	)
 	@Test
 	public void testConcurrentAccessing() throws Exception {
@@ -151,12 +152,12 @@ public class ResourceBlockLocalServiceTest {
 	}
 
 	@ExpectedLogs(
-		loggerClass = JDBCExceptionReporter.class, level = "ERROR",
 		expectedLogs = {
 			@ExpectedLog(
-				expectedType = ExpectedType.PREFIX,
-				expectedLog = "Duplicate entry ")
-		}
+				expectedLog = "Duplicate entry ",
+				expectedType = ExpectedType.PREFIX)
+		},
+		level = "ERROR", loggerClass = JDBCExceptionReporter.class
 	)
 	@Test
 	public void testConcurrentUpdateResourceBlockId() throws Exception {

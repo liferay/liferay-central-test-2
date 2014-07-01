@@ -58,13 +58,14 @@ public class LockLocalServiceTest {
 	}
 
 	@ExpectedLogs(
-		loggerClass = JDBCExceptionReporter.class, level = "ERROR",
 		expectedLogs = {
 			@ExpectedLog(
-				expectedType = ExpectedType.EXACT, expectedLog =
+				expectedLog =
 					"Deadlock found when trying to get lock; try restarting " +
-						"transaction")
-		}
+						"transaction",
+				expectedType = ExpectedType.EXACT)
+		},
+		level = "ERROR", loggerClass = JDBCExceptionReporter.class
 	)
 	@Test
 	public void testMutualExcludeLockingParallel() throws Exception {
