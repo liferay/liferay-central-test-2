@@ -56,7 +56,7 @@ public class UserIdException extends PortalException {
 	public static class MustNotBeNull extends UserIdException {
 
 		public MustNotBeNull() {
-			super("User id must not be null");
+			super("User ID must not be null");
 		}
 
 	}
