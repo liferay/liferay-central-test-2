@@ -1067,6 +1067,22 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return true;
 	}
 
+	private boolean _isIgnoredInterface(String interfaceClassName) {
+		for (String ignoredClass :
+				PropsValues.MODULE_FRAMEWORK_SERVICES_IGNORED_INTERFACES) {
+
+			if (ignoredClass.equals(interfaceClassName) ||
+				(ignoredClass.endsWith(StringPool.STAR) &&
+				 interfaceClassName.startsWith(
+					 ignoredClass.substring(0, ignoredClass.length() - 1)))) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private void _processURL(
 		StringBundler sb, URL url, String[] ignoredFragments) {
 
@@ -1192,23 +1208,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		List<String> names = new ArrayList<String>(interfaces.size());
 
-		a: for (Class<?> interfaceClass : interfaces) {
+		for (Class<?> interfaceClass : interfaces) {
 			String interfaceClassName = interfaceClass.getName();
 
-			for (String ignoredClass :
-					PropsValues.MODULE_FRAMEWORK_SERVICES_IGNORED_INTERFACES) {
-
-				if (ignoredClass.equals(interfaceClassName) ||
-					(ignoredClass.endsWith(StringPool.STAR) &&
-					 interfaceClassName.startsWith(
-						 ignoredClass.substring(
-							 0, ignoredClass.length() - 1)))) {
-
-					continue a;
-				}
+			if (!_isIgnoredInterface(interfaceClassName)) {
+				names.add(interfaceClassName);
 			}
-
-			names.add(interfaceClassName);
 		}
 
 		if (names.isEmpty()) {
