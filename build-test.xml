@@ -2895,7 +2895,7 @@ if (ppstate.equals("normal")) {
 }
 %>]]></echo>
 
-		<echo>${bottom.ext.jsp} has been updated for testing purpose.</echo>
+		<echo>Updated ${bottom.ext.jsp}.</echo>
 	</target>
 
 	<target name="record-test-package-names">
