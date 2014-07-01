@@ -244,6 +244,10 @@ public class UserScreenNameException extends PortalException {
 		public String getScreenName() {
 			return _screenName;
 		}
+		
+		public long getUserId() {
+			return _userId;
+		}
 
 		private int _exceptionType;
 		private String _screenName;
