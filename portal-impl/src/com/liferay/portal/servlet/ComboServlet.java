@@ -79,10 +79,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ComboServlet extends HttpServlet {
 
-	public static void clearCache() {
-		_bytesArrayPortalCache.removeAll();
-		_fileContentBagPortalCache.removeAll();
-	}
+	public static final String COMBO_SERVLET_BYTES_CACHE_KEY =
+		ComboServlet.class.getName();
+
+	public static final String COMBO_SERVLET_FILES_CACHE_KEY =
+		FileContentBag.class.getName();
 
 	@Override
 	public void service(
@@ -431,7 +432,7 @@ public class ComboServlet extends HttpServlet {
 
 		return validModuleExtension;
 	}
-	
+
 	private static final String _CSS_EXTENSION = "css";
 
 	private static final String _CSS_MINIFIED_SUFFIX = "-min.css";
@@ -441,14 +442,12 @@ public class ComboServlet extends HttpServlet {
 
 	private static final String _JAVASCRIPT_MINIFIED_SUFFIX = "-min.js";
 
-	private static PortalCache<String, byte[][]> _bytesArrayPortalCache =
-		SingleVMPoolUtil.getCache(ComboServlet.class.getName());
-	private static PortalCache<String, FileContentBag>
-		_fileContentBagPortalCache =
-			SingleVMPoolUtil.getCache(FileContentBag.class.getName());
-
 	private static Log _log = LogFactoryUtil.getLog(ComboServlet.class);
 
+	private PortalCache<String, byte[][]> _bytesArrayPortalCache =
+		SingleVMPoolUtil.getCache(COMBO_SERVLET_BYTES_CACHE_KEY);
+	private PortalCache<String, FileContentBag> _fileContentBagPortalCache =
+		SingleVMPoolUtil.getCache(COMBO_SERVLET_FILES_CACHE_KEY);
 	private Set<String> _protectedParameters = SetUtil.fromArray(
 		new String[] {
 			"b", "browserId", "minifierType", "languageId", "t", "themeId"
