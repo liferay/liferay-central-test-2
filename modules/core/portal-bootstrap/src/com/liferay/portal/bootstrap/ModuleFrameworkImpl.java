@@ -597,7 +597,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return properties;
 	}
 
-	private String _calculateExportsFromContents(Jar jar) {
+	private String _calculateExportPackage(Jar jar) {
 		StringBundler sb = new StringBundler();
 
 		String delimiter = StringPool.BLANK;
@@ -686,7 +686,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			analyzer.setProperty(
 				Analyzer.BUNDLE_SYMBOLICNAME, bundleSymbolicName);
 
-			String exportPackage = _calculateExportsFromContents(jar);
+			String exportPackage = _calculateExportPackage(jar);
 
 			analyzer.setProperty(Analyzer.EXPORT_PACKAGE, exportPackage);
 
