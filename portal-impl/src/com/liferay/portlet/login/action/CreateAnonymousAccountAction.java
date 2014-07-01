@@ -133,6 +133,18 @@ public class CreateAnonymousAccountAction extends PortletAction {
 
 				writeJSON(actionRequest, actionResponse, jsonObject);
 			}
+			else if (e instanceof CaptchaTextException ||
+					 e instanceof CompanyMaxUsersException ||
+					 e instanceof ContactFirstNameException ||
+					 e instanceof ContactFullNameException ||
+					 e instanceof ContactLastNameException ||
+					 e instanceof EmailAddressException ||
+					 e instanceof GroupFriendlyURLException ||
+					 e instanceof ReservedUserEmailAddressException ||
+					 e instanceof UserEmailAddressException) {
+
+				SessionErrors.add(actionRequest, e.getClass(), e);
+			}
 			else if (e instanceof
 						UserEmailAddressException.MustNotBeDuplicate) {
 
@@ -146,18 +158,6 @@ public class CreateAnonymousAccountAction extends PortletAction {
 					sendRedirect(
 						actionRequest, actionResponse, portletURL.toString());
 				}
-			}
-			else if (e instanceof CaptchaTextException ||
-					 e instanceof CompanyMaxUsersException ||
-					 e instanceof ContactFirstNameException ||
-					 e instanceof ContactFullNameException ||
-					 e instanceof ContactLastNameException ||
-					 e instanceof EmailAddressException ||
-					 e instanceof GroupFriendlyURLException ||
-					 e instanceof ReservedUserEmailAddressException ||
-					 e instanceof UserEmailAddressException) {
-
-				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				_log.error("Unable to create anonymous account", e);
