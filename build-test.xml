@@ -2887,7 +2887,7 @@ String ppstate = ParamUtil.getString(request, "p_p_state", "normal");
 if (ppstate.equals("normal")) {
 %>
 
-	<div id="currentHead" class="alert alert-info" style="margin: 2em">
+	<div class="alert alert-info" id="currentHead" style="margin: 2em">
 		Commit <a href="https://github.com/liferay/liferay-portal/commit/${git.commit.portal.rev.parse}" target="_blank">${git.commit.portal.rev.parse} - ${git.commit.portal.current.date}</a>
 	</div>
 
