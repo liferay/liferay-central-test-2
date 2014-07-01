@@ -38,22 +38,18 @@ public class ModulePathContainerTest {
 
 	@Test
 	public void testModulePathWithPortletId() {
-		String modulePath = PortletKeys.ACTIVITIES + ":/js/javascript.js";
+		String modulePath = "75:/js/javascript.js";
 
-		Assert.assertEquals(
-			PortletKeys.ACTIVITIES,
-			ComboServlet.getModulePortletId(modulePath));
+		Assert.assertEquals("75", ComboServlet.getModulePortletId(modulePath));
 		Assert.assertEquals(
 			"/js/javascript.js", ComboServlet.getResourcePath(modulePath));
 	}
 
 	@Test
 	public void testModulePathWithPortletIdAndNoResource() {
-		String modulePath = PortletKeys.ACTIVITIES + ":";
+		String modulePath = "75:";
 
-		Assert.assertEquals(
-			PortletKeys.ACTIVITIES,
-			ComboServlet.getModulePortletId(modulePath));
+		Assert.assertEquals("75", ComboServlet.getModulePortletId(modulePath));
 		Assert.assertEquals(
 			StringPool.BLANK, ComboServlet.getResourcePath(modulePath));
 	}
