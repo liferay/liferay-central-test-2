@@ -70,9 +70,9 @@ public class PACLIntegrationJUnitTestRunner
 		ServiceTestUtil.initServices();
 		ServiceTestUtil.initPermissions();
 
-		_indexerPostProcessorRegistry = new IndexerPostProcessorRegistry();
-		_schedulerEntryRegistry = new SchedulerEntryRegistry();
-		_serviceWrapperRegistry = new ServiceWrapperRegistry();
+		new IndexerPostProcessorRegistry();
+		new SchedulerEntryRegistry();
+		new ServiceWrapperRegistry();
 
 		_initialized = true;
 	}
@@ -101,10 +101,7 @@ public class PACLIntegrationJUnitTestRunner
 	private static final String _PACKAGE_PATH =
 		"com.liferay.portal.security.pacl.test.";
 
-	private static IndexerPostProcessorRegistry _indexerPostProcessorRegistry;
-	private static boolean _initialized = false;
-	private static SchedulerEntryRegistry _schedulerEntryRegistry;
-	private static ServiceWrapperRegistry _serviceWrapperRegistry;
+	private static boolean _initialized;
 
 	private static class PACLClassLoader extends URLClassLoader {
 
