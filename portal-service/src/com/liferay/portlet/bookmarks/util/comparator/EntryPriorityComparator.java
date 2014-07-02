@@ -20,8 +20,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EntryPriorityComparator
-	extends OrderByComparator<BookmarksEntry> {
+public class EntryPriorityComparator extends OrderByComparator<BookmarksEntry> {
 
 	public static final String ORDER_BY_ASC = "BookmarksEntry.priority ASC";
 
