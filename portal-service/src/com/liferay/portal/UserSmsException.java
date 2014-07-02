@@ -56,7 +56,7 @@ public class UserSmsException extends PortalException {
 	public static class MustNotBeNull extends UserSmsException {
 
 		public MustNotBeNull() {
-			super("User SMS must not be null");
+			super("SMS must not be null");
 		}
 
 	}
@@ -65,8 +65,9 @@ public class UserSmsException extends PortalException {
 
 		public MustBeValidEmailAddress(String smsSn) {
 			super(
-				"User SMS must be a valid email address but " + smsSn +
-					"is not");
+				String.format(
+					"SMS must be a valid email address but %s is not",
+					smsSn));
 
 			_smsSn = smsSn;
 		}

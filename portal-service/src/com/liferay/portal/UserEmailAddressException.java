@@ -115,7 +115,9 @@ public class UserEmailAddressException extends PortalException {
 
 		public MustNotBeNull(String fullName) {
 			super(
-				"Email address must not be null for the full name " + fullName);
+				String.format(
+					"Email address must not be null for the full name %s",
+					fullName));
 		}
 
 	}

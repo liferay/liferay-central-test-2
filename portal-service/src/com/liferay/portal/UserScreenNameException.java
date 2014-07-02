@@ -64,10 +64,11 @@ public class UserScreenNameException extends PortalException {
 			long userId, String screenName, char ... validSpecialChars) {
 
 			super(
-				"Screen name " + screenName + " for user " + userId + " is " +
-					" not valid because it must be alphanumeric or one the " +
-						"following special characters: " +
-							new String(validSpecialChars));
+				String.format(
+					"Screen name %s for user %s is  not valid because it " +
+						"must be alphanumeric or one the following special " +
+							"characters: %s",
+					screenName, userId, new String(validSpecialChars)));
 
 			_userId = userId;
 			_screenName = screenName;
@@ -96,8 +97,9 @@ public class UserScreenNameException extends PortalException {
 
 		public MustNotBeDuplicate(long userId, String screenName) {
 			super(
-				"Screen name " + screenName + " cannot be set for " +
-					" user " + userId + " because it is already being used");
+				String.format(
+					"Screen name %s cannot be set for user %s because it is already used",
+					screenName, userId));
 
 			_userId = userId;
 			_screenName = screenName;
@@ -123,11 +125,16 @@ public class UserScreenNameException extends PortalException {
 		}
 
 		public MustNotBeNull(String fullName) {
-			super("Screen name must not be null for the full name " + fullName);
+			super(
+				String.format(
+					"Screen name must not be null for the full name %s",
+					fullName));
 		}
 
 		public MustNotBeNull(long userId) {
-			super("Screen name must not be null for the user " + userId);
+			super(
+				String.format(
+					"Screen name must not be null for user %s", userId));
 		}
 
 	}
@@ -136,10 +143,11 @@ public class UserScreenNameException extends PortalException {
 
 		public MustNotBeNumeric(long userId, String screenName) {
 			super(
-				"Screen name " + screenName + " for user " + userId + " is " +
-					"numeric but the portal property \"" +
-						PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC +
-							"\" is disabled");
+				String.format(
+					"Screen name %s for user %s is numeric but the portal " +
+						"property \"%s\" is disabled",
+					screenName, userId,
+					PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC));
 
 			_userId = userId;
 			_screenName = screenName;
