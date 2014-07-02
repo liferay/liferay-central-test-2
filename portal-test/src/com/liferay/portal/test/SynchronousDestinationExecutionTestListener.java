@@ -86,9 +86,9 @@ public class SynchronousDestinationExecutionTestListener
 
 		public BaseDestination createSynchronousDestination(
 			String destinationName) {
-		
+
 			SynchronousDestination synchronousDestination;
-		
+
 			if ((_sync != null) && _sync.cleanTransaction()) {
 				synchronousDestination =
 					new CleanTransactionSynchronousDestination();
@@ -96,9 +96,9 @@ public class SynchronousDestinationExecutionTestListener
 			else {
 				synchronousDestination = new SynchronousDestination();
 			}
-		
+
 			synchronousDestination.setName(destinationName);
-		
+
 			return synchronousDestination;
 		}
 
