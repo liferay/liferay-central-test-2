@@ -89,7 +89,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 					status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 				}
 
-				_log.error(_getThrowableMessage(throwable));
+				_log.error(getThrowableMessage(throwable));
 
 				response.setStatus(status);
 
@@ -108,7 +108,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 				status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 			}
 
-			_log.error(_getThrowableMessage(e));
+			_log.error(getThrowableMessage(e));
 
 			response.setStatus(status);
 
@@ -179,7 +179,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 		return _REROUTE_PATH;
 	}
 
-	private String _getThrowableMessage(Throwable throwable) {
+	protected String getThrowableMessage(Throwable throwable) {
 		String message = throwable.getMessage();
 
 		if (Validator.isNotNull(message)) {
