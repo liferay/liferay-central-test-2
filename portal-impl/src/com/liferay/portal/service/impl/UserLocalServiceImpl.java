@@ -6274,7 +6274,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new UserSmsException.MustNotBeNull();
 		}
 		else if (!Validator.isEmailAddress(smsSn)) {
-			throw new UserSmsException.MustBeValidEmailAddress(smsSn);
+			throw new UserSmsException.MustBeEmailAddress(smsSn);
 		}
 	}
 

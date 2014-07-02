@@ -61,9 +61,9 @@ public class UserSmsException extends PortalException {
 
 	}
 
-	public static class MustBeValidEmailAddress extends UserSmsException {
+	public static class MustBeEmailAddress extends UserSmsException {
 
-		public MustBeValidEmailAddress(String smsSn) {
+		public MustBeEmailAddress(String smsSn) {
 			super(
 				String.format(
 					"SMS must be a valid email address but %s is not",
