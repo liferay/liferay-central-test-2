@@ -84,6 +84,24 @@ public class SynchronousDestinationExecutionTestListener
 
 	protected class SyncHandler {
 
+		public BaseDestination createSynchronousDestination(
+			String destinationName) {
+		
+			SynchronousDestination synchronousDestination;
+		
+			if ((_sync != null) && _sync.cleanTransaction()) {
+				synchronousDestination =
+					new CleanTransactionSynchronousDestination();
+			}
+			else {
+				synchronousDestination = new SynchronousDestination();
+			}
+		
+			synchronousDestination.setName(destinationName);
+		
+			return synchronousDestination;
+		}
+
 		public void enableSync() {
 			if (_sync == null) {
 				return;
@@ -120,24 +138,6 @@ public class SynchronousDestinationExecutionTestListener
 				messageBus.addDestination(
 					createSynchronousDestination(destinationName));
 			}
-		}
-
-		public BaseDestination createSynchronousDestination(
-			String destinationName) {
-
-			SynchronousDestination synchronousDestination;
-
-			if ((_sync != null) && _sync.cleanTransaction()) {
-				synchronousDestination =
-					new CleanTransactionSynchronousDestination();
-			}
-			else {
-				synchronousDestination = new SynchronousDestination();
-			}
-
-			synchronousDestination.setName(destinationName);
-
-			return synchronousDestination;
 		}
 
 		public void restorePreviousSync() {
