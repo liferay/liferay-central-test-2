@@ -56,8 +56,7 @@ public class UserSmsException extends PortalException {
 	public static class MustBeEmailAddress extends UserSmsException {
 
 		public MustBeEmailAddress(String smsSn) {
-			super(
-				String.format("SMS %s must be an email address", smsSn));
+			super(String.format("SMS %s must be an email address", smsSn));
 
 			_smsSn = smsSn;
 		}

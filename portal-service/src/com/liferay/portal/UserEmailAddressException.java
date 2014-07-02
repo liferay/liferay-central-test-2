@@ -132,8 +132,7 @@ public class UserEmailAddressException extends PortalException {
 
 			super(
 				String.format(
-					"Email name address %s must validate with %s",
-					emailAddress,
+					"Email name address %s must validate with %s", emailAddress,
 					ClassUtil.getClassName(emailAddressValidator)));
 
 			_emailAddress = emailAddress;
