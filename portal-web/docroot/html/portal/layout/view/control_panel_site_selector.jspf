@@ -40,8 +40,6 @@ manageableSiteGroups.remove(siteGroup);
 String switchGroupURL = HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "switchGroup", "1");
 
 switchGroupURL = PortalUtil.resetPortletParameters(switchGroupURL, themeDisplay.getPpid());
-
-boolean singlePageApplication = PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_ENABLED;
 %>
 
 <c:choose>
@@ -56,7 +54,7 @@ boolean singlePageApplication = PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_E
 			<%
 			String taglibOnClick = null;
 
-			if (singlePageApplication) {
+			if (PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_ENABLED) {
 				manageableSiteGroups.add(siteGroup);
 
 				taglibOnClick = portletDisplay.getNamespace() + "changeSiteLabel(this);";
@@ -65,7 +63,7 @@ boolean singlePageApplication = PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_E
 			for (Group manageableSiteGroup : manageableSiteGroups) {
 				String cssClass = "site-group";
 
-				if (singlePageApplication && (siteGroup.getGroupId() == manageableSiteGroup.getGroupId())) {
+				if (PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_ENABLED && (siteGroup.getGroupId() == manageableSiteGroup.getGroupId())) {
 					cssClass += " selected";
 				}
 			%>
@@ -85,7 +83,7 @@ boolean singlePageApplication = PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_E
 
 		</liferay-ui:icon-menu>
 
-		<c:if test="<%= singlePageApplication %>">
+		<c:if test="<%= PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_ENABLED %>">
 			<aui:script>
 				Liferay.provide(
 					window,
