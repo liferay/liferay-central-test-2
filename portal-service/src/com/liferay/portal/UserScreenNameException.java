@@ -65,9 +65,8 @@ public class UserScreenNameException extends PortalException {
 
 			super(
 				String.format(
-					"Screen name %s for user %s is  not valid because it " +
-						"must be alphanumeric or one the following special " +
-							"characters: %s",
+					"Screen name %s for user %s must be alphanumeric or one " +
+						"of the following special characters: %s",
 					screenName, userId, new String(validSpecialChars)));
 
 			_userId = userId;
@@ -98,7 +97,8 @@ public class UserScreenNameException extends PortalException {
 		public MustNotBeDuplicate(long userId, String screenName) {
 			super(
 				String.format(
-					"Screen name %s cannot be set for user %s because it is already used",
+					"Screen name %s must not be duplicate but is already " +
+						"used by user %s",
 					screenName, userId));
 
 			_userId = userId;
@@ -144,8 +144,8 @@ public class UserScreenNameException extends PortalException {
 		public MustNotBeNumeric(long userId, String screenName) {
 			super(
 				String.format(
-					"Screen name %s for user %s is numeric but the portal " +
-						"property \"%s\" is disabled",
+					"Screen name %s for user %s must not be numeric because " +
+						"the portal property \"%s\" is disabled",
 					screenName, userId,
 					PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC));
 
@@ -173,10 +173,9 @@ public class UserScreenNameException extends PortalException {
 			long userId, String screenName, String[] reservedScreenNames) {
 			super(
 				String.format(
-					"Screen name %s for user %s is invalid because it must " +
-						"not be a reserved name for anonymous users such as: " +
-							"%s",
-					StringUtil.merge(reservedScreenNames)));
+					"Screen name %s for user %s must not be a reserved name " +
+						"for anonymous users such as: %s",
+					screenName, userId, StringUtil.merge(reservedScreenNames)));
 
 			_userId = userId;
 			_screenName = screenName;
@@ -208,7 +207,7 @@ public class UserScreenNameException extends PortalException {
 
 			super(
 				String.format(
-					"Screen name %s for user %s is already used by group %s",
+					"Screen name %s for user %s must not be used by group %s",
 					screenName, userId, group.getGroupId()));
 
 			_userId = userId;
@@ -242,7 +241,7 @@ public class UserScreenNameException extends PortalException {
 
 			super(
 				String.format(
-					"Screen name %s for user %s does not produce a valid " +
+					"Screen name %s for user %s must produce a valid " +
 						"friendly URL",
 					screenName, userId),
 				new GroupFriendlyURLException(exceptionType));
@@ -278,7 +277,7 @@ public class UserScreenNameException extends PortalException {
 
 			super(
 				String.format(
-					"Screen name %s for user %s does not validate with %s" +
+					"Screen name %s for user %s must validate with %s",
 					screenName, userId,
 					ClassUtil.getClassName(screenNameValidator)));
 

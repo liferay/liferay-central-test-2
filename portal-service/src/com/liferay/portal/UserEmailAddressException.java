@@ -56,29 +56,30 @@ public class UserEmailAddressException extends PortalException {
 			User user, String emailAddress1, String emailAddress2) {
 
 			super(
-				"User email name addresses for user " + user.getUserId() +
-					" are not equal: " + emailAddress1 + " vs " +
-						emailAddress2);
+				String.format(
+					"Email address 1 %s and email address %2 for user %s " +
+						"must be equal",
+					emailAddress1, emailAddress2, user.getUserId()));
 
 			_user = user;
 			_emailAddress1 = emailAddress1;
 			_emailAddress2 = emailAddress2;
 		}
 
-		public String getEmailAddress2() {
-			return _emailAddress2;
-		}
-
 		public String getEmailAddress1() {
 			return _emailAddress1;
+		}
+
+		public String getEmailAddress2() {
+			return _emailAddress2;
 		}
 
 		public User getUser() {
 			return _user;
 		}
 
-		private String _emailAddress2;
 		private String _emailAddress1;
+		private String _emailAddress2;
 		private User _user;
 
 	}
@@ -87,8 +88,10 @@ public class UserEmailAddressException extends PortalException {
 
 		public MustNotBeDuplicate(long userId, String emailAddress) {
 			super(
-				"User email address " + emailAddress + " cannot be set for " +
-					" user " + userId + " because it is already being used");
+				String.format(
+					"Email address %s must not be duplicate but is already " +
+						"used by user %s",
+					emailAddress, userId));
 
 			_userId = userId;
 			_emailAddress = emailAddress;
@@ -129,7 +132,7 @@ public class UserEmailAddressException extends PortalException {
 
 			super(
 				String.format(
-					"Email name address %s does not validate with %s",
+					"Email name address %s must validate with %s",
 					emailAddress,
 					ClassUtil.getClassName(emailAddressValidator)));
 
