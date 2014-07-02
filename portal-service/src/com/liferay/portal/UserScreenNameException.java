@@ -234,7 +234,7 @@ public class UserScreenNameException extends PortalException {
 
 			super(
 				String.format(
-					"Screen name %s for user %s  does not produce a valid " +
+					"Screen name %s for user %s does not produce a valid " +
 						"friendly URL",
 					screenName, userId),
 				new GroupFriendlyURLException(exceptionType));
@@ -251,7 +251,7 @@ public class UserScreenNameException extends PortalException {
 		public String getScreenName() {
 			return _screenName;
 		}
-		
+
 		public long getUserId() {
 			return _userId;
 		}

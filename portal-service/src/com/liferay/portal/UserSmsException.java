@@ -53,7 +53,7 @@ public class UserSmsException extends PortalException {
 		super(cause);
 	}
 
-		public static class MustNotBeNull extends UserSmsException {
+	public static class MustNotBeNull extends UserSmsException {
 
 		public MustNotBeNull() {
 			super("User SMS must not be null");
