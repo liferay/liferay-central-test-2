@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @deprecated As of 7.0.0, replaced by
  * 		{@link UserEmailAddressException.MustNotBeDuplicate}
  */
+@Deprecated
 public class DuplicateUserEmailAddressException extends PortalException {
 
 	public DuplicateUserEmailAddressException() {
