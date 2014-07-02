@@ -412,8 +412,6 @@ public class IconTag extends IncludeTag {
 			sb.append("')");
 
 			onClick = sb.toString();
-
-			_url = "javascript:;";
 		}
 
 		return onClick;
@@ -437,6 +435,14 @@ public class IconTag extends IncludeTag {
 			new String[] {
 				StringPool.DASH, StringPool.BLANK
 			});
+	}
+
+	protected String getProcessedUrl() {
+		if (isForcePost()) {
+			return "javascript:;";
+		}
+
+		return _url;
 	}
 
 	protected String getSrc() {
@@ -580,7 +586,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:target", _target);
 		request.setAttribute(
 			"liferay-ui:icon:toolTip", String.valueOf(_toolTip));
-		request.setAttribute("liferay-ui:icon:url", getUrl());
+		request.setAttribute("liferay-ui:icon:url", getProcessedUrl());
 		request.setAttribute(
 			"liferay-ui:icon:useDialog", String.valueOf(_useDialog));
 	}
