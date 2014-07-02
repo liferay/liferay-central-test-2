@@ -101,7 +101,7 @@ public class SynchronousDestinationExecutionTestListener
 			replaceDestination(DestinationNames.SUBSCRIPTION_SENDER);
 		}
 
-		protected void replaceDestination(String destinationName) {
+		public void replaceDestination(String destinationName) {
 			MessageBus messageBus = MessageBusUtil.getMessageBus();
 
 			Destination destination = messageBus.getDestination(
@@ -122,7 +122,7 @@ public class SynchronousDestinationExecutionTestListener
 			}
 		}
 
-		private BaseDestination createSynchronousDestination(
+		public BaseDestination createSynchronousDestination(
 			String destinationName) {
 
 			SynchronousDestination synchronousDestination;
