@@ -171,6 +171,7 @@ public class UserScreenNameException extends PortalException {
 
 		public MustNotBeReservedForAnonymous(
 			long userId, String screenName, String[] reservedScreenNames) {
+
 			super(
 				String.format(
 					"Screen name %s for user %s must not be a reserved name " +
