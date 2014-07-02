@@ -55,7 +55,6 @@ import com.liferay.portlet.shopping.util.comparator.ItemMinQuantityComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemPriceComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemSKUComparator;
-import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
 
 import java.text.NumberFormat;
 
