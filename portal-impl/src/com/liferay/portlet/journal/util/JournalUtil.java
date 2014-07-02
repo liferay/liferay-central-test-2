@@ -559,7 +559,7 @@ public class JournalUtil {
 		return sb.toString();
 	}
 
-	public static OrderByComparator getArticleOrderByComparator(
+	public static OrderByComparator<JournalArticle> getArticleOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -568,7 +568,7 @@ public class JournalUtil {
 			orderByAsc = true;
 		}
 
-		OrderByComparator orderByComparator = null;
+		OrderByComparator<JournalArticle> orderByComparator = null;
 
 		if (orderByCol.equals("create-date")) {
 			orderByComparator = new ArticleCreateDateComparator(orderByAsc);

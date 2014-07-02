@@ -161,8 +161,7 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 		OrderByComparator<?> obc) {
 
 		return getFoldersAndArticles(
-			groupId, folderId, WorkflowConstants.STATUS_ANY, start, end,
-			(OrderByComparator<Object>)obc);
+			groupId, folderId, WorkflowConstants.STATUS_ANY, start, end, obc);
 	}
 
 	@Override
