@@ -187,7 +187,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *         (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 */
-	public<T> List<T> findWithDynamicQuery(
+	public <T> List<T> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator<T> orderByComparator);
 
