@@ -152,7 +152,7 @@ public class FileEntryAtomCollectionAdapter
 
 		long folderId = atomRequestContext.getLongParameter("folderId");
 
-		long repositoryId;
+		long repositoryId = 0;
 
 		if (folderId != 0) {
 			Folder folder = DLAppServiceUtil.getFolder(folderId);
@@ -223,7 +223,7 @@ public class FileEntryAtomCollectionAdapter
 
 		long folderId = atomRequestContext.getLongParameter("folderId");
 
-		long repositoryId;
+		long repositoryId = 0;
 
 		if (folderId != 0) {
 			Folder folder = DLAppServiceUtil.getFolder(folderId);
