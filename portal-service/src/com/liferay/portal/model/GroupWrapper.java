@@ -829,7 +829,7 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	@Override
 	public java.util.List<com.liferay.portal.model.Group> getChildrenWithLayouts(
 		boolean site, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Group> obc) {
 		return _group.getChildrenWithLayouts(site, start, end, obc);
 	}
 
