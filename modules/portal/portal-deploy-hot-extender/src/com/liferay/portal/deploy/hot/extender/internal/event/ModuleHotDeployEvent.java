@@ -38,7 +38,11 @@ public class ModuleHotDeployEvent extends HotDeployEvent {
 	public boolean hasBundleHeader(String header) {
 		Dictionary<String, String> headers = _bundle.getHeaders();
 
-		return headers.get(header) != null;
+		if (headers.get(header) != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private Bundle _bundle;

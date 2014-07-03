@@ -48,23 +48,26 @@ public class ServicesHotDeployListener extends PluginPackageHotDeployListener {
 		super.invokeDeploy(hotDeployEvent);
 
 		try {
-			_processServiceResourceActions(hotDeployEvent);
+			processServiceResourceActions(hotDeployEvent);
 		}
 		catch (SystemException se) {
 			throw new HotDeployException(
-				"Error processing service resource actions for " +
-					hotDeployEvent.getServletContextName(), se);
+				"Unable to process service resource actions for " +
+					hotDeployEvent.getServletContextName(),
+				se);
 		}
 	}
 
 	@Override
 	protected void initPortletProps(ClassLoader classLoader) throws Exception {
 
-		// Don't load the properties, we will load it the proper way
+		// Do not initialize the properties
 
 	}
 
-	private void _processServiceResourceActions(HotDeployEvent hotDeployEvent) {
+	protected void processServiceResourceActions(
+		HotDeployEvent hotDeployEvent) {
+
 		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
 			hotDeployEvent.getContextClassLoader(), "portlet");
 
@@ -81,11 +84,10 @@ public class ServicesHotDeployListener extends PluginPackageHotDeployListener {
 					resourceActionConfig);
 			}
 			catch (Exception e) {
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Unexpected error while processing resource config " +
-							"actions defined in " + resourceActionConfig, e);
-				}
+				_log.error(
+					"Unable to process resource config actions defined in " +
+						resourceActionConfig,
+					e);
 			}
 		}
 
