@@ -53,6 +53,7 @@ public class UserLockoutException extends PortalException {
 	}
 
 	public static class LDAPLockout extends UserLockoutException {
+
 		public LDAPLockout(String fullUserDN, String ldapMessage) {
 			super(
 				String.format(
@@ -78,6 +79,7 @@ public class UserLockoutException extends PortalException {
 	}
 
 	public static class PasswordPolicyLockout extends UserLockoutException {
+
 		public PasswordPolicyLockout(User user, PasswordPolicy passwordPolicy) {
 			super(
 				String.format(
