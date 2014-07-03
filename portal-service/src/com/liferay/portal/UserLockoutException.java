@@ -58,7 +58,7 @@ public class UserLockoutException extends PortalException {
 			super(
 				String.format(
 					"User %s was locked out of LDAP with the following " +
-						"message: %s",
+						"LDAP message: %s",
 					fullUserDN, ldapMessage));
 
 			_fullUserDN = fullUserDN;
@@ -83,9 +83,8 @@ public class UserLockoutException extends PortalException {
 		public PasswordPolicyLockout(User user, PasswordPolicy passwordPolicy) {
 			super(
 				String.format(
-					"User %s was locked out of the system on %s by " +
-						"password policy %s and will be automatically " +
-							"unlocked on %s",
+					"User %s was locked on %s by password policy %s and will " +
+						"be automatically unlocked on %s",
 					user.getUserId(), user.getLockoutDate(),
 					passwordPolicy.getName(),
 					DateUtil.newDate(
