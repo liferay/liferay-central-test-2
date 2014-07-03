@@ -57,8 +57,7 @@ public class UserLockoutException extends PortalException {
 		public LDAPLockout(String fullUserDN, String ldapMessage) {
 			super(
 				String.format(
-					"User %s was locked out of LDAP with the following " +
-						"LDAP message: %s",
+					"User %s is locked out of a required LDAP server: %s",
 					fullUserDN, ldapMessage));
 
 			_fullUserDN = fullUserDN;
