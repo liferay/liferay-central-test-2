@@ -140,28 +140,28 @@ public class MapUtilTest {
 
 		@Test(expected = NumberFormatException.class)
 		public void shouldFailWithDouble() {
-			MapUtil.toLinkedHashMap(new String[]{"one:foo:double"});
+			MapUtil.toLinkedHashMap(new String[] {"one:foo:double"});
 
 			Assert.fail();
 		}
 
 		@Test(expected = NumberFormatException.class)
 		public void shouldFailWithInteger() {
-			MapUtil.toLinkedHashMap(new String[]{"one:foo:int"});
+			MapUtil.toLinkedHashMap(new String[] {"one:foo:int"});
 
 			Assert.fail();
 		}
 
 		@Test(expected = NumberFormatException.class)
 		public void shouldFailWithLong() {
-			MapUtil.toLinkedHashMap(new String[]{"one:foo:long"});
+			MapUtil.toLinkedHashMap(new String[] {"one:foo:long"});
 
 			Assert.fail();
 		}
 
 		@Test(expected = NumberFormatException.class)
 		public void shouldFailWithShort() {
-			MapUtil.toLinkedHashMap(new String[]{"one:foo:short"});
+			MapUtil.toLinkedHashMap(new String[] {"one:foo:short"});
 
 			Assert.fail();
 		}
@@ -211,7 +211,7 @@ public class MapUtilTest {
 		@Test
 		public void shouldReturnMapWithComposite() {
 			Map<String, Object> map = MapUtil.toLinkedHashMap(
-				new String[]{"one:1:" + Byte.class.getName()});
+				new String[] {"one:1:" + Byte.class.getName()});
 
 			Assert.assertEquals(1, map.size());
 			Assert.assertTrue(map.containsKey("one"));
@@ -219,7 +219,7 @@ public class MapUtilTest {
 			Assert.assertTrue(map.get("one") instanceof Byte);
 
 			map = MapUtil.toLinkedHashMap(
-				new String[]{"one:1:" + Float.class.getName()});
+				new String[] {"one:1:" + Float.class.getName()});
 
 			Assert.assertEquals(1, map.size());
 			Assert.assertTrue(map.containsKey("one"));
