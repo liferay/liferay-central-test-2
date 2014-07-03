@@ -701,7 +701,6 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<Object> getFoldersAndFileEntries(
 		long folderId, int start, int end, OrderByComparator<?> obc) {
 
@@ -712,7 +711,6 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<Object> getFoldersAndFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator<?> obc)
