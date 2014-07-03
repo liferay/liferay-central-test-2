@@ -16,7 +16,7 @@ package com.liferay.portlet.documentlibrary.util.comparator;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.OrderByComparatorAdaptor;
+import com.liferay.portal.kernel.util.OrderByComparatorAdapter;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
@@ -24,7 +24,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  * @author William Newbury
  */
 public class DLFileEntryOrderByComparator
-	extends OrderByComparatorAdaptor<DLFileEntry, FileEntry> {
+	extends OrderByComparatorAdapter<DLFileEntry, FileEntry> {
 
 	public static OrderByComparator<DLFileEntry> getOrderByComparator(
 		OrderByComparator<FileEntry> orderByComparator) {

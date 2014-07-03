@@ -17,55 +17,55 @@ package com.liferay.portal.kernel.util;
 /**
  * @author Shuyang Zhou
  */
-public abstract class OrderByComparatorAdaptor<T, V>
+public abstract class OrderByComparatorAdapter<T, V>
 	extends OrderByComparator<T> {
 
-	public OrderByComparatorAdaptor(OrderByComparator<V> orderByComparator) {
-		this.orderByComparator = orderByComparator;
+	public OrderByComparatorAdapter(OrderByComparator<V> orderByComparator) {
+		this._orderByComparator = orderByComparator;
 	}
 
 	public abstract V adapt(T t);
 
 	@Override
 	public int compare(T o1, T o2) {
-		return orderByComparator.compare(adapt(o1), adapt(o2));
+		return _orderByComparator.compare(adapt(o1), adapt(o2));
 	}
 
 	@Override
 	public String getOrderBy() {
-		return orderByComparator.getOrderBy();
+		return _orderByComparator.getOrderBy();
 	}
 
 	@Override
 	public String[] getOrderByConditionFields() {
-		return orderByComparator.getOrderByConditionFields();
+		return _orderByComparator.getOrderByConditionFields();
 	}
 
 	@Override
 	public Object[] getOrderByConditionValues(Object obj) {
-		return orderByComparator.getOrderByConditionValues(obj);
+		return _orderByComparator.getOrderByConditionValues(obj);
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return orderByComparator.getOrderByFields();
+		return _orderByComparator.getOrderByFields();
 	}
 
 	@Override
 	public boolean isAscending() {
-		return orderByComparator.isAscending();
+		return _orderByComparator.isAscending();
 	}
 
 	@Override
 	public boolean isAscending(String field) {
-		return orderByComparator.isAscending(field);
+		return _orderByComparator.isAscending(field);
 	}
 
 	@Override
 	public String toString() {
-		return orderByComparator.toString();
+		return _orderByComparator.toString();
 	}
 
-	protected OrderByComparator<V> orderByComparator;
+	private OrderByComparator<V> _orderByComparator;
 
 }
