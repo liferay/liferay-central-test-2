@@ -86,7 +86,13 @@ public class JSONServiceActionTest extends TestCase {
 	public void testGetArgumentWithArrayValue() throws Exception {
 		JSONServiceAction jsonServiceAction = new JSONServiceAction();
 
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest();
+
 		String[] parameters = {"roleId", "groupIds"};
+
+		mockHttpServletRequest.setParameter(parameters[0], "11111");
+		mockHttpServletRequest.setParameter(parameters[1], "11111,22222,33333");
 
 		Object[] methodAndParameterTypes =
 			jsonServiceAction.getMethodAndParameterTypes(
@@ -95,12 +101,6 @@ public class JSONServiceActionTest extends TestCase {
 
 		Method method = (Method)methodAndParameterTypes[0];
 		Type[] parameterTypes = (Type[])methodAndParameterTypes[1];
-
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		mockHttpServletRequest.setParameter(parameters[0], "11111");
-		mockHttpServletRequest.setParameter(parameters[1], "11111,22222,33333");
 
 		Object value = jsonServiceAction.getArgValue(
 			mockHttpServletRequest, GroupServiceUtil.class, method.getName(),
