@@ -31,6 +31,10 @@ public abstract class OrderByComparatorAdapter<T, V>
 		return _orderByComparator.compare(adapt(o1), adapt(o2));
 	}
 
+	public OrderByComparator<V> getAdaptedOrderByComparator() {
+		return _orderByComparator;
+	}
+
 	@Override
 	public String getOrderBy() {
 		return _orderByComparator.getOrderBy();
