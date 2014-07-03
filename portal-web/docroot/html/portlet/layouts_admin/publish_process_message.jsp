@@ -78,7 +78,7 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 		<c:choose>
 			<c:when test="<%= Validator.equals(cmd, Constants.PUBLISH_TO_REMOTE) && (percentage == 100) %>">
 				<div class="progress-current-item">
-					<strong><liferay-ui:message key="the-publication-is-processing-on-the-remote-site,-please-wait" /></strong>
+					<strong><liferay-ui:message key="please-wait-as-the-publication-processes-on-the-remote-site" /></strong>
 				</div>
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(stagedModelName) && Validator.isNotNull(stagedModelType) %>">
