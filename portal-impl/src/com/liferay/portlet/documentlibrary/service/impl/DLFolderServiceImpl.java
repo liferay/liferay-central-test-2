@@ -225,7 +225,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
-		@SuppressWarnings("unchecked")
 		QueryDefinition<?> queryDefinition = new QueryDefinition<Object>(
 			status, start, end, (OrderByComparator<Object>)obc);
 
@@ -246,7 +245,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
-		@SuppressWarnings("unchecked")
 		QueryDefinition<?> queryDefinition = new QueryDefinition<Object>(
 			status, start, end, (OrderByComparator<Object>)obc);
 
