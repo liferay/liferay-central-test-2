@@ -53,27 +53,27 @@ public class UserLockoutException extends PortalException {
 	}
 
 	public static class LDAPLockout extends UserLockoutException {
-		public LDAPLockout(String fullUserDN, String message) {
+		public LDAPLockout(String fullUserDN, String ldapMessage) {
 			super(
 				String.format(
 					"User %s has been locked out of LDAP with the following " +
 						"message: %s",
-					fullUserDN, message));
+					fullUserDN, ldapMessage));
 
 			_fullUserDN = fullUserDN;
-			_message = message;
+			_ldapMessage = ldapMessage;
 		}
 
 		public String getFullUserDN() {
 			return _fullUserDN;
 		}
 
-		public String getMessage() {
-			return _message;
+		public String getLDAPMessage() {
+			return _ldapMessage;
 		}
 
 		private String _fullUserDN;
-		private String _message;
+		private String _ldapMessage;
 
 	}
 
