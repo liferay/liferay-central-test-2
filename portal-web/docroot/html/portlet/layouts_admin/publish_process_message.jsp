@@ -35,6 +35,10 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 	<c:if test="<%= backgroundTaskStatus != null %>">
 
 		<%
+		Map<String, Serializable> taskContextMap = backgroundTask.getTaskContextMap();
+
+		String cmd = (String)taskContextMap.get(Constants.CMD);
+
 		int percentage = 100;
 
 		long allModelAdditionCountersTotal = GetterUtil.getLong(backgroundTaskStatus.getAttribute("allModelAdditionCountersTotal"));
@@ -44,10 +48,6 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 
 		long allProgressBarCountersTotal = allModelAdditionCountersTotal + allPortletAdditionCounter;
 		long currentProgressBarCountersTotal = currentModelAdditionCountersTotal + currentPortletAdditionCounter;
-
-		Map<String, Serializable> taskContextMap = backgroundTask.getTaskContextMap();
-
-		String cmd = (String)taskContextMap.get(Constants.CMD);
 
 		if (allProgressBarCountersTotal > 0) {
 			int base = 100;
