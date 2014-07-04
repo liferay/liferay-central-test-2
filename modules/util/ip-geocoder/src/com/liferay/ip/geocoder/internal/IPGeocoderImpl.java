@@ -48,8 +48,7 @@ import org.tukaani.xz.XZInputStream;
  * @author Julio Camarero
  */
 @Component(
-	configurationPolicy = ConfigurationPolicy.OPTIONAL,
-	name = "IPGeocoder",
+	configurationPolicy = ConfigurationPolicy.OPTIONAL, name = "IPGeocoder",
 	property = {
 		"ip.geocoder.file.path=",
 		"ip.geocoder.file.url=http://cdn.files.liferay.com/mirrors" +
@@ -66,7 +65,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 		String filePath = properties.get("ip.geocoder.file.path");
 
-		if ((filePath == null) || (filePath.equals(""))) {
+		if ((filePath == null) || filePath.equals("")) {
 			filePath =
 				System.getProperty("java.io.tmpdir") +
 					"/liferay/GeoIP/GeoIPCity.dat";
@@ -75,8 +74,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 		String fileURL = properties.get("ip.geocoder.file.url");
 
 		try {
-			File ipGeocoderFile = getIPGeocoderFile(
-				filePath, fileURL, false);
+			File ipGeocoderFile = getIPGeocoderFile(filePath, fileURL, false);
 
 			_lookupService = new LookupService(
 				ipGeocoderFile, LookupService.GEOIP_MEMORY_CACHE);

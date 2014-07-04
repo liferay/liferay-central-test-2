@@ -34,8 +34,7 @@ import org.osgi.service.component.annotations.ReferenceCardinality;
 @Component (
 	immediate = true, property = {
 		"osgi.command.function=updateFilePath",
-		"osgi.command.function=updateFileURL",
-		"osgi.command.scope=ipgeocoder"
+		"osgi.command.function=updateFileURL", "osgi.command.scope=ipgeocoder"
 	},
 	service = Object.class
 )
