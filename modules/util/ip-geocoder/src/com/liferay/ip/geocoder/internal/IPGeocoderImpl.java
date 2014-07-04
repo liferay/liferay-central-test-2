@@ -52,8 +52,8 @@ import org.tukaani.xz.XZInputStream;
 	name = "IPGeocoder",
 	property = {
 		"ip.geocoder.file.path=",
-		"ip.geocoder.file.url=http://cdn.files.liferay.com/mirrors/" +
-			"geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
+		"ip.geocoder.file.url=http://cdn.files.liferay.com/mirrors" +
+			"/geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
 	},
 	service = IPGeocoder.class)
 public class IPGeocoderImpl implements IPGeocoder {
@@ -126,22 +126,20 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 		synchronized (this) {
 			if (_logger.isInfoEnabled()) {
-				_logger.info(
-					"Downloading Geolocation Data from " + fileURL);
+				_logger.info("Downloading " + fileURL);
 			}
 
 			URL url = new URL(fileURL);
 
-			URLConnection con = url.openConnection();
+			URLConnection urlConnection = url.openConnection();
 
-			String tmpDir = System.getProperty("java.io.tmpdir");
+			File xzFile = new File(
+				System.getProperty("java.io.tmpdir") +
+					"/liferay/GeoIP/GeoIPCity.dat.xz");
 
-			File tarFile = new File(
-				tmpDir + "/liferay/GeoIP/GeoIPCity.dat.xz");
+			write(xzFile, urlConnection.getInputStream());
 
-			write(tarFile, con.getInputStream());
-
-			write(file, new XZInputStream(new FileInputStream(tarFile)));
+			write(file, new XZInputStream(new FileInputStream(xzFile)));
 		}
 
 		return file;
