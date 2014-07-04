@@ -14,19 +14,20 @@
 
 package com.liferay.portlet.relatedassets.action;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public class ViewAction extends com.liferay.portlet.assetpublisher.action.ViewAction {
+public class ViewAction
+	extends com.liferay.portlet.assetpublisher.action.ViewAction {
 
 	@Override
 	public ActionForward render(
