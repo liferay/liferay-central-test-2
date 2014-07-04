@@ -14,8 +14,6 @@
 
 package com.liferay.ip.geocoder.internal.command;
 
-import com.liferay.ip.geocoder.internal.IPGeocoderImpl;
-
 import java.io.IOException;
 
 import java.util.Dictionary;
@@ -70,7 +68,7 @@ public class IPGeocoderConfigurationCommand {
 		}
 
 		Configuration configuration = _configurationAdmin.getConfiguration(
-			IPGeocoderImpl.SERVICE_NAME);
+			"IPGeocoder");
 
 		Dictionary<String, Object> properties = configuration.getProperties();
 
