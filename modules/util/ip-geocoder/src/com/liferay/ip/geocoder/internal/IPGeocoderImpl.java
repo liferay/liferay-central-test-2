@@ -60,7 +60,30 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 	@Activate
 	public void activate(Map<String, String> properties) {
-		_init(properties);
+		if (_lookupService != null) {
+			return;
+		}
+
+		String fileLocation = properties.get(
+			"ip.geocoder.file.location");
+
+		if ((fileLocation == null) || (fileLocation.equals(""))) {
+			fileLocation =
+				System.getProperty(TMP_DIR) + "/liferay/GeoIP/GeoIPCity.dat";
+		}
+
+		String fileURL = properties.get("ip.geocoder.file.url");
+
+		try {
+			String ipGeocoderFile = getIPGeocoderFile(
+				fileLocation, fileURL, false);
+
+			_lookupService = new LookupService(
+				ipGeocoderFile, LookupService.GEOIP_MEMORY_CACHE);
+		}
+		catch (IOException ioe) {
+			_logger.error(ioe.getMessage());
+		}
 	}
 
 	@Deactivate
@@ -87,7 +110,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 			_lookupService = null;
 
-			_init(properties);
+			activate(properties);
 		}
 	}
 
@@ -121,33 +144,6 @@ public class IPGeocoderImpl implements IPGeocoder {
 		String absolutePath = file.getAbsolutePath();
 
 		return absolutePath.replace('\\', '/');
-	}
-
-	private void _init(Map<String, String> properties) {
-		if (_lookupService != null) {
-			return;
-		}
-
-		String fileLocation = properties.get(
-			"ip.geocoder.file.location");
-
-		if ((fileLocation == null) || (fileLocation.equals(""))) {
-			fileLocation =
-				System.getProperty(TMP_DIR) + "/liferay/GeoIP/GeoIPCity.dat";
-		}
-
-		String fileURL = properties.get("ip.geocoder.file.url");
-
-		try {
-			String ipGeocoderFile = getIPGeocoderFile(
-				fileLocation, fileURL, false);
-
-			_lookupService = new LookupService(
-				ipGeocoderFile, LookupService.GEOIP_MEMORY_CACHE);
-		}
-		catch (IOException ioe) {
-			_logger.error(ioe.getMessage());
-		}
 	}
 
 	private void mkdirsParentFile(File file) {
