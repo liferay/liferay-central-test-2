@@ -1560,7 +1560,6 @@ public interface LayoutLocalService extends BaseLocalService,
 	* @deprecated As of 6.2.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
-	@java.lang.SuppressWarnings(value = "unused")
 	public void updateScopedPortletNames(long groupId, boolean privateLayout,
 		long layoutId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,

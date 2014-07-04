@@ -98,7 +98,6 @@ public interface UserLocalService extends BaseLocalService,
 	* @param userId the primary key of the user
 	* @throws PortalException if a user with the primary key could not be found
 	*/
-	@java.lang.SuppressWarnings(value = "deprecation")
 	public void addDefaultUserGroups(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -265,7 +264,6 @@ public interface UserLocalService extends BaseLocalService,
 	/**
 	* @throws PortalException
 	*/
-	@java.lang.SuppressWarnings(value = "deprecation")
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -316,7 +314,6 @@ public interface UserLocalService extends BaseLocalService,
 	* @return the new user
 	* @throws PortalException if the user's information was invalid
 	*/
-	@java.lang.SuppressWarnings(value = "deprecation")
 	public com.liferay.portal.model.User addUserWithWorkflow(
 		long creatorUserId, long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
@@ -2014,7 +2011,6 @@ public interface UserLocalService extends BaseLocalService,
 	/**
 	* @throws PortalException
 	*/
-	@java.lang.SuppressWarnings(value = "deprecation")
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -2666,7 +2662,6 @@ public interface UserLocalService extends BaseLocalService,
 	* @throws PortalException if a user with the primary key could not be found
 	or if the new information was invalid
 	*/
-	@java.lang.SuppressWarnings(value = "deprecation")
 	public com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String oldPassword, java.lang.String newPassword1,
 		java.lang.String newPassword2, boolean passwordReset,
