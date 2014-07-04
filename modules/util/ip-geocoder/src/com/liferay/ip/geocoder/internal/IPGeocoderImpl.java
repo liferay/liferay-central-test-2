@@ -48,12 +48,14 @@ import org.tukaani.xz.XZInputStream;
  * @author Julio Camarero
  */
 @Component(
-	name = "IPGeocoder", service = IPGeocoder.class,
-	configurationPolicy = ConfigurationPolicy.OPTIONAL, property = {
+	configurationPolicy = ConfigurationPolicy.OPTIONAL,
+	name = "IPGeocoder",
+	property = {
 		"ip.geocoder.file.path=",
 		"ip.geocoder.file.url=http://cdn.files.liferay.com/mirrors/" +
 			"geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
-	})
+	},
+	service = IPGeocoder.class)
 public class IPGeocoderImpl implements IPGeocoder {
 
 	@Activate
