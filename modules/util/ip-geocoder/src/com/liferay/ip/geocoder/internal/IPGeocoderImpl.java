@@ -115,19 +115,19 @@ public class IPGeocoderImpl implements IPGeocoder {
 	}
 
 	protected File getIPGeocoderFile(
-			String path, String fileUrl, boolean forceDownload)
+			String filePath, String fileURL, boolean forceDownload)
 		throws IOException {
 
-		File file = new File(path);
+		File file = new File(filePath);
 
 		if (!file.exists() || forceDownload) {
 			synchronized (this) {
 				if (_logger.isInfoEnabled()) {
 					_logger.info(
-						"Downloading Geolocation Data from " + fileUrl);
+						"Downloading Geolocation Data from " + fileURL);
 				}
 
-				URL url = new URL(fileUrl);
+				URL url = new URL(fileURL);
 
 				URLConnection con = url.openConnection();
 
