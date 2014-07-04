@@ -82,7 +82,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 				ipGeocoderFile, LookupService.GEOIP_MEMORY_CACHE);
 		}
 		catch (IOException ioe) {
-			_logger.error(ioe, ioe);
+			_logger.error("Unable to activate IP geocoder service", ioe);
 		}
 	}
 
@@ -93,14 +93,13 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 	@Override
 	public IPInfo getIPInfo(String ipAddress) {
-		if (_lookupService != null) {
-			Location location = _lookupService.getLocation(ipAddress);
-
-			return new IPInfo(ipAddress, location);
-		}
-		else {
+		if (_lookupService == null) {
 			return null;
 		}
+
+		Location location = _lookupService.getLocation(ipAddress);
+
+		return new IPInfo(ipAddress, location);
 	}
 
 	@Modified
