@@ -104,7 +104,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 	}
 
 	@Modified
-	public void modified(final Map<String, String> properties) {
+	public void modified(Map<String, String> properties) {
 		if (properties.containsKey("ip.geocoder.file.path") ||
 			properties.containsKey("ip.geocoder.file.url")) {
 
