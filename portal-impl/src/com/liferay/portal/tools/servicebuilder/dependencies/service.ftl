@@ -103,7 +103,7 @@ public interface ${entity.name}${sessionTypeName}Service
 			${serviceBuilder.getJavadocComment(method)}
 
 			<#list method.annotations as annotation>
-				<#if annotation.type != "java.lang.Override">
+				<#if (annotation.type != "java.lang.Override") && (annotation.type != "java.lang.SuppressWarnings")>
 					${serviceBuilder.annotationToString(annotation)}
 				</#if>
 			</#list>
