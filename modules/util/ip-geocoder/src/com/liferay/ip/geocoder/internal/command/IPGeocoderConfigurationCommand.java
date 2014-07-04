@@ -48,7 +48,7 @@ public class IPGeocoderConfigurationCommand {
 	}
 
 	@Reference (cardinality = ReferenceCardinality.OPTIONAL)
-	public void setAdminConfig(ConfigurationAdmin configurationAdmin) {
+	public void setConfigurationAdmin(ConfigurationAdmin configurationAdmin) {
 		_configurationAdmin = configurationAdmin;
 	}
 
