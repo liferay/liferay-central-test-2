@@ -48,12 +48,10 @@ import org.tukaani.xz.XZInputStream;
  * @author Julio Camarero
  */
 @Component(
-	name = IPGeocoderImpl.SERVICE_NAME,
-	service = IPGeocoder.class,
-	configurationPolicy = ConfigurationPolicy.OPTIONAL,
-	property = {
-		"ip.geocoderservice.file.location=",
-		"ip.geocoderservice.file.url=http://cdn.files.liferay.com/mirrors/" +
+	name = IPGeocoderImpl.SERVICE_NAME, service = IPGeocoder.class,
+	configurationPolicy = ConfigurationPolicy.OPTIONAL, property = {
+		"ip.geocoder.file.location=",
+		"ip.geocoder.file.url=http://cdn.files.liferay.com/mirrors/" +
 			"geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
 	})
 public class IPGeocoderImpl implements IPGeocoder {
@@ -84,8 +82,8 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 	@Modified
 	public void modified(final Map<String, String> properties) {
-		if (properties.containsKey("ip.geocoderservice.file.location") ||
-			properties.containsKey("ip.geocoderservice.file.url")) {
+		if (properties.containsKey("ip.geocoder.file.location") ||
+			properties.containsKey("ip.geocoder.file.url")) {
 
 			_lookupService = null;
 
@@ -131,14 +129,14 @@ public class IPGeocoderImpl implements IPGeocoder {
 		}
 
 		String fileLocation = properties.get(
-			"ip.geocoderservice.file.location");
+			"ip.geocoder.file.location");
 
 		if ((fileLocation == null) || (fileLocation.equals(""))) {
 			fileLocation =
 				System.getProperty(TMP_DIR) + "/liferay/GeoIP/GeoIPCity.dat";
 		}
 
-		String fileURL = properties.get("ip.geocoderservice.file.url");
+		String fileURL = properties.get("ip.geocoder.file.url");
 
 		try {
 			String ipGeocoderFile = getIPGeocoderFile(
