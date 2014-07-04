@@ -63,7 +63,7 @@ public class IPGeocoderConfigurationCommand {
 	protected void updateConfig(String key, String value) throws IOException {
 		if (_configurationAdmin == null) {
 			if (_logger.isInfoEnabled()) {
-				_logger.info("Configuration Admin Service is not available");
+				_logger.info("Configuration Admin service is unavailable");
 			}
 
 			return;
