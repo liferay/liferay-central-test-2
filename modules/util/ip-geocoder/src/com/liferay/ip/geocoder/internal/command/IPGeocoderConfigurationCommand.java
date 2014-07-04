@@ -53,11 +53,11 @@ public class IPGeocoderConfigurationCommand {
 	}
 
 	public void updateFileLocation(String fileLocation) throws IOException {
-		updateConfig("ip.geocoderservice.file.location", fileLocation);
+		updateConfig("ip.geocoder.file.location", fileLocation);
 	}
 
 	public void updateURL(String url) throws IOException {
-		updateConfig("ip.geocoderservice.file.url", url);
+		updateConfig("ip.geocoder.file.url", url);
 	}
 
 	protected void updateConfig(String key, String value) throws IOException {
