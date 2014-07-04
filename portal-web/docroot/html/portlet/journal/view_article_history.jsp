@@ -75,7 +75,7 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 					<liferay-ui:search-container-column-text
 						name="id"
-                        value="<%= HtmlUtil.escape(articleVersion.getArticleId()) %>"
+						value="<%= HtmlUtil.escape(articleVersion.getArticleId()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
