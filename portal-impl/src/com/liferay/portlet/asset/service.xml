@@ -194,6 +194,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -208,9 +211,6 @@
 		</finder>
 		<finder name="LayoutUuid" return-type="Collection">
 			<finder-column name="layoutUuid" />
-		</finder>
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
 		</finder>
 		<finder name="G_CU" return-type="AssetEntry">
 			<finder-column name="groupId" />
