@@ -120,26 +120,28 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 		File file = new File(filePath);
 
-		if (!file.exists() || forceDownload) {
-			synchronized (this) {
-				if (_logger.isInfoEnabled()) {
-					_logger.info(
-						"Downloading Geolocation Data from " + fileURL);
-				}
+		if (file.exists() && !forceDownload) {
+			return file;
+		}
 
-				URL url = new URL(fileURL);
-
-				URLConnection con = url.openConnection();
-
-				String tmpDir = System.getProperty("java.io.tmpdir");
-
-				File tarFile = new File(
-					tmpDir + "/liferay/GeoIP/GeoIPCity.dat.xz");
-
-				write(tarFile, con.getInputStream());
-
-				write(file, new XZInputStream(new FileInputStream(tarFile)));
+		synchronized (this) {
+			if (_logger.isInfoEnabled()) {
+				_logger.info(
+					"Downloading Geolocation Data from " + fileURL);
 			}
+
+			URL url = new URL(fileURL);
+
+			URLConnection con = url.openConnection();
+
+			String tmpDir = System.getProperty("java.io.tmpdir");
+
+			File tarFile = new File(
+				tmpDir + "/liferay/GeoIP/GeoIPCity.dat.xz");
+
+			write(tarFile, con.getInputStream());
+
+			write(file, new XZInputStream(new FileInputStream(tarFile)));
 		}
 
 		return file;
