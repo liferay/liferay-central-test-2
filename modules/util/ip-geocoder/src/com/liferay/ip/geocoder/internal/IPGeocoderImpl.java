@@ -82,7 +82,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 				ipGeocoderFile, LookupService.GEOIP_MEMORY_CACHE);
 		}
 		catch (IOException ioe) {
-			_logger.error(ioe.getMessage());
+			_logger.error(ioe, ioe);
 		}
 	}
 
