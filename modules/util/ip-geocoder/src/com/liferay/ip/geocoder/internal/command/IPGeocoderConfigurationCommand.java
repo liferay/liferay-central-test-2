@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.ReferenceCardinality;
  */
 @Component (
 	immediate = true, property = {
-		"osgi.command.function=updateURL",
+		"osgi.command.function=updateFileURL",
 		"osgi.command.function=updateFileLocation",
 		"osgi.command.scope=ipgeocoder"
 	},
@@ -56,7 +56,7 @@ public class IPGeocoderConfigurationCommand {
 		updateConfig("ip.geocoder.file.location", fileLocation);
 	}
 
-	public void updateURL(String url) throws IOException {
+	public void updateFileURL(String url) throws IOException {
 		updateConfig("ip.geocoder.file.url", url);
 	}
 
