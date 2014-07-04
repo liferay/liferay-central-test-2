@@ -145,7 +145,9 @@ public class IPGeocoderImpl implements IPGeocoder {
 		return file;
 	}
 
-	private void mkdirsParentFile(File file) {
+	protected void write(File file, InputStream inputStream)
+		throws IOException {
+
 		File parentFile = file.getParentFile();
 
 		if (parentFile == null) {
@@ -163,24 +165,22 @@ public class IPGeocoderImpl implements IPGeocoder {
 			// having the permission to check if the parent file exists
 
 		}
-	}
 
-	private void write(File file, InputStream is) throws IOException {
-		mkdirsParentFile(file);
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(
+			inputStream);
 
-		BufferedInputStream bis = new BufferedInputStream(is);
-
-		BufferedOutputStream bos = new BufferedOutputStream(
+		BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
 			new FileOutputStream(file));
 
-		int i;
+		int i = 0;
 
-		while ((i = bis.read()) != -1) {
-			bos.write(i);
+		while ((i = bufferedInputStream.read()) != -1) {
+			bufferedOutputStream.write(i);
 		}
 
-		bos.flush();
-		bis.close();
+		bufferedOutputStream.flush();
+
+		bufferedInputStream.close();
 	}
 
 	private static Logger _logger = Logger.getLogger(IPGeocoderImpl.class);
