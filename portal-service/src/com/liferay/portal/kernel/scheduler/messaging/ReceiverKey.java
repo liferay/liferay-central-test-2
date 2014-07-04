@@ -59,7 +59,7 @@ public class ReceiverKey implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return _groupName.hashCode() * 11 + _jobName.hashCode();
+		return _jobName.hashCode() + (_groupName.hashCode() * 11);
 	}
 
 	private String _groupName;
