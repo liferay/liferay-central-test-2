@@ -59,12 +59,12 @@ import org.tukaani.xz.XZInputStream;
 public class IPGeocoderImpl implements IPGeocoder {
 
 	@Activate
-	public void activate(final Map<String, String> properties) {
+	public void activate(Map<String, String> properties) {
 		_init(properties);
 	}
 
 	@Deactivate
-	public void deactivate(final Map<String, String> properties) {
+	public void deactivate(Map<String, String> properties) {
 		_lookupService = null;
 	}
 
