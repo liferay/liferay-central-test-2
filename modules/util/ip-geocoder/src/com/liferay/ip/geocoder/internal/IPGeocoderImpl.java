@@ -68,7 +68,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 		if ((filePath == null) || filePath.equals("")) {
 			filePath =
 				System.getProperty("java.io.tmpdir") +
-					"/liferay/GeoIP/GeoIPCity.dat";
+					"/liferay/geoip/GeoIPCity.dat";
 		}
 
 		String fileURL = properties.get("ip.geocoder.file.url");
@@ -132,7 +132,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 			File xzFile = new File(
 				System.getProperty("java.io.tmpdir") +
-					"/liferay/GeoIP/GeoIPCity.dat.xz");
+					"/liferay/geoip/GeoIPCity.dat.xz");
 
 			write(xzFile, urlConnection.getInputStream());
 
