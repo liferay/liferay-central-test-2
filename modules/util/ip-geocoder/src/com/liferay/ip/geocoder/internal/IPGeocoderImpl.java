@@ -68,7 +68,8 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 		if ((filePath == null) || (filePath.equals(""))) {
 			filePath =
-				System.getProperty(TMP_DIR) + "/liferay/GeoIP/GeoIPCity.dat";
+				System.getProperty("java.io.tmpdir") +
+					"/liferay/GeoIP/GeoIPCity.dat";
 		}
 
 		String fileURL = properties.get("ip.geocoder.file.url");
@@ -130,9 +131,10 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 				URLConnection con = url.openConnection();
 
-				String tmpDir = System.getProperty(TMP_DIR);
+				String tmpDir = System.getProperty("java.io.tmpdir");
 
-				File tarFile = new File(tmpDir + GEO_DATA_TAR_FILE_NAME);
+				File tarFile = new File(
+					tmpDir + "/liferay/GeoIP/GeoIPCity.dat.xz");
 
 				write(tarFile, con.getInputStream());
 
@@ -183,12 +185,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 		bis.close();
 	}
 
-	private static final String TMP_DIR = "java.io.tmpdir";
-
 	private static Logger _logger = Logger.getLogger(IPGeocoderImpl.class);
-
-	private static String GEO_DATA_TAR_FILE_NAME =
-		"/liferay/GeoIP/GeoIPCity.dat.xz";
 
 	private static LookupService _lookupService;
 
