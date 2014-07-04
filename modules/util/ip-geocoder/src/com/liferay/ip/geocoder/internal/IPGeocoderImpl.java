@@ -75,7 +75,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 		String fileURL = properties.get("ip.geocoder.file.url");
 
 		try {
-			String ipGeocoderFile = getIPGeocoderFile(
+			File ipGeocoderFile = getIPGeocoderFile(
 				filePath, fileURL, false);
 
 			_lookupService = new LookupService(
@@ -114,7 +114,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 		}
 	}
 
-	protected String getIPGeocoderFile(
+	protected File getIPGeocoderFile(
 			String path, String fileUrl, boolean forceDownload)
 		throws IOException {
 
@@ -142,9 +142,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 			}
 		}
 
-		String absolutePath = file.getAbsolutePath();
-
-		return absolutePath.replace('\\', '/');
+		return file;
 	}
 
 	private void mkdirsParentFile(File file) {
