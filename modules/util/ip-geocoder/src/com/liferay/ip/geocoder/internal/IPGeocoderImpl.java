@@ -64,11 +64,10 @@ public class IPGeocoderImpl implements IPGeocoder {
 			return;
 		}
 
-		String fileLocation = properties.get(
-			"ip.geocoder.file.location");
+		String filePath = properties.get("ip.geocoder.file.path");
 
-		if ((fileLocation == null) || (fileLocation.equals(""))) {
-			fileLocation =
+		if ((filePath == null) || (filePath.equals(""))) {
+			filePath =
 				System.getProperty(TMP_DIR) + "/liferay/GeoIP/GeoIPCity.dat";
 		}
 
@@ -76,7 +75,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 		try {
 			String ipGeocoderFile = getIPGeocoderFile(
-				fileLocation, fileURL, false);
+				filePath, fileURL, false);
 
 			_lookupService = new LookupService(
 				ipGeocoderFile, LookupService.GEOIP_MEMORY_CACHE);
@@ -105,7 +104,7 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 	@Modified
 	public void modified(final Map<String, String> properties) {
-		if (properties.containsKey("ip.geocoder.file.location") ||
+		if (properties.containsKey("ip.geocoder.file.path") ||
 			properties.containsKey("ip.geocoder.file.url")) {
 
 			_lookupService = null;
