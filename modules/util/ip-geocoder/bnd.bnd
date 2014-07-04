@@ -2,7 +2,7 @@ Bundle-ClassPath:\
 	.,\
 	lib/geoip-api.jar,\
 	lib/xz.jar
-Bundle-Name: IP Geocoder
+Bundle-Name: Liferay IP Geocoder
 Export-Package:\
 	com.liferay.ip.geocoder
 Include-Resource:\
