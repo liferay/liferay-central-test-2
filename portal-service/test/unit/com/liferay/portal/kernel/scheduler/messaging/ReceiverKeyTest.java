@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.SerializableUtil;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -30,8 +30,8 @@ import org.junit.Test;
  */
 public class ReceiverKeyTest {
 
-	@BeforeClass
-	public static void setUpClass() {
+	@Before
+	public void setUp() {
 		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
 
 		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
@@ -41,22 +41,31 @@ public class ReceiverKeyTest {
 	public void testSerializeToBytes() {
 		Message message = createMessage();
 
-		byte[] serializedMessage = SerializableUtil.serialize(message);
+		byte[] bytes = SerializableUtil.serialize(message);
 
-		message = (Message)SerializableUtil.deserialize(serializedMessage);
+		message = (Message)SerializableUtil.deserialize(bytes);
 
-		doTest(message);
+		assertReceiverKey(message);
 	}
 
 	@Test
 	public void testSerializeToJSON() {
 		Message message = createMessage();
 
-		String serializedMessage = JSONFactoryUtil.serialize(message);
+		String json = JSONFactoryUtil.serialize(message);
 
-		message = (Message)JSONFactoryUtil.deserialize(serializedMessage);
+		message = (Message)JSONFactoryUtil.deserialize(json);
 
-		doTest(message);
+		assertReceiverKey(message);
+	}
+
+	protected void assertReceiverKey(Message message) {
+		Assert.assertNotNull(message);
+
+		ReceiverKey receiverKey = (ReceiverKey)message.get(
+			SchedulerEngine.RECEIVER_KEY);
+
+		Assert.assertEquals(_RECEIVER_KEY, receiverKey);
 	}
 
 	protected Message createMessage() {
@@ -65,15 +74,6 @@ public class ReceiverKeyTest {
 		message.put(SchedulerEngine.RECEIVER_KEY, _RECEIVER_KEY);
 
 		return message;
-	}
-
-	protected void doTest(Message message) {
-		Assert.assertNotNull(message);
-
-		ReceiverKey receiverKey = (ReceiverKey)message.get(
-			SchedulerEngine.RECEIVER_KEY);
-
-		Assert.assertEquals(_RECEIVER_KEY, receiverKey);
 	}
 
 	private static final ReceiverKey _RECEIVER_KEY = new ReceiverKey(
