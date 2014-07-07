@@ -265,6 +265,7 @@ configuration and make any necessary modifications.
 Unifying portlet and service configuration facilitates managing them.
 
 ---------------------------------------
+
 ### DDM Structure Local Service API No Longer Has the `updateXSDFieldMetadata()` operation
 - **Date:** 2014-Jun-11
 - **JIRA Ticket:** LPS-47559
@@ -291,6 +292,7 @@ concerning themselves with the DDM Structure's internal content representation
 of data.
 
 ---------------------------------------
+
 ### The `aui:input` Taglib for Type `checkbox` No Longer Creates a Hidden Input
 - **Date:** 2014-Jun-16
 - **JIRA Ticket:** LPS-44228
@@ -353,6 +355,8 @@ prevented the use of any other JSP impl within plugins (OSGi or otherwise). This
 limited what Liferay could change with respect to providing its own JSP
 implementation within OSGi.
 
+---------------------------------------
+
 ### Changes in Exceptions thrown by user services
 - **Date:** 2014-July
 - **JIRA Ticket:** LPS-47130
@@ -367,13 +371,14 @@ belong as (static inner) subclasses of existing exceptions.
 #### Who is affected?
 
 Client code which is handling any of the following exceptions:
+
 - `DuplicateUserScreenNameException`
 - `DuplicateUserEmailAddressException`
-
 
 #### How should I update my code?
 
 Replace the old exception with the equivalent inner class exception as follows:
+
 - `DuplicateUserScreenNameException` -> UserScreenNameException.MustNotBeDuplicate
 - `DuplicateUserEmailAddressException`-> UserEmailAddressException.MustNotBeDuplicate
 
