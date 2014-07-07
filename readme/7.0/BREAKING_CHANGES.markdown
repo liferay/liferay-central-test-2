@@ -386,6 +386,6 @@ Replace the old exception with the equivalent inner class exception as follows:
 
 #### Why was this change made?
 
-To provide more information to clients of the services API about
-the root cause of an error. This provides a more helpful error message to the
-end-user, and allows for easier recovery, when possible.
+This change provides more information to clients of the services API about the
+root cause of an error. It provides a more helpful error message to the end-user
+and it allows for easier recovery, when possible.
