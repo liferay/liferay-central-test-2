@@ -57,7 +57,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 
 					text = text.trim();
 
-					text = text.replace(' ', '/');
+					text = text.replace(' ', '-');
 
 					printer.print("<a name=\"" + text + "\" />");
 				}
