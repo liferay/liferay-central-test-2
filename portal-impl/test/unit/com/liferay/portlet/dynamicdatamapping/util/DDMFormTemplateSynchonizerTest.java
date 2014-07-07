@@ -283,10 +283,10 @@ public class DDMFormTemplateSynchonizerTest extends BaseDDMTest {
 	}
 
 	private DDMTemplate _createDDMTemplate;
-
 	private DDMTemplate _editDDMTemplate;
 
-	class MockDDMFormTemplateSynchronizer extends DDMFormTemplateSynchonizer {
+	private class MockDDMFormTemplateSynchronizer
+		extends DDMFormTemplateSynchonizer {
 
 		public MockDDMFormTemplateSynchronizer(DDMForm structureDDMForm) {
 			super(structureDDMForm);
