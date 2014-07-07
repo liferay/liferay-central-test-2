@@ -357,16 +357,16 @@ implementation within OSGi.
 
 ---------------------------------------
 
-### Changes in Exceptions thrown by user services
-- **Date:** 2014-July
+### Changes in Exceptions Thrown by User Services
+- **Date:** 2014-Jul-03
 - **JIRA Ticket:** LPS-47130
 
 #### What changed?
 
-In order to provide more information about the root cause of an exception
+In order to provide more information about the root cause of an exception,
 several exceptions have been extended with static inner classes, one for each
-cause. As a result of this effort we identified some exceptions that really
-belong as (static inner) subclasses of existing exceptions.
+cause. As a result of this effort, some exceptions have been identified that
+really belong as static inner subclasses of existing exceptions.
 
 #### Who is affected?
 
@@ -379,12 +379,13 @@ Client code which is handling any of the following exceptions:
 
 Replace the old exception with the equivalent inner class exception as follows:
 
-- `DuplicateUserScreenNameException` -> UserScreenNameException.MustNotBeDuplicate
-- `DuplicateUserEmailAddressException`-> UserEmailAddressException.MustNotBeDuplicate
+- `DuplicateUserScreenNameException` &rarr;
+`UserScreenNameException.MustNotBeDuplicate`
+- `DuplicateUserEmailAddressException` &rarr;
+`UserEmailAddressException.MustNotBeDuplicate`
 
 #### Why was this change made?
 
-In order to provide more information to clients of the services API about what
-is the root cause of the error. This should allow for easier recovery when it
-is possible and to provide a more helpful error message to the end user
-otherwise.
+To provide more information to clients of the services API about
+the root cause of an error. This provides a more helpful error message to the
+end user, and allows for easier recovery, when possible.
