@@ -16,6 +16,7 @@ package com.liferay.markdown.converter.internal.pegdown.serializer;
 
 import com.liferay.markdown.converter.internal.pegdown.ast.PicWithCaptionNode;
 import com.liferay.markdown.converter.internal.pegdown.ast.SidebarNode;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.List;
 
@@ -45,7 +46,9 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
     		if (!children.isEmpty()) {
     			TextNode childNode = (TextNode) children.get(0);
 				String text = childNode.getText().toLowerCase()
-						.replaceAll("[^a-z0-9 ]", "").replace(' ', '-');
+						.replaceAll("[^a-z0-9 ]", "");
+				text = StringUtil.trim(text);
+				text = text.replace(' ', '-');
     			printer.print("<a name=\"" + text + "\" />");
     		}
     	}
