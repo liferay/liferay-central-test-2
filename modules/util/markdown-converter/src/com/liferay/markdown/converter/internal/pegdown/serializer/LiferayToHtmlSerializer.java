@@ -39,9 +39,8 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 	}
 
 	@Override
-    public void visit(HeaderNode node) {
-    	int headerLevel = node.getLevel();
-    	if (headerLevel != 1) {
+	public void visit(HeaderNode node) {
+    	if (node.getLevel() != 1) {
     		List<Node> children = node.getChildren();
     		if (!children.isEmpty()) {
     			TextNode childNode = (TextNode) children.get(0);
@@ -50,7 +49,8 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
     			printer.print("<a name=\"" + text + "\" />");
     		}
     	}
-        printTag(node, "h" + headerLevel);
+
+		super.visit(node);
 	}
 
 	public void visit(PicWithCaptionNode picWithCaptionNode) {
