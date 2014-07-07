@@ -17,15 +17,14 @@ package com.liferay.markdown.converter.internal.pegdown.serializer;
 import com.liferay.markdown.converter.internal.pegdown.ast.PicWithCaptionNode;
 import com.liferay.markdown.converter.internal.pegdown.ast.SidebarNode;
 
+import java.util.List;
+
 import org.pegdown.LinkRenderer;
 import org.pegdown.ToHtmlSerializer;
 import org.pegdown.ast.HeaderNode;
-import org.pegdown.ast.HtmlBlockNode;
 import org.pegdown.ast.Node;
 import org.pegdown.ast.SuperNode;
 import org.pegdown.ast.TextNode;
-
-import java.util.List;
 
 /**
  * Provides a visitor implementation for printing HTML for pictures with
@@ -39,14 +38,6 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 		super(linkRenderer);
 	}
 
-	public void visit(PicWithCaptionNode picWithCaptionNode) {
-		print(picWithCaptionNode);
-	}
-
-	public void visit(SidebarNode sidebarNode) {
-		print(sidebarNode);
-	}
-	
 	@Override
     public void visit(HeaderNode node) {
     	int headerLevel = node.getLevel();
@@ -60,7 +51,15 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
     		}
     	}
         printTag(node, "h" + headerLevel);
-    }
+	}
+
+	public void visit(PicWithCaptionNode picWithCaptionNode) {
+		print(picWithCaptionNode);
+	}
+
+	public void visit(SidebarNode sidebarNode) {
+		print(sidebarNode);
+	}
 
 	@Override
 	public void visit(SuperNode superNode) {
