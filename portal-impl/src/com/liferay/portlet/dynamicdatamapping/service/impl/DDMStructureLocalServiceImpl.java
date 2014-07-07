@@ -1438,9 +1438,7 @@ public class DDMStructureLocalServiceImpl
 			type);
 	}
 
-	protected void syncStructureTemplatesFields(final DDMStructure structure)
-		throws PortalException {
-
+	protected void syncStructureTemplatesFields(final DDMStructure structure) {
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
 
