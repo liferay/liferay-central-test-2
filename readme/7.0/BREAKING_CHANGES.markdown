@@ -36,7 +36,7 @@ the capitalization rules from
 (Optional).
 * **What changed?** Identify the affected component and the type of change that
 was made.
-* **Who is affected?** Are end users affected? Are developers affected? If the
+* **Who is affected?** Are end-users affected? Are developers affected? If the
 only affected people are those using a certain feature or API, say so.
 * **How should I update my code?** Explain any client code changes required.
 * **Why was this change made?** Explain the reason for the change. If
@@ -388,4 +388,4 @@ Replace the old exception with the equivalent inner class exception as follows:
 
 To provide more information to clients of the services API about
 the root cause of an error. This provides a more helpful error message to the
-end user, and allows for easier recovery, when possible.
+end-user, and allows for easier recovery, when possible.
