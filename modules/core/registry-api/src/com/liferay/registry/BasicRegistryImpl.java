@@ -529,6 +529,11 @@ public class BasicRegistryImpl implements Registry {
 		}
 
 		@Override
+		public Map<String, Object> getProperties() {
+			return new HashMap<String, Object>(_properties);
+		}
+
+		@Override
 		public Object getProperty(String key) {
 			return _properties.get(key.toLowerCase());
 		}

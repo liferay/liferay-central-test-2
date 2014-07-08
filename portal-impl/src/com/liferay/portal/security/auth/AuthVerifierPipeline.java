@@ -17,8 +17,8 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -34,7 +34,6 @@ import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -141,20 +140,9 @@ public class AuthVerifierPipeline {
 				Properties properties = PropsUtil.getProperties(
 					getAuthVerifierPropertyName(authVerifierClassName), true);
 
-				Map<String, Object> propertiesMap =
-					new HashMap<String, Object>();
-
-				Enumeration<?> enumeration = properties.propertyNames();
-
-				while (enumeration.hasMoreElements()) {
-					String key = (String)enumeration.nextElement();
-					Object value = properties.getProperty(key);
-
-					propertiesMap.put(key, value);
-				}
-
 				registry.registerService(
-					AuthVerifier.class, authVerifier, propertiesMap);
+					AuthVerifier.class, authVerifier,
+					PropertiesUtil.toMap(properties));
 			}
 			catch (Exception e) {
 				_log.error("Unable to initialize " + authVerifierClassName, e);
@@ -351,24 +339,16 @@ public class AuthVerifierPipeline {
 
 			AuthVerifier authVerifier = registry.getService(serviceReference);
 
-			String authVerifierClassName = authVerifier.getClass().getName();
-
-			Properties properties = new Properties();
-
-			for (String key : serviceReference.getPropertyKeys()) {
-				String value = GetterUtil.getString(
-					serviceReference.getProperty(key));
-
-				properties.put(key, value);
-			}
+			Class<?> authVerifierClass = authVerifier.getClass();
 
 			AuthVerifierConfiguration authVerifierConfiguration =
 				new AuthVerifierConfiguration();
 
 			authVerifierConfiguration.setAuthVerifier(authVerifier);
 			authVerifierConfiguration.setAuthVerifierClassName(
-				authVerifierClassName);
-			authVerifierConfiguration.setProperties(properties);
+				authVerifierClass.getName());
+			authVerifierConfiguration.setProperties(
+				PropertiesUtil.fromMap(serviceReference.getProperties()));
 
 			_authVerifierConfigurations.add(0, authVerifierConfiguration);
 
@@ -380,15 +360,6 @@ public class AuthVerifierPipeline {
 			ServiceReference<AuthVerifier> serviceReference,
 			AuthVerifierConfiguration authVerifierConfiguration) {
 
-			Properties properties = new Properties();
-
-			for (String key : serviceReference.getPropertyKeys()) {
-				String value = GetterUtil.getString(
-					serviceReference.getProperty(key));
-
-				properties.put(key, value);
-			}
-
 			AuthVerifierConfiguration newAuthVerifierConfiguration =
 				new AuthVerifierConfiguration();
 
@@ -396,7 +367,8 @@ public class AuthVerifierPipeline {
 				authVerifierConfiguration.getAuthVerifier());
 			newAuthVerifierConfiguration.setAuthVerifierClassName(
 				authVerifierConfiguration.getAuthVerifierClassName());
-			newAuthVerifierConfiguration.setProperties(properties);
+			newAuthVerifierConfiguration.setProperties(
+				PropertiesUtil.fromMap(serviceReference.getProperties()));
 
 			if (_authVerifierConfigurations.remove(authVerifierConfiguration)) {
 				_authVerifierConfigurations.add(
