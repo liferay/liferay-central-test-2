@@ -29,15 +29,15 @@ import org.junit.Test;
 public class ClassUtilTest {
 
 	@Test
-	public void testGetClassesfromAnnotationsWithArrayParameter()
+	public void testGetClassesFromAnnotationsWithArrayParameter()
 		throws Exception {
 
-		testGetClassesfromAnnotationWithArrayParameter("A");
-		testGetClassesfromAnnotationWithArrayParameter("A", "B");
-		testGetClassesfromAnnotationWithArrayParameter("A", "B", "C");
+		testGetClassesFromAnnotationWithArrayParameter("A");
+		testGetClassesFromAnnotationWithArrayParameter("A", "B");
+		testGetClassesFromAnnotationWithArrayParameter("A", "B", "C");
 	}
 
-	protected void testGetClassesfromAnnotationWithArrayParameter(
+	protected void testGetClassesFromAnnotationWithArrayParameter(
 			String... classNames)
 		throws Exception {
 
@@ -56,15 +56,15 @@ public class ClassUtilTest {
 
 		sb.append("})");
 
-		Set<String> classes = ClassUtil.getClasses(
+		Set<String> actualClassNames = ClassUtil.getClasses(
 			new StringReader(sb.toString()), null);
 
-		Set<String> expectedClasses = new HashSet<String>();
+		Set<String> expectedClassNames = new HashSet<String>();
 
-		expectedClasses.add("AnnotationWithArrayParameter");
-		expectedClasses.addAll(Arrays.asList(classNames));
+		expectedClassNames.add("AnnotationWithArrayParameter");
+		expectedClassNames.addAll(Arrays.asList(classNames));
 
-		Assert.assertEquals(expectedClasses, classes);
+		Assert.assertEquals(expectedClassNames, actualClassNames);
 	}
 
 }
