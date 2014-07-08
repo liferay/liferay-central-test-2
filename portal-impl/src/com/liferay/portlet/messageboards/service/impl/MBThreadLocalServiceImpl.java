@@ -193,13 +193,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
 			}
 
-			// Indexer
-
-			messageIndexer.delete(message);
-
 			// Message
 
 			mbMessagePersistence.remove(message);
+
+			// Indexer
+
+			messageIndexer.delete(message);
 
 			// Statistics
 
