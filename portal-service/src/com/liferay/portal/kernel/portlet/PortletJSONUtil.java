@@ -59,7 +59,7 @@ public class PortletJSONUtil {
 
 		boolean portletOnLayout = false;
 
-		String rootPortletId = getRootPortletId(portlet);
+		String rootPortletId = _getRootPortletId(portlet);
 		String portletId = portlet.getPortletId();
 
 		LayoutTypePortlet layoutTypePortlet =
@@ -70,7 +70,8 @@ public class PortletJSONUtil {
 			// Check to see if an instance of this portlet is already in the
 			// layout, but ignore the portlet that was just added
 
-			String layoutPortletRootPortletId = getRootPortletId(layoutPortlet);
+			String layoutPortletRootPortletId = _getRootPortletId(
+				layoutPortlet);
 
 			if (rootPortletId.equals(layoutPortletRootPortletId) &&
 				!portletId.equals(layoutPortlet.getPortletId())) {
@@ -240,7 +241,7 @@ public class PortletJSONUtil {
 			HttpServletResponse response, JSONObject jsonObject)
 		throws IOException {
 
-		writePaths(
+		_writePaths(
 			response, jsonObject.getJSONArray("footerCssPaths"),
 			jsonObject.getJSONArray("footerJavaScriptPaths"));
 	}
@@ -249,12 +250,12 @@ public class PortletJSONUtil {
 			HttpServletResponse response, JSONObject jsonObject)
 		throws IOException {
 
-		writePaths(
+		_writePaths(
 			response, jsonObject.getJSONArray("headerCssPaths"),
 			jsonObject.getJSONArray("headerJavaScriptPaths"));
 	}
 
-	protected static String getRootPortletId(Portlet portlet) {
+	private static String _getRootPortletId(Portlet portlet) {
 
 		// Workaround for portlet#getRootPortletId because that does not return
 		// the proper root portlet ID for OpenSocial and WSRP portlets
@@ -264,7 +265,7 @@ public class PortletJSONUtil {
 		return rootPortlet.getPortletId();
 	}
 
-	private static void writePaths(
+	private static void _writePaths(
 			HttpServletResponse response, JSONArray cssPathsJSONArray,
 			JSONArray javaScriptPathsJSONArray)
 		throws IOException {
