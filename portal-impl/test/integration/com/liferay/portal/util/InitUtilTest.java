@@ -24,7 +24,7 @@ import org.junit.Test;
 public class InitUtilTest {
 
 	@Test
-	public void testSeleniumBaseTestCaseSpringConfigs() {
+	public void testBaseSeleniumTestCaseSpringConfigs() {
 		String springConfigs = PropsUtil.get(PropsKeys.SPRING_CONFIGS);
 
 		try {
