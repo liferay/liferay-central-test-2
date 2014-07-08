@@ -28,11 +28,11 @@ public class InitUtilTest {
 		String springConfigs = PropsUtil.get(PropsKeys.SPRING_CONFIGS);
 
 		try {
-			String seleniumBaseTestCaseSpringConfigs =
+			String baseSeleniumTestCaseSpringConfigs =
 				"META-INF/management-spring.xml,META-INF/util-spring.xml";
 
 			PropsUtil.set(
-				PropsKeys.SPRING_CONFIGS, seleniumBaseTestCaseSpringConfigs);
+				PropsKeys.SPRING_CONFIGS, baseSeleniumTestCaseSpringConfigs);
 
 			InitUtil.initWithSpringAndModuleFramework();
 		}
