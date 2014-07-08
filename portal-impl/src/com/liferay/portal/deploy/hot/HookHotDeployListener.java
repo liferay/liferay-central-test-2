@@ -323,13 +323,13 @@ public class HookHotDeployListener
 		String servletContextName, Object serviceRegistrationKey,
 		Class<T> clazz, T service, Map<String, Object> properties) {
 
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			getServiceRegistrations(servletContextName);
+
 		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceRegistration<T> serviceRegistration = registry.registerService(
 			clazz, service, properties);
-
-		Map<Object, ServiceRegistration<?>> serviceRegistrations =
-			getServiceRegistrations(servletContextName);
 
 		serviceRegistrations.put(serviceRegistrationKey, serviceRegistration);
 	}
