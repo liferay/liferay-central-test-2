@@ -106,8 +106,9 @@ public class UserNotificationEventLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		return addUserNotificationEvent(userId, type, timestamp, deliveryType,
-			deliverBy, payload, false, archived, serviceContext);
+		return addUserNotificationEvent(
+			userId, type, timestamp, deliveryType, deliverBy, payload, false,
+			archived, serviceContext);
 	}
 
 	/**
@@ -458,8 +459,9 @@ public class UserNotificationEventLocalServiceImpl
 			JSONObject notificationEventJSONObject)
 		throws PortalException {
 
-		return sendUserNotificationEvents(userId, portletId, deliveryType,
-			false, notificationEventJSONObject);
+		return sendUserNotificationEvents(
+			userId, portletId, deliveryType, false,
+			notificationEventJSONObject);
 	}
 
 	@Override
