@@ -16,60 +16,32 @@ package com.liferay.portal.servlet.filters.dynamiccss;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 public class DynamicCSSUtilTest {
 
 	@Test
 	public void testPropagateQueryString() {
 		String[] propagatedQueryStrings = {
-			"@import url(//main?test=1);",
-			"@import url(\"//main?test=1\");",
-			"@import url('//main?test=1');"
+			"@import url(//main?test=1);", "@import url(\"//main?test=1\");",
+			"@import url('//main?test=1');", "@import url(//main?p=2&test=1);",
+			"@import url(\"//main?p=2&test=1\");",
+			"@import url('//main?p=2&test=1');",
+			"@import url(http://main?test=1);",
+			"@import url(\"http://main?test=1\");",
+			"@import url('http://main?p=2&test=1');"
+		};
+		String[] contents = {
+			"@import url(//main);", "@import url(\"//main\");",
+			"@import url('//main');", "@import url(//main?p=2);",
+			"@import url(\"//main?p=2\");", "@import url('//main?p=2');",
+			"@import url(http://main);", "@import url(\"http://main\");",
+			"@import url('http://main?p=2');"
 		};
 
-		String[] contents = {
-			"@import url(//main);",
-			"@import url(\"//main\");",
-			"@import url('//main');"
-		};
-		
 		for (int i = 0; i < propagatedQueryStrings.length; i++) {
 			Assert.assertEquals(
 				propagatedQueryStrings[i],
-				DynamicCSSUtil.propagateQueryString(
-					contents[i], "test=1"));
-		} 
-
-		String query = "test=1";
-
-		Assert.assertEquals(
-			"@import url(//main?p=2&test=1);",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url(//main?p=2);", query));
-
-		Assert.assertEquals(
-			"@import url(\"//main?p=2&test=1\");",
-				DynamicCSSUtil.propagateQueryString(
-					"@import url(\"//main?p=2\");", query));
-
-		Assert.assertEquals(
-			"@import url('//main?p=2&test=1');",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url('//main?p=2');", query));
-
-		Assert.assertEquals(
-			"@import url(http://main?test=1);",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url(http://main);", query));
-
-		Assert.assertEquals(
-			"@import url(\"http://main?test=1\");",
-			DynamicCSSUtil.propagateQueryString("@import url(\"http://main\");",
-			query));
-
-		Assert.assertEquals(
-			"@import url('http://main?p=2&test=1');",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url('http://main?p=2');", query));
+				DynamicCSSUtil.propagateQueryString(contents[i], "test=1"));
+		}
 	}
+
 }
