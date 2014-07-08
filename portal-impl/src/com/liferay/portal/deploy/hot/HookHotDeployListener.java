@@ -357,25 +357,13 @@ public class HookHotDeployListener
 			properties);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public <T> void registerService(
 		String servletContextName, Object serviceRegistrationKey,
 		Class<T> clazz, T service, Properties properties) {
 
-		Map<String, Object> propertiesMap = new HashMap<String, Object>();
-
-		Enumeration enumeration = properties.propertyNames();
-
-		while (enumeration.hasMoreElements()) {
-			String key = (String)enumeration.nextElement();
-			Object value = properties.getProperty(key);
-
-			propertiesMap.put(key, value);
-		}
-
 		registerService(
 			servletContextName, serviceRegistrationKey, clazz, service,
-			propertiesMap);
+			PropertiesUtil.toMap(properties));
 	}
 
 	protected boolean checkPermission(
