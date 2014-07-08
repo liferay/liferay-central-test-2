@@ -136,8 +136,7 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	 * @return the matching rows
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery) {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return userNotificationEventPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -154,8 +153,8 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return userNotificationEventPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
@@ -174,9 +173,8 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return userNotificationEventPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
@@ -269,7 +267,7 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return deleteUserNotificationEvent((UserNotificationEvent)persistedModel);
+		return userNotificationEventLocalService.deleteUserNotificationEvent((UserNotificationEvent)persistedModel);
 	}
 
 	@Override
