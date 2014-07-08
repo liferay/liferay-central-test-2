@@ -128,7 +128,6 @@ public class AuthVerifierPipeline {
 		return authVerifierConfigurations;
 	}
 
-	@SuppressWarnings("rawtypes")
 	private void _initAuthVerifierConfigurations(Registry registry) {
 		for (String authVerifierClassName :
 				PropsValues.AUTH_VERIFIER_PIPELINE) {
@@ -145,7 +144,7 @@ public class AuthVerifierPipeline {
 				Map<String, Object> propertiesMap =
 					new HashMap<String, Object>();
 
-				Enumeration enumeration = properties.propertyNames();
+				Enumeration<?> enumeration = properties.propertyNames();
 
 				while (enumeration.hasMoreElements()) {
 					String key = (String)enumeration.nextElement();
