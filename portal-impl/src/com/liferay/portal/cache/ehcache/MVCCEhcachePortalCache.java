@@ -56,17 +56,6 @@ public class MVCCEhcachePortalCache<K extends Serializable, V extends MVCCModel>
 	}
 
 	protected void doPut(K key, V value, boolean quiet, int timeToLive) {
-		Element newElement = null;
-
-		if (timeToLive >= 0) {
-			newElement = new Element(key, value, timeToLive);
-		}
-		else {
-			newElement = new Element(key, value);
-		}
-
-		Ehcache ehcache = getEhcache();
-
 		boolean replicate = false;
 
 		if (quiet) {
@@ -76,6 +65,17 @@ public class MVCCEhcachePortalCache<K extends Serializable, V extends MVCCModel>
 		}
 
 		try {
+			Element newElement = null;
+
+			if (timeToLive >= 0) {
+				newElement = new Element(key, value, timeToLive);
+			}
+			else {
+				newElement = new Element(key, value);
+			}
+
+			Ehcache ehcache = getEhcache();
+
 			while (true) {
 				Element oldElement = ehcache.get(key);
 
