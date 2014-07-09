@@ -538,17 +538,11 @@ public class DynamicCSSUtil {
 
 			Boolean hasQuotes = false;
 
-			char quoteCharacter = CharPool.QUOTE;
-
 			String urlStart = content.substring(pos, importY);
 
 			Matcher urlQuotesMatcher = _urlQuotesPattern.matcher(urlStart);
 
 			if (urlQuotesMatcher.find()) {
-				if (urlStart.indexOf(CharPool.APOSTROPHE) != -1) {
-					quoteCharacter = CharPool.APOSTROPHE;
-				}
-
 				urlStart = urlQuotesMatcher.replaceAll("$1");
 
 				hasQuotes = true;
@@ -566,7 +560,7 @@ public class DynamicCSSUtil {
 			sb.append(queryString);
 
 			if (hasQuotes) {
-				sb.append(quoteCharacter);
+				sb.append(CharPool.QUOTE);
 			}
 
 			sb.append(_CSS_IMPORT_END);
@@ -597,5 +591,6 @@ public class DynamicCSSUtil {
 	private static ScriptingContainer _scriptingContainer;
 	private static Object _scriptObject;
 	private static Pattern _urlQuotesPattern = Pattern.compile(
-		"(url\\([\"\'][\\s\\S]+?)[\"\']");
+		"(url\\(\"[\\s\\S]+)\"");
+
 }
