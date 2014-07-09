@@ -21,55 +21,60 @@ public class DynamicCSSUtilTest {
 
 	@Test
 	public void testPropagateQueryString() {
-		String[] propagatedQueryStrings = {
-			"@import url(//main?test=1);",
-			"@import url(\"//main?test=1\");",
-			"@import url('//main?test=1');"
-		};
-
-		String[] contents = {
-			"@import url(//main);",
-			"@import url(\"//main\");",
-			"@import url('//main');"
-		};
-		
-		for (int i = 0; i < propagatedQueryStrings.length; i++) {
-			Assert.assertEquals(
-				propagatedQueryStrings[i],
-				DynamicCSSUtil.propagateQueryString(
-					contents[i], "test=1"));
-		} 
-
 		String query = "test=1";
 
-		Assert.assertEquals(
-			"@import url(//main?p=2&test=1);",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url(//main?p=2);", query));
+		String url = "@import url(//main);";
+		String expected = "@import url(//main?test=1);";
 
 		Assert.assertEquals(
-			"@import url(\"//main?p=2&test=1\");",
-				DynamicCSSUtil.propagateQueryString(
-					"@import url(\"//main?p=2\");", query));
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url(\"//main\");";
+		expected = "@import url(\"//main?test=1\");";
 
 		Assert.assertEquals(
-			"@import url('//main?p=2&test=1');",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url('//main?p=2');", query));
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url('//main');";
+		expected = "@import url('//main?test=1');";
 
 		Assert.assertEquals(
-			"@import url(http://main?test=1);",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url(http://main);", query));
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url(//main?p=2);";
+		expected = "@import url(//main?p=2&test=1);";
 
 		Assert.assertEquals(
-			"@import url(\"http://main?test=1\");",
-			DynamicCSSUtil.propagateQueryString("@import url(\"http://main\");",
-			query));
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url(\"//main?p=2\");";
+		expected = "@import url(\"//main?p=2&test=1\");";
 
 		Assert.assertEquals(
-			"@import url('http://main?p=2&test=1');",
-			DynamicCSSUtil.propagateQueryString(
-				"@import url('http://main?p=2');", query));
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url('//main?p=2');";
+		expected = "@import url('//main?p=2&test=1');";
+
+		Assert.assertEquals(
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url(http://main);";
+		expected = "@import url(http://main?test=1);";
+
+		Assert.assertEquals(
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url(\"http://main\");";
+		expected = "@import url(\"http://main?test=1\");";
+
+		Assert.assertEquals(
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
+
+		url = "@import url('http://main?p=2');";
+		expected = "@import url('http://main?p=2&test=1');";
+
+		Assert.assertEquals(
+			expected, DynamicCSSUtil.propagateQueryString(url, query));
 	}
 }
