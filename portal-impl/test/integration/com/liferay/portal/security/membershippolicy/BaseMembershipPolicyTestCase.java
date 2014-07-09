@@ -69,12 +69,12 @@ public abstract class BaseMembershipPolicyTestCase {
 	@After
 	public void tearDown() throws Exception {
 		for (ServiceRegistration<?> serviceRegistration :
-				_serviceRegistrations) {
+				serviceRegistrations) {
 
 			serviceRegistration.unregister();
 		}
 
-		_serviceRegistrations.clear();
+		serviceRegistrations.clear();
 
 		_propagateMembership = false;
 		_propagateRoles = false;
@@ -99,7 +99,7 @@ public abstract class BaseMembershipPolicyTestCase {
 	@DeleteAfterTestRun
 	protected Group group;
 
-	protected Set<ServiceRegistration<?>> _serviceRegistrations =
+	protected Set<ServiceRegistration<?>> serviceRegistrations =
 		new HashSet<ServiceRegistration<?>>();
 
 	private static boolean _propagateMembership;

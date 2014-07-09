@@ -74,7 +74,7 @@ public abstract class BaseOrganizationMembershipPolicyTestCase
 			OrganizationMembershipPolicy.class,
 			new TestOrganizationMembershipPolicy(), properties);
 
-		_serviceRegistrations.add(serviceRegistration);
+		serviceRegistrations.add(serviceRegistration);
 
 		organization = OrganizationTestUtil.addOrganization();
 	}
