@@ -854,6 +854,10 @@ public class ProcessExecutorTest {
 
 	@Test
 	public void testLargeRuntimeClassPath() throws Exception {
+		Builder builder = new Builder();
+
+		builder.setArguments(_createArguments(_JPDA_OPTIONS1));
+
 		char[] largeFileNameChars = new char[10 * 1024 * 1024];
 
 		largeFileNameChars[0] = CharPool.SLASH;
@@ -864,9 +868,6 @@ public class ProcessExecutorTest {
 
 		String largeFileName = new String(largeFileNameChars);
 
-		Builder builder = new Builder();
-
-		builder.setArguments(_createArguments(_JPDA_OPTIONS1));
 		builder.setRuntimeClassPath(largeFileName);
 
 		Future<String> future = ProcessExecutor.execute(
@@ -1063,14 +1064,14 @@ public class ProcessExecutorTest {
 
 	@Test
 	public void testPropertyPassing() throws Exception {
-		String propertyKey = "test-key";
-		String propertyValue = "test-value";
+		Builder builder = new Builder();
 
 		List<String> arguments = _createArguments(_JPDA_OPTIONS1);
 
-		arguments.add("-D" + propertyKey + "=" + propertyValue);
+		String propertyKey = "test-key";
+		String propertyValue = "test-value";
 
-		Builder builder = new Builder();
+		arguments.add("-D" + propertyKey + "=" + propertyValue);
 
 		builder.setArguments(arguments);
 

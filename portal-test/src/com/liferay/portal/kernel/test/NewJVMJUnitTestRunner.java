@@ -131,6 +131,12 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 
 	@Override
 	protected Statement methodBlock(FrameworkMethod frameworkMethod) {
+		Builder builder = new Builder();
+
+		builder.setArguments(createArguments(frameworkMethod));
+		builder.setBootstrapClassPath(_classPath);
+		builder.setRuntimeClassPath(_classPath);
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -138,12 +144,6 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 		PortalClassLoaderUtil.setClassLoader(contextClassLoader);
 
 		TestClass testClass = getTestClass();
-
-		Builder builder = new Builder();
-
-		builder.setArguments(createArguments(frameworkMethod));
-		builder.setBootstrapClassPath(_classPath);
-		builder.setRuntimeClassPath(_classPath);
 
 		Class<?> clazz = testClass.getJavaClass();
 
