@@ -56,9 +56,9 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 
 <c:choose>
 	<c:when test="<%= portlet == null %>">
-			<div class="alert alert-info">
-				<liferay-ui:message key="you-do-not-have-permission-to-access-any-site-administration-application" />
-			</div>
+		<div class="alert alert-info">
+			<liferay-ui:message key="you-do-not-have-permission-to-access-any-site-administration-applications" />
+		</div>
 	</c:when>
 	<c:when test="<%= !themeDisplay.isStatePopUp() %>">
 
