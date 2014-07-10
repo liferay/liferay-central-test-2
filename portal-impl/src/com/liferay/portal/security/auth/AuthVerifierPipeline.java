@@ -307,13 +307,13 @@ public class AuthVerifierPipeline {
 		public AuthVerifierConfiguration addingService(
 			ServiceReference<AuthVerifier> serviceReference) {
 
-			Registry registry = RegistryUtil.getRegistry();
-
 			if (Validator.isNull(
 					serviceReference.getProperty("urls.includes"))) {
 
 				return null;
 			}
+
+			Registry registry = RegistryUtil.getRegistry();
 
 			AuthVerifier authVerifier = registry.getService(serviceReference);
 
