@@ -199,6 +199,7 @@ public class DDMFormFieldFreeMarkerRenderer implements DDMFormFieldRenderer {
 			LocalizedValue label = ddmFormFieldOptions.getOptionLabels(value);
 
 			fieldStructure.put("label", label.getValue(locale));
+
 			fieldStructure.put("name", StringUtil.randomId());
 			fieldStructure.put("value", value);
 
