@@ -56,7 +56,6 @@ public @interface OSGiBeanProperties {
 			return toMap(osgiBeanProperties);
 		}
 
-		@SuppressWarnings("unchecked")
 		public static Map<String, Object> toMap(
 			OSGiBeanProperties osgiBeanProperties) {
 
