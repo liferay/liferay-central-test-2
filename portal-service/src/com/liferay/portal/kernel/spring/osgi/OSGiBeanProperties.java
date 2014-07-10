@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.kernel.spring.osgi;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -35,9 +36,9 @@ import java.util.Properties;
 @Target(ElementType.TYPE)
 public @interface OSGiBeanProperties {
 
-	public String portalPropertyPrefix() default "";
-
 	public boolean portalPropertiesRemovePrefix() default true;
+
+	public String portalPropertyPrefix() default "";
 
 	public String[] property() default {};
 
@@ -79,9 +80,14 @@ public @interface OSGiBeanProperties {
 					properties.put(
 						parts[0], new String[] {(String)object, parts[1]});
 				}
-				else if (object.getClass().isArray()) {
-					properties.put(
-						parts[0], ArrayUtil.append((String[])object, parts[1]));
+				else {
+					Class<?> clazz = object.getClass();
+
+					if (clazz.isArray()) {
+						properties.put(
+							parts[0],
+							ArrayUtil.append((String[])object, parts[1]));
+					}
 				}
 			}
 
