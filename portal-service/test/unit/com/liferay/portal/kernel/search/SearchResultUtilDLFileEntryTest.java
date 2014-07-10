@@ -88,32 +88,32 @@ public class SearchResultUtilDLFileEntryTest
 	public void testDLFileEntryAttachment() throws Exception {
 		final Indexer indexer = Mockito.mock(Indexer.class);
 
-		class IndexerRegistryGetIndexer implements InvocationHandler {
-
-			@Override
-			public Indexer invoke(Object proxy, Method method, Object[] args)
-				throws Throwable {
-
-				String className = (String)args[0];
-
-				if (DLFILEENTRY_CLASS_NAME.equals(className)) {
-					return indexer;
-				}
-
-				if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
-						className)) {
-
-					return null;
-				}
-
-				throw new IllegalArgumentException();
-			}
-		}
-
 		replace(
 			method(IndexerRegistryUtil.class, "getIndexer", String.class)
 		).with(
-			new IndexerRegistryGetIndexer()
+			new InvocationHandler() {
+	
+				@Override
+				public Indexer invoke(
+						Object proxy, Method method, Object[] args)
+					throws Throwable {
+	
+					String className = (String)args[0];
+	
+					if (DLFILEENTRY_CLASS_NAME.equals(className)) {
+						return indexer;
+					}
+	
+					if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
+							className)) {
+	
+						return null;
+					}
+	
+					throw new IllegalArgumentException();
+				}
+
+			}
 		);
 
 		String title = RandomTestUtil.randomString();
@@ -130,36 +130,34 @@ public class SearchResultUtilDLFileEntryTest
 			(PortletURL)Matchers.any(), (PortletRequest)Matchers.isNull(),
 			(PortletResponse)Matchers.isNull());
 
-		class AssetRendererFactoryRegistryGetAssetRendererFactoryByClassName
-			implements InvocationHandler {
-
-			@Override
-			public AssetRendererFactory invoke(
-					Object proxy, Method method, Object[] args)
-				throws Throwable {
-
-				String className = (String)args[0];
-
-				if (DLFILEENTRY_CLASS_NAME.equals(className)) {
-					return null;
-				}
-
-				if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
-						className)) {
-
-					return assetRendererFactory;
-				}
-
-				throw new IllegalArgumentException();
-			}
-		}
-
 		replace(
 			method(
 				AssetRendererFactoryRegistryUtil.class,
 				"getAssetRendererFactoryByClassName", String.class)
 		).with(
-			new AssetRendererFactoryRegistryGetAssetRendererFactoryByClassName()
+			new InvocationHandler() {
+
+				@Override
+				public AssetRendererFactory invoke(
+						Object proxy, Method method, Object[] args)
+					throws Throwable {
+	
+					String className = (String)args[0];
+	
+					if (DLFILEENTRY_CLASS_NAME.equals(className)) {
+						return null;
+					}
+	
+					if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
+							className)) {
+	
+						return assetRendererFactory;
+					}
+	
+					throw new IllegalArgumentException();
+				}
+
+			}
 		);
 
 		when(
