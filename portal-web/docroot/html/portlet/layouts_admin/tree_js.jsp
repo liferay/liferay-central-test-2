@@ -67,6 +67,7 @@ if (saveState) {
 	</c:if>
 
 	<c:if test="<%= saveState %>">
+
 		<%
 		JSONArray checkedNodesJSONArray = JSONFactoryUtil.createJSONArray();
 
