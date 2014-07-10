@@ -35,11 +35,11 @@ import java.util.Properties;
 @Target(ElementType.TYPE)
 public @interface OSGiBeanProperties {
 
-	public String[] property() default {};
-
 	public String portalPropertyPrefix() default "";
 
 	public boolean portalPropertiesRemovePrefix() default true;
+
+	public String[] property() default {};
 
 	public static class Convert {
 
