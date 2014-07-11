@@ -157,8 +157,8 @@
 			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {
 				<portlet:actionURL var="deleteURL">
 					<portlet:param name="struts_action" value="/asset_tag_admin/edit_tag" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
 				document.<portlet:namespace />fm.<portlet:namespace />deleteTagIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
