@@ -208,7 +208,7 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 								</aui:select>
 
 								<c:choose>
-									<c:when test="<%= ((group == null) || !group.isStaged()) %>">
+									<c:when test="<%= (group == null) || !group.isStaged() %>">
 										<c:choose>
 											<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 												<div class="hide" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
@@ -314,7 +314,7 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 								</aui:select>
 
 								<c:choose>
-									<c:when test="<%= ((group == null) || !group.isStaged()) %>">
+									<c:when test="<%= (group == null) || !group.isStaged() %>">
 										<c:choose>
 											<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 												<div class="hide" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
