@@ -17,12 +17,13 @@
 <%@ include file="/html/portlet/document_selector/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1");
+String[] tabs1Names = DocumentSelectorUtil.getTabs1Names(request);
+
 long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
-String[] tabs1Names = DocumentSelectorUtil.getTabs1Names(request);
-String tabs1 = ParamUtil.getString(request, "tabs1");
 String ckEditorFuncNum = DocumentSelectorUtil.getCKEditorFuncNum(request);
 String eventName = ParamUtil.getString(request, "eventName");
 boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector");
