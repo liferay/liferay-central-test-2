@@ -349,7 +349,8 @@ public abstract class MDRActionLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<MDRAction> getMDRActionsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MDRAction> orderByComparator) {
 		return mdrActionPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

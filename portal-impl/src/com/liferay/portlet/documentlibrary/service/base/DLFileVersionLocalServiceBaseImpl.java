@@ -354,7 +354,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	@Override
 	public List<DLFileVersion> getDLFileVersionsByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<DLFileVersion> orderByComparator) {
 		return dlFileVersionPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

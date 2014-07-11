@@ -368,7 +368,7 @@ public class LayoutFriendlyURLLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portal.model.LayoutFriendlyURL> getLayoutFriendlyURLsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.LayoutFriendlyURL> orderByComparator) {
 		return _layoutFriendlyURLLocalService.getLayoutFriendlyURLsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

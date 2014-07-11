@@ -367,7 +367,8 @@ public abstract class MBThreadLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<MBThread> getMBThreadsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MBThread> orderByComparator) {
 		return mbThreadPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

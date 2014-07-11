@@ -359,7 +359,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService,
 	@Override
 	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getDDLRecordsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecord> orderByComparator) {
 		return _ddlRecordLocalService.getDDLRecordsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

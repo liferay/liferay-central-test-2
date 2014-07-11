@@ -357,7 +357,7 @@ public class DLFileShortcutLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getDLFileShortcutsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileShortcut> orderByComparator) {
 		return _dlFileShortcutLocalService.getDLFileShortcutsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

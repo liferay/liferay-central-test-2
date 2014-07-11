@@ -325,7 +325,7 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 	@Override
 	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getMBDiscussionsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBDiscussion> orderByComparator) {
 		return _mbDiscussionLocalService.getMBDiscussionsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

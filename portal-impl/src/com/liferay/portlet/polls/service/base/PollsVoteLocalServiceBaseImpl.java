@@ -337,7 +337,8 @@ public abstract class PollsVoteLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<PollsVote> getPollsVotesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<PollsVote> orderByComparator) {
 		return pollsVotePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

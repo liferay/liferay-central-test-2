@@ -362,7 +362,7 @@ public class AssetCategoryLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategoriesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetCategory> orderByComparator) {
 		return _assetCategoryLocalService.getAssetCategoriesByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

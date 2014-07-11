@@ -333,7 +333,7 @@ public abstract class MBBanLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<MBBan> getMBBansByUuidAndCompanyId(String uuid, long companyId,
-		int start, int end, OrderByComparator orderByComparator) {
+		int start, int end, OrderByComparator<MBBan> orderByComparator) {
 		return mbBanPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

@@ -386,7 +386,7 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService,
 	@Override
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getJournalFeedsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalFeed> orderByComparator) {
 		return _journalFeedLocalService.getJournalFeedsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

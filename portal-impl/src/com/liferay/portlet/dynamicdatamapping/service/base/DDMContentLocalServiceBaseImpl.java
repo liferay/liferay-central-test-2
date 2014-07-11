@@ -337,7 +337,8 @@ public abstract class DDMContentLocalServiceBaseImpl
 
 	@Override
 	public List<DDMContent> getDDMContentsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<DDMContent> orderByComparator) {
 		return ddmContentPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

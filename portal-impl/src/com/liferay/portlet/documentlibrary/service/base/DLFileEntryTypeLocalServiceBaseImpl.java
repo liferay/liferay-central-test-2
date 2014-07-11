@@ -352,7 +352,7 @@ public abstract class DLFileEntryTypeLocalServiceBaseImpl
 	@Override
 	public List<DLFileEntryType> getDLFileEntryTypesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<DLFileEntryType> orderByComparator) {
 		return dlFileEntryTypePersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

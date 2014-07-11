@@ -436,7 +436,7 @@ public class SocialRequestLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequestsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.social.model.SocialRequest> orderByComparator) {
 		return _socialRequestLocalService.getSocialRequestsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

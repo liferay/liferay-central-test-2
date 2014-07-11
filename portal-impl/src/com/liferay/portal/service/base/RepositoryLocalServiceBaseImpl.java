@@ -366,7 +366,8 @@ public abstract class RepositoryLocalServiceBaseImpl
 
 	@Override
 	public List<Repository> getRepositoriesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<Repository> orderByComparator) {
 		return repositoryPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

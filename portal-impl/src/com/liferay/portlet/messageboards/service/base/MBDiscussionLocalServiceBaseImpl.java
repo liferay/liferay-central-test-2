@@ -358,7 +358,8 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 
 	@Override
 	public List<MBDiscussion> getMBDiscussionsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MBDiscussion> orderByComparator) {
 		return mbDiscussionPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

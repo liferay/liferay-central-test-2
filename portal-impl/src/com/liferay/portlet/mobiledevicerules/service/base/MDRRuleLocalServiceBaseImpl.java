@@ -336,7 +336,8 @@ public abstract class MDRRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<MDRRule> getMDRRulesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MDRRule> orderByComparator) {
 		return mdrRulePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

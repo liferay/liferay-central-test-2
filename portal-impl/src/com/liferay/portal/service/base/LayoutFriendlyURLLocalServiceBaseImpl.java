@@ -341,7 +341,7 @@ public abstract class LayoutFriendlyURLLocalServiceBaseImpl
 	@Override
 	public List<LayoutFriendlyURL> getLayoutFriendlyURLsByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<LayoutFriendlyURL> orderByComparator) {
 		return layoutFriendlyURLPersistence.findByUuid_C(uuid, companyId,
 			start, end, orderByComparator);
 	}

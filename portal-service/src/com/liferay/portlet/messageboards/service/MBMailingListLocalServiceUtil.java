@@ -300,7 +300,7 @@ public class MBMailingListLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> getMBMailingListsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMailingList> orderByComparator) {
 		return getService()
 				   .getMBMailingListsByUuidAndCompanyId(uuid, companyId, start,
 			end, orderByComparator);

@@ -371,7 +371,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	@Override
 	public List<BookmarksEntry> getBookmarksEntriesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<BookmarksEntry> orderByComparator) {
 		return bookmarksEntryPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

@@ -368,7 +368,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	@Override
 	public List<BookmarksFolder> getBookmarksFoldersByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<BookmarksFolder> orderByComparator) {
 		return bookmarksFolderPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

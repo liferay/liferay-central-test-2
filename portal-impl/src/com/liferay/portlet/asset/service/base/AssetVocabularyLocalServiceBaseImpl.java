@@ -347,7 +347,7 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 	@Override
 	public List<AssetVocabulary> getAssetVocabulariesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<AssetVocabulary> orderByComparator) {
 		return assetVocabularyPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

@@ -298,7 +298,7 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService,
 	@Override
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getPollsVotesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.polls.model.PollsVote> orderByComparator) {
 		return _pollsVoteLocalService.getPollsVotesByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

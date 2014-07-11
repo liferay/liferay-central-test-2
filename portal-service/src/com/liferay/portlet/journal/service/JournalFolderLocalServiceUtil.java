@@ -478,7 +478,7 @@ public class JournalFolderLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFolder> getJournalFoldersByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalFolder> orderByComparator) {
 		return getService()
 				   .getJournalFoldersByUuidAndCompanyId(uuid, companyId, start,
 			end, orderByComparator);

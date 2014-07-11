@@ -347,7 +347,8 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 
 	@Override
 	public List<DDLRecordSet> getDDLRecordSetsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<DDLRecordSet> orderByComparator) {
 		return ddlRecordSetPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

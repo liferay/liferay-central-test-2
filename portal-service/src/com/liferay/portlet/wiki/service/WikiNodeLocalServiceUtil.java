@@ -389,7 +389,7 @@ public class WikiNodeLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.wiki.model.WikiNode> orderByComparator) {
 		return getService()
 				   .getWikiNodesByUuidAndCompanyId(uuid, companyId, start, end,
 			orderByComparator);

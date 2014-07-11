@@ -343,7 +343,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	@Override
 	public List<PollsQuestion> getPollsQuestionsByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<PollsQuestion> orderByComparator) {
 		return pollsQuestionPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

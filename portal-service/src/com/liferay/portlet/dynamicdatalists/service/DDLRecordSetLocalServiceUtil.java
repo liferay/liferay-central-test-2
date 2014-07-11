@@ -316,7 +316,7 @@ public class DDLRecordSetLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> getDDLRecordSetsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> orderByComparator) {
 		return getService()
 				   .getDDLRecordSetsByUuidAndCompanyId(uuid, companyId, start,
 			end, orderByComparator);

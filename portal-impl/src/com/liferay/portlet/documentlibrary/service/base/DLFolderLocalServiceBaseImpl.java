@@ -363,7 +363,8 @@ public abstract class DLFolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<DLFolder> getDLFoldersByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<DLFolder> orderByComparator) {
 		return dlFolderPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

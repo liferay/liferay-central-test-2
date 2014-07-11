@@ -357,7 +357,8 @@ public abstract class WikiNodeLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<WikiNode> getWikiNodesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<WikiNode> orderByComparator) {
 		return wikiNodePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

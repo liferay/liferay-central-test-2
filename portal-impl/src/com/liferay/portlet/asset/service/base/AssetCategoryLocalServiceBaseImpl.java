@@ -350,7 +350,7 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 	@Override
 	public List<AssetCategory> getAssetCategoriesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<AssetCategory> orderByComparator) {
 		return assetCategoryPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

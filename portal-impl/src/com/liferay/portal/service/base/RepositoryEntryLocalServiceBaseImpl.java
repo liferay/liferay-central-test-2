@@ -340,7 +340,7 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	@Override
 	public List<RepositoryEntry> getRepositoryEntriesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<RepositoryEntry> orderByComparator) {
 		return repositoryEntryPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

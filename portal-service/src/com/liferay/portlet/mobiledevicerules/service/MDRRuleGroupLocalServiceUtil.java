@@ -302,7 +302,7 @@ public class MDRRuleGroupLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> getMDRRuleGroupsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> orderByComparator) {
 		return getService()
 				   .getMDRRuleGroupsByUuidAndCompanyId(uuid, companyId, start,
 			end, orderByComparator);

@@ -366,7 +366,8 @@ public abstract class MBCategoryLocalServiceBaseImpl
 
 	@Override
 	public List<MBCategory> getMBCategoriesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MBCategory> orderByComparator) {
 		return mbCategoryPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

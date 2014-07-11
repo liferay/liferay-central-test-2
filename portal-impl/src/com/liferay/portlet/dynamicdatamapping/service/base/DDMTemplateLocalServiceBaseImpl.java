@@ -359,7 +359,8 @@ public abstract class DDMTemplateLocalServiceBaseImpl
 
 	@Override
 	public List<DDMTemplate> getDDMTemplatesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<DDMTemplate> orderByComparator) {
 		return ddmTemplatePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

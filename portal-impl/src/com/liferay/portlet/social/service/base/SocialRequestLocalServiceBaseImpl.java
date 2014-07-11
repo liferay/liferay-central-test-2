@@ -280,7 +280,7 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	@Override
 	public List<SocialRequest> getSocialRequestsByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<SocialRequest> orderByComparator) {
 		return socialRequestPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

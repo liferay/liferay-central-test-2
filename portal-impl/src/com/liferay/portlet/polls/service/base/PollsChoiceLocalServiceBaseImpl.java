@@ -339,7 +339,8 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 
 	@Override
 	public List<PollsChoice> getPollsChoicesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<PollsChoice> orderByComparator) {
 		return pollsChoicePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

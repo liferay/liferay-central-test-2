@@ -340,7 +340,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	@Override
 	public List<MBMailingList> getMBMailingListsByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<MBMailingList> orderByComparator) {
 		return mbMailingListPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

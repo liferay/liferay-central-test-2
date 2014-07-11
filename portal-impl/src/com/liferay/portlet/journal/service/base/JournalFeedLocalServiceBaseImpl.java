@@ -343,7 +343,8 @@ public abstract class JournalFeedLocalServiceBaseImpl
 
 	@Override
 	public List<JournalFeed> getJournalFeedsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<JournalFeed> orderByComparator) {
 		return journalFeedPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

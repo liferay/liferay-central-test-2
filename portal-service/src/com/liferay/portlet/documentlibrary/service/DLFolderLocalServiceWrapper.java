@@ -461,7 +461,7 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService,
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFoldersByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFolder> orderByComparator) {
 		return _dlFolderLocalService.getDLFoldersByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

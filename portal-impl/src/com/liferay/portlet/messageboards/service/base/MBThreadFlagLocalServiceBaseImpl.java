@@ -339,7 +339,8 @@ public abstract class MBThreadFlagLocalServiceBaseImpl
 
 	@Override
 	public List<MBThreadFlag> getMBThreadFlagsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MBThreadFlag> orderByComparator) {
 		return mbThreadFlagPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

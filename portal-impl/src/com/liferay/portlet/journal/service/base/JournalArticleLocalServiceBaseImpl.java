@@ -405,7 +405,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	@Override
 	public List<JournalArticle> getJournalArticlesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<JournalArticle> orderByComparator) {
 		return journalArticlePersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

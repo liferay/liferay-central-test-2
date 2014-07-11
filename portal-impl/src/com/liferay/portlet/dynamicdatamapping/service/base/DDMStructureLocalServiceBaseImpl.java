@@ -363,7 +363,8 @@ public abstract class DDMStructureLocalServiceBaseImpl
 
 	@Override
 	public List<DDMStructure> getDDMStructuresByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<DDMStructure> orderByComparator) {
 		return ddmStructurePersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

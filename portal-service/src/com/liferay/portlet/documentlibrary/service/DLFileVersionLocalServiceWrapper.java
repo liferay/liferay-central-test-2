@@ -271,7 +271,7 @@ public class DLFileVersionLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getDLFileVersionsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileVersion> orderByComparator) {
 		return _dlFileVersionLocalService.getDLFileVersionsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

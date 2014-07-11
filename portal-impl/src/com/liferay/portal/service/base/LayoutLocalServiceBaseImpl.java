@@ -369,7 +369,8 @@ public abstract class LayoutLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<Layout> getLayoutsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<Layout> orderByComparator) {
 		return layoutPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

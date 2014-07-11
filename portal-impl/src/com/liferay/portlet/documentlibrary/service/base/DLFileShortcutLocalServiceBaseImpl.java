@@ -360,7 +360,7 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	@Override
 	public List<DLFileShortcut> getDLFileShortcutsByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<DLFileShortcut> orderByComparator) {
 		return dlFileShortcutPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

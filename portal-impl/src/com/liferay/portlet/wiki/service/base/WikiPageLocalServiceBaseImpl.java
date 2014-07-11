@@ -380,7 +380,8 @@ public abstract class WikiPageLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<WikiPage> getWikiPagesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<WikiPage> orderByComparator) {
 		return wikiPagePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

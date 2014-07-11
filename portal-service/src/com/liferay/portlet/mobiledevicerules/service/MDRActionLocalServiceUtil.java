@@ -321,7 +321,7 @@ public class MDRActionLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRAction> getMDRActionsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.mobiledevicerules.model.MDRAction> orderByComparator) {
 		return getService()
 				   .getMDRActionsByUuidAndCompanyId(uuid, companyId, start,
 			end, orderByComparator);

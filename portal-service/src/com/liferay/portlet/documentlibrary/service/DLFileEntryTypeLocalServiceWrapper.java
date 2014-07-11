@@ -492,7 +492,7 @@ public class DLFileEntryTypeLocalServiceWrapper
 	@Override
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.documentlibrary.model.DLFileEntryType> orderByComparator) {
 		return _dlFileEntryTypeLocalService.getDLFileEntryTypesByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

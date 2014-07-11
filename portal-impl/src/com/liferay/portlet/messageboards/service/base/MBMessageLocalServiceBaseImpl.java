@@ -388,7 +388,8 @@ public abstract class MBMessageLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<MBMessage> getMBMessagesByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<MBMessage> orderByComparator) {
 		return mbMessagePersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}

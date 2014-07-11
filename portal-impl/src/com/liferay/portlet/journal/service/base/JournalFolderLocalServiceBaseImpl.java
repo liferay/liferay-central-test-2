@@ -371,7 +371,7 @@ public abstract class JournalFolderLocalServiceBaseImpl
 	@Override
 	public List<JournalFolder> getJournalFoldersByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<JournalFolder> orderByComparator) {
 		return journalFolderPersistence.findByUuid_C(uuid, companyId, start,
 			end, orderByComparator);
 	}

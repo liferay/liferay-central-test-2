@@ -1017,7 +1017,7 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 	@Override
 	public java.util.List<com.liferay.portal.model.Layout> getLayoutsByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Layout> orderByComparator) {
 		return _layoutLocalService.getLayoutsByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

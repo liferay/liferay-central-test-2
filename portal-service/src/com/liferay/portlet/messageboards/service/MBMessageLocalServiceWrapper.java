@@ -543,7 +543,7 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService,
 	@Override
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessagesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.messageboards.model.MBMessage> orderByComparator) {
 		return _mbMessageLocalService.getMBMessagesByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}

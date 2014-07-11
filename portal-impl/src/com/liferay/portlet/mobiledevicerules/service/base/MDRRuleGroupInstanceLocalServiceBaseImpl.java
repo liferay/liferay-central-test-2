@@ -364,7 +364,7 @@ public abstract class MDRRuleGroupInstanceLocalServiceBaseImpl
 	@Override
 	public List<MDRRuleGroupInstance> getMDRRuleGroupInstancesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator orderByComparator) {
+		OrderByComparator<MDRRuleGroupInstance> orderByComparator) {
 		return mdrRuleGroupInstancePersistence.findByUuid_C(uuid, companyId,
 			start, end, orderByComparator);
 	}

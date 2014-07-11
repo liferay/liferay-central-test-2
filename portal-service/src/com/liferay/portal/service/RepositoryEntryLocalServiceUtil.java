@@ -254,7 +254,7 @@ public class RepositoryEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.RepositoryEntry> getRepositoryEntriesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.RepositoryEntry> orderByComparator) {
 		return getService()
 				   .getRepositoryEntriesByUuidAndCompanyId(uuid, companyId,
 			start, end, orderByComparator);

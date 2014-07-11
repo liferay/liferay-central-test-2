@@ -344,7 +344,8 @@ public abstract class DDLRecordLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	@Override
 	public List<DDLRecord> getDDLRecordsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end, OrderByComparator orderByComparator) {
+		long companyId, int start, int end,
+		OrderByComparator<DDLRecord> orderByComparator) {
 		return ddlRecordPersistence.findByUuid_C(uuid, companyId, start, end,
 			orderByComparator);
 	}
