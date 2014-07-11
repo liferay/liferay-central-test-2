@@ -104,11 +104,6 @@ public class JSONWebServiceActionsManagerUtil {
 			servletContext);
 	}
 
-	public static int registerServletContext(String contextPath) {
-		return getJSONWebServiceActionsManager().registerServletContext(
-			contextPath);
-	}
-
 	public static int unregisterJSONWebServiceActions(Object actionObject) {
 		return getJSONWebServiceActionsManager().
 			unregisterJSONWebServiceActions(actionObject);
