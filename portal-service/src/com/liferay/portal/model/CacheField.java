@@ -28,6 +28,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface CacheField {
 
-	String methodName() default "";
+	public String methodName() default "";
 
 }
