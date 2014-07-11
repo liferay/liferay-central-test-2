@@ -315,6 +315,7 @@ public class OSGiBeanPropertiesTest {
 		Assert.assertEquals("value1", properties.get("key1"));
 	}
 
+	@Test
 	public void testWithPortalProperties() {
 		@OSGiBeanProperties(
 			portalPropertyPrefix = "portlet."
