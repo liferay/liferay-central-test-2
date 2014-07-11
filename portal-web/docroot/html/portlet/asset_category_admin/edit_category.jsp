@@ -80,6 +80,8 @@ else {
 
 <aui:form action="<%= editCategoryURL %>" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= category == null ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
+	<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 	<aui:input name="vocabularyId" type="hidden" value="<%= vocabularyId %>" />
 
 	<liferay-ui:error exception="<%= AssetCategoryNameException.class %>" message="please-enter-a-valid-name" />
@@ -88,9 +90,6 @@ else {
 	<aui:model-context bean="<%= category %>" model="<%= AssetCategory.class %>" />
 
 	<aui:fieldset>
-		<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
-		<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
-
 		<aui:input autoFocus="<%= true %>" label="name" name="title" />
 
 		<aui:input name="description" />

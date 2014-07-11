@@ -21,11 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
-long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
-
 AssetCategory category = AssetCategoryLocalServiceUtil.fetchCategory(categoryId);
 
 AssetCategory parentCategory = category.getParentCategory();
+
+long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 
 List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
 %>
