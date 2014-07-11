@@ -239,6 +239,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 		return JournalFolderLocalServiceUtil.getFolder(getFolderId());
 	}
 
+	@Override
 	public Layout getLayout() {
 		String layoutUuid = getLayoutUuid();
 
