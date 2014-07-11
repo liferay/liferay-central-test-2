@@ -513,7 +513,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 				}
 
 				@Override
-				public List<${entity.name}> get${entity.names}ByUuidAndCompanyId(String uuid, long companyId, int start, int end, OrderByComparator orderByComparator) {
+				public List<${entity.name}> get${entity.names}ByUuidAndCompanyId(String uuid, long companyId, int start, int end, OrderByComparator<${entity.name}> orderByComparator) {
 					return ${entity.varName}Persistence.findByUuid_C(uuid, companyId, start, end, orderByComparator);
 				}
 			<#else>
