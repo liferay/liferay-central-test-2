@@ -64,28 +64,26 @@ public @interface OSGiBeanProperties {
 
 			Map<String, Object> properties = new HashMap<String, Object>();
 
-			String[] propertiesArray = osgiBeanProperties.property();
-
-			for (String propertyString : propertiesArray) {
-				String[] parts = propertyString.split(StringPool.EQUAL, 2);
+			for (String property : osgiBeanProperties.property()) {
+				String[] parts = property.split(StringPool.EQUAL, 2);
 
 				if (parts.length <= 1) {
 					continue;
 				}
 
-				String keyPart = parts[0];
-				String valuePart = parts[1];
-				String typePart = String.class.getSimpleName();
+				String key = parts[0];
+				String className = String.class.getSimpleName();
 
-				if (keyPart.indexOf(StringPool.COLON) != -1) {
-					String[] keyAndTypeParts = StringUtil.split(
-						keyPart, StringPool.COLON);
+				if (key.indexOf(StringPool.COLON) != -1) {
+					String[] keyParts = StringUtil.split(key, StringPool.COLON);
 
-					keyPart = keyAndTypeParts[0];
-					typePart = keyAndTypeParts[1];
+					key = keyParts[0];
+					className = keyParts[1];
 				}
 
-				_put(keyPart, valuePart, typePart, properties);
+				String value = parts[1];
+
+				_put(key, value, className, properties);
 			}
 
 			String portalPropertyPrefix =
@@ -103,21 +101,31 @@ public @interface OSGiBeanProperties {
 		}
 
 		private static void _put(
-			String key, String value, String type,
+			String key, String value, String className,
 			Map<String, Object> properties) {
 
-			Type valueType = Type.isType(type);
+			Type type = Type.getType(className);
 
 			Object previousValue = properties.get(key);
 
-			properties.put(key, valueType.convert(value, previousValue));
+			properties.put(key, type.convert(value, previousValue));
 		}
 
 	}
 
 	public enum Type {
 
-		Boolean, Byte, Character, Double, Float, Integer, Long, Short, String;
+		BOOLEAN, BYTE, CHARACTER, DOUBLE, FLOAT, INTEGER, LONG, SHORT, STRING;
+
+		public static Type getType(String name) {
+			for (Type type : values()) {
+				if (name.equals(type.name())) {
+					return type;
+				}
+			}
+
+			return Type.STRING;
+		}
 
 		public Object convert(String value, Object previousValue) {
 			if (previousValue != null) {
@@ -150,73 +158,63 @@ public @interface OSGiBeanProperties {
 		}
 
 		public Class<?> getTypeClass() {
-			if (this == Type.Boolean) {
+			if (this == Type.BOOLEAN) {
 				return java.lang.Boolean.class;
 			}
-			else if (this == Type.Byte) {
+			else if (this == Type.BYTE) {
 				return java.lang.Byte.class;
 			}
-			else if (this == Type.Character) {
+			else if (this == Type.CHARACTER) {
 				return java.lang.Character.class;
 			}
-			else if (this == Type.Double) {
+			else if (this == Type.DOUBLE) {
 				return java.lang.Double.class;
 			}
-			else if (this == Type.Float) {
+			else if (this == Type.FLOAT) {
 				return java.lang.Float.class;
 			}
-			else if (this == Type.Integer) {
+			else if (this == Type.INTEGER) {
 				return java.lang.Integer.class;
 			}
-			else if (this == Type.Long) {
+			else if (this == Type.LONG) {
 				return java.lang.Long.class;
 			}
-			else if (this == Type.Short) {
+			else if (this == Type.SHORT) {
 				return java.lang.Short.class;
 			}
-			else if (this == Type.String) {
+			else if (this == Type.STRING) {
 				return java.lang.String.class;
 			}
 
 			return null;
 		}
 
-		public static Type isType(String stringType) {
-			for (Type curType : values()) {
-			   if (curType.name().equals(stringType)) {
-				   return curType;
-			   }
-			}
-
-			return Type.String;
-		}
-
 		private Object _getTypedValue(String value) {
-			if (this == Type.Boolean) {
+			if (this == Type.BOOLEAN) {
 				return GetterUtil.getBoolean(value);
 			}
-			else if (this == Type.Byte) {
+			else if (this == Type.BYTE) {
 				return new java.lang.Byte(value).byteValue();
 			}
-			else if (this == Type.Character) {
+			else if (this == Type.CHARACTER) {
 				return value.charAt(0);
 			}
-			else if (this == Type.Double) {
+			else if (this == Type.DOUBLE) {
 				return GetterUtil.getDouble(value);
 			}
-			else if (this == Type.Float) {
+			else if (this == Type.FLOAT) {
 				return GetterUtil.getFloat(value);
 			}
-			else if (this == Type.Integer) {
+			else if (this == Type.INTEGER) {
 				return GetterUtil.getInteger(value);
 			}
-			else if (this == Type.Long) {
+			else if (this == Type.LONG) {
 				return GetterUtil.getLong(value);
 			}
-			else if (this == Type.Short) {
+			else if (this == Type.SHORT) {
 				return GetterUtil.getShort(value);
 			}
-		
+
 			return value;
 		}
 

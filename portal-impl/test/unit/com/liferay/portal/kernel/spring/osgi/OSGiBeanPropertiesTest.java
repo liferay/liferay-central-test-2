@@ -26,120 +26,25 @@ import org.junit.Test;
 public class OSGiBeanPropertiesTest {
 
 	@Test
-	public void testNotAnnotatedClass() {
-		class C {}
-
-		Assert.assertNull(
-			OSGiBeanProperties.Convert.fromObject(new C()));
-	}
-
-	@Test
 	public void testAnnotatedClass() {
 		@OSGiBeanProperties()
 		class C {}
 
-		Assert.assertNotNull(
-			OSGiBeanProperties.Convert.fromObject(new C()));
+		Assert.assertNotNull(OSGiBeanProperties.Convert.fromObject(new C()));
 	}
 
 	@Test
-	public void testWithSingleProperty() {
-		@OSGiBeanProperties(property = "key=value")
+	public void testNotAnnotatedClass() {
 		class C {}
 
-		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
-			new C());
-
-		Assert.assertNotNull(properties);
-		Assert.assertFalse(properties.isEmpty());
-		Assert.assertEquals(1, properties.size());
-		Assert.assertEquals("value", properties.get("key"));
-	}
-
-	@Test
-	public void testWithMultipleProperties() {
-		@OSGiBeanProperties(property = {"key1=value1", "key2=value2"})
-		class C {}
-
-		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
-			new C());
-
-		Assert.assertNotNull(properties);
-		Assert.assertFalse(properties.isEmpty());
-		Assert.assertEquals(2, properties.size());
-		Assert.assertEquals("value1", properties.get("key1"));
-	}
-
-	@Test
-	public void testWithTypedProperties() {
-		@OSGiBeanProperties(
-			property = {
-				"key1=value1",
-				"key2:Boolean=true",
-				"key3:Byte=127",
-				"key4:Character=@",
-				"key5:Double=1.7976931348623157E308",
-				"key6:Float=3.4028234663852886E38f",
-				"key7:Integer=2147483647",
-				"key8:Long=9223372036854775807",
-				"key9:Short=32767",
-				"key10:String=value10"
-			}
-		)
-		class C {}
-
-		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
-			new C());
-
-		Assert.assertNotNull(properties);
-		Assert.assertEquals("value1", properties.get("key1"));
-		Assert.assertEquals(Boolean.TRUE, properties.get("key2"));
-		Assert.assertEquals(new Byte("127"), properties.get("key3"));
-		Assert.assertEquals(new Character('@'), properties.get("key4"));
-		Assert.assertEquals(Double.MAX_VALUE, properties.get("key5"));
-		Assert.assertEquals(Float.MAX_VALUE, properties.get("key6"));
-		Assert.assertEquals(Integer.MAX_VALUE, properties.get("key7"));
-		Assert.assertEquals(Long.MAX_VALUE, properties.get("key8"));
-		Assert.assertEquals(Short.MAX_VALUE, properties.get("key9"));
-		Assert.assertEquals("value10", properties.get("key10"));
-	}
-
-	@Test
-	public void testWithArrayOfProperties() {
-		@OSGiBeanProperties(
-			property = {
-				"key=valueA",
-				"key=valueB",
-				"key=valueC",
-			}
-		)
-		class C {}
-
-		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
-			new C());
-
-		Assert.assertNotNull(properties);
-
-		Object value = properties.get("key");
-
-		Class<? extends Object> clazz = value.getClass();
-
-		Assert.assertTrue(clazz.isArray());
-		Assert.assertEquals(String[].class, clazz);
-		String[] values = (String[])value;
-		Assert.assertEquals("valueA", values[0]);
-		Assert.assertEquals("valueB", values[1]);
-		Assert.assertEquals("valueC", values[2]);
-		Assert.assertEquals(3, values.length);
+		Assert.assertNull(OSGiBeanProperties.Convert.fromObject(new C()));
 	}
 
 	@Test
 	public void testWithArrayOfBooleanProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Boolean=true",
-				"key:Boolean=false",
-				"key:Boolean=true",
+				"key:Boolean=true", "key:Boolean=false", "key:Boolean=true",
 			}
 		)
 		class C {}
@@ -166,9 +71,7 @@ public class OSGiBeanPropertiesTest {
 	public void testWithArrayOfByteProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Byte=127",
-				"key:Byte=95",
-				"key:Byte=13",
+				"key:Byte=127", "key:Byte=95", "key:Byte=13",
 			}
 		)
 		class C {}
@@ -195,9 +98,7 @@ public class OSGiBeanPropertiesTest {
 	public void testWithArrayOfCharacterProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Character=@",
-				"key:Character=#",
-				"key:Character=\u0069",
+				"key:Character=@", "key:Character=#", "key:Character=\u0069",
 			}
 		)
 		class C {}
@@ -224,8 +125,7 @@ public class OSGiBeanPropertiesTest {
 	public void testWithArrayOfDoubleProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Double=1.7976931348623157E308",
-				"key:Double=4.9E-324",
+				"key:Double=1.7976931348623157E308", "key:Double=4.9E-324",
 				"key:Double=2.2250738585072014E-308",
 			}
 		)
@@ -282,8 +182,7 @@ public class OSGiBeanPropertiesTest {
 	public void testWithArrayOfIntegerProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Integer=2147483647",
-				"key:Integer=-2147483648",
+				"key:Integer=2147483647", "key:Integer=-2147483648",
 				"key:Integer=12",
 			}
 		)
@@ -311,8 +210,7 @@ public class OSGiBeanPropertiesTest {
 	public void testWithArrayOfLongProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Long=9223372036854775807",
-				"key:Long=-9223372036854775808",
+				"key:Long=9223372036854775807", "key:Long=-9223372036854775808",
 				"key:Long=12",
 			}
 		)
@@ -336,13 +234,50 @@ public class OSGiBeanPropertiesTest {
 		Assert.assertEquals(3, values.length);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testWithArrayOfMixedProperties() {
+		@OSGiBeanProperties(
+			property = {
+				"key:String=32767", "key:Integer=-32768", "key:Short=12",
+			}
+		)
+		class C {}
+
+		OSGiBeanProperties.Convert.fromObject(new C());
+	}
+
+	@Test
+	public void testWithArrayOfProperties() {
+		@OSGiBeanProperties(
+			property = {
+				"key=valueA", "key=valueB", "key=valueC",
+			}
+		)
+		class C {}
+
+		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
+			new C());
+
+		Assert.assertNotNull(properties);
+
+		Object value = properties.get("key");
+
+		Class<? extends Object> clazz = value.getClass();
+
+		Assert.assertTrue(clazz.isArray());
+		Assert.assertEquals(String[].class, clazz);
+		String[] values = (String[])value;
+		Assert.assertEquals("valueA", values[0]);
+		Assert.assertEquals("valueB", values[1]);
+		Assert.assertEquals("valueC", values[2]);
+		Assert.assertEquals(3, values.length);
+	}
+
 	@Test
 	public void testWithArrayOfShortProperties() {
 		@OSGiBeanProperties(
 			property = {
-				"key:Short=32767",
-				"key:Short=-32768",
-				"key:Short=12",
+				"key:Short=32767", "key:Short=-32768", "key:Short=12",
 			}
 		)
 		class C {}
@@ -365,18 +300,18 @@ public class OSGiBeanPropertiesTest {
 		Assert.assertEquals(3, values.length);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testWithArrayOfMixedProperties() {
-		@OSGiBeanProperties(
-			property = {
-				"key:String=32767",
-				"key:Integer=-32768",
-				"key:Short=12",
-			}
-		)
+	@Test
+	public void testWithMultipleProperties() {
+		@OSGiBeanProperties(property = {"key1=value1", "key2=value2"})
 		class C {}
 
-		OSGiBeanProperties.Convert.fromObject(new C());
+		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
+			new C());
+
+		Assert.assertNotNull(properties);
+		Assert.assertFalse(properties.isEmpty());
+		Assert.assertEquals(2, properties.size());
+		Assert.assertEquals("value1", properties.get("key1"));
 	}
 
 	public void testWithPortalProperties() {
@@ -392,9 +327,51 @@ public class OSGiBeanPropertiesTest {
 		Assert.assertTrue(
 			properties.containsKey("default.resource.check.whitelist"));
 		Assert.assertEquals(
-			PropsUtil.get(
-				"portlet.add.default.resource.check.whitelist"),
+			PropsUtil.get("portlet.add.default.resource.check.whitelist"),
 				properties.get("default.resource.check.whitelist"));
+	}
+
+	@Test
+	public void testWithSingleProperty() {
+		@OSGiBeanProperties(property = "key=value")
+		class C {}
+
+		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
+			new C());
+
+		Assert.assertNotNull(properties);
+		Assert.assertFalse(properties.isEmpty());
+		Assert.assertEquals(1, properties.size());
+		Assert.assertEquals("value", properties.get("key"));
+	}
+
+	@Test
+	public void testWithTypedProperties() {
+		@OSGiBeanProperties(
+			property = {
+				"key1=value1", "key2:Boolean=true", "key3:Byte=127",
+				"key4:Character=@", "key5:Double=1.7976931348623157E308",
+				"key6:Float=3.4028234663852886E38f", "key7:Integer=2147483647",
+				"key8:Long=9223372036854775807", "key9:Short=32767",
+				"key10:String=value10"
+			}
+		)
+		class C {}
+
+		Map<String, Object> properties = OSGiBeanProperties.Convert.fromObject(
+			new C());
+
+		Assert.assertNotNull(properties);
+		Assert.assertEquals("value1", properties.get("key1"));
+		Assert.assertEquals(Boolean.TRUE, properties.get("key2"));
+		Assert.assertEquals(new Byte("127"), properties.get("key3"));
+		Assert.assertEquals(new Character('@'), properties.get("key4"));
+		Assert.assertEquals(Double.MAX_VALUE, properties.get("key5"));
+		Assert.assertEquals(Float.MAX_VALUE, properties.get("key6"));
+		Assert.assertEquals(Integer.MAX_VALUE, properties.get("key7"));
+		Assert.assertEquals(Long.MAX_VALUE, properties.get("key8"));
+		Assert.assertEquals(Short.MAX_VALUE, properties.get("key9"));
+		Assert.assertEquals("value10", properties.get("key10"));
 	}
 
 }
