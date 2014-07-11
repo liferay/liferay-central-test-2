@@ -128,33 +128,34 @@ public @interface OSGiBeanProperties {
 		}
 
 		public Object convert(String value, Object previousValue) {
-			if (previousValue != null) {
-				Class<?> clazz = previousValue.getClass();
+			if (previousValue == null) {
+				return _getTypedValue(value);
+			}
 
-				if (!clazz.isArray()) {
-					Object array = Array.newInstance(getTypeClass(), 2);
+			Class<?> clazz = previousValue.getClass();
 
-					Array.set(array, 0, previousValue);
-					Array.set(array, 1, _getTypedValue(value));
+			if (!clazz.isArray()) {
+				Object array = Array.newInstance(getTypeClass(), 2);
 
-					return array;
-				}
-
-				Object array = Array.newInstance(
-					getTypeClass(), Array.getLength(previousValue) + 1);
-
-				for (int i = 0; i < Array.getLength(previousValue); i++) {
-					Array.set(array, i, Array.get(previousValue, i));
-				}
-
-				Array.set(
-					array, Array.getLength(previousValue),
-					_getTypedValue(value));
+				Array.set(array, 0, previousValue);
+				Array.set(array, 1, _getTypedValue(value));
 
 				return array;
 			}
 
-			return _getTypedValue(value);
+			Object array = Array.newInstance(
+				getTypeClass(), Array.getLength(previousValue) + 1);
+
+			for (int i = 0; i < Array.getLength(previousValue); i++) {
+				Array.set(array, i, Array.get(previousValue, i));
+			}
+
+			Array.set(
+				array, Array.getLength(previousValue),
+				_getTypedValue(value));
+
+			return array;
+
 		}
 
 		public Class<?> getTypeClass() {
