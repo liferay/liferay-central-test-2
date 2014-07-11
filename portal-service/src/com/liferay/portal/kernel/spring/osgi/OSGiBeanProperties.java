@@ -108,7 +108,7 @@ public @interface OSGiBeanProperties {
 
 			Object previousValue = properties.get(key);
 
-			properties.put(key, type.convert(value, previousValue));
+			properties.put(key, type._convert(value, previousValue));
 		}
 
 	}
@@ -127,7 +127,7 @@ public @interface OSGiBeanProperties {
 			return Type.STRING;
 		}
 
-		private Object convert(String value, Object previousValue) {
+		private Object _convert(String value, Object previousValue) {
 			if (previousValue == null) {
 				return _getTypedValue(value);
 			}
@@ -135,7 +135,7 @@ public @interface OSGiBeanProperties {
 			Class<?> clazz = previousValue.getClass();
 
 			if (!clazz.isArray()) {
-				Object array = Array.newInstance(getTypeClass(), 2);
+				Object array = Array.newInstance(_getTypeClass(), 2);
 
 				Array.set(array, 0, previousValue);
 				Array.set(array, 1, _getTypedValue(value));
@@ -144,7 +144,7 @@ public @interface OSGiBeanProperties {
 			}
 
 			Object array = Array.newInstance(
-				getTypeClass(), Array.getLength(previousValue) + 1);
+				_getTypeClass(), Array.getLength(previousValue) + 1);
 
 			for (int i = 0; i < Array.getLength(previousValue); i++) {
 				Array.set(array, i, Array.get(previousValue, i));
@@ -158,7 +158,7 @@ public @interface OSGiBeanProperties {
 
 		}
 
-		private Class<?> getTypeClass() {
+		private Class<?> _getTypeClass() {
 			if (this == Type.BOOLEAN) {
 				return java.lang.Boolean.class;
 			}
