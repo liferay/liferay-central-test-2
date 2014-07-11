@@ -17,11 +17,7 @@
 <%@ include file="/html/portlet/asset_category_admin/init.jsp" %>
 
 <%
-long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
-
 long categoryId = ParamUtil.getLong(request, "categoryId");
-
-AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
 
 AssetCategory category = null;
 
@@ -29,14 +25,18 @@ if (categoryId > 0) {
 	category = AssetCategoryLocalServiceUtil.fetchCategory(categoryId);
 }
 
+long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
+
+AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
+
 String keywords = ParamUtil.getString(request, "keywords");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/asset_category_admin/view_categories");
 portletURL.setParameter("redirect", currentURL);
-portletURL.setParameter("vocabularyId", String.valueOf(vocabularyId));
 portletURL.setParameter("categoryId", String.valueOf(categoryId));
+portletURL.setParameter("vocabularyId", String.valueOf(vocabularyId));
 
 String title = StringPool.BLANK;
 
