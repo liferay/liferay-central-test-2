@@ -72,8 +72,8 @@ public abstract class BaseSiteMembershipPolicyTestCase
 		properties.put("service.ranking", 1);
 
 		ServiceRegistration<?> serviceRegistration = registry.registerService(
-			SiteMembershipPolicy.class,
-			new TestSiteMembershipPolicy(), properties);
+			SiteMembershipPolicy.class, new TestSiteMembershipPolicy(),
+			properties);
 
 		serviceRegistrations.add(serviceRegistration);
 	}
