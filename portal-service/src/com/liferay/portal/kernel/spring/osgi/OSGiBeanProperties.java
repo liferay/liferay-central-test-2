@@ -104,7 +104,7 @@ public @interface OSGiBeanProperties {
 			String key, String value, String className,
 			Map<String, Object> properties) {
 
-			Type type = Type.getType(className);
+			Type type = Type._getType(className);
 
 			Object previousValue = properties.get(key);
 
@@ -117,7 +117,7 @@ public @interface OSGiBeanProperties {
 
 		BOOLEAN, BYTE, CHARACTER, DOUBLE, FLOAT, INTEGER, LONG, SHORT, STRING;
 
-		public static Type getType(String name) {
+		private static Type _getType(String name) {
 			for (Type type : values()) {
 				if (name.equals(type.name())) {
 					return type;
@@ -127,7 +127,7 @@ public @interface OSGiBeanProperties {
 			return Type.STRING;
 		}
 
-		public Object convert(String value, Object previousValue) {
+		private Object convert(String value, Object previousValue) {
 			if (previousValue == null) {
 				return _getTypedValue(value);
 			}
@@ -158,7 +158,7 @@ public @interface OSGiBeanProperties {
 
 		}
 
-		public Class<?> getTypeClass() {
+		private Class<?> getTypeClass() {
 			if (this == Type.BOOLEAN) {
 				return java.lang.Boolean.class;
 			}
