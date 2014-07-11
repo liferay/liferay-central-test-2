@@ -189,8 +189,8 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "vocabul
 			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {
 				<portlet:actionURL var="deleteURL">
 					<portlet:param name="struts_action" value="/asset_category_admin/edit_vocabulary" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
 				document.<portlet:namespace />fm.<portlet:namespace />deleteVocabularyIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
