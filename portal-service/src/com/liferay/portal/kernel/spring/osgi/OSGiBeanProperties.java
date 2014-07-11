@@ -118,8 +118,10 @@ public @interface OSGiBeanProperties {
 		BOOLEAN, BYTE, CHARACTER, DOUBLE, FLOAT, INTEGER, LONG, SHORT, STRING;
 
 		private static Type _getType(String name) {
+			name = StringUtil.toUpperCase(name);
+
 			for (Type type : values()) {
-				if (StringUtil.toUpperCase(name).equals(type.name())) {
+				if (name.equals(type.name())) {
 					return type;
 				}
 			}
