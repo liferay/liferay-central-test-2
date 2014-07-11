@@ -18,7 +18,6 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1");
-String[] tabs1Names = DocumentSelectorUtil.getTabs1Names(request);
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
@@ -39,7 +38,7 @@ String type = DocumentSelectorUtil.getType(request);
 
 	selectGroupURL.setParameter("struts_action", "/document_selector/view");
 	selectGroupURL.setParameter("tabs1", tabs1);
-	selectGroupURL.setParameter("tabs1Names", StringUtil.merge(tabs1Names));
+	selectGroupURL.setParameter("tabs1Names", StringUtil.merge(DocumentSelectorUtil.getTabs1Names(request)));
 	selectGroupURL.setParameter("ckEditorFuncNum", ckEditorFuncNum);
 	selectGroupURL.setParameter("eventName", eventName);
 	selectGroupURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
