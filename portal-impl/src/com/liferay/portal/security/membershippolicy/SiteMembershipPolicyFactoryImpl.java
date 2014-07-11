@@ -67,8 +67,8 @@ public class SiteMembershipPolicyFactoryImpl
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			SiteMembershipPolicy siteMembershipPolicy =
-				registry.getService(serviceReference);
+			SiteMembershipPolicy siteMembershipPolicy = registry.getService(
+				serviceReference);
 
 			if (PropsValues.MEMBERSHIP_POLICY_AUTO_VERIFY) {
 				try {

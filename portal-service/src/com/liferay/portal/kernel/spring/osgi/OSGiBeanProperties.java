@@ -151,11 +151,9 @@ public @interface OSGiBeanProperties {
 			}
 
 			Array.set(
-				array, Array.getLength(previousValue),
-				_getTypedValue(value));
+				array, Array.getLength(previousValue), _getTypedValue(value));
 
 			return array;
-
 		}
 
 		private Class<?> _getTypeClass() {

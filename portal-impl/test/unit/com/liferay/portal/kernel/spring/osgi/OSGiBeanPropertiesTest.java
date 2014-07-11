@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.kernel.spring.osgi;
 
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -328,7 +329,7 @@ public class OSGiBeanPropertiesTest {
 			properties.containsKey("default.resource.check.whitelist"));
 		Assert.assertEquals(
 			PropsUtil.get("portlet.add.default.resource.check.whitelist"),
-				properties.get("default.resource.check.whitelist"));
+			properties.get("default.resource.check.whitelist"));
 	}
 
 	@Test
