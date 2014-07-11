@@ -63,8 +63,8 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(vocabulary, category, request, rende
 				<portlet:renderURL var="addCategoryURL">
 					<portlet:param name="struts_action" value="/asset_category_admin/edit_category" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="vocabularyId" value="<%= String.valueOf(vocabularyId) %>" />
 					<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
+					<portlet:param name="vocabularyId" value="<%= String.valueOf(vocabularyId) %>" />
 				</portlet:renderURL>
 
 				<aui:nav-item href="<%= addCategoryURL %>" iconCssClass="icon-plus" label="add-category" />
@@ -111,8 +111,8 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(vocabulary, category, request, rende
 			<portlet:renderURL var="rowURL">
 				<portlet:param name="struts_action" value="/asset_category_admin/view_categories" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="vocabularyId" value="<%= String.valueOf(curCategory.getVocabularyId()) %>" />
 				<portlet:param name="categoryId" value="<%= String.valueOf(curCategory.getCategoryId()) %>" />
+				<portlet:param name="vocabularyId" value="<%= String.valueOf(curCategory.getVocabularyId()) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text
@@ -153,8 +153,8 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(vocabulary, category, request, rende
 			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-this" />')) {
 				<portlet:actionURL var="deleteURL">
 					<portlet:param name="struts_action" value="/asset_category_admin/edit_category" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
 				document.<portlet:namespace />fm.<portlet:namespace />deleteCategoryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
