@@ -37,7 +37,7 @@ import org.junit.Test;
 public class FacetFactoryTest {
 
 	@BeforeClass
-	public static void staticSetup() {
+	public static void setUpClass() {
 		RegistryUtil.setRegistry(new BasicRegistryImpl());
 
 		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
@@ -48,7 +48,7 @@ public class FacetFactoryTest {
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void testBlankFacetConfiguration() throws Exception {
+	public void testEmptyFacetConfiguration() throws Exception {
 		FacetFactoryUtil.create(new SearchContext(), new FacetConfiguration());
 	}
 
