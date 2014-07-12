@@ -23,14 +23,12 @@ public class ModifiedFacetFactory implements FacetFactory {
 
 	@Override
 	public String getFacetClassName() {
-		return _CLASSNAME;
+		return ModifiedFacet.class.getName();
 	}
 
 	@Override
 	public Facet newInstance(SearchContext searchContext) {
 		return new ModifiedFacet(searchContext);
 	}
-
-	private String _CLASSNAME = ModifiedFacet.class.getName();
 
 }

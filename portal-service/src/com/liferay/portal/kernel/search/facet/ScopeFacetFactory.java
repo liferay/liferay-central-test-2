@@ -23,14 +23,12 @@ public class ScopeFacetFactory implements FacetFactory {
 
 	@Override
 	public String getFacetClassName() {
-		return _CLASSNAME;
+		return ScopeFacet.class.getName();
 	}
 
 	@Override
 	public Facet newInstance(SearchContext searchContext) {
 		return new ScopeFacet(searchContext);
 	}
-
-	private String _CLASSNAME = ScopeFacet.class.getName();
 
 }

@@ -23,14 +23,12 @@ public class AssetEntriesFacetFactory implements FacetFactory {
 
 	@Override
 	public String getFacetClassName() {
-		return _CLASSNAME;
+		return AssetEntriesFacet.class.getName();
 	}
 
 	@Override
 	public Facet newInstance(SearchContext searchContext) {
 		return new AssetEntriesFacet(searchContext);
 	}
-
-	private String _CLASSNAME = AssetEntriesFacet.class.getName();
 
 }

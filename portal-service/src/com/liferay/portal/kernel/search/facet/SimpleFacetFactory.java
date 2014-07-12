@@ -23,14 +23,12 @@ public class SimpleFacetFactory implements FacetFactory {
 
 	@Override
 	public String getFacetClassName() {
-		return _CLASSNAME;
+		return SimpleFacet.class.getName();
 	}
 
 	@Override
 	public Facet newInstance(SearchContext searchContext) {
 		return new SimpleFacet(searchContext);
 	}
-
-	private String _CLASSNAME = SimpleFacet.class.getName();
 
 }

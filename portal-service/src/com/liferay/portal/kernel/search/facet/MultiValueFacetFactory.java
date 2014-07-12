@@ -23,14 +23,12 @@ public class MultiValueFacetFactory implements FacetFactory {
 
 	@Override
 	public String getFacetClassName() {
-		return _CLASSNAME;
+		return MultiValueFacet.class.getName();
 	}
 
 	@Override
 	public Facet newInstance(SearchContext searchContext) {
 		return new MultiValueFacet(searchContext);
 	}
-
-	private String _CLASSNAME = MultiValueFacet.class.getName();
 
 }
