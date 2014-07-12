@@ -67,11 +67,9 @@ public class DDMFormFieldRendererRegistryImpl
 	public void register(DDMFormFieldRenderer ddmFormFieldRenderer) {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Map<String, Object> properties = new HashMap<String, Object>();
-
 		ServiceRegistration<DDMFormFieldRenderer> serviceRegistration =
 			registry.registerService(
-				DDMFormFieldRenderer.class, ddmFormFieldRenderer, properties);
+				DDMFormFieldRenderer.class, ddmFormFieldRenderer);
 
 		_serviceRegistrations.put(ddmFormFieldRenderer, serviceRegistration);
 	}
