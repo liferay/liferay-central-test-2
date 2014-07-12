@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
-	<info organisation="biz.aQute"
-		module="bnd"
-		revision="1.50.0"
+	<info organisation="com.github.rotty3000"
+		module="phidias"
+		revision="0.3.1"
 		status="release"
-		publication="20120907025338"
+		publication="20140709122022"
 	>
-		<license name="All files contained in this JAR are licensed under the Apache 2.0 license, unless noted differently in their source (see swing2swt)." url="http://www.opensource.org/licenses/apache2.0.php" />
-		<description homepage="http://www.aQute.biz/Code/Bnd">
-		A utility and plugin to wrap, build, or print bundles
+		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="https://github.com/rotty3000/phidias">
+		A small javax compiler adapter for OSGi environments.
 		</description>
 	</info>
 	<configurations>
@@ -24,8 +24,11 @@
 		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
 	</configurations>
 	<publications>
-		<artifact name="bnd" type="jar" ext="jar" conf="master"/>
-		<artifact name="bnd" type="source" ext="jar" conf="sources" m:classifier="sources"/>
-		<artifact name="bnd" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc"/>
+		<artifact name="phidias" type="jar" ext="jar" conf="master"/>
+		<artifact name="phidias" type="source" ext="jar" conf="sources" m:classifier="sources"/>
+		<artifact name="phidias" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc"/>
 	</publications>
+	<dependencies>
+		<dependency org="org.osgi" name="org.osgi.core" rev="5.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+	</dependencies>
 </ivy-module>
