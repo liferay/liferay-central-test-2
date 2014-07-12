@@ -44,8 +44,7 @@ public class FacetFactoryUtil {
 		if (facetFactory == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"FacetFactory not found for {className=" + className +
-						"}. Ignoring!");
+					"Unable to find facet factory for class " + className);
 			}
 
 			return null;
