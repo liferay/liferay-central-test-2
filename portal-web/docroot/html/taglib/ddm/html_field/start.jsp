@@ -30,14 +30,14 @@
 
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext = new DDMFormFieldRenderingContext();
 
+		ddmFormFieldRenderingContext.setField(field);
 		ddmFormFieldRenderingContext.setHttpServletRequest(request);
 		ddmFormFieldRenderingContext.setHttpServletResponse(response);
-		ddmFormFieldRenderingContext.setPortletNamespace(portletResponse.getNamespace());
-		ddmFormFieldRenderingContext.setNamespace(fieldsNamespace);
-		ddmFormFieldRenderingContext.setField(field);
-		ddmFormFieldRenderingContext.setMode(mode);
-		ddmFormFieldRenderingContext.setReadOnly(readOnly);
 		ddmFormFieldRenderingContext.setLocale(requestedLocale);
+		ddmFormFieldRenderingContext.setMode(mode);
+		ddmFormFieldRenderingContext.setNamespace(fieldsNamespace);
+		ddmFormFieldRenderingContext.setPortletNamespace(portletResponse.getNamespace());
+		ddmFormFieldRenderingContext.setReadOnly(readOnly);
 		%>
 
 		<%= ddmFormFieldRenderer.render(ddmFormField, ddmFormFieldRenderingContext) %>
