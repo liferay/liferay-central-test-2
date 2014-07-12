@@ -219,6 +219,7 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 			page.getNodeId(), true, parentTitle);
 	}
 
+	@Override
 	public long getDestinationContainerModelId(
 		long classPK, long destinationContainerModelId) {
 
