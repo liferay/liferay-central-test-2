@@ -188,7 +188,7 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 
 			ServiceTrackerMapFactory.createObjectServiceTrackerMap(
-				TrackedOne.class, "(&(target=*)(other=*))",
+				TrackedOne.class, "(&(other=*)(target=*))",
 				new ServiceReferenceMapper<String>() {
 
 					@Override
