@@ -35,7 +35,6 @@ import org.junit.runner.RunWith;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
-import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceRegistration;
 
 /**
@@ -45,7 +44,7 @@ import org.osgi.framework.ServiceRegistration;
 public class ObjectServiceTrackerMapTest {
 
 	@Before
-	public void setup() throws BundleException, InvalidSyntaxException {
+	public void setup() throws BundleException {
 		_bundle.start();
 
 		_bundleContext = _bundle.getBundleContext();
@@ -94,9 +93,7 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testGetServiceGetsReplacedAfterRemovalInverseOrder()
-		throws InterruptedException {
-
+	public void testGetServiceGetsReplacedAfterRemovalInverseOrder() {
 		ServiceTrackerMap<String, TrackedOne>
 			ServiceTrackerMap = _createDefaultMapServiceTracker();
 
