@@ -58,7 +58,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceAfterRemoval() {
 		ServiceTrackerMap<String, TrackedOne>
-			ServiceTrackerMap = _createDefaultMapServiceTracker();
+			ServiceTrackerMap = createDefaultMapServiceTracker();
 
 		ServiceRegistration<TrackedOne> sr = registerDefaultTrackedOne(
 			new TrackedOne());
@@ -73,7 +73,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceGetsReplacedAfterRemoval() {
 		ServiceTrackerMap<String, TrackedOne>
-			ServiceTrackerMap = _createDefaultMapServiceTracker();
+			ServiceTrackerMap = createDefaultMapServiceTracker();
 
 		TrackedOne TrackedOne1 = new TrackedOne();
 		ServiceRegistration<TrackedOne> sr1 = registerDefaultTrackedOne(
@@ -95,7 +95,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceGetsReplacedAfterRemovalInverseOrder() {
 		ServiceTrackerMap<String, TrackedOne>
-			ServiceTrackerMap = _createDefaultMapServiceTracker();
+			ServiceTrackerMap = createDefaultMapServiceTracker();
 
 		TrackedOne TrackedOne2 = new TrackedOne();
 
@@ -118,7 +118,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceIsNullAfterDeregistration() {
 		ServiceTrackerMap<String, TrackedOne> mapServiceTracker =
-			_createDefaultMapServiceTracker();
+			createDefaultMapServiceTracker();
 
 		ServiceRegistration<TrackedOne> sr1 = registerDefaultTrackedOne(
 			new TrackedOne());
@@ -219,7 +219,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceWithIncorrectKey() {
 		ServiceTrackerMap<String, TrackedOne>
-			ServiceTrackerMap = _createDefaultMapServiceTracker();
+			ServiceTrackerMap = createDefaultMapServiceTracker();
 
 		registerDefaultTrackedOne(new TrackedOne(), "anotherTarget");
 
@@ -229,7 +229,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceWithSimpleRegistration() {
 		ServiceTrackerMap<String, TrackedOne>
-			ServiceTrackerMap = _createDefaultMapServiceTracker();
+			ServiceTrackerMap = createDefaultMapServiceTracker();
 
 		registerDefaultTrackedOne(new TrackedOne());
 
@@ -272,8 +272,8 @@ public class ObjectServiceTrackerMapTest {
 			TrackedOne.class, TrackedOne, properties);
 	}
 
-	private ServiceTrackerMap<String, TrackedOne>
-		_createDefaultMapServiceTracker() {
+	protected ServiceTrackerMap<String, TrackedOne>
+		createDefaultMapServiceTracker() {
 
 		ServiceTrackerMap<String, TrackedOne>
 			ServiceTrackerMap =
