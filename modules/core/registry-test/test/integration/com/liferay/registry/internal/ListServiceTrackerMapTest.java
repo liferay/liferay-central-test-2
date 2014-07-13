@@ -97,7 +97,7 @@ public class ListServiceTrackerMapTest {
 
 		TrackedOne trackedOne2 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr2 = registerService(
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
 			trackedOne2, 2);
 
 		List<TrackedOne> services = serviceTrackerMap.getService("aTarget");
@@ -106,17 +106,19 @@ public class ListServiceTrackerMapTest {
 
 		Iterator<? extends TrackedOne> iterator = services.iterator();
 
-		sr2.unregister();
+		serviceRegistration2.unregister();
 
-		/* Deregistering a service should not affect an already existing
-		collection or iterator */
+		// Deregistering a service should not affect an already existing
+		// collection or iterator
+
 		Assert.assertEquals(trackedOne3, iterator.next());
 		Assert.assertEquals(trackedOne2, iterator.next());
 		Assert.assertEquals(trackedOne1, iterator.next());
 
 		services = serviceTrackerMap.getService("aTarget");
 
-		// From here on we should see the changes in services
+		// Getting the list of services should return a list with the affected
+		// changes
 
 		Assert.assertEquals(2, services.size());
 
