@@ -157,18 +157,17 @@ public class ListServiceTrackerMapTest {
 		registerService(new TrackedOne(), "anotherTarget");
 		registerService(new TrackedOne(), "anotherTarget");
 
-		List<TrackedOne> aTargetCollection = serviceTrackerMap.getService(
+		List<TrackedOne> aTargetList = serviceTrackerMap.getService(
 			"aTarget");
 
-		Assert.assertNotNull(aTargetCollection);
+		Assert.assertNotNull(aTargetList);
+		Assert.assertEquals(2, aTargetList.size());
 
-		List<TrackedOne> anotherTargetCollection = serviceTrackerMap.getService(
+		List<TrackedOne> anotherTargetList = serviceTrackerMap.getService(
 			"anotherTarget");
 
-		Assert.assertNotNull(anotherTargetCollection);
-
-		Assert.assertEquals(2, aTargetCollection.size());
-		Assert.assertEquals(3, anotherTargetCollection.size());
+		Assert.assertNotNull(anotherTargetList);
+		Assert.assertEquals(3, anotherTargetList.size());
 	}
 
 	@Test
