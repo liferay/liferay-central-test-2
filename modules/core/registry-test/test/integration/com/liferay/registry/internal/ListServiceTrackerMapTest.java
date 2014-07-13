@@ -204,7 +204,7 @@ public class ListServiceTrackerMapTest {
 	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne trackedOne, int ranking) {
 
-		return registerService(trackedOne, "aTarget", ranking);
+		return registerService(trackedOne, ranking, "aTarget");
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
@@ -219,7 +219,7 @@ public class ListServiceTrackerMapTest {
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne trackedOne, String target, int ranking) {
+		TrackedOne trackedOne, int ranking, String target) {
 
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
