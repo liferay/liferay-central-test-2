@@ -44,7 +44,7 @@ import org.osgi.framework.ServiceRegistration;
 public class ObjectServiceTrackerMapTest {
 
 	@Before
-	public void setup() throws BundleException {
+	public void setUp() throws BundleException {
 		_bundle.start();
 
 		_bundleContext = _bundle.getBundleContext();
