@@ -128,15 +128,15 @@ public class ListServiceTrackerMapTest {
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
 			createServiceTrackerMap();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(
+		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
 			new TrackedOne());
-		ServiceRegistration<TrackedOne> sr2 = registerService(
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
 			new TrackedOne());
 
 		Assert.assertNotNull(serviceTrackerMap.getService("aTarget"));
 
-		sr1.unregister();
-		sr2.unregister();
+		serviceRegistration1.unregister();
+		serviceRegistration2.unregister();
 
 		Assert.assertNull(serviceTrackerMap.getService("aTarget"));
 	}
