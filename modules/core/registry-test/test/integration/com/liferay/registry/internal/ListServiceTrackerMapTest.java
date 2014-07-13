@@ -59,17 +59,17 @@ public class ListServiceTrackerMapTest {
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
 			createServiceTrackerMap();
 
-		TrackedOne TrackedOne1 = new TrackedOne();
+		TrackedOne trackedOne1 = new TrackedOne();
 
-		registerService(TrackedOne1, 1);
+		registerService(trackedOne1, 1);
 
-		TrackedOne TrackedOne3 = new TrackedOne();
+		TrackedOne trackedOne3 = new TrackedOne();
 
-		registerService(TrackedOne3, 3);
+		registerService(trackedOne3, 3);
 
-		TrackedOne TrackedOne2 = new TrackedOne();
+		TrackedOne trackedOne2 = new TrackedOne();
 
-		registerService(TrackedOne2, 2);
+		registerService(trackedOne2, 2);
 
 		List<TrackedOne> services = serviceTrackerMap.getService("aTarget");
 
@@ -77,9 +77,9 @@ public class ListServiceTrackerMapTest {
 
 		Iterator<? extends TrackedOne> iterator = services.iterator();
 
-		Assert.assertEquals(TrackedOne3, iterator.next());
-		Assert.assertEquals(TrackedOne2, iterator.next());
-		Assert.assertEquals(TrackedOne1, iterator.next());
+		Assert.assertEquals(trackedOne3, iterator.next());
+		Assert.assertEquals(trackedOne2, iterator.next());
+		Assert.assertEquals(trackedOne1, iterator.next());
 	}
 
 	@Test
@@ -87,15 +87,18 @@ public class ListServiceTrackerMapTest {
 		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
 			createServiceTrackerMap();
 
-		TrackedOne TrackedOne1 = new TrackedOne();
-		registerService(TrackedOne1, 1);
+		TrackedOne trackedOne1 = new TrackedOne();
 
-		TrackedOne TrackedOne3 = new TrackedOne();
-		registerService(TrackedOne3, 3);
+		registerService(trackedOne1, 1);
 
-		TrackedOne TrackedOne2 = new TrackedOne();
+		TrackedOne trackedOne3 = new TrackedOne();
+
+		registerService(trackedOne3, 3);
+
+		TrackedOne trackedOne2 = new TrackedOne();
+
 		ServiceRegistration<TrackedOne> sr2 = registerService(
-			TrackedOne2, 2);
+			trackedOne2, 2);
 
 		List<TrackedOne> services = serviceTrackerMap.getService("aTarget");
 
@@ -107,9 +110,9 @@ public class ListServiceTrackerMapTest {
 
 		/* Deregistering a service should not affect an already existing
 		collection or iterator */
-		Assert.assertEquals(TrackedOne3, iterator.next());
-		Assert.assertEquals(TrackedOne2, iterator.next());
-		Assert.assertEquals(TrackedOne1, iterator.next());
+		Assert.assertEquals(trackedOne3, iterator.next());
+		Assert.assertEquals(trackedOne2, iterator.next());
+		Assert.assertEquals(trackedOne1, iterator.next());
 
 		services = serviceTrackerMap.getService("aTarget");
 
@@ -119,8 +122,8 @@ public class ListServiceTrackerMapTest {
 
 		iterator = services.iterator();
 
-		Assert.assertEquals(TrackedOne3, iterator.next());
-		Assert.assertEquals(TrackedOne1, iterator.next());
+		Assert.assertEquals(trackedOne3, iterator.next());
+		Assert.assertEquals(trackedOne1, iterator.next());
 	}
 
 	@Test
