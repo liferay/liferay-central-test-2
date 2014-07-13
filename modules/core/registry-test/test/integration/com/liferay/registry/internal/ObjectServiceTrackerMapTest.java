@@ -251,36 +251,36 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne TrackedOne) {
+		TrackedOne trackedOne) {
 
-		return registerService(TrackedOne, "aTarget");
+		return registerService(trackedOne, "aTarget");
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne TrackedOne, int ranking) {
+		TrackedOne trackedOne, int ranking) {
 
-		return registerService(TrackedOne, "aTarget", ranking);
+		return registerService(trackedOne, "aTarget", ranking);
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne TrackedOne, String target) {
+		TrackedOne trackedOne, String target) {
 
 		Hashtable<String, Object> properties = new Hashtable<String, Object>();
 		properties.put("target", target);
 
 		return _bundleContext.registerService(
-			TrackedOne.class, TrackedOne, properties);
+			TrackedOne.class, trackedOne, properties);
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne TrackedOne, String target, int ranking) {
+		TrackedOne trackedOne, String target, int ranking) {
 
 		Hashtable<String, Object> properties = new Hashtable<String, Object>();
 		properties.put("target", target);
 		properties.put("service.ranking", ranking);
 
 		return _bundleContext.registerService(
-			TrackedOne.class, TrackedOne, properties);
+			TrackedOne.class, trackedOne, properties);
 	}
 
 	private BundleContext _bundleContext;
