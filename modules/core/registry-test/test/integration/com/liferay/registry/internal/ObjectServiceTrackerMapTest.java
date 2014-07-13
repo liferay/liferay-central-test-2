@@ -107,12 +107,13 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne trackedOne1 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(trackedOne1, 2);
+		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
+			trackedOne1, 2);
 
 		Assert.assertEquals(
 			trackedOne1, serviceTrackerMap.getService("aTarget"));
 
-		sr1.unregister();
+		serviceRegistration1.unregister();
 
 		Assert.assertEquals(
 			trackedOne2, serviceTrackerMap.getService("aTarget"));
@@ -123,15 +124,18 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			createServiceTrackerMap();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(new TrackedOne());
-		ServiceRegistration<TrackedOne> sr2 = registerService(new TrackedOne());
-		ServiceRegistration<TrackedOne> sr3 = registerService(new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
+			new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
+			new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration3 = registerService(
+			new TrackedOne());
 
 		Assert.assertNotNull(serviceTrackerMap.getService("aTarget"));
 
-		sr1.unregister();
-		sr2.unregister();
-		sr3.unregister();
+		serviceRegistration1.unregister();
+		serviceRegistration2.unregister();
+		serviceRegistration3.unregister();
 
 		Assert.assertNull(serviceTrackerMap.getService("aTarget"));
 	}
@@ -158,20 +162,21 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne trackedOne1 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(trackedOne1);
+		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
+			trackedOne1);
 
 		TrackedOne trackedOne2 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr2 = registerService(trackedOne2);
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
+			trackedOne2);
 
 		Assert.assertEquals(
 			trackedOne2, serviceTrackerMap.getService("aTarget"));
 
-		sr1.unregister();
-		sr2.unregister();
+		serviceRegistration1.unregister();
+		serviceRegistration2.unregister();
 
 		registerService(trackedOne2);
-
 		registerService(trackedOne1);
 
 		Assert.assertEquals(
