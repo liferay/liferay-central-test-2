@@ -239,6 +239,17 @@ public class ObjectServiceTrackerMapTest {
 	@ArquillianResource
 	public Bundle _bundle;
 
+	protected ServiceTrackerMap<String, TrackedOne> createServiceTrackerMap() {
+		ServiceTrackerMap<String, TrackedOne>
+			serviceTrackerMap =
+				ServiceTrackerMapFactory.createObjectServiceTrackerMap(
+					TrackedOne.class, "target");
+
+		serviceTrackerMap.open();
+
+		return serviceTrackerMap;
+	}
+
 	protected ServiceRegistration<TrackedOne> registerDefaultTrackedOne(
 		TrackedOne TrackedOne) {
 
@@ -270,17 +281,6 @@ public class ObjectServiceTrackerMapTest {
 
 		return _bundleContext.registerService(
 			TrackedOne.class, TrackedOne, properties);
-	}
-
-	protected ServiceTrackerMap<String, TrackedOne> createServiceTrackerMap() {
-		ServiceTrackerMap<String, TrackedOne>
-			serviceTrackerMap =
-				ServiceTrackerMapFactory.createObjectServiceTrackerMap(
-					TrackedOne.class, "target");
-
-		serviceTrackerMap.open();
-
-		return serviceTrackerMap;
 	}
 
 	private BundleContext _bundleContext;
