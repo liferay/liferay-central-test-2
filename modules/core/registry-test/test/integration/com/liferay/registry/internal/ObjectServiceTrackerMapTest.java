@@ -60,7 +60,7 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne>
 			ServiceTrackerMap = createServiceTrackerMap();
 
-		ServiceRegistration<TrackedOne> sr = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr = registerService(
 			new TrackedOne());
 
 		Assert.assertNotNull(ServiceTrackerMap.getService("aTarget"));
@@ -76,12 +76,12 @@ public class ObjectServiceTrackerMapTest {
 			ServiceTrackerMap = createServiceTrackerMap();
 
 		TrackedOne TrackedOne1 = new TrackedOne();
-		ServiceRegistration<TrackedOne> sr1 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr1 = registerService(
 			TrackedOne1, 2);
 
 		TrackedOne TrackedOne2 = new TrackedOne();
 
-		registerDefaultTrackedOne(TrackedOne2, 1);
+		registerService(TrackedOne2, 1);
 
 		Assert.assertEquals(
 			TrackedOne1, ServiceTrackerMap.getService("aTarget"));
@@ -99,11 +99,11 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne TrackedOne2 = new TrackedOne();
 
-		registerDefaultTrackedOne(TrackedOne2, 1);
+		registerService(TrackedOne2, 1);
 
 		TrackedOne TrackedOne1 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr1 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr1 = registerService(
 			TrackedOne1, 2);
 
 		Assert.assertEquals(
@@ -120,11 +120,11 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne> mapServiceTracker =
 			createServiceTrackerMap();
 
-		ServiceRegistration<TrackedOne> sr1 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr1 = registerService(
 			new TrackedOne());
-		ServiceRegistration<TrackedOne> sr2 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr2 = registerService(
 			new TrackedOne());
-		ServiceRegistration<TrackedOne> sr3 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr3 = registerService(
 			new TrackedOne());
 
 		Assert.assertNotNull(mapServiceTracker.getService("aTarget"));
@@ -158,12 +158,12 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne TrackedOne1 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr1 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr1 = registerService(
 			TrackedOne1);
 
 		TrackedOne TrackedOne2 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr2 = registerDefaultTrackedOne(
+		ServiceRegistration<TrackedOne> sr2 = registerService(
 			TrackedOne2);
 
 		Assert.assertEquals(
@@ -172,9 +172,9 @@ public class ObjectServiceTrackerMapTest {
 		sr1.unregister();
 		sr2.unregister();
 
-		registerDefaultTrackedOne(TrackedOne2);
+		registerService(TrackedOne2);
 
-		registerDefaultTrackedOne(TrackedOne1);
+		registerService(TrackedOne1);
 
 		Assert.assertEquals(
 			TrackedOne1, mapServiceTracker.getService("aTarget"));
@@ -221,7 +221,7 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne>
 			ServiceTrackerMap = createServiceTrackerMap();
 
-		registerDefaultTrackedOne(new TrackedOne(), "anotherTarget");
+		registerService(new TrackedOne(), "anotherTarget");
 
 		Assert.assertNull(ServiceTrackerMap.getService("aTarget"));
 	}
@@ -231,7 +231,7 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne>
 			ServiceTrackerMap = createServiceTrackerMap();
 
-		registerDefaultTrackedOne(new TrackedOne());
+		registerService(new TrackedOne());
 
 		Assert.assertNotNull(ServiceTrackerMap.getService("aTarget"));
 	}
@@ -250,19 +250,19 @@ public class ObjectServiceTrackerMapTest {
 		return serviceTrackerMap;
 	}
 
-	protected ServiceRegistration<TrackedOne> registerDefaultTrackedOne(
+	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne TrackedOne) {
 
-		return registerDefaultTrackedOne(TrackedOne, "aTarget");
+		return registerService(TrackedOne, "aTarget");
 	}
 
-	protected ServiceRegistration<TrackedOne> registerDefaultTrackedOne(
+	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne TrackedOne, int ranking) {
 
-		return registerDefaultTrackedOne(TrackedOne, "aTarget", ranking);
+		return registerService(TrackedOne, "aTarget", ranking);
 	}
 
-	protected ServiceRegistration<TrackedOne> registerDefaultTrackedOne(
+	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne TrackedOne, String target) {
 
 		Hashtable<String, Object> properties = new Hashtable<String, Object>();
@@ -272,7 +272,7 @@ public class ObjectServiceTrackerMapTest {
 			TrackedOne.class, TrackedOne, properties);
 	}
 
-	protected ServiceRegistration<TrackedOne> registerDefaultTrackedOne(
+	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne TrackedOne, String target, int ranking) {
 
 		Hashtable<String, Object> properties = new Hashtable<String, Object>();
