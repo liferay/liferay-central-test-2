@@ -92,7 +92,7 @@ public class ObjectServiceTrackerMapTest {
 
 		Assert.assertEquals(
 			trackedOne2, serviceTrackerMap.getService("aTarget"));
-			
+
 		serviceRegistration2.unregister();
 	}
 
@@ -107,8 +107,7 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne trackedOne1 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(
-			trackedOne1, 2);
+		ServiceRegistration<TrackedOne> sr1 = registerService(trackedOne1, 2);
 
 		Assert.assertEquals(
 			trackedOne1, serviceTrackerMap.getService("aTarget"));
@@ -124,12 +123,9 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			createServiceTrackerMap();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(
-			new TrackedOne());
-		ServiceRegistration<TrackedOne> sr2 = registerService(
-			new TrackedOne());
-		ServiceRegistration<TrackedOne> sr3 = registerService(
-			new TrackedOne());
+		ServiceRegistration<TrackedOne> sr1 = registerService(new TrackedOne());
+		ServiceRegistration<TrackedOne> sr2 = registerService(new TrackedOne());
+		ServiceRegistration<TrackedOne> sr3 = registerService(new TrackedOne());
 
 		Assert.assertNotNull(serviceTrackerMap.getService("aTarget"));
 
@@ -162,13 +158,11 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne trackedOne1 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(
-			trackedOne1);
+		ServiceRegistration<TrackedOne> sr1 = registerService(trackedOne1);
 
 		TrackedOne trackedOne2 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr2 = registerService(
-			trackedOne2);
+		ServiceRegistration<TrackedOne> sr2 = registerService(trackedOne2);
 
 		Assert.assertEquals(
 			trackedOne2, serviceTrackerMap.getService("aTarget"));
@@ -265,10 +259,11 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne trackedOne, String target) {
+		TrackedOne trackedOne, int ranking, String target) {
 
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
+		properties.put("service.ranking", ranking);
 		properties.put("target", target);
 
 		return _bundleContext.registerService(
@@ -276,11 +271,10 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne trackedOne, int ranking, String target) {
+		TrackedOne trackedOne, String target) {
 
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
-		properties.put("service.ranking", ranking);
 		properties.put("target", target);
 
 		return _bundleContext.registerService(

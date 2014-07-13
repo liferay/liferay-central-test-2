@@ -157,8 +157,7 @@ public class ListServiceTrackerMapTest {
 		registerService(new TrackedOne(), "anotherTarget");
 		registerService(new TrackedOne(), "anotherTarget");
 
-		List<TrackedOne> aTargetList = serviceTrackerMap.getService(
-			"aTarget");
+		List<TrackedOne> aTargetList = serviceTrackerMap.getService("aTarget");
 
 		Assert.assertNotNull(aTargetList);
 		Assert.assertEquals(2, aTargetList.size());
@@ -208,10 +207,11 @@ public class ListServiceTrackerMapTest {
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne trackedOne, String target) {
+		TrackedOne trackedOne, int ranking, String target) {
 
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
+		properties.put("service.ranking", ranking);
 		properties.put("target", target);
 
 		return _bundleContext.registerService(
@@ -219,11 +219,10 @@ public class ListServiceTrackerMapTest {
 	}
 
 	protected ServiceRegistration<TrackedOne> registerService(
-		TrackedOne trackedOne, int ranking, String target) {
+		TrackedOne trackedOne, String target) {
 
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
-		properties.put("service.ranking", ranking);
 		properties.put("target", target);
 
 		return _bundleContext.registerService(
