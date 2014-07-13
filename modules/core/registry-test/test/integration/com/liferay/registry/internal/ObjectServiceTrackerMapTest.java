@@ -199,10 +199,9 @@ public class ObjectServiceTrackerMapTest {
 						keys.emit(
 							serviceReference.getProperty("other") + " - " +
 								serviceReference.getProperty("target"));
-
 					}
-				}
-			);
+
+				});
 
 		serviceTrackerMap.open();
 
