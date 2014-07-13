@@ -76,12 +76,14 @@ public class ObjectServiceTrackerMapTest {
 			ServiceTrackerMap = createServiceTrackerMap();
 
 		TrackedOne TrackedOne1 = new TrackedOne();
+
 		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
 			TrackedOne1, 2);
 
 		TrackedOne TrackedOne2 = new TrackedOne();
 
-		registerService(TrackedOne2, 1);
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
+			TrackedOne2, 1);
 
 		Assert.assertEquals(
 			TrackedOne1, ServiceTrackerMap.getService("aTarget"));
@@ -90,6 +92,8 @@ public class ObjectServiceTrackerMapTest {
 
 		Assert.assertEquals(
 			TrackedOne2, ServiceTrackerMap.getService("aTarget"));
+			
+		serviceRegistration2.unregister();
 	}
 
 	@Test
