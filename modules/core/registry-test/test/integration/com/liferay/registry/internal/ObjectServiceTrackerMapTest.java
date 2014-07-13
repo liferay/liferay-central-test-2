@@ -265,7 +265,8 @@ public class ObjectServiceTrackerMapTest {
 	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne trackedOne, String target) {
 
-		Hashtable<String, Object> properties = new Hashtable<String, Object>();
+		Dictionary<String, Object> properties = new Hashtable<String, Object>();
+
 		properties.put("target", target);
 
 		return _bundleContext.registerService(
@@ -275,7 +276,8 @@ public class ObjectServiceTrackerMapTest {
 	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne trackedOne, String target, int ranking) {
 
-		Hashtable<String, Object> properties = new Hashtable<String, Object>();
+		Dictionary<String, Object> properties = new Hashtable<String, Object>();
+
 		properties.put("target", target);
 		properties.put("service.ranking", ranking);
 
