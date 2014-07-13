@@ -117,7 +117,7 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testGetServiceIsNullAfterDeregistration() {
-		ServiceTrackerMap<String, TrackedOne> mapServiceTracker =
+		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			createServiceTrackerMap();
 
 		ServiceRegistration<TrackedOne> sr1 = registerService(
@@ -127,18 +127,18 @@ public class ObjectServiceTrackerMapTest {
 		ServiceRegistration<TrackedOne> sr3 = registerService(
 			new TrackedOne());
 
-		Assert.assertNotNull(mapServiceTracker.getService("aTarget"));
+		Assert.assertNotNull(serviceTrackerMap.getService("aTarget"));
 
 		sr1.unregister();
 		sr2.unregister();
 		sr3.unregister();
 
-		Assert.assertNull(mapServiceTracker.getService("aTarget"));
+		Assert.assertNull(serviceTrackerMap.getService("aTarget"));
 	}
 
 	@Test
 	public void testGetServiceWithCustomComparator() {
-		ServiceTrackerMap<String, TrackedOne> mapServiceTracker =
+		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			ServiceTrackerMapFactory.createObjectServiceTrackerMap(
 				TrackedOne.class, "(target=*)",
 				new ServiceTrackerMapFactory.PropertyServiceReferenceMapper<String>(
@@ -154,7 +154,7 @@ public class ObjectServiceTrackerMapTest {
 				}
 		);
 
-		mapServiceTracker.open();
+		serviceTrackerMap.open();
 
 		TrackedOne TrackedOne1 = new TrackedOne();
 
@@ -167,7 +167,7 @@ public class ObjectServiceTrackerMapTest {
 			TrackedOne2);
 
 		Assert.assertEquals(
-			TrackedOne2, mapServiceTracker.getService("aTarget"));
+			TrackedOne2, serviceTrackerMap.getService("aTarget"));
 
 		sr1.unregister();
 		sr2.unregister();
@@ -177,7 +177,7 @@ public class ObjectServiceTrackerMapTest {
 		registerService(TrackedOne1);
 
 		Assert.assertEquals(
-			TrackedOne1, mapServiceTracker.getService("aTarget"));
+			TrackedOne1, serviceTrackerMap.getService("aTarget"));
 	}
 
 	@Test
