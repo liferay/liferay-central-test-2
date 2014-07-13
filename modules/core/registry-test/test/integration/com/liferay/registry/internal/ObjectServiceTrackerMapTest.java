@@ -145,18 +145,19 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			ServiceTrackerMapFactory.createObjectServiceTrackerMap(
 				TrackedOne.class, "(target=*)",
-				new ServiceTrackerMapFactory.PropertyServiceReferenceMapper<String>(
-					"target"),
+				new ServiceTrackerMapFactory.
+					PropertyServiceReferenceMapper<String>("target"),
 				new Comparator<ServiceReference<TrackedOne>>() {
+
 					@Override
 					public int compare(
-						ServiceReference<TrackedOne> o1,
-						ServiceReference<TrackedOne> o2) {
+						ServiceReference<TrackedOne> serviceReference1,
+						ServiceReference<TrackedOne> serviceReference2) {
 
 						return -1;
 					}
-				}
-		);
+
+				});
 
 		serviceTrackerMap.open();
 
