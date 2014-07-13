@@ -197,9 +197,9 @@ public class ObjectServiceTrackerMapTest {
 						Emitter<String> keys) {
 
 						keys.emit(
-							serviceReference.getProperty("target") + " - " +
-								serviceReference.getProperty("other")
-						);
+							serviceReference.getProperty("other") + " - " +
+								serviceReference.getProperty("target"));
+
 					}
 				}
 			);
@@ -215,7 +215,7 @@ public class ObjectServiceTrackerMapTest {
 			TrackedOne.class, new TrackedOne(), properties);
 
 		Assert.assertNotNull(
-			serviceTrackerMap.getService("aTarget - aProperty"));
+			serviceTrackerMap.getService("aProperty - aTarget"));
 	}
 
 	@Test
