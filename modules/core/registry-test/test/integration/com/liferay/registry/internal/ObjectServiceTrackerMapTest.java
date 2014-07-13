@@ -99,8 +99,7 @@ public class ObjectServiceTrackerMapTest {
 
 		TrackedOne TrackedOne2 = new TrackedOne();
 
-		ServiceRegistration<TrackedOne> sr2 = registerDefaultTrackedOne(
-			TrackedOne2, 1);
+		registerDefaultTrackedOne(TrackedOne2, 1);
 
 		TrackedOne TrackedOne1 = new TrackedOne();
 
