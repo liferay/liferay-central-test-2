@@ -219,8 +219,8 @@ public class ListServiceTrackerMapTest {
 
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
-		properties.put("target", target);
 		properties.put("service.ranking", ranking);
+		properties.put("target", target);
 
 		return _bundleContext.registerService(
 			TrackedOne.class, trackedOne, properties);
