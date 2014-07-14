@@ -100,10 +100,10 @@ public class JournalArticleIndexVersionsTest {
 	}
 
 	protected long searchCount() throws Exception {
+		Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
+
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
 
 		searchContext.setGroupIds(new long[] {_group.getGroupId()});
 
@@ -113,10 +113,10 @@ public class JournalArticleIndexVersionsTest {
 	}
 
 	protected List<JournalArticle> search() throws Exception {
+		Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
+
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
 
 		searchContext.setGroupIds(new long[] {_group.getGroupId()});
 
