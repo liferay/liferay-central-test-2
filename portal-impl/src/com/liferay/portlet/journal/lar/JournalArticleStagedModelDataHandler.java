@@ -210,10 +210,10 @@ public class JournalArticleStagedModelDataHandler
 	public boolean validateReference(
 		PortletDataContext portletDataContext, Element referenceElement) {
 
+		validateMissingGroupReference(portletDataContext, referenceElement);
+
 		String articleResourceUuid = referenceElement.attributeValue(
 			"article-resource-uuid");
-
-		validateMissingGroupReference(portletDataContext, referenceElement);
 
 		Map<Long, Long> groupIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
