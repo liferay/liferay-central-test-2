@@ -110,7 +110,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 	@Override
 	public T fetchExistingStagedModel(String uuid, long groupId) {
 
-		// Try to fetch it from the actual group
+		// Try to fetch the existing staged model from the actual group
 
 		T existingStagedModel = doFetchExistingStagedModel(uuid, groupId);
 
@@ -120,7 +120,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 
 		try {
 
-			// Try to fetch it from the parent sites
+			// Try to fetch the existing staged model from the parent sites
 
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
