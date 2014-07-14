@@ -15,7 +15,6 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.BaseSearchEngine;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
@@ -30,9 +29,7 @@ import java.io.FileOutputStream;
 public class LuceneSearchEngine extends BaseSearchEngine {
 
 	@Override
-	public synchronized String backup(long companyId, String backupName)
-		throws SearchException {
-
+	public synchronized String backup(long companyId, String backupName) {
 		FileOutputStream fileOutputStream = null;
 
 		try {
@@ -60,9 +57,7 @@ public class LuceneSearchEngine extends BaseSearchEngine {
 	}
 
 	@Override
-	public synchronized void removeBackup(long companyId, String backupName)
-		throws SearchException {
-
+	public synchronized void removeBackup(long companyId, String backupName) {
 		String fileName = getFileName(backupName);
 
 		FileUtil.delete(fileName);
@@ -78,9 +73,7 @@ public class LuceneSearchEngine extends BaseSearchEngine {
 	}
 
 	@Override
-	public synchronized void restore(long companyId, String backupName)
-		throws SearchException {
-
+	public synchronized void restore(long companyId, String backupName) {
 		FileInputStream fileInputStream = null;
 
 		try {
