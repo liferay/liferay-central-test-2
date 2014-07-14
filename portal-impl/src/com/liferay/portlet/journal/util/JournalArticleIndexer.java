@@ -414,7 +414,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 		document.addKeyword("ddmStructureKey", article.getStructureId());
 		document.addKeyword("ddmTemplateKey", article.getTemplateId());
 		document.addDate("displayDate", article.getDisplayDate());
-		document.addKeyword("head", getHead(article));
+		document.addKeyword("head", isHead(article));
 
 		addDDMStructureAttributes(document, article);
 
@@ -645,7 +645,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 		return content;
 	}
 
-	protected boolean getHead(JournalArticle article) {
+	protected boolean isHead(JournalArticle article) {
 		if (!PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
 			return true;
 		}
@@ -654,8 +654,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 			JournalArticleLocalServiceUtil.fetchLatestArticle(
 				article.getResourcePrimKey(),
 				new int[] {
-					WorkflowConstants.STATUS_IN_TRASH,
-					WorkflowConstants.STATUS_APPROVED});
+					WorkflowConstants.STATUS_APPROVED,
+					WorkflowConstants.STATUS_IN_TRASH});
 
 		if ((latestArticle != null) && !latestArticle.isIndexable()) {
 			return false;
