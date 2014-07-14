@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-long groupId = ParamUtil.getLong(request, "groupId");
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
 
+long groupId = ParamUtil.getLong(request, "groupId");
 String sitesListView = ParamUtil.get(request, "sitesListView", SiteConstants.LIST_VIEW_TREE);
 
 PortletURL portletURL = renderResponse.createRenderURL();
