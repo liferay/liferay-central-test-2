@@ -5016,107 +5016,81 @@ public class ServiceBuilder {
 	}
 
 	private void _removeActionableDynamicQuery(Entity entity) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/persistence/" +
 				entity.getName() + "ActionableDynamicQuery.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeExportActionableDynamicQuery(Entity entity) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/persistence/" +
 				entity.getName() + "ExportActionableDynamicQuery.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeFinder(Entity entity) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/persistence/" + entity.getName() +
 				"Finder.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeFinderUtil(Entity entity) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/persistence/" + entity.getName() +
 				"FinderUtil.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeService(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "Service.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceBaseImpl(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_outputPath + "/service/base/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceBaseImpl.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceClp(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceClp.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceClpInvoker(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_outputPath + "/service/base/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceClpInvoker.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceHttp(Entity entity) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceHttp.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceImpl(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_outputPath + "/service/impl/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceImpl.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceSoap(Entity entity) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceSoap.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceUtil(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceUtil.java");
-
-		ejbFile.delete();
 	}
 
 	private void _removeServiceWrapper(Entity entity, int sessionType) {
-		File ejbFile = new File(
+		FileUtil.delete(
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceWrapper.java");
-
-		ejbFile.delete();
 	}
 
 	private void _resolveEntity(Entity entity) throws IOException {
