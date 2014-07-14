@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.service;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -24,7 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.test.DeleteAfterTestRun;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.PropsValues;
@@ -61,11 +60,9 @@ public class JournalArticleIndexVersionsTest {
 	}
 
 	@After
-	public void tearDown() throws PortalException {
+	public void tearDown() {
 		PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS = GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS));
-
-		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 
 	@Test
@@ -128,6 +125,7 @@ public class JournalArticleIndexVersionsTest {
 		return JournalUtil.getArticles(results);
 	}
 
-	Group _group;
+	@DeleteAfterTestRun
+	private Group _group;
 
 }
