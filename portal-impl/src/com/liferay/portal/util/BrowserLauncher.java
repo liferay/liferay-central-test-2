@@ -107,7 +107,7 @@ public class BrowserLauncher implements Runnable {
 	}
 
 	private static final String[] _BROWSERS = {
-		"xdg-open", "firefox", "mozilla", "konqueror", "opera"
+		"firefox", "mozilla", "konqueror", "opera", "xdg-open"
 	};
 
 }
