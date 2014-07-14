@@ -645,6 +645,25 @@ public class JournalArticleIndexer extends BaseIndexer {
 		return content;
 	}
 
+	protected String[] getLanguageIds(
+		String defaultLanguageId,
+		com.liferay.portal.kernel.xml.Document document) {
+
+		String[] languageIds = LocalizationUtil.getAvailableLanguageIds(
+			document);
+
+		if (languageIds.length == 0) {
+			languageIds = new String[] {defaultLanguageId};
+		}
+
+		return languageIds;
+	}
+
+	@Override
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
 	protected boolean isHead(JournalArticle article) {
 		if (!PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
 			return true;
@@ -667,25 +686,6 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		return false;
-	}
-
-	protected String[] getLanguageIds(
-		String defaultLanguageId,
-		com.liferay.portal.kernel.xml.Document document) {
-
-		String[] languageIds = LocalizationUtil.getAvailableLanguageIds(
-			document);
-
-		if (languageIds.length == 0) {
-			languageIds = new String[] {defaultLanguageId};
-		}
-
-		return languageIds;
-	}
-
-	@Override
-	protected String getPortletId(SearchContext searchContext) {
-		return PORTLET_ID;
 	}
 
 	protected void reindexArticles(long companyId) throws PortalException {
