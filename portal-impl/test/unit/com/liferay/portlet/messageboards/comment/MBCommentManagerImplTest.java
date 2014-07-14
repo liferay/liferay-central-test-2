@@ -149,13 +149,13 @@ public class MBCommentManagerImplTest extends Mockito {
 	public void testGetCommentsCount() throws Exception {
 		long classPK = RandomTestUtil.randomLong();
 		long classNameId = RandomTestUtil.randomLong();
-		int expectedCommentsCount = RandomTestUtil.randomInt();
+		int commentsCount = RandomTestUtil.randomInt();
 
 		Mockito.when(
 			_mbMessageLocalService.getDiscussionMessagesCount(
 				classNameId, classPK, WorkflowConstants.STATUS_APPROVED)
 		).thenReturn(
-			expectedCommentsCount
+			commentsCount
 		);
 
 		Mockito.when(
@@ -165,7 +165,7 @@ public class MBCommentManagerImplTest extends Mockito {
 		);
 
 		Assert.assertEquals(
-			expectedCommentsCount,
+			commentsCount,
 			_mbCommentManagerImpl.getCommentsCount(_CLASS_NAME, classPK));
 	}
 
