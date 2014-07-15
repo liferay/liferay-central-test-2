@@ -96,8 +96,7 @@ public class EhcacheConfigurationUtil {
 				_clearEhcacheReplicatorConfigurations(
 					configuration, cacheConfigurations);
 
-			for (
-				Map.Entry<CacheConfiguration, String> entry :
+			for (Map.Entry<CacheConfiguration, String> entry :
 					cacheEventListenerProperties.entrySet()) {
 
 				_enableClusterLinkReplication(entry.getKey(), entry.getValue());
@@ -214,10 +213,12 @@ public class EhcacheConfigurationUtil {
 			cacheConfigurations.add(defaultCacheConfiguration);
 		}
 
-		Map<String, CacheConfiguration> configurations =
+		Map<String, CacheConfiguration> cacheConfigurationsMap =
 			configuration.getCacheConfigurations();
 
-		for (CacheConfiguration cacheConfiguration : configurations.values()) {
+		for (CacheConfiguration cacheConfiguration :
+				cacheConfigurationsMap.values()) {
+
 			if (cacheConfiguration != null) {
 				cacheConfigurations.add(cacheConfiguration);
 			}
