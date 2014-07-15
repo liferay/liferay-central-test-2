@@ -255,22 +255,24 @@ public class JSONWebServiceActionsManagerImpl
 		Method actionMethod, String path, String method) {
 
 		try {
-		JSONWebServiceActionConfig jsonWebServiceActionConfig =
-			new JSONWebServiceActionConfig(
-				contextName, contextPath, actionClass, actionMethod, path,
-				method);
+			JSONWebServiceActionConfig jsonWebServiceActionConfig =
+				new JSONWebServiceActionConfig(
+					contextName, contextPath, actionClass, actionMethod, path,
+					method);
 
-		if (_jsonWebServiceActionConfigs.contains(jsonWebServiceActionConfig)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"A JSON web service action is already registered at " +
-						path);
+			if (_jsonWebServiceActionConfigs.contains(
+					jsonWebServiceActionConfig)) {
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"A JSON web service action is already registered at " +
+							path);
+				}
+
+				return;
 			}
 
-			return;
-		}
-
-		_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
+			_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
 		}
 		catch (Exception e) {
 			StringBundler sb = new StringBundler(15);
@@ -301,23 +303,24 @@ public class JSONWebServiceActionsManagerImpl
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
 		try {
-		JSONWebServiceActionConfig jsonWebServiceActionConfig =
-			new JSONWebServiceActionConfig(
-				contextName, contextPath, actionObject, actionClass,
-				actionMethod, path, method);
+			JSONWebServiceActionConfig jsonWebServiceActionConfig =
+				new JSONWebServiceActionConfig(
+					contextName, contextPath, actionObject, actionClass,
+					actionMethod, path, method);
 
-		if (_jsonWebServiceActionConfigs.contains(jsonWebServiceActionConfig)) {
+			if (_jsonWebServiceActionConfigs.contains(
+					jsonWebServiceActionConfig)) {
 
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"A JSON web service action is already registered at " +
-						path);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"A JSON web service action is already registered at " +
+							path);
+				}
+
+				return;
 			}
 
-			return;
-		}
-
-		_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
+			_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
 		}
 		catch (Exception e) {
 			StringBundler sb = new StringBundler(17);
