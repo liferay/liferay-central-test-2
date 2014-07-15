@@ -37,8 +37,8 @@ public class JSONWebServiceActionConfig
 		String contextName, String contextPath, Class<?> actionClass,
 		Method actionMethod, String path, String method) {
 
-		_contextName = GetterUtil.getString(contextName, StringPool.BLANK);
-		_contextPath = GetterUtil.getString(contextPath, StringPool.BLANK);
+		_contextName = GetterUtil.getString(contextName);
+		_contextPath = GetterUtil.getString(contextPath);
 		_actionClass = actionClass;
 		_actionMethod = actionMethod;
 		_path = path;
@@ -50,7 +50,7 @@ public class JSONWebServiceActionConfig
 			_deprecated = true;
 		}
 
-		if (!_contextName.equals(StringPool.BLANK)) {
+		if (Validator.isNotNull(_contextName)) {
 			path = _path.substring(1);
 
 			_path = StringPool.SLASH.concat(_contextName).concat(

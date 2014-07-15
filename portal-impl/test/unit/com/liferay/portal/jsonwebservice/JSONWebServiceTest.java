@@ -58,7 +58,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 
 		registerActionClass(CamelFooService.class);
 		registerActionClass(FooService.class);
-		registerActionClass(FooService.class, "somectx");
+		registerActionClass(FooService.class, "test-context");
 	}
 
 	@Before
@@ -315,7 +315,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 		MockHttpServletRequest mockHttpServletRequest = createHttpRequest(
 			"/foo/method-one/id/123");
 
-		setServletContext(mockHttpServletRequest, "somectx");
+		setServletContext(mockHttpServletRequest, "test-context");
 
 		try {
 			lookupJSONWebServiceAction(mockHttpServletRequest);
@@ -328,7 +328,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 		mockHttpServletRequest = createHttpRequest(
 			"/foo/method-one/id/123/name/Name");
 
-		setServletContext(mockHttpServletRequest, "somectx");
+		setServletContext(mockHttpServletRequest, "test-context");
 
 		JSONWebServiceAction jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
@@ -338,7 +338,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 		mockHttpServletRequest = createHttpRequest(
 			"/foo/method-one/id/123/name-id/321");
 
-		setServletContext(mockHttpServletRequest, "somectx");
+		setServletContext(mockHttpServletRequest, "test-context");
 
 		jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
@@ -348,7 +348,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 		mockHttpServletRequest = createHttpRequest(
 			"/foo/method-one.3/id/123/name-id/321");
 
-		setServletContext(mockHttpServletRequest, "somectx");
+		setServletContext(mockHttpServletRequest, "test-context");
 
 		jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
@@ -358,7 +358,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 		mockHttpServletRequest = createHttpRequest(
 			"/foo/method-one/id/123/name/Name/name-id/321");
 
-		setServletContext(mockHttpServletRequest, "somectx");
+		setServletContext(mockHttpServletRequest, "test-context");
 
 		jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
@@ -367,7 +367,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 
 		mockHttpServletRequest = createHttpRequest("/foo/method-one.2/id/123");
 
-		setServletContext(mockHttpServletRequest, "somectx");
+		setServletContext(mockHttpServletRequest, "test-context");
 
 		jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
