@@ -374,7 +374,10 @@ public class EhcacheConfigurationUtilTest {
 				String fullyQualifiedClassPath =
 					factoryConfiguration. getFullyQualifiedClassPath();
 
-				if (fullyQualifiedClassPath.equals(_CLUSTER_LINK_REPLICATOR)) {
+				if (fullyQualifiedClassPath.equals(
+						EhcachePortalCacheClusterReplicatorFactory.class.
+							getName())) {
+
 					Assert.assertEquals(
 						_CACHE_EVENT_LISTENER_PROPERTIES,
 						factoryConfiguration.getProperties());
@@ -546,9 +549,6 @@ public class EhcacheConfigurationUtilTest {
 
 	private static final String _CACHE_EVENT_LISTENER_PROPERTIES =
 		"testKey=testValue";
-
-	private static final String _CLUSTER_LINK_REPLICATOR =
-		EhcachePortalCacheClusterReplicatorFactory.class.getName();
 
 	private Configuration _configuration;
 	private URL _configurationURL;
