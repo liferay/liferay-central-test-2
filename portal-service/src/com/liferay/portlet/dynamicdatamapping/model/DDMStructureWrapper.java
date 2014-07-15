@@ -690,8 +690,7 @@ public class DDMStructureWrapper implements DDMStructure,
 	}
 
 	@Override
-	public boolean isFieldPrivate(java.lang.String fieldName)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public boolean isFieldPrivate(java.lang.String fieldName) {
 		return _ddmStructure.isFieldPrivate(fieldName);
 	}
 

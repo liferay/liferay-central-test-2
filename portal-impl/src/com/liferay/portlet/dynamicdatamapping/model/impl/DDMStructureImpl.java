@@ -352,7 +352,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public boolean isFieldPrivate(String fieldName) throws PortalException {
+	public boolean isFieldPrivate(String fieldName) {
 		if (fieldName.startsWith(StringPool.UNDERLINE)) {
 			return true;
 		}
