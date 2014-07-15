@@ -723,17 +723,17 @@ public class DataFactory {
 	}
 
 	public void initContext(Properties properties) {
-		String timeZone = properties.getProperty("sample.sql.db.timezone");
+		String timeZoneId = properties.getProperty("sample.sql.db.time.zone");
 
-		if (Validator.isNotNull(timeZone)) {
-			TimeZone newTimeZone = TimeZone.getTimeZone(timeZone);
+		if (Validator.isNotNull(timeZoneId)) {
+			TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
 
-			if (newTimeZone != null) {
-				TimeZone.setDefault(newTimeZone);
+			if (timeZone != null) {
+				TimeZone.setDefault(timeZone);
 
 				_simpleDateFormat =
 					FastDateFormatFactoryUtil.getSimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss", newTimeZone);
+						"yyyy-MM-dd HH:mm:ss", timeZone);
 			}
 		}
 
