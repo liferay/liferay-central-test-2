@@ -56,7 +56,5 @@ else {
 
 List<Portlet> dataSiteLevelPortlets = LayoutExporter.getDataSiteLevelPortlets(company.getCompanyId(), false);
 
-UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
-
 ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
 %>

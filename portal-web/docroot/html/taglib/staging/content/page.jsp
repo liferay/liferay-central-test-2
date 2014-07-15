@@ -222,6 +222,8 @@
 								boolean displayCounts = (exportModelCount != 0) || (modelDeletionCount != 0);
 
 								if (!type.equals(Constants.EXPORT)) {
+									UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
+
 									displayCounts = displayCounts && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingUtil.getStagedPortletId(portlet.getRootPortletId())), portletDataHandler.isPublishToLiveByDefault());
 								}
 							%>
