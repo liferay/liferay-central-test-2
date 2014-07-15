@@ -402,6 +402,18 @@ public abstract class BaseDDMTestCase extends PowerMockito {
 	protected void setUpPropsUtil() throws Exception {
 		Props props = mock(Props.class);
 
+		when(
+			props.get(PropsKeys.DYNAMIC_DATA_MAPPING_IMAGE_EXTENSIONS)
+		).thenReturn(
+			".gif,.jpeg,.jpg,.png"
+		);
+
+		when(
+			props.get(PropsKeys.DYNAMIC_DATA_MAPPING_IMAGE_SMALL_MAX_SIZE)
+		).thenReturn(
+			"51200"
+		);
+
 		String ddmStructurePrivateFieldDataTypeKey =
 			PropsKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_PRIVATE_FIELD_DATATYPE;
 
@@ -422,18 +434,6 @@ public abstract class BaseDDMTestCase extends PowerMockito {
 				Matchers.any(Filter.class))
 		).thenReturn(
 			"false"
-		);
-
-		when(
-			props.get(PropsKeys.DYNAMIC_DATA_MAPPING_IMAGE_EXTENSIONS)
-		).thenReturn(
-			".gif,.jpeg,.jpg,.png"
-		);
-
-		when(
-			props.get(PropsKeys.DYNAMIC_DATA_MAPPING_IMAGE_SMALL_MAX_SIZE)
-		).thenReturn(
-			"51200"
 		);
 
 		when(
