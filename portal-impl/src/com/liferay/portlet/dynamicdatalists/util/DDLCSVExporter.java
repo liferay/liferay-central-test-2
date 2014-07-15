@@ -42,9 +42,9 @@ public class DDLCSVExporter extends BaseDDLExporter {
 			OrderByComparator<DDLRecord> orderByComparator)
 		throws Exception {
 
-		List<DDMFormField> ddmFormFields = getDDMFormFields(recordSetId);
-
 		StringBundler sb = new StringBundler();
+
+		List<DDMFormField> ddmFormFields = getDDMFormFields(recordSetId);
 
 		for (DDMFormField ddmFormField : ddmFormFields) {
 			LocalizedValue label = ddmFormField.getLabel();
