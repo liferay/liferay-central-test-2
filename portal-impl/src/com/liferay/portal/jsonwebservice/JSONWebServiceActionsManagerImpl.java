@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodParameter;
 import com.liferay.portal.kernel.util.SortedArrayList;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -253,6 +254,7 @@ public class JSONWebServiceActionsManagerImpl
 		String contextName, String contextPath, Class<?> actionClass,
 		Method actionMethod, String path, String method) {
 
+		try {
 		JSONWebServiceActionConfig jsonWebServiceActionConfig =
 			new JSONWebServiceActionConfig(
 				contextName, contextPath, actionClass, actionMethod, path,
@@ -269,6 +271,28 @@ public class JSONWebServiceActionsManagerImpl
 		}
 
 		_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
+		}
+		catch (Exception e) {
+			StringBundler sb = new StringBundler(15);
+
+			sb.append("Something went wrong attempting to register service ");
+			sb.append("method {contextName=");
+			sb.append(contextName);
+			sb.append(",contextPath=");
+			sb.append(contextPath);
+			sb.append(",actionClass=");
+			sb.append(actionClass);
+			sb.append(",actionMethod=");
+			sb.append(actionMethod);
+			sb.append(",path=");
+			sb.append(path);
+			sb.append(",method=");
+			sb.append(method);
+			sb.append("} due to ");
+			sb.append(e.getMessage());
+
+			_log.warn(sb.toString());
+		}
 	}
 
 	@Override
@@ -276,12 +300,14 @@ public class JSONWebServiceActionsManagerImpl
 		String contextName, String contextPath, Object actionObject,
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
+		try {
 		JSONWebServiceActionConfig jsonWebServiceActionConfig =
 			new JSONWebServiceActionConfig(
 				contextName, contextPath, actionObject, actionClass,
 				actionMethod, path, method);
 
 		if (_jsonWebServiceActionConfigs.contains(jsonWebServiceActionConfig)) {
+
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"A JSON web service action is already registered at " +
@@ -292,6 +318,30 @@ public class JSONWebServiceActionsManagerImpl
 		}
 
 		_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
+		}
+		catch (Exception e) {
+			StringBundler sb = new StringBundler(17);
+
+			sb.append("Something went wrong attempting to register service ");
+			sb.append("method {contextName=");
+			sb.append(contextName);
+			sb.append(",contextPath=");
+			sb.append(contextPath);
+			sb.append(",actionObject=");
+			sb.append(actionObject);
+			sb.append(",actionClass=");
+			sb.append(actionClass);
+			sb.append(",actionMethod=");
+			sb.append(actionMethod);
+			sb.append(",path=");
+			sb.append(path);
+			sb.append(",method=");
+			sb.append(method);
+			sb.append("} due to ");
+			sb.append(e.getMessage());
+
+			_log.warn(sb.toString());
+		}
 	}
 
 	@Override
