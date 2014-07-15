@@ -88,12 +88,12 @@ public abstract class BaseDDLExporter implements DDLExporter {
 	protected List<DDMFormField> getDDMFormFields(long recordSetId)
 		throws Exception {
 
+		List<DDMFormField> ddmFormFields = new ArrayList<DDMFormField>();
+
 		DDLRecordSet recordSet = DDLRecordSetServiceUtil.getRecordSet(
 			recordSetId);
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
-
-		List<DDMFormField> ddmFormFields = new ArrayList<DDMFormField>();
 
 		for (DDMFormField ddmFormField : ddmStructure.getDDMFormFields(false)) {
 			if (ddmStructure.isFieldPrivate(ddmFormField.getName())) {
