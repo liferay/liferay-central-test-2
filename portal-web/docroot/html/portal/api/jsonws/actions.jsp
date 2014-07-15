@@ -141,7 +141,7 @@ Set<String> contextNames = JSONWebServiceActionsManagerUtil.getContextNames();
 				function(event) {
 					var contextName = contextNameSelector.val();
 
-					var location = Liferay.Util.addParams('contextName=' + contextName, '<%= jsonWSPath %>');;
+					var location = Liferay.Util.addParams('contextName=' + contextName, '<%= jsonWSPath %>');
 
 					window.location.href = location;
 				}

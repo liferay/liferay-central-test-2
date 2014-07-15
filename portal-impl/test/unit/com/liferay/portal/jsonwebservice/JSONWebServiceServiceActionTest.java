@@ -149,8 +149,7 @@ public class JSONWebServiceServiceActionTest
 
 	@Test
 	public void testServletContextInvoker2() throws Exception {
-		testServletContextInvoker(
-			"somectx", false, "/somectx.foo/hello-world");
+		testServletContextInvoker("somectx", false, "/somectx.foo/hello-world");
 	}
 
 	@Test
@@ -167,8 +166,7 @@ public class JSONWebServiceServiceActionTest
 	@Test
 	public void testServletContextURL1() throws Exception {
 		testServletContextURL(
-			"somectx", true,
-			"/foo/hello-world/user-id/173/world-name/Jupiter");
+			"somectx", true, "/foo/hello-world/user-id/173/world-name/Jupiter");
 	}
 
 	@Test

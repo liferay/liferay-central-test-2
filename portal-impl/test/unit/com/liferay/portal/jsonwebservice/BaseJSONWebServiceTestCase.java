@@ -101,8 +101,8 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 				actionMethod);
 
 			JSONWebServiceActionsManagerUtil.registerJSONWebServiceAction(
-				servletContextName, StringPool.BLANK, actionClass,
-				actionMethod, path, method);
+				servletContextName, StringPool.BLANK, actionClass, actionMethod,
+				path, method);
 		}
 	}
 

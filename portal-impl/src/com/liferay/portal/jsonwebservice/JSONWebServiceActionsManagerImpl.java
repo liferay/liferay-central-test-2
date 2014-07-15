@@ -360,8 +360,7 @@ public class JSONWebServiceActionsManagerImpl
 			beanLocator = PortalBeanLocatorUtil.getBeanLocator();
 		}
 		else {
-			beanLocator = PortletBeanLocatorUtil.getBeanLocator(
-				contextName);
+			beanLocator = PortletBeanLocatorUtil.getBeanLocator(contextName);
 		}
 
 		if (beanLocator == null) {
