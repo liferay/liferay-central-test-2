@@ -112,7 +112,6 @@ public class EhcacheConfigurationUtil {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private static String _clearCacheEventListenerConfigurations(
 		CacheConfiguration cacheConfiguration, boolean usingDefault) {
 

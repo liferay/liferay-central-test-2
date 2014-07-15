@@ -226,8 +226,6 @@ public class EhcacheConfigurationUtilTest {
 
 		Assert.assertNotNull(configuration);
 
-		// For code coverage
-
 		new EhcacheConfigurationUtil();
 	}
 
@@ -338,7 +336,6 @@ public class EhcacheConfigurationUtilTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void _assertClusterLinkReplicatorConfigs(
 		Configuration configuration, boolean onlyReplicator) {
 
@@ -400,7 +397,6 @@ public class EhcacheConfigurationUtilTest {
 		Assert.assertEquals(
 			configuration1.getCacheManagerPeerProviderFactoryConfiguration(),
 			configuration2.getCacheManagerPeerProviderFactoryConfiguration());
-
 		Assert.assertEquals(
 			configuration1.getCacheManagerPeerListenerFactoryConfigurations(),
 			configuration2.getCacheManagerPeerListenerFactoryConfigurations());
@@ -439,12 +435,13 @@ public class EhcacheConfigurationUtilTest {
 					cacheConfigurations1.entrySet()) {
 
 				String key = entry.getKey();
-				CacheConfiguration value1 = entry.getValue();
+				CacheConfiguration cacheConfiguration1 = entry.getValue();
 
-				CacheConfiguration value2 = cacheConfigurations2.get(key);
+				CacheConfiguration cacheConfiguration2 =
+					cacheConfigurations2.get(key);
 
-				if (value1 == null) {
-					if ((value2 != null) ||
+				if (cacheConfiguration1 == null) {
+					if ((cacheConfiguration2 != null) ||
 						cacheConfigurations2.containsKey(key)) {
 
 						Assert.fail();
@@ -452,8 +449,10 @@ public class EhcacheConfigurationUtilTest {
 				}
 				else {
 					Assert.assertEquals(
-						value1.getCacheEventListenerConfigurations(),
-						value2.getCacheEventListenerConfigurations());
+						cacheConfiguration1.
+							getCacheEventListenerConfigurations(),
+						cacheConfiguration2.
+							getCacheEventListenerConfigurations());
 				}
 			}
 		}
@@ -462,7 +461,6 @@ public class EhcacheConfigurationUtilTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void _assertNoDefaultReplicatorConfigs(
 		Configuration configuration) {
 
