@@ -72,12 +72,12 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public abstract class BaseDDMTestCase extends PowerMockito {
 
 	protected void addDDMFormFields(
-		DDMForm ddmForm, DDMFormField... ddmFormFields) {
+		DDMForm ddmForm, DDMFormField... ddmFormFieldsArray) {
 
-		List<DDMFormField> fields = ddmForm.getDDMFormFields();
+		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
 
-		for (DDMFormField ddmFormField : ddmFormFields) {
-			fields.add(ddmFormField);
+		for (DDMFormField ddmFormField : ddmFormFieldsArray) {
+			ddmFormFields.add(ddmFormField);
 		}
 	}
 
