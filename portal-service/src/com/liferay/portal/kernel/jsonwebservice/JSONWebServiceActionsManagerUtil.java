@@ -30,8 +30,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class JSONWebServiceActionsManagerUtil {
 
-	public static Set<String> getContextPaths() {
-		return _jsonWebServiceActionsManager. getContextPaths();
+	public static Set<String> getContextNames() {
+		return _jsonWebServiceActionsManager.getContextNames();
 	}
 
 	public static JSONWebServiceAction getJSONWebServiceAction(

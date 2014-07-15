@@ -61,18 +61,18 @@ public class JSONWebServiceActionsManagerImpl
 	implements JSONWebServiceActionsManager {
 
 	@Override
-	public Set<String> getContextPaths() {
-		Set<String> contextPaths = new TreeSet<String>();
+	public Set<String> getContextNames() {
+		Set<String> contextNames = new TreeSet<String>();
 
 		for (JSONWebServiceActionConfig jsonWebServiceActionConfig :
 				_jsonWebServiceActionConfigs) {
 
-			String contextPath = jsonWebServiceActionConfig.getContextPath();
+			String contextName = jsonWebServiceActionConfig.getContextName();
 
-			contextPaths.add(contextPath);
+			contextNames.add(contextName);
 		}
 
-		return contextPaths;
+		return contextNames;
 	}
 
 	@Override

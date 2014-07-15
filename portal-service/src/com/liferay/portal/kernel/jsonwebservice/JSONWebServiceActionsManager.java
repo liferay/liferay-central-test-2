@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface JSONWebServiceActionsManager {
 
-	public Set<String> getContextPaths();
+	public Set<String> getContextNames();
 
 	public JSONWebServiceAction getJSONWebServiceAction(
 			HttpServletRequest request)
