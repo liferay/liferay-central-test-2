@@ -357,8 +357,7 @@ public class EhcacheConfigurationUtilTest {
 
 		for (CacheConfiguration cacheConfiguration : cacheConfigurations) {
 			List<FactoryConfiguration<?>> factoryConfigurations =
-				(List<FactoryConfiguration<?>>)
-					cacheConfiguration.getCacheEventListenerConfigurations();
+				cacheConfiguration.getCacheEventListenerConfigurations();
 
 			if (onlyReplicator) {
 				Assert.assertEquals(1, factoryConfigurations.size());
@@ -479,8 +478,7 @@ public class EhcacheConfigurationUtilTest {
 
 		for (CacheConfiguration cacheConfiguration : cacheConfigurations) {
 			List<FactoryConfiguration<?>> factoryConfigurations =
-				(List<FactoryConfiguration<?>>)
-					cacheConfiguration.getCacheEventListenerConfigurations();
+				cacheConfiguration.getCacheEventListenerConfigurations();
 
 			for (FactoryConfiguration<?> factoryConfiguration :
 					factoryConfigurations) {
