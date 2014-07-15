@@ -275,24 +275,26 @@ public class JSONWebServiceActionsManagerImpl
 			_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
 		}
 		catch (Exception e) {
-			StringBundler sb = new StringBundler(14);
+			if (_log.isWarnEnabled()) {
+				StringBundler sb = new StringBundler(14);
 
-			sb.append("Unable to register service method {actionClass=");
-			sb.append(actionClass);
-			sb.append(", actionMethod=");
-			sb.append(actionMethod);
-			sb.append(", contextName=");
-			sb.append(contextName);
-			sb.append(", contextPath=");
-			sb.append(contextPath);
-			sb.append(", method=");
-			sb.append(method);
-			sb.append(", path=");
-			sb.append(path);
-			sb.append("} due to ");
-			sb.append(e.getMessage());
+				sb.append("Unable to register service method {actionClass=");
+				sb.append(actionClass);
+				sb.append(", actionMethod=");
+				sb.append(actionMethod);
+				sb.append(", contextName=");
+				sb.append(contextName);
+				sb.append(", contextPath=");
+				sb.append(contextPath);
+				sb.append(", method=");
+				sb.append(method);
+				sb.append(", path=");
+				sb.append(path);
+				sb.append("} due to ");
+				sb.append(e.getMessage());
 
-			_log.warn(sb.toString());
+				_log.warn(sb.toString());
+			}
 		}
 	}
 
