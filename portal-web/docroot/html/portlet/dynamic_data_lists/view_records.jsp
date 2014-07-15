@@ -44,11 +44,11 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
 	<%
+	List<String> headerNames = new ArrayList<String>();
+
 	DDMStructure ddmStructure = recordSet.getDDMStructure(formDDMTemplateId);
 
 	List<DDMFormField> ddmFormfields = ddmStructure.getDDMFormFields(false);
-
-	List<String> headerNames = new ArrayList<String>();
 
 	for (DDMFormField ddmFormField : ddmFormfields) {
 		if (ddmStructure.isFieldPrivate(ddmFormField.getName())) {
