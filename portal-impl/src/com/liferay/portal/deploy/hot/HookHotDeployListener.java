@@ -1822,7 +1822,8 @@ public class HookHotDeployListener
 					portletClassLoader, PhoneNumberFormat.class,
 					phoneNumberFormatClassName);
 
-			registerService(servletContextName, phoneNumberFormatClassName,
+			registerService(
+				servletContextName, phoneNumberFormatClassName,
 				PhoneNumberFormat.class, phoneNumberFormat);
 		}
 
