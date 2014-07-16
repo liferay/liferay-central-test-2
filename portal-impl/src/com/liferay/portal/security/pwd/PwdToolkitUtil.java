@@ -28,7 +28,9 @@ import com.liferay.registry.ServiceTracker;
 public class PwdToolkitUtil {
 
 	public static String generate(PasswordPolicy passwordPolicy) {
-		return getToolkit().generate(passwordPolicy);
+		Toolkit toolkit = getToolkit();
+
+		return toolkit.generate(passwordPolicy);
 	}
 
 	public static Toolkit getToolkit() {
@@ -48,7 +50,9 @@ public class PwdToolkitUtil {
 		if (!LDAPSettingsUtil.isPasswordPolicyEnabled(companyId) &&
 			PwdToolkitUtilThreadLocal.isValidate()) {
 
-			getToolkit().validate(userId, password1, password2, passwordPolicy);
+			Toolkit toolkit = getToolkit();
+
+			toolkit.validate(userId, password1, password2, passwordPolicy);
 		}
 	}
 
