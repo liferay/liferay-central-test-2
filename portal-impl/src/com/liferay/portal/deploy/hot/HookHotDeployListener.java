@@ -37,8 +37,6 @@ import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.format.PhoneNumberFormat;
-import com.liferay.portal.kernel.format.PhoneNumberFormatUtil;
-import com.liferay.portal.kernel.format.PhoneNumberFormatWrapper;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lock.LockListener;
 import com.liferay.portal.kernel.lock.LockListenerRegistryUtil;
@@ -556,14 +554,6 @@ public class HookHotDeployListener
 
 			userGroupMembershipPolicyFactoryImpl.setUserGroupMembershipPolicy(
 				null);
-		}
-
-		if (portalProperties.containsKey(PropsKeys.PHONE_NUMBER_FORMAT_IMPL)) {
-			PhoneNumberFormatWrapper phoneNumberFormatWrapper =
-				(PhoneNumberFormatWrapper)
-					PhoneNumberFormatUtil.getPhoneNumberFormat();
-
-			phoneNumberFormatWrapper.setPhoneNumberFormat(null);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.SANITIZER_IMPL)) {
@@ -1832,11 +1822,8 @@ public class HookHotDeployListener
 					portletClassLoader, PhoneNumberFormat.class,
 					phoneNumberFormatClassName);
 
-			PhoneNumberFormatWrapper phoneNumberFormatWrapper =
-				(PhoneNumberFormatWrapper)
-					PhoneNumberFormatUtil.getPhoneNumberFormat();
-
-			phoneNumberFormatWrapper.setPhoneNumberFormat(phoneNumberFormat);
+			registerService(servletContextName, phoneNumberFormatClassName,
+				PhoneNumberFormat.class, phoneNumberFormat);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.SANITIZER_IMPL)) {
