@@ -62,9 +62,11 @@ public @interface OSGiBeanProperties {
 	 * Returns the service properties.
 	 *
 	 * <p>
-	 * Each property string is specified as <code>"key=value"</code>. To specify
-	 * a property with multiple values, use multiple key-value pairs. For
-	 * example, <code>"foo=bar", "foo=baz"</code>.
+	 * Each property string is specified as <code>"key=value"</code>. The type
+	 * of the property value can be specified in the key as
+	 * <code>"key:type=value"</code>. The type must be from {@link Type}. To
+	 * specify a property with multiple values, use multiple key-value pairs.
+	 * For example, <code>"foo=bar", "foo=baz"</code>.
 	 * </p>
 	 *
 	 * @return the service properties
