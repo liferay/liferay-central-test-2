@@ -106,7 +106,7 @@ public class ${entity.name}PersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<${entity.name}> iterator = _models.iterator();
+		Iterator<${entity.name}> iterator = _${entity.varNames}.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -250,7 +250,7 @@ public class ${entity.name}PersistenceTest {
 			</#if>
 		</#list>
 
-		_models.add(_persistence.update(new${entity.name}));
+		_${entity.varNames}.add(_persistence.update(new${entity.name}));
 
 		${entity.name} existing${entity.name} = _persistence.findByPrimaryKey(new${entity.name}.getPrimaryKey());
 
@@ -987,7 +987,7 @@ public class ${entity.name}PersistenceTest {
 			</#if>
 		</#list>
 
-		_models.add(_persistence.update(${entity.varName}));
+		_${entity.varNames}.add(_persistence.update(${entity.varName}));
 
 		return ${entity.varName};
 	}
@@ -1247,7 +1247,7 @@ public class ${entity.name}PersistenceTest {
 
 	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceTest.class);
 
-	private List<${entity.name}> _models = new ArrayList<${entity.name}>();
+	private List<${entity.name}> _${entity.varNames} = new ArrayList<${entity.name}>();
 	private ModelListener<${entity.name}>[] _modelListeners;
 	private ${entity.name}Persistence _persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName());
 
