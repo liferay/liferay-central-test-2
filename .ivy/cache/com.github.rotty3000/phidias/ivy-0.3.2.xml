@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
-	<info organisation="org.apache.maven"
-		module="maven-parent"
-		revision="23"
+	<info organisation="com.github.rotty3000"
+		module="phidias"
+		revision="0.3.2"
 		status="release"
-		publication="20130117075701"
+		publication="20140716122148"
 	>
-		<description homepage="http://maven.apache.org/">
-		Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project&apos;s build, reporting and documentation from a central piece of information.
+		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="https://github.com/rotty3000/phidias">
+		A small javax compiler adapter for OSGi environments.
 		</description>
-		<m:properties__organization.logo>http://www.apache.org/images/asf_logo_wide.gif</m:properties__organization.logo>
-		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__scope>provided</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__scope>
-		<m:properties__distMgmtSnapshotsName>Apache Development Snapshot Repository</m:properties__distMgmtSnapshotsName>
-		<m:properties__distMgmtSnapshotsUrl>https://repository.apache.org/content/repositories/snapshots</m:properties__distMgmtSnapshotsUrl>
-		<m:properties__sourceReleaseAssemblyDescriptor>source-release</m:properties__sourceReleaseAssemblyDescriptor>
-		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
-		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__version>3.2</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__version>
-		<m:properties__maven.site.cache>${user.home}/maven-sites</m:properties__maven.site.cache>
-		<m:properties__sonar.host.url>https://analysis.apache.org/</m:properties__sonar.host.url>
-		<m:properties__gpg.useagent>true</m:properties__gpg.useagent>
-		<m:maven.plugins>org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null</m:maven.plugins>
-		<m:dependency.management__org.codehaus.plexus__plexus-component-annotations__version>1.5.5</m:dependency.management__org.codehaus.plexus__plexus-component-annotations__version>
 	</info>
 	<configurations>
 		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
@@ -35,5 +24,11 @@
 		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
 	</configurations>
 	<publications>
+		<artifact name="phidias" type="jar" ext="jar" conf="master"/>
+		<artifact name="phidias" type="source" ext="jar" conf="sources" m:classifier="sources"/>
+		<artifact name="phidias" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc"/>
 	</publications>
+	<dependencies>
+		<dependency org="org.osgi" name="org.osgi.core" rev="5.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+	</dependencies>
 </ivy-module>
