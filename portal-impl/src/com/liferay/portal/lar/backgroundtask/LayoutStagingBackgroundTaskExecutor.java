@@ -103,8 +103,7 @@ public class LayoutStagingBackgroundTaskExecutor
 				_log.debug(t, t);
 			}
 			else if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to execute layout publication: " + t.getMessage());
+				_log.warn("Unable to publish layout: " + t.getMessage());
 			}
 
 			Group sourceGroup = GroupLocalServiceUtil.getGroup(sourceGroupId);
