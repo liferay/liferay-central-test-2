@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class AssetTagPropertyPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AssetTagProperty> iterator = _models.iterator();
+		Iterator<AssetTagProperty> iterator = _assetTagProperties.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -152,7 +150,7 @@ public class AssetTagPropertyPersistenceTest {
 
 		newAssetTagProperty.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newAssetTagProperty));
+		_assetTagProperties.add(_persistence.update(newAssetTagProperty));
 
 		AssetTagProperty existingAssetTagProperty = _persistence.findByPrimaryKey(newAssetTagProperty.getPrimaryKey());
 
@@ -507,13 +505,12 @@ public class AssetTagPropertyPersistenceTest {
 
 		assetTagProperty.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(assetTagProperty));
+		_assetTagProperties.add(_persistence.update(assetTagProperty));
 
 		return assetTagProperty;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetTagPropertyPersistenceTest.class);
-	private List<AssetTagProperty> _models = new ArrayList<AssetTagProperty>();
+	private List<AssetTagProperty> _assetTagProperties = new ArrayList<AssetTagProperty>();
 	private ModelListener<AssetTagProperty>[] _modelListeners;
 	private AssetTagPropertyPersistence _persistence = (AssetTagPropertyPersistence)PortalBeanLocatorUtil.locate(AssetTagPropertyPersistence.class.getName());
 }

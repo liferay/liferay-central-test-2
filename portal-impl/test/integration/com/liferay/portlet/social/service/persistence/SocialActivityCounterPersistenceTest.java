@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class SocialActivityCounterPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SocialActivityCounter> iterator = _models.iterator();
+		Iterator<SocialActivityCounter> iterator = _socialActivityCounters.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -159,7 +157,8 @@ public class SocialActivityCounterPersistenceTest {
 
 		newSocialActivityCounter.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newSocialActivityCounter));
+		_socialActivityCounters.add(_persistence.update(
+				newSocialActivityCounter));
 
 		SocialActivityCounter existingSocialActivityCounter = _persistence.findByPrimaryKey(newSocialActivityCounter.getPrimaryKey());
 
@@ -578,13 +577,12 @@ public class SocialActivityCounterPersistenceTest {
 
 		socialActivityCounter.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(socialActivityCounter));
+		_socialActivityCounters.add(_persistence.update(socialActivityCounter));
 
 		return socialActivityCounter;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SocialActivityCounterPersistenceTest.class);
-	private List<SocialActivityCounter> _models = new ArrayList<SocialActivityCounter>();
+	private List<SocialActivityCounter> _socialActivityCounters = new ArrayList<SocialActivityCounter>();
 	private ModelListener<SocialActivityCounter>[] _modelListeners;
 	private SocialActivityCounterPersistence _persistence = (SocialActivityCounterPersistence)PortalBeanLocatorUtil.locate(SocialActivityCounterPersistence.class.getName());
 }

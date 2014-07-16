@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class UserTrackerPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<UserTracker> iterator = _models.iterator();
+		Iterator<UserTracker> iterator = _userTrackers.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -149,7 +147,7 @@ public class UserTrackerPersistenceTest {
 
 		newUserTracker.setUserAgent(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newUserTracker));
+		_userTrackers.add(_persistence.update(newUserTracker));
 
 		UserTracker existingUserTracker = _persistence.findByPrimaryKey(newUserTracker.getPrimaryKey());
 
@@ -470,13 +468,12 @@ public class UserTrackerPersistenceTest {
 
 		userTracker.setUserAgent(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(userTracker));
+		_userTrackers.add(_persistence.update(userTracker));
 
 		return userTracker;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserTrackerPersistenceTest.class);
-	private List<UserTracker> _models = new ArrayList<UserTracker>();
+	private List<UserTracker> _userTrackers = new ArrayList<UserTracker>();
 	private ModelListener<UserTracker>[] _modelListeners;
 	private UserTrackerPersistence _persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(UserTrackerPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MBDiscussionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBDiscussion> iterator = _models.iterator();
+		Iterator<MBDiscussion> iterator = _mbDiscussions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -156,7 +154,7 @@ public class MBDiscussionPersistenceTest {
 
 		newMBDiscussion.setThreadId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newMBDiscussion));
+		_mbDiscussions.add(_persistence.update(newMBDiscussion));
 
 		MBDiscussion existingMBDiscussion = _persistence.findByPrimaryKey(newMBDiscussion.getPrimaryKey());
 
@@ -557,13 +555,12 @@ public class MBDiscussionPersistenceTest {
 
 		mbDiscussion.setThreadId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(mbDiscussion));
+		_mbDiscussions.add(_persistence.update(mbDiscussion));
 
 		return mbDiscussion;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBDiscussionPersistenceTest.class);
-	private List<MBDiscussion> _models = new ArrayList<MBDiscussion>();
+	private List<MBDiscussion> _mbDiscussions = new ArrayList<MBDiscussion>();
 	private ModelListener<MBDiscussion>[] _modelListeners;
 	private MBDiscussionPersistence _persistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName());
 }

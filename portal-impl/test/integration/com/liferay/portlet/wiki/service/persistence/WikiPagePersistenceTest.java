@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class WikiPagePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<WikiPage> iterator = _models.iterator();
+		Iterator<WikiPage> iterator = _wikiPages.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -181,7 +179,7 @@ public class WikiPagePersistenceTest {
 
 		newWikiPage.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newWikiPage));
+		_wikiPages.add(_persistence.update(newWikiPage));
 
 		WikiPage existingWikiPage = _persistence.findByPrimaryKey(newWikiPage.getPrimaryKey());
 
@@ -1052,13 +1050,12 @@ public class WikiPagePersistenceTest {
 
 		wikiPage.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(wikiPage));
+		_wikiPages.add(_persistence.update(wikiPage));
 
 		return wikiPage;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WikiPagePersistenceTest.class);
-	private List<WikiPage> _models = new ArrayList<WikiPage>();
+	private List<WikiPage> _wikiPages = new ArrayList<WikiPage>();
 	private ModelListener<WikiPage>[] _modelListeners;
 	private WikiPagePersistence _persistence = (WikiPagePersistence)PortalBeanLocatorUtil.locate(WikiPagePersistence.class.getName());
 }

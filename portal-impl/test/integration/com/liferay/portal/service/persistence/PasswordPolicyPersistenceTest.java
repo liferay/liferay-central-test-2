@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class PasswordPolicyPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PasswordPolicy> iterator = _models.iterator();
+		Iterator<PasswordPolicy> iterator = _passwordPolicies.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -203,7 +201,7 @@ public class PasswordPolicyPersistenceTest {
 
 		newPasswordPolicy.setResetTicketMaxAge(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newPasswordPolicy));
+		_passwordPolicies.add(_persistence.update(newPasswordPolicy));
 
 		PasswordPolicy existingPasswordPolicy = _persistence.findByPrimaryKey(newPasswordPolicy.getPrimaryKey());
 
@@ -692,13 +690,12 @@ public class PasswordPolicyPersistenceTest {
 
 		passwordPolicy.setResetTicketMaxAge(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(passwordPolicy));
+		_passwordPolicies.add(_persistence.update(passwordPolicy));
 
 		return passwordPolicy;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyPersistenceTest.class);
-	private List<PasswordPolicy> _models = new ArrayList<PasswordPolicy>();
+	private List<PasswordPolicy> _passwordPolicies = new ArrayList<PasswordPolicy>();
 	private ModelListener<PasswordPolicy>[] _modelListeners;
 	private PasswordPolicyPersistence _persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyPersistence.class.getName());
 }

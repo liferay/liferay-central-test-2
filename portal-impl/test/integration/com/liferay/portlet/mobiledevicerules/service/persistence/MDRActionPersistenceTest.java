@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MDRActionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MDRAction> iterator = _models.iterator();
+		Iterator<MDRAction> iterator = _mdrActions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -164,7 +162,7 @@ public class MDRActionPersistenceTest {
 
 		newMDRAction.setTypeSettings(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newMDRAction));
+		_mdrActions.add(_persistence.update(newMDRAction));
 
 		MDRAction existingMDRAction = _persistence.findByPrimaryKey(newMDRAction.getPrimaryKey());
 
@@ -543,13 +541,12 @@ public class MDRActionPersistenceTest {
 
 		mdrAction.setTypeSettings(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(mdrAction));
+		_mdrActions.add(_persistence.update(mdrAction));
 
 		return mdrAction;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MDRActionPersistenceTest.class);
-	private List<MDRAction> _models = new ArrayList<MDRAction>();
+	private List<MDRAction> _mdrActions = new ArrayList<MDRAction>();
 	private ModelListener<MDRAction>[] _modelListeners;
 	private MDRActionPersistence _persistence = (MDRActionPersistence)PortalBeanLocatorUtil.locate(MDRActionPersistence.class.getName());
 }

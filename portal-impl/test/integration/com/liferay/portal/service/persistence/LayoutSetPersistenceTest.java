@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class LayoutSetPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<LayoutSet> iterator = _models.iterator();
+		Iterator<LayoutSet> iterator = _layoutSets.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -166,7 +164,7 @@ public class LayoutSetPersistenceTest {
 
 		newLayoutSet.setLayoutSetPrototypeLinkEnabled(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newLayoutSet));
+		_layoutSets.add(_persistence.update(newLayoutSet));
 
 		LayoutSet existingLayoutSet = _persistence.findByPrimaryKey(newLayoutSet.getPrimaryKey());
 
@@ -538,13 +536,12 @@ public class LayoutSetPersistenceTest {
 
 		layoutSet.setLayoutSetPrototypeLinkEnabled(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(layoutSet));
+		_layoutSets.add(_persistence.update(layoutSet));
 
 		return layoutSet;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutSetPersistenceTest.class);
-	private List<LayoutSet> _models = new ArrayList<LayoutSet>();
+	private List<LayoutSet> _layoutSets = new ArrayList<LayoutSet>();
 	private ModelListener<LayoutSet>[] _modelListeners;
 	private LayoutSetPersistence _persistence = (LayoutSetPersistence)PortalBeanLocatorUtil.locate(LayoutSetPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class AnnouncementsFlagPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AnnouncementsFlag> iterator = _models.iterator();
+		Iterator<AnnouncementsFlag> iterator = _announcementsFlags.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class AnnouncementsFlagPersistenceTest {
 
 		newAnnouncementsFlag.setValue(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newAnnouncementsFlag));
+		_announcementsFlags.add(_persistence.update(newAnnouncementsFlag));
 
 		AnnouncementsFlag existingAnnouncementsFlag = _persistence.findByPrimaryKey(newAnnouncementsFlag.getPrimaryKey());
 
@@ -451,13 +449,12 @@ public class AnnouncementsFlagPersistenceTest {
 
 		announcementsFlag.setValue(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(announcementsFlag));
+		_announcementsFlags.add(_persistence.update(announcementsFlag));
 
 		return announcementsFlag;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AnnouncementsFlagPersistenceTest.class);
-	private List<AnnouncementsFlag> _models = new ArrayList<AnnouncementsFlag>();
+	private List<AnnouncementsFlag> _announcementsFlags = new ArrayList<AnnouncementsFlag>();
 	private ModelListener<AnnouncementsFlag>[] _modelListeners;
 	private AnnouncementsFlagPersistence _persistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName());
 }

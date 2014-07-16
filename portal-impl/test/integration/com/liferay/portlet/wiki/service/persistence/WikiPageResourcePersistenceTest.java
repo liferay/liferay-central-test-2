@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class WikiPageResourcePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<WikiPageResource> iterator = _models.iterator();
+		Iterator<WikiPageResource> iterator = _wikiPageResources.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -141,7 +139,7 @@ public class WikiPageResourcePersistenceTest {
 
 		newWikiPageResource.setTitle(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newWikiPageResource));
+		_wikiPageResources.add(_persistence.update(newWikiPageResource));
 
 		WikiPageResource existingWikiPageResource = _persistence.findByPrimaryKey(newWikiPageResource.getPrimaryKey());
 
@@ -448,13 +446,12 @@ public class WikiPageResourcePersistenceTest {
 
 		wikiPageResource.setTitle(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(wikiPageResource));
+		_wikiPageResources.add(_persistence.update(wikiPageResource));
 
 		return wikiPageResource;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WikiPageResourcePersistenceTest.class);
-	private List<WikiPageResource> _models = new ArrayList<WikiPageResource>();
+	private List<WikiPageResource> _wikiPageResources = new ArrayList<WikiPageResource>();
 	private ModelListener<WikiPageResource>[] _modelListeners;
 	private WikiPageResourcePersistence _persistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(WikiPageResourcePersistence.class.getName());
 }

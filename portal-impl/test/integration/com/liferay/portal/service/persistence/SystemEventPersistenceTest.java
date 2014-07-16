@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class SystemEventPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SystemEvent> iterator = _models.iterator();
+		Iterator<SystemEvent> iterator = _systemEvents.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -160,7 +158,7 @@ public class SystemEventPersistenceTest {
 
 		newSystemEvent.setExtraData(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newSystemEvent));
+		_systemEvents.add(_persistence.update(newSystemEvent));
 
 		SystemEvent existingSystemEvent = _persistence.findByPrimaryKey(newSystemEvent.getPrimaryKey());
 
@@ -521,13 +519,12 @@ public class SystemEventPersistenceTest {
 
 		systemEvent.setExtraData(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(systemEvent));
+		_systemEvents.add(_persistence.update(systemEvent));
 
 		return systemEvent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SystemEventPersistenceTest.class);
-	private List<SystemEvent> _models = new ArrayList<SystemEvent>();
+	private List<SystemEvent> _systemEvents = new ArrayList<SystemEvent>();
 	private ModelListener<SystemEvent>[] _modelListeners;
 	private SystemEventPersistence _persistence = (SystemEventPersistence)PortalBeanLocatorUtil.locate(SystemEventPersistence.class.getName());
 }

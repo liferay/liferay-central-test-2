@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class PluginSettingPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PluginSetting> iterator = _models.iterator();
+		Iterator<PluginSetting> iterator = _pluginSettings.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,7 @@ public class PluginSettingPersistenceTest {
 
 		newPluginSetting.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newPluginSetting));
+		_pluginSettings.add(_persistence.update(newPluginSetting));
 
 		PluginSetting existingPluginSetting = _persistence.findByPrimaryKey(newPluginSetting.getPrimaryKey());
 
@@ -468,13 +466,12 @@ public class PluginSettingPersistenceTest {
 
 		pluginSetting.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(pluginSetting));
+		_pluginSettings.add(_persistence.update(pluginSetting));
 
 		return pluginSetting;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PluginSettingPersistenceTest.class);
-	private List<PluginSetting> _models = new ArrayList<PluginSetting>();
+	private List<PluginSetting> _pluginSettings = new ArrayList<PluginSetting>();
 	private ModelListener<PluginSetting>[] _modelListeners;
 	private PluginSettingPersistence _persistence = (PluginSettingPersistence)PortalBeanLocatorUtil.locate(PluginSettingPersistence.class.getName());
 }

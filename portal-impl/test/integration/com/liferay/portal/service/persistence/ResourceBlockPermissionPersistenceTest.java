@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class ResourceBlockPermissionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ResourceBlockPermission> iterator = _models.iterator();
+		Iterator<ResourceBlockPermission> iterator = _resourceBlockPermissions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -140,7 +138,8 @@ public class ResourceBlockPermissionPersistenceTest {
 
 		newResourceBlockPermission.setActionIds(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newResourceBlockPermission));
+		_resourceBlockPermissions.add(_persistence.update(
+				newResourceBlockPermission));
 
 		ResourceBlockPermission existingResourceBlockPermission = _persistence.findByPrimaryKey(newResourceBlockPermission.getPrimaryKey());
 
@@ -473,13 +472,13 @@ public class ResourceBlockPermissionPersistenceTest {
 
 		resourceBlockPermission.setActionIds(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(resourceBlockPermission));
+		_resourceBlockPermissions.add(_persistence.update(
+				resourceBlockPermission));
 
 		return resourceBlockPermission;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ResourceBlockPermissionPersistenceTest.class);
-	private List<ResourceBlockPermission> _models = new ArrayList<ResourceBlockPermission>();
+	private List<ResourceBlockPermission> _resourceBlockPermissions = new ArrayList<ResourceBlockPermission>();
 	private ModelListener<ResourceBlockPermission>[] _modelListeners;
 	private ResourceBlockPermissionPersistence _persistence = (ResourceBlockPermissionPersistence)PortalBeanLocatorUtil.locate(ResourceBlockPermissionPersistence.class.getName());
 }

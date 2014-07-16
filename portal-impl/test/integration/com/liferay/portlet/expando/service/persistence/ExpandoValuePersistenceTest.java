@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ExpandoValuePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ExpandoValue> iterator = _models.iterator();
+		Iterator<ExpandoValue> iterator = _expandoValues.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -148,7 +146,7 @@ public class ExpandoValuePersistenceTest {
 
 		newExpandoValue.setData(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newExpandoValue));
+		_expandoValues.add(_persistence.update(newExpandoValue));
 
 		ExpandoValue existingExpandoValue = _persistence.findByPrimaryKey(newExpandoValue.getPrimaryKey());
 
@@ -576,13 +574,12 @@ public class ExpandoValuePersistenceTest {
 
 		expandoValue.setData(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(expandoValue));
+		_expandoValues.add(_persistence.update(expandoValue));
 
 		return expandoValue;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ExpandoValuePersistenceTest.class);
-	private List<ExpandoValue> _models = new ArrayList<ExpandoValue>();
+	private List<ExpandoValue> _expandoValues = new ArrayList<ExpandoValue>();
 	private ModelListener<ExpandoValue>[] _modelListeners;
 	private ExpandoValuePersistence _persistence = (ExpandoValuePersistence)PortalBeanLocatorUtil.locate(ExpandoValuePersistence.class.getName());
 }

@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -85,7 +83,7 @@ public class OrgLaborPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<OrgLabor> iterator = _models.iterator();
+		Iterator<OrgLabor> iterator = _orgLabors.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -165,7 +163,7 @@ public class OrgLaborPersistenceTest {
 
 		newOrgLabor.setSatClose(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newOrgLabor));
+		_orgLabors.add(_persistence.update(newOrgLabor));
 
 		OrgLabor existingOrgLabor = _persistence.findByPrimaryKey(newOrgLabor.getPrimaryKey());
 
@@ -494,13 +492,12 @@ public class OrgLaborPersistenceTest {
 
 		orgLabor.setSatClose(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(orgLabor));
+		_orgLabors.add(_persistence.update(orgLabor));
 
 		return orgLabor;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(OrgLaborPersistenceTest.class);
-	private List<OrgLabor> _models = new ArrayList<OrgLabor>();
+	private List<OrgLabor> _orgLabors = new ArrayList<OrgLabor>();
 	private ModelListener<OrgLabor>[] _modelListeners;
 	private OrgLaborPersistence _persistence = (OrgLaborPersistence)PortalBeanLocatorUtil.locate(OrgLaborPersistence.class.getName());
 }

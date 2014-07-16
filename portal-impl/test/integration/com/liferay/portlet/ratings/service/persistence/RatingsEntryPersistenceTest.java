@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -90,7 +88,7 @@ public class RatingsEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<RatingsEntry> iterator = _models.iterator();
+		Iterator<RatingsEntry> iterator = _ratingsEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -154,7 +152,7 @@ public class RatingsEntryPersistenceTest {
 
 		newRatingsEntry.setScore(RandomTestUtil.nextDouble());
 
-		_models.add(_persistence.update(newRatingsEntry));
+		_ratingsEntries.add(_persistence.update(newRatingsEntry));
 
 		RatingsEntry existingRatingsEntry = _persistence.findByPrimaryKey(newRatingsEntry.getPrimaryKey());
 
@@ -527,13 +525,12 @@ public class RatingsEntryPersistenceTest {
 
 		ratingsEntry.setScore(RandomTestUtil.nextDouble());
 
-		_models.add(_persistence.update(ratingsEntry));
+		_ratingsEntries.add(_persistence.update(ratingsEntry));
 
 		return ratingsEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RatingsEntryPersistenceTest.class);
-	private List<RatingsEntry> _models = new ArrayList<RatingsEntry>();
+	private List<RatingsEntry> _ratingsEntries = new ArrayList<RatingsEntry>();
 	private ModelListener<RatingsEntry>[] _modelListeners;
 	private RatingsEntryPersistence _persistence = (RatingsEntryPersistence)PortalBeanLocatorUtil.locate(RatingsEntryPersistence.class.getName());
 }

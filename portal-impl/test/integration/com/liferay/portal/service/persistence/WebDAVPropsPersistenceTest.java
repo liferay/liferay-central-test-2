@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class WebDAVPropsPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<WebDAVProps> iterator = _models.iterator();
+		Iterator<WebDAVProps> iterator = _webDAVPropses.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -147,7 +145,7 @@ public class WebDAVPropsPersistenceTest {
 
 		newWebDAVProps.setProps(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newWebDAVProps));
+		_webDAVPropses.add(_persistence.update(newWebDAVProps));
 
 		WebDAVProps existingWebDAVProps = _persistence.findByPrimaryKey(newWebDAVProps.getPrimaryKey());
 
@@ -458,13 +456,12 @@ public class WebDAVPropsPersistenceTest {
 
 		webDAVProps.setProps(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(webDAVProps));
+		_webDAVPropses.add(_persistence.update(webDAVProps));
 
 		return webDAVProps;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WebDAVPropsPersistenceTest.class);
-	private List<WebDAVProps> _models = new ArrayList<WebDAVProps>();
+	private List<WebDAVProps> _webDAVPropses = new ArrayList<WebDAVProps>();
 	private ModelListener<WebDAVProps>[] _modelListeners;
 	private WebDAVPropsPersistence _persistence = (WebDAVPropsPersistence)PortalBeanLocatorUtil.locate(WebDAVPropsPersistence.class.getName());
 }

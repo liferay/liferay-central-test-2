@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ShardPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Shard> iterator = _models.iterator();
+		Iterator<Shard> iterator = _shards.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class ShardPersistenceTest {
 
 		newShard.setName(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newShard));
+		_shards.add(_persistence.update(newShard));
 
 		Shard existingShard = _persistence.findByPrimaryKey(newShard.getPrimaryKey());
 
@@ -445,13 +443,12 @@ public class ShardPersistenceTest {
 
 		shard.setName(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(shard));
+		_shards.add(_persistence.update(shard));
 
 		return shard;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShardPersistenceTest.class);
-	private List<Shard> _models = new ArrayList<Shard>();
+	private List<Shard> _shards = new ArrayList<Shard>();
 	private ModelListener<Shard>[] _modelListeners;
 	private ShardPersistence _persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName());
 }

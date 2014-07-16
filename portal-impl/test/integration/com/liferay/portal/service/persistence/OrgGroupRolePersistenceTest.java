@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.model.ModelListener;
@@ -79,7 +77,7 @@ public class OrgGroupRolePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<OrgGroupRole> iterator = _models.iterator();
+		Iterator<OrgGroupRole> iterator = _orgGroupRoles.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -129,7 +127,7 @@ public class OrgGroupRolePersistenceTest {
 
 		newOrgGroupRole.setMvccVersion(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newOrgGroupRole));
+		_orgGroupRoles.add(_persistence.update(newOrgGroupRole));
 
 		OrgGroupRole existingOrgGroupRole = _persistence.findByPrimaryKey(newOrgGroupRole.getPrimaryKey());
 
@@ -385,13 +383,12 @@ public class OrgGroupRolePersistenceTest {
 
 		orgGroupRole.setMvccVersion(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(orgGroupRole));
+		_orgGroupRoles.add(_persistence.update(orgGroupRole));
 
 		return orgGroupRole;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(OrgGroupRolePersistenceTest.class);
-	private List<OrgGroupRole> _models = new ArrayList<OrgGroupRole>();
+	private List<OrgGroupRole> _orgGroupRoles = new ArrayList<OrgGroupRole>();
 	private ModelListener<OrgGroupRole>[] _modelListeners;
 	private OrgGroupRolePersistence _persistence = (OrgGroupRolePersistence)PortalBeanLocatorUtil.locate(OrgGroupRolePersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class SocialActivityAchievementPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SocialActivityAchievement> iterator = _models.iterator();
+		Iterator<SocialActivityAchievement> iterator = _socialActivityAchievements.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -147,7 +145,8 @@ public class SocialActivityAchievementPersistenceTest {
 
 		newSocialActivityAchievement.setFirstInGroup(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newSocialActivityAchievement));
+		_socialActivityAchievements.add(_persistence.update(
+				newSocialActivityAchievement));
 
 		SocialActivityAchievement existingSocialActivityAchievement = _persistence.findByPrimaryKey(newSocialActivityAchievement.getPrimaryKey());
 
@@ -532,13 +531,13 @@ public class SocialActivityAchievementPersistenceTest {
 
 		socialActivityAchievement.setFirstInGroup(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(socialActivityAchievement));
+		_socialActivityAchievements.add(_persistence.update(
+				socialActivityAchievement));
 
 		return socialActivityAchievement;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SocialActivityAchievementPersistenceTest.class);
-	private List<SocialActivityAchievement> _models = new ArrayList<SocialActivityAchievement>();
+	private List<SocialActivityAchievement> _socialActivityAchievements = new ArrayList<SocialActivityAchievement>();
 	private ModelListener<SocialActivityAchievement>[] _modelListeners;
 	private SocialActivityAchievementPersistence _persistence = (SocialActivityAchievementPersistence)PortalBeanLocatorUtil.locate(SocialActivityAchievementPersistence.class.getName());
 }

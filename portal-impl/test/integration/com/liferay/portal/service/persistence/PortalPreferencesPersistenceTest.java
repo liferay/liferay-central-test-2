@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class PortalPreferencesPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PortalPreferences> iterator = _models.iterator();
+		Iterator<PortalPreferences> iterator = _portalPreferenceses.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -140,7 +138,7 @@ public class PortalPreferencesPersistenceTest {
 
 		newPortalPreferences.setPreferences(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newPortalPreferences));
+		_portalPreferenceses.add(_persistence.update(newPortalPreferences));
 
 		PortalPreferences existingPortalPreferences = _persistence.findByPrimaryKey(newPortalPreferences.getPrimaryKey());
 
@@ -437,13 +435,12 @@ public class PortalPreferencesPersistenceTest {
 
 		portalPreferences.setPreferences(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(portalPreferences));
+		_portalPreferenceses.add(_persistence.update(portalPreferences));
 
 		return portalPreferences;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PortalPreferencesPersistenceTest.class);
-	private List<PortalPreferences> _models = new ArrayList<PortalPreferences>();
+	private List<PortalPreferences> _portalPreferenceses = new ArrayList<PortalPreferences>();
 	private ModelListener<PortalPreferences>[] _modelListeners;
 	private PortalPreferencesPersistence _persistence = (PortalPreferencesPersistence)PortalBeanLocatorUtil.locate(PortalPreferencesPersistence.class.getName());
 }

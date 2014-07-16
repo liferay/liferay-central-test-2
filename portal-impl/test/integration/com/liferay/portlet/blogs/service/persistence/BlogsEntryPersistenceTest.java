@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class BlogsEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<BlogsEntry> iterator = _models.iterator();
+		Iterator<BlogsEntry> iterator = _blogsEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -182,7 +180,7 @@ public class BlogsEntryPersistenceTest {
 
 		newBlogsEntry.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newBlogsEntry));
+		_blogsEntries.add(_persistence.update(newBlogsEntry));
 
 		BlogsEntry existingBlogsEntry = _persistence.findByPrimaryKey(newBlogsEntry.getPrimaryKey());
 
@@ -897,13 +895,12 @@ public class BlogsEntryPersistenceTest {
 
 		blogsEntry.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(blogsEntry));
+		_blogsEntries.add(_persistence.update(blogsEntry));
 
 		return blogsEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BlogsEntryPersistenceTest.class);
-	private List<BlogsEntry> _models = new ArrayList<BlogsEntry>();
+	private List<BlogsEntry> _blogsEntries = new ArrayList<BlogsEntry>();
 	private ModelListener<BlogsEntry>[] _modelListeners;
 	private BlogsEntryPersistence _persistence = (BlogsEntryPersistence)PortalBeanLocatorUtil.locate(BlogsEntryPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class AnnouncementsDeliveryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AnnouncementsDelivery> iterator = _models.iterator();
+		Iterator<AnnouncementsDelivery> iterator = _announcementsDeliveries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -147,7 +145,8 @@ public class AnnouncementsDeliveryPersistenceTest {
 
 		newAnnouncementsDelivery.setWebsite(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newAnnouncementsDelivery));
+		_announcementsDeliveries.add(_persistence.update(
+				newAnnouncementsDelivery));
 
 		AnnouncementsDelivery existingAnnouncementsDelivery = _persistence.findByPrimaryKey(newAnnouncementsDelivery.getPrimaryKey());
 
@@ -470,13 +469,12 @@ public class AnnouncementsDeliveryPersistenceTest {
 
 		announcementsDelivery.setWebsite(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(announcementsDelivery));
+		_announcementsDeliveries.add(_persistence.update(announcementsDelivery));
 
 		return announcementsDelivery;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AnnouncementsDeliveryPersistenceTest.class);
-	private List<AnnouncementsDelivery> _models = new ArrayList<AnnouncementsDelivery>();
+	private List<AnnouncementsDelivery> _announcementsDeliveries = new ArrayList<AnnouncementsDelivery>();
 	private ModelListener<AnnouncementsDelivery>[] _modelListeners;
 	private AnnouncementsDeliveryPersistence _persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName());
 }

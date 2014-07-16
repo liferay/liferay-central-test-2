@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class SCFrameworkVersionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SCFrameworkVersion> iterator = _models.iterator();
+		Iterator<SCFrameworkVersion> iterator = _scFrameworkVersions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -153,7 +151,7 @@ public class SCFrameworkVersionPersistenceTest {
 
 		newSCFrameworkVersion.setPriority(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newSCFrameworkVersion));
+		_scFrameworkVersions.add(_persistence.update(newSCFrameworkVersion));
 
 		SCFrameworkVersion existingSCFrameworkVersion = _persistence.findByPrimaryKey(newSCFrameworkVersion.getPrimaryKey());
 
@@ -495,13 +493,12 @@ public class SCFrameworkVersionPersistenceTest {
 
 		scFrameworkVersion.setPriority(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(scFrameworkVersion));
+		_scFrameworkVersions.add(_persistence.update(scFrameworkVersion));
 
 		return scFrameworkVersion;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCFrameworkVersionPersistenceTest.class);
-	private List<SCFrameworkVersion> _models = new ArrayList<SCFrameworkVersion>();
+	private List<SCFrameworkVersion> _scFrameworkVersions = new ArrayList<SCFrameworkVersion>();
 	private ModelListener<SCFrameworkVersion>[] _modelListeners;
 	private SCFrameworkVersionPersistence _persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName());
 }

@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ResourceBlockPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ResourceBlock> iterator = _models.iterator();
+		Iterator<ResourceBlock> iterator = _resourceBlocks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,7 @@ public class ResourceBlockPersistenceTest {
 
 		newResourceBlock.setReferenceCount(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newResourceBlock));
+		_resourceBlocks.add(_persistence.update(newResourceBlock));
 
 		ResourceBlock existingResourceBlock = _persistence.findByPrimaryKey(newResourceBlock.getPrimaryKey());
 
@@ -488,13 +486,12 @@ public class ResourceBlockPersistenceTest {
 
 		resourceBlock.setReferenceCount(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(resourceBlock));
+		_resourceBlocks.add(_persistence.update(resourceBlock));
 
 		return resourceBlock;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ResourceBlockPersistenceTest.class);
-	private List<ResourceBlock> _models = new ArrayList<ResourceBlock>();
+	private List<ResourceBlock> _resourceBlocks = new ArrayList<ResourceBlock>();
 	private ModelListener<ResourceBlock>[] _modelListeners;
 	private ResourceBlockPersistence _persistence = (ResourceBlockPersistence)PortalBeanLocatorUtil.locate(ResourceBlockPersistence.class.getName());
 }

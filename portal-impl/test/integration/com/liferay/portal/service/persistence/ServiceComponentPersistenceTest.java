@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ServiceComponentPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ServiceComponent> iterator = _models.iterator();
+		Iterator<ServiceComponent> iterator = _serviceComponents.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -144,7 +142,7 @@ public class ServiceComponentPersistenceTest {
 
 		newServiceComponent.setData(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newServiceComponent));
+		_serviceComponents.add(_persistence.update(newServiceComponent));
 
 		ServiceComponent existingServiceComponent = _persistence.findByPrimaryKey(newServiceComponent.getPrimaryKey());
 
@@ -461,13 +459,12 @@ public class ServiceComponentPersistenceTest {
 
 		serviceComponent.setData(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(serviceComponent));
+		_serviceComponents.add(_persistence.update(serviceComponent));
 
 		return serviceComponent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ServiceComponentPersistenceTest.class);
-	private List<ServiceComponent> _models = new ArrayList<ServiceComponent>();
+	private List<ServiceComponent> _serviceComponents = new ArrayList<ServiceComponent>();
 	private ModelListener<ServiceComponent>[] _modelListeners;
 	private ServiceComponentPersistence _persistence = (ServiceComponentPersistence)PortalBeanLocatorUtil.locate(ServiceComponentPersistence.class.getName());
 }

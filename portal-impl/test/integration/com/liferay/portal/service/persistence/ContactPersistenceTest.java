@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class ContactPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Contact> iterator = _models.iterator();
+		Iterator<Contact> iterator = _contacts.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -198,7 +196,7 @@ public class ContactPersistenceTest {
 
 		newContact.setHoursOfOperation(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newContact));
+		_contacts.add(_persistence.update(newContact));
 
 		Contact existingContact = _persistence.findByPrimaryKey(newContact.getPrimaryKey());
 
@@ -615,13 +613,12 @@ public class ContactPersistenceTest {
 
 		contact.setHoursOfOperation(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(contact));
+		_contacts.add(_persistence.update(contact));
 
 		return contact;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ContactPersistenceTest.class);
-	private List<Contact> _models = new ArrayList<Contact>();
+	private List<Contact> _contacts = new ArrayList<Contact>();
 	private ModelListener<Contact>[] _modelListeners;
 	private ContactPersistence _persistence = (ContactPersistence)PortalBeanLocatorUtil.locate(ContactPersistence.class.getName());
 }

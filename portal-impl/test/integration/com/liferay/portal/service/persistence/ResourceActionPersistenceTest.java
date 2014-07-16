@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ResourceActionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ResourceAction> iterator = _models.iterator();
+		Iterator<ResourceAction> iterator = _resourceActions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class ResourceActionPersistenceTest {
 
 		newResourceAction.setBitwiseValue(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newResourceAction));
+		_resourceActions.add(_persistence.update(newResourceAction));
 
 		ResourceAction existingResourceAction = _persistence.findByPrimaryKey(newResourceAction.getPrimaryKey());
 
@@ -455,13 +453,12 @@ public class ResourceActionPersistenceTest {
 
 		resourceAction.setBitwiseValue(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(resourceAction));
+		_resourceActions.add(_persistence.update(resourceAction));
 
 		return resourceAction;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ResourceActionPersistenceTest.class);
-	private List<ResourceAction> _models = new ArrayList<ResourceAction>();
+	private List<ResourceAction> _resourceActions = new ArrayList<ResourceAction>();
 	private ModelListener<ResourceAction>[] _modelListeners;
 	private ResourceActionPersistence _persistence = (ResourceActionPersistence)PortalBeanLocatorUtil.locate(ResourceActionPersistence.class.getName());
 }

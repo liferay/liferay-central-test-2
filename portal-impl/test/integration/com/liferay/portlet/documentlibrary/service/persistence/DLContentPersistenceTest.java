@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -94,7 +92,7 @@ public class DLContentPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLContent> iterator = _models.iterator();
+		Iterator<DLContent> iterator = _dlContents.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -161,7 +159,7 @@ public class DLContentPersistenceTest {
 
 		newDLContent.setSize(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newDLContent));
+		_dlContents.add(_persistence.update(newDLContent));
 
 		DLContent existingDLContent = _persistence.findByPrimaryKey(newDLContent.getPrimaryKey());
 
@@ -525,13 +523,12 @@ public class DLContentPersistenceTest {
 
 		dlContent.setSize(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(dlContent));
+		_dlContents.add(_persistence.update(dlContent));
 
 		return dlContent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLContentPersistenceTest.class);
-	private List<DLContent> _models = new ArrayList<DLContent>();
+	private List<DLContent> _dlContents = new ArrayList<DLContent>();
 	private ModelListener<DLContent>[] _modelListeners;
 	private DLContentPersistence _persistence = (DLContentPersistence)PortalBeanLocatorUtil.locate(DLContentPersistence.class.getName());
 }

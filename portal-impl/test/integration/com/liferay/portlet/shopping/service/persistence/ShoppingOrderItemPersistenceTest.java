@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -88,7 +86,7 @@ public class ShoppingOrderItemPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ShoppingOrderItem> iterator = _models.iterator();
+		Iterator<ShoppingOrderItem> iterator = _shoppingOrderItems.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -152,7 +150,7 @@ public class ShoppingOrderItemPersistenceTest {
 
 		newShoppingOrderItem.setShippedDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newShoppingOrderItem));
+		_shoppingOrderItems.add(_persistence.update(newShoppingOrderItem));
 
 		ShoppingOrderItem existingShoppingOrderItem = _persistence.findByPrimaryKey(newShoppingOrderItem.getPrimaryKey());
 
@@ -449,13 +447,12 @@ public class ShoppingOrderItemPersistenceTest {
 
 		shoppingOrderItem.setShippedDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(shoppingOrderItem));
+		_shoppingOrderItems.add(_persistence.update(shoppingOrderItem));
 
 		return shoppingOrderItem;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShoppingOrderItemPersistenceTest.class);
-	private List<ShoppingOrderItem> _models = new ArrayList<ShoppingOrderItem>();
+	private List<ShoppingOrderItem> _shoppingOrderItems = new ArrayList<ShoppingOrderItem>();
 	private ModelListener<ShoppingOrderItem>[] _modelListeners;
 	private ShoppingOrderItemPersistence _persistence = (ShoppingOrderItemPersistence)PortalBeanLocatorUtil.locate(ShoppingOrderItemPersistence.class.getName());
 }

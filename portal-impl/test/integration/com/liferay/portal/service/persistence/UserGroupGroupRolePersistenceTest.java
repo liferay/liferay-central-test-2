@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -82,7 +80,7 @@ public class UserGroupGroupRolePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<UserGroupGroupRole> iterator = _models.iterator();
+		Iterator<UserGroupGroupRole> iterator = _userGroupGroupRoles.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -132,7 +130,7 @@ public class UserGroupGroupRolePersistenceTest {
 
 		newUserGroupGroupRole.setMvccVersion(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newUserGroupGroupRole));
+		_userGroupGroupRoles.add(_persistence.update(newUserGroupGroupRole));
 
 		UserGroupGroupRole existingUserGroupGroupRole = _persistence.findByPrimaryKey(newUserGroupGroupRole.getPrimaryKey());
 
@@ -449,13 +447,12 @@ public class UserGroupGroupRolePersistenceTest {
 
 		userGroupGroupRole.setMvccVersion(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(userGroupGroupRole));
+		_userGroupGroupRoles.add(_persistence.update(userGroupGroupRole));
 
 		return userGroupGroupRole;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserGroupGroupRolePersistenceTest.class);
-	private List<UserGroupGroupRole> _models = new ArrayList<UserGroupGroupRole>();
+	private List<UserGroupGroupRole> _userGroupGroupRoles = new ArrayList<UserGroupGroupRole>();
 	private ModelListener<UserGroupGroupRole>[] _modelListeners;
 	private UserGroupGroupRolePersistence _persistence = (UserGroupGroupRolePersistence)PortalBeanLocatorUtil.locate(UserGroupGroupRolePersistence.class.getName());
 }

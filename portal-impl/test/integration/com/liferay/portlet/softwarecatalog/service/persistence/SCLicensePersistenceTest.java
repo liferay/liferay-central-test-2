@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class SCLicensePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SCLicense> iterator = _models.iterator();
+		Iterator<SCLicense> iterator = _scLicenses.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class SCLicensePersistenceTest {
 
 		newSCLicense.setRecommended(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newSCLicense));
+		_scLicenses.add(_persistence.update(newSCLicense));
 
 		SCLicense existingSCLicense = _persistence.findByPrimaryKey(newSCLicense.getPrimaryKey());
 
@@ -432,13 +430,12 @@ public class SCLicensePersistenceTest {
 
 		scLicense.setRecommended(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(scLicense));
+		_scLicenses.add(_persistence.update(scLicense));
 
 		return scLicense;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCLicensePersistenceTest.class);
-	private List<SCLicense> _models = new ArrayList<SCLicense>();
+	private List<SCLicense> _scLicenses = new ArrayList<SCLicense>();
 	private ModelListener<SCLicense>[] _modelListeners;
 	private SCLicensePersistence _persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName());
 }

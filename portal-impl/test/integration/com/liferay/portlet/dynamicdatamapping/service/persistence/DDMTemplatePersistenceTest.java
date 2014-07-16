@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DDMTemplatePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DDMTemplate> iterator = _models.iterator();
+		Iterator<DDMTemplate> iterator = _ddmTemplates.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -176,7 +174,7 @@ public class DDMTemplatePersistenceTest {
 
 		newDDMTemplate.setSmallImageURL(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newDDMTemplate));
+		_ddmTemplates.add(_persistence.update(newDDMTemplate));
 
 		DDMTemplate existingDDMTemplate = _persistence.findByPrimaryKey(newDDMTemplate.getPrimaryKey());
 
@@ -795,13 +793,12 @@ public class DDMTemplatePersistenceTest {
 
 		ddmTemplate.setSmallImageURL(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(ddmTemplate));
+		_ddmTemplates.add(_persistence.update(ddmTemplate));
 
 		return ddmTemplate;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDMTemplatePersistenceTest.class);
-	private List<DDMTemplate> _models = new ArrayList<DDMTemplate>();
+	private List<DDMTemplate> _ddmTemplates = new ArrayList<DDMTemplate>();
 	private ModelListener<DDMTemplate>[] _modelListeners;
 	private DDMTemplatePersistence _persistence = (DDMTemplatePersistence)PortalBeanLocatorUtil.locate(DDMTemplatePersistence.class.getName());
 }

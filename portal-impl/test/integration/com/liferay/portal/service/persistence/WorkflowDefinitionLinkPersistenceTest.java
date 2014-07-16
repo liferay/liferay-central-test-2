@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class WorkflowDefinitionLinkPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<WorkflowDefinitionLink> iterator = _models.iterator();
+		Iterator<WorkflowDefinitionLink> iterator = _workflowDefinitionLinks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -158,7 +156,8 @@ public class WorkflowDefinitionLinkPersistenceTest {
 
 		newWorkflowDefinitionLink.setWorkflowDefinitionVersion(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newWorkflowDefinitionLink));
+		_workflowDefinitionLinks.add(_persistence.update(
+				newWorkflowDefinitionLink));
 
 		WorkflowDefinitionLink existingWorkflowDefinitionLink = _persistence.findByPrimaryKey(newWorkflowDefinitionLink.getPrimaryKey());
 
@@ -550,13 +549,12 @@ public class WorkflowDefinitionLinkPersistenceTest {
 
 		workflowDefinitionLink.setWorkflowDefinitionVersion(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(workflowDefinitionLink));
+		_workflowDefinitionLinks.add(_persistence.update(workflowDefinitionLink));
 
 		return workflowDefinitionLink;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WorkflowDefinitionLinkPersistenceTest.class);
-	private List<WorkflowDefinitionLink> _models = new ArrayList<WorkflowDefinitionLink>();
+	private List<WorkflowDefinitionLink> _workflowDefinitionLinks = new ArrayList<WorkflowDefinitionLink>();
 	private ModelListener<WorkflowDefinitionLink>[] _modelListeners;
 	private WorkflowDefinitionLinkPersistence _persistence = (WorkflowDefinitionLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowDefinitionLinkPersistence.class.getName());
 }

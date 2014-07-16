@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ShoppingCartPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ShoppingCart> iterator = _models.iterator();
+		Iterator<ShoppingCart> iterator = _shoppingCarts.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -154,7 +152,7 @@ public class ShoppingCartPersistenceTest {
 
 		newShoppingCart.setInsure(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newShoppingCart));
+		_shoppingCarts.add(_persistence.update(newShoppingCart));
 
 		ShoppingCart existingShoppingCart = _persistence.findByPrimaryKey(newShoppingCart.getPrimaryKey());
 
@@ -499,13 +497,12 @@ public class ShoppingCartPersistenceTest {
 
 		shoppingCart.setInsure(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(shoppingCart));
+		_shoppingCarts.add(_persistence.update(shoppingCart));
 
 		return shoppingCart;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShoppingCartPersistenceTest.class);
-	private List<ShoppingCart> _models = new ArrayList<ShoppingCart>();
+	private List<ShoppingCart> _shoppingCarts = new ArrayList<ShoppingCart>();
 	private ModelListener<ShoppingCart>[] _modelListeners;
 	private ShoppingCartPersistence _persistence = (ShoppingCartPersistence)PortalBeanLocatorUtil.locate(ShoppingCartPersistence.class.getName());
 }

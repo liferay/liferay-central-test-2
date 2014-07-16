@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DDMStructurePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DDMStructure> iterator = _models.iterator();
+		Iterator<DDMStructure> iterator = _ddmStructures.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -166,7 +164,7 @@ public class DDMStructurePersistenceTest {
 
 		newDDMStructure.setType(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newDDMStructure));
+		_ddmStructures.add(_persistence.update(newDDMStructure));
 
 		DDMStructure existingDDMStructure = _persistence.findByPrimaryKey(newDDMStructure.getPrimaryKey());
 
@@ -699,13 +697,12 @@ public class DDMStructurePersistenceTest {
 
 		ddmStructure.setType(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(ddmStructure));
+		_ddmStructures.add(_persistence.update(ddmStructure));
 
 		return ddmStructure;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDMStructurePersistenceTest.class);
-	private List<DDMStructure> _models = new ArrayList<DDMStructure>();
+	private List<DDMStructure> _ddmStructures = new ArrayList<DDMStructure>();
 	private ModelListener<DDMStructure>[] _modelListeners;
 	private DDMStructurePersistence _persistence = (DDMStructurePersistence)PortalBeanLocatorUtil.locate(DDMStructurePersistence.class.getName());
 }

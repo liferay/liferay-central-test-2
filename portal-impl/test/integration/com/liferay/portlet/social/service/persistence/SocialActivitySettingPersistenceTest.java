@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class SocialActivitySettingPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SocialActivitySetting> iterator = _models.iterator();
+		Iterator<SocialActivitySetting> iterator = _socialActivitySettings.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -147,7 +145,8 @@ public class SocialActivitySettingPersistenceTest {
 
 		newSocialActivitySetting.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newSocialActivitySetting));
+		_socialActivitySettings.add(_persistence.update(
+				newSocialActivitySetting));
 
 		SocialActivitySetting existingSocialActivitySetting = _persistence.findByPrimaryKey(newSocialActivitySetting.getPrimaryKey());
 
@@ -517,13 +516,12 @@ public class SocialActivitySettingPersistenceTest {
 
 		socialActivitySetting.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(socialActivitySetting));
+		_socialActivitySettings.add(_persistence.update(socialActivitySetting));
 
 		return socialActivitySetting;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SocialActivitySettingPersistenceTest.class);
-	private List<SocialActivitySetting> _models = new ArrayList<SocialActivitySetting>();
+	private List<SocialActivitySetting> _socialActivitySettings = new ArrayList<SocialActivitySetting>();
 	private ModelListener<SocialActivitySetting>[] _modelListeners;
 	private SocialActivitySettingPersistence _persistence = (SocialActivitySettingPersistence)PortalBeanLocatorUtil.locate(SocialActivitySettingPersistence.class.getName());
 }

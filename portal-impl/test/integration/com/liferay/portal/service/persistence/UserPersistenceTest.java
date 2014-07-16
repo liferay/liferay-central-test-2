@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class UserPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<User> iterator = _models.iterator();
+		Iterator<User> iterator = _users.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -215,7 +213,7 @@ public class UserPersistenceTest {
 
 		newUser.setStatus(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newUser));
+		_users.add(_persistence.update(newUser));
 
 		User existingUser = _persistence.findByPrimaryKey(newUser.getPrimaryKey());
 
@@ -897,13 +895,12 @@ public class UserPersistenceTest {
 
 		user.setStatus(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(user));
+		_users.add(_persistence.update(user));
 
 		return user;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserPersistenceTest.class);
-	private List<User> _models = new ArrayList<User>();
+	private List<User> _users = new ArrayList<User>();
 	private ModelListener<User>[] _modelListeners;
 	private UserPersistence _persistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName());
 }

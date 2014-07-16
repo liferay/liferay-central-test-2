@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MDRRulePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MDRRule> iterator = _models.iterator();
+		Iterator<MDRRule> iterator = _mdrRules.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -160,7 +158,7 @@ public class MDRRulePersistenceTest {
 
 		newMDRRule.setTypeSettings(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newMDRRule));
+		_mdrRules.add(_persistence.update(newMDRRule));
 
 		MDRRule existingMDRRule = _persistence.findByPrimaryKey(newMDRRule.getPrimaryKey());
 
@@ -525,13 +523,12 @@ public class MDRRulePersistenceTest {
 
 		mdrRule.setTypeSettings(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(mdrRule));
+		_mdrRules.add(_persistence.update(mdrRule));
 
 		return mdrRule;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MDRRulePersistenceTest.class);
-	private List<MDRRule> _models = new ArrayList<MDRRule>();
+	private List<MDRRule> _mdrRules = new ArrayList<MDRRule>();
 	private ModelListener<MDRRule>[] _modelListeners;
 	private MDRRulePersistence _persistence = (MDRRulePersistence)PortalBeanLocatorUtil.locate(MDRRulePersistence.class.getName());
 }

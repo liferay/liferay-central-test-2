@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class PasswordPolicyRelPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PasswordPolicyRel> iterator = _models.iterator();
+		Iterator<PasswordPolicyRel> iterator = _passwordPolicyRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -140,7 +138,7 @@ public class PasswordPolicyRelPersistenceTest {
 
 		newPasswordPolicyRel.setClassPK(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newPasswordPolicyRel));
+		_passwordPolicyRels.add(_persistence.update(newPasswordPolicyRel));
 
 		PasswordPolicyRel existingPasswordPolicyRel = _persistence.findByPrimaryKey(newPasswordPolicyRel.getPrimaryKey());
 
@@ -449,13 +447,12 @@ public class PasswordPolicyRelPersistenceTest {
 
 		passwordPolicyRel.setClassPK(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(passwordPolicyRel));
+		_passwordPolicyRels.add(_persistence.update(passwordPolicyRel));
 
 		return passwordPolicyRel;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyRelPersistenceTest.class);
-	private List<PasswordPolicyRel> _models = new ArrayList<PasswordPolicyRel>();
+	private List<PasswordPolicyRel> _passwordPolicyRels = new ArrayList<PasswordPolicyRel>();
 	private ModelListener<PasswordPolicyRel>[] _modelListeners;
 	private PasswordPolicyRelPersistence _persistence = (PasswordPolicyRelPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyRelPersistence.class.getName());
 }

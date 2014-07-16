@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class UserNotificationDeliveryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<UserNotificationDelivery> iterator = _models.iterator();
+		Iterator<UserNotificationDelivery> iterator = _userNotificationDeliveries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -150,7 +148,8 @@ public class UserNotificationDeliveryPersistenceTest {
 
 		newUserNotificationDelivery.setDeliver(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newUserNotificationDelivery));
+		_userNotificationDeliveries.add(_persistence.update(
+				newUserNotificationDelivery));
 
 		UserNotificationDelivery existingUserNotificationDelivery = _persistence.findByPrimaryKey(newUserNotificationDelivery.getPrimaryKey());
 
@@ -499,13 +498,13 @@ public class UserNotificationDeliveryPersistenceTest {
 
 		userNotificationDelivery.setDeliver(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(userNotificationDelivery));
+		_userNotificationDeliveries.add(_persistence.update(
+				userNotificationDelivery));
 
 		return userNotificationDelivery;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserNotificationDeliveryPersistenceTest.class);
-	private List<UserNotificationDelivery> _models = new ArrayList<UserNotificationDelivery>();
+	private List<UserNotificationDelivery> _userNotificationDeliveries = new ArrayList<UserNotificationDelivery>();
 	private ModelListener<UserNotificationDelivery>[] _modelListeners;
 	private UserNotificationDeliveryPersistence _persistence = (UserNotificationDeliveryPersistence)PortalBeanLocatorUtil.locate(UserNotificationDeliveryPersistence.class.getName());
 }

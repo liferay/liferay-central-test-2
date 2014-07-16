@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class DDMStorageLinkPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DDMStorageLink> iterator = _models.iterator();
+		Iterator<DDMStorageLink> iterator = _ddmStorageLinks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class DDMStorageLinkPersistenceTest {
 
 		newDDMStorageLink.setStructureId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newDDMStorageLink));
+		_ddmStorageLinks.add(_persistence.update(newDDMStorageLink));
 
 		DDMStorageLink existingDDMStorageLink = _persistence.findByPrimaryKey(newDDMStorageLink.getPrimaryKey());
 
@@ -461,13 +459,12 @@ public class DDMStorageLinkPersistenceTest {
 
 		ddmStorageLink.setStructureId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(ddmStorageLink));
+		_ddmStorageLinks.add(_persistence.update(ddmStorageLink));
 
 		return ddmStorageLink;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDMStorageLinkPersistenceTest.class);
-	private List<DDMStorageLink> _models = new ArrayList<DDMStorageLink>();
+	private List<DDMStorageLink> _ddmStorageLinks = new ArrayList<DDMStorageLink>();
 	private ModelListener<DDMStorageLink>[] _modelListeners;
 	private DDMStorageLinkPersistence _persistence = (DDMStorageLinkPersistence)PortalBeanLocatorUtil.locate(DDMStorageLinkPersistence.class.getName());
 }

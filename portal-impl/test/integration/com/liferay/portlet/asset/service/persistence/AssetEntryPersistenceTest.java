@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class AssetEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AssetEntry> iterator = _models.iterator();
+		Iterator<AssetEntry> iterator = _assetEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -187,7 +185,7 @@ public class AssetEntryPersistenceTest {
 
 		newAssetEntry.setViewCount(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newAssetEntry));
+		_assetEntries.add(_persistence.update(newAssetEntry));
 
 		AssetEntry existingAssetEntry = _persistence.findByPrimaryKey(newAssetEntry.getPrimaryKey());
 
@@ -669,13 +667,12 @@ public class AssetEntryPersistenceTest {
 
 		assetEntry.setViewCount(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(assetEntry));
+		_assetEntries.add(_persistence.update(assetEntry));
 
 		return assetEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetEntryPersistenceTest.class);
-	private List<AssetEntry> _models = new ArrayList<AssetEntry>();
+	private List<AssetEntry> _assetEntries = new ArrayList<AssetEntry>();
 	private ModelListener<AssetEntry>[] _modelListeners;
 	private AssetEntryPersistence _persistence = (AssetEntryPersistence)PortalBeanLocatorUtil.locate(AssetEntryPersistence.class.getName());
 }

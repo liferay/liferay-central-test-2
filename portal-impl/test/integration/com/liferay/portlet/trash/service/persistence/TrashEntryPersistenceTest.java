@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class TrashEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<TrashEntry> iterator = _models.iterator();
+		Iterator<TrashEntry> iterator = _trashEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -154,7 +152,7 @@ public class TrashEntryPersistenceTest {
 
 		newTrashEntry.setStatus(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newTrashEntry));
+		_trashEntries.add(_persistence.update(newTrashEntry));
 
 		TrashEntry existingTrashEntry = _persistence.findByPrimaryKey(newTrashEntry.getPrimaryKey());
 
@@ -524,13 +522,12 @@ public class TrashEntryPersistenceTest {
 
 		trashEntry.setStatus(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(trashEntry));
+		_trashEntries.add(_persistence.update(trashEntry));
 
 		return trashEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(TrashEntryPersistenceTest.class);
-	private List<TrashEntry> _models = new ArrayList<TrashEntry>();
+	private List<TrashEntry> _trashEntries = new ArrayList<TrashEntry>();
 	private ModelListener<TrashEntry>[] _modelListeners;
 	private TrashEntryPersistence _persistence = (TrashEntryPersistence)PortalBeanLocatorUtil.locate(TrashEntryPersistence.class.getName());
 }

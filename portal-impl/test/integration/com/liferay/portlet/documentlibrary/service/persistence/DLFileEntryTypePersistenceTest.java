@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DLFileEntryTypePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLFileEntryType> iterator = _models.iterator();
+		Iterator<DLFileEntryType> iterator = _dlFileEntryTypes.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -156,7 +154,7 @@ public class DLFileEntryTypePersistenceTest {
 
 		newDLFileEntryType.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newDLFileEntryType));
+		_dlFileEntryTypes.add(_persistence.update(newDLFileEntryType));
 
 		DLFileEntryType existingDLFileEntryType = _persistence.findByPrimaryKey(newDLFileEntryType.getPrimaryKey());
 
@@ -565,13 +563,12 @@ public class DLFileEntryTypePersistenceTest {
 
 		dlFileEntryType.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(dlFileEntryType));
+		_dlFileEntryTypes.add(_persistence.update(dlFileEntryType));
 
 		return dlFileEntryType;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLFileEntryTypePersistenceTest.class);
-	private List<DLFileEntryType> _models = new ArrayList<DLFileEntryType>();
+	private List<DLFileEntryType> _dlFileEntryTypes = new ArrayList<DLFileEntryType>();
 	private ModelListener<DLFileEntryType>[] _modelListeners;
 	private DLFileEntryTypePersistence _persistence = (DLFileEntryTypePersistence)PortalBeanLocatorUtil.locate(DLFileEntryTypePersistence.class.getName());
 }

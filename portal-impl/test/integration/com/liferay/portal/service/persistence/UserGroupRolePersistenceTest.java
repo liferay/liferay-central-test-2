@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -82,7 +80,7 @@ public class UserGroupRolePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<UserGroupRole> iterator = _models.iterator();
+		Iterator<UserGroupRole> iterator = _userGroupRoles.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -132,7 +130,7 @@ public class UserGroupRolePersistenceTest {
 
 		newUserGroupRole.setMvccVersion(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newUserGroupRole));
+		_userGroupRoles.add(_persistence.update(newUserGroupRole));
 
 		UserGroupRole existingUserGroupRole = _persistence.findByPrimaryKey(newUserGroupRole.getPrimaryKey());
 
@@ -446,13 +444,12 @@ public class UserGroupRolePersistenceTest {
 
 		userGroupRole.setMvccVersion(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(userGroupRole));
+		_userGroupRoles.add(_persistence.update(userGroupRole));
 
 		return userGroupRole;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserGroupRolePersistenceTest.class);
-	private List<UserGroupRole> _models = new ArrayList<UserGroupRole>();
+	private List<UserGroupRole> _userGroupRoles = new ArrayList<UserGroupRole>();
 	private ModelListener<UserGroupRole>[] _modelListeners;
 	private UserGroupRolePersistence _persistence = (UserGroupRolePersistence)PortalBeanLocatorUtil.locate(UserGroupRolePersistence.class.getName());
 }

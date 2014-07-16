@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class LayoutSetPrototypePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<LayoutSetPrototype> iterator = _models.iterator();
+		Iterator<LayoutSetPrototype> iterator = _layoutSetPrototypes.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -155,7 +153,7 @@ public class LayoutSetPrototypePersistenceTest {
 
 		newLayoutSetPrototype.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newLayoutSetPrototype));
+		_layoutSetPrototypes.add(_persistence.update(newLayoutSetPrototype));
 
 		LayoutSetPrototype existingLayoutSetPrototype = _persistence.findByPrimaryKey(newLayoutSetPrototype.getPrimaryKey());
 
@@ -508,13 +506,12 @@ public class LayoutSetPrototypePersistenceTest {
 
 		layoutSetPrototype.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(layoutSetPrototype));
+		_layoutSetPrototypes.add(_persistence.update(layoutSetPrototype));
 
 		return layoutSetPrototype;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypePersistenceTest.class);
-	private List<LayoutSetPrototype> _models = new ArrayList<LayoutSetPrototype>();
+	private List<LayoutSetPrototype> _layoutSetPrototypes = new ArrayList<LayoutSetPrototype>();
 	private ModelListener<LayoutSetPrototype>[] _modelListeners;
 	private LayoutSetPrototypePersistence _persistence = (LayoutSetPrototypePersistence)PortalBeanLocatorUtil.locate(LayoutSetPrototypePersistence.class.getName());
 }

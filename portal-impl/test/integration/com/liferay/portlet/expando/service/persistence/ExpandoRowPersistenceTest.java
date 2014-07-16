@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ExpandoRowPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ExpandoRow> iterator = _models.iterator();
+		Iterator<ExpandoRow> iterator = _expandoRows.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class ExpandoRowPersistenceTest {
 
 		newExpandoRow.setClassPK(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newExpandoRow));
+		_expandoRows.add(_persistence.update(newExpandoRow));
 
 		ExpandoRow existingExpandoRow = _persistence.findByPrimaryKey(newExpandoRow.getPrimaryKey());
 
@@ -460,13 +458,12 @@ public class ExpandoRowPersistenceTest {
 
 		expandoRow.setClassPK(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(expandoRow));
+		_expandoRows.add(_persistence.update(expandoRow));
 
 		return expandoRow;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ExpandoRowPersistenceTest.class);
-	private List<ExpandoRow> _models = new ArrayList<ExpandoRow>();
+	private List<ExpandoRow> _expandoRows = new ArrayList<ExpandoRow>();
 	private ModelListener<ExpandoRow>[] _modelListeners;
 	private ExpandoRowPersistence _persistence = (ExpandoRowPersistence)PortalBeanLocatorUtil.locate(ExpandoRowPersistence.class.getName());
 }

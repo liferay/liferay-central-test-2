@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class TicketPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Ticket> iterator = _models.iterator();
+		Iterator<Ticket> iterator = _tickets.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -153,7 +151,7 @@ public class TicketPersistenceTest {
 
 		newTicket.setExpirationDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newTicket));
+		_tickets.add(_persistence.update(newTicket));
 
 		Ticket existingTicket = _persistence.findByPrimaryKey(newTicket.getPrimaryKey());
 
@@ -461,13 +459,12 @@ public class TicketPersistenceTest {
 
 		ticket.setExpirationDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(ticket));
+		_tickets.add(_persistence.update(ticket));
 
 		return ticket;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(TicketPersistenceTest.class);
-	private List<Ticket> _models = new ArrayList<Ticket>();
+	private List<Ticket> _tickets = new ArrayList<Ticket>();
 	private ModelListener<Ticket>[] _modelListeners;
 	private TicketPersistence _persistence = (TicketPersistence)PortalBeanLocatorUtil.locate(TicketPersistence.class.getName());
 }

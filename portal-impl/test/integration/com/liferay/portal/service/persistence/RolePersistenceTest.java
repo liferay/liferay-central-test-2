@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class RolePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Role> iterator = _models.iterator();
+		Iterator<Role> iterator = _roles.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -163,7 +161,7 @@ public class RolePersistenceTest {
 
 		newRole.setSubtype(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newRole));
+		_roles.add(_persistence.update(newRole));
 
 		Role existingRole = _persistence.findByPrimaryKey(newRole.getPrimaryKey());
 
@@ -625,13 +623,12 @@ public class RolePersistenceTest {
 
 		role.setSubtype(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(role));
+		_roles.add(_persistence.update(role));
 
 		return role;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RolePersistenceTest.class);
-	private List<Role> _models = new ArrayList<Role>();
+	private List<Role> _roles = new ArrayList<Role>();
 	private ModelListener<Role>[] _modelListeners;
 	private RolePersistence _persistence = (RolePersistence)PortalBeanLocatorUtil.locate(RolePersistence.class.getName());
 }

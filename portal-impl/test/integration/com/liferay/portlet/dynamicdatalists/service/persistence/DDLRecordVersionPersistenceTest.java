@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -87,7 +85,7 @@ public class DDLRecordVersionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DDLRecordVersion> iterator = _models.iterator();
+		Iterator<DDLRecordVersion> iterator = _ddlRecordVersions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -161,7 +159,7 @@ public class DDLRecordVersionPersistenceTest {
 
 		newDDLRecordVersion.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newDDLRecordVersion));
+		_ddlRecordVersions.add(_persistence.update(newDDLRecordVersion));
 
 		DDLRecordVersion existingDDLRecordVersion = _persistence.findByPrimaryKey(newDDLRecordVersion.getPrimaryKey());
 
@@ -507,13 +505,12 @@ public class DDLRecordVersionPersistenceTest {
 
 		ddlRecordVersion.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(ddlRecordVersion));
+		_ddlRecordVersions.add(_persistence.update(ddlRecordVersion));
 
 		return ddlRecordVersion;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDLRecordVersionPersistenceTest.class);
-	private List<DDLRecordVersion> _models = new ArrayList<DDLRecordVersion>();
+	private List<DDLRecordVersion> _ddlRecordVersions = new ArrayList<DDLRecordVersion>();
 	private ModelListener<DDLRecordVersion>[] _modelListeners;
 	private DDLRecordVersionPersistence _persistence = (DDLRecordVersionPersistence)PortalBeanLocatorUtil.locate(DDLRecordVersionPersistence.class.getName());
 }

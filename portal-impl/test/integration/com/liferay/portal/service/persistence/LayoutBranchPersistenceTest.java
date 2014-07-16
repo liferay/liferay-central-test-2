@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class LayoutBranchPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<LayoutBranch> iterator = _models.iterator();
+		Iterator<LayoutBranch> iterator = _layoutBranchs.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -154,7 +152,7 @@ public class LayoutBranchPersistenceTest {
 
 		newLayoutBranch.setMaster(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newLayoutBranch));
+		_layoutBranchs.add(_persistence.update(newLayoutBranch));
 
 		LayoutBranch existingLayoutBranch = _persistence.findByPrimaryKey(newLayoutBranch.getPrimaryKey());
 
@@ -519,13 +517,12 @@ public class LayoutBranchPersistenceTest {
 
 		layoutBranch.setMaster(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(layoutBranch));
+		_layoutBranchs.add(_persistence.update(layoutBranch));
 
 		return layoutBranch;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutBranchPersistenceTest.class);
-	private List<LayoutBranch> _models = new ArrayList<LayoutBranch>();
+	private List<LayoutBranch> _layoutBranchs = new ArrayList<LayoutBranch>();
 	private ModelListener<LayoutBranch>[] _modelListeners;
 	private LayoutBranchPersistence _persistence = (LayoutBranchPersistence)PortalBeanLocatorUtil.locate(LayoutBranchPersistence.class.getName());
 }

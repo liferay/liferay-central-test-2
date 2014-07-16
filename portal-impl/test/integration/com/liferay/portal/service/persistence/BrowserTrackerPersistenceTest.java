@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class BrowserTrackerPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<BrowserTracker> iterator = _models.iterator();
+		Iterator<BrowserTracker> iterator = _browserTrackers.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -138,7 +136,7 @@ public class BrowserTrackerPersistenceTest {
 
 		newBrowserTracker.setBrowserKey(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newBrowserTracker));
+		_browserTrackers.add(_persistence.update(newBrowserTracker));
 
 		BrowserTracker existingBrowserTracker = _persistence.findByPrimaryKey(newBrowserTracker.getPrimaryKey());
 
@@ -427,13 +425,12 @@ public class BrowserTrackerPersistenceTest {
 
 		browserTracker.setBrowserKey(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(browserTracker));
+		_browserTrackers.add(_persistence.update(browserTracker));
 
 		return browserTracker;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BrowserTrackerPersistenceTest.class);
-	private List<BrowserTracker> _models = new ArrayList<BrowserTracker>();
+	private List<BrowserTracker> _browserTrackers = new ArrayList<BrowserTracker>();
 	private ModelListener<BrowserTracker>[] _modelListeners;
 	private BrowserTrackerPersistence _persistence = (BrowserTrackerPersistence)PortalBeanLocatorUtil.locate(BrowserTrackerPersistence.class.getName());
 }

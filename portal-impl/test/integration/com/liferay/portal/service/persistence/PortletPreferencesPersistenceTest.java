@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class PortletPreferencesPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PortletPreferences> iterator = _models.iterator();
+		Iterator<PortletPreferences> iterator = _portletPreferenceses.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,7 @@ public class PortletPreferencesPersistenceTest {
 
 		newPortletPreferences.setPreferences(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newPortletPreferences));
+		_portletPreferenceses.add(_persistence.update(newPortletPreferences));
 
 		PortletPreferences existingPortletPreferences = _persistence.findByPrimaryKey(newPortletPreferences.getPrimaryKey());
 
@@ -558,13 +556,12 @@ public class PortletPreferencesPersistenceTest {
 
 		portletPreferences.setPreferences(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(portletPreferences));
+		_portletPreferenceses.add(_persistence.update(portletPreferences));
 
 		return portletPreferences;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PortletPreferencesPersistenceTest.class);
-	private List<PortletPreferences> _models = new ArrayList<PortletPreferences>();
+	private List<PortletPreferences> _portletPreferenceses = new ArrayList<PortletPreferences>();
 	private ModelListener<PortletPreferences>[] _modelListeners;
 	private PortletPreferencesPersistence _persistence = (PortletPreferencesPersistence)PortalBeanLocatorUtil.locate(PortletPreferencesPersistence.class.getName());
 }

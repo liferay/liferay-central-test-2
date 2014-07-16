@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DLFileEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLFileEntry> iterator = _models.iterator();
+		Iterator<DLFileEntry> iterator = _dlFileEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -190,7 +188,7 @@ public class DLFileEntryPersistenceTest {
 
 		newDLFileEntry.setManualCheckInRequired(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newDLFileEntry));
+		_dlFileEntries.add(_persistence.update(newDLFileEntry));
 
 		DLFileEntry existingDLFileEntry = _persistence.findByPrimaryKey(newDLFileEntry.getPrimaryKey());
 
@@ -824,13 +822,12 @@ public class DLFileEntryPersistenceTest {
 
 		dlFileEntry.setManualCheckInRequired(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(dlFileEntry));
+		_dlFileEntries.add(_persistence.update(dlFileEntry));
 
 		return dlFileEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLFileEntryPersistenceTest.class);
-	private List<DLFileEntry> _models = new ArrayList<DLFileEntry>();
+	private List<DLFileEntry> _dlFileEntries = new ArrayList<DLFileEntry>();
 	private ModelListener<DLFileEntry>[] _modelListeners;
 	private DLFileEntryPersistence _persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class ShoppingOrderPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ShoppingOrder> iterator = _models.iterator();
+		Iterator<ShoppingOrder> iterator = _shoppingOrders.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -237,7 +235,7 @@ public class ShoppingOrderPersistenceTest {
 
 		newShoppingOrder.setSendShippingEmail(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newShoppingOrder));
+		_shoppingOrders.add(_persistence.update(newShoppingOrder));
 
 		ShoppingOrder existingShoppingOrder = _persistence.findByPrimaryKey(newShoppingOrder.getPrimaryKey());
 
@@ -788,13 +786,12 @@ public class ShoppingOrderPersistenceTest {
 
 		shoppingOrder.setSendShippingEmail(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(shoppingOrder));
+		_shoppingOrders.add(_persistence.update(shoppingOrder));
 
 		return shoppingOrder;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShoppingOrderPersistenceTest.class);
-	private List<ShoppingOrder> _models = new ArrayList<ShoppingOrder>();
+	private List<ShoppingOrder> _shoppingOrders = new ArrayList<ShoppingOrder>();
 	private ModelListener<ShoppingOrder>[] _modelListeners;
 	private ShoppingOrderPersistence _persistence = (ShoppingOrderPersistence)PortalBeanLocatorUtil.locate(ShoppingOrderPersistence.class.getName());
 }

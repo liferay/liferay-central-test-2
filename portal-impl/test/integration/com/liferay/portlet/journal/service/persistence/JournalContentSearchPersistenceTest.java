@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class JournalContentSearchPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<JournalContentSearch> iterator = _models.iterator();
+		Iterator<JournalContentSearch> iterator = _journalContentSearchs.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -147,7 +145,7 @@ public class JournalContentSearchPersistenceTest {
 
 		newJournalContentSearch.setArticleId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newJournalContentSearch));
+		_journalContentSearchs.add(_persistence.update(newJournalContentSearch));
 
 		JournalContentSearch existingJournalContentSearch = _persistence.findByPrimaryKey(newJournalContentSearch.getPrimaryKey());
 
@@ -572,13 +570,12 @@ public class JournalContentSearchPersistenceTest {
 
 		journalContentSearch.setArticleId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(journalContentSearch));
+		_journalContentSearchs.add(_persistence.update(journalContentSearch));
 
 		return journalContentSearch;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalContentSearchPersistenceTest.class);
-	private List<JournalContentSearch> _models = new ArrayList<JournalContentSearch>();
+	private List<JournalContentSearch> _journalContentSearchs = new ArrayList<JournalContentSearch>();
 	private ModelListener<JournalContentSearch>[] _modelListeners;
 	private JournalContentSearchPersistence _persistence = (JournalContentSearchPersistence)PortalBeanLocatorUtil.locate(JournalContentSearchPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class SCProductEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SCProductEntry> iterator = _models.iterator();
+		Iterator<SCProductEntry> iterator = _scProductEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -166,7 +164,7 @@ public class SCProductEntryPersistenceTest {
 
 		newSCProductEntry.setRepoArtifactId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newSCProductEntry));
+		_scProductEntries.add(_persistence.update(newSCProductEntry));
 
 		SCProductEntry existingSCProductEntry = _persistence.findByPrimaryKey(newSCProductEntry.getPrimaryKey());
 
@@ -562,13 +560,12 @@ public class SCProductEntryPersistenceTest {
 
 		scProductEntry.setRepoArtifactId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(scProductEntry));
+		_scProductEntries.add(_persistence.update(scProductEntry));
 
 		return scProductEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCProductEntryPersistenceTest.class);
-	private List<SCProductEntry> _models = new ArrayList<SCProductEntry>();
+	private List<SCProductEntry> _scProductEntries = new ArrayList<SCProductEntry>();
 	private ModelListener<SCProductEntry>[] _modelListeners;
 	private SCProductEntryPersistence _persistence = (SCProductEntryPersistence)PortalBeanLocatorUtil.locate(SCProductEntryPersistence.class.getName());
 }

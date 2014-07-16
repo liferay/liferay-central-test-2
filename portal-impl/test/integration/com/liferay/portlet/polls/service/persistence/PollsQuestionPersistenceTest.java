@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class PollsQuestionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PollsQuestion> iterator = _models.iterator();
+		Iterator<PollsQuestion> iterator = _pollsQuestions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -158,7 +156,7 @@ public class PollsQuestionPersistenceTest {
 
 		newPollsQuestion.setLastVoteDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newPollsQuestion));
+		_pollsQuestions.add(_persistence.update(newPollsQuestion));
 
 		PollsQuestion existingPollsQuestion = _persistence.findByPrimaryKey(newPollsQuestion.getPrimaryKey());
 
@@ -540,13 +538,12 @@ public class PollsQuestionPersistenceTest {
 
 		pollsQuestion.setLastVoteDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(pollsQuestion));
+		_pollsQuestions.add(_persistence.update(pollsQuestion));
 
 		return pollsQuestion;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PollsQuestionPersistenceTest.class);
-	private List<PollsQuestion> _models = new ArrayList<PollsQuestion>();
+	private List<PollsQuestion> _pollsQuestions = new ArrayList<PollsQuestion>();
 	private ModelListener<PollsQuestion>[] _modelListeners;
 	private PollsQuestionPersistence _persistence = (PollsQuestionPersistence)PortalBeanLocatorUtil.locate(PollsQuestionPersistence.class.getName());
 }

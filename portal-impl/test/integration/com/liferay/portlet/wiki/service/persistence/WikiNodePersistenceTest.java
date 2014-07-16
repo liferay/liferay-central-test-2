@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class WikiNodePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<WikiNode> iterator = _models.iterator();
+		Iterator<WikiNode> iterator = _wikiNodes.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -164,7 +162,7 @@ public class WikiNodePersistenceTest {
 
 		newWikiNode.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newWikiNode));
+		_wikiNodes.add(_persistence.update(newWikiNode));
 
 		WikiNode existingWikiNode = _persistence.findByPrimaryKey(newWikiNode.getPrimaryKey());
 
@@ -614,13 +612,12 @@ public class WikiNodePersistenceTest {
 
 		wikiNode.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(wikiNode));
+		_wikiNodes.add(_persistence.update(wikiNode));
 
 		return wikiNode;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WikiNodePersistenceTest.class);
-	private List<WikiNode> _models = new ArrayList<WikiNode>();
+	private List<WikiNode> _wikiNodes = new ArrayList<WikiNode>();
 	private ModelListener<WikiNode>[] _modelListeners;
 	private WikiNodePersistence _persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName());
 }

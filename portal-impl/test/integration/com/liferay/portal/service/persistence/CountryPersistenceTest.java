@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -85,7 +83,7 @@ public class CountryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Country> iterator = _models.iterator();
+		Iterator<Country> iterator = _countries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -147,7 +145,7 @@ public class CountryPersistenceTest {
 
 		newCountry.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newCountry));
+		_countries.add(_persistence.update(newCountry));
 
 		Country existingCountry = _persistence.findByPrimaryKey(newCountry.getPrimaryKey());
 
@@ -473,13 +471,12 @@ public class CountryPersistenceTest {
 
 		country.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(country));
+		_countries.add(_persistence.update(country));
 
 		return country;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CountryPersistenceTest.class);
-	private List<Country> _models = new ArrayList<Country>();
+	private List<Country> _countries = new ArrayList<Country>();
 	private ModelListener<Country>[] _modelListeners;
 	private CountryPersistence _persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName());
 }

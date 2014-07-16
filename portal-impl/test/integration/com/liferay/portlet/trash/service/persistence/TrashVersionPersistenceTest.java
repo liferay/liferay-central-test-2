@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class TrashVersionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<TrashVersion> iterator = _models.iterator();
+		Iterator<TrashVersion> iterator = _trashVersions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -143,7 +141,7 @@ public class TrashVersionPersistenceTest {
 
 		newTrashVersion.setStatus(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newTrashVersion));
+		_trashVersions.add(_persistence.update(newTrashVersion));
 
 		TrashVersion existingTrashVersion = _persistence.findByPrimaryKey(newTrashVersion.getPrimaryKey());
 
@@ -485,13 +483,12 @@ public class TrashVersionPersistenceTest {
 
 		trashVersion.setStatus(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(trashVersion));
+		_trashVersions.add(_persistence.update(trashVersion));
 
 		return trashVersion;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(TrashVersionPersistenceTest.class);
-	private List<TrashVersion> _models = new ArrayList<TrashVersion>();
+	private List<TrashVersion> _trashVersions = new ArrayList<TrashVersion>();
 	private ModelListener<TrashVersion>[] _modelListeners;
 	private TrashVersionPersistence _persistence = (TrashVersionPersistence)PortalBeanLocatorUtil.locate(TrashVersionPersistence.class.getName());
 }

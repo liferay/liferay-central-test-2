@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class JournalFeedPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<JournalFeed> iterator = _models.iterator();
+		Iterator<JournalFeed> iterator = _journalFeeds.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -181,7 +179,7 @@ public class JournalFeedPersistenceTest {
 
 		newJournalFeed.setFeedVersion(RandomTestUtil.nextDouble());
 
-		_models.add(_persistence.update(newJournalFeed));
+		_journalFeeds.add(_persistence.update(newJournalFeed));
 
 		JournalFeed existingJournalFeed = _persistence.findByPrimaryKey(newJournalFeed.getPrimaryKey());
 
@@ -625,13 +623,12 @@ public class JournalFeedPersistenceTest {
 
 		journalFeed.setFeedVersion(RandomTestUtil.nextDouble());
 
-		_models.add(_persistence.update(journalFeed));
+		_journalFeeds.add(_persistence.update(journalFeed));
 
 		return journalFeed;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalFeedPersistenceTest.class);
-	private List<JournalFeed> _models = new ArrayList<JournalFeed>();
+	private List<JournalFeed> _journalFeeds = new ArrayList<JournalFeed>();
 	private ModelListener<JournalFeed>[] _modelListeners;
 	private JournalFeedPersistence _persistence = (JournalFeedPersistence)PortalBeanLocatorUtil.locate(JournalFeedPersistence.class.getName());
 }

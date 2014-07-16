@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class SCProductScreenshotPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SCProductScreenshot> iterator = _models.iterator();
+		Iterator<SCProductScreenshot> iterator = _scProductScreenshots.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -145,7 +143,7 @@ public class SCProductScreenshotPersistenceTest {
 
 		newSCProductScreenshot.setPriority(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newSCProductScreenshot));
+		_scProductScreenshots.add(_persistence.update(newSCProductScreenshot));
 
 		SCProductScreenshot existingSCProductScreenshot = _persistence.findByPrimaryKey(newSCProductScreenshot.getPrimaryKey());
 
@@ -493,13 +491,12 @@ public class SCProductScreenshotPersistenceTest {
 
 		scProductScreenshot.setPriority(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(scProductScreenshot));
+		_scProductScreenshots.add(_persistence.update(scProductScreenshot));
 
 		return scProductScreenshot;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCProductScreenshotPersistenceTest.class);
-	private List<SCProductScreenshot> _models = new ArrayList<SCProductScreenshot>();
+	private List<SCProductScreenshot> _scProductScreenshots = new ArrayList<SCProductScreenshot>();
 	private ModelListener<SCProductScreenshot>[] _modelListeners;
 	private SCProductScreenshotPersistence _persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName());
 }

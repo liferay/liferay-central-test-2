@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ResourcePermissionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ResourcePermission> iterator = _models.iterator();
+		Iterator<ResourcePermission> iterator = _resourcePermissions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -150,7 +148,7 @@ public class ResourcePermissionPersistenceTest {
 
 		newResourcePermission.setActionIds(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newResourcePermission));
+		_resourcePermissions.add(_persistence.update(newResourcePermission));
 
 		ResourcePermission existingResourcePermission = _persistence.findByPrimaryKey(newResourcePermission.getPrimaryKey());
 
@@ -569,13 +567,12 @@ public class ResourcePermissionPersistenceTest {
 
 		resourcePermission.setActionIds(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(resourcePermission));
+		_resourcePermissions.add(_persistence.update(resourcePermission));
 
 		return resourcePermission;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ResourcePermissionPersistenceTest.class);
-	private List<ResourcePermission> _models = new ArrayList<ResourcePermission>();
+	private List<ResourcePermission> _resourcePermissions = new ArrayList<ResourcePermission>();
 	private ModelListener<ResourcePermission>[] _modelListeners;
 	private ResourcePermissionPersistence _persistence = (ResourcePermissionPersistence)PortalBeanLocatorUtil.locate(ResourcePermissionPersistence.class.getName());
 }

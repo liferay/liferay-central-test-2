@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -83,7 +81,7 @@ public class CounterPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Counter> iterator = _models.iterator();
+		Iterator<Counter> iterator = _counters.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -131,7 +129,7 @@ public class CounterPersistenceTest {
 
 		newCounter.setCurrentId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newCounter));
+		_counters.add(_persistence.update(newCounter));
 
 		Counter existingCounter = _persistence.findByPrimaryKey(newCounter.getPrimaryKey());
 
@@ -354,13 +352,12 @@ public class CounterPersistenceTest {
 
 		counter.setCurrentId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(counter));
+		_counters.add(_persistence.update(counter));
 
 		return counter;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CounterPersistenceTest.class);
-	private List<Counter> _models = new ArrayList<Counter>();
+	private List<Counter> _counters = new ArrayList<Counter>();
 	private ModelListener<Counter>[] _modelListeners;
 	private CounterPersistence _persistence = (CounterPersistence)PortalBeanLocatorUtil.locate(CounterPersistence.class.getName());
 }

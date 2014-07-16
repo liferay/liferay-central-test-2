@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class AssetLinkPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AssetLink> iterator = _models.iterator();
+		Iterator<AssetLink> iterator = _assetLinks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -150,7 +148,7 @@ public class AssetLinkPersistenceTest {
 
 		newAssetLink.setWeight(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newAssetLink));
+		_assetLinks.add(_persistence.update(newAssetLink));
 
 		AssetLink existingAssetLink = _persistence.findByPrimaryKey(newAssetLink.getPrimaryKey());
 
@@ -525,13 +523,12 @@ public class AssetLinkPersistenceTest {
 
 		assetLink.setWeight(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(assetLink));
+		_assetLinks.add(_persistence.update(assetLink));
 
 		return assetLink;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetLinkPersistenceTest.class);
-	private List<AssetLink> _models = new ArrayList<AssetLink>();
+	private List<AssetLink> _assetLinks = new ArrayList<AssetLink>();
 	private ModelListener<AssetLink>[] _modelListeners;
 	private AssetLinkPersistence _persistence = (AssetLinkPersistence)PortalBeanLocatorUtil.locate(AssetLinkPersistence.class.getName());
 }

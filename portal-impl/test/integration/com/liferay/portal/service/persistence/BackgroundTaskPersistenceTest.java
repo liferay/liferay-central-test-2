@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class BackgroundTaskPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<BackgroundTask> iterator = _models.iterator();
+		Iterator<BackgroundTask> iterator = _backgroundTasks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -163,7 +161,7 @@ public class BackgroundTaskPersistenceTest {
 
 		newBackgroundTask.setStatusMessage(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newBackgroundTask));
+		_backgroundTasks.add(_persistence.update(newBackgroundTask));
 
 		BackgroundTask existingBackgroundTask = _persistence.findByPrimaryKey(newBackgroundTask.getPrimaryKey());
 
@@ -676,13 +674,12 @@ public class BackgroundTaskPersistenceTest {
 
 		backgroundTask.setStatusMessage(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(backgroundTask));
+		_backgroundTasks.add(_persistence.update(backgroundTask));
 
 		return backgroundTask;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BackgroundTaskPersistenceTest.class);
-	private List<BackgroundTask> _models = new ArrayList<BackgroundTask>();
+	private List<BackgroundTask> _backgroundTasks = new ArrayList<BackgroundTask>();
 	private ModelListener<BackgroundTask>[] _modelListeners;
 	private BackgroundTaskPersistence _persistence = (BackgroundTaskPersistence)PortalBeanLocatorUtil.locate(BackgroundTaskPersistence.class.getName());
 }

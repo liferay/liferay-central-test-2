@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DLFolderPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLFolder> iterator = _models.iterator();
+		Iterator<DLFolder> iterator = _dlFolders.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -178,7 +176,7 @@ public class DLFolderPersistenceTest {
 
 		newDLFolder.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newDLFolder));
+		_dlFolders.add(_persistence.update(newDLFolder));
 
 		DLFolder existingDLFolder = _persistence.findByPrimaryKey(newDLFolder.getPrimaryKey());
 
@@ -750,13 +748,12 @@ public class DLFolderPersistenceTest {
 
 		dlFolder.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(dlFolder));
+		_dlFolders.add(_persistence.update(dlFolder));
 
 		return dlFolder;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLFolderPersistenceTest.class);
-	private List<DLFolder> _models = new ArrayList<DLFolder>();
+	private List<DLFolder> _dlFolders = new ArrayList<DLFolder>();
 	private ModelListener<DLFolder>[] _modelListeners;
 	private DLFolderPersistence _persistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class DLSyncEventPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLSyncEvent> iterator = _models.iterator();
+		Iterator<DLSyncEvent> iterator = _dlSyncEvents.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -141,7 +139,7 @@ public class DLSyncEventPersistenceTest {
 
 		newDLSyncEvent.setTypePK(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newDLSyncEvent));
+		_dlSyncEvents.add(_persistence.update(newDLSyncEvent));
 
 		DLSyncEvent existingDLSyncEvent = _persistence.findByPrimaryKey(newDLSyncEvent.getPrimaryKey());
 
@@ -443,13 +441,12 @@ public class DLSyncEventPersistenceTest {
 
 		dlSyncEvent.setTypePK(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(dlSyncEvent));
+		_dlSyncEvents.add(_persistence.update(dlSyncEvent));
 
 		return dlSyncEvent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLSyncEventPersistenceTest.class);
-	private List<DLSyncEvent> _models = new ArrayList<DLSyncEvent>();
+	private List<DLSyncEvent> _dlSyncEvents = new ArrayList<DLSyncEvent>();
 	private ModelListener<DLSyncEvent>[] _modelListeners;
 	private DLSyncEventPersistence _persistence = (DLSyncEventPersistence)PortalBeanLocatorUtil.locate(DLSyncEventPersistence.class.getName());
 }

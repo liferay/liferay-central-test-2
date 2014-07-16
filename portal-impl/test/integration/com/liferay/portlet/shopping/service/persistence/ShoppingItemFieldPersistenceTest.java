@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class ShoppingItemFieldPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ShoppingItemField> iterator = _models.iterator();
+		Iterator<ShoppingItemField> iterator = _shoppingItemFields.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -140,7 +138,7 @@ public class ShoppingItemFieldPersistenceTest {
 
 		newShoppingItemField.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newShoppingItemField));
+		_shoppingItemFields.add(_persistence.update(newShoppingItemField));
 
 		ShoppingItemField existingShoppingItemField = _persistence.findByPrimaryKey(newShoppingItemField.getPrimaryKey());
 
@@ -415,13 +413,12 @@ public class ShoppingItemFieldPersistenceTest {
 
 		shoppingItemField.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(shoppingItemField));
+		_shoppingItemFields.add(_persistence.update(shoppingItemField));
 
 		return shoppingItemField;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShoppingItemFieldPersistenceTest.class);
-	private List<ShoppingItemField> _models = new ArrayList<ShoppingItemField>();
+	private List<ShoppingItemField> _shoppingItemFields = new ArrayList<ShoppingItemField>();
 	private ModelListener<ShoppingItemField>[] _modelListeners;
 	private ShoppingItemFieldPersistence _persistence = (ShoppingItemFieldPersistence)PortalBeanLocatorUtil.locate(ShoppingItemFieldPersistence.class.getName());
 }

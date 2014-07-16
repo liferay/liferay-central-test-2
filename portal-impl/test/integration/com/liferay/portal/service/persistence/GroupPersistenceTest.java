@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class GroupPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Group> iterator = _models.iterator();
+		Iterator<Group> iterator = _groups.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -172,7 +170,7 @@ public class GroupPersistenceTest {
 
 		newGroup.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newGroup));
+		_groups.add(_persistence.update(newGroup));
 
 		Group existingGroup = _persistence.findByPrimaryKey(newGroup.getPrimaryKey());
 
@@ -773,13 +771,12 @@ public class GroupPersistenceTest {
 
 		group.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(group));
+		_groups.add(_persistence.update(group));
 
 		return group;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(GroupPersistenceTest.class);
-	private List<Group> _models = new ArrayList<Group>();
+	private List<Group> _groups = new ArrayList<Group>();
 	private ModelListener<Group>[] _modelListeners;
 	private GroupPersistence _persistence = (GroupPersistence)PortalBeanLocatorUtil.locate(GroupPersistence.class.getName());
 }

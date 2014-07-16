@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ResourceTypePermissionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ResourceTypePermission> iterator = _models.iterator();
+		Iterator<ResourceTypePermission> iterator = _resourceTypePermissions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,8 @@ public class ResourceTypePermissionPersistenceTest {
 
 		newResourceTypePermission.setActionIds(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newResourceTypePermission));
+		_resourceTypePermissions.add(_persistence.update(
+				newResourceTypePermission));
 
 		ResourceTypePermission existingResourceTypePermission = _persistence.findByPrimaryKey(newResourceTypePermission.getPrimaryKey());
 
@@ -498,13 +497,12 @@ public class ResourceTypePermissionPersistenceTest {
 
 		resourceTypePermission.setActionIds(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(resourceTypePermission));
+		_resourceTypePermissions.add(_persistence.update(resourceTypePermission));
 
 		return resourceTypePermission;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ResourceTypePermissionPersistenceTest.class);
-	private List<ResourceTypePermission> _models = new ArrayList<ResourceTypePermission>();
+	private List<ResourceTypePermission> _resourceTypePermissions = new ArrayList<ResourceTypePermission>();
 	private ModelListener<ResourceTypePermission>[] _modelListeners;
 	private ResourceTypePermissionPersistence _persistence = (ResourceTypePermissionPersistence)PortalBeanLocatorUtil.locate(ResourceTypePermissionPersistence.class.getName());
 }

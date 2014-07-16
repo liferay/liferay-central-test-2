@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DDLRecordPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DDLRecord> iterator = _models.iterator();
+		Iterator<DDLRecord> iterator = _ddlRecords.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -162,7 +160,7 @@ public class DDLRecordPersistenceTest {
 
 		newDDLRecord.setDisplayIndex(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newDDLRecord));
+		_ddlRecords.add(_persistence.update(newDDLRecord));
 
 		DDLRecord existingDDLRecord = _persistence.findByPrimaryKey(newDDLRecord.getPrimaryKey());
 
@@ -563,13 +561,12 @@ public class DDLRecordPersistenceTest {
 
 		ddlRecord.setDisplayIndex(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(ddlRecord));
+		_ddlRecords.add(_persistence.update(ddlRecord));
 
 		return ddlRecord;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDLRecordPersistenceTest.class);
-	private List<DDLRecord> _models = new ArrayList<DDLRecord>();
+	private List<DDLRecord> _ddlRecords = new ArrayList<DDLRecord>();
 	private ModelListener<DDLRecord>[] _modelListeners;
 	private DDLRecordPersistence _persistence = (DDLRecordPersistence)PortalBeanLocatorUtil.locate(DDLRecordPersistence.class.getName());
 }

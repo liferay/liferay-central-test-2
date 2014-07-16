@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class MBMessagePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBMessage> iterator = _models.iterator();
+		Iterator<MBMessage> iterator = _mbMessages.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -185,7 +183,7 @@ public class MBMessagePersistenceTest {
 
 		newMBMessage.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newMBMessage));
+		_mbMessages.add(_persistence.update(newMBMessage));
 
 		MBMessage existingMBMessage = _persistence.findByPrimaryKey(newMBMessage.getPrimaryKey());
 
@@ -942,13 +940,12 @@ public class MBMessagePersistenceTest {
 
 		mbMessage.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(mbMessage));
+		_mbMessages.add(_persistence.update(mbMessage));
 
 		return mbMessage;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBMessagePersistenceTest.class);
-	private List<MBMessage> _models = new ArrayList<MBMessage>();
+	private List<MBMessage> _mbMessages = new ArrayList<MBMessage>();
 	private ModelListener<MBMessage>[] _modelListeners;
 	private MBMessagePersistence _persistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName());
 }

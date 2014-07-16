@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class MBStatsUserPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBStatsUser> iterator = _models.iterator();
+		Iterator<MBStatsUser> iterator = _mbStatsUsers.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class MBStatsUserPersistenceTest {
 
 		newMBStatsUser.setLastPostDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newMBStatsUser));
+		_mbStatsUsers.add(_persistence.update(newMBStatsUser));
 
 		MBStatsUser existingMBStatsUser = _persistence.findByPrimaryKey(newMBStatsUser.getPrimaryKey());
 
@@ -473,13 +471,12 @@ public class MBStatsUserPersistenceTest {
 
 		mbStatsUser.setLastPostDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(mbStatsUser));
+		_mbStatsUsers.add(_persistence.update(mbStatsUser));
 
 		return mbStatsUser;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBStatsUserPersistenceTest.class);
-	private List<MBStatsUser> _models = new ArrayList<MBStatsUser>();
+	private List<MBStatsUser> _mbStatsUsers = new ArrayList<MBStatsUser>();
 	private ModelListener<MBStatsUser>[] _modelListeners;
 	private MBStatsUserPersistence _persistence = (MBStatsUserPersistence)PortalBeanLocatorUtil.locate(MBStatsUserPersistence.class.getName());
 }

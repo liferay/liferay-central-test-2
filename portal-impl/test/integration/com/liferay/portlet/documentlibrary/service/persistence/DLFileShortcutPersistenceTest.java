@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class DLFileShortcutPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLFileShortcut> iterator = _models.iterator();
+		Iterator<DLFileShortcut> iterator = _dlFileShortcuts.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -168,7 +166,7 @@ public class DLFileShortcutPersistenceTest {
 
 		newDLFileShortcut.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newDLFileShortcut));
+		_dlFileShortcuts.add(_persistence.update(newDLFileShortcut));
 
 		DLFileShortcut existingDLFileShortcut = _persistence.findByPrimaryKey(newDLFileShortcut.getPrimaryKey());
 
@@ -629,13 +627,12 @@ public class DLFileShortcutPersistenceTest {
 
 		dlFileShortcut.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(dlFileShortcut));
+		_dlFileShortcuts.add(_persistence.update(dlFileShortcut));
 
 		return dlFileShortcut;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutPersistenceTest.class);
-	private List<DLFileShortcut> _models = new ArrayList<DLFileShortcut>();
+	private List<DLFileShortcut> _dlFileShortcuts = new ArrayList<DLFileShortcut>();
 	private ModelListener<DLFileShortcut>[] _modelListeners;
 	private DLFileShortcutPersistence _persistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(DLFileShortcutPersistence.class.getName());
 }

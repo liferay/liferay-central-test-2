@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class MembershipRequestPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MembershipRequest> iterator = _models.iterator();
+		Iterator<MembershipRequest> iterator = _membershipRequests.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -152,7 +150,7 @@ public class MembershipRequestPersistenceTest {
 
 		newMembershipRequest.setStatusId(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newMembershipRequest));
+		_membershipRequests.add(_persistence.update(newMembershipRequest));
 
 		MembershipRequest existingMembershipRequest = _persistence.findByPrimaryKey(newMembershipRequest.getPrimaryKey());
 
@@ -496,13 +494,12 @@ public class MembershipRequestPersistenceTest {
 
 		membershipRequest.setStatusId(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(membershipRequest));
+		_membershipRequests.add(_persistence.update(membershipRequest));
 
 		return membershipRequest;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MembershipRequestPersistenceTest.class);
-	private List<MembershipRequest> _models = new ArrayList<MembershipRequest>();
+	private List<MembershipRequest> _membershipRequests = new ArrayList<MembershipRequest>();
 	private ModelListener<MembershipRequest>[] _modelListeners;
 	private MembershipRequestPersistence _persistence = (MembershipRequestPersistence)PortalBeanLocatorUtil.locate(MembershipRequestPersistence.class.getName());
 }

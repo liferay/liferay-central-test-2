@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MBCategoryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBCategory> iterator = _models.iterator();
+		Iterator<MBCategory> iterator = _mbCategories.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -172,7 +170,7 @@ public class MBCategoryPersistenceTest {
 
 		newMBCategory.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newMBCategory));
+		_mbCategories.add(_persistence.update(newMBCategory));
 
 		MBCategory existingMBCategory = _persistence.findByPrimaryKey(newMBCategory.getPrimaryKey());
 
@@ -725,13 +723,12 @@ public class MBCategoryPersistenceTest {
 
 		mbCategory.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(mbCategory));
+		_mbCategories.add(_persistence.update(mbCategory));
 
 		return mbCategory;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBCategoryPersistenceTest.class);
-	private List<MBCategory> _models = new ArrayList<MBCategory>();
+	private List<MBCategory> _mbCategories = new ArrayList<MBCategory>();
 	private ModelListener<MBCategory>[] _modelListeners;
 	private MBCategoryPersistence _persistence = (MBCategoryPersistence)PortalBeanLocatorUtil.locate(MBCategoryPersistence.class.getName());
 }

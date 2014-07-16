@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class LockPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Lock> iterator = _models.iterator();
+		Iterator<Lock> iterator = _locks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -157,7 +155,7 @@ public class LockPersistenceTest {
 
 		newLock.setExpirationDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newLock));
+		_locks.add(_persistence.update(newLock));
 
 		Lock existingLock = _persistence.findByPrimaryKey(newLock.getPrimaryKey());
 
@@ -512,13 +510,12 @@ public class LockPersistenceTest {
 
 		lock.setExpirationDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(lock));
+		_locks.add(_persistence.update(lock));
 
 		return lock;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LockPersistenceTest.class);
-	private List<Lock> _models = new ArrayList<Lock>();
+	private List<Lock> _locks = new ArrayList<Lock>();
 	private ModelListener<Lock>[] _modelListeners;
 	private LockPersistence _persistence = (LockPersistence)PortalBeanLocatorUtil.locate(LockPersistence.class.getName());
 }

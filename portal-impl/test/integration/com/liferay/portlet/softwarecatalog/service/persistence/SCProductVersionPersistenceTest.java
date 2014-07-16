@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class SCProductVersionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SCProductVersion> iterator = _models.iterator();
+		Iterator<SCProductVersion> iterator = _scProductVersions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -158,7 +156,7 @@ public class SCProductVersionPersistenceTest {
 
 		newSCProductVersion.setRepoStoreArtifact(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newSCProductVersion));
+		_scProductVersions.add(_persistence.update(newSCProductVersion));
 
 		SCProductVersion existingSCProductVersion = _persistence.findByPrimaryKey(newSCProductVersion.getPrimaryKey());
 
@@ -499,13 +497,12 @@ public class SCProductVersionPersistenceTest {
 
 		scProductVersion.setRepoStoreArtifact(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(scProductVersion));
+		_scProductVersions.add(_persistence.update(scProductVersion));
 
 		return scProductVersion;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCProductVersionPersistenceTest.class);
-	private List<SCProductVersion> _models = new ArrayList<SCProductVersion>();
+	private List<SCProductVersion> _scProductVersions = new ArrayList<SCProductVersion>();
 	private ModelListener<SCProductVersion>[] _modelListeners;
 	private SCProductVersionPersistence _persistence = (SCProductVersionPersistence)PortalBeanLocatorUtil.locate(SCProductVersionPersistence.class.getName());
 }

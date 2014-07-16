@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class CalEventPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CalEvent> iterator = _models.iterator();
+		Iterator<CalEvent> iterator = _calEvents.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -180,7 +178,7 @@ public class CalEventPersistenceTest {
 
 		newCalEvent.setSecondReminder(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newCalEvent));
+		_calEvents.add(_persistence.update(newCalEvent));
 
 		CalEvent existingCalEvent = _persistence.findByPrimaryKey(newCalEvent.getPrimaryKey());
 
@@ -702,13 +700,12 @@ public class CalEventPersistenceTest {
 
 		calEvent.setSecondReminder(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(calEvent));
+		_calEvents.add(_persistence.update(calEvent));
 
 		return calEvent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CalEventPersistenceTest.class);
-	private List<CalEvent> _models = new ArrayList<CalEvent>();
+	private List<CalEvent> _calEvents = new ArrayList<CalEvent>();
 	private ModelListener<CalEvent>[] _modelListeners;
 	private CalEventPersistence _persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName());
 }

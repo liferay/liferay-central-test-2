@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -85,7 +83,7 @@ public class ClusterGroupPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ClusterGroup> iterator = _models.iterator();
+		Iterator<ClusterGroup> iterator = _clusterGroups.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -139,7 +137,7 @@ public class ClusterGroupPersistenceTest {
 
 		newClusterGroup.setWholeCluster(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newClusterGroup));
+		_clusterGroups.add(_persistence.update(newClusterGroup));
 
 		ClusterGroup existingClusterGroup = _persistence.findByPrimaryKey(newClusterGroup.getPrimaryKey());
 
@@ -404,13 +402,12 @@ public class ClusterGroupPersistenceTest {
 
 		clusterGroup.setWholeCluster(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(clusterGroup));
+		_clusterGroups.add(_persistence.update(clusterGroup));
 
 		return clusterGroup;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ClusterGroupPersistenceTest.class);
-	private List<ClusterGroup> _models = new ArrayList<ClusterGroup>();
+	private List<ClusterGroup> _clusterGroups = new ArrayList<ClusterGroup>();
 	private ModelListener<ClusterGroup>[] _modelListeners;
 	private ClusterGroupPersistence _persistence = (ClusterGroupPersistence)PortalBeanLocatorUtil.locate(ClusterGroupPersistence.class.getName());
 }

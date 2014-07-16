@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class DLFileEntryMetadataPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLFileEntryMetadata> iterator = _models.iterator();
+		Iterator<DLFileEntryMetadata> iterator = _dlFileEntryMetadatas.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,7 @@ public class DLFileEntryMetadataPersistenceTest {
 
 		newDLFileEntryMetadata.setFileVersionId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newDLFileEntryMetadata));
+		_dlFileEntryMetadatas.add(_persistence.update(newDLFileEntryMetadata));
 
 		DLFileEntryMetadata existingDLFileEntryMetadata = _persistence.findByPrimaryKey(newDLFileEntryMetadata.getPrimaryKey());
 
@@ -502,13 +500,12 @@ public class DLFileEntryMetadataPersistenceTest {
 
 		dlFileEntryMetadata.setFileVersionId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(dlFileEntryMetadata));
+		_dlFileEntryMetadatas.add(_persistence.update(dlFileEntryMetadata));
 
 		return dlFileEntryMetadata;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLFileEntryMetadataPersistenceTest.class);
-	private List<DLFileEntryMetadata> _models = new ArrayList<DLFileEntryMetadata>();
+	private List<DLFileEntryMetadata> _dlFileEntryMetadatas = new ArrayList<DLFileEntryMetadata>();
 	private ModelListener<DLFileEntryMetadata>[] _modelListeners;
 	private DLFileEntryMetadataPersistence _persistence = (DLFileEntryMetadataPersistence)PortalBeanLocatorUtil.locate(DLFileEntryMetadataPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class JournalArticlePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<JournalArticle> iterator = _models.iterator();
+		Iterator<JournalArticle> iterator = _journalArticles.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -203,7 +201,7 @@ public class JournalArticlePersistenceTest {
 
 		newJournalArticle.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newJournalArticle));
+		_journalArticles.add(_persistence.update(newJournalArticle));
 
 		JournalArticle existingJournalArticle = _persistence.findByPrimaryKey(newJournalArticle.getPrimaryKey());
 
@@ -1202,13 +1200,12 @@ public class JournalArticlePersistenceTest {
 
 		journalArticle.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(journalArticle));
+		_journalArticles.add(_persistence.update(journalArticle));
 
 		return journalArticle;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalArticlePersistenceTest.class);
-	private List<JournalArticle> _models = new ArrayList<JournalArticle>();
+	private List<JournalArticle> _journalArticles = new ArrayList<JournalArticle>();
 	private ModelListener<JournalArticle>[] _modelListeners;
 	private JournalArticlePersistence _persistence = (JournalArticlePersistence)PortalBeanLocatorUtil.locate(JournalArticlePersistence.class.getName());
 }

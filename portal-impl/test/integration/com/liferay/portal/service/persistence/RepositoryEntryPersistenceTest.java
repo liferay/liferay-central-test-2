@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class RepositoryEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<RepositoryEntry> iterator = _models.iterator();
+		Iterator<RepositoryEntry> iterator = _repositoryEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -157,7 +155,7 @@ public class RepositoryEntryPersistenceTest {
 
 		newRepositoryEntry.setManualCheckInRequired(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newRepositoryEntry));
+		_repositoryEntries.add(_persistence.update(newRepositoryEntry));
 
 		RepositoryEntry existingRepositoryEntry = _persistence.findByPrimaryKey(newRepositoryEntry.getPrimaryKey());
 
@@ -549,13 +547,12 @@ public class RepositoryEntryPersistenceTest {
 
 		repositoryEntry.setManualCheckInRequired(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(repositoryEntry));
+		_repositoryEntries.add(_persistence.update(repositoryEntry));
 
 		return repositoryEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RepositoryEntryPersistenceTest.class);
-	private List<RepositoryEntry> _models = new ArrayList<RepositoryEntry>();
+	private List<RepositoryEntry> _repositoryEntries = new ArrayList<RepositoryEntry>();
 	private ModelListener<RepositoryEntry>[] _modelListeners;
 	private RepositoryEntryPersistence _persistence = (RepositoryEntryPersistence)PortalBeanLocatorUtil.locate(RepositoryEntryPersistence.class.getName());
 }

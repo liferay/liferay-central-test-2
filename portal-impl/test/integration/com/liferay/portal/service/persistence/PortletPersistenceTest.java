@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class PortletPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Portlet> iterator = _models.iterator();
+		Iterator<Portlet> iterator = _portlets.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -144,7 +142,7 @@ public class PortletPersistenceTest {
 
 		newPortlet.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newPortlet));
+		_portlets.add(_persistence.update(newPortlet));
 
 		Portlet existingPortlet = _persistence.findByPrimaryKey(newPortlet.getPrimaryKey());
 
@@ -448,13 +446,12 @@ public class PortletPersistenceTest {
 
 		portlet.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(portlet));
+		_portlets.add(_persistence.update(portlet));
 
 		return portlet;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PortletPersistenceTest.class);
-	private List<Portlet> _models = new ArrayList<Portlet>();
+	private List<Portlet> _portlets = new ArrayList<Portlet>();
 	private ModelListener<Portlet>[] _modelListeners;
 	private PortletPersistence _persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(PortletPersistence.class.getName());
 }

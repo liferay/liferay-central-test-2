@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class ClassNamePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ClassName> iterator = _models.iterator();
+		Iterator<ClassName> iterator = _classNames.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -138,7 +136,7 @@ public class ClassNamePersistenceTest {
 
 		newClassName.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newClassName));
+		_classNames.add(_persistence.update(newClassName));
 
 		ClassName existingClassName = _persistence.findByPrimaryKey(newClassName.getPrimaryKey());
 
@@ -422,13 +420,12 @@ public class ClassNamePersistenceTest {
 
 		className.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(className));
+		_classNames.add(_persistence.update(className));
 
 		return className;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ClassNamePersistenceTest.class);
-	private List<ClassName> _models = new ArrayList<ClassName>();
+	private List<ClassName> _classNames = new ArrayList<ClassName>();
 	private ModelListener<ClassName>[] _modelListeners;
 	private ClassNamePersistence _persistence = (ClassNamePersistence)PortalBeanLocatorUtil.locate(ClassNamePersistence.class.getName());
 }

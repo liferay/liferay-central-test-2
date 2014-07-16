@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MDRRuleGroupPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MDRRuleGroup> iterator = _models.iterator();
+		Iterator<MDRRuleGroup> iterator = _mdrRuleGroups.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -154,7 +152,7 @@ public class MDRRuleGroupPersistenceTest {
 
 		newMDRRuleGroup.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newMDRRuleGroup));
+		_mdrRuleGroups.add(_persistence.update(newMDRRuleGroup));
 
 		MDRRuleGroup existingMDRRuleGroup = _persistence.findByPrimaryKey(newMDRRuleGroup.getPrimaryKey());
 
@@ -525,13 +523,12 @@ public class MDRRuleGroupPersistenceTest {
 
 		mdrRuleGroup.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(mdrRuleGroup));
+		_mdrRuleGroups.add(_persistence.update(mdrRuleGroup));
 
 		return mdrRuleGroup;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MDRRuleGroupPersistenceTest.class);
-	private List<MDRRuleGroup> _models = new ArrayList<MDRRuleGroup>();
+	private List<MDRRuleGroup> _mdrRuleGroups = new ArrayList<MDRRuleGroup>();
 	private ModelListener<MDRRuleGroup>[] _modelListeners;
 	private MDRRuleGroupPersistence _persistence = (MDRRuleGroupPersistence)PortalBeanLocatorUtil.locate(MDRRuleGroupPersistence.class.getName());
 }

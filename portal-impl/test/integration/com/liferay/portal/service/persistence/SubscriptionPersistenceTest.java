@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class SubscriptionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Subscription> iterator = _models.iterator();
+		Iterator<Subscription> iterator = _subscriptions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -151,7 +149,7 @@ public class SubscriptionPersistenceTest {
 
 		newSubscription.setFrequency(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newSubscription));
+		_subscriptions.add(_persistence.update(newSubscription));
 
 		Subscription existingSubscription = _persistence.findByPrimaryKey(newSubscription.getPrimaryKey());
 
@@ -526,13 +524,12 @@ public class SubscriptionPersistenceTest {
 
 		subscription.setFrequency(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(subscription));
+		_subscriptions.add(_persistence.update(subscription));
 
 		return subscription;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SubscriptionPersistenceTest.class);
-	private List<Subscription> _models = new ArrayList<Subscription>();
+	private List<Subscription> _subscriptions = new ArrayList<Subscription>();
 	private ModelListener<Subscription>[] _modelListeners;
 	private SubscriptionPersistence _persistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(SubscriptionPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class ShoppingCouponPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ShoppingCoupon> iterator = _models.iterator();
+		Iterator<ShoppingCoupon> iterator = _shoppingCoupons.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -171,7 +169,7 @@ public class ShoppingCouponPersistenceTest {
 
 		newShoppingCoupon.setDiscountType(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newShoppingCoupon));
+		_shoppingCoupons.add(_persistence.update(newShoppingCoupon));
 
 		ShoppingCoupon existingShoppingCoupon = _persistence.findByPrimaryKey(newShoppingCoupon.getPrimaryKey());
 
@@ -536,13 +534,12 @@ public class ShoppingCouponPersistenceTest {
 
 		shoppingCoupon.setDiscountType(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(shoppingCoupon));
+		_shoppingCoupons.add(_persistence.update(shoppingCoupon));
 
 		return shoppingCoupon;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShoppingCouponPersistenceTest.class);
-	private List<ShoppingCoupon> _models = new ArrayList<ShoppingCoupon>();
+	private List<ShoppingCoupon> _shoppingCoupons = new ArrayList<ShoppingCoupon>();
 	private ModelListener<ShoppingCoupon>[] _modelListeners;
 	private ShoppingCouponPersistence _persistence = (ShoppingCouponPersistence)PortalBeanLocatorUtil.locate(ShoppingCouponPersistence.class.getName());
 }

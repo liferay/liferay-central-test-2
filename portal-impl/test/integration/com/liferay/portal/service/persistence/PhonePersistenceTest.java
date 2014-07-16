@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class PhonePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Phone> iterator = _models.iterator();
+		Iterator<Phone> iterator = _phones.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -159,7 +157,7 @@ public class PhonePersistenceTest {
 
 		newPhone.setPrimary(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newPhone));
+		_phones.add(_persistence.update(newPhone));
 
 		Phone existingPhone = _persistence.findByPrimaryKey(newPhone.getPrimaryKey());
 
@@ -543,13 +541,12 @@ public class PhonePersistenceTest {
 
 		phone.setPrimary(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(phone));
+		_phones.add(_persistence.update(phone));
 
 		return phone;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PhonePersistenceTest.class);
-	private List<Phone> _models = new ArrayList<Phone>();
+	private List<Phone> _phones = new ArrayList<Phone>();
 	private ModelListener<Phone>[] _modelListeners;
 	private PhonePersistence _persistence = (PhonePersistence)PortalBeanLocatorUtil.locate(PhonePersistence.class.getName());
 }

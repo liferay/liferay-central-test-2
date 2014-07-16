@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class AccountPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Account> iterator = _models.iterator();
+		Iterator<Account> iterator = _accounts.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -164,7 +162,7 @@ public class AccountPersistenceTest {
 
 		newAccount.setSize(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newAccount));
+		_accounts.add(_persistence.update(newAccount));
 
 		Account existingAccount = _persistence.findByPrimaryKey(newAccount.getPrimaryKey());
 
@@ -473,13 +471,12 @@ public class AccountPersistenceTest {
 
 		account.setSize(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(account));
+		_accounts.add(_persistence.update(account));
 
 		return account;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AccountPersistenceTest.class);
-	private List<Account> _models = new ArrayList<Account>();
+	private List<Account> _accounts = new ArrayList<Account>();
 	private ModelListener<Account>[] _modelListeners;
 	private AccountPersistence _persistence = (AccountPersistence)PortalBeanLocatorUtil.locate(AccountPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -91,7 +89,7 @@ public class MBThreadPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBThread> iterator = _models.iterator();
+		Iterator<MBThread> iterator = _mbThreads.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -177,7 +175,7 @@ public class MBThreadPersistenceTest {
 
 		newMBThread.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newMBThread));
+		_mbThreads.add(_persistence.update(newMBThread));
 
 		MBThread existingMBThread = _persistence.findByPrimaryKey(newMBThread.getPrimaryKey());
 
@@ -777,13 +775,12 @@ public class MBThreadPersistenceTest {
 
 		mbThread.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(mbThread));
+		_mbThreads.add(_persistence.update(mbThread));
 
 		return mbThread;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBThreadPersistenceTest.class);
-	private List<MBThread> _models = new ArrayList<MBThread>();
+	private List<MBThread> _mbThreads = new ArrayList<MBThread>();
 	private ModelListener<MBThread>[] _modelListeners;
 	private MBThreadPersistence _persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName());
 }

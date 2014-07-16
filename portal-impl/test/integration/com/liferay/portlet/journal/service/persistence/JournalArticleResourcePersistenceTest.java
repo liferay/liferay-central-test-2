@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class JournalArticleResourcePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<JournalArticleResource> iterator = _models.iterator();
+		Iterator<JournalArticleResource> iterator = _journalArticleResources.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -141,7 +139,8 @@ public class JournalArticleResourcePersistenceTest {
 
 		newJournalArticleResource.setArticleId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newJournalArticleResource));
+		_journalArticleResources.add(_persistence.update(
+				newJournalArticleResource));
 
 		JournalArticleResource existingJournalArticleResource = _persistence.findByPrimaryKey(newJournalArticleResource.getPrimaryKey());
 
@@ -490,13 +489,12 @@ public class JournalArticleResourcePersistenceTest {
 
 		journalArticleResource.setArticleId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(journalArticleResource));
+		_journalArticleResources.add(_persistence.update(journalArticleResource));
 
 		return journalArticleResource;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalArticleResourcePersistenceTest.class);
-	private List<JournalArticleResource> _models = new ArrayList<JournalArticleResource>();
+	private List<JournalArticleResource> _journalArticleResources = new ArrayList<JournalArticleResource>();
 	private ModelListener<JournalArticleResource>[] _modelListeners;
 	private JournalArticleResourcePersistence _persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName());
 }

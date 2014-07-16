@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class SocialRelationPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SocialRelation> iterator = _models.iterator();
+		Iterator<SocialRelation> iterator = _socialRelations.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,7 @@ public class SocialRelationPersistenceTest {
 
 		newSocialRelation.setType(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newSocialRelation));
+		_socialRelations.add(_persistence.update(newSocialRelation));
 
 		SocialRelation existingSocialRelation = _persistence.findByPrimaryKey(newSocialRelation.getPrimaryKey());
 
@@ -578,13 +576,12 @@ public class SocialRelationPersistenceTest {
 
 		socialRelation.setType(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(socialRelation));
+		_socialRelations.add(_persistence.update(socialRelation));
 
 		return socialRelation;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SocialRelationPersistenceTest.class);
-	private List<SocialRelation> _models = new ArrayList<SocialRelation>();
+	private List<SocialRelation> _socialRelations = new ArrayList<SocialRelation>();
 	private ModelListener<SocialRelation>[] _modelListeners;
 	private SocialRelationPersistence _persistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(SocialRelationPersistence.class.getName());
 }

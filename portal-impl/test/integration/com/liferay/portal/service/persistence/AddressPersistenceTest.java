@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class AddressPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Address> iterator = _models.iterator();
+		Iterator<Address> iterator = _addresses.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -171,7 +169,7 @@ public class AddressPersistenceTest {
 
 		newAddress.setPrimary(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newAddress));
+		_addresses.add(_persistence.update(newAddress));
 
 		Address existingAddress = _persistence.findByPrimaryKey(newAddress.getPrimaryKey());
 
@@ -602,13 +600,12 @@ public class AddressPersistenceTest {
 
 		address.setPrimary(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(address));
+		_addresses.add(_persistence.update(address));
 
 		return address;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AddressPersistenceTest.class);
-	private List<Address> _models = new ArrayList<Address>();
+	private List<Address> _addresses = new ArrayList<Address>();
 	private ModelListener<Address>[] _modelListeners;
 	private AddressPersistence _persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class DDMStructureLinkPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DDMStructureLink> iterator = _models.iterator();
+		Iterator<DDMStructureLink> iterator = _ddmStructureLinks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -139,7 +137,7 @@ public class DDMStructureLinkPersistenceTest {
 
 		newDDMStructureLink.setStructureId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newDDMStructureLink));
+		_ddmStructureLinks.add(_persistence.update(newDDMStructureLink));
 
 		DDMStructureLink existingDDMStructureLink = _persistence.findByPrimaryKey(newDDMStructureLink.getPrimaryKey());
 
@@ -452,13 +450,12 @@ public class DDMStructureLinkPersistenceTest {
 
 		ddmStructureLink.setStructureId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(ddmStructureLink));
+		_ddmStructureLinks.add(_persistence.update(ddmStructureLink));
 
 		return ddmStructureLink;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDMStructureLinkPersistenceTest.class);
-	private List<DDMStructureLink> _models = new ArrayList<DDMStructureLink>();
+	private List<DDMStructureLink> _ddmStructureLinks = new ArrayList<DDMStructureLink>();
 	private ModelListener<DDMStructureLink>[] _modelListeners;
 	private DDMStructureLinkPersistence _persistence = (DDMStructureLinkPersistence)PortalBeanLocatorUtil.locate(DDMStructureLinkPersistence.class.getName());
 }

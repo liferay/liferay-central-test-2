@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class ReleasePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Release> iterator = _models.iterator();
+		Iterator<Release> iterator = _releases.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -153,7 +151,7 @@ public class ReleasePersistenceTest {
 
 		newRelease.setTestString(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newRelease));
+		_releases.add(_persistence.update(newRelease));
 
 		Release existingRelease = _persistence.findByPrimaryKey(newRelease.getPrimaryKey());
 
@@ -467,13 +465,12 @@ public class ReleasePersistenceTest {
 
 		release.setTestString(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(release));
+		_releases.add(_persistence.update(release));
 
 		return release;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ReleasePersistenceTest.class);
-	private List<Release> _models = new ArrayList<Release>();
+	private List<Release> _releases = new ArrayList<Release>();
 	private ModelListener<Release>[] _modelListeners;
 	private ReleasePersistence _persistence = (ReleasePersistence)PortalBeanLocatorUtil.locate(ReleasePersistence.class.getName());
 }

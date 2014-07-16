@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class VirtualHostPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<VirtualHost> iterator = _models.iterator();
+		Iterator<VirtualHost> iterator = _virtualHosts.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -142,7 +140,7 @@ public class VirtualHostPersistenceTest {
 
 		newVirtualHost.setHostname(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newVirtualHost));
+		_virtualHosts.add(_persistence.update(newVirtualHost));
 
 		VirtualHost existingVirtualHost = _persistence.findByPrimaryKey(newVirtualHost.getPrimaryKey());
 
@@ -456,13 +454,12 @@ public class VirtualHostPersistenceTest {
 
 		virtualHost.setHostname(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(virtualHost));
+		_virtualHosts.add(_persistence.update(virtualHost));
 
 		return virtualHost;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(VirtualHostPersistenceTest.class);
-	private List<VirtualHost> _models = new ArrayList<VirtualHost>();
+	private List<VirtualHost> _virtualHosts = new ArrayList<VirtualHost>();
 	private ModelListener<VirtualHost>[] _modelListeners;
 	private VirtualHostPersistence _persistence = (VirtualHostPersistence)PortalBeanLocatorUtil.locate(VirtualHostPersistence.class.getName());
 }

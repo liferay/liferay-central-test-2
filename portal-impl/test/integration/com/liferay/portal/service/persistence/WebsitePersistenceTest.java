@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -87,7 +85,7 @@ public class WebsitePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Website> iterator = _models.iterator();
+		Iterator<Website> iterator = _websites.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -157,7 +155,7 @@ public class WebsitePersistenceTest {
 
 		newWebsite.setPrimary(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newWebsite));
+		_websites.add(_persistence.update(newWebsite));
 
 		Website existingWebsite = _persistence.findByPrimaryKey(newWebsite.getPrimaryKey());
 
@@ -543,13 +541,12 @@ public class WebsitePersistenceTest {
 
 		website.setPrimary(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(website));
+		_websites.add(_persistence.update(website));
 
 		return website;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WebsitePersistenceTest.class);
-	private List<Website> _models = new ArrayList<Website>();
+	private List<Website> _websites = new ArrayList<Website>();
 	private ModelListener<Website>[] _modelListeners;
 	private WebsitePersistence _persistence = (WebsitePersistence)PortalBeanLocatorUtil.locate(WebsitePersistence.class.getName());
 }

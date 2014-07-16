@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class TeamPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Team> iterator = _models.iterator();
+		Iterator<Team> iterator = _teams.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -153,7 +151,7 @@ public class TeamPersistenceTest {
 
 		newTeam.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newTeam));
+		_teams.add(_persistence.update(newTeam));
 
 		Team existingTeam = _persistence.findByPrimaryKey(newTeam.getPrimaryKey());
 
@@ -482,13 +480,12 @@ public class TeamPersistenceTest {
 
 		team.setDescription(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(team));
+		_teams.add(_persistence.update(team));
 
 		return team;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(TeamPersistenceTest.class);
-	private List<Team> _models = new ArrayList<Team>();
+	private List<Team> _teams = new ArrayList<Team>();
 	private ModelListener<Team>[] _modelListeners;
 	private TeamPersistence _persistence = (TeamPersistence)PortalBeanLocatorUtil.locate(TeamPersistence.class.getName());
 }

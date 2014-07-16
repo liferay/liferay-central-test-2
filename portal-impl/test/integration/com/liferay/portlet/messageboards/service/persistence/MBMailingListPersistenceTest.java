@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MBMailingListPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBMailingList> iterator = _models.iterator();
+		Iterator<MBMailingList> iterator = _mbMailingLists.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -186,7 +184,7 @@ public class MBMailingListPersistenceTest {
 
 		newMBMailingList.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newMBMailingList));
+		_mbMailingLists.add(_persistence.update(newMBMailingList));
 
 		MBMailingList existingMBMailingList = _persistence.findByPrimaryKey(newMBMailingList.getPrimaryKey());
 
@@ -637,13 +635,12 @@ public class MBMailingListPersistenceTest {
 
 		mbMailingList.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(mbMailingList));
+		_mbMailingLists.add(_persistence.update(mbMailingList));
 
 		return mbMailingList;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBMailingListPersistenceTest.class);
-	private List<MBMailingList> _models = new ArrayList<MBMailingList>();
+	private List<MBMailingList> _mbMailingLists = new ArrayList<MBMailingList>();
 	private ModelListener<MBMailingList>[] _modelListeners;
 	private MBMailingListPersistence _persistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName());
 }

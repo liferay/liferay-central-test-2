@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class DLFileRankPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<DLFileRank> iterator = _models.iterator();
+		Iterator<DLFileRank> iterator = _dlFileRanks.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -146,7 +144,7 @@ public class DLFileRankPersistenceTest {
 
 		newDLFileRank.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newDLFileRank));
+		_dlFileRanks.add(_persistence.update(newDLFileRank));
 
 		DLFileRank existingDLFileRank = _persistence.findByPrimaryKey(newDLFileRank.getPrimaryKey());
 
@@ -500,13 +498,12 @@ public class DLFileRankPersistenceTest {
 
 		dlFileRank.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(dlFileRank));
+		_dlFileRanks.add(_persistence.update(dlFileRank));
 
 		return dlFileRank;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLFileRankPersistenceTest.class);
-	private List<DLFileRank> _models = new ArrayList<DLFileRank>();
+	private List<DLFileRank> _dlFileRanks = new ArrayList<DLFileRank>();
 	private ModelListener<DLFileRank>[] _modelListeners;
 	private DLFileRankPersistence _persistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName());
 }

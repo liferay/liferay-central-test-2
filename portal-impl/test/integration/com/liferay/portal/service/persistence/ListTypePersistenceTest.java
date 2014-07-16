@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -83,7 +81,7 @@ public class ListTypePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ListType> iterator = _models.iterator();
+		Iterator<ListType> iterator = _listTypes.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -135,7 +133,7 @@ public class ListTypePersistenceTest {
 
 		newListType.setType(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newListType));
+		_listTypes.add(_persistence.update(newListType));
 
 		ListType existingListType = _persistence.findByPrimaryKey(newListType.getPrimaryKey());
 
@@ -382,13 +380,12 @@ public class ListTypePersistenceTest {
 
 		listType.setType(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(listType));
+		_listTypes.add(_persistence.update(listType));
 
 		return listType;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ListTypePersistenceTest.class);
-	private List<ListType> _models = new ArrayList<ListType>();
+	private List<ListType> _listTypes = new ArrayList<ListType>();
 	private ModelListener<ListType>[] _modelListeners;
 	private ListTypePersistence _persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName());
 }

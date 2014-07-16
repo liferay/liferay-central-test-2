@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class LayoutFriendlyURLPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<LayoutFriendlyURL> iterator = _models.iterator();
+		Iterator<LayoutFriendlyURL> iterator = _layoutFriendlyURLs.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -159,7 +157,7 @@ public class LayoutFriendlyURLPersistenceTest {
 
 		newLayoutFriendlyURL.setLanguageId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newLayoutFriendlyURL));
+		_layoutFriendlyURLs.add(_persistence.update(newLayoutFriendlyURL));
 
 		LayoutFriendlyURL existingLayoutFriendlyURL = _persistence.findByPrimaryKey(newLayoutFriendlyURL.getPrimaryKey());
 
@@ -640,13 +638,12 @@ public class LayoutFriendlyURLPersistenceTest {
 
 		layoutFriendlyURL.setLanguageId(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(layoutFriendlyURL));
+		_layoutFriendlyURLs.add(_persistence.update(layoutFriendlyURL));
 
 		return layoutFriendlyURL;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutFriendlyURLPersistenceTest.class);
-	private List<LayoutFriendlyURL> _models = new ArrayList<LayoutFriendlyURL>();
+	private List<LayoutFriendlyURL> _layoutFriendlyURLs = new ArrayList<LayoutFriendlyURL>();
 	private ModelListener<LayoutFriendlyURL>[] _modelListeners;
 	private LayoutFriendlyURLPersistence _persistence = (LayoutFriendlyURLPersistence)PortalBeanLocatorUtil.locate(LayoutFriendlyURLPersistence.class.getName());
 }

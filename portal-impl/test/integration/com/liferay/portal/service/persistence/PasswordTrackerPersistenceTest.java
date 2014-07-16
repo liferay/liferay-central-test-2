@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class PasswordTrackerPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<PasswordTracker> iterator = _models.iterator();
+		Iterator<PasswordTracker> iterator = _passwordTrackers.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -140,7 +138,7 @@ public class PasswordTrackerPersistenceTest {
 
 		newPasswordTracker.setPassword(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newPasswordTracker));
+		_passwordTrackers.add(_persistence.update(newPasswordTracker));
 
 		PasswordTracker existingPasswordTracker = _persistence.findByPrimaryKey(newPasswordTracker.getPrimaryKey());
 
@@ -418,13 +416,12 @@ public class PasswordTrackerPersistenceTest {
 
 		passwordTracker.setPassword(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(passwordTracker));
+		_passwordTrackers.add(_persistence.update(passwordTracker));
 
 		return passwordTracker;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PasswordTrackerPersistenceTest.class);
-	private List<PasswordTracker> _models = new ArrayList<PasswordTracker>();
+	private List<PasswordTracker> _passwordTrackers = new ArrayList<PasswordTracker>();
 	private ModelListener<PasswordTracker>[] _modelListeners;
 	private PasswordTrackerPersistence _persistence = (PasswordTrackerPersistence)PortalBeanLocatorUtil.locate(PasswordTrackerPersistence.class.getName());
 }

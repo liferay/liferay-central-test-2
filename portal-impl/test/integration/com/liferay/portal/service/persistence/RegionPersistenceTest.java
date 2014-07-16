@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -85,7 +83,7 @@ public class RegionPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Region> iterator = _models.iterator();
+		Iterator<Region> iterator = _regions.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -141,7 +139,7 @@ public class RegionPersistenceTest {
 
 		newRegion.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newRegion));
+		_regions.add(_persistence.update(newRegion));
 
 		Region existingRegion = _persistence.findByPrimaryKey(newRegion.getPrimaryKey());
 
@@ -449,13 +447,12 @@ public class RegionPersistenceTest {
 
 		region.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(region));
+		_regions.add(_persistence.update(region));
 
 		return region;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RegionPersistenceTest.class);
-	private List<Region> _models = new ArrayList<Region>();
+	private List<Region> _regions = new ArrayList<Region>();
 	private ModelListener<Region>[] _modelListeners;
 	private RegionPersistence _persistence = (RegionPersistence)PortalBeanLocatorUtil.locate(RegionPersistence.class.getName());
 }

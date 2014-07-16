@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MDRRuleGroupInstancePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MDRRuleGroupInstance> iterator = _models.iterator();
+		Iterator<MDRRuleGroupInstance> iterator = _mdrRuleGroupInstances.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -158,7 +156,7 @@ public class MDRRuleGroupInstancePersistenceTest {
 
 		newMDRRuleGroupInstance.setPriority(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newMDRRuleGroupInstance));
+		_mdrRuleGroupInstances.add(_persistence.update(newMDRRuleGroupInstance));
 
 		MDRRuleGroupInstance existingMDRRuleGroupInstance = _persistence.findByPrimaryKey(newMDRRuleGroupInstance.getPrimaryKey());
 
@@ -603,13 +601,12 @@ public class MDRRuleGroupInstancePersistenceTest {
 
 		mdrRuleGroupInstance.setPriority(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(mdrRuleGroupInstance));
+		_mdrRuleGroupInstances.add(_persistence.update(mdrRuleGroupInstance));
 
 		return mdrRuleGroupInstance;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MDRRuleGroupInstancePersistenceTest.class);
-	private List<MDRRuleGroupInstance> _models = new ArrayList<MDRRuleGroupInstance>();
+	private List<MDRRuleGroupInstance> _mdrRuleGroupInstances = new ArrayList<MDRRuleGroupInstance>();
 	private ModelListener<MDRRuleGroupInstance>[] _modelListeners;
 	private MDRRuleGroupInstancePersistence _persistence = (MDRRuleGroupInstancePersistence)PortalBeanLocatorUtil.locate(MDRRuleGroupInstancePersistence.class.getName());
 }

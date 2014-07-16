@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class AssetCategoryPropertyPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AssetCategoryProperty> iterator = _models.iterator();
+		Iterator<AssetCategoryProperty> iterator = _assetCategoryProperties.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -152,7 +150,8 @@ public class AssetCategoryPropertyPersistenceTest {
 
 		newAssetCategoryProperty.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newAssetCategoryProperty));
+		_assetCategoryProperties.add(_persistence.update(
+				newAssetCategoryProperty));
 
 		AssetCategoryProperty existingAssetCategoryProperty = _persistence.findByPrimaryKey(newAssetCategoryProperty.getPrimaryKey());
 
@@ -515,13 +514,12 @@ public class AssetCategoryPropertyPersistenceTest {
 
 		assetCategoryProperty.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(assetCategoryProperty));
+		_assetCategoryProperties.add(_persistence.update(assetCategoryProperty));
 
 		return assetCategoryProperty;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyPersistenceTest.class);
-	private List<AssetCategoryProperty> _models = new ArrayList<AssetCategoryProperty>();
+	private List<AssetCategoryProperty> _assetCategoryProperties = new ArrayList<AssetCategoryProperty>();
 	private ModelListener<AssetCategoryProperty>[] _modelListeners;
 	private AssetCategoryPropertyPersistence _persistence = (AssetCategoryPropertyPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPropertyPersistence.class.getName());
 }

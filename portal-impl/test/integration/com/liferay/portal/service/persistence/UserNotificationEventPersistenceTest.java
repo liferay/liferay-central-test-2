@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class UserNotificationEventPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<UserNotificationEvent> iterator = _models.iterator();
+		Iterator<UserNotificationEvent> iterator = _userNotificationEvents.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -156,7 +154,8 @@ public class UserNotificationEventPersistenceTest {
 
 		newUserNotificationEvent.setArchived(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newUserNotificationEvent));
+		_userNotificationEvents.add(_persistence.update(
+				newUserNotificationEvent));
 
 		UserNotificationEvent existingUserNotificationEvent = _persistence.findByPrimaryKey(newUserNotificationEvent.getPrimaryKey());
 
@@ -626,13 +625,12 @@ public class UserNotificationEventPersistenceTest {
 
 		userNotificationEvent.setArchived(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(userNotificationEvent));
+		_userNotificationEvents.add(_persistence.update(userNotificationEvent));
 
 		return userNotificationEvent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserNotificationEventPersistenceTest.class);
-	private List<UserNotificationEvent> _models = new ArrayList<UserNotificationEvent>();
+	private List<UserNotificationEvent> _userNotificationEvents = new ArrayList<UserNotificationEvent>();
 	private ModelListener<UserNotificationEvent>[] _modelListeners;
 	private UserNotificationEventPersistence _persistence = (UserNotificationEventPersistence)PortalBeanLocatorUtil.locate(UserNotificationEventPersistence.class.getName());
 }

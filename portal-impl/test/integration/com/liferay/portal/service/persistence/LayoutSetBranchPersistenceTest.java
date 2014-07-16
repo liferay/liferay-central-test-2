@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class LayoutSetBranchPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<LayoutSetBranch> iterator = _models.iterator();
+		Iterator<LayoutSetBranch> iterator = _layoutSetBranchs.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -175,7 +173,7 @@ public class LayoutSetBranchPersistenceTest {
 
 		newLayoutSetBranch.setLayoutSetPrototypeLinkEnabled(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newLayoutSetBranch));
+		_layoutSetBranchs.add(_persistence.update(newLayoutSetBranch));
 
 		LayoutSetBranch existingLayoutSetBranch = _persistence.findByPrimaryKey(newLayoutSetBranch.getPrimaryKey());
 
@@ -600,13 +598,12 @@ public class LayoutSetBranchPersistenceTest {
 
 		layoutSetBranch.setLayoutSetPrototypeLinkEnabled(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(layoutSetBranch));
+		_layoutSetBranchs.add(_persistence.update(layoutSetBranch));
 
 		return layoutSetBranch;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutSetBranchPersistenceTest.class);
-	private List<LayoutSetBranch> _models = new ArrayList<LayoutSetBranch>();
+	private List<LayoutSetBranch> _layoutSetBranchs = new ArrayList<LayoutSetBranch>();
 	private ModelListener<LayoutSetBranch>[] _modelListeners;
 	private LayoutSetBranchPersistence _persistence = (LayoutSetBranchPersistence)PortalBeanLocatorUtil.locate(LayoutSetBranchPersistence.class.getName());
 }

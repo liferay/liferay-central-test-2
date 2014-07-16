@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class MBBanPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<MBBan> iterator = _models.iterator();
+		Iterator<MBBan> iterator = _mbBans.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -152,7 +150,7 @@ public class MBBanPersistenceTest {
 
 		newMBBan.setBanUserId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newMBBan));
+		_mbBans.add(_persistence.update(newMBBan));
 
 		MBBan existingMBBan = _persistence.findByPrimaryKey(newMBBan.getPrimaryKey());
 
@@ -539,13 +537,12 @@ public class MBBanPersistenceTest {
 
 		mbBan.setBanUserId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(mbBan));
+		_mbBans.add(_persistence.update(mbBan));
 
 		return mbBan;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBBanPersistenceTest.class);
-	private List<MBBan> _models = new ArrayList<MBBan>();
+	private List<MBBan> _mbBans = new ArrayList<MBBan>();
 	private ModelListener<MBBan>[] _modelListeners;
 	private MBBanPersistence _persistence = (MBBanPersistence)PortalBeanLocatorUtil.locate(MBBanPersistence.class.getName());
 }

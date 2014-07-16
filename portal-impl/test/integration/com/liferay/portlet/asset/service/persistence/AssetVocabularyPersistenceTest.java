@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class AssetVocabularyPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AssetVocabulary> iterator = _models.iterator();
+		Iterator<AssetVocabulary> iterator = _assetVocabularies.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -158,7 +156,7 @@ public class AssetVocabularyPersistenceTest {
 
 		newAssetVocabulary.setSettings(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newAssetVocabulary));
+		_assetVocabularies.add(_persistence.update(newAssetVocabulary));
 
 		AssetVocabulary existingAssetVocabulary = _persistence.findByPrimaryKey(newAssetVocabulary.getPrimaryKey());
 
@@ -598,13 +596,12 @@ public class AssetVocabularyPersistenceTest {
 
 		assetVocabulary.setSettings(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(assetVocabulary));
+		_assetVocabularies.add(_persistence.update(assetVocabulary));
 
 		return assetVocabulary;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetVocabularyPersistenceTest.class);
-	private List<AssetVocabulary> _models = new ArrayList<AssetVocabulary>();
+	private List<AssetVocabulary> _assetVocabularies = new ArrayList<AssetVocabulary>();
 	private ModelListener<AssetVocabulary>[] _modelListeners;
 	private AssetVocabularyPersistence _persistence = (AssetVocabularyPersistence)PortalBeanLocatorUtil.locate(AssetVocabularyPersistence.class.getName());
 }

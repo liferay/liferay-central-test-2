@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class ImagePersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Image> iterator = _models.iterator();
+		Iterator<Image> iterator = _images.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -144,7 +142,7 @@ public class ImagePersistenceTest {
 
 		newImage.setSize(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newImage));
+		_images.add(_persistence.update(newImage));
 
 		Image existingImage = _persistence.findByPrimaryKey(newImage.getPrimaryKey());
 
@@ -418,13 +416,12 @@ public class ImagePersistenceTest {
 
 		image.setSize(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(image));
+		_images.add(_persistence.update(image));
 
 		return image;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ImagePersistenceTest.class);
-	private List<Image> _models = new ArrayList<Image>();
+	private List<Image> _images = new ArrayList<Image>();
 	private ModelListener<Image>[] _modelListeners;
 	private ImagePersistence _persistence = (ImagePersistence)PortalBeanLocatorUtil.locate(ImagePersistence.class.getName());
 }

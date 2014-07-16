@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
@@ -89,7 +87,7 @@ public class BlogsStatsUserPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<BlogsStatsUser> iterator = _models.iterator();
+		Iterator<BlogsStatsUser> iterator = _blogsStatsUsers.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -151,7 +149,7 @@ public class BlogsStatsUserPersistenceTest {
 
 		newBlogsStatsUser.setRatingsAverageScore(RandomTestUtil.nextDouble());
 
-		_models.add(_persistence.update(newBlogsStatsUser));
+		_blogsStatsUsers.add(_persistence.update(newBlogsStatsUser));
 
 		BlogsStatsUser existingBlogsStatsUser = _persistence.findByPrimaryKey(newBlogsStatsUser.getPrimaryKey());
 
@@ -526,13 +524,12 @@ public class BlogsStatsUserPersistenceTest {
 
 		blogsStatsUser.setRatingsAverageScore(RandomTestUtil.nextDouble());
 
-		_models.add(_persistence.update(blogsStatsUser));
+		_blogsStatsUsers.add(_persistence.update(blogsStatsUser));
 
 		return blogsStatsUser;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserPersistenceTest.class);
-	private List<BlogsStatsUser> _models = new ArrayList<BlogsStatsUser>();
+	private List<BlogsStatsUser> _blogsStatsUsers = new ArrayList<BlogsStatsUser>();
 	private ModelListener<BlogsStatsUser>[] _modelListeners;
 	private BlogsStatsUserPersistence _persistence = (BlogsStatsUserPersistence)PortalBeanLocatorUtil.locate(BlogsStatsUserPersistence.class.getName());
 }

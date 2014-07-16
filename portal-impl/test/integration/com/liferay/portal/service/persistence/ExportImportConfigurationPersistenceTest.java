@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class ExportImportConfigurationPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<ExportImportConfiguration> iterator = _models.iterator();
+		Iterator<ExportImportConfiguration> iterator = _exportImportConfigurations.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -162,7 +160,8 @@ public class ExportImportConfigurationPersistenceTest {
 
 		newExportImportConfiguration.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newExportImportConfiguration));
+		_exportImportConfigurations.add(_persistence.update(
+				newExportImportConfiguration));
 
 		ExportImportConfiguration existingExportImportConfiguration = _persistence.findByPrimaryKey(newExportImportConfiguration.getPrimaryKey());
 
@@ -554,13 +553,13 @@ public class ExportImportConfigurationPersistenceTest {
 
 		exportImportConfiguration.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(exportImportConfiguration));
+		_exportImportConfigurations.add(_persistence.update(
+				exportImportConfiguration));
 
 		return exportImportConfiguration;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ExportImportConfigurationPersistenceTest.class);
-	private List<ExportImportConfiguration> _models = new ArrayList<ExportImportConfiguration>();
+	private List<ExportImportConfiguration> _exportImportConfigurations = new ArrayList<ExportImportConfiguration>();
 	private ModelListener<ExportImportConfiguration>[] _modelListeners;
 	private ExportImportConfigurationPersistence _persistence = (ExportImportConfigurationPersistence)PortalBeanLocatorUtil.locate(ExportImportConfigurationPersistence.class.getName());
 }

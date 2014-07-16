@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -89,7 +87,7 @@ public class SocialActivityLimitPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SocialActivityLimit> iterator = _models.iterator();
+		Iterator<SocialActivityLimit> iterator = _socialActivityLimits.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -151,7 +149,7 @@ public class SocialActivityLimitPersistenceTest {
 
 		newSocialActivityLimit.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(newSocialActivityLimit));
+		_socialActivityLimits.add(_persistence.update(newSocialActivityLimit));
 
 		SocialActivityLimit existingSocialActivityLimit = _persistence.findByPrimaryKey(newSocialActivityLimit.getPrimaryKey());
 
@@ -515,13 +513,12 @@ public class SocialActivityLimitPersistenceTest {
 
 		socialActivityLimit.setValue(RandomTestUtil.randomString());
 
-		_models.add(_persistence.update(socialActivityLimit));
+		_socialActivityLimits.add(_persistence.update(socialActivityLimit));
 
 		return socialActivityLimit;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SocialActivityLimitPersistenceTest.class);
-	private List<SocialActivityLimit> _models = new ArrayList<SocialActivityLimit>();
+	private List<SocialActivityLimit> _socialActivityLimits = new ArrayList<SocialActivityLimit>();
 	private ModelListener<SocialActivityLimit>[] _modelListeners;
 	private SocialActivityLimitPersistence _persistence = (SocialActivityLimitPersistence)PortalBeanLocatorUtil.locate(SocialActivityLimitPersistence.class.getName());
 }

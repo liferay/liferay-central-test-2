@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class AnnouncementsEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AnnouncementsEntry> iterator = _models.iterator();
+		Iterator<AnnouncementsEntry> iterator = _announcementsEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -166,7 +164,7 @@ public class AnnouncementsEntryPersistenceTest {
 
 		newAnnouncementsEntry.setAlert(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newAnnouncementsEntry));
+		_announcementsEntries.add(_persistence.update(newAnnouncementsEntry));
 
 		AnnouncementsEntry existingAnnouncementsEntry = _persistence.findByPrimaryKey(newAnnouncementsEntry.getPrimaryKey());
 
@@ -551,13 +549,12 @@ public class AnnouncementsEntryPersistenceTest {
 
 		announcementsEntry.setAlert(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(announcementsEntry));
+		_announcementsEntries.add(_persistence.update(announcementsEntry));
 
 		return announcementsEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AnnouncementsEntryPersistenceTest.class);
-	private List<AnnouncementsEntry> _models = new ArrayList<AnnouncementsEntry>();
+	private List<AnnouncementsEntry> _announcementsEntries = new ArrayList<AnnouncementsEntry>();
 	private ModelListener<AnnouncementsEntry>[] _modelListeners;
 	private AnnouncementsEntryPersistence _persistence = (AnnouncementsEntryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsEntryPersistence.class.getName());
 }

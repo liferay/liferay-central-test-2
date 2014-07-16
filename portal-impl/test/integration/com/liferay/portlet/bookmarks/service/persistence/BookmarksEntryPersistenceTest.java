@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class BookmarksEntryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<BookmarksEntry> iterator = _models.iterator();
+		Iterator<BookmarksEntry> iterator = _bookmarksEntries.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -174,7 +172,7 @@ public class BookmarksEntryPersistenceTest {
 
 		newBookmarksEntry.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newBookmarksEntry));
+		_bookmarksEntries.add(_persistence.update(newBookmarksEntry));
 
 		BookmarksEntry existingBookmarksEntry = _persistence.findByPrimaryKey(newBookmarksEntry.getPrimaryKey());
 
@@ -756,13 +754,12 @@ public class BookmarksEntryPersistenceTest {
 
 		bookmarksEntry.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(bookmarksEntry));
+		_bookmarksEntries.add(_persistence.update(bookmarksEntry));
 
 		return bookmarksEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BookmarksEntryPersistenceTest.class);
-	private List<BookmarksEntry> _models = new ArrayList<BookmarksEntry>();
+	private List<BookmarksEntry> _bookmarksEntries = new ArrayList<BookmarksEntry>();
 	private ModelListener<BookmarksEntry>[] _modelListeners;
 	private BookmarksEntryPersistence _persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName());
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class AssetCategoryPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<AssetCategory> iterator = _models.iterator();
+		Iterator<AssetCategory> iterator = _assetCategories.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -162,7 +160,7 @@ public class AssetCategoryPersistenceTest {
 
 		newAssetCategory.setVocabularyId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(newAssetCategory));
+		_assetCategories.add(_persistence.update(newAssetCategory));
 
 		AssetCategory existingAssetCategory = _persistence.findByPrimaryKey(newAssetCategory.getPrimaryKey());
 
@@ -721,7 +719,7 @@ public class AssetCategoryPersistenceTest {
 
 		assetCategory.setVocabularyId(RandomTestUtil.nextLong());
 
-		_models.add(_persistence.update(assetCategory));
+		_assetCategories.add(_persistence.update(assetCategory));
 
 		return assetCategory;
 	}
@@ -978,8 +976,7 @@ public class AssetCategoryPersistenceTest {
 		return assetCategory;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPersistenceTest.class);
-	private List<AssetCategory> _models = new ArrayList<AssetCategory>();
+	private List<AssetCategory> _assetCategories = new ArrayList<AssetCategory>();
 	private ModelListener<AssetCategory>[] _modelListeners;
 	private AssetCategoryPersistence _persistence = (AssetCategoryPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPersistence.class.getName());
 }

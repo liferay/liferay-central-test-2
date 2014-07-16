@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -86,7 +84,7 @@ public class SocialActivitySetPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<SocialActivitySet> iterator = _models.iterator();
+		Iterator<SocialActivitySet> iterator = _socialActivitySets.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -152,7 +150,7 @@ public class SocialActivitySetPersistenceTest {
 
 		newSocialActivitySet.setActivityCount(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(newSocialActivitySet));
+		_socialActivitySets.add(_persistence.update(newSocialActivitySet));
 
 		SocialActivitySet existingSocialActivitySet = _persistence.findByPrimaryKey(newSocialActivitySet.getPrimaryKey());
 
@@ -522,13 +520,12 @@ public class SocialActivitySetPersistenceTest {
 
 		socialActivitySet.setActivityCount(RandomTestUtil.nextInt());
 
-		_models.add(_persistence.update(socialActivitySet));
+		_socialActivitySets.add(_persistence.update(socialActivitySet));
 
 		return socialActivitySet;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SocialActivitySetPersistenceTest.class);
-	private List<SocialActivitySet> _models = new ArrayList<SocialActivitySet>();
+	private List<SocialActivitySet> _socialActivitySets = new ArrayList<SocialActivitySet>();
 	private ModelListener<SocialActivitySet>[] _modelListeners;
 	private SocialActivitySetPersistence _persistence = (SocialActivitySetPersistence)PortalBeanLocatorUtil.locate(SocialActivitySetPersistence.class.getName());
 }

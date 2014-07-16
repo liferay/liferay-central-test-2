@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -90,7 +88,7 @@ public class JournalFolderPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<JournalFolder> iterator = _models.iterator();
+		Iterator<JournalFolder> iterator = _journalFolders.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -168,7 +166,7 @@ public class JournalFolderPersistenceTest {
 
 		newJournalFolder.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(newJournalFolder));
+		_journalFolders.add(_persistence.update(newJournalFolder));
 
 		JournalFolder existingJournalFolder = _persistence.findByPrimaryKey(newJournalFolder.getPrimaryKey());
 
@@ -692,13 +690,12 @@ public class JournalFolderPersistenceTest {
 
 		journalFolder.setStatusDate(RandomTestUtil.nextDate());
 
-		_models.add(_persistence.update(journalFolder));
+		_journalFolders.add(_persistence.update(journalFolder));
 
 		return journalFolder;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalFolderPersistenceTest.class);
-	private List<JournalFolder> _models = new ArrayList<JournalFolder>();
+	private List<JournalFolder> _journalFolders = new ArrayList<JournalFolder>();
 	private ModelListener<JournalFolder>[] _modelListeners;
 	private JournalFolderPersistence _persistence = (JournalFolderPersistence)PortalBeanLocatorUtil.locate(JournalFolderPersistence.class.getName());
 }

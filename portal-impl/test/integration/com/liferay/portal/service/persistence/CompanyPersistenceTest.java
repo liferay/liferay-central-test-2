@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -88,7 +86,7 @@ public class CompanyPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<Company> iterator = _models.iterator();
+		Iterator<Company> iterator = _companies.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -154,7 +152,7 @@ public class CompanyPersistenceTest {
 
 		newCompany.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(newCompany));
+		_companies.add(_persistence.update(newCompany));
 
 		Company existingCompany = _persistence.findByPrimaryKey(newCompany.getPrimaryKey());
 
@@ -510,13 +508,12 @@ public class CompanyPersistenceTest {
 
 		company.setActive(RandomTestUtil.randomBoolean());
 
-		_models.add(_persistence.update(company));
+		_companies.add(_persistence.update(company));
 
 		return company;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CompanyPersistenceTest.class);
-	private List<Company> _models = new ArrayList<Company>();
+	private List<Company> _companies = new ArrayList<Company>();
 	private ModelListener<Company>[] _modelListeners;
 	private CompanyPersistence _persistence = (CompanyPersistence)PortalBeanLocatorUtil.locate(CompanyPersistence.class.getName());
 }
