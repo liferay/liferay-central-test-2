@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Marcellus Tavares
  */
-public class PingbackDisabledException extends PortalException {
+public class DisabledPingbackException extends PortalException {
 
-	public PingbackDisabledException() {
+	public DisabledPingbackException() {
 		super();
 	}
 
-	public PingbackDisabledException(String msg) {
+	public DisabledPingbackException(String msg) {
 		super(msg);
 	}
 
-	public PingbackDisabledException(String msg, Throwable cause) {
+	public DisabledPingbackException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public PingbackDisabledException(Throwable cause) {
+	public DisabledPingbackException(Throwable cause) {
 		super(cause);
 	}
 
