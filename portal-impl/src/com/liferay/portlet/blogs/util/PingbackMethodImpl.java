@@ -16,7 +16,6 @@ package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.comment.DuplicateCommentException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -91,7 +90,7 @@ public class PingbackMethodImpl implements Method {
 		}
 		catch (DuplicateCommentException dce) {
 			return XmlRpcUtil.createFault(
-				PINGBACK_ALREADY_REGISTERED, "Pingback previously registered");
+				PINGBACK_ALREADY_REGISTERED, "Pingback is already registered");
 		}
 		catch (InvalidSourceURIException isue) {
 			return XmlRpcUtil.createFault(
@@ -128,8 +127,8 @@ public class PingbackMethodImpl implements Method {
 	@Override
 	public boolean setArguments(Object[] arguments) {
 		try {
-			_sourceUri = (String)arguments[0];
-			_targetUri = (String)arguments[1];
+			_sourceURI = (String)arguments[0];
+			_targetURI = (String)arguments[1];
 
 			return true;
 		}
@@ -165,7 +164,7 @@ public class PingbackMethodImpl implements Method {
 		long classPK = entry.getEntryId();
 
 		String body =
-			"[...] " + getExcerpt() + " [...] [url=" + _sourceUri + "]" +
+			"[...] " + getExcerpt() + " [...] [url=" + _sourceURI + "]" +
 				LanguageUtil.get(LocaleUtil.getSiteDefault(), "read-more") +
 					"[/url]";
 
@@ -178,7 +177,7 @@ public class PingbackMethodImpl implements Method {
 
 	protected ServiceContext buildServiceContext(
 			long companyId, long groupId, String urlTitle)
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -213,7 +212,7 @@ public class PingbackMethodImpl implements Method {
 	protected BlogsEntry getBlogsEntry(long companyId) throws Exception {
 		BlogsEntry entry = null;
 
-		URL url = new URL(_targetUri);
+		URL url = new URL(_targetURI);
 
 		String friendlyURL = url.getPath();
 
@@ -267,7 +266,7 @@ public class PingbackMethodImpl implements Method {
 	}
 
 	protected String getExcerpt() throws IOException {
-		String html = HttpUtil.URLtoString(_sourceUri);
+		String html = HttpUtil.URLtoString(_sourceURI);
 
 		Source source = new Source(html);
 
@@ -279,7 +278,7 @@ public class PingbackMethodImpl implements Method {
 			String href = GetterUtil.getString(
 				element.getAttributeValue("href"));
 
-			if (href.equals(_targetUri)) {
+			if (href.equals(_targetURI)) {
 				element = element.getParentElement();
 
 				TextExtractor textExtractor = new TextExtractor(element);
@@ -322,13 +321,11 @@ public class PingbackMethodImpl implements Method {
 		}
 	}
 
-	protected void validateSource()
-		throws InvalidSourceURIException, UnavailableSourceURIException {
-
+	protected void validateSource() throws Exception {
 		Source source = null;
 
 		try {
-			String html = HttpUtil.URLtoString(_sourceUri);
+			String html = HttpUtil.URLtoString(_sourceURI);
 
 			source = new Source(html);
 		}
@@ -347,19 +344,19 @@ public class PingbackMethodImpl implements Method {
 			String href = GetterUtil.getString(
 				startTag.getAttributeValue("href"));
 
-			if (href.equals(_targetUri)) {
+			if (href.equals(_targetURI)) {
 				return;
 			}
 		}
 
 		throw new InvalidSourceURIException(
-			"Could not find target URI in source");
+			"Unable to find target URI in source");
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PingbackMethodImpl.class);
 
 	private CommentManager _commentManager = BlogsUtil.getCommentManager();
-	private String _sourceUri;
-	private String _targetUri;
+	private String _sourceURI;
+	private String _targetURI;
 
 }
