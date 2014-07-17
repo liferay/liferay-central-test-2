@@ -42,8 +42,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.pingback.InvalidSourceURIException;
 import com.liferay.portlet.blogs.pingback.DisabledPingbackException;
+import com.liferay.portlet.blogs.pingback.InvalidSourceURIException;
 import com.liferay.portlet.blogs.pingback.UnavailableSourceURIException;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
