@@ -113,6 +113,10 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			return content;
 		}
 
+		if (content.contains("<project>")) {
+			return content;
+		}
+
 		int y = fileName.indexOf("/", x);
 
 		String correctProjectElementText =
