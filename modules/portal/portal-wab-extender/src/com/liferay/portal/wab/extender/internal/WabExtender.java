@@ -83,7 +83,7 @@ public class WabExtender {
 			properties);
 	}
 
-	/*
+	/**
 	 * This reference is held to force a dependency on the portal's complete
 	 * startup.
 	 */
@@ -98,7 +98,7 @@ public class WabExtender {
 		_servletContext = null;
 	}
 
-	private ServletContext _servletContext;
 	private ServiceRegistration<ArtifactUrlTransformer> _serviceRegistration;
+	private ServletContext _servletContext;
 
 }
