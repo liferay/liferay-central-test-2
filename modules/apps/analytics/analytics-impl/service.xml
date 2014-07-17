@@ -41,31 +41,26 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-
-		<finder name="C_GtD" return-type="Collection">
+		<finder name="C_GtCD" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="createDate" comparator="&gt;" />
 		</finder>
-
-		<finder name="C_LtD" return-type="Collection">
+		<finder name="C_LtCD" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="createDate" comparator="&lt;" />
 		</finder>
-
-		<finder name="C_C_E_GtD" return-type="Collection">
+		<finder name="C_C_E_GtCD" return-type="Collection">
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 			<finder-column name="eventType" />
 			<finder-column name="createDate" comparator="&gt;" />
 		</finder>
-
-		<finder name="E_E_GtD" return-type="Collection">
+		<finder name="E_E_GtCD" return-type="Collection">
 			<finder-column name="elementId" />
 			<finder-column name="eventType" />
 			<finder-column name="createDate" comparator="&gt;" />
 		</finder>
-
-		<finder name="C_C_R_R_E_GtD" return-type="Collection">
+		<finder name="C_C_R_R_E_GtCD" return-type="Collection">
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 			<finder-column name="referrerClassName" />
@@ -73,8 +68,7 @@
 			<finder-column name="eventType" />
 			<finder-column name="createDate" comparator="&gt;" />
 		</finder>
-
-		<finder name="R_R_E_E_GtD" return-type="Collection">
+		<finder name="R_R_E_E_GtCD" return-type="Collection">
 			<finder-column name="referrerClassName" />
 			<finder-column name="referrerClassPK" />
 			<finder-column name="elementId" />
