@@ -80,13 +80,15 @@ public @interface OSGiBeanProperties {
 	public static class Convert {
 
 		/**
-		 * Converts the OSGi bean properties object to a properties map.
+		 * Returns a properties map representing the object's OSGi bean properties.
 		 *
-		 * @param  object the object that is possibly annotated with {@link 
+		 * @param  object the object that is possibly annotated with {@link
 		 *         OSGiBeanProperties}
-		 * @return a converted properties map, which may be empty if there are
-		 *         no properties found, or <code>null</code> if the object is
-		 *         not annotated with {@link OSGiBeanProperties}
+		 * @return a properties map representing the object's OSGi bean
+		 *         properties. The map will be <code>null</code> if the object
+		 *         is not annotated with {@link OSGiBeanProperties} or will be
+		 *         empty if the object is annotated with {@link
+		 *         OSGiBeanProperties} but has no properties.
 		 */
 		public static Map<String, Object> fromObject(Object object) {
 			Class<? extends Object> clazz = object.getClass();
@@ -102,12 +104,14 @@ public @interface OSGiBeanProperties {
 		}
 
 		/**
-		 * Converts the {@link OSGiBeanProperties} instance to a properties map.
+		 * Returns a properties map representing the {@link OSGiBeanProperties}
+		 * instance.
 		 *
-		 * @param  osgiBeanProperties the instance of {@link OSGiBeanProperties},
-		 *         which is read for properties
-		 * @return a converted properties map, which may be empty if there are
-		 *         no properties found
+		 * @param  osgiBeanProperties the instance of {@link OSGiBeanProperties}
+		 *         read for properties
+		 * @return a properties map representing the {@link OSGiBeanProperties}
+		 *         instance. The map will be empty if the {@link
+		 *         OSGiBeanProperties} instance has no properties.
 		 */
 		public static Map<String, Object> toMap(
 			OSGiBeanProperties osgiBeanProperties) {
