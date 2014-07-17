@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Brian Wing Shun Chan
+ * @generated
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class AssetVocabularyPersistenceTest {

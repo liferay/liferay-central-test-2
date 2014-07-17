@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Edward C. Han
+ * @generated
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class MDRActionPersistenceTest {
