@@ -75,7 +75,7 @@ public class MBCommentManagerImplTest extends Mockito {
 	}
 
 	@Test
-	public void testAddCommentWithUsernameAndSubject() throws Exception {
+	public void testAddCommentWithUserNameAndSubject() throws Exception {
 		when(
 			_mbMessage.getMessageId()
 		).thenReturn(

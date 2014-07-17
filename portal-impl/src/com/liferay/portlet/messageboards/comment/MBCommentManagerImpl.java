@@ -49,12 +49,9 @@ public class MBCommentManagerImpl implements CommentManager {
 
 		MBThread thread = messageDisplay.getThread();
 
-		long threadId = thread.getThreadId();
-		long parentMessageId = thread.getRootMessageId();
-
 		List<MBMessage> messages =
 			_mbMessageLocalService.getThreadMessages(
-				threadId, WorkflowConstants.STATUS_APPROVED);
+				thread.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
 		for (MBMessage message : messages) {
 			String messageBody = message.getBody();
@@ -65,8 +62,9 @@ public class MBCommentManagerImpl implements CommentManager {
 		}
 
 		_mbMessageLocalService.addDiscussionMessage(
-			userId, StringPool.BLANK, groupId, className, classPK, threadId,
-			parentMessageId, StringPool.BLANK, body, serviceContext);
+			userId, StringPool.BLANK, groupId, className, classPK,
+			thread.getThreadId(), thread.getRootMessageId(), StringPool.BLANK,
+			body, serviceContext);
 	}
 
 	@Override

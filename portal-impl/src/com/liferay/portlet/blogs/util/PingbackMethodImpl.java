@@ -111,7 +111,7 @@ public class PingbackMethodImpl implements Method {
 			}
 
 			return XmlRpcUtil.createFault(
-				TARGET_URI_INVALID, "Error parsing target URI");
+				TARGET_URI_INVALID, "Unable to parse target URI");
 		}
 	}
 
