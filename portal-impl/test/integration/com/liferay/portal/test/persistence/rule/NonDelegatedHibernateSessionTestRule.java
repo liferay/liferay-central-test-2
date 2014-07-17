@@ -41,6 +41,7 @@ public class NonDelegatedHibernateSessionTestRule implements TestRule {
 					PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
 				}
 			}
+
 		};
 	}
 
