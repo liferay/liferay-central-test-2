@@ -760,7 +760,8 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	protected String formatWebXML(String fileName, String content)
 		throws IOException {
 
-		if (!portalSource) {
+		if (!fileName.contains("portal-web/docroot")) {
+		//if (!portalSource) {
 			String webXML = ContentUtil.get(
 				"com/liferay/portal/deploy/dependencies/web.xml");
 
