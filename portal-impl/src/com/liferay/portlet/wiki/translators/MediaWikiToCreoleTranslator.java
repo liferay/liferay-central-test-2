@@ -166,7 +166,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// Remove HTML tags
 
-		for (Pattern pattern : _HTML_TAG_PATTERNS) {
+		for (Pattern pattern : _htmlTagPatterns) {
 			matcher = pattern.matcher(content);
 
 			content = matcher.replaceAll(StringPool.BLANK);
@@ -248,19 +248,19 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 			originalLength = mediaWikiTable.length() + 4;
 
-			Matcher matcher1 = pattern1.matcher(mediaWikiTable);
+			Matcher matcher1 = _mediaWikiTablePattern1.matcher(mediaWikiTable);
 
 			mediaWikiTable = matcher1.replaceAll(StringPool.BLANK);
 
-			Matcher matcher2 = pattern2.matcher(mediaWikiTable);
+			Matcher matcher2 = _mediaWikiTablePattern2.matcher(mediaWikiTable);
 
 			mediaWikiTable = matcher2.replaceAll("$1");
 
-			Matcher matcher3 = pattern3.matcher(mediaWikiTable);
+			Matcher matcher3 = _mediaWikiTablePattern3.matcher(mediaWikiTable);
 
 			mediaWikiTable = matcher3.replaceAll("===$1===");
 
-			Matcher matcher4 = pattern4.matcher(mediaWikiTable);
+			Matcher matcher4 = _mediaWikiTablePattern4.matcher(mediaWikiTable);
 
 			mediaWikiTable = matcher4.replaceAll("|=$1|");
 
@@ -301,9 +301,6 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		return TABLE_OF_CONTENTS + super.postProcess(sb.toString());
 	}
 
-	private static final Pattern[] _HTML_TAG_PATTERNS = {
-		Pattern.compile("<div[^>]*>"), Pattern.compile("<font[^>]*>")};
-
 	private static final String[] _HTML_TAGS = {
 		"<blockquote>", "</blockquote>", "<br>", "<br/>", "<br />", "<center>",
 		"</center>", "<cite>", "</cite>","<code>", "</code>", "</div>",
@@ -311,6 +308,8 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		"<var>", "</var>"
 	};
 
+	private Pattern[] _htmlTagPatterns = {
+		Pattern.compile("<div[^>]*>"), Pattern.compile("<font[^>]*>")};
 	private Pattern _imagePattern = Pattern.compile(
 		"(\\[{2})(Image|File)(:)", Pattern.DOTALL);
 	private Pattern _linkPattern = Pattern.compile(
@@ -320,9 +319,10 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		"\\{\\|(.*?)\\|\\}", Pattern.DOTALL);
 	private Pattern _titlePattern = Pattern.compile(
 		"^=([^=]+)=", Pattern.MULTILINE);
-	private Pattern pattern1 = Pattern.compile("class=(.*?)[|\n\r]");
-	private Pattern pattern2 = Pattern.compile("(\\|\\-)(.*)");
-	private Pattern pattern3 = Pattern.compile("\\|\\+(.*)");
-	private Pattern pattern4 = Pattern.compile("(?m)^!(.+)");
+	private Pattern _mediaWikiTablePattern1 = Pattern.compile(
+		"class=(.*?)[|\n\r]");
+	private Pattern _mediaWikiTablePattern2 = Pattern.compile("(\\|\\-)(.*)");
+	private Pattern _mediaWikiTablePattern3 = Pattern.compile("\\|\\+(.*)");
+	private Pattern _mediaWikiTablePattern4 = Pattern.compile("(?m)^!(.+)");
 
 }
