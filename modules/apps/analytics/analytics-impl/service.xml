@@ -22,7 +22,7 @@
 		<column name="classPK" type="long" />
 		<column name="referrerClassName" type="String" />
 		<column name="referrerClassPK" type="long" />
-		<column name="elementId" type="String" />
+		<column name="elementKey" type="String" />
 		<column name="type" type="String" />
 		<column name="clientIP" type="String" />
 		<column name="userAgent" type="String" />
@@ -51,7 +51,7 @@
 		</finder>
 		<finder name="GtCD_E_E" return-type="Collection">
 			<finder-column name="createDate" comparator="&gt;" />
-			<finder-column name="elementId" />
+			<finder-column name="elementKey" />
 			<finder-column name="type" />
 		</finder>
 		<finder name="GtCD_C_C_E" return-type="Collection">
@@ -72,7 +72,7 @@
 			<finder-column name="createDate" comparator="&gt;" />
 			<finder-column name="referrerClassName" />
 			<finder-column name="referrerClassPK" />
-			<finder-column name="elementId" />
+			<finder-column name="elementKey" />
 			<finder-column name="type" />
 		</finder>
 	</entity>
