@@ -75,6 +75,9 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 
+/**
+ * @generated
+ */
 <#if osgiModule>
 	@RunWith(Arquillian.class)
 <#else>
