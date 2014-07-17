@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
-import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
@@ -44,7 +43,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.test.TransactionalTestRule;
+import com.liferay.portal.test.persistence.rule.NonDelegatedHibernateSessionTestRule;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.test.RandomTestUtil;
@@ -71,7 +70,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -86,8 +85,8 @@ import org.junit.Test;
 </#if>
 public class ${entity.name}PersistenceTest {
 
-	@ClassRule
-	public static TransactionalTestRule transactionalTestRule = new TransactionalTestRule(Propagation.REQUIRED);
+	@Rule
+	public TestRule testRule = new NonDelegatedHibernateSessionTestRule();
 
 	@BeforeClass
 	public static void setupClass() throws TemplateException {
