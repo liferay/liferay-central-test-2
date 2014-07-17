@@ -13,6 +13,7 @@
 
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
 
 		<!-- Other fields -->
 
@@ -28,7 +29,6 @@
 		<column name="languageId" type="String" />
 		<column name="URL" type="String" />
 		<column name="additionalInfo" type="String" />
-		<column name="createDate" type="Date" />
 
 		<!-- Order -->
 
