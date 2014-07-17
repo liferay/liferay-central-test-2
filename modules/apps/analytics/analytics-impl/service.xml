@@ -49,14 +49,14 @@
 			<finder-column name="companyId" />
 			<finder-column name="createDate" comparator="&lt;" />
 		</finder>
-		<finder name="C_C_E_GtCD" return-type="Collection">
-			<finder-column name="className" />
-			<finder-column name="classPK" />
+		<finder name="E_E_GtCD" return-type="Collection">
+			<finder-column name="elementId" />
 			<finder-column name="eventType" />
 			<finder-column name="createDate" comparator="&gt;" />
 		</finder>
-		<finder name="E_E_GtCD" return-type="Collection">
-			<finder-column name="elementId" />
+		<finder name="C_C_E_GtCD" return-type="Collection">
+			<finder-column name="className" />
+			<finder-column name="classPK" />
 			<finder-column name="eventType" />
 			<finder-column name="createDate" comparator="&gt;" />
 		</finder>
