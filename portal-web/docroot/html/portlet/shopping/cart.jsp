@@ -54,9 +54,9 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	}
 
 	function <portlet:namespace />updateCart() {
-		var itemIds = '';
 		var count = 0;
 		var invalidSKUs = '';
+		var itemIds = '';
 		var subtotal = 0;
 
 		<%
@@ -94,9 +94,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		%>
 
 		if (document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value == '<%= Constants.CHECKOUT %>') {
-			var shoppingSettingsMinOrder = <%= shoppingSettings.getMinOrder() %>;
-
-			if (subtotal < shoppingSettingsMinOrder) {
+			if (subtotal < <%= shoppingSettings.getMinOrder() %>) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>'
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= currentURL %>';
 
