@@ -27,7 +27,7 @@
 		<column name="clientIP" type="String" />
 		<column name="userAgent" type="String" />
 		<column name="languageId" type="String" />
-		<column name="URL" type="String" />
+		<column name="url" type="String" />
 		<column name="additionalInfo" type="String" />
 
 		<!-- Order -->
