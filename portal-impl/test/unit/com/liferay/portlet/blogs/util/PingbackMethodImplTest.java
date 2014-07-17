@@ -219,9 +219,9 @@ public class PingbackMethodImplTest extends PowerMockito {
 		).when(
 			_commentManager
 		).addComment(
-				Mockito.anyLong(), Mockito.anyLong(), Mockito.anyString(),
-				Mockito.anyLong(), Mockito.anyString(),
-				(ServiceContext)Mockito.any()
+			Mockito.anyLong(), Mockito.anyLong(), Mockito.anyString(),
+			Mockito.anyLong(), Mockito.anyString(),
+			(ServiceContext)Mockito.any()
 		);
 
 		execute();
