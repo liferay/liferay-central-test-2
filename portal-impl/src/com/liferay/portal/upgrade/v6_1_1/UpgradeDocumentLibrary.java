@@ -130,8 +130,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				ps.executeUpdate();
 
 				ps = con.prepareStatement(
-					"update DLFileVersion set title = ? where " +
-						"fileEntryId = ? and DLFileVersion.version = ?");
+					"update DLFileVersion set title = ? where fileEntryId = " +
+						"? and version = ?");
 
 				ps.setString(1, uniqueTitle);
 				ps.setLong(2, fileEntryId);
