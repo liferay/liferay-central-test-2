@@ -89,7 +89,7 @@ public class TrashEntryLocalServiceTest {
 	}
 
 	@Test
-	public void testCustomizedMaxAge() throws Exception {
+	public void testCustomMaxAge() throws Exception {
 		Group group = setTrashEntriesMaxAge(
 			createGroup(TestPropsValues.getCompanyId()), 2);
 
@@ -111,8 +111,8 @@ public class TrashEntryLocalServiceTest {
 	}
 
 	@Test
-	public void testMultiCompanyCleanUp() throws Exception {
-		for (int i = 0; i < _companyCount; i++ ) {
+	public void testCompaniesCleanUp() throws Exception {
+		for (int i = 0; i < _companiesCount; i++ ) {
 			Group group = setTrashEntriesMaxAge(
 				createGroup(createCompany()), _maxAgeDay);
 
@@ -122,12 +122,12 @@ public class TrashEntryLocalServiceTest {
 		TrashEntryLocalServiceUtil.checkEntries();
 
 		Assert.assertEquals(
-			_companyCount * _notExpiredTrashEntryCount,
+			_companiesCount * _notExpiredTrashEntriesCount,
 			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
 	@Test
-	public void testMultiGroupTrashCleanUp() throws Exception {
+	public void testGroupsTrashCleanUp() throws Exception {
 		for (int i = 0; i < _groupCount; i++) {
 			Group group = setTrashEntriesMaxAge(
 				createGroup(TestPropsValues.getCompanyId()), _maxAgeDay);
@@ -138,7 +138,7 @@ public class TrashEntryLocalServiceTest {
 		TrashEntryLocalServiceUtil.checkEntries();
 
 		Assert.assertEquals(
-			_groupCount * _notExpiredTrashEntryCount,
+			_groupCount * _notExpiredTrashEntriesCount,
 			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
@@ -307,7 +307,7 @@ public class TrashEntryLocalServiceTest {
 			createFileEntryTrash(group, true);
 		}
 
-		for (int i = 0; i < _notExpiredTrashEntryCount; i++) {
+		for (int i = 0; i < _notExpiredTrashEntriesCount; i++) {
 			createFileEntryTrash(group, false);
 		}
 	}
@@ -329,7 +329,7 @@ public class TrashEntryLocalServiceTest {
 		TrashEntryLocalServiceUtil.checkEntries();
 
 		Assert.assertEquals(
-			_notExpiredTrashEntryCount,
+			_notExpiredTrashEntriesCount,
 			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
@@ -365,11 +365,11 @@ public class TrashEntryLocalServiceTest {
 		return GroupLocalServiceUtil.updateGroup(group);
 	}
 
-	private static final int _companyCount = 2;
+	private static final int _companiesCount = 2;
 	private static final int _expiredTrashEntryCount = 3;
 	private static final int _groupCount = 2;
 	private static final int _maxAgeDay = 5;
-	private static final int _notExpiredTrashEntryCount = 4;
+	private static final int _notExpiredTrashEntriesCount = 4;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		TrashEntryLocalServiceTest.class);
