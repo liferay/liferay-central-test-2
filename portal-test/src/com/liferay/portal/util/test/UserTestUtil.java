@@ -222,7 +222,7 @@ public class UserTestUtil {
 			companyId, RoleConstants.ADMINISTRATOR);
 
 		List<User> users = UserLocalServiceUtil.getRoleUsers(
-			role.getRoleId(), 0, 2);
+			role.getRoleId(), 0, 1);
 
 		if (!users.isEmpty()) {
 			return users.get(0);
