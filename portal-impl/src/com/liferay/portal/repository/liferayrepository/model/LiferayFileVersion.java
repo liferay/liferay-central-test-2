@@ -115,7 +115,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 	public InputStream getContentStream(boolean incrementCounter)
 		throws PortalException {
 
-		InputStream contentStream = _dlFileVersion.getContentStream(
+		InputStream inputStream = _dlFileVersion.getContentStream(
 			incrementCounter);
 
 		try {
@@ -124,10 +124,10 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 				incrementCounter);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
-		return contentStream;
+		return inputStream;
 	}
 
 	@Override
