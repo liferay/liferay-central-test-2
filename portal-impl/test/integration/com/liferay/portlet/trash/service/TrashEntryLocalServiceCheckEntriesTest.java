@@ -80,12 +80,28 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 	@Before
 	public void setUp() throws Exception {
-		cleanUpTrashEntries();
+		deleteTrashEntries();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		cleanUpTrashEntries();
+		deleteTrashEntries();
+	}
+
+	@Test
+	public void testCompanies() throws Exception {
+		for (int i = 0; i < _COMPANIES_COUNT; i++ ) {
+			Group group = updateTrashEntriesMaxAge(
+				createGroup(createCompany()), _MAX_AGE);
+
+			createTrashEntries(group);
+		}
+
+		TrashEntryLocalServiceUtil.checkEntries();
+
+		Assert.assertEquals(
+			_COMPANIES_COUNT * _NOT_EXPIRED_TRASH_ENTRIES_COUNT,
+			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
 	@Test
@@ -93,7 +109,23 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 		Group group = updateTrashEntriesMaxAge(
 			createGroup(TestPropsValues.getCompanyId()), 2);
 
-		cleanUp(group);
+		deleteTrashEntries(group);
+	}
+
+	@Test
+	public void testGroups() throws Exception {
+		for (int i = 0; i < _GROUPS_COUNT; i++) {
+			Group group = updateTrashEntriesMaxAge(
+				createGroup(TestPropsValues.getCompanyId()), _MAX_AGE);
+
+			createTrashEntries(group);
+		}
+
+		TrashEntryLocalServiceUtil.checkEntries();
+
+		Assert.assertEquals(
+			_GROUPS_COUNT * _NOT_EXPIRED_TRASH_ENTRIES_COUNT,
+			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
 	@Test
@@ -111,52 +143,20 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	}
 
 	@Test
-	public void testCompaniesCleanUp() throws Exception {
-		for (int i = 0; i < _companiesCount; i++ ) {
-			Group group = updateTrashEntriesMaxAge(
-				createGroup(createCompany()), _maxAgeDay);
-
-			createTrashEntries(group);
-		}
-
-		TrashEntryLocalServiceUtil.checkEntries();
-
-		Assert.assertEquals(
-			_companiesCount * _notExpiredTrashEntriesCount,
-			TrashEntryLocalServiceUtil.getTrashEntriesCount());
-	}
-
-	@Test
-	public void testGroupsCleanUp() throws Exception {
-		for (int i = 0; i < _groupsCount; i++) {
-			Group group = updateTrashEntriesMaxAge(
-				createGroup(TestPropsValues.getCompanyId()), _maxAgeDay);
-
-			createTrashEntries(group);
-		}
-
-		TrashEntryLocalServiceUtil.checkEntries();
-
-		Assert.assertEquals(
-			_groupsCount * _notExpiredTrashEntriesCount,
-			TrashEntryLocalServiceUtil.getTrashEntriesCount());
-	}
-
-	@Test
-	public void testWithLayoutGroup() throws Exception {
+	public void testLayoutGroup() throws Exception {
 		Group group = updateTrashEntriesMaxAge(
 			createGroup(TestPropsValues.getCompanyId()), 2);
 
-		cleanUp(createLayoutGroup(group));
+		deleteTrashEntries(createLayoutGroup(group));
 	}
 
 	@Test
-	public void testWithRegularGroup() throws Exception {
-		cleanUp(createGroup(TestPropsValues.getCompanyId()));
+	public void testRegularGroup() throws Exception {
+		deleteTrashEntries(createGroup(TestPropsValues.getCompanyId()));
 	}
 
 	@Test
-	public void testWithStagingGroup() throws Exception {
+	public void testStagingGroup() throws Exception {
 		long companyId = TestPropsValues.getCompanyId();
 
 		Group group = updateTrashEntriesMaxAge(createGroup(companyId), 2);
@@ -166,11 +166,11 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 			user.getUserId(), group, false, false,
 			ServiceContextTestUtil.getServiceContext(group, user.getUserId()));
 
-		cleanUp(group.getStagingGroup());
+		deleteTrashEntries(group.getStagingGroup());
 	}
 
 	@Test
-	public void testWithStagingPageScope() throws Exception {
+	public void testStagingLayoutScope() throws Exception {
 		long companyId = TestPropsValues.getCompanyId();
 
 		Group group = updateTrashEntriesMaxAge(createGroup(companyId), 2);
@@ -184,11 +184,11 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 		group = createLayoutGroup(group.getStagingGroup());
 
-		cleanUp(group);
+		deleteTrashEntries(group);
 	}
 
 	@Test
-	public void testWithStagingTrashDisabled() throws Exception {
+	public void testStagingTrashDisabled() throws Exception {
 		long companyId = TestPropsValues.getCompanyId();
 
 		Group group = disableTrashForGroup(createGroup(companyId));
@@ -208,27 +208,6 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 		Assert.assertEquals(
 			0, TrashEntryLocalServiceUtil.getTrashEntriesCount());
-	}
-
-	protected void cleanUpTrashEntries() {
-		List<TrashEntry> trashEntries =
-			TrashEntryLocalServiceUtil.getTrashEntries(
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		for (TrashEntry trashEntry : trashEntries) {
-			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(
-					trashEntry.getClassName());
-
-			try {
-				trashHandler.deleteTrashEntry(trashEntry.getClassPK());
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-
-				TrashEntryLocalServiceUtil.deleteEntry(trashEntry);
-			}
-		}
 	}
 
 	protected long createCompany() throws Exception {
@@ -296,13 +275,44 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	}
 
 	protected void createTrashEntries(Group group) throws Exception {
-		for (int i = 0; i < _expiredTrashEntryCount; i++) {
+		for (int i = 0; i < _EXPIRED_TRASH_ENTRIES_COUNT; i++) {
 			createFileEntryTrashEntry(group, true);
 		}
 
-		for (int i = 0; i < _notExpiredTrashEntriesCount; i++) {
+		for (int i = 0; i < _NOT_EXPIRED_TRASH_ENTRIES_COUNT; i++) {
 			createFileEntryTrashEntry(group, false);
 		}
+	}
+
+	protected void deleteTrashEntries() {
+		List<TrashEntry> trashEntries =
+			TrashEntryLocalServiceUtil.getTrashEntries(
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (TrashEntry trashEntry : trashEntries) {
+			TrashHandler trashHandler =
+				TrashHandlerRegistryUtil.getTrashHandler(
+					trashEntry.getClassName());
+
+			try {
+				trashHandler.deleteTrashEntry(trashEntry.getClassPK());
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+
+				TrashEntryLocalServiceUtil.deleteEntry(trashEntry);
+			}
+		}
+	}
+
+	protected void deleteTrashEntries(Group group) throws Exception {
+		createTrashEntries(group);
+
+		TrashEntryLocalServiceUtil.checkEntries();
+
+		Assert.assertEquals(
+			_NOT_EXPIRED_TRASH_ENTRIES_COUNT,
+			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
 	protected Group disableTrashForGroup(Group group) throws Exception {
@@ -314,16 +324,6 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 		group.setTypeSettingsProperties(typeSettingsProperties);
 
 		return GroupLocalServiceUtil.updateGroup(group);
-	}
-
-	protected void cleanUp(Group group) throws Exception {
-		createTrashEntries(group);
-
-		TrashEntryLocalServiceUtil.checkEntries();
-
-		Assert.assertEquals(
-			_notExpiredTrashEntriesCount,
-			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
 	protected Group updateTrashEntriesMaxAge(Group group, int days)
@@ -357,14 +357,18 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 		return GroupLocalServiceUtil.updateGroup(group);
 	}
 
-	private static final int _companiesCount = 2;
-	private static final int _expiredTrashEntryCount = 3;
-	private static final int _groupsCount = 2;
-	private static final int _maxAgeDay = 5;
-	private static final int _notExpiredTrashEntriesCount = 4;
-
 	private static Log _log = LogFactoryUtil.getLog(
 		TrashEntryLocalServiceCheckEntriesTest.class);
+
+	private static int _COMPANIES_COUNT = 2;
+
+	private static int _EXPIRED_TRASH_ENTRIES_COUNT = 3;
+
+	private static int _GROUPS_COUNT = 2;
+
+	private static int _MAX_AGE = 5;
+
+	private static int _NOT_EXPIRED_TRASH_ENTRIES_COUNT = 4;
 
 	@DeleteAfterTestRun
 	private List<Company> _companies = new ArrayList<Company>();
