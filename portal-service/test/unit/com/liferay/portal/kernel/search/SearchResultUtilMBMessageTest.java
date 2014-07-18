@@ -56,7 +56,7 @@ public class SearchResultUtilMBMessageTest
 	@Test
 	public void testMBMessage() throws Exception {
 		SearchResult searchResult = assertOneSearchResult(
-			createMBMessageDocument());
+			SearchTestUtil.createDocument(_MB_MESSAGE_CLASS_NAME));
 
 		Assert.assertEquals(
 			_MB_MESSAGE_CLASS_NAME, searchResult.getClassName());
@@ -88,7 +88,7 @@ public class SearchResultUtilMBMessageTest
 			new ThrowsExceptionClass(IllegalStateException.class));
 
 		SearchResult searchResult = assertOneSearchResult(
-			createMBMessageAttachmentDocument());
+			SearchTestUtil.createAttachmentDocument(_MB_MESSAGE_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -117,7 +117,7 @@ public class SearchResultUtilMBMessageTest
 		);
 
 		SearchResult searchResult = assertOneSearchResult(
-			createMBMessageAttachmentDocument());
+			SearchTestUtil.createAttachmentDocument(_MB_MESSAGE_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -156,8 +156,10 @@ public class SearchResultUtilMBMessageTest
 	public void testTwoDocumentsWithSameAttachmentOwner() {
 		long baseEntryPK = SearchTestUtil.ENTRY_CLASS_PK;
 
-		Document documentA = createMBMessageAttachmentDocument(baseEntryPK);
-		Document documentB = createMBMessageAttachmentDocument(baseEntryPK + 1);
+		Document documentA = SearchTestUtil.createAttachmentDocument(
+			_MB_MESSAGE_CLASS_NAME, baseEntryPK);
+		Document documentB = SearchTestUtil.createAttachmentDocument(
+			_MB_MESSAGE_CLASS_NAME, baseEntryPK + 1);
 
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL, documentA, documentB);
@@ -172,19 +174,6 @@ public class SearchResultUtilMBMessageTest
 		Assert.assertEquals(
 			searchResult.getClassPK(),
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK);
-	}
-
-	protected Document createMBMessageAttachmentDocument() {
-		return SearchTestUtil.createAttachmentDocument(_MB_MESSAGE_CLASS_NAME);
-	}
-
-	protected Document createMBMessageAttachmentDocument(long entryClassPK) {
-		return SearchTestUtil.createAttachmentDocument(
-			_MB_MESSAGE_CLASS_NAME, entryClassPK);
-	}
-
-	protected Document createMBMessageDocument() {
-		return SearchTestUtil.createDocument(_MB_MESSAGE_CLASS_NAME);
 	}
 
 	protected void setUpMBMessageLocalServiceUtil() {

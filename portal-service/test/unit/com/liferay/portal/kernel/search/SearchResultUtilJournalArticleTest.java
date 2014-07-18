@@ -46,7 +46,7 @@ public class SearchResultUtilJournalArticleTest
 	@Test
 	public void testJournalArticle() {
 		SearchResult searchResult = assertOneSearchResult(
-			createJournalArticleDocumentWithVersion());
+			createDocument());
 
 		assertSearchResult(searchResult);
 
@@ -72,7 +72,7 @@ public class SearchResultUtilJournalArticleTest
 			indexer
 		);
 
-		Document document = createJournalArticleDocumentWithVersion();
+		Document document = createDocument();
 
 		SearchResult searchResult = assertOneSearchResult(document);
 
@@ -103,7 +103,7 @@ public class SearchResultUtilJournalArticleTest
 		Assert.assertEquals(1, versions.size());
 	}
 
-	protected Document createJournalArticleDocumentWithVersion() {
+	protected Document createDocument() {
 		Document document = SearchTestUtil.createDocument(
 			_JOURNAL_ARTICLE_CLASS_NAME);
 
