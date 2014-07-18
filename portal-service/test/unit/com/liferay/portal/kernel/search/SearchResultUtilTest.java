@@ -145,11 +145,11 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 	public void testTwoDocumentsWithSameEntryKey() {
 		String className = RandomTestUtil.randomString();
 
-		Document documentA = SearchTestUtil.createDocument(className);
-		Document documentB = SearchTestUtil.createDocument(className);
+		Document document1 = SearchTestUtil.createDocument(className);
+		Document document2 = SearchTestUtil.createDocument(className);
 
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
-			portletURL, documentA, documentB);
+			portletURL, document1, document2);
 
 		Assert.assertEquals(1, searchResults.size());
 
@@ -167,9 +167,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		Assert.assertEquals(0L, searchResult.getClassPK());
 
 		assertThatFileEntryTuplesIsEmpty(searchResult);
-
 		assertThatMBMessagesIsEmpty(searchResult);
-
 		assertThatVersionsIsEmpty(searchResult);
 	}
 
