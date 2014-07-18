@@ -90,7 +90,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 	@Test
 	public void testCustomMaxAge() throws Exception {
-		Group group = setTrashEntriesMaxAge(
+		Group group = updateTrashEntriesMaxAge(
 			createGroup(TestPropsValues.getCompanyId()), 2);
 
 		cleanUp(group);
@@ -100,7 +100,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	public void testGroupTrashDisabled() throws Exception {
 		Group group = createGroup(TestPropsValues.getCompanyId());
 
-		createFileEntryTrash(group, false);
+		createFileEntryTrashEntry(group, false);
 
 		disableTrashForGroup(group);
 
@@ -113,7 +113,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	@Test
 	public void testCompaniesCleanUp() throws Exception {
 		for (int i = 0; i < _companiesCount; i++ ) {
-			Group group = setTrashEntriesMaxAge(
+			Group group = updateTrashEntriesMaxAge(
 				createGroup(createCompany()), _maxAgeDay);
 
 			createTrashEntries(group);
@@ -127,9 +127,9 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	}
 
 	@Test
-	public void testGroupsTrashCleanUp() throws Exception {
+	public void testGroupsCleanUp() throws Exception {
 		for (int i = 0; i < _groupsCount; i++) {
-			Group group = setTrashEntriesMaxAge(
+			Group group = updateTrashEntriesMaxAge(
 				createGroup(TestPropsValues.getCompanyId()), _maxAgeDay);
 
 			createTrashEntries(group);
@@ -144,7 +144,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 	@Test
 	public void testWithLayoutGroup() throws Exception {
-		Group group = setTrashEntriesMaxAge(
+		Group group = updateTrashEntriesMaxAge(
 			createGroup(TestPropsValues.getCompanyId()), 2);
 
 		cleanUp(createLayoutGroup(group));
@@ -159,8 +159,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	public void testWithStagingGroup() throws Exception {
 		long companyId = TestPropsValues.getCompanyId();
 
-		Group group = setTrashEntriesMaxAge(createGroup(companyId), 2);
-
+		Group group = updateTrashEntriesMaxAge(createGroup(companyId), 2);
 		User user = UserTestUtil.getAdminUser(companyId);
 
 		StagingLocalServiceUtil.enableLocalStaging(
@@ -174,8 +173,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	public void testWithStagingPageScope() throws Exception {
 		long companyId = TestPropsValues.getCompanyId();
 
-		Group group = setTrashEntriesMaxAge(createGroup(companyId), 2);
-
+		Group group = updateTrashEntriesMaxAge(createGroup(companyId), 2);
 		User user = UserTestUtil.getAdminUser(companyId);
 
 		ServiceContext serviceContext =
@@ -194,7 +192,6 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 		long companyId = TestPropsValues.getCompanyId();
 
 		Group group = disableTrashForGroup(createGroup(companyId));
-
 		User user = UserTestUtil.getAdminUser(companyId);
 
 		ServiceContext serviceContext =
@@ -205,11 +202,9 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 		Group stagingGroup = group.getStagingGroup();
 
-		createFileEntryTrash(stagingGroup, false);
+		createFileEntryTrashEntry(stagingGroup, false);
 
 		TrashEntryLocalServiceUtil.checkEntries();
-
-		// Note that this should be empty
 
 		Assert.assertEquals(
 			0, TrashEntryLocalServiceUtil.getTrashEntriesCount());
@@ -245,7 +240,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 		return company.getCompanyId();
 	}
 
-	protected void createFileEntryTrash(Group group, boolean expired)
+	protected void createFileEntryTrashEntry(Group group, boolean expired)
 		throws Exception {
 
 		FileEntry fileEntry =
@@ -288,27 +283,25 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 	}
 
 	protected Group createLayoutGroup(Group group) throws Exception {
-		Layout layout = LayoutTestUtil.addLayout(group);
-
-		String name = String.valueOf(layout.getPlid());
-
 		User user = UserTestUtil.getAdminUser(group.getCompanyId());
+		Layout layout = LayoutTestUtil.addLayout(group);
 
 		return GroupLocalServiceUtil.addGroup(
 			user.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			Layout.class.getName(), layout.getPlid(),
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, name, null, 0, true,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			String.valueOf(layout.getPlid()), null, 0, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 	}
 
 	protected void createTrashEntries(Group group) throws Exception {
 		for (int i = 0; i < _expiredTrashEntryCount; i++) {
-			createFileEntryTrash(group, true);
+			createFileEntryTrashEntry(group, true);
 		}
 
 		for (int i = 0; i < _notExpiredTrashEntriesCount; i++) {
-			createFileEntryTrash(group, false);
+			createFileEntryTrashEntry(group, false);
 		}
 	}
 
@@ -333,7 +326,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 			TrashEntryLocalServiceUtil.getTrashEntriesCount());
 	}
 
-	protected Group setTrashEntriesMaxAge(Group group, int days)
+	protected Group updateTrashEntriesMaxAge(Group group, int days)
 		throws Exception {
 
 		UnicodeProperties typeSettingsProperties =
@@ -353,8 +346,7 @@ public class TrashEntryLocalServiceCheckEntriesTest {
 
 		if (days != companyTrashEntriesMaxAge) {
 			typeSettingsProperties.setProperty(
-				"trashEntriesMaxAge",
-				String.valueOf(GetterUtil.getInteger(days)));
+				"trashEntriesMaxAge", String.valueOf(days));
 		}
 		else {
 			typeSettingsProperties.remove("trashEntriesMaxAge");
