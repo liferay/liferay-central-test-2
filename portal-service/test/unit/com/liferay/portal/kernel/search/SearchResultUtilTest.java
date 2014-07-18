@@ -47,7 +47,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 
 	@Test
 	public void testBlankDocument() {
-		SearchResult searchResult = searchBlankDocument();
+		SearchResult searchResult = assertOneSearchResult(new DocumentImpl());
 
 		Assert.assertNull(searchResult.getSummary());
 
@@ -90,7 +90,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 			assetRendererFactory
 		);
 
-		SearchResult searchResult = searchBlankDocument();
+		SearchResult searchResult = assertOneSearchResult(new DocumentImpl());
 
 		Summary summary = searchResult.getSummary();
 
@@ -128,7 +128,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 			indexer
 		);
 
-		SearchResult searchResult = searchBlankDocument();
+		SearchResult searchResult = assertOneSearchResult(new DocumentImpl());
 
 		Assert.assertSame(summary, searchResult.getSummary());
 
@@ -161,10 +161,6 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		assertEmptyFileEntryTuples(searchResult);
 		assertEmptyMBMessages(searchResult);
 		assertEmptyVersions(searchResult);
-	}
-
-	protected SearchResult searchBlankDocument() {
-		return assertOneSearchResult(new DocumentImpl());
 	}
 
 }
