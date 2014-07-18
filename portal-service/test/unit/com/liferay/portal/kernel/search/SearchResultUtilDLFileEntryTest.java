@@ -58,8 +58,9 @@ public class SearchResultUtilDLFileEntryTest
 	extends BaseSearchResultUtilTestCase {
 
 	@Before
-	public void setUp() throws Exception {
-		doSetUp();
+	@Override
+	public void setUp() {
+		super.setUp();
 
 		setUpDLAppLocalServiceUtil();
 	}

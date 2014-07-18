@@ -46,8 +46,9 @@ public class SearchResultUtilMBMessageTest
 	extends BaseSearchResultUtilTestCase {
 
 	@Before
+	@Override
 	public void setUp() {
-		doSetUp();
+		super.setUp();
 
 		setUpMBMessageLocalServiceUtil();
 	}

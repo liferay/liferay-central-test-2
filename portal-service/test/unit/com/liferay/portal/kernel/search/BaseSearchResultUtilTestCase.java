@@ -34,6 +34,7 @@ import java.util.List;
 import javax.portlet.PortletURL;
 
 import org.junit.Assert;
+import org.junit.Before;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -73,7 +74,8 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 		Assert.assertTrue(versions.isEmpty());
 	}
 
-	protected void doSetUp() {
+	@Before
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
 		setUpFastDateFormatFactoryUtil();

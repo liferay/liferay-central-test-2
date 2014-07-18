@@ -27,7 +27,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -45,11 +44,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 })
 @RunWith(PowerMockRunner.class)
 public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
-
-	@Before
-	public void setUp() {
-		doSetUp();
-	}
 
 	@Test
 	public void testBlankDocument() {
