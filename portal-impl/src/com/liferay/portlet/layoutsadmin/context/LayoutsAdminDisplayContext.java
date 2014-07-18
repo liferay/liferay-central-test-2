@@ -399,7 +399,7 @@ public class LayoutsAdminDisplayContext {
 		return _tabs1;
 	}
 
-	public String getTabs1Names() throws PortalException {
+	public String getTabs1Names() {
 		if (_tabs1Names != null) {
 			return _tabs1Names;
 		}
