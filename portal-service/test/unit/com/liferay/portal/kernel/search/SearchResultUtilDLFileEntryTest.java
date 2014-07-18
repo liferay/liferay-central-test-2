@@ -71,7 +71,7 @@ public class SearchResultUtilDLFileEntryTest
 				createDLFileEntryDocument());
 
 		Assert.assertEquals(
-			DLFILEENTRY_CLASS_NAME, searchResult.getClassName());
+			_DL_FILEENTRY_CLASS_NAME, searchResult.getClassName());
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
@@ -79,7 +79,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		Assert.assertNull(searchResult.getSummary());
 
-		verifyZeroInteractions(dlAppLocalService);
+		verifyZeroInteractions(_dlAppLocalService);
 
 		assertThatMBMessagesAndVersionsAreEmpty(searchResult);
 	}
@@ -100,7 +100,7 @@ public class SearchResultUtilDLFileEntryTest
 	
 					String className = (String)args[0];
 	
-					if (DLFILEENTRY_CLASS_NAME.equals(className)) {
+					if (_DL_FILEENTRY_CLASS_NAME.equals(className)) {
 						return indexer;
 					}
 	
@@ -144,7 +144,7 @@ public class SearchResultUtilDLFileEntryTest
 	
 					String className = (String)args[0];
 	
-					if (DLFILEENTRY_CLASS_NAME.equals(className)) {
+					if (_DL_FILEENTRY_CLASS_NAME.equals(className)) {
 						return null;
 					}
 	
@@ -180,9 +180,9 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		when(
-			dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
+			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(
-			fileEntry
+			_fileEntry
 		);
 
 		SearchResult searchResult =
@@ -215,7 +215,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		Summary tupleSummary = (Summary)tuple.getObject(1);
 
-		Assert.assertSame(fileEntry, tupleFileEntry);
+		Assert.assertSame(_fileEntry, tupleFileEntry);
 		Assert.assertSame(summary, tupleSummary);
 
 		Assert.assertEquals(content, tupleSummary.getContent());
@@ -227,7 +227,7 @@ public class SearchResultUtilDLFileEntryTest
 	@Test
 	public void testDLFileEntryMissingFromService() throws Exception {
 		when(
-			dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
+			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(
 			null
 		);
@@ -246,7 +246,7 @@ public class SearchResultUtilDLFileEntryTest
 		assertThatFileEntryTuplesIsEmpty(searchResult);
 
 		Mockito.verify(
-			dlAppLocalService
+			_dlAppLocalService
 		).getFileEntry(
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
@@ -286,9 +286,9 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		when(
-			dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
+			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(
-			fileEntry
+			_fileEntry
 		);
 
 		Document document = createDLFileEntryAttachmentDocument();
@@ -310,7 +310,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		verifyStatic();
 
-		IndexerRegistryUtil.getIndexer(DLFILEENTRY_CLASS_NAME);
+		IndexerRegistryUtil.getIndexer(_DL_FILEENTRY_CLASS_NAME);
 
 		Mockito.verify(
 			indexer
@@ -321,7 +321,7 @@ public class SearchResultUtilDLFileEntryTest
 		assertThatFileEntryTuplesIsEmpty(searchResult);
 
 		Mockito.verify(
-			dlAppLocalService
+			_dlAppLocalService
 		).getFileEntry(
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
@@ -338,11 +338,11 @@ public class SearchResultUtilDLFileEntryTest
 	}
 
 	protected Document createDLFileEntryAttachmentDocument() {
-		return SearchTestUtil.createAttachmentDocument(DLFILEENTRY_CLASS_NAME);
+		return SearchTestUtil.createAttachmentDocument(_DL_FILEENTRY_CLASS_NAME);
 	}
 
 	protected Document createDLFileEntryDocument() {
-		return SearchTestUtil.createDocument(DLFILEENTRY_CLASS_NAME);
+		return SearchTestUtil.createDocument(_DL_FILEENTRY_CLASS_NAME);
 	}
 
 	protected void setUpDLAppLocalServiceUtil() {
@@ -351,17 +351,17 @@ public class SearchResultUtilDLFileEntryTest
 		stub(
 			method(DLAppLocalServiceUtil.class, "getService")
 		).toReturn(
-			dlAppLocalService
+			_dlAppLocalService
 		);
 	}
 
-	protected static final String DLFILEENTRY_CLASS_NAME =
+	private static final String _DL_FILEENTRY_CLASS_NAME =
 		DLFileEntry.class.getName();
 
 	@Mock
-	protected DLAppLocalService dlAppLocalService;
+	private DLAppLocalService _dlAppLocalService;
 
 	@Mock
-	protected FileEntry fileEntry;
+	private FileEntry _fileEntry;
 
 }

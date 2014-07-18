@@ -58,7 +58,7 @@ public class SearchResultUtilMBMessageTest
 			assertThatSearchSingleDocumentReturnsOneSearchResult(
 				createMBMessageDocument());
 
-		Assert.assertEquals(MBMESSAGE_CLASS_NAME, searchResult.getClassName());
+		Assert.assertEquals(_MB_MESSAGE_CLASS_NAME, searchResult.getClassName());
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
@@ -66,7 +66,7 @@ public class SearchResultUtilMBMessageTest
 
 		Assert.assertTrue(mbMessages.isEmpty());
 
-		verifyZeroInteractions(mbMessageLocalService);
+		verifyZeroInteractions(_mbMessageLocalService);
 
 		Assert.assertNull(searchResult.getSummary());
 
@@ -76,9 +76,9 @@ public class SearchResultUtilMBMessageTest
 	@Test
 	public void testMBMessageAttachment() throws Exception {
 		when(
-			mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
+			_mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(
-			mbMessage
+			_mbMessage
 		);
 
 		mockStatic(
@@ -98,7 +98,7 @@ public class SearchResultUtilMBMessageTest
 
 		List<MBMessage> mbMessages = searchResult.getMBMessages();
 
-		Assert.assertSame(mbMessage, mbMessages.get(0));
+		Assert.assertSame(_mbMessage, mbMessages.get(0));
 		Assert.assertEquals(1, mbMessages.size());
 
 		Assert.assertNull(searchResult.getSummary());
@@ -109,7 +109,7 @@ public class SearchResultUtilMBMessageTest
 	@Test
 	public void testMBMessageAttachmentMissingFromService() throws Exception {
 		when(
-			mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
+			_mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(
 			null
 		);
@@ -130,7 +130,7 @@ public class SearchResultUtilMBMessageTest
 		Assert.assertTrue(mbMessages.isEmpty());
 
 		Mockito.verify(
-			mbMessageLocalService
+			_mbMessageLocalService
 		).getMessage(
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
@@ -181,16 +181,16 @@ public class SearchResultUtilMBMessageTest
 	}
 
 	protected Document createMBMessageAttachmentDocument() {
-		return SearchTestUtil.createAttachmentDocument(MBMESSAGE_CLASS_NAME);
+		return SearchTestUtil.createAttachmentDocument(_MB_MESSAGE_CLASS_NAME);
 	}
 
 	protected Document createMBMessageAttachmentDocument(long entryClassPK) {
 		return SearchTestUtil.createAttachmentDocument(
-			MBMESSAGE_CLASS_NAME, entryClassPK);
+			_MB_MESSAGE_CLASS_NAME, entryClassPK);
 	}
 
 	protected Document createMBMessageDocument() {
-		return SearchTestUtil.createDocument(MBMESSAGE_CLASS_NAME);
+		return SearchTestUtil.createDocument(_MB_MESSAGE_CLASS_NAME);
 	}
 
 	protected void setUpMBMessageLocalServiceUtil() {
@@ -199,17 +199,17 @@ public class SearchResultUtilMBMessageTest
 		stub(
 			method(MBMessageLocalServiceUtil.class, "getService")
 		).toReturn(
-			mbMessageLocalService
+			_mbMessageLocalService
 		);
 	}
 
-	protected static final String MBMESSAGE_CLASS_NAME =
+	private static final String _MB_MESSAGE_CLASS_NAME =
 		MBMessage.class.getName();
 
 	@Mock
-	protected MBMessage mbMessage;
+	private MBMessage _mbMessage;
 
 	@Mock
-	protected MBMessageLocalService mbMessageLocalService;
+	private MBMessageLocalService _mbMessageLocalService;
 
 }

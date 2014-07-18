@@ -97,7 +97,7 @@ public class SearchResultUtilJournalArticleTest
 
 	protected void assertThatSearchResultHasVersion(SearchResult searchResult) {
 		Assert.assertEquals(
-			JOURNALARTICLE_CLASS_NAME, searchResult.getClassName());
+			_JOURNAL_ARTICLE_CLASS_NAME, searchResult.getClassName());
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
@@ -107,23 +107,23 @@ public class SearchResultUtilJournalArticleTest
 
 		List<String> versions = searchResult.getVersions();
 
-		Assert.assertEquals(DOCUMENT_VERSION, versions.get(0));
+		Assert.assertEquals(_DOCUMENT_VERSION, versions.get(0));
 		Assert.assertEquals(1, versions.size());
 	}
 
 	protected Document createJournalArticleDocumentWithVersion() {
 		Document document = SearchTestUtil.createDocument(
-			JOURNALARTICLE_CLASS_NAME);
+			_JOURNAL_ARTICLE_CLASS_NAME);
 
-		document.add(new Field(Field.VERSION, DOCUMENT_VERSION));
+		document.add(new Field(Field.VERSION, _DOCUMENT_VERSION));
 
 		return document;
 	}
 
-	protected static final String DOCUMENT_VERSION = String.valueOf(
+	private static final String _DOCUMENT_VERSION = String.valueOf(
 		RandomTestUtil.randomInt());
 
-	protected static final String JOURNALARTICLE_CLASS_NAME =
+	private static final String _JOURNAL_ARTICLE_CLASS_NAME =
 		JournalArticle.class.getName();
 
 }
