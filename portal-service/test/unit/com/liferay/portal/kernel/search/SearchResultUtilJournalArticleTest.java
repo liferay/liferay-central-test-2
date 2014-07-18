@@ -94,7 +94,6 @@ public class SearchResultUtilJournalArticleTest
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
 		assertEmptyFileEntryTuples(searchResult);
-
 		assertEmptyMBMessages(searchResult);
 
 		List<String> versions = searchResult.getVersions();
