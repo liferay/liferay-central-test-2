@@ -87,7 +87,6 @@ public class SearchResultUtilDLFileEntryTest
 
 	@Test
 	public void testDLFileEntryAttachment() throws Exception {
-
 		when(
 			assetRenderer.getSearchSummary((Locale)Matchers.any())
 		).thenReturn(
@@ -99,7 +98,7 @@ public class SearchResultUtilDLFileEntryTest
 		).thenReturn(
 			SearchTestUtil.SUMMARY_TITLE
 		);
-	
+
 		replace(
 			method(
 				AssetRendererFactoryRegistryUtil.class,
@@ -188,8 +187,7 @@ public class SearchResultUtilDLFileEntryTest
 			(PortletResponse)Matchers.isNull());
 
 		SearchResult searchResult = assertOneSearchResult(
-			SearchTestUtil.createAttachmentDocument(
-				_DL_FILE_ENTRY_CLASS_NAME));
+			SearchTestUtil.createAttachmentDocument(_DL_FILE_ENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -235,8 +233,7 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		SearchResult searchResult = assertOneSearchResult(
-			SearchTestUtil.createAttachmentDocument(
-				_DL_FILE_ENTRY_CLASS_NAME));
+			SearchTestUtil.createAttachmentDocument(_DL_FILE_ENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,

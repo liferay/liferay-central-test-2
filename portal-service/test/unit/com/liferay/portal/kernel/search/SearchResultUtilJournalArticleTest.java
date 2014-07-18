@@ -45,8 +45,7 @@ public class SearchResultUtilJournalArticleTest
 
 	@Test
 	public void testJournalArticle() {
-		SearchResult searchResult = assertOneSearchResult(
-			createDocument());
+		SearchResult searchResult = assertOneSearchResult(createDocument());
 
 		assertSearchResult(searchResult);
 
