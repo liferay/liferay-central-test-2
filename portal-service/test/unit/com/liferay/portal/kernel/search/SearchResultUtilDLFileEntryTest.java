@@ -334,7 +334,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		assertEmptyMBMessages(searchResult);
 
-		assertThatVersionsIsEmpty(searchResult);
+		assertEmptyVersions(searchResult);
 	}
 
 	protected Document createDLFileEntryAttachmentDocument() {

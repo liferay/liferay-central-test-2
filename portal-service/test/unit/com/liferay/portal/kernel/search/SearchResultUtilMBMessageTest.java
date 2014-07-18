@@ -177,7 +177,7 @@ public class SearchResultUtilMBMessageTest
 
 		assertEmptyFileEntryTuples(searchResult);
 
-		assertThatVersionsIsEmpty(searchResult);
+		assertEmptyVersions(searchResult);
 	}
 
 	protected Document createMBMessageAttachmentDocument() {

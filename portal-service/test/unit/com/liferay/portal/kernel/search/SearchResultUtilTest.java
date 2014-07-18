@@ -168,7 +168,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 
 		assertEmptyFileEntryTuples(searchResult);
 		assertEmptyMBMessages(searchResult);
-		assertThatVersionsIsEmpty(searchResult);
+		assertEmptyVersions(searchResult);
 	}
 
 	protected SearchResult searchBlankDocument() {
