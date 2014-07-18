@@ -48,7 +48,7 @@ public class SearchResultUtilJournalArticleTest
 		SearchResult searchResult = assertOneSearchResult(
 			createJournalArticleDocumentWithVersion());
 
-		assertThatSearchResultHasVersion(searchResult);
+		assertSearchResult(searchResult);
 
 		Assert.assertNull(searchResult.getSummary());
 	}
@@ -76,7 +76,7 @@ public class SearchResultUtilJournalArticleTest
 
 		SearchResult searchResult = assertOneSearchResult(document);
 
-		assertThatSearchResultHasVersion(searchResult);
+		assertSearchResult(searchResult);
 
 		Assert.assertNull(searchResult.getSummary());
 
@@ -87,7 +87,7 @@ public class SearchResultUtilJournalArticleTest
 		);
 	}
 
-	protected void assertThatSearchResultHasVersion(SearchResult searchResult) {
+	protected void assertSearchResult(SearchResult searchResult) {
 		Assert.assertEquals(
 			_JOURNAL_ARTICLE_CLASS_NAME, searchResult.getClassName());
 		Assert.assertEquals(
