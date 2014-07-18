@@ -51,7 +51,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 
 		Assert.assertNull(searchResult.getSummary());
 
-		assertThatEverythingButSummaryIsEmpty(searchResult);
+		assertSearchResult(searchResult);
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		Assert.assertSame(portletURL, summary.getPortletURL());
 		Assert.assertEquals(SearchTestUtil.SUMMARY_TITLE, summary.getTitle());
 
-		assertThatEverythingButSummaryIsEmpty(searchResult);
+		assertSearchResult(searchResult);
 	}
 
 	@Test
@@ -132,7 +132,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 
 		Assert.assertSame(summary, searchResult.getSummary());
 
-		assertThatEverythingButSummaryIsEmpty(searchResult);
+		assertSearchResult(searchResult);
 	}
 
 	@Test
@@ -154,9 +154,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 			searchResult.getClassPK(), SearchTestUtil.ENTRY_CLASS_PK);
 	}
 
-	protected void assertThatEverythingButSummaryIsEmpty(
-		SearchResult searchResult) {
-
+	protected void assertSearchResult(SearchResult searchResult) {
 		Assert.assertEquals(StringPool.BLANK, searchResult.getClassName());
 		Assert.assertEquals(0L, searchResult.getClassPK());
 
