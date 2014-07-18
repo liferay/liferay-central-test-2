@@ -44,7 +44,6 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "roles"
 
 <aui:input name="addGroupRolesGroupIds" type="hidden" />
 <aui:input name="addGroupRolesRoleIds" type="hidden" />
-
 <aui:input name="deleteGroupRolesGroupIds" type="hidden" />
 <aui:input name="deleteGroupRolesRoleIds" type="hidden" />
 
@@ -514,7 +513,6 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "roles"
 <aui:script>
 	var <portlet:namespace />addGroupRolesGroupIds = [];
 	var <portlet:namespace />addGroupRolesRoleIds = [];
-
 	var <portlet:namespace />deleteGroupRolesGroupIds = [];
 	var <portlet:namespace />deleteGroupRolesRoleIds = [];
 
@@ -533,7 +531,6 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "roles"
 
 		document.<portlet:namespace />fm.<portlet:namespace />addGroupRolesGroupIds.value = <portlet:namespace />addGroupRolesGroupIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />addGroupRolesRoleIds.value = <portlet:namespace />addGroupRolesRoleIds.join(',');
-
 		document.<portlet:namespace />fm.<portlet:namespace />deleteGroupRolesGroupIds.value = <portlet:namespace />deleteGroupRolesGroupIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />deleteGroupRolesRoleIds.value = <portlet:namespace />deleteGroupRolesRoleIds.join(',');
 	}
@@ -573,7 +570,6 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "roles"
 
 				document.<portlet:namespace />fm.<portlet:namespace />addGroupRolesGroupIds.value = <portlet:namespace />addGroupRolesGroupIds.join(',');
 				document.<portlet:namespace />fm.<portlet:namespace />addGroupRolesRoleIds.value = <portlet:namespace />addGroupRolesRoleIds.join(',');
-
 				document.<portlet:namespace />fm.<portlet:namespace />deleteGroupRolesGroupIds.value = <portlet:namespace />deleteGroupRolesGroupIds.join(',');
 				document.<portlet:namespace />fm.<portlet:namespace />deleteGroupRolesRoleIds.value = <portlet:namespace />deleteGroupRolesRoleIds.join(',');
 			}
