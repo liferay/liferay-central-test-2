@@ -68,20 +68,26 @@ public class LayoutsAdminDisplayContext {
 		if (_tabs1.equals("my-dashboard") || _tabs1.equals("private-pages")) {
 			_privateLayout = true;
 		}
+		
+		Layout selLayout = getSelLayout();
 
-		if (getSelLayout() != null) {
-			_privateLayout = getSelLayout().isPrivateLayout();
+		if (selLayout != null) {
+			_privateLayout = selLayout.isPrivateLayout();
 		}
+		
+		Group liveGroup = getLiveGroup();
 
-		if (getLiveGroup().isUser() && !isPublicLayoutsModifiable() &&
+		if (liveGroup.isUser() && !isPublicLayoutsModifiable() &&
 			isPrivateLayoutsModifiable() && !_privateLayout) {
 
 			_tabs1 = "my-dashboard";
 
 			_privateLayout = true;
 		}
+		
+		Group selGroup = getSelGroup();
 
-		if (getSelGroup().isLayoutSetPrototype()) {
+		if (selGroup.isLayoutSetPrototype()) {
 			_privateLayout = true;
 		}
 
@@ -132,11 +138,15 @@ public class LayoutsAdminDisplayContext {
 		if (_groupId != null) {
 			return _groupId;
 		}
+		
+		Group liveGroup = getLiveGroup();
 
-		_groupId = getLiveGroup().getGroupId();
+		_groupId = liveGroup.getGroupId();
+		
+		Group group = getGroup();
 
-		if (getGroup() != null) {
-			_groupId = getGroup().getGroupId();
+		if (group != null) {
+			_groupId = group.getGroupId();
 		}
 
 		return _groupId;
@@ -146,9 +156,11 @@ public class LayoutsAdminDisplayContext {
 		if (_groupTypeSettings != null) {
 			return _groupTypeSettings;
 		}
+		
+		Group group = getGroup();
 
-		if (getGroup() != null) {
-			_groupTypeSettings = getGroup().getTypeSettingsProperties();
+		if (group != null) {
+			_groupTypeSettings = group.getTypeSettingsProperties();
 		}
 		else {
 			_groupTypeSettings = new UnicodeProperties();
@@ -178,9 +190,11 @@ public class LayoutsAdminDisplayContext {
 		}
 
 		_layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
+		
+		Layout selLayout = getSelLayout();
 
-		if (getSelLayout() != null) {
-			_layoutId = getSelLayout().getLayoutId();
+		if (selLayout != null) {
+			_layoutId = selLayout.getLayoutId();
 		}
 
 		return _layoutId;
@@ -191,11 +205,13 @@ public class LayoutsAdminDisplayContext {
 			return _liveGroup;
 		}
 
-		if (getSelGroup().isStagingGroup()) {
-			_liveGroup = getSelGroup().getLiveGroup();
+		Group selGroup = getSelGroup();
+
+		if (selGroup.isStagingGroup()) {
+			_liveGroup = selGroup.getLiveGroup();
 		}
 		else {
-			_liveGroup = getSelGroup();
+			_liveGroup = selGroup;
 		}
 
 		return _liveGroup;
@@ -205,8 +221,10 @@ public class LayoutsAdminDisplayContext {
 		if (_liveGroupId != null) {
 			return _liveGroupId;
 		}
+		
+		Group liveGroup = getLiveGroup();
 
-		_liveGroupId = getLiveGroup().getGroupId();
+		_liveGroupId = liveGroup.getGroupId();
 
 		return _liveGroupId;
 	}
@@ -216,9 +234,11 @@ public class LayoutsAdminDisplayContext {
 			return _organization;
 		}
 
-		if (getLiveGroup().isOrganization()) {
+		Group liveGroup = getLiveGroup();
+
+		if (liveGroup.isOrganization()) {
 			_organization = OrganizationLocalServiceUtil.fetchOrganization(
-				getLiveGroup().getOrganizationId());
+				liveGroup.getOrganizationId());
 		}
 
 		return _organization;
@@ -229,14 +249,15 @@ public class LayoutsAdminDisplayContext {
 			return _pagesName;
 		}
 
-		if (getLiveGroup().isLayoutPrototype() ||
-			getLiveGroup().isLayoutSetPrototype() ||
-			getLiveGroup().isUserGroup()) {
+		Group liveGroup = getLiveGroup();
+
+		if (liveGroup.isLayoutPrototype() || liveGroup.isLayoutSetPrototype() ||
+			liveGroup.isUserGroup()) {
 
 			_pagesName = "pages";
 		}
 		else if (isPrivateLayout()) {
-			if (getLiveGroup().isUser()) {
+			if (liveGroup.isUser()) {
 				_pagesName = "my-dashboard";
 			}
 			else {
@@ -244,7 +265,7 @@ public class LayoutsAdminDisplayContext {
 			}
 		}
 		else {
-			if (getLiveGroup().isUser()) {
+			if (liveGroup.isUser()) {
 				_pagesName = "my-profile";
 			}
 			else {
@@ -293,8 +314,10 @@ public class LayoutsAdminDisplayContext {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
 			WebKeys.THEME_DISPLAY);
+			
+		Group liveGroup = getLiveGroup();
 
-		_rootNodeName = getLiveGroup().getLayoutRootNodeName(
+		_rootNodeName = liveGroup.getLayoutRootNodeName(
 			isPrivateLayout(), themeDisplay.getLocale());
 
 		return _rootNodeName;
@@ -349,9 +372,11 @@ public class LayoutsAdminDisplayContext {
 			return _selUser;
 		}
 
-		if (getLiveGroup().isUser()) {
+		Group liveGroup = getLiveGroup();
+
+		if (liveGroup.isUser()) {
 			_selUser = UserLocalServiceUtil.fetchUser(
-				getLiveGroup().getClassPK());
+				liveGroup.getClassPK());
 		}
 
 		return _selUser;
@@ -388,8 +413,10 @@ public class LayoutsAdminDisplayContext {
 
 		_stagingGroupId = 0L;
 
-		if (getStagingGroup() != null) {
-			_stagingGroupId = getStagingGroup().getGroupId();
+		Group stagingGroup = getStagingGroup();
+
+		if (stagingGroup != null) {
+			_stagingGroupId = stagingGroup.getGroupId();
 		}
 
 		return _stagingGroupId;
@@ -405,8 +432,10 @@ public class LayoutsAdminDisplayContext {
 		}
 
 		_tabs1Names = "public-pages,private-pages";
+		
+		Group liveGroup = getLiveGroup(); 
 
-		if (getLiveGroup().isUser()) {
+		if (liveGroup.isUser()) {
 			if (isPrivateLayoutsModifiable() && isPublicLayoutsModifiable()) {
 				_tabs1Names = "my-profile,my-dashboard";
 			}
@@ -426,9 +455,11 @@ public class LayoutsAdminDisplayContext {
 			return _userGroup;
 		}
 
-		if (getLiveGroup().isUserGroup()) {
+		Group liveGroup = getLiveGroup(); 
+
+		if (liveGroup.isUserGroup()) {
 			_userGroup = UserGroupLocalServiceUtil.fetchUserGroup(
-				getLiveGroup().getClassPK());
+				liveGroup.getClassPK());
 		}
 
 		return _userGroup;
@@ -450,12 +481,14 @@ public class LayoutsAdminDisplayContext {
 	}
 
 	protected boolean hasPowerUserRole() {
-		ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		try {
+			User selUser = getSelUser();
+
 			return RoleLocalServiceUtil.hasUserRole(
-				getSelUser().getUserId(), themeDisplay.getCompanyId(),
+				selUser.getUserId(), themeDisplay.getCompanyId(),
 				RoleConstants.POWER_USER, true);
 		}
 		catch (Exception e) {
