@@ -87,6 +87,62 @@ public class SearchResultUtilDLFileEntryTest
 
 	@Test
 	public void testDLFileEntryAttachment() throws Exception {
+
+		when(
+			assetRenderer.getSearchSummary((Locale)Matchers.any())
+		).thenReturn(
+			SearchTestUtil.SUMMARY_CONTENT
+		);
+
+		when(
+			assetRenderer.getTitle((Locale)Matchers.any())
+		).thenReturn(
+			SearchTestUtil.SUMMARY_TITLE
+		);
+	
+		replace(
+			method(
+				AssetRendererFactoryRegistryUtil.class,
+				"getAssetRendererFactoryByClassName", String.class)
+		).with(
+			new InvocationHandler() {
+
+				@Override
+				public AssetRendererFactory invoke(
+						Object proxy, Method method, Object[] args)
+					throws Throwable {
+
+					String className = (String)args[0];
+
+					if (_DL_FILE_ENTRY_CLASS_NAME.equals(className)) {
+						return null;
+					}
+
+					if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
+							className)) {
+
+						return assetRendererFactory;
+					}
+
+					throw new IllegalArgumentException();
+				}
+
+			}
+		);
+
+		when(
+			assetRendererFactory.getAssetRenderer(
+				SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK)
+		).thenReturn(
+			assetRenderer
+		);
+
+		when(
+			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
+		).thenReturn(
+			_fileEntry
+		);
+
 		final Indexer indexer = Mockito.mock(Indexer.class);
 
 		replace(
@@ -130,61 +186,6 @@ public class SearchResultUtilDLFileEntryTest
 			(Document)Matchers.any(), Matchers.anyString(),
 			(PortletURL)Matchers.any(), (PortletRequest)Matchers.isNull(),
 			(PortletResponse)Matchers.isNull());
-
-		replace(
-			method(
-				AssetRendererFactoryRegistryUtil.class,
-				"getAssetRendererFactoryByClassName", String.class)
-		).with(
-			new InvocationHandler() {
-
-				@Override
-				public AssetRendererFactory invoke(
-						Object proxy, Method method, Object[] args)
-					throws Throwable {
-
-					String className = (String)args[0];
-
-					if (_DL_FILE_ENTRY_CLASS_NAME.equals(className)) {
-						return null;
-					}
-
-					if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
-							className)) {
-
-						return assetRendererFactory;
-					}
-
-					throw new IllegalArgumentException();
-				}
-
-			}
-		);
-
-		when(
-			assetRendererFactory.getAssetRenderer(
-				SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK)
-		).thenReturn(
-			assetRenderer
-		);
-
-		when(
-			assetRenderer.getSearchSummary((Locale)Matchers.any())
-		).thenReturn(
-			SearchTestUtil.SUMMARY_CONTENT
-		);
-
-		when(
-			assetRenderer.getTitle((Locale)Matchers.any())
-		).thenReturn(
-			SearchTestUtil.SUMMARY_TITLE
-		);
-
-		when(
-			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
-		).thenReturn(
-			_fileEntry
-		);
 
 		SearchResult searchResult = assertOneSearchResult(
 			SearchTestUtil.createAttachmentDocument(
@@ -256,12 +257,12 @@ public class SearchResultUtilDLFileEntryTest
 
 		verifyStatic();
 
-		IndexerRegistryUtil.getIndexer(
+		AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME);
 
 		verifyStatic();
 
-		AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+		IndexerRegistryUtil.getIndexer(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME);
 
 		assertEmptyMBMessages(searchResult);
@@ -270,6 +271,12 @@ public class SearchResultUtilDLFileEntryTest
 
 	@Test
 	public void testDLFileEntryWithBrokenIndexer() throws Exception {
+		when(
+			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
+		).thenReturn(
+			_fileEntry
+		);
+
 		Indexer indexer = Mockito.mock(Indexer.class);
 
 		Mockito.doThrow(
@@ -285,12 +292,6 @@ public class SearchResultUtilDLFileEntryTest
 			method(IndexerRegistryUtil.class, "getIndexer", String.class)
 		).toReturn(
 			indexer
-		);
-
-		when(
-			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
-		).thenReturn(
-			_fileEntry
 		);
 
 		Document document = SearchTestUtil.createAttachmentDocument(
