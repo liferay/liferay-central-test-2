@@ -68,13 +68,13 @@ public class LayoutsAdminDisplayContext {
 		if (_tabs1.equals("my-dashboard") || _tabs1.equals("private-pages")) {
 			_privateLayout = true;
 		}
-		
+
 		Layout selLayout = getSelLayout();
 
 		if (selLayout != null) {
 			_privateLayout = selLayout.isPrivateLayout();
 		}
-		
+
 		Group liveGroup = getLiveGroup();
 
 		if (liveGroup.isUser() && !isPublicLayoutsModifiable() &&
@@ -84,7 +84,7 @@ public class LayoutsAdminDisplayContext {
 
 			_privateLayout = true;
 		}
-		
+
 		Group selGroup = getSelGroup();
 
 		if (selGroup.isLayoutSetPrototype()) {
@@ -138,11 +138,11 @@ public class LayoutsAdminDisplayContext {
 		if (_groupId != null) {
 			return _groupId;
 		}
-		
+
 		Group liveGroup = getLiveGroup();
 
 		_groupId = liveGroup.getGroupId();
-		
+
 		Group group = getGroup();
 
 		if (group != null) {
@@ -156,7 +156,7 @@ public class LayoutsAdminDisplayContext {
 		if (_groupTypeSettings != null) {
 			return _groupTypeSettings;
 		}
-		
+
 		Group group = getGroup();
 
 		if (group != null) {
@@ -190,7 +190,7 @@ public class LayoutsAdminDisplayContext {
 		}
 
 		_layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
-		
+
 		Layout selLayout = getSelLayout();
 
 		if (selLayout != null) {
@@ -221,7 +221,7 @@ public class LayoutsAdminDisplayContext {
 		if (_liveGroupId != null) {
 			return _liveGroupId;
 		}
-		
+
 		Group liveGroup = getLiveGroup();
 
 		_liveGroupId = liveGroup.getGroupId();
@@ -314,7 +314,7 @@ public class LayoutsAdminDisplayContext {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
 			WebKeys.THEME_DISPLAY);
-			
+
 		Group liveGroup = getLiveGroup();
 
 		_rootNodeName = liveGroup.getLayoutRootNodeName(
@@ -375,8 +375,7 @@ public class LayoutsAdminDisplayContext {
 		Group liveGroup = getLiveGroup();
 
 		if (liveGroup.isUser()) {
-			_selUser = UserLocalServiceUtil.fetchUser(
-				liveGroup.getClassPK());
+			_selUser = UserLocalServiceUtil.fetchUser(liveGroup.getClassPK());
 		}
 
 		return _selUser;
@@ -432,8 +431,8 @@ public class LayoutsAdminDisplayContext {
 		}
 
 		_tabs1Names = "public-pages,private-pages";
-		
-		Group liveGroup = getLiveGroup(); 
+
+		Group liveGroup = getLiveGroup();
 
 		if (liveGroup.isUser()) {
 			if (isPrivateLayoutsModifiable() && isPublicLayoutsModifiable()) {
@@ -455,7 +454,7 @@ public class LayoutsAdminDisplayContext {
 			return _userGroup;
 		}
 
-		Group liveGroup = getLiveGroup(); 
+		Group liveGroup = getLiveGroup();
 
 		if (liveGroup.isUserGroup()) {
 			_userGroup = UserGroupLocalServiceUtil.fetchUserGroup(
