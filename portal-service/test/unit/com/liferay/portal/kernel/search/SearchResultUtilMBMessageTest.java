@@ -71,7 +71,8 @@ public class SearchResultUtilMBMessageTest
 
 		Assert.assertNull(searchResult.getSummary());
 
-		assertThatFileEntryTuplesAndVersionsAreEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
+		assertEmptyVersions(searchResult);
 	}
 
 	@Test
@@ -103,7 +104,8 @@ public class SearchResultUtilMBMessageTest
 
 		Assert.assertNull(searchResult.getSummary());
 
-		assertThatFileEntryTuplesAndVersionsAreEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
+		assertEmptyVersions(searchResult);
 	}
 
 	@Test
@@ -146,7 +148,8 @@ public class SearchResultUtilMBMessageTest
 		AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME);
 
-		assertThatFileEntryTuplesAndVersionsAreEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
+		assertEmptyVersions(searchResult);
 	}
 
 	@Test
@@ -169,14 +172,6 @@ public class SearchResultUtilMBMessageTest
 		Assert.assertEquals(
 			searchResult.getClassPK(),
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK);
-	}
-
-	protected void assertThatFileEntryTuplesAndVersionsAreEmpty(
-		SearchResult searchResult) {
-
-		assertEmptyFileEntryTuples(searchResult);
-
-		assertEmptyVersions(searchResult);
 	}
 
 	protected Document createMBMessageAttachmentDocument() {
