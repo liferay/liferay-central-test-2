@@ -140,12 +140,12 @@ public class SearchResultUtilMBMessageTest
 
 		verifyStatic();
 
-		IndexerRegistryUtil.getIndexer(
+		AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME);
 
 		verifyStatic();
 
-		AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+		IndexerRegistryUtil.getIndexer(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME);
 
 		assertEmptyFileEntryTuples(searchResult);

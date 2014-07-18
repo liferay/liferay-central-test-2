@@ -65,12 +65,6 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 	@Test
 	public void testSummaryFromAssetRenderer() throws Exception {
 		when(
-			assetRendererFactory.getAssetRenderer(Matchers.anyLong())
-		).thenReturn(
-			assetRenderer
-		);
-
-		when(
 			assetRenderer.getSearchSummary((Locale)Matchers.any())
 		).thenReturn(
 			SearchTestUtil.SUMMARY_CONTENT
@@ -80,6 +74,12 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 			assetRenderer.getTitle((Locale)Matchers.any())
 		).thenReturn(
 			SearchTestUtil.SUMMARY_TITLE
+		);
+
+		when(
+			assetRendererFactory.getAssetRenderer(Matchers.anyLong())
+		).thenReturn(
+			assetRenderer
 		);
 
 		stub(
