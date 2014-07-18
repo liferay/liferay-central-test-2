@@ -141,12 +141,12 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 
 					TrashEntry trashEntry = (TrashEntry)object;
 
+					Date createDate = trashEntry.getCreateDate();
+
 					Group group = groupPersistence.fetchByPrimaryKey(
 						trashEntry.getGroupId());
 
 					Date date = getMaxAge(group);
-
-					Date createDate = trashEntry.getCreateDate();
 
 					if (createDate.before(date) ||
 						!TrashUtil.isTrashEnabled(group)) {

@@ -29,9 +29,7 @@ public class ServiceContextTestUtil {
 		return getServiceContext(TestPropsValues.getGroupId());
 	}
 
-	public static ServiceContext getServiceContext(Group group, long userId)
-		throws PortalException {
-
+	public static ServiceContext getServiceContext(Group group, long userId) {
 		return getServiceContext(
 			group.getCompanyId(), group.getGroupId(), userId);
 	}
@@ -67,8 +65,7 @@ public class ServiceContextTestUtil {
 	}
 
 	public static ServiceContext getServiceContext(
-			long companyId, long groupId, long userId)
-		throws PortalException {
+		long companyId, long groupId, long userId) {
 
 		ServiceContext serviceContext = new ServiceContext();
 
