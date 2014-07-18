@@ -68,7 +68,7 @@ public class SearchResultUtilDLFileEntryTest
 	@Test
 	public void testDLFileEntry() throws Exception {
 		SearchResult searchResult = assertOneSearchResult(
-			createDLFileEntryDocument());
+			SearchTestUtil.createDocument(_DL_FILEENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			_DL_FILEENTRY_CLASS_NAME, searchResult.getClassName());
@@ -187,7 +187,8 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		SearchResult searchResult = assertOneSearchResult(
-			createDLFileEntryAttachmentDocument());
+			SearchTestUtil.createAttachmentDocument(
+				_DL_FILEENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -233,7 +234,8 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		SearchResult searchResult = assertOneSearchResult(
-			createDLFileEntryAttachmentDocument());
+			SearchTestUtil.createAttachmentDocument(
+				_DL_FILEENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -291,7 +293,8 @@ public class SearchResultUtilDLFileEntryTest
 			_fileEntry
 		);
 
-		Document document = createDLFileEntryAttachmentDocument();
+		Document document = SearchTestUtil.createAttachmentDocument(
+			_DL_FILEENTRY_CLASS_NAME);
 
 		String snippet = RandomTestUtil.randomString();
 
@@ -327,15 +330,6 @@ public class SearchResultUtilDLFileEntryTest
 
 		assertEmptyMBMessages(searchResult);
 		assertEmptyVersions(searchResult);
-	}
-
-	protected Document createDLFileEntryAttachmentDocument() {
-		return SearchTestUtil.createAttachmentDocument(
-			_DL_FILEENTRY_CLASS_NAME);
-	}
-
-	protected Document createDLFileEntryDocument() {
-		return SearchTestUtil.createDocument(_DL_FILEENTRY_CLASS_NAME);
 	}
 
 	protected void setUpDLAppLocalServiceUtil() {
