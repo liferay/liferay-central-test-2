@@ -1414,9 +1414,8 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	protected List<UserGroupRole> getUserGroupRoles(
-			PortletRequest portletRequest, User user, String groupIdsParam,
-			String roleIdsParam)
-		throws PortalException {
+		PortletRequest portletRequest, User user, String groupIdsParam,
+		String roleIdsParam) {
 
 		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
 
