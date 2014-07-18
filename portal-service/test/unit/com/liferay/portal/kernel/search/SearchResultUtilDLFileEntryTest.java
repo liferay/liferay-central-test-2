@@ -226,7 +226,7 @@ public class SearchResultUtilDLFileEntryTest
 	}
 
 	@Test
-	public void testDLFileEntryMissingFromService() throws Exception {
+	public void testDLFileEntryMissing() throws Exception {
 		when(
 			_dlAppLocalService.getFileEntry(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(

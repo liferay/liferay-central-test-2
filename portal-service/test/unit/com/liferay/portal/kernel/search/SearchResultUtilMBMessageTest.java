@@ -109,7 +109,7 @@ public class SearchResultUtilMBMessageTest
 	}
 
 	@Test
-	public void testMBMessageAttachmentMissingFromService() throws Exception {
+	public void testMBMessageAttachmentMissing() throws Exception {
 		when(
 			_mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
 		).thenReturn(
