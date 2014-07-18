@@ -55,11 +55,11 @@ public class SearchResultUtilMBMessageTest
 
 	@Test
 	public void testMBMessage() throws Exception {
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createMBMessageDocument());
+		SearchResult searchResult = assertOneSearchResult(
+			createMBMessageDocument());
 
-		Assert.assertEquals(_MB_MESSAGE_CLASS_NAME, searchResult.getClassName());
+		Assert.assertEquals(
+			_MB_MESSAGE_CLASS_NAME, searchResult.getClassName());
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
@@ -86,9 +86,8 @@ public class SearchResultUtilMBMessageTest
 			IndexerRegistryUtil.class,
 			new ThrowsExceptionClass(IllegalStateException.class));
 
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createMBMessageAttachmentDocument());
+		SearchResult searchResult = assertOneSearchResult(
+			createMBMessageAttachmentDocument());
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -115,9 +114,8 @@ public class SearchResultUtilMBMessageTest
 			null
 		);
 
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createMBMessageAttachmentDocument());
+		SearchResult searchResult = assertOneSearchResult(
+			createMBMessageAttachmentDocument());
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,

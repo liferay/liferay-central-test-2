@@ -47,6 +47,16 @@ import org.powermock.api.mockito.PowerMockito;
  */
 public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+
+		setUpFastDateFormatFactoryUtil();
+		setUpPortalUtil();
+		setUpPropsUtil();
+		setUpRegistryUtil();
+	}
+
 	protected void assertEmptyFileEntryTuples(SearchResult searchResult) {
 		List<Tuple> fileEntryTuples = searchResult.getFileEntryTuples();
 
@@ -59,6 +69,12 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 		Assert.assertTrue(mbMessages.isEmpty());
 	}
 
+	protected void assertEmptyVersions(SearchResult searchResult) {
+		List<String> versions = searchResult.getVersions();
+
+		Assert.assertTrue(versions.isEmpty());
+	}
+
 	protected SearchResult assertOneSearchResult(Document document) {
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL, document);
@@ -66,22 +82,6 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 		Assert.assertEquals(1, searchResults.size());
 
 		return searchResults.get(0);
-	}
-
-	protected void assertEmptyVersions(SearchResult searchResult) {
-		List<String> versions = searchResult.getVersions();
-
-		Assert.assertTrue(versions.isEmpty());
-	}
-
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-
-		setUpFastDateFormatFactoryUtil();
-		setUpPortalUtil();
-		setUpPropsUtil();
-		setUpRegistryUtil();
 	}
 
 	protected void setUpFastDateFormatFactoryUtil() {
@@ -113,7 +113,6 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 
 		mockStatic(
 			AssetRendererFactoryRegistryUtil.class, Mockito.CALLS_REAL_METHODS);
-
 		mockStatic(IndexerRegistryUtil.class, Mockito.CALLS_REAL_METHODS);
 	}
 

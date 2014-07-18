@@ -166,8 +166,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 	}
 
 	protected SearchResult searchBlankDocument() {
-		return assertOneSearchResult(
-			new DocumentImpl());
+		return assertOneSearchResult(new DocumentImpl());
 	}
 
 }

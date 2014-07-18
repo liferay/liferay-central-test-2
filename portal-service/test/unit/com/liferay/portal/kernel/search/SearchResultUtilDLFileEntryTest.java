@@ -67,9 +67,8 @@ public class SearchResultUtilDLFileEntryTest
 
 	@Test
 	public void testDLFileEntry() throws Exception {
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createDLFileEntryDocument());
+		SearchResult searchResult = assertOneSearchResult(
+			createDLFileEntryDocument());
 
 		Assert.assertEquals(
 			_DL_FILEENTRY_CLASS_NAME, searchResult.getClassName());
@@ -93,24 +92,24 @@ public class SearchResultUtilDLFileEntryTest
 			method(IndexerRegistryUtil.class, "getIndexer", String.class)
 		).with(
 			new InvocationHandler() {
-	
+
 				@Override
 				public Indexer invoke(
 						Object proxy, Method method, Object[] args)
 					throws Throwable {
-	
+
 					String className = (String)args[0];
-	
+
 					if (_DL_FILEENTRY_CLASS_NAME.equals(className)) {
 						return indexer;
 					}
-	
+
 					if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
 							className)) {
-	
+
 						return null;
 					}
-	
+
 					throw new IllegalArgumentException();
 				}
 
@@ -142,19 +141,19 @@ public class SearchResultUtilDLFileEntryTest
 				public AssetRendererFactory invoke(
 						Object proxy, Method method, Object[] args)
 					throws Throwable {
-	
+
 					String className = (String)args[0];
-	
+
 					if (_DL_FILEENTRY_CLASS_NAME.equals(className)) {
 						return null;
 					}
-	
+
 					if (SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME.equals(
 							className)) {
-	
+
 						return assetRendererFactory;
 					}
-	
+
 					throw new IllegalArgumentException();
 				}
 
@@ -186,9 +185,8 @@ public class SearchResultUtilDLFileEntryTest
 			_fileEntry
 		);
 
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createDLFileEntryAttachmentDocument());
+		SearchResult searchResult = assertOneSearchResult(
+			createDLFileEntryAttachmentDocument());
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -200,7 +198,6 @@ public class SearchResultUtilDLFileEntryTest
 		Summary searchResultSummary = searchResult.getSummary();
 
 		Assert.assertNotSame(summary, searchResultSummary);
-
 		Assert.assertEquals(
 			SearchTestUtil.SUMMARY_CONTENT, searchResultSummary.getContent());
 		Assert.assertEquals(
@@ -233,9 +230,8 @@ public class SearchResultUtilDLFileEntryTest
 			null
 		);
 
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createDLFileEntryAttachmentDocument());
+		SearchResult searchResult = assertOneSearchResult(
+			createDLFileEntryAttachmentDocument());
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -298,8 +294,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		document.add(new Field(Field.SNIPPET, snippet));
 
-		SearchResult searchResult =
-			assertOneSearchResult(document);
+		SearchResult searchResult = assertOneSearchResult(document);
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -339,7 +334,8 @@ public class SearchResultUtilDLFileEntryTest
 	}
 
 	protected Document createDLFileEntryAttachmentDocument() {
-		return SearchTestUtil.createAttachmentDocument(_DL_FILEENTRY_CLASS_NAME);
+		return SearchTestUtil.createAttachmentDocument(
+			_DL_FILEENTRY_CLASS_NAME);
 	}
 
 	protected Document createDLFileEntryDocument() {

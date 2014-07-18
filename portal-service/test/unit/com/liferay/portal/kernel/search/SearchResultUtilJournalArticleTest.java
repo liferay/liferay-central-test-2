@@ -45,9 +45,8 @@ public class SearchResultUtilJournalArticleTest
 
 	@Test
 	public void testJournalArticle() {
-		SearchResult searchResult =
-			assertOneSearchResult(
-				createJournalArticleDocumentWithVersion());
+		SearchResult searchResult = assertOneSearchResult(
+			createJournalArticleDocumentWithVersion());
 
 		assertThatSearchResultHasVersion(searchResult);
 
@@ -75,8 +74,7 @@ public class SearchResultUtilJournalArticleTest
 
 		Document document = createJournalArticleDocumentWithVersion();
 
-		SearchResult searchResult =
-			assertOneSearchResult(document);
+		SearchResult searchResult = assertOneSearchResult(document);
 
 		assertThatSearchResultHasVersion(searchResult);
 
