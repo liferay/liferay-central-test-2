@@ -52,7 +52,7 @@ public class SearchResultUtilJournalArticleTest
 	@Test
 	public void testJournalArticle() {
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createJournalArticleDocumentWithVersion());
 
 		assertThatSearchResultHasVersion(searchResult);
@@ -82,7 +82,7 @@ public class SearchResultUtilJournalArticleTest
 		Document document = createJournalArticleDocumentWithVersion();
 
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(document);
+			assertOneSearchResult(document);
 
 		assertThatSearchResultHasVersion(searchResult);
 
@@ -101,9 +101,9 @@ public class SearchResultUtilJournalArticleTest
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
-		assertThatFileEntryTuplesIsEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
 
-		assertThatMBMessagesIsEmpty(searchResult);
+		assertEmptyMBMessages(searchResult);
 
 		List<String> versions = searchResult.getVersions();
 

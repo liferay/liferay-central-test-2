@@ -166,13 +166,13 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		Assert.assertEquals(StringPool.BLANK, searchResult.getClassName());
 		Assert.assertEquals(0L, searchResult.getClassPK());
 
-		assertThatFileEntryTuplesIsEmpty(searchResult);
-		assertThatMBMessagesIsEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
+		assertEmptyMBMessages(searchResult);
 		assertThatVersionsIsEmpty(searchResult);
 	}
 
 	protected SearchResult searchBlankDocument() {
-		return assertThatSearchSingleDocumentReturnsOneSearchResult(
+		return assertOneSearchResult(
 			new DocumentImpl());
 	}
 

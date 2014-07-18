@@ -46,21 +46,19 @@ import org.powermock.api.mockito.PowerMockito;
  */
 public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 
-	protected void assertThatFileEntryTuplesIsEmpty(SearchResult searchResult) {
+	protected void assertEmptyFileEntryTuples(SearchResult searchResult) {
 		List<Tuple> fileEntryTuples = searchResult.getFileEntryTuples();
 
 		Assert.assertTrue(fileEntryTuples.isEmpty());
 	}
 
-	protected void assertThatMBMessagesIsEmpty(SearchResult searchResult) {
+	protected void assertEmptyMBMessages(SearchResult searchResult) {
 		List<MBMessage> mbMessages = searchResult.getMBMessages();
 
 		Assert.assertTrue(mbMessages.isEmpty());
 	}
 
-	protected SearchResult assertThatSearchSingleDocumentReturnsOneSearchResult(
-		Document document) {
-
+	protected SearchResult assertOneSearchResult(Document document) {
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL, document);
 

@@ -55,7 +55,7 @@ public class SearchResultUtilMBMessageTest
 	@Test
 	public void testMBMessage() throws Exception {
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createMBMessageDocument());
 
 		Assert.assertEquals(_MB_MESSAGE_CLASS_NAME, searchResult.getClassName());
@@ -86,7 +86,7 @@ public class SearchResultUtilMBMessageTest
 			new ThrowsExceptionClass(IllegalStateException.class));
 
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createMBMessageAttachmentDocument());
 
 		Assert.assertEquals(
@@ -115,7 +115,7 @@ public class SearchResultUtilMBMessageTest
 		);
 
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createMBMessageAttachmentDocument());
 
 		Assert.assertEquals(
@@ -175,7 +175,7 @@ public class SearchResultUtilMBMessageTest
 	protected void assertThatFileEntryTuplesAndVersionsAreEmpty(
 		SearchResult searchResult) {
 
-		assertThatFileEntryTuplesIsEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
 
 		assertThatVersionsIsEmpty(searchResult);
 	}

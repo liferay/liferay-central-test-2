@@ -67,7 +67,7 @@ public class SearchResultUtilDLFileEntryTest
 	@Test
 	public void testDLFileEntry() throws Exception {
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createDLFileEntryDocument());
 
 		Assert.assertEquals(
@@ -75,7 +75,7 @@ public class SearchResultUtilDLFileEntryTest
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
-		assertThatFileEntryTuplesIsEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
 
 		Assert.assertNull(searchResult.getSummary());
 
@@ -186,7 +186,7 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createDLFileEntryAttachmentDocument());
 
 		Assert.assertEquals(
@@ -233,7 +233,7 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(
+			assertOneSearchResult(
 				createDLFileEntryAttachmentDocument());
 
 		Assert.assertEquals(
@@ -243,7 +243,7 @@ public class SearchResultUtilDLFileEntryTest
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK,
 			searchResult.getClassPK());
 
-		assertThatFileEntryTuplesIsEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
 
 		Mockito.verify(
 			_dlAppLocalService
@@ -298,7 +298,7 @@ public class SearchResultUtilDLFileEntryTest
 		document.add(new Field(Field.SNIPPET, snippet));
 
 		SearchResult searchResult =
-			assertThatSearchSingleDocumentReturnsOneSearchResult(document);
+			assertOneSearchResult(document);
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -318,7 +318,7 @@ public class SearchResultUtilDLFileEntryTest
 			document, snippet, portletURL, null, null
 		);
 
-		assertThatFileEntryTuplesIsEmpty(searchResult);
+		assertEmptyFileEntryTuples(searchResult);
 
 		Mockito.verify(
 			_dlAppLocalService
@@ -332,7 +332,7 @@ public class SearchResultUtilDLFileEntryTest
 	protected void assertThatMBMessagesAndVersionsAreEmpty(
 		SearchResult searchResult) {
 
-		assertThatMBMessagesIsEmpty(searchResult);
+		assertEmptyMBMessages(searchResult);
 
 		assertThatVersionsIsEmpty(searchResult);
 	}
