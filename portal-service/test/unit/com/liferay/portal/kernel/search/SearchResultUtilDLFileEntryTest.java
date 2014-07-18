@@ -68,10 +68,10 @@ public class SearchResultUtilDLFileEntryTest
 	@Test
 	public void testDLFileEntry() throws Exception {
 		SearchResult searchResult = assertOneSearchResult(
-			SearchTestUtil.createDocument(_DL_FILEENTRY_CLASS_NAME));
+			SearchTestUtil.createDocument(_DL_FILE_ENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
-			_DL_FILEENTRY_CLASS_NAME, searchResult.getClassName());
+			_DL_FILE_ENTRY_CLASS_NAME, searchResult.getClassName());
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
@@ -101,7 +101,7 @@ public class SearchResultUtilDLFileEntryTest
 
 					String className = (String)args[0];
 
-					if (_DL_FILEENTRY_CLASS_NAME.equals(className)) {
+					if (_DL_FILE_ENTRY_CLASS_NAME.equals(className)) {
 						return indexer;
 					}
 
@@ -145,7 +145,7 @@ public class SearchResultUtilDLFileEntryTest
 
 					String className = (String)args[0];
 
-					if (_DL_FILEENTRY_CLASS_NAME.equals(className)) {
+					if (_DL_FILE_ENTRY_CLASS_NAME.equals(className)) {
 						return null;
 					}
 
@@ -188,7 +188,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		SearchResult searchResult = assertOneSearchResult(
 			SearchTestUtil.createAttachmentDocument(
-				_DL_FILEENTRY_CLASS_NAME));
+				_DL_FILE_ENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -235,7 +235,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		SearchResult searchResult = assertOneSearchResult(
 			SearchTestUtil.createAttachmentDocument(
-				_DL_FILEENTRY_CLASS_NAME));
+				_DL_FILE_ENTRY_CLASS_NAME));
 
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME,
@@ -294,7 +294,7 @@ public class SearchResultUtilDLFileEntryTest
 		);
 
 		Document document = SearchTestUtil.createAttachmentDocument(
-			_DL_FILEENTRY_CLASS_NAME);
+			_DL_FILE_ENTRY_CLASS_NAME);
 
 		String snippet = RandomTestUtil.randomString();
 
@@ -312,7 +312,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		verifyStatic();
 
-		IndexerRegistryUtil.getIndexer(_DL_FILEENTRY_CLASS_NAME);
+		IndexerRegistryUtil.getIndexer(_DL_FILE_ENTRY_CLASS_NAME);
 
 		Mockito.verify(
 			indexer
@@ -342,7 +342,7 @@ public class SearchResultUtilDLFileEntryTest
 		);
 	}
 
-	private static final String _DL_FILEENTRY_CLASS_NAME =
+	private static final String _DL_FILE_ENTRY_CLASS_NAME =
 		DLFileEntry.class.getName();
 
 	@Mock
