@@ -154,15 +154,13 @@ public class SearchResultUtilMBMessageTest
 
 	@Test
 	public void testTwoDocumentsWithSameAttachmentOwner() {
-		long baseEntryPK = SearchTestUtil.ENTRY_CLASS_PK;
-
-		Document documentA = SearchTestUtil.createAttachmentDocument(
-			_MB_MESSAGE_CLASS_NAME, baseEntryPK);
-		Document documentB = SearchTestUtil.createAttachmentDocument(
-			_MB_MESSAGE_CLASS_NAME, baseEntryPK + 1);
+		Document document1 = SearchTestUtil.createAttachmentDocument(
+			_MB_MESSAGE_CLASS_NAME, SearchTestUtil.ENTRY_CLASS_PK);
+		Document document2 = SearchTestUtil.createAttachmentDocument(
+			_MB_MESSAGE_CLASS_NAME, SearchTestUtil.ENTRY_CLASS_PK + 1);
 
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
-			portletURL, documentA, documentB);
+			portletURL, document1, document2);
 
 		Assert.assertEquals( 1, searchResults.size());
 
