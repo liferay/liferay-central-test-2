@@ -213,11 +213,11 @@ public class SearchResultUtilDLFileEntryTest
 
 		FileEntry tupleFileEntry = (FileEntry)tuple.getObject(0);
 
+		Assert.assertSame(_fileEntry, tupleFileEntry);
+
 		Summary tupleSummary = (Summary)tuple.getObject(1);
 
-		Assert.assertSame(_fileEntry, tupleFileEntry);
 		Assert.assertSame(summary, tupleSummary);
-
 		Assert.assertEquals(content, tupleSummary.getContent());
 		Assert.assertEquals(title, tupleSummary.getTitle());
 
@@ -269,7 +269,7 @@ public class SearchResultUtilDLFileEntryTest
 	}
 
 	@Test
-	public void testDLFileEntryWithDefectiveIndexer() throws Exception {
+	public void testDLFileEntryWithBrokenIndexer() throws Exception {
 		Indexer indexer = Mockito.mock(Indexer.class);
 
 		Mockito.doThrow(
