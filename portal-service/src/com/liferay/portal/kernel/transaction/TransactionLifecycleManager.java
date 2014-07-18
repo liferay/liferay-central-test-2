@@ -79,7 +79,7 @@ public class TransactionLifecycleManager {
 			transactionLifecycleListener);
 	}
 
-	private static final Set<TransactionLifecycleListener>
+	private static Set<TransactionLifecycleListener>
 		_transactionLifecycleListeners =
 			new CopyOnWriteArraySet<TransactionLifecycleListener>();
 

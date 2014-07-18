@@ -33,7 +33,7 @@ public enum Propagation {
 	SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS);
 
 	public static Propagation getPropagation(int value) {
-		return _lookupMap.get(value);
+		return _propagations.get(value);
 	}
 
 	Propagation(int value) {
@@ -44,15 +44,15 @@ public enum Propagation {
 		return _value;
 	}
 
-	private static final Map<Integer, Propagation> _lookupMap =
+	private static Map<Integer, Propagation> _propagations =
 		new HashMap<Integer, Propagation>();
-
-	private int _value;
 
 	static {
 		for (Propagation propagation : EnumSet.allOf(Propagation.class)) {
-			_lookupMap.put(propagation._value, propagation);
+			_propagations.put(propagation._value, propagation);
 		}
 	}
+
+	private int _value;
 
 }

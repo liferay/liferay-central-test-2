@@ -29,7 +29,7 @@ import java.util.concurrent.Callable;
 /**
  * @author Shuyang Zhou
  */
-class TransactionCommitCallbackUtil {
+public class TransactionCommitCallbackUtil {
 
 	public static final TransactionLifecycleListener
 		TRANSACTION_LIFECYCLE_LISTENER = new TransactionLifecycleListener() {

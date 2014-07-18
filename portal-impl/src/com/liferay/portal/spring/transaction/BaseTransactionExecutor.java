@@ -14,8 +14,6 @@
 
 package com.liferay.portal.spring.transaction;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionAttribute;
@@ -84,8 +82,5 @@ public abstract class BaseTransactionExecutor implements TransactionExecutor {
 			createTransactionAttribute(transactionAttribute),
 			createTransactionStatus(transactionStatus), throwable);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		BaseTransactionExecutor.class);
 
 }

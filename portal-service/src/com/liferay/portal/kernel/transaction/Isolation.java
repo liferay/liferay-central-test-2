@@ -33,7 +33,7 @@ public enum Isolation {
 	SERIALIZABLE(TransactionDefinition.ISOLATION_SERIALIZABLE);
 
 	public static Isolation getIsolation(int value) {
-		return _lookupMap.get(value);
+		return _isolations.get(value);
 	}
 
 	Isolation(int value) {
@@ -44,15 +44,15 @@ public enum Isolation {
 		return _value;
 	}
 
-	private static final Map<Integer, Isolation> _lookupMap =
+	private static Map<Integer, Isolation> _isolations =
 		new HashMap<Integer, Isolation>();
-
-	private int _value;
 
 	static {
 		for (Isolation isolation : EnumSet.allOf(Isolation.class)) {
-			_lookupMap.put(isolation._value, isolation);
+			_isolations.put(isolation._value, isolation);
 		}
 	}
+
+	private int _value;
 
 }
