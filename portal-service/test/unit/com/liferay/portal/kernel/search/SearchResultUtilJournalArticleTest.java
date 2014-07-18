@@ -93,13 +93,13 @@ public class SearchResultUtilJournalArticleTest
 		Assert.assertEquals(
 			SearchTestUtil.ENTRY_CLASS_PK, searchResult.getClassPK());
 
-		assertEmptyFileEntryTuples(searchResult);
-		assertEmptyMBMessages(searchResult);
-
 		List<String> versions = searchResult.getVersions();
 
 		Assert.assertEquals(_DOCUMENT_VERSION, versions.get(0));
 		Assert.assertEquals(1, versions.size());
+
+		assertEmptyFileEntryTuples(searchResult);
+		assertEmptyMBMessages(searchResult);
 	}
 
 	protected Document createDocument() {
