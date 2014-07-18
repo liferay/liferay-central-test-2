@@ -55,9 +55,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 	public void testBlankDocument() {
 		SearchResult searchResult = searchBlankDocument();
 
-		Assert.assertNull(
-			"Summary should be null with no Indexer or AssetRenderer defined",
-			searchResult.getSummary());
+		Assert.assertNull(searchResult.getSummary());
 
 		assertThatEverythingButSummaryIsEmpty(searchResult);
 	}
@@ -67,7 +65,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL);
 
-		Assert.assertEquals("no hits, no results", 0, searchResults.size());
+		Assert.assertEquals(0, searchResults.size());
 	}
 
 	@Test
@@ -153,7 +151,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL, documentA, documentB);
 
-		Assert.assertEquals("two hits, one result", 1, searchResults.size());
+		Assert.assertEquals(1, searchResults.size());
 
 		SearchResult searchResult = searchResults.get(0);
 

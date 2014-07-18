@@ -57,9 +57,7 @@ public class SearchResultUtilJournalArticleTest
 
 		assertThatSearchResultHasVersion(searchResult);
 
-		Assert.assertNull(
-			"Summary should be null with no Indexer or AssetRenderer defined",
-			searchResult.getSummary());
+		Assert.assertNull(searchResult.getSummary());
 	}
 
 	@Test
@@ -88,9 +86,7 @@ public class SearchResultUtilJournalArticleTest
 
 		assertThatSearchResultHasVersion(searchResult);
 
-		Assert.assertNull(
-			"Indexer is attempted, exception is discarded, no summary returned",
-			searchResult.getSummary());
+		Assert.assertNull(searchResult.getSummary());
 
 		Mockito.verify(
 			indexer

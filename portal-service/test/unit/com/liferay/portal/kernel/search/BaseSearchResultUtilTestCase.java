@@ -64,7 +64,7 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL, document);
 
-		Assert.assertEquals("one hit, one result", 1, searchResults.size());
+		Assert.assertEquals(1, searchResults.size());
 
 		return searchResults.get(0);
 	}

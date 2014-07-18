@@ -198,9 +198,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		Summary searchResultSummary = searchResult.getSummary();
 
-		Assert.assertNotSame(
-			"Summary in searchResult is not the same one returned by Indexer",
-			summary, searchResultSummary);
+		Assert.assertNotSame(summary, searchResultSummary);
 
 		Assert.assertEquals(
 			SearchTestUtil.SUMMARY_CONTENT, searchResultSummary.getContent());
@@ -218,10 +216,7 @@ public class SearchResultUtilDLFileEntryTest
 		Summary tupleSummary = (Summary)tuple.getObject(1);
 
 		Assert.assertSame(fileEntry, tupleFileEntry);
-
-		Assert.assertSame(
-			"Summary in tuple must be the same one returned by Indexer",
-			summary, tupleSummary);
+		Assert.assertSame(summary, tupleSummary);
 
 		Assert.assertEquals(content, tupleSummary.getContent());
 		Assert.assertEquals(title, tupleSummary.getTitle());
@@ -256,9 +251,7 @@ public class SearchResultUtilDLFileEntryTest
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
 
-		Assert.assertNull(
-			"Indexer and AssetRenderer are both attempted, no summary returned",
-			searchResult.getSummary());
+		Assert.assertNull(searchResult.getSummary());
 
 		verifyStatic();
 
@@ -313,10 +306,7 @@ public class SearchResultUtilDLFileEntryTest
 		Assert.assertEquals(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK,
 			searchResult.getClassPK());
-
-		Assert.assertNull(
-			"Indexer is attempted, exception is discarded, no summary returned",
-			searchResult.getSummary());
+		Assert.assertNull(searchResult.getSummary());
 
 		verifyStatic();
 

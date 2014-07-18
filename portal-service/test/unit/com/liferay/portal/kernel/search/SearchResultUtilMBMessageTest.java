@@ -64,9 +64,7 @@ public class SearchResultUtilMBMessageTest
 
 		List<MBMessage> mbMessages = searchResult.getMBMessages();
 
-		Assert.assertTrue(
-			"MBMessageLocalService must not be invoked at all",
-			mbMessages.isEmpty());
+		Assert.assertTrue(mbMessages.isEmpty());
 
 		verifyZeroInteractions(mbMessageLocalService);
 
@@ -129,9 +127,7 @@ public class SearchResultUtilMBMessageTest
 
 		List<MBMessage> mbMessages = searchResult.getMBMessages();
 
-		Assert.assertTrue(
-			"MBMessageLocalService is attempted, no message returned",
-			mbMessages.isEmpty());
+		Assert.assertTrue(mbMessages.isEmpty());
 
 		Mockito.verify(
 			mbMessageLocalService
@@ -139,9 +135,7 @@ public class SearchResultUtilMBMessageTest
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
 
-		Assert.assertNull(
-			"Indexer and AssetRenderer are both attempted, no summary returned",
-			searchResult.getSummary());
+		Assert.assertNull(searchResult.getSummary());
 
 		verifyStatic();
 
@@ -166,7 +160,7 @@ public class SearchResultUtilMBMessageTest
 		List<SearchResult> searchResults = SearchTestUtil.getSearchResults(
 			portletURL, documentA, documentB);
 
-		Assert.assertEquals("two hits, one result", 1, searchResults.size());
+		Assert.assertEquals( 1, searchResults.size());
 
 		SearchResult searchResult = searchResults.get(0);
 
