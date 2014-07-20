@@ -101,7 +101,9 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 	}
 
 	protected void print(SidebarNode sidebarNode) {
-		if (sidebarNode.getAlt().equalsIgnoreCase("note")) {
+		String alt = sidebarNode.getAlt();
+
+		if (alt.equalsIgnoreCase("note")) {
 			printer.print("<div class=\"sidebar\">");
 			printer.print("<div class=\"sidebar-note-image\"></div>");
 			printer.print("<div class=\"sidebar-note-paragraph\">");
@@ -111,7 +113,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 			printer.print("</div>");
 			printer.print("</div>");
 		}
-		else if (sidebarNode.getAlt().equalsIgnoreCase("tip")) {
+		else if (alt.equalsIgnoreCase("tip")) {
 			printer.print("<div class=\"sidebar\">");
 			printer.print("<div class=\"sidebar-tip-image\"></div>");
 			printer.print("<div class=\"sidebar-tip-paragraph\">");
@@ -121,7 +123,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 			printer.print("</div>");
 			printer.print("</div>");
 		}
-		else if (sidebarNode.getAlt().equalsIgnoreCase("warning")) {
+		else if (alt.equalsIgnoreCase("warning")) {
 			printer.print("<div class=\"sidebar\">");
 			printer.print("<div class=\"sidebar-warning-image\"></div>");
 			printer.print("<div class=\"sidebar-warning-paragraph\">");
@@ -135,7 +137,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 			printer.print("<p><img src=\"");
 			printer.print(sidebarNode.getSrc());
 			printer.print("\" alt=\"");
-			printer.print(sidebarNode.getAlt());
+			printer.print(alt);
 			printer.print("\"/>");
 
 			visitChildren(sidebarNode);
