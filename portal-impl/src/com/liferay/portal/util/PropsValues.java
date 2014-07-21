@@ -1150,8 +1150,6 @@ public class PropsValues {
 
 	public static final String MAIL_AUDIT_TRAIL = PropsUtil.get(PropsKeys.MAIL_AUDIT_TRAIL);
 
-	public static final String MAIL_HOOK_IMPL = PropsUtil.get(PropsKeys.MAIL_HOOK_IMPL);
-
 	public static final boolean MAIL_MX_UPDATE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MAIL_MX_UPDATE));
 
 	public static final String MAIL_SESSION_MAIL_ADVANCED_PROPERTIES = PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES);
