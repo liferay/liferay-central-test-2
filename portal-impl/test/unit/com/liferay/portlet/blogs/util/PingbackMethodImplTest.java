@@ -312,7 +312,8 @@ public class PingbackMethodImplTest extends PowerMockito {
 		execute("MALFORMED");
 
 		verifyFault(
-			PingbackMethodImpl.TARGET_URI_INVALID, "Error parsing target URI");
+			PingbackMethodImpl.TARGET_URI_INVALID,
+			"Unable to parse target URI");
 	}
 
 	@Test
