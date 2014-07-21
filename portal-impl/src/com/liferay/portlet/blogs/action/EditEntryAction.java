@@ -515,10 +515,10 @@ public class EditEntryAction extends PortletAction {
 				}
 			}
 
-			long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				BlogsEntry.class.getName(), actionRequest);
+
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 			serviceContext.setScopeGroupId(groupId);
 
