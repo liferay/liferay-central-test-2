@@ -1595,7 +1595,8 @@ public class HookHotDeployListener
 					portletClassLoader, ControlPanelEntry.class,
 					controlPanelEntryClassName);
 
-			registerService(servletContextName, controlPanelEntryClassName,
+			registerService(
+				servletContextName, controlPanelEntryClassName,
 				ControlPanelEntry.class, controlPanelEntry);
 		}
 
