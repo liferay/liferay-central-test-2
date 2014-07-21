@@ -107,13 +107,10 @@ public class VerifyLayout extends VerifyProcess {
 		verifyUuid("AssetEntry");
 		verifyUuid("JournalArticle");
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append("update Layout set uuid_ = sourcePrototypeLayoutUuid where ");
-		sb.append("sourcePrototypeLayoutUuid != '' and ");
-		sb.append("uuid_ != sourcePrototypeLayoutUuid");
-
-		runSQL(sb.toString());
+		runSQL(
+			"update Layout set uuid_ = sourcePrototypeLayoutUuid where " +
+				"sourcePrototypeLayoutUuid != '' and uuid_ != " +
+					"sourcePrototypeLayoutUuid");
 	}
 
 	protected void verifyUuid(String tableName) throws Exception {
