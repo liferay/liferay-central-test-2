@@ -1902,10 +1902,6 @@ public class PropsValues {
 
 	public static boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
 
-	public static final String USERS_SCREEN_NAME_GENERATOR = PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_GENERATOR);
-
-	public static final String USERS_SCREEN_NAME_VALIDATOR = PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_VALIDATOR);
-
 	public static final boolean USERS_SEARCH_WITH_INDEX = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_SEARCH_WITH_INDEX));
 
 	public static final boolean USERS_UPDATE_LAST_LOGIN = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_UPDATE_LAST_LOGIN));
