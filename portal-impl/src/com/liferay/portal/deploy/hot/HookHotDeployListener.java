@@ -1710,7 +1710,8 @@ public class HookHotDeployListener
 					portletClassLoader, com.liferay.mail.util.Hook.class,
 					mailHookClassName);
 
-			registerService(servletContextName, mailHookClassName,
+			registerService(
+				servletContextName, mailHookClassName,
 				com.liferay.mail.util.Hook.class, mailHook);
 		}
 
