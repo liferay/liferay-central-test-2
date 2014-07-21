@@ -57,7 +57,6 @@ import com.liferay.portal.module.framework.ModuleFrameworkUtilAdapter;
 import com.liferay.portal.security.lang.SecurityManagerUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.servlet.filters.dynamiccss.DynamicCSSUtil;
 import com.liferay.portal.spring.bean.BeanReferenceRefreshUtil;
 import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.InitUtil;
@@ -300,8 +299,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			applicationContext.getAutowireCapableBeanFactory();
 
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
-
-		DynamicCSSUtil.init();
 
 		_indexerPostProcessorRegistry = new IndexerPostProcessorRegistry();
 		_schedulerEntryRegistry = new SchedulerEntryRegistry();
