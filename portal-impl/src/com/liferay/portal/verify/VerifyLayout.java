@@ -98,13 +98,9 @@ public class VerifyLayout extends VerifyProcess {
 	}
 
 	protected void verifyLayoutPrototypeLinkEnabled() throws Exception {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append("update Layout set layoutPrototypeLinkEnabled = 0 where ");
-		sb.append("type_ = 'link_to_layout' and ");
-		sb.append("layoutPrototypeLinkEnabled = 1");
-
-		runSQL(sb.toString());
+		runSQL(
+			"update Layout set layoutPrototypeLinkEnabled = 0 where type_ = " +
+				"'link_to_layout' and layoutPrototypeLinkEnabled = 1");
 	}
 
 	protected void verifyUuid() throws Exception {
