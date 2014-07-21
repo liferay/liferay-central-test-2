@@ -324,7 +324,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 		verifyFault(
 			PingbackMethodImpl.SOURCE_URI_INVALID,
-			"Could not find target URI in source");
+			"Unable to find target URI in source");
 	}
 
 	@Test
