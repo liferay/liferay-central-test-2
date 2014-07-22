@@ -747,7 +747,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			TrashCapability.class);
 
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
-
 		Folder destinationFolder = localRepository.getFolder(newFolderId);
 
 		return trashCapability.moveFileEntryFromTrash(
