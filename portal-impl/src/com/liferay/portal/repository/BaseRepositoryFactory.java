@@ -456,24 +456,19 @@ public abstract class BaseRepositoryFactory<T> {
 		_userLocalService = userLocalService;
 	}
 
-	private static Map<Class<? extends Capability>, Capability>
-		_externalSupportedCapabilities = Collections.emptyMap();
-
 	private static Set<Class<? extends Capability>>
 		_externalExportedCapabilityClasses = Collections.emptySet();
-
 	private static Map<Class<? extends Capability>, Capability>
-		_internalSupportedCapabilities;
-
+		_externalSupportedCapabilities = Collections.emptyMap();
 	private static Set<Class<? extends Capability>>
 		_internalExportedCapabilityClasses =
 			Collections.<Class<? extends Capability>>singleton(
 				TrashCapability.class);
-
-	static {
+	private static Map<Class<? extends Capability>, Capability>
 		_internalSupportedCapabilities =
 			new HashMap<Class<? extends Capability>, Capability>();
 
+	static {
 		_internalSupportedCapabilities.put(
 			TrashCapability.class, new LiferayTrashCapability());
 	}
