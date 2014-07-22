@@ -238,23 +238,27 @@ public abstract class BaseRepositoryFactory<T> {
 	}
 
 	protected Map<Class<? extends Capability>, Capability>
-		getDefaultExternalCapabilities() {
+		getExternalSupportedCapabilities() {
 
-		return _DEFAULT_EXTERNAL_CAPABILITIES;
+		return _externalSupportedCapabilities;
 	}
 
-	protected Set<Class<? extends Capability>> getDefaultExternalExports() {
-		return _DEFAULT_EXTERNAL_EXPORTS;
+	protected Set<Class<? extends Capability>>
+		getExternalExportedCapabilityClasses() {
+
+		return _externalExportedCapabilityClasses;
 	}
 
-	protected Set<Class<? extends Capability>> getDefaultInternalExports() {
-		return _DEFAULT_INTERNAL_EXPORTS;
+	protected Set<Class<? extends Capability>>
+		getInternalExportedCapabilityClasses() {
+
+		return _internalExportedCapabilityClasses;
 	}
 
 	protected Map<Class<? extends Capability>, Capability>
-		getDefaultInternalCapabilities() {
+		getInternalSupportedCapabilities() {
 
-		return _DEFAULT_INTERNAL_CAPABILITIES;
+		return _internalSupportedCapabilities;
 	}
 
 	protected DLAppHelperLocalService getDlAppHelperLocalService() {
@@ -452,25 +456,25 @@ public abstract class BaseRepositoryFactory<T> {
 		_userLocalService = userLocalService;
 	}
 
-	private static final Map<Class<? extends Capability>, Capability>
-		_DEFAULT_EXTERNAL_CAPABILITIES = Collections.emptyMap();
+	private static Map<Class<? extends Capability>, Capability>
+		_externalSupportedCapabilities = Collections.emptyMap();
 
-	private static final Set<Class<? extends Capability>>
-		_DEFAULT_EXTERNAL_EXPORTS = Collections.emptySet();
+	private static Set<Class<? extends Capability>>
+		_externalExportedCapabilityClasses = Collections.emptySet();
 
-	private static final Map<Class<? extends Capability>, Capability>
-		_DEFAULT_INTERNAL_CAPABILITIES;
+	private static Map<Class<? extends Capability>, Capability>
+		_internalSupportedCapabilities;
 
-	private static final Set<Class<? extends Capability>>
-		_DEFAULT_INTERNAL_EXPORTS =
+	private static Set<Class<? extends Capability>>
+		_internalExportedCapabilityClasses =
 			Collections.<Class<? extends Capability>>singleton(
 				TrashCapability.class);
 
 	static {
-		_DEFAULT_INTERNAL_CAPABILITIES =
+		_internalSupportedCapabilities =
 			new HashMap<Class<? extends Capability>, Capability>();
 
-		_DEFAULT_INTERNAL_CAPABILITIES.put(
+		_internalSupportedCapabilities.put(
 			TrashCapability.class, new LiferayTrashCapability());
 	}
 
