@@ -57,7 +57,7 @@ public class DeleteAfterTestRunRule implements TestRule {
 		_instance = instance;
 	}
 
-	public void after(Class testClass) {
+	public void after(Class<?> testClass) {
 		Map<Class<?>, FieldBag> deleteAfterTestRunFieldBags =
 			new HashMap<Class<?>, FieldBag>();
 
@@ -85,7 +85,7 @@ public class DeleteAfterTestRunRule implements TestRule {
 						throw new IllegalArgumentException(
 							"Unable to annotate field " + field +
 								" because it is not an array of type " +
-								PersistedModel.class.getName());
+									PersistedModel.class.getName());
 					}
 
 					addField(
@@ -112,7 +112,7 @@ public class DeleteAfterTestRunRule implements TestRule {
 							throw new IllegalArgumentException(
 								"Unable to annotate field " + field +
 									" because it is not a collection of type " +
-									PersistedModel.class.getName());
+										PersistedModel.class.getName());
 						}
 
 						addField(
