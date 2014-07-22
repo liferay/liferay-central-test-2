@@ -202,7 +202,7 @@
 </tr>
 <tr>
 	<td>CONTENT_IMAGE_LINK_URL_FIELD</td>
-	<td>//input[@id='cke_71_textInput']</td>
+	<td>//input[@id='cke_73_textInput']</td>
 	<td></td>
 </tr>
 <tr>
@@ -250,11 +250,6 @@
 <tr>
 	<td>LINK_IMAGE_BROWSE_SERVER_SITE_MENULIST_BUTTON</td>
 	<td>//body[contains(@class,'portal-popup')]//ul/li/a[contains(.,'${key_siteName}')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>LINK_IMAGE_BROWSE_SERVER_NAVIGATION_BUTTON</td>
-	<td>//body[contains(@class,'portal-popup')]//ul[contains(@class,'nav-pills')]/li/a[contains(.,'${key_navButton}')]</td>
 	<td></td>
 </tr>
 <tr>
