@@ -54,17 +54,18 @@ public class AssetEntryServiceTest {
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
 
-		int initialCount = AssetEntryLocalServiceUtil.getEntriesCount(
-			assetEntryQuery);
+		int initialAssetEntriesCount =
+			AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
 		AssetTestUtil.addAssetEntry(_group.getGroupId());
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
 
-		int actualCount = AssetEntryLocalServiceUtil.getEntriesCount(
-			assetEntryQuery);
+		int actualAssetEntriesCount =
+			AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
-		Assert.assertEquals(initialCount + 1, actualCount);
+		Assert.assertEquals(
+			initialAssetEntriesCount + 1, actualAssetEntriesCount);
 	}
 
 	@Test
@@ -73,60 +74,56 @@ public class AssetEntryServiceTest {
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
 
-		List<AssetEntry> initialEntries = AssetEntryLocalServiceUtil.getEntries(
-			assetEntryQuery);
-
-		int initialEntriesCount = initialEntries.size();
+		List<AssetEntry> initialAssetEntries =
+			AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
 		AssetTestUtil.addAssetEntry(_group.getGroupId());
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
 
-		List<AssetEntry> entries = AssetEntryLocalServiceUtil.getEntries(
+		List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialEntriesCount + 1, entries.size());
+		Assert.assertEquals(
+			initialAssetEntries.size() + 1, assetEntries.size());
 
-		AssetEntry assetEntry = entries.get(0);
+		AssetEntry assetEntry = assetEntries.get(0);
 
-		Assert.assertTrue(entries.contains(assetEntry));
+		Assert.assertTrue(assetEntries.contains(assetEntry));
 	}
 
 	@Test
 	public void testGetEntriesOrderByPublishDateAndRatings() throws Exception {
-		List<AssetEntry> assetEntries = createAssetEntries();
+		List<AssetEntry> expectedAssetEntries = createAssetEntries();
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
-
 		assetEntryQuery.setOrderByCol1("publishDate");
-		assetEntryQuery.setOrderByType1("DESC");
-
 		assetEntryQuery.setOrderByCol2("ratings");
+		assetEntryQuery.setOrderByType1("DESC");
 		assetEntryQuery.setOrderByType2("DESC");
 
-		List<AssetEntry> entries = AssetEntryLocalServiceUtil.getEntries(
-			assetEntryQuery);
+		List<AssetEntry> actualAssetEntries =
+			AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
-		validateAssetEntries(assetEntries, entries);
+		validateAssetEntries(expectedAssetEntries, actualAssetEntries);
 	}
 
 	@Test
 	public void testGetEntriesOrderByRatings() throws Exception {
-		List<AssetEntry> assetEntries = createAssetEntries();
+		List<AssetEntry> expectedAssetEntries = createAssetEntries();
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 		assetEntryQuery.setGroupIds(new long[] {_group.getGroupId()});
-
 		assetEntryQuery.setOrderByCol1("ratings");
 		assetEntryQuery.setOrderByType1("DESC");
 
-		List<AssetEntry> entries = AssetEntryLocalServiceUtil.getEntries(
-			assetEntryQuery);
+		List<AssetEntry> actualAssetEntries =
+			AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
-		validateAssetEntries(assetEntries, entries);
+		validateAssetEntries(expectedAssetEntries, actualAssetEntries);
 	}
 
 	protected List<AssetEntry> createAssetEntries() throws Exception {
@@ -158,26 +155,28 @@ public class AssetEntryServiceTest {
 		RatingsTestUtil.addStats(
 			assetEntry3.getClassName(), assetEntry3.getClassPK(), 3000);
 
-		List<AssetEntry> entries = new ArrayList<AssetEntry>(3);
+		List<AssetEntry> assetEntries = new ArrayList<AssetEntry>(3);
 
-		entries.add(assetEntry3);
-		entries.add(assetEntry1);
-		entries.add(assetEntry2);
+		assetEntries.add(assetEntry3);
+		assetEntries.add(assetEntry1);
+		assetEntries.add(assetEntry2);
 
-		return entries;
+		return assetEntries;
 	}
 
 	protected void validateAssetEntries(
-		List<AssetEntry> expectedEntries, List<AssetEntry> actualEntries) {
+		List<AssetEntry> expectedAssetEntries,
+		List<AssetEntry> actualAssetEntries) {
 
-		Assert.assertEquals(expectedEntries.size(), actualEntries.size());
+		Assert.assertEquals(
+			expectedAssetEntries.size(), actualAssetEntries.size());
 
-		for (int pos = 0; pos < expectedEntries.size(); pos++) {
-			AssetEntry expectedEntry = expectedEntries.get(pos);
-			AssetEntry actualEntry = actualEntries.get(pos);
+		for (int i = 0; i < expectedAssetEntries.size(); i++) {
+			AssetEntry expectedAssetEntry = expectedAssetEntries.get(i);
+			AssetEntry actualAssetEntry = actualAssetEntries.get(i);
 
 			Assert.assertEquals(
-				expectedEntry.getEntryId(), actualEntry.getEntryId());
+				expectedAssetEntry.getEntryId(), actualAssetEntry.getEntryId());
 		}
 	}
 
