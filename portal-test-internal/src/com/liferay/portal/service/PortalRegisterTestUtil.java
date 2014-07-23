@@ -177,9 +177,9 @@ public class PortalRegisterTestUtil {
 		WikiPageAssetRendererFactory.class
 	};
 
-	private static boolean _assetRendererFactoriesInitialized = false;
-	private static boolean _indexersInitialized = false;
-	private static boolean _trashHandlersInitialized = false;
-	private static boolean _workflowHandlersInitialized = false;
+	private static boolean _assetRendererFactoriesInitialized;
+	private static boolean _indexersInitialized;
+	private static boolean _trashHandlersInitialized;
+	private static boolean _workflowHandlersInitialized;
 
 }
