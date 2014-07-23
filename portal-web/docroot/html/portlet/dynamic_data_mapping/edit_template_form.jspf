@@ -15,19 +15,17 @@
 --%>
 
 <%
-JSONArray structureJSONArray = _getFormTemplateFieldsJSONArray(structure, structure.getDefinition());
+String namespace = renderResponse.getNamespace();
+
+if (Validator.isNotNull(portletResourceNamespace)) {
+	namespace = portletResourceNamespace;
+}
 
 if (Validator.isNull(script)) {
 	script = structure.getDefinition();
 }
 
 JSONArray fieldsJSONArray = _getFormTemplateFieldsJSONArray(structure, script);
-
-String namespace = renderResponse.getNamespace();
-
-if (Validator.isNotNull(portletResourceNamespace)) {
-	namespace = portletResourceNamespace;
-}
 %>
 
 <aui:input name="language" type="hidden" value="xsd" />
@@ -107,6 +105,11 @@ if (Validator.isNotNull(portletResourceNamespace)) {
 	);
 
 	window['<%= HtmlUtil.escapeJS(namespace) %>getAvailableFields'] = function(A, FormBuilder) {
+
+		<%
+		JSONArray structureJSONArray = _getFormTemplateFieldsJSONArray(structure, structure.getDefinition());
+		%>
+
 		var availableFields = <%= structureJSONArray.toString() %>;
 
 		A.Array.each(
