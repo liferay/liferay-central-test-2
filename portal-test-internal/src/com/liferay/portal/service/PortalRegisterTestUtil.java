@@ -74,7 +74,7 @@ import com.liferay.portlet.wiki.workflow.WikiPageWorkflowHandler;
 public class PortalRegisterTestUtil {
 
 	protected static void registerAssetRendererFactories() {
-		if (_assetRendererFactoriesInitialized) {
+		if (_assetRendererFactoriesRegistered) {
 			return;
 		}
 
@@ -96,11 +96,11 @@ public class PortalRegisterTestUtil {
 			}
 		}
 
-		_assetRendererFactoriesInitialized = true;
+		_assetRendererFactoriesRegistered = true;
 	}
 
 	protected static void registerIndexers() {
-		if (_indexersInitialized) {
+		if (_indexersRegistered) {
 			return;
 		}
 
@@ -121,11 +121,11 @@ public class PortalRegisterTestUtil {
 		IndexerRegistryUtil.register(new WikiNodeIndexer());
 		IndexerRegistryUtil.register(new WikiPageIndexer());
 
-		_indexersInitialized = true;
+		_indexersRegistered = true;
 	}
 
 	protected static void registerTrashHandlers() {
-		if (_trashHandlersInitialized) {
+		if (_trashHandlersRegistered) {
 			return;
 		}
 
@@ -140,11 +140,11 @@ public class PortalRegisterTestUtil {
 		TrashHandlerRegistryUtil.register(new WikiNodeTrashHandler());
 		TrashHandlerRegistryUtil.register(new WikiPageTrashHandler());
 
-		_trashHandlersInitialized = true;
+		_trashHandlersRegistered = true;
 	}
 
 	protected static void registerWorkflowHandlers() {
-		if (_workflowHandlersInitialized) {
+		if (_workflowHandlersRegistered) {
 			return;
 		}
 
@@ -158,7 +158,7 @@ public class PortalRegisterTestUtil {
 		WorkflowHandlerRegistryUtil.register(new UserWorkflowHandler());
 		WorkflowHandlerRegistryUtil.register(new WikiPageWorkflowHandler());
 
-		_workflowHandlersInitialized = true;
+		_workflowHandlersRegistered = true;
 	}
 
 	private static final Class<?>[] _ASSET_RENDERER_FACTORY_CLASSES = {
@@ -177,9 +177,9 @@ public class PortalRegisterTestUtil {
 		WikiPageAssetRendererFactory.class
 	};
 
-	private static boolean _assetRendererFactoriesInitialized;
-	private static boolean _indexersInitialized;
-	private static boolean _trashHandlersInitialized;
-	private static boolean _workflowHandlersInitialized;
+	private static boolean _assetRendererFactoriesRegistered;
+	private static boolean _indexersRegistered;
+	private static boolean _trashHandlersRegistered;
+	private static boolean _workflowHandlersRegistered;
 
 }
