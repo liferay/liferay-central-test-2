@@ -254,11 +254,9 @@ public class JavadocManagerImpl implements JavadocManager {
 
 		String name = methodElement.elementText("name");
 
-		if (clazz.getSimpleName().equals(name)) {
-			return null;
-		}
+		if (name.equals(clazz.getSimpleName()) ||
+			name.startsWith(StringPool.UNDERLINE)) {
 
-		if (name.startsWith(StringPool.UNDERLINE)) {
 			return null;
 		}
 
