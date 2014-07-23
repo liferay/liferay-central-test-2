@@ -89,6 +89,7 @@ public class SearchContainerColumnStatusTag<R>
 				PortalUtil.getServletContextName());
 
 			statusSearchEntry.setServletContext(servletContext);
+
 			statusSearchEntry.setStatus(_status);
 			statusSearchEntry.setStatusByUserId(_statusByUserId);
 			statusSearchEntry.setStatusDate(_statusDate);
