@@ -60,6 +60,7 @@ public class NestableAutoFlushEventListener
 
 			try {
 				performExecutions(eventSource);
+
 				postFlush(eventSource);
 			}
 			finally {
