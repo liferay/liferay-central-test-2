@@ -492,7 +492,7 @@ public class DDMImpl implements DDM {
 			Serializable fieldValue = serviceContext.getAttribute(
 				fieldNameValue);
 
-			if (DDMImpl.TYPE_CHECKBOX.equals(fieldType) &&
+			if (fieldType.equals(DDMImpl.TYPE_CHECKBOX) &&
 				Validator.isNull(fieldValue)) {
 
 				fieldValue = "false";
