@@ -3081,7 +3081,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createServicePropsUtil() throws Exception {
-		if (Validator.isNull(_osgiModule)) {
+		if (!_osgiModule) {
 			return;
 		}
 
