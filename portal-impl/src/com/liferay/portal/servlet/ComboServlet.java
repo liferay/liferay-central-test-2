@@ -372,9 +372,9 @@ public class ComboServlet extends HttpServlet {
 
 		ServletContext servletContext = portletApp.getServletContext();
 
-		String contextPath = servletContext.getContextPath();
-
 		String resourcePath = getResourcePath(modulePath);
+
+		String contextPath = servletContext.getContextPath();
 
 		if (resourcePath.startsWith(contextPath)) {
 			resourcePath = resourcePath.substring(contextPath.length());
