@@ -50,8 +50,7 @@ public class ${servicePropsUtilClassName} {
 	}
 
 	private ServiceProps() {
-		_configuration = ConfigurationFactoryUtil.getConfiguration(
-			getClass().getClassLoader(), "service");
+		_configuration = ConfigurationFactoryUtil.getConfiguration(getClass().getClassLoader(), "service");
 	}
 
 	private static ServiceProps _instance = new ${servicePropsUtilClassName}();
