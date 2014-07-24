@@ -3095,12 +3095,12 @@ public class ServiceBuilder {
 
 		Map<String, Object> context = _getContext();
 
-		int indexOf = _propsUtil.lastIndexOf(".");
+		int index = _propsUtil.lastIndexOf(".");
 
 		context.put(
-			"servicePropsUtilClassName", _propsUtil.substring(indexOf + 1));
+			"servicePropsUtilClassName", _propsUtil.substring(index + 1));
 		context.put(
-			"servicePropsUtilPackagePath", _propsUtil.substring(0, indexOf));
+			"servicePropsUtilPackagePath", _propsUtil.substring(0, index));
 
 		String content = _processTemplate(_tplServicePropsUtil, context);
 
