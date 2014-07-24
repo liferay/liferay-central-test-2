@@ -191,7 +191,9 @@ public class BundleServletContext
 			_serviceRegistration.unregister();
 		}
 		catch (IllegalStateException ies) {
-			_log.info("The service is already unregistered");
+			if (_log.isInfoEnabled()) {
+				_log.info("The service is already unregistered");
+			}
 		}
 
 		if (_tempDir != null) {
