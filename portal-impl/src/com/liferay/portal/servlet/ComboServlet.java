@@ -393,12 +393,10 @@ public class ComboServlet extends HttpServlet {
 			request.getScheme(), request.getLocalAddr(),
 			request.getLocalPort(), contextPath + resourcePath);
 
-		HttpURLConnection connection =
+		HttpURLConnection urlConnection =
 			(HttpURLConnection)url.openConnection();
 
-		int responseCode = connection.getResponseCode();
-
-		if (responseCode == 200) {
+		if (urlConnection.getResponseCode() == HttpServletResponse.SC_OK) {
 			return url;
 		}
 
