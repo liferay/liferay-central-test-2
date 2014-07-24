@@ -52,7 +52,7 @@ public class MethodParameter {
 		return _type;
 	}
 
-	private static String _getClassName(String signature) {
+	private String _getClassName(String signature) {
 		String className = signature;
 
 		char c = signature.charAt(0);
@@ -77,7 +77,7 @@ public class MethodParameter {
 		return className;
 	}
 
-	private static String _getGenericName(String typeName) {
+	private String _getGenericName(String typeName) {
 		if (typeName.equals(StringPool.STAR)) {
 			return null;
 		}
@@ -91,7 +91,7 @@ public class MethodParameter {
 		return typeName;
 	}
 
-	private static boolean _isPrimitive(char c) {
+	private boolean _isPrimitive(char c) {
 		if ((c == 'B') || (c == 'C') || (c == 'D') || (c == 'F') ||
 			(c == 'I') || (c == 'J') || (c == 'S') || (c == 'V') ||
 			(c == 'Z')) {
