@@ -702,8 +702,6 @@ public class ServiceBuilder {
 			_ejbList = new ArrayList<Entity>();
 			_entityMappings = new HashMap<String, EntityMapping>();
 
-			_createServicePropsUtil();
-
 			List<Element> entityElements = rootElement.elements("entity");
 
 			for (Element entityElement : entityElements) {
@@ -872,6 +870,7 @@ public class ServiceBuilder {
 
 				_createServiceClpMessageListener();
 				_createServiceClpSerializer(exceptionList);
+				_createServicePropsUtil();
 
 				if (Validator.isNotNull(_remotingFileName)) {
 					_createRemotingXml();
