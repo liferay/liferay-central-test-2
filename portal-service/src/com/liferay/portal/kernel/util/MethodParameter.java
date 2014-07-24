@@ -59,15 +59,16 @@ public class MethodParameter {
 
 		if (_isPrimitive(c)) {
 			if (signature.length() != 1) {
-				throw new IllegalArgumentException("Invalid: " + signature);
+				throw new IllegalArgumentException(
+					"Invalid signature " + signature);
 			}
 		}
 		else if (c == 'L') {
 			className = className.substring(1, className.length() - 1);
-			className = className.replace('/', '.');
+			className = className.replace(CharPool.SLASH, CharPool.PERIOD);
 		}
 		else if (c == '[') {
-			className = className.replace('/', '.');
+			className = className.replace(CharPool.SLASH, CharPool.PERIOD);
 		}
 		else {
 			throw new IllegalArgumentException(
