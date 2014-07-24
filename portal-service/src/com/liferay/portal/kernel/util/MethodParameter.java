@@ -77,6 +77,18 @@ public class MethodParameter {
 		return className;
 	}
 
+	private ClassLoader _getContextClassLoader() {
+		if (_contextClassLoader != null) {
+			return _contextClassLoader;
+		}
+
+		Thread currentThread = Thread.currentThread();
+
+		_contextClassLoader = currentThread.getContextClassLoader();
+
+		return _contextClassLoader;
+	}
+
 	private String _getGenericName(String typeName) {
 		if (typeName.equals(StringPool.STAR)) {
 			return null;
@@ -89,30 +101,6 @@ public class MethodParameter {
 		}
 
 		return typeName;
-	}
-
-	private boolean _isPrimitive(char c) {
-		if ((c == 'B') || (c == 'C') || (c == 'D') || (c == 'F') ||
-			(c == 'I') || (c == 'J') || (c == 'S') || (c == 'V') ||
-			(c == 'Z')) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private ClassLoader _getContextClassLoader() {
-		if (_contextClassLoader != null) {
-			return _contextClassLoader;
-		}
-
-		Thread currentThread = Thread.currentThread();
-
-		_contextClassLoader = currentThread.getContextClassLoader();
-
-		return _contextClassLoader;
 	}
 
 	private Class<?> _getGenericType(String signature)
@@ -215,6 +203,18 @@ public class MethodParameter {
 		}
 
 		return genericTypeslist.toArray(new Class<?>[genericTypeslist.size()]);
+	}
+
+	private boolean _isPrimitive(char c) {
+		if ((c == 'B') || (c == 'C') || (c == 'D') || (c == 'F') ||
+			(c == 'I') || (c == 'J') || (c == 'S') || (c == 'V') ||
+			(c == 'Z')) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private ClassLoader _contextClassLoader;
