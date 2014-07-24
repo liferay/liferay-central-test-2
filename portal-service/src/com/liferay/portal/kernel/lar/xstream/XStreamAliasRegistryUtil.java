@@ -34,12 +34,12 @@ public class XStreamAliasRegistryUtil {
 		return _instance._getAliases();
 	}
 
-	public static void register(Class<?> clazz, String alias) {
-		_instance._register(clazz, alias);
+	public static void register(Class<?> clazz, String name) {
+		_instance._register(clazz, name);
 	}
 
-	public static void unregister(Class<?> clazz, String alias) {
-		_instance._unregister(clazz, alias);
+	public static void unregister(Class<?> clazz, String name) {
+		_instance._unregister(clazz, name);
 	}
 
 	private XStreamAliasRegistryUtil() {
@@ -55,8 +55,8 @@ public class XStreamAliasRegistryUtil {
 		return _xstreamAliases;
 	}
 
-	private void _register(Class<?> clazz, String alias) {
-		XStreamAlias xStreamAlias = new XStreamAlias(clazz, alias);
+	private void _register(Class<?> clazz, String name) {
+		XStreamAlias xStreamAlias = new XStreamAlias(clazz, name);
 
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -66,8 +66,8 @@ public class XStreamAliasRegistryUtil {
 		_serviceRegistrations.put(xStreamAlias, serviceRegistration);
 	}
 
-	private void _unregister(Class<?> clazz, String alias) {
-		XStreamAlias xStreamAlias = new XStreamAlias(clazz, alias);
+	private void _unregister(Class<?> clazz, String name) {
+		XStreamAlias xStreamAlias = new XStreamAlias(clazz, name);
 
 		ServiceRegistration<XStreamAlias> serviceRegistration =
 			_serviceRegistrations.remove(xStreamAlias);
@@ -88,21 +88,21 @@ public class XStreamAliasRegistryUtil {
 
 	private class XStreamAlias {
 
-		public XStreamAlias(Class<?> clazz, String alias) {
-			_aliasClass = clazz;
-			_aliasName = alias;
+		public XStreamAlias(Class<?> clazz, String name) {
+			_class = clazz;
+			_name = name;
 		}
 
-		public Class<?> getAliasClass() {
-			return _aliasClass;
+		public Class<?> getClazz() {
+			return _class;
 		}
 
-		public String getAliasName() {
-			return _aliasName;
+		public String getName() {
+			return _name;
 		}
 
-		private Class<?> _aliasClass;
-		private String _aliasName;
+		private Class<?> _class;
+		private String _name;
 
 	}
 
@@ -118,7 +118,7 @@ public class XStreamAliasRegistryUtil {
 			XStreamAlias xStreamAlias = registry.getService(serviceReference);
 
 			_xstreamAliases.put(
-				xStreamAlias.getAliasClass(), xStreamAlias.getAliasName());
+				xStreamAlias.getClazz(), xStreamAlias.getName());
 
 			return xStreamAlias;
 		}
@@ -138,7 +138,7 @@ public class XStreamAliasRegistryUtil {
 
 			registry.ungetService(serviceReference);
 
-			_xstreamAliases.remove(xStreamAlias.getAliasClass());
+			_xstreamAliases.remove(xStreamAlias.getClazz());
 		}
 
 	}
