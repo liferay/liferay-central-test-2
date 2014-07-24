@@ -325,7 +325,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.service_clp_serializer=" + _TPL_ROOT + "service_clp_serializer.ftl\n"+
 				"\t-Dservice.tpl.service_http=" + _TPL_ROOT + "service_http.ftl\n"+
 				"\t-Dservice.tpl.service_impl=" + _TPL_ROOT + "service_impl.ftl\n"+
-				"\t-Dservice.tpl.service_props_util=" + _TPL_ROOT + "service_props_util.ftl.ftl\n"+
+				"\t-Dservice.tpl.service_props_util=" + _TPL_ROOT + "service_props_util.ftl\n"+
 				"\t-Dservice.tpl.service_soap=" + _TPL_ROOT + "service_soap.ftl\n"+
 				"\t-Dservice.tpl.service_util=" + _TPL_ROOT + "service_util.ftl\n"+
 				"\t-Dservice.tpl.service_wrapper=" + _TPL_ROOT + "service_wrapper.ftl\n"+
