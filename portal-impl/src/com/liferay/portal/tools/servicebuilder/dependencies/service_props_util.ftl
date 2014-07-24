@@ -9,6 +9,7 @@ import java.util.Properties;
 
 /**
  * @author ${author}
+ * @generated
  */
 public class ${servicePropsUtilClassName} {
 
