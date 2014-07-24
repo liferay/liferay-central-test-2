@@ -434,10 +434,10 @@ public class ComboServlet extends HttpServlet {
 	protected boolean validateModuleExtension(String moduleName)
 		throws Exception {
 
-		int pos = moduleName.indexOf('?');
+		int index = moduleName.indexOf(CharPool.QUESTION);
 
-		if (pos != -1) {
-			moduleName = moduleName.substring(0, pos);
+		if (index != -1) {
+			moduleName = moduleName.substring(0, index);
 		}
 
 		boolean validModuleExtension = false;
