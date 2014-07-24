@@ -2533,9 +2533,10 @@ public class ServiceBuilder {
 
 		int indexOf = _propsUtil.lastIndexOf(".");
 
-		context.put("servicePropsUtilClass", _propsUtil.substring(indexOf + 1));
 		context.put(
-			"servicePropsUtilPackage", _propsUtil.substring(0, indexOf));
+			"servicePropsUtilClassName", _propsUtil.substring(indexOf + 1));
+		context.put(
+			"servicePropsUtilPackagePath", _propsUtil.substring(0, indexOf));
 
 		String content = _processTemplate(_tplServicePropsUtil, context);
 

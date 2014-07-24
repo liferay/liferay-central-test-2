@@ -1,4 +1,4 @@
-package ${servicePropsUtilPackage};
+package ${servicePropsUtilPackagePath};
 
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * @author ${author}
  */
-public class ${servicePropsUtilClass} {
+public class ${servicePropsUtilClassName} {
 
 	public static void addProperties(Properties properties) {
 		_instance._configuration.addProperties(properties);
@@ -53,7 +53,7 @@ public class ${servicePropsUtilClass} {
 			getClass().getClassLoader(), "service");
 	}
 
-	private static ServiceProps _instance = new ${servicePropsUtilClass}();
+	private static ServiceProps _instance = new ${servicePropsUtilClassName}();
 
 	private Configuration _configuration;
 
