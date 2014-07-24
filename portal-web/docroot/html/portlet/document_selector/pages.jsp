@@ -23,9 +23,6 @@ Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
 request.setAttribute(WebKeys.GROUP, group);
 
-String eventName = ParamUtil.getString(request, "eventName");
-
-boolean checkContentDisplayPage = ParamUtil.getBoolean(request, "checkContentDisplayPage");
 boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector");
 %>
 
@@ -45,19 +42,20 @@ if (group.getPublicLayoutsPageCount() > 0) {
 if (group.getPrivateLayoutsPageCount() > 0) {
 	tabs1Names += "private-pages";
 }
-
-LayoutsAdminDisplayContext layoutsAdminDisplayContext = new LayoutsAdminDisplayContext(request, liferayPortletResponse);
 %>
 
 <liferay-ui:tabs names="<%= tabs1Names %>" refresh="false">
+
+	<%
+	boolean checkContentDisplayPage = ParamUtil.getBoolean(request, "checkContentDisplayPage");
+	String selectedLayoutIds = ParamUtil.getString(request, "selectedLayoutIds");
+
+	LayoutsAdminDisplayContext layoutsAdminDisplayContext = new LayoutsAdminDisplayContext(request, liferayPortletResponse);
+	%>
+
 	<c:if test="<%= group.getPublicLayoutsPageCount() > 0 %>">
 		<liferay-ui:section>
 			<div>
-
-				<%
-				String selectedLayoutIds = ParamUtil.getString(request, "selectedLayoutIds");
-				%>
-
 				<liferay-ui:layouts-tree
 					checkContentDisplayPage="<%= checkContentDisplayPage %>"
 					draggableTree="<%= false %>"
@@ -76,11 +74,6 @@ LayoutsAdminDisplayContext layoutsAdminDisplayContext = new LayoutsAdminDisplayC
 	<c:if test="<%= group.getPrivateLayoutsPageCount() > 0 %>">
 		<liferay-ui:section>
 			<div>
-
-				<%
-				String selectedLayoutIds = ParamUtil.getString(request, "selectedLayoutIds");
-				%>
-
 				<liferay-ui:layouts-tree
 					checkContentDisplayPage="<%= checkContentDisplayPage %>"
 					draggableTree="<%= false %>"
@@ -203,6 +196,10 @@ LayoutsAdminDisplayContext layoutsAdminDisplayContext = new LayoutsAdminDisplayC
 	<c:if test="<%= group.getPrivateLayoutsPageCount() > 0 %>">
 		bindTreeUI('treeContainerPrivatePagesOutput');
 	</c:if>
+
+	<%
+	String eventName = ParamUtil.getString(request, "eventName");
+	%>
 
 	Liferay.Util.selectEntityHandler('#<portlet:namespace />selectPageMessage', '<%= HtmlUtil.escapeJS(eventName) %>');
 </aui:script>

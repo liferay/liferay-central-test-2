@@ -188,7 +188,8 @@ public class LayoutsTreeTag extends IncludeTag {
 			String.valueOf(_expandFirstNode));
 		request.setAttribute(
 			"liferay-ui:layouts-tree:groupId", String.valueOf(_groupId));
-		request.setAttribute("liferay-ui:layouts-tree:incomplete", String.valueOf(_incomplete));
+		request.setAttribute(
+			"liferay-ui:layouts-tree:incomplete", String.valueOf(_incomplete));
 		request.setAttribute("liferay-ui:layouts-tree:modules", getModules());
 		request.setAttribute("liferay-ui:layouts-tree:portletURL", _portletURL);
 		request.setAttribute(
