@@ -19,7 +19,6 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 String articleId = ParamUtil.getString(request, "articleId");
-
 double sourceVersion = ParamUtil.getDouble(request, "sourceVersion");
 String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectVersionFm");
 
