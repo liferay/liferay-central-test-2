@@ -238,6 +238,7 @@ public class ComboServletTest extends PowerMockito {
 	private PortletApp _activitiesPortletApp;
 
 	private ComboServlet _comboServlet;
+	private MockHttpServletRequest _mockHttpServletRequest;
 	private MockServletContext _pluginServletContext;
 
 	@Mock
@@ -253,8 +254,6 @@ public class ComboServletTest extends PowerMockito {
 
 	@Mock
 	private Portlet _portletUndeployed;
-
-	private MockHttpServletRequest _mockHttpServletRequest;
 
 	@Rule
 	private TemporaryFolder _temporaryFolder = new TemporaryFolder();

@@ -390,8 +390,8 @@ public class ComboServlet extends HttpServlet {
 		}
 
 		url = new URL(
-			request.getScheme(), request.getLocalAddr(),
-			request.getLocalPort(), contextPath + resourcePath);
+			request.getScheme(), request.getLocalAddr(), request.getLocalPort(),
+			contextPath + resourcePath);
 
 		HttpURLConnection urlConnection =
 			(HttpURLConnection)url.openConnection();
