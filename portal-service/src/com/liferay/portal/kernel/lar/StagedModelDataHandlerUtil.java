@@ -311,7 +311,9 @@ public class StagedModelDataHandlerUtil {
 		StagedModel stagedModel = null;
 		Attribute classNameAttribute = null;
 
-		if (element.getName().equals("reference")) {
+		String elementName = element.getName();
+
+		if (elementName.equals("reference")) {
 			stagedModel = _getReferenceStagedModel(portletDataContext, element);
 
 			Element referenceStagedModelElement =
