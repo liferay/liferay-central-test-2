@@ -31,8 +31,8 @@ public class AppiumWebDriverImpl extends BaseWebDriverImpl {
 			new AppiumDriver(_url, _desiredCapabilities));
 	}
 
-	private static DesiredCapabilities _desiredCapabilities = null;
-	private static URL _url = null;
+	private static DesiredCapabilities _desiredCapabilities;
+	private static URL _url;
 
 	static {
 		_desiredCapabilities = DesiredCapabilities.android();
