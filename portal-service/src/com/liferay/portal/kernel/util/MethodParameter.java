@@ -23,7 +23,7 @@ import java.util.List;
 public class MethodParameter {
 
 	public MethodParameter(
-			String name, String signatures, Class<?> type, boolean init) {
+		String name, String signatures, Class<?> type, boolean init) {
 
 		_name = name;
 		_signatures = signatures;
