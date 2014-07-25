@@ -332,7 +332,7 @@ public class VerifyGroup extends VerifyProcess {
 
 			if (portlet == null) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Removing type settings property: " + key);
+					_log.info("Removing type settings property " + key);
 				}
 
 				iterator.remove();
@@ -347,7 +347,7 @@ public class VerifyGroup extends VerifyProcess {
 				!portletDataHandler.isDataSiteLevel()) {
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Removing type settings property: " + key);
+					_log.info("Removing type settings property " + key);
 				}
 
 				iterator.remove();
