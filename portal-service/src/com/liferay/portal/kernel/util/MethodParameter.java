@@ -23,13 +23,13 @@ import java.util.List;
 public class MethodParameter {
 
 	public MethodParameter(
-		String name, String signatures, Class<?> type, boolean init) {
+		String name, String signatures, Class<?> type, boolean initialize) {
 
 		_name = name;
 		_signatures = signatures;
 		_type = type;
 
-		if (init) {
+		if (initialize) {
 			try {
 				getGenericTypes();
 			}
