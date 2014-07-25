@@ -30,7 +30,7 @@ import java.util.Map;
 public class LockListenerRegistryUtil {
 
 	public static LockListener getLockListener(String className) {
-		return _instance._lockListenerMap.get(className);
+		return _instance._lockListeners.get(className);
 	}
 
 	private LockListenerRegistryUtil() {
@@ -45,10 +45,9 @@ public class LockListenerRegistryUtil {
 	private static LockListenerRegistryUtil _instance =
 		new LockListenerRegistryUtil();
 
-	private ServiceTracker<?, LockListener> _serviceTracker;
-
-	private Map<String, LockListener> _lockListenerMap =
+	private Map<String, LockListener> _lockListeners =
 		new HashMap<String, LockListener>();
+	private ServiceTracker<?, LockListener> _serviceTracker;
 
 	private class LockListenerServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<LockListener, LockListener> {
@@ -61,7 +60,7 @@ public class LockListenerRegistryUtil {
 
 			LockListener lockListener = registry.getService(serviceReference);
 
-			_lockListenerMap.put(lockListener.getClassName(), lockListener);
+			_lockListeners.put(lockListener.getClassName(), lockListener);
 
 			return lockListener;
 		}
@@ -81,7 +80,8 @@ public class LockListenerRegistryUtil {
 
 			registry.ungetService(serviceReference);
 
-			_lockListenerMap.remove(lockListener);
+			_lockListeners.remove(lockListener);
 		}
 	}
+
 }
