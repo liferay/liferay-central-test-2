@@ -87,11 +87,12 @@ public class ServiceBag<T> {
 
 				if (previousService == null) {
 
-					// There is no previous service, so we need to unwrap portal
-					// classloader bean handler and change the target source
+					// There is no previous service, so we need to unwrap the
+					// portal class loader bean handler and change the target
+					// source
 
 					if (!(wrappedService instanceof ServiceWrapper) &&
-							ProxyUtil.isProxyClass(wrappedService.getClass())) {
+						ProxyUtil.isProxyClass(wrappedService.getClass())) {
 
 						InvocationHandler invocationHandler =
 							ProxyUtil.getInvocationHandler(wrappedService);
