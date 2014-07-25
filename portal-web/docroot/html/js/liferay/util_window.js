@@ -1,21 +1,21 @@
 AUI.add(
 	'liferay-util-window',
 	function(A) {
+		var DOM = A.DOM;
 		var Lang = A.Lang;
 		var UA = A.UA;
-		var DOM = A.DOM;
 
 		var Util = Liferay.Util;
 		var Window = Util.Window;
 
-		var isIE9 = (UA.ie == 9);
+		var IE9 = (UA.ie == 9);
 
 		var setWidth = function(modal, width) {
-			if (isIE9) {
+			if (IE9) {
 				modal.set('width', width + 1);
 				modal.set('width', width);
 			}
-		}
+		};
 
 		var LiferayModal = A.Component.create(
 			{
@@ -138,7 +138,7 @@ AUI.add(
 						function(event) {
 							var openerInFrame = !!modal._opener.frameElement;
 
-							if (isIE9 && openerInFrame) {
+							if (IE9 && openerInFrame) {
 								instance._syncWindowsUI();
 							}
 
