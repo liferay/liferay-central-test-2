@@ -629,14 +629,17 @@ public interface UserService extends BaseService {
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public boolean sendPasswordByEmailAddress(long companyId,
-		java.lang.String emailAddress)
+		java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public boolean sendPasswordByScreenName(long companyId,
-		java.lang.String screenName)
+		java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public boolean sendPasswordByUserId(long companyId, long userId)
+	public boolean sendPasswordByUserId(long companyId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**

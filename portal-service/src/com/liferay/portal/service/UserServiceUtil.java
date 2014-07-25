@@ -692,20 +692,28 @@ public class UserServiceUtil {
 	}
 
 	public static boolean sendPasswordByEmailAddress(long companyId,
-		java.lang.String emailAddress)
+		java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().sendPasswordByEmailAddress(companyId, emailAddress);
+		return getService()
+				   .sendPasswordByEmailAddress(companyId, emailAddress,
+			serviceContext);
 	}
 
 	public static boolean sendPasswordByScreenName(long companyId,
-		java.lang.String screenName)
+		java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().sendPasswordByScreenName(companyId, screenName);
+		return getService()
+				   .sendPasswordByScreenName(companyId, screenName,
+			serviceContext);
 	}
 
-	public static boolean sendPasswordByUserId(long companyId, long userId)
+	public static boolean sendPasswordByUserId(long companyId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().sendPasswordByUserId(companyId, userId);
+		return getService()
+				   .sendPasswordByUserId(companyId, userId, serviceContext);
 	}
 
 	/**
