@@ -35,17 +35,16 @@ public class Summary {
 	public Summary(
 		Locale locale, String title, String content, PortletURL portletURL) {
 
+		_locale = locale;
 		_title = title;
 		_content = content;
-		_locale = locale;
 		_portletURL = portletURL;
 	}
 
 	public Summary(String title, String content, PortletURL portletURL) {
-		_title = title;
-		_content = content;
-		_locale = LocaleThreadLocal.getThemeDisplayLocale();
-		_portletURL = portletURL;
+		this(
+			LocaleThreadLocal.getThemeDisplayLocale(), title, content,
+			portletURL);
 	}
 
 	public String getContent() {
