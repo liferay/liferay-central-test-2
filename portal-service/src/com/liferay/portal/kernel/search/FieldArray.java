@@ -43,12 +43,12 @@ public class FieldArray extends Field {
 
 	@Override
 	public void addField(Field field) {
-		_arrayElementsFields.add(field);
+		_fields.add(field);
 	}
 
 	@Override
 	public List<Field> getFields() {
-		return _arrayElementsFields;
+		return _fields;
 	}
 
 	@Override
@@ -56,6 +56,6 @@ public class FieldArray extends Field {
 		return true;
 	}
 
-	private List<Field> _arrayElementsFields = new ArrayList<Field>();
+	private List<Field> _fields = new ArrayList<Field>();
 
 }
