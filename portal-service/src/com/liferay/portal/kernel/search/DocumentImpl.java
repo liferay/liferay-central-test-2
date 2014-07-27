@@ -787,10 +787,10 @@ public class DocumentImpl implements Document {
 		return field;
 	}
 
-	protected Field doGetField(String name, boolean createIfNotExists) {
+	protected Field doGetField(String name, boolean createIfNew) {
 		Field field = _fields.get(name);
 
-		if ((field == null) && createIfNotExists) {
+		if ((field == null) && createIfNew) {
 			field = new Field(name);
 
 			_fields.put(name, field);
