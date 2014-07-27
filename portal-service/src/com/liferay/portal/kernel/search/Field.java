@@ -233,8 +233,8 @@ public class Field implements Serializable {
 		setTokenized(tokenized);
 	}
 
-	public void addField(Field nested) {
-		_nestedFields.add(nested);
+	public void addField(Field field) {
+		_nestedFields.add(field);
 	}
 
 	public float getBoost() {
@@ -257,8 +257,8 @@ public class Field implements Serializable {
 		return _numericClass;
 	}
 
-	public Field getParent() {
-		return _parent;
+	public Field getParentField() {
+		return _parentField;
 	}
 
 	public String getValue() {
@@ -292,7 +292,11 @@ public class Field implements Serializable {
 	}
 
 	public boolean isNested() {
-		return getParent() != null;
+		if (getParentField() != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isNumeric() {
@@ -323,8 +327,8 @@ public class Field implements Serializable {
 		_numericClass = numericClass;
 	}
 
-	public void setParent(Field _parent) {
-		this._parent = _parent;
+	public void setParentField(Field parentField) {
+		_parentField = parentField;
 	}
 
 	public void setTokenized(boolean tokenized) {
@@ -415,7 +419,7 @@ public class Field implements Serializable {
 	private List<Field> _nestedFields = new ArrayList<Field>();
 	private boolean _numeric;
 	private Class<? extends Number> _numericClass;
-	private Field _parent;
+	private Field _parentField;
 	private boolean _tokenized;
 	private String[] _values;
 
