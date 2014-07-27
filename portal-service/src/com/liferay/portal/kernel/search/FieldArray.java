@@ -51,6 +51,7 @@ public class FieldArray extends Field {
 		return _arrayElementsFields;
 	}
 
+	@Override
 	public boolean isArray() {
 		return true;
 	}
