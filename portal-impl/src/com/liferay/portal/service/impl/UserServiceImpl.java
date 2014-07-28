@@ -1011,17 +1011,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.hasRoleUser(companyId, name, userId, inherited);
 	}
 
-	/**
-	 * Sends the password email to the user with the email address. The content
-	 * of this email can be specified in <code>portal.properties</code> with the
-	 * <code>admin.email.password</code> keys and overridden through the
-	 * "Portal Settings" UI.
-	 *
-	 * @param  companyId the primary key of the user's company
-	 * @param  emailAddress the user's email address
-	 * @throws PortalException if a user with the email address could not be
-	 *         found
-	 */
 	@Override
 	public boolean sendPasswordByEmailAddress(
 			long companyId, String emailAddress)
