@@ -239,8 +239,6 @@ public class EditTemplateAction extends PortletAction {
 	protected String getScript(UploadPortletRequest uploadPortletRequest)
 		throws Exception {
 
-		String type = ParamUtil.getString(uploadPortletRequest, "type");
-
 		String scriptContent = ParamUtil.getString(
 			uploadPortletRequest, "scriptContent");
 
@@ -253,6 +251,8 @@ public class EditTemplateAction extends PortletAction {
 				throw new TemplateScriptException();
 			}
 		}
+
+		String type = ParamUtil.getString(uploadPortletRequest, "type");
 
 		if (type.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
 			DDMForm ddmForm = DDMFormJSONDeserializerUtil.deserialize(
