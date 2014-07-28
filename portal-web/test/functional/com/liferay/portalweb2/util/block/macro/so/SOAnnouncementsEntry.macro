@@ -271,7 +271,6 @@
 		<var name="expirationDateMonth" value="${expirationDateMonth?increment()}" />
 
 		<var locator-key="DISPLAY_DATE_DATE_YEAR" name="expirationDateYear" path="SODashboardAddAnnouncementsEntry" />
-
 		<var name="expirationDate" value="${expirationDateMonth}/${expirationDateDay}/${expirationDateYear}" />
 
 		<execute action="SODashboardAddAnnouncementsEntry#type" locator-key1="EXPIRATION_DATE_DATE_INPUT" value1="${expirationDate}" />
@@ -307,7 +306,6 @@
 		<var locator-key="DISPLAY_DATE_DATE_MERIDIAN" name="expirationDateMeridian" path="SODashboardAddAnnouncementsEntry" />
 		<var name="expirationDateMeridian" value="${expirationDateMeridian?replace('0', 'AM')}" />
 		<var name="expirationDateMeridian" value="${expirationDateMeridian?replace('1', 'PM')}" />
-
 		<var name="expirationTime" value="${expirationDateHour}:${expirationDateMinuteFuture} ${expirationDateMeridian}" />
 
 		<execute action="SODashboardAddAnnouncementsEntry#type" locator-key1="EXPIRATION_DATE_TIME_INPUT" value1="${expirationTime}" />

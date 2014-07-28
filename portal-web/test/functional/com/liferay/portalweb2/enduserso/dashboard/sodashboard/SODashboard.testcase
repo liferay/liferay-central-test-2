@@ -1104,19 +1104,19 @@
 			<var name="activitiesPortletLocalized" value="活动" />
 			<var name="announcementsPortletLocalized" value="公告" />
 			<var name="contactsCenterPageLocalized" value="通讯录" />
-			<var name="contactsCenterPortletLocalized" value="�?�系中心" />
+			<var name="contactsCenterPortletLocalized" value="联系中心" />
 			<var name="dashboardPageLocalized" value="Dashboard" />
 			<var name="documentsAndMediaPortletLocalized" value="文档媒体库" />
 			<var name="eventsPortletLocalized" value="事件" />
-			<var name="messagesPageLocalized" value="消�?�" />
-			<var name="microblogsPageLocalized" value="微�?�" />
-			<var name="microblogsPortletLocalized" value="微�?�" />
-			<var name="microblogsStatusUpdatePortletLocalized" value="微�?�状�?更新" />
+			<var name="messagesPageLocalized" value="消息" />
+			<var name="microblogsPageLocalized" value="微博" />
+			<var name="microblogsPortletLocalized" value="微博" />
+			<var name="microblogsStatusUpdatePortletLocalized" value="微博状态更新" />
 			<var name="myDocumentsPageLocalized" value="我的文档" />
-			<var name="privateMessagingPortletLocalized" value="�?人消�?�" />
+			<var name="privateMessagingPortletLocalized" value="私人消息" />
 			<var name="tasksPageLocalized" value="任务" />
 			<var name="tasksPortletLocalized" value="任务" />
-			<var name="upcomingTasksPortletLocalized" value="�?�将开始的任务" />
+			<var name="upcomingTasksPortletLocalized" value="即将开始的任务" />
 		</execute>
 	</command>
 
