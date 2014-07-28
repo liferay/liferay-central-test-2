@@ -234,7 +234,7 @@ public class Field implements Serializable {
 	}
 
 	public void addField(Field field) {
-		_nestedFields.add(field);
+		_fields.add(field);
 	}
 
 	public float getBoost() {
@@ -242,7 +242,7 @@ public class Field implements Serializable {
 	}
 
 	public List<Field> getFields() {
-		return _nestedFields;
+		return _fields;
 	}
 
 	public Map<Locale, String> getLocalizedValues() {
@@ -352,7 +352,7 @@ public class Field implements Serializable {
 
 			field.addField(new Field("value", values));
 
-			_doAddField(field);
+			_addField(field);
 
 			return this;
 		}
@@ -362,25 +362,25 @@ public class Field implements Serializable {
 		}
 
 		public NestedFieldBuilder endField() {
-			if (_fields.size() > 1) {
-				_fields.removeLast();
+			if (_nestedFieldsBuilderFields.size() > 1) {
+				_nestedFieldsBuilderFields.removeLast();
 			}
 
 			return this;
 		}
 
 		public Field getField() {
-			if (!_fields.isEmpty()) {
-				return _fields.getLast();
+			if (!_nestedFieldsBuilderFields.isEmpty()) {
+				return _nestedFieldsBuilderFields.getLast();
 			}
 
 			return null;
 		}
 
 		public NestedFieldBuilder startArray(String name) {
-			FieldArray field = new FieldArray(name);
+			FieldArray fieldArray = new FieldArray(name);
 
-			return _doStartField(field);
+			return _startField(fieldArray);
 		}
 
 		public NestedFieldBuilder startField() {
@@ -390,33 +390,34 @@ public class Field implements Serializable {
 		public NestedFieldBuilder startField(String name) {
 			Field field = new Field(name);
 
-			return _doStartField(field);
+			return _startField(field);
 		}
 
-		private void _doAddField(Field newField) {
-			Field current = _fields.getLast();
+		private void _addField(Field field) {
+			Field lastField = _nestedFieldsBuilderFields.getLast();
 
-			current.addField(newField);
+			lastField.addField(field);
 		}
 
-		private NestedFieldBuilder _doStartField(Field field) {
-			if (!_fields.isEmpty()) {
-				_doAddField(field);
+		private NestedFieldBuilder _startField(Field field) {
+			if (!_nestedFieldsBuilderFields.isEmpty()) {
+				_addField(field);
 			}
 
-			_fields.add(field);
+			_nestedFieldsBuilderFields.add(field);
 
 			return this;
 		}
 
-		private LinkedList<Field> _fields = new LinkedList<Field>();
+		private LinkedList<Field> _nestedFieldsBuilderFields =
+			new LinkedList<Field>();
 
 	}
 
 	private float _boost = 1;
 	private Map<Locale, String> _localizedValues;
 	private String _name;
-	private List<Field> _nestedFields = new ArrayList<Field>();
+	private List<Field> _fields = new ArrayList<Field>();
 	private boolean _numeric;
 	private Class<? extends Number> _numericClass;
 	private Field _parentField;
