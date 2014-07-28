@@ -98,7 +98,6 @@ public class DDMImplTest extends BaseDDMTestCase {
 		testValues(
 			actualContentField.getValues(LocaleUtil.US), "Content 1",
 			"Content 3");
-
 		testValues(
 			actualContentField.getValues(LocaleUtil.BRAZIL), "Conteudo 1",
 			"Conteudo 3");
@@ -187,7 +186,6 @@ public class DDMImplTest extends BaseDDMTestCase {
 		testValues(
 			actualContentField.getValues(LocaleUtil.US), "Content 1",
 			"Content 2", "Content 3");
-
 		testValues(
 			actualContentField.getValues(LocaleUtil.BRAZIL), "Conteudo 1",
 			"Content 2", "Conteudo 3");
@@ -305,7 +303,6 @@ public class DDMImplTest extends BaseDDMTestCase {
 		testValues(
 			actualNameField.getValues(LocaleUtil.US), "Paul Smith",
 			"Joe William", "Charlie Parker");
-
 		testValues(
 			actualNameField.getValues(LocaleUtil.BRAZIL), "Paulo", "Joao",
 			"Charlie Parker");
@@ -318,7 +315,6 @@ public class DDMImplTest extends BaseDDMTestCase {
 			actualPhoneField.getValues(LocaleUtil.US), "Paul Smith phone",
 			"Joe William Phone 1", "Joe William Phone 2",
 			"Charlie Parker phone");
-
 		testValues(
 			actualPhoneField.getValues(LocaleUtil.BRAZIL),
 			"Telefone de Paulo 1", "Telefone de Joao", "Joe William Phone 2",
@@ -374,7 +370,6 @@ public class DDMImplTest extends BaseDDMTestCase {
 		testValues(
 			actualContentField.getValues(LocaleUtil.US), "Content 1",
 			"Content 2", "Content 3");
-
 		testValues(
 			actualContentField.getValues(LocaleUtil.BRAZIL), "Conteudo 1",
 			"Conteudo 2", "Content 3");
