@@ -51,7 +51,6 @@ import com.liferay.portal.security.membershippolicy.UserGroupMembershipPolicyUti
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -1013,30 +1012,29 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 	@Override
 	public boolean sendPasswordByEmailAddress(
-			long companyId, String emailAddress)
+			long companyId, String emailAddress, ServiceContext serviceContext)
 		throws PortalException {
 
 		return userLocalService.sendPasswordByEmailAddress(
-			companyId, emailAddress,
-			ServiceContextThreadLocal.getServiceContext());
+			companyId, emailAddress, serviceContext);
 	}
 
 	@Override
-	public boolean sendPasswordByScreenName(long companyId, String screenName)
+	public boolean sendPasswordByScreenName(
+			long companyId, String screenName, ServiceContext serviceContext)
 		throws PortalException {
 
 		return userLocalService.sendPasswordByScreenName(
-			companyId, screenName,
-			ServiceContextThreadLocal.getServiceContext());
+			companyId, screenName, serviceContext);
 	}
 
 	@Override
-	public boolean sendPasswordByUserId(long companyId, long userId)
+	public boolean sendPasswordByUserId(
+			long companyId, long userId, ServiceContext serviceContext)
 		throws PortalException {
 
 		return userLocalService.sendPasswordByUserId(
-			companyId, userId,
-			ServiceContextThreadLocal.getServiceContext());
+			companyId, userId, serviceContext);
 	}
 
 	/**
