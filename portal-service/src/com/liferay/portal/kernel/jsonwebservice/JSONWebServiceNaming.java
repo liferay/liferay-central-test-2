@@ -100,14 +100,15 @@ public class JSONWebServiceNaming {
 			return true;
 		}
 
-		Class<?>[] parameterTypes = method.getParameterTypes();
-
 		MethodParameter[] methodParameters =
 			MethodParametersResolverUtil.resolveMethodParameters(method);
 
+		Class<?>[] parameterTypes = method.getParameterTypes();
+
 		for (int i = 0; i < parameterTypes.length; i++) {
-			Class<?> parameterType = parameterTypes[i];
 			MethodParameter methodParameter = methodParameters[i];
+
+			Class<?> parameterType = parameterTypes[i];
 
 			if (parameterType.isArray()) {
 				parameterType = parameterType.getComponentType();
