@@ -415,9 +415,9 @@ public class Field implements Serializable {
 	}
 
 	private float _boost = 1;
+	private List<Field> _fields = new ArrayList<Field>();
 	private Map<Locale, String> _localizedValues;
 	private String _name;
-	private List<Field> _fields = new ArrayList<Field>();
 	private boolean _numeric;
 	private Class<? extends Number> _numericClass;
 	private Field _parentField;
