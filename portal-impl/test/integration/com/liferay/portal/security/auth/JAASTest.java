@@ -328,13 +328,13 @@ public class JAASTest {
 			}
 		);
 
+		MainServlet mainServlet = new MainServlet();
+
 		MockServletContext mockServletContext =
 			new AutoDeployMockServletContext(new FileSystemResourceLoader());
 
 		MockServletConfig mockServletConfig = new MockServletConfig(
 			mockServletContext);
-
-		MainServlet mainServlet = new MainServlet();
 
 		try {
 			mainServlet.init(mockServletConfig);
