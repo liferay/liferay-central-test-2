@@ -1016,27 +1016,27 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long companyId, String emailAddress)
 		throws PortalException {
 
-		User user = userPersistence.findByC_EA(companyId, emailAddress);
-
-		return sendPassword(user);
+		return userLocalService.sendPasswordByEmailAddress(
+			companyId, emailAddress,
+			ServiceContextThreadLocal.getServiceContext());
 	}
 
 	@Override
 	public boolean sendPasswordByScreenName(long companyId, String screenName)
 		throws PortalException {
 
-		User user = userPersistence.findByC_SN(companyId, screenName);
-
-		return sendPassword(user);
+		return userLocalService.sendPasswordByScreenName(
+			companyId, screenName,
+			ServiceContextThreadLocal.getServiceContext());
 	}
 
 	@Override
 	public boolean sendPasswordByUserId(long companyId, long userId)
 		throws PortalException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		return sendPassword(user);
+		return userLocalService.sendPasswordByUserId(
+			companyId, userId,
+			ServiceContextThreadLocal.getServiceContext());
 	}
 
 	/**
@@ -2630,15 +2630,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			UserGroupMembershipPolicyUtil.propagateMembership(
 				userIds, userGroupIds, null);
 		}
-	}
-
-	protected boolean sendPassword(User user) throws PortalException {
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
-		return userLocalService.sendPassword(
-			user.getCompanyId(), user.getEmailAddress(), null, null, null, null,
-			serviceContext);
 	}
 
 	protected void updateAnnouncementsDeliveries(
