@@ -3753,7 +3753,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Map<Locale, String> localizedSubjectMap = null;
 		Map<Locale, String> localizedBodyMap = null;
 
-		String prefix;
+		String prefix = null;
 
 		if (company.isSendPasswordResetLink()) {
 			prefix = "adminEmailPasswordReset";
