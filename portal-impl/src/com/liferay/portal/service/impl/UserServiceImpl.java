@@ -1021,6 +1021,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return sendPassword(user);
 	}
 
+	@Override
 	public boolean sendPasswordByScreenName(long companyId, String screenName)
 		throws PortalException {
 
@@ -1029,6 +1030,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return sendPassword(user);
 	}
 
+	@Override
 	public boolean sendPasswordByUserId(long companyId, long userId)
 		throws PortalException {
 
