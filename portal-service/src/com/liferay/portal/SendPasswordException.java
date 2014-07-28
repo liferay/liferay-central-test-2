@@ -19,7 +19,7 @@ import com.liferay.portal.model.Company;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Jose M. Navarro
+ * @author José Manuel Navarro
  */
 public class SendPasswordException extends PortalException {
 
