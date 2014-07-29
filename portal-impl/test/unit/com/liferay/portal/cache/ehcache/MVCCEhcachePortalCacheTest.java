@@ -81,7 +81,7 @@ public class MVCCEhcachePortalCacheTest {
 	@Test
 	public void testMVCCCacheWithAdvice() throws Exception {
 
-		// Concurrent Put 1
+		// Concurrent put 1
 
 		MemoryPortalCacheAdvice.block();
 
@@ -124,7 +124,7 @@ public class MVCCEhcachePortalCacheTest {
 		_testCacheListener.assertActionsCount(1);
 		_testCacheListener.reset();
 
-		// Concurrent Put 2
+		// Concurrent put 2
 
 		MemoryPortalCacheAdvice.block();
 
@@ -167,7 +167,7 @@ public class MVCCEhcachePortalCacheTest {
 		_testCacheListener.assertActionsCount(1);
 		_testCacheListener.reset();
 
-		// Put with Exception
+		// Put with exception
 
 		MemoryPortalCacheAdvice.setException();
 
