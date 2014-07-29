@@ -251,8 +251,8 @@ public class WebDriverToSeleniumBridge
 			int offsetX = GetterUtil.getInteger(coords[0]);
 			int offsetY = GetterUtil.getInteger(coords[1]);
 
-			int clickDestinationX;
-			int clickDestinationY;
+			int clickDestinationX = 0;
+			int clickDestinationY = 0;
 
 			if (scrollIntoView) {
 				scrollWebElementIntoView(webElement);
