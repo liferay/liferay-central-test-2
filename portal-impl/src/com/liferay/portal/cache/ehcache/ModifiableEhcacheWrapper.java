@@ -308,6 +308,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Set<Attribute> getSearchAttributes() throws CacheException {
 		return _ehcache.getSearchAttributes();
 	}

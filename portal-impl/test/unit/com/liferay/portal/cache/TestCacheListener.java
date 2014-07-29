@@ -156,14 +156,17 @@ public class TestCacheListener<K extends Serializable, V>
 			return false;
 		}
 
+		@SuppressWarnings("unused")
 		public ActionType getActionType() {
 			return _actionType;
 		}
 
+		@SuppressWarnings("unused")
 		public Object getKey() {
 			return _key;
 		}
 
+		@SuppressWarnings("unused")
 		public Object getValue() {
 			return _value;
 		}
