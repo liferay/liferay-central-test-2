@@ -33,36 +33,35 @@ public abstract class BaseDBTestCase {
 	public void testReplaceTemplate() throws IOException {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("select * from SomeTable WHERE someColumn1 = ");
-		sb.append(getDB().getTemplateFalse());
-		sb.append(" AND someColumn2 = ");
-		sb.append(getDB().getTemplateTrue());
+		sb.append("select * from SomeTable where someColumn1 = ");
+		sb.append(_db.getTemplateFalse());
+		sb.append(" and someColumn2 = ");
+		sb.append(_db.getTemplateTrue());
 		sb.append(StringPool.NEW_LINE);
 
 		Assert.assertEquals(
-			sb.toString(), buildSQL(QUERY_WITH_BOOLEAN_LITERAL));
-
+			sb.toString(), buildSQL(BOOLEAN_LITERAL_QUERY));
 		Assert.assertEquals(
-			QUERY_WITH_BOOLEAN_PATTERN + StringPool.NEW_LINE,
-			buildSQL(QUERY_WITH_BOOLEAN_PATTERN));
+			BOOLEAN_PATTERN_QUERY + StringPool.NEW_LINE,
+			buildSQL(BOOLEAN_PATTERN_QUERY));
 	}
 
 	protected String buildSQL(String query) throws IOException {
-		DB db = getDB();
-
-		return db.buildSQL(query);
+		return _db.buildSQL(query);
 	}
 
 	protected abstract DB getDB();
 
-	protected static final String QUERY_WITH_BOOLEAN_LITERAL =
-		"SELECT * FROM SomeTable WHERE someColumn1 = FALSE " +
-			"AND someColumn2 = TRUE";
+	protected static final String BOOLEAN_LITERAL_QUERY =
+		"select * from SomeTable where someColumn1 = FALSE and someColumn2 = " +
+			"TRUE";
 
-	protected static final String QUERY_WITH_BOOLEAN_PATTERN =
-		"SELECT * FROM SomeTable WHERE someColumn1 = [$FALSE$] " +
-			"AND someColumn2 = [$TRUE$]";
+	protected static final String BOOLEAN_PATTERN_QUERY =
+		"select * from SomeTable where someColumn1 = [$FALSE$] and " +
+			"someColumn2 = [$TRUE$]";
 
 	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
+	
+	private DB _db = getDB();
 
 }
