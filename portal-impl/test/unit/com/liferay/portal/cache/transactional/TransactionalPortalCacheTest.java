@@ -186,7 +186,7 @@ public class TransactionalPortalCacheTest {
 
 	@AdviseWith(adviceClasses = {EnableTransactionalCacheAdvice.class})
 	@Test
-	public void testTransactionalCacheWithParameterValidatation() {
+	public void testTransactionalCacheWithParameterValidation() {
 		TransactionalPortalCacheHelper.begin();
 
 		// Get with null key
