@@ -826,8 +826,8 @@ public class DocumentImpl implements Document {
 
 		Field field = createField(name);
 
-		field.setValues(values);
 		field.setSortable(sortable);
+		field.setValues(values);
 
 		return field;
 	}
