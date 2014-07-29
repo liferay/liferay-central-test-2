@@ -39,8 +39,7 @@ public abstract class BaseDBTestCase {
 		sb.append(_db.getTemplateTrue());
 		sb.append(StringPool.NEW_LINE);
 
-		Assert.assertEquals(
-			sb.toString(), buildSQL(BOOLEAN_LITERAL_QUERY));
+		Assert.assertEquals(sb.toString(), buildSQL(BOOLEAN_LITERAL_QUERY));
 		Assert.assertEquals(
 			BOOLEAN_PATTERN_QUERY + StringPool.NEW_LINE,
 			buildSQL(BOOLEAN_PATTERN_QUERY));
@@ -61,7 +60,7 @@ public abstract class BaseDBTestCase {
 			"someColumn2 = [$TRUE$]";
 
 	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
-	
+
 	private DB _db = getDB();
 
 }
