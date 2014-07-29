@@ -33,9 +33,9 @@ public abstract class BaseDBTestCase {
 	public void testReplaceTemplate() throws IOException {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("SELECT * FROM someTable WHERE someColumn = ");
+		sb.append("select * from SomeTable WHERE someColumn1 = ");
 		sb.append(getDB().getTemplateFalse());
-		sb.append(" AND anotherColumn = ");
+		sb.append(" AND someColumn2 = ");
 		sb.append(getDB().getTemplateTrue());
 		sb.append(StringPool.NEW_LINE);
 
@@ -56,12 +56,12 @@ public abstract class BaseDBTestCase {
 	protected abstract DB getDB();
 
 	protected static final String QUERY_WITH_BOOLEAN_LITERAL =
-		"SELECT * FROM someTable WHERE someColumn = FALSE " +
-			"AND anotherColumn = TRUE";
+		"SELECT * FROM SomeTable WHERE someColumn1 = FALSE " +
+			"AND someColumn2 = TRUE";
 
 	protected static final String QUERY_WITH_BOOLEAN_PATTERN =
-		"SELECT * FROM someTable WHERE someColumn = [$FALSE$] " +
-			"AND anotherColumn = [$TRUE$]";
+		"SELECT * FROM SomeTable WHERE someColumn1 = [$FALSE$] " +
+			"AND someColumn2 = [$TRUE$]";
 
 	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
 
