@@ -182,6 +182,7 @@ public class TestCacheListener<K extends Serializable, V>
 		private ActionType _actionType;
 		private Object _key;
 		private Object _value;
+
 	}
 
 	private enum ActionType {

@@ -95,8 +95,9 @@ public class TransactionalPortalCacheTest {
 
 		_transactionalPortalCache.put(_KEY_2, _VALUE_2);
 
-		_testCacheListener.assertPut(_KEY_2, _VALUE_2);
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertPut(_KEY_2, _VALUE_2);
+
 		_testCacheListener.reset();
 
 		Assert.assertEquals(_VALUE_1, _transactionalPortalCache.get(_KEY_1));
@@ -106,8 +107,9 @@ public class TransactionalPortalCacheTest {
 
 		_transactionalPortalCache.put(_KEY_1, _VALUE_2, 10);
 
-		_testCacheListener.assertUpdated(_KEY_1, _VALUE_2);
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertUpdated(_KEY_1, _VALUE_2);
+
 		_testCacheListener.reset();
 
 		Assert.assertEquals(_VALUE_2, _transactionalPortalCache.get(_KEY_1));
@@ -126,8 +128,9 @@ public class TransactionalPortalCacheTest {
 
 		_transactionalPortalCache.remove(_KEY_1);
 
-		_testCacheListener.assertRemoved(_KEY_1, _VALUE_2);
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertRemoved(_KEY_1, _VALUE_2);
+
 		_testCacheListener.reset();
 
 		Assert.assertNull(_transactionalPortalCache.get(_KEY_1));
@@ -137,8 +140,9 @@ public class TransactionalPortalCacheTest {
 
 		_transactionalPortalCache.removeAll();
 
-		_testCacheListener.assertRemoveAll();
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertRemoveAll();
+
 		_testCacheListener.reset();
 
 		Assert.assertNull(_transactionalPortalCache.get(_KEY_1));
@@ -409,8 +413,9 @@ public class TransactionalPortalCacheTest {
 
 		TransactionalPortalCacheHelper.commit();
 
-		_testCacheListener.assertRemoveAll();
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertRemoveAll();
+
 		_testCacheListener.reset();
 
 		Assert.assertNull(_transactionalPortalCache.get(_KEY_1));
@@ -422,8 +427,9 @@ public class TransactionalPortalCacheTest {
 
 		_portalCache.put(_KEY_1, _VALUE_1);
 
-		_testCacheListener.assertPut(_KEY_1, _VALUE_1);
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertPut(_KEY_1, _VALUE_1);
+
 		_testCacheListener.reset();
 
 		TransactionalPortalCacheHelper.begin();
@@ -458,9 +464,10 @@ public class TransactionalPortalCacheTest {
 
 		TransactionalPortalCacheHelper.commit();
 
+		_testCacheListener.assertActionsCount(2);
 		_testCacheListener.assertPut(_KEY_2, _VALUE_1);
 		_testCacheListener.assertRemoved(_KEY_1, _VALUE_1);
-		_testCacheListener.assertActionsCount(2);
+
 		_testCacheListener.reset();
 
 		Assert.assertNull(_transactionalPortalCache.get(_KEY_1));
@@ -472,8 +479,9 @@ public class TransactionalPortalCacheTest {
 
 		_portalCache.removeAll();
 
-		_testCacheListener.assertRemoveAll();
 		_testCacheListener.assertActionsCount(1);
+		_testCacheListener.assertRemoveAll();
+
 		_testCacheListener.reset();
 
 		TransactionalPortalCacheHelper.begin();
