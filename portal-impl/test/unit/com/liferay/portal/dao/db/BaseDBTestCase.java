@@ -39,10 +39,10 @@ public abstract class BaseDBTestCase {
 		sb.append(_db.getTemplateTrue());
 		sb.append(StringPool.NEW_LINE);
 
-		Assert.assertEquals(sb.toString(), buildSQL(BOOLEAN_LITERAL_QUERY));
+		Assert.assertEquals(sb.toString(), buildSQL(_BOOLEAN_LITERAL_QUERY));
 		Assert.assertEquals(
-			BOOLEAN_PATTERN_QUERY + StringPool.NEW_LINE,
-			buildSQL(BOOLEAN_PATTERN_QUERY));
+			_BOOLEAN_PATTERN_QUERY + StringPool.NEW_LINE,
+			buildSQL(_BOOLEAN_PATTERN_QUERY));
 	}
 
 	protected String buildSQL(String query) throws IOException {
@@ -51,15 +51,15 @@ public abstract class BaseDBTestCase {
 
 	protected abstract DB getDB();
 
-	protected static final String BOOLEAN_LITERAL_QUERY =
+	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
+
+	private static final String _BOOLEAN_LITERAL_QUERY =
 		"select * from SomeTable where someColumn1 = FALSE and someColumn2 = " +
 			"TRUE";
 
-	protected static final String BOOLEAN_PATTERN_QUERY =
+	private static final String _BOOLEAN_PATTERN_QUERY =
 		"select * from SomeTable where someColumn1 = [$FALSE$] and " +
 			"someColumn2 = [$TRUE$]";
-
-	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
 
 	private DB _db = getDB();
 
