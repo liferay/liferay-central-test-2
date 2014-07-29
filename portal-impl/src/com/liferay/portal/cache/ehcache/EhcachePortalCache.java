@@ -204,6 +204,7 @@ public class EhcachePortalCache<K extends Serializable, V>
 	@Override
 	protected boolean doReplace(K key, V oldValue, V newValue, int timeToLive) {
 		Element oldElement = new Element(key, oldValue);
+
 		Element newElement = new Element(key, newValue);
 
 		if (timeToLive != DEFAULT_TIME_TO_LIVE) {
