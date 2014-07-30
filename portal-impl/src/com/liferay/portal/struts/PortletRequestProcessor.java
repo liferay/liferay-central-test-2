@@ -561,9 +561,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				!strutsPath.equals(portlet.getParentStrutsPath())) {
 
 				throw new PrincipalException(
-					"The struts path " + strutsPath + " does not belong " +
-						"to portlet " + portlet.getPortletId() + ". " +
-							"Check the definition in liferay-portlet.xml");
+					"The struts path " + strutsPath + " does not belong to " +
+						"portlet " + portlet.getPortletId() + ". Check the " +
+							"definition in liferay-portlet.xml");
 			}
 			else if (!portlet.isActive()) {
 				ForwardConfig forwardConfig = actionMapping.findForward(
