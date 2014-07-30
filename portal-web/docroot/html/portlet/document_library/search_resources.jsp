@@ -103,12 +103,6 @@ else if ((searchType == DLSearchConstants.SINGLE) && !ajax) {
 		showRepositoryTabs = true;
 	}
 }
-
-boolean searchEverywhere = false;
-
-if ((folder == null) || (folder.getFolderId() == rootFolderId)) {
-	searchEverywhere = true;
-}
 %>
 
 <aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
@@ -118,7 +112,16 @@ if ((folder == null) || (folder.getFolderId() == rootFolderId)) {
 	<liferay-util:buffer var="searchInfo">
 		<div class="search-info">
 			<span class="keywords">
-				<%= (!searchEverywhere) ? LanguageUtil.format(request, "searched-for-x-in-x", new Object[] {HtmlUtil.escape(keywords), HtmlUtil.escape(folder.getName())}, false) : LanguageUtil.format(request, "searched-for-x-everywhere", HtmlUtil.escape(keywords), false) %>
+
+				<%
+				boolean searchEverywhere = false;
+
+				if ((folder == null) || (folder.getFolderId() == rootFolderId)) {
+					searchEverywhere = true;
+				}
+				%>
+
+				<%= !searchEverywhere ? LanguageUtil.format(request, "searched-for-x-in-x", new Object[] {HtmlUtil.escape(keywords), HtmlUtil.escape(folder.getName())}, false) : LanguageUtil.format(request, "searched-for-x-everywhere", HtmlUtil.escape(keywords), false) %>
 			</span>
 
 			<c:if test="<%= folderId != rootFolderId %>">
