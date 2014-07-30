@@ -103,10 +103,10 @@ public class TestContextHandler {
 				ExecutionTestListeners.class, declaringClass.getSuperclass());
 		}
 
+		int i = 0;
+
 		ExecutionTestListener[] executionTestListeners =
 			new ExecutionTestListener[executionTestListenerClasses.size()];
-
-		int i = 0;
 
 		for (Class<? extends ExecutionTestListener> executionTestListenerClass :
 				executionTestListenerClasses) {

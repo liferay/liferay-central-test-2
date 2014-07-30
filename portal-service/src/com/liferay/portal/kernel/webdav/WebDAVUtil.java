@@ -219,11 +219,11 @@ public class WebDAVUtil {
 			groups.add(user.getGroup());
 		}
 
-		List<Group> groupList = new ArrayList<Group>(groups);
+		List<Group> groupsList = new ArrayList<Group>(groups);
 
-		Collections.sort(groupList, orderByComparator);
+		Collections.sort(groupsList, orderByComparator);
 
-		return groupList;
+		return groupsList;
 	}
 
 	public static WebDAVUtil getInstance() {

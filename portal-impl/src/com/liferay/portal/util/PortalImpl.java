@@ -1113,11 +1113,11 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public long[] getAncestorSiteGroupIds(long groupId) throws PortalException {
+		int i = 0;
+
 		Set<Group> groups = doGetAncestorSiteGroups(groupId, false);
 
 		long[] groupIds = new long[groups.size()];
-
-		int i = 0;
 
 		for (Group group : groups) {
 			groupIds[i++] = group.getGroupId();

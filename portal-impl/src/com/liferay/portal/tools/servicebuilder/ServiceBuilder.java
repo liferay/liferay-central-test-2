@@ -4512,18 +4512,18 @@ public class ServiceBuilder {
 	private List<Entity> _mergeReferenceList(Entity entity) {
 		List<Entity> referenceList = entity.getReferenceList();
 
-		Set<Entity> list = new LinkedHashSet<Entity>();
+		Set<Entity> set = new LinkedHashSet<Entity>();
 
 		if (_autoImportDefaultReferences) {
-			list.addAll(_ejbList);
+			set.addAll(_ejbList);
 		}
 		else {
-			list.add(entity);
+			set.add(entity);
 		}
 
-		list.addAll(referenceList);
+		set.addAll(referenceList);
 
-		return new ArrayList<Entity>(list);
+		return new ArrayList<Entity>(set);
 	}
 
 	private void _parseEntity(Element entityElement) throws Exception {
