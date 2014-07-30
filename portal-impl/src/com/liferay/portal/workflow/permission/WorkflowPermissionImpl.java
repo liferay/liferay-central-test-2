@@ -84,7 +84,7 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 				return null;
 			}
 
-			boolean hasPermission = hasPermissionImplicitlyGranted(
+			boolean hasPermission = hasImplicitPermission(
 				permissionChecker, workflowInstance);
 
 			if (!hasPermission && actionId.equals(ActionKeys.VIEW)) {
@@ -98,7 +98,7 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 		return null;
 	}
 
-	protected boolean hasPermissionImplicitlyGranted(
+	protected boolean hasImplicitPermission(
 			PermissionChecker permissionChecker,
 			WorkflowInstance workflowInstance)
 		throws WorkflowException {
