@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
@@ -107,12 +108,11 @@ public class ServiceConfiguratorImpl
 	}
 
 	protected void initServiceComponent() {
-		Configuration serviceBuilderPropertiesConfiguration = null;
+		Configuration configuration = null;
 
 		try {
-			serviceBuilderPropertiesConfiguration =
-				ConfigurationFactoryUtil.getConfiguration(
-					_classLoader, "service");
+			configuration = ConfigurationFactoryUtil.getConfiguration(
+				_classLoader, "service");
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
@@ -122,21 +122,20 @@ public class ServiceConfiguratorImpl
 			return;
 		}
 
-		Properties serviceBuilderProperties =
-			serviceBuilderPropertiesConfiguration.getProperties();
+		Properties properties = configuration.getProperties();
 
-		if (serviceBuilderProperties.isEmpty()) {
+		if (properties.isEmpty()) {
 			return;
 		}
 
 		String buildNamespace = GetterUtil.getString(
-			serviceBuilderProperties.getProperty("build.namespace"));
+			properties.getProperty("build.namespace"));
 		long buildNumber = GetterUtil.getLong(
-			serviceBuilderProperties.getProperty("build.number"));
+			properties.getProperty("build.number"));
 		long buildDate = GetterUtil.getLong(
-			serviceBuilderProperties.getProperty("build.date"));
+			properties.getProperty("build.date"));
 		boolean buildAutoUpgrade = GetterUtil.getBoolean(
-			serviceBuilderProperties.getProperty("build.auto.upgrade"), true);
+			properties.getProperty("build.auto.upgrade"), true);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Build namespace " + buildNamespace);
@@ -156,7 +155,7 @@ public class ServiceConfiguratorImpl
 				buildAutoUpgrade);
 		}
 		catch (PortalException pe) {
-			_log.error("Unable to register component", pe);
+			_log.error("Unable to initialize service component", pe);
 		}
 	}
 
@@ -164,29 +163,26 @@ public class ServiceConfiguratorImpl
 		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
 			_classLoader, "portlet");
 
-		String resourceActionsConfigs = configuration.get(
-			PropsKeys.RESOURCE_ACTIONS_CONFIGS);
+		String[] resourceActionsConfigs = StringUtil.split(
+			configuration.get(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
 
-		String[] resourceActionConfigs = resourceActionsConfigs.split(",");
-
-		for (String resourceActionConfig : resourceActionConfigs) {
+		for (String resourceActionsConfig : resourceActionsConfigs) {
 			try {
 				ResourceActionsUtil.read(
-					"", _classLoader, resourceActionConfig);
+					"", _classLoader, resourceActionsConfig);
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to process resource config actions defined in " +
-						resourceActionConfig,
+					"Unable to read resource actions config in " +
+						resourceActionsConfig,
 					e);
 			}
 		}
 
-		String portletIds = configuration.get("portlet.ids");
+		String[] portletIds = StringUtil.split(
+			configuration.get("portlet.ids"));
 
-		String[] portletsIds = portletIds.split(",");
-
-		for (String portletId : portletsIds) {
+		for (String portletId : portletIds) {
 			List<String> modelNames =
 				ResourceActionsUtil.getPortletModelResources(portletId);
 
@@ -207,12 +203,11 @@ public class ServiceConfiguratorImpl
 	}
 
 	protected void reconfigureCaches() throws Exception {
-		Configuration portletPropertiesConfiguration = null;
+		Configuration configuration = null;
 
 		try {
-			portletPropertiesConfiguration =
-				ConfigurationFactoryUtil.getConfiguration(
-					_classLoader, "portlet");
+			configuration = ConfigurationFactoryUtil.getConfiguration(
+				_classLoader, "portlet");
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
@@ -228,18 +223,18 @@ public class ServiceConfiguratorImpl
 		portalCacheConfigurator.reconfigureCaches(
 			_classLoader,
 			getPortalCacheConfigurationURL(
-				portletPropertiesConfiguration, _classLoader,
+				configuration, _classLoader,
 				PropsKeys.EHCACHE_SINGLE_VM_CONFIG_LOCATION));
 
 		portalCacheConfigurator.reconfigureCaches(
 			_classLoader,
 			getPortalCacheConfigurationURL(
-				portletPropertiesConfiguration, _classLoader,
+				configuration, _classLoader,
 				PropsKeys.EHCACHE_MULTI_VM_CONFIG_LOCATION));
 
 		portalCacheConfigurator.reconfigureHibernateCache(
 			getPortalCacheConfigurationURL(
-				portletPropertiesConfiguration, _classLoader,
+				configuration, _classLoader,
 				PropsKeys.NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME));
 	}
 
