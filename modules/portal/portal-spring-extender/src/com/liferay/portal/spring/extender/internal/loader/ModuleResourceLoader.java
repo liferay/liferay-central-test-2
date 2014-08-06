@@ -36,35 +36,35 @@ public class ModuleResourceLoader implements ServiceComponentConfiguration {
 
 	@Override
 	public InputStream getHibernateInputStream() {
-		return _openInputStream("/META-INF/module-hbm.xml");
+		return getInputStream("/META-INF/module-hbm.xml");
 	}
 
 	@Override
 	public InputStream getModelHintsExtInputStream() {
-		return _openInputStream("/META-INF/portlet-model-hints-ext.xml");
+		return getInputStream("/META-INF/portlet-model-hints-ext.xml");
 	}
 
 	@Override
 	public InputStream getModelHintsInputStream() {
-		return _openInputStream("/META-INF/portlet-model-hints.xml");
+		return getInputStream("/META-INF/portlet-model-hints.xml");
 	}
 
 	@Override
 	public InputStream getSQLIndexesInputStream() {
-		return _openInputStream("/META-INF/sql/indexes.sql");
+		return getInputStream("/META-INF/sql/indexes.sql");
 	}
 
 	@Override
 	public InputStream getSQLSequencesInputStream() {
-		return _openInputStream("/META-INF/sql/sequences.sql");
+		return getInputStream("/META-INF/sql/sequences.sql");
 	}
 
 	@Override
 	public InputStream getSQLTablesInputStream() {
-		return _openInputStream("/META-INF/sql/tables.sql");
+		return getInputStream("/META-INF/sql/tables.sql");
 	}
 
-	private InputStream _openInputStream(String location) {
+	protected InputStream getInputStream(String location) {
 		URL url = _bundle.getResource(location);
 
 		InputStream inputStream = null;
@@ -73,9 +73,7 @@ public class ModuleResourceLoader implements ServiceComponentConfiguration {
 			inputStream = url.openStream();
 		}
 		catch (IOException ioe) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to read file: " + location, ioe);
-			}
+			_log.error("Unable to read " + location, ioe);
 		}
 
 		return inputStream;
