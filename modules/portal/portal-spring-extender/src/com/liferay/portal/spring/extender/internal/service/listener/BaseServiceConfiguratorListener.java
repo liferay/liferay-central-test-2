@@ -36,11 +36,10 @@ public abstract class BaseServiceConfiguratorListener {
 			_serviceConfigurator.destroy();
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to destroy services in application context " +
-						applicationContext.getDisplayName(), e);
-			}
+			_log.error(
+				"Unable to destroy application context " +
+					applicationContext.getDisplayName(),
+				e);
 		}
 	}
 
@@ -49,11 +48,10 @@ public abstract class BaseServiceConfiguratorListener {
 			_serviceConfigurator.init();
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to setup services in application context " +
-						applicationContext.getDisplayName(), e);
-			}
+			_log.error(
+				"Unable initialize application context " +
+					applicationContext.getDisplayName(),
+				e);
 		}
 	}
 
