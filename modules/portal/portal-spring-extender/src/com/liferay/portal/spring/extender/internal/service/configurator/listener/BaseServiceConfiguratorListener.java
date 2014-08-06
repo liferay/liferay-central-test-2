@@ -37,9 +37,7 @@ public abstract class BaseServiceConfiguratorListener {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to destroy application context " +
-					applicationContext.getDisplayName(),
-				e);
+				"Unable to destroy " + applicationContext.getDisplayName(), e);
 		}
 	}
 
@@ -49,9 +47,7 @@ public abstract class BaseServiceConfiguratorListener {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable initialize application context " +
-					applicationContext.getDisplayName(),
-				e);
+				"Unable initialize " + applicationContext.getDisplayName(), e);
 		}
 	}
 
