@@ -5923,6 +5923,7 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	@Override
 	public String getValidPortalDomain(long companyId, String domain) {
 		if (Validator.isHostName(domain)) {
 			if (isValidVirtualHost(domain)) {
