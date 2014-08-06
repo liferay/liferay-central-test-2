@@ -82,6 +82,12 @@ public class ServiceConfiguratorImpl
 			new ModuleResourceLoader(_bundleContext.getBundle()), _classLoader);
 	}
 
+	protected ClassLoader getBundleClassLoader(Bundle bundle) {
+		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+		return bundleWiring.getClassLoader();
+	}
+
 	protected URL getPortalCacheConfigurationURL(
 		Configuration configuration, ClassLoader classLoader,
 		String configLocation) {
@@ -236,12 +242,6 @@ public class ServiceConfiguratorImpl
 			getPortalCacheConfigurationURL(
 				configuration, _classLoader,
 				PropsKeys.NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME));
-	}
-
-	protected ClassLoader getBundleClassLoader(Bundle bundle) {
-		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
-		return bundleWiring.getClassLoader();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
