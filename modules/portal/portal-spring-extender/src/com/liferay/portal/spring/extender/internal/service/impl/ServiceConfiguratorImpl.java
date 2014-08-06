@@ -56,7 +56,8 @@ public class ServiceConfiguratorImpl
 
 	@Override
 	public void init() throws Exception {
-		initLogger();
+		initLog4J();
+
 		initServiceComponent();
 
 		reconfigureCaches();
@@ -108,7 +109,7 @@ public class ServiceConfiguratorImpl
 		return _bundleContext.getService(serviceReference);
 	}
 
-	protected void initLogger() {
+	protected void initLog4J() {
 		Log4JUtil.configureLog4J(
 			_classLoader.getResource("META-INF/portal-log4j.xml"));
 	}
