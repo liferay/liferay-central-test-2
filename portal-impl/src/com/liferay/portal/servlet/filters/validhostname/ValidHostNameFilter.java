@@ -34,10 +34,10 @@ public class ValidHostNameFilter extends BasePortalFilter implements TryFilter {
 
 		String serverName = request.getServerName();
 
-		String validDomain = PortalUtil.getValidPortalDomain(
+		String validPortalDomain = PortalUtil.getValidPortalDomain(
 			PortalUtil.getDefaultCompanyId(), serverName);
 
-		if (!StringUtil.equalsIgnoreCase(validDomain, serverName)) {
+		if (!StringUtil.equalsIgnoreCase(serverName, validPortalDomain)) {
 			throw new RuntimeException("Invalid host name " + serverName);
 		}
 
