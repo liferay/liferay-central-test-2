@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.service.listener;
+package com.liferay.portal.spring.extender.internal.service.configurator.listener;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.spring.extender.internal.service.ServiceConfigurator;
+import com.liferay.portal.spring.extender.internal.service.configurator.ServiceConfigurator;
 
 import org.springframework.context.ApplicationContext;
 

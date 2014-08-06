@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.service;
+package com.liferay.portal.spring.extender.internal.service.configurator;
 
 /**
  * @author Miguel Pastor

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.service.impl;
+package com.liferay.portal.spring.extender.internal.service.configurator.impl;
 
 import com.liferay.portal.cache.configurator.PortalCacheConfigurator;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -28,7 +28,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.spring.extender.internal.loader.ModuleResourceLoader;
-import com.liferay.portal.spring.extender.internal.service.ServiceConfigurator;
+import com.liferay.portal.spring.extender.internal.service.configurator.ServiceConfigurator;
 import com.liferay.util.log4j.Log4JUtil;
 
 import java.net.URL;

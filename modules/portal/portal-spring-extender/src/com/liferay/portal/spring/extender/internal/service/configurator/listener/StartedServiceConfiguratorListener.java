@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.service.listener;
+package com.liferay.portal.spring.extender.internal.service.configurator.listener;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
