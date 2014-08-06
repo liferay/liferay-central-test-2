@@ -12,28 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.services.listener;
+package com.liferay.portal.spring.extender.internal.service.listener;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.spring.extender.internal.services.ServicesConfigurator;
+import com.liferay.portal.spring.extender.internal.service.ServiceConfigurator;
 
 import org.springframework.context.ApplicationContext;
 
 /**
  * @author Miguel Pastor
  */
-public abstract class ServicesConfiguratorListener {
+public abstract class ServiceConfiguratorListener {
 
-	public void setServicesConfigurator(
-		ServicesConfigurator servicesConfigurator) {
+	public void setServiceConfigurator(
+		ServiceConfigurator serviceConfigurator) {
 
-		_servicesConfigurator = servicesConfigurator;
+		_serviceConfigurator = serviceConfigurator;
 	}
 
 	protected void doDestroy(ApplicationContext applicationContext) {
 		try {
-			_servicesConfigurator.destroy();
+			_serviceConfigurator.destroy();
 		}
 		catch (Exception e) {
 			if (_log.isErrorEnabled()) {
@@ -46,7 +46,7 @@ public abstract class ServicesConfiguratorListener {
 
 	protected void doInit(ApplicationContext applicationContext) {
 		try {
-			_servicesConfigurator.init();
+			_serviceConfigurator.init();
 		}
 		catch (Exception e) {
 			if (_log.isErrorEnabled()) {
@@ -58,8 +58,8 @@ public abstract class ServicesConfiguratorListener {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		ServicesConfiguratorListener.class);
+		ServiceConfiguratorListener.class);
 
-	private ServicesConfigurator _servicesConfigurator;
+	private ServiceConfigurator _serviceConfigurator;
 
 }

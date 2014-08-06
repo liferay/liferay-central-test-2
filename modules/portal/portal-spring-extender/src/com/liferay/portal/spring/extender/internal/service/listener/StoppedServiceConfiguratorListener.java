@@ -12,27 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.services.listener;
+package com.liferay.portal.spring.extender.internal.service.listener;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStoppedEvent;
 
 /**
  * @author Miguel Pastor
  */
-public class StartedServicesConfiguratorListener
-	extends ServicesConfiguratorListener
-	implements ApplicationListener<ContextRefreshedEvent> {
+public class StoppedServiceConfiguratorListener
+	extends ServiceConfiguratorListener
+	implements ApplicationListener<ContextStoppedEvent> {
 
 	@Override
-	public void onApplicationEvent(
-		ContextRefreshedEvent contextRefreshedEvent) {
-
+	public void onApplicationEvent(ContextStoppedEvent contextStoppedEvent) {
 		ApplicationContext applicationContext =
-			contextRefreshedEvent.getApplicationContext();
+			contextStoppedEvent.getApplicationContext();
 
-		doInit(applicationContext);
+		doDestroy(applicationContext);
 	}
 
 }

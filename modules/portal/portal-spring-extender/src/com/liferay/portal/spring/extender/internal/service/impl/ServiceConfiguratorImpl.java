@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.services.impl;
+package com.liferay.portal.spring.extender.internal.service.impl;
 
 import com.liferay.portal.cache.configurator.PortalCacheConfigurator;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -27,7 +27,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.spring.extender.internal.loader.ModuleResourceLoader;
-import com.liferay.portal.spring.extender.internal.services.ServicesConfigurator;
+import com.liferay.portal.spring.extender.internal.service.ServiceConfigurator;
 import com.liferay.util.log4j.Log4JUtil;
 
 import java.net.URL;
@@ -45,8 +45,8 @@ import org.osgi.framework.wiring.BundleWiring;
 /**
  * @author Miguel Pastor
  */
-public class ServicesConfiguratorImpl
-	implements BundleContextAware, ServicesConfigurator {
+public class ServiceConfiguratorImpl
+	implements BundleContextAware, ServiceConfigurator {
 
 	@Override
 	public void destroy() throws Exception {
@@ -250,7 +250,7 @@ public class ServicesConfiguratorImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		ServicesConfiguratorImpl.class);
+		ServiceConfiguratorImpl.class);
 
 	private BundleContext _bundleContext;
 	private ClassLoader _classLoader;

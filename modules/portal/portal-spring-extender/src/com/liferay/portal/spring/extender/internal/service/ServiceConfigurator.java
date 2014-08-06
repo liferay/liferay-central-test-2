@@ -12,25 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.services.listener;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextStoppedEvent;
+package com.liferay.portal.spring.extender.internal.service;
 
 /**
  * @author Miguel Pastor
  */
-public class StoppedServicesConfiguratorListener
-	extends ServicesConfiguratorListener
-	implements ApplicationListener<ContextStoppedEvent> {
+public interface ServiceConfigurator {
 
-	@Override
-	public void onApplicationEvent(ContextStoppedEvent contextStoppedEvent) {
-		ApplicationContext applicationContext =
-			contextStoppedEvent.getApplicationContext();
+	public void destroy() throws Exception;
 
-		doDestroy(applicationContext);
-	}
+	public void init() throws Exception;
 
 }

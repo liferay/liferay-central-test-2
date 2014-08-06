@@ -12,15 +12,27 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.internal.services;
+package com.liferay.portal.spring.extender.internal.service.listener;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
 /**
  * @author Miguel Pastor
  */
-public interface ServicesConfigurator {
+public class StartedServiceConfiguratorListener
+	extends ServiceConfiguratorListener
+	implements ApplicationListener<ContextRefreshedEvent> {
 
-	public void destroy() throws Exception;
+	@Override
+	public void onApplicationEvent(
+		ContextRefreshedEvent contextRefreshedEvent) {
 
-	public void init() throws Exception;
+		ApplicationContext applicationContext =
+			contextRefreshedEvent.getApplicationContext();
+
+		doInit(applicationContext);
+	}
 
 }
