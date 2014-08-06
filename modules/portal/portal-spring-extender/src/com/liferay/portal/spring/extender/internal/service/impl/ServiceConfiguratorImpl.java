@@ -61,14 +61,14 @@ public class ServiceConfiguratorImpl
 
 		reconfigureCaches();
 
-		processServiceResourceActions();
+		processResourceActionsConfigs();
 	}
 
 	@Override
 	public void setBundleContext(BundleContext bundleContext) {
 		_bundleContext = bundleContext;
 
-		_classLoader = _getBundleClassLoader(_bundleContext.getBundle());
+		_classLoader = getBundleClassLoader(_bundleContext.getBundle());
 	}
 
 	public void setServiceComponentLocalService(
@@ -159,7 +159,7 @@ public class ServiceConfiguratorImpl
 		}
 	}
 
-	protected void processServiceResourceActions() {
+	protected void processResourceActionsConfigs() {
 		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
 			_classLoader, "portlet");
 
@@ -238,7 +238,7 @@ public class ServiceConfiguratorImpl
 				PropsKeys.NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME));
 	}
 
-	private ClassLoader _getBundleClassLoader(Bundle bundle) {
+	protected ClassLoader getBundleClassLoader(Bundle bundle) {
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 		return bundleWiring.getClassLoader();
