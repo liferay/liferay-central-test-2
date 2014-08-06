@@ -22,7 +22,7 @@ import org.springframework.context.event.ContextStoppedEvent;
  * @author Miguel Pastor
  */
 public class StoppedServiceConfiguratorListener
-	extends ServiceConfiguratorListener
+	extends BaseServiceConfiguratorListener
 	implements ApplicationListener<ContextStoppedEvent> {
 
 	@Override

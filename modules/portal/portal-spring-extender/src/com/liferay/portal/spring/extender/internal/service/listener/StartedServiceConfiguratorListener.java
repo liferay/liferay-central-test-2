@@ -22,7 +22,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
  * @author Miguel Pastor
  */
 public class StartedServiceConfiguratorListener
-	extends ServiceConfiguratorListener
+	extends BaseServiceConfiguratorListener
 	implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Override

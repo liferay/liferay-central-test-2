@@ -23,7 +23,7 @@ import org.springframework.context.ApplicationContext;
 /**
  * @author Miguel Pastor
  */
-public abstract class ServiceConfiguratorListener {
+public abstract class BaseServiceConfiguratorListener {
 
 	public void setServiceConfigurator(
 		ServiceConfigurator serviceConfigurator) {
@@ -58,7 +58,7 @@ public abstract class ServiceConfiguratorListener {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		ServiceConfiguratorListener.class);
+		BaseServiceConfiguratorListener.class);
 
 	private ServiceConfigurator _serviceConfigurator;
 
