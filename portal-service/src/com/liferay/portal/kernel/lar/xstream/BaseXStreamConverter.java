@@ -29,7 +29,7 @@ public abstract class BaseXStreamConverter implements XStreamConverter {
 	@Override
 	public void marshal(
 			Object object, XStreamHierarchicalStreamWriter writer,
-			XStreamMarshallingContext marshallingContext)
+			XStreamMarshallingContext xStreamMarshallingContext)
 		throws Exception {
 
 		for (String field : getFields()) {
@@ -38,7 +38,7 @@ public abstract class BaseXStreamConverter implements XStreamConverter {
 			Object value = BeanPropertiesUtil.getObject(object, field);
 
 			if (value != null) {
-				marshallingContext.convertAnother(value);
+				xStreamMarshallingContext.convertAnother(value);
 			}
 
 			writer.endNode();
@@ -47,8 +47,8 @@ public abstract class BaseXStreamConverter implements XStreamConverter {
 
 	@Override
 	public abstract Object unmarshal(
-			XStreamHierarchicalStreamReader reader,
-			XStreamUnmarshallingContext unmarshallingContext)
+			XStreamHierarchicalStreamReader xStreamHierarchicalStreamReader,
+			XStreamUnmarshallingContext xStreamUnmarshallingContext)
 		throws Exception;
 
 	protected abstract List<String> getFields();
