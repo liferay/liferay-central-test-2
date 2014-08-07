@@ -12,15 +12,15 @@
 
 		<execute macro="DDLTemplate#tearDownTemplateCP" />
 
-		<execute macro="DataDefinitionTemplate#tearDownTemplateCP">
+		<execute macro="DDLTemplate#tearDownTemplateCP">
 			<var name="dataDefinitionName" value="To Do" />
 		</execute>
 
-		<execute macro="DataDefinitionTemplate#tearDownTemplateCP">
+		<execute macro="DDLTemplate#tearDownTemplateCP">
 			<var name="dataDefinitionName" value="Inventory" />
 		</execute>
 
-		<execute macro="DataDefinition#tearDownCP" />
+		<execute macro="DDLDataDefinition#tearDownCP" />
 
 		<execute macro="DMDocument#tearDownCP" />
 

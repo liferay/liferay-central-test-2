@@ -16,11 +16,11 @@
 			<var name="dataDefinitionName" value="Process Fields Definition" />
 		</execute>
 
-		<execute macro="DataDefinitionTemplate#tearDownTemplateCP">
+		<execute macro="DDLTemplate#tearDownTemplateCP">
 			<var name="dataDefinitionName" value="To Do" />
 		</execute>
 
-		<execute macro="DataDefinition#tearDownCP" />
+		<execute macro="DDLDataDefinition#tearDownCP" />
 	</tear-down>
 
 	<command name="AddProcessWithDataDefinitionFieldsDefinition" priority="5">
@@ -158,7 +158,7 @@
 			<var name="portletName" value="Dynamic Data Lists" />
 		</execute>
 
-		<execute macro="DataDefinition#addCP">
+		<execute macro="DDLDataDefinition#addCP">
 			<var name="dataDefinitionDescription" value="${dataDefinitionDescription}" />
 			<var name="dataDefinitionName" value="${dataDefinitionName}" />
 		</execute>
@@ -169,7 +169,7 @@
 			<var name="fieldName" value="${fieldName}" />
 		</execute>
 
-		<execute macro="DataDefinition#saveCP" />
+		<execute macro="DDLDataDefinition#saveCP" />
 
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Kaleo Forms Admin" />
@@ -229,9 +229,9 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
-		<execute macro="DataDefinitionTemplate#tearDownTemplateCP" />
+		<execute macro="DDLTemplate#tearDownTemplateCP" />
 
-		<execute macro="DataDefinition#tearDownCP">
+		<execute macro="DDLDataDefinition#tearDownCP">
 			<var name="kfProcessExists" value="true" />
 		</execute>
 
@@ -247,7 +247,7 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
-		<execute macro="DataDefinition#tearDownCP" />
+		<execute macro="DDLDataDefinition#tearDownCP" />
 	</command>
 
 	<command name="DeleteFieldsDefinition" priority="5">
@@ -312,9 +312,9 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
-		<execute macro="DataDefinitionTemplate#tearDownTemplateCP" />
+		<execute macro="DDLTemplate#tearDownTemplateCP" />
 
-		<execute macro="DataDefinition#tearDownCP">
+		<execute macro="DDLDataDefinition#tearDownCP">
 			<var name="kfProcessExists" value="true" />
 		</execute>
 
@@ -330,7 +330,7 @@
 			<var name="kfProcessName" value="${kfProcessName}" />
 		</execute>
 
-		<execute macro="DataDefinition#tearDownCP" />
+		<execute macro="DDLDataDefinition#tearDownCP" />
 	</command>
 
 	<command name="DeleteForm" priority="5">
@@ -393,7 +393,7 @@
 			<var name="kfProcessName" value="Kaleo Forms Process" />
 		</execute>
 
-		<execute macro="DataDefinitionTemplate#tearDownTemplateCP" />
+		<execute macro="DDLTemplate#tearDownTemplateCP" />
 
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Kaleo Forms Admin" />
@@ -510,7 +510,7 @@
 			<var name="portletName" value="Dynamic Data Lists" />
 		</execute>
 
-		<execute macro="DataDefinition#addCP">
+		<execute macro="DDLDataDefinition#addCP">
 			<var name="dataDefinitionDescription" value="${dataDefinitionDescription}" />
 			<var name="dataDefinitionName" value="${dataDefinitionName}" />
 		</execute>
@@ -521,7 +521,7 @@
 			<var name="fieldName" value="${fieldName}" />
 		</execute>
 
-		<execute macro="DataDefinition#saveCP" />
+		<execute macro="DDLDataDefinition#saveCP" />
 
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Kaleo Forms Admin" />
