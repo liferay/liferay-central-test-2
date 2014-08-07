@@ -17,9 +17,9 @@
 <%
 String bodyContentString = StringPool.BLANK;
 
-Serializable bodyContent = (Serializable)request.getAttribute("aui:nav:bodyContent");
+Object bodyContent = request.getAttribute("aui:nav:bodyContent");
 
 if (bodyContent != null) {
-	bodyContentString = String.valueOf(bodyContent);
+	bodyContentString = bodyContent.toString();
 }
 %>

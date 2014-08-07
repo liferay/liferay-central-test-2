@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -37,8 +36,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CustomJspRegistryUtil;
 import com.liferay.taglib.FileAvailabilityUtil;
 import com.liferay.taglib.servlet.PipingServletResponse;
-
-import java.io.Serializable;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -179,22 +176,18 @@ public class IncludeTag extends AttributesTagSupport {
 		setAttributes(request);
 	}
 
-	private Serializable getBodyContentWrapper() {
+	private Object getBodyContentWrapper() {
 		final BodyContent bodyContent = getBodyContent();
 
 		if (bodyContent == null) {
 			return null;
 		}
 
-		return new Serializable() {
+		return new Object() {
 
 			@Override
 			public String toString() {
-				StringBundler sb = new StringBundler(1);
-
-				sb.append(bodyContent.getString());
-
-				return sb.toString();
+				return bodyContent.getString();
 			}
 
 		};
