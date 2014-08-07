@@ -29,8 +29,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Hugo Huijser
  */
 @Component(
-	immediate = true,
-	property = {"javax.portlet.name=102"},
+	immediate = true, property = {"javax.portlet.name=102"},
 	service = ConfigurationAction.class
 )
 public class ConfigurationActionImpl extends DefaultConfigurationAction {
