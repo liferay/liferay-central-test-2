@@ -40,9 +40,7 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.resource-bundle=com.liferay.portlet.StrutsResourceBundle",
-		"javax.portlet.security-role-ref=guest",
-		"javax.portlet.security-role-ref=power-user",
-		"javax.portlet.security-role-ref=user",
+		"javax.portlet.security-role-ref=guest,power-user,user",
 		"javax.portlet.supported-public-render-parameter=tags"
 	},
 	service = Portlet.class
