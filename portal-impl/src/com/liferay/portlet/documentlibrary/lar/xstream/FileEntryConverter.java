@@ -45,10 +45,8 @@ public class FileEntryConverter extends BaseXStreamConverter {
 		throws Exception {
 
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
-
-		LiferayFileVersion liferayFileVersion = null;
-
 		boolean escapedModel = false;
+		LiferayFileVersion liferayFileVersion = null;
 
 		while (xStreamHierarchicalStreamReader.hasMoreChildren()) {
 			xStreamHierarchicalStreamReader.moveDown();

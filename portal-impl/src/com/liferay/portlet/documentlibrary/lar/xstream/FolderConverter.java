@@ -43,7 +43,6 @@ public class FolderConverter extends BaseXStreamConverter {
 		throws Exception {
 
 		DLFolder dlFolder = new DLFolderImpl();
-
 		boolean escapedModel = false;
 
 		while (xStreamHierarchicalStreamReader.hasMoreChildren()) {

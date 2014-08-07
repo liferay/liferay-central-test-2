@@ -43,7 +43,6 @@ public class FileVersionConverter extends BaseXStreamConverter {
 		throws Exception {
 
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
-
 		boolean escapedModel = false;
 
 		while (xStreamHierarchicalStreamReader.hasMoreChildren()) {
