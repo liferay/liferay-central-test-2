@@ -93,7 +93,7 @@
 				</for>
 			</then>
 			<else>
-				<echo message="hello" />
+				<echo message="This else block is needed until LIFERAYQA-10632 is resolved." />
 			</else>
 		</if>
 
@@ -109,7 +109,7 @@
 				</for>
 			</then>
 			<else>
-				<echo message="hello" />
+				<echo message="This else block is needed until LIFERAYQA-10632 is resolved." />
 			</else>
 		</if>
 
