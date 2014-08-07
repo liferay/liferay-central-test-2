@@ -52,8 +52,6 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.collections.iterators.ArrayIterator;
-
 import org.sikuli.api.robot.Key;
 import org.sikuli.script.Button;
 import org.sikuli.script.Location;
@@ -995,12 +993,10 @@ public class LiferaySeleniumHelper {
 		if (value.contains("${line.separator}")) {
 			String[] tokens = StringUtil.split(value, "${line.separator}");
 
-			ArrayIterator arrayIterator = new ArrayIterator(tokens);
+			for (int i = 0; i < tokens.length; i++) {
+				_screen.type(tokens[i]);
 
-			while (arrayIterator.hasNext()) {
-				_screen.type((String)arrayIterator.next());
-
-				if (arrayIterator.hasNext()) {
+				if ((i + 1) < tokens.length) {
 					_screen.type(Key.ENTER);
 				}
 			}
