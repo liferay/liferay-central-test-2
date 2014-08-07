@@ -69,7 +69,7 @@ public class ModuleResourceLoader implements ServiceComponentConfiguration {
 
 		if (url == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Location " + location + " does not exist");
+				_log.info("Unable to find " + location);
 			}
 
 			return null;
