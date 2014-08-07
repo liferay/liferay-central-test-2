@@ -33,8 +33,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@
-page import="com.liferay.portal.kernel.log.Log" %><%@
+<%@ page import="com.liferay.portal.kernel.log.Log" %><%@
 page import="com.liferay.portal.kernel.log.LogFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
@@ -49,7 +48,7 @@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %><%@
 page import="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" %><%@
 page import="com.liferay.xsl.content.util.XSLContentUtil" %>
 
-<%@page import="javax.portlet.PortletMode" %><%@
+<%@ page import="javax.portlet.PortletMode" %><%@
 page import="javax.portlet.PortletURL" %><%@
 page import="javax.portlet.PortletMode" %><%@
 page import="javax.portlet.WindowState" %>

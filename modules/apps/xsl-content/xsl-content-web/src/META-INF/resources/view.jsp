@@ -102,5 +102,5 @@ catch (Exception e) {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("xsl_content.view_jsp");
+private static Log _log = LogFactoryUtil.getLog("com_liferay_xsl_content_web.view_jsp");
 %>
