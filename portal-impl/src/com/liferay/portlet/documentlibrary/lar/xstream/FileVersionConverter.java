@@ -73,6 +73,7 @@ public class FileVersionConverter extends BaseXStreamConverter {
 		return new LiferayFileVersion(dlFileVersion, escapedModel);
 	}
 
+	@Override
 	protected List<String> getFields() {
 		return fields;
 	}

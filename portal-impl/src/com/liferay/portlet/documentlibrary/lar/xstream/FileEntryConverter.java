@@ -89,6 +89,7 @@ public class FileEntryConverter extends BaseXStreamConverter {
 		return liferayFileEntry;
 	}
 
+	@Override
 	protected List<String> getFields() {
 		return fields;
 	}

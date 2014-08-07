@@ -73,6 +73,7 @@ public class FolderConverter extends BaseXStreamConverter {
 		return new LiferayFolder(dlFolder, escapedModel);
 	}
 
+	@Override
 	protected List<String> getFields() {
 		return fields;
 	}
