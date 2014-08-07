@@ -52,14 +52,12 @@ if (Validator.isNull(gridCssClasses)) {
 %>
 
 <%!
-private static void _getGridCssClasses(String size, String sizeType, StringBundler sb) {
-	String[] sizeProperties = StringUtil.split(size);
-
-	for (String property : sizeProperties) {
+private static void _getGridCssClasses(String sizes, String sizeType, StringBundler sb) {
+	for (String size : StringUtil.split(sizes)) {
 		sb.append("col-");
 		sb.append(sizeType);
 		sb.append(StringPool.DASH);
-		sb.append(StringUtil.trim(property));
+		sb.append(StringUtil.trim(size));
 		sb.append(StringPool.SPACE);
 	}
 }
