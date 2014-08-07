@@ -16,8 +16,6 @@
 
 <%@ include file="/html/taglib/aui/nav_item/init.jsp" %>
 
-<%@ page import="javax.servlet.jsp.tagext.BodyContent" %>
-
 <%
 Object bodyContent = request.getAttribute("aui:nav-item:bodyContent");
 

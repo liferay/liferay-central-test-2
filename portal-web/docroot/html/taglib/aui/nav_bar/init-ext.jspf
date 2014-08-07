@@ -14,8 +14,6 @@
  */
 --%>
 
-<%@ page import="javax.servlet.jsp.tagext.BodyContent" %>
-
 <%
 String bodyContentString = StringPool.BLANK;
 
