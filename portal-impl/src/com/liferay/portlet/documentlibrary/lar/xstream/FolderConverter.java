@@ -38,24 +38,24 @@ public class FolderConverter extends BaseXStreamConverter {
 
 	@Override
 	public Object unmarshal(
-			XStreamHierarchicalStreamReader reader,
-			XStreamUnmarshallingContext unmarshallingContext)
+			XStreamHierarchicalStreamReader xStreamHierarchicalStreamReader,
+			XStreamUnmarshallingContext xStreamUnmarshallingContext)
 		throws Exception {
 
 		DLFolder dlFolder = new DLFolderImpl();
 
 		boolean escapedModel = false;
 
-		while (reader.hasMoreChildren()) {
-			reader.moveDown();
+		while (xStreamHierarchicalStreamReader.hasMoreChildren()) {
+			xStreamHierarchicalStreamReader.moveDown();
 
-			String nodeName = reader.getNodeName();
+			String nodeName = xStreamHierarchicalStreamReader.getNodeName();
 
 			Class<?> clazz = BeanPropertiesUtil.getObjectType(
 				dlFolder, nodeName);
 
-			Object convertedValue = unmarshallingContext.convertAnother(
-				reader.getValue(), clazz);
+			Object convertedValue = xStreamUnmarshallingContext.convertAnother(
+				xStreamHierarchicalStreamReader.getValue(), clazz);
 
 			if (fields.contains(nodeName)) {
 				if (nodeName.equals(FieldConstants.ESCAPED_MODEL)) {
@@ -67,7 +67,7 @@ public class FolderConverter extends BaseXStreamConverter {
 				}
 			}
 
-			reader.moveUp();
+			xStreamHierarchicalStreamReader.moveUp();
 		}
 
 		return new LiferayFolder(dlFolder, escapedModel);

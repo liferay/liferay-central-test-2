@@ -40,8 +40,8 @@ public class FileEntryConverter extends BaseXStreamConverter {
 
 	@Override
 	public Object unmarshal(
-			XStreamHierarchicalStreamReader reader,
-			XStreamUnmarshallingContext unmarshallingContext)
+			XStreamHierarchicalStreamReader xStreamHierarchicalStreamReader,
+			XStreamUnmarshallingContext xStreamUnmarshallingContext)
 		throws Exception {
 
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
@@ -50,10 +50,10 @@ public class FileEntryConverter extends BaseXStreamConverter {
 
 		boolean escapedModel = false;
 
-		while (reader.hasMoreChildren()) {
-			reader.moveDown();
+		while (xStreamHierarchicalStreamReader.hasMoreChildren()) {
+			xStreamHierarchicalStreamReader.moveDown();
 
-			String nodeName = reader.getNodeName();
+			String nodeName = xStreamHierarchicalStreamReader.getNodeName();
 
 			Class<?> clazz = BeanPropertiesUtil.getObjectType(
 				dlFileEntry, nodeName);
@@ -62,8 +62,8 @@ public class FileEntryConverter extends BaseXStreamConverter {
 				clazz = FileVersionProxyBean.class;
 			}
 
-			Object convertedValue = unmarshallingContext.convertAnother(
-				reader.getValue(), clazz);
+			Object convertedValue = xStreamUnmarshallingContext.convertAnother(
+				xStreamHierarchicalStreamReader.getValue(), clazz);
 
 			if (fields.contains(nodeName)) {
 				if (nodeName.equals(FieldConstants.ESCAPED_MODEL)) {
@@ -78,7 +78,7 @@ public class FileEntryConverter extends BaseXStreamConverter {
 				}
 			}
 
-			reader.moveUp();
+			xStreamHierarchicalStreamReader.moveUp();
 		}
 
 		LiferayFileEntry liferayFileEntry = new LiferayFileEntry(
