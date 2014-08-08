@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Portal Servlet JSTL
-Bundle-SymbolicName: org.glassfish.web.javax.servlet.jsp.jstl
-Bundle-Version: ${plugin.full.version}
+Bundle-SymbolicName: com.liferay.portal.servlet.jstl
+Bundle-Version: 1.2.3
 Export-Package: org.apache.taglibs.standard.*;version=${plugin.full.version}
 Implementation-Version: ${plugin.full.version}
 Import-Package:\
