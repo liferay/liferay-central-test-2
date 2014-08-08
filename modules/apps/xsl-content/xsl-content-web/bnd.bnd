@@ -1,5 +1,6 @@
 Bundle-Name: Liferay XSL Content Web
-Bundle-Version: ${plugin.full.version}
+Bundle-SymbolicName: com.liferay.xsl.content
+Bundle-Version: 1.0.0
 Import-Package:\
 	${bnd.jsp.support.imports},\
 	com.liferay.util.freemarker;resolution:=optional,\
