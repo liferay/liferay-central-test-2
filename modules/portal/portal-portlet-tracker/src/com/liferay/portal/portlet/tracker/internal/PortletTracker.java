@@ -1110,10 +1110,10 @@ public class PortletTracker
 		Configuration configuration, String servletContextName,
 		ClassLoader classLoader) {
 
-		Properties portletProperties = configuration.getProperties();
+		Properties properties = configuration.getProperties();
 
 		String[] resourceActionConfigs = StringUtil.split(
-			portletProperties.getProperty(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
+			properties.getProperty(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
 
 		for (String resourceActionConfig : resourceActionConfigs) {
 			try {
