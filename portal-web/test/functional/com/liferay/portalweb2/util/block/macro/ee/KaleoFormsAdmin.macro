@@ -39,7 +39,7 @@
 			</then>
 		</if>
 
-		<var name="key_workflowDefinitionTask" value="${workflowDefinitionTask}" />
+		<var name="key_workflowTask" value="${workflowTask}" />
 
 		<execute action="CPKaleoformsadminNewprocess#assertClick" locator-key1="FORMS_TABLE_ASSIGN_FORM_BUTTON" value1="Assign Form" />
 	</command>
@@ -262,7 +262,7 @@
 	</command>
 
 	<command name="viewProcessForms">
-		<var name="key_workflowDefinitionTask" value="${workflowDefinitionTask}" />
+		<var name="key_workflowTask" value="${workflowTask}" />
 
 		<execute action="CPKaleoformsadminNewprocess#assertTextEquals" locator-key1="FORMS_TABLE_FORM" value1="${kfFormName}" />
 		<execute action="CPKaleoformsadminNewprocess#assertElementNotPresent" locator-key1="SAVE_BUTTON_INACTIVE" />
@@ -273,7 +273,7 @@
 		<execute action="CPKaleoformsadminNewprocess#assertElementPresent" locator-key1="SAVE_BUTTON_INACTIVE" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="${workflowDefinitionTask}" />
+			<var name="workflowTask" value="${workflowTask}" />
 		</execute>
 
 		<execute action="CPKaleoformsadminNewprocessSelectform#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no results." />

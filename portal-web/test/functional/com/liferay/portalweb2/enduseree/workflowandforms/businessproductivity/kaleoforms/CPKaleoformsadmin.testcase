@@ -75,7 +75,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -125,7 +125,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -210,7 +210,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -293,7 +293,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -374,7 +374,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -417,7 +417,7 @@
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#viewProcessFormsDeleted">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 	</command>
 
@@ -473,7 +473,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -562,7 +562,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -609,7 +609,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -639,7 +639,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -673,7 +673,7 @@
 
 		<execute macro="KaleoFormsAdmin#viewProcessForms">
 			<var name="kfFormName" value="Edited Process Task Form" />
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 	</command>
 
@@ -706,7 +706,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -781,7 +781,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
@@ -827,7 +827,7 @@
 		<execute macro="KaleoFormsAdmin#next" />
 
 		<execute macro="KaleoFormsAdmin#assignForm">
-			<var name="workflowDefinitionTask" value="create" />
+			<var name="workflowTask" value="create" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#addForm">
