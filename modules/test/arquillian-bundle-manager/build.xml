@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
+<!DOCTYPE project>
 
-<project name="arquillian-plugin-deployer" basedir="." default="compile">
+<project>
 	<property name="osgi.ide.dependencies" value="commons-fileupload.jar" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
