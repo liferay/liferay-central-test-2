@@ -234,7 +234,7 @@ public class PortletBagFactory {
 		return portletBag;
 	}
 
-	public List<SchedulerEntry> newSchedulerEntryInstances(Portlet portlet) {
+	protected List<SchedulerEntry> newSchedulerEntryInstances(Portlet portlet) {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return new ArrayList<SchedulerEntry>();
 		}
