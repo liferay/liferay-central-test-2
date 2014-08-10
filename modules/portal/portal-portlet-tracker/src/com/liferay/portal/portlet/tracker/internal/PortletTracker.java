@@ -141,7 +141,7 @@ public class PortletTracker
 			_portletLocalService.getPortletById(portletId);
 
 		if (portletModel != null) {
-			_log.error("Portlet id " + portletId + " is already in use.");
+			_log.error("Portlet id " + portletId + " is already in use");
 
 			bundleContext.ungetService(serviceReference);
 
