@@ -96,6 +96,8 @@ public interface PortletBag extends Cloneable {
 
 	public ResourceBundleTracker getResourceBundleTracker();
 
+	public List<SchedulerEntry> getSchedulerEntryInstances();
+
 	public ServletContext getServletContext();
 
 	public List<SocialActivityInterpreter>
@@ -124,7 +126,5 @@ public interface PortletBag extends Cloneable {
 	public void setPortletInstance(Portlet portletInstance);
 
 	public void setPortletName(String portletName);
-
-	public List<SchedulerEntry> getSchedulerEntryInstances();
 
 }
