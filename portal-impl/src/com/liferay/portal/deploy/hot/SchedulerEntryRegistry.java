@@ -141,7 +141,7 @@ public class SchedulerEntryRegistry {
 			}
 		}
 
-		private void addTrigger(
+		protected void addTrigger(
 			SchedulerEntry schedulerEntry,
 			ServiceReference<SchedulerEntry> serviceReference) {
 
@@ -175,7 +175,7 @@ public class SchedulerEntryRegistry {
 			}
 		}
 
-		private String getPluginPropertyValue(
+		protected String getPluginPropertyValue(
 			ClassLoader classLoader, String propertyKey) {
 
 			Configuration configuration =
