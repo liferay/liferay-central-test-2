@@ -51,8 +51,7 @@ public class VerifyProcessTracker {
 		cardinality = ReferenceCardinality.MULTIPLE,
 		policy = ReferencePolicy.DYNAMIC,
 		policyOption = ReferencePolicyOption.GREEDY,
-		target = "(verify.process.name=*)",
-		unbind = "removedService",
+		target = "(verify.process.name=*)", unbind = "removedService",
 		updated = "modifiedService"
 	)
 	public void addingService(
