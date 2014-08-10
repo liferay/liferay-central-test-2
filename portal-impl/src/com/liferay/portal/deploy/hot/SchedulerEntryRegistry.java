@@ -145,15 +145,15 @@ public class SchedulerEntryRegistry {
 			SchedulerEntry schedulerEntry,
 			ServiceReference<SchedulerEntry> serviceReference) {
 
-			Class<?> clazz = schedulerEntry.getClass();
-
-			ClassLoader classloader = clazz.getClassLoader();
-
 			String propertyKey = schedulerEntry.getPropertyKey();
 
 			if (Validator.isNull(propertyKey)) {
 				return;
 			}
+
+			Class<?> clazz = schedulerEntry.getClass();
+
+			ClassLoader classloader = clazz.getClassLoader();
 
 			String triggerValue = null;
 
