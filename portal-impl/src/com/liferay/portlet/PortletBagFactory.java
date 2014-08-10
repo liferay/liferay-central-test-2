@@ -239,16 +239,12 @@ public class PortletBagFactory {
 			return new ArrayList<SchedulerEntry>();
 		}
 
-		ServiceTrackerList<SchedulerEntry> schedulerEntriesTracked =
+		ServiceTrackerList<SchedulerEntry> schedulerEntries =
 			getServiceTrackerList(SchedulerEntry.class, portlet);
 
-		List<SchedulerEntry> schedulerEntries = portlet.getSchedulerEntries();
+		schedulerEntries.addAll(portlet.getSchedulerEntries());
 
-		for (SchedulerEntry schedulerEntry : schedulerEntries) {
-			schedulerEntriesTracked.add(schedulerEntry);
-		}
-
-		return schedulerEntriesTracked;
+		return schedulerEntries;
 	}
 
 	public void setClassLoader(ClassLoader classLoader) {
