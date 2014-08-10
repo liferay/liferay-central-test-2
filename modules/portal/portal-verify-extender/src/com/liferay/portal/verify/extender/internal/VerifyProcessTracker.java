@@ -39,8 +39,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 @Component(
 	immediate = true,
 	property = {
-		"osgi.command.function=execute",
-		"osgi.command.function=list",
+		"osgi.command.function=execute", "osgi.command.function=list",
 		"osgi.command.scope=verify-extender"
 	},
 	service = {Object.class}
