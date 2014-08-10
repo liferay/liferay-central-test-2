@@ -125,6 +125,6 @@ public interface PortletBag extends Cloneable {
 
 	public void setPortletName(String portletName);
 
-	List<SchedulerEntry> getSchedulerEntryInstances();
+	public List<SchedulerEntry> getSchedulerEntryInstances();
 
 }
