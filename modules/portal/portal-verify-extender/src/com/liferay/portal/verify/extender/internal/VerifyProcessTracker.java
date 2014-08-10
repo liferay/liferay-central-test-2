@@ -126,6 +126,7 @@ public class VerifyProcessTracker {
 		VerifyProcess verifyProcess, Map<String, Object> properties) {
 
 		removedService(verifyProcess, properties);
+
 		addingService(verifyProcess, properties);
 	}
 
