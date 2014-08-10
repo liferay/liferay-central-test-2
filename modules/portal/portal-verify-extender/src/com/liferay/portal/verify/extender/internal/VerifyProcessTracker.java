@@ -117,7 +117,9 @@ public class VerifyProcessTracker {
 
 			System.out.println(
 				String.format(
-					_FORMAT, i++, ClassUtil.getClassName(entry.getValue()),
+					"[%1$5d] Verify process '%2$s' is registered with the " +
+						"name '%3$s'",
+					i++, ClassUtil.getClassName(entry.getValue()),
 					entry.getKey()));
 		}
 	}
@@ -140,9 +142,6 @@ public class VerifyProcessTracker {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyProcessTracker.class);
-
-	private static final String _FORMAT =
-		"[%1$5d] Verify process '%2$s' is registered with the name '%3$s'";
 
 	private ConcurrentMap<String, VerifyProcess> _verifyProcesses =
 		new ConcurrentSkipListMap<String, VerifyProcess>();
