@@ -29,42 +29,11 @@ import java.util.List;
  */
 public class SynchronousPollerChannelListener implements ChannelListener {
 
-	public SynchronousPollerChannelListener() {
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, moved to {@link
-	 *             SynchronousPollerChannelListener#
-	 *             SynchronousPollerChannelListener()}
-	 */
-	@Deprecated
-	public SynchronousPollerChannelListener(
-		long companyId, long userId,
-		JSONObject pollerResponseHeaderJSONObject) {
-
-		_companyId = companyId;
-		_userId = userId;
-		_pollerResponseHeaderJSONObject = pollerResponseHeaderJSONObject;
-	}
-
 	@Override
 	public synchronized void channelListenerRemoved(long channelId) {
 		_complete = true;
 
 		this.notify();
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             SynchronousPollerChannelListener#getNotificationEvents(long,
-	 *             long, JSONObject, long)}
-	 */
-	@Deprecated
-	public synchronized String getNotificationEvents(long timeout)
-		throws ChannelException {
-
-		return getNotificationEvents(
-			_companyId, _userId, _pollerResponseHeaderJSONObject, timeout);
 	}
 
 	public synchronized String getNotificationEvents(
@@ -102,9 +71,6 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		this.notify();
 	}
 
-	private long _companyId;
 	private boolean _complete;
-	private JSONObject _pollerResponseHeaderJSONObject;
-	private long _userId;
 
 }
