@@ -112,6 +112,9 @@ public class PortletBagFactory {
 
 		List<OpenSearch> openSearchInstances = newOpenSearches(portlet);
 
+		List<SchedulerEntry> schedulerEntryInstances =
+			newSchedulerEntryInstances(portlet);
+
 		List<FriendlyURLMapper> friendlyURLMapperInstances =
 			newFriendlyURLMappers(portlet);
 
@@ -177,9 +180,6 @@ public class PortletBagFactory {
 		List<PreferencesValidator> preferencesValidatorInstances =
 			newPreferencesValidatorInstances(portlet);
 
-		List<SchedulerEntry> schedulerEntryInstances =
-			newSchedulerEntryInstances(portlet);
-
 		ResourceBundleTracker resourceBundleTracker = new ResourceBundleTracker(
 			portlet.getPortletId());
 
@@ -208,18 +208,19 @@ public class PortletBagFactory {
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), _servletContext, portletInstance,
 			resourceBundleTracker, configurationActionInstances,
-			indexerInstances, openSearchInstances, friendlyURLMapperInstances,
-			urlEncoderInstances, portletDataHandlerInstances,
-			stagedModelDataHandlerInstances, templateHandlerInstances,
-			portletLayoutListenerInstances, pollerProcessorInstances,
-			popMessageListenerInstances, socialActivityInterpreterInstances,
+			indexerInstances, openSearchInstances, schedulerEntryInstances,
+			friendlyURLMapperInstances, urlEncoderInstances,
+			portletDataHandlerInstances, stagedModelDataHandlerInstances,
+			templateHandlerInstances, portletLayoutListenerInstances,
+			pollerProcessorInstances, popMessageListenerInstances,
+			socialActivityInterpreterInstances,
 			socialRequestInterpreterInstances, userNotificationHandlerInstances,
 			webDAVStorageInstances, xmlRpcMethodInstances,
 			controlPanelEntryInstances, assetRendererFactoryInstances,
 			atomCollectionAdapterInstances, customAttributesDisplayInstances,
 			ddmDisplayInstances, permissionPropagatorInstances,
 			trashHandlerInstances, workflowHandlerInstances,
-			preferencesValidatorInstances, schedulerEntryInstances);
+			preferencesValidatorInstances);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 

@@ -65,6 +65,7 @@ public class PortletBagImpl implements PortletBag {
 		Portlet portletInstance, ResourceBundleTracker resourceBundleTracker,
 		List<ConfigurationAction> configurationActionInstances,
 		List<Indexer> indexerInstances, List<OpenSearch> openSearchInstances,
+		List<SchedulerEntry> schedulerEntryInstances,
 		List<FriendlyURLMapper> friendlyURLMapperInstances,
 		List<URLEncoder> urlEncoderInstances,
 		List<PortletDataHandler> portletDataHandlerInstances,
@@ -86,8 +87,7 @@ public class PortletBagImpl implements PortletBag {
 		List<PermissionPropagator> permissionPropagatorInstances,
 		List<TrashHandler> trashHandlerInstances,
 		List<WorkflowHandler<?>> workflowHandlerInstances,
-		List<PreferencesValidator> preferencesValidatorInstances,
-		List<SchedulerEntry> schedulerEntryInstances) {
+		List<PreferencesValidator> preferencesValidatorInstances) {
 
 		_portletName = portletName;
 		_servletContext = servletContext;
@@ -96,6 +96,7 @@ public class PortletBagImpl implements PortletBag {
 		_configurationActionInstances = configurationActionInstances;
 		_indexerInstances = indexerInstances;
 		_openSearchInstances = openSearchInstances;
+		_schedulerEntryInstances = schedulerEntryInstances;
 		_friendlyURLMapperInstances = friendlyURLMapperInstances;
 		_urlEncoderInstances = urlEncoderInstances;
 		_portletDataHandlerInstances = portletDataHandlerInstances;
@@ -119,7 +120,6 @@ public class PortletBagImpl implements PortletBag {
 		_trashHandlerInstances = trashHandlerInstances;
 		_workflowHandlerInstances = workflowHandlerInstances;
 		_preferencesValidatorInstances = preferencesValidatorInstances;
-		_schedulerEntryInstances = schedulerEntryInstances;
 	}
 
 	@Override
@@ -128,8 +128,8 @@ public class PortletBagImpl implements PortletBag {
 			getPortletName(), getServletContext(), getPortletInstance(),
 			getResourceBundleTracker(), getConfigurationActionInstances(),
 			getIndexerInstances(), getOpenSearchInstances(),
-			getFriendlyURLMapperInstances(), getURLEncoderInstances(),
-			getPortletDataHandlerInstances(),
+			getSchedulerEntryInstances(), getFriendlyURLMapperInstances(),
+			getURLEncoderInstances(), getPortletDataHandlerInstances(),
 			getStagedModelDataHandlerInstances(), getTemplateHandlerInstances(),
 			getPortletLayoutListenerInstances(), getPollerProcessorInstances(),
 			getPopMessageListenerInstances(),
@@ -141,8 +141,7 @@ public class PortletBagImpl implements PortletBag {
 			getAtomCollectionAdapterInstances(),
 			getCustomAttributesDisplayInstances(), getDdmDisplayInstances(),
 			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
-			getWorkflowHandlerInstances(), getPreferencesValidatorInstances(),
-			getSchedulerEntryInstances());
+			getWorkflowHandlerInstances(), getPreferencesValidatorInstances());
 	}
 
 	@Override
