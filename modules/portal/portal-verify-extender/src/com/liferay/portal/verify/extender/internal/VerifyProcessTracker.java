@@ -91,7 +91,7 @@ public class VerifyProcessTracker {
 		}
 		catch (IndexOutOfBoundsException iobe) {
 			System.out.println(
-				"Unable to find a verify process with index " + index);
+				"Unable to find a verify process with index " + (index - 1));
 		}
 	}
 
