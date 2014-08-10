@@ -116,8 +116,8 @@ public class VerifyProcessTracker {
 
 			System.out.println(
 				String.format(
-					"[%1$5d] Verify process '%2$s' is registered with the " +
-						"name '%3$s'",
+					"[%1$5d] Verify process \"%2$s\" is registered with the " +
+						"name \"%3$s\"",
 					i++, ClassUtil.getClassName(entry.getValue()),
 					entry.getKey()));
 		}
