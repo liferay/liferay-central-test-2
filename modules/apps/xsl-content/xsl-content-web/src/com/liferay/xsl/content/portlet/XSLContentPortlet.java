@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.xsl.content.portlet;
 
 import com.liferay.util.bridges.mvc.MVCPortlet;
