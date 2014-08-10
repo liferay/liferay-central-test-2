@@ -234,19 +234,6 @@ public class PortletBagFactory {
 		return portletBag;
 	}
 
-	protected List<SchedulerEntry> newSchedulerEntryInstances(Portlet portlet) {
-		if (!PropsValues.SCHEDULER_ENABLED) {
-			return new ArrayList<SchedulerEntry>();
-		}
-
-		ServiceTrackerList<SchedulerEntry> schedulerEntries =
-			getServiceTrackerList(SchedulerEntry.class, portlet);
-
-		schedulerEntries.addAll(portlet.getSchedulerEntries());
-
-		return schedulerEntries;
-	}
-
 	public void setClassLoader(ClassLoader classLoader) {
 		_classLoader = classLoader;
 	}
@@ -902,6 +889,19 @@ public class PortletBagFactory {
 		}
 
 		return preferencesValidatorInstances;
+	}
+
+	protected List<SchedulerEntry> newSchedulerEntryInstances(Portlet portlet) {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return new ArrayList<SchedulerEntry>();
+		}
+
+		ServiceTrackerList<SchedulerEntry> schedulerEntries =
+			getServiceTrackerList(SchedulerEntry.class, portlet);
+
+		schedulerEntries.addAll(portlet.getSchedulerEntries());
+
+		return schedulerEntries;
 	}
 
 	protected List<SocialActivityInterpreter>
