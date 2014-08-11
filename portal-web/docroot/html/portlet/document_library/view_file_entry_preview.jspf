@@ -17,7 +17,7 @@
 <div>
 
 	<%
-	String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_document_library_view_file_entry_preview_previewId") + StringPool.UNDERLINE;
+	String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_document_library_view_file_entry_preview") + StringPool.UNDERLINE;
 
 	int previewFileCount = 0;
 	String previewFileURL = null;
