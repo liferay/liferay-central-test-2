@@ -48,9 +48,8 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public boolean add(S service) {
-		if (service==null) {
-			throw new IllegalArgumentException(
-				"Null is not allowed as an element");
+		if (service == null) {
+			throw new IllegalArgumentException("Service is null");
 		}
 
 		if ((_filter != null) && !_filter.matches(_properties)) {
@@ -73,8 +72,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	@Override
 	public boolean add(S service, Map<String, Object> properties) {
 		if (service == null) {
-			throw new IllegalArgumentException(
-				"Null is not allowed as an element");
+			throw new IllegalArgumentException("Service is null");
 		}
 
 		properties = new HashMap<String, Object>(properties);
@@ -83,7 +81,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 		if ((_filter != null) && !_filter.matches(properties)) {
 			throw new IllegalArgumentException(
-				"Provided properties " + properties + " do not match filter");
+				"Filter does not match properties " + properties);
 		}
 
 		Registry registry = RegistryUtil.getRegistry();

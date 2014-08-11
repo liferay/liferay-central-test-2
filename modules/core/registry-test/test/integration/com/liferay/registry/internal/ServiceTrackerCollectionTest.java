@@ -118,10 +118,9 @@ public class ServiceTrackerCollectionTest {
 		try {
 			serviceTrackerList.add(interfaceOneB);
 
-			Assert.fail("This should throw IllegalStateException");
+			Assert.fail();
 		}
-		catch (IllegalStateException e) {
-			//We are good
+		catch (IllegalStateException ise) {
 		}
 
 		Assert.assertEquals(1, serviceTrackerList.size());
@@ -240,11 +239,11 @@ public class ServiceTrackerCollectionTest {
 		try {
 			serviceTrackerList.add(interfaceOneB);
 
-			Assert.fail("This should throw an IllegalStateException");
+			Assert.fail();
 		}
-		catch (IllegalStateException e) {
-			//We are good
+		catch (IllegalStateException ise) {
 		}
+
 		Assert.assertEquals(1, serviceTrackerList.size());
 
 		for (InterfaceOne interfaceOne : serviceTrackerList) {
