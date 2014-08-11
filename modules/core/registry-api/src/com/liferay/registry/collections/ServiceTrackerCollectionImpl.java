@@ -87,15 +87,15 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public boolean addAll(Collection<? extends S> services) {
-		boolean changed = false;
+		boolean modified = false;
 
 		for (S service : services) {
-			add(service);
-
-			changed = true;
+			if (add(service)) {
+				modified = true;
+			}
 		}
 
-		return changed;
+		return modified;
 	}
 
 	@Override
