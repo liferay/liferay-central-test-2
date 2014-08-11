@@ -20,7 +20,7 @@
 </tr>
 <tr>
 	<td>CONFIGURATION_IFRAME</td>
-	<td>//iframe[contains(@id,'_WAR_knowledgebaseportlet') and contains(@id,'configurationIframeDialog_iframe')]</td>
+	<td>//iframe[contains(@id,'knowledgebaseportlet') and contains(@id,'configurationIframeDialog_iframe')]</td>
 	<td></td>
 </tr>
 <tr>

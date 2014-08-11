@@ -19,13 +19,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>CONFIGURATION_IFRAME</td>
-	<td>//iframe[contains(@id,'_WAR_knowledgebaseportlet_') and contains(@id,'configurationIframeDialog_iframe')]</td>
+	<td>EXTEND_ACTION_PATH</td>
+	<td>PGKnowledgebasearticleConfiguration</td>
 	<td></td>
 </tr>
 <tr>
-	<td>SUCCESS_MESSAGE</td>
-	<td>//div[@class='alert alert-success']</td>
+	<td></td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
