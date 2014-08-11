@@ -249,7 +249,7 @@ public class RegistryImpl implements Registry {
 	public <T> ServiceRegistration<T> registerService(
 		Class<T> clazz, T service, Map<String, Object> properties) {
 
-		properties = addBundleContextInfo(properties);
+		properties = addBundleContextProperties(properties);
 
 		org.osgi.framework.ServiceRegistration<T> serviceRegistration =
 			_bundleContext.registerService(
@@ -270,7 +270,7 @@ public class RegistryImpl implements Registry {
 	public <T> ServiceRegistration<T> registerService(
 		String className, T service, Map<String, Object> properties) {
 
-		properties = addBundleContextInfo(properties);
+		properties = addBundleContextProperties(properties);
 
 		org.osgi.framework.ServiceRegistration<?> serviceRegistration =
 			_bundleContext.registerService(
@@ -291,7 +291,7 @@ public class RegistryImpl implements Registry {
 	public <T> ServiceRegistration<T> registerService(
 		String[] classNames, T service, Map<String, Object> properties) {
 
-		properties = addBundleContextInfo(properties);
+		properties = addBundleContextProperties(properties);
 
 		org.osgi.framework.ServiceRegistration<?> serviceRegistration =
 			_bundleContext.registerService(
@@ -399,7 +399,7 @@ public class RegistryImpl implements Registry {
 			serviceReferenceWrapper.getServiceReference());
 	}
 
-	private Map<String, Object> addBundleContextInfo(
+	private Map<String, Object> addBundleContextProperties(
 		Map<String, Object> properties) {
 
 		Bundle bundle = _bundleContext.getBundle();
