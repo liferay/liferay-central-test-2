@@ -31,7 +31,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Levente Hudák
  */
-public class ConfirmExportImportConfigurationAction extends PortletAction {
+public class ConfirmationExportImportConfigurationAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
