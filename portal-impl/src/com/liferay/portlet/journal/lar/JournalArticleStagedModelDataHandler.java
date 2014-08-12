@@ -114,14 +114,15 @@ public class JournalArticleStagedModelDataHandler
 
 		dynamicQuery.add(uuidProperty.eq(uuid));
 
-		List<JournalArticleResource> resources =
+		List<JournalArticleResource> articleResources =
 			JournalArticleResourceLocalServiceUtil.dynamicQuery(dynamicQuery);
 
-		if (ListUtil.isEmpty(resources)) {
+		if (ListUtil.isEmpty(articleResources)) {
 			return null;
 		}
 
-		JournalArticleResource existingArticleResource = resources.get(0);
+		JournalArticleResource existingArticleResource = articleResources.get(
+			0);
 
 		return JournalArticleLocalServiceUtil.fetchLatestArticle(
 			existingArticleResource.getResourcePrimKey(),
