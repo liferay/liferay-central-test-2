@@ -79,7 +79,7 @@ public class PortletListTag extends IncludeTag {
 		"/html/taglib/staging/portlet_list/page.jsp";
 
 	private DateRange _dateRange;
-	private boolean _disableInputs = false;
+	private boolean _disableInputs;
 	private Map<String, String[]> _parameterMap;
 	private List<Portlet> _portlets;
 	private String _type;
