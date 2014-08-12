@@ -39,7 +39,7 @@ public class WebProxyVerifyPortletIdUpgrade {
 
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
-				return new String[][]{
+				return new String[][] {
 					new String[] {
 						"66",
 						"com_liferay_web_proxy_portlet_WebProxyPortlet"
