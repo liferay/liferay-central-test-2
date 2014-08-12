@@ -107,9 +107,10 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 			return;
 		}
 
-		PortletPreferences preferences = renderRequest.getPreferences();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String initUrl = preferences.getValue("initUrl", StringPool.BLANK);
+		String initUrl = portletPreferences.getValue(
+			"initUrl", StringPool.BLANK);
 
 		if (Validator.isNull(initUrl)) {
 			PortletContext portletContext = getPortletContext();
