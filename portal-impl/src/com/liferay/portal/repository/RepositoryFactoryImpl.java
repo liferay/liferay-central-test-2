@@ -55,7 +55,7 @@ public class RepositoryFactoryImpl extends BaseRepositoryFactory<Repository>
 		Set<Class<? extends Capability>> exportedCapabilityClasses =
 			getExternalExportedCapabilityClasses();
 
-		CMISRepositoryHandler cmisRepositoryHandler = _getCMISRepositoryHandler(
+		CMISRepositoryHandler cmisRepositoryHandler = getCMISRepositoryHandler(
 			repository);
 
 		if (cmisRepositoryHandler != null) {
@@ -106,6 +106,27 @@ public class RepositoryFactoryImpl extends BaseRepositoryFactory<Repository>
 			getResourceLocalService(), groupId, repositoryId, dlFolderId);
 	}
 
+	protected CMISRepositoryHandler getCMISRepositoryHandler(
+		Repository repository) {
+	
+		if (repository instanceof BaseRepositoryProxyBean) {
+			BaseRepositoryProxyBean baseRepositoryProxyBean =
+				(BaseRepositoryProxyBean)repository;
+	
+			ClassLoaderBeanHandler classLoaderBeanHandler =
+				(ClassLoaderBeanHandler)ProxyUtil.getInvocationHandler(
+					baseRepositoryProxyBean.getProxyBean());
+	
+			Object bean = classLoaderBeanHandler.getBean();
+	
+			if (bean instanceof CMISRepositoryHandler) {
+				return (CMISRepositoryHandler)bean;
+			}
+		}
+	
+		return null;
+	}
+
 	@Override
 	protected long getFileEntryRepositoryId(long fileEntryId)
 		throws PortalException {
@@ -146,27 +167,6 @@ public class RepositoryFactoryImpl extends BaseRepositoryFactory<Repository>
 			getRepositoryLocalService();
 
 		return repositoryLocalService.fetchRepository(repositoryId);
-	}
-
-	private CMISRepositoryHandler _getCMISRepositoryHandler(
-		Repository repository) {
-
-		if (repository instanceof BaseRepositoryProxyBean) {
-			BaseRepositoryProxyBean baseRepositoryProxyBean =
-				(BaseRepositoryProxyBean)repository;
-
-			ClassLoaderBeanHandler classLoaderBeanHandler =
-				(ClassLoaderBeanHandler)ProxyUtil.getInvocationHandler(
-					baseRepositoryProxyBean.getProxyBean());
-
-			Object bean = classLoaderBeanHandler.getBean();
-
-			if (bean instanceof CMISRepositoryHandler) {
-				return (CMISRepositoryHandler)bean;
-			}
-		}
-
-		return null;
 	}
 
 }

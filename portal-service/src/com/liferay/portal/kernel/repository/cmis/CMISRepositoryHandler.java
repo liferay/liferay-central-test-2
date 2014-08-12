@@ -45,8 +45,8 @@ import java.util.Map;
 /**
  * @author Alexander Chow
  */
-public abstract class CMISRepositoryHandler extends BaseRepositoryImpl
-	implements Capability {
+public abstract class CMISRepositoryHandler
+	extends BaseRepositoryImpl implements Capability {
 
 	@Override
 	public FileEntry addFileEntry(
