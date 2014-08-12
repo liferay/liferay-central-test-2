@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.web.proxy.action;
+package com.liferay.web.proxy.portlet.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
