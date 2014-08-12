@@ -39,10 +39,11 @@ public class XSLContentUpgrade {
 
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
-				return new String[][]{
+				return new String[][] {
 					new String[] {
 						"102",
-						"com_liferay_xsl_content_portlet_XSLContentPortlet"}
+						"com_liferay_xsl_content_portlet_XSLContentPortlet"
+					}
 				};
 			}
 
