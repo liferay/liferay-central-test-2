@@ -17,30 +17,29 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
+String redirectURL = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
+
 long exportImportConfigurationId = ParamUtil.getLong(request, "exportImportConfigurationId");
 
 ExportImportConfiguration exportImportConfiguration = ExportImportConfigurationLocalServiceUtil.getExportImportConfiguration(exportImportConfigurationId);
 
 String cmd = Constants.EXPORT;
-String confirmActionKey = cmd;
+String submitLanguageKey = Constants.EXPORT;
 
 if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_LOCAL) {
 	cmd = Constants.PUBLISH_TO_LIVE;
-	confirmActionKey = "publish-to-live";
+	submitLanguageKey = "publish-to-live";
 }
 else if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE) {
 	cmd = Constants.PUBLISH_TO_REMOTE;
-	confirmActionKey = "publish-to-remote";
+	submitLanguageKey = "publish-to-remote";
 }
 
 Map<String, Serializable> settingsMap = exportImportConfiguration.getSettingsMap();
 
-String hoursAgo = Time.getRelativeTimeDescription(exportImportConfiguration.getCreateDate(), locale, timeZone);
 Map<String, String[]> parameterMap = (Map<String, String[]>)settingsMap.get("parameterMap");
 long [] selectedLayoutIds = GetterUtil.getLongValues(settingsMap.get("layoutIds"));
-
-String backURL = ParamUtil.getString(request, "backURL");
-String redirectURL = ParamUtil.getString(request, "redirect");
 %>
 
 <liferay-ui:header
@@ -63,7 +62,7 @@ String redirectURL = ParamUtil.getString(request, "redirect");
 					userId="<%= exportImportConfiguration.getUserId() %>"
 				/>
 
-				<liferay-ui:message key="<%= hoursAgo %>" />
+				<liferay-ui:message key="<%= Time.getRelativeTimeDescription(exportImportConfiguration.getCreateDate(), locale, timeZone) %>" />
 			</aui:fieldset>
 
 			<portlet:actionURL var="confirmedActionURL">
@@ -114,7 +113,7 @@ String redirectURL = ParamUtil.getString(request, "redirect");
 				<liferay-staging:content disableInputs="<%= true %>" parameterMap="<%= parameterMap %>" type="<%= cmd %>" />
 
 				<aui:button-row>
-					<aui:button type="submit" value="<%= LanguageUtil.get(request, confirmActionKey) %>" />
+					<aui:button type="submit" value="<%= LanguageUtil.get(request, submitLanguageKey) %>" />
 
 					<aui:button href="<%= backURL %>" type="cancel" />
 				</aui:button-row>
