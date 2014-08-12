@@ -48,25 +48,24 @@ public class RepositoryFactoryImpl extends BaseRepositoryFactory<Repository>
 
 		Repository repository = createExternalRepositoryImpl(
 			repositoryId, classNameId);
-
-		Map<Class<? extends Capability>, Capability> supportedCapabilities =
-			getExternalSupportedCapabilities();
-
-		Set<Class<? extends Capability>> exportedCapabilityClasses =
+		Map<Class<? extends Capability>, Capability>
+			externalSupportedCapabilities = getExternalSupportedCapabilities();
+		Set<Class<? extends Capability>> externalExportedCapabilityClasses =
 			getExternalExportedCapabilityClasses();
 
 		CMISRepositoryHandler cmisRepositoryHandler = getCMISRepositoryHandler(
 			repository);
 
 		if (cmisRepositoryHandler != null) {
-			supportedCapabilities.put(
+			externalSupportedCapabilities.put(
 				CMISRepositoryHandler.class, cmisRepositoryHandler);
 
-			exportedCapabilityClasses.add(CMISRepositoryHandler.class);
+			externalExportedCapabilityClasses.add(CMISRepositoryHandler.class);
 		}
 
 		return new CapabilityRepository(
-			repository, supportedCapabilities, exportedCapabilityClasses);
+			repository, externalSupportedCapabilities,
+			externalExportedCapabilityClasses);
 	}
 
 	@Override
@@ -108,22 +107,22 @@ public class RepositoryFactoryImpl extends BaseRepositoryFactory<Repository>
 
 	protected CMISRepositoryHandler getCMISRepositoryHandler(
 		Repository repository) {
-	
+
 		if (repository instanceof BaseRepositoryProxyBean) {
 			BaseRepositoryProxyBean baseRepositoryProxyBean =
 				(BaseRepositoryProxyBean)repository;
-	
+
 			ClassLoaderBeanHandler classLoaderBeanHandler =
 				(ClassLoaderBeanHandler)ProxyUtil.getInvocationHandler(
 					baseRepositoryProxyBean.getProxyBean());
-	
+
 			Object bean = classLoaderBeanHandler.getBean();
-	
+
 			if (bean instanceof CMISRepositoryHandler) {
 				return (CMISRepositoryHandler)bean;
 			}
 		}
-	
+
 		return null;
 	}
 
