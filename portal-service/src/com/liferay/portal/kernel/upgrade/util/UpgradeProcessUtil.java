@@ -87,7 +87,7 @@ public class UpgradeProcessUtil {
 		return _createIGImageDocumentType;
 	}
 
-	public static List<UpgradeProcess> loadFromClassLoader(
+	public static List<UpgradeProcess> initUpgradeProcesses(
 		ClassLoader classLoader, String[] upgradeProcessClassNames) {
 
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<UpgradeProcess>();
@@ -105,7 +105,8 @@ public class UpgradeProcessUtil {
 				upgradeProcess = (UpgradeProcess)clazz.newInstance();
 			}
 			catch (Exception e) {
-				_log.error(e, e);
+				_log.error(
+					"Unable to initialize upgrade " + upgradeProcessClassName);
 
 				continue;
 			}
@@ -165,19 +166,17 @@ public class UpgradeProcessUtil {
 
 		Class<?> clazz = upgradeProcess.getClass();
 
-		String upgradeProcessClassName = clazz.getName();
-
 		if ((upgradeProcess.getThreshold() == 0) ||
 			(upgradeProcess.getThreshold() > buildNumber)) {
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Running upgrade " + upgradeProcessClassName);
+				_log.debug("Running upgrade " + clazz.getName());
 			}
 
 			upgradeProcess.upgrade();
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Finished upgrade " + upgradeProcessClassName);
+				_log.debug("Finished upgrade " + clazz.getName());
 			}
 
 			return true;
@@ -188,7 +187,7 @@ public class UpgradeProcessUtil {
 				"Upgrade threshold " + upgradeProcess.getThreshold() +
 					" will not trigger upgrade");
 
-			_log.debug("Skipping upgrade " + upgradeProcessClassName);
+			_log.debug("Skipping upgrade " + clazz.getName());
 		}
 
 		return false;

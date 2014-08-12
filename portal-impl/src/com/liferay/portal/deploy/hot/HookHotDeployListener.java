@@ -1835,7 +1835,7 @@ public class HookHotDeployListener
 					PropsKeys.UPGRADE_PROCESSES));
 
 			List<UpgradeProcess> upgradeProcesses =
-				UpgradeProcessUtil.loadFromClassLoader(
+				UpgradeProcessUtil.initUpgradeProcesses(
 					portletClassLoader, upgradeProcessClassNames);
 
 			ReleaseLocalServiceUtil.updateRelease(

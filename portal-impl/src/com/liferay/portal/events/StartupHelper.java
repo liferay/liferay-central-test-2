@@ -149,7 +149,7 @@ public class StartupHelper {
 			}
 
 			List<UpgradeProcess> upgradeProcesses =
-				UpgradeProcessUtil.loadFromClassLoader(
+				UpgradeProcessUtil.initUpgradeProcesses(
 					ClassLoaderUtil.getPortalClassLoader(),
 					upgradeProcessClassNames);
 
