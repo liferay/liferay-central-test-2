@@ -39,7 +39,7 @@ else if (exportImportConfiguration.getType() == ExportImportConfigurationConstan
 Map<String, Serializable> settingsMap = exportImportConfiguration.getSettingsMap();
 
 Map<String, String[]> parameterMap = (Map<String, String[]>)settingsMap.get("parameterMap");
-long [] selectedLayoutIds = GetterUtil.getLongValues(settingsMap.get("layoutIds"));
+long[] layoutIds = GetterUtil.getLongValues(settingsMap.get("layoutIds"));
 %>
 
 <liferay-ui:header
@@ -83,7 +83,7 @@ long [] selectedLayoutIds = GetterUtil.getLongValues(settingsMap.get("layoutIds"
 						<%
 						StringBundler sb = new StringBundler();
 
-						if (ArrayUtil.isEmpty(selectedLayoutIds)) {
+						if (ArrayUtil.isEmpty(layoutIds)) {
 							sb.append(LanguageUtil.get(locale, "selected-pages"));
 						}
 						else {
