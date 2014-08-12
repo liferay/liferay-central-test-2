@@ -193,6 +193,7 @@ public class TestCacheListener<K extends Serializable, V>
 			return _key;
 		}
 
+		@SuppressWarnings("unused")
 		public int getTimeToLive() {
 			return _timeToLive;
 		}
