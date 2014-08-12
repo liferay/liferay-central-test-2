@@ -62,6 +62,7 @@ public class XSLContentUpgrade {
 		_releaseLocalService = releaseLocalService;
 	}
 
+	@SuppressWarnings("unused")
 	private void unsetReleaseLocalService(
 		ReleaseLocalService releaseLocalService) {
 
