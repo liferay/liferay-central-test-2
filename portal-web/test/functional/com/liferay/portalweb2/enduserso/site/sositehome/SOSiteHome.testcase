@@ -151,7 +151,7 @@
 		<var name="bookmarksEntryDescription" value="Bookmarks Entry Description" />
 		<var name="bookmarksEntryName" value="Bookmarks Entry Name" />
 		<var name="bookmarksEntryUrl" value="http://www.google.com" />
-		<var name="tagName" value="tag name" />
+		<var name="tagName" value="tag" />
 
 		<execute macro="SOUserBar#addSOSite">
 			<var name="siteDescription" value="${siteDescription}" />
@@ -1210,7 +1210,6 @@
 	<command name="EditDefaultRssFeed" priority="4">
 		<var name="entriesPerFeedEdit" value="5" />
 		<var name="expandedEntriesPerFeedEdit" value="5" />
-		<var name="feedRow" value="1" />
 		<var name="feedTitleEdit" value="The Guardian" />
 		<var name="feedUrlEdit" value="http://feeds.theguardian.com/theguardian/technology/rss" />
 		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
@@ -1245,7 +1244,7 @@
 		<execute macro="SORss#editRssFeed">
 			<var name="entriesPerFeed" value="${entriesPerFeedEdit}" />
 			<var name="expandedEntriesPerFeed" value="${expandedEntriesPerFeedEdit}" />
-			<var name="feedRow" value="${feedRow}" />
+			<var name="feedRow" value="1" />
 			<var name="feedTitle" value="${feedTitleEdit}" />
 			<var name="feedUrl" value="${feedUrlEdit}" />
 		</execute>
@@ -1543,10 +1542,8 @@
 		</execute>
 	</command>
 
-	<command name="EditWYSIWYGContent" priority="3">
-		<var name="portletName" value="Welcome" />
-		<var name="portletOption" value="Configuration" />
-		<var name="WYSIWYGContent" value="WYSIWYG Content" />
+	<command name="EditWelcomeContent" priority="3">
+		<var name="welcomeContent" value="Welcome Content" />
 
 		<execute macro="SOUserBar#addSOSite">
 			<var name="siteDescription" value="${siteDescription}" />
@@ -1559,22 +1556,16 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SOPortlet#gotoPortletOptions">
-			<var name="portletName" value="${portletName}" />
-			<var name="portletOption" value="${portletOption}" />
+		<execute macro="SOWelcome#editContent">
+			<var name="welcomeContent" value="${welcomeContent}" />
 		</execute>
-
-		<execute action="PGWYSIWYGConfiguration#selectFrame" locator-key1="CONFIGURATION_IFRAME" />
-		<execute action="PGWYSIWYGConfiguration#type" locator-key1="CONTENT_FIELD" value1="${WYSIWYGContent}" />
-		<execute action="PGWYSIWYGConfiguration#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
-		<execute action="PGWYSIWYGConfiguration#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
 
 		<execute macro="Page#openURL">
 			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute action="SOSiteHome#assertTextEquals" locator-key1="WELCOME_PORTLET_CONTENT" value1="${WYSIWYGContent}" />
+		<execute action="SOSiteHome#assertTextEquals" locator-key1="WELCOME_PORTLET_CONTENT" value1="${welcomeContent}" />
 	</command>
 
 	<command name="ImportLARRssFeed" priority="4">

@@ -81,7 +81,7 @@
 		<execute action="BasePortlet#click" locator-key1="OPTIONS_MENULIST_CONFIGURATION" />
 
 		<execute action="SOSiteHomeRssConfiguration#selectFrame" locator-key1="CONFIGURATION_IFRAME" />
-		
+
 		<if>
 			<equals arg1="${feedRow}" arg2="1" />
 			<then>
