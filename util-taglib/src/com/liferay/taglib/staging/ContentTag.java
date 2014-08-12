@@ -63,7 +63,7 @@ public class ContentTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/staging/content/page.jsp";
 
-	private boolean _disableInputs = false;
+	private boolean _disableInputs;
 	private Map<String, String[]> _parameterMap;
 	private String _type;
 
