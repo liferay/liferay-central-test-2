@@ -83,10 +83,6 @@ public class UpgradeProcessUtil {
 		}
 	}
 
-	public static boolean isCreateIGImageDocumentType() {
-		return _createIGImageDocumentType;
-	}
-
 	public static List<UpgradeProcess> initUpgradeProcesses(
 		ClassLoader classLoader, String[] upgradeProcessClassNames) {
 
@@ -115,6 +111,10 @@ public class UpgradeProcessUtil {
 		}
 
 		return upgradeProcesses;
+	}
+
+	public static boolean isCreateIGImageDocumentType() {
+		return _createIGImageDocumentType;
 	}
 
 	public static void setCreateIGImageDocumentType(

@@ -197,26 +197,20 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void updateRelease(
-			String servletContextName, List<UpgradeProcess> upgradeProcesses,
-			Properties unfilteredPortalProperties)
-		throws Exception {
+	public Release updateRelease(
+			long releaseId, int buildNumber, Date buildDate, boolean verified)
+		throws PortalException {
 
-		int buildNumber = GetterUtil.getInteger(
-			unfilteredPortalProperties.getProperty(
-				PropsKeys.RELEASE_INFO_BUILD_NUMBER));
-		int previousBuildNumber = GetterUtil.getInteger(
-			unfilteredPortalProperties.getProperty(
-				PropsKeys.RELEASE_INFO_PREVIOUS_BUILD_NUMBER),
-			buildNumber);
-		boolean indexOnUpgrade = GetterUtil.getBoolean(
-			unfilteredPortalProperties.getProperty(
-				PropsKeys.INDEX_ON_UPGRADE),
-			PropsValues.INDEX_ON_UPGRADE);
+		Release release = releasePersistence.findByPrimaryKey(releaseId);
 
-		updateRelease(
-			servletContextName, upgradeProcesses, buildNumber,
-			previousBuildNumber, indexOnUpgrade);
+		release.setModifiedDate(new Date());
+		release.setBuildNumber(buildNumber);
+		release.setBuildDate(buildDate);
+		release.setVerified(verified);
+
+		releasePersistence.update(release);
+
+		return release;
 	}
 
 	@Override
@@ -262,20 +256,25 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Release updateRelease(
-			long releaseId, int buildNumber, Date buildDate, boolean verified)
-		throws PortalException {
+	public void updateRelease(
+			String servletContextName, List<UpgradeProcess> upgradeProcesses,
+			Properties unfilteredPortalProperties)
+		throws Exception {
 
-		Release release = releasePersistence.findByPrimaryKey(releaseId);
+		int buildNumber = GetterUtil.getInteger(
+			unfilteredPortalProperties.getProperty(
+				PropsKeys.RELEASE_INFO_BUILD_NUMBER));
+		int previousBuildNumber = GetterUtil.getInteger(
+			unfilteredPortalProperties.getProperty(
+				PropsKeys.RELEASE_INFO_PREVIOUS_BUILD_NUMBER),
+			buildNumber);
+		boolean indexOnUpgrade = GetterUtil.getBoolean(
+			unfilteredPortalProperties.getProperty(PropsKeys.INDEX_ON_UPGRADE),
+			PropsValues.INDEX_ON_UPGRADE);
 
-		release.setModifiedDate(new Date());
-		release.setBuildNumber(buildNumber);
-		release.setBuildDate(buildDate);
-		release.setVerified(verified);
-
-		releasePersistence.update(release);
-
-		return release;
+		updateRelease(
+			servletContextName, upgradeProcesses, buildNumber,
+			previousBuildNumber, indexOnUpgrade);
 	}
 
 	protected void testSupportsStringCaseSensitiveQuery() {
