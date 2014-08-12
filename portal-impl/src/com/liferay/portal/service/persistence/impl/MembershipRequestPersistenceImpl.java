@@ -2841,8 +2841,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MembershipRequest exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MembershipRequest exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
-	private static Log _log = LogFactoryUtil.getLog(MembershipRequestPersistenceImpl.class);
-	private static MembershipRequest _nullMembershipRequest = new MembershipRequestImpl() {
+	private static final Log _log = LogFactoryUtil.getLog(MembershipRequestPersistenceImpl.class);
+	private static final MembershipRequest _nullMembershipRequest = new MembershipRequestImpl() {
 			@Override
 			public Object clone() {
 				return this;
@@ -2854,7 +2854,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			}
 		};
 
-	private static CacheModel<MembershipRequest> _nullMembershipRequestCacheModel =
+	private static final CacheModel<MembershipRequest> _nullMembershipRequestCacheModel =
 		new NullCacheModel();
 
 	private static class NullCacheModel implements CacheModel<MembershipRequest>,

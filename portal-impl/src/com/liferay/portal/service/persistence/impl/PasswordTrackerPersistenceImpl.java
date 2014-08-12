@@ -1216,11 +1216,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PasswordTracker exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PasswordTracker exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
-	private static Log _log = LogFactoryUtil.getLog(PasswordTrackerPersistenceImpl.class);
-	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+	private static final Log _log = LogFactoryUtil.getLog(PasswordTrackerPersistenceImpl.class);
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
 				"password"
 			});
-	private static PasswordTracker _nullPasswordTracker = new PasswordTrackerImpl() {
+	private static final PasswordTracker _nullPasswordTracker = new PasswordTrackerImpl() {
 			@Override
 			public Object clone() {
 				return this;
@@ -1232,7 +1232,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			}
 		};
 
-	private static CacheModel<PasswordTracker> _nullPasswordTrackerCacheModel = new NullCacheModel();
+	private static final CacheModel<PasswordTracker> _nullPasswordTrackerCacheModel =
+		new NullCacheModel();
 
 	private static class NullCacheModel implements CacheModel<PasswordTracker>,
 		MVCCModel {
