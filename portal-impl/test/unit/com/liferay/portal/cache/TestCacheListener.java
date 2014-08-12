@@ -207,7 +207,6 @@ public class TestCacheListener<K extends Serializable, V>
 			int hash = HashUtil.hash(0, _actionType);
 
 			hash = HashUtil.hash(hash, _key);
-
 			hash = HashUtil.hash(hash, _value);
 
 			return HashUtil.hash(hash, _timeToLive);

@@ -55,11 +55,11 @@ public class EhcachePortalCacheTest {
 	public static void setUpClass() {
 		Configuration configuration = new Configuration();
 
-		CacheConfiguration defaultCacheConfiguration = new CacheConfiguration();
+		CacheConfiguration cacheConfiguration = new CacheConfiguration();
 
-		defaultCacheConfiguration.setMaxEntriesLocalHeap(100);
+		cacheConfiguration.setMaxEntriesLocalHeap(100);
 
-		configuration.addDefaultCache(defaultCacheConfiguration);
+		configuration.addDefaultCache(cacheConfiguration);
 
 		_cacheManager = CacheManager.newInstance(configuration);
 	}

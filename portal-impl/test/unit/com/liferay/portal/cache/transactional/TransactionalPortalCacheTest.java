@@ -465,7 +465,6 @@ public class TransactionalPortalCacheTest {
 		TransactionalPortalCacheHelper.commit();
 
 		_testCacheListener.assertActionsCount(2);
-		_testCacheListener.assertRemoved(_KEY_1, _VALUE_1);
 
 		if (ttl) {
 			_testCacheListener.assertPut(_KEY_2, _VALUE_1, 10);
@@ -473,6 +472,8 @@ public class TransactionalPortalCacheTest {
 		else {
 			_testCacheListener.assertPut(_KEY_2, _VALUE_1);
 		}
+
+		_testCacheListener.assertRemoved(_KEY_1, _VALUE_1);
 
 		_testCacheListener.reset();
 
