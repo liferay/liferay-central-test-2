@@ -59,14 +59,14 @@ import org.portletbridge.portlet.PortletBridgeServlet;
 @Component(
 	immediate = true,
 	property = {
+		"com.liferay.portlet.css-class-wrapper=portlet-web-proxy",
 		"com.liferay.portlet.display-category=category.sample",
-		"com.liferay.portlet.struts-path=web_proxy",
-		"com.liferay.portlet.preferences-owned-by-group=true",
 		"com.liferay.portlet.instanceable=true",
+		"com.liferay.portlet.preferences-owned-by-group=true",
 		"com.liferay.portlet.private-request-attributes=false",
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
-		"com.liferay.portlet.css-class-wrapper=portlet-web-proxy",
+		"com.liferay.portlet.struts-path=web_proxy",
 		"javax.portlet.display-name=Web Proxy",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.authenticatorClassName=org.portletbridge.portlet.DefaultBridgeAuthenticator",
@@ -83,8 +83,7 @@ import org.portletbridge.portlet.PortletBridgeServlet;
 		"javax.portlet.init-param.stylesheetUrl=classpath:/org/portletbridge/xsl/default.xsl",
 		"javax.portlet.preferences=classpath:/META-INF/preferences/default-preferences.xml",
 		"javax.portlet.resource-bundle=org.portletbridge.portlet.PortletBridgePortlet",
-		"javax.portlet.security-role-ref=power-user",
-		"javax.portlet.security-role-ref=user",
+		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = Portlet.class
 )
