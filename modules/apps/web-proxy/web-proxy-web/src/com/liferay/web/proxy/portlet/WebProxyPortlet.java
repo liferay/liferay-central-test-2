@@ -226,10 +226,8 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 	}
 
 	/**
-	 * Force the upgrade to execute before the portlet is ever registered so
-	 * that there's no race condition between the portlet tracker creating a new
-	 * portlet references in the DB and the upgrade changing old values to new
-	 * values.
+	 * Force upgrades to register before the portlet is registered to prevent
+	 * race conditions.
 	 */
 	@Reference(unbind = "-")
 	private void setWebProxyVerifyPortletIdUpgrade(
