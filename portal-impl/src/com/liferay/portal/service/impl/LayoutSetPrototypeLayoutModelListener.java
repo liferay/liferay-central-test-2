@@ -56,7 +56,7 @@ public class LayoutSetPrototypeLayoutModelListener
 			return;
 		}
 
-		Group group;
+		Group group = null;
 
 		try {
 			 group = layout.getGroup();
@@ -68,6 +68,7 @@ public class LayoutSetPrototypeLayoutModelListener
 		catch (PortalException pe) {
 			return;
 		}
+
 		try {
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
