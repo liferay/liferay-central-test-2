@@ -380,17 +380,17 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		portlet.setHeaderPortletCss(portletResourcesList);
 		portlet.setHeaderPortletJavaScript(portletResourcesList);
 
-		portlet.setPortletName(contextName);
-
 		PortletAppImpl portletApp = new PortletAppImpl(contextName);
 
 		ServletContext servletContext = new MockServletContext();
+
+		ServletContextPool.put(contextName, servletContext);
 
 		portletApp.setServletContext(servletContext);
 
 		portlet.setPortletApp(portletApp);
 
-		ServletContextPool.put(contextName, servletContext);
+		portlet.setPortletName(contextName);
 
 		doReturn(
 			contextName
