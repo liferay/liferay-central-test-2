@@ -111,7 +111,7 @@ public interface PortletResourceAccessor
 		implements PortletResourceAccessor {
 
 		@Override
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		public Class<List<String>> getAttributeClass() {
 			return (Class)List.class;
 		}
@@ -132,7 +132,7 @@ public interface PortletResourceAccessor
 		implements PortletResourceAccessor {
 
 		@Override
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		public Class<List<String>> getAttributeClass() {
 			return (Class)List.class;
 		}
