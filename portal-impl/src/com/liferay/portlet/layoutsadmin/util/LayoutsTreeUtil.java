@@ -241,6 +241,11 @@ public class LayoutsTreeUtil {
 			return layouts;
 		}
 
+		HttpSession session = request.getSession();
+
+		int loadedLayoutsCount = _getLoadedLayoutsCount(
+			session, groupId, privateLayout, parentLayoutId, treeId);
+
 		int start = ParamUtil.getInteger(request, "start");
 
 		start = Math.max(0, Math.min(start, layouts.size()));
@@ -248,11 +253,6 @@ public class LayoutsTreeUtil {
 		int end = ParamUtil.getInteger(
 			request, "end",
 			start + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN);
-
-		HttpSession session = request.getSession();
-
-		int loadedLayoutsCount = _getLoadedLayoutsCount(
-			session, groupId, privateLayout, parentLayoutId, treeId);
 
 		if (loadedLayoutsCount > end) {
 			end = loadedLayoutsCount;
