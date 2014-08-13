@@ -14,6 +14,7 @@
 
 package com.liferay.portal.tools.seleniumbuilder;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -301,17 +302,7 @@ public class SeleniumBuilder {
 				for (Element commandElement : commandElements) {
 					String commmandName = commandElement.attributeValue("name");
 
-					boolean found = false;
-
-					for (String ignoreCommandName : ignoreCommandNames) {
-						if (ignoreCommandName.equals(commmandName)) {
-							found = true;
-
-							break;
-						}
-					}
-
-					if (found) {
+					if (ArrayUtil.contains(ignoreCommandNames, commmandName)) {
 						continue;
 					}
 
