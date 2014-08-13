@@ -221,6 +221,29 @@ public class SeleniumBuilder {
 
 		return testCaseCount;
 	}
+	
+	private boolean _isIgnoreCommandName(
+		Element rootElement, String commandName) {
+
+		String ignoreCommands = rootElement.attributeValue("ignore-commands");
+
+		if (ignoreCommands == null) {
+			return false;
+		}
+
+		String[] ignoreCommandNames = new String[0];
+
+		ignoreCommands = StringUtil.replace(
+			ignoreCommands, " ", "");
+		ignoreCommands = StringUtil.replace(
+			ignoreCommands, "\n", "");
+		ignoreCommands = StringUtil.replace(
+			ignoreCommands, "\t", "");
+
+		ignoreCommandNames = StringUtil.split(ignoreCommands);
+
+		return ArrayUtil.contains(ignoreCommandNames, commandName);
+	}
 
 	/**
 	 * Writes lists of all test case method names, aggregated by component, to a
@@ -275,22 +298,6 @@ public class SeleniumBuilder {
 			String extendsTestCaseName = rootElement.attributeValue("extends");
 
 			if (extendsTestCaseName != null) {
-				String[] ignoreCommandNames = new String[0];
-
-				String ignoreCommands = rootElement.attributeValue(
-					"ignore-commands");
-
-				if (ignoreCommands != null) {
-					ignoreCommands = StringUtil.replace(
-						ignoreCommands, " ", "");
-					ignoreCommands = StringUtil.replace(
-						ignoreCommands, "\n", "");
-					ignoreCommands = StringUtil.replace(
-						ignoreCommands, "\t", "");
-
-					ignoreCommandNames = StringUtil.split(ignoreCommands);
-				}
-
 				Element extendsRootElement =
 					_seleniumBuilderContext.getTestCaseRootElement(
 						extendsTestCaseName);
@@ -302,7 +309,7 @@ public class SeleniumBuilder {
 				for (Element commandElement : commandElements) {
 					String commandName = commandElement.attributeValue("name");
 
-					if (ArrayUtil.contains(ignoreCommandNames, commandName)) {
+					if (_isIgnoreCommandName(rootElement, commandName)) {
 						continue;
 					}
 
