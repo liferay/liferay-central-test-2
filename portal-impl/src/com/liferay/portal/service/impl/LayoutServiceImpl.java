@@ -879,9 +879,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	@Override
 	public List<Layout> getLayouts(
-			long groupId, boolean privateLayout, long parentLayoutId,
-			boolean incomplete, int start, int end)
-		throws PortalException {
+		long groupId, boolean privateLayout, long parentLayoutId,
+		boolean incomplete, int start, int end) {
 
 		return layoutPersistence.filterFindByG_P_P(
 			groupId, privateLayout, parentLayoutId, start, end);
@@ -889,8 +888,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	@Override
 	public int getLayoutsCount(
-			long groupId, boolean privateLayout, long parentLayoutId)
-		throws PortalException {
+		long groupId, boolean privateLayout, long parentLayoutId) {
 
 		return layoutPersistence.filterCountByG_P_P(
 			groupId, privateLayout, parentLayoutId);
