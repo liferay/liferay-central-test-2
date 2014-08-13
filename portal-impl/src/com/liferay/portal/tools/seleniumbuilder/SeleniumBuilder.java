@@ -300,14 +300,14 @@ public class SeleniumBuilder {
 						extendsRootElement, "command");
 
 				for (Element commandElement : commandElements) {
-					String commmandName = commandElement.attributeValue("name");
+					String commandName = commandElement.attributeValue("name");
 
-					if (ArrayUtil.contains(ignoreCommandNames, commmandName)) {
+					if (ArrayUtil.contains(ignoreCommandNames, commandName)) {
 						continue;
 					}
 
 					String testCaseMethodName =
-						testCaseName + "TestCase#test" + commmandName;
+						testCaseName + "TestCase#test" + commandName;
 
 					compontentTestCaseMethodNames.add(testCaseMethodName);
 
