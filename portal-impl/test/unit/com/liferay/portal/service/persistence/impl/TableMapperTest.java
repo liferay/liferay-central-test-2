@@ -1467,12 +1467,12 @@ public class TableMapperTest {
 
 		@Override
 		public ModelListener<T>[] getListeners() {
-			return listeners.toArray(new ModelListener[listeners.size()]);
+			return _listeners.toArray(new ModelListener[_listeners.size()]);
 		}
 
 		@Override
 		public void registerListener(ModelListener<T> listener) {
-			listeners.add(listener);
+			_listeners.add(listener);
 		}
 
 		public void setNoSuchModelException(boolean noSuchModelException) {
@@ -1481,12 +1481,11 @@ public class TableMapperTest {
 
 		@Override
 		public void unregisterListener(ModelListener<T> listener) {
-			listeners.remove(listener);
+			_listeners.remove(listener);
 		}
 
-		protected List<ModelListener<T>> listeners =
+		private List<ModelListener<T>> _listeners =
 			new ArrayList<ModelListener<T>>();
-
 		private boolean _noSuchModelException;
 
 	}
