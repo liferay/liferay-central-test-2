@@ -31,7 +31,9 @@ public class PersistenceIntegrationJUnitTestRunner
 	}
 
 	@Override
-	protected List<String> processConfigurations(List<String> configLocations) {
+	protected List<String> processConfigLocations(
+		List<String> configLocations) {
+
 		configLocations.remove("META-INF/model-listener-spring.xml");
 
 		return configLocations;
