@@ -71,6 +71,7 @@ public class UserStagedModelDataHandler
 		return;
 	}
 
+	@Override
 	protected void doImportStagedModel(
 			PortletDataContext portletDataContext, User user)
 		throws Exception {
