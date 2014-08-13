@@ -63,24 +63,6 @@ import javax.servlet.http.HttpSession;
 public class LayoutsTreeUtil {
 
 	public static String getLayoutsJSON(
-			HttpServletRequest request, long groupId, String treeId)
-		throws Exception {
-
-		LayoutTreeNodes layoutTreeNodes = new LayoutTreeNodes();
-
-		layoutTreeNodes.addAll(
-			_getLayoutTreeNodes(
-				request, groupId, true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, false, null, treeId));
-		layoutTreeNodes.addAll(
-			_getLayoutTreeNodes(
-				request, groupId, false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, false, null, treeId));
-
-		return _toJSON(request, groupId, layoutTreeNodes);
-	}
-
-	public static String getLayoutsJSON(
 			HttpServletRequest request, long groupId, boolean privateLayout,
 			long parentLayoutId, boolean incomplete, String treeId)
 		throws Exception {
@@ -99,6 +81,24 @@ public class LayoutsTreeUtil {
 		LayoutTreeNodes layoutTreeNodes = _getLayoutTreeNodes(
 			request, groupId, privateLayout, parentLayoutId, incomplete,
 			expandedLayoutIds, treeId);
+
+		return _toJSON(request, groupId, layoutTreeNodes);
+	}
+
+	public static String getLayoutsJSON(
+			HttpServletRequest request, long groupId, String treeId)
+		throws Exception {
+
+		LayoutTreeNodes layoutTreeNodes = new LayoutTreeNodes();
+
+		layoutTreeNodes.addAll(
+			_getLayoutTreeNodes(
+				request, groupId, true,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, false, null, treeId));
+		layoutTreeNodes.addAll(
+			_getLayoutTreeNodes(
+				request, groupId, false,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, false, null, treeId));
 
 		return _toJSON(request, groupId, layoutTreeNodes);
 	}
