@@ -62,7 +62,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LayoutsTreeUtil {
 
-	public static String getAllLayoutsJSON(
+	public static String getLayoutsJSON(
 			HttpServletRequest request, long groupId, String treeId)
 		throws Exception {
 

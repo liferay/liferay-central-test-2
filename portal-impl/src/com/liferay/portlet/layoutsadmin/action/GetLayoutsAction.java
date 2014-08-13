@@ -47,7 +47,7 @@ public class GetLayoutsAction extends JSONAction {
 			return getLayoutsJSON(request, groupId, treeId);
 		}
 		else if (cmd.equals("getAll")) {
-			return LayoutsTreeUtil.getAllLayoutsJSON(request, groupId, treeId);
+			return LayoutsTreeUtil.getLayoutsJSON(request, groupId, treeId);
 		}
 
 		return null;
