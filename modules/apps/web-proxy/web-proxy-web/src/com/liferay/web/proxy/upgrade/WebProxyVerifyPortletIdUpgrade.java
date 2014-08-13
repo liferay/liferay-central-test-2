@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.web.proxy.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -29,10 +30,16 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true,
-	service = WebProxyVerifyPortletIdUpgrade.class
+	immediate = true, service = WebProxyVerifyPortletIdUpgrade.class
 )
 public class WebProxyVerifyPortletIdUpgrade {
+
+	@Reference(unbind = "-")
+	private void setReleaseLocalService(
+		ReleaseLocalService releaseLocalService) {
+
+		_releaseLocalService = releaseLocalService;
+	}
 
 	@Activate
 	private void upgrade() throws PortalException {
@@ -42,8 +49,7 @@ public class WebProxyVerifyPortletIdUpgrade {
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
 					new String[] {
-						"66",
-						"com_liferay_web_proxy_portlet_WebProxyPortlet"
+						"66", "com_liferay_web_proxy_portlet_WebProxyPortlet"
 					}
 				};
 			}
@@ -54,13 +60,6 @@ public class WebProxyVerifyPortletIdUpgrade {
 			WebProxyPortlet.class.getName(),
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 1,
 			false);
-	}
-
-	@Reference(unbind = "-")
-	private void setReleaseLocalService(
-		ReleaseLocalService releaseLocalService) {
-
-		_releaseLocalService = releaseLocalService;
 	}
 
 	private ReleaseLocalService _releaseLocalService;

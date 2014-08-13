@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.xsl.content.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -29,10 +30,23 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true,
-	service = XSLContentUpgrade.class
+	immediate = true, service = XSLContentUpgrade.class
 )
 public class XSLContentUpgrade {
+
+	@Reference
+	private void setReleaseLocalService(
+		ReleaseLocalService releaseLocalService) {
+
+		_releaseLocalService = releaseLocalService;
+	}
+
+	@SuppressWarnings("unused")
+	private void unsetReleaseLocalService(
+		ReleaseLocalService releaseLocalService) {
+
+		_releaseLocalService = null;
+	}
 
 	@Activate
 	private void upgrade() throws PortalException {
@@ -54,20 +68,6 @@ public class XSLContentUpgrade {
 			XSLContentPortlet.class.getName(),
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 1,
 			false);
-	}
-
-	@Reference
-	private void setReleaseLocalService(
-		ReleaseLocalService releaseLocalService) {
-
-		_releaseLocalService = releaseLocalService;
-	}
-
-	@SuppressWarnings("unused")
-	private void unsetReleaseLocalService(
-		ReleaseLocalService releaseLocalService) {
-
-		_releaseLocalService = null;
 	}
 
 	private ReleaseLocalService _releaseLocalService;

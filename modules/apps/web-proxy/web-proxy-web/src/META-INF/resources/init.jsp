@@ -44,7 +44,7 @@ page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.StringUtil" %><%@
 page import="com.liferay.portlet.PortletURLUtil" %>
 
-<%@page import="javax.portlet.PortletMode" %><%@
+<%@ page import="javax.portlet.PortletMode" %><%@
 page import="javax.portlet.PortletURL" %><%@
 page import="javax.portlet.PortletMode" %><%@
 page import="javax.portlet.WindowState" %>
