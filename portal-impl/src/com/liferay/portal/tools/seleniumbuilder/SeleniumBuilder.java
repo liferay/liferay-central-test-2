@@ -225,22 +225,19 @@ public class SeleniumBuilder {
 	private boolean _isIgnoreCommandName(
 		Element rootElement, String commandName) {
 
-		String ignoreCommands = rootElement.attributeValue("ignore-commands");
+		String ignoreCommandNamesString = rootElement.attributeValue(
+			"ignore-command-names");
 
-		if (ignoreCommands == null) {
+		if (ignoreCommandNamesString == null) {
 			return false;
 		}
 
-		String[] ignoreCommandNames = new String[0];
+		String[] ignoreCommandNames = StringUtil.split(
+			ignoreCommandNamesString);
 
-		ignoreCommands = StringUtil.replace(
-			ignoreCommands, " ", "");
-		ignoreCommands = StringUtil.replace(
-			ignoreCommands, "\n", "");
-		ignoreCommands = StringUtil.replace(
-			ignoreCommands, "\t", "");
-
-		ignoreCommandNames = StringUtil.split(ignoreCommands);
+		ignoreCommandNamesString = StringUtil.replace(
+			ignoreCommandNamesString,
+			new String[] {" ", "\n", "\t"}, new String[] {"", "", ""});
 
 		return ArrayUtil.contains(ignoreCommandNames, commandName);
 	}
