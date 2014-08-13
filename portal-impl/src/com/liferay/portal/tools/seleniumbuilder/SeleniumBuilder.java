@@ -296,7 +296,7 @@ public class SeleniumBuilder {
 					ignoreCommands = StringUtil.replace(
 						ignoreCommands, "\t", "");
 
-					ignoreCommandNames = StringUtil.split(ignoreCommands, ",");
+					ignoreCommandNames = StringUtil.split(ignoreCommands);
 				}
 
 				for (Element commandElement : commandElements) {
