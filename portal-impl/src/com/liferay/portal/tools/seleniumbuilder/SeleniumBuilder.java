@@ -221,7 +221,7 @@ public class SeleniumBuilder {
 
 		return testCaseCount;
 	}
-	
+
 	private boolean _isIgnoreCommandName(
 		Element rootElement, String commandName) {
 
@@ -236,8 +236,8 @@ public class SeleniumBuilder {
 			ignoreCommandNamesString);
 
 		ignoreCommandNamesString = StringUtil.replace(
-			ignoreCommandNamesString,
-			new String[] {" ", "\n", "\t"}, new String[] {"", "", ""});
+			ignoreCommandNamesString, new String[] {" ", "\n", "\t"},
+			new String[] {"", "", ""});
 
 		return ArrayUtil.contains(ignoreCommandNames, commandName);
 	}
