@@ -50,10 +50,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class XSLContentPortlet extends MVCPortlet {
 
-	/**
-	 * Force upgrades to register before the portlet is registered to prevent
-	 * race conditions.
-	 */
 	@Reference(unbind = "-")
 	private void setXSLContentUpgrade(XSLContentUpgrade xslContentUpgrade) {
 	}

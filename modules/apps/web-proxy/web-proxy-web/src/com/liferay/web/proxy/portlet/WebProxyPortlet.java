@@ -225,10 +225,6 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 		writer.close();
 	}
 
-	/**
-	 * Force upgrades to register before the portlet is registered to prevent
-	 * race conditions.
-	 */
 	@Reference(unbind = "-")
 	private void setWebProxyVerifyPortletIdUpgrade(
 		WebProxyUpgrade webProxyUpgrade) {
