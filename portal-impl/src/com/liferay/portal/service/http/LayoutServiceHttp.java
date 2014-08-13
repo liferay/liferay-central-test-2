@@ -1000,8 +1000,7 @@ public class LayoutServiceHttp {
 
 	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long parentLayoutId, boolean incomplete, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long parentLayoutId, boolean incomplete, int start, int end) {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class,
 					"getLayouts", _getLayoutsParameterTypes28);
@@ -1015,10 +1014,6 @@ public class LayoutServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -1032,8 +1027,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static int getLayoutsCount(HttpPrincipal httpPrincipal,
-		long groupId, boolean privateLayout, long parentLayoutId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long groupId, boolean privateLayout, long parentLayoutId) {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class,
 					"getLayoutsCount", _getLayoutsCountParameterTypes29);
@@ -1047,10 +1041,6 @@ public class LayoutServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
