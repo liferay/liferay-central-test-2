@@ -39,7 +39,7 @@ import java.io.IOException;
 /**
  * Represents a portal layout set, providing access to the layout set's color schemes,
  * groups, prototypes, themes, and more.
- * 
+ *
  * <p>
  * Each {@link Group} in Liferay can have a public and a private layout set. This
  * keeps information common to all layouts (pages) in the layout set.
@@ -293,7 +293,7 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 	/**
 	 * Sets the name of the layout set's virtual host.
 	 *
-     * @param virtualHostname the name of the layout set's virtual host
+	 * @param virtualHostname the name of the layout set's virtual host
 	 * @see #getVirtualHostname()
 	 */
 	@Override
