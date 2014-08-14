@@ -21,48 +21,50 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public interface DLFileEntryActionsDisplayContext extends DLDisplayContext {
 
-	String getPublishButtonLabel() throws PortalException;
+	public String getPublishButtonLabel() throws PortalException;
 
-	String getSaveButtonLabel() throws PortalException;
+	public String getSaveButtonLabel() throws PortalException;
 
-	boolean isAssetMetadataVisible() throws PortalException;
+	public boolean isAssetMetadataVisible() throws PortalException;
 
-	boolean isCancelCheckoutDocumentButtonDisabled() throws PortalException;
+	public boolean isCancelCheckoutDocumentButtonDisabled()
+		throws PortalException;
 
-	boolean isCancelCheckoutDocumentButtonVisible() throws PortalException;
+	public boolean isCancelCheckoutDocumentButtonVisible()
+		throws PortalException;
 
-	boolean isCheckinButtonDisabled() throws PortalException;
+	public boolean isCheckinButtonDisabled() throws PortalException;
 
-	boolean isCheckinButtonVisible() throws PortalException;
+	public boolean isCheckinButtonVisible() throws PortalException;
 
-	boolean isCheckoutDocumentButtonVisible() throws PortalException;
+	public boolean isCheckoutDocumentButtonVisible() throws PortalException;
 
-	boolean isCheckoutDocumentDisabled() throws PortalException;
+	public boolean isCheckoutDocumentDisabled() throws PortalException;
 
-	boolean isDeleteButtonVisible() throws PortalException;
+	public boolean isDeleteButtonVisible() throws PortalException;
 
-	boolean isDownloadButtonVisible() throws PortalException;
+	public boolean isDownloadButtonVisible() throws PortalException;
 
-	boolean isEditButtonVisible() throws PortalException;
+	public boolean isEditButtonVisible() throws PortalException;
 
-	boolean isMoveButtonVisible() throws PortalException;
+	public boolean isMoveButtonVisible() throws PortalException;
 
-	boolean isMoveToTheRecycleBinButtonVisible() throws PortalException;
+	public boolean isMoveToTheRecycleBinButtonVisible() throws PortalException;
 
-	boolean isOpenInMsOfficeButtonVisible() throws PortalException;
+	public boolean isOpenInMsOfficeButtonVisible() throws PortalException;
 
-	boolean isPermissionsButtonVisible() throws PortalException;
+	public boolean isPermissionsButtonVisible() throws PortalException;
 
-	boolean isPublishButtonDisabled() throws PortalException;
+	public boolean isPublishButtonDisabled() throws PortalException;
 
-	boolean isPublishButtonVisible() throws PortalException;
+	public boolean isPublishButtonVisible() throws PortalException;
 
-	boolean isSaveButtonDisabled() throws PortalException;
+	public boolean isSaveButtonDisabled() throws PortalException;
 
-	boolean isSaveButtonVisible() throws PortalException;
+	public boolean isSaveButtonVisible() throws PortalException;
 
-	boolean isViewButtonVisible() throws PortalException;
+	public boolean isViewButtonVisible() throws PortalException;
 
-	boolean isViewOriginalFileButtonVisible() throws PortalException;
+	public boolean isViewOriginalFileButtonVisible() throws PortalException;
 
 }
