@@ -42,14 +42,11 @@ public class DefaultDLFileEntryActionsDisplayContext
 	extends BaseDLFileEntryActionsDisplayContext
 	implements DLFileEntryActionsDisplayContext {
 
-	public static final UUID ID = UUID.fromString(
-		"85F6C50E-3893-4E32-9D63-208528A503FA");
-
 	public DefaultDLFileEntryActionsDisplayContext(
 		HttpServletRequest request, HttpServletResponse response,
 		FileEntry fileEntry, FileVersion fileVersion) {
 
-		super(ID, null, request, response, fileEntry, fileVersion);
+		super(_UUID, null, request, response, fileEntry, fileVersion);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -361,6 +358,9 @@ public class DefaultDLFileEntryActionsDisplayContext
 	private boolean _isWebDAVEnabled() {
 		return _portletDisplay.isWebDAVEnabled();
 	}
+
+	private static final UUID _UUID = UUID.fromString(
+		"85F6C50E-3893-4E32-9D63-208528A503FA");
 
 	private long _companyId;
 	private DLFileEntryActionsDisplayContextHelper
