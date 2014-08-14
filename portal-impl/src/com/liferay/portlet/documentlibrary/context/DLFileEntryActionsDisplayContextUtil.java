@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.context;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 
 import java.util.Collection;
@@ -38,16 +39,15 @@ public class DLFileEntryActionsDisplayContextUtil {
 			new DefaultDLFileEntryActionsDisplayContext(
 				request, response, fileEntry, fileVersion);
 
-		dlFileEntryActionsDisplayContext =
-			_chainExtendedDLFileEntryDisplayContexts(
-				request, response, fileEntry, fileVersion,
-				dlFileEntryActionsDisplayContext);
+		dlFileEntryActionsDisplayContext = _chainDLFileEntryDisplayContexts(
+			request, response, fileEntry, fileVersion,
+			dlFileEntryActionsDisplayContext);
 
 		return dlFileEntryActionsDisplayContext;
 	}
 
 	private static DLFileEntryActionsDisplayContext
-		_chainExtendedDLFileEntryDisplayContexts(
+		_chainDLFileEntryDisplayContexts(
 			HttpServletRequest request, HttpServletResponse response,
 			FileEntry fileEntry, FileVersion fileVersion,
 			DLFileEntryActionsDisplayContext dlFileEntryActionsDisplayContext) {
@@ -74,7 +74,9 @@ public class DLFileEntryActionsDisplayContextUtil {
 		_getDLFileEntryActionsDisplayContextFactories() {
 
 		try {
-			return RegistryUtil.getRegistry().getServices(
+			Registry registry = RegistryUtil.getRegistry();
+
+			return registry.getServices(
 				DLFileEntryActionsDisplayContextFactory.class, null);
 		}
 		catch (Exception e) {
