@@ -32,7 +32,8 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServic
 			"com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"
 	}
 )
-public class SCFrameworkVersionPermission implements BaseModelPermissionChecker {
+public class SCFrameworkVersionPermission
+	implements BaseModelPermissionChecker {
 
 	public static void check(
 			PermissionChecker permissionChecker, long frameworkVersionId,
