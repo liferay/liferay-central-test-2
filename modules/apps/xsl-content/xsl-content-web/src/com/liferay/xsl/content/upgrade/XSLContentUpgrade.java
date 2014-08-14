@@ -48,7 +48,7 @@ public class XSLContentUpgrade {
 	}
 
 	@Activate
-	private void upgrade() throws PortalException {
+	protected void upgrade() throws PortalException {
 		UpgradePortletId upgradePortletId = new UpgradePortletId() {
 
 			@Override
