@@ -154,8 +154,7 @@ public class MBMessageSearchTest extends BaseSearchTestCase {
 
 	@Override
 	protected void deleteBaseModel(long primaryKey) throws Exception {
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(
-			primaryKey);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(primaryKey);
 
 		if (!message.isRoot()) {
 			MBMessageLocalServiceUtil.deleteMessage(primaryKey);
