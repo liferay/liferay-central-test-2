@@ -574,21 +574,20 @@ public class ImageToolImpl implements ImageTool {
 	protected RenderedImage doScale(
 		RenderedImage renderedImage, int scaledHeight, int scaledWidth) {
 
-		// See the following link for reference on how resize should be done.
-		// http://www.oracle.com/technetwork/java/index-137037.html
+		// See http://www.oracle.com/technetwork/java/index-137037.html
 
 		BufferedImage originalBufferedImage = getBufferedImage(renderedImage);
 
 		ColorModel originalColorModel = originalBufferedImage.getColorModel();
 
-		Graphics2D originalGraphics = originalBufferedImage.createGraphics();
+		Graphics2D originalGraphics2D = originalBufferedImage.createGraphics();
 
 		if (originalColorModel.hasAlpha()) {
-			originalGraphics.setComposite(AlphaComposite.Src);
+			originalGraphics2D.setComposite(AlphaComposite.Src);
 		}
 
 		GraphicsConfiguration originalGraphicsConfiguration =
-			originalGraphics.getDeviceConfiguration();
+			originalGraphics2D.getDeviceConfiguration();
 
 		BufferedImage scaledBufferedImage =
 			originalGraphicsConfiguration.createCompatibleImage(
@@ -597,12 +596,12 @@ public class ImageToolImpl implements ImageTool {
 
 		Graphics scaledGraphics = scaledBufferedImage.getGraphics();
 
-		java.awt.Image scaledImage = originalBufferedImage.getScaledInstance(
-			scaledWidth, scaledHeight, java.awt.Image.SCALE_SMOOTH);
+		scaledGraphics.drawImage(
+			originalBufferedImage.getScaledInstance(
+				scaledWidth, scaledHeight, java.awt.Image.SCALE_SMOOTH),
+			0, 0, null);
 
-		scaledGraphics.drawImage(scaledImage, 0, 0, null);
-
-		originalGraphics.dispose();
+		originalGraphics2D.dispose();
 
 		return scaledBufferedImage;
 	}
