@@ -80,9 +80,7 @@ if (fileEntryTypeId > 0) {
 
 long assetClassPK = 0;
 
-DLFileEntryActionsDisplayContext dlFileEntryActionsDisplayContext =
-	DLFileEntryActionsDisplayContextUtil.getDLFileEntryActionsDisplayContext(
-		request, response, fileEntry, fileEntry.getFileVersion());
+DLFileEntryActionsDisplayContext dlFileEntryActionsDisplayContext = DLFileEntryActionsDisplayContextUtil.getDLFileEntryActionsDisplayContext(request, response, fileEntry, fileEntry.getFileVersion());
 %>
 
 <portlet:actionURL var="uploadMultipleFileEntriesURL">

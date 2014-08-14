@@ -104,12 +104,9 @@ if (fileShortcut != null) {
 	fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getToFileEntryId());
 }
 
-DLFileEntryActionsDisplayContext dlFileEntryActionsDisplayContext =
-	DLFileEntryActionsDisplayContextUtil.getDLFileEntryActionsDisplayContext(
-		request, response, fileEntry, fileEntry.getFileVersion());
+DLFileEntryActionsDisplayContext dlFileEntryActionsDisplayContext = DLFileEntryActionsDisplayContextUtil.getDLFileEntryActionsDisplayContext(request, response, fileEntry, fileEntry.getFileVersion());
 
-DLActionsDisplayContext dlActionsDisplayContext =
-	new DLActionsDisplayContext(request, dlPortletInstanceSettings);
+DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
 %>
 
 <liferay-util:buffer var="iconMenu">
