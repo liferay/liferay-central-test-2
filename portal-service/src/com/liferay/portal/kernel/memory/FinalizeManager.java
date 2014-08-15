@@ -74,7 +74,7 @@ public class FinalizeManager {
 		Reference<T> reference = referenceFactory.createReference(
 			realReference, _referenceQueue);
 
-		_referenceActionMap.put(reference, finalizeAction);
+		_finalizeActions.put(reference, finalizeAction);
 
 		if (!THREAD_ENABLED) {
 			_pollingCleanup();
@@ -93,7 +93,7 @@ public class FinalizeManager {
 	private static void _finalizeReference(
 		Reference<? extends Object> reference) {
 
-		FinalizeAction finalizeAction = _referenceActionMap.remove(reference);
+		FinalizeAction finalizeAction = _finalizeActions.remove(reference);
 
 		try {
 			finalizeAction.doFinalize(reference);
@@ -111,7 +111,7 @@ public class FinalizeManager {
 		}
 	}
 
-	private static final Map<Reference<?>, FinalizeAction> _referenceActionMap =
+	private static final Map<Reference<?>, FinalizeAction> _finalizeActions =
 		new ConcurrentHashMap<Reference<?>, FinalizeAction>();
 	private static final ReferenceQueue<Object> _referenceQueue =
 		new ReferenceQueue<Object>();
