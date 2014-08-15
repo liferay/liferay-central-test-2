@@ -35,14 +35,14 @@ public class FinalizeManager {
 				return new EqualityPhantomReference<T>(
 					reference, referenceQueue) {
 
-						@Override
-						public void clear() {
-							_finalizeActions.remove(this);
+					@Override
+					public void clear() {
+						_finalizeActions.remove(this);
 
-							super.clear();
-						}
+						super.clear();
+					}
 
-					};
+				};
 			}
 
 		};
