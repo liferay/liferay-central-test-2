@@ -892,7 +892,7 @@ public class WabProcessor {
 
 			String[] partialPackageNames = {
 				"", ".model", ".model.impl", ".service", ".service.base",
-				".service.impl", ".service.http", ".service.persistence",
+				".service.http", ".service.impl", ".service.persistence",
 				".service.persistence.impl"
 			};
 
