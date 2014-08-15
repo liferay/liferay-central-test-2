@@ -30,10 +30,10 @@ public class FinalizeManager {
 
 			@Override
 			public <T> Reference<T> createReference(
-				T realReference, ReferenceQueue<? super T> referenceQueue) {
+				T reference, ReferenceQueue<? super T> referenceQueue) {
 
 				return new EqualityPhantomReference<T>(
-					realReference, referenceQueue);
+					reference, referenceQueue);
 			}
 
 		};
@@ -43,10 +43,9 @@ public class FinalizeManager {
 
 			@Override
 			public <T> Reference<T> createReference(
-				T realReference, ReferenceQueue<? super T> referenceQueue) {
+				T reference, ReferenceQueue<? super T> referenceQueue) {
 
-				return new EqualitySoftReference<T>(
-					realReference, referenceQueue);
+				return new EqualitySoftReference<T>(reference, referenceQueue);
 			}
 
 		};
@@ -68,19 +67,19 @@ public class FinalizeManager {
 		};
 
 	public static <T> Reference<T> register(
-		T realReference, FinalizeAction finalizeAction,
+		T reference, FinalizeAction finalizeAction,
 		ReferenceFactory referenceFactory) {
 
-		Reference<T> reference = referenceFactory.createReference(
-			realReference, _referenceQueue);
+		Reference<T> newReference = referenceFactory.createReference(
+			reference, _referenceQueue);
 
-		_finalizeActions.put(reference, finalizeAction);
+		_finalizeActions.put(newReference, finalizeAction);
 
 		if (!THREAD_ENABLED) {
 			_pollingCleanup();
 		}
 
-		return reference;
+		return newReference;
 	}
 
 	public interface ReferenceFactory {
