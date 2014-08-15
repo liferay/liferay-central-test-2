@@ -53,7 +53,8 @@ public class FinalizeManagerTest {
 		final RuntimeException runtimeException = new RuntimeException();
 
 		Reference<Object> reference = FinalizeManager.register(
-			new Object(), new FinalizeAction() {
+			new Object(),
+			new FinalizeAction() {
 
 				@Override
 				public void doFinalize(Reference<?> reference) {
@@ -146,7 +147,7 @@ public class FinalizeManagerTest {
 
 		finalizeRecorder = null;
 
-		// First GC to trigger finalize()
+		// First GC to trigger Object#finalize
 
 		if (referenceType == ReferenceType.SOFT) {
 			GCUtil.fullGC();
@@ -160,7 +161,7 @@ public class FinalizeManagerTest {
 		if (referenceType == ReferenceType.PHANTOM) {
 			Assert.assertFalse(markFinalizeAction.isMarked());
 
-			// Second GC to push reference enqueue
+			// Second GC to trigger ReferenceQueue#enqueue
 
 			GCUtil.gc();
 		}
@@ -262,7 +263,7 @@ public class FinalizeManagerTest {
 
 	private static enum ReferenceType {
 
-		SOFT, WEAK, PHANTOM
+		SOFT, PHANTOM, WEAK
 
 	}
 
