@@ -2136,9 +2136,7 @@ tck.url=true</echo>
 				<isset property="skip.delete-selenium-output" />
 			</not>
 			<then>
-				<delete dir="${selenium.output.dir}" />
-
-				<mkdir dir="${selenium.output.dir}" />
+				<remake-dir dir="${selenium.output.dir}" />
 			</then>
 		</if>
 
