@@ -101,7 +101,7 @@ public class StagingImplTest {
 	}
 
 	@Test
-	public void testLocalStagingWithPageVersioningJournal() throws Exception {
+	public void testLocalStagingWithLayoutVersioningJournal() throws Exception {
 		enableLocalStagingWithContent(true, false, true);
 	}
 
