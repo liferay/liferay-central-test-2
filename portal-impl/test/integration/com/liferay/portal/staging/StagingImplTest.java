@@ -79,7 +79,7 @@ public class StagingImplTest {
 	}
 
 	@Test
-	public void testLocalStagingCategories() throws Exception {
+	public void testLocalStagingAssetCategories() throws Exception {
 		enableLocalStagingWithContent(false, true, false);
 	}
 
@@ -89,12 +89,12 @@ public class StagingImplTest {
 	}
 
 	@Test
-	public void testLocalStagingWithPageVersioning() throws Exception {
+	public void testLocalStagingWithLayoutVersioning() throws Exception {
 		enableLocalStaging(true);
 	}
 
 	@Test
-	public void testLocalStagingWithPageVersioningCategories()
+	public void testLocalStagingWithLayoutVersioningAssetCategories()
 		throws Exception {
 
 		enableLocalStagingWithContent(false, true, true);
@@ -188,7 +188,7 @@ public class StagingImplTest {
 			boolean branching, ServiceContext serviceContext)
 		throws Exception {
 
-		int initialPagesCount = LayoutLocalServiceUtil.getLayoutsCount(
+		int initialLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
 			_group, false);
 
 		StagingLocalServiceUtil.enableLocalStaging(
@@ -200,13 +200,16 @@ public class StagingImplTest {
 		Assert.assertNotNull(stagingGroup);
 
 		Assert.assertEquals(
-			initialPagesCount,
+			initialLayoutsCount,
 			LayoutLocalServiceUtil.getLayoutsCount(stagingGroup, false));
 	}
 
 	protected void enableLocalStagingWithContent(
-			boolean stageJournal, boolean stageCategories, boolean branching)
+			boolean stageJournal, boolean stageAssetCategories,
+			boolean branching)
 		throws Exception {
+
+		// Layouts
 
 		LayoutTestUtil.addLayout(_group.getGroupId(), "Layout 1");
 		LayoutTestUtil.addLayout(_group.getGroupId(), "Layout 2");
@@ -233,7 +236,7 @@ public class StagingImplTest {
 		parameters.put(
 			PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
 				PortletKeys.ASSET_CATEGORIES_ADMIN,
-			new String[] {String.valueOf(stageCategories)});
+			new String[] {String.valueOf(stageAssetCategories)});
 		parameters.put(
 			PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
 				PortletKeys.JOURNAL,
@@ -288,7 +291,7 @@ public class StagingImplTest {
 		journalArticle = JournalArticleLocalServiceUtil.getArticle(
 			_group.getGroupId(), journalArticle.getArticleId());
 
-		if (stageCategories) {
+		if (stageAssetCategories) {
 			for (Locale locale : _locales) {
 				Assert.assertEquals(
 					assetCategory.getTitle(locale),
