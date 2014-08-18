@@ -240,8 +240,10 @@ public class DocumentImplTest {
 		searchContext.setAttribute(Field.STATUS, WorkflowConstants.STATUS_ANY);
 		searchContext.setKeywords(keywords);
 		searchContext.setGroupIds(new long[] {});
-		searchContext.getQueryConfig().setSelectedFieldNames(
-			getSelectedFields());
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setSelectedFieldNames(getSelectedFieldNames());
 
 		return searchContext;
 	}
@@ -249,7 +251,7 @@ public class DocumentImplTest {
 	protected void checkSearchContext(SearchContext searchContext)
 		throws Exception {
 
-		Hits results = _indexer.search(searchContext, getSelectedFields());
+		Hits results = _indexer.search(searchContext, getSelectedFieldNames());
 
 		for (Document document : results.getDocs()) {
 			String screenName = document.get("screenName");
@@ -297,8 +299,10 @@ public class DocumentImplTest {
 			SearchContext searchContext, Sort sort, String[] screenNames)
 		throws Exception {
 
-		searchContext.getQueryConfig().setSelectedFieldNames(
-			getSelectedFields());
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setSelectedFieldNames(getSelectedFieldNames());
+
 		searchContext.setSorts(sort);
 
 		Query query = _indexer.getFullQuery(searchContext);
@@ -375,7 +379,7 @@ public class DocumentImplTest {
 		return list.toArray(new Long[list.size()]);
 	}
 
-	protected String[] getSelectedFields() {
+	protected String[] getSelectedFieldNames() {
 		return new String[] {
 			_FIELD_DOUBLE, _FIELD_DOUBLE_ARRAY, _FIELD_FLOAT,
 			_FIELD_FLOAT_ARRAY, _FIELD_INTEGER, _FIELD_INTEGER_ARRAY,
