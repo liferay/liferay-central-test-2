@@ -198,7 +198,6 @@ public class StagingImplTest {
 		Group stagingGroup = _group.getStagingGroup();
 
 		Assert.assertNotNull(stagingGroup);
-
 		Assert.assertEquals(
 			initialLayoutsCount,
 			LayoutLocalServiceUtil.getLayoutsCount(stagingGroup, false));
