@@ -208,8 +208,8 @@ public class StagingImplTest {
 			boolean stageJournal, boolean stageCategories, boolean branching)
 		throws Exception {
 
-		LayoutTestUtil.addLayout(_group.getGroupId(), "Page1");
-		LayoutTestUtil.addLayout(_group.getGroupId(), "Page2");
+		LayoutTestUtil.addLayout(_group.getGroupId(), "Layout 1");
+		LayoutTestUtil.addLayout(_group.getGroupId(), "Layout 2");
 
 		// Create content
 
