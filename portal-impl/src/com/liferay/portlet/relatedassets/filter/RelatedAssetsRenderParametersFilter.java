@@ -63,7 +63,7 @@ public class RelatedAssetsRenderParametersFilter implements RenderFilter {
 	}
 
 	@Override
-	public void init(FilterConfig filterConfig) throws PortletException {
+	public void init(FilterConfig filterConfig) {
 	}
 
 	protected void clearDynamicServletRequestParameters(
