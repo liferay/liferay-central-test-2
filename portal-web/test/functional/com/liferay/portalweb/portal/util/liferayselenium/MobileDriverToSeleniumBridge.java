@@ -465,7 +465,7 @@ public class MobileDriverToSeleniumBridge
 	}
 
 	@Override
-	public Number getXpathCount(String xpath) {
+	public Number getXpathCount(String xPath) {
 		throw new UnsupportedOperationException();
 	}
 
