@@ -38,7 +38,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * @author Minhchau Dang
  * @author Preston Crary
  */
-public class RelatedAssetsRenderParametersFilter implements RenderFilter {
+public class RelatedAssetsRenderParametersPortletFilter
+	implements RenderFilter {
 
 	@Override
 	public void destroy() {
