@@ -40,8 +40,6 @@
 		}
 	);
 
-	var REGEX_DASH = /-([a-z])/gi;
-
 	var STR_LEFT_SQUARE_BRACKET = '[';
 
 	var STR_RIGHT_SQUARE_BRACKET = ']';
