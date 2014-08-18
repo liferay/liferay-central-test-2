@@ -11,7 +11,6 @@ AUI.add(
 		var Lang = A.Lang;
 
 		var booleanParse = A.DataType.Boolean.parse;
-
 		var camelize = Lang.String.camelize;
 		var instanceOf = A.instanceOf;
 		var isObject = Lang.isObject;
