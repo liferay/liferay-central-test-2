@@ -194,7 +194,7 @@ public class Logger {
 		sb.append("<img alt=\"");
 		sb.append(_screenshotCount);
 		sb.append("\" height=\"450\" src=\"screenshots/");
-		sb.append("actionBeforeFailure");
+		sb.append("ScreenshotBeforeAction");
 		sb.append(_screenshotErrorCount - 1);
 		sb.append(".jpg\" width=\"630\" />");
 		sb.append("<br />");

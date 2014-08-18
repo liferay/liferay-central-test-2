@@ -881,30 +881,6 @@ public class LiferaySeleniumHelper {
 		ImageIO.write(bufferedImage, "jpg", file);
 	}
 
-	public static void saveScreenshotBeforeFailure(
-			LiferaySelenium liferaySelenium)
-		throws Exception {
-
-		_screenshotErrorCount++;
-
-		File file = new File(
-			liferaySelenium.getProjectDir() + "portal-web/test-results/" +
-				"functional/screenshots/" + "ScreenshotBeforeAction" +
-					_screenshotErrorCount + ".jpg");
-
-		file.mkdirs();
-
-		Robot robot = new Robot();
-
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
-
-		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
-
-		ImageIO.write(bufferedImage, "jpg", file);
-	}
-
 	public static void sendEmail(
 			LiferaySelenium liferaySelenium, String to, String subject,
 			String body)
@@ -1140,11 +1116,16 @@ public class LiferaySeleniumHelper {
 		_screen.type(Key.ENTER);
 	}
 
-	public static void takeScreenshot(LiferaySelenium liferaySelenium)
+	public static void takeScreenshot(
+			LiferaySelenium liferaySelenium, Boolean fail)
 		throws Exception {
 
+		if (fail == true) {
+			_screenshotErrorCount++;
+		}
+
 		File file = new File(
-			liferaySelenium.getProjectDir() + "portal-web/test-results/" +
+			liferaySelenium.getProjectDirName() + "portal-web/test-results/" +
 				"functional/screenshots/" + "ScreenshotBeforeAction" +
 					_screenshotErrorCount + ".jpg");
 

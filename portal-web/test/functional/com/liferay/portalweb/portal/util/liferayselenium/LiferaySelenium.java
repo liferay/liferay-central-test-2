@@ -196,8 +196,6 @@ public interface LiferaySelenium extends Selenium {
 
 	public void scrollWebElementIntoView(String locator) throws Exception;
 
-	public void saveScreenshotBeforeFailure() throws Exception;
-
 	public void selectAndWait(String selectLocator, String optionLocator);
 
 	public void sendActionDescriptionLogger(String description);
@@ -263,7 +261,7 @@ public interface LiferaySelenium extends Selenium {
 
 	public void stopLogger();
 
-	public void takeScreenshot() throws Exception;
+	public void takeScreenshot(Boolean fail) throws Exception;
 
 	public void typeAceEditor(String locator, String value);
 

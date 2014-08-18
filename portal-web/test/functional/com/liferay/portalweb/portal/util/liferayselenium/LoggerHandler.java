@@ -84,7 +84,7 @@ public class LoggerHandler implements InvocationHandler {
 				return null;
 			}
 
-			_liferaySelenium.saveScreenshotBeforeFailure();
+			_liferaySelenium.takeScreenshot(true);
 
 			_logger.logError(method, arguments, throwable);
 

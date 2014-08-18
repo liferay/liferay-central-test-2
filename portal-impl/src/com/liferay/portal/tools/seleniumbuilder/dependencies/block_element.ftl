@@ -85,7 +85,7 @@
 
 			<#include "action_log_element.ftl">
 
-			${selenium}.takeScreenshot();
+			${selenium}.takeScreenshot(false);
 
 			<#include "action_element.ftl">
 
