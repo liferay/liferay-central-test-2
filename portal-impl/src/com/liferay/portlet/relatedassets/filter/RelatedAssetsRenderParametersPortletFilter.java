@@ -79,10 +79,11 @@ public class RelatedAssetsRenderParametersPortletFilter
 				break;
 			}
 
-			HttpServletRequestWrapper requestWrapper =
+			HttpServletRequestWrapper httpServletRequestWrapper =
 				(HttpServletRequestWrapper)request;
 
-			request = (HttpServletRequest)requestWrapper.getRequest();
+			request =
+				(HttpServletRequest)httpServletRequestWrapper.getRequest();
 		}
 
 		if (dynamicServletRequest != null) {
