@@ -12,6 +12,7 @@
 	<xsl:template match="@*|node()">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
+
 			<xsl:if test="not(string(.)) and not(node())">
 				<xsl:comment></xsl:comment>
 			</xsl:if>
