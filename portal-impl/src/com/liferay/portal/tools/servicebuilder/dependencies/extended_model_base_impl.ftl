@@ -2,8 +2,6 @@ package ${packagePath}.model.impl;
 
 import ${packagePath}.model.${entity.name};
 
-import aQute.bnd.annotation.ProviderType;
-
 <#if entity.hasLocalService() && entity.hasColumns()>
 	import ${packagePath}.service.${entity.name}LocalServiceUtil;
 
@@ -15,6 +13,8 @@ import aQute.bnd.annotation.ProviderType;
 	import java.util.ArrayList;
 	import java.util.List;
 </#if>
+
+import aQute.bnd.annotation.ProviderType;
 
 /**
  * The extended model base implementation for the ${entity.name} service. Represents a row in the &quot;${entity.table}&quot; database table, with each column mapped to a property of this class.
