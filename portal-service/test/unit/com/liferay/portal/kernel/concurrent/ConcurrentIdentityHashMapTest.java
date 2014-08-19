@@ -59,7 +59,7 @@ public class ConcurrentIdentityHashMapTest {
 	}
 
 	@Test
-	public void testIdentityHashMap() {
+	public void testConcurrentIdentityHashMap() {
 		ConcurrentIdentityHashMap<String, Object> concurrentIdentityHashMap =
 			new ConcurrentIdentityHashMap<String, Object>();
 

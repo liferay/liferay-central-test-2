@@ -107,7 +107,8 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 		IK innerKey = mapKey(key);
 
-		IV oldInnerValue = innerConcurrentMap.put(innerKey, mapValue(key, value));
+		IV oldInnerValue = innerConcurrentMap.put(
+			innerKey, mapValue(key, value));
 
 		if (oldInnerValue == null) {
 			return null;
@@ -138,7 +139,8 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 		IK innerKey = mapKey(key);
 		IV innerValue = mapValue(key, value);
 
-		IV previousInnerValue = innerConcurrentMap.putIfAbsent(innerKey, innerValue);
+		IV previousInnerValue = innerConcurrentMap.putIfAbsent(
+			innerKey, innerValue);
 
 		if (previousInnerValue == null) {
 			return null;
@@ -205,7 +207,8 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 		IV newInnerValue = mapValue(key, value);
 
-		IV oldInnerValue = innerConcurrentMap.replace(mapKeyForQuery(key), newInnerValue);
+		IV oldInnerValue = innerConcurrentMap.replace(
+			mapKeyForQuery(key), newInnerValue);
 
 		if (oldInnerValue == null) {
 			unmapValue(newInnerValue);
@@ -244,7 +247,9 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 			return false;
 		}
 
-		if (innerConcurrentMap.replace(innerKey, oldInnerValue, newInnerValue)) {
+		if (innerConcurrentMap.replace(
+				innerKey, oldInnerValue, newInnerValue)) {
+
 			unmapValue(oldInnerValue);
 
 			return true;
