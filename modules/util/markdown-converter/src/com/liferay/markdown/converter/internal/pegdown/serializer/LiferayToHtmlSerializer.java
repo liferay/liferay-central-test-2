@@ -69,7 +69,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 	}
 
 	@Override
-    public void visit(ParaNode node) {
+	public void visit(ParaNode node) {
 		boolean printParagraphTag = true;
 
 		List<Node> childNodes = node.getChildren();
@@ -95,7 +95,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 		if (printParagraphTag) {
 			printTag(node, "p");
 		}
-    }
+	}
 
 	public void visit(PicWithCaptionNode picWithCaptionNode) {
 		print(picWithCaptionNode);
@@ -121,7 +121,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 	@Override
 	public void visit(TextNode node) {
 		String text = node.getText();
-		
+
 		if (text.equals("+$$$")) {
 			printer.print("<div class=\"sidebar\">");
 			printer.print("<div class=\"sidebar-image\"></div>");
