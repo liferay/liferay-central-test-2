@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.google.docs.util;
+package com.liferay.document.library.google.docs.util;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StreamUtil;

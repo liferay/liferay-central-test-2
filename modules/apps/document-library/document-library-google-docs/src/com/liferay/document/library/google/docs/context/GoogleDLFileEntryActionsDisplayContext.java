@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.google.docs.context;
+package com.liferay.document.library.google.docs.context;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;

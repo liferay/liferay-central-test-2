@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.google.docs;
+package com.liferay.document.library.google.docs.util;
 
 /**
  * @author Iván Zaera

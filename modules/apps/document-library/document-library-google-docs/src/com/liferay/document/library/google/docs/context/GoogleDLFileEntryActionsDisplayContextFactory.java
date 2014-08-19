@@ -12,8 +12,10 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.google.docs.context;
+package com.liferay.document.library.google.docs.context;
 
+import com.liferay.document.library.google.docs.util.Constants;
+import com.liferay.document.library.google.docs.util.GoogleDocumentTypeCreator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -24,8 +26,6 @@ import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portlet.documentlibrary.context.DLFileEntryActionsDisplayContext;
 import com.liferay.portlet.documentlibrary.context.DLFileEntryActionsDisplayContextFactory;
-import com.liferay.portlet.documentlibrary.google.docs.Constants;
-import com.liferay.portlet.documentlibrary.google.docs.util.GoogleDocumentTypeCreator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService;

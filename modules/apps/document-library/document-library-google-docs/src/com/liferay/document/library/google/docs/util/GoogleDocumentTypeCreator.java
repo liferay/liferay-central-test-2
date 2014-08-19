@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.google.docs.util;
+package com.liferay.document.library.google.docs.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -20,7 +20,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalService;
-import com.liferay.portlet.documentlibrary.google.docs.Constants;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService;
