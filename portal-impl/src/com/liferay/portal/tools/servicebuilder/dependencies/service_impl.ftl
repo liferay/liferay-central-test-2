@@ -1,9 +1,9 @@
 package ${packagePath}.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 import ${packagePath}.service.base.${entity.name}${sessionTypeName}ServiceBaseImpl;
+
+import aQute.bnd.annotation.ProviderType;
 
 <#if sessionTypeName == "Local">
 /**

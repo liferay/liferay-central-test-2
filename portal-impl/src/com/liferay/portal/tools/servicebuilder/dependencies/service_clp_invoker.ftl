@@ -1,8 +1,8 @@
 package ${packagePath}.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil;
+
+import aQute.bnd.annotation.ProviderType;
 
 import java.util.Arrays;
 

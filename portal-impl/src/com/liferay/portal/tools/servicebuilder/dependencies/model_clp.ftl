@@ -1,7 +1,5 @@
 package ${packagePath}.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.service.ClpSerializer;
 
 <#if entity.hasLocalService() && entity.hasColumns()>
@@ -11,6 +9,8 @@ import ${packagePath}.service.ClpSerializer;
 <#if entity.hasCompoundPK()>
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchModelException;

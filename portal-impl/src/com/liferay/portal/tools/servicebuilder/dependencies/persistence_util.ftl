@@ -1,8 +1,8 @@
 package ${packagePath}.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.model.${entity.name};
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;

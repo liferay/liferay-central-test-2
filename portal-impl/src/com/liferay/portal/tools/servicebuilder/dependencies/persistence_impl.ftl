@@ -12,8 +12,6 @@
 
 package ${packagePath}.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 <#assign noSuchEntity = serviceBuilder.getNoSuchEntityException(entity)>
 
 import ${packagePath}.${noSuchEntity}Exception;
@@ -25,6 +23,8 @@ import ${packagePath}.service.persistence.${entity.name}Persistence;
 <#if entity.hasCompoundPK()>
 	import ${packagePath}.service.persistence.${entity.PKClassName};
 </#if>
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.bean.BeanReference;

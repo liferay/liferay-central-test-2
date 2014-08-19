@@ -1,10 +1,10 @@
 package ${packagePath}.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 <#if hasHttpMethods>
 	import ${packagePath}.service.${entity.name}ServiceUtil;
 </#if>
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

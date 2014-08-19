@@ -1,9 +1,9 @@
 package ${packagePath}.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.service.${entity.name}LocalServiceUtil;
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;

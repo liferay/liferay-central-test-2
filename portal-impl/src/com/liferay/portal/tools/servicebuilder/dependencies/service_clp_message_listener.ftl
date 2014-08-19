@@ -1,7 +1,5 @@
 package ${packagePath}.service.messaging;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.service.ClpSerializer;
 
 <#list entities as entity>
@@ -13,6 +11,8 @@ import ${packagePath}.service.ClpSerializer;
 		import ${packagePath}.service.${entity.name}ServiceUtil;
 	</#if>
 </#list>
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;

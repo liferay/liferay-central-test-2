@@ -1,8 +1,8 @@
 package ${packagePath}.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.model.${entity.name};
+
+import aQute.bnd.annotation.ProviderType;
 
 <#if entity.hasLocalService() && entity.hasColumns()>
 	import ${packagePath}.service.${entity.name}LocalServiceUtil;

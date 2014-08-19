@@ -1,7 +1,5 @@
 package ${packagePath}.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 <#assign entitiesHaveColumns = false>
 
 <#list entities as entity>
@@ -11,6 +9,8 @@ import aQute.bnd.annotation.ProviderType;
 		import ${packagePath}.model.${entity.name}Clp;
 	</#if>
 </#list>
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;

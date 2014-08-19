@@ -10,8 +10,6 @@
 
 package ${packagePath}.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 <#if entity.hasCompoundPK()>
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
@@ -27,6 +25,8 @@ import ${packagePath}.model.${entity.name}Soap;
 </#list>
 
 import ${packagePath}.service.${entity.name}LocalServiceUtil;
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchModelException;

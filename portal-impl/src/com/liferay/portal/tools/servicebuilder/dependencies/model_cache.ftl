@@ -1,8 +1,8 @@
 package ${packagePath}.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import ${packagePath}.model.${entity.name};
+
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
