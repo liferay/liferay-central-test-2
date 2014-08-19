@@ -36,7 +36,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 	@Override
 	public void clear() {
-		innerMap.clear();
+		innerConcurrentMap.clear();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 			throw new NullPointerException("Key is null");
 		}
 
-		return innerMap.containsKey(mapKeyForQuery((K)key));
+		return innerConcurrentMap.containsKey(mapKeyForQuery((K)key));
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 			throw new NullPointerException("Value is null");
 		}
 
-		return innerMap.containsValue(mapValueForQuery((V)value));
+		return innerConcurrentMap.containsValue(mapValueForQuery((V)value));
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 			throw new NullPointerException("Key is null");
 		}
 
-		IV innerValue = innerMap.get(mapKeyForQuery((K)key));
+		IV innerValue = innerConcurrentMap.get(mapKeyForQuery((K)key));
 
 		if (innerValue == null) {
 			return null;
@@ -83,7 +83,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 	@Override
 	public boolean isEmpty() {
-		return innerMap.isEmpty();
+		return innerConcurrentMap.isEmpty();
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 		IK innerKey = mapKey(key);
 
-		IV oldInnerValue = innerMap.put(innerKey, mapValue(key, value));
+		IV oldInnerValue = innerConcurrentMap.put(innerKey, mapValue(key, value));
 
 		if (oldInnerValue == null) {
 			return null;
@@ -138,7 +138,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 		IK innerKey = mapKey(key);
 		IV innerValue = mapValue(key, value);
 
-		IV previousInnerValue = innerMap.putIfAbsent(innerKey, innerValue);
+		IV previousInnerValue = innerConcurrentMap.putIfAbsent(innerKey, innerValue);
 
 		if (previousInnerValue == null) {
 			return null;
@@ -158,7 +158,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 		IK innerKey = mapKeyForQuery((K)key);
 
-		IV innerValue = innerMap.remove(innerKey);
+		IV innerValue = innerConcurrentMap.remove(innerKey);
 
 		if (innerValue == null) {
 			return null;
@@ -180,10 +180,10 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 		IK innerKey = mapKeyForQuery((K)key);
 		IV innerValue = mapValueForQuery((V)value);
 
-		IV previousInnerValue = innerMap.get(innerKey);
+		IV previousInnerValue = innerConcurrentMap.get(innerKey);
 
 		if (!innerValue.equals(previousInnerValue) ||
-			!innerMap.remove(innerKey, previousInnerValue)) {
+			!innerConcurrentMap.remove(innerKey, previousInnerValue)) {
 
 			return false;
 		}
@@ -205,7 +205,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 		IV newInnerValue = mapValue(key, value);
 
-		IV oldInnerValue = innerMap.replace(mapKeyForQuery(key), newInnerValue);
+		IV oldInnerValue = innerConcurrentMap.replace(mapKeyForQuery(key), newInnerValue);
 
 		if (oldInnerValue == null) {
 			unmapValue(newInnerValue);
@@ -234,7 +234,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 		IV newInnerValue = mapValue(key, newValue);
 
-		IV oldInnerValue = innerMap.get(innerKey);
+		IV oldInnerValue = innerConcurrentMap.get(innerKey);
 
 		if ((oldInnerValue == null) ||
 			!oldValue.equals(unmapValueForQuery(oldInnerValue))) {
@@ -244,7 +244,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 			return false;
 		}
 
-		if (innerMap.replace(innerKey, oldInnerValue, newInnerValue)) {
+		if (innerConcurrentMap.replace(innerKey, oldInnerValue, newInnerValue)) {
 			unmapValue(oldInnerValue);
 
 			return true;
@@ -257,7 +257,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 
 	@Override
 	public int size() {
-		return innerMap.size();
+		return innerConcurrentMap.size();
 	}
 
 	@Override
@@ -270,7 +270,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 	}
 
 	protected ConcurrentMapperHashMap(ConcurrentMap<IK, IV> innerMap) {
-		this.innerMap = innerMap;
+		this.innerConcurrentMap = innerMap;
 	}
 
 	protected abstract IK mapKey(K key);
@@ -290,7 +290,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 	protected abstract V unmapValueForQuery(IV value);
 
 	protected transient Set<Map.Entry<K, V>> entrySet;
-	protected final ConcurrentMap<IK, IV> innerMap;
+	protected final ConcurrentMap<IK, IV> innerConcurrentMap;
 	protected transient Set<K> keySet;
 	protected transient Collection<V> values;
 
@@ -357,7 +357,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 	private class UnwrapEntryIterator implements Iterator<Map.Entry<K, V>> {
 
 		public UnwrapEntryIterator() {
-			Set<Entry<IK, IV>> entrySet = innerMap.entrySet();
+			Set<Entry<IK, IV>> entrySet = innerConcurrentMap.entrySet();
 
 			_iterator = entrySet.iterator();
 		}
@@ -438,7 +438,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 	private class UnwrapKeyIterator implements Iterator<K> {
 
 		public UnwrapKeyIterator() {
-			Set<IK> keySet = innerMap.keySet();
+			Set<IK> keySet = innerConcurrentMap.keySet();
 
 			_iterator = keySet.iterator();
 		}
@@ -503,7 +503,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 	private class UnwrapValueIterator implements Iterator<V> {
 
 		public UnwrapValueIterator() {
-			Collection<IV> values = innerMap.values();
+			Collection<IV> values = innerConcurrentMap.values();
 
 			_iterator = values.iterator();
 		}
