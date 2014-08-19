@@ -443,8 +443,7 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 		JSONObject layoutJSONObject = selectedLayoutsJSONArray.getJSONObject(0);
 
 		Assert.assertTrue(layoutJSONObject.getBoolean("includeChildren"));
-		Assert.assertEquals(
-			layout.getPlid(), layoutJSONObject.getLong("plid"));
+		Assert.assertEquals(layout.getPlid(), layoutJSONObject.getLong("plid"));
 	}
 
 	@Test
@@ -520,8 +519,7 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 		JSONObject layoutJSONObject = selectedLayoutsJSONArray.getJSONObject(0);
 
 		Assert.assertFalse(layoutJSONObject.getBoolean("includeChildren"));
-		Assert.assertEquals(
-			layout.getPlid(), layoutJSONObject.getLong("plid"));
+		Assert.assertEquals(layout.getPlid(), layoutJSONObject.getLong("plid"));
 	}
 
 	@Test
