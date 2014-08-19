@@ -27,16 +27,12 @@ import aQute.bnd.service.diff.Diff;
 import aQute.bnd.version.Version;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +158,7 @@ public class BaselineJarTask extends BaseBndTask {
 					}
 				}
 
-				generateMissingPackageInfo(info, warnings);
+				generatePackageInfo(info, warnings);
 
 				if (((_reportLevelIsStandard || _reportOnlyDirtyPackages) &&
 					 warnings.equals("-")) ||
@@ -422,14 +418,16 @@ public class BaselineJarTask extends BaseBndTask {
 		}
 	}
 
-	protected void generateMissingPackageInfo(Info info, String warnings) {
-		String sourceDirProperty = project.getProperty("plugin.source.dir");
+	protected void generatePackageInfo(Info info, String warnings)
+		throws Exception {
 
-		if (sourceDirProperty == null) {
-			return;
+		String sourceDirName = project.getProperty("plugin.source.dir");
+
+		if (sourceDirName == null) {
+			sourceDirName = "src";
 		}
 
-		File sourceDir = new File(project.getBaseDir(), sourceDirProperty);
+		File sourceDir = new File(project.getBaseDir(), sourceDirName);
 
 		if (!sourceDir.exists()) {
 			return;
@@ -448,18 +446,14 @@ public class BaselineJarTask extends BaseBndTask {
 			return;
 		}
 
-		java.nio.file.Path path = packageInfoFile.toPath();
+		FileOutputStream fileOutputStream = new FileOutputStream(
+			packageInfoFile);
 
-		try {
-			Files.write(
-				path,
-				Collections.singletonList("version " + info.suggestedVersion),
-				StandardCharsets.UTF_8, StandardOpenOption.CREATE,
-				StandardOpenOption.TRUNCATE_EXISTING);
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+		String content = "version " + info.suggestedVersion;
+
+		fileOutputStream.write(content.getBytes());
+
+		fileOutputStream.close();
 	}
 
 	protected String getBaselineResportsDirName() {
