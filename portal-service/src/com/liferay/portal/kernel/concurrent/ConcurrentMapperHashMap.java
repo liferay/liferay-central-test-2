@@ -230,7 +230,7 @@ public abstract class ConcurrentMapperHashMap<K, IK, V, IV>
 			throw new NullPointerException("New value is null");
 		}
 
-		IK innerKey = mapKeyForQuery((K)key);
+		IK innerKey = mapKeyForQuery(key);
 
 		IV newInnerValue = mapValue(key, newValue);
 
