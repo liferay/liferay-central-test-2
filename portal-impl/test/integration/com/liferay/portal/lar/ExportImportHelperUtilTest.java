@@ -420,14 +420,15 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 	@Test
 	public void testGetSelectedLayoutsJSONSelectAllLayouts() throws Exception {
-		Layout rootLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Root Layout");
+		Layout layout = LayoutTestUtil.addLayout(
+			_stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		Layout childLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Child Layout", rootLayout.getPlid());
+			_stagingGroup.getGroupId(), RandomTestUtil.randomString(),
+			layout.getPlid());
 
 		long[] selectedLayoutIds = new long[] {
-			rootLayout.getLayoutId(), childLayout.getLayoutId()};
+			layout.getLayoutId(), childLayout.getLayoutId()};
 
 		String selectedLayoutsJSON =
 			ExportImportHelperUtil.getSelectedLayoutsJSON(
@@ -441,18 +442,19 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 		JSONObject layoutJSONObject = selectedLayoutsJSONArray.getJSONObject(0);
 
-		Assert.assertEquals(
-			rootLayout.getPlid(), layoutJSONObject.getLong("plid"));
 		Assert.assertTrue(layoutJSONObject.getBoolean("includeChildren"));
+		Assert.assertEquals(
+			layout.getPlid(), layoutJSONObject.getLong("plid"));
 	}
 
 	@Test
 	public void testGetSelectedLayoutsJSONSelectChildLayout() throws Exception {
-		Layout rootLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Root Layout");
+		Layout layout = LayoutTestUtil.addLayout(
+			_stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		Layout childLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Child Layout", rootLayout.getPlid());
+			_stagingGroup.getGroupId(), RandomTestUtil.randomString(),
+			layout.getPlid());
 
 		long[] selectedLayoutIds = new long[] {childLayout.getLayoutId()};
 
@@ -468,18 +470,19 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 		JSONObject layoutJSONObject = selectedLayoutsJSONArray.getJSONObject(0);
 
+		Assert.assertTrue(layoutJSONObject.getBoolean("includeChildren"));
 		Assert.assertEquals(
 			childLayout.getPlid(), layoutJSONObject.getLong("plid"));
-		Assert.assertTrue(layoutJSONObject.getBoolean("includeChildren"));
 	}
 
 	@Test
 	public void testGetSelectedLayoutsJSONSelectNoLayouts() throws Exception {
-		Layout rootLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Root Layout");
+		Layout layout = LayoutTestUtil.addLayout(
+			_stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Child Layout", rootLayout.getPlid());
+			_stagingGroup.getGroupId(), RandomTestUtil.randomString(),
+			layout.getPlid());
 
 		String selectedLayoutsJSON =
 			ExportImportHelperUtil.getSelectedLayoutsJSON(
@@ -496,13 +499,13 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 	public void testGetSelectedLayoutsJSONSelectParentLayout()
 		throws Exception {
 
-		Layout rootLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Root Layout");
+		Layout layout = LayoutTestUtil.addLayout(
+			_stagingGroup.getGroupId(), "Layout");
 
 		LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), "Child Layout", rootLayout.getPlid());
+			_stagingGroup.getGroupId(), "Child Layout", layout.getPlid());
 
-		long[] selectedLayoutIds = new long[] {rootLayout.getLayoutId()};
+		long[] selectedLayoutIds = new long[] {layout.getLayoutId()};
 
 		String selectedLayoutsJSON =
 			ExportImportHelperUtil.getSelectedLayoutsJSON(
@@ -516,9 +519,9 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 		JSONObject layoutJSONObject = selectedLayoutsJSONArray.getJSONObject(0);
 
-		Assert.assertEquals(
-			rootLayout.getPlid(), layoutJSONObject.getLong("plid"));
 		Assert.assertFalse(layoutJSONObject.getBoolean("includeChildren"));
+		Assert.assertEquals(
+			layout.getPlid(), layoutJSONObject.getLong("plid"));
 	}
 
 	@Test
