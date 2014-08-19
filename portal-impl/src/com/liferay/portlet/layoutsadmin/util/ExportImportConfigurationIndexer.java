@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -207,11 +208,11 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)settingsMap.get("parameterMap");
 
-		for (Map.Entry<String, String[]> parameter : parameterMap.entrySet()) {
-			String[] parameterValues = new String[parameter.getValue().length];
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			String[] parameterValues = ArrayUtil.clone(entry.getValue());
 
-			for (int i = 0; i < parameter.getValue().length; i++) {
-				String parameterValue = parameter.getValue()[i];
+			for (int i = 0; i < parameterValues.length; i++) {
+				String parameterValue = parameterValues[i];
 
 				if (parameterValue.equals(StringPool.TRUE)) {
 					parameterValues[i] = "on";
@@ -219,13 +220,10 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 				else if (parameterValue.equals(StringPool.FALSE)) {
 					parameterValues[i] = "off";
 				}
-				else {
-					parameterValues[i] = parameterValue;
-				}
 			}
 
 			document.addKeyword(
-				_PREFIX_PARAMETER + parameter.getKey(), parameterValues);
+				_PREFIX_PARAMETER + entry.getKey(), parameterValues);
 		}
 	}
 
