@@ -59,7 +59,7 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 					company, _classNameLocalService, _ddmStructureLocalService,
 					_dlFileEntryTypeLocalService, _userLocalService);
 
-			googleDocumentTypeCreator.addDocumentType();
+			googleDocumentTypeCreator.addGoogleDocumentDLFileEntryType();
 		}
 	}
 

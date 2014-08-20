@@ -52,7 +52,7 @@ public class GoogleDocumentTypeCreator {
 			DLFileEntryMetadata.class);
 	}
 
-	public void addDocumentType() throws PortalException {
+	public void addGoogleDocumentDLFileEntryType() throws PortalException {
 		if (!hasGoogleDocumentDDMStructure(_company)) {
 			DDMStructure ddmStructure = addGoogleDocumentDDMStructure();
 
