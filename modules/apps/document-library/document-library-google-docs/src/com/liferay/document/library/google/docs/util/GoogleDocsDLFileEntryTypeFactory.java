@@ -28,15 +28,16 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 /**
  * @author Iván Zaera
  */
-public class GoogleDocsDLFileEntryTypeCreator {
+public class GoogleDocsDLFileEntryTypeFactory {
 
-	public GoogleDocsDLFileEntryTypeCreator(
+	public GoogleDocsDLFileEntryTypeFactory(
 		Company company, ClassNameLocalService classNameLocalService,
 		DDMStructureLocalService ddmStructureLocalService,
 		DLFileEntryTypeLocalService dlFileEntryTypeLocalService,
@@ -52,14 +53,26 @@ public class GoogleDocsDLFileEntryTypeCreator {
 			DLFileEntryMetadata.class);
 	}
 
-	public void addGoogleDocsDLFileEntryType() throws PortalException {
-		if (hasGoogleDocsDDMStructure(_company)) {
-			return;
+	public DLFileEntryType addGoogleDocsDLFileEntryType()
+		throws PortalException {
+
+		DDMStructure ddmStructure = _ddmStructureLocalService.fetchStructure(
+			_company.getGroupId(), _dlFileEntryMetadataClassNameId,
+			GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS);
+
+		if (ddmStructure == null) {
+			ddmStructure = addGoogleDocsDDMStructure();
 		}
 
-		DDMStructure ddmStructure = addGoogleDocsDDMStructure();
+		List<DLFileEntryType> dlFileEntryTypes =
+			_dlFileEntryTypeLocalService.getDDMStructureDLFileEntryTypes(
+				ddmStructure.getStructureId());
 
-		addGoogleDocsDLFileEntryType(ddmStructure.getStructureId());
+		if (dlFileEntryTypes.size() > 0) {
+			return dlFileEntryTypes.get(0);
+		}
+
+		return addGoogleDocsDLFileEntryType(ddmStructure.getStructureId());
 	}
 
 	protected DDMStructure addGoogleDocsDDMStructure() throws PortalException {
@@ -118,20 +131,6 @@ public class GoogleDocsDLFileEntryTypeCreator {
 			defaultUserId, _company.getGroupId(),
 			GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS, nameMap,
 			descriptionMap, new long[] {ddmStructureId}, serviceContext);
-	}
-
-	protected boolean hasGoogleDocsDDMStructure(Company company)
-		throws PortalException {
-
-		DDMStructure ddmStructure = _ddmStructureLocalService.fetchStructure(
-			company.getGroupId(), _dlFileEntryMetadataClassNameId,
-			GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS);
-
-		if (ddmStructure != null) {
-			return true;
-		}
-
-		return false;
 	}
 
 	private ClassNameLocalService _classNameLocalService;
