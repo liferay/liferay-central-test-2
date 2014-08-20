@@ -45,10 +45,8 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -272,8 +270,6 @@ public class UserFinderImpl
 			emailAddresses, status, params, andOperator, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		userIds = ListUtil.unique(userIds);
-
 		return userIds.size();
 	}
 
@@ -454,11 +450,10 @@ public class UserFinderImpl
 		int start, int end, OrderByComparator<User> obc) {
 
 		try {
-			Set<Long> userIds = new LinkedHashSet<Long>(
-				doFindByC_FN_MN_LN_SN_EA_S(
-					companyId, firstNames, middleNames, lastNames, screenNames,
-					emailAddresses, status, params, andOperator, start, end,
-					obc));
+			List<Long> userIds = doFindByC_FN_MN_LN_SN_EA_S(
+				companyId, firstNames, middleNames, lastNames, screenNames,
+				emailAddresses, status, params, andOperator, start, end,
+				obc);
 
 			List<User> users = new ArrayList<User>(userIds.size());
 
