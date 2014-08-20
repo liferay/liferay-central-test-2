@@ -1677,9 +1677,9 @@ public class WebDriverToSeleniumBridge
 
 		int i = 0;
 
-		Set<Integer> specialCharIndexSet = _getSpecialCharIndexSet(value);
+		Set<Integer> specialCharIndexes = getSpecialCharIndexes(value);
 
-		for (int specialCharIndex : specialCharIndexSet) {
+		for (int specialCharIndex : specialCharIndexes) {
 			webElement.sendKeys(value.substring(i, specialCharIndex));
 
 			String specialChar = GetterUtil.getString(
@@ -2018,11 +2018,11 @@ public class WebDriverToSeleniumBridge
 
 	protected String defaultWindowHandle;
 
-	private Set<Integer> _getSpecialCharIndexSet(String value) {
-		Set<Integer> set = new TreeSet<Integer>();
+	protected Set<Integer> getSpecialCharIndexes(String value) {
+		Set<Integer> specialCharIndexes = new TreeSet<Integer>();
 
 		while (value.contains("-")) {
-			set.add(value.indexOf("-"));
+			specialCharIndexes.add(value.indexOf("-"));
 
 			value = StringUtil.replaceFirst(value, "-", " ");
 		}
@@ -2031,13 +2031,13 @@ public class WebDriverToSeleniumBridge
 			specialChar = "\\" + specialChar;
 
 			while (value.contains(specialChar)) {
-				set.add(value.indexOf(specialChar));
+				specialCharIndexes.add(value.indexOf(specialChar));
 
 				value = StringUtil.replaceFirst(value, specialChar, " ");
 			}
 		}
 
-		return set;
+		return specialCharIndexes;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
