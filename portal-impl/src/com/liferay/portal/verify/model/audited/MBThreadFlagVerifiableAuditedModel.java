@@ -26,11 +26,6 @@ public class MBThreadFlagVerifiableAuditedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "MBThreadFlag";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "threadFlagId";
 	}
@@ -43,6 +38,11 @@ public class MBThreadFlagVerifiableAuditedModel
 	@Override
 	public String getRelatedPKColumnName() {
 		return "userId";
+	}
+
+	@Override
+	public String getTableName() {
+		return "MBThreadFlag";
 	}
 
 	@Override

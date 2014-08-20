@@ -25,11 +25,6 @@ public class RoleVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getTableName() {
-		return "Role_";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "roleId";
 	}
@@ -42,6 +37,11 @@ public class RoleVerifiableAuditedModel implements VerifiableAuditedModel {
 	@Override
 	public String getRelatedPKColumnName() {
 		return null;
+	}
+
+	@Override
+	public String getTableName() {
+		return "Role_";
 	}
 
 	@Override

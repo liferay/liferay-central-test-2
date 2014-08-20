@@ -26,11 +26,6 @@ public class MBDiscussionVerifiableAuditedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "MBDiscussion";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "discussionId";
 	}
@@ -43,6 +38,11 @@ public class MBDiscussionVerifiableAuditedModel
 	@Override
 	public String getRelatedPKColumnName() {
 		return "threadId";
+	}
+
+	@Override
+	public String getTableName() {
+		return "MBDiscussion";
 	}
 
 	@Override

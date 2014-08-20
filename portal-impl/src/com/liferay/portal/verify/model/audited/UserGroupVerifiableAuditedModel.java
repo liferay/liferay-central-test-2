@@ -25,11 +25,6 @@ public class UserGroupVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getTableName() {
-		return "UserGroup";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "userGroupId";
 	}
@@ -42,6 +37,11 @@ public class UserGroupVerifiableAuditedModel implements VerifiableAuditedModel {
 	@Override
 	public String getRelatedPKColumnName() {
 		return null;
+	}
+
+	@Override
+	public String getTableName() {
+		return "UserGroup";
 	}
 
 	@Override

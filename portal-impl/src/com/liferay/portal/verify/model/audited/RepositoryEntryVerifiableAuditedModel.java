@@ -26,11 +26,6 @@ public class RepositoryEntryVerifiableAuditedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "RepositoryEntry";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "repositoryEntryId";
 	}
@@ -43,6 +38,11 @@ public class RepositoryEntryVerifiableAuditedModel
 	@Override
 	public String getRelatedPKColumnName() {
 		return "repositoryId";
+	}
+
+	@Override
+	public String getTableName() {
+		return "RepositoryEntry";
 	}
 
 	@Override

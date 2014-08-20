@@ -76,49 +76,6 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 	}
 
-	protected Object[] getDefaultUserArray(Connection con, long companyId)
-		throws Exception {
-
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = con.prepareStatement(
-				"select userId, firstName, middleName, lastName from User_" +
-					" where companyId = ? and defaultUser = ?");
-
-			ps.setLong(1, companyId);
-			ps.setBoolean(2, true);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				long userId = rs.getLong("userId");
-				String firstName = rs.getString("firstName");
-				String middleName = rs.getString("middleName");
-				String lastName = rs.getString("lastName");
-
-				FullNameGenerator fullNameGenerator =
-					FullNameGeneratorFactory.getInstance();
-
-				String userName = fullNameGenerator.getFullName(
-					firstName, middleName, lastName);
-
-				Timestamp createDate = new Timestamp(
-					System.currentTimeMillis());
-
-				return new Object[] {
-					companyId, userId, userName, createDate, createDate
-				};
-			}
-
-			return null;
-		}
-		finally {
-			DataAccess.cleanUp(null, ps, rs);
-		}
-	}
-
 	protected Object[] getAuditedModelArray(
 			String modelName, String pkColumnName, long primKey)
 		throws Exception {
@@ -159,6 +116,49 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected Object[] getDefaultUserArray(Connection con, long companyId)
+		throws Exception {
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement(
+				"select userId, firstName, middleName, lastName from User_" +
+					" where companyId = ? and defaultUser = ?");
+
+			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				long userId = rs.getLong("userId");
+				String firstName = rs.getString("firstName");
+				String middleName = rs.getString("middleName");
+				String lastName = rs.getString("lastName");
+
+				FullNameGenerator fullNameGenerator =
+					FullNameGeneratorFactory.getInstance();
+
+				String userName = fullNameGenerator.getFullName(
+					firstName, middleName, lastName);
+
+				Timestamp createDate = new Timestamp(
+					System.currentTimeMillis());
+
+				return new Object[] {
+					companyId, userId, userName, createDate, createDate
+				};
+			}
+
+			return null;
+		}
+		finally {
+			DataAccess.cleanUp(null, ps, rs);
 		}
 	}
 

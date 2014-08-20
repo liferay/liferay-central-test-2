@@ -21,13 +21,13 @@ public interface VerifiableAuditedModel {
 
 	public String getJoinByTableName();
 
-	public String getTableName();
-
 	public String getPrimaryKeyColumnName();
 
 	public String getRelatedModelName();
 
 	public String getRelatedPKColumnName();
+
+	public String getTableName();
 
 	public boolean isUpdateDates();
 

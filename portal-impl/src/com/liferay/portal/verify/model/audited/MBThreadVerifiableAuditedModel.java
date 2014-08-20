@@ -25,11 +25,6 @@ public class MBThreadVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getTableName() {
-		return "MBThread";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "threadId";
 	}
@@ -42,6 +37,11 @@ public class MBThreadVerifiableAuditedModel implements VerifiableAuditedModel {
 	@Override
 	public String getRelatedPKColumnName() {
 		return "messageId";
+	}
+
+	@Override
+	public String getTableName() {
+		return "MBThread";
 	}
 
 	@Override

@@ -25,11 +25,6 @@ public class PollsVoteVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getTableName() {
-		return "PollsVote";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "voteId";
 	}
@@ -42,6 +37,11 @@ public class PollsVoteVerifiableAuditedModel implements VerifiableAuditedModel {
 	@Override
 	public String getRelatedPKColumnName() {
 		return "questionId";
+	}
+
+	@Override
+	public String getTableName() {
+		return "PollsVote";
 	}
 
 	@Override

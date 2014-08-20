@@ -26,11 +26,6 @@ public class OrganizationVerifiableAuditedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "Organization_";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "organizationId";
 	}
@@ -43,6 +38,11 @@ public class OrganizationVerifiableAuditedModel
 	@Override
 	public String getRelatedPKColumnName() {
 		return null;
+	}
+
+	@Override
+	public String getTableName() {
+		return "Organization_";
 	}
 
 	@Override

@@ -25,11 +25,6 @@ public class LayoutVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getTableName() {
-		return "Layout";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "plid";
 	}
@@ -42,6 +37,11 @@ public class LayoutVerifiableAuditedModel implements VerifiableAuditedModel {
 	@Override
 	public String getRelatedPKColumnName() {
 		return null;
+	}
+
+	@Override
+	public String getTableName() {
+		return "Layout";
 	}
 
 	@Override

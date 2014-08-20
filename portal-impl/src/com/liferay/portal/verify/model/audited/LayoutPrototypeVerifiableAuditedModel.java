@@ -26,11 +26,6 @@ public class LayoutPrototypeVerifiableAuditedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "LayoutPrototype";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "layoutPrototypeId";
 	}
@@ -43,6 +38,11 @@ public class LayoutPrototypeVerifiableAuditedModel
 	@Override
 	public String getRelatedPKColumnName() {
 		return null;
+	}
+
+	@Override
+	public String getTableName() {
+		return "LayoutPrototype";
 	}
 
 	@Override

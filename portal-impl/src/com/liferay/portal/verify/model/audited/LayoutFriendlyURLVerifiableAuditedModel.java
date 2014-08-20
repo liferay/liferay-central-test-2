@@ -26,11 +26,6 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "LayoutFriendlyURL";
-	}
-
-	@Override
 	public String getPrimaryKeyColumnName() {
 		return "layoutFriendlyURLId";
 	}
@@ -43,6 +38,11 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 	@Override
 	public String getRelatedPKColumnName() {
 		return null;
+	}
+
+	@Override
+	public String getTableName() {
+		return "LayoutFriendlyURL";
 	}
 
 	@Override
