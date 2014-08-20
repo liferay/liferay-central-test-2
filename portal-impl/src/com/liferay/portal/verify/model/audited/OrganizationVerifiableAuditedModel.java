@@ -12,40 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
-public class RepositoryEntryVerifiableAuditedModel
+public class OrganizationVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
 	public String getJoinByColumnName() {
-		return "repositoryId";
+		return null;
 	}
 
 	@Override
 	public String getModelName() {
-		return "RepositoryEntry";
+		return "Organization_";
 	}
 
 	@Override
 	public String getPkColumnName() {
-		return "repositoryEntryId";
+		return "organizationId";
 	}
 
 	@Override
 	public String getRelatedModelName() {
-		return "Repository";
+		return null;
 	}
 
 	@Override
 	public String getRelatedPKColumnName() {
-		return "repositoryId";
+		return null;
 	}
 
 	@Override

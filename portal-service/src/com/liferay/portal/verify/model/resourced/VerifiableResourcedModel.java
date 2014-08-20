@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.verify;
+package com.liferay.portal.verify.model.resourced;
 
 /**
  * @author Miguel Pastor
  */
-public interface VerifiableModelResource {
+public interface VerifiableResourcedModel {
 
 	public String getModelName();
 

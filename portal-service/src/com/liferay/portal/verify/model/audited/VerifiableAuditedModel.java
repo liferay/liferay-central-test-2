@@ -12,45 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
+public interface VerifiableAuditedModel {
 
-public class PollsChoiceVerifiableAuditedModel
-	implements VerifiableAuditedModel {
+	public String getJoinByColumnName();
 
-	@Override
-	public String getJoinByColumnName() {
-		return "questionId";
-	}
+	public String getModelName();
 
-	@Override
-	public String getModelName() {
-		return "PollsChoice";
-	}
+	public String getPkColumnName();
 
-	@Override
-	public String getPkColumnName() {
-		return "choiceId";
-	}
+	public String getRelatedModelName();
 
-	@Override
-	public String getRelatedModelName() {
-		return "PollsQuestion";
-	}
+	public String getRelatedPKColumnName();
 
-	@Override
-	public String getRelatedPKColumnName() {
-		return "questionId";
-	}
-
-	@Override
-	public boolean isUpdateDates() {
-		return true;
-	}
+	public boolean isUpdateDates();
 
 }

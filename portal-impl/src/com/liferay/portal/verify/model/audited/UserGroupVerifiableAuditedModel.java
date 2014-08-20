@@ -12,16 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
-public class LayoutFriendlyURLVerifiableAuditedModel
-	implements VerifiableAuditedModel {
+public class UserGroupVerifiableAuditedModel implements VerifiableAuditedModel {
 
 	@Override
 	public String getJoinByColumnName() {
@@ -30,12 +26,12 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 
 	@Override
 	public String getModelName() {
-		return "LayoutFriendlyURL";
+		return "UserGroup";
 	}
 
 	@Override
 	public String getPkColumnName() {
-		return "layoutFriendlyURLId";
+		return "userGroupId";
 	}
 
 	@Override
@@ -50,7 +46,7 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 
 	@Override
 	public boolean isUpdateDates() {
-		return false;
+		return true;
 	}
 
 }

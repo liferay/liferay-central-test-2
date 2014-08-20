@@ -12,14 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
 public class LayoutVerifiableAuditedModel implements VerifiableAuditedModel {
 
 	@Override

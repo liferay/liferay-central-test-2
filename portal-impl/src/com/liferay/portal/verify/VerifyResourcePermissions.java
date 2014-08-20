@@ -35,6 +35,7 @@ import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.verify.model.resourced.VerifiableResourcedModel;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetTag;
@@ -83,13 +84,13 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				verifyModel(role, model[0], model[1], model[2]);
 			}
 
-			for (VerifiableModelResource verifiableModelResource :
-					_verifiableModelResources) {
+			for (VerifiableResourcedModel verifiableResourcedModel :
+					_verifiableResourcedModels) {
 
 				verifyModel(
-					role, verifiableModelResource.getName(),
-					verifiableModelResource.getModelName(),
-					verifiableModelResource.getPrimaryKeyColumnName());
+					role, verifiableResourcedModel.getName(),
+					verifiableResourcedModel.getModelName(),
+					verifiableResourcedModel.getPrimaryKeyColumnName());
 			}
 
 			verifyLayout(role);
@@ -311,8 +312,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 	private static Log _log = LogFactoryUtil.getLog(
 		VerifyResourcePermissions.class);
 
-	private ServiceTrackerList<VerifiableModelResource>
-		_verifiableModelResources = ServiceTrackerCollections.list(
-			VerifiableModelResource.class);
+	private ServiceTrackerList<VerifiableResourcedModel>
+		_verifiableResourcedModels = ServiceTrackerCollections.list(
+			VerifiableResourcedModel.class);
 
 }

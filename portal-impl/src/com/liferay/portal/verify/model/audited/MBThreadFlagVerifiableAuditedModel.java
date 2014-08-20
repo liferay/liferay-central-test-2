@@ -12,40 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
-public class OrganizationVerifiableAuditedModel
+public class MBThreadFlagVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
 	public String getJoinByColumnName() {
-		return null;
+		return "userId";
 	}
 
 	@Override
 	public String getModelName() {
-		return "Organization_";
+		return "MBThreadFlag";
 	}
 
 	@Override
 	public String getPkColumnName() {
-		return "organizationId";
+		return "threadFlagId";
 	}
 
 	@Override
 	public String getRelatedModelName() {
-		return null;
+		return "User_";
 	}
 
 	@Override
 	public String getRelatedPKColumnName() {
-		return null;
+		return "userId";
 	}
 
 	@Override

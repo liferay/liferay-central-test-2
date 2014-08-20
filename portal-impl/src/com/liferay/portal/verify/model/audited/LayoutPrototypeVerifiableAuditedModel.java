@@ -12,40 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
-public class MBDiscussionVerifiableAuditedModel
+public class LayoutPrototypeVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
 	public String getJoinByColumnName() {
-		return "threadId";
+		return null;
 	}
 
 	@Override
 	public String getModelName() {
-		return "MBDiscussion";
+		return "LayoutPrototype";
 	}
 
 	@Override
 	public String getPkColumnName() {
-		return "discussionId";
+		return "layoutPrototypeId";
 	}
 
 	@Override
 	public String getRelatedModelName() {
-		return "MBThread";
+		return null;
 	}
 
 	@Override
 	public String getRelatedPKColumnName() {
-		return "threadId";
+		return null;
 	}
 
 	@Override

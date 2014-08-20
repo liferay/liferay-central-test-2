@@ -12,39 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
-public class UserGroupVerifiableAuditedModel implements VerifiableAuditedModel {
+public class RepositoryEntryVerifiableAuditedModel
+	implements VerifiableAuditedModel {
 
 	@Override
 	public String getJoinByColumnName() {
-		return null;
+		return "repositoryId";
 	}
 
 	@Override
 	public String getModelName() {
-		return "UserGroup";
+		return "RepositoryEntry";
 	}
 
 	@Override
 	public String getPkColumnName() {
-		return "userGroupId";
+		return "repositoryEntryId";
 	}
 
 	@Override
 	public String getRelatedModelName() {
-		return null;
+		return "Repository";
 	}
 
 	@Override
 	public String getRelatedPKColumnName() {
-		return null;
+		return "repositoryId";
 	}
 
 	@Override

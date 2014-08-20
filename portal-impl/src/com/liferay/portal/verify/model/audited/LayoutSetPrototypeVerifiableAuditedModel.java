@@ -12,15 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.verify.audited.model;
-
-import com.liferay.portal.verify.VerifiableAuditedModel;
+package com.liferay.portal.verify.model.audited;
 
 /**
  * @author Miguel Pastor
  */
-
-public class RoleVerifiableAuditedModel implements VerifiableAuditedModel {
+public class LayoutSetPrototypeVerifiableAuditedModel
+	implements VerifiableAuditedModel {
 
 	@Override
 	public String getJoinByColumnName() {
@@ -29,12 +27,12 @@ public class RoleVerifiableAuditedModel implements VerifiableAuditedModel {
 
 	@Override
 	public String getModelName() {
-		return "Role_";
+		return "LayoutSetPrototype";
 	}
 
 	@Override
 	public String getPkColumnName() {
-		return "roleId";
+		return "layoutSetPrototypeId";
 	}
 
 	@Override
@@ -49,7 +47,7 @@ public class RoleVerifiableAuditedModel implements VerifiableAuditedModel {
 
 	@Override
 	public boolean isUpdateDates() {
-		return true;
+		return false;
 	}
 
 }
