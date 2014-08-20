@@ -53,11 +53,13 @@ public class GoogleDocumentTypeCreator {
 	}
 
 	public void addGoogleDocumentDLFileEntryType() throws PortalException {
-		if (!hasGoogleDocumentDDMStructure(_company)) {
-			DDMStructure ddmStructure = addGoogleDocumentDDMStructure();
-
-			addGoogleDocumentDLFileEntryType(ddmStructure.getStructureId());
+		if (hasGoogleDocumentDDMStructure(_company)) {
+			return;
 		}
+
+		DDMStructure ddmStructure = addGoogleDocumentDDMStructure();
+
+		addGoogleDocumentDLFileEntryType(ddmStructure.getStructureId());
 	}
 
 	protected DDMStructure addGoogleDocumentDDMStructure()
@@ -117,8 +119,8 @@ public class GoogleDocumentTypeCreator {
 
 		return _dlFileEntryTypeLocalService.addFileEntryType(
 			defaultUserId, _company.getGroupId(),
-			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap, descriptionMap,
-			new long[] {ddmStructureId}, serviceContext);
+			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap,
+			descriptionMap, new long[] {ddmStructureId}, serviceContext);
 	}
 
 	protected boolean hasGoogleDocumentDDMStructure(Company company)
