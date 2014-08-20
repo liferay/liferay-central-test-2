@@ -23,7 +23,7 @@ public interface VerifiableAuditedModel {
 
 	public String getTableName();
 
-	public String getPkColumnName();
+	public String getPrimaryKeyColumnName();
 
 	public String getRelatedModelName();
 

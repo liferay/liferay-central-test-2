@@ -31,7 +31,7 @@ public class OrganizationVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "organizationId";
 	}
 

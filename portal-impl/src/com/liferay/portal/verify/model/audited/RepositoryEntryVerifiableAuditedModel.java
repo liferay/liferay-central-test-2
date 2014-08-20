@@ -31,7 +31,7 @@ public class RepositoryEntryVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "repositoryEntryId";
 	}
 

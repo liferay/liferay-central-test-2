@@ -31,7 +31,7 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "layoutFriendlyURLId";
 	}
 

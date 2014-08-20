@@ -197,8 +197,8 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 	}
 
-	protected void verifyModel(
-			String modelName, String pkColumnName, long primKey,
+	protected void verifyAuditedModel(
+			String tableName, String primaryKeyColumnName, long primKey,
 			Object[] modelArray, boolean updateDates)
 		throws Exception {
 
@@ -226,7 +226,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 			StringBundler sb = new StringBundler(7);
 
 			sb.append("update ");
-			sb.append(modelName);
+			sb.append(tableName);
 			sb.append(" set companyId = ?, userId = ?, userName = ?");
 
 			if (updateDates) {
@@ -234,7 +234,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 			}
 
 			sb.append(" where ");
-			sb.append(pkColumnName);
+			sb.append(primaryKeyColumnName);
 			sb.append(" = ?");
 
 			ps = con.prepareStatement(sb.toString());
@@ -256,7 +256,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to verify model " + modelName, e);
+				_log.warn("Unable to verify model " + tableName, e);
 			}
 		}
 		finally {
@@ -264,7 +264,8 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 	}
 
-	protected void verifyAuditedModel(VerifiableAuditedModel verifiableAuditedModel)
+	protected void verifyAuditedModel(
+			VerifiableAuditedModel verifiableAuditedModel)
 		throws Exception {
 
 		Connection con = null;
@@ -276,24 +277,17 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 			StringBundler sb = new StringBundler(8);
 
-			String pkColumnName = verifiableAuditedModel.getPkColumnName();
-
 			sb.append("select ");
-			sb.append(pkColumnName);
+			sb.append(verifiableAuditedModel.getPrimaryKeyColumnName());
 			sb.append(", companyId");
 
-			String joinByColumnName =
-				verifiableAuditedModel.getJoinByTableName();
-
-			if (joinByColumnName != null) {
+			if (verifiableAuditedModel.getJoinByTableName() != null) {
 				sb.append(StringPool.COMMA_AND_SPACE);
-				sb.append(joinByColumnName);
+				sb.append(verifiableAuditedModel.getJoinByTableName());
 			}
 
-			String modelName = verifiableAuditedModel.getTableName();
-
 			sb.append(" from ");
-			sb.append(modelName);
+			sb.append(verifiableAuditedModel.getTableName());
 			sb.append(" where userName is null order by companyId");
 
 			ps = con.prepareStatement(sb.toString());
@@ -306,10 +300,12 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 			while (rs.next()) {
 				long companyId = rs.getLong("companyId");
-				long primKey = rs.getLong(pkColumnName);
+				long primKey = rs.getLong(
+					verifiableAuditedModel.getPrimaryKeyColumnName());
 
-				if (joinByColumnName != null) {
-					long relatedPrimKey = rs.getLong(joinByColumnName);
+				if (verifiableAuditedModel.getJoinByTableName() != null) {
+					long relatedPrimKey = rs.getLong(
+						verifiableAuditedModel.getJoinByTableName());
 
 					modelArray = getModelArray(
 						verifiableAuditedModel.getRelatedModelName(),
@@ -326,9 +322,10 @@ public class VerifyAuditedModel extends VerifyProcess {
 					continue;
 				}
 
-				verifyModel(
-					modelName, pkColumnName, primKey, modelArray,
-					verifiableAuditedModel.isUpdateDates());
+				verifyAuditedModel(
+					verifiableAuditedModel.getTableName(),
+					verifiableAuditedModel.getPrimaryKeyColumnName(), primKey,
+					modelArray, verifiableAuditedModel.isUpdateDates());
 			}
 		}
 		finally {

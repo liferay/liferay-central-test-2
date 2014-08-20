@@ -31,7 +31,7 @@ public class PollsChoiceVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "choiceId";
 	}
 

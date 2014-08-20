@@ -30,7 +30,7 @@ public class UserGroupVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "userGroupId";
 	}
 

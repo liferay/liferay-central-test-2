@@ -30,7 +30,7 @@ public class RoleVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "roleId";
 	}
 

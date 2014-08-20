@@ -31,7 +31,7 @@ public class MBDiscussionVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "discussionId";
 	}
 

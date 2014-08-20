@@ -31,7 +31,7 @@ public class MBThreadFlagVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "threadFlagId";
 	}
 

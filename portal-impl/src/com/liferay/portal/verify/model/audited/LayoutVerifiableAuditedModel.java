@@ -30,7 +30,7 @@ public class LayoutVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "plid";
 	}
 

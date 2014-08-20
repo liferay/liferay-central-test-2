@@ -31,7 +31,7 @@ public class LayoutPrototypeVerifiableAuditedModel
 	}
 
 	@Override
-	public String getPkColumnName() {
+	public String getPrimaryKeyColumnName() {
 		return "layoutPrototypeId";
 	}
 
