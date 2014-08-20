@@ -119,7 +119,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 	}
 
-	protected Object[] getModelArray(
+	protected Object[] getAuditedModelArray(
 			String modelName, String pkColumnName, long primKey)
 		throws Exception {
 
@@ -199,7 +199,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 	protected void verifyAuditedModel(
 			String tableName, String primaryKeyColumnName, long primKey,
-			Object[] modelArray, boolean updateDates)
+			Object[] auditedModelArray, boolean updateDates)
 		throws Exception {
 
 		Connection con = null;
@@ -208,20 +208,20 @@ public class VerifyAuditedModel extends VerifyProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			long companyId = (Long)modelArray[0];
+			long companyId = (Long)auditedModelArray[0];
 
-			if (modelArray[2] == null) {
-				modelArray = getDefaultUserArray(con, companyId);
+			if (auditedModelArray[2] == null) {
+				auditedModelArray = getDefaultUserArray(con, companyId);
 
-				if (modelArray == null) {
+				if (auditedModelArray == null) {
 					return;
 				}
 			}
 
-			long userId = (Long)modelArray[1];
-			String userName = (String)modelArray[2];
-			Timestamp createDate = (Timestamp)modelArray[3];
-			Timestamp modifiedDate = (Timestamp)modelArray[4];
+			long userId = (Long)auditedModelArray[1];
+			String userName = (String)auditedModelArray[2];
+			Timestamp createDate = (Timestamp)auditedModelArray[3];
+			Timestamp modifiedDate = (Timestamp)auditedModelArray[4];
 
 			StringBundler sb = new StringBundler(7);
 
@@ -294,7 +294,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			Object[] modelArray = null;
+			Object[] auditedModelArray = null;
 
 			long previousCompanyId = 0;
 
@@ -307,25 +307,25 @@ public class VerifyAuditedModel extends VerifyProcess {
 					long relatedPrimKey = rs.getLong(
 						verifiableAuditedModel.getJoinByTableName());
 
-					modelArray = getModelArray(
+					auditedModelArray = getAuditedModelArray(
 						verifiableAuditedModel.getRelatedModelName(),
 						verifiableAuditedModel.getRelatedPKColumnName(),
 						relatedPrimKey);
 				}
 				else if (previousCompanyId != companyId) {
-					modelArray = getDefaultUserArray(con, companyId);
+					auditedModelArray = getDefaultUserArray(con, companyId);
 
 					previousCompanyId = companyId;
 				}
 
-				if (modelArray == null) {
+				if (auditedModelArray == null) {
 					continue;
 				}
 
 				verifyAuditedModel(
 					verifiableAuditedModel.getTableName(),
 					verifiableAuditedModel.getPrimaryKeyColumnName(), primKey,
-					modelArray, verifiableAuditedModel.isUpdateDates());
+					auditedModelArray, verifiableAuditedModel.isUpdateDates());
 			}
 		}
 		finally {
