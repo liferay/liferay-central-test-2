@@ -452,8 +452,7 @@ public class UserFinderImpl
 		try {
 			List<Long> userIds = doFindByC_FN_MN_LN_SN_EA_S(
 				companyId, firstNames, middleNames, lastNames, screenNames,
-				emailAddresses, status, params, andOperator, start, end,
-				obc);
+				emailAddresses, status, params, andOperator, start, end, obc);
 
 			List<User> users = new ArrayList<User>(userIds.size());
 
