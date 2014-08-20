@@ -21,9 +21,9 @@ public interface VerifiableGroupedModel {
 
 	public String getPrimaryKeyColumnName();
 
-	public String getRelatedModelName();
+	public String getRelatedPrimaryKeyColumnName();
 
-	public String getRelatedPKColumnName();
+	public String getRelatedTableName();
 
 	public String getTableName();
 

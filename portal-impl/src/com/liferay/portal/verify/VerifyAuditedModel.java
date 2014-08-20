@@ -77,7 +77,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 	}
 
 	protected Object[] getAuditedModelArray(
-			String modelName, String pkColumnName, long primKey)
+			String tableName, String pkColumnName, long primKey)
 		throws Exception {
 
 		Connection con = null;
@@ -89,7 +89,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 			ps = con.prepareStatement(
 				"select companyId, userId, createDate, modifiedDate from " +
-					modelName + " where " + pkColumnName + " = ?");
+					tableName + " where " + pkColumnName + " = ?");
 
 			ps.setLong(1, primKey);
 
@@ -108,8 +108,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Unable to find " + modelName + StringPool.SPACE + primKey);
+				_log.debug("Unable to find " + tableName + " " + primKey);
 			}
 
 			return null;

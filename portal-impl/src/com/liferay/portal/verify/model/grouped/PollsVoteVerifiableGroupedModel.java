@@ -25,13 +25,13 @@ public class PollsVoteVerifiableGroupedModel implements VerifiableGroupedModel {
 	}
 
 	@Override
-	public String getRelatedModelName() {
-		return "PollsQuestion";
+	public String getRelatedPrimaryKeyColumnName() {
+		return "questionId";
 	}
 
 	@Override
-	public String getRelatedPKColumnName() {
-		return "questionId";
+	public String getRelatedTableName() {
+		return "PollsQuestion";
 	}
 
 	@Override

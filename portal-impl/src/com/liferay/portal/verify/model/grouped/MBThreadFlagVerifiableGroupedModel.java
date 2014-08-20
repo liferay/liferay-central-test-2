@@ -26,13 +26,13 @@ public class MBThreadFlagVerifiableGroupedModel
 	}
 
 	@Override
-	public String getRelatedModelName() {
-		return "MBThread";
+	public String getRelatedPrimaryKeyColumnName() {
+		return "threadId";
 	}
 
 	@Override
-	public String getRelatedPKColumnName() {
-		return "threadId";
+	public String getRelatedTableName() {
+		return "MBThread";
 	}
 
 	@Override
