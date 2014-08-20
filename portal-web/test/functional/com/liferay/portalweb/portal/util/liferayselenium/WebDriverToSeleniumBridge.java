@@ -1802,6 +1802,28 @@ public class WebDriverToSeleniumBridge
 		alert.accept();
 	}
 
+	protected Set<Integer> getSpecialCharIndexes(String value) {
+		Set<Integer> specialCharIndexes = new TreeSet<Integer>();
+
+		while (value.contains("-")) {
+			specialCharIndexes.add(value.indexOf("-"));
+
+			value = StringUtil.replaceFirst(value, "-", " ");
+		}
+
+		for (String specialChar : _keysSpecialChars.keySet()) {
+			specialChar = "\\" + specialChar;
+
+			while (value.contains(specialChar)) {
+				specialCharIndexes.add(value.indexOf(specialChar));
+
+				value = StringUtil.replaceFirst(value, specialChar, " ");
+			}
+		}
+
+		return specialCharIndexes;
+	}
+
 	protected WebElement getWebElement(String locator) {
 		return getWebElement(locator, null);
 	}
@@ -2017,28 +2039,6 @@ public class WebDriverToSeleniumBridge
 	}
 
 	protected String defaultWindowHandle;
-
-	protected Set<Integer> getSpecialCharIndexes(String value) {
-		Set<Integer> specialCharIndexes = new TreeSet<Integer>();
-
-		while (value.contains("-")) {
-			specialCharIndexes.add(value.indexOf("-"));
-
-			value = StringUtil.replaceFirst(value, "-", " ");
-		}
-
-		for (String specialChar : _keysSpecialChars.keySet()) {
-			specialChar = "\\" + specialChar;
-
-			while (value.contains(specialChar)) {
-				specialCharIndexes.add(value.indexOf(specialChar));
-
-				value = StringUtil.replaceFirst(value, specialChar, " ");
-			}
-		}
-
-		return specialCharIndexes;
-	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		WebDriverToSeleniumBridge.class);
