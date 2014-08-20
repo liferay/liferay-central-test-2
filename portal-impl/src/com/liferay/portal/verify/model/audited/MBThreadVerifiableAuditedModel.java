@@ -20,7 +20,7 @@ package com.liferay.portal.verify.model.audited;
 public class MBThreadVerifiableAuditedModel implements VerifiableAuditedModel {
 
 	@Override
-	public String getJoinByColumnName() {
+	public String getJoinByTableName() {
 		return "rootMessageId";
 	}
 

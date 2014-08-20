@@ -21,7 +21,7 @@ public class MBDiscussionVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
-	public String getJoinByColumnName() {
+	public String getJoinByTableName() {
 		return "threadId";
 	}
 

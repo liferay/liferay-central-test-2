@@ -21,7 +21,7 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
-	public String getJoinByColumnName() {
+	public String getJoinByTableName() {
 		return null;
 	}
 

@@ -21,7 +21,7 @@ public class RepositoryEntryVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
-	public String getJoinByColumnName() {
+	public String getJoinByTableName() {
 		return "repositoryId";
 	}
 

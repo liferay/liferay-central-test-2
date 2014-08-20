@@ -21,7 +21,7 @@ public class LayoutPrototypeVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
-	public String getJoinByColumnName() {
+	public String getJoinByTableName() {
 		return null;
 	}
 

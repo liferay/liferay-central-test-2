@@ -19,7 +19,7 @@ package com.liferay.portal.verify.model.audited;
  */
 public interface VerifiableAuditedModel {
 
-	public String getJoinByColumnName();
+	public String getJoinByTableName();
 
 	public String getModelName();
 

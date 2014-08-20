@@ -56,7 +56,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 					_verifiableAuditedModels) {
 
 				if (unverifiedModelNames.contains(
-						verifiableAuditedModel.getJoinByColumnName()) ||
+						verifiableAuditedModel.getJoinByTableName()) ||
 					!unverifiedModelNames.contains(
 						verifiableAuditedModel.getModelName())) {
 
@@ -283,7 +283,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 			sb.append(", companyId");
 
 			String joinByColumnName =
-				verifiableAuditedModel.getJoinByColumnName();
+				verifiableAuditedModel.getJoinByTableName();
 
 			if (joinByColumnName != null) {
 				sb.append(StringPool.COMMA_AND_SPACE);

@@ -21,7 +21,7 @@ public class PollsChoiceVerifiableAuditedModel
 	implements VerifiableAuditedModel {
 
 	@Override
-	public String getJoinByColumnName() {
+	public String getJoinByTableName() {
 		return "questionId";
 	}
 
