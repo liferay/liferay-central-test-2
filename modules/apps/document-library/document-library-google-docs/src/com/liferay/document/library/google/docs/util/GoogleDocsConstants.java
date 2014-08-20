@@ -17,9 +17,8 @@ package com.liferay.document.library.google.docs.util;
 /**
  * @author Iván Zaera
  */
-public class Constants {
+public class GoogleDocsConstants {
 
-	public static final String DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT =
-		"GOOGLE_DOCUMENT";
+	public static final String DDM_STRUCTURE_KEY_GOOGLE_DOCS = "GOOGLE_DOCS";
 
 }

@@ -27,10 +27,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Iván Zaera
  */
-public class GoogleDLFileEntryActionsDisplayContext
+public class GoogleDocsDLFileEntryActionsDisplayContext
 	extends BaseDLFileEntryActionsDisplayContext {
 
-	public GoogleDLFileEntryActionsDisplayContext(
+	public GoogleDocsDLFileEntryActionsDisplayContext(
 		DLFileEntryActionsDisplayContext parentDLDisplayContext,
 		HttpServletRequest request, HttpServletResponse response,
 		FileEntry fileEntry, FileVersion fileVersion) {

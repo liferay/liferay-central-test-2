@@ -34,9 +34,9 @@ import java.util.Map;
 /**
  * @author Iván Zaera
  */
-public class GoogleDocumentTypeCreator {
+public class GoogleDocsDLFileEntryTypeCreator {
 
-	public GoogleDocumentTypeCreator(
+	public GoogleDocsDLFileEntryTypeCreator(
 		Company company, ClassNameLocalService classNameLocalService,
 		DDMStructureLocalService ddmStructureLocalService,
 		DLFileEntryTypeLocalService dlFileEntryTypeLocalService,
@@ -52,17 +52,17 @@ public class GoogleDocumentTypeCreator {
 			DLFileEntryMetadata.class);
 	}
 
-	public void addGoogleDocumentDLFileEntryType() throws PortalException {
-		if (hasGoogleDocumentDDMStructure(_company)) {
+	public void addGoogleDocsDLFileEntryType() throws PortalException {
+		if (hasGoogleDocsDDMStructure(_company)) {
 			return;
 		}
 
-		DDMStructure ddmStructure = addGoogleDocumentDDMStructure();
+		DDMStructure ddmStructure = addGoogleDocsDDMStructure();
 
-		addGoogleDocumentDLFileEntryType(ddmStructure.getStructureId());
+		addGoogleDocsDLFileEntryType(ddmStructure.getStructureId());
 	}
 
-	protected DDMStructure addGoogleDocumentDDMStructure()
+	protected DDMStructure addGoogleDocsDDMStructure()
 		throws PortalException {
 
 		long defaultUserId = _userLocalService.getDefaultUserId(
@@ -70,11 +70,11 @@ public class GoogleDocumentTypeCreator {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(LocaleUtil.getDefault(), "Google Metadata Set");
+		nameMap.put(LocaleUtil.getDefault(), "Google Docs Metadata");
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(LocaleUtil.getDefault(), "Google Metadata Set");
+		descriptionMap.put(LocaleUtil.getDefault(), "Google Docs Metadata");
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -84,18 +84,18 @@ public class GoogleDocumentTypeCreator {
 		serviceContext.setUserId(defaultUserId);
 
 		String definition = ResourceUtil.get(
-			this, "dependencies/ddm_structure_google_document.xml");
+			this, "dependencies/ddm_structure_google_docs.xml");
 
 		return _ddmStructureLocalService.addStructure(
 			defaultUserId, _company.getGroupId(),
 			DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
 			_dlFileEntryMetadataClassNameId,
-			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap,
+			GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS, nameMap,
 			descriptionMap, definition, "xml",
 			DDMStructureConstants.TYPE_DEFAULT, serviceContext);
 	}
 
-	protected DLFileEntryType addGoogleDocumentDLFileEntryType(
+	protected DLFileEntryType addGoogleDocsDLFileEntryType(
 			long ddmStructureId)
 		throws PortalException {
 
@@ -104,11 +104,11 @@ public class GoogleDocumentTypeCreator {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(LocaleUtil.getDefault(), "Google Document");
+		nameMap.put(LocaleUtil.getDefault(), "Google Docs");
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(LocaleUtil.getDefault(), "Google Document");
+		descriptionMap.put(LocaleUtil.getDefault(), "Google Docs");
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -119,19 +119,18 @@ public class GoogleDocumentTypeCreator {
 
 		return _dlFileEntryTypeLocalService.addFileEntryType(
 			defaultUserId, _company.getGroupId(),
-			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap,
+			GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS, nameMap,
 			descriptionMap, new long[] {ddmStructureId}, serviceContext);
 	}
 
-	protected boolean hasGoogleDocumentDDMStructure(Company company)
+	protected boolean hasGoogleDocsDDMStructure(Company company)
 		throws PortalException {
 
-		DDMStructure googleDocumentDDMStructure =
-			_ddmStructureLocalService.fetchStructure(
-				company.getGroupId(), _dlFileEntryMetadataClassNameId,
-				Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT);
+		DDMStructure ddmStructure = _ddmStructureLocalService.fetchStructure(
+			company.getGroupId(), _dlFileEntryMetadataClassNameId,
+			GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS);
 
-		if (googleDocumentDDMStructure != null) {
+		if (ddmStructure != null) {
 			return true;
 		}
 		

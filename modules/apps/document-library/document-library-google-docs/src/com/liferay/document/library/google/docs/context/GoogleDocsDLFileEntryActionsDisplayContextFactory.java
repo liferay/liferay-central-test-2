@@ -14,8 +14,8 @@
 
 package com.liferay.document.library.google.docs.context;
 
-import com.liferay.document.library.google.docs.util.Constants;
-import com.liferay.document.library.google.docs.util.GoogleDocumentTypeCreator;
+import com.liferay.document.library.google.docs.util.GoogleDocsConstants;
+import com.liferay.document.library.google.docs.util.GoogleDocsDLFileEntryTypeCreator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -45,8 +45,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Iván Zaera
  */
 @Component(
-	service = DLFileEntryActionsDisplayContextFactory.class, immediate = true)
-public class GoogleDLFileEntryActionsDisplayContextFactory
+	immediate = true, service = DLFileEntryActionsDisplayContextFactory.class
+)
+public class GoogleDocsDLFileEntryActionsDisplayContextFactory
 	implements DLFileEntryActionsDisplayContextFactory {
 
 	@Activate
@@ -54,12 +55,12 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 		List<Company> companies = _companyLocalService.getCompanies();
 
 		for (Company company : companies) {
-			GoogleDocumentTypeCreator googleDocumentTypeCreator =
-				new GoogleDocumentTypeCreator(
+			GoogleDocsDLFileEntryTypeCreator googleDocumentTypeCreator =
+				new GoogleDocsDLFileEntryTypeCreator(
 					company, _classNameLocalService, _ddmStructureLocalService,
 					_dlFileEntryTypeLocalService, _userLocalService);
 
-			googleDocumentTypeCreator.addGoogleDocumentDLFileEntryType();
+			googleDocumentTypeCreator.addGoogleDocsDLFileEntryType();
 		}
 	}
 
@@ -70,8 +71,8 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 		FileEntry fileEntry, FileVersion fileVersion) {
 
 		try {
-			if (isGoogleDocument(fileVersion)) {
-				return new GoogleDLFileEntryActionsDisplayContext(
+			if (isGoogleDocs(fileVersion)) {
+				return new GoogleDocsDLFileEntryActionsDisplayContext(
 					parentDLFileEntryActionsDisplayContext, request, response,
 					fileEntry, fileVersion);
 			}
@@ -116,7 +117,7 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 		_userLocalService = userLocalService;
 	}
 
-	protected boolean isGoogleDocument(FileVersion fileVersion)
+	protected boolean isGoogleDocs(FileVersion fileVersion)
 		throws PortalException {
 
 		Object fileVersionModel = fileVersion.getModel();
@@ -137,7 +138,7 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 			String structureKey = ddmStructure.getStructureKey();
 
 			if (structureKey.equals(
-					Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT)) {
+					GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS)) {
 
 				return true;
 			}
