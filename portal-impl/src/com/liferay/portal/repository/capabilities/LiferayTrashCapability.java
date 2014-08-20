@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
-import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.RepositoryLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -87,7 +86,6 @@ public class LiferayTrashCapability implements TrashCapability {
 		if (repository == null) {
 			deleteRepositoryTrashEntries(
 				repositoryId, DLFileEntry.class.getName());
-
 			deleteRepositoryTrashEntries(
 				repositoryId, DLFolder.class.getName());
 		}
@@ -97,18 +95,21 @@ public class LiferayTrashCapability implements TrashCapability {
 
 			queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-			List<Object> entries =
+			List<Object> foldersAndFileEntriesAndFileShortcuts =
 				DLFolderLocalServiceUtil.
 					getFoldersAndFileEntriesAndFileShortcuts(
 						repository.getGroupId(), repository.getDlFolderId(),
 						null, true, queryDefinition);
 
-			for (Object entry : entries) {
-				if (entry instanceof DLFileEntry) {
-					deleteTrashEntry((DLFileEntry)entry);
+			for (Object folderFileEntryOrFileShortcut :
+					foldersAndFileEntriesAndFileShortcuts) {
+
+				if (folderFileEntryOrFileShortcut instanceof DLFileEntry) {
+					deleteTrashEntry(
+						(DLFileEntry)folderFileEntryOrFileShortcut);
 				}
-				else if (entry instanceof DLFolder) {
-					deleteTrashEntry((DLFolder)entry);
+				else if (folderFileEntryOrFileShortcut instanceof DLFolder) {
+					deleteTrashEntry((DLFolder)folderFileEntryOrFileShortcut);
 				}
 			}
 		}
@@ -181,10 +182,10 @@ public class LiferayTrashCapability implements TrashCapability {
 		List<TrashEntry> trashEntries = TrashEntryLocalServiceUtil.getEntries(
 			repositoryId, className);
 
-		long[] entryIds = StringUtil.split(
+		long[] trashEntryIds = StringUtil.split(
 			ListUtil.toString(trashEntries, _TRASH_ENTRY_ID_ACCESSOR), 0L);
 
-		TrashEntryServiceUtil.deleteEntries(entryIds);
+		TrashEntryServiceUtil.deleteEntries(trashEntryIds);
 	}
 
 	protected void deleteTrashEntry(DLFileEntry dlFileEntry)
