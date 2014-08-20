@@ -1079,7 +1079,7 @@ public class UserFinderImpl
 		}
 	}
 
-	public List<Long> findByC_FN_MN_LN_SN_EA_S(
+	protected List<User> doFindByC_FN_MN_LN_SN_EA_S(
 		long companyId, String[] firstNames, String[] middleNames,
 		String[] lastNames, String[] screenNames, String[] emailAddresses,
 		int status, LinkedHashMap<String, Object> params, boolean andOperator,
