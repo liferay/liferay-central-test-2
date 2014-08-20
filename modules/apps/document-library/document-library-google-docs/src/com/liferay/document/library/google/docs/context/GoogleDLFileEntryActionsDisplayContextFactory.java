@@ -70,7 +70,7 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 		FileEntry fileEntry, FileVersion fileVersion) {
 
 		try {
-			if (_isGoogleDocument(fileVersion)) {
+			if (isGoogleDocument(fileVersion)) {
 				return new GoogleDLFileEntryActionsDisplayContext(
 					parentDLFileEntryActionsDisplayContext, request, response,
 					fileEntry, fileVersion);
@@ -116,29 +116,30 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 		_userLocalService = userLocalService;
 	}
 
-	private boolean _isGoogleDocument(FileVersion fileVersion)
+	protected boolean isGoogleDocument(FileVersion fileVersion)
 		throws PortalException {
 
 		Object fileVersionModel = fileVersion.getModel();
 
-		if (fileVersionModel instanceof DLFileVersion) {
-			DLFileVersion dlFileVersion = (DLFileVersion)fileVersionModel;
+		if (!(fileVersionModel instanceof DLFileVersion)) {
+			return false;
+		}
 
-			DLFileEntryType dlFileEntryType =
-				_dlFileEntryTypeLocalService.getFileEntryType(
-					dlFileVersion.getFileEntryTypeId());
+		DLFileVersion dlFileVersion = (DLFileVersion)fileVersionModel;
 
-			List<DDMStructure> ddmStructures =
-				dlFileEntryType.getDDMStructures();
+		DLFileEntryType dlFileEntryType =
+			_dlFileEntryTypeLocalService.getFileEntryType(
+				dlFileVersion.getFileEntryTypeId());
 
-			for (DDMStructure ddmStructure : ddmStructures) {
-				String structureKey = ddmStructure.getStructureKey();
+		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
 
-				if (structureKey.equals(
-						Constants.GOOGLE_DOCUMENT_STRUCTURE_KEY)) {
+		for (DDMStructure ddmStructure : ddmStructures) {
+			String structureKey = ddmStructure.getStructureKey();
 
-					return true;
-				}
+			if (structureKey.equals(
+					Constants.GOOGLE_DOCUMENT_STRUCTURE_KEY)) {
+
+				return true;
 			}
 		}
 
