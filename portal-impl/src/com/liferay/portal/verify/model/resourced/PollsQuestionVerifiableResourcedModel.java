@@ -28,7 +28,7 @@ public class PollsQuestionVerifiableResourcedModel
 	}
 
 	@Override
-	public String getName() {
+	public String getTableName() {
 		return "PollsQuestion";
 	}
 

@@ -21,7 +21,7 @@ public interface VerifiableResourcedModel {
 
 	public String getModelName();
 
-	public String getName();
+	public String getTableName();
 
 	public String getPrimaryKeyColumnName();
 

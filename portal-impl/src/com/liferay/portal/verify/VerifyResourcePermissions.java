@@ -87,7 +87,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 					_verifiableResourcedModels) {
 
 				verifyResourcedModel(
-					role, verifiableResourcedModel.getName(),
+					role, verifiableResourcedModel.getTableName(),
 					verifiableResourcedModel.getModelName(),
 					verifiableResourcedModel.getPrimaryKeyColumnName());
 			}
@@ -177,7 +177,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 	}
 
 	protected void verifyResourcedModel(
-			Role role, String name, String tableName,
+			Role role, String modelName, String tableName,
 			String primaryKeyColumnName)
 		throws Exception {
 
@@ -218,7 +218,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				long userId = rs.getLong("userId");
 
 				verifyModel(
-					role.getCompanyId(), name, primKey, role, userId, i, total);
+					role.getCompanyId(), modelName, primKey, role, userId, i,
+					total);
 			}
 		}
 		finally {
