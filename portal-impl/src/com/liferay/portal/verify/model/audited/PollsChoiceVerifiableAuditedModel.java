@@ -26,7 +26,7 @@ public class PollsChoiceVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "PollsChoice";
 	}
 

@@ -25,7 +25,7 @@ public class MBThreadVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "MBThread";
 	}
 

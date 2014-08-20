@@ -41,37 +41,37 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		List<String> unverifiedModelNames = new ArrayList<String>();
+		List<String> unverifiedTableNames = new ArrayList<String>();
 
 		for (VerifiableAuditedModel verifiableAuditedModel :
 				_verifiableAuditedModels) {
 
-			unverifiedModelNames.add(verifiableAuditedModel.getModelName());
+			unverifiedTableNames.add(verifiableAuditedModel.getTableName());
 		}
 
-		while (!unverifiedModelNames.isEmpty()) {
-			int count = unverifiedModelNames.size();
+		while (!unverifiedTableNames.isEmpty()) {
+			int count = unverifiedTableNames.size();
 
 			for (VerifiableAuditedModel verifiableAuditedModel :
 					_verifiableAuditedModels) {
 
-				if (unverifiedModelNames.contains(
+				if (unverifiedTableNames.contains(
 						verifiableAuditedModel.getJoinByTableName()) ||
-					!unverifiedModelNames.contains(
-						verifiableAuditedModel.getModelName())) {
+					!unverifiedTableNames.contains(
+						verifiableAuditedModel.getTableName())) {
 
 					continue;
 				}
 
-				verifyModel(verifiableAuditedModel);
+				verifyAuditedModel(verifiableAuditedModel);
 
-				unverifiedModelNames.remove(
-					verifiableAuditedModel.getModelName());
+				unverifiedTableNames.remove(
+					verifiableAuditedModel.getTableName());
 			}
 
-			if (unverifiedModelNames.size() == count) {
+			if (unverifiedTableNames.size() == count) {
 				throw new VerifyException(
-					"Circular dependency detected " + unverifiedModelNames);
+					"Circular dependency detected " + unverifiedTableNames);
 			}
 		}
 	}
@@ -264,7 +264,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 		}
 	}
 
-	protected void verifyModel(VerifiableAuditedModel verifiableAuditedModel)
+	protected void verifyAuditedModel(VerifiableAuditedModel verifiableAuditedModel)
 		throws Exception {
 
 		Connection con = null;
@@ -290,7 +290,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 				sb.append(joinByColumnName);
 			}
 
-			String modelName = verifiableAuditedModel.getModelName();
+			String modelName = verifiableAuditedModel.getTableName();
 
 			sb.append(" from ");
 			sb.append(modelName);

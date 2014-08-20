@@ -26,7 +26,7 @@ public class LayoutSetPrototypeVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "LayoutSetPrototype";
 	}
 

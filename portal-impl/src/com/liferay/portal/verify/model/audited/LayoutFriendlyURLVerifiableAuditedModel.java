@@ -26,7 +26,7 @@ public class LayoutFriendlyURLVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "LayoutFriendlyURL";
 	}
 

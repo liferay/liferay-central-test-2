@@ -26,7 +26,7 @@ public class RepositoryEntryVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "RepositoryEntry";
 	}
 

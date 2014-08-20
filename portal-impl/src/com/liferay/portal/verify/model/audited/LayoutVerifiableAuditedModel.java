@@ -25,7 +25,7 @@ public class LayoutVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "Layout";
 	}
 

@@ -21,7 +21,7 @@ public interface VerifiableAuditedModel {
 
 	public String getJoinByTableName();
 
-	public String getModelName();
+	public String getTableName();
 
 	public String getPkColumnName();
 

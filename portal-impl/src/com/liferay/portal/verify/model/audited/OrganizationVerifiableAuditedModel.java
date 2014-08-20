@@ -26,7 +26,7 @@ public class OrganizationVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "Organization_";
 	}
 

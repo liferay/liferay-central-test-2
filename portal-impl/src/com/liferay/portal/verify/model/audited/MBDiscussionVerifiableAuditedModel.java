@@ -26,7 +26,7 @@ public class MBDiscussionVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "MBDiscussion";
 	}
 

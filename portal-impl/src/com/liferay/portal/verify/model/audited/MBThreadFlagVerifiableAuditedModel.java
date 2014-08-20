@@ -26,7 +26,7 @@ public class MBThreadFlagVerifiableAuditedModel
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "MBThreadFlag";
 	}
 

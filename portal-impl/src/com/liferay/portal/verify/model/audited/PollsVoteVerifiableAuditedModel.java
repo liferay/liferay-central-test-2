@@ -25,7 +25,7 @@ public class PollsVoteVerifiableAuditedModel implements VerifiableAuditedModel {
 	}
 
 	@Override
-	public String getModelName() {
+	public String getTableName() {
 		return "PollsVote";
 	}
 
