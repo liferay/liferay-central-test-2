@@ -52,7 +52,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WeakValueConcurrentHashMap;
 import com.liferay.portal.security.lang.DoPrivilegedBean;
 import com.liferay.portal.security.lang.DoPrivilegedFactory;
 import com.liferay.portal.security.lang.DoPrivilegedHandler;
@@ -430,7 +429,8 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		initClass(TemplateContextHelper.class);
 		initClass(URLWrapper.class);
 		initClass(VelocityTemplate.class);
-		initClass(WeakValueConcurrentHashMap.class);
+		initClass(
+			com.liferay.portal.kernel.util.WeakValueConcurrentHashMap.class);
 		initClass(XSLTemplate.class);
 	}
 
