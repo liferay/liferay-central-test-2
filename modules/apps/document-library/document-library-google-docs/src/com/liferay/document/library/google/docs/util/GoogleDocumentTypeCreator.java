@@ -89,7 +89,7 @@ public class GoogleDocumentTypeCreator {
 			defaultUserId, _company.getGroupId(),
 			DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
 			_dlFileEntryMetadataClassNameId,
-			Constants.GOOGLE_DOCUMENT_STRUCTURE_KEY, nameMap, descriptionMap,
+			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap, descriptionMap,
 			googleDocumentTypeDDMXML, "xml", DDMStructureConstants.TYPE_DEFAULT,
 			serviceContext);
 	}
@@ -118,7 +118,7 @@ public class GoogleDocumentTypeCreator {
 
 		return _dlFileEntryTypeLocalService.addFileEntryType(
 			defaultUserId, _company.getGroupId(),
-			Constants.GOOGLE_DOCUMENT_STRUCTURE_KEY, nameMap, descriptionMap,
+			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap, descriptionMap,
 			new long[] {googleDocumentMetadataSetId}, serviceContext);
 	}
 
@@ -128,7 +128,7 @@ public class GoogleDocumentTypeCreator {
 		DDMStructure googleDocumentMetadataSet =
 			_ddmStructureLocalService.fetchStructure(
 				company.getGroupId(), _dlFileEntryMetadataClassNameId,
-				Constants.GOOGLE_DOCUMENT_STRUCTURE_KEY);
+				Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT);
 
 		return googleDocumentMetadataSet != null;
 	}

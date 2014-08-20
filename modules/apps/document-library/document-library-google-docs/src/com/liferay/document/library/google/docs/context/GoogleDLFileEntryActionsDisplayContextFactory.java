@@ -137,7 +137,7 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 			String structureKey = ddmStructure.getStructureKey();
 
 			if (structureKey.equals(
-					Constants.GOOGLE_DOCUMENT_STRUCTURE_KEY)) {
+					Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT)) {
 
 				return true;
 			}
