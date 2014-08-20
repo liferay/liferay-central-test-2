@@ -63,6 +63,9 @@ public class GoogleDocumentTypeCreator {
 	protected DDMStructure addGoogleDocumentDDMStructure()
 		throws PortalException {
 
+		long defaultUserId = _userLocalService.getDefaultUserId(
+			_company.getCompanyId());
+
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 		nameMap.put(LocaleUtil.getDefault(), "Google Metadata Set");
@@ -72,9 +75,6 @@ public class GoogleDocumentTypeCreator {
 		descriptionMap.put(
 			LocaleUtil.getDefault(), "Metadata Set used by Google Documents");
 
-		long defaultUserId = _userLocalService.getDefaultUserId(
-			_company.getCompanyId());
-
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGuestPermissions(true);
@@ -82,21 +82,24 @@ public class GoogleDocumentTypeCreator {
 		serviceContext.setScopeGroupId(_company.getGroupId());
 		serviceContext.setUserId(defaultUserId);
 
-		String googleDocumentTypeDDMXML = ResourceUtil.get(
+		String definition = ResourceUtil.get(
 			this, _GOOGLE_DOCUMENT_METADATA_SET_XML);
 
 		return _ddmStructureLocalService.addStructure(
 			defaultUserId, _company.getGroupId(),
 			DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
 			_dlFileEntryMetadataClassNameId,
-			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap, descriptionMap,
-			googleDocumentTypeDDMXML, "xml", DDMStructureConstants.TYPE_DEFAULT,
-			serviceContext);
+			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap,
+			descriptionMap, definition, "xml",
+			DDMStructureConstants.TYPE_DEFAULT, serviceContext);
 	}
 
 	protected DLFileEntryType addGoogleDocumentDLFileEntryType(
-			long googleDocumentMetadataSetId)
+			long ddmStructureId)
 		throws PortalException {
+
+		long defaultUserId = _userLocalService.getDefaultUserId(
+			_company.getCompanyId());
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
@@ -105,9 +108,6 @@ public class GoogleDocumentTypeCreator {
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 		descriptionMap.put(LocaleUtil.getDefault(), "Google Document Type");
-
-		long defaultUserId = _userLocalService.getDefaultUserId(
-			_company.getCompanyId());
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -119,18 +119,18 @@ public class GoogleDocumentTypeCreator {
 		return _dlFileEntryTypeLocalService.addFileEntryType(
 			defaultUserId, _company.getGroupId(),
 			Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT, nameMap, descriptionMap,
-			new long[] {googleDocumentMetadataSetId}, serviceContext);
+			new long[] {ddmStructureId}, serviceContext);
 	}
 
 	protected boolean hasGoogleDocumentDDMStructure(Company company)
 		throws PortalException {
 
-		DDMStructure googleDocumentMetadataSet =
+		DDMStructure googleDocumentDDMStructure =
 			_ddmStructureLocalService.fetchStructure(
 				company.getGroupId(), _dlFileEntryMetadataClassNameId,
 				Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT);
 
-		if (googleDocumentMetadataSet != null) {
+		if (googleDocumentDDMStructure != null) {
 			return true;
 		}
 		
