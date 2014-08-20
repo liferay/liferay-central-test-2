@@ -35,9 +35,9 @@ import java.util.Map;
 /**
  * @author Iván Zaera
  */
-public class GoogleDocsDLFileEntryTypeFactory {
+public class GoogleDocsDLFileEntryTypeHelper {
 
-	public GoogleDocsDLFileEntryTypeFactory(
+	public GoogleDocsDLFileEntryTypeHelper(
 		Company company, ClassNameLocalService classNameLocalService,
 		DDMStructureLocalService ddmStructureLocalService,
 		DLFileEntryTypeLocalService dlFileEntryTypeLocalService,

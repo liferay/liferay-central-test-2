@@ -15,7 +15,7 @@
 package com.liferay.document.library.google.docs.context;
 
 import com.liferay.document.library.google.docs.util.GoogleDocsConstants;
-import com.liferay.document.library.google.docs.util.GoogleDocsDLFileEntryTypeFactory;
+import com.liferay.document.library.google.docs.util.GoogleDocsDLFileEntryTypeHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -54,8 +54,8 @@ public class GoogleDocsDLFileVersionActionsDisplayContextFactory
 		List<Company> companies = _companyLocalService.getCompanies();
 
 		for (Company company : companies) {
-			GoogleDocsDLFileEntryTypeFactory googleDocumentTypeCreator =
-				new GoogleDocsDLFileEntryTypeFactory(
+			GoogleDocsDLFileEntryTypeHelper googleDocumentTypeCreator =
+				new GoogleDocsDLFileEntryTypeHelper(
 					company, _classNameLocalService, _ddmStructureLocalService,
 					_dlFileEntryTypeLocalService, _userLocalService);
 
