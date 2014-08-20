@@ -425,7 +425,7 @@ public class LiferaySeleniumHelper {
 		}
 	}
 
-	private static void _captureScreen(String fileName) throws Exception {
+	public static void captureScreen(String fileName) throws Exception {
 		File file = new File(fileName);
 
 		file.mkdirs();
@@ -880,10 +880,10 @@ public class LiferaySeleniumHelper {
 
 		_screenshotCount++;
 
-		_captureScreen(
+		captureScreen(
 			liferaySelenium.getProjectDirName() +
-			"portal-web/test-results/functional/screenshots/" +
-			_screenshotCount + ".jpg");
+				"portal-web/test-results/functional/screenshots/" +
+				_screenshotCount + ".jpg");
 	}
 
 	public static void saveScreenshotBeforeAction(
@@ -894,10 +894,10 @@ public class LiferaySeleniumHelper {
 			_screenshotErrorCount++;
 		}
 
-		_captureScreen(
+		captureScreen(
 			liferaySelenium.getProjectDirName() +
-			"portal-web/test-results/functional/screenshots/" +
-			"ScreenshotBeforeAction" + _screenshotErrorCount + ".jpg");
+				"portal-web/test-results/functional/screenshots/" +
+				"ScreenshotBeforeAction" + _screenshotErrorCount + ".jpg");
 	}
 
 	public static void sendEmail(
