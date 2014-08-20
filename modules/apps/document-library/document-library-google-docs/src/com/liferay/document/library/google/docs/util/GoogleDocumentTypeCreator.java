@@ -72,8 +72,7 @@ public class GoogleDocumentTypeCreator {
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(
-			LocaleUtil.getDefault(), "Metadata Set used by Google Documents");
+		descriptionMap.put(LocaleUtil.getDefault(), "Google Metadata Set");
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -107,7 +106,7 @@ public class GoogleDocumentTypeCreator {
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(LocaleUtil.getDefault(), "Google Document Type");
+		descriptionMap.put(LocaleUtil.getDefault(), "Google Document");
 
 		ServiceContext serviceContext = new ServiceContext();
 
