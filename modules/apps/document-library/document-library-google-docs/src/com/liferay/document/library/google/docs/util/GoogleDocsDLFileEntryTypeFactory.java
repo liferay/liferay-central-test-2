@@ -68,7 +68,7 @@ public class GoogleDocsDLFileEntryTypeFactory {
 			_dlFileEntryTypeLocalService.getDDMStructureDLFileEntryTypes(
 				ddmStructure.getStructureId());
 
-		if (dlFileEntryTypes.size() > 0) {
+		if (!dlFileEntryTypes.isEmpty()) {
 			return dlFileEntryTypes.get(0);
 		}
 
