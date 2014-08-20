@@ -105,21 +105,21 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		for (int i = 0; i < total; i++) {
 			Layout layout = layouts.get(i);
 
-			verifyModel(
+			verifyResourcedModel(
 				role.getCompanyId(), Layout.class.getName(), layout.getPlid(),
 				role, 0, i, total);
 		}
 	}
 
-	protected void verifyModel(
-			long companyId, String name, long primKey, Role role, long ownerId,
-			int cur, int total)
+	protected void verifyResourcedModel(
+			long companyId, String modelName, long primKey, Role role,
+			long ownerId, int cur, int total)
 		throws Exception {
 
 		if (_log.isInfoEnabled() && ((cur % 100) == 0)) {
 			_log.info(
 				"Processed " + cur + " of " + total + " resource permissions " +
-					"for company = " + companyId + " and model " + name);
+					"for company = " + companyId + " and model " + modelName);
 		}
 
 		ResourcePermission resourcePermission = null;
@@ -127,27 +127,28 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		try {
 			resourcePermission =
 				ResourcePermissionLocalServiceUtil.getResourcePermission(
-					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+					companyId, modelName, ResourceConstants.SCOPE_INDIVIDUAL,
 					String.valueOf(primKey), role.getRoleId());
 		}
 		catch (NoSuchResourcePermissionException nsrpe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No resource found for {" + companyId + ", " + name + ", " +
-						ResourceConstants.SCOPE_INDIVIDUAL + ", " + primKey +
-							", " + role.getRoleId() + "}");
+					"No resource found for {" + companyId + ", " + modelName +
+						", " + ResourceConstants.SCOPE_INDIVIDUAL + ", " +
+							primKey + ", " + role.getRoleId() + "}");
 			}
 
 			ResourceLocalServiceUtil.addResources(
-				companyId, 0, ownerId, name, String.valueOf(primKey), false,
-				false, false);
+				companyId, 0, ownerId, modelName, String.valueOf(primKey),
+				false, false, false);
 		}
 
 		if (resourcePermission == null) {
 			try {
 				resourcePermission =
 					ResourcePermissionLocalServiceUtil.getResourcePermission(
-						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+						companyId, modelName,
+						ResourceConstants.SCOPE_INDIVIDUAL,
 						String.valueOf(primKey), role.getRoleId());
 			}
 			catch (NoSuchResourcePermissionException nsrpe) {
@@ -155,7 +156,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			}
 		}
 
-		if (name.equals(User.class.getName())) {
+		if (modelName.equals(User.class.getName())) {
 			User user = UserLocalServiceUtil.fetchUserById(ownerId);
 
 			if (user != null) {
@@ -217,7 +218,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				long primKey = rs.getLong(primaryKeyColumnName);
 				long userId = rs.getLong("userId");
 
-				verifyModel(
+				verifyResourcedModel(
 					role.getCompanyId(), modelName, primKey, role, userId, i,
 					total);
 			}
