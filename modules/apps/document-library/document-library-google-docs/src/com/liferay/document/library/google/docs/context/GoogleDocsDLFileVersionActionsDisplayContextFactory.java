@@ -54,12 +54,12 @@ public class GoogleDocsDLFileVersionActionsDisplayContextFactory
 		List<Company> companies = _companyLocalService.getCompanies();
 
 		for (Company company : companies) {
-			GoogleDocsDLFileEntryTypeHelper googleDocumentTypeCreator =
+			GoogleDocsDLFileEntryTypeHelper googleDocsDLFileEntryTypeHelper =
 				new GoogleDocsDLFileEntryTypeHelper(
 					company, _classNameLocalService, _ddmStructureLocalService,
 					_dlFileEntryTypeLocalService, _userLocalService);
 
-			googleDocumentTypeCreator.addGoogleDocsDLFileEntryType();
+			googleDocsDLFileEntryTypeHelper.addGoogleDocsDLFileEntryType();
 		}
 	}
 
