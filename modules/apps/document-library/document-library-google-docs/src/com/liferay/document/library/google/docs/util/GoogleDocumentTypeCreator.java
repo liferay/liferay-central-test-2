@@ -53,14 +53,14 @@ public class GoogleDocumentTypeCreator {
 	}
 
 	public void addDocumentType() throws PortalException {
-		if (!_existsGoogleDocumentMetadataSet(_company)) {
-			DDMStructure ddmStructure = _addGoogleDocumentMetadataSet();
+		if (!hasGoogleDocumentDDMStructure(_company)) {
+			DDMStructure ddmStructure = addGoogleDocumentDDMStructure();
 
-			_addGoogleDocumentType(ddmStructure.getStructureId());
+			addGoogleDocumentDLFileEntryType(ddmStructure.getStructureId());
 		}
 	}
 
-	private DDMStructure _addGoogleDocumentMetadataSet()
+	protected DDMStructure addGoogleDocumentDDMStructure()
 		throws PortalException {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
@@ -94,7 +94,7 @@ public class GoogleDocumentTypeCreator {
 			serviceContext);
 	}
 
-	private DLFileEntryType _addGoogleDocumentType(
+	protected DLFileEntryType addGoogleDocumentDLFileEntryType(
 			long googleDocumentMetadataSetId)
 		throws PortalException {
 
@@ -122,7 +122,7 @@ public class GoogleDocumentTypeCreator {
 			new long[] {googleDocumentMetadataSetId}, serviceContext);
 	}
 
-	private boolean _existsGoogleDocumentMetadataSet(Company company)
+	protected boolean hasGoogleDocumentDDMStructure(Company company)
 		throws PortalException {
 
 		DDMStructure googleDocumentMetadataSet =
@@ -130,7 +130,11 @@ public class GoogleDocumentTypeCreator {
 				company.getGroupId(), _dlFileEntryMetadataClassNameId,
 				Constants.DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT);
 
-		return googleDocumentMetadataSet != null;
+		if (googleDocumentMetadataSet != null) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	private static final String _GOOGLE_DOCUMENT_METADATA_SET_XML =
