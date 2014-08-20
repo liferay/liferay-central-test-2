@@ -1079,7 +1079,7 @@ public class UserFinderImpl
 		}
 	}
 
-	protected List<User> doFindByC_FN_MN_LN_SN_EA_S(
+	protected List<Long> doFindByC_FN_MN_LN_SN_EA_S(
 		long companyId, String[] firstNames, String[] middleNames,
 		String[] lastNames, String[] screenNames, String[] emailAddresses,
 		int status, LinkedHashMap<String, Object> params, boolean andOperator,
@@ -1389,18 +1389,7 @@ public class UserFinderImpl
 				}
 			}
 
-			Set<Long> userIds = new LinkedHashSet<Long>(
-				(List<Long>)QueryUtil.list(q, getDialect(), start, end));
-
-			List<User> users = new ArrayList<User>(userIds.size());
-
-			for (Long userId : userIds) {
-				User user = UserUtil.findByPrimaryKey(userId);
-
-				users.add(user);
-			}
-
-			return users;
+			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
