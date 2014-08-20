@@ -81,13 +81,13 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				companyId, RoleConstants.OWNER);
 
 			for (String[] model : _MODELS) {
-				verifyModel(role, model[0], model[1], model[2]);
+				verifyResourcedModel(role, model[0], model[1], model[2]);
 			}
 
 			for (VerifiableResourcedModel verifiableResourcedModel :
 					_verifiableResourcedModels) {
 
-				verifyModel(
+				verifyResourcedModel(
 					role, verifiableResourcedModel.getName(),
 					verifiableResourcedModel.getModelName(),
 					verifiableResourcedModel.getPrimaryKeyColumnName());
@@ -177,8 +177,9 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		}
 	}
 
-	protected void verifyModel(
-			Role role, String name, String modelName, String pkColumnName)
+	protected void verifyResourcedModel(
+			Role role, String name, String tableName,
+			String primaryKeyColumnName)
 		throws Exception {
 
 		Connection con = null;
@@ -191,7 +192,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select count(*) from " + modelName + " where companyId = " +
+				"select count(*) from " + tableName + " where companyId = " +
 					role.getCompanyId());
 
 			rs = ps.executeQuery();
@@ -208,13 +209,13 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select " + pkColumnName + ", userId from " + modelName +
-					" where companyId = " + role.getCompanyId());
+				"select " + primaryKeyColumnName + ", userId from " +
+					tableName + " where companyId = " + role.getCompanyId());
 
 			rs = ps.executeQuery();
 
 			for (int i = 0; rs.next(); i++) {
-				long primKey = rs.getLong(pkColumnName);
+				long primKey = rs.getLong(primaryKeyColumnName);
 				long userId = rs.getLong("userId");
 
 				verifyModel(
