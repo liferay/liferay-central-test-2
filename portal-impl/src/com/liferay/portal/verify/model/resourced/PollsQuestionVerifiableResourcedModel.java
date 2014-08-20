@@ -28,13 +28,13 @@ public class PollsQuestionVerifiableResourcedModel
 	}
 
 	@Override
-	public String getTableName() {
-		return "PollsQuestion";
+	public String getPrimaryKeyColumnName() {
+		return "questionId";
 	}
 
 	@Override
-	public String getPrimaryKeyColumnName() {
-		return "questionId";
+	public String getTableName() {
+		return "PollsQuestion";
 	}
 
 }
