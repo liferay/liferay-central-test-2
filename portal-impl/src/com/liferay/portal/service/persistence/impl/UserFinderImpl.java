@@ -273,7 +273,7 @@ public class UserFinderImpl
 			QueryUtil.ALL_POS, null);
 
 		userIds = ListUtil.unique(userIds);
-		
+
 		return userIds.size();
 	}
 
@@ -459,15 +459,15 @@ public class UserFinderImpl
 					companyId, firstNames, middleNames, lastNames, screenNames,
 					emailAddresses, status, params, andOperator, start, end,
 					obc));
-	
+
 			List<User> users = new ArrayList<User>(userIds.size());
-	
+
 			for (Long userId : userIds) {
 				User user = UserUtil.findByPrimaryKey(userId);
-	
+
 				users.add(user);
 			}
-	
+
 			return users;
 		}
 		catch (Exception e) {
