@@ -87,8 +87,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 					_verifiableResourcedModels) {
 
 				verifyResourcedModel(
-					role, verifiableResourcedModel.getTableName(),
-					verifiableResourcedModel.getModelName(),
+					role, verifiableResourcedModel.getModelName(),
+					verifiableResourcedModel.getTableName(),
 					verifiableResourcedModel.getPrimaryKeyColumnName());
 			}
 
