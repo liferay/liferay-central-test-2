@@ -51,7 +51,16 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 
 	@Activate
 	public void activate() throws PortalException {
-		_addGoogleDocumentTypes();
+		List<Company> companies = _companyLocalService.getCompanies();
+
+		for (Company company : companies) {
+			GoogleDocumentTypeCreator googleDocumentTypeCreator =
+				new GoogleDocumentTypeCreator(
+					company, _classNameLocalService, _ddmStructureLocalService,
+					_dlFileEntryTypeLocalService, _userLocalService);
+
+			googleDocumentTypeCreator.addDocumentType();
+		}
 	}
 
 	@Override
@@ -105,19 +114,6 @@ public class GoogleDLFileEntryActionsDisplayContextFactory
 	@Reference
 	public void setUserLocalService(UserLocalService userLocalService) {
 		_userLocalService = userLocalService;
-	}
-
-	private void _addGoogleDocumentTypes() throws PortalException {
-		List<Company> companies = _companyLocalService.getCompanies();
-
-		for (Company company : companies) {
-			GoogleDocumentTypeCreator googleDocumentTypeCreator =
-				new GoogleDocumentTypeCreator(
-					company, _classNameLocalService, _ddmStructureLocalService,
-					_dlFileEntryTypeLocalService, _userLocalService);
-
-			googleDocumentTypeCreator.addDocumentType();
-		}
 	}
 
 	private boolean _isGoogleDocument(FileVersion fileVersion)
