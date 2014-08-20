@@ -119,11 +119,10 @@ public class ProxyUtil {
 
 	private static Class<?>[] _argumentsClazz = {InvocationHandler.class};
 	private static ConcurrentMap
-		<ClassLoader, ConcurrentMap<LookupKey, Class<?>>>
-			_classReferences =
-				new ConcurrentReferenceKeyHashMap
-					<ClassLoader, ConcurrentMap<LookupKey, Class<?>>>(
-						FinalizeManager.WEAK_REFERENCE_FACTORY);
+		<ClassLoader, ConcurrentMap<LookupKey, Class<?>>> _classReferences =
+			new ConcurrentReferenceKeyHashMap
+				<ClassLoader, ConcurrentMap<LookupKey, Class<?>>>(
+					FinalizeManager.WEAK_REFERENCE_FACTORY);
 	private static ConcurrentMap<Class<?>, Constructor<?>> _constructors =
 		new ConcurrentReferenceKeyHashMap<Class<?>, Constructor<?>>(
 			FinalizeManager.WEAK_REFERENCE_FACTORY);
