@@ -83,7 +83,7 @@ public class GoogleDocumentTypeCreator {
 		serviceContext.setUserId(defaultUserId);
 
 		String definition = ResourceUtil.get(
-			this, _GOOGLE_DOCUMENT_METADATA_SET_XML);
+			this, "dependencies/ddm_structure_google_document.xml");
 
 		return _ddmStructureLocalService.addStructure(
 			defaultUserId, _company.getGroupId(),
@@ -136,9 +136,6 @@ public class GoogleDocumentTypeCreator {
 		
 		return false;
 	}
-
-	private static final String _GOOGLE_DOCUMENT_METADATA_SET_XML =
-		"GoogleDocumentMetadataSet.xml";
 
 	private ClassNameLocalService _classNameLocalService;
 	private Company _company;
