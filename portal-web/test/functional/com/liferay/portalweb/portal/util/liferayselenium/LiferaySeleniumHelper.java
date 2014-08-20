@@ -425,6 +425,22 @@ public class LiferaySeleniumHelper {
 		}
 	}
 
+	private static void _captureScreen(String fileName) throws Exception {
+		File file = new File(fileName);
+
+		file.mkdirs();
+
+		Robot robot = new Robot();
+
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
+
+		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
+
+		ImageIO.write(bufferedImage, "jpg", file);
+	}
+
 	public static void connectToEmailAccount(
 			String emailAddress, String emailPassword)
 		throws Exception {
@@ -864,21 +880,24 @@ public class LiferaySeleniumHelper {
 
 		_screenshotCount++;
 
-		File file = new File(
-			liferaySelenium.getProjectDirName() + "portal-web/test-results/" +
-				"functional/screenshots/" + _screenshotCount + ".jpg");
+		_captureScreen(
+			liferaySelenium.getProjectDirName() +
+			"portal-web/test-results/functional/screenshots/" +
+			_screenshotCount + ".jpg");
+	}
 
-		file.mkdirs();
+	public static void saveScreenshotBeforeAction(
+			LiferaySelenium liferaySelenium, boolean actionFailed)
+		throws Exception {
 
-		Robot robot = new Robot();
+		if (actionFailed) {
+			_screenshotErrorCount++;
+		}
 
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
-
-		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
-
-		ImageIO.write(bufferedImage, "jpg", file);
+		_captureScreen(
+			liferaySelenium.getProjectDirName() +
+			"portal-web/test-results/functional/screenshots/" +
+			"ScreenshotBeforeAction" + _screenshotErrorCount + ".jpg");
 	}
 
 	public static void sendEmail(
@@ -1114,32 +1133,6 @@ public class LiferaySeleniumHelper {
 			liferaySelenium.getOutputDirName() + slash + value);
 
 		_screen.type(Key.ENTER);
-	}
-
-	public static void takeScreenshot(
-			LiferaySelenium liferaySelenium, Boolean fail)
-		throws Exception {
-
-		if (fail == true) {
-			_screenshotErrorCount++;
-		}
-
-		File file = new File(
-			liferaySelenium.getProjectDirName() + "portal-web/test-results/" +
-				"functional/screenshots/" + "ScreenshotBeforeAction" +
-					_screenshotErrorCount + ".jpg");
-
-		file.mkdirs();
-
-		Robot robot = new Robot();
-
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
-
-		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
-
-		ImageIO.write(bufferedImage, "jpg", file);
 	}
 
 	public static void typeAceEditor(

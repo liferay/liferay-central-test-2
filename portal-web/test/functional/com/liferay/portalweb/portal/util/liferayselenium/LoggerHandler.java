@@ -43,7 +43,7 @@ public class LoggerHandler implements InvocationHandler {
 				_logger.pauseLoggerCheck();
 			}
 			else if (methodName.equals("saveScreenshot")) {
-				_logger.logScreenShots();
+				_logger.logScreenShots(arguments);
 			}
 			else if (methodName.equals("sendActionDescriptionLogger")) {
 				_logger.logActionDescription(arguments);
@@ -84,7 +84,7 @@ public class LoggerHandler implements InvocationHandler {
 				return null;
 			}
 
-			_liferaySelenium.takeScreenshot(true);
+			_liferaySelenium.saveScreenshotBeforeAction(true);
 
 			_logger.logError(method, arguments, throwable);
 

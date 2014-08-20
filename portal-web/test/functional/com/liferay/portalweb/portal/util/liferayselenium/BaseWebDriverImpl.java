@@ -682,6 +682,17 @@ public abstract class BaseWebDriverImpl
 	}
 
 	@Override
+	public void saveScreenshotBeforeAction(boolean actionFailed)
+		throws Exception {
+
+		if (!TestPropsValues.SAVE_SCREENSHOT) {
+			return;
+		}
+
+		LiferaySeleniumHelper.saveScreenshotBeforeAction(this, actionFailed);
+	}
+
+	@Override
 	public void saveScreenshotAndSource() throws Exception {
 	}
 
@@ -852,15 +863,6 @@ public abstract class BaseWebDriverImpl
 
 	@Override
 	public void stopLogger() {
-	}
-
-	@Override
-	public void takeScreenshot(Boolean fail) throws Exception {
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
-			return;
-		}
-
-		LiferaySeleniumHelper.takeScreenshot(this, fail);
 	}
 
 	@Override

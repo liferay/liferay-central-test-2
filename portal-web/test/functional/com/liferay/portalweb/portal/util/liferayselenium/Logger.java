@@ -281,7 +281,7 @@ public class Logger {
 		log("descriptionLog", sb.toString(), "descriptionLog");
 	}
 
-	public void logScreenShots() throws Exception {
+	public void logScreenShots(Object[] arguments) throws Exception {
 		StringBundler sb = new StringBundler();
 
 		_screenshotCount++;
