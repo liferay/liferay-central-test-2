@@ -19,16 +19,6 @@ package com.liferay.document.library.google.docs.util;
  */
 public class Constants {
 
-	public static final String DDM_FIELD_EDIT_URL = "Edit_URL";
-
-	public static final String DDM_FIELD_EMBED_URL = "Embed_URL";
-
-	public static final String DDM_FIELD_ICON = "Icon";
-
-	public static final String DDM_FIELD_ID = "ID";
-
-	public static final String DDM_FIELD_TITLE = "Title";
-
 	public static final String DDM_STRUCTURE_KEY_GOOGLE_DOCUMENT =
 		"GOOGLE_DOCUMENT";
 
