@@ -41,38 +41,37 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		List<String> pendingModels = new ArrayList<String>();
+		List<String> unverifiedModelNames = new ArrayList<String>();
 
 		for (VerifiableAuditedModel verifiableAuditedModel :
 				_verifiableAuditedModels) {
 
-			pendingModels.add(verifiableAuditedModel.getModelName());
+			unverifiedModelNames.add(verifiableAuditedModel.getModelName());
 		}
 
-		while (!pendingModels.isEmpty()) {
-			int count = pendingModels.size();
+		while (!unverifiedModelNames.isEmpty()) {
+			int count = unverifiedModelNames.size();
 
 			for (VerifiableAuditedModel verifiableAuditedModel :
 					_verifiableAuditedModels) {
 
-				String joinByColumnName =
-					verifiableAuditedModel.getJoinByColumnName();
-				String modelName = verifiableAuditedModel.getModelName();
-
-				if (pendingModels.contains(joinByColumnName) ||
-					!pendingModels.contains(modelName)) {
+				if (unverifiedModelNames.contains(
+						verifiableAuditedModel.getJoinByColumnName()) ||
+					!unverifiedModelNames.contains(
+						verifiableAuditedModel.getModelName())) {
 
 					continue;
 				}
 
 				verifyModel(verifiableAuditedModel);
 
-				pendingModels.remove(modelName);
+				unverifiedModelNames.remove(
+					verifiableAuditedModel.getModelName());
 			}
 
-			if (pendingModels.size() == count) {
+			if (unverifiedModelNames.size() == count) {
 				throw new VerifyException(
-					"Circular dependency detected " + pendingModels);
+					"Circular dependency detected " + unverifiedModelNames);
 			}
 		}
 	}
