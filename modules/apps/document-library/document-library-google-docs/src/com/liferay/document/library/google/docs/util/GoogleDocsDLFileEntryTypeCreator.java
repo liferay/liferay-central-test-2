@@ -74,15 +74,15 @@ public class GoogleDocsDLFileEntryTypeCreator {
 
 		descriptionMap.put(LocaleUtil.getDefault(), "Google Docs Metadata");
 
+		String definition = ResourceUtil.get(
+			this, "dependencies/ddm_structure_google_docs.xml");
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setScopeGroupId(_company.getGroupId());
 		serviceContext.setUserId(defaultUserId);
-
-		String definition = ResourceUtil.get(
-			this, "dependencies/ddm_structure_google_docs.xml");
 
 		return _ddmStructureLocalService.addStructure(
 			defaultUserId, _company.getGroupId(),
