@@ -38,13 +38,13 @@ public class BaseConcurrentReferenceHashMapTestCase {
 	protected Map<String, Object> createDataMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		map.put("testKey", new Object());
+		map.put("testKey1", new Object());
 		map.put("testKey2", new Object());
 
 		return map;
 	}
 
-	protected void doTestAutoRemove(
+	protected void testAutoRemove(
 			ConcurrentMap<String, Object> concurrentMap, boolean fullGC)
 		throws Exception {
 
@@ -53,20 +53,20 @@ public class BaseConcurrentReferenceHashMapTestCase {
 				FinalizeManager.class, "_finalizeActions");
 
 		String testKey = new String("testKey");
-		Object testValue = new Object();
+		Object testValue1 = new Object();
 		Object testValue2 = new Object();
 
 		Assert.assertFalse(concurrentMap.containsKey(testKey));
 		Assert.assertTrue(finalizeActions.isEmpty());
-		Assert.assertNull(concurrentMap.put(testKey, testValue));
+		Assert.assertNull(concurrentMap.put(testKey, testValue1));
 		Assert.assertTrue(concurrentMap.containsKey(testKey));
-		Assert.assertSame(testValue, concurrentMap.get(testKey));
-		Assert.assertTrue(concurrentMap.containsValue(testValue));
+		Assert.assertSame(testValue1, concurrentMap.get(testKey));
+		Assert.assertTrue(concurrentMap.containsValue(testValue1));
 		Assert.assertEquals(1, finalizeActions.size());
-		Assert.assertSame(testValue, concurrentMap.put(testKey, testValue2));
+		Assert.assertSame(testValue1, concurrentMap.put(testKey, testValue2));
 		Assert.assertTrue(concurrentMap.containsKey(testKey));
 		Assert.assertSame(testValue2, concurrentMap.get(testKey));
-		Assert.assertFalse(concurrentMap.containsValue(testValue));
+		Assert.assertFalse(concurrentMap.containsValue(testValue1));
 		Assert.assertTrue(concurrentMap.containsValue(testValue2));
 		Assert.assertEquals(1, finalizeActions.size());
 

@@ -47,12 +47,11 @@ public class ConcurrentReferenceKeyHashMapTest
 			FinalizeManager.class.getName() + ".thread.enabled",
 			StringPool.FALSE);
 
-		doTestAutoRemove(
+		testAutoRemove(
 			new ConcurrentReferenceKeyHashMap<String, Object>(
 				FinalizeManager.SOFT_REFERENCE_FACTORY),
 			true);
-
-		doTestAutoRemove(
+		testAutoRemove(
 			new ConcurrentReferenceKeyHashMap<String, Object>(
 				FinalizeManager.WEAK_REFERENCE_FACTORY),
 			false);
