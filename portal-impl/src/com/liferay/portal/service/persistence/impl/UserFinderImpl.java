@@ -271,6 +271,8 @@ public class UserFinderImpl
 			companyId, firstNames, middleNames, lastNames, screenNames,
 			emailAddresses, status, params, andOperator, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
+
+		userIds = ListUtil.unique(userIds);
 		
 		return userIds.size();
 	}
