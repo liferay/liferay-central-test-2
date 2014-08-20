@@ -312,8 +312,12 @@ public class UserFinderImpl
 		}
 
 		boolean inherit = GetterUtil.getBoolean(params.get("inherit"));
+		boolean socialRelationTypeUnionUserGroups = GetterUtil.getBoolean(
+			params.get("socialRelationTypeUnionUserGroups"));
 
-		if (ArrayUtil.isNotEmpty(groupIds) && inherit) {
+		if (ArrayUtil.isNotEmpty(groupIds) && inherit &&
+			!socialRelationTypeUnionUserGroups) {
+
 			List<Long> organizationIds = new ArrayList<Long>();
 			List<Long> userGroupIds = new ArrayList<Long>();
 
@@ -362,7 +366,9 @@ public class UserFinderImpl
 			}
 		}
 
-		if (ArrayUtil.isNotEmpty(roleIds) && inherit) {
+		if (ArrayUtil.isNotEmpty(roleIds) && inherit &&
+			!socialRelationTypeUnionUserGroups) {
+
 			List<Long> organizationIds = new ArrayList<Long>();
 			List<Long> roleGroupIds = new ArrayList<Long>();
 			List<Long> userGroupIds = new ArrayList<Long>();
@@ -421,6 +427,19 @@ public class UserFinderImpl
 				params4.put(
 					"usersOrgs",
 					organizationIds.toArray(new Long[organizationIds.size()]));
+			}
+		}
+
+		if (socialRelationTypeUnionUserGroups) {
+			boolean hasSocialRelationTypes = Validator.isNotNull(
+				params.get("socialRelationType"));
+
+			if (hasSocialRelationTypes && ArrayUtil.isNotEmpty(groupIds)) {
+				params2 = new LinkedHashMap<String, Object>(params1);
+
+				params1.remove("socialRelationType");
+
+				params2.remove("usersGroups");
 			}
 		}
 
