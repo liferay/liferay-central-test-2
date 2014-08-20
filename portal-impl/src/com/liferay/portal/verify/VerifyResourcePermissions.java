@@ -20,13 +20,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutSetBranch;
-import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
-import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -36,26 +33,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.verify.model.resourced.VerifiableResourcedModel;
-import com.liferay.portlet.announcements.model.AnnouncementsEntry;
-import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.AssetTag;
-import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalFeed;
-import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
-import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerList;
 
@@ -78,10 +55,6 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		for (long companyId : companyIds) {
 			Role role = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.OWNER);
-
-			for (String[] model : _MODELS) {
-				verifyResourcedModel(role, model[0], model[1], model[2]);
-			}
 
 			for (VerifiableResourcedModel verifiableResourcedModel :
 					_verifiableResourcedModels) {
@@ -227,86 +200,6 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final String[][] _MODELS = new String[][] {
-		new String[] {
-			AnnouncementsEntry.class.getName(), "AnnouncementsEntry", "entryId"
-		},
-		new String[] {
-			AssetCategory.class.getName(), "AssetCategory", "categoryId"
-		},
-		new String[] {
-			AssetTag.class.getName(), "AssetTag", "tagId"
-		},
-		new String[] {
-			AssetVocabulary.class.getName(), "AssetVocabulary", "vocabularyId"
-		},
-		new String[] {
-			BlogsEntry.class.getName(), "BlogsEntry", "entryId"
-		},
-		new String[] {
-			DDMStructure.class.getName(), "DDMStructure", "structureId"
-		},
-		new String[] {
-			DDMTemplate.class.getName(), "DDMTemplate", "templateId"
-		},
-		new String[] {
-			DLFileEntry.class.getName(), "DLFileEntry", "fileEntryId"
-		},
-		new String[] {
-			DLFileShortcut.class.getName(), "DLFileShortcut", "fileShortcutId"
-		},
-		new String[] {
-			DLFolder.class.getName(), "DLFolder", "folderId"
-		},
-		new String[] {
-			JournalArticle.class.getName(), "JournalArticle", "resourcePrimKey"
-		},
-		new String[] {
-			JournalFeed.class.getName(), "JournalFeed", "id_"
-		},
-		new String[] {
-			Layout.class.getName(), "Layout", "plid"
-		},
-		new String[] {
-			LayoutSetBranch.class.getName(), "LayoutSetBranch",
-			"layoutSetBranchId"
-		},
-		new String[] {
-			MBCategory.class.getName(), "MBCategory", "categoryId"
-		},
-		new String[] {
-			MBMessage.class.getName(), "MBMessage", "messageId"
-		},
-		new String[] {
-			PasswordPolicy.class.getName(), "PasswordPolicy", "passwordPolicyId"
-		},
-		new String[] {
-			SCFrameworkVersion.class.getName(), "SCFrameworkVersion",
-			"frameworkVersionId"
-		},
-		new String[] {
-			SCProductEntry.class.getName(), "SCProductEntry", "productEntryId"
-		},
-		new String[] {
-			ShoppingCategory.class.getName(), "ShoppingCategory", "categoryId"
-		},
-		new String[] {
-			ShoppingItem.class.getName(), "ShoppingItem", "itemId"
-		},
-		new String[] {
-			Team.class.getName(), "Team", "teamId"
-		},
-		new String[] {
-			User.class.getName(), "User_", "userId"
-		},
-		new String[] {
-			WikiNode.class.getName(), "WikiNode", "nodeId"
-		},
-		new String[] {
-			WikiPage.class.getName(), "WikiPage", "resourcePrimKey"
-		}
-	};
 
 	private static Log _log = LogFactoryUtil.getLog(
 		VerifyResourcePermissions.class);
