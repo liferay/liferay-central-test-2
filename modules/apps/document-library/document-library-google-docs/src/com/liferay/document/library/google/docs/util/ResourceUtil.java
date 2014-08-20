@@ -32,30 +32,31 @@ import org.osgi.framework.FrameworkUtil;
 public class ResourceUtil {
 
 	public static String get(Class<?> clazz, String resource) {
-		InputStream is = null;
+		InputStream inputStream = null;
 
 		Bundle bundle = FrameworkUtil.getBundle(clazz);
 
-		Package classPackage = clazz.getPackage();
+		Package pkg = clazz.getPackage();
 
-		String packageName = classPackage.getName();
+		String packageName = pkg.getName();
 
 		String path = packageName.replaceAll("\\.", "/") + "/" + resource;
 
 		try {
-			URL entry = bundle.getEntry(path);
+			URL url = bundle.getEntry(path);
 
-			is = entry.openStream();
+			inputStream = url.openStream();
 
-			return StringUtil.read(is);
+			return StringUtil.read(inputStream);
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
 			throw new SystemException(
-				"Unable to get content of entry " + path + " in bundle " +
-					bundle.getSymbolicName(), e);
+				"Unable to read " + path + " in bundle " +
+					bundle.getSymbolicName(),
+				ioe);
 		}
 		finally {
-			StreamUtil.cleanUp(is);
+			StreamUtil.cleanUp(inputStream);
 		}
 	}
 
