@@ -41,6 +41,7 @@ import java.sql.ResultSet;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Raymond Augé
@@ -72,12 +73,16 @@ public class VerifyResourcePermissions extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		VerifiableResourcedModel[] verifiableResourcedModels =
-			_verifiableResourcedModels.toArray(
-				new VerifiableResourcedModel[
-					_verifiableResourcedModels.size()]);
+		Map<String, VerifiableResourcedModel> verifiableResourcedModelsMap =
+			PortalBeanLocatorUtil.locate(VerifiableResourcedModel.class);
 
-		verify(verifiableResourcedModels);
+		Collection<VerifiableResourcedModel> verifiableResourcedModels =
+			verifiableResourcedModelsMap.values();
+
+		verify(
+			verifiableResourcedModels.toArray(
+				new VerifiableResourcedModel[
+					verifiableResourcedModels.size()]));
 	}
 
 	protected void verifyLayout(Role role) throws Exception {
@@ -211,10 +216,6 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final Collection<VerifiableResourcedModel>
-		_verifiableResourcedModels = PortalBeanLocatorUtil.locate(
-			VerifiableResourcedModel.class).values();
 
 	private static Log _log = LogFactoryUtil.getLog(
 		VerifyResourcePermissions.class);

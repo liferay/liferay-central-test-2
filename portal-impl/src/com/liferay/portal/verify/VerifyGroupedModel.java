@@ -29,6 +29,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Shinn Lok
@@ -75,11 +76,15 @@ public class VerifyGroupedModel extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		VerifiableGroupedModel[] verifiableGroupedModels =
-			_verifiableGroupedModels.toArray(
-				new VerifiableGroupedModel[_verifiableGroupedModels.size()]);
+		Map<String, VerifiableGroupedModel> verifiableGroupedModelsMap =
+			PortalBeanLocatorUtil.locate(VerifiableGroupedModel.class);
 
-		verify(verifiableGroupedModels);
+		Collection<VerifiableGroupedModel> verifiableGroupedModels =
+			verifiableGroupedModelsMap.values();
+
+		verify(
+			verifiableGroupedModels.toArray(
+				new VerifiableGroupedModel[verifiableGroupedModels.size()]));
 	}
 
 	protected long getGroupId(
@@ -174,10 +179,6 @@ public class VerifyGroupedModel extends VerifyProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final Collection<VerifiableGroupedModel>
-		_verifiableGroupedModels = PortalBeanLocatorUtil.locate(
-			VerifiableGroupedModel.class).values();
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyGroupedModel.class);
 

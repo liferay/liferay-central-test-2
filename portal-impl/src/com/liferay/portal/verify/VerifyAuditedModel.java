@@ -32,6 +32,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Michael C. Han
@@ -79,11 +80,15 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		VerifiableAuditedModel[] verifiableAuditedModels =
-			_verifiableAuditedModels.toArray(
-				new VerifiableAuditedModel[_verifiableAuditedModels.size()]);
+		Map<String, VerifiableAuditedModel> verifiableAuditedModelsMap =
+			PortalBeanLocatorUtil.locate(VerifiableAuditedModel.class);
 
-		verify(verifiableAuditedModels);
+		Collection<VerifiableAuditedModel> verifiableAuditedModels =
+			verifiableAuditedModelsMap.values();
+
+		verify(
+			verifiableAuditedModels.toArray(
+				new VerifiableAuditedModel[verifiableAuditedModels.size()]));
 	}
 
 	protected Object[] getAuditedModelArray(
@@ -341,10 +346,6 @@ public class VerifyAuditedModel extends VerifyProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final Collection<VerifiableAuditedModel>
-		_verifiableAuditedModels = PortalBeanLocatorUtil.locate(
-			VerifiableAuditedModel.class).values();
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyAuditedModel.class);
 
