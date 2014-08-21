@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.concurrent.DefaultNoticeableFuture;
 import com.liferay.portal.kernel.concurrent.FutureListener;
 import com.liferay.portal.kernel.concurrent.NoticeableFuture;
-import com.liferay.portal.kernel.concurrent.NoticeableFutureConvertor;
+import com.liferay.portal.kernel.concurrent.NoticeableFutureConverter;
 import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.concurrent.ThreadPoolHandlerAdapter;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
@@ -166,7 +166,7 @@ public class ProcessExecutor {
 			final Process process) {
 
 		DefaultNoticeableFuture<T> defaultNoticeableFuture =
-			new NoticeableFutureConvertor
+			new NoticeableFutureConverter
 				<T, ProcessCallable<? extends Serializable>>(
 					processCallableNoticeableFuture) {
 

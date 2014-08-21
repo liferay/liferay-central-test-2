@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.cluster.ClusterMasterTokenTransitionListener;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.concurrent.DefaultNoticeableFuture;
-import com.liferay.portal.kernel.concurrent.NoticeableFutureConvertor;
+import com.liferay.portal.kernel.concurrent.NoticeableFutureConverter;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -90,15 +90,18 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 			methodHandler, address);
 
 		try {
-			return new NoticeableFutureConvertor<T, ClusterNodeResponses>(
+			return new NoticeableFutureConverter<T, ClusterNodeResponses>(
 				_clusterExecutor.execute(clusterRequest)) {
 
-				@Override
-				protected T convert(ClusterNodeResponses clusterNodeResponses) {
-					return (T)clusterNodeResponses.getClusterResponse(address);
-				}
+					@Override
+					protected T convert(
+						ClusterNodeResponses clusterNodeResponses) {
 
-			};
+						return (T)clusterNodeResponses.getClusterResponse(
+							address);
+					}
+
+				};
 		}
 		catch (Exception e) {
 			throw new SystemException(

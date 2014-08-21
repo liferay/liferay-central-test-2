@@ -14,7 +14,7 @@
 
 package com.liferay.portal.image;
 
-import com.liferay.portal.kernel.concurrent.FutureConvertor;
+import com.liferay.portal.kernel.concurrent.FutureConverter;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageMagick;
 import com.liferay.portal.kernel.image.ImageTool;
@@ -197,7 +197,7 @@ public class ImageToolImpl implements ImageTool {
 				Future<Object> future = (Future<Object>)imageMagick.convert(
 					imOperation.getCmdArgs());
 
-				return new FutureConvertor<RenderedImage, Object>(future) {
+				return new FutureConverter<RenderedImage, Object>(future) {
 
 					@Override
 					protected RenderedImage convert(Object obj)

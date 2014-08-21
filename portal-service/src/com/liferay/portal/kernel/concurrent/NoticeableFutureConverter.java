@@ -20,17 +20,17 @@ import java.util.concurrent.Future;
 /**
  * @author Shuyang Zhou
  */
-public abstract class NoticeableFutureConvertor<T, V>
+public abstract class NoticeableFutureConverter<T, V>
 	extends DefaultNoticeableFuture<T> {
 
-	public NoticeableFutureConvertor(NoticeableFuture<V> noticeableFuture) {
+	public NoticeableFutureConverter(NoticeableFuture<V> noticeableFuture) {
 		noticeableFuture.addFutureListener(
 			new FutureListener<V>() {
 
 				@Override
 				public void complete(Future<V> future) {
 					try {
-						NoticeableFutureConvertor.this.set(
+						NoticeableFutureConverter.this.set(
 							convert(future.get()));
 					}
 					catch (Throwable t) {
@@ -38,7 +38,7 @@ public abstract class NoticeableFutureConvertor<T, V>
 							t = t.getCause();
 						}
 
-						NoticeableFutureConvertor.this.setException(t);
+						NoticeableFutureConverter.this.setException(t);
 					}
 				}
 

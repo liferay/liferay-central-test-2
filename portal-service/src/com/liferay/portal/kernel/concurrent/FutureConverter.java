@@ -22,9 +22,9 @@ import java.util.concurrent.TimeoutException;
 /**
  * @author Shuyang Zhou
  */
-public abstract class FutureConvertor<T, V> implements Future<T> {
+public abstract class FutureConverter<T, V> implements Future<T> {
 
-	public FutureConvertor(Future<V> future) {
+	public FutureConverter(Future<V> future) {
 		_future = future;
 	}
 
