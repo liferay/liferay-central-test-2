@@ -79,13 +79,13 @@ public class BaseSPIProviderTest {
 
 		MPIHelperUtil.registerSPIProvider(_testSPIProvider);
 
-		SPIRegistryUtil spiRegistryUtil = new SPIRegistryUtil();
-
-		spiRegistryUtil.setSPIRegistry(new SPIRegistryImpl());
-
 		ProcessExecutorUtil processExecutorUtil = new ProcessExecutorUtil();
 
 		processExecutorUtil.setProcessExecutor(_mockProcessExecutor);
+
+		SPIRegistryUtil spiRegistryUtil = new SPIRegistryUtil();
+
+		spiRegistryUtil.setSPIRegistry(new SPIRegistryImpl());
 	}
 
 	@Test
