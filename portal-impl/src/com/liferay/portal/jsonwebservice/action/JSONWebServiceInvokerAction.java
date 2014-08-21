@@ -361,10 +361,11 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 		HashMap<Object, Object> destinationMap = new HashMap<Object, Object>();
 
-		String[] includes = JSONIncludesManagerUtil.lookupIncludes(clazz);
 		String[] excludes = JSONIncludesManagerUtil.lookupExcludes(clazz);
+		String[] includes = JSONIncludesManagerUtil.lookupIncludes(clazz);
 
-		ClassDescriptor classDescriptor = ClassIntrospector.lookup(object.getClass());
+		ClassDescriptor classDescriptor = ClassIntrospector.lookup(
+			object.getClass());
 
 		String[] properties = classDescriptor.getAllBeanGetterNames(false);
 
@@ -374,10 +375,13 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			for (String exclude : excludes) {
 				if (exclude.equals(StringPool.STAR)) {
 					includeProperty = false;
+
 					break;
 				}
+
 				if (property.equals(exclude)) {
 					includeProperty = false;
+
 					break;
 				}
 			}
@@ -385,10 +389,13 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			for (String include : includes) {
 				if (include.equals(StringPool.STAR)) {
 					includeProperty = true;
+
 					break;
 				}
+
 				if (property.equals(include)) {
 					includeProperty = true;
+
 					break;
 				}
 			}
