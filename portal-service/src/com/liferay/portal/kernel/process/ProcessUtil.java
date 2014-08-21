@@ -164,6 +164,9 @@ public class ProcessUtil {
 		final AtomicMarkableReference<O> stdOutReference =
 			new AtomicMarkableReference<O>(null, false);
 
+		final AtomicMarkableReference<E> stdErrReference =
+			new AtomicMarkableReference<E>(null, false);
+
 		stdOutNoticeableFuture.addFutureListener(
 			new FutureListener<O>() {
 
@@ -193,9 +196,6 @@ public class ProcessUtil {
 				}
 
 			});
-
-		final AtomicMarkableReference<E> stdErrReference =
-			new AtomicMarkableReference<E>(null, false);
 
 		stdErrNoticeableFuture.addFutureListener(
 			new FutureListener<E>() {
