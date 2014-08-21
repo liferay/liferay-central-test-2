@@ -54,7 +54,7 @@ catch (NoSuchOrderException nsoe) {
 </c:choose>
 
 <portlet:renderURL var="continueShoppingURL">
-	<portlet:param name="mvcPath" value="/html/portlet/shopping/view.jsp" />
+	<portlet:param name="struts_action" value="/shopping/view" />
 </portlet:renderURL>
 
 <aui:button-row>
