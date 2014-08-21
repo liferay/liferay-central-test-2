@@ -14,9 +14,8 @@
  */
 --%>
 
-<%@ taglib uri="/META-INF/liferay-portlet_2_0.tld" prefix="portlet" %>
-
 <%@ taglib uri="/META-INF/aui.tld" prefix="aui" %>
+<%@ taglib uri="/META-INF/liferay-portlet_2_0.tld" prefix="portlet" %>
 <%@ taglib uri="/META-INF/liferay-theme.tld" prefix="liferay-theme" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -37,7 +36,6 @@ WindowState windowState = liferayPortletRequest.getWindowState();
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
-//String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <%@ include file="/init-ext.jsp" %>
