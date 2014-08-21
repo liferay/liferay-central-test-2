@@ -203,8 +203,8 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
 		rowURL.setParameter("struts_action", "/shopping/view_item");
-		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
 		// SKU and small image
 
