@@ -36,7 +36,8 @@ integerFormat.setMinimumFractionDigits(0);
 
 try {
 	loanAmount = GetterUtil.getInteger(integerFormat.parse(loanAmountString));
-} catch (Exception e) {
+}
+catch (Exception e) {
 }
 
 double tempValue = Math.pow((1 + (interestRate / 100 / paymentsPerYear)), (years * paymentsPerYear));
