@@ -64,8 +64,7 @@ public class FutureClusterResponses
 			return super.get();
 		}
 		catch (ExecutionException ee) {
-			throw new AssertionError(
-				"Not possible to throw ExecutionException", ee);
+			throw new AssertionError(ee);
 		}
 	}
 
@@ -77,8 +76,7 @@ public class FutureClusterResponses
 			return super.get(timeout, unit);
 		}
 		catch (ExecutionException ee) {
-			throw new AssertionError(
-				"Not possible to throw ExecutionException", ee);
+			throw new AssertionError(ee);
 		}
 	}
 
