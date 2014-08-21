@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.portlet;
 import aQute.bnd.annotation.ProviderType;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 /**
  * @author Raymond Augé
@@ -25,7 +24,7 @@ import java.io.IOException;
 public interface FriendlyURLMapperTracker extends Closeable {
 
 	@Override
-	public void close() throws IOException;
+	public void close();
 
 	public FriendlyURLMapper getFriendlyURLMapper();
 

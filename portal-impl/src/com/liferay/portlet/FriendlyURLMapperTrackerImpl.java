@@ -34,8 +34,6 @@ import com.liferay.registry.ServiceRegistration;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
 
-import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -63,7 +61,7 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void close() {
 		_serviceTracker.close();
 	}
 
