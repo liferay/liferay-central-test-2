@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.dictionary.portlet;
 
 import com.liferay.dictionary.upgrade.DictionaryUpgrade;
