@@ -153,6 +153,7 @@ public class ProcessUtil {
 					}
 
 					stdOutNoticeableFuture.cancel(true);
+
 					stdErrNoticeableFuture.cancel(true);
 
 					process.destroy();
@@ -162,66 +163,69 @@ public class ProcessUtil {
 
 		final AtomicMarkableReference<O> stdOutReference =
 			new AtomicMarkableReference<O>(null, false);
+
+		stdOutNoticeableFuture.addFutureListener(
+			new FutureListener<O>() {
+
+				@Override
+				public void complete(Future<O> future) {
+					try {
+						O stdOut = future.get();
+
+						stdOutReference.set(stdOut, true);
+
+						boolean[] markHolder = new boolean[1];
+
+						E stdErr = stdErrReference.get(markHolder);
+
+						if (markHolder[0]) {
+							defaultNoticeableFuture.set(
+								new ObjectValuePair<O, E>(stdOut, stdErr));
+						}
+					}
+					catch (Throwable t) {
+						if (t instanceof ExecutionException) {
+							t = t.getCause();
+						}
+
+						defaultNoticeableFuture.setException(t);
+					}
+				}
+
+			});
+
 		final AtomicMarkableReference<E> stdErrReference =
 			new AtomicMarkableReference<E>(null, false);
 
-		stdOutNoticeableFuture.addFutureListener(new FutureListener<O>() {
+		stdErrNoticeableFuture.addFutureListener(
+			new FutureListener<E>() {
 
-			@Override
-			public void complete(Future<O> future) {
-				try {
-					O stdOut = future.get();
+				@Override
+				public void complete(Future<E> future) {
+					try {
+						E stdErr = future.get();
 
-					stdOutReference.set(stdOut, true);
+						stdErrReference.set(stdErr, true);
 
-					boolean[] markHolder = new boolean[1];
+						boolean[] markHolder = new boolean[1];
 
-					E stdErr = stdErrReference.get(markHolder);
+						O stdOut = stdOutReference.get(markHolder);
 
-					if (markHolder[0]) {
-						defaultNoticeableFuture.set(
-							new ObjectValuePair<O, E>(stdOut, stdErr));
+						if (markHolder[0]) {
+							defaultNoticeableFuture.set(
+								new ObjectValuePair<O, E>(stdOut, stdErr));
+						}
+					}
+					catch (Throwable t) {
+						if (t instanceof ExecutionException) {
+							t = t.getCause();
+						}
+
+						defaultNoticeableFuture.setException(t);
 					}
 				}
-				catch (Throwable t) {
-					if (t instanceof ExecutionException) {
-						t = t.getCause();
-					}
 
-					defaultNoticeableFuture.setException(t);
-				}
-			}
-
-		});
-
-		stdErrNoticeableFuture.addFutureListener(new FutureListener<E>() {
-
-			@Override
-			public void complete(Future<E> future) {
-				try {
-					E stdErr = future.get();
-
-					stdErrReference.set(stdErr, true);
-
-					boolean[] markHolder = new boolean[1];
-
-					O stdOut = stdOutReference.get(markHolder);
-
-					if (markHolder[0]) {
-						defaultNoticeableFuture.set(
-							new ObjectValuePair<O, E>(stdOut, stdErr));
-					}
-				}
-				catch (Throwable t) {
-					if (t instanceof ExecutionException) {
-						t = t.getCause();
-					}
-
-					defaultNoticeableFuture.setException(t);
-				}
-			}
-
-		});
+			});
 
 		return defaultNoticeableFuture;
 	}
