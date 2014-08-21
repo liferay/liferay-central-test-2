@@ -518,17 +518,6 @@ public abstract class BaseSeleniumImpl
 	}
 
 	@Override
-	public void saveScreenshotBeforeAction(boolean actionFailed)
-		throws Exception {
-
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
-			return;
-		}
-
-		LiferaySeleniumHelper.saveScreenshotBeforeAction(this, actionFailed);
-	}
-
-	@Override
 	public void saveScreenshotAndSource() throws Exception {
 		String screenshotName = null;
 
@@ -543,6 +532,17 @@ public abstract class BaseSeleniumImpl
 
 		FileUtil.write(
 			_OUTPUT_SCREENSHOTS_DIR + screenshotName + ".html", content);
+	}
+
+	@Override
+	public void saveScreenshotBeforeAction(boolean actionFailed)
+		throws Exception {
+
+		if (!TestPropsValues.SAVE_SCREENSHOT) {
+			return;
+		}
+
+		LiferaySeleniumHelper.saveScreenshotBeforeAction(this, actionFailed);
 	}
 
 	@Override

@@ -682,6 +682,10 @@ public abstract class BaseWebDriverImpl
 	}
 
 	@Override
+	public void saveScreenshotAndSource() throws Exception {
+	}
+
+	@Override
 	public void saveScreenshotBeforeAction(boolean actionFailed)
 		throws Exception {
 
@@ -690,10 +694,6 @@ public abstract class BaseWebDriverImpl
 		}
 
 		LiferaySeleniumHelper.saveScreenshotBeforeAction(this, actionFailed);
-	}
-
-	@Override
-	public void saveScreenshotAndSource() throws Exception {
 	}
 
 	@Override
