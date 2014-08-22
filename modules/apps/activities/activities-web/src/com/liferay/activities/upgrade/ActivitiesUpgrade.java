@@ -62,7 +62,7 @@ public class ActivitiesUpgrade {
 
 			_releaseLocalService.updateRelease(
 				ActivitiesPortlet.class.getName(),
-				Collections.<UpgradeProcess> singletonList(
+				Collections.<UpgradeProcess>singletonList(
 					upgradePortletId), 1, 1, false);
 	}
 
