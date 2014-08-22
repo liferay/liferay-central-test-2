@@ -208,7 +208,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		}
 	}
 
-	protected long doUpdateStructure(ResultSet rs) throws Exception {
+	protected long updateStructure(ResultSet rs) throws Exception {
 		String uuid_ = rs.getString("uuid_");
 		long id_ = rs.getLong("id_");
 		long groupId = rs.getLong("groupId");
@@ -386,7 +386,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return doUpdateStructure(rs);
+				return updateStructure(rs);
 			}
 
 			return 0;
@@ -416,7 +416,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				doUpdateStructure(rs);
+				updateStructure(rs);
 			}
 		}
 		finally {
