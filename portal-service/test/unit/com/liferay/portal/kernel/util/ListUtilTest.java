@@ -377,7 +377,8 @@ public class ListUtilTest {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4);
 
 		String[] array = ListUtil.toArray(
-			list, new Accessor<Integer, String>() {
+			list,
+			new Accessor<Integer, String>() {
 
 				@Override
 				public String get(Integer integer) {
@@ -404,7 +405,8 @@ public class ListUtilTest {
 		List<Integer> list = Collections.emptyList();
 
 		String[] array = ListUtil.toArray(
-			list, new Accessor<Integer, String>() {
+			list,
+			new Accessor<Integer, String>() {
 
 				@Override
 				public String get(Integer integer) {
@@ -423,7 +425,7 @@ public class ListUtilTest {
 
 			});
 
-		Assert.assertArrayEquals(new String[] {}, array);
+		Assert.assertArrayEquals(new String[0], array);
 	}
 
 	@Test
@@ -431,7 +433,8 @@ public class ListUtilTest {
 		List<String> list = Collections.emptyList();
 
 		long[] array = ListUtil.toLongArray(
-			list, new Accessor<String, Long>() {
+			list,
+			new Accessor<String, Long>() {
 
 				@Override
 				public Long get(String string) {
@@ -450,7 +453,7 @@ public class ListUtilTest {
 
 			});
 
-		Assert.assertArrayEquals(new long[] {}, array);
+		Assert.assertArrayEquals(new long[0], array);
 	}
 
 	@Test
@@ -473,7 +476,8 @@ public class ListUtilTest {
 		List<String> list = Arrays.asList("1", "2", "3", "4");
 
 		long[] array = ListUtil.toLongArray(
-			list, new Accessor<String, Long>() {
+			list,
+			new Accessor<String, Long>() {
 
 				@Override
 				public Long get(String string) {
@@ -492,7 +496,7 @@ public class ListUtilTest {
 
 			});
 
-		Assert.assertArrayEquals(new long[] {1L, 2L, 3L, 4L}, array);
+		Assert.assertArrayEquals(new long[] {1, 2, 3, 4}, array);
 	}
 
 	@Test

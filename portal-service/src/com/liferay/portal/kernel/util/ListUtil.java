@@ -325,7 +325,6 @@ public class ListUtil {
 		return Collections.emptyList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T, A> A[] toArray(
 		List<? extends T> list, Accessor<T, A> accessor) {
 
@@ -338,6 +337,7 @@ public class ListUtil {
 
 		for (int i = 0; i < list.size(); i++) {
 			T bean = list.get(i);
+
 			A attribute = accessor.get(bean);
 
 			array[i] = attribute;
@@ -477,6 +477,7 @@ public class ListUtil {
 
 		for (int i = 0; i < list.size(); i++) {
 			T bean = list.get(i);
+
 			Long attribute = accessor.get(bean);
 
 			array[i] = attribute;
