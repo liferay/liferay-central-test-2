@@ -50,10 +50,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class ActivitiesPortlet extends MVCPortlet {
 
-	/**
-	 * Force upgrades to register before the portlet is registered to prevent
-	 * race conditions.
-	 */
 	@Reference(unbind = "-")
 	protected void setActivitiesUpgrade(ActivitiesUpgrade activitiesUpgrade) {
 	}
