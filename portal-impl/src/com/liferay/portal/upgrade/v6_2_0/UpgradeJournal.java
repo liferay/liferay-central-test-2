@@ -346,14 +346,13 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		String description = rs.getString("description");
 		String xsd = rs.getString("xsd");
 	
-		Long insertedDdmStructureId = _ddmStructureIds.get(
-			groupId + "#" + structureId);
+		Long ddmStructureId = _ddmStructureIds.get(groupId + "#" + structureId);
 	
-		if (insertedDdmStructureId != null) {
-			return insertedDdmStructureId;
+		if (ddmStructureId != null) {
+			return ddmStructureId;
 		}
 	
-		long ddmStructureId = increment();
+		ddmStructureId = increment();
 	
 		addDDMStructure(
 			uuid_, ddmStructureId, groupId, companyId, userId, userName,
@@ -363,7 +362,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		updateResourcePermission(
 			companyId, "com.liferay.portlet.journal.model.JournalStructure",
 			DDMStructure.class.getName(), id_, ddmStructureId);
-	
+
 		_ddmStructureIds.put(groupId + "#" + structureId, ddmStructureId);
 		_ddmStructurePKs.put(id_, ddmStructureId);
 	
