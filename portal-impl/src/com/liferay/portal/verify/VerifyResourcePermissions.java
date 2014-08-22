@@ -33,7 +33,7 @@ import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.verify.model.resourced.VerifiableResourcedModel;
+import com.liferay.portal.verify.model.VerifiableResourcedModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

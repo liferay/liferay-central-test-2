@@ -17,8 +17,8 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.test.listeners.MainServletExecutionTestListener;
 import com.liferay.portal.test.runners.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.verify.model.uuid.VerifiableUUIDModel;
-import com.liferay.portal.verify.model.verifiable.LayoutVerifiableModel;
+import com.liferay.portal.verify.model.LayoutVerifiableModel;
+import com.liferay.portal.verify.model.VerifiableUUIDModel;
 
 import java.sql.SQLException;
 

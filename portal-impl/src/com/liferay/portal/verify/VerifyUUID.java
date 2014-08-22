@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.portal.verify.model.uuid.VerifiableUUIDModel;
+import com.liferay.portal.verify.model.VerifiableUUIDModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
-import com.liferay.portal.verify.model.audited.VerifiableAuditedModel;
+import com.liferay.portal.verify.model.VerifiableAuditedModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
