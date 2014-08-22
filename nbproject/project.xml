@@ -503,7 +503,6 @@
 				<classpath mode="compile">lib/portal/slf4j-api.jar</classpath>
 				<classpath mode="compile">lib/portal/soap.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-aop.jar</classpath>
-				<classpath mode="compile">lib/portal/spring-asm.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-aspects.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-beans.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-context.jar</classpath>
@@ -516,6 +515,7 @@
 				<classpath mode="compile">lib/portal/spring-oxm.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-transaction.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-web.jar</classpath>
+				<classpath mode="compile">lib/portal/spring-web-mvc.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-web-portlet.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-web-servlet.jar</classpath>
 				<classpath mode="compile">lib/portal/spring-web-struts.jar</classpath>
