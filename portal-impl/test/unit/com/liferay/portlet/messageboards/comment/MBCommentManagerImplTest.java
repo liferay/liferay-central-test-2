@@ -117,7 +117,7 @@ public class MBCommentManagerImplTest extends Mockito {
 
 	@Test(expected = DuplicateCommentException.class)
 	public void testAddDuplicateComment() throws Exception {
-		simulatePreexistingComment(_BODY);
+		setUpExistingComment(_BODY);
 
 		_mbCommentManagerImpl.addComment(
 			_USER_ID, _GROUP_ID, _CLASS_NAME, _ENTRY_ID, _BODY,
@@ -127,8 +127,8 @@ public class MBCommentManagerImplTest extends Mockito {
 	}
 
 	@Test
-	public void testAddNonDuplicateComment() throws Exception {
-		simulatePreexistingComment(_BODY + RandomTestUtil.randomString());
+	public void testAddUniqueComment() throws Exception {
+		setUpExistingComment(_BODY + RandomTestUtil.randomString());
 
 		_mbCommentManagerImpl.addComment(
 			_USER_ID, _GROUP_ID, _CLASS_NAME, _ENTRY_ID, _BODY,
@@ -247,7 +247,7 @@ public class MBCommentManagerImplTest extends Mockito {
 		);
 	}
 
-	protected void simulatePreexistingComment(String body) {
+	protected void setUpExistingComment(String body) {
 		when(
 			_mbMessage.getBody()
 		).thenReturn(
