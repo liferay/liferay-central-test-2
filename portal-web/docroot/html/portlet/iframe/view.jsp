@@ -65,6 +65,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 <aui:script>
 	function <portlet:namespace />monitorIframe() {
 		var A = AUI();
+
 		var url = null;
 
 		try {
