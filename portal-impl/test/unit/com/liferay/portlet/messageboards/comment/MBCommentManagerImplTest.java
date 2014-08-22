@@ -191,6 +191,23 @@ public class MBCommentManagerImplTest extends Mockito {
 			_mbCommentManagerImpl.getCommentsCount(_CLASS_NAME, classPK));
 	}
 
+	protected void setUpExistingComment(String body) {
+		when(
+			_mbMessage.getBody()
+		).thenReturn(
+			body
+		);
+
+		List<MBMessage> messages = Collections.singletonList(_mbMessage);
+
+		when(
+			_mbMessageLocalService.getThreadMessages(
+				_THREAD_ID, WorkflowConstants.STATUS_APPROVED)
+		).thenReturn(
+			messages
+		);
+	}
+
 	protected void setUpMBCommentManagerImpl() throws Exception {
 		_mbCommentManagerImpl.setMBMessageLocalService(_mbMessageLocalService);
 
@@ -244,23 +261,6 @@ public class MBCommentManagerImplTest extends Mockito {
 			_serviceContextFunction.apply(MBMessage.class.getName())
 		).thenReturn(
 			_serviceContext
-		);
-	}
-
-	protected void setUpExistingComment(String body) {
-		when(
-			_mbMessage.getBody()
-		).thenReturn(
-			body
-		);
-
-		List<MBMessage> messages = Collections.singletonList(_mbMessage);
-
-		when(
-			_mbMessageLocalService.getThreadMessages(
-				_THREAD_ID, WorkflowConstants.STATUS_APPROVED)
-		).thenReturn(
-			messages
 		);
 	}
 
