@@ -401,7 +401,7 @@ public class ListUtilTest {
 	}
 
 	@Test
-	public void testToEmptyArray() {
+	public void testToArrayEmpty() {
 		List<Integer> list = Collections.emptyList();
 
 		String[] array = ListUtil.toArray(
@@ -429,7 +429,7 @@ public class ListUtilTest {
 	}
 
 	@Test
-	public void testToEmptyLongArray() {
+	public void testToLongArrayEmpty() {
 		List<String> list = Collections.emptyList();
 
 		long[] array = ListUtil.toLongArray(
