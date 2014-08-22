@@ -429,34 +429,6 @@ public class ListUtilTest {
 	}
 
 	@Test
-	public void testToLongArrayEmpty() {
-		List<String> list = Collections.emptyList();
-
-		long[] array = ListUtil.toLongArray(
-			list,
-			new Accessor<String, Long>() {
-
-				@Override
-				public Long get(String string) {
-					return Long.parseLong(string);
-				}
-
-				@Override
-				public Class<Long> getAttributeClass() {
-					return Long.class;
-				}
-
-				@Override
-				public Class<String> getTypeClass() {
-					return String.class;
-				}
-
-			});
-
-		Assert.assertArrayEquals(new long[0], array);
-	}
-
-	@Test
 	public void testToList() throws Exception {
 		List<String> list = new ArrayList<String>();
 
@@ -497,6 +469,34 @@ public class ListUtilTest {
 			});
 
 		Assert.assertArrayEquals(new long[] {1, 2, 3, 4}, array);
+	}
+
+	@Test
+	public void testToLongArrayEmpty() {
+		List<String> list = Collections.emptyList();
+
+		long[] array = ListUtil.toLongArray(
+			list,
+			new Accessor<String, Long>() {
+
+				@Override
+				public Long get(String string) {
+					return Long.parseLong(string);
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<String> getTypeClass() {
+					return String.class;
+				}
+
+			});
+
+		Assert.assertArrayEquals(new long[0], array);
 	}
 
 	@Test
