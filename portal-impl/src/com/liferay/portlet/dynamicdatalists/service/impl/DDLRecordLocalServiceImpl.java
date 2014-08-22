@@ -537,9 +537,7 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 		}
 
 		if (isKeepRecordVersionLabel(
-				record.getRecordVersion(), recordVersion,
-				serviceContext.getCommand(),
-				serviceContext.getWorkflowAction())) {
+				record.getRecordVersion(), recordVersion, serviceContext)) {
 
 			ddlRecordVersionPersistence.remove(recordVersion);
 
@@ -697,19 +695,20 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 	/**
 	 * @see com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl#isKeepFileVersionLabel(
-	 *      DLFileEntry, DLFileVersion, DLFileVersion, String, int)
+	 *      DLFileEntry, DLFileVersion, DLFileVersion, ServiceContext)
 	 */
 	protected boolean isKeepRecordVersionLabel(
 			DDLRecordVersion lastRecordVersion,
-			DDLRecordVersion latestRecordVersion, String cmd,
-			int workflowContext)
+			DDLRecordVersion latestRecordVersion, ServiceContext serviceContext)
 		throws PortalException {
 
-		if (Validator.equals(cmd, Constants.RENAME)) {
+		if (Validator.equals(serviceContext.getCommand(), Constants.RENAME)) {
 			return false;
 		}
 
-		if (workflowContext == WorkflowConstants.ACTION_SAVE_DRAFT) {
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_SAVE_DRAFT) {
+
 			return false;
 		}
 
