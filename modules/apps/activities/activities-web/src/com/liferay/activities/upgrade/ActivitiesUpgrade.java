@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.activities.upgrade;
 
 import com.liferay.activities.portlet.ActivitiesPortlet;
@@ -62,9 +63,10 @@ public class ActivitiesUpgrade {
 
 			_releaseLocalService.updateRelease(
 				ActivitiesPortlet.class.getName(),
-				Collections.<UpgradeProcess>singletonList(
-					upgradePortletId), 1, 1, false);
+				Collections.<UpgradeProcess>singletonList(upgradePortletId),
+				1, 1, false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;
+
 }

@@ -94,8 +94,8 @@ public class RSSAction implements ActionCommand {
 
 		try {
 			ServletResponseUtil.sendFile(
-				request, response, null, getRSS(
-					portletRequest, portletResponse),
+				request, response, null,
+				getRSS(portletRequest, portletResponse),
 				ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (Exception e) {
