@@ -84,7 +84,7 @@ public class RSSAction implements ActionCommand {
 		if (!(portletResponse instanceof MimeResponse)) {
 			return false;
 		}
-		
+
 		MimeResponse mimeResponse = (MimeResponse)portletResponse;
 
 		try {
@@ -150,7 +150,8 @@ public class RSSAction implements ActionCommand {
 				syndEntry.setLink(socialActivityFeedEntry.getLink());
 			}
 
-			syndEntry.setPublishedDate(new Date(socialActivity.getCreateDate()));
+			syndEntry.setPublishedDate(
+				new Date(socialActivity.getCreateDate()));
 			syndEntry.setTitle(
 				HtmlUtil.extractText(socialActivityFeedEntry.getTitle()));
 			syndEntry.setUri(syndEntry.getLink());
@@ -194,6 +195,33 @@ public class RSSAction implements ActionCommand {
 		return RSSUtil.export(syndFeed);
 	}
 
+	protected byte[] getRSS(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws Exception {
+
+		String feedTitle = ParamUtil.getString(portletRequest, "feedTitle");
+		String format = ParamUtil.getString(
+			portletRequest, "type", RSSUtil.FORMAT_DEFAULT);
+		double version = ParamUtil.getDouble(
+			portletRequest, "version", RSSUtil.VERSION_DEFAULT);
+		String displayStyle = ParamUtil.getString(
+			portletRequest, "displayStyle", RSSUtil.DISPLAY_STYLE_DEFAULT);
+		int max = ParamUtil.getInteger(
+			portletRequest, "max", SearchContainer.DEFAULT_DELTA);
+
+		List<SocialActivity> socialActivities = getSocialActivities(
+			portletRequest, max);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			portletRequest);
+
+		String rss = exportToRSS(
+			portletRequest, portletResponse, feedTitle, null, format, version,
+			displayStyle, socialActivities, serviceContext);
+
+		return rss.getBytes(StringPool.UTF8);
+	}
+
 	protected List<SocialActivity> getSocialActivities(
 			PortletRequest portletRequest, int max)
 		throws Exception {
@@ -220,33 +248,6 @@ public class RSSAction implements ActionCommand {
 		}
 
 		return Collections.emptyList();
-	}
-
-	protected byte[] getRSS(
-			PortletRequest portletRequest, PortletResponse portletResponse)
-		throws Exception {
-
-		String feedTitle = ParamUtil.getString(portletRequest, "feedTitle");
-		String format = ParamUtil.getString(
-			portletRequest, "type", RSSUtil.FORMAT_DEFAULT);
-		double version = ParamUtil.getDouble(
-			portletRequest, "version", RSSUtil.VERSION_DEFAULT);
-		String displayStyle = ParamUtil.getString(
-			portletRequest, "displayStyle", RSSUtil.DISPLAY_STYLE_DEFAULT);
-		int max = ParamUtil.getInteger(
-			portletRequest, "max", SearchContainer.DEFAULT_DELTA);
-
-		List<SocialActivity> socialActivities = getSocialActivities(
-			portletRequest, max);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			portletRequest);
-
-		String rss = exportToRSS(
-			portletRequest, portletResponse, feedTitle, null, format, version,
-			displayStyle, socialActivities, serviceContext);
-
-		return rss.getBytes(StringPool.UTF8);
 	}
 
 }

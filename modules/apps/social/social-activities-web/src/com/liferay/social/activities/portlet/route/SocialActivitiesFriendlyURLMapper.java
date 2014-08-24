@@ -29,5 +29,6 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = FriendlyURLMapper.class
 )
-public class SocialActivitiesFriendlyURLMapper extends DefaultFriendlyURLMapper {
+public class SocialActivitiesFriendlyURLMapper
+	extends DefaultFriendlyURLMapper {
 }

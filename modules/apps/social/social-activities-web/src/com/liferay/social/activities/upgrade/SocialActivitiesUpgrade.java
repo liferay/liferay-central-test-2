@@ -14,11 +14,11 @@
 
 package com.liferay.social.activities.upgrade;
 
-import com.liferay.social.activities.portlet.SocialActivitiesPortlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
+import com.liferay.social.activities.portlet.SocialActivitiesPortlet;
 
 import java.util.Collections;
 
@@ -64,8 +64,8 @@ public class SocialActivitiesUpgrade {
 
 			_releaseLocalService.updateRelease(
 				SocialActivitiesPortlet.class.getName(),
-				Collections.<UpgradeProcess>singletonList(upgradePortletId),
-				1, 0, false);
+				Collections.<UpgradeProcess>singletonList(upgradePortletId), 1,
+				0, false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;
