@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.activities.upgrade;
+package com.liferay.social.activities.upgrade;
 
-import com.liferay.activities.portlet.ActivitiesPortlet;
+import com.liferay.social.activities.portlet.ActivitiesPortlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;

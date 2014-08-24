@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.activities.action;
+package com.liferay.social.activities.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;

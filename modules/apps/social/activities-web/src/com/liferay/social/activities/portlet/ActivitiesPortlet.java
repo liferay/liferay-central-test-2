@@ -11,9 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.activities.portlet;
+package com.liferay.social.activities.portlet;
 
-import com.liferay.activities.upgrade.ActivitiesUpgrade;
+import com.liferay.social.activities.upgrade.ActivitiesUpgrade;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
