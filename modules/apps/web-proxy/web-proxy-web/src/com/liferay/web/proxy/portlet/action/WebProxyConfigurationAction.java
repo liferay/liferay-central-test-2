@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.xsl.content.portlet.action;
+package com.liferay.web.proxy.portlet.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
-import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -26,16 +27,15 @@ import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Hugo Huijser
  */
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=com_liferay_xsl_content_portlet_XSLContentPortlet"
+		"javax.portlet.name=com_liferay_web_proxy_portlet_WebProxyPortlet"
 	},
 	service = ConfigurationAction.class
 )
-public class ConfigurationActionImpl extends DefaultConfigurationAction {
+public class WebProxyConfigurationAction extends DefaultConfigurationAction {
 
 	@Override
 	public void processAction(
@@ -43,21 +43,19 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		validateUrls(actionRequest);
+		String initUrl = getParameter(actionRequest, "initUrl");
+
+		if (!initUrl.startsWith("/") &&
+			!StringUtil.startsWith(initUrl, "http://") &&
+			!StringUtil.startsWith(initUrl, "https://") &&
+			!StringUtil.startsWith(initUrl, "mhtml://")) {
+
+			initUrl = HttpUtil.getProtocol(actionRequest) + "://" + initUrl;
+		}
+
+		setPreference(actionRequest, "initUrl", initUrl);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
-
-	protected void validateUrls(ActionRequest actionRequest) {
-		String xmlUrl = getParameter(actionRequest, "xmlUrl");
-		String xslUrl = getParameter(actionRequest, "xslUrl");
-
-		if (xmlUrl.startsWith("file:/")) {
-			SessionErrors.add(actionRequest, "xmlUrl");
-		}
-		else if (xslUrl.startsWith("file:/")) {
-			SessionErrors.add(actionRequest, "xslUrl");
-		}
 	}
 
 }
