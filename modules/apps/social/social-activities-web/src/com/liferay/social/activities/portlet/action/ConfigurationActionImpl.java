@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.social.activities.action;
+package com.liferay.social.activities.portlet.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
@@ -29,5 +29,5 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ConfigurationAction.class
 )
-public class ActivitiesConfigurationAction extends DefaultConfigurationAction {
+public class ConfigurationActionImpl extends DefaultConfigurationAction {
 }
