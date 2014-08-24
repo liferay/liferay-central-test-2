@@ -25,7 +25,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=com_liferay_social_activities_portlet_ActivitiesPortlet"
+		"javax.portlet.name=com_liferay_social_activities_portlet_SocialActivitiesPortlet"
 	},
 	service = FriendlyURLMapper.class
 )

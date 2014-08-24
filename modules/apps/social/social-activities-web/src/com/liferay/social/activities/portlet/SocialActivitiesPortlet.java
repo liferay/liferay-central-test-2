@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = Portlet.class
 )
-public class ActivitiesPortlet extends MVCPortlet {
+public class SocialActivitiesPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
 	protected void setActivitiesUpgrade(ActivitiesUpgrade activitiesUpgrade) {
