@@ -19,16 +19,16 @@
 <%
 Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
-List<SocialActivity> activities = null;
+List<SocialActivity> socialActivities = null;
 
 if (group.isOrganization()) {
-	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getOrganizationId(), 0, max);
+	socialActivities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getOrganizationId(), 0, max);
 }
 else if (group.isRegularSite()) {
-	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), 0, max);
+	socialActivities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), 0, max);
 }
 else if (group.isUser()) {
-	activities = SocialActivityLocalServiceUtil.getUserActivities(group.getClassPK(), 0, max);
+	socialActivities = SocialActivityLocalServiceUtil.getUserActivities(group.getClassPK(), 0, max);
 }
 
 String feedTitle = LanguageUtil.format(request, "x's-activities", HtmlUtil.escape(group.getDescriptiveName(locale)), false);
@@ -42,7 +42,7 @@ String taglibFeedTitle = LanguageUtil.format(request, "subscribe-to-x's-activiti
 %>
 
 <liferay-ui:social-activities
-	activities="<%= activities %>"
+	activities="<%= socialActivities %>"
 	feedDisplayStyle="<%= rssDisplayStyle %>"
 	feedEnabled="<%= enableRSS %>"
 	feedLink="<%= rssURL.toString() %>"
