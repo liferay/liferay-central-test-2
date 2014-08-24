@@ -108,7 +108,7 @@ public class RSSAction implements ActionCommand {
 	protected String exportToRSS(
 			ThemeDisplay themeDisplay, PortletResponse portletResponse,
 			String title, String description, String format, double version,
-			String displayStyle, List<SocialActivity> activities,
+			String displayStyle, List<SocialActivity> socialActivities,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -120,12 +120,12 @@ public class RSSAction implements ActionCommand {
 
 		syndFeed.setEntries(syndEntries);
 
-		for (SocialActivity activity : activities) {
-			SocialActivityFeedEntry activityFeedEntry =
+		for (SocialActivity socialActivity : socialActivities) {
+			SocialActivityFeedEntry socialActivityFeedEntry =
 				SocialActivityInterpreterLocalServiceUtil.interpret(
-					StringPool.BLANK, activity, serviceContext);
+					StringPool.BLANK, socialActivity, serviceContext);
 
-			if (activityFeedEntry == null) {
+			if (socialActivityFeedEntry == null) {
 				continue;
 			}
 
@@ -141,20 +141,20 @@ public class RSSAction implements ActionCommand {
 				value = StringPool.BLANK;
 			}
 			else {
-				value = activityFeedEntry.getBody();
+				value = socialActivityFeedEntry.getBody();
 			}
 
 			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
 
-			if (Validator.isNotNull(activityFeedEntry.getLink())) {
-				syndEntry.setLink(activityFeedEntry.getLink());
+			if (Validator.isNotNull(socialActivityFeedEntry.getLink())) {
+				syndEntry.setLink(socialActivityFeedEntry.getLink());
 			}
 
-			syndEntry.setPublishedDate(new Date(activity.getCreateDate()));
+			syndEntry.setPublishedDate(new Date(socialActivity.getCreateDate()));
 			syndEntry.setTitle(
-				HtmlUtil.extractText(activityFeedEntry.getTitle()));
+				HtmlUtil.extractText(socialActivityFeedEntry.getTitle()));
 			syndEntry.setUri(syndEntry.getLink());
 
 			syndEntries.add(syndEntry);
@@ -195,7 +195,7 @@ public class RSSAction implements ActionCommand {
 		return RSSUtil.export(syndFeed);
 	}
 
-	protected List<SocialActivity> getActivities(
+	protected List<SocialActivity> getSocialActivities(
 			ThemeDisplay themeDisplay, int max)
 		throws Exception {
 
@@ -237,14 +237,15 @@ public class RSSAction implements ActionCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		List<SocialActivity> activities = getActivities(themeDisplay, max);
+		List<SocialActivity> socialActivities = getSocialActivities(
+			themeDisplay, max);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			portletRequest);
 
 		String rss = exportToRSS(
 			themeDisplay, portletResponse, feedTitle, null, format, version,
-			displayStyle, activities, serviceContext);
+			displayStyle, socialActivities, serviceContext);
 
 		return rss.getBytes(StringPool.UTF8);
 	}
