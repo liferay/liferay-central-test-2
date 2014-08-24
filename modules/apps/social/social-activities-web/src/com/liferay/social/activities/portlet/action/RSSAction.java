@@ -15,7 +15,7 @@
 package com.liferay.social.activities.portlet.action;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -57,9 +57,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.ResourceURL;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -86,15 +83,12 @@ public class RSSAction implements ActionCommand {
 		if (!(portletResponse instanceof MimeResponse)) {
 			return false;
 		}
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			portletResponse);
+		
+		MimeResponse mimeResponse = (MimeResponse)portletResponse;
 
 		try {
-			ServletResponseUtil.sendFile(
-				request, response, null,
+			PortletResponseUtil.sendFile(
+				portletRequest, mimeResponse, null,
 				getRSS(portletRequest, portletResponse),
 				ContentTypes.TEXT_XML_UTF8);
 		}
