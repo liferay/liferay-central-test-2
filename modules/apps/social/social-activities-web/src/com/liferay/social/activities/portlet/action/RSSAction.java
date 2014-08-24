@@ -100,11 +100,14 @@ public class RSSAction implements ActionCommand {
 	}
 
 	protected String exportToRSS(
-			ThemeDisplay themeDisplay, PortletResponse portletResponse,
+			PortletRequest portletRequest, PortletResponse portletResponse,
 			String title, String description, String format, double version,
 			String displayStyle, List<SocialActivity> socialActivities,
 			ServiceContext serviceContext)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
@@ -190,8 +193,11 @@ public class RSSAction implements ActionCommand {
 	}
 
 	protected List<SocialActivity> getSocialActivities(
-			ThemeDisplay themeDisplay, int max)
+			PortletRequest portletRequest, int max)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Group group = GroupLocalServiceUtil.getGroup(
 			themeDisplay.getScopeGroupId());
@@ -228,17 +234,14 @@ public class RSSAction implements ActionCommand {
 		int max = ParamUtil.getInteger(
 			portletRequest, "max", SearchContainer.DEFAULT_DELTA);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		List<SocialActivity> socialActivities = getSocialActivities(
-			themeDisplay, max);
+			portletRequest, max);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			portletRequest);
 
 		String rss = exportToRSS(
-			themeDisplay, portletResponse, feedTitle, null, format, version,
+			portletRequest, portletResponse, feedTitle, null, format, version,
 			displayStyle, socialActivities, serviceContext);
 
 		return rss.getBytes(StringPool.UTF8);
