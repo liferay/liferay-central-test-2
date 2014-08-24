@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.social.activities.route;
+package com.liferay.social.activities.portlet.route;
 
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
