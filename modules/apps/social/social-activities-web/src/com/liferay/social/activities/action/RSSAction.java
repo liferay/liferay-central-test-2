@@ -72,7 +72,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"action.command.name=activities/rss",
-		"javax.portlet.name=com_liferay_activities_portlet_ActivitiesPortlet"
+		"javax.portlet.name=com_liferay_social_activities_portlet_ActivitiesPortlet"
 	},
 	service = ActionCommand.class
 )

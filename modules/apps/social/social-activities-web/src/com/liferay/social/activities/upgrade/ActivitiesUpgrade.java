@@ -55,7 +55,7 @@ public class ActivitiesUpgrade {
 				return new String[][] {
 					new String[] {
 						"116",
-						"com_liferay_activities_portlet_ActivitiesPortlet"
+						"com_liferay_social_activities_portlet_ActivitiesPortlet"
 						}
 					};
 				}
