@@ -32,8 +32,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  * @author Peter Fellwock
  */
-@Component(immediate = true, service = ActivitiesUpgrade.class)
-public class ActivitiesUpgrade {
+@Component(immediate = true, service = SocialActivitiesUpgrade.class)
+public class SocialActivitiesUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
