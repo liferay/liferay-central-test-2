@@ -14,7 +14,7 @@
 
 package com.liferay.social.activities.upgrade;
 
-import com.liferay.social.activities.portlet.SocialSocialActivitiesPortlet;
+import com.liferay.social.activities.portlet.SocialActivitiesPortlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -55,14 +55,15 @@ public class ActivitiesUpgrade {
 				return new String[][] {
 					new String[] {
 						"116",
-						"com_liferay_social_activities_portlet_SocialActivitiesPortlet"
+						"com_liferay_social_activities_portlet_" +
+							"SocialActivitiesPortlet"
 						}
 					};
 				}
 			};
 
 			_releaseLocalService.updateRelease(
-				SocialSocialActivitiesPortlet.class.getName(),
+				SocialActivitiesPortlet.class.getName(),
 				Collections.<UpgradeProcess>singletonList(upgradePortletId),
 				1, 1, false);
 	}
