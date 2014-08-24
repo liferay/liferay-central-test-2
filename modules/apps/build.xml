@@ -3,8 +3,8 @@
 
 <project>
 	<path id="plugins.includes.path">
-		<dirset dir="activities" includes="*" />
 		<dirset dir="dictionary" includes="*" />
+		<dirset dir="social" includes="*" />
 		<dirset dir="web-proxy" includes="*" />
 		<dirset dir="xsl-content" includes="*" />
 	</path>
