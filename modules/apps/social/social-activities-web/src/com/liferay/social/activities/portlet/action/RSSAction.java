@@ -15,6 +15,7 @@
 package com.liferay.social.activities.portlet.action;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -167,9 +168,10 @@ public class RSSAction implements ActionCommand {
 
 		syndLinks.add(selfSyndLink);
 
-		MimeResponse mimeResponse = (MimeResponse)portletResponse;
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
 
-		ResourceURL rssURL = mimeResponse.createResourceURL();
+		ResourceURL rssURL = liferayPortletResponse.createResourceURL();
 
 		rssURL.setParameter(ActionRequest.ACTION_NAME, "rss");
 		rssURL.setParameter("feedTitle", title);
