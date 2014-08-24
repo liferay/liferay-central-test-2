@@ -71,7 +71,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"action.command.name=activities/rss",
+		"action.command.name=rss",
 		"javax.portlet.name=com_liferay_social_activities_portlet_SocialActivitiesPortlet"
 	},
 	service = ActionCommand.class
@@ -174,7 +174,7 @@ public class RSSAction implements ActionCommand {
 
 		ResourceURL rssURL = mimeResponse.createResourceURL();
 
-		rssURL.setParameter(ActionRequest.ACTION_NAME, "activities/rss");
+		rssURL.setParameter(ActionRequest.ACTION_NAME, "rss");
 		rssURL.setParameter("feedTitle", title);
 
 		selfSyndLink.setHref(rssURL.toString());

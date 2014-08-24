@@ -35,7 +35,7 @@ String feedTitle = LanguageUtil.format(request, "x's-activities", HtmlUtil.escap
 
 ResourceURL rssURL = renderResponse.createResourceURL();
 
-rssURL.setParameter(ActionRequest.ACTION_NAME, "activities/rss");
+rssURL.setParameter(ActionRequest.ACTION_NAME, "rss");
 rssURL.setParameter("feedTitle", feedTitle);
 
 String taglibFeedTitle = LanguageUtil.format(request, "subscribe-to-x's-activities", HtmlUtil.escape(group.getDescriptiveName(locale)), false);
