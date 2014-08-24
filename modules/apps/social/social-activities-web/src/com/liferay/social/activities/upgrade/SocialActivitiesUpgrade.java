@@ -65,7 +65,7 @@ public class SocialActivitiesUpgrade {
 			_releaseLocalService.updateRelease(
 				SocialActivitiesPortlet.class.getName(),
 				Collections.<UpgradeProcess>singletonList(upgradePortletId),
-				1, 1, false);
+				1, 0, false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;
