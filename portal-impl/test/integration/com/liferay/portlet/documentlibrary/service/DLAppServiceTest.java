@@ -431,10 +431,12 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 	public void testDeleteExplicitlyTrashedFolder() throws Exception {
 		Folder folder = DLAppTestUtil.addFolder(
 			group.getGroupId(), parentFolder.getFolderId());
+
 		Folder subfolder = DLAppTestUtil.addFolder(
 			group.getGroupId(), folder.getFolderId());
 
 		DLAppServiceUtil.moveFolderToTrash(subfolder.getFolderId());
+
 		DLAppServiceUtil.moveFolderToTrash(folder.getFolderId());
 
 		DLAppServiceUtil.deleteFolder(folder.getFolderId());
@@ -446,10 +448,12 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 	public void testDeleteExplicitlyTrashedFolderByName() throws Exception {
 		Folder folder = DLAppTestUtil.addFolder(
 			group.getGroupId(), parentFolder.getFolderId());
+
 		Folder subfolder = DLAppTestUtil.addFolder(
 			group.getGroupId(), folder.getFolderId());
 
 		DLAppServiceUtil.moveFolderToTrash(subfolder.getFolderId());
+
 		DLAppServiceUtil.moveFolderToTrash(folder.getFolderId());
 
 		folder = DLAppServiceUtil.getFolder(folder.getFolderId());
@@ -463,30 +467,32 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 	@Test
 	public void testDeleteImplicitlyTrashedFolder() throws Exception {
-		int initialFolderCount = DLAppServiceUtil.getFoldersCount(
+		int initialFoldersCount = DLAppServiceUtil.getFoldersCount(
 			group.getGroupId(), parentFolder.getFolderId());
 
 		Folder folder = DLAppTestUtil.addFolder(
 			group.getGroupId(), parentFolder.getFolderId());
+
 		DLAppTestUtil.addFolder(group.getGroupId(), folder.getFolderId());
 
 		DLAppServiceUtil.moveFolderToTrash(folder.getFolderId());
 
 		DLAppServiceUtil.deleteFolder(folder.getFolderId());
 
-		int afterDeleteFolderCount = DLAppServiceUtil.getFoldersCount(
+		int foldersCount = DLAppServiceUtil.getFoldersCount(
 			group.getGroupId(), parentFolder.getFolderId());
 
-		Assert.assertEquals(initialFolderCount, afterDeleteFolderCount);
+		Assert.assertEquals(initialFoldersCount, foldersCount);
 	}
 
 	@Test
 	public void testDeleteImplicitlyTrashedFolderByName() throws Exception {
-		int initialFolderCount = DLAppServiceUtil.getFoldersCount(
+		int initialFoldersCount = DLAppServiceUtil.getFoldersCount(
 			group.getGroupId(), parentFolder.getFolderId());
 
 		Folder folder = DLAppTestUtil.addFolder(
 			group.getGroupId(), parentFolder.getFolderId());
+
 		DLAppTestUtil.addFolder(group.getGroupId(), folder.getFolderId());
 
 		DLAppServiceUtil.moveFolderToTrash(folder.getFolderId());
@@ -497,10 +503,10 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			folder.getRepositoryId(), folder.getParentFolderId(),
 			folder.getName());
 
-		int afterDeleteFolderCount = DLAppServiceUtil.getFoldersCount(
+		int foldersCount = DLAppServiceUtil.getFoldersCount(
 			group.getGroupId(), parentFolder.getFolderId());
 
-		Assert.assertEquals(initialFolderCount, afterDeleteFolderCount);
+		Assert.assertEquals(initialFoldersCount, foldersCount);
 	}
 
 	@Test
