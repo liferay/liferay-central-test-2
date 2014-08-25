@@ -1233,7 +1233,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the file shortcut with the primary key.
+	 * Returns the file version with the primary key.
 	 *
 	 * @param  fileVersionId the primary key of the file version
 	 * @return the file version with the primary key
