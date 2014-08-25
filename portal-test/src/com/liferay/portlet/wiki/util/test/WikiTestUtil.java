@@ -201,8 +201,8 @@ public class WikiTestUtil {
 			TestPropsValues.getUserId(), nodeId, "TestChildPage",
 			RandomTestUtil.randomString(), "TestPage", true, serviceContext);
 
-		WikiPage grandChildPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, "TestGrandChildPage",
+		WikiPage grandchildPage = WikiTestUtil.addPage(
+			TestPropsValues.getUserId(), nodeId, "TestGrandchildPage",
 			RandomTestUtil.randomString(), "TestChildPage", true,
 			serviceContext);
 
@@ -215,11 +215,11 @@ public class WikiTestUtil {
 			nodeId, "TestPage");
 		childPage = WikiPageLocalServiceUtil.getPageByPageId(
 			childPage.getPageId());
-		grandChildPage = WikiPageLocalServiceUtil.getPageByPageId(
-			grandChildPage.getPageId());
+		grandchildPage = WikiPageLocalServiceUtil.getPageByPageId(
+			grandchildPage.getPageId());
 
 		return new WikiPage[] {
-			page, redirectPage, childPage, grandChildPage};
+			page, redirectPage, childPage, grandchildPage};
 	}
 
 	public static WikiPage[] addRenamedTrashedPage(
@@ -342,7 +342,7 @@ public class WikiTestUtil {
 			RandomTestUtil.randomString(), parentPage.getTitle(), true,
 			serviceContext);
 
-		WikiPage grandChildPage = WikiTestUtil.addPage(
+		WikiPage grandchildPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), childPage.getTitle(), true,
 			serviceContext);
@@ -361,10 +361,10 @@ public class WikiTestUtil {
 			parentPage.getPageId());
 		childPage = WikiPageLocalServiceUtil.getPageByPageId(
 			childPage.getPageId());
-		grandChildPage = WikiPageLocalServiceUtil.getPageByPageId(
-			grandChildPage.getPageId());
+		grandchildPage = WikiPageLocalServiceUtil.getPageByPageId(
+			grandchildPage.getPageId());
 
-		return new WikiPage[] {parentPage, childPage, grandChildPage};
+		return new WikiPage[] {parentPage, childPage, grandchildPage};
 	}
 
 	public static File addWikiAttachment(
