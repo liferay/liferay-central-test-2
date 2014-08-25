@@ -405,6 +405,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			groupId, userId, fileName, tempFolderName, inputStream, mimeType);
 	}
 
+	@Override
 	public void changeNode(
 			long userId, long nodeId, String title, long newNodeId,
 			ServiceContext serviceContext)
