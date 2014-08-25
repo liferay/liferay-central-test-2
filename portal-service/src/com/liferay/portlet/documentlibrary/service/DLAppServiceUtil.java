@@ -876,6 +876,13 @@ public class DLAppServiceUtil {
 		return getService().getFileShortcut(fileShortcutId);
 	}
 
+	/**
+	* Returns the file version with the primary key.
+	*
+	* @param fileVersionId the primary key of the file version
+	* @return the file version with the primary key
+	* @throws PortalException if the file version could not be found
+	*/
 	public static com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
 		long fileVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException {

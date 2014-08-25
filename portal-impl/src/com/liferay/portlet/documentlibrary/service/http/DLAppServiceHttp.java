@@ -1207,45 +1207,13 @@ public class DLAppServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
-		HttpPrincipal httpPrincipal, long fileVersionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class,
-					"getFileVersion", _getFileVersionParameterTypes36);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileVersionId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.kernel.repository.model.FileVersion)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class,
-					"getFileEntry", _getFileEntryParameterTypes37);
+					"getFileEntry", _getFileEntryParameterTypes36);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, title);
@@ -1278,7 +1246,7 @@ public class DLAppServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class,
 					"getFileEntryByUuidAndGroupId",
-					_getFileEntryByUuidAndGroupIdParameterTypes38);
+					_getFileEntryByUuidAndGroupIdParameterTypes37);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, uuid,
 					groupId);
@@ -1310,7 +1278,7 @@ public class DLAppServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class,
-					"getFileShortcut", _getFileShortcutParameterTypes39);
+					"getFileShortcut", _getFileShortcutParameterTypes38);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId);
@@ -1329,6 +1297,38 @@ public class DLAppServiceHttp {
 			}
 
 			return (com.liferay.portlet.documentlibrary.model.DLFileShortcut)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
+		HttpPrincipal httpPrincipal, long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class,
+					"getFileVersion", _getFileVersionParameterTypes39);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileVersionId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.repository.model.FileVersion)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -3895,15 +3895,15 @@ public class DLAppServiceHttp {
 	private static final Class<?>[] _getFileEntryParameterTypes35 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getFileVersionParameterTypes36 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getFileEntryParameterTypes37 = new Class[] {
+	private static final Class<?>[] _getFileEntryParameterTypes36 = new Class[] {
 			long.class, long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _getFileEntryByUuidAndGroupIdParameterTypes38 =
+	private static final Class<?>[] _getFileEntryByUuidAndGroupIdParameterTypes37 =
 		new Class[] { java.lang.String.class, long.class };
-	private static final Class<?>[] _getFileShortcutParameterTypes39 = new Class[] {
+	private static final Class<?>[] _getFileShortcutParameterTypes38 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFileVersionParameterTypes39 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[] _getFolderParameterTypes40 = new Class[] {
