@@ -81,13 +81,13 @@ public class CompareVersionsAction extends PortletAction {
 	protected void compareVersions(RenderRequest renderRequest)
 		throws Exception {
 
-		long sourceVersionId = ParamUtil.getLong(
-			renderRequest, "sourceVersionId");
-		long targetVersionId = ParamUtil.getLong(
-			renderRequest, "targetVersionId");
+		long sourceFileVersionId = ParamUtil.getLong(
+			renderRequest, "sourceFileVersionId");
+		long targetFileVersionId = ParamUtil.getLong(
+			renderRequest, "targetFileVersionId");
 
 		FileVersion sourceFileVersion = DLAppServiceUtil.getFileVersion(
-			sourceVersionId);
+			sourceFileVersionId);
 
 		InputStream sourceIs = sourceFileVersion.getContentStream(false);
 
@@ -104,7 +104,7 @@ public class CompareVersionsAction extends PortletAction {
 		}
 
 		FileVersion targetFileVersion = DLAppLocalServiceUtil.getFileVersion(
-			targetVersionId);
+			targetFileVersionId);
 
 		InputStream targetIs = targetFileVersion.getContentStream(false);
 
@@ -120,15 +120,13 @@ public class CompareVersionsAction extends PortletAction {
 				targetContent.getBytes(StringPool.UTF8));
 		}
 
-		String targetVersion = targetFileVersion.getVersion();
-		String sourceVersion = sourceFileVersion.getVersion();
-
 		if (DocumentConversionUtil.isEnabled()) {
 			if (DocumentConversionUtil.isConvertBeforeCompare(
 					sourceExtension)) {
 
 				String sourceTempFileId = DLUtil.getTempFileId(
-					sourceFileVersion.getFileEntryId(), sourceVersion);
+					sourceFileVersion.getFileEntryId(),
+					sourceFileVersion.getVersion());
 
 				sourceIs = new FileInputStream(
 					DocumentConversionUtil.convert(
@@ -139,7 +137,8 @@ public class CompareVersionsAction extends PortletAction {
 					targetExtension)) {
 
 				String targetTempFileId = DLUtil.getTempFileId(
-					targetFileVersion.getFileEntryId(), targetVersion);
+					targetFileVersion.getFileEntryId(),
+					targetFileVersion.getVersion());
 
 				targetIs = new FileInputStream(
 					DocumentConversionUtil.convert(
@@ -152,10 +151,12 @@ public class CompareVersionsAction extends PortletAction {
 
 		renderRequest.setAttribute(
 			WebKeys.SOURCE_NAME,
-			sourceFileVersion.getTitle() + StringPool.SPACE + sourceVersion);
+			sourceFileVersion.getTitle() + StringPool.SPACE +
+				sourceFileVersion.getVersion());
 		renderRequest.setAttribute(
 			WebKeys.TARGET_NAME,
-			targetFileVersion.getTitle() + StringPool.SPACE + targetVersion);
+			targetFileVersion.getTitle() + StringPool.SPACE +
+				targetFileVersion.getVersion());
 		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 
