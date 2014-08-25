@@ -106,9 +106,10 @@ public class PortletImpl extends PortletBaseImpl {
 	public PortletImpl(long companyId, String portletId) {
 		setCompanyId(companyId);
 		setPortletId(portletId);
-		setStrutsPath(portletId);
 
 		setActive(true);
+		setStrutsPath(portletId);
+
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_atomCollectionAdapterClasses = new ArrayList<String>();
 		_autopropagatedParameters = new LinkedHashSet<String>();
@@ -195,10 +196,16 @@ public class PortletImpl extends PortletBaseImpl {
 		PortletApp portletApp) {
 
 		setPortletId(portletId);
+		setCompanyId(companyId);
+		setRoles(roles);
+		setActive(active);
+		setProcessingEvents(processingEvents);
+		setPublishingEvents(publishingEvents);
+		setPublicRenderParameters(publicRenderParameters);
+
 		_rootPortlet = rootPortlet;
 		_pluginPackage = pluginPackage;
 		_defaultPluginSetting = pluginSetting;
-		setCompanyId(companyId);
 		_icon = icon;
 		_virtualPath = virtualPath;
 		_strutsPath = strutsPath;
@@ -277,11 +284,9 @@ public class PortletImpl extends PortletBaseImpl {
 		_cssClassWrapper = cssClassWrapper;
 		_facebookIntegration = facebookIntegration;
 		_addDefaultResource = addDefaultResource;
-		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
 		_roleMappers = roleMappers;
 		_system = system;
-		setActive(active);
 		_include = include;
 		_initParams = initParams;
 		_expCache = expCache;
@@ -291,9 +296,6 @@ public class PortletImpl extends PortletBaseImpl {
 		_resourceBundle = resourceBundle;
 		_portletInfo = portletInfo;
 		_portletFilters = portletFilters;
-		setProcessingEvents(processingEvents);
-		setPublishingEvents(publishingEvents);
-		setPublicRenderParameters(publicRenderParameters);
 		_portletApp = portletApp;
 	}
 
