@@ -1667,16 +1667,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		validateTitle(newTitle);
 
-		// Check if the new title already exists
-
 		if (StringUtil.equalsIgnoreCase(title, newTitle)) {
 			throw new DuplicatePageException(newTitle);
 		}
 
 		if (isUsedTitle(nodeId, newTitle)) {
-			WikiPage page = getPage(nodeId, newTitle);
 
 			// Support moving back to a previously moved title
+
+			WikiPage page = getPage(nodeId, newTitle);
 
 			if (((page.getVersion() == WikiPageConstants.VERSION_DEFAULT) &&
 				 (page.getContent().length() < 200)) ||
@@ -2109,15 +2108,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (cmd.equals(Constants.MOVE)) {
 				long resourcePrimKey = page.getResourcePrimKey();
 
-				WikiPageResource wikiPageResource =
+				WikiPageResource pageResource =
 					wikiPageResourceLocalService.getPageResource(
 						resourcePrimKey);
 
-				long oldNodeId = wikiPageResource.getNodeId();
-
 				page = doChangeNode(
-					userId, oldNodeId, page.getTitle(), page.getNodeId(),
-					serviceContext);
+					userId, pageResource.getNodeId(), page.getTitle(),
+					page.getNodeId(), serviceContext);
 			}
 			else if (cmd.equals(Constants.RENAME)) {
 				long resourcePrimKey = page.getResourcePrimKey();
@@ -2292,8 +2289,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				userId, nodeId, childPage.getTitle(), newNodeId,
 				serviceContext);
 
-			// Indexer
-
 			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				WikiPage.class);
 
@@ -2313,8 +2308,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			redirectPage = doChangeNode(
 				userId, nodeId, redirectPage.getTitle(), newNodeId,
 				serviceContext);
-
-			// Indexer
 
 			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				WikiPage.class);
@@ -2337,8 +2330,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				NodeChangeException.DUPLICATE_PAGE);
 		}
 
-		// Child pages
-
 		List<WikiPage> childPages = wikiPagePersistence.findByN_P(
 			nodeId, title);
 
@@ -2346,8 +2337,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			checkDuplicationOnNodeChange(
 				nodeId, childPage.getTitle(), newNodeId);
 		}
-
-		// Redirect pages
 
 		List<WikiPage> redirectPages = wikiPagePersistence.findByN_R(
 			nodeId, title);
@@ -3018,8 +3007,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void restoreDependentRedirectPagesFromTrash
-			(WikiPage page, String title, String trashTitle, long trashEntryId)
+	protected void restoreDependentRedirectPagesFromTrash(
+			WikiPage page, String title, String trashTitle, long trashEntryId)
 		throws PortalException {
 
 		List<WikiPage> redirectPages = wikiPagePersistence.findByN_H_R_S(
