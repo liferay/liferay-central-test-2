@@ -43,7 +43,7 @@
 			</c:when>
 			<c:otherwise>
 				<aui:select label="new-node" name="newNodeId">
-					<aui:option disabled="true" label="select-a-node" selected="<%= true %>" value="" />
+					<aui:option disabled="<%= true %>" label="select-a-node" selected="<%= true %>" value="" />
 
 					<%
 					for (WikiNode currentNode : nodes) {
