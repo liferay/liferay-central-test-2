@@ -228,15 +228,6 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 
 	@Override
 	public List<AssetVocabulary> getGroupVocabularies(
-		long groupId, int start, int end,
-		OrderByComparator<AssetVocabulary> obc) {
-
-		return assetVocabularyPersistence.filterFindByGroupId(
-			groupId, start, end, obc);
-	}
-
-	@Override
-	public List<AssetVocabulary> getGroupVocabularies(
 			long groupId, boolean createDefaultVocabulary, int start, int end,
 			OrderByComparator<AssetVocabulary> obc)
 		throws PortalException {
@@ -256,6 +247,15 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 		vocabularies.add(vocabulary);
 
 		return vocabularies;
+	}
+
+	@Override
+	public List<AssetVocabulary> getGroupVocabularies(
+		long groupId, int start, int end,
+		OrderByComparator<AssetVocabulary> obc) {
+
+		return assetVocabularyPersistence.filterFindByGroupId(
+			groupId, start, end, obc);
 	}
 
 	@Override
