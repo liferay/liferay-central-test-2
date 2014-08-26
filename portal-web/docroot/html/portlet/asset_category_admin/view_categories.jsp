@@ -96,20 +96,20 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(vocabulary, category, request, rende
 	>
 
 		<%
-		List<AssetCategory> assetCategories = null;
+		List<AssetCategory> categories = null;
 
 		if (Validator.isNotNull(keywords)) {
 			AssetCategoryDisplay assetCategoryDisplay = AssetCategoryServiceUtil.searchCategoriesDisplay(scopeGroupId, keywords, categoryId, vocabularyId, searchContainer.getStart(), searchContainer.getEnd());
 
-			assetCategories = assetCategoryDisplay.getCategories();
+			categories = assetCategoryDisplay.getCategories();
 		}
 		else {
-			assetCategories = AssetCategoryServiceUtil.getVocabularyCategories(scopeGroupId, categoryId, vocabularyId, searchContainer.getStart(), searchContainer.getEnd(), null);
+			categories = AssetCategoryServiceUtil.getVocabularyCategories(scopeGroupId, categoryId, vocabularyId, searchContainer.getStart(), searchContainer.getEnd(), null);
 		}
 		%>
 
 		<liferay-ui:search-container-results
-			results="<%= assetCategories %>"
+			results="<%= categories %>"
 		/>
 
 		<liferay-ui:search-container-row
