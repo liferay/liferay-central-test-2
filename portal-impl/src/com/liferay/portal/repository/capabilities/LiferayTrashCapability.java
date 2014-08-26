@@ -158,6 +158,17 @@ public class LiferayTrashCapability implements TrashCapability {
 		DLAppHelperLocalServiceUtil.restoreFolderFromTrash(userId, folder);
 	}
 
+	protected void deleteRepositoryTrashEntries(
+		long repositoryId, String className) {
+
+		List<TrashEntry> trashEntries = TrashEntryLocalServiceUtil.getEntries(
+			repositoryId, className);
+
+		for (TrashEntry trashEntry : trashEntries) {
+			TrashEntryLocalServiceUtil.deleteTrashEntry(trashEntry);
+		}
+	}
+
 	protected void deleteTrashEntries(long groupId, long dlFolderId)
 		throws PortalException {
 
@@ -183,17 +194,6 @@ public class LiferayTrashCapability implements TrashCapability {
 
 				deleteTrashEntry(dlFolder);
 			}
-		}
-	}
-
-	protected void deleteRepositoryTrashEntries(
-		long repositoryId, String className) {
-
-		List<TrashEntry> trashEntries = TrashEntryLocalServiceUtil.getEntries(
-			repositoryId, className);
-
-		for (TrashEntry trashEntry : trashEntries) {
-			TrashEntryLocalServiceUtil.deleteTrashEntry(trashEntry);
 		}
 	}
 
