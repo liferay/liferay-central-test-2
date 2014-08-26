@@ -86,7 +86,7 @@ public class LiferayTrashCapability implements TrashCapability {
 				repositoryId, DLFolder.class.getName());
 		}
 		else {
-			deleteDescendantTrashEntries(
+			deleteTrashEntries(
 				repository.getGroupId(), repository.getDlFolderId());
 		}
 	}
@@ -158,7 +158,7 @@ public class LiferayTrashCapability implements TrashCapability {
 		DLAppHelperLocalServiceUtil.restoreFolderFromTrash(userId, folder);
 	}
 
-	protected void deleteDescendantTrashEntries(long groupId, long dlFolderId)
+	protected void deleteTrashEntries(long groupId, long dlFolderId)
 		throws PortalException {
 
 		QueryDefinition<Object> queryDefinition = new QueryDefinition<Object>();
@@ -178,7 +178,7 @@ public class LiferayTrashCapability implements TrashCapability {
 			else if (folderFileEntryOrFileShortcut instanceof DLFolder) {
 				DLFolder dlFolder = (DLFolder)folderFileEntryOrFileShortcut;
 
-				deleteDescendantTrashEntries(
+				deleteTrashEntries(
 					dlFolder.getGroupId(), dlFolder.getFolderId());
 
 				deleteTrashEntry(dlFolder);
