@@ -74,9 +74,8 @@ public class EhcachePortalCacheClusterReplicator implements CacheEventListener {
 			return;
 		}
 
-		Serializable key = (Serializable)element.getObjectKey();
-
 		CacheManager cacheManager = ehcache.getCacheManager();
+		Serializable key = (Serializable)element.getObjectKey();
 
 		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
@@ -102,9 +101,8 @@ public class EhcachePortalCacheClusterReplicator implements CacheEventListener {
 			return;
 		}
 
-		Serializable key = (Serializable)element.getObjectKey();
-
 		CacheManager cacheManager = ehcache.getCacheManager();
+		Serializable key = (Serializable)element.getObjectKey();
 
 		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
