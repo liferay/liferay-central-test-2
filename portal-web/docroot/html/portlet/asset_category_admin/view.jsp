@@ -81,7 +81,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "vocabul
 			vocabularies = assetVocabularyDisplay.getVocabularies();
 		}
 		else {
-			vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), null, true);
+			vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId, true, searchContainer.getStart(), searchContainer.getEnd(), null);
 		}
 		%>
 

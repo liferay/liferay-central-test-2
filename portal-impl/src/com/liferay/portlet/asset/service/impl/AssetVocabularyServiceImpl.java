@@ -237,9 +237,8 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 
 	@Override
 	public List<AssetVocabulary> getGroupVocabularies(
-			long groupId, int start, int end,
-			OrderByComparator<AssetVocabulary> obc,
-			boolean createDefaultVocabulary)
+			long groupId, boolean createDefaultVocabulary, int start, int end,
+			OrderByComparator<AssetVocabulary> obc)
 		throws PortalException {
 
 		List<AssetVocabulary> vocabularies = getGroupVocabularies(
