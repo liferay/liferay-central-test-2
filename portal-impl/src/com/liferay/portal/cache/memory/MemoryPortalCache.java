@@ -42,6 +42,7 @@ public class MemoryPortalCache<K extends Serializable, V>
 
 		_portalCacheManager = portalCacheManager;
 		_name = name;
+
 		_concurrentMap = new ConcurrentHashMap<K, V>(initialCapacity);
 	}
 
