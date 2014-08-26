@@ -101,15 +101,15 @@ public class SPIPortalCacheManagerConfigurator {
 		implements TargetLocator {
 
 		public IntrabandPortalCacheTargetLocator(
-			String portalCacheManagerName, boolean isPortalCacheManager) {
+			String portalCacheManagerName, boolean manager) {
 
 			_portalCacheManagerName = portalCacheManagerName;
-			_isPortalCacheManager = isPortalCacheManager;
+			_manager = manager;
 		}
 
 		@Override
 		public Object getTarget(String id) {
-			if (_isPortalCacheManager) {
+			if (_manager) {
 				return _portalCacheManager;
 			}
 
@@ -125,7 +125,7 @@ public class SPIPortalCacheManagerConfigurator {
 				_portalCacheManagerName);
 		}
 
-		private boolean _isPortalCacheManager;
+		private boolean _manager;
 		private transient PortalCacheManager<?, ?> _portalCacheManager;
 		private String _portalCacheManagerName;
 
