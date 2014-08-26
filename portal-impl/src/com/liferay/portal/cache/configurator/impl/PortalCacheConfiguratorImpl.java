@@ -61,8 +61,7 @@ public class PortalCacheConfiguratorImpl implements PortalCacheConfigurator {
 					PortalCacheProvider.getPortalCacheManagers();
 
 			for (PortalCacheManager<? extends Serializable, ?>
-					portalCacheManager :
-						portalCacheManagers) {
+					portalCacheManager : portalCacheManagers) {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
