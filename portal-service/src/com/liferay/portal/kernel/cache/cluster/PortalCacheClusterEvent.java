@@ -87,17 +87,17 @@ public class PortalCacheClusterEvent implements Serializable {
 			(PortalCacheClusterEvent)obj;
 
 		if (Validator.equals(
-				_portalCacheManagerName,
-				portalCacheClusterEvent._portalCacheManagerName) &&
-			Validator.equals(
-				_portalCacheName, portalCacheClusterEvent._portalCacheName) &&
-			Validator.equals(
 				_elementKey, portalCacheClusterEvent._elementKey) &&
 			Validator.equals(
 				_elementValue, portalCacheClusterEvent._elementValue) &&
 			Validator.equals(
 				_portalCacheClusterEventType,
-				portalCacheClusterEvent._portalCacheClusterEventType)) {
+				portalCacheClusterEvent._portalCacheClusterEventType) &&
+			Validator.equals(
+				_portalCacheManagerName,
+				portalCacheClusterEvent._portalCacheManagerName) &&
+			Validator.equals(
+				_portalCacheName, portalCacheClusterEvent._portalCacheName)) {
 
 			return true;
 		}
