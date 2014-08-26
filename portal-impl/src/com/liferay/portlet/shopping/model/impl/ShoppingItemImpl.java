@@ -33,6 +33,8 @@ import java.util.List;
  */
 public class ShoppingItemImpl extends ShoppingItemBaseImpl {
 
+	public static final int STOCK_QUANTITY_INFINITE_STOCK = -1;
+
 	public ShoppingItemImpl() {
 	}
 
@@ -79,7 +81,11 @@ public class ShoppingItemImpl extends ShoppingItemBaseImpl {
 
 	@Override
 	public boolean hasInfiniteStock() {
-		return getStockQuantity() == ShoppingConstants.INFINITE_STOCK;
+		if (getStockQuantity() == STOCK_QUANTITY_INFINITE_STOCK) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override

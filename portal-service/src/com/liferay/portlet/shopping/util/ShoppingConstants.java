@@ -19,8 +19,6 @@ package com.liferay.portlet.shopping.util;
  */
 public class ShoppingConstants {
 
-	public static final int INFINITE_STOCK = -1;
-
 	public static final String SERVICE_NAME = "com.liferay.portlet.shopping";
 
 }
