@@ -461,9 +461,9 @@ public class AssetVocabularyServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc,
-		boolean createDefaultVocabulary)
+		HttpPrincipal httpPrincipal, long groupId,
+		boolean createDefaultVocabulary, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.asset.model.AssetVocabulary> obc)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class,
@@ -471,7 +471,7 @@ public class AssetVocabularyServiceHttp {
 					_getGroupVocabulariesParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, obc, createDefaultVocabulary);
+					createDefaultVocabulary, start, end, obc);
 
 			Object returnObj = null;
 
@@ -957,9 +957,8 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getGroupVocabulariesParameterTypes13 = new Class[] {
-			long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class,
-			boolean.class
+			long.class, boolean.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getGroupVocabulariesParameterTypes14 = new Class[] {
 			long.class, java.lang.String.class, int.class, int.class,
