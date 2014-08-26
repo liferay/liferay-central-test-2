@@ -59,8 +59,9 @@ public class TransactionalPortalCacheTest {
 	@Before
 	public void setUp() {
 		_portalCache = new MemoryPortalCache<String, String>(
-			new MockPortalCacheManager<String, String>(_CACHE_MANAGER_NAME),
-			_CACHE_NAME, 16);
+			new MockPortalCacheManager<String, String>(
+				_PORTAL_CACHE_MANAGER_NAME),
+			_PORTAL_CACHE_NAME, 16);
 		_transactionalPortalCache =
 			new TransactionalPortalCache<String, String>(_portalCache);
 
@@ -527,13 +528,14 @@ public class TransactionalPortalCacheTest {
 		_testCacheListener.assertActionsCount(0);
 	}
 
-	private static final String _CACHE_MANAGER_NAME = "CACHE_MANAGER_NAME";
-
-	private static final String _CACHE_NAME = "CACHE_NAME";
-
 	private static final String _KEY_1 = "KEY_1";
 
 	private static final String _KEY_2 = "KEY_2";
+
+	private static final String _PORTAL_CACHE_MANAGER_NAME =
+		"PORTAL_CACHE_MANAGER_NAME";
+
+	private static final String _PORTAL_CACHE_NAME = "PORTAL_CACHE_NAME";
 
 	private static final String _VALUE_1 = "VALUE_1";
 
