@@ -110,14 +110,13 @@ public class UpdateLayoutAction extends JSONAction {
 
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-				jsonObject.put("plid", plid);
-				jsonObject.put("layoutId", layout.getLayoutId());
 				jsonObject.put("groupId", layout.getGroupId());
-				jsonObject.put("originalParentPlid", layout.getParentPlid());
+				jsonObject.put("layoutId", layout.getLayoutId());
 				jsonObject.put(
 					"originalParentLayoutId", layout.getParentLayoutId());
-
+				jsonObject.put("originalParentPlid", layout.getParentPlid());
 				jsonObject.put("originalPriority", layout.getPriority());
+				jsonObject.put("plid", plid);
 			}
 		}
 
