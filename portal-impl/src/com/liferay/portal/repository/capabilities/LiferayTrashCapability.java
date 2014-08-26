@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.capabilities.TrashCapability;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.util.Accessor;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
@@ -188,8 +187,7 @@ public class LiferayTrashCapability implements TrashCapability {
 	}
 
 	protected void deleteRepositoryTrashEntries(
-			long repositoryId, String className)
-		throws PortalException {
+		long repositoryId, String className) {
 
 		List<TrashEntry> trashEntries = TrashEntryLocalServiceUtil.getEntries(
 			repositoryId, className);
@@ -237,25 +235,5 @@ public class LiferayTrashCapability implements TrashCapability {
 				DLFolderConstants.getClassName(), dlFolder.getFolderId());
 		}
 	}
-
-	private static final Accessor<TrashEntry, Long> _TRASH_ENTRY_ID_ACCESSOR =
-		new Accessor<TrashEntry, Long>() {
-
-			@Override
-			public Long get(TrashEntry trashEntry) {
-				return trashEntry.getEntryId();
-			}
-
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
-
-			@Override
-			public Class<TrashEntry> getTypeClass() {
-				return TrashEntry.class;
-			}
-
-		};
 
 }
