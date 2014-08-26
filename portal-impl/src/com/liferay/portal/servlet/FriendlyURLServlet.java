@@ -180,7 +180,7 @@ public class FriendlyURLServlet extends HttpServlet {
 	protected String getPathInfo(HttpServletRequest request) {
 		String requestURI = request.getRequestURI();
 
-		int pos = requestURI.indexOf(CharPool.SEMICOLON);
+		int pos = requestURI.indexOf(_JSESSIONID);
 
 		if (pos != -1) {
 			requestURI = requestURI.substring(0, pos);
@@ -373,6 +373,8 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		return locale;
 	}
+
+	private static final String _JSESSIONID = ";jsessionid=";
 
 	private static Log _log = LogFactoryUtil.getLog(FriendlyURLServlet.class);
 
