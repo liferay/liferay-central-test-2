@@ -35,14 +35,14 @@ public class AsyncBrokerThreadLocal {
 		return asyncBroker;
 	}
 
+	public static void removeAsyncBroker() {
+		_asyncBrokerThreadLocal.remove();
+	}
+
 	public static void setAsyncBroker(
 		AsyncBroker<Long, Serializable> asyncBroker) {
 
 		_asyncBrokerThreadLocal.set(asyncBroker);
-	}
-
-	public static void removeAsyncBroker() {
-		_asyncBrokerThreadLocal.remove();
 	}
 
 	private static final ThreadLocal<AsyncBroker<Long, Serializable>>
