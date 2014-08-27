@@ -20,11 +20,6 @@ import com.liferay.registry.collections.ServiceTrackerMapFactory;
 import java.util.List;
 
 /**
- * This class exists with the sole purpose of holding the Service Trackers in
- * the portal class loader. If we put the service trackers in util taglib they
- * would be recreated in every class loader since util-taglib is copied to
- * modules and plugins.
- *
  * @author Carlos Sierra Andrés
  */
 public class ViewExtensionUtil {
