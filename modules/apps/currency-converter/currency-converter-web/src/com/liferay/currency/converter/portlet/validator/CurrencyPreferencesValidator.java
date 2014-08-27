@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.currency.converter;
+package com.liferay.currency.converter.portlet.validator;
 
 import com.liferay.currency.converter.model.Currency;
 import com.liferay.currency.converter.util.CurrencyUtil;

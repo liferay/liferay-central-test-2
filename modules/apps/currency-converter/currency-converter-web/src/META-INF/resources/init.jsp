@@ -22,7 +22,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ page import="com.liferay.currency.converter.util.CurrencyUtil" %><%@
+<%@ page import="com.liferay.currency.converter.portlet.validator.CurrencyUtil" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
