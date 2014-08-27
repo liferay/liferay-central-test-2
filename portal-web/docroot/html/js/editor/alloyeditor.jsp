@@ -147,7 +147,7 @@ boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("
 			return window['<%= name %>'].getCkData();
 		},
 
-		instanceReady: false,
+		instanceReady: true,
 
 		<c:if test="<%= Validator.isNotNull(onBlurMethod) %>">
 			onBlurCallback: function() {
