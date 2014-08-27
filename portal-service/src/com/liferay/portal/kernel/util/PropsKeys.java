@@ -55,6 +55,8 @@ public interface PropsKeys {
 
 	public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
 
+	public static final String ADMIN_OBFUSCATED_PROPERTIES = "admin.obfuscated.properties";
+
 	public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";
 
 	public static final String ADMIN_RESERVED_SCREEN_NAMES = "admin.reserved.screen.names";
@@ -1876,8 +1878,6 @@ public interface PropsKeys {
 	public static final String NTLM_SERVICE_ACCOUNT = "ntlm.auth.service.account";
 
 	public static final String NTLM_SERVICE_PASSWORD = "ntlm.auth.service.password";
-
-	public static final String OBFUSCATED_PROPERTY_VALUES = "obfuscated.property.values";
 
 	public static final String OMNIADMIN_USERS = "omniadmin.users";
 

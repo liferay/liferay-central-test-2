@@ -53,7 +53,7 @@ for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 	String property = (String)entry.getKey();
 	String value = StringPool.BLANK;
 
-	if (ArrayUtil.contains(PropsValues.OBFUSCATED_PROPERTY_VALUES, property)) {
+	if (ArrayUtil.contains(PropsValues.ADMIN_OBFUSCATED_PROPERTIES, property)) {
 		value = StringPool.EIGHT_STARS;
 	}
 	else {
