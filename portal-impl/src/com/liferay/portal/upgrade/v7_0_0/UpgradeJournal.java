@@ -105,15 +105,14 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		Element templateElement = structureElement.element("template");
 
-		String templateFileName = templateElement.elementText("file-name");
-
-		boolean templateCacheable = GetterUtil.getBoolean(
+		String fileName = templateElement.elementText("file-name");
+		boolean cacheable = GetterUtil.getBoolean(
 			templateElement.elementText("cacheable"));
 
 		addDDMTemplate(
 			increment(), groupId, companyId, ddmStructureId, name,
-			localizedName, localizedDescription, getContent(templateFileName),
-			templateCacheable);
+			localizedName, localizedDescription, getContent(fileName),
+			cacheable);
 
 		return name;
 	}
