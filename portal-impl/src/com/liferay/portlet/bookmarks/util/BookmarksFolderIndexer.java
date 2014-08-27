@@ -172,7 +172,8 @@ public class BookmarksFolderIndexer extends BaseIndexer {
 
 		if (document != null) {
 			SearchEngineUtil.updateDocument(
-				getSearchEngineId(), folder.getCompanyId(), document);
+				getSearchEngineId(), folder.getCompanyId(), document,
+				isCommitImmediately());
 		}
 
 		SearchEngineUtil.updateDocument(

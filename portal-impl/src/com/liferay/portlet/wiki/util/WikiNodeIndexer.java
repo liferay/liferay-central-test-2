@@ -126,13 +126,14 @@ public class WikiNodeIndexer extends BaseIndexer {
 		if (!node.isInTrash()) {
 			SearchEngineUtil.deleteDocument(
 				getSearchEngineId(), node.getCompanyId(),
-				document.get(Field.UID));
+				document.get(Field.UID), isCommitImmediately());
 
 			return;
 		}
 
 		SearchEngineUtil.updateDocument(
-			getSearchEngineId(), node.getCompanyId(), document);
+			getSearchEngineId(), node.getCompanyId(), document,
+			isCommitImmediately());
 	}
 
 	@Override
