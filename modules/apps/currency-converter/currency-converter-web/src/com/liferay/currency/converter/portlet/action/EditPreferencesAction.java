@@ -50,6 +50,10 @@ public class EditPreferencesAction implements ActionCommand {
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException {
 
+		if (!(portletResponse instanceof ActionResponse)) {
+			return false;
+		}
+
 		String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
