@@ -54,7 +54,8 @@ public class CurrencyConverterUpgrade {
 				return new String[][] {
 					new String[] {
 						"67",
-						"com_liferay_currency_converter_portlet_CurrencyConverterPortlet"
+						"com_liferay_currency_converter_portlet_" +
+							"CurrencyConverterPortlet"
 						}
 					};
 				}
