@@ -54,10 +54,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CurrencyConverterPortlet extends MVCPortlet {
 
-	/**
-	* Force upgrades to register before the portlet is registered to prevent
-	* race conditions.
-	*/
 	@Reference(unbind = "-")
 	protected void setCurrencyConverterUpgrade(
 		CurrencyConverterUpgrade currencyConverterUpgrade) {
