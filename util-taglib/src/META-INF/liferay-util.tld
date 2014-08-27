@@ -38,8 +38,8 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>extension</name>
-		<tag-class>com.liferay.taglib.util.ExtensionTag</tag-class>
+		<name>view-extension</name>
+		<tag-class>com.liferay.taglib.util.ViewExtensionTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>extensionId</name>

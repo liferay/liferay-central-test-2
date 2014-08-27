@@ -35,7 +35,7 @@ import javax.servlet.jsp.JspWriter;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ExtensionTag extends TagSupport {
+public class ViewExtensionTag extends TagSupport {
 
 	@Override
 	public int doEndTag() throws JspException {
@@ -107,7 +107,7 @@ public class ExtensionTag extends TagSupport {
 		};
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ExtensionTag.class);
+	private static Log _log = LogFactoryUtil.getLog(ViewExtensionTag.class);
 
 	private String _extensionId;
 

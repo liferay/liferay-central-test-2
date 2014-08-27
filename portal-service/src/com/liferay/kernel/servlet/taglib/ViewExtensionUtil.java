@@ -30,18 +30,18 @@ import java.util.List;
 public class ViewExtensionUtil {
 
 	public static List<ViewExtension> getViewExtensions(String extensionId) {
-		return _instance._extensions.getService(extensionId);
+		return _instance._viewExtensions.getService(extensionId);
 	}
 
 	private ViewExtensionUtil() {
-		_extensions = ServiceTrackerMapFactory.createListServiceTracker(
+		_viewExtensions = ServiceTrackerMapFactory.createListServiceTracker(
 			ViewExtension.class, "extension-id");
 
-		_extensions.open();
+		_viewExtensions.open();
 	}
 
 	private	static final ViewExtensionUtil _instance = new ViewExtensionUtil();
 
-	private ServiceTrackerMap<String, List<ViewExtension>> _extensions;
+	private ServiceTrackerMap<String, List<ViewExtension>> _viewExtensions;
 
 }
