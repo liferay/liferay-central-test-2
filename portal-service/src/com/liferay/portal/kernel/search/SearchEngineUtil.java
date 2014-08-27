@@ -68,6 +68,11 @@ public class SearchEngineUtil {
 		addDocument(getSearchEngineId(document), companyId, document, true);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #addDocument(String, long,
+	 *             Document, boolean)}
+	 */
+	@Deprecated
 	public static void addDocument(
 			String searchEngineId, long companyId, Document document)
 		throws SearchException {
@@ -115,6 +120,11 @@ public class SearchEngineUtil {
 		addDocuments(getSearchEngineId(documents), companyId, documents, false);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #addDocuments(String, long,
+	 *             Collection, boolean)}
+	 */
+	@Deprecated
 	public static void addDocuments(
 			String searchEngineId, long companyId,
 			Collection<Document> documents)
@@ -206,6 +216,11 @@ public class SearchEngineUtil {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #deleteDocument(String, long,
+	 *             String, boolean)}
+	 */
+	@Deprecated
 	public static void deleteDocument(
 			String searchEngineId, long companyId, String uid)
 		throws SearchException {
@@ -248,6 +263,11 @@ public class SearchEngineUtil {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #deleteDocuments(String, long,
+	 *             Collection, boolean)}
+	 */
+	@Deprecated
 	public static void deleteDocuments(
 			String searchEngineId, long companyId, Collection<String> uids)
 		throws SearchException {
@@ -290,6 +310,11 @@ public class SearchEngineUtil {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #deletePortletDocuments(String, long,
+	 *             String, boolean)}
+	 */
+	@Deprecated
 	public static void deletePortletDocuments(
 			String searchEngineId, long companyId, String portletId)
 		throws SearchException {
@@ -907,6 +932,11 @@ public class SearchEngineUtil {
 		updateDocument(getSearchEngineId(document), companyId, document, true);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #updateDocument(String, long,
+	 *             Document, boolean)}
+	 */
+	@Deprecated
 	public static void updateDocument(
 			String searchEngineId, long companyId, Document document)
 		throws SearchException {
@@ -955,6 +985,11 @@ public class SearchEngineUtil {
 			getSearchEngineId(documents), companyId, documents, true);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #updateDocuments(String, long,
+	 *             Collection, boolean)}
+	 */
+	@Deprecated
 	public static void updateDocuments(
 			String searchEngineId, long companyId,
 			Collection<Document> documents)
