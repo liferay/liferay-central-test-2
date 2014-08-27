@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.currency.converter.action;
+package com.liferay.currency.converter.portlet.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
