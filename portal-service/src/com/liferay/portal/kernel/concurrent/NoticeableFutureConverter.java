@@ -67,8 +67,10 @@ public abstract class NoticeableFutureConverter<T, V>
 			if (futureListener instanceof
 					NoticeableFutureConverter.FutureListenerConverter) {
 
-				futureListener =
-					((FutureListenerConverter)futureListener)._futureListener;
+				FutureListenerConverter futureListenerConverter =
+					(FutureListenerConverter)futureListener;
+
+				futureListener = futureListenerConverter._futureListener;
 			}
 
 			return _futureListener.equals(futureListener);

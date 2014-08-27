@@ -338,6 +338,7 @@ public class LocalProcessLauncher {
 					e.printStackTrace(unsyncPrintWriter);
 
 					unsyncPrintWriter.println();
+
 					unsyncPrintWriter.close();
 
 					System.err.write(
@@ -349,6 +350,7 @@ public class LocalProcessLauncher {
 		}
 
 		private final ObjectInputStream _objectInputStream;
+
 	}
 
 }

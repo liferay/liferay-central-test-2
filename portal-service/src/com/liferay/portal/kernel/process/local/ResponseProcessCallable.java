@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.process.local;
 
 import com.liferay.portal.kernel.concurrent.AsyncBroker;
 import com.liferay.portal.kernel.process.ProcessCallable;
-import com.liferay.portal.kernel.process.ProcessException;
 
 import java.io.Serializable;
 
@@ -33,7 +32,7 @@ public class ResponseProcessCallable<T extends Serializable>
 	}
 
 	@Override
-	public Boolean call() throws ProcessException {
+	public Boolean call() {
 		AsyncBroker<Long, Serializable> asyncBroker =
 			AsyncBrokerThreadLocal.getAsyncBroker();
 

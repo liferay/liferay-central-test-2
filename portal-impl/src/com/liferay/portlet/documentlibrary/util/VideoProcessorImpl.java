@@ -522,7 +522,7 @@ public class VideoProcessorImpl
 
 			Future<String> future = processChannel.getProcessNoticeableFuture();
 
-			String processIdentity = Long.toString(
+			String processIdentity = String.valueOf(
 				fileVersion.getFileVersionId());
 
 			futures.put(processIdentity, future);

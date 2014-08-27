@@ -1936,7 +1936,7 @@ public class LocalProcessExecutorTest {
 		implements ProcessCallable<Serializable> {
 
 		@Override
-		public Serializable call() throws ProcessException {
+		public Serializable call() {
 			Thread thread = ReturnWithoutExitProcessCallable._thread;
 
 			Assert.assertNotNull(thread);
