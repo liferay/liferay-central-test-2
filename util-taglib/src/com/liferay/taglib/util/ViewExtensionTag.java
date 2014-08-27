@@ -61,7 +61,7 @@ public class ViewExtensionTag extends TagSupport {
 		List<ViewExtension> viewExtensions =
 			ViewExtensionUtil.getViewExtensions(getExtensionId());
 
-		if (viewExtensions == null || viewExtensions.isEmpty()) {
+		if ((viewExtensions == null) || viewExtensions.isEmpty()) {
 			return SKIP_BODY;
 		}
 
@@ -92,10 +92,11 @@ public class ViewExtensionTag extends TagSupport {
 
 					@Override
 					public void write(int b) throws IOException {
-						JspWriter out = pageContext.getOut();
+						JspWriter jspWriter = pageContext.getOut();
 
-						out.write(b);
+						jspWriter.write(b);
 					}
+
 				};
 			}
 

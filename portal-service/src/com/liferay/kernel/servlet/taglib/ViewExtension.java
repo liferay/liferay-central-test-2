@@ -24,7 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface ViewExtension {
 
-	public void include(HttpServletRequest request, HttpServletResponse response)
+	public void include(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException;
 
 }
