@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.currency.converter.upgrade;
 
 import com.liferay.currency.converter.portlet.CurrencyConverterPortlet;
@@ -68,4 +69,5 @@ public class CurrencyConverterUpgrade {
 	}
 
 	private ReleaseLocalService _releaseLocalService;
+
 }
