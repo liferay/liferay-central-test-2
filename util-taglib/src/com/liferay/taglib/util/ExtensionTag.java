@@ -57,7 +57,7 @@ public class ExtensionTag extends TagSupport {
 	}
 
 	@Override
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		List<ViewExtension> viewExtensions =
 			ViewExtensionUtil.getViewExtensions(getExtensionId());
 
@@ -80,14 +80,14 @@ public class ExtensionTag extends TagSupport {
 		return (HttpServletRequest)pageContext.getRequest();
 	}
 
-	protected HttpServletResponse getResponse() throws IOException {
+	protected HttpServletResponse getResponse() {
 		HttpServletResponse httpServletResponse =
 			(HttpServletResponse)pageContext.getResponse();
 
 		return new HttpServletResponseWrapper(httpServletResponse) {
 
 			@Override
-			public ServletOutputStream getOutputStream() throws IOException {
+			public ServletOutputStream getOutputStream() {
 				return new ServletOutputStream() {
 
 					@Override
@@ -100,7 +100,7 @@ public class ExtensionTag extends TagSupport {
 			}
 
 			@Override
-			public PrintWriter getWriter() throws IOException {
+			public PrintWriter getWriter() {
 				return new PrintWriter(pageContext.getOut(), true);
 			}
 
