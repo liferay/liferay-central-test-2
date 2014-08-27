@@ -22,21 +22,21 @@ import java.util.List;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ViewExtensionUtil {
+public class DynamicIncludeUtil {
 
-	public static List<ViewExtension> getViewExtensions(String extensionId) {
-		return _instance._viewExtensions.getService(extensionId);
+	public static List<DynamicInclude> getDynamicIncludes(String key) {
+		return _instance._dynamicIncludes.getService(key);
 	}
 
-	private ViewExtensionUtil() {
-		_viewExtensions = ServiceTrackerMapFactory.createListServiceTracker(
-			ViewExtension.class, "extension-id");
+	private DynamicIncludeUtil() {
+		_dynamicIncludes = ServiceTrackerMapFactory.createListServiceTracker(
+			DynamicInclude.class, "key");
 
-		_viewExtensions.open();
+		_dynamicIncludes.open();
 	}
 
-	private	static final ViewExtensionUtil _instance = new ViewExtensionUtil();
+	private	static DynamicIncludeUtil _instance = new DynamicIncludeUtil();
 
-	private ServiceTrackerMap<String, List<ViewExtension>> _viewExtensions;
+	private ServiceTrackerMap<String, List<DynamicInclude>> _dynamicIncludes;
 
 }

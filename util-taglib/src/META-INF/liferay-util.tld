@@ -38,11 +38,11 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>view-extension</name>
-		<tag-class>com.liferay.taglib.util.ViewExtensionTag</tag-class>
+		<name>dynamic-include</name>
+		<tag-class>com.liferay.taglib.util.DynamicIncludeTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
-			<name>extensionId</name>
+			<name>key</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

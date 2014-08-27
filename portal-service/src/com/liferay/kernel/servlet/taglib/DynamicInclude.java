@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Carlos Sierra Andrés
  */
-public interface ViewExtension {
+public interface DynamicInclude {
 
 	public void include(
 			HttpServletRequest request, HttpServletResponse response)

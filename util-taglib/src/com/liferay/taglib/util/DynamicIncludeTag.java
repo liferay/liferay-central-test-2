@@ -14,8 +14,8 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.kernel.servlet.taglib.ViewExtension;
-import com.liferay.kernel.servlet.taglib.ViewExtensionUtil;
+import com.liferay.kernel.servlet.taglib.DynamicInclude;
+import com.liferay.kernel.servlet.taglib.DynamicIncludeUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.taglib.TagSupport;
@@ -35,20 +35,20 @@ import javax.servlet.jsp.JspWriter;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ViewExtensionTag extends TagSupport {
+public class DynamicIncludeTag extends TagSupport {
 
 	@Override
 	public int doEndTag() throws JspException {
-		List<ViewExtension> viewExtensions =
-			ViewExtensionUtil.getViewExtensions(getExtensionId());
+		List<DynamicInclude> dynamicIncludes =
+			DynamicIncludeUtil.getDynamicIncludes(getKey());
 
-		if ((viewExtensions != null) && !viewExtensions.isEmpty()) {
-			for (ViewExtension viewExtension : viewExtensions) {
+		if ((dynamicIncludes != null) && !dynamicIncludes.isEmpty()) {
+			for (DynamicInclude dynamicInclude : dynamicIncludes) {
 				try {
-					viewExtension.include(getRequest(), getResponse());
+					dynamicInclude.include(getRequest(), getResponse());
 				}
 				catch (Exception e) {
-					_log.error(e.getLocalizedMessage(), e);
+					_log.error(e, e);
 				}
 			}
 		}
@@ -58,22 +58,22 @@ public class ViewExtensionTag extends TagSupport {
 
 	@Override
 	public int doStartTag() {
-		List<ViewExtension> viewExtensions =
-			ViewExtensionUtil.getViewExtensions(getExtensionId());
+		List<DynamicInclude> dynamicIncludes =
+			DynamicIncludeUtil.getDynamicIncludes(getKey());
 
-		if ((viewExtensions == null) || viewExtensions.isEmpty()) {
+		if ((dynamicIncludes == null) || dynamicIncludes.isEmpty()) {
 			return SKIP_BODY;
 		}
 
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public String getExtensionId() {
-		return _extensionId;
+	public String getKey() {
+		return _key;
 	}
 
-	public void setExtensionId(String extensionId) {
-		_extensionId = extensionId;
+	public void setKey(String key) {
+		_key = key;
 	}
 
 	protected HttpServletRequest getRequest() {
@@ -108,8 +108,8 @@ public class ViewExtensionTag extends TagSupport {
 		};
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ViewExtensionTag.class);
+	private static Log _log = LogFactoryUtil.getLog(DynamicIncludeTag.class);
 
-	private String _extensionId;
+	private String _key;
 
 }
