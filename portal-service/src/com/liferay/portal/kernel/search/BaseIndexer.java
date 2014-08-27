@@ -360,6 +360,7 @@ public abstract class BaseIndexer implements Indexer {
 		return true;
 	}
 
+	@Override
 	public boolean isCommitImmediately() {
 		return _commitImmediately;
 	}
