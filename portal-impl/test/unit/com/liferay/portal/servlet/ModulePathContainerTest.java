@@ -66,8 +66,7 @@ public class ModulePathContainerTest {
 		String modulePath = PortletKeys.PORTAL + ":/js/javascript.js";
 
 		Assert.assertEquals(
-			PortletKeys.PORTAL,
-			ComboServlet.getModulePortletId(modulePath));
+			PortletKeys.PORTAL, ComboServlet.getModulePortletId(modulePath));
 		Assert.assertEquals(
 			"/js/javascript.js", ComboServlet.getResourcePath(modulePath));
 	}
@@ -77,8 +76,7 @@ public class ModulePathContainerTest {
 		String modulePath = PortletKeys.PORTAL + ":";
 
 		Assert.assertEquals(
-			PortletKeys.PORTAL,
-			ComboServlet.getModulePortletId(modulePath));
+			PortletKeys.PORTAL, ComboServlet.getModulePortletId(modulePath));
 		Assert.assertEquals(
 			StringPool.BLANK, ComboServlet.getResourcePath(modulePath));
 	}
