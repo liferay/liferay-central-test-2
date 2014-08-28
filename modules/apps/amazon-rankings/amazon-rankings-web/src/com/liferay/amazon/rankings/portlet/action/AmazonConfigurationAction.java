@@ -32,7 +32,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Brian Wing Shun Chan
  */
 @Component(
-	immediate = true, property = {
+	immediate = true,
+	property = {
 		"javax.portlet.name=com_liferay_amazon_rankings_portlet_AmazonRankingsPortlet"
 	},
 	service = ConfigurationAction.class
