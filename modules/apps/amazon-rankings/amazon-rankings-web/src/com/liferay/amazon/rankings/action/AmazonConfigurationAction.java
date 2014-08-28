@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true, property = {
-			"javax.portlet.name=com_liferay_amazon_rankings_portlet_AmazonRankingsPortlet"
+		"javax.portlet.name=com_liferay_amazon_rankings_portlet_AmazonRankingsPortlet"
 	},
 	service = ConfigurationAction.class
 )
