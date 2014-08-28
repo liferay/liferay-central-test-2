@@ -170,7 +170,7 @@ public class DLFileEntryLocalServiceImpl
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
 		String extension = DLAppUtil.getExtension(title, sourceFileName);
-		String filename = getFilename(title, extension);
+		String filename = DLUtil.getFilename(title, extension);
 
 		if (fileEntryTypeId == -1) {
 			fileEntryTypeId =
@@ -2009,19 +2009,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	protected String getFilename(String title, String extension) {
-		String filename = StringUtil.replace(
-			title, StringPool.SLASH, StringPool.UNDERLINE);
-
-		if (Validator.isNotNull(extension) &&
-			!filename.endsWith(StringPool.PERIOD + extension)) {
-
-			filename += StringPool.PERIOD + extension;
-		}
-
-		return filename;
-	}
-
 	protected String getNextVersion(
 			DLFileEntry dlFileEntry, boolean majorVersion, int workflowAction)
 		throws PortalException {
@@ -2359,7 +2346,7 @@ public class DLFileEntryLocalServiceImpl
 				}
 			}
 
-			String filename = getFilename(title, extension);
+			String filename = DLUtil.getFilename(title, extension);
 
 			Date now = new Date();
 
