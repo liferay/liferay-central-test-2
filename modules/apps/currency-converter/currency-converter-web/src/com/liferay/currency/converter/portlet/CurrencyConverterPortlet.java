@@ -46,9 +46,9 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.portlet.display-name=Currency Converter",
 		"javax.portlet.portlet.expiration-cache=0",
+		"javax.portlet.portletModes=text/html;edit,edit-guest",
 		"javax.portlet.preferences=classpath:/META-INF/portlet-preferences/default-portlet-preferences.xml",
-		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.portletModes=text/html;edit,edit-guest"
+		"javax.portlet.resource-bundle=content.Language"
 	},
 	service = Portlet.class
 )
