@@ -195,14 +195,14 @@ public class UserServiceTest {
 
 		@Test
 		public void shouldUnsetGroupAdmin() throws Exception {
-			User otherGroupAdminUser = UserTestUtil.addGroupAdminUser(_group);
+			User groupAdminUser = UserTestUtil.addGroupAdminUser(_group);
 
 			_unsetGroupUsers(
-				_group.getGroupId(), _groupAdminUser, otherGroupAdminUser);
+				_group.getGroupId(), _groupAdminUser, groupAdminUser);
 
 			Assert.assertTrue(
 				UserLocalServiceUtil.hasGroupUser(
-					_group.getGroupId(), otherGroupAdminUser.getUserId()));
+					_group.getGroupId(), groupAdminUser.getUserId()));
 		}
 
 		@Test
@@ -556,11 +556,11 @@ public class UserServiceTest {
 
 			int initialInboxSize = MailServiceTestUtil.getInboxSize();
 
-			boolean isPasswordSent =
+			boolean sentPassword =
 				UserServiceUtil.sendPasswordByEmailAddress(
 					_user.getCompanyId(), _user.getEmailAddress());
 
-			Assert.assertTrue(isPasswordSent);
+			Assert.assertTrue(sentPassword);
 			Assert.assertEquals(
 				initialInboxSize + 1, MailServiceTestUtil.getInboxSize());
 			Assert.assertTrue(
@@ -574,11 +574,11 @@ public class UserServiceTest {
 
 			int initialInboxSize = MailServiceTestUtil.getInboxSize();
 
-			boolean isPasswordSent =
+			boolean sentPassword =
 				UserServiceUtil.sendPasswordByScreenName(
 					_user.getCompanyId(), _user.getScreenName());
 
-			Assert.assertTrue(isPasswordSent);
+			Assert.assertTrue(sentPassword);
 			Assert.assertEquals(
 				initialInboxSize + 1, MailServiceTestUtil.getInboxSize());
 			Assert.assertTrue(
@@ -592,10 +592,10 @@ public class UserServiceTest {
 
 			givenThatCompanySendsNewPassword();
 
-			boolean isPasswordSent = UserServiceUtil.sendPasswordByUserId(
+			boolean sentPassword = UserServiceUtil.sendPasswordByUserId(
 				_user.getUserId());
 
-			Assert.assertTrue(isPasswordSent);
+			Assert.assertTrue(sentPassword);
 			Assert.assertEquals(
 				initialInboxSize + 1, MailServiceTestUtil.getInboxSize());
 			Assert.assertTrue(
@@ -609,11 +609,11 @@ public class UserServiceTest {
 
 			int initialInboxSize = MailServiceTestUtil.getInboxSize();
 
-			boolean isPasswordSent =
+			boolean sentPassword =
 				UserServiceUtil.sendPasswordByEmailAddress(
 					_user.getCompanyId(), _user.getEmailAddress());
 
-			Assert.assertFalse(isPasswordSent);
+			Assert.assertFalse(sentPassword);
 			Assert.assertEquals(
 				initialInboxSize + 1, MailServiceTestUtil.getInboxSize());
 			Assert.assertTrue(
@@ -627,11 +627,11 @@ public class UserServiceTest {
 
 			int initialInboxSize = MailServiceTestUtil.getInboxSize();
 
-			boolean isPasswordSent =
+			boolean sentPassword =
 				UserServiceUtil.sendPasswordByScreenName(
 					_user.getCompanyId(), _user.getScreenName());
 
-			Assert.assertFalse(isPasswordSent);
+			Assert.assertFalse(sentPassword);
 			Assert.assertEquals(
 				initialInboxSize + 1, MailServiceTestUtil.getInboxSize());
 			Assert.assertTrue(
@@ -645,10 +645,10 @@ public class UserServiceTest {
 
 			int initialInboxSize = MailServiceTestUtil.getInboxSize();
 
-			boolean isPasswordSent = UserServiceUtil.sendPasswordByUserId(
+			boolean sentPassword = UserServiceUtil.sendPasswordByUserId(
 				_user.getUserId());
 
-			Assert.assertFalse(isPasswordSent);
+			Assert.assertFalse(sentPassword);
 			Assert.assertEquals(
 				initialInboxSize + 1, MailServiceTestUtil.getInboxSize());
 			Assert.assertTrue(
@@ -680,7 +680,6 @@ public class UserServiceTest {
 			portletPreferences.setValue(
 				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
 				Boolean.FALSE.toString());
-
 			portletPreferences.setValue(
 				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK,
 				Boolean.TRUE.toString());
