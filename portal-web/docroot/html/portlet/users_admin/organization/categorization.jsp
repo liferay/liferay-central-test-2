@@ -22,11 +22,11 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 <aui:model-context bean="<%= organization %>" model="<%= Organization.class %>" />
 
-<h3><liferay-ui:message key="categorization" /></h3>
-
 <liferay-ui:asset-categories-error />
 
 <liferay-ui:asset-tags-error />
+
+<h3><liferay-ui:message key="categorization" /></h3>
 
 <aui:fieldset>
 	<aui:input name="categories" type="assetCategories" />

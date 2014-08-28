@@ -22,11 +22,11 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
 
-<h3><liferay-ui:message key="categorization" /></h3>
-
 <liferay-ui:asset-categories-error />
 
 <liferay-ui:asset-tags-error />
+
+<h3><liferay-ui:message key="categorization" /></h3>
 
 <aui:fieldset>
 	<aui:input name="categories" type="assetCategories" />
