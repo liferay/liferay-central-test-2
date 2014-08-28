@@ -139,14 +139,6 @@ public class DynamicCSSUtil {
 
 		boolean themeCssFastLoad = _isThemeCssFastLoad(request, themeDisplay);
 
-		URLConnection resourceURLConnection = null;
-
-		URL resourceURL = servletContext.getResource(resourcePath);
-
-		if (resourceURL != null) {
-			resourceURLConnection = resourceURL.openConnection();
-		}
-
 		URLConnection cacheResourceURLConnection = null;
 
 		URL cacheResourceURL = _getCacheResourceURL(
