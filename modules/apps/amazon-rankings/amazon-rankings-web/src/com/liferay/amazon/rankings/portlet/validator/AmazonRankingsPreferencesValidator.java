@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.amazon.rankings;
+package com.liferay.amazon.rankings.portlet.validator;
 
 import com.liferay.amazon.rankings.model.AmazonRankings;
 import com.liferay.amazon.rankings.util.AmazonRankingsUtil;
