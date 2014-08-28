@@ -3339,6 +3339,18 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>lib/portal/spring-struts.jar</file-name>
+		<version>3.2.10</version>
+		<project-name>Spring</project-name>
+		<project-url>http://www.springframework.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>lib/portal/spring-tx.jar</file-name>
 		<version>3.2.10</version>
 		<project-name>Spring</project-name>
@@ -3376,18 +3388,6 @@
 	</library>
 	<library>
 		<file-name>lib/portal/spring-webmvc-portlet.jar</file-name>
-		<version>3.2.10</version>
-		<project-name>Spring</project-name>
-		<project-url>http://www.springframework.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>lib/portal/spring-struts.jar</file-name>
 		<version>3.2.10</version>
 		<project-name>Spring</project-name>
 		<project-url>http://www.springframework.org</project-url>
