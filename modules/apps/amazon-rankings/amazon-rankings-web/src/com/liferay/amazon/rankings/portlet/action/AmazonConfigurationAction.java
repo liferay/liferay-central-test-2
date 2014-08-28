@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.amazon.rankings.action;
+package com.liferay.amazon.rankings.portlet.action;
 
 import com.liferay.amazon.rankings.model.AmazonRankings;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
