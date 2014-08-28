@@ -112,8 +112,8 @@ public class JavaClass {
 			String fileName, String absolutePath, String content, String indent)
 		throws Exception {
 
-		_absolutePath = absolutePath;
 		_fileName = fileName;
+		_absolutePath = absolutePath;
 		_content = content;
 		_indent = indent;
 	}
