@@ -16,7 +16,6 @@
 		<execute action="PGMessageboardsAddcategory#type" locator-key1="NAME_FIELD" value1="${categoryNullName}" />
 		<execute action="PGMessageboardsAddcategory#type" locator-key1="DESCRIPTION_FIELD" value1="${categoryDescription}" />
 		<execute action="PGMessageboardsAddcategory#click" locator-key1="SAVE_BUTTON" />
-
 		<execute action="PGMessageboardsAddcategory#assertTextEquals" locator-key1="REQUIRED_ALERT" value1="This field is required." />
 	</command>
 
