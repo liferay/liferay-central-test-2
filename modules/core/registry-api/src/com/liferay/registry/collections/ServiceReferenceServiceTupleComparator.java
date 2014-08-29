@@ -25,28 +25,29 @@ public class ServiceReferenceServiceTupleComparator<S>
 	implements Comparator<ServiceReferenceServiceTuple<S>> {
 
 	public ServiceReferenceServiceTupleComparator(
-		Comparator<ServiceReference<S>> delegatee) {
+		Comparator<ServiceReference<S>> comparator) {
 
-		_delegatee = delegatee;
+		_comparator = comparator;
 	}
 
 	@Override
 	public int compare(
-		ServiceReferenceServiceTuple<S> sr1,
-		ServiceReferenceServiceTuple<S> sr2) {
+		ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple1,
+		ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple2) {
 
-		if (sr1 == null) {
-			if (sr2 == null) {
+		if (serviceReferenceServiceTuple1 == null) {
+			if (serviceReferenceServiceTuple2 == null) {
 				return 0;
 			}
 
 			return -1;
 		}
 
-		return _delegatee.compare(
-			sr1.getServiceReference(), sr2.getServiceReference());
+		return _comparator.compare(
+			serviceReferenceServiceTuple1.getServiceReference(),
+			serviceReferenceServiceTuple2.getServiceReference());
 	}
 
-	private Comparator<ServiceReference<S>> _delegatee;
+	private Comparator<ServiceReference<S>> _comparator;
 
 }

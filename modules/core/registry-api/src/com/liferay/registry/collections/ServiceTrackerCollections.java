@@ -154,7 +154,7 @@ public class ServiceTrackerCollections {
 
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
 			clazz, filterString, serviceReferenceMapper,
-				new MultiValueServiceTrackerBucketFactory<S>(comparator));
+			new MultiValueServiceTrackerBucketFactory<S>(comparator));
 	}
 
 	public static <S> ServiceTrackerMap<String, S> singleValueMap(

@@ -30,8 +30,11 @@ public class ServiceReferenceServiceTuple<S>
 	}
 
 	@Override
-	public int compareTo(ServiceReferenceServiceTuple<S> o) {
-		return getServiceReference().compareTo(o.getServiceReference());
+	public int compareTo(
+		ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple) {
+
+		return _serviceReference.compareTo(
+			serviceReferenceServiceTuple.getServiceReference());
 	}
 
 	@Override
