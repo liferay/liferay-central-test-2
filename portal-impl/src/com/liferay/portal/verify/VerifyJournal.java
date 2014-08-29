@@ -65,8 +65,8 @@ public class VerifyJournal extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		updateFolderAssets();
 		verifyCreateDate();
+		updateFolderAssets();
 		verifyOracleNewLine();
 		verifyPermissionsAndAssets();
 		verifySearch();
@@ -194,10 +194,10 @@ public class VerifyJournal extends VerifyProcess {
 
 				@Override
 				public void performAction(Object object) {
-					JournalArticleResource journalArticleResource =
+					JournalArticleResource articleResource =
 						(JournalArticleResource)object;
 
-					verifyCreateDate(journalArticleResource);
+					verifyCreateDate(articleResource);
 				}
 
 			});
@@ -209,29 +209,26 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyCreateDate(
-		JournalArticleResource journalArticleResource) {
-
-		List<JournalArticle> journalArticles =
+	protected void verifyCreateDate(JournalArticleResource articleResource) {
+		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getArticles(
-				journalArticleResource.getGroupId(),
-				journalArticleResource.getArticleId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, new ArticleVersionComparator(true));
+				articleResource.getGroupId(), articleResource.getArticleId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new ArticleVersionComparator(true));
 
-		if (journalArticles.size() <= 1) {
+		if (articles.size() <= 1) {
 			return;
 		}
 
-		JournalArticle firstArticle = journalArticles.get(0);
+		JournalArticle firstArticle = articles.get(0);
 
 		Date createDate = firstArticle.getCreateDate();
 
-		for (JournalArticle journalArticle : journalArticles) {
-			if (!createDate.equals(journalArticle.getCreateDate())) {
-				journalArticle.setCreateDate(createDate);
+		for (JournalArticle article : articles) {
+			if (!createDate.equals(article.getCreateDate())) {
+				article.setCreateDate(createDate);
 
-				JournalArticleLocalServiceUtil.updateJournalArticle(
-					journalArticle);
+				JournalArticleLocalServiceUtil.updateJournalArticle(article);
 			}
 		}
 	}

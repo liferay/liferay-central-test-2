@@ -47,10 +47,9 @@ public class VerifyWiki extends VerifyProcess {
 
 				@Override
 				public void performAction(Object object) {
-					WikiPageResource wikiPageResource =
-						(WikiPageResource)object;
+					WikiPageResource pageResource = (WikiPageResource)object;
 
-					verifyCreateDate(wikiPageResource);
+					verifyCreateDate(pageResource);
 				}
 
 			});
@@ -62,26 +61,25 @@ public class VerifyWiki extends VerifyProcess {
 		}
 	}
 
-	protected void verifyCreateDate(WikiPageResource wikiPageResource) {
-		List<WikiPage> wikiPages =
-			WikiPageLocalServiceUtil.getPages(
-				wikiPageResource.getNodeId(), wikiPageResource.getTitle(),
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				new PageVersionComparator(true));
+	protected void verifyCreateDate(WikiPageResource pageResource) {
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
+			pageResource.getNodeId(), pageResource.getTitle(),
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new PageVersionComparator(true));
 
-		if (wikiPages.size() <= 1) {
+		if (pages.size() <= 1) {
 			return;
 		}
 
-		WikiPage firstPage = wikiPages.get(0);
+		WikiPage firstPage = pages.get(0);
 
 		Date createDate = firstPage.getCreateDate();
 
-		for (WikiPage wikiPage : wikiPages) {
-			if (!createDate.equals(wikiPage.getCreateDate())) {
-				wikiPage.setCreateDate(createDate);
+		for (WikiPage page : pages) {
+			if (!createDate.equals(page.getCreateDate())) {
+				page.setCreateDate(createDate);
 
-				WikiPageLocalServiceUtil.updateWikiPage(wikiPage);
+				WikiPageLocalServiceUtil.updateWikiPage(page);
 			}
 		}
 	}
