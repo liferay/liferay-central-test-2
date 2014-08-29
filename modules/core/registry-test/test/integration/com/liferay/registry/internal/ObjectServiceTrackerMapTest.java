@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jboss.arquillian.junit.Arquillian;
@@ -167,8 +168,7 @@ public class ObjectServiceTrackerMapTest {
 						return -1;
 					}
 
-				}
-			);
+				});
 
 		serviceTrackerMap.open();
 
@@ -262,26 +262,29 @@ public class ObjectServiceTrackerMapTest {
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			createServiceTrackerMap();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(new TrackedOne());
-		ServiceRegistration<TrackedOne> sr2 = registerService(new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
+			new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
+			new TrackedOne());
 
-		sr2.unregister();
+		serviceRegistration2.unregister();
 
-		sr2 = registerService(new TrackedOne());
+		serviceRegistration2 = registerService(new TrackedOne());
 
-		sr2.unregister();
+		serviceRegistration2.unregister();
 
-		sr1.unregister();
+		serviceRegistration1.unregister();
 
-		Collection<AtomicInteger> values =
-			registryWrapper.getReferences().values();
+		Map<ServiceReference<?>, AtomicInteger> serviceReferenceCountsMap =
+			registryWrapper.getServiceReferenceCountsMap();
 
-		Assert.assertEquals(3, values.size());
+		Collection<AtomicInteger> serviceReferenceCounts =
+			serviceReferenceCountsMap.values();
 
-		for (AtomicInteger i : registryWrapper.getReferences().values()) {
-			int count = i.get();
+		Assert.assertEquals(3, serviceReferenceCounts.size());
 
-			Assert.assertEquals(0, count);
+		for (AtomicInteger serviceReferenceCount : serviceReferenceCounts) {
+			Assert.assertEquals(0, serviceReferenceCount.get());
 		}
 
 		serviceTrackerMap.close();
@@ -300,42 +303,33 @@ public class ObjectServiceTrackerMapTest {
 				TrackedOne.class, null,
 				new ServiceReferenceMapper<TrackedOne>() {
 
-				@Override
-				public void map(
-					ServiceReference<?> serviceReference,
-					Emitter<TrackedOne> emitter) {
-					//noop;
-				}
-			}
-		);
+					@Override
+					public void map(
+						ServiceReference<?> serviceReference,
+						Emitter<TrackedOne> emitter) {
+					}
+
+				});
 
 		serviceTrackerMap.open();
 
-		ServiceRegistration<TrackedOne> sr1 = registerService(new TrackedOne());
-		ServiceRegistration<TrackedOne> sr2 = registerService(new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
+			new TrackedOne());
+		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
+			new TrackedOne());
 
-		Collection<AtomicInteger> values = registryWrapper.getReferences().values();
+		Map<ServiceReference<?>, AtomicInteger> serviceReferenceCountsMap =
+			registryWrapper.getServiceReferenceCountsMap();
 
-		Assert.assertEquals(0, values.size());
+		Collection<AtomicInteger> serviceReferenceCounts =
+			serviceReferenceCountsMap.values();
 
-		for (AtomicInteger i : values) {
-			int count = i.get();
+		Assert.assertEquals(0, serviceReferenceCounts.size());
 
-			Assert.assertEquals(0, count);
-		}
+		serviceRegistration1.unregister();
+		serviceRegistration2.unregister();
 
-		sr1.unregister();
-		sr2.unregister();
-
-		values = registryWrapper.getReferences().values();
-
-		Assert.assertEquals(0, values.size());
-
-		for (AtomicInteger i : values) {
-			int count = i.get();
-
-			Assert.assertEquals(0, count);
-		}
+		Assert.assertEquals(0, serviceReferenceCounts.size());
 
 		serviceTrackerMap.close();
 	}
