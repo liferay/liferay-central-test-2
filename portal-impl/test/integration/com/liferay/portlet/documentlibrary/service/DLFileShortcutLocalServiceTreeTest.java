@@ -51,7 +51,7 @@ public class DLFileShortcutLocalServiceTreeTest {
 	}
 
 	@Test
-	public void testFileShortcutTreepathWhenMovingSubfolderWithFileShortcut()
+	public void testFileShortcutTreePathWhenMovingSubfolderWithFileShortcut()
 		throws Exception {
 
 		Folder folderA = DLAppTestUtil.addFolder(

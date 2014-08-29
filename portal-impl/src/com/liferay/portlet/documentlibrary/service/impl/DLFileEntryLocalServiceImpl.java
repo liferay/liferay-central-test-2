@@ -1575,8 +1575,7 @@ public class DLFileEntryLocalServiceImpl
 					dynamicQuery.add(treePathProperty.ne(treePath));
 				}
 
-			}
-		);
+			});
 
 		final Indexer indexer = IndexerRegistryUtil.getIndexer(
 			DLFileEntry.class.getName());
@@ -1588,13 +1587,13 @@ public class DLFileEntryLocalServiceImpl
 				public void performAction(Object object)
 					throws PortalException {
 
-					DLFileEntry entry = (DLFileEntry)object;
+					DLFileEntry dlFileEntry = (DLFileEntry)object;
 
-					entry.setTreePath(treePath);
+					dlFileEntry.setTreePath(treePath);
 
-					updateDLFileEntry(entry);
+					updateDLFileEntry(dlFileEntry);
 
-					indexer.reindex(entry);
+					indexer.reindex(dlFileEntry);
 				}
 
 			});

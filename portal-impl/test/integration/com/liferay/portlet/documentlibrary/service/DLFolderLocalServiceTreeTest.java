@@ -42,7 +42,7 @@ import org.junit.runner.RunWith;
 public class DLFolderLocalServiceTreeTest extends BaseLocalServiceTreeTestCase {
 
 	@Test
-	public void testFolderTreepathWhenMovingFolderWithSubfolder()
+	public void testFolderTreePathWhenMovingFolderWithSubfolder()
 		throws Exception {
 
 		List<Folder> folders = new ArrayList<Folder>();
@@ -70,11 +70,12 @@ public class DLFolderLocalServiceTreeTest extends BaseLocalServiceTreeTestCase {
 			TestPropsValues.getUserId(), folderAA.getFolderId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
 
-		for (Folder curFolder : folders) {
-			DLFolder folder = DLFolderLocalServiceUtil.getFolder(
-				curFolder.getFolderId());
+		for (Folder folder : folders) {
+			DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(
+				folder.getFolderId());
 
-			Assert.assertEquals(folder.buildTreePath(), folder.getTreePath());
+			Assert.assertEquals(
+				dlFolder.buildTreePath(), dlFolder.getTreePath());
 		}
 	}
 

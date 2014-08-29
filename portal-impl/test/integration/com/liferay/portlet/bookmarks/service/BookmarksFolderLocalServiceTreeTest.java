@@ -41,7 +41,7 @@ public class BookmarksFolderLocalServiceTreeTest
 	extends BaseLocalServiceTreeTestCase {
 
 	@Test
-	public void testFolderTreepathWhenMovingFolderWithSubfolder()
+	public void testFolderTreePathWhenMovingFolderWithSubfolder()
 		throws Exception {
 
 		List<BookmarksFolder> folders = new ArrayList<BookmarksFolder>();
@@ -65,13 +65,8 @@ public class BookmarksFolderLocalServiceTreeTest
 			folderAA.getFolderId(),
 			BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		for (BookmarksFolder curFolder : folders) {
-			BookmarksFolder bookmarksFolder =
-				BookmarksFolderLocalServiceUtil.getFolder(
-					curFolder.getFolderId());
-
-			Assert.assertEquals(
-				bookmarksFolder.buildTreePath(), bookmarksFolder.getTreePath());
+		for (BookmarksFolder folder : folders) {
+			Assert.assertEquals(folder.buildTreePath(), folder.getTreePath());
 		}
 	}
 

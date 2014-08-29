@@ -170,8 +170,7 @@ public class DLFileVersionLocalServiceImpl
 					dynamicQuery.add(treePathProperty.ne(treePath));
 				}
 
-			}
-		);
+			});
 
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
@@ -180,11 +179,11 @@ public class DLFileVersionLocalServiceImpl
 				public void performAction(Object object)
 					throws PortalException {
 
-					DLFileVersion version = (DLFileVersion)object;
+					DLFileVersion dlFileVersion = (DLFileVersion)object;
 
-					version.setTreePath(treePath);
+					dlFileVersion.setTreePath(treePath);
 
-					updateDLFileVersion(version);
+					updateDLFileVersion(dlFileVersion);
 				}
 
 			});

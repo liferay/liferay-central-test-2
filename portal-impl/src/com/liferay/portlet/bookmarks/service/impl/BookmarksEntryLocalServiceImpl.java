@@ -529,8 +529,7 @@ public class BookmarksEntryLocalServiceImpl
 					dynamicQuery.add(treePathProperty.ne(treePath));
 				}
 
-			}
-		);
+			});
 
 		final Indexer indexer = IndexerRegistryUtil.getIndexer(
 			BookmarksEntry.class.getName());

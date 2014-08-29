@@ -4147,8 +4147,7 @@ public class JournalArticleLocalServiceImpl
 					dynamicQuery.add(treePathProperty.ne(treePath));
 				}
 
-			}
-		);
+			});
 
 		final Indexer indexer = IndexerRegistryUtil.getIndexer(
 			JournalArticle.class.getName());

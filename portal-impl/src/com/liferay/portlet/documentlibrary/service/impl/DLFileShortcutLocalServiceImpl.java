@@ -332,8 +332,7 @@ public class DLFileShortcutLocalServiceImpl
 					dynamicQuery.add(treePathProperty.ne(treePath));
 				}
 
-			}
-		);
+			});
 
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
@@ -342,11 +341,11 @@ public class DLFileShortcutLocalServiceImpl
 				public void performAction(Object object)
 					throws PortalException {
 
-					DLFileShortcut shortcut = (DLFileShortcut)object;
+					DLFileShortcut dlFileShortcut = (DLFileShortcut)object;
 
-					shortcut.setTreePath(treePath);
+					dlFileShortcut.setTreePath(treePath);
 
-					updateDLFileShortcut(shortcut);
+					updateDLFileShortcut(dlFileShortcut);
 				}
 
 			});

@@ -71,10 +71,7 @@ public class JournalFolderLocalServiceTreeTest
 			folderAA.getFolderId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
 
-		for (JournalFolder curFolder : folders) {
-			JournalFolder folder = JournalFolderLocalServiceUtil.getFolder(
-				curFolder.getFolderId());
-
+		for (JournalFolder folder : folders) {
 			Assert.assertEquals(folder.buildTreePath(), folder.getTreePath());
 		}
 	}

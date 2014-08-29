@@ -52,7 +52,7 @@ public class DLFileVersionLocalServiceTreeTest {
 	}
 
 	@Test
-	public void testFileVersionTreepathWhenMovingSubfolderWithFileVersion()
+	public void testFileVersionTreePathWhenMovingSubfolderWithFileVersion()
 		throws Exception {
 
 		Folder folderA = DLAppTestUtil.addFolder(
