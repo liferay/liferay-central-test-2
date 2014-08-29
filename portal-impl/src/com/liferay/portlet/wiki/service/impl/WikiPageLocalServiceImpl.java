@@ -418,11 +418,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		checkNodeChange(nodeId, title, newNodeId);
 
-		serviceContext.setCommand(Constants.MOVE);
-
 		WikiPage oldPage = getPage(nodeId, title);
 
 		oldPage.setParentTitle(StringPool.BLANK);
+
+		serviceContext.setCommand(Constants.MOVE);
 
 		updatePage(
 			userId, oldPage, newNodeId, oldPage.getTitle(),
@@ -1689,8 +1689,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
-		serviceContext.setCommand(Constants.RENAME);
-
 		WikiPage page = getPage(nodeId, title);
 
 		String summary = page.getSummary();
@@ -1700,6 +1698,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			summary = StringPool.BLANK;
 		}
+
+		serviceContext.setCommand(Constants.RENAME);
 
 		updatePage(
 			userId, page, 0, newTitle, page.getContent(), summary,
