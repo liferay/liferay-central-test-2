@@ -33,9 +33,7 @@ import java.util.Set;
  */
 public class ReflectionUtil {
 
-	public static final Error SHOULD_NEVER_HAPPEN_ERROR = new AssertionError(
-		"This error should never happen, if it does happen," +
-			"the code must be broken");
+	public static final Error SHOULD_NEVER_HAPPEN_ERROR = new AssertionError();
 
 	public static Class<?> getAnnotationDeclaringClass(
 		Class<? extends Annotation> annotationClass, Class<?> clazz) {
