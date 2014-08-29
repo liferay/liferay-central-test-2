@@ -96,11 +96,12 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 		}
 
 		private T _value;
+
 	}
 
 	private class ServiceReferenceServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer<S, ServiceReferenceServiceTuple<S>>
-			{
+		implements
+			ServiceTrackerCustomizer<S, ServiceReferenceServiceTuple<S>> {
 
 		@Override
 		public ServiceReferenceServiceTuple<S> addingService(
@@ -108,10 +109,8 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 			final Registry registry = RegistryUtil.getRegistry();
 
-			//This holder is used to know if some key has been emitted in the
-			//mapper
-			final Holder<ServiceReferenceServiceTuple<S>>
-				tupleHolder = new Holder<ServiceReferenceServiceTuple<S>>();
+			final Holder<ServiceReferenceServiceTuple<S>> holder =
+				new Holder<ServiceReferenceServiceTuple<S>>();
 
 			_serviceReferenceMapper.map(
 				serviceReference,
@@ -136,40 +135,44 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 						}
 
 						ServiceReferenceServiceTuple<S>
-							serviceReferenceServiceTuple = tupleHolder.get();
+							serviceReferenceServiceTuple = holder.get();
 
 						if (serviceReferenceServiceTuple == null) {
 							S service = registry.getService(serviceReference);
 
 							serviceReferenceServiceTuple =
-									new ServiceReferenceServiceTuple<S>(
-										serviceReference, service);
+								new ServiceReferenceServiceTuple<S>(
+									serviceReference, service);
 
-							tupleHolder.set(serviceReferenceServiceTuple);
+							holder.set(serviceReferenceServiceTuple);
 						}
 
 						serviceTrackerBucket.store(
 							serviceReferenceServiceTuple);
 					}
+
 				});
 
-			return tupleHolder.get();
+			return holder.get();
 		}
 
 		@Override
 		public void modifiedService(
 			ServiceReference<S> service,
-			ServiceReferenceServiceTuple<S> tuple) {
+			ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple) {
 
-			removedService(tuple.getServiceReference(), tuple);
+			removedService(
+				serviceReferenceServiceTuple.getServiceReference(),
+				serviceReferenceServiceTuple);
 
-			addingService(tuple.getServiceReference());
+			addingService(serviceReferenceServiceTuple.getServiceReference());
 		}
 
 		@Override
 		public void removedService(
 			final ServiceReference<S> serviceReference,
-			final ServiceReferenceServiceTuple<S> tuple) {
+			final ServiceReferenceServiceTuple<S>
+				serviceReferenceServiceTuple) {
 
 			_serviceReferenceMapper.map(
 				serviceReference,
@@ -184,7 +187,8 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 							return;
 						}
 
-						serviceTrackerBucket.remove(tuple);
+						serviceTrackerBucket.remove(
+							serviceReferenceServiceTuple);
 
 						if (serviceTrackerBucket.isDisposable()) {
 							_serviceTrackerBuckets.remove(key);
@@ -196,6 +200,7 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 			registry.ungetService(serviceReference);
 		}
+
 	}
 
 }
