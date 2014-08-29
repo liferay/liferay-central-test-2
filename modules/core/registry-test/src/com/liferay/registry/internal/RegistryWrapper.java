@@ -30,8 +30,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 */
 public class RegistryWrapper implements Registry {
 
-	public RegistryWrapper(Registry instance) {
-		_registry = instance;
+	public RegistryWrapper(Registry registry) {
+		_registry = registry;
 	}
 
 	@Override
