@@ -82,7 +82,7 @@ public class AuthPublicPathRegistry {
 	}
 
 	private static AuthPublicPathRegistry _instance =
-	new AuthPublicPathRegistry();
+		new AuthPublicPathRegistry();
 
 	private Set<String> _paths = new ConcurrentHashSet<>();
 	private StringServiceRegistrationMap<AuthPublicPath> _serviceRegistrations =
