@@ -44,8 +44,8 @@ public class ServiceReferenceServiceTuple<S>
 			return false;
 		}
 
-		ServiceReferenceServiceTuple serviceReferenceServiceTuple =
-			(ServiceReferenceServiceTuple)obj;
+		ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple =
+			(ServiceReferenceServiceTuple<S>)obj;
 
 		return _serviceReference.equals(
 			serviceReferenceServiceTuple.getServiceReference());
