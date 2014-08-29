@@ -60,42 +60,49 @@ public class MultiValueServiceTrackerBucketFactory<S>
 
 		@Override
 		public synchronized boolean isDisposable() {
-			return _serviceTuples.isEmpty();
+			return _serviceReferenceServiceTuples.isEmpty();
 		}
 
 		@Override
-		public synchronized void remove(ServiceReferenceServiceTuple<S> tuple) {
-			_serviceTuples.remove(tuple);
+		public synchronized void remove(
+			ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple) {
+
+			_serviceReferenceServiceTuples.remove(serviceReferenceServiceTuple);
 
 			rebuild();
 		}
 
 		@Override
-		public synchronized void store(ServiceReferenceServiceTuple<S> tuple) {
-			_serviceTuples.add(tuple);
+		public synchronized void store(
+			ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple) {
+
+			_serviceReferenceServiceTuples.add(serviceReferenceServiceTuple);
 
 			rebuild();
 		}
 
 		protected void rebuild() {
-			_services = new ArrayList<S>(_serviceTuples.size());
+			_services = new ArrayList<S>(_serviceReferenceServiceTuples.size());
 
 			for (
-				ServiceReferenceServiceTuple<S> tuple : _serviceTuples) {
+				ServiceReferenceServiceTuple<S> serviceReferenceServiceTuple :
+					_serviceReferenceServiceTuples) {
 
-				_services.add(tuple.getService());
+				_services.add(serviceReferenceServiceTuple.getService());
 			}
 
 			_services = Collections.unmodifiableList(_services);
 		}
 
 		private ListServiceTrackerBucket() {
-			_serviceTuples = new TreeSet<ServiceReferenceServiceTuple<S>>(
-				new ServiceReferenceServiceTupleComparator<S>(_comparator));
+			_serviceReferenceServiceTuples =
+				new TreeSet<ServiceReferenceServiceTuple<S>>(
+					new ServiceReferenceServiceTupleComparator<S>(_comparator));
 		}
 
+		private Set<ServiceReferenceServiceTuple<S>>
+			_serviceReferenceServiceTuples;
 		private List<S> _services = new ArrayList<S>();
-		private Set<ServiceReferenceServiceTuple<S>> _serviceTuples;
 
 	}
 
