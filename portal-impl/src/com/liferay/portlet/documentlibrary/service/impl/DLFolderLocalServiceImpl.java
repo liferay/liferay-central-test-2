@@ -763,6 +763,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			StringPool.SLASH, false);
 	}
 
+	@Override
 	public void rebuildTree(
 			long companyId, long parentFolderId, String parentTreePath,
 			final boolean reindex)

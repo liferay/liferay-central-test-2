@@ -310,6 +310,7 @@ public class DLFileShortcutLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void setTreePaths(final long folderId, final String treePath)
 		throws PortalException {
 
@@ -338,9 +339,7 @@ public class DLFileShortcutLocalServiceImpl
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					DLFileShortcut dlFileShortcut = (DLFileShortcut)object;
 
 					dlFileShortcut.setTreePath(treePath);

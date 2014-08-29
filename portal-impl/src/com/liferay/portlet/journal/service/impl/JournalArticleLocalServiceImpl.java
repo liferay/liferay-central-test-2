@@ -4125,6 +4125,7 @@ public class JournalArticleLocalServiceImpl
 		return searchJournalArticles(searchContext);
 	}
 
+	@Override
 	public void setTreePaths(final long folderId, final String treePath)
 		throws PortalException {
 
