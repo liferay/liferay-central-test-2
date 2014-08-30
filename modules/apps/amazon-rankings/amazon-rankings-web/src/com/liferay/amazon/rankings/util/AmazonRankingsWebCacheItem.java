@@ -44,11 +44,14 @@ import java.util.Map;
  */
 public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
-	public AmazonRankingsWebCacheItem(String isbn, String key, String tag, String secret) {
+	public AmazonRankingsWebCacheItem(
+		String isbn, String amazonAccessKeyId, String amazonAssociateTag,
+		String amazonSecretAccessKey) {
+
 		_isbn = isbn;
-		_tag = tag;
-		_key = key;
-		_secret = secret;
+		_amazonAccessKeyId = amazonAccessKeyId;
+		_amazonAssociateTag = amazonAssociateTag;
+		_amazonSecretAccessKey = amazonSecretAccessKey;
 	}
 
 	@Override
@@ -73,8 +76,8 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 	protected AmazonRankings doConvert(String key) throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		parameters.put("AssociateTag", _tag);
-		parameters.put("AWSAccessKeyId", _key);
+		parameters.put("AssociateTag", _amazonAssociateTag);
+		parameters.put("AWSAccessKeyId", _amazonAccessKeyId);
 		parameters.put("IdType", "ASIN");
 		parameters.put("ItemId", _isbn);
 		parameters.put("Operation", "ItemLookup");
@@ -84,7 +87,7 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		parameters.put("Timestamp", AmazonRankingsUtil.getTimestamp());
 
 		String urlWithSignature =
-			AmazonSignedRequestsUtil.generateUrlWithSignature(parameters, _secret);
+			AmazonSignedRequestsUtil.generateUrlWithSignature(parameters, _amazonSecretAccessKey);
 
 		String xml = HttpUtil.URLtoString(urlWithSignature);
 
@@ -281,8 +284,8 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		AmazonRankingsWebCacheItem.class);
 
 	private String _isbn;
-	private String _key;
-	private String _secret;
-	private String _tag;
+	private String _amazonAccessKeyId;
+	private String _amazonSecretAccessKey;
+	private String _amazonAssociateTag;
 
 }

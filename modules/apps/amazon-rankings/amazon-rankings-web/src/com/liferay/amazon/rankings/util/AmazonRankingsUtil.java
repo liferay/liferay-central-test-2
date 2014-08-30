@@ -32,14 +32,16 @@ import java.util.Calendar;
 public class AmazonRankingsUtil {
 
 	public static AmazonRankings getAmazonRankings(
-		String isbn, String key, String tag, String secret) {
+		String isbn, String amazonAccessKeyId, String amazonAssociateTag,
+		String amazonSecretAccessKey) {
 
 		if (!Validator.isDigit(isbn)) {
 			return null;
 		}
 
-		WebCacheItem wci = new AmazonRankingsWebCacheItem(isbn, key, tag,
-			secret);
+		WebCacheItem wci = new AmazonRankingsWebCacheItem(
+			isbn, amazonAccessKeyId, amazonAssociateTag,
+			amazonSecretAccessKey);
 
 		return (AmazonRankings)WebCachePoolUtil.get(
 			AmazonRankingsUtil.class.getName() + StringPool.PERIOD + isbn, wci);
