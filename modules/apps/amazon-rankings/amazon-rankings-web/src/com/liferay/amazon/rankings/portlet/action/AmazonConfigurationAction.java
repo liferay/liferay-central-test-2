@@ -14,7 +14,6 @@
 
 package com.liferay.amazon.rankings.portlet.action;
 
-import com.liferay.amazon.rankings.model.AmazonRankings;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.util.CharPool;
@@ -60,13 +59,11 @@ public class AmazonConfigurationAction extends DefaultConfigurationAction {
 		Arrays.sort(isbns);
 
 		setPreference(actionRequest, "isbns", isbns);
-		setPreference(
-			actionRequest, "amazon.access.key.id", amazonAccessKeyId);
+		setPreference(actionRequest, "amazon.access.key.id", amazonAccessKeyId);
 		setPreference(
 			actionRequest, "amazon.associate.tag", amazonAssociateTag);
 		setPreference(
-			actionRequest, "amazon.secret.access.key",
-			amazonSecretAccessKey);
+			actionRequest, "amazon.secret.access.key", amazonSecretAccessKey);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}

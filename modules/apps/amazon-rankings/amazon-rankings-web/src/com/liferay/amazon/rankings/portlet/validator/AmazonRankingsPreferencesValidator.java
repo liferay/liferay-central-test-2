@@ -57,7 +57,8 @@ public class AmazonRankingsPreferencesValidator
 		for (String isbn : isbns) {
 			AmazonRankings amazonRankings =
 				AmazonRankingsUtil.getAmazonRankings(
-					isbn, amazonAccessKeyId, amazonAssociateTag, amazonSecretAccessKey);
+					isbn, amazonAccessKeyId, amazonAssociateTag,
+					amazonSecretAccessKey);
 
 			if (amazonRankings == null) {
 				badIsbns.add(isbn);
