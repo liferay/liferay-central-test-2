@@ -24,12 +24,6 @@ import java.util.Date;
 public class AmazonRankings
 	implements Comparable<AmazonRankings>, Serializable {
 
-	public static String AMAZON_ACCESS_KEY_ID = "amazon.access.key.id";
-
-	public static String AMAZON_ASSOCIATE_TAG = "amazon.associate.tag";
-
-	public static String AMAZON_SECRET_ACCESS_KEY = "amazon.secret.access.key";
-
 	public AmazonRankings(
 		String isbn, String productName, String catalog, String[] authors,
 		Date releaseDate, String releaseDateAsString, String manufacturer,

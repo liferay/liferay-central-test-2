@@ -50,23 +50,23 @@ public class AmazonConfigurationAction extends DefaultConfigurationAction {
 			StringUtil.toUpperCase(getParameter(actionRequest, "isbns")),
 			CharPool.SPACE);
 
-		String accessKeyID = getParameter(
-			actionRequest, AmazonRankings.AMAZON_ACCESS_KEY_ID);
-		String associateTag = getParameter(
-			actionRequest, AmazonRankings.AMAZON_ASSOCIATE_TAG);
-		String secretAccessKey = getParameter(
-			actionRequest, AmazonRankings.AMAZON_SECRET_ACCESS_KEY);
+		String amazonAccessKeyId = getParameter(
+			actionRequest, "amazon.access.key.id");
+		String amazonAssociateTag = getParameter(
+			actionRequest, "amazon.associate.tag");
+		String amazonSecretAccessKey = getParameter(
+			actionRequest, "amazon.secret.access.key");
 
 		Arrays.sort(isbns);
 
 		setPreference(actionRequest, "isbns", isbns);
 		setPreference(
-			actionRequest, AmazonRankings.AMAZON_ACCESS_KEY_ID, accessKeyID);
+			actionRequest, "amazon.access.key.id", amazonAccessKeyId);
 		setPreference(
-			actionRequest, AmazonRankings.AMAZON_ASSOCIATE_TAG, associateTag);
+			actionRequest, "amazon.associate.tag", amazonAssociateTag);
 		setPreference(
-			actionRequest, AmazonRankings.AMAZON_SECRET_ACCESS_KEY,
-			secretAccessKey);
+			actionRequest, "amazon.secret.access.key",
+			amazonSecretAccessKey);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}

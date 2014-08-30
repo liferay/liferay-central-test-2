@@ -55,9 +55,9 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 String currentURL = currentURLObj.toString();
 
 String[] isbns = portletPreferences.getValues("isbns", new String[0]);
-String accessKeyID = portletPreferences.getValue(AmazonRankings.AMAZON_ACCESS_KEY_ID, "");
-String associateTag = portletPreferences.getValue(AmazonRankings.AMAZON_ASSOCIATE_TAG , "");
-String secretAccessKey = portletPreferences.getValue(AmazonRankings.AMAZON_SECRET_ACCESS_KEY, "");
+String amazonAccessKeyId = portletPreferences.getValue("amazon.access.key.id", "");
+String amazonAssociateTag = portletPreferences.getValue("amazon.associate.tag" , "");
+String amazonSecretAccessKey = portletPreferences.getValue("amazon.secret.access.key", "");
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
