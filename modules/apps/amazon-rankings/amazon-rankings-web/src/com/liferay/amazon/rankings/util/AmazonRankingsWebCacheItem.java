@@ -87,7 +87,8 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		parameters.put("Timestamp", AmazonRankingsUtil.getTimestamp());
 
 		String urlWithSignature =
-			AmazonSignedRequestsUtil.generateUrlWithSignature(parameters, _amazonSecretAccessKey);
+			AmazonSignedRequestsUtil.generateUrlWithSignature(
+				parameters, _amazonSecretAccessKey);
 
 		String xml = HttpUtil.URLtoString(urlWithSignature);
 
@@ -283,9 +284,9 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 	private static Log _log = LogFactoryUtil.getLog(
 		AmazonRankingsWebCacheItem.class);
 
-	private String _isbn;
 	private String _amazonAccessKeyId;
-	private String _amazonSecretAccessKey;
 	private String _amazonAssociateTag;
+	private String _amazonSecretAccessKey;
+	private String _isbn;
 
 }

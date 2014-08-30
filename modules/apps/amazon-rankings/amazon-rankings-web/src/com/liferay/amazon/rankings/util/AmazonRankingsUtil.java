@@ -40,8 +40,7 @@ public class AmazonRankingsUtil {
 		}
 
 		WebCacheItem wci = new AmazonRankingsWebCacheItem(
-			isbn, amazonAccessKeyId, amazonAssociateTag,
-			amazonSecretAccessKey);
+			isbn, amazonAccessKeyId, amazonAssociateTag, amazonSecretAccessKey);
 
 		return (AmazonRankings)WebCachePoolUtil.get(
 			AmazonRankingsUtil.class.getName() + StringPool.PERIOD + isbn, wci);

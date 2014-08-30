@@ -54,7 +54,7 @@ public class AmazonRankingsUpgrade {
 				return new String[][] {
 					new String[] {
 						"67",
-						"com_liferay_amazon_rankings_portlet_" + 
+						"com_liferay_amazon_rankings_portlet_" +
 							"AmazonRankingsPortlet"
 					}
 				};
