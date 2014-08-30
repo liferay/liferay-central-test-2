@@ -44,7 +44,7 @@ import java.util.Map;
  */
 public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
-	public AmazonRankingsWebCacheItem(String isbn, String tag, String key, String secret) {
+	public AmazonRankingsWebCacheItem(String isbn, String key, String tag, String secret) {
 		_isbn = isbn;
 		_tag = tag;
 		_key = key;
