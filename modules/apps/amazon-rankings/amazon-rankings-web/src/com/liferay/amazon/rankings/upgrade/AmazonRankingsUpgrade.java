@@ -54,16 +54,18 @@ public class AmazonRankingsUpgrade {
 				return new String[][] {
 					new String[] {
 						"67",
-						"com_liferay_amazon_rankings_portlet_AmazonRankingsPortlet"
-						}
-					};
-				}
-			};
+						"com_liferay_amazon_rankings_portlet_" + 
+							"AmazonRankingsPortlet"
+					}
+				};
+			}
 
-			_releaseLocalService.updateRelease(
-				AmazonRankingsPortlet.class.getName(),
-				Collections.<UpgradeProcess> singletonList(upgradePortletId), 1,
-				0, false);
+		};
+
+		_releaseLocalService.updateRelease(
+			AmazonRankingsPortlet.class.getName(),
+			Collections.<UpgradeProcess> singletonList(upgradePortletId), 1, 0,
+			false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;
