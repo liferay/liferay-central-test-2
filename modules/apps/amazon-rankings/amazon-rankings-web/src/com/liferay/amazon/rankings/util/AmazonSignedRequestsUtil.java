@@ -75,7 +75,10 @@ public class AmazonSignedRequestsUtil {
 		return sb.toString();
 	}
 
-	private static String _generateSignature(String data, String amazonSecretAccessKey) throws Exception {
+	private static String _generateSignature(
+			String data, String amazonSecretAccessKey)
+		throws Exception {
+
 		if (Validator.isNull(amazonSecretAccessKey)) {
 			return StringPool.BLANK;
 		}

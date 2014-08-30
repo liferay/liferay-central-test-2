@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.amazon.rankings.upgrade;
 
 import com.liferay.amazon.rankings.portlet.AmazonRankingsPortlet;
@@ -69,4 +70,5 @@ public class AmazonRankingsUpgrade {
 	}
 
 	private ReleaseLocalService _releaseLocalService;
+
 }
