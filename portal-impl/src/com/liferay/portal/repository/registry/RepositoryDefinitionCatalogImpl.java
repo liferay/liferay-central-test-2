@@ -187,11 +187,11 @@ public class RepositoryDefinitionCatalogImpl
 		@Override
 		public void modifiedService(
 			ServiceReference<RepositoryDefiner> serviceReference,
-			RepositoryDefiner service) {
+			RepositoryDefiner repositoryDefiner) {
 
-			String className = service.getClassName();
+			String className = repositoryDefiner.getClassName();
 
-			if (service.isExternalRepository()) {
+			if (repositoryDefiner.isExternalRepository()) {
 				_externalRepositoriesClassNames.add(className);
 			}
 			else {
@@ -199,15 +199,16 @@ public class RepositoryDefinitionCatalogImpl
 			}
 
 			_repositoryDefinitions.put(
-				service.getClassName(), createRepositoryDefinition(service));
+				repositoryDefiner.getClassName(),
+				createRepositoryDefinition(repositoryDefiner));
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<RepositoryDefiner> serviceReference,
-			RepositoryDefiner service) {
+			RepositoryDefiner repositoryDefiner) {
 
-			unregisterRepositoryDefiner(service.getClassName());
+			unregisterRepositoryDefiner(repositoryDefiner.getClassName());
 		}
 
 	}
