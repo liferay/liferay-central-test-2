@@ -62,7 +62,7 @@ public class InputEditorTag extends IncludeTag {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #setContents(String)}.
+	 * @deprecated As of 7.0.0, replaced by {@link #setContents(String)}
 	 */
 	@Deprecated
 	public void setInitMethod(String initMethod) {
