@@ -414,8 +414,7 @@ public class RepositoryLocalServiceImpl
 	}
 
 	protected long getInternalRepositoryId(
-			long folderId, long fileEntryId, long fileVersionId)
-		throws PortalException {
+		long folderId, long fileEntryId, long fileVersionId) {
 
 		long repositoryId = 0;
 
