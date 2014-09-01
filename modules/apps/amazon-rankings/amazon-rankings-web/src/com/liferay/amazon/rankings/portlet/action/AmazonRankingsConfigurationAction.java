@@ -37,7 +37,8 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ConfigurationAction.class
 )
-public class AmazonConfigurationAction extends DefaultConfigurationAction {
+public class AmazonRankingsConfigurationAction
+	extends DefaultConfigurationAction {
 
 	@Override
 	public void processAction(
