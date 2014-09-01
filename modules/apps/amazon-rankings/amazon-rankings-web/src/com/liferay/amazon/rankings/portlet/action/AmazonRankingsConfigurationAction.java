@@ -46,25 +46,30 @@ public class AmazonRankingsConfigurationAction
 			ActionResponse actionResponse)
 		throws Exception {
 
+		String amazonAccessKeyId = getParameter(
+			actionRequest, "amazon.access.key.id");
+
+		setPreference(actionRequest, "amazon.access.key.id", amazonAccessKeyId);
+
+		String amazonAssociateTag = getParameter(
+			actionRequest, "amazon.associate.tag");
+
+		setPreference(
+			actionRequest, "amazon.associate.tag", amazonAssociateTag);
+
+		String amazonSecretAccessKey = getParameter(
+			actionRequest, "amazon.secret.access.key");
+
+		setPreference(
+			actionRequest, "amazon.secret.access.key", amazonSecretAccessKey);
+
 		String[] isbns = StringUtil.split(
 			StringUtil.toUpperCase(getParameter(actionRequest, "isbns")),
 			CharPool.SPACE);
 
-		String amazonAccessKeyId = getParameter(
-			actionRequest, "amazon.access.key.id");
-		String amazonAssociateTag = getParameter(
-			actionRequest, "amazon.associate.tag");
-		String amazonSecretAccessKey = getParameter(
-			actionRequest, "amazon.secret.access.key");
-
 		Arrays.sort(isbns);
 
 		setPreference(actionRequest, "isbns", isbns);
-		setPreference(actionRequest, "amazon.access.key.id", amazonAccessKeyId);
-		setPreference(
-			actionRequest, "amazon.associate.tag", amazonAssociateTag);
-		setPreference(
-			actionRequest, "amazon.secret.access.key", amazonSecretAccessKey);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
