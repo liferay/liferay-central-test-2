@@ -32,10 +32,6 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
-	<aui:input cssClass="lfr-input-text-container" name="preferences--amazon.access.key.id--" value="<%= accessKeyID %>" />
-	<aui:input cssClass="lfr-input-text-container" name="preferences--amazon.associate.tag--" value="<%= associateTag %>" />
-	<aui:input cssClass="lfr-input-text-container" name="preferences--amazon.secret.access.key--" value="<%= secretAccessKey %>" />
-
 	<liferay-ui:error exception="<%= ValidatorException.class %>">
 
 		<%
@@ -58,6 +54,12 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 		%>
 
 	</liferay-ui:error>
+
+	<aui:input cssClass="lfr-input-text-container" name="preferences--amazon.access.key.id--" value="<%= accessKeyID %>" />
+
+	<aui:input cssClass="lfr-input-text-container" name="preferences--amazon.associate.tag--" value="<%= associateTag %>" />
+
+	<aui:input cssClass="lfr-input-text-container" name="preferences--amazon.secret.access.key--" value="<%= secretAccessKey %>" />
 
 	<aui:fieldset>
 		<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>" cssClass="lfr-textarea-container" label="add-all-isbn-numbers-separated-by-spaces" name="preferences--isbns--" type="textarea" value="<%= isbnsString %>" wrap="soft" />
