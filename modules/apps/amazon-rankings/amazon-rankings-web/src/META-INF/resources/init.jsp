@@ -51,7 +51,9 @@ page import="javax.portlet.WindowState" %>
 <%
 PortletMode portletMode = liferayPortletRequest.getPortletMode();
 WindowState windowState = liferayPortletRequest.getWindowState();
+
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+
 String currentURL = currentURLObj.toString();
 
 String[] isbns = portletPreferences.getValues("isbns", new String[0]);
