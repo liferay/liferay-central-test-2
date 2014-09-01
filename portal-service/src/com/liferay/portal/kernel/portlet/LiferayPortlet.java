@@ -505,7 +505,6 @@ public class LiferayPortlet extends GenericPortlet {
 	}
 
 	protected boolean addProcessActionSuccessMessage;
-
 	protected boolean alwaysSendRedirect;
 
 	private static final boolean _PROCESS_PORTLET_REQUEST = true;
