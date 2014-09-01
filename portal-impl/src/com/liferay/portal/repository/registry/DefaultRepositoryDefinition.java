@@ -37,8 +37,8 @@ import java.util.Set;
  */
 public class DefaultRepositoryDefinition
 	implements CapabilityRegistry, RepositoryDefinition,
-			RepositoryFactoryRegistry, RepositoryEventTrigger,
-			RepositoryEventRegistry {
+			   RepositoryEventRegistry, RepositoryEventTrigger,
+			   RepositoryFactoryRegistry {
 
 	public DefaultRepositoryDefinition() {
 		_exportedCapabilities = new HashSet<Class<? extends Capability>>();
