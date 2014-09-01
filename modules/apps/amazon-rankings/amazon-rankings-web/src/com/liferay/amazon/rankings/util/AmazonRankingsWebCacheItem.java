@@ -88,7 +88,7 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
 		String urlWithSignature =
 			AmazonSignedRequestsUtil.generateUrlWithSignature(
-				parameters, _amazonSecretAccessKey);
+				_amazonSecretAccessKey, parameters);
 
 		String xml = HttpUtil.URLtoString(urlWithSignature);
 

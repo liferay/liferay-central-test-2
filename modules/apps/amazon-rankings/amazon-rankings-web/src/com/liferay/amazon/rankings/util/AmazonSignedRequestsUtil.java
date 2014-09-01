@@ -36,14 +36,14 @@ import javax.crypto.spec.SecretKeySpec;
 public class AmazonSignedRequestsUtil {
 
 	public static String generateUrlWithSignature(
-			Map<String, String> parameters, String amazonSecretAccessKey)
+			String amazonSecretAccessKey, Map<String, String> parameters)
 		throws Exception {
 
 		String canonicalizedParameters = _canonicalizeParameters(parameters);
 
 		String signature = _generateSignature(
-			"GET\necs.amazonaws.com\n/onca/xml\n" + canonicalizedParameters,
-			amazonSecretAccessKey);
+			amazonSecretAccessKey,
+			"GET\necs.amazonaws.com\n/onca/xml\n" + canonicalizedParameters);
 
 		return "http://ecs.amazonaws.com/onca/xml?" + canonicalizedParameters +
 			"&Signature=" + signature;
@@ -76,7 +76,7 @@ public class AmazonSignedRequestsUtil {
 	}
 
 	private static String _generateSignature(
-			String data, String amazonSecretAccessKey)
+			String amazonSecretAccessKey, String data)
 		throws Exception {
 
 		if (Validator.isNull(amazonSecretAccessKey)) {
