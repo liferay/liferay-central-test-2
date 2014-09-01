@@ -67,7 +67,7 @@ public class LiferayPortlet extends GenericPortlet {
 		addProcessActionSuccessMessage = GetterUtil.getBoolean(
 			getInitParameter("add-process-action-success-action"), true);
 		alwaysSendRedirect = GetterUtil.getBoolean(
-			getInitParameter("always-send-redirect"), false);
+			getInitParameter("always-send-redirect"));
 	}
 
 	@Override
