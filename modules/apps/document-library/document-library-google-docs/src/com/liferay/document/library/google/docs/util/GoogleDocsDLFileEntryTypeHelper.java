@@ -114,11 +114,11 @@ public class GoogleDocsDLFileEntryTypeHelper {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(LocaleUtil.getDefault(), "Google Doc");
+		nameMap.put(LocaleUtil.getDefault(), "Google Docs");
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(LocaleUtil.getDefault(), "Google Doc");
+		descriptionMap.put(LocaleUtil.getDefault(), "Google Docs");
 
 		ServiceContext serviceContext = new ServiceContext();
 
