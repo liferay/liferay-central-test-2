@@ -56,10 +56,10 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 
 String currentURL = currentURLObj.toString();
 
-String[] isbns = portletPreferences.getValues("isbns", new String[0]);
 String amazonAccessKeyId = portletPreferences.getValue("amazon.access.key.id", "");
 String amazonAssociateTag = portletPreferences.getValue("amazon.associate.tag" , "");
 String amazonSecretAccessKey = portletPreferences.getValue("amazon.secret.access.key", "");
+String[] isbns = portletPreferences.getValues("isbns", new String[0]);
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>

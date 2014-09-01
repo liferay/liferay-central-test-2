@@ -45,13 +45,13 @@ import java.util.Map;
 public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
 	public AmazonRankingsWebCacheItem(
-		String isbn, String amazonAccessKeyId, String amazonAssociateTag,
-		String amazonSecretAccessKey) {
+		String amazonAccessKeyId, String amazonAssociateTag,
+		String amazonSecretAccessKey, String isbn) {
 
-		_isbn = isbn;
 		_amazonAccessKeyId = amazonAccessKeyId;
 		_amazonAssociateTag = amazonAssociateTag;
 		_amazonSecretAccessKey = amazonSecretAccessKey;
+		_isbn = isbn;
 	}
 
 	@Override

@@ -46,19 +46,19 @@ public class AmazonRankingsPreferencesValidator
 
 		List<String> badIsbns = new ArrayList<String>();
 
-		String[] isbns = preferences.getValues("isbns", new String[0]);
 		String amazonAccessKeyId = preferences.getValue(
 			"amazon.access.key.id", "");
 		String amazonAssociateTag = preferences.getValue(
 			"amazon.associate.tag" , "");
 		String amazonSecretAccessKey = preferences.getValue(
 			"amazon.secret.access.key", "");
+		String[] isbns = preferences.getValues("isbns", new String[0]);
 
 		for (String isbn : isbns) {
 			AmazonRankings amazonRankings =
 				AmazonRankingsUtil.getAmazonRankings(
-					isbn, amazonAccessKeyId, amazonAssociateTag,
-					amazonSecretAccessKey);
+					amazonAccessKeyId, amazonAssociateTag,
+					amazonSecretAccessKey, isbn);
 
 			if (amazonRankings == null) {
 				badIsbns.add(isbn);
