@@ -324,9 +324,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 	}
 
 	protected String checkImmutableAndStaticableFieldTypes(
-			String fileName, String packagePath, String className,
-			String content)
-		throws IOException {
+		String fileName, String packagePath, String className,
+		String content) {
 
 		ClassLibrary classLibrary = new ClassLibrary();
 
