@@ -296,6 +296,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 <aui:script>
 	var <portlet:namespace />saveDraftIntervalId = null;
 	var <portlet:namespace />oldTitle = null;
+	var <portlet:namespace />oldSubtitle = null;
 	var <portlet:namespace />oldContent = null;
 
 	function <portlet:namespace />clearSaveDraftIntervalId() {
@@ -342,6 +343,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 				}
 
 				if ((<portlet:namespace />oldTitle == title) &&
+					(<portlet:namespace />oldSubtitle == subtitle) &&
 					(<portlet:namespace />oldContent == content)) {
 
 					return;
@@ -365,6 +367,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 					<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
 					<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
 					<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
+					<portlet:namespace />subtitle: subtitle,
 					<portlet:namespace />title: title,
 					<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>
 				};
