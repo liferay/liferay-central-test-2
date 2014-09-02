@@ -317,9 +317,7 @@ public class RepositoryLocalServiceImpl
 
 	@Override
 	public void invalidate() {
-		_localRepositoriesByRepositoryEntryId.clear();
 		_localRepositoriesByRepositoryId.clear();
-		_repositoriesByEntryId.clear();
 		_repositoriesByRepositoryId.clear();
 	}
 
@@ -433,13 +431,8 @@ public class RepositoryLocalServiceImpl
 	private static Log _log = LogFactoryUtil.getLog(
 		RepositoryLocalServiceImpl.class);
 
-	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =
-		new ConcurrentHashMap<Long, LocalRepository>();
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryId =
 		new ConcurrentHashMap<Long, LocalRepository>();
-	private Map<Long, com.liferay.portal.kernel.repository.Repository>
-		_repositoriesByEntryId = new ConcurrentHashMap
-			<Long, com.liferay.portal.kernel.repository.Repository>();
 	private Map<Long, com.liferay.portal.kernel.repository.Repository>
 		_repositoriesByRepositoryId = new ConcurrentHashMap
 			<Long, com.liferay.portal.kernel.repository.Repository>();
