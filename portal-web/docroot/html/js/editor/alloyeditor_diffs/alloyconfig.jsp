@@ -76,7 +76,7 @@ response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 		none: {}
 	}
 
-	alloyEditor.config.toolbars = toolbars['<%= toolbarSet %>'] || toolbars.default;
+	alloyEditor.config.toolbars = toolbars['<%= HtmlUtil.escapeJS(toolbarSet) %>'] || toolbars.default;
 };
 
 window['<%= HtmlUtil.escapeJS(name) %>Config']();
