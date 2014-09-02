@@ -81,6 +81,9 @@ public abstract class ConvertProcess {
 		_paramValues = values;
 	}
 
+	/**
+	 * @throws ConvertException  
+	 */
 	public void validateConversion() throws ConvertException {
 	}
 
