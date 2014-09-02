@@ -170,6 +170,7 @@ public class DLFileEntryLocalServiceImpl
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
 		String extension = DLAppUtil.getExtension(title, sourceFileName);
+
 		String fileName = DLAppUtil.getSanitizedFileName(title, extension);
 
 		if (fileEntryTypeId == -1) {
@@ -184,7 +185,7 @@ public class DLFileEntryLocalServiceImpl
 			fileEntryTypeId);
 
 		validateFile(
-			groupId, folderId, 0, title, fileName, extension, sourceFileName,
+			groupId, folderId, 0, sourceFileName, fileName, extension, title,
 			file, is);
 
 		long fileEntryId = counterLocalService.increment();
@@ -224,10 +225,10 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntry.setFolderId(folderId);
 		dlFileEntry.setTreePath(dlFileEntry.buildTreePath());
 		dlFileEntry.setName(name);
+		dlFileEntry.setFileName(fileName);
 		dlFileEntry.setExtension(extension);
 		dlFileEntry.setMimeType(mimeType);
 		dlFileEntry.setTitle(title);
-		dlFileEntry.setFileName(fileName);
 		dlFileEntry.setDescription(description);
 		dlFileEntry.setFileEntryTypeId(fileEntryTypeId);
 		dlFileEntry.setVersion(DLFileEntryConstants.VERSION_DEFAULT);
@@ -239,8 +240,8 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		addFileVersion(
-			user, dlFileEntry, serviceContext.getModifiedDate(now), extension,
-			mimeType, title, fileName, description, changeLog, StringPool.BLANK,
+			user, dlFileEntry, serviceContext.getModifiedDate(now), fileName,
+			extension, mimeType, title, description, changeLog, StringPool.BLANK,
 			fileEntryTypeId, fieldsMap, DLFileEntryConstants.VERSION_DEFAULT,
 			size, WorkflowConstants.STATUS_DRAFT, serviceContext);
 
@@ -556,10 +557,10 @@ public class DLFileEntryLocalServiceImpl
 
 				dlFileVersion = updateFileVersion(
 					user, existingDLFileVersion, null,
+					existingDLFileVersion.getFileName(),
 					existingDLFileVersion.getExtension(),
 					existingDLFileVersion.getMimeType(),
 					existingDLFileVersion.getTitle(),
-					existingDLFileVersion.getFileName(),
 					existingDLFileVersion.getDescription(),
 					existingDLFileVersion.getChangeLog(),
 					existingDLFileVersion.getExtraSettings(),
@@ -574,8 +575,8 @@ public class DLFileEntryLocalServiceImpl
 
 				dlFileVersion = addFileVersion(
 					user, dlFileEntry, serviceContext.getModifiedDate(null),
-					dlFileVersion.getExtension(), dlFileVersion.getMimeType(),
-					dlFileVersion.getTitle(), dlFileVersion.getFileName(),
+					dlFileVersion.getFileName(), dlFileVersion.getExtension(),
+					dlFileVersion.getMimeType(), dlFileVersion.getTitle(),
 					dlFileVersion.getDescription(),
 					dlFileVersion.getChangeLog(),
 					dlFileVersion.getExtraSettings(),
@@ -1820,7 +1821,7 @@ public class DLFileEntryLocalServiceImpl
 
 	protected DLFileVersion addFileVersion(
 			User user, DLFileEntry dlFileEntry, Date modifiedDate,
-			String extension, String mimeType, String title, String fileName,
+			String fileName, String extension, String mimeType, String title,
 			String description, String changeLog, String extraSettings,
 			long fileEntryTypeId, Map<String, Fields> fieldsMap, String version,
 			long size, int status, ServiceContext serviceContext)
@@ -1846,9 +1847,9 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setFolderId(dlFileEntry.getFolderId());
 		dlFileVersion.setFileEntryId(dlFileEntry.getFileEntryId());
 		dlFileVersion.setTreePath(dlFileVersion.buildTreePath());
+		dlFileVersion.setFileName(fileName);
 		dlFileVersion.setExtension(extension);
 		dlFileVersion.setMimeType(mimeType);
-		dlFileVersion.setFileName(fileName);
 		dlFileVersion.setTitle(title);
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);
@@ -2212,8 +2213,8 @@ public class DLFileEntryLocalServiceImpl
 
 		validateFile(
 			dlFileEntry.getGroupId(), newFolderId, dlFileEntry.getFileEntryId(),
-			dlFileEntry.getTitle(), dlFileEntry.getFileName(),
-			dlFileEntry.getExtension());
+			dlFileEntry.getFileName(), dlFileEntry.getExtension(),
+			dlFileEntry.getTitle());
 
 		if (DLStoreUtil.hasFile(
 				user.getCompanyId(),
@@ -2352,8 +2353,8 @@ public class DLFileEntryLocalServiceImpl
 
 			validateFile(
 				dlFileEntry.getGroupId(), dlFileEntry.getFolderId(),
-				dlFileEntry.getFileEntryId(), title, fileName, extension,
-				sourceFileName, file, is);
+				dlFileEntry.getFileEntryId(), sourceFileName, fileName,
+				extension, title, file, is);
 
 			// File version
 
@@ -2364,8 +2365,8 @@ public class DLFileEntryLocalServiceImpl
 			}
 
 			updateFileVersion(
-				user, dlFileVersion, sourceFileName, extension, mimeType, title,
-				fileName, description, changeLog, extraSettings,
+				user, dlFileVersion, sourceFileName, fileName, extension,
+				mimeType, title, description, changeLog, extraSettings,
 				fileEntryTypeId, fieldsMap, version, size,
 				dlFileVersion.getStatus(), serviceContext.getModifiedDate(now),
 				serviceContext);
@@ -2478,7 +2479,7 @@ public class DLFileEntryLocalServiceImpl
 
 	protected DLFileVersion updateFileVersion(
 			User user, DLFileVersion dlFileVersion, String sourceFileName,
-			String extension, String mimeType, String title, String fileName,
+			String fileName, String extension, String mimeType, String title,
 			String description, String changeLog, String extraSettings,
 			long fileEntryTypeId, Map<String, Fields> fieldsMap, String version,
 			long size, int status, Date statusDate,
@@ -2519,8 +2520,8 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validateFile(
-			long groupId, long folderId, long fileEntryId, String title,
-			String fileName, String extension)
+			long groupId, long folderId, long fileEntryId, String fileName,
+			String extension, String title)
 		throws PortalException {
 
 		DLFolder dlFolder = dlFolderPersistence.fetchByG_P_N(
@@ -2565,9 +2566,9 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validateFile(
-			long groupId, long folderId, long fileEntryId, String title,
-			String fileName, String extension, String sourceFileName, File file,
-			InputStream is)
+			long groupId, long folderId, long fileEntryId,
+			String sourceFileName, String fileName, String extension,
+			String title, File file, InputStream is)
 		throws PortalException {
 
 		if (Validator.isNotNull(sourceFileName)) {
@@ -2590,7 +2591,7 @@ public class DLFileEntryLocalServiceImpl
 		DLStoreUtil.validate(title, false);
 
 		validateFile(
-			groupId, folderId, fileEntryId, title, fileName, extension);
+			groupId, folderId, fileEntryId, fileName, extension, title);
 	}
 
 	protected void validateFileEntryTypeId(
