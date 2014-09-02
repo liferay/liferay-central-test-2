@@ -93,11 +93,11 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	</c:if>
 
 	<aui:fieldset>
-		<liferay-ui:input-editor contents="<%= title %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name="title" toolbarSet="none" />
+		<liferay-ui:input-editor contents="<%= title %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name="title" placeholder="title" toolbarSet="none" />
 
 		<aui:input name="title" type="hidden" />
 
-		<liferay-ui:input-editor contents="<%= subtitle %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name="subtitle" toolbarSet="none" />
+		<liferay-ui:input-editor contents="<%= subtitle %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name="subtitle" placeholder="subtitle" toolbarSet="none" />
 
 		<aui:input name="subtitle" type="hidden" />
 
@@ -122,7 +122,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 			<br />
 		</c:if>
 
-		<liferay-ui:input-editor contents="<%= content %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name="content" />
+		<liferay-ui:input-editor contents="<%= content %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name="content" placeholder="content" />
 
 		<aui:input name="content" type="hidden" />
 
