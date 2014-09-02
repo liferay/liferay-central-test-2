@@ -113,51 +113,53 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			return;
 		}
 
-		String advancedFileSystemStoreRootDir =
-			PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR;
-
-		String fileSystemStoreRootDir =
-			PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR;
-
-		if (Validator.isBlank(advancedFileSystemStoreRootDir) ||
-			Validator.isBlank(fileSystemStoreRootDir)) {
+		if (Validator.isBlank(
+				PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR)) {
 
 			if (_log.isWarnEnabled()) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append("Either ");
-				sb.append(PropsKeys.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR);
-				sb.append(" or ");
-				sb.append(PropsKeys.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-				sb.append(
-					" is null; set both of them to a valid path and retry.");
-
-				_log.warn(sb.toString());
+				_log.warn(
+					"Property \"" +
+						PropsKeys.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR +
+							" is not set");
 			}
 
 			throw new InvalidFileSystemStoreRootDirException();
 		}
 
-		boolean identicalRootDirs = true;
+		if (Validator.isBlank(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR)) {
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Property \"" +
+						PropsKeys.DL_STORE_FILE_SYSTEM_ROOT_DIR +
+							" is not set");
+			}
+
+			throw new InvalidFileSystemStoreRootDirException();
+		}
+
+		boolean identicalRootDirNames = true;
 
 		if (OSDetector.isWindows()) {
-			identicalRootDirs = StringUtil.equalsIgnoreCase(
-				advancedFileSystemStoreRootDir, fileSystemStoreRootDir);
+			identicalRootDirNames = StringUtil.equalsIgnoreCase(
+				PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR,
+				PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 		}
 		else {
-			identicalRootDirs = advancedFileSystemStoreRootDir.equals(
-				fileSystemStoreRootDir);
+			identicalRootDirNames =
+				PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR.equals(
+					PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 		}
 
-		if (identicalRootDirs) {
+		if (identicalRootDirNames) {
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(5);
 
-				sb.append("Both ");
+				sb.append("Both properties \"");
 				sb.append(PropsKeys.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR);
-				sb.append(" and ");
+				sb.append("\" and \"");
 				sb.append(PropsKeys.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-				sb.append(" refer to the same path.");
+				sb.append("\" have the same value");
 
 				_log.warn(sb.toString());
 			}
