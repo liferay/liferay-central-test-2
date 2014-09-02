@@ -96,7 +96,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	@Override
-	public void validateConversion()
+	public void validate()
 		throws InvalidFileSystemStoreRootDirException {
 
 		String sourceStoreClassName = getSourceStoreClassName();

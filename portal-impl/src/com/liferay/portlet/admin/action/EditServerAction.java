@@ -300,7 +300,7 @@ public class EditServerAction extends PortletAction {
 		}
 
 		try {
-			convertProcess.validateConversion();
+			convertProcess.validate();
 		}
 		catch (ConvertException ce) {
 			SessionErrors.add(actionRequest, ce.getClass(), ce);

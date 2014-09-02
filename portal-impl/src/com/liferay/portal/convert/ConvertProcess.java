@@ -84,7 +84,7 @@ public abstract class ConvertProcess {
 	/**
 	 * @throws ConvertException  
 	 */
-	public void validateConversion() throws ConvertException {
+	public void validate() throws ConvertException {
 	}
 
 	protected abstract void doConvert() throws Exception;
