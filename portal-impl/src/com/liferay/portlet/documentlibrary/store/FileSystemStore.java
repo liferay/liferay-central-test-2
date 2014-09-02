@@ -45,7 +45,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FileSystemStore extends BaseStore {
 
 	public FileSystemStore() {
-		initRootDir();
+		_rootDir = new File(getRootDirName());
+
+		if (!_rootDir.exists()) {
+			_rootDir.mkdirs();
+		}
 	}
 
 	@Override
@@ -507,18 +511,8 @@ public class FileSystemStore extends BaseStore {
 		return repositoryDir;
 	}
 
-	protected String getRootDir() {
+	protected String getRootDirName() {
 		return PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR;
-	}
-
-	protected void initRootDir() {
-		String rootDir = getRootDir();
-
-		_rootDir = new File(rootDir);
-
-		if (!_rootDir.exists()) {
-			_rootDir.mkdirs();
-		}
 	}
 
 	private Map<RepositoryDirKey, File> _repositoryDirs =

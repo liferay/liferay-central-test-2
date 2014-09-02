@@ -283,7 +283,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 	}
 
 	@Override
-	protected String getRootDir() {
+	protected String getRootDirName() {
 		return PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR;
 	}
 
