@@ -184,7 +184,6 @@ public class ShoppingUtil {
 		}
 
 		String[] categoryNames = StringUtil.split(coupon.getLimitCategories());
-		String[] skus = StringUtil.split(coupon.getLimitSkus());
 
 		List<Long> categoryIds = new ArrayList<Long>();
 
@@ -195,6 +194,8 @@ public class ShoppingUtil {
 
 			categoryIds.add(category.getCategoryId());
 		}
+
+		String[] skus = StringUtil.split(coupon.getLimitSkus());
 
 		if ((categoryIds.size() > 0) || (skus.length > 0)) {
 			Set<Long> categoryIdsSet = new HashSet<Long>();
