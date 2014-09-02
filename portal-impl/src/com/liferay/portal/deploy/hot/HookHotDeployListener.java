@@ -561,6 +561,9 @@ public class HookHotDeployListener
 			servletContext, servletContextName, portletClassLoader,
 			hotDeployEvent.getPluginPackage(), rootElement);
 
+		initDynamicDataMappingFormFieldRenderers(
+			servletContextName, portletClassLoader, rootElement);
+
 		initIndexerPostProcessors(
 			servletContextName, portletClassLoader, rootElement);
 
@@ -571,9 +574,6 @@ public class HookHotDeployListener
 			rootElement);
 
 		initStrutsActions(servletContextName, portletClassLoader, rootElement);
-
-		initDynamicDataMappingFormFieldRenderers(
-			servletContextName, portletClassLoader, rootElement);
 
 		List<Element> modelListenerElements = rootElement.elements(
 			"model-listener");

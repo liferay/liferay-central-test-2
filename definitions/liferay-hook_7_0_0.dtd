@@ -5,9 +5,9 @@
 -->
 
 <!ELEMENT hook (portal-properties?, language-properties*, custom-jsp-dir?,
-custom-jsp-global?, indexer-post-processor*, service*, servlet-filter*,
-servlet-filter-mapping*, struts-action*,
-dynamic-data-mapping-form-field-renderer*)>
+custom-jsp-global?, dynamic-data-mapping-form-field-renderer*,
+indexer-post-processor*, service*, servlet-filter*, servlet-filter-mapping*,
+struts-action*)>
 
 <!--
 Not all portal properties can be overridden via a hook. The supported properties
