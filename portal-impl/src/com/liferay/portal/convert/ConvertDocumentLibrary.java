@@ -24,11 +24,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Image;
@@ -138,20 +136,9 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			throw new InvalidFileSystemStoreRootDirException();
 		}
 
-		boolean identicalRootDirNames = true;
+		if (PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR.equals(
+				PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR)) {
 
-		if (OSDetector.isWindows()) {
-			identicalRootDirNames = StringUtil.equalsIgnoreCase(
-				PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR,
-				PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-		}
-		else {
-			identicalRootDirNames =
-				PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR.equals(
-					PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-		}
-
-		if (identicalRootDirNames) {
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(5);
 
