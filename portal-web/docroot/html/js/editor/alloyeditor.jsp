@@ -110,7 +110,7 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 	CKEDITOR.env.isCompatible = true;
 </script>
 
-<div class="alloy-editor-placeholder" data-placeholder="<%= LanguageUtil.get(request, placeholder) %>" id="<%= name %>" name="<%= name %>" style="min-height: 300px; min-width: 300px"><%= contents %></div>
+<div class="alloy-editor-placeholder" data-placeholder="<%= LanguageUtil.get(request, placeholder) %>" id="<%= name %>" name="<%= name %>"><%= contents %></div>
 
 <aui:script use="aui-base">
 	window['<%= name %>'] = {
