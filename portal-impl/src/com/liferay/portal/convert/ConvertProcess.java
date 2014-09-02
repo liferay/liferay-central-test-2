@@ -82,7 +82,7 @@ public abstract class ConvertProcess {
 	}
 
 	/**
-	 * @throws ConvertException  
+	 * @throws ConvertException
 	 */
 	public void validate() throws ConvertException {
 	}
