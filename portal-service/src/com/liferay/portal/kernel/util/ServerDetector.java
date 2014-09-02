@@ -139,7 +139,7 @@ public class ServerDetector {
 	}
 
 	public static boolean isSupportsComet() {
-		return getInstance()._SUPPORTS_COMET;
+		return _SUPPORTS_COMET;
 	}
 
 	public static boolean isSupportsHotDeploy() {
