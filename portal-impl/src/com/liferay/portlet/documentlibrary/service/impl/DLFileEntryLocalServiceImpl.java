@@ -241,9 +241,10 @@ public class DLFileEntryLocalServiceImpl
 
 		addFileVersion(
 			user, dlFileEntry, serviceContext.getModifiedDate(now), fileName,
-			extension, mimeType, title, description, changeLog, StringPool.BLANK,
-			fileEntryTypeId, fieldsMap, DLFileEntryConstants.VERSION_DEFAULT,
-			size, WorkflowConstants.STATUS_DRAFT, serviceContext);
+			extension, mimeType, title, description, changeLog,
+			StringPool.BLANK, fileEntryTypeId, fieldsMap,
+			DLFileEntryConstants.VERSION_DEFAULT, size,
+			WorkflowConstants.STATUS_DRAFT, serviceContext);
 
 		// Folder
 
