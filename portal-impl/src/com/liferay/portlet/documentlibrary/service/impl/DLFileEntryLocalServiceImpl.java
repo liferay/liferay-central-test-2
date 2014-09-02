@@ -2489,6 +2489,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setUserId(user.getUserId());
 		dlFileVersion.setUserName(user.getFullName());
 		dlFileVersion.setModifiedDate(statusDate);
+		dlFileVersion.setFileName(fileName);
 
 		if (Validator.isNotNull(sourceFileName)) {
 			dlFileVersion.setExtension(extension);
