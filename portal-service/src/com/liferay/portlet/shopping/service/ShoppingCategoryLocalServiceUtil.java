@@ -270,8 +270,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
-		long groupId, java.lang.String categoryName)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long groupId, java.lang.String categoryName) {
 		return getService().getCategory(groupId, categoryName);
 	}
 
