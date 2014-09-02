@@ -145,9 +145,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		long companyId = portlet.getCompanyId();
 		String name = portlet.getPortletId();
 
-		if (resourcePermissionLocalService.getResourcePermissionsCount(
-				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, name) < 1) {
+		int resourcePermissionsCount =
+			resourcePermissionLocalService.getResourcePermissionsCount(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, name);
 
+		if (resourcePermissionsCount == 0) {
 			resourceLocalService.addResources(
 				companyId, 0, 0, name, name, true, false, false);
 		}

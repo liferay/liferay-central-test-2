@@ -87,16 +87,16 @@ public class ResourceImpl implements Resource {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{companyid=");
 		sb.append(_companyId);
 		sb.append(", name=");
 		sb.append(_name);
-		sb.append(", scope=");
-		sb.append(_scope);
 		sb.append(", primKey=");
 		sb.append(_primKey);
+		sb.append(", scope=");
+		sb.append(_scope);
 		sb.append("}");
 
 		return sb.toString();
