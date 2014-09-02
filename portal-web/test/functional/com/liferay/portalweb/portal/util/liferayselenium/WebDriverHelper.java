@@ -51,8 +51,8 @@ public class WebDriverHelper {
 
 		WebDriver wrappedWebDriver = wrapsDriver.getWrappedDriver();
 
-		JavascriptExecutor javascriptExecutor = (
-			JavascriptExecutor)wrappedWebDriver;
+		JavascriptExecutor javascriptExecutor =
+			(JavascriptExecutor)wrappedWebDriver;
 
 		StringBundler sb = new StringBundler(4);
 
