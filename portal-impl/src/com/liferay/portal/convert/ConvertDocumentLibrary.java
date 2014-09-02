@@ -96,9 +96,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	@Override
-	public void validate()
-		throws InvalidFileSystemStoreRootDirException {
-
+	public void validate() throws FileSystemStoreRootDirException {
 		String sourceStoreClassName = getSourceStoreClassName();
 
 		if (!sourceStoreClassName.endsWith(_FILE_SYSTEM_STORE_SUFFIX)) {
@@ -121,7 +119,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 							" is not set");
 			}
 
-			throw new InvalidFileSystemStoreRootDirException();
+			throw new FileSystemStoreRootDirException();
 		}
 
 		if (Validator.isBlank(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR)) {
@@ -133,7 +131,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 							" is not set");
 			}
 
-			throw new InvalidFileSystemStoreRootDirException();
+			throw new FileSystemStoreRootDirException();
 		}
 
 		if (PropsValues.DL_STORE_ADVANCED_FILE_SYSTEM_ROOT_DIR.equals(
@@ -151,7 +149,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 				_log.warn(sb.toString());
 			}
 
-			throw new InvalidFileSystemStoreRootDirException();
+			throw new FileSystemStoreRootDirException();
 		}
 	}
 

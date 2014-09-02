@@ -17,20 +17,20 @@ package com.liferay.portal.convert;
 /**
  * @author László Csontos
  */
-public class InvalidFileSystemStoreRootDirException extends ConvertException {
+public class FileSystemStoreRootDirException extends ConvertException {
 
-	public InvalidFileSystemStoreRootDirException() {
+	public FileSystemStoreRootDirException() {
 	}
 
-	public InvalidFileSystemStoreRootDirException(String msg) {
+	public FileSystemStoreRootDirException(String msg) {
 		super(msg);
 	}
 
-	public InvalidFileSystemStoreRootDirException(String msg, Throwable cause) {
+	public FileSystemStoreRootDirException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public InvalidFileSystemStoreRootDirException(Throwable cause) {
+	public FileSystemStoreRootDirException(Throwable cause) {
 		super(cause);
 	}
 
