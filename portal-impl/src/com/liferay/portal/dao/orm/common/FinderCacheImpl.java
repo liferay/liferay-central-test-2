@@ -345,16 +345,18 @@ public class FinderCacheImpl
 
 	static {
 		if (PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
+			_LOCAL_CACHE_AVAILABLE = true;
+
 			_localCache = new AutoResetThreadLocal<LRUMap>(
 				FinderCacheImpl.class + "._localCache",
 				new LRUMap(
 					PropsValues.
 						VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
-			_LOCAL_CACHE_AVAILABLE = true;
 		}
 		else {
-			_localCache = null;
 			_LOCAL_CACHE_AVAILABLE = false;
+
+			_localCache = null;
 		}
 	}
 
