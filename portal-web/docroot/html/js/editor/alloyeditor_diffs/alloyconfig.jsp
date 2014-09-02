@@ -36,7 +36,6 @@ Locale locale = LocaleUtil.fromLanguageId(languageId);
 languageId = LocaleUtil.toLanguageId(locale);
 
 String name = ParamUtil.getString(request, "name");
-
 String toolbarSet = ParamUtil.getString(request, "toolbarSet");
 
 response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
