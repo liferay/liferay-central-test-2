@@ -143,7 +143,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 		boolean changeable = ParamUtil.getBoolean(actionRequest, "changeable");
 
 		boolean changeRequired = false;
-		long minAge = 0L;
+		long minAge = 0;
 
 		if (changeable) {
 			changeRequired = ParamUtil.getBoolean(
