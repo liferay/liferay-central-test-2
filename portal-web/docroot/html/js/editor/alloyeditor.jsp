@@ -65,10 +65,10 @@ if (Validator.isNotNull(onFocusMethod)) {
 	onFocusMethod = namespace + onFocusMethod;
 }
 
-String placeholder = (String)request.getAttribute("liferay-ui:input-editor:placeholder");
+String placeholder = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:placeholder"));
 boolean resizable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:resizable"));
 boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
-String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
+String toolbarSet = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:toolbarSet"));
 %>
 
 <c:if test="<%= !skipEditorLoading %>">
