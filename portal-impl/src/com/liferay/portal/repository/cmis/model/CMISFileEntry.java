@@ -171,8 +171,8 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	@Override
-	public String getFilename() {
-		return DLAppUtil.getSanitizedFilename(getTitle(), getExtension());
+	public String getFileName() {
+		return DLAppUtil.getSanitizedFileName(getTitle(), getExtension());
 	}
 
 	@Override

@@ -827,13 +827,13 @@ public class DLImpl implements DL {
 		sb.append(fileEntry.getFolderId());
 		sb.append(StringPool.SLASH);
 
-		String filename = fileEntry.getFilename();
+		String fileName = fileEntry.getFileName();
 
 		if (fileEntry.isInTrash()) {
-			filename = TrashUtil.getOriginalTitle(fileEntry.getFilename());
+			fileName = TrashUtil.getOriginalTitle(fileEntry.getFileName());
 		}
 
-		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(filename)));
+		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(fileName)));
 
 		sb.append(StringPool.SLASH);
 		sb.append(HttpUtil.encodeURL(fileEntry.getUuid()));
@@ -1076,12 +1076,12 @@ public class DLImpl implements DL {
 			webDavURL.append(MANUAL_CHECK_IN_REQUIRED_PATH);
 		}
 
-		String fileEntryFilename = null;
+		String fileEntryFileName = null;
 
 		Group group = null;
 
 		if (fileEntry != null) {
-			fileEntryFilename = HtmlUtil.unescape(fileEntry.getFilename());
+			fileEntryFileName = HtmlUtil.unescape(fileEntry.getFileName());
 
 			group = GroupLocalServiceUtil.getGroup(fileEntry.getGroupId());
 		}
@@ -1117,7 +1117,7 @@ public class DLImpl implements DL {
 
 		if (fileEntry != null) {
 			sb.append(StringPool.SLASH);
-			sb.append(HttpUtil.encodeURL(fileEntryFilename, true));
+			sb.append(HttpUtil.encodeURL(fileEntryFileName, true));
 		}
 
 		webDavURL.append(sb.toString());

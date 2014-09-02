@@ -86,7 +86,7 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 
 	public long getFileEntryId();
 
-	public String getFilename();
+	public String getFileName();
 
 	/**
 	 * Returns the current file version. The workflow state of the latest file

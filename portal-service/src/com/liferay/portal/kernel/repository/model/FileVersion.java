@@ -50,7 +50,7 @@ public interface FileVersion extends RepositoryModel<FileVersion> {
 
 	public long getFileEntryId();
 
-	public String getFilename();
+	public String getFileName();
 
 	public long getFileVersionId();
 

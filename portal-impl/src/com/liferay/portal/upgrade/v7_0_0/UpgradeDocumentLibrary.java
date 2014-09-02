@@ -37,7 +37,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		// DLFileEntry
 
 		try {
-			runSQL("alter table DLFileEntry add filename VARCHAR(255) null");
+			runSQL("alter table DLFileEntry add fileName VARCHAR(255) null");
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
@@ -46,12 +46,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
 		}
 
-		updateFileEntryFilenames();
+		updateFileEntryFileNames();
 
 		// DLFileVersion
 
 		try {
-			runSQL("alter table DLFileVersion add filename VARCHAR(255) null");
+			runSQL("alter table DLFileVersion add fileName VARCHAR(255) null");
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
@@ -60,10 +60,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 		}
 
-		updateFileVersionFilenames();
+		updateFileVersionFileNames();
 	}
 
-	protected void updateFileEntryFilename(long fileEntryId, String filename)
+	protected void updateFileEntryFileName(long fileEntryId, String fileName)
 		throws Exception {
 
 		Connection con = null;
@@ -73,9 +73,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update DLFileEntry set filename = ? where fileEntryId = ?");
+				"update DLFileEntry set fileName = ? where fileEntryId = ?");
 
-			ps.setString(1, filename);
+			ps.setString(1, fileName);
 			ps.setLong(2, fileEntryId);
 
 			ps.executeUpdate();
@@ -85,7 +85,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateFileEntryFilenames() throws Exception {
+	protected void updateFileEntryFileNames() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -104,10 +104,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					rs.getString("extension"));
 				String title = GetterUtil.getString(rs.getString("title"));
 
-				String filename = DLAppUtil.getSanitizedFilename(
+				String fileName = DLAppUtil.getSanitizedFileName(
 					title, extension);
 
-				updateFileEntryFilename(fileEntryId, filename);
+				updateFileEntryFileName(fileEntryId, fileName);
 			}
 		}
 		finally {
@@ -115,8 +115,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateFileVersionFilename(
-			long fileVersionId, String filename)
+	protected void updateFileVersionFileName(
+			long fileVersionId, String fileName)
 		throws Exception {
 
 		Connection con = null;
@@ -126,10 +126,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update DLFileVersion set filename = ? where " +
+				"update DLFileVersion set fileName = ? where " +
 					"fileVersionId = ?");
 
-			ps.setString(1, filename);
+			ps.setString(1, fileName);
 			ps.setLong(2, fileVersionId);
 
 			ps.executeUpdate();
@@ -139,7 +139,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateFileVersionFilenames() throws Exception {
+	protected void updateFileVersionFileNames() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -158,10 +158,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					rs.getString("extension"));
 				String title = GetterUtil.getString(rs.getString("title"));
 
-				String filename = DLAppUtil.getSanitizedFilename(
+				String fileName = DLAppUtil.getSanitizedFileName(
 					title, extension);
 
-				updateFileVersionFilename(fileVersionId, filename);
+				updateFileVersionFileName(fileVersionId, fileName);
 			}
 		}
 		finally {

@@ -54,17 +54,17 @@ public class DLAppUtil {
 		return mimeType;
 	}
 
-	public static String getSanitizedFilename(String title, String extension) {
-		String filename = StringUtil.replace(
+	public static String getSanitizedFileName(String title, String extension) {
+		String fileName = StringUtil.replace(
 			title, StringPool.SLASH, StringPool.UNDERLINE);
 
 		if (Validator.isNotNull(extension) &&
-			!filename.endsWith(StringPool.PERIOD + extension)) {
+			!fileName.endsWith(StringPool.PERIOD + extension)) {
 
-			filename += StringPool.PERIOD + extension;
+			fileName += StringPool.PERIOD + extension;
 		}
 
-		return filename;
+		return fileName;
 	}
 
 	public static boolean isMajorVersion(

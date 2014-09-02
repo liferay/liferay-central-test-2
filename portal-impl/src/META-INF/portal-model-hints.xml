@@ -1562,7 +1562,7 @@
 		<field name="title" type="String">
 			<hint name="max-length">255</hint>
 		</field>
-		<field name="filename" type="String">
+		<field name="fileName" type="String">
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="description" type="String">
@@ -1658,7 +1658,7 @@
 		<field name="title" type="String">
 			<hint name="max-length">255</hint>
 		</field>
-		<field name="filename" type="String">
+		<field name="fileName" type="String">
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="description" type="String">

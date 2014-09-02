@@ -196,8 +196,8 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	}
 
 	@Override
-	public String getFilename() {
-		return _dlFileEntry.getFilename();
+	public String getFileName() {
+		return _dlFileEntry.getFileName();
 	}
 
 	@Override
