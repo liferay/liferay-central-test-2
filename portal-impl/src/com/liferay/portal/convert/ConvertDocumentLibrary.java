@@ -123,7 +123,6 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		}
 
 		if (Validator.isBlank(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR)) {
-
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Property \"" +
