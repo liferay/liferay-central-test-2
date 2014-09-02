@@ -67,14 +67,14 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		sb.append(fileEntryId);
 		sb.append(", treePath=");
 		sb.append(treePath);
+		sb.append(", fileName=");
+		sb.append(fileName);
 		sb.append(", extension=");
 		sb.append(extension);
 		sb.append(", mimeType=");
 		sb.append(mimeType);
 		sb.append(", title=");
 		sb.append(title);
-		sb.append(", filename=");
-		sb.append(filename);
 		sb.append(", description=");
 		sb.append(description);
 		sb.append(", changeLog=");
@@ -150,6 +150,13 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 			dlFileVersionImpl.setTreePath(treePath);
 		}
 
+		if (fileName == null) {
+			dlFileVersionImpl.setFileName(StringPool.BLANK);
+		}
+		else {
+			dlFileVersionImpl.setFileName(fileName);
+		}
+
 		if (extension == null) {
 			dlFileVersionImpl.setExtension(StringPool.BLANK);
 		}
@@ -169,13 +176,6 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		}
 		else {
 			dlFileVersionImpl.setTitle(title);
-		}
-
-		if (filename == null) {
-			dlFileVersionImpl.setFilename(StringPool.BLANK);
-		}
-		else {
-			dlFileVersionImpl.setFilename(filename);
 		}
 
 		if (description == null) {
@@ -253,10 +253,10 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		folderId = objectInput.readLong();
 		fileEntryId = objectInput.readLong();
 		treePath = objectInput.readUTF();
+		fileName = objectInput.readUTF();
 		extension = objectInput.readUTF();
 		mimeType = objectInput.readUTF();
 		title = objectInput.readUTF();
-		filename = objectInput.readUTF();
 		description = objectInput.readUTF();
 		changeLog = objectInput.readUTF();
 		extraSettings = objectInput.readUTF();
@@ -305,6 +305,13 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 			objectOutput.writeUTF(treePath);
 		}
 
+		if (fileName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(fileName);
+		}
+
 		if (extension == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -324,13 +331,6 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		}
 		else {
 			objectOutput.writeUTF(title);
-		}
-
-		if (filename == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(filename);
 		}
 
 		if (description == null) {
@@ -397,10 +397,10 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 	public long folderId;
 	public long fileEntryId;
 	public String treePath;
+	public String fileName;
 	public String extension;
 	public String mimeType;
 	public String title;
-	public String filename;
 	public String description;
 	public String changeLog;
 	public String extraSettings;

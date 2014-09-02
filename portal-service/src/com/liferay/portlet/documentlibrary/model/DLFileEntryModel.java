@@ -314,6 +314,21 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	public void setName(String name);
 
 	/**
+	 * Returns the file name of this document library file entry.
+	 *
+	 * @return the file name of this document library file entry
+	 */
+	@AutoEscape
+	public String getFileName();
+
+	/**
+	 * Sets the file name of this document library file entry.
+	 *
+	 * @param fileName the file name of this document library file entry
+	 */
+	public void setFileName(String fileName);
+
+	/**
 	 * Returns the extension of this document library file entry.
 	 *
 	 * @return the extension of this document library file entry
@@ -357,21 +372,6 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 * @param title the title of this document library file entry
 	 */
 	public void setTitle(String title);
-
-	/**
-	 * Returns the filename of this document library file entry.
-	 *
-	 * @return the filename of this document library file entry
-	 */
-	@AutoEscape
-	public String getFilename();
-
-	/**
-	 * Sets the filename of this document library file entry.
-	 *
-	 * @param filename the filename of this document library file entry
-	 */
-	public void setFilename(String filename);
 
 	/**
 	 * Returns the description of this document library file entry.

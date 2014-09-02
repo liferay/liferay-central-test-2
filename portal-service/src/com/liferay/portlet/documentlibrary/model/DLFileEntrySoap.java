@@ -48,10 +48,10 @@ public class DLFileEntrySoap implements Serializable {
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setTreePath(model.getTreePath());
 		soapModel.setName(model.getName());
+		soapModel.setFileName(model.getFileName());
 		soapModel.setExtension(model.getExtension());
 		soapModel.setMimeType(model.getMimeType());
 		soapModel.setTitle(model.getTitle());
-		soapModel.setFilename(model.getFilename());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setExtraSettings(model.getExtraSettings());
 		soapModel.setFileEntryTypeId(model.getFileEntryTypeId());
@@ -227,6 +227,14 @@ public class DLFileEntrySoap implements Serializable {
 		_name = name;
 	}
 
+	public String getFileName() {
+		return _fileName;
+	}
+
+	public void setFileName(String fileName) {
+		_fileName = fileName;
+	}
+
 	public String getExtension() {
 		return _extension;
 	}
@@ -249,14 +257,6 @@ public class DLFileEntrySoap implements Serializable {
 
 	public void setTitle(String title) {
 		_title = title;
-	}
-
-	public String getFilename() {
-		return _filename;
-	}
-
-	public void setFilename(String filename) {
-		_filename = filename;
 	}
 
 	public String getDescription() {
@@ -365,10 +365,10 @@ public class DLFileEntrySoap implements Serializable {
 	private long _folderId;
 	private String _treePath;
 	private String _name;
+	private String _fileName;
 	private String _extension;
 	private String _mimeType;
 	private String _title;
-	private String _filename;
 	private String _description;
 	private String _extraSettings;
 	private long _fileEntryTypeId;

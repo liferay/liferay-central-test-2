@@ -68,10 +68,10 @@ public class DLFileEntryWrapper implements DLFileEntry,
 		attributes.put("folderId", getFolderId());
 		attributes.put("treePath", getTreePath());
 		attributes.put("name", getName());
+		attributes.put("fileName", getFileName());
 		attributes.put("extension", getExtension());
 		attributes.put("mimeType", getMimeType());
 		attributes.put("title", getTitle());
-		attributes.put("filename", getFilename());
 		attributes.put("description", getDescription());
 		attributes.put("extraSettings", getExtraSettings());
 		attributes.put("fileEntryTypeId", getFileEntryTypeId());
@@ -173,6 +173,12 @@ public class DLFileEntryWrapper implements DLFileEntry,
 			setName(name);
 		}
 
+		String fileName = (String)attributes.get("fileName");
+
+		if (fileName != null) {
+			setFileName(fileName);
+		}
+
 		String extension = (String)attributes.get("extension");
 
 		if (extension != null) {
@@ -189,12 +195,6 @@ public class DLFileEntryWrapper implements DLFileEntry,
 
 		if (title != null) {
 			setTitle(title);
-		}
-
-		String filename = (String)attributes.get("filename");
-
-		if (filename != null) {
-			setFilename(filename);
 		}
 
 		String description = (String)attributes.get("description");
@@ -436,6 +436,16 @@ public class DLFileEntryWrapper implements DLFileEntry,
 		return _dlFileEntry.getFileEntryTypeId();
 	}
 
+	/**
+	* Returns the file name of this document library file entry.
+	*
+	* @return the file name of this document library file entry
+	*/
+	@Override
+	public java.lang.String getFileName() {
+		return _dlFileEntry.getFileName();
+	}
+
 	@Override
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion()
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -458,16 +468,6 @@ public class DLFileEntryWrapper implements DLFileEntry,
 	@Override
 	public int getFileVersionsCount(int status) {
 		return _dlFileEntry.getFileVersionsCount(status);
-	}
-
-	/**
-	* Returns the filename of this document library file entry.
-	*
-	* @return the filename of this document library file entry
-	*/
-	@Override
-	public java.lang.String getFilename() {
-		return _dlFileEntry.getFilename();
 	}
 
 	@Override
@@ -991,13 +991,13 @@ public class DLFileEntryWrapper implements DLFileEntry,
 	}
 
 	/**
-	* Sets the filename of this document library file entry.
+	* Sets the file name of this document library file entry.
 	*
-	* @param filename the filename of this document library file entry
+	* @param fileName the file name of this document library file entry
 	*/
 	@Override
-	public void setFilename(java.lang.String filename) {
-		_dlFileEntry.setFilename(filename);
+	public void setFileName(java.lang.String fileName) {
+		_dlFileEntry.setFileName(fileName);
 	}
 
 	/**

@@ -145,13 +145,13 @@ public class DLFileVersionPersistenceTest {
 
 		newDLFileVersion.setTreePath(RandomTestUtil.randomString());
 
+		newDLFileVersion.setFileName(RandomTestUtil.randomString());
+
 		newDLFileVersion.setExtension(RandomTestUtil.randomString());
 
 		newDLFileVersion.setMimeType(RandomTestUtil.randomString());
 
 		newDLFileVersion.setTitle(RandomTestUtil.randomString());
-
-		newDLFileVersion.setFilename(RandomTestUtil.randomString());
 
 		newDLFileVersion.setDescription(RandomTestUtil.randomString());
 
@@ -205,14 +205,14 @@ public class DLFileVersionPersistenceTest {
 			newDLFileVersion.getFileEntryId());
 		Assert.assertEquals(existingDLFileVersion.getTreePath(),
 			newDLFileVersion.getTreePath());
+		Assert.assertEquals(existingDLFileVersion.getFileName(),
+			newDLFileVersion.getFileName());
 		Assert.assertEquals(existingDLFileVersion.getExtension(),
 			newDLFileVersion.getExtension());
 		Assert.assertEquals(existingDLFileVersion.getMimeType(),
 			newDLFileVersion.getMimeType());
 		Assert.assertEquals(existingDLFileVersion.getTitle(),
 			newDLFileVersion.getTitle());
-		Assert.assertEquals(existingDLFileVersion.getFilename(),
-			newDLFileVersion.getFilename());
 		Assert.assertEquals(existingDLFileVersion.getDescription(),
 			newDLFileVersion.getDescription());
 		Assert.assertEquals(existingDLFileVersion.getChangeLog(),
@@ -427,8 +427,8 @@ public class DLFileVersionPersistenceTest {
 			true, "fileVersionId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "repositoryId", true, "folderId", true,
-			"fileEntryId", true, "treePath", true, "extension", true,
-			"mimeType", true, "title", true, "filename", true, "description",
+			"fileEntryId", true, "treePath", true, "fileName", true,
+			"extension", true, "mimeType", true, "title", true, "description",
 			true, "changeLog", true, "extraSettings", true, "fileEntryTypeId",
 			true, "version", true, "size", true, "checksum", true, "status",
 			true, "statusByUserId", true, "statusByUserName", true,
@@ -683,13 +683,13 @@ public class DLFileVersionPersistenceTest {
 
 		dlFileVersion.setTreePath(RandomTestUtil.randomString());
 
+		dlFileVersion.setFileName(RandomTestUtil.randomString());
+
 		dlFileVersion.setExtension(RandomTestUtil.randomString());
 
 		dlFileVersion.setMimeType(RandomTestUtil.randomString());
 
 		dlFileVersion.setTitle(RandomTestUtil.randomString());
-
-		dlFileVersion.setFilename(RandomTestUtil.randomString());
 
 		dlFileVersion.setDescription(RandomTestUtil.randomString());
 
