@@ -303,7 +303,7 @@ public interface VelocityTaglib {
 
 	public void mySites(int max) throws Exception;
 
-	public void permissionsURL(
+	public String permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, Object resourceGroupId,
 			String resourcePrimKey, String windowState, int[] roleTypes)
@@ -314,7 +314,7 @@ public interface VelocityTaglib {
 	 *             String, String, Object, String, String, int[])}
 	 */
 	@Deprecated
-	public void permissionsURL(
+	public String permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey,
 			String windowState, int[] roleTypes)

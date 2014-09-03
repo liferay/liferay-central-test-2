@@ -809,15 +809,15 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	}
 
 	@Override
-	public void permissionsURL(
+	public String permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, Object resourceGroupId,
 			String resourcePrimKey, String windowState, int[] roleTypes)
 		throws Exception {
 
-		PermissionsURLTag.doTag(
+		return PermissionsURLTag.doTag(
 			redirect, modelResource, modelResourceDescription, resourceGroupId,
-			resourcePrimKey, windowState, null, roleTypes, _pageContext);
+			resourcePrimKey, windowState, roleTypes, _request);
 	}
 
 	/**
@@ -826,13 +826,13 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	 */
 	@Deprecated
 	@Override
-	public void permissionsURL(
+	public String permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey,
 			String windowState, int[] roleTypes)
 		throws Exception {
 
-		permissionsURL(
+		return permissionsURL(
 			redirect, modelResourceDescription, modelResourceDescription, null,
 			resourcePrimKey, windowState, roleTypes);
 	}
