@@ -15,5 +15,5 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactoryImplementor" ref="liferayHibernateSessionFactory" />
 	</bean>
-	<bean id="liferayTransactionManager" class="com.liferay.portal.kernel.util.InfrastructureUtil" depends-on="infrastructureUtil" factory-method="getTransactionManager" />
+	<bean id="liferayTransactionManager" class="com.liferay.portal.kernel.util.InfrastructureUtil" depends-on="com.liferay.portal.kernel.util.InfrastructureUtil" factory-method="getTransactionManager" />
 </beans>
