@@ -165,8 +165,9 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 			// redirecting ProjectData#initialize to
 			// InstrumentationAgent#initialize
 
-			if ("net/sourceforge/cobertura/coveragedata/TouchCollector".equals(
-					className)) {
+			if ((className != null) &&
+				className.equals(
+					"net/sourceforge/cobertura/coveragedata/TouchCollector")) {
 
 				ClassWriter classWriter = new ContextAwareClassWriter(
 					ClassWriter.COMPUTE_FRAMES);
