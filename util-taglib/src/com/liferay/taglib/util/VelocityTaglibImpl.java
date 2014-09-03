@@ -1213,8 +1213,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		throws Exception {
 
 		return WrapPortletTag.doTag(
-			wrapPage, portletPage, _servletContext, _request, _response,
-			_pageContext);
+			wrapPage, portletPage, _servletContext, _request, _response);
 	}
 
 	protected VelocityTaglibImpl init(
