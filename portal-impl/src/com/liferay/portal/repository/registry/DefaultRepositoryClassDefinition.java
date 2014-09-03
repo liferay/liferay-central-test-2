@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public class DefaultRepositoryClassDefinition
 	implements RepositoryClassDefinition, RepositoryEventRegistry,
-		RepositoryEventTrigger, RepositoryFactoryRegistry {
+			   RepositoryEventTrigger, RepositoryFactoryRegistry {
 
 	public DefaultRepositoryClassDefinition(
 		RepositoryDefiner repositoryDefiner) {

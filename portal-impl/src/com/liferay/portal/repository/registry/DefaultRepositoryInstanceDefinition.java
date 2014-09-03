@@ -33,11 +33,6 @@ public class DefaultRepositoryInstanceDefinition
 		DocumentRepository documentRepository) {
 
 		_documentRepository = documentRepository;
-
-		_exportedCapabilities = new HashSet<Class<? extends Capability>>();
-
-		_supportedCapabilities =
-			new HashMap<Class<? extends Capability>, Capability>();
 	}
 
 	@Override
@@ -74,7 +69,10 @@ public class DefaultRepositoryInstanceDefinition
 	}
 
 	private DocumentRepository _documentRepository;
-	private Set<Class<? extends Capability>> _exportedCapabilities;
-	private Map<Class<? extends Capability>, Capability> _supportedCapabilities;
+	private Set<Class<? extends Capability>> _exportedCapabilities =
+		new HashSet<Class<? extends Capability>>();
+	private Map<Class<? extends Capability>, Capability>
+		_supportedCapabilities =
+			new HashMap<Class<? extends Capability>, Capability>();
 
 }
