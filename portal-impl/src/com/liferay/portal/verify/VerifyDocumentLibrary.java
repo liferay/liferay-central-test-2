@@ -302,8 +302,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			DLFileEntry.class);
 
- 		dynamicQuery.add(
- 			RestrictionsFactoryUtil.like("title", "%\\\\%"));
+		dynamicQuery.add(RestrictionsFactoryUtil.like("title", "%\\\\%"));
 
 		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.dynamicQuery(dynamicQuery);
