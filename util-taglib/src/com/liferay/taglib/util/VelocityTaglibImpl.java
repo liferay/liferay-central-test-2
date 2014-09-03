@@ -325,7 +325,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 
 	@Override
 	public void doAsURL(long doAsUserId) throws Exception {
-		DoAsURLTag.doTag(doAsUserId, null, _pageContext);
+		DoAsURLTag.doTag(doAsUserId, _request);
 	}
 
 	@Override
