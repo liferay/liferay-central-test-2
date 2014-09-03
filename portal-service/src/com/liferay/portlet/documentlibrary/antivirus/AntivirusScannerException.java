@@ -70,7 +70,7 @@ public class AntivirusScannerException extends PortalException {
 			return "a-virus-was-detected-in-the-file";
 		}
 
-		return "an-error-occurred-while-executing-the-antivirus";
+		return "an-unexpected-error-occurred-while-scanning-for-viruses";
 	}
 
 	private int _type;
