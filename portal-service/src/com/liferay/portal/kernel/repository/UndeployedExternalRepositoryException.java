@@ -24,8 +24,8 @@ public class UndeployedExternalRepositoryException extends RepositoryException {
 	public UndeployedExternalRepositoryException(ClassName className) {
 		super(
 			"Unable to load external repository of class " +
-				className.getClassName() + " because its plugin is currently " +
-				"not deployed");
+				className.getClassName() + " because its plugin is not " +
+					"deployed");
 
 		_className = className;
 	}
