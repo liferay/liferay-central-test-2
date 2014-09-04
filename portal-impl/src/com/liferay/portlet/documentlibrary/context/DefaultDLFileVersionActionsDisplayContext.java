@@ -18,7 +18,6 @@ import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -501,10 +500,10 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setIconCssClass("icon-download");
 		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
 
-		String message =
-			LanguageUtil.get(_request, "download") + " (" +
-				TextFormatter.formatStorageSize(
-					_fileEntry.getSize(), _themeDisplay.getLocale()) + ")";
+		String message = TextFormatter.formatStorageSize(
+			_fileEntry.getSize(), _themeDisplay.getLocale());
+
+		message = _themeDisplay.translate("download") + " (" + message + ")";
 
 		urlMenuItem.setMessage(message);
 
