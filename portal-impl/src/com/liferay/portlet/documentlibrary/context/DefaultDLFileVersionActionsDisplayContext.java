@@ -507,6 +507,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 					_fileEntry.getSize(), _themeDisplay.getLocale()) + ")";
 
 		urlMenuItem.setMessage(message);
+
 		urlMenuItem.setTarget("_blank");
 
 		String url = DLUtil.getDownloadURL(
@@ -561,7 +562,8 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
 
-		portletURL.setParameter("struts_action", "/document_library/move_entry");
+		portletURL.setParameter(
+			"struts_action", "/document_library/move_entry");
 
 		PortletURL redirectURL = _liferayPortletResponse.createRenderURL();
 
