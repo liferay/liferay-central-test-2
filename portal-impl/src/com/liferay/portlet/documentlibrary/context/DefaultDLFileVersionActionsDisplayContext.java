@@ -459,7 +459,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 				menuItems.add(
 					new DeleteMenuItem(
-						DLMenuItems.MENU_ITEM_DELETE, deleteURL.toString()));
+						DLMenuItems.MENU_ITEM_ID_DELETE, deleteURL.toString()));
 			}
 
 			if (isMoveToTheRecycleBinButtonVisible()) {
@@ -476,7 +476,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 				menuItems.add(
 					new DeleteMenuItem(
-						DLMenuItems.MENU_ITEM_DELETE, deleteURL.toString(),
+						DLMenuItems.MENU_ITEM_ID_DELETE, deleteURL.toString(),
 						true));
 			}
 		}
