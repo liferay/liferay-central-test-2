@@ -21,19 +21,15 @@ MenuItem menuItem = (MenuItem)request.getAttribute("liferay-ui:menu_item:menuIte
 %>
 
 <c:choose>
-	<c:when test="<%= menuItem instanceof URLMenuItem %>">
+	<c:when test="<%= menuItem instanceof DeleteMenuItem %>">
 
 		<%
-		URLMenuItem urlMenuItem = (URLMenuItem)menuItem;
+		DeleteMenuItem deleteMenuItem = (DeleteMenuItem)menuItem;
 		%>
 
-		<liferay-ui:icon
-			iconCssClass="<%= urlMenuItem.getIconCssClass() %>"
-			message="<%= urlMenuItem.getMessage() %>"
-			method="<%= urlMenuItem.getMethod() %>"
-			target="<%= urlMenuItem.getTarget() %>"
-			url="<%= urlMenuItem.getURL() %>"
-			useDialog="<%= urlMenuItem.isUseDialog() %>"
+		<liferay-ui:icon-delete
+			trash="<%= deleteMenuItem.getTrash() %>"
+			url="<%= deleteMenuItem.getURL() %>"
 		/>
 	</c:when>
 	<c:when test="<%= menuItem instanceof JavascriptMenuItem %>">
@@ -52,15 +48,19 @@ MenuItem menuItem = (MenuItem)request.getAttribute("liferay-ui:menu_item:menuIte
 			<%= javascriptMenuItem.getJavascript() %>
 		</aui:script>
 	</c:when>
-	<c:when test="<%= menuItem instanceof DeleteMenuItem %>">
+	<c:when test="<%= menuItem instanceof URLMenuItem %>">
 
 		<%
-		DeleteMenuItem deleteMenuItem = (DeleteMenuItem)menuItem;
+		URLMenuItem urlMenuItem = (URLMenuItem)menuItem;
 		%>
 
-		<liferay-ui:icon-delete
-			trash="<%= deleteMenuItem.getTrash() %>"
-			url="<%= deleteMenuItem.getURL() %>"
+		<liferay-ui:icon
+			iconCssClass="<%= urlMenuItem.getIconCssClass() %>"
+			message="<%= urlMenuItem.getMessage() %>"
+			method="<%= urlMenuItem.getMethod() %>"
+			target="<%= urlMenuItem.getTarget() %>"
+			url="<%= urlMenuItem.getURL() %>"
+			useDialog="<%= urlMenuItem.isUseDialog() %>"
 		/>
 	</c:when>
 </c:choose>
