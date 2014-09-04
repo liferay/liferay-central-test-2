@@ -339,35 +339,34 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			return (Map<String, Object>)object;
 		}
 
-		final Map<String, Object> destinationMap = new LinkedHashMap<>();
-
 		JsonContext jsonContext = _jsonSerializer.createJsonContext(null);
+		final Map<String, Object> map = new LinkedHashMap<>();
 
-		BeanSerializer beanSerializer =
-			new BeanSerializer(jsonContext, object) {
+		BeanSerializer beanSerializer = new BeanSerializer(
+			jsonContext, object) {
 
-				@Override
-				protected void onSerializableProperty(
-					String propertyName,
-					@SuppressWarnings("rawtypes") Class propertyClass,
-					Object value) {
+			@Override
+			protected void onSerializableProperty(
+				String propertyName,
+				@SuppressWarnings("rawtypes") Class propertyClass,
+				Object value) {
 
-					destinationMap.put(propertyName, value);
+				map.put(propertyName, value);
 
-					String include = propertyName;
+				String include = propertyName;
 
-					if (prefix != null) {
-						include = prefix + "." + include;
-					}
-
-					_addInclude(statement, include);
+				if (prefix != null) {
+					include = prefix + "." + include;
 				}
+
+				_addInclude(statement, include);
+			}
 
 		};
 
 		beanSerializer.serialize();
 
-		return destinationMap;
+		return map;
 	}
 
 	private Object _executeStatement(Statement statement) throws Exception {
