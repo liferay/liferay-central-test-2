@@ -22,7 +22,7 @@ import jodd.json.TypeJsonSerializer;
 /**
  * @author Igor Spasic
  */
-public class JoddJsonTransformer implements TypeJsonSerializer {
+public class JoddJsonTransformer implements TypeJsonSerializer<Object> {
 
 	public JoddJsonTransformer(JSONTransformer jsonTransformer) {
 		_jsonTransformer = jsonTransformer;
