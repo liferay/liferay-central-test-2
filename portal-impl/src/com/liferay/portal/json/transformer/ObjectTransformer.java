@@ -19,8 +19,12 @@ import com.liferay.portal.kernel.json.JSONContext;
 import com.liferay.portal.kernel.json.JSONTransformer;
 
 import jodd.json.impl.ObjectJsonSerializer;
-public abstract class ObjectTransformer extends ObjectJsonSerializer
-	implements JSONTransformer {
+
+/**
+ * @author Igor Spasic
+ */
+public abstract class ObjectTransformer
+	extends ObjectJsonSerializer implements JSONTransformer {
 
 	@Override
 	public void transform(JSONContext jsonContext, Object object) {
