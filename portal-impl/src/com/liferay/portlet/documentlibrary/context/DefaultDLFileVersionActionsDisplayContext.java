@@ -379,8 +379,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
-		portletURL.setParameter(
-			Constants.CMD, Constants.CANCEL_CHECKOUT);
+		portletURL.setParameter(Constants.CMD, Constants.CANCEL_CHECKOUT);
 		portletURL.setParameter("redirect", _getCurrentURL());
 		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
