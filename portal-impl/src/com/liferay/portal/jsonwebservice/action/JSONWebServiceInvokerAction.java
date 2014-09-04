@@ -341,13 +341,16 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 		final Map<String, Object> destinationMap = new LinkedHashMap<>();
 
-		JsonContext jsonContext = new JsonSerializer().createJsonContext(null);
+		JsonContext jsonContext = _jsonSerializer.createJsonContext(null);
 
 		BeanSerializer beanSerializer =
 			new BeanSerializer(jsonContext, object) {
+
 				@Override
 				protected void onSerializableProperty(
-						String propertyName, Class propertyType, Object value) {
+					String propertyName,
+					@SuppressWarnings("rawtypes") Class propertyClass,
+					Object value) {
 
 					destinationMap.put(propertyName, value);
 
@@ -359,6 +362,7 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 					_addInclude(statement, include);
 				}
+
 		};
 
 		beanSerializer.serialize();
@@ -646,6 +650,8 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			}
 		}
 	}
+	
+	private static JsonSerializer _jsonSerializer = new JsonSerializer();
 
 	private String _command;
 	private List<String> _includes;
