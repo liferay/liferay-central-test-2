@@ -583,13 +583,12 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 		Map<String, String> context = new HashMap<String, String>();
 
-		context.put("namespace", _liferayPortletResponse.getNamespace());
-
 		context.put(
 			"errorMessage", UnicodeLanguageUtil.get(
 				_request,
 				"cannot-open-the-requested-document-due-to-the-following-" +
 					"reason"));
+		context.put("namespace", _liferayPortletResponse.getNamespace());
 
 		String javaScript = _processFreeMarkerTemplate(
 			"/com/liferay/portlet/documentlibrary/context/dependencies" +
