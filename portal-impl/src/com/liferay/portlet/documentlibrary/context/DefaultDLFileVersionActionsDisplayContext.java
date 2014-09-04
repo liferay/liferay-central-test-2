@@ -375,18 +375,17 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CANCEL_CHECKOUT);
 		urlMenuItem.setMessage("cancel-checkout[document]");
 
-		PortletURL cancelCheckoutURL =
-			_liferayPortletResponse.createActionURL();
+		PortletURL portletURL = _liferayPortletResponse.createActionURL();
 
-		cancelCheckoutURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
-		cancelCheckoutURL.setParameter(
+		portletURL.setParameter(
 			Constants.CMD, Constants.CANCEL_CHECKOUT);
-		cancelCheckoutURL.setParameter("redirect", _getCurrentURL());
-		cancelCheckoutURL.setParameter(
+		portletURL.setParameter("redirect", _getCurrentURL());
+		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		urlMenuItem.setURL(cancelCheckoutURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
 		menuItems.add(urlMenuItem);
 	}
@@ -404,16 +403,16 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKIN);
 		urlMenuItem.setMessage("checkin");
 
-		PortletURL checkinURL = _liferayPortletResponse.createActionURL();
+		PortletURL portletURL = _liferayPortletResponse.createActionURL();
 
-		checkinURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
-		checkinURL.setParameter(Constants.CMD, Constants.CHECKIN);
-		checkinURL.setParameter("redirect", _getCurrentURL());
-		checkinURL.setParameter(
+		portletURL.setParameter(Constants.CMD, Constants.CHECKIN);
+		portletURL.setParameter("redirect", _getCurrentURL());
+		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		urlMenuItem.setURL(checkinURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
 		menuItems.add(urlMenuItem);
 	}
@@ -431,16 +430,16 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKOUT);
 		urlMenuItem.setMessage("checkout[document]");
 
-		PortletURL checkoutURL = _liferayPortletResponse.createActionURL();
+		PortletURL portletURL = _liferayPortletResponse.createActionURL();
 
-		checkoutURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
-		checkoutURL.setParameter(Constants.CMD, Constants.CHECKOUT);
-		checkoutURL.setParameter("redirect", _getCurrentURL());
-		checkoutURL.setParameter(
+		portletURL.setParameter(Constants.CMD, Constants.CHECKOUT);
+		portletURL.setParameter("redirect", _getCurrentURL());
+		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		urlMenuItem.setURL(checkoutURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
 		menuItems.add(urlMenuItem);
 	}
@@ -457,16 +456,16 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
 
-			PortletURL deleteURL = _liferayPortletResponse.createActionURL();
+			PortletURL portletURL = _liferayPortletResponse.createActionURL();
 
-			deleteURL.setParameter(
+			portletURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
-			deleteURL.setParameter(Constants.CMD, Constants.DELETE);
-			deleteURL.setParameter("redirect", _getCurrentURL());
-			deleteURL.setParameter(
+			portletURL.setParameter(Constants.CMD, Constants.DELETE);
+			portletURL.setParameter("redirect", _getCurrentURL());
+			portletURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-			deleteMenuItem.setURL(deleteURL.toString());
+			deleteMenuItem.setURL(portletURL.toString());
 
 			menuItems.add(deleteMenuItem);
 		}
@@ -477,16 +476,16 @@ public class DefaultDLFileVersionActionsDisplayContext
 			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
 			deleteMenuItem.setTrash(true);
 
-			PortletURL deleteURL = _liferayPortletResponse.createActionURL();
+			PortletURL portletURL = _liferayPortletResponse.createActionURL();
 
-			deleteURL.setParameter(
+			portletURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
-			deleteURL.setParameter(Constants.CMD, Constants.MOVE_TO_TRASH);
-			deleteURL.setParameter("redirect", _getCurrentURL());
-			deleteURL.setParameter(
+			portletURL.setParameter(Constants.CMD, Constants.MOVE_TO_TRASH);
+			portletURL.setParameter("redirect", _getCurrentURL());
+			portletURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-			deleteMenuItem.setURL(deleteURL.toString());
+			deleteMenuItem.setURL(portletURL.toString());
 
 			menuItems.add(deleteMenuItem);
 		}
@@ -534,16 +533,16 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_EDIT);
 		urlMenuItem.setMessage("edit");
 
-		PortletURL editURL = _liferayPortletResponse.createRenderURL();
+		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
 
-		editURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
-		editURL.setParameter("redirect", _getCurrentURL());
-		editURL.setParameter("backURL", _getCurrentURL());
-		editURL.setParameter(
+		portletURL.setParameter("redirect", _getCurrentURL());
+		portletURL.setParameter("backURL", _getCurrentURL());
+		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		urlMenuItem.setURL(editURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
 		menuItems.add(urlMenuItem);
 	}
@@ -562,21 +561,21 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setMessage("move");
 		urlMenuItem.setTarget("_blank");
 
-		PortletURL moveURL = _liferayPortletResponse.createRenderURL();
+		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
 
-		moveURL.setParameter("struts_action", "/document_library/move_entry");
+		portletURL.setParameter("struts_action", "/document_library/move_entry");
 
-		PortletURL viewFolderURL = _liferayPortletResponse.createRenderURL();
+		PortletURL redirectURL = _liferayPortletResponse.createRenderURL();
 
-		viewFolderURL.setParameter("struts_action", "/document_library/view");
-		viewFolderURL.setParameter("folderId", String.valueOf(_folderId));
+		redirectURL.setParameter("struts_action", "/document_library/view");
+		redirectURL.setParameter("folderId", String.valueOf(_folderId));
 
-		moveURL.setParameter("redirect", viewFolderURL.toString());
+		portletURL.setParameter("redirect", redirectURL.toString());
 
-		moveURL.setParameter(
+		portletURL.setParameter(
 			"fileEntryIds", String.valueOf(_fileEntry.getFileEntryId()));
 
-		urlMenuItem.setURL(moveURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
 		menuItems.add(urlMenuItem);
 	}
@@ -641,10 +640,10 @@ public class DefaultDLFileVersionActionsDisplayContext
 		urlMenuItem.setMessage("permissions");
 		urlMenuItem.setMethod("get");
 
-		String permissionsURL = null;
+		String url = null;
 
 		try {
-			permissionsURL = PermissionsURLTag.doTag(
+			url = PermissionsURLTag.doTag(
 				null, DLFileEntryConstants.getClassName(),
 				HtmlUtil.unescape(_fileEntry.getTitle()), null,
 				String.valueOf(_fileEntry.getFileEntryId()),
@@ -654,7 +653,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 			throw new SystemException("Unable to create permissions URL", e);
 		}
 
-		urlMenuItem.setURL(permissionsURL.toString());
+		urlMenuItem.setURL(url.toString());
 
 		urlMenuItem.setUseDialog(true);
 
