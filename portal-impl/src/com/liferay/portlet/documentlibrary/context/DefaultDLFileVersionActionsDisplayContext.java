@@ -101,15 +101,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 		}
 
 		_folderId = BeanParamUtil.getLong(_fileEntry, request, "folderId");
-		_portletDisplay = _themeDisplay.getPortletDisplay();
-		_scopeGroupId = _themeDisplay.getScopeGroupId();
-
-		PortletResponse portletResponse =
-			(PortletResponse)_request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-		_liferayPortletResponse = PortalUtil.getLiferayPortletResponse(
-			portletResponse);
 
 		PortletRequest portletRequest =
 			(PortletRequest)_request.getAttribute(
@@ -118,25 +109,15 @@ public class DefaultDLFileVersionActionsDisplayContext
 		_liferayPortletRequest = PortalUtil.getLiferayPortletRequest(
 			portletRequest);
 
-		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
+		PortletResponse portletResponse =
+			(PortletResponse)_request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		_portletId = portletDisplay.getId();
+		_liferayPortletResponse = PortalUtil.getLiferayPortletResponse(
+			portletResponse);
 
-		if (_portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-			_portletId = ParamUtil.getString(_request, "portletResource");
-		}
-
-		DLPortletInstanceSettings dlPortletInstanceSettings =
-			DLPortletInstanceSettings.getInstance(
-				_themeDisplay.getLayout(), _portletId);
-
-		_dlActionsDisplayContext = new DLActionsDisplayContext(
-			_request, dlPortletInstanceSettings);
-
-		PortletURL portletURL = PortletURLUtil.getCurrent(
-			_liferayPortletRequest, _liferayPortletResponse);
-
-		_currentURL = portletURL.toString();
+		_portletDisplay = _themeDisplay.getPortletDisplay();
+		_scopeGroupId = _themeDisplay.getScopeGroupId();
 	}
 
 	@Override
@@ -376,9 +357,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addCancelCheckoutMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions() &&
-			isCancelCheckoutDocumentButtonVisible()) {
-
+		if (_isShowActions() && isCancelCheckoutDocumentButtonVisible()) {
 			PortletURL cancelCheckoutURL =
 				_liferayPortletResponse.createActionURL();
 
@@ -386,7 +365,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 				"struts_action", "/document_library/edit_file_entry");
 			cancelCheckoutURL.setParameter(
 				Constants.CMD, Constants.CANCEL_CHECKOUT);
-			cancelCheckoutURL.setParameter("redirect", _currentURL);
+			cancelCheckoutURL.setParameter("redirect", _getCurrentURL());
 			cancelCheckoutURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
@@ -404,15 +383,13 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addCheckinMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions() &&
-			isCheckinButtonVisible()) {
-
+		if (_isShowActions() && isCheckinButtonVisible()) {
 			PortletURL checkinURL = _liferayPortletResponse.createActionURL();
 
 			checkinURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
 			checkinURL.setParameter(Constants.CMD, Constants.CHECKIN);
-			checkinURL.setParameter("redirect", _currentURL);
+			checkinURL.setParameter("redirect", _getCurrentURL());
 			checkinURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
@@ -430,15 +407,13 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addCheckoutMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions() &&
-			isCheckoutDocumentButtonVisible()) {
-
+		if (_isShowActions() && isCheckoutDocumentButtonVisible()) {
 			PortletURL checkoutURL = _liferayPortletResponse.createActionURL();
 
 			checkoutURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
 			checkoutURL.setParameter(Constants.CMD, Constants.CHECKOUT);
-			checkoutURL.setParameter("redirect", _currentURL);
+			checkoutURL.setParameter("redirect", _getCurrentURL());
 			checkoutURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
@@ -456,7 +431,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addDeleteMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions()) {
+		if (_isShowActions()) {
 			if (isDeleteButtonVisible()) {
 				PortletURL deleteURL =
 					_liferayPortletResponse.createActionURL();
@@ -465,7 +440,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 					"struts_action", "/document_library/edit_file_entry");
 
 				deleteURL.setParameter(Constants.CMD, Constants.DELETE);
-				deleteURL.setParameter("redirect", _currentURL);
+				deleteURL.setParameter("redirect", _getCurrentURL());
 				deleteURL.setParameter(
 					"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
@@ -485,7 +460,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 					"struts_action", "/document_library/edit_file_entry");
 
 				deleteURL.setParameter(Constants.CMD, Constants.MOVE_TO_TRASH);
-				deleteURL.setParameter("redirect", _currentURL);
+				deleteURL.setParameter("redirect", _getCurrentURL());
 				deleteURL.setParameter(
 					"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
@@ -528,14 +503,14 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addEditMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions()) {
+		if (_isShowActions()) {
 			if (isEditButtonVisible()) {
 				PortletURL editURL = _liferayPortletResponse.createRenderURL();
 
 				editURL.setParameter(
 					"struts_action", "/document_library/edit_file_entry");
-				editURL.setParameter("redirect", _currentURL);
-				editURL.setParameter("backURL", _currentURL);
+				editURL.setParameter("redirect", _getCurrentURL());
+				editURL.setParameter("backURL", _getCurrentURL());
 				editURL.setParameter(
 					"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
@@ -554,7 +529,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addMoveMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions() && isMoveButtonVisible()) {
+		if (_isShowActions() && isMoveButtonVisible()) {
 			PortletURL moveURL = _liferayPortletResponse.createRenderURL();
 
 			moveURL.setParameter(
@@ -626,9 +601,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addPermissionsMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_dlActionsDisplayContext.isShowActions() &&
-			isPermissionsButtonVisible()) {
-
+		if (_isShowActions() && isPermissionsButtonVisible()) {
 			String permissionsURL = null;
 
 			try {
@@ -654,6 +627,42 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 			menuItems.add(urlMenuItem);
 		}
+	}
+
+	private String _getCurrentURL() {
+		if (_currentURL != null) {
+			return _currentURL;
+		}
+
+		PortletURL portletURL = PortletURLUtil.getCurrent(
+			_liferayPortletRequest, _liferayPortletResponse);
+
+		_currentURL = portletURL.toString();
+
+		return _currentURL;
+	}
+
+	private DLActionsDisplayContext _getDLActionsDisplayContext()
+		throws PortalException {
+
+		if (_dlActionsDisplayContext != null) {
+			return _dlActionsDisplayContext;
+		}
+
+		String portletId = _portletDisplay.getId();
+
+		if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+			portletId = ParamUtil.getString(_request, "portletResource");
+		}
+
+		DLPortletInstanceSettings dlPortletInstanceSettings =
+			DLPortletInstanceSettings.getInstance(
+				_themeDisplay.getLayout(), portletId);
+
+		_dlActionsDisplayContext = new DLActionsDisplayContext(
+			_request, dlPortletInstanceSettings);
+
+		return _dlActionsDisplayContext;
 	}
 
 	private boolean _hasWorkflowDefinitionLink() {
@@ -721,6 +730,13 @@ public class DefaultDLFileVersionActionsDisplayContext
 		return _ieOnWin32;
 	}
 
+	private boolean _isShowActions() throws PortalException {
+		DLActionsDisplayContext dlActionsDisplayContext =
+			_getDLActionsDisplayContext();
+
+		return dlActionsDisplayContext.isShowActions();
+	}
+
 	private boolean _isTrashEnabled() throws PortalException {
 		if (_trashEnabled == null) {
 			_trashEnabled = TrashUtil.isTrashEnabled(_scopeGroupId);
@@ -761,7 +777,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private LiferayPortletRequest _liferayPortletRequest;
 	private LiferayPortletResponse _liferayPortletResponse;
 	private PortletDisplay _portletDisplay;
-	private String _portletId;
 	private HttpServletRequest _request;
 	private long _scopeGroupId;
 	private ThemeDisplay _themeDisplay;
