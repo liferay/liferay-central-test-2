@@ -365,276 +365,286 @@ public class DefaultDLFileVersionActionsDisplayContext
 	private void _addCancelCheckoutMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions() && isCancelCheckoutDocumentButtonVisible()) {
-			PortletURL cancelCheckoutURL =
-				_liferayPortletResponse.createActionURL();
-
-			cancelCheckoutURL.setParameter(
-				"struts_action", "/document_library/edit_file_entry");
-			cancelCheckoutURL.setParameter(
-				Constants.CMD, Constants.CANCEL_CHECKOUT);
-			cancelCheckoutURL.setParameter("redirect", _getCurrentURL());
-			cancelCheckoutURL.setParameter(
-				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
-			URLMenuItem urlMenuItem = new URLMenuItem();
-
-			urlMenuItem.setIconCssClass("icon-remove");
-			urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CANCEL_CHECKOUT);
-			urlMenuItem.setMessage("cancel-checkout[document]");
-			urlMenuItem.setURL(cancelCheckoutURL.toString());
-
-			menuItems.add(urlMenuItem);
+		if (!_isShowActions() || !isCancelCheckoutDocumentButtonVisible()) {
+			return;
 		}
+
+		PortletURL cancelCheckoutURL =
+			_liferayPortletResponse.createActionURL();
+
+		cancelCheckoutURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		cancelCheckoutURL.setParameter(
+			Constants.CMD, Constants.CANCEL_CHECKOUT);
+		cancelCheckoutURL.setParameter("redirect", _getCurrentURL());
+		cancelCheckoutURL.setParameter(
+			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-remove");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CANCEL_CHECKOUT);
+		urlMenuItem.setMessage("cancel-checkout[document]");
+		urlMenuItem.setURL(cancelCheckoutURL.toString());
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addCheckinMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions() && isCheckinButtonVisible()) {
-			PortletURL checkinURL = _liferayPortletResponse.createActionURL();
-
-			checkinURL.setParameter(
-				"struts_action", "/document_library/edit_file_entry");
-			checkinURL.setParameter(Constants.CMD, Constants.CHECKIN);
-			checkinURL.setParameter("redirect", _getCurrentURL());
-			checkinURL.setParameter(
-				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
-			URLMenuItem urlMenuItem = new URLMenuItem();
-
-			urlMenuItem.setIconCssClass("icon-lock");
-			urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKIN);
-			urlMenuItem.setMessage("checkin");
-			urlMenuItem.setURL(checkinURL.toString());
-
-			menuItems.add(urlMenuItem);
+		if (!_isShowActions() || !isCheckinButtonVisible()) {
+			return;
 		}
+
+		PortletURL checkinURL = _liferayPortletResponse.createActionURL();
+
+		checkinURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		checkinURL.setParameter(Constants.CMD, Constants.CHECKIN);
+		checkinURL.setParameter("redirect", _getCurrentURL());
+		checkinURL.setParameter(
+			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-lock");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKIN);
+		urlMenuItem.setMessage("checkin");
+		urlMenuItem.setURL(checkinURL.toString());
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addCheckoutMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions() && isCheckoutDocumentButtonVisible()) {
-			PortletURL checkoutURL = _liferayPortletResponse.createActionURL();
-
-			checkoutURL.setParameter(
-				"struts_action", "/document_library/edit_file_entry");
-			checkoutURL.setParameter(Constants.CMD, Constants.CHECKOUT);
-			checkoutURL.setParameter("redirect", _getCurrentURL());
-			checkoutURL.setParameter(
-				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
-			URLMenuItem urlMenuItem = new URLMenuItem();
-
-			urlMenuItem.setIconCssClass("icon-unlock");
-			urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKOUT);
-			urlMenuItem.setMessage("checkout[document]");
-			urlMenuItem.setURL(checkoutURL.toString());
-
-			menuItems.add(urlMenuItem);
+		if (!_isShowActions() || !isCheckoutDocumentButtonVisible()) {
+			return;
 		}
+
+		PortletURL checkoutURL = _liferayPortletResponse.createActionURL();
+
+		checkoutURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		checkoutURL.setParameter(Constants.CMD, Constants.CHECKOUT);
+		checkoutURL.setParameter("redirect", _getCurrentURL());
+		checkoutURL.setParameter(
+			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-unlock");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKOUT);
+		urlMenuItem.setMessage("checkout[document]");
+		urlMenuItem.setURL(checkoutURL.toString());
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addDeleteMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions()) {
-			if (isDeleteButtonVisible()) {
-				PortletURL deleteURL =
-					_liferayPortletResponse.createActionURL();
+		if (!_isShowActions()) {
+			return;
+		}
 
-				deleteURL.setParameter(
-					"struts_action", "/document_library/edit_file_entry");
+		if (isDeleteButtonVisible()) {
+			PortletURL deleteURL = _liferayPortletResponse.createActionURL();
 
-				deleteURL.setParameter(Constants.CMD, Constants.DELETE);
-				deleteURL.setParameter("redirect", _getCurrentURL());
-				deleteURL.setParameter(
-					"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+			deleteURL.setParameter(
+				"struts_action", "/document_library/edit_file_entry");
 
-				DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
+			deleteURL.setParameter(Constants.CMD, Constants.DELETE);
+			deleteURL.setParameter("redirect", _getCurrentURL());
+			deleteURL.setParameter(
+				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-				deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
-				deleteMenuItem.setURL(deleteURL.toString());
+			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
 
-				menuItems.add(deleteMenuItem);
-			}
+			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
+			deleteMenuItem.setURL(deleteURL.toString());
 
-			if (isMoveToTheRecycleBinButtonVisible()) {
-				PortletURL deleteURL =
-					_liferayPortletResponse.createActionURL();
+			menuItems.add(deleteMenuItem);
+		}
 
-				deleteURL.setParameter(
-					"struts_action", "/document_library/edit_file_entry");
+		if (isMoveToTheRecycleBinButtonVisible()) {
+			PortletURL deleteURL = _liferayPortletResponse.createActionURL();
 
-				deleteURL.setParameter(Constants.CMD, Constants.MOVE_TO_TRASH);
-				deleteURL.setParameter("redirect", _getCurrentURL());
-				deleteURL.setParameter(
-					"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+			deleteURL.setParameter(
+				"struts_action", "/document_library/edit_file_entry");
 
-				DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
+			deleteURL.setParameter(Constants.CMD, Constants.MOVE_TO_TRASH);
+			deleteURL.setParameter("redirect", _getCurrentURL());
+			deleteURL.setParameter(
+				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-				deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
-				deleteMenuItem.setTrash(true);
-				deleteMenuItem.setURL(deleteURL.toString());
+			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
 
-				menuItems.add(deleteMenuItem);
-			}
+			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
+			deleteMenuItem.setTrash(true);
+			deleteMenuItem.setURL(deleteURL.toString());
+
+			menuItems.add(deleteMenuItem);
 		}
 	}
 
 	private void _addDownloadMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (isDownloadButtonVisible()) {
-			String message =
-				LanguageUtil.get(_request, "download") + " (" +
-					TextFormatter.formatStorageSize(
-						_fileEntry.getSize(), _themeDisplay.getLocale()) + ")";
-
-			String url = DLUtil.getDownloadURL(
-				_fileEntry, _fileVersion, _themeDisplay, StringPool.BLANK,
-				false, true);
-
-			URLMenuItem urlMenuItem = new URLMenuItem();
-
-			urlMenuItem.setIconCssClass("icon-download");
-			urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
-			urlMenuItem.setMessage(message);
-			urlMenuItem.setTarget("_blank");
-			urlMenuItem.setURL(url);
-
-			menuItems.add(urlMenuItem);
+		if (!isDownloadButtonVisible()) {
+			return;
 		}
+
+		String message =
+			LanguageUtil.get(_request, "download") + " (" +
+				TextFormatter.formatStorageSize(
+					_fileEntry.getSize(), _themeDisplay.getLocale()) + ")";
+
+		String url = DLUtil.getDownloadURL(
+			_fileEntry, _fileVersion, _themeDisplay, StringPool.BLANK, false,
+			true);
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-download");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
+		urlMenuItem.setMessage(message);
+		urlMenuItem.setTarget("_blank");
+		urlMenuItem.setURL(url);
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addEditMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions()) {
-			if (isEditButtonVisible()) {
-				PortletURL editURL = _liferayPortletResponse.createRenderURL();
-
-				editURL.setParameter(
-					"struts_action", "/document_library/edit_file_entry");
-				editURL.setParameter("redirect", _getCurrentURL());
-				editURL.setParameter("backURL", _getCurrentURL());
-				editURL.setParameter(
-					"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
-				URLMenuItem urlMenuItem = new URLMenuItem();
-
-				urlMenuItem.setIconCssClass("icon-edit");
-				urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_EDIT);
-				urlMenuItem.setMessage("edit");
-				urlMenuItem.setURL(editURL.toString());
-
-				menuItems.add(urlMenuItem);
-			}
+		if (!_isShowActions() || !isEditButtonVisible()) {
+			return;
 		}
+
+		PortletURL editURL = _liferayPortletResponse.createRenderURL();
+
+		editURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		editURL.setParameter("redirect", _getCurrentURL());
+		editURL.setParameter("backURL", _getCurrentURL());
+		editURL.setParameter(
+			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-edit");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_EDIT);
+		urlMenuItem.setMessage("edit");
+		urlMenuItem.setURL(editURL.toString());
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addMoveMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions() && isMoveButtonVisible()) {
-			PortletURL moveURL = _liferayPortletResponse.createRenderURL();
-
-			moveURL.setParameter(
-				"struts_action", "/document_library/move_entry");
-			moveURL.setParameter(
-				"fileEntryIds", String.valueOf(_fileEntry.getFileEntryId()));
-
-			PortletURL viewFolderURL =
-				_liferayPortletResponse.createRenderURL();
-
-			viewFolderURL.setParameter(
-				"struts_action", "/document_library/view");
-			viewFolderURL.setParameter("folderId", String.valueOf(_folderId));
-
-			moveURL.setParameter("redirect", viewFolderURL.toString());
-
-			URLMenuItem urlMenuItem = new URLMenuItem();
-
-			urlMenuItem.setIconCssClass("icon-move");
-			urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_MOVE);
-			urlMenuItem.setMessage("move");
-			urlMenuItem.setTarget("_blank");
-			urlMenuItem.setURL(moveURL.toString());
-
-			menuItems.add(urlMenuItem);
+		if (!_isShowActions() || !isMoveButtonVisible()) {
+			return;
 		}
+
+		PortletURL moveURL = _liferayPortletResponse.createRenderURL();
+
+		moveURL.setParameter("struts_action", "/document_library/move_entry");
+		moveURL.setParameter(
+			"fileEntryIds", String.valueOf(_fileEntry.getFileEntryId()));
+
+		PortletURL viewFolderURL = _liferayPortletResponse.createRenderURL();
+
+		viewFolderURL.setParameter("struts_action", "/document_library/view");
+		viewFolderURL.setParameter("folderId", String.valueOf(_folderId));
+
+		moveURL.setParameter("redirect", viewFolderURL.toString());
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-move");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_MOVE);
+		urlMenuItem.setMessage("move");
+		urlMenuItem.setTarget("_blank");
+		urlMenuItem.setURL(moveURL.toString());
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addOpenDocumentMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (isOpenInMsOfficeButtonVisible()) {
-			String webDavURL = DLUtil.getWebDavURL(
-				_themeDisplay, _fileEntry.getFolder(), _fileEntry,
-				PropsValues.
-					DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED,
-				true);
-
-			String onClick =
-				_liferayPortletResponse.getNamespace() + "openDocument('" +
-					webDavURL + "');";
-
-			Map<String, String> context = new HashMap<String, String>();
-
-			context.put("namespace", _liferayPortletResponse.getNamespace());
-
-			context.put(
-				"errorMessage", UnicodeLanguageUtil.get(
-					_request,
-					"cannot-open-the-requested-document-due-to-the-following-" +
-						"reason"));
-
-			String javaScript = _processFreeMarkerTemplate(
-				"/com/liferay/portlet/documentlibrary/context/dependencies" +
-					"open_document_js.ftl", context);
-
-			JavascriptMenuItem javaScriptMenuItem = new JavascriptMenuItem();
-
-			javaScriptMenuItem.setIconCssClass("icon-file-alt");
-			javaScriptMenuItem.setId(DLMenuItems.MENU_ITEM_ID_OPEN_DOCUMENT);
-			javaScriptMenuItem.setJavascript(javaScript);
-			javaScriptMenuItem.setMessage("open-in-ms-office");
-			javaScriptMenuItem.setOnClick(onClick);
-
-			menuItems.add(javaScriptMenuItem);
+		if (!isOpenInMsOfficeButtonVisible()) {
+			return;
 		}
+
+		String webDavURL = DLUtil.getWebDavURL(
+			_themeDisplay, _fileEntry.getFolder(), _fileEntry,
+			PropsValues.
+				DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED,
+			true);
+
+		String onClick =
+			_liferayPortletResponse.getNamespace() + "openDocument('" +
+				webDavURL + "');";
+
+		Map<String, String> context = new HashMap<String, String>();
+
+		context.put("namespace", _liferayPortletResponse.getNamespace());
+
+		context.put(
+			"errorMessage", UnicodeLanguageUtil.get(
+				_request,
+				"cannot-open-the-requested-document-due-to-the-following-" +
+					"reason"));
+
+		String javaScript = _processFreeMarkerTemplate(
+			"/com/liferay/portlet/documentlibrary/context/dependencies" +
+				"open_document_js.ftl", context);
+
+		JavascriptMenuItem javaScriptMenuItem = new JavascriptMenuItem();
+
+		javaScriptMenuItem.setIconCssClass("icon-file-alt");
+		javaScriptMenuItem.setId(DLMenuItems.MENU_ITEM_ID_OPEN_DOCUMENT);
+		javaScriptMenuItem.setJavascript(javaScript);
+		javaScriptMenuItem.setMessage("open-in-ms-office");
+		javaScriptMenuItem.setOnClick(onClick);
+
+		menuItems.add(javaScriptMenuItem);
 	}
 
 	private void _addPermissionsMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		if (_isShowActions() && isPermissionsButtonVisible()) {
-			String permissionsURL = null;
-
-			try {
-				permissionsURL = PermissionsURLTag.doTag(
-					null, DLFileEntryConstants.getClassName(),
-					HtmlUtil.unescape(_fileEntry.getTitle()), null,
-					String.valueOf(_fileEntry.getFileEntryId()),
-					LiferayWindowState.POP_UP.toString(), null, _request);
-			}
-			catch (Exception e) {
-				throw new SystemException(
-					"Unable to create permissions URL", e);
-			}
-
-			URLMenuItem urlMenuItem = new URLMenuItem();
-
-			urlMenuItem.setIconCssClass("icon-lock");
-			urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_PERMISSIONS);
-			urlMenuItem.setMessage("permissions");
-			urlMenuItem.setMethod("get");
-			urlMenuItem.setURL(permissionsURL.toString());
-			urlMenuItem.setUseDialog(true);
-
-			menuItems.add(urlMenuItem);
+		if (!_isShowActions() || !isPermissionsButtonVisible()) {
+			return;
 		}
+
+		String permissionsURL = null;
+
+		try {
+			permissionsURL = PermissionsURLTag.doTag(
+				null, DLFileEntryConstants.getClassName(),
+				HtmlUtil.unescape(_fileEntry.getTitle()), null,
+				String.valueOf(_fileEntry.getFileEntryId()),
+				LiferayWindowState.POP_UP.toString(), null, _request);
+		}
+		catch (Exception e) {
+			throw new SystemException("Unable to create permissions URL", e);
+		}
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-lock");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_PERMISSIONS);
+		urlMenuItem.setMessage("permissions");
+		urlMenuItem.setMethod("get");
+		urlMenuItem.setURL(permissionsURL.toString());
+		urlMenuItem.setUseDialog(true);
+
+		menuItems.add(urlMenuItem);
 	}
 
 	private String _getCurrentURL() {
