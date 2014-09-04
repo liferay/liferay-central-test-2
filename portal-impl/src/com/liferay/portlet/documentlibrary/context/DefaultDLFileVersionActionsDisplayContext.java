@@ -653,7 +653,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 			throw new SystemException("Unable to create permissions URL", e);
 		}
 
-		urlMenuItem.setURL(url.toString());
+		urlMenuItem.setURL(url);
 
 		urlMenuItem.setUseDialog(true);
 
