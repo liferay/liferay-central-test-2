@@ -24,9 +24,11 @@ import jodd.json.JsonParser;
 public class PortalJsonParser extends JsonParser {
 
 	@Override
-	protected Object newObjectInstance(Class targetType) {
-		if (targetType != null) {
-			String targetClassName = targetType.getName();
+	protected Object newObjectInstance(
+		@SuppressWarnings("rawtypes") Class targetClass) {
+
+		if (targetClass != null) {
+			String targetClassName = targetClass.getName();
 
 			if (targetClassName.contains("com.liferay") &&
 				targetClassName.contains("Util")) {
@@ -36,7 +38,7 @@ public class PortalJsonParser extends JsonParser {
 			}
 		}
 
-		return super.newObjectInstance(targetType);
+		return super.newObjectInstance(targetClass);
 	}
 
 }
