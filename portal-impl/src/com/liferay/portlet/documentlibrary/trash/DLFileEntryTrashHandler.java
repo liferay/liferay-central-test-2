@@ -266,6 +266,7 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 			name, dlFileEntry.getExtension());
 
 		dlFileEntry.setFileName(fileName);
+
 		dlFileEntry.setTitle(name);
 
 		DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
@@ -291,7 +292,6 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 		if (Validator.isNotNull(newName)) {
 			originalFileName = DLAppUtil.getSanitizedFileName(
 				newName, dlFileEntry.getExtension());
-
 			originalTitle = newName;
 		}
 
