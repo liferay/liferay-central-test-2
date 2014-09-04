@@ -608,7 +608,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 						"reason"));
 
 			String javaScript = _processFreeMarkerTemplate(
-				"/com/liferay/portlet/documentlibrary/context/" +
+				"/com/liferay/portlet/documentlibrary/context/dependencies" +
 					"open_document_js.ftl", context);
 
 			JavascriptMenuItem javaScriptMenuItem = new JavascriptMenuItem();
