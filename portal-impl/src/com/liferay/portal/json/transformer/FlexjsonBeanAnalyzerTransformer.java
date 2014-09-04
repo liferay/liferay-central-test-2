@@ -29,8 +29,8 @@ import jodd.json.TypeJsonVisitor;
  */
 public class FlexjsonBeanAnalyzerTransformer extends TypeJsonVisitor {
 
-	public FlexjsonBeanAnalyzerTransformer(Class type) {
-		super(new JsonSerializer().createJsonContext(null), type);
+	public FlexjsonBeanAnalyzerTransformer(Class<?> clazz) {
+		super(_jsonSerializer.createJsonContext(null), clazz);
 	}
 
 	public List<Map<String, String>> collect() {
@@ -41,23 +41,26 @@ public class FlexjsonBeanAnalyzerTransformer extends TypeJsonVisitor {
 		return _propertiesList;
 	}
 
-	protected String getTypeName(Class<?> type) {
-		return type.getName();
+	protected String getTypeName(Class<?> clazz) {
+		return clazz.getName();
 	}
 
 	@Override
 	protected void onSerializableProperty(
 		String propertyName, PropertyDescriptor propertyDescriptor) {
 
-		Class propertyType = propertyDescriptor.getType();
-
 		Map<String, String> properties = new LinkedHashMap<>();
 
 		properties.put("name", propertyName);
-		properties.put("type", getTypeName(propertyType));
+
+		Class<?> propertyClass = propertyDescriptor.getType();
+
+		properties.put("type", getTypeName(propertyClass));
 
 		_propertiesList.add(properties);
 	}
+
+	private static JsonSerializer _jsonSerializer = new JsonSerializer();
 
 	private List<Map<String, String>> _propertiesList = new ArrayList<>();
 
