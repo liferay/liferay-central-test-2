@@ -193,14 +193,14 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 	}
 
 	protected List<Object> toList(String json) {
-		JSONDeserializer<Map> jsonDeserializer =
+		JSONDeserializer<Map<String, Object>> jsonDeserializer =
 			JSONFactoryUtil.createJSONDeserializer();
 
 		return (List<Object>)jsonDeserializer.deserialize(json);
 	}
 
 	protected Map<String, Object> toMap(String json) {
-		JSONDeserializer<Map> jsonDeserializer =
+		JSONDeserializer<Map<String, Object>> jsonDeserializer =
 			JSONFactoryUtil.createJSONDeserializer();
 
 		return jsonDeserializer.deserialize(json);

@@ -649,7 +649,7 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			}
 		}
 	}
-	
+
 	private static JsonSerializer _jsonSerializer = new JsonSerializer();
 
 	private String _command;

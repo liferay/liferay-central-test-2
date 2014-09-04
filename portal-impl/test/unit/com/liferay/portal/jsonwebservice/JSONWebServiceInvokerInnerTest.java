@@ -55,8 +55,9 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		Map expectedMap = prepareExpectedMap(false, false, false);
-		Map actualMap = invokeAndReturnMap(commandMap);
+		Map<String, Object> expectedMap = prepareExpectedMap(
+			false, false, false);
+		Map<String, Object> actualMap = invokeAndReturnMap(commandMap);
 
 		Assert.assertEquals(expectedMap, actualMap);
 	}
@@ -83,8 +84,9 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		Map expectedMap = prepareExpectedMap(true, false, false);
-		Map actualMap = invokeAndReturnMap(commandMap);
+		Map<String, Object> expectedMap = prepareExpectedMap(
+			true, false, false);
+		Map<String, Object> actualMap = invokeAndReturnMap(commandMap);
 
 		Assert.assertEquals(expectedMap, actualMap);
 	}
@@ -118,8 +120,8 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		Map expectedMap = prepareExpectedMap(true, true, false);
-		Map actualMap = invokeAndReturnMap(commandMap);
+		Map<String, Object> expectedMap = prepareExpectedMap(true, true, false);
+		Map<String, Object> actualMap = invokeAndReturnMap(commandMap);
 
 		Assert.assertEquals(expectedMap, actualMap);
 	}
@@ -155,8 +157,8 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		Map expectedMap = prepareExpectedMap(true, true, true);
-		Map actualMap = invokeAndReturnMap(commandMap);
+		Map<String, Object> expectedMap = prepareExpectedMap(true, true, true);
+		Map<String, Object> actualMap = invokeAndReturnMap(commandMap);
 
 		Assert.assertEquals(expectedMap, actualMap);
 	}
@@ -181,11 +183,10 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 		return toMap(json);
 	}
 
-	protected Map prepareExpectedMap(
+	protected Map<String, Object> prepareExpectedMap(
 		boolean xxx1, boolean xxx3, boolean index) {
 
-		LinkedHashMap<String, Object> expectedMap =
-			new LinkedHashMap<String, Object>();
+		Map<String, Object> expectedMap = new LinkedHashMap<String, Object>();
 
 		if (xxx1) {
 			expectedMap.put("XXX1", "Welcome 3 to galaxy");

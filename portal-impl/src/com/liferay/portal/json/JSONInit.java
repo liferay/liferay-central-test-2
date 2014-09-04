@@ -81,20 +81,20 @@ public class JSONInit {
 		};
 
 		TypeJsonSerializerMap typeSerializerMap = JoddJson.defaultSerializers;
-		
+
 		Class<?>[][] classesArray = new Class<?>[][] {
-			new Class[] {File.class, FileJSONTransformer.class}, 
+			new Class[] {File.class, FileJSONTransformer.class},
 			new Class[] {JSONArray.class, JSONArrayJSONTransformer.class},
 			new Class[] {JSONObject.class, JSONObjectJSONTransformer.class},
 			new Class[] {
 				JSONSerializable.class, JSONSerializableJSONTransformer.class
-			}, 
+			},
 			new Class[] {
 				RepositoryModel.class, RepositoryModelJSONTransformer.class
-			}, 
+			},
 			new Class[] {User.class, UserJSONTransformer.class}
 		};
-		
+
 		for (Class<?>[] classes : classesArray) {
 			typeSerializerMap.register(
 				classes[0],
