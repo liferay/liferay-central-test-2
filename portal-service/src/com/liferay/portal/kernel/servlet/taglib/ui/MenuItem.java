@@ -23,10 +23,6 @@ public abstract class MenuItem {
 		return _iconCssClass;
 	}
 
-	public String getId() {
-		return _id;
-	}
-
 	public String getMessage() {
 		return _message;
 	}
@@ -35,16 +31,11 @@ public abstract class MenuItem {
 		_iconCssClass = iconCssClass;
 	}
 
-	public void setId(String id) {
-		_id = id;
-	}
-
 	public void setMessage(String message) {
 		_message = message;
 	}
 
 	private String _iconCssClass;
-	private String _id;
 	private String _message;
 
 }
