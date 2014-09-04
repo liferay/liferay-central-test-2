@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/taglib/ui/menu_item/init.jsp" %>
 
 <%
 MenuItem menuItem = (MenuItem)request.getAttribute("liferay-ui:menu_item:menuItem");
