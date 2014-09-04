@@ -1954,9 +1954,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSender.setEntryURL(contentURL);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
+
+		Date modifiedDate = message.getModifiedDate();
+
 		subscriptionSender.setMailId(
 			"mb_discussion", message.getCategoryId(), message.getMessageId(),
-			message.getModifiedDate().getTime());
+			modifiedDate.getTime());
 
 		int notificationType =
 			UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY;
@@ -2111,10 +2114,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage parentMessage = mbMessageLocalService.getMessage(
 				message.getParentMessageId());
 
+			Date modifiedDate = parentMessage.getModifiedDate();
+
 			inReplyTo = PortalUtil.getMailId(
 				company.getMx(), MBUtil.MESSAGE_POP_PORTLET_PREFIX,
 				message.getCategoryId(), parentMessage.getMessageId(),
-				parentMessage.getModifiedDate().getTime());
+				modifiedDate.getTime());
 		}
 
 		SubscriptionSender subscriptionSenderPrototype =
@@ -2142,9 +2147,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSenderPrototype.setLocalizedBodyMap(bodyLocalizedValuesMap);
 		subscriptionSenderPrototype.setLocalizedSubjectMap(
 			subjectLocalizedValuesMap);
+
+		Date modifiedDate = message.getModifiedDate();
+
 		subscriptionSenderPrototype.setMailId(
 			MBUtil.MESSAGE_POP_PORTLET_PREFIX, message.getCategoryId(),
-			message.getMessageId(), message.getModifiedDate().getTime());
+			message.getMessageId(), modifiedDate.getTime());
 
 		int notificationType =
 			UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY;
