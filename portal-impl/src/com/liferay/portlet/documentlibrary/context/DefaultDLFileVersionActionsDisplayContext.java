@@ -125,13 +125,21 @@ public class DefaultDLFileVersionActionsDisplayContext
 		List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
 		_addDownloadMenuItem(menuItems);
+
 		_addOpenDocumentMenuItem(menuItems);
+
 		_addEditMenuItem(menuItems);
+
 		_addMoveMenuItem(menuItems);
+
 		_addCheckoutMenuItem(menuItems);
+
 		_addCheckinMenuItem(menuItems);
+
 		_addCancelCheckoutMenuItem(menuItems);
+
 		_addPermissionsMenuItem(menuItems);
+
 		_addDeleteMenuItem(menuItems);
 
 		return menuItems;
