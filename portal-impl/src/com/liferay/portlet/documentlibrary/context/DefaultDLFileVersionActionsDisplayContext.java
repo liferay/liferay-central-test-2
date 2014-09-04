@@ -369,6 +369,12 @@ public class DefaultDLFileVersionActionsDisplayContext
 			return;
 		}
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-remove");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CANCEL_CHECKOUT);
+		urlMenuItem.setMessage("cancel-checkout[document]");
+
 		PortletURL cancelCheckoutURL =
 			_liferayPortletResponse.createActionURL();
 
@@ -380,11 +386,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 		cancelCheckoutURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-remove");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CANCEL_CHECKOUT);
-		urlMenuItem.setMessage("cancel-checkout[document]");
 		urlMenuItem.setURL(cancelCheckoutURL.toString());
 
 		menuItems.add(urlMenuItem);
@@ -397,6 +398,12 @@ public class DefaultDLFileVersionActionsDisplayContext
 			return;
 		}
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-lock");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKIN);
+		urlMenuItem.setMessage("checkin");
+
 		PortletURL checkinURL = _liferayPortletResponse.createActionURL();
 
 		checkinURL.setParameter(
@@ -406,11 +413,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 		checkinURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-lock");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKIN);
-		urlMenuItem.setMessage("checkin");
 		urlMenuItem.setURL(checkinURL.toString());
 
 		menuItems.add(urlMenuItem);
@@ -423,6 +425,12 @@ public class DefaultDLFileVersionActionsDisplayContext
 			return;
 		}
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-unlock");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKOUT);
+		urlMenuItem.setMessage("checkout[document]");
+
 		PortletURL checkoutURL = _liferayPortletResponse.createActionURL();
 
 		checkoutURL.setParameter(
@@ -432,11 +440,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 		checkoutURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-unlock");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKOUT);
-		urlMenuItem.setMessage("checkout[document]");
 		urlMenuItem.setURL(checkoutURL.toString());
 
 		menuItems.add(urlMenuItem);
@@ -450,39 +453,39 @@ public class DefaultDLFileVersionActionsDisplayContext
 		}
 
 		if (isDeleteButtonVisible()) {
+			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
+
+			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
+
 			PortletURL deleteURL = _liferayPortletResponse.createActionURL();
 
 			deleteURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
-
 			deleteURL.setParameter(Constants.CMD, Constants.DELETE);
 			deleteURL.setParameter("redirect", _getCurrentURL());
 			deleteURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
-
-			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
 			deleteMenuItem.setURL(deleteURL.toString());
 
 			menuItems.add(deleteMenuItem);
 		}
 
 		if (isMoveToTheRecycleBinButtonVisible()) {
+			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
+
+			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
+			deleteMenuItem.setTrash(true);
+
 			PortletURL deleteURL = _liferayPortletResponse.createActionURL();
 
 			deleteURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
-
 			deleteURL.setParameter(Constants.CMD, Constants.MOVE_TO_TRASH);
 			deleteURL.setParameter("redirect", _getCurrentURL());
 			deleteURL.setParameter(
 				"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
-
-			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
-			deleteMenuItem.setTrash(true);
 			deleteMenuItem.setURL(deleteURL.toString());
 
 			menuItems.add(deleteMenuItem);
@@ -496,21 +499,23 @@ public class DefaultDLFileVersionActionsDisplayContext
 			return;
 		}
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-download");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
+
 		String message =
 			LanguageUtil.get(_request, "download") + " (" +
 				TextFormatter.formatStorageSize(
 					_fileEntry.getSize(), _themeDisplay.getLocale()) + ")";
 
+		urlMenuItem.setMessage(message);
+		urlMenuItem.setTarget("_blank");
+
 		String url = DLUtil.getDownloadURL(
 			_fileEntry, _fileVersion, _themeDisplay, StringPool.BLANK, false,
 			true);
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-download");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
-		urlMenuItem.setMessage(message);
-		urlMenuItem.setTarget("_blank");
 		urlMenuItem.setURL(url);
 
 		menuItems.add(urlMenuItem);
@@ -523,6 +528,12 @@ public class DefaultDLFileVersionActionsDisplayContext
 			return;
 		}
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-edit");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_EDIT);
+		urlMenuItem.setMessage("edit");
+
 		PortletURL editURL = _liferayPortletResponse.createRenderURL();
 
 		editURL.setParameter(
@@ -532,11 +543,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 		editURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-edit");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_EDIT);
-		urlMenuItem.setMessage("edit");
 		urlMenuItem.setURL(editURL.toString());
 
 		menuItems.add(urlMenuItem);
@@ -548,6 +554,13 @@ public class DefaultDLFileVersionActionsDisplayContext
 		if (!_isShowActions() || !isMoveButtonVisible()) {
 			return;
 		}
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-move");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_MOVE);
+		urlMenuItem.setMessage("move");
+		urlMenuItem.setTarget("_blank");
 
 		PortletURL moveURL = _liferayPortletResponse.createRenderURL();
 
@@ -562,12 +575,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 		moveURL.setParameter("redirect", viewFolderURL.toString());
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-move");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_MOVE);
-		urlMenuItem.setMessage("move");
-		urlMenuItem.setTarget("_blank");
 		urlMenuItem.setURL(moveURL.toString());
 
 		menuItems.add(urlMenuItem);
@@ -580,15 +587,10 @@ public class DefaultDLFileVersionActionsDisplayContext
 			return;
 		}
 
-		String webDavURL = DLUtil.getWebDavURL(
-			_themeDisplay, _fileEntry.getFolder(), _fileEntry,
-			PropsValues.
-				DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED,
-			true);
+		JavascriptMenuItem javaScriptMenuItem = new JavascriptMenuItem();
 
-		String onClick =
-			_liferayPortletResponse.getNamespace() + "openDocument('" +
-				webDavURL + "');";
+		javaScriptMenuItem.setIconCssClass("icon-file-alt");
+		javaScriptMenuItem.setId(DLMenuItems.MENU_ITEM_ID_OPEN_DOCUMENT);
 
 		Map<String, String> context = new HashMap<String, String>();
 
@@ -602,14 +604,23 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 		String javaScript = _processFreeMarkerTemplate(
 			"/com/liferay/portlet/documentlibrary/context/dependencies" +
-				"open_document_js.ftl", context);
+				"open_document_js.ftl",
+			context);
 
-		JavascriptMenuItem javaScriptMenuItem = new JavascriptMenuItem();
-
-		javaScriptMenuItem.setIconCssClass("icon-file-alt");
-		javaScriptMenuItem.setId(DLMenuItems.MENU_ITEM_ID_OPEN_DOCUMENT);
 		javaScriptMenuItem.setJavascript(javaScript);
+
 		javaScriptMenuItem.setMessage("open-in-ms-office");
+
+		String webDavURL = DLUtil.getWebDavURL(
+			_themeDisplay, _fileEntry.getFolder(), _fileEntry,
+			PropsValues.
+				DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED,
+			true);
+
+		String onClick =
+			_liferayPortletResponse.getNamespace() + "openDocument('" +
+				webDavURL + "');";
+
 		javaScriptMenuItem.setOnClick(onClick);
 
 		menuItems.add(javaScriptMenuItem);
@@ -621,6 +632,13 @@ public class DefaultDLFileVersionActionsDisplayContext
 		if (!_isShowActions() || !isPermissionsButtonVisible()) {
 			return;
 		}
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass("icon-lock");
+		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_PERMISSIONS);
+		urlMenuItem.setMessage("permissions");
+		urlMenuItem.setMethod("get");
 
 		String permissionsURL = null;
 
@@ -635,13 +653,8 @@ public class DefaultDLFileVersionActionsDisplayContext
 			throw new SystemException("Unable to create permissions URL", e);
 		}
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass("icon-lock");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_PERMISSIONS);
-		urlMenuItem.setMessage("permissions");
-		urlMenuItem.setMethod("get");
 		urlMenuItem.setURL(permissionsURL.toString());
+
 		urlMenuItem.setUseDialog(true);
 
 		menuItems.add(urlMenuItem);
