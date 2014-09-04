@@ -21,8 +21,6 @@ import jodd.json.JsonSerializer;
 import jodd.json.TypeJsonSerializer;
 
 /**
- * Wrapper over Jodd type serializer.
- *
  * @author Igor Spasic
  */
 public class JSONSerializerImpl implements JSONSerializer {
@@ -59,16 +57,16 @@ public class JSONSerializerImpl implements JSONSerializer {
 	public JSONSerializerImpl transform(
 		JSONTransformer jsonTransformer, Class<?> type) {
 
-		TypeJsonSerializer transformer = null;
+		TypeJsonSerializer<?> typeJsonSerializer = null;
 
 		if (jsonTransformer instanceof TypeJsonSerializer) {
-			transformer = (TypeJsonSerializer)jsonTransformer;
+			typeJsonSerializer = (TypeJsonSerializer<?>)jsonTransformer;
 		}
 		else {
-			transformer = new JoddJsonTransformer(jsonTransformer);
+			typeJsonSerializer = new JoddJsonTransformer(jsonTransformer);
 		}
 
-		_jsonSerializer.use(type, transformer);
+		_jsonSerializer.use(type, typeJsonSerializer);
 
 		return this;
 	}
@@ -77,20 +75,20 @@ public class JSONSerializerImpl implements JSONSerializer {
 	public JSONSerializerImpl transform(
 		JSONTransformer jsonTransformer, String field) {
 
-		TypeJsonSerializer transformer = null;
+		TypeJsonSerializer<?> typeJsonSerializer = null;
 
 		if (jsonTransformer instanceof TypeJsonSerializer) {
-			transformer = (TypeJsonSerializer)jsonTransformer;
+			typeJsonSerializer = (TypeJsonSerializer<?>)jsonTransformer;
 		}
 		else {
-			transformer = new JoddJsonTransformer(jsonTransformer);
+			typeJsonSerializer = new JoddJsonTransformer(jsonTransformer);
 		}
 
-		_jsonSerializer.use(field, transformer);
+		_jsonSerializer.use(field, typeJsonSerializer);
 
 		return this;
 	}
 
-	private final jodd.json.JsonSerializer _jsonSerializer;
+	private final JsonSerializer _jsonSerializer;
 
 }

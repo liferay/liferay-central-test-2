@@ -29,7 +29,7 @@ public class JoddJsonTransformer implements TypeJsonSerializer {
 	}
 
 	@Override
-	public void serialize(final JsonContext jsonContext, Object object) {
+	public void serialize(JsonContext jsonContext, Object object) {
 		_jsonTransformer.transform(new JoddJSONContext(jsonContext), object);
 	}
 
