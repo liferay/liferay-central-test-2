@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONSerializable;
+import com.liferay.portal.kernel.json.JSONTransformer;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletDisplayModel;
@@ -48,7 +49,6 @@ import jodd.json.TypeJsonSerializerMap;
  */
 public class JSONInit {
 
-	@SuppressWarnings("rawtypes")
 	public static synchronized void init() {
 		try {
 			if (_initalized) {
@@ -64,10 +64,7 @@ public class JSONInit {
 		}
 	}
 
-	private static void _registerDefaultTransformers() {
-
-		// todo move this line to somewhere else (e.g. BeanUtilInit) ?
-
+	private static void _registerDefaultTransformers() throws Exception {
 		JoddIntrospector.introspector = new CachingIntrospector(
 			true, true, true, "_");
 
@@ -83,30 +80,27 @@ public class JSONInit {
 			"javax.*"
 		};
 
-		TypeJsonSerializerMap defaultTypeSerializerMap =
-			JoddJson.defaultSerializers;
-
-		defaultTypeSerializerMap.register(
-			File.class, new JoddJsonTransformer(new FileJSONTransformer()));
-
-		defaultTypeSerializerMap.register(
-			JSONArray.class,
-			new JoddJsonTransformer(new JSONArrayJSONTransformer()));
-
-		defaultTypeSerializerMap.register(
-			JSONObject.class,
-			new JoddJsonTransformer(new JSONObjectJSONTransformer()));
-
-		defaultTypeSerializerMap.register(
-			JSONSerializable.class,
-			new JoddJsonTransformer(new JSONSerializableJSONTransformer()));
-
-		defaultTypeSerializerMap.register(
-			RepositoryModel.class,
-			new JoddJsonTransformer(new RepositoryModelJSONTransformer()));
-
-		defaultTypeSerializerMap.register(
-			User.class, new JoddJsonTransformer(new UserJSONTransformer()));
+		TypeJsonSerializerMap typeSerializerMap = JoddJson.defaultSerializers;
+		
+		Class<?>[][] classesArray = new Class<?>[][] {
+			new Class[] {File.class, FileJSONTransformer.class}, 
+			new Class[] {JSONArray.class, JSONArrayJSONTransformer.class},
+			new Class[] {JSONObject.class, JSONObjectJSONTransformer.class},
+			new Class[] {
+				JSONSerializable.class, JSONSerializableJSONTransformer.class
+			}, 
+			new Class[] {
+				RepositoryModel.class, RepositoryModelJSONTransformer.class
+			}, 
+			new Class[] {User.class, UserJSONTransformer.class}
+		};
+		
+		for (Class<?>[] classes : classesArray) {
+			typeSerializerMap.register(
+				classes[0],
+				new JoddJsonTransformer(
+					(JSONTransformer)classes[1].newInstance()));
+		}
 	}
 
 	private static boolean _initalized = false;
