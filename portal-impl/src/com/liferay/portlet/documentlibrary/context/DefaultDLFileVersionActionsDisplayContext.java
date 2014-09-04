@@ -565,8 +565,6 @@ public class DefaultDLFileVersionActionsDisplayContext
 		PortletURL moveURL = _liferayPortletResponse.createRenderURL();
 
 		moveURL.setParameter("struts_action", "/document_library/move_entry");
-		moveURL.setParameter(
-			"fileEntryIds", String.valueOf(_fileEntry.getFileEntryId()));
 
 		PortletURL viewFolderURL = _liferayPortletResponse.createRenderURL();
 
@@ -574,6 +572,9 @@ public class DefaultDLFileVersionActionsDisplayContext
 		viewFolderURL.setParameter("folderId", String.valueOf(_folderId));
 
 		moveURL.setParameter("redirect", viewFolderURL.toString());
+
+		moveURL.setParameter(
+			"fileEntryIds", String.valueOf(_fileEntry.getFileEntryId()));
 
 		urlMenuItem.setURL(moveURL.toString());
 
