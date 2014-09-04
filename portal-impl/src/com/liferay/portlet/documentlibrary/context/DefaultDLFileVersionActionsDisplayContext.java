@@ -469,8 +469,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 
 			menuItems.add(deleteMenuItem);
 		}
-
-		if (isMoveToTheRecycleBinButtonVisible()) {
+		else if (isMoveToTheRecycleBinButtonVisible()) {
 			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
 
 			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
