@@ -14,14 +14,15 @@
 
 package com.liferay.portal.json.transformer;
 
-import jodd.introspector.PropertyDescriptor;
-import jodd.json.JsonSerializer;
-import jodd.json.TypeJsonVisitor;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import jodd.introspector.PropertyDescriptor;
+
+import jodd.json.JsonSerializer;
+import jodd.json.TypeJsonVisitor;
 
 /**
  * @author Igor Spasic
@@ -46,7 +47,7 @@ public class FlexjsonBeanAnalyzerTransformer extends TypeJsonVisitor {
 
 	@Override
 	protected void onSerializableProperty(
-			String propertyName, PropertyDescriptor propertyDescriptor) {
+		String propertyName, PropertyDescriptor propertyDescriptor) {
 
 		Class propertyType = propertyDescriptor.getType();
 

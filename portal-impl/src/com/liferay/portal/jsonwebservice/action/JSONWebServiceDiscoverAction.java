@@ -359,7 +359,6 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			typeName = "list";
 		}
 		else if (ReflectUtil.isTypeOf(type, Map.class)) {
-
 			typeName = "map";
 		}
 		else {

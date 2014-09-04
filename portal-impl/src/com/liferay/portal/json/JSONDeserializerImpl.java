@@ -15,6 +15,7 @@
 package com.liferay.portal.json;
 
 import com.liferay.portal.kernel.json.JSONDeserializer;
+
 import jodd.json.JsonParser;
 
 /**
