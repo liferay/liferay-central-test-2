@@ -27,16 +27,15 @@ import jodd.json.impl.MapJsonSerializer;
 /**
  * @author Igor Spasic
  */
-public class SortedHashMapJSONTransformer extends MapJsonSerializer
-	implements JSONTransformer {
+public class SortedHashMapJSONTransformer
+	extends MapJsonSerializer implements JSONTransformer {
 
+	@Override
 	public void transform(JSONContext jsonContext, Object map) {
 		if (map instanceof HashMap) {
-			HashMap<Object, Object> hashMap = (HashMap<Object, Object>)map;
-
 			TreeMap<Object, Object> treeMap = new TreeMap<>();
 
-			treeMap.putAll(hashMap);
+			treeMap.putAll((HashMap<Object, Object>)map);
 
 			map = treeMap;
 		}
