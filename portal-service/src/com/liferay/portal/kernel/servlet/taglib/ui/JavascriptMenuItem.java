@@ -19,22 +19,20 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
  */
 public class JavascriptMenuItem extends MenuItem {
 
-	public JavascriptMenuItem(
-		String id, String iconCssClass, String message, String onClick,
-		String javascript) {
-
-		super(id, iconCssClass, message);
-
-		_onClick = onClick;
-		_javascript = javascript;
-	}
-
 	public String getJavascript() {
 		return _javascript;
 	}
 
 	public String getOnClick() {
 		return _onClick;
+	}
+
+	public void setJavascript(String javascript) {
+		_javascript = javascript;
+	}
+
+	public void setOnClick(String onClick) {
+		_onClick = onClick;
 	}
 
 	private String _javascript;

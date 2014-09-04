@@ -19,12 +19,6 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
  */
 public abstract class MenuItem {
 
-	public MenuItem(String id, String iconCssClass, String message) {
-		_id = id;
-		_iconCssClass = iconCssClass;
-		_message = message;
-	}
-
 	public String getIconCssClass() {
 		return _iconCssClass;
 	}
@@ -35,6 +29,18 @@ public abstract class MenuItem {
 
 	public String getMessage() {
 		return _message;
+	}
+
+	public void setIconCssClass(String iconCssClass) {
+		_iconCssClass = iconCssClass;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public void setMessage(String message) {
+		_message = message;
 	}
 
 	private String _iconCssClass;

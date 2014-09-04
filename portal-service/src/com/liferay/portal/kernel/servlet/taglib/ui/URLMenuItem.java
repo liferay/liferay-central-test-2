@@ -19,22 +19,6 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
  */
 public class URLMenuItem extends MenuItem {
 
-	public URLMenuItem(
-		String id, String iconCssClass, String message, String url) {
-
-		this(id, iconCssClass, message, url, "_self");
-	}
-
-	public URLMenuItem(
-		String id, String iconCssClass, String message, String url,
-		String target) {
-
-		super(id, iconCssClass, message);
-
-		_target = target;
-		_url = url;
-	}
-
 	public String getMethod() {
 		return _method;
 	}
@@ -55,12 +39,22 @@ public class URLMenuItem extends MenuItem {
 		_method = method;
 	}
 
+	public void setTarget(String target) {
+		_target = target;
+	}
+
+	public void setURL(String url) {
+		_url = url;
+	}
+
 	public void setUseDialog(boolean useDialog) {
 		_useDialog = useDialog;
 	}
 
+	private static final String _TARGET_DEFAULT = "_self";
+
 	private String _method;
-	private String _target;
+	private String _target = _TARGET_DEFAULT;
 	private String _url;
 	private boolean _useDialog;
 
