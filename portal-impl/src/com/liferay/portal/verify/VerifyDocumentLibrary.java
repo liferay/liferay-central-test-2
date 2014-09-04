@@ -438,8 +438,8 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 	protected void updateClassNameId() {
 		try {
 			runSQL(
-				"update DLFileEntry set classNameId = 0 where classNameId " +
-					"is null");
+				"update DLFileEntry set classNameId = 0 where classNameId is " +
+					"null");
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
