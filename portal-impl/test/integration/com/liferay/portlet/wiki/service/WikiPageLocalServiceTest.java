@@ -45,7 +45,6 @@ import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.util.test.ExpandoTestUtil;
 import com.liferay.portlet.wiki.DuplicatePageException;
-import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
 import com.liferay.portlet.wiki.NodeChangeException;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -123,13 +122,8 @@ public class WikiPageLocalServiceTest {
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle(),
 			destinationNode.getNodeId(), serviceContext);
 
-		try {
-			WikiPageLocalServiceUtil.getPage(
-				destinationNode.getNodeId(), page.getTitle());
-		}
-		catch (NoSuchPageException nspe) {
-			Assert.fail("Cannot get moved page");
-		}
+		WikiPageLocalServiceUtil.getPage(
+			destinationNode.getNodeId(), page.getTitle());
 	}
 
 	@Test
@@ -191,8 +185,7 @@ public class WikiPageLocalServiceTest {
 				TestPropsValues.getUserId(), _node.getNodeId(), "ParentPage",
 				destinationNode.getNodeId(), serviceContext);
 
-			Assert.fail(
-				"Node change should not be performed due title duplication");
+			Assert.fail();
 		}
 		catch (NodeChangeException nce) {
 			Assert.assertEquals("DuplicatedTitlePage", nce.getPageTitle());
@@ -222,8 +215,7 @@ public class WikiPageLocalServiceTest {
 				page.getUserId(), _node.getNodeId(), "DuplicatedTitlePage",
 				destinationNode.getNodeId(), serviceContext);
 
-			Assert.fail(
-				"Node change should not be performed due title duplication");
+			Assert.fail();
 		}
 		catch (NodeChangeException nce) {
 			Assert.assertEquals("DuplicatedTitlePage", nce.getPageTitle());
@@ -289,8 +281,7 @@ public class WikiPageLocalServiceTest {
 				TestPropsValues.getUserId(), _node.getNodeId(), "RenamedPage",
 				destinationNode.getNodeId(), serviceContext);
 
-			Assert.fail(
-				"Node change should not be performed due title duplication");
+			Assert.fail();
 		}
 		catch (NodeChangeException nce) {
 			Assert.assertEquals("DuplicatedTitlePage", nce.getPageTitle());
@@ -331,8 +322,7 @@ public class WikiPageLocalServiceTest {
 				"InitialTitlePage", destinationNode.getNodeId(),
 				serviceContext);
 
-			Assert.fail(
-				"Node change should not be performed due title duplication");
+			Assert.fail();
 		}
 		catch (NodeChangeException nce) {
 			Assert.assertEquals("InitialTitlePage", nce.getPageTitle());
@@ -400,7 +390,7 @@ public class WikiPageLocalServiceTest {
 		try {
 			WikiPageLocalServiceUtil.getPage(page.getResourcePrimKey());
 
-			Assert.fail("Page should be deleted");
+			Assert.fail();
 		}
 		catch (NoSuchPageResourceException nspre) {
 			redirectPage = WikiPageLocalServiceUtil.getPage(
@@ -425,7 +415,7 @@ public class WikiPageLocalServiceTest {
 		try {
 			WikiPageLocalServiceUtil.getPage(page.getResourcePrimKey());
 
-			Assert.fail("Page should be deleted");
+			Assert.fail();
 		}
 		catch (NoSuchPageResourceException nsrpe) {
 			WikiPageLocalServiceUtil.getPage(redirectPage.getResourcePrimKey());
@@ -448,7 +438,7 @@ public class WikiPageLocalServiceTest {
 		try {
 			WikiPageLocalServiceUtil.getPage(parentPage.getResourcePrimKey());
 
-			Assert.fail("Parent page should be deleted");
+			Assert.fail();
 		}
 		catch (NoSuchPageResourceException nspre) {
 			childPage = WikiPageLocalServiceUtil.getPage(
@@ -478,7 +468,7 @@ public class WikiPageLocalServiceTest {
 		try {
 			WikiPageLocalServiceUtil.getPage(page.getResourcePrimKey());
 
-			Assert.fail("Page should be deleted");
+			Assert.fail();
 		}
 		catch (NoSuchPageResourceException nspre) {
 			redirectPage = WikiPageLocalServiceUtil.getPageByPageId(
@@ -505,7 +495,7 @@ public class WikiPageLocalServiceTest {
 		try {
 			WikiPageLocalServiceUtil.getPage(parentPage.getResourcePrimKey());
 
-			Assert.fail("Parent page should be deleted");
+			Assert.fail();
 		}
 		catch (NoSuchPageResourceException nspre) {
 			childPage = WikiPageLocalServiceUtil.getPageByPageId(
@@ -530,7 +520,7 @@ public class WikiPageLocalServiceTest {
 		try {
 			WikiPageLocalServiceUtil.getPage(parentPage.getResourcePrimKey());
 
-			Assert.fail("Parent page should be deleted");
+			Assert.fail();
 		}
 		catch (NoSuchPageResourceException nspre) {
 			WikiPageLocalServiceUtil.getPage(childPage.getResourcePrimKey());
