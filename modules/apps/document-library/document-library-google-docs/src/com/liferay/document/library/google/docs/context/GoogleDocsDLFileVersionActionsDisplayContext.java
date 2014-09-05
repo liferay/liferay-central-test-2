@@ -79,12 +79,6 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 		int menuItemIndex = _getMenuItemIndex(
 			menuItems, DLMenuItemKeys.EDIT);
 
-		GoogleDocsMetadataHelper googleDocsMetadataHelper =
-			new GoogleDocsMetadataHelper(fileVersion);
-
-		String editURL = googleDocsMetadataHelper.getFieldValue(
-			GoogleDocsConstants.DDM_FIELD_NAME_EDIT_URL);
-
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-edit");
@@ -101,6 +95,13 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 		urlMenuItem.setMessage(message);
 
 		urlMenuItem.setTarget("_blank");
+
+		GoogleDocsMetadataHelper googleDocsMetadataHelper =
+			new GoogleDocsMetadataHelper(fileVersion);
+
+		String editURL = googleDocsMetadataHelper.getFieldValue(
+			GoogleDocsConstants.DDM_FIELD_NAME_EDIT_URL);
+
 		urlMenuItem.setURL(editURL);
 
 		menuItems.set(menuItemIndex, urlMenuItem);
