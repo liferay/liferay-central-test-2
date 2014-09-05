@@ -2492,7 +2492,7 @@
 		</execute>
 	</command>
 
-	<command name="ViewRegRolePermissionsDefaultView" priority="5">
+	<command known-issues="LPS-49842" name="ViewRegRolePermissionsDefaultView" priority="5">
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Roles" />
 		</execute>
