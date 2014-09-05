@@ -60,7 +60,6 @@ page import="com.liferay.portal.security.auth.PrincipalException" %><%@
 page import="com.liferay.portal.security.permission.ActionKeys" %><%@
 page import="com.liferay.portal.service.UserLocalServiceUtil" %><%@
 page import="com.liferay.portal.util.PortalUtil" %><%@
-
 page import="com.liferay.portlet.PortletURLUtil" %><%@
 page import="com.liferay.taglib.search.ResultRow" %>
 
