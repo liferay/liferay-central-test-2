@@ -87,6 +87,9 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
+		urlMenuItem.setIconCssClass("icon-edit");
+		urlMenuItem.setKey(GoogleDocsMenuItemKeys.EDIT_IN_GOOGLE);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -95,11 +98,10 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 
 		String message = LanguageUtil.get(resourceBundle, "edit-in-google");
 
-		urlMenuItem.setKey(GoogleDocsMenuItemKeys.EDIT_IN_GOOGLE);
 		urlMenuItem.setMessage(message);
-		urlMenuItem.setIconCssClass("icon-edit");
-		urlMenuItem.setURL(editURL);
+
 		urlMenuItem.setTarget("_blank");
+		urlMenuItem.setURL(editURL);
 
 		menuItems.set(menuItemIndex, urlMenuItem);
 	}
