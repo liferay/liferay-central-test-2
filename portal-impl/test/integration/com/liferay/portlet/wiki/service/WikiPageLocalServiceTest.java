@@ -92,7 +92,7 @@ public class WikiPageLocalServiceTest {
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _node.getNodeId(), "ChildPage",
-			"content", "ParentPage", true, serviceContext);
+			RandomTestUtil.randomString(), "ParentPage", true, serviceContext);
 
 		WikiPageLocalServiceUtil.changeNode(
 			TestPropsValues.getUserId(), _node.getNodeId(), "ChildPage",
@@ -173,8 +173,8 @@ public class WikiPageLocalServiceTest {
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _node.getNodeId(),
-			"DuplicatedTitlePage", "content", "ParentPage", true,
-			serviceContext);
+			"DuplicatedTitlePage", RandomTestUtil.randomString(), "ParentPage",
+			true, serviceContext);
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _group.getGroupId(),
