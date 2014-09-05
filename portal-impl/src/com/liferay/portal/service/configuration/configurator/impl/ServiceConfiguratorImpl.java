@@ -180,7 +180,7 @@ public class ServiceConfiguratorImpl implements ServiceConfigurator {
 		}
 
 		String[] portletIds = StringUtil.split(
-			configuration.get("service.model.permission.key"));
+			configuration.get("service.configurator.portlet.ids"));
 
 		for (String portletId : portletIds) {
 			List<String> modelNames =
