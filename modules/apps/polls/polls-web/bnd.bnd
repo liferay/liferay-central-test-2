@@ -24,9 +24,9 @@ Import-Package: \
 	\
 	com.liferay.polls,\
 	com.liferay.polls.*,\
-	com.liferay.polls.constants,\
 	com.liferay.polls.lar,\
 	com.liferay.polls.service.permission,\
+	com.liferay.polls.util,\
 	\
 	org.apache.struts.action,\
 	org.apache.struts.action.*,\
