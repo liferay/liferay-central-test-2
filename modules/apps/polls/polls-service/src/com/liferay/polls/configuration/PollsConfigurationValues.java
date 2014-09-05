@@ -22,8 +22,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public class PollsConfigurationValues {
 
-	public static final boolean POLLS_PUBLISH_TO_LIVE_BY_DEFAULT =
+	public static final boolean PUBLISH_TO_LIVE_BY_DEFAULT =
 		GetterUtil.getBoolean(
-			PollsConfigurationUtil.get("polls.publish.to.live.by.default"));
+			PollsConfigurationUtil.get("publish.to.live.by.default"));
 
 }
