@@ -28,7 +28,7 @@ MenuItem menuItem = (MenuItem)request.getAttribute("liferay-ui:menu_item:menuIte
 		%>
 
 		<liferay-ui:icon-delete
-			trash="<%= deleteMenuItem.getTrash() %>"
+			trash="<%= deleteMenuItem.isTrash() %>"
 			url="<%= deleteMenuItem.getURL() %>"
 		/>
 	</c:when>
