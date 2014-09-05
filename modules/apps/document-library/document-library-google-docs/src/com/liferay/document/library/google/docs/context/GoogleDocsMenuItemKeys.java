@@ -17,9 +17,9 @@ package com.liferay.document.library.google.docs.context;
 /**
  * @author Ivan Zaera
  */
-public class GoogleDocsMenuItems {
+public class GoogleDocsMenuItemKeys {
 
-	public static final String MENU_ITEM_ID_EDIT_IN_GOOGLE =
-		GoogleDocsMenuItems.class.getName() + "#edit-in-google";
+	public static final String EDIT_IN_GOOGLE =
+		GoogleDocsMenuItemKeys.class.getName() + "#edit-in-google";
 
 }

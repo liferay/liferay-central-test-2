@@ -371,7 +371,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-remove");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CANCEL_CHECKOUT);
+		urlMenuItem.setKey(DLMenuItemKeys.CANCEL_CHECKOUT);
 		urlMenuItem.setMessage("cancel-checkout[document]");
 
 		PortletURL portletURL = _liferayPortletResponse.createActionURL();
@@ -398,7 +398,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-lock");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKIN);
+		urlMenuItem.setKey(DLMenuItemKeys.CHECKIN);
 		urlMenuItem.setMessage("checkin");
 
 		PortletURL portletURL = _liferayPortletResponse.createActionURL();
@@ -425,7 +425,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-unlock");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_CHECKOUT);
+		urlMenuItem.setKey(DLMenuItemKeys.CHECKOUT);
 		urlMenuItem.setMessage("checkout[document]");
 
 		PortletURL portletURL = _liferayPortletResponse.createActionURL();
@@ -452,7 +452,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		if (isDeleteButtonVisible()) {
 			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
 
-			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
+			deleteMenuItem.setKey(DLMenuItemKeys.DELETE);
 
 			PortletURL portletURL = _liferayPortletResponse.createActionURL();
 
@@ -470,7 +470,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		else if (isMoveToTheRecycleBinButtonVisible()) {
 			DeleteMenuItem deleteMenuItem = new DeleteMenuItem();
 
-			deleteMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DELETE);
+			deleteMenuItem.setKey(DLMenuItemKeys.DELETE);
 			deleteMenuItem.setTrash(true);
 
 			PortletURL portletURL = _liferayPortletResponse.createActionURL();
@@ -498,7 +498,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-download");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
+		urlMenuItem.setKey(DLMenuItemKeys.DOWNLOAD);
 
 		String message = TextFormatter.formatStorageSize(
 			_fileEntry.getSize(), _themeDisplay.getLocale());
@@ -528,7 +528,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-edit");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_EDIT);
+		urlMenuItem.setKey(DLMenuItemKeys.EDIT);
 		urlMenuItem.setMessage("edit");
 
 		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
@@ -555,7 +555,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-move");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_MOVE);
+		urlMenuItem.setKey(DLMenuItemKeys.MOVE);
 		urlMenuItem.setMessage("move");
 
 		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
@@ -588,7 +588,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		JavascriptMenuItem javaScriptMenuItem = new JavascriptMenuItem();
 
 		javaScriptMenuItem.setIconCssClass("icon-file-alt");
-		javaScriptMenuItem.setId(DLMenuItems.MENU_ITEM_ID_OPEN_IN_MS_OFFICE);
+		javaScriptMenuItem.setKey(DLMenuItemKeys.OPEN_IN_MS_OFFICE);
 
 		Map<String, String> context = new HashMap<String, String>();
 
@@ -633,7 +633,7 @@ public class DefaultDLFileVersionActionsDisplayContext
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
 		urlMenuItem.setIconCssClass("icon-lock");
-		urlMenuItem.setId(DLMenuItems.MENU_ITEM_ID_PERMISSIONS);
+		urlMenuItem.setKey(DLMenuItemKeys.PERMISSIONS);
 		urlMenuItem.setMessage("permissions");
 		urlMenuItem.setMethod("get");
 

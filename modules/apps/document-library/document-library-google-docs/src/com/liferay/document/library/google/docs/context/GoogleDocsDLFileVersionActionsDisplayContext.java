@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.context.BaseDLFileVersionActionsDisplayContext;
 import com.liferay.portlet.documentlibrary.context.DLFileVersionActionsDisplayContext;
-import com.liferay.portlet.documentlibrary.context.DLMenuItems;
+import com.liferay.portlet.documentlibrary.context.DLMenuItemKeys;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -53,21 +53,19 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 	public List<MenuItem> getMenuItems() throws PortalException {
 		List<MenuItem> menuItems = super.getMenuItems();
 
-		_removeMenuItem(menuItems, DLMenuItems.MENU_ITEM_ID_DOWNLOAD);
-		_removeMenuItem(menuItems, DLMenuItems.MENU_ITEM_ID_OPEN_IN_MS_OFFICE);
+		_removeMenuItem(menuItems, DLMenuItemKeys.DOWNLOAD);
+		_removeMenuItem(menuItems, DLMenuItemKeys.OPEN_IN_MS_OFFICE);
 
 		_insertEditInGoogleMenuItem(menuItems);
 
 		return menuItems;
 	}
 
-	private int _getMenuItemIndex(List<MenuItem> menuItems, String menuItemId) {
+	private int _getMenuItemIndex(List<MenuItem> menuItems, String key) {
 		for (int i = 0; i < menuItems.size(); i++) {
 			MenuItem menuItem = menuItems.get(i);
 
-			String currentMenuItemId = menuItem.getId();
-
-			if (currentMenuItemId.equals(menuItemId)) {
+			if (key.equals(menuItem.getKey())) {
 				return i;
 			}
 		}
@@ -79,7 +77,7 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 		throws PortalException {
 
 		int menuItemIndex = _getMenuItemIndex(
-			menuItems, DLMenuItems.MENU_ITEM_ID_EDIT);
+			menuItems, DLMenuItemKeys.EDIT);
 
 		GoogleDocsMetadataHelper googleDocsMetadataHelper =
 			new GoogleDocsMetadataHelper(fileVersion);
@@ -97,7 +95,7 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 
 		String message = LanguageUtil.get(resourceBundle, "edit-in-google");
 
-		urlMenuItem.setId(GoogleDocsMenuItems.MENU_ITEM_ID_EDIT_IN_GOOGLE);
+		urlMenuItem.setKey(GoogleDocsMenuItemKeys.EDIT_IN_GOOGLE);
 		urlMenuItem.setMessage(message);
 		urlMenuItem.setIconCssClass("icon-edit");
 		urlMenuItem.setURL(editURL);
@@ -106,8 +104,8 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 		menuItems.set(menuItemIndex, urlMenuItem);
 	}
 
-	private void _removeMenuItem(List<MenuItem> menuItems, String menuItemId) {
-		int index = _getMenuItemIndex(menuItems, menuItemId);
+	private void _removeMenuItem(List<MenuItem> menuItems, String key) {
+		int index = _getMenuItemIndex(menuItems, key);
 
 		if (index != -1) {
 			menuItems.remove(index);
