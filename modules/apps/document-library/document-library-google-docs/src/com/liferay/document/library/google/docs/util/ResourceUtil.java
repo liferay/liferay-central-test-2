@@ -69,8 +69,7 @@ public class ResourceUtil {
 
 	public static ResourceBundle getResourceBundle(Locale locale) {
 		return ResourceBundle.getBundle(
-			"com.liferay.document.library.google.docs.util.dependencies." +
-				"Language", locale, ResourceUtil.class.getClassLoader());
+			"content.Language", locale, ResourceUtil.class.getClassLoader());
 	}
 
 }
