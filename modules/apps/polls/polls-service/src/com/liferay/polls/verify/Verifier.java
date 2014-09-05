@@ -27,7 +27,6 @@ public class Verifier {
 
 	public void verify() throws Exception {
 		verifyAuditedModels();
-
 		verifyResourcedModels();
 	}
 
@@ -40,8 +39,8 @@ public class Verifier {
 		_verifyResourcePermissions.verify(new PollsQuestionVerifiableModel());
 	}
 
-	VerifyAuditedModel _verifyAuditedModel = new VerifyAuditedModel();
-	VerifyResourcePermissions _verifyResourcePermissions =
+	private VerifyAuditedModel _verifyAuditedModel = new VerifyAuditedModel();
+	private VerifyResourcePermissions _verifyResourcePermissions =
 		new VerifyResourcePermissions();
 
 }
