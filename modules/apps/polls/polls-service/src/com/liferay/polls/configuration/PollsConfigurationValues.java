@@ -12,24 +12,18 @@
  * details.
  */
 
-package com.liferay.polls.constants;
+package com.liferay.polls.configuration;
 
-import com.liferay.portal.kernel.configuration.Configuration;
-import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 /**
  *
  * @author Miguel pastor
  */
-public class ConfigurationConstants {
-
-	public static final Configuration CONFIGURATION =
-		ConfigurationFactoryUtil.getConfiguration(
-			ConfigurationConstants.class.getClassLoader(), "portlet");
+public class PollsConfigurationValues {
 
 	public static final boolean POLLS_PUBLISH_TO_LIVE_BY_DEFAULT =
 		GetterUtil.getBoolean(
-			CONFIGURATION.get("polls.publish.to.live.by.default"));
+			PollsConfigurationUtil.get("polls.publish.to.live.by.default"));
 
 }
