@@ -49,17 +49,19 @@ public class ViewChartAction extends PortletAction {
 	@Override
 	public void serveResource(
 			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ResourceRequest request,
-			ResourceResponse response)
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse renderResponse)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)resourceRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
-			long questionId = ParamUtil.getLong(request, "questionId");
+			long questionId = ParamUtil.getLong(resourceRequest, "questionId");
 
-			String chartType = ParamUtil.getString(request, "chartType", "pie");
+			String chartType = ParamUtil.getString(
+				resourceRequest, "chartType", "pie");
 			String chartName = themeDisplay.translate("vote-results");
 			String xName = themeDisplay.translate("choice");
 			String yName = themeDisplay.translate("votes");
@@ -97,14 +99,14 @@ public class ViewChartAction extends PortletAction {
 					chartName, pieDataset, true, false, false);
 			}
 
-			response.setContentType(ContentTypes.IMAGE_JPEG);
+			renderResponse.setContentType(ContentTypes.IMAGE_JPEG);
 
-			OutputStream outputStream = response.getPortletOutputStream();
+			OutputStream outputStream = renderResponse.getPortletOutputStream();
 
 			ChartUtilities.writeChartAsJPEG(outputStream, jFreeChat, 400, 400);
 		}
 		catch (Exception e) {
-			PortletSession portletSession = request.getPortletSession();
+			PortletSession portletSession = resourceRequest.getPortletSession();
 
 			PortletContext portletContext = portletSession.getPortletContext();
 
@@ -112,7 +114,7 @@ public class ViewChartAction extends PortletAction {
 				portletContext.getRequestDispatcher(
 					"/html/portlet/polls/error.jsp");
 
-			requestDispatcher.forward(request, response);
+			requestDispatcher.forward(resourceRequest, renderResponse);
 		}
 	}
 
