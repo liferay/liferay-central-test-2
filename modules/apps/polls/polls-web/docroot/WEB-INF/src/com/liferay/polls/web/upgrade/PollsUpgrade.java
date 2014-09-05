@@ -14,7 +14,7 @@
 
 package com.liferay.polls.web.upgrade;
 
-import com.liferay.polls.configurator.PollServicesConfigurator;
+import com.liferay.polls.service.configuration.configurator.PollsServiceConfigurator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -35,8 +35,8 @@ import org.osgi.service.component.annotations.Reference;
 public class PollsUpgrade {
 
 	@Reference(unbind = "-")
-	protected void setPollServicesConfigurator(
-		PollServicesConfigurator pollServicesConfigurator) {
+	protected void setPollsServiceConfigurator(
+		PollsServiceConfigurator pollsServiceConfigurator) {
 	}
 
 	@Reference(unbind = "-")

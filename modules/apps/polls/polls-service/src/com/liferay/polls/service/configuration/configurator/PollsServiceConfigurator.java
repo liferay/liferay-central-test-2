@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.configurator;
+package com.liferay.polls.service.configuration.configurator;
 
 import com.liferay.polls.verify.Verifier;
 import com.liferay.portal.service.configuration.ServiceComponentConfiguration;
@@ -32,9 +32,9 @@ import org.springframework.context.ApplicationContext;
  * @author Miguel Pastor
  */
 @Component(
-	immediate = true, service = PollServicesConfigurator.class
+	immediate = true, service = PollsServiceConfigurator.class
 )
-public class PollServicesConfigurator {
+public class PollsServiceConfigurator {
 
 	@Activate
 	protected void activate() throws Exception {
@@ -52,7 +52,7 @@ public class PollServicesConfigurator {
 	}
 
 	protected ClassLoader getClassLoader() {
-		Class<? extends PollServicesConfigurator> clazz = getClass();
+		Class<? extends PollsServiceConfigurator> clazz = getClass();
 
 		return clazz.getClassLoader();
 	}
