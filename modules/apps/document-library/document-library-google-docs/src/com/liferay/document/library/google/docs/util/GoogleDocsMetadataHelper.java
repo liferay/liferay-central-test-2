@@ -69,7 +69,7 @@ public class GoogleDocsMetadataHelper {
 	}
 
 	public String getFieldValue(String fieldName) {
-		_loadFields();
+		initFields();
 
 		Field field = _fields.get(fieldName);
 
@@ -90,15 +90,15 @@ public class GoogleDocsMetadataHelper {
 		return false;
 	}
 
-	private void _loadFields() {
+	protected void initFields() {
 		if (_fields == null) {
 			_fields = new HashMap<>();
 
 			try {
 				DLFileEntryMetadata dlFileEntryMetadata =
 					DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(
-							_ddmStructure.getStructureId(),
-							_fileVersion.getFileVersionId());
+						_ddmStructure.getStructureId(),
+						_fileVersion.getFileVersionId());
 
 				Fields fields = StorageEngineUtil.getFields(
 					dlFileEntryMetadata.getDDMStorageId());
@@ -110,7 +110,8 @@ public class GoogleDocsMetadataHelper {
 			catch (PortalException pe) {
 				throw new SystemException(
 					"Unable to load DDM fields for file version " +
-						_fileVersion.getFileVersionId(), pe);
+						_fileVersion.getFileVersionId(),
+					pe);
 			}
 		}
 	}
