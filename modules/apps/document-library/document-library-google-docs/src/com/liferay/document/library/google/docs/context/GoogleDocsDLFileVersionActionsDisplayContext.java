@@ -61,7 +61,7 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 		return menuItems;
 	}
 
-	private int _getMenuItemIndex(List<MenuItem> menuItems, String key) {
+	private int _getIndex(List<MenuItem> menuItems, String key) {
 		for (int i = 0; i < menuItems.size(); i++) {
 			MenuItem menuItem = menuItems.get(i);
 
@@ -76,8 +76,7 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 	private void _insertEditInGoogleMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		int menuItemIndex = _getMenuItemIndex(
-			menuItems, DLMenuItemKeys.EDIT);
+		int index = _getIndex(menuItems, DLMenuItemKeys.EDIT);
 
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
@@ -104,11 +103,11 @@ public class GoogleDocsDLFileVersionActionsDisplayContext
 
 		urlMenuItem.setURL(editURL);
 
-		menuItems.set(menuItemIndex, urlMenuItem);
+		menuItems.set(index, urlMenuItem);
 	}
 
 	private void _removeMenuItem(List<MenuItem> menuItems, String key) {
-		int index = _getMenuItemIndex(menuItems, key);
+		int index = _getIndex(menuItems, key);
 
 		if (index != -1) {
 			menuItems.remove(index);
