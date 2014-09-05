@@ -20,7 +20,6 @@ package com.liferay.document.library.google.docs.context;
 public class GoogleDocsMenuItems {
 
 	public static final String MENU_ITEM_ID_EDIT_IN_GOOGLE =
-		"com.liferay.document.library.google.docs.context." +
-			"GoogleDocsMenuItems#edit-in-google";
+		GoogleDocsMenuItems.class.getName() + "#edit-in-google";
 
 }
