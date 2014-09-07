@@ -94,9 +94,7 @@ public class IFramePortlet extends MVCPortlet {
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		try {
-			ViewAction viewAction = new ViewAction();
-
-			return viewAction.transformSrc(renderRequest, renderResponse);
+			return _viewAction.transformSrc(renderRequest, renderResponse);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -106,5 +104,7 @@ public class IFramePortlet extends MVCPortlet {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IFramePortlet.class);
+
+	private static ViewAction _viewAction = new ViewAction();
 
 }
