@@ -45,10 +45,11 @@ page import="java.util.List" %>
 <portlet:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
 String src = portletPreferences.getValue("src", StringPool.BLANK);
 
 boolean relative = GetterUtil.getBoolean(portletPreferences.getValue("relative", StringPool.BLANK));
-WindowState windowState = liferayPortletRequest.getWindowState();
 
 boolean auth = GetterUtil.getBoolean(portletPreferences.getValue("auth", StringPool.BLANK));
 String authType = portletPreferences.getValue("authType", StringPool.BLANK);
