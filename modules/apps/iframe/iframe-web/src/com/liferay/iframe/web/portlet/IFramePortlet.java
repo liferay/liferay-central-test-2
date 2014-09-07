@@ -16,7 +16,7 @@ package com.liferay.iframe.web.portlet;
 
 import com.liferay.iframe.web.portlet.action.ViewAction;
 import com.liferay.iframe.web.upgrade.IFrameUpgrade;
-import com.liferay.iframe.web.util.IFrameUtil;
+import com.liferay.iframe.web.util.IFrameWebKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -72,7 +72,7 @@ public class IFramePortlet extends MVCPortlet {
 
 		String src = transformIframe(renderRequest, renderResponse);
 
-		renderRequest.setAttribute(IFrameUtil.IFRAME_SRC, src);
+		renderRequest.setAttribute(IFrameWebKeys.IFRAME_SRC, src);
 
 		if (Validator.isNull(src) || src.equals(Http.HTTP_WITH_SLASH) ||
 			src.equals(Http.HTTPS_WITH_SLASH)) {

@@ -23,7 +23,7 @@ if (relative) {
 	iframeSrc = themeDisplay.getPathContext();
 }
 
-iframeSrc += (String)request.getAttribute(IFrameUtil.IFRAME_SRC);
+iframeSrc += (String)request.getAttribute(IFrameWebKeys.IFRAME_SRC);
 
 if (iframeSrc.contains(StringPool.QUESTION)) {
 	iframeSrc = iframeSrc.concat(StringPool.AMPERSAND).concat(StringUtil.merge(iframeVariables, StringPool.AMPERSAND));

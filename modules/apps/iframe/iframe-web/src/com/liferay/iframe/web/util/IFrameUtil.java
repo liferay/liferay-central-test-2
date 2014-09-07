@@ -36,8 +36,6 @@ import javax.portlet.PortletRequest;
  */
 public class IFrameUtil {
 
-	public static final String IFRAME_SRC = "IFRAME_SRC";
-
 	public static String getPassword(
 			PortletRequest portletRequest, String password)
 		throws PortalException {
