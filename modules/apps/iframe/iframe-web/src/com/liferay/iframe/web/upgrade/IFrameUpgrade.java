@@ -64,8 +64,8 @@ public class IFrameUpgrade {
 
 		_releaseLocalService.updateRelease(
 			IFramePortlet.class.getName(),
-			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1,
-			0, false);
+			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
+			false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;

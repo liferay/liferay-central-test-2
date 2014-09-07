@@ -107,6 +107,6 @@ public class IFramePortlet extends MVCPortlet {
 		return null;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(IFramePortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(IFramePortlet.class);
 
 }

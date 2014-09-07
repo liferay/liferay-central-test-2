@@ -74,6 +74,18 @@ public class ViewAction {
 		return src;
 	}
 
+	protected String getPassword(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException {
+
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
+
+		String password = portletPreferences.getValue(
+			"basicPassword", StringPool.BLANK);
+
+		return IFrameUtil.getPassword(renderRequest, password);
+	}
+
 	protected String getSrc(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
@@ -96,18 +108,6 @@ public class ViewAction {
 			"basicUserName", StringPool.BLANK);
 
 		return IFrameUtil.getUserName(renderRequest, userName);
-	}
-
-	protected String getPassword(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws PortalException {
-
-		PortletPreferences portletPreferences = renderRequest.getPreferences();
-
-		String password = portletPreferences.getValue(
-			"basicPassword", StringPool.BLANK);
-
-		return IFrameUtil.getPassword(renderRequest, password);
 	}
 
 }
