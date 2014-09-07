@@ -36,7 +36,6 @@ String baseSrc = iframeSrc;
 int lastSlashPos = 0;
 
 if (iframeSrc.length() > 6) {
-
 	lastSlashPos = iframeSrc.substring(7).lastIndexOf(StringPool.SLASH);
 
 	if (lastSlashPos != -1) {
