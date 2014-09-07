@@ -99,9 +99,7 @@ public class IFramePortlet extends MVCPortlet {
 			return viewAction.transformSrc(renderRequest, renderResponse);
 		}
 		catch (PortalException pe) {
-			if (_log.isErrorEnabled()) {
-				_log.error(pe, pe);
-			}
+			_log.error(pe, pe);
 		}
 
 		return null;
