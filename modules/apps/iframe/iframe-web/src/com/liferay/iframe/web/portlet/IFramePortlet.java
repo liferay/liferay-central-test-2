@@ -67,8 +67,9 @@ import org.osgi.service.component.annotations.Reference;
 public class IFramePortlet extends MVCPortlet {
 
 	@Override
-	public void doView(RenderRequest renderRequest,
-		RenderResponse renderResponse) throws IOException, PortletException {
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
 
 		String src = transformIframe(renderRequest, renderResponse);
 

@@ -67,8 +67,9 @@ public class ViewAction {
 
 			String portletId = PortalUtil.getPortletId(renderRequest);
 
-			src = "/proxy.jsp?p_l_id=" + themeDisplay.getPlid() +
-				"&p_p_id=" + portletId;
+			src =
+				"/proxy.jsp?p_l_id=" + themeDisplay.getPlid() + "&p_p_id=" +
+					portletId;
 		}
 
 		return src;
