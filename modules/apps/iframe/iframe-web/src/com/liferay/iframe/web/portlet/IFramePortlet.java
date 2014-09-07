@@ -86,10 +86,6 @@ public class IFramePortlet extends MVCPortlet {
 		}
 	}
 
-	/**
-	* Force upgrades to register before the portlet is registered to prevent
-	* race conditions.
-	*/
 	@Reference(unbind = "-")
 	protected void setIFrameUpgrade(IFrameUpgrade iFrameUpgrade) {
 	}
