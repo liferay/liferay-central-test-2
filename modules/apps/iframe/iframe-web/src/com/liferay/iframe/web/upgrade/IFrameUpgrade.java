@@ -53,19 +53,19 @@ public class IFrameUpgrade {
 
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
-
 				return new String[][] {
 					new String[] {
 						"48", "com_liferay_iframe_web_portlet_IFramePortlet"
 					}
 				};
 			}
+
 		};
 
 		_releaseLocalService.updateRelease(
-				IFramePortlet.class.getName(),
-				Collections.<UpgradeProcess> singletonList(upgradePortletId), 1,
-				0, false);
+			IFramePortlet.class.getName(),
+			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1,
+			0, false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;
