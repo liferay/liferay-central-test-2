@@ -14,20 +14,26 @@
 
 package com.liferay.iframe.web.portlet;
 
-import com.liferay.iframe.web.portlet.action.ViewAction;
 import com.liferay.iframe.web.upgrade.IFrameUpgrade;
+import com.liferay.iframe.web.util.IFrameUtil;
 import com.liferay.iframe.web.util.IFrameWebKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -70,7 +76,14 @@ public class IFramePortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		String src = transformIframe(renderRequest, renderResponse);
+		String src = null;
+
+		try {
+			src = transformSrc(renderRequest, renderResponse);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
 		renderRequest.setAttribute(IFrameWebKeys.IFRAME_SRC, src);
 
@@ -86,25 +99,90 @@ public class IFramePortlet extends MVCPortlet {
 		}
 	}
 
+	protected String getPassword(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException {
+
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
+
+		String password = portletPreferences.getValue(
+			"basicPassword", StringPool.BLANK);
+
+		return IFrameUtil.getPassword(renderRequest, password);
+	}
+
+	protected String getSrc(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
+
+		String src = portletPreferences.getValue("src", StringPool.BLANK);
+
+		src = ParamUtil.getString(renderRequest, "src", src);
+
+		return src;
+	}
+
+	protected String getUserName(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException {
+
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
+
+		String userName = portletPreferences.getValue(
+			"basicUserName", StringPool.BLANK);
+
+		return IFrameUtil.getUserName(renderRequest, userName);
+	}
+
 	@Reference(unbind = "-")
 	protected void setIFrameUpgrade(IFrameUpgrade iFrameUpgrade) {
 	}
 
-	protected String transformIframe(
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+	protected String transformSrc(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException {
 
-		try {
-			return _viewAction.transformSrc(renderRequest, renderResponse);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
+
+		String src = getSrc(renderRequest, renderResponse);
+
+		boolean auth = GetterUtil.getBoolean(
+			portletPreferences.getValue("auth", StringPool.BLANK));
+
+		if (!auth) {
+			return src;
 		}
 
-		return null;
+		String authType = portletPreferences.getValue(
+			"authType", StringPool.BLANK);
+
+		if (authType.equals("basic")) {
+			String userName = getUserName(renderRequest, renderResponse);
+			String password = getPassword(renderRequest, renderResponse);
+
+			int pos = src.indexOf("://");
+
+			String protocol = src.substring(0, pos + 3);
+			String url = src.substring(pos + 3);
+
+			src = protocol + userName + ":" + password + "@" + url;
+		}
+		else {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)renderRequest.getAttribute(
+					com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
+
+			String portletId = PortalUtil.getPortletId(renderRequest);
+
+			src =
+				"/proxy.jsp?p_l_id=" + themeDisplay.getPlid() + "&p_p_id=" +
+					portletId;
+		}
+
+		return src;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IFramePortlet.class);
-
-	private static ViewAction _viewAction = new ViewAction();
 
 }
