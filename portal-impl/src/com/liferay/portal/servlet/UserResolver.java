@@ -31,6 +31,7 @@ public class UserResolver {
 
 	public UserResolver(HttpServletRequest request) throws PortalException {
 		long companyId = ParamUtil.getLong(request, "companyId");
+		User user = null;
 
 		String remoteUser = request.getRemoteUser();
 
@@ -39,8 +40,6 @@ public class UserResolver {
 		if (userId == 0) {
 			remoteUser = null;
 		}
-
-		User user = null;
 
 		if (remoteUser != null) {
 			PrincipalThreadLocal.setName(remoteUser);

@@ -14,6 +14,7 @@
 
 package com.liferay.util.axis;
 
+import com.liferay.portal.kernel.exception.StaticInitializationException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BufferCacheServletResponse;
@@ -267,7 +268,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 				MethodCache.class, "cache");
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			throw new StaticInitializationException(e);
 		}
 
 		_CACHE_FIELD = cacheField;

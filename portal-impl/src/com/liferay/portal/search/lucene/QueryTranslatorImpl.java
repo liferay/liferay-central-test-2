@@ -14,6 +14,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.exception.StaticInitializationException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
@@ -127,8 +128,6 @@ public class QueryTranslatorImpl implements QueryTranslator {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(QueryTranslatorImpl.class);
-
 	private static final Field _TEXT_FIELD;
 
 	static {
@@ -140,10 +139,12 @@ public class QueryTranslatorImpl implements QueryTranslator {
 			textField.setAccessible(true);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			throw new StaticInitializationException(e);
 		}
 
 		_TEXT_FIELD = textField;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(QueryTranslatorImpl.class);
 
 }

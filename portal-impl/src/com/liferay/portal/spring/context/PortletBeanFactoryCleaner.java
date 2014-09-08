@@ -14,6 +14,7 @@
 
 package com.liferay.portal.spring.context;
 
+import com.liferay.portal.kernel.exception.StaticInitializationException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
@@ -127,9 +128,6 @@ public class PortletBeanFactoryCleaner implements BeanFactoryAware {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		PortletBeanFactoryCleaner.class);
-
 	private static final Field _SHADOW_MATCH_CACHE_FIELD;
 
 	static {
@@ -140,11 +138,14 @@ public class PortletBeanFactoryCleaner implements BeanFactoryAware {
 				AspectJExpressionPointcut.class, "shadowMatchCache");
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			throw new StaticInitializationException(e);
 		}
 
 		_SHADOW_MATCH_CACHE_FIELD = shadowMatchCacheField;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletBeanFactoryCleaner.class);
 
 	private static final Set<AspectJExpressionPointcut>
 		_aspectJExpressionPointcuts = new HashSet<AspectJExpressionPointcut>();

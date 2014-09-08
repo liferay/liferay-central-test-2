@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.deploy.DeployManagerUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.exception.StaticInitializationException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
@@ -354,16 +355,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		PortalContextLoaderListener.class);
-
-	private static String _portalServletContextName = StringPool.BLANK;
-	private static String _portalServletContextPath = StringPool.SLASH;
-
-	private IndexerPostProcessorRegistry _indexerPostProcessorRegistry;
-	private SchedulerEntryRegistry _schedulerEntryRegistry;
-	private ServiceWrapperRegistry _serviceWrapperRegistry;
-
 	private static final Field _FILTERED_PROPERTY_DESCRIPTORS_CACHE_FIELD;
 
 	static {
@@ -376,11 +367,21 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 					"filteredPropertyDescriptorsCache");
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			throw new StaticInitializationException(e);
 		}
 
 		_FILTERED_PROPERTY_DESCRIPTORS_CACHE_FIELD =
 			filteredPropertyDescriptorsCacheField;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalContextLoaderListener.class);
+
+	private static String _portalServletContextName = StringPool.BLANK;
+	private static String _portalServletContextPath = StringPool.SLASH;
+
+	private IndexerPostProcessorRegistry _indexerPostProcessorRegistry;
+	private SchedulerEntryRegistry _schedulerEntryRegistry;
+	private ServiceWrapperRegistry _serviceWrapperRegistry;
 
 }
