@@ -570,6 +570,13 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			String localServiceImplContent = fileUtil.read(
 				localServiceImplFileName);
 
+			if (localServiceImplContent == null) {
+				System.out.println(
+					"Unable to read " + localServiceImplFileName);
+
+				return;
+			}
+
 			if (!localServiceImplContent.contains("@SystemEvent")) {
 				processErrorMessage(
 					fileName,
