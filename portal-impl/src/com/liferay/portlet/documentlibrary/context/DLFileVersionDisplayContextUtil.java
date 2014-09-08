@@ -53,8 +53,8 @@ public class DLFileVersionDisplayContextUtil {
 	private static DLFileVersionDisplayContext
 		_chainDLFileVersionActionsDisplayContexts(
 			HttpServletRequest request, HttpServletResponse response,
-			FileVersion fileVersion, DLFileVersionDisplayContext
-		dlFileVersionDisplayContext) {
+			FileVersion fileVersion,
+			DLFileVersionDisplayContext dlFileVersionDisplayContext) {
 
 		Collection<DLFileVersionDisplayContextFactory>
 			dlFileVersionActionsDisplayContextFactories =

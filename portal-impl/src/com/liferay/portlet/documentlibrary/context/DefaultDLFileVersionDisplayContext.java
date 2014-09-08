@@ -126,6 +126,16 @@ public class DefaultDLFileVersionDisplayContext
 	}
 
 	@Override
+	public List<DDMStructure> getDDMStructures() throws PortalException {
+		return _fileVersionMetadataHelper.getDDMStructures();
+	}
+
+	@Override
+	public Fields getFields(DDMStructure ddmStructure) throws PortalException {
+		return _fileVersionMetadataHelper.getFields(ddmStructure);
+	}
+
+	@Override
 	public List<MenuItem> getMenuItems() throws PortalException {
 		List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
@@ -374,16 +384,6 @@ public class DefaultDLFileVersionDisplayContext
 	@Override
 	public boolean isViewOriginalFileButtonVisible() throws PortalException {
 		return _defaultDLFileEntryActionsDisplayContextHelper.hasViewPermission();
-	}
-
-	@Override
-	public List<DDMStructure> getDDMStructures() throws PortalException {
-		return _fileVersionMetadataHelper.getDDMStructures();
-	}
-
-	@Override
-	public Fields getFields(DDMStructure ddmStructure) throws PortalException {
-		return _fileVersionMetadataHelper.getFields(ddmStructure);
 	}
 
 	private void _addCancelCheckoutMenuItem(List<MenuItem> menuItems)

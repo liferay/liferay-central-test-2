@@ -24,13 +24,17 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeService;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngine;
-import org.junit.Test;
-import org.mockito.Matchers;
-import org.powermock.api.mockito.PowerMockito;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
+
+import org.mockito.Matchers;
+
+import org.powermock.api.mockito.PowerMockito;
+
+import org.testng.Assert;
 
 /**
  * @author Ivan Zaera
@@ -96,25 +100,6 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 		Assert.assertNotNull(fields);
 	}
 
-	private void _mockFields() throws PortalException {
-		DLFileEntryMetadata fileEntryMetadata = mock(DLFileEntryMetadata.class);
-
-		when(
-			_dlFileEntryMetadataLocalService.getFileEntryMetadata(
-				Matchers.anyLong(), Matchers.anyLong())
-		).thenReturn(
-			fileEntryMetadata
-		);
-
-		Fields fields = mock(Fields.class);
-
-		when(
-			_storageEngine.getFields(fileEntryMetadata.getDDMStorageId())
-		).thenReturn(
-			fields
-		);
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetFieldsFailsForUnknownStructure() throws Exception {
 		DLFileVersion model = mock(DLFileVersion.class);
@@ -150,6 +135,25 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 			dlFileEntryType.getDDMStructures()
 		).thenReturn(
 			ddmStructures
+		);
+	}
+
+	private void _mockFields() throws PortalException {
+		DLFileEntryMetadata fileEntryMetadata = mock(DLFileEntryMetadata.class);
+
+		when(
+			_dlFileEntryMetadataLocalService.getFileEntryMetadata(
+				Matchers.anyLong(), Matchers.anyLong())
+		).thenReturn(
+			fileEntryMetadata
+		);
+
+		Fields fields = mock(Fields.class);
+
+		when(
+			_storageEngine.getFields(fileEntryMetadata.getDDMStorageId())
+		).thenReturn(
+			fields
 		);
 	}
 

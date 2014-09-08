@@ -60,10 +60,10 @@ public class FileVersionMetadataHelper {
 			long fileEntryTypeId = _getFileEntryTypeId();
 
 			if (fileEntryTypeId != -1) {
-				DLFileEntryType fileEntryType =
+				DLFileEntryType dlFileEntryType =
 					_dlFileEntryTypeService.getFileEntryType(fileEntryTypeId);
 
-				_ddmStructures = fileEntryType.getDDMStructures();
+				_ddmStructures = dlFileEntryType.getDDMStructures();
 			}
 			else {
 				_ddmStructures = Collections.emptyList();
@@ -80,15 +80,14 @@ public class FileVersionMetadataHelper {
 
 		if (!_ddmStructures.contains(ddmStructure)) {
 			throw new IllegalArgumentException(
-				"DDMStructure does not belong to this file version");
+				"DDM structure does not belong to this file version");
 		}
 
-		DLFileEntryMetadata fileEntryMetadata =
+		DLFileEntryMetadata dlFileEntryMetadata =
 			_dlFileEntryMetadataLocalService.getFileEntryMetadata(
-				ddmStructure.getStructureId(),
-				_fileVersion.getFileVersionId());
+				ddmStructure.getStructureId(), _fileVersion.getFileVersionId());
 
-		return _storageEngine.getFields(fileEntryMetadata.getDDMStorageId());
+		return _storageEngine.getFields(dlFileEntryMetadata.getDDMStorageId());
 	}
 
 	private long _getFileEntryTypeId() {
