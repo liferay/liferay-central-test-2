@@ -88,12 +88,9 @@ public class DefaultDLFileVersionDisplayContext
 			_fileEntry = fileVersion.getFileEntry();
 		}
 
-		_dlFileEntryActionsDisplayContextHelper =
+		_defaultDLFileEntryActionsDisplayContextHelper =
 			new DefaultDLFileVersionDisplayContextHelper(
 				_themeDisplay.getPermissionChecker(), _fileEntry, fileVersion);
-
-		_fileVersionMetadataHelper = new FileVersionMetadataHelper(
-			_fileVersion);
 
 		_fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
 
@@ -104,6 +101,9 @@ public class DefaultDLFileVersionDisplayContext
 
 			_fileEntryTypeId = dlFileEntry.getFileEntryTypeId();
 		}
+
+		_fileVersionMetadataHelper = new FileVersionMetadataHelper(
+			_fileVersion);
 
 		_folderId = BeanParamUtil.getLong(_fileEntry, request, "folderId");
 
@@ -170,11 +170,11 @@ public class DefaultDLFileVersionDisplayContext
 		String saveButtonLabel = "save";
 
 		FileVersion fileVersion =
-			_dlFileEntryActionsDisplayContextHelper.getFileVersion();
+			_defaultDLFileEntryActionsDisplayContextHelper.getFileVersion();
 
 		if ((fileVersion == null) ||
-			_dlFileEntryActionsDisplayContextHelper.isApproved() ||
-			_dlFileEntryActionsDisplayContextHelper.isDraft()) {
+			_defaultDLFileEntryActionsDisplayContextHelper.isApproved() ||
+			_defaultDLFileEntryActionsDisplayContextHelper.isDraft()) {
 
 			saveButtonLabel = "save-as-draft";
 		}
@@ -216,8 +216,8 @@ public class DefaultDLFileVersionDisplayContext
 		throws PortalException {
 
 		if (isCheckinButtonVisible() ||
-			(_dlFileEntryActionsDisplayContextHelper.isCheckedOut() &&
-			 _dlFileEntryActionsDisplayContextHelper.
+			(_defaultDLFileEntryActionsDisplayContextHelper.isCheckedOut() &&
+			 _defaultDLFileEntryActionsDisplayContextHelper.
 				 hasOverrideCheckoutPermission())) {
 
 			return true;
@@ -233,9 +233,11 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isCheckinButtonVisible() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.hasUpdatePermission() &&
-			_dlFileEntryActionsDisplayContextHelper.isLockedByMe() &&
-			_dlFileEntryActionsDisplayContextHelper.isSupportsLocking()) {
+		if (_defaultDLFileEntryActionsDisplayContextHelper.
+				hasUpdatePermission() &&
+			_defaultDLFileEntryActionsDisplayContextHelper.isLockedByMe() &&
+			_defaultDLFileEntryActionsDisplayContextHelper.
+				isSupportsLocking()) {
 
 			return true;
 		}
@@ -245,9 +247,11 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isCheckoutDocumentButtonVisible() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.hasUpdatePermission() &&
-			!_dlFileEntryActionsDisplayContextHelper.isCheckedOut() &&
-			_dlFileEntryActionsDisplayContextHelper.isSupportsLocking()) {
+		if (_defaultDLFileEntryActionsDisplayContextHelper.
+				hasUpdatePermission() &&
+			!_defaultDLFileEntryActionsDisplayContextHelper.isCheckedOut() &&
+			_defaultDLFileEntryActionsDisplayContextHelper.
+				isSupportsLocking()) {
 
 			return true;
 		}
@@ -271,12 +275,14 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isDownloadButtonVisible() throws PortalException {
-		return _dlFileEntryActionsDisplayContextHelper.hasViewPermission();
+		return _defaultDLFileEntryActionsDisplayContextHelper.
+			hasViewPermission();
 	}
 
 	@Override
 	public boolean isEditButtonVisible() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.hasUpdatePermission() &&
+		if (_defaultDLFileEntryActionsDisplayContextHelper.
+				hasUpdatePermission() &&
 			!_isFileEntryCheckedOutByOther()) {
 
 			return true;
@@ -287,7 +293,8 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isMoveButtonVisible() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.hasUpdatePermission() &&
+		if (_defaultDLFileEntryActionsDisplayContextHelper.
+				hasUpdatePermission() &&
 			!_isFileEntryCheckedOutByOther()) {
 
 			return true;
@@ -307,8 +314,9 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isOpenInMsOfficeButtonVisible() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.hasViewPermission() &&
-			_dlFileEntryActionsDisplayContextHelper.isOfficeDoc() &&
+		if (_defaultDLFileEntryActionsDisplayContextHelper.
+				hasViewPermission() &&
+			_defaultDLFileEntryActionsDisplayContextHelper.isOfficeDoc() &&
 			_isWebDAVEnabled() && _isIEOnWin32()) {
 
 			return true;
@@ -320,14 +328,15 @@ public class DefaultDLFileVersionDisplayContext
 	@Override
 	public boolean isPermissionsButtonVisible() throws PortalException {
 		return
-			_dlFileEntryActionsDisplayContextHelper.hasPermissionsPermission();
+			_defaultDLFileEntryActionsDisplayContextHelper.
+				hasPermissionsPermission();
 	}
 
 	@Override
 	public boolean isPublishButtonDisabled() {
-		if ((_dlFileEntryActionsDisplayContextHelper.isCheckedOut() &&
-			 !_dlFileEntryActionsDisplayContextHelper.isLockedByMe()) ||
-			(_dlFileEntryActionsDisplayContextHelper.isPending() &&
+		if ((_defaultDLFileEntryActionsDisplayContextHelper.isCheckedOut() &&
+			 !_defaultDLFileEntryActionsDisplayContextHelper.isLockedByMe()) ||
+			(_defaultDLFileEntryActionsDisplayContextHelper.isPending() &&
 			 _isDLFileEntryDraftsEnabled())) {
 
 			return true;
@@ -343,8 +352,8 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isSaveButtonDisabled() {
-		if (_dlFileEntryActionsDisplayContextHelper.isCheckedOut() &&
-			!_dlFileEntryActionsDisplayContextHelper.isLockedByMe()) {
+		if (_defaultDLFileEntryActionsDisplayContextHelper.isCheckedOut() &&
+			!_defaultDLFileEntryActionsDisplayContextHelper.isLockedByMe()) {
 
 			return true;
 		}
@@ -359,12 +368,12 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isViewButtonVisible() throws PortalException {
-		return _dlFileEntryActionsDisplayContextHelper.hasViewPermission();
+		return _defaultDLFileEntryActionsDisplayContextHelper.hasViewPermission();
 	}
 
 	@Override
 	public boolean isViewOriginalFileButtonVisible() throws PortalException {
-		return _dlFileEntryActionsDisplayContextHelper.hasViewPermission();
+		return _defaultDLFileEntryActionsDisplayContextHelper.hasViewPermission();
 	}
 
 	@Override
@@ -726,8 +735,8 @@ public class DefaultDLFileVersionDisplayContext
 	}
 
 	private boolean _isFileEntryCheckedOutByOther() {
-		if (_dlFileEntryActionsDisplayContextHelper.isCheckedOut() &&
-			!_dlFileEntryActionsDisplayContextHelper.isLockedByMe()) {
+		if (_defaultDLFileEntryActionsDisplayContextHelper.isCheckedOut() &&
+			!_defaultDLFileEntryActionsDisplayContextHelper.isLockedByMe()) {
 
 			return true;
 		}
@@ -736,7 +745,8 @@ public class DefaultDLFileVersionDisplayContext
 	}
 
 	private boolean _isFileEntryDeletable() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.hasDeletePermission() &&
+		if (_defaultDLFileEntryActionsDisplayContextHelper.
+				hasDeletePermission() &&
 			!_isFileEntryCheckedOutByOther()) {
 
 			return true;
@@ -746,8 +756,8 @@ public class DefaultDLFileVersionDisplayContext
 	}
 
 	private boolean _isFileEntrySaveAsDraft() {
-		if ((_dlFileEntryActionsDisplayContextHelper.isCheckedOut() ||
-			 _dlFileEntryActionsDisplayContextHelper.isPending()) &&
+		if ((_defaultDLFileEntryActionsDisplayContextHelper.isCheckedOut() ||
+			 _defaultDLFileEntryActionsDisplayContextHelper.isPending()) &&
 			!_isDLFileEntryDraftsEnabled()) {
 
 			return true;
@@ -757,7 +767,7 @@ public class DefaultDLFileVersionDisplayContext
 	}
 
 	private boolean _isFileEntryTrashable() throws PortalException {
-		if (_dlFileEntryActionsDisplayContextHelper.isDLFileEntry() &&
+		if (_defaultDLFileEntryActionsDisplayContextHelper.isDLFileEntry() &&
 			_isTrashEnabled()) {
 
 			return true;
@@ -810,9 +820,9 @@ public class DefaultDLFileVersionDisplayContext
 
 	private long _companyId;
 	private String _currentURL;
-	private DLActionsDisplayContext _dlActionsDisplayContext;
 	private DefaultDLFileVersionDisplayContextHelper
-		_dlFileEntryActionsDisplayContextHelper;
+		_defaultDLFileEntryActionsDisplayContextHelper;
+	private DLActionsDisplayContext _dlActionsDisplayContext;
 	private FileEntry _fileEntry;
 	private long _fileEntryTypeId;
 	private FileVersion _fileVersion;
