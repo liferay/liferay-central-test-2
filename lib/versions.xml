@@ -966,7 +966,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/alloy-taglib.jar</file-name>
-		<version>74065</version>
+		<version>b6499ca397d36703b5cc0a87816f3d6a224d5dad</version>
 		<project-name>Alloy</project-name>
 		<project-url>http://alloy.liferay.com</project-url>
 		<licenses>
