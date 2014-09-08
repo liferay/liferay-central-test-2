@@ -126,7 +126,7 @@ public class ClassLoaderComponentConfiguration extends ComponentConfiguration {
 		}
 
 		try {
-			_properties = _constructor.newInstance(
+			_properties = _CONSTRUCTOR.newInstance(
 				new Object[] {classLoaderAggregateProperties});
 		}
 		catch (Exception e) {
@@ -136,10 +136,7 @@ public class ClassLoaderComponentConfiguration extends ComponentConfiguration {
 		return _properties;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		ClassLoaderComponentConfiguration.class);
-
-	private static final Constructor<ComponentProperties> _constructor;
+	private static final Constructor<ComponentProperties> _CONSTRUCTOR;
 
 	static {
 		Constructor<ComponentProperties> constructor = null;
@@ -154,8 +151,11 @@ public class ClassLoaderComponentConfiguration extends ComponentConfiguration {
 			_log.error(e, e);
 		}
 
-		_constructor = constructor;
+		_CONSTRUCTOR = constructor;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		ClassLoaderComponentConfiguration.class);
 
 	private final ClassLoader _classLoader;
 	private final String _companyId;
