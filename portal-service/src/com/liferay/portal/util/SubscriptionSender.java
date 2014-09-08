@@ -263,7 +263,8 @@ public class SubscriptionSender implements Serializable {
 		}
 
 		if (uniqueMailId) {
-			ArrayUtil.append(_mailIdIds, PortalUUIDUtil.generate());
+			_mailIdIds = ArrayUtil.append(
+				_mailIdIds, PortalUUIDUtil.generate());
 		}
 
 		mailId = PortalUtil.getMailId(
