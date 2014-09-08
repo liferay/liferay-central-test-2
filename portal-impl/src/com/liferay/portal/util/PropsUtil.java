@@ -169,9 +169,7 @@ public class PropsUtil {
 				PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to initialize PropsUtil", e);
-			}
+			_log.error("Unable to initialize PropsUtil", e);
 		}
 
 		_configuration = configuration;
