@@ -174,6 +174,8 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			}
 		}
 
+		_portalPolicy = portalPolicy;
+
 		try {
 			initInitialContextFactoryBuilder();
 		}
@@ -212,8 +214,6 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		if (ServerDetector.isWebSphere()) {
 			addWebSphereHook();
 		}
-
-		_portalPolicy = portalPolicy;
 	}
 
 	@Override

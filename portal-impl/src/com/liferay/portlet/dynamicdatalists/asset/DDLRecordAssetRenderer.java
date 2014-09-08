@@ -67,8 +67,8 @@ public class DDLRecordAssetRenderer extends BaseAssetRenderer {
 			}
 		}
 
-		_recordSet = recordSet;
 		_ddmStructure = ddmStructure;
+		_recordSet = recordSet;
 	}
 
 	@Override

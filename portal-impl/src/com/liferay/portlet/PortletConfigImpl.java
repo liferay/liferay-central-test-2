@@ -55,7 +55,6 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		_copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"));
 		_portletApp = portlet.getPortletApp();
-		_resourceBundles = new ConcurrentHashMap<String, ResourceBundle>();
 
 		String portletName = portlet.getRootPortletId();
 
@@ -66,6 +65,8 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		}
 
 		_portletName = portletName;
+
+		_resourceBundles = new ConcurrentHashMap<String, ResourceBundle>();
 	}
 
 	@Override

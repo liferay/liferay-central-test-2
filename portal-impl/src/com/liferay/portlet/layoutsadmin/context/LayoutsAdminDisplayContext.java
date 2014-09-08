@@ -63,9 +63,8 @@ public class LayoutsAdminDisplayContext {
 
 		_groupDisplayContextHelper = new GroupDisplayContextHelper(request);
 
-		String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
-
 		boolean privateLayout = false;
+		String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
 		if (tabs1.equals("my-dashboard") || tabs1.equals("private-pages")) {
 			privateLayout = true;
@@ -82,9 +81,8 @@ public class LayoutsAdminDisplayContext {
 		if (liveGroup.isUser() && !isPublicLayoutsModifiable() &&
 			isPrivateLayoutsModifiable() && !privateLayout) {
 
-			tabs1 = "my-dashboard";
-
 			privateLayout = true;
+			tabs1 = "my-dashboard";
 		}
 
 		Group selGroup = getSelGroup();
