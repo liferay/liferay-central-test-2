@@ -130,7 +130,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		List<String> javaScriptAttributes) {
 
 		throw new UnsupportedOperationException(
-			"Temporally disabled until alloy-taglib is updated.");
+			"Temporally disabled until alloy-taglib.jar is updated");
 	}
 
 	@Override
