@@ -149,8 +149,8 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 
 	private DLFileEntryMetadataLocalService _dlFileEntryMetadataLocalService =
 		mock(DLFileEntryMetadataLocalService.class);
-	private DLFileEntryTypeService _dlFileEntryTypeService =
-		mock(DLFileEntryTypeService.class);
+	private DLFileEntryTypeService _dlFileEntryTypeService = mock(
+		DLFileEntryTypeService.class);
 	private FileVersion _fileVersion = mock(FileVersion.class);
 	private FileVersionMetadataHelper _fileVersionMetadataHelper;
 	private StorageEngine _storageEngine = mock(StorageEngine.class);
