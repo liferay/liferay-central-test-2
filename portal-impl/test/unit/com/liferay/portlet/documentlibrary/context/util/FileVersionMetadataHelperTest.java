@@ -42,15 +42,6 @@ import org.testng.Assert;
 public class FileVersionMetadataHelperTest extends PowerMockito {
 
 	public FileVersionMetadataHelperTest() {
-		_fileVersion = mock(FileVersion.class);
-
-		_dlFileEntryMetadataLocalService = mock(
-			DLFileEntryMetadataLocalService.class);
-
-		_dlFileEntryTypeService = mock(DLFileEntryTypeService.class);
-
-		_storageEngine = mock(StorageEngine.class);
-
 		_fileVersionMetadataHelper = new FileVersionMetadataHelper(
 			_fileVersion, _dlFileEntryMetadataLocalService,
 			_dlFileEntryTypeService, _storageEngine);
@@ -58,9 +49,9 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 
 	@Test
 	public void testGetDDMStructures() throws Exception {
-		DLFileVersion model = mock(DLFileVersion.class);
+		DLFileVersion dlFileVersion = mock(DLFileVersion.class);
 
-		_mockDDMStructures(model);
+		mockDDMStructures(dlFileVersion);
 
 		List<DDMStructure> ddmStructures =
 			_fileVersionMetadataHelper.getDDMStructures();
@@ -72,9 +63,9 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 	public void testGetDDMStructuresReturnsEmptyListForNonDLFileVersions()
 		throws Exception {
 
-		Object model = new Object();
+		Object object = new Object();
 
-		_mockDDMStructures(model);
+		mockDDMStructures(object);
 
 		List<DDMStructure> ddmStructures =
 			_fileVersionMetadataHelper.getDDMStructures();
@@ -84,16 +75,16 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 
 	@Test
 	public void testGetFields() throws Exception {
-		DLFileVersion model = mock(DLFileVersion.class);
+		DLFileVersion dlFileVersion = mock(DLFileVersion.class);
 
-		_mockDDMStructures(model);
+		mockDDMStructures(dlFileVersion);
 
 		List<DDMStructure> ddmStructures =
 			_fileVersionMetadataHelper.getDDMStructures();
 
 		DDMStructure ddmStructure = ddmStructures.get(0);
 
-		_mockFields();
+		mockFields();
 
 		Fields fields = _fileVersionMetadataHelper.getFields(ddmStructure);
 
@@ -101,17 +92,17 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetFieldsFailsForUnknownStructure() throws Exception {
-		DLFileVersion model = mock(DLFileVersion.class);
+	public void testGetFieldsFailsForUnknownDDMStructure() throws Exception {
+		DLFileVersion dlFileVersion = mock(DLFileVersion.class);
 
-		_mockDDMStructures(model);
+		mockDDMStructures(dlFileVersion);
 
 		DDMStructure ddmStructure = mock(DDMStructure.class);
 
 		_fileVersionMetadataHelper.getFields(ddmStructure);
 	}
 
-	private void _mockDDMStructures(Object model) throws PortalException {
+	protected void mockDDMStructures(Object model) throws PortalException {
 		when(
 			_fileVersion.getModel()
 		).thenReturn(
@@ -138,29 +129,32 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 		);
 	}
 
-	private void _mockFields() throws PortalException {
-		DLFileEntryMetadata fileEntryMetadata = mock(DLFileEntryMetadata.class);
+	protected void mockFields() throws PortalException {
+		DLFileEntryMetadata dlFileEntryMetadata = mock(
+			DLFileEntryMetadata.class);
 
 		when(
 			_dlFileEntryMetadataLocalService.getFileEntryMetadata(
 				Matchers.anyLong(), Matchers.anyLong())
 		).thenReturn(
-			fileEntryMetadata
+			dlFileEntryMetadata
 		);
 
 		Fields fields = mock(Fields.class);
 
 		when(
-			_storageEngine.getFields(fileEntryMetadata.getDDMStorageId())
+			_storageEngine.getFields(dlFileEntryMetadata.getDDMStorageId())
 		).thenReturn(
 			fields
 		);
 	}
 
-	private DLFileEntryMetadataLocalService _dlFileEntryMetadataLocalService;
-	private DLFileEntryTypeService _dlFileEntryTypeService;
-	private FileVersion _fileVersion;
+	private DLFileEntryMetadataLocalService _dlFileEntryMetadataLocalService =
+		mock(DLFileEntryMetadataLocalService.class);
+	private DLFileEntryTypeService _dlFileEntryTypeService =
+		mock(DLFileEntryTypeService.class);
+	private FileVersion _fileVersion = mock(FileVersion.class);
 	private FileVersionMetadataHelper _fileVersionMetadataHelper;
-	private StorageEngine _storageEngine;
+	private StorageEngine _storageEngine = mock(StorageEngine.class);
 
 }
