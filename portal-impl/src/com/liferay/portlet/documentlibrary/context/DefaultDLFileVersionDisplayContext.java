@@ -378,12 +378,14 @@ public class DefaultDLFileVersionDisplayContext
 
 	@Override
 	public boolean isViewButtonVisible() throws PortalException {
-		return _defaultDLFileEntryActionsDisplayContextHelper.hasViewPermission();
+		return _defaultDLFileEntryActionsDisplayContextHelper.
+			hasViewPermission();
 	}
 
 	@Override
 	public boolean isViewOriginalFileButtonVisible() throws PortalException {
-		return _defaultDLFileEntryActionsDisplayContextHelper.hasViewPermission();
+		return _defaultDLFileEntryActionsDisplayContextHelper.
+			hasViewPermission();
 	}
 
 	private void _addCancelCheckoutMenuItem(List<MenuItem> menuItems)

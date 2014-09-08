@@ -48,7 +48,7 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetDDMStructures() throws Exception {
+	public void testGetDDMStructuresForDLFileVersion() throws Exception {
 		DLFileVersion dlFileVersion = mock(DLFileVersion.class);
 
 		mockDDMStructures(dlFileVersion);
@@ -60,9 +60,7 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetDDMStructuresReturnsEmptyListForNonDLFileVersions()
-		throws Exception {
-
+	public void testGetDDMStructuresForObject() throws Exception {
 		Object object = new Object();
 
 		mockDDMStructures(object);
@@ -74,7 +72,7 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetFields() throws Exception {
+	public void testGetFieldsWithDDMStructure() throws Exception {
 		DLFileVersion dlFileVersion = mock(DLFileVersion.class);
 
 		mockDDMStructures(dlFileVersion);
@@ -92,7 +90,7 @@ public class FileVersionMetadataHelperTest extends PowerMockito {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetFieldsFailsForUnknownDDMStructure() throws Exception {
+	public void testGetFieldsWithoutDDMStructure() throws Exception {
 		DLFileVersion dlFileVersion = mock(DLFileVersion.class);
 
 		mockDDMStructures(dlFileVersion);
