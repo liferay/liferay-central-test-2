@@ -32,8 +32,6 @@ public class JSONRPCResponse implements JSONSerializable {
 	public JSONRPCResponse(
 		JSONRPCRequest jsonRPCRequest, Object result, Exception exception) {
 
-		_id = jsonRPCRequest.getId();
-
 		_jsonrpc = GetterUtil.getString(jsonRPCRequest.getJsonrpc());
 
 		Error error = null;
@@ -67,6 +65,7 @@ public class JSONRPCResponse implements JSONSerializable {
 		}
 
 		_error = error;
+		_id = jsonRPCRequest.getId();
 		_result = result;
 	}
 
