@@ -20,15 +20,16 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 /**
  * @author Brian Wing Shun Chan
  */
-public class StaticInitializationException extends RuntimeException {
+public class LoggedExceptionInInitializerError
+	extends ExceptionInInitializerError {
 
-	public StaticInitializationException(Throwable cause) {
+	public LoggedExceptionInInitializerError(Throwable cause) {
 		super(cause);
 
 		_log.error(cause, cause);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		StaticInitializationException.class);
+		LoggedExceptionInInitializerError.class);
 
 }

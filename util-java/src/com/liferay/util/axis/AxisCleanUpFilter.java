@@ -14,7 +14,7 @@
 
 package com.liferay.util.axis;
 
-import com.liferay.portal.kernel.exception.StaticInitializationException;
+import com.liferay.portal.kernel.exception.LoggedExceptionInInitializerError;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
@@ -74,7 +74,7 @@ public class AxisCleanUpFilter extends BaseFilter {
 				MethodCache.class, "cache");
 		}
 		catch (Exception e) {
-			throw new StaticInitializationException(e);
+			throw new LoggedExceptionInInitializerError(e);
 		}
 
 		_CACHE_FIELD = cacheField;

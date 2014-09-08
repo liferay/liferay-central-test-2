@@ -14,7 +14,7 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.kernel.exception.StaticInitializationException;
+import com.liferay.portal.kernel.exception.LoggedExceptionInInitializerError;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
@@ -138,7 +138,7 @@ public class PortletBeanFactoryCleaner implements BeanFactoryAware {
 				AspectJExpressionPointcut.class, "shadowMatchCache");
 		}
 		catch (Exception e) {
-			throw new StaticInitializationException(e);
+			throw new LoggedExceptionInInitializerError(e);
 		}
 
 		_SHADOW_MATCH_CACHE_FIELD = shadowMatchCacheField;
