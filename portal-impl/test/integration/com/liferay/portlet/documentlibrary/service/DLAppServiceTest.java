@@ -112,7 +112,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		}
 
 		@Test(expected = DuplicateFileException.class)
-		public void shouldFailIfDuplicatedNameInFolder() throws Exception {
+		public void shouldFailIfDuplicateNameInFolder() throws Exception {
 			addFileEntry(group.getGroupId(), parentFolder.getFolderId());
 			addFileEntry(group.getGroupId(), parentFolder.getFolderId());
 		}
@@ -129,7 +129,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldHaveVersion1_0() throws Exception {
-			String fileName = "TestVersion.txt";
+			String fileName = RandomTestUtil.randomString() + ".txt";
 
 			FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId(), fileName);
@@ -141,22 +141,23 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldInferValidMimeType() throws Exception {
+			String fileName = RandomTestUtil.randomString() + ".txt";
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
-			String name = "InvalidMime.txt";
-
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.APPLICATION_OCTET_STREAM, name, StringPool.BLANK,
-				StringPool.BLANK, CONTENT.getBytes(), serviceContext);
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.APPLICATION_OCTET_STREAM, fileName,
+				StringPool.BLANK, StringPool.BLANK, CONTENT.getBytes(),
+				serviceContext);
 
 			Assert.assertEquals(
 				ContentTypes.TEXT_PLAIN, fileEntry.getMimeType());
 		}
 
 		@Test
-		public void shouldSucceedIfDuplicatedNameInOtherFolder()
+		public void shouldSucceedIfDuplicateNameInOtherFolder()
 			throws Exception {
 
 			addFileEntry(group.getGroupId(), parentFolder.getFolderId());
@@ -655,7 +656,9 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 	public static class WhenSearchingFileEntries extends BaseDLAppTestCase {
 
 		@Test
-		public void shouldFindFileEntryByTagName() throws Exception {
+		public void shouldFindFileEntryByAssetTagName() throws Exception {
+			String fileName = RandomTestUtil.randomString() + ".txt";
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
@@ -663,11 +666,9 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 			serviceContext.setAssetTagNames(assetTagNames);
 
-			String name = "TestTags.txt";
-
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.TEXT_PLAIN, name, StringPool.BLANK,
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, CONTENT.getBytes(), serviceContext);
 
 			search(fileEntry, false, "hello", true);
@@ -676,9 +677,11 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		}
 
 		@Test
-		public void shouldFindFileEntryByTagNameAfterUpdate() throws Exception {
+		public void shouldFindFileEntryByAssetTagNameAfterUpdate()
+			throws Exception {
+
 			long folderId = parentFolder.getFolderId();
-			String name = "TestTags.txt";
+			String fileName = RandomTestUtil.randomString() + ".txt";
 			String description = StringPool.BLANK;
 			String changeLog = StringPool.BLANK;
 			byte[] bytes = CONTENT.getBytes();
@@ -691,16 +694,16 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), folderId, name, ContentTypes.TEXT_PLAIN,
-				name, description, changeLog, bytes, serviceContext);
+				group.getGroupId(), folderId, fileName, ContentTypes.TEXT_PLAIN,
+				fileName, description, changeLog, bytes, serviceContext);
 
 			assetTagNames = new String[] {"hello", "world", "liferay"};
 
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), name, ContentTypes.TEXT_PLAIN, name,
-				description, changeLog, false, bytes, serviceContext);
+				fileEntry.getFileEntryId(), fileName, ContentTypes.TEXT_PLAIN,
+				fileName, description, changeLog, false, bytes, serviceContext);
 
 			search(fileEntry, false, "hello", true);
 			search(fileEntry, false, "world", true);
