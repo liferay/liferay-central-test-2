@@ -15,6 +15,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceActionException;
+import com.liferay.portal.ResourceActionsException;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -964,7 +965,8 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	protected void readModelResource(
-		String servletContextName, Element modelResourceElement) {
+			String servletContextName, Element modelResourceElement)
+		throws Exception {
 
 		String name = modelResourceElement.elementTextTrim("model-name");
 
@@ -1027,10 +1029,9 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		checkModelActions(supportsActions);
 
-		if (_log.isWarnEnabled() && (supportsActions.size() > 64)) {
-			_log.warn(
-				"There are too many action keys for resource " + name + ". " +
-					"64 keys per resource is the maximum number supported.");
+		if (supportsActions.size() > 64) {
+			throw new ResourceActionsException(
+				"There are more than 64 actions for resource " + name);
 		}
 
 		_modelResourceActions.put(name, supportsActions);
@@ -1070,7 +1071,8 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	protected void readPortletResource(
-		String servletContextName, Element portletResourceElement) {
+			String servletContextName, Element portletResourceElement)
+		throws Exception {
 
 		String name = portletResourceElement.elementTextTrim("portlet-name");
 
@@ -1090,10 +1092,9 @@ public class ResourceActionsImpl implements ResourceActions {
 			checkPortletActions(name, supportsActions);
 		}
 
-		if (_log.isWarnEnabled() && (supportsActions.size() > 64)) {
-			_log.warn(
-				"There are too many action keys for resource " + name + ". " +
-					"64 keys per resource is the maximum number supported.");
+		if (supportsActions.size() > 64) {
+			throw new ResourceActionsException(
+				"There are more than 64 actions for resource " + name);
 		}
 
 		_portletResourceActions.put(name, supportsActions);
