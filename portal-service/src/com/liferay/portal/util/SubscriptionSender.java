@@ -271,10 +271,6 @@ public class SubscriptionSender implements Serializable {
 			company.getMx(), _mailIdPopPortletPrefix, _mailIdIds);
 	}
 
-	public void setUniqueMailId(boolean uniqueMailId) {
-		this.uniqueMailId = uniqueMailId;
-	}
-
 	public void setBody(String body) {
 		this.body = body;
 	}
@@ -408,6 +404,10 @@ public class SubscriptionSender implements Serializable {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	public void setUniqueMailId(boolean uniqueMailId) {
+		this.uniqueMailId = uniqueMailId;
 	}
 
 	public void setUserId(long userId) {
@@ -806,7 +806,6 @@ public class SubscriptionSender implements Serializable {
 		}
 	}
 
-	protected boolean uniqueMailId = true;
 	protected String body;
 	protected boolean bulk;
 	protected long companyId;
@@ -826,6 +825,7 @@ public class SubscriptionSender implements Serializable {
 	protected ServiceContext serviceContext;
 	protected SMTPAccount smtpAccount;
 	protected String subject;
+	protected boolean uniqueMailId = true;
 	protected long userId;
 
 	private void readObject(ObjectInputStream objectInputStream)
