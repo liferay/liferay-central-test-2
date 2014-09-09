@@ -762,7 +762,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             com.liferay.portal.kernel.repository.capabilities.SyncCapability}
 	 */
 	@Deprecated
@@ -791,7 +791,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             com.liferay.portal.kernel.repository.capabilities.SyncCapability}
 	 */
 	@Deprecated
@@ -1892,9 +1892,8 @@ public class DLAppHelperLocalServiceImpl
 
 			return dlFileEntry.getFileEntryTypeId();
 		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	protected Class<? extends WorkflowRepositoryEventType> getWorkflowEvent(
@@ -2075,7 +2074,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             com.liferay.portal.kernel.repository.capabilities.SyncCapability}
 	 */
 	@Deprecated
