@@ -58,9 +58,9 @@ public class CapabilityLocalRepository
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		LocalRepository repository = getRepository();
+		LocalRepository localRepository = getRepository();
 
-		FileEntry fileEntry = repository.addFileEntry(
+		FileEntry fileEntry = localRepository.addFileEntry(
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, file, serviceContext);
 
@@ -77,9 +77,9 @@ public class CapabilityLocalRepository
 			long size, ServiceContext serviceContext)
 		throws PortalException {
 
-		LocalRepository repository = getRepository();
+		LocalRepository localRepository = getRepository();
 
-		FileEntry fileEntry = repository.addFileEntry(
+		FileEntry fileEntry = localRepository.addFileEntry(
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, is, size, serviceContext);
 
@@ -95,9 +95,9 @@ public class CapabilityLocalRepository
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		LocalRepository repository = getRepository();
+		LocalRepository localRepository = getRepository();
 
-		Folder folder = repository.addFolder(
+		Folder folder = localRepository.addFolder(
 			userId, parentFolderId, title, description, serviceContext);
 
 		_repositoryEventTrigger.trigger(
