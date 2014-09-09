@@ -2114,7 +2114,8 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	protected <T extends RepositoryModel<T>> void triggerRepositoryEvent(
-			long repositoryId, Class<? extends RepositoryEventType> eventType,
+			long repositoryId,
+			Class<? extends RepositoryEventType> repositoryEventType,
 			Class<T> modelClass, T model)
 		throws PortalException {
 
@@ -2124,11 +2125,12 @@ public class DLAppHelperLocalServiceImpl
 		if (repository.isCapabilityProvided(
 				RepositoryEventTriggerCapability.class)) {
 
-			RepositoryEventTriggerCapability eventTriggerCapability =
+			RepositoryEventTriggerCapability repositoryEventTriggerCapability =
 				repository.getCapability(
 					RepositoryEventTriggerCapability.class);
 
-			eventTriggerCapability.trigger(eventType, modelClass, model);
+			repositoryEventTriggerCapability.trigger(
+				repositoryEventType, modelClass, model);
 		}
 	}
 
