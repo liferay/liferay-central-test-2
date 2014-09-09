@@ -84,64 +84,46 @@ public class LiferaySyncCapability implements SyncCapability {
 	public void registerRepositoryEventListeners(
 		RepositoryEventRegistry repositoryEventRegistry) {
 
-		// Core events
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Add.class,
 			Folder.class, "addFolder");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Update.class,
 			FileEntry.class, "updateFileEntry");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Update.class,
 			Folder.class, "updateFolder");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Delete.class,
 			FileEntry.class, "deleteFileEntry");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Delete.class,
 			Folder.class, "deleteFolder");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Move.class,
 			FileEntry.class, "moveFileEntry");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, RepositoryEventType.Move.class,
 			Folder.class, "moveFolder");
-
-		// Trash events
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry,
 			TrashRepositoryEventType.EntryTrashed.class, FileEntry.class,
 			"trashFileEntry");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry,
 			TrashRepositoryEventType.EntryRestored.class, FileEntry.class,
 			"restoreFileEntry");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry,
 			TrashRepositoryEventType.EntryRestored.class, Folder.class,
 			"restoreFolder");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry,
 			TrashRepositoryEventType.EntryTrashed.class, Folder.class,
 			"trashFolder");
-
-		// Workflow events
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, WorkflowRepositoryEventType.Add.class,
 			FileEntry.class, "addFileEntry");
-
 		registerRepositoryEventListener(
 			repositoryEventRegistry, WorkflowRepositoryEventType.Update.class,
 			FileEntry.class, "updateFileEntry");
