@@ -242,16 +242,17 @@ public class LiferaySyncCapability implements SyncCapability {
 
 	protected <S extends RepositoryEventType, T extends RepositoryModel<T>>
 		void registerRepositoryEventListener(
-			RepositoryEventRegistry repositoryEventRegistry, Class<S> eventType,
-			Class<T> modelClass, String methodName) {
+			RepositoryEventRegistry repositoryEventRegistry,
+			Class<S> repositoryEventTypeClass, Class<T> modelClass,
+			String methodName) {
 
-		RepositoryEventListener<S, T> eventListener =
+		RepositoryEventListener<S, T> repositoryEventListener =
 			new MethodKeyRepositoryEventListener<S, T>(
 				new MethodKey(
 					LiferaySyncCapability.class, methodName, modelClass));
 
 		repositoryEventRegistry.registerRepositoryEventListener(
-			eventType, modelClass, eventListener);
+			repositoryEventTypeClass, modelClass, repositoryEventListener);
 	}
 
 	private class MethodKeyRepositoryEventListener
