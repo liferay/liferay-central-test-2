@@ -43,7 +43,9 @@ public class ATag extends BaseATag {
 	protected boolean isOpensNewWindow() {
 		String target = getTarget();
 
-		if ((target != null) && target.equals("_blank")) {
+		if ((target != null) &&
+			(target.equals("_blank") || target.equals("_new"))) {
+
 			return true;
 		}
 		else {
