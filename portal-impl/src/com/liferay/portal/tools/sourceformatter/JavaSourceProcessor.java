@@ -552,17 +552,14 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				return;
 			}
 
-			String packageName = packageNameMatcher.group(1);
-
-			pos = fileName.indexOf("/src/");
-
 			StringBundler sb = new StringBundler(6);
 
 			sb.append(BASEDIR);
-			sb.append(fileName.substring(0, pos + 5));
+			sb.append(fileName.substring(0, fileName.indexOf("/src/") + 5));
 			sb.append(
 				StringUtil.replace(
-					packageName, StringPool.PERIOD, StringPool.SLASH));
+					packageNameMatcher.group(1), StringPool.PERIOD,
+					StringPool.SLASH));
 			sb.append("/service/impl/");
 			sb.append(className);
 			sb.append("LocalServiceImpl.java");
