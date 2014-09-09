@@ -1912,7 +1912,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0  As of 7.0.0, with no direct replacement.
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	protected boolean isStagingGroup(long groupId) {
