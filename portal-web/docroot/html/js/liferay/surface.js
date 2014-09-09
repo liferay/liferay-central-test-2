@@ -311,6 +311,7 @@ AUI.add(
 						var instance = this;
 
 						var url = new A.Url(path);
+
 						var portletId = url.getParameter('p_p_id');
 
 						if (!Surface.isPortletCacheable(portletId)) {

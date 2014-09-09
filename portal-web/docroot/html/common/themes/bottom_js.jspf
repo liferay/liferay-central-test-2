@@ -226,7 +226,6 @@ if (layout != null) {
 					%>
 
 					Liferay.Surface.blacklist.surface['<%= PortletKeys.NESTED_PORTLETS %>'] = true;
-
 				}
 			</aui:script>
 
