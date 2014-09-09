@@ -89,7 +89,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void assetTagsShouldBeOrdered() throws Exception {
-			String name = "TestTags.txt";
+			String name = RandomTestUtil.randomString() + ".txt";
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
