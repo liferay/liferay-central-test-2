@@ -1388,8 +1388,8 @@ public class DLAppHelperLocalServiceImpl
 			if (Validator.isNotNull(event)) {
 				triggerRepositoryEvent(
 					fileEntry.getRepositoryId(),
-					getWorkflowRepositoryEventTypeClass(event),
-					FileEntry.class, fileEntry);
+					getWorkflowRepositoryEventTypeClass(event), FileEntry.class,
+					fileEntry);
 			}
 
 			if ((oldStatus != WorkflowConstants.STATUS_IN_TRASH) &&
