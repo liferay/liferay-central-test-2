@@ -57,7 +57,7 @@ public class LiferaySyncCapability implements SyncCapability {
 	}
 
 	@Override
-	public void addFolder(Folder folder) throws PortalException {
+	public void addFolder(Folder folder) {
 		registerDLSyncEventCallback(DLSyncConstants.EVENT_ADD, folder);
 	}
 
@@ -67,7 +67,7 @@ public class LiferaySyncCapability implements SyncCapability {
 	}
 
 	@Override
-	public void deleteFolder(Folder folder) throws PortalException {
+	public void deleteFolder(Folder folder) {
 		registerDLSyncEventCallback(DLSyncConstants.EVENT_DELETE, folder);
 	}
 
@@ -77,7 +77,7 @@ public class LiferaySyncCapability implements SyncCapability {
 	}
 
 	@Override
-	public void moveFolder(Folder folder) throws PortalException {
+	public void moveFolder(Folder folder) {
 		registerDLSyncEventCallback(DLSyncConstants.EVENT_MOVE, folder);
 	}
 
