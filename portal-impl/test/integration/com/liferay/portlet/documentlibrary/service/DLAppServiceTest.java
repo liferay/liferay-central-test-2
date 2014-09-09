@@ -89,14 +89,14 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void assetTagsShouldBeOrdered() throws Exception {
+			String name = "TestTags.txt";
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 			String[] assetTagNames = new String[] {"hello", "world"};
 
 			serviceContext.setAssetTagNames(assetTagNames);
-
-			String name = "TestTags.txt";
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId(), name,
