@@ -97,7 +97,6 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		refresh="<%= false %>"
 		type="pills"
 	>
-
 		<liferay-ui:section>
 			<div class="entry-title">
 				<h2><liferay-ui:input-editor contents="<%= title %>" editorImpl="<%= EDITOR_TEXT_IMPL_KEY %>" name="title" placeholder="title" /></h2>
