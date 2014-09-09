@@ -153,7 +153,7 @@ public class LiferaySyncCapability implements SyncCapability {
 	}
 
 	@Override
-	public void restoreFolder(Folder folder) throws PortalException {
+	public void restoreFolder(Folder folder) {
 		registerDLSyncEventCallback(DLSyncConstants.EVENT_RESTORE, folder);
 	}
 
@@ -163,7 +163,7 @@ public class LiferaySyncCapability implements SyncCapability {
 	}
 
 	@Override
-	public void trashFolder(Folder folder) throws PortalException {
+	public void trashFolder(Folder folder) {
 		registerDLSyncEventCallback(DLSyncConstants.EVENT_TRASH, folder);
 	}
 
@@ -173,7 +173,7 @@ public class LiferaySyncCapability implements SyncCapability {
 	}
 
 	@Override
-	public void updateFolder(Folder folder) throws PortalException {
+	public void updateFolder(Folder folder) {
 		registerDLSyncEventCallback(DLSyncConstants.EVENT_UPDATE, folder);
 	}
 
@@ -281,7 +281,7 @@ public class LiferaySyncCapability implements SyncCapability {
 		}
 
 		@Override
-		public void execute(T target) throws PortalException {
+		public void execute(T target) {
 			try {
 				Method method = _methodKey.getMethod();
 
