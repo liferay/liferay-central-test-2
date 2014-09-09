@@ -114,16 +114,6 @@ public class LiferaySyncCapability implements SyncCapability {
 			repositoryEventRegistry, RepositoryEventType.Move.class,
 			Folder.class, "moveFolder");
 
-		// Workflow events
-
-		registerRepositoryEventListener(
-			repositoryEventRegistry, WorkflowRepositoryEventType.Add.class,
-			FileEntry.class, "addFileEntry");
-
-		registerRepositoryEventListener(
-			repositoryEventRegistry, WorkflowRepositoryEventType.Update.class,
-			FileEntry.class, "updateFileEntry");
-
 		// Trash events
 
 		registerRepositoryEventListener(
@@ -145,6 +135,16 @@ public class LiferaySyncCapability implements SyncCapability {
 			repositoryEventRegistry,
 			TrashRepositoryEventType.EntryTrashed.class, Folder.class,
 			"trashFolder");
+
+		// Workflow events
+
+		registerRepositoryEventListener(
+			repositoryEventRegistry, WorkflowRepositoryEventType.Add.class,
+			FileEntry.class, "addFileEntry");
+
+		registerRepositoryEventListener(
+			repositoryEventRegistry, WorkflowRepositoryEventType.Update.class,
+			FileEntry.class, "updateFileEntry");
 	}
 
 	@Override
