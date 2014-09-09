@@ -89,7 +89,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void assetTagsShouldBeOrdered() throws Exception {
-			String name = RandomTestUtil.randomString() + ".txt";
+			String fileName = RandomTestUtil.randomString() + ".txt";
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
@@ -99,8 +99,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.TEXT_PLAIN, name, StringPool.BLANK,
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, CONTENT.getBytes(), serviceContext);
 
 			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
