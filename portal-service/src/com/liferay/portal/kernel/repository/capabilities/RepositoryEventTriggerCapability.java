@@ -21,5 +21,4 @@ import com.liferay.portal.kernel.repository.event.RepositoryEventTrigger;
  */
 public interface RepositoryEventTriggerCapability
 	extends Capability, RepositoryEventTrigger {
-
 }
