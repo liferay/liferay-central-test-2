@@ -89,7 +89,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void assetTagsShouldBeOrdered() throws Exception {
-			String fileName = RandomTestUtil.randomString() + ".txt";
+			String fileName = RandomTestUtil.randomString();
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
@@ -129,7 +129,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldHaveVersion1_0() throws Exception {
-			String fileName = RandomTestUtil.randomString() + ".txt";
+			String fileName = RandomTestUtil.randomString();
 
 			FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId(), fileName);
@@ -141,7 +141,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldInferValidMimeType() throws Exception {
-			String fileName = RandomTestUtil.randomString() + ".txt";
+			String fileName = RandomTestUtil.randomString();
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
@@ -238,40 +238,40 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldSucceedWithNullBytes() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
-			String name = "Bytes-null.txt";
-
 			DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.TEXT_PLAIN, name, StringPool.BLANK,
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, (byte[])null, serviceContext);
 		}
 
 		@Test
 		public void shouldSucceedWithNullFile() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
-			String name = "File-null.txt";
-
 			DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.TEXT_PLAIN, name, StringPool.BLANK,
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, (File)null, serviceContext);
 		}
 
 		@Test
 		public void shouldSucceedWithNullInputStream() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
-			String name = "IS-null.txt";
-
 			DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.TEXT_PLAIN, name, StringPool.BLANK,
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, null, 0, serviceContext);
 		}
 
@@ -657,7 +657,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldFindFileEntryByAssetTagName() throws Exception {
-			String fileName = RandomTestUtil.randomString() + ".txt";
+			String fileName = RandomTestUtil.randomString();
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
@@ -681,7 +681,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			throws Exception {
 
 			long folderId = parentFolder.getFolderId();
-			String fileName = RandomTestUtil.randomString() + ".txt";
+			String fileName = RandomTestUtil.randomString();
 			String description = StringPool.BLANK;
 			String changeLog = StringPool.BLANK;
 			byte[] bytes = CONTENT.getBytes();
@@ -734,6 +734,9 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void assetTagsShouldBeOrdered() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+			byte[] bytes = CONTENT.getBytes();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
@@ -741,12 +744,9 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 			serviceContext.setAssetTagNames(assetTagNames);
 
-			String name = "TestTags.txt";
-			byte[] bytes = CONTENT.getBytes();
-
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), name,
-				ContentTypes.TEXT_PLAIN, name, StringPool.BLANK,
+				group.getGroupId(), parentFolder.getFolderId(), fileName,
+				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, bytes, serviceContext);
 
 			assetTagNames = new String[] {"hello", "world", "liferay"};
@@ -754,8 +754,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), name, ContentTypes.TEXT_PLAIN, name,
-				StringPool.BLANK, StringPool.BLANK, false, bytes,
+				fileEntry.getFileEntryId(), fileName, ContentTypes.TEXT_PLAIN,
+				fileName, StringPool.BLANK, StringPool.BLANK, false, bytes,
 				serviceContext);
 
 			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
@@ -821,19 +821,20 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldNotChangeMimeTypeIfNullContent() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			FileEntry fileEntry = addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId());
+
+			byte[] bytes = CONTENT.getBytes();
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
-			byte[] bytes = CONTENT.getBytes();
-
-			String name = "InvalidMime";
-
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), name, null, name, StringPool.BLANK,
-				StringPool.BLANK, true, bytes, serviceContext);
+				fileEntry.getFileEntryId(), fileName, null, fileName,
+				StringPool.BLANK, StringPool.BLANK, true, bytes,
+				serviceContext);
 
 			Assert.assertEquals(
 				ContentTypes.TEXT_PLAIN, fileEntry.getMimeType());
@@ -852,49 +853,49 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test
 		public void shouldSucceedWithNullBytes() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
-
-			String name = "Bytes-null.txt";
 
 			FileEntry fileEntry = addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId());
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), name, ContentTypes.TEXT_PLAIN, name,
-				StringPool.BLANK, StringPool.BLANK, true, (byte[])null,
-				serviceContext);
+				fileEntry.getFileEntryId(), fileName, ContentTypes.TEXT_PLAIN,
+				fileName, StringPool.BLANK, StringPool.BLANK, true,
+				(byte[])null, serviceContext);
 		}
 
 		@Test
 		public void shouldSucceedWithNullFile() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
-
-			String name = "File-null.txt";
 
 			FileEntry fileEntry = addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId());
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), name, ContentTypes.TEXT_PLAIN, name,
-				StringPool.BLANK, StringPool.BLANK, true, (File)null,
+				fileEntry.getFileEntryId(), fileName, ContentTypes.TEXT_PLAIN,
+				fileName, StringPool.BLANK, StringPool.BLANK, true, (File)null,
 				serviceContext);
 		}
 
 		@Test
 		public void shouldSucceedWithNullInputStream() throws Exception {
+			String fileName = RandomTestUtil.randomString();
+
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(group.getGroupId());
-
-			String name = "IS-null.txt";
 
 			FileEntry fileEntry = addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId());
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), name, ContentTypes.TEXT_PLAIN, name,
-				StringPool.BLANK, StringPool.BLANK, true, null, 0,
+				fileEntry.getFileEntryId(), fileName, ContentTypes.TEXT_PLAIN,
+				fileName, StringPool.BLANK, StringPool.BLANK, true, null, 0,
 				serviceContext);
 		}
 
@@ -1030,8 +1031,11 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		FileEntry fileEntry = addFileEntry(groupId, folderId);
 
-		boolean rootFolder =
-			folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		boolean rootFolder = false;
+		
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			rootFolder = true;
+		}
 
 		search(fileEntry, rootFolder, "title", true);
 		search(fileEntry, rootFolder, "content", true);
