@@ -128,7 +128,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		}
 
 		@Test
-		public void shouldHaveVersion1_0() throws Exception {
+		public void shouldHaveDefaultVersion() throws Exception {
 			String fileName = RandomTestUtil.randomString();
 
 			FileEntry fileEntry = DLAppTestUtil.addFileEntry(
@@ -1032,7 +1032,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		FileEntry fileEntry = addFileEntry(groupId, folderId);
 
 		boolean rootFolder = false;
-		
+
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			rootFolder = true;
 		}
