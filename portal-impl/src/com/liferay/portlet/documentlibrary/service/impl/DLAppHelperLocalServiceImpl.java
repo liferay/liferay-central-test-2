@@ -1387,7 +1387,8 @@ public class DLAppHelperLocalServiceImpl
 
 			if (Validator.isNotNull(event)) {
 				triggerRepositoryEvent(
-					fileEntry.getRepositoryId(), getWorkflowEvent(event),
+					fileEntry.getRepositoryId(),
+					getWorkflowRepositoryEventTypeClass(event),
 					FileEntry.class, fileEntry);
 			}
 
@@ -1845,8 +1846,9 @@ public class DLAppHelperLocalServiceImpl
 		return 0;
 	}
 
-	protected Class<? extends WorkflowRepositoryEventType> getWorkflowEvent(
-		String syncEvent) {
+	protected Class<? extends WorkflowRepositoryEventType>
+		getWorkflowRepositoryEventTypeClass(
+			String syncEvent) {
 
 		if (syncEvent.equals(DLSyncConstants.EVENT_ADD)) {
 			return WorkflowRepositoryEventType.Add.class;
@@ -2010,7 +2012,7 @@ public class DLAppHelperLocalServiceImpl
 	protected <T extends RepositoryModel<T>> void triggerRepositoryEvent(
 			long repositoryId,
 			Class<? extends RepositoryEventType> repositoryEventType,
-			Class<T> modelClass, T model)
+			Class<T> modelClass, T target)
 		throws PortalException {
 
 		Repository repository = repositoryLocalService.getRepositoryImpl(
@@ -2024,7 +2026,7 @@ public class DLAppHelperLocalServiceImpl
 					RepositoryEventTriggerCapability.class);
 
 			repositoryEventTriggerCapability.trigger(
-				repositoryEventType, modelClass, model);
+				repositoryEventType, modelClass, target);
 		}
 	}
 
