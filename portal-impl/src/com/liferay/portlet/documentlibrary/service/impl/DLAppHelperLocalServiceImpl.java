@@ -761,52 +761,6 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	 */
-	@Deprecated
-	@Override
-	public void registerDLSyncEventCallback(String event, FileEntry fileEntry)
-		throws PortalException {
-
-		if (isStagingGroup(fileEntry.getGroupId()) ||
-			!(fileEntry instanceof LiferayFileEntry)) {
-
-			return;
-		}
-
-		if (!event.equals(DLSyncConstants.EVENT_DELETE) &&
-			!event.equals(DLSyncConstants.EVENT_TRASH)) {
-
-			FileVersion fileVersion = fileEntry.getFileVersion();
-
-			if (!fileVersion.isApproved()) {
-				return;
-			}
-		}
-
-		registerDLSyncEventCallback(
-			event, DLSyncConstants.TYPE_FILE, fileEntry.getFileEntryId());
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	 */
-	@Deprecated
-	@Override
-	public void registerDLSyncEventCallback(String event, Folder folder) {
-		if (isStagingGroup(folder.getGroupId()) ||
-			!(folder instanceof LiferayFolder)) {
-
-			return;
-		}
-
-		registerDLSyncEventCallback(
-			event, DLSyncConstants.TYPE_FOLDER, folder.getFolderId());
-	}
-
 	@Override
 	public void restoreDependentsFromTrash(
 			List<Object> dlFileEntriesAndDLFolders, long trashEntryId)
@@ -1911,21 +1865,6 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
-	 */
-	@Deprecated
-	protected boolean isStagingGroup(long groupId) {
-		try {
-			Group group = groupLocalService.getGroup(groupId);
-
-			return group.isStagingGroup();
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
 	protected void notifySubscribers(
 			FileVersion fileVersion, String entryURL,
 			ServiceContext serviceContext)
@@ -2071,46 +2010,6 @@ public class DLAppHelperLocalServiceImpl
 				}
 
 			});
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	 */
-	@Deprecated
-	protected void registerDLSyncEventCallback(
-		final String event, final String type, final long typePK) {
-
-		DLSyncEvent dlSyncEvent = dlSyncEventLocalService.addDLSyncEvent(
-			event, type, typePK);
-
-		final long modifiedTime = dlSyncEvent.getModifiedTime();
-
-		TransactionCommitCallbackRegistryUtil.registerCallback(
-			new Callable<Void>() {
-
-				@Override
-				public Void call() throws Exception {
-					Message message = new Message();
-
-					Map<String, Object> values = new HashMap<String, Object>(4);
-
-					values.put("event", event);
-					values.put("modifiedTime", modifiedTime);
-					values.put("type", type);
-					values.put("typePK", typePK);
-
-					message.setValues(values);
-
-					MessageBusUtil.sendMessage(
-						DestinationNames.DOCUMENT_LIBRARY_SYNC_EVENT_PROCESSOR,
-						message);
-
-					return null;
-				}
-
-			}
-		);
 	}
 
 	protected <T extends RepositoryModel<T>> void triggerRepositoryEvent(

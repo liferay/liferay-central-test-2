@@ -182,23 +182,6 @@ public interface DLAppHelperLocalService extends BaseLocalService {
 		long userId, com.liferay.portal.kernel.repository.model.Folder folder)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	/**
-	* @deprecated As of 7.0.0, see {@link
-	com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	*/
-	@java.lang.Deprecated
-	public void registerDLSyncEventCallback(java.lang.String event,
-		com.liferay.portal.kernel.repository.model.FileEntry fileEntry)
-		throws com.liferay.portal.kernel.exception.PortalException;
-
-	/**
-	* @deprecated As of 7.0.0, see {@link
-	com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	*/
-	@java.lang.Deprecated
-	public void registerDLSyncEventCallback(java.lang.String event,
-		com.liferay.portal.kernel.repository.model.Folder folder);
-
 	public void restoreDependentsFromTrash(
 		java.util.List<java.lang.Object> dlFileEntriesAndDLFolders,
 		long trashEntryId)

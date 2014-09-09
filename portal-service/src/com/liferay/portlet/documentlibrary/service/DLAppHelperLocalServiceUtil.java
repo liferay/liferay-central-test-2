@@ -225,27 +225,6 @@ public class DLAppHelperLocalServiceUtil {
 		return getService().moveFolderToTrash(userId, folder);
 	}
 
-	/**
-	* @deprecated As of 7.0.0, see {@link
-	com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	*/
-	@Deprecated
-	public static void registerDLSyncEventCallback(java.lang.String event,
-		com.liferay.portal.kernel.repository.model.FileEntry fileEntry)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().registerDLSyncEventCallback(event, fileEntry);
-	}
-
-	/**
-	* @deprecated As of 7.0.0, see {@link
-	com.liferay.portal.kernel.repository.capabilities.SyncCapability}
-	*/
-	@Deprecated
-	public static void registerDLSyncEventCallback(java.lang.String event,
-		com.liferay.portal.kernel.repository.model.Folder folder) {
-		getService().registerDLSyncEventCallback(event, folder);
-	}
-
 	public static void restoreDependentsFromTrash(
 		java.util.List<java.lang.Object> dlFileEntriesAndDLFolders,
 		long trashEntryId)
