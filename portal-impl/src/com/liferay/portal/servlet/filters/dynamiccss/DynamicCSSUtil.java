@@ -514,7 +514,7 @@ public class DynamicCSSUtil {
 		HttpServletRequest request, ThemeDisplay themeDisplay) {
 
 		if (!PropsValues.THEME_CSS_FAST_LOAD_CHECK_REQUEST_PARAMETER) {
-			return true;
+			return PropsValues.THEME_CSS_FAST_LOAD;
 		}
 
 		if (themeDisplay != null) {
