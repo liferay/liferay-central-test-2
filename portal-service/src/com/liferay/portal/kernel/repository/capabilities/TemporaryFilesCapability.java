@@ -44,9 +44,9 @@ public interface TemporaryFilesCapability extends Capability {
 	public List<FileEntry> getTemporaryFiles(long userId, String folderName)
 		throws PortalException;
 
-	public long getTemporaryFilesTimeoutMilliseconds();
+	public long getTemporaryFilesTimeout();
 
-	public void setTemporaryFilesTimeoutMilliseconds(
-		long temporaryFilesTimeoutMilliseconds);
+	public void setTemporaryFilesTimeout(
+		long temporaryFilesTimeout);
 
 }

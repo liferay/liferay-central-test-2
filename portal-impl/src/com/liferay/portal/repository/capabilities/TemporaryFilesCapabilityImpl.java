@@ -67,13 +67,12 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public long getTemporaryFilesTimeoutMilliseconds() {
+	public long getTemporaryFilesTimeout() {
 		return 0;
 	}
 
 	@Override
-	public void setTemporaryFilesTimeoutMilliseconds(
-		long temporaryFilesTimeoutMilliseconds) {
+	public void setTemporaryFilesTimeout(long temporaryFilesTimeout) {
 	}
 
 	private LocalRepository _localRepository;
