@@ -19,9 +19,9 @@
 <div class="control-panel-home-actions">
 
 	<%
-	Map<String, String> buttonsDataAttributes = new HashMap<String, String>();
+	Map<String, String> data = new HashMap<String, String>();
 
-	buttonsDataAttributes.put("navigation", "true");
+	data.put("navigation", "true");
 
 	Map<String, List<Portlet>> categoriesMap = PortalUtil.getControlPanelCategoriesMap(request);
 
@@ -42,7 +42,7 @@
 									<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(request) %>" />
 								</liferay-portlet:renderURL>
 
-								<aui:button data="<%= buttonsDataAttributes %>" href="<%= appManagerURL %>" id="controlPanelHomeActionManageApps" primary="<%= true %>" value="manage-apps" />
+								<aui:button data="<%= data %>" href="<%= appManagerURL %>" id="controlPanelHomeActionManageApps" primary="<%= true %>" value="manage-apps" />
 							</c:when>
 							<c:otherwise>
 								<p>
@@ -53,7 +53,7 @@
 									<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(request) %>" />
 								</liferay-portlet:renderURL>
 
-								<aui:button data="<%= buttonsDataAttributes %>" href="<%= pluginsAdminURL %>" id="controlPanelHomeActionManageApps" primary="<%= true %>" value="manage-apps" />
+								<aui:button data="<%= data %>" href="<%= pluginsAdminURL %>" id="controlPanelHomeActionManageApps" primary="<%= true %>" value="manage-apps" />
 							</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -66,7 +66,7 @@
 							<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(request) %>" />
 						</liferay-portlet:renderURL>
 
-						<aui:button data="<%= buttonsDataAttributes %>" href="<%= editPortalSettingsURL %>" id="controlPanelHomeActionPortalSettings" primary="<%= true %>" value="edit-portal-settings" />
+						<aui:button data="<%= data %>" href="<%= editPortalSettingsURL %>" id="controlPanelHomeActionPortalSettings" primary="<%= true %>" value="edit-portal-settings" />
 					</c:when>
 					<c:when test="<%= category.equals(PortletCategoryKeys.SITES) %>">
 
@@ -93,7 +93,7 @@
 										<liferay-ui:message key="you-can-manage-the-site-you-are-coming-from" />
 									</p>
 
-									<aui:button data="<%= buttonsDataAttributes %>" href="<%= siteAdministrationURL.toString() %>" id="controlPanelHomeActionManageSite" primary="<%= true %>" value="<%= buttonLabel %>" />
+									<aui:button data="<%= data %>" href="<%= siteAdministrationURL.toString() %>" id="controlPanelHomeActionManageSite" primary="<%= true %>" value="<%= buttonLabel %>" />
 								</c:if>
 
 						<%
@@ -113,7 +113,7 @@
 								<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(request) %>" />
 							</liferay-portlet:renderURL>
 
-							<aui:button data="<%= buttonsDataAttributes %>" href="<%= addUserURL %>" id="controlPanelHomeActionAddUser" primary="<%= true %>" value="add-user" />
+							<aui:button data="<%= data %>" href="<%= addUserURL %>" id="controlPanelHomeActionAddUser" primary="<%= true %>" value="add-user" />
 						</c:if>
 					</c:when>
 				</c:choose>
