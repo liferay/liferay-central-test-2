@@ -388,6 +388,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		notifyChannelListeners();
 	}
 
+	@Override
 	public void storeNotificationEvent(
 		NotificationEvent notificationEvent, long currentTime) {
 
