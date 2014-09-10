@@ -133,7 +133,6 @@ public class SubscriptionSenderTest extends PowerMockito {
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setGroupId(100);
-
 		subscriptionSender.setMailId("test-mail-id");
 
 		subscriptionSender.initialize();
@@ -160,15 +159,15 @@ public class SubscriptionSenderTest extends PowerMockito {
 
 	@Test
 	public void testGetPortalURLWithServiceContext() throws Exception {
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
+
+		subscriptionSender.setMailId("test-mail-id");
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setScopeGroupId(100l);
 
-		SubscriptionSender subscriptionSender = new SubscriptionSender();
-
 		subscriptionSender.setServiceContext(serviceContext);
-
-		subscriptionSender.setMailId("test-mail-id");
 
 		subscriptionSender.initialize();
 
