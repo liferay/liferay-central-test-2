@@ -96,9 +96,6 @@ public class EditFolderAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFolders(actionRequest, false);
 			}
-			else if (cmd.equals("deleteExpiredTemporaryFiles")) {
-				deleteExpiredTemporaryFiles(actionRequest);
-			}
 			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 				deleteFolders(actionRequest, true);
 			}
@@ -107,6 +104,9 @@ public class EditFolderAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeFolder(actionRequest);
+			}
+			else if (cmd.equals("deleteExpiredTemporaryFiles")) {
+				deleteExpiredTemporaryFiles(actionRequest);
 			}
 			else if (cmd.equals("updateWorkflowDefinitions")) {
 				updateWorkflowDefinitions(actionRequest);
