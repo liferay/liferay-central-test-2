@@ -53,8 +53,8 @@ public class AIMConnector {
 
 		_oscar = new Oscar();
 
-		_oscar.setSN(login);
 		_oscar.setPassword(password);
+		_oscar.setSN(login);
 
 		ses.init();
 	}
