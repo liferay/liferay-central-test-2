@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.exception.LoggedExceptionInInitializerError;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.memory.EqualityWeakReference;
 
 import java.io.IOException;
@@ -316,8 +314,6 @@ public class AggregateClassLoader extends ClassLoader {
 			throw new ClassNotFoundException("Unable to load class " + name, e);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(AggregateClassLoader.class);
 
 	private static Method _findClassMethod;
 	private static Method _getResourceMethod;

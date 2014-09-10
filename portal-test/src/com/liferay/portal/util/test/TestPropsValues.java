@@ -16,8 +16,6 @@ package com.liferay.portal.util.test;
 
 import com.liferay.portal.kernel.exception.LoggedExceptionInInitializerError;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -116,8 +114,6 @@ public class TestPropsValues {
 
 		return _userId;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(TestPropsValues.class);
 
 	private static long _companyId;
 	private static long _groupId;
