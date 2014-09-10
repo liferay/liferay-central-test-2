@@ -1792,6 +1792,8 @@ public class PropsValues {
 
 	public static boolean THEME_IMAGES_FAST_LOAD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_IMAGES_FAST_LOAD));
 
+	public static boolean THEME_IMAGES_FAST_LOAD_CHECK_REQUEST_PARAMETER = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_IMAGES_FAST_LOAD_CHECK_REQUEST_PARAMETER));
+
 	public static boolean THEME_JSP_OVERRIDE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_JSP_OVERRIDE_ENABLED));
 
 	public static boolean THEME_LOADER_NEW_THEME_ID_ON_IMPORT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_LOADER_NEW_THEME_ID_ON_IMPORT));
