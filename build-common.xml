@@ -1732,16 +1732,16 @@ rerun your task.
 	<target name="test-package-group">
 		<if>
 			<not>
-				<isset property="test.package.group" />
+				<isset property="test.package.group.index" />
 			</not>
 			<then>
-				<fail>Use "ant test-package-group -Dtest.package.group=0".</fail>
+				<fail>Use "ant test-package-group -Dtest.package.group.index=0".</fail>
 			</then>
 		</if>
 
 		<property file="${project.dir}/test.package.names.properties" />
 
-		<propertycopy from="TEST_PACKAGE_GROUP_${test.package.group}" name="test.packages" />
+		<propertycopy from="TEST_PACKAGE_GROUP_${test.package.group.index}" name="test.packages" />
 
 		<for list="${test.packages}" param="test.package">
 			<sequential>
