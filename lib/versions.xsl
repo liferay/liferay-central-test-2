@@ -13,6 +13,7 @@
 				body {
 					padding: 10px;
 				}
+
 				th.version {
 					border-top: none !important;
 					font-size: 20px;
@@ -34,14 +35,13 @@
 				<table class="table table-condensed">
 					<xsl:for-each select="versions/version">
 						<tr>
-							<th colspan="5" class="version">
+							<th class="version" colspan="5">
 								<xsl:value-of select="@name" />
 							</th>
 						</tr>
 
 						<xsl:choose>
 							<xsl:when test="libraries">
-
 								<tr>
 									<th>
 										File Name
@@ -61,7 +61,6 @@
 								</tr>
 
 								<xsl:apply-templates />
-
 							</xsl:when>
 							<xsl:otherwise>
 								<tr>
