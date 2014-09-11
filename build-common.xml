@@ -1741,7 +1741,7 @@ rerun your task.
 
 		<property file="${project.dir}/test.package.names.properties" />
 
-		<propertycopy from="test.package.group[${test.package.group}]" name="test.packages" />
+		<propertycopy from="TEST_PACKAGE_GROUP_${test.package.group}" name="test.packages" />
 
 		<for list="${test.packages}" param="test.package">
 			<sequential>
