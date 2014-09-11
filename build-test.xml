@@ -3206,14 +3206,14 @@ if (ppstate.equals("normal")) {
 				sb.append(StringUtil.merge(packageNames, " "));
 				sb.append("\n\n");
 
-				int packageGroupCount = GetterUtil.getInteger(project.getProperty("test.package.group.count"));
+				int packageGroupsSize = GetterUtil.getInteger(project.getProperty("test.package.groups.size"));
 
 				sb.append("TEST_PACKAGE_GROUPS=");
 
-				for (int i = 0; i < packageGroupCount; i++) {
+				for (int i = 0; i < packageGroupsSize; i++) {
 					sb.append(i);
 
-					if (i < packageGroupCount - 1) {
+					if (i < packageGroupsSize - 1) {
 						sb.append(" ");
 					}
 				}
@@ -3225,7 +3225,7 @@ if (ppstate.equals("normal")) {
 				Iterator iterator = packageNames.iterator();
 
 				for (int i = 0; i < packageNames.size(); i++) {
-					int index = i % packageGroupCount;
+					int index = i % packageGroupsSize;
 
 					Set packageGroup = packageGroups.get(index);
 
@@ -3238,7 +3238,7 @@ if (ppstate.equals("normal")) {
 					packageGroups.put(index, packageGroup);
 				}
 
-				for (int i = 0; i < packageGroupCount; i++) {
+				for (int i = 0; i < packageGroupsSize; i++) {
 					Set packageGroup = packageGroups.get(i);
 
 					sb.append("TEST_PACKAGE_GROUP_");
