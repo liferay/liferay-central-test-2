@@ -3166,47 +3166,82 @@ if (ppstate.equals("normal")) {
 
 				import org.apache.tools.ant.DirectoryScanner;
 
-				DirectoryScanner directoryScanner = new DirectoryScanner();
+				Map getPackageGroups(Set packageNames, int packageGroupsSize) {
+					Map packageGroups = new HashMap();
 
-				directoryScanner.setBasedir(project.getBaseDir());
-				directoryScanner.setIncludes(new String[] {"**/test/integration/**/*Test.java", "**/test/unit/**/*Test.java"});
+					Iterator iterator = packageNames.iterator();
 
-				directoryScanner.scan();
+					for (int i = 0; i < packageNames.size(); i++) {
+						int index = i % packageGroupsSize;
 
-				String[] fileNames = directoryScanner.getIncludedFiles();
+						Set packageGroup = packageGroups.get(index);
 
-				Arrays.sort(fileNames);
+						if (packageGroup == null) {
+							packageGroup = new TreeSet();
+						}
 
-				Set packageNames = new TreeSet();
+						packageGroup.add(iterator.next());
 
-				for (String fileName : fileNames) {
-					int x = fileName.indexOf("com/");
-					int y = fileName.lastIndexOf("/");
-
-					if (OSDetector.isWindows()) {
-						x = fileName.indexOf("com\\");
-						y = fileName.lastIndexOf("\\");
+						packageGroups.put(index, packageGroup);
 					}
 
-					if (fileName.endsWith("ServiceHttpTest.java") || fileName.endsWith("ServiceJsonTest.java") || fileName.endsWith("ServiceSoapTest.java")) {
-						continue;
+					return packageGroups;
+				}
+
+				Set getPackageNames() {
+					Set packageNames = new TreeSet();
+
+					DirectoryScanner directoryScanner = new DirectoryScanner();
+
+					directoryScanner.setBasedir(project.getBaseDir());
+					directoryScanner.setIncludes(new String[] {"**/test/integration/**/*Test.java", "**/test/unit/**/*Test.java"});
+
+					directoryScanner.scan();
+
+					String[] fileNames = directoryScanner.getIncludedFiles();
+
+					Arrays.sort(fileNames);
+
+					for (String fileName : fileNames) {
+						int x = fileName.indexOf("com/");
+						int y = fileName.lastIndexOf("/");
+
+						if (OSDetector.isWindows()) {
+							x = fileName.indexOf("com\\");
+							y = fileName.lastIndexOf("\\");
+						}
+
+						if (fileName.endsWith("ServiceHttpTest.java") || fileName.endsWith("ServiceJsonTest.java") || fileName.endsWith("ServiceSoapTest.java")) {
+							continue;
+						}
+
+						String packageName = fileName.substring(x, y);
+
+						packageName = StringUtil.replace(packageName, "/", ".");
+						packageName = StringUtil.replace(packageName, "\\", ".");
+
+						packageNames.add(packageName);
 					}
 
-					String packageName = fileName.substring(x, y);
-
-					packageName = StringUtil.replace(packageName, "/", ".");
-					packageName = StringUtil.replace(packageName, "\\", ".");
-
-					packageNames.add(packageName);
+					return packageNames;
 				}
 
 				StringBundler sb = new StringBundler();
 
-				sb.append("TEST_PACKAGE_NAMES=");
-				sb.append(StringUtil.merge(packageNames, " "));
-				sb.append("\n\n");
-
+				Set packageNames = getPackageNames();
 				int packageGroupsSize = GetterUtil.getInteger(project.getProperty("test.package.groups.size"));
+
+				Map packageGroups = getPackageGroups(packageNames, packageGroupsSize);
+
+				for (int i = 0; i < packageGroupsSize; i++) {
+					Set packageGroup = packageGroups.get(i);
+
+					sb.append("TEST_PACKAGE_GROUP_");
+					sb.append(i);
+					sb.append("=");
+					sb.append(StringUtil.merge(packageGroup));
+					sb.append("\n\n");
+				}
 
 				sb.append("TEST_PACKAGE_GROUPS=");
 
@@ -3219,34 +3254,8 @@ if (ppstate.equals("normal")) {
 				}
 
 				sb.append("\n\n");
-
-				Map packageGroups = new HashMap();
-
-				Iterator iterator = packageNames.iterator();
-
-				for (int i = 0; i < packageNames.size(); i++) {
-					int index = i % packageGroupsSize;
-
-					Set packageGroup = packageGroups.get(index);
-
-					if (packageGroup == null) {
-						packageGroup = new TreeSet();
-					}
-
-					packageGroup.add(iterator.next());
-
-					packageGroups.put(index, packageGroup);
-				}
-
-				for (int i = 0; i < packageGroupsSize; i++) {
-					Set packageGroup = packageGroups.get(i);
-
-					sb.append("TEST_PACKAGE_GROUP_");
-					sb.append(i);
-					sb.append("=");
-					sb.append(StringUtil.merge(packageGroup));
-					sb.append("\n");
-				}
+				sb.append("TEST_PACKAGE_NAMES=");
+				sb.append(StringUtil.merge(packageNames, " "));
 
 				project.setProperty("test.package.names.properties.content", sb.toString());
 			]]>
