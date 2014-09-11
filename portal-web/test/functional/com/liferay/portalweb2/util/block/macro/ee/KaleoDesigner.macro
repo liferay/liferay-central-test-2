@@ -62,7 +62,7 @@
 		<execute action="Kaleodesigner#pause" locator1="1000" />
 	</command>
 
-	<command name="assertSourceXML">
+	<command name="viewSourceXML">
 		<execute action="Kaleodesigner#assertClick" locator-key1="SOURCE_KALEO_XML_TAB" value1="Source (Kaleo XML)" />
 		<execute action="Kaleodesigner#pause" locator1="1000" />
 
