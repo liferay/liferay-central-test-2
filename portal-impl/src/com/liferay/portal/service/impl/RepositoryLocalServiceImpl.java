@@ -144,7 +144,7 @@ public class RepositoryLocalServiceImpl
 	}
 
 	@Override
-	public void deleteRepositories(long groupId) throws PortalException {
+	public void deleteRepositories(long groupId) {
 		List<Repository> repositories = repositoryPersistence.findByGroupId(
 			groupId);
 
