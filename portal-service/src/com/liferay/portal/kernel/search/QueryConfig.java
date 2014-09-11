@@ -40,7 +40,7 @@ public class QueryConfig implements Serializable {
 
 	public void addHighlightFieldNames(String... highlightFieldNames) {
 		Set<String> highlightFieldNamesSet = SetUtil.fromArray(
-			(String[]) _attributes.get(_HIGHLIGHT_FIELD_NAMES));
+			(String[])_attributes.get(_HIGHLIGHT_FIELD_NAMES));
 
 		highlightFieldNamesSet.addAll(Arrays.asList(highlightFieldNames));
 
@@ -52,7 +52,7 @@ public class QueryConfig implements Serializable {
 
 	public void addSelectedFieldNames(String... selectedFieldNames) {
 		Set<String> selectedFieldNamesSet = SetUtil.fromArray(
-			(String[]) _attributes.get(_SELECTED_FIELD_NAMES));
+			(String[])_attributes.get(_SELECTED_FIELD_NAMES));
 
 		selectedFieldNamesSet.addAll(Arrays.asList(selectedFieldNames));
 
