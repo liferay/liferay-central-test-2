@@ -554,8 +554,6 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 				Collections.<String>emptySet());
 		}
 
-		String[] highlightFieldNames = queryConfig.getHighlightFieldNames();
-
 		for (int i = start; i < start + subsetTotal; i++) {
 			int docId = browseHits[i].getDocid();
 
@@ -563,6 +561,8 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 				docId, fieldSelector);
 
 			Document subsetDocument = getDocument(document);
+
+			String[] highlightFieldNames = queryConfig.getHighlightFieldNames();
 
 			for (String highlightFieldName : highlightFieldNames) {
 				getSnippet(
