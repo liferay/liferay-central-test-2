@@ -952,9 +952,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = getDLFolder(folderId);
+			DLFolder dlFolder = getDLFolder(folderId);
 
-			parentFolderId = folder.getParentFolderId();
+			parentFolderId = dlFolder.getParentFolderId();
 		}
 
 		return updateFolder(
@@ -1152,11 +1152,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	protected long getParentFolderId(DLFolder dlFolder, long parentFolderId)
 		throws PortalException {
 
-		long groupId = dlFolder.getGroupId();
-		long repositoryId = dlFolder.getRepositoryId();
-
 		parentFolderId = getParentFolderId(
-			groupId, repositoryId, parentFolderId);
+			dlFolder.getGroupId(), dlFolder.getRepositoryId(), parentFolderId);
 
 		if (parentFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
@@ -1197,7 +1194,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		if (parentDLFolder.getGroupId() != groupId) {
 			throw new NoSuchFolderException(
 				String.format(
-					"No DLFolder exists with primary key %s in group %s",
+					"No folder exists with the primary key %s in group %s",
 					parentFolderId, groupId));
 		}
 
@@ -1210,7 +1207,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			if (repository.getGroupId() != parentDLFolder.getGroupId()) {
 				throw new NoSuchFolderException(
 					String.format(
-						"No DLFolder exists with primary key %s in " +
+						"No folder exists with the primary key %s in " +
 							"repository %s",
 						parentFolderId, repositoryId));
 			}
