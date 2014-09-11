@@ -211,7 +211,7 @@
 					<fileset dir="${alloy.bootstrap.lib.dir}/" />
 				</copy>
 
-				<!-- Glyphicons Font -->
+				<!-- Glyphicons font -->
 
 				<property name="alloy.bootstrap.fonts.lib.dir" value="${alloy.bootstrap.tmp.dir}/bootstrap-sass-${alloy.bootstrap.version}/assets/fonts/bootstrap" />
 
