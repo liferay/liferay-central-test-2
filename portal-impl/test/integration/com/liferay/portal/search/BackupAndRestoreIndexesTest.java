@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @ExecutionTestListeners(listeners = {MainServletExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class BackUpRestoreIndicesTest {
+public class BackupAndRestoreIndexesTest {
 
 	@Test
 	public void testBackupAndRestore() throws Exception {
@@ -38,7 +38,7 @@ public class BackUpRestoreIndicesTest {
 
 		for (long companyId : PortalInstances.getCompanyIds()) {
 			String backupName =
-				BackupRestoreIndicesTest.class.getName() + "-" +
+				BackupAndRestoreIndexesTest.class.getName() + "-" +
 					System.currentTimeMillis();
 
 			SearchEngineUtil.backup(
