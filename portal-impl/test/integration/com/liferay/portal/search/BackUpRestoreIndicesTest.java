@@ -33,33 +33,29 @@ import java.util.Map;
 public class BackUpRestoreIndicesTest {
 
 	@Test
-	public void testBackupAndRestore()
-		throws Exception {
+	public void testBackupAndRestore() throws Exception {
+		Map<Long, String> backupNames = new HashMap<Long, String>();
 
-		Map<Long, String> indexNames = new HashMap<Long, String>();
+		for (long companyId : PortalInstances.getCompanyIds()) {
+			String backupName =
+				BackupRestoreIndicesTest.class.getName() + "-" +
+					System.currentTimeMillis();
 
-			for (long companyId : PortalInstances.getCompanyIds()) {
-				String backupName = null;
+			SearchEngineUtil.backup(
+				companyId, SearchEngineUtil.SYSTEM_ENGINE_ID, backupName);
 
-				backupName =
-					"search-" + companyId + "-" + System.currentTimeMillis();
-
-				SearchEngineUtil.backup(
-					companyId, SearchEngineUtil.SYSTEM_ENGINE_ID, backupName);
-
-				indexNames.put(companyId, backupName);
-			}
-
-			GroupTestUtil.addGroup();
-
-			for (Map.Entry<Long, String> entry : indexNames.entrySet()) {
-				String backupFileName = entry.getValue();
-
-				SearchEngineUtil.restore(entry.getKey(), backupFileName);
-
-				SearchEngineUtil.removeBackup(entry.getKey(), backupFileName);
-			}
+			backupNames.put(companyId, backupName);
 		}
 
+		GroupTestUtil.addGroup();
+
+		for (Map.Entry<Long, String> entry : backupNames.entrySet()) {
+			String backupName = entry.getValue();
+
+			SearchEngineUtil.restore(entry.getKey(), backupName);
+
+			SearchEngineUtil.removeBackup(entry.getKey(), backupName);
+		}
+	}
 
 }
