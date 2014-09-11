@@ -105,13 +105,13 @@ public class UpgradeJournal extends UpgradeProcess {
 			ddmStructureUUID, increment(), groupId, companyId, name,
 			localizedName, localizedDescription, xsd);
 
+		String ddmTemplateUUID = PortalUUIDUtil.generate();
+
 		Element templateElement = structureElement.element("template");
 
 		String fileName = templateElement.elementText("file-name");
 		boolean cacheable = GetterUtil.getBoolean(
 			templateElement.elementText("cacheable"));
-
-		String ddmTemplateUUID = PortalUUIDUtil.generate();
 
 		addDDMTemplate(
 			ddmTemplateUUID, increment(), groupId, companyId, ddmStructureId,
