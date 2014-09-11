@@ -3220,28 +3220,26 @@ if (ppstate.equals("normal")) {
 
 				sb.append("\n\n");
 
-				Map packageGroupNumberToPackageGroup = new HashMap();
+				Map packageGroups = new HashMap();
 
-				List packageNameList = new ArrayList();
+				Iterator iterator = packageNames.iterator();
 
-				packageNameList.addAll(packageNames);
+				for (int i = 0; i < packageNames.size(); i++) {
+					int index = i % packageGroupCount;
 
-				for (int i = 0; i < packageNameList.size(); i++) {
-					int packageGroupNumber = i % packageGroupCount;
-
-					Set packageGroup = packageGroupNumberToPackageGroup.get(packageGroupNumber);
+					Set packageGroup = packageGroups.get(index);
 
 					if (packageGroup == null) {
 						packageGroup = new TreeSet();
 					}
 
-					packageGroup.add(packageNameList.get(i));
+					packageGroup.add(iterator.next());
 
-					packageGroupNumberToPackageGroup.put(packageGroupNumber, packageGroup);
+					packageGroups.put(index, packageGroup);
 				}
 
 				for (int i = 0; i < packageGroupCount; i++) {
-					Set packageGroup = packageGroupNumberToPackageGroup.get(i);
+					Set packageGroup = packageGroups.get(i);
 
 					sb.append("test.package.group[");
 					sb.append(i);
