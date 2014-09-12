@@ -57,7 +57,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(9, sb.length());
 		Assert.assertEquals("truefalse", sb.toString());
 
-		_assertArray(sb, "true", "false");
+		assertArray(sb, "true", "false");
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(3, sb.length());
 		Assert.assertEquals("abc", sb.toString());
 
-		_assertArray(sb, "a", "b", "c");
+		assertArray(sb, "a", "b", "c");
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(6, sb.length());
 		Assert.assertEquals("abcdef", sb.toString());
 
-		_assertArray(sb, "ab", "cd", "ef");
+		assertArray(sb, "ab", "cd", "ef");
 	}
 
 	@Test
@@ -129,7 +129,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(9, sb.length());
 		Assert.assertEquals("1.02.13.2", sb.toString());
 
-		_assertArray(sb, "1.0", "2.1", "3.2");
+		assertArray(sb, "1.0", "2.1", "3.2");
 	}
 
 	@Test
@@ -162,7 +162,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(9, sb.length());
 		Assert.assertEquals("1.02.13.2", sb.toString());
 
-		_assertArray(sb, "1.0", "2.1", "3.2");
+		assertArray(sb, "1.0", "2.1", "3.2");
 	}
 
 	@Test
@@ -186,7 +186,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(3, sb.length());
 		Assert.assertEquals("123", sb.toString());
 
-		_assertArray(sb, "1", "2", "3");
+		assertArray(sb, "1", "2", "3");
 	}
 
 	@Test
@@ -210,7 +210,7 @@ public class StringBundlerTest {
 		Assert.assertEquals(3, sb.length());
 		Assert.assertEquals("123", sb.toString());
 
-		_assertArray(sb, "1", "2", "3");
+		assertArray(sb, "1", "2", "3");
 	}
 
 	@Test
@@ -707,7 +707,7 @@ public class StringBundlerTest {
 
 		try {
 			Assert.assertEquals(
-				Integer.MAX_VALUE,
+				0,
 				ReflectionTestUtil.getFieldValue(
 					StringBundler.class, "_THREAD_LOCAL_BUFFER_LIMIT"));
 			Assert.assertNull(
@@ -812,7 +812,7 @@ public class StringBundlerTest {
 			"test1test2test3test4test5", stringWriter.toString());
 	}
 
-	private void _assertArray(StringBundler sb, String... prefix) {
+	protected void assertArray(StringBundler sb, String... prefix) {
 		String[] strings = sb.getStrings();
 
 		for (int i = 0; i < prefix.length; i++) {
