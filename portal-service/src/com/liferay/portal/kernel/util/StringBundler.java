@@ -311,13 +311,15 @@ public class StringBundler implements Serializable {
 
 	static {
 		if (_THREADLOCAL_BUFFER_LIMIT > 0) {
+			_THREAD_LOCAL_BUFFER_LIMIT = _THREADLOCAL_BUFFER_LIMIT;
+
 			_stringBuilderThreadLocal =
 				new SoftReferenceThreadLocal<StringBuilder>();
-			_THREAD_LOCAL_BUFFER_LIMIT = _THREADLOCAL_BUFFER_LIMIT;
 		}
 		else {
-			_stringBuilderThreadLocal = null;
 			_THREAD_LOCAL_BUFFER_LIMIT = Integer.MAX_VALUE;
+
+			_stringBuilderThreadLocal = null;
 		}
 	}
 
