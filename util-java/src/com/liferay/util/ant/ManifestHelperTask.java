@@ -109,14 +109,14 @@ public class ManifestHelperTask extends Task {
 			return;
 		}
 
-		File classesDir = new File(project.getBaseDir(), "classes");
-
-		File file = new File(project.getBaseDir(), "bnd.bnd");
-
 		try (Analyzer analyzer = new Analyzer()) {
 			analyzer.setBase(project.getBaseDir());
 
+			File classesDir = new File(project.getBaseDir(), "classes");
+
 			analyzer.setJar(classesDir);
+
+			File file = new File(project.getBaseDir(), "bnd.bnd");
 
 			if (file.exists()) {
 				analyzer.setProperties(file);
