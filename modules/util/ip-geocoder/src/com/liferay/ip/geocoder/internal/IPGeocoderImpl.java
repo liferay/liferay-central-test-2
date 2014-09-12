@@ -163,13 +163,14 @@ public class IPGeocoderImpl implements IPGeocoder {
 
 		}
 
-		int i = 0;
 
 		try (BufferedInputStream bufferedInputStream = new BufferedInputStream(
 				inputStream)) {
 
 			BufferedOutputStream bufferedOutputStream =
 				new BufferedOutputStream(new FileOutputStream(file));
+
+			int i = 0;
 
 			while ((i = bufferedInputStream.read()) != -1) {
 				bufferedOutputStream.write(i);

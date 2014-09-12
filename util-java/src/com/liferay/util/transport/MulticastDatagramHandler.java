@@ -80,12 +80,11 @@ public class MulticastDatagramHandler implements DatagramHandler {
 		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream(
 			bytes.length);
 
-		byte[] buffer = new byte[1500];
-
-		int c = 0;
-
 		try (InputStream is = new GZIPInputStream(
 				new UnsyncByteArrayInputStream(bytes))) {
+
+			byte[] buffer = new byte[1500];
+			int c = 0;
 
 			while (true) {
 				if (c == -1) {
