@@ -75,7 +75,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		Set<Class<? extends Capability>> exportedCapabilityClasses =
 			repositoryInstanceDefinition.getExportedCapabilities();
 
-		_setupCommonCapabilities(
+		setupCommonCapabilities(
 			repositoryClassDefinition, supportedCapabilities,
 			exportedCapabilityClasses);
 
@@ -118,7 +118,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 			exportedCapabilityClasses.add(CMISRepositoryHandler.class);
 		}
 
-		_setupCommonCapabilities(
+		setupCommonCapabilities(
 			repositoryClassDefinition, supportedCapabilities,
 			exportedCapabilityClasses);
 
@@ -214,7 +214,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		return _repositoryLocalService;
 	}
 
-	private void _setupCommonCapabilities(
+	protected void setupCommonCapabilities(
 		RepositoryClassDefinition repositoryClassDefinition,
 		Map<Class<? extends Capability>, Capability> supportedCapabilities,
 		Set<Class<? extends Capability>> exportedCapabilityClasses) {
