@@ -798,10 +798,10 @@ public class CustomSQL {
 
 		StringBundler sb = new StringBundler();
 
-		String line = null;
-
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(sql))) {
+
+			String line = null;
 
 			while ((line = unsyncBufferedReader.readLine()) != null) {
 				sb.append(line.trim());
