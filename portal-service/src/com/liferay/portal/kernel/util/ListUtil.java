@@ -189,10 +189,10 @@ public class ListUtil {
 
 		List<String> list = new ArrayList<String>();
 
-		String s = StringPool.BLANK;
-
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new FileReader(file))) {
+
+			String s = StringPool.BLANK;
 
 			while ((s = unsyncBufferedReader.readLine()) != null) {
 				list.add(s);
