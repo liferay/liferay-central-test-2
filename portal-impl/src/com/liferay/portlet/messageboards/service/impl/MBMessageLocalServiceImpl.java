@@ -678,15 +678,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					MessageCreateDateComparator comparator =
 						new MessageCreateDateComparator(true);
 
-					MBMessage[] prevAndNext =
+					MBMessage[] prevAndNextMessages =
 						mbMessagePersistence.findByT_S_PrevAndNext(
 							message.getMessageId(), thread.getThreadId(),
 							WorkflowConstants.STATUS_APPROVED, comparator);
 
-					if (prevAndNext[2] == null) {
-						thread.setLastPostByUserId(prevAndNext[0].getUserId());
+					if (prevAndNextMessages[2] == null) {
+						thread.setLastPostByUserId(
+							prevAndNextMessages[0].getUserId());
 						thread.setLastPostDate(
-							prevAndNext[0].getModifiedDate());
+							prevAndNextMessages[0].getModifiedDate());
 
 						mbThreadPersistence.update(thread);
 					}
