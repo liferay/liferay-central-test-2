@@ -222,13 +222,13 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		if (!supportedCapabilities.containsKey(
 				RepositoryEventTriggerCapability.class)) {
 
-			exportedCapabilityClasses.add(
-				RepositoryEventTriggerCapability.class);
-
 			supportedCapabilities.put(
 				RepositoryEventTriggerCapability.class,
 				new LiferayRepositoryEventTriggerCapability(
 					repositoryClassDefinition.getRepositoryEventTrigger()));
+
+			exportedCapabilityClasses.add(
+				RepositoryEventTriggerCapability.class);
 		}
 	}
 
