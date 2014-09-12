@@ -442,7 +442,7 @@ public class RepositoryLocalServiceImpl
 		if (repositoryId == 0) {
 			throw new InvalidRepositoryIdException(
 				String.format(
-					"No DLFolder or RepositoryEntry found with folderId = %s",
+					"No folder or repository entry found with folder ID %s",
 					folderId));
 		}
 
