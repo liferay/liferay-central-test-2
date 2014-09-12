@@ -367,8 +367,7 @@ public class RepositoryLocalServiceImpl
 	}
 
 	protected long getExternalRepositoryId(
-			long folderId, long fileEntryId, long fileVersionId)
-		throws PortalException {
+		long folderId, long fileEntryId, long fileVersionId) {
 
 		long repositoryEntryId = RepositoryUtil.getRepositoryEntryId(
 			folderId, fileEntryId, fileVersionId);
@@ -426,8 +425,7 @@ public class RepositoryLocalServiceImpl
 	}
 
 	protected long getRepositoryId(
-			long folderId, long fileEntryId, long fileVersionId)
-		throws PortalException {
+		long folderId, long fileEntryId, long fileVersionId) {
 
 		long repositoryId = getInternalRepositoryId(
 			folderId, fileEntryId, fileVersionId);

@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.repository.InvalidRepositoryIdException;
 import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
