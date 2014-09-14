@@ -225,14 +225,12 @@ public class SeleniumBuilder {
 	private boolean _isCommandNameOverridden(
 		Element rootElement, String commandName) {
 
-		List<Element> commandRootElements =
+		List<Element> commandElements =
 			_seleniumBuilderFileUtil.getAllChildElements(
 				rootElement, "command");
 
-		for (Element commandRootElement : commandRootElements) {
-			String commandRootName = commandRootElement.attributeValue("name");
-
-			if (commandName.equals(commandRootName)) {
+		for (Element commandElement : commandElements) {
+			if (commandName.equals(commandElement.attributeValue("name"))) {
 				return true;
 			}
 		}
