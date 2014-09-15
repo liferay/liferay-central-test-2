@@ -600,13 +600,6 @@ public interface TrashHandler {
 	 */
 	public boolean isRestorable(long classPK) throws PortalException;
 
-	/**
-	 * Returns <code>true</code> if the entity can be moved from one root
-	 * container model (such as a wiki node) to another.
-	 *
-	 * @return <code>true</code> if the entity can be moved from one root
-	 *         container model to another; <code>false</code> otherwise
-	 */
 	public boolean isRootContainerModelMovable();
 
 	/**
