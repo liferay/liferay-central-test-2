@@ -42,15 +42,15 @@ public class PortletPropertyValidator {
 	}
 
 	public List<String> validate(String[] keys) {
-		List<String> invalid = new ArrayList<String>();
+		List<String> invalidKeys = new ArrayList<String>();
 
 		for (String key : keys){
 			if (!validate(key)){
-				invalid.add(key);
+				invalidKeys.add(key);
 			}
 		}
 
-		return invalid;
+		return invalidKeys;
 	}
 
 	private final Set<String> _validKeys = SetUtil.fromArray(

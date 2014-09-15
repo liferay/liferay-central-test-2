@@ -299,9 +299,10 @@ public class PortletTracker
 		List<String> invalidKeys = _portletPropertyValidator.validate(
 			serviceReference.getPropertyKeys());
 
-		for (String key : invalidKeys) {
+		for (String invalidKey : invalidKeys) {
 			_log.warn(
-				"Invalid property " + key + " for portlet " + portletName);
+				"Invalid property " + invalidKey + " for portlet " +
+					portletName);
 		}
 	}
 
