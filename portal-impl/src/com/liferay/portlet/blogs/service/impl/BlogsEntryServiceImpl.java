@@ -89,7 +89,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.ADD_ENTRY);
 
-		ImageSelector smallImageSelector = null;
+		ImageSelector imageSelector = null;
 
 		if (smallImage && Validator.isNotNull(smallImageFileName) &&
 			(smallImageInputStream != null)) {
@@ -100,14 +100,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 				smallImageInputStream,
 				MimeTypesUtil.getContentType(smallImageFileName));
 
-			smallImageSelector = new ImageSelector(
+			imageSelector = new ImageSelector(
 				fileEntry.getFileEntryId(), smallImageURL);
 		}
 
 		return addEntry(
 			title, StringPool.BLANK, description, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			allowPingbacks, allowTrackbacks, trackbacks, smallImageSelector,
+			allowPingbacks, allowTrackbacks, trackbacks, imageSelector,
 			serviceContext);
 	}
 
@@ -117,7 +117,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 			boolean allowTrackbacks, String[] trackbacks,
-			ImageSelector smallImage, ServiceContext serviceContext)
+			ImageSelector imageSelector, ServiceContext serviceContext)
 		throws PortalException {
 
 		BlogsPermission.check(
@@ -128,7 +128,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getUserId(), title, subtitle, description, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-			smallImage, serviceContext);
+			imageSelector, serviceContext);
 	}
 
 	@Override
@@ -463,7 +463,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.UPDATE);
 
-		ImageSelector smallImageSelector = null;
+		ImageSelector imageSelector = null;
 
 		if (smallImage) {
 			if (Validator.isNotNull(smallImageFileName) &&
@@ -475,19 +475,19 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 					smallImageInputStream,
 					MimeTypesUtil.getContentType(smallImageFileName));
 
-				smallImageSelector = new ImageSelector(
+				imageSelector = new ImageSelector(
 					fileEntry.getFileEntryId(), smallImageURL);
 			}
 		}
 		else {
-			smallImageSelector = new ImageSelector(0);
+			imageSelector = new ImageSelector(0);
 		}
 
 		return updateEntry(
 			entryId, title, StringPool.BLANK, description, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-			smallImageSelector, serviceContext);
+			imageSelector, serviceContext);
 	}
 
 	@Override
@@ -496,7 +496,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			boolean allowPingbacks, boolean allowTrackbacks,
-			String[] trackbacks, ImageSelector smallImage,
+			String[] trackbacks, ImageSelector imageSelector,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -507,7 +507,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getUserId(), entryId, title, subtitle, description, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-			smallImage, serviceContext);
+			imageSelector, serviceContext);
 	}
 
 	protected String exportToRSS(
