@@ -304,18 +304,18 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
+		long scopeGroupId = 0;
+
+		if (serviceContext != null) {
+			scopeGroupId = serviceContext.getScopeGroupId();
+		}
+
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			className);
 
 		destinationContainerModelId =
 			trashHandler.getDestinationContainerModelId(
 				classPK, destinationContainerModelId);
-
-		long scopeGroupId = 0;
-
-		if (serviceContext != null) {
-			scopeGroupId = serviceContext.getScopeGroupId();
-		}
 
 		if (!trashHandler.hasTrashPermission(
 				permissionChecker, scopeGroupId, destinationContainerModelId,
