@@ -55,17 +55,10 @@ public class BlogsEntryImpl extends BlogsEntryBaseImpl {
 	}
 
 	@Override
-	public long getSmallImageFileEntryFolderId() {
-		if (_smallImageFileEntryFolderId !=
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-
-			return _smallImageFileEntryFolderId;
+	public long getSmallImageFolderId() {
+		if (_smallImageFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return _smallImageFolderId;
 		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
 
 		Repository repository =
 			PortletFileRepositoryUtil.fetchPortletRepository(
@@ -75,18 +68,23 @@ public class BlogsEntryImpl extends BlogsEntryBaseImpl {
 			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 		}
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
 		try {
 			Folder folder = PortletFileRepositoryUtil.getPortletFolder(
 				getUserId(), repository.getRepositoryId(),
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				String.valueOf(getEntryId()), serviceContext);
 
-			_smallImageFileEntryFolderId = folder.getFolderId();
+			_smallImageFolderId = folder.getFolderId();
 		}
 		catch (Exception e) {
 		}
 
-		return _smallImageFileEntryFolderId;
+		return _smallImageFolderId;
 	}
 
 	@Override
@@ -118,7 +116,7 @@ public class BlogsEntryImpl extends BlogsEntryBaseImpl {
 		_smallImageType = smallImageType;
 	}
 
-	private long _smallImageFileEntryFolderId;
+	private long _smallImageFolderId;
 	private String _smallImageType;
 
 }

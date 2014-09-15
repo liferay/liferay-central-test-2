@@ -394,7 +394,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Small Image File Entry
 
 		long smallImageFileEntryFolderId =
-			entry.getSmallImageFileEntryFolderId();
+			entry.getSmallImageFolderId();
 
 		if (smallImageFileEntryFolderId != 0) {
 			PortletFileRepositoryUtil.deletePortletFolder(
