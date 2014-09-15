@@ -798,7 +798,8 @@ public interface UserLocalService extends BaseLocalService,
 	* Returns the user with the contact ID.
 	*
 	* @param contactId the user's contact ID
-	* @return the user with the contact ID
+	* @return the user with the contact ID, or <code>null</code> if a user with
+	the contact ID could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.User fetchUserByContactId(long contactId);
