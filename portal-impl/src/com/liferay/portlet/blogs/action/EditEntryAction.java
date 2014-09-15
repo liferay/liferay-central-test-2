@@ -490,7 +490,7 @@ public class EditEntryAction extends PortletAction {
 		String smallImageURL = ParamUtil.getString(
 			actionRequest, "smallImageURL");
 
-		ImageSelector smallImage = new ImageSelector(
+		ImageSelector imageSelector = new ImageSelector(
 			smallImageFileEntryId, smallImageURL);
 
 		BlogsEntry entry = null;
@@ -507,7 +507,7 @@ public class EditEntryAction extends PortletAction {
 				title, subtitle, description, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-				smallImage, serviceContext);
+				imageSelector, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, BlogsEntry.class.getName(), entry.getEntryId(),
@@ -525,7 +525,7 @@ public class EditEntryAction extends PortletAction {
 				entryId, title, subtitle, description, content,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, allowPingbacks,
-				allowTrackbacks, trackbacks, smallImage, serviceContext);
+				allowTrackbacks, trackbacks, imageSelector, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;
