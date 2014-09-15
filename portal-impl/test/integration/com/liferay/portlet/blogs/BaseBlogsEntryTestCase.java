@@ -65,13 +65,13 @@ public class BaseBlogsEntryTestCase {
 		boolean allowPingbacks = true;
 		boolean allowTrackbacks = true;
 		String[] trackbacks = new String[0];
-		ImageSelector smallImage = null;
+		ImageSelector imageSelector = null;
 
 		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
 			getUserId(), title, description, subtitle, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-			smallImage, serviceContext);
+			imageSelector, serviceContext);
 
 		if (approved) {
 			BlogsEntryLocalServiceUtil.updateStatus(
