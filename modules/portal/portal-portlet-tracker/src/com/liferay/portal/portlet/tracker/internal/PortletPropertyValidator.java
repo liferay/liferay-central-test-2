@@ -27,9 +27,9 @@ import java.util.Set;
  **/
 public class PortletPropertyValidator {
 
-	public boolean validate(String key){
+	public boolean validate(String key) {
 		if (!StringUtil.startsWith(key, "com.liferay.portlet.") &&
-			!StringUtil.startsWith(key, "javax.portlet.")){
+			!StringUtil.startsWith(key, "javax.portlet.")) {
 
 			return true;
 		}
@@ -44,8 +44,8 @@ public class PortletPropertyValidator {
 	public List<String> validate(String[] keys) {
 		List<String> invalidKeys = new ArrayList<String>();
 
-		for (String key : keys){
-			if (!validate(key)){
+		for (String key : keys) {
+			if (!validate(key)) {
 				invalidKeys.add(key);
 			}
 		}
@@ -55,8 +55,7 @@ public class PortletPropertyValidator {
 
 	private final Set<String> _validKeys = SetUtil.fromArray(
 		new String[] {
-			"com.liferay.portlet.action-timeout",
-			"com.liferay.portlet.active",
+			"com.liferay.portlet.action-timeout", "com.liferay.portlet.active",
 			"com.liferay.portlet.add-default-resource",
 			"com.liferay.portlet.ajaxable",
 			"com.liferay.portlet.autopropagated-parameters",
@@ -77,8 +76,7 @@ public class PortletPropertyValidator {
 			"com.liferay.portlet.header-portal-javascript",
 			"com.liferay.portlet.header-portlet-css",
 			"com.liferay.portlet.header-portlet-javascript",
-			"com.liferay.portlet.icon",
-			"com.liferay.portlet.instanceable",
+			"com.liferay.portlet.icon", "com.liferay.portlet.instanceable",
 			"com.liferay.portlet.layout-cacheable",
 			"com.liferay.portlet.maximize-edit",
 			"com.liferay.portlet.maximize-help",
@@ -99,22 +97,15 @@ public class PortletPropertyValidator {
 			"com.liferay.portlet.show-portlet-inactive",
 			"com.liferay.portlet.show-portlet-inactive",
 			"com.liferay.portlet.single-page-application",
-			"com.liferay.portlet.struts-path",
-			"com.liferay.portlet.system",
+			"com.liferay.portlet.struts-path", "com.liferay.portlet.system",
 			"com.liferay.portlet.use-default-template",
 			"com.liferay.portlet.user-principal-strategy",
-			"com.liferay.portlet.virtual-path",
-			"javax.portlet.description",
-			"javax.portlet.display-name",
-			"javax.portlet.expiration-cache",
-			"javax.portlet.info.keywords",
-			"javax.portlet.info.short-title",
-			"javax.portlet.info.title",
-			"javax.portlet.portlet-mode",
-			"javax.portlet.portlet-name",
-			"javax.portlet.preferences",
-			"javax.portlet.resource-bundle",
-			"javax.portlet.security-role-ref",
+			"com.liferay.portlet.virtual-path", "javax.portlet.description",
+			"javax.portlet.display-name", "javax.portlet.expiration-cache",
+			"javax.portlet.info.keywords", "javax.portlet.info.short-title",
+			"javax.portlet.info.title", "javax.portlet.portlet-mode",
+			"javax.portlet.portlet-name", "javax.portlet.preferences",
+			"javax.portlet.resource-bundle", "javax.portlet.security-role-ref",
 			"javax.portlet.supported-processing-event",
 			"javax.portlet.supported-public-render-parameter",
 			"javax.portlet.supported-publishing-event",

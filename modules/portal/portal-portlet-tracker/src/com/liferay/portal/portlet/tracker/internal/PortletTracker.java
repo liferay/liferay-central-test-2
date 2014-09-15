@@ -241,7 +241,6 @@ public class PortletTracker
 			serviceReference.getProperty("javax.portlet.display-name"),
 			portletName);
 
-
 		portletModel.setDisplayName(displayName);
 
 		Class<?> portletClazz = portlet.getClass();
@@ -286,23 +285,6 @@ public class PortletTracker
 			bundleContext.ungetService(serviceReference);
 
 			return null;
-		}
-	}
-
-	private void warnPorletProperties(
-		String portletName, ServiceReference<Portlet> serviceReference) {
-
-		if (!_log.isWarnEnabled()) {
-			return;
-		}
-
-		List<String> invalidKeys = _portletPropertyValidator.validate(
-			serviceReference.getPropertyKeys());
-
-		for (String invalidKey : invalidKeys) {
-			_log.warn(
-				"Invalid property " + invalidKey + " for portlet " +
-					portletName);
 		}
 	}
 
@@ -1256,6 +1238,23 @@ public class PortletTracker
 
 	protected void unsetServletContext(ServletContext servletContext) {
 		_servletContext = null;
+	}
+
+	private void warnPorletProperties(
+		String portletName, ServiceReference<Portlet> serviceReference) {
+
+		if (!_log.isWarnEnabled()) {
+			return;
+		}
+
+		List<String> invalidKeys = _portletPropertyValidator.validate(
+			serviceReference.getPropertyKeys());
+
+		for (String invalidKey : invalidKeys) {
+			_log.warn(
+				"Invalid property " + invalidKey + " for portlet " +
+					portletName);
+		}
 	}
 
 	private static final String _NAMESPACE = "com.liferay.portlet.";
