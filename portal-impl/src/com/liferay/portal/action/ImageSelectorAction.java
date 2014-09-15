@@ -74,6 +74,8 @@ public class ImageSelectorAction extends JSONAction {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		try {
+			JSONObject imageJSONObject = JSONFactoryUtil.createJSONObject();
+
 			String fileName = uploadPortletRequest.getFileName(
 				"imageSelectorFileName");
 
@@ -89,15 +91,15 @@ public class ImageSelectorAction extends JSONAction {
 				StringUtil.randomString() + fileName, tempFolderName,
 				inputStream, MimeTypesUtil.getContentType(fileName));
 
-			JSONObject imageJSONObject = JSONFactoryUtil.createJSONObject();
-
 			imageJSONObject.put("fileEntryId", fileEntry.getFileEntryId());
+
 			imageJSONObject.put(
 				"url",
 				PortletFileRepositoryUtil.getPortletFileEntryURL(
 					themeDisplay, fileEntry, StringPool.BLANK));
 
 			jsonObject.put("image", imageJSONObject);
+
 			jsonObject.put("success", Boolean.TRUE);
 		}
 		catch (Exception e) {
