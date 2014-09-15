@@ -33,7 +33,7 @@ public class PortletPropertyValidator {
 			return true;
 		}
 
-		if (ArrayUtil.contains(validKeys, key)) {
+		if (ArrayUtil.contains(_validKeys, key)) {
 			return true;
 		}
 
@@ -52,7 +52,7 @@ public class PortletPropertyValidator {
 		return invalid;
 	}
 
-	private final String[] validKeys = new String[] {
+	private final String[] _validKeys = new String[] {
 		"com.liferay.portlet.action-timeout",
 		"com.liferay.portlet.active",
 		"com.liferay.portlet.add-default-resource",
