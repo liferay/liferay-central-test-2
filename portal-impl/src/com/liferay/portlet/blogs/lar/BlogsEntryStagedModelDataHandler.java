@@ -240,7 +240,7 @@ public class BlogsEntryStagedModelDataHandler
 					PortletDataContext.REFERENCE_TYPE_WEAK);
 
 			for (Element attachmentElement : attachmentElements) {
-				InputStream inputStream = _getSmallImageInputStream(
+				InputStream inputStream = getSmallImageInputStream(
 					portletDataContext, attachmentElement);
 
 				if (inputStream != null) {
@@ -338,15 +338,15 @@ public class BlogsEntryStagedModelDataHandler
 		}
 	}
 
-	private InputStream _getSmallImageInputStream(
+	protected InputStream getSmallImageInputStream(
 		PortletDataContext portletDataContext, Element attachmentElement) {
+
+		InputStream inputStream = null;
 
 		String path = attachmentElement.attributeValue("path");
 
 		FileEntry fileEntry = (FileEntry)portletDataContext.getZipEntryAsObject(
 			path);
-
-		InputStream inputStream = null;
 
 		String binPath = attachmentElement.attributeValue("bin-path");
 
