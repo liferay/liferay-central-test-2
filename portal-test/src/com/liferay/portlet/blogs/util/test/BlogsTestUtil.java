@@ -132,38 +132,34 @@ public class BlogsTestUtil {
 			boolean allowTrackbacks = true;
 			String[] trackbacks = new String[0];
 
-			ImageSelector smallImageSelector = null;
+			ImageSelector imageSelector = null;
 
 			if (smallImage) {
-				String smallImageFileName = "image.jpg";
-
 				Class<?> clazz = BlogsTestUtil.class;
 
 				ClassLoader classLoader = clazz.getClassLoader();
 
-				InputStream smallImageInputStream =
+				InputStream inputStream =
 					classLoader.getResourceAsStream(
 						"com/liferay/portal/util/dependencies/test.jpg");
 
-				String smallImageURL = StringPool.BLANK;
-
-				FileEntry smallImageFileEntry = null;
+				FileEntry fileEntry = null;
 
 				try {
-					smallImageFileEntry = TempFileUtil.getTempFile(
+					fileEntry = TempFileUtil.getTempFile(
 						serviceContext.getScopeGroupId(), userId,
-						smallImageFileName, BlogsEntry.class.getName());
+						"image.jpg", BlogsEntry.class.getName());
 				}
 				catch (Exception e) {
-					smallImageFileEntry = TempFileUtil.addTempFile(
+					fileEntry = TempFileUtil.addTempFile(
 						serviceContext.getScopeGroupId(), userId,
-						smallImageFileName, BlogsEntry.class.getName(),
-						smallImageInputStream,
-						MimeTypesUtil.getContentType(smallImageFileName));
+						"image.jpg", BlogsEntry.class.getName(),
+						inputStream,
+						MimeTypesUtil.getContentType("image.jpg"));
 				}
 
-				smallImageSelector = new ImageSelector(
-					smallImageFileEntry.getFileEntryId(), smallImageURL);
+				imageSelector = new ImageSelector(
+					fileEntry.getFileEntryId(), StringPool.BLANK);
 			}
 
 			serviceContext = (ServiceContext)serviceContext.clone();
@@ -175,7 +171,7 @@ public class BlogsTestUtil {
 				userId, title, subtitle, description, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-				smallImageSelector, serviceContext);
+				imageSelector, serviceContext);
 
 			if (approved) {
 				return updateStatus(entry, serviceContext);
