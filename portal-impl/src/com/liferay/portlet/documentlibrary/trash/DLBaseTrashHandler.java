@@ -129,8 +129,7 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 
 	@Override
 	public String getRootContainerModelTitle(
-			long containerModelId, Locale locale)
-		throws PortalException {
+		long containerModelId, Locale locale) {
 
 		return LanguageUtil.get(locale, "home");
 	}

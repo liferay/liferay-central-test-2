@@ -187,8 +187,7 @@ public class MBCategoryTrashHandler extends BaseTrashHandler {
 
 	@Override
 	public String getRootContainerModelTitle(
-			long containerModelId, Locale locale)
-		throws PortalException {
+		long containerModelId, Locale locale) {
 
 		return LanguageUtil.get(locale, "home");
 	}

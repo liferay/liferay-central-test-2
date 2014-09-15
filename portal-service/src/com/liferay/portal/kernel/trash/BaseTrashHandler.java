@@ -140,6 +140,9 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public String getContainerModelName(long classPK) throws PortalException {
 		return StringPool.BLANK;
@@ -236,6 +239,9 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return getContainerModelClassName(0);
 	}
 
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public long getRootContainerModelId(long classPK) throws PortalException {
 		return 0;
@@ -246,6 +252,9 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public List<ContainerModel> getRootContainerModels(long groupId)
 		throws PortalException {
@@ -258,6 +267,9 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return 0;
 	}
 
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public String getRootContainerModelTitle(
 			long containerModelId, Locale locale)
