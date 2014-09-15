@@ -1486,7 +1486,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #renamePage(long, long,
 	 *             String, String, boolean, ServiceContext)}
-	 **/
+	 */
+	@Deprecated
 	@Override
 	public void movePage(
 			long userId, long nodeId, String title, String newTitle,
@@ -1497,8 +1498,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #renamePage(
-	 *             long, long, String, String, ServiceContext)}
+	 * @deprecated As of 7.0.0, replaced by {@link #renamePage(long, long,
+	 *             String, String, ServiceContext)}
 	 */
 	@Deprecated
 	@Override
@@ -1560,8 +1561,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link #movePageFromTrash(long,
-	 *             long, String, long, String)}
-	 **/
+	 *             long, String, long, String)} *
+	 */
 	@Deprecated
 	@Override
 	public WikiPage movePageFromTrash(
