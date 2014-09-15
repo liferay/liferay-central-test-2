@@ -83,11 +83,11 @@ public class QueryConfig implements Serializable {
 		String[] highlightFieldNames = (String[])_attributes.get(
 			_HIGHLIGHT_FIELD_NAMES);
 
-		if (highlightFieldNames == null) {
-			return StringPool.EMPTY_ARRAY;
+		if (highlightFieldNames != null) {
+			return highlightFieldNames;
 		}
 
-		return highlightFieldNames;
+		return StringPool.EMPTY_ARRAY;
 	}
 
 	public int getHighlightFragmentSize() {
@@ -135,11 +135,11 @@ public class QueryConfig implements Serializable {
 		String[] selectedFieldNames = (String[])_attributes.get(
 			_SELECTED_FIELD_NAMES);
 
-		if (selectedFieldNames == null) {
-			return StringPool.EMPTY_ARRAY;
+		if (selectedFieldNames != null) {
+			return selectedFieldNames;
 		}
 
-		return selectedFieldNames;
+		return StringPool.EMPTY_ARRAY;
 	}
 
 	public boolean isAllFieldsSelected() {
