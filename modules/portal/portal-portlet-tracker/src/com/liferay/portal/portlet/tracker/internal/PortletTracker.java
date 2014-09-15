@@ -218,6 +218,8 @@ public class PortletTracker
 		ServiceReference<Portlet> serviceReference, Portlet portlet,
 		String portletName, String portletId) {
 
+		warnPorletProperties(portletName, serviceReference);
+
 		Bundle bundle = serviceReference.getBundle();
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
@@ -239,7 +241,6 @@ public class PortletTracker
 			serviceReference.getProperty("javax.portlet.display-name"),
 			portletName);
 
-		warnPorletProperties(portletName, serviceReference);
 
 		portletModel.setDisplayName(displayName);
 
