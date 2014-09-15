@@ -78,7 +78,7 @@ AUI.add(
 						var browseImageControls = instance.one('.browse-image-controls');
 						var changeImageControls = instance.one('.change-image-controls');
 
-						var fileEntryId = event.imageData.id;
+						var fileEntryId = event.imageData.fileEntryId;
 						var fileEntryUrl = event.imageData.url;
 
 						fileEntryIdNode.val(fileEntryId);
@@ -150,7 +150,7 @@ AUI.add(
 							{
 								boundingBox: instance.rootNode,
 								dragAndDropArea: instance.rootNode,
-								fileFieldName: 'imageSelectorFile',
+								fileFieldName: 'imageSelectorFileName',
 								on: {
 									dragleave: A.bind('removeClass', instance.rootNode, CSS_DROP_ACTIVE),
 									dragover: A.bind('addClass', instance.rootNode, CSS_DROP_ACTIVE),

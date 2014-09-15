@@ -75,22 +75,23 @@ public class ImageSelectorAction extends JSONAction {
 
 		try {
 			String fileName = uploadPortletRequest.getFileName(
-				"imageSelectorFile");
+				"imageSelectorFileName");
+
+			Class<?> clazz = getClass();
+
+			String tempFolderName = clazz.getName();
+
 			InputStream inputStream = uploadPortletRequest.getFileAsStream(
-				"imageSelectorFile");
-
-			String tempImageFolderName = getClass().getName();
-
-			String uniqueTempFileName = StringUtil.randomString() + fileName;
-
+				"imageSelectorFileName");
+				
 			FileEntry fileEntry = TempFileUtil.addTempFile(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				uniqueTempFileName, tempImageFolderName, inputStream,
-				MimeTypesUtil.getContentType(fileName));
+				StringUtil.randomString() + fileName, tempFolderName,
+				inputStream, MimeTypesUtil.getContentType(fileName));
 
 			JSONObject imageJSONObject = JSONFactoryUtil.createJSONObject();
 
-			imageJSONObject.put("id", fileEntry.getFileEntryId());
+			imageJSONObject.put("fileEntryId", fileEntry.getFileEntryId());
 			imageJSONObject.put(
 				"url",
 				PortletFileRepositoryUtil.getPortletFileEntryURL(
