@@ -28,13 +28,13 @@ import org.junit.Test;
 public class ShoppingItemImplTest {
 
 	@Test
-	public void testShoppingItemBeanProperty_InfiniteStock() {
+	public void testInfiniteStock() {
 		ShoppingItemImpl shoppingItemImpl = new ShoppingItemImpl();
 
 		Object beanValue = BeanUtil.getProperty(
 			shoppingItemImpl, "infiniteStock");
 
-		boolean value = Convert.toBooleanValue(beanValue, false);
+		boolean value = Convert.toBooleanValue(beanValue);
 
 		Assert.assertFalse(value);
 
@@ -43,7 +43,7 @@ public class ShoppingItemImplTest {
 
 		beanValue = BeanUtil.getProperty(shoppingItemImpl, "infiniteStock");
 
-		value = Convert.toBooleanValue(beanValue, false);
+		value = Convert.toBooleanValue(beanValue);
 
 		Assert.assertTrue(value);
 	}
