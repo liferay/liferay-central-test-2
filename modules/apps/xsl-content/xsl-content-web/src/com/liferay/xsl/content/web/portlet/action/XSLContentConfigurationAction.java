@@ -18,18 +18,12 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -61,19 +55,17 @@ public class XSLContentConfigurationAction extends DefaultConfigurationAction {
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
-	protected boolean hasAllowedProtocol(
-		String xmlURL, String[] allowedProtocols) {
-
+	protected boolean hasAllowedProtocol(String xmlURL) {
 		try {
 			URL url = new URL(xmlURL);
 
 			String protocol = url.getProtocol();
 
-			if (ArrayUtil.contains(allowedProtocols, protocol)) {
+			if (ArrayUtil.contains(_PROTOCOLS, protocol)) {
 				return true;
 			}
 		}
-		catch (MalformedURLException e) {
+		catch (MalformedURLException murle) {
 			return false;
 		}
 
@@ -81,38 +73,28 @@ public class XSLContentConfigurationAction extends DefaultConfigurationAction {
 	}
 
 	protected void validateUrls(ActionRequest actionRequest) {
-		String xmlUrl = getParameter(actionRequest, "xmlUrl");
-		String xslUrl = getParameter(actionRequest, "xslUrl");
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String xmlUrl = getParameter(actionRequest, "xmlUrl");
 
 		xmlUrl = StringUtil.replace(
 			xmlUrl, "@portal_url@", themeDisplay.getPortalURL());
 
-		xslUrl = StringUtil.replace(
-			xslUrl, "@portal_url@", themeDisplay.getPortalURL());
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		Portlet xslPortlet = PortletLocalServiceUtil.getPortletById(
-			portletResource);
-
-		Map initParameters = xslPortlet.getInitParams();
-
-		String[] allowedProtocols = GetterUtil.getStringValues(
-			initParameters.get("allowed-protocols"), _ALLOWED_PROTOCOLS);
-
-		if (!hasAllowedProtocol(xmlUrl, allowedProtocols)) {
+		if (!hasAllowedProtocol(xmlUrl)) {
 			SessionErrors.add(actionRequest, "xmlUrl");
 		}
 
-		if (!hasAllowedProtocol(xslUrl, allowedProtocols)) {
+		String xslUrl = getParameter(actionRequest, "xslUrl");
+
+		xslUrl = StringUtil.replace(
+			xslUrl, "@portal_url@", themeDisplay.getPortalURL());
+
+		if (!hasAllowedProtocol(xslUrl)) {
 			SessionErrors.add(actionRequest, "xslUrl");
 		}
 	}
 
-	private static final String[] _ALLOWED_PROTOCOLS = {"http", "https"};
+	private static final String[] _PROTOCOLS = {"http", "https"};
 
 }
