@@ -11,7 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.portlet.shopping;
+package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 
@@ -25,7 +25,7 @@ import org.junit.Test;
 /**
  * @author Raymond Augé
  */
-public class ShoppingTest {
+public class ShoppingItemImplTest {
 
 	@Test
 	public void testShoppingItemBeanProperty_InfiniteStock() {
