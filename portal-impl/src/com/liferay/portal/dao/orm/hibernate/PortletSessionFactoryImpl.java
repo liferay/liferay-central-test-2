@@ -44,8 +44,8 @@ import org.springframework.beans.factory.BeanFactoryAware;
  * @author Shuyang Zhou
  * @author Alexander Chow
  */
-public class PortletSessionFactoryImpl extends SessionFactoryImpl
-	implements BeanFactoryAware {
+public class PortletSessionFactoryImpl
+	extends SessionFactoryImpl implements BeanFactoryAware {
 
 	@Override
 	public void closeSession(Session session) throws ORMException {
