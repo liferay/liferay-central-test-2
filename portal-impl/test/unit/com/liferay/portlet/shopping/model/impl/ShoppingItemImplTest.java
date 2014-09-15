@@ -31,21 +31,16 @@ public class ShoppingItemImplTest {
 	public void testInfiniteStock() {
 		ShoppingItemImpl shoppingItemImpl = new ShoppingItemImpl();
 
-		Object beanValue = BeanUtil.getProperty(
-			shoppingItemImpl, "infiniteStock");
-
-		boolean value = Convert.toBooleanValue(beanValue);
-
-		Assert.assertFalse(value);
+		Assert.assertFalse(
+			Convert.toBooleanValue(
+				BeanUtil.getProperty(shoppingItemImpl, "infiniteStock")));
 
 		shoppingItemImpl.setStockQuantity(
 			ShoppingItemImpl.STOCK_QUANTITY_INFINITE_STOCK);
 
-		beanValue = BeanUtil.getProperty(shoppingItemImpl, "infiniteStock");
-
-		value = Convert.toBooleanValue(beanValue);
-
-		Assert.assertTrue(value);
+		Assert.assertTrue(
+			Convert.toBooleanValue(
+				BeanUtil.getProperty(shoppingItemImpl, "infiniteStock")));
 	}
 
 }
