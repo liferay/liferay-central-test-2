@@ -22,8 +22,8 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 String className = ParamUtil.getString(request, "className");
 long classPK = ParamUtil.getLong(request, "classPK");
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectContainer");
 boolean rootContainerModelMovable = ParamUtil.getBoolean(request, "rootContainerModelMovable");
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectContainer");
 
 TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(className);
 
@@ -41,6 +41,12 @@ if (containerModel != null) {
 	containerModelId = containerModel.getContainerModelId();
 }
 
+String containerModelName = trashHandler.getContainerModelName(classPK);
+
+if (rootContainerModelMovable) {
+	containerModelName = trashHandler.getRootContainerModelName();
+}
+
 PortletURL containerURL = renderResponse.createRenderURL();
 
 containerURL.setParameter("struts_action", "/trash/view_container_model");
@@ -51,12 +57,6 @@ containerURL.setParameter("classPK", String.valueOf(classPK));
 containerURL.setParameter("containerModelClassName", containerModelClassName);
 
 TrashUtil.addContainerModelBreadcrumbEntries(request, renderResponse, containerModelClassName, containerModelId, containerURL);
-
-String containerModelName = trashHandler.getContainerModelName(classPK);
-
-if (rootContainerModelMovable) {
-	containerModelName = trashHandler.getRootContainerModelName();
-}
 %>
 
 <div class="alert alert-block">
@@ -115,8 +115,8 @@ if (rootContainerModelMovable) {
 
 			long curContainerModelId = curContainerModel.getContainerModelId();
 
-			containerURL.setParameter("containerModelId", String.valueOf(curContainerModelId));
 			containerURL.setParameter("containerModelClassName", curContainerModelTrashHandler.getClassName());
+			containerURL.setParameter("containerModelId", String.valueOf(curContainerModelId));
 			%>
 
 			<liferay-ui:search-container-column-text
