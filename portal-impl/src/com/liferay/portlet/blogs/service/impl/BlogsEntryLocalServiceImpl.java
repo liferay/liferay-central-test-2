@@ -183,7 +183,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (smallImage != null) {
 			smallImageFileEntryId = smallImage.getImageId();
 
-			isSmallImage = !smallImage.removeSmallImage();
+			isSmallImage = !smallImage.isRemoveSmallImage();
 
 			smallImageURL = smallImage.getImageURL();
 		}
@@ -1165,7 +1165,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 					tempSmallImageFileEntry.getFileEntryId());
 			}
 
-			isSmallImage = !smallImage.removeSmallImage();
+			isSmallImage = !smallImage.isRemoveSmallImage();
 			smallImageURL = smallImage.getImageURL();
 		}
 

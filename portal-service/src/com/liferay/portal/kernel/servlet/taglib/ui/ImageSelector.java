@@ -43,8 +43,8 @@ public class ImageSelector {
 		return _imageURL;
 	}
 
-	public boolean removeSmallImage() {
-		if ((getImageId() == 0) && Validator.isNull(getImageURL())) {
+	public boolean isRemoveSmallImage() {
+		if ((_imageId == 0) && Validator.isNull(_imageURL)) {
 			return true;
 		}
 

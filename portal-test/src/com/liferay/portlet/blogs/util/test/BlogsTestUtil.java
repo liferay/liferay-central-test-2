@@ -131,7 +131,7 @@ public class BlogsTestUtil {
 			boolean allowPingbacks = true;
 			boolean allowTrackbacks = true;
 			String[] trackbacks = new String[0];
-			String smallImageURL = StringPool.BLANK;
+
 			ImageSelector smallImageSelector = null;
 
 			if (smallImage) {
@@ -144,6 +144,8 @@ public class BlogsTestUtil {
 				InputStream smallImageInputStream =
 					classLoader.getResourceAsStream(
 						"com/liferay/portal/util/dependencies/test.jpg");
+
+				String smallImageURL = StringPool.BLANK;
 
 				FileEntry smallImageFileEntry = null;
 
