@@ -498,11 +498,17 @@ public class TrashImpl implements Trash {
 			long classPK, String paramName, PortletURL containerModelURL)
 		throws PortalException, PortletException {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		PortletURL portletURL = PortletURLUtil.clone(
 			containerModelURL, liferayPortletResponse);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		portletURL.setParameter("struts_action", "/trash/view");
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, LanguageUtil.get(themeDisplay.getLocale(), "recycle-bin"),
+			portletURL.toString());
 
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			className);
@@ -511,12 +517,6 @@ public class TrashImpl implements Trash {
 			trashHandler.getParentContainerModels(classPK);
 
 		Collections.reverse(containerModels);
-
-		portletURL.setParameter("struts_action", "/trash/view");
-
-		PortalUtil.addPortletBreadcrumbEntry(
-			request, LanguageUtil.get(themeDisplay.getLocale(), "recycle-bin"),
-			portletURL.toString());
 
 		for (ContainerModel containerModel : containerModels) {
 			TrashHandler containerModelTrashHandler =
