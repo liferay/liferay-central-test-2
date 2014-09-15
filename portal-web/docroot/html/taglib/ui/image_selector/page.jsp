@@ -39,7 +39,7 @@ if (fileEntryId != 0) {
 
 	<div class="browse-image-controls <%= (fileEntryId != 0) ? "hide" : StringPool.BLANK %>">
 		<div class="drag-drop-label">
-			<liferay-ui:message arguments="<%= validExtensions %>" key="drag-drop-images" />
+			<liferay-ui:message arguments="<%= validExtensions %>" key="drag-and-drop-images" />
 
 			<c:if test="<%= Validator.isNotNull(validExtensions) %>">
 				(<%= validExtensions %>)
