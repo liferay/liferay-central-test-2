@@ -203,8 +203,7 @@ public class BlogsEntryStagedModelDataHandler
 			if (Validator.isNotNull(entry.getSmallImageURL())) {
 				String smallImageURL =
 					ExportImportHelperUtil.replaceImportContentReferences(
-						portletDataContext, entry,
-						entry.getSmallImageURL());
+						portletDataContext, entry, entry.getSmallImageURL());
 
 				entry.setSmallImageURL(smallImageURL);
 			}
@@ -218,13 +217,13 @@ public class BlogsEntryStagedModelDataHandler
 				try {
 					inputStream = portletDataContext.getZipEntryAsInputStream(
 						smallImagePath);
-	
+
 					FileEntry fileEntry = TempFileUtil.addTempFile(
 						serviceContext.getScopeGroupId(), userId,
 						smallImageFileName, BlogsEntry.class.getName(),
 						inputStream,
 						MimeTypesUtil.getContentType(smallImageFileName));
-	
+
 					smallImageFileEntryId = fileEntry.getFileEntryId();
 				}
 				finally {
@@ -247,15 +246,13 @@ public class BlogsEntryStagedModelDataHandler
 					String path = attachmentElement.attributeValue("path");
 
 					FileEntry fileEntry =
-						(FileEntry)portletDataContext.getZipEntryAsObject(
-							path);
+						(FileEntry)portletDataContext.getZipEntryAsObject(path);
 
 					FileEntry smallImageFileEntry =
 						TempFileUtil.addTempFile(
 							serviceContext.getScopeGroupId(), userId,
-							fileEntry.getTitle(),
-							BlogsEntry.class.getName(), inputStream,
-							fileEntry.getMimeType());
+							fileEntry.getTitle(), BlogsEntry.class.getName(),
+							inputStream, fileEntry.getMimeType());
 
 					if (fileEntry != null) {
 						smallImageFileEntryId =
@@ -292,8 +289,7 @@ public class BlogsEntryStagedModelDataHandler
 					entry.getDescription(), entry.getContent(),
 					displayDateMonth, displayDateDay, displayDateYear,
 					displayDateHour, displayDateMinute, allowPingbacks,
-					allowTrackbacks, trackbacks, imageSelector,
-					serviceContext);
+					allowTrackbacks, trackbacks, imageSelector, serviceContext);
 			}
 			else {
 				importedEntry = BlogsEntryLocalServiceUtil.updateEntry(
@@ -308,10 +304,10 @@ public class BlogsEntryStagedModelDataHandler
 		else {
 			importedEntry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, entry.getTitle(), entry.getSubtitle(),
-				entry.getDescription(), entry.getContent(),
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, allowPingbacks,
-				allowTrackbacks, trackbacks, imageSelector, serviceContext);
+				entry.getDescription(), entry.getContent(), displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
+				imageSelector, serviceContext);
 		}
 
 		portletDataContext.importClassedModel(entry, importedEntry);

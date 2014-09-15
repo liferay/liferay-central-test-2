@@ -174,48 +174,44 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			displayDateMinute, user.getTimeZone(),
 			EntryDisplayDateException.class);
 
-		Date now = new Date();
-
+		boolean smallImage = false;
 		long smallImageFileEntryId = 0;
-		boolean isSmallImage = false;
 		String smallImageURL = null;
 
 		if (imageSelector != null) {
+			smallImage = !imageSelector.isRemoveSmallImage();
 			smallImageFileEntryId = imageSelector.getImageId();
-
-			isSmallImage = !imageSelector.isRemoveSmallImage();
-
 			smallImageURL = imageSelector.getImageURL();
 		}
-
-		validate(title, content, smallImageFileEntryId);
 
 		long entryId = counterLocalService.increment();
 
 		if (smallImageFileEntryId != 0) {
-			FileEntry tempSmallImageFileEntry =
+			FileEntry tempFileEntry =
 				PortletFileRepositoryUtil.getPortletFileEntry(
 					smallImageFileEntryId);
 
-			Folder smallImageFileEntryFolder =
-				PortletFileRepositoryUtil.addPortletFolder(
-					groupId, userId, PortletKeys.BLOGS,
-					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-					String.valueOf(entryId), serviceContext);
+			Folder folder = PortletFileRepositoryUtil.addPortletFolder(
+				groupId, userId, PortletKeys.BLOGS,
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(entryId), serviceContext);
 
-			FileEntry smallImageFileEntry =
+			FileEntry fileEntry =
 				PortletFileRepositoryUtil.addPortletFileEntry(
 					groupId, userId, BlogsEntry.class.getName(), entryId,
-					PortletKeys.BLOGS, smallImageFileEntryFolder.getFolderId(),
-					tempSmallImageFileEntry.getContentStream(),
-					tempSmallImageFileEntry.getTitle(),
-					tempSmallImageFileEntry.getMimeType(), false);
+					PortletKeys.BLOGS, folder.getFolderId(),
+					tempFileEntry.getContentStream(), tempFileEntry.getTitle(),
+					tempFileEntry.getMimeType(), false);
 
-			smallImageFileEntryId = smallImageFileEntry.getFileEntryId();
+			smallImageFileEntryId = fileEntry.getFileEntryId();
 
 			PortletFileRepositoryUtil.deletePortletFileEntry(
-				tempSmallImageFileEntry.getFileEntryId());
+				tempFileEntry.getFileEntryId());
 		}
+
+		Date now = new Date();
+
+		validate(title, content, smallImageFileEntryId);
 
 		BlogsEntry entry = blogsEntryPersistence.create(entryId);
 
@@ -235,7 +231,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setDisplayDate(displayDate);
 		entry.setAllowPingbacks(allowPingbacks);
 		entry.setAllowTrackbacks(allowTrackbacks);
-		entry.setSmallImage(isSmallImage);
+		entry.setSmallImage(smallImage);
 		entry.setSmallImageFileEntryId(smallImageFileEntryId);
 		entry.setSmallImageURL(smallImageURL);
 		entry.setStatus(WorkflowConstants.STATUS_DRAFT);
@@ -391,14 +387,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		imageLocalService.deleteImage(entry.getSmallImageId());
 
-		// Small Image File Entry
+		long smallImageFolderId = entry.getSmallImageFolderId();
 
-		long smallImageFileEntryFolderId =
-			entry.getSmallImageFolderId();
-
-		if (smallImageFileEntryFolderId != 0) {
-			PortletFileRepositoryUtil.deletePortletFolder(
-				smallImageFileEntryFolderId);
+		if (smallImageFolderId != 0) {
+			PortletFileRepositoryUtil.deletePortletFolder(smallImageFolderId);
 		}
 
 		// Subscriptions
@@ -1127,8 +1119,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
+		boolean smallImage = entry.isSmallImage();
 		long smallImageFileEntryId = 0;
-		boolean isSmallImage = entry.isSmallImage();
 		String smallImageURL = null;
 
 		if (imageSelector != null) {
@@ -1146,26 +1138,26 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 						entry.getSmallImageFileEntryId());
 				}
 
-				FileEntry tempSmallImageFileEntry =
+				FileEntry tempFileEntry =
 					PortletFileRepositoryUtil.getPortletFileEntry(
 						imageSelector.getImageId());
 
-				FileEntry smallImageFileEntry =
+				FileEntry fileEntry =
 					PortletFileRepositoryUtil.addPortletFileEntry(
 						entry.getGroupId(), userId, BlogsEntry.class.getName(),
 						entry.getEntryId(), PortletKeys.BLOGS,
 						DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-						tempSmallImageFileEntry.getContentStream(),
-						tempSmallImageFileEntry.getTitle(),
-						tempSmallImageFileEntry.getMimeType(), false);
+						tempFileEntry.getContentStream(),
+						tempFileEntry.getTitle(), tempFileEntry.getMimeType(),
+						false);
 
-				smallImageFileEntryId = smallImageFileEntry.getFileEntryId();
+				smallImageFileEntryId = fileEntry.getFileEntryId();
 
 				PortletFileRepositoryUtil.deletePortletFileEntry(
-					tempSmallImageFileEntry.getFileEntryId());
+					tempFileEntry.getFileEntryId());
 			}
 
-			isSmallImage = !imageSelector.isRemoveSmallImage();
+			smallImage = !imageSelector.isRemoveSmallImage();
 			smallImageURL = imageSelector.getImageURL();
 		}
 
@@ -1183,7 +1175,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setDisplayDate(displayDate);
 		entry.setAllowPingbacks(allowPingbacks);
 		entry.setAllowTrackbacks(allowTrackbacks);
-		entry.setSmallImage(isSmallImage);
+		entry.setSmallImage(smallImage);
 		entry.setSmallImageFileEntryId(smallImageFileEntryId);
 		entry.setSmallImageURL(smallImageURL);
 
@@ -1846,7 +1838,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			serviceContext, workflowContext);
 	}
 
-	protected void validate(String title, String content, long fileEntryId)
+	protected void validate(
+			String title, String content, long smallImageFileEntryId)
 		throws PortalException {
 
 		if (Validator.isNull(title)) {
@@ -1859,20 +1852,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String[] imageExtensions = PrefsPropsUtil.getStringArray(
 			PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
 
-		if (fileEntryId != 0) {
-			FileEntry smallImageFileEntry =
-				PortletFileRepositoryUtil.getPortletFileEntry(fileEntryId);
+		if (smallImageFileEntryId != 0) {
+			FileEntry fileEntry =
+				PortletFileRepositoryUtil.getPortletFileEntry(
+					smallImageFileEntryId);
 
 			boolean validSmallImageExtension = false;
 
 			for (String _imageExtension : imageExtensions) {
-				String smallImageFileEntryExtensionWithPeriod =
-					StringPool.PERIOD.concat(
-						smallImageFileEntry.getExtension());
-
 				if (StringPool.STAR.equals(_imageExtension) ||
 					_imageExtension.equals(
-						smallImageFileEntryExtensionWithPeriod)) {
+						StringPool.PERIOD + fileEntry.getExtension())) {
 
 					validSmallImageExtension = true;
 
@@ -1882,14 +1872,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			if (!validSmallImageExtension) {
 				throw new EntrySmallImageNameException(
-					"Invalid small image for file entry " + fileEntryId);
+					"Invalid small image for file entry " +
+						smallImageFileEntryId);
 			}
 
 			long smallImageMaxSize = PrefsPropsUtil.getLong(
 				PropsKeys.BLOGS_IMAGE_SMALL_MAX_SIZE);
 
 			if ((smallImageMaxSize > 0) &&
-				(smallImageFileEntry.getSize() > smallImageMaxSize)) {
+				(fileEntry.getSize() > smallImageMaxSize)) {
 
 				throw new EntrySmallImageSizeException();
 			}
