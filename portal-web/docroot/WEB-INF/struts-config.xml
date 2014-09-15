@@ -27,8 +27,6 @@
 
 		<action path="/portal/api/jsonws" forward="portal.api.jsonws" />
 
-		<action path="/portal/image_selector" type="com.liferay.portal.action.ImageSelectorAction" />
-
 		<action path="/portal/emoticons" forward="/portal/emoticons.jsp" />
 
 		<action path="/portal/error" forward="portal.error" />
@@ -38,6 +36,8 @@
 		<action path="/portal/extend_session" forward="/portal/extend_session.jsp" />
 
 		<action path="/portal/flash" forward="/portal/flash.jsp" />
+
+		<action path="/portal/image_selector" type="com.liferay.portal.action.ImageSelectorAction" />
 
 		<action path="/portal/j_login" forward="/portal/j_login.jsp" />
 
