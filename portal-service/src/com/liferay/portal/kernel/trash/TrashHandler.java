@@ -194,10 +194,8 @@ public interface TrashHandler {
 	/**
 	 * Returns the name of the container model (e.g. folder name).
 	 *
-	 * @return the name of the container model
-	 *
-	 *  @deprecated As of 7.0.0, replaced by {@link #getContainerModelName(
-	 *              long)}
+	 * @return     the name of the container model
+	 * @deprecated As of 7.0.0, replaced by {@link #getContainerModelName(long)}
 	 */
 	@Deprecated
 	public String getContainerModelName();

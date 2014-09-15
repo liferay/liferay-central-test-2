@@ -967,8 +967,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #restoreDependentsFromTrash(
-	 *             long, long)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #restoreDependentsFromTrash(long, long)}
 	 */
 	@Deprecated
 	@Override
