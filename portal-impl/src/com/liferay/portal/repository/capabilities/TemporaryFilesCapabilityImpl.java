@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -207,7 +208,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		String[] folderNames = folderPath.split(_PATTERN_SLASH);
+		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
 
 		Folder folder = null;
 
@@ -229,7 +230,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	private Folder _getFolders(long parentFolderId, String folderPath)
 		throws PortalException {
 
-		String[] folderNames = folderPath.split(_PATTERN_SLASH);
+		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
 
 		Folder folder = null;
 
@@ -247,8 +248,6 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		12 * 60 * 60 * 1000;
 
 	private static final String _FOLDER_NAME_TEMP = "temp";
-
-	private static final String _PATTERN_SLASH = Pattern.quote("/");
 
 	private static final String _PROPERTY_TEMPORARY_FILES_TIMEOUT =
 		"temporaryFilesTimeout";
