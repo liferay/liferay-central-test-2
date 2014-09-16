@@ -38,7 +38,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 /**
  * @author Iván Zaera
@@ -109,8 +108,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public List<FileEntry> getTemporaryFiles(
-			UUID callerUuid, String folderPath)
+	public List<FileEntry> getTemporaryFiles(UUID callerUuid, String folderPath)
 		throws PortalException {
 
 		try {
@@ -150,44 +148,6 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			String.valueOf(temporaryFilesTimeout));
 	}
 
-	protected Folder addTempFolder(
-			long userId, UUID callerUuid, String folderPath)
-		throws PortalException {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		Folder tempFolder = addFolder(
-			userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			_FOLDER_NAME_TEMP, serviceContext);
-
-		Folder folder = addFolder(
-			userId, tempFolder.getFolderId(), callerUuid.toString(),
-			serviceContext);
-
-		return addFolders(
-			userId, folder.getFolderId(), folderPath, serviceContext);
-	}
-
-	protected Folder getTempFolder(UUID callerUuid, String folderPath)
-		throws PortalException {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		Folder tempFolder = getFolder(
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, _FOLDER_NAME_TEMP);
-
-		Folder folder = getFolder(
-			tempFolder.getFolderId(), callerUuid.toString());
-
-		return getDeepestFolder(folder.getFolderId(), folderPath);
-	}
-
 	protected Folder addFolder(
 			long userId, long parentFolderId, String folderName,
 			ServiceContext serviceContext)
@@ -221,10 +181,25 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		return folder;
 	}
 
-	protected Folder getFolder(long parentFolderId, String folderName)
+	protected Folder addTempFolder(
+			long userId, UUID callerUuid, String folderPath)
 		throws PortalException {
 
-		return _localRepository.getFolder(parentFolderId, folderName);
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		Folder tempFolder = addFolder(
+			userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			_FOLDER_NAME_TEMP, serviceContext);
+
+		Folder folder = addFolder(
+			userId, tempFolder.getFolderId(), callerUuid.toString(),
+			serviceContext);
+
+		return addFolders(
+			userId, folder.getFolderId(), folderPath, serviceContext);
 	}
 
 	protected Folder getDeepestFolder(long parentFolderId, String folderPath)
@@ -243,6 +218,28 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		return folder;
 	}
 
+	protected Folder getFolder(long parentFolderId, String folderName)
+		throws PortalException {
+
+		return _localRepository.getFolder(parentFolderId, folderName);
+	}
+
+	protected Folder getTempFolder(UUID callerUuid, String folderPath)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		Folder tempFolder = getFolder(
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, _FOLDER_NAME_TEMP);
+
+		Folder folder = getFolder(
+			tempFolder.getFolderId(), callerUuid.toString());
+
+		return getDeepestFolder(folder.getFolderId(), folderPath);
+	}
 
 	private static final String _FOLDER_NAME_TEMP = "temp";
 

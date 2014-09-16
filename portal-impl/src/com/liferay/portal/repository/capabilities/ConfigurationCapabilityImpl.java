@@ -79,7 +79,7 @@ public class ConfigurationCapabilityImpl implements ConfigurationCapability {
 		Class<? extends Capability> owner, String key) {
 
 		Class<?> clazz = owner.getClass();
-		
+
 		return clazz.getName() + StringPool.POUND + key;
 	}
 
