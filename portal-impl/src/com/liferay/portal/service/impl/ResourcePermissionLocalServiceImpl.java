@@ -619,14 +619,14 @@ public class ResourcePermissionLocalServiceImpl
 
 		if (firstResource.getScope() != ResourceConstants.SCOPE_INDIVIDUAL) {
 			throw new IllegalArgumentException(
-				"The first resource must be individual scope");
+				"The first resource must be an individual scope");
 		}
 
 		Resource lastResource = resources.get(size - 1);
 
 		if (lastResource.getScope() != ResourceConstants.SCOPE_COMPANY) {
 			throw new IllegalArgumentException(
-				"The last resource must be company scope");
+				"The last resource must be a company scope");
 		}
 
 		// See LPS-47464
