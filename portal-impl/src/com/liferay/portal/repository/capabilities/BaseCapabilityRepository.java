@@ -23,10 +23,10 @@ import com.liferay.portal.kernel.util.ClassUtil;
 /**
  * @author Adolfo Pérez
  */
-public abstract class BaseCapabilityRepository<T> extends BaseCapabilityProvider
+public abstract class BaseCapabilityRepository<R> extends BaseCapabilityProvider
 	implements DocumentRepository, CapabilityRegistry {
 
-	public BaseCapabilityRepository(T repository) {
+	public BaseCapabilityRepository(R repository) {
 		_repository = repository;
 	}
 
@@ -49,7 +49,7 @@ public abstract class BaseCapabilityRepository<T> extends BaseCapabilityProvider
 		return this;
 	}
 
-	public T getRepository() {
+	public R getRepository() {
 		return _repository;
 	}
 
@@ -63,6 +63,6 @@ public abstract class BaseCapabilityRepository<T> extends BaseCapabilityProvider
 			getRepositoryId());
 	}
 
-	private T _repository;
+	private R _repository;
 
 }
