@@ -159,15 +159,15 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		Folder tempFolder = _addFolder(
+		Folder tempFolder = addFolder(
 			userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			_FOLDER_NAME_TEMP, serviceContext);
 
-		Folder callerFolder = _addFolder(
+		Folder callerFolder = addFolder(
 			userId, tempFolder.getFolderId(), callerUuid.toString(),
 			serviceContext);
 
-		return _addFolders(
+		return addFolders(
 			userId, callerFolder.getFolderId(), folderPath, serviceContext);
 	}
 
@@ -179,22 +179,22 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		Folder tempFolder = _getFolder(
+		Folder tempFolder = getFolder(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, _FOLDER_NAME_TEMP);
 
-		Folder callerFolder = _getFolder(
+		Folder callerFolder = getFolder(
 			tempFolder.getFolderId(), callerUuid.toString());
 
 		return getDeepestFolder(callerFolder.getFolderId(), folderPath);
 	}
 
-	private Folder _addFolder(
+	protected Folder addFolder(
 			long userId, long parentFolderId, String folderName,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		try {
-			return _getFolder(parentFolderId, folderName);
+			return getFolder(parentFolderId, folderName);
 		}
 		catch (NoSuchFolderException nsfe) {
 			return _localRepository.addFolder(
@@ -203,7 +203,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		}
 	}
 
-	private Folder _addFolders(
+	protected Folder addFolders(
 			long userId, long folderId, String folderPath,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -213,7 +213,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
 
 		for (String folderName : folderNames) {
-			folder = _addFolder(userId, folderId, folderName, serviceContext);
+			folder = addFolder(userId, folderId, folderName, serviceContext);
 
 			folderId = folder.getFolderId();
 		}
@@ -221,13 +221,13 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		return folder;
 	}
 
-	private Folder _getFolder(long parentFolderId, String folderName)
+	protected Folder getFolder(long parentFolderId, String folderName)
 		throws PortalException {
 
 		return _localRepository.getFolder(parentFolderId, folderName);
 	}
 
-	private Folder getDeepestFolder(long parentFolderId, String folderPath)
+	protected Folder getDeepestFolder(long parentFolderId, String folderPath)
 		throws PortalException {
 
 		Folder folder = null;
