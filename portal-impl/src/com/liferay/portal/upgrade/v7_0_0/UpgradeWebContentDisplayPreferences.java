@@ -26,7 +26,7 @@ import javax.portlet.PortletPreferences;
  * @author Eudaldo Alonso
  */
 public class UpgradeWebContentDisplayPreferences
-		extends BaseUpgradePortletPreferences {
+	extends BaseUpgradePortletPreferences {
 
 	@Override
 	protected String[] getPortletIds() {
