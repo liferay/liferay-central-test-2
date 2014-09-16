@@ -163,12 +163,12 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			_FOLDER_NAME_TEMP, serviceContext);
 
-		Folder callerFolder = addFolder(
+		Folder folder = addFolder(
 			userId, tempFolder.getFolderId(), callerUuid.toString(),
 			serviceContext);
 
 		return addFolders(
-			userId, callerFolder.getFolderId(), folderPath, serviceContext);
+			userId, folder.getFolderId(), folderPath, serviceContext);
 	}
 
 	protected Folder getTempFolder(UUID callerUuid, String folderPath)
@@ -182,10 +182,10 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		Folder tempFolder = getFolder(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, _FOLDER_NAME_TEMP);
 
-		Folder callerFolder = getFolder(
+		Folder folder = getFolder(
 			tempFolder.getFolderId(), callerUuid.toString());
 
-		return getDeepestFolder(callerFolder.getFolderId(), folderPath);
+		return getDeepestFolder(folder.getFolderId(), folderPath);
 	}
 
 	protected Folder addFolder(
