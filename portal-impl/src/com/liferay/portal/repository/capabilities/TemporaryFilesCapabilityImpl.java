@@ -94,9 +94,6 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			_localRepository.deleteFileEntry(fileEntry.getFileEntryId());
 		}
 		catch (NoSuchModelException nsme) {
-
-			// ignore
-
 		}
 	}
 
