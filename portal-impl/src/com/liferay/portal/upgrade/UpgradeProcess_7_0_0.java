@@ -35,7 +35,7 @@ import com.liferay.portal.upgrade.v7_0_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeShopping;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeShoppingPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeSubscription;
-import com.liferay.portal.upgrade.v7_0_0.UpgradeWebContentDisplayPreferences;
+import com.liferay.portal.upgrade.v7_0_0.UpgradeJournalDisplayPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeWiki;
 
 /**
@@ -62,13 +62,13 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradeExpando.class);
 		upgrade(UpgradeLanguagePreferences.class);
 		upgrade(UpgradeJournal.class);
+		upgrade(UpgradeJournalDisplayPreferences.class);
 		upgrade(UpgradeLock.class);
 		upgrade(UpgradeMessageBoards.class);
 		upgrade(UpgradeRepositoryEntry.class);
 		upgrade(UpgradeShopping.class);
 		upgrade(UpgradeShoppingPreferences.class);
 		upgrade(UpgradeSubscription.class);
-		upgrade(UpgradeWebContentDisplayPreferences.class);
 		upgrade(UpgradeWiki.class);
 
 		// This must be the last upgrade process. Otherwise, upgrades based on

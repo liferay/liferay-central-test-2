@@ -25,7 +25,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Eudaldo Alonso
  */
-public class UpgradeWebContentDisplayPreferences
+public class UpgradeJournalDisplayPreferences
 	extends BaseUpgradePortletPreferences {
 
 	@Override
