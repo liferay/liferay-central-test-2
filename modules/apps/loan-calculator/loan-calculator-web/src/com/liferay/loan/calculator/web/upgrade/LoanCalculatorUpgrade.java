@@ -52,7 +52,6 @@ public class LoanCalculatorUpgrade {
 
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
-
 				return new String[][] {
 					new String[] {
 						"61",
@@ -61,10 +60,11 @@ public class LoanCalculatorUpgrade {
 					}
 				};
 			}
+
 		};
 
 		_releaseLocalService.updateRelease(
-			LoanCalculatorPortlet.class.getName(),
+			"com.liferay.loan.calculator.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
 			false);
 	}
