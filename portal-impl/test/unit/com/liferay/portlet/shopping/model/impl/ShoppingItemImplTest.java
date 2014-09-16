@@ -11,9 +11,8 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
+package com.liferay.portlet.shopping.model.impl;
 
 import jodd.bean.BeanUtil;
 
