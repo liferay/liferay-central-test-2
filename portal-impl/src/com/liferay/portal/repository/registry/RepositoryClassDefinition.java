@@ -106,7 +106,7 @@ public class RepositoryClassDefinition
 	public void setRepositoryFactory(RepositoryFactory repositoryFactory) {
 		if (_repositoryFactory != null) {
 			throw new IllegalStateException(
-				"Repository factory is already set");
+				"Repository factory already exists");
 		}
 
 		_repositoryFactory = repositoryFactory;
