@@ -179,10 +179,12 @@ public class BrowserSnifferImplTest {
 
 	@Test
 	public void testParseVersion() throws IOException {
+		Class<?> clazz = getClass();
+
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(
 					new InputStreamReader(
-						getClass().getResourceAsStream(
+						clazz.getResourceAsStream(
 							"dependencies/user_agents.csv")))) {
 
 			String line = null;
