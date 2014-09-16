@@ -58,11 +58,11 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 	@Override
 	public FileEntry addTemporaryFile(
-			UUID invokerUuid, String folderPath, String fileName, long userId,
+			UUID callerUuid, String folderPath, String fileName, long userId,
 			String mimeType, InputStream inputStream)
 		throws PortalException {
 
-		Folder folder = addTempFolder(userId, invokerUuid, folderPath);
+		Folder folder = addTempFolder(userId, callerUuid, folderPath);
 
 		File file = null;
 
@@ -92,12 +92,12 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 	@Override
 	public void deleteTemporaryFile(
-			UUID invokerUuid, String folderPath, String fileName)
+			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException {
 
 		try {
 			FileEntry fileEntry = getTemporaryFile(
-				invokerUuid, folderPath, fileName);
+				callerUuid, folderPath, fileName);
 
 			_localRepository.deleteFileEntry(fileEntry.getFileEntryId());
 		}
@@ -110,21 +110,21 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 	@Override
 	public FileEntry getTemporaryFile(
-			UUID invokerUuid, String folderPath, String fileName)
+			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException {
 
-		Folder folder = getTempFolder(invokerUuid, folderPath);
+		Folder folder = getTempFolder(callerUuid, folderPath);
 
 		return _localRepository.getFileEntry(folder.getFolderId(), fileName);
 	}
 
 	@Override
 	public List<FileEntry> getTemporaryFiles(
-			UUID invokerUuid, String folderPath)
+			UUID callerUuid, String folderPath)
 		throws PortalException {
 
 		try {
-			Folder folder = getTempFolder(invokerUuid, folderPath);
+			Folder folder = getTempFolder(callerUuid, folderPath);
 
 			return _localRepository.getRepositoryFileEntries(
 				folder.getFolderId(), 0, QueryUtil.ALL_POS, null);
@@ -161,7 +161,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	protected Folder addTempFolder(
-			long userId, UUID invokerUuid, String folderPath)
+			long userId, UUID callerUuid, String folderPath)
 		throws PortalException {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -173,15 +173,15 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			FOLDER_NAME_TEMP, serviceContext);
 
-		Folder invokerFolder = _addFolder(
-			userId, tempFolder.getFolderId(), invokerUuid.toString(),
+		Folder callerFolder = _addFolder(
+			userId, tempFolder.getFolderId(), callerUuid.toString(),
 			serviceContext);
 
 		return _addFolders(
-			userId, invokerFolder.getFolderId(), folderPath, serviceContext);
+			userId, callerFolder.getFolderId(), folderPath, serviceContext);
 	}
 
-	protected Folder getTempFolder(UUID invokerUuid, String folderPath)
+	protected Folder getTempFolder(UUID callerUuid, String folderPath)
 		throws PortalException {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -192,10 +192,10 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		Folder tempFolder = _getFolder(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, FOLDER_NAME_TEMP);
 
-		Folder invokerFolder = _getFolder(
-			tempFolder.getFolderId(), invokerUuid.toString());
+		Folder callerFolder = _getFolder(
+			tempFolder.getFolderId(), callerUuid.toString());
 
-		return _getFolders(invokerFolder.getFolderId(), folderPath);
+		return _getFolders(callerFolder.getFolderId(), folderPath);
 	}
 
 	private Folder _addFolder(
