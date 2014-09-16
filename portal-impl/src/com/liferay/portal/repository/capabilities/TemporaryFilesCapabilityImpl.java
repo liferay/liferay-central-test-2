@@ -127,15 +127,15 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		ConfigurationCapability configurationCapability =
 			_localRepository.getCapability(ConfigurationCapability.class);
 
-		String minimumLifespanMilliseconds =
+		String temporaryFilesTimeout =
 			configurationCapability.getProperty(
 				getClass(), _PROPERTY_TEMPORARY_FILES_TIMEOUT);
 
-		if (minimumLifespanMilliseconds == null) {
+		if (temporaryFilesTimeout == null) {
 			return _TEMPORARY_FILES_TIMEOUT_DEFAULT;
 		}
 
-		return GetterUtil.getLong(minimumLifespanMilliseconds);
+		return GetterUtil.getLong(temporaryFilesTimeout);
 	}
 
 	@Override
