@@ -190,7 +190,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 	}
 
 	private void _setupCommonCapabilities(
-		BaseCapabilityRepository baseCapabilityRepository,
+		BaseCapabilityRepository<?> baseCapabilityRepository,
 		RepositoryClassDefinition repositoryClassDefinition) {
 
 		if (!baseCapabilityRepository.isCapabilityProvided(

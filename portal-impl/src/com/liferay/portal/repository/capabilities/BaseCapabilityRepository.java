@@ -53,6 +53,7 @@ public abstract class BaseCapabilityRepository<T> extends BaseCapabilityProvider
 		return _repository;
 	}
 
+	@Override
 	public abstract long getRepositoryId();
 
 	@Override
