@@ -62,7 +62,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 			repositoryClassDefinition.createCapabilityLocalRepository(
 				repositoryId);
 
-		_setupCommonCapabilities(
+		setupCommonCapabilities(
 			capabilityLocalRepository, repositoryClassDefinition);
 
 		return capabilityLocalRepository;
@@ -80,10 +80,10 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		CapabilityRepository capabilityRepository =
 			repositoryClassDefinition.createCapabilityRepository(repositoryId);
 
-		_setupCommonCapabilities(
+		setupCommonCapabilities(
 			capabilityRepository, repositoryClassDefinition);
 
-		_setupCapabilityRepositoryCapabilities(capabilityRepository);
+		setupCapabilityRepositoryCapabilities(capabilityRepository);
 
 		return capabilityRepository;
 	}
@@ -175,7 +175,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		return _repositoryLocalService;
 	}
 
-	private void _setupCapabilityRepositoryCapabilities(
+	protected void setupCapabilityRepositoryCapabilities(
 		CapabilityRepository capabilityRepository) {
 
 		Repository repository = capabilityRepository.getRepository();
@@ -189,7 +189,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		}
 	}
 
-	private void _setupCommonCapabilities(
+	protected void setupCommonCapabilities(
 		BaseCapabilityRepository<?> baseCapabilityRepository,
 		RepositoryClassDefinition repositoryClassDefinition) {
 
