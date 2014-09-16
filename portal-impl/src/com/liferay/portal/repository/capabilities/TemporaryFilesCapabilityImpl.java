@@ -208,9 +208,9 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
-
 		Folder folder = null;
+
+		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
 
 		for (String folderName : folderNames) {
 			folder = _addFolder(userId, folderId, folderName, serviceContext);
@@ -230,9 +230,9 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	private Folder _getFolders(long parentFolderId, String folderPath)
 		throws PortalException {
 
-		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
-
 		Folder folder = null;
+
+		String[] folderNames = StringUtil.split(folderPath, StringPool.SLASH);
 
 		for (String folderName : folderNames) {
 			folder = _localRepository.getFolder(parentFolderId, folderName);
