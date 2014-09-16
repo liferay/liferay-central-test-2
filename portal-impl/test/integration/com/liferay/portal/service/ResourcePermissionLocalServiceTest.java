@@ -60,15 +60,17 @@ public class ResourcePermissionLocalServiceTest {
 
 			List<Resource> resources = new ArrayList<Resource>();
 
-			Resource first = new ResourceImpl();
-			first.setScope(ResourceConstants.SCOPE_GROUP);
+			Resource firstResource = new ResourceImpl();
 
-			resources.add(first);
+			firstResource.setScope(ResourceConstants.SCOPE_GROUP);
 
-			Resource last = new ResourceImpl();
-			last.setScope(ResourceConstants.SCOPE_COMPANY);
+			resources.add(firstResource);
 
-			resources.add(last);
+			Resource lastResource = new ResourceImpl();
+
+			lastResource.setScope(ResourceConstants.SCOPE_COMPANY);
+
+			resources.add(lastResource);
 
 			long[] roleIds = new long[1];
 
@@ -83,7 +85,7 @@ public class ResourcePermissionLocalServiceTest {
 			}
 			catch (IllegalArgumentException iae) {
 				Assert.assertEquals(
-					"The first resource must be individual scope",
+					"The first resource must be an individual scope",
 					iae.getMessage());
 			}
 		}
@@ -92,15 +94,17 @@ public class ResourcePermissionLocalServiceTest {
 		public void shouldFailIfLastResourceIsNotCompany() throws Exception {
 			List<Resource> resources = new ArrayList<Resource>();
 
-			Resource first = new ResourceImpl();
-			first.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			Resource firstResource = new ResourceImpl();
 
-			resources.add(first);
+			firstResource.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 
-			Resource last = new ResourceImpl();
-			last.setScope(ResourceConstants.SCOPE_GROUP);
+			resources.add(firstResource);
 
-			resources.add(last);
+			Resource lastResource = new ResourceImpl();
+
+			lastResource.setScope(ResourceConstants.SCOPE_GROUP);
+
+			resources.add(lastResource);
 
 			long[] roleIds = new long[1];
 
@@ -115,15 +119,13 @@ public class ResourcePermissionLocalServiceTest {
 			}
 			catch (IllegalArgumentException iae) {
 				Assert.assertEquals(
-					"The last resource must be company scope",
+					"The last resource must be a company scope",
 					iae.getMessage());
 			}
 		}
 
 		@Test
-		public void shouldFailIfResourceListIsSmallerThanTwo()
-			throws Exception {
-
+		public void shouldFailIfResourcesIsLessThanTwo() throws Exception {
 			List<Resource> resources = new ArrayList<Resource>();
 
 			resources.add(new ResourceImpl());
