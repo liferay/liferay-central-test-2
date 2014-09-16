@@ -44,14 +44,6 @@ import java.util.regex.Pattern;
  */
 public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
-	public static final long DEFAULT_TEMPORARY_FILES_TIMEOUT =
-		12 * 60 * 60 * 1000;
-
-	public static final String FOLDER_NAME_TEMP = "temp";
-
-	public static final String PROPERTY_TEMPORARY_FILES_TIMEOUT =
-		"temporaryFilesTimeout";
-
 	public TemporaryFilesCapabilityImpl(LocalRepository localRepository) {
 		_localRepository = localRepository;
 	}
@@ -141,10 +133,10 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 		String minimumLifespanMilliseconds =
 			configurationCapability.getProperty(
-				getClass(), PROPERTY_TEMPORARY_FILES_TIMEOUT);
+				getClass(), _PROPERTY_TEMPORARY_FILES_TIMEOUT);
 
 		if (minimumLifespanMilliseconds == null) {
-			return DEFAULT_TEMPORARY_FILES_TIMEOUT;
+			return _DEFAULT_TEMPORARY_FILES_TIMEOUT;
 		}
 
 		return GetterUtil.getLong(minimumLifespanMilliseconds);
@@ -156,7 +148,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 			_localRepository.getCapability(ConfigurationCapability.class);
 
 		configurationCapability.setProperty(
-			getClass(), PROPERTY_TEMPORARY_FILES_TIMEOUT,
+			getClass(), _PROPERTY_TEMPORARY_FILES_TIMEOUT,
 			String.valueOf(temporaryFilesTimeout));
 	}
 
@@ -171,7 +163,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 		Folder tempFolder = _addFolder(
 			userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			FOLDER_NAME_TEMP, serviceContext);
+			_FOLDER_NAME_TEMP, serviceContext);
 
 		Folder callerFolder = _addFolder(
 			userId, tempFolder.getFolderId(), callerUuid.toString(),
@@ -190,7 +182,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		serviceContext.setAddGuestPermissions(true);
 
 		Folder tempFolder = _getFolder(
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, FOLDER_NAME_TEMP);
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, _FOLDER_NAME_TEMP);
 
 		Folder callerFolder = _getFolder(
 			tempFolder.getFolderId(), callerUuid.toString());
@@ -253,7 +245,16 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		return folder;
 	}
 
+
+	private static final long _DEFAULT_TEMPORARY_FILES_TIMEOUT =
+		12 * 60 * 60 * 1000;
+
+	private static final String _FOLDER_NAME_TEMP = "temp";
+
 	private static final String _PATTERN_SLASH = Pattern.quote("/");
+
+	private static final String _PROPERTY_TEMPORARY_FILES_TIMEOUT =
+		"temporaryFilesTimeout";
 
 	private LocalRepository _localRepository;
 
