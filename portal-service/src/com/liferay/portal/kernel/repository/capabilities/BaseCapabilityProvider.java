@@ -56,8 +56,7 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 
 		if (_supportedCapabilities.containsKey(capabilityClass)) {
 			throw new IllegalStateException(
-				"Capability " + capabilityClass.getName() + " has been "+
-					"already added");
+				"Capability " + capabilityClass.getName() + " already exists");
 		}
 
 		_supportedCapabilities.put(capabilityClass, capability);
