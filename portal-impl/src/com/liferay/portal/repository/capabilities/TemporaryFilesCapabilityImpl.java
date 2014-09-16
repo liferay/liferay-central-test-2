@@ -185,7 +185,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		Folder callerFolder = _getFolder(
 			tempFolder.getFolderId(), callerUuid.toString());
 
-		return _getFolders(callerFolder.getFolderId(), folderPath);
+		return getDeepestFolder(callerFolder.getFolderId(), folderPath);
 	}
 
 	private Folder _addFolder(
@@ -227,7 +227,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		return _localRepository.getFolder(parentFolderId, folderName);
 	}
 
-	private Folder _getFolders(long parentFolderId, String folderPath)
+	private Folder getDeepestFolder(long parentFolderId, String folderPath)
 		throws PortalException {
 
 		Folder folder = null;
