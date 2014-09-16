@@ -50,7 +50,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 	@Override
 	public FileEntry addTemporaryFile(
-			UUID callerUuid, String folderPath, String fileName, long userId,
+			UUID callerUuid, long userId, String folderPath, String fileName,
 			String mimeType, InputStream inputStream)
 		throws PortalException {
 
