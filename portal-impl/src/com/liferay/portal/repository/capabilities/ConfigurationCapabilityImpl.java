@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.DocumentRepository;
 import com.liferay.portal.kernel.repository.capabilities.Capability;
 import com.liferay.portal.kernel.repository.capabilities.ConfigurationCapability;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.service.RepositoryLocalServiceUtil;
@@ -77,7 +78,9 @@ public class ConfigurationCapabilityImpl implements ConfigurationCapability {
 	private String _getUniqueKey(
 		Class<? extends Capability> owner, String key) {
 
-		return owner.getClass().getName() + "#" + key;
+		Class<?> clazz = owner.getClass();
+		
+		return clazz.getName() + StringPool.POUND + key;
 	}
 
 	private DocumentRepository _repository;
