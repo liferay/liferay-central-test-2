@@ -134,7 +134,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 				getClass(), _PROPERTY_TEMPORARY_FILES_TIMEOUT);
 
 		if (minimumLifespanMilliseconds == null) {
-			return _DEFAULT_TEMPORARY_FILES_TIMEOUT;
+			return _TEMPORARY_FILES_TIMEOUT_DEFAULT;
 		}
 
 		return GetterUtil.getLong(minimumLifespanMilliseconds);
@@ -244,13 +244,13 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 
-	private static final long _DEFAULT_TEMPORARY_FILES_TIMEOUT =
-		12 * 60 * 60 * 1000;
-
 	private static final String _FOLDER_NAME_TEMP = "temp";
 
 	private static final String _PROPERTY_TEMPORARY_FILES_TIMEOUT =
 		"temporaryFilesTimeout";
+
+	private static final long _TEMPORARY_FILES_TIMEOUT_DEFAULT =
+		12 * 60 * 60 * 1000;
 
 	private LocalRepository _localRepository;
 
