@@ -87,7 +87,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public void deleteExpiredTemporaryFiles() throws PortalException {
+	public void deleteExpiredTemporaryFiles() {
 	}
 
 	@Override
