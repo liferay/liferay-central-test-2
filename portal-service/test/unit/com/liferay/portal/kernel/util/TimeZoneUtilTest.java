@@ -28,7 +28,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 
 /**
- * @author Will Newbury
+ * @author William Newbury
  */
 public class TimeZoneUtilTest {
 
@@ -51,7 +51,6 @@ public class TimeZoneUtilTest {
 	@Test
 	public void testGetInstance() throws NoSuchMethodException {
 		TimeZoneUtil timeZoneUtil1 = TimeZoneUtil.getInstance();
-
 		TimeZoneUtil timeZoneUtil2 = TimeZoneUtil.getInstance();
 
 		Assert.assertNotSame(timeZoneUtil1, timeZoneUtil2);
