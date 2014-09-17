@@ -773,8 +773,9 @@ public class JavadocFormatter {
 	}
 
 	private void _format(String fileName) throws Exception {
-		String originalContent = new String(Files.readAllBytes(
-			Paths.get(_inputDir + fileName)), StringPool.UTF8);
+		String originalContent = new String(
+			Files.readAllBytes(Paths.get(_inputDir + fileName)),
+			StringPool.UTF8);
 
 		if (fileName.endsWith("JavadocFormatter.java") ||
 			fileName.endsWith("SourceFormatter.java") ||
