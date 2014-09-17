@@ -112,7 +112,19 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		}
 
 		@Test(expected = DuplicateFileException.class)
-		public void shouldFailIfDuplicateNameAndExtension2InFolder()
+		public void shouldFailIfDuplicateNameAndExtensionInFolder1()
+			throws Exception {
+
+			addFileEntry(
+				group.getGroupId(), parentFolder.getFolderId(), _FILE_NAME,
+				_STRIPPED_FILE_NAME);
+			addFileEntry(
+				group.getGroupId(), parentFolder.getFolderId(), _FILE_NAME,
+				_FILE_NAME);
+		}
+
+		@Test(expected = DuplicateFileException.class)
+		public void shouldFailIfDuplicateNameAndExtensionInFolder2()
 			throws Exception {
 
 			addFileEntry(
@@ -124,7 +136,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		}
 
 		@Test(expected = DuplicateFileException.class)
-		public void shouldFailIfDuplicateNameAndExtension3InFolder()
+		public void shouldFailIfDuplicateNameAndExtensionInFolder3()
 			throws Exception {
 
 			addFileEntry(
@@ -133,18 +145,6 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			addFileEntry(
 				group.getGroupId(), parentFolder.getFolderId(),
 				_STRIPPED_FILE_NAME, _FILE_NAME);
-		}
-
-		@Test(expected = DuplicateFileException.class)
-		public void shouldFailIfDuplicateNameAndExtensionInFolder()
-			throws Exception {
-
-			addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), _FILE_NAME,
-				_STRIPPED_FILE_NAME);
-			addFileEntry(
-				group.getGroupId(), parentFolder.getFolderId(), _FILE_NAME,
-				_FILE_NAME);
 		}
 
 		@Test(expected = DuplicateFileException.class)
