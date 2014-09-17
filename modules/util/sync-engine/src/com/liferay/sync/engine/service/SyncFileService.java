@@ -193,8 +193,6 @@ public class SyncFileService {
 
 		// Local sync file
 
-		syncFile.setUiEvent(SyncFile.UI_EVENT_UPDATED_LOCAL);
-
 		update(syncFile);
 
 		// Remote sync file
@@ -217,8 +215,6 @@ public class SyncFileService {
 		throws Exception {
 
 		// Local sync file
-
-		syncFile.setUiEvent(SyncFile.UI_EVENT_UPDATED_LOCAL);
 
 		update(syncFile);
 
@@ -244,8 +240,6 @@ public class SyncFileService {
 		throws Exception {
 
 		// Local sync file
-
-		syncFile.setUiEvent(SyncFile.UI_EVENT_UPDATED_LOCAL);
 
 		update(syncFile);
 
@@ -650,7 +644,6 @@ public class SyncFileService {
 		syncFile.setChecksum(targetChecksum);
 		syncFile.setFilePathName(filePath.toString());
 		syncFile.setName(name);
-		syncFile.setUiEvent(SyncFile.UI_EVENT_UPDATED_LOCAL);
 
 		update(syncFile);
 
