@@ -359,6 +359,7 @@ public class RemoteSPITest {
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
+
 		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 				unsyncByteArrayOutputStream)) {
 
