@@ -903,12 +903,15 @@ AUI.add(
 							}
 						).render();
 
-						instance.datePicker.calendar.set('strings', {
-							next: Liferay.Language.get('next'),
-							none: Liferay.Language.get('none'),
-							previous: Liferay.Language.get('previous'),
-							today: Liferay.Language.get('today')
-						});
+						instance.datePicker.calendar.set(
+							'strings',
+							{
+								next: Liferay.Language.get('next'),
+								none: Liferay.Language.get('none'),
+								previous: Liferay.Language.get('previous'),
+								today: Liferay.Language.get('today')
+							}
+						);
 					},
 
 					getPropertyModel: function() {

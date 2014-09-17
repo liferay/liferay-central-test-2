@@ -184,10 +184,13 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 		}
 	).render('#<portlet:namespace /><%= HtmlUtil.escapeJS(facet.getFieldId()) %>PlaceHolder');
 
-	dateSelection.set('strings', {
-		next: '<liferay-ui:message key="next" />',
-		none: '<liferay-ui:message key="none" />',
-		previous: '<liferay-ui:message key="previous" />',
-		today: '<liferay-ui:message key="today" />'
-	});
+	dateSelection.set(
+		'strings',
+		{
+			next: '<liferay-ui:message key="next" />',
+			none: '<liferay-ui:message key="none" />',
+			previous: '<liferay-ui:message key="previous" />',
+			today: '<liferay-ui:message key="today" />'
+		}
+	);
 </aui:script>
