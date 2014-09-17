@@ -475,7 +475,7 @@ public class SyncFileService {
 	}
 
 	public static SyncFile updateFileSyncFile(
-			Path filePath, long syncAccountId, SyncFile syncFile, boolean force)
+			Path filePath, long syncAccountId, SyncFile syncFile)
 		throws Exception {
 
 		// Local sync file
@@ -514,7 +514,7 @@ public class SyncFileService {
 
 		if (syncFile.getState() != SyncFile.STATE_ERROR) {
 			FileEventUtil.updateFile(
-				filePath, syncAccountId, syncFile, force, deltaFilePath, name,
+				filePath, syncAccountId, syncFile, deltaFilePath, name,
 				sourceChecksum, sourceFileName, sourceVersion, targetChecksum);
 		}
 

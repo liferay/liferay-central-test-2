@@ -208,7 +208,7 @@ public class FileEventUtil {
 	}
 
 	public static void updateFile(
-			Path filePath, long syncAccountId, SyncFile syncFile, boolean force,
+			Path filePath, long syncAccountId, SyncFile syncFile,
 			Path deltaFilePath, String name, String sourceChecksum,
 			String sourceFileName, String sourceVersion, String targetChecksum)
 		throws IOException {
@@ -225,7 +225,7 @@ public class FileEventUtil {
 		parameters.put("syncFile", syncFile);
 		parameters.put("title", name);
 
-		if (sourceChecksum.equals(targetChecksum) && !force) {
+		if (sourceChecksum.equals(targetChecksum)) {
 			parameters.put("-file", null);
 		}
 		else {
