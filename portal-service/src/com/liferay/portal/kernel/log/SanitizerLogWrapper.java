@@ -35,12 +35,14 @@ public class SanitizerLogWrapper extends LogWrapper {
 			return log;
 		}
 
-		SanitizerLogWrapper sanitizerLog = new SanitizerLogWrapper(
-			((SanitizerLogWrapper)log).getWrappedLog());
+		SanitizerLogWrapper sanitizerLogWrapper = (SanitizerLogWrapper)log;
 
-		sanitizerLog._allowCRLF = true;
+		sanitizerLogWrapper = new SanitizerLogWrapper(
+			sanitizerLogWrapper.getWrappedLog());
 
-		return sanitizerLog;
+		sanitizerLogWrapper._allowCRLF = true;
+
+		return sanitizerLogWrapper;
 	}
 
 	public static void init() {
