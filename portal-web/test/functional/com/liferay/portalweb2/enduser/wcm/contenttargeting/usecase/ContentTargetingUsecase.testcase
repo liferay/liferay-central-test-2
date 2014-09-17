@@ -58,7 +58,7 @@
 
 		<execute macro="WebContent#addWithCategoryCP">
 			<var name="categoryName" value="Female Users" />
-			<var name="vocabularyName" value="User Segment (Global)" />
+			<var name="vocabularyName" value="User Segment" />
 			<var name="webContentContent" value="Web Content targeted to a User Segment" />
 			<var name="webContentTitle" value="Targeted Web Content Title" />
 		</execute>
@@ -205,6 +205,7 @@
 
 		<execute macro="WebContent#addWithCategoryCP">
 			<var name="categoryName" value="Female Users" />
+			<var name="userSegmentDetailTitle" value="User Segment (Global)" />
 			<var name="vocabularyName" value="User Segment" />
 			<var name="webContentContent" value="Web Content targeted to a User Segment" />
 			<var name="webContentTitle" value="Targeted Web Content Title" />
@@ -244,6 +245,7 @@
 
 		<execute macro="WebContent#addWithCategoryCP">
 			<var name="categoryName" value="Female Users" />
+			<var name="userSegmentDetailTitle" value="User Segment (Site Name)" />
 			<var name="vocabularyName" value="User Segment" />
 			<var name="webContentContent" value="Web Content targeted to a User Segment" />
 			<var name="webContentTitle" value="Targeted Web Content Title" />
