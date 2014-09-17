@@ -750,12 +750,12 @@ public abstract class BaseDB implements DB {
 			ClassLoaderUtil.setContextClassLoader(classLoader);
 		}
 
-		StringBundler sb = new StringBundler();
-
 		// Trim insert statements because it breaks MySQL Query Browser
 
+		StringBundler sb = new StringBundler();
+
 		try (UnsyncBufferedReader unsyncBufferedReader =
-			new UnsyncBufferedReader(new UnsyncStringReader(template))) {
+				new UnsyncBufferedReader(new UnsyncStringReader(template))) {
 
 			String line = null;
 
@@ -854,10 +854,10 @@ public abstract class BaseDB implements DB {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler();
-
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new FileReader(new File(fileName)))) {
+
+			StringBundler sb = new StringBundler();
 
 			String line = null;
 
@@ -875,9 +875,9 @@ public abstract class BaseDB implements DB {
 					}
 				}
 			}
-		}
 
-		return sb.toString();
+			return sb.toString();
+		}
 	}
 
 	protected String removeBooleanIndexes(String sqlDir, String data)
@@ -889,10 +889,10 @@ public abstract class BaseDB implements DB {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler();
-
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(data))) {
+
+			StringBundler sb = new StringBundler();
 
 			String line = null;
 
@@ -932,16 +932,16 @@ public abstract class BaseDB implements DB {
 					sb.append("\n");
 				}
 			}
-		}
 
-		return sb.toString();
+			return sb.toString();
+		}
 	}
 
 	protected String removeInserts(String data) throws IOException {
-		StringBundler sb = new StringBundler();
-
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(data))) {
+
+			StringBundler sb = new StringBundler();
 
 			String line = null;
 
@@ -953,16 +953,16 @@ public abstract class BaseDB implements DB {
 					sb.append("\n");
 				}
 			}
-		}
 
-		return sb.toString();
+			return sb.toString();
+		}
 	}
 
 	protected String removeLongInserts(String data) throws IOException {
-		StringBundler sb = new StringBundler();
-
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(data))) {
+
+			StringBundler sb = new StringBundler();
 
 			String line = null;
 
@@ -974,9 +974,10 @@ public abstract class BaseDB implements DB {
 					sb.append("\n");
 				}
 			}
+
+			return sb.toString();
 		}
 
-		return sb.toString();
 	}
 
 	protected String removeNull(String content) {

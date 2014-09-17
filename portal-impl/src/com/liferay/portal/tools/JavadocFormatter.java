@@ -1876,15 +1876,15 @@ public class JavadocFormatter {
 
 		StringBundler sb = new StringBundler();
 
-		boolean begin = false;
-		boolean firstLine = true;
-		String linePrefix = key + "=";
-
-		String line = null;
-
 		try (UnsyncBufferedReader unsyncBufferedReader = 
 				new UnsyncBufferedReader(
 					new FileReader(_languagePropertiesFile))) {
+
+			boolean begin = false;
+			boolean firstLine = true;
+			String linePrefix = key + "=";
+
+			String line = null;
 
 			while ((line = unsyncBufferedReader.readLine()) != null) {
 				if (line.equals(StringPool.BLANK)) {
