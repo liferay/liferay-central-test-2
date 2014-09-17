@@ -116,11 +116,8 @@ public class SanitizerLogWrapperTest {
 	}
 
 	@Test
-	public void testAllowCRLFCharacters() {
+	public void testAllowCRLF() {
 		Exception exception = new NullPointerException();
-		String warningPrefix =
-			"SanitizerLogWrapper warning: Following message contains CRLF " +
-				"characters\n";
 
 		char[] _expectedMessageCharsWithCRLF =
 			new char[_expectedMessageChars.length];
@@ -157,13 +154,17 @@ public class SanitizerLogWrapperTest {
 			for (LoggingEvent loggingEvent : loggingEvents) {
 				String message = loggingEvent.getRenderedMessage();
 
-				Assert.assertTrue(message.startsWith(warningPrefix));
+				Assert.assertTrue(
+					message.startsWith(SanitizerLogWrapper.CRLF_WARNING));
+					
+				int sanitizedMessageCharsLength =
+					message.length() - SanitizerLogWrapper.CRLF_WARNING.length();
 
 				char[] sanitizedMessageChars =
-					new char[message.length() - warningPrefix.length()];
+					new char[sanitizedMessageCharsLength];
 
 				message.getChars(
-					warningPrefix.length(), message.length(),
+					SanitizerLogWrapper.CRLF_WARNING.length(), message.length(),
 					sanitizedMessageChars, 0);
 
 				Assert.assertArrayEquals(
