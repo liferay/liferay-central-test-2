@@ -171,7 +171,7 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 				throw new UnsupportedOperationException(
 					"Unsupported field " + field.getName());
 			}
-			
+
 			Operator operator = _filter.getOperator();
 
 			Object value = _filter.getValue();

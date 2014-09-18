@@ -442,7 +442,8 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		finally {
 			if (tempFileEntry != null) {
-				TempFileEntryUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
+				TempFileEntryUtil.deleteTempFileEntry(
+					tempFileEntry.getFileEntryId());
 			}
 		}
 	}

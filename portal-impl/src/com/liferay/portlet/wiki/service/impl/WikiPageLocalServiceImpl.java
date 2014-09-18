@@ -731,7 +731,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long groupId, long userId, String fileName, String tempFolderName)
 		throws PortalException {
 
-		TempFileEntryUtil.deleteTempFileEntry(groupId, userId, tempFolderName, fileName);
+		TempFileEntryUtil.deleteTempFileEntry(
+			groupId, userId, tempFolderName, fileName);
 	}
 
 	@Override

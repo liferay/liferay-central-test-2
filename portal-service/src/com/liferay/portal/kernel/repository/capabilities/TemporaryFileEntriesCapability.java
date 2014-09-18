@@ -38,12 +38,12 @@ public interface TemporaryFileEntriesCapability extends Capability {
 			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException;
 
-	public FileEntry getTemporaryFileEntries(
-			UUID callerUuid, String folderPath, String fileName)
-		throws PortalException;
-
 	public List<FileEntry> getTemporaryFileEntries(
 			UUID callerUuid, String folderPath)
+		throws PortalException;
+
+	public FileEntry getTemporaryFileEntries(
+			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException;
 
 	public long getTemporaryFileEntriesTimeout();

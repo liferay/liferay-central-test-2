@@ -116,16 +116,6 @@ public class TemporaryFileEntriesCapabilityImpl
 	}
 
 	@Override
-	public FileEntry getTemporaryFileEntries(
-			UUID callerUuid, String folderPath, String fileName)
-		throws PortalException {
-
-		Folder folder = getTempFolder(callerUuid, folderPath);
-
-		return _localRepository.getFileEntry(folder.getFolderId(), fileName);
-	}
-
-	@Override
 	public List<FileEntry> getTemporaryFileEntries(
 			UUID callerUuid, String folderPath)
 		throws PortalException {
@@ -140,6 +130,16 @@ public class TemporaryFileEntriesCapabilityImpl
 		catch (NoSuchModelException nsme) {
 			return Collections.emptyList();
 		}
+	}
+
+	@Override
+	public FileEntry getTemporaryFileEntries(
+			UUID callerUuid, String folderPath, String fileName)
+		throws PortalException {
+
+		Folder folder = getTempFolder(callerUuid, folderPath);
+
+		return _localRepository.getFileEntry(folder.getFolderId(), fileName);
 	}
 
 	@Override

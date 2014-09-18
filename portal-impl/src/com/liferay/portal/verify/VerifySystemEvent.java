@@ -70,7 +70,7 @@ public class VerifySystemEvent extends VerifyProcess {
 				systemEvent.getExtraData());
 
 			if (extraDataJSONObject.has("uuid") ||
-			   !extraDataJSONObject.has("version")) {
+				!extraDataJSONObject.has("version")) {
 
 				continue;
 			}

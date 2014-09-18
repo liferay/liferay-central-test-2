@@ -270,7 +270,8 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		}
 		finally {
 			if (tempFileEntry != null) {
-				TempFileEntryUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
+				TempFileEntryUtil.deleteTempFileEntry(
+					tempFileEntry.getFileEntryId());
 			}
 		}
 	}

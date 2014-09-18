@@ -24,6 +24,20 @@ import java.util.Date;
  */
 public interface BulkOperationCapability extends Capability {
 
+	public void execute(
+			Filter<?> filter, RepositoryModelOperation repositoryModelOperation)
+		throws PortalException;
+
+	public void execute(RepositoryModelOperation repositoryModelOperation)
+		throws PortalException;
+
+	public interface Field<T> {
+
+		public interface CreateDate extends Field<Date> {
+		}
+
+	}
+
 	public class Filter<T> {
 
 		public Filter(
@@ -56,19 +70,5 @@ public interface BulkOperationCapability extends Capability {
 		LT, LE, GT, GE, EQ
 
 	}
-
-	public interface Field<T> {
-
-		public interface CreateDate extends Field<Date> {
-		}
-
-	}
-
-	public void execute(
-			Filter<?> filter, RepositoryModelOperation repositoryModelOperation)
-		throws PortalException;
-
-	public void execute(RepositoryModelOperation repositoryModelOperation)
-		throws PortalException;
 
 }
