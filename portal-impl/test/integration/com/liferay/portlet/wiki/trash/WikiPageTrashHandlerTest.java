@@ -753,7 +753,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Test
 	public void testRestorePageToADifferentNode() throws Exception {
-		WikiPage[] pages = WikiTestUtil.addPageWithChildAndRedirectPage(
+		WikiPage[] pages = WikiTestUtil.addPageWithChildPageAndRedirectPage(
 			group.getGroupId(), _node.getNodeId());
 
 		WikiPage page = pages[0];
@@ -824,7 +824,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Test
 	public void testRestoreParentPageToADifferentNode() throws Exception {
-		WikiPage[] pages = WikiTestUtil.addPageWithChildAndRedirectPage(
+		WikiPage[] pages = WikiTestUtil.addPageWithChildPageAndRedirectPage(
 			group.getGroupId(), _node.getNodeId());
 
 		WikiPage page = pages[0];
@@ -842,15 +842,14 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			childPage.getResourcePrimKey(), newParentPage.getResourcePrimKey());
 
 		page = WikiPageLocalServiceUtil.getPage(page.getResourcePrimKey());
-		redirectPage = WikiPageLocalServiceUtil.getPage(
-			redirectPage.getResourcePrimKey());
 		childPage = WikiPageLocalServiceUtil.getPage(
 			childPage.getResourcePrimKey());
+		redirectPage = WikiPageLocalServiceUtil.getPage(
+			redirectPage.getResourcePrimKey());
 
 		Assert.assertEquals(_node.getNodeId(), page.getNodeId());
 		Assert.assertEquals(newNode.getNodeId(), childPage.getNodeId());
 		Assert.assertEquals(_node.getNodeId(), redirectPage.getNodeId());
-
 		Assert.assertEquals(
 			newParentPage.getTitle(), childPage.getParentTitle());
 	}

@@ -187,7 +187,7 @@ public class WikiTestUtil {
 		return new WikiPage[] {childPage, finalParentPage, initialParentPage};
 	}
 
-	public static WikiPage[] addPageWithChildAndRedirectPage(
+	public static WikiPage[] addPageWithChildPageAndRedirectPage(
 			long groupId, long nodeId)
 		throws Exception {
 
@@ -206,10 +206,10 @@ public class WikiTestUtil {
 			serviceContext);
 
 		WikiPage page = WikiPageLocalServiceUtil.getPage(nodeId, "B");
-		WikiPage redirectPage = WikiPageLocalServiceUtil.getPage(
-			nodeId, "TestPage");
 		WikiPage childPage = WikiPageLocalServiceUtil.getPage(
 			nodeId, "TestChildPage");
+		WikiPage redirectPage = WikiPageLocalServiceUtil.getPage(
+			nodeId, "TestPage");
 
 		return new WikiPage[]{page, childPage, redirectPage};
 	}
