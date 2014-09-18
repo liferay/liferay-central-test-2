@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.invitation.web.upgrade;
 
 import com.liferay.invitation.web.portlet.InvitationPortlet;
