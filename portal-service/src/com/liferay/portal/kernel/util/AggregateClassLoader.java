@@ -327,10 +327,13 @@ public class AggregateClassLoader extends ClassLoader {
 		try {
 			_FIND_CLASS_METHOD = ReflectionUtil.getDeclaredMethod(
 				ClassLoader.class, "findClass", String.class);
+
 			_GET_RESOURCE_METHOD = ReflectionUtil.getDeclaredMethod(
 				ClassLoader.class, "getResource", String.class);
+
 			_GET_RESOURCES_METHOD = ReflectionUtil.getDeclaredMethod(
 				ClassLoader.class, "getResources", String.class);
+
 			_LOAD_CLASS_METHOD = ReflectionUtil.getDeclaredMethod(
 				ClassLoader.class, "loadClass", String.class, boolean.class);
 		}

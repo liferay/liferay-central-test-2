@@ -68,23 +68,24 @@ public class ClearTimerThreadUtil {
 	private static Log _log = LogFactoryUtil.getLog(ClearTimerThreadUtil.class);
 
 	static {
+		Method clearMethod = null;
 		Field newTasksMayBeScheduledField = null;
 		Field queueField = null;
-		Method clearMethod = null;
+
 		boolean initialized = false;
 
 		try {
+			Class<?> taskQueueClass = Class.forName("java.util.TaskQueue");
+
+			clearMethod = ReflectionUtil.getDeclaredMethod(
+				taskQueueClass, "clear");
+
 			Class<?> timeThreadClass = Class.forName("java.util.TimerThread");
 
 			newTasksMayBeScheduledField = ReflectionUtil.getDeclaredField(
 				timeThreadClass, "newTasksMayBeScheduled");
 			queueField = ReflectionUtil.getDeclaredField(
 				timeThreadClass, "queue");
-
-			Class<?> taskQueueClass = Class.forName("java.util.TaskQueue");
-
-			clearMethod = ReflectionUtil.getDeclaredMethod(
-				taskQueueClass, "clear");
 
 			initialized = true;
 		}
@@ -94,9 +95,12 @@ public class ClearTimerThreadUtil {
 			}
 		}
 
-		_NEW_TASKS_MAY_BE_SCHEDULED_FIELD = newTasksMayBeScheduledField;
-		_QUEUE_FIELD = queueField;
 		_CLEAR_METHOD = clearMethod;
+
+		_NEW_TASKS_MAY_BE_SCHEDULED_FIELD = newTasksMayBeScheduledField;
+
+		_QUEUE_FIELD = queueField;
+
 		_INITIALIZED = initialized;
 	}
 
