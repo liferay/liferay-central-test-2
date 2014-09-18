@@ -61,7 +61,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ActionCommand.class
 )
-public class ViewAction implements ActionCommand {
+public class ViewActionCommand implements ActionCommand {
 
 	@Override
 	public boolean processCommand(
