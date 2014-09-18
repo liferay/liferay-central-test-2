@@ -18,7 +18,6 @@
 
 	<dependencies defaultconf="default">
 		<dependency name="org.osgi.core" org="org.osgi" rev="5.0.0" />
-
 		<dependency conf="test->default" name="arquillian-container-felix-embedded" org="org.jboss.arquillian.container" rev="2.1.0.CR15" />
 		<dependency conf="test->default" name="arquillian-deployment-generator-bnd" org="com.liferay.arquillian" rev="latest.integration" />
 		<dependency conf="test->default" name="arquillian-junit-container" org="org.jboss.arquillian.junit" rev="1.1.2.Final" />
