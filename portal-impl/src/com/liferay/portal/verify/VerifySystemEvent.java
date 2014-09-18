@@ -69,8 +69,8 @@ public class VerifySystemEvent extends VerifyProcess {
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
 				systemEvent.getExtraData());
 
-			if (!extraDataJSONObject.has("version") ||
-				extraDataJSONObject.has("uuid")) {
+			if (extraDataJSONObject.has("uuid") ||
+			   !extraDataJSONObject.has("version")) {
 
 				continue;
 			}
