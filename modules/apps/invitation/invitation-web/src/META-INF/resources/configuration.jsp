@@ -18,7 +18,6 @@
 
 <%
 String emailMessageBody = portletPreferences.getValue("email.message.body", "");
-
 String emailMessageSubject = portletPreferences.getValue("email.message.subject", "");
 %>
 
