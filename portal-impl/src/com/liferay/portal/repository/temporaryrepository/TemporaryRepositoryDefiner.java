@@ -48,14 +48,13 @@ public class TemporaryRepositoryDefiner extends BaseRepositoryDefiner {
 
 		if (documentRepository instanceof LocalRepository) {
 			capabilityRegistry.addExportedCapability(
-				TemporaryFilesCapability.class,
-				new TemporaryFilesCapabilityImpl(
-					(LocalRepository)documentRepository));
-
-			capabilityRegistry.addExportedCapability(
 				BulkOperationCapability.class,
 				new LiferayBulkOperationCapability(
 					documentRepository.getRepositoryId()));
+			capabilityRegistry.addExportedCapability(
+				TemporaryFilesCapability.class,
+				new TemporaryFilesCapabilityImpl(
+					(LocalRepository)documentRepository));
 		}
 	}
 
