@@ -88,7 +88,7 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 		actionableDynamicQuery.performActions();
 	}
 
-	private static final Map<Class<? extends Field>, String> _fieldNames =
+	private static final Map<Class<? extends Field<?>>, String> _fieldNames =
 		new HashMap<>();
 
 	static {
@@ -163,7 +163,7 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 		}
 
 		protected void addFilterCriteria(DynamicQuery dynamicQuery) {
-			Class<? extends Field> field = _filter.getField();
+			Class<? extends Field<?>> field = _filter.getField();
 
 			String fieldName = _fieldNames.get(field);
 
