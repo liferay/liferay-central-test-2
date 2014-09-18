@@ -88,7 +88,7 @@ public class ImageSelectorAction extends JSONAction {
 
 			FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				StringUtil.randomString() + fileName, tempFolderName,
+				tempFolderName, StringUtil.randomString() + fileName,
 				inputStream, MimeTypesUtil.getContentType(fileName));
 
 			imageJSONObject.put("fileEntryId", fileEntry.getFileEntryId());

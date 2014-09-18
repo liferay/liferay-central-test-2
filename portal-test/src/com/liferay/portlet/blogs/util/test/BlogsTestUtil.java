@@ -152,8 +152,8 @@ public class BlogsTestUtil {
 				}
 				catch (Exception e) {
 					fileEntry = TempFileEntryUtil.addTempFileEntry(
-						serviceContext.getScopeGroupId(), userId, "image.jpg",
-						BlogsEntry.class.getName(), inputStream,
+						serviceContext.getScopeGroupId(), userId,
+						BlogsEntry.class.getName(), "image.jpg", inputStream,
 						MimeTypesUtil.getContentType("image.jpg"));
 				}
 

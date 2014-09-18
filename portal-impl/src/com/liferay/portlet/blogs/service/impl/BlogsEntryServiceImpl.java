@@ -96,7 +96,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
 				serviceContext.getScopeGroupId(), getUserId(),
-				smallImageFileName, BlogsEntry.class.getName(),
+				BlogsEntry.class.getName(), smallImageFileName,
 				smallImageInputStream,
 				MimeTypesUtil.getContentType(smallImageFileName));
 
@@ -471,7 +471,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 				FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
 					serviceContext.getScopeGroupId(), getUserId(),
-					smallImageFileName, BlogsEntry.class.getName(),
+					BlogsEntry.class.getName(), smallImageFileName,
 					smallImageInputStream,
 					MimeTypesUtil.getContentType(smallImageFileName));
 

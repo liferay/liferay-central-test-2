@@ -220,7 +220,7 @@ public class BlogsEntryStagedModelDataHandler
 
 					FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
 						serviceContext.getScopeGroupId(), userId,
-						smallImageFileName, BlogsEntry.class.getName(),
+						BlogsEntry.class.getName(), smallImageFileName,
 						inputStream,
 						MimeTypesUtil.getContentType(smallImageFileName));
 
@@ -251,7 +251,7 @@ public class BlogsEntryStagedModelDataHandler
 					FileEntry smallImageFileEntry =
 						TempFileEntryUtil.addTempFileEntry(
 							serviceContext.getScopeGroupId(), userId,
-							fileEntry.getTitle(), BlogsEntry.class.getName(),
+							BlogsEntry.class.getName(), fileEntry.getTitle(),
 							inputStream, fileEntry.getMimeType());
 
 					if (fileEntry != null) {

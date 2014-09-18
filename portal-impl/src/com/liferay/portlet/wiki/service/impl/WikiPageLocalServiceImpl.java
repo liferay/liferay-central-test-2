@@ -403,7 +403,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		throws PortalException {
 
 		TempFileEntryUtil.addTempFileEntry(
-			groupId, userId, fileName, tempFolderName, inputStream, mimeType);
+			groupId, userId, tempFolderName, fileName, inputStream, mimeType);
 	}
 
 	@Override

@@ -50,7 +50,7 @@ import java.util.UUID;
 public class TempFileEntryUtil {
 
 	public static FileEntry addTempFileEntry(
-			long groupId, long userId, String fileName, String tempFolderName,
+			long groupId, long userId, String folderName, String fileName,
 			File file, String mimeType)
 		throws PortalException {
 
@@ -60,8 +60,7 @@ public class TempFileEntryUtil {
 			inputStream = new FileInputStream(file);
 
 			return addTempFileEntry(
-				groupId, userId, fileName, tempFolderName, inputStream,
-				mimeType);
+				groupId, userId, folderName, fileName, inputStream, mimeType);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new PortalException(fnfe);
@@ -72,7 +71,7 @@ public class TempFileEntryUtil {
 	}
 
 	public static FileEntry addTempFileEntry(
-			long groupId, long userId, String fileName, String tempFolderName,
+			long groupId, long userId, String folderName, String fileName,
 			InputStream inputStream, String mimeType)
 		throws PortalException {
 
@@ -80,7 +79,7 @@ public class TempFileEntryUtil {
 			_getTemporaryFileEntriesCapability(groupId);
 
 		return temporaryFileEntriesCapability.addTemporaryFileEntry(
-			_UUID, userId, _getFolderPath(userId, tempFolderName), fileName,
+			_UUID, userId, _getFolderPath(userId, folderName), fileName,
 			mimeType, inputStream);
 	}
 

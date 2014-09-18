@@ -138,8 +138,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			(smallImageInputStream != null)) {
 
 			FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
-				serviceContext.getScopeGroupId(), userId, smallImageFileName,
-				BlogsEntry.class.getName(), smallImageInputStream,
+				serviceContext.getScopeGroupId(), userId,
+				BlogsEntry.class.getName(), smallImageFileName,
+				smallImageInputStream,
 				MimeTypesUtil.getContentType(smallImageFileName));
 
 			imageSelector = new ImageSelector(
@@ -1079,7 +1080,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
 					serviceContext.getScopeGroupId(), userId,
-					smallImageFileName, BlogsEntry.class.getName(),
+					BlogsEntry.class.getName(), smallImageFileName,
 					smallImageInputStream,
 					MimeTypesUtil.getContentType(smallImageFileName));
 

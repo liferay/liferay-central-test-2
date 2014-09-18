@@ -293,7 +293,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
 		return TempFileEntryUtil.addTempFileEntry(
-			groupId, getUserId(), fileName, tempFolderName, inputStream,
+			groupId, getUserId(), tempFolderName, fileName, inputStream,
 			mimeType);
 	}
 

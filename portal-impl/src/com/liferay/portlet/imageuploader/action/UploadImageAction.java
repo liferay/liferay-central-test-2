@@ -205,7 +205,7 @@ public class UploadImageAction extends PortletAction {
 
 			return TempFileEntryUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				fileName, getTempImageFolderName(), inputStream, contentType);
+				getTempImageFolderName(), fileName, inputStream, contentType);
 		}
 		finally {
 			StreamUtil.cleanUp(inputStream);
@@ -376,7 +376,7 @@ public class UploadImageAction extends PortletAction {
 
 			return TempFileEntryUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				getTempImageFileName(actionRequest), getTempImageFolderName(),
+				getTempImageFolderName(), getTempImageFileName(actionRequest),
 				file, tempFileEntry.getMimeType());
 		}
 		catch (NoSuchFileEntryException nsfee) {

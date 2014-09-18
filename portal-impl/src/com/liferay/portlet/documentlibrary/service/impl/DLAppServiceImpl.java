@@ -389,7 +389,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return TempFileEntryUtil.addTempFileEntry(
-			groupId, getUserId(), fileName, tempFolderName, file, mimeType);
+			groupId, getUserId(), tempFolderName, fileName, file, mimeType);
 	}
 
 	/**
@@ -424,7 +424,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return TempFileEntryUtil.addTempFileEntry(
-			groupId, getUserId(), fileName, tempFolderName, inputStream,
+			groupId, getUserId(), tempFolderName, fileName, inputStream,
 			mimeType);
 	}
 
