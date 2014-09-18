@@ -977,7 +977,6 @@ public abstract class BaseDB implements DB {
 
 			return sb.toString();
 		}
-
 	}
 
 	protected String removeNull(String content) {
