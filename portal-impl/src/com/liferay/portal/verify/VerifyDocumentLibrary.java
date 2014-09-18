@@ -175,12 +175,13 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 									"Unable to rename duplicate title for " +
 										"file entry " +
 											dlFileEntry.getFileEntryId() +
-												" : " + e.getMessage(),
+												": " + e.getMessage(),
 									e);
 							}
 						}
 					}
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -529,30 +530,28 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 			DLFileEntry dlFileEntry, String newTitle)
 		throws PortalException {
 
-		String newFileName = DLUtil.getSanitizedFileName(
-			newTitle, dlFileEntry.getExtension());
-
 		String title = dlFileEntry.getTitle();
 
 		dlFileEntry.setTitle(newTitle);
 
-		dlFileEntry.setFileName(newFileName);
+		String fileName = DLUtil.getSanitizedFileName(
+			newTitle, dlFileEntry.getExtension());
+
+		dlFileEntry.setFileName(fileName);
 
 		DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
 
 		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
 		dlFileVersion.setTitle(newTitle);
-
-		dlFileVersion.setFileName(newFileName);
+		dlFileVersion.setFileName(fileName);
 
 		DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Invalid document title " + title + " renamed to " +
-					newTitle + " for file entry " +
-						dlFileEntry.getFileEntryId());
+				"Invalid title " + title + " renamed to " + newTitle +
+					" for file entry " + dlFileEntry.getFileEntryId());
 		}
 	}
 
