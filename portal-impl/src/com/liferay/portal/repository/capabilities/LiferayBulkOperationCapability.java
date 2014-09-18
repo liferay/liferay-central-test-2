@@ -55,7 +55,6 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 
 		actionableDynamicQuery.setAddCriteriaMethod(
 			new RepositoryModelAddCriteriaMethod());
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new FileEntryPerformActionMethod(repositoryModelOperation));
 
@@ -71,7 +70,6 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 
 		actionableDynamicQuery.setAddCriteriaMethod(
 			new RepositoryModelAddCriteriaMethod());
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new FolderPerformActionMethod(repositoryModelOperation));
 
