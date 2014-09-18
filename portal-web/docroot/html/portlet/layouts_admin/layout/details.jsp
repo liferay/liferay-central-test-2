@@ -22,7 +22,7 @@ Layout selLayout = layoutsAdminDisplayContext.getSelLayout();
 
 LayoutType selLayoutType = selLayout.getLayoutType();
 
-String[] layoutTypes = LayoutTypeControllerTracker.getTypes();
+String[] types = LayoutTypeControllerTracker.getTypes();
 
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -152,15 +152,15 @@ StringBuilder friendlyURLBase = new StringBuilder();
 		<aui:select name="type">
 
 			<%
-			for (String curLayoutType : layoutTypes) {
-				if (curLayoutType.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
+			for (String type : types) {
+				if (type.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
 					continue;
 				}
 
-				LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
+				LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(type);
 			%>
 
-				<aui:option disabled="<%= selLayout.isFirstParent() && !layoutTypeController.isFirstPageable() %>" label='<%= "layout.types." + curLayoutType %>' selected="<%= selLayout.getType().equals(curLayoutType) %>" value="<%= curLayoutType %>" />
+				<aui:option disabled="<%= selLayout.isFirstParent() && !layoutTypeController.isFirstPageable() %>" label='<%= "layout.types." + type %>' selected="<%= selLayout.getType().equals(type) %>" value="<%= type %>" />
 
 			<%
 				}
@@ -171,15 +171,15 @@ StringBuilder friendlyURLBase = new StringBuilder();
 		<div id="<portlet:namespace />layoutTypeForm">
 
 			<%
-			for (String curLayoutType : layoutTypes) {
-				if (curLayoutType.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
+			for (String type : types) {
+				if (type.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
 					continue;
 				}
 
-				LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
+				LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(type);
 			%>
 
-				<div class="layout-type-form layout-type-form-<%= curLayoutType %> <%= selLayout.getType().equals(curLayoutType) ? "" : "hide" %>">
+				<div class="layout-type-form layout-type-form-<%= type %> <%= selLayout.getType().equals(type) ? "" : "hide" %>">
 
 					<%
 					request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);

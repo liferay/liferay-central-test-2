@@ -40,7 +40,7 @@ else {
 	parentLayoutId = layout.getParentLayoutId();
 }
 
-String[] layoutTypes = LayoutTypeControllerTracker.getTypes();
+String[] types = LayoutTypeControllerTracker.getTypes();
 %>
 
 <portlet:actionURL var="editLayoutActionURL" windowState="<%= themeDisplay.isStateExclusive() ? LiferayWindowState.EXCLUSIVE.toString() : WindowState.NORMAL.toString() %>">
@@ -102,7 +102,7 @@ String[] layoutTypes = LayoutTypeControllerTracker.getTypes();
 
 			<aui:fieldset cssClass="template-selector" label="type">
 				<aui:nav cssClass="list-group" id="templateList">
-					<c:if test='<%= ArrayUtil.contains(layoutTypes, "portlet") %>'>
+					<c:if test='<%= ArrayUtil.contains(types, "portlet") %>'>
 						<aui:nav-item cssClass="lfr-page-template" data-search='<%= HtmlUtil.escape(LanguageUtil.get(request, "empty-page")) %>'>
 							<div class="active lfr-page-template-title toggler-header toggler-header-expanded" data-type="portlet">
 								<aui:input checked="<%= true %>" id="addLayoutSelectedPageTemplateBlank" label="empty-page" name="selectedPageTemplate" type="radio" />
@@ -158,20 +158,20 @@ String[] layoutTypes = LayoutTypeControllerTracker.getTypes();
 
 					int layoutsCount = LayoutLocalServiceUtil.getLayoutsCount(layoutsAdminDisplayContext.getGroup(), privateLayout);
 
-					for (String curLayoutType : layoutTypes) {
-						if (curLayoutType.equals("portlet")) {
+					for (String type : types) {
+						if (type.equals("portlet")) {
 							continue;
 						}
 
-						LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
+						LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(type);
 					%>
 
-						<aui:nav-item cssClass="lfr-page-template" data-search='<%= LanguageUtil.get(request, "layout.types." + curLayoutType) %>'>
-							<div class="lfr-page-template-title toggler-header toggler-header-collapsed" data-type="<%= curLayoutType %>">
-								<aui:input disabled="<%= (layoutsCount == 0) && !layoutTypeController.isFirstPageable() %>" id='<%= "addLayoutSelectedPageTemplate" + curLayoutType %>' label='<%= "layout.types." + curLayoutType %>' name="selectedPageTemplate" type="radio" />
+						<aui:nav-item cssClass="lfr-page-template" data-search='<%= LanguageUtil.get(request, "layout.types." + type) %>'>
+							<div class="lfr-page-template-title toggler-header toggler-header-collapsed" data-type="<%= type %>">
+								<aui:input disabled="<%= (layoutsCount == 0) && !layoutTypeController.isFirstPageable() %>" id='<%= "addLayoutSelectedPageTemplate" + type %>' label='<%= "layout.types." + type %>' name="selectedPageTemplate" type="radio" />
 
 								<div class="lfr-page-template-description">
-									<small><%= LanguageUtil.get(request, "layout.types." + curLayoutType + ".description" ) %></small>
+									<small><%= LanguageUtil.get(request, "layout.types." + type + ".description" ) %></small>
 								</div>
 							</div>
 
@@ -184,7 +184,7 @@ String[] layoutTypes = LayoutTypeControllerTracker.getTypes();
 					}
 					%>
 
-					<c:if test='<%= ArrayUtil.contains(layoutTypes, "portlet") %>'>
+					<c:if test='<%= ArrayUtil.contains(types, "portlet") %>'>
 						<aui:nav-item cssClass="lfr-page-template" data-search="portlet">
 							<div class="lfr-page-template-title toggler-header toggler-header-collapsed" data-type="portlet">
 								<aui:input id="addLayoutSelectedPageTemplateCopyOfPage" label="copy-of-a-page" name="selectedPageTemplate" type="radio" />
