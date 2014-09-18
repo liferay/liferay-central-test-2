@@ -221,7 +221,7 @@ public class ImportLayoutsAction extends PortletAction {
 			String contentType = uploadPortletRequest.getContentType("file");
 
 			LayoutServiceUtil.addTempFileEntry(
-				groupId, sourceFileName, folderName, inputStream, contentType);
+				groupId, folderName, sourceFileName, inputStream, contentType);
 		}
 		catch (Exception e) {
 			UploadException uploadException =

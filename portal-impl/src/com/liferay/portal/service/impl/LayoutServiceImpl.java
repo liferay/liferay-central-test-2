@@ -285,7 +285,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	@Override
 	public FileEntry addTempFileEntry(
-			long groupId, String fileName, String tempFolderName,
+			long groupId, String folderName, String fileName,
 			InputStream inputStream, String mimeType)
 		throws PortalException {
 
@@ -293,7 +293,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
 		return TempFileEntryUtil.addTempFileEntry(
-			groupId, getUserId(), tempFolderName, fileName, inputStream,
+			groupId, getUserId(), folderName, fileName, inputStream,
 			mimeType);
 	}
 

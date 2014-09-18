@@ -218,12 +218,12 @@ public class LayoutServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry addTempFileEntry(
-		long groupId, java.lang.String fileName,
-		java.lang.String tempFolderName, java.io.InputStream inputStream,
+		long groupId, java.lang.String tempFolderName,
+		java.lang.String fileName, java.io.InputStream inputStream,
 		java.lang.String mimeType)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addTempFileEntry(groupId, fileName, tempFolderName,
+				   .addTempFileEntry(groupId, tempFolderName, fileName,
 			inputStream, mimeType);
 	}
 
