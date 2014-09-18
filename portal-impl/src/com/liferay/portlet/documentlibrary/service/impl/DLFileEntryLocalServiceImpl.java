@@ -1795,6 +1795,7 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntry;
 	}
 
+	@Override
 	public void validateFile(
 			long groupId, long folderId, long fileEntryId, String fileName,
 			String title)
