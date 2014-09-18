@@ -77,7 +77,8 @@ public class InvitationUtil {
 		PortletPreferences portletPreferences) {
 
 		return GetterUtil.getInteger(
-			portletPreferences.getValue("emailMaxRecipients", StringPool.NULL));
+			portletPreferences.getValue(
+				"emailMaxRecipients", StringPool.BLANK));
 	}
 
 	public static Map<Locale, String> getEmailMessageSubjectMap(
