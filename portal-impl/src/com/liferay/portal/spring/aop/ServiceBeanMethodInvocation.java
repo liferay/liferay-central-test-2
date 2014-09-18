@@ -52,10 +52,12 @@ public class ServiceBeanMethodInvocation
 			_method.setAccessible(true);
 		}
 
-		if ((_method.getDeclaringClass() == Object.class) &&
-			"equals".equals(_method.getName())) {
+		if (_method.getDeclaringClass() == Object.class) {
+			String methodName = _method.getName();
 
-			_equalsMethod = true;
+			if (methodName.equals("equals")) {
+				_equalsMethod = true;
+			}
 		}
 	}
 
