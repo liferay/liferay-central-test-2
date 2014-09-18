@@ -293,8 +293,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
 		return TempFileEntryUtil.addTempFileEntry(
-			groupId, getUserId(), folderName, fileName, inputStream,
-			mimeType);
+			groupId, getUserId(), folderName, fileName, inputStream, mimeType);
 	}
 
 	/**
@@ -345,14 +344,14 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	@Override
 	public void deleteTempFileEntry(
-			long groupId, String fileName, String tempFolderName)
+			long groupId, String folderName, String fileName)
 		throws PortalException {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
 		TempFileEntryUtil.deleteTempFileEntry(
-			groupId, getUserId(), tempFolderName, fileName);
+			groupId, getUserId(), folderName, fileName);
 	}
 
 	/**
@@ -895,14 +894,14 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	@Override
-	public String[] getTempFileEntryNames(long groupId, String tempFolderName)
+	public String[] getTempFileNames(long groupId, String folderName)
 		throws PortalException {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
 		return TempFileEntryUtil.getTempFileNames(
-			groupId, getUserId(), tempFolderName);
+			groupId, getUserId(), folderName);
 	}
 
 	/**

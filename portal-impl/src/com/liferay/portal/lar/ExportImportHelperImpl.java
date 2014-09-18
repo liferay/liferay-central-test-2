@@ -633,15 +633,15 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			long groupId, long userId, String folderName)
 		throws PortalException {
 
-		String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(
+		String[] tempFileNames = LayoutServiceUtil.getTempFileNames(
 			groupId, folderName);
 
-		if (tempFileEntryNames.length == 0) {
+		if (tempFileNames.length == 0) {
 			return null;
 		}
 
 		return TempFileEntryUtil.getTempFileEntry(
-			groupId, userId, folderName, tempFileEntryNames[0]);
+			groupId, userId, folderName, tempFileNames[0]);
 	}
 
 	@Override

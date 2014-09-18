@@ -278,7 +278,7 @@ public class ImportLayoutsAction extends PortletAction {
 			String fileName = ParamUtil.getString(actionRequest, "fileName");
 
 			LayoutServiceUtil.deleteTempFileEntry(
-				themeDisplay.getScopeGroupId(), fileName, folderName);
+				themeDisplay.getScopeGroupId(), folderName, fileName);
 
 			jsonObject.put("deleted", Boolean.TRUE);
 		}
@@ -296,12 +296,12 @@ public class ImportLayoutsAction extends PortletAction {
 	protected void deleteTempFileEntry(long groupId, String folderName)
 		throws PortalException {
 
-		String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(
+		String[] tempFileNames = LayoutServiceUtil.getTempFileNames(
 			groupId, folderName);
 
-		for (String tempFileEntryName : tempFileEntryNames) {
+		for (String tempFileEntryName : tempFileNames) {
 			LayoutServiceUtil.deleteTempFileEntry(
-				groupId, tempFileEntryName, folderName);
+				groupId, folderName, tempFileEntryName);
 		}
 	}
 
