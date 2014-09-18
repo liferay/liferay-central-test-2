@@ -57,7 +57,7 @@ public class EhcacheListenerFactory implements ListenerFactory {
 		if (bootstrapCacheLoaderFactory == null) {
 			try {
 				bootstrapCacheLoaderFactory =
-					(BootstrapCacheLoaderFactory)InstanceFactory.newInstance(
+					(BootstrapCacheLoaderFactory<?>)InstanceFactory.newInstance(
 						ClassLoaderUtil.getPortalClassLoader(),
 						className);
 			}
