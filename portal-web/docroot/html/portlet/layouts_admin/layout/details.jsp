@@ -152,12 +152,12 @@ StringBuilder friendlyURLBase = new StringBuilder();
 		<aui:select name="type">
 
 			<%
-				for (String curLayoutType : layoutTypes) {
-					if (curLayoutType.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
-						continue;
-					}
+			for (String curLayoutType : layoutTypes) {
+				if (curLayoutType.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
+					continue;
+				}
 
-					LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
+				LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
 			%>
 
 				<aui:option disabled="<%= selLayout.isFirstParent() && !layoutTypeController.isFirstPageable() %>" label='<%= "layout.types." + curLayoutType %>' selected="<%= selLayout.getType().equals(curLayoutType) %>" value="<%= curLayoutType %>" />
@@ -171,12 +171,12 @@ StringBuilder friendlyURLBase = new StringBuilder();
 		<div id="<portlet:namespace />layoutTypeForm">
 
 			<%
-				for (String curLayoutType : layoutTypes) {
-					if (curLayoutType.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
-						continue;
-					}
+			for (String curLayoutType : layoutTypes) {
+				if (curLayoutType.equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
+					continue;
+				}
 
-					LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
+				LayoutTypeController layoutTypeController = LayoutTypeControllerTracker.getLayoutTypeController(curLayoutType);
 			%>
 
 				<div class="layout-type-form layout-type-form-<%= curLayoutType %> <%= selLayout.getType().equals(curLayoutType) ? "" : "hide" %>">
