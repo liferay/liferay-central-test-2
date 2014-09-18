@@ -176,22 +176,21 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 
 			Object value = _filter.getValue();
 
-			if (operator == Operator.LT) {
-				dynamicQuery.add(RestrictionsFactoryUtil.lt(fieldName, value));
+			if (operator == Operator.EQ) {
+				dynamicQuery.add(RestrictionsFactoryUtil.eq(fieldName, value));
 			}
 			else if (operator == Operator.LE) {
 				dynamicQuery.add(RestrictionsFactoryUtil.le(fieldName, value));
 			}
-			else if (operator == Operator.GT) {
-				dynamicQuery.add(RestrictionsFactoryUtil.gt(fieldName, value));
+			else if (operator == Operator.LT) {
+				dynamicQuery.add(RestrictionsFactoryUtil.lt(fieldName, value));
 			}
 			else if (operator == Operator.GE) {
 				dynamicQuery.add(RestrictionsFactoryUtil.ge(fieldName, value));
 			}
-			else if (operator == Operator.EQ) {
-				dynamicQuery.add(RestrictionsFactoryUtil.eq(fieldName, value));
+			else if (operator == Operator.GT) {
+				dynamicQuery.add(RestrictionsFactoryUtil.gt(fieldName, value));
 			}
-
 		}
 
 		private Filter<?> _filter;
