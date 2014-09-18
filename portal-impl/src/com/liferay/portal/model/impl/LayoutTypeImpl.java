@@ -77,8 +77,6 @@ public class LayoutTypeImpl implements LayoutType {
 	public String getURL(Map<String, String> variables) {
 		String url = _layoutTypeController.getURL();
 
-		// The url has to at least start with the default string
-
 		if (Validator.isNull(url) || !url.startsWith(_URL)) {
 			url = _URL;
 		}
