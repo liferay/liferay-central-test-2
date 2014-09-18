@@ -107,7 +107,7 @@ public class LayoutTypeImpl implements LayoutType {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 with no replacement. This method has no effect.
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Override
 	public void setLayout(Layout layout) {
