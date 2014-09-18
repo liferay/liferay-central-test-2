@@ -376,6 +376,8 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 			renameFileEntryTitle(dlFileEntry, newTitle);
 		}
+
+		checkDuplicateTitles();
 	}
 
 	protected void copyDLFileEntry(DLFileEntry dlFileEntry)
@@ -455,7 +457,6 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		checkDLFileEntryType();
 		checkMimeTypes();
 		checkTitles();
-		checkDuplicateTitles();
 		deleteOrphanedDLFileEntries();
 		updateClassNameId();
 		updateFileEntryAssets();
