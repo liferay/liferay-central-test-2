@@ -94,10 +94,10 @@ public class DefaultLayoutTypeController implements LayoutTypeController {
 		return _url;
 	}
 
-	public String getViewPath(String portletId, boolean isWap) {
+	public String getViewPath(String portletId, boolean wap) {
 		String path = StrutsUtil.TEXT_HTML_DIR;
 
-		if (isWap) {
+		if (wap) {
 			path = StrutsUtil.TEXT_WAP_DIR;
 		}
 
