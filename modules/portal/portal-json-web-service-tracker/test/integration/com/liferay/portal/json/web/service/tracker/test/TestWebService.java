@@ -22,7 +22,10 @@ import org.osgi.service.component.annotations.Component;
 * @author Carlos Sierra Andrés
 */
 @Component(
-	property = {"json.web.service.path=testws"},
+	property = {
+		"json.web.service.context.name=test",
+		"json.web.service.context.path=webservice"
+	},
 	immediate = true, service = Object.class
 )
 @JSONWebService
