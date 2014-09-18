@@ -806,7 +806,7 @@ public class JournalArticleStagedModelDataHandler
 				return existingArticle;
 			}
 
-			// LAR compatibility fallback
+			// Backwards compatibility
 
 			JournalArticleResource journalArticleResource =
 				JournalArticleResourceLocalServiceUtil.
