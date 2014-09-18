@@ -145,8 +145,7 @@ public class ViewActionCommand extends BaseActionCommand {
 			},
 			new String[] {
 				fromAddress, fromName, layoutFullURL, portalURL
-			}
-		);
+			});
 
 		body = StringUtil.replace(
 			body,
@@ -156,8 +155,7 @@ public class ViewActionCommand extends BaseActionCommand {
 			},
 			new String[] {
 				fromAddress, fromName, layoutFullURL, portalURL
-			}
-		);
+			});
 
 		for (String emailAddress : validEmailAddresses) {
 			InternetAddress to = new InternetAddress(emailAddress);
