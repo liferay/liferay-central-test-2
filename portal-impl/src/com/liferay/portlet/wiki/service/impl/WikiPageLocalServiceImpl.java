@@ -397,13 +397,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void addTempPageAttachment(
-			long groupId, long userId, String fileName, String tempFolderName,
+	public void addTempFileEntry(
+			long groupId, long userId, String folderName, String fileName,
 			InputStream inputStream, String mimeType)
 		throws PortalException {
 
 		TempFileEntryUtil.addTempFileEntry(
-			groupId, userId, tempFolderName, fileName, inputStream, mimeType);
+			groupId, userId, folderName, fileName, inputStream, mimeType);
 	}
 
 	@Override
@@ -727,12 +727,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void deleteTempPageAttachment(
-			long groupId, long userId, String fileName, String tempFolderName)
+	public void deleteTempFileEntry(
+			long groupId, long userId, String folderName, String fileName)
 		throws PortalException {
 
 		TempFileEntryUtil.deleteTempFileEntry(
-			groupId, userId, tempFolderName, fileName);
+			groupId, userId, folderName, fileName);
 	}
 
 	@Override
@@ -1456,12 +1456,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	@Override
-	public String[] getTempPageAttachmentNames(
-			long groupId, long userId, String tempFolderName)
+	public String[] getTempFileNames(
+			long groupId, long userId, String folderName)
 		throws PortalException {
 
-		return TempFileEntryUtil.getTempFileNames(
-			groupId, userId, tempFolderName);
+		return TempFileEntryUtil.getTempFileNames(groupId, userId, folderName);
 	}
 
 	@Override

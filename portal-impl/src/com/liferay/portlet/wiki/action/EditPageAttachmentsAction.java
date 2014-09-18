@@ -292,7 +292,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 
 			String mimeType = uploadPortletRequest.getContentType("file");
 
-			WikiPageServiceUtil.addTempPageAttachment(
+			WikiPageServiceUtil.addTempFileEntry(
 				nodeId, sourceFileName, _TEMP_FOLDER_NAME, inputStream,
 				mimeType);
 		}
@@ -344,7 +344,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		try {
-			WikiPageServiceUtil.deleteTempPageAttachment(
+			WikiPageServiceUtil.deleteTempFileEntry(
 				nodeId, fileName, _TEMP_FOLDER_NAME);
 
 			jsonObject.put("deleted", Boolean.TRUE);
