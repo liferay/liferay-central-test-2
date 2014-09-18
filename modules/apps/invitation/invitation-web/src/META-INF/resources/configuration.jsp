@@ -17,8 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String emailMessageBody = portletPreferences.getValue("emailMessageBody", "");
-String emailMessageSubject = portletPreferences.getValue("emailMessageSubject", "");
+String emailMessageBody = portletPreferences.getValue("emailMessageBody", StringPool.BLANK);
+String emailMessageSubject = portletPreferences.getValue("emailMessageSubject", StringPool.BLANK);
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
