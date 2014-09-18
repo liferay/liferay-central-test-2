@@ -66,7 +66,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updateFileVersionFileNames();
 	}
 
-	protected boolean hasFileNameFileEntry(
+	protected boolean hasFileEntry(
 			long groupId, long folderId, String fileName)
 		throws Exception {
 
@@ -164,7 +164,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				int count = 0;
 
-				while (hasFileNameFileEntry(
+				while (hasFileEntry(
 							groupId, folderId, uniqueFileName)) {
 
 					count++;
