@@ -54,7 +54,7 @@ public interface LayoutType extends Serializable {
 	public boolean isURLFriendliable();
 
 	/**
-	 * @deprecated As of 7.0.0 with no replacement. This method has no effect.
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	public void setLayout(Layout layout);
 
