@@ -66,8 +66,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updateFileVersionFileNames();
 	}
 
-	protected boolean hasFileEntry(
-			long groupId, long folderId, String fileName)
+	protected boolean hasFileEntry(long groupId, long folderId, String fileName)
 		throws Exception {
 
 		Connection con = null;
@@ -161,9 +160,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String uniqueTitle = StringPool.BLANK;
 
 				for (int i = 1;; i++) {
-					if (!hasFileEntry(
-							groupId, folderId, uniqueFileName)) {
-						
+					if (!hasFileEntry(groupId, folderId, uniqueFileName)) {
 						break;
 					}
 
