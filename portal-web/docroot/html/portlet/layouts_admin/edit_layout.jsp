@@ -29,8 +29,6 @@ PortletURL redirectURL = layoutsAdminDisplayContext.getRedirectURL();
 
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
-LayoutTypePortlet selLayoutTypePortlet = (LayoutTypePortlet)selLayout.getLayoutType();
-
 Set<Long> parentPlids = new HashSet<Long>();
 
 long parentPlid = refererPlid;
@@ -74,6 +72,8 @@ String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
 if (selLayout.isSupportsEmbeddedPortlets()) {
 	List<Portlet> embeddedPortlets = new ArrayList<Portlet>();
+
+	LayoutTypePortlet selLayoutTypePortlet = (LayoutTypePortlet)selLayout.getLayoutType();
 
 	List<String> portletIds = selLayoutTypePortlet.getPortletIds();
 
