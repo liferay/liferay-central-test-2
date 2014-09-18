@@ -39,10 +39,10 @@ public class VerifySystemEvent extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		verifyJournalArticleDeletions();
+		verifyJournalArticleDeleteSystemEvents();
 	}
 
-	protected void verifyJournalArticleDeletions() throws Exception {
+	protected void verifyJournalArticleDeleteSystemEvents() throws Exception {
 		DynamicQuery dynamicQuery = SystemEventLocalServiceUtil.dynamicQuery();
 
 		Property classNameIdProperty = PropertyFactoryUtil.forName(
@@ -61,8 +61,8 @@ public class VerifySystemEvent extends VerifyProcess {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Processing " + systemEvents.size() +
-					" JournalArticle deletion system event");
+				"Processing " + systemEvents.size() + " delete system events " +
+					"for journal articles");
 		}
 
 		for (SystemEvent systemEvent : systemEvents) {
@@ -98,7 +98,7 @@ public class VerifySystemEvent extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("JournalArticle deletion system events verified");
+			_log.debug("Delete system events verified for journal articles");
 		}
 	}
 
