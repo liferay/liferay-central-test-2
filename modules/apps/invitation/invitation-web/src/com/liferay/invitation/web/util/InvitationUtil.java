@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -76,7 +77,7 @@ public class InvitationUtil {
 		PortletPreferences portletPreferences) {
 
 		return GetterUtil.getInteger(
-			portletPreferences.getValue("emailMaxRecipients", "20"));
+			portletPreferences.getValue("emailMaxRecipients", StringPool.NULL));
 	}
 
 	public static Map<Locale, String> getEmailMessageSubjectMap(
