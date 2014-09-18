@@ -167,7 +167,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 						}
 
 						try {
-							renameDuplicateTitle(dlFileEntry);
+							renameDuplicateFileEntryTitle(dlFileEntry);
 						}
 						catch (Exception e) {
 							if (_log.isWarnEnabled()) {
@@ -477,7 +477,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		return mimeType;
 	}
 
-	protected void renameDuplicateTitle(DLFileEntry dlFileEntry)
+	protected void renameDuplicateFileEntryTitle(DLFileEntry dlFileEntry)
 		throws PortalException {
 
 		String title = dlFileEntry.getTitle();
