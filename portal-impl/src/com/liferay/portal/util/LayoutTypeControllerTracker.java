@@ -86,16 +86,16 @@ public class LayoutTypeControllerTracker {
 	}
 
 	private String[] _getTypes() {
-		Set<String> keySet = _layoutTypeControllers.keySet();
+		Set<String> types = _layoutTypeControllers.keySet();
 
-		return keySet.toArray(new String[keySet.size()]);
+		return types.toArray(new String[types.size()]);
 	}
 
 	private void _registerDefaults(Registry registry) {
-		Set<Entry<String, LayoutTypeController>> entrySet =
+		Set<Entry<String, LayoutTypeController>> entries =
 			_defaultLayoutTypeControllers.entrySet();
 
-		for (Entry<String, LayoutTypeController> entry : entrySet) {
+		for (Entry<String, LayoutTypeController> entry : entries) {
 			Map<String, Object> properties = new HashMap<String, Object>();
 
 			properties.put("layout.type", entry.getKey());
@@ -137,10 +137,9 @@ public class LayoutTypeControllerTracker {
 			LayoutTypeController layoutTypeController = registry.getService(
 				serviceReference);
 
-			String layoutTypeKey = (String)serviceReference.getProperty(
-				"layout.type");
+			String type = (String)serviceReference.getProperty("layout.type");
 
-			_layoutTypeControllers.put(layoutTypeKey, layoutTypeController);
+			_layoutTypeControllers.put(type, layoutTypeController);
 
 			return layoutTypeController;
 		}
@@ -160,16 +159,15 @@ public class LayoutTypeControllerTracker {
 
 			registry.ungetService(serviceReference);
 
-			String layoutTypeKey = (String)serviceReference.getProperty(
-				"layout.type");
+			String type = (String)serviceReference.getProperty("layout.type");
 
-			if (_defaultLayoutTypeControllers.containsKey(layoutTypeKey)) {
+			if (_defaultLayoutTypeControllers.containsKey(type)) {
 				_layoutTypeControllers.replace(
-					layoutTypeKey, layoutTypeController,
-					_defaultLayoutTypeControllers.get(layoutTypeKey));
+					type, layoutTypeController,
+					_defaultLayoutTypeControllers.get(type));
 			}
 			else {
-				_layoutTypeControllers.remove(layoutTypeKey);
+				_layoutTypeControllers.remove(type);
 			}
 		}
 
