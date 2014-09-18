@@ -150,14 +150,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String uniqueFileName = DLUtil.getSanitizedFileName(
 					title, extension);
 
+				String titleExtension = StringPool.BLANK;
 				String titleWithoutExtension = title;
 
-				String titleExtension = StringPool.BLANK;
-
 				if (title.endsWith(StringPool.PERIOD + extension)) {
-					titleWithoutExtension = FileUtil.stripExtension(title);
-
 					titleExtension = extension;
+					titleWithoutExtension = FileUtil.stripExtension(title);
 				}
 
 				String uniqueTitle = StringPool.BLANK;

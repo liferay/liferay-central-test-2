@@ -481,17 +481,14 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		throws PortalException {
 
 		String title = dlFileEntry.getTitle();
-
-		String titleWithoutExtension = dlFileEntry.getTitle();
-
 		String titleExtension = StringPool.BLANK;
+		String titleWithoutExtension = dlFileEntry.getTitle();
 
 		if (title.endsWith(
 				StringPool.PERIOD.concat(dlFileEntry.getExtension()))) {
 
-			titleWithoutExtension = FileUtil.stripExtension(title);
-
 			titleExtension = dlFileEntry.getExtension();
+			titleWithoutExtension = FileUtil.stripExtension(title);
 		}
 
 		int count = 1;
