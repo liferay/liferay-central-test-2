@@ -237,6 +237,7 @@ public class JournalArticleStagedModelDataHandler
 
 		validateMissingGroupReference(portletDataContext, referenceElement);
 
+		String uuid = referenceElement.attributeValue("uuid");
 		String articleResourceUuid = referenceElement.attributeValue(
 			"article-resource-uuid");
 
@@ -250,7 +251,6 @@ public class JournalArticleStagedModelDataHandler
 		liveGroupId = MapUtil.getLong(groupIds, liveGroupId);
 
 		String articleArticleId = referenceElement.attributeValue("article-id");
-		String uuid = referenceElement.attributeValue("uuid");
 		boolean preloaded = GetterUtil.getBoolean(
 			referenceElement.attributeValue("preloaded"));
 
