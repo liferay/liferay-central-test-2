@@ -49,11 +49,11 @@ public class InvitationConfigurationAction extends DefaultConfigurationAction {
 		removeDefaultValue(
 			portletRequest, portletPreferences,
 			"emailMessageBody_" + languageId,
-			portletPreferences.getValue("email.message.body", ""));
+			portletPreferences.getValue("emailMessageBody", ""));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
 			"emailMessageSubject_" + languageId,
-			portletPreferences.getValue("email.message.subject", ""));
+			portletPreferences.getValue("emailMessageSubject", ""));
 	}
 
 	@Override

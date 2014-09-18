@@ -69,21 +69,21 @@ public class InvitationUtil {
 		PortletPreferences preferences) {
 
 		return LocalizationUtil.getLocalizationMap(
-			preferences, "emailMessageBody", "email.message.body");
+			preferences, "emailMessageBody", "emailMessageBody");
 	}
 
 	public static int getEmailMessageMaxRecipients(
 		PortletPreferences portletPreferences) {
 
 		return GetterUtil.getInteger(
-			portletPreferences.getValue("email.max.recipients", "20"));
+			portletPreferences.getValue("emailMaxRecipients", "20"));
 	}
 
 	public static Map<Locale, String> getEmailMessageSubjectMap(
 		PortletPreferences preferences) {
 
 		return LocalizationUtil.getLocalizationMap(
-			preferences, "emailMessageSubject", "email.message.subject");
+			preferences, "emailMessageSubject", "emailMessageSubject");
 	}
 
 }
