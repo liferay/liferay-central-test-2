@@ -486,8 +486,8 @@ public class EditFileEntryAction extends PortletAction {
 			String contentType = uploadPortletRequest.getContentType("file");
 
 			DLAppServiceUtil.addTempFileEntry(
-				themeDisplay.getScopeGroupId(), folderId, sourceFileName,
-				_TEMP_FOLDER_NAME, inputStream, contentType);
+				themeDisplay.getScopeGroupId(), folderId, _TEMP_FOLDER_NAME,
+				sourceFileName, inputStream, contentType);
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -633,8 +633,8 @@ public class EditFileEntryAction extends PortletAction {
 
 		try {
 			DLAppServiceUtil.deleteTempFileEntry(
-				themeDisplay.getScopeGroupId(), folderId, fileName,
-				_TEMP_FOLDER_NAME);
+				themeDisplay.getScopeGroupId(), folderId, _TEMP_FOLDER_NAME,
+				fileName);
 
 			jsonObject.put("deleted", Boolean.TRUE);
 		}
