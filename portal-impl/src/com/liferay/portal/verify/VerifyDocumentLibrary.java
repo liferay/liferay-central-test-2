@@ -167,7 +167,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 						}
 
 						try {
-							renameDuplicateFileEntryTitle(dlFileEntry);
+							renameDuplicateTitle(dlFileEntry);
 						}
 						catch (Exception e) {
 							if (_log.isWarnEnabled()) {
@@ -375,7 +375,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 			String newTitle = title.replace(
 				StringPool.BACK_SLASH, StringPool.UNDERLINE);
 
-			renameFileEntryTitle(dlFileEntry, newTitle);
+			renameTitle(dlFileEntry, newTitle);
 		}
 
 		checkDuplicateTitles();
@@ -478,7 +478,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		return mimeType;
 	}
 
-	protected void renameDuplicateFileEntryTitle(DLFileEntry dlFileEntry)
+	protected void renameDuplicateTitle(DLFileEntry dlFileEntry)
 		throws PortalException {
 
 		String title = dlFileEntry.getTitle();
@@ -510,7 +510,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					dlFileEntry.getGroupId(), dlFileEntry.getFolderId(),
 					dlFileEntry.getFileEntryId(), uniqueFileName, uniqueTitle);
 
-				renameFileEntryTitle(dlFileEntry, uniqueTitle);
+				renameTitle(dlFileEntry, uniqueTitle);
 
 				return;
 			}
@@ -526,8 +526,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		}
 	}
 
-	protected void renameFileEntryTitle(
-			DLFileEntry dlFileEntry, String newTitle)
+	protected void renameTitle(DLFileEntry dlFileEntry, String newTitle)
 		throws PortalException {
 
 		String title = dlFileEntry.getTitle();
