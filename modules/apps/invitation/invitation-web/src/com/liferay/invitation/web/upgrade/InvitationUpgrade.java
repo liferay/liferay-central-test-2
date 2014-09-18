@@ -53,14 +53,14 @@ public class InvitationUpgrade {
 
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
-
 				return new String[][] {
 					new String[] {
-						"100", "com_liferay_invitation_web_portlet_" +
-							"InvitationPortlet"
+						"100",
+						"com_liferay_invitation_web_portlet_InvitationPortlet"
 					}
 				};
 			}
+
 		};
 
 		_releaseLocalService.updateRelease(
