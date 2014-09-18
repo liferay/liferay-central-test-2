@@ -361,8 +361,8 @@ public class JournalArticleLocalServiceImpl
 			user, groupId, articleId, version, false, content, ddmStructureKey,
 			images);
 
-		article.setResourcePrimKey(resourcePrimKey);
 		article.setUuid(serviceContext.getUuid());
+		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());
 		article.setUserId(user.getUserId());
