@@ -51,13 +51,17 @@ public interface BulkOperationCapability extends Capability {
 		private T _value;
 	}
 
-	enum Operator {
+	public enum Operator {
+
 		LT, LE, GT, GE, EQ
+
 	}
 
-	interface Field<T> {
-		interface CreateDate extends Field<Date> {
+	public interface Field<T> {
+
+		public interface CreateDate extends Field<Date> {
 		}
+
 	}
 
 	public void execute(
