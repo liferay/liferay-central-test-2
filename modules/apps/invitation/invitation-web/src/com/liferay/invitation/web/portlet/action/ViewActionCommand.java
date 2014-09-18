@@ -30,6 +30,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.bridges.mvc.ActionCommand;
+import com.liferay.util.bridges.mvc.BaseActionCommand;
 
 import java.io.UnsupportedEncodingException;
 
@@ -61,12 +62,12 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ActionCommand.class
 )
-public class ViewActionCommand implements ActionCommand {
+public class ViewActionCommand extends BaseActionCommand {
 
 	@Override
-	public boolean processCommand(
+	protected void doProcessCommand(
 			PortletRequest portletRequest, PortletResponse portletResponse)
-		throws PortletException {
+		throws Exception {
 
 		Set<String> invalidEmailAddresses = new HashSet<String>();
 		Set<String> validEmailAddresses = new HashSet<String>();
@@ -96,7 +97,7 @@ public class ViewActionCommand implements ActionCommand {
 			SessionErrors.add(
 				portletRequest, "emailAddresses", invalidEmailAddresses);
 
-			return false;
+			return;
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
@@ -201,8 +202,6 @@ public class ViewActionCommand implements ActionCommand {
 		ActionResponse actionResponse = (ActionResponse)portletResponse;
 
 		actionResponse.setRenderParameter("mvcPath", "/view.jsp");
-
-		return true;
 	}
 
 }
