@@ -28,11 +28,11 @@ public class LayoutTypePortletFactoryImpl implements LayoutTypePortletFactory {
 
 	@Override
 	public LayoutTypePortlet create(Layout layout) {
-		LayoutTypeController layoutTypecontroller =
+		LayoutTypeController layoutTypeController =
 			LayoutTypeControllerTracker.getLayoutTypeController(
 				layout.getType());
 
-		return new LayoutTypePortletImpl(layout, layoutTypecontroller);
+		return new LayoutTypePortletImpl(layout, layoutTypeController);
 	}
 
 }
