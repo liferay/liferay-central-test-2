@@ -42,7 +42,7 @@ public class EhcacheUnwrapUtil {
 		}
 
 		throw new IllegalArgumentException(
-			"Unable to locate ehcache from " + portalCache);
+			"Unable to locate Ehcache from " + portalCache);
 	}
 
 }
