@@ -345,10 +345,10 @@ public class FriendlyURLServlet extends HttpServlet {
 					group.getGroupId(), _private,
 					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-				for (Layout curLayout : layouts) {
-					if (curLayout.matches(request, friendlyURL)) {
+				for (Layout layout : layouts) {
+					if (layout.matches(request, friendlyURL)) {
 						String redirect = PortalUtil.getLayoutActualURL(
-							curLayout, mainPath);
+							layout, mainPath);
 
 						return new Object[] {redirect, Boolean.FALSE};
 					}
