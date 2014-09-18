@@ -40,7 +40,7 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -367,7 +367,7 @@ public class EditFileEntryAction extends PortletAction {
 		FileEntry tempFileEntry = null;
 
 		try {
-			tempFileEntry = TempFileUtil.getTempFileEntry(
+			tempFileEntry = TempFileEntryUtil.getTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				_TEMP_FOLDER_NAME, selectedFileName);
 
@@ -442,7 +442,7 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		finally {
 			if (tempFileEntry != null) {
-				TempFileUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
+				TempFileEntryUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
 			}
 		}
 	}

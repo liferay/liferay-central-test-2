@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.capabilities.BulkOperationCapability;
 import com.liferay.portal.kernel.repository.capabilities.ConfigurationCapability;
-import com.liferay.portal.kernel.repository.capabilities.TemporaryFilesCapability;
+import com.liferay.portal.kernel.repository.capabilities.TemporaryFileEntriesCapability;
 import com.liferay.portal.kernel.repository.model.BaseRepositoryModelOperation;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -45,9 +45,10 @@ import java.util.UUID;
 /**
  * @author Iván Zaera
  */
-public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
+public class TemporaryFileEntriesCapabilityImpl
+	implements TemporaryFileEntriesCapability {
 
-	public TemporaryFilesCapabilityImpl(LocalRepository localRepository) {
+	public TemporaryFileEntriesCapabilityImpl(LocalRepository localRepository) {
 		_localRepository = localRepository;
 	}
 

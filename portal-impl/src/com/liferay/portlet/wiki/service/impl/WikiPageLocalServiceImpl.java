@@ -45,7 +45,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -402,7 +402,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			InputStream inputStream, String mimeType)
 		throws PortalException {
 
-		TempFileUtil.addTempFileEntry(
+		TempFileEntryUtil.addTempFileEntry(
 			groupId, userId, fileName, tempFolderName, inputStream, mimeType);
 	}
 
@@ -731,7 +731,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long groupId, long userId, String fileName, String tempFolderName)
 		throws PortalException {
 
-		TempFileUtil.deleteTempFileEntry(groupId, userId, tempFolderName, fileName);
+		TempFileEntryUtil.deleteTempFileEntry(groupId, userId, tempFolderName, fileName);
 	}
 
 	@Override
@@ -1459,7 +1459,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long groupId, long userId, String tempFolderName)
 		throws PortalException {
 
-		return TempFileUtil.getTempFileNames(
+		return TempFileEntryUtil.getTempFileNames(
 			groupId, userId, tempFolderName);
 	}
 

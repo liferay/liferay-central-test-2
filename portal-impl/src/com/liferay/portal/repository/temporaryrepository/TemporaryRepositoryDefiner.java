@@ -18,13 +18,13 @@ import com.liferay.portal.kernel.repository.DocumentRepository;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryFactory;
 import com.liferay.portal.kernel.repository.capabilities.BulkOperationCapability;
-import com.liferay.portal.kernel.repository.capabilities.TemporaryFilesCapability;
+import com.liferay.portal.kernel.repository.capabilities.TemporaryFileEntriesCapability;
 import com.liferay.portal.kernel.repository.registry.BaseRepositoryDefiner;
 import com.liferay.portal.kernel.repository.registry.CapabilityRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryEventRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryFactoryRegistry;
 import com.liferay.portal.repository.capabilities.LiferayBulkOperationCapability;
-import com.liferay.portal.repository.capabilities.TemporaryFilesCapabilityImpl;
+import com.liferay.portal.repository.capabilities.TemporaryFileEntriesCapabilityImpl;
 
 /**
  * @author Iván Zaera
@@ -52,8 +52,8 @@ public class TemporaryRepositoryDefiner extends BaseRepositoryDefiner {
 				new LiferayBulkOperationCapability(
 					documentRepository.getRepositoryId()));
 			capabilityRegistry.addExportedCapability(
-				TemporaryFilesCapability.class,
-				new TemporaryFilesCapabilityImpl(
+				TemporaryFileEntriesCapability.class,
+				new TemporaryFileEntriesCapabilityImpl(
 					(LocalRepository)documentRepository));
 		}
 	}

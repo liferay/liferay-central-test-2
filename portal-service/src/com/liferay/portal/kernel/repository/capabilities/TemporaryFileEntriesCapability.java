@@ -25,7 +25,7 @@ import java.util.UUID;
 /**
  * @author Iván Zaera
  */
-public interface TemporaryFilesCapability extends Capability {
+public interface TemporaryFileEntriesCapability extends Capability {
 
 	public FileEntry addTemporaryFileEntry(
 			UUID callerUuid, long userId, String folderPath, String fileName,

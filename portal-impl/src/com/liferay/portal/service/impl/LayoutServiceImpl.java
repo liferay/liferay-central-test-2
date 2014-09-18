@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -292,7 +292,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		return TempFileUtil.addTempFileEntry(
+		return TempFileEntryUtil.addTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName, inputStream,
 			mimeType);
 	}
@@ -351,7 +351,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		TempFileUtil.deleteTempFileEntry(
+		TempFileEntryUtil.deleteTempFileEntry(
 			groupId, getUserId(), tempFolderName, fileName);
 	}
 
@@ -901,7 +901,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		return TempFileUtil.getTempFileNames(
+		return TempFileEntryUtil.getTempFileNames(
 			groupId, getUserId(), tempFolderName);
 	}
 

@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.LocalRepository;
-import com.liferay.portal.kernel.repository.capabilities.TemporaryFilesCapability;
+import com.liferay.portal.kernel.repository.capabilities.TemporaryFileEntriesCapability;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Repository;
@@ -47,7 +47,7 @@ import java.util.UUID;
  * @author Alexander Chow
  * @author Iván Zaera
  */
-public class TempFileUtil {
+public class TempFileEntryUtil {
 
 	public static FileEntry addTempFileEntry(
 			long groupId, long userId, String fileName, String tempFolderName,
@@ -76,10 +76,10 @@ public class TempFileUtil {
 			InputStream inputStream, String mimeType)
 		throws PortalException {
 
-		TemporaryFilesCapability temporaryFilesCapability =
-			_getTemporaryFilesCapability(groupId);
+		TemporaryFileEntriesCapability temporaryFileEntriesCapability =
+			_getTemporaryFileEntriesCapability(groupId);
 
-		return temporaryFilesCapability.addTemporaryFileEntry(
+		return temporaryFileEntriesCapability.addTemporaryFileEntry(
 			_UUID, userId, _getFolderPath(userId, tempFolderName), fileName,
 			mimeType, inputStream);
 	}
@@ -101,10 +101,10 @@ public class TempFileUtil {
 			long groupId, long userId, String folderName, String fileName)
 		throws PortalException {
 
-		TemporaryFilesCapability temporaryFilesCapability =
-			_getTemporaryFilesCapability(groupId);
+		TemporaryFileEntriesCapability temporaryFileEntriesCapability =
+			_getTemporaryFileEntriesCapability(groupId);
 
-		temporaryFilesCapability.deleteTemporaryFileEntry(
+		temporaryFileEntriesCapability.deleteTemporaryFileEntry(
 			_UUID, _getFolderPath(userId, folderName), fileName);
 	}
 
@@ -112,10 +112,10 @@ public class TempFileUtil {
 			long groupId, long userId, String folderName, String fileName)
 		throws PortalException {
 
-		TemporaryFilesCapability temporaryFilesCapability =
-			_getTemporaryFilesCapability(groupId);
+		TemporaryFileEntriesCapability temporaryFileEntriesCapability =
+			_getTemporaryFileEntriesCapability(groupId);
 
-		return temporaryFilesCapability.getTemporaryFileEntries(
+		return temporaryFileEntriesCapability.getTemporaryFileEntries(
 			_UUID, _getFolderPath(userId, folderName), fileName);
 	}
 
@@ -123,11 +123,11 @@ public class TempFileUtil {
 			long groupId, long userId, String folderName)
 		throws PortalException {
 
-		TemporaryFilesCapability temporaryFilesCapability =
-			_getTemporaryFilesCapability(groupId);
+		TemporaryFileEntriesCapability temporaryFileEntriesCapability =
+			_getTemporaryFileEntriesCapability(groupId);
 
 		List<FileEntry> fileEntries =
-			temporaryFilesCapability.getTemporaryFileEntries(
+			temporaryFileEntriesCapability.getTemporaryFileEntries(
 				_UUID, _getFolderPath(userId, folderName));
 
 		List<String> fileNames = new ArrayList<>();
@@ -144,7 +144,7 @@ public class TempFileUtil {
 		throws PortalException {
 
 		Repository repository = RepositoryLocalServiceUtil.fetchRepository(
-			groupId, TempFileUtil.class.getName(), StringPool.BLANK);
+			groupId, TempFileEntryUtil.class.getName(), StringPool.BLANK);
 
 		if (repository != null) {
 			return RepositoryLocalServiceUtil.getLocalRepositoryImpl(
@@ -169,7 +169,7 @@ public class TempFileUtil {
 			repository = RepositoryLocalServiceUtil.addRepository(
 				user.getUserId(), groupId, classNameId,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				TempFileUtil.class.getName(), StringPool.BLANK,
+				TempFileEntryUtil.class.getName(), StringPool.BLANK,
 				StringPool.BLANK, typeSettingsProperties, true, serviceContext);
 
 			return RepositoryLocalServiceUtil.getLocalRepositoryImpl(
@@ -185,8 +185,8 @@ public class TempFileUtil {
 			String.valueOf(userId) + StringPool.FORWARD_SLASH + tempFolderName;
 	}
 
-	private static TemporaryFilesCapability _getTemporaryFilesCapability(
-			long groupId)
+	private static TemporaryFileEntriesCapability
+			_getTemporaryFileEntriesCapability(long groupId)
 		throws PortalException {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -197,7 +197,8 @@ public class TempFileUtil {
 		LocalRepository localRepository = _addPortletRepository(
 			groupId, serviceContext);
 
-		return localRepository.getCapability(TemporaryFilesCapability.class);
+		return localRepository.getCapability(
+			TemporaryFileEntriesCapability.class);
 	}
 
 	private static final UUID _UUID = UUID.fromString(

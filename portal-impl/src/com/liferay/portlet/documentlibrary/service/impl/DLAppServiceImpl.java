@@ -42,7 +42,7 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
@@ -377,7 +377,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	 * @param  mimeType the file's MIME type
 	 * @return the temporary file entry
 	 * @throws PortalException if the file name was invalid
-	 * @see    com.liferay.portal.kernel.util.TempFileUtil
+	 * @see    com.liferay.portal.kernel.util.TempFileEntryUtil
 	 */
 	@Override
 	public FileEntry addTempFileEntry(
@@ -388,7 +388,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		return TempFileUtil.addTempFileEntry(
+		return TempFileEntryUtil.addTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName, file, mimeType);
 	}
 
@@ -412,7 +412,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	 * @return the temporary file entry
 	 * @throws PortalException if the file name was invalid or if a portal
 	 *         exception occurred
-	 * @see    com.liferay.portal.kernel.util.TempFileUtil
+	 * @see    com.liferay.portal.kernel.util.TempFileEntryUtil
 	 */
 	@Override
 	public FileEntry addTempFileEntry(
@@ -423,7 +423,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		return TempFileUtil.addTempFileEntry(
+		return TempFileEntryUtil.addTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName, inputStream,
 			mimeType);
 	}
@@ -841,7 +841,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	 * @param  fileName the file's original name
 	 * @param  tempFolderName the temporary folder's name
 	 * @throws PortalException if the file name was invalid
-	 * @see    com.liferay.portal.kernel.util.TempFileUtil
+	 * @see    com.liferay.portal.kernel.util.TempFileEntryUtil
 	 */
 	@Override
 	public void deleteTempFileEntry(
@@ -851,7 +851,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		TempFileUtil.deleteTempFileEntry(
+		TempFileEntryUtil.deleteTempFileEntry(
 			groupId, getUserId(), tempFolderName, fileName);
 	}
 
@@ -2103,7 +2103,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	 * @return the temporary file entry names
 	 * @throws PortalException if the folder was invalid
 	 * @see    #addTempFileEntry(long, long, String, String, File, String)
-	 * @see    com.liferay.portal.kernel.util.TempFileUtil
+	 * @see    com.liferay.portal.kernel.util.TempFileEntryUtil
 	 */
 	@Override
 	public String[] getTempFileEntryNames(
@@ -2113,7 +2113,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		return TempFileUtil.getTempFileNames(
+		return TempFileEntryUtil.getTempFileNames(
 			groupId, getUserId(), tempFolderName);
 	}
 

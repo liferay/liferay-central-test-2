@@ -61,7 +61,7 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -640,7 +640,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			return null;
 		}
 
-		return TempFileUtil.getTempFileEntry(
+		return TempFileEntryUtil.getTempFileEntry(
 			groupId, userId, folderName, tempFileEntryNames[0]);
 	}
 

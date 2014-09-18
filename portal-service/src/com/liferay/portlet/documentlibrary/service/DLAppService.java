@@ -225,7 +225,7 @@ public interface DLAppService extends BaseService {
 	* @param mimeType the file's MIME type
 	* @return the temporary file entry
 	* @throws PortalException if the file name was invalid
-	* @see com.liferay.portal.kernel.util.TempFileUtil
+	* @see com.liferay.portal.kernel.util.TempFileEntryUtil
 	*/
 	public com.liferay.portal.kernel.repository.model.FileEntry addTempFileEntry(
 		long groupId, long folderId, java.lang.String fileName,
@@ -253,7 +253,7 @@ public interface DLAppService extends BaseService {
 	* @return the temporary file entry
 	* @throws PortalException if the file name was invalid or if a portal
 	exception occurred
-	* @see com.liferay.portal.kernel.util.TempFileUtil
+	* @see com.liferay.portal.kernel.util.TempFileEntryUtil
 	*/
 	public com.liferay.portal.kernel.repository.model.FileEntry addTempFileEntry(
 		long groupId, long folderId, java.lang.String fileName,
@@ -497,7 +497,7 @@ public interface DLAppService extends BaseService {
 	* @param fileName the file's original name
 	* @param tempFolderName the temporary folder's name
 	* @throws PortalException if the file name was invalid
-	* @see com.liferay.portal.kernel.util.TempFileUtil
+	* @see com.liferay.portal.kernel.util.TempFileEntryUtil
 	*/
 	public void deleteTempFileEntry(long groupId, long folderId,
 		java.lang.String fileName, java.lang.String tempFolderName)
@@ -1476,7 +1476,7 @@ public interface DLAppService extends BaseService {
 	* @return the temporary file entry names
 	* @throws PortalException if the folder was invalid
 	* @see #addTempFileEntry(long, long, String, String, File, String)
-	* @see com.liferay.portal.kernel.util.TempFileUtil
+	* @see com.liferay.portal.kernel.util.TempFileEntryUtil
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String[] getTempFileEntryNames(long groupId,

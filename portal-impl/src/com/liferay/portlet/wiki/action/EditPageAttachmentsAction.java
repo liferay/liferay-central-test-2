@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.model.TrashedModel;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -246,7 +246,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		FileEntry tempFileEntry = null;
 
 		try {
-			tempFileEntry = TempFileUtil.getTempFileEntry(
+			tempFileEntry = TempFileEntryUtil.getTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				_TEMP_FOLDER_NAME, selectedFileName);
 
@@ -270,7 +270,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		}
 		finally {
 			if (tempFileEntry != null) {
-				TempFileUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
+				TempFileEntryUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
 			}
 		}
 	}

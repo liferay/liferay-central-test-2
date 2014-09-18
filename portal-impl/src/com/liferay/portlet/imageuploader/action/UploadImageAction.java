@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
+import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -191,7 +191,7 @@ public class UploadImageAction extends PortletAction {
 		String fileName = uploadPortletRequest.getFileName("fileName");
 
 		try {
-			TempFileUtil.deleteTempFileEntry(
+			TempFileEntryUtil.deleteTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				getTempImageFolderName(), fileName);
 		}
@@ -203,7 +203,7 @@ public class UploadImageAction extends PortletAction {
 		try {
 			inputStream = uploadPortletRequest.getFileAsStream("fileName");
 
-			return TempFileUtil.addTempFileEntry(
+			return TempFileEntryUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				fileName, getTempImageFolderName(), inputStream, contentType);
 		}
@@ -218,7 +218,7 @@ public class UploadImageAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return TempFileUtil.getTempFileEntry(
+		return TempFileEntryUtil.getTempFileEntry(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 			getTempImageFolderName(), getTempImageFileName(portletRequest));
 	}
@@ -366,7 +366,7 @@ public class UploadImageAction extends PortletAction {
 			File file = FileUtil.createTempFile(bytes);
 
 			try {
-				TempFileUtil.deleteTempFileEntry(
+				TempFileEntryUtil.deleteTempFileEntry(
 					themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 					getTempImageFolderName(),
 					getTempImageFileName(actionRequest));
@@ -374,7 +374,7 @@ public class UploadImageAction extends PortletAction {
 			catch (Exception e) {
 			}
 
-			return TempFileUtil.addTempFileEntry(
+			return TempFileEntryUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				getTempImageFileName(actionRequest), getTempImageFolderName(),
 				file, tempFileEntry.getMimeType());
