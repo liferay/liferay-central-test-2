@@ -72,7 +72,7 @@ String inputWrapperClass = controlGroupCssClass;
 if (choiceField) {
 	inputWrapperClass = baseTypeCssClass;
 
-	if(Validator.isNull(label)) {
+	if (Validator.isNull(label)) {
 		useInputWrapper = false;
 	}
 }
