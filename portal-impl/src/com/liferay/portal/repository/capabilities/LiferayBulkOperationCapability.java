@@ -171,40 +171,27 @@ public class LiferayBulkOperationCapability implements BulkOperationCapability {
 				throw new UnsupportedOperationException(
 					"Unsupported field " + field.getName());
 			}
+			
+			Operator operator = _filter.getOperator();
 
 			Object value = _filter.getValue();
 
-			switch (_filter.getOperator()) {
-				case LT:
-					dynamicQuery.add(
-						RestrictionsFactoryUtil.lt(fieldName, value));
-
-					break;
-
-				case LE:
-					dynamicQuery.add(
-						RestrictionsFactoryUtil.le(fieldName, value));
-
-					break;
-
-				case GT:
-					dynamicQuery.add(
-						RestrictionsFactoryUtil.gt(fieldName, value));
-
-					break;
-
-				case GE:
-					dynamicQuery.add(
-						RestrictionsFactoryUtil.ge(fieldName, value));
-
-					break;
-
-				case EQ:
-					dynamicQuery.add(
-						RestrictionsFactoryUtil.eq(fieldName, value));
-
-					break;
+			if (operator == Operator.LT) {
+				dynamicQuery.add(RestrictionsFactoryUtil.lt(fieldName, value));
 			}
+			else if (operator == Operator.LE) {
+				dynamicQuery.add(RestrictionsFactoryUtil.le(fieldName, value));
+			}
+			else if (operator == Operator.GT) {
+				dynamicQuery.add(RestrictionsFactoryUtil.gt(fieldName, value));
+			}
+			else if (operator == Operator.GE) {
+				dynamicQuery.add(RestrictionsFactoryUtil.ge(fieldName, value));
+			}
+			else if (operator == Operator.EQ) {
+				dynamicQuery.add(RestrictionsFactoryUtil.eq(fieldName, value));
+			}
+
 		}
 
 		private Filter<?> _filter;
