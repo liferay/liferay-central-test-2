@@ -108,27 +108,14 @@ public class ViewActionCommand extends BaseActionCommand {
 		String fromAddress = user.getEmailAddress();
 		String fromName = user.getFullName();
 
-		InternetAddress from = null;
-
-		try {
-			from = new InternetAddress(fromAddress, fromName);
-		}
-		catch (UnsupportedEncodingException uee) {
-			throw new PortletException(uee);
-		}
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
 
 		Layout layout = themeDisplay.getLayout();
 
 		String portalURL = PortalUtil.getPortalURL(portletRequest);
 
-		String layoutFullURL = null;
-
-		try {
-			layoutFullURL = PortalUtil.getLayoutFullURL(layout, themeDisplay);
-		}
-		catch (PortalException pe) {
-			throw new PortletException(pe);
-		}
+		String layoutFullURL = PortalUtil.getLayoutFullURL(
+			layout, themeDisplay);
 
 		Map<Locale, String> localizedSubjectMap =
 			InvitationUtil.getEmailMessageSubjectMap(portletPreferences);
@@ -173,14 +160,7 @@ public class ViewActionCommand extends BaseActionCommand {
 		);
 
 		for (String emailAddress : validEmailAddresses) {
-			InternetAddress to = null;
-
-			try {
-				to = new InternetAddress(emailAddress);
-			}
-			catch (AddressException ae) {
-				throw new PortletException(ae);
-			}
+			InternetAddress to = new InternetAddress(emailAddress);
 
 			MailMessage message = new MailMessage(
 				from, to, subject, body, true);
