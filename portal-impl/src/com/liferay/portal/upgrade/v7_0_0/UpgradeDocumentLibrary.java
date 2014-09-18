@@ -160,14 +160,16 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				String uniqueTitle = StringPool.BLANK;
 
-				int count = 1;
-
-				while (hasFileEntry(
+				for (int i = 1;; i++) {
+					if (!hasFileEntry(
 							groupId, folderId, uniqueFileName)) {
+						
+						break;
+					}
 
 					uniqueTitle =
 						titleWithoutExtension + StringPool.UNDERLINE +
-							String.valueOf(count);
+							String.valueOf(i);
 
 					if (Validator.isNotNull(titleExtension)) {
 						uniqueTitle += StringPool.PERIOD.concat(titleExtension);
@@ -175,8 +177,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 					uniqueFileName = DLUtil.getSanitizedFileName(
 						uniqueTitle, extension);
-
-					count++;
 				}
 
 				updateFileEntryFileName(fileEntryId, uniqueFileName);

@@ -491,12 +491,10 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 			titleWithoutExtension = FileUtil.stripExtension(title);
 		}
 
-		int count = 1;
-
-		while (true) {
+		for (int i = 1;;) {
 			String uniqueTitle =
 				titleWithoutExtension + StringPool.UNDERLINE +
-					String.valueOf(count);
+					String.valueOf(i);
 
 			if (Validator.isNotNull(titleExtension)) {
 				uniqueTitle = uniqueTitle.concat(
@@ -522,7 +520,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					throw e;
 				}
 
-				count++;
+				i++;
 			}
 		}
 	}
