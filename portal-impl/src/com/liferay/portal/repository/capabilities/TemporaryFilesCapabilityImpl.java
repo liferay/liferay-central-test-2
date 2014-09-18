@@ -86,13 +86,12 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 		BulkOperationCapability bulkOperationCapability =
 			_localRepository.getCapability(BulkOperationCapability.class);
 
-		Date date = new Date(
-			System.currentTimeMillis() - getTemporaryFilesTimeout());
-
 		BulkOperationCapability.Filter<Date> bulkFilter =
 			new BulkOperationCapability.Filter<>(
 				BulkOperationCapability.Field.CreateDate.class,
-				BulkOperationCapability.Operator.LT, date);
+				BulkOperationCapability.Operator.LT,
+				new Date(
+					System.currentTimeMillis() - getTemporaryFilesTimeout()));
 
 		bulkOperationCapability.execute(
 			bulkFilter,
