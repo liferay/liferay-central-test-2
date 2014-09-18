@@ -292,7 +292,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		return TempFileUtil.addTempFile(
+		return TempFileUtil.addTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName, inputStream,
 			mimeType);
 	}
@@ -351,7 +351,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		TempFileUtil.deleteTempFile(
+		TempFileUtil.deleteTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName);
 	}
 
@@ -901,7 +901,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		return TempFileUtil.getTempFileEntryNames(
+		return TempFileUtil.getTempFileNames(
 			groupId, getUserId(), tempFolderName);
 	}
 

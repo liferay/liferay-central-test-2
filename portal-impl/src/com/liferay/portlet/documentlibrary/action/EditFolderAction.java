@@ -187,7 +187,7 @@ public class EditFolderAction extends PortletAction {
 			TemporaryFilesCapability temporaryFilesCapability =
 				localRepository.getCapability(TemporaryFilesCapability.class);
 
-			temporaryFilesCapability.deleteExpiredTemporaryFiles();
+			temporaryFilesCapability.deleteExpiredTemporaryFileEntries();
 		}
 	}
 

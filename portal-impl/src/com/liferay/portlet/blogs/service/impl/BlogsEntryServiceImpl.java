@@ -94,7 +94,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		if (smallImage && Validator.isNotNull(smallImageFileName) &&
 			(smallImageInputStream != null)) {
 
-			FileEntry fileEntry = TempFileUtil.addTempFile(
+			FileEntry fileEntry = TempFileUtil.addTempFileEntry(
 				serviceContext.getScopeGroupId(), getUserId(),
 				smallImageFileName, BlogsEntry.class.getName(),
 				smallImageInputStream,
@@ -469,7 +469,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			if (Validator.isNotNull(smallImageFileName) &&
 				(smallImageInputStream != null)) {
 
-				FileEntry fileEntry = TempFileUtil.addTempFile(
+				FileEntry fileEntry = TempFileUtil.addTempFileEntry(
 					serviceContext.getScopeGroupId(), getUserId(),
 					smallImageFileName, BlogsEntry.class.getName(),
 					smallImageInputStream,

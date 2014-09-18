@@ -402,7 +402,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			InputStream inputStream, String mimeType)
 		throws PortalException {
 
-		TempFileUtil.addTempFile(
+		TempFileUtil.addTempFileEntry(
 			groupId, userId, fileName, tempFolderName, inputStream, mimeType);
 	}
 
@@ -731,7 +731,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long groupId, long userId, String fileName, String tempFolderName)
 		throws PortalException {
 
-		TempFileUtil.deleteTempFile(groupId, userId, fileName, tempFolderName);
+		TempFileUtil.deleteTempFileEntry(groupId, userId, fileName, tempFolderName);
 	}
 
 	@Override
@@ -1459,7 +1459,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long groupId, long userId, String tempFolderName)
 		throws PortalException {
 
-		return TempFileUtil.getTempFileEntryNames(
+		return TempFileUtil.getTempFileNames(
 			groupId, userId, tempFolderName);
 	}
 

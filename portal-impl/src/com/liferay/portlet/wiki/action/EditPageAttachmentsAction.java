@@ -246,7 +246,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		FileEntry tempFileEntry = null;
 
 		try {
-			tempFileEntry = TempFileUtil.getTempFile(
+			tempFileEntry = TempFileUtil.getTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				selectedFileName, _TEMP_FOLDER_NAME);
 
@@ -270,7 +270,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		}
 		finally {
 			if (tempFileEntry != null) {
-				TempFileUtil.deleteTempFile(tempFileEntry.getFileEntryId());
+				TempFileUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
 			}
 		}
 	}

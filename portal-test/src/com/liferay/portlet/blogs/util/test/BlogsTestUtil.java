@@ -146,12 +146,12 @@ public class BlogsTestUtil {
 				FileEntry fileEntry = null;
 
 				try {
-					fileEntry = TempFileUtil.getTempFile(
+					fileEntry = TempFileUtil.getTempFileEntry(
 						serviceContext.getScopeGroupId(), userId, "image.jpg",
 						BlogsEntry.class.getName());
 				}
 				catch (Exception e) {
-					fileEntry = TempFileUtil.addTempFile(
+					fileEntry = TempFileUtil.addTempFileEntry(
 						serviceContext.getScopeGroupId(), userId, "image.jpg",
 						BlogsEntry.class.getName(), inputStream,
 						MimeTypesUtil.getContentType("image.jpg"));

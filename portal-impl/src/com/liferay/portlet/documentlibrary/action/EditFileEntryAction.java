@@ -367,7 +367,7 @@ public class EditFileEntryAction extends PortletAction {
 		FileEntry tempFileEntry = null;
 
 		try {
-			tempFileEntry = TempFileUtil.getTempFile(
+			tempFileEntry = TempFileUtil.getTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				selectedFileName, _TEMP_FOLDER_NAME);
 
@@ -442,7 +442,7 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		finally {
 			if (tempFileEntry != null) {
-				TempFileUtil.deleteTempFile(tempFileEntry.getFileEntryId());
+				TempFileUtil.deleteTempFileEntry(tempFileEntry.getFileEntryId());
 			}
 		}
 	}

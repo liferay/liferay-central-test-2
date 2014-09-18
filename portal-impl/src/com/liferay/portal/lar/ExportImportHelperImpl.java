@@ -640,7 +640,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			return null;
 		}
 
-		return TempFileUtil.getTempFile(
+		return TempFileUtil.getTempFileEntry(
 			groupId, userId, tempFileEntryNames[0], folderName);
 	}
 

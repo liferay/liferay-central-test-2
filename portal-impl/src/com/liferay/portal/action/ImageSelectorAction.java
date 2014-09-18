@@ -86,7 +86,7 @@ public class ImageSelectorAction extends JSONAction {
 			InputStream inputStream = uploadPortletRequest.getFileAsStream(
 				"imageSelectorFileName");
 
-			FileEntry fileEntry = TempFileUtil.addTempFile(
+			FileEntry fileEntry = TempFileUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				StringUtil.randomString() + fileName, tempFolderName,
 				inputStream, MimeTypesUtil.getContentType(fileName));

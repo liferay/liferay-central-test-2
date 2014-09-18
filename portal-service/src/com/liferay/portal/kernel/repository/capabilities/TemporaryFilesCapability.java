@@ -27,26 +27,28 @@ import java.util.UUID;
  */
 public interface TemporaryFilesCapability extends Capability {
 
-	public FileEntry addTemporaryFile(
+	public FileEntry addTemporaryFileEntry(
 			UUID callerUuid, long userId, String folderPath, String fileName,
 			String mimeType, InputStream inputStream)
 		throws PortalException;
 
-	public void deleteExpiredTemporaryFiles() throws PortalException;
+	public void deleteExpiredTemporaryFileEntries() throws PortalException;
 
-	public void deleteTemporaryFile(
+	public void deleteTemporaryFileEntry(
 			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException;
 
-	public FileEntry getTemporaryFile(
+	public FileEntry getTemporaryFileEntries(
 			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException;
 
-	public List<FileEntry> getTemporaryFiles(UUID callerUuid, String folderPath)
+	public List<FileEntry> getTemporaryFileEntries(
+			UUID callerUuid, String folderPath)
 		throws PortalException;
 
-	public long getTemporaryFilesTimeout();
+	public long getTemporaryFileEntriesTimeout();
 
-	public void setTemporaryFilesTimeout(long temporaryFilesTimeout);
+	public void setTemporaryFileEntriesTimeout(
+		long temporaryFileEntriesTimeout);
 
 }

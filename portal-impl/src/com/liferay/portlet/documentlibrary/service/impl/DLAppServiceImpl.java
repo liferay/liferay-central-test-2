@@ -388,7 +388,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		return TempFileUtil.addTempFile(
+		return TempFileUtil.addTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName, file, mimeType);
 	}
 
@@ -423,7 +423,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		return TempFileUtil.addTempFile(
+		return TempFileUtil.addTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName, inputStream,
 			mimeType);
 	}
@@ -851,7 +851,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		TempFileUtil.deleteTempFile(
+		TempFileUtil.deleteTempFileEntry(
 			groupId, getUserId(), fileName, tempFolderName);
 	}
 
@@ -2113,7 +2113,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
-		return TempFileUtil.getTempFileEntryNames(
+		return TempFileUtil.getTempFileNames(
 			groupId, getUserId(), tempFolderName);
 	}
 

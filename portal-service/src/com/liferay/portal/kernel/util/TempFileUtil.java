@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class TempFileUtil {
 
-	public static FileEntry addTempFile(
+	public static FileEntry addTempFileEntry(
 			long groupId, long userId, String fileName, String tempFolderName,
 			File file, String mimeType)
 		throws PortalException {
@@ -59,7 +59,7 @@ public class TempFileUtil {
 		try {
 			inputStream = new FileInputStream(file);
 
-			return addTempFile(
+			return addTempFileEntry(
 				groupId, userId, fileName, tempFolderName, inputStream,
 				mimeType);
 		}
@@ -71,7 +71,7 @@ public class TempFileUtil {
 		}
 	}
 
-	public static FileEntry addTempFile(
+	public static FileEntry addTempFileEntry(
 			long groupId, long userId, String fileName, String tempFolderName,
 			InputStream inputStream, String mimeType)
 		throws PortalException {
@@ -79,54 +79,56 @@ public class TempFileUtil {
 		TemporaryFilesCapability temporaryFilesCapability =
 			_getTemporaryFilesCapability(groupId);
 
-		return temporaryFilesCapability.addTemporaryFile(
+		return temporaryFilesCapability.addTemporaryFileEntry(
 			_UUID, userId, _getFolderPath(userId, tempFolderName), fileName,
 			mimeType, inputStream);
 	}
 
-	public static void deleteTempFile(long fileEntryId) throws PortalException {
+	public static void deleteTempFileEntry(long fileEntryId)
+		throws PortalException {
+
 		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(
 			fileEntryId);
 
 		DLFolder dlFolder = dlFileEntry.getFolder();
 
-		deleteTempFile(
+		deleteTempFileEntry(
 			dlFileEntry.getGroupId(), dlFileEntry.getUserId(),
 			dlFileEntry.getTitle(), dlFolder.getName());
 	}
 
-	public static void deleteTempFile(
-			long groupId, long userId, String fileName, String tempFolderName)
+	public static void deleteTempFileEntry(
+			long groupId, long userId, String fileName, String folderName)
 		throws PortalException {
 
 		TemporaryFilesCapability temporaryFilesCapability =
 			_getTemporaryFilesCapability(groupId);
 
-		temporaryFilesCapability.deleteTemporaryFile(
-			_UUID, _getFolderPath(userId, tempFolderName), fileName);
+		temporaryFilesCapability.deleteTemporaryFileEntry(
+			_UUID, _getFolderPath(userId, folderName), fileName);
 	}
 
-	public static FileEntry getTempFile(
-			long groupId, long userId, String fileName, String tempFolderName)
+	public static FileEntry getTempFileEntry(
+			long groupId, long userId, String fileName, String folderName)
 		throws PortalException {
 
 		TemporaryFilesCapability temporaryFilesCapability =
 			_getTemporaryFilesCapability(groupId);
 
-		return temporaryFilesCapability.getTemporaryFile(
-			_UUID, _getFolderPath(userId, tempFolderName), fileName);
+		return temporaryFilesCapability.getTemporaryFileEntries(
+			_UUID, _getFolderPath(userId, folderName), fileName);
 	}
 
-	public static String[] getTempFileEntryNames(
-			long groupId, long userId, String tempFolderName)
+	public static String[] getTempFileNames(
+			long groupId, long userId, String folderName)
 		throws PortalException {
 
 		TemporaryFilesCapability temporaryFilesCapability =
 			_getTemporaryFilesCapability(groupId);
 
 		List<FileEntry> fileEntries =
-			temporaryFilesCapability.getTemporaryFiles(
-				_UUID, _getFolderPath(userId, tempFolderName));
+			temporaryFilesCapability.getTemporaryFileEntries(
+				_UUID, _getFolderPath(userId, folderName));
 
 		List<String> fileNames = new ArrayList<>();
 

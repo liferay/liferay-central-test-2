@@ -52,7 +52,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public FileEntry addTemporaryFile(
+	public FileEntry addTemporaryFileEntry(
 			UUID callerUuid, long userId, String folderPath, String fileName,
 			String mimeType, InputStream inputStream)
 		throws PortalException {
@@ -82,7 +82,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public void deleteExpiredTemporaryFiles() throws PortalException {
+	public void deleteExpiredTemporaryFileEntries() throws PortalException {
 		BulkOperationCapability bulkOperationCapability =
 			_localRepository.getCapability(BulkOperationCapability.class);
 
@@ -91,7 +91,8 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 				BulkOperationCapability.Field.CreateDate.class,
 				BulkOperationCapability.Operator.LT,
 				new Date(
-					System.currentTimeMillis() - getTemporaryFilesTimeout()));
+					System.currentTimeMillis() -
+						getTemporaryFileEntriesTimeout()));
 
 		bulkOperationCapability.execute(
 			bulkFilter,
@@ -99,12 +100,12 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public void deleteTemporaryFile(
+	public void deleteTemporaryFileEntry(
 			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException {
 
 		try {
-			FileEntry fileEntry = getTemporaryFile(
+			FileEntry fileEntry = getTemporaryFileEntries(
 				callerUuid, folderPath, fileName);
 
 			_localRepository.deleteFileEntry(fileEntry.getFileEntryId());
@@ -114,7 +115,7 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public FileEntry getTemporaryFile(
+	public FileEntry getTemporaryFileEntries(
 			UUID callerUuid, String folderPath, String fileName)
 		throws PortalException {
 
@@ -124,7 +125,8 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public List<FileEntry> getTemporaryFiles(UUID callerUuid, String folderPath)
+	public List<FileEntry> getTemporaryFileEntries(
+			UUID callerUuid, String folderPath)
 		throws PortalException {
 
 		try {
@@ -140,29 +142,31 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 	}
 
 	@Override
-	public long getTemporaryFilesTimeout() {
+	public long getTemporaryFileEntriesTimeout() {
 		ConfigurationCapability configurationCapability =
 			_localRepository.getCapability(ConfigurationCapability.class);
 
-		String temporaryFilesTimeout =
+		String temporaryFileEntriesTimeout =
 			configurationCapability.getProperty(
-				getClass(), _PROPERTY_TEMPORARY_FILES_TIMEOUT);
+				getClass(), _PROPERTY_TEMPORARY_FILE_ENTRIES_TIMEOUT);
 
-		if (temporaryFilesTimeout == null) {
-			return _TEMPORARY_FILES_TIMEOUT_DEFAULT;
+		if (temporaryFileEntriesTimeout == null) {
+			return _TEMPORARY_FILE_ENTRIES_TIMEOUT_DEFAULT;
 		}
 
-		return GetterUtil.getLong(temporaryFilesTimeout);
+		return GetterUtil.getLong(temporaryFileEntriesTimeout);
 	}
 
 	@Override
-	public void setTemporaryFilesTimeout(long temporaryFilesTimeout) {
+	public void setTemporaryFileEntriesTimeout(
+		long temporaryFileEntriesTimeout) {
+
 		ConfigurationCapability configurationCapability =
 			_localRepository.getCapability(ConfigurationCapability.class);
 
 		configurationCapability.setProperty(
-			getClass(), _PROPERTY_TEMPORARY_FILES_TIMEOUT,
-			String.valueOf(temporaryFilesTimeout));
+			getClass(), _PROPERTY_TEMPORARY_FILE_ENTRIES_TIMEOUT,
+			String.valueOf(temporaryFileEntriesTimeout));
 	}
 
 	protected Folder addFolder(
@@ -260,10 +264,10 @@ public class TemporaryFilesCapabilityImpl implements TemporaryFilesCapability {
 
 	private static final String _FOLDER_NAME_TEMP = "temp";
 
-	private static final String _PROPERTY_TEMPORARY_FILES_TIMEOUT =
+	private static final String _PROPERTY_TEMPORARY_FILE_ENTRIES_TIMEOUT =
 		"temporaryFilesTimeout";
 
-	private static final long _TEMPORARY_FILES_TIMEOUT_DEFAULT =
+	private static final long _TEMPORARY_FILE_ENTRIES_TIMEOUT_DEFAULT =
 		12 * 60 * 60 * 1000;
 
 	private LocalRepository _localRepository;

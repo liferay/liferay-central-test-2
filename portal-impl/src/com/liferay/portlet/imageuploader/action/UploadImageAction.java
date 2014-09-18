@@ -191,7 +191,7 @@ public class UploadImageAction extends PortletAction {
 		String fileName = uploadPortletRequest.getFileName("fileName");
 
 		try {
-			TempFileUtil.deleteTempFile(
+			TempFileUtil.deleteTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				fileName, getTempImageFolderName());
 		}
@@ -203,7 +203,7 @@ public class UploadImageAction extends PortletAction {
 		try {
 			inputStream = uploadPortletRequest.getFileAsStream("fileName");
 
-			return TempFileUtil.addTempFile(
+			return TempFileUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				fileName, getTempImageFolderName(), inputStream, contentType);
 		}
@@ -218,7 +218,7 @@ public class UploadImageAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return TempFileUtil.getTempFile(
+		return TempFileUtil.getTempFileEntry(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 			getTempImageFileName(portletRequest), getTempImageFolderName());
 	}
@@ -366,7 +366,7 @@ public class UploadImageAction extends PortletAction {
 			File file = FileUtil.createTempFile(bytes);
 
 			try {
-				TempFileUtil.deleteTempFile(
+				TempFileUtil.deleteTempFileEntry(
 					themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 					getTempImageFileName(actionRequest),
 					getTempImageFolderName());
@@ -374,7 +374,7 @@ public class UploadImageAction extends PortletAction {
 			catch (Exception e) {
 			}
 
-			return TempFileUtil.addTempFile(
+			return TempFileUtil.addTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				getTempImageFileName(actionRequest), getTempImageFolderName(),
 				file, tempFileEntry.getMimeType());

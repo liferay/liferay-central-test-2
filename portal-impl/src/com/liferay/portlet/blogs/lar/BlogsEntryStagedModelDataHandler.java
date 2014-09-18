@@ -218,7 +218,7 @@ public class BlogsEntryStagedModelDataHandler
 					inputStream = portletDataContext.getZipEntryAsInputStream(
 						smallImagePath);
 
-					FileEntry fileEntry = TempFileUtil.addTempFile(
+					FileEntry fileEntry = TempFileUtil.addTempFileEntry(
 						serviceContext.getScopeGroupId(), userId,
 						smallImageFileName, BlogsEntry.class.getName(),
 						inputStream,
@@ -249,7 +249,7 @@ public class BlogsEntryStagedModelDataHandler
 						(FileEntry)portletDataContext.getZipEntryAsObject(path);
 
 					FileEntry smallImageFileEntry =
-						TempFileUtil.addTempFile(
+						TempFileUtil.addTempFileEntry(
 							serviceContext.getScopeGroupId(), userId,
 							fileEntry.getTitle(), BlogsEntry.class.getName(),
 							inputStream, fileEntry.getMimeType());
