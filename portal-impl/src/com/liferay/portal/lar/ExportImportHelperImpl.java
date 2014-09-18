@@ -641,7 +641,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		}
 
 		return TempFileUtil.getTempFileEntry(
-			groupId, userId, tempFileEntryNames[0], folderName);
+			groupId, userId, folderName, tempFileEntryNames[0]);
 	}
 
 	@Override

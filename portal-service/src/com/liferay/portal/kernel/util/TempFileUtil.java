@@ -94,11 +94,11 @@ public class TempFileUtil {
 
 		deleteTempFileEntry(
 			dlFileEntry.getGroupId(), dlFileEntry.getUserId(),
-			dlFileEntry.getTitle(), dlFolder.getName());
+			dlFolder.getName(), dlFileEntry.getTitle());
 	}
 
 	public static void deleteTempFileEntry(
-			long groupId, long userId, String fileName, String folderName)
+			long groupId, long userId, String folderName, String fileName)
 		throws PortalException {
 
 		TemporaryFilesCapability temporaryFilesCapability =
@@ -109,7 +109,7 @@ public class TempFileUtil {
 	}
 
 	public static FileEntry getTempFileEntry(
-			long groupId, long userId, String fileName, String folderName)
+			long groupId, long userId, String folderName, String fileName)
 		throws PortalException {
 
 		TemporaryFilesCapability temporaryFilesCapability =

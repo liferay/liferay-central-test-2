@@ -193,7 +193,7 @@ public class UploadImageAction extends PortletAction {
 		try {
 			TempFileUtil.deleteTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				fileName, getTempImageFolderName());
+				getTempImageFolderName(), fileName);
 		}
 		catch (Exception e) {
 		}
@@ -220,7 +220,7 @@ public class UploadImageAction extends PortletAction {
 
 		return TempFileUtil.getTempFileEntry(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			getTempImageFileName(portletRequest), getTempImageFolderName());
+			getTempImageFolderName(), getTempImageFileName(portletRequest));
 	}
 
 	protected String getTempImageFileName(PortletRequest portletRequest) {
@@ -368,8 +368,8 @@ public class UploadImageAction extends PortletAction {
 			try {
 				TempFileUtil.deleteTempFileEntry(
 					themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-					getTempImageFileName(actionRequest),
-					getTempImageFolderName());
+					getTempImageFolderName(),
+					getTempImageFileName(actionRequest));
 			}
 			catch (Exception e) {
 			}

@@ -852,7 +852,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		TempFileUtil.deleteTempFileEntry(
-			groupId, getUserId(), fileName, tempFolderName);
+			groupId, getUserId(), tempFolderName, fileName);
 	}
 
 	/**

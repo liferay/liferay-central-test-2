@@ -248,7 +248,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		try {
 			tempFileEntry = TempFileUtil.getTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				selectedFileName, _TEMP_FOLDER_NAME);
+				_TEMP_FOLDER_NAME, selectedFileName);
 
 			InputStream inputStream = tempFileEntry.getContentStream();
 			String mimeType = tempFileEntry.getMimeType();

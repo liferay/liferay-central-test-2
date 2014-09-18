@@ -352,7 +352,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
 		TempFileUtil.deleteTempFileEntry(
-			groupId, getUserId(), fileName, tempFolderName);
+			groupId, getUserId(), tempFolderName, fileName);
 	}
 
 	/**

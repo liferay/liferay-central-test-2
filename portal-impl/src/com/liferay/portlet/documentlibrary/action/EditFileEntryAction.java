@@ -369,7 +369,7 @@ public class EditFileEntryAction extends PortletAction {
 		try {
 			tempFileEntry = TempFileUtil.getTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				selectedFileName, _TEMP_FOLDER_NAME);
+				_TEMP_FOLDER_NAME, selectedFileName);
 
 			String mimeType = tempFileEntry.getMimeType();
 

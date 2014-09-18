@@ -147,8 +147,8 @@ public class BlogsTestUtil {
 
 				try {
 					fileEntry = TempFileUtil.getTempFileEntry(
-						serviceContext.getScopeGroupId(), userId, "image.jpg",
-						BlogsEntry.class.getName());
+						serviceContext.getScopeGroupId(), userId, BlogsEntry.class.getName(),
+						"image.jpg");
 				}
 				catch (Exception e) {
 					fileEntry = TempFileUtil.addTempFileEntry(
