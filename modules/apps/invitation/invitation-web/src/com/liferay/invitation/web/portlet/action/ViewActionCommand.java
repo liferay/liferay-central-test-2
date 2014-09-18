@@ -16,7 +16,6 @@ package com.liferay.invitation.web.portlet.action;
 
 import com.liferay.invitation.web.util.InvitationUtil;
 import com.liferay.mail.service.MailServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -32,18 +31,14 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.bridges.mvc.ActionCommand;
 import com.liferay.util.bridges.mvc.BaseActionCommand;
 
-import java.io.UnsupportedEncodingException;
-
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
