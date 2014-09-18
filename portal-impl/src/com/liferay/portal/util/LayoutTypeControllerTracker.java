@@ -14,10 +14,10 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.layout.type.DefaultLayoutTypeController;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypeController;
+import com.liferay.portal.model.impl.LayoutTypeControllerImpl;
 import com.liferay.registry.Filter;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
@@ -57,7 +57,7 @@ public class LayoutTypeControllerTracker {
 	private LayoutTypeControllerTracker() {
 		for (String type : _LAYOUT_TYPES) {
 			_defaultLayoutTypeControllers.put(
-				type, new DefaultLayoutTypeController(type));
+				type, new LayoutTypeControllerImpl(type));
 		}
 
 		Registry registry = RegistryUtil.getRegistry();

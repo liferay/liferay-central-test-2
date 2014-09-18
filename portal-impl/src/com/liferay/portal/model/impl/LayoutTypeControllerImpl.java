@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.layout.type;
+package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -43,9 +43,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Raymond Augé
  */
-public class DefaultLayoutTypeController implements LayoutTypeController {
+public class LayoutTypeControllerImpl implements LayoutTypeController {
 
-	public DefaultLayoutTypeController(String type) {
+	public LayoutTypeControllerImpl(String type) {
 		_type = type;
 
 		Filter filter = new Filter(type);
