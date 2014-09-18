@@ -17,6 +17,7 @@ package com.liferay.invitation.web.portlet.action;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -49,11 +50,12 @@ public class InvitationConfigurationAction extends DefaultConfigurationAction {
 		removeDefaultValue(
 			portletRequest, portletPreferences,
 			"emailMessageBody_" + languageId,
-			portletPreferences.getValue("emailMessageBody", ""));
+			portletPreferences.getValue("emailMessageBody", StringPool.BLANK));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
 			"emailMessageSubject_" + languageId,
-			portletPreferences.getValue("emailMessageSubject", ""));
+			portletPreferences.getValue(
+				"emailMessageSubject", StringPool.BLANK));
 	}
 
 	@Override
