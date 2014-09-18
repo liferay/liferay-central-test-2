@@ -267,11 +267,11 @@ public class LiferaySyncCapability implements SyncCapability {
 		}
 
 		@Override
-		public void execute(FileVersion fileVersion) throws PortalException {
+		public void execute(FileVersion fileVersion) {
 		}
 
 		@Override
-		public void execute(Folder folder) throws PortalException {
+		public void execute(Folder folder) {
 			deleteFolder(folder);
 		}
 
