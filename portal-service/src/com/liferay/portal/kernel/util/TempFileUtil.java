@@ -124,17 +124,17 @@ public class TempFileUtil {
 		TemporaryFilesCapability temporaryFilesCapability =
 			_getTemporaryFilesCapability(groupId);
 
-		List<FileEntry> temporaryFiles =
+		List<FileEntry> fileEntries =
 			temporaryFilesCapability.getTemporaryFiles(
 				_UUID, _getFolderPath(userId, tempFolderName));
 
-		List<String> temporaryFileNames = new ArrayList<>();
+		List<String> fileNames = new ArrayList<>();
 
-		for (FileEntry fileEntry : temporaryFiles) {
-			temporaryFileNames.add(fileEntry.getFileName());
+		for (FileEntry fileEntry : fileEntries) {
+			fileNames.add(fileEntry.getFileName());
 		}
 
-		return ArrayUtil.toStringArray(temporaryFileNames);
+		return ArrayUtil.toStringArray(fileNames);
 	}
 
 	private static LocalRepository _addPortletRepository(
