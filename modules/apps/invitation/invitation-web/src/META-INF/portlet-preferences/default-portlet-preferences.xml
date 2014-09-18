@@ -7,10 +7,10 @@
 	</preference>
 	<preference>
 		<name>emailMessageBody</name>
-		<value>com/liferay/invitation/web/dependencies/email_message_body.tmpl</value>
+		<value>com/liferay/invitation/web/util/dependencies/email_message_body.tmpl</value>
 	</preference>
 	<preference>
 		<name>emailMessageSubject</name>
-		<value>com/liferay/invitation/web/dependencies/email_message_subject.tmpl</value>
+		<value>com/liferay/invitation/web/util/dependencies/email_message_subject.tmpl</value>
 	</preference>
 </portlet-preferences>
