@@ -1403,8 +1403,6 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_TEMPLATE_CACHE_ENABLED = "layout.template.cache.enabled";
 
-	public static final String LAYOUT_TYPES = "layout.types";
-
 	public static final String LAYOUT_URL = "layout.url";
 
 	public static final String LAYOUT_URL_FRIENDLIABLE = "layout.url.friendliable";
