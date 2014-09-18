@@ -141,11 +141,6 @@ public class PortletConstants {
 		return assemblePortletId(portletId, 0, instanceId);
 	}
 
-	/**
-	 * Returns an instance ID for use by instanceable portlets.
-	 *
-	 * @return the instance ID
-	 */
 	public static String generateInstanceId() {
 		return StringUtil.randomString(12);
 	}
