@@ -297,8 +297,11 @@ public class Watcher implements Runnable {
 
 	protected boolean isIgnoredFilePath(Path filePath) {
 		try {
+			String fileName = String.valueOf(filePath.getFileName());
+
 			if (FileUtil.isIgnoredFilePath(filePath) ||
-				!FileUtil.isValidFileName(filePath)) {
+				((Files.isDirectory(filePath) && (fileName.length() > 100)) ||
+				 (!Files.isDirectory(filePath) && (fileName.length() > 255)))) {
 
 				if (_logger.isDebugEnabled()) {
 					_logger.debug("Ignored file path {}", filePath);
