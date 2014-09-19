@@ -54,7 +54,7 @@ public class NetworkUtilitiesUpgrade {
 					new String[] {
 						"30",
 						"com_liferay_network_utilities_web_portlet_" +
-							"NetworkPortlet"
+							"NetworkUtilitiesPortlet"
 					}
 				};
 			}
