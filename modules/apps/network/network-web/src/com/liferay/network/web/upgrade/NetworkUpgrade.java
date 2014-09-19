@@ -53,8 +53,7 @@ public class NetworkUpgrade {
 				return new String[][] {
 					new String[] {
 						"30",
-						"com_liferay_network_web_portlet_" +
-							"NetworkPortlet"
+						"com_liferay_network_web_portlet_NetworkPortlet"
 					}
 				};
 			}
