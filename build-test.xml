@@ -2490,6 +2490,10 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 
 		<property name="plugins.includes" value="so-portlet,${dependent-apps}" />
 
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.parent.dir=${app.server.parent.dir}
+
+plugins.includes=${plugins.includes}</echo>
+
 		<ant dir="${lp.plugins.dir}" target="clean" />
 
 		<ant dir="${lp.plugins.dir}" target="compile" />
