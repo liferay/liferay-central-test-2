@@ -48,8 +48,9 @@ public class TemporaryFileEntriesMessageListener extends BaseMessageListener {
 					catch (Exception e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to try to cleanup temporary files in " +
-									"repository " + repository.getRepositoryId(),
+								"Unable to delete expired temporary file " +
+									"entries in repository " +
+										repository.getRepositoryId(),
 								e);
 						}
 					}
