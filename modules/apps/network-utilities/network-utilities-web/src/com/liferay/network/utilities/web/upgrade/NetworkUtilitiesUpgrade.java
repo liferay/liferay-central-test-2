@@ -30,8 +30,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Peter Fellwock
  */
-@Component(immediate = true, service = NetworkUpgrade.class)
-public class NetworkUpgrade {
+@Component(immediate = true, service = NetworkUtilitiesUpgrade.class)
+public class NetworkUtilitiesUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(

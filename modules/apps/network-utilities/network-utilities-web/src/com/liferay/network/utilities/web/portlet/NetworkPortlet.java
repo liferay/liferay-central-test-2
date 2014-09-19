@@ -14,7 +14,7 @@
 
 package com.liferay.network.utilities.web.portlet;
 
-import com.liferay.network.utilities.web.upgrade.NetworkUpgrade;
+import com.liferay.network.utilities.web.upgrade.NetworkUtilitiesUpgrade;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Reference;
 public class NetworkPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
-	protected void setNetworkUpgrade(NetworkUpgrade networkUpgrade) {
+	protected void setNetworkUpgrade(NetworkUtilitiesUpgrade networkUpgrade) {
 	}
 
 }
