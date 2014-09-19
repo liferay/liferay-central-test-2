@@ -34,6 +34,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
@@ -82,6 +83,10 @@ public class Watcher implements Runnable {
 		catch (Exception e) {
 			_watchService = null;
 		}
+	}
+
+	public List<String> getDownloadedFiles() {
+		return _downloadedFiles;
 	}
 
 	@Override
@@ -296,6 +301,10 @@ public class Watcher implements Runnable {
 	}
 
 	protected boolean isIgnoredFilePath(Path filePath) {
+		if (_downloadedFiles.remove(filePath.toString())) {
+			return true;
+		}
+
 		try {
 			String fileName = String.valueOf(filePath.getFileName());
 
@@ -361,6 +370,7 @@ public class Watcher implements Runnable {
 
 	private static Logger _logger = LoggerFactory.getLogger(Watcher.class);
 
+	private List<String> _downloadedFiles = new ArrayList<String>();
 	private BidirectionalMap<WatchKey, Path> _filePaths =
 		new BidirectionalMap<WatchKey, Path>();
 	private boolean _recursive;
