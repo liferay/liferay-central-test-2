@@ -45,10 +45,11 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = Portlet.class
 )
-public class NetworkPortlet extends MVCPortlet {
+public class NetworkUtilitiesPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
-	protected void setNetworkUpgrade(NetworkUtilitiesUpgrade networkUpgrade) {
+	protected void setNetworkUtilitiesUpgrade(
+		NetworkUtilitiesUpgrade networkUtilitiesUpgrade) {
 	}
 
 }
