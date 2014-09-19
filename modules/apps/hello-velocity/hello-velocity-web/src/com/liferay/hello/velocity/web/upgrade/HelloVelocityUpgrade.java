@@ -71,4 +71,5 @@ public class HelloVelocityUpgrade {
 	}
 
 	private ReleaseLocalService _releaseLocalService;
+
 }
