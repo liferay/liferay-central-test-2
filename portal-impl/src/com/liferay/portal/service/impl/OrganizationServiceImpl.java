@@ -493,8 +493,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
-			return organizationPersistence.filterFindByCompanyId(
-				companyId);
+			return organizationPersistence.filterFindByCompanyId(companyId);
 		}
 
 		return organizationPersistence.filterFindByC_P(
