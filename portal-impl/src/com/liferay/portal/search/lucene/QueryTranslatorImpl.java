@@ -117,7 +117,6 @@ public class QueryTranslatorImpl implements QueryTranslator {
 				String text = term.text();
 
 				if (Validator.equals(term.field(), Field.TREE_PATH)) {
-
 					text = text.replaceAll("/", "\\\\/");
 				}
 
