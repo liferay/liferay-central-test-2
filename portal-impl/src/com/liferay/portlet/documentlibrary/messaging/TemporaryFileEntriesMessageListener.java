@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * @author Ivan Zaera
  */
-public class TemporaryFilesMessageListener implements MessageListener {
+public class TemporaryFileEntriesMessageListener implements MessageListener {
 
 	@Override
 	public void receive(Message message) throws MessageListenerException {
@@ -73,6 +73,6 @@ public class TemporaryFilesMessageListener implements MessageListener {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		TemporaryFilesMessageListener.class);
+		TemporaryFileEntriesMessageListener.class);
 
 }
