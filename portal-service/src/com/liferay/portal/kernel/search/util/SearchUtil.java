@@ -39,9 +39,6 @@ public class SearchUtil {
 
 	public static final String HIGHLIGHT_TAG_OPEN = "<lr_hl>";
 
-	public static final String HIGHLIGHT_TAG_PATTERN =
-		HIGHLIGHT_TAG_OPEN + "(.*?)" + HIGHLIGHT_TAG_CLOSE;
-
 	public static void addSnippet(
 		Document document, Set<String> queryTerms, String snippet,
 		String snippetFieldName) {
@@ -141,6 +138,7 @@ public class SearchUtil {
 		return sb.toString();
 	}
 
-	private static Pattern _pattern = Pattern.compile(HIGHLIGHT_TAG_PATTERN);
+	private static Pattern _pattern = Pattern.compile(
+		HIGHLIGHT_TAG_OPEN + "(.*?)" + HIGHLIGHT_TAG_CLOSE);
 
 }
