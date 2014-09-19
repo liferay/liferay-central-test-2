@@ -21,6 +21,6 @@ import org.springframework.aop.framework.AdvisedSupport;
  */
 public interface AdvisableSupportProxy {
 
-	AdvisedSupport getAdvisedSupport();
+	public AdvisedSupport getAdvisedSupport();
 
 }
