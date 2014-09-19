@@ -65,7 +65,7 @@ public class InvitationUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			InvitationPortlet.class.getName(),
+			"com.liferay.invitation.web",
 			Collections.<UpgradeProcess> singletonList(upgradePortletId), 1, 0,
 			false);
 	}
