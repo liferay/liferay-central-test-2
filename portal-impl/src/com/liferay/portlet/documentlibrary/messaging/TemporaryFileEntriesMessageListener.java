@@ -30,6 +30,24 @@ import com.liferay.portal.service.RepositoryLocalServiceUtil;
  */
 public class TemporaryFileEntriesMessageListener extends BaseMessageListener {
 
+	protected void deleteExpiredTemporaryFileEntries(Repository repository)
+		throws PortalException {
+
+		LocalRepository localRepository =
+			RepositoryLocalServiceUtil.getLocalRepositoryImpl(
+				repository.getRepositoryId());
+
+		if (localRepository.isCapabilityProvided(
+				TemporaryFileEntriesCapability.class)) {
+
+			TemporaryFileEntriesCapability temporaryFileEntriesCapability =
+				localRepository.getCapability(
+					TemporaryFileEntriesCapability.class);
+
+			temporaryFileEntriesCapability.deleteExpiredTemporaryFileEntries();
+		}
+	}
+
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		ActionableDynamicQuery actionableDynamicQuery =
@@ -41,7 +59,7 @@ public class TemporaryFileEntriesMessageListener extends BaseMessageListener {
 				@Override
 				public void performAction(Object object) {
 					Repository repository = (Repository)object;
-		
+
 					try {
 						deleteExpiredTemporaryFileEntries(repository);
 					}
@@ -59,24 +77,6 @@ public class TemporaryFileEntriesMessageListener extends BaseMessageListener {
 			});
 
 		actionableDynamicQuery.performActions();
-	}
-
-	protected void deleteExpiredTemporaryFileEntries(Repository repository)
-		throws PortalException {
-
-		LocalRepository localRepository =
-			RepositoryLocalServiceUtil.getLocalRepositoryImpl(
-				repository.getRepositoryId());
-
-		if (localRepository.isCapabilityProvided(
-				TemporaryFileEntriesCapability.class)) {
-
-			TemporaryFileEntriesCapability temporaryFileEntriesCapability =
-				localRepository.getCapability(
-					TemporaryFileEntriesCapability.class);
-
-			temporaryFileEntriesCapability.deleteExpiredTemporaryFileEntries();
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
