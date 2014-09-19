@@ -133,6 +133,10 @@ public class DDMIndexerImpl implements DDMIndexer {
 							}
 						}
 						else {
+							if (type.equals(DDMImpl.TYPE_DDM_TEXT_HTML)) {
+								valueString = HtmlUtil.extractText(valueString);
+							}
+
 							if (indexType.equals("keyword")) {
 								document.addKeyword(name, valueString);
 							}
