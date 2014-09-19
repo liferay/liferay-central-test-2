@@ -32,12 +32,12 @@ import java.util.regex.Pattern;
  */
 public class SearchUtil {
 
-	public static final String[] HIGHLIGHTS =
-		{"<span class=\"highlight\">", "</span>"};
-
 	public static final String HIGHLIGHT_TAG_CLOSE = "</liferay-hl>";
 
 	public static final String HIGHLIGHT_TAG_OPEN = "<liferay-hl>";
+
+	public static final String[] HIGHLIGHTS =
+		{"<span class=\"highlight\">", "</span>"};
 
 	public static void addSnippet(
 		Document document, Set<String> queryTerms, String snippet,
