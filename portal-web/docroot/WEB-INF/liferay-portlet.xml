@@ -2102,7 +2102,7 @@
 			<scheduler-event-listener-class>com.liferay.portlet.documentlibrary.messaging.TemporaryFileEntriesMessageListener</scheduler-event-listener-class>
 			<trigger>
 				<simple>
-					<property-key>dl.temp.file.entries.check.interval</property-key>
+					<property-key>dl.temporary.file.entries.check.interval</property-key>
 					<time-unit>hour</time-unit>
 				</simple>
 			</trigger>
