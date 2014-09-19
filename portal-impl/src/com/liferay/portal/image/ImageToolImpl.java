@@ -690,7 +690,7 @@ public class ImageToolImpl implements ImageTool {
 	}
 
 	private ImageToolImpl() {
-		ImageIO.setUseCache(PropsValues.IMAGE_USE_DISK_CACHE);
+		ImageIO.setUseCache(PropsValues.IMAGE_IO_USE_DISK_CACHE);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ImageToolImpl.class);

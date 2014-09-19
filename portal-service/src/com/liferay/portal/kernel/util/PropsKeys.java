@@ -1037,7 +1037,7 @@ public interface PropsKeys {
 
 	public static final String IMAGE_HOOK_IMPL = "image.hook.impl";
 
-	public static final String IMAGE_USE_DISK_CACHE = "image.use.disk.cache";
+	public static final String IMAGE_IO_USE_DISK_CACHE = "image.io.use.disk.cache";
 
 	public static final String IMAGEMAGICK_ENABLED = "imagemagick.enabled";
 
