@@ -14,43 +14,50 @@
 
 package com.liferay.portlet.documentlibrary.messaging;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.capabilities.TemporaryFileEntriesCapability;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.service.RepositoryLocalServiceUtil;
 
-import java.util.List;
-
 /**
  * @author Ivan Zaera
  */
-public class TemporaryFileEntriesMessageListener implements MessageListener {
+public class TemporaryFileEntriesMessageListener extends BaseMessageListener {
 
 	@Override
-	public void receive(Message message) {
-		List<Repository> repositories =
-			RepositoryLocalServiceUtil.getRepositories(
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	protected void doReceive(Message message) throws Exception {
+		ActionableDynamicQuery actionableDynamicQuery =
+			RepositoryLocalServiceUtil.getActionableDynamicQuery();
 
-		for (Repository repository : repositories) {
-			try {
-				deleteExpiredTemporaryFileEntries(repository);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to try to cleanup temporary files in " +
-							"repository " + repository.getRepositoryId(),
-						e);
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
+
+				@Override
+				public void performAction(Object object) {
+					Repository repository = (Repository)object;
+		
+					try {
+						deleteExpiredTemporaryFileEntries(repository);
+					}
+					catch (Exception e) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"Unable to try to cleanup temporary files in " +
+									"repository " + repository.getRepositoryId(),
+								e);
+						}
+					}
 				}
-			}
-		}
+
+			});
+
+		actionableDynamicQuery.performActions();
 	}
 
 	protected void deleteExpiredTemporaryFileEntries(Repository repository)
