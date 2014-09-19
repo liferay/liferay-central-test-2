@@ -9,7 +9,7 @@
 		<dirset dir="iframe" includes="*" />
 		<dirset dir="invitation" includes="*" />
 		<dirset dir="loan-calculator" includes="*" />
-		<dirset dir="network" includes="*" />
+		<dirset dir="network-utilities" includes="*" />
 		<dirset dir="polls" includes="*" />
 		<dirset dir="social" includes="*" />
 		<dirset dir="web-proxy" includes="*" />
