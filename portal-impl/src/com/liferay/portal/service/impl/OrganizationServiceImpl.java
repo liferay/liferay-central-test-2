@@ -496,10 +496,9 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			return organizationPersistence.filterFindByCompanyId(
 				companyId);
 		}
-		else {
-			return organizationPersistence.filterFindByC_P(
-				companyId, parentOrganizationId);
-		}
+
+		return organizationPersistence.filterFindByC_P(
+			companyId, parentOrganizationId);
 	}
 
 	/**
@@ -534,10 +533,9 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			return organizationPersistence.filterFindByCompanyId(
 				companyId, start, end);
 		}
-		else {
-			return organizationPersistence.filterFindByC_P(
-				companyId, parentOrganizationId, start, end);
-		}
+
+		return organizationPersistence.filterFindByC_P(
+			companyId, parentOrganizationId, start, end);
 	}
 
 	/**
@@ -557,10 +555,9 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 			return organizationPersistence.filterCountByCompanyId(companyId);
 		}
-		else {
-			return organizationPersistence.filterCountByC_P(
-						companyId, parentOrganizationId);
-		}
+
+		return organizationPersistence.filterCountByC_P(
+			companyId, parentOrganizationId);
 	}
 
 	/**
