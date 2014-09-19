@@ -19,7 +19,7 @@ import org.springframework.aop.framework.AdvisedSupport;
 /**
  * @author Miguel Pastor
  */
-public interface AdvisableSupportProxy {
+public interface AdvisedSupportProxy {
 
 	public AdvisedSupport getAdvisedSupport();
 

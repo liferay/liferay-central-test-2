@@ -43,7 +43,7 @@ import org.springframework.util.ClassUtils;
  * @author Shuyang Zhou
  */
 public class ServiceBeanAopProxy
-	implements AdvisableSupportProxy, AopProxy, InvocationHandler {
+	implements AdvisedSupportProxy, AopProxy, InvocationHandler {
 
 	public static AdvisedSupport getAdvisedSupport(Object proxy)
 		throws Exception {
@@ -51,9 +51,9 @@ public class ServiceBeanAopProxy
 		InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(
 			proxy);
 
-		if (invocationHandler instanceof AdvisableSupportProxy) {
-			AdvisableSupportProxy advisableSupportProxy =
-				(AdvisableSupportProxy)invocationHandler;
+		if (invocationHandler instanceof AdvisedSupportProxy) {
+			AdvisedSupportProxy advisableSupportProxy =
+				(AdvisedSupportProxy)invocationHandler;
 
 			return advisableSupportProxy.getAdvisedSupport();
 		}

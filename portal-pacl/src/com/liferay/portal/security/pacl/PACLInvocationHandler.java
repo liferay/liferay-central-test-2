@@ -15,7 +15,7 @@
 package com.liferay.portal.security.pacl;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalServicePermission;
-import com.liferay.portal.spring.aop.AdvisableSupportProxy;
+import com.liferay.portal.spring.aop.AdvisedSupportProxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -32,7 +32,7 @@ import org.springframework.aop.framework.AdvisedSupport;
  * @author Raymond Augé
  */
 public class PACLInvocationHandler
-	implements AdvisableSupportProxy, InvocationHandler {
+	implements AdvisedSupportProxy, InvocationHandler {
 
 	public PACLInvocationHandler(InvocationHandler invocationHandler) {
 		this(invocationHandler, null);
