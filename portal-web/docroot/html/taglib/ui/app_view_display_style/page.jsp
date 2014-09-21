@@ -30,20 +30,20 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 			<aui:nav-item anchorCssClass="btn btn-default" dropdown="<%= true %>" iconCssClass='<%= "icon-" + _getIcon(displayStyle) %>'>
 
 				<%
-				for (String dataStyle : displayStyles) {
+				for (String curDisplayStyle : displayStyles) {
 				%>
 
 					<c:choose>
 						<c:when test="<%= displayStyle != null %>">
 
 							<%
-							displayStyleURL.setParameter("displayStyle", dataStyle);
+							displayStyleURL.setParameter("displayStyle", curDisplayStyle);
 							%>
 
 							<aui:nav-item
 								href="<%= displayStyleURL.toString() %>"
-								iconCssClass='<%= "icon-" + _getIcon(dataStyle) %>'
-								label="<%= dataStyle %>"
+								iconCssClass='<%= "icon-" + _getIcon(curDisplayStyle) %>'
+								label="<%= curDisplayStyle %>"
 							/>
 						</c:when>
 						<c:otherwise>
@@ -51,14 +51,14 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 							<%
 							Map<String, Object> data = new HashMap<String, Object>();
 
-							data.put("displayStyle", dataStyle);
+							data.put("displayStyle", curDisplayStyle);
 							%>
 
 							<aui:nav-item
 								anchorData="<%= data %>"
 								href="javascript:;"
-								iconCssClass='<%= "icon-" + _getIcon(dataStyle) %>'
-								label="<%= dataStyle %>"
+								iconCssClass='<%= "icon-" + _getIcon(curDisplayStyle) %>'
+								label="<%= curDisplayStyle %>"
 							/>
 						</c:otherwise>
 					</c:choose>
