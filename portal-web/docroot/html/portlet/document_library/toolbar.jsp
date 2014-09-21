@@ -19,15 +19,13 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
-String keywords = ParamUtil.getString(request, "keywords");
-
 Folder folder = (Folder)request.getAttribute("view.jsp-folder");
 
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-repositoryId"));
 
-Group scopeGroup = themeDisplay.getScopeGroup();
+String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <aui:nav-bar>
@@ -39,6 +37,11 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 	<aui:nav cssClass="navbar-nav" id="toolbarContainer">
 		<aui:nav-item cssClass="hide" dropdown="<%= true %>" id="actionsButtonContainer" label="actions">
+			
+			<%
+			Group scopeGroup = themeDisplay.getScopeGroup();
+			%>
+
 			<c:if test="<%= !scopeGroup.isStaged() || scopeGroup.isStagingGroup() || !scopeGroup.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY) %>">
 
 				<%
