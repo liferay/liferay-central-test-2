@@ -109,6 +109,10 @@ else {
 
 			<c:choose>
 				<c:when test='<%= (((folderId == rootFolderId) && !expandFolder) || ((folder != null) && (folder.isRoot() && !folder.isDefaultRepository() && !expandFolder))) && !browseBy.equals("file-entry-type") %>'>
+					<portlet:renderURL var="viewDocumentsHomeURL">
+						<portlet:param name="struts_action" value="/document_library/view" />
+						<portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" />
+					</portlet:renderURL>
 
 					<%
 					String navigation = ParamUtil.getString(request, "navigation", "home");
@@ -117,11 +121,6 @@ else {
 					request.setAttribute("view_entries.jsp-folderId", String.valueOf(folderId));
 					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(repositoryId));
 					%>
-
-					<portlet:renderURL var="viewDocumentsHomeURL">
-						<portlet:param name="struts_action" value="/document_library/view" />
-						<portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" />
-					</portlet:renderURL>
 
 					<aui:nav-item
 						cssClass="folder list-group-item navigation-entry"
@@ -262,7 +261,6 @@ else {
 
 				</c:when>
 				<c:when test='<%= browseBy.equals("file-entry-type") %>'>
-
 					<portlet:renderURL var="viewUpURL">
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="structureId" value="<%= String.valueOf(0) %>" />
