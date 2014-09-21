@@ -68,7 +68,6 @@ List<Folder> mountFolders = DLAppServiceUtil.getMountFolders(scopeGroupId, DLFol
 String keywords = ParamUtil.getString(request, "keywords");
 
 boolean showRepositoryTabs = ParamUtil.getBoolean(request, "showRepositoryTabs");
-
 boolean showSearchInfo = ParamUtil.getBoolean(request, "showSearchInfo");
 
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
@@ -108,9 +107,9 @@ SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, por
 					<portlet:renderURL var="changeSearchFolderURL">
 						<portlet:param name="struts_action" value="/document_library/search" />
 						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
-						<portlet:param name="searchRepositoryId" value="<%= (!searchEverywhere) ? String.valueOf(scopeGroupId) : String.valueOf(repositoryId) %>" />
+						<portlet:param name="searchRepositoryId" value="<%= !searchEverywhere ? String.valueOf(scopeGroupId) : String.valueOf(repositoryId) %>" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-						<portlet:param name="searchFolderId" value="<%= (!searchEverywhere) ? String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) : String.valueOf(folderId) %>" />
+						<portlet:param name="searchFolderId" value="<%= !searchEverywhere ? String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) : String.valueOf(folderId) %>" />
 						<portlet:param name="keywords" value="<%= String.valueOf(keywords) %>" />
 						<portlet:param name="showRepositoryTabs" value="<% (searchEverywhere) ? Boolean.TRUE.toString() : Boolean.FALSE.toString() %>" />
 						<portlet:param name="showSearchInfo" value="<%= Boolean.TRUE.toString() %>" />
