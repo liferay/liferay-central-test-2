@@ -14,7 +14,6 @@
 
 package com.liferay.invitation.web.upgrade;
 
-import com.liferay.invitation.web.portlet.InvitationPortlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;

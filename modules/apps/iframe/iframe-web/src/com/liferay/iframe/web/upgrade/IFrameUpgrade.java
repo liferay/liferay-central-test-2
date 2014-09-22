@@ -14,7 +14,6 @@
 
 package com.liferay.iframe.web.upgrade;
 
-import com.liferay.iframe.web.portlet.IFramePortlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
