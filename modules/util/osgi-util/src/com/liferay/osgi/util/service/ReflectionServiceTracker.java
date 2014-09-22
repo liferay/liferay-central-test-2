@@ -48,10 +48,10 @@ public class ReflectionServiceTracker implements Closeable {
 
 		List<InjectionPoint> injectionPoints = getInjectionPoints(targetObject);
 
-		_serviceTrackers = new ArrayList<ServiceTracker<?,?>>();
+		_serviceTrackers = new ArrayList<ServiceTracker<?, ?>>();
 
 		for (InjectionPoint injectionPoint : injectionPoints) {
-			ServiceTracker<?,?> serviceTracker = track(
+			ServiceTracker<?, ?> serviceTracker = track(
 				bundleContext, targetObject, injectionPoint);
 
 			_serviceTrackers.add(serviceTracker);
@@ -60,7 +60,7 @@ public class ReflectionServiceTracker implements Closeable {
 
 	@Override
 	public void close() throws IOException {
-		for (ServiceTracker<?,?> serviceTracker : _serviceTrackers) {
+		for (ServiceTracker<?, ?> serviceTracker : _serviceTrackers) {
 			try {
 				serviceTracker.close();
 			}
@@ -159,9 +159,9 @@ public class ReflectionServiceTracker implements Closeable {
 					injectionPoint.getName() + " on "+ target, e);
 		}
 
-		ServiceTracker<?, ?> serviceTracker = new ServiceTracker<Object,Object>(
+		ServiceTracker<?, ?> serviceTracker = new ServiceTracker<Object, Object>(
 			bundleContext, (Class<Object>)injectionPoint.getParameterType(),
-            null) {
+			null) {
 
 			@Override
 			public Object addingService(ServiceReference<Object> reference) {
@@ -308,7 +308,7 @@ public class ReflectionServiceTracker implements Closeable {
 			}
 	};
 
-	private final ArrayList<ServiceTracker<?,?>> _serviceTrackers;
+	private final ArrayList<ServiceTracker<?, ?>> _serviceTrackers;
 	private Object _unavailableServiceProxy;
 
 }
