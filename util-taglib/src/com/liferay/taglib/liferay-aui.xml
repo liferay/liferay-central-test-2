@@ -1360,7 +1360,7 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<name>ogvUrl</name>
+				<name>ogvURL</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>
@@ -1370,7 +1370,7 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<name>swfUrl</name>
+				<name>swfURL</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>

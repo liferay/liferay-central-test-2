@@ -53,16 +53,16 @@ public class BaseVideoTag extends com.liferay.taglib.util.IncludeTag {
 		return _id;
 	}
 
-	public java.lang.String getOgvUrl() {
-		return _ogvUrl;
+	public java.lang.String getOgvURL() {
+		return _ogvURL;
 	}
 
 	public java.lang.String getPoster() {
 		return _poster;
 	}
 
-	public java.lang.String getSwfUrl() {
-		return _swfUrl;
+	public java.lang.String getSwfURL() {
+		return _swfURL;
 	}
 
 	public java.lang.String getUrl() {
@@ -103,10 +103,10 @@ public class BaseVideoTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("id", id);
 	}
 
-	public void setOgvUrl(java.lang.String ogvUrl) {
-		_ogvUrl = ogvUrl;
+	public void setOgvURL(java.lang.String ogvURL) {
+		_ogvURL = ogvURL;
 
-		setScopedAttribute("ogvUrl", ogvUrl);
+		setScopedAttribute("ogvURL", ogvURL);
 	}
 
 	public void setPoster(java.lang.String poster) {
@@ -115,10 +115,10 @@ public class BaseVideoTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("poster", poster);
 	}
 
-	public void setSwfUrl(java.lang.String swfUrl) {
-		_swfUrl = swfUrl;
+	public void setSwfURL(java.lang.String swfURL) {
+		_swfURL = swfURL;
 
-		setScopedAttribute("swfUrl", swfUrl);
+		setScopedAttribute("swfURL", swfURL);
 	}
 
 	public void setUrl(java.lang.String url) {
@@ -140,9 +140,9 @@ public class BaseVideoTag extends com.liferay.taglib.util.IncludeTag {
 		_flashPlayerVersion = "9,0,0,0";
 		_height = null;
 		_id = null;
-		_ogvUrl = null;
+		_ogvURL = null;
 		_poster = null;
-		_swfUrl = null;
+		_swfURL = null;
 		_url = null;
 		_width = null;
 	}
@@ -159,9 +159,9 @@ public class BaseVideoTag extends com.liferay.taglib.util.IncludeTag {
 		setNamespacedAttribute(request, "flashPlayerVersion", _flashPlayerVersion);
 		setNamespacedAttribute(request, "height", _height);
 		setNamespacedAttribute(request, "id", _id);
-		setNamespacedAttribute(request, "ogvUrl", _ogvUrl);
+		setNamespacedAttribute(request, "ogvURL", _ogvURL);
 		setNamespacedAttribute(request, "poster", _poster);
-		setNamespacedAttribute(request, "swfUrl", _swfUrl);
+		setNamespacedAttribute(request, "swfURL", _swfURL);
 		setNamespacedAttribute(request, "url", _url);
 		setNamespacedAttribute(request, "width", _width);
 	}
@@ -176,9 +176,9 @@ public class BaseVideoTag extends com.liferay.taglib.util.IncludeTag {
 	private java.lang.String _flashPlayerVersion = "9,0,0,0";
 	private java.lang.Object _height = null;
 	private java.lang.String _id = null;
-	private java.lang.String _ogvUrl = null;
+	private java.lang.String _ogvURL = null;
 	private java.lang.String _poster = null;
-	private java.lang.String _swfUrl = null;
+	private java.lang.String _swfURL = null;
 	private java.lang.String _url = null;
 	private java.lang.Object _width = null;
 

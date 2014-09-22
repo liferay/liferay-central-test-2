@@ -24,9 +24,9 @@
 			boundingBox: '#<%= id %>',
 			flashPlayerVersion: '<%= flashPlayerVersion %>',
 			height: <%= height %>,
-			ogvUrl: '<%= ogvUrl %>',
+			ogvUrl: '<%= ogvURL %>',
 			poster: '<%= poster %>',
-			swfUrl: '<%= swfUrl %>',
+			swfUrl: '<%= swfURL %>',
 			url: '<%= url %>',
 			width: <%= width %>
 		}
