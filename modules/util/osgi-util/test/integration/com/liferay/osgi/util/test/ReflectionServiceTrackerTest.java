@@ -15,7 +15,7 @@
 package com.liferay.osgi.util.test;
 
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
-import com.liferay.osgi.util.exception.ServiceUnavailableException;
+import com.liferay.osgi.util.exception.UnavailableServiceException;
 import com.liferay.osgi.util.service.ReflectionServiceTracker;
 import com.liferay.osgi.util.test.instances.TestInstance;
 import com.liferay.osgi.util.test.instances.TestInterface;
@@ -140,7 +140,7 @@ public class ReflectionServiceTrackerTest {
 
 			Assert.fail();
 		}
-		catch (ServiceUnavailableException sue) {
+		catch (UnavailableServiceException sue) {
 		}
 
 		try {
@@ -148,7 +148,7 @@ public class ReflectionServiceTrackerTest {
 
 			Assert.fail();
 		}
-		catch (ServiceUnavailableException sue) {
+		catch (UnavailableServiceException sue) {
 		}
 
 		TrackedOne trackedOne = new TrackedOne();
@@ -211,7 +211,7 @@ public class ReflectionServiceTrackerTest {
 
 			Assert.fail();
 		}
-		catch (ServiceUnavailableException sue) {
+		catch (UnavailableServiceException sue) {
 		}
 
 		try {
@@ -219,7 +219,7 @@ public class ReflectionServiceTrackerTest {
 
 			Assert.fail();
 		}
-		catch (ServiceUnavailableException sue) {
+		catch (UnavailableServiceException sue) {
 		}
 
 		reflectionServiceTracker.close();

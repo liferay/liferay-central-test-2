@@ -14,7 +14,7 @@
 
 package com.liferay.osgi.util.service;
 
-import com.liferay.osgi.util.exception.ServiceUnavailableException;
+import com.liferay.osgi.util.exception.UnavailableServiceException;
 import com.liferay.osgi.util.service.annotations.Reference;
 
 import java.io.Closeable;
@@ -259,7 +259,7 @@ public class ReflectionServiceTracker implements Closeable {
 					Object object, Method method, Object[] parameters)
 				throws Throwable {
 
-				throw new ServiceUnavailableException();
+				throw new UnavailableServiceException();
 			}
 
 		};
