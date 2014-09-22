@@ -55,9 +55,9 @@ public class HelloVelocityUpgrade {
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
 					new String[] {
-					"50",
-					"com_liferay_hello_velocity_web_portlet_" +
-						"HelloVelocityPortlet"
+						"50",
+						"com_liferay_hello_velocity_web_portlet_" +
+							"HelloVelocityPortlet"
 					}
 			};
 
