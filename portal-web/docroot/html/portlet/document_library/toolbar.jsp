@@ -37,7 +37,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 	<aui:nav cssClass="navbar-nav" id="toolbarContainer">
 		<aui:nav-item cssClass="hide" dropdown="<%= true %>" id="actionsButtonContainer" label="actions">
-			
+
 			<%
 			Group scopeGroup = themeDisplay.getScopeGroup();
 			%>
