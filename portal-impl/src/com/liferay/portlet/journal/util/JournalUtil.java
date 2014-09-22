@@ -853,8 +853,9 @@ public class JournalUtil {
 		}
 	}
 
-	public static Map<Locale, String> getEmailArticleApprovalRequestedSubjectMap(
-		PortletPreferences preferences) {
+	public static Map<Locale, String>
+		getEmailArticleApprovalRequestedSubjectMap(
+			PortletPreferences preferences) {
 
 		return LocalizationUtil.getLocalizationMap(
 			preferences, "emailArticleApprovalRequestedSubject",
