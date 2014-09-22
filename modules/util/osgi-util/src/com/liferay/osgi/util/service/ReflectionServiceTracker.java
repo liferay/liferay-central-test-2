@@ -38,20 +38,20 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class ReflectionServiceTracker implements Closeable {
 
-	public ReflectionServiceTracker(Object targetObject) {
-		Class<?> targetObjectClass = targetObject.getClass();
+	public ReflectionServiceTracker(Object target) {
+		Class<?> targetClass = target.getClass();
 
-		Bundle bundle = FrameworkUtil.getBundle(targetObjectClass);
+		Bundle bundle = FrameworkUtil.getBundle(targetClass);
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
-		List<InjectionPoint> injectionPoints = getInjectionPoints(targetObject);
+		List<InjectionPoint> injectionPoints = getInjectionPoints(target);
 
 		_serviceTrackers = new ArrayList<ServiceTracker<?, ?>>();
 
 		for (InjectionPoint injectionPoint : injectionPoints) {
 			ServiceTracker<?, ?> serviceTracker = track(
-				bundleContext, targetObject, injectionPoint);
+				bundleContext, target, injectionPoint);
 
 			_serviceTrackers.add(serviceTracker);
 		}
@@ -71,36 +71,36 @@ public class ReflectionServiceTracker implements Closeable {
 	}
 
 	protected InjectionPoint createInjectionPoint(
-		final Object target, final Method method) {
+		Object target, Method method) {
 
-		Class<?> _injectionPointType = method.getParameterTypes()[0];
+		Class<?> clazz = method.getParameterTypes()[0];
 
-		if (_injectionPointType.isInterface()) {
+		if (clazz.isInterface()) {
 			return new ProxyUnavailableInjectionPoint(
 				target, method, _unavailableServiceProxy);
 		}
-		else {
-			return new InjectionPoint(target, method);
-		}
+
+		return new InjectionPoint(target, method);
 	}
 
 	protected List<Method> getInjectionPointMethods(Object target) {
-		Method[] declaredMethods = target.getClass().getDeclaredMethods();
+		List<Method> injectionPointMethods = new ArrayList<Method>();
 
-		ArrayList<Method> injectionPointMethods = new ArrayList<Method>();
+		Class<?> targetClass = target.getClass();
 
-		for (Method declaredMethod : declaredMethods) {
-			boolean annotationPresent = declaredMethod.isAnnotationPresent(
+		Method[] methods = targetClass.getDeclaredMethods();
+
+		for (Method method : methods) {
+			boolean annotationPresent = method.isAnnotationPresent(
 				Reference.class);
 
-			Class<?>[] parameterTypes = declaredMethod.getParameterTypes();
-
-			Class<?> returnType = declaredMethod.getReturnType();
+			Class<?>[] parameterTypes = method.getParameterTypes();
+			Class<?> returnType = method.getReturnType();
 
 			if (annotationPresent && (parameterTypes.length == 1) &&
 				returnType.equals(void.class)) {
 
-				injectionPointMethods.add(declaredMethod);
+				injectionPointMethods.add(method);
 			}
 		}
 
@@ -108,9 +108,9 @@ public class ReflectionServiceTracker implements Closeable {
 	}
 
 	protected List<InjectionPoint> getInjectionPoints(Object target) {
-		Class<?> targetObjectClass = target.getClass();
+		List<Class<?>> interfaceClasses = new ArrayList<Class<?>>();
 
-		ArrayList<Class<?>> interfaces = new ArrayList<Class<?>>();
+		Class<?> targetClass = target.getClass();
 
 		List<Method> injectionPointMethods = getInjectionPointMethods(target);
 
@@ -119,18 +119,17 @@ public class ReflectionServiceTracker implements Closeable {
 				injectionPointMethod.getParameterTypes()[0];
 
 			if (parameterType.isInterface()) {
-				interfaces.add(parameterType);
+				interfaceClasses.add(parameterType);
 			}
 		}
 
-		ClassLoader classLoader = targetObjectClass.getClassLoader();
+		ClassLoader classLoader = targetClass.getClassLoader();
 
 		_unavailableServiceProxy = Proxy.newProxyInstance(
-			classLoader, interfaces.toArray(new Class[0]), _INVOCATION_HANDLER
-		);
+			classLoader, interfaceClasses.toArray(new Class[0]),
+			_invocationHandler);
 
-		ArrayList<InjectionPoint> injectionPoints =
-			new ArrayList<InjectionPoint>();
+		List<InjectionPoint> injectionPoints = new ArrayList<InjectionPoint>();
 
 		for (Method injectionPointMethod : injectionPointMethods) {
 			InjectionPoint injectionPoint = createInjectionPoint(
@@ -145,7 +144,7 @@ public class ReflectionServiceTracker implements Closeable {
 	}
 
 	protected ServiceTracker<?, ?> track(
-		final BundleContext bundleContext, final Object target,
+		BundleContext bundleContext, final Object target,
 		final InjectionPoint injectionPoint) {
 
 		try {
@@ -153,95 +152,122 @@ public class ReflectionServiceTracker implements Closeable {
 		}
 		catch (Exception e) {
 			throw new RuntimeException(
-				"Could not unset " +
-					injectionPoint.getName() + " on "+ target, e);
+				"Unable to unset " +
+					injectionPoint.getName() + " on "+ target,
+				e);
 		}
 
-		ServiceTracker<?, ?> serviceTracker = new ServiceTracker<Object, Object>(
-			bundleContext, (Class<Object>)injectionPoint.getParameterType(),
-			null) {
+		ServiceTracker<?, ?> serviceTracker =
+			new ServiceTracker<Object, Object>(
+				bundleContext,
+				(Class<Object>)injectionPoint.getParameterType(), null) {
 
-			@Override
-			public Object addingService(ServiceReference<Object> reference) {
-				Object service = super.addingService(reference);
+				@Override
+				public Object addingService(
+					ServiceReference<Object> serviceReference) {
 
-				ServiceReference<Object> currentServiceReference =
-					getServiceReference();
-
-				if ((currentServiceReference == null) ||
-					(reference.compareTo(currentServiceReference) > 0)) {
-
-					try {
-						injectionPoint.inject(service);
-					}
-					catch (Exception e) {
-						throw new RuntimeException(
-							"Could not set service reference using " +
-								injectionPoint.getName() + " on "+ target, e);
-					}
-				}
-
-				return service;
-			}
-
-			@Override
-			public void modifiedService(
-				ServiceReference<Object> reference, Object service) {
-
-				super.modifiedService(reference, service);
-
-				ServiceReference<Object> currentServiceReference =
-					getServiceReference();
-
-				Object currentService = getService(currentServiceReference);
-
-				try {
-					injectionPoint.inject(currentService);
-				}
-				catch (Exception e) {
-					throw new RuntimeException(
-						"Could not set injection point " +
-							injectionPoint.getName() + " on " + target, e);
-				}
-			}
-
-			@Override
-			public void removedService(
-				ServiceReference<Object> serviceReference, Object service) {
-
-				try {
-					super.removedService(serviceReference, service);
+					Object service = super.addingService(serviceReference);
 
 					ServiceReference<Object> currentServiceReference =
 						getServiceReference();
 
-					if (currentServiceReference == null) {
-						injectionPoint.reset();
-					}
-					else {
-						Object currentService = getService(
-							currentServiceReference);
+					if ((currentServiceReference == null) ||
+						(serviceReference.compareTo(
+							currentServiceReference) > 0)) {
 
+						try {
+							injectionPoint.inject(service);
+						}
+						catch (Exception e) {
+							throw new RuntimeException(
+								"Unable to set service reference using " +
+									injectionPoint.getName() + " on "+
+										target,
+								e);
+						}
+					}
+
+					return service;
+				}
+
+				@Override
+				public void modifiedService(
+					ServiceReference<Object> reference, Object service) {
+
+					super.modifiedService(reference, service);
+
+					ServiceReference<Object> currentServiceReference =
+						getServiceReference();
+
+					Object currentService = getService(currentServiceReference);
+
+					try {
 						injectionPoint.inject(currentService);
 					}
+					catch (Exception e) {
+						throw new RuntimeException(
+							"Unable to set injection point " +
+								injectionPoint.getName() + " on " +
+									target,
+							e);
+					}
 				}
-				catch (IllegalStateException ise) {
-					//BundleContext is invalidated... nothing to do
+
+				@Override
+				public void removedService(
+					ServiceReference<Object> serviceReference, Object service) {
+
+					try {
+						super.removedService(serviceReference, service);
+
+						ServiceReference<Object> currentServiceReference =
+							getServiceReference();
+
+						if (currentServiceReference == null) {
+							injectionPoint.reset();
+						}
+						else {
+							Object currentService = getService(
+								currentServiceReference);
+
+							injectionPoint.inject(currentService);
+						}
+					}
+					catch (IllegalStateException ise) {
+					}
+					catch (Exception e) {
+						throw new RuntimeException(
+							"Unable to set injection point " +
+								injectionPoint.getName() + " on " +
+									target,
+							e);
+					}
 				}
-				catch (Exception e) {
-					throw new RuntimeException(
-						"Could not set injection point " +
-							injectionPoint.getName() + " on " + target, e);
-				}
-			}
-		};
+
+			};
 
 		serviceTracker.open();
 
 		return serviceTracker;
 	}
 
-	protected static class InjectionPoint {
+	private static final InvocationHandler _invocationHandler =
+		new InvocationHandler() {
+
+			@Override
+			public Object invoke(
+					Object object, Method method, Object[] parameters)
+				throws Throwable {
+
+				throw new ServiceUnavailableException();
+			}
+
+		};
+
+	private List<ServiceTracker<?, ?>> _serviceTrackers;
+	private Object _unavailableServiceProxy;
+
+	private static class InjectionPoint {
 
 		public String getName() {
 			return _method.getName();
@@ -263,7 +289,7 @@ public class ReflectionServiceTracker implements Closeable {
 			_method.invoke(_target, new Object[]{null});
 		}
 
-		protected InjectionPoint(Object target, Method method) {
+		private InjectionPoint(Object target, Method method) {
 			_target = target;
 			_method = method;
 		}
@@ -273,8 +299,7 @@ public class ReflectionServiceTracker implements Closeable {
 
 	}
 
-	protected static class ProxyUnavailableInjectionPoint
-		extends InjectionPoint {
+	private static class ProxyUnavailableInjectionPoint extends InjectionPoint {
 
 		public ProxyUnavailableInjectionPoint(
 			Object target, Method method, Object proxy) {
@@ -292,21 +317,7 @@ public class ReflectionServiceTracker implements Closeable {
 		}
 
 		private Object _proxy;
+
 	}
-
-	private static final InvocationHandler _INVOCATION_HANDLER =
-		new InvocationHandler() {
-
-			@Override
-			public Object invoke(
-				Object object, Method method, Object[] parameters)
-			throws Throwable {
-
-				throw new ServiceUnavailableException();
-			}
-	};
-
-	private final ArrayList<ServiceTracker<?, ?>> _serviceTrackers;
-	private Object _unavailableServiceProxy;
 
 }
