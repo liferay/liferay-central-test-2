@@ -18,7 +18,6 @@ import com.liferay.osgi.util.exception.ServiceUnavailableException;
 import com.liferay.osgi.util.service.annotations.Reference;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -59,13 +58,12 @@ public class ReflectionServiceTracker implements Closeable {
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void close() {
 		for (ServiceTracker<?, ?> serviceTracker : _serviceTrackers) {
 			try {
 				serviceTracker.close();
 			}
 			catch (Exception e) {
-				//Nothing to do... trying to keep it clean
 			}
 		}
 

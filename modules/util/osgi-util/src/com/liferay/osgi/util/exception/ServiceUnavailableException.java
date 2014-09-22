@@ -18,5 +18,4 @@ package com.liferay.osgi.util.exception;
  * @author Carlos Sierra Andrés
  */
 public class ServiceUnavailableException extends RuntimeException {
-
 }
