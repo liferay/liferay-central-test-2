@@ -167,7 +167,7 @@ public class ReflectionServiceTracker implements Closeable {
 			public Object addingService(ServiceReference<Object> reference) {
 				Object service = super.addingService(reference);
 
-				ServiceReference currentServiceReference =
+				ServiceReference<Object> currentServiceReference =
 					getServiceReference();
 
 				if ((currentServiceReference == null) ||
@@ -192,7 +192,7 @@ public class ReflectionServiceTracker implements Closeable {
 
 				super.modifiedService(reference, service);
 
-				ServiceReference currentServiceReference =
+				ServiceReference<Object> currentServiceReference =
 					getServiceReference();
 
 				Object currentService = getService(currentServiceReference);
@@ -214,7 +214,7 @@ public class ReflectionServiceTracker implements Closeable {
 				try {
 					super.removedService(serviceReference, service);
 
-					ServiceReference currentServiceReference =
+					ServiceReference<Object> currentServiceReference =
 						getServiceReference();
 
 					if (currentServiceReference == null) {
