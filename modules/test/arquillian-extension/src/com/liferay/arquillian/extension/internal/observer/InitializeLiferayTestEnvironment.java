@@ -16,7 +16,6 @@ package com.liferay.arquillian.extension.internal.observer;
 
 import com.liferay.arquillian.extension.internal.descriptor.SpringDescriptor;
 import com.liferay.arquillian.extension.internal.event.LiferayContextCreatedEvent;
-import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.test.jdbc.ResetDatabaseUtilDataSource;
 import com.liferay.portal.util.InitUtil;
 
@@ -35,14 +34,12 @@ import org.jboss.arquillian.test.spi.event.suite.BeforeClass;
  */
 public class InitializeLiferayTestEnvironment {
 
-	public void beforeClass(@Observes BeforeClass beforeClass)
-		throws TemplateException {
-
+	public void beforeClass(@Observes BeforeClass beforeClass) {
 		System.setProperty("catalina.base", ".");
 
 		ResetDatabaseUtilDataSource.initialize();
 
-		List<String> configLocations = configLocations();
+		List<String> configLocations = getConfigLocations();
 
 		InitUtil.initWithSpringAndModuleFramework(
 			false, configLocations, false);
@@ -54,13 +51,13 @@ public class InitializeLiferayTestEnvironment {
 		_event.fire(new LiferayContextCreatedEvent(beforeClass.getTestClass()));
 	}
 
-	protected List<String> configLocations() {
+	protected List<String> getConfigLocations() {
+		List<String> configLocations = new ArrayList<String>();
+
 		ServiceLoader serviceLoader = _instance.get();
 
 		List<SpringDescriptor> springDescriptors =
 			(List<SpringDescriptor>)serviceLoader.all(SpringDescriptor.class);
-
-		List<String> configLocations = new ArrayList<String>();
 
 		for (SpringDescriptor springDescriptor : springDescriptors) {
 			configLocations.addAll(springDescriptor.getConfigLocations());

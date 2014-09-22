@@ -15,7 +15,7 @@
 package com.liferay.arquillian.extension;
 
 import com.liferay.arquillian.extension.internal.descriptor.SpringDescriptor;
-import com.liferay.arquillian.extension.internal.descriptor.impl.SpringDescriptorImpl;
+import com.liferay.arquillian.extension.internal.descriptor.SpringDescriptorImpl;
 import com.liferay.arquillian.extension.internal.observer.InitializeLiferayTestEnvironment;
 
 import org.jboss.arquillian.core.spi.LoadableExtension;
@@ -26,10 +26,11 @@ import org.jboss.arquillian.core.spi.LoadableExtension;
 public class LiferayTestScenarioExtension implements LoadableExtension {
 
 	@Override
-	public void register(ExtensionBuilder builder) {
-		builder.observer(InitializeLiferayTestEnvironment.class);
+	public void register(ExtensionBuilder extensionBuilder) {
+		extensionBuilder.observer(InitializeLiferayTestEnvironment.class);
 
-		builder.service(SpringDescriptor.class, SpringDescriptorImpl.class);
+		extensionBuilder.service(
+			SpringDescriptor.class, SpringDescriptorImpl.class);
 	}
 
 }
