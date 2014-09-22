@@ -1540,8 +1540,8 @@
 		<m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_3>org.apache.avro__avro</m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_3>
 		<m:dependency.management__org.apache.tika__tika-parsers__exclusion_5>de.l3s.boilerpipe__boilerpipe</m:dependency.management__org.apache.tika__tika-parsers__exclusion_5>
 		<m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_4>org.apache.hadoop__hadoop-annotations</m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_4>
-		<m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_5>org.apache.hadoop__hadoop-mapreduce-client-app</m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_5>
 		<m:dependency.management__org.apache.tika__tika-parsers__exclusion_0>com.drewnoakes__metadata-extractor</m:dependency.management__org.apache.tika__tika-parsers__exclusion_0>
+		<m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_5>org.apache.hadoop__hadoop-mapreduce-client-app</m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_5>
 		<m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_6>org.apache.hadoop__hadoop-mapreduce-client-common</m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_6>
 		<m:dependency.management__org.apache.tika__tika-parsers__exclusion_2>com.googlecode.mp4parser__isoparser</m:dependency.management__org.apache.tika__tika-parsers__exclusion_2>
 		<m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_7>org.slf4j__slf4j-api</m:dependency.management__org.apache.hadoop__hadoop-mapreduce-client-hs__exclusion_7>
@@ -1691,8 +1691,8 @@
 		<m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_7>commons-io__commons-io</m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_7>
 		<m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_48>org.apache.hadoop__hadoop-hdfs</m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_48>
 		<m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_8>io.netty__netty</m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_8>
-		<m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_9>log4j__log4j</m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_9>
 		<m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_47>org.apache.hadoop__hadoop-auth</m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_47>
+		<m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_9>log4j__log4j</m:dependency.management__org.apache.hadoop__hadoop-yarn-common__exclusion_9>
 		<m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_46>org.apache.hadoop__hadoop-annotations</m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_46>
 		<m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_39>dom4j__dom4j</m:dependency.management__org.apache.solr__solr-morphlines-core__exclusion_39>
 		<m:dependency.management__org.apache.hadoop__hadoop-hdfs__exclusion_17>tomcat__jasper-runtime</m:dependency.management__org.apache.hadoop__hadoop-hdfs__exclusion_17>
