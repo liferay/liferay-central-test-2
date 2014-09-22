@@ -59,9 +59,8 @@ entriesChecker.setCssClass("entry-selector");
 
 dlSearchContainer.setRowChecker(entriesChecker);
 
-String orderByCol = GetterUtil.getString((String)request.getAttribute("view.jsp-orderByCol"));;
-
-String orderByType = GetterUtil.getString((String)request.getAttribute("view.jsp-orderByType"));;
+String orderByCol = GetterUtil.getString((String)request.getAttribute("view.jsp-orderByCol"));
+String orderByType = GetterUtil.getString((String)request.getAttribute("view.jsp-orderByType"));
 
 OrderByComparator<?> orderByComparator = DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType);
 
@@ -69,8 +68,8 @@ dlSearchContainer.setOrderByCol(orderByCol);
 dlSearchContainer.setOrderByComparator(orderByComparator);
 dlSearchContainer.setOrderByType(orderByType);
 
-List resultsList = null;
-int totalVar = 0;
+List results = null;
+int total = 0;
 
 if (fileEntryTypeId >= 0) {
 	Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntryConstants.getClassName());
@@ -104,13 +103,13 @@ if (fileEntryTypeId >= 0) {
 
 	Hits hits = indexer.search(searchContext);
 
-	totalVar = hits.getLength();
+	total = hits.getLength();
 
-	dlSearchContainer.setTotal(totalVar);
+	dlSearchContainer.setTotal(total);
 
 	Document[] docs = hits.getDocs();
 
-	resultsList = new ArrayList(docs.length);
+	results = new ArrayList(docs.length);
 
 	for (Document doc : docs) {
 		long fileEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
@@ -128,7 +127,7 @@ if (fileEntryTypeId >= 0) {
 			continue;
 		}
 
-		resultsList.add(fileEntry);
+		results.add(fileEntry);
 	}
 }
 else {
@@ -140,18 +139,18 @@ else {
 
 			assetEntryQuery.setExcludeZeroViewCount(false);
 
-			totalVar = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
+			total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
-			dlSearchContainer.setTotal(totalVar);
+			dlSearchContainer.setTotal(total);
 
-			resultsList = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+			results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 		}
 		else {
-			totalVar = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status, false);
+			total = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status, false);
 
-			dlSearchContainer.setTotal(totalVar);
+			dlSearchContainer.setTotal(total);
 
-			resultsList = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, false, dlSearchContainer.getStart(), dlSearchContainer.getEnd(), dlSearchContainer.getOrderByComparator());
+			results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, false, dlSearchContainer.getStart(), dlSearchContainer.getEnd(), dlSearchContainer.getOrderByComparator());
 		}
 	}
 	else if (navigation.equals("mine") || navigation.equals("recent")) {
@@ -163,15 +162,15 @@ else {
 			status = WorkflowConstants.STATUS_ANY;
 		}
 
-		totalVar = DLAppServiceUtil.getGroupFileEntriesCount(repositoryId, groupFileEntriesUserId, folderId, null, status);
+		total = DLAppServiceUtil.getGroupFileEntriesCount(repositoryId, groupFileEntriesUserId, folderId, null, status);
 
-		dlSearchContainer.setTotal(totalVar);
+		dlSearchContainer.setTotal(total);
 
-		resultsList = DLAppServiceUtil.getGroupFileEntries(repositoryId, groupFileEntriesUserId, folderId, null, status, dlSearchContainer.getStart(), dlSearchContainer.getEnd(), dlSearchContainer.getOrderByComparator());
+		results = DLAppServiceUtil.getGroupFileEntries(repositoryId, groupFileEntriesUserId, folderId, null, status, dlSearchContainer.getStart(), dlSearchContainer.getEnd(), dlSearchContainer.getOrderByComparator());
 	}
 }
 
-dlSearchContainer.setResults(resultsList);
+dlSearchContainer.setResults(results);
 %>
 
 <div class="subscribe-action">
@@ -257,7 +256,7 @@ dlSearchContainer.setResults(resultsList);
 	</c:if>
 </div>
 
-<c:if test="<%= resultsList.isEmpty() %>">
+<c:if test="<%= results.isEmpty() %>">
 	<div class="alert alert-info entries-empty">
 		<c:choose>
 			<c:when test="<%= (fileEntryTypeId >= 0) %>">
@@ -275,7 +274,7 @@ dlSearchContainer.setResults(resultsList);
 		<c:when test='<%= !displayStyle.equals("list") %>'>
 
 			<%
-			for (Object result : resultsList) {
+			for (Object result : results) {
 			%>
 
 				<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
@@ -364,10 +363,12 @@ dlSearchContainer.setResults(resultsList);
 
 			<liferay-ui:search-container
 				searchContainer="<%= dlSearchContainer %>"
+				totalVar="dlSearchContainerTotal"
 			>
 				<liferay-ui:search-container-results
-					results="<%= resultsList %>"
-					total="<%= totalVar %>"
+					results="<%= results %>"
+					resultsVar="dlSearchContainerResults"
+					total="<%= total %>"
 				/>
 
 				<liferay-ui:search-container-row
