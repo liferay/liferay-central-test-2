@@ -21,11 +21,11 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- * @author Sergio González
- * @author Matthew Kong
- * @author Alexander Chow
- * @author Iván Zaera
- * @deprecated As of 7.0.0, replaced by {@link com.liferay.portal.kernel.util.TempFileEntryUtil}
+ * @author     Sergio González
+ * @author     Matthew Kong
+ * @author     Alexander Chow
+ * @author     Iván Zaera
+ * @deprecated As of 7.0.0, replaced by {@link TempFileEntryUtil}
  */
 @Deprecated
 public class TempFileUtil {
