@@ -76,7 +76,7 @@ public class ReflectionServiceTracker implements Closeable {
 		Class<?> clazz = method.getParameterTypes()[0];
 
 		if (clazz.isInterface()) {
-			return new ProxyUnavailableInjectionPoint(
+			return new UnavailableProxyInjectionPoint(
 				target, method, _unavailableServiceProxy);
 		}
 
@@ -299,9 +299,9 @@ public class ReflectionServiceTracker implements Closeable {
 
 	}
 
-	private static class ProxyUnavailableInjectionPoint extends InjectionPoint {
+	private static class UnavailableProxyInjectionPoint extends InjectionPoint {
 
-		public ProxyUnavailableInjectionPoint(
+		public UnavailableProxyInjectionPoint(
 			Object target, Method method, Object proxy) {
 
 			super(target, method);
