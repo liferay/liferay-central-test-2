@@ -13,7 +13,7 @@
 		<fileset dir="${sdk.dir}/lib" includes="activation.jar,javax.servlet-api.jar,jsp-api.jar,mail.jar" />
 	</path>
 
-	<property name="auto.deploy.dir" value="${liferay.home}/osgi/test/" />
+	<property name="auto.deploy.dir" value="${liferay.home}/osgi/modules" />
 
 	<target name="jar">
 		<jar-macro
