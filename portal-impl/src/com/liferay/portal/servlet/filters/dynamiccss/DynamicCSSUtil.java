@@ -156,6 +156,7 @@ public class DynamicCSSUtil {
 
 					if (cacheResourceURLConnection.getLastModified() <
 							resourceURLConnection.getLastModified()) {
+
 						cacheResourceURLConnection = null;
 					}
 				}
