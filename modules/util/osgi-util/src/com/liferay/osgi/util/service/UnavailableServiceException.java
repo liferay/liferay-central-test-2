@@ -19,16 +19,16 @@ package com.liferay.osgi.util.service;
  */
 public class UnavailableServiceException extends RuntimeException {
 
-	public UnavailableServiceException(Class<?> clazz) {
-		super(clazz.toString());
+	public UnavailableServiceException(Class<?> unavailableServiceClass) {
+		super(unavailableServiceClass.toString());
 
-		_clazz = clazz;
+		_unavailableServiceClass = unavailableServiceClass;
 	}
 
 	public Class<?> getUnavailableServiceClass() {
-		return _clazz;
+		return _unavailableServiceClass;
 	}
 
-	private Class<?> _clazz;
+	private Class<?> _unavailableServiceClass;
 
 }
