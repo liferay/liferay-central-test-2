@@ -95,7 +95,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 		Assert.assertNotNull(testInterface.getTrackedTwo());
 
 		try {
-			testInterface.getTrackedOne().noop();
+			testInterface.getTrackedOne().noop1();
 
 			Assert.fail("Should throw UnavailableServiceException");
 		}
@@ -139,7 +139,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 		Assert.assertNotNull(testInterface.getTrackedTwo());
 
 		try {
-			testInterface.getTrackedOne().noop();
+			testInterface.getTrackedOne().noop1();
 
 			Assert.fail("Should throw UnavailableServiceException");
 		}

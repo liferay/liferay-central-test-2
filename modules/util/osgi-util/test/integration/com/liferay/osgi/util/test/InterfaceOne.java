@@ -19,6 +19,6 @@ package com.liferay.osgi.util.test;
  */
 public interface InterfaceOne {
 
-	public void noop();
+	public void noop1();
 
 }

@@ -20,7 +20,7 @@ package com.liferay.osgi.util.test;
 public class TrackedOne implements InterfaceOne {
 
 	@Override
-	public void noop() {
+	public void noop1() {
 	}
 
 }
