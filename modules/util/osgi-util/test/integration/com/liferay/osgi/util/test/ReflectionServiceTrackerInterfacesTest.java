@@ -57,10 +57,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 	}
 
 	@Test
-	public void
-		whenRegisteringServicesTheyShouldBeInjectedInTheInstance()
-	throws IOException {
-
+	public void whenRegisteringServicesTheyShouldBeInjectedInTheInstance() {
 		TestInterface testInterface = new TestInterface();
 
 		ReflectionServiceTracker reflectionServiceTracker =
