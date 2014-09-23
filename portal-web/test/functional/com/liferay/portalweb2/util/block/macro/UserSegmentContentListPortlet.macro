@@ -51,22 +51,16 @@
 	</command>
 
 	<command name="viewContent">
-		<if>
-			<isset var="entryTitle" />
-			<then>
-				<var name="key_entryTitle" value="${entryTitle}" />
+		<for list="${viewEntryTitleList}" param="entryTitle">
+			<var name="key_entryTitle" value="${entryTitle}" />
 
-				<execute action="PGUsersegmentcontentlist#assertTextEquals" locator-key1="VIEW_ENTRY_TITLE" value1="${entryTitle}" />
-			</then>
-		</if>
+			<execute action="PGUsersegmentcontentlist#assertTextEquals" locator-key1="VIEW_ENTRY_TITLE" value1="${entryTitle}" />
+		</for>
 
-		<if>
-			<isset var="entryContent" />
-			<then>
-				<var name="key_entryContent" value="${entryContent}" />
+		<for list="${viewEntryContentList}" param="entryContent">
+			<var name="key_entryContent" value="${entryContent}" />
 
-				<execute action="PGUsersegmentcontentlist#assertTextEquals" locator-key1="VIEW_ENTRY_CONTENT" value1="${entryContent}" />
-			</then>
-		</if>
+			<execute action="PGUsersegmentcontentlist#assertTextEquals" locator-key1="VIEW_ENTRY_CONTENT" value1="${entryContent}" />
+		</for>
 	</command>
 </definition>

@@ -1297,12 +1297,10 @@
 
 		<execute macro="ContentTargetingUserSegment#addCP">
 			<var name="userSegmentDescription" value="User Segment Description" />
-			<var name="userSegmentName" value="Female Users" />
+			<var name="userSegmentName" value="User Segment Name" />
 		</execute>
 
-		<execute macro="ContentTargetingUserSegment#addUserAttributesGenderRuleCP">
-			<var name="genderRadio" value="Female" />
-		</execute>
+		<execute macro="ContentTargetingUserSegment#addUserAttributesUserSignedInRuleCP" />
 
 		<execute macro="ContentTargetingUserSegment#saveCP" />
 
@@ -1312,10 +1310,10 @@
 		</execute>
 
 		<execute macro="WebContent#addWithCategoryCP">
-			<var name="categoryName" value="Female Users" />
+			<var name="categoryName" value="User Segment Name" />
 			<var name="vocabularyName" value="User Segment" />
-			<var name="webContentContent" value="Web Content targeted to a User Segment" />
-			<var name="webContentTitle" value="Targeted Web Content Title" />
+			<var name="webContentContent" value="Web Content Content" />
+			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -1330,21 +1328,9 @@
 
 		<execute action="Home#refresh" />
 
-		<execute macro="ContentTargetingSimulator#gotoPG" />
-
-		<execute macro="ContentTargetingSimulator#configureUserSegmentOtherPG">
-			<var name="checkUserSegmentOtherList" value="Female Users" />
-		</execute>
-
-		<execute macro="ContentTargetingSimulator#simulateUserSegmentPG">
-			<var name="simulationbutton" value="Simulate" />
-		</execute>
-
-		<execute action="Home#refresh" />
-
 		<execute macro="UserSegmentContentListPortlet#viewContent">
-			<var name="entryContent" value="Web Content targeted to a User Segment" />
-			<var name="entryTitle" value="Targeted Web Content Title" />
+			<var name="viewEntryContentList" value="Web Content Content" />
+			<var name="viewEntryTitleList" value="Web Content Title" />
 		</execute>
 	</command>
 
@@ -1455,7 +1441,7 @@
 		</execute>
 	</command>
 
-	<command name="UserSegmentViewSpecificContentWithCategorizationViaContentListPortlet" priority="5">
+	<command known-issues="WCM-206" name="UserSegmentViewSpecificContentWithCategorizationViaContentListPortlet" priority="5">
 		<execute macro="Page#gotoConfigurationCP">
 			<var name="portletName" value="Audience Targeting" />
 			<var name="siteScopeName" value="Site Name" />
@@ -1463,11 +1449,11 @@
 
 		<execute macro="ContentTargetingUserSegment#addCP">
 			<var name="userSegmentDescription" value="User Segment Description" />
-			<var name="userSegmentName" value="Female Users" />
+			<var name="userSegmentName" value="Male Users" />
 		</execute>
 
 		<execute macro="ContentTargetingUserSegment#addUserAttributesGenderRuleCP">
-			<var name="genderRadio" value="Female" />
+			<var name="genderRadio" value="Male" />
 		</execute>
 
 		<execute macro="ContentTargetingUserSegment#saveCP" />
@@ -1478,10 +1464,10 @@
 		</execute>
 
 		<execute macro="WebContent#addWithCategoryCP">
-			<var name="categoryName" value="Female Users" />
+			<var name="categoryName" value="Male Users" />
 			<var name="vocabularyName" value="User Segment" />
-			<var name="webContentContent" value="Web Content targeted to a User Segment" />
-			<var name="webContentTitle" value="Targeted Web Content Title" />
+			<var name="webContentContent" value="Web Content Content" />
+			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -1496,26 +1482,15 @@
 
 		<execute action="Home#refresh" />
 
-		<execute macro="ContentTargetingSimulator#gotoPG" />
-
-		<execute macro="ContentTargetingSimulator#configureUserSegmentOtherPG">
-			<var name="checkUserSegmentOtherList" value="Female Users" />
-		</execute>
-
-		<execute macro="ContentTargetingSimulator#simulateUserSegmentPG">
-			<var name="simulationbutton" value="Simulate" />
-		</execute>
-
 		<execute macro="UserSegmentContentListPortlet#configureDisplayFilter">
 			<var name="assetTypeFilter" value="Web Content Article" />
-			<var name="selectMultipleAssetTypes" value="Web Content Article" />
 		</execute>
 
 		<execute action="Home#refresh" />
 
 		<execute macro="UserSegmentContentListPortlet#viewContent">
-			<var name="entryContent" value="Web Content targeted to a User Segment" />
-			<var name="entryTitle" value="Targeted Web Content Title" />
+			<var name="entryContent" value="Web Content Content" />
+			<var name="entryTitle" value="Web Content Title" />
 		</execute>
 	</command>
 </definition>
