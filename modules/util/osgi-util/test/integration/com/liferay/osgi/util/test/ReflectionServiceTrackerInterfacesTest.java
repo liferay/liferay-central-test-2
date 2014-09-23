@@ -17,11 +17,6 @@ package com.liferay.osgi.util.test;
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
 import com.liferay.osgi.util.service.ReflectionServiceTracker;
 import com.liferay.osgi.util.service.UnavailableServiceException;
-import com.liferay.osgi.util.test.instances.TestInterface;
-import com.liferay.osgi.util.test.services.InterfaceOne;
-import com.liferay.osgi.util.test.services.InterfaceTwo;
-import com.liferay.osgi.util.test.services.TrackedOne;
-import com.liferay.osgi.util.test.services.TrackedTwo;
 
 import java.io.IOException;
 

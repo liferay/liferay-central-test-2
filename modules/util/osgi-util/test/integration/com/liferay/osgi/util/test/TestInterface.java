@@ -12,36 +12,34 @@
  * details.
  */
 
-package com.liferay.osgi.util.test.instances;
+package com.liferay.osgi.util.test;
 
 import com.liferay.osgi.util.service.Reference;
-import com.liferay.osgi.util.test.services.TrackedOne;
-import com.liferay.osgi.util.test.services.TrackedTwo;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public class TestInstance {
+public class TestInterface {
 
-	public TrackedOne getTrackedOne() {
+	public InterfaceOne getTrackedOne() {
 		return _trackedOne;
 	}
 
-	public TrackedTwo getTrackedTwo() {
+	public InterfaceTwo getTrackedTwo() {
 		return _trackedTwo;
 	}
 
 	@Reference
-	public void setTrackedOne(TrackedOne trackedOne) {
+	public void setTrackedOne(InterfaceOne trackedOne) {
 		_trackedOne = trackedOne;
 	}
 
 	@Reference
-	public void setTrackedTwo(TrackedTwo trackedTwo) {
+	public void setTrackedTwo(InterfaceTwo trackedTwo) {
 		_trackedTwo = trackedTwo;
 	}
 
-	private TrackedOne _trackedOne;
-	private TrackedTwo _trackedTwo;
+	private InterfaceOne _trackedOne;
+	private InterfaceTwo _trackedTwo;
 
 }

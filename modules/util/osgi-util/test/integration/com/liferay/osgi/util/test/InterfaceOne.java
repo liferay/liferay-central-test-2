@@ -12,15 +12,13 @@
  * details.
  */
 
-package com.liferay.osgi.util.test.services;
+package com.liferay.osgi.util.test;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public class TrackedTwo implements InterfaceTwo {
+public interface InterfaceOne {
 
-	@Override
-	public void noop2() {
-	}
+	public void noop();
 
 }
