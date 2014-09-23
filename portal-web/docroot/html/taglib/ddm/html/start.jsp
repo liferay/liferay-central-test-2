@@ -35,22 +35,6 @@
 		ddmFormFieldRenderingContext.setPortletNamespace(portletResponse.getNamespace());
 		ddmFormFieldRenderingContext.setReadOnly(readOnly);
 		ddmFormFieldRenderingContext.setShowEmptyFieldLabel(showEmptyFieldLabel);
-
-		long ddmStructureId = classPK;
-
-		if (classNameId == PortalUtil.getClassNameId(DDMTemplate.class)) {
-			DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(classPK);
-
-			ddmStructureId = ddmTemplate.getClassPK();
-		}
-
-		DDMStructure ddmStructure = DDMStructureServiceUtil.getStructure(ddmStructureId);
-
-		DDMFormValues ddmFormValues = null;
-
-		if (fields != null) {
-			ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(ddmStructure, fields);
-		}
 		%>
 
 		<%= DDMFormRendererUtil.render(ddmForm, ddmFormFieldRenderingContext) %>
@@ -71,10 +55,27 @@
 					portletNamespace: '<portlet:namespace />',
 					repeatable: <%= repeatable %>
 
-					<c:if test="<%= ddmFormValues != null %>">
-						,values: <%= DDMFormValuesJSONSerializerUtil.serialize(ddmFormValues) %>
-					</c:if>
+					<%
+					long ddmStructureId = classPK;
 
+					if (classNameId == PortalUtil.getClassNameId(DDMTemplate.class)) {
+						DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(classPK);
+
+						ddmStructureId = ddmTemplate.getClassPK();
+					}
+
+					DDMStructure ddmStructure = DDMStructureServiceUtil.getStructure(ddmStructureId);
+
+					DDMFormValues ddmFormValues = null;
+
+					if (fields != null) {
+						ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(ddmStructure, fields);
+					}
+					%>
+
+					<c:if test="<%= ddmFormValues != null %>">
+						, values: <%= DDMFormValuesJSONSerializerUtil.serialize(ddmFormValues) %>
+					</c:if>
 				}
 			);
 		</aui:script>
