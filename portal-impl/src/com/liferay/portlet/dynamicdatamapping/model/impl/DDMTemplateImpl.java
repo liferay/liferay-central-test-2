@@ -83,9 +83,8 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 			return getSmallImageURL();
 		}
 
-		return
-			themeDisplay.getPathImage() + "/template?img_id=" +
-				getSmallImageId() + "&t=" +
+		return themeDisplay.getPathImage() + "/template?img_id=" +
+			getSmallImageId() + "&t=" +
 				WebServerServletTokenUtil.getToken(getSmallImageId());
 	}
 

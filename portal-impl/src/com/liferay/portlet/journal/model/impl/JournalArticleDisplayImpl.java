@@ -68,9 +68,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 			return getSmallImageURL();
 		}
 
-		return
-			themeDisplay.getPathImage() + "/journal/article?img_id=" +
-				getSmallImageId() + "&t=" +
+		return themeDisplay.getPathImage() + "/journal/article?img_id=" +
+			getSmallImageId() + "&t=" +
 				WebServerServletTokenUtil.getToken(getSmallImageId());
 	}
 

@@ -91,9 +91,8 @@ public class ShoppingItemImpl extends ShoppingItemBaseImpl {
 			return getSmallImageURL();
 		}
 
-		return
-			themeDisplay.getPathImage() + "/shopping/item?img_id=" +
-				getSmallImageId() + "&t=" +
+		return themeDisplay.getPathImage() + "/shopping/item?img_id=" +
+			getSmallImageId() + "&t=" +
 				WebServerServletTokenUtil.getToken(getSmallImageId());
 	}
 
