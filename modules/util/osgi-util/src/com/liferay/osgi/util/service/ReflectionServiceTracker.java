@@ -44,8 +44,6 @@ public class ReflectionServiceTracker implements Closeable {
 
 		List<InjectionPoint> injectionPoints = getInjectionPoints(target);
 
-		_serviceTrackers = new ArrayList<ServiceTracker<?, ?>>();
-
 		for (InjectionPoint injectionPoint : injectionPoints) {
 			ServiceTracker<?, ?> serviceTracker = track(
 				bundleContext, target, injectionPoint);
@@ -262,7 +260,8 @@ public class ReflectionServiceTracker implements Closeable {
 
 		};
 
-	private List<ServiceTracker<?, ?>> _serviceTrackers;
+	private List<ServiceTracker<?, ?>> _serviceTrackers =
+		new ArrayList<ServiceTracker<?, ?>>();
 	private Object _unavailableServiceProxy;
 
 	private static class InjectionPoint {
