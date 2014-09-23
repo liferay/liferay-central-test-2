@@ -306,7 +306,6 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 				</c:if>
 			</div>
 		</div>
-
 	</c:when>
 	<c:otherwise>
 

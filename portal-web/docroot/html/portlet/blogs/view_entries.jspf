@@ -163,6 +163,7 @@ else {
 	<c:if test='<%= index < searchContainer.getTotal() %>'>
 		<div class="separator"><!-- --></div>
 	</c:if>
+
 <%
 	}
 }
