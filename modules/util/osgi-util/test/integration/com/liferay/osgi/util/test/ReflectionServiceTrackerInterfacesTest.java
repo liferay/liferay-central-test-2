@@ -45,7 +45,7 @@ import org.osgi.framework.ServiceRegistration;
 /**
  * @author Carlos Sierra Andrés
  */
-@BndFile("test/integration/test-bnd.bnd")
+@BndFile("test/integration/bnd.bnd")
 @RunWith(Arquillian.class)
 public class ReflectionServiceTrackerInterfacesTest {
 
