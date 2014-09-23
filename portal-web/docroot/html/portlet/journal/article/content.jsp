@@ -38,6 +38,12 @@ DDMTemplate ddmTemplate = (DDMTemplate)request.getAttribute("edit_article.jsp-te
 String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaultLanguageId");
 String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
 
+String requestedLanguageId = defaultLanguageId;
+
+if (Validator.isNotNull(toLanguageId)) {
+	requestedLanguageId = toLanguageId;
+}
+
 Fields ddmFields = null;
 
 if (article != null) {
@@ -53,12 +59,6 @@ if (article != null) {
 	if (Validator.isNotNull(content)) {
 		ddmFields = JournalConverterUtil.getDDMFields(ddmStructure, content);
 	}
-}
-
-String requestedLanguageId = defaultLanguageId;
-
-if (Validator.isNotNull(toLanguageId)) {
-	requestedLanguageId = toLanguageId;
 }
 
 Locale[] availableLocales = new Locale[0];
