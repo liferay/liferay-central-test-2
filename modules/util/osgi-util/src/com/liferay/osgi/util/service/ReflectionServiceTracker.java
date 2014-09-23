@@ -88,7 +88,6 @@ public class ReflectionServiceTracker implements Closeable {
 		for (Method method : methods) {
 			boolean annotationPresent = method.isAnnotationPresent(
 				Reference.class);
-
 			Class<?>[] parameterTypes = method.getParameterTypes();
 			Class<?> returnType = method.getReturnType();
 
@@ -103,9 +102,11 @@ public class ReflectionServiceTracker implements Closeable {
 	}
 
 	protected List<InjectionPoint> getInjectionPoints(Object target) {
-		List<Class<?>> interfaceClasses = new ArrayList<Class<?>>();
-
 		Class<?> targetClass = target.getClass();
+
+		ClassLoader classLoader = targetClass.getClassLoader();
+
+		List<Class<?>> interfaceClasses = new ArrayList<Class<?>>();
 
 		List<Method> injectionPointMethods = getInjectionPointMethods(target);
 
@@ -117,8 +118,6 @@ public class ReflectionServiceTracker implements Closeable {
 				interfaceClasses.add(parameterType);
 			}
 		}
-
-		ClassLoader classLoader = targetClass.getClassLoader();
 
 		_unavailableServiceProxy = Proxy.newProxyInstance(
 			classLoader, interfaceClasses.toArray(new Class[0]),
