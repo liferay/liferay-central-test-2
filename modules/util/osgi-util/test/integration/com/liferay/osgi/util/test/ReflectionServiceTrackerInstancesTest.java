@@ -124,7 +124,6 @@ public class ReflectionServiceTrackerInstancesTest {
 	@Test
 	public void
 	whenMoreThanOneServiceExistsShouldInjectTheOneWithHigherServiceRanking() {
-
 		TestInstance testInstance = new TestInstance();
 
 		ReflectionServiceTracker reflectionServiceTracker =

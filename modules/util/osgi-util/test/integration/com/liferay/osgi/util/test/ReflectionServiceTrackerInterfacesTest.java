@@ -102,7 +102,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 		try {
 			testInterface.getTrackedOne().noop();
 
-			Assert.fail();
+			Assert.fail("Should throw UnavailableServiceException");
 		}
 		catch (UnavailableServiceException sue) {
 			Assert.assertEquals(
@@ -112,7 +112,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 		try {
 			testInterface.getTrackedTwo().noop2();
 
-			Assert.fail();
+			Assert.fail("Should throw UnavailableServiceException");
 		}
 		catch (UnavailableServiceException sue) {
 			Assert.assertEquals(
@@ -146,7 +146,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 		try {
 			testInterface.getTrackedOne().noop();
 
-			Assert.fail();
+			Assert.fail("Should throw UnavailableServiceException");
 		}
 		catch (UnavailableServiceException sue) {
 			Assert.assertEquals(
@@ -156,7 +156,7 @@ public class ReflectionServiceTrackerInterfacesTest {
 		try {
 			testInterface.getTrackedTwo().noop2();
 
-			Assert.fail();
+			Assert.fail("Should throw UnavailableServiceException");
 		}
 		catch (UnavailableServiceException sue) {
 			Assert.assertEquals(
