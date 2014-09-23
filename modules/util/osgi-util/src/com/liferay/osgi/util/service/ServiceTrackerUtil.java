@@ -23,13 +23,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 /**
- * @author Carlos Sierra Andrés
- * @deprecated As of release 1.0.2.
- * This class makes excessive use of getService and ungetService which,
- * depending on the OSGi framework implementation or use case, can translate
- * into excessive object instantiation and destruction, possibly leading to
- * performance issues. Use
- * {@link com.liferay.osgi.util.service.ReflectionServiceTracker} instead.
+ * @author     Carlos Sierra Andrés
+ * @deprecated As of release 1.0.2,replaced by {@ ReflectionServiceTracker}
  */
 @Deprecated
 public class ServiceTrackerUtil {
