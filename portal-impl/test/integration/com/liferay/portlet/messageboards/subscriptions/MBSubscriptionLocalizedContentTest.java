@@ -64,13 +64,13 @@ public class MBSubscriptionLocalizedContentTest
 	}
 
 	@Override
-	protected String getSubscriptionBodyPreferenceName() throws Exception {
-		return "emailMessageAddedBody";
+	protected String getServiceName() {
+		return MBConstants.SERVICE_NAME;
 	}
 
 	@Override
-	protected String getServiceName() {
-		return MBConstants.SERVICE_NAME;
+	protected String getSubscriptionBodyPreferenceName() throws Exception {
+		return "emailMessageAddedBody";
 	}
 
 }
