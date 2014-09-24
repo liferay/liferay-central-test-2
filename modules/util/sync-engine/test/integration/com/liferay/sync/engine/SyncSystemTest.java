@@ -208,11 +208,11 @@ public class SyncSystemTest {
 			});
 
 		for (long syncAccountId : _syncAccountIds.values()) {
+			SyncAccountService.deleteSyncAccount(syncAccountId);
+
 			SyncUser syncUser = SyncUserService.fetchSyncUser(syncAccountId);
 
 			SyncSystemTestUtil.deleteUser(syncUser.getUserId(), syncAccountId);
-
-			SyncAccountService.deleteSyncAccount(syncAccountId);
 		}
 
 		SyncAccountService.deleteSyncAccount(_syncAccount.getSyncAccountId());
