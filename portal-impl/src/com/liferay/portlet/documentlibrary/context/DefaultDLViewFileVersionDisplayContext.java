@@ -274,52 +274,6 @@ public class DefaultDLViewFileVersionDisplayContext
 		jspRenderer.render(request, response);
 	}
 
-	protected String getActionURL(String strutsAction, String cmd) {
-		LiferayPortletResponse liferayPortletResponse =
-			getLiferayPortletResponse();
-
-		PortletURL portletURL = liferayPortletResponse.createActionURL();
-
-		portletURL.setParameter("struts_action", strutsAction);
-		portletURL.setParameter(Constants.CMD, cmd);
-		portletURL.setParameter("redirect", _getCurrentURL());
-		portletURL.setParameter(
-			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
-		return portletURL.toString();
-	}
-
-	protected LiferayPortletRequest getLiferayPortletRequest() {
-		PortletRequest portletRequest =
-			(PortletRequest)_request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		return PortalUtil.getLiferayPortletRequest(portletRequest);
-	}
-
-	protected LiferayPortletResponse getLiferayPortletResponse() {
-		PortletResponse portletResponse =
-			(PortletResponse)_request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-		return PortalUtil.getLiferayPortletResponse(portletResponse);
-	}
-
-	protected PortletURL getRenderURL(String strutsAction) {
-		LiferayPortletResponse liferayPortletResponse =
-			getLiferayPortletResponse();
-
-		PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-		portletURL.setParameter(
-			"struts_action", "/document_library/edit_file_entry");
-		portletURL.setParameter("redirect", _getCurrentURL());
-		portletURL.setParameter(
-			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
-		return portletURL;
-	}
-
 	private void _addCancelCheckoutMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
@@ -335,7 +289,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		urlMenuItem.setKey(DLMenuItemKeys.CANCEL_CHECKOUT);
 		urlMenuItem.setMessage("cancel-checkout[document]");
 		urlMenuItem.setURL(
-			getActionURL(
+			_getActionURL(
 				"/document_library/edit_file_entry",
 				Constants.CANCEL_CHECKOUT));
 
@@ -355,7 +309,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		urlMenuItem.setKey(DLMenuItemKeys.CHECKIN);
 		urlMenuItem.setMessage("checkin");
 		urlMenuItem.setURL(
-			getActionURL(
+			_getActionURL(
 				"/document_library/edit_file_entry", Constants.CHECKIN));
 
 		menuItems.add(urlMenuItem);
@@ -374,7 +328,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		urlMenuItem.setKey(DLMenuItemKeys.CHECKOUT);
 		urlMenuItem.setMessage("checkout[document]");
 		urlMenuItem.setURL(
-			getActionURL(
+			_getActionURL(
 				"/document_library/edit_file_entry", Constants.CHECKOUT));
 
 		menuItems.add(urlMenuItem);
@@ -388,7 +342,7 @@ public class DefaultDLViewFileVersionDisplayContext
 
 			deleteMenuItem.setKey(DLMenuItemKeys.DELETE);
 			deleteMenuItem.setURL(
-				getActionURL(
+				_getActionURL(
 					"/document_library/edit_file_entry", Constants.DELETE));
 
 			menuItems.add(deleteMenuItem);
@@ -399,7 +353,7 @@ public class DefaultDLViewFileVersionDisplayContext
 			deleteMenuItem.setKey(DLMenuItemKeys.DELETE);
 			deleteMenuItem.setTrash(true);
 			deleteMenuItem.setURL(
-				getActionURL(
+				_getActionURL(
 					"/document_library/edit_file_entry",
 					Constants.MOVE_TO_TRASH));
 
@@ -436,7 +390,7 @@ public class DefaultDLViewFileVersionDisplayContext
 			return;
 		}
 
-		PortletURL portletURL = getRenderURL(
+		PortletURL portletURL = _getRenderURL(
 			"/document_library/edit_file_entry");
 
 		portletURL.setParameter("backURL", _getCurrentURL());
@@ -454,7 +408,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		}
 
 		LiferayPortletResponse liferayPortletResponse =
-			getLiferayPortletResponse();
+			_getLiferayPortletResponse();
 
 		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
@@ -491,7 +445,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		Map<String, String> context = new HashMap<String, String>();
 
 		LiferayPortletResponse liferayPortletResponse =
-			getLiferayPortletResponse();
+			_getLiferayPortletResponse();
 
 		context.put(
 			"errorMessage", UnicodeLanguageUtil.get(
@@ -552,16 +506,47 @@ public class DefaultDLViewFileVersionDisplayContext
 		urlMenuItem.setUseDialog(true);
 	}
 
+	private URLMenuItem _addURLMenuItem(
+		List<MenuItem> menuItems, String iconCssClass, String key,
+		String message, String url) {
+
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setIconCssClass(iconCssClass);
+		urlMenuItem.setKey(key);
+		urlMenuItem.setMessage(message);
+		urlMenuItem.setURL(url);
+
+		menuItems.add(urlMenuItem);
+
+		return urlMenuItem;
+	}
+
+	private String _getActionURL(String strutsAction, String cmd) {
+		LiferayPortletResponse liferayPortletResponse =
+			_getLiferayPortletResponse();
+
+		PortletURL portletURL = liferayPortletResponse.createActionURL();
+
+		portletURL.setParameter("struts_action", strutsAction);
+		portletURL.setParameter(Constants.CMD, cmd);
+		portletURL.setParameter("redirect", _getCurrentURL());
+		portletURL.setParameter(
+			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+
+		return portletURL.toString();
+	}
+
 	private String _getCurrentURL() {
 		if (_currentURL != null) {
 			return _currentURL;
 		}
 
 		LiferayPortletRequest liferayPortletRequest =
-			getLiferayPortletRequest();
+			_getLiferayPortletRequest();
 
 		LiferayPortletResponse liferayPortletResponse =
-			getLiferayPortletResponse();
+			_getLiferayPortletResponse();
 
 		PortletURL portletURL = PortletURLUtil.getCurrent(
 			liferayPortletRequest, liferayPortletResponse);
@@ -594,6 +579,37 @@ public class DefaultDLViewFileVersionDisplayContext
 			_request, dlPortletInstanceSettings);
 
 		return _dlActionsDisplayContext;
+	}
+
+	private LiferayPortletRequest _getLiferayPortletRequest() {
+		PortletRequest portletRequest =
+			(PortletRequest)_request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		return PortalUtil.getLiferayPortletRequest(portletRequest);
+	}
+
+	private LiferayPortletResponse _getLiferayPortletResponse() {
+		PortletResponse portletResponse =
+			(PortletResponse)_request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		return PortalUtil.getLiferayPortletResponse(portletResponse);
+	}
+
+	private PortletURL _getRenderURL(String strutsAction) {
+		LiferayPortletResponse liferayPortletResponse =
+			_getLiferayPortletResponse();
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		portletURL.setParameter("redirect", _getCurrentURL());
+		portletURL.setParameter(
+			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
+
+		return portletURL;
 	}
 
 	private boolean _isFileEntryTrashable() throws PortalException {
@@ -646,22 +662,6 @@ public class DefaultDLViewFileVersionDisplayContext
 			throw new SystemException(
 				"Unable to process Freemarker template", e);
 		}
-	}
-
-	private URLMenuItem _addURLMenuItem(
-		List<MenuItem> menuItems, String iconCssClass, String key,
-		String message, String url) {
-
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
-		urlMenuItem.setIconCssClass(iconCssClass);
-		urlMenuItem.setKey(key);
-		urlMenuItem.setMessage(message);
-		urlMenuItem.setURL(url);
-
-		menuItems.add(urlMenuItem);
-
-		return urlMenuItem;
 	}
 
 	private static final UUID _UUID = UUID.fromString(
