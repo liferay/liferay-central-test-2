@@ -200,8 +200,9 @@ public class DefaultDLEditFileEntryDisplayContext
 		_dlFileEntryType = dlFileEntryType;
 		_fileEntry = fileEntry;
 
-		if (fileEntry != null) {
-			_fileVersion = fileEntry.getFileVersion();
+		if ((_dlFileEntryType == null) && (_fileEntry != null)) {
+			_dlFileEntryType =
+				_fileEntryDisplayContextHelper.getDLFileEntryType();
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -211,17 +212,15 @@ public class DefaultDLEditFileEntryDisplayContext
 
 		_dlPortletInstanceSettings = DLPortletInstanceSettings.getInstance(
 			themeDisplay.getLayout(), portletDisplay.getId());
-
 		_fileEntryDisplayContextHelper = new FileEntryDisplayContextHelper(
 			themeDisplay.getPermissionChecker(), _fileEntry);
 
+		if (fileEntry != null) {
+			_fileVersion = fileEntry.getFileVersion();
+		}
+
 		_fileVersionDisplayContextHelper = new FileVersionDisplayContextHelper(
 			_fileVersion);
-
-		if ((_dlFileEntryType == null) && (_fileEntry != null)) {
-			_dlFileEntryType =
-				_fileEntryDisplayContextHelper.getDLFileEntryType();
-		}
 	}
 
 	private static final UUID _UUID = UUID.fromString(
