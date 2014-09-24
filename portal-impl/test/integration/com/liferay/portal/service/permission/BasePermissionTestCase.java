@@ -78,8 +78,7 @@ public abstract class BasePermissionTestCase {
 			group.getCompanyId(), getResourceName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			String.valueOf(group.getGroupId()), role.getRoleId(),
-			new String[] {ActionKeys.VIEW}
-		);
+			new String[] {ActionKeys.VIEW});
 	}
 
 	protected abstract void doSetUp() throws Exception;
