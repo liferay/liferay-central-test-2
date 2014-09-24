@@ -62,7 +62,7 @@ public class FileVersionDisplayContextHelper {
 		return _draft;
 	}
 
-	public boolean isOfficeDoc() {
+	public boolean isMsOffice() {
 		if (_officeDoc == null) {
 			_officeDoc = DLUtil.isOfficeExtension(_fileVersion.getExtension());
 		}

@@ -236,7 +236,7 @@ public class DefaultDLViewFileVersionDisplayContext
 	@Override
 	public boolean isOpenInMsOfficeButtonVisible() throws PortalException {
 		if (_fileEntryDisplayContextHelper.hasViewPermission() &&
-			_fileVersionDisplayContextHelper.isOfficeDoc() &&
+			_fileVersionDisplayContextHelper.isMsOffice() &&
 			_isWebDAVEnabled() && _isIEOnWin32()) {
 
 			return true;
