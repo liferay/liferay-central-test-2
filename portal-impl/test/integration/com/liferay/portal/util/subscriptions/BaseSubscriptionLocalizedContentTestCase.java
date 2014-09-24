@@ -109,12 +109,13 @@ public abstract class BaseSubscriptionLocalizedContentTestCase
 				localizedContents.entrySet()) {
 
 			Locale locale = localizedContent.getKey();
-			String content = localizedContent.getValue();
 
 			String subscriptionBodyPreferencesKey =
 				LocalizationUtil.getPreferencesKey(
 					getSubscriptionBodyPreferenceName(),
 					LocaleUtil.toLanguageId(locale));
+
+			String content = localizedContent.getValue();
 
 			modifiableSettings.setValue(
 				subscriptionBodyPreferencesKey, content);
