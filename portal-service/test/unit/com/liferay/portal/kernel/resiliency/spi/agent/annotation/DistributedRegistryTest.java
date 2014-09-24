@@ -309,10 +309,10 @@ public class DistributedRegistryTest {
 		public static final String name12 = "name12";
 
 		@Distributed
-		public final String name13 = "name13";
+		public static final String name14 = "name14";
 
 		@Distributed
-		public static final String name14 = "name14";
+		public final String name13 = "name13";
 
 	}
 
