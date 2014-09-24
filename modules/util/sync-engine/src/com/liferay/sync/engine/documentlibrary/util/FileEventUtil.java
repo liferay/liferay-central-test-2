@@ -57,6 +57,7 @@ public class FileEventUtil {
 		parameters.put("folderId", folderId);
 		parameters.put("mimeType", mimeType);
 		parameters.put("repositoryId", repositoryId);
+		parameters.put("serviceContext.attributes.overwrite", true);
 
 		SyncSite syncSite = SyncSiteService.fetchSyncSite(
 			repositoryId, syncAccountId);
@@ -72,7 +73,6 @@ public class FileEventUtil {
 				"serviceContext.guestPermissions", "ADD_DISCUSSION,VIEW");
 		}
 
-		parameters.put("serviceContext.attributes.overwrite", true);
 		parameters.put("sourceFileName", name);
 		parameters.put("syncFile", syncFile);
 		parameters.put("title", name);
@@ -93,6 +93,7 @@ public class FileEventUtil {
 		parameters.put("name", name);
 		parameters.put("parentFolderId", parentFolderId);
 		parameters.put("repositoryId", repositoryId);
+		parameters.put("serviceContext.attributes.overwrite", true);
 
 		SyncSite syncSite = SyncSiteService.fetchSyncSite(
 			repositoryId, syncAccountId);
@@ -108,7 +109,6 @@ public class FileEventUtil {
 			parameters.put("serviceContext.guestPermissions", "VIEW");
 		}
 
-		parameters.put("serviceContext.attributes.overwrite", true);
 		parameters.put("syncFile", syncFile);
 
 		AddFolderEvent addFolderEvent = new AddFolderEvent(
