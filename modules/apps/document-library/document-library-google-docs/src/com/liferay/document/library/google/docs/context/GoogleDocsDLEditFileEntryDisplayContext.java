@@ -62,9 +62,9 @@ public class GoogleDocsDLEditFileEntryDisplayContext
 	public boolean isDDMStructureVisible(DDMStructure ddmStructure)
 		throws PortalException {
 
-		String structureKey = ddmStructure.getStructureKey();
+		String ddmStructureKey = ddmStructure.getStructureKey();
 
-		if (structureKey.equals(
+		if (ddmStructureKey.equals(
 				GoogleDocsConstants.DDM_STRUCTURE_KEY_GOOGLE_DOCS)) {
 
 			return false;
