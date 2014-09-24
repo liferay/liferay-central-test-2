@@ -126,11 +126,19 @@ public class FileEntryDisplayContextHelper {
 	}
 
 	public boolean isCheckedOutByMe() {
-		return isCheckedOut() && isLockedByMe();
+		if (isCheckedOut() && isLockedByMe()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isCheckedOutByOther() {
-		return isCheckedOut() && !isLockedByMe();
+		if (isCheckedOut() && !isLockedByMe()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isCheckinButtonVisible() throws PortalException {
