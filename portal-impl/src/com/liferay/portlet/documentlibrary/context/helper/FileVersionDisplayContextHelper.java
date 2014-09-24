@@ -27,7 +27,10 @@ public class FileVersionDisplayContextHelper {
 		_fileVersion = fileVersion;
 
 		if (_fileVersion == null) {
-			_setValuesForNullFileVersion();
+			_approved = false;
+			_draft = false;
+			_officeDoc = false;
+			_pending = false;
 		}
 	}
 
@@ -73,13 +76,6 @@ public class FileVersionDisplayContextHelper {
 		}
 
 		return _pending;
-	}
-
-	private void _setValuesForNullFileVersion() {
-		_approved = false;
-		_draft = false;
-		_officeDoc = false;
-		_pending = false;
 	}
 
 	private Boolean _approved;
