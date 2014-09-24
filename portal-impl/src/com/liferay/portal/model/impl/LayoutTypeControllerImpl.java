@@ -43,8 +43,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Raymond Augé
  */
-public class LayoutTypeControllerImpl
-	implements LayoutTypeController {
+public class LayoutTypeControllerImpl implements LayoutTypeController {
 
 	public LayoutTypeControllerImpl(String type) {
 		_type = type;
