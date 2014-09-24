@@ -423,7 +423,7 @@ public class DefaultDLViewFileVersionDisplayContext
 			_fileEntry, _fileVersion, _themeDisplay, StringPool.BLANK, false,
 			true);
 
-		URLMenuItem urlMenuItem = addURLMenuItem(
+		URLMenuItem urlMenuItem = _addURLMenuItem(
 			menuItems, "icon-download", DLMenuItemKeys.DOWNLOAD, message, url);
 
 		urlMenuItem.setTarget("_blank");
@@ -441,7 +441,7 @@ public class DefaultDLViewFileVersionDisplayContext
 
 		portletURL.setParameter("backURL", _getCurrentURL());
 
-		addURLMenuItem(
+		_addURLMenuItem(
 			menuItems, "icon-edit", DLMenuItemKeys.EDIT, "edit",
 			portletURL.toString());
 	}
@@ -471,7 +471,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		portletURL.setParameter(
 			"fileEntryIds", String.valueOf(_fileEntry.getFileEntryId()));
 
-		addURLMenuItem(
+		_addURLMenuItem(
 			menuItems, "icon-move", DLMenuItemKeys.MOVE, "move",
 			portletURL.toString());
 	}
@@ -544,7 +544,7 @@ public class DefaultDLViewFileVersionDisplayContext
 			throw new SystemException("Unable to create permissions URL", e);
 		}
 
-		URLMenuItem urlMenuItem = addURLMenuItem(
+		URLMenuItem urlMenuItem = _addURLMenuItem(
 			menuItems, "icon-lock", DLMenuItemKeys.PERMISSIONS, "permissions",
 			url);
 
@@ -648,7 +648,7 @@ public class DefaultDLViewFileVersionDisplayContext
 		}
 	}
 
-	private URLMenuItem addURLMenuItem(
+	private URLMenuItem _addURLMenuItem(
 		List<MenuItem> menuItems, String iconCssClass, String key,
 		String message, String url) {
 
