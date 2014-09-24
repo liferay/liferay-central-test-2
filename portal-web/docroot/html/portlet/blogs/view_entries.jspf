@@ -160,7 +160,7 @@ else {
 
 	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
 
-	<c:if test='<%= index < searchContainer.getTotal() %>'>
+	<c:if test="<%= index < searchContainer.getTotal() %>">
 		<div class="separator"><!-- --></div>
 	</c:if>
 
