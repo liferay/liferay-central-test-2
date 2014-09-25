@@ -649,18 +649,13 @@ public class DefaultDLViewFileVersionDisplayContext
 			return;
 		}
 
-		LiferayPortletResponse liferayPortletResponse =
-			_getLiferayPortletResponse();
-
 		String webDavURL = DLUtil.getWebDavURL(
 			_themeDisplay, _fileEntry.getFolder(), _fileEntry,
 			PropsValues.
 				DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED,
 			true);
-
 		String onClick =
-			liferayPortletResponse.getNamespace() + "openDocument('" +
-				webDavURL + "');";
+			getNamespace() + "openDocument('" + webDavURL + "');";
 
 		JavascriptMenuItem javascriptMenuItem = _addJavascriptUIItem(
 			new JavascriptMenuItem(), menuItems, "icon-file-alt",
@@ -673,7 +668,7 @@ public class DefaultDLViewFileVersionDisplayContext
 				_request,
 				"cannot-open-the-requested-document-due-to-the-following-" +
 					"reason"));
-		context.put("namespace", liferayPortletResponse.getNamespace());
+		context.put("namespace", getNamespace());
 
 		String javaScript = _processFreeMarkerTemplate(
 			"/com/liferay/portlet/documentlibrary/context/dependencies" +
@@ -695,12 +690,9 @@ public class DefaultDLViewFileVersionDisplayContext
 			PropsValues.
 				DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED);
 
-		LiferayPortletResponse liferayPortletResponse =
-			_getLiferayPortletResponse();
-
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(liferayPortletResponse.getNamespace());
+		sb.append(getNamespace());
 		sb.append("openDocument('");
 		sb.append(webDavURL);
 		sb.append("');");
