@@ -124,7 +124,7 @@ public class MBDiscussionPermission {
 			return true;
 		}
 
-		hasPermission = PermissionCheckerUtil.checkResourcePermission(
+		hasPermission = PermissionCheckerUtil.containsResourcePermission(
 			permissionChecker, className, classPK, actionId);
 
 		if (hasPermission != null) {

@@ -137,7 +137,7 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 				ActionKeys.VIEW);
 		}
 
-		return PermissionCheckerUtil.checkResourcePermission(
+		return PermissionCheckerUtil.containsResourcePermission(
 			permissionChecker, className, classPK, actionId);
 	}
 
