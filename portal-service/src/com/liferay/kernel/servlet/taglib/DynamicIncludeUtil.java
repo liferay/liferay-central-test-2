@@ -30,6 +30,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DynamicIncludeUtil {
 
+	public static List<DynamicInclude> getDynamicIncludes(String key) {
+		return _instance._dynamicIncludes.getService(key);
+	}
+
+	public static boolean hasDynamicInclude(String key) {
+		List<DynamicInclude> dynamicIncludes = getDynamicIncludes(key);
+
+		if ((dynamicIncludes == null) || dynamicIncludes.isEmpty()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public static void include(
 		HttpServletRequest request, HttpServletResponse response, String key) {
 
@@ -45,20 +59,6 @@ public class DynamicIncludeUtil {
 				}
 			}
 		}
-	}
-
-	public static List<DynamicInclude> getDynamicIncludes(String key) {
-		return _instance._dynamicIncludes.getService(key);
-	}
-
-	public static boolean hasDynamicInclude(String key) {
-		List<DynamicInclude> dynamicIncludes = getDynamicIncludes(key);
-
-		if ((dynamicIncludes == null) || dynamicIncludes.isEmpty()) {
-			return false;
-		}
-
-		return true;
 	}
 
 	private DynamicIncludeUtil() {
