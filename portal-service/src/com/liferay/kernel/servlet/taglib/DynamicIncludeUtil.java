@@ -51,7 +51,7 @@ public class DynamicIncludeUtil {
 		return _instance._dynamicIncludes.getService(key);
 	}
 
-	public static boolean hasInclude(String key) {
+	public static boolean hasDynamicInclude(String key) {
 		List<DynamicInclude> dynamicIncludes = getDynamicIncludes(key);
 
 		if ((dynamicIncludes == null) || dynamicIncludes.isEmpty()) {

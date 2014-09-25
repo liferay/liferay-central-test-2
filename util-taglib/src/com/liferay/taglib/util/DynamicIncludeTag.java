@@ -41,7 +41,7 @@ public class DynamicIncludeTag extends TagSupport {
 
 	@Override
 	public int doStartTag() {
-		if (!DynamicIncludeUtil.hasInclude(getKey())) {
+		if (!DynamicIncludeUtil.hasDynamicInclude(getKey())) {
 			return SKIP_BODY;
 		}
 
