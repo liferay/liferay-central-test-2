@@ -51,14 +51,18 @@ public class DoIncludeJSPDynamicInclude implements DynamicInclude {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String tilesTitle = (String)componentContext.getAttribute("title");
 		String tilesContent = (String)componentContext.getAttribute("content");
+
+		themeDisplay.setTilesContent(tilesContent);
+
 		boolean tilesSelectable = GetterUtil.getBoolean(
 			(String)componentContext.getAttribute("selectable"));
 
-		themeDisplay.setTilesTitle(tilesTitle);
-		themeDisplay.setTilesContent(tilesContent);
 		themeDisplay.setTilesSelectable(tilesSelectable);
+
+		String tilesTitle = (String)componentContext.getAttribute("title");
+
+		themeDisplay.setTilesTitle(tilesTitle);
 	}
 
 }

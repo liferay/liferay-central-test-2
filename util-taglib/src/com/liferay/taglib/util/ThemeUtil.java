@@ -325,7 +325,8 @@ public class ThemeUtil {
 			HttpServletResponse response, String path, Theme theme)
 		throws Exception {
 
-		DynamicIncludeUtil.include(request, response, _DO_INCLUDE_JSP_KEY);
+		DynamicIncludeUtil.include(
+			request, response, ThemeUtil.class.getName() + "#doIncludeJSP");
 
 		if (theme.isWARFile()) {
 			ServletContext themeServletContext = servletContext.getContext(
@@ -480,9 +481,6 @@ public class ThemeUtil {
 			return ((UnsyncStringWriter)writer).toString();
 		}
 	}
-
-	private static final String _DO_INCLUDE_JSP_KEY =
-		ThemeUtil.class.getName().concat("#doIncludeJSP");
 
 	private static Log _log = LogFactoryUtil.getLog(ThemeUtil.class);
 
