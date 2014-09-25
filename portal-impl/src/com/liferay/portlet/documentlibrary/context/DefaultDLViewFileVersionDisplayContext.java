@@ -306,19 +306,21 @@ public class DefaultDLViewFileVersionDisplayContext
 
 		jspRenderer.render(request, response);
 	}
-
-	protected String getSubmitFormJavascript(String cmd, String redirect) {
-		StringBundler sb = new StringBundler();
-
+	
+	protected String getNamespace() {
 		LiferayPortletResponse liferayPortletResponse =
 			_getLiferayPortletResponse();
+			
+		return liferayPortletResponse.getNamespace();
+	}
 
-		String namespace = liferayPortletResponse.getNamespace();
+	protected String getSubmitFormJavascript(String cmd, String redirect) {
+		StringBundler sb = new StringBundler(18);
 
 		sb.append("document.");
-		sb.append(namespace);
+		sb.append(getNamespace());
 		sb.append("fm.");
-		sb.append(namespace);
+		sb.append(getNamespace());
 		sb.append(Constants.CMD);
 		sb.append(".value = '");
 		sb.append(cmd);
@@ -326,16 +328,16 @@ public class DefaultDLViewFileVersionDisplayContext
 
 		if (redirect != null) {
 			sb.append("document.");
-			sb.append(namespace);
+			sb.append(getNamespace());
 			sb.append("fm.");
-			sb.append(namespace);
+			sb.append(getNamespace());
 			sb.append("redirect.value = '");
 			sb.append(redirect);
 			sb.append("';");
 		}
 
 		sb.append("submitForm(document.");
-		sb.append(namespace);
+		sb.append(getNamespace());
 		sb.append("fm);");
 
 		return sb.toString();
@@ -761,7 +763,7 @@ public class DefaultDLViewFileVersionDisplayContext
 
 	private <T extends JavascriptUIItem> T _addJavascriptUIItem(
 		T javascriptUIItem, List<? super T> javascriptUIItems, String key,
-	String icon, String label, String onClick ) {
+		String icon, String label, String onClick ) {
 
 		javascriptUIItem.setKey(key);
 		javascriptUIItem.setIcon(icon);

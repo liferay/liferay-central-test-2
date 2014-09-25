@@ -17,8 +17,8 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
 /**
  * @author Iván Zaera
  */
-public class JavascriptToolbarItem extends ToolbarItem
-	implements JavascriptUIItem {
+public class JavascriptToolbarItem
+	extends ToolbarItem implements JavascriptUIItem {
 
 	public String getOnClick() {
 		return _onClick;
