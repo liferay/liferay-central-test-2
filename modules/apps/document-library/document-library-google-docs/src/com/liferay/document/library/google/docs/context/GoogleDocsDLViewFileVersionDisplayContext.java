@@ -157,17 +157,17 @@ public class GoogleDocsDLViewFileVersionDisplayContext
 		return urlUIItem;
 	}
 
-	private void _removeUnsupportedUIItems(List<? extends UIItem> uiItems) {
-		_removeUIItem(uiItems, DLUIItemKeys.DOWNLOAD);
-		_removeUIItem(uiItems, DLUIItemKeys.OPEN_IN_MS_OFFICE);
-	}
-
 	private void _removeUIItem(List<? extends UIItem> uiItems, String key) {
 		int index = _getIndex(uiItems, key);
 
 		if (index != -1) {
 			uiItems.remove(index);
 		}
+	}
+
+	private void _removeUnsupportedUIItems(List<? extends UIItem> uiItems) {
+		_removeUIItem(uiItems, DLUIItemKeys.DOWNLOAD);
+		_removeUIItem(uiItems, DLUIItemKeys.OPEN_IN_MS_OFFICE);
 	}
 
 	private static final UUID _UUID = UUID.fromString(

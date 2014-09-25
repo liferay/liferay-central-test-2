@@ -655,8 +655,7 @@ public class DefaultDLViewFileVersionDisplayContext
 				DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED,
 			true);
 
-		String onClick =
-			getNamespace() + "openDocument('" + webDavURL + "');";
+		String onClick = getNamespace() + "openDocument('" + webDavURL + "');";
 
 		JavascriptMenuItem javascriptMenuItem = _addJavascriptUIItem(
 			new JavascriptMenuItem(), menuItems, "icon-file-alt",
