@@ -83,7 +83,7 @@ public class GoogleDocsDLViewFileVersionDisplayContext
 	public List<MenuItem> getMenuItems() throws PortalException {
 		List<MenuItem> menuItems = super.getMenuItems();
 
-		_removeNonGoogleUIItems(menuItems);
+		_removeUnsupportedUIItems(menuItems);
 
 		URLMenuItem urlMenuItem = _insertEditInGoogleURLUIItem(
 			new URLMenuItem(), menuItems);
@@ -97,7 +97,7 @@ public class GoogleDocsDLViewFileVersionDisplayContext
 	public List<ToolbarItem> getToolbarItems() throws PortalException {
 		List<ToolbarItem> toolbarItems = super.getToolbarItems();
 
-		_removeNonGoogleUIItems(toolbarItems);
+		_removeUnsupportedUIItems(toolbarItems);
 
 		_insertEditInGoogleURLUIItem(new URLToolbarItem(), toolbarItems);
 
@@ -157,7 +157,7 @@ public class GoogleDocsDLViewFileVersionDisplayContext
 		return urlUIItem;
 	}
 
-	private void _removeNonGoogleUIItems(List<? extends UIItem> uiItems) {
+	private void _removeUnsupportedUIItems(List<? extends UIItem> uiItems) {
 		_removeUIItem(uiItems, DLUIItemKeys.DOWNLOAD);
 		_removeUIItem(uiItems, DLUIItemKeys.OPEN_IN_MS_OFFICE);
 	}
