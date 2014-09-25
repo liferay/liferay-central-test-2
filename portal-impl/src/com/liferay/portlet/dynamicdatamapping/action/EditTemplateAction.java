@@ -226,10 +226,10 @@ public class EditTemplateAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 		String portletResourceNamespace = ParamUtil.getString(
 			actionRequest, "portletResourceNamespace");
+		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 		String structureAvailableFields = ParamUtil.getString(
 			actionRequest, "structureAvailableFields");
 
@@ -242,6 +242,8 @@ public class EditTemplateAction extends PortletAction {
 			"struts_action", "/dynamic_data_mapping/edit_template");
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
+			"portletResourceNamespace", portletResourceNamespace, false);
+		portletURL.setParameter(
 			"templateId", String.valueOf(template.getTemplateId()), false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
@@ -249,8 +251,6 @@ public class EditTemplateAction extends PortletAction {
 			"classNameId", String.valueOf(classNameId), false);
 		portletURL.setParameter("classPK", String.valueOf(classPK), false);
 		portletURL.setParameter("type", template.getType(), false);
-		portletURL.setParameter(
-			"portletResourceNamespace", portletResourceNamespace, false);
 		portletURL.setParameter(
 			"structureAvailableFields", structureAvailableFields, false);
 		portletURL.setWindowState(actionRequest.getWindowState());
