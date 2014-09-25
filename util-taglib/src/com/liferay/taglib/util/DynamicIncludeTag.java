@@ -15,8 +15,6 @@
 package com.liferay.taglib.util;
 
 import com.liferay.kernel.servlet.taglib.DynamicIncludeUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.taglib.TagSupport;
 
 import java.io.IOException;
@@ -89,8 +87,6 @@ public class DynamicIncludeTag extends TagSupport {
 
 		};
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(DynamicIncludeTag.class);
 
 	private String _key;
 
