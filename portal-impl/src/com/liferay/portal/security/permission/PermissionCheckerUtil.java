@@ -62,7 +62,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
  */
 public class PermissionCheckerUtil {
 
-	public static Boolean checkResourcePermission(
+	public static Boolean containsResourcePermission(
 			PermissionChecker permissionChecker, String className, long classPK,
 			String actionId)
 		throws PortalException {
