@@ -210,13 +210,13 @@ public class DefaultDLEditFileEntryDisplayContext
 		_fileEntryDisplayContextHelper = new FileEntryDisplayContextHelper(
 			themeDisplay.getPermissionChecker(), _fileEntry);
 
-		if (fileEntry != null) {
-			_fileVersion = fileEntry.getFileVersion();
-		}
-
 		if ((_dlFileEntryType == null) && (_fileEntry != null)) {
 			_dlFileEntryType =
 				_fileEntryDisplayContextHelper.getDLFileEntryType();
+		}
+
+		if (fileEntry != null) {
+			_fileVersion = fileEntry.getFileVersion();
 		}
 
 		_fileVersionDisplayContextHelper = new FileVersionDisplayContextHelper(
