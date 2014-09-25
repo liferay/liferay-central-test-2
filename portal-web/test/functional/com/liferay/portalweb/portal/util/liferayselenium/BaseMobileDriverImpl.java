@@ -640,14 +640,19 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public void tap(String locator) {
-		WebElement bodyWebElement = getWebElement("//body");
+		WebElement webElement = getWebElement("//body");
 
-		WrapsDriver wrapsDriver = (WrapsDriver)bodyWebElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver wrappedWebDriver = wrapsDriver.getWrappedDriver();
 
 		JavascriptExecutor javascriptExecutor =
 			(JavascriptExecutor)wrappedWebDriver;
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("YUI().use('node-event-simulate', function(Y) {");
+		sb.append("var node = Y.one('");
 
 		String cssLocator = locator;
 
@@ -657,13 +662,10 @@ public abstract class BaseMobileDriverImpl
 		cssLocator = cssLocator.replaceAll("'", "\"");
 		cssLocator = cssLocator.replaceAll("\\/", " > ");
 		cssLocator = cssLocator.replaceAll("^ ", "");
-		cssLocator = cssLocator.replaceAll(" and ","][");
+		cssLocator = cssLocator.replaceAll(" and ", "][");
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("YUI().use('node-event-simulate', function(Y) {");
-		sb.append("var node = Y.one('");
 		sb.append(cssLocator);
+
 		sb.append("');");
 		sb.append("node.simulateGesture('tap');});");
 
