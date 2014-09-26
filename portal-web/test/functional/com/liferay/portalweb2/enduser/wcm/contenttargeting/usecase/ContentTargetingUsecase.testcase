@@ -614,7 +614,7 @@
 
 		<execute action="Home#refresh" />
 
-		<execute macro="Staging#publishToLiveNowPG" />
+		<execute macro="Staging#publishToLiveNow" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Test Page Name" />
