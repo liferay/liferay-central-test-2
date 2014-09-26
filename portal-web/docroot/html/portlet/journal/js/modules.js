@@ -7,16 +7,6 @@
 				journal: {
 					base: PATH_PORTLET + '/journal/js/',
 					modules: {
-						'liferay-portlet-journal': {
-							path: 'main.js',
-							requires: [
-								'aui-base',
-								'aui-dialog-iframe-deprecated',
-								'aui-tooltip',
-								'liferay-portlet-base',
-								'liferay-util-window'
-							]
-						},
 						'liferay-journal-content': {
 							path: 'content.js',
 							requires: [
@@ -30,6 +20,16 @@
 								'liferay-app-view-move',
 								'liferay-app-view-select',
 								'liferay-portlet-base'
+							]
+						},
+						'liferay-portlet-journal': {
+							path: 'main.js',
+							requires: [
+								'aui-base',
+								'aui-dialog-iframe-deprecated',
+								'aui-tooltip',
+								'liferay-portlet-base',
+								'liferay-util-window'
 							]
 						}
 					},
