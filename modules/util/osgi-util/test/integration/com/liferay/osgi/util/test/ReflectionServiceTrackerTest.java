@@ -18,8 +18,6 @@ import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
 import com.liferay.osgi.util.service.ReflectionServiceTracker;
 import com.liferay.osgi.util.service.UnavailableServiceException;
 
-import java.io.IOException;
-
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -116,8 +114,8 @@ public class ReflectionServiceTrackerTest {
 		}
 
 		@Test
-		public void shouldInjectHighestRankingWhenSeveralServicesAreRegistered()
-			throws IOException {
+		public void
+			shouldInjectHighestRankingWhenSeveralServicesAreRegistered() {
 
 			TestInterface testInterface = new TestInterface();
 
