@@ -74,15 +74,19 @@ public class ReflectionServiceTrackerTest {
 				new ReflectionServiceTracker(testInstance);
 
 			TrackedOne trackedOne = new TrackedOne();
-			ServiceRegistration<TrackedOne> sr1 = registerServiceWithRanking(
-				_bundleContext, TrackedOne.class, trackedOne, 0);
+
+			ServiceRegistration<TrackedOne> serviceRegistration1 =
+				registerServiceWithRanking(
+					_bundleContext, TrackedOne.class, trackedOne, 0);
 
 			TrackedTwo trackedTwo = new TrackedTwo();
-			ServiceRegistration<TrackedTwo> sr2 = registerServiceWithRanking(
-				_bundleContext, TrackedTwo.class, trackedTwo, 0);
 
-			sr1.unregister();
-			sr2.unregister();
+			ServiceRegistration<TrackedTwo> serviceRegistration2 =
+				registerServiceWithRanking(
+					_bundleContext, TrackedTwo.class, trackedTwo, 0);
+
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
 
 			Assert.assertNull(testInstance.getTrackedOne());
 			Assert.assertNull(testInstance.getTrackedTwo());
@@ -124,31 +128,35 @@ public class ReflectionServiceTrackerTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr1 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne, 2);
+			ServiceRegistration<InterfaceOne> serviceRegistration1 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne, 2);
 
 			TrackedTwo trackedTwo = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr2 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo, 2);
+			ServiceRegistration<InterfaceTwo> serviceRegistration2 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo, 2);
 
 			TrackedOne trackedOne2 = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr3 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne2, 1);
+			ServiceRegistration<InterfaceOne> serviceRegistration3 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne2, 1);
 
 			TrackedTwo trackedTwo2 = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr4 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo2, 1);
+			ServiceRegistration<InterfaceTwo> serviceRegistration4 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo2, 1);
 
 			Assert.assertEquals(trackedOne, testInterface.getTrackedOne());
 			Assert.assertEquals(trackedTwo, testInterface.getTrackedTwo());
 
-			sr1.unregister();
-			sr2.unregister();
-			sr3.unregister();
-			sr4.unregister();
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
+			serviceRegistration3.unregister();
+			serviceRegistration4.unregister();
 
 			reflectionServiceTracker.close();
 		}
@@ -164,44 +172,50 @@ public class ReflectionServiceTrackerTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr1 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne, 3);
+			ServiceRegistration<InterfaceOne> serviceRegistration1 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne, 3);
 
 			TrackedTwo trackedTwo = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr2 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo, 3);
+			ServiceRegistration<InterfaceTwo> serviceRegistration2 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo, 3);
 
 			TrackedOne trackedOne2 = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr3 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne2, 2);
+			ServiceRegistration<InterfaceOne> serviceRegistration3 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne2, 2);
 
 			TrackedTwo trackedTwo2 = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr4 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo2, 2);
+			ServiceRegistration<InterfaceTwo> serviceRegistration4 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo2, 2);
 
 			TrackedOne trackedOne3 = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr5 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne3, 1);
+			ServiceRegistration<InterfaceOne> serviceRegistration5 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne3, 1);
 
 			TrackedTwo trackedTwo3 = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr6 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo3, 1);
+			ServiceRegistration<InterfaceTwo> serviceRegistration6 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo3, 1);
 
-			sr1.unregister();
-			sr2.unregister();
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
 
 			Assert.assertEquals(trackedOne2, testInterface.getTrackedOne());
 			Assert.assertEquals(trackedTwo2, testInterface.getTrackedTwo());
 
-			sr3.unregister();
-			sr4.unregister();
-			sr5.unregister();
-			sr6.unregister();
+			serviceRegistration3.unregister();
+			serviceRegistration4.unregister();
+			serviceRegistration5.unregister();
+			serviceRegistration6.unregister();
 
 			reflectionServiceTracker.close();
 		}
@@ -215,19 +229,21 @@ public class ReflectionServiceTrackerTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr1 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne, 0);
+			ServiceRegistration<InterfaceOne> serviceRegistration1 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne, 0);
 
 			TrackedTwo trackedTwo = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr2 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo, 0);
+			ServiceRegistration<InterfaceTwo> serviceRegistration2 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo, 0);
 
 			Assert.assertEquals(trackedOne, testInterface.getTrackedOne());
 			Assert.assertEquals(trackedTwo, testInterface.getTrackedTwo());
 
-			sr1.unregister();
-			sr2.unregister();
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
 
 			reflectionServiceTracker.close();
 		}
@@ -278,16 +294,18 @@ public class ReflectionServiceTrackerTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr1 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne, 0);
+			ServiceRegistration<InterfaceOne> serviceRegistration1 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne, 0);
 
 			TrackedTwo trackedTwo = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr2 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo, 0);
+			ServiceRegistration<InterfaceTwo> serviceRegistration2 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo, 0);
 
-			sr1.unregister();
-			sr2.unregister();
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
 
 			Assert.assertNotNull(testInterface.getTrackedOne());
 			Assert.assertNotNull(testInterface.getTrackedTwo());
@@ -324,38 +342,43 @@ public class ReflectionServiceTrackerTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr1 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne, 2);
+			ServiceRegistration<InterfaceOne> serviceRegistration1 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne, 2);
+
 			TrackedTwo trackedTwo = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr2 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo, 2);
+			ServiceRegistration<InterfaceTwo> serviceRegistration2 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo, 2);
 
 			TrackedOne trackedOne2 = new TrackedOne();
 
-			ServiceRegistration<InterfaceOne> sr3 = registerServiceWithRanking(
-				_bundleContext, InterfaceOne.class, trackedOne2, 1);
+			ServiceRegistration<InterfaceOne> serviceRegistration3 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceOne.class, trackedOne2, 1);
 
 			TrackedTwo trackedTwo2 = new TrackedTwo();
 
-			ServiceRegistration<InterfaceTwo> sr4 = registerServiceWithRanking(
-				_bundleContext, InterfaceTwo.class, trackedTwo2, 1);
+			ServiceRegistration<InterfaceTwo> serviceRegistration4 =
+				registerServiceWithRanking(
+					_bundleContext, InterfaceTwo.class, trackedTwo2, 1);
 
-			Hashtable<String, Object> properties =
+			Dictionary<String, Object> properties =
 				new Hashtable<String, Object>();
 
 			properties.put("service.ranking", 3);
 
-			sr3.setProperties(properties);
-			sr4.setProperties(properties);
+			serviceRegistration3.setProperties(properties);
+			serviceRegistration4.setProperties(properties);
 
 			Assert.assertEquals(trackedOne2, testInterface.getTrackedOne());
 			Assert.assertEquals(trackedTwo2, testInterface.getTrackedTwo());
 
-			sr1.unregister();
-			sr2.unregister();
-			sr3.unregister();
-			sr4.unregister();
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
+			serviceRegistration3.unregister();
+			serviceRegistration4.unregister();
 
 			reflectionServiceTracker.close();
 		}
