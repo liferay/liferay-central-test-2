@@ -79,7 +79,7 @@ public class TunnelUtil {
 			}
 			catch (DecoderException e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e);
+					_log.warn(e, e);
 				}
 
 				AuthException authException = new AuthException();
