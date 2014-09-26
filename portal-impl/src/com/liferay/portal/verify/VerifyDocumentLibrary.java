@@ -140,7 +140,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 								dlFileEntryMetadata.getDDMStructureId());
 
 						if (ddmStructure == null) {
-							deleteRedundantDLFileEntryMetadata(
+							deleteUnusedDLFileEntryMetadata(
 								dlFileEntryMetadata);
 
 							return;
@@ -149,15 +149,15 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 						if (dlFileEntry.getCompanyId() !=
 								ddmStructure.getCompanyId()) {
 
-							deleteRedundantDLFileEntryMetadata(
+							deleteUnusedDLFileEntryMetadata(
 								dlFileEntryMetadata);
 						}
 					}
 					catch (Exception e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to delete redundant metadata for " +
-									"file entry " +
+								"Unable to delete unused metadata for file " +
+									"entry " +
 										dlFileEntryMetadata.getFileEntryId(),
 								e);
 						}
@@ -508,7 +508,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		}
 	}
 
-	protected void deleteRedundantDLFileEntryMetadata(
+	protected void deleteUnusedDLFileEntryMetadata(
 			DLFileEntryMetadata dlFileEntryMetadata)
 		throws Exception {
 
