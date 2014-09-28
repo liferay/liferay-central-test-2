@@ -107,12 +107,13 @@ public class AsyncBrokerTest {
 
 	@Test
 	public void testOrphanCancellationNotDoneYet() throws InterruptedException {
+
+		// Without log
+
 		System.setProperty(_THREAD_ENABLED_KEY, StringPool.FALSE);
 
 		AsyncBroker<String, String> asyncBroker =
 			new AsyncBroker<String, String>();
-
-		// Without log
 
 		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
 			AsyncBroker.class.getName(), Level.OFF);
@@ -157,8 +158,8 @@ public class AsyncBrokerTest {
 			LogRecord logRecord = logRecords.get(0);
 
 			Assert.assertEquals(
-				"Cancelled an orphan NoticeableFuture : " + toString +
-					" under key : " + _key,
+				"Cancelled orphan noticeable future " + toString +
+					" with key " + _key,
 				logRecord.getMessage());
 		}
 		finally {
@@ -230,9 +231,10 @@ public class AsyncBrokerTest {
 			LogRecord logRecord = logRecords.get(0);
 
 			Assert.assertEquals(
-				"Current JVM does not support java.lang.ref.PhantomReference " +
-					"resurrection, orphan NoticeableFuture cancellation has " +
-						"been disabled.", logRecord.getMessage());
+				"Cancellation of orphaned noticeable futures is disabled " +
+					"because the JVM does not support phantom reference " +
+						"resurrection",
+				logRecord.getMessage());
 			Assert.assertSame(_exception, logRecord.getThrown());
 		}
 		finally {

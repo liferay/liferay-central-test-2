@@ -108,9 +108,9 @@ public class AsyncBroker<K, V> {
 		catch (Throwable t) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Current JVM does not support " +
-						"java.lang.ref.PhantomReference resurrection, orphan " +
-							"NoticeableFuture cancellation has been disabled.",
+					"Cancellation of orphaned noticeable futures is disabled " +
+						"because the JVM does not support phantom reference " +
+							"resurrection",
 					t);
 			}
 		}
@@ -137,8 +137,8 @@ public class AsyncBroker<K, V> {
 
 				if (noticeableFuture.cancel(true) && _log.isWarnEnabled()) {
 					_log.warn(
-						"Cancelled an orphan NoticeableFuture : " +
-							noticeableFuture + " under key : " + _key);
+						"Cancelled orphan noticeable future " +
+							noticeableFuture + " with key " + _key);
 				}
 			}
 			catch (Exception e) {
