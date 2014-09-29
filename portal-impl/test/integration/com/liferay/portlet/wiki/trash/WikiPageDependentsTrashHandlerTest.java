@@ -1098,6 +1098,7 @@ public class WikiPageDependentsTrashHandlerTest {
 		private WikiPage _page;
 		private WikiPage _parentPage;
 		private WikiPage _redirectPage;
+
 	}
 
 }
