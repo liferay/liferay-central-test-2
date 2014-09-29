@@ -981,9 +981,7 @@ public class WikiPageDependentsTrashHandlerTest {
 			newParentPage.getResourcePrimKey(), serviceContext);
 	}
 
-	protected void movePageToTrash(WikiPage page)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
+	protected void movePageToTrash(WikiPage page) throws PortalException {
 		WikiPageLocalServiceUtil.movePageToTrash(
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle());
 	}
