@@ -955,7 +955,7 @@ public class WikiPageDependentsTrashHandlerTest {
 		int initialTrashVersionCount =
 			TrashVersionLocalServiceUtil.getTrashVersionsCount();
 
-		RelatedPages relatedPages = buildRelatedPages();
+		buildRelatedPages();
 
 		WikiPage page = WikiPageLocalServiceUtil.movePageToTrash(
 			TestPropsValues.getUserId(), _node.getNodeId(), "RenamedPage");
