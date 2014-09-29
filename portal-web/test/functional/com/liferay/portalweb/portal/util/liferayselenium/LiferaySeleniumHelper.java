@@ -764,6 +764,14 @@ public class LiferaySeleniumHelper {
 
 				return true;
 			}
+
+			if (line.contains("[org.apache.xmlbeans.impl.store.CharUtil$1]")) {
+				return true;
+			}
+
+			if (line.contains("[org.apache.xmlbeans.impl.store.Locale$1]")) {
+				return true;
+			}
 		}
 
 		// LPS-49505
@@ -821,28 +829,6 @@ public class LiferaySeleniumHelper {
 			if (line.contains(
 					"[com.sun.syndication.feed.impl.ToStringBean$1]")) {
 
-				return true;
-			}
-		}
-
-		// LPS-50411
-
-		if (line.matches(
-				".*The web application \\[\\] created a ThreadLocal with key " +
-					"of type.*")) {
-
-			if (line.contains("[org.apache.xmlbeans.impl.store.CharUtil$1]")) {
-				return true;
-			}
-		}
-
-		// LPS-50411
-
-		if (line.matches(
-				".*The web application \\[\\] created a ThreadLocal with key " +
-					"of type.*")) {
-
-			if (line.contains("[org.apache.xmlbeans.impl.store.Locale$1]")) {
 				return true;
 			}
 		}
