@@ -67,7 +67,6 @@ public class FieldsToDDMFormValuesConverterTest extends BaseDDMTestCase {
 			ddmStructure.getStructureId(), "Metadata1",
 			createValuesList("Metadata 1 Value"),
 			createValuesList("Metadata 1 Valor"));
-
 		Field metadata2Field = createField(
 			ddmStructure.getStructureId(), "Metadata2",
 			createValuesList("Metadata 2 Value"),
