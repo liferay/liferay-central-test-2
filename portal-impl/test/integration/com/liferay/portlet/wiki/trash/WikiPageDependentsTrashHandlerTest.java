@@ -967,39 +967,6 @@ public class WikiPageDependentsTrashHandlerTest {
 			TrashVersionLocalServiceUtil.getTrashVersionsCount());
 	}
 
-	protected void movePage(WikiPage trashedPage, WikiPage newParentPage)
-		throws PortalException {
-
-		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			WikiPage.class.getName());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
-		trashHandler.moveEntry(
-			TestPropsValues.getUserId(), trashedPage.getResourcePrimKey(),
-			newParentPage.getResourcePrimKey(), serviceContext);
-	}
-
-	protected void movePageToTrash(WikiPage page) throws PortalException {
-		WikiPageLocalServiceUtil.movePageToTrash(
-			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle());
-	}
-
-	protected void moveTrashEntry(long classPK, long newContainerId)
-		throws Exception {
-
-		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			WikiPage.class.getName());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
-		trashHandler.moveTrashEntry(
-			TestPropsValues.getUserId(), classPK, newContainerId,
-			serviceContext);
-	}
-
 	protected RelatedPages buildRelatedPages() throws Exception {
 		WikiPage parentPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _group.getGroupId(), _node.getNodeId(),
@@ -1032,6 +999,39 @@ public class WikiPageDependentsTrashHandlerTest {
 
 		return new RelatedPages(
 			parentPage, page, childPage, grandChildPage, redirectPage);
+	}
+
+	protected void movePage(WikiPage trashedPage, WikiPage newParentPage)
+		throws PortalException {
+
+		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
+			WikiPage.class.getName());
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+
+		trashHandler.moveEntry(
+			TestPropsValues.getUserId(), trashedPage.getResourcePrimKey(),
+			newParentPage.getResourcePrimKey(), serviceContext);
+	}
+
+	protected void movePageToTrash(WikiPage page) throws PortalException {
+		WikiPageLocalServiceUtil.movePageToTrash(
+			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle());
+	}
+
+	protected void moveTrashEntry(long classPK, long newContainerId)
+		throws Exception {
+
+		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
+			WikiPage.class.getName());
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+
+		trashHandler.moveTrashEntry(
+			TestPropsValues.getUserId(), classPK, newContainerId,
+			serviceContext);
 	}
 
 	protected void restoreFromTrash(WikiPage page) throws Exception {
