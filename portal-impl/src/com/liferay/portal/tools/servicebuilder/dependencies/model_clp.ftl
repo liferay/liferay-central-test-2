@@ -624,11 +624,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			@SuppressWarnings("unused")
 			public String buildTreePath() throws PortalException {
 				try {
-					Class<?>[] parameterTypes = new Class<?>[0];
-
-					Object[] parameterValues = new Object[0];
-
-					return (String)invokeOnRemoteModel("buildTreePath", parameterTypes, parameterValues);
+					return (String)invokeOnRemoteModel("buildTreePath", new Class<?>[0], new Object[0]);
 				}
 				catch (Exception e) {
 					throw new UnsupportedOperationException(e);
@@ -641,11 +637,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			try {
 				_treePath = treePath;
 
-				Class<?>[] parameterTypes = new Class<?>[] { String.class };
-
-				Object[] parameterValues = new Object[] { treePath };
-
-				invokeOnRemoteModel("updateTreePath", parameterTypes, parameterValues);
+				invokeOnRemoteModel("updateTreePath", new Class<?>[] {String.class}, new Object[] {treePath});
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
