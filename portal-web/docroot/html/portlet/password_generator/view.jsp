@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/password_generator/init.jsp" %>
 
 <%
-int length = ParamUtil.get(request, "length", 8);
-boolean numbers = ParamUtil.get(request, "numbers", false);
-boolean lowerCaseLetters = ParamUtil.get(request, "lowerCaseLetters", false);
-boolean upperCaseLetters = ParamUtil.get(request, "upperCaseLetters", false);
+int length = ParamUtil.getInteger(request, "length", 8);
+boolean numbers = ParamUtil.getBoolean(request, "numbers");
+boolean lowerCaseLetters = ParamUtil.getBoolean(request, "lowerCaseLetters");
+boolean upperCaseLetters = ParamUtil.getBoolean(request, "upperCaseLetters");
 
 String key = StringPool.BLANK;
 
