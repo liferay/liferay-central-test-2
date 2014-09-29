@@ -46,11 +46,11 @@ public class BaseAudioTag extends com.liferay.taglib.util.IncludeTag {
 	}
 
 	public java.lang.String getOggUrl() {
-		return _oggUrl;
+		return _oggURL;
 	}
 
 	public java.lang.String getSwfUrl() {
-		return _swfUrl;
+		return _swfURL;
 	}
 
 	public java.lang.String getType() {
@@ -79,16 +79,16 @@ public class BaseAudioTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("id", id);
 	}
 
-	public void setOggUrl(java.lang.String oggUrl) {
-		_oggUrl = oggUrl;
+	public void setOggUrl(java.lang.String oggURL) {
+		_oggURL = oggURL;
 
-		setScopedAttribute("oggUrl", oggUrl);
+		setScopedAttribute("oggURL", oggURL);
 	}
 
-	public void setSwfUrl(java.lang.String swfUrl) {
-		_swfUrl = swfUrl;
+	public void setSwfUrl(java.lang.String swfURL) {
+		_swfURL = swfURL;
 
-		setScopedAttribute("swfUrl", swfUrl);
+		setScopedAttribute("swfURL", swfURL);
 	}
 
 	public void setType(java.lang.String type) {
@@ -108,8 +108,8 @@ public class BaseAudioTag extends com.liferay.taglib.util.IncludeTag {
 		_boundingBox = null;
 		_cssClass = null;
 		_id = null;
-		_oggUrl = null;
-		_swfUrl = null;
+		_oggURL = null;
+		_swfURL = null;
 		_type = "mp3";
 		_url = null;
 	}
@@ -124,8 +124,8 @@ public class BaseAudioTag extends com.liferay.taglib.util.IncludeTag {
 		setNamespacedAttribute(request, "boundingBox", _boundingBox);
 		setNamespacedAttribute(request, "cssClass", _cssClass);
 		setNamespacedAttribute(request, "id", _id);
-		setNamespacedAttribute(request, "oggUrl", _oggUrl);
-		setNamespacedAttribute(request, "swfUrl", _swfUrl);
+		setNamespacedAttribute(request, "oggURL", _oggURL);
+		setNamespacedAttribute(request, "swfURL", _swfURL);
 		setNamespacedAttribute(request, "type", _type);
 		setNamespacedAttribute(request, "url", _url);
 	}
@@ -138,8 +138,8 @@ public class BaseAudioTag extends com.liferay.taglib.util.IncludeTag {
 	private java.lang.String _boundingBox = null;
 	private java.lang.String _cssClass = null;
 	private java.lang.String _id = null;
-	private java.lang.String _oggUrl = null;
-	private java.lang.String _swfUrl = null;
+	private java.lang.String _oggURL = null;
+	private java.lang.String _swfURL = null;
 	private java.lang.String _type = "mp3";
 	private java.lang.String _url = null;
 

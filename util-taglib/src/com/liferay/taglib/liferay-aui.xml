@@ -130,12 +130,12 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<name>oggUrl</name>
+				<name>oggURL</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<name>swfUrl</name>
+				<name>swfURL</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>

@@ -23,8 +23,8 @@
 		{
 			boundingBox: '#<%= id %>',
 			cssClass: '<%= cssClass %>',
-			oggUrl: '<%= oggUrl %>',
-			swfUrl: '<%= swfUrl %>',
+			oggUrl: '<%= oggURL %>',
+			swfUrl: '<%= swfURL %>',
 			type: '<%= type %>',
 			url: '<%= url %>'
 		}
