@@ -255,9 +255,7 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 	}
 
 	@Override
-	protected StagedModel getStagedModel(String uuid, long groupId)
-		throws PortalException {
-
+	protected StagedModel getStagedModel(String uuid, long groupId) {
 		return
 			JournalArticleLocalServiceUtil.fetchJournalArticleByUuidAndGroupId(
 				uuid, groupId);
