@@ -70,7 +70,7 @@ public class XSLContentPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		renderRequest.setAttribute(
-			"xslContentConfiguration", _xslContentConfiguration);
+			XSLContentConfiguration.class.getName(), _xslContentConfiguration);
 
 		super.doView(renderRequest, renderResponse);
 	}
