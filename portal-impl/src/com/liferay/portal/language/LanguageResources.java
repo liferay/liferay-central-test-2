@@ -246,6 +246,7 @@ public class LanguageResources {
 
 		if (oldLanguageMap == null) {
 			_loadLocale(locale);
+
 			oldLanguageMap = _languageMaps.get(locale);
 		}
 
@@ -266,7 +267,7 @@ public class LanguageResources {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter languageResourceFilter = registry.getFilter(
-			"(&(objectClass=" + Object.class.getName() + ")(language.id=*))");
+			"(&(language.id=*)(objectClass=" + Object.class.getName() + "))");
 
 		_serviceTracker = registry.trackServices(
 			languageResourceFilter,
@@ -349,7 +350,7 @@ public class LanguageResources {
 
 			Map<String, String> languageMap = new HashMap<String, String>();
 
-			Locale locale;
+			Locale locale = null;
 
 			if (Validator.isNotNull(languageId)) {
 				locale = LocaleUtil.fromLanguageId(languageId, true);
@@ -389,7 +390,7 @@ public class LanguageResources {
 			String languageId = GetterUtil.getString(
 				serviceReference.getProperty("language.id"), StringPool.BLANK);
 
-			Locale locale;
+			Locale locale = null;
 
 			if (Validator.isNotNull(languageId)) {
 				locale = LocaleUtil.fromLanguageId(languageId, true);

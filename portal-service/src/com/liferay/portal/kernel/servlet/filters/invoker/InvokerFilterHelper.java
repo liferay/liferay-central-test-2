@@ -97,9 +97,9 @@ public class InvokerFilterHelper {
 				servletContext.getServletContextName());
 
 			com.liferay.registry.Filter filter = registry.getFilter(
-				"(&(servlet-context-name=" + servletContextName +
-					")(servlet-filter-name=*)(objectClass=" +
-						Filter.class.getName() + "))");
+				"(&(objectClass=" + Filter.class.getName() +
+					")(servlet-context-name=" + servletContextName +
+						")(servlet-filter-name=*))");
 
 			_serviceTracker = registry.trackServices(
 				filter, new FilterServiceTrackerCustomizer());
