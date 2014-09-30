@@ -28,8 +28,8 @@ public class UpgradeBackgroundTask extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL(
-				"alter_column_name BackgroundTask " +
-					"taskContext taskContextMap TEXT null");
+				"alter_column_name BackgroundTask taskContext taskContextMap " +
+					"TEXT null");
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
