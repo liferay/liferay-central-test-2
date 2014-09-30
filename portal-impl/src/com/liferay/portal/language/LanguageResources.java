@@ -347,9 +347,7 @@ public class LanguageResources {
 
 			String languageId = GetterUtil.getString(
 				serviceReference.getProperty("language.id"), StringPool.BLANK);
-
 			Map<String, String> languageMap = new HashMap<String, String>();
-
 			Locale locale = null;
 
 			if (Validator.isNotNull(languageId)) {
@@ -389,7 +387,6 @@ public class LanguageResources {
 
 			String languageId = GetterUtil.getString(
 				serviceReference.getProperty("language.id"), StringPool.BLANK);
-
 			Locale locale = null;
 
 			if (Validator.isNotNull(languageId)) {
