@@ -48,7 +48,7 @@ if (searchFolderId > 0) {
 	folder = DLAppServiceUtil.getFolder(searchFolderId);
 }
 else {
-	folderIdsArray = new long[] {};
+	folderIdsArray = new long[0];
 }
 
 List<Folder> mountFolders = DLAppServiceUtil.getMountFolders(scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
