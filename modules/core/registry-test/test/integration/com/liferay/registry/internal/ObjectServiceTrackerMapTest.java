@@ -71,8 +71,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testContainsKey() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			ServiceRegistration<TrackedOne> sr1 = registerService(
 				new TrackedOne(), "aTarget");
@@ -103,8 +103,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testGetServiceAfterRemoval() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			ServiceRegistration<TrackedOne> serviceRegistration = registerService(
 				new TrackedOne());
@@ -119,8 +119,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testGetServiceGetsReplacedAfterRemoval() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			TrackedOne trackedOne1 = new TrackedOne();
 
@@ -147,7 +147,7 @@ public class ObjectServiceTrackerMapTest {
 	@Test
 	public void testGetServiceGetsReplacedAfterRemovalInverseOrder() {
 		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+				createServiceTrackerMap()) {
 
 			TrackedOne trackedOne2 = new TrackedOne();
 
@@ -170,8 +170,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testGetServiceIsNullAfterDeregistration() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			ServiceRegistration<TrackedOne> serviceRegistration1 =
 				registerService(new TrackedOne());
@@ -239,27 +239,27 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testGetServiceWithCustomResolver() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				ServiceTrackerCollections.singleValueMap(
+					TrackedOne.class, "(&(other=*)(target=*))",
+					new ServiceReferenceMapper<String, TrackedOne>() {
 
-			ServiceTrackerCollections.singleValueMap(
-				TrackedOne.class, "(&(other=*)(target=*))",
-				new ServiceReferenceMapper<String, TrackedOne>() {
+						@Override
+						public void map(
+							ServiceReference<TrackedOne> serviceReference,
+							Emitter<String> keys) {
 
-					@Override
-					public void map(
-						ServiceReference<TrackedOne> serviceReference,
-						Emitter<String> keys) {
+							keys.emit(
+								serviceReference.getProperty("other") + " - " +
+									serviceReference.getProperty("target"));
+						}
 
-						keys.emit(
-							serviceReference.getProperty("other") + " - " +
-								serviceReference.getProperty("target"));
-					}
-
-				})) {
+					})) {
 
 			serviceTrackerMap.open();
 
-			Dictionary<String, String> properties = new Hashtable<String, String>();
+			Dictionary<String, String> properties =
+				new Hashtable<String, String>();
 
 			properties.put("other", "aProperty");
 			properties.put("target", "aTarget");
@@ -274,8 +274,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testGetServiceWithIncorrectKey() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			registerService(new TrackedOne(), "anotherTarget");
 
@@ -287,35 +287,36 @@ public class ObjectServiceTrackerMapTest {
 	public void testGetServiceWithServiceCustomizer() {
 		final Registry registry = RegistryUtil.getRegistry();
 
-		try(ServiceTrackerMap<String, TrackedTwo> serviceTrackerMap =
-			ServiceTrackerCollections.singleValueMap(
-				TrackedOne.class, "target",
-				new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
+		try (ServiceTrackerMap<String, TrackedTwo> serviceTrackerMap =
+				ServiceTrackerCollections.singleValueMap(
+					TrackedOne.class, "target",
+					new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
 
-					@Override
-					public TrackedTwo addingService(
-						ServiceReference<TrackedOne> serviceReference) {
+						@Override
+						public TrackedTwo addingService(
+							ServiceReference<TrackedOne> serviceReference) {
 
-						return new TrackedTwo(
-							registry.getService(serviceReference));
-					}
+							return new TrackedTwo(
+								registry.getService(serviceReference));
+						}
 
-					@Override
-					public void modifiedService(
-						ServiceReference<TrackedOne> serviceReference,
-						TrackedTwo service) {
+						@Override
+						public void modifiedService(
+							ServiceReference<TrackedOne> serviceReference,
+							TrackedTwo service) {
 
-						removedService(serviceReference, service);
-					}
+							removedService(serviceReference, service);
+						}
 
-					@Override
-					public void removedService(
-						ServiceReference<TrackedOne> serviceReference,
-						TrackedTwo service) {
+						@Override
+						public void removedService(
+							ServiceReference<TrackedOne> serviceReference,
+							TrackedTwo service) {
 
-						registry.ungetService(serviceReference);
-					}
-				})) {
+							registry.ungetService(serviceReference);
+						}
+
+					})) {
 
 			serviceTrackerMap.open();
 
@@ -340,54 +341,54 @@ public class ObjectServiceTrackerMapTest {
 	public void testGetServiceWithServiceCustomizerAndServiceReferenceMapper() {
 		final Registry registry = RegistryUtil.getRegistry();
 
-		try(ServiceTrackerMap<String, TrackedTwo> serviceTrackerMap =
-			ServiceTrackerCollections.singleValueMap(
-				TrackedOne.class, ("(target=*)"),
-				new ServiceReferenceMapper<String, TrackedOne>() {
+		try (ServiceTrackerMap<String, TrackedTwo> serviceTrackerMap =
+				ServiceTrackerCollections.singleValueMap(
+					TrackedOne.class, ("(target=*)"),
+					new ServiceReferenceMapper<String, TrackedOne>() {
 
-					@Override
-					public void map(
-						ServiceReference<TrackedOne> serviceReference,
-						Emitter<String> emitter) {
+						@Override
+						public void map(
+							ServiceReference<TrackedOne> serviceReference,
+							Emitter<String> emitter) {
 
-						TrackedOne service = registry.getService(
-							serviceReference);
+							TrackedOne service = registry.getService(
+								serviceReference);
 
-						String targetProperty =
-							(String) serviceReference.getProperty("target");
+							String targetProperty =
+								(String) serviceReference.getProperty("target");
 
-						//
-						emitter.emit(targetProperty + "-" + service.getKey());
+							//
+							emitter.emit(targetProperty + "-" + service.getKey());
 
-						registry.ungetService(serviceReference);
-					}
-				},
-				new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
+							registry.ungetService(serviceReference);
+						}
+					},
+					new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
 
-					@Override
-					public TrackedTwo addingService(
-						ServiceReference<TrackedOne> serviceReference) {
+						@Override
+						public TrackedTwo addingService(
+							ServiceReference<TrackedOne> serviceReference) {
 
-						return new TrackedTwo(
-							registry.getService(serviceReference));
-					}
+							return new TrackedTwo(
+								registry.getService(serviceReference));
+						}
 
-					@Override
-					public void modifiedService(
-						ServiceReference<TrackedOne> serviceReference,
-						TrackedTwo service) {
+						@Override
+						public void modifiedService(
+							ServiceReference<TrackedOne> serviceReference,
+							TrackedTwo service) {
 
-						removedService(serviceReference, service);
-					}
+							removedService(serviceReference, service);
+						}
 
-					@Override
-					public void removedService(
-						ServiceReference<TrackedOne> serviceReference,
-						TrackedTwo service) {
+						@Override
+						public void removedService(
+							ServiceReference<TrackedOne> serviceReference,
+							TrackedTwo service) {
 
-						registry.ungetService(serviceReference);
-					}
-				})) {
+							registry.ungetService(serviceReference);
+						}
+					})) {
 
 			serviceTrackerMap.open();
 
@@ -420,8 +421,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testKeySet() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			ServiceRegistration<TrackedOne> sr1 = registerService(
 				new TrackedOne(), "aTarget");
@@ -450,8 +451,8 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testKeySetReturnsUnmodifiableSet() {
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
 			ServiceRegistration<TrackedOne> sr1 = registerService(
 				new TrackedOne(), "aTarget");
@@ -481,13 +482,13 @@ public class ObjectServiceTrackerMapTest {
 	public void testOperationBalancesOutGetServiceAndUngetService() {
 		RegistryWrapper registryWrapper = wrapRegistry();
 
-		try(ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-			createServiceTrackerMap()) {
+		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
+				createServiceTrackerMap()) {
 
-			ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
-				new TrackedOne());
-			ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
-				new TrackedOne());
+			ServiceRegistration<TrackedOne> serviceRegistration1 =
+				registerService(new TrackedOne());
+			ServiceRegistration<TrackedOne> serviceRegistration2 =
+				registerService(new TrackedOne());
 
 			serviceRegistration2.unregister();
 

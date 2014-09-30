@@ -70,7 +70,7 @@ public class ListServiceTrackerMapTest {
 	@Test
 	public void testGestServiceWithDifferentRanking() {
 		try (ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			createServiceTrackerMap()) {
+				createServiceTrackerMap()) {
 
 			TrackedOne trackedOne1 = new TrackedOne();
 
@@ -99,7 +99,7 @@ public class ListServiceTrackerMapTest {
 	@Test
 	public void testGestServiceWithUnregistering() {
 		try (ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			createServiceTrackerMap()) {
+				createServiceTrackerMap()) {
 
 			TrackedOne trackedOne1 = new TrackedOne();
 
@@ -165,7 +165,7 @@ public class ListServiceTrackerMapTest {
 	@Test
 	public void testGetServicesWithDifferentKeys() {
 		try (ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-			createServiceTrackerMap()) {
+				createServiceTrackerMap()) {
 
 			registerService(new TrackedOne(), "aTarget");
 			registerService(new TrackedOne(), "anotherTarget");
@@ -275,8 +275,7 @@ public class ListServiceTrackerMapTest {
 							Emitter<TrackedOne> emitter) {
 						}
 
-					}
-				)) {
+					})) {
 
 			serviceTrackerMap.open();
 
