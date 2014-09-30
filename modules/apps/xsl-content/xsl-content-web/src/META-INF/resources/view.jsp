@@ -14,7 +14,6 @@
  */
 --%>
 
-<%@page import="com.liferay.xsl.content.web.configuration.XSLContentConfiguration"%>
 <%@ include file="/init.jsp" %>
 
 <%
