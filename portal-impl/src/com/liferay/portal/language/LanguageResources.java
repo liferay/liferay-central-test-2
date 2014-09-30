@@ -369,7 +369,7 @@ public class LanguageResources {
 			Map<String, String> oldLanguageMap = _putLanguageMap(
 				locale, languageMap);
 
-			_oldLanguagesMap.put(serviceReference, oldLanguageMap);
+			_oldLanguageMaps.put(serviceReference, oldLanguageMap);
 
 			return object;
 		}
@@ -399,14 +399,14 @@ public class LanguageResources {
 				locale = new Locale(StringPool.BLANK);
 			}
 
-			Map<String, String> languageMap = _oldLanguagesMap.get(
+			Map<String, String> languageMap = _oldLanguageMaps.get(
 				serviceReference);
 
 			_putLanguageMap(locale, languageMap);
 		}
 
 		private Map<ServiceReference<Object>, Map<String, String>>
-			_oldLanguagesMap =
+			_oldLanguageMaps =
 				new HashMap<ServiceReference<Object>, Map<String, String>>();
 
 	}
