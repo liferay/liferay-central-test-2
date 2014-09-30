@@ -191,11 +191,11 @@ public class BackgroundTaskSoap implements Serializable {
 		_taskExecutorClassName = taskExecutorClassName;
 	}
 
-	public Map getTaskContextMap() {
+	public Map<String, Serializable> getTaskContextMap() {
 		return _taskContextMap;
 	}
 
-	public void setTaskContextMap(Map taskContextMap) {
+	public void setTaskContextMap(Map<String, Serializable> taskContextMap) {
 		_taskContextMap = taskContextMap;
 	}
 
@@ -246,7 +246,7 @@ public class BackgroundTaskSoap implements Serializable {
 	private String _name;
 	private String _servletContextNames;
 	private String _taskExecutorClassName;
-	private Map _taskContextMap;
+	private Map<String, Serializable> _taskContextMap;
 	private boolean _completed;
 	private Date _completionDate;
 	private int _status;

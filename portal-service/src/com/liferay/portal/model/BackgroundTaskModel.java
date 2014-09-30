@@ -255,14 +255,14 @@ public interface BackgroundTaskModel extends BaseModel<BackgroundTask>,
 	 *
 	 * @return the task context map of this background task
 	 */
-	public Map getTaskContextMap();
+	public Map<String, Serializable> getTaskContextMap();
 
 	/**
 	 * Sets the task context map of this background task.
 	 *
 	 * @param taskContextMap the task context map of this background task
 	 */
-	public void setTaskContextMap(Map taskContextMap);
+	public void setTaskContextMap(Map<String, Serializable> taskContextMap);
 
 	/**
 	 * Returns the completed of this background task.

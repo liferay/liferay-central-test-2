@@ -296,7 +296,8 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 			setTaskExecutorClassName(taskExecutorClassName);
 		}
 
-		Map taskContextMap = (Map)attributes.get("taskContextMap");
+		Map<String, Serializable> taskContextMap = (Map<String, Serializable>)attributes.get(
+				"taskContextMap");
 
 		if (taskContextMap != null) {
 			setTaskContextMap(taskContextMap);
@@ -532,12 +533,12 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 
 	@JSON
 	@Override
-	public Map getTaskContextMap() {
+	public Map<String, Serializable> getTaskContextMap() {
 		return _taskContextMap;
 	}
 
 	@Override
-	public void setTaskContextMap(Map taskContextMap) {
+	public void setTaskContextMap(Map<String, Serializable> taskContextMap) {
 		_taskContextMap = taskContextMap;
 	}
 
@@ -982,7 +983,7 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	private String _servletContextNames;
 	private String _taskExecutorClassName;
 	private String _originalTaskExecutorClassName;
-	private Map _taskContextMap;
+	private Map<String, Serializable> _taskContextMap;
 	private boolean _completed;
 	private boolean _originalCompleted;
 	private boolean _setOriginalCompleted;

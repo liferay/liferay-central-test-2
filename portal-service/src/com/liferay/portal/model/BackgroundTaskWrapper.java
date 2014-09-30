@@ -18,6 +18,8 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.Serializable;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -142,7 +144,8 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 			setTaskExecutorClassName(taskExecutorClassName);
 		}
 
-		Map taskContextMap = (Map)attributes.get("taskContextMap");
+		Map<String, Serializable> taskContextMap = (Map<String, Serializable>)attributes.get(
+				"taskContextMap");
 
 		if (taskContextMap != null) {
 			setTaskContextMap(taskContextMap);
@@ -361,7 +364,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @return the task context map of this background task
 	*/
 	@Override
-	public java.util.Map getTaskContextMap() {
+	public java.util.Map<java.lang.String, java.io.Serializable> getTaskContextMap() {
 		return _backgroundTask.getTaskContextMap();
 	}
 
@@ -614,7 +617,8 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @param taskContextMap the task context map of this background task
 	*/
 	@Override
-	public void setTaskContextMap(java.util.Map taskContextMap) {
+	public void setTaskContextMap(
+		java.util.Map<java.lang.String, java.io.Serializable> taskContextMap) {
 		_backgroundTask.setTaskContextMap(taskContextMap);
 	}
 

@@ -140,7 +140,7 @@ public class BackgroundTaskPersistenceTest {
 
 		newBackgroundTask.setTaskExecutorClassName(RandomTestUtil.randomString());
 
-		newBackgroundTask.setTaskContextMap(new HashMap());
+		newBackgroundTask.setTaskContextMap(new HashMap<String, Serializable>());
 
 		newBackgroundTask.setCompleted(RandomTestUtil.randomBoolean());
 
@@ -653,7 +653,7 @@ public class BackgroundTaskPersistenceTest {
 
 		backgroundTask.setTaskExecutorClassName(RandomTestUtil.randomString());
 
-		backgroundTask.setTaskContextMap(new HashMap());
+		backgroundTask.setTaskContextMap(new HashMap<String, Serializable>());
 
 		backgroundTask.setCompleted(RandomTestUtil.randomBoolean());
 

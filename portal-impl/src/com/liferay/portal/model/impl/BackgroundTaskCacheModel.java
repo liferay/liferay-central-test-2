@@ -26,6 +26,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.Map;
@@ -181,7 +182,7 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 		name = objectInput.readUTF();
 		servletContextNames = objectInput.readUTF();
 		taskExecutorClassName = objectInput.readUTF();
-		taskContextMap = (Map)objectInput.readObject();
+		taskContextMap = (Map<String, Serializable>)objectInput.readObject();
 		completed = objectInput.readBoolean();
 		completionDate = objectInput.readLong();
 		status = objectInput.readInt();
@@ -252,7 +253,7 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 	public String name;
 	public String servletContextNames;
 	public String taskExecutorClassName;
-	public Map taskContextMap;
+	public Map<String, Serializable> taskContextMap;
 	public boolean completed;
 	public long completionDate;
 	public int status;
