@@ -74,30 +74,32 @@ public class ObjectServiceTrackerMapTest {
 		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 				createServiceTrackerMap()) {
 
-			ServiceRegistration<TrackedOne> sr1 = registerService(
-				new TrackedOne(), "aTarget");
-			ServiceRegistration<TrackedOne> sr2 = registerService(
-				new TrackedOne(), "aTarget");
-			ServiceRegistration<TrackedOne> sr3 = registerService(
-				new TrackedOne(), "aTarget2");
-			ServiceRegistration<TrackedOne> sr4 = registerService(
-				new TrackedOne(), "aTarget2");
+			ServiceRegistration<TrackedOne> serviceRegistration1 =
+				registerService(new TrackedOne(), "aTarget1");
+			ServiceRegistration<TrackedOne> serviceRegistration2 =
+				registerService(new TrackedOne(), "aTarget1");
+			ServiceRegistration<TrackedOne> serviceRegistration3 =
+				registerService(new TrackedOne(), "aTarget2");
+			ServiceRegistration<TrackedOne> serviceRegistration4 =
+				registerService(new TrackedOne(), "aTarget2");
 
-			Assert.assertTrue(serviceTrackerMap.containsKey("aTarget"));
+			Assert.assertTrue(serviceTrackerMap.containsKey("aTarget1"));
 			Assert.assertTrue(serviceTrackerMap.containsKey("aTarget2"));
-
 			Assert.assertFalse(serviceTrackerMap.containsKey("aTarget3"));
 			Assert.assertFalse(serviceTrackerMap.containsKey(""));
+
 			try {
 				serviceTrackerMap.containsKey(null);
+
 				Assert.fail();
-			} catch (NullPointerException e) {
+			}
+			catch (NullPointerException npe) {
 			}
 
-			sr1.unregister();
-			sr2.unregister();
-			sr3.unregister();
-			sr4.unregister();
+			serviceRegistration1.unregister();
+			serviceRegistration2.unregister();
+			serviceRegistration3.unregister();
+			serviceRegistration4.unregister();
 		}
 	}
 
