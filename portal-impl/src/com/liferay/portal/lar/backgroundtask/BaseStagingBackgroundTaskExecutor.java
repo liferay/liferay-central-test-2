@@ -69,18 +69,14 @@ public abstract class BaseStagingBackgroundTaskExecutor
 			BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
 				backgroundTaskId);
 
-		if (backgroundTask == null) {
+		if ((backgroundTask == null) || Validator.isNull(backgroundTaskState)) {
 			return;
 		}
 
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
-		if (Validator.isNull(backgroundTaskState)) {
-			return;
-		}
-
-		if (Validator.isNull(taskContextMap)) {
+		if (taskContextMap == null) {
 			taskContextMap = new HashMap<String, Serializable>();
 		}
 
