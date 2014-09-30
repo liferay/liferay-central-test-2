@@ -1978,7 +1978,7 @@ public class HookHotDeployListener
 			return;
 		}
 
-		Map<String, Tuple> filterMappings = new HashMap<String, Tuple>();
+		Map<String, Tuple> filterTuples = new HashMap<String, Tuple>();
 
 		List<Element> servletFilterMappingElements = parentElement.elements(
 			"servlet-filter-mapping");
@@ -2017,7 +2017,7 @@ public class HookHotDeployListener
 				dispatchers.add(dispatcher);
 			}
 
-			filterMappings.put(
+			filterTuples.put(
 				servletFilterName,
 				new Tuple(afterFilter, beforeFilter, dispatchers, urlPatterns));
 		}
@@ -2040,16 +2040,16 @@ public class HookHotDeployListener
 				properties.put("init.param." + paramName, paramValue);
 			}
 
-			Tuple tuple = filterMappings.get(servletFilterName);
+			Tuple filterTuple = filterTuples.get(servletFilterName);
 
-			properties.put("after-filter", tuple.getObject(0));
-			properties.put("before-filter", tuple.getObject(1));
-			properties.put("dispatcher", tuple.getObject(2));
+			properties.put("after-filter", filterTuple.getObject(0));
+			properties.put("before-filter", filterTuple.getObject(1));
+			properties.put("dispatcher", filterTuple.getObject(2));
 			properties.put(
 				"servlet-context-name",
 				PortalContextLoaderListener.getPortalServletContextName());
 			properties.put("servlet-filter-name", servletFilterName);
-			properties.put("url-pattern", tuple.getObject(3));
+			properties.put("url-pattern", filterTuple.getObject(3));
 
 			Filter filter = initServletFilter(
 				servletFilterImpl, portletClassLoader);
