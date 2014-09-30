@@ -27,7 +27,7 @@ public class ChannelThreadLocal {
 		Channel channel = _channelThreadLocal.get();
 
 		if (channel == null) {
-			throw new IllegalStateException("Channel is not set");
+			throw new IllegalStateException("Channel is null");
 		}
 
 		return channel;

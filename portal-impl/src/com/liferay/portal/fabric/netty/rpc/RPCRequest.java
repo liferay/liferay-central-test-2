@@ -83,7 +83,7 @@ public class RPCRequest<T extends Serializable> extends RPCSerializable {
 			}
 
 			_log.error(
-				"Unable to send rpc response : " + _rpcResponse,
+				"Unable to send rpc response: " + _rpcResponse,
 				channelFuture.cause());
 		}
 
