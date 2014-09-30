@@ -92,7 +92,7 @@ public class InvokerFilterHelper {
 			readLiferayFilterWebXML(servletContext, "/WEB-INF/liferay-web.xml");
 
 			Registry registry = RegistryUtil.getRegistry();
-			
+
 			String servletContextName = GetterUtil.getString(
 				servletContext.getServletContextName());
 
@@ -359,8 +359,8 @@ public class InvokerFilterHelper {
 	}
 
 	protected void registerFilterMapping(
-		String filterName, List<String> urlPatterns,
-		List<String> dispatchers, String positionFilterName,
+		String filterName, List<String> urlPatterns, List<String> dispatchers,
+		String positionFilterName,
 		boolean after) {
 
 		Filter filter = getFilter(filterName);
@@ -373,8 +373,7 @@ public class InvokerFilterHelper {
 
 		if (filter == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"No filter exists with filter mapping " + filterName);
+				_log.warn("No filter exists with filter mapping " + filterName);
 			}
 
 			return;
