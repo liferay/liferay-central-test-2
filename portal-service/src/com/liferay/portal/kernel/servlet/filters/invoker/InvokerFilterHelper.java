@@ -92,13 +92,14 @@ public class InvokerFilterHelper {
 			readLiferayFilterWebXML(servletContext, "/WEB-INF/liferay-web.xml");
 
 			Registry registry = RegistryUtil.getRegistry();
+			
+			String servletContextName = GetterUtil.getString(
+				servletContext.getServletContextName());
 
 			com.liferay.registry.Filter filter = registry.getFilter(
-				"(&(servlet-context-name=" +
-					GetterUtil.getString(
-						servletContext.getServletContextName())
-						+ ")(servlet-filter-name=*)(objectClass=" +
-							Filter.class.getName() + "))");
+				"(&(servlet-context-name=" + servletContextName +
+					")(servlet-filter-name=*)(objectClass=" +
+						Filter.class.getName() + "))");
 
 			_serviceTracker = registry.trackServices(
 				filter, new FilterServiceTrackerCustomizer());
@@ -400,8 +401,9 @@ public class InvokerFilterHelper {
 		implements ServiceTrackerCustomizer<Filter, FilterMapping> {
 
 		@Override
-		@SuppressWarnings("unchecked")
-		public FilterMapping addingService(ServiceReference<Filter> serviceReference) {
+		public FilterMapping addingService(
+			ServiceReference<Filter> serviceReference) {
+
 			Registry registry = RegistryUtil.getRegistry();
 
 			Filter filter = registry.getService(serviceReference);
@@ -428,9 +430,10 @@ public class InvokerFilterHelper {
 				after = true;
 			}
 
-			Map<String, Object> properties = serviceReference.getProperties();
 			Map<String, String> initParameterMap =
 				new HashMap<String, String>();
+
+			Map<String, Object> properties = serviceReference.getProperties();
 
 			for (String key : properties.keySet()) {
 				if (!key.startsWith("init.param.")) {
@@ -452,8 +455,8 @@ public class InvokerFilterHelper {
 			try {
 				filter.init(filterConfig);
 			}
-			catch (ServletException e) {
-				_log.error(e, e);
+			catch (ServletException se) {
+				_log.error(se, se);
 
 				registry.ungetService(serviceReference);
 
@@ -478,6 +481,7 @@ public class InvokerFilterHelper {
 			FilterMapping filterMapping) {
 
 			removedService(serviceReference, filterMapping);
+
 			addingService(serviceReference);
 		}
 
