@@ -1198,8 +1198,8 @@ public class HookHotDeployListener
 		List<Element> languagePropertiesElements = parentElement.elements(
 			"language-properties");
 
-		URL baseLanguageURL = null;
 		String baseLanguagePropertiesLocation = null;
+		URL baseLanguageURL = null;
 
 		for (Element languagePropertiesElement : languagePropertiesElements) {
 			String languagePropertiesLocation =
@@ -1242,8 +1242,8 @@ public class HookHotDeployListener
 				}
 			}
 			else {
-				baseLanguageURL = url;
 				baseLanguagePropertiesLocation = languagePropertiesLocation;
+				baseLanguageURL = url;
 			}
 		}
 
