@@ -15,6 +15,7 @@
 package com.liferay.registry.collections;
 
 import java.io.Closeable;
+
 import java.util.Set;
 
 /**
