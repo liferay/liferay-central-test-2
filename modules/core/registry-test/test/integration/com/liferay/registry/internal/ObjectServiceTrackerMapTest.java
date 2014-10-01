@@ -381,6 +381,7 @@ public class ObjectServiceTrackerMapTest {
 
 							registry.ungetService(serviceReference);
 						}
+
 					},
 					new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
 
@@ -407,6 +408,7 @@ public class ObjectServiceTrackerMapTest {
 
 							registry.ungetService(serviceReference);
 						}
+
 					})) {
 
 			serviceTrackerMap.open();
@@ -417,6 +419,7 @@ public class ObjectServiceTrackerMapTest {
 				registerService(trackedOne1, "trackedOne1");
 
 			TrackedOne trackedOne2 = new TrackedOne("2");
+
 			ServiceRegistration<TrackedOne> serviceRegistration2 =
 				registerService(trackedOne2, "trackedOne2");
 
