@@ -364,8 +364,8 @@ public class LanguageResources {
 
 			Enumeration<String> keys = resourceBundle.getKeys();
 
-			while(keys.hasMoreElements()) {
-				String key  = keys.nextElement();
+			while (keys.hasMoreElements()) {
+				String key = keys.nextElement();
 				String value = resourceBundle.getString(key);
 
 				languageMap.put(key, value);
