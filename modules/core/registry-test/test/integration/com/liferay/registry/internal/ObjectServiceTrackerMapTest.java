@@ -262,8 +262,8 @@ public class ObjectServiceTrackerMapTest {
 									serviceReference.getProperty("target"));
 						}
 
-					}))
-		{
+					})) {
+
 			serviceTrackerMap.open();
 
 			Dictionary<String, String> properties =
@@ -327,8 +327,8 @@ public class ObjectServiceTrackerMapTest {
 							registry.ungetService(serviceReference);
 						}
 
-					}))
-		{
+					})) {
+
 			serviceTrackerMap.open();
 
 			TrackedOne trackedOne1 = new TrackedOne();
@@ -407,8 +407,8 @@ public class ObjectServiceTrackerMapTest {
 
 							registry.ungetService(serviceReference);
 						}
-					}))
-		{
+					})) {
+
 			serviceTrackerMap.open();
 
 			TrackedOne trackedOne1 = new TrackedOne("1");
