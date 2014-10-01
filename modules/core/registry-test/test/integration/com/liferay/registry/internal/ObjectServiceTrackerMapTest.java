@@ -513,7 +513,7 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testOperationBalancesOutGetServiceAndUngetService() {
-		RegistryWrapper registryWrapper = wrapRegistry();
+		RegistryWrapper registryWrapper = getRegistryWrapper();
 
 		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 				createServiceTrackerMap()) {
@@ -550,7 +550,7 @@ public class ObjectServiceTrackerMapTest {
 
 	@Test
 	public void testUnkeyedServiceReferencesBalanceRefCount() {
-		RegistryWrapper registryWrapper = wrapRegistry();
+		RegistryWrapper registryWrapper = getRegistryWrapper();
 
 		try (ServiceTrackerMap<TrackedOne, TrackedOne> serviceTrackerMap =
 				ServiceTrackerCollections.singleValueMap(
@@ -603,6 +603,16 @@ public class ObjectServiceTrackerMapTest {
 		return _serviceTrackerMap;
 	}
 
+	protected RegistryWrapper getRegistryWrapper() {
+		Registry registry = RegistryUtil.getRegistry();
+
+		RegistryWrapper registryWrapper = new RegistryWrapper(registry);
+
+		RegistryUtil.setRegistry(registryWrapper);
+
+		return registryWrapper;
+	}
+
 	protected ServiceRegistration<TrackedOne> registerService(
 		TrackedOne trackedOne) {
 
@@ -636,16 +646,6 @@ public class ObjectServiceTrackerMapTest {
 
 		return _bundleContext.registerService(
 			TrackedOne.class, trackedOne, properties);
-	}
-
-	protected RegistryWrapper wrapRegistry() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		RegistryWrapper registryWrapper = new RegistryWrapper(registry);
-
-		RegistryUtil.setRegistry(registryWrapper);
-
-		return registryWrapper;
 	}
 
 	private BundleContext _bundleContext;
