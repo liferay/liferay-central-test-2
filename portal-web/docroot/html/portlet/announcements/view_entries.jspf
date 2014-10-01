@@ -62,6 +62,19 @@ if ((hiddenMessagesCount == 0) && (visibleMessagesCount == 0) && portletName.equ
 %>
 
 <aui:script>
+	function <portlet:namespace />handleEntry(entryId) {
+		var entry = AUI.$('#<portlet:namespace />' + entryId);
+
+		var container = entry.parent();
+
+		if (container.hasClass('unread-entries')) {
+			<portlet:namespace />markEntry(entryId);
+		}
+		else {
+			<portlet:namespace />toggleContent(entry);
+		}
+	}
+
 	function <portlet:namespace />markEntry(entryId) {
 		Liferay.Service(
 			'/announcementsflag/add-flag',
@@ -81,31 +94,10 @@ if ((hiddenMessagesCount == 0) && (visibleMessagesCount == 0) && portletName.equ
 
 		entry.toggleClass('visible', !visible);
 
-		if (content.length) {
-			content.toggleClass('hide', visible);
-		}
+		content.toggleClass('hide', visible);
 
 		var label = visible ? '<%= UnicodeLanguageUtil.get(request, "show") %>' : '<%= UnicodeLanguageUtil.get(request, "hide") %>';
 
-		if (control.length) {
-			control.html(label);
-		}
-	}
-
-	function <portlet:namespace />handleEntry(entryId) {
-		var entry = AUI.$('#<portlet:namespace />' + entryId);
-
-		if (entry.length) {
-			var container = entry.parent();
-
-			if (container.length) {
-				if (container.hasClass('unread-entries')) {
-					<portlet:namespace />markEntry(entryId);
-				}
-				else {
-					<portlet:namespace />toggleContent(entry);
-				}
-			}
-		}
+		control.html(label);
 	}
 </aui:script>
