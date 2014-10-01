@@ -498,9 +498,10 @@ public class ObjectServiceTrackerMapTest {
 
 			try {
 				keySet.remove("aTarget1");
+
 				Assert.fail();
 			}
-			catch (UnsupportedOperationException e) {
+			catch (UnsupportedOperationException uoe) {
 			}
 
 			serviceRegistration1.unregister();
