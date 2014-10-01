@@ -6829,11 +6829,8 @@
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#saveAndContinueForm" />
-
 		<execute macro="KaleoFormsAdmin#saveAndContinueForm" />
-
 		<execute macro="KaleoFormsAdmin#saveAndContinueForm" />
-
 		<execute macro="KaleoFormsAdmin#saveForm" />
 
 		<var name="key_kfFormName" value="Created Task Form" />
