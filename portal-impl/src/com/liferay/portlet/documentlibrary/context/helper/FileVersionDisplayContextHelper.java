@@ -15,7 +15,6 @@
 package com.liferay.portlet.documentlibrary.context.helper;
 
 import com.liferay.portal.kernel.repository.model.FileVersion;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
