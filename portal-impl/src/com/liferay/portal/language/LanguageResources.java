@@ -366,6 +366,7 @@ public class LanguageResources {
 
 			while (keys.hasMoreElements()) {
 				String key = keys.nextElement();
+
 				String value = resourceBundle.getString(key);
 
 				languageMap.put(key, value);
