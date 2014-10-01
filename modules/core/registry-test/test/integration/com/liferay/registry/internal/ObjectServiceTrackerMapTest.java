@@ -466,14 +466,12 @@ public class ObjectServiceTrackerMapTest {
 			ServiceRegistration<TrackedOne> serviceRegistration4 =
 				registerService(new TrackedOne(), "aTarget2");
 
-			Set<String> keySet = serviceTrackerMap.keySet();
-
-			HashSet<String> targets = new HashSet<String>();
+			Set<String> targets = new HashSet<String>();
 
 			targets.add("aTarget1");
 			targets.add("aTarget2");
 
-			Assert.assertEquals(keySet, targets);
+			Assert.assertEquals(targets, serviceTrackerMap.keySet());
 
 			serviceRegistration1.unregister();
 			serviceRegistration2.unregister();
