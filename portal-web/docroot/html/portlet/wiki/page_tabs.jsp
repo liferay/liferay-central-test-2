@@ -64,12 +64,12 @@ PortletURL viewPageActivitiesURL = PortletURLUtil.clone(viewPageDetailsURL, rend
 
 viewPageActivitiesURL.setParameter("struts_action", "/wiki/view_page_activities");
 
-String[] names = new String[] {"details", "history", "incoming-links", "outgoing-links", "attachments"};
-String[] urls = new String[] {viewPageDetailsURL.toString(), viewPageHistoryURL.toString(), viewPageIncomingLinksURL.toString(), viewPageOutgoingLinksURL.toString(), viewPageAttachmentsURL.toString()};
+String[] names = {"details", "history", "incoming-links", "outgoing-links", "attachments"};
+String[] urls = {viewPageDetailsURL.toString(), viewPageHistoryURL.toString(), viewPageIncomingLinksURL.toString(), viewPageOutgoingLinksURL.toString(), viewPageAttachmentsURL.toString()};
 
 if (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) {
-	names = ArrayUtil.append(new String[]{"content"}, names);
-	urls = ArrayUtil.append(new String[]{editPageURL.toString()}, urls);
+	names = ArrayUtil.append(new String[] {"content"}, names);
+	urls = ArrayUtil.append(new String[] {editPageURL.toString()}, urls);
 }
 %>
 
