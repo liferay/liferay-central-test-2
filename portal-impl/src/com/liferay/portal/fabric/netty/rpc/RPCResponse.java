@@ -44,15 +44,12 @@ public class RPCResponse<T extends Serializable> extends RPCSerializable {
 		if (_throwable != null) {
 			if (!asyncBroker.takeWithException(id, _throwable)) {
 				_log.error(
-					"No match key : " + id + " for rpc response exception",
-					_throwable);
+					"ID " + id + " does not match exception", _throwable);
 			}
 		}
 		else {
 			if (!asyncBroker.takeWithResult(id, _result)) {
-				_log.error(
-					"No match key : " + id + " for rpc response result : " +
-						_result);
+				_log.error("ID " + id + " does not match result " + _result);
 			}
 		}
 	}

@@ -58,8 +58,7 @@ public class RPCUtil {
 							id, channelFuture.cause())) {
 
 						_log.error(
-							"No match key : " + id +
-								" for rpc response exception",
+							"ID " + id + " does not match exception",
 							channelFuture.cause());
 					}
 				}
