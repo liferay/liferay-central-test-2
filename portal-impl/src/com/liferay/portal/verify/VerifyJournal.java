@@ -118,6 +118,7 @@ public class VerifyJournal extends VerifyProcess {
 			}
 
 			Node node = dynamicContentElement.node(0);
+
 			node.setText(path + StringPool.SLASH + dlFileEntry.getUuid());
 		}
 	}
