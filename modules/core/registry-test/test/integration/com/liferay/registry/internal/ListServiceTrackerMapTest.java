@@ -275,8 +275,7 @@ public class ListServiceTrackerMapTest {
 							Emitter<TrackedOne> emitter) {
 						}
 
-					}
-				)) {
+					})) {
 
 			serviceTrackerMap.open();
 
