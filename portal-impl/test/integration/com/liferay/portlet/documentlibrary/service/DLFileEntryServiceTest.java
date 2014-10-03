@@ -191,11 +191,11 @@ public class DLFileEntryServiceTest {
 	public void testCopyFileEntryWithoutExtensionInRootFolderToFolder()
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		DLFileEntry dlFileEntry = addDLFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, false);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFolder destFolder = DLFolderLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), _group.getGroupId(),
@@ -214,11 +214,11 @@ public class DLFileEntryServiceTest {
 	public void testRestoreFileNameWhenDeletingLatestFileVersion()
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		DLFileEntry dlFileEntry = addDLFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, false);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		dlFileEntry = updateStatus(
 			dlFileEntry.getLatestFileVersion(true), serviceContext);
@@ -227,7 +227,7 @@ public class DLFileEntryServiceTest {
 
 		dlFileEntry.setTitle(RandomTestUtil.randomString());
 
-		dlFileEntry = updateFileEntry(dlFileEntry, serviceContext);
+		dlFileEntry = updateDLFileEntry(dlFileEntry, serviceContext);
 
 		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
@@ -240,23 +240,23 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testUpdateFileName()throws Exception {
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		DLFileEntry dlFileEntry = addDLFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, false);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		dlFileEntry = updateStatus(
 			dlFileEntry.getLatestFileVersion(true), serviceContext);
 
-		String newTitle = RandomTestUtil.randomString();
+		String title = RandomTestUtil.randomString();
 
-		dlFileEntry.setTitle(newTitle);
+		dlFileEntry.setTitle(title);
 
-		dlFileEntry = updateFileEntry(dlFileEntry, serviceContext);
+		dlFileEntry = updateDLFileEntry(dlFileEntry, serviceContext);
 
 		Assert.assertEquals(
-			DLUtil.getSanitizedFileName(newTitle, dlFileEntry.getExtension()),
+			DLUtil.getSanitizedFileName(title, dlFileEntry.getExtension()),
 			dlFileEntry.getFileName());
 	}
 
@@ -264,27 +264,27 @@ public class DLFileEntryServiceTest {
 	public void testUpdateFileNameWhenUpdatingFileVersionStatus()
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		DLFileEntry dlFileEntry = addDLFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, false);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		dlFileEntry = updateStatus(
 			dlFileEntry.getLatestFileVersion(true), serviceContext);
 
 		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
-		String newTitle = RandomTestUtil.randomString();
+		String fileName = RandomTestUtil.randomString();
 
-		dlFileVersion.setFileName(newTitle);
+		dlFileVersion.setFileName(fileName);
 
 		DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
 
 		dlFileEntry = updateStatus(dlFileVersion, serviceContext);
 
 		Assert.assertEquals(
-			DLUtil.getSanitizedFileName(newTitle, dlFileEntry.getExtension()),
+			DLUtil.getSanitizedFileName(fileName, dlFileEntry.getExtension()),
 			dlFileEntry.getFileName());
 	}
 
@@ -311,7 +311,7 @@ public class DLFileEntryServiceTest {
 			serviceContext);
 	}
 
-	protected DLFileEntry updateFileEntry(
+	protected DLFileEntry updateDLFileEntry(
 			DLFileEntry dlFileEntry, ServiceContext serviceContext)
 		throws Exception {
 

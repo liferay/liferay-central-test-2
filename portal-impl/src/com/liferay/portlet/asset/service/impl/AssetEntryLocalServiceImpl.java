@@ -710,6 +710,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				title, dlFileEntry.getExtension());
 
 			dlFileEntry.setFileName(fileName);
+
 			dlFileEntry.setTitle(title);
 			dlFileEntry.setDescription(description);
 
