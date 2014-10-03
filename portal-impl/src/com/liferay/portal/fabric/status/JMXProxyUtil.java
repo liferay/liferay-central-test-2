@@ -308,8 +308,8 @@ public class JMXProxyUtil {
 
 		private static final long serialVersionUID = 1L;
 
-		private final ObjectName _objectName;
 		private final String _attributeName;
+		private final ObjectName _objectName;
 		private final boolean _optional;
 
 	}
@@ -412,10 +412,10 @@ public class JMXProxyUtil {
 
 		private static final long serialVersionUID = 1L;
 
-		private final ObjectName _objectName;
 		private final Object[] _arguments;
-		private final String[] _parameterTypeNames;
+		private final ObjectName _objectName;
 		private final String _operationName;
+		private final String[] _parameterTypeNames;
 
 	}
 
@@ -456,9 +456,9 @@ public class JMXProxyUtil {
 
 		private static final long serialVersionUID = 1L;
 
-		private final ObjectName _objectName;
 		private final String _attributeName;
 		private final Serializable _attributeValue;
+		private final ObjectName _objectName;
 		private final boolean _optional;
 
 	}
