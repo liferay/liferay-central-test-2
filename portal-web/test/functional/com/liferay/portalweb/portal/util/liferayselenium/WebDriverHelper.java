@@ -256,7 +256,7 @@ public class WebDriverHelper {
 		Object pageXOffset = javascriptExecutor.executeScript(
 			"return window.pageXOffset;");
 
-		return ((Long)pageXOffset).intValue();
+		return GetterUtil.getInteger(pageXOffset);
 	}
 
 	public static int getScrollOffsetY(WebDriver webDriver) {
@@ -272,7 +272,7 @@ public class WebDriverHelper {
 		Object pageYOffset = javascriptExecutor.executeScript(
 			"return window.pageYOffset;");
 
-		return ((Long)pageYOffset).intValue();
+		return GetterUtil.getInteger(pageYOffset);
 	}
 
 	public static String getText(
