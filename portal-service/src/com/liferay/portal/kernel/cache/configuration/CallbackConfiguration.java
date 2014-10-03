@@ -52,8 +52,13 @@ public class CallbackConfiguration {
 		CallbackConfiguration callbackConfiguration =
 			(CallbackConfiguration)object;
 
-		return (_callbackFactory == callbackConfiguration._callbackFactory) &&
-			_properties.equals(callbackConfiguration._properties);
+		if ((_callbackFactory == callbackConfiguration._callbackFactory) &&
+			_properties.equals(callbackConfiguration._properties)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public CallbackFactory getCallbackFactory() {
