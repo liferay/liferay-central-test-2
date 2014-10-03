@@ -104,6 +104,7 @@ public class AnnotatedObjectDecoderTest {
 		ByteBuf byteBuf = _toByteBuf(date);
 
 		byteBuf.markWriterIndex();
+
 		byteBuf.setIndex(0, byteBuf.writerIndex() / 2);
 
 		Assert.assertNull(_annotatedObjectDecoder.decode(null, byteBuf));
