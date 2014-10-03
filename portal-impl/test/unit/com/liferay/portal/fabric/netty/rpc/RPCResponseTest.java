@@ -135,8 +135,8 @@ public class RPCResponseTest {
 		});
 
 	private final ProcessException _exception = new ProcessException(
-		"This is the exception!");
+		"This is the exception.");
 	private final long _id = System.currentTimeMillis();
-	private final String _result = "This is the result!";
+	private final String _result = "This is the result.";
 
 }
