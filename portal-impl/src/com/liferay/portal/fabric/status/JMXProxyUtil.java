@@ -72,14 +72,14 @@ public class JMXProxyUtil {
 
 		return new ProcessCallableExecutor() {
 
-				@Override
-				public <V extends Serializable> NoticeableFuture<V> execute(
-					ProcessCallable<V> processCallable) {
+			@Override
+			public <V extends Serializable> NoticeableFuture<V> execute(
+				ProcessCallable<V> processCallable) {
 
-					return RPCUtil.execute(channel, processCallable);
-				}
+				return RPCUtil.execute(channel, processCallable);
+			}
 
-			};
+		};
 	}
 
 	public static ProcessCallableExecutor toProcessCallableExecutor(
@@ -87,15 +87,15 @@ public class JMXProxyUtil {
 
 		return new ProcessCallableExecutor() {
 
-				@Override
-				public <V extends Serializable> NoticeableFuture<V> execute(
-						ProcessCallable<V> processCallable)
-					throws ProcessException {
+			@Override
+			public <V extends Serializable> NoticeableFuture<V> execute(
+					ProcessCallable<V> processCallable)
+				throws ProcessException {
 
-					return processChannel.write(processCallable);
-				}
+				return processChannel.write(processCallable);
+			}
 
-			};
+		};
 	}
 
 	protected static Object decode(
