@@ -86,9 +86,9 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			getBaseModelClassName());
 
-		String newTitle = RandomTestUtil.randomString();
+		String title = RandomTestUtil.randomString();
 
-		trashHandler.updateTitle(dlFileEntry.getFileEntryId(), newTitle);
+		trashHandler.updateTitle(dlFileEntry.getFileEntryId(), title);
 
 		dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 			dlFileEntry.getFileEntryId());
@@ -96,10 +96,10 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
 		Assert.assertEquals(
-			DLUtil.getSanitizedFileName(newTitle, dlFileEntry.getExtension()),
+			DLUtil.getSanitizedFileName(title, dlFileEntry.getExtension()),
 			dlFileEntry.getFileName());
 		Assert.assertEquals(
-			DLUtil.getSanitizedFileName(newTitle, dlFileVersion.getExtension()),
+			DLUtil.getSanitizedFileName(title, dlFileVersion.getExtension()),
 			dlFileVersion.getFileName());
 	}
 

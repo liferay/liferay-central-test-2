@@ -55,21 +55,21 @@ public class DLAssetEntryLocalServiceTest {
 			RandomTestUtil.randomString() + ".txt",
 			RandomTestUtil.randomString());
 
-		String newTitle = RandomTestUtil.randomString();
+		String title = RandomTestUtil.randomString();
 
 		AssetEntryLocalServiceUtil.updateEntry(
 			fileEntry.getUserId(), _group.getGroupId(),
 			fileEntry.getCreateDate(), fileEntry.getModifiedDate(),
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
 			fileEntry.getUuid(), 0, null, null, true, null, null, null,
-			fileEntry.getMimeType(), newTitle, fileEntry.getDescription(), null,
+			fileEntry.getMimeType(), title, fileEntry.getDescription(), null,
 			null, null, 0, 0, null, true);
 
 		fileEntry = DLAppLocalServiceUtil.getFileEntry(
 			fileEntry.getFileEntryId());
 
 		Assert.assertEquals(
-			DLUtil.getSanitizedFileName(newTitle, fileEntry.getExtension()),
+			DLUtil.getSanitizedFileName(title, fileEntry.getExtension()),
 			fileEntry.getFileName());
 	}
 
