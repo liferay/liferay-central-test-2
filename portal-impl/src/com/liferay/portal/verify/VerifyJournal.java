@@ -86,10 +86,11 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void updateDocumentLibraryElements(Element element) {
-		List<Element> nestedElements = element.elements("dynamic-element");
+		List<Element> dynamicElementElements = element.elements(
+			"dynamic-element");
 
-		for (Element nestedElement : nestedElements) {
-			updateDocumentLibraryElements(nestedElement);
+		for (Element dynamicElementElement : dynamicElementElements) {
+			updateDocumentLibraryElements(dynamicElementElement);
 		}
 
 		Element dynamicContentElement = element.element("dynamic-content");
@@ -147,10 +148,11 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void updateLinkToLayoutElements(long groupId, Element element) {
-		List<Element> nestedElements = element.elements("dynamic-element");
+		List<Element> dynamicElementElements = element.elements(
+			"dynamic-element");
 
-		for (Element nestedElement : nestedElements) {
-			updateLinkToLayoutElements(groupId, nestedElement);
+		for (Element dynamicElementElement : dynamicElementElements) {
+			updateLinkToLayoutElements(groupId, dynamicElementElement);
 		}
 
 		Element dynamicContentElement = element.element("dynamic-content");
