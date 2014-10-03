@@ -56,8 +56,8 @@ else {
 
     folderIds.add(defaultFolderId);
 
-    for (Folder subFolder : folders) {
-        folderIds.add(subFolder.getFolderId());
+    for (Folder subfolder : folders) {
+        folderIds.add(subfolder.getFolderId());
     }
 
     folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
