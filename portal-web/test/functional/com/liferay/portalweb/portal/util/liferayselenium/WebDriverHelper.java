@@ -29,7 +29,9 @@ import java.util.concurrent.TimeUnit;
 import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
@@ -159,39 +161,30 @@ public class WebDriverHelper {
 	public static int getElementHeight(WebDriver webDriver, String locator) {
 		WebElement webElement = getWebElement(webDriver, locator, "1");
 
-		int elementHeight = webElement.getSize().getHeight();
+		Dimension dimension = webElement.getSize();
 
-		return elementHeight;
+		return dimension.getHeight();
 	}
 
 	public static int getElementPositionBottom(
 		WebDriver webDriver, String locator) {
 
-		int elementPositionBottom =
-			getElementHeight(webDriver, locator) +
-			getElementPositionTop(webDriver, locator);
-
-		return elementPositionBottom;
+		return getElementPositionTop(webDriver, locator) +
+			getElementHeight(webDriver, locator);
 	}
 
 	public static int getElementPositionCenterX(
 		WebDriver webDriver, String locator) {
 
-		int elementPositionCenterX =
-			(getElementWidth(webDriver, locator) / 2) +
-			getElementPositionLeft(webDriver, locator);
-
-		return elementPositionCenterX;
+		return getElementPositionLeft(webDriver, locator) +
+			(getElementWidth(webDriver, locator) / 2);
 	}
 
 	public static int getElementPositionCenterY(
 		WebDriver webDriver, String locator) {
 
-		int elementPositionCenterY =
-			(getElementHeight(webDriver, locator) / 2) +
-			getElementPositionTop(webDriver, locator);
-
-		return elementPositionCenterY;
+		return getElementPositionTop(webDriver, locator) +
+			(getElementHeight(webDriver, locator) / 2);
 	}
 
 	public static int getElementPositionLeft(
@@ -199,19 +192,16 @@ public class WebDriverHelper {
 
 		WebElement webElement = getWebElement(webDriver, locator, "1");
 
-		int elementPositionLeft = webElement.getLocation().getX();
+		Point point = webElement.getLocation();
 
-		return elementPositionLeft;
+		return point.getX();
 	}
 
 	public static int getElementPositionRight(
 		WebDriver webDriver, String locator) {
 
-		int elementPositionRight =
-			getElementWidth(webDriver, locator) +
-			getElementPositionLeft(webDriver, locator);
-
-		return elementPositionRight;
+		return getElementPositionLeft(webDriver, locator) +
+			getElementWidth(webDriver, locator);
 	}
 
 	public static int getElementPositionTop(
@@ -219,17 +209,17 @@ public class WebDriverHelper {
 
 		WebElement webElement = getWebElement(webDriver, locator, "1");
 
-		int elementPositionTop = webElement.getLocation().getY();
+		Point point = webElement.getLocation();
 
-		return elementPositionTop;
+		return point.getY();
 	}
 
 	public static int getElementWidth(WebDriver webDriver, String locator) {
 		WebElement webElement = getWebElement(webDriver, locator, "1");
 
-		int elementWidth = webElement.getSize().getWidth();
+		Dimension dimension = webElement.getSize();
 
-		return elementWidth;
+		return dimension.getWidth();
 	}
 
 	public static String getEval(WebDriver webDriver, String script) {
@@ -266,9 +256,7 @@ public class WebDriverHelper {
 		Object pageXOffset = javascriptExecutor.executeScript(
 			"return window.pageXOffset;");
 
-		int scrollWidth = ((Long)pageXOffset).intValue();
-
-		return scrollWidth;
+		return ((Long)pageXOffset).intValue();
 	}
 
 	public static int getScrollOffsetY(WebDriver webDriver) {
@@ -284,9 +272,7 @@ public class WebDriverHelper {
 		Object pageYOffset = javascriptExecutor.executeScript(
 			"return window.pageYOffset;");
 
-		int scrollHeight = ((Long)pageYOffset).intValue();
-
-		return scrollHeight;
+		return ((Long)pageYOffset).intValue();
 	}
 
 	public static String getText(
