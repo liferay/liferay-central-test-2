@@ -156,6 +156,82 @@ public class WebDriverHelper {
 		return _defaultWindowHandle;
 	}
 
+	public static int getElementHeight(WebDriver webDriver, String locator) {
+		WebElement webElement = getWebElement(webDriver, locator, "1");
+
+		int elementHeight = webElement.getSize().getHeight();
+
+		return elementHeight;
+	}
+
+	public static int getElementPositionBottom(
+		WebDriver webDriver, String locator) {
+
+		int elementPositionBottom =
+			getElementHeight(webDriver, locator) +
+			getElementPositionTop(webDriver, locator);
+
+		return elementPositionBottom;
+	}
+
+	public static int getElementPositionCenterX(
+		WebDriver webDriver, String locator) {
+
+		int elementPositionCenterX =
+			(getElementWidth(webDriver, locator) / 2) +
+			getElementPositionLeft(webDriver, locator);
+
+		return elementPositionCenterX;
+	}
+
+	public static int getElementPositionCenterY(
+		WebDriver webDriver, String locator) {
+
+		int elementPositionCenterY =
+			(getElementHeight(webDriver, locator) / 2) +
+			getElementPositionTop(webDriver, locator);
+
+		return elementPositionCenterY;
+	}
+
+	public static int getElementPositionLeft(
+		WebDriver webDriver, String locator) {
+
+		WebElement webElement = getWebElement(webDriver, locator, "1");
+
+		int elementPositionLeft = webElement.getLocation().getX();
+
+		return elementPositionLeft;
+	}
+
+	public static int getElementPositionRight(
+		WebDriver webDriver, String locator) {
+
+		int elementPositionRight =
+			getElementWidth(webDriver, locator) +
+			getElementPositionLeft(webDriver, locator);
+
+		return elementPositionRight;
+	}
+
+	public static int getElementPositionTop(
+		WebDriver webDriver, String locator) {
+
+		WebElement webElement = getWebElement(webDriver, locator, "1");
+
+		int elementPositionTop = webElement.getLocation().getY();
+
+		return elementPositionTop;
+	}
+
+	public static int getElementWidth(WebDriver webDriver, String locator) {
+		WebElement webElement = getWebElement(webDriver, locator, "1");
+
+		int elementWidth = webElement.getSize().getWidth();
+
+		return elementWidth;
+	}
+
 	public static String getEval(WebDriver webDriver, String script) {
 		WebElement webElement = getWebElement(webDriver, "//body");
 
@@ -171,6 +247,46 @@ public class WebDriverHelper {
 
 	public static String getLocation(WebDriver webDriver) {
 		return webDriver.getCurrentUrl();
+	}
+
+	public static int getNavigationBarHeight() {
+		return _navigationBarHeight;
+	}
+
+	public static int getScrollOffsetX(WebDriver webDriver) {
+		WebElement bodyWebElement = getWebElement(webDriver, "//body");
+
+		WrapsDriver wrapsDriver = (WrapsDriver)bodyWebElement;
+
+		WebDriver wrappedWebDriver = wrapsDriver.getWrappedDriver();
+
+		JavascriptExecutor javascriptExecutor =
+			(JavascriptExecutor)wrappedWebDriver;
+
+		Object pageXOffset = javascriptExecutor.executeScript(
+			"return window.pageXOffset;");
+
+		int scrollWidth = ((Long)pageXOffset).intValue();
+
+		return scrollWidth;
+	}
+
+	public static int getScrollOffsetY(WebDriver webDriver) {
+		WebElement bodyWebElement = getWebElement(webDriver, "//body");
+
+		WrapsDriver wrapsDriver = (WrapsDriver)bodyWebElement;
+
+		WebDriver wrappedWebDriver = wrapsDriver.getWrappedDriver();
+
+		JavascriptExecutor javascriptExecutor =
+			(JavascriptExecutor)wrappedWebDriver;
+
+		Object pageYOffset = javascriptExecutor.executeScript(
+			"return window.pageYOffset;");
+
+		int scrollHeight = ((Long)pageYOffset).intValue();
+
+		return scrollHeight;
 	}
 
 	public static String getText(
@@ -355,6 +471,10 @@ public class WebDriverHelper {
 		_defaultWindowHandle = defaultWindowHandle;
 	}
 
+	public static void setNavigationBarHeight(int navigationBarHeight) {
+		_navigationBarHeight = navigationBarHeight;
+	}
+
 	public static void setTimeoutImplicit(WebDriver webDriver, String timeout) {
 		WebDriver.Options options = webDriver.manage();
 
@@ -472,5 +592,6 @@ public class WebDriverHelper {
 	private static String _defaultWindowHandle;
 	private static Stack<WebElement> _frameWebElements =
 		new Stack<WebElement>();
+	private static int _navigationBarHeight;
 
 }
