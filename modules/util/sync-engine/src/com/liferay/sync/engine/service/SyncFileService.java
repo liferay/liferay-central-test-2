@@ -453,7 +453,7 @@ public class SyncFileService {
 
 		// Sync files
 
-		resyncChildren(syncFile);
+		resyncChildSyncFiles(syncFile);
 
 		// Remote
 
@@ -486,7 +486,7 @@ public class SyncFileService {
 
 		// Sync files
 
-		unsyncChildren(syncFile);
+		unsyncChildSyncFiles(syncFile);
 
 		return syncFile;
 	}
@@ -646,7 +646,7 @@ public class SyncFileService {
 		}
 	}
 
-	protected static void resyncChildren(SyncFile syncFile) throws Exception {
+	protected static void resyncChildSyncFiles(SyncFile syncFile) throws Exception {
 		List<SyncFile> childSyncFiles = _syncFilePersistence.queryForEq(
 			"parentFolderId", syncFile.getTypePK());
 
@@ -656,12 +656,12 @@ public class SyncFileService {
 			update(childSyncFile);
 
 			if (childSyncFile.isFolder()) {
-				resyncChildren(childSyncFile);
+				resyncChildSyncFiles(childSyncFile);
 			}
 		}
 	}
 
-	protected static void unsyncChildren(SyncFile syncFile) throws Exception {
+	protected static void unsyncChildSyncFiles(SyncFile syncFile) throws Exception {
 		List<SyncFile> childSyncFiles = _syncFilePersistence.queryForEq(
 			"parentFolderId", syncFile.getTypePK());
 
@@ -671,7 +671,7 @@ public class SyncFileService {
 			update(childSyncFile);
 
 			if (childSyncFile.isFolder()) {
-				unsyncChildren(childSyncFile);
+				unsyncChildSyncFiles(childSyncFile);
 			}
 		}
 	}
