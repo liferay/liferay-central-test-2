@@ -49,10 +49,10 @@ public class BackupAndRestoreIndexesTest {
 		Map<Long, String> backupNames = new HashMap<Long, String>();
 
 		for (long companyId : PortalInstances.getCompanyIds()) {
-			String backupName =
-				StringUtil.lowerCase(
-					BackupAndRestoreIndexesTest.class.getName() + "-" +
-						System.currentTimeMillis());
+			String backupName = StringUtil.lowerCase(
+				BackupAndRestoreIndexesTest.class.getName());
+
+			backupName = backupName + "-" + System.currentTimeMillis();
 
 			SearchEngineUtil.backup(
 				companyId, SearchEngineUtil.SYSTEM_ENGINE_ID, backupName);
