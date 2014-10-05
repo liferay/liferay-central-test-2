@@ -189,7 +189,6 @@ public class ${actionSimpleClassName} extends
 
 					<#list 1..seleniumBuilderContext.getFunctionLocatorCount(functionName) as i>
 						locator${i} = getLocator(locator${i}, locatorKey${i}, environmentScopeVariables);
-
 						value${i} = HtmlUtil.escape(value${i});
 					</#list>
 
