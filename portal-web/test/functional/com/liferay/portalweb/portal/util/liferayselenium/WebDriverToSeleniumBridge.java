@@ -426,9 +426,7 @@ public class WebDriverToSeleniumBridge
 		y -= WebDriverHelper.getElementPositionCenterY(
 			this, locatorOfObjectToBeDragged);
 
-		dragAndDrop(
-			locatorOfObjectToBeDragged,
-			Integer.toString(x) + "," + Integer.toString(y));
+		dragAndDrop(locatorOfObjectToBeDragged, x + "," + y);
 	}
 
 	@Override
