@@ -1649,10 +1649,10 @@ create database lportal2 character set utf8;</echo>
 			<then>
 				<move file="${file}" tofile="${tofile}" />
 
-				<echo message="Moved from ${file} to ${tofile}" />
+				<echo message="Moved file ${file} to ${tofile}." />
 			</then>
 			<else>
-				<echo message="${file} not found" />
+				<echo message="File ${file} does not exist." />
 			</else>
 		</if>
 	</target>
