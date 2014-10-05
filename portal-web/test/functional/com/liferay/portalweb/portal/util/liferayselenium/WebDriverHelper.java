@@ -258,9 +258,7 @@ public class WebDriverHelper {
 			targetLocator.frame(webElement);
 		}
 
-		Point framePoint = new Point(x, y);
-
-		return framePoint;
+		return new Point(x, y);
 	}
 
 	public static int getFramePositionLeft(WebDriver webDriver) {
@@ -342,9 +340,7 @@ public class WebDriverHelper {
 
 		WebDriver.Window window = options.window();
 
-		Point windowPoint = window.getPosition();
-
-		return windowPoint;
+		return window.getPosition();
 	}
 
 	public static int getWindowPositionLeft(WebDriver webDriver) {

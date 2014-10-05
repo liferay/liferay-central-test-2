@@ -371,17 +371,18 @@ public class WebDriverToSeleniumBridge
 	@Override
 	public void dragAndDrop(String locator, String coordString) {
 		try {
-			int x =
-				WebDriverHelper.getElementPositionCenterX(this, locator) +
-				WebDriverHelper.getFramePositionLeft(this) +
-				WebDriverHelper.getWindowPositionLeft(this) -
-				WebDriverHelper.getScrollOffsetX(this);
-			int y =
-				WebDriverHelper.getElementPositionCenterY(this, locator) +
-				WebDriverHelper.getFramePositionTop(this) +
-				WebDriverHelper.getNavigationBarHeight() +
-				WebDriverHelper.getWindowPositionTop(this) -
-				WebDriverHelper.getScrollOffsetY(this);
+			int x = WebDriverHelper.getElementPositionCenterX(this, locator);
+
+			x += WebDriverHelper.getFramePositionLeft(this);
+			x += WebDriverHelper.getWindowPositionLeft(this);
+			x -= WebDriverHelper.getScrollOffsetX(this);
+
+			int y = WebDriverHelper.getElementPositionCenterY(this, locator);
+
+			y += WebDriverHelper.getFramePositionTop(this);
+			y += WebDriverHelper.getNavigationBarHeight();
+			y += WebDriverHelper.getWindowPositionTop(this);
+			y -= WebDriverHelper.getScrollOffsetY(this);
 
 			Robot robot = new Robot();
 
@@ -413,16 +414,17 @@ public class WebDriverToSeleniumBridge
 		String locatorOfObjectToBeDragged,
 		String locatorOfDragDestinationObject) {
 
-		int x =
-			WebDriverHelper.getElementPositionCenterX(
-				this, locatorOfDragDestinationObject) -
-			WebDriverHelper.getElementPositionCenterX(
-				this, locatorOfObjectToBeDragged);
-		int y =
-			WebDriverHelper.getElementPositionCenterY(
-				this, locatorOfDragDestinationObject) -
-			WebDriverHelper.getElementPositionCenterY(
-				this, locatorOfObjectToBeDragged);
+		int x = WebDriverHelper.getElementPositionCenterX(
+				this, locatorOfDragDestinationObject);
+	
+		x -= WebDriverHelper.getElementPositionCenterX(
+			this, locatorOfObjectToBeDragged);
+
+		int y = WebDriverHelper.getElementPositionCenterY(
+			this, locatorOfDragDestinationObject);
+		
+		y -= WebDriverHelper.getElementPositionCenterY(
+			this, locatorOfObjectToBeDragged);
 
 		dragAndDrop(
 			locatorOfObjectToBeDragged,
