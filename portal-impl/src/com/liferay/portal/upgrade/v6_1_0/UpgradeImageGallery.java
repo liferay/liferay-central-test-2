@@ -517,8 +517,10 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				return (byte[])Base64.stringToObject(getTextObj);
 			}
 
-			_log.warn(
-				"Image " + image.getImageId() + " is not in the database");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Image " + image.getImageId() + " is not in the database");
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
