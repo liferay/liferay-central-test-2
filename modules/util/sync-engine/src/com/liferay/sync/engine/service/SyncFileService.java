@@ -646,7 +646,9 @@ public class SyncFileService {
 		}
 	}
 
-	protected static void resyncChildSyncFiles(SyncFile syncFile) throws Exception {
+	protected static void resyncChildSyncFiles(SyncFile syncFile)
+		throws Exception {
+
 		List<SyncFile> childSyncFiles = _syncFilePersistence.queryForEq(
 			"parentFolderId", syncFile.getTypePK());
 
@@ -661,7 +663,9 @@ public class SyncFileService {
 		}
 	}
 
-	protected static void unsyncChildSyncFiles(SyncFile syncFile) throws Exception {
+	protected static void unsyncChildSyncFiles(SyncFile syncFile)
+		throws Exception {
+
 		List<SyncFile> childSyncFiles = _syncFilePersistence.queryForEq(
 			"parentFolderId", syncFile.getTypePK());
 
