@@ -448,7 +448,7 @@
 	</command>
 
 	<command name="PublishFromSourceTabAndViewNameChange" priority="5">
-		<description message="This is a use case for LPS-43214 and LPS-50269." /> -->
+		<description message="This is a use case for LPS-43214 and LPS-50269." />
 
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Workflow" />
@@ -844,7 +844,6 @@
 		</execute>
 
 		<execute macro="KaleoDesigner#viewViewTab" />
-
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 
 		<execute macro="KaleoDesigner#viewSourceXMLLine">
@@ -885,7 +884,6 @@
 		</execute>
 
 		<execute macro="Workflow#deactivateAddedWorkflowDefinition" />
-
 		<execute macro="Workflow#deleteWorkflowDefinition" />
 
 		<execute macro="Workflow#uploadDefinition">
