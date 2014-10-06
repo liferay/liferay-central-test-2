@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.security.sso;
 
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -46,7 +47,8 @@ public class SSOUtil {
 			PropsValues.CAS_LOGOUT_ON_SESSION_EXPIRATION) {
 
 			sessionRedirectUrl = PrefsPropsUtil.getString(
-				companyId, PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL);
+				companyId, PropsKeys.CAS_LOGOUT_URL,
+				PropsValues.CAS_LOGOUT_URL);
 		}
 		else if (PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
@@ -137,7 +139,8 @@ public class SSOUtil {
 			PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE;
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED) &&
+				companyId, PropsKeys.CAS_AUTH_ENABLED,
+				PropsValues.CAS_AUTH_ENABLED) &&
 			PropsValues.CAS_LOGOUT_ON_SESSION_EXPIRATION) {
 
 			sessionRedirectOnExpire = true;

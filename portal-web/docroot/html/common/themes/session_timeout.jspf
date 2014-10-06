@@ -28,7 +28,6 @@
 		int sessionTimeoutWarning = PropsValues.SESSION_TIMEOUT_WARNING;
 
 		boolean sessionRedirectOnExpire = SSOUtil.isSessionRedirectOnExpire(themeDisplay.getCompanyId());
-		long companyId = themeDisplay.getCompanyId();
 
 		String sessionRedirectUrl = SSOUtil.getSessionExpirationRedirectUrl(themeDisplay.getCompanyId(), themeDisplay.getURLHome());
 
