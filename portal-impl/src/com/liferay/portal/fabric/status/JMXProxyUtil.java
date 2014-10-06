@@ -89,8 +89,7 @@ public class JMXProxyUtil {
 
 			@Override
 			public <V extends Serializable> NoticeableFuture<V> execute(
-					ProcessCallable<V> processCallable)
-				throws ProcessException {
+				ProcessCallable<V> processCallable) {
 
 				return processChannel.write(processCallable);
 			}
