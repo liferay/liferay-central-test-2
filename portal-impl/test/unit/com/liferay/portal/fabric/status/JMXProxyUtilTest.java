@@ -451,7 +451,7 @@ public class JMXProxyUtilTest {
 
 		Assert.assertEquals(
 			_testClassObjectName.toString(),
-			(String)jmxProxyInvocationHandler.invoke(
+			jmxProxyInvocationHandler.invoke(
 				null, Object.class.getMethod("toString"), new Object[0]));
 	}
 
