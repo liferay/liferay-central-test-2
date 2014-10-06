@@ -551,13 +551,13 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected InputStream getImageAsAStream(Image image)
+	protected InputStream getHookImageAsStream(Image image)
 		throws PortalException, SQLException {
 
 		InputStream is = null;
 
 		if (_sourceHook instanceof DatabaseHook) {
-			byte[] bytes = getImageBytesFromDB(image);
+			byte[] bytes = getDatabaseImageAsBytes(image);
 
 			is = new UnsyncByteArrayInputStream(bytes);
 		}
@@ -568,15 +568,15 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		return is;
 	}
 
-	protected byte[] getImageAsBytes(Image image)
+	protected byte[] getHookImageAsBytes(Image image)
 		throws IOException, PortalException, SQLException {
 
-		InputStream is = getImageAsAStream(image);
+		InputStream is = getHookImageAsStream(image);
 
 		return FileUtil.getBytes(is);
 	}
 
-	protected byte[] getImageBytesFromDB(Image image) throws SQLException {
+	protected byte[] getDatabaseImageAsBytes(Image image) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -598,7 +598,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			}
 
 			_log.warn(
-				"Image " + image.getImageId() + " hasn't been found in the DB");
+				"Image " + image.getImageId() + " is not in the database");
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -627,7 +627,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			long repositoryId, long companyId, String name, Image image)
 		throws Exception {
 
-		byte[] bytes = getImageAsBytes(image);
+		byte[] bytes = getHookImageAsBytes(image);
 
 		if (name == null) {
 			name = image.getImageId() + StringPool.PERIOD + image.getType();
@@ -715,7 +715,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				if (rs.next()) {
 					long fileVersionId = rs.getLong(1);
 
-					InputStream is = getImageAsAStream(thumbnailImage);
+					InputStream is = getHookImageAsStream(thumbnailImage);
 
 					ImageProcessorUtil.storeThumbnail(
 						companyId, groupId, fileEntryId, fileVersionId,
