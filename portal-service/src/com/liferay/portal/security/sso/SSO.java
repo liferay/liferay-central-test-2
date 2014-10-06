@@ -21,7 +21,7 @@ public interface SSO {
 
 	public String getSessionExpirationRedirectUrl();
 
-	public String getSignInUrl();
+	public String getSignInURL();
 
 	public boolean isLoginRedirectRequired();
 

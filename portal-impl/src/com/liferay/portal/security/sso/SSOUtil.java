@@ -36,17 +36,15 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SSOUtil {
 
-	public static String getSessionExpirationRedirectUrl(
-		long companyId, String defaultSessionRedirectUrl) {
-
-		String sessionRedirectUrl = defaultSessionRedirectUrl;
+	public static String getSessionExpirationRedirectURL(
+		long companyId, String sessionExpirationRedirectURL) {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.CAS_AUTH_ENABLED,
 				PropsValues.CAS_AUTH_ENABLED) &&
 			PropsValues.CAS_LOGOUT_ON_SESSION_EXPIRATION) {
 
-			sessionRedirectUrl = PrefsPropsUtil.getString(
+			return PrefsPropsUtil.getString(
 				companyId, PropsKeys.CAS_LOGOUT_URL,
 				PropsValues.CAS_LOGOUT_URL);
 		}
@@ -55,17 +53,15 @@ public class SSOUtil {
 					PropsValues.OPEN_SSO_AUTH_ENABLED) &&
 				 PropsValues.OPEN_SSO_LOGOUT_ON_SESSION_EXPIRATION) {
 
-			sessionRedirectUrl = PrefsPropsUtil.getString(
+			return PrefsPropsUtil.getString(
 				companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
 				PropsValues.OPEN_SSO_LOGOUT_URL);
 		}
 
-		return sessionRedirectUrl;
+		return sessionExpirationRedirectURL;
 	}
 
-	public static String getSignInUrl(long companyId, String defaultURLSignIn) {
-		String authLoginURL = null;
-
+	public static String getSignInURL(long companyId, String signInURL) {
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.CAS_AUTH_ENABLED,
 				PropsValues.CAS_AUTH_ENABLED) ||
@@ -73,10 +69,10 @@ public class SSOUtil {
 				companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
 				PropsValues.OPEN_SSO_AUTH_ENABLED)) {
 
-			authLoginURL = defaultURLSignIn;
+			return signInURL;
 		}
 
-		return authLoginURL;
+		return null;
 	}
 
 	public static boolean isAccessAllowed(
@@ -167,10 +163,11 @@ public class SSOUtil {
 
 	private String _getSessionExpirationRedirectUrl() {
 		for (SSO sso : _ssoMap.values()) {
-			String redirectUrl = sso.getSessionExpirationRedirectUrl();
+			String sessionExpirationRedirectUrl =
+				sso.getSessionExpirationRedirectUrl();
 
-			if (redirectUrl != null) {
-				return redirectUrl;
+			if (sessionExpirationRedirectUrl != null) {
+				return sessionExpirationRedirectUrl;
 			}
 		}
 
@@ -179,10 +176,10 @@ public class SSOUtil {
 
 	private String _getSignInUrl() {
 		for (SSO sso : _ssoMap.values()) {
-			String signInUrl = sso.getSignInUrl();
+			String signInURL = sso.getSignInURL();
 
-			if (signInUrl != null) {
-				return signInUrl;
+			if (signInURL != null) {
+				return signInURL;
 			}
 		}
 

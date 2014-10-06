@@ -115,7 +115,7 @@ public class LayoutAction extends Action {
 						redirectParam;
 				}
 
-				String authLoginURL = SSOUtil.getSignInUrl(
+				String authLoginURL = SSOUtil.getSignInURL(
 					themeDisplay.getCompanyId(), themeDisplay.getURLSignIn());
 
 				if (Validator.isNull(authLoginURL)) {
