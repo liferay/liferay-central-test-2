@@ -404,7 +404,8 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			else {
 				document.addKeyword(
 					Field.TREE_PATH,
-					StringUtil.split(dlFileEntry.getTreePath(), CharPool.SLASH));
+					StringUtil.split(
+						dlFileEntry.getTreePath(), CharPool.SLASH));
 			}
 
 			document.addKeyword(

@@ -337,7 +337,7 @@ SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, por
 			<liferay-ui:tabs
 				names='<%= LanguageUtil.get(request, "local") + "," + HtmlUtil.escape(ListUtil.toString(mountFolders, "name")) %>'
 				refresh="<%= false %>"
-				urls ="<%= tabsUrls %>"
+				urls="<%= tabsUrls %>"
 				value="<%= selectedTab %>"
 			>
 				<liferay-ui:section>
