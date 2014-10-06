@@ -141,7 +141,8 @@ public class JMXProxyUtilTest {
 			new Object[] {new long[] {currentThread.getId()}, true, true},
 			new String[] {
 				long[].class.getName(), boolean.class.getName(),
-				boolean.class.getName()});
+				boolean.class.getName()
+			});
 
 		Assert.assertEquals(1, compositeDatas.length);
 
@@ -211,9 +212,8 @@ public class JMXProxyUtilTest {
 			"dumpAllThreads", new Object[] {true, true},
 			new String[] {boolean.class.getName(), boolean.class.getName()});
 
-		ThreadInfo[] threadInfos =
-			(ThreadInfo[])JMXProxyUtil.decode(
-				ThreadInfo[].class, compositeDatas);
+		ThreadInfo[] threadInfos = (ThreadInfo[])JMXProxyUtil.decode(
+			ThreadInfo[].class, compositeDatas);
 
 		assertEquals(createThreadInfos(compositeDatas), threadInfos);
 
@@ -339,6 +339,7 @@ public class JMXProxyUtilTest {
 			public boolean equals(Object object) {
 				return super.equals(object);
 			}
+
 		}
 
 		Assert.assertFalse(
@@ -359,6 +360,7 @@ public class JMXProxyUtilTest {
 			public int hashCode() {
 				return super.hashCode();
 			}
+
 		}
 
 		Assert.assertFalse(
@@ -379,6 +381,7 @@ public class JMXProxyUtilTest {
 			public String toString() {
 				return super.toString();
 			}
+
 		}
 
 		Assert.assertFalse(
