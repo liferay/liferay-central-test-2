@@ -496,86 +496,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected long getDefaultUserId(long companyId) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select userId from User_ where companyId = ? and " +
-					"defaultUser = ?");
-
-			ps.setLong(1, companyId);
-			ps.setBoolean(2, true);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong("userId");
-			}
-
-			return 0;
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected Object[] getImage(long imageId) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select type_, size_ from Image where imageId = " + imageId);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				String type = rs.getString("type_");
-				long size = rs.getInt("size_");
-
-				return new Object[] {type, size};
-			}
-
-			return null;
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected InputStream getHookImageAsStream(Image image)
-		throws PortalException, SQLException {
-
-		InputStream is = null;
-
-		if (_sourceHook instanceof DatabaseHook) {
-			byte[] bytes = getDatabaseImageAsBytes(image);
-
-			is = new UnsyncByteArrayInputStream(bytes);
-		}
-		else {
-			is = _sourceHook.getImageAsStream(image);
-		}
-
-		return is;
-	}
-
-	protected byte[] getHookImageAsBytes(Image image)
-		throws IOException, PortalException, SQLException {
-
-		InputStream is = getHookImageAsStream(image);
-
-		return FileUtil.getBytes(is);
-	}
-
 	protected byte[] getDatabaseImageAsBytes(Image image) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -605,6 +525,86 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 
 		return new byte[0];
+	}
+
+	protected long getDefaultUserId(long companyId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select userId from User_ where companyId = ? and " +
+					"defaultUser = ?");
+
+			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return rs.getLong("userId");
+			}
+
+			return 0;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected byte[] getHookImageAsBytes(Image image)
+		throws IOException, PortalException, SQLException {
+
+		InputStream is = getHookImageAsStream(image);
+
+		return FileUtil.getBytes(is);
+	}
+
+	protected InputStream getHookImageAsStream(Image image)
+		throws PortalException, SQLException {
+
+		InputStream is = null;
+
+		if (_sourceHook instanceof DatabaseHook) {
+			byte[] bytes = getDatabaseImageAsBytes(image);
+
+			is = new UnsyncByteArrayInputStream(bytes);
+		}
+		else {
+			is = _sourceHook.getImageAsStream(image);
+		}
+
+		return is;
+	}
+
+	protected Object[] getImage(long imageId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select type_, size_ from Image where imageId = " + imageId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String type = rs.getString("type_");
+				long size = rs.getInt("size_");
+
+				return new Object[] {type, size};
+			}
+
+			return null;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected List<String> getResourceActionIds(
