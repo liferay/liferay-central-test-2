@@ -394,8 +394,10 @@ public class JMXProxyUtilTest {
 			public void method1() {
 			}
 
+			@SuppressWarnings("unused")
 			public void method2() {
 			}
+
 		}
 
 		Assert.assertTrue(
