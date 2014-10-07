@@ -74,7 +74,7 @@ public class ClusterLinkPortalCacheClusterListener extends BaseMessageListener {
 		PortalCacheClusterEventType portalCacheClusterEventType =
 			portalCacheClusterEvent.getEventType();
 
-		boolean remote = AggregatedCacheListener.isRemoteInvoke();
+		boolean remoteInvoke = AggregatedCacheListener.isRemoteInvoke();
 
 		AggregatedCacheListener.setRemoteInvoke(true);
 
@@ -105,7 +105,7 @@ public class ClusterLinkPortalCacheClusterListener extends BaseMessageListener {
 			}
 		}
 		finally {
-			AggregatedCacheListener.setRemoteInvoke(remote);
+			AggregatedCacheListener.setRemoteInvoke(remoteInvoke);
 		}
 	}
 
