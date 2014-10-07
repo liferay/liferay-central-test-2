@@ -57,16 +57,6 @@
 		<path refid="lib.classpath" />
 	</path>
 
-	<path id="test.classpath">
-		<pathelement path="test-classes/${test.type}" />
-		<pathelement path="${classpath}" />
-		<pathelement path="${test.additional.classpath}" />
-		<path refid="test-ivy.classpath" />
-		<fileset dir="${project.dir}/lib/development" includes="*.jar" excludes="jalopy.jar,jetty*.jar,tomcat*.jar" />
-		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
-		<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="ant.jar" />
-	</path>
-
 	<path id="web.classpath">
 		<pathelement path="${classpath}" />
 		<fileset dir="${project.dir}/lib/development" includes="jsp-api.jar,mail.jar,servlet-api.jar" />
@@ -996,7 +986,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</sequential>
 	</macrodef>
 
-	<macrodef name="setup-test-ivy-classpath">
+	<macrodef name="setup-test-classpath">
 		<sequential>
 			<ivy:resolve>
 				<dependency name="arquillian-junit-container" org="org.jboss.arquillian.junit" rev="1.1.2.Final" />
@@ -1006,6 +996,16 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 			<path id="test-ivy.classpath">
 				<ivy:resources type="bundle,jar,orbit" />
+			</path>
+
+			<path id="test.classpath">
+				<pathelement path="test-classes/${test.type}" />
+				<pathelement path="${classpath}" />
+				<pathelement path="${test.additional.classpath}" />
+				<path refid="test-ivy.classpath" />
+				<fileset dir="${project.dir}/lib/development" includes="*.jar" excludes="jalopy.jar,jetty*.jar,tomcat*.jar" />
+				<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+				<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="ant.jar" />
 			</path>
 		</sequential>
 	</macrodef>
@@ -1103,7 +1103,7 @@ rerun your task.
 		<if>
 			<available file="test/${test.type}" type="dir" />
 			<then>
-				<setup-test-ivy-classpath />
+				<setup-test-classpath />
 
 				<mkdir dir="test-classes/${test.type}" />
 				<mkdir dir="test-results/${test.type}" />
@@ -1334,7 +1334,7 @@ rerun your task.
 			setonempty="false"
 		/>
 
-		<setup-test-ivy-classpath />
+		<setup-test-classpath />
 
 		<if>
 			<not>
@@ -1431,7 +1431,7 @@ rerun your task.
 			</then>
 		</if>
 
-		<setup-test-ivy-classpath />
+		<setup-test-classpath />
 
 		<if>
 			<available file="test/${test.dir}" type="dir" />
@@ -1624,7 +1624,7 @@ rerun your task.
 			replace="com."
 		/>
 
-		<setup-test-ivy-classpath />
+		<setup-test-classpath />
 
 		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="${junit.halt.on.failure}" jvm="${junit.jvm}" outputtoformatters="false" printsummary="on" showoutput="true">
 			<sysproperty key="junit.aspectj.dump" file="woven-classes" />
