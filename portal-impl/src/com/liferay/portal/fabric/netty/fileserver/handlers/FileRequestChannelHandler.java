@@ -100,6 +100,7 @@ public class FileRequestChannelHandler
 			new FileResponse(
 				path, fileChannel.size(), fileTime.toMillis(),
 				basicFileAttributes.isDirectory()));
+
 		channelHandlerContext.writeAndFlush(
 			new DefaultFileRegion(fileChannel, 0, fileChannel.size()));
 	}
