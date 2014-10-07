@@ -54,8 +54,8 @@ public class RPCRequest<T extends Serializable> extends RPCSerializable {
 					public void complete(Future<T> future) {
 						if (future.isCancelled()) {
 							sendRPCResponse(
-								channel, new RPCResponse<T>(
-									id, true, null, null));
+								channel,
+								new RPCResponse<T>(id, true, null, null));
 
 							return;
 						}
@@ -72,8 +72,8 @@ public class RPCRequest<T extends Serializable> extends RPCSerializable {
 							}
 
 							sendRPCResponse(
-								channel, new RPCResponse<T>(
-									id, false, null, throwable));
+								channel,
+								new RPCResponse<T>(id, false, null, throwable));
 						}
 					}
 
