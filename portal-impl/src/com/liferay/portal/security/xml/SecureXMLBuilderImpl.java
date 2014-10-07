@@ -14,10 +14,17 @@
 
 package com.liferay.portal.security.xml;
 
-import org.xml.sax.XMLReader;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.util.PropsValues;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.stream.XMLInputFactory;
+
+import org.apache.xerces.parsers.SAXParser;
+
+import org.xml.sax.XMLReader;
 
 /**
  * @author Tomas Polesovsky
@@ -26,17 +33,95 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 
 	@Override
 	public DocumentBuilderFactory newDocumentBuilderFactory() {
-		return null;
+		DocumentBuilderFactory documentBuilderFactory =
+			DocumentBuilderFactory.newInstance();
+
+		if (!PropsValues.XML_SECURITY_ENABLED) {
+			return documentBuilderFactory;
+		}
+
+		try {
+			documentBuilderFactory.setFeature(
+				XMLConstants.FEATURE_SECURE_PROCESSING, true);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to initialize safe DocumentBuilderFactory! Your " +
+					"system may be vulnerable to XML Bomb attacks!", e);
+		}
+
+		try {
+			documentBuilderFactory.setFeature(_FEATURES_DISALLOW_DTD, true);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to initialize safe DocumentBuilderFactory! Your " +
+					"system may be vulnerable to XML Bomb attacks!", e);
+		}
+
+		try {
+			documentBuilderFactory.setFeature(
+				_FEATURES_EXTERNAL_GENERAL_ENTITIES, false);
+
+			documentBuilderFactory.setFeature(
+				_FEATURES_EXTERNAL_PARAMETER_ENTITIES, false);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to initialize safe DocumentBuilderFactory! Your " +
+					"system may be vulnerable to XXE attacks!", e);
+		}
+
+		return documentBuilderFactory;
 	}
 
 	@Override
 	public XMLInputFactory newXMLInputFactory() {
-		return null;
+		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+
+		if (!PropsValues.XML_SECURITY_ENABLED) {
+			return xmlInputFactory;
+		}
+
+		xmlInputFactory.setProperty(
+			XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
+
+		xmlInputFactory.setProperty(
+			XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+
+		xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+
+		return xmlInputFactory;
 	}
 
 	@Override
 	public XMLReader newXMLReader() {
-		return null;
+		XMLReader xmlReader = new SAXParser();
+
+		if (!PropsValues.XML_SECURITY_ENABLED) {
+			return xmlReader;
+		}
+
+		try {
+			xmlReader.setFeature(_FEATURES_DISALLOW_DTD, true);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to initialize safe SAX parser! Your system may be " +
+					"vulnerable to XML Bomb attacks!", e);
+		}
+
+		try {
+			xmlReader.setFeature(_FEATURES_EXTERNAL_GENERAL_ENTITIES, false);
+			xmlReader.setFeature(_FEATURES_EXTERNAL_PARAMETER_ENTITIES, false);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to initialize safe SAX parser! Your system may be " +
+					"vulnerable to XXE attacks!", e);
+		}
+
+		return xmlReader;
 	}
 
 	@Override
@@ -53,5 +138,16 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 	public XMLReader unsafeXMLReader() {
 		return null;
 	}
+
+	private static final String _FEATURES_DISALLOW_DTD =
+		"http://apache.org/xml/features/disallow-doctype-decl";
+
+	private static final String _FEATURES_EXTERNAL_GENERAL_ENTITIES =
+		"http://xml.org/sax/features/external-general-entities";
+
+	private static final String _FEATURES_EXTERNAL_PARAMETER_ENTITIES =
+		"http://xml.org/sax/features/external-parameter-entities";
+
+	private static Log _log = LogFactoryUtil.getLog(SecureXMLBuilderImpl.class);
 
 }
