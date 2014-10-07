@@ -34,9 +34,7 @@ public class FileResponse implements Serializable {
 	public FileResponse(
 		Path path, long size, long lastModifiedTime, boolean folder) {
 
-		path = path.toAbsolutePath();
-
-		_path = path.toString();
+		_path = String.valueOf(path.toAbsolutePath());
 		_size = size;
 		_lastModifiedTime = lastModifiedTime;
 		_folder = folder;
@@ -54,10 +52,9 @@ public class FileResponse implements Serializable {
 
 		FileResponse fileResponse = (FileResponse)obj;
 
-		if (_path.equals(fileResponse._path) &&
-			(_size == fileResponse._size) &&
+		if ((_folder == fileResponse._folder) &&
 			(_lastModifiedTime == fileResponse._lastModifiedTime) &&
-			(_folder == fileResponse._folder)) {
+			_path.equals(fileResponse._path) && (_size == fileResponse._size)) {
 
 			return true;
 		}
@@ -83,21 +80,29 @@ public class FileResponse implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = HashUtil.hash(0, _path);
+		int hash = HashUtil.hash(0, _folder);
 
-		hash = HashUtil.hash(hash, _size);
 		hash = HashUtil.hash(hash, _lastModifiedTime);
-		hash = HashUtil.hash(hash, _folder);
+		hash = HashUtil.hash(hash, _path);
+		hash = HashUtil.hash(hash, _size);
 
 		return hash;
 	}
 
 	public boolean isFileNotFound() {
-		return _size == FILE_NOT_FOUND;
+		if (_size == FILE_NOT_FOUND) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isFileNotModified() {
-		return _size == FILE_NOT_MODIFIED;
+		if (_size == FILE_NOT_MODIFIED {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isFolder() {
@@ -112,10 +117,14 @@ public class FileResponse implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(_size > 0 ? 11 : 10);
 
-		sb.append("{path=");
-		sb.append(_path);
-		sb.append(", isFolder=");
+		sb.append("{folder=");
 		sb.append(_folder);
+		sb.append(", lastModifiedTime=");
+		sb.append(_lastModifiedTime);
+		sb.append(", localFile=");
+		sb.append(_localFile);
+		sb.append(", path=");
+		sb.append(_path);
 
 		if (_size == FILE_NOT_FOUND) {
 			sb.append(", status=File Not Found");
@@ -128,10 +137,6 @@ public class FileResponse implements Serializable {
 			sb.append(_size);
 		}
 
-		sb.append(", lastModifiedTime=");
-		sb.append(_lastModifiedTime);
-		sb.append(", localFile=");
-		sb.append(_localFile);
 		sb.append("}");
 
 		return sb.toString();

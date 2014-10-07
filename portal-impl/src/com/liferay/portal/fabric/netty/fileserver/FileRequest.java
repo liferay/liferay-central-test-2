@@ -67,10 +67,10 @@ public class FileRequest implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = HashUtil.hash(0, _path);
+		int hash = HashUtil.hash(0, _deleteAfterFetch);
 
 		hash = HashUtil.hash(hash, _lastModifiedTime);
-		hash = HashUtil.hash(hash, _deleteAfterFetch);
+		hash = HashUtil.hash(hash, _path);
 
 		return hash;
 	}
