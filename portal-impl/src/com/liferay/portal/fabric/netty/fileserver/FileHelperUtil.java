@@ -283,9 +283,9 @@ public class FileHelperUtil {
 
 				if (size != length) {
 					throw new IOException(
-						"Corrupted zip stream for entry " + zipEntry.getName() +
-							", expected size " + length + ", actual size " +
-								size);
+						"Zip stream for entry " + zipEntry.getName() +
+							" is " + size + " bytes but should " + length +
+								" bytes");
 				}
 			}
 		}
@@ -365,10 +365,21 @@ public class FileHelperUtil {
 
 				double compressionRatio = rawSize / zippedSize;
 
-				_log.debug(
-					"Zipped \"" + sourcePath + "(" + rawSize + " bytes) -> " +
-						zipPath + "(" + zippedSize + " bytes)\" in " + time +
-							"s. Compression ratio " + compressionRatio);
+				StringBundler sb = new StringBundler(11);
+
+				sb.append("Zipped ");
+				sb.append(sourcePath);
+				sb.append(" (" + rawSize + " bytes) to ");
+				sb.append(zipPath);
+				sb.append(" (");
+				sb.append(zippedSize);
+				sb.append(" bytes)\" in ");
+				sb.append(time);
+				sb.append("s with a ");
+				sb.append(compressionRatio);
+				sb.append("compression ratio");
+
+				_log.debug(sb.toString());
 			}
 		}
 		catch (IOException ioe) {

@@ -30,9 +30,7 @@ public class FileRequest implements Serializable {
 	public FileRequest(
 		Path path, long lastModifiedTime, boolean deleteAfterFetch) {
 
-		path = path.toAbsolutePath();
-
-		_path = path.toString();
+		_path = String.valueOf(path.toAbsolutePath());
 		_lastModifiedTime = lastModifiedTime;
 		_deleteAfterFetch = deleteAfterFetch;
 	}
@@ -49,9 +47,9 @@ public class FileRequest implements Serializable {
 
 		FileRequest fileRequest = (FileRequest)obj;
 
-		if (_path.equals(fileRequest._path) &&
+		if ((_deleteAfterFetch == fileRequest._deleteAfterFetch) &&
 			(_lastModifiedTime == fileRequest._lastModifiedTime) &&
-			(_deleteAfterFetch == fileRequest._deleteAfterFetch)) {
+			_path.equals(fileRequest._path)) {
 
 			return true;
 		}
@@ -85,12 +83,12 @@ public class FileRequest implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{path=");
-		sb.append(_path);
+		sb.append("{deleteAfterFetch=");
+		sb.append(_deleteAfterFetch);
 		sb.append(", lastModifiedTime=");
 		sb.append(_lastModifiedTime);
-		sb.append(", deleteAfterFetch=");
-		sb.append(_deleteAfterFetch);
+		sb.append(", path=");
+		sb.append(_path);
 		sb.append("}");
 
 		return sb.toString();
