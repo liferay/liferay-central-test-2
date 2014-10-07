@@ -988,7 +988,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 	<macrodef name="setup-test-classpath">
 		<sequential>
-			<ivy:resolve>
+			<ivy:resolve log="download-only">
 				<dependency name="arquillian-junit-container" org="org.jboss.arquillian.junit" rev="1.1.2.Final" />
 				<dependency name="com.liferay.arquillian.extension" org="com.liferay" rev="latest.integration" />
 				<exclude org="junit" />
