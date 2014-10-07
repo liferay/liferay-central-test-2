@@ -26,8 +26,8 @@ public enum CompressionLevel {
 
 	BEST_COMPRESSION(Deflater.BEST_COMPRESSION),
 	BEST_SPEED(Deflater.BEST_SPEED),
-	DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION), LEVEL2(2), LEVEL3(3),
-	LEVEL4(4), LEVEL5(5), LEVEL6(6), LEVEL7(7), LEVEL8(8),
+	DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION), LEVEL_2(2), LEVEL_3(3),
+	LEVEL_4(4), LEVEL_5(5), LEVEL_6(6), LEVEL_7(7), LEVEL_8(8),
 	NO_COMPRESSION(Deflater.NO_COMPRESSION);
 
 	public static CompressionLevel getCompressionLevel(int level) {
@@ -35,8 +35,8 @@ public enum CompressionLevel {
 
 		if (compressionLevel == null) {
 			throw new IllegalArgumentException(
-				"Unknown compression level " + level +
-					", acceptable value range is [-1, 9]");
+				"Compression level " + level +
+					" is not within the range of -1 and 9");
 		}
 
 		return compressionLevel;
