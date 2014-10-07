@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.cache.PortalCacheProvider;
 import com.liferay.portal.kernel.cache.configuration.CallbackConfiguration;
 import com.liferay.portal.kernel.cache.configuration.PortalCacheConfiguration;
 import com.liferay.portal.kernel.cache.configuration.PortalCacheManagerConfiguration;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.resiliency.spi.SPIUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -287,9 +285,6 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 			portalCache.registerCacheListener(cacheListener, entry.getValue());
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		AbstractPortalCacheManager.class);
 
 	private boolean _mpiOnly;
 	private PortalCacheManagerConfiguration _portalCacheManagerConfiguration;
