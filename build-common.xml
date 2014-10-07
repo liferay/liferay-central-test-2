@@ -996,13 +996,17 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</sequential>
 	</macrodef>
 
-	<macrodef name="setup-arquillian-test">
+	<macrodef name="setup-test-ivy-classpath">
 		<sequential>
 			<ivy:resolve>
 				<dependency name="arquillian-junit-container" org="org.jboss.arquillian.junit" rev="1.1.2.Final" />
 				<dependency name="com.liferay.arquillian.extension" org="com.liferay" rev="latest.integration" />
 				<exclude org="junit" />
 			</ivy:resolve>
+
+			<path id="test-ivy.classpath">
+				<ivy:resources type="bundle,jar,orbit" />
+			</path>
 		</sequential>
 	</macrodef>
 
@@ -1099,11 +1103,7 @@ rerun your task.
 		<if>
 			<available file="test/${test.type}" type="dir" />
 			<then>
-				<setup-arquillian-test />
-
-				<path id="test-ivy.classpath">
-					<ivy:resources type="bundle,jar,orbit" />
-				</path>
+				<setup-test-ivy-classpath />
 
 				<mkdir dir="test-classes/${test.type}" />
 				<mkdir dir="test-results/${test.type}" />
@@ -1334,11 +1334,7 @@ rerun your task.
 			setonempty="false"
 		/>
 
-		<setup-arquillian-test />
-
-		<path id="test-ivy.classpath">
-			<ivy:resources type="bundle,jar,orbit" />
-		</path>
+		<setup-test-ivy-classpath />
 
 		<if>
 			<not>
@@ -1435,11 +1431,7 @@ rerun your task.
 			</then>
 		</if>
 
-		<setup-arquillian-test />
-
-		<path id="test-ivy.classpath">
-			<ivy:resources type="bundle,jar,orbit" />
-		</path>
+		<setup-test-ivy-classpath />
 
 		<if>
 			<available file="test/${test.dir}" type="dir" />
