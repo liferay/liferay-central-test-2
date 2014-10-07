@@ -98,7 +98,7 @@ public class FileResponse implements Serializable {
 	}
 
 	public boolean isFileNotModified() {
-		if (_size == FILE_NOT_MODIFIED {
+		if (_size == FILE_NOT_MODIFIED) {
 			return true;
 		}
 

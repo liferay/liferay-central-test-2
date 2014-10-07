@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.BigEndianCodec;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -106,6 +107,12 @@ public class FileHelperUtil {
 
 	public static void delete(Path... paths) {
 		delete(false, paths);
+	}
+
+	public static void move(Path fromPath, final Path toPath)
+		throws IOException {
+
+		move(fromPath, toPath, true);
 	}
 
 	public static void move(
@@ -202,12 +209,6 @@ public class FileHelperUtil {
 		}
 	}
 
-	public static void move(Path fromPath, final Path toPath)
-		throws IOException {
-
-		move(fromPath, toPath, true);
-	}
-
 	public static Path unzip(Path sourcePath, Path destDirPath)
 		throws IOException {
 
@@ -225,11 +226,13 @@ public class FileHelperUtil {
 
 				double compressionRatio = rawSize / zippedSize;
 
-				StringBundler sb = new StringBundler(11);
+				StringBundler sb = new StringBundler(13);
 
 				sb.append("Unzipped ");
 				sb.append(sourcePath);
-				sb.append(" (" + zippedSize + " bytes) to ");
+				sb.append(" (");
+				sb.append(zippedSize);
+				sb.append(" bytes) to ");
 				sb.append(destPath);
 				sb.append(" (");
 				sb.append(rawSize);
@@ -293,6 +296,57 @@ public class FileHelperUtil {
 		return rawSize.get();
 	}
 
+	public static Path zip(
+			Path sourcePath, Path destDirPath,
+			CompressionLevel compressionLevel)
+		throws IOException {
+
+		Path zipPath = Files.createTempFile(destDirPath, null, null);
+
+		try (OutputStream outputStream = Files.newOutputStream(zipPath)) {
+			ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+
+			zipOutputStream.setLevel(compressionLevel.getLevel());
+
+			long startTime = System.currentTimeMillis();
+
+			long rawSize = zip(sourcePath, zipOutputStream);
+
+			if (_log.isDebugEnabled()) {
+				long zippedSize = Files.size(zipPath);
+
+				long time = (System.currentTimeMillis() - startTime) / 1000;
+
+				double compressionRatio = rawSize / zippedSize;
+
+				StringBundler sb = new StringBundler(13);
+
+				sb.append("Zipped ");
+				sb.append(sourcePath);
+				sb.append(" (");
+				sb.append(rawSize);
+				sb.append(" bytes) to ");
+				sb.append(zipPath);
+				sb.append(" (");
+				sb.append(zippedSize);
+				sb.append(" bytes)\" in ");
+				sb.append(time);
+				sb.append("s with a ");
+				sb.append(compressionRatio);
+				sb.append("compression ratio");
+
+				_log.debug(sb.toString());
+			}
+		}
+		catch (IOException ioe) {
+			Files.delete(zipPath);
+
+			throw ioe;
+		}
+
+		return zipPath;
+	}
+
 	public static long zip(
 			final Path sourcePath, ZipOutputStream zipOutputStream)
 		throws IOException {
@@ -340,55 +394,6 @@ public class FileHelperUtil {
 		}
 
 		return rawSize.get();
-	}
-
-	public static Path zip(
-			Path sourcePath, Path destDirPath,
-			CompressionLevel compressionLevel)
-		throws IOException {
-
-		Path zipPath = Files.createTempFile(destDirPath, null, null);
-
-		try (OutputStream outputStream = Files.newOutputStream(zipPath)) {
-			ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
-
-			zipOutputStream.setLevel(compressionLevel.getLevel());
-
-			long startTime = System.currentTimeMillis();
-
-			long rawSize = zip(sourcePath, zipOutputStream);
-
-			if (_log.isDebugEnabled()) {
-				long zippedSize = Files.size(zipPath);
-
-				long time = (System.currentTimeMillis() - startTime) / 1000;
-
-				double compressionRatio = rawSize / zippedSize;
-
-				StringBundler sb = new StringBundler(11);
-
-				sb.append("Zipped ");
-				sb.append(sourcePath);
-				sb.append(" (" + rawSize + " bytes) to ");
-				sb.append(zipPath);
-				sb.append(" (");
-				sb.append(zippedSize);
-				sb.append(" bytes)\" in ");
-				sb.append(time);
-				sb.append("s with a ");
-				sb.append(compressionRatio);
-				sb.append("compression ratio");
-
-				_log.debug(sb.toString());
-			}
-		}
-		catch (IOException ioe) {
-			Files.delete(zipPath);
-
-			throw ioe;
-		}
-
-		return zipPath;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FileHelperUtil.class);
