@@ -1105,10 +1105,6 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 	protected String fixIncorrectEmptyLineBeforeCloseCurlyBrace(
 		String content, String fileName) {
 
-		if (fileName.endsWith("AnnotationLocatorTest.java")) {
-			return content;
-		}
-
 		Matcher matcher1 = _incorrectCloseCurlyBracePattern1.matcher(content);
 
 		while (matcher1.find()) {
