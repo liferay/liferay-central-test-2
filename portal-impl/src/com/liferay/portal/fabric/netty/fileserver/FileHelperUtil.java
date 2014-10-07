@@ -189,8 +189,9 @@ public class FileHelperUtil {
 
 			if (touched.get()) {
 				throw new IOException(
-					"Source path " + fromPath + " has been left in " +
-						"inconsistent state.", ioe);
+					"Source path " + fromPath + " was left in an " +
+						"inconsistent state",
+					ioe);
 			}
 
 			throw ioe;
@@ -224,11 +225,21 @@ public class FileHelperUtil {
 
 				double compressionRatio = rawSize / zippedSize;
 
-				_log.debug(
-					"Unzipped \"" + sourcePath + "(" + zippedSize +
-						" bytes) -> " + destPath + "(" + rawSize +
-							" bytes)\" in " + time + "s. Compression ratio " +
-								compressionRatio);
+				StringBundler sb = new StringBundler(11);
+
+				sb.append("Unzipped ");
+				sb.append(sourcePath);
+				sb.append(" (" + zippedSize + " bytes) to ");
+				sb.append(destPath);
+				sb.append(" (");
+				sb.append(rawSize);
+				sb.append(" bytes)\" in ");
+				sb.append(time);
+				sb.append("s with a ");
+				sb.append(compressionRatio);
+				sb.append("compression ratio");
+
+				_log.debug(sb.toString());
 			}
 		}
 		catch (IOException ioe) {
