@@ -162,17 +162,18 @@ public class EhcacheConfigurationHelperUtil {
 	private static CacheListenerScope _getCacheListenerScope(
 		NotificationScope notificationScope) {
 
-		switch(notificationScope) {
-			case ALL:
-				return CacheListenerScope.ALL;
-			case LOCAL:
-				return CacheListenerScope.LOCAL;
-			case REMOTE:
-				return CacheListenerScope.REMOTE;
+		if (notificationScope == NotificationScope.ALL) {
+			return CacheListenerScope.ALL;
+		}
+		else if (notificationScope == NotificationScope.LOCAL) {
+			return CacheListenerScope.LOCAL;
+		}
+		else if (notificationScope == NotificationScope.REMOTE) {
+			return CacheListenerScope.REMOTE;
 		}
 
 		throw new IllegalArgumentException(
-			"Unable to parse NotificationScope " + notificationScope);
+			"Unable to parse notification scope " + notificationScope);		
 	}
 
 	private static Set<CallbackConfiguration>
