@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 import java.io.Serializable;
@@ -220,9 +218,6 @@ public class AggregatedCacheListener<K extends Serializable, V>
 
 		return false;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		AggregatedCacheListener.class);
 
 	private static final ThreadLocal<Boolean> _remoteInvokeThreadLocal =
 		new InitialThreadLocal<Boolean>(
