@@ -173,7 +173,7 @@ public class EhcacheConfigurationHelperUtil {
 		}
 
 		throw new IllegalArgumentException(
-			"Unable to parse notification scope " + notificationScope);		
+			"Unable to parse notification scope " + notificationScope);
 	}
 
 	private static Set<CallbackConfiguration>
