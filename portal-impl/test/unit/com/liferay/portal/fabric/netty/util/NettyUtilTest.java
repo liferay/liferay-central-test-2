@@ -76,12 +76,13 @@ public class NettyUtilTest {
 
 	@Test
 	public void testScheduleCancellation() throws Exception {
+
+		// Normal finish without log
+
 		MockEventLoopGroup mockEventLoopGroup = new MockEventLoopGroup();
 
 		ReflectionTestUtil.setFieldValue(
 			_embeddedChannel, "eventLoop", mockEventLoopGroup.next());
-
-		// Normal finish without log
 
 		DefaultNoticeableFuture<Object> defaultNoticeableFuture =
 			new DefaultNoticeableFuture<Object>();

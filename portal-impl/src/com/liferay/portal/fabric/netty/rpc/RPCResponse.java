@@ -61,7 +61,7 @@ public class RPCResponse<T extends Serializable> extends RPCSerializable {
 			else if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Unable to cancel future with ID " + id +
-						", because it is already completed");
+						" because it is already completed");
 			}
 		}
 		else if (_throwable != null) {
@@ -85,10 +85,10 @@ public class RPCResponse<T extends Serializable> extends RPCSerializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{id=");
-		sb.append(id);
-		sb.append(", cancelled=");
+		sb.append("{cancelled=");
 		sb.append(_cancelled);
+		sb.append(", id=");
+		sb.append(id);
 		sb.append(", result=");
 		sb.append(_result);
 		sb.append(", throwable=");

@@ -167,7 +167,7 @@ public class RPCResponseTest {
 
 			Assert.assertEquals(
 				"Unable to cancel future with ID " + _id +
-					", because it is already completed",
+					" because it is already completed",
 				logRecord.getMessage());
 		}
 		finally {
