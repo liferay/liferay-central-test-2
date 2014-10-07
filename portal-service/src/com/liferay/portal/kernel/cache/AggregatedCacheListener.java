@@ -203,8 +203,8 @@ public class AggregatedCacheListener<K extends Serializable, V>
 				return false;
 			}
 
-			if (cacheListenerScope.equals(cacheListenerScope.ALL) ||
-				cacheListenerScope.equals(cacheListenerScope.REMOTE)) {
+			if (cacheListenerScope.equals(CacheListenerScope.ALL) ||
+				cacheListenerScope.equals(CacheListenerScope.REMOTE)) {
 
 				return true;
 			}
@@ -212,8 +212,8 @@ public class AggregatedCacheListener<K extends Serializable, V>
 			return false;
 		}
 
-		if (cacheListenerScope.equals(cacheListenerScope.ALL) ||
-			cacheListenerScope.equals(cacheListenerScope.LOCAL)) {
+		if (cacheListenerScope.equals(CacheListenerScope.ALL) ||
+			cacheListenerScope.equals(CacheListenerScope.LOCAL)) {
 
 			return true;
 		}
