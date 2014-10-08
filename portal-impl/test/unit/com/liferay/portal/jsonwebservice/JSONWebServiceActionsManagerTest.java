@@ -43,7 +43,7 @@ public class JSONWebServiceActionsManagerTest
 
 		mockHttpServletRequest.setParameter("i1", "123");
 
-		doTestOverloadedMethodsAndDefaultParams(
+		testOverloadedMethodsAndDefaultParams(
 			mockHttpServletRequest, "hello:123");
 	}
 
@@ -55,7 +55,7 @@ public class JSONWebServiceActionsManagerTest
 		mockHttpServletRequest.setParameter("i1", "123");
 		mockHttpServletRequest.setParameter("i2", "456");
 
-		doTestOverloadedMethodsAndDefaultParams(
+		testOverloadedMethodsAndDefaultParams(
 			mockHttpServletRequest, "hello:123");
 	}
 
@@ -68,7 +68,7 @@ public class JSONWebServiceActionsManagerTest
 		mockHttpServletRequest.setParameter("i2", "456");
 		mockHttpServletRequest.setParameter("i3", "789");
 
-		doTestOverloadedMethodsAndDefaultParams(
+		testOverloadedMethodsAndDefaultParams(
 			mockHttpServletRequest, "hello:123:456:789");
 	}
 
@@ -81,11 +81,11 @@ public class JSONWebServiceActionsManagerTest
 		mockHttpServletRequest.setParameter("i2", "456");
 		mockHttpServletRequest.setParameter("s", "abc");
 
-		doTestOverloadedMethodsAndDefaultParams(
+		testOverloadedMethodsAndDefaultParams(
 			mockHttpServletRequest, "hello:123:456>abc");
 	}
 
-	protected void doTestOverloadedMethodsAndDefaultParams(
+	protected void testOverloadedMethodsAndDefaultParams(
 			MockHttpServletRequest mockHttpServletRequest,
 			String expectedString)
 		throws Exception {
@@ -96,8 +96,7 @@ public class JSONWebServiceActionsManagerTest
 			JSONWebServiceActionsManagerUtil.getJSONWebServiceAction(
 				mockHttpServletRequest);
 
-		Assert.assertEquals(
-			expectedString, (String)jsonWebServiceAction.invoke());
+		Assert.assertEquals(expectedString, jsonWebServiceAction.invoke());
 	}
 
 }
