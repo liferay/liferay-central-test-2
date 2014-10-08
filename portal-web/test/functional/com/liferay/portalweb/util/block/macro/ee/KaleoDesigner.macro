@@ -388,7 +388,6 @@
 		<var name="key_nodeNodeLabel" value="${nodeNodeLabel}" />
 
 		<execute action="Kaleodesigner#click" locator-key1="VIEW_FORM_NODE" />
-
 		<execute action="Kaleodesigner#scrollWebElementIntoView" locator-key1="VIEW_FORM_NODE" />
 	</command>
 
