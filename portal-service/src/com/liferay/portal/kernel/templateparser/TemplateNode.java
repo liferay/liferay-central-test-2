@@ -138,15 +138,15 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 			return StringPool.BLANK;
 		}
 
+		long groupId = getLayoutGroupId();
+
+		if (groupId == 0) {
+			groupId = _themeDisplay.getScopeGroupId();
+		}
+
 		boolean privateLayout = layoutType.startsWith("private");
 
 		try {
-			long groupId = getLayoutGroupId();
-
-			if (groupId == 0) {
-				groupId = _themeDisplay.getScopeGroupId();
-			}
-
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				groupId, privateLayout, getLayoutId());
 
