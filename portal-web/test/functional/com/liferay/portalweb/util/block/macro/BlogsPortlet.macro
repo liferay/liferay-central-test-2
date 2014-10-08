@@ -164,7 +164,7 @@
 		<execute action="BasePortlet#assertClick" locator-key1="OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
 
 		<execute action="CPBlogsConfiguration#selectFrame" locator-key1="CONFIGURATION_IFRAME" />
-		<execute action="PGBlogsConfiguration#select" locator-key1="DISPLAY_SETTINGS_DISPLAY_TEMPLATE_SELECT" value1="Full Content" />
+		<execute action="CPBlogsConfiguration#select" locator-key1="DISPLAY_SETTINGS_DISPLAY_TEMPLATE_SELECT" value1="Full Content" />
 		<execute action="CPBlogsConfiguration#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
 
 		<execute action="CPBlogsConfiguration#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
