@@ -28,10 +28,12 @@ import java.util.Random;
 import org.apache.http.HttpEntity;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -63,24 +65,26 @@ public class JSONWebServiceTrackerTest {
 	public void testWebServiceInvocation()
 		throws IOException, URISyntaxException {
 
+		HttpClientBuilder httpClientBuilder = HttpClients.custom();
+
+		CredentialsProvider credentialsProvider =
+			new BasicCredentialsProvider();
+
 		Random random = new Random();
 
 		int a = random.nextInt(50);
 		int b = random.nextInt(50);
 
 		final URL url = new URL(
-			_url, "/api/jsonws/test.testweb/sum/a/"+a+"/b/"+b);
+			_url, "/api/jsonws/test.testweb/sum/a/" + a + "/b/" + b);
 
-		CloseableHttpClient closeableHttpClient =
-			HttpClients.custom().setDefaultCredentialsProvider(
-				new BasicCredentialsProvider() { {
-					setCredentials(
-						new AuthScope(url.getHost(), url.getPort()),
-						new UsernamePasswordCredentials(
-							"test@liferay.com", "test")
-					);
-				}}
-			).build();
+		credentialsProvider.setCredentials(
+			new AuthScope(url.getHost(), url.getPort()),
+			new UsernamePasswordCredentials("test@liferay.com", "test"));
+
+		httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+
+		CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
 
 		HttpGet httpGet = new HttpGet(url.toURI());
 
