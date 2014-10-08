@@ -59,7 +59,7 @@ public class JSONWebServiceActionParameters {
 	}
 
 	public List<NameValue<String, Object>> getInnerParameters(String baseName) {
-		return _parameters.getInnerParameters(baseName);
+		return _jsonWebServiceActionParameters.getInnerParameters(baseName);
 	}
 
 	public JSONRPCRequest getJSONRPCRequest() {
@@ -67,15 +67,15 @@ public class JSONWebServiceActionParameters {
 	}
 
 	public Object getParameter(String name) {
-		return _parameters.get(name);
+		return _jsonWebServiceActionParameters.get(name);
 	}
 
 	public String[] getParameterNames() {
-		String[] names = new String[_parameters.size()];
+		String[] names = new String[_jsonWebServiceActionParameters.size()];
 
 		int i = 0;
 
-		for (String key : _parameters.keySet()) {
+		for (String key : _jsonWebServiceActionParameters.keySet()) {
 			names[i] = key;
 
 			i++;
@@ -85,7 +85,7 @@ public class JSONWebServiceActionParameters {
 	}
 
 	public String getParameterTypeName(String name) {
-		return _parameters.getParameterTypeName(name);
+		return _jsonWebServiceActionParameters.getParameterTypeName(name);
 	}
 
 	public ServiceContext getServiceContext() {
@@ -93,11 +93,11 @@ public class JSONWebServiceActionParameters {
 	}
 
 	public boolean includeDefaultParameters() {
-		return _parameters.includeDefaultParameters();
+		return _jsonWebServiceActionParameters.includeDefaultParameters();
 	}
 
 	private void _addDefaultParameters() {
-		_parameters.put("serviceContext", Void.TYPE);
+		_jsonWebServiceActionParameters.put("serviceContext", Void.TYPE);
 	}
 
 	private void _collectDefaultsFromRequestAttributes(
@@ -110,7 +110,7 @@ public class JSONWebServiceActionParameters {
 
 			Object value = request.getAttribute(attributeName);
 
-			_parameters.putDefaultParameter(attributeName, value);
+			_jsonWebServiceActionParameters.putDefaultParameter(attributeName, value);
 		}
 	}
 
@@ -126,7 +126,7 @@ public class JSONWebServiceActionParameters {
 
 			parameterName = CamelCaseUtil.normalizeCamelCase(parameterName);
 
-			_parameters.put(parameterName, value);
+			_jsonWebServiceActionParameters.put(parameterName, value);
 		}
 	}
 
@@ -140,7 +140,7 @@ public class JSONWebServiceActionParameters {
 
 			Object value = entry.getValue();
 
-			_parameters.put(parameterName, value);
+			_jsonWebServiceActionParameters.put(parameterName, value);
 		}
 	}
 
@@ -185,7 +185,7 @@ public class JSONWebServiceActionParameters {
 
 			name = CamelCaseUtil.toCamelCase(name);
 
-			_parameters.put(name, value);
+			_jsonWebServiceActionParameters.put(name, value);
 
 			i++;
 		}
@@ -223,12 +223,12 @@ public class JSONWebServiceActionParameters {
 
 			name = CamelCaseUtil.normalizeCamelCase(name);
 
-			_parameters.put(name, value);
+			_jsonWebServiceActionParameters.put(name, value);
 		}
 	}
 
 	private JSONRPCRequest _jsonRPCRequest;
-	private JSONWebServiceActionParametersMap _parameters =
+	private JSONWebServiceActionParametersMap _jsonWebServiceActionParameters =
 		new JSONWebServiceActionParametersMap();
 	private ServiceContext _serviceContext;
 
