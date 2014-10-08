@@ -47,7 +47,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Carlos Sierra Andrés
  */
-@BndFile("test/integration/test-bnd.bnd")
+@BndFile("test/integration/bnd.bnd")
 @RunAsClient
 @RunWith(Arquillian.class)
 public class JSONWebServiceTrackerTest {
