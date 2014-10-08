@@ -78,40 +78,40 @@ scopeURL.setParameter("portletResource", portletResource);
 int pos = 0;
 
 String tabs1Names = StringPool.BLANK;
-String[] urls = new String[0];
+String[] tabs1URLs = new String[0];
 
 if (selPortlet.getConfigurationActionInstance() != null) {
 	tabs1Names += ",setup";
 
-	urls = ArrayUtil.append(urls, configurationURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, configurationURL.toString());
 }
 
 if (selPortlet.hasMultipleMimeTypes()) {
 	tabs1Names += ",supported-clients";
 
-	urls = ArrayUtil.append(urls, supportedClientsURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, supportedClientsURL.toString());
 }
 
 if (PortletPermissionUtil.contains(permissionChecker, layout, portletResource, ActionKeys.PERMISSIONS)) {
 	tabs1Names += ",permissions";
 
-	urls = ArrayUtil.append(urls, permissionsURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, permissionsURL.toString());
 }
 
 if (!selPortlet.getPublicRenderParameters().isEmpty()) {
 	tabs1Names += ",communication";
 
-	urls = ArrayUtil.append(urls, publicRenderParametersURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, publicRenderParametersURL.toString());
 }
 
 tabs1Names += ",sharing";
 
-urls = ArrayUtil.append(urls, sharingURL.toString());
+tabs1URLs = ArrayUtil.append(tabs1URLs, sharingURL.toString());
 
 if (selPortlet.isScopeable()) {
 	tabs1Names += ",scope";
 
-	urls = ArrayUtil.append(urls, scopeURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, scopeURL.toString());
 }
 
 if (tabs1Names.startsWith(",")) {
@@ -125,4 +125,4 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "configu
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, tabs1), currentURL);
 %>
 
-<liferay-ui:tabs names="<%= tabs1Names %>" type="pills" urls="<%= urls %>" />
+<liferay-ui:tabs names="<%= tabs1Names %>" type="pills" urls="<%= tabs1URLs %>" />

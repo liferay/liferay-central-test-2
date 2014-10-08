@@ -65,12 +65,12 @@ assignMembersURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 int pos = 0;
 
 String tabs1Names = StringPool.BLANK;
-String[] urls = new String[0];
+String[] tabs1URLs = new String[0];
 
 if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
 	tabs1Names += ",edit";
 
-	urls = ArrayUtil.append(urls, editRoleURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, editRoleURL.toString());
 }
 
 String name = role.getName();
@@ -78,7 +78,7 @@ String name = role.getName();
 if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && !name.equals(RoleConstants.SITE_ADMINISTRATOR) && !name.equals(RoleConstants.SITE_OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
 	tabs1Names += ",define-permissions";
 
-	urls = ArrayUtil.append(urls, definePermissionsURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, definePermissionsURL.toString());
 }
 
 boolean unassignableRole = false;
@@ -90,7 +90,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 if (!unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
 	tabs1Names += ",assign-members";
 
-	urls = ArrayUtil.append(urls, assignMembersURL.toString());
+	tabs1URLs = ArrayUtil.append(tabs1URLs, assignMembersURL.toString());
 }
 
 if (tabs1Names.startsWith(",")) {
@@ -106,4 +106,4 @@ request.setAttribute("edit_role_permissions.jsp-role", role);
 request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
 %>
 
-<liferay-ui:tabs names="<%= tabs1Names %>" urls="<%= urls %>" />
+<liferay-ui:tabs names="<%= tabs1Names %>" urls="<%= tabs1URLs %>" />
