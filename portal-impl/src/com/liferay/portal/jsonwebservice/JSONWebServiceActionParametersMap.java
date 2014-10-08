@@ -167,6 +167,7 @@ public class JSONWebServiceActionParametersMap extends HashMap<String, Object> {
 
 		private final String _name;
 		private final Object _value;
+
 	}
 
 	private List<DefaultParameter> _defaultParameters;
