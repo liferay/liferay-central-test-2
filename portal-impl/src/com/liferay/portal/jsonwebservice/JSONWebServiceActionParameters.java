@@ -110,7 +110,8 @@ public class JSONWebServiceActionParameters {
 
 			Object value = request.getAttribute(attributeName);
 
-			_jsonWebServiceActionParameters.putDefaultParameter(attributeName, value);
+			_jsonWebServiceActionParameters.putDefaultParameter(
+				attributeName, value);
 		}
 	}
 
