@@ -59,26 +59,6 @@ import java.util.Set;
 public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@Override
-	public DDMForm createFullHierarchyDDMForm() throws PortalException {
-		DDMForm fullHierarchyDDMForm = DDMFormXSDDeserializerUtil.deserialize(
-			getDefinition());
-
-		DDMStructure parentDDMStructure = getParentDDMStructure();
-
-		if (parentDDMStructure != null) {
-			DDMForm ancestorsDDMForm =
-				parentDDMStructure.createFullHierarchyDDMForm();
-
-			List<DDMFormField> ddmFormFields =
-				fullHierarchyDDMForm.getDDMFormFields();
-
-			ddmFormFields.addAll(ancestorsDDMForm.getDDMFormFields());
-		}
-
-		return fullHierarchyDDMForm;
-	}
-
-	@Override
 	public String[] getAvailableLanguageIds() {
 		DDMForm ddmForm = getDDMForm();
 
@@ -104,7 +84,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 				_ddmForm = DDMFormXSDDeserializerUtil.deserialize(
 					getDefinition());
 
-				addDDMFormPrivateDDMFormFields(_ddmForm);
+				addDDMFormPrivateDDMFormFields();
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -237,19 +217,21 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public DDMForm getFullHierarchyDDMForm() {
-		if (_fullHierarchyDDMForm == null) {
-			try {
-				_fullHierarchyDDMForm = createFullHierarchyDDMForm();
+	public DDMForm getFullHierarchyDDMForm() throws PortalException {
+		DDMForm ddmForm = getDDMForm();
 
-				addDDMFormPrivateDDMFormFields(_fullHierarchyDDMForm);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+		DDMStructure parentDDMStructure = getParentDDMStructure();
+
+		if (parentDDMStructure != null) {
+			DDMForm ancestorsDDMForm =
+				parentDDMStructure.getFullHierarchyDDMForm();
+
+			List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
+
+			ddmFormFields.addAll(ancestorsDDMForm.getDDMFormFields());
 		}
 
-		return _fullHierarchyDDMForm;
+		return ddmForm;
 	}
 
 	@Override
@@ -423,17 +405,12 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public void setFullHierarchyDDMForm(DDMForm fullHierarchyDDMForm) {
-		_fullHierarchyDDMForm = fullHierarchyDDMForm;
-	}
-
-	@Override
 	public void updateDDMForm(DDMForm ddmForm) {
 		setDefinition(DDMFormXSDSerializerUtil.serialize(ddmForm));
 	}
 
-	protected void addDDMFormPrivateDDMFormFields(DDMForm ddmForm) {
-		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
+	protected void addDDMFormPrivateDDMFormFields() {
+		List<DDMFormField> ddmFormFields = _ddmForm.getDDMFormFields();
 
 		String[] privateFieldNames =
 			PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_PRIVATE_FIELD_NAMES;
@@ -511,8 +488,5 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@CacheField(methodName = "DDMForm")
 	private DDMForm _ddmForm;
-
-	@CacheField(methodName = "FullHierarchyDDMForm")
-	private DDMForm _fullHierarchyDDMForm;
 
 }
