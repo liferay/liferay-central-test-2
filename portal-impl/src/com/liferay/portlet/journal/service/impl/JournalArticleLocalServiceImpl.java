@@ -7083,7 +7083,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void updateDDMStructurePredefinedValues(
-		long ddmStructureId, String content, ServiceContext serviceContext) {
+			long ddmStructureId, String content, ServiceContext serviceContext)
+		throws PortalException {
 
 		DDMStructure ddmStructure = ddmStructureLocalService.fetchDDMStructure(
 			ddmStructureId);

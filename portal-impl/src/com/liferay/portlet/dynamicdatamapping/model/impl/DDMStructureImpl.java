@@ -131,7 +131,9 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public List<DDMFormField> getDDMFormFields(boolean includeTransientFields) {
+	public List<DDMFormField> getDDMFormFields(boolean includeTransientFields)
+		throws PortalException {
+
 		Map<String, DDMFormField> ddmFormFieldsMap =
 			getFullHierarchyDDMFormFieldsMap(true);
 
@@ -178,7 +180,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public Set<String> getFieldNames() {
+	public Set<String> getFieldNames() throws PortalException {
 		List<DDMFormField> ddmFormFields = getDDMFormFields(false);
 
 		List<String> ddmFormFieldNames = getDDMFormFieldNames(ddmFormFields);
@@ -252,7 +254,8 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@Override
 	public Map<String, DDMFormField> getFullHierarchyDDMFormFieldsMap(
-		boolean includeNestedDDMFormFields) {
+			boolean includeNestedDDMFormFields)
+		throws PortalException {
 
 		DDMForm ddmForm = getFullHierarchyDDMForm();
 
@@ -260,7 +263,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public List<String> getRootFieldNames() {
+	public List<String> getRootFieldNames() throws PortalException {
 		DDMForm ddmForm = getFullHierarchyDDMForm();
 
 		return getDDMFormFieldNames(ddmForm.getDDMFormFields());
@@ -353,7 +356,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
-	public boolean hasField(String fieldName) {
+	public boolean hasField(String fieldName) throws PortalException {
 		Map<String, DDMFormField> ddmFormFieldsMap =
 			getFullHierarchyDDMFormFieldsMap(true);
 
