@@ -1297,7 +1297,7 @@ public interface PropsKeys {
 
 	public static final String JSON_WEB_SERVICE_ENABLED = "json.web.service.enabled";
 
-	public static final String JSONWS_WEB_SERVICE_API_INFO_ENABLED = "jsonws.web.service.api.info.enabled";
+	public static final String JSONWS_WEB_SERVICE_API_DISCOVERABLE = "jsonws.web.service.api.discoverable";
 
 	public static final String JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS = "jsonws.web.service.invalid.http.methods";
 
