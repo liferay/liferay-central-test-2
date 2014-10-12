@@ -62,8 +62,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	configurationPid = "com.liferay.nested.portlets.web",
-	configurationPolicy = ConfigurationPolicy.OPTIONAL,
-	immediate = true,
+	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"com.liferay.portlet.css-class-wrapper=portlet-nested-portlets",
 		"com.liferay.portlet.display-category=category.cms",
