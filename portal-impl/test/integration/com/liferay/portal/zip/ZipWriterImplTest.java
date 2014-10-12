@@ -216,9 +216,9 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		StringBuilder emptyStringBuilder = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-		zipWriter.addEntry("empty.txt", emptyStringBuilder);
+		zipWriter.addEntry("empty.txt", sb);
 
 		File file = zipWriter.getFile();
 
@@ -237,9 +237,9 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		StringBuilder nullStringBuilder = null;
+		StringBuilder sb = null;
 
-		zipWriter.addEntry("null.txt", nullStringBuilder);
+		zipWriter.addEntry("null.txt", sb);
 
 		File file = zipWriter.getFile();
 
@@ -258,9 +258,9 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		String emptyString = "";
+		String string = "";
 
-		zipWriter.addEntry("empty.txt", emptyString);
+		zipWriter.addEntry("empty.txt", string);
 
 		File file = zipWriter.getFile();
 
@@ -279,9 +279,9 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		String nullString = null;
+		String string = null;
 
-		zipWriter.addEntry("null.txt", nullString);
+		zipWriter.addEntry("null.txt", string);
 
 		File file = zipWriter.getFile();
 
