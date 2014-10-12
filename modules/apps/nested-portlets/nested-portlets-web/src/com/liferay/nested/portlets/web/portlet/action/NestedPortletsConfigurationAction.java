@@ -81,9 +81,9 @@ public class NestedPortletsConfigurationAction
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
-		String oldLayoutTemplateId = preferences.getValue(
+		String oldLayoutTemplateId = portletPreferences.getValue(
 			"layoutTemplateId",
 			_nestedPortletsConfiguration.getLayoutTemplateDefault());
 
@@ -98,8 +98,9 @@ public class NestedPortletsConfigurationAction
 
 	@Override
 	public String render(
-		PortletConfig portletConfig, RenderRequest renderRequest,
-		RenderResponse renderResponse) throws Exception {
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws Exception {
 
 		renderRequest.setAttribute(
 			NestedPortletsConfiguration.class.getName(),
