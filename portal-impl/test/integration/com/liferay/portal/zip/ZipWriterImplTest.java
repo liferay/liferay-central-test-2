@@ -25,8 +25,6 @@ import com.liferay.portal.util.test.DependenciesTestUtil;
 import java.io.File;
 import java.io.InputStream;
 
-import java.util.Date;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -49,7 +47,7 @@ public class ZipWriterImplTest {
 	@Before
 	public void setUp() {
 		_tempZipFilePath = SystemProperties.get(SystemProperties.TMP_DIR) +
-			File.separatorChar + new Date().getTime() + "-file.zip";
+			File.separatorChar + System.currentTimeMillis() + "-file.zip";
 	}
 
 	@Test
