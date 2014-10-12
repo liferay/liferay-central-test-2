@@ -17,9 +17,9 @@ package com.liferay.document.library.google.docs.context;
 /**
  * @author Ivan Zaera
  */
-public class GoogleDocsMenuItemKeys {
+public class GoogleDocsUIItemKeys {
 
 	public static final String EDIT_IN_GOOGLE =
-		GoogleDocsMenuItemKeys.class.getName() + "#edit-in-google-docs";
+		GoogleDocsUIItemKeys.class.getName() + "#edit-in-google-docs";
 
 }
