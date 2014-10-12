@@ -101,8 +101,8 @@ public class NestedPortletsPortlet extends MVCPortlet {
 			"layoutTemplateId",
 			_nestedPortletsConfiguration.getLayoutTemplateDefault());
 
-		String velocityTemplateId = StringPool.BLANK;
-		String velocityTemplateContent = StringPool.BLANK;
+		String templateId = StringPool.BLANK;
+		String templateContent = StringPool.BLANK;
 
 		Map<String, String> columnIds = new HashMap<String, String>();
 
@@ -138,26 +138,25 @@ public class NestedPortletsPortlet extends MVCPortlet {
 			sb.append(renderResponse.getNamespace());
 			sb.append(layoutTemplateId);
 
-			velocityTemplateId = sb.toString();
+			templateId = sb.toString();
 
 			content = processColumnMatcher.replaceAll("$1\\${$2}$3");
 
 			Matcher columnIdMatcher = _columnIdPattern.matcher(content);
 
-			velocityTemplateContent =
+			templateContent =
 				columnIdMatcher.replaceAll(
-					"$1" +renderResponse.getNamespace() + "$2$3");
+					"$1" + renderResponse.getNamespace() + "$2$3");
 		}
 
 		checkLayout(themeDisplay.getLayout(), columnIds.values());
 
 		renderRequest.setAttribute(
-			NestedPortletsConfiguration.TEMPLATE_ID, velocityTemplateId);
+			NestedPortletsConfiguration.TEMPLATE_ID, templateId);
 		renderRequest.setAttribute(
 			NestedPortletsConfiguration.TEMPLATE_CONTENT,
-			velocityTemplateContent);
+			templateContent);
 
-		@SuppressWarnings("unchecked")
 		Map<String, Object> vmVariables =
 			(Map<String, Object>)renderRequest.getAttribute(
 				WebKeys.VM_VARIABLES);
@@ -184,16 +183,17 @@ public class NestedPortletsPortlet extends MVCPortlet {
 	}
 
 	protected void checkLayout(Layout layout, Collection<String> columnIds) {
-		UnicodeProperties properties = layout.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
 
-		String[] layoutColumnIds =
-			StringUtil.split(
-				properties.get(LayoutTypePortletConstants.NESTED_COLUMN_IDS));
+		String[] layoutColumnIds = StringUtil.split(
+			typeSettingsProperties.get(
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS));
 
 		boolean updateColumnIds = false;
 
 		for (String columnId : columnIds) {
-			String portletIds = properties.getProperty(columnId);
+			String portletIds = typeSettingsProperties.getProperty(columnId);
 
 			if (Validator.isNotNull(portletIds) &&
 				!ArrayUtil.contains(layoutColumnIds, columnId)) {
@@ -205,11 +205,11 @@ public class NestedPortletsPortlet extends MVCPortlet {
 		}
 
 		if (updateColumnIds) {
-			properties.setProperty(
-					LayoutTypePortletConstants.NESTED_COLUMN_IDS,
-					StringUtil.merge(layoutColumnIds));
+			typeSettingsProperties.setProperty(
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS,
+				StringUtil.merge(layoutColumnIds));
 
-			layout.setTypeSettingsProperties(properties);
+			layout.setTypeSettingsProperties(typeSettingsProperties);
 
 			try {
 				LayoutLocalServiceUtil.updateLayout(
