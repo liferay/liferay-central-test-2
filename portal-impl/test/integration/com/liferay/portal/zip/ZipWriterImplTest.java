@@ -172,14 +172,14 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		zipWriter.addEntry("string.txt", "This is a string");
+		zipWriter.addEntry("string.txt", "This is a string.");
 
 		File file = zipWriter.getFile();
 
 		ZipReader zipReader = new ZipReaderImpl(file);
 
 		Assert.assertEquals(
-			"This is a string", zipReader.getEntryAsString("string.txt"));
+			"This is a string.", zipReader.getEntryAsString("string.txt"));
 
 		zipReader.close();
 
@@ -194,7 +194,7 @@ public class ZipWriterImplTest {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("This is a string");
+		sb.append("This is a string.");
 
 		zipWriter.addEntry("string.txt", sb);
 
@@ -203,7 +203,7 @@ public class ZipWriterImplTest {
 		ZipReader zipReader = new ZipReaderImpl(file);
 
 		Assert.assertEquals(
-			"This is a string", zipReader.getEntryAsString("string.txt"));
+			"This is a string.", zipReader.getEntryAsString("string.txt"));
 
 		zipReader.close();
 
@@ -329,7 +329,7 @@ public class ZipWriterImplTest {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("This is a string");
+		sb.append("This is a string.");
 
 		zipWriter.addEntry("string.txt", sb);
 
