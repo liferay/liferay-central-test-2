@@ -56,10 +56,10 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		File entry = DependenciesTestUtil.getDependencyAsFile(
+		File dependencyFile = DependenciesTestUtil.getDependencyAsFile(
 			getClass(), _ENTRY_FILE_PATH);
 
-		zipWriter.addEntry(_ENTRY_FILE_PATH, FileUtil.getBytes(entry));
+		zipWriter.addEntry(_ENTRY_FILE_PATH, FileUtil.getBytes(dependencyFile));
 
 		File file = zipWriter.getFile();
 
@@ -82,9 +82,7 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		byte[] emptyBytes = new byte[0];
-
-		zipWriter.addEntry("empty.txt", emptyBytes);
+		zipWriter.addEntry("empty.txt", new byte[0]);
 
 		File file = zipWriter.getFile();
 
@@ -174,14 +172,14 @@ public class ZipWriterImplTest {
 
 		ZipWriter zipWriter = new ZipWriterImpl(tempZipFile);
 
-		zipWriter.addEntry("string.txt", "This is a String");
+		zipWriter.addEntry("string.txt", "This is a string");
 
 		File file = zipWriter.getFile();
 
 		ZipReader zipReader = new ZipReaderImpl(file);
 
 		Assert.assertEquals(
-			"This is a String", zipReader.getEntryAsString("string.txt"));
+			"This is a string", zipReader.getEntryAsString("string.txt"));
 
 		zipReader.close();
 
@@ -196,7 +194,7 @@ public class ZipWriterImplTest {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("This is a String");
+		sb.append("This is a string");
 
 		zipWriter.addEntry("string.txt", sb);
 
@@ -205,7 +203,7 @@ public class ZipWriterImplTest {
 		ZipReader zipReader = new ZipReaderImpl(file);
 
 		Assert.assertEquals(
-			"This is a String", zipReader.getEntryAsString("string.txt"));
+			"This is a string", zipReader.getEntryAsString("string.txt"));
 
 		zipReader.close();
 
@@ -328,7 +326,7 @@ public class ZipWriterImplTest {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("This is a String");
+		sb.append("This is a string");
 
 		zipWriter.addEntry("string.txt", sb);
 
