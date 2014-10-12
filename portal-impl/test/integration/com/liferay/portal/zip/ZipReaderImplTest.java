@@ -40,25 +40,22 @@ public class ZipReaderImplTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		_expectedContent_0 = StringUtil.read(
+		_expectedContent0 = StringUtil.read(
 			DependenciesTestUtil.getDependencyAsInputStream(
 				ZipReaderImplTest.class, _FILE_PATH_0));
-
-		_expectedContent_1 = StringUtil.read(
+		_expectedContent1 = StringUtil.read(
 			DependenciesTestUtil.getDependencyAsInputStream(
 				ZipReaderImplTest.class, _FILE_PATH_1));
-
-		_expectedContent_2 = StringUtil.read(
+		_expectedContent2 = StringUtil.read(
 			DependenciesTestUtil.getDependencyAsInputStream(
 				ZipReaderImplTest.class, _FILE_PATH_2));
-
-		_expectedContent_3 = StringUtil.read(
+		_expectedContent3 = StringUtil.read(
 			DependenciesTestUtil.getDependencyAsInputStream(
 				ZipReaderImplTest.class, _FILE_PATH_3));
 	}
 
 	@Test
-	public void testConstructors() throws Exception {
+	public void testConstructor() throws Exception {
 		ZipReader zipReader = new ZipReaderImpl(
 			DependenciesTestUtil.getDependencyAsInputStream(
 				getClass(), _ZIP_FILE_PATH));
@@ -100,21 +97,21 @@ public class ZipReaderImplTest {
 			DependenciesTestUtil.getDependencyAsInputStream(
 				getClass(), _ZIP_FILE_PATH));
 
-		byte[] content = zipReader.getEntryAsByteArray(_FILE_PATH_0);
+		byte[] bytes = zipReader.getEntryAsByteArray(_FILE_PATH_0);
 
-		Assert.assertArrayEquals(_expectedContent_0.getBytes(_UTF_8), content);
+		Assert.assertArrayEquals(_expectedContent0.getBytes(_UTF_8), bytes);
 
-		content = zipReader.getEntryAsByteArray(_FILE_PATH_1);
+		bytes = zipReader.getEntryAsByteArray(_FILE_PATH_1);
 
-		Assert.assertArrayEquals(_expectedContent_1.getBytes(_UTF_8), content);
+		Assert.assertArrayEquals(_expectedContent1.getBytes(_UTF_8), bytes);
 
-		content = zipReader.getEntryAsByteArray(_FILE_PATH_2);
+		bytes = zipReader.getEntryAsByteArray(_FILE_PATH_2);
 
-		Assert.assertArrayEquals(_expectedContent_2.getBytes(_UTF_8), content);
+		Assert.assertArrayEquals(_expectedContent2.getBytes(_UTF_8), bytes);
 
-		content = zipReader.getEntryAsByteArray(_FILE_PATH_3);
+		bytes = zipReader.getEntryAsByteArray(_FILE_PATH_3);
 
-		Assert.assertArrayEquals(_expectedContent_3.getBytes(_UTF_8), content);
+		Assert.assertArrayEquals(_expectedContent3.getBytes(_UTF_8), bytes);
 
 		zipReader.close();
 	}
@@ -222,23 +219,23 @@ public class ZipReaderImplTest {
 
 		String content = zipReader.getEntryAsString(_FILE_PATH_0);
 
-		Assert.assertEquals(_expectedContent_0, content);
+		Assert.assertEquals(_expectedContent0, content);
 
 		content = zipReader.getEntryAsString("/" + _FILE_PATH_0);
 
-		Assert.assertEquals(_expectedContent_0, content);
+		Assert.assertEquals(_expectedContent0, content);
 
 		content = zipReader.getEntryAsString(_FILE_PATH_1);
 
-		Assert.assertEquals(_expectedContent_1, content);
+		Assert.assertEquals(_expectedContent1, content);
 
 		content = zipReader.getEntryAsString(_FILE_PATH_2);
 
-		Assert.assertEquals(_expectedContent_2, content);
+		Assert.assertEquals(_expectedContent2, content);
 
 		content = zipReader.getEntryAsString(_FILE_PATH_3);
 
-		Assert.assertEquals(_expectedContent_3, content);
+		Assert.assertEquals(_expectedContent3, content);
 
 		zipReader.close();
 	}
@@ -310,7 +307,7 @@ public class ZipReaderImplTest {
 	}
 
 	@Test
-	public void testGetFolderEntriesThatDoesNotExists() throws Exception {
+	public void testGetFolderEntriesThatDoesNotExist() throws Exception {
 		ZipReader zipReader = new ZipReaderImpl(
 			DependenciesTestUtil.getDependencyAsInputStream(
 				getClass(), _ZIP_FILE_PATH));
@@ -335,15 +332,11 @@ public class ZipReaderImplTest {
 
 	private static final Charset _UTF_8 = Charset.forName("UTF-8");
 
-	/**
-	 * file.zip contains a zip file which contains the structure under it
-	 * dependencies
-	 */
 	private static final String _ZIP_FILE_PATH = "file.zip";
 
-	private static String _expectedContent_0;
-	private static String _expectedContent_1;
-	private static String _expectedContent_2;
-	private static String _expectedContent_3;
+	private static String _expectedContent0;
+	private static String _expectedContent1;
+	private static String _expectedContent2;
+	private static String _expectedContent3;
 
 }

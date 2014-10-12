@@ -7,7 +7,7 @@
 		revision="working@bchan-lion-1.local"
 		conf="default"
 		confs="default"
-		date="20141009122407"/>
+		date="20141012150353"/>
 	<dependencies>
 		<module organisation="com.liferay" name="com.liferay.arquillian.extension">
 			<revision name="1.0.0-SNAPSHOT" status="integration" pubdate="20141007151017" resolver="liferay-public" artresolver="default" homepage="" downloaded="false" searched="false" default="false" conf="system, default, optional, compile, *, provided, runtime, javadoc, sources, master" position="20">
