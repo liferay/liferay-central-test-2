@@ -61,6 +61,7 @@ public class NestedPortletUpgrade {
 					}
 				};
 			}
+
 		};
 
 		_releaseLocalService.updateRelease(
