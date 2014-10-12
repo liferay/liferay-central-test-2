@@ -73,7 +73,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -163,7 +163,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -183,7 +183,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -207,7 +207,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -228,7 +228,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -249,7 +249,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -270,7 +270,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -291,7 +291,7 @@ public class ZipWriterImplTest {
 
 		zipReader.close();
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -299,9 +299,12 @@ public class ZipWriterImplTest {
 		ZipWriter zipWriter = new ZipWriterImpl();
 
 		Assert.assertNotNull(zipWriter);
-		Assert.assertNotNull(zipWriter.getFile());
 
-		zipWriter.getFile().delete();
+		File file = zipWriter.getFile();
+		
+		Assert.assertNotNull(file);
+
+		file.delete();
 
 		File zipFile = new File(_tempZipFilePath);
 
@@ -309,13 +312,13 @@ public class ZipWriterImplTest {
 
 		Assert.assertNotNull(zipWriter);
 
-		File file = zipWriter.getFile();
+		file = zipWriter.getFile();
 
 		Assert.assertNotNull(file);
 		Assert.assertTrue(file.exists());
 		Assert.assertEquals(zipFile.getPath(), file.getPath());
 
-		zipWriter.getFile().delete();
+		file.delete();
 	}
 
 	@Test
@@ -334,7 +337,9 @@ public class ZipWriterImplTest {
 
 		Assert.assertArrayEquals(FileUtil.getBytes(tempZipFile), bytes);
 
-		zipWriter.getFile().delete();
+		File file = zipWriter.getFile();
+		
+		file.delete();
 	}
 
 	@Test
@@ -343,7 +348,9 @@ public class ZipWriterImplTest {
 
 		zipWriter.finish();
 
-		zipWriter.getFile().delete();
+		File file = zipWriter.getFile();
+		
+		file.delete();
 	}
 
 	/**
@@ -360,7 +367,9 @@ public class ZipWriterImplTest {
 
 		zipWriter.finish();
 
-		zipWriter.getFile().delete();
+		File file = zipWriter.getFile();
+		
+		file.delete();
 	}
 
 	private static final String _ENTRY_FILE_PATH = "entry.txt";
