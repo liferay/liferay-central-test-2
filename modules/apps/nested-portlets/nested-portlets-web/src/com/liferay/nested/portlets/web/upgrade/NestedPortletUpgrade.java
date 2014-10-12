@@ -57,7 +57,7 @@ public class NestedPortletUpgrade {
 					new String[] {
 						"118",
 						"com_liferay_nested_portlets_web_portlet_" +
-						"NestedPortletsPortlet"
+							"NestedPortletsPortlet"
 					}
 				};
 			}
@@ -65,7 +65,7 @@ public class NestedPortletUpgrade {
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.nested.portlets.web",
-			Collections.<UpgradeProcess> singletonList(upgradePortletId), 1, 0,
+			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
 			false);
 	}
 
