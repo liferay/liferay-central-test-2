@@ -123,8 +123,9 @@ public class NestedPortletsPortlet extends MVCPortlet {
 
 				if (Validator.isNotNull(columnId)) {
 					columnIds.put(
-						columnId, renderResponse.getNamespace() +
-						StringPool.UNDERLINE + columnId);
+						columnId,
+						renderResponse.getNamespace() + StringPool.UNDERLINE +
+							columnId);
 				}
 			}
 
