@@ -26,9 +26,9 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author Carlos Sierra Andrés
  */
-public class JspContextHttpResponseWrapper extends HttpServletResponseWrapper {
+public class JspWriterHttpServletResponse extends HttpServletResponseWrapper {
 
-	public JspContextHttpResponseWrapper(PageContext pageContext) {
+	public JspWriterHttpServletResponse(PageContext pageContext) {
 		super((HttpServletResponse)pageContext.getResponse());
 
 		_pageContext = pageContext;

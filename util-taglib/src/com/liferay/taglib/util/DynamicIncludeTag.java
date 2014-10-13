@@ -16,7 +16,7 @@ package com.liferay.taglib.util;
 
 import com.liferay.kernel.servlet.taglib.DynamicIncludeUtil;
 import com.liferay.taglib.TagSupport;
-import com.liferay.taglib.servlet.JspContextHttpResponseWrapper;
+import com.liferay.taglib.servlet.JspWriterHttpServletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,7 +56,7 @@ public class DynamicIncludeTag extends TagSupport {
 	}
 
 	protected HttpServletResponse getResponse() {
-		return new JspContextHttpResponseWrapper(pageContext);
+		return new JspWriterHttpServletResponse(pageContext);
 	}
 
 	private String _key;
