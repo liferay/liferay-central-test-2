@@ -217,7 +217,7 @@ public class VerifyProperties extends VerifyProcess {
 	private static final String[][] _EXTRACTED_FROM_CORE_PORTAL_KEYS = {
 		new String[] {
 			"polls.publish.to.live.by.default", "publish.to.live.by.default",
-			"polls-service"
+			"com.liferay.polls.service"
 		}
 	};
 
