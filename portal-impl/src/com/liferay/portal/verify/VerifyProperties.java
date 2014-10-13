@@ -103,19 +103,6 @@ public class VerifyProperties extends VerifyProcess {
 		return false;
 	}
 
-	protected void verifyModularizedPortalProperty(
-			String oldKey, String newKey, String moduleName)
-		throws Exception {
-
-		if (isPortalProperty(oldKey)) {
-			_log.error(
-				"Portal property \"" + oldKey +
-					"\" was migrated to the module property \"" + newKey +
-						"\" and it should be defined within the module \"" +
-							moduleName + "\"");
-		}
-	}
-
 	protected void verifyLDAPProperties() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
@@ -167,6 +154,19 @@ public class VerifyProperties extends VerifyProcess {
 				"System property \"" + oldKey +
 					"\" was migrated to the portal property \"" + newKey +
 						"\"");
+		}
+	}
+
+	protected void verifyModularizedPortalProperty(
+			String oldKey, String newKey, String moduleName)
+		throws Exception {
+	
+		if (isPortalProperty(oldKey)) {
+			_log.error(
+				"Portal property \"" + oldKey +
+					"\" was migrated to the module property \"" + newKey +
+						"\" and it should be defined within the module \"" +
+							moduleName + "\"");
 		}
 	}
 
