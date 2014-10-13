@@ -737,6 +737,12 @@ public class JournalArticleLocalServiceUtil {
 		return getService().fetchLatestArticle(resourcePrimKey);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle fetchLatestArticle(
+		long resourcePrimKey, int status)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().fetchLatestArticle(resourcePrimKey, status);
+	}
+
 	/**
 	* Returns the latest web content article matching the resource primary key
 	* and workflow status, optionally preferring articles with approved
