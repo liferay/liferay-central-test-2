@@ -33,16 +33,6 @@ import com.liferay.portlet.documentlibrary.store.StoreFactory;
  */
 public class VerifyProperties extends VerifyProcess {
 
-	protected boolean isPortalProperty(String key) {
-		String value = PropsUtil.get(key);
-
-		if (value != null) {
-			return true;
-		}
-
-		return false;
-	}
-
 	@Override
 	protected void doVerify() throws Exception {
 
@@ -101,6 +91,16 @@ public class VerifyProperties extends VerifyProcess {
 		// LDAP
 
 		verifyLDAPProperties();
+	}
+
+	protected boolean isPortalProperty(String key) {
+		String value = PropsUtil.get(key);
+	
+		if (value != null) {
+			return true;
+		}
+	
+		return false;
 	}
 
 	protected void verifyExtractedPortalProperty(
