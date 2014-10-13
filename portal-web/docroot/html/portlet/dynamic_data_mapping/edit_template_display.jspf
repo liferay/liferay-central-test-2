@@ -530,20 +530,40 @@ private String _getDataContent(TemplateVariableDefinition templateVariableDefini
 }
 
 private String _getListCode(String variableName, String itemName, String accessor, String language) {
-	StringBundler sb = new StringBundler(2);
-
 	if (StringUtil.equalsIgnoreCase(language, "ftl")) {
-		sb.append("<#if " + variableName + "?has_content>\n\t<#list " + variableName + " as " + itemName + ">\n\t\t" + _getVariableReferenceCode(itemName, accessor, language));
+		StringBundler sb = new StringBundler(10);
+
+		sb.append("<#if ");
+		sb.append(variableName);
+		sb.append("?has_content>\n\t<#list ");
+		sb.append(variableName);
+		sb.append(" as ");
+		sb.append(itemName);
+		sb.append(">\n\t\t");
+		sb.append(_getVariableReferenceCode(itemName, accessor, language));
 		sb.append("[$CURSOR$]");
 		sb.append("\n\t</#list>\n</#if>");
+
+		return sb.toString();
 	}
 	else if (StringUtil.equalsIgnoreCase(language, "vm")) {
-		sb.append("#if (!$"+ variableName + ".isEmpty())\n\t#foreach ($" + itemName + " in $" + variableName + ")\n\t\t" + _getVariableReferenceCode(itemName, accessor, language));
+		StringBundler sb = new StringBundler(10);
+
+		sb.append("#if (!$");
+		sb.append(variableName);
+		sb.append(".isEmpty())\n\t#foreach ($");
+		sb.append(itemName);
+		sb.append(" in $");
+		sb.append(variableName);
+		sb.append(")\n\t\t");
+		sb.append(_getVariableReferenceCode(itemName, accessor, language));
 		sb.append("[$CURSOR$]");
 		sb.append("#end\n#end");
+
+		return sb.toString();
 	}
 
-	return sb.toString();
+	return StringPool.BLANK;
 }
 
 private String _getPaletteItemTitle(HttpServletRequest request, String label, Class<?> clazz) {
