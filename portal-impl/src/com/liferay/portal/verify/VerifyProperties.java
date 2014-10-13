@@ -95,11 +95,11 @@ public class VerifyProperties extends VerifyProcess {
 
 	protected boolean isPortalProperty(String key) {
 		String value = PropsUtil.get(key);
-	
+
 		if (value != null) {
 			return true;
 		}
-	
+
 		return false;
 	}
 
@@ -160,7 +160,7 @@ public class VerifyProperties extends VerifyProcess {
 	protected void verifyModularizedPortalProperty(
 			String oldKey, String newKey, String moduleName)
 		throws Exception {
-	
+
 		if (isPortalProperty(oldKey)) {
 			_log.error(
 				"Portal property \"" + oldKey + "\" was modularized to " +
