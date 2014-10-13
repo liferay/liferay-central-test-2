@@ -295,24 +295,24 @@ public class ListUtil {
 
 	public static <E> Iterator<E> reverseIterator(List<E> list) {
 		final ListIterator<E> listIterator = list.listIterator(list.size());
-	
+
 		return new Iterator<E>() {
-	
+
 			@Override
 			public boolean hasNext() {
 				return listIterator.hasPrevious();
 			}
-	
+
 			@Override
 			public E next() {
 				return listIterator.previous();
 			}
-	
+
 			@Override
 			public void remove() {
 				listIterator.remove();
 			}
-	
+
 		};
 	}
 
