@@ -33,7 +33,7 @@ import com.liferay.portlet.documentlibrary.store.StoreFactory;
  */
 public class VerifyProperties extends VerifyProcess {
 
-	protected boolean checkIfPortalPropertyExists(String key) {
+	protected boolean isPortalProperty(String key) {
 		String value = PropsUtil.get(key);
 
 		if (value != null) {
@@ -107,7 +107,7 @@ public class VerifyProperties extends VerifyProcess {
 			String oldKey, String newKey, String moduleName)
 		throws Exception {
 
-		boolean exists = checkIfPortalPropertyExists(oldKey);
+		boolean exists = isPortalProperty(oldKey);
 
 		if (exists) {
 			_log.error(
@@ -151,7 +151,7 @@ public class VerifyProperties extends VerifyProcess {
 	protected void verifyMigratedPortalProperty(String oldKey, String newKey)
 		throws Exception {
 
-		boolean exists = checkIfPortalPropertyExists(oldKey);
+		boolean exists = isPortalProperty(oldKey);
 
 		if (exists) {
 			_log.error(
@@ -175,7 +175,7 @@ public class VerifyProperties extends VerifyProcess {
 	}
 
 	protected void verifyObsoletePortalProperty(String key) throws Exception {
-		boolean exists = checkIfPortalPropertyExists(key);
+		boolean exists = isPortalProperty(key);
 
 		if (exists) {
 			_log.error("Portal property \"" + key + "\" is obsolete");
@@ -193,7 +193,7 @@ public class VerifyProperties extends VerifyProcess {
 	protected void verifyRenamedPortalProperty(String oldKey, String newKey)
 		throws Exception {
 
-		boolean exists = checkIfPortalPropertyExists(oldKey);
+		boolean exists = isPortalProperty(oldKey);
 
 		if (exists) {
 			_log.error(
