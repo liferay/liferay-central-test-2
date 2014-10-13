@@ -55,35 +55,41 @@ public class FileSystemProviderWrapper extends FileSystemProvider {
 	}
 
 	@Override
-	public void copy(Path source, Path target, CopyOption... options)
+	public void copy(
+			Path sourcePath, Path targetPath, CopyOption... copyOptions)
 		throws IOException {
 
 		_fileSystemProvider.copy(
-			PathWrapper.unwrapPath(source), PathWrapper.unwrapPath(target),
-			options);
+			PathWrapper.unwrapPath(sourcePath),
+			PathWrapper.unwrapPath(targetPath), copyOptions);
 	}
 
 	@Override
-	public void createDirectory(Path dir, FileAttribute<?>... attrs)
+	public void createDirectory(
+			Path dirPath, FileAttribute<?>... fileAttributes)
 		throws IOException {
 
-		_fileSystemProvider.createDirectory(PathWrapper.unwrapPath(dir), attrs);
+		_fileSystemProvider.createDirectory(
+			PathWrapper.unwrapPath(dirPath), fileAttributes);
 	}
 
 	@Override
-	public void createLink(Path link, Path existing) throws IOException {
+	public void createLink(Path linkPath, Path existingPath)
+		throws IOException {
+
 		_fileSystemProvider.createLink(
-			PathWrapper.unwrapPath(link), PathWrapper.unwrapPath(existing));
+			PathWrapper.unwrapPath(linkPath),
+			PathWrapper.unwrapPath(existingPath));
 	}
 
 	@Override
 	public void createSymbolicLink(
-			Path link, Path target, FileAttribute<?>... attrs)
+			Path linkPath, Path targetPath, FileAttribute<?>... fileAttributes)
 		throws IOException {
 
 		_fileSystemProvider.createSymbolicLink(
-			PathWrapper.unwrapPath(link), PathWrapper.unwrapPath(target),
-			attrs);
+			PathWrapper.unwrapPath(linkPath), PathWrapper.unwrapPath(targetPath),
+			fileAttributes);
 	}
 
 	@Override
@@ -98,10 +104,10 @@ public class FileSystemProviderWrapper extends FileSystemProvider {
 
 	@Override
 	public <V extends FileAttributeView> V getFileAttributeView(
-		Path path, Class<V> type, LinkOption... options) {
+		Path path, Class<V> clazz, LinkOption... linkOtions) {
 
 		return _fileSystemProvider.getFileAttributeView(
-			PathWrapper.unwrapPath(path), type, options);
+			PathWrapper.unwrapPath(path), clazz, linkOtions);
 	}
 
 	@Override
@@ -134,57 +140,59 @@ public class FileSystemProviderWrapper extends FileSystemProvider {
 	}
 
 	@Override
-	public boolean isSameFile(Path path, Path path2) throws IOException {
+	public boolean isSameFile(Path path1, Path path2) throws IOException {
 		return _fileSystemProvider.isSameFile(
-			PathWrapper.unwrapPath(path), PathWrapper.unwrapPath(path2));
+			PathWrapper.unwrapPath(path1), PathWrapper.unwrapPath(path2));
 	}
 
 	@Override
-	public void move(Path source, Path target, CopyOption... options)
+	public void move(
+			Path sourcePath, Path targetPath, CopyOption... copyOptions)
 		throws IOException {
 
 		_fileSystemProvider.move(
-			PathWrapper.unwrapPath(source), PathWrapper.unwrapPath(target),
-			options);
+			PathWrapper.unwrapPath(sourcePath),
+			PathWrapper.unwrapPath(targetPath), copyOptions);
 	}
 
 	@Override
 	public AsynchronousFileChannel newAsynchronousFileChannel(
-			Path path, Set<? extends OpenOption> options,
-			ExecutorService executor, FileAttribute<?>... attrs)
+			Path path, Set<? extends OpenOption> openOptions,
+			ExecutorService executorService, FileAttribute<?>... fileAttribute)
 		throws IOException {
 
 		return _fileSystemProvider.newAsynchronousFileChannel(
-			PathWrapper.unwrapPath(path), options, executor, attrs);
+			PathWrapper.unwrapPath(path), openOptions, executorService,
+			fileAttribute);
 	}
 
 	@Override
 	public SeekableByteChannel newByteChannel(
-			Path path, Set<? extends OpenOption> options,
-			FileAttribute<?>... attrs)
+			Path path, Set<? extends OpenOption> openOptions,
+			FileAttribute<?>... fileAttributes)
 		throws IOException {
 
 		return _fileSystemProvider.newByteChannel(
-			PathWrapper.unwrapPath(path), options, attrs);
+			PathWrapper.unwrapPath(path), openOptions, fileAttributes);
 	}
 
 	@Override
 	public DirectoryStream<Path> newDirectoryStream(
-			Path dir, DirectoryStream.Filter<? super Path> filter)
+			Path dirPath, DirectoryStream.Filter<? super Path> filter)
 		throws IOException {
 
 		return _fileSystemProvider.newDirectoryStream(
-			PathWrapper.unwrapPath(dir), filter);
+			PathWrapper.unwrapPath(dirPath), filter);
 	}
 
 	@Override
 	public FileChannel newFileChannel(
-			Path path, Set<? extends OpenOption> options,
-			FileAttribute<?>... attrs)
+			Path path, Set<? extends OpenOption> openOptions,
+			FileAttribute<?>... fileAttributes)
 		throws IOException {
 
 		return _fileSystemProvider.newFileChannel(
-			PathWrapper.unwrapPath(path), options, attrs);
+			PathWrapper.unwrapPath(path), openOptions, fileAttributes);
 	}
 
 	@Override
@@ -206,37 +214,37 @@ public class FileSystemProviderWrapper extends FileSystemProvider {
 	}
 
 	@Override
-	public InputStream newInputStream(Path path, OpenOption... options)
+	public InputStream newInputStream(Path path, OpenOption... openOptions)
 		throws IOException {
 
 		return _fileSystemProvider.newInputStream(
-			PathWrapper.unwrapPath(path), options);
+			PathWrapper.unwrapPath(path), openOptions);
 	}
 
 	@Override
-	public OutputStream newOutputStream(Path path, OpenOption... options)
+	public OutputStream newOutputStream(Path path, OpenOption... openOptions)
 		throws IOException {
 
 		return _fileSystemProvider.newOutputStream(
-			PathWrapper.unwrapPath(path), options);
+			PathWrapper.unwrapPath(path), openOptions);
 	}
 
 	@Override
 	public <A extends BasicFileAttributes> A readAttributes(
-			Path path, Class<A> type, LinkOption... options)
+			Path path, Class<A> clazz, LinkOption... linkOptions)
 		throws IOException {
 
 		return _fileSystemProvider.readAttributes(
-			PathWrapper.unwrapPath(path), type, options);
+			PathWrapper.unwrapPath(path), clazz, linkOptions);
 	}
 
 	@Override
 	public Map<String, Object> readAttributes(
-			Path path, String attributes, LinkOption... options)
+			Path path, String attributes, LinkOption... linkOptions)
 		throws IOException {
 
 		return _fileSystemProvider.readAttributes(
-			PathWrapper.unwrapPath(path), attributes, options);
+			PathWrapper.unwrapPath(path), attributes, linkOptions);
 	}
 
 	@Override
@@ -247,11 +255,12 @@ public class FileSystemProviderWrapper extends FileSystemProvider {
 
 	@Override
 	public void setAttribute(
-			Path path, String attribute, Object value, LinkOption... options)
+			Path path, String attribute, Object value,
+			LinkOption... linkOptions)
 		throws IOException {
 
 		_fileSystemProvider.setAttribute(
-			PathWrapper.unwrapPath(path), attribute, value, options);
+			PathWrapper.unwrapPath(path), attribute, value, linkOptions);
 	}
 
 	private final FileSystemProvider _fileSystemProvider;
