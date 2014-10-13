@@ -220,8 +220,7 @@ public class RepositoryStagedModelDataHandler
 
 	@Override
 	protected void importReferenceStagedModels(
-			PortletDataContext portletDataContext, Repository stagedModel)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, Repository stagedModel) {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
