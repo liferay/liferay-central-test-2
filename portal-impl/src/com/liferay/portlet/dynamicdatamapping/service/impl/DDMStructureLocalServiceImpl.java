@@ -1334,12 +1334,12 @@ public class DDMStructureLocalServiceImpl
 			}
 
 			if (!GroupThreadLocal.isDeleteInProcess()) {
-				List<DDMStructure> childrenDDMStructures =
+				List<DDMStructure> childDDMStructures =
 					ddmStructurePersistence.findByParentStructureId(
 						structure.getStructureId());
 
 				deletedStructureIds.addAll(
-					deleteStructures(childrenDDMStructures));
+					deleteStructures(childDDMStructures));
 			}
 
 			ddmStructureLocalService.deleteStructure(structure);
