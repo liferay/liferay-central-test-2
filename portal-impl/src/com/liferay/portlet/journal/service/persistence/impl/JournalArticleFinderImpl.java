@@ -1491,7 +1491,7 @@ public class JournalArticleFinderImpl
 
 		if (isNullArray(ddmStructureKeys) && isNullArray(ddmTemplateKeys)) {
 			return StringUtil.replace(
-				sql, "([$TYPE_STRUCTURE_TEMPLATE$]) AND", StringPool.BLANK);
+				sql, "([$STRUCTURE_TEMPLATE$]) AND", StringPool.BLANK);
 		}
 
 		StringBundler sb = new StringBundler(3);
@@ -1508,8 +1508,7 @@ public class JournalArticleFinderImpl
 			sb.append(_DDM_TEMPLATE_KEY_SQL);
 		}
 
-		return StringUtil.replace(
-			sql, "[$TYPE_STRUCTURE_TEMPLATE$]", sb.toString());
+		return StringUtil.replace(sql, "[$STRUCTURE_TEMPLATE$]", sb.toString());
 	}
 
 	private static final String _AND_OR_CONNECTOR = "[$AND_OR_CONNECTOR$] ";
