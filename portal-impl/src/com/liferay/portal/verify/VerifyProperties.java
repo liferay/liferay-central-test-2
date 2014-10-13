@@ -81,7 +81,7 @@ public class VerifyProperties extends VerifyProcess {
 			String newKey = keys[1];
 			String moduleName = keys[2];
 
-			verifyExtractedPortalProperty(oldKey, newKey, moduleName);
+			verifyModularizedPortalProperty(oldKey, newKey, moduleName);
 		}
 
 		// Document library
@@ -103,7 +103,7 @@ public class VerifyProperties extends VerifyProcess {
 		return false;
 	}
 
-	protected void verifyExtractedPortalProperty(
+	protected void verifyModularizedPortalProperty(
 			String oldKey, String newKey, String moduleName)
 		throws Exception {
 
