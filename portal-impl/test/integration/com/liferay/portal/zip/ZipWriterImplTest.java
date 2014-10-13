@@ -46,8 +46,9 @@ public class ZipWriterImplTest {
 
 	@Before
 	public void setUp() {
-		_tempZipFilePath = SystemProperties.get(SystemProperties.TMP_DIR) +
-			File.separatorChar + System.currentTimeMillis() + "-file.zip";
+		_tempZipFilePath =
+			SystemProperties.get(SystemProperties.TMP_DIR) +
+				File.separatorChar + System.currentTimeMillis() + "-file.zip";
 	}
 
 	@Test
