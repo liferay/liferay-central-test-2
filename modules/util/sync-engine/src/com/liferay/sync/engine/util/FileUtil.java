@@ -138,10 +138,10 @@ public class FileUtil {
 		String fileName = title.replace("/", "_");
 
 		if ((extension != null) && !extension.equals("")) {
-			int pos = fileName.lastIndexOf(".");
+			int x = fileName.lastIndexOf(".");
 
-			if ((pos == -1) ||
-				!extension.equalsIgnoreCase(fileName.substring(pos + 1))) {
+			if ((x == -1) ||
+				!extension.equalsIgnoreCase(fileName.substring(x + 1))) {
 
 				fileName += "." + extension;
 			}
