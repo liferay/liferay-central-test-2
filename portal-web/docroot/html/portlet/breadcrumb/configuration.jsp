@@ -81,12 +81,12 @@ TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler
 	var formNode = A.one('#<portlet:namespace />fm');
 
 	var data = {
+		'_<%= HtmlUtil.escapeJS(portletResource) %>_displayStyle': '<%= displayStyle %>',
 		'_<%= HtmlUtil.escapeJS(portletResource) %>_showCurrentGroup': <%= showCurrentGroup %>,
 		'_<%= HtmlUtil.escapeJS(portletResource) %>_showGuestGroup': <%= showGuestGroup %>,
 		'_<%= HtmlUtil.escapeJS(portletResource) %>_showLayout': <%= showLayout %>,
 		'_<%= HtmlUtil.escapeJS(portletResource) %>_showParentGroups': <%= showParentGroups %>,
-		'_<%= HtmlUtil.escapeJS(portletResource) %>_showPortletBreadcrumb': <%= showPortletBreadcrumb %>,
-		'_<%= HtmlUtil.escapeJS(portletResource) %>_displayStyle': '<%= displayStyle %>'
+		'_<%= HtmlUtil.escapeJS(portletResource) %>_showPortletBreadcrumb': <%= showPortletBreadcrumb %>
 	}
 
 	var selectDisplayStyle = formNode.one('#<portlet:namespace />displayStyle');
