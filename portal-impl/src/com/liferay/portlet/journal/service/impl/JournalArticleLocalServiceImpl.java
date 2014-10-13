@@ -1370,11 +1370,15 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle fetchLatestArticle(long resourcePrimKey)
 		throws PortalException {
 
-		OrderByComparator<JournalArticle> orderByComparator =
-			new ArticleVersionComparator();
+		return fetchLatestArticle(
+			resourcePrimKey, WorkflowConstants.STATUS_ANY);
+	}
 
-		return journalArticlePersistence.fetchByResourcePrimKey_First(
-			resourcePrimKey, orderByComparator);
+	@Override
+	public JournalArticle fetchLatestArticle(long resourcePrimKey, int status)
+		throws PortalException {
+
+		return fetchLatestArticle(resourcePrimKey, status, true);
 	}
 
 	/**
