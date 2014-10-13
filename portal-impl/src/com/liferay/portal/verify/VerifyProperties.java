@@ -163,10 +163,8 @@ public class VerifyProperties extends VerifyProcess {
 	
 		if (isPortalProperty(oldKey)) {
 			_log.error(
-				"Portal property \"" + oldKey +
-					"\" was migrated to the module property \"" + newKey +
-						"\" and it should be defined within the module \"" +
-							moduleName + "\"");
+				"Portal property \"" + oldKey + "\" was modularized to " +
+					moduleName + " as \"" + newKey);
 		}
 	}
 
