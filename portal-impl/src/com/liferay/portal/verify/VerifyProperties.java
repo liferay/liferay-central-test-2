@@ -107,9 +107,7 @@ public class VerifyProperties extends VerifyProcess {
 			String oldKey, String newKey, String moduleName)
 		throws Exception {
 
-		boolean exists = isPortalProperty(oldKey);
-
-		if (exists) {
+		if (isPortalProperty(oldKey)) {
 			_log.error(
 				"Portal property \"" + oldKey +
 					"\" was migrated to the module property \"" + newKey +
@@ -151,9 +149,7 @@ public class VerifyProperties extends VerifyProcess {
 	protected void verifyMigratedPortalProperty(String oldKey, String newKey)
 		throws Exception {
 
-		boolean exists = isPortalProperty(oldKey);
-
-		if (exists) {
+		if (isPortalProperty(oldKey)) {
 			_log.error(
 				"Portal property \"" + oldKey +
 					"\" was migrated to the system property \"" + newKey +
@@ -175,9 +171,7 @@ public class VerifyProperties extends VerifyProcess {
 	}
 
 	protected void verifyObsoletePortalProperty(String key) throws Exception {
-		boolean exists = isPortalProperty(key);
-
-		if (exists) {
+		if (isPortalProperty(key)) {
 			_log.error("Portal property \"" + key + "\" is obsolete");
 		}
 	}
@@ -193,9 +187,7 @@ public class VerifyProperties extends VerifyProcess {
 	protected void verifyRenamedPortalProperty(String oldKey, String newKey)
 		throws Exception {
 
-		boolean exists = isPortalProperty(oldKey);
-
-		if (exists) {
+		if (isPortalProperty(oldKey)) {
 			_log.error(
 				"Portal property \"" + oldKey + "\" was renamed to \"" +
 					newKey + "\"");
