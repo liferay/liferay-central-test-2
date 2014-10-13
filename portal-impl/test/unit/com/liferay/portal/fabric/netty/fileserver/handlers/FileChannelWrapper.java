@@ -135,7 +135,7 @@ public class FileChannelWrapper extends FileChannel {
 	}
 
 	@Override
-	protected void implCloseChannel() throws IOException {
+	protected void implCloseChannel() {
 		ReflectionTestUtil.invoke(
 			_fileChannel, "implCloseChannel", new Class<?>[0]);
 	}
