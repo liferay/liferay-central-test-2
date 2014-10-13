@@ -301,7 +301,7 @@ public class ZipWriterImplTest {
 		Assert.assertNotNull(zipWriter);
 
 		File file = zipWriter.getFile();
-		
+
 		Assert.assertNotNull(file);
 
 		file.delete();
@@ -338,7 +338,7 @@ public class ZipWriterImplTest {
 		Assert.assertArrayEquals(FileUtil.getBytes(tempZipFile), bytes);
 
 		File file = zipWriter.getFile();
-		
+
 		file.delete();
 	}
 
@@ -349,7 +349,7 @@ public class ZipWriterImplTest {
 		zipWriter.finish();
 
 		File file = zipWriter.getFile();
-		
+
 		file.delete();
 	}
 
@@ -362,7 +362,7 @@ public class ZipWriterImplTest {
 		zipWriter.finish();
 
 		File file = zipWriter.getFile();
-		
+
 		file.delete();
 	}
 
