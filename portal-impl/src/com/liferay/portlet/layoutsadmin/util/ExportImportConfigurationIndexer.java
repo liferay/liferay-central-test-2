@@ -35,7 +35,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
 
 import javax.portlet.PortletRequest;
@@ -183,17 +182,8 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 		Map<Number, Boolean> layoutIdMap =
 			(Map<Number, Boolean>)settingsMap.get("layoutIdMap");
 
-		Set<Number> layoutIdSet = layoutIdMap.keySet();
-
-		Long[] layoutIds = new Long[layoutIdSet.size()];
-
-		int i = 0;
-
-		for (Number layoutIdNumber : layoutIdSet) {
-			layoutIds[i++] = GetterUtil.getLong(layoutIdNumber);
-		}
-
-		document.addKeyword("layoutIds", layoutIds);
+		document.addKeyword(
+			"layoutIds", ArrayUtil.toLongArray(layoutIdMap.keySet()));
 	}
 
 	protected void populateLocale(
