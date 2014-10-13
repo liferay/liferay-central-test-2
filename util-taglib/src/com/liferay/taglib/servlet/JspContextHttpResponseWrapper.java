@@ -30,6 +30,7 @@ public class JspContextHttpResponseWrapper extends HttpServletResponseWrapper {
 
 	public JspContextHttpResponseWrapper(PageContext pageContext) {
 		super((HttpServletResponse)pageContext.getResponse());
+
 		_pageContext = pageContext;
 	}
 
