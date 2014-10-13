@@ -1502,6 +1502,17 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.findByPrimaryKey(id);
 	}
 
+	@Override
+	public JournalArticle fetchLatestArticle(long resourcePrimKey)
+		throws PortalException {
+
+		OrderByComparator<JournalArticle> orderByComparator =
+			new ArticleVersionComparator();
+
+		return journalArticlePersistence.fetchByResourcePrimKey_First(
+			resourcePrimKey, orderByComparator);
+	}
+
 	/**
 	 * Returns the latest approved web content article, or the latest unapproved
 	 * article if none are approved. Both approved and unapproved articles must
