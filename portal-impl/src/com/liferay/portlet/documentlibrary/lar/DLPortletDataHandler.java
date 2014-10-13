@@ -494,7 +494,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 					DynamicQuery fileVersionDynamicQuery =
 						DynamicQueryFactoryUtil.forClass(
-							DLFileVersion.class, "fileVersion",
+							DLFileVersion.class, "dlFileVersion",
 							PortalClassLoaderUtil.getClassLoader());
 
 					fileVersionDynamicQuery.setProjection(
@@ -514,11 +514,11 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 					fileVersionDynamicQuery.add(
 						RestrictionsFactoryUtil.eqProperty(
-							"fileVersion.version", "version"));
+							"dlFileVersion.version", "version"));
 
 					fileVersionDynamicQuery.add(
 						RestrictionsFactoryUtil.eqProperty(
-							"fileVersion.fileEntryId", "fileEntryId"));
+							"dlFileVersion.fileEntryId", "fileEntryId"));
 
 					Property fileEntryIdProperty = PropertyFactoryUtil.forName(
 						"fileEntryId");
