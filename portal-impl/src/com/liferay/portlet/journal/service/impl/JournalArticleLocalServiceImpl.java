@@ -1367,17 +1367,13 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	@Override
-	public JournalArticle fetchLatestArticle(long resourcePrimKey)
-		throws PortalException {
-
+	public JournalArticle fetchLatestArticle(long resourcePrimKey) {
 		return fetchLatestArticle(
 			resourcePrimKey, WorkflowConstants.STATUS_ANY);
 	}
 
 	@Override
-	public JournalArticle fetchLatestArticle(long resourcePrimKey, int status)
-		throws PortalException {
-
+	public JournalArticle fetchLatestArticle(long resourcePrimKey, int status) {
 		return fetchLatestArticle(resourcePrimKey, status, true);
 	}
 

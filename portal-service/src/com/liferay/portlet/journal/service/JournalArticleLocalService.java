@@ -651,13 +651,11 @@ public interface JournalArticleLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticle fetchLatestArticle(
-		long resourcePrimKey)
-		throws com.liferay.portal.kernel.exception.PortalException;
+		long resourcePrimKey);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticle fetchLatestArticle(
-		long resourcePrimKey, int status)
-		throws com.liferay.portal.kernel.exception.PortalException;
+		long resourcePrimKey, int status);
 
 	/**
 	* Returns the latest web content article matching the resource primary key
