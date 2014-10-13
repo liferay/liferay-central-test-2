@@ -214,13 +214,6 @@ public class VerifyProperties extends VerifyProcess {
 		}
 	}
 
-	private static final String[][] _MODULARIZED_PORTAL_KEYS = {
-		new String[] {
-			"polls.publish.to.live.by.default", "publish.to.live.by.default",
-			"com.liferay.polls.service"
-		}
-	};
-
 	private static final String[] _LDAP_KEYS = {
 		PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS, PropsKeys.LDAP_CONTACT_MAPPINGS,
 		PropsKeys.LDAP_USER_CUSTOM_MAPPINGS
@@ -295,6 +288,13 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.util.servlet.fileupload.LiferayInputStream." +
 				"threshold.size",
 			"com.liferay.portal.upload.LiferayInputStream.threshold.size"
+		}
+	};
+
+	private static final String[][] _MODULARIZED_PORTAL_KEYS = {
+		new String[] {
+			"polls.publish.to.live.by.default", "publish.to.live.by.default",
+			"com.liferay.polls.service"
 		}
 	};
 
