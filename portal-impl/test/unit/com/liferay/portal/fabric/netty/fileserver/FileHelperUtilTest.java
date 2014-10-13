@@ -640,9 +640,10 @@ public class FileHelperUtilTest {
 
 	@Test
 	public void testZipAndUnzip() throws IOException {
-		String folderName = "TestFolder";
 
 		// With log
+
+		String folderName = "TestFolder";
 
 		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
 			FileHelperUtil.class.getName(), Level.FINEST);
