@@ -154,8 +154,7 @@ public class NestedPortletsPortlet extends MVCPortlet {
 		renderRequest.setAttribute(
 			NestedPortletsConfiguration.TEMPLATE_ID, templateId);
 		renderRequest.setAttribute(
-			NestedPortletsConfiguration.TEMPLATE_CONTENT,
-			templateContent);
+			NestedPortletsConfiguration.TEMPLATE_CONTENT, templateContent);
 
 		Map<String, Object> vmVariables =
 			(Map<String, Object>)renderRequest.getAttribute(
