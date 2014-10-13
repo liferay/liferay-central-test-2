@@ -76,7 +76,7 @@ public class VerifyProperties extends VerifyProcess {
 			verifyObsoletePortalProperty(key);
 		}
 
-		for (String[] keys : _EXTRACTED_FROM_CORE_PORTAL_KEYS) {
+		for (String[] keys : _MODULARIZED_PORTAL_KEYS) {
 			String oldKey = keys[0];
 			String newKey = keys[1];
 			String moduleName = keys[2];
@@ -214,7 +214,7 @@ public class VerifyProperties extends VerifyProcess {
 		}
 	}
 
-	private static final String[][] _EXTRACTED_FROM_CORE_PORTAL_KEYS = {
+	private static final String[][] _MODULARIZED_PORTAL_KEYS = {
 		new String[] {
 			"polls.publish.to.live.by.default", "publish.to.live.by.default",
 			"com.liferay.polls.service"
