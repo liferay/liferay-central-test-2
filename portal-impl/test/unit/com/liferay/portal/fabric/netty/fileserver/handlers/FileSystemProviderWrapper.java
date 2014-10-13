@@ -88,8 +88,8 @@ public class FileSystemProviderWrapper extends FileSystemProvider {
 		throws IOException {
 
 		_fileSystemProvider.createSymbolicLink(
-			PathWrapper.unwrapPath(linkPath), PathWrapper.unwrapPath(targetPath),
-			fileAttributes);
+			PathWrapper.unwrapPath(linkPath),
+			PathWrapper.unwrapPath(targetPath), fileAttributes);
 	}
 
 	@Override
