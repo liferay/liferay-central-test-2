@@ -133,18 +133,18 @@ public class RoleFinderTest {
 	protected static ResourceAction getModelResourceAction()
 		throws PortalException {
 
-		List<String> list = new ArrayList<String>();
+		String name = "TestModel";
 
-		list.add(ActionKeys.UPDATE);
-		list.add(ActionKeys.VIEW);
+		List<String> actionIds = new ArrayList<String>();
 
-		String modelName = "TestModel";
+		actionIds.add(ActionKeys.UPDATE);
+		actionIds.add(ActionKeys.VIEW);
 
 		ResourceActionLocalServiceUtil.checkResourceActions(
-			modelName, list, true);
+			name, actionIds, true);
 
 		return ResourceActionLocalServiceUtil.getResourceAction(
-			modelName, ActionKeys.VIEW);
+			name, ActionKeys.VIEW);
 	}
 
 	private static ResourceAction _arbitraryResourceAction;
