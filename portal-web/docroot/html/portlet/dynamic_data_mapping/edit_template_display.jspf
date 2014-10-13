@@ -507,7 +507,7 @@ private String _getDataContent(TemplateVariableDefinition templateVariableDefini
 
 		String variableName = templateVariableDefinitionClass.getSimpleName();
 
-		StringBundler sb = new StringBundler(2);
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(_getVariableAssignmentCode(variableName, "serviceLocator.findService(\"" + templateVariableDefinition.getName() + "\")", language));
 		sb.append("[$CURSOR$]");
