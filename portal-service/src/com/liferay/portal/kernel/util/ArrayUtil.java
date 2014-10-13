@@ -1646,7 +1646,9 @@ public class ArrayUtil {
 		return aArray;
 	}
 
-	public static double[] toDoubleArray(Collection<? extends Number> collection) {
+	public static double[] toDoubleArray(
+		Collection<? extends Number> collection) {
+
 		double[] newArray = new double[collection.size()];
 
 		if (collection instanceof List) {
@@ -1673,7 +1675,9 @@ public class ArrayUtil {
 		return newArray;
 	}
 
-	public static float[] toFloatArray(Collection<? extends Number> collection) {
+	public static float[] toFloatArray(
+		Collection<? extends Number> collection) {
+
 		float[] newArray = new float[collection.size()];
 
 		if (collection instanceof List) {
