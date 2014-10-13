@@ -82,10 +82,11 @@ public class ListUtil {
 		return count;
 	}
 
-	public static <E> Iterator<E> descendingIterator(List<E> list) {
+	public static <E> Iterator<E> reverseIterator(List<E> list) {
 		final ListIterator<E> listIterator = list.listIterator(list.size());
 
 		return new Iterator<E>() {
+
 			@Override
 			public boolean hasNext() {
 				return listIterator.hasPrevious();
@@ -100,6 +101,7 @@ public class ListUtil {
 			public void remove() {
 				listIterator.remove();
 			}
+
 		};
 	}
 
