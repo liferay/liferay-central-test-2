@@ -39,29 +39,29 @@ public class PathWrapper implements Path {
 	}
 
 	@Override
-	public int compareTo(Path other) {
-		return _path.compareTo(unwrapPath(other));
+	public int compareTo(Path path) {
+		return _path.compareTo(unwrapPath(path));
 	}
 
 	@Override
-	public boolean endsWith(Path other) {
-		return _path.endsWith(unwrapPath(other));
+	public boolean endsWith(Path path) {
+		return _path.endsWith(unwrapPath(path));
 	}
 
 	@Override
-	public boolean endsWith(String other) {
-		return _path.endsWith(other);
+	public boolean endsWith(String path) {
+		return _path.endsWith(path);
 	}
 
 	@Override
-	public boolean equals(Object other) {
-		if (other instanceof PathWrapper) {
-			PathWrapper pathWrapper = (PathWrapper)other;
+	public boolean equals(Object path) {
+		if (path instanceof PathWrapper) {
+			PathWrapper pathWrapper = (PathWrapper)path;
 
-			other = pathWrapper._path;
+			path = pathWrapper._path;
 		}
 
-		return _path.equals(other);
+		return _path.equals(path);
 	}
 
 	@Override
@@ -134,54 +134,55 @@ public class PathWrapper implements Path {
 	}
 
 	@Override
-	public WatchKey register(WatchService watcher, WatchEvent.Kind<?>... events)
+	public WatchKey register(
+			WatchService watcherService, WatchEvent.Kind<?>... kinds)
 		throws IOException {
 
-		return _path.register(watcher, events);
+		return _path.register(watcherService, kinds);
 	}
 
 	@Override
 	public WatchKey register(
-			WatchService watcher, WatchEvent.Kind<?>[] events,
+			WatchService watcherService, WatchEvent.Kind<?>[] kinds,
 			WatchEvent.Modifier... modifiers)
 		throws IOException {
 
-		return _path.register(watcher, events, modifiers);
+		return _path.register(watcherService, kinds, modifiers);
 	}
 
 	@Override
-	public Path relativize(Path other) {
-		return wrapPath(_path.relativize(unwrapPath(other)), _fileSystem);
+	public Path relativize(Path path) {
+		return wrapPath(_path.relativize(unwrapPath(path)), _fileSystem);
 	}
 
 	@Override
-	public Path resolve(Path other) {
-		return wrapPath(_path.resolve(unwrapPath(other)), _fileSystem);
+	public Path resolve(Path path) {
+		return wrapPath(_path.resolve(unwrapPath(path)), _fileSystem);
 	}
 
 	@Override
-	public Path resolve(String other) {
-		return wrapPath(_path.resolve(other), _fileSystem);
+	public Path resolve(String path) {
+		return wrapPath(_path.resolve(path), _fileSystem);
 	}
 
 	@Override
-	public Path resolveSibling(Path other) {
-		return wrapPath(_path.resolveSibling(unwrapPath(other)), _fileSystem);
+	public Path resolveSibling(Path path) {
+		return wrapPath(_path.resolveSibling(unwrapPath(path)), _fileSystem);
 	}
 
 	@Override
-	public Path resolveSibling(String other) {
-		return wrapPath(_path.resolveSibling(other), _fileSystem);
+	public Path resolveSibling(String path) {
+		return wrapPath(_path.resolveSibling(path), _fileSystem);
 	}
 
 	@Override
-	public boolean startsWith(Path other) {
-		return _path.startsWith(unwrapPath(other));
+	public boolean startsWith(Path path) {
+		return _path.startsWith(unwrapPath(path));
 	}
 
 	@Override
-	public boolean startsWith(String other) {
-		return _path.startsWith(other);
+	public boolean startsWith(String path) {
+		return _path.startsWith(path);
 	}
 
 	@Override
@@ -200,8 +201,8 @@ public class PathWrapper implements Path {
 	}
 
 	@Override
-	public Path toRealPath(LinkOption... options) throws IOException {
-		return wrapPath(_path.toRealPath(options), _fileSystem);
+	public Path toRealPath(LinkOption... linkOptions) throws IOException {
+		return wrapPath(_path.toRealPath(linkOptions), _fileSystem);
 	}
 
 	@Override
