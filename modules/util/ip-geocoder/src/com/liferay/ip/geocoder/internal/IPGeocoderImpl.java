@@ -51,7 +51,7 @@ import org.tukaani.xz.XZInputStream;
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, name = "IPGeocoder",
 	property = {
 		"ip.geocoder.file.path=",
-		"ip.geocoder.file.url=http://cdn.files.liferay.com/mirrors" +
+		"ip.geocoder.file.url=http://cdn.mirrors.liferay.com" +
 			"/geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
 	},
 	service = IPGeocoder.class)
