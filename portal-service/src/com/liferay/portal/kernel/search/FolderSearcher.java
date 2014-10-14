@@ -45,13 +45,13 @@ public class FolderSearcher extends BaseSearcher {
 			}
 		}
 
-		classNames = folderClassNames.toArray(
+		_classNames = folderClassNames.toArray(
 			new String[folderClassNames.size()]);
 	}
 
 	@Override
 	public String[] getClassNames() {
-		return classNames;
+		return _classNames;
 	}
 
 	@Override
@@ -73,6 +73,6 @@ public class FolderSearcher extends BaseSearcher {
 		return super.createFullQuery(contextQuery, searchContext);
 	}
 
-	private final String[] classNames;
+	private final String[] _classNames;
 
 }
