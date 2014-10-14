@@ -128,7 +128,7 @@ response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 		['Link', 'Unlink']
 
 		<c:if test="<%= (wikiPageResourcePrimKey > 0) %>">
-		, ['Image']
+			, ['Image']
 		</c:if>
 	];
 
@@ -139,7 +139,7 @@ response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 		['Link', 'Unlink']
 
 		<c:if test="<%= (wikiPageResourcePrimKey > 0) %>">
-		, ['Image']
+			, ['Image']
 		</c:if>
 	];
 
