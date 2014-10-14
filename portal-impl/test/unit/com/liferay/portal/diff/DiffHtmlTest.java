@@ -28,29 +28,29 @@ import org.junit.Test;
 public class DiffHtmlTest {
 
 	@Test(expected = NullPointerException.class)
-	public void testDiffBothNull() throws Exception {
+	public void testDiffWhereSourceAndTargetAreNull() throws Exception {
 		_diffHtml.diff(null, null);
 	}
 
 	@Test
-	public void testDiffDifferences() throws Exception {
-		String original = StringUtil.randomString();
-		String modified = StringUtil.randomString();
+	public void testDiffWhereSourceAndTargetAreDifferent() throws Exception {
+		String source = StringUtil.randomString();
+		String target = StringUtil.randomString();
 
 		String diff = _diffHtml.diff(
-			new StringReader(original), new StringReader(modified));
+			new StringReader(source), new StringReader(target));
 
-		Assert.assertNotEquals(original, diff);
-		Assert.assertNotEquals(modified, diff);
+		Assert.assertNotEquals(source, diff);
+		Assert.assertNotEquals(target, diff);
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void testDiffLeftNull() throws Exception {
+	public void testDiffWhereSourceIsNull() throws Exception {
 		_diffHtml.diff(null, new StringReader(StringUtil.randomString()));
 	}
 
 	@Test
-	public void testDiffNoDifferences() throws Exception {
+	public void testDiffWhereSourceAndTargetAreIdentical() throws Exception {
 		String content = StringUtil.randomString();
 
 		Assert.assertEquals(
@@ -60,18 +60,18 @@ public class DiffHtmlTest {
 	}
 
 	@Test
-	public void testDiffNoXMLDeclaration() throws Exception {
-		String original = StringUtil.randomString();
-		String modified = StringUtil.randomString();
+	public void testDiffMustNotHaveXMLDeclaration() throws Exception {
+		String source = StringUtil.randomString();
+		String target = StringUtil.randomString();
 
 		String diff = _diffHtml.diff(
-			new StringReader(original), new StringReader(modified));
+			new StringReader(source), new StringReader(target));
 
 		Assert.assertFalse(diff.startsWith("<?xml"));
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void testDiffRightNull() throws Exception {
+	public void testDiffWhereTargetIsNull() throws Exception {
 		_diffHtml.diff(new StringReader(StringUtil.randomString()), null);
 	}
 
