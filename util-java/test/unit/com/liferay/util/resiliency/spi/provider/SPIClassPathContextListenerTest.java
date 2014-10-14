@@ -507,7 +507,8 @@ public class SPIClassPathContextListenerTest {
 		}
 	}
 
-	private static final String _CONTEXT_PATH = System.getProperty("java.io.tmpdir");
+	private static final String _CONTEXT_PATH = System.getProperty(
+		"java.io.tmpdir");
 
 	private static final String _EMBEDDED_LIB_DIR_NAME = "/embeddedLib";
 
