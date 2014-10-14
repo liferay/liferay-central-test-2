@@ -24,8 +24,6 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("view.js
 List results = searchContainer.getResults();
 
 DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
-
-boolean mediaGalleryHasImages = false;
 %>
 
 <c:choose>
@@ -44,6 +42,8 @@ boolean mediaGalleryHasImages = false;
 <div>
 
 	<%
+	boolean hasViewableFileEntries = false;
+
 	for (int i = 0; i < results.size(); i++) {
 		Object result = results.get(i);
 	%>
@@ -69,7 +69,7 @@ boolean mediaGalleryHasImages = false;
 				<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 
 					<%
-					mediaGalleryHasImages = true;
+					hasViewableFileEntries = true;
 
 					FileVersion fileVersion = fileEntry.getFileVersion();
 
@@ -262,7 +262,7 @@ embeddedPlayerURL.setParameter("struts_action", "/image_gallery_display/embedded
 embeddedPlayerURL.setWindowState(LiferayWindowState.POP_UP);
 %>
 
-<c:if test="<%= mediaGalleryHasImages %>">
+<c:if test="<%= hasViewableFileEntries %>">
 	<aui:script use="aui-image-viewer,aui-image-viewer-media">
 		var viewportRegion = A.getDoc().get('viewportRegion');
 
