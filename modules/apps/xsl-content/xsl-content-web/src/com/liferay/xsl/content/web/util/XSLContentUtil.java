@@ -44,8 +44,8 @@ public class XSLContentUtil {
 	public static final String DEFAULT_XSL_URL = "/example.xsl";
 
 	public static String transform(
-			URL xmlUrl, URL xslUrl,
-			XSLContentConfiguration xslContentConfiguration)
+			XSLContentConfiguration xslContentConfiguration, URL xmlUrl,
+			URL xslUrl)
 		throws Exception {
 
 		TransformerFactory transformerFactory = getTransformerFactory(
