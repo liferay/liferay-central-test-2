@@ -416,12 +416,12 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 					}
 
 					try {
-						List<DDMTemplate> ddmStructureTemplates =
+						List<DDMTemplate> ddmStructureDDMTemplates =
 							DDMTemplateLocalServiceUtil.getTemplatesByClassPK(
 								ddmStructure.getGroupId(),
 								ddmStructure.getStructureId());
 
-						ddmTemplates.addAll(ddmStructureTemplates);
+						ddmTemplates.addAll(ddmStructureDDMTemplates);
 					}
 					catch (SystemException se) {
 					}
