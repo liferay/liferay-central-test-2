@@ -25,7 +25,7 @@ List results = searchContainer.getResults();
 
 DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
 
-Boolean mediaGalleryHasImages = false;
+boolean mediaGalleryHasImages = false;
 %>
 
 <c:choose>
