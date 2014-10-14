@@ -38,7 +38,7 @@ public class ReflectionUtil {
 
 		if (!clazz.isArray()) {
 			throw new IllegalArgumentException(
-				"Input object is not an array : " + array);
+				"Input object is not an array: " + array);
 		}
 
 		try {

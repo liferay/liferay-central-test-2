@@ -483,6 +483,7 @@ public class ObjectGraphUtilTest {
 				}
 
 			};
+
 	}
 
 	@Documented
@@ -499,6 +500,7 @@ public class ObjectGraphUtilTest {
 				}
 
 			};
+
 	}
 
 	@Documented
@@ -515,6 +517,7 @@ public class ObjectGraphUtilTest {
 				}
 
 			};
+
 	}
 
 }
