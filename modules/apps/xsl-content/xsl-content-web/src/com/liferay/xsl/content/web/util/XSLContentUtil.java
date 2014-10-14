@@ -48,8 +48,28 @@ public class XSLContentUtil {
 			XSLContentConfiguration xslContentConfiguration)
 		throws Exception {
 
-		String xml = HttpUtil.URLtoString(xmlUrl);
-		String xsl = HttpUtil.URLtoString(xslUrl);
+		TransformerFactory transformerFactory = getTransformerFactory(
+			xslContentConfiguration);
+
+		DocumentBuilder documentBuilder = getDocumentBuilder(
+			xslContentConfiguration);
+
+		Transformer transformer = transformerFactory.newTransformer(
+			getXslSource(documentBuilder, xslUrl));
+
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
+
+		transformer.transform(
+			getXmlSource(documentBuilder, xmlUrl),
+			new StreamResult(unsyncByteArrayOutputStream));
+
+		return unsyncByteArrayOutputStream.toString();
+	}
+
+	protected static DocumentBuilder getDocumentBuilder(
+			XSLContentConfiguration xslContentConfiguration)
+		throws Exception {
 
 		DocumentBuilderFactory documentBuilderFactory =
 			DocumentBuilderFactory.newInstance();
@@ -66,16 +86,12 @@ public class XSLContentUtil {
 
 		documentBuilderFactory.setNamespaceAware(true);
 
-		DocumentBuilder documentBuilder =
-			documentBuilderFactory.newDocumentBuilder();
+		return documentBuilderFactory.newDocumentBuilder();
+	}
 
-		Document xmlDocument = documentBuilder.parse(
-			new ByteArrayInputStream(xml.getBytes()));
-		Document xslDocument = documentBuilder.parse(
-			new ByteArrayInputStream(xsl.getBytes()));
-
-		Source xmlSource = new DOMSource(xmlDocument);
-		Source xslSource = new DOMSource(xslDocument);
+	protected static TransformerFactory getTransformerFactory(
+			XSLContentConfiguration xslContentConfiguration)
+		throws Exception {
 
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
@@ -84,15 +100,31 @@ public class XSLContentUtil {
 			XMLConstants.FEATURE_SECURE_PROCESSING,
 			xslContentConfiguration.isXslSecureProcessingEnabled());
 
-		Transformer transformer = transformerFactory.newTransformer(xslSource);
+		return transformerFactory;
+	}
 
-		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-			new UnsyncByteArrayOutputStream();
+	protected static Source getXmlSource(
+			DocumentBuilder documentBuilder, URL xmlUrl)
+		throws Exception {
 
-		transformer.transform(
-			xmlSource, new StreamResult(unsyncByteArrayOutputStream));
+		String xml = HttpUtil.URLtoString(xmlUrl);
 
-		return unsyncByteArrayOutputStream.toString();
+		Document xmlDocument = documentBuilder.parse(
+			new ByteArrayInputStream(xml.getBytes()));
+
+		return new DOMSource(xmlDocument);
+	}
+
+	protected static Source getXslSource(
+			DocumentBuilder documentBuilder, URL xslUrl)
+		throws Exception {
+
+		String xsl = HttpUtil.URLtoString(xslUrl);
+
+		Document xslDocument = documentBuilder.parse(
+			new ByteArrayInputStream(xsl.getBytes()));
+
+		return new DOMSource(xslDocument);
 	}
 
 }
