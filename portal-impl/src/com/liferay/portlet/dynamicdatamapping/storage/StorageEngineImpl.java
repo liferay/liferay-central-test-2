@@ -260,7 +260,9 @@ public class StorageEngineImpl implements StorageEngine {
 
 		try {
 			for (Field field : fields) {
-				if (!field.getDataType().equals(FieldConstants.HTML)) {
+				String dataType = field.getDataType();
+
+				if (!dataType.equals(FieldConstants.HTML)) {
 					continue;
 				}
 
