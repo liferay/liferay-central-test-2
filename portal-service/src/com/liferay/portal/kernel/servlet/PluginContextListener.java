@@ -35,8 +35,8 @@ public class PluginContextListener
 	implements ServletContextAttributeListener, ServletContextListener {
 
 	/**
-	 * @deprecated As of 7.0.0, with no replacement. Use <code>
-	 *             javax.servlet.ServletContext.getClassLoader()</code>.
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             ServletContext#getClassLoader}.
 	 */
 	@Deprecated
 	public static final String PLUGIN_CLASS_LOADER = "PLUGIN_CLASS_LOADER";
