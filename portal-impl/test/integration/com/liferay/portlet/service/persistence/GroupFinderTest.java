@@ -197,7 +197,7 @@ public class GroupFinderTest {
 	protected static ResourceAction getModelResourceAction()
 		throws PortalException {
 
-		String name = "TestModel";
+		String name = RandomTestUtil.randomString() + "Model";
 
 		List<String> actionIds = new ArrayList<String>();
 

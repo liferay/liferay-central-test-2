@@ -32,6 +32,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.test.TransactionalTestRule;
 import com.liferay.portal.test.listeners.MainServletExecutionTestListener;
 import com.liferay.portal.test.runners.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portal.util.test.ResourceBlockPermissionTestUtil;
 import com.liferay.portal.util.test.ResourceBlockTestUtil;
 import com.liferay.portal.util.test.ResourcePermissionTestUtil;
@@ -133,7 +134,7 @@ public class RoleFinderTest {
 	protected static ResourceAction getModelResourceAction()
 		throws PortalException {
 
-		String name = "TestModel";
+		String name = RandomTestUtil.randomString() + "Model";
 
 		List<String> actionIds = new ArrayList<String>();
 
