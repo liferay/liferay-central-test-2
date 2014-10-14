@@ -55,14 +55,14 @@ public class XSLContentUtil {
 			DocumentBuilderFactory.newInstance();
 
 		documentBuilderFactory.setFeature(
+			_FEATURE_DISALLOW_DOCTYPE_DECLARATION,
+			!xslContentConfiguration.isXmlDoctypeDeclarationAllowed());
+		documentBuilderFactory.setFeature(
 			_FEATURE_EXTERNAL_GENERAL_ENTITIES,
 			xslContentConfiguration.isXmlExternalGeneralEntitiesAllowed());
 		documentBuilderFactory.setFeature(
 			_FEATURE_EXTERNAL_PARAMETER_ENTITIES,
 			xslContentConfiguration.isXmlExternalGeneralEntitiesAllowed());
-		documentBuilderFactory.setFeature(
-			_FEATURE_DISALLOW_DOCTYPE_DECLARATION,
-			!xslContentConfiguration.isXmlDoctypeDeclarationAllowed());
 
 		documentBuilderFactory.setNamespaceAware(true);
 
