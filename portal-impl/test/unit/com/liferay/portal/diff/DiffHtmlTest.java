@@ -27,9 +27,15 @@ import org.junit.Test;
  */
 public class DiffHtmlTest {
 
-	@Test(expected = NullPointerException.class)
-	public void testDiffWhereSourceAndTargetAreNull() throws Exception {
-		_diffHtml.diff(null, null);
+	@Test
+	public void testDiffMustNotHaveXMLDeclaration() throws Exception {
+		String source = StringUtil.randomString();
+		String target = StringUtil.randomString();
+
+		String diff = _diffHtml.diff(
+			new StringReader(source), new StringReader(target));
+
+		Assert.assertFalse(diff.startsWith("<?xml"));
 	}
 
 	@Test
@@ -44,11 +50,6 @@ public class DiffHtmlTest {
 		Assert.assertNotEquals(target, diff);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testDiffWhereSourceIsNull() throws Exception {
-		_diffHtml.diff(null, new StringReader(StringUtil.randomString()));
-	}
-
 	@Test
 	public void testDiffWhereSourceAndTargetAreIdentical() throws Exception {
 		String content = StringUtil.randomString();
@@ -59,15 +60,14 @@ public class DiffHtmlTest {
 				new StringReader(content), new StringReader(content)));
 	}
 
-	@Test
-	public void testDiffMustNotHaveXMLDeclaration() throws Exception {
-		String source = StringUtil.randomString();
-		String target = StringUtil.randomString();
+	@Test(expected = NullPointerException.class)
+	public void testDiffWhereSourceAndTargetAreNull() throws Exception {
+		_diffHtml.diff(null, null);
+	}
 
-		String diff = _diffHtml.diff(
-			new StringReader(source), new StringReader(target));
-
-		Assert.assertFalse(diff.startsWith("<?xml"));
+	@Test(expected = NullPointerException.class)
+	public void testDiffWhereSourceIsNull() throws Exception {
+		_diffHtml.diff(null, new StringReader(StringUtil.randomString()));
 	}
 
 	@Test(expected = NullPointerException.class)
