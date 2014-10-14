@@ -295,9 +295,7 @@ public class EditGroupAction extends PortletAction {
 		}
 	}
 
-	protected String getGroupFriendlyURL(Group liveGroup)
-		throws PortalException {
-
+	protected String getGroupFriendlyURL(Group liveGroup) {
 		if (liveGroup != null) {
 			return liveGroup.getFriendlyURL();
 		}
@@ -335,8 +333,7 @@ public class EditGroupAction extends PortletAction {
 	}
 
 	protected long getRefererPlid(
-			Group liveGroup, long scopeGroupId, String redirect)
-		throws PortalException {
+		Group liveGroup, long scopeGroupId, String redirect) {
 
 		long refererPlid = GetterUtil.getLong(
 			HttpUtil.getParameter(redirect, "refererPlid", false));
@@ -383,9 +380,7 @@ public class EditGroupAction extends PortletAction {
 		return roles;
 	}
 
-	protected String getStagingGroupFriendlyURL(Group liveGroup)
-		throws PortalException {
-
+	protected String getStagingGroupFriendlyURL(Group liveGroup) {
 		if ((liveGroup != null) && liveGroup.hasStagingGroup()) {
 			Group stagingGroup = liveGroup.getStagingGroup();
 
