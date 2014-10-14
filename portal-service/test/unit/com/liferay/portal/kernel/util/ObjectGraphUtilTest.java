@@ -390,6 +390,7 @@ public class ObjectGraphUtilTest {
 
 	private static class NullReference {
 
+		@SuppressWarnings("unused")
 		private final Object _object = null;
 
 	}
@@ -400,12 +401,14 @@ public class ObjectGraphUtilTest {
 			_int = 1;
 		}
 
+		@SuppressWarnings("unused")
 		private final int _int;
 
 	}
 
 	private static class PrimitiveArray {
 
+		@SuppressWarnings("unused")
 		private final int[] _ints = {1, 2, 3};
 
 	}
@@ -453,18 +456,21 @@ public class ObjectGraphUtilTest {
 
 	private static class SelfReference {
 
+		@SuppressWarnings("unused")
 		private final SelfReference _selfReference = this;
 
 	}
 
 	private static class SelfReferenceArray {
 
+		@SuppressWarnings("unused")
 		private final SelfReferenceArray[] _selfReferenceArray = {this, null};
 
 	}
 
 	private static class StaticField {
 
+		@SuppressWarnings("unused")
 		private static final int _INT = 1;
 
 	}
