@@ -55,13 +55,13 @@ public class XSLContentUtil {
 			DocumentBuilderFactory.newInstance();
 
 		documentBuilderFactory.setFeature(
-			_FEATURE_DISALLOW_DOCTYPE_DECLARATION,
+			"http://apache.org/xml/features/disallow-doctype-decl",
 			!xslContentConfiguration.isXmlDoctypeDeclarationAllowed());
 		documentBuilderFactory.setFeature(
-			_FEATURE_EXTERNAL_GENERAL_ENTITIES,
+			"http://xml.org/sax/features/external-general-entities",
 			xslContentConfiguration.isXmlExternalGeneralEntitiesAllowed());
 		documentBuilderFactory.setFeature(
-			_FEATURE_EXTERNAL_PARAMETER_ENTITIES,
+			"http://xml.org/sax/features/external-parameter-entities",
 			xslContentConfiguration.isXmlExternalGeneralEntitiesAllowed());
 
 		documentBuilderFactory.setNamespaceAware(true);
@@ -94,14 +94,5 @@ public class XSLContentUtil {
 
 		return unsyncByteArrayOutputStream.toString();
 	}
-
-	private static final String _FEATURE_DISALLOW_DOCTYPE_DECLARATION =
-		"http://apache.org/xml/features/disallow-doctype-decl";
-
-	private static final String _FEATURE_EXTERNAL_GENERAL_ENTITIES =
-		"http://xml.org/sax/features/external-general-entities";
-
-	private static final String _FEATURE_EXTERNAL_PARAMETER_ENTITIES =
-		"http://xml.org/sax/features/external-parameter-entities";
 
 }
