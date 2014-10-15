@@ -1757,8 +1757,8 @@ public class StagingImpl implements Staging {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             ExportImportDateUtil#updateLastPublishDate(
-	 *             long, boolean, DateRange, Date)}
+	 *             ExportImportDateUtil#updateLastPublishDate(long, boolean,
+	 *             DateRange, Date)}
 	 */
 	@Deprecated
 	@Override
@@ -1772,8 +1772,8 @@ public class StagingImpl implements Staging {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             ExportImportDateUtil#updateLastPublishDate(
-	 *             String, PortletPreferences, DateRange, Date)}
+	 *             ExportImportDateUtil#updateLastPublishDate(String,
+	 *             PortletPreferences, DateRange, Date)}
 	 */
 	@Deprecated
 	@Override
