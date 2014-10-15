@@ -519,8 +519,8 @@ com.liferay.portal.kernel.portlet.bridges.mvc.ActionCommand
 com.liferay.portal.kernel.portlet.bridges.mvc.BaseActionCommand
 ```
 
-In addition, `com.liferay.util.bridges.mvc.MVCPortlet` is a deprecated, but
-was made to extend `com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet`.
+In addition, `com.liferay.util.bridges.mvc.MVCPortlet` is deprecated, but was
+made to extend `com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet`.
 
 #### Who is affected?
 
@@ -535,8 +535,8 @@ Replace imports of `com.liferay.util.bridges.mvc.ActionCommand` with
 
 #### Why was this change made?
 
-This change was made in to avoid duplication of an implementable interface in
-the system. Duplication can cause `ClassCastException`s.
+This change was made to avoid duplication of an implementable interface in the
+system. Duplication can cause `ClassCastException`s.
 
 ---------------------------------------
 
