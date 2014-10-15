@@ -68,8 +68,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		long companyId, String serviceName) {
 
 		return applyFallbackKeys(
-			serviceName,
-			getCompanySettings(companyId, serviceName));
+			serviceName, getCompanySettings(companyId, serviceName));
 	}
 
 	@Override
@@ -87,8 +86,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		throws PortalException {
 
 		return applyFallbackKeys(
-			serviceName,
-			getGroupSettings(groupId, serviceName));
+			serviceName, getGroupSettings(groupId, serviceName));
 	}
 
 	@Override
