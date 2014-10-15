@@ -94,7 +94,7 @@ public class ExportImportDateUtilTest {
 			_layoutSet);
 
 		// It should be null, since no update should have happened, because it
-		// would result a gap for contents
+		// would result in a gap for contents
 
 		Assert.assertNull(lastPublishDate);
 	}
@@ -117,7 +117,7 @@ public class ExportImportDateUtilTest {
 			_portletPreferences);
 
 		// It should be null, since no update should have happened, because it
-		// would result a gap for contents
+		// would result in a gap for contents
 
 		Assert.assertNull(lastPublishDate);
 	}

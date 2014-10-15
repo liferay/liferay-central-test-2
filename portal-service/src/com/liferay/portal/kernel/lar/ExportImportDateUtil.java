@@ -200,9 +200,7 @@ public class ExportImportDateUtil {
 			themeDisplay.getTimeZone());
 	}
 
-	public static Date getLastPublishDate(LayoutSet layoutSet)
-		throws PortalException {
-
+	public static Date getLastPublishDate(LayoutSet layoutSet) {
 		UnicodeProperties settingsProperties =
 			layoutSet.getSettingsProperties();
 
@@ -285,7 +283,7 @@ public class ExportImportDateUtil {
 				_log.debug(
 					"Not updating the portlet setup for " + portletId +
 						" because no setup was returned for the current " +
-						"page");
+							"page");
 			}
 		}
 		catch (Exception e) {
