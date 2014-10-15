@@ -35,6 +35,7 @@ public class ClassLoaderResourceManager implements ResourceManager {
 		return _classLoader;
 	}
 
+	@Override
 	public ResourceRetriever getResourceRetriever(String location) {
 		return new ClassLoaderResourceRetriever(_classLoader, location);
 	}

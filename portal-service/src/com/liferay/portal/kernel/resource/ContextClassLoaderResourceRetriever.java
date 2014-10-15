@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.resource;
 
-import java.io.InputStream;
-
 /**
  * @author Shuyang Zhou
  */
