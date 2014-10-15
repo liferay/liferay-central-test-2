@@ -7,8 +7,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
 >
 	<tlib-version>1.0</tlib-version>
-	<description>Provides the Liferay UI component tags, prefixed with <![CDATA[<code>liferay-ui:</code>]]>.
-</description>
+	<description>Provides the Liferay UI component tags, prefixed with <![CDATA[<code>liferay-ui:</code>]]>.</description>
 	<short-name>liferay-ui</short-name>
 	<uri>http://liferay.com/tld/ui</uri>
 	<tag>
@@ -1441,7 +1440,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to translate the icon's <![CDATA[<code>message</code>]]> into the user's language.</description> 
+			<description>Sets whether to translate the icon's <![CDATA[<code>message</code>]]> into the user's language.</description>
 			<name>localizeMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -3031,7 +3030,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets text to be displayed as a help tool tip on mouse over of the panel's help icon.</description> 
+			<description>Sets text to be displayed as a help tool tip on mouse over of the panel's help icon.</description>
 			<name>helpMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -3065,7 +3064,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
-		<attribute>	
+		<attribute>
 			<description>Sets the panel's title and displays it at the top of the panel.</description>
 			<name>title</name>
 			<required>true</required>
@@ -4259,7 +4258,7 @@
 		values is a reserved property, so we have to use tabsValues intead
 		-->
 		<attribute>
-			<description>Sets a label for the back URL.</description>	
+			<description>Sets a label for the back URL.</description>
 			<name>backLabel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -4307,7 +4306,7 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
-		<attribute>	
+		<attribute>
 			<description>Sets the tab values. Values must follow the same order as the <![CDATA[<code>names</code>]]> attribute. Each value must be separated by a comma with no spaces.</description>
 			<name>tabsValues</name>
 			<required>false</required>
