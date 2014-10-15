@@ -203,7 +203,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 		_multiValuedKeysMap.put(settingsId, multiValuedKeysList);
 
-		_resourceLoadersMap.put(settingsId, resourceManager);
+		_resourceManagers.put(settingsId, resourceManager);
 	}
 
 	protected Settings applyFallbackKeys(String settingsId, Settings settings) {
@@ -330,17 +330,17 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	protected PropertiesSettings getPortletPropertiesSettings(
 		String settingsId) {
 
-		ResourceManager resourceManager = getResourceLoader(settingsId);
+		ResourceManager resourceManager = getResourceManager(settingsId);
 
 		return new PropertiesSettings(
 			getPortletProperties(resourceManager), resourceManager,
 			getPortalPropertiesSettings(settingsId));
 	}
 
-	protected ResourceManager getResourceLoader(String settingsId) {
+	protected ResourceManager getResourceManager(String settingsId) {
 		settingsId = PortletConstants.getRootPortletId(settingsId);
 
-		return _resourceLoadersMap.get(settingsId);
+		return _resourceManagers.get(settingsId);
 	}
 
 	private final ConcurrentMap<String, FallbackKeys> _fallbackKeysMap =
@@ -349,7 +349,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		new ConcurrentHashMap<String, List<String>>();
 	private final Map<String, Properties> _propertiesMap =
 		new ConcurrentHashMap<String, Properties>();
-	private final ConcurrentMap<String, ResourceManager> _resourceLoadersMap =
+	private final ConcurrentMap<String, ResourceManager> _resourceManagers =
 		new ConcurrentHashMap<String, ResourceManager>();
 
 }
