@@ -26,27 +26,21 @@ import org.junit.Test;
 public class ClassLoaderResourceManagerTest {
 
 	@Test
-	public void testLoadExistingResource() {
+	public void testGetResourceRetriever() {
 		ResourceRetriever resourceRetriever =
-			_resourceManager.getResourceRetriever(_RESOURCE_LOCATION);
+			_resourceManager.getResourceRetriever(
+				"com/liferay/portal/kernel/resource/dependencies" +
+					"/test.properties");
 
 		Assert.assertNotNull(resourceRetriever);
 		Assert.assertNotNull(resourceRetriever.getInputStream());
-	}
 
-	@Test
-	public void testLoadNonExistingResource() {
-		ResourceRetriever resourceRetriever =
-			_resourceManager.getResourceRetriever(
-				"resource-not-found.properties");
+		resourceRetriever = _resourceManager.getResourceRetriever(
+			"resource-not-found.properties");
 
 		Assert.assertNotNull(resourceRetriever);
 		Assert.assertNull(resourceRetriever.getInputStream());
 	}
-
-	private static final String _RESOURCE_LOCATION =
-		"com/liferay/portal/kernel/resource/dependencies/" +
-			"classpath-resource.properties";
 
 	private final ResourceManager _resourceManager =
 		new ClassLoaderResourceManager(
