@@ -1757,7 +1757,7 @@ public class StagingImpl implements Staging {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.kernel.lar.ExportImportDateUtil#updateLastPublishDate(
+	 *             ExportImportDateUtil#updateLastPublishDate(
 	 *             long, boolean, DateRange, Date)}
 	 */
 	@Deprecated
@@ -1772,7 +1772,7 @@ public class StagingImpl implements Staging {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.kernel.lar.ExportImportDateUtil#updateLastPublishDate(
+	 *             ExportImportDateUtil#updateLastPublishDate(
 	 *             String, PortletPreferences, DateRange, Date)}
 	 */
 	@Deprecated

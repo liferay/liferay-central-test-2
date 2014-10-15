@@ -175,10 +175,10 @@ public class PortletExporter {
 
 		Date originalStartDate = portletDataContext.getStartDate();
 
+		Date startDate = originalStartDate;
+
 		String range = MapUtil.getString(
 			portletDataContext.getParameterMap(), "range");
-
-		Date startDate = originalStartDate;
 
 		if (range.equals(ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE)) {
 			Date lastPublishDate = ExportImportDateUtil.getLastPublishDate(
