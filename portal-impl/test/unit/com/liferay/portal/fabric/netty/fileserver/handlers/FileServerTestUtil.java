@@ -71,6 +71,23 @@ public class FileServerTestUtil {
 	}
 
 	public static Path createFolderWithFiles(Path folder) throws IOException {
+		/**
+		 * folder
+		 *		|
+		 *		|->subFolder1
+		 *		|			|
+		 *		|			|->file1
+		 *		|			|->file2
+		 *		|
+		 *		|->subFolder2
+		 *		|			|
+		 *		|			|->file3
+		 *		|
+		 *		|->subFolder3
+		 *					|
+		 *					|->subFolder4
+		 */
+		
 		FileHelperUtil.delete(folder);
 
 		_paths.add(Files.createDirectories(folder));
