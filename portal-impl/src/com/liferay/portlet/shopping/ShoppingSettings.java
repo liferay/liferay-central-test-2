@@ -335,12 +335,12 @@ public class ShoppingSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
-		new ClassLoaderResourceManager(ShoppingSettings.class.getClassLoader());
-
 	private static final String[] _MULTI_VALUED_KEYS = {
 		"ccTypes", "insurance", "shipping"
 	};
+
+	private static final ResourceManager _resourceManager =
+		new ClassLoaderResourceManager(ShoppingSettings.class.getClassLoader());
 
 	static {
 		SettingsFactory settingsFactory =
@@ -348,7 +348,7 @@ public class ShoppingSettings {
 
 		settingsFactory.registerSettingsMetadata(
 			ShoppingConstants.SERVICE_NAME, _getFallbackKeys(),
-			_MULTI_VALUED_KEYS, __RESOURCE_MANAGER);
+			_MULTI_VALUED_KEYS, _resourceManager);
 	}
 
 	private TypedSettings _typedSettings;

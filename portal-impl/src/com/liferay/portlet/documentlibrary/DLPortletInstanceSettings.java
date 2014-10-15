@@ -182,10 +182,6 @@ public class DLPortletInstanceSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
-		new ClassLoaderResourceManager(
-			DLPortletInstanceSettings.class.getClassLoader());
-
 	private static final String[] _MIME_TYPES_DEFAULT = ArrayUtil.toStringArray(
 		DLUtil.getAllMediaGalleryMimeTypes());
 
@@ -194,22 +190,26 @@ public class DLPortletInstanceSettings {
 		"mimeTypes"
 	};
 
+	private static final ResourceManager _resourceManager =
+		new ClassLoaderResourceManager(
+			DLPortletInstanceSettings.class.getClassLoader());
+
 	static {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.DOCUMENT_LIBRARY, _getFallbackKeys(),
-			_MULTI_VALUED_KEYS, __RESOURCE_MANAGER);
+			_MULTI_VALUED_KEYS, _resourceManager);
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.DOCUMENT_LIBRARY_ADMIN, _getFallbackKeys(),
-			_MULTI_VALUED_KEYS, __RESOURCE_MANAGER);
+			_MULTI_VALUED_KEYS, _resourceManager);
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.DOCUMENT_LIBRARY_DISPLAY, _getFallbackKeys(),
-			_MULTI_VALUED_KEYS, __RESOURCE_MANAGER);
+			_MULTI_VALUED_KEYS, _resourceManager);
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.MEDIA_GALLERY_DISPLAY, _getFallbackKeys(),
-			_MULTI_VALUED_KEYS, __RESOURCE_MANAGER);
+			_MULTI_VALUED_KEYS, _resourceManager);
 	}
 
 	private final TypedSettings _typedSettings;

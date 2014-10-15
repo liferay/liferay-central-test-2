@@ -202,13 +202,13 @@ public class BookmarksSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
-		new ClassLoaderResourceManager(
-			BookmarksSettings.class.getClassLoader());
-
 	private static final String[] _MULTI_VALUED_KEYS = {
 		"entryColumns", "folderColumns"
 	};
+
+	private static final ResourceManager _resourceManager =
+		new ClassLoaderResourceManager(
+			BookmarksSettings.class.getClassLoader());
 
 	static {
 		SettingsFactory settingsFactory =
@@ -216,7 +216,7 @@ public class BookmarksSettings {
 
 		settingsFactory.registerSettingsMetadata(
 			BookmarksConstants.SERVICE_NAME, _getFallbackKeys(),
-			_MULTI_VALUED_KEYS, __RESOURCE_MANAGER);
+			_MULTI_VALUED_KEYS, _resourceManager);
 	}
 
 	private final TypedSettings _typedSettings;

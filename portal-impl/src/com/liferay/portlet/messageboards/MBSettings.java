@@ -262,10 +262,10 @@ public class MBSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
-		new ClassLoaderResourceManager(MBSettings.class.getClassLoader());
-
 	private static final String[] _MULTI_VALUED_KEYS = {"ranks"};
+
+	private static final ResourceManager _resourceManager =
+		new ClassLoaderResourceManager(MBSettings.class.getClassLoader());
 
 	static {
 		SettingsFactory settingsFactory =
@@ -273,7 +273,7 @@ public class MBSettings {
 
 		settingsFactory.registerSettingsMetadata(
 			MBConstants.SERVICE_NAME, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 	}
 
 	private final TypedSettings _typedSettings;

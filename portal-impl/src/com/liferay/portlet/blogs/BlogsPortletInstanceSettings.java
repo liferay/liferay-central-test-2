@@ -172,11 +172,11 @@ public class BlogsPortletInstanceSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
+	private static final String[] _MULTI_VALUED_KEYS = {};
+
+	private static final ResourceManager _resourceManager =
 		new ClassLoaderResourceManager(
 			BlogsPortletInstanceSettings.class.getClassLoader());
-
-	private static final String[] _MULTI_VALUED_KEYS = {};
 
 	static {
 		SettingsFactory settingsFactory =
@@ -184,10 +184,10 @@ public class BlogsPortletInstanceSettings {
 
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.BLOGS, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.BLOGS_ADMIN, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 	}
 
 	private final TypedSettings _typedSettings;

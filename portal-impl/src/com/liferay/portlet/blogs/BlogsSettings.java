@@ -152,10 +152,10 @@ public class BlogsSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
-		new ClassLoaderResourceManager(BlogsSettings.class.getClassLoader());
-
 	private static final String[] _MULTI_VALUED_KEYS = {};
+
+	private static final ResourceManager _resourceManager =
+		new ClassLoaderResourceManager(BlogsSettings.class.getClassLoader());
 
 	static {
 		SettingsFactory settingsFactory =
@@ -163,7 +163,7 @@ public class BlogsSettings {
 
 		settingsFactory.registerSettingsMetadata(
 			BlogsConstants.SERVICE_NAME, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 	}
 
 	private final TypedSettings _typedSettings;

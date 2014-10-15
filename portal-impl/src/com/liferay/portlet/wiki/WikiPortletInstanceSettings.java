@@ -164,13 +164,13 @@ public class WikiPortletInstanceSettings {
 		return fallbackKeys;
 	}
 
-	private static final ResourceManager __RESOURCE_MANAGER =
-		new ClassLoaderResourceManager(
-			WikiPortletInstanceSettings.class.getClassLoader());
-
 	private static final String[] _MULTI_VALUED_KEYS = {
 		"hiddenNodes", "visibleNodes"
 	};
+
+	private static final ResourceManager _resourceManager =
+		new ClassLoaderResourceManager(
+			WikiPortletInstanceSettings.class.getClassLoader());
 
 	static {
 		SettingsFactory settingsFactory =
@@ -178,13 +178,13 @@ public class WikiPortletInstanceSettings {
 
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.WIKI, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.WIKI_ADMIN, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 		settingsFactory.registerSettingsMetadata(
 			PortletKeys.WIKI_DISPLAY, _getFallbackKeys(), _MULTI_VALUED_KEYS,
-			__RESOURCE_MANAGER);
+			_resourceManager);
 	}
 
 	private final TypedSettings _typedSettings;
