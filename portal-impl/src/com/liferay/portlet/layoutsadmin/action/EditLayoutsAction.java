@@ -929,7 +929,7 @@ public class EditLayoutsAction extends PortletAction {
 
 				String layoutTemplateId = ParamUtil.getString(
 					uploadPortletRequest, "layoutTemplateId",
-					PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);;
+					PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
 
 				if (copyLayoutId > 0) {
 					try {
