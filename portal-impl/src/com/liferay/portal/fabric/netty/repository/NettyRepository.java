@@ -267,7 +267,7 @@ public class NettyRepository implements Repository {
 							_log.debug(
 								"Remote file " + remoteFilePath +
 									" is not modified, use cached local file " +
-									cachedLocalFilePath);
+										cachedLocalFilePath);
 						}
 
 						return cachedLocalFilePath;
