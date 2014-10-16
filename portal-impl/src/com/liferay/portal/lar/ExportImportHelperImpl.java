@@ -504,7 +504,6 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		File file = FileUtil.createTempFile("lar");
 		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
 			fileEntry.getFileEntryId(), fileEntry.getVersion(), false);
-
 		ZipReader zipReader = null;
 
 		ManifestSummary manifestSummary = null;
