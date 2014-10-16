@@ -1483,7 +1483,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Whether a tooltip is used. Default value is true.</description>
+			<description>Sets whether to use a tooltip. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>toolTip</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1581,7 +1581,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a icon list UI component from a list of child components.</description>
+		<description>Creates an icon list UI component from a list of child components.</description>
 		<name>icon-list</name>
 		<tag-class>com.liferay.taglib.ui.IconListTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1594,7 +1594,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a icon menu UI component from a list of child components.</description>
+		<description>Creates an icon menu UI component from a list of child components.</description>
 		<name>icon-menu</name>
 		<tag-class>com.liferay.taglib.ui.IconMenuTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1669,14 +1669,14 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Whether to show the arrow, indicating a popup dialog, next to the icon menu's trigger icon. The default value is <![CDATA[<code>true</code>]]>.</description>
+			<description>Sets whether to show an arrow, indicating a popup dialog, next to the icon menu's trigger icon. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>showArrow</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Whether to show the icon menu when there is only one icon. The default value is <![CDATA[<code>false</code>]]>.</description>
+			<description>Sets whether to show the icon menu when there is only one icon. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>showWhenSingleIcon</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2341,7 +2341,7 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the the text value for the search button's label. The default value is <![CDATA[<code>Search</code>]]>.</description>
+			<description>Sets the text value for the search button's label. The default value is <![CDATA[<code>Search</code>]]>.</description>
 			<name>buttonLabel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -4432,7 +4432,7 @@
 		<tag-class>com.liferay.taglib.ui.ToggleTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Whether the content is shown by default.</description>
+			<description>Sets whether to show content by default.</description>
 			<name>defaultShowContent</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -4444,7 +4444,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the text to display for the link to hide the content.</description> 
+			<description>Sets the text to display for the link to hide the content.</description>
 			<name>hideMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
