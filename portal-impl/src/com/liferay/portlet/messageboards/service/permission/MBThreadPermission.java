@@ -28,5 +28,4 @@ import com.liferay.portal.security.permission.ResourcePermissionChecker;
 )
 public class MBThreadPermission extends MBMessagePermission
 	implements BaseModelPermissionChecker, ResourcePermissionChecker {
-
 }
