@@ -877,7 +877,6 @@
 
 		<var name="key_pageName" value="${pageName}" />
 
-		<execute action="CPWebcontentAddwebcontentDisplaypageConfiguration#selectFrame" value1="relative=top" />
 		<execute action="CPWebcontentAddwebcontentDisplaypageConfiguration#selectFrame" locator-key1="DISPLAY_PAGE_CONFIGURATION_IFRAME" />
 		<execute action="CPWebcontentAddwebcontentDisplaypageConfiguration#assertClick" locator-key1="NAVIGATION_PUBLIC_PAGE" value1="Public Pages" />
 		<execute action="CPWebcontentAddwebcontentDisplaypageConfiguration#assertClick" locator-key1="PUBLIC_PAGES_SELECTION" value1="${pageName}" />
