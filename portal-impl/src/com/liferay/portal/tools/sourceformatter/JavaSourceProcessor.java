@@ -1808,7 +1808,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 					}
 					else if (lineLength > _MAX_LINE_LENGTH) {
 						if (!isExcluded(
-								_lineLengthExclusions, absolutePath, 
+								_lineLengthExclusions, absolutePath,
 								lineCount) &&
 							!isAnnotationParameter(content, trimmedLine)) {
 
