@@ -884,7 +884,7 @@
 		<property name="assetPublisher" ref="com.liferay.portlet.assetpublisher.util.AssetPublisher" />
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" class="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" />
-	<bean id ="com.liferay.portlet.blogs.service.permission.BlogsPermission" class="com.liferay.portlet.blogs.service.permission.BlogsPermission" />
+	<bean id="com.liferay.portlet.blogs.service.permission.BlogsPermission" class="com.liferay.portlet.blogs.service.permission.BlogsPermission" />
 	<bean id="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" class="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" />
 	<bean id="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" class="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" />
 	<bean id="com.liferay.portlet.bookmarks.service.permission.BookmarksPermission" class="com.liferay.portlet.bookmarks.service.permission.BookmarksPermission" />
