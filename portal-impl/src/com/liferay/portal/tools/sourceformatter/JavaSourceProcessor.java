@@ -1809,7 +1809,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 					else if (fileName.endsWith("Table.java") &&
 							 line.contains(" index IX_")) {
 					}
-					else if (lineLength > 80) {
+					else if (lineLength > _MAX_LINE_LENGTH) {
 						if (!isExcluded(
 								_lineLengthExclusions, absolutePath, 
 								lineCount) &&
@@ -1885,7 +1885,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 									StringPool.OPEN_PARENTHESIS);
 
 								if ((x != -1) &&
-									((getLineLength(previousLine) + x) < 80) &&
+									((getLineLength(previousLine) + x) <
+										_MAX_LINE_LENGTH) &&
 									(trimmedLine.endsWith(
 										StringPool.OPEN_PARENTHESIS) ||
 									 (trimmedLine.charAt(x + 1) !=
@@ -1960,7 +1961,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 								line, linePart, StringPool.BLANK);
 						}
 						else {
-							if (((linePart.length() + lineLength) <= 80) &&
+							if (((linePart.length() + lineLength) <=
+									_MAX_LINE_LENGTH) &&
 								(line.endsWith(StringPool.OPEN_CURLY_BRACE) ||
 								 line.endsWith(StringPool.SEMICOLON))) {
 
@@ -2094,7 +2096,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 		int previousLineLength = getLineLength(previousLine);
 
-		if ((line.length() + previousLineLength) < 80) {
+		if ((line.length() + previousLineLength) < _MAX_LINE_LENGTH) {
 			if (trimmedPreviousLine.startsWith("for ") &&
 				previousLine.endsWith(StringPool.COLON) &&
 				line.endsWith(StringPool.OPEN_CURLY_BRACE)) {
@@ -2192,7 +2194,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 					if ((previousChar != CharPool.CLOSE_PARENTHESIS) &&
 						(previousChar != CharPool.OPEN_PARENTHESIS) &&
 						(previousChar != CharPool.SPACE) &&
-						(previousLineLength + 1 + x) < 80) {
+						(previousLineLength + 1 + x) < _MAX_LINE_LENGTH) {
 
 						String linePart = line.substring(0, x + 1);
 
@@ -2218,7 +2220,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			int x = line.indexOf(StringPool.COMMA);
 
 			if (x != -1) {
-				while ((previousLineLength + 1 + x) < 80) {
+				while ((previousLineLength + 1 + x) < _MAX_LINE_LENGTH) {
 					String linePart = line.substring(0, x + 1);
 
 					if (isValidJavaParameter(linePart)) {
@@ -2249,7 +2251,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 					 !line.endsWith(StringPool.PERIOD) &&
 					 (!line.startsWith("new ") ||
 					  !line.endsWith(StringPool.OPEN_CURLY_BRACE)) &&
-					 ((line.length() + previousLineLength) < 80)) {
+					 ((line.length() + previousLineLength) <
+						 _MAX_LINE_LENGTH)) {
 
 				return new Tuple(previousLine + StringPool.SPACE + line);
 			}
@@ -2277,7 +2280,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			}
 		}
 
-		if ((line.length() + previousLineLength) > 80) {
+		if ((line.length() + previousLineLength) > _MAX_LINE_LENGTH) {
 			return null;
 		}
 
@@ -2571,6 +2574,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 		return line;
 	}
+
+	private static final int _MAX_LINE_LENGTH = 80;
 
 	private static Pattern _importsPattern = Pattern.compile(
 		"(^[ \t]*import\\s+.*;\n+)+", Pattern.MULTILINE);
