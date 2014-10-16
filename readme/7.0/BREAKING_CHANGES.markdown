@@ -540,37 +540,39 @@ system. Duplication can cause `ClassCastException`s.
 
 ---------------------------------------
 
-### The `convert.processes` Key is No Longer Declared in `portal.properties`, but Contributed through OSGi Modules
+### Convert Process Classes Are No Longer Specified via the `convert.processes` Portal Property, but Are Contributed as OSGi Modules
 - **Date:** 2014-Oct-09
 - **JIRA Ticket:** LPS-50604
 
 #### What changed?
 
-The class `com.liferay.portal.convert.ConvertProcess` has been renamed to 
-`com.liferay.portal.convert.BaseConvertProcess` while the former has been 
-converted to an interface.
+The implementation class `com.liferay.portal.convert.ConvertProcess` was renamed 
+`com.liferay.portal.convert.BaseConvertProcess`. An interface named
+`com.liferay.portal.convert.ConvertProcess` was created for it.
 
-The `convert.processes` key in `portal.properties` no longer exists and 
-`ConvertProcess` implementations must be registered as OSGi components.
+The `convert.processes` key was removed from `portal.properties`.
+Consequentially, `ConvertProcess` implementations must register as OSGi
+components.
 
 #### Who is affected?
 
-This will affect any implementations of `ConvertProcess`. Until version 6.2,
-this type of service could only be implemented with EXT plugins given that they
-needed to extend from a class inside `portal-impl`.
+This affects any implementations of the former `ConvertProcess` class, including
+`ConvertProcess` class implementations in EXT plugins. Until version 6.2, this
+type of service could only be implemented with an EXT plugin, given that the
+`ConvertProcess` class resided in `portal-impl`.
 
 #### How should I update my code?
 
-Developers should replace `extends com.liferay.portal.convert.ConvertProcess`
-with `extends com.liferay.portal.convert.BaseConvertProcess` and annotate the
-class with `@Component(service=ConvertProcess.class)`.
+You should replace `extends com.liferay.portal.convert.ConvertProcess` with
+`extends com.liferay.portal.convert.BaseConvertProcess` and annotate the class
+with `@Component(service=ConvertProcess.class)`.
 
-Then turn your EXT plugin into an OSGi bundle and deploy it to the portal.
-You should see your convert process in the configuration UI.
+Then turn your EXT plugin into an OSGi bundle and deploy it to the portal. You
+should see your convert process in the configuration UI.
 
 #### Why was this change made?
 
-This change is included in the ongoing strategy to modularize Liferay Portal
-by means of an OSGi container. 
+This change was made as a part of the ongoing strategy to modularize Liferay
+Portal by means of an OSGi container. 
 
 ---------------------------------------
