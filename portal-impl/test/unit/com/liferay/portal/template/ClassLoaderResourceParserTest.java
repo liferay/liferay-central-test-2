@@ -36,6 +36,7 @@ public class ClassLoaderResourceParserTest {
 	public static CodeCoverageAssertor codeCoverageAssertor =
 		new CodeCoverageAssertor();
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetURL() {
 		ClassLoaderResourceParser classLoaderResourceParser =
