@@ -44,7 +44,7 @@ public class PermissionCheckerUtil {
 			permissionChecker, classPK, actionId);
 
 		if (resource != null) {
-			resource.booleanValue();
+			return resource.booleanValue();
 		}
 
 		return null;
