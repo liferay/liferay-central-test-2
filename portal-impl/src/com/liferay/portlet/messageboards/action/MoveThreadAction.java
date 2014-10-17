@@ -124,7 +124,6 @@ public class MoveThreadAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
@@ -139,7 +138,8 @@ public class MoveThreadAction extends PortletAction {
 			String subject = ParamUtil.getString(actionRequest, "subject");
 			String body = ParamUtil.getString(actionRequest, "body");
 
-			MBSettings mbSettings = MBSettings.getInstance(groupId);
+			MBSettings mbSettings = MBSettings.getInstance(
+				themeDisplay.getScopeGroupId());
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				MBMessage.class.getName(), actionRequest);

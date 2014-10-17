@@ -126,7 +126,6 @@ public class SplitThreadAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		String splitThreadSubject = ParamUtil.getString(
@@ -149,7 +148,8 @@ public class SplitThreadAction extends PortletAction {
 			String subject = ParamUtil.getString(actionRequest, "subject");
 			String body = ParamUtil.getString(actionRequest, "body");
 
-			MBSettings mbSettings = MBSettings.getInstance(groupId);
+			MBSettings mbSettings = MBSettings.getInstance(
+				themeDisplay.getScopeGroupId());
 
 			String layoutFullURL = PortalUtil.getLayoutFullURL(themeDisplay);
 
