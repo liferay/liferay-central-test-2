@@ -90,4 +90,8 @@ public class PermissionCheckerUtil {
 		_serviceTrackerMap = ServiceTrackerCollections.singleValueMap(
 			ResourcePermissionChecker.class, "model.class.name");
 
+	static {
+		_serviceTrackerMap.open();
+	}
+
 }
