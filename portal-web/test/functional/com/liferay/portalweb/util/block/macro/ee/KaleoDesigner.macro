@@ -407,7 +407,7 @@
 		<var name="key_line" value="${line}" />
 
 		<execute action="Kaleodesigner#doubleClick" locator-key1="SOURCE_KALEO_XML_CONTENT_SPECIFIC_LINE" />
-		<execute action="Kaleodesigner#typeScreen" locator-key1="${kdsourceXML}" />
+		<execute action="Kaleodesigner#typeScreen" locator-key1="${kdSourceXML}" />
 	</command>
 
 	<command name="editWorkflowDefinitionTitleViaWorkflowCP">
@@ -665,7 +665,7 @@
 
 		<var name="key_line" value="${line}" />
 
-		<execute action="Kaleodesigner#assertTextEquals" locator-key1="SOURCE_KALEO_XML_CONTENT_SPECIFIC_LINE_CONTENT" value1="${kdsourceXML}" />
+		<execute action="Kaleodesigner#assertTextEquals" locator-key1="SOURCE_KALEO_XML_CONTENT_SPECIFIC_LINE_CONTENT" value1="${kdSourceXML}" />
 		<execute action="Kaleodesigner#pause" locator1="1000" />
 		<execute action="Kaleodesigner#assertClick" locator-key1="VIEW_TAB" value1="View" />
 		<execute action="Kaleodesigner#pause" locator1="1000" />

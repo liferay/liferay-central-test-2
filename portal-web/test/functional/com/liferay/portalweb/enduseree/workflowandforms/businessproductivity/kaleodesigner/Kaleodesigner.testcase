@@ -648,7 +648,7 @@
 		</execute>
 
 		<execute macro="KaleoDesigner#editSourceXML">
-			<var name="kdsourceXML"><![CDATA[<name>NAME EDIT]]></var>
+			<var name="kdSourceXML"><![CDATA[<name>NAME EDIT]]></var>
 			<var name="line" value="3" />
 		</execute>
 
@@ -669,7 +669,7 @@
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 
 		<execute macro="KaleoDesigner#viewSourceXMLLine">
-			<var name="kdsourceXML"><![CDATA[<name>NAME EDIT</name>]]></var>
+			<var name="kdSourceXML"><![CDATA[<name>NAME EDIT</name>]]></var>
 			<var name="line" value="3" />
 		</execute>
 	</command>
@@ -1017,7 +1017,7 @@
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 
 		<execute macro="KaleoDesigner#viewSourceXMLLine">
-			<var name="kdsourceXML" ><![CDATA[<![CDATA[The file sent by]]></var>
+			<var name="kdSourceXML" ><![CDATA[<![CDATA[The file sent by]]></var>
 			<var name="line" value="16" />
 		</execute>
 	</command>
@@ -1034,7 +1034,7 @@
 		</execute>
 
 		<execute macro="KaleoDesigner#editSourceXML">
-			<var name="kdsourceXML" value="INVALID" />
+			<var name="kdSourceXML" value="INVALID" />
 			<var name="line" value="6" />
 		</execute>
 
@@ -1042,7 +1042,7 @@
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 
 		<execute macro="KaleoDesigner#viewSourceXMLLine">
-			<var name="kdsourceXML" value="INVALID" />
+			<var name="kdSourceXML" value="INVALID" />
 			<var name="line" value="6" />
 		</execute>
 	</command>
@@ -1072,7 +1072,7 @@
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 
 		<execute macro="KaleoDesigner#viewSourceXMLLine">
-			<var name="kdsourceXML" ><![CDATA[<![CDATA[A file has been submitted.]]></var>
+			<var name="kdSourceXML" ><![CDATA[<![CDATA[A file has been submitted.]]></var>
 			<var name="line" value="15" />
 		</execute>
 
@@ -1101,7 +1101,7 @@
 		<execute macro="KaleoDesigner#viewSourceXMLTab" />
 
 		<execute macro="KaleoDesigner#viewSourceXMLLine">
-			<var name="kdsourceXML" ><![CDATA[<![CDATA[The file sent by]]></var>
+			<var name="kdSourceXML" ><![CDATA[<![CDATA[The file sent by]]></var>
 			<var name="line" value="16" />
 		</execute>
 	</command>
