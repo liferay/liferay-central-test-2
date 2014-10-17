@@ -300,6 +300,7 @@ public class NettyRepository implements Repository {
 		new ConcurrentHashMap<Path, Path>();
 	protected final Path repositoryPath;
 
-	private static final Log _log = LogFactoryUtil.getLog(NettyRepository.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		NettyRepository.class);
 
 }
