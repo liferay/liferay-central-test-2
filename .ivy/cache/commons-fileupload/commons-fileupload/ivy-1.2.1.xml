@@ -4,7 +4,7 @@
 		module="commons-fileupload"
 		revision="1.2.1"
 		status="release"
-		publication="20080211020752"
+		publication="20080210230752"
 	>
 		<description homepage="http://commons.apache.org/fileupload/">
 		The FileUpload component provides a simple yet flexible means of adding support for multipart

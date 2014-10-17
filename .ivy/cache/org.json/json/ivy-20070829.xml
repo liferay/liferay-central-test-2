@@ -4,7 +4,7 @@
 		module="json"
 		revision="20070829"
 		status="release"
-		publication="20071112022648"
+		publication="20071111232648"
 	>
 		<description homepage="http://www.json.org/java/index.html">
 		JSON (JavaScript Object Notation) is a lightweight data-interchange format.

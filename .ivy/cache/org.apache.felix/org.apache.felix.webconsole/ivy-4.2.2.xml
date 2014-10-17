@@ -4,7 +4,7 @@
 		module="org.apache.felix.webconsole"
 		revision="4.2.2"
 		status="release"
-		publication="20140128034112"
+		publication="20140128004112"
 	>
 		<description homepage="">
 		Web Based Management Console for OSGi Frameworks. See

@@ -4,7 +4,7 @@
 		module="commons-parent"
 		revision="7"
 		status="release"
-		publication="20141002134640"
+		publication="20080115122932"
 	>
 		<description homepage="http://commons.apache.org/" />
 		<m:properties__organization.logo>http://www.apache.org/images/asf_logo_wide.gif</m:properties__organization.logo>
