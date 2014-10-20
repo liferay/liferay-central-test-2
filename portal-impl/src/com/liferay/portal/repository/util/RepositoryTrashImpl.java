@@ -44,10 +44,10 @@ public class RepositoryTrashImpl implements RepositoryTrash {
 			TrashCapability.class);
 
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
-		Folder destinationFolder = localRepository.getFolder(newFolderId);
+		Folder newFolder = localRepository.getFolder(newFolderId);
 
 		return trashCapability.moveFileEntryFromTrash(
-			userId, fileEntry, destinationFolder, serviceContext);
+			userId, fileEntry, newFolder, serviceContext);
 	}
 
 	@Override
