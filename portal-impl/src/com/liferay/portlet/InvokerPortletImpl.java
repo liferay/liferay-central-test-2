@@ -146,9 +146,8 @@ public class InvokerPortletImpl
 
 		_initialize(
 			portletModel, portlet, portletConfig, portletContext,
-			checkAuthToken, facesPortlet, strutsPortlet, strutsBridgePortlet);
-
-		_invokerFilterContainer = invokerFilterContainer;
+			invokerFilterContainer, checkAuthToken, facesPortlet, strutsPortlet,
+			strutsBridgePortlet);
 	}
 
 	public InvokerPortletImpl(
@@ -177,10 +176,8 @@ public class InvokerPortletImpl
 			"org.apache.portals.bridges.struts.StrutsPortlet");
 
 		_initialize(
-			portletModel, portlet, null, portletContext, checkAuthToken,
-			facesPortlet, strutsPortlet, strutsBridgePortlet);
-
-		_invokerFilterContainer = invokerFilterContainer;
+			portletModel, portlet, null, portletContext, invokerFilterContainer,
+			checkAuthToken, facesPortlet, strutsPortlet, strutsBridgePortlet);
 	}
 
 	@Override
@@ -622,7 +619,8 @@ public class InvokerPortletImpl
 	private void _initialize(
 		com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 		PortletConfig portletConfig, PortletContext portletContext,
-		boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
+		InvokerFilterContainer invokerFilterContainer, boolean checkAuthToken,
+		boolean facesPortlet, boolean strutsPortlet,
 		boolean strutsBridgePortlet) {
 
 		_portletModel = portletModel;
@@ -630,6 +628,7 @@ public class InvokerPortletImpl
 		_liferayPortletConfig = (LiferayPortletConfig)portletConfig;
 		_portletId = _portletModel.getPortletId();
 		_liferayPortletContext = (LiferayPortletContext)portletContext;
+		_invokerFilterContainer = invokerFilterContainer;
 		_checkAuthToken = checkAuthToken;
 		_facesPortlet = facesPortlet;
 		_strutsPortlet = strutsPortlet;
@@ -649,7 +648,7 @@ public class InvokerPortletImpl
 	private boolean _checkAuthToken;
 	private Integer _expCache;
 	private boolean _facesPortlet;
-	private final InvokerFilterContainer _invokerFilterContainer;
+	private InvokerFilterContainer _invokerFilterContainer;
 	private LiferayPortletConfig _liferayPortletConfig;
 	private LiferayPortletContext _liferayPortletContext;
 	private Portlet _portlet;
