@@ -103,7 +103,7 @@ public class InvokerFilterContainerImpl
 				registry.registerService(
 					PortletFilter.class, portletFilter, properties);
 
-			_portletFilterRegistrations.add(serviceRegistration);
+			_serviceRegistrations.add(serviceRegistration);
 		}
 
 		ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
@@ -128,7 +128,7 @@ public class InvokerFilterContainerImpl
 					registry.registerService(
 						PortletFilter.class, portletFilter, properties);
 
-				_portletFilterRegistrations.add(serviceRegistration);
+				_serviceRegistrations.add(serviceRegistration);
 			}
 		}
 		finally {
@@ -138,13 +138,13 @@ public class InvokerFilterContainerImpl
 
 	@Override
 	public void close() {
-		for (ServiceRegistration<?> registration :
-				_portletFilterRegistrations) {
+		for (ServiceRegistration<?> serviceRegistration :
+				_serviceRegistrations) {
 
-			registration.unregister();
+			serviceRegistration.unregister();
 		}
 
-		_portletFilterRegistrations.clear();
+		_serviceRegistrations.clear();
 
 		_actionFilters.clear();
 		_eventFilters.clear();
@@ -180,7 +180,7 @@ public class InvokerFilterContainerImpl
 	private final List<EventFilter> _eventFilters =
 		new CopyOnWriteArrayList<>();
 	private final List<ServiceRegistration<PortletFilter>>
-		_portletFilterRegistrations = new CopyOnWriteArrayList<>();
+		_serviceRegistrations = new CopyOnWriteArrayList<>();
 	private final List<RenderFilter> _renderFilters =
 		new CopyOnWriteArrayList<>();
 	private final List<ResourceFilter> _resourceFilters =
