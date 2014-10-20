@@ -571,6 +571,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 	protected String checkStaticableFieldType(
 		JavaField javaField, Type javaFieldType, String content) {
 
+		String[] lines = StringUtil.splitLines(content);
+
 		String initializationExpression = StringUtil.trim(
 			javaField.getInitializationExpression());
 
@@ -579,8 +581,6 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 			return content;
 		}
-
-		String[] lines = StringUtil.splitLines(content);
 
 		String line = lines[javaField.getLineNumber() - 1];
 
