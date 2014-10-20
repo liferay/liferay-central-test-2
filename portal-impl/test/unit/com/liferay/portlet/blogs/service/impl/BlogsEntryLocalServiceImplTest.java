@@ -115,12 +115,12 @@ public class BlogsEntryLocalServiceImplTest {
 	}
 
 	@Mock
-	private final BlogsEntry _blogsEntry;
+	private BlogsEntry _blogsEntry;
 
 	private final BlogsEntryLocalServiceImpl _blogsEntryLocalServiceImpl =
 		new BlogsEntryLocalServiceImpl();
 
 	@Mock
-	private final CommentManager _commentManager;
+	private CommentManager _commentManager;
 
 }

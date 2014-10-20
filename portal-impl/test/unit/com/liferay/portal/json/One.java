@@ -32,7 +32,7 @@ public class One {
 	}
 
 	public long getNot() {
-		return _NOT;
+		return _not;
 	}
 
 	private static final String _FONE = "string";
@@ -40,6 +40,6 @@ public class One {
 	private static final int _FTWO = 173;
 
 	@JSON(include = false)
-	private static final long _NOT = -1;
+	private long _not = -1;
 
 }

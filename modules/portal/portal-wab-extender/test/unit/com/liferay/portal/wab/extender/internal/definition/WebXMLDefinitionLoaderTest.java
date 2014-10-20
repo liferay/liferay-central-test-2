@@ -112,10 +112,10 @@ public class WebXMLDefinitionLoaderTest {
 	};
 
 	@Mock
-	private final Servlet _servlet;
+	private Servlet _servlet;
 
 	@Mock
-	private final ServletContextListener _servletContextListener;
+	private ServletContextListener _servletContextListener;
 
 	private final WebXMLDefinitionLoader _webXMLDefinitionLoader;
 

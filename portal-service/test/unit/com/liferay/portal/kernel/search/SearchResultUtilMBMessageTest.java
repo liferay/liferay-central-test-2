@@ -188,9 +188,9 @@ public class SearchResultUtilMBMessageTest
 		MBMessage.class.getName();
 
 	@Mock
-	private final MBMessage _mbMessage;
+	private MBMessage _mbMessage;
 
 	@Mock
-	private final MBMessageLocalService _mbMessageLocalService;
+	private MBMessageLocalService _mbMessageLocalService;
 
 }

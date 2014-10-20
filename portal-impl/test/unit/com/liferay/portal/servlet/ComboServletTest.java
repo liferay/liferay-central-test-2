@@ -233,30 +233,30 @@ public class ComboServletTest extends PowerMockito {
 	}
 
 	@Mock
-	private final Portlet _adminPortlet;
+	private Portlet _adminPortlet;
 
 	@Mock
-	private final PortletApp _adminPortletApp;
+	private PortletApp _adminPortletApp;
 
 	private ComboServlet _comboServlet;
 	private MockHttpServletRequest _mockHttpServletRequest;
 	private MockServletContext _pluginServletContext;
 
 	@Mock
-	private final Portlet _portalPortlet;
+	private Portlet _portalPortlet;
 
 	@Mock
-	private final PortletApp _portalPortletApp;
+	private PortletApp _portalPortletApp;
 
 	private MockServletContext _portalServletContext;
 
 	@Mock
-	private final PortletLocalService _portletLocalService;
+	private PortletLocalService _portletLocalService;
 
 	@Mock
-	private final Portlet _portletUndeployed;
+	private Portlet _portletUndeployed;
 
 	@Rule
-	private final TemporaryFolder _temporaryFolder = new TemporaryFolder();
+	private TemporaryFolder _temporaryFolder = new TemporaryFolder();
 
 }

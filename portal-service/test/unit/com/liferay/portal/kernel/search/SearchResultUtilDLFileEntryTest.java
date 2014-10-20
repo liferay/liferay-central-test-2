@@ -344,9 +344,9 @@ public class SearchResultUtilDLFileEntryTest
 		DLFileEntry.class.getName();
 
 	@Mock
-	private final DLAppLocalService _dlAppLocalService;
+	private DLAppLocalService _dlAppLocalService;
 
 	@Mock
-	private final FileEntry _fileEntry;
+	private FileEntry _fileEntry;
 
 }

@@ -53,7 +53,7 @@ public class DestinationManagerTest {
 	}
 
 	@Mock
-	private final Destination _destination;
+	private Destination _destination;
 
 	private MBeanServer _mBeanServer;
 

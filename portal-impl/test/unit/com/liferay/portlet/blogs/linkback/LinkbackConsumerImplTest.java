@@ -158,10 +158,10 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 	}
 
 	@Mock
-	private final CommentManager _commentManager;
+	private CommentManager _commentManager;
 
 	@Mock
-	private final Http _http;
+	private Http _http;
 
 	private LinkbackConsumerImpl _linkbackConsumer;
 

@@ -656,27 +656,27 @@ public class PingbackMethodImplTest extends PowerMockito {
 	private static final long _USER_ID = RandomTestUtil.randomLong();
 
 	@Mock
-	private final BlogsEntry _blogsEntry;
+	private BlogsEntry _blogsEntry;
 
 	@Mock
-	private final BlogsEntryLocalService _blogsEntryLocalService;
+	private BlogsEntryLocalService _blogsEntryLocalService;
 
 	@Mock
-	private final CommentManager _commentManager;
+	private CommentManager _commentManager;
 
 	@Mock
-	private final FriendlyURLMapper _friendlyURLMapper;
+	private FriendlyURLMapper _friendlyURLMapper;
 
 	@Mock
-	private final Http _http;
+	private Http _http;
 
 	@Mock
-	private final Language _language;
+	private Language _language;
 
 	@Mock
-	private final Portal _portal;
+	private Portal _portal;
 
 	@Mock
-	private final XmlRpc _xmlRpc;
+	private XmlRpc _xmlRpc;
 
 }
