@@ -95,9 +95,9 @@ public class ViewArticleContentAction extends Action {
 					uploadServletRequest, "description");
 				String type = ParamUtil.getString(uploadServletRequest, "type");
 				String ddmStructureKey = ParamUtil.getString(
-					uploadServletRequest, "structureId");
+					uploadServletRequest, "ddmStructureKey");
 				String ddmTemplateKey = ParamUtil.getString(
-					uploadServletRequest, "templateId");
+					uploadServletRequest, "ddmTemplateKey");
 
 				Date now = new Date();
 

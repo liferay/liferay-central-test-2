@@ -162,7 +162,8 @@ public class GetArticleAction extends Action {
 				url =
 					themeDisplay.getPathMain() +
 						"/journal/get_template?groupId=" +
-							article.getGroupId() + "&templateId=" + templateId;
+							article.getGroupId() + "&templateId=" +
+								ddmTemplateKey;
 
 				arguments.clear();
 
