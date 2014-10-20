@@ -251,19 +251,10 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 			auditedModel.getCompanyId());
 
 		if (_log.isWarnEnabled()) {
-			StringBundler sb = new StringBundler(9);
-
-			sb.append("Using default user (userId=");
-			sb.append(defaultUser.getUserId());
-			sb.append(", companyId=");
-			sb.append(defaultUser.getCompanyId());
-			sb.append(") for model ");
-			sb.append(auditedModel.getModelClassName());
-			sb.append(" with primary key ");
-			sb.append(auditedModel.getPrimaryKeyObj());
-			sb.append(StringPool.PERIOD);
-
-			_log.warn(sb.toString());
+			_log.warn(
+				"Using default user " + defaultUser.getUserId() +
+					" for audited model " + auditedModel.getModelClassName() +
+						" with primary key " + auditedModel.getPrimaryKeyObj());
 		}
 
 		return defaultUser.getUserId();
