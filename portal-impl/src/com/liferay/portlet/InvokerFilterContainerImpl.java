@@ -179,12 +179,12 @@ public class InvokerFilterContainerImpl
 		new CopyOnWriteArrayList<>();
 	private final List<EventFilter> _eventFilters =
 		new CopyOnWriteArrayList<>();
-	private final List<ServiceRegistration<PortletFilter>>
-		_serviceRegistrations = new CopyOnWriteArrayList<>();
 	private final List<RenderFilter> _renderFilters =
 		new CopyOnWriteArrayList<>();
 	private final List<ResourceFilter> _resourceFilters =
 		new CopyOnWriteArrayList<>();
+	private final List<ServiceRegistration<PortletFilter>>
+		_serviceRegistrations = new CopyOnWriteArrayList<>();
 
 	private class PortletFilterServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<PortletFilter, PortletFilter> {

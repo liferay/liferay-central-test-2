@@ -140,8 +140,8 @@ public class InvokerPortletImpl
 	public InvokerPortletImpl(
 		com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 		PortletConfig portletConfig, PortletContext portletContext,
-		InvokerFilterContainer invokerFilterContainer,
-		boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
+		InvokerFilterContainer invokerFilterContainer, boolean checkAuthToken,
+		boolean facesPortlet, boolean strutsPortlet,
 		boolean strutsBridgePortlet) {
 
 		_initialize(
