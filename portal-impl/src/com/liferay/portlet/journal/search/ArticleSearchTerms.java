@@ -32,12 +32,12 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 
 		articleId = DAOParamUtil.getString(portletRequest, ARTICLE_ID);
 		content = DAOParamUtil.getString(portletRequest, CONTENT);
-		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
-		status = ParamUtil.getInteger(portletRequest, STATUS);
 		ddmStructureKey = DAOParamUtil.getString(
 			portletRequest, DDM_STRUCTURE_KEY);
 		ddmTemplateKey = DAOParamUtil.getString(
 			portletRequest, DDM_TEMPLATE_KEY);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
+		status = ParamUtil.getInteger(portletRequest, STATUS);
 		title = DAOParamUtil.getString(portletRequest, TITLE);
 		type = DAOParamUtil.getString(portletRequest, TYPE);
 		version = ParamUtil.getDouble(portletRequest, VERSION);

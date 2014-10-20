@@ -72,13 +72,13 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
 		content = ParamUtil.getString(portletRequest, CONTENT);
+		ddmStructureKey = ParamUtil.getString(
+			portletRequest, DDM_STRUCTURE_KEY);
+		ddmTemplateKey = ParamUtil.getString(portletRequest, DDM_TEMPLATE_KEY);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 		folderId = ParamUtil.getLong(portletRequest, FOLDER_ID);
 		navigation = ParamUtil.getString(portletRequest, NAVIGATION);
 		status = ParamUtil.getInteger(portletRequest, STATUS);
-		ddmStructureKey = ParamUtil.getString(
-			portletRequest, DDM_STRUCTURE_KEY);
-		ddmTemplateKey = ParamUtil.getString(portletRequest, DDM_TEMPLATE_KEY);
 		title = ParamUtil.getString(portletRequest, TITLE);
 		type = ParamUtil.getString(portletRequest, TYPE);
 		version = ParamUtil.getDouble(portletRequest, VERSION);

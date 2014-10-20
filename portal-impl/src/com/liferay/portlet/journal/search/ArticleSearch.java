@@ -96,6 +96,12 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
+			ArticleDisplayTerms.DDM_STRUCTURE_KEY,
+			displayTerms.getDDMStructureKey());
+		iteratorURL.setParameter(
+			ArticleDisplayTerms.DDM_TEMPLATE_KEY,
+			displayTerms.getDDMTemplateKey());
+		iteratorURL.setParameter(
 			ArticleDisplayTerms.FOLDER_ID,
 			String.valueOf(displayTerms.getFolderId()));
 		iteratorURL.setParameter(
@@ -106,12 +112,6 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.STATUS,
 			String.valueOf(displayTerms.getStatus()));
-		iteratorURL.setParameter(
-			ArticleDisplayTerms.DDM_STRUCTURE_KEY,
-			displayTerms.getDDMStructureKey());
-		iteratorURL.setParameter(
-			ArticleDisplayTerms.DDM_TEMPLATE_KEY,
-			displayTerms.getDDMTemplateKey());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.TITLE, displayTerms.getTitle());
 		iteratorURL.setParameter(
