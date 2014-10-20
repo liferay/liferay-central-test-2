@@ -39,9 +39,6 @@ public class InvokerPortletFactoryImpl implements InvokerPortletFactory {
 				invokerFilterContainer, checkAuthToken, facesPortlet,
 				strutsPortlet, strutsBridgePortlet);
 		}
-		catch (PortletException pe) {
-			throw pe;
-		}
 		catch (Exception e) {
 			throw new PortletException(e);
 		}
@@ -57,9 +54,6 @@ public class InvokerPortletFactoryImpl implements InvokerPortletFactory {
 		try {
 			return new InvokerPortletImpl(
 				portletModel, portlet, portletContext, invokerFilterContainer);
-		}
-		catch (PortletException pe) {
-			throw pe;
 		}
 		catch (Exception e) {
 			throw new PortletException(e);

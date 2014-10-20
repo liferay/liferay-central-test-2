@@ -138,12 +138,11 @@ public class InvokerPortletImpl
 	}
 
 	public InvokerPortletImpl(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletConfig portletConfig, PortletContext portletContext,
-			InvokerFilterContainer invokerFilterContainer,
-			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
-			boolean strutsBridgePortlet)
-		throws PortletException {
+		com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+		PortletConfig portletConfig, PortletContext portletContext,
+		InvokerFilterContainer invokerFilterContainer,
+		boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
+		boolean strutsBridgePortlet) {
 
 		_initialize(
 			portletModel, portlet, portletConfig, portletContext,
@@ -153,10 +152,9 @@ public class InvokerPortletImpl
 	}
 
 	public InvokerPortletImpl(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletContext portletContext,
-			InvokerFilterContainer invokerFilterContainer)
-		throws PortletException {
+		com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+		PortletContext portletContext,
+		InvokerFilterContainer invokerFilterContainer) {
 
 		Map<String, String> initParams = portletModel.getInitParams();
 
@@ -479,7 +477,7 @@ public class InvokerPortletImpl
 	 */
 	@Deprecated
 	@Override
-	public void setPortletFilters() throws PortletException {
+	public void setPortletFilters() {
 	}
 
 	protected void invoke(
@@ -622,11 +620,10 @@ public class InvokerPortletImpl
 	}
 
 	private void _initialize(
-			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletConfig portletConfig, PortletContext portletContext,
-			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
-			boolean strutsBridgePortlet)
-		throws PortletException {
+		com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+		PortletConfig portletConfig, PortletContext portletContext,
+		boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
+		boolean strutsBridgePortlet) {
 
 		_portletModel = portletModel;
 		_portlet = portlet;
