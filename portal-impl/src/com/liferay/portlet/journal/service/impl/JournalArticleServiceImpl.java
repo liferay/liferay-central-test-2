@@ -1818,8 +1818,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
 		String articleId, Double version, String title, String description,
 		String content, String ddmStructureKey, String ddmTemplateKey,
-		Date displayDateGT, Date displayDateLT,
-		int status, Date reviewDate, boolean andOperator) {
+		Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
+		boolean andOperator) {
 
 		return journalArticleFinder.filterCountByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
@@ -1880,8 +1880,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
 		String articleId, Double version, String title, String description,
 		String content, String[] ddmStructureKeys, String[] ddmTemplateKeys,
-		Date displayDateGT, Date displayDateLT,
-		int status, Date reviewDate, boolean andOperator) {
+		Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
+		boolean andOperator) {
 
 		return journalArticleFinder.filterCountByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,

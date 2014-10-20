@@ -418,8 +418,7 @@ public class JournalArticleFinderImpl
 		String articleId, Double version, String title, String description,
 		String content, String[] ddmStructureKeys, String[] ddmTemplateKeys,
 		Date displayDateGT, Date displayDateLT, Date reviewDate,
-		boolean andOperator,
-		QueryDefinition<JournalArticle> queryDefinition) {
+		boolean andOperator, QueryDefinition<JournalArticle> queryDefinition) {
 
 		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
 		String[] titles = CustomSQLUtil.keywords(title);
@@ -639,8 +638,7 @@ public class JournalArticleFinderImpl
 		String articleId, Double version, String title, String description,
 		String content, String ddmStructureKey, String ddmTemplateKey,
 		Date displayDateGT, Date displayDateLT, Date reviewDate,
-		boolean andOperator,
-		QueryDefinition<JournalArticle> queryDefinition) {
+		boolean andOperator, QueryDefinition<JournalArticle> queryDefinition) {
 
 		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
 		String[] titles = CustomSQLUtil.keywords(title);
@@ -664,8 +662,7 @@ public class JournalArticleFinderImpl
 		String articleId, Double version, String title, String description,
 		String content, String[] ddmStructureKeys, String[] ddmTemplateKeys,
 		Date displayDateGT, Date displayDateLT, Date reviewDate,
-		boolean andOperator,
-		QueryDefinition<JournalArticle> queryDefinition) {
+		boolean andOperator, QueryDefinition<JournalArticle> queryDefinition) {
 
 		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
 		String[] titles = CustomSQLUtil.keywords(title);

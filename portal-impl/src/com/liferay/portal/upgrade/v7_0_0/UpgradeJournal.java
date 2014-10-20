@@ -746,7 +746,7 @@ public class UpgradeJournal extends UpgradeDynamicDataMapping {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UpgradeJournal.class);
+	private static final Log _log = LogFactoryUtil.getLog(UpgradeJournal.class);
 
 	private Map<String, Map<String, Long>> _bitwiseValues =
 		new HashMap<String, Map<String, Long>>();

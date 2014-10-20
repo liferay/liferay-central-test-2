@@ -263,7 +263,8 @@ public class LanguageResources {
 		return oldLanguageMap;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LanguageResources.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		LanguageResources.class);
 
 	private static final Locale _blankLocale = new Locale(StringPool.BLANK);
 	private static String[] _configNames;
