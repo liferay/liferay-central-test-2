@@ -3096,9 +3096,9 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DS(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DDMSK(
 		long groupId, java.lang.String DDMStructureKey) {
-		return getPersistence().findByG_DS(groupId, DDMStructureKey);
+		return getPersistence().findByG_DDMSK(groupId, DDMStructureKey);
 	}
 
 	/**
@@ -3114,9 +3114,10 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DS(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DDMSK(
 		long groupId, java.lang.String DDMStructureKey, int start, int end) {
-		return getPersistence().findByG_DS(groupId, DDMStructureKey, start, end);
+		return getPersistence()
+				   .findByG_DDMSK(groupId, DDMStructureKey, start, end);
 	}
 
 	/**
@@ -3133,11 +3134,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DS(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DDMSK(
 		long groupId, java.lang.String DDMStructureKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .findByG_DS(groupId, DDMStructureKey, start, end,
+				   .findByG_DDMSK(groupId, DDMStructureKey, start, end,
 			orderByComparator);
 	}
 
@@ -3150,12 +3151,13 @@ public class JournalArticleUtil {
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_DS_First(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_DDMSK_First(
 		long groupId, java.lang.String DDMStructureKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_DS_First(groupId, DDMStructureKey, orderByComparator);
+				   .findByG_DDMSK_First(groupId, DDMStructureKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3166,11 +3168,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DS_First(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DDMSK_First(
 		long groupId, java.lang.String DDMStructureKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_DS_First(groupId, DDMStructureKey,
+				   .fetchByG_DDMSK_First(groupId, DDMStructureKey,
 			orderByComparator);
 	}
 
@@ -3183,12 +3185,13 @@ public class JournalArticleUtil {
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_DS_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_DDMSK_Last(
 		long groupId, java.lang.String DDMStructureKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_DS_Last(groupId, DDMStructureKey, orderByComparator);
+				   .findByG_DDMSK_Last(groupId, DDMStructureKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3199,11 +3202,12 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DS_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DDMSK_Last(
 		long groupId, java.lang.String DDMStructureKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_DS_Last(groupId, DDMStructureKey, orderByComparator);
+				   .fetchByG_DDMSK_Last(groupId, DDMStructureKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3216,12 +3220,12 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_DS_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_DDMSK_PrevAndNext(
 		long id, long groupId, java.lang.String DDMStructureKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_DS_PrevAndNext(id, groupId, DDMStructureKey,
+				   .findByG_DDMSK_PrevAndNext(id, groupId, DDMStructureKey,
 			orderByComparator);
 	}
 
@@ -3232,9 +3236,9 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DS(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DDMSK(
 		long groupId, java.lang.String DDMStructureKey) {
-		return getPersistence().filterFindByG_DS(groupId, DDMStructureKey);
+		return getPersistence().filterFindByG_DDMSK(groupId, DDMStructureKey);
 	}
 
 	/**
@@ -3250,10 +3254,10 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DS(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DDMSK(
 		long groupId, java.lang.String DDMStructureKey, int start, int end) {
 		return getPersistence()
-				   .filterFindByG_DS(groupId, DDMStructureKey, start, end);
+				   .filterFindByG_DDMSK(groupId, DDMStructureKey, start, end);
 	}
 
 	/**
@@ -3270,11 +3274,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DS(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DDMSK(
 		long groupId, java.lang.String DDMStructureKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .filterFindByG_DS(groupId, DDMStructureKey, start, end,
+				   .filterFindByG_DDMSK(groupId, DDMStructureKey, start, end,
 			orderByComparator);
 	}
 
@@ -3288,13 +3292,13 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_DS_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_DDMSK_PrevAndNext(
 		long id, long groupId, java.lang.String DDMStructureKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .filterFindByG_DS_PrevAndNext(id, groupId, DDMStructureKey,
-			orderByComparator);
+				   .filterFindByG_DDMSK_PrevAndNext(id, groupId,
+			DDMStructureKey, orderByComparator);
 	}
 
 	/**
@@ -3303,9 +3307,9 @@ public class JournalArticleUtil {
 	* @param groupId the group ID
 	* @param DDMStructureKey the d d m structure key
 	*/
-	public static void removeByG_DS(long groupId,
+	public static void removeByG_DDMSK(long groupId,
 		java.lang.String DDMStructureKey) {
-		getPersistence().removeByG_DS(groupId, DDMStructureKey);
+		getPersistence().removeByG_DDMSK(groupId, DDMStructureKey);
 	}
 
 	/**
@@ -3315,8 +3319,9 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the number of matching journal articles
 	*/
-	public static int countByG_DS(long groupId, java.lang.String DDMStructureKey) {
-		return getPersistence().countByG_DS(groupId, DDMStructureKey);
+	public static int countByG_DDMSK(long groupId,
+		java.lang.String DDMStructureKey) {
+		return getPersistence().countByG_DDMSK(groupId, DDMStructureKey);
 	}
 
 	/**
@@ -3326,9 +3331,9 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the number of matching journal articles that the user has permission to view
 	*/
-	public static int filterCountByG_DS(long groupId,
+	public static int filterCountByG_DDMSK(long groupId,
 		java.lang.String DDMStructureKey) {
-		return getPersistence().filterCountByG_DS(groupId, DDMStructureKey);
+		return getPersistence().filterCountByG_DDMSK(groupId, DDMStructureKey);
 	}
 
 	/**
@@ -3338,9 +3343,9 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DDMTK(
 		long groupId, java.lang.String DDMTemplateKey) {
-		return getPersistence().findByG_DT(groupId, DDMTemplateKey);
+		return getPersistence().findByG_DDMTK(groupId, DDMTemplateKey);
 	}
 
 	/**
@@ -3356,9 +3361,10 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DDMTK(
 		long groupId, java.lang.String DDMTemplateKey, int start, int end) {
-		return getPersistence().findByG_DT(groupId, DDMTemplateKey, start, end);
+		return getPersistence()
+				   .findByG_DDMTK(groupId, DDMTemplateKey, start, end);
 	}
 
 	/**
@@ -3375,11 +3381,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_DDMTK(
 		long groupId, java.lang.String DDMTemplateKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .findByG_DT(groupId, DDMTemplateKey, start, end,
+				   .findByG_DDMTK(groupId, DDMTemplateKey, start, end,
 			orderByComparator);
 	}
 
@@ -3392,12 +3398,13 @@ public class JournalArticleUtil {
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_DT_First(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_DDMTK_First(
 		long groupId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_DT_First(groupId, DDMTemplateKey, orderByComparator);
+				   .findByG_DDMTK_First(groupId, DDMTemplateKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3408,11 +3415,12 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DT_First(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DDMTK_First(
 		long groupId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_DT_First(groupId, DDMTemplateKey, orderByComparator);
+				   .fetchByG_DDMTK_First(groupId, DDMTemplateKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3424,12 +3432,13 @@ public class JournalArticleUtil {
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_DT_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_DDMTK_Last(
 		long groupId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_DT_Last(groupId, DDMTemplateKey, orderByComparator);
+				   .findByG_DDMTK_Last(groupId, DDMTemplateKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3440,11 +3449,12 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DT_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_DDMTK_Last(
 		long groupId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_DT_Last(groupId, DDMTemplateKey, orderByComparator);
+				   .fetchByG_DDMTK_Last(groupId, DDMTemplateKey,
+			orderByComparator);
 	}
 
 	/**
@@ -3457,12 +3467,12 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_DT_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_DDMTK_PrevAndNext(
 		long id, long groupId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_DT_PrevAndNext(id, groupId, DDMTemplateKey,
+				   .findByG_DDMTK_PrevAndNext(id, groupId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -3473,9 +3483,9 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DDMTK(
 		long groupId, java.lang.String DDMTemplateKey) {
-		return getPersistence().filterFindByG_DT(groupId, DDMTemplateKey);
+		return getPersistence().filterFindByG_DDMTK(groupId, DDMTemplateKey);
 	}
 
 	/**
@@ -3491,10 +3501,10 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DDMTK(
 		long groupId, java.lang.String DDMTemplateKey, int start, int end) {
 		return getPersistence()
-				   .filterFindByG_DT(groupId, DDMTemplateKey, start, end);
+				   .filterFindByG_DDMTK(groupId, DDMTemplateKey, start, end);
 	}
 
 	/**
@@ -3511,11 +3521,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_DDMTK(
 		long groupId, java.lang.String DDMTemplateKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .filterFindByG_DT(groupId, DDMTemplateKey, start, end,
+				   .filterFindByG_DDMTK(groupId, DDMTemplateKey, start, end,
 			orderByComparator);
 	}
 
@@ -3529,13 +3539,13 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_DT_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_DDMTK_PrevAndNext(
 		long id, long groupId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .filterFindByG_DT_PrevAndNext(id, groupId, DDMTemplateKey,
-			orderByComparator);
+				   .filterFindByG_DDMTK_PrevAndNext(id, groupId,
+			DDMTemplateKey, orderByComparator);
 	}
 
 	/**
@@ -3544,9 +3554,9 @@ public class JournalArticleUtil {
 	* @param groupId the group ID
 	* @param DDMTemplateKey the d d m template key
 	*/
-	public static void removeByG_DT(long groupId,
+	public static void removeByG_DDMTK(long groupId,
 		java.lang.String DDMTemplateKey) {
-		getPersistence().removeByG_DT(groupId, DDMTemplateKey);
+		getPersistence().removeByG_DDMTK(groupId, DDMTemplateKey);
 	}
 
 	/**
@@ -3556,8 +3566,9 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the number of matching journal articles
 	*/
-	public static int countByG_DT(long groupId, java.lang.String DDMTemplateKey) {
-		return getPersistence().countByG_DT(groupId, DDMTemplateKey);
+	public static int countByG_DDMTK(long groupId,
+		java.lang.String DDMTemplateKey) {
+		return getPersistence().countByG_DDMTK(groupId, DDMTemplateKey);
 	}
 
 	/**
@@ -3567,9 +3578,9 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the number of matching journal articles that the user has permission to view
 	*/
-	public static int filterCountByG_DT(long groupId,
+	public static int filterCountByG_DDMTK(long groupId,
 		java.lang.String DDMTemplateKey) {
-		return getPersistence().filterCountByG_DT(groupId, DDMTemplateKey);
+		return getPersistence().filterCountByG_DDMTK(groupId, DDMTemplateKey);
 	}
 
 	/**
@@ -4519,9 +4530,9 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_DDMTK(
 		long classNameId, java.lang.String DDMTemplateKey) {
-		return getPersistence().findByC_DT(classNameId, DDMTemplateKey);
+		return getPersistence().findByC_DDMTK(classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -4537,10 +4548,10 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_DDMTK(
 		long classNameId, java.lang.String DDMTemplateKey, int start, int end) {
 		return getPersistence()
-				   .findByC_DT(classNameId, DDMTemplateKey, start, end);
+				   .findByC_DDMTK(classNameId, DDMTemplateKey, start, end);
 	}
 
 	/**
@@ -4557,11 +4568,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_DDMTK(
 		long classNameId, java.lang.String DDMTemplateKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .findByC_DT(classNameId, DDMTemplateKey, start, end,
+				   .findByC_DDMTK(classNameId, DDMTemplateKey, start, end,
 			orderByComparator);
 	}
 
@@ -4574,12 +4585,12 @@ public class JournalArticleUtil {
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByC_DT_First(
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_DDMTK_First(
 		long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByC_DT_First(classNameId, DDMTemplateKey,
+				   .findByC_DDMTK_First(classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -4591,11 +4602,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByC_DT_First(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByC_DDMTK_First(
 		long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByC_DT_First(classNameId, DDMTemplateKey,
+				   .fetchByC_DDMTK_First(classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -4608,12 +4619,12 @@ public class JournalArticleUtil {
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByC_DT_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_DDMTK_Last(
 		long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByC_DT_Last(classNameId, DDMTemplateKey,
+				   .findByC_DDMTK_Last(classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -4625,11 +4636,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByC_DT_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByC_DDMTK_Last(
 		long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByC_DT_Last(classNameId, DDMTemplateKey,
+				   .fetchByC_DDMTK_Last(classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -4643,12 +4654,12 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_DT_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_DDMTK_PrevAndNext(
 		long id, long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByC_DT_PrevAndNext(id, classNameId, DDMTemplateKey,
+				   .findByC_DDMTK_PrevAndNext(id, classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -4658,9 +4669,9 @@ public class JournalArticleUtil {
 	* @param classNameId the class name ID
 	* @param DDMTemplateKey the d d m template key
 	*/
-	public static void removeByC_DT(long classNameId,
+	public static void removeByC_DDMTK(long classNameId,
 		java.lang.String DDMTemplateKey) {
-		getPersistence().removeByC_DT(classNameId, DDMTemplateKey);
+		getPersistence().removeByC_DDMTK(classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -4670,9 +4681,9 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the number of matching journal articles
 	*/
-	public static int countByC_DT(long classNameId,
+	public static int countByC_DDMTK(long classNameId,
 		java.lang.String DDMTemplateKey) {
-		return getPersistence().countByC_DT(classNameId, DDMTemplateKey);
+		return getPersistence().countByC_DDMTK(classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -6012,11 +6023,11 @@ public class JournalArticleUtil {
 	* @return the matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_DS(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_DDMSK(
 		long groupId, long classNameId, java.lang.String DDMStructureKey)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_C_DS(groupId, classNameId, DDMStructureKey);
+				   .findByG_C_DDMSK(groupId, classNameId, DDMStructureKey);
 	}
 
 	/**
@@ -6027,10 +6038,10 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DS(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DDMSK(
 		long groupId, long classNameId, java.lang.String DDMStructureKey) {
 		return getPersistence()
-				   .fetchByG_C_DS(groupId, classNameId, DDMStructureKey);
+				   .fetchByG_C_DDMSK(groupId, classNameId, DDMStructureKey);
 	}
 
 	/**
@@ -6042,11 +6053,11 @@ public class JournalArticleUtil {
 	* @param retrieveFromCache whether to use the finder cache
 	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DS(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DDMSK(
 		long groupId, long classNameId, java.lang.String DDMStructureKey,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .fetchByG_C_DS(groupId, classNameId, DDMStructureKey,
+				   .fetchByG_C_DDMSK(groupId, classNameId, DDMStructureKey,
 			retrieveFromCache);
 	}
 
@@ -6058,11 +6069,11 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the journal article that was removed
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle removeByG_C_DS(
+	public static com.liferay.portlet.journal.model.JournalArticle removeByG_C_DDMSK(
 		long groupId, long classNameId, java.lang.String DDMStructureKey)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .removeByG_C_DS(groupId, classNameId, DDMStructureKey);
+				   .removeByG_C_DDMSK(groupId, classNameId, DDMStructureKey);
 	}
 
 	/**
@@ -6073,10 +6084,10 @@ public class JournalArticleUtil {
 	* @param DDMStructureKey the d d m structure key
 	* @return the number of matching journal articles
 	*/
-	public static int countByG_C_DS(long groupId, long classNameId,
+	public static int countByG_C_DDMSK(long groupId, long classNameId,
 		java.lang.String DDMStructureKey) {
 		return getPersistence()
-				   .countByG_C_DS(groupId, classNameId, DDMStructureKey);
+				   .countByG_C_DDMSK(groupId, classNameId, DDMStructureKey);
 	}
 
 	/**
@@ -6087,10 +6098,10 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_DDMTK(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey) {
 		return getPersistence()
-				   .findByG_C_DT(groupId, classNameId, DDMTemplateKey);
+				   .findByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -6107,12 +6118,12 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_DDMTK(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		int start, int end) {
 		return getPersistence()
-				   .findByG_C_DT(groupId, classNameId, DDMTemplateKey, start,
-			end);
+				   .findByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
+			start, end);
 	}
 
 	/**
@@ -6130,13 +6141,13 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_DDMTK(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .findByG_C_DT(groupId, classNameId, DDMTemplateKey, start,
-			end, orderByComparator);
+				   .findByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
+			start, end, orderByComparator);
 	}
 
 	/**
@@ -6149,12 +6160,12 @@ public class JournalArticleUtil {
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_DT_First(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_DDMTK_First(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_C_DT_First(groupId, classNameId, DDMTemplateKey,
+				   .findByG_C_DDMTK_First(groupId, classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -6167,12 +6178,12 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DT_First(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DDMTK_First(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_C_DT_First(groupId, classNameId, DDMTemplateKey,
-			orderByComparator);
+				   .fetchByG_C_DDMTK_First(groupId, classNameId,
+			DDMTemplateKey, orderByComparator);
 	}
 
 	/**
@@ -6185,12 +6196,12 @@ public class JournalArticleUtil {
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_DT_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_DDMTK_Last(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_C_DT_Last(groupId, classNameId, DDMTemplateKey,
+				   .findByG_C_DDMTK_Last(groupId, classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -6203,11 +6214,11 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DT_Last(
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_C_DDMTK_Last(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_C_DT_Last(groupId, classNameId, DDMTemplateKey,
+				   .fetchByG_C_DDMTK_Last(groupId, classNameId, DDMTemplateKey,
 			orderByComparator);
 	}
 
@@ -6222,13 +6233,13 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_C_DT_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_C_DDMTK_PrevAndNext(
 		long id, long groupId, long classNameId,
 		java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .findByG_C_DT_PrevAndNext(id, groupId, classNameId,
+				   .findByG_C_DDMTK_PrevAndNext(id, groupId, classNameId,
 			DDMTemplateKey, orderByComparator);
 	}
 
@@ -6240,10 +6251,10 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_DDMTK(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey) {
 		return getPersistence()
-				   .filterFindByG_C_DT(groupId, classNameId, DDMTemplateKey);
+				   .filterFindByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -6260,11 +6271,11 @@ public class JournalArticleUtil {
 	* @param end the upper bound of the range of journal articles (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_DDMTK(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		int start, int end) {
 		return getPersistence()
-				   .filterFindByG_C_DT(groupId, classNameId, DDMTemplateKey,
+				   .filterFindByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
 			start, end);
 	}
 
@@ -6283,12 +6294,12 @@ public class JournalArticleUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal articles that the user has permission to view
 	*/
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_DT(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_DDMTK(
 		long groupId, long classNameId, java.lang.String DDMTemplateKey,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator) {
 		return getPersistence()
-				   .filterFindByG_C_DT(groupId, classNameId, DDMTemplateKey,
+				   .filterFindByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
 			start, end, orderByComparator);
 	}
 
@@ -6303,13 +6314,13 @@ public class JournalArticleUtil {
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	*/
-	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_C_DT_PrevAndNext(
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_C_DDMTK_PrevAndNext(
 		long id, long groupId, long classNameId,
 		java.lang.String DDMTemplateKey,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portlet.journal.model.JournalArticle> orderByComparator)
 		throws com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
-				   .filterFindByG_C_DT_PrevAndNext(id, groupId, classNameId,
+				   .filterFindByG_C_DDMTK_PrevAndNext(id, groupId, classNameId,
 			DDMTemplateKey, orderByComparator);
 	}
 
@@ -6320,9 +6331,9 @@ public class JournalArticleUtil {
 	* @param classNameId the class name ID
 	* @param DDMTemplateKey the d d m template key
 	*/
-	public static void removeByG_C_DT(long groupId, long classNameId,
+	public static void removeByG_C_DDMTK(long groupId, long classNameId,
 		java.lang.String DDMTemplateKey) {
-		getPersistence().removeByG_C_DT(groupId, classNameId, DDMTemplateKey);
+		getPersistence().removeByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -6333,10 +6344,10 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the number of matching journal articles
 	*/
-	public static int countByG_C_DT(long groupId, long classNameId,
+	public static int countByG_C_DDMTK(long groupId, long classNameId,
 		java.lang.String DDMTemplateKey) {
 		return getPersistence()
-				   .countByG_C_DT(groupId, classNameId, DDMTemplateKey);
+				   .countByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 	}
 
 	/**
@@ -6347,10 +6358,10 @@ public class JournalArticleUtil {
 	* @param DDMTemplateKey the d d m template key
 	* @return the number of matching journal articles that the user has permission to view
 	*/
-	public static int filterCountByG_C_DT(long groupId, long classNameId,
+	public static int filterCountByG_C_DDMTK(long groupId, long classNameId,
 		java.lang.String DDMTemplateKey) {
 		return getPersistence()
-				   .filterCountByG_C_DT(groupId, classNameId, DDMTemplateKey);
+				   .filterCountByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 	}
 
 	/**

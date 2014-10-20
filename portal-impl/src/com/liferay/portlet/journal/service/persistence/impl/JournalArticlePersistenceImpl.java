@@ -11128,28 +11128,29 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_UT_URLTITLE_1 = "journalArticle.urlTitle IS NULL";
 	private static final String _FINDER_COLUMN_G_UT_URLTITLE_2 = "journalArticle.urlTitle = ?";
 	private static final String _FINDER_COLUMN_G_UT_URLTITLE_3 = "(journalArticle.urlTitle IS NULL OR journalArticle.urlTitle = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DS = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DDMSK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_DS",
+			"findByG_DDMSK",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DS = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMSK =
+		new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_DS",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_DDMSK",
 			new String[] { Long.class.getName(), String.class.getName() },
 			JournalArticleModelImpl.GROUPID_COLUMN_BITMASK |
 			JournalArticleModelImpl.DDMSTRUCTUREKEY_COLUMN_BITMASK |
 			JournalArticleModelImpl.ARTICLEID_COLUMN_BITMASK |
 			JournalArticleModelImpl.VERSION_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_DS = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_DDMSK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_DS",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_DDMSK",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
@@ -11160,8 +11161,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_DS(long groupId, String DDMStructureKey) {
-		return findByG_DS(groupId, DDMStructureKey, QueryUtil.ALL_POS,
+	public List<JournalArticle> findByG_DDMSK(long groupId,
+		String DDMStructureKey) {
+		return findByG_DDMSK(groupId, DDMStructureKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -11179,9 +11181,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_DS(long groupId,
+	public List<JournalArticle> findByG_DDMSK(long groupId,
 		String DDMStructureKey, int start, int end) {
-		return findByG_DS(groupId, DDMStructureKey, start, end, null);
+		return findByG_DDMSK(groupId, DDMStructureKey, start, end, null);
 	}
 
 	/**
@@ -11199,7 +11201,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_DS(long groupId,
+	public List<JournalArticle> findByG_DDMSK(long groupId,
 		String DDMStructureKey, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 		boolean pagination = true;
@@ -11209,11 +11211,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DS;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMSK;
 			finderArgs = new Object[] { groupId, DDMStructureKey };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DS;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DDMSK;
 			finderArgs = new Object[] {
 					groupId, DDMStructureKey,
 					
@@ -11249,20 +11251,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_DS_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_DDMSK_GROUPID_2);
 
 			boolean bindDDMStructureKey = false;
 
 			if (DDMStructureKey == null) {
-				query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1);
+				query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1);
 			}
 			else if (DDMStructureKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3);
+				query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3);
 			}
 			else {
 				bindDDMStructureKey = true;
 
-				query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2);
+				query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2);
 			}
 
 			if (orderByComparator != null) {
@@ -11331,11 +11333,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_DS_First(long groupId,
+	public JournalArticle findByG_DDMSK_First(long groupId,
 		String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_DS_First(groupId,
+		JournalArticle journalArticle = fetchByG_DDMSK_First(groupId,
 				DDMStructureKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -11366,11 +11368,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_DS_First(long groupId,
+	public JournalArticle fetchByG_DDMSK_First(long groupId,
 		String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		List<JournalArticle> list = findByG_DS(groupId, DDMStructureKey, 0, 1,
-				orderByComparator);
+		List<JournalArticle> list = findByG_DDMSK(groupId, DDMStructureKey, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -11389,10 +11391,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_DS_Last(long groupId, String DDMStructureKey,
+	public JournalArticle findByG_DDMSK_Last(long groupId,
+		String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_DS_Last(groupId,
+		JournalArticle journalArticle = fetchByG_DDMSK_Last(groupId,
 				DDMStructureKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -11423,16 +11426,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_DS_Last(long groupId,
+	public JournalArticle fetchByG_DDMSK_Last(long groupId,
 		String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		int count = countByG_DS(groupId, DDMStructureKey);
+		int count = countByG_DDMSK(groupId, DDMStructureKey);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<JournalArticle> list = findByG_DS(groupId, DDMStructureKey,
+		List<JournalArticle> list = findByG_DDMSK(groupId, DDMStructureKey,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -11453,7 +11456,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] findByG_DS_PrevAndNext(long id, long groupId,
+	public JournalArticle[] findByG_DDMSK_PrevAndNext(long id, long groupId,
 		String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
@@ -11466,13 +11469,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = getByG_DS_PrevAndNext(session, journalArticle, groupId,
-					DDMStructureKey, orderByComparator, true);
+			array[0] = getByG_DDMSK_PrevAndNext(session, journalArticle,
+					groupId, DDMStructureKey, orderByComparator, true);
 
 			array[1] = journalArticle;
 
-			array[2] = getByG_DS_PrevAndNext(session, journalArticle, groupId,
-					DDMStructureKey, orderByComparator, false);
+			array[2] = getByG_DDMSK_PrevAndNext(session, journalArticle,
+					groupId, DDMStructureKey, orderByComparator, false);
 
 			return array;
 		}
@@ -11484,7 +11487,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle getByG_DS_PrevAndNext(Session session,
+	protected JournalArticle getByG_DDMSK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long groupId, String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -11499,20 +11502,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_G_DS_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMSK_GROUPID_2);
 
 		boolean bindDDMStructureKey = false;
 
 		if (DDMStructureKey == null) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1);
 		}
 		else if (DDMStructureKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3);
 		}
 		else {
 			bindDDMStructureKey = true;
 
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2);
 		}
 
 		if (orderByComparator != null) {
@@ -11615,9 +11618,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_DS(long groupId,
+	public List<JournalArticle> filterFindByG_DDMSK(long groupId,
 		String DDMStructureKey) {
-		return filterFindByG_DS(groupId, DDMStructureKey, QueryUtil.ALL_POS,
+		return filterFindByG_DDMSK(groupId, DDMStructureKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -11635,9 +11638,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_DS(long groupId,
+	public List<JournalArticle> filterFindByG_DDMSK(long groupId,
 		String DDMStructureKey, int start, int end) {
-		return filterFindByG_DS(groupId, DDMStructureKey, start, end, null);
+		return filterFindByG_DDMSK(groupId, DDMStructureKey, start, end, null);
 	}
 
 	/**
@@ -11655,11 +11658,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_DS(long groupId,
+	public List<JournalArticle> filterFindByG_DDMSK(long groupId,
 		String DDMStructureKey, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_DS(groupId, DDMStructureKey, start, end,
+			return findByG_DDMSK(groupId, DDMStructureKey, start, end,
 				orderByComparator);
 		}
 
@@ -11680,20 +11683,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_DS_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMSK_GROUPID_2);
 
 		boolean bindDDMStructureKey = false;
 
 		if (DDMStructureKey == null) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1);
 		}
 		else if (DDMStructureKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3);
 		}
 		else {
 			bindDDMStructureKey = true;
 
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -11767,12 +11770,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] filterFindByG_DS_PrevAndNext(long id, long groupId,
-		String DDMStructureKey,
+	public JournalArticle[] filterFindByG_DDMSK_PrevAndNext(long id,
+		long groupId, String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_DS_PrevAndNext(id, groupId, DDMStructureKey,
+			return findByG_DDMSK_PrevAndNext(id, groupId, DDMStructureKey,
 				orderByComparator);
 		}
 
@@ -11785,12 +11788,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = filterGetByG_DS_PrevAndNext(session, journalArticle,
+			array[0] = filterGetByG_DDMSK_PrevAndNext(session, journalArticle,
 					groupId, DDMStructureKey, orderByComparator, true);
 
 			array[1] = journalArticle;
 
-			array[2] = filterGetByG_DS_PrevAndNext(session, journalArticle,
+			array[2] = filterGetByG_DDMSK_PrevAndNext(session, journalArticle,
 					groupId, DDMStructureKey, orderByComparator, false);
 
 			return array;
@@ -11803,7 +11806,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle filterGetByG_DS_PrevAndNext(Session session,
+	protected JournalArticle filterGetByG_DDMSK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long groupId, String DDMStructureKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -11823,20 +11826,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_DS_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMSK_GROUPID_2);
 
 		boolean bindDDMStructureKey = false;
 
 		if (DDMStructureKey == null) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1);
 		}
 		else if (DDMStructureKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3);
 		}
 		else {
 			bindDDMStructureKey = true;
 
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -11968,8 +11971,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param DDMStructureKey the d d m structure key
 	 */
 	@Override
-	public void removeByG_DS(long groupId, String DDMStructureKey) {
-		for (JournalArticle journalArticle : findByG_DS(groupId,
+	public void removeByG_DDMSK(long groupId, String DDMStructureKey) {
+		for (JournalArticle journalArticle : findByG_DDMSK(groupId,
 				DDMStructureKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(journalArticle);
 		}
@@ -11983,8 +11986,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles
 	 */
 	@Override
-	public int countByG_DS(long groupId, String DDMStructureKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_DS;
+	public int countByG_DDMSK(long groupId, String DDMStructureKey) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_DDMSK;
 
 		Object[] finderArgs = new Object[] { groupId, DDMStructureKey };
 
@@ -11996,20 +11999,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_DS_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_DDMSK_GROUPID_2);
 
 			boolean bindDDMStructureKey = false;
 
 			if (DDMStructureKey == null) {
-				query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1);
+				query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1);
 			}
 			else if (DDMStructureKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3);
+				query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3);
 			}
 			else {
 				bindDDMStructureKey = true;
 
-				query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2);
+				query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2);
 			}
 
 			String sql = query.toString();
@@ -12054,29 +12057,29 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public int filterCountByG_DS(long groupId, String DDMStructureKey) {
+	public int filterCountByG_DDMSK(long groupId, String DDMStructureKey) {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_DS(groupId, DDMStructureKey);
+			return countByG_DDMSK(groupId, DDMStructureKey);
 		}
 
 		StringBundler query = new StringBundler(3);
 
 		query.append(_FILTER_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_G_DS_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMSK_GROUPID_2);
 
 		boolean bindDDMStructureKey = false;
 
 		if (DDMStructureKey == null) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1);
 		}
 		else if (DDMStructureKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3);
 		}
 		else {
 			bindDDMStructureKey = true;
 
-			query.append(_FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2);
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -12113,32 +12116,33 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	private static final String _FINDER_COLUMN_G_DS_GROUPID_2 = "journalArticle.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_1 = "journalArticle.DDMStructureKey IS NULL";
-	private static final String _FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_2 = "journalArticle.DDMStructureKey = ?";
-	private static final String _FINDER_COLUMN_G_DS_DDMSTRUCTUREKEY_3 = "(journalArticle.DDMStructureKey IS NULL OR journalArticle.DDMStructureKey = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_G_DDMSK_GROUPID_2 = "journalArticle.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_1 = "journalArticle.DDMStructureKey IS NULL";
+	private static final String _FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_2 = "journalArticle.DDMStructureKey = ?";
+	private static final String _FINDER_COLUMN_G_DDMSK_DDMSTRUCTUREKEY_3 = "(journalArticle.DDMStructureKey IS NULL OR journalArticle.DDMStructureKey = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DDMTK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_DT",
+			"findByG_DDMTK",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMTK =
+		new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_DT",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_DDMTK",
 			new String[] { Long.class.getName(), String.class.getName() },
 			JournalArticleModelImpl.GROUPID_COLUMN_BITMASK |
 			JournalArticleModelImpl.DDMTEMPLATEKEY_COLUMN_BITMASK |
 			JournalArticleModelImpl.ARTICLEID_COLUMN_BITMASK |
 			JournalArticleModelImpl.VERSION_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_DDMTK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_DT",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_DDMTK",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
@@ -12149,8 +12153,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_DT(long groupId, String DDMTemplateKey) {
-		return findByG_DT(groupId, DDMTemplateKey, QueryUtil.ALL_POS,
+	public List<JournalArticle> findByG_DDMTK(long groupId,
+		String DDMTemplateKey) {
+		return findByG_DDMTK(groupId, DDMTemplateKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -12168,9 +12173,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_DT(long groupId, String DDMTemplateKey,
-		int start, int end) {
-		return findByG_DT(groupId, DDMTemplateKey, start, end, null);
+	public List<JournalArticle> findByG_DDMTK(long groupId,
+		String DDMTemplateKey, int start, int end) {
+		return findByG_DDMTK(groupId, DDMTemplateKey, start, end, null);
 	}
 
 	/**
@@ -12188,8 +12193,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_DT(long groupId, String DDMTemplateKey,
-		int start, int end, OrderByComparator<JournalArticle> orderByComparator) {
+	public List<JournalArticle> findByG_DDMTK(long groupId,
+		String DDMTemplateKey, int start, int end,
+		OrderByComparator<JournalArticle> orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -12197,11 +12203,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DT;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMTK;
 			finderArgs = new Object[] { groupId, DDMTemplateKey };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DT;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_DDMTK;
 			finderArgs = new Object[] {
 					groupId, DDMTemplateKey,
 					
@@ -12237,20 +12243,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_DT_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_DDMTK_GROUPID_2);
 
 			boolean bindDDMTemplateKey = false;
 
 			if (DDMTemplateKey == null) {
-				query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1);
+				query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1);
 			}
 			else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3);
+				query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3);
 			}
 			else {
 				bindDDMTemplateKey = true;
 
-				query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2);
+				query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2);
 			}
 
 			if (orderByComparator != null) {
@@ -12319,10 +12325,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_DT_First(long groupId, String DDMTemplateKey,
+	public JournalArticle findByG_DDMTK_First(long groupId,
+		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_DT_First(groupId,
+		JournalArticle journalArticle = fetchByG_DDMTK_First(groupId,
 				DDMTemplateKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -12353,11 +12360,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_DT_First(long groupId,
+	public JournalArticle fetchByG_DDMTK_First(long groupId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		List<JournalArticle> list = findByG_DT(groupId, DDMTemplateKey, 0, 1,
-				orderByComparator);
+		List<JournalArticle> list = findByG_DDMTK(groupId, DDMTemplateKey, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -12376,10 +12383,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_DT_Last(long groupId, String DDMTemplateKey,
+	public JournalArticle findByG_DDMTK_Last(long groupId,
+		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_DT_Last(groupId,
+		JournalArticle journalArticle = fetchByG_DDMTK_Last(groupId,
 				DDMTemplateKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -12410,15 +12418,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_DT_Last(long groupId, String DDMTemplateKey,
+	public JournalArticle fetchByG_DDMTK_Last(long groupId,
+		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		int count = countByG_DT(groupId, DDMTemplateKey);
+		int count = countByG_DDMTK(groupId, DDMTemplateKey);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<JournalArticle> list = findByG_DT(groupId, DDMTemplateKey,
+		List<JournalArticle> list = findByG_DDMTK(groupId, DDMTemplateKey,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -12439,7 +12448,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] findByG_DT_PrevAndNext(long id, long groupId,
+	public JournalArticle[] findByG_DDMTK_PrevAndNext(long id, long groupId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
@@ -12452,13 +12461,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = getByG_DT_PrevAndNext(session, journalArticle, groupId,
-					DDMTemplateKey, orderByComparator, true);
+			array[0] = getByG_DDMTK_PrevAndNext(session, journalArticle,
+					groupId, DDMTemplateKey, orderByComparator, true);
 
 			array[1] = journalArticle;
 
-			array[2] = getByG_DT_PrevAndNext(session, journalArticle, groupId,
-					DDMTemplateKey, orderByComparator, false);
+			array[2] = getByG_DDMTK_PrevAndNext(session, journalArticle,
+					groupId, DDMTemplateKey, orderByComparator, false);
 
 			return array;
 		}
@@ -12470,7 +12479,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle getByG_DT_PrevAndNext(Session session,
+	protected JournalArticle getByG_DDMTK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long groupId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -12485,20 +12494,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_G_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMTK_GROUPID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (orderByComparator != null) {
@@ -12601,9 +12610,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_DT(long groupId,
+	public List<JournalArticle> filterFindByG_DDMTK(long groupId,
 		String DDMTemplateKey) {
-		return filterFindByG_DT(groupId, DDMTemplateKey, QueryUtil.ALL_POS,
+		return filterFindByG_DDMTK(groupId, DDMTemplateKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -12621,9 +12630,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_DT(long groupId,
+	public List<JournalArticle> filterFindByG_DDMTK(long groupId,
 		String DDMTemplateKey, int start, int end) {
-		return filterFindByG_DT(groupId, DDMTemplateKey, start, end, null);
+		return filterFindByG_DDMTK(groupId, DDMTemplateKey, start, end, null);
 	}
 
 	/**
@@ -12641,11 +12650,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_DT(long groupId,
+	public List<JournalArticle> filterFindByG_DDMTK(long groupId,
 		String DDMTemplateKey, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_DT(groupId, DDMTemplateKey, start, end,
+			return findByG_DDMTK(groupId, DDMTemplateKey, start, end,
 				orderByComparator);
 		}
 
@@ -12666,20 +12675,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMTK_GROUPID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -12753,12 +12762,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] filterFindByG_DT_PrevAndNext(long id, long groupId,
-		String DDMTemplateKey,
+	public JournalArticle[] filterFindByG_DDMTK_PrevAndNext(long id,
+		long groupId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_DT_PrevAndNext(id, groupId, DDMTemplateKey,
+			return findByG_DDMTK_PrevAndNext(id, groupId, DDMTemplateKey,
 				orderByComparator);
 		}
 
@@ -12771,12 +12780,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = filterGetByG_DT_PrevAndNext(session, journalArticle,
+			array[0] = filterGetByG_DDMTK_PrevAndNext(session, journalArticle,
 					groupId, DDMTemplateKey, orderByComparator, true);
 
 			array[1] = journalArticle;
 
-			array[2] = filterGetByG_DT_PrevAndNext(session, journalArticle,
+			array[2] = filterGetByG_DDMTK_PrevAndNext(session, journalArticle,
 					groupId, DDMTemplateKey, orderByComparator, false);
 
 			return array;
@@ -12789,7 +12798,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle filterGetByG_DT_PrevAndNext(Session session,
+	protected JournalArticle filterGetByG_DDMTK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long groupId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -12809,20 +12818,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMTK_GROUPID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -12954,8 +12963,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param DDMTemplateKey the d d m template key
 	 */
 	@Override
-	public void removeByG_DT(long groupId, String DDMTemplateKey) {
-		for (JournalArticle journalArticle : findByG_DT(groupId,
+	public void removeByG_DDMTK(long groupId, String DDMTemplateKey) {
+		for (JournalArticle journalArticle : findByG_DDMTK(groupId,
 				DDMTemplateKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(journalArticle);
 		}
@@ -12969,8 +12978,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles
 	 */
 	@Override
-	public int countByG_DT(long groupId, String DDMTemplateKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_DT;
+	public int countByG_DDMTK(long groupId, String DDMTemplateKey) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_DDMTK;
 
 		Object[] finderArgs = new Object[] { groupId, DDMTemplateKey };
 
@@ -12982,20 +12991,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_DT_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_DDMTK_GROUPID_2);
 
 			boolean bindDDMTemplateKey = false;
 
 			if (DDMTemplateKey == null) {
-				query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1);
+				query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1);
 			}
 			else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3);
+				query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3);
 			}
 			else {
 				bindDDMTemplateKey = true;
 
-				query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2);
+				query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2);
 			}
 
 			String sql = query.toString();
@@ -13040,29 +13049,29 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public int filterCountByG_DT(long groupId, String DDMTemplateKey) {
+	public int filterCountByG_DDMTK(long groupId, String DDMTemplateKey) {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_DT(groupId, DDMTemplateKey);
+			return countByG_DDMTK(groupId, DDMTemplateKey);
 		}
 
 		StringBundler query = new StringBundler(3);
 
 		query.append(_FILTER_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_G_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_DDMTK_GROUPID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -13099,10 +13108,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	private static final String _FINDER_COLUMN_G_DT_GROUPID_2 = "journalArticle.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_1 = "journalArticle.DDMTemplateKey IS NULL";
-	private static final String _FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_2 = "journalArticle.DDMTemplateKey = ?";
-	private static final String _FINDER_COLUMN_G_DT_DDMTEMPLATEKEY_3 = "(journalArticle.DDMTemplateKey IS NULL OR journalArticle.DDMTemplateKey = '')";
+	private static final String _FINDER_COLUMN_G_DDMTK_GROUPID_2 = "journalArticle.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_1 = "journalArticle.DDMTemplateKey IS NULL";
+	private static final String _FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_2 = "journalArticle.DDMTemplateKey = ?";
+	private static final String _FINDER_COLUMN_G_DDMTK_DDMTEMPLATEKEY_3 = "(journalArticle.DDMTemplateKey IS NULL OR journalArticle.DDMTemplateKey = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_L = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -16512,28 +16521,29 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	private static final String _FINDER_COLUMN_C_NOTST_COMPANYID_2 = "journalArticle.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_NOTST_STATUS_2 = "journalArticle.status != ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_DDMTK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC_DT",
+			"findByC_DDMTK",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DDMTK =
+		new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_DT",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_DDMTK",
 			new String[] { Long.class.getName(), String.class.getName() },
 			JournalArticleModelImpl.CLASSNAMEID_COLUMN_BITMASK |
 			JournalArticleModelImpl.DDMTEMPLATEKEY_COLUMN_BITMASK |
 			JournalArticleModelImpl.ARTICLEID_COLUMN_BITMASK |
 			JournalArticleModelImpl.VERSION_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_DDMTK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_DT",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_DDMTK",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
@@ -16544,9 +16554,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByC_DT(long classNameId,
+	public List<JournalArticle> findByC_DDMTK(long classNameId,
 		String DDMTemplateKey) {
-		return findByC_DT(classNameId, DDMTemplateKey, QueryUtil.ALL_POS,
+		return findByC_DDMTK(classNameId, DDMTemplateKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -16564,9 +16574,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByC_DT(long classNameId,
+	public List<JournalArticle> findByC_DDMTK(long classNameId,
 		String DDMTemplateKey, int start, int end) {
-		return findByC_DT(classNameId, DDMTemplateKey, start, end, null);
+		return findByC_DDMTK(classNameId, DDMTemplateKey, start, end, null);
 	}
 
 	/**
@@ -16584,7 +16594,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByC_DT(long classNameId,
+	public List<JournalArticle> findByC_DDMTK(long classNameId,
 		String DDMTemplateKey, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 		boolean pagination = true;
@@ -16594,11 +16604,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DT;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DDMTK;
 			finderArgs = new Object[] { classNameId, DDMTemplateKey };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_DT;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_DDMTK;
 			finderArgs = new Object[] {
 					classNameId, DDMTemplateKey,
 					
@@ -16634,20 +16644,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_DT_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_C_DDMTK_CLASSNAMEID_2);
 
 			boolean bindDDMTemplateKey = false;
 
 			if (DDMTemplateKey == null) {
-				query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_1);
+				query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_1);
 			}
 			else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_3);
+				query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_3);
 			}
 			else {
 				bindDDMTemplateKey = true;
 
-				query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_2);
+				query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_2);
 			}
 
 			if (orderByComparator != null) {
@@ -16716,11 +16726,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByC_DT_First(long classNameId,
+	public JournalArticle findByC_DDMTK_First(long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByC_DT_First(classNameId,
+		JournalArticle journalArticle = fetchByC_DDMTK_First(classNameId,
 				DDMTemplateKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -16751,11 +16761,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByC_DT_First(long classNameId,
+	public JournalArticle fetchByC_DDMTK_First(long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		List<JournalArticle> list = findByC_DT(classNameId, DDMTemplateKey, 0,
-				1, orderByComparator);
+		List<JournalArticle> list = findByC_DDMTK(classNameId, DDMTemplateKey,
+				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -16774,11 +16784,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByC_DT_Last(long classNameId,
+	public JournalArticle findByC_DDMTK_Last(long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByC_DT_Last(classNameId,
+		JournalArticle journalArticle = fetchByC_DDMTK_Last(classNameId,
 				DDMTemplateKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -16809,16 +16819,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByC_DT_Last(long classNameId,
+	public JournalArticle fetchByC_DDMTK_Last(long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		int count = countByC_DT(classNameId, DDMTemplateKey);
+		int count = countByC_DDMTK(classNameId, DDMTemplateKey);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<JournalArticle> list = findByC_DT(classNameId, DDMTemplateKey,
+		List<JournalArticle> list = findByC_DDMTK(classNameId, DDMTemplateKey,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -16839,8 +16849,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] findByC_DT_PrevAndNext(long id, long classNameId,
-		String DDMTemplateKey,
+	public JournalArticle[] findByC_DDMTK_PrevAndNext(long id,
+		long classNameId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
@@ -16852,12 +16862,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = getByC_DT_PrevAndNext(session, journalArticle,
+			array[0] = getByC_DDMTK_PrevAndNext(session, journalArticle,
 					classNameId, DDMTemplateKey, orderByComparator, true);
 
 			array[1] = journalArticle;
 
-			array[2] = getByC_DT_PrevAndNext(session, journalArticle,
+			array[2] = getByC_DDMTK_PrevAndNext(session, journalArticle,
 					classNameId, DDMTemplateKey, orderByComparator, false);
 
 			return array;
@@ -16870,7 +16880,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle getByC_DT_PrevAndNext(Session session,
+	protected JournalArticle getByC_DDMTK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long classNameId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -16885,20 +16895,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_C_DT_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_C_DDMTK_CLASSNAMEID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (orderByComparator != null) {
@@ -17000,8 +17010,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param DDMTemplateKey the d d m template key
 	 */
 	@Override
-	public void removeByC_DT(long classNameId, String DDMTemplateKey) {
-		for (JournalArticle journalArticle : findByC_DT(classNameId,
+	public void removeByC_DDMTK(long classNameId, String DDMTemplateKey) {
+		for (JournalArticle journalArticle : findByC_DDMTK(classNameId,
 				DDMTemplateKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(journalArticle);
 		}
@@ -17015,8 +17025,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles
 	 */
 	@Override
-	public int countByC_DT(long classNameId, String DDMTemplateKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_DT;
+	public int countByC_DDMTK(long classNameId, String DDMTemplateKey) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_DDMTK;
 
 		Object[] finderArgs = new Object[] { classNameId, DDMTemplateKey };
 
@@ -17028,20 +17038,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_DT_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_C_DDMTK_CLASSNAMEID_2);
 
 			boolean bindDDMTemplateKey = false;
 
 			if (DDMTemplateKey == null) {
-				query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_1);
+				query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_1);
 			}
 			else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_3);
+				query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_3);
 			}
 			else {
 				bindDDMTemplateKey = true;
 
-				query.append(_FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_2);
+				query.append(_FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_2);
 			}
 
 			String sql = query.toString();
@@ -17078,10 +17088,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_DT_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_1 = "journalArticle.DDMTemplateKey IS NULL";
-	private static final String _FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_2 = "journalArticle.DDMTemplateKey = ?";
-	private static final String _FINDER_COLUMN_C_DT_DDMTEMPLATEKEY_3 = "(journalArticle.DDMTemplateKey IS NULL OR journalArticle.DDMTemplateKey = '')";
+	private static final String _FINDER_COLUMN_C_DDMTK_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_1 = "journalArticle.DDMTemplateKey IS NULL";
+	private static final String _FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_2 = "journalArticle.DDMTemplateKey = ?";
+	private static final String _FINDER_COLUMN_C_DDMTK_DDMTEMPLATEKEY_3 = "(journalArticle.DDMTemplateKey IS NULL OR journalArticle.DDMTemplateKey = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LTD_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -21823,10 +21833,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "journalArticle.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 = "journalArticle.classPK = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_DS = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_DDMSK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_C_DS",
+			"fetchByG_C_DDMSK",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
@@ -21834,9 +21844,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			JournalArticleModelImpl.GROUPID_COLUMN_BITMASK |
 			JournalArticleModelImpl.CLASSNAMEID_COLUMN_BITMASK |
 			JournalArticleModelImpl.DDMSTRUCTUREKEY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_DS = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_DDMSK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_DS",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_DDMSK",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
@@ -21852,9 +21862,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_C_DS(long groupId, long classNameId,
+	public JournalArticle findByG_C_DDMSK(long groupId, long classNameId,
 		String DDMStructureKey) throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_C_DS(groupId, classNameId,
+		JournalArticle journalArticle = fetchByG_C_DDMSK(groupId, classNameId,
 				DDMStructureKey);
 
 		if (journalArticle == null) {
@@ -21892,9 +21902,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_C_DS(long groupId, long classNameId,
+	public JournalArticle fetchByG_C_DDMSK(long groupId, long classNameId,
 		String DDMStructureKey) {
-		return fetchByG_C_DS(groupId, classNameId, DDMStructureKey, true);
+		return fetchByG_C_DDMSK(groupId, classNameId, DDMStructureKey, true);
 	}
 
 	/**
@@ -21907,14 +21917,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_C_DS(long groupId, long classNameId,
+	public JournalArticle fetchByG_C_DDMSK(long groupId, long classNameId,
 		String DDMStructureKey, boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] { groupId, classNameId, DDMStructureKey };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C_DS,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C_DDMSK,
 					finderArgs, this);
 		}
 
@@ -21934,22 +21944,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_C_DS_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMSK_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_C_DS_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMSK_CLASSNAMEID_2);
 
 			boolean bindDDMStructureKey = false;
 
 			if (DDMStructureKey == null) {
-				query.append(_FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_1);
+				query.append(_FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_1);
 			}
 			else if (DDMStructureKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_3);
+				query.append(_FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_3);
 			}
 			else {
 				bindDDMStructureKey = true;
 
-				query.append(_FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_2);
+				query.append(_FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_2);
 			}
 
 			String sql = query.toString();
@@ -21974,13 +21984,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				List<JournalArticle> list = q.list();
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DS,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DDMSK,
 						finderArgs, list);
 				}
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"JournalArticlePersistenceImpl.fetchByG_C_DS(long, long, String, boolean) with parameters (" +
+							"JournalArticlePersistenceImpl.fetchByG_C_DDMSK(long, long, String, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
@@ -21996,13 +22006,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 							(journalArticle.getDDMStructureKey() == null) ||
 							!journalArticle.getDDMStructureKey()
 											   .equals(DDMStructureKey)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DS,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DDMSK,
 							finderArgs, journalArticle);
 					}
 				}
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_DS,
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_DDMSK,
 					finderArgs);
 
 				throw processException(e);
@@ -22029,9 +22039,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the journal article that was removed
 	 */
 	@Override
-	public JournalArticle removeByG_C_DS(long groupId, long classNameId,
+	public JournalArticle removeByG_C_DDMSK(long groupId, long classNameId,
 		String DDMStructureKey) throws NoSuchArticleException {
-		JournalArticle journalArticle = findByG_C_DS(groupId, classNameId,
+		JournalArticle journalArticle = findByG_C_DDMSK(groupId, classNameId,
 				DDMStructureKey);
 
 		return remove(journalArticle);
@@ -22046,9 +22056,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles
 	 */
 	@Override
-	public int countByG_C_DS(long groupId, long classNameId,
+	public int countByG_C_DDMSK(long groupId, long classNameId,
 		String DDMStructureKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_DS;
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_DDMSK;
 
 		Object[] finderArgs = new Object[] { groupId, classNameId, DDMStructureKey };
 
@@ -22060,22 +22070,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_C_DS_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMSK_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_C_DS_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMSK_CLASSNAMEID_2);
 
 			boolean bindDDMStructureKey = false;
 
 			if (DDMStructureKey == null) {
-				query.append(_FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_1);
+				query.append(_FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_1);
 			}
 			else if (DDMStructureKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_3);
+				query.append(_FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_3);
 			}
 			else {
 				bindDDMStructureKey = true;
 
-				query.append(_FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_2);
+				query.append(_FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_2);
 			}
 
 			String sql = query.toString();
@@ -22114,15 +22124,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_C_DS_GROUPID_2 = "journalArticle.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_DS_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_1 = "journalArticle.DDMStructureKey IS NULL";
-	private static final String _FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_2 = "journalArticle.DDMStructureKey = ?";
-	private static final String _FINDER_COLUMN_G_C_DS_DDMSTRUCTUREKEY_3 = "(journalArticle.DDMStructureKey IS NULL OR journalArticle.DDMStructureKey = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_G_C_DDMSK_GROUPID_2 = "journalArticle.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_DDMSK_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_1 = "journalArticle.DDMStructureKey IS NULL";
+	private static final String _FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_2 = "journalArticle.DDMStructureKey = ?";
+	private static final String _FINDER_COLUMN_G_C_DDMSK_DDMSTRUCTUREKEY_3 = "(journalArticle.DDMStructureKey IS NULL OR journalArticle.DDMStructureKey = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_DDMTK =
+		new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_C_DT",
+			"findByG_C_DDMTK",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName(),
@@ -22130,11 +22141,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DT =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DDMTK =
 		new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_DT",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_DDMTK",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
@@ -22144,9 +22155,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			JournalArticleModelImpl.DDMTEMPLATEKEY_COLUMN_BITMASK |
 			JournalArticleModelImpl.ARTICLEID_COLUMN_BITMASK |
 			JournalArticleModelImpl.VERSION_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_DT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_DDMTK = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_DT",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_DDMTK",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
@@ -22161,9 +22172,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_C_DT(long groupId, long classNameId,
+	public List<JournalArticle> findByG_C_DDMTK(long groupId, long classNameId,
 		String DDMTemplateKey) {
-		return findByG_C_DT(groupId, classNameId, DDMTemplateKey,
+		return findByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -22182,10 +22193,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_C_DT(long groupId, long classNameId,
+	public List<JournalArticle> findByG_C_DDMTK(long groupId, long classNameId,
 		String DDMTemplateKey, int start, int end) {
-		return findByG_C_DT(groupId, classNameId, DDMTemplateKey, start, end,
-			null);
+		return findByG_C_DDMTK(groupId, classNameId, DDMTemplateKey, start,
+			end, null);
 	}
 
 	/**
@@ -22204,7 +22215,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles
 	 */
 	@Override
-	public List<JournalArticle> findByG_C_DT(long groupId, long classNameId,
+	public List<JournalArticle> findByG_C_DDMTK(long groupId, long classNameId,
 		String DDMTemplateKey, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 		boolean pagination = true;
@@ -22214,11 +22225,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DT;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DDMTK;
 			finderArgs = new Object[] { groupId, classNameId, DDMTemplateKey };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_DT;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_DDMTK;
 			finderArgs = new Object[] {
 					groupId, classNameId, DDMTemplateKey,
 					
@@ -22255,22 +22266,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_C_DT_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_C_DT_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2);
 
 			boolean bindDDMTemplateKey = false;
 
 			if (DDMTemplateKey == null) {
-				query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1);
+				query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1);
 			}
 			else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3);
+				query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3);
 			}
 			else {
 				bindDDMTemplateKey = true;
 
-				query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2);
+				query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2);
 			}
 
 			if (orderByComparator != null) {
@@ -22342,11 +22353,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_C_DT_First(long groupId, long classNameId,
+	public JournalArticle findByG_C_DDMTK_First(long groupId, long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_C_DT_First(groupId,
+		JournalArticle journalArticle = fetchByG_C_DDMTK_First(groupId,
 				classNameId, DDMTemplateKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -22381,10 +22392,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_C_DT_First(long groupId, long classNameId,
-		String DDMTemplateKey,
+	public JournalArticle fetchByG_C_DDMTK_First(long groupId,
+		long classNameId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		List<JournalArticle> list = findByG_C_DT(groupId, classNameId,
+		List<JournalArticle> list = findByG_C_DDMTK(groupId, classNameId,
 				DDMTemplateKey, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -22405,11 +22416,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle findByG_C_DT_Last(long groupId, long classNameId,
+	public JournalArticle findByG_C_DDMTK_Last(long groupId, long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
-		JournalArticle journalArticle = fetchByG_C_DT_Last(groupId,
+		JournalArticle journalArticle = fetchByG_C_DDMTK_Last(groupId,
 				classNameId, DDMTemplateKey, orderByComparator);
 
 		if (journalArticle != null) {
@@ -22444,16 +22455,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
 	 */
 	@Override
-	public JournalArticle fetchByG_C_DT_Last(long groupId, long classNameId,
+	public JournalArticle fetchByG_C_DDMTK_Last(long groupId, long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator) {
-		int count = countByG_C_DT(groupId, classNameId, DDMTemplateKey);
+		int count = countByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<JournalArticle> list = findByG_C_DT(groupId, classNameId,
+		List<JournalArticle> list = findByG_C_DDMTK(groupId, classNameId,
 				DDMTemplateKey, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -22475,7 +22486,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] findByG_C_DT_PrevAndNext(long id, long groupId,
+	public JournalArticle[] findByG_C_DDMTK_PrevAndNext(long id, long groupId,
 		long classNameId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
@@ -22488,13 +22499,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = getByG_C_DT_PrevAndNext(session, journalArticle,
+			array[0] = getByG_C_DDMTK_PrevAndNext(session, journalArticle,
 					groupId, classNameId, DDMTemplateKey, orderByComparator,
 					true);
 
 			array[1] = journalArticle;
 
-			array[2] = getByG_C_DT_PrevAndNext(session, journalArticle,
+			array[2] = getByG_C_DDMTK_PrevAndNext(session, journalArticle,
 					groupId, classNameId, DDMTemplateKey, orderByComparator,
 					false);
 
@@ -22508,7 +22519,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle getByG_C_DT_PrevAndNext(Session session,
+	protected JournalArticle getByG_C_DDMTK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long groupId, long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
@@ -22524,22 +22535,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_G_C_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_C_DT_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (orderByComparator != null) {
@@ -22645,9 +22656,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_C_DT(long groupId,
+	public List<JournalArticle> filterFindByG_C_DDMTK(long groupId,
 		long classNameId, String DDMTemplateKey) {
-		return filterFindByG_C_DT(groupId, classNameId, DDMTemplateKey,
+		return filterFindByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -22666,10 +22677,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the range of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_C_DT(long groupId,
+	public List<JournalArticle> filterFindByG_C_DDMTK(long groupId,
 		long classNameId, String DDMTemplateKey, int start, int end) {
-		return filterFindByG_C_DT(groupId, classNameId, DDMTemplateKey, start,
-			end, null);
+		return filterFindByG_C_DDMTK(groupId, classNameId, DDMTemplateKey,
+			start, end, null);
 	}
 
 	/**
@@ -22688,11 +22699,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public List<JournalArticle> filterFindByG_C_DT(long groupId,
+	public List<JournalArticle> filterFindByG_C_DDMTK(long groupId,
 		long classNameId, String DDMTemplateKey, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_C_DT(groupId, classNameId, DDMTemplateKey, start,
+			return findByG_C_DDMTK(groupId, classNameId, DDMTemplateKey, start,
 				end, orderByComparator);
 		}
 
@@ -22713,22 +22724,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_C_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_C_DT_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -22805,12 +22816,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 */
 	@Override
-	public JournalArticle[] filterFindByG_C_DT_PrevAndNext(long id,
+	public JournalArticle[] filterFindByG_C_DDMTK_PrevAndNext(long id,
 		long groupId, long classNameId, String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator)
 		throws NoSuchArticleException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_C_DT_PrevAndNext(id, groupId, classNameId,
+			return findByG_C_DDMTK_PrevAndNext(id, groupId, classNameId,
 				DDMTemplateKey, orderByComparator);
 		}
 
@@ -22823,15 +22834,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = filterGetByG_C_DT_PrevAndNext(session, journalArticle,
-					groupId, classNameId, DDMTemplateKey, orderByComparator,
-					true);
+			array[0] = filterGetByG_C_DDMTK_PrevAndNext(session,
+					journalArticle, groupId, classNameId, DDMTemplateKey,
+					orderByComparator, true);
 
 			array[1] = journalArticle;
 
-			array[2] = filterGetByG_C_DT_PrevAndNext(session, journalArticle,
-					groupId, classNameId, DDMTemplateKey, orderByComparator,
-					false);
+			array[2] = filterGetByG_C_DDMTK_PrevAndNext(session,
+					journalArticle, groupId, classNameId, DDMTemplateKey,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -22843,7 +22854,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	protected JournalArticle filterGetByG_C_DT_PrevAndNext(Session session,
+	protected JournalArticle filterGetByG_C_DDMTK_PrevAndNext(Session session,
 		JournalArticle journalArticle, long groupId, long classNameId,
 		String DDMTemplateKey,
 		OrderByComparator<JournalArticle> orderByComparator, boolean previous) {
@@ -22864,22 +22875,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_C_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_C_DT_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -23014,10 +23025,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param DDMTemplateKey the d d m template key
 	 */
 	@Override
-	public void removeByG_C_DT(long groupId, long classNameId,
+	public void removeByG_C_DDMTK(long groupId, long classNameId,
 		String DDMTemplateKey) {
-		for (JournalArticle journalArticle : findByG_C_DT(groupId, classNameId,
-				DDMTemplateKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (JournalArticle journalArticle : findByG_C_DDMTK(groupId,
+				classNameId, DDMTemplateKey, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
 			remove(journalArticle);
 		}
 	}
@@ -23031,9 +23043,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles
 	 */
 	@Override
-	public int countByG_C_DT(long groupId, long classNameId,
+	public int countByG_C_DDMTK(long groupId, long classNameId,
 		String DDMTemplateKey) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_DT;
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_DDMTK;
 
 		Object[] finderArgs = new Object[] { groupId, classNameId, DDMTemplateKey };
 
@@ -23045,22 +23057,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_C_DT_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_C_DT_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2);
 
 			boolean bindDDMTemplateKey = false;
 
 			if (DDMTemplateKey == null) {
-				query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1);
+				query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1);
 			}
 			else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3);
+				query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3);
 			}
 			else {
 				bindDDMTemplateKey = true;
 
-				query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2);
+				query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2);
 			}
 
 			String sql = query.toString();
@@ -23108,32 +23120,32 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @return the number of matching journal articles that the user has permission to view
 	 */
 	@Override
-	public int filterCountByG_C_DT(long groupId, long classNameId,
+	public int filterCountByG_C_DDMTK(long groupId, long classNameId,
 		String DDMTemplateKey) {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_C_DT(groupId, classNameId, DDMTemplateKey);
+			return countByG_C_DDMTK(groupId, classNameId, DDMTemplateKey);
 		}
 
 		StringBundler query = new StringBundler(4);
 
 		query.append(_FILTER_SQL_COUNT_JOURNALARTICLE_WHERE);
 
-		query.append(_FINDER_COLUMN_G_C_DT_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_C_DT_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2);
 
 		boolean bindDDMTemplateKey = false;
 
 		if (DDMTemplateKey == null) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1);
 		}
 		else if (DDMTemplateKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3);
 		}
 		else {
 			bindDDMTemplateKey = true;
 
-			query.append(_FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2);
+			query.append(_FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2);
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -23172,11 +23184,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	private static final String _FINDER_COLUMN_G_C_DT_GROUPID_2 = "journalArticle.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_DT_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_1 = "journalArticle.DDMTemplateKey IS NULL";
-	private static final String _FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_2 = "journalArticle.DDMTemplateKey = ?";
-	private static final String _FINDER_COLUMN_G_C_DT_DDMTEMPLATEKEY_3 = "(journalArticle.DDMTemplateKey IS NULL OR journalArticle.DDMTemplateKey = '')";
+	private static final String _FINDER_COLUMN_G_C_DDMTK_GROUPID_2 = "journalArticle.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_DDMTK_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_1 = "journalArticle.DDMTemplateKey IS NULL";
+	private static final String _FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_2 = "journalArticle.DDMTemplateKey = ?";
+	private static final String _FINDER_COLUMN_G_C_DDMTK_DDMTEMPLATEKEY_3 = "(journalArticle.DDMTemplateKey IS NULL OR journalArticle.DDMTemplateKey = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_L = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			JournalArticleImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -28762,7 +28774,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			new Object[] { journalArticle.getUuid(), journalArticle.getGroupId() },
 			journalArticle);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DS,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DDMSK,
 			new Object[] {
 				journalArticle.getGroupId(), journalArticle.getClassNameId(),
 				journalArticle.getDDMStructureKey()
@@ -28863,9 +28875,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					journalArticle.getDDMStructureKey()
 				};
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_DS, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_DDMSK, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DS, args,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DDMSK, args,
 				journalArticle);
 
 			args = new Object[] {
@@ -28894,16 +28906,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_C_DS.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_G_C_DDMSK.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						journalArticle.getGroupId(),
 						journalArticle.getClassNameId(),
 						journalArticle.getDDMStructureKey()
 					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_DS, args,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_DDMSK, args,
 					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DS, args,
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_DDMSK, args,
 					journalArticle);
 			}
 
@@ -28949,19 +28961,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				journalArticle.getDDMStructureKey()
 			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DS, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_DS, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DDMSK, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_DDMSK, args);
 
 		if ((journalArticleModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_C_DS.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_G_C_DDMSK.getColumnBitmask()) != 0) {
 			args = new Object[] {
 					journalArticleModelImpl.getOriginalGroupId(),
 					journalArticleModelImpl.getOriginalClassNameId(),
 					journalArticleModelImpl.getOriginalDDMStructureKey()
 				};
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DS, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_DS, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DDMSK, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_DDMSK, args);
 		}
 
 		args = new Object[] {
@@ -29428,14 +29440,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DS.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMSK.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						journalArticleModelImpl.getOriginalGroupId(),
 						journalArticleModelImpl.getOriginalDDMStructureKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DS, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DS,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DDMSK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMSK,
 					args);
 
 				args = new Object[] {
@@ -29443,20 +29455,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						journalArticleModelImpl.getDDMStructureKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DS, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DS,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DDMSK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMSK,
 					args);
 			}
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DT.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMTK.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						journalArticleModelImpl.getOriginalGroupId(),
 						journalArticleModelImpl.getOriginalDDMTemplateKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DDMTK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMTK,
 					args);
 
 				args = new Object[] {
@@ -29464,8 +29476,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						journalArticleModelImpl.getDDMTemplateKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_DDMTK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMTK,
 					args);
 			}
 
@@ -29554,14 +29566,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DT.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DDMTK.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						journalArticleModelImpl.getOriginalClassNameId(),
 						journalArticleModelImpl.getOriginalDDMTemplateKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_DT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_DDMTK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DDMTK,
 					args);
 
 				args = new Object[] {
@@ -29569,8 +29581,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						journalArticleModelImpl.getDDMTemplateKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_DT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_DDMTK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DDMTK,
 					args);
 			}
 
@@ -29667,15 +29679,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DT.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DDMTK.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						journalArticleModelImpl.getOriginalGroupId(),
 						journalArticleModelImpl.getOriginalClassNameId(),
 						journalArticleModelImpl.getOriginalDDMTemplateKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DDMTK,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DDMTK,
 					args);
 
 				args = new Object[] {
@@ -29684,8 +29697,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						journalArticleModelImpl.getDDMTemplateKey()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_DDMTK,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DDMTK,
 					args);
 			}
 

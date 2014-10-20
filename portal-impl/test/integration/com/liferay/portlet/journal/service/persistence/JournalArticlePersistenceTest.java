@@ -520,13 +520,14 @@ public class JournalArticlePersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_DS() {
+	public void testCountByG_DDMSK() {
 		try {
-			_persistence.countByG_DS(RandomTestUtil.nextLong(), StringPool.BLANK);
+			_persistence.countByG_DDMSK(RandomTestUtil.nextLong(),
+				StringPool.BLANK);
 
-			_persistence.countByG_DS(0L, StringPool.NULL);
+			_persistence.countByG_DDMSK(0L, StringPool.NULL);
 
-			_persistence.countByG_DS(0L, (String)null);
+			_persistence.countByG_DDMSK(0L, (String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
@@ -534,13 +535,14 @@ public class JournalArticlePersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_DT() {
+	public void testCountByG_DDMTK() {
 		try {
-			_persistence.countByG_DT(RandomTestUtil.nextLong(), StringPool.BLANK);
+			_persistence.countByG_DDMTK(RandomTestUtil.nextLong(),
+				StringPool.BLANK);
 
-			_persistence.countByG_DT(0L, StringPool.NULL);
+			_persistence.countByG_DDMTK(0L, StringPool.NULL);
 
-			_persistence.countByG_DT(0L, (String)null);
+			_persistence.countByG_DDMTK(0L, (String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
@@ -614,13 +616,14 @@ public class JournalArticlePersistenceTest {
 	}
 
 	@Test
-	public void testCountByC_DT() {
+	public void testCountByC_DDMTK() {
 		try {
-			_persistence.countByC_DT(RandomTestUtil.nextLong(), StringPool.BLANK);
+			_persistence.countByC_DDMTK(RandomTestUtil.nextLong(),
+				StringPool.BLANK);
 
-			_persistence.countByC_DT(0L, StringPool.NULL);
+			_persistence.countByC_DDMTK(0L, StringPool.NULL);
 
-			_persistence.countByC_DT(0L, (String)null);
+			_persistence.countByC_DDMTK(0L, (String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
@@ -717,14 +720,14 @@ public class JournalArticlePersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_C_DS() {
+	public void testCountByG_C_DDMSK() {
 		try {
-			_persistence.countByG_C_DS(RandomTestUtil.nextLong(),
+			_persistence.countByG_C_DDMSK(RandomTestUtil.nextLong(),
 				RandomTestUtil.nextLong(), StringPool.BLANK);
 
-			_persistence.countByG_C_DS(0L, 0L, StringPool.NULL);
+			_persistence.countByG_C_DDMSK(0L, 0L, StringPool.NULL);
 
-			_persistence.countByG_C_DS(0L, 0L, (String)null);
+			_persistence.countByG_C_DDMSK(0L, 0L, (String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
@@ -732,14 +735,14 @@ public class JournalArticlePersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_C_DT() {
+	public void testCountByG_C_DDMTK() {
 		try {
-			_persistence.countByG_C_DT(RandomTestUtil.nextLong(),
+			_persistence.countByG_C_DDMTK(RandomTestUtil.nextLong(),
 				RandomTestUtil.nextLong(), StringPool.BLANK);
 
-			_persistence.countByG_C_DT(0L, 0L, StringPool.NULL);
+			_persistence.countByG_C_DDMTK(0L, 0L, StringPool.NULL);
 
-			_persistence.countByG_C_DT(0L, 0L, (String)null);
+			_persistence.countByG_C_DDMTK(0L, 0L, (String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
