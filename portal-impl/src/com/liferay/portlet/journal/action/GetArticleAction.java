@@ -143,16 +143,16 @@ public class GetArticleAction extends Action {
 
 		// XSL template
 
-		String templateId = article.getDDMTemplateKey();
+		String ddmTemplateKey = article.getDDMTemplateKey();
 
-		if (Validator.isNull(templateId)) {
+		if (Validator.isNull(ddmTemplateKey)) {
 			return;
 		}
 
 		try {
 			DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
 				article.getGroupId(),
-				PortalUtil.getClassNameId(DDMStructure.class), templateId,
+				PortalUtil.getClassNameId(DDMStructure.class), ddmTemplateKey,
 				true);
 
 			if (Validator.equals(
