@@ -85,7 +85,7 @@ public class InvokerFilterContainerImpl
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		properties.put("javax.portlet.name", rootPortletId);
-		properties.put(_PRE_INITIALIZED_FILTER, Boolean.TRUE);
+		properties.put("preinitialized.filter", Boolean.TRUE);
 
 		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
 			portlet.getPortletFilters();
@@ -172,9 +172,6 @@ public class InvokerFilterContainerImpl
 		return _resourceFilters;
 	}
 
-	private static final String _PRE_INITIALIZED_FILTER =
-		"pre.initialized.filter";
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		InvokerFilterContainerImpl.class);
 
@@ -206,10 +203,10 @@ public class InvokerFilterContainerImpl
 
 			PortletFilter portletFilter = registry.getService(serviceReference);
 
-			boolean preInitializedFilter = GetterUtil.getBoolean(
-				serviceReference.getProperty(_PRE_INITIALIZED_FILTER));
+			boolean preinitializedFilter = GetterUtil.getBoolean(
+				serviceReference.getProperty("preinitialized.filter"));
 
-			if (!preInitializedFilter) {
+			if (!preinitializedFilter) {
 				String filterName = GetterUtil.getString(
 					serviceReference.getProperty("service.id"),
 					ClassUtil.getClassName(portletFilter));
@@ -277,10 +274,10 @@ public class InvokerFilterContainerImpl
 			_renderFilters.remove(portletFilter);
 			_resourceFilters.remove(portletFilter);
 
-			boolean preInitializedFilter = GetterUtil.getBoolean(
-				serviceReference.getProperty(_PRE_INITIALIZED_FILTER));
+			boolean preinitializedFilter = GetterUtil.getBoolean(
+				serviceReference.getProperty("preinitialized.filter"));
 
-			if (preInitializedFilter) {
+			if (preinitializedFilter) {
 				return;
 			}
 
