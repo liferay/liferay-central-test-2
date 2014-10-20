@@ -20,7 +20,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
-boolean showCacheableInput = ParamUtil.getBoolean(request, "showCacheableInput", false);
+boolean showCacheableInput = ParamUtil.getBoolean(request, "showCacheableInput");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
