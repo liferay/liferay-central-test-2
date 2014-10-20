@@ -118,7 +118,6 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 	}
 
 	@DeleteAfterTestRun
-	private final Set<EmailAddress> _emailAddresses =
-		new HashSet<EmailAddress>();
+	private final Set<EmailAddress> _emailAddresses = new HashSet<EmailAddress>();
 
 }
