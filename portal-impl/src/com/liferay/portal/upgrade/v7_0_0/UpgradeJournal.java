@@ -386,8 +386,8 @@ public class UpgradeJournal extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL(
-				"alter_column_name JournalArticle structureId DDMStructureKey " +
-					"VARCHAR(75) null");
+				"alter_column_name JournalArticle structureId " +
+					"DDMStructureKey VARCHAR(75) null");
 
 			runSQL(
 				"alter_column_name JournalArticle templateId DDMtemplateKey " +
