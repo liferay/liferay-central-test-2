@@ -721,8 +721,8 @@ public class UpgradeJournal extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select id_, content from JournalArticle where companyId = " +
-					companyId + " and ddmStructureKey is NULL or " +
-					"ddmStructureKey LIKE ''");
+					companyId + " and ddmStructureKey is null or " +
+						"ddmStructureKey like ''");
 
 			String name = addBasicWebContentStructureAndTemplate(companyId);
 
