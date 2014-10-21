@@ -1588,6 +1588,7 @@ public class JavadocFormatter {
 
 			while (line.equals(StringPool.BLANK)) {
 				line = lines[--pos];
+
 				blankLines++;
 			}
 
