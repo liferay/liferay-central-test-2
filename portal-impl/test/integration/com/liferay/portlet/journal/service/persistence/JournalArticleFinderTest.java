@@ -386,7 +386,7 @@ public class JournalArticleFinderTest {
 		int actualCount =
 			JournalArticleFinderUtil.countByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 				companyId, groupId, folderIds, classNameId, articleId, version,
-				title, description, content, type, ddmStructureKey,
+				title, description, content, ddmStructureKey,
 				ddmTemplateKey, displayDateGT, displayDateLT, reviewDate,
 				andOperator, queryDefinition);
 
@@ -395,7 +395,7 @@ public class JournalArticleFinderTest {
 		List<JournalArticle> articles =
 			JournalArticleFinderUtil.findByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 				companyId, groupId, folderIds, classNameId, articleId, version,
-				title, description, content, type, ddmStructureKey,
+				title, description, content, ddmStructureKey,
 				ddmTemplateKey, displayDateGT, displayDateLT, reviewDate,
 				andOperator, queryDefinition);
 
