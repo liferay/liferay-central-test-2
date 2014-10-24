@@ -181,10 +181,6 @@ public class DDMStructureLocalServiceImpl
 
 		ddmStructurePersistence.update(structure);
 
-		// Structure version
-
-		addStructureVersion(structure, DDMStructureConstants.VERSION_DEFAULT);
-
 		// Resources
 
 		if (serviceContext.isAddGroupPermissions() ||
@@ -199,6 +195,10 @@ public class DDMStructureLocalServiceImpl
 				structure, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
+
+		// Structure version
+
+		addStructureVersion(structure, DDMStructureConstants.VERSION_DEFAULT);
 
 		return structure;
 	}
@@ -1388,6 +1388,8 @@ public class DDMStructureLocalServiceImpl
 			ServiceContext serviceContext, DDMStructure structure)
 		throws PortalException {
 
+		// Structure
+
 		try {
 			definition = DDMXMLUtil.validateXML(definition);
 			definition = DDMXMLUtil.formatXML(definition);
@@ -1417,13 +1419,13 @@ public class DDMStructureLocalServiceImpl
 
 		ddmStructurePersistence.update(structure);
 
+		// Structure templates
+
+		syncStructureTemplatesFields(structure);
+
 		// Structure version
 
 		addStructureVersion(structure, version);
-
-		// Sync structure templates
-
-		syncStructureTemplatesFields(structure);
 
 		// Indexer
 
@@ -1502,10 +1504,9 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	protected String getNextVersion(
-		String currentVersion, boolean majorVersion) {
+		String version, boolean majorVersion) {
 
-		int[] versionParts = StringUtil.split(
-			currentVersion, StringPool.PERIOD, 0);
+		int[] versionParts = StringUtil.split(version, StringPool.PERIOD, 0);
 
 		if (majorVersion) {
 			versionParts[0]++;
