@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.upgrade.portlet;
+package com.liferay.bookmarks.upgrade.v1_0_0;
 
 import com.liferay.portal.upgrade.util.UpgradePortletId;
 

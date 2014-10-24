@@ -12,21 +12,26 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.upgrade.admin;
+package com.liferay.bookmarks.upgrade.v1_0_0;
 
+import com.liferay.bookmarks.constants.BookmarksConstants;
 import com.liferay.bookmarks.constants.BookmarksPortletKeys;
-import com.liferay.portal.kernel.upgrade.BaseUpgradeAdminPortlets;
+import com.liferay.bookmarks.settings.BookmarksSettings;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.upgrade.v7_0_0.UpgradePortletSettings;
+import com.liferay.portal.util.PortletKeys;
 
 /**
  * @author Miguel Pastor
  */
-public class UpgradeAdminPortlets extends BaseUpgradeAdminPortlets {
+public class UpgradeBookmarksSettings extends UpgradePortletSettings {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateAccessInControlPanelPermission(
-			BookmarksPortletKeys.BOOKMARKS,
-			BookmarksPortletKeys.BOOKMARKS_ADMIN);
+		upgradeMainPortlet(
+			BookmarksPortletKeys.BOOKMARKS, BookmarksConstants.SERVICE_NAME,
+			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, StringPool.EMPTY_ARRAY,
+			BookmarksSettings.ALL_KEYS);
 	}
 
 }

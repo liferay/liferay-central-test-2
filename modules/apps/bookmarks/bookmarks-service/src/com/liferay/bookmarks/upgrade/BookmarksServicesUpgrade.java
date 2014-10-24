@@ -14,8 +14,8 @@
 
 package com.liferay.bookmarks.upgrade;
 
-import com.liferay.bookmarks.upgrade.portlet.UpgradeBookmarksPortletIds;
-import com.liferay.bookmarks.upgrade.settings.UpgradeBookmarksSettings;
+import com.liferay.bookmarks.upgrade.v1_0_0.UpgradeBookmarksPortletIds;
+import com.liferay.bookmarks.upgrade.v1_0_0.UpgradeBookmarksSettings;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
