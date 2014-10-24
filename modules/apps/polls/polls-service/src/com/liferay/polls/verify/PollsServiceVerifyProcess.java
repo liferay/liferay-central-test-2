@@ -29,8 +29,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Miguel Pastor
  */
-@Component(immediate = true, service = PollsServiceVerifier.class)
-public class PollsServiceVerifier extends VerifyProcess {
+@Component(immediate = true, service = PollsServiceVerifyProcess.class)
+public class PollsServiceVerifyProcess extends VerifyProcess {
 
 	@Activate
 	@Override

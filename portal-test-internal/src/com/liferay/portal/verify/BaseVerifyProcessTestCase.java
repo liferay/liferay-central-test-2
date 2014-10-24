@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  * @author Manuel de la Peña
  */
-public abstract class BaseVerifyTestCase {
+public abstract class BaseVerifyProcessTestCase {
 
 	@Test
 	public void testVerify() throws Exception {

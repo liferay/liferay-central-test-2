@@ -34,8 +34,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  * @author Alexander Chow
  */
-@Component(immediate = true, service = BookmarksServiceVerifier.class)
-public class BookmarksServiceVerifier extends VerifyProcess {
+@Component(immediate = true, service = BookmarksServiceVerifyProcess.class)
+public class BookmarksServiceVerifyProcess extends VerifyProcess {
 
 	@Activate
 	@Override
@@ -115,6 +115,6 @@ public class BookmarksServiceVerifier extends VerifyProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		BookmarksServiceVerifier.class);
+		BookmarksServiceVerifyProcess.class);
 
 }

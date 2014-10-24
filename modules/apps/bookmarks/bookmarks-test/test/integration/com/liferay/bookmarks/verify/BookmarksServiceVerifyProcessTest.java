@@ -29,7 +29,7 @@ import com.liferay.portal.util.test.GroupTestUtil;
 import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portal.util.test.ServiceContextTestUtil;
 import com.liferay.portal.util.test.TestPropsValues;
-import com.liferay.portal.verify.BaseVerifyTestCase;
+import com.liferay.portal.verify.BaseVerifyProcessTestCase;
 import com.liferay.portal.verify.VerifyProcess;
 
 import org.junit.Before;
@@ -43,7 +43,8 @@ import org.junit.runner.RunWith;
  */
 @ExecutionTestListeners(listeners = {MainServletExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class VerifyBookmarksTest extends BaseVerifyTestCase {
+public class BookmarksServiceVerifyProcessTest
+	extends BaseVerifyProcessTestCase {
 
 	@Before
 	public void setUp() throws Exception {
