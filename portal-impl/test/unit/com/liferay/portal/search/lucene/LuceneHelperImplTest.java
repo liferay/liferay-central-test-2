@@ -163,9 +163,10 @@ public class LuceneHelperImplTest {
 	)
 	@Test
 	public void testLoadIndexClusterEventListener1() throws Exception {
-		ClusterEvent clusterEvent = ClusterEvent.join(_clusterNode);
 
 		// Test 1, 2 nodes in cluster
+
+		ClusterEvent clusterEvent = ClusterEvent.join(_clusterNode);
 
 		_mockClusterExecutor.reset();
 
