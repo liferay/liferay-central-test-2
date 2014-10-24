@@ -43,7 +43,7 @@ public class DDMStructureVersionLocalServiceImpl
 
 		if (structureVersions.isEmpty()) {
 			throw new NoSuchStructureVersionException(
-				"No structure versions found for structureId " + structureId);
+				"No structure versions found for structure ID " + structureId);
 		}
 
 		structureVersions = ListUtil.copy(structureVersions);

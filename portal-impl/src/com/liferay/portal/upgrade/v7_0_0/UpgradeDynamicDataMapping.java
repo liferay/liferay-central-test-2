@@ -79,7 +79,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		catch (Exception e) {
 			_log.error(
 				"Unable to upgrade dynamic data mapping structure version " +
-					"with structureId " + structureId);
+					"with structure ID " + structureId);
 
 			throw e;
 		}
@@ -113,10 +113,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				String storageType = rs.getString("storageType");
 				int type = rs.getInt("type_");
 
-				long structureVersionId = increment();
-
 				addStructureVersion(
-					structureVersionId, groupId, companyId, userId, userName,
+					increment(), groupId, companyId, userId, userName,
 					modifiedDate, structureId, name, description, definition,
 					storageType, type);
 			}
