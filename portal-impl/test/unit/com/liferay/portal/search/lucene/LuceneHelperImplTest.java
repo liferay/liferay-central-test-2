@@ -518,9 +518,7 @@ public class LuceneHelperImplTest {
 
 			Object[] arguments = proceedingJoinPoint.getArgs();
 
-			if (arguments[0] instanceof Long) {
-				_COMPANY_ID = (Long)arguments[0];
-			}
+			_COMPANY_ID = (Long)arguments[0];
 		}
 
 		private static long _COMPANY_ID = Long.MAX_VALUE;
