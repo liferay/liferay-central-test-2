@@ -639,24 +639,22 @@ public class JournalArticleStagedModelDataHandler
 					newArticleId, article.getVersion(), preloaded);
 
 				if (existingArticle == null) {
-					importedArticle =
-						JournalArticleLocalServiceUtil.addArticle(
-							userId, portletDataContext.getScopeGroupId(),
-							folderId, article.getClassNameId(), ddmStructureId,
-							articleId, autoArticleId, article.getVersion(),
-							article.getTitleMap(), article.getDescriptionMap(),
-							article.getContent(), parentDDMStructureKey,
-							parentDDMTemplateKey, article.getLayoutUuid(),
-							displayDateMonth, displayDateDay, displayDateYear,
-							displayDateHour, displayDateMinute,
-							expirationDateMonth, expirationDateDay,
-							expirationDateYear, expirationDateHour,
-							expirationDateMinute, neverExpire, reviewDateMonth,
-							reviewDateDay, reviewDateYear, reviewDateHour,
-							reviewDateMinute, neverReview,
-							article.isIndexable(), article.isSmallImage(),
-							article.getSmallImageURL(), smallFile, images,
-							articleURL, serviceContext);
+					importedArticle = JournalArticleLocalServiceUtil.addArticle(
+						userId, portletDataContext.getScopeGroupId(), folderId,
+						article.getClassNameId(), ddmStructureId, articleId,
+						autoArticleId, article.getVersion(),
+						article.getTitleMap(), article.getDescriptionMap(),
+						article.getContent(), parentDDMStructureKey,
+						parentDDMTemplateKey, article.getLayoutUuid(),
+						displayDateMonth, displayDateDay, displayDateYear,
+						displayDateHour, displayDateMinute, expirationDateMonth,
+						expirationDateDay, expirationDateYear,
+						expirationDateHour, expirationDateMinute, neverExpire,
+						reviewDateMonth, reviewDateDay, reviewDateYear,
+						reviewDateHour, reviewDateMinute, neverReview,
+						article.isIndexable(), article.isSmallImage(),
+						article.getSmallImageURL(), smallFile, images,
+						articleURL, serviceContext);
 				}
 				else {
 					importedArticle =
