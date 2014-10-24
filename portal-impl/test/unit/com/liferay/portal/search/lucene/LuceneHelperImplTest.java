@@ -217,11 +217,15 @@ public class LuceneHelperImplTest {
 		adviceClasses = {
 			DisableIndexOnStartUpAdvice.class, EnableClusterLinkAdvice.class,
 			EnableLuceneReplicateWriteAdvice.class,
-			LuceneClusterUtilWithExceptionAdvice.class
+			LuceneClusterUtilAdvice.class
 		}
 	)
 	@Test
 	public void testLoadIndexClusterEventListener2() {
+		Exception exception = new Exception();
+
+		LuceneClusterUtilAdvice.setException(exception);
+
 		_mockClusterExecutor.setNodeNumber(2);
 
 		List<LogRecord> logRecords = _captureHandler.resetLogLevel(
@@ -239,12 +243,7 @@ public class LuceneHelperImplTest {
 			logRecord, "Unable to load indexes for company " + _COMPANY_ID,
 			Exception.class);
 
-		Exception exception = (Exception)logRecord.getThrown();
-
-		Assert.assertEquals(
-			"Unable to execute LuceneClusterUtil.loadIndexesFromCluster(" +
-				"long)",
-			exception.getMessage());
+		Assert.assertSame(exception, logRecord.getThrown());
 	}
 
 	@AdviseWith(
@@ -502,12 +501,20 @@ public class LuceneHelperImplTest {
 			_COMPANY_ID = Long.MAX_VALUE;
 		}
 
+		public static void setException(Exception exception) {
+			_exception = exception;
+		}
+
 		@Around(
 			"execution(* com.liferay.portal.search.lucene.cluster." +
 				"LuceneClusterUtil.loadIndexesFromCluster(long))")
 		public void loadIndexesFromCluster(
 				ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
+
+			if (_exception != null) {
+				throw _exception;
+			}
 
 			Object[] arguments = proceedingJoinPoint.getArgs();
 
@@ -518,22 +525,7 @@ public class LuceneHelperImplTest {
 
 		private static long _COMPANY_ID = Long.MAX_VALUE;
 
-	}
-
-	@Aspect
-	public static class LuceneClusterUtilWithExceptionAdvice {
-
-		@Around(
-			"execution(* com.liferay.portal.search.lucene.cluster." +
-				"LuceneClusterUtil.loadIndexesFromCluster(long))")
-		public void loadIndexesFromClusterWithException(
-				ProceedingJoinPoint proceedingJoinPoint)
-			throws Throwable {
-
-			throw new Exception(
-				"Unable to execute LuceneClusterUtil.loadIndexesFromCluster(" +
-					"long)");
-		}
+		private static Exception _exception;
 
 	}
 
