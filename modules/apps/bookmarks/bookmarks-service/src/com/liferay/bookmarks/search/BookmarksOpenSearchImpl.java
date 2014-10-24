@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.opensearch;
+package com.liferay.bookmarks.search;
 
 import com.liferay.bookmarks.constants.BookmarksPortletKeys;
 import com.liferay.bookmarks.model.BookmarksEntry;

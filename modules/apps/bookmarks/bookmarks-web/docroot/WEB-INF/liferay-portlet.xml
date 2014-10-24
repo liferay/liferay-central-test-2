@@ -8,7 +8,7 @@
 		<struts-path>bookmarks</struts-path>
 		<indexer-class>com.liferay.bookmarks.indexer.BookmarksEntryIndexer</indexer-class>
 		<indexer-class>com.liferay.bookmarks.indexer.BookmarksFolderIndexer</indexer-class>
-		<open-search-class>com.liferay.bookmarks.opensearch.BookmarksOpenSearchImpl</open-search-class>
+		<open-search-class>com.liferay.bookmarks.search.BookmarksOpenSearchImpl</open-search-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>bookmarks</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/bookmarks/web/bookmarks-friendly-url-routes.xml</friendly-url-routes>
