@@ -40,6 +40,7 @@ public class ProcessCallableAssignmentFabricAgentSelectorTest
 	public static CodeCoverageAssertor codeCoverageAssertor =
 		new CodeCoverageAssertor();
 
+	@Override
 	@Test
 	public void testSelect() {
 		FabricAgentSelector fabricAgentSelector =
