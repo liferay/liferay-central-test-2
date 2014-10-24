@@ -16,7 +16,7 @@ package com.liferay.bookmarks.web.upgrade;
 
 import com.liferay.bookmarks.service.configuration.configurator.BookmarksServiceConfigurator;
 import com.liferay.bookmarks.web.upgrade.v1_0_0.UpgradeAdminPortlets;
-import com.liferay.bookmarks.web.upgrade.v1_0_0.UpgradeBookmarksPreferences;
+import com.liferay.bookmarks.web.upgrade.v1_0_0.UpgradePortletPreferences;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -52,8 +52,8 @@ public class BookmarksWebUpgrade {
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
-		upgradeProcesses.add(new UpgradeBookmarksPreferences());
 		upgradeProcesses.add(new UpgradeAdminPortlets());
+		upgradeProcesses.add(new UpgradePortletPreferences());
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.bookmarks.web", upgradeProcesses, 1, 0, false);

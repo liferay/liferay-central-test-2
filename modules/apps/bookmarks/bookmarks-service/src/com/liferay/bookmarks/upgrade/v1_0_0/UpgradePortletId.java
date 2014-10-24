@@ -14,12 +14,11 @@
 
 package com.liferay.bookmarks.upgrade.v1_0_0;
 
-import com.liferay.portal.upgrade.util.UpgradePortletId;
-
 /**
  * @author Miguel Pastor
  */
-public class UpgradeBookmarksPortletIds extends UpgradePortletId {
+public class UpgradePortletId
+	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
 	@Override
 	protected String[][] getRenamePortletIdsArray() {

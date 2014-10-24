@@ -18,13 +18,13 @@ import com.liferay.bookmarks.constants.BookmarksConstants;
 import com.liferay.bookmarks.constants.BookmarksPortletKeys;
 import com.liferay.bookmarks.settings.BookmarksSettings;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.upgrade.v7_0_0.UpgradePortletSettings;
 import com.liferay.portal.util.PortletKeys;
 
 /**
  * @author Miguel Pastor
  */
-public class UpgradeBookmarksSettings extends UpgradePortletSettings {
+public class UpgradePortletSettings
+	extends com.liferay.portal.upgrade.v7_0_0.UpgradePortletSettings {
 
 	@Override
 	protected void doUpgrade() throws Exception {
