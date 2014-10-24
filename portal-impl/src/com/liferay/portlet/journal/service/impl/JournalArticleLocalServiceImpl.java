@@ -3861,7 +3861,7 @@ public class JournalArticleLocalServiceImpl
 		QueryDefinition<JournalArticle> queryDefinition =
 			new QueryDefinition<JournalArticle>(status, start, end, obc);
 
-		return journalArticleFinder.findByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		return journalArticleFinder.findByC_G_F_C_A_V_T_D_C_S_T_D_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
 			title, description, content, ddmStructureKey, ddmTemplateKey,
 			displayDateGT, displayDateLT, reviewDate, andOperator,
@@ -3943,7 +3943,7 @@ public class JournalArticleLocalServiceImpl
 		QueryDefinition<JournalArticle> queryDefinition =
 			new QueryDefinition<JournalArticle>(status, start, end, obc);
 
-		return journalArticleFinder.findByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		return journalArticleFinder.findByC_G_F_C_A_V_T_D_C_S_T_D_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
 			title, description, content, ddmStructureKeys, ddmTemplateKeys,
 			displayDateGT, displayDateLT, reviewDate, andOperator,
@@ -4319,7 +4319,7 @@ public class JournalArticleLocalServiceImpl
 		Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 		boolean andOperator) {
 
-		return journalArticleFinder.countByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		return journalArticleFinder.countByC_G_F_C_A_V_T_D_C_S_T_D_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
 			title, description, content, ddmStructureKey, ddmTemplateKey,
 			displayDateGT, displayDateLT, reviewDate, andOperator,
@@ -4381,7 +4381,7 @@ public class JournalArticleLocalServiceImpl
 		Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 		boolean andOperator) {
 
-		return journalArticleFinder.countByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		return journalArticleFinder.countByC_G_F_C_A_V_T_D_C_S_T_D_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
 			title, description, content, ddmStructureKeys, ddmTemplateKeys,
 			displayDateGT, displayDateLT, reviewDate, andOperator,

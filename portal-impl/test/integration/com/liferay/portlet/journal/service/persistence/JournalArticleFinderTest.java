@@ -384,7 +384,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		int actualCount =
-			JournalArticleFinderUtil.countByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+			JournalArticleFinderUtil.countByC_G_F_C_A_V_T_D_C_S_T_D_R(
 				companyId, groupId, folderIds, classNameId, articleId, version,
 				title, description, content, ddmStructureKey,
 				ddmTemplateKey, displayDateGT, displayDateLT, reviewDate,
@@ -393,7 +393,7 @@ public class JournalArticleFinderTest {
 		Assert.assertEquals(expectedCount, actualCount);
 
 		List<JournalArticle> articles =
-			JournalArticleFinderUtil.findByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+			JournalArticleFinderUtil.findByC_G_F_C_A_V_T_D_C_S_T_D_R(
 				companyId, groupId, folderIds, classNameId, articleId, version,
 				title, description, content, ddmStructureKey,
 				ddmTemplateKey, displayDateGT, displayDateLT, reviewDate,
