@@ -1503,9 +1503,7 @@ public class DDMStructureLocalServiceImpl
 		return elementNames;
 	}
 
-	protected String getNextVersion(
-		String version, boolean majorVersion) {
-
+	protected String getNextVersion(String version, boolean majorVersion) {
 		int[] versionParts = StringUtil.split(version, StringPool.PERIOD, 0);
 
 		if (majorVersion) {
