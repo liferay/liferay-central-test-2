@@ -168,18 +168,17 @@ public class LuceneHelperImplTest {
 		// Test 1, 2 nodes in cluster
 
 		_mockClusterExecutor.reset();
-		LuceneClusterUtilAdvice.reset();
 
 		_mockClusterExecutor.setNodeNumber(2);
 
 		_fireClusterEventListeners(clusterEvent);
 
-		Assert.assertEquals(_COMPANY_ID, LuceneClusterUtilAdvice._COMPANY_ID);
+		Assert.assertEquals(
+			_COMPANY_ID, LuceneClusterUtilAdvice.getCompanyId());
 
 		// Test 2, more than 2 nodes in cluster with debug enabled
 
 		_mockClusterExecutor.reset();
-		LuceneClusterUtilAdvice.reset();
 
 		_mockClusterExecutor.setNodeNumber(3);
 
@@ -194,12 +193,11 @@ public class LuceneHelperImplTest {
 			"Number of original cluster members is greater than one", null);
 
 		Assert.assertNotEquals(
-			_COMPANY_ID, LuceneClusterUtilAdvice._COMPANY_ID);
+			_COMPANY_ID, LuceneClusterUtilAdvice.getCompanyId());
 
 		// Test 3, more than 2 nodes in cluster with debug disabled
 
 		_mockClusterExecutor.reset();
-		LuceneClusterUtilAdvice.reset();
 
 		_mockClusterExecutor.setNodeNumber(3);
 
@@ -210,7 +208,7 @@ public class LuceneHelperImplTest {
 		Assert.assertTrue(logRecords.isEmpty());
 
 		Assert.assertNotEquals(
-			_COMPANY_ID, LuceneClusterUtilAdvice._COMPANY_ID);
+			_COMPANY_ID, LuceneClusterUtilAdvice.getCompanyId());
 	}
 
 	@AdviseWith(
@@ -497,8 +495,12 @@ public class LuceneHelperImplTest {
 	@Aspect
 	public static class LuceneClusterUtilAdvice {
 
-		public static void reset() {
-			_COMPANY_ID = Long.MAX_VALUE;
+		public static long getCompanyId() {
+			long companyId = _companyId;
+
+			_companyId = Long.MAX_VALUE;
+
+			return companyId;
 		}
 
 		public static void setException(Exception exception) {
@@ -518,11 +520,10 @@ public class LuceneHelperImplTest {
 
 			Object[] arguments = proceedingJoinPoint.getArgs();
 
-			_COMPANY_ID = (Long)arguments[0];
+			_companyId = (long)arguments[0];
 		}
 
-		private static long _COMPANY_ID = Long.MAX_VALUE;
-
+		private static long _companyId;
 		private static Exception _exception;
 
 	}
