@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.action;
+package com.liferay.bookmarks.web.portlet.action;
 
 import com.liferay.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.bookmarks.service.BookmarksFolderLocalServiceUtil;

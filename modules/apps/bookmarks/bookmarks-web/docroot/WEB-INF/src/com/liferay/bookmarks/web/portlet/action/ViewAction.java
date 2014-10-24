@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.action;
+package com.liferay.bookmarks.web.portlet.action;
 
 import com.liferay.bookmarks.exception.NoSuchFolderException;
 import com.liferay.portal.kernel.servlet.SessionErrors;

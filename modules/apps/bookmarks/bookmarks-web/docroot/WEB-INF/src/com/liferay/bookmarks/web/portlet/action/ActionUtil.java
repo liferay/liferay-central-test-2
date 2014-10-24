@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.action;
+package com.liferay.bookmarks.web.portlet.action;
 
 import com.liferay.bookmarks.constants.BookmarksWebKeys;
 import com.liferay.bookmarks.exception.NoSuchEntryException;

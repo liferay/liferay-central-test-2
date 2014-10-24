@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.path;
+package com.liferay.bookmarks.web.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 
@@ -27,10 +27,10 @@ import org.osgi.service.component.annotations.Modified;
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/find_folder",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/find_entry",
 	service = AuthPublicPath.class
 )
-public class FindFolderPath extends BaseAuthPublicPath {
+public class FindEntryPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {

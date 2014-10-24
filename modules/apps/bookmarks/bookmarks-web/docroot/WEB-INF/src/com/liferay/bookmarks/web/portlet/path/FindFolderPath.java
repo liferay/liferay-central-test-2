@@ -12,36 +12,34 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.path;
+package com.liferay.bookmarks.web.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 
 import java.util.Map;
 
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Modified;
+
 /**
  * @author Miguel Pastor
  */
-public class BaseAuthPublicPath implements AuthPublicPath {
+@Component(
+	immediate = true,
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/find_folder",
+	service = AuthPublicPath.class
+)
+public class FindFolderPath extends BaseAuthPublicPath {
 
-	public static final String AUTH_PUBLIC_PATH = "auth.public.path";
-
-	@Override
-	public String path() {
-		return _path;
+	@Activate
+	protected void activate(Map<String, String> properties) {
+		updatePath(properties);
 	}
 
-	protected void updatePath(Map<String, String> properties) {
-		if (!properties.containsKey(AUTH_PUBLIC_PATH)) {
-			_path = null;
-
-			return;
-		}
-
-		String path = properties.get(AUTH_PUBLIC_PATH);
-
-		_path = path;
+	@Modified
+	protected void modified(Map<String, String> properties) {
+		updatePath(properties);
 	}
-
-	private String _path;
 
 }
