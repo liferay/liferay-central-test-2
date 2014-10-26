@@ -723,7 +723,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		long companyId = PortalUtil.getCompanyId(request);
-
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		if (!path.equals(_PATH_PORTAL_JSON_SERVICE) &&
