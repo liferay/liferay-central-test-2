@@ -53,6 +53,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		updateFileEntryFileNames();
 
+		// DLFileEntryType
+
+		updateFileEntryTypeNamesAndDescriptions();
+
 		// DLFileVersion
 
 		runSQL("alter table DLFileVersion add fileName VARCHAR(255) null");
@@ -268,8 +272,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	@Override
-	protected void doUpgrade() throws Exception {
+	protected void updateFileEntryTypeNamesAndDescriptions() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -290,7 +293,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long companyId = rs.getLong(1);
 				long groupId = rs.getLong(2);
 
-				upgradeTranslations(companyId, groupId);
+				updateFileEntryTypeNamesAndDescriptions(companyId, groupId);
 			}
 		}
 		finally {
@@ -298,7 +301,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeDLFileEntryType(
+	protected void updateFileEntryTypeNamesAndDescriptions(
 			long companyId, long groupId, String dlFileEntryTypeKey,
 			String nameLanguageKey)
 		throws SQLException {
@@ -336,7 +339,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						groupId, dlFileEntryTypeKey));
 			}
 
-			upgradeDLFileEntryTypeTranslation(
+			updateFileEntryTypeNamesAndDescriptions(
 				companyId, fileEntryTypeId, nameLanguageKey, name, description);
 		}
 		finally {
@@ -344,7 +347,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeDLFileEntryType(
+	protected void updateFileEntryTypeNamesAndDescriptions(
 			long fileEntryTypeId, String nameXML, String descriptionXML,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			Locale defaultLocale)
@@ -386,7 +389,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeDLFileEntryTypeTranslation(
+	protected void updateFileEntryTypeNamesAndDescriptions(
 			long companyId, long dlFileEntryTypeId, String nameLanguageKey,
 			String nameXML, String descriptionXML)
 		throws SQLException {
@@ -430,13 +433,13 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 
 		if (update) {
-			upgradeDLFileEntryType(
+			updateFileEntryTypeNamesAndDescriptions(
 				dlFileEntryTypeId, nameXML, descriptionXML, nameMap,
 				descriptionMap, defaultLocale);
 		}
 	}
 
-	protected void upgradeTranslations(long companyId, long groupId)
+	protected void updateFileEntryTypeNamesAndDescriptions(long companyId, long groupId)
 		throws PortalException {
 
 		try {
@@ -446,7 +449,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String dlFileEntryTypeKey = nameAndKey.getValue();
 				String nameLanguageKey = nameAndKey.getKey();
 
-				upgradeDLFileEntryType(
+				updateFileEntryTypeNamesAndDescriptions(
 					companyId, groupId, dlFileEntryTypeKey, nameLanguageKey);
 			}
 		}
