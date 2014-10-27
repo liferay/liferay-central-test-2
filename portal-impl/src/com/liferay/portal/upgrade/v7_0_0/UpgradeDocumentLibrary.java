@@ -35,6 +35,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -219,59 +220,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateFileVersionFileName(
-			long fileVersionId, String fileName)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update DLFileVersion set fileName = ? where " +
-					"fileVersionId = ?");
-
-			ps.setString(1, fileName);
-			ps.setLong(2, fileVersionId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
-
-	protected void updateFileVersionFileNames() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select fileVersionId, extension, title from DLFileVersion");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long fileVersionId = rs.getLong("fileVersionId");
-				String extension = GetterUtil.getString(
-					rs.getString("extension"));
-				String title = GetterUtil.getString(rs.getString("title"));
-
-				String fileName = DLUtil.getSanitizedFileName(title, extension);
-
-				updateFileVersionFileName(fileVersionId, fileName);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	protected void updateFileEntryTypeNamesAndDescriptions() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -298,6 +246,26 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateFileEntryTypeNamesAndDescriptions(
+			long companyId, long groupId)
+		throws PortalException {
+
+		try {
+			for (Map.Entry<String, String> nameAndKey :
+					_DEFAULT_FILE_ENTRY_TYPE_MAP.entrySet()) {
+
+				String dlFileEntryTypeKey = nameAndKey.getValue();
+				String nameLanguageKey = nameAndKey.getKey();
+
+				updateFileEntryTypeNamesAndDescriptions(
+					companyId, groupId, dlFileEntryTypeKey, nameLanguageKey);
+			}
+		}
+		catch (SQLException sqle) {
+			throw new UpgradeException(sqle);
 		}
 	}
 
@@ -348,6 +316,54 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateFileEntryTypeNamesAndDescriptions(
+			long companyId, long dlFileEntryTypeId, String nameLanguageKey,
+			String nameXML, String descriptionXML)
+		throws SQLException {
+
+		boolean update = false;
+
+		Locale defaultLocale = LocaleUtil.fromLanguageId(
+			UpgradeProcessUtil.getDefaultLanguageId(companyId));
+
+		String defaultValue = LanguageUtil.get(defaultLocale, nameLanguageKey);
+
+		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+			nameXML);
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(descriptionXML);
+
+		for (Locale locale : LanguageUtil.getSupportedLocales()) {
+			String value = LanguageUtil.get(locale, nameLanguageKey);
+
+			if (!locale.equals(defaultLocale) && value.equals(defaultValue)) {
+				continue;
+			}
+
+			String description = descriptionMap.get(locale);
+
+			if (description == null) {
+				descriptionMap.put(locale, value);
+
+				update = true;
+			}
+
+			String name = nameMap.get(locale);
+
+			if (name == null) {
+				nameMap.put(locale, value);
+
+				update = true;
+			}
+		}
+
+		if (update) {
+			updateFileEntryTypeNamesAndDescriptions(
+				dlFileEntryTypeId, nameXML, descriptionXML, nameMap,
+				descriptionMap, defaultLocale);
+		}
+	}
+
+	protected void updateFileEntryTypeNamesAndDescriptions(
 			long fileEntryTypeId, String nameXML, String descriptionXML,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			Locale defaultLocale)
@@ -389,72 +405,56 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateFileEntryTypeNamesAndDescriptions(
-			long companyId, long dlFileEntryTypeId, String nameLanguageKey,
-			String nameXML, String descriptionXML)
-		throws SQLException {
+	protected void updateFileVersionFileName(
+			long fileVersionId, String fileName)
+		throws Exception {
 
-		boolean update = false;
+		Connection con = null;
+		PreparedStatement ps = null;
 
-		Locale defaultLocale = LocaleUtil.fromLanguageId(
-			UpgradeProcessUtil.getDefaultLanguageId(companyId));
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
 
-		String defaultValue = LanguageUtil.get(defaultLocale, nameLanguageKey);
+			ps = con.prepareStatement(
+				"update DLFileVersion set fileName = ? where " +
+					"fileVersionId = ?");
 
-		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-			nameXML);
-		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizationMap(descriptionXML);
+			ps.setString(1, fileName);
+			ps.setLong(2, fileVersionId);
 
-		for (Locale locale : LanguageUtil.getSupportedLocales()) {
-			String value = LanguageUtil.get(locale, nameLanguageKey);
-
-			if (!locale.equals(defaultLocale) &&
-				value.equals(defaultValue)) {
-
-				continue;
-			}
-
-			String description = descriptionMap.get(locale);
-
-			if (description == null) {
-				descriptionMap.put(locale, value);
-
-				update = true;
-			}
-
-			String name = nameMap.get(locale);
-
-			if (name == null) {
-				nameMap.put(locale, value);
-
-				update = true;
-			}
+			ps.executeUpdate();
 		}
-
-		if (update) {
-			updateFileEntryTypeNamesAndDescriptions(
-				dlFileEntryTypeId, nameXML, descriptionXML, nameMap,
-				descriptionMap, defaultLocale);
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
-	protected void updateFileEntryTypeNamesAndDescriptions(long companyId, long groupId)
-		throws PortalException {
+	protected void updateFileVersionFileNames() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
-			for (Map.Entry<String, String> nameAndKey :
-					_DEFAULT_FILE_ENTRY_TYPE_MAP.entrySet()) {
+			con = DataAccess.getUpgradeOptimizedConnection();
 
-				String dlFileEntryTypeKey = nameAndKey.getValue();
-				String nameLanguageKey = nameAndKey.getKey();
+			ps = con.prepareStatement(
+				"select fileVersionId, extension, title from DLFileVersion");
 
-				updateFileEntryTypeNamesAndDescriptions(
-					companyId, groupId, dlFileEntryTypeKey, nameLanguageKey);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long fileVersionId = rs.getLong("fileVersionId");
+				String extension = GetterUtil.getString(
+					rs.getString("extension"));
+				String title = GetterUtil.getString(rs.getString("title"));
+
+				String fileName = DLUtil.getSanitizedFileName(title, extension);
+
+				updateFileVersionFileName(fileVersionId, fileName);
 			}
 		}
-		catch (SQLException sqle) {
-			throw new UpgradeException(sqle);
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
