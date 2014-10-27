@@ -498,7 +498,8 @@ public class EditArticleAction extends PortletAction {
 
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
 			PortalUtil.getSiteGroupId(groupId),
-			PortalUtil.getClassNameId(JournalArticle.class), ddmStructureKey, true);
+			PortalUtil.getClassNameId(JournalArticle.class), ddmStructureKey,
+			true);
 
 		String languageId = defaultLanguageId;
 

@@ -36,6 +36,10 @@ public class JournalArticleTag extends IncludeTag {
 		_articleResourcePrimKey = articleResourcePrimKey;
 	}
 
+	public void setDDMTemplateKey(String ddmTemplateKey) {
+		_ddmTemplateKey = ddmTemplateKey;
+	}
+
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
@@ -56,10 +60,6 @@ public class JournalArticleTag extends IncludeTag {
 
 	public void setShowTitle(boolean showTitle) {
 		_showTitle = showTitle;
-	}
-
-	public void setDDMTemplateKey(String ddmTemplateKey) {
-		_ddmTemplateKey = ddmTemplateKey;
 	}
 
 	@Override
@@ -112,11 +112,11 @@ public class JournalArticleTag extends IncludeTag {
 	private String _articleId;
 	private int _articlePage = 1;
 	private long _articleResourcePrimKey;
+	private String _ddmTemplateKey;
 	private long _groupId;
 	private String _languageId;
 	private PortletRequestModel _portletRequestModel;
 	private boolean _showAvailableLocales;
 	private boolean _showTitle;
-	private String _ddmTemplateKey;
 
 }
