@@ -67,12 +67,12 @@ public class JournalArticleTag extends IncludeTag {
 		_articleId = null;
 		_articlePage = 1;
 		_articleResourcePrimKey = 0;
+		_ddmTemplateKey = null;
 		_groupId = 0;
 		_languageId = null;
 		_portletRequestModel = null;
 		_showAvailableLocales = false;
 		_showTitle = false;
-		_ddmTemplateKey = null;
 	}
 
 	@Override
