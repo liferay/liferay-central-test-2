@@ -255,8 +255,10 @@ public class AssetCategoryLocalServiceImpl
 		List<AssetCategory> categories = new ArrayList<AssetCategory>();
 
 		for (long categoryId : categoryIds) {
-			categories.add(
-				assetCategoryPersistence.findByPrimaryKey(categoryId));
+			AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
+				categoryId);
+
+			categories.add(category);
 		}
 
 		deleteCategories(categories);
