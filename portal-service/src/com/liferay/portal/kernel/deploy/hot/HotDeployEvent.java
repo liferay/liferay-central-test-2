@@ -150,8 +150,8 @@ public class HotDeployEvent {
 
 	protected boolean isWAB() {
 
-		// When the ServletContext is from a Liferay WAB never enable Liferay's
-		// plugin dependency management. This is handled by the OSGi runtime.
+		// Never enable plugin dependency management when the servlet context is
+		// from a Liferay WAB since dependency is handled by the OSGi runtime
 
 		Object osgiBundleContext = _servletContext.getAttribute(
 			"osgi-bundlecontext");
