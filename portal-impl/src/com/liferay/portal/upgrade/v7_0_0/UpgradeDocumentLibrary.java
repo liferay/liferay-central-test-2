@@ -254,8 +254,23 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		throws PortalException {
 
 		try {
+			Map<String, String> nameLanguageKeys = new HashMap<String, String>();
+
+			nameLanguageKeys.put(
+				DLFileEntryTypeConstants.NAME_CONTRACT,
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_CONTRACT);
+			nameLanguageKeys.put(
+				DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_MARKETING_BANNER);
+			nameLanguageKeys.put(
+				DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_ONLINE_TRAINING);
+			nameLanguageKeys.put(
+				DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_SALES_PRESENTATION);
+	
 			for (Map.Entry<String, String> nameAndKey :
-					_DEFAULT_FILE_ENTRY_TYPE_MAP.entrySet()) {
+					nameLanguageKeys.entrySet()) {
 
 				String dlFileEntryTypeKey = nameAndKey.getValue();
 				String nameLanguageKey = nameAndKey.getKey();
@@ -456,25 +471,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-	}
-
-	private static Map<String, String> _DEFAULT_FILE_ENTRY_TYPE_MAP;
-
-	static {
-		_DEFAULT_FILE_ENTRY_TYPE_MAP = new HashMap<String, String>();
-
-		_DEFAULT_FILE_ENTRY_TYPE_MAP.put(
-			DLFileEntryTypeConstants.NAME_CONTRACT,
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_CONTRACT);
-		_DEFAULT_FILE_ENTRY_TYPE_MAP.put(
-			DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_MARKETING_BANNER);
-		_DEFAULT_FILE_ENTRY_TYPE_MAP.put(
-			DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_ONLINE_TRAINING);
-		_DEFAULT_FILE_ENTRY_TYPE_MAP.put(
-			DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_SALES_PRESENTATION);
 	}
 
 }
