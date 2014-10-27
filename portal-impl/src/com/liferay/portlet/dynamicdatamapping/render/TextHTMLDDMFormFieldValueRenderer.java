@@ -43,7 +43,7 @@ public class TextHTMLDDMFormFieldValueRenderer
 				Value value = ddmFormFieldValue.getValue();
 
 				return StringUtil.replace(
-					_OUTPUT_FORMAT,
+					_HTML,
 					new String[] {
 						"[$DDM_FORM_FIELD_VALUE$]", "[$PREVIEW$]"
 					},
@@ -56,7 +56,7 @@ public class TextHTMLDDMFormFieldValueRenderer
 		};
 	}
 
-	private static final String _OUTPUT_FORMAT =
+	private static final String _HTML =
 		"<a href=\"javascript:Liferay.DDLUtil.openPreviewDialog(" +
 			"'[$DDM_FORM_FIELD_VALUE$]');\">([$PREVIEW$])</a>";
 

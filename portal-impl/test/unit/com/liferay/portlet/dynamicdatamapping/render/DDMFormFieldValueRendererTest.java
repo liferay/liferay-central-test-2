@@ -444,6 +444,7 @@ public class DDMFormFieldValueRendererTest extends BaseDDMTestCase {
 			new FastDateFormatFactoryImpl());
 	}
 
+	@Override
 	protected void setUpHtmlUtil() {
 		HtmlUtil htmlUtil = new HtmlUtil();
 

@@ -49,13 +49,13 @@ public class DocumentLibraryDDMFormFieldValueRenderer
 				JSONObject jsonObject = createJSONObject(
 					value.getString(locale));
 
-				long fileEntryGroupId = jsonObject.getLong("groupId");
-				String fileEntryUUID = jsonObject.getString("uuid");
+				String uuid = jsonObject.getString("uuid");
+				long groupId = jsonObject.getLong("groupId");
 
 				try {
 					FileEntry fileEntry =
 						DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-							fileEntryUUID, fileEntryGroupId);
+							uuid, groupId);
 
 					return fileEntry.getTitle();
 				}
