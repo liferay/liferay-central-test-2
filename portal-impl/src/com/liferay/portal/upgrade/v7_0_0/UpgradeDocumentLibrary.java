@@ -15,9 +15,7 @@
 package com.liferay.portal.upgrade.v7_0_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeProcessUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -34,7 +32,6 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -251,43 +248,38 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void updateFileEntryTypeNamesAndDescriptions(
 			long companyId, long groupId)
-		throws PortalException {
+		throws Exception {
 
-		try {
-			Map<String, String> nameLanguageKeys = new HashMap<String, String>();
+		Map<String, String> nameLanguageKeys = new HashMap<String, String>();
 
-			nameLanguageKeys.put(
-				DLFileEntryTypeConstants.NAME_CONTRACT,
-				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_CONTRACT);
-			nameLanguageKeys.put(
-				DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
-				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_MARKETING_BANNER);
-			nameLanguageKeys.put(
-				DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
-				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_ONLINE_TRAINING);
-			nameLanguageKeys.put(
-				DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
-				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_SALES_PRESENTATION);
-	
-			for (Map.Entry<String, String> nameAndKey :
-					nameLanguageKeys.entrySet()) {
+		nameLanguageKeys.put(
+			DLFileEntryTypeConstants.NAME_CONTRACT,
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_CONTRACT);
+		nameLanguageKeys.put(
+			DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_MARKETING_BANNER);
+		nameLanguageKeys.put(
+			DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_ONLINE_TRAINING);
+		nameLanguageKeys.put(
+			DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_KEY_SALES_PRESENTATION);
 
-				String dlFileEntryTypeKey = nameAndKey.getValue();
-				String nameLanguageKey = nameAndKey.getKey();
+		for (Map.Entry<String, String> nameAndKey :
+				nameLanguageKeys.entrySet()) {
 
-				updateFileEntryTypeNamesAndDescriptions(
-					companyId, groupId, dlFileEntryTypeKey, nameLanguageKey);
-			}
-		}
-		catch (SQLException sqle) {
-			throw new UpgradeException(sqle);
+			String dlFileEntryTypeKey = nameAndKey.getValue();
+			String nameLanguageKey = nameAndKey.getKey();
+
+			updateFileEntryTypeNamesAndDescriptions(
+				companyId, groupId, dlFileEntryTypeKey, nameLanguageKey);
 		}
 	}
 
 	protected void updateFileEntryTypeNamesAndDescriptions(
 			long companyId, long groupId, String dlFileEntryTypeKey,
 			String nameLanguageKey)
-		throws SQLException {
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -333,7 +325,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	protected void updateFileEntryTypeNamesAndDescriptions(
 			long companyId, long dlFileEntryTypeId, String nameLanguageKey,
 			String nameXML, String descriptionXML)
-		throws SQLException {
+		throws Exception {
 
 		boolean update = false;
 
@@ -382,7 +374,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			long fileEntryTypeId, String nameXML, String descriptionXML,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			Locale defaultLocale)
-		throws SQLException {
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
