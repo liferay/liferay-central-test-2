@@ -160,25 +160,26 @@ public class UpgradeDefaultDataTranslations extends UpgradeProcess {
 
 	protected void upgradeDLFileEntryTypeTranslation(
 			long companyId, long dlFileEntryTypeId, String nameLanguageKey,
-			String nameXml, String descriptionXml)
+			String nameXML, String descriptionXML)
 		throws SQLException {
+
+		boolean update = false;
 
 		Locale defaultLocale = LocaleUtil.fromLanguageId(
 			UpgradeProcessUtil.getDefaultLanguageId(companyId));
+
 		String defaultValue = LanguageUtil.get(defaultLocale, nameLanguageKey);
 
-		boolean needsUpdate = false;
-
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-			nameXml);
+			nameXML);
 		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizationMap(descriptionXml);
+			LocalizationUtil.getLocalizationMap(descriptionXML);
 
 		for (Locale locale : LanguageUtil.getSupportedLocales()) {
-			String localizedValue = LanguageUtil.get(locale, nameLanguageKey);
+			String value = LanguageUtil.get(locale, nameLanguageKey);
 
 			if (!locale.equals(defaultLocale) &&
-				localizedValue.equals(defaultValue)) {
+				value.equals(defaultValue)) {
 
 				continue;
 			}
@@ -186,23 +187,23 @@ public class UpgradeDefaultDataTranslations extends UpgradeProcess {
 			String description = descriptionMap.get(locale);
 
 			if (description == null) {
-				descriptionMap.put(locale, localizedValue);
+				descriptionMap.put(locale, value);
 
-				needsUpdate = true;
+				update = true;
 			}
 
 			String name = nameMap.get(locale);
 
 			if (name == null) {
-				nameMap.put(locale, localizedValue);
+				nameMap.put(locale, value);
 
-				needsUpdate = true;
+				update = true;
 			}
 		}
 
-		if (needsUpdate) {
+		if (update) {
 			upgradeDLFileEntryType(
-				dlFileEntryTypeId, nameXml, descriptionXml, nameMap,
+				dlFileEntryTypeId, nameXML, descriptionXML, nameMap,
 				descriptionMap, defaultLocale);
 		}
 	}
