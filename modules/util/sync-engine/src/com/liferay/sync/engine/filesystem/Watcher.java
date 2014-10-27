@@ -65,11 +65,11 @@ public class Watcher implements Runnable {
 		_recursive = recursive;
 		_watchEventListener = watchEventListener;
 
+		_dataFilePath = filePath.resolve(".data");
+
 		FileSystem fileSystem = FileSystems.getDefault();
 
 		_watchService = fileSystem.newWatchService();
-
-		_dataFilePath = filePath.resolve(".data");
 
 		registerFilePath(filePath, recursive);
 
