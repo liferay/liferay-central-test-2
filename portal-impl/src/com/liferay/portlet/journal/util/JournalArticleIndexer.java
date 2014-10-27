@@ -56,7 +56,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.portlet.trash.util.TrashUtil;
 
 import java.io.Serializable;
