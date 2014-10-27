@@ -103,9 +103,8 @@ public class UpgradeDefaultDataTranslations extends UpgradeProcess {
 			if (rs.next()) {
 				throw new IllegalStateException(
 					String.format(
-						"Found at least two rows for groupId = %s and " +
-							"fileEntryTypeKey = %s on table DLFileEntryType; " +
-								"expected 1 row",
+						"Found more than one row in table DLFileEntryType " +
+							"with groupId %s and fileEntryTypeKey %s",
 						groupId, dlFileEntryTypeKey));
 			}
 
@@ -118,7 +117,7 @@ public class UpgradeDefaultDataTranslations extends UpgradeProcess {
 	}
 
 	protected void upgradeDLFileEntryType(
-			long dlFileEntryTypeId, String nameXml, String descriptionXml,
+			long fileEntryTypeId, String nameXML, String descriptionXML,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			Locale defaultLocale)
 		throws SQLException {
@@ -135,24 +134,23 @@ public class UpgradeDefaultDataTranslations extends UpgradeProcess {
 
 			String languageId = LanguageUtil.getLanguageId(defaultLocale);
 
-			nameXml = LocalizationUtil.updateLocalization(
-				nameMap, nameXml, "Name", languageId);
+			nameXML = LocalizationUtil.updateLocalization(
+				nameMap, nameXML, "Name", languageId);
+			descriptionXML = LocalizationUtil.updateLocalization(
+				descriptionMap, descriptionXML, "Description", languageId);
 
-			descriptionXml = LocalizationUtil.updateLocalization(
-				descriptionMap, descriptionXml, "Description", languageId);
-
-			ps.setString(1, nameXml);
-			ps.setString(2, descriptionXml);
-			ps.setLong(3, dlFileEntryTypeId);
+			ps.setString(1, nameXML);
+			ps.setString(2, descriptionXML);
+			ps.setLong(3, fileEntryTypeId);
 
 			int rowCount = ps.executeUpdate();
 
 			if (rowCount != 1) {
 				throw new IllegalStateException(
 					String.format(
-						"Updated %s rows with fileEntryTypeId = %s in table" +
-							"DLFileEntryTypeId; expected 1 row",
-						rowCount, dlFileEntryTypeId));
+						"Updated %s rows in table DLFileEntryType with " +
+							"fileEntryTypeId %s",
+						rowCount, fileEntryTypeId));
 			}
 		}
 		finally {
