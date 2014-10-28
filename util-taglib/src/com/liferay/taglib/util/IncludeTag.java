@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.kernel.servlet.taglib.DynamicIncludeUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
@@ -81,7 +82,9 @@ public class IncludeTag extends AttributesTagSupport {
 				return processEndTag();
 			}
 
-			doInclude(page);
+			Class<?> clazz = getClass();
+
+			doInclude(page, clazz.getName() + "#doEndTag", false);
 
 			return EVAL_PAGE;
 		}
@@ -121,7 +124,9 @@ public class IncludeTag extends AttributesTagSupport {
 				return processStartTag();
 			}
 
-			doInclude(page);
+			Class<?> clazz = getClass();
+
+			doInclude(page, clazz.getName() + "#doStartTag", true);
 
 			return EVAL_BODY_INCLUDE;
 		}
@@ -188,8 +193,21 @@ public class IncludeTag extends AttributesTagSupport {
 		}
 	}
 
-	protected void doInclude(String page) throws JspException {
+	protected void doInclude(
+			String page, String dynamicIncludeKey,
+			boolean dynamicIncludeAscendingPriority)
+		throws JspException {
+
 		try {
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+			HttpServletResponse response =
+				(HttpServletResponse)pageContext.getResponse();
+
+			DynamicIncludeUtil.include(
+				request, response, dynamicIncludeKey,
+				dynamicIncludeAscendingPriority);
+
 			include(page);
 		}
 		catch (Exception e) {
