@@ -324,7 +324,8 @@ public class ThemeUtil {
 		throws Exception {
 
 		DynamicIncludeUtil.include(
-			request, response, ThemeUtil.class.getName() + "#doIncludeJSP");
+			request, response, ThemeUtil.class.getName() + "#doIncludeJSP",
+			true);
 
 		if (theme.isWARFile()) {
 			ServletContext themeServletContext = servletContext.getContext(
