@@ -202,8 +202,6 @@ public class IncludeTag extends AttributesTagSupport {
 		try {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
-			HttpServletResponse response =
-				(HttpServletResponse)pageContext.getResponse();
 
 			String tagClassName = this.getClass().getName();
 
