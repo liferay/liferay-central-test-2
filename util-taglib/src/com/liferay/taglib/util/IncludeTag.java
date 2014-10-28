@@ -22,8 +22,8 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.servlet.taglib.DynamicIncludeUtil;
-import com.liferay.portal.kernel.servlet.taglib.TagKeyResolver;
-import com.liferay.portal.kernel.servlet.taglib.TagResolverRegistry;
+import com.liferay.portal.kernel.servlet.taglib.TagKeyFactory;
+import com.liferay.portal.kernel.servlet.taglib.TagKeyFactoryRegistry;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -202,36 +202,29 @@ public class IncludeTag extends AttributesTagSupport {
 		throws JspException {
 
 		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
+			Class<?> clazz = getClass();
 
-			String tagClassName = this.getClass().getName();
+			String tagClassName = clazz.getName();
 
-			TagKeyResolver tagIdResolver = TagResolverRegistry.getTagIdResolver(
-				tagClassName);
+			TagKeyFactory tagKeyResolver =
+				TagKeyFactoryRegistry.getTagKeyFactory(tagClassName);
 
-			JspWriterHttpServletResponse wrappedResponse =
-				new JspWriterHttpServletResponse(pageContext);
+			JspWriterHttpServletResponse jspWriterHttpServletResponse = null;
+			String tagKey = null;
 
-			if (tagIdResolver != null) {
-				String tagKey = tagIdResolver.getKey(
-					request, wrappedResponse, this);
-
+			if (tagKeyResolver != null) {
 				DynamicIncludeUtil.include(
-					request, wrappedResponse,
-					dynamicIncludeKey + ".before:" + tagKey,
+					request, jspWriterHttpServletResponse,
+					dynamicIncludeKey + "#before#include#" + tagKey,
 					dynamicIncludeAscendingPriority);
 			}
 
 			include(page);
 
-			if (tagIdResolver != null) {
-				String tagKey = tagIdResolver.getKey(
-					request, wrappedResponse, this);
-
+			if (tagKeyResolver != null) {
 				DynamicIncludeUtil.include(
-					request, wrappedResponse,
-					dynamicIncludeKey + ".after:" + tagKey,
+					request, jspWriterHttpServletResponse,
+					dynamicIncludeKey + "#after#include#" + tagKey,
 					dynamicIncludeAscendingPriority);
 			}
 		}

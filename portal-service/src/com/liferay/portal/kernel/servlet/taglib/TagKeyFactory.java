@@ -16,14 +16,14 @@ package com.liferay.portal.kernel.servlet.taglib;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.tagext.Tag;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public interface TagKeyResolver {
+public interface TagKeyFactory {
 
 	public String getKey(
-		HttpServletRequest request, HttpServletResponse response,
-		Object jspTag);
+		HttpServletRequest request, HttpServletResponse response, Tag tag);
 
 }
