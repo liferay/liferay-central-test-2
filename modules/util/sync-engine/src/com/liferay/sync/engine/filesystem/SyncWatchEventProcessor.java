@@ -100,7 +100,9 @@ public class SyncWatchEventProcessor implements Runnable {
 							parentSyncFile.getRepositoryId(), _syncAccountId);
 					}
 					catch (Exception e) {
-						_logger.error(e.getMessage(), e);
+						if (_logger.isTraceEnabled()) {
+							_logger.trace(e.getMessage(), e);
+						}
 					}
 				}
 
