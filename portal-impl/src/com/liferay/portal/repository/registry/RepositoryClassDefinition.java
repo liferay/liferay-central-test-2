@@ -89,7 +89,7 @@ public class RepositoryClassDefinition
 
 		if (repositoryEventListener == null) {
 			throw new NullPointerException(
-				"it's not legal to register a null repository event listener");
+				"Repository event listener is null");
 		}
 
 		Tuple key = new Tuple(repositoryEventTypeClass, modelClass);

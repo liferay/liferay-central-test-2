@@ -64,17 +64,11 @@ public class RepositoryEventTest {
 		public void shouldExecuteAllMatchingListeners() throws Exception {
 			AtomicInteger count = new AtomicInteger();
 
-			registerCounterRepositoryEventListener(
-				_repositoryClassDefinition, RepositoryEventType.Add.class,
-				FileEntry.class, count);
-
-			registerCounterRepositoryEventListener(
-				_repositoryClassDefinition, RepositoryEventType.Add.class,
-				FileEntry.class, count);
-
-			registerCounterRepositoryEventListener(
-				_repositoryClassDefinition, RepositoryEventType.Add.class,
-				FileEntry.class, count);
+			for (int i = 0; i < 3; i++) {
+				registerCounterRepositoryEventListener(
+					_repositoryClassDefinition, RepositoryEventType.Add.class,
+					FileEntry.class, count);
+			}
 
 			_repositoryClassDefinition.trigger(
 				RepositoryEventType.Add.class, FileEntry.class, null);
@@ -90,14 +84,14 @@ public class RepositoryEventTest {
 				_repositoryClassDefinition, RepositoryEventType.Add.class,
 				FileEntry.class);
 
-			int n = Math.abs(RandomTestUtil.nextInt());
+			int randomInt = Math.abs(RandomTestUtil.nextInt());
 
-			for (int i = 0; i < n; i++) {
+			for (int i = 0; i < randomInt; i++) {
 				_repositoryClassDefinition.trigger(
 					RepositoryEventType.Add.class, FileEntry.class, null);
 			}
 
-			Assert.assertEquals(n, count.get());
+			Assert.assertEquals(randomInt, count.get());
 		}
 
 		@Test
