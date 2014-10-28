@@ -25,7 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 public interface DynamicInclude {
 
 	public void include(
-			HttpServletRequest request, HttpServletResponse response)
+			HttpServletRequest request, HttpServletResponse response,
+			String key, boolean ascendingPriority)
 		throws IOException;
 
 }

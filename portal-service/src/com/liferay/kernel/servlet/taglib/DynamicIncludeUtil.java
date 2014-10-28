@@ -69,7 +69,8 @@ public class DynamicIncludeUtil {
 			DynamicInclude dynamicInclude = iterator.next();
 
 			try {
-				dynamicInclude.include(request, response);
+				dynamicInclude.include(
+					request, response, key, ascendingPriority);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
