@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.servlet.taglib.DynamicIncludeUtil;
+import com.liferay.portal.kernel.servlet.taglib.TagKeyResolver;
+import com.liferay.portal.kernel.servlet.taglib.TagResolverRegistry;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;

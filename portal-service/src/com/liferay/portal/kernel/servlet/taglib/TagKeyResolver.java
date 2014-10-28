@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.taglib.util;
+package com.liferay.portal.kernel.servlet.taglib;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

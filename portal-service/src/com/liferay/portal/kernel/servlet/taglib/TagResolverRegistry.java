@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.taglib.util;
+package com.liferay.portal.kernel.servlet.taglib;
 
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
