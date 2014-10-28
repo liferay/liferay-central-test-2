@@ -219,7 +219,7 @@ public class IncludeTag extends AttributesTagSupport {
 					dynamicIncludeAscendingPriority);
 			}
 
-			include(page);
+			include(page, dynamicIncludeAscendingPriority);
 
 			if (tagKeyResolver != null) {
 				DynamicIncludeUtil.include(
@@ -335,7 +335,9 @@ public class IncludeTag extends AttributesTagSupport {
 		return null;
 	}
 
-	protected void include(String page) throws Exception {
+	protected void include(String page, boolean dynamicIncludeAscendingPriority)
+		throws Exception {
+
 		RequestDispatcher requestDispatcher =
 			DirectRequestDispatcherFactoryUtil.getRequestDispatcher(
 				servletContext, page);
