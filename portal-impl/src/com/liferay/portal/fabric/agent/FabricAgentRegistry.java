@@ -44,11 +44,11 @@ public class FabricAgentRegistry {
 	}
 
 	public boolean registerFabricAgent(
-		FabricAgent fabricAgent, Runnable onRegistration) {
+		FabricAgent fabricAgent, Runnable runnable) {
 
 		if (_fabricAgents.addIfAbsent(fabricAgent)) {
-			if (onRegistration != null) {
-				onRegistration.run();
+			if (runnable != null) {
+				runnable.run();
 			}
 
 			for (FabricAgentListener fabricAgentListener :
@@ -70,11 +70,11 @@ public class FabricAgentRegistry {
 	}
 
 	public boolean unregisterFabricAgent(
-		FabricAgent fabricAgent, Runnable onUnregistration) {
+		FabricAgent fabricAgent, Runnable runnable) {
 
 		if (_fabricAgents.remove(fabricAgent)) {
-			if (onUnregistration != null) {
-				onUnregistration.run();
+			if (runnable != null) {
+				runnable.run();
 			}
 
 			for (FabricAgentListener fabricAgentListener :

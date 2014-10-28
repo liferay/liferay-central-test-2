@@ -183,29 +183,29 @@ public class FabricAgentRegistryTest {
 
 		@Override
 		public void registered(FabricAgent fabricAgent) {
-			_recorders.add(fabricAgent);
-			_recorders.add(0);
+			_objects.add(fabricAgent);
+			_objects.add(0);
 		}
 
 		@Override
 		public void run() {
-			_recorders.add(2);
+			_objects.add(2);
 		}
 
 		@Override
 		public void unregistered(FabricAgent fabricAgent) {
-			_recorders.add(fabricAgent);
-			_recorders.add(1);
+			_objects.add(fabricAgent);
+			_objects.add(1);
 		}
 
-		public void validate(Object... expects) {
+		public void validate(Object... objects) {
 			Assert.assertArrayEquals(
-				expects, _recorders.toArray(new Object[_recorders.size()]));
+				objects, _objects.toArray(new Object[_objects.size()]));
 
-			_recorders.clear();
+			_objects.clear();
 		}
 
-		private final List<Object> _recorders = new ArrayList<Object>();
+		private final List<Object> _objects = new ArrayList<Object>();
 
 	}
 
