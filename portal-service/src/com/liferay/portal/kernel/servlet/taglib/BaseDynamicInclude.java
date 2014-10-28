@@ -12,21 +12,10 @@
  * details.
  */
 
-package com.liferay.kernel.servlet.taglib;
-
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package com.liferay.portal.kernel.servlet.taglib;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public interface DynamicInclude {
-
-	public void include(
-			HttpServletRequest request, HttpServletResponse response,
-			String key, boolean ascendingPriority)
-		throws IOException;
-
+public abstract class BaseDynamicInclude implements DynamicInclude {
 }

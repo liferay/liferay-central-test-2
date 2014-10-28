@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.kernel.servlet.taglib.DynamicIncludeUtil;
+import com.liferay.portal.kernel.servlet.taglib.DynamicIncludeUtil;
 import com.liferay.taglib.TagSupport;
 import com.liferay.taglib.servlet.JspWriterHttpServletResponse;
 

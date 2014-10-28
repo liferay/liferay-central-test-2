@@ -14,7 +14,7 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.kernel.servlet.taglib.BaseDynamicInclude;
+import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
