@@ -87,6 +87,10 @@ public class SyncEngine {
 		scheduledFuture.cancel(false);
 	}
 
+	public static ExecutorService getExecutorService() {
+		return _executorService;
+	}
+
 	public static synchronized boolean isRunning() {
 		return _running;
 	}

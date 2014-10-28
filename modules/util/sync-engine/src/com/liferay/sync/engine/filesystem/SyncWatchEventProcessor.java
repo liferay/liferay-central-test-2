@@ -14,6 +14,7 @@
 
 package com.liferay.sync.engine.filesystem;
 
+import com.liferay.sync.engine.SyncEngine;
 import com.liferay.sync.engine.model.SyncAccount;
 import com.liferay.sync.engine.model.SyncFile;
 import com.liferay.sync.engine.model.SyncWatchEvent;
@@ -31,7 +32,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -390,7 +390,7 @@ public class SyncWatchEventProcessor implements Runnable {
 		SyncWatchEventProcessor.class);
 
 	private static final ExecutorService _executorService =
-		Executors.newCachedThreadPool();
+		SyncEngine.getExecutorService();
 
 	private boolean _inProgress;
 	private final Set<Long> _processedSyncWatchEventIds = new HashSet<Long>();
