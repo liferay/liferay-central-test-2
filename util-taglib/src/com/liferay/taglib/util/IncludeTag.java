@@ -306,9 +306,7 @@ public class IncludeTag extends AttributesTagSupport {
 		return null;
 	}
 
-	protected void include(String page, boolean dynamicIncludeAscendingPriority)
-		throws Exception {
-
+	protected void include(String page, boolean doStartTag) throws Exception {
 		JspWriterHttpServletResponse jspWriterHttpServletResponse = null;
 
 		String tagKey = null;
@@ -316,6 +314,15 @@ public class IncludeTag extends AttributesTagSupport {
 		Class<?> clazz = getClass();
 
 		String tagClassName = clazz.getName();
+
+		String dynamicIncludePrefixKey = tagClassName + "#";
+
+		if (doStartTag) {
+			dynamicIncludePrefixKey += "doStartTag#";
+		}
+		else {
+			dynamicIncludePrefixKey += "doEndTag#";
+		}
 
 		TagKeyFactory tagKeyResolver = TagKeyFactoryRegistry.getTagKeyFactory(
 			tagClassName);
@@ -329,8 +336,7 @@ public class IncludeTag extends AttributesTagSupport {
 
 			DynamicIncludeUtil.include(
 				request, jspWriterHttpServletResponse,
-				tagClassName + "#beforeInclude#" + tagKey,
-				dynamicIncludeAscendingPriority);
+				dynamicIncludePrefixKey + "before#" + tagKey, doStartTag);
 		}
 
 		RequestDispatcher requestDispatcher =
@@ -349,8 +355,7 @@ public class IncludeTag extends AttributesTagSupport {
 		if (tagKeyResolver != null) {
 			DynamicIncludeUtil.include(
 				request, jspWriterHttpServletResponse,
-				tagClassName + "#afterInclude#" + tagKey,
-				dynamicIncludeAscendingPriority);
+				dynamicIncludePrefixKey + "after#" + tagKey, doStartTag);
 		}
 	}
 
