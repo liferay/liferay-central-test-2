@@ -14,7 +14,6 @@
 
 package com.liferay.portal.repository.registry;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.event.RepositoryEventListener;
 import com.liferay.portal.kernel.repository.event.RepositoryEventType;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -151,7 +150,7 @@ public class RepositoryEventTest {
 		implements RepositoryEventListener<S, T> {
 
 		@Override
-		public void execute(T target) throws PortalException {
+		public void execute(T target) {
 			throw new IllegalStateException();
 		}
 
@@ -166,7 +165,7 @@ public class RepositoryEventTest {
 		}
 
 		@Override
-		public void execute(T target) throws PortalException {
+		public void execute(T target) { 
 			_count.incrementAndGet();
 		}
 
@@ -179,7 +178,7 @@ public class RepositoryEventTest {
 		implements RepositoryEventListener<S, T> {
 
 		@Override
-		public void execute(T target) throws PortalException {
+		public void execute(T target) {
 		}
 
 	}
