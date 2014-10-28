@@ -165,7 +165,7 @@ public class RepositoryEventTest {
 		}
 
 		@Override
-		public void execute(T target) { 
+		public void execute(T target) {
 			_count.incrementAndGet();
 		}
 
