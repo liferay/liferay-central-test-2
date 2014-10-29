@@ -81,7 +81,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		if (matcher.find()) {
 			processErrorMessage(
 				fileName,
-				"Character(s) found after definition element: " + fileName);
+				"Characters found after definition element: " + fileName);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		if (matcher.find()) {
 			processErrorMessage(
 				fileName,
-				"Character(s) found before definition element: " + fileName);
+				"Characters found before definition element: " + fileName);
 		}
 	}
 
