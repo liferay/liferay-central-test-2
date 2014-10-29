@@ -61,13 +61,14 @@ public class LayoutsAdminDisplayContext {
 
 		_request = request;
 		_liferayPortletResponse = liferayPortletResponse;
-		_themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		_groupDisplayContextHelper = new GroupDisplayContextHelper(request);
 
 		boolean privateLayout = false;
 		String tabs1 = ParamUtil.getString(request, "tabs1");
+
+		_themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (Validator.isNull(tabs1)) {
 			tabs1 = "public-pages";
