@@ -1446,7 +1446,6 @@ public class DDMStructureLocalServiceImpl
 		validate(definition);
 
 		DDMForm parentDDMForm = getParentDDMForm(parentStructureId);
-
 		DDMForm ddmForm = DDMFormXSDDeserializerUtil.deserialize(definition);
 
 		validate(nameMap, parentDDMForm, ddmForm);

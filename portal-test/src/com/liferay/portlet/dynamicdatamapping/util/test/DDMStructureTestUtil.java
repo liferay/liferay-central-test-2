@@ -87,7 +87,6 @@ public class DDMStructureTestUtil {
 		nameMap.put(defaultLocale, "Test Structure");
 
 		DDMForm ddmForm = DDMFormXSDDeserializerUtil.deserialize(definition);
-
 		String ddlStorageType = GetterUtil.getString(
 			PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_STORAGE_TYPE));
 
