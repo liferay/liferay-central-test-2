@@ -1526,6 +1526,10 @@ public class DDMStructureLocalServiceImpl
 			ddmFormFieldsMap.size());
 
 		for (String ddmFormFieldName : ddmFormFieldsMap.keySet()) {
+			if (ddmFormFieldName.startsWith(StringPool.UNDERLINE)) {
+				continue;
+			}
+
 			ddmFormFieldsNames.add(StringUtil.toLowerCase(ddmFormFieldName));
 		}
 
