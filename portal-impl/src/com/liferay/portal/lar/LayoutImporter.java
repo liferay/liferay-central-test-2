@@ -263,8 +263,6 @@ public class LayoutImporter {
 
 		long companyId = layoutSet.getCompanyId();
 
-		// Service Context
-
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 

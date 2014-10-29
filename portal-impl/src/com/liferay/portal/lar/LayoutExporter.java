@@ -215,8 +215,6 @@ public class LayoutExporter {
 		long companyId = layoutSet.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		// Service Context
-
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.popServiceContext();
 
