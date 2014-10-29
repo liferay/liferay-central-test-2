@@ -503,18 +503,6 @@ public class JournalUtil {
 			new UnsyncStringReader(targetArticleDisplay.getContent()));
 	}
 
-	public static String transform(
-			ThemeDisplay themeDisplay, Map<String, String> tokens,
-			String viewMode, String languageId, Document document,
-			PortletRequestModel portletRequestModel, String script,
-			String langType, boolean propagateException)
-		throws Exception {
-
-		return _transformer.transform(
-			themeDisplay, tokens, viewMode, languageId, document,
-			portletRequestModel, script, langType, propagateException);
-	}
-
 	public static String formatVM(String vm) {
 		return vm;
 	}
@@ -1511,6 +1499,18 @@ public class JournalUtil {
 		return transform(
 			themeDisplay, tokens, viewMode, languageId, document,
 			portletRequestModel, script, langType, false);
+	}
+
+	public static String transform(
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, Document document,
+			PortletRequestModel portletRequestModel, String script,
+			String langType, boolean propagateException)
+		throws Exception {
+
+		return _transformer.transform(
+			themeDisplay, tokens, viewMode, languageId, document,
+			portletRequestModel, script, langType, propagateException);
 	}
 
 	private static void _addElementOptions(
