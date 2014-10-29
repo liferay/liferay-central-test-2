@@ -790,9 +790,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 			fileName = jarFileURL.getFile();
 		}
-		else if ("zip".equals(url.getProtocol())) {
+		else if (Validator.equals(url.getProtocol(), "zip")) {
 
-			// WEBLOGIC use a custom zip protocol to represent the Jar files
+			// Weblogic use a custom zip protocol to represent JAR files
 
 			fileName = url.getFile();
 
