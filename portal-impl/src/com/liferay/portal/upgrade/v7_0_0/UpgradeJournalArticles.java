@@ -58,7 +58,9 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 
 			ps = con.prepareStatement(
 				"select categoryId from AssetCategory where groupId = " +
-					groupId + " and name = '" + type + "'");
+					groupId + " and name = ?");
+
+			ps.setString(1, type);
 
 			rs = ps.executeQuery();
 
