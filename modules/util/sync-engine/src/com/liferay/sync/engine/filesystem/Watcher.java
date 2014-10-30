@@ -116,7 +116,18 @@ public class Watcher implements Runnable {
 					break;
 				}
 
-				WatchKey watchKey = _watchService.take();
+				WatchKey watchKey = null;
+
+				try {
+					watchKey = _watchService.take();
+				}
+				catch (Exception e) {
+					if (_logger.isTraceEnabled()) {
+						_logger.trace(e.getMessage(), e);
+					}
+
+					continue;
+				}
 
 				Path parentFilePath = _filePaths.get(watchKey);
 
