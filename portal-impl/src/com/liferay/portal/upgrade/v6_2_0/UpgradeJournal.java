@@ -493,14 +493,14 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		PortletPreferences preferences = PortletPreferencesFactoryUtil.fromXML(
 			companyId, ownerId, ownerType, plid, portletId, xml);
 
-		if (portletId.startsWith("101")) {
+		if (portletId.startsWith(_PORTLET_ID_ASSET_PUBLISHER)) {
 			updatePreferencesClassPKs(
 				preferences, "anyClassTypeJournalArticleAssetRendererFactory");
 			updatePreferencesClassPKs(preferences, "classTypeIds");
 			updatePreferencesClassPKs(
 				preferences, "classTypeIdsJournalArticleAssetRendererFactory");
 		}
-		else if (portletId.startsWith("56")) {
+		else if (portletId.startsWith(_PORTLET_ID_JOURNAL_CONTENT)) {
 			String templateId = preferences.getValue(
 				"templateId", StringPool.BLANK);
 
@@ -510,7 +510,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 				preferences.setValue("ddmTemplateKey", templateId);
 			}
 		}
-		else if (portletId.startsWith("62")) {
+		else if (portletId.startsWith(_PORTLET_ID_JOURNAL_CONTENT_LIST)) {
 			String structureId = preferences.getValue(
 				"structureId", StringPool.BLANK);
 
@@ -523,6 +523,12 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 		return PortletPreferencesFactoryUtil.toXML(preferences);
 	}
+
+	private static final String _PORTLET_ID_ASSET_PUBLISHER = "101";
+
+	private static final String _PORTLET_ID_JOURNAL_CONTENT = "56";
+
+	private static final String _PORTLET_ID_JOURNAL_CONTENT_LIST = "62";
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeJournal.class);
 
