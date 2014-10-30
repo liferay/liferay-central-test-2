@@ -171,13 +171,13 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 		int pageDelta = GetterUtil.getInteger(
 			oldPortletPreferences.getValue("pageDelta", StringPool.BLANK));
 
-		long companyId = getCompanyId(plid);
-
 		PortletPreferences newPortletPreferences = new PortletPreferencesImpl();
 
 		newPortletPreferences.setValue(
 			"anyAssetType",
 			String.valueOf(PortalUtil.getClassNameId(JournalArticle.class)));
+
+		long companyId = getCompanyId(plid);
 
 		long structureId = getStructureId(companyId, plid, ddmStructureKey);
 
