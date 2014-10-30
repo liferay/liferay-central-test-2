@@ -46,7 +46,7 @@
 <!--CATEGORIES_WINDOW-->
 <tr>
 	<td>CATEGORIES_WINDOW_CATEGORY_CHECKBOX</td>
-	<td>//div[contains(@class,'tree-node-content')]/span[contains(@class,'tree-node-checkbox-container')]/following-sibling::span[contains(.,'${key_categoryName}')]</td>
+	<td>//div[contains(@class,'tree-node')]/span[contains(@class,'checkbox')]/following-sibling::span[contains(.,'${key_categoryName}')]</td>
 	<td></td>
 </tr>
 <tr>
