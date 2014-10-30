@@ -159,17 +159,17 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 
 		String ddmStructureKey = oldPortletPreferences.getValue(
 			"ddmStructureKey", StringPool.BLANK);
-		String pageUrl = oldPortletPreferences.getValue(
-			"pageUrl", StringPool.BLANK);
+		long groupId = GetterUtil.getLong(
+			oldPortletPreferences.getValue("groupId", StringPool.BLANK));
 		String orderByCol = oldPortletPreferences.getValue(
 			"orderByCol", StringPool.BLANK);
 		String orderByType = oldPortletPreferences.getValue(
 			"orderByType", StringPool.BLANK);
-		String type = oldPortletPreferences.getValue("type", StringPool.BLANK);
-		long groupId = GetterUtil.getLong(
-			oldPortletPreferences.getValue("groupId", StringPool.BLANK));
 		int pageDelta = GetterUtil.getInteger(
 			oldPortletPreferences.getValue("pageDelta", StringPool.BLANK));
+		String pageUrl = oldPortletPreferences.getValue(
+			"pageUrl", StringPool.BLANK);
+		String type = oldPortletPreferences.getValue("type", StringPool.BLANK);
 
 		PortletPreferences newPortletPreferences = new PortletPreferencesImpl();
 
