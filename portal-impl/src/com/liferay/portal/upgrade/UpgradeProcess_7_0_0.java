@@ -27,7 +27,6 @@ import com.liferay.portal.upgrade.v7_0_0.UpgradeEmailNotificationPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeExpando;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeJournal;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeJournalArticleType;
-import com.liferay.portal.upgrade.v7_0_0.UpgradeJournalArticles;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeJournalDisplayPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeLanguagePreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeLock;
@@ -66,13 +65,6 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradeJournal.class);
 		upgrade(UpgradeJournalDisplayPreferences.class);
 		upgrade(UpgradeJournalArticleType.class);
-
-		// UpgradeJournalArticles must be executed after
-		// UpgradeJournalArticleType because web content types should have
-		// been converted into vocabularies and categories.
-
-		upgrade(UpgradeJournalArticles.class);
-
 		upgrade(UpgradeLock.class);
 		upgrade(UpgradeMessageBoards.class);
 		upgrade(UpgradeRepositoryEntry.class);
