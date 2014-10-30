@@ -38,14 +38,15 @@ public class ServiceBag<V> {
 		Object previousService = serviceWrapper.getWrappedService();
 
 		if (!(previousService instanceof ServiceWrapper)) {
-			Class<?> clazz = previousService.getClass();
+			Class<?> previousServiceClass = previousService.getClass();
 
-			ClassLoader serviceClassLoader = clazz.getClassLoader();
+			ClassLoader previousServiceClassLoader =
+				previousServiceClass.getClassLoader();
 
 			previousService = ProxyUtil.newProxyInstance(
-				serviceClassLoader, new Class<?>[] {serviceTypeClass},
+				previousServiceClassLoader, new Class<?>[] {serviceTypeClass},
 					new ClassLoaderBeanHandler(
-						previousService, serviceClassLoader));
+						previousService, previousServiceClassLoader));
 
 			serviceWrapper.setWrappedService((V)previousService);
 		}
