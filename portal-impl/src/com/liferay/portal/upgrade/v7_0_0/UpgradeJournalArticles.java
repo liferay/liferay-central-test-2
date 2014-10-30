@@ -259,8 +259,9 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 			ps = con.prepareStatement(
 				"select structureId from DDMStructure where (groupId = " +
 					groupId + " or groupId = " + companyGroupId + ") and " +
-					"structureKey = '" + ddmStructureKey + "'"
-			);
+						"structureKey = ?");
+
+			ps.setString(1, ddmStructureKey);
 
 			rs = ps.executeQuery();
 
