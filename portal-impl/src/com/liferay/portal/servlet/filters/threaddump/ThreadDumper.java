@@ -37,9 +37,11 @@ public class ThreadDumper implements Runnable {
 			log.info(ThreadUtil.threadDump());
 		}
 		else {
+			Class<?> clazz = getClass();
+
 			_log.error(
 				"Thread dumps require the log level to be at least INFO for " +
-					getClass().getName());
+					clazz.getName());
 		}
 
 		_executed = true;
