@@ -435,21 +435,21 @@ public class AssetEntryFinderImpl
 
 		if (Validator.isNotNull(entryQuery.getKeywords())) {
 			qPos.add(
-				CharPool.PERCENT + entryQuery.getKeywords() + CharPool.PERCENT);
+				StringUtil.quote(entryQuery.getKeywords(), StringPool.PERCENT));
 			qPos.add(
-				CharPool.PERCENT + entryQuery.getKeywords() + CharPool.PERCENT);
+				StringUtil.quote(entryQuery.getKeywords(), StringPool.PERCENT));
 		}
 		else {
 			if (Validator.isNotNull(entryQuery.getTitle())) {
 				qPos.add(
-					CharPool.PERCENT + entryQuery.getTitle() +
-						CharPool.PERCENT);
+					StringUtil.quote(
+						entryQuery.getTitle(), StringPool.PERCENT));
 			}
 
 			if (Validator.isNotNull(entryQuery.getDescription())) {
 				qPos.add(
-					CharPool.PERCENT + entryQuery.getDescription() +
-						CharPool.PERCENT);
+					StringUtil.quote(
+						entryQuery.getDescription(), StringPool.PERCENT));
 			}
 		}
 
