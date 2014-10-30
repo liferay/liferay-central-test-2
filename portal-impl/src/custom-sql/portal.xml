@@ -1415,8 +1415,8 @@
 					(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]) AND
 					(Group_.classPK = User_.userId)
 			WHERE
-				(Group_.classPK IS NULL) AND
-				(defaultUser = [$FALSE$])
+				(defaultUser = [$FALSE$]) AND
+				(Group_.classPK IS NULL)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findBySocialUsers">
