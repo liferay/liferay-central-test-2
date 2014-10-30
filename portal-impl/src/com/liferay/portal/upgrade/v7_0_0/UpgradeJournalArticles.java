@@ -234,7 +234,7 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {_JOURNAL_CONTENT_LIST, "101"}
+			new String[] {_PORTLET_ID_JOURNAL_CONTENT_LIST, "101"}
 		};
 	}
 
@@ -379,7 +379,7 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 		}
 	}
 
-	private static final String _JOURNAL_CONTENT_LIST = "62";
+	private static final String _PORTLET_ID_JOURNAL_CONTENT_LIST = "62";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradeJournalArticles.class);
