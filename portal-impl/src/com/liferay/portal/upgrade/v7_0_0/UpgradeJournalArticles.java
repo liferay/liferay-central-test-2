@@ -236,7 +236,9 @@ public class UpgradeJournalArticles extends UpgradePortletId {
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {_PORTLET_ID_JOURNAL_CONTENT_LIST, "101"}
+			new String[] {
+				_PORTLET_ID_JOURNAL_CONTENT_LIST, PortletKeys.ASSET_PUBLISHER
+			}
 		};
 	}
 
