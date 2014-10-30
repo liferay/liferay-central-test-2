@@ -212,10 +212,10 @@ public class UpgradeJournalArticleType extends UpgradeBaseJournal {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgradeArticleType();
+		updateArticleType();
 
 		// UpgradeJournalArticles must be executed after calling
-		// upgradeArticleType because journal article types must already be
+		// updateArticleType because journal article types must already be
 		// converted to asset categories and asset vocabularies
 
 		upgrade(UpgradeJournalArticles.class);
@@ -352,7 +352,7 @@ public class UpgradeJournalArticleType extends UpgradeBaseJournal {
 		}
 	}
 
-	protected void upgradeArticleType() throws Exception {
+	protected void updateArticleType() throws Exception {
 		if (!hasSelectedArticleTypes()) {
 			return;
 		}
