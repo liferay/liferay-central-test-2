@@ -206,7 +206,8 @@ public class NettyFabricServer implements FabricServer {
 					_serverChannel, _fileServerEventExecutorGroupAttributeKey),
 				FileRequestChannelHandler.NAME,
 				new FileRequestChannelHandler(
-					_nettyFabricServerConfig.getFileServerFolderCompressionLevel()));
+					_nettyFabricServerConfig.
+						getFileServerFolderCompressionLevel()));
 			channelPipeline.addLast(
 				getEventExecutorGroup(
 					_serverChannel,

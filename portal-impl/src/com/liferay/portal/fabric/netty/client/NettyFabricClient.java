@@ -72,12 +72,12 @@ public class NettyFabricClient implements FabricClient {
 	public synchronized void connect() {
 		if (_channel != null) {
 			throw new IllegalStateException(
-				"Netty fabric client has already started");
+				"Netty fabric client was already started");
 		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Starting netty fabric client using " +
+				"Starting Netty fabric client using " +
 					_nettyFabricClientConfig);
 		}
 
@@ -152,7 +152,7 @@ public class NettyFabricClient implements FabricClient {
 	protected void doDisconnect() throws InterruptedException {
 		if (_channel == null) {
 			throw new IllegalStateException(
-				"Netty fabric client has not started");
+				"Netty fabric client is not started");
 		}
 
 		try {
@@ -192,7 +192,7 @@ public class NettyFabricClient implements FabricClient {
 			else {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Shutting down netty fabric client on " + _channel);
+						"Shutting down Netty fabric client on " + _channel);
 				}
 
 				try {
@@ -303,7 +303,8 @@ public class NettyFabricClient implements FabricClient {
 					socketChannel, _fileServerEventExecutorGroupAttributeKey),
 				FileRequestChannelHandler.NAME,
 				new FileRequestChannelHandler(
-					_nettyFabricClientConfig.getFileServerFolderCompressionLevel()));
+					_nettyFabricClientConfig.
+						getFileServerFolderCompressionLevel()));
 			channelPipeline.addLast(
 				getEventExecutorGroup(
 					socketChannel, _rpcEventExecutorGroupAttributeKey),
@@ -379,7 +380,7 @@ public class NettyFabricClient implements FabricClient {
 					_nettyFabricClientConfig.getReconnectCount());
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Registered fabric agent on " + _channel);
+					_log.info("Registered Netty fabric agent on " + _channel);
 				}
 
 				channelFuture = _channel.closeFuture();
@@ -390,7 +391,7 @@ public class NettyFabricClient implements FabricClient {
 				return;
 			}
 
-			_log.error("Unable to register fabric agent on " + _channel);
+			_log.error("Unable to register Netty fabric agent on " + _channel);
 
 			doDisconnect();
 		}
