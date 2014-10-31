@@ -63,12 +63,12 @@ public class NettyFabricServer implements FabricServer {
 	public synchronized void start() throws Exception {
 		if (_serverChannel != null) {
 			throw new IllegalStateException(
-				"Netty fabric server has already started");
+				"Netty fabric server was already started");
 		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Starting netty fabric server using : " +
+				"Starting netty fabric server using " +
 					_nettyFabricServerConfig);
 		}
 
@@ -133,7 +133,7 @@ public class NettyFabricServer implements FabricServer {
 	public synchronized void stop() throws InterruptedException {
 		if (_serverChannel == null) {
 			throw new IllegalStateException(
-				"Netty fabric server has not started");
+				"Netty fabric server is not started");
 		}
 
 		try {
