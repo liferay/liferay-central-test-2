@@ -740,7 +740,7 @@ public class ClusterSchedulerEngine
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"MEMORY_CLUSTERED jobs stop running on this node");
+						"MEMORY_CLUSTERED jobs stopped running on this node");
 				}
 			}
 			finally {

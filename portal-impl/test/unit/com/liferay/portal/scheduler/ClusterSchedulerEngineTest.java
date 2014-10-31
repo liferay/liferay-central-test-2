@@ -448,7 +448,7 @@ public class ClusterSchedulerEngineTest {
 		LogRecord logRecord = logRecords.get(0);
 
 		Assert.assertEquals(
-			"MEMORY_CLUSTERED jobs stop running on this node",
+			"MEMORY_CLUSTERED jobs stopped running on this node",
 			logRecord.getMessage());
 		Assert.assertFalse(ClusterMasterExecutorUtil.isMaster());
 
