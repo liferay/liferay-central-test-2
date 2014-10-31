@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.JobState;
@@ -554,7 +552,7 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 	}
 
 	@Override
-	public void initialize() throws SchedulerException {
+	public void initialize() {
 		SchedulerLifecycle schedulerLifecycle = new SchedulerLifecycle();
 
 		schedulerLifecycle.registerPortalLifecycle(PortalLifecycle.METHOD_INIT);
@@ -731,9 +729,6 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 			list.add(new DayAndPosition(day, 0));
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		SchedulerEngineHelperImpl.class);
 
 	private SchedulerEngine _schedulerEngine;
 

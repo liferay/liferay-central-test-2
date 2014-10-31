@@ -1863,10 +1863,6 @@ public class ClusterSchedulerEngineTest {
 			_exception = exception;
 		}
 
-		public void setMaster(boolean master) {
-			_master = master;
-		}
-
 		@Override
 		public void unregisterClusterMasterTokenTransitionListener(
 			ClusterMasterTokenTransitionListener
