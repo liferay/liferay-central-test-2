@@ -541,9 +541,7 @@ public class ClusterSchedulerEngine
 		}
 	}
 
-	protected boolean isMemoryClusteredSlaveJob(StorageType storageType)
-		throws SchedulerException {
-
+	protected boolean isMemoryClusteredSlaveJob(StorageType storageType) {
 		if ((storageType != StorageType.MEMORY_CLUSTERED) ||
 			ClusterMasterExecutorUtil.isMaster()) {
 
