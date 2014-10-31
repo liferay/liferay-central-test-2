@@ -68,7 +68,7 @@ public class NettyFabricServer implements FabricServer {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Starting netty fabric server using " +
+				"Starting Netty fabric server using " +
 					_nettyFabricServerConfig);
 		}
 
@@ -235,7 +235,7 @@ public class NettyFabricServer implements FabricServer {
 			if (channelFuture.isSuccess()) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Started netty fabric server on " +
+						"Started Netty fabric server on " +
 							channel.localAddress());
 				}
 
@@ -248,12 +248,12 @@ public class NettyFabricServer implements FabricServer {
 
 			if (channelFuture.isCancelled()) {
 				_log.error(
-					"Cancelled starting netty fabric server on " +
+					"Cancelled starting Netty fabric server on " +
 						serverAddress);
 			}
 			else {
 				_log.error(
-					"Unable to start netty fabric server on " + serverAddress,
+					"Unable to start Netty fabric server on " + serverAddress,
 					channelFuture.cause());
 			}
 
