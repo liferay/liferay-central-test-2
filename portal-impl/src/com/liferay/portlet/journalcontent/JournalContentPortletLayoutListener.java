@@ -63,11 +63,11 @@ public class JournalContentPortletLayoutListener
 		try {
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					layout, portletId, StringPool.BLANK);
 
-			String articleId = preferences.getValue("articleId", null);
+			String articleId = portletPreferences.getValue("articleId", null);
 
 			if (Validator.isNull(articleId)) {
 				return;
@@ -102,11 +102,11 @@ public class JournalContentPortletLayoutListener
 		try {
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					layout, portletId, StringPool.BLANK);
 
-			String articleId = preferences.getValue("articleId", null);
+			String articleId = portletPreferences.getValue("articleId", null);
 
 			if (Validator.isNull(articleId)) {
 				return;
@@ -140,11 +140,11 @@ public class JournalContentPortletLayoutListener
 		try {
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					layout, portletId, StringPool.BLANK);
 
-			String articleId = preferences.getValue("articleId", null);
+			String articleId = portletPreferences.getValue("articleId", null);
 
 			if (Validator.isNull(articleId)) {
 				JournalContentSearchLocalServiceUtil.deleteArticleContentSearch(
