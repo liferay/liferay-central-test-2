@@ -190,16 +190,13 @@ public class GroupImpl extends GroupBaseImpl {
 	}
 
 	@Override
-	public String getDisplayURL(ThemeDisplay themeDisplay)
-		throws PortalException {
-
+	public String getDisplayURL(ThemeDisplay themeDisplay) {
 		return getDisplayURL(themeDisplay, false);
 	}
 
 	@Override
 	public String getDisplayURL(
-			ThemeDisplay themeDisplay, boolean privateLayout)
-		throws PortalException {
+		ThemeDisplay themeDisplay, boolean privateLayout) {
 
 		String portalURL = themeDisplay.getPortalURL();
 
