@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Iván Zaera
  */
 public class DefaultDLViewFileVersionDisplayContext
-	extends BaseDLViewFileVersionDisplayContext {
+	extends BaseDefaultDLViewFileVersionDisplayContext {
 
 	public DefaultDLViewFileVersionDisplayContext(
 			HttpServletRequest request, HttpServletResponse response,
