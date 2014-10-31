@@ -82,10 +82,10 @@ public class NettyFabricServerConfig implements Serializable {
 
 		sb.append("{bossGroupThreadCount=");
 		sb.append(getBossGroupThreadCount());
-		sb.append(", fileServerGroupThreadCount=");
-		sb.append(getFileServerGroupThreadCount());
 		sb.append(", fileServerFolderCompressionLevel=");
 		sb.append(getFileServerFolderCompressionLevel());
+		sb.append(", fileServerGroupThreadCount=");
+		sb.append(getFileServerGroupThreadCount());
 		sb.append(", nettyFabricServerHost=");
 		sb.append(getNettyFabricServerHost());
 		sb.append(", nettyFabricServerPort=");

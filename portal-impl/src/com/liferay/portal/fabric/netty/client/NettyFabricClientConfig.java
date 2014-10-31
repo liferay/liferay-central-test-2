@@ -124,7 +124,17 @@ public class NettyFabricClientConfig implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 
-		sb.append("{id=");
+		sb.append("{eventLoopGroupThreadCount=");
+		sb.append(getEventLoopGroupThreadCount());
+		sb.append(", executionGroupThreadCount=");
+		sb.append(getExecutionGroupThreadCount());
+		sb.append(", executionTimeout=");
+		sb.append(getExecutionTimeout());
+		sb.append(", fileServerFolderCompressionLevel=");
+		sb.append(getFileServerFolderCompressionLevel());
+		sb.append(", fileServerGroupThreadCount=");
+		sb.append(getFileServerGroupThreadCount());
+		sb.append(", id=");
 		sb.append(_id);
 		sb.append(", nettyFabricServetHost=");
 		sb.append(getNettyFabricServerHost());
@@ -134,22 +144,12 @@ public class NettyFabricClientConfig implements Serializable {
 		sb.append(getReconnectCount());
 		sb.append(", reconnectInterval=");
 		sb.append(getReconnectInterval());
-		sb.append(", eventLoopGroupThreadCount=");
-		sb.append(getEventLoopGroupThreadCount());
-		sb.append(", repositoryPath=");
-		sb.append(getRepositoryPath());
 		sb.append(", repositoryGetFileTimeout=");
 		sb.append(getRepositoryGetFileTimeout());
-		sb.append(", fileServerGroupThreadCount=");
-		sb.append(getFileServerGroupThreadCount());
-		sb.append(", fileServerFolderCompressionLevel=");
-		sb.append(getFileServerFolderCompressionLevel());
+		sb.append(", repositoryPath=");
+		sb.append(getRepositoryPath());
 		sb.append(", rpcGroupThreadCount=");
 		sb.append(getRPCGroupThreadCount());
-		sb.append(", executionGroupThreadCount=");
-		sb.append(getExecutionGroupThreadCount());
-		sb.append(", executionTimeout=");
-		sb.append(getExecutionTimeout());
 		sb.append("}");
 
 		return sb.toString();
