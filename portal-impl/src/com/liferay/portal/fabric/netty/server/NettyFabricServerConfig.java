@@ -80,28 +80,28 @@ public class NettyFabricServerConfig implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{nettyFabricServerHost=");
-		sb.append(getNettyFabricServerHost());
-		sb.append(", nettyFabricServerPort=");
-		sb.append(getNettyFabricServerPort());
-		sb.append(", bossGroupThreadCount=");
+		sb.append("{bossGroupThreadCount=");
 		sb.append(getBossGroupThreadCount());
-		sb.append(", workerGroupThreadCount=");
-		sb.append(getWorkerGroupThreadCount());
-		sb.append(", repositoryParentPath=");
-		sb.append(getRepositoryParentPath());
-		sb.append(", repositoryGetFileTimeout=");
-		sb.append(getRepositoryGetFileTimeout());
-		sb.append(", registrationGroupThreadCount=");
-		sb.append(getRegistrationGroupThreadCount());
 		sb.append(", fileServerGroupThreadCount=");
 		sb.append(getFileServerGroupThreadCount());
 		sb.append(", fileServerFolderCompressionLevel=");
 		sb.append(getFileServerFolderCompressionLevel());
+		sb.append(", nettyFabricServerHost=");
+		sb.append(getNettyFabricServerHost());
+		sb.append(", nettyFabricServerPort=");
+		sb.append(getNettyFabricServerPort());
+		sb.append(", registrationGroupThreadCount=");
+		sb.append(getRegistrationGroupThreadCount());
+		sb.append(", repositoryGetFileTimeout=");
+		sb.append(getRepositoryGetFileTimeout());
+		sb.append(", repositoryParentPath=");
+		sb.append(getRepositoryParentPath());
 		sb.append(", rpcGroupThreadCount=");
 		sb.append(getRPCGroupThreadCount());
 		sb.append(", rpcRelayTimeout=");
 		sb.append(getRPCRelayTimeout());
+		sb.append(", workerGroupThreadCount=");
+		sb.append(getWorkerGroupThreadCount());
 		sb.append("}");
 
 		return sb.toString();
