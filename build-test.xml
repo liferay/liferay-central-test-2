@@ -3443,7 +3443,6 @@ if (ppstate.equals("normal")) {
 
 				StringBuilder sb = new StringBuilder();
 
-				Set allPackageNames = getPackageNames();
 				int allPackageGroupsSize = Integer.parseInt(project.getProperty("test.package.groups.size"));
 
 				String longRunningPackageNamesString = project.getProperty("test.package.names.long.running");
@@ -3456,19 +3455,21 @@ if (ppstate.equals("normal")) {
 					longRunningPackageGroupsSize = 0;
 				}
 
-				int connectedPackageGroupsSize = allPackageGroupsSize - longRunningPackageGroupsSize;
+				int shortRunningPackageGroupsSize = allPackageGroupsSize - longRunningPackageGroupsSize;
 
-				Set connectedPackageNames = new TreeSet();
+				Set shortRunningPackageNames = new TreeSet();
 
-				connectedPackageNames.addAll(allPackageNames);
+				Set allPackageNames = getPackageNames();
+
+				shortRunningPackageNames.addAll(allPackageNames);
 
 				for (String longRunningPackageName : longRunningPackageNames) {
-					connectedPackageNames.remove(longRunningPackageName);
+					shortRunningPackageNames.remove(longRunningPackageName);
 				}
 
-				Map packageGroups = getPackageGroups(connectedPackageNames, connectedPackageGroupsSize);
+				Map packageGroups = getPackageGroups(shortRunningPackageNames, shortRunningPackageGroupsSize);
 
-				for (int i = 0; i < connectedPackageGroupsSize; i++) {
+				for (int i = 0; i < shortRunningPackageGroupsSize; i++) {
 					Set packageGroup = packageGroups.get(i);
 
 					sb.append("TEST_PACKAGE_GROUP_");
@@ -3491,10 +3492,8 @@ if (ppstate.equals("normal")) {
 				}
 
 				for (int i = 0; i < longRunningPackageGroupsSize; i++) {
-					int j = connectedPackageGroupsSize + i;
-
 					sb.append("TEST_PACKAGE_GROUP_");
-					sb.append(j);
+					sb.append(shortRunningPackageGroupsSize + i);
 					sb.append("=");
 					sb.append(longRunningPackageNames[i]);
 					sb.append("\n\n");
