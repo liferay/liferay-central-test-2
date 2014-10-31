@@ -35,7 +35,8 @@ public class NettyFabricServerConfig implements Serializable {
 
 	public CompressionLevel getFileServerFolderCompressionLevel() {
 		return CompressionLevel.getCompressionLevel(
-			PropsValues.PORTAL_FABRIC_SERVER_FILE_SERVER_FOLDER_COMPRESSION_LEVEL);
+			PropsValues.
+				PORTAL_FABRIC_SERVER_FILE_SERVER_FOLDER_COMPRESSION_LEVEL);
 	}
 
 	public int getFileServerGroupThreadCount() {
