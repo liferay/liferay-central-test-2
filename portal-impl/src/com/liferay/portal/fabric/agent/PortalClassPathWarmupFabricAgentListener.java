@@ -66,7 +66,7 @@ public class PortalClassPathWarmupFabricAgentListener
 
 		@Override
 		public void completeWithCancel(Future<Serializable> future) {
-			_log.error("Portal class path warmup got cancelled");
+			_log.error("Portal class path warmup cancelled");
 		}
 
 		@Override
@@ -100,7 +100,7 @@ public class PortalClassPathWarmupFabricAgentListener
 			@Override
 			public String call() {
 				if (_log.isInfoEnabled()) {
-					_log.info("Portal class path warmed up successfully!");
+					_log.info("Portal class path warmup successful");
 				}
 
 				return null;
