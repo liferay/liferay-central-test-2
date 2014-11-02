@@ -116,7 +116,7 @@ public class StartupAction extends SimpleAction {
 		intraband.registerDatagramReceiveHandler(
 			SystemDataType.RPC.getValue(), new RPCDatagramReceiveHandler());
 
-		// Fabric
+		// Portal fabric
 
 		if (PropsValues.PORTAL_FABRIC_ENABLED) {
 			FabricServerUtil.start();

@@ -232,7 +232,7 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		MessageBusUtil.shutdown(true);
 
-		// Fabric
+		// Portal fabric
 
 		if (PropsValues.PORTAL_FABRIC_ENABLED) {
 			try {
