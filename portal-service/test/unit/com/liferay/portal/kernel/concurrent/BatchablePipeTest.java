@@ -246,10 +246,8 @@ public class BatchablePipeTest {
 
 		final IncreasableEntry<String, Integer> increasbleEntry1 =
 			new IntegerIncreasableEntry("test", 1);
-
 		final IncreasableEntry<String, Integer> increasbleEntry2 =
 			new IntegerIncreasableEntry("test", 2);
-
 		IncreasableEntry<String, Integer> increasbleEntry3 =
 			new IntegerIncreasableEntry("test", 3);
 
