@@ -33,17 +33,15 @@ import java.io.IOException;
 public class ImageSelector {
 
 	public ImageSelector(long imageId) {
-		_imageCropRegion = null;
-
 		_imageId = imageId;
 
+		_imageCropRegion = null;
 		_imageURL = null;
 	}
 
 	public ImageSelector(long imageId, String imageCropRegion) {
-		_imageCropRegion = imageCropRegion;
-
 		_imageId = imageId;
+		_imageCropRegion = imageCropRegion;
 
 		_imageURL = null;
 	}
@@ -51,19 +49,16 @@ public class ImageSelector {
 	public ImageSelector(
 		long imageId, String imageURL, String imageCropRegion) {
 
-		_imageCropRegion = imageCropRegion;
-
 		_imageId = imageId;
-
 		_imageURL = imageURL;
+		_imageCropRegion = imageCropRegion;
 	}
 
 	public ImageSelector(String imageURL, String imageCropRegion) {
+		_imageURL = imageURL;
 		_imageCropRegion = imageCropRegion;
 
 		_imageId = 0;
-
-		_imageURL = imageURL;
 	}
 
 	public byte[] getCroppedImageBytes() throws IOException, PortalException {
