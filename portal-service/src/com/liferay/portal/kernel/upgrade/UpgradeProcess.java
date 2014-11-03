@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.sql.Connection;
@@ -162,7 +163,7 @@ public abstract class UpgradeProcess extends BaseDBProcess {
 
 		try {
 			if (_log.isInfoEnabled()) {
-				_log.info("Upgrading " + getClass().getName());
+				_log.info("Upgrading " + ClassUtil.getClassName(this));
 			}
 
 			doUpgrade();
@@ -173,8 +174,9 @@ public abstract class UpgradeProcess extends BaseDBProcess {
 		finally {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Completed upgrade process: " + getClass().getName() +
-						" in " + (System.currentTimeMillis() - start) + "ms");
+					"Completed upgrade process " +
+						ClassUtil.getClassName(this) + " in " +
+							(System.currentTimeMillis() - start) + "ms");
 			}
 		}
 	}
