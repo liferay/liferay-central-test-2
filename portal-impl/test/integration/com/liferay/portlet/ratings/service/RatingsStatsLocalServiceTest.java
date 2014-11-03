@@ -53,11 +53,11 @@ public class RatingsStatsLocalServiceTest {
 	public void testAverageScoreWithDifferentMultipleRatingsEntries()
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		String className1 = StringUtil.randomString();
 		long classPK1 = RandomTestUtil.randomLong();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		RatingsEntryLocalServiceUtil.updateEntry(
 			_user1.getUserId(), className1, classPK1, 1, serviceContext);
@@ -83,11 +83,11 @@ public class RatingsStatsLocalServiceTest {
 
 	@Test
 	public void testAverageScoreWithMultipleRatingsEntries() throws Exception {
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		String className = StringUtil.randomString();
 		long classPK = RandomTestUtil.randomLong();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		RatingsEntryLocalServiceUtil.updateEntry(
 			_user1.getUserId(), className, classPK, 1, serviceContext);
@@ -104,11 +104,11 @@ public class RatingsStatsLocalServiceTest {
 
 	@Test
 	public void testTotalEntriesWithMultipleRatingsEntries() throws Exception {
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		String className = StringUtil.randomString();
 		long classPK = RandomTestUtil.randomLong();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		RatingsEntryLocalServiceUtil.updateEntry(
 			_user1.getUserId(), className, classPK, 1, serviceContext);
@@ -125,11 +125,11 @@ public class RatingsStatsLocalServiceTest {
 	public void testTotalScoreWithDifferentMultipleRatingsEntries()
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		String className1 = StringUtil.randomString();
 		long classPK1 = RandomTestUtil.randomLong();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		RatingsEntryLocalServiceUtil.updateEntry(
 			_user1.getUserId(), className1, classPK1, 1, serviceContext);
@@ -155,11 +155,11 @@ public class RatingsStatsLocalServiceTest {
 
 	@Test
 	public void testTotalScoreWithMultipleRatingsEntries() throws Exception {
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		String className = StringUtil.randomString();
 		long classPK = RandomTestUtil.randomLong();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		RatingsEntryLocalServiceUtil.updateEntry(
 			_user1.getUserId(), className, classPK, 1, serviceContext);

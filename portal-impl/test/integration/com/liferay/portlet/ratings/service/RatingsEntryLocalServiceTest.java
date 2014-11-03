@@ -45,7 +45,7 @@ public class RatingsEntryLocalServiceTest {
 	}
 
 	@Test(expected = EntryScoreException.class)
-	public void testNegativeRatingScoreIsInvalidScore() throws Exception {
+	public void testRatingScoreLessThan0IsInvalidScore() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
@@ -79,7 +79,7 @@ public class RatingsEntryLocalServiceTest {
 	}
 
 	@Test(expected = EntryScoreException.class)
-	public void testRatingScoreBiggerThan1IsInvalidScore() throws Exception {
+	public void testRatingScoreGreaterThan1IsInvalidScore() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
