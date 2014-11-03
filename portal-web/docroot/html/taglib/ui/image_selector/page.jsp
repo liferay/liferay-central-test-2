@@ -69,8 +69,6 @@ if (fileEntryId != 0) {
 </liferay-portlet:renderURL>
 
 <%
-String uploadImageURL = themeDisplay.getPathMain() + "/portal/image_selector?p_auth=" + AuthTokenUtil.getToken(request);
-
 String modules = "liferay-image-selector";
 
 if (!draggableImage.equals("none")) {
@@ -85,7 +83,7 @@ if (!draggableImage.equals("none")) {
 			namespace: '<%= randomNamespace %>',
 			paramName: '<portlet:namespace /><%= paramName %>',
 			rootNode: '#<%= randomNamespace %>taglibImageSelector',
-			uploadURL: '<%= uploadImageURL %>'
+			uploadURL: '<%= themeDisplay.getPathMain() %>/portal/image_selector?p_auth=<%= AuthTokenUtil.getToken(request) %>'
 		}
 	);
 
