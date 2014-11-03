@@ -1457,57 +1457,57 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Cannot obtain cropped image from image selector image " +
-						"id " + coverImageImageSelector.getImageId());
+					"Unable to get cropped image from image selector image " +
+						coverImageImageSelector.getImageId());
 			}
 		}
 
-		if (bytes != null) {
-			File file = null;
+		if (bytes == null) {
+			return coverImageId;
+		}
 
-			try {
-				file = FileUtil.createTempFile(bytes);
+		File file = null;
 
-				String title = coverImageImageSelector.getTitle();
-				String mimeType = coverImageImageSelector.getMimeType();
+		try {
+			file = FileUtil.createTempFile(bytes);
 
-				if (Validator.isNull(title)) {
-					title =
-						StringUtil.randomString() + "_tempCroppedImage_" +
-							entryId;
-				}
+			String title = coverImageImageSelector.getTitle();
+			String mimeType = coverImageImageSelector.getMimeType();
 
-				ServiceContext serviceContext = new ServiceContext();
-
-				serviceContext.setAddGroupPermissions(true);
-				serviceContext.setAddGuestPermissions(true);
-
-				Folder folder = PortletFileRepositoryUtil.addPortletFolder(
-					groupId, userId, PortletKeys.BLOGS,
-					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-					String.valueOf(entryId), serviceContext);
-
-				FileEntry fileEntry =
-					PortletFileRepositoryUtil.addPortletFileEntry(
-						groupId, userId, BlogsEntry.class.getName(), entryId,
-						PortletKeys.BLOGS, folder.getFolderId(), file, title,
-						mimeType, false);
-
-				coverImageId = fileEntry.getFileEntryId();
-
-				PortletFileRepositoryUtil.deletePortletFileEntry(
-					coverImageImageSelector.getImageId());
+			if (Validator.isNull(title)) {
+				title =
+					StringUtil.randomString() + "_tempCroppedImage_" + entryId;
 			}
-			catch (IOException ioe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Cannot obtain cropped image from image selector " +
-							"image id " + coverImageImageSelector.getImageId());
-				}
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddGroupPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+
+			Folder folder = PortletFileRepositoryUtil.addPortletFolder(
+				groupId, userId, PortletKeys.BLOGS,
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(entryId), serviceContext);
+
+			FileEntry fileEntry = PortletFileRepositoryUtil.addPortletFileEntry(
+				groupId, userId, BlogsEntry.class.getName(), entryId,
+				PortletKeys.BLOGS, folder.getFolderId(), file, title, mimeType,
+				false);
+
+			coverImageId = fileEntry.getFileEntryId();
+
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				coverImageImageSelector.getImageId());
+		}
+		catch (IOException ioe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Unable to get cropped image from image selector image " +
+						coverImageImageSelector.getImageId());
 			}
-			finally {
-				FileUtil.delete(file);
-			}
+		}
+		finally {
+			FileUtil.delete(file);
 		}
 
 		return coverImageId;
@@ -1538,11 +1538,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, String.valueOf(entryId),
 			serviceContext);
 
-		FileEntry fileEntry =
-			PortletFileRepositoryUtil.addPortletFileEntry(
-				groupId, userId, BlogsEntry.class.getName(), entryId,
-				PortletKeys.BLOGS, folder.getFolderId(), is, title, mimeType,
-				false);
+		FileEntry fileEntry = PortletFileRepositoryUtil.addPortletFileEntry(
+			groupId, userId, BlogsEntry.class.getName(), entryId,
+			PortletKeys.BLOGS, folder.getFolderId(), is, title, mimeType,
+			false);
 
 		return fileEntry.getFileEntryId();
 	}
