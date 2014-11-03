@@ -150,7 +150,7 @@ public class UpgradeRatings extends UpgradeProcess {
 			boolean supportsBatchUpdates =
 				databaseMetaData.supportsBatchUpdates();
 
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("select classNameId, classPK, count(1) as ");
 			sb.append("totalEntries, sum(RatingsEntry.score) as totalScore, ");
