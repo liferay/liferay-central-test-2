@@ -64,15 +64,15 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 		boolean allowTrackbacks, java.lang.String[] trackbacks,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageSelector,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageImageSelector,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _blogsEntryService.addEntry(title, subtitle, description,
 			content, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, allowPingbacks,
-			allowTrackbacks, trackbacks, coverImageSelector,
-			smallImageSelector, serviceContext);
+			allowTrackbacks, trackbacks, coverImageImageSelector,
+			smallImageImageSelector, serviceContext);
 	}
 
 	@Override
@@ -268,15 +268,15 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 		boolean allowTrackbacks, java.lang.String[] trackbacks,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageSelector,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageImageSelector,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _blogsEntryService.updateEntry(entryId, title, subtitle,
 			description, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
-			allowPingbacks, allowTrackbacks, trackbacks, coverImageSelector,
-			smallImageSelector, serviceContext);
+			allowPingbacks, allowTrackbacks, trackbacks,
+			coverImageImageSelector, smallImageImageSelector, serviceContext);
 	}
 
 	/**

@@ -106,8 +106,8 @@ public class BlogsEntryServiceHttp {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageSelector,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageImageSelector,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -118,8 +118,8 @@ public class BlogsEntryServiceHttp {
 					subtitle, description, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, allowPingbacks, allowTrackbacks,
-					trackbacks, coverImageSelector, smallImageSelector,
-					serviceContext);
+					trackbacks, coverImageImageSelector,
+					smallImageImageSelector, serviceContext);
 
 			Object returnObj = null;
 
@@ -773,8 +773,8 @@ public class BlogsEntryServiceHttp {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageSelector,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector coverImageImageSelector,
+		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector smallImageImageSelector,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -785,8 +785,8 @@ public class BlogsEntryServiceHttp {
 					title, subtitle, description, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, allowPingbacks, allowTrackbacks,
-					trackbacks, coverImageSelector, smallImageSelector,
-					serviceContext);
+					trackbacks, coverImageImageSelector,
+					smallImageImageSelector, serviceContext);
 
 			Object returnObj = null;
 
