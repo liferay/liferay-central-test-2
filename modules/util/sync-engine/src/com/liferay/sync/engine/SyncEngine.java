@@ -18,6 +18,7 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import com.liferay.sync.engine.documentlibrary.event.GetSyncDLObjectUpdateEvent;
 import com.liferay.sync.engine.documentlibrary.util.FileEventUtil;
+import com.liferay.sync.engine.documentlibrary.util.ServerEventUtil;
 import com.liferay.sync.engine.filesystem.SyncSiteWatchEventListener;
 import com.liferay.sync.engine.filesystem.SyncWatchEventProcessor;
 import com.liferay.sync.engine.filesystem.WatchEventListener;
@@ -152,7 +153,7 @@ public class SyncEngine {
 
 		SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
 
-		SyncAccount syncAccount = SyncAccountService.synchronizeSyncAccount(
+		SyncAccount syncAccount = ServerEventUtil.synchronizeSyncAccount(
 			syncAccountId);
 
 		if (!ConnectionRetryUtil.retryInProgress(syncAccountId)) {
@@ -160,7 +161,7 @@ public class SyncEngine {
 
 			SyncAccountService.update(syncAccount);
 
-			SyncSiteService.synchronizeSyncSites(syncAccountId);
+			ServerEventUtil.synchronizeSyncSites(syncAccountId);
 		}
 
 		Path filePath = Paths.get(syncAccount.getFilePathName());
