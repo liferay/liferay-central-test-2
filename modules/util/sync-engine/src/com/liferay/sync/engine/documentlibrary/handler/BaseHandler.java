@@ -147,8 +147,8 @@ public class BaseHandler implements Handler<Void> {
 
 		SyncAccountService.update(syncAccount);
 
-		SyncAccountService.synchronizeSyncAccount(
-			getSyncAccountId(), true,
+		SyncAccountService.retryServerConnection(
+			getSyncAccountId(),
 			ConnectionRetryUtil.incrementRetryDelay(getSyncAccountId()));
 
 		if (_logger.isDebugEnabled()) {

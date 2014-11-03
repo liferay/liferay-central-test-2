@@ -33,6 +33,7 @@ import com.liferay.sync.engine.service.SyncSiteService;
 import com.liferay.sync.engine.service.SyncWatchEventService;
 import com.liferay.sync.engine.service.persistence.SyncAccountPersistence;
 import com.liferay.sync.engine.upgrade.util.UpgradeUtil;
+import com.liferay.sync.engine.util.ConnectionRetryUtil;
 import com.liferay.sync.engine.util.LoggerUtil;
 import com.liferay.sync.engine.util.PropsValues;
 import com.liferay.sync.engine.util.SyncClientUpdater;
@@ -152,9 +153,13 @@ public class SyncEngine {
 		SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
 
 		SyncAccount syncAccount = SyncAccountService.synchronizeSyncAccount(
-			syncAccountId, true, 0);
+			syncAccountId);
 
-		if (syncAccount.getState() == SyncAccount.STATE_CONNECTED) {
+		if (!ConnectionRetryUtil.retryInProgress(syncAccountId)) {
+			syncAccount.setState(SyncAccount.STATE_CONNECTED);
+
+			SyncAccountService.update(syncAccount);
+
 			SyncSiteService.synchronizeSyncSites(syncAccountId);
 		}
 

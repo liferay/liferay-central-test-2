@@ -59,7 +59,7 @@ public class SyncAccountModelListener implements ModelListener<SyncAccount> {
 			SessionManager.removeSession(syncAccount.getSyncAccountId());
 
 			SyncAccountService.synchronizeSyncAccount(
-				syncAccount.getSyncAccountId(), true, 0);
+				syncAccount.getSyncAccountId());
 		}
 	}
 

@@ -15,6 +15,7 @@
 package com.liferay.sync.engine.service;
 
 import com.liferay.sync.engine.documentlibrary.event.GetSyncContextEvent;
+import com.liferay.sync.engine.documentlibrary.event.RetryServerConnectionEvent;
 import com.liferay.sync.engine.model.ModelListener;
 import com.liferay.sync.engine.model.SyncAccount;
 import com.liferay.sync.engine.model.SyncAccountModelListener;
@@ -253,6 +254,18 @@ public class SyncAccountService {
 		_activeSyncAccountIds = null;
 	}
 
+	public static void retryServerConnection(long syncAccountId, long delay) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+
+		parameters.put("uuid", null);
+
+		RetryServerConnectionEvent retryServerConnectionEvent =
+			new RetryServerConnectionEvent(syncAccountId, parameters);
+
+		_scheduledExecutorService.schedule(
+			retryServerConnectionEvent, delay, TimeUnit.MILLISECONDS);
+	}
+
 	public static SyncAccount setFilePathName(
 		long syncAccountId, String targetFilePathName) {
 
@@ -299,19 +312,15 @@ public class SyncAccountService {
 		return syncAccount;
 	}
 
-	public static SyncAccount synchronizeSyncAccount(
-		long syncAccountId, boolean checkState, long delay) {
-
+	public static SyncAccount synchronizeSyncAccount(long syncAccountId) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
-		parameters.put("checkState", checkState);
 		parameters.put("uuid", null);
 
 		GetSyncContextEvent getSyncContextEvent = new GetSyncContextEvent(
 			syncAccountId, parameters);
 
-		_scheduledExecutorService.schedule(
-			getSyncContextEvent, delay, TimeUnit.MILLISECONDS);
+		getSyncContextEvent.run();
 
 		return SyncAccountService.fetchSyncAccount(syncAccountId);
 	}
