@@ -44,16 +44,6 @@ public class RatingsEntryLocalServiceTest {
 		_group = GroupTestUtil.addGroup();
 	}
 
-	@Test(expected = EntryScoreException.class)
-	public void testRatingScoreLessThan0IsInvalidScore() throws Exception {
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
-		RatingsEntryLocalServiceUtil.updateEntry(
-			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomLong(), -1, serviceContext);
-	}
-
 	@Test
 	public void testRatingScore0IsValidScore() throws Exception {
 		ServiceContext serviceContext =
@@ -86,6 +76,16 @@ public class RatingsEntryLocalServiceTest {
 		RatingsEntryLocalServiceUtil.updateEntry(
 			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 			RandomTestUtil.randomLong(), 4, serviceContext);
+	}
+
+	@Test(expected = EntryScoreException.class)
+	public void testRatingScoreLessThan0IsInvalidScore() throws Exception {
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+
+		RatingsEntryLocalServiceUtil.updateEntry(
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomLong(), -1, serviceContext);
 	}
 
 	@DeleteAfterTestRun
