@@ -45,7 +45,7 @@ public class ImageSelector {
 
 		_imageId = imageId;
 
-		_imageURL = null;		
+		_imageURL = null;
 	}
 
 	public ImageSelector(
