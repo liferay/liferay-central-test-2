@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -99,8 +100,8 @@ public class UpgradeRatings extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update RatingsEntry set score = score / ? " +
-					"where classNameId = ?");
+				"update RatingsEntry set score = score / ? where classNameId " +
+					"= ?");
 
 			ps.setInt(1, normalizationFactor);
 			ps.setLong(2, classNameId);
@@ -148,12 +149,15 @@ public class UpgradeRatings extends UpgradeProcess {
 
 			boolean supportsBatchUpdates =
 				databaseMetaData.supportsBatchUpdates();
+				
+			StringBundler sb = new StringBundler();
+			
+			sb.append("select classNameId, classPK, count(1) as ");
+			sb.append("totalEntries, sum(RatingsEntry.score) as totalScore, ");
+			sb.append("sum(RatingsEntry.score) / count(1) as averageScore ");
+			sb.append("from RatingsEntry group by classNameId, classPK");
 
-			ps = con.prepareStatement(
-				"select classNameId, classPK, count(1) as totalEntries, " +
-					"sum(re.score) as totalScore, sum(re.score) / count(1) " +
-						"as averageScore from RatingsEntry re group by " +
-							"classNameId, classPK");
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
