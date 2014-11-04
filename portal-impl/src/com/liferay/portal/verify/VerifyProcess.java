@@ -92,42 +92,45 @@ public abstract class VerifyProcess extends BaseDBProcess {
 	}
 
 	protected void doVerify(
-			Collection<? extends ThrowableAwareRunnable> runnables)
+			Collection<? extends ThrowableAwareRunnable>
+				throwableAwareRunnables)
 		throws Exception {
 
 		List<Throwable> throwables = new ArrayList<Throwable>();
 
-		if (runnables.size() <
+		if (throwableAwareRunnables.size() <
 				PropsValues.VERIFY_PROCESS_CONCURRENCY_THRESHOLD) {
 
-			for (ThrowableAwareRunnable runnable : runnables) {
-				runnable.run();
+			for (ThrowableAwareRunnable throwableAwareRunnable :
+					throwableAwareRunnables) {
 
-				if (runnable.hasException()) {
-					throwables.add(runnable.getThrowable());
+				throwableAwareRunnable.run();
+
+				if (throwableAwareRunnable.hasException()) {
+					throwables.add(throwableAwareRunnable.getThrowable());
 				}
 			}
 		}
 		else {
 			ExecutorService executorService = Executors.newFixedThreadPool(
-				runnables.size());
+				throwableAwareRunnables.size());
 
 			List<Callable<Object>> jobs = new ArrayList<Callable<Object>>(
-				runnables.size());
+				throwableAwareRunnables.size());
 
-			for (Runnable runnable : runnables) {
+			for (Runnable runnable : throwableAwareRunnables) {
 				jobs.add(Executors.callable(runnable));
 			}
 
 			try {
 				List<Future<Object>> futures = executorService.invokeAll(jobs);
 
-				for (Future future : futures) {
+				for (Future<Object> future : futures) {
 					try {
 						future.get();
 					}
-					catch (ExecutionException e) {
-						throwables.add(e.getCause());
+					catch (ExecutionException ee) {
+						throwables.add(ee.getCause());
 					}
 				}
 			}
