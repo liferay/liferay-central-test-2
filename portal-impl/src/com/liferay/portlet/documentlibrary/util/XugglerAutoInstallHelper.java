@@ -62,7 +62,7 @@ public class XugglerAutoInstallHelper {
 	public static void installNativeLibraries() throws ProcessException {
 		if (isNativeLibraryInstalled()) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Xuggler is already installed.");
+				_log.debug("Xuggler is already installed");
 			}
 
 			return;
@@ -72,7 +72,7 @@ public class XugglerAutoInstallHelper {
 
 		if (xugglerJarFile == null) {
 			_log.error(
-				"Xuggler auto install is not supported on current system :" +
+				"Xuggler auto install is not supported on system: " +
 					System.getProperty("os.name") + "/" +
 						System.getProperty("os.arch"));
 
