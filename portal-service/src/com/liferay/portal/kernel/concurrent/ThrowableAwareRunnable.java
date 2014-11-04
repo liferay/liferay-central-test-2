@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.concurrent;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 
 /**
  * @author Michael C. Han
@@ -36,14 +37,15 @@ public abstract class ThrowableAwareRunnable implements Runnable {
 
 		try {
 			if (_log.isInfoEnabled()) {
-				_log.info("Processing runnable: " + getClass().getName());
+				_log.info(
+					"Processing runnable " + ClassUtil.getClassName(this));
 			}
 
 			doRun();
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Error processing runnable", e);
+				_log.debug("Unable to process runnable", e);
 			}
 
 			_throwable = e;
@@ -51,8 +53,9 @@ public abstract class ThrowableAwareRunnable implements Runnable {
 		finally {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Completed processing runnable: " + getClass().getName() +
-						" in " + (System.currentTimeMillis() - start) + "ms");
+					"Completed processing runnable " +
+						ClassUtil.getClassName(this) + " in " +
+							(System.currentTimeMillis() - start) + "ms");
 			}
 		}
 	}
