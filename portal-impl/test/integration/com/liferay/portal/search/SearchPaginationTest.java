@@ -267,10 +267,6 @@ public class SearchPaginationTest {
 		}
 
 		Assert.assertEquals(
-			"Start :" + start + ", end :" + end + ", expectedTotal :" +
-				expectedTotal + ", expectedRecalculatedStart :" +
-					expectedRecalculatedStart + ", setup users :" + _users +
-						", returned users :" + returnedUsers,
 			_users.subList(
 				expectedRecalculatedStart,
 				expectedRecalculatedStart + hits.getDocs().length),
