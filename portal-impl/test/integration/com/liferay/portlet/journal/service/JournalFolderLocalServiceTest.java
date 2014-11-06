@@ -22,6 +22,7 @@ import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portal.test.listeners.MainServletExecutionTestListener;
 import com.liferay.portal.test.runners.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.test.GroupTestUtil;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalFolder;
@@ -53,26 +54,24 @@ public class JournalFolderLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetFolders() throws Exception {
-		JournalFolder journalFolder1 = JournalTestUtil.addFolder(
-			_group.getGroupId(), "Test1");
+		JournalTestUtil.addFolder(
+			_group.getGroupId(), RandomTestUtil.randomString());
 
-		JournalFolder journalFolder2 = JournalTestUtil.addFolder(
-			_group.getGroupId(), "Test2");
+		JournalFolder folder = JournalTestUtil.addFolder(
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			JournalFolder.class.getName(), journalFolder2.getFolderId());
+			JournalFolder.class.getName(), folder.getFolderId());
 
 		Assert.assertNotNull(assetEntry);
 
 		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
 
-		List<JournalFolder> journalFolders =
+		List<JournalFolder> folders =
 			JournalFolderLocalServiceUtil.getNoAssetFolders();
 
-		Assert.assertEquals(1, journalFolders.size());
-
-		Assert.assertEquals(
-			journalFolder2.getFolderId(), journalFolders.get(0).getFolderId());
+		Assert.assertEquals(1, folders.size());
+		Assert.assertEquals(folder, folders.get(0));
 	}
 
 	@DeleteAfterTestRun

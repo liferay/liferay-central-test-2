@@ -73,7 +73,7 @@ public class DLFileEntryLocalServiceTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(dlFolder.getGroupId());
 
-		FileEntry fileEntry1 = DLAppLocalServiceUtil.addFileEntry(
+		DLAppLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), dlFolder.getRepositoryId(),
 			dlFolder.getFolderId(), RandomTestUtil.randomString(),
 			ContentTypes.TEXT_PLAIN, RandomTestUtil.randomString(),
@@ -82,7 +82,7 @@ public class DLFileEntryLocalServiceTest {
 
 		is = new ByteArrayInputStream(bytes);
 
-		FileEntry fileEntry2 = DLAppLocalServiceUtil.addFileEntry(
+		FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), dlFolder.getRepositoryId(),
 			dlFolder.getFolderId(), RandomTestUtil.randomString(),
 			ContentTypes.TEXT_PLAIN, RandomTestUtil.randomString(),
@@ -90,7 +90,7 @@ public class DLFileEntryLocalServiceTest {
 			serviceContext);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			DLFileEntry.class.getName(), fileEntry2.getFileEntryId());
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		Assert.assertNotNull(assetEntry);
 
@@ -100,9 +100,7 @@ public class DLFileEntryLocalServiceTest {
 			DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
 
 		Assert.assertEquals(1, dlFileEntries.size());
-
-		Assert.assertEquals(
-			fileEntry2.getFileEntryId(), dlFileEntries.get(0).getFileEntryId());
+		Assert.assertEquals(fileEntry, dlFileEntries.get(0));
 	}
 
 	@DeleteAfterTestRun
