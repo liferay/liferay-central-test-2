@@ -269,18 +269,18 @@ public class SearchPaginationTest {
 
 		StringBundler sb = new StringBundler(13);
 
-		sb.append("{start=");
-		sb.append(start);
-		sb.append(", end=");
+		sb.append("{end=");
 		sb.append(end);
-		sb.append(", expectedTotal=");
-		sb.append(expectedTotal);
 		sb.append(", expectedRecalculatedStart=");
 		sb.append(expectedRecalculatedStart);
-		sb.append(", setupUsers=");
-		sb.append(_users);
+		sb.append(", expectedTotal=");
+		sb.append(expectedTotal);
 		sb.append(", returnedUsers=");
 		sb.append(returnedUsers);
+		sb.append(", start=");
+		sb.append(start);
+		sb.append(", _users=");
+		sb.append(_users);
 		sb.append("}");
 
 		Assert.assertEquals(
