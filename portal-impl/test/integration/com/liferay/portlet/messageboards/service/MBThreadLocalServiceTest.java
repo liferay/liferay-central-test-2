@@ -47,14 +47,14 @@ public class MBThreadLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetThreads() throws Exception {
-		MBMessage mbMessage1 = MBTestUtil.addMessage(_group.getGroupId());
-		MBMessage mbMessage2 = MBTestUtil.addMessage(_group.getGroupId());
+		MBTestUtil.addMessage(_group.getGroupId());
 
-		MBThread mbThread1 = mbMessage1.getThread();
-		MBThread mbThread2 = mbMessage2.getThread();
+		MBMessage message = MBTestUtil.addMessage(_group.getGroupId());
+
+		MBThread thread = message.getThread();
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			MBThread.class.getName(), mbThread2.getThreadId());
+			MBThread.class.getName(), thread.getThreadId());
 
 		Assert.assertNotNull(assetEntry);
 
@@ -63,9 +63,7 @@ public class MBThreadLocalServiceTest {
 		List<MBThread> threads = MBThreadLocalServiceUtil.getNoAssetThreads();
 
 		Assert.assertEquals(1, threads.size());
-
-		Assert.assertEquals(
-			mbThread2.getThreadId(), threads.get(0).getThreadId());
+		Assert.assertEquals(thread, threads.get(0));
 	}
 
 	@DeleteAfterTestRun

@@ -51,11 +51,12 @@ public class MBMessageLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetMessages() throws Exception {
-		MBMessage mbMessage1 = MBTestUtil.addMessage(_group.getGroupId());
-		MBMessage mbMessage2 = MBTestUtil.addMessage(_group.getGroupId());
+		MBTestUtil.addMessage(_group.getGroupId());
+
+		MBMessage message = MBTestUtil.addMessage(_group.getGroupId());
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			MBMessage.class.getName(), mbMessage2.getMessageId());
+			MBMessage.class.getName(), message.getMessageId());
 
 		Assert.assertNotNull(assetEntry);
 
@@ -65,9 +66,7 @@ public class MBMessageLocalServiceTest {
 			MBMessageLocalServiceUtil.getNoAssetMessages();
 
 		Assert.assertEquals(1, messages.size());
-
-		Assert.assertEquals(
-			mbMessage2.getMessageId(), messages.get(0).getMessageId());
+		Assert.assertEquals(message, messages.get(0));
 	}
 
 	@Test
