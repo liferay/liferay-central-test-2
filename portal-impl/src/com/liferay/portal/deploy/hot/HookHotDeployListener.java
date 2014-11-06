@@ -1555,11 +1555,10 @@ public class HookHotDeployListener
 					(DLProcessor)InstanceFactory.newInstance(
 						portletClassLoader, dlProcessorClassName);
 
-				dlProcessor =
-					(DLProcessor)newInstance(
-						portletClassLoader,
-						ReflectionUtil.getInterfaces(
-							dlProcessor, portletClassLoader),
+				dlProcessor = (DLProcessor)newInstance(
+					portletClassLoader,
+					ReflectionUtil.getInterfaces(
+						dlProcessor, portletClassLoader),
 					dlProcessorClassName);
 
 				dlFileEntryProcessorContainer.registerDLProcessor(dlProcessor);
