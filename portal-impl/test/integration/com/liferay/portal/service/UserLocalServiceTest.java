@@ -57,40 +57,38 @@ public class UserLocalServiceTest {
 				success = true;
 			}
 			else if (user.getUserId() == user1.getUserId()) {
-				Assert.fail("User should not have announcement deliveries");
+				Assert.fail(
+					"User " + user.getUserId() +
+						" should not have announcement deliveries");
 			}
 		}
 
 		Assert.assertTrue(
-			"No user returned matching userId: " + user2.getUserId(), success);
+			"No user found with user ID " + user2.getUserId(), success);
 	}
 
 	@Test
 	public void testGetNoContacts() throws Exception {
-		User user1 = UserTestUtil.addUser();
-		User user2 = UserTestUtil.addUser();
+		User user = UserTestUtil.addUser();
 
-		ContactLocalServiceUtil.deleteContact(user2.getContactId());
+		ContactLocalServiceUtil.deleteContact(user.getContactId());
 
 		List<User> users = UserLocalServiceUtil.getNoContacts();
 
 		Assert.assertEquals(1, users.size());
-
-		Assert.assertEquals(user2.getUserId(), users.get(0).getUserId());
+		Assert.assertEquals(user, users.get(0));
 	}
 
 	@Test
 	public void testGetNoGroups() throws Exception {
-		User user1 = UserTestUtil.addUser();
-		User user2 = UserTestUtil.addUser();
+		User user = UserTestUtil.addUser();
 
-		GroupLocalServiceUtil.deleteGroup(user2.getGroupId());
+		GroupLocalServiceUtil.deleteGroup(user.getGroupId());
 
 		List<User> users = UserLocalServiceUtil.getNoGroups();
 
 		Assert.assertEquals(1, users.size());
-
-		Assert.assertEquals(user2.getUserId(), users.get(0).getUserId());
+		Assert.assertEquals(user, users.get(0));
 	}
 
 }

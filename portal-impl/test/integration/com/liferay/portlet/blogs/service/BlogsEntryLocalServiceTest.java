@@ -364,24 +364,20 @@ public class BlogsEntryLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetEntries() throws Exception {
-		BlogsEntry blogsEntry1 = BlogsTestUtil.addEntry(_group, true);
-
-		BlogsEntry blogsEntry2 = BlogsTestUtil.addEntry(_group, true);
+		BlogsEntry entry = BlogsTestUtil.addEntry(_group, true);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			BlogsEntry.class.getName(), blogsEntry2.getEntryId());
+			BlogsEntry.class.getName(), entry.getEntryId());
 
 		Assert.assertNotNull(assetEntry);
 
 		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
 
-		List<BlogsEntry> blogsEntries =
+		List<BlogsEntry> entries =
 			BlogsEntryLocalServiceUtil.getNoAssetEntries();
 
-		Assert.assertEquals(1, blogsEntries.size());
-
-		Assert.assertEquals(
-			blogsEntry2.getEntryId(), blogsEntries.get(0).getEntryId());
+		Assert.assertEquals(1, entries.size());
+		Assert.assertEquals(entry, entries.get(0));
 	}
 
 	@Test

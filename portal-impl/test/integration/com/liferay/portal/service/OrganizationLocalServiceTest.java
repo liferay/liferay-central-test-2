@@ -26,6 +26,7 @@ import com.liferay.portal.test.listeners.MainServletExecutionTestListener;
 import com.liferay.portal.test.listeners.ResetDatabaseExecutionTestListener;
 import com.liferay.portal.test.runners.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.test.OrganizationTestUtil;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portal.util.test.TestPropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
@@ -153,15 +154,15 @@ public class OrganizationLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetOrganizations() throws Exception {
-		Organization organization1 =
-			OrganizationLocalServiceUtil.addOrganization(
-				TestPropsValues.getUserId(),
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, "Test",
-				OrganizationConstants.TYPE_REGULAR_ORGANIZATION, 0, 0,
-				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
-				false, new ServiceContext());
+		OrganizationLocalServiceUtil.addOrganization(
+			TestPropsValues.getUserId(),
+			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+			RandomTestUtil.randomString(),
+			OrganizationConstants.TYPE_REGULAR_ORGANIZATION, 0, 0,
+			ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
+			false, new ServiceContext());
 
-		Organization organization2 =
+		Organization organization =
 			OrganizationLocalServiceUtil.addOrganization(
 				TestPropsValues.getUserId(),
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, "Test2",
@@ -170,7 +171,7 @@ public class OrganizationLocalServiceTest {
 				false, new ServiceContext());
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			Organization.class.getName(), organization2.getOrganizationId());
+			Organization.class.getName(), organization.getOrganizationId());
 
 		Assert.assertNotNull(assetEntry);
 
@@ -180,10 +181,7 @@ public class OrganizationLocalServiceTest {
 			OrganizationLocalServiceUtil.getNoAssetOrganizations();
 
 		Assert.assertEquals(1, organizations.size());
-
-		Assert.assertEquals(
-			organization2.getOrganizationId(),
-			organizations.get(0).getOrganizationId());
+		Assert.assertEquals(organization, organizations.get(0));
 	}
 
 	@Test
