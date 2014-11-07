@@ -27,15 +27,15 @@ public class UniqueStringRandomizerBumper implements RandomizerBumper<String> {
 		new UniqueStringRandomizerBumper();
 
 	public static void reset() {
-		_valueSet.clear();
+		_randomValues.clear();
 	}
 
 	@Override
 	public boolean accept(String randomValue) {
-		return _valueSet.add(randomValue);
+		return _randomValues.add(randomValue);
 	}
 
-	private static final Set<String> _valueSet =
+	private static final Set<String> _randomValues =
 		new ConcurrentHashSet<String>();
 
 }
