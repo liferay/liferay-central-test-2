@@ -187,8 +187,7 @@ public class NettyFabricWorkerExecutionChannelHandler
 
 				if (!missedInputResources.isEmpty()) {
 					throw new IOException(
-						"Unable to get input resources :" +
-							missedInputResources);
+						"Unable to get input paths: " + missedInputPaths);
 				}
 
 				List<Path> loadedBootstrapResources = new ArrayList<Path>();
@@ -210,8 +209,8 @@ public class NettyFabricWorkerExecutionChannelHandler
 					_log.isWarnEnabled()) {
 
 					_log.warn(
-						"Incomplete bootstrap classpath loaded, missed :" +
-							missedBootstrapResources);
+						"Incomplete bootstrap classpath loaded, missed: " +
+							missedBootstrapPaths);
 				}
 
 				List<Path> loadedRuntimeResources = new ArrayList<Path>();
@@ -231,8 +230,8 @@ public class NettyFabricWorkerExecutionChannelHandler
 
 				if (!missedRuntimeResources.isEmpty() && _log.isWarnEnabled()) {
 					_log.warn(
-						"Incomplete runtime classpath loaded, missed :" +
-							missedRuntimeResources);
+						"Incomplete runtime classpath loaded, missed: " +
+							missedRuntimePaths);
 				}
 
 				return new LoadedResources(
