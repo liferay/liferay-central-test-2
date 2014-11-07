@@ -201,6 +201,7 @@ public class StripFilterTest extends PowerMockito {
 		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("script>abc");
+
 		StringWriter stringWriter = new StringWriter();
 
 		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
@@ -328,6 +329,7 @@ public class StripFilterTest extends PowerMockito {
 		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("pre>abcde");
+
 		StringWriter stringWriter = new StringWriter();
 
 		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
@@ -380,6 +382,7 @@ public class StripFilterTest extends PowerMockito {
 		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("textarea >abcde");
+
 		StringWriter stringWriter = new StringWriter();
 
 		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
@@ -434,6 +437,7 @@ public class StripFilterTest extends PowerMockito {
 		// Empty buffer
 
 		CharBuffer charBuffer = CharBuffer.allocate(0);
+
 		StringWriter stringWriter = new StringWriter();
 
 		stripFilter.skipWhiteSpace(charBuffer, stringWriter, true);
