@@ -260,8 +260,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					dynamicQuery.add(property.eq(originalMimeType));
 				}
 
-		});
-
+			});
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
