@@ -136,10 +136,11 @@ public class CounterLocalServiceTest {
 
 		@Override
 		public Long[] call() throws ProcessException {
-			System.setProperty("catalina.base", ".");
-			System.setProperty("external-properties", "portal-test.properties");
 			System.setProperty(
 				PropsKeys.COUNTER_INCREMENT + "." + _counterName, "1");
+
+			System.setProperty("catalina.base", ".");
+			System.setProperty("external-properties", "portal-test.properties");
 
 			CacheKeyGeneratorUtil cacheKeyGeneratorUtil =
 				new CacheKeyGeneratorUtil();
