@@ -183,7 +183,7 @@ public class Watcher implements Runnable {
 					else if (kind == StandardWatchEventKind.ENTRY_MODIFY) {
 						if ((removeCreatedFilePathName(
 								childFilePath.toString()) &&
-							 FileUtil.isSizeOverChecksumThreshold(
+							 !FileUtil.isValidChecksum(
 								 childFilePath)) ||
 							Files.isDirectory(childFilePath)) {
 
