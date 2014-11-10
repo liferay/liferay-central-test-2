@@ -39,7 +39,7 @@ public class ProcessConfig implements Serializable {
 	}
 
 	public String[] getBootstrapClassPathElements() {
-		return ArrayUtil.toStringArray(_bootstrapClassPathElements);
+		return ArrayUtil.toStringArray(_bootstrapClassPathHolders);
 	}
 
 	public String getJavaExecutable() {
@@ -56,7 +56,7 @@ public class ProcessConfig implements Serializable {
 	}
 
 	public String[] getRuntimeClassPathElements() {
-		return ArrayUtil.toStringArray(_runtimeClassPathElements);
+		return ArrayUtil.toStringArray(_runtimeClassPathHolders);
 	}
 
 	public static class Builder {
@@ -108,35 +108,35 @@ public class ProcessConfig implements Serializable {
 	private ProcessConfig(Builder builder) {
 		_arguments = builder._arguments;
 
-		_bootstrapClassPathElements = toPathHolders(
+		_bootstrapClassPathHolders = toPathHolders(
 			builder._bootstrapClassPath);
 
 		_javaExecutable = builder._javaExecutable;
 		_reactClassLoader = builder._reactClassLoader;
 
-		_runtimeClassPathElements = toPathHolders(builder._runtimeClassPath);
+		_runtimeClassPathHolders = toPathHolders(builder._runtimeClassPath);
 	}
 
 	private PathHolder[] toPathHolders(String classPath) {
-		String[] classPathStringElements = StringUtil.split(
+		String[] classPathElements = StringUtil.split(
 			classPath, File.pathSeparatorChar);
 
-		PathHolder[] classPathElements =
-			new PathHolder[classPathStringElements.length];
+		PathHolder[] classPathHolders =
+			new PathHolder[classPathElements.length];
 
-		for (int i = 0; i < classPathStringElements.length; i++) {
-			classPathElements[i] = new PathHolder(classPathStringElements[i]);
+		for (int i = 0; i < classPathElements.length; i++) {
+			classPathHolders[i] = new PathHolder(classPathElements[i]);
 		}
 
-		return classPathElements;
+		return classPathHolders;
 	}
 
 	private static final long serialVersionUID = 1L;
 
 	private final List<String> _arguments;
-	private final PathHolder[] _bootstrapClassPathElements;
+	private final PathHolder[] _bootstrapClassPathHolders;
 	private final String _javaExecutable;
 	private final transient ClassLoader _reactClassLoader;
-	private final PathHolder[] _runtimeClassPathElements;
+	private final PathHolder[] _runtimeClassPathHolders;
 
 }

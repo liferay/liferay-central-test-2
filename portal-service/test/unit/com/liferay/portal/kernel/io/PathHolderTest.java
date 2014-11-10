@@ -61,9 +61,9 @@ public class PathHolderTest {
 	public void testHashCode() {
 		Path path = Paths.get("testFile");
 
-		PathHolder pathHolder = new PathHolder(path);
-
 		String pathString = path.toString();
+
+		PathHolder pathHolder = new PathHolder(path);
 
 		Assert.assertEquals(pathString.hashCode(), pathHolder.hashCode());
 	}
@@ -85,19 +85,19 @@ public class PathHolderTest {
 
 	@Test
 	public void testToStringSwitchSeparator() {
-		char separatorChar = File.separatorChar;
-
-		char foreignSeparatorChar =
-			(separatorChar == CharPool.SLASH) ?
-				CharPool.BACK_SLASH : CharPool.SLASH;
-
 		PathHolder pathHolder = new PathHolder(Paths.get(""));
+
+		char separatorChar = CharPool.SLASH;
+
+		if (File.separatorChar == CharPool.SLASH) {
+			separatorChar = CharPool.BACK_SLASH;
+		}
 
 		ReflectionTestUtil.setFieldValue(
 			pathHolder, "_pathString",
-			"testFolder" + foreignSeparatorChar + "testFile");
+			"testFolder" + separatorChar + "testFile");
 		ReflectionTestUtil.setFieldValue(
-			pathHolder, "_separatorChar", foreignSeparatorChar);
+			pathHolder, "_separatorChar", separatorChar);
 
 		Assert.assertEquals(
 			"testFolder" + separatorChar + "testFile", pathHolder.toString());

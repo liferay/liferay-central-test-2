@@ -34,10 +34,11 @@ public class FileResponse implements Serializable {
 	public FileResponse(
 		Path path, long size, long lastModifiedTime, boolean folder) {
 
-		_pathHolder = new PathHolder(path);
 		_size = size;
 		_lastModifiedTime = lastModifiedTime;
 		_folder = folder;
+
+		_pathHolder = new PathHolder(path);
 	}
 
 	@Override

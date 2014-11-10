@@ -30,9 +30,10 @@ public class FileRequest implements Serializable {
 	public FileRequest(
 		Path path, long lastModifiedTime, boolean deleteAfterFetch) {
 
-		_pathHolder = new PathHolder(path);
 		_lastModifiedTime = lastModifiedTime;
 		_deleteAfterFetch = deleteAfterFetch;
+
+		_pathHolder = new PathHolder(path);
 	}
 
 	@Override
