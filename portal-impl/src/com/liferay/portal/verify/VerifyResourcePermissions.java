@@ -66,11 +66,11 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			for (VerifiableResourcedModel verifiableResourcedModel :
 					verifiableResourcedModels) {
 
-				VerifyResourcedModelRunnable verifyAuditedModelRunnable =
+				VerifyResourcedModelRunnable verifyResourcedModelRunnable =
 					new VerifyResourcedModelRunnable(
 						role, verifiableResourcedModel);
 
-				verifyResourcedModelRunnables.add(verifyAuditedModelRunnable);
+				verifyResourcedModelRunnables.add(verifyResourcedModelRunnable);
 			}
 
 			doVerify(verifyResourcedModelRunnables);
@@ -174,13 +174,6 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			Role role, VerifiableResourcedModel verifiableResourcedModel)
 		throws Exception {
 
-		String modelName = verifiableResourcedModel.getModelName();
-
-		String primaryKeyColumnName =
-			verifiableResourcedModel.getPrimaryKeyColumnName();
-
-		String tableName = verifiableResourcedModel.getTableName();
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -191,8 +184,9 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select count(*) from " + tableName + " where companyId = " +
-					role.getCompanyId());
+				"select count(*) from " +
+					verifiableResourcedModel.getTableName() +
+						" where companyId = " + role.getCompanyId());
 
 			rs = ps.executeQuery();
 
@@ -208,18 +202,21 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select " + primaryKeyColumnName + ", userId from " +
-					tableName + " where companyId = " + role.getCompanyId());
+				"select " + verifiableResourcedModel.getPrimaryKeyColumnName() +
+					", userId from " + verifiableResourcedModel.getTableName() +
+						" where companyId = " + role.getCompanyId());
 
 			rs = ps.executeQuery();
 
 			for (int i = 0; rs.next(); i++) {
-				long primKey = rs.getLong(primaryKeyColumnName);
+				long primKey = rs.getLong(
+					verifiableResourcedModel.getPrimaryKeyColumnName());
 				long userId = rs.getLong("userId");
 
 				verifyResourcedModel(
-					role.getCompanyId(), modelName, primKey, role, userId, i,
-					total);
+					role.getCompanyId(),
+					verifiableResourcedModel.getModelName(), primKey, role,
+					userId, i, total);
 			}
 		}
 		finally {
