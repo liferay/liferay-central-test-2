@@ -87,9 +87,9 @@ public class PathHolderTest {
 	public void testToStringSwitchSeparator() {
 		PathHolder pathHolder = new PathHolder(Paths.get(""));
 
-		char separatorChar = File.separatorChar;
-
 		char foreignSeparatorChar = CharPool.SLASH;
+
+		char separatorChar = File.separatorChar;
 
 		if (separatorChar == CharPool.SLASH) {
 			foreignSeparatorChar = CharPool.BACK_SLASH;
