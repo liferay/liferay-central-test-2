@@ -1567,7 +1567,7 @@ public class DLFileEntryFinderTest {
 			user.getUserId(), repositoryId, folder.getFolderId(), "FE1.txt",
 			ContentTypes.TEXT_PLAIN, "FE1.txt".concat(titleSuffix), null, null,
 			(byte[])null, serviceContext);
-		}
+	}
 
 	private static final long _SMALL_IMAGE_ID = 1234L;
 

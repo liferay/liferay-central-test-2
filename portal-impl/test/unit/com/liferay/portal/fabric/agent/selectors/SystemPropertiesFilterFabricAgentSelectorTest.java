@@ -120,7 +120,9 @@ public class SystemPropertiesFilterFabricAgentSelectorTest {
 
 		private final Map<String, String> _systemProperties;
 
-	} protected static class RuntimeMXBeanInvocationHandler
+	}
+
+	protected static class RuntimeMXBeanInvocationHandler
 		implements InvocationHandler {
 
 		public RuntimeMXBeanInvocationHandler(
