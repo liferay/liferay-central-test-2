@@ -1377,8 +1377,8 @@
 			LEFT JOIN
 				AnnouncementsDelivery ON
 					(AnnouncementsDelivery.userId = User_.userId) AND
-					(User_.defaultUser = [$FALSE$]) AND
-					(AnnouncementsDelivery.type_ = ?)
+					(AnnouncementsDelivery.type_ = ?) AND
+					(User_.defaultUser = [$FALSE$])
 			WHERE
 				(AnnouncementsDelivery.userId IS NULL)
 		]]>

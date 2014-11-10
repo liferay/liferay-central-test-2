@@ -100,10 +100,7 @@ public class DLFileEntryLocalServiceTest {
 				DLFileEntryLocalServiceUtil.getMisversionedFileEntries();
 
 			Assert.assertEquals(1, dlFileEntries.size());
-
-			Assert.assertEquals(
-				dlFileEntry.getFileEntryId(),
-				dlFileEntries.get(0).getFileEntryId());
+			Assert.assertEquals(dlFileEntry, dlFileEntries.get(0));
 		}
 		finally {
 			if (dlFileEntry != null) {
