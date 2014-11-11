@@ -125,36 +125,36 @@
 			<![CDATA[
 				import org.json.JSONObject;
 
-				public String fixJsonUrlString(String jsonUrlString) {
-					if (jsonUrlString.contains("(")) {
-						jsonUrlString = jsonUrlString.replace("(", "%28");
+				public String fixURL(String url) {
+					if (url.contains("(")) {
+						url = url.replace("(", "%28");
 					}
 
-					if (jsonUrlString.contains(")")) {
-						jsonUrlString = jsonUrlString.replace(")", "%29");
+					if (url.contains(")")) {
+						url = url.replace(")", "%29");
 					}
 
-					if (jsonUrlString.contains("[")) {
-						jsonUrlString = jsonUrlString.replace("[", "%5B");
+					if (url.contains("[")) {
+						url = url.replace("[", "%5B");
 					}
 
-					if (jsonUrlString.contains("]")) {
-						jsonUrlString = jsonUrlString.replace("]", "%5D");
+					if (url.contains("]")) {
+						url = url.replace("]", "%5D");
 					}
 
-					return jsonUrlString;
+					return url;
 				}
 
-				public JSONObject toJSONObject(String jsonUrlString) {
+				public JSONObject toJSONObject(String url) {
 					StringBuilder sb = new StringBuilder();
 
-					URL url = new URL(fixJsonUrlString(jsonUrlString));
+					URL urlObject = new URL(fixURL(url));
 
-					InputStreamReader inputStreamReader = new InputStreamReader(url.openStream());
+					InputStreamReader inputStreamReader = new InputStreamReader(urlObject.openStream());
 
 					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-					String line;
+					String line = null;
 
 					while ((line = bufferedReader.readLine()) != null) {
 						sb.append(line);
@@ -169,19 +169,20 @@
 
 				sb.append("<h1>Some tests have FAILED!</h1>");
 
-				String targetURL = project.getProperty("github.jenkins.results.url");
+				String githubJenkinsResultsURL = project.getProperty("github.jenkins.results.url");
 
-				if (targetURL != null) {
+				if (githubJenkinsResultsURL != null) {
 					sb.append("<p>Click <a href='");
-					sb.append(targetURL);
+					sb.append(githubJenkinsResultsURL);
 					sb.append("'>here</a> for more information.</p>");
 				}
+
+				sb.append("<h1>");
 
 				String githubJenkinsFailureURLPathsString = project.getProperty("github.jenkins.failure.url.paths");
 
 				String[] githubJenkinsFailureURLPaths = githubJenkinsFailureURLPathsString.split(",");
 
-				sb.append("<h1>");
 				sb.append(githubJenkinsFailureURLPaths.length);
 				sb.append(" Failure");
 
@@ -190,19 +191,16 @@
 				}
 
 				sb.append(":</h1>");
-
 				sb.append("<ul>");
 
 				for (String githubJenkinsFailureURLPath : githubJenkinsFailureURLPaths) {
-					String githubJenkinsUrl = project.getProperty("github.jenkins.url");
+					String githubJenkinsFailureURL = project.getProperty("github.jenkins.url") + githubJenkinsFailureURLPath;
 
-					String githubJenkinsFailureURLPathUrlString = githubJenkinsUrl + githubJenkinsFailureURLPath;
-
-					JSONObject jsonObject = toJSONObject(githubJenkinsFailureURLPathUrlString + "/api/json");
+					JSONObject jsonObject = toJSONObject(githubJenkinsFailureURL + "/api/json");
 
 					sb.append("<li>");
 					sb.append("<a href='");
-					sb.append(githubJenkinsFailureURLPathUrlString);
+					sb.append(githubJenkinsFailureURL);
 					sb.append("'>");
 					sb.append(jsonObject.get("className"));
 					sb.append(".");
@@ -240,11 +238,11 @@
 
 				sb.append("<h1>All tests have PASSED!</h1>");
 
-				String targetURL = project.getProperty("github.jenkins.results.url");
+				String githubJenkinsResultsURL = project.getProperty("github.jenkins.results.url");
 
-				if (targetURL != null) {
+				if (githubJenkinsResultsURL != null) {
 					sb.append("<p>Click <a href='");
-					sb.append(targetURL);
+					sb.append(githubJenkinsResultsURL);
 					sb.append("'>here</a> for more information.</p>");
 				}
 
