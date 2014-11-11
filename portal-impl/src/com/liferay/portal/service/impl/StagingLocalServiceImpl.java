@@ -802,8 +802,8 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	protected Layout updateLayoutWithLayoutRevision(
 		LayoutRevision layoutRevision) {
 
-		// we need the latest Layout object to avoid StaleObjectStateExceptions
-		// so we have to suppress the usage of the advice here
+		// Suppress the usage of the advice to get the latest layout to prevent
+		// a StaleObjectStateException
 
 		Layout layout = null;
 
