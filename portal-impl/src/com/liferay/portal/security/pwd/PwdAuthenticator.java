@@ -60,8 +60,8 @@ public class PwdAuthenticator {
 				if (Validator.isNull(shardKey)) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Please set " + PropsKeys.AUTH_MAC_SHARED_KEY +
-								" in portal-ext.properties");
+							"Please set the property " +
+								PropsKeys.AUTH_MAC_SHARED_KEY);
 					}
 
 					return false;
