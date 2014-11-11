@@ -126,26 +126,26 @@
 				import org.json.JSONObject;
 
 				public String fixJsonUrlString(String jsonUrlString) {
-					if(jsonUrlString.contains("(")) {
+					if (jsonUrlString.contains("(")) {
 						jsonUrlString = jsonUrlString.replace("(", "%28");
 					}
 
-					if(jsonUrlString.contains(")")) {
+					if (jsonUrlString.contains(")")) {
 						jsonUrlString = jsonUrlString.replace(")", "%29");
 					}
 
-					if(jsonUrlString.contains("[")) {
+					if (jsonUrlString.contains("[")) {
 						jsonUrlString = jsonUrlString.replace("[", "%5B");
 					}
 
-					if(jsonUrlString.contains("]")) {
+					if (jsonUrlString.contains("]")) {
 						jsonUrlString = jsonUrlString.replace("]", "%5D");
 					}
 
 					return jsonUrlString;
 				}
 
-				public JSONObject jsonUrlStringToJsonObject(String jsonUrlString) {
+				public JSONObject toJSONObject(String jsonUrlString) {
 					StringBuilder sb = new StringBuilder();
 
 					URL url = new URL(fixJsonUrlString(jsonUrlString));
@@ -167,18 +167,17 @@
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("<h1>Some tests have FAILED!</h1>\\n");
+				sb.append("<h1>Some tests have FAILED!</h1>");
 
 				String targetURL = project.getProperty("jenkins.results.url");
 
 				if (targetURL != null) {
 					sb.append("<p>Click <a href='");
 					sb.append(targetURL);
-					sb.append("'>here</a> for more information.</p>\\n");
+					sb.append("'>here</a> for more information.</p>");
 				}
 
 				String jenkinsFailureList = project.getProperty("jenkins.failure.list");
-				String jenkinsUrl = project.getProperty("jenkins.url");
 
 				String[] jenkinsFailures = jenkinsFailureList.split(",");
 
@@ -192,38 +191,37 @@
 					sb.append("s");
 				}
 
-				sb.append(":</h1>\\n");
+				sb.append(":</h1>");
 
-				sb.append("<ul>\\n");
+				sb.append("<ul>");
 
 				for (String jenkinsFailure : jenkinsFailures) {
+					String jenkinsUrl = project.getProperty("jenkins.url");
+
 					String jenkinsFailureUrlString = jenkinsUrl + jenkinsFailure;
 
-					String jsonUrlString = jenkinsFailureUrlString + "/api/json";
-
-					JSONObject jsonObject = jsonUrlStringToJsonObject(jsonUrlString);
+					JSONObject jsonObject = toJSONObject(jenkinsFailureUrlString + "/api/json");
 
 					sb.append("<li>");
-
 					sb.append("<a href='");
 					sb.append(jenkinsFailureUrlString);
 					sb.append("'>");
 					sb.append(jsonObject.get("className"));
 					sb.append(".");
 					sb.append(jsonObject.get("name"));
-					sb.append("</a>\\n");
+					sb.append("</a>");
+					sb.append("<pre>");
+					sb.append(jsonObject.get("errorDetails"));
+					sb.append("<br /><br />");
 
 					String errorStackTrace = jsonObject.get("errorStackTrace");
 
 					errorStackTrace = errorStackTrace.replaceAll("\n", "<br />");
 
-					sb.append("<pre>");
-					sb.append(jsonObject.get("errorDetails"));
-					sb.append("<br /><br />");
 					sb.append(errorStackTrace);
-					sb.append("</pre>");
 
-					sb.append("</li>\\n");
+					sb.append("</pre>");
+					sb.append("</li>");
 				}
 
 				sb.append("</ul>");
@@ -242,14 +240,14 @@
 			<![CDATA[
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("<h1>All tests have PASSED!</h1>\\n");
+				sb.append("<h1>All tests have PASSED!</h1>");
 
 				String targetURL = project.getProperty("jenkins.results.url");
 
 				if (targetURL != null) {
 					sb.append("<p>Click <a href='");
 					sb.append(targetURL);
-					sb.append("'>here</a> for more information.</p>\\n");
+					sb.append("'>here</a> for more information.</p>");
 				}
 
 				project.setProperty("github.post.comment.body", sb.toString());
