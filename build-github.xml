@@ -118,7 +118,7 @@
 	</macrodef>
 
 	<target name="github-post-comment-failure">
-		<fail message="Please set the property ${github.jenkins.failure.list}" unless="github.jenkins.failure.list" />
+		<fail message="Please set the property ${github.jenkins.failure.url.paths}" unless="github.jenkins.failure.url.paths" />
 		<fail message="Please set the property ${github.jenkins.url}" unless="github.jenkins.url" />
 
 		<script classpathref="project.classpath" language="beanshell">
@@ -177,17 +177,15 @@
 					sb.append("'>here</a> for more information.</p>");
 				}
 
-				String githubJenkinsFailureList = project.getProperty("github.jenkins.failure.list");
+				String githubJenkinsFailureURLPathsString = project.getProperty("github.jenkins.failure.url.paths");
 
-				String[] githubJenkinsFailures = githubJenkinsFailureList.split(",");
-
-				int githubJenkinsFailureCount = githubJenkinsFailures.length;
+				String[] githubJenkinsFailureURLPaths = githubJenkinsFailureURLPathsString.split(",");
 
 				sb.append("<h1>");
-				sb.append(githubJenkinsFailureCount);
+				sb.append(githubJenkinsFailureURLPaths.length);
 				sb.append(" Failure");
 
-				if (githubJenkinsFailureCount != 1) {
+				if (githubJenkinsFailureURLPaths.length != 1) {
 					sb.append("s");
 				}
 
@@ -195,16 +193,16 @@
 
 				sb.append("<ul>");
 
-				for (String githubJenkinsFailure : githubJenkinsFailures) {
+				for (String githubJenkinsFailureURLPath : githubJenkinsFailureURLPaths) {
 					String githubJenkinsUrl = project.getProperty("github.jenkins.url");
 
-					String githubJenkinsFailureUrlString = githubJenkinsUrl + githubJenkinsFailure;
+					String githubJenkinsFailureURLPathUrlString = githubJenkinsUrl + githubJenkinsFailureURLPath;
 
-					JSONObject jsonObject = toJSONObject(githubJenkinsFailureUrlString + "/api/json");
+					JSONObject jsonObject = toJSONObject(githubJenkinsFailureURLPathUrlString + "/api/json");
 
 					sb.append("<li>");
 					sb.append("<a href='");
-					sb.append(githubJenkinsFailureUrlString);
+					sb.append(githubJenkinsFailureURLPathUrlString);
 					sb.append("'>");
 					sb.append(jsonObject.get("className"));
 					sb.append(".");
