@@ -60,21 +60,21 @@ public class BookmarksFolderLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetFolders() throws Exception {
-		BookmarksFolder bookmarksFolder = BookmarksTestUtil.addFolder(
+		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			_group.getGroupId(), RandomTestUtil.randomString());
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			BookmarksFolder.class.getName(), bookmarksFolder.getFolderId());
+			BookmarksFolder.class.getName(), folder.getFolderId());
 
 		Assert.assertNotNull(assetEntry);
 
 		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
 
-		List<BookmarksFolder> bookmarksFolders =
+		List<BookmarksFolder> folders =
 			BookmarksFolderLocalServiceUtil.getNoAssetFolders();
 
-		Assert.assertEquals(1, bookmarksFolders.size());
-		Assert.assertEquals(bookmarksFolder, bookmarksFolders.get(0));
+		Assert.assertEquals(1, folders.size());
+		Assert.assertEquals(folder, folders.get(0));
 	}
 
 	@Test

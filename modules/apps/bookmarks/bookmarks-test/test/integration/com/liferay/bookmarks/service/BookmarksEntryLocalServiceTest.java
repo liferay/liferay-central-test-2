@@ -53,11 +53,11 @@ public class BookmarksEntryLocalServiceTest {
 
 	@Test
 	public void testGetNoAssetFolders() throws Exception {
-		BookmarksEntry bookmarksEntry = BookmarksTestUtil.addEntry(
+		BookmarksEntry entry = BookmarksTestUtil.addEntry(
 			_group.getGroupId(), true);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			BookmarksEntry.class.getName(), bookmarksEntry.getEntryId());
+			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		Assert.assertNotNull(assetEntry);
 
@@ -67,7 +67,7 @@ public class BookmarksEntryLocalServiceTest {
 			BookmarksEntryLocalServiceUtil.getNoAssetEntries();
 
 		Assert.assertEquals(1, bookmarksEntries.size());
-		Assert.assertEquals(bookmarksEntry, bookmarksEntries.get(0));
+		Assert.assertEquals(entry, bookmarksEntries.get(0));
 	}
 
 	@DeleteAfterTestRun
