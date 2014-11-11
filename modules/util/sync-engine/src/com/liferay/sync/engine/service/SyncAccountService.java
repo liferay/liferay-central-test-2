@@ -143,7 +143,9 @@ public class SyncAccountService {
 
 			_syncAccountPersistence.deleteById(syncAccountId);
 
-			// Sync sites
+			// Delete sync sites and then sync files so that we do not encounter
+			// a java.nio.file.DirectoryNotEmptyException when trying to delete
+			// the account folder
 
 			List<SyncSite> syncSites = SyncSiteService.findSyncSites(
 				syncAccountId);
@@ -151,8 +153,6 @@ public class SyncAccountService {
 			for (SyncSite syncSite : syncSites) {
 				SyncSiteService.deleteSyncSite(syncSite.getSyncSiteId());
 			}
-
-			// Sync file
 
 			SyncFile syncFile = SyncFileService.fetchSyncFile(
 				syncAccount.getFilePathName());
