@@ -46,7 +46,11 @@ public class XhtmlTranslatorTest {
 	public void testParseCorrectlyMultipleHeadingBlocks() {
 		WikiPage page = Mockito.mock(WikiPage.class);
 
-		Mockito.when(page.getTitle()).thenReturn("test");
+		Mockito.when(
+			page.getTitle()
+		).thenReturn(
+			"test"
+		);
 
 		XhtmlTranslator xhtmlTranslator = new XhtmlTranslator();
 
@@ -61,7 +65,7 @@ public class XhtmlTranslatorTest {
 		Assert.assertEquals(
 			"<h1 id=\"section-test-Level+1\">Level 1</h1><h2 " +
 				"id=\"section-test-Level+2\">Level 2</h2><h3 " +
-				"id=\"section-test-Level+3\">Level 3</h3>",
+					"id=\"section-test-Level+3\">Level 3</h3>",
 			translation);
 	}
 
