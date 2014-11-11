@@ -58,9 +58,9 @@ public class XhtmlTranslatorTest {
 			page, null, null, null,
 			CreoleTestUtil.getWikiPageNode("heading-10.creole", getClass()));
 
-		WikiPage wikiPage = Mockito.verify(page, Mockito.atLeast(1));
+		page = Mockito.verify(page, Mockito.atLeast(1));
 
-		wikiPage.getTitle();
+		page.getTitle();
 
 		Assert.assertEquals(
 			"<h1 id=\"section-test-Level+1\">Level 1</h1><h2 " +
