@@ -764,7 +764,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 					}
 				}
 				catch (Exception e) {
-					_log.error(e);
+					_log.error(e, e);
 
 					return _PATH_PORTAL_UPDATE_PASSWORD;
 				}
