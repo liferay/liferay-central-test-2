@@ -149,7 +149,6 @@ public class AspectJNewEnvMethodRule extends NewEnvMethodRule {
 
 			_encodedProcessCallable = SerializableUtil.serialize(
 				processCallable);
-
 			_toString = processCallable.toString();
 		}
 
