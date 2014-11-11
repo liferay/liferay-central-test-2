@@ -118,8 +118,8 @@
 	</macrodef>
 
 	<target name="github-post-comment-failure">
-		<fail message="Please set the property ${jenkins.failure.list}" unless="jenkins.failure.list" />
-		<fail message="Please set the property ${jenkins.url}" unless="jenkins.url" />
+		<fail message="Please set the property ${github.jenkins.failure.list}" unless="github.jenkins.failure.list" />
+		<fail message="Please set the property ${github.jenkins.url}" unless="github.jenkins.url" />
 
 		<script classpathref="project.classpath" language="beanshell">
 			<![CDATA[
@@ -169,7 +169,7 @@
 
 				sb.append("<h1>Some tests have FAILED!</h1>");
 
-				String targetURL = project.getProperty("jenkins.results.url");
+				String targetURL = project.getProperty("github.jenkins.results.url");
 
 				if (targetURL != null) {
 					sb.append("<p>Click <a href='");
@@ -177,17 +177,17 @@
 					sb.append("'>here</a> for more information.</p>");
 				}
 
-				String jenkinsFailureList = project.getProperty("jenkins.failure.list");
+				String githubJenkinsFailureList = project.getProperty("github.jenkins.failure.list");
 
-				String[] jenkinsFailures = jenkinsFailureList.split(",");
+				String[] githubJenkinsFailures = githubJenkinsFailureList.split(",");
 
-				int jenkinsFailureCount = jenkinsFailures.length;
+				int githubJenkinsFailureCount = githubJenkinsFailures.length;
 
 				sb.append("<h1>");
-				sb.append(jenkinsFailureCount);
+				sb.append(githubJenkinsFailureCount);
 				sb.append(" Failure");
 
-				if (jenkinsFailureCount != 1) {
+				if (githubJenkinsFailureCount != 1) {
 					sb.append("s");
 				}
 
@@ -195,16 +195,16 @@
 
 				sb.append("<ul>");
 
-				for (String jenkinsFailure : jenkinsFailures) {
-					String jenkinsUrl = project.getProperty("jenkins.url");
+				for (String githubJenkinsFailure : githubJenkinsFailures) {
+					String githubJenkinsUrl = project.getProperty("github.jenkins.url");
 
-					String jenkinsFailureUrlString = jenkinsUrl + jenkinsFailure;
+					String githubJenkinsFailureUrlString = githubJenkinsUrl + githubJenkinsFailure;
 
-					JSONObject jsonObject = toJSONObject(jenkinsFailureUrlString + "/api/json");
+					JSONObject jsonObject = toJSONObject(githubJenkinsFailureUrlString + "/api/json");
 
 					sb.append("<li>");
 					sb.append("<a href='");
-					sb.append(jenkinsFailureUrlString);
+					sb.append(githubJenkinsFailureUrlString);
 					sb.append("'>");
 					sb.append(jsonObject.get("className"));
 					sb.append(".");
@@ -242,7 +242,7 @@
 
 				sb.append("<h1>All tests have PASSED!</h1>");
 
-				String targetURL = project.getProperty("jenkins.results.url");
+				String targetURL = project.getProperty("github.jenkins.results.url");
 
 				if (targetURL != null) {
 					sb.append("<p>Click <a href='");
@@ -263,7 +263,7 @@
 		<github-post-status
 			github.post.status.description="Some tests have FAILED!"
 			github.post.status.state="failure"
-			github.post.status.url="${jenkins.results.url}"
+			github.post.status.url="${github.jenkins.results.url}"
 		/>
 	</target>
 
@@ -271,7 +271,7 @@
 		<github-post-status
 			github.post.status.description="Tests are running on Jenkins."
 			github.post.status.state="pending"
-			github.post.status.url="${jenkins.results.url}"
+			github.post.status.url="${github.jenkins.results.url}"
 		/>
 	</target>
 
@@ -279,7 +279,7 @@
 		<github-post-status
 			github.post.status.description="All tests have PASSED!"
 			github.post.status.state="success"
-			github.post.status.url="${jenkins.results.url}"
+			github.post.status.url="${github.jenkins.results.url}"
 		/>
 	</target>
 </project>
