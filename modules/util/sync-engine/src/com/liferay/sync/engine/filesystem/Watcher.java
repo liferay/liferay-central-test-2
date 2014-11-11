@@ -37,7 +37,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.SortedMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -183,8 +183,7 @@ public class Watcher implements Runnable {
 					else if (kind == StandardWatchEventKind.ENTRY_MODIFY) {
 						if ((removeCreatedFilePathName(
 								childFilePath.toString()) &&
-							 !FileUtil.isValidChecksum(
-								 childFilePath)) ||
+							 !FileUtil.isValidChecksum(childFilePath)) ||
 							Files.isDirectory(childFilePath)) {
 
 							continue;
@@ -274,10 +273,10 @@ public class Watcher implements Runnable {
 	}
 
 	protected void clearCreatedFilePathNames() {
-		SortedMap<Long, String> headMap = _createdFilePathNames.headMap(
+		Map<Long, String> map = _createdFilePathNames.headMap(
 			System.currentTimeMillis() - 5000);
 
-		headMap.clear();
+		map.clear();
 	}
 
 	protected void doRegister(Path filePath, boolean recursive)
