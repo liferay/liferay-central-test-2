@@ -308,10 +308,8 @@ public class WebDriverHelper {
 		JavascriptExecutor javascriptExecutor =
 			(JavascriptExecutor)wrappedWebDriver;
 
-		Object innerHeight = javascriptExecutor.executeScript(
-			"return window.innerHeight;");
-
-		return GetterUtil.getInteger(innerHeight);
+		return GetterUtil.getInteger(
+			javascriptExecutor.executeScript("return window.innerHeight;"));
 	}
 
 	public static int getViewportPositionBottom(WebDriver webDriver) {
