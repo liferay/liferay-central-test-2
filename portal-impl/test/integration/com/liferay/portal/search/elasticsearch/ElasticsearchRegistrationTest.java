@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
  * @author Cristina González
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class CheckElasticsearchModuleStartedTest {
+public class ElasticsearchRegistrationTest {
 
 	@Test
 	public void testGetSearchEngineService() {
