@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -85,7 +87,7 @@ public class LiferayWorkflowCapability implements WorkflowCapability {
 			long userId, FileEntry fileEntry, ServiceContext serviceContext)
 		throws PortalException {
 
-		throw new UnsupportedOperationException();
+		_startWorkflowInstance(userId, fileEntry, serviceContext);
 	}
 
 	@Override
@@ -93,7 +95,109 @@ public class LiferayWorkflowCapability implements WorkflowCapability {
 			long userId, FileEntry fileEntry, ServiceContext serviceContext)
 		throws PortalException {
 
-		throw new UnsupportedOperationException();
+		_startWorkflowInstance(userId, fileEntry, serviceContext);
+	}
+
+	/**
+	 * See {@link
+	 * com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl#updateFileEntry(
+	 * long, long, String, String, String, String, String, String, boolean,
+	 * String, long, java.util.Map, java.io.File, java.io.InputStream, long,
+	 * ServiceContext)}
+	 */
+	private DLFileVersionReference _getWorkflowDLFileVersion(
+			long fileEntryId, ServiceContext serviceContext)
+		throws PortalException {
+
+		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(
+			fileEntryId);
+
+		boolean checkedOut = dlFileEntry.isCheckedOut();
+
+		DLFileVersion dlFileVersion =
+			DLFileVersionLocalServiceUtil.getLatestFileVersion(
+				fileEntryId, !checkedOut);
+
+		boolean autoCheckIn = !checkedOut && dlFileVersion.isApproved();
+
+		if (autoCheckIn) {
+			return new DLFileVersionReference(autoCheckIn, fileEntryId, null);
+		}
+
+		int workflowAction = serviceContext.getWorkflowAction();
+
+		if (!checkedOut &&
+			(workflowAction == WorkflowConstants.ACTION_PUBLISH)) {
+
+			return new DLFileVersionReference(
+				autoCheckIn, fileEntryId, dlFileVersion);
+		}
+
+		return new DLFileVersionReference(autoCheckIn, fileEntryId, null);
+	}
+
+	private void _startWorkflowInstance(
+			long userId, DLFileVersion dlFileVersion,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		if (dlFileVersion == null) {
+			return;
+		}
+
+		String syncEvent = DLSyncConstants.EVENT_UPDATE;
+
+		if (dlFileVersion.getVersion().equals(
+				DLFileEntryConstants.VERSION_DEFAULT)) {
+
+			syncEvent = DLSyncConstants.EVENT_ADD;
+		}
+
+		DLUtil.startWorkflowInstance(
+			userId, dlFileVersion, syncEvent, serviceContext);
+	}
+
+	private void _startWorkflowInstance(
+			long userId, FileEntry fileEntry, ServiceContext serviceContext)
+		throws PortalException {
+
+		DLFileVersionReference dlFileVersionReference =
+			_getWorkflowDLFileVersion(
+				fileEntry.getFileEntryId(), serviceContext);
+
+		_startWorkflowInstance(
+			userId, dlFileVersionReference.fetchDLFileVersion(),
+			serviceContext);
+	}
+
+	private static final class DLFileVersionReference {
+
+		public DLFileVersionReference(
+			boolean autoCheckIn, long fileEntryId,
+			DLFileVersion dlFileVersion) {
+
+			_autoCheckIn = autoCheckIn;
+			_fileEntryId = fileEntryId;
+			_dlFileVersion = dlFileVersion;
+		}
+
+		public DLFileVersion fetchDLFileVersion() throws PortalException {
+			if (_dlFileVersion != null) {
+				return _dlFileVersion;
+			}
+
+			if (_autoCheckIn) {
+				return DLFileVersionLocalServiceUtil.getLatestFileVersion(
+					_fileEntryId, false);
+			}
+
+			return null;
+		}
+
+		private final boolean _autoCheckIn;
+		private final DLFileVersion _dlFileVersion;
+		private final long _fileEntryId;
+
 	}
 
 }
