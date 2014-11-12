@@ -98,42 +98,29 @@ public class LiferayWorkflowCapability implements WorkflowCapability {
 		_startWorkflowInstance(userId, fileEntry, serviceContext);
 	}
 
-	/**
-	 * See {@link
-	 * com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl#updateFileEntry(
-	 * long, long, String, String, String, String, String, String, boolean,
-	 * String, long, java.util.Map, java.io.File, java.io.InputStream, long,
-	 * ServiceContext)}
-	 */
-	private DLFileVersionReference _getWorkflowDLFileVersion(
+	private DLFileVersion _getWorkflowDLFileVersion(
 			long fileEntryId, ServiceContext serviceContext)
 		throws PortalException {
 
 		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(
 			fileEntryId);
 
-		boolean checkedOut = dlFileEntry.isCheckedOut();
+		if (dlFileEntry.isCheckedOut()) {
+			return null;
+		}
 
 		DLFileVersion dlFileVersion =
 			DLFileVersionLocalServiceUtil.getLatestFileVersion(
-				fileEntryId, !checkedOut);
+				fileEntryId, true);
 
-		boolean autoCheckIn = !checkedOut && dlFileVersion.isApproved();
+		if (dlFileVersion.isApproved() ||
+			(serviceContext.getWorkflowAction() ==
+					WorkflowConstants.ACTION_PUBLISH)) {
 
-		if (autoCheckIn) {
-			return new DLFileVersionReference(autoCheckIn, fileEntryId, null);
+			return dlFileVersion;
 		}
 
-		int workflowAction = serviceContext.getWorkflowAction();
-
-		if (!checkedOut &&
-			(workflowAction == WorkflowConstants.ACTION_PUBLISH)) {
-
-			return new DLFileVersionReference(
-				autoCheckIn, fileEntryId, dlFileVersion);
-		}
-
-		return new DLFileVersionReference(autoCheckIn, fileEntryId, null);
+		return null;
 	}
 
 	private void _startWorkflowInstance(
@@ -161,43 +148,10 @@ public class LiferayWorkflowCapability implements WorkflowCapability {
 			long userId, FileEntry fileEntry, ServiceContext serviceContext)
 		throws PortalException {
 
-		DLFileVersionReference dlFileVersionReference =
-			_getWorkflowDLFileVersion(
-				fileEntry.getFileEntryId(), serviceContext);
+		DLFileVersion dlFileVersion = _getWorkflowDLFileVersion(
+			fileEntry.getFileEntryId(), serviceContext);
 
-		_startWorkflowInstance(
-			userId, dlFileVersionReference.fetchDLFileVersion(),
-			serviceContext);
-	}
-
-	private static final class DLFileVersionReference {
-
-		public DLFileVersionReference(
-			boolean autoCheckIn, long fileEntryId,
-			DLFileVersion dlFileVersion) {
-
-			_autoCheckIn = autoCheckIn;
-			_fileEntryId = fileEntryId;
-			_dlFileVersion = dlFileVersion;
-		}
-
-		public DLFileVersion fetchDLFileVersion() throws PortalException {
-			if (_dlFileVersion != null) {
-				return _dlFileVersion;
-			}
-
-			if (_autoCheckIn) {
-				return DLFileVersionLocalServiceUtil.getLatestFileVersion(
-					_fileEntryId, false);
-			}
-
-			return null;
-		}
-
-		private final boolean _autoCheckIn;
-		private final DLFileVersion _dlFileVersion;
-		private final long _fileEntryId;
-
+		_startWorkflowInstance(userId, dlFileVersion, serviceContext);
 	}
 
 }
