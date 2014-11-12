@@ -155,12 +155,6 @@ public class ConvertDocumentLibrary extends BaseConvertProcess {
 		}
 	}
 
-	protected boolean isDeleteFilesFromSourceStore() {
-		String[] values = getParameterValues();
-
-		return GetterUtil.getBoolean(values[1]);
-	}
-
 	@Override
 	protected void doConvert() throws Exception {
 		_sourceStore = StoreFactory.getInstance();
@@ -200,6 +194,12 @@ public class ConvertDocumentLibrary extends BaseConvertProcess {
 		String[] values = getParameterValues();
 
 		return values[0];
+	}
+
+	protected boolean isDeleteFilesFromSourceStore() {
+		String[] values = getParameterValues();
+
+		return GetterUtil.getBoolean(values[1]);
 	}
 
 	protected void migrateDL() throws PortalException {
