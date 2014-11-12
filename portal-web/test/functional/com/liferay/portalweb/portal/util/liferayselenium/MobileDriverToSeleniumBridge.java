@@ -589,13 +589,12 @@ public class MobileDriverToSeleniumBridge
 		if (!webElement.isDisplayed()) {
 			return webElement.isDisplayed();
 		}
-		else {
-			if (!isInViewport(locator)) {
-				swipeWebElementIntoView(locator);
-			}
 
-			return isInViewport(locator);
+		if (!isInViewport(locator)) {
+			swipeWebElementIntoView(locator);
 		}
+
+		return isInViewport(locator);
 	}
 
 	@Override
@@ -942,20 +941,24 @@ public class MobileDriverToSeleniumBridge
 
 			if (elementPositionCenterY >= viewportPositionBottom) {
 				try {
-					Process p = Runtime.getRuntime().exec(
+					Runtime runtime = Runtime.getRuntime();
+
+					runtime.exec(
 						"adb -s emulator-5554 shell /data/local/swipe_up.sh");
 				}
-				catch (IOException e) {
-					e.printStackTrace();
+				catch (IOException ioe) {
+					ioe.printStackTrace();
 				}
 			}
 			else if (elementPositionCenterY <= viewportPositionTop ) {
 				try {
-					Process p = Runtime.getRuntime().exec(
+					Runtime runtime = Runtime.getRuntime();
+
+					runtime.exec(
 						"adb -s emulator-5554 shell /data/local/swipe_down.sh");
 				}
-				catch (IOException e) {
-					e.printStackTrace();
+				catch (IOException ioe) {
+					ioe.printStackTrace();
 				}
 			}
 			else {
