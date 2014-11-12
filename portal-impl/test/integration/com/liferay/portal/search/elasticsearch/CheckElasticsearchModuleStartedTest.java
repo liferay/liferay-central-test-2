@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 public class CheckElasticsearchModuleStartedTest {
 
 	@Test
-	public void testElasticsearchIsTheSearchEngine() {
+	public void testGetSearchEngineService() {
 		Registry registry = RegistryUtil.getRegistry();
 
 		SearchEngine searchEngine = registry.getService(SearchEngine.class);
@@ -43,8 +43,7 @@ public class CheckElasticsearchModuleStartedTest {
 		String searchEngineClassName = searchEngineClass.getName();
 
 		Assert.assertTrue(
-			"The service registered as SearchEngine is " +
-				searchEngineClassName,
+			"The registered search engine is " + searchEngineClassName,
 			searchEngineClassName.endsWith("ElasticsearchSearchEngine"));
 	}
 
