@@ -854,14 +854,11 @@ public class MainServlet extends ActionServlet {
 
 		ServletContext servletContext = getServletContext();
 
-		String[] configs = PropsValues.PORTLET_CONFIGS;
+		String[] xmls = new String[PropsValues.PORTLET_CONFIGS.length];
 
-		String[] xmls = new String[configs.length];
-
-		for (int i = 0; i < configs.length; i++) {
-			String config = configs[i];
-
-			xmls[i] = HttpUtil.URLtoString(servletContext.getResource(config));
+		for (int i = 0; i < PropsValues.PORTLET_CONFIGS.length; i++) {
+			xmls[i] = HttpUtil.URLtoString(
+				servletContext.getResource(PropsValues.PORTLET_CONFIGS[i]));
 		}
 
 		PortletLocalServiceUtil.initEAR(servletContext, xmls, pluginPackage);
