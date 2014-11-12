@@ -58,13 +58,9 @@
 				<![CDATA[
 					StringBuilder sb = new StringBuilder();
 
-					sb.append("{");
-
-					sb.append("\"body\":\"");
+					sb.append("{\"body\":\"");
 					sb.append(project.getProperty("github.post.comment.body"));
-					sb.append("\"");
-
-					sb.append("}");
+					sb.append("\"}");
 
 					project.setProperty("github.post.data", sb.toString());
 
@@ -101,11 +97,9 @@
 				<![CDATA[
 					StringBuilder sb = new StringBuilder();
 
-					sb.append("{");
-					sb.append("\"description\":\"@{github.post.status.description}\",");
+					sb.append("{\"description\":\"@{github.post.status.description}\",");
 					sb.append("\"state\":\"@{github.post.status.state}\",");
-					sb.append("\"target_url\":\"@{github.post.status.url}\"");
-					sb.append("}");
+					sb.append("\"target_url\":\"@{github.post.status.url}\"}");
 
 					project.setProperty("github.post.data", sb.toString());
 
