@@ -290,23 +290,23 @@ public class ConvertDocumentLibraryTest {
 
 		_convertProcess.convert();
 
-		DLFileEntry dlRootFileEntry = (DLFileEntry)rootFileEntry.getModel();
+		DLFileEntry rootDLFileEntry = (DLFileEntry)rootFileEntry.getModel();
 
 		Assert.assertNotEquals(
 			delete,
 			_sourceStore.hasFile(
-				dlRootFileEntry.getCompanyId(),
-				dlRootFileEntry.getDataRepositoryId(),
-				dlRootFileEntry.getName()));
+				rootDLFileEntry.getCompanyId(),
+				rootDLFileEntry.getDataRepositoryId(),
+				rootDLFileEntry.getName()));
 
-		DLFileEntry dlFolderFileEntry = (DLFileEntry)folderFileEntry.getModel();
+		DLFileEntry folderDLFileEntry = (DLFileEntry)folderFileEntry.getModel();
 
 		Assert.assertNotEquals(
 			delete,
 			_sourceStore.hasFile(
-				dlFolderFileEntry.getCompanyId(),
-				dlFolderFileEntry.getDataRepositoryId(),
-				dlFolderFileEntry.getName()));
+				folderDLFileEntry.getCompanyId(),
+				folderDLFileEntry.getDataRepositoryId(),
+				folderDLFileEntry.getName()));
 	}
 
 	protected void testMigrateDL(long folderId) throws Exception {
