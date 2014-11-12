@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.capabilities.WorkflowCapability;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.repository.capabilities.LiferayWorkflowCapability;
 import com.liferay.portal.repository.util.RepositoryWrapper;
 import com.liferay.portal.service.ServiceContext;
 
@@ -30,8 +29,12 @@ import java.io.InputStream;
  */
 public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 
-	public LiferayWorkflowRepositoryWrapper(Repository repository) {
+	public LiferayWorkflowRepositoryWrapper(
+		Repository repository, WorkflowCapability workflowCapability) {
+
 		super(repository);
+
+		_workflowCapability = workflowCapability;
 	}
 
 	@Override
@@ -124,7 +127,6 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 			changeLog, majorVersion, is, size, serviceContext);
 	}
 
-	private final WorkflowCapability _workflowCapability =
-		new LiferayWorkflowCapability();
+	private final WorkflowCapability _workflowCapability;
 
 }

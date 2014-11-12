@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.capabilities.WorkflowCapability;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.repository.capabilities.LiferayWorkflowCapability;
 import com.liferay.portal.repository.util.LocalRepositoryWrapper;
 import com.liferay.portal.service.ServiceContext;
 
@@ -32,9 +31,12 @@ public class LiferayWorkflowLocalRepositoryWrapper
 	extends LocalRepositoryWrapper {
 
 	public LiferayWorkflowLocalRepositoryWrapper(
-		LocalRepository localRepository) {
+		LocalRepository localRepository,
+		WorkflowCapability workflowCapability) {
 
 		super(localRepository);
+
+		_workflowCapability = workflowCapability;
 	}
 
 	@Override
@@ -70,7 +72,6 @@ public class LiferayWorkflowLocalRepositoryWrapper
 		return super.getFileEntry(fileEntryId);
 	}
 
-	private final WorkflowCapability _workflowCapability =
-		new LiferayWorkflowCapability();
+	private final WorkflowCapability _workflowCapability;
 
 }
