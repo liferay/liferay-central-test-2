@@ -46,10 +46,10 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException {
 
+		super.revertFileEntry(fileEntryId, version, serviceContext);
+
 		DLFileVersionReference dlFileVersionReference =
 			_getWorkflowDLFileVersion(fileEntryId, serviceContext);
-
-		super.revertFileEntry(fileEntryId, version, serviceContext);
 
 		_startWorkflowInstance(
 			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
@@ -64,12 +64,12 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 			boolean majorVersion, File file, ServiceContext serviceContext)
 		throws PortalException {
 
-		DLFileVersionReference dlFileVersionReference =
-			_getWorkflowDLFileVersion(fileEntryId, serviceContext);
-
 		super.updateFileEntry(
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, file, serviceContext);
+
+		DLFileVersionReference dlFileVersionReference =
+			_getWorkflowDLFileVersion(fileEntryId, serviceContext);
 
 		_startWorkflowInstance(
 			userId, dlFileVersionReference.fetchDLFileVersion(),
@@ -86,12 +86,12 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		DLFileVersionReference dlFileVersionReference =
-			_getWorkflowDLFileVersion(fileEntryId, serviceContext);
-
 		super.updateFileEntry(
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
+
+		DLFileVersionReference dlFileVersionReference =
+			_getWorkflowDLFileVersion(fileEntryId, serviceContext);
 
 		_startWorkflowInstance(
 			userId, dlFileVersionReference.fetchDLFileVersion(),
