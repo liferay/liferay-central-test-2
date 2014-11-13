@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.messaging.MessageListenerException;
 import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.messaging.SynchronousDestination;
 import com.liferay.portal.uuid.PortalUUIDImpl;
@@ -139,7 +138,7 @@ public class DefaultSynchronousMessageSenderTest {
 		}
 
 		@Override
-		public void receive(Message message) throws MessageListenerException {
+		public void receive(Message message) {
 			Message responseMessage = MessageBusUtil.createResponseMessage(
 				message);
 
