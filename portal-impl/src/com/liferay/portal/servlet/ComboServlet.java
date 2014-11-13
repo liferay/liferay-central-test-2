@@ -187,7 +187,8 @@ public class ComboServlet extends HttpServlet {
 				modulePathsString += ".rtl";
 			}
 			else if (minifierType.equals("js")) {
-				modulePathsString += LanguageUtil.getLanguageId(request);
+				modulePathsString +=
+					StringPool.POUND + LanguageUtil.getLanguageId(request);
 			}
 
 			bytesArray = _bytesArrayPortalCache.get(modulePathsString);
