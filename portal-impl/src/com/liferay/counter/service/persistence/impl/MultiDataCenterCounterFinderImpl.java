@@ -27,7 +27,7 @@ public class MultiDataCenterCounterFinderImpl extends CounterFinderImpl {
 
 		_multiDataCenterBits = getBits(dataCenterCount - 1);
 
-		if (_multiDataCenterBits > _MAXIMUM_BYTE_SHIFTS) {
+		if (_multiDataCenterBits > _BYTE_SHIFTS_MAX) {
 			throw new IllegalArgumentException(
 				"Unable to shift more than 8 bits");
 		}
@@ -59,15 +59,16 @@ public class MultiDataCenterCounterFinderImpl extends CounterFinderImpl {
 
 		BigEndianCodec.putLong(bytes, 0, value);
 
-		bytes[0] =
-			(byte)((bytes[0] >>> _multiDataCenterBits) +
-				(byte)(_multiDataCenterDeploymentId <<
-					(_MAXIMUM_BYTE_SHIFTS - _multiDataCenterBits)));
+		int x = (bytes[0] >>> _multiDataCenterBits);
+		int y = _multiDataCenterDeploymentId <<
+			(_BYTE_SHIFTS_MAX - _multiDataCenterBits);
+
+		bytes[0] = (byte)(x + (byte)y);
 
 		return BigEndianCodec.getLong(bytes, 0);
 	}
 
-	private static final int _MAXIMUM_BYTE_SHIFTS = 7;
+	private static final int _BYTE_SHIFTS_MAX = 7;
 
 	private final int _multiDataCenterBits;
 	private final byte _multiDataCenterDeploymentId;
