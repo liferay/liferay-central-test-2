@@ -102,8 +102,6 @@ public class StagingImplTest {
 
 		Group stagingGroup = _group.getStagingGroup();
 
-		// LayoutSet
-
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			_group.getGroupId(), false);
 
@@ -114,8 +112,6 @@ public class StagingImplTest {
 
 		Assert.assertNotNull(
 			ExportImportDateUtil.getLastPublishDate(layoutSet));
-
-		// Portlet
 
 		Layout layout = new LayoutImpl();
 

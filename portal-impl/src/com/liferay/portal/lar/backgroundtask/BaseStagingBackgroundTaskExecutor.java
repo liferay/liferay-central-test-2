@@ -149,6 +149,6 @@ public abstract class BaseStagingBackgroundTaskExecutor
 
 	protected TransactionAttribute transactionAttribute =
 		TransactionAttributeBuilder.build(
-			Propagation.REQUIRED, new Class<?>[]{Exception.class});
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 }

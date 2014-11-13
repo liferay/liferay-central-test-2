@@ -55,12 +55,11 @@ public class PortletStagingBackgroundTaskExecutor
 		try {
 			ExportImportThreadLocal.setPortletStagingInProcess(true);
 
-			Callable<MissingReferences> portletStagingCallable =
-				new PortletStagingCallable(
-					backgroundTask.getBackgroundTaskId());
+			Callable<MissingReferences> callable = new PortletStagingCallable(
+				backgroundTask.getBackgroundTaskId());
 
 			missingReferences = TransactionalCallableUtil.call(
-				transactionAttribute, portletStagingCallable);
+				transactionAttribute, callable);
 		}
 		catch (Throwable t) {
 			if (_log.isDebugEnabled()) {
@@ -137,7 +136,7 @@ public class PortletStagingBackgroundTaskExecutor
 			return missingReferences;
 		}
 
-		private PortletStagingCallable(long backgroundTaskId) {
+		public PortletStagingCallable(long backgroundTaskId) {
 			_backgroundTaskId = backgroundTaskId;
 		}
 
