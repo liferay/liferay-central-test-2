@@ -227,7 +227,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		if (repository != null) {
-			dlFileEntryLocalService.deleteFileEntriesByRepository(
+			dlFileEntryLocalService.deleteRepositoryFileEntries(
 				repository.getRepositoryId(), repository.getDlFolderId());
 		}
 		else {
