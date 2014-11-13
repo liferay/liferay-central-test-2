@@ -2308,7 +2308,7 @@ module.framework.properties.osgi.console=11312</echo>
 
 		<get dest="extraapps.zip" src="${test.build.extraapps.zip.url}" />
 
-		<copy file="extraapps.zip" todir="${jenkins.shared.user.content.dir}/jobs/${top.level.job.name}/builds/${top.level.build.number}/downloads" />
+		<move file="extraapps.zip" todir="${jenkins.shared.user.content.dir}/jobs/${top.level.job.name}/builds/${top.level.build.number}/downloads" />
 	</target>
 
 	<target name="prepare-portal-properties">
