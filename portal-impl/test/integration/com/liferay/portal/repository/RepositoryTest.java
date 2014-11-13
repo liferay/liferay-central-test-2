@@ -230,34 +230,31 @@ public class RepositoryTest {
 			testRepositoryFileEntriesAreDeletedWhenDeletingLiferayRepository()
 		throws Exception {
 
-		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
-
 		long[] fileEntryIds = new long[4];
-
-		long[] folderIds = new long[2];
-
-		// Add folders and files
 
 		long[] primaryKeys = populateRepository(_group.getGroupId());
 
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];
+
+		long[] folderIds = new long[2];
+
 		folderIds[0] = primaryKeys[1];
 
-		Repository dlRepository2 = RepositoryLocalServiceUtil.addRepository(
-			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
+		Repository repository = RepositoryLocalServiceUtil.addRepository(
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			PortalUtil.getClassNameId(LiferayRepository.class),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(), true,
 			new ServiceContext());
 
-		primaryKeys = populateRepository(dlRepository2.getRepositoryId());
+		primaryKeys = populateRepository(repository.getRepositoryId());
 
 		fileEntryIds[2] = primaryKeys[0];
 		fileEntryIds[3] = primaryKeys[2];
-		folderIds[1] = primaryKeys[1];
 
-		// Delete repositories
+		folderIds[1] = primaryKeys[1];
 
 		DLAppLocalServiceUtil.deleteAll(_group.getGroupId());
 
@@ -267,7 +264,6 @@ public class RepositoryTest {
 					_group.getGroupId());
 
 			localRepository.getFileEntry(fileEntryIds[0]);
-
 			localRepository.getFileEntry(fileEntryIds[1]);
 
 			Assert.fail(
@@ -280,16 +276,15 @@ public class RepositoryTest {
 		try {
 			LocalRepository localRepository =
 				RepositoryServiceUtil.getLocalRepositoryImpl(
-					dlRepository2.getRepositoryId());
+					repository.getRepositoryId());
 
 			localRepository.getFileEntry(fileEntryIds[2]);
-
 			localRepository.getFileEntry(fileEntryIds[3]);
 		}
 		catch (Exception e) {
 			Assert.fail(
 				"Should not be able to get file entry from repository " +
-					dlRepository2.getRepositoryId());
+					repository.getRepositoryId());
 		}
 	}
 
@@ -299,7 +294,7 @@ public class RepositoryTest {
 
 		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
 
-		Repository dlRepository1 = RepositoryLocalServiceUtil.addRepository(
+		Repository repository1 = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
@@ -308,46 +303,43 @@ public class RepositoryTest {
 
 		long[] fileEntryIds = new long[4];
 
-		long[] folderIds = new long[2];
-
-		// Add folders and files
-
 		long[] primaryKeys = populateRepository(
-			dlRepository1.getRepositoryId());
+			repository1.getRepositoryId());
 
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];
+
+		long[] folderIds = new long[2];
+
 		folderIds[0] = primaryKeys[1];
 
-		Repository dlRepository2 = RepositoryLocalServiceUtil.addRepository(
+		Repository repository2 = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(), true,
 			new ServiceContext());
 
-		primaryKeys = populateRepository(dlRepository2.getRepositoryId());
+		primaryKeys = populateRepository(repository2.getRepositoryId());
 
 		fileEntryIds[2] = primaryKeys[0];
 		fileEntryIds[3] = primaryKeys[2];
+
 		folderIds[1] = primaryKeys[1];
 
-		// Delete repositories
-
-		DLAppLocalServiceUtil.deleteAll(dlRepository1.getRepositoryId());
+		DLAppLocalServiceUtil.deleteAll(repository1.getRepositoryId());
 
 		try {
 			LocalRepository localRepository =
 				RepositoryServiceUtil.getLocalRepositoryImpl(
-					dlRepository2.getRepositoryId());
+					repository2.getRepositoryId());
 
 			localRepository.getFileEntry(fileEntryIds[0]);
-
 			localRepository.getFileEntry(fileEntryIds[1]);
 
 			Assert.fail(
 				"Should be able to get file entry from repository " +
-					dlRepository2.getRepositoryId());
+					repository2.getRepositoryId());
 		}
 		catch (Exception e) {
 		}
@@ -355,16 +347,15 @@ public class RepositoryTest {
 		try {
 			LocalRepository localRepository =
 				RepositoryServiceUtil.getLocalRepositoryImpl(
-					dlRepository2.getRepositoryId());
+					repository2.getRepositoryId());
 
 			localRepository.getFileEntry(fileEntryIds[2]);
-
 			localRepository.getFileEntry(fileEntryIds[3]);
 		}
 		catch (Exception e) {
 			Assert.fail(
 				"Should not be able to get file entry from repository " +
-					dlRepository2.getRepositoryId());
+					repository2.getRepositoryId());
 		}
 	}
 
