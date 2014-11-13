@@ -713,6 +713,14 @@ public class LayoutExporter {
 	private class UpdateLayoutSetLastPublishDateCallable
 		implements Callable<Void> {
 
+		public UpdateLayoutSetLastPublishDateCallable(
+			DateRange dateRange, long groupId, boolean privateLayout) {
+
+			_dateRange = dateRange;
+			_groupId = groupId;
+			_privateLayout = privateLayout;
+		}
+
 		@Override
 		public Void call() throws PortalException {
 			Group group = GroupLocalServiceUtil.getGroup(_groupId);
@@ -742,14 +750,6 @@ public class LayoutExporter {
 			}
 
 			return null;
-		}
-
-		public UpdateLayoutSetLastPublishDateCallable(
-			DateRange dateRange, long groupId, boolean privateLayout) {
-
-			_dateRange = dateRange;
-			_groupId = groupId;
-			_privateLayout = privateLayout;
 		}
 
 		private final DateRange _dateRange;

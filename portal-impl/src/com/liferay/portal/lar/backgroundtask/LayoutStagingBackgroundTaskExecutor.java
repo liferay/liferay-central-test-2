@@ -162,6 +162,18 @@ public class LayoutStagingBackgroundTaskExecutor
 
 	private class LayoutStagingCallable implements Callable<MissingReferences> {
 
+		public LayoutStagingCallable(
+			long backgroundTaskId,
+			ExportImportConfiguration exportImportConfiguration,
+			long sourceGroupId, long targetGroupId, long userId) {
+
+			_backgroundTaskId = backgroundTaskId;
+			_exportImportConfiguration = exportImportConfiguration;
+			_sourceGroupId = sourceGroupId;
+			_targetGroupId = targetGroupId;
+			_userId = userId;
+		}
+
 		@Override
 		public MissingReferences call() throws PortalException {
 			File file = null;
@@ -207,18 +219,6 @@ public class LayoutStagingBackgroundTaskExecutor
 			}
 
 			return missingReferences;
-		}
-
-		public LayoutStagingCallable(
-			long backgroundTaskId,
-			ExportImportConfiguration exportImportConfiguration,
-			long sourceGroupId, long targetGroupId, long userId) {
-
-			_backgroundTaskId = backgroundTaskId;
-			_exportImportConfiguration = exportImportConfiguration;
-			_sourceGroupId = sourceGroupId;
-			_targetGroupId = targetGroupId;
-			_userId = userId;
 		}
 
 		private final long _backgroundTaskId;

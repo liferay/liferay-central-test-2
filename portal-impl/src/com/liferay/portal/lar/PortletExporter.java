@@ -1255,6 +1255,17 @@ public class PortletExporter {
 	private class UpdatePortletLastPublishDateCallable
 		implements Callable<Void> {
 
+		public UpdatePortletLastPublishDateCallable(
+			DateRange dateRange, Date endDate, long groupId, long plid,
+			String portletId) {
+
+			_dateRange = dateRange;
+			_endDate = endDate;
+			_groupId = groupId;
+			_plid = plid;
+			_portletId = portletId;
+		}
+
 		@Override
 		public Void call() throws PortalException {
 			Group group = GroupLocalServiceUtil.getGroup(_groupId);
@@ -1292,17 +1303,6 @@ public class PortletExporter {
 				_portletId, jxPortletPreferences, _dateRange, _endDate);
 
 			return null;
-		}
-
-		public UpdatePortletLastPublishDateCallable(
-			DateRange dateRange, Date endDate, long groupId, long plid,
-			String portletId) {
-
-			_dateRange = dateRange;
-			_endDate = endDate;
-			_groupId = groupId;
-			_plid = plid;
-			_portletId = portletId;
 		}
 
 		private final DateRange _dateRange;

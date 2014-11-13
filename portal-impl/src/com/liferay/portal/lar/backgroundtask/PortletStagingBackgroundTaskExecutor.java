@@ -84,6 +84,10 @@ public class PortletStagingBackgroundTaskExecutor
 	private class PortletStagingCallable
 		implements Callable<MissingReferences> {
 
+		public PortletStagingCallable(long backgroundTaskId) {
+			_backgroundTaskId = backgroundTaskId;
+		}
+
 		@Override
 		public MissingReferences call() throws PortalException {
 			BackgroundTask backgroundTask =
@@ -133,10 +137,6 @@ public class PortletStagingBackgroundTaskExecutor
 			}
 
 			return missingReferences;
-		}
-
-		public PortletStagingCallable(long backgroundTaskId) {
-			_backgroundTaskId = backgroundTaskId;
 		}
 
 		private final long _backgroundTaskId;
