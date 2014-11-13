@@ -287,8 +287,7 @@ public class RepositoryTest {
 
 		long[] fileEntryIds = new long[4];
 
-		long[] primaryKeys = populateRepository(
-			repository1.getRepositoryId());
+		long[] primaryKeys = populateRepository(repository1.getRepositoryId());
 
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];

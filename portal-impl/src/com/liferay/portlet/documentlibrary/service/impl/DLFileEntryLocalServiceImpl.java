@@ -697,39 +697,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	@Override
-	public void deleteRepositoryFileEntries(long repositoryId, long folderId)
-		throws PortalException {
-
-		deleteFileEntries(repositoryId, folderId, true);
-	}
-
-	@Override
-	public void deleteRepositoryFileEntries(
-			long repositoryId, long folderId, boolean includeTrashedEntries)
-		throws PortalException {
-
-		int count = dlFileEntryPersistence.countByR_F(repositoryId, folderId);
-
-		int pages = count / _DELETE_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * _DELETE_INTERVAL);
-			int end = start + _DELETE_INTERVAL;
-
-			List<DLFileEntry> dlFileEntries = dlFileEntryPersistence.findByR_F(
-				repositoryId, folderId, start, end);
-
-			for (DLFileEntry dlFileEntry : dlFileEntries) {
-				if (includeTrashedEntries ||
-					!dlFileEntry.isInTrashExplicitly()) {
-
-					dlFileEntryLocalService.deleteFileEntry(dlFileEntry);
-				}
-			}
-		}
-	}
-
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(
@@ -922,6 +889,39 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return null;
+	}
+
+	@Override
+	public void deleteRepositoryFileEntries(long repositoryId, long folderId)
+		throws PortalException {
+
+		deleteFileEntries(repositoryId, folderId, true);
+	}
+
+	@Override
+	public void deleteRepositoryFileEntries(
+			long repositoryId, long folderId, boolean includeTrashedEntries)
+		throws PortalException {
+
+		int count = dlFileEntryPersistence.countByR_F(repositoryId, folderId);
+
+		int pages = count / _DELETE_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * _DELETE_INTERVAL);
+			int end = start + _DELETE_INTERVAL;
+
+			List<DLFileEntry> dlFileEntries = dlFileEntryPersistence.findByR_F(
+				repositoryId, folderId, start, end);
+
+			for (DLFileEntry dlFileEntry : dlFileEntries) {
+				if (includeTrashedEntries ||
+					!dlFileEntry.isInTrashExplicitly()) {
+
+					dlFileEntryLocalService.deleteFileEntry(dlFileEntry);
+				}
+			}
+		}
 	}
 
 	@Override
