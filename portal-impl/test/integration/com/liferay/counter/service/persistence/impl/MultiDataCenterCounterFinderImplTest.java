@@ -127,8 +127,7 @@ public class MultiDataCenterCounterFinderImplTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"Invalid data center count (2) or data center deployment id " +
-					"(2). Please consult the appropriate documentation.",
+				"Invalid data center count 2 or data center deployment ID 2",
 				iae.getMessage());
 		}
 

@@ -25,21 +25,17 @@ public class MultiDataCenterCounterFinderImpl extends CounterFinderImpl {
 	public MultiDataCenterCounterFinderImpl(
 		int dataCenterCount, int dataCenterDeploymentId) {
 
-		_multiDataCenterBits = getNumberBits(dataCenterCount - 1);
+		_multiDataCenterBits = getBits(dataCenterCount - 1);
 
 		if (_multiDataCenterBits > _MAXIMUM_BYTE_SHIFTS) {
 			throw new IllegalArgumentException(
 				"Unable to shift more than 8 bits");
 		}
 
-		int numberBits = getNumberBits(dataCenterDeploymentId);
-
-		if (numberBits > _multiDataCenterBits) {
+		if (getBits(dataCenterDeploymentId) > _multiDataCenterBits) {
 			throw new IllegalArgumentException(
-				"Invalid data center count (" + dataCenterCount +
-					") or data center deployment id (" +
-					dataCenterDeploymentId +
-					"). Please consult the appropriate documentation.");
+				"Invalid data center count " + dataCenterCount +
+					" or data center deployment ID " + dataCenterDeploymentId);
 		}
 
 		_multiDataCenterDeploymentId = (byte)dataCenterDeploymentId;
@@ -50,7 +46,7 @@ public class MultiDataCenterCounterFinderImpl extends CounterFinderImpl {
 		return getMultiClusterSafeValue(super.increment(name, size));
 	}
 
-	protected static int getNumberBits(int value) {
+	protected static int getBits(int value) {
 		if (value == 0) {
 			return 0;
 		}
@@ -65,8 +61,8 @@ public class MultiDataCenterCounterFinderImpl extends CounterFinderImpl {
 
 		bytes[0] =
 			(byte)((bytes[0] >>> _multiDataCenterBits) +
-			(byte)(_multiDataCenterDeploymentId <<
-				(_MAXIMUM_BYTE_SHIFTS - _multiDataCenterBits)));
+				(byte)(_multiDataCenterDeploymentId <<
+					(_MAXIMUM_BYTE_SHIFTS - _multiDataCenterBits)));
 
 		return BigEndianCodec.getLong(bytes, 0);
 	}
