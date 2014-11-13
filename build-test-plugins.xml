@@ -89,7 +89,7 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 			<then>
 				<unzip
 					dest="${liferay.home}/deploy"
-					src="${jenkins.shared.user.content.dir}/jobs/${top.level.job.name}/builds/${top.level.build.number}/downloads/extraapps.war.zip"
+					src="${jenkins.shared.user.content.dir}/jobs/${top.level.job.name}/builds/${top.level.build.number}/downloads/extraapps.zip"
 				/>
 			</then>
 		</if>

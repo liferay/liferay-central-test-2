@@ -2306,9 +2306,9 @@ module.framework.properties.osgi.console=11312</echo>
 		<fail message="Please set the property ${top.level.build.number}." unless="top.level.build.number" />
 		<fail message="Please set the property ${top.level.job.name}." unless="top.level.job.name" />
 
-		<get dest="extraapps.war.zip" src="${test.build.extraapps.zip.url}" />
+		<get dest="extraapps.zip" src="${test.build.extraapps.zip.url}" />
 
-		<copy file="extraapps.war.zip" todir="${jenkins.shared.user.content.dir}/jobs/${top.level.job.name}/builds/${top.level.build.number}/downloads" />
+		<copy file="extraapps.zip" todir="${jenkins.shared.user.content.dir}/jobs/${top.level.job.name}/builds/${top.level.build.number}/downloads" />
 	</target>
 
 	<target name="prepare-portal-properties">
