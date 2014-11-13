@@ -66,32 +66,31 @@ public class RepositoryTest {
 	public void testAddFileEntryInRepository() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
 
-		Repository dlRepository = RepositoryLocalServiceUtil.addRepository(
+		Repository repository = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(), true,
 			new ServiceContext());
 
-		long repositoryId = dlRepository.getRepositoryId();
-
-		long[] primaryKeys = populateRepository(repositoryId);
+		long[] primaryKeys = populateRepository(repository.getRepositoryId());
 
 		Assert.assertEquals(
 			1,
 			DLAppServiceUtil.getFoldersCount(
-				repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID));
-
+				repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID));
 		Assert.assertEquals(
 			1,
 			DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(
-				repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				WorkflowConstants.STATUS_ANY));
-
 		Assert.assertEquals(
 			1,
 			DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(
-				repositoryId, primaryKeys[1], WorkflowConstants.STATUS_ANY));
+				repository.getRepositoryId(), primaryKeys[1],
+				WorkflowConstants.STATUS_ANY));
 	}
 
 	@Test
@@ -123,8 +122,6 @@ public class RepositoryTest {
 
 		repositoryIds[1] = repository.getRepositoryId();
 
-		// Delete repositories
-
 		DLAppLocalServiceUtil.deleteAllRepositories(_group.getGroupId());
 
 		for (long repositoryId : repositoryIds) {
@@ -154,17 +151,14 @@ public class RepositoryTest {
 
 		long[] fileEntryIds = new long[2];
 
-		long[] folderIds = new long[1];
-
-		// Add folders and files
-
 		long[] primaryKeys = populateRepository(dlRepository.getRepositoryId());
 
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];
-		folderIds[0] = primaryKeys[1];
 
-		// Delete repositories
+		long[] folderIds = new long[1];
+
+		folderIds[0] = primaryKeys[1];
 
 		DLAppLocalServiceUtil.deleteAllRepositories(_group.getGroupId());
 
