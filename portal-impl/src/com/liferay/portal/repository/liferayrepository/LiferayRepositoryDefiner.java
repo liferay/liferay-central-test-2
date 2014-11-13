@@ -92,8 +92,7 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		new LiferayTrashCapability();
 	private RepositoryFactory _repositoryFactory;
 
-	private final class LiferayRepositoryFactoryWrapper
-		implements RepositoryFactory {
+	private class LiferayRepositoryFactoryWrapper implements RepositoryFactory {
 
 		public LiferayRepositoryFactoryWrapper(
 			RepositoryFactory repositoryFactory) {
