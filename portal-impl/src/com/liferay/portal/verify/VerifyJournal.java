@@ -360,9 +360,9 @@ public class VerifyJournal extends VerifyProcess {
 			return;
 		}
 
-		Date articleModifiedDate = article.getModifiedDate();
+		Date modifiedDate = article.getModifiedDate();
 
-		if (articleModifiedDate.equals(assetEntry.getModifiedDate())) {
+		if (modifiedDate.equals(assetEntry.getModifiedDate())) {
 			return;
 		}
 
