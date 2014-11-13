@@ -156,10 +156,6 @@ public class RepositoryTest {
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];
 
-		long[] folderIds = new long[1];
-
-		folderIds[0] = primaryKeys[1];
-
 		DLAppLocalServiceUtil.deleteAllRepositories(_group.getGroupId());
 
 		for (int i = 0; i < fileEntryIds.length; i++) {
@@ -231,10 +227,6 @@ public class RepositoryTest {
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];
 
-		long[] folderIds = new long[2];
-
-		folderIds[0] = primaryKeys[1];
-
 		Repository repository = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(),
 			PortalUtil.getClassNameId(LiferayRepository.class),
@@ -247,8 +239,6 @@ public class RepositoryTest {
 
 		fileEntryIds[2] = primaryKeys[0];
 		fileEntryIds[3] = primaryKeys[2];
-
-		folderIds[1] = primaryKeys[1];
 
 		DLAppLocalServiceUtil.deleteAll(_group.getGroupId());
 
@@ -303,10 +293,6 @@ public class RepositoryTest {
 		fileEntryIds[0] = primaryKeys[0];
 		fileEntryIds[1] = primaryKeys[2];
 
-		long[] folderIds = new long[2];
-
-		folderIds[0] = primaryKeys[1];
-
 		Repository repository2 = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
@@ -318,8 +304,6 @@ public class RepositoryTest {
 
 		fileEntryIds[2] = primaryKeys[0];
 		fileEntryIds[3] = primaryKeys[2];
-
-		folderIds[1] = primaryKeys[1];
 
 		DLAppLocalServiceUtil.deleteAll(repository1.getRepositoryId());
 
