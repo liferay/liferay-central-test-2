@@ -34,7 +34,7 @@ public class WorkflowHandlerInvocationCounter<T> implements AutoCloseable {
 		WorkflowHandler<T> workflowHandler =
 			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
-		_countMap = new HashMap<>();
+		_counts = new HashMap<>();
 
 		WorkflowHandler<T> delegateWorkflowHandler =
 			_createInvocationCounterWorkflowHandler(workflowHandler);
@@ -54,7 +54,7 @@ public class WorkflowHandlerInvocationCounter<T> implements AutoCloseable {
 		Method method = WorkflowHandler.class.getMethod(
 			methodName, parameterTypes);
 
-		AtomicInteger count = _countMap.get(method);
+		AtomicInteger count = _counts.get(method);
 
 		if (count == null) {
 			return 0;
@@ -67,6 +67,7 @@ public class WorkflowHandlerInvocationCounter<T> implements AutoCloseable {
 		final WorkflowHandler<T> workflowHandler) {
 
 		Thread currentThread = Thread.currentThread();
+
 		ClassLoader classLoader = currentThread.getContextClassLoader();
 
 		return (WorkflowHandler<T>)ProxyUtil.newProxyInstance(
@@ -77,12 +78,12 @@ public class WorkflowHandlerInvocationCounter<T> implements AutoCloseable {
 				public Object invoke(Object proxy, Method method, Object[] args)
 					throws Throwable {
 
-					AtomicInteger count = _countMap.get(method);
+					AtomicInteger count = _counts.get(method);
 
 					if (count == null) {
 						count = new AtomicInteger();
 
-						_countMap.put(method, count);
+						_counts.put(method, count);
 					}
 
 					count.incrementAndGet();
@@ -94,7 +95,7 @@ public class WorkflowHandlerInvocationCounter<T> implements AutoCloseable {
 		);
 	}
 
-	private final Map<Method, AtomicInteger> _countMap;
+	private final Map<Method, AtomicInteger> _counts;
 	private final WorkflowHandlerReplacer<T> _workflowHandlerReplacer;
 
 }

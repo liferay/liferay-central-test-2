@@ -118,14 +118,15 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<DLFileEntry>
-					invocationCounter = new WorkflowHandlerInvocationCounter<>(
-						DLFileEntryConstants.getClassName())) {
+					workflowHandlerInvocationCounter =
+						new WorkflowHandlerInvocationCounter<>(
+							DLFileEntryConstants.getClassName())) {
 
 				addFileEntry(group.getGroupId(), parentFolder.getFolderId());
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 			}
 		}
@@ -451,15 +452,16 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<FileEntry>
-					invocationCounter = new WorkflowHandlerInvocationCounter<>(
-						DLFileEntryConstants.getClassName())) {
+					workflowHandlerInvocationCounter =
+						new WorkflowHandlerInvocationCounter<>(
+							DLFileEntryConstants.getClassName())) {
 
 				FileEntry fileEntry = addFileEntry(
 					group.getGroupId(), parentFolder.getFolderId());
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				ServiceContext serviceContext =
@@ -471,7 +473,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				updateFileEntry(
@@ -480,7 +482,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				DLAppServiceUtil.checkInFileEntry(
@@ -489,7 +491,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					2,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 			}
 		}
@@ -557,8 +559,9 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<DLFileEntry>
-					invocationCounter = new WorkflowHandlerInvocationCounter<>(
-						DLFileEntryConstants.getClassName())) {
+					workflowHandlerInvocationCounter =
+						new WorkflowHandlerInvocationCounter<>(
+							DLFileEntryConstants.getClassName())) {
 
 				ServiceContext serviceContext =
 					ServiceContextTestUtil.getServiceContext(
@@ -573,7 +576,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				DLAppServiceUtil.copyFolder(
@@ -583,7 +586,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					2,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 			}
 		}
@@ -840,15 +843,16 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<FileEntry>
-					invocationCounter = new WorkflowHandlerInvocationCounter<>(
-						DLFileEntryConstants.getClassName())) {
+					workflowHandlerInvocationCounter =
+						new WorkflowHandlerInvocationCounter<>(
+							DLFileEntryConstants.getClassName())) {
 
 				FileEntry fileEntry = addFileEntry(
 					group.getGroupId(), parentFolder.getFolderId());
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				String version = fileEntry.getVersion();
@@ -859,7 +863,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					2,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				ServiceContext serviceContext =
@@ -871,7 +875,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					3,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 			}
 		}
@@ -1004,7 +1008,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<DLFileEntry>
-					invocationCounter =
+					workflowHandlerInvocationCounter =
 						new WorkflowHandlerInvocationCounter<>(
 							DLFileEntryConstants.getClassName())) {
 
@@ -1013,7 +1017,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					1,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 
 				updateFileEntry(
@@ -1022,7 +1026,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 				Assert.assertEquals(
 					2,
-					invocationCounter.getCount(
+					workflowHandlerInvocationCounter.getCount(
 						"updateStatus", int.class, Map.class));
 			}
 		}
