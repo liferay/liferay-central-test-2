@@ -75,7 +75,7 @@ public class RepositoryTest {
 
 		long repositoryId = dlRepository.getRepositoryId();
 
-		long[] entryIds = populateRepository(repositoryId);
+		long[] primaryKeys = populateRepository(repositoryId);
 
 		Assert.assertEquals(
 			1,
@@ -91,7 +91,7 @@ public class RepositoryTest {
 		Assert.assertEquals(
 			1,
 			DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(
-				repositoryId, entryIds[1], WorkflowConstants.STATUS_ANY));
+				repositoryId, primaryKeys[1], WorkflowConstants.STATUS_ANY));
 	}
 
 	@Test
@@ -158,11 +158,11 @@ public class RepositoryTest {
 
 		// Add folders and files
 
-		long[] entryIds = populateRepository(dlRepository.getRepositoryId());
+		long[] primaryKeys = populateRepository(dlRepository.getRepositoryId());
 
-		fileEntryIds[0] = entryIds[0];
-		fileEntryIds[1] = entryIds[2];
-		folderIds[0] = entryIds[1];
+		fileEntryIds[0] = primaryKeys[0];
+		fileEntryIds[1] = primaryKeys[2];
+		folderIds[0] = primaryKeys[1];
 
 		// Delete repositories
 
@@ -238,11 +238,11 @@ public class RepositoryTest {
 
 		// Add folders and files
 
-		long[] entryIds = populateRepository(_group.getGroupId());
+		long[] primaryKeys = populateRepository(_group.getGroupId());
 
-		fileEntryIds[0] = entryIds[0];
-		fileEntryIds[1] = entryIds[2];
-		folderIds[0] = entryIds[1];
+		fileEntryIds[0] = primaryKeys[0];
+		fileEntryIds[1] = primaryKeys[2];
+		folderIds[0] = primaryKeys[1];
 
 		Repository dlRepository2 = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
@@ -251,11 +251,11 @@ public class RepositoryTest {
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(), true,
 			new ServiceContext());
 
-		entryIds = populateRepository(dlRepository2.getRepositoryId());
+		primaryKeys = populateRepository(dlRepository2.getRepositoryId());
 
-		fileEntryIds[2] = entryIds[0];
-		fileEntryIds[3] = entryIds[2];
-		folderIds[1] = entryIds[1];
+		fileEntryIds[2] = primaryKeys[0];
+		fileEntryIds[3] = primaryKeys[2];
+		folderIds[1] = primaryKeys[1];
 
 		// Delete repositories
 
@@ -312,11 +312,12 @@ public class RepositoryTest {
 
 		// Add folders and files
 
-		long[] entryIds = populateRepository(dlRepository1.getRepositoryId());
+		long[] primaryKeys = populateRepository(
+			dlRepository1.getRepositoryId());
 
-		fileEntryIds[0] = entryIds[0];
-		fileEntryIds[1] = entryIds[2];
-		folderIds[0] = entryIds[1];
+		fileEntryIds[0] = primaryKeys[0];
+		fileEntryIds[1] = primaryKeys[2];
+		folderIds[0] = primaryKeys[1];
 
 		Repository dlRepository2 = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,
@@ -325,11 +326,11 @@ public class RepositoryTest {
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(), true,
 			new ServiceContext());
 
-		entryIds = populateRepository(dlRepository2.getRepositoryId());
+		primaryKeys = populateRepository(dlRepository2.getRepositoryId());
 
-		fileEntryIds[2] = entryIds[0];
-		fileEntryIds[3] = entryIds[2];
-		folderIds[1] = entryIds[1];
+		fileEntryIds[2] = primaryKeys[0];
+		fileEntryIds[3] = primaryKeys[2];
+		folderIds[1] = primaryKeys[1];
 
 		// Delete repositories
 
