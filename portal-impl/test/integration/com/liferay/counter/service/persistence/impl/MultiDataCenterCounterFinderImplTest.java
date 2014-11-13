@@ -139,7 +139,7 @@ public class MultiDataCenterCounterFinderImplTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"Cannot shift more than 8 bits", iae.getMessage());
+				"Unable to shift more than 8 bits", iae.getMessage());
 		}
 	}
 

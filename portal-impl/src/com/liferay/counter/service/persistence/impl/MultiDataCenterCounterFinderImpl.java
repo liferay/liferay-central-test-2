@@ -28,7 +28,8 @@ public class MultiDataCenterCounterFinderImpl extends CounterFinderImpl {
 		_multiDataCenterBits = getNumberBits(dataCenterCount - 1);
 
 		if (_multiDataCenterBits > _MAXIMUM_BYTE_SHIFTS) {
-			throw new IllegalArgumentException("Cannot shift more than 8 bits");
+			throw new IllegalArgumentException(
+				"Unable to shift more than 8 bits");
 		}
 
 		int numberBits = getNumberBits(dataCenterDeploymentId);
