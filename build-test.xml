@@ -1275,9 +1275,18 @@ create database lportal${database.index} character set utf8;</echo>
 		</if>
 	</target>
 
-	<target name="deploy-regular-plugins">
+	<target name="deploy-required-plugins">
+		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+			<property name="plugin.types" value="portlets" />
+			<property name="plugins.includes" value="marketplace-portlet" />
+		</ant>
+	</target>
 
-		<!-- Deploy plugin war files to deploy directory -->
+	<target name="deploy-specified-plugins">
+
+		<!--
+		Deploy plugin files to the deploy directory.
+		-->
 
 		<if>
 			<isset property="hook.plugins.includes" />
@@ -1339,7 +1348,10 @@ create database lportal${database.index} character set utf8;</echo>
 			</then>
 		</if>
 
-		<!-- Copy plugin war files to additional deploy directories if additional bundles are present -->
+		<!--
+		Copy plugin files to additional deploy directories if additional bundles
+		are present.
+		-->
 
 		<if>
 			<isset property="app.server.bundles.size" />
@@ -1367,13 +1379,6 @@ create database lportal${database.index} character set utf8;</echo>
 				<var name="app.server.bundle.index" unset="true" />
 			</then>
 		</if>
-	</target>
-
-	<target name="deploy-required-plugins">
-		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-			<property name="plugin.types" value="portlets" />
-			<property name="plugins.includes" value="marketplace-portlet" />
-		</ant>
 	</target>
 
 	<target name="evaluate-logs">
@@ -3879,7 +3884,7 @@ if (ppstate.equals("normal")) {
 
 		<antcall target="deploy-required-plugins" />
 
-		<antcall target="deploy-regular-plugins" />
+		<antcall target="deploy-specified-plugins" />
 
 		<if>
 			<isset property="web.xml.timeout" />
