@@ -74,7 +74,7 @@ public class MapTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/map/page.jsp";
 
-	private boolean _geolocation = false;
+	private boolean _geolocation;
 	private double _latitude;
 	private double _longitude;
 	private String _name;
