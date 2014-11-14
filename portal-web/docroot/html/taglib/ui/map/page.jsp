@@ -19,12 +19,12 @@
 <%
 String protocol = HttpUtil.getProtocol(request);
 
-String points = GetterUtil.getString(request.getAttribute("liferay-ui:map:points"));
 boolean geolocation = GetterUtil.getBoolean(request.getAttribute("liferay-ui:map:geolocation"));
 double latitude = (Double)request.getAttribute("liferay-ui:map:latitude");
 double longitude = (Double)request.getAttribute("liferay-ui:map:longitude");
-String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:name"));
 String mapsAPIProvider = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:provider"));
+String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:name"));
+String points = GetterUtil.getString(request.getAttribute("liferay-ui:map:points"));
 
 if (Validator.isNull(mapsAPIProvider)) {
 	Group group = layout.getGroup();
@@ -39,8 +39,6 @@ if (Validator.isNull(mapsAPIProvider)) {
 }
 
 name = namespace + name;
-
-String modules = "liferay-map-" + StringUtil.toLowerCase(mapsAPIProvider);
 %>
 
 <c:if test='<%= mapsAPIProvider.equals("Google") %>'>
@@ -58,7 +56,7 @@ String modules = "liferay-map-" + StringUtil.toLowerCase(mapsAPIProvider);
 
 <div class="lfr-map" id="<%= name %>Map"></div>
 
-<aui:script use="<%= modules %>">
+<aui:script use='<%= "liferay-map-" + StringUtil.toLowerCase(mapsAPIProvider) %>'>
 	var MapControls = Liferay.MapBase.CONTROLS;
 
 	var mapConfig = {
