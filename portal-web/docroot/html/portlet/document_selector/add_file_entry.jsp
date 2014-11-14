@@ -21,9 +21,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String uploadProgressId = "dlFileEntryUploadProgress";
 
-long folderId = ParamUtil.getLong(request, "folderId");
-
 long repositoryId = scopeGroupId;
+
+long folderId = ParamUtil.getLong(request, "folderId");
 
 if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	try {

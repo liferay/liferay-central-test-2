@@ -21,6 +21,8 @@ String[] tabs1Names = DocumentSelectorUtil.getTabs1Names(request);
 
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 
+long repositoryId = groupId;
+
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -34,8 +36,6 @@ if ((folder != null) && (folder.getGroupId() != groupId)) {
 if (folderId > 0) {
 	folder = DLAppServiceUtil.getFolder(folderId);
 }
-
-long repositoryId = groupId;
 
 if (folder != null) {
 	repositoryId = folder.getRepositoryId();
