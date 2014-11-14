@@ -65,7 +65,7 @@ public abstract class BaseUserNotificationHandler
 					getPortletId());
 
 				String body = StringUtil.replace(
-					_DEFAULT_BODY_TEMPLATE,
+					_BODY_TEMPLATE_DEFAULT,
 					new String[] {"[$BODY$]", "[$TITLE$]"},
 					new String[] {
 						serviceContext.translate(
@@ -165,7 +165,7 @@ public abstract class BaseUserNotificationHandler
 			return sb.toString();
 		}
 		else {
-			return _DEFAULT_BODY_TEMPLATE;
+			return _BODY_TEMPLATE_DEFAULT;
 		}
 	}
 
@@ -197,7 +197,7 @@ public abstract class BaseUserNotificationHandler
 		_selector = selector;
 	}
 
-	private static final String _DEFAULT_BODY_TEMPLATE =
+	private static final String _BODY_TEMPLATE_DEFAULT =
 		"<div class=\"title\">[$TITLE$]</div><div class=\"body\">[$BODY$]" +
 			"</div>";
 
