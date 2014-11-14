@@ -31,7 +31,7 @@
 />
 
 <%
-List<Organization> userOrganizations = OrganizationLocalServiceUtil.getUserOrganizations(user2.getUserId(), 0, PropsValues.USER_ADMIN_ORGANIZATION_COLUMN_LIMIT);
+List<Organization> userOrganizations = OrganizationLocalServiceUtil.getUserOrganizations(user2.getUserId(), 0, PropsValues.USERS_ADMIN_ORGANIZATION_COLUMN_LIMIT);
 int userOrganizationsCount = OrganizationLocalServiceUtil.getUserOrganizationsCount(user2.getUserId());
 %>
 

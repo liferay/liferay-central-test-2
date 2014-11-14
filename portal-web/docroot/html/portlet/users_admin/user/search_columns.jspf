@@ -34,7 +34,7 @@
 	<c:when test="<%= organizationContextView && (organizationGroupId > 0) %>">
 
 		<%
-		List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), organizationGroupId, 0, PropsValues.USER_ADMIN_ROLE_COLUMN_LIMIT);
+		List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), organizationGroupId, 0, PropsValues.USERS_ADMIN_ROLE_COLUMN_LIMIT);
 		int userGroupRolesCount = UserGroupRoleLocalServiceUtil.getUserGroupRolesCount(user2.getUserId(), organizationGroupId);
 		%>
 
@@ -47,7 +47,7 @@
 	<c:otherwise>
 
 		<%
-		List<Organization> userOrganizations = OrganizationLocalServiceUtil.getUserOrganizations(user2.getUserId(), 0, PropsValues.USER_ADMIN_ORGANIZATION_COLUMN_LIMIT);
+		List<Organization> userOrganizations = OrganizationLocalServiceUtil.getUserOrganizations(user2.getUserId(), 0, PropsValues.USERS_ADMIN_ORGANIZATION_COLUMN_LIMIT);
 		int userOrganizationsCount = OrganizationLocalServiceUtil.getUserOrganizationsCount(user2.getUserId());
 		%>
 
@@ -60,7 +60,7 @@
 </c:choose>
 
 <%
-List<UserGroup> userUserGroups = UserGroupLocalServiceUtil.getUserUserGroups(user2.getUserId(), 0, PropsValues.USER_ADMIN_USER_GROUP_COLUMN_LIMIT);
+List<UserGroup> userUserGroups = UserGroupLocalServiceUtil.getUserUserGroups(user2.getUserId(), 0, PropsValues.USERS_ADMIN_USER_GROUP_COLUMN_LIMIT);
 int userUserGroupsCount = UserGroupLocalServiceUtil.getUserUserGroupsCount(user2.getUserId());
 %>
 

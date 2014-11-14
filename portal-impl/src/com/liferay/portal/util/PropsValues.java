@@ -1618,11 +1618,11 @@ public class PropsValues {
 
 	public static final String[] SCRIPTING_JRUBY_LOAD_PATHS = PropsUtil.getArray(PropsKeys.SCRIPTING_JRUBY_LOAD_PATHS);
 
-	public static final int USER_ADMIN_ORGANIZATION_COLUMN_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USER_ADMIN_ORGANIZATION_COLUMN_LIMIT), 50);
+	public static final int USERS_ADMIN_ORGANIZATION_COLUMN_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USERS_ADMIN_ORGANIZATION_COLUMN_LIMIT), 50);
 
-	public static final int USER_ADMIN_ROLE_COLUMN_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USER_ADMIN_ROLE_COLUMN_LIMIT), 50);
+	public static final int USERS_ADMIN_ROLE_COLUMN_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USERS_ADMIN_ROLE_COLUMN_LIMIT), 50);
 
-	public static final int USER_ADMIN_USER_GROUP_COLUMN_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USER_ADMIN_USER_GROUP_COLUMN_LIMIT), 50);
+	public static final int USERS_ADMIN_USER_GROUP_COLUMN_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USERS_ADMIN_USER_GROUP_COLUMN_LIMIT), 50);
 
 	public static final int SEARCH_CONTAINER_PAGE_DEFAULT_DELTA = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA), 20);
 

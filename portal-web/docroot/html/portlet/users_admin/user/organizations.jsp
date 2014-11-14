@@ -69,7 +69,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "organi
 		int userGroupRolesCount = 0;
 
 		if (selUser != null) {
-			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), organization.getGroupId(), 0, PropsValues.USER_ADMIN_ROLE_COLUMN_LIMIT);
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId(), organization.getGroupId(), 0, PropsValues.USERS_ADMIN_ROLE_COLUMN_LIMIT);
 			userGroupRolesCount = UserGroupRoleLocalServiceUtil.getUserGroupRolesCount(selUser.getUserId(), organization.getGroupId());
 		}
 		%>
