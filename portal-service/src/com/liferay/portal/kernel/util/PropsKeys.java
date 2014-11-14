@@ -2627,12 +2627,6 @@ public interface PropsKeys {
 
 	public static final String UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR = "com.liferay.portal.upload.UploadServletRequestImpl.temp.dir";
 
-	public static final String USERS_ADMIN_ORGANIZATION_COLUMN_LIMIT = "users.admin.organization.column.limit";
-
-	public static final String USERS_ADMIN_ROLE_COLUMN_LIMIT = "users.admin.role.column.limit";
-
-	public static final String USERS_ADMIN_USER_GROUP_COLUMN_LIMIT = "users.admin.user.group.column.limit";
-
 	public static final String USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE = "user.groups.copy.layouts.to.user.personal.site";
 
 	public static final String USER_GROUPS_INDEXER_ENABLED = "user.groups.indexer.enabled";
@@ -2642,6 +2636,12 @@ public interface PropsKeys {
 	public static final String USER_GROUPS_SEARCH_WITH_INDEX = "user.groups.search.with.index";
 
 	public static final String USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED = "user.notification.event.confirmation.enabled";
+
+	public static final String USERS_ADMIN_ORGANIZATION_COLUMN_LIMIT = "users.admin.organization.column.limit";
+
+	public static final String USERS_ADMIN_ROLE_COLUMN_LIMIT = "users.admin.role.column.limit";
+
+	public static final String USERS_ADMIN_USER_GROUP_COLUMN_LIMIT = "users.admin.user.group.column.limit";
 
 	public static final String USERS_DELETE = "users.delete";
 
