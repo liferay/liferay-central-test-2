@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -521,30 +522,28 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		WikiImporter wikiImporter = _wikiImporters.get(importer);
 
 		if (wikiImporter == null) {
-			String importerClass = PropsUtil.get(
+			String importerClassName = PropsUtil.get(
 				PropsKeys.WIKI_IMPORTERS_CLASS, new Filter(importer));
 
-			if (importerClass != null) {
-				ClassLoader classLoader = getClassLoader();
-
+			if (importerClassName != null) {
 				try {
-					Class<?> clazz = classLoader.loadClass(importerClass);
-
-					wikiImporter = (WikiImporter)clazz.newInstance();
+					wikiImporter = (WikiImporter)InstanceFactory.newInstance(
+						getClassLoader(), importerClassName);
 
 					_wikiImporters.put(importer, wikiImporter);
 				}
 				catch (Exception e) {
 					throw new SystemException(
 						"Unable to instantiate wiki importer class " +
-							importerClass, e);
+							importerClassName,
+						e);
 				}
 			}
 
 			if (importer == null) {
 				throw new SystemException(
 					"Unable to instantiate wiki importer class " +
-						importerClass);
+						importerClassName);
 			}
 		}
 

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -695,12 +696,6 @@ public class WikiUtil {
 		return matcher.appendTail(sb).toString();
 	}
 
-	private ClassLoader _getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	private String _getEditPage(String format) {
 		return PropsUtil.get(
 			PropsKeys.WIKI_FORMATS_EDIT_PAGE, new Filter(format));
@@ -721,27 +716,25 @@ public class WikiUtil {
 			}
 
 			try {
-				String engineClass = PropsUtil.get(
+				String engineClassName = PropsUtil.get(
 					PropsKeys.WIKI_FORMATS_ENGINE, new Filter(format));
 
-				if (engineClass == null) {
+				if (engineClassName == null) {
 					throw new WikiFormatException(format);
 				}
 
-				ClassLoader classLoader = _getClassLoader();
+				Class<?> clazz = getClass();
 
-				Class<?> clazz = classLoader.loadClass(engineClass);
-
-				engine = (WikiEngine)clazz.newInstance();
-
-				engine.setMainConfiguration(
-					_readConfigurationFile(
-						PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN, format));
+				engine = (WikiEngine)InstanceFactory.newInstance(
+					clazz.getClassLoader(), engineClassName);
 
 				engine.setInterWikiConfiguration(
 					_readConfigurationFile(
 						PropsKeys.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
 						format));
+				engine.setMainConfiguration(
+					_readConfigurationFile(
+						PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN, format));
 
 				_engines.put(format, engine);
 
