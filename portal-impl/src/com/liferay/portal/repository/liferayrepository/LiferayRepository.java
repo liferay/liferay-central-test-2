@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.repository.util.RepositoryUserUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -811,9 +810,10 @@ public class LiferayRepository
 		throws PortalException {
 
 		return updateFileEntry(
-			RepositoryUserUtil.getUserId(), fileEntryId, sourceFileName,
-			mimeType, title, description, changeLog, majorVersion, file,
-			serviceContext);
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, file, serviceContext);
 	}
 
 	/**
@@ -831,9 +831,10 @@ public class LiferayRepository
 		throws PortalException {
 
 		return updateFileEntry(
-			RepositoryUserUtil.getUserId(), fileEntryId, sourceFileName,
-			mimeType, title, description, changeLog, majorVersion, is, size,
-			serviceContext);
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	@Override

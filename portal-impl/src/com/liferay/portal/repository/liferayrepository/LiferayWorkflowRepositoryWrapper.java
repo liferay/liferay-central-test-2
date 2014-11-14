@@ -17,7 +17,6 @@ package com.liferay.portal.repository.liferayrepository;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.util.RepositoryUserUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.repository.util.RepositoryWrapper;
 import com.liferay.portal.service.ServiceContext;
@@ -41,6 +40,7 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 		super(repository);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void revertFileEntry(
 			long fileEntryId, String version, ServiceContext serviceContext)
@@ -52,7 +52,9 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 		super.revertFileEntry(fileEntryId, version, serviceContext);
 
 		_startWorkflowInstance(
-			RepositoryUserUtil.getUserId(), dlFileVersion, serviceContext);
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			dlFileVersion, serviceContext);
 	}
 
 	@Override
@@ -108,9 +110,10 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 		throws PortalException {
 
 		return updateFileEntry(
-			RepositoryUserUtil.getUserId(), fileEntryId, sourceFileName,
-			mimeType, title, description, changeLog, majorVersion, file,
-			serviceContext);
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, file, serviceContext);
 	}
 
 	/**
@@ -128,9 +131,10 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 		throws PortalException {
 
 		return updateFileEntry(
-			RepositoryUserUtil.getUserId(), fileEntryId, sourceFileName,
-			mimeType, title, description, changeLog, majorVersion, is, size,
-			serviceContext);
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	/**
