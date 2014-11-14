@@ -40,8 +40,8 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 		super(repository);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
+	@SuppressWarnings("deprecation")
 	public void revertFileEntry(
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException {
