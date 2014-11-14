@@ -145,6 +145,37 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 	}
 
 	@Override
+	public FileEntry copyFileEntry(
+			long userId, long groupId, long fileEntryId, long destFolderId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		FileEntry fileEntry = super.copyFileEntry(
+			userId, groupId, fileEntryId, destFolderId, serviceContext);
+
+		_workflowCapability.addFileEntry(userId, fileEntry, serviceContext);
+
+		return fileEntry;
+	}
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #copyFileEntry(long, long,
+	 *             long, long, ServiceContext)}
+	 */
+	@Deprecated
+	@Override
+	public FileEntry copyFileEntry(
+			long groupId, long fileEntryId, long destFolderId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return copyFileEntry(
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			fileEntryId, destFolderId, serviceContext);
+	}
+
+	@Override
 	@SuppressWarnings("deprecation")
 	public void revertFileEntry(
 			long fileEntryId, String version, ServiceContext serviceContext)

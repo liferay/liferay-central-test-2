@@ -16,7 +16,6 @@ package com.liferay.portal.repository.capabilities;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.Repository;
-import com.liferay.portal.kernel.repository.capabilities.WorkflowCapability;
 import com.liferay.portal.kernel.repository.event.RepositoryEventTrigger;
 import com.liferay.portal.kernel.repository.event.RepositoryEventType;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -247,13 +246,6 @@ public class CapabilityRepository
 
 		FileEntry fileEntry = repository.copyFileEntry(
 			userId, groupId, fileEntryId, destFolderId, serviceContext);
-
-		WorkflowCapability workflowCapability = getInternalCapability(
-			WorkflowCapability.class);
-
-		if (workflowCapability != null) {
-			workflowCapability.addFileEntry(userId, fileEntry, serviceContext);
-		}
 
 		_repositoryEventTrigger.trigger(
 			RepositoryEventType.Add.class, FileEntry.class, fileEntry);
