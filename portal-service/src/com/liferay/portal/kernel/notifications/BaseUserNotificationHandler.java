@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.notifications;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -69,12 +68,10 @@ public abstract class BaseUserNotificationHandler
 					_DEFAULT_BODY_TEMPLATE,
 					new String[] {"[$BODY$]", "[$TITLE$]"},
 					new String[] {
-						LanguageUtil.format(
-							serviceContext.getLocale(),
+						serviceContext.translate(
 							"notification-for-x-was-deleted",
 							portlet.getDisplayName()),
-						LanguageUtil.get(
-							serviceContext.getLocale(),
+						serviceContext.translate(
 							"notification-no-longer-applies")
 					});
 
