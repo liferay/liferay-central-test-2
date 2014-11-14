@@ -745,11 +745,11 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 				clusterExecutorImpl.execute(
 					clusterRequest, mockClusterResponseCallback);
 
-			BlockingQueue<ClusterNodeResponse> partialResults =
+			BlockingQueue<ClusterNodeResponse> blockingQueue =
 				mockClusterResponseCallback.waitMessage();
 
 			Assert.assertSame(
-				futureClusterResponses.getPartialResults(), partialResults);
+				futureClusterResponses.getPartialResults(), blockingQueue);
 		}
 		finally {
 			if (clusterExecutorImpl != null) {
