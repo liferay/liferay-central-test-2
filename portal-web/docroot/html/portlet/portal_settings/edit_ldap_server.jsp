@@ -601,7 +601,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				);
 			}
 		},
-		['aui-io-plugin-deprecated', 'aui-io', 'liferay-util-window']
+		['aui-io', 'aui-io-plugin-deprecated', 'liferay-util-window']
 	);
 </aui:script>
 
