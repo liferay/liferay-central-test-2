@@ -16,7 +16,6 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
@@ -62,9 +61,7 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	@Override
-	public WorkflowTask fetchWorkflowTask(long companyId, long workflowTaskId)
-		throws WorkflowException {
-
+	public WorkflowTask fetchWorkflowTask(long companyId, long workflowTaskId) {
 		throw new UnsupportedOperationException();
 	}
 
