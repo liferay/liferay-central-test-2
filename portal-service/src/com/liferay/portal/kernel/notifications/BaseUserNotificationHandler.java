@@ -67,7 +67,7 @@ public abstract class BaseUserNotificationHandler
 
 				String body = StringUtil.replace(
 					_DEFAULT_BODY_TEMPLATE,
-					new String[]{"[$BODY$]", "[$TITLE$]"},
+					new String[] {"[$BODY$]", "[$TITLE$]"},
 					new String[] {
 						LanguageUtil.format(
 							serviceContext.getLocale(),
@@ -75,7 +75,8 @@ public abstract class BaseUserNotificationHandler
 							portlet.getDisplayName()),
 						LanguageUtil.get(
 							serviceContext.getLocale(),
-							"notification-no-longer-applies")});
+							"notification-no-longer-applies")
+					});
 
 				userNotificationFeedEntry = new UserNotificationFeedEntry(
 					false, body, StringPool.BLANK);
