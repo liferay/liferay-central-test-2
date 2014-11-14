@@ -114,8 +114,8 @@ public class DDMImpl implements DDM {
 
 			if (refererPortletName == null) {
 				throw new IllegalArgumentException(
-					"ServiceContext must have either refererPortletName or " +
-						"portletPreferenceIds set.");
+					"Service context must have values for either " +
+						"the referer portlet nme or portlet preference IDs");
 			}
 		}
 
