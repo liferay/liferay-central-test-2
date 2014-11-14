@@ -659,19 +659,21 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 				public void addCriteria(DynamicQuery dynamicQuery) {
 					addCriteriaMethod.addCriteria(dynamicQuery);
 
+					Conjunction conjunction =
+						RestrictionsFactoryUtil.conjunction();
+
 					Property classNameIdProperty = PropertyFactoryUtil.forName(
 						"classNameId");
 
 					long liferayRepositoryClassNameId =
 						PortalUtil.getClassNameId(LiferayRepository.class);
-					long tempFileRepositoryClassNameId =
-						PortalUtil.getClassNameId(TempFileEntryUtil.class);
-
-					Conjunction conjunction =
-						RestrictionsFactoryUtil.conjunction();
 
 					conjunction.add(
 						classNameIdProperty.ne(liferayRepositoryClassNameId));
+
+					long tempFileRepositoryClassNameId =
+						PortalUtil.getClassNameId(TempFileEntryUtil.class);
+
 					conjunction.add(
 						classNameIdProperty.ne(tempFileRepositoryClassNameId));
 
