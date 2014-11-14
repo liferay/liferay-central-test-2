@@ -63,13 +63,6 @@ public class CapabilityRepository
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, file, serviceContext);
 
-		WorkflowCapability workflowCapability = getInternalCapability(
-			WorkflowCapability.class);
-
-		if (workflowCapability != null) {
-			workflowCapability.addFileEntry(userId, fileEntry, serviceContext);
-		}
-
 		_repositoryEventTrigger.trigger(
 			RepositoryEventType.Add.class, FileEntry.class, fileEntry);
 
@@ -88,13 +81,6 @@ public class CapabilityRepository
 		FileEntry fileEntry = repository.addFileEntry(
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, is, size, serviceContext);
-
-		WorkflowCapability workflowCapability = getInternalCapability(
-			WorkflowCapability.class);
-
-		if (workflowCapability != null) {
-			workflowCapability.addFileEntry(userId, fileEntry, serviceContext);
-		}
 
 		_repositoryEventTrigger.trigger(
 			RepositoryEventType.Add.class, FileEntry.class, fileEntry);

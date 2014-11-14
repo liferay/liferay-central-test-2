@@ -38,6 +38,78 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 	}
 
 	@Override
+	public FileEntry addFileEntry(
+			long userId, long folderId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog, File file,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		FileEntry fileEntry = super.addFileEntry(
+			userId, folderId, sourceFileName, mimeType, title, description,
+			changeLog, file, serviceContext);
+
+		_workflowCapability.addFileEntry(userId, fileEntry, serviceContext);
+
+		return fileEntry;
+	}
+
+	@Override
+	public FileEntry addFileEntry(
+			long userId, long folderId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog, InputStream is,
+			long size, ServiceContext serviceContext)
+		throws PortalException {
+
+		FileEntry fileEntry = super.addFileEntry(
+			userId, folderId, sourceFileName, mimeType, title, description,
+			changeLog, is, size, serviceContext);
+
+		_workflowCapability.addFileEntry(userId, fileEntry, serviceContext);
+
+		return fileEntry;
+	}
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #addFileEntry(long, long,
+	 *             String, String, String, String, String, File,
+	 *             ServiceContext)}
+	 */
+	@Deprecated
+	@Override
+	public FileEntry addFileEntry(
+			long folderId, String sourceFileName, String mimeType, String title,
+			String description, String changeLog, File file,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return addFileEntry(
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			sourceFileName, mimeType, title, description, changeLog, file,
+			serviceContext);
+	}
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #addFileEntry(long, long,
+	 *             String, String, String, String, String, InputStream, long,
+	 *             ServiceContext)}
+	 */
+	@Deprecated
+	@Override
+	public FileEntry addFileEntry(
+			long folderId, String sourceFileName, String mimeType, String title,
+			String description, String changeLog, InputStream is, long size,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return addFileEntry(
+			com.liferay.portal.kernel.repository.util.RepositoryUserUtil.
+				getUserId(),
+			sourceFileName, mimeType, title, description, changeLog, is, size,
+			serviceContext);
+	}
+
+	@Override
 	@SuppressWarnings("deprecation")
 	public void revertFileEntry(
 			long fileEntryId, String version, ServiceContext serviceContext)
