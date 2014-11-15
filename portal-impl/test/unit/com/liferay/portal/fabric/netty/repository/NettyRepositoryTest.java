@@ -292,7 +292,6 @@ public class NettyRepositoryTest {
 
 		Path localFilePath1 = FileServerTestUtil.registerForCleanUp(
 			_repositoryPath.resolve("localFile1"));
-
 		Path localFilePath2 = FileServerTestUtil.registerForCleanUp(
 			_repositoryPath.resolve("localFile2"));
 
