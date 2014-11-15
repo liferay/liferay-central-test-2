@@ -216,11 +216,11 @@ AUI.add(
 
 					var ratings = Liferay.Ratings.StarRating;
 
-					if (config.type === 'thumbs') {
-						ratings = Liferay.Ratings.ThumbRating;
-					}
-					else if (config.type === 'like') {
+					if (config.type === 'like') {
 						ratings = Liferay.Ratings.LikeRating;
+					}
+					else if (config.type === 'thumbs') {
+						ratings = Liferay.Ratings.ThumbRating;
 					}
 
 					var ratingInstance = new ratings(config);
@@ -502,9 +502,9 @@ AUI.add(
 			}
 		);
 
+		Ratings.LikeRating = LikeRating;
 		Ratings.StarRating = StarRating;
 		Ratings.ThumbRating = ThumbRating;
-		Ratings.LikeRating = LikeRating;
 
 		Liferay.Ratings = Ratings;
 	},
