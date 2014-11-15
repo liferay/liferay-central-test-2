@@ -21,7 +21,7 @@
 		white-space: nowrap;
 	}
 
-	&.thumbs, &.like {
+	&.like, &.thumbs {
 		float: left;
 		margin: 10px 0;
 
