@@ -118,6 +118,7 @@ boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("
 
 	<%
 	Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
+
 	contentsLanguageId = LocaleUtil.toLanguageId(contentsLocale);
 
 	String contentsLanguageDir = LanguageUtil.get(contentsLocale, "lang.dir");
