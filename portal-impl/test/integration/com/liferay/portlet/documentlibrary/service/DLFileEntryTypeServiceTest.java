@@ -306,10 +306,8 @@ public class DLFileEntryTypeServiceTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		DLFileEntryType defaultFileEntryType = dlFileEntryTypes[0];
-
 		serviceContext.setAttribute(
-			"defaultFileEntryTypeId", defaultFileEntryType.getPrimaryKey());
+			"defaultFileEntryTypeId", dlFileEntryTypes[0].getPrimaryKey());
 		serviceContext.setAttribute(
 			"dlFileEntryTypesSearchContainerPrimaryKeys",
 			ArrayUtil.toString(dlFileEntryTypes, "primaryKey"));
