@@ -85,7 +85,7 @@ public class LiferayWorkflowCapability implements WorkflowCapability {
 			long userId, FileEntry fileEntry, ServiceContext serviceContext)
 		throws PortalException {
 
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class LiferayWorkflowCapability implements WorkflowCapability {
 			long userId, FileEntry fileEntry, ServiceContext serviceContext)
 		throws PortalException {
 
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 }
