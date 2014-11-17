@@ -49,13 +49,14 @@
 			<aui:fieldset cssClass="subscriptions">
 
 				<%
-				String[] titles = rssDisplayContext.getTitles();
 				String[] urls = rssDisplayContext.getURLs();
 
 				if (urls.length == 0) {
 					urls = new String[1];
 					urls[0] = StringPool.BLANK;
 				}
+
+				String[] titles = rssDisplayContext.getTitles();
 
 				for (int i = 0; i < urls.length; i++) {
 					String title = StringPool.BLANK;

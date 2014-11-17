@@ -55,15 +55,15 @@ SyndFeed syndFeed = rssFeedContext.getSyndFeed();
 			</c:if>
 
 			<%
-			List entries = syndFeed.getEntries();
+			List syndEntries = syndFeed.getEntries();
 			%>
 
-			<c:if test="<%= !entries.isEmpty() %>">
+			<c:if test="<%= !syndEntries.isEmpty() %>">
 				<liferay-ui:panel-container cssClass="feed-entries" extended="<%= false %>" id="rssFeedsPanelContainer" persistState="<%= false %>">
 
 					<%
-					for (int j = 0; (j < entries.size()) && (j < rssDisplayContext.getEntriesPerFeed()); j++) {
-						SyndEntry syndEntry = (SyndEntry)entries.get(j);
+					for (int j = 0; (j < syndEntries.size()) && (j < rssDisplayContext.getEntriesPerFeed()); j++) {
+						SyndEntry syndEntry = (SyndEntry)syndEntries.get(j);
 
 						RSSFeedEntryDisplayContext rssFeedEntryDisplayContext = new RSSFeedEntryDisplayContext(syndEntry, request, rssFeedContext);
 					%>

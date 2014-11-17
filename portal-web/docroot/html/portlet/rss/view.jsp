@@ -19,8 +19,7 @@
 <div id="<portlet:namespace />feedsContainer">
 
 	<%
-	List<RSSFeedContext> rssFeedContexts =
-		rssDisplayContext.getRSSFeedContexts();
+	List<RSSFeedContext> rssFeedContexts = rssDisplayContext.getRSSFeedContexts();
 
 	for (int i = 0; i < rssFeedContexts.size(); i++) {
 		RSSFeedContext rssFeedContext = rssFeedContexts.get(i);
