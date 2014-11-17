@@ -28,9 +28,9 @@ public interface DLFilePicker {
 
 	public String getIconFieldName() throws PortalException;
 
-	public String getJavascript() throws PortalException;
+	public String getJavaScript() throws PortalException;
 
-	public String getJavascriptModuleName() throws PortalException;
+	public String getJavaScriptModuleName() throws PortalException;
 
 	public String getOnClickCallback() throws PortalException;
 

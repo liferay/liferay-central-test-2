@@ -38,14 +38,17 @@ DLFilePicker dlFilePicker = dlEditFileEntryDisplayContext.getDLFilePicker("onFil
 		<aui:script sandbox="<%= true %>">
 			var onFilePick = function(fields) {
 				var documentIconURL = fields['<%= dlFilePicker.getIconFieldName() %>'];
-				var documentTitle = fields['<%= dlFilePicker.getTitleFieldName() %>'];
-				var documentDescription = fields['<%= dlFilePicker.getDescriptionFieldName() %>'];
 
 				$('#<portlet:namespace />pickButtonIcon').attr('src', documentIconURL);
+
+				var documentTitle = fields['<%= dlFilePicker.getTitleFieldName() %>'];
 
 				$('#<portlet:namespace />pickButtonTitle').html(documentTitle);
 
 				$('#<portlet:namespace />title').val(documentTitle);
+
+				var documentDescription = fields['<%= dlFilePicker.getDescriptionFieldName() %>'];
+
 				$('#<portlet:namespace />description').val(documentDescription);
 
 				$('#<portlet:namespace />fm .lfr-ddm-container .field-wrapper').each(
@@ -60,9 +63,9 @@ DLFilePicker dlFilePicker = dlEditFileEntryDisplayContext.getDLFilePicker("onFil
 				);
 			};
 
-			<%= dlFilePicker.getJavascript() %>
+			<%= dlFilePicker.getJavaScript() %>
 
-			var filePicker = new <%= dlFilePicker.getJavascriptModuleName() %>(
+			var filePicker = new <%= dlFilePicker.getJavaScriptModuleName() %>(
 				function() {
 					Liferay.Util.toggleDisabled($('.customized-file-button'), false);
 				}

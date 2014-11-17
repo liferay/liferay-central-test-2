@@ -974,7 +974,6 @@ public class EditFileEntryAction extends PortletAction {
 
 			if (uploadPortletRequest.getParameter("file") != null) {
 				contentType = uploadPortletRequest.getContentType("file");
-
 				size = uploadPortletRequest.getSize("file");
 			}
 

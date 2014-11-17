@@ -61,7 +61,7 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 	}
 
 	@Override
-	public String getJavascript() throws PortalException {
+	public String getJavaScript() throws PortalException {
 		try {
 			FreeMarkerRenderer freeMarkerRenderer = new FreeMarkerRenderer(
 				"com/liferay/document/library/google/docs/context/"+
@@ -73,9 +73,7 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 			freeMarkerRenderer.setAttribute(
 				"googleClientId",
 				_googleDocsConfigurationHelper.getGoogleClientId());
-
 			freeMarkerRenderer.setAttribute("namespace", _namespace);
-
 			freeMarkerRenderer.setAttribute(
 				"onFilePickCallback", _onFilePickCallback);
 
@@ -87,7 +85,7 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 	}
 
 	@Override
-	public String getJavascriptModuleName() {
+	public String getJavaScriptModuleName() {
 		return "FilePicker";
 	}
 
