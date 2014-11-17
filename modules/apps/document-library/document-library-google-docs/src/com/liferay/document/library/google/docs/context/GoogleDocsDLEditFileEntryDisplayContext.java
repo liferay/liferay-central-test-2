@@ -59,9 +59,7 @@ public class GoogleDocsDLEditFileEntryDisplayContext
 	}
 
 	@Override
-	public DLFilePicker getDLFilePicker(String onFilePickCallback)
-		throws PortalException {
-
+	public DLFilePicker getDLFilePicker(String onFilePickCallback) {
 		GoogleDocsMetadataHelper googleDocsMetadataHelper =
 			new GoogleDocsMetadataHelper(dlFileEntryType);
 

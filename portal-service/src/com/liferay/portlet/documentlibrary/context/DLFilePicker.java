@@ -22,18 +22,18 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
  */
 public interface DLFilePicker {
 
-	public DDMStructure getDDMStructure() throws PortalException;
+	public DDMStructure getDDMStructure();
 
-	public String getDescriptionFieldName() throws PortalException;
+	public String getDescriptionFieldName();
 
-	public String getIconFieldName() throws PortalException;
+	public String getIconFieldName();
 
 	public String getJavaScript() throws PortalException;
 
-	public String getJavaScriptModuleName() throws PortalException;
+	public String getJavaScriptModuleName();
 
-	public String getOnClickCallback() throws PortalException;
+	public String getOnClickCallback();
 
-	public String getTitleFieldName() throws PortalException;
+	public String getTitleFieldName();
 
 }

@@ -46,17 +46,17 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 	}
 
 	@Override
-	public DDMStructure getDDMStructure() throws PortalException {
+	public DDMStructure getDDMStructure() {
 		return _googleDocsMetadataHelper.getDDMStructure();
 	}
 
 	@Override
-	public String getDescriptionFieldName() throws PortalException {
+	public String getDescriptionFieldName() {
 		return GoogleDocsConstants.DDM_FIELD_NAME_DESCRIPTION;
 	}
 
 	@Override
-	public String getIconFieldName() throws PortalException {
+	public String getIconFieldName() {
 		return GoogleDocsConstants.DDM_FIELD_NAME_ICON;
 	}
 
@@ -79,8 +79,11 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 
 			return freeMarkerRenderer.render();
 		}
-		catch (IOException | TemplateException e) {
-			throw new PortalException(e);
+		catch (IOException ioe) {
+			throw new PortalException(ioe);
+		}
+		catch (TemplateException te) {
+			throw new PortalException(te);
 		}
 	}
 
@@ -90,12 +93,12 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 	}
 
 	@Override
-	public String getOnClickCallback() throws PortalException {
+	public String getOnClickCallback() {
 		return "openPicker";
 	}
 
 	@Override
-	public String getTitleFieldName() throws PortalException {
+	public String getTitleFieldName() {
 		return GoogleDocsConstants.DDM_FIELD_NAME_TITLE;
 	}
 

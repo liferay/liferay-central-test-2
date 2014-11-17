@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -114,7 +113,7 @@ public class GoogleDocsDLViewFileVersionDisplayContext
 	@Override
 	public void renderPreview(
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws IOException {
 
 		PrintWriter printWriter = response.getWriter();
 
