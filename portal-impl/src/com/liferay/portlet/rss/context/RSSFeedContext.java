@@ -104,10 +104,10 @@ public class RSSFeedContext {
 		}
 
 		try {
-			ObjectValuePair ovp = com.liferay.portlet.rss.util.RSSUtil.getFeed(
-				_url);
+			ObjectValuePair<String, SyndFeed> ovp =
+				com.liferay.portlet.rss.util.RSSUtil.getFeed(_url);
 
-			_syndFeed = (SyndFeed)ovp.getValue();
+			_syndFeed = ovp.getValue();
 		}
 		catch (Exception e) {
 		}
