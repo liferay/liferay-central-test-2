@@ -1026,10 +1026,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 			DLFolder dlFolder = null;
 
-			Set<Long> originalDLFileEntryTypeIds = new HashSet<Long>();
+			Set<Long> originalFileEntryTypeIds = new HashSet<Long>();
 
 			if (folderId > DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				originalDLFileEntryTypeIds = getDLFileEntryTypeIds(
+				originalFileEntryTypeIds = getFileEntryTypeIds(
 					dlFolderPersistence.getDLFileEntryTypes(folderId));
 
 				dlFolder = dlFolderLocalService.updateFolderAndFileEntryTypes(
@@ -1067,17 +1067,15 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			else if (restrictionType ==
 						DLFolderConstants.RESTRICTION_TYPE_INHERIT) {
 
-				if (originalDLFileEntryTypeIds.isEmpty()) {
-					originalDLFileEntryTypeIds.add(
+				if (originalFileEntryTypeIds.isEmpty()) {
+					originalFileEntryTypeIds.add(
 						DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL);
 				}
 
-				for (long originalDLFileEntryTypeId :
-						originalDLFileEntryTypeIds) {
-
+				for (long originalFileEntryTypeId : originalFileEntryTypeIds) {
 					workflowDefinitionOVPs.add(
 						new ObjectValuePair<Long, String>(
-							originalDLFileEntryTypeId, StringPool.BLANK));
+							originalFileEntryTypeId, StringPool.BLANK));
 				}
 			}
 			else if (restrictionType ==
@@ -1093,12 +1091,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 						DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL,
 						workflowDefinition));
 
-				for (long originalDLFileEntryTypeId :
-						originalDLFileEntryTypeIds) {
-
+				for (long originalFileEntryTypeId : originalFileEntryTypeIds) {
 					workflowDefinitionOVPs.add(
 						new ObjectValuePair<Long, String>(
-							originalDLFileEntryTypeId, StringPool.BLANK));
+							originalFileEntryTypeId, StringPool.BLANK));
 				}
 			}
 
@@ -1385,16 +1381,16 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		addFolderResources(dlFolder, groupPermissions, guestPermissions);
 	}
 
-	protected Set<Long> getDLFileEntryTypeIds(
+	protected Set<Long> getFileEntryTypeIds(
 		List<DLFileEntryType> dlFileEntryTypes) {
 
-		Set<Long> dlFileEntryTypeIds = new HashSet<Long>();
+		Set<Long> fileEntryTypeIds = new HashSet<Long>();
 
 		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
-			dlFileEntryTypeIds.add(dlFileEntryType.getFileEntryTypeId());
+			fileEntryTypeIds.add(dlFileEntryType.getFileEntryTypeId());
 		}
 
-		return dlFileEntryTypeIds;
+		return fileEntryTypeIds;
 	}
 
 	protected long getParentFolderId(DLFolder dlFolder, long parentFolderId)
