@@ -156,12 +156,10 @@ public class LiferayLocalRepository
 
 	@Override
 	public FileEntry copyFileEntry(
-			long userId, long groupId, long fileEntryId, long destFolderId,
-			ServiceContext serviceContext)
-		throws PortalException {
+		long userId, long groupId, long fileEntryId, long destFolderId,
+		ServiceContext serviceContext) {
 
-		throw new UnsupportedOperationException(
-			"This method is not supported by this repository");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
