@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.rss.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndImage;
@@ -104,8 +105,7 @@ public class RSSFeedContext {
 		}
 
 		try {
-			ObjectValuePair<String, SyndFeed> ovp =
-				com.liferay.portlet.rss.util.RSSUtil.getFeed(_url);
+			ObjectValuePair<String, SyndFeed> ovp = RSSUtil.getFeed(_url);
 
 			_syndFeed = ovp.getValue();
 		}
