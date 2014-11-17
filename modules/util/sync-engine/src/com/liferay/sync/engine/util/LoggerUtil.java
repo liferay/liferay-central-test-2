@@ -39,13 +39,13 @@ public class LoggerUtil {
 
 		loggerContext.reset();
 
-		JoranConfigurator configurator = new JoranConfigurator();
+		JoranConfigurator joranConfigurator = new JoranConfigurator();
 
-		configurator.setContext(loggerContext);
+		joranConfigurator.setContext(loggerContext);
 
 		try {
 			if (Files.exists(Paths.get(loggerConfigurationFilePathName))) {
-				configurator.doConfigure(loggerConfigurationFilePathName);
+				joranConfigurator.doConfigure(loggerConfigurationFilePathName);
 			}
 			else {
 				ClassLoader classLoader = LoggerUtil.class.getClassLoader();
@@ -53,7 +53,7 @@ public class LoggerUtil {
 				URL url = classLoader.getResource(
 					PropsValues.SYNC_LOGGER_CONFIGURATION_FILE);
 
-				configurator.doConfigure(url);
+				joranConfigurator.doConfigure(url);
 			}
 		}
 		catch (Exception e) {
