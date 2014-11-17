@@ -29,9 +29,9 @@
 
 	<logger name="com.liferay.sync.engine.documentlibrary.event.GetSyncContextEvent" level="ERROR" />
 
-	<logger name="org.apache" level ="ERROR" />
+	<logger name="org.apache" level="ERROR" />
 
-	<root value="TRACE">
+	<root level="TRACE">
 		<appender-ref ref="FILE" />
 	</root>
 </configuration>
