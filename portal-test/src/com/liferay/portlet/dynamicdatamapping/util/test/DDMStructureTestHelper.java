@@ -75,7 +75,7 @@ public class DDMStructureTestHelper {
 	}
 
 	public DDMStructure addStructureXsd(Class<?> testClass) throws Exception {
-		String definition = DDLRecordTestUtil.readText(
+		String definition = DDLRecordTestUtil.read(
 			testClass, "test-structure.xsd");
 
 		return addStructure(definition, StorageType.XML.toString());

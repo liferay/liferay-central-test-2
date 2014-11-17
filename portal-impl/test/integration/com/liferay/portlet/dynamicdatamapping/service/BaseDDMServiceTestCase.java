@@ -155,7 +155,7 @@ public class BaseDDMServiceTestCase {
 		String text = StringPool.BLANK;
 
 		if (storageType.equals(StorageType.XML.getValue())) {
-			text = readText("test-structure.xsd");
+			text = read("test-structure.xsd");
 		}
 
 		return text;
@@ -168,13 +168,13 @@ public class BaseDDMServiceTestCase {
 			text = "#set ($preferences = $renderRequest.getPreferences())";
 		}
 		else if (language.equals("xsd")) {
-			text = readText("test-template.xsd");
+			text = read("test-template.xsd");
 		}
 
 		return text;
 	}
 
-	protected String readText(String fileName) throws Exception {
+	protected String read(String fileName) throws Exception {
 		Class<?> clazz = getClass();
 
 		return StringUtil.read(

@@ -93,7 +93,7 @@ public class DDLRecordTestUtil {
 		return serviceContext;
 	}
 
-	public static String readText(Class<?> testClass, String fileName)
+	public static String read(Class<?> testClass, String fileName)
 		throws Exception {
 
 		return StringUtil.read(
