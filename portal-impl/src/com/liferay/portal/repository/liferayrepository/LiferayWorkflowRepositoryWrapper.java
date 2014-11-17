@@ -265,6 +265,7 @@ public class LiferayWorkflowRepositoryWrapper extends RepositoryWrapper {
 			changeLog, majorVersion, is, size, serviceContext);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void _checkInFileEntry(
 			long fileEntryId, ServiceContext serviceContext)
 		throws PortalException {
