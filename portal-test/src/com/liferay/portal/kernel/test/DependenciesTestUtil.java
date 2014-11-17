@@ -27,6 +27,7 @@ public class DependenciesTestUtil {
 		throws Exception {
 
 		ClassLoader classLoader = clazz.getClassLoader();
+
 		InputStream inputStream = classLoader.getResourceAsStream(name);
 
 		return StringUtil.read(inputStream);

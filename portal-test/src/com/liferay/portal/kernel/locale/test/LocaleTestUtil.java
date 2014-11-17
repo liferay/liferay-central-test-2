@@ -25,10 +25,10 @@ import java.util.Map;
  */
 public class LocaleTestUtil {
 
-	public static Map<Locale, String> getDefaultLocaleMap(String defaultValue) {
+	public static Map<Locale, String> getDefaultLocaleMap(String value) {
 		Map<Locale, String> map = new HashMap<Locale, String>();
 
-		map.put(LocaleUtil.getSiteDefault(), defaultValue);
+		map.put(LocaleUtil.getSiteDefault(), value);
 
 		return map;
 	}

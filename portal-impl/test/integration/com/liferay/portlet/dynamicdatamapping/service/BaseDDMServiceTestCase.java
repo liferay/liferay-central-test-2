@@ -42,10 +42,9 @@ public class BaseDDMServiceTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		Group testGroup = GroupTestUtil.addGroup();
+		group = GroupTestUtil.addGroup();
 
-		ddmStructureTestHelper = new DDMStructureTestHelper(testGroup);
-		group = testGroup;
+		ddmStructureTestHelper = new DDMStructureTestHelper(group);
 	}
 
 	protected DDMTemplate addDisplayTemplate(

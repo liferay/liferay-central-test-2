@@ -160,7 +160,7 @@ public class DDLRecordSearchTest {
 
 		String vendor = searchEngine.getVendor();
 
-		if ("SOLR".equals(vendor) || "Lucene".equals(vendor)) {
+		if (vendor.equals("Lucene") || vendor.equals("SOLR")) {
 			return true;
 		}
 
