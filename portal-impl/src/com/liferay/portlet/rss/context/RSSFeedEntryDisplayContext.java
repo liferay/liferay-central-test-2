@@ -47,13 +47,9 @@ public class RSSFeedEntryDisplayContext {
 		SyndEntry syndEntry, HttpServletRequest request,
 		RSSFeedContext rssFeedContext) {
 
-		String syndEntryLink = syndEntry.getLink();
-
-		if (Validator.isNotNull(syndEntryLink) &&
-			!HttpUtil.hasDomain(syndEntryLink)) {
-
-			syndEntryLink = rssFeedContext.getBaseURL() + syndEntryLink;
-		}
+		_syndEntry = syndEntry;
+		_request = request;
+		_rssFeedContext = rssFeedContext;
 
 		List<SyndEnclosure> syndEnclosures = syndEntry.getEnclosures();
 
@@ -79,12 +75,18 @@ public class RSSFeedEntryDisplayContext {
 			}
 		}
 
-		_syndEntry = syndEntry;
-		_syndEntryLink = syndEntryLink;
 		_syndEnclosureLink = syndEnclosureLink;
 		_syndEnclosureLinkTitle = syndEnclosureLinkTitle;
-		_request = request;
-		_rssFeedContext = rssFeedContext;
+
+		String syndEntryLink = syndEntry.getLink();
+
+		if (Validator.isNotNull(syndEntryLink) &&
+			!HttpUtil.hasDomain(syndEntryLink)) {
+
+			syndEntryLink = rssFeedContext.getBaseURL() + syndEntryLink;
+		}
+
+		_syndEntryLink = syndEntryLink;
 	}
 
 	public String getSanitizedContent() {

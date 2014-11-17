@@ -101,10 +101,12 @@ public class RSSDisplayContext {
 		List<RSSFeedContext> rssFeedContexts = new ArrayList<RSSFeedContext>();
 
 		String[] titles = getTitles();
+
 		String[] urls = getURLs();
 
 		for (int i = 0; i < urls.length; i++) {
 			String url = urls[i];
+
 			String title = StringPool.BLANK;
 
 			if (i < titles.length) {
