@@ -77,8 +77,8 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		try {
 			addStructure(
 				_CLASS_NAME_ID, null, "Test Structure",
-				read("ddm-structure-duplicate-element-name.xsd"),
-				storageType, DDMStructureConstants.TYPE_DEFAULT);
+				read("ddm-structure-duplicate-element-name.xsd"), storageType,
+				DDMStructureConstants.TYPE_DEFAULT);
 
 			Assert.fail();
 		}
@@ -95,14 +95,14 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		try {
 			DDMStructure parentStructure = addStructure(
 				_CLASS_NAME_ID, null, "Test Parent Structure",
-				read("ddm-structure-duplicate-element-name.xsd"),
-				storageType, DDMStructureConstants.TYPE_DEFAULT);
+				read("ddm-structure-duplicate-element-name.xsd"), storageType,
+				DDMStructureConstants.TYPE_DEFAULT);
 
 			addStructure(
 				parentStructure.getStructureId(), _CLASS_NAME_ID, null,
 				"Test Structure",
-				read("ddm-structure-duplicate-element-name.xsd"),
-				storageType, DDMStructureConstants.TYPE_DEFAULT);
+				read("ddm-structure-duplicate-element-name.xsd"), storageType,
+				DDMStructureConstants.TYPE_DEFAULT);
 
 			Assert.fail();
 		}

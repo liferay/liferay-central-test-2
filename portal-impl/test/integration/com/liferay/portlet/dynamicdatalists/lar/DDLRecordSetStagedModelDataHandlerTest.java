@@ -86,13 +86,13 @@ public class DDLRecordSetStagedModelDataHandlerTest
 			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
+		DDLRecordSetTestHelper recordSetTestHelper = new DDLRecordSetTestHelper(
+			group);
+
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			DDMStructure.class.getSimpleName());
 
 		DDMStructure ddmStructure = (DDMStructure)dependentStagedModels.get(0);
-
-		DDLRecordSetTestHelper recordSetTestHelper = new DDLRecordSetTestHelper(
-			group);
 
 		return recordSetTestHelper.addRecordSet(ddmStructure);
 	}

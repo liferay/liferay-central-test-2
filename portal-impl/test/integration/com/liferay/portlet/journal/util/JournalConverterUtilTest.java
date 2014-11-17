@@ -160,8 +160,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 
 		fields.put(fieldsDisplayField);
 
-		String expectedContent = read(
-			"test-journal-content-list-field.xml");
+		String expectedContent = read("test-journal-content-list-field.xml");
 
 		String actualContent = JournalConverterUtil.getContent(
 			_ddmStructure, fields);
@@ -196,8 +195,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 	public void testGetContentFromNestedFields() throws Exception {
 		Fields fields = getNestedFields(_ddmStructure.getStructureId());
 
-		String expectedContent = read(
-			"test-journal-content-nested-fields.xml");
+		String expectedContent = read("test-journal-content-nested-fields.xml");
 
 		String actualContent = JournalConverterUtil.getContent(
 			_ddmStructure, fields);
@@ -264,8 +262,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 
 		fields.put(fieldsDisplayField);
 
-		String expectedContent = read(
-			"test-journal-content-text-field.xml");
+		String expectedContent = read("test-journal-content-text-field.xml");
 
 		String actualContent = JournalConverterUtil.getContent(
 			_ddmStructure, fields);
@@ -392,8 +389,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 		expectedFields.put(fieldsDisplayField);
 
 		String content = replaceLinksToLayoutsParameters(
-			read("test-journal-content-link-to-page-field.xml"),
-			layoutsMap);
+			read("test-journal-content-link-to-page-field.xml"), layoutsMap);
 
 		Fields actualFields = JournalConverterUtil.getDDMFields(
 			_ddmStructure, content);
