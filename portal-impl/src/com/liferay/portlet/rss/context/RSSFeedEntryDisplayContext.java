@@ -55,8 +55,7 @@ public class RSSFeedEntryDisplayContext {
 			syndEntryLink = rssFeedContext.getBaseURL() + syndEntryLink;
 		}
 
-		List<SyndEnclosure> syndEnclosures =
-			(List<SyndEnclosure>)syndEntry.getEnclosures();
+		List<SyndEnclosure> syndEnclosures = syndEntry.getEnclosures();
 
 		String syndEnclosureLink = StringPool.BLANK;
 		String syndEnclosureLinkTitle = syndEntry.getTitle();
