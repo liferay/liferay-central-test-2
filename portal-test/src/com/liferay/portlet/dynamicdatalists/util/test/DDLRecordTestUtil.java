@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.dynamicdatalists.util.test;
 
-import com.liferay.portal.kernel.test.DependenciesTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -97,8 +96,8 @@ public class DDLRecordTestUtil {
 	public static String readText(Class<?> testClass, String fileName)
 		throws Exception {
 
-		return DependenciesTestUtil.readText(
-			testClass, getBasePath() + fileName);
+		return StringUtil.read(
+			testClass.getClassLoader(), getBasePath() + fileName);
 	}
 
 }

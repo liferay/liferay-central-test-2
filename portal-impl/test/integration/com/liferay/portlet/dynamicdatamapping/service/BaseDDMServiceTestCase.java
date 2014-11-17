@@ -16,8 +16,8 @@ package com.liferay.portlet.dynamicdatamapping.service;
 
 import com.liferay.portal.kernel.locale.test.LocaleTestUtil;
 import com.liferay.portal.kernel.template.TemplateConstants;
-import com.liferay.portal.kernel.test.DependenciesTestUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.test.DeleteAfterTestRun;
 import com.liferay.portal.util.PortalUtil;
@@ -175,8 +175,10 @@ public class BaseDDMServiceTestCase {
 	}
 
 	protected String readText(String fileName) throws Exception {
-		return DependenciesTestUtil.readText(
-			getClass(), getBasePath() + fileName);
+		Class<?> clazz = getClass();
+
+		return StringUtil.read(
+			clazz.getClassLoader(), getBasePath() + fileName);
 	}
 
 	protected DDMStructureTestHelper ddmStructureTestHelper;
