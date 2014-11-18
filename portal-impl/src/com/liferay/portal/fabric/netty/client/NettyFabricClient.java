@@ -341,8 +341,8 @@ public class NettyFabricClient implements FabricClient {
 
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Forcibly terminate fabric worker: " +
-									entry.getKey() + ", with exit code :" +
+								"Forcibly terminate fabric worker " +
+									entry.getKey() + " with exit code " +
 										tpe.getExitCode());
 						}
 
@@ -351,7 +351,7 @@ public class NettyFabricClient implements FabricClient {
 				}
 
 				_log.error(
-					"Unable to terminate fabric worker: " + entry.getKey(), t);
+					"Unable to terminate fabric worker " + entry.getKey(), t);
 			}
 		}
 	}
