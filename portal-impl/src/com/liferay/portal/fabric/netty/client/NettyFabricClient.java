@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.concurrent.NoticeableFuture;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.process.ProcessCallable;
-import com.liferay.portal.kernel.process.ProcessException;
 import com.liferay.portal.kernel.process.ProcessExecutor;
 import com.liferay.portal.kernel.process.TerminationProcessException;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
@@ -488,7 +487,7 @@ public class NettyFabricClient implements FabricClient {
 		_runtimeExitProcessCallable = new ProcessCallable<Serializable>() {
 
 			@Override
-			public Serializable call() throws ProcessException {
+			public Serializable call() {
 				Runtime runtime = Runtime.getRuntime();
 
 				runtime.exit(_FABRIC_AGENT_SHUTDOWN_CODE);
@@ -504,7 +503,7 @@ public class NettyFabricClient implements FabricClient {
 		_runtimeHaltProcessCallable = new ProcessCallable<Serializable>() {
 
 			@Override
-			public Serializable call() throws ProcessException {
+			public Serializable call() {
 				Runtime runtime = Runtime.getRuntime();
 
 				runtime.halt(_FABRIC_AGENT_SHUTDOWN_CODE);
