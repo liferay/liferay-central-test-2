@@ -248,7 +248,7 @@ public class ExecutorIntrabandTest {
 	public void testRegisterChannelDuplexWithNonSelectableChannel()
 		throws Exception {
 
-		// Normal register, with non-SelectableChannel
+		// Normal register, with unselectable channel
 
 		File tempFile = new File("tempFile");
 
@@ -281,7 +281,7 @@ public class ExecutorIntrabandTest {
 	public void testRegisterChannelDuplexWithSelectableChannel()
 		throws Exception {
 
-		// Normal register, with SelectableChannel
+		// Normal register, with selectable channel
 
 		SocketChannel[] peerSocketChannels =
 			IntrabandTestUtil.createSocketChannelPeers();
@@ -377,7 +377,7 @@ public class ExecutorIntrabandTest {
 	public void testRegisterChannelReadWriteWithNonSelectableChannel()
 		throws Exception {
 
-		// Normal register, with non-SelectableChannel
+		// Normal register, with unselectable channel
 
 		File tempFile = new File("tempFile");
 
@@ -423,7 +423,7 @@ public class ExecutorIntrabandTest {
 	public void testRegisterChannelReadWriteWithSelectableChannel()
 		throws Exception {
 
-		// Normal register, with SelectableChannel
+		// Normal register, with selectable channel
 
 		Pipe pipe = Pipe.open();
 
