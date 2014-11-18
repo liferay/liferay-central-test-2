@@ -43,10 +43,10 @@ public class LogAssertionHandler extends Handler {
 		if (level.equals(Level.SEVERE)) {
 			StringBundler sb = new StringBundler(6);
 
-			sb.append("{loggerName=");
-			sb.append(logRecord.getLoggerName());
-			sb.append(", level=");
+			sb.append("{level=");
 			sb.append(logRecord.getLevel());
+			sb.append(", loggerName=");
+			sb.append(logRecord.getLoggerName());
 			sb.append(", message=");
 			sb.append(logRecord.getMessage());
 
