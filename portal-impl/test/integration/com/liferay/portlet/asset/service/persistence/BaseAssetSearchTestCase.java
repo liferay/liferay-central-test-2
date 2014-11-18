@@ -75,10 +75,10 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_group1 = GroupTestUtil.addGroup();
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -152,7 +152,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -164,7 +164,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -177,7 +177,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -192,7 +192,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -204,7 +204,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -216,7 +216,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -228,7 +228,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -240,7 +240,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -252,7 +252,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -264,7 +264,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -277,7 +277,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -289,7 +289,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -301,7 +301,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyTags);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -313,7 +313,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyTags);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -325,7 +325,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyTags);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -337,7 +337,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null, null,
 				anyTags);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -351,7 +351,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allCategoryIds, anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -365,8 +365,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				null, allCategoryIds, null);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, null, allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
@@ -378,8 +378,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				null, null, anyCategoryIds);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, null, null, anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
@@ -391,8 +391,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				notAnyCategoryIds, null, null);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
@@ -404,7 +404,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null,
+				_group1.getGroupId(), getBaseModelClassName(), null,
 				notAnyCategoryIds, allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -418,7 +418,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null,
+				_group1.getGroupId(), getBaseModelClassName(), null,
 				notAnyCategoryIds, null, anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -431,7 +431,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, null,
+				_group1.getGroupId(), getBaseModelClassName(), null, null,
 				allTags, anyTags);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -444,7 +444,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags, null,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags, null,
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -457,7 +457,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags, null,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags, null,
 				null, anyTags);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -470,7 +470,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags,
 				notAnyTags, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -483,7 +483,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, notAnyTags,
+				_group1.getGroupId(), getBaseModelClassName(), null, notAnyTags,
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -496,7 +496,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, notAnyTags,
+				_group1.getGroupId(), getBaseModelClassName(), null, notAnyTags,
 				null, anyTags);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -506,7 +506,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testClassName1() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		testClassNames(assetEntryQuery, 1);
 	}
@@ -521,7 +521,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), classNameIds);
+				_group1.getGroupId(), classNameIds);
 
 		testClassNames(assetEntryQuery, 0);
 	}
@@ -530,7 +530,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testClassTypeIds1() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		testClassTypeIds(assetEntryQuery, true);
 	}
@@ -539,7 +539,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testClassTypeIds2() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		testClassTypeIds(assetEntryQuery, false);
 	}
@@ -588,8 +588,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				null, null, null);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
@@ -600,8 +600,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				null, null, null);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
@@ -612,8 +612,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				null, null, null);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
@@ -625,8 +625,8 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
-				null, null, null);
+				_group1.getGroupId(), getBaseModelClassName(),
+				notAllCategoryIds, null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
 	}
@@ -637,7 +637,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags, null,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags, null,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -649,7 +649,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags, null,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags, null,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -661,7 +661,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags, null,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags, null,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -673,7 +673,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllTags, null,
+				_group1.getGroupId(), getBaseModelClassName(), notAllTags, null,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -685,7 +685,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null,
+				_group1.getGroupId(), getBaseModelClassName(), null,
 				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -697,7 +697,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null,
+				_group1.getGroupId(), getBaseModelClassName(), null,
 				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -710,7 +710,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null,
+				_group1.getGroupId(), getBaseModelClassName(), null,
 				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -722,7 +722,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null,
+				_group1.getGroupId(), getBaseModelClassName(), null,
 				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -734,7 +734,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, notAnyTags,
+				_group1.getGroupId(), getBaseModelClassName(), null, notAnyTags,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -746,7 +746,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, notAnyTags,
+				_group1.getGroupId(), getBaseModelClassName(), null, notAnyTags,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -758,7 +758,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, notAnyTags,
+				_group1.getGroupId(), getBaseModelClassName(), null, notAnyTags,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -770,7 +770,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), null, notAnyTags,
+				_group1.getGroupId(), getBaseModelClassName(), null, notAnyTags,
 				null, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -780,7 +780,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testOrderByCreateDateAsc() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		String[] titles = {
 			"open", "liferay", "social", "osgi", "content", "life"
@@ -793,7 +793,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testOrderByCreateDateDesc() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		String[] titles = {
 			"open", "liferay", "social", "osgi", "content", "life"
@@ -810,7 +810,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testOrderByExpirationDateAsc() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		Date[] expirationDates = generateRandomDates(new Date(), 6);
 
@@ -821,7 +821,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testOrderByExpirationDateDesc() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		Date[] expirationDates = generateRandomDates(new Date(), 6);
 
@@ -832,7 +832,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testOrderByTitleAsc() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		String[] titles = {
 			"open", "liferay", "social", "osgi", "content", "life"
@@ -849,7 +849,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testOrderByTitleDesc() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		String[] titles = {
 			"open", "liferay", "social", "osgi", "content", "life"
@@ -866,7 +866,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testPaginationTypeNone() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		assetEntryQuery.setPaginationType("none");
 
@@ -877,7 +877,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testPaginationTypeRegular() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		assetEntryQuery.setPaginationType("regular");
 
@@ -888,7 +888,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void testPaginationTypeSimple() throws Exception {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), new String[] {getBaseModelClassName()});
+				_group1.getGroupId(), new String[]{getBaseModelClassName()});
 
 		assetEntryQuery.setPaginationType("simple");
 
@@ -1003,10 +1003,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1034,10 +1034,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1057,10 +1057,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1092,10 +1092,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1130,10 +1130,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1178,10 +1178,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1209,10 +1209,10 @@ public abstract class BaseAssetSearchTestCase {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group1.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
-			_group, serviceContext);
+			_group1, serviceContext);
 
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
@@ -1235,7 +1235,7 @@ public abstract class BaseAssetSearchTestCase {
 	private long _foodCategoryId;
 
 	@DeleteAfterTestRun
-	private Group _group;
+	private Group _group1;
 
 	private long _healthCategoryId;
 	private long _sportCategoryId;
