@@ -169,6 +169,10 @@ public class SyncAccountService {
 			SyncUser syncUser = SyncUserService.fetchSyncUser(syncAccountId);
 
 			SyncUserService.deleteSyncUser(syncUser.getSyncUserId());
+
+			// Sync watch events
+
+			SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
 		}
 		catch (SQLException sqle) {
 			if (_logger.isDebugEnabled()) {
