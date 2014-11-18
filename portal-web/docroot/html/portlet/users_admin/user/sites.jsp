@@ -134,6 +134,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "sites"
 						rowColumns.push('<a class="modify-link" data-rowId="' + event.groupid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeGroupIcon) %></a>');
 
 						searchContainer.addRow(rowColumns, event.groupid);
+
 						searchContainer.updateDataStore();
 
 						addGroupIds.push(event.groupid);

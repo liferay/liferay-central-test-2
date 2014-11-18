@@ -42,13 +42,12 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "roles"
 	/>
 </liferay-util:buffer>
 
-<aui:input name="addRoleIds" type="hidden" />
-<aui:input name="deleteRoleIds" type="hidden" />
-
 <aui:input name="addGroupRolesGroupIds" type="hidden" />
 <aui:input name="addGroupRolesRoleIds" type="hidden" />
+<aui:input name="addRoleIds" type="hidden" />
 <aui:input name="deleteGroupRolesGroupIds" type="hidden" />
 <aui:input name="deleteGroupRolesRoleIds" type="hidden" />
+<aui:input name="deleteRoleIds" type="hidden" />
 
 <h3><liferay-ui:message key="regular-roles" /></h3>
 
@@ -603,6 +602,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "roles"
 				}
 
 				searchContainer.addRow(rowColumns, roleId);
+
 				searchContainer.updateDataStore();
 			},
 			['liferay-search-container']

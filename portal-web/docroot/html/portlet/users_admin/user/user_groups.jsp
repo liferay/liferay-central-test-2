@@ -165,6 +165,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "userGr
 						rowColumns.push('<a class="modify-link" data-rowId="' + event.usergroupid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeUserGroupIcon) %></a>');
 
 						searchContainer.addRow(rowColumns, event.usergroupid);
+
 						searchContainer.updateDataStore();
 
 						A.Array.removeItem(deleteUserGroupIds, event.usergroupid);
