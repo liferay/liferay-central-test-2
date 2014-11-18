@@ -226,9 +226,9 @@ public class SyncEngine {
 			cancelSyncAccountTasks(syncAccountId);
 		}
 
-		_remoteEventsScheduledExecutorService.shutdownNow();
 		_executorService.shutdownNow();
 		_localEventsScheduledExecutorService.shutdownNow();
+		_remoteEventsScheduledExecutorService.shutdownNow();
 
 		SyncClientUpdater.cancelAutoUpdateChecker();
 
