@@ -72,17 +72,17 @@ public class CommentsUserNotificationTest extends BaseUserNotificationTestCase {
 
 		long classPK = userNotificationEventJSONObject.getLong("classPK");
 
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(baseEntryId);
+		MBMessage mbMessage = MBMessageLocalServiceUtil.getMessage(baseEntryId);
 
-		if (!message.isDiscussion()) {
+		if (!mbMessage.isDiscussion()) {
 			return false;
 		}
 
-		MBDiscussion discussion =
+		MBDiscussion mbDiscussion =
 			MBDiscussionLocalServiceUtil.getThreadDiscussion(
-				message.getThreadId());
+				mbMessage.getThreadId());
 
-		if (discussion.getDiscussionId() != classPK) {
+		if (mbDiscussion.getDiscussionId() != classPK) {
 			return false;
 		}
 
