@@ -84,7 +84,6 @@ public abstract class BaseUserNotificationTestCase {
 				isValidUserNotificationEventObject(
 					(Long)baseModel.getPrimaryKeyObj(),
 					userNotificationEventsJSONObject));
-
 			Assert.assertEquals(
 				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY,
 				userNotificationEventsJSONObject.getInt("notificationType"));
@@ -118,7 +117,6 @@ public abstract class BaseUserNotificationTestCase {
 				isValidUserNotificationEventObject(
 					(Long)baseModel.getPrimaryKeyObj(),
 					userNotificationEventsJSONObject));
-
 			Assert.assertEquals(
 				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY,
 				userNotificationEventsJSONObject.getInt("notificationType"));
@@ -353,7 +351,7 @@ public abstract class BaseUserNotificationTestCase {
 	}
 
 	protected List<JSONObject> getUserNotificationEventsJSONObjects(
-			long userId, long baseEntryId)
+			long userId, long primaryKey)
 		throws Exception {
 
 		List<UserNotificationEvent> userNotificationEvents =
@@ -378,12 +376,12 @@ public abstract class BaseUserNotificationTestCase {
 	}
 
 	protected boolean isValidUserNotificationEventObject(
-			long baseEntryId, JSONObject userNotificationEventJSONObject)
+			long primaryKey, JSONObject userNotificationEventJSONObject)
 		throws Exception {
 
 		long classPK = userNotificationEventJSONObject.getLong("classPK");
 
-		if (classPK != baseEntryId) {
+		if (classPK != primaryKey) {
 			return false;
 		}
 
