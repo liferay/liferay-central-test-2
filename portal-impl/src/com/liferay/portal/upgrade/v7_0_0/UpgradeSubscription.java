@@ -31,14 +31,13 @@ public class UpgradeSubscription extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateSubscriptionClassNames(
-			DLFolder.class.getName(), Folder.class.getName());
-
+			Folder.class.getName(), DLFolder.class.getName());
 		updateSubscriptionClassNames(
-			JournalFolder.class.getName(), JournalArticle.class.getName());
+			JournalArticle.class.getName(), JournalFolder.class.getName());
 	}
 
 	protected void updateSubscriptionClassNames(
-			String newClassName, String oldClassName)
+			String oldClassName, String newClassName)
 		throws Exception {
 
 		StringBundler sb = new StringBundler(4);
