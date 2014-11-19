@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
 
@@ -24,9 +23,8 @@ import com.liferay.registry.collections.ServiceTrackerMap;
 public class BaseModelPermissionCheckerUtil {
 
 	public static Boolean containsBaseModelPermission(
-			PermissionChecker permissionChecker, long groupId, String className,
-			long classPK, String actionId)
-		throws PortalException {
+		PermissionChecker permissionChecker, long groupId, String className,
+		long classPK, String actionId) {
 
 		BaseModelPermissionChecker baseModelPermissionChecker =
 			_serviceTrackerMap.getService(className);
