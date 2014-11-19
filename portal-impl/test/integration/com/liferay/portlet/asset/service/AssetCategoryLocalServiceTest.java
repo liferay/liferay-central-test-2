@@ -25,6 +25,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.listeners.MainServletExecutionTestListener;
 import com.liferay.portal.test.runners.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.test.GroupTestUtil;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portal.util.test.ServiceContextTestUtil;
 import com.liferay.portal.util.test.TestPropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -68,26 +69,27 @@ public class AssetCategoryLocalServiceTest {
 	public void testDeleteCategory() throws Exception {
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
-		titleMap.put(_LOCALE, _TITLE);
+		titleMap.put(LocaleUtil.US, RandomTestUtil.randomString());
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
 
-		AssetVocabulary vocabulary =
+		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
-				TestPropsValues.getUserId(), _TITLE, titleMap, null, null,
-				serviceContext);
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
+				titleMap, null, null, serviceContext);
 
 		AssetCategory assetCategory = AssetCategoryLocalServiceUtil.addCategory(
-			TestPropsValues.getUserId(), "Test", vocabulary.getVocabularyId(),
-			serviceContext);
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
+			assetVocabulary.getVocabularyId(), serviceContext);
 
 		serviceContext.setAssetCategoryIds(
 			new long[] {assetCategory.getCategoryId()});
 
 		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(
-			TestPropsValues.getUserId(), "Test", true, serviceContext);
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(), true,
+			serviceContext);
 
 		AssetTestIndexer assetTestIndexer = new AssetTestIndexer();
 
@@ -99,10 +101,6 @@ public class AssetCategoryLocalServiceTest {
 
 		AssetCategoryLocalServiceUtil.deleteCategory(assetCategory, true);
 	}
-
-	private static final Locale _LOCALE = LocaleUtil.US;
-
-	private static final String _TITLE = "Test Vocabulary";
 
 	private Indexer _blogsIndexer;
 
