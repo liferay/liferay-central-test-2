@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.service;
 
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portlet.blogs.util.BlogsIndexer;
 
 import org.testng.Assert;
@@ -25,7 +24,7 @@ import org.testng.Assert;
 public class AssetTestIndexer extends BlogsIndexer {
 
 	@Override
-	public void reindex(String className, long classPK) throws SearchException {
+	public void reindex(String className, long classPK) {
 		Assert.assertEquals(_className, className);
 		Assert.assertEquals(_classPK, classPK);
 	}
