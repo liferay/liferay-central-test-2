@@ -41,9 +41,7 @@ public class ImageImpl extends ImageBaseImpl {
 		try {
 			DLFileEntry dlFileEntry = null;
 
-			if (PropsValues.
-					WEB_SERVER_SERVLET_CHECK_LEGACY_IMAGE_GALLERY_REQUEST_ENABLED) {
-
+			if (PropsValues.WEB_SERVER_SERVLET_CHECK_IMAGE_GALLERY) {
 				dlFileEntry =
 					DLFileEntryLocalServiceUtil.fetchFileEntryByAnyImageId(
 						imageId);

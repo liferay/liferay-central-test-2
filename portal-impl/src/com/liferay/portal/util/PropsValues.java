@@ -1976,7 +1976,7 @@ public class PropsValues {
 
 	public static final String[] WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES = PropsUtil.getArray(PropsKeys.WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES);
 
-	public static final boolean WEB_SERVER_SERVLET_CHECK_LEGACY_IMAGE_GALLERY_REQUEST_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WEB_SERVER_SERVLET_CHECK_LEGACY_IMAGE_GALLERY_REQUEST_ENABLED));
+	public static final boolean WEB_SERVER_SERVLET_CHECK_IMAGE_GALLERY = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WEB_SERVER_SERVLET_CHECK_IMAGE_GALLERY));
 
 	public static final boolean WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED));
 
