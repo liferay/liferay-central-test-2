@@ -87,14 +87,15 @@ public class UserPasswordException extends PortalException {
 
 	}
 
-	public static class MustComplyWithListeners extends UserPasswordException {
+	public static class MustComplyWithModelListeners
+		extends UserPasswordException {
 
-		public MustComplyWithListeners(
+		public MustComplyWithModelListeners(
 			long userId, ModelListenerException modelListenerException) {
 
 			super(
 				String.format(
-					"Password must not make a user model listener fail: " +
+					"Password must comply with model listeners: " +
 						modelListenerException.getMessage()),
 				PASSWORD_INVALID);
 
