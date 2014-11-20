@@ -373,13 +373,13 @@ public class AssetPublisherImpl implements AssetPublisher {
 	public List<AssetEntry> getAssetEntries(
 		long[] classNameIds, long[] groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
+		boolean advancedSearch, boolean andOperator, int start, int end,
 		String orderByCol1, String orderByCol2, String orderByType1,
 		String orderByType2) {
 
 		AssetEntryQuery assetEntryQuery = getAssetEntryQuery(
 			classNameIds, groupIds, keywords, description, title, userName,
-			isAdvancedSearch, isAndOperator, start, end, orderByCol1,
+			advancedSearch, andOperator, start, end, orderByCol1,
 			orderByCol2, orderByType1, orderByType2);
 
 		return AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
@@ -634,11 +634,11 @@ public class AssetPublisherImpl implements AssetPublisher {
 	public int getAssetEntriesCount(
 		long[] classNameIds, long[] groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end) {
+		boolean advancedSearch, boolean andOperator, int start, int end) {
 
 		AssetEntryQuery assetEntryQuery = getAssetEntryQuery(
 			classNameIds, groupIds, keywords, description, title, userName,
-			isAdvancedSearch, isAndOperator, start, end, null, null, null,
+			advancedSearch, andOperator, start, end, null, null, null,
 			null);
 
 		return AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
@@ -1428,14 +1428,14 @@ public class AssetPublisherImpl implements AssetPublisher {
 	protected AssetEntryQuery getAssetEntryQuery(
 		long[] classNameIds, long[] groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
+		boolean advancedSearch, boolean andOperator, int start, int end,
 		String orderByCol1, String orderByCol2, String orderByType1,
 		String orderByType2) {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
-		if (isAdvancedSearch) {
-			assetEntryQuery.setAndOperator(isAndOperator);
+		if (advancedSearch) {
+			assetEntryQuery.setAndOperator(andOperator);
 			assetEntryQuery.setDescription(description);
 			assetEntryQuery.setTitle(title);
 			assetEntryQuery.setUserName(userName);

@@ -82,7 +82,7 @@ public interface AssetPublisher {
 	public List<AssetEntry> getAssetEntries(
 		long[] classNameIds, long[] groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
+		boolean advancedSearch, boolean andOperator, int start, int end,
 		String orderByCol1, String orderByCol2, String orderByType1,
 		String orderByType2);
 
@@ -140,7 +140,7 @@ public interface AssetPublisher {
 	public int getAssetEntriesCount(
 		long[] classNameIds, long[] groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end);
+		boolean advancedSearch, boolean andOperator, int start, int end);
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link

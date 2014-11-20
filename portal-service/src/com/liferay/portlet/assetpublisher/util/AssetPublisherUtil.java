@@ -100,12 +100,12 @@ public class AssetPublisherUtil {
 	public static List<AssetEntry> getAssetEntries(
 		long[] classNameIds, long[]groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
+		boolean advancedSearch, boolean andOperator, int start, int end,
 		String orderByCol1, String orderByCol2, String orderByType1,
 		String orderByType2) {
 
 		return getAssetPublisher().getAssetEntries(classNameIds, groupIds,
-		keywords, description, title, userName, isAdvancedSearch, isAndOperator,
+		keywords, description, title, userName, advancedSearch, andOperator,
 		start, end, orderByCol1, orderByCol2, orderByType1, orderByType2);
 	}
 
@@ -189,11 +189,11 @@ public class AssetPublisherUtil {
 	public static int getAssetEntriesCount(
 		long[] classNameIds, long[] groupIds, String keywords,
 		String description, String title, String userName,
-		boolean isAdvancedSearch, boolean isAndOperator, int start, int end) {
+		boolean advancedSearch, boolean andOperator, int start, int end) {
 
 		return getAssetPublisher().getAssetEntriesCount(
 			classNameIds, groupIds, keywords, description, title, userName,
-			isAdvancedSearch, isAndOperator, start, end);
+			advancedSearch, andOperator, start, end);
 	}
 
 	/**
