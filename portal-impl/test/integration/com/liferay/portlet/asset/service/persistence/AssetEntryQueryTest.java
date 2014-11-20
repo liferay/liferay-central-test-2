@@ -621,8 +621,6 @@ public class AssetEntryQueryTest {
 			int expectedResults)
 		throws Exception {
 
-		// Clear the thread local cache which is populated in AssetPublisherUtil
-
 		ThreadLocalCache<Object[]> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
@@ -636,34 +634,32 @@ public class AssetEntryQueryTest {
 				_group.getGroupId(), isAndOperator, searchTitle,
 				searchDescription, searchUserName);
 
-		int initialEntries = AssetEntryServiceUtil.getEntriesCount(
+		int initialAssetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		BlogsEntry entry1 = BlogsEntryLocalServiceUtil.addEntry(
+		BlogsEntry blogsEntry1 = BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), StringUtil.randomString(),
 			StringPool.BLANK, StringUtil.randomString(),
-			"This is a blog entry for testing purposes", 1, 1, 1965, 0, 0, true,
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
 			true, null, null, null, serviceContext);
 
-		BlogsEntry entry2 = BlogsEntryLocalServiceUtil.addEntry(
+		BlogsEntry blogsEntry2 = BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title, StringPool.BLANK, description,
-			"This is a blog entry for testing purposes", 1, 1, 1965, 0, 0, true,
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
 			true, null, null, null, serviceContext);
-
-		// Clear the thread local cache which is populated in AssetPublisherUtil
 
 		threadLocalCache.removeAll();
 
-		int entriesCount = AssetEntryServiceUtil.getEntriesCount(
+		int assetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialEntries + expectedResults, entriesCount);
+		Assert.assertEquals(initialAssetEntriesCount + expectedResults, assetEntriesCount);
 
-		BlogsEntryLocalServiceUtil.deleteEntry(entry1);
-		BlogsEntryLocalServiceUtil.deleteEntry(entry2);
+		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry1);
+		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry2);
 	}
 
 	protected void testAssetCategories(
@@ -684,8 +680,6 @@ public class AssetEntryQueryTest {
 			boolean not, int expectedResults)
 		throws Exception {
 
-		// Clear the thread local cache which is populated in AssetPublisherUtil
-
 		ThreadLocalCache<Object[]> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
@@ -695,7 +689,7 @@ public class AssetEntryQueryTest {
 		AssetEntryQuery assetEntryQuery = buildAssetEntryQuery(
 			_group.getGroupId(), assetCategoryIds, assetTagNames, any, not);
 
-		int initialEntries = AssetEntryServiceUtil.getEntriesCount(
+		int initialAssetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
 		ServiceContext serviceContext =
@@ -711,8 +705,8 @@ public class AssetEntryQueryTest {
 
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title1, StringPool.BLANK,
-			StringPool.BLANK, "This is a blog entry for testing purposes", 1, 1,
-			1965, 0, 0, true, true, null, null, null, serviceContext);
+			StringPool.BLANK, RandomTestUtil.randomString(), 1, 1, 1965, 0, 0,
+			true, true, null, null, null, serviceContext);
 
 		if (assetCategoryIds2 != null) {
 			serviceContext.setAssetCategoryIds(assetCategoryIds2);
@@ -724,10 +718,8 @@ public class AssetEntryQueryTest {
 
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title2, StringPool.BLANK,
-			StringPool.BLANK, "This is a blog entry for testing purposes", 1, 1,
-			1965, 0, 0, true, true, null, null, null, serviceContext);
-
-		// Clear the thread local cache which is populated in AssetPublisherUtil
+			StringPool.BLANK, RandomTestUtil.randomString(), 1, 1, 1965, 0, 0,
+			true, true, null, null, null, serviceContext);
 
 		threadLocalCache.removeAll();
 
@@ -737,15 +729,13 @@ public class AssetEntryQueryTest {
 		int allTagsEntries = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialEntries + expectedResults, allTagsEntries);
+		Assert.assertEquals(initialAssetEntriesCount + expectedResults, allTagsEntries);
 	}
 
 	protected void testAssetKeywords(
 			String keywords, String title, String description,
 			int expectedResults)
 		throws Exception {
-
-		// Clear the thread local cache which is populated in AssetPublisherUtil
 
 		ThreadLocalCache<Object[]> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
@@ -756,7 +746,7 @@ public class AssetEntryQueryTest {
 		AssetEntryQuery assetEntryQuery = buildAssetEntryQueryWithKeywords(
 			_group.getGroupId(), keywords);
 
-		int initialEntries = AssetEntryServiceUtil.getEntriesCount(
+		int initialAssetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
 		ServiceContext serviceContext =
@@ -765,22 +755,20 @@ public class AssetEntryQueryTest {
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), StringUtil.randomString(),
 			StringPool.BLANK, StringUtil.randomString(),
-			"This is a blog entry for testing purposes", 1, 1, 1965, 0, 0, true,
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
 			true, null, null, null, serviceContext);
 
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title, StringPool.BLANK, description,
-			"This is a blog entry for testing purposes", 1, 1, 1965, 0, 0, true,
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
 			true, null, null, null, serviceContext);
-
-		// Clear the thread local cache which is populated in AssetPublisherUtil
 
 		threadLocalCache.removeAll();
 
-		int entriesCount = AssetEntryServiceUtil.getEntriesCount(
+		int assetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialEntries + expectedResults, entriesCount);
+		Assert.assertEquals(initialAssetEntriesCount + expectedResults, assetEntriesCount);
 	}
 
 	protected void testAssetTags(
@@ -800,8 +788,6 @@ public class AssetEntryQueryTest {
 			double[] scores, double[] orderedScores, String orderByType)
 		throws Exception {
 
-		// Clear the thread local cache which is populated in AssetPublisherUtil
-
 		ThreadLocalCache<Object[]> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
@@ -814,8 +800,6 @@ public class AssetEntryQueryTest {
 			RatingsEntryServiceUtil.updateEntry(
 				BlogsEntry.class.getName(), entry.getEntryId(), scores[i]);
 		}
-
-		// Clear the thread local cache which is populated in AssetPublisherUtil
 
 		threadLocalCache.removeAll();
 
@@ -843,8 +827,6 @@ public class AssetEntryQueryTest {
 			int[] viewCounts, int[] orderedViewCounts, String orderByType)
 		throws Exception {
 
-		// Clear the thread local cache which is populated in AssetPublisherUtil
-
 		ThreadLocalCache<Object[]> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
@@ -861,8 +843,6 @@ public class AssetEntryQueryTest {
 
 			AssetEntryLocalServiceUtil.updateAssetEntry(assetEntry);
 		}
-
-		// Clear the thread local cache which is populated in AssetPublisherUtil
 
 		threadLocalCache.removeAll();
 
