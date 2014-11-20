@@ -57,8 +57,8 @@ public class DDMFormValidatorImpl implements DDMFormValidator {
 
 		if (!availableLocales.contains(defaultLocale)) {
 			throw new DDMFormValidationException(
-				"The default locale '" + defaultLocale + "' should be a set" +
-					" as valid available locale");
+				"The default locale " + defaultLocale + " should be set as a " +
+					"valid available locale");
 		}
 	}
 
