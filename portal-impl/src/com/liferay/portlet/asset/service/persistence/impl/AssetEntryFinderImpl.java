@@ -294,17 +294,23 @@ public class AssetEntryFinderImpl
 		// Keywords
 
 		if (Validator.isNotNull(entryQuery.getKeywords())) {
-			sb.append(" AND ((AssetEntry.title LIKE ?) OR");
-			sb.append(" (AssetEntry.description LIKE ?) OR");
-			sb.append(" (AssetEntry.userName LIKE ?))");
+			sb.append(" AND ((AssetEntry.userName LIKE ?) OR");
+			sb.append(" (AssetEntry.title LIKE ?) OR");
+			sb.append(" (AssetEntry.description LIKE ?))");
 		}
-		else if (Validator.isNotNull(entryQuery.getTitle()) ||
-				 Validator.isNotNull(entryQuery.getDescription()) ||
-				 Validator.isNotNull(entryQuery.getUserName())) {
+		else if (Validator.isNotNull(entryQuery.getUserName()) ||
+				 Validator.isNotNull(entryQuery.getTitle()) ||
+				 Validator.isNotNull(entryQuery.getDescription())) {
 
 			sb.append("AND (");
 			sb.append(
 				entryQuery.isAndOperator() ? Boolean.TRUE : Boolean.FALSE);
+
+			if (Validator.isNotNull(entryQuery.getUserName())) {
+				sb.append(entryQuery.isAndOperator() ? " AND " : " OR ");
+
+				sb.append("(AssetEntry.userName LIKE ?)");
+			}
 
 			if (Validator.isNotNull(entryQuery.getTitle())) {
 				sb.append(entryQuery.isAndOperator() ? " AND " : " OR ");
@@ -316,12 +322,6 @@ public class AssetEntryFinderImpl
 				sb.append(entryQuery.isAndOperator() ? " AND " : " OR ");
 
 				sb.append("(AssetEntry.description LIKE ?)");
-			}
-
-			if (Validator.isNotNull(entryQuery.getUserName())) {
-				sb.append(entryQuery.isAndOperator() ? " AND " : " OR ");
-
-				sb.append("(AssetEntry.userName LIKE ?)");
 			}
 
 			sb.append(")");
