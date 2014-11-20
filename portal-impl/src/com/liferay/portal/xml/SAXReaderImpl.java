@@ -500,6 +500,168 @@ public class SAXReaderImpl implements SAXReader {
 	}
 
 	@Override
+	public Document readTrusted(File file) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(File file, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(InputStream is) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(InputStream is, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(Reader reader) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(Reader reader, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(String xml) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(String xml, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(String xml, XMLSchema xmlSchema)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(URL url) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrusted(URL url, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrustedURL(String url)
+		throws DocumentException, MalformedURLException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readTrustedURL(String url, boolean validate)
+		throws DocumentException, MalformedURLException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(File file) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(File file, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(InputStream is) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(InputStream is, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(Reader reader) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(Reader reader, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(String xml) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(String xml, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(String xml, XMLSchema xmlSchema)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(URL url) throws DocumentException {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrusted(URL url, boolean validate)
+		throws DocumentException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrustedURL(String url)
+		throws DocumentException, MalformedURLException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
+	public Document readUntrustedURL(String url, boolean validate)
+		throws DocumentException, MalformedURLException {
+
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
+
+	@Override
 	public Document readURL(String url)
 		throws DocumentException, MalformedURLException {
 
