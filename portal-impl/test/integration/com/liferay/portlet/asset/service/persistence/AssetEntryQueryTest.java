@@ -609,8 +609,8 @@ public class AssetEntryQueryTest {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
-		assetEntryQuery.setKeywords(keywords);
 		assetEntryQuery.setGroupIds(new long[] {groupId});
+		assetEntryQuery.setKeywords(keywords);
 
 		return assetEntryQuery;
 	}
