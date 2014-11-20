@@ -548,12 +548,12 @@ public class AssetEntryQueryTest {
 	}
 
 	protected AssetEntryQuery buildAssetEntryQueryWithAdvancedSearch(
-		long groupId, boolean isAndOperator, String title,
+		long groupId, boolean andOperator, String title,
 		String description, String userName) {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
-		assetEntryQuery.setAndOperator(isAndOperator);
+		assetEntryQuery.setAndOperator(andOperator);
 		assetEntryQuery.setDescription(description);
 		assetEntryQuery.setGroupIds(new long[] {groupId});
 		assetEntryQuery.setTitle(title);
@@ -615,7 +615,7 @@ public class AssetEntryQueryTest {
 
 	protected void testAdvancedSearch(
 			String searchTitle, String searchDescription, String searchUserName,
-			boolean isAndOperator, String title, String description,
+			boolean andOperator, String title, String description,
 			int expectedResults)
 		throws Exception {
 
@@ -627,7 +627,7 @@ public class AssetEntryQueryTest {
 
 		AssetEntryQuery assetEntryQuery =
 			buildAssetEntryQueryWithAdvancedSearch(
-				_group.getGroupId(), isAndOperator, searchTitle,
+				_group.getGroupId(), andOperator, searchTitle,
 				searchDescription, searchUserName);
 
 		int initialAssetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
