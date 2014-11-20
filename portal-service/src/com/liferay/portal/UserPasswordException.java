@@ -181,8 +181,8 @@ public class UserPasswordException extends PortalException {
 			this.changeableDate = changeableDate;
 		}
 
-		private final Date changeableDate;
-		private long userId;
+		public final Date changeableDate;
+		public long userId;
 
 	}
 
@@ -213,7 +213,7 @@ public class UserPasswordException extends PortalException {
 			this.userId = userId;
 		}
 
-		private long userId;
+		public long userId;
 
 	}
 
@@ -229,7 +229,7 @@ public class UserPasswordException extends PortalException {
 			this.userId = userId;
 		}
 
-		private long userId;
+		public long userId;
 
 	}
 
@@ -244,7 +244,7 @@ public class UserPasswordException extends PortalException {
 			this.userId = userId;
 		}
 
-		private long userId;
+		public long userId;
 
 	}
 
@@ -265,8 +265,8 @@ public class UserPasswordException extends PortalException {
 			this.dictionaryWords = dictionaryWords;
 		}
 
-		private final List<String> dictionaryWords;
-		private long userId;
+		public final List<String> dictionaryWords;
+		public long userId;
 
 	}
 
