@@ -556,9 +556,9 @@ public class AssetEntryQueryTest {
 
 		assetEntryQuery.setAndOperator(isAndOperator);
 		assetEntryQuery.setDescription(description);
+		assetEntryQuery.setGroupIds(new long[] {groupId});
 		assetEntryQuery.setTitle(title);
 		assetEntryQuery.setUserName(userName);
-		assetEntryQuery.setGroupIds(new long[] {groupId});
 
 		return assetEntryQuery;
 	}
