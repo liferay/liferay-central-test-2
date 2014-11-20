@@ -20,11 +20,11 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 /**
  * @author Miguel pastor
  */
-public class PollsConfigurationUtil {
+public class PollsServiceConfigurationUtil {
 
 	public static final Configuration _configuration =
 		ConfigurationFactoryUtil.getConfiguration(
-			PollsConfigurationUtil.class.getClassLoader(), "portlet");
+			PollsServiceConfigurationUtil.class.getClassLoader(), "portlet");
 
 	public static String get(String key) {
 		return _configuration.get(key);
