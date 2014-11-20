@@ -217,7 +217,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		try {
 
-			// Test 1, create ClusterLinkImpl.MAX_CHANNEL_COUNT channels
+			// Test 1, create ClusterLinkImpl#MAX_CHANNEL_COUNT channels
 
 			TransportationConfigurationAdvice.setChannelCount(
 				ClusterLinkImpl.MAX_CHANNEL_COUNT + 1);
@@ -237,7 +237,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 					ise.getMessage());
 			}
 
-			// Test 2, create 0 channel
+			// Test 2, create 0 channels
 
 			TransportationConfigurationAdvice.setChannelCount(0);
 
@@ -348,7 +348,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		try {
 
-			// Test 1, send message when clusterLinkImpl is destroyed
+			// Test 1, send message when cluster link is destroyed
 
 			clusterLinkImpl.destroy();
 
@@ -362,7 +362,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 				logRecords, "Unable to send multicast message " + message,
 				IllegalStateException.class);
 
-			// Test 2, send message when clusterLinkImpl is disconnected
+			// Test 2, send message when cluster link is disconnected
 
 			clusterLinkImpl = getClusterLinkImpl();
 
@@ -460,7 +460,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		try {
 
-			// Test 1, send message when clusterLinkImpl is destroyed
+			// Test 1, send message when cluster link is destroyed
 
 			clusterLinkImpl.destroy();
 
@@ -475,7 +475,7 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 				logRecords, "Unable to send unicast message " + message,
 				IllegalStateException.class);
 
-			// Test 2, send message when clusterLinkImpl is disconnected
+			// Test 2, send message when cluster link is disconnected
 
 			clusterLinkImpl = getClusterLinkImpl();
 

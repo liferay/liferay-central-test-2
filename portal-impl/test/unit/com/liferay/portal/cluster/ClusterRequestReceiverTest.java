@@ -114,7 +114,7 @@ public class ClusterRequestReceiverTest
 				futureClusterResponses, clusterRequest.getUuid(),
 				clusterExecutorImpl2.getLocalClusterNodeAddress(), timestamp);
 
-			// Test 5, methodHandler is null
+			// Test 5, method handler is null
 
 			clusterRequest = ClusterRequest.createUnicastRequest(
 				null, clusterExecutorImpl2.getLocalClusterNodeAddress());
