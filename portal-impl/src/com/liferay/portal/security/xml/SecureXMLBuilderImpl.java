@@ -126,17 +126,53 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 
 	@Override
 	public DocumentBuilderFactory unsafeDocumentBuilderFactory() {
-		return null;
+		DocumentBuilderFactory documentBuilderFactory =
+			newDocumentBuilderFactory();
+
+		if (!PropsValues.XML_SECURITY_ENABLED) {
+			return documentBuilderFactory;
+		}
+
+		try {
+			documentBuilderFactory.setFeature(_FEATURES_DISALLOW_DTD, false);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to initialize unsafe DocumentBuilderFactory!", e);
+		}
+
+		return documentBuilderFactory;
 	}
 
 	@Override
 	public XMLInputFactory unsafeXMLInputFactory() {
-		return null;
+		XMLInputFactory xmlInputFactory = newXMLInputFactory();
+
+		if (!PropsValues.XML_SECURITY_ENABLED) {
+			return xmlInputFactory;
+		}
+
+		xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+
+		return xmlInputFactory;
 	}
 
 	@Override
 	public XMLReader unsafeXMLReader() {
-		return null;
+		XMLReader xmlReader = newXMLReader();
+
+		if (!PropsValues.XML_SECURITY_ENABLED) {
+			return xmlReader;
+		}
+
+		try {
+			xmlReader.setFeature(_FEATURES_DISALLOW_DTD, false);
+		}
+		catch (Exception e) {
+			_log.error("Unable to initialize unsafe SAX parser!", e);
+		}
+
+		return xmlReader;
 	}
 
 	private static final String _FEATURES_DISALLOW_DTD =
