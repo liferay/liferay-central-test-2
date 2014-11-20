@@ -52,7 +52,7 @@ public class DDMFormValidatorImpl implements DDMFormValidator {
 
 		if ((availableLocales == null) || availableLocales.isEmpty()) {
 			throw new DDMFormValidationException(
-				"The available locales property was never set for DDM Form");
+				"The available locales property was never set for DDM form");
 		}
 
 		if (!availableLocales.contains(defaultLocale)) {
@@ -81,7 +81,7 @@ public class DDMFormValidatorImpl implements DDMFormValidator {
 
 		if (!matcher.matches()) {
 			throw new DDMFormValidationException(
-				"Non alphanumeric characters were defined for field name " +
+				"Nonalphanumeric characters were defined for field name " +
 					ddmFormField.getName());
 		}
 	}
@@ -127,16 +127,16 @@ public class DDMFormValidatorImpl implements DDMFormValidator {
 
 		if (!ddmFormDefaultLocale.equals(propertyValue.getDefaultLocale())) {
 			throw new DDMFormValidationException(
-				"Invalid default locale set for property " +
-					"'" + propertyName + "' of field name " + fieldName);
+				"Invalid default locale set for property \"" + propertyName +
+					"\" of field name " + fieldName);
 		}
 
 		if (!ddmFormAvailableLocales.equals(
 				propertyValue.getAvailableLocales())) {
 
 			throw new DDMFormValidationException(
-				"Invalid available locales set for property " +
-					"'" + propertyName + "' of field name " + fieldName);
+				"Invalid available locales set for property \"" +
+					propertyName + "\" of field name " + fieldName);
 		}
 	}
 
@@ -189,7 +189,7 @@ public class DDMFormValidatorImpl implements DDMFormValidator {
 
 		if (defaultLocale == null) {
 			throw new DDMFormValidationException(
-				"The default locale property was never set for DDM Form");
+				"The default locale property was never set for DDM form");
 		}
 
 		validateDDMFormAvailableLocales(
