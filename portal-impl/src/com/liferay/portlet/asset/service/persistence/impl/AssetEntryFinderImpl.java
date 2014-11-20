@@ -461,6 +461,12 @@ public class AssetEntryFinderImpl
 				StringUtil.quote(entryQuery.getKeywords(), StringPool.PERCENT));
 		}
 		else {
+			if (Validator.isNotNull(entryQuery.getUserName())) {
+				qPos.add(
+					StringUtil.quote(
+						entryQuery.getUserName(), StringPool.PERCENT));
+			}
+
 			if (Validator.isNotNull(entryQuery.getTitle())) {
 				qPos.add(
 					StringUtil.quote(
@@ -471,12 +477,6 @@ public class AssetEntryFinderImpl
 				qPos.add(
 					StringUtil.quote(
 						entryQuery.getDescription(), StringPool.PERCENT));
-			}
-
-			if (Validator.isNotNull(entryQuery.getUserName())) {
-				qPos.add(
-					StringUtil.quote(
-						entryQuery.getUserName(), StringPool.PERCENT));
 			}
 		}
 
