@@ -197,9 +197,10 @@ public class DLFileEntryLocalServiceTest {
 
 			Assert.assertEquals(1, dlFileEntries.size());
 
+			DLFileEntry dlFileEntry = dlFileEntries.get(0);
+
 			Assert.assertEquals(
-				dlFileEntry.getFileEntryId(),
-				dlFileEntries.get(0).getFileEntryId());
+				dlFileEntry.getFileEntryId(), dlFileEntry.getFileEntryId());
 		}
 		finally {
 			if (dlFileEntry != null) {
