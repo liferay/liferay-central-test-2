@@ -80,11 +80,10 @@ public interface AssetPublisher {
 		throws Exception;
 
 	public List<AssetEntry> getAssetEntries(
-		long[] classNameIds, long[] groupIds, String keywords,
-		String description, String title, String userName,
-		boolean advancedSearch, boolean andOperator, int start, int end,
-		String orderByCol1, String orderByCol2, String orderByType1,
-		String orderByType2);
+		long[] groupIds, long[] classNameIds, String keywords, String userName,
+		String title, String description, boolean advancedSearch,
+		boolean andOperator, int start, int end, String orderByCol1,
+		String orderByCol2, String orderByType1, String orderByType2);
 
 	public List<AssetEntry> getAssetEntries(
 			PortletPreferences portletPreferences, Layout layout,
@@ -138,9 +137,9 @@ public interface AssetPublisher {
 		throws Exception;
 
 	public int getAssetEntriesCount(
-		long[] classNameIds, long[] groupIds, String keywords,
-		String description, String title, String userName,
-		boolean advancedSearch, boolean andOperator, int start, int end);
+		long[] groupIds, long[] classNameIds, String keywords, String userName,
+		String title, String description, boolean advancedSearch,
+		boolean andOperator, int start, int end);
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link

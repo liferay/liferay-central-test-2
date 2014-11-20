@@ -154,15 +154,15 @@ public class AssetEntryQueryTest {
 	@Test
 	public void testAdvancedSearchAndOperatorTitle2() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, "Test", true, "Cabina14 in Madrid", "blah blah blah",
-			1);
+			"Cabina14", null, "Test", true, "Cabina14 in Madrid",
+			"blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorTitle3() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, null, true, "Cabina14 in Madrid", "blah blah blah",
-			1);
+			"Cabina14", null, null, true, "Cabina14 in Madrid",
+			"blah blah blah", 1);
 	}
 
 	@Test
@@ -216,15 +216,15 @@ public class AssetEntryQueryTest {
 	@Test
 	public void testAdvancedSearchOrOperator5() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, null, false, "Cabina14 in Madrid", "blah blah blah",
-			1);
+			"Cabina14", null, null, false, "Cabina14 in Madrid",
+			"blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator6() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, null, false, "Concert in Madrid", "blah blah blah",
-			0);
+			"Cabina14", null, null, false, "Concert in Madrid",
+			"blah blah blah", 0);
 	}
 
 	@Test
@@ -237,20 +237,22 @@ public class AssetEntryQueryTest {
 	@Test
 	public void testAdvancedSearchOrOperator8() throws Exception {
 		testAdvancedSearch(
-			null, "Cabina14", null, false, "Concert in Madrid", "blah blah blah",
-			0);
+			null, "Cabina14", null, false, "Concert in Madrid",
+			"blah blah blah", 0);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator9() throws Exception {
 		testAdvancedSearch(
-			null, null, "Test", false, "Concert in Madrid", "blah blah blah", 2);
+			null, null, "Test", false, "Concert in Madrid", "blah blah blah",
+			2);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator10() throws Exception {
 		testAdvancedSearch(
-			null, null, "Julio", false, "Concert in Madrid", "blah blah blah", 0);
+			null, null, "Julio", false, "Concert in Madrid", "blah blah blah",
+			0);
 	}
 
 	@Test
@@ -548,8 +550,8 @@ public class AssetEntryQueryTest {
 	}
 
 	protected AssetEntryQuery buildAssetEntryQueryWithAdvancedSearch(
-		long groupId, boolean andOperator, String title,
-		String description, String userName) {
+		long groupId, boolean andOperator, String title, String description,
+		String userName) {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
@@ -639,20 +641,21 @@ public class AssetEntryQueryTest {
 		BlogsEntry blogsEntry1 = BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), StringUtil.randomString(),
 			StringPool.BLANK, StringUtil.randomString(),
-			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
-			true, null, null, null, serviceContext);
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true, true, null,
+			null, null, serviceContext);
 
 		BlogsEntry blogsEntry2 = BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title, StringPool.BLANK, description,
-			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
-			true, null, null, null, serviceContext);
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true, true, null,
+			null, null, serviceContext);
 
 		threadLocalCache.removeAll();
 
 		int assetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialAssetEntriesCount + expectedResults, assetEntriesCount);
+		Assert.assertEquals(
+			initialAssetEntriesCount + expectedResults, assetEntriesCount);
 
 		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry1);
 		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry2);
@@ -725,7 +728,8 @@ public class AssetEntryQueryTest {
 		int allTagsEntries = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialAssetEntriesCount + expectedResults, allTagsEntries);
+		Assert.assertEquals(
+			initialAssetEntriesCount + expectedResults, allTagsEntries);
 	}
 
 	protected void testAssetKeywords(
@@ -751,20 +755,21 @@ public class AssetEntryQueryTest {
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), StringUtil.randomString(),
 			StringPool.BLANK, StringUtil.randomString(),
-			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
-			true, null, null, null, serviceContext);
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true, true, null,
+			null, null, serviceContext);
 
 		BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title, StringPool.BLANK, description,
-			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true,
-			true, null, null, null, serviceContext);
+			RandomTestUtil.randomString(), 1, 1, 1965, 0, 0, true, true, null,
+			null, null, serviceContext);
 
 		threadLocalCache.removeAll();
 
 		int assetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		Assert.assertEquals(initialAssetEntriesCount + expectedResults, assetEntriesCount);
+		Assert.assertEquals(
+			initialAssetEntriesCount + expectedResults, assetEntriesCount);
 	}
 
 	protected void testAssetTags(
