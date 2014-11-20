@@ -548,9 +548,8 @@ public class AssetEntryQueryTest {
 	}
 
 	protected AssetEntryQuery buildAssetEntryQueryWithAdvancedSearch(
-			long groupId, boolean isAndOperator, String title,
-			String description, String userName)
-		throws PortalException {
+		long groupId, boolean isAndOperator, String title,
+		String description, String userName) {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
@@ -604,8 +603,7 @@ public class AssetEntryQueryTest {
 	}
 
 	protected AssetEntryQuery buildAssetEntryQueryWithKeywords(
-			long groupId, String keywords)
-		throws PortalException {
+		long groupId, String keywords) {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
@@ -626,8 +624,6 @@ public class AssetEntryQueryTest {
 				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
 
 		threadLocalCache.removeAll();
-
-		User user = TestPropsValues.getUser();
 
 		AssetEntryQuery assetEntryQuery =
 			buildAssetEntryQueryWithAdvancedSearch(
