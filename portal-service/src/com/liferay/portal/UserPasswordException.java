@@ -257,8 +257,8 @@ public class UserPasswordException extends PortalException {
 
 			super(
 				String.format(
-					"Password for user %s must not contain any dictionary " +
-						"words such as: %s",
+					"Password for user %s must not contain dictionary words " +
+						"such as: %s",
 					userId, _getDictionaryWordsString(dictionaryWords)),
 				PASSWORD_CONTAINS_TRIVIAL_WORDS);
 
