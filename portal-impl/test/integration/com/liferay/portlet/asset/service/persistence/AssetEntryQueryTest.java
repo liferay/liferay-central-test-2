@@ -128,7 +128,7 @@ public class AssetEntryQueryTest {
 	}
 
 	@Test
-	public void testAdvancedSearchAndOperatorDescription() throws Exception {
+	public void testAdvancedSearchAndOperatorDescription1() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", true, "Concert in Madrid",
 			"Cabina14 blah blah blah", 0);
@@ -149,7 +149,7 @@ public class AssetEntryQueryTest {
 	}
 
 	@Test
-	public void testAdvancedSearchAndOperatorTitle() throws Exception {
+	public void testAdvancedSearchAndOperatorTitle1() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", true, "Cabina14 in Madrid",
 			"Cabina14 blah blah blah", 0);
@@ -170,7 +170,7 @@ public class AssetEntryQueryTest {
 	}
 
 	@Test
-	public void testAdvancedSearchAndOperatorUserName() throws Exception {
+	public void testAdvancedSearchAndOperatorUserName1() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", true, "Cabina14 in Madrid",
 			"Cabina14 blah blah blah", 0);
@@ -190,7 +190,7 @@ public class AssetEntryQueryTest {
 	}
 
 	@Test
-	public void testAdvancedSearchOrOperator() throws Exception {
+	public void testAdvancedSearchOrOperator1() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", false, "Concert in Madrid",
 			"blah blah blah", 0);
