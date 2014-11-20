@@ -121,48 +121,48 @@ public class AssetEntryQueryTest {
 	public void testAdvancedSearchAndOperator() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Test", true, "Cabina14 in Madrid",
-			"Cabina14 bla bla bla", 1);
+			"Cabina14 blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorDescription() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", true, "Concert in Madrid",
-			"Cabina14 bla bla bla", 0);
+			"Cabina14 blah blah blah", 0);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorDescription2() throws Exception {
 		testAdvancedSearch(
 			null, "Cabina14", "Test", true, "Concert in Madrid",
-			"Cabina14 bla bla bla", 1);
+			"Cabina14 blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorDescription3() throws Exception {
 		testAdvancedSearch(
 			null, "Cabina14", null, true, "Concert in Madrid",
-			"Cabina14 bla bla bla", 1);
+			"Cabina14 blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorTitle() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", true, "Cabina14 in Madrid",
-			"Cabina14 bla bla bla", 0);
+			"Cabina14 blah blah blah", 0);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorTitle2() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, "Test", true, "Cabina14 in Madrid", "bla bla bla",
+			"Cabina14", null, "Test", true, "Cabina14 in Madrid", "blah blah blah",
 			1);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorTitle3() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, null, true, "Cabina14 in Madrid", "bla bla bla",
+			"Cabina14", null, null, true, "Cabina14 in Madrid", "blah blah blah",
 			1);
 	}
 
@@ -170,61 +170,61 @@ public class AssetEntryQueryTest {
 	public void testAdvancedSearchAndOperatorUserName() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", true, "Cabina14 in Madrid",
-			"Cabina14 bla bla bla", 0);
+			"Cabina14 blah blah blah", 0);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorUserName2() throws Exception {
 		testAdvancedSearch(
 			null, "Cabina14", "Test", true, "Concert in Madrid",
-			"Cabina14 bla bla bla", 1);
+			"Cabina14 blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchAndOperatorUserName3() throws Exception {
 		testAdvancedSearch(
-			null, null, "Test", true, "Concert in Madrid", "bla bla bla", 2);
+			null, null, "Test", true, "Concert in Madrid", "blah blah blah", 2);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", false, "Concert in Madrid",
-			"bla bla bla", 0);
+			"blah blah blah", 0);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator2() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", false, "Cabina14 in Madrid",
-			"bla bla bla", 1);
+			"blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator3() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Julio", false, "Concert in Madrid",
-			"Cabina14 bla bla bla", 1);
+			"Cabina14 blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator4() throws Exception {
 		testAdvancedSearch(
 			"Cabina14", "Cabina14", "Test", false, "Concert in Madrid",
-			"bla bla bla", 2);
+			"blah blah blah", 2);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator5() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, null, false, "Cabina14 in Madrid", "bla bla bla",
+			"Cabina14", null, null, false, "Cabina14 in Madrid", "blah blah blah",
 			1);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator6() throws Exception {
 		testAdvancedSearch(
-			"Cabina14", null, null, false, "Concert in Madrid", "bla bla bla",
+			"Cabina14", null, null, false, "Concert in Madrid", "blah blah blah",
 			0);
 	}
 
@@ -232,26 +232,26 @@ public class AssetEntryQueryTest {
 	public void testAdvancedSearchOrOperator7() throws Exception {
 		testAdvancedSearch(
 			null, "Cabina14", null, false, "Concert in Madrid",
-			"Cabina14 bla bla bla", 1);
+			"Cabina14 blah blah blah", 1);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator8() throws Exception {
 		testAdvancedSearch(
-			null, "Cabina14", null, false, "Concert in Madrid", "bla bla bla",
+			null, "Cabina14", null, false, "Concert in Madrid", "blah blah blah",
 			0);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator9() throws Exception {
 		testAdvancedSearch(
-			null, null, "Test", false, "Concert in Madrid", "bla bla bla", 2);
+			null, null, "Test", false, "Concert in Madrid", "blah blah blah", 2);
 	}
 
 	@Test
 	public void testAdvancedSearchOrOperator10() throws Exception {
 		testAdvancedSearch(
-			null, null, "Julio", false, "Concert in Madrid", "bla bla bla", 0);
+			null, null, "Julio", false, "Concert in Madrid", "blah blah blah", 0);
 	}
 
 	@Test
@@ -356,22 +356,22 @@ public class AssetEntryQueryTest {
 	@Test
 	public void testKeywordsDescription() throws Exception {
 		testAssetKeywords(
-			"Cabina14", "Concert in Madrid", "Cabina14 Bla bla bla", 1);
+			"Cabina14", "Concert in Madrid", "Cabina14 Blah blah blah", 1);
 	}
 
 	@Test
 	public void testKeywordsNotFound() throws Exception {
-		testAssetKeywords("Cabina14", "Concert in Madrid", "Bla bla bla", 0);
+		testAssetKeywords("Cabina14", "Concert in Madrid", "Blah blah blah", 0);
 	}
 
 	@Test
 	public void testKeywordsTitle() throws Exception {
-		testAssetKeywords("Cabina14", "Cabina14 in Madrid", "Bla bla bla", 1);
+		testAssetKeywords("Cabina14", "Cabina14 in Madrid", "Blah blah blah", 1);
 	}
 
 	@Test
 	public void testKeywordsUserName() throws Exception {
-		testAssetKeywords("Test", "Concert in Madrid", "Bla bla bla", 2);
+		testAssetKeywords("Test", "Concert in Madrid", "Blah blah blah", 2);
 	}
 
 	@Test
