@@ -618,7 +618,7 @@ public class AssetEntryQueryTest {
 	protected void testAdvancedSearch(
 			String searchTitle, String searchDescription, String searchUserName,
 			boolean andOperator, String title, String description,
-			int expectedResults)
+			int expectedAssetEntriesCount)
 		throws Exception {
 
 		ThreadLocalCache<Object[]> threadLocalCache =
@@ -655,7 +655,7 @@ public class AssetEntryQueryTest {
 			assetEntryQuery);
 
 		Assert.assertEquals(
-			initialAssetEntriesCount + expectedResults, assetEntriesCount);
+			initialAssetEntriesCount + expectedAssetEntriesCount, assetEntriesCount);
 
 		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry1);
 		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry2);
@@ -663,20 +663,20 @@ public class AssetEntryQueryTest {
 
 	protected void testAssetCategories(
 			long[] assetCategoryIds, boolean any, boolean not,
-			int expectedResults)
+			int expectedAssetEntriesCount)
 		throws Exception {
 
 		testAssetCategorization(
 			assetCategoryIds, null, "Skiing in the Alps", _assetCategoryIds1,
 			null, "Keep your body in a good shape!", _assetCategoryIds2, null,
-			any, not, expectedResults);
+			any, not, expectedAssetEntriesCount);
 	}
 
 	protected void testAssetCategorization(
 			long[] assetCategoryIds, String[] assetTagNames, String title1,
 			long[] assetCategoryIds1, String[] assetTagNames1, String title2,
 			long[] assetCategoryIds2, String[] assetTagNames2, boolean any,
-			boolean not, int expectedResults)
+			boolean not, int expectedAssetEntriesCount)
 		throws Exception {
 
 		ThreadLocalCache<Object[]> threadLocalCache =
@@ -729,12 +729,12 @@ public class AssetEntryQueryTest {
 			assetEntryQuery);
 
 		Assert.assertEquals(
-			initialAssetEntriesCount + expectedResults, allTagsEntries);
+			initialAssetEntriesCount + expectedAssetEntriesCount, allTagsEntries);
 	}
 
 	protected void testAssetKeywords(
 			String keywords, String title, String description,
-			int expectedResults)
+			int expectedAssetEntriesCount)
 		throws Exception {
 
 		ThreadLocalCache<Object[]> threadLocalCache =
@@ -769,12 +769,12 @@ public class AssetEntryQueryTest {
 			assetEntryQuery);
 
 		Assert.assertEquals(
-			initialAssetEntriesCount + expectedResults, assetEntriesCount);
+			initialAssetEntriesCount + expectedAssetEntriesCount, assetEntriesCount);
 	}
 
 	protected void testAssetTags(
 			String[] assetTagNames, boolean any, boolean not,
-			int expectedResults)
+			int expectedAssetEntriesCount)
 		throws Exception {
 
 		testAssetCategorization(
@@ -782,7 +782,7 @@ public class AssetEntryQueryTest {
 			new String[] {"liferay", "architecture", "services"},
 			"Modularity with OSGI", null,
 			new String[] {"liferay", "architecture", "modularity", "osgi"}, any,
-			not, expectedResults);
+			not, expectedAssetEntriesCount);
 	}
 
 	protected void testOrderByRatings(
