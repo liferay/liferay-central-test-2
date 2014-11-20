@@ -196,8 +196,7 @@ public class DLFileEntryLocalServiceTest {
 				DLFileEntryLocalServiceUtil.getOrphanedFileEntries();
 
 			Assert.assertEquals(1, dlFileEntries.size());
-			Assert.assertEquals(
-				dlFileEntry, dlFileEntries.get(0));
+			Assert.assertEquals(dlFileEntry, dlFileEntries.get(0));
 		}
 		finally {
 			if (dlFileEntry != null) {
