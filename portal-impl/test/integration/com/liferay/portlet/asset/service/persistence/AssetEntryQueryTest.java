@@ -366,7 +366,8 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testKeywordsTitle() throws Exception {
-		testAssetKeywords("Cabina14", "Cabina14 in Madrid", "Blah blah blah", 1);
+		testAssetKeywords(
+			"Cabina14", "Cabina14 in Madrid", "Blah blah blah", 1);
 	}
 
 	@Test
