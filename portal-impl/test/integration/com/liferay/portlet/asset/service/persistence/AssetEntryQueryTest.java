@@ -752,12 +752,12 @@ public class AssetEntryQueryTest {
 		assetEntryQuery = buildAssetEntryQuery(
 			_group.getGroupId(), assetCategoryIds, assetTagNames, any, not);
 
-		int allTagsEntries = AssetEntryServiceUtil.getEntriesCount(
+		int assetEntriesCount = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
 		Assert.assertEquals(
 			initialAssetEntriesCount + expectedAssetEntriesCount,
-			allTagsEntries);
+			assetEntriesCount);
 	}
 
 	protected void testAssetKeywords(
