@@ -265,7 +265,7 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 			Assert.assertEquals(
 				"Unable to send notify message", logRecord2.getMessage());
 
-			// Test 4, configurate InetSockAddress
+			// Test 4, configure InetSockAddress
 
 			logRecords = captureHandler.resetLogLevel(Level.SEVERE);
 
@@ -1007,12 +1007,12 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 				clusterExecutorImpl.execute(
 					ClusterRequest.createMulticastRequest(null)));
 
-			// Test 12, configurate InetSocketAddress of remote
+			// Test 12, configure InetSocketAddress of remote
 
 			clusterExecutorImpl.portalServerInetSocketAddressConfigured(
 				new InetSocketAddress(80));
 
-			// Test 13, configurate InetSocketAddress of local
+			// Test 13, configure InetSocketAddress of local
 
 			clusterExecutorImpl.portalLocalInetSockAddressConfigured(
 				new InetSocketAddress(80));
