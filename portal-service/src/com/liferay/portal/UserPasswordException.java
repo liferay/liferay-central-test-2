@@ -277,7 +277,7 @@ public class UserPasswordException extends PortalException {
 			return dictionaryWords.toString();
 		}
 
-		List sampleDictionaryWords = dictionaryWords.subList(0, 10);
+		List<String> sampleDictionaryWords = dictionaryWords.subList(0, 10);
 
 		return sampleDictionaryWords.toString() + StringPool.SPACE +
 			StringPool.TRIPLE_PERIOD;
