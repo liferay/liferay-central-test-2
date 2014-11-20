@@ -17,7 +17,7 @@ package com.liferay.polls.configuration;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 /**
- * @author Miguel pastor
+ * @author Miguel Pastor
  */
 public class PollsServiceConfigurationValues {
 

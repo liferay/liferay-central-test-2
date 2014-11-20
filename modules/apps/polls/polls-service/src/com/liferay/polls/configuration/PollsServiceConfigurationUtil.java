@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 
 /**
- * @author Miguel pastor
+ * @author Miguel Pastor
  */
 public class PollsServiceConfigurationUtil {
 
