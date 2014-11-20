@@ -84,7 +84,8 @@ public class AssetEntryQueryTest {
 		_fashionAssetCategoryId = fashionCategory.getCategoryId();
 
 		AssetCategory foodCategory = AssetCategoryLocalServiceUtil.addCategory(
-			TestPropsValues.getUserId(), "Food", _assetVocabularyId, serviceContext);
+			TestPropsValues.getUserId(), "Food", _assetVocabularyId,
+			serviceContext);
 
 		_foodAssetCategoryId = foodCategory.getCategoryId();
 
@@ -109,10 +110,13 @@ public class AssetEntryQueryTest {
 		_travelAssetCategoryId = travelCategory.getCategoryId();
 
 		_assetCategoryIds1 =
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId, _travelAssetCategoryId};
+			new long[] {
+				_healthAssetCategoryId, _sportAssetCategoryId,
+				_travelAssetCategoryId
+			};
 		_assetCategoryIds2 = new long[] {
-			_fashionAssetCategoryId, _foodAssetCategoryId, _healthAssetCategoryId,
-			_sportAssetCategoryId
+			_fashionAssetCategoryId, _foodAssetCategoryId,
+			_healthAssetCategoryId, _sportAssetCategoryId
 		};
 	}
 
@@ -257,19 +261,24 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testAllAssetCategories1() throws Exception {
-		testAssetCategories(new long[] {_healthAssetCategoryId}, false, false, 2);
+		testAssetCategories(
+			new long[] {_healthAssetCategoryId}, false, false, 2);
 	}
 
 	@Test
 	public void testAllAssetCategories2() throws Exception {
 		testAssetCategories(
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId}, false, false, 2);
+			new long[] {_healthAssetCategoryId, _sportAssetCategoryId},
+			false, false, 2);
 	}
 
 	@Test
 	public void testAllAssetCategories3() throws Exception {
 		testAssetCategories(
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId, _foodAssetCategoryId},
+			new long[] {
+				_healthAssetCategoryId, _sportAssetCategoryId,
+				_foodAssetCategoryId
+			},
 			false, false, 1);
 	}
 
@@ -277,8 +286,8 @@ public class AssetEntryQueryTest {
 	public void testAllAssetCategories4() throws Exception {
 		testAssetCategories(
 			new long[] {
-				_healthAssetCategoryId, _sportAssetCategoryId, _foodAssetCategoryId,
-				_travelAssetCategoryId
+				_healthAssetCategoryId, _sportAssetCategoryId,
+				_foodAssetCategoryId, _travelAssetCategoryId
 			},
 			false, false, 0);
 	}
@@ -310,26 +319,32 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testAnyAssetCategories1() throws Exception {
-		testAssetCategories(new long[] {_healthAssetCategoryId}, true, false, 2);
+		testAssetCategories(
+			new long[] {_healthAssetCategoryId}, true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories2() throws Exception {
 		testAssetCategories(
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId}, true, false, 2);
+			new long[] {_healthAssetCategoryId, _sportAssetCategoryId},
+			true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories3() throws Exception {
 		testAssetCategories(
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId, _foodAssetCategoryId},
+			new long[] {
+				_healthAssetCategoryId, _sportAssetCategoryId,
+				_foodAssetCategoryId
+			},
 			true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories4() throws Exception {
 		testAssetCategories(
-			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId}, true, false, 1);
+			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId},
+			true, false, 1);
 	}
 
 	@Test
@@ -378,25 +393,31 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testNotAllAssetCategories1() throws Exception {
-		testAssetCategories(new long[] {_healthAssetCategoryId}, false, true, 0);
+		testAssetCategories(
+			new long[] {_healthAssetCategoryId}, false, true, 0);
 	}
 
 	@Test
 	public void testNotAllAssetCategories2() throws Exception {
 		testAssetCategories(
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId}, false, true, 0);
+			new long[] {_healthAssetCategoryId, _sportAssetCategoryId},
+			false, true, 0);
 	}
 
 	@Test
 	public void testNotAllAssetCategories3() throws Exception {
 		testAssetCategories(
-			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId}, false, true, 1);
+			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId},
+			false, true, 1);
 	}
 
 	@Test
 	public void testNotAllAssetCategories4() throws Exception {
 		testAssetCategories(
-			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId, _travelAssetCategoryId},
+			new long[] {
+				_fashionAssetCategoryId, _foodAssetCategoryId,
+				_travelAssetCategoryId
+			},
 			false, true, 2);
 	}
 
@@ -432,20 +453,25 @@ public class AssetEntryQueryTest {
 	@Test
 	public void testNotAnyAssetCategories2() throws Exception {
 		testAssetCategories(
-			new long[] {_healthAssetCategoryId, _sportAssetCategoryId}, true, true, 0);
+			new long[] {_healthAssetCategoryId, _sportAssetCategoryId},
+			true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories3() throws Exception {
 		testAssetCategories(
-			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId, _travelAssetCategoryId},
+			new long[] {
+				_fashionAssetCategoryId, _foodAssetCategoryId,
+				_travelAssetCategoryId
+			},
 			true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories4() throws Exception {
 		testAssetCategories(
-			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId}, true, true, 1);
+			new long[] {_fashionAssetCategoryId, _foodAssetCategoryId},
+			true, true, 1);
 	}
 
 	@Test
@@ -655,7 +681,8 @@ public class AssetEntryQueryTest {
 			assetEntryQuery);
 
 		Assert.assertEquals(
-			initialAssetEntriesCount + expectedAssetEntriesCount, assetEntriesCount);
+			initialAssetEntriesCount + expectedAssetEntriesCount,
+			assetEntriesCount);
 
 		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry1);
 		BlogsEntryLocalServiceUtil.deleteEntry(blogsEntry2);
@@ -729,7 +756,8 @@ public class AssetEntryQueryTest {
 			assetEntryQuery);
 
 		Assert.assertEquals(
-			initialAssetEntriesCount + expectedAssetEntriesCount, allTagsEntries);
+			initialAssetEntriesCount + expectedAssetEntriesCount,
+			allTagsEntries);
 	}
 
 	protected void testAssetKeywords(
@@ -769,7 +797,8 @@ public class AssetEntryQueryTest {
 			assetEntryQuery);
 
 		Assert.assertEquals(
-			initialAssetEntriesCount + expectedAssetEntriesCount, assetEntriesCount);
+			initialAssetEntriesCount + expectedAssetEntriesCount,
+			assetEntriesCount);
 	}
 
 	protected void testAssetTags(
@@ -866,6 +895,7 @@ public class AssetEntryQueryTest {
 
 	private long[] _assetCategoryIds1;
 	private long[] _assetCategoryIds2;
+	private long _assetVocabularyId;
 	private long _fashionAssetCategoryId;
 	private long _foodAssetCategoryId;
 
@@ -875,6 +905,5 @@ public class AssetEntryQueryTest {
 	private long _healthAssetCategoryId;
 	private long _sportAssetCategoryId;
 	private long _travelAssetCategoryId;
-	private long _assetVocabularyId;
 
 }
