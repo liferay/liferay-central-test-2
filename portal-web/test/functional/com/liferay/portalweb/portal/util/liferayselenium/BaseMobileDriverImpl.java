@@ -93,8 +93,8 @@ public abstract class BaseMobileDriverImpl
 		throw new UnsupportedOperationException();
 	}
 
-	public void assertEmptyLiferayExceptionList() throws Exception {
-		LiferaySeleniumHelper.assertEmptyLiferayExceptionList();
+	public void assertNoLiferayExceptions() throws Exception {
+		LiferaySeleniumHelper.assertNoLiferayExceptions();
 	}
 
 	@Override

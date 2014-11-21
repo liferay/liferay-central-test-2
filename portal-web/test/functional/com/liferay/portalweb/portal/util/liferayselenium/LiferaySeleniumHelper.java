@@ -167,7 +167,7 @@ public class LiferaySeleniumHelper {
 			subject, liferaySelenium.getEmailSubject(index));
 	}
 
-	public static void assertEmptyLiferayExceptionList() throws Exception {
+	public static void assertNoLiferayExceptions() throws Exception {
 		if (!_liferayExceptionList.isEmpty()) {
 			StringBundler sb = new StringBundler();
 
