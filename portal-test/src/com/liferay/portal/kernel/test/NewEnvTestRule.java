@@ -300,13 +300,12 @@ public class NewEnvTestRule implements TestRule {
 		public RunInNewClassLoaderStatement(Description description) {
 			Class<?> testClass = description.getTestClass();
 
-			_testClassName = testClass.getName();
+			_afterMethodKeys = getMethodKeys(testClass, After.class);
 			_beforeMethodKeys = getMethodKeys(testClass, Before.class);
+			_newClassLoader = createClassLoader(description);
+			_testClassName = testClass.getName();
 			_testMethodKey = new MethodKey(
 				testClass, description.getMethodName());
-			_afterMethodKeys = getMethodKeys(testClass, After.class);
-
-			_newClassLoader = createClassLoader(description);
 		}
 
 		@Override
@@ -375,11 +374,11 @@ public class NewEnvTestRule implements TestRule {
 
 			Class<?> testClass = description.getTestClass();
 
-			_testClassName = testClass.getName();
+			_afterMethodKeys = getMethodKeys(testClass, After.class);
 			_beforeMethodKeys = getMethodKeys(testClass, Before.class);
+			_testClassName = testClass.getName();
 			_testMethodKey = new MethodKey(
 				testClass, description.getMethodName());
-			_afterMethodKeys = getMethodKeys(testClass, After.class);
 		}
 
 		@Override
