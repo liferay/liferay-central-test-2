@@ -93,7 +93,6 @@ public class JournalContentSearchLocalServiceImpl
 						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 						portletId);
 
-				String className = displayInformationProvider.getClassName();
 				String classPK = displayInformationProvider.getClassPK(
 					preferences);
 
