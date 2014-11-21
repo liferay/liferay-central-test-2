@@ -34,14 +34,15 @@ import org.jboss.arquillian.test.spi.event.suite.TestEvent;
  */
 public class TransactionalExecutorImpl implements TransactionalExecutor {
 
-	public void execute(EventContext eventContext) throws Throwable {
+	@Override
+	public void execute(EventContext<?> eventContext) throws Throwable {
 		Transactional transactional = getAnnotation(eventContext.getEvent());
 
 		executeInTransaction(transactional, eventContext);
 	}
 
 	protected void executeInTransaction(
-			Transactional transactional, final EventContext eventContext)
+			Transactional transactional, final EventContext<?> eventContext)
 		throws Throwable {
 
 		if (transactional == null) {
