@@ -60,7 +60,6 @@ public class LocalizationImplTest {
 		_cache.setAccessible(true);
 
 		_defaultLocale = LocaleUtil.getDefault();
-
 		_localization = LocalizationUtil.getLocalization();
 	}
 
