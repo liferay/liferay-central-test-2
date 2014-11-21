@@ -119,21 +119,22 @@ public class OrganizationImpl extends OrganizationBaseImpl {
 	}
 
 	@Override
-	public long[] getAncestorIds() throws PortalException {
+	public long[] getAncestorOrganizationIds() throws PortalException {
 		if (Validator.isNull(getTreePath())) {
-			List<Organization> ancestors = getAncestors();
+			List<Organization> ancestorOrganizations = getAncestors();
 
-			Collections.reverse(ancestors);
+			Collections.reverse(ancestorOrganizations);
 
-			long[] ancestorIds = new long[ancestors.size()];
+			long[] ancestorOrganizationIds =
+				new long[ancestorOrganizations.size()];
 
-			for (int i = 0; i < ancestors.size(); i++) {
-				Organization organization = ancestors.get(i);
+			for (int i = 0; i < ancestorOrganizations.size(); i++) {
+				Organization organization = ancestorOrganizations.get(i);
 
-				ancestorIds[i] = organization.getOrganizationId();
+				ancestorOrganizationIds[i] = organization.getOrganizationId();
 			}
 
-			return ancestorIds;
+			return ancestorOrganizationIds;
 		}
 
 		long[] primaryKeys = StringUtil.split(
@@ -143,12 +144,12 @@ public class OrganizationImpl extends OrganizationBaseImpl {
 			return new long[0];
 		}
 
-		long[] ancestorIds = new long[primaryKeys.length - 2];
+		long[] ancestorOrganizationIds = new long[primaryKeys.length - 2];
 
 		System.arraycopy(
-			primaryKeys, 1, ancestorIds, 0, primaryKeys.length - 2);
+			primaryKeys, 1, ancestorOrganizationIds, 0, primaryKeys.length - 2);
 
-		return ancestorIds;
+		return ancestorOrganizationIds;
 	}
 
 	@Override

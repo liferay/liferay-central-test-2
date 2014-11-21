@@ -49,18 +49,20 @@ public class OrganizationImplTest {
 	}
 
 	@Test
-	public void testGetAncestorIds() throws Exception {
+	public void testGetAncestorOrganizationIds() throws Exception {
 		Assert.assertArrayEquals(
 			new long[] {
 				_organization1.getOrganizationId(),
 				_organization2.getOrganizationId(),
 				_organization3.getOrganizationId()
 			},
-			_organization4.getAncestorIds());
+			_organization4.getAncestorOrganizationIds());
 	}
 
 	@Test
-	public void testGetAncestorIdsWithNullTreePath() throws Exception {
+	public void testGetAncestorOrganizationIdsWithNullTreePath()
+		throws Exception {
+
 		_organization4.setTreePath(null);
 
 		Assert.assertArrayEquals(
@@ -69,7 +71,7 @@ public class OrganizationImplTest {
 				_organization2.getOrganizationId(),
 				_organization3.getOrganizationId()
 			},
-			_organization4.getAncestorIds());
+			_organization4.getAncestorOrganizationIds());
 	}
 
 	@DeleteAfterTestRun
