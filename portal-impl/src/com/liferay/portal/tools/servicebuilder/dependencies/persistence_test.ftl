@@ -35,8 +35,6 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -1228,8 +1226,6 @@ public class ${entity.name}PersistenceTest {
 			return ${entity.varName};
 		}
 	</#if>
-
-	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceTest.class);
 
 	private List<${entity.name}> _${entity.varNames} = new ArrayList<${entity.name}>();
 	private ${entity.name}Persistence _persistence = ${entity.name}Util.getPersistence();
