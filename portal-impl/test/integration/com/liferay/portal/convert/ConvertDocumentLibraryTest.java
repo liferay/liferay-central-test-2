@@ -312,17 +312,16 @@ public class ConvertDocumentLibraryTest {
 
 		Assert.assertNotEquals(
 			delete,
-			_sourceStore.hasFile(
-				folderDLFileEntry.getCompanyId(),
-				folderDLFileEntry.getDataRepositoryId(),
-				folderDLFileEntry.getName()));
-
-		Assert.assertNotEquals(
-			delete,
 			_sourceStore.hasDirectory(
 				folderDLFileEntry.getCompanyId(),
 				DLPreviewableProcessor.REPOSITORY_ID,
 				DLPreviewableProcessor.THUMBNAIL_PATH));
+		Assert.assertNotEquals(
+			delete,
+			_sourceStore.hasFile(
+				folderDLFileEntry.getCompanyId(),
+				folderDLFileEntry.getDataRepositoryId(),
+				folderDLFileEntry.getName()));
 	}
 
 	protected void testMigrateDL(long folderId) throws Exception {
