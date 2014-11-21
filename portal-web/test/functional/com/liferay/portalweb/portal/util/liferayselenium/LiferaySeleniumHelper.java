@@ -63,8 +63,8 @@ import org.sikuli.script.Screen;
  */
 public class LiferaySeleniumHelper {
 
-	public static void addToJavascriptExceptions(Exception exception) {
-		_javascriptExceptions.add(exception);
+	public static void addToJavaScriptExceptions(Exception exception) {
+		_javaScriptExceptions.add(exception);
 	}
 
 	public static void addToLiferayExceptions(Exception exception) {
@@ -264,14 +264,14 @@ public class LiferaySeleniumHelper {
 		BaseTestCase.assertEquals(pattern, liferaySelenium.getLocation());
 	}
 
-	public static void assertNoJavascriptExceptions() throws Exception {
-		if (!_javascriptExceptions.isEmpty()) {
+	public static void assertNoJavaScriptExceptions() throws Exception {
+		if (!_javaScriptExceptions.isEmpty()) {
 			StringBundler sb = new StringBundler();
 
-			sb.append(_javascriptExceptions.size());
+			sb.append(_javaScriptExceptions.size());
 			sb.append(" Javascript Exception");
 
-			if (_javascriptExceptions.size() > 1) {
+			if (_javaScriptExceptions.size() > 1) {
 				sb.append("s were");
 			}
 			else {
@@ -285,8 +285,8 @@ public class LiferaySeleniumHelper {
 			System.out.println("## " + sb.toString());
 			System.out.println("##");
 
-			for (int i = 0; i < _javascriptExceptions.size(); i++) {
-				Exception liferayException = _javascriptExceptions.get(i);
+			for (int i = 0; i < _javaScriptExceptions.size(); i++) {
+				Exception liferayException = _javaScriptExceptions.get(i);
 
 				System.out.println();
 				System.out.println("##");
@@ -1710,7 +1710,7 @@ public class LiferaySeleniumHelper {
 		}
 	}
 
-	private static List<Exception> _javascriptExceptions =
+	private static List<Exception> _javaScriptExceptions =
 		new ArrayList<Exception>();
 	private static List<Exception> _liferayExceptions =
 		new ArrayList<Exception>();

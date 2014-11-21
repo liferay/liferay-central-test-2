@@ -122,7 +122,7 @@ public class WebDriverHelper {
 
 				Exception exception = new Exception(javaScriptErrorValue);
 
-				LiferaySeleniumHelper.addToJavascriptExceptions(exception);
+				LiferaySeleniumHelper.addToJavaScriptExceptions(exception);
 
 				throw exception;
 			}

@@ -125,8 +125,8 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
-	public void assertNoJavascriptExceptions() throws Exception {
-		LiferaySeleniumHelper.assertNoJavascriptExceptions();
+	public void assertNoJavaScriptExceptions() throws Exception {
+		LiferaySeleniumHelper.assertNoJavaScriptExceptions();
 	}
 
 	@Override

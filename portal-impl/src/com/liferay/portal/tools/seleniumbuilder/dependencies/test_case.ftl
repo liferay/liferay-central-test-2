@@ -216,7 +216,7 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)}
 
 				method${commandName}("${commandName}", false);
 
-				selenium.assertNoJavascriptExceptions();
+				selenium.assertNoJavaScriptExceptions();
 				selenium.assertNoLiferayExceptions();
 
 				testPassed = true;
