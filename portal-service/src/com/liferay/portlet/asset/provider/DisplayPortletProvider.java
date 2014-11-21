@@ -25,9 +25,9 @@ public interface DisplayPortletProvider {
 
 	public String getPortletId();
 
-	public void setPreferences(
-			PortletPreferences preferences, String portletId, String className,
-			long classPK, ThemeDisplay themeDisplay)
+	public void setPortletPreferences(
+			PortletPreferences portletPreferences, String portletId,
+			String className, long classPK, ThemeDisplay themeDisplay)
 		throws Exception;
 
 }

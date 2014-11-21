@@ -361,7 +361,7 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 			_serviceTrackerMap.getService(getClassName());
 
 		if (displayPortletProvider != null) {
-			displayPortletProvider.setPreferences(
+			displayPortletProvider.setPortletPreferences(
 				preferences, portletId, getClassName(), getClassPK(),
 				themeDisplay);
 

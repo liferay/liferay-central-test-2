@@ -46,9 +46,9 @@ public class JournalContentDisplayPortletProvider
 	}
 
 	@Override
-	public void setPreferences(
-			PortletPreferences preferences, String portletId, String className,
-			long classPK, ThemeDisplay themeDisplay)
+	public void setPortletPreferences(
+			PortletPreferences portletPreferences, String portletId,
+			String className, long classPK, ThemeDisplay themeDisplay)
 		throws Exception {
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
@@ -66,8 +66,9 @@ public class JournalContentDisplayPortletProvider
 
 		JournalArticle article = articleAssetRenderer.getArticle();
 
-		preferences.setValue("articleId", article.getArticleId());
-		preferences.setValue("groupId", String.valueOf(article.getGroupId()));
+		portletPreferences.setValue("articleId", article.getArticleId());
+		portletPreferences.setValue(
+			"groupId", String.valueOf(article.getGroupId()));
 
 		Layout layout = themeDisplay.getLayout();
 
