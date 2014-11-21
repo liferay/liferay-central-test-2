@@ -353,7 +353,7 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 
 	@Override
 	public void setAddToPagePreferences(
-			PortletPreferences preferences, String portletId,
+			PortletPreferences portletPreferences, String portletId,
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
@@ -362,24 +362,25 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 
 		if (displayPortletProvider != null) {
 			displayPortletProvider.setPortletPreferences(
-				preferences, portletId, getClassName(), getClassPK(),
+				portletPreferences, portletId, getClassName(), getClassPK(),
 				themeDisplay);
 
 			return;
 		}
 
-		preferences.setValue("displayStyle", "full-content");
-		preferences.setValue(
+		portletPreferences.setValue("displayStyle", "full-content");
+		portletPreferences.setValue(
 			"emailAssetEntryAddedEnabled", Boolean.FALSE.toString());
-		preferences.setValue("selectionStyle", "manual");
-		preferences.setValue("showAddContentButton", Boolean.FALSE.toString());
+		portletPreferences.setValue("selectionStyle", "manual");
+		portletPreferences.setValue(
+			"showAddContentButton", Boolean.FALSE.toString());
 
-		AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			getClassName(), getClassPK());
 
 		AssetPublisherUtil.addSelection(
-			themeDisplay, preferences, portletId, entry.getEntryId(), -1,
-			entry.getClassName());
+			themeDisplay, portletPreferences, portletId,
+			assetEntry.getEntryId(), -1, assetEntry.getClassName());
 	}
 
 	public void setAssetRendererType(int assetRendererType) {
