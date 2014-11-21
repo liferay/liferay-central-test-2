@@ -16,8 +16,6 @@ package com.liferay.arquillian.extension.persistence.internal.observer;
 
 import com.liferay.arquillian.extension.internal.event.LiferayContextCreatedEvent;
 import com.liferay.arquillian.extension.persistence.internal.annotation.PersistenceTest;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.tools.DBUpgrader;
@@ -47,8 +45,5 @@ public class PersistenceTestObserver {
 			TemplateManagerUtil.init();
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		PersistenceTestObserver.class);
 
 }
