@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.test.runners.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 
 import java.lang.reflect.Field;
@@ -145,7 +146,7 @@ public class LocalizationImplTest {
 
 	@Test
 	public void testGetModifiedLocales() throws Exception {
-		String key = "mykey";
+		String key = RandomTestUtil.randomString();
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
@@ -154,7 +155,6 @@ public class LocalizationImplTest {
 
 		LocalizationUtil.setPreferencesValue(
 			preferences, key, defaultLanguageId, "A0");
-
 		LocalizationUtil.setPreferencesValue(
 			preferences, key, _germanLanguageId, "B0");
 
@@ -163,7 +163,6 @@ public class LocalizationImplTest {
 
 		LocalizationUtil.setPreferencesValue(
 			preferences, key, defaultLanguageId, "A1");
-
 		LocalizationUtil.setPreferencesValue(
 			preferences, key, _germanLanguageId, "B1");
 
@@ -179,7 +178,7 @@ public class LocalizationImplTest {
 
 	@Test
 	public void testGetPreferencesValue() throws Exception {
-		String key = "mykey";
+		String key = RandomTestUtil.randomString();
 
 		LocaleUtil.setDefault(
 			LocaleUtil.US.getLanguage(), LocaleUtil.US.getCountry(),
@@ -189,7 +188,6 @@ public class LocalizationImplTest {
 
 		LocalizationUtil.setPreferencesValue(
 			preferences, key, _englishLanguageId, "A");
-
 		LocalizationUtil.setPreferencesValue(
 			preferences, key, _germanLanguageId, "B");
 
@@ -197,12 +195,10 @@ public class LocalizationImplTest {
 			"A",
 			LocalizationUtil.getPreferencesValue(
 				preferences, key, _englishLanguageId));
-
 		Assert.assertEquals(
 			"B",
 			LocalizationUtil.getPreferencesValue(
 				preferences, key, _germanLanguageId));
-
 		Assert.assertEquals(
 			"A",
 			LocalizationUtil.getPreferencesValue(
@@ -216,12 +212,10 @@ public class LocalizationImplTest {
 			"A",
 			LocalizationUtil.getPreferencesValue(
 				preferences, key, _englishLanguageId));
-
 		Assert.assertEquals(
 			"B",
 			LocalizationUtil.getPreferencesValue(
 				preferences, key, _germanLanguageId));
-
 		Assert.assertEquals(
 			"B",
 			LocalizationUtil.getPreferencesValue(
