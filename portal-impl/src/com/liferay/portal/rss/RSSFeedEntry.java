@@ -41,11 +41,11 @@ import java.util.List;
 public class RSSFeedEntry {
 
 	public RSSFeedEntry(
-		SyndEntry syndEntry, ThemeDisplay themeDisplay, RSSFeed rssFeed) {
+		RSSFeed rssFeed, SyndEntry syndEntry, ThemeDisplay themeDisplay) {
 
+		_rssFeed = rssFeed;
 		_syndEntry = syndEntry;
 		_themeDisplay = themeDisplay;
-		_rssFeed = rssFeed;
 
 		List<SyndEnclosure> syndEnclosures = syndEntry.getEnclosures();
 

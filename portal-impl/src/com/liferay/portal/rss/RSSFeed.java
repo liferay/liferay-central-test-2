@@ -115,7 +115,7 @@ public class RSSFeed {
 
 		for (Object syndEntry : syndFeed.getEntries()) {
 			RSSFeedEntry rssFeedEntry = new RSSFeedEntry(
-				(SyndEntry)syndEntry, themeDisplay, this);
+				this, (SyndEntry)syndEntry, themeDisplay);
 
 			_rssFeedEntries.add(rssFeedEntry);
 		}
