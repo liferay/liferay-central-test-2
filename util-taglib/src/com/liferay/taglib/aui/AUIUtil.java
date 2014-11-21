@@ -224,9 +224,8 @@ public class AUIUtil {
 
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public static String normalizeId(String name) {
