@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -491,7 +489,6 @@ public class LockPersistenceTest {
 		return lock;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LockPersistenceTest.class);
 	private List<Lock> _locks = new ArrayList<Lock>();
 	private LockPersistence _persistence = LockUtil.getPersistence();
 }

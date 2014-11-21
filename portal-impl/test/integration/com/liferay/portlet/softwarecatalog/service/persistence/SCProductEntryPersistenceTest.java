@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -541,7 +539,6 @@ public class SCProductEntryPersistenceTest {
 		return scProductEntry;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCProductEntryPersistenceTest.class);
 	private List<SCProductEntry> _scProductEntries = new ArrayList<SCProductEntry>();
 	private SCProductEntryPersistence _persistence = SCProductEntryUtil.getPersistence();
 }

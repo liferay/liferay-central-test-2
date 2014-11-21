@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -410,7 +408,6 @@ public class SCLicensePersistenceTest {
 		return scLicense;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SCLicensePersistenceTest.class);
 	private List<SCLicense> _scLicenses = new ArrayList<SCLicense>();
 	private SCLicensePersistence _persistence = SCLicenseUtil.getPersistence();
 }

@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.test.PersistenceTestRule;
@@ -363,7 +361,6 @@ public class OrgGroupRolePersistenceTest {
 		return orgGroupRole;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(OrgGroupRolePersistenceTest.class);
 	private List<OrgGroupRole> _orgGroupRoles = new ArrayList<OrgGroupRole>();
 	private OrgGroupRolePersistence _persistence = OrgGroupRoleUtil.getPersistence();
 }

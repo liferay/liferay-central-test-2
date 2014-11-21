@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -426,7 +424,6 @@ public class ExpandoTablePersistenceTest {
 		return expandoTable;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ExpandoTablePersistenceTest.class);
 	private List<ExpandoTable> _expandoTables = new ArrayList<ExpandoTable>();
 	private ExpandoTablePersistence _persistence = ExpandoTableUtil.getPersistence();
 }

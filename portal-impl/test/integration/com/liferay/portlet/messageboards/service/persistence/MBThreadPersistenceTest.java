@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -756,7 +754,6 @@ public class MBThreadPersistenceTest {
 		return mbThread;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MBThreadPersistenceTest.class);
 	private List<MBThread> _mbThreads = new ArrayList<MBThread>();
 	private MBThreadPersistence _persistence = MBThreadUtil.getPersistence();
 }

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -428,7 +426,6 @@ public class PasswordPolicyRelPersistenceTest {
 		return passwordPolicyRel;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyRelPersistenceTest.class);
 	private List<PasswordPolicyRel> _passwordPolicyRels = new ArrayList<PasswordPolicyRel>();
 	private PasswordPolicyRelPersistence _persistence = PasswordPolicyRelUtil.getPersistence();
 }

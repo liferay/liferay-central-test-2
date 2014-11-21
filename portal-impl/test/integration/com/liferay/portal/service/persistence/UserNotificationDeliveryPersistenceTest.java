@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -480,7 +478,6 @@ public class UserNotificationDeliveryPersistenceTest {
 		return userNotificationDelivery;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserNotificationDeliveryPersistenceTest.class);
 	private List<UserNotificationDelivery> _userNotificationDeliveries = new ArrayList<UserNotificationDelivery>();
 	private UserNotificationDeliveryPersistence _persistence = UserNotificationDeliveryUtil.getPersistence();
 }

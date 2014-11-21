@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
@@ -428,7 +426,6 @@ public class RegionPersistenceTest {
 		return region;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RegionPersistenceTest.class);
 	private List<Region> _regions = new ArrayList<Region>();
 	private RegionPersistence _persistence = RegionUtil.getPersistence();
 }

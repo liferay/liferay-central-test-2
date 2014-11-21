@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -486,7 +484,6 @@ public class LayoutSetPrototypePersistenceTest {
 		return layoutSetPrototype;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypePersistenceTest.class);
 	private List<LayoutSetPrototype> _layoutSetPrototypes = new ArrayList<LayoutSetPrototype>();
 	private LayoutSetPrototypePersistence _persistence = LayoutSetPrototypeUtil.getPersistence();
 }

@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.model.UserGroupGroupRole;
@@ -427,7 +425,6 @@ public class UserGroupGroupRolePersistenceTest {
 		return userGroupGroupRole;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserGroupGroupRolePersistenceTest.class);
 	private List<UserGroupGroupRole> _userGroupGroupRoles = new ArrayList<UserGroupGroupRole>();
 	private UserGroupGroupRolePersistence _persistence = UserGroupGroupRoleUtil.getPersistence();
 }

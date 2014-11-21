@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -495,7 +493,6 @@ public class JournalArticleImagePersistenceTest {
 		return journalArticleImage;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalArticleImagePersistenceTest.class);
 	private List<JournalArticleImage> _journalArticleImages = new ArrayList<JournalArticleImage>();
 	private JournalArticleImagePersistence _persistence = JournalArticleImageUtil.getPersistence();
 }

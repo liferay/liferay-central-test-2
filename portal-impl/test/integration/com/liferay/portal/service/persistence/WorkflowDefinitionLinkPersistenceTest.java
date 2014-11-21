@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -530,7 +528,6 @@ public class WorkflowDefinitionLinkPersistenceTest {
 		return workflowDefinitionLink;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WorkflowDefinitionLinkPersistenceTest.class);
 	private List<WorkflowDefinitionLink> _workflowDefinitionLinks = new ArrayList<WorkflowDefinitionLink>();
 	private WorkflowDefinitionLinkPersistence _persistence = WorkflowDefinitionLinkUtil.getPersistence();
 }

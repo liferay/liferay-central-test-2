@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -494,7 +492,6 @@ public class PortletItemPersistenceTest {
 		return portletItem;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(PortletItemPersistenceTest.class);
 	private List<PortletItem> _portletItems = new ArrayList<PortletItem>();
 	private PortletItemPersistence _persistence = PortletItemUtil.getPersistence();
 }

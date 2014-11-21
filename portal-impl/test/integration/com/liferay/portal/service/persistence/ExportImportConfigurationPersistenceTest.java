@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -534,7 +532,6 @@ public class ExportImportConfigurationPersistenceTest {
 		return exportImportConfiguration;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ExportImportConfigurationPersistenceTest.class);
 	private List<ExportImportConfiguration> _exportImportConfigurations = new ArrayList<ExportImportConfiguration>();
 	private ExportImportConfigurationPersistence _persistence = ExportImportConfigurationUtil.getPersistence();
 }

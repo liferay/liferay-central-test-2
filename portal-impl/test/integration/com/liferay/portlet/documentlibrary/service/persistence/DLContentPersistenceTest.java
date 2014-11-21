@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -504,7 +502,6 @@ public class DLContentPersistenceTest {
 		return dlContent;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLContentPersistenceTest.class);
 	private List<DLContent> _dlContents = new ArrayList<DLContent>();
 	private DLContentPersistence _persistence = DLContentUtil.getPersistence();
 }

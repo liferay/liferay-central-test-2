@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -435,7 +433,6 @@ public class VirtualHostPersistenceTest {
 		return virtualHost;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(VirtualHostPersistenceTest.class);
 	private List<VirtualHost> _virtualHosts = new ArrayList<VirtualHost>();
 	private VirtualHostPersistence _persistence = VirtualHostUtil.getPersistence();
 }

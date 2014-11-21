@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -550,7 +548,6 @@ public class DDLRecordSetPersistenceTest {
 		return ddlRecordSet;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DDLRecordSetPersistenceTest.class);
 	private List<DDLRecordSet> _ddlRecordSets = new ArrayList<DDLRecordSet>();
 	private DDLRecordSetPersistence _persistence = DDLRecordSetUtil.getPersistence();
 }

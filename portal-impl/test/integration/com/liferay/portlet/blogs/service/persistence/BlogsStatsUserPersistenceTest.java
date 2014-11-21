@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -505,7 +503,6 @@ public class BlogsStatsUserPersistenceTest {
 		return blogsStatsUser;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserPersistenceTest.class);
 	private List<BlogsStatsUser> _blogsStatsUsers = new ArrayList<BlogsStatsUser>();
 	private BlogsStatsUserPersistence _persistence = BlogsStatsUserUtil.getPersistence();
 }

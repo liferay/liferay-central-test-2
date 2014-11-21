@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -437,7 +435,6 @@ public class WebDAVPropsPersistenceTest {
 		return webDAVProps;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WebDAVPropsPersistenceTest.class);
 	private List<WebDAVProps> _webDAVPropses = new ArrayList<WebDAVProps>();
 	private WebDAVPropsPersistence _persistence = WebDAVPropsUtil.getPersistence();
 }
