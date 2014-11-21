@@ -22,7 +22,7 @@ import com.liferay.arquillian.extension.persistence.internal.observer.Persistenc
 import org.jboss.arquillian.core.spi.LoadableExtension;
 
 /**
- * @author Cristina González Castellano
+ * @author Cristina González
  */
 public class PersistenceTestScenarioExtension implements LoadableExtension {
 
