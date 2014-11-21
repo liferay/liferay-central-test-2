@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.journalcontent;
+package com.liferay.portlet.journalcontent.asset.provider;
 
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.StringPool;
