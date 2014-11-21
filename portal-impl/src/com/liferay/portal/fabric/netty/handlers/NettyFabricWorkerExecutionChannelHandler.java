@@ -395,8 +395,8 @@ public class NettyFabricWorkerExecutionChannelHandler
 					new URLClassLoader(
 						ArrayUtil.append(
 							ClassPathUtil.getClassPathURLs(_bootstrapClassPath),
-							ClassPathUtil.getClassPathURLs(_runtimeClassPath)))
-				);
+							ClassPathUtil.getClassPathURLs(
+								_runtimeClassPath))));
 			}
 			catch (MalformedURLException murle) {
 				throw new ProcessException(murle);
