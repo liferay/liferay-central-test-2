@@ -101,8 +101,8 @@ public class LiferayIntegrationJUnitTestRunner
 	}
 
 	@Override
-	protected List<TestRule> getTestRules(Object target) {
-		List<TestRule> testRules = super.getTestRules(target);
+	protected List<TestRule> getTestRules(Object object) {
+		List<TestRule> testRules = super.getTestRules(object);
 
 		testRules.add(_logAssertionTestRule);
 
