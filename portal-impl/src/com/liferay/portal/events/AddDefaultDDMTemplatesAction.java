@@ -65,9 +65,6 @@ public class AddDefaultDDMTemplatesAction extends SimpleAction {
 			List<Element> templateElements =
 				templateHandler.getDefaultTemplateElements();
 
-			ClassLoader classLoader =
-				templateHandler.getClass().getClassLoader();
-
 			for (Element templateElement : templateElements) {
 				String templateKey = templateElement.elementText(
 					"template-key");
@@ -80,27 +77,22 @@ public class AddDefaultDDMTemplatesAction extends SimpleAction {
 					continue;
 				}
 
-				String name = templateElement.elementText("name");
-				String description = templateElement.elementText("description");
+				Map<Locale, String> nameMap = getLocalizationMap(
+					groupId, templateElement.elementText("name"));
+				Map<Locale, String> descriptionMap = getLocalizationMap(
+					groupId, templateElement.elementText("description"));
 				String language = templateElement.elementText("language");
 				String scriptFileName = templateElement.elementText(
 					"script-file");
-				boolean cacheable = GetterUtil.getBoolean(
-					templateElement.elementText("cacheable"));
 
-				Map<Locale, String> nameMap = new HashMap<Locale, String>();
-				Map<Locale, String> descriptionMap =
-					new HashMap<Locale, String>();
+				Class<?> clazz = templateHandler.getClass();
 
-				Locale[] locales = LanguageUtil.getAvailableLocales(groupId);
-
-				for (Locale locale : locales) {
-					nameMap.put(locale, LanguageUtil.get(locale, name));
-					descriptionMap.put(
-						locale, LanguageUtil.get(locale, description));
-				}
+				ClassLoader classLoader = clazz.getClassLoader();
 
 				String script = ContentUtil.get(classLoader, scriptFileName);
+
+				boolean cacheable = GetterUtil.getBoolean(
+					templateElement.elementText("cacheable"));
 
 				DDMTemplateLocalServiceUtil.addTemplate(
 					userId, groupId, classNameId, 0, templateKey, nameMap,
@@ -123,6 +115,18 @@ public class AddDefaultDDMTemplatesAction extends SimpleAction {
 		serviceContext.setUserId(defaultUserId);
 
 		addDDMTemplates(defaultUserId, group.getGroupId(), serviceContext);
+	}
+
+	protected Map<Locale, String> getLocalizationMap(long groupId, String key) {
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		Locale[] locales = LanguageUtil.getAvailableLocales(groupId);
+
+		for (Locale locale : locales) {
+			map.put(locale, LanguageUtil.get(locale, key));
+		}
+
+		return map;
 	}
 
 }
