@@ -40,12 +40,15 @@ public class OrganizationImplTest {
 	@Before
 	public void setUp() throws Exception {
 		_organization1 = OrganizationTestUtil.addOrganization();
+
 		_organization2 = OrganizationTestUtil.addOrganization(
 			_organization1.getOrganizationId(), RandomTestUtil.randomString(),
 			false);
+
 		_organization3 = OrganizationTestUtil.addOrganization(
 			_organization2.getOrganizationId(), RandomTestUtil.randomString(),
 			false);
+
 		_organization4 = OrganizationTestUtil.addOrganization(
 			_organization3.getOrganizationId(), RandomTestUtil.randomString(),
 			false);
