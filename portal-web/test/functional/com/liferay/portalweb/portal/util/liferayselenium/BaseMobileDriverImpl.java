@@ -93,10 +93,6 @@ public abstract class BaseMobileDriverImpl
 		throw new UnsupportedOperationException();
 	}
 
-	public void assertNoLiferayExceptions() throws Exception {
-		LiferaySeleniumHelper.assertNoLiferayExceptions();
-	}
-
 	@Override
 	public void assertHTMLSourceTextNotPresent(String value) throws Exception {
 		throw new UnsupportedOperationException();
@@ -126,6 +122,11 @@ public abstract class BaseMobileDriverImpl
 	@Override
 	public void assertLocation(String pattern) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void assertNoLiferayExceptions() throws Exception {
+		LiferaySeleniumHelper.assertNoLiferayExceptions();
 	}
 
 	@Override

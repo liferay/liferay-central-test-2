@@ -113,10 +113,6 @@ public abstract class BaseSeleniumImpl
 		LiferaySeleniumHelper.assertEmailSubject(this, index, subject);
 	}
 
-	public void assertNoLiferayExceptions() throws Exception {
-		LiferaySeleniumHelper.assertNoLiferayExceptions();
-	}
-
 	@Override
 	public void assertHTMLSourceTextNotPresent(String value) throws Exception {
 		LiferaySeleniumHelper.assertHTMLSourceTextNotPresent(this, value);
@@ -144,6 +140,11 @@ public abstract class BaseSeleniumImpl
 	@Override
 	public void assertLocation(String pattern) {
 		LiferaySeleniumHelper.assertLocation(this, pattern);
+	}
+
+	@Override
+	public void assertNoLiferayExceptions() throws Exception {
+		LiferaySeleniumHelper.assertNoLiferayExceptions();
 	}
 
 	@Override

@@ -44,8 +44,6 @@ public interface LiferaySelenium extends Selenium {
 	public void assertEmailSubject(String index, String subject)
 		throws Exception;
 
-	public void assertNoLiferayExceptions() throws Exception;
-
 	public void assertHTMLSourceTextNotPresent(String value) throws Exception;
 
 	public void assertHTMLSourceTextPresent(String value) throws Exception;
@@ -56,6 +54,8 @@ public interface LiferaySelenium extends Selenium {
 	public void assertLiferayErrors() throws Exception;
 
 	public void assertLocation(String pattern);
+
+	public void assertNoLiferayExceptions() throws Exception;
 
 	public void assertNotAlert(String pattern);
 

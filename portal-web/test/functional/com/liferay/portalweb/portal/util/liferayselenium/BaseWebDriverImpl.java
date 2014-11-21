@@ -132,10 +132,6 @@ public abstract class BaseWebDriverImpl
 		LiferaySeleniumHelper.assertEmailSubject(this, index, subject);
 	}
 
-	public void assertNoLiferayExceptions() throws Exception {
-		LiferaySeleniumHelper.assertNoLiferayExceptions();
-	}
-
 	@Override
 	public void assertHTMLSourceTextNotPresent(String value) throws Exception {
 		LiferaySeleniumHelper.assertHTMLSourceTextPresent(this, value);
@@ -165,6 +161,11 @@ public abstract class BaseWebDriverImpl
 	@Override
 	public void assertLocation(String pattern) {
 		LiferaySeleniumHelper.assertLocation(this, pattern);
+	}
+
+	@Override
+	public void assertNoLiferayExceptions() throws Exception {
+		LiferaySeleniumHelper.assertNoLiferayExceptions();
 	}
 
 	@Override
