@@ -68,8 +68,7 @@ public class TransactionalExecutorImpl implements TransactionalExecutor {
 					return null;
 				}
 
-			}
-		);
+			});
 	}
 
 	protected Transactional getAnnotation(ClassEvent classEvent) {
@@ -79,21 +78,21 @@ public class TransactionalExecutorImpl implements TransactionalExecutor {
 	}
 
 	protected Transactional getAnnotation(Object object) {
-		if (object instanceof TestEvent) {
-			return getAnnotation((TestEvent)object);
-		}
-		else if (object instanceof ClassEvent) {
+		if (object instanceof ClassEvent) {
 			return getAnnotation((ClassEvent)object);
+		}
+		else if (object instanceof TestEvent) {
+			return getAnnotation((TestEvent)object);
 		}
 
 		throw new RuntimeException(
-			"The type of the event should be TestEvent or ClassEvent");
+			"Object " + object + " is not a class event or test event");
 	}
 
 	protected Transactional getAnnotation(TestEvent testEvent) {
-		Method testMethod = testEvent.getTestMethod();
+		Method method = testEvent.getTestMethod();
 
-		Transactional transactional = testMethod.getAnnotation(
+		Transactional transactional = method.getAnnotation(
 			Transactional.class);
 
 		if (transactional != null) {

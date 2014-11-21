@@ -28,8 +28,8 @@ import org.jboss.arquillian.core.api.annotation.Observes;
  */
 public class TransactionalExecutorInstanceProducer {
 
-	public void createTransactionalUtil
-		(@Observes ArquillianDescriptor arquillianDescriptor) {
+	public void createTransactionalUtil(
+		@Observes ArquillianDescriptor arquillianDescriptor) {
 
 		_instanceProducer.set(new TransactionalExecutorImpl());
 	}
