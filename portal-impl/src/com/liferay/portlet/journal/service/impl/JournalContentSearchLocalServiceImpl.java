@@ -86,7 +86,7 @@ public class JournalContentSearchLocalServiceImpl
 					continue;
 				}
 
-				PortletPreferences preferences =
+				PortletPreferences portletPreferences =
 					portletPreferencesLocalService.getPreferences(
 						layout.getCompanyId(),
 						PortletKeys.PREFS_OWNER_ID_DEFAULT,
@@ -94,7 +94,7 @@ public class JournalContentSearchLocalServiceImpl
 						portletId);
 
 				String classPK = displayInformationProvider.getClassPK(
-					preferences);
+					portletPreferences);
 
 				updateContentSearch(
 					layout.getGroupId(), layout.isPrivateLayout(),
