@@ -177,7 +177,7 @@ public class JournalContentPortlet extends MVCPortlet {
 	}
 
 	@Reference(unbind = "-")
-	protected void setInvitationUpgrade(
+	protected void setJournalContentUpgrade(
 		JournalContentUpgrade journalContentUpgrade) {
 	}
 
