@@ -176,16 +176,16 @@ public class JournalContentPortlet extends MVCPortlet {
 			classLoader.getResource("META-INF/portlet-log4j.xml"));
 	}
 
-	@Reference(unbind = "-")
-	protected void setJournalContentUpgrade(
-		JournalContentUpgrade journalContentUpgrade) {
-	}
-
 	@Reference
 	protected void setJournalContentSearchLocal(
 		JournalArticleLocalService journalArticleLocalService) {
 
 		_journalArticleLocalService = journalArticleLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setJournalContentUpgrade(
+		JournalContentUpgrade journalContentUpgrade) {
 	}
 
 	protected void unsetJournalContentSearchLocal(
