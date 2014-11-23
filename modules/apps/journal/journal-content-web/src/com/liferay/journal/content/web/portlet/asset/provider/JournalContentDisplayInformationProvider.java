@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.content.web.portlet.asset;
+package com.liferay.journal.content.web.portlet.asset.provider;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.asset.provider.DisplayInformationProvider;

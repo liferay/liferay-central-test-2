@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.content.web.portlet.asset;
+package com.liferay.journal.content.web.portlet.asset.provider;
 
 import com.liferay.journal.content.web.util.JournalContentPortletKeys;
 import com.liferay.portal.model.Layout;
