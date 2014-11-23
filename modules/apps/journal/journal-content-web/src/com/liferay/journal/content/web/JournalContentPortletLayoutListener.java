@@ -54,7 +54,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-			"javax.portlet.name=com_liferay_journal_content_web_portlet_JournalContentPortlet"
+		"javax.portlet.name=com_liferay_journal_content_web_portlet_JournalContentPortlet"
 	},
 	service = PortletLayoutListener.class
 )
