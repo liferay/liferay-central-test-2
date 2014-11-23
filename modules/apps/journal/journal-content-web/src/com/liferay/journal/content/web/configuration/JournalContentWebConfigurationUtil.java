@@ -22,13 +22,13 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
  */
 public class JournalContentWebConfigurationUtil {
 
-	public static final Configuration _configuration =
-		ConfigurationFactoryUtil.getConfiguration(
-			JournalContentWebConfigurationUtil.class.getClassLoader(),
-			"portlet");
-
 	public static String get(String key) {
 		return _configuration.get(key);
 	}
+
+	private static final Configuration _configuration =
+		ConfigurationFactoryUtil.getConfiguration(
+			JournalContentWebConfigurationUtil.class.getClassLoader(),
+			"portlet");
 
 }
