@@ -73,7 +73,7 @@ public class JournalArticleLocalServiceTest {
 		}
 
 		List<JournalArticle> journalArticles =
-			JournalArticleLocalServiceUtil.getByNoPermissions();
+			JournalArticleLocalServiceUtil.getNoPermissionArticles();
 
 		Assert.assertEquals(1, journalArticles.size());
 

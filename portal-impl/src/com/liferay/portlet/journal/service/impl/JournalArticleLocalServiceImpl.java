@@ -2389,7 +2389,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	@Override
-	public List<JournalArticle> getByNoPermissions() {
+	public List<JournalArticle> getNoPermissionArticles() {
 		return journalArticleFinder.findByNoPermissions();
 	}
 
