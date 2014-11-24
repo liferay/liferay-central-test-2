@@ -56,56 +56,55 @@ public class JournalArticleLocalServiceTest {
 	}
 
 	@Test
-	public void testGetByNoPermissions() throws Exception {
-		JournalArticle journalArticle = JournalTestUtil.addArticle(
+	public void testGetNoPermissionArticles() throws Exception {
+		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		List<ResourcePermission> resourcePermissions =
 			ResourcePermissionLocalServiceUtil.getResourcePermissions(
-				journalArticle.getCompanyId(), JournalArticle.class.getName(),
+				article.getCompanyId(), JournalArticle.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(journalArticle.getResourcePrimKey()));
+				String.valueOf(article.getResourcePrimKey()));
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
 			ResourcePermissionLocalServiceUtil.deleteResourcePermission(
 				resourcePermission.getResourcePermissionId());
 		}
 
-		List<JournalArticle> journalArticles =
+		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getNoPermissionArticles();
 
-		Assert.assertEquals(1, journalArticles.size());
-
-		Assert.assertEquals(journalArticle, journalArticles.get(0));
+		Assert.assertEquals(1, articles.size());
+		Assert.assertEquals(article, articles.get(0));
 	}
 
 	@Test
 	public void testGetNoAssetArticles() throws Exception {
-		JournalArticle journalArticle2 = JournalTestUtil.addArticle(
+		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
 			JournalArticle.class.getName(),
-			journalArticle2.getResourcePrimKey());
+			article.getResourcePrimKey());
 
 		Assert.assertNotNull(assetEntry);
 
 		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
 
-		List<JournalArticle> journalArticles =
+		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getNoAssetArticles();
 
-		for (JournalArticle journalArticle : journalArticles) {
+		for (JournalArticle curArticle : articles) {
 			assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
 				JournalArticle.class.getName(),
-				journalArticle.getResourcePrimKey());
+				curArticle.getResourcePrimKey());
 
 			Assert.assertNull(assetEntry);
 
 			JournalArticleLocalServiceUtil.deleteJournalArticle(
-				journalArticle.getPrimaryKey());
+				curArticle.getPrimaryKey());
 		}
 	}
 
