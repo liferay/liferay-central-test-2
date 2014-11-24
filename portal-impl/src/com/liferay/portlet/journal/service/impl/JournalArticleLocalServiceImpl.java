@@ -2388,11 +2388,6 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.countByG_A(groupId, articleId);
 	}
 
-	@Override
-	public List<JournalArticle> getNoPermissionArticles() {
-		return journalArticleFinder.findByNoPermissions();
-	}
-
 	/**
 	 * Returns an ordered range of all the web content articles matching the
 	 * company, version, and workflow status.
@@ -2886,6 +2881,11 @@ public class JournalArticleLocalServiceImpl
 	@Override
 	public List<JournalArticle> getNoAssetArticles() {
 		return journalArticleFinder.findByNoAssets();
+	}
+
+	@Override
+	public List<JournalArticle> getNoPermissionArticles() {
+		return journalArticleFinder.findByNoPermissions();
 	}
 
 	/**
