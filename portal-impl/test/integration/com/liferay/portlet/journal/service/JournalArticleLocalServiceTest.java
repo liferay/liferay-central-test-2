@@ -56,6 +56,34 @@ public class JournalArticleLocalServiceTest {
 	}
 
 	@Test
+	public void testGetNoAssetArticles() throws Exception {
+		JournalArticle article = JournalTestUtil.addArticle(
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+			JournalArticle.class.getName(), article.getResourcePrimKey());
+
+		Assert.assertNotNull(assetEntry);
+
+		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
+
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getNoAssetArticles();
+
+		for (JournalArticle curArticle : articles) {
+			assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+				JournalArticle.class.getName(),
+				curArticle.getResourcePrimKey());
+
+			Assert.assertNull(assetEntry);
+
+			JournalArticleLocalServiceUtil.deleteJournalArticle(
+				curArticle.getPrimaryKey());
+		}
+	}
+
+	@Test
 	public void testGetNoPermissionArticles() throws Exception {
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
@@ -77,35 +105,6 @@ public class JournalArticleLocalServiceTest {
 
 		Assert.assertEquals(1, articles.size());
 		Assert.assertEquals(article, articles.get(0));
-	}
-
-	@Test
-	public void testGetNoAssetArticles() throws Exception {
-		JournalArticle article = JournalTestUtil.addArticle(
-			_group.getGroupId(),
-			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			JournalArticle.class.getName(),
-			article.getResourcePrimKey());
-
-		Assert.assertNotNull(assetEntry);
-
-		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
-
-		List<JournalArticle> articles =
-			JournalArticleLocalServiceUtil.getNoAssetArticles();
-
-		for (JournalArticle curArticle : articles) {
-			assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-				JournalArticle.class.getName(),
-				curArticle.getResourcePrimKey());
-
-			Assert.assertNull(assetEntry);
-
-			JournalArticleLocalServiceUtil.deleteJournalArticle(
-				curArticle.getPrimaryKey());
-		}
 	}
 
 	@Rule
