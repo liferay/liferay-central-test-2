@@ -15,23 +15,29 @@
 package com.liferay.portal.service.persistence.test;
 
 import com.liferay.portal.NoSuchListTypeException;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.TransactionalTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ListType;
+import com.liferay.portal.service.ListTypeLocalServiceUtil;
 import com.liferay.portal.service.persistence.ListTypePersistence;
 import com.liferay.portal.service.persistence.ListTypeUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
+import com.liferay.portal.util.PropsValues;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -136,6 +142,20 @@ public class ListTypePersistenceTest {
 			_persistence.countByType(StringPool.NULL);
 
 			_persistence.countByType((String)null);
+		}
+		catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testCountByN_T() {
+		try {
+			_persistence.countByN_T(StringPool.BLANK, StringPool.BLANK);
+
+			_persistence.countByN_T(StringPool.NULL, StringPool.NULL);
+
+			_persistence.countByN_T((String)null, (String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
@@ -281,6 +301,28 @@ public class ListTypePersistenceTest {
 	}
 
 	@Test
+	public void testActionableDynamicQuery() throws Exception {
+		final IntegerWrapper count = new IntegerWrapper();
+
+		ActionableDynamicQuery actionableDynamicQuery = ListTypeLocalServiceUtil.getActionableDynamicQuery();
+
+		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod() {
+				@Override
+				public void performAction(Object object) {
+					ListType listType = (ListType)object;
+
+					Assert.assertNotNull(listType);
+
+					count.increment();
+				}
+			});
+
+		actionableDynamicQuery.performActions();
+
+		Assert.assertEquals(count.getValue(), _persistence.countAll());
+	}
+
+	@Test
 	public void testDynamicQueryByPrimaryKeyExisting()
 		throws Exception {
 		ListType newListType = addListType();
@@ -350,6 +392,26 @@ public class ListTypePersistenceTest {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
+	}
+
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ListType newListType = addListType();
+
+		_persistence.clearCache();
+
+		ListType existingListType = _persistence.findByPrimaryKey(newListType.getPrimaryKey());
+
+		Assert.assertTrue(Validator.equals(existingListType.getName(),
+				ReflectionTestUtil.invoke(existingListType, "getOriginalName",
+					new Class<?>[0])));
+		Assert.assertTrue(Validator.equals(existingListType.getType(),
+				ReflectionTestUtil.invoke(existingListType, "getOriginalType",
+					new Class<?>[0])));
 	}
 
 	protected ListType addListType() throws Exception {

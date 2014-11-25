@@ -176,6 +176,11 @@ public class ListTypeWrapper implements ListType, ModelWrapper<ListType> {
 	}
 
 	@Override
+	public void persist() {
+		_listType.persist();
+	}
+
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_listType.setCachedModel(cachedModel);
 	}

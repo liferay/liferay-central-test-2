@@ -56,7 +56,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see MembershipRequestPersistence
- * @see MembershipRequestUtil
+ * @see com.liferay.portal.service.persistence.MembershipRequestUtil
  * @generated
  */
 @ProviderType

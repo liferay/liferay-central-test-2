@@ -26,7 +26,7 @@ import com.liferay.portal.model.MembershipRequest;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see MembershipRequestPersistenceImpl
+ * @see com.liferay.portal.service.persistence.impl.MembershipRequestPersistenceImpl
  * @see MembershipRequestUtil
  * @generated
  */
