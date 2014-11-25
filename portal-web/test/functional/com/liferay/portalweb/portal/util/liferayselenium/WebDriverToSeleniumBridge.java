@@ -1674,6 +1674,18 @@ public class WebDriverToSeleniumBridge
 		_keysSpecialChars.put(">", ".");
 	}
 
+	protected boolean isValidKeycode(String keycode) {
+		for (Keys keys : Keys.values()) {
+			String keysName = keys.name();
+
+			if (keysName.equals(keycode)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	protected void scrollWebElementIntoView(WebElement webElement) {
 		WebDriverHelper.scrollWebElementIntoView(this, webElement);
 	}
@@ -1729,18 +1741,6 @@ public class WebDriverToSeleniumBridge
 		}
 
 		select.selectByIndex(index);
-	}
-
-	protected boolean isValidKeycode(String keycode) {
-		for (Keys keys : Keys.values()) {
-			String keysName = keys.name();
-
-			if (keysName.equals(keycode)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
