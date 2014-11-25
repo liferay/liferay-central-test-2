@@ -86,7 +86,7 @@ public class LiferaySeleniumHelper {
 
 		ExecutorService executorService = Executors.newCachedThreadPool();
 
-		Future future = executorService.submit(antCommands);
+		Future<Void> future = executorService.submit(antCommands);
 
 		try {
 			future.get(150, TimeUnit.SECONDS);
