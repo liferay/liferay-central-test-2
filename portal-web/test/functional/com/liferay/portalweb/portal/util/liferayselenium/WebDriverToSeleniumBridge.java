@@ -953,7 +953,7 @@ public class WebDriverToSeleniumBridge
 		if (keySequence.startsWith("\\")) {
 			String keycode = keySequence.substring(1);
 
-			if (_isValidKeys(keycode)) {
+			if (isValidKeycode(keycode)) {
 				Keys keys = Keys.valueOf(keycode);
 
 				WrapsDriver wrapsDriver = (WrapsDriver)webElement;
@@ -1731,7 +1731,7 @@ public class WebDriverToSeleniumBridge
 		select.selectByIndex(index);
 	}
 
-	private boolean _isValidKeys(String keycode) {
+	protected boolean isValidKeycode(String keycode) {
 		for (Keys keys : Keys.values()) {
 			String keysName = keys.name();
 
