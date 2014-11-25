@@ -105,6 +105,7 @@ public class DefineObjectsTag extends IncludeTag {
 		return SKIP_BODY;
 	}
 
+	@Override
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 	}
