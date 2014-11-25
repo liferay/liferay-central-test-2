@@ -60,8 +60,6 @@ public class DefineObjectsTag extends IncludeTag {
 		pageContext.setAttribute("groupId", group.getGroupId());
 		pageContext.setAttribute("liveGroup", null);
 		pageContext.setAttribute("liveGroupId", 0L);
-		pageContext.setAttribute("stagingGroup", null);
-		pageContext.setAttribute("stagingGroupId", 0L);
 
 		Layout layout = themeDisplay.getLayout();
 
@@ -70,6 +68,9 @@ public class DefineObjectsTag extends IncludeTag {
 				request, "privateLayout", layout.isPrivateLayout()));
 
 		pageContext.setAttribute("privateLayout", privateLayout);
+
+		pageContext.setAttribute("stagingGroup", null);
+		pageContext.setAttribute("stagingGroupId", 0L);
 
 		if (!group.isStaged() && !group.isStagedRemotely() &&
 			!group.hasLocalOrRemoteStagingGroup()) {
@@ -86,13 +87,13 @@ public class DefineObjectsTag extends IncludeTag {
 		pageContext.setAttribute("stagingGroupId", stagingGroup.getGroupId());
 
 		if (Validator.isNotNull(_portletId)) {
-			boolean isStagedPortlet = liveGroup.isStagedPortlet(_portletId);
+			boolean stagedPortlet = liveGroup.isStagedPortlet(_portletId);
 
 			if (group.isStagedRemotely()) {
-				isStagedPortlet = stagingGroup.isStagedPortlet(_portletId);
+				stagedPortlet = stagingGroup.isStagedPortlet(_portletId);
 			}
 
-			if (isStagedPortlet) {
+			if (stagedPortlet) {
 				pageContext.setAttribute("group", stagingGroup);
 				pageContext.setAttribute("groupId", stagingGroup.getGroupId());
 				pageContext.setAttribute("scopeGroup", stagingGroup);
