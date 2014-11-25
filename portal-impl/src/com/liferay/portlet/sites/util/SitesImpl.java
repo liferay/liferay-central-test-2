@@ -564,12 +564,12 @@ public class SitesImpl implements Sites {
 
 		LayoutSet layoutSet = layoutSetPrototype.getLayoutSet();
 
-		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
-			serviceContext);
-
 		List<Layout> layoutSetPrototypeLayouts =
 			LayoutLocalServiceUtil.getLayouts(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout());
+
+		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
+			serviceContext);
 
 		return LayoutLocalServiceUtil.exportLayoutsAsFile(
 			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),

@@ -83,10 +83,10 @@ if (!cmd.equals(Constants.UPDATE)) {
 
 		selectedLayoutIds = new long[liveGroupLayouts.size()];
 
-		int i = 0;
+		for (int i = 0; i < liveGroupLayouts.size(); i++) {
+			Layout liveGroupLayout = liveGroupLayouts.get(i);
 
-		for (Layout liveGroupLayout : liveGroupLayouts) {
-			selectedLayoutIds[i++] = liveGroupLayout.getLayoutId();
+			selectedLayoutIds[i] = liveGroupLayout.getLayoutId();
 		}
 	}
 	else {

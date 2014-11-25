@@ -106,7 +106,7 @@ catch (NoSuchLayoutException nsle) {
 
 treeId = treeId + privateLayout + layoutSetBranchId;
 
-long[] selectedLayoutIds;
+long[] selectedLayoutIds = null;
 
 String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode");
 
@@ -115,10 +115,10 @@ if (openNodes == null) {
 
 	selectedLayoutIds = new long[stagingGroupLayouts.size()];
 
-	int i = 0;
+	for (int i = 0; i < stagingGroupLayouts.size(); i++) {
+		Layout stagingGroupLayout = stagingGroupLayouts.get(i);
 
-	for (Layout stagingGroupLayout : stagingGroupLayouts) {
-		selectedLayoutIds[i++] = stagingGroupLayout.getLayoutId();
+		selectedLayoutIds[i] = stagingGroupLayout.getLayoutId();
 	}
 }
 else {
