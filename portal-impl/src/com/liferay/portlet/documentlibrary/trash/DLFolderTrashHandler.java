@@ -243,6 +243,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 			TrashCapability.class);
 
 		Folder folder = repository.getFolder(classPK);
+
 		Folder destinationFolder = null;
 
 		if (containerModelId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
