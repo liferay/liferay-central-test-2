@@ -116,6 +116,10 @@ public class SyncWatchEventProcessor implements Runnable {
 		Path sourceFilePath = Paths.get(syncFile.getFilePathName());
 
 		if (targetFilePath.equals(sourceFilePath)) {
+			if (isPendingTypePK(syncFile)) {
+				return false;
+			}
+
 			if (FileUtil.hasFileChanged(syncFile)) {
 				SyncFileService.updateFileSyncFile(
 					targetFilePath, _syncAccountId, syncFile);
@@ -136,10 +140,18 @@ public class SyncWatchEventProcessor implements Runnable {
 			return true;
 		}
 		else if (parentTargetFilePath.equals(sourceFilePath.getParent())) {
+			if (isPendingTypePK(syncFile)) {
+				return false;
+			}
+
 			SyncFileService.updateFileSyncFile(
 				targetFilePath, _syncAccountId, syncFile);
 		}
 		else {
+			if (isPendingTypePK(syncFile)) {
+				return false;
+			}
+
 			SyncFileService.moveFileSyncFile(
 				targetFilePath, parentSyncFile.getTypePK(), _syncAccountId,
 				syncFile);
@@ -214,10 +226,18 @@ public class SyncWatchEventProcessor implements Runnable {
 			return true;
 		}
 		else if (parentTargetFilePath.equals(sourceFilePath.getParent())) {
+			if (isPendingTypePK(syncFile)) {
+				return false;
+			}
+
 			SyncFileService.updateFolderSyncFile(
 				targetFilePath, _syncAccountId, syncFile);
 		}
 		else {
+			if (isPendingTypePK(syncFile)) {
+				return false;
+			}
+
 			SyncFileService.moveFolderSyncFile(
 				targetFilePath, parentSyncFile.getTypePK(), _syncAccountId,
 				syncFile);
@@ -259,6 +279,9 @@ public class SyncWatchEventProcessor implements Runnable {
 		if (syncFile == null) {
 			return true;
 		}
+		else if (isPendingTypePK(syncFile)) {
+			return false;
+		}
 
 		SyncFileService.deleteFileSyncFile(_syncAccountId, syncFile);
 
@@ -274,6 +297,9 @@ public class SyncWatchEventProcessor implements Runnable {
 
 		if (syncFile == null) {
 			return true;
+		}
+		else if (isPendingTypePK(syncFile)) {
+			return false;
 		}
 
 		SyncFileService.deleteFolderSyncFile(_syncAccountId, syncFile);
@@ -304,6 +330,8 @@ public class SyncWatchEventProcessor implements Runnable {
 		if (_logger.isTraceEnabled()) {
 			_logger.trace("Processing sync watch events");
 		}
+
+		_pendingTypePKSyncFileIds.clear();
 
 		List<SyncWatchEvent> syncWatchEvents =
 			SyncWatchEventService.findBySyncAccountId(
@@ -351,15 +379,15 @@ public class SyncWatchEventProcessor implements Runnable {
 			}
 			else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_DELETE)) {
 				if (fileType.equals(SyncFile.TYPE_FILE)) {
-					deleteFile(syncWatchEvent);
+					syncWatchEventProcessed = deleteFile(syncWatchEvent);
 				}
 				else {
-					deleteFolder(syncWatchEvent);
+					syncWatchEventProcessed = deleteFolder(syncWatchEvent);
 				}
 			}
 			else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_MODIFY)) {
 				if (fileType.equals(SyncFile.TYPE_FILE)) {
-					modifyFile(syncWatchEvent);
+					syncWatchEventProcessed = modifyFile(syncWatchEvent);
 				}
 			}
 
@@ -381,6 +409,19 @@ public class SyncWatchEventProcessor implements Runnable {
 		_processedSyncWatchEventIds.clear();
 	}
 
+	protected boolean isPendingTypePK(SyncFile syncFile) {
+		if (_pendingTypePKSyncFileIds.contains(syncFile.getSyncFileId())) {
+			return true;
+		}
+		else if (syncFile.getTypePK() == 0) {
+			_pendingTypePKSyncFileIds.add(syncFile.getSyncFileId());
+
+			return true;
+		}
+
+		return false;
+	}
+
 	protected boolean modifyFile(SyncWatchEvent syncWatchEvent)
 		throws Exception {
 
@@ -388,7 +429,13 @@ public class SyncWatchEventProcessor implements Runnable {
 
 		SyncFile syncFile = SyncFileService.fetchSyncFile(filePath.toString());
 
-		if ((syncFile == null) || !FileUtil.hasFileChanged(syncFile)) {
+		if (syncFile == null) {
+			return true;
+		}
+		else if (isPendingTypePK(syncFile)) {
+			return false;
+		}
+		else if (!FileUtil.hasFileChanged(syncFile)) {
 			return true;
 		}
 
@@ -404,6 +451,7 @@ public class SyncWatchEventProcessor implements Runnable {
 		SyncEngine.getEventProcessorExecutorService();
 
 	private boolean _inProgress;
+	private final Set<Long> _pendingTypePKSyncFileIds = new HashSet<Long>();
 	private final Set<Long> _processedSyncWatchEventIds = new HashSet<Long>();
 	private final long _syncAccountId;
 
