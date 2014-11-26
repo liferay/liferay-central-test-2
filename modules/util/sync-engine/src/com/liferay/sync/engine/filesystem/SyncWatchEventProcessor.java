@@ -249,19 +249,7 @@ public class SyncWatchEventProcessor implements Runnable {
 		return true;
 	}
 
-	protected void deleteFile(SyncWatchEvent syncWatchEvent) throws Exception {
-		Path filePath = Paths.get(syncWatchEvent.getFilePathName());
-
-		SyncFile syncFile = SyncFileService.fetchSyncFile(filePath.toString());
-
-		if (syncFile == null) {
-			return;
-		}
-
-		SyncFileService.deleteFileSyncFile(_syncAccountId, syncFile);
-	}
-
-	protected void deleteFolder(SyncWatchEvent syncWatchEvent)
+	protected boolean deleteFile(SyncWatchEvent syncWatchEvent)
 		throws Exception {
 
 		Path filePath = Paths.get(syncWatchEvent.getFilePathName());
@@ -269,10 +257,28 @@ public class SyncWatchEventProcessor implements Runnable {
 		SyncFile syncFile = SyncFileService.fetchSyncFile(filePath.toString());
 
 		if (syncFile == null) {
-			return;
+			return true;
+		}
+
+		SyncFileService.deleteFileSyncFile(_syncAccountId, syncFile);
+
+		return true;
+	}
+
+	protected boolean deleteFolder(SyncWatchEvent syncWatchEvent)
+		throws Exception {
+
+		Path filePath = Paths.get(syncWatchEvent.getFilePathName());
+
+		SyncFile syncFile = SyncFileService.fetchSyncFile(filePath.toString());
+
+		if (syncFile == null) {
+			return true;
 		}
 
 		SyncFileService.deleteFolderSyncFile(_syncAccountId, syncFile);
+
+		return true;
 	}
 
 	protected void doRun() throws Exception {
@@ -375,16 +381,20 @@ public class SyncWatchEventProcessor implements Runnable {
 		_processedSyncWatchEventIds.clear();
 	}
 
-	protected void modifyFile(SyncWatchEvent syncWatchEvent) throws Exception {
+	protected boolean modifyFile(SyncWatchEvent syncWatchEvent)
+		throws Exception {
+
 		Path filePath = Paths.get(syncWatchEvent.getFilePathName());
 
 		SyncFile syncFile = SyncFileService.fetchSyncFile(filePath.toString());
 
 		if ((syncFile == null) || !FileUtil.hasFileChanged(syncFile)) {
-			return;
+			return true;
 		}
 
 		SyncFileService.updateFileSyncFile(filePath, _syncAccountId, syncFile);
+
+		return true;
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
