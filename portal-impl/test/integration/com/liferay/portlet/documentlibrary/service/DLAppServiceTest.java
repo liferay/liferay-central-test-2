@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.test.PrefsPropsReplacement;
+import com.liferay.portal.kernel.util.test.PrefsPropsTemporarySwapper;
 import com.liferay.portal.kernel.workflow.test.WorkflowHandlerInvocationCounter;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.DoAsUserThread;
@@ -182,8 +182,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 		@Test(expected = FileSizeException.class)
 		public void shouldFailIfSizeLimitExceeded() throws Exception {
-			try (PrefsPropsReplacement prefsPropsReplacement =
-					new PrefsPropsReplacement(PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
+			try (PrefsPropsTemporarySwapper prefsPropsReplacement =
+					new PrefsPropsTemporarySwapper(PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
 
 				String fileName = RandomTestUtil.randomString();
 
@@ -1120,8 +1120,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				ContentTypes.TEXT_PLAIN, fileName, StringPool.BLANK,
 				StringPool.BLANK, null, 0, serviceContext);
 
-			try (PrefsPropsReplacement prefsPropsReplacement =
-					new PrefsPropsReplacement(PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
+			try (PrefsPropsTemporarySwapper prefsPropsReplacement =
+					new PrefsPropsTemporarySwapper(PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
 
 				byte[] bytes = RandomTestUtil.randomBytes();
 

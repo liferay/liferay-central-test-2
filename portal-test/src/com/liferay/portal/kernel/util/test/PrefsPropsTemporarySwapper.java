@@ -25,23 +25,23 @@ import javax.portlet.ReadOnlyException;
 /**
  * @author Adolfo Pérez
  */
-public class PrefsPropsReplacement implements AutoCloseable {
+public class PrefsPropsTemporarySwapper implements AutoCloseable {
 
-	public PrefsPropsReplacement(
+	public PrefsPropsTemporarySwapper(
 			String firstKey, Object firstValue, Object... keysAndValues)
 		throws Exception {
 
 		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
 			0, false);
 
-		_saveAndReplace(
+		_setTemporaryValue(
 			portletPreferences, firstKey, String.valueOf(firstValue));
 
 		for (int i = 0; i < keysAndValues.length; i += 2) {
 			String key = String.valueOf(keysAndValues[i]);
 			String value = String.valueOf(keysAndValues[i + 1]);
 
-			_saveAndReplace(portletPreferences, key, value);
+			_setTemporaryValue(portletPreferences, key, value);
 		}
 
 		portletPreferences.store();
@@ -59,7 +59,7 @@ public class PrefsPropsReplacement implements AutoCloseable {
 		portletPreferences.store();
 	}
 
-	private void _saveAndReplace(
+	private void _setTemporaryValue(
 			PortletPreferences portletPreferences, String key, String value)
 		throws ReadOnlyException {
 
