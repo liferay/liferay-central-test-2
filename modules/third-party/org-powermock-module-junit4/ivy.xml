@@ -17,6 +17,6 @@
 	</publications>
 
 	<dependencies defaultconf="default">
-		<dependency name="powermock-module-junit4" org="org.powermock" rev="1.5.6" />
+		<dependency conf="internal->default" name="powermock-module-junit4" org="org.powermock" rev="1.5.6" />
 	</dependencies>
 </ivy-module>
