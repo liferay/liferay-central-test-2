@@ -183,7 +183,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		@Test(expected = FileSizeException.class)
 		public void shouldFailIfSizeLimitExceeded() throws Exception {
 			try (PrefsPropsTemporarySwapper prefsPropsReplacement =
-					new PrefsPropsTemporarySwapper(PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
+					new PrefsPropsTemporarySwapper(
+						PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
 
 				String fileName = RandomTestUtil.randomString();
 
@@ -1121,7 +1122,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				StringPool.BLANK, null, 0, serviceContext);
 
 			try (PrefsPropsTemporarySwapper prefsPropsReplacement =
-					new PrefsPropsTemporarySwapper(PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
+					new PrefsPropsTemporarySwapper(
+						PropsKeys.DL_FILE_MAX_SIZE, 1L)) {
 
 				byte[] bytes = RandomTestUtil.randomBytes();
 
