@@ -518,7 +518,7 @@
 		<if>
 			<contains string="${build-css.output}" substring="Error" />
 			<then>
-				<fail>CSS Builder generated exceptions.</fail>
+				<fail>Sass to CSS Builder generated exceptions.</fail>
 			</then>
 		</if>
 	</target>
