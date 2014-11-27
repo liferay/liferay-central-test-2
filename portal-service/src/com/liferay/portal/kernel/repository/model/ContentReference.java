@@ -38,9 +38,11 @@ public class ContentReference {
 	}
 
 	public static final ContentReference fromInputStream(
-		String sourceFileName, String mimeType, InputStream is, long size) {
+		String sourceFileName, String mimeType, InputStream inputStream,
+		long size) {
 
-		return new ContentReference(sourceFileName, mimeType, null, is, size);
+		return new ContentReference(
+			sourceFileName, mimeType, null, inputStream, size);
 	}
 
 	public String getMimeType() {
@@ -64,13 +66,13 @@ public class ContentReference {
 	}
 
 	protected ContentReference(
-		String sourceFileName, String mimeType, File file, InputStream is,
-		long size) {
+		String sourceFileName, String mimeType, File file,
+		InputStream inputStream, long size) {
 
 		_sourceFileName = sourceFileName;
 		_mimeType = mimeType;
 		_file = file;
-		_inputStream = is;
+		_inputStream = inputStream;
 		_size = size;
 	}
 

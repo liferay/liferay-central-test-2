@@ -33,11 +33,11 @@ public class ModelValidatorUtil {
 	public static final ModelValidator<ContentReference>
 		getDefaultFileSizeModelValidator() {
 
-		return _DEFAULT_FILE_SIZE_MODEL_VALIDATOR;
+		return _defaultFileSizeModelValidator;
 	}
 
 	private static final ModelValidator<ContentReference>
-		_DEFAULT_FILE_SIZE_MODEL_VALIDATOR =
+		_defaultFileSizeModelValidator =
 			new ModelValidator<ContentReference>() {
 
 				@Override
