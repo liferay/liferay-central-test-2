@@ -54,50 +54,68 @@ public class PortletDataContextZipWriterTest extends PowerMockito {
 	}
 
 	@Test
-	public void testMultipleByteArrayAddition() throws Exception {
+	public void testMultipleByteArraysAddition() throws Exception {
 		byte[] bytes = {Byte.MIN_VALUE, Byte.MAX_VALUE};
 
 		_portletDataContext.addZipEntry(_PATH, bytes);
 
-		Mockito.verify(_zipWriter, Mockito.times(1)).addEntry(_PATH, bytes);
+		Mockito.verify(
+			_zipWriter, Mockito.times(1)
+		).addEntry(
+			_PATH, bytes
+		);
 
 		_portletDataContext.addZipEntry(_PATH, bytes);
 
-		//Verify that it's not called again
-
-		Mockito.verify(_zipWriter, Mockito.times(1)).addEntry(_PATH, bytes);
+		Mockito.verify(
+			_zipWriter,
+			Mockito.times(1)).addEntry(
+				_PATH, bytes
+		);
 	}
 
 	@Test
-	public void testMultipleInputStreamAddition() throws Exception {
+	public void testMultipleInputStreamsAddition() throws Exception {
 		byte[] bytes = {Byte.MIN_VALUE, Byte.MAX_VALUE};
 
 		InputStream is = new ByteArrayInputStream(bytes);
 
 		_portletDataContext.addZipEntry(_PATH, is);
 
-		Mockito.verify(_zipWriter, Mockito.times(1)).addEntry(_PATH, is);
+		Mockito.verify(
+			_zipWriter, Mockito.times(1)
+		).addEntry(
+			_PATH, is
+		);
 
 		_portletDataContext.addZipEntry(_PATH, is);
 
-		//Verify that it's not called again
-
-		Mockito.verify(_zipWriter, Mockito.times(1)).addEntry(_PATH, is);
+		Mockito.verify(
+			_zipWriter, Mockito.times(1)
+		).addEntry(
+			_PATH, is
+		);
 	}
 
 	@Test
-	public void testMultipleStringAddition() throws Exception {
+	public void testMultipleStringsAddition() throws Exception {
 		String string = RandomTestUtil.randomString();
 
 		_portletDataContext.addZipEntry(_PATH, string);
 
-		Mockito.verify(_zipWriter, Mockito.times(1)).addEntry(_PATH, string);
+		Mockito.verify(
+			_zipWriter, Mockito.times(1)
+		).addEntry(
+			_PATH, string
+		);
 
 		_portletDataContext.addZipEntry(_PATH, string);
 
-		//Verify that it's not called again
-
-		Mockito.verify(_zipWriter, Mockito.times(1)).addEntry(_PATH, string);
+		Mockito.verify(
+			_zipWriter, Mockito.times(1)
+		).addEntry(
+			_PATH, string
+		);
 	}
 
 	private static final String _PATH = "/test.xml";
