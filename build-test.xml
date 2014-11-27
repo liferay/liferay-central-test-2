@@ -1999,7 +1999,7 @@ ${marketplace.portlet.properties}</echo>
 			}
 		</script>
 
-		<fail message="'${test.name}.testcase' does not exist." unless="test.class.name" />
+		<fail message="${test.name}.testcase does not exist." unless="test.class.name" />
 
 		<if>
 			<not>
