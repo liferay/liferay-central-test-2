@@ -92,6 +92,113 @@ public class VerifyJournal extends VerifyProcess {
 		verifyURLTitle();
 	}
 
+	protected void updateContentSearch(long groupId, String portletId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select preferences from PortletPreferences inner join " +
+					"Layout on PortletPreferences.plid = Layout.plid where " +
+						"groupId = ? and portletId = ?");
+
+			ps.setLong(1, groupId);
+			ps.setString(2, portletId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String xml = rs.getString("preferences");
+
+				PortletPreferences portletPreferences =
+					PortletPreferencesFactoryUtil.fromDefaultXML(xml);
+
+				String articleId = portletPreferences.getValue(
+					"articleId", null);
+
+				List<JournalContentSearch> contentSearches =
+					JournalContentSearchLocalServiceUtil.
+						getArticleContentSearches(groupId, articleId);
+
+				if (contentSearches.isEmpty()) {
+					continue;
+				}
+
+				JournalContentSearch contentSearch = contentSearches.get(0);
+
+				JournalContentSearchLocalServiceUtil.updateContentSearch(
+					contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
+					contentSearch.getLayoutId(), contentSearch.getPortletId(),
+					articleId, true);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateCreateAndModifiedDates() throws Exception {
+		ActionableDynamicQuery actionableDynamicQuery =
+			JournalArticleResourceLocalServiceUtil.getActionableDynamicQuery();
+
+		if (_log.isDebugEnabled()) {
+			long count = actionableDynamicQuery.performCount();
+
+			_log.debug(
+				"Processing " + count +
+					" journal article resources for create and modified dates");
+		}
+
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
+
+				@Override
+				public void performAction(Object object) {
+					JournalArticleResource articleResource =
+						(JournalArticleResource)object;
+
+					updateCreateDate(articleResource);
+					updateModifiedDate(articleResource);
+				}
+
+			});
+
+		actionableDynamicQuery.performActions();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Create and modified dates verified for articles");
+		}
+	}
+
+	protected void updateCreateDate(JournalArticleResource articleResource) {
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getArticles(
+				articleResource.getGroupId(), articleResource.getArticleId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new ArticleVersionComparator(true));
+
+		if (articles.size() <= 1) {
+			return;
+		}
+
+		JournalArticle firstArticle = articles.get(0);
+
+		Date createDate = firstArticle.getCreateDate();
+
+		for (JournalArticle article : articles) {
+			if (!createDate.equals(article.getCreateDate())) {
+				article.setCreateDate(createDate);
+
+				JournalArticleLocalServiceUtil.updateJournalArticle(article);
+			}
+		}
+	}
+
 	protected void updateDocumentLibraryElements(Element element) {
 		Element dynamicContentElement = element.element("dynamic-content");
 
@@ -117,6 +224,20 @@ public class VerifyJournal extends VerifyProcess {
 		Node node = dynamicContentElement.node(0);
 
 		node.setText(path + StringPool.SLASH + dlFileEntry.getUuid());
+	}
+
+	protected void updateDynamicElements(JournalArticle article)
+		throws Exception {
+
+		Document document = SAXReaderUtil.read(article.getContent());
+
+		Element rootElement = document.getRootElement();
+
+		updateDynamicElements(rootElement.elements("dynamic-element"));
+
+		article.setContent(document.asXML());
+
+		JournalArticleLocalServiceUtil.updateJournalArticle(article);
 	}
 
 	protected void updateDynamicElements(List<Element> dynamicElements)
@@ -190,6 +311,82 @@ public class VerifyJournal extends VerifyProcess {
 				dynamicContentElement.getStringValue() + StringPool.AT +
 					groupId);
 		}
+	}
+
+	protected void updateModifiedDate(JournalArticleResource articleResource) {
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.fetchLatestArticle(
+				articleResource.getResourcePrimKey(),
+				WorkflowConstants.STATUS_APPROVED, true);
+
+		if (article == null) {
+			return;
+		}
+
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+			articleResource.getGroupId(), articleResource.getUuid());
+
+		if (assetEntry == null) {
+			return;
+		}
+
+		Date modifiedDate = article.getModifiedDate();
+
+		if (modifiedDate.equals(assetEntry.getModifiedDate())) {
+			return;
+		}
+
+		article.setModifiedDate(assetEntry.getModifiedDate());
+
+		JournalArticleLocalServiceUtil.updateJournalArticle(article);
+	}
+
+	protected void updateResourcePrimKey() throws PortalException {
+		ActionableDynamicQuery actionableDynamicQuery =
+			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
+
+		actionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					Property resourcePrimKey = PropertyFactoryUtil.forName(
+						"resourcePrimKey");
+
+					dynamicQuery.add(resourcePrimKey.le(0l));
+				}
+
+			}
+		);
+
+		if (_log.isDebugEnabled()) {
+			long count = actionableDynamicQuery.performCount();
+
+			_log.debug(
+				"Processing " + count +
+					" default article versions in draft mode");
+		}
+
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
+
+				@Override
+				public void performAction(Object object)
+					throws PortalException {
+
+					JournalArticle article = (JournalArticle)object;
+
+					long groupId = article.getGroupId();
+					String articleId = article.getArticleId();
+					double version = article.getVersion();
+
+					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
+						groupId, articleId, version);
+				}
+
+			});
+
+		actionableDynamicQuery.performActions();
 	}
 
 	protected void updateURLTitle(
@@ -431,127 +628,6 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void updateContentSearch(long groupId, String portletId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select preferences from PortletPreferences inner join " +
-					"Layout on PortletPreferences.plid = Layout.plid where " +
-						"groupId = ? and portletId = ?");
-
-			ps.setLong(1, groupId);
-			ps.setString(2, portletId);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				String xml = rs.getString("preferences");
-
-				PortletPreferences portletPreferences =
-					PortletPreferencesFactoryUtil.fromDefaultXML(xml);
-
-				String articleId = portletPreferences.getValue(
-					"articleId", null);
-
-				List<JournalContentSearch> contentSearches =
-					JournalContentSearchLocalServiceUtil.
-						getArticleContentSearches(groupId, articleId);
-
-				if (contentSearches.isEmpty()) {
-					continue;
-				}
-
-				JournalContentSearch contentSearch = contentSearches.get(0);
-
-				JournalContentSearchLocalServiceUtil.updateContentSearch(
-					contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
-					contentSearch.getLayoutId(), contentSearch.getPortletId(),
-					articleId, true);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateCreateAndModifiedDates() throws Exception {
-		ActionableDynamicQuery actionableDynamicQuery =
-			JournalArticleResourceLocalServiceUtil.getActionableDynamicQuery();
-
-		if (_log.isDebugEnabled()) {
-			long count = actionableDynamicQuery.performCount();
-
-			_log.debug(
-				"Processing " + count +
-					" journal article resources for create and modified dates");
-		}
-
-		actionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod() {
-
-				@Override
-				public void performAction(Object object) {
-					JournalArticleResource articleResource =
-						(JournalArticleResource)object;
-
-					updateCreateDate(articleResource);
-					updateModifiedDate(articleResource);
-				}
-
-			});
-
-		actionableDynamicQuery.performActions();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Create and modified dates verified for articles");
-		}
-	}
-
-	protected void updateCreateDate(JournalArticleResource articleResource) {
-		List<JournalArticle> articles =
-			JournalArticleLocalServiceUtil.getArticles(
-				articleResource.getGroupId(), articleResource.getArticleId(),
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				new ArticleVersionComparator(true));
-
-		if (articles.size() <= 1) {
-			return;
-		}
-
-		JournalArticle firstArticle = articles.get(0);
-
-		Date createDate = firstArticle.getCreateDate();
-
-		for (JournalArticle article : articles) {
-			if (!createDate.equals(article.getCreateDate())) {
-				article.setCreateDate(createDate);
-
-				JournalArticleLocalServiceUtil.updateJournalArticle(article);
-			}
-		}
-	}
-
-	protected void updateDynamicElements(JournalArticle article)
-		throws Exception {
-
-		Document document = SAXReaderUtil.read(article.getContent());
-
-		Element rootElement = document.getRootElement();
-
-		updateDynamicElements(rootElement.elements("dynamic-element"));
-
-		article.setContent(document.asXML());
-
-		JournalArticleLocalServiceUtil.updateJournalArticle(article);
-	}
-
 	protected void verifyFolderAssets() throws Exception {
 		List<JournalFolder> folders =
 			JournalFolderLocalServiceUtil.getNoAssetFolders();
@@ -578,34 +654,6 @@ public class VerifyJournal extends VerifyProcess {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Assets verified for folders");
 		}
-	}
-
-	protected void updateModifiedDate(JournalArticleResource articleResource) {
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.fetchLatestArticle(
-				articleResource.getResourcePrimKey(),
-				WorkflowConstants.STATUS_APPROVED, true);
-
-		if (article == null) {
-			return;
-		}
-
-		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-			articleResource.getGroupId(), articleResource.getUuid());
-
-		if (assetEntry == null) {
-			return;
-		}
-
-		Date modifiedDate = article.getModifiedDate();
-
-		if (modifiedDate.equals(assetEntry.getModifiedDate())) {
-			return;
-		}
-
-		article.setModifiedDate(assetEntry.getModifiedDate());
-
-		JournalArticleLocalServiceUtil.updateJournalArticle(article);
 	}
 
 	protected void verifyOracleNewLine() throws Exception {
@@ -675,54 +723,6 @@ public class VerifyJournal extends VerifyProcess {
 				article.getCompanyId(), 0, 0, JournalArticle.class.getName(),
 				article.getResourcePrimKey(), false, false, false);
 		}
-	}
-
-	protected void updateResourcePrimKey() throws PortalException {
-		ActionableDynamicQuery actionableDynamicQuery =
-			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
-
-		actionableDynamicQuery.setAddCriteriaMethod(
-			new ActionableDynamicQuery.AddCriteriaMethod() {
-
-				@Override
-				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property resourcePrimKey = PropertyFactoryUtil.forName(
-						"resourcePrimKey");
-
-					dynamicQuery.add(resourcePrimKey.le(0l));
-				}
-
-			}
-		);
-
-		if (_log.isDebugEnabled()) {
-			long count = actionableDynamicQuery.performCount();
-
-			_log.debug(
-				"Processing " + count +
-					" default article versions in draft mode");
-		}
-
-		actionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod() {
-
-				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
-					JournalArticle article = (JournalArticle)object;
-
-					long groupId = article.getGroupId();
-					String articleId = article.getArticleId();
-					double version = article.getVersion();
-
-					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
-						groupId, articleId, version);
-				}
-
-			});
-
-		actionableDynamicQuery.performActions();
 	}
 
 	protected void verifyTree() throws Exception {
