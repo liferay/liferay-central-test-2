@@ -190,11 +190,14 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(
-				"select ExpandoColumn.name, ExpandoValue.data_ from " +
-					"ExpandoValue inner join ExpandoColumn on " +
-						"ExpandoColumn.columnId = ExpandoValue.columnId " +
-							"where rowId_ = ?");
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select ExpandoColumn.name, ExpandoValue.data_ from ");
+			sb.append("ExpandoValue inner join ExpandoColumn on ");
+			sb.append("ExpandoColumn.columnId = ExpandoValue.columnId where ")'
+			sb.append("rowId_ = ?");
+
+			ps = con.prepareStatement(sb.toString());
 
 			ps.setLong(1, expandoRowId);
 
