@@ -33,6 +33,7 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
  */
 public class WikiDLStoreConvertProcess implements DLStoreConvertProcess {
 
+	@Override
 	public void migrate(final DLStoreConverter dlStoreConverter)
 		throws PortalException {
 
