@@ -194,7 +194,7 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 
 			sb.append("select ExpandoColumn.name, ExpandoValue.data_ from ");
 			sb.append("ExpandoValue inner join ExpandoColumn on ");
-			sb.append("ExpandoColumn.columnId = ExpandoValue.columnId where ")'
+			sb.append("ExpandoColumn.columnId = ExpandoValue.columnId where ");
 			sb.append("rowId_ = ?");
 
 			ps = con.prepareStatement(sb.toString());
