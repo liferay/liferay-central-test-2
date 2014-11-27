@@ -510,9 +510,7 @@ public class VerifyJournal extends VerifyProcess {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					JournalArticle article = (JournalArticle)object;
 
 					try {
