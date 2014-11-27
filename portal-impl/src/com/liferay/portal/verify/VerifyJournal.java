@@ -302,8 +302,8 @@ public class VerifyJournal extends VerifyProcess {
 			_log.debug("Assets verified for articles");
 		}
 
-		verifyCreateAndModifiedDates();
-		verifyResourcePrimKey();
+		updateCreateAndModifiedDates();
+		updateResourcePrimKey();
 	}
 
 	protected void verifyArticleContents() throws Exception {
@@ -390,7 +390,7 @@ public class VerifyJournal extends VerifyProcess {
 					}
 
 					try {
-						verifyDynamicElements(article);
+						updateDynamicElements(article);
 					}
 					catch (Exception e) {
 						_log.error(
@@ -423,7 +423,7 @@ public class VerifyJournal extends VerifyProcess {
 				long groupId = rs.getLong("groupId");
 				String portletId = rs.getString("portletId");
 
-				verifyContentSearch(groupId, portletId);
+				updateContentSearch(groupId, portletId);
 			}
 		}
 		finally {
@@ -431,7 +431,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyContentSearch(long groupId, String portletId)
+	protected void updateContentSearch(long groupId, String portletId)
 		throws Exception {
 
 		Connection con = null;
@@ -481,7 +481,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyCreateAndModifiedDates() throws Exception {
+	protected void updateCreateAndModifiedDates() throws Exception {
 		ActionableDynamicQuery actionableDynamicQuery =
 			JournalArticleResourceLocalServiceUtil.getActionableDynamicQuery();
 
@@ -501,8 +501,8 @@ public class VerifyJournal extends VerifyProcess {
 					JournalArticleResource articleResource =
 						(JournalArticleResource)object;
 
-					verifyCreateDate(articleResource);
-					verifyModifiedDate(articleResource);
+					updateCreateDate(articleResource);
+					updateModifiedDate(articleResource);
 				}
 
 			});
@@ -514,7 +514,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyCreateDate(JournalArticleResource articleResource) {
+	protected void updateCreateDate(JournalArticleResource articleResource) {
 		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getArticles(
 				articleResource.getGroupId(), articleResource.getArticleId(),
@@ -538,7 +538,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyDynamicElements(JournalArticle article)
+	protected void updateDynamicElements(JournalArticle article)
 		throws Exception {
 
 		Document document = SAXReaderUtil.read(article.getContent());
@@ -580,7 +580,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyModifiedDate(JournalArticleResource articleResource) {
+	protected void updateModifiedDate(JournalArticleResource articleResource) {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.fetchLatestArticle(
 				articleResource.getResourcePrimKey(),
@@ -677,7 +677,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyResourcePrimKey() throws PortalException {
+	protected void updateResourcePrimKey() throws PortalException {
 		ActionableDynamicQuery actionableDynamicQuery =
 			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
 
