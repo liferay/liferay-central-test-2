@@ -107,10 +107,10 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 			<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.ADD_LAYOUT) && showAddAction %>">
 				<portlet:renderURL var="addPagesURL">
 					<portlet:param name="struts_action" value="/layouts_admin/add_layout" />
+					<portlet:param name="tabs1" value="<%= layoutsAdminDisplayContext.getTabs1() %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(selGroup.getGroupId()) %>" />
 					<portlet:param name="selPlid" value="<%= String.valueOf(selLayout.getPlid()) %>" />
 					<portlet:param name="privateLayout" value="<%= String.valueOf(selLayout.isPrivateLayout()) %>" />
-					<portlet:param name="tabs1" value="<%= layoutsAdminDisplayContext.getTabs1() %>" />
 				</portlet:renderURL>
 
 				<aui:nav-item href="<%= addPagesURL %>" iconCssClass="icon-plus" label="add-child-page" />
