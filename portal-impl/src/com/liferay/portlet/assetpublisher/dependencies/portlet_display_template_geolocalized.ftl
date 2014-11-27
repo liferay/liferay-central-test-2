@@ -15,11 +15,11 @@
 	<#assign mapsAPIProvider = companyPortletPreferences.getValue("mapsAPIProvider", "Google") />
 </#if>
 
-<#assign featureCollection = jsonFactoryUtil.createJSONObject() />
+<#assign featureCollectionJSONObject = jsonFactoryUtil.createJSONObject() />
 
-<@liferay.silently featureCollection.put("type", "FeatureCollection") />
+<@liferay.silently featureCollectionJSONObject.put("type", "FeatureCollection") />
 
-<#assign featureArray = jsonFactoryUtil.createJSONArray() />
+<#assign featureJSONArray = jsonFactoryUtil.createJSONArray() />
 
 <#list entries as entry>
 	<#assign assetRenderer = entry.getAssetRenderer() />
@@ -29,35 +29,35 @@
 	<#assign fields = ddmReader.getFields("geolocation") />
 
 	<#list fields.iterator() as field>
-		<#assign featureObject = jsonFactoryUtil.createJSONObject() />
+		<#assign featureJSONObject = jsonFactoryUtil.createJSONObject() />
 
-		<@liferay.silently featureObject.put("type", "Feature") />
+		<@liferay.silently featureJSONObject.put("type", "Feature") />
 
-		<#assign geometryObject = jsonFactoryUtil.createJSONObject() />
+		<#assign geometryJSONObject = jsonFactoryUtil.createJSONObject() />
 
-		<@liferay.silently geometryObject.put("type", "Point") />
+		<@liferay.silently geometryJSONObject.put("type", "Point") />
 
-		<#assign coordinatesArray = jsonFactoryUtil.createJSONArray() />
+		<#assign coordinatesJSONArray = jsonFactoryUtil.createJSONArray() />
 
-		<#assign coordinatesObject = jsonFactoryUtil.createJSONObject(field.getValue()) />
+		<#assign coordinatesJSONObject = jsonFactoryUtil.createJSONObject(field.getValue()) />
 
-		<@liferay.silently coordinatesArray.put(coordinatesObject.getDouble("longitude")) />
+		<@liferay.silently coordinatesJSONArray.put(coordinatesJSONObject.getDouble("longitude")) />
 
-		<@liferay.silently coordinatesArray.put(coordinatesObject.getDouble("latitude")) />
+		<@liferay.silently coordinatesJSONArray.put(coordinatesJSONObject.getDouble("latitude")) />
 
-		<@liferay.silently geometryObject.put("coordinates", coordinatesArray) />
+		<@liferay.silently geometryJSONObject.put("coordinates", coordinatesJSONArray) />
 
-		<@liferay.silently featureObject.put("geometry", geometryObject) />
+		<@liferay.silently featureJSONObject.put("geometry", geometryJSONObject) />
 
-		<#assign propertiesObject = jsonFactoryUtil.createJSONObject() />
+		<#assign propertiesJSONObject = jsonFactoryUtil.createJSONObject() />
 
-		<@liferay.silently propertiesObject.put("title", assetRenderer.getTitle(locale)) />
+		<@liferay.silently propertiesJSONObject.put("title", assetRenderer.getTitle(locale)) />
 
 		<#assign entryAbstract>
 			<@getAbstract asset = entry />
 		</#assign>
 
-		<@liferay.silently propertiesObject.put("abstract", entryAbstract) />
+		<@liferay.silently propertiesJSONObject.put("abstract", entryAbstract) />
 
 		<#if mapsAPIProvider = "Google">
 			<#assign
@@ -70,19 +70,19 @@
 			/>
 
 			<#if images?keys?seq_contains(entry.getClassName())>
-				<@liferay.silently propertiesObject.put("icon", images[entry.getClassName()]) />
+				<@liferay.silently propertiesJSONObject.put("icon", images[entry.getClassName()]) />
 			<#else>
-				<@liferay.silently propertiesObject.put("icon", images["default"]) />
+				<@liferay.silently propertiesJSONObject.put("icon", images["default"]) />
 			</#if>
 		</#if>
 
-		<@liferay.silently featureObject.put("properties", propertiesObject) />
+		<@liferay.silently featureJSONObject.put("properties", propertiesJSONObject) />
 
-		<@liferay.silently featureArray.put(featureObject) />
+		<@liferay.silently featureJSONArray.put(featureJSONObject) />
 	</#list>
 </#list>
 
-<@liferay.silently featureCollection.put("features", featureArray) />
+<@liferay.silently featureCollectionJSONObject.put("features", featureJSONArray) />
 
 <style type="text/css">
 	#<@liferay_portlet.namespace />assetEntryAbstract {
@@ -117,7 +117,7 @@
 	<#assign apiKey = companyPortletPreferences.getValue("googleMapsAPIKey", "") />
 </#if>
 
-<@liferay_ui["map"] name='Map' points="${featureCollection}" />
+<@liferay_ui["map"] name='Map' points="${featureCollectionJSONObject}" />
 
 <@liferay_aui.script use="liferay-map-base">
 	var map = Liferay.component('<@liferay_portlet.namespace />Map');
