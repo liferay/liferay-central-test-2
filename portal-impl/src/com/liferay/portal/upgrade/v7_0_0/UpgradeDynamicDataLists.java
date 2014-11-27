@@ -220,13 +220,11 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 	}
 
 	protected String getUpgradeRecordVersionsSQL() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("select DDLRecordVersion.* ");
-		sb.append("from DDLRecordVersion ");
-		sb.append("inner join DDLRecordSet on ");
-		sb.append("DDLRecordVersion.recordSetId = DDLRecordSet.recordSetId ");
-		sb.append("inner join DDMStructure on ");
+		sb.append("select DDLRecordVersion.* from DDLRecordVersion inner ");
+		sb.append("join DDLRecordSet on DDLRecordVersion.recordSetId = ");
+		sb.append("DDLRecordSet.recordSetId inner join DDMStructure on ");
 		sb.append("DDLRecordSet.ddmStructureId = DDMStructure.structureId ");
 		sb.append("where DDMStructure.storageType = 'expando'");
 
