@@ -83,11 +83,11 @@ public class VerifyJournal extends VerifyProcess {
 	protected void doVerify() throws Exception {
 		verifyArticleAssets();
 		verifyArticleContents();
-		verifyFolderAssets();
 		verifyArticleStructures();
+		verifyContentSearch();
+		verifyFolderAssets();
 		verifyOracleNewLine();
 		verifyPermissions();
-		verifyContentSearch();
 		verifyTree();
 		verifyURLTitle();
 	}
@@ -345,6 +345,92 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
+	protected void verifyArticleStructures() throws PortalException {
+		ActionableDynamicQuery actionableDynamicQuery =
+			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
+
+		if (_log.isDebugEnabled()) {
+			long count = actionableDynamicQuery.performCount();
+
+			_log.debug(
+				"Processing " + count + " journal articles for bad " +
+					"structures and dynamic elements.");
+		}
+
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
+
+				@Override
+				public void performAction(Object object) {
+					JournalArticle article = (JournalArticle)object;
+
+					try {
+						JournalArticleLocalServiceUtil.checkStructure(
+							article.getGroupId(), article.getArticleId(),
+							article.getVersion());
+					}
+					catch (NoSuchStructureException nsse) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"Removing reference to missing structure for " +
+									"article " + article.getId());
+						}
+
+						article.setDDMStructureKey(StringPool.BLANK);
+						article.setDDMTemplateKey(StringPool.BLANK);
+
+						JournalArticleLocalServiceUtil.updateJournalArticle(
+							article);
+					}
+					catch (Exception e) {
+						_log.error(
+							"Unable to check the structure for article " +
+								article.getId(),
+							e);
+					}
+
+					try {
+						verifyDynamicElements(article);
+					}
+					catch (Exception e) {
+						_log.error(
+							"Unable to update content for article " +
+								article.getId(),
+							e);
+					}
+				}
+			});
+
+		actionableDynamicQuery.performActions();
+	}
+
+	protected void verifyContentSearch() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select groupId, portletId from JournalContentSearch group " +
+					"by groupId, portletId having count(groupId) > 1 and " +
+						"count(portletId) > 1");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+				String portletId = rs.getString("portletId");
+
+				verifyContentSearch(groupId, portletId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected void verifyContentSearch(long groupId, String portletId)
 		throws Exception {
 
@@ -494,65 +580,6 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyArticleStructures() throws PortalException {
-		ActionableDynamicQuery actionableDynamicQuery =
-			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
-
-		if (_log.isDebugEnabled()) {
-			long count = actionableDynamicQuery.performCount();
-
-			_log.debug(
-				"Processing " + count + " journal articles for bad " +
-					"structures and dynamic elements.");
-		}
-
-		actionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod() {
-
-				@Override
-				public void performAction(Object object) {
-					JournalArticle article = (JournalArticle)object;
-
-					try {
-						JournalArticleLocalServiceUtil.checkStructure(
-							article.getGroupId(), article.getArticleId(),
-							article.getVersion());
-					}
-					catch (NoSuchStructureException nsse) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Removing reference to missing structure for " +
-									"article " + article.getId());
-						}
-
-						article.setDDMStructureKey(StringPool.BLANK);
-						article.setDDMTemplateKey(StringPool.BLANK);
-
-						JournalArticleLocalServiceUtil.updateJournalArticle(
-							article);
-					}
-					catch (Exception e) {
-						_log.error(
-							"Unable to check the structure for article " +
-								article.getId(),
-							e);
-					}
-
-					try {
-						verifyDynamicElements(article);
-					}
-					catch (Exception e) {
-						_log.error(
-							"Unable to update content for article " +
-								article.getId(),
-							e);
-					}
-				}
-			});
-
-		actionableDynamicQuery.performActions();
-	}
-
 	protected void verifyModifiedDate(JournalArticleResource articleResource) {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.fetchLatestArticle(
@@ -645,8 +672,7 @@ public class VerifyJournal extends VerifyProcess {
 
 		for (JournalArticle article : articles) {
 			ResourceLocalServiceUtil.addResources(
-				article.getCompanyId(), 0, 0,
-				JournalArticle.class.getName(),
+				article.getCompanyId(), 0, 0, JournalArticle.class.getName(),
 				article.getResourcePrimKey(), false, false, false);
 		}
 	}
@@ -697,33 +723,6 @@ public class VerifyJournal extends VerifyProcess {
 			});
 
 		actionableDynamicQuery.performActions();
-	}
-
-	protected void verifyContentSearch() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select groupId, portletId from JournalContentSearch group " +
-					"by groupId, portletId having count(groupId) > 1 and " +
-						"count(portletId) > 1");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long groupId = rs.getLong("groupId");
-				String portletId = rs.getString("portletId");
-
-				verifyContentSearch(groupId, portletId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
 	}
 
 	protected void verifyTree() throws Exception {
