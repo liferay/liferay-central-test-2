@@ -82,12 +82,12 @@ public class VerifyJournal extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		verifyArticleAssets();
-		verifyContent();
+		verifyArticleContents();
 		verifyFolderAssets();
-		verifyJournalArticles();
+		verifyArticleStructures();
 		verifyOracleNewLine();
 		verifyPermissions();
-		verifySearch();
+		verifyContentSearch();
 		verifyTree();
 		verifyURLTitle();
 	}
@@ -306,7 +306,7 @@ public class VerifyJournal extends VerifyProcess {
 		verifyResourcePrimKey();
 	}
 
-	protected void verifyContent() throws Exception {
+	protected void verifyArticleContents() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -494,7 +494,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyJournalArticles() throws PortalException {
+	protected void verifyArticleStructures() throws PortalException {
 		ActionableDynamicQuery actionableDynamicQuery =
 			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
 
@@ -640,14 +640,14 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void verifyPermissions() throws PortalException {
-		List<JournalArticle> journalArticles =
+		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getNoPermissionArticles();
 
-		for (JournalArticle journalArticle : journalArticles) {
+		for (JournalArticle article : articles) {
 			ResourceLocalServiceUtil.addResources(
-				journalArticle.getCompanyId(), 0, 0,
+				article.getCompanyId(), 0, 0,
 				JournalArticle.class.getName(),
-				journalArticle.getResourcePrimKey(), false, false, false);
+				article.getResourcePrimKey(), false, false, false);
 		}
 	}
 
@@ -665,6 +665,7 @@ public class VerifyJournal extends VerifyProcess {
 
 					dynamicQuery.add(resourcePrimKey.le(0l));
 				}
+
 			}
 		);
 
@@ -692,12 +693,13 @@ public class VerifyJournal extends VerifyProcess {
 					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
 						groupId, articleId, version);
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
 	}
 
-	protected void verifySearch() throws Exception {
+	protected void verifyContentSearch() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
