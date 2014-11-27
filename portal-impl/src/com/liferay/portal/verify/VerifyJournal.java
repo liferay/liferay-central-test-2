@@ -151,7 +151,7 @@ public class VerifyJournal extends VerifyProcess {
 
 			_log.debug(
 				"Processing " + count +
-					" journal article resources for create and modified dates");
+					" article resources for create and modified dates");
 		}
 
 		actionableDynamicQuery.setPerformActionMethod(
@@ -455,15 +455,21 @@ public class VerifyJournal extends VerifyProcess {
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property status = PropertyFactoryUtil.forName("status");
-					dynamicQuery.add(status.eq(WorkflowConstants.STATUS_DRAFT));
+					Property versionProperty = PropertyFactoryUtil.forName(
+						"version");
 
-					Property version = PropertyFactoryUtil.forName("version");
 					dynamicQuery.add(
-						version.eq(JournalArticleConstants.VERSION_DEFAULT));
+						versionProperty.eq(
+							JournalArticleConstants.VERSION_DEFAULT));
+
+					Property statusProperty = PropertyFactoryUtil.forName(
+						"status");
+
+					dynamicQuery.add(
+						statusProperty.eq(WorkflowConstants.STATUS_DRAFT));
 				}
-			}
-		);
+
+			});
 
 		if (_log.isDebugEnabled()) {
 			long count = actionableDynamicQuery.performCount();
@@ -491,6 +497,7 @@ public class VerifyJournal extends VerifyProcess {
 						assetEntry.getClassName(), assetEntry.getClassPK(),
 						null, assetEntry.isVisible());
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -550,8 +557,8 @@ public class VerifyJournal extends VerifyProcess {
 			long count = actionableDynamicQuery.performCount();
 
 			_log.debug(
-				"Processing " + count + " journal articles for bad " +
-					"structures and dynamic elements.");
+				"Processing " + count + " articles for invalid structures " +
+					"and dynamic elements");
 		}
 
 		actionableDynamicQuery.setPerformActionMethod(
@@ -596,6 +603,7 @@ public class VerifyJournal extends VerifyProcess {
 							e);
 					}
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
