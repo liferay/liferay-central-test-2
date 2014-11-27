@@ -142,8 +142,11 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 				long tableId = rs.getLong("tableId");
 
 				runSQL("delete from ExpandoTable where tableId = " + tableId);
+
 				runSQL("delete from ExpandoRow where tableId = " + tableId);
+
 				runSQL("delete from ExpandoColumn where tableId = " + tableId);
+
 				runSQL("delete from ExpandoValue where tableId = " + tableId);
 			}
 		}
