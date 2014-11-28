@@ -199,17 +199,17 @@ Group selGroup = layoutsAdminDisplayContext.getSelGroup();
 
 				sharingContentGroups.addAll(GroupLocalServiceUtil.getGroups(group.getCompanyId(), group.getGroupId(), false, true));
 
-				for (Group curGroup : sharingContentGroups) {
+				for (Group sharingContentGroup : sharingContentGroups) {
 					PortletURL editLayoutURL = layoutsAdminDisplayContext.getEditLayoutURL();
 
-					editLayoutURL.setParameter("groupId", String.valueOf(curGroup.getGroupId()));
+					editLayoutURL.setParameter("groupId", String.valueOf(sharingContentGroup.getGroupId()));
 				%>
 
 					<liferay-ui:layouts-tree
-						groupId="<%= curGroup.getGroupId() %>"
+						groupId="<%= sharingContentGroup.getGroupId() %>"
 						portletURL="<%= editLayoutURL %>"
 						privateLayout="<%= layoutsAdminDisplayContext.isPrivateLayout() %>"
-						rootNodeName="<%= curGroup.getName() %>"
+						rootNodeName="<%= sharingContentGroup.getName() %>"
 						selPlid="<%= layoutsAdminDisplayContext.getSelPlid() %>"
 						selectedLayoutIds="<%= selectedLayoutIds %>"
 						treeId="layoutsTree"
