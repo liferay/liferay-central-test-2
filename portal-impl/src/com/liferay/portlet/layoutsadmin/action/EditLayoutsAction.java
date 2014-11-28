@@ -279,8 +279,8 @@ public class EditLayoutsAction extends PortletAction {
 				setForward(actionRequest, "portlet.layouts_admin.error");
 			}
 			else if (e instanceof DuplicateGroupException ||
-					 e instanceof ImageTypeException ||
 					 e instanceof GroupNameException ||
+					 e instanceof ImageTypeException ||
 					 e instanceof LayoutFriendlyURLException ||
 					 e instanceof LayoutFriendlyURLsException ||
 					 e instanceof LayoutNameException ||
@@ -354,13 +354,13 @@ public class EditLayoutsAction extends PortletAction {
 	}
 
 	protected void addGroup(ActionRequest actionRequest) throws Exception {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
-
 		long parentGroupId = ParamUtil.getLong(actionRequest, "parentGroupId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
 
 		GroupServiceUtil.addGroup(
 			parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, name,
