@@ -68,6 +68,8 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 
 			documentBuilderFactory.setFeature(
 				_FEATURES_EXTERNAL_PARAMETER_ENTITIES, false);
+
+			documentBuilderFactory.setExpandEntityReferences(false);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -98,7 +100,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 
 	@Override
 	public XMLReader newXMLReader() {
-		XMLReader xmlReader = new SAXParser();
+		XMLReader xmlReader = new DoctypeStrippingXMLReader(new SAXParser());
 
 		if (!PropsValues.XML_SECURITY_ENABLED) {
 			return xmlReader;
