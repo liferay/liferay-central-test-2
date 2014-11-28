@@ -117,7 +117,7 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 				_repositoryFactory.createLocalRepository(repositoryId);
 
 			ModelValidator<FileContentReference> modelValidator =
-				ModelValidatorUtil.getDefaultDLFileModelValidator();
+				ModelValidatorUtil.getDefaultDLFileEntryModelValidator();
 
 			LocalRepository localRepositoryWrapper =
 				new ModelValidatorLocalRepositoryWrapper(
@@ -135,7 +135,7 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 				repositoryId);
 
 			ModelValidator<FileContentReference> modelValidator =
-				ModelValidatorUtil.getDefaultDLFileModelValidator();
+				ModelValidatorUtil.getDefaultDLFileEntryModelValidator();
 
 			Repository repositoryWrapper = new ModelValidatorRepositoryWrapper(
 				repository, modelValidator);

@@ -32,7 +32,7 @@ public class ModelValidatorUtil {
 	}
 
 	public static final ModelValidator<FileContentReference>
-		getDefaultDLFileModelValidator() {
+		getDefaultDLFileEntryModelValidator() {
 
 		return compose(
 			getDefaultFileNameModelValidator(),
