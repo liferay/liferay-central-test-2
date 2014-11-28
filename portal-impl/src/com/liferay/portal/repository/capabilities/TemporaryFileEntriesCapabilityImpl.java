@@ -255,17 +255,17 @@ public class TemporaryFileEntriesCapabilityImpl
 	private String _getFolderPath(
 		TemporaryFileEntriesScope temporaryFileEntriesScope) {
 
-		StringBundler folderPath = new StringBundler(7);
+		StringBundler sb = new StringBundler(7);
 
-		folderPath.append(_FOLDER_NAME_TEMP);
-		folderPath.append(StringPool.SLASH);
-		folderPath.append(temporaryFileEntriesScope.getCallerUuid());
-		folderPath.append(StringPool.SLASH);
-		folderPath.append(temporaryFileEntriesScope.getUserId());
-		folderPath.append(StringPool.SLASH);
-		folderPath.append(temporaryFileEntriesScope.getFolderPath());
+		sb.append(_FOLDER_NAME_TEMP);
+		sb.append(StringPool.SLASH);
+		sb.append(temporaryFileEntriesScope.getCallerUuid());
+		sb.append(StringPool.SLASH);
+		sb.append(temporaryFileEntriesScope.getUserId());
+		sb.append(StringPool.SLASH);
+		sb.append(temporaryFileEntriesScope.getFolderPath());
 
-		return folderPath.toString();
+		return sb.toString();
 	}
 
 	private static final String _FOLDER_NAME_TEMP = "temp";
