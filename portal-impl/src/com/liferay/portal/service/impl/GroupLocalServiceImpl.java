@@ -291,7 +291,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 		else if (!className.equals(Company.class.getName()) &&
 				 !className.equals(Organization.class.getName()) &&
-			 	className.startsWith("com.liferay.portal.model.")) {
+			 	 className.startsWith("com.liferay.portal.model.")) {
 
 			if (site) {
 				throw new IllegalArgumentException();
