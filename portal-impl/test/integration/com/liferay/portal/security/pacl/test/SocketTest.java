@@ -119,7 +119,7 @@ public class SocketTest {
 	@Test
 	public void testConnect1() throws IOException {
 		try {
-			HttpUtil.URLtoString("http://www.cnn.com");
+			HttpUtil.URLtoString("http://www.cbs.com");
 
 			Assert.fail();
 		}
@@ -130,7 +130,7 @@ public class SocketTest {
 	@Test
 	public void testConnect2() throws IOException {
 		try {
-			HttpUtil.URLtoString("http://www.cbs.com");
+			HttpUtil.URLtoString("http://www.cnn.com");
 		}
 		catch (SecurityException se) {
 			Assert.fail();
