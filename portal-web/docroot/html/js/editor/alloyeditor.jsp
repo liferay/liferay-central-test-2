@@ -221,6 +221,17 @@ boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("
 		}
 	);
 
+	<c:if test='<%= alloyEditorMode.equals("text") %>'>
+		nativeEditor.on(
+			'key',
+			function(event) {
+				if (event.data.keyCode === 13) {
+					event.cancel();
+				}
+			}
+		);
+	</c:if>
+
 	var contentFilter = new CKEDITOR.filter(
 		{
 			$1: {
@@ -246,17 +257,6 @@ boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("
 			event.data.dataValue = writer.getHtml();
 		}
 	);
-
-	<c:if test='<%= alloyEditorMode.equals("text") %>'>
-		nativeEditor.on(
-			'key',
-			function(event) {
-				if (event.data.keyCode === 13) {
-					event.cancel();
-				}
-			}
-		);
-	</c:if>
 
 	window['<%= name %>'] = {
 		destroy: function() {
