@@ -63,9 +63,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		return LiferayRepository.class.getName();
 	}
 
-	protected RepositoryFactory getRepositoryFactory(String className)
-		throws PortalException {
-
+	protected RepositoryFactory getRepositoryFactory(String className) {
 		RepositoryClassDefinition repositoryDefinition =
 			_repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
 				className);
