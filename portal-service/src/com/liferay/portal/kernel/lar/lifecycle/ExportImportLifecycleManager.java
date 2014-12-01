@@ -33,7 +33,7 @@ public class ExportImportLifecycleManager {
 		ExportImportLifecycleEvent exportImportLifecycleEvent =
 			ExportImportLifecycleEventFactoryUtil.create(code, arguments);
 
-		message.put("event", exportImportLifecycleEvent);
+		message.put("exportImportLifecycleEvent", exportImportLifecycleEvent);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.EXPORT_IMPORT_LIFECYCLE_EVENT_ASYNC, message);

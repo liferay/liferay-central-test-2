@@ -21,7 +21,8 @@ public interface ExportImportLifecycleListener {
 
 	public boolean isParallel();
 
-	public void onEvent(ExportImportLifecycleEvent exportImportLifecycleEvent)
+	public void onExportImportLifecycleEvent(
+			ExportImportLifecycleEvent exportImportLifecycleEvent)
 		throws Exception;
 
 }

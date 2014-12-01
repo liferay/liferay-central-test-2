@@ -36,20 +36,22 @@ public class ExportImportLifecycleMessageListener extends BaseMessageListener {
 			getExportImportLifecycleListeners(message);
 
 		ExportImportLifecycleEvent exportImportLifecycleEvent =
-			(ExportImportLifecycleEvent)message.get("event");
+			(ExportImportLifecycleEvent)message.get(
+				"exportImportLifecycleEvent");
 
 		for (ExportImportLifecycleListener exportImportLifecycleListener :
 				exportImportLifecycleListeners) {
 
 			try {
-				exportImportLifecycleListener.onEvent(
+				exportImportLifecycleListener.onExportImportLifecycleEvent(
 					exportImportLifecycleEvent);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to call event listener " +
-							exportImportLifecycleListener.getClass(), e);
+						"Unable to call " +
+							exportImportLifecycleListener.getClass(),
+						e);
 				}
 			}
 		}
