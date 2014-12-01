@@ -65,7 +65,7 @@ public class RepositoryClassDefinition
 
 		_repositoryDefiner.registerCapabilities(capabilityLocalRepository);
 
-		setupCommonCapabilities(capabilityLocalRepository);
+		setUpCommonCapabilities(capabilityLocalRepository);
 
 		return capabilityLocalRepository;
 	}
@@ -82,9 +82,9 @@ public class RepositoryClassDefinition
 
 		_repositoryDefiner.registerCapabilities(capabilityRepository);
 
-		setupCommonCapabilities(capabilityRepository);
+		setUpCommonCapabilities(capabilityRepository);
 
-		setupCapabilityRepositoryCapabilities(capabilityRepository);
+		setUpCapabilityRepositoryCapabilities(capabilityRepository);
 
 		return capabilityRepository;
 	}
@@ -164,7 +164,7 @@ public class RepositoryClassDefinition
 		return null;
 	}
 
-	protected void setupCapabilityRepositoryCapabilities(
+	protected void setUpCapabilityRepositoryCapabilities(
 		CapabilityRepository capabilityRepository) {
 
 		Repository repository = capabilityRepository.getRepository();
@@ -178,7 +178,7 @@ public class RepositoryClassDefinition
 		}
 	}
 
-	protected void setupCommonCapabilities(
+	protected void setUpCommonCapabilities(
 		BaseCapabilityRepository<?> baseCapabilityRepository) {
 
 		if (!baseCapabilityRepository.isCapabilityProvided(
