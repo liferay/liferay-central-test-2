@@ -1661,7 +1661,7 @@ rerun your task.
 			</then>
 		</if>
 
-		<property file="${project.dir}/test.class.filenames.properties" />
+		<property file="${project.dir}/test.class.file.names.properties" />
 
 		<propertycopy from="TEST_CLASS_GROUP_${test.package.group.index}" name="test.classes" />
 

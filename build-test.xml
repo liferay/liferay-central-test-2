@@ -3148,7 +3148,7 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 
 		<antcall target="compile-test" inheritAll="false" />
 
-		<antcall target="record-test-class-filenames" inheritAll="false" />
+		<antcall target="record-test-class-file-names" inheritAll="false" />
 	</target>
 
 	<target name="prepare-test-build-tomcat-dependents">
@@ -3604,7 +3604,7 @@ if (ppstate.equals("normal")) {
 		<echo>Updated ${app.server.dir}/webapps/ROOT/html/common/themes/bottom-test.jsp.</echo>
 	</target>
 
-	<target name="record-test-class-filenames">
+	<target name="record-test-class-file-names">
 		<script classpathref="project.classpath" language="beanshell">
 			<![CDATA[
 				import java.nio.file.Files;
@@ -3698,11 +3698,11 @@ if (ppstate.equals("normal")) {
 					sb.setLength(sb.length() - 1);
 				}
 
-				project.setProperty("test.class.filenames.properties.content", sb.toString());
+				project.setProperty("test.class.file.names.properties.content", sb.toString());
 			]]>
 		</script>
 
-		<echo file="test.class.filenames.properties">${test.class.filenames.properties.content}</echo>
+		<echo file="test.class.file.names.properties">${test.class.file.names.properties.content}</echo>
 	</target>
 
 	<target name="record-test-package-names">
