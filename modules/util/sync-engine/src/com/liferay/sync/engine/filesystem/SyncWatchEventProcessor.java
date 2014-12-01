@@ -199,6 +199,10 @@ public class SyncWatchEventProcessor implements Runnable {
 			return true;
 		}
 
+		if (!parentSyncFile.isSystem() && (parentSyncFile.getTypePK() == 0)) {
+			return false;
+		}
+
 		SyncFile syncFile = SyncFileService.fetchSyncFileByFileKey(
 			FileUtil.getFileKey(targetFilePath), _syncAccountId);
 
@@ -208,10 +212,6 @@ public class SyncWatchEventProcessor implements Runnable {
 				parentSyncFile.getRepositoryId(), _syncAccountId);
 
 			return true;
-		}
-
-		if (!parentSyncFile.isSystem() && (parentSyncFile.getTypePK() == 0)) {
-			return false;
 		}
 
 		Path sourceFilePath = Paths.get(syncFile.getFilePathName());
