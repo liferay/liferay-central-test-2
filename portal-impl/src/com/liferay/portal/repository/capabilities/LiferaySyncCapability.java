@@ -260,7 +260,7 @@ public class LiferaySyncCapability implements SyncCapability {
 		}
 
 		@Override
-		public void execute(FileEntry fileEntry) throws PortalException {
+		public void execute(FileEntry fileEntry) {
 			registerDLSyncEventCallback(_syncEvent, fileEntry);
 		}
 
@@ -277,7 +277,7 @@ public class LiferaySyncCapability implements SyncCapability {
 		}
 
 		@Override
-		public void execute(Folder folder) throws PortalException {
+		public void execute(Folder folder) {
 			registerDLSyncEventCallback(_syncEvent, folder);
 		}
 

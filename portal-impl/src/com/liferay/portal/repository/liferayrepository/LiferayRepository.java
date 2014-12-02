@@ -328,7 +328,7 @@ public class LiferayRepository
 	}
 
 	@Override
-	public void deleteAll() throws PortalException {
+	public void deleteAll() {
 		throw new UnsupportedOperationException();
 	}
 
