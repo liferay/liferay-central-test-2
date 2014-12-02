@@ -272,8 +272,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 						return null;
 					}
 
-				}
-			);
+				});
 		}
 		else {
 			addDependenciesToClassPath();
@@ -292,11 +291,11 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		tldMappings = new HashMap<String, String[]>();
 
-		ServiceReference<SAXParserFactory> saxReference =
+		ServiceReference<SAXParserFactory> saxParserFactoryServiceReference =
 			_bundleContext.getServiceReference(SAXParserFactory.class);
 
 		SAXParserFactory saxParserFactory = _bundleContext.getService(
-			saxReference);
+			saxParserFactoryServiceReference);
 
 		saxParserFactory.setNamespaceAware(false);
 		saxParserFactory.setValidating(false);
@@ -374,11 +373,11 @@ public class JspCompiler extends Jsr199JavaCompiler {
 	private class URIHandler extends DefaultHandler {
 
 		@Override
-		public void characters(char[] ch, int start, int length) {
+		public void characters(char[] c, int start, int length) {
 			if (inTaglib && inURI) {
 				_sb = new StringBuilder();
 
-				_sb.append(ch, start, length);
+				_sb.append(c, start, length);
 			}
 		}
 
