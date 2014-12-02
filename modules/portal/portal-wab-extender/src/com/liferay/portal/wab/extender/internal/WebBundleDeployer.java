@@ -72,20 +72,20 @@ public class WebBundleDeployer {
 		}
 
 		try {
-			WabBundleProcessor wabBundleProcessor = new WabBundleProcessor(
+			WabBundleProcessor newWabBundleProcessor = new WabBundleProcessor(
 				bundle, contextPath, _extendedHttpService, _saxParserFactory,
 				_logger);
 
-			WabBundleProcessor original = _wabBundleProcessors.putIfAbsent(
-				bundle, wabBundleProcessor);
+			WabBundleProcessor oldWabBundleProcessor =
+				_wabBundleProcessors.putIfAbsent(bundle, newWabBundleProcessor);
 
-			if (original != null) {
+			if (oldWabBundleProcessor != null) {
 				_eventUtil.sendEvent(bundle, EventUtil.FAILED, null, false);
 
 				return;
 			}
 
-			wabBundleProcessor.init();
+			newWabBundleProcessor.init();
 		}
 		catch (Exception e) {
 			_eventUtil.sendEvent(bundle, EventUtil.FAILED, e, false);
