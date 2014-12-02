@@ -62,7 +62,7 @@ public class SyncWatchEventProcessor implements Runnable {
 	protected boolean addFile(SyncWatchEvent syncWatchEvent) throws Exception {
 		final Path targetFilePath = Paths.get(syncWatchEvent.getFilePathName());
 
-		if (Files.notExists(targetFilePath)) {
+		if (Files.notExists(targetFilePath) || isInErrorState(targetFilePath)) {
 			return true;
 		}
 
@@ -72,12 +72,9 @@ public class SyncWatchEventProcessor implements Runnable {
 			parentTargetFilePath.toString());
 
 		if ((parentSyncFile == null) ||
-			(parentSyncFile.getState() == SyncFile.STATE_ERROR)) {
+			(!parentSyncFile.isSystem() &&
+			 (parentSyncFile.getTypePK() == 0))) {
 
-			return true;
-		}
-
-		if (!parentSyncFile.isSystem() && (parentSyncFile.getTypePK() == 0)) {
 			return false;
 		}
 
@@ -188,18 +185,19 @@ public class SyncWatchEventProcessor implements Runnable {
 
 		Path targetFilePath = Paths.get(syncWatchEvent.getFilePathName());
 
+		if (isInErrorState(targetFilePath)) {
+			return true;
+		}
+
 		Path parentTargetFilePath = targetFilePath.getParent();
 
 		SyncFile parentSyncFile = SyncFileService.fetchSyncFile(
 			parentTargetFilePath.toString());
 
 		if ((parentSyncFile == null) ||
-			(parentSyncFile.getState() == SyncFile.STATE_ERROR)) {
+			(!parentSyncFile.isSystem() &&
+			 (parentSyncFile.getTypePK() == 0))) {
 
-			return true;
-		}
-
-		if (!parentSyncFile.isSystem() && (parentSyncFile.getTypePK() == 0)) {
 			return false;
 		}
 
@@ -407,6 +405,31 @@ public class SyncWatchEventProcessor implements Runnable {
 			_syncAccountId, SyncEngineUtil.SYNC_ENGINE_STATE_PROCESSED);
 
 		_processedSyncWatchEventIds.clear();
+	}
+
+	protected boolean isInErrorState(Path filePath) {
+		while (true) {
+			filePath = filePath.getParent();
+
+			if (filePath == null) {
+				return false;
+			}
+
+			SyncFile syncFile = SyncFileService.fetchSyncFile(
+				filePath.toString());
+
+			if (syncFile == null) {
+				continue;
+			}
+
+			if (!syncFile.isSystem() &&
+				(syncFile.getState() == SyncFile.STATE_ERROR)) {
+
+				return true;
+			}
+
+			return false;
+		}
 	}
 
 	protected boolean isPendingTypePK(SyncFile syncFile) {
