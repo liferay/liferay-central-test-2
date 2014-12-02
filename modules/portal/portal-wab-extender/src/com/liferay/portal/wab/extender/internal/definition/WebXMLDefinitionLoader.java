@@ -74,8 +74,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("async-supported")) {
-			boolean asyncSupported = GetterUtil.getBoolean(
-				_stack.pop().toString());
+			boolean asyncSupported = GetterUtil.getBoolean(_stack.pop());
 
 			if (_filterDefinition != null) {
 				_filterDefinition.setAsyncSupported(asyncSupported);
@@ -91,9 +90,12 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_paramValue = null;
 		}
 		else if (qName.equals("dispatcher")) {
-			String dispatcher = _stack.pop().toString();
+			String dispatcher = String.valueOf(_stack.pop());
 
-			_filterMapping.dispatchers.add(dispatcher.trim().toUpperCase());
+			dispatcher = dispatcher.toUpperCase();
+			dispatcher = dispatcher.trim();
+
+			_filterMapping.dispatchers.add(dispatcher);
 		}
 		else if (qName.equals("filter")) {
 			_webXMLDefinition.setFilterDefinition(
@@ -102,22 +104,25 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_filterDefinition = null;
 		}
 		else if (qName.equals("filter-class")) {
-			String filterClass = _stack.pop().toString();
+			String filterClass = String.valueOf(_stack.pop());
 
 			Filter filter = _getFilterInstance(filterClass.trim());
 
 			_filterDefinition.setFilter(filter);
 		}
 		else if (qName.equals("filter-mapping")) {
-			FilterDefinition filterDefinition =
-				_webXMLDefinition.getFilterDefinitions().get(
-					_filterMapping.filterName);
+			Map<String, FilterDefinition> filterDefinitions =
+				_webXMLDefinition.getFilterDefinitions();
+
+			FilterDefinition filterDefinition = filterDefinitions.get(
+				_filterMapping.filterName);
 
 			filterDefinition.setDispatchers(_filterMapping.dispatchers);
 
 			if (_filterMapping.servletName != null) {
-				filterDefinition.getServletNames().add(
-					_filterMapping.servletName);
+				List<String> servletNames = filterDefinition.getServletNames();
+
+				servletNames.add(_filterMapping.servletName);
 			}
 
 			filterDefinition.setURLPatterns(_filterMapping.urlPatterns);
@@ -126,12 +131,12 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		else if (qName.equals("filter-name")) {
 			if (_filterMapping != null) {
-				String filterName = _stack.pop().toString();
+				String filterName = String.valueOf(_stack.pop());
 
 				_filterMapping.filterName = filterName.trim();
 			}
 			else if (_filterDefinition != null) {
-				String filterName = _stack.pop().toString();
+				String filterName = String.valueOf(_stack.pop());
 
 				_filterDefinition.setName(filterName.trim());
 			}
@@ -158,17 +163,20 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_listenerDefinition = null;
 		}
 		else if (qName.equals("listener-class")) {
-			String listenerClass = _stack.pop().toString();
+			String listenerClassName = String.valueOf(_stack.pop());
 
-			EventListener eventListener = _getListenerInstance(listenerClass);
+			EventListener eventListener = _getListenerInstance(
+				listenerClassName);
 
 			_listenerDefinition.setEventListener(eventListener);
 		}
 		else if (qName.equals("param-name")) {
-			_paramName = _stack.pop().toString().trim();
+			_paramName = String.valueOf(_stack.pop());
+			_paramName = _paramName.trim();
 		}
 		else if (qName.equals("param-value")) {
-			_paramValue = _stack.pop().toString().trim();
+			_paramValue = String.valueOf(_stack.pop());
+			_paramValue = _paramValue.trim();
 		}
 		else if (qName.equals("servlet")) {
 			_webXMLDefinition.setServletDefinition(
@@ -177,16 +185,18 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_servletDefinition = null;
 		}
 		else if (qName.equals("servlet-class")) {
-			String servletClass = _stack.pop().toString();
+			String servletClassName = String.valueOf(_stack.pop());
 
-			Servlet servlet = _getServletInstance(servletClass.trim());
+			Servlet servlet = _getServletInstance(servletClassName.trim());
 
 			_servletDefinition.setServlet(servlet);
 		}
 		else if (qName.equals("servlet-mapping")) {
-			ServletDefinition servletDefinition =
-				_webXMLDefinition.getServletDefinitions().get(
-					_servletMapping.servletName);
+			Map<String, ServletDefinition> servletDefinitions =
+				_webXMLDefinition.getServletDefinitions();
+
+			ServletDefinition servletDefinition = servletDefinitions.get(
+				_servletMapping.servletName);
 
 			servletDefinition.setURLPatterns(_servletMapping.urlPatterns);
 
@@ -194,17 +204,17 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		else if (qName.equals("servlet-name")) {
 			if (_filterMapping != null) {
-				String servletName = _stack.pop().toString();
+				String servletName = String.valueOf(_stack.pop());
 
 				_filterMapping.servletName = servletName.trim();
 			}
 			else if (_servletDefinition != null) {
-				String servletName = _stack.pop().toString();
+				String servletName = String.valueOf(_stack.pop());
 
 				_servletDefinition.setName(servletName.trim());
 			}
 			else if (_servletMapping != null) {
-				String servletName = _stack.pop().toString();
+				String servletName = String.valueOf(_stack.pop());
 
 				_servletMapping.servletName = servletName.trim();
 			}
@@ -216,19 +226,19 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_taglibLocation = null;
 		}
 		else if (qName.equals("taglib-location")) {
-			_taglibLocation = _stack.pop().toString().trim();
+			_taglibLocation = String.valueOf(_stack.pop());
 		}
 		else if (qName.equals("taglib-uri")) {
-			_taglibUri = _stack.pop().toString().trim();
+			_taglibUri = String.valueOf(_stack.pop());
 		}
 		else if (qName.equals("url-pattern")) {
 			if (_filterMapping != null) {
-				String urlPattern = _stack.pop().toString();
+				String urlPattern = String.valueOf(_stack.pop());
 
 				_filterMapping.urlPatterns.add(urlPattern.trim());
 			}
 			else if (_servletMapping != null) {
-				String urlPattern = _stack.pop().toString();
+				String urlPattern = String.valueOf(_stack.pop());
 
 				_servletMapping.urlPatterns.add(urlPattern.trim());
 			}
