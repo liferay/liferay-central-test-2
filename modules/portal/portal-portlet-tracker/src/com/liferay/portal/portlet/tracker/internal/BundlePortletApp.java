@@ -44,8 +44,12 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 		_portalPortletModel = portalPortletModel;
 
-		_servletContextName = bundle.getSymbolicName().replaceAll(
-			"[^a-zA-Z0-9]", "");
+		_pluginPackage = new BundlePluginPackage(bundle, this);
+		_portletApp = portalPortletModel.getPortletApp();
+
+		String symbolicName = bundle.getSymbolicName();
+
+		_servletContextName = symbolicName.replaceAll("[^a-zA-Z0-9]", "");
 
 		if ((httpServiceEndpoint.length() > 0) &&
 			httpServiceEndpoint.endsWith("/")) {
@@ -54,10 +58,7 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 				0, httpServiceEndpoint.length() - 1);
 		}
 
-		_servletContextPath = httpServiceEndpoint.concat("/").concat(
-			_servletContextName);
-		_pluginPackage = new BundlePluginPackage(bundle, this);
-		_portletApp = portalPortletModel.getPortletApp();
+		_contextPath = httpServiceEndpoint + "/" + _servletContextName;
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 	@Override
 	public String getContextPath() {
-		return _servletContextPath;
+		return _contextPath;
 	}
 
 	@Override
@@ -219,11 +220,11 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 		_portletApp.setWARFile(warFile);
 	}
 
+	private final String _contextPath;
 	private final BundlePluginPackage _pluginPackage;
 	private final Portlet _portalPortletModel;
 	private final PortletApp _portletApp;
 	private ServletContext _servletContext;
 	private final String _servletContextName;
-	private final String _servletContextPath;
 
 }
