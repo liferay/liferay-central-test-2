@@ -237,8 +237,6 @@ public class PortletTracker
 		BundlePortletApp bundlePortletApp = createBundlePortletApp(
 			bundle, bundleWiring.getClassLoader(), serviceRegistrations);
 
-		// Portlet
-
 		com.liferay.portal.model.Portlet portletModel = buildPortletModel(
 			bundlePortletApp, portletId);
 
@@ -932,6 +930,7 @@ public class PortletTracker
 		createContext(bundle, bundlePortletApp, serviceRegistrations);
 
 		serviceRegistrations.setBundlePortletApp(bundlePortletApp);
+
 		serviceRegistrations.doConfiguration(classLoader);
 
 		BundleContext bundleContext = bundle.getBundleContext();
@@ -997,11 +996,10 @@ public class PortletTracker
 		Servlet servlet = null;
 
 		try {
-			Class<? extends Servlet> clazz = Class.forName(
-				"com.liferay.portal.servlet.jsp.JspServlet").asSubclass(
-					Servlet.class);
+			Class<?> clazz = Class.forName(
+				"com.liferay.portal.servlet.jsp.JspServlet");
 
-			servlet = clazz.newInstance();
+			servlet = (Servlet)clazz.newInstance();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -1087,11 +1085,11 @@ public class PortletTracker
 		if (serviceRegistrations == null) {
 			serviceRegistrations = new ServiceRegistrations();
 
-			ServiceRegistrations original = _serviceRegistrations.putIfAbsent(
-				bundle, serviceRegistrations);
+			ServiceRegistrations oldServiceRegistrations =
+				_serviceRegistrations.putIfAbsent(bundle, serviceRegistrations);
 
-			if (original != null) {
-				serviceRegistrations = original;
+			if (oldServiceRegistrations != null) {
+				serviceRegistrations = oldServiceRegistrations;
 			}
 		}
 
@@ -1248,8 +1246,8 @@ public class PortletTracker
 				serviceRegistration.unregister();
 			}
 
-			_serviceRegistrations = null;
 			_bundlePortletApp = null;
+			_serviceRegistrations = null;
 		}
 
 		protected synchronized int count() {
