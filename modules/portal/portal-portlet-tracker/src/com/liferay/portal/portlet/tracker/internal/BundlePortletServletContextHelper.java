@@ -59,9 +59,7 @@ public class BundlePortletServletContextHelper extends ServletContextHelper {
 	public boolean handleSecurity(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		// Prevent access to WAB metadata.
-
-		String pathInfo;
+		String pathInfo = null;
 
 		if (request.getAttribute(
 				RequestDispatcher.INCLUDE_REQUEST_URI) != null) {
