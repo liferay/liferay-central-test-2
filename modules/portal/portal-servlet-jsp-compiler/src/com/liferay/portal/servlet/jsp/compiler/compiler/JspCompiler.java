@@ -403,8 +403,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		@Override
 		public void startElement(
-			String uri, String localName, String qName,
-			Attributes attributes) {
+			String uri, String localName, String qName, Attributes attributes) {
 
 			if (qName.equals("taglib")) {
 				inTaglib = true;
