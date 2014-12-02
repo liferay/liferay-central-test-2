@@ -104,9 +104,9 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_filterDefinition = null;
 		}
 		else if (qName.equals("filter-class")) {
-			String filterClass = String.valueOf(_stack.pop());
+			String filterClassName = String.valueOf(_stack.pop());
 
-			Filter filter = _getFilterInstance(filterClass.trim());
+			Filter filter = _getFilterInstance(filterClassName.trim());
 
 			_filterDefinition.setFilter(filter);
 		}
