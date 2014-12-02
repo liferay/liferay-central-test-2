@@ -3051,7 +3051,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return UsersAdminUtil.getUsers(
 				search(
 					companyId, keywords, status, params, start, end,
-					getSortsFromOrderByComparator(obc)));
+					getSorts(obc)));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -3212,7 +3212,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				search(
 					companyId, firstName, middleName, lastName, screenName,
 					emailAddress, status, params, andSearch, start, end,
-					getSortsFromOrderByComparator(obc)));
+					getSorts(obc)));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -5981,9 +5981,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return StringUtil.lowerCase(StringUtil.trim(login));
 	}
 
-	protected Sort[] getSortsFromOrderByComparator(
-		OrderByComparator<User> obc) {
-
+	protected Sort[] getSorts(OrderByComparator<User> obc) {
 		String[] orderByClauses = StringUtil.split(obc.getOrderBy());
 		String[] orderByFields = obc.getOrderByFields();
 
