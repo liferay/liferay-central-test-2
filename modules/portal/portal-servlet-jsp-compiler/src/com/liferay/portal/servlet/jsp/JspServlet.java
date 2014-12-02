@@ -51,7 +51,7 @@ public class JspServlet
 	extends org.apache.jasper.servlet.JspServlet {
 
 	public static final String _JSP_CLASSLOADER =
-		JspServlet.class.getName().concat(".classLoader");
+		JspServlet.class.getName() + ".classLoader";
 
 	public JspServlet() {
 		_jspBundle = FrameworkUtil.getBundle(
