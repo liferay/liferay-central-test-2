@@ -65,21 +65,23 @@ public class WabBundleProcessor implements ServletContextListener {
 
 		if (_contextPath.indexOf('/') != 0) {
 			throw new IllegalArgumentException(
-				"contextPath must start with '/'");
+				"Context path must start with /");
 		}
 
-		_contextName = _contextPath.substring(1).replaceAll("[^a-zA-Z0-9]", "");
 		_extendedHttpService = extendedHttpService;
 		_logger = logger;
-
-		_bundleContext = _bundle.getBundleContext();
-
-		_webXMLDefinitionLoader = new WebXMLDefinitionLoader(
-			_bundle, saxParserFactory, _logger);
 
 		BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
 		_bundleClassLoader = bundleWiring.getClassLoader();
+
+		String contextName = _contextPath.substring(1);
+
+		_contextName = contextName.replaceAll("[^a-zA-Z0-9]", "");
+
+		_bundleContext = _bundle.getBundleContext();
+		_webXMLDefinitionLoader = new WebXMLDefinitionLoader(
+			_bundle, saxParserFactory, _logger);
 	}
 
 	@Override
@@ -91,16 +93,17 @@ public class WabBundleProcessor implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		ServletContext servletContext = servletContextEvent.getServletContext();
 
+		servletContext.setAttribute(
+			"jsp.taglib.mappings", _webXMLDefinition.getJspTaglibMappings());
+		servletContext.setAttribute("osgi-bundlecontext", _bundleContext);
+		servletContext.setAttribute("osgi-runtime-vendor", _VENDOR);
+
+
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put("osgi.web.symbolicname", _bundle.getSymbolicName());
 		properties.put("osgi.web.version", _bundle.getVersion());
 		properties.put("osgi.web.contextpath", servletContext.getContextPath());
-
-		servletContext.setAttribute(
-			"jsp.taglib.mappings", _webXMLDefinition.getJspTaglibMappings());
-		servletContext.setAttribute("osgi-bundlecontext", _bundleContext);
-		servletContext.setAttribute("osgi-runtime-vendor", _VENDOR);
 
 		_servletContextRegistration = _bundleContext.registerService(
 			ServletContext.class, servletContext, properties);
@@ -189,11 +192,10 @@ public class WabBundleProcessor implements ServletContextListener {
 		Servlet servlet = null;
 
 		try {
-			Class<? extends Servlet> clazz = Class.forName(
-				"com.liferay.portal.servlet.jsp.JspServlet").asSubclass(
-					Servlet.class);
+			Class<?> clazz = Class.forName(
+				"com.liferay.portal.servlet.jsp.JspServlet");
 
-			servlet = clazz.newInstance();
+			servlet = (Servlet)clazz.newInstance();
 		}
 		catch (Exception e) {
 			_logger.log(
