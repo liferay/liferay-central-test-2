@@ -14,30 +14,31 @@
 
 package com.liferay.portal.wab.extender.ws.axis;
 
+import org.apache.axis.EngineConfiguration;
+import org.apache.axis.EngineConfigurationFactory;
+import org.apache.axis.configuration.EngineConfigurationFactoryDefault;
+
 /**
  * @author Raymond Augé
  * @author Miguel Pastor
  */
-public class AxisConfigurationFactory
-	implements org.apache.axis.EngineConfigurationFactory {
+public class AxisConfigurationFactory implements EngineConfigurationFactory {
 
 	public AxisConfigurationFactory() {
 		_engineConfigurationFactory =
-			org.apache.axis.configuration.EngineConfigurationFactoryDefault.
-				newFactory(null);
+			EngineConfigurationFactoryDefault.newFactory(null);
 	}
 
 	@Override
-	public org.apache.axis.EngineConfiguration getClientEngineConfig() {
+	public EngineConfiguration getClientEngineConfig() {
 		return _engineConfigurationFactory.getClientEngineConfig();
 	}
 
 	@Override
-	public org.apache.axis.EngineConfiguration getServerEngineConfig() {
+	public EngineConfiguration getServerEngineConfig() {
 		return _engineConfigurationFactory.getServerEngineConfig();
 	}
 
-	private final org.apache.axis.EngineConfigurationFactory
-		_engineConfigurationFactory;
+	private final EngineConfigurationFactory _engineConfigurationFactory;
 
 }
