@@ -155,8 +155,8 @@ public class JspCompiler extends Jsr199JavaCompiler {
 			catch (ClassNotFoundException e) {
 				_logger.log(
 					Logger.LOG_ERROR,
-					"Could not add depedency {" + className +
-						"} to the classpath");
+					"Unable to add depedency " + className +
+						" to the classpath");
 			}
 		}
 	}
@@ -201,10 +201,11 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 			String uri = getTldUri(saxParser, url);
 
-			if (uri != null) {
-				tldMappings.put(
-					uri, new String[] {"/".concat(resourcePath), null});
+			if (uri == null) {
+				continue;
 			}
+
+			tldMappings.put(uri, new String[] {"/" + resourcePath, null});
 		}
 	}
 
