@@ -375,9 +375,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 	private class URIHandler extends DefaultHandler {
 
 		@Override
-		public void characters(char[] ch, int start, int length)
-			throws SAXException {
-
+		public void characters(char[] ch, int start, int length) {
 			if (inTaglib && inURI) {
 				_sb = new StringBuilder();
 
@@ -396,7 +394,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		@Override
 		public InputSource resolveEntity(String publicId, String systemId)
-			throws IOException, SAXException {
+			throws IOException {
 
 			_reader.reset();
 
@@ -405,9 +403,8 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		@Override
 		public void startElement(
-				String uri, String localName, String qName,
-				Attributes attributes)
-			throws SAXException {
+			String uri, String localName, String qName,
+			Attributes attributes) {
 
 			if (qName.equals("taglib")) {
 				inTaglib = true;
