@@ -181,12 +181,10 @@ public class UserNotificationManagerUtil {
 			serviceRegistrations =
 				_userNotificationDefinitionServiceRegistrations.get(portletId);
 
-		if (!serviceRegistrations.isEmpty()) {
-			for (ServiceRegistration<UserNotificationDefinition>
-					serviceRegistration : serviceRegistrations) {
+		for (ServiceRegistration<UserNotificationDefinition>
+				serviceRegistration : serviceRegistrations) {
 
-				serviceRegistration.unregister();
-			}
+			serviceRegistration.unregister();
 		}
 	}
 
