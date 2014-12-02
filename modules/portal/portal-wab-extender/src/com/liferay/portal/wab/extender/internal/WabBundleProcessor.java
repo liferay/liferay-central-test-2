@@ -98,7 +98,6 @@ public class WabBundleProcessor implements ServletContextListener {
 		servletContext.setAttribute("osgi-bundlecontext", _bundleContext);
 		servletContext.setAttribute("osgi-runtime-vendor", _VENDOR);
 
-
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put("osgi.web.symbolicname", _bundle.getSymbolicName());

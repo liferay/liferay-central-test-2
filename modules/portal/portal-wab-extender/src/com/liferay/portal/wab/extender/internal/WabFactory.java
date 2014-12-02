@@ -43,8 +43,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true, configurationPid = "com.liferay.portal.wab.extender",
-	configurationPolicy = ConfigurationPolicy.OPTIONAL,
+	configurationPid = "com.liferay.portal.wab.extender",
+	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"com.liferay.portal.wab.extender.stop.timeout=60000"
 	}
@@ -54,6 +54,8 @@ public class WabFactory extends AbstractExtender {
 	@Activate
 	public void activate(ComponentContext componentContext) {
 		_bundleContext = componentContext.getBundleContext();
+		_eventUtil = new EventUtil(_bundleContext);
+		_logger = new Logger(_bundleContext);
 
 		Dictionary<String, Object> properties =
 			componentContext.getProperties();
@@ -61,9 +63,6 @@ public class WabFactory extends AbstractExtender {
 		_stopTimeout = GetterUtil.getLong(
 			properties.get("com.liferay.portal.wab.extender.stop.timeout"),
 			60000);
-
-		_logger = new Logger(_bundleContext);
-		_eventUtil = new EventUtil(_bundleContext);
 
 		try {
 			_webBundleDeployer = new WebBundleDeployer(
@@ -81,12 +80,16 @@ public class WabFactory extends AbstractExtender {
 	public void deactivate() throws Exception {
 		super.stop(_bundleContext);
 
-		_webBundleDeployer.close();
+		_bundleContext = null;
+
 		_eventUtil.close();
 
 		_eventUtil = null;
+
 		_logger = null;
-		_bundleContext = null;
+
+		_webBundleDeployer.close();
+
 		_webBundleDeployer = null;
 	}
 
@@ -136,7 +139,6 @@ public class WabFactory extends AbstractExtender {
 
 		public WABExtension(Bundle bundle) {
 			_bundle = bundle;
-			_started = new CountDownLatch(1);
 		}
 
 		@Override
@@ -148,8 +150,8 @@ public class WabFactory extends AbstractExtender {
 				_logger.log(
 					Logger.LOG_ERROR,
 					String.format(
-						"The wait for bundle {0}/{1} being started " +
-							"before destruction has been interrupted.",
+						"The wait for bundle {0}/{1} to start before " +
+							"destroying was interrupted",
 						_bundle.getSymbolicName(), _bundle.getBundleId()),
 					ie);
 			}
@@ -168,7 +170,7 @@ public class WabFactory extends AbstractExtender {
 		}
 
 		private final Bundle _bundle;
-		private final CountDownLatch _started;
+		private final CountDownLatch _started = new CountDownLatch(1);
 
 	}
 
