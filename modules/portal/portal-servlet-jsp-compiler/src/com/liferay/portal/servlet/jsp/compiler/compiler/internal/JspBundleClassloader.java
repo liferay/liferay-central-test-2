@@ -57,10 +57,10 @@ public class JspBundleClassloader extends URLClassLoader {
 	public Enumeration<URL> findResources(String name) {
 		for (Bundle bundle : _bundles) {
 			try {
-				Enumeration<URL> resources = bundle.getResources(name);
+				Enumeration<URL> enumeration = bundle.getResources(name);
 
-				if ((resources != null) && resources.hasMoreElements()) {
-					return resources;
+				if ((enumeration != null) && enumeration.hasMoreElements()) {
+					return enumeration;
 				}
 			}
 			catch (IOException ioe) {
