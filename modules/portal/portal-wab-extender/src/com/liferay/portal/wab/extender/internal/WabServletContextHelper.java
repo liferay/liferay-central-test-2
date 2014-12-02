@@ -53,9 +53,7 @@ public class WabServletContextHelper extends ServletContextHelper {
 	public boolean handleSecurity(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		// Prevent access to WAB metadata.
-
-		String pathInfo;
+		String pathInfo = null;
 
 		if (request.getAttribute(
 				RequestDispatcher.INCLUDE_REQUEST_URI) != null) {
@@ -83,7 +81,7 @@ public class WabServletContextHelper extends ServletContextHelper {
 			try {
 				response.sendError(HttpServletResponse.SC_FORBIDDEN, pathInfo);
 			}
-			catch (IOException e) {
+			catch (IOException ioe) {
 				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			}
 
