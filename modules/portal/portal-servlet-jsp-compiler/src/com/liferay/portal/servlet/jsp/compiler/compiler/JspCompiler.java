@@ -221,8 +221,6 @@ public class JspCompiler extends Jsr199JavaCompiler {
 				standardJavaFileManager.setLocation(
 					StandardLocation.CLASS_PATH, _classPath);
 
-				//options.add("-verbose");
-
 				BundleJavaManager bundleJavaManager = new BundleJavaManager(
 					_bundle, standardJavaFileManager, options, true);
 
