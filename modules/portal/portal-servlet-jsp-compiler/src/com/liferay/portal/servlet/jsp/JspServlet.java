@@ -50,8 +50,8 @@ import org.osgi.framework.FrameworkUtil;
 public class JspServlet
 	extends org.apache.jasper.servlet.JspServlet {
 
-	public static final String _JSP_CLASSLOADER =
-		JspServlet.class.getName() + ".classLoader";
+	public static final String JSP_CLASS_LOADER =
+		JspServlet.class.getName() + "#JSP_CLASS_LOADER";
 
 	public JspServlet() {
 		_jspBundle = FrameworkUtil.getBundle(
@@ -70,7 +70,7 @@ public class JspServlet
 		_jspBundleClassloader = new JspBundleClassloader(
 			bundleContext.getBundle(), _jspBundle);
 
-		servletContext.setAttribute(_JSP_CLASSLOADER, _jspBundleClassloader);
+		servletContext.setAttribute(JSP_CLASS_LOADER, _jspBundleClassloader);
 
 		final Map<String, String> defaults = new HashMap<String, String>();
 

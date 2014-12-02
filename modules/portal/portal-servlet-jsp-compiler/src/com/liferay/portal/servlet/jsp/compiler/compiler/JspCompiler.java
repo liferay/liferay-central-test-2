@@ -98,7 +98,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		URLClassLoader jspClassLoader =
 			(URLClassLoader)servletContext.getAttribute(
-				JspServlet._JSP_CLASSLOADER);
+				JspServlet.JSP_CLASS_LOADER);
 
 		jspCompilationContext.setClassLoader(jspClassLoader);
 
