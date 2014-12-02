@@ -40,7 +40,6 @@ import org.osgi.framework.Bundle;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
@@ -62,22 +61,18 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	}
 
 	@Override
-	public void characters(char[] ch, int start, int length)
-		throws SAXException {
-
+	public void characters(char[] c, int start, int length) {
 		if (_stack.empty()) {
 			return;
 		}
 
 		StringBuilder stringBuilder = _stack.peek();
 
-		stringBuilder.append(ch, start, length);
+		stringBuilder.append(c, start, length);
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName)
-		throws SAXException {
-
+	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("async-supported")) {
 			boolean asyncSupported = GetterUtil.getBoolean(
 				_stack.pop().toString());
@@ -241,7 +236,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	}
 
 	@Override
-	public void error(SAXParseException e) throws SAXException {
+	public void error(SAXParseException e) {
 		_logger.log(Logger.LOG_ERROR, e.getMessage(), e);
 	}
 
@@ -265,8 +260,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 	@Override
 	public void startElement(
-			String uri, String localName, String qName, Attributes attributes)
-		throws SAXException {
+		String uri, String localName, String qName, Attributes attributes) {
 
 		if (qName.equals("filter")) {
 			_filterDefinition = new FilterDefinition();
