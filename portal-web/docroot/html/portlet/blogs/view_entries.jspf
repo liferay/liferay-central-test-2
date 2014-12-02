@@ -148,15 +148,15 @@ showSearch = showSearch && !results.isEmpty();
 		request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	%>
 
-<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
+	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
 
-<c:if test="<%= index < searchContainer.getTotal() %>">
-	<div class="separator"><!-- --></div>
-</c:if>
+	<c:if test="<%= index < searchContainer.getTotal() %>">
+		<div class="separator"><!-- --></div>
+	</c:if>
 
-<%
-}
-%>
+	<%
+	}
+	%>
 
 </liferay-ui:ddm-template-renderer>
 
