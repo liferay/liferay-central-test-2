@@ -52,7 +52,9 @@ public class JspResourceResolver implements ResourceResolver {
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
-		Filter filter;
+		_logger = new Logger(bundleContext);
+
+		Filter filter = null;
 
 		try {
 			filter = bundleContext.createFilter(
@@ -63,11 +65,9 @@ public class JspResourceResolver implements ResourceResolver {
 			throw new RuntimeException(ise);
 		}
 
-		_resourceMapTracker = new ServiceTracker<>(bundleContext, filter, null);
+		_serviceTracker = new ServiceTracker<>(bundleContext, filter, null);
 
-		_resourceMapTracker.open();
-
-		_logger = new Logger(bundle.getBundleContext());
+		_serviceTracker.open();
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class JspResourceResolver implements ResourceResolver {
 		resources = new ArrayList<String>();
 
 		Map<String, List<URL>> extraPackageMap =
-			_resourceMapTracker.getService();
+			_serviceTracker.getService();
 
 		if (extraPackageMap == null) {
 			return resources;
@@ -181,8 +181,7 @@ public class JspResourceResolver implements ResourceResolver {
 						return Bundle.class.getClassLoader();
 					}
 
-				}
-			);
+				});
 		}
 		else {
 			_frameworkClassLoader = Bundle.class.getClassLoader();
@@ -192,6 +191,6 @@ public class JspResourceResolver implements ResourceResolver {
 	private final JspResourceCache _jspResourceCache;
 	private final Logger _logger;
 	private final ServiceTracker<Map<String, List<URL>>, Map<String, List<URL>>>
-		_resourceMapTracker;
+		_serviceTracker;
 
 }

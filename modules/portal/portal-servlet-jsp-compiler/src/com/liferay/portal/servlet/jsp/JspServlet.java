@@ -64,8 +64,8 @@ public class JspServlet
 
 		final ServletContext servletContext = servletConfig.getServletContext();
 
-		BundleContext bundleContext = (BundleContext)servletContext.getAttribute(
-				"osgi-bundlecontext");
+		BundleContext bundleContext =
+			(BundleContext)servletContext.getAttribute("osgi-bundlecontext");
 
 		_jspBundleClassloader = new JspBundleClassloader(
 			bundleContext.getBundle(), _jspBundle);
