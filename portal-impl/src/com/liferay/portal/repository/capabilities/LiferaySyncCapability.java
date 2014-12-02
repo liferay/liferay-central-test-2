@@ -71,12 +71,6 @@ public class LiferaySyncCapability implements SyncCapability {
 			RepositoryEventType.Add.class, Folder.class,
 			ADD_FOLDER_EVENT_LISTENER);
 		repositoryEventRegistry.registerRepositoryEventListener(
-			RepositoryEventType.Update.class, FileEntry.class,
-			UPDATE_FILE_ENTRY_EVENT_LISTENER);
-		repositoryEventRegistry.registerRepositoryEventListener(
-			RepositoryEventType.Update.class, Folder.class,
-			UPDATE_FOLDER_EVENT_LISTENER);
-		repositoryEventRegistry.registerRepositoryEventListener(
 			RepositoryEventType.Delete.class, FileEntry.class,
 			DELETE_FILE_ENTRY_EVENT_LISTENER);
 		repositoryEventRegistry.registerRepositoryEventListener(
@@ -89,17 +83,23 @@ public class LiferaySyncCapability implements SyncCapability {
 			RepositoryEventType.Move.class, Folder.class,
 			MOVE_FOLDER_EVENT_LISTENER);
 		repositoryEventRegistry.registerRepositoryEventListener(
-			TrashRepositoryEventType.EntryTrashed.class, FileEntry.class,
-			TRASH_FILE_ENTRY_EVENT_LISTENER);
-		repositoryEventRegistry.registerRepositoryEventListener(
 			TrashRepositoryEventType.EntryRestored.class, FileEntry.class,
 			RESTORE_FILE_ENTRY_EVENT_LISTENER);
 		repositoryEventRegistry.registerRepositoryEventListener(
 			TrashRepositoryEventType.EntryRestored.class, Folder.class,
 			RESTORE_FOLDER_EVENT_LISTENER);
 		repositoryEventRegistry.registerRepositoryEventListener(
+			TrashRepositoryEventType.EntryTrashed.class, FileEntry.class,
+			TRASH_FILE_ENTRY_EVENT_LISTENER);
+		repositoryEventRegistry.registerRepositoryEventListener(
 			TrashRepositoryEventType.EntryTrashed.class, Folder.class,
 			TRASH_FOLDER_EVENT_LISTENER);
+		repositoryEventRegistry.registerRepositoryEventListener(
+			RepositoryEventType.Update.class, FileEntry.class,
+			UPDATE_FILE_ENTRY_EVENT_LISTENER);
+		repositoryEventRegistry.registerRepositoryEventListener(
+			RepositoryEventType.Update.class, Folder.class,
+			UPDATE_FOLDER_EVENT_LISTENER);
 		repositoryEventRegistry.registerRepositoryEventListener(
 			WorkflowRepositoryEventType.Add.class, FileEntry.class,
 			WORKFLOW_ADD_FILE_ENTRY_EVENT_LISTENER);
