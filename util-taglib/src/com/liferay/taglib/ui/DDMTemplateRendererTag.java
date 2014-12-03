@@ -66,6 +66,7 @@ public class DDMTemplateRendererTag extends IncludeTag {
 		_portletDisplayDDMTemplateId = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
