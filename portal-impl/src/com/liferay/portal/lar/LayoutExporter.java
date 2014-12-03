@@ -270,8 +270,8 @@ public class LayoutExporter {
 		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
 		if (exportIgnoreLastPublishDate) {
-			portletDataContext.setStartDate(null);
 			portletDataContext.setEndDate(null);
+			portletDataContext.setStartDate(null);
 		}
 
 		StopWatch stopWatch = new StopWatch();
