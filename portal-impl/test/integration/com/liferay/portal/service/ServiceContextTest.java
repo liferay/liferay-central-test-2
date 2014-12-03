@@ -49,6 +49,7 @@ public class ServiceContextTest extends PowerMockito {
 		serviceContext.setAttribute("TestName", "TestValue");
 
 		Map<String, String> headers = new HashMap<String, String>();
+
 		headers.put("TestHeaderName", "TestHeaderValue");
 
 		serviceContext.setHeaders(headers);
@@ -63,7 +64,6 @@ public class ServiceContextTest extends PowerMockito {
 		Assert.assertEquals(
 			deserializedServiceContext.getAttributes(),
 			serviceContext.getAttributes());
-
 		Assert.assertNull(deserializedServiceContext.getHeaders());
 		Assert.assertNull(deserializedServiceContext.getRequest());
 	}
