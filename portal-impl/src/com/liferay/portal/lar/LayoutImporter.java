@@ -273,8 +273,6 @@ public class LayoutImporter {
 		String layoutsImportMode = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
 			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_UUID);
-		String userIdStrategyString = MapUtil.getString(
-			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete portlet data " + deletePortletData);
@@ -311,12 +309,6 @@ public class LayoutImporter {
 		validateFile(
 			companyId, portletDataContext.getGroupId(), parameterMap,
 			portletDataContext.getZipReader());
-
-		// PortletDataContext
-
-		UserIdStrategy userIdStrategy =
-			ExportImportHelperUtil.getUserIdStrategy(
-				userId, userIdStrategyString);
 
 		// Source and target group id
 
