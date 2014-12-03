@@ -635,9 +635,9 @@ urlStaging.setWindowState(LiferayWindowState.POP_UP);
 
 urlStaging.setParameter("struts_action", "/portlet_configuration/staging");
 urlStaging.setParameter("cmd", Constants.PUBLISH_TO_LIVE);
-urlStaging.setParameter("portletResource", portletDisplay.getId());
 urlStaging.setParameter("redirect", currentURL);
 urlStaging.setParameter("returnToFullPageURL", currentURL);
+urlStaging.setParameter("portletResource", portletDisplay.getId());
 
 urlStaging.setEscapeXml(false);
 
