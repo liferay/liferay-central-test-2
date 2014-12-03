@@ -1229,9 +1229,9 @@ public class PortletExporter {
 				layout.getCompanyId(), groupId, parameterMap, startDate,
 				endDate, zipWriter);
 
+		portletDataContext.setOldPlid(plid);
 		portletDataContext.setPlid(plid);
 		portletDataContext.setPortletId(portletId);
-		portletDataContext.setOldPlid(plid);
 
 		return portletDataContext;
 	}
