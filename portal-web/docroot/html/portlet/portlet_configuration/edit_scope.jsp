@@ -125,7 +125,7 @@ for (Layout scopeGroupLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layou
 </aui:fieldset>
 
 <aui:script>
-function <portlet:namespace />changeScope() {
-	Liferay.Util.getTop().Liferay.fire('changeScope');
-}
+	function <portlet:namespace />changeScope() {
+		Liferay.Util.getTop().Liferay.fire('changeScope');
+	}
 </aui:script>
