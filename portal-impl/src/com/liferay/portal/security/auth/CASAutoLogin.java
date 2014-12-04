@@ -44,7 +44,8 @@ public class CASAutoLogin extends BaseAutoLogin {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             com.liferay.portal.security.PortalUserImporterUtil#importUser(long, String, String)}
+	 *             com.liferay.portal.security.PortalUserImporterUtil#importUser(
+	 *             long, String, String)}
 	 */
 	@Deprecated
 	protected User addUser(long companyId, String screenName) throws Exception {
