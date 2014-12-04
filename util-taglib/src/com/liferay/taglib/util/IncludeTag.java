@@ -389,7 +389,7 @@ public class IncludeTag extends AttributesTagSupport {
 			sb.append(contextPath);
 			sb.append(".");
 
-			if (_isPortalTaglibPage(page)) {
+			if (isPortalTaglibPage(page)) {
 				if (contextPath.equals(StringPool.SLASH)) {
 					sb = null;
 				}
@@ -478,7 +478,7 @@ public class IncludeTag extends AttributesTagSupport {
 		return exists;
 	}
 
-	private boolean _isPortalTaglibPage(String page) {
+	protected boolean isPortalTaglibPage(String page) {
 		if (page.startsWith("/html/taglib/") &&
 			(page.endsWith("/start.jsp") || page.endsWith("/end.jsp") ||
 			 page.endsWith("/page.jsp"))) {
