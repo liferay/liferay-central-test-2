@@ -382,19 +382,25 @@ if (inlineEdit && Validator.isNotNull(inlineEditSaveURL)) {
 								documentSelectorURL.setParameter(entry.getKey(), entry.getValue());
 							}
 						}
+						%>
 
+						filebrowserBrowseUrl: '<%= documentSelectorURL %>',
+
+						<%
 						PortletURL imageDocumentSelectorURL = PortletURLUtil.clone(documentSelectorURL, liferayPortletResponse);
 
 						imageDocumentSelectorURL.setParameter("type", "image");
+						%>
 
+						filebrowserImageBrowseUrl: '<%= imageDocumentSelectorURL %>',
+						filebrowserImageBrowseLinkUrl: '<%= imageDocumentSelectorURL %>',
+
+						<%
 						PortletURL flashDocumentSelectorURL = PortletURLUtil.clone(documentSelectorURL, liferayPortletResponse);
 
 						flashDocumentSelectorURL.setParameter("type", "flash");
 						%>
 
-						filebrowserBrowseUrl: '<%= documentSelectorURL %>',
-						filebrowserImageBrowseUrl: '<%= imageDocumentSelectorURL %>',
-						filebrowserImageBrowseLinkUrl: '<%= imageDocumentSelectorURL %>',
 						filebrowserFlashBrowseUrl: '<%= flashDocumentSelectorURL %>',
 					</c:when>
 					<c:otherwise>
