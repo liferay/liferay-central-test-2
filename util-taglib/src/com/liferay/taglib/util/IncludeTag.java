@@ -419,7 +419,9 @@ public class IncludeTag extends AttributesTagSupport {
 			}
 		}
 		else if (contextPath.equals(StringPool.SLASH)) {
-			if (getClass().equals(IncludeTag.class)) {
+			Class<?> clazz = getClass();
+
+			if (clazz.equals(IncludeTag.class)) {
 				sb.append(" It seems that you are trying to use an ");
 				sb.append("include taglib from a module without ");
 				sb.append("specifying the servletContext attribute, ");
