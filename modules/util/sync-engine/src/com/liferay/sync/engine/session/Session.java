@@ -137,11 +137,12 @@ public class Session {
 
 			@Override
 			public void run() {
-
 				_downloadRate = _downloadedBytes.get();
+
 				_downloadedBytes.set(0);
 
 				_uploadRate = _uploadedBytes.get();
+
 				_uploadedBytes.set(0);
 			}
 
@@ -368,6 +369,7 @@ public class Session {
 
 				super.writeTo(output);
 			}
+
 		};
 	}
 
