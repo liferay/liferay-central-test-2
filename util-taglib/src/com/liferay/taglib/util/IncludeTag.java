@@ -84,7 +84,7 @@ public class IncludeTag extends AttributesTagSupport {
 			}
 
 			if (!FileAvailabilityUtil.isAvailable(servletContext, page)) {
-				logWarnForNotFoundPage(page);
+				logUnavailablePage(page);
 
 				return processEndTag();
 			}
@@ -126,7 +126,7 @@ public class IncludeTag extends AttributesTagSupport {
 			}
 
 			if (!FileAvailabilityUtil.isAvailable(servletContext, page)) {
-				logWarnForNotFoundPage(page);
+				logUnavailablePage(page);
 
 				return processStartTag();
 			}
@@ -384,7 +384,7 @@ public class IncludeTag extends AttributesTagSupport {
 		return _useCustomPage;
 	}
 
-	protected void logWarnForNotFoundPage(String page) {
+	protected void logUnavailablePage(String page) {
 		if ((page!= null) && _log.isWarnEnabled()) {
 			String contextPath = servletContext.getContextPath();
 
