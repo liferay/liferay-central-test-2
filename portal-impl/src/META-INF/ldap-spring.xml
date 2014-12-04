@@ -22,7 +22,7 @@
 	<bean id="com.liferay.portal.security.PortalUserImporterUtil" class="com.liferay.portal.security.PortalUserImporterUtil">
 		<property name="portalUserImporter" ref="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl" />
 	</bean>
-	<bean id="com.liferay.portal.security.ldap.PortalLDAPUserImporterUtil" class="com.liferay.portal.security.ldap.PortalLDAPUserImporterUtil">
-		<property name="portalLDAPUserImporter" ref="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl" />
+	<bean id="com.liferay.portal.security.ldap.LDAPPortalUserImporterUtil" class="com.liferay.portal.security.ldap.LDAPPortalUserImporterUtil">
+		<property name="ldapPortalUserImporter" ref="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl" />
 	</bean>
 </beans>

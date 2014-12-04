@@ -23,13 +23,13 @@ import javax.naming.ldap.LdapContext;
 /**
  * @author Michael C. Han
  */
-public class PortalLDAPUserImporterUtil {
+public class LDAPPortalUserImporterUtil {
 
-	public static PortalLDAPUserImporter getPortalLDAPUserImporter() {
+	public static LDAPPortalUserImporter getLDAPPortalUserImporter() {
 		PortalRuntimePermission.checkGetBeanProperty(
-			PortalLDAPUserImporterUtil.class);
+			LDAPPortalUserImporterUtil.class);
 
-		return _portalLDAPUserImporter;
+		return _ldapPortalUserImporter;
 	}
 
 	public static User importUser(
@@ -37,16 +37,16 @@ public class PortalLDAPUserImporterUtil {
 			Attributes attributes, String password)
 		throws Exception {
 
-		return getPortalLDAPUserImporter().importUser(
+		return getLDAPPortalUserImporter().importUser(
 			ldapServerId, companyId, ldapContext, attributes, password);
 	}
 
-	public void setPortalLDAPUserImporter(
-		PortalLDAPUserImporter portalLDAPUserImporter) {
+	public void setLDAPPortalUserImporter(
+		LDAPPortalUserImporter ldapPortalUserImporter) {
 
-		_portalLDAPUserImporter = portalLDAPUserImporter;
+		_ldapPortalUserImporter = ldapPortalUserImporter;
 	}
 
-	private static PortalLDAPUserImporter _portalLDAPUserImporter;
+	private static LDAPPortalUserImporter _ldapPortalUserImporter;
 
 }
