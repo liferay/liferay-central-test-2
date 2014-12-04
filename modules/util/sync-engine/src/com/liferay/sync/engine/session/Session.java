@@ -424,7 +424,7 @@ public class Session {
 
 	private BasicHttpContext _basicHttpContext;
 	private final AtomicInteger _downloadedBytes = new AtomicInteger(0);
-	private int _downloadRate;
+	private final int _downloadRate;
 	private final ExecutorService _executorService;
 	private final HttpClient _httpClient;
 	private final HttpHost _httpHost;
@@ -432,6 +432,6 @@ public class Session {
 		Arrays.asList("filePath", "syncFile", "syncSite", "uiEvent"));
 	private String _token;
 	private final AtomicInteger _uploadedBytes = new AtomicInteger(0);
-	private int _uploadRate;
+	private final int _uploadRate;
 
 }
