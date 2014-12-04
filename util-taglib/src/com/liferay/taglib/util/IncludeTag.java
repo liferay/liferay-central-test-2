@@ -418,26 +418,24 @@ public class IncludeTag extends AttributesTagSupport {
 				sb.append(" attributes.");
 			}
 		}
-		else {
-			if (contextPath.equals(StringPool.SLASH)) {
-				if (getClass().equals(IncludeTag.class)) {
-					sb.append(" It seems that you are trying to use an ");
-					sb.append("include taglib from a module without ");
-					sb.append("specifying the servletContext attribute, ");
-					sb.append("which is unsupported and will not render ");
-					sb.append("anything in the page. Please set the ");
-					sb.append("servletContext attribute of the tag to the");
-					sb.append(" value <%= application %> to make it work.");
-				}
-				else {
-					sb.append(" It seems that you are trying to use an ");
-					sb.append("include-derived taglib from a module using");
-					sb.append(" the file attribute of the taglib, which ");
-					sb.append("is unsupported and will not render ");
-					sb.append("anything in the page. Please consider ");
-					sb.append("nesting the content directly inside ");
-					sb.append("the tag.");
-				}
+		else if (contextPath.equals(StringPool.SLASH)) {
+			if (getClass().equals(IncludeTag.class)) {
+				sb.append(" It seems that you are trying to use an ");
+				sb.append("include taglib from a module without ");
+				sb.append("specifying the servletContext attribute, ");
+				sb.append("which is unsupported and will not render ");
+				sb.append("anything in the page. Please set the ");
+				sb.append("servletContext attribute of the tag to the");
+				sb.append(" value <%= application %> to make it work.");
+			}
+			else {
+				sb.append(" It seems that you are trying to use an ");
+				sb.append("include-derived taglib from a module using");
+				sb.append(" the file attribute of the taglib, which ");
+				sb.append("is unsupported and will not render ");
+				sb.append("anything in the page. Please consider ");
+				sb.append("nesting the content directly inside ");
+				sb.append("the tag.");
 			}
 		}
 
