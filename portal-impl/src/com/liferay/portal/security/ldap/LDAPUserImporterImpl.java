@@ -93,8 +93,8 @@ import javax.naming.ldap.LdapContext;
  * @author Hugo Huijser
  */
 @DoPrivileged
-public class LDAPPortalUserImporterImpl
-	implements LDAPPortalUserImporter, UserImporter {
+public class LDAPUserImporterImpl
+	implements LDAPUserImporter, UserImporter {
 
 	@Override
 	public User importUser(
@@ -353,7 +353,7 @@ public class LDAPPortalUserImporterImpl
 
 			LockLocalServiceUtil.lock(
 				defaultUserId, UserImporterUtil.class.getName(), companyId,
-				LDAPPortalUserImporterImpl.class.getName(), false,
+				LDAPUserImporterImpl.class.getName(), false,
 				PropsValues.LDAP_IMPORT_LOCK_EXPIRATION_TIME);
 
 			long[] ldapServerIds = StringUtil.split(
@@ -1343,7 +1343,7 @@ public class LDAPPortalUserImporterImpl
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(
-		LDAPPortalUserImporterImpl.class);
+		LDAPUserImporterImpl.class);
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
 	private Set<String> _ldapUserIgnoreAttributes = SetUtil.fromArray(

@@ -22,7 +22,7 @@ import javax.naming.ldap.LdapContext;
 /**
  * @author Michael C. Han
  */
-public interface LDAPPortalUserImporter {
+public interface LDAPUserImporter {
 
 	public User importUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,

@@ -53,7 +53,7 @@ import javax.naming.ldap.LdapContext;
  * @author Vilmos Papp
  */
 @DoPrivileged
-public class LDAPPortalUserExporterImpl implements UserExporter {
+public class LDAPUserExporterImpl implements UserExporter {
 
 	@Override
 	public void exportUser(
@@ -378,7 +378,7 @@ public class LDAPPortalUserExporterImpl implements UserExporter {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		LDAPPortalUserExporterImpl.class);
+		LDAPUserExporterImpl.class);
 
 	private PortalToLDAPConverter _portalToLDAPConverter;
 
