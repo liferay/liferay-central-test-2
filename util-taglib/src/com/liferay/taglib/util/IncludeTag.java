@@ -373,10 +373,10 @@ public class IncludeTag extends AttributesTagSupport {
 		if (page.startsWith("/html/taglib/") &&
 			(page.endsWith("/end.jsp") || page.endsWith("/page.jsp") ||
 			 page.endsWith("/start.jsp"))) {
-	
+
 			return true;
 		}
-	
+
 		return false;
 	}
 
