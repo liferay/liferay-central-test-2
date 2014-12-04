@@ -35,36 +35,35 @@ public class UserExporterUtil {
 			Contact contact, Map<String, Serializable> contactExpandoAttributes)
 		throws Exception {
 
-		getPortalUserExporter().exportUser(contact, contactExpandoAttributes);
+		getUserExporter().exportUser(contact, contactExpandoAttributes);
 	}
 
 	public static void exportUser(
 			long userId, long userGroupId, UserOperation userOperation)
 		throws Exception {
 
-		getPortalUserExporter().exportUser(userId, userGroupId, userOperation);
+		getUserExporter().exportUser(userId, userGroupId, userOperation);
 	}
 
 	public static void exportUser(
 			User user, Map<String, Serializable> userExpandoAttributes)
 		throws Exception {
 
-		getPortalUserExporter().exportUser(user, userExpandoAttributes);
+		getUserExporter().exportUser(user, userExpandoAttributes);
 	}
 
-	public static UserExporter getPortalUserExporter() {
-		PortalRuntimePermission.checkGetBeanProperty(
-			UserExporterUtil.class);
+	public static UserExporter getUserExporter() {
+		PortalRuntimePermission.checkGetBeanProperty(UserExporterUtil.class);
 
-		return _portalUserExporter;
+		return _userExporter;
 	}
 
-	public void setPortalUserExporter(UserExporter portalUserExporter) {
+	public void setUserExporter(UserExporter userExporter) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-		_portalUserExporter = portalUserExporter;
+		_userExporter = userExporter;
 	}
 
-	private static UserExporter _portalUserExporter;
+	private static UserExporter _userExporter;
 
 }

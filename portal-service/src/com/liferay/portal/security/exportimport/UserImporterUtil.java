@@ -25,11 +25,10 @@ import com.liferay.portal.model.User;
  */
 public class UserImporterUtil {
 
-	public static UserImporter getPortalUserImporter() {
-		PortalRuntimePermission.checkGetBeanProperty(
-			UserImporterUtil.class);
+	public static UserImporter getUserImporter() {
+		PortalRuntimePermission.checkGetBeanProperty(UserImporterUtil.class);
 
-		return _portalUserImporter;
+		return _userImporter;
 	}
 
 	public static User importUser(
@@ -37,7 +36,7 @@ public class UserImporterUtil {
 			String screenName)
 		throws Exception {
 
-		return getPortalUserImporter().importUser(
+		return getUserImporter().importUser(
 			ldapServerId, companyId, emailAddress, screenName);
 	}
 
@@ -45,37 +44,37 @@ public class UserImporterUtil {
 			long companyId, String emailAddress, String screenName)
 		throws Exception {
 
-		return getPortalUserImporter().importUser(
+		return getUserImporter().importUser(
 			companyId, emailAddress, screenName);
 	}
 
 	public static User importUserByScreenName(long companyId, String screenName)
 		throws Exception {
 
-		return getPortalUserImporter().importUserByScreenName(
+		return getUserImporter().importUserByScreenName(
 			companyId, screenName);
 	}
 
 	public static void importUsers() throws Exception {
-		getPortalUserImporter().importUsers();
+		getUserImporter().importUsers();
 	}
 
 	public static void importUsers(long companyId) throws Exception {
-		getPortalUserImporter().importUsers(companyId);
+		getUserImporter().importUsers(companyId);
 	}
 
 	public static void importUsers(long ldapServerId, long companyId)
 		throws Exception {
 
-		getPortalUserImporter().importUsers(ldapServerId, companyId);
+		getUserImporter().importUsers(ldapServerId, companyId);
 	}
 
-	public void setPortalUserImporter(UserImporter portalUserImporter) {
+	public void setUserImporter(UserImporter userImporter) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-		_portalUserImporter = portalUserImporter;
+		_userImporter = userImporter;
 	}
 
-	private static UserImporter _portalUserImporter;
+	private static UserImporter _userImporter;
 
 }
