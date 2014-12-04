@@ -1231,7 +1231,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.model.Group#getDescriptiveName(Locale)
+	 *             Group#getDescriptiveName(Locale)
 	 */
 	@Deprecated
 	@Override
@@ -1243,7 +1243,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.model.Group#getDescriptiveName(Locale)
+	 *             Group#getDescriptiveName(Locale)
 	 */
 	@Deprecated
 	@Override
