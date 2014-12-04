@@ -76,6 +76,7 @@ public class NettyRepository implements Repository<Channel> {
 		}
 	}
 
+	@Override
 	public AsyncBroker<Path, FileResponse> getAsyncBroker() {
 		return asyncBroker;
 	}
