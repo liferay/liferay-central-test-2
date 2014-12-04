@@ -371,8 +371,8 @@ public class IncludeTag extends AttributesTagSupport {
 
 	protected boolean isPortalTaglibPage(String page) {
 		if (page.startsWith("/html/taglib/") &&
-			(page.endsWith("/start.jsp") || page.endsWith("/end.jsp") ||
-			 page.endsWith("/page.jsp"))) {
+			(page.endsWith("/end.jsp") || page.endsWith("/page.jsp") ||
+			 page.endsWith("/start.jsp"))) {
 	
 			return true;
 		}
