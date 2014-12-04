@@ -15,6 +15,7 @@
 package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.exportimport.UserImporter;
 
 import javax.naming.directory.Attributes;
 import javax.naming.ldap.LdapContext;
@@ -22,7 +23,7 @@ import javax.naming.ldap.LdapContext;
 /**
  * @author Michael C. Han
  */
-public interface LDAPUserImporter {
+public interface LDAPUserImporter extends UserImporter {
 
 	public User importUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,
