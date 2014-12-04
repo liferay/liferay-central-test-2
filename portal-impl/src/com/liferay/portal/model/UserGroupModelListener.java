@@ -15,8 +15,8 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.UserImportTransactionThreadLocal;
 import com.liferay.portal.security.exportimport.UserExporterUtil;
+import com.liferay.portal.security.exportimport.UserImportTransactionThreadLocal;
 import com.liferay.portal.security.exportimport.UserOperation;
 
 /**
