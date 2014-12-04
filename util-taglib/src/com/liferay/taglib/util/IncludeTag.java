@@ -399,7 +399,7 @@ public class IncludeTag extends AttributesTagSupport {
 
 		sb.append("Unable to find ");
 		sb.append(page);
-		sb.append(" in context ");
+		sb.append(" in the context ");
 		sb.append(contextPath);
 		sb.append(".");
 
@@ -408,36 +408,23 @@ public class IncludeTag extends AttributesTagSupport {
 				sb = null;
 			}
 			else {
-				sb.append(" It seems that you are trying to use an ");
-				sb.append("include-derived taglib from a module and ");
-				sb.append("setting the servletContext at the same time,");
-				sb.append(" which is not supported. Please consider ");
-				sb.append("inlining the nested content of the tag ");
-				sb.append(" directly in the JSP where the tag is invoked,");
-				sb.append(" instead of using the file and servletContext");
-				sb.append(" attributes.");
+				sb.append(" You must not use a taglib from a module and ");
+				sb.append("set the attribute \"servletContext\". Inline the ");
+				sb.append("content directly where the taglib is invoked.");
 			}
 		}
 		else if (contextPath.equals(StringPool.SLASH)) {
 			Class<?> clazz = getClass();
 
 			if (clazz.equals(IncludeTag.class)) {
-				sb.append(" It seems that you are trying to use an ");
-				sb.append("include taglib from a module without ");
-				sb.append("specifying the servletContext attribute, ");
-				sb.append("which is unsupported and will not render ");
-				sb.append("anything in the page. Please set the ");
-				sb.append("servletContext attribute of the tag to the");
-				sb.append(" value <%= application %> to make it work.");
+				sb.append(" You must set the attribute \"servletContext\" ");
+				sb.append("with the value \"<%= application %>\" when ");
+				sb.append("invoking a taglib from a module.");
 			}
 			else {
-				sb.append(" It seems that you are trying to use an ");
-				sb.append("include-derived taglib from a module using");
-				sb.append(" the file attribute of the taglib, which ");
-				sb.append("is unsupported and will not render ");
-				sb.append("anything in the page. Please consider ");
-				sb.append("nesting the content directly inside ");
-				sb.append("the tag.");
+				sb.append(" You must not use a taglib from a module and ");
+				sb.append("set the attribute \"file\". Inline the content ");
+				sb.append("directly where the taglib is invoked.");
 			}
 		}
 
