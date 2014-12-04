@@ -9,20 +9,20 @@
 >
 	<bean id="ldapToPortalConverter" class="com.liferay.portal.security.ldap.DefaultLDAPToPortalConverter" />
 	<bean id="portalToLDAPConverter" class="com.liferay.portal.security.ldap.DefaultPortalToLDAPConverter" />
-	<bean id="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl" class="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl">
-		<property name="LDAPToPortalConverter" ref="ldapToPortalConverter" />
-	</bean>
-	<bean id="com.liferay.portal.security.PortalUserExporterUtil" class="com.liferay.portal.security.PortalUserExporterUtil">
-		<property name="portalUserExporter">
-			<bean class="com.liferay.portal.security.ldap.LDAPPortalUserExporterImpl">
+	<bean id="com.liferay.portal.security.exportimport.UserExporterUtil" class="com.liferay.portal.security.exportimport.UserExporterUtil">
+		<property name="userExporter">
+			<bean class="com.liferay.portal.security.ldap.LDAPUserExporterImpl">
 				<property name="portalToLDAPConverter" ref="portalToLDAPConverter" />
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.security.PortalUserImporterUtil" class="com.liferay.portal.security.PortalUserImporterUtil">
-		<property name="portalUserImporter" ref="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl" />
+	<bean id="com.liferay.portal.security.exportimport.UserImporterUtil" class="com.liferay.portal.security.exportimport.UserImporterUtil">
+		<property name="userImporter" ref="com.liferay.portal.security.ldap.LDAPUserImporterImpl" />
 	</bean>
-	<bean id="com.liferay.portal.security.ldap.LDAPPortalUserImporterUtil" class="com.liferay.portal.security.ldap.LDAPPortalUserImporterUtil">
-		<property name="ldapPortalUserImporter" ref="com.liferay.portal.security.ldap.LDAPPortalUserImporterImpl" />
+	<bean id="com.liferay.portal.security.ldap.LDAPUserImporterImpl" class="com.liferay.portal.security.ldap.LDAPUserImporterImpl">
+		<property name="LDAPToPortalConverter" ref="ldapToPortalConverter" />
+	</bean>
+	<bean id="com.liferay.portal.security.ldap.LDAPUserImporterUtil" class="com.liferay.portal.security.ldap.LDAPUserImporterUtil">
+		<property name="ldapUserImporter" ref="com.liferay.portal.security.ldap.LDAPUserImporterImpl" />
 	</bean>
 </beans>
