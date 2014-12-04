@@ -86,8 +86,10 @@ for (int i = values.size() - 1; i >= 0; i--) {
 
 			<aui:script>
 				var opener = Liferay.Util.getTop();
-				var fieldsQuantities = opener.document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value;
+
 				var itemQuantities = [];
+
+				var fieldsQuantities = opener.document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value;
 
 				if (fieldsQuantities) {
 					itemQuantities = fieldsQuantities.split(',');
