@@ -369,6 +369,17 @@ public class IncludeTag extends AttributesTagSupport {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	protected boolean isPortalTaglibPage(String page) {
+		if (page.startsWith("/html/taglib/") &&
+			(page.endsWith("/start.jsp") || page.endsWith("/end.jsp") ||
+			 page.endsWith("/page.jsp"))) {
+	
+			return true;
+		}
+	
+		return false;
+	}
+
 	protected boolean isUseCustomPage() {
 		return _useCustomPage;
 	}
@@ -476,17 +487,6 @@ public class IncludeTag extends AttributesTagSupport {
 		}
 
 		return exists;
-	}
-
-	protected boolean isPortalTaglibPage(String page) {
-		if (page.startsWith("/html/taglib/") &&
-			(page.endsWith("/start.jsp") || page.endsWith("/end.jsp") ||
-			 page.endsWith("/page.jsp"))) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
