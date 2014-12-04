@@ -1675,6 +1675,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
+		Group group = groupPersistence.findByPrimaryKey(entry.getGroupId());
+
 		String entryTitle = entry.getTitle();
 
 		String fromName = blogsSettings.getEmailFromName();
@@ -1694,8 +1696,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			bodyLocalizedValuesMap = blogsSettings.getEmailEntryAddedBody();
 		}
 
-		Group group = groupPersistence.findByPrimaryKey(entry.getGroupId());
-
 		SubscriptionSender subscriptionSender =
 			new GroupSubscriptionCheckSubscriptionSender(
 				BlogsPermission.RESOURCE_NAME);
@@ -1707,7 +1707,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			"[$BLOGS_ENTRY_CONTENT$]",
 			StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), 500),
 			false);
-
 		subscriptionSender.setContextAttributes(
 			"[$BLOGS_ENTRY_CREATE_DATE$]",
 			Time.getSimpleDate(entry.getCreateDate(), "yyyy/MM/dd"),
@@ -1725,7 +1724,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			workflowContext.get(WorkflowConstants.CONTEXT_USER_PORTRAIT_URL),
 			"[$BLOGS_ENTRY_USER_URL$]",
 			workflowContext.get(WorkflowConstants.CONTEXT_USER_URL));
-
 		subscriptionSender.setContextUserPrefix("BLOGS_ENTRY");
 		subscriptionSender.setEntryTitle(entryTitle);
 		subscriptionSender.setEntryURL(entryURL);
