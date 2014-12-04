@@ -431,7 +431,7 @@ public class LDAPPortalUserImporterImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error importing LDAP users and groups", e);
+			_log.error("Unable to import LDAP users and groups", e);
 		}
 		finally {
 			if (ldapContext != null) {
