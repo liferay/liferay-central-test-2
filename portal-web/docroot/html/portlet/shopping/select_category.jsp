@@ -36,7 +36,6 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 
 	portletURL.setParameter("struts_action", "/shopping/select_category");
 	portletURL.setParameter("categoryId", String.valueOf(categoryId));
-
 	%>
 
 	<liferay-ui:search-container
