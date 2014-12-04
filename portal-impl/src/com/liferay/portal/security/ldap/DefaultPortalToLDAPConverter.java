@@ -27,7 +27,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.UserOperation;
+import com.liferay.portal.security.exportimport.UserOperation;
 import com.liferay.portal.security.pwd.PasswordEncryptorUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -35,7 +35,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 
 import java.io.Serializable;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

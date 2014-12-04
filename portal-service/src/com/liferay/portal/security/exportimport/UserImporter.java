@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.security;
+package com.liferay.portal.security.exportimport;
 
 import com.liferay.portal.model.User;
 
 /**
  * @author Michael C. Han
  */
-public interface PortalUserImporter {
+public interface UserImporter {
 
 	public User importUser(
 			long ldapServerId, long companyId, String emailAddress,

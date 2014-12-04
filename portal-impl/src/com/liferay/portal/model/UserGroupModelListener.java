@@ -15,9 +15,9 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.PortalUserExporterUtil;
 import com.liferay.portal.security.UserImportTransactionThreadLocal;
-import com.liferay.portal.security.UserOperation;
+import com.liferay.portal.security.exportimport.UserExporterUtil;
+import com.liferay.portal.security.exportimport.UserOperation;
 
 /**
  * @author Marcellus Tavares
@@ -68,7 +68,7 @@ public class UserGroupModelListener extends BaseModelListener<UserGroup> {
 			return;
 		}
 
-		PortalUserExporterUtil.exportUser(userId, userGroupId, userOperation);
+		UserExporterUtil.exportUser(userId, userGroupId, userOperation);
 	}
 
 }

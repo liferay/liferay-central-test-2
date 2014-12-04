@@ -15,13 +15,12 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.PortalUserExporterUtil;
 import com.liferay.portal.security.UserImportTransactionThreadLocal;
+import com.liferay.portal.security.exportimport.UserExporterUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 
 import java.io.Serializable;
-
 import java.util.Map;
 
 /**
@@ -66,7 +65,7 @@ public class ContactModelListener extends BaseModelListener<Contact> {
 				serviceContext.getExpandoBridgeAttributes();
 		}
 
-		PortalUserExporterUtil.exportUser(contact, expandoBridgeAttributes);
+		UserExporterUtil.exportUser(contact, expandoBridgeAttributes);
 	}
 
 }

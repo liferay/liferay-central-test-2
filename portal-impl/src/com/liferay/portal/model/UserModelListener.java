@@ -18,16 +18,15 @@ import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.UserModelImpl;
-import com.liferay.portal.security.PortalUserExporterUtil;
 import com.liferay.portal.security.UserImportTransactionThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.exportimport.UserExporterUtil;
 import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 
@@ -103,7 +102,7 @@ public class UserModelListener extends BaseModelListener<User> {
 				serviceContext.getExpandoBridgeAttributes();
 		}
 
-		PortalUserExporterUtil.exportUser(user, expandoBridgeAttributes);
+		UserExporterUtil.exportUser(user, expandoBridgeAttributes);
 	}
 
 	protected void updateMembershipRequestStatus(long userId, long groupId)

@@ -44,10 +44,10 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.PortalUserImporter;
-import com.liferay.portal.security.PortalUserImporterUtil;
 import com.liferay.portal.security.UserGroupImportTransactionThreadLocal;
 import com.liferay.portal.security.UserImportTransactionThreadLocal;
+import com.liferay.portal.security.exportimport.UserImporter;
+import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LockLocalServiceUtil;
@@ -63,9 +63,7 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 
 import java.io.Serializable;
-
 import java.text.ParseException;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -94,7 +92,7 @@ import javax.naming.ldap.LdapContext;
  */
 @DoPrivileged
 public class LDAPPortalUserImporterImpl
-	implements LDAPPortalUserImporter, PortalUserImporter {
+	implements LDAPPortalUserImporter, UserImporter {
 
 	@Override
 	public User importUser(
@@ -339,7 +337,7 @@ public class LDAPPortalUserImporterImpl
 				companyId);
 
 			if (LockLocalServiceUtil.hasLock(
-					defaultUserId, PortalUserImporterUtil.class.getName(),
+					defaultUserId, UserImporterUtil.class.getName(),
 					companyId)) {
 
 				if (_log.isDebugEnabled()) {
@@ -352,7 +350,7 @@ public class LDAPPortalUserImporterImpl
 			}
 
 			LockLocalServiceUtil.lock(
-				defaultUserId, PortalUserImporterUtil.class.getName(),
+				defaultUserId, UserImporterUtil.class.getName(),
 				companyId, LDAPPortalUserImporterImpl.class.getName(), false,
 				PropsValues.LDAP_IMPORT_LOCK_EXPIRATION_TIME);
 
@@ -379,7 +377,7 @@ public class LDAPPortalUserImporterImpl
 		}
 		finally {
 			LockLocalServiceUtil.unlock(
-				PortalUserImporterUtil.class.getName(), companyId);
+				UserImporterUtil.class.getName(), companyId);
 
 			ShardUtil.popCompanyService();
 		}
@@ -1349,6 +1347,6 @@ public class LDAPPortalUserImporterImpl
 	private Set<String> _ldapUserIgnoreAttributes = SetUtil.fromArray(
 		PropsValues.LDAP_USER_IGNORE_ATTRIBUTES);
 	private PortalCache<String, Long> _portalCache = SingleVMPoolUtil.getCache(
-		PortalUserImporter.class.getName(), false);
+		UserImporter.class.getName(), false);
 
 }

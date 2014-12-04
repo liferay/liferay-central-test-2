@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security;
+package com.liferay.portal.security.exportimport;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.model.Contact;
@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Marcellus Tavares
  * @author Raymond Augé
  */
-public class PortalUserExporterUtil {
+public class UserExporterUtil {
 
 	public static void exportUser(
 			Contact contact, Map<String, Serializable> contactExpandoAttributes)
@@ -52,19 +52,19 @@ public class PortalUserExporterUtil {
 		getPortalUserExporter().exportUser(user, userExpandoAttributes);
 	}
 
-	public static PortalUserExporter getPortalUserExporter() {
+	public static UserExporter getPortalUserExporter() {
 		PortalRuntimePermission.checkGetBeanProperty(
-			PortalUserExporterUtil.class);
+			UserExporterUtil.class);
 
 		return _portalUserExporter;
 	}
 
-	public void setPortalUserExporter(PortalUserExporter portalUserExporter) {
+	public void setPortalUserExporter(UserExporter portalUserExporter) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_portalUserExporter = portalUserExporter;
 	}
 
-	private static PortalUserExporter _portalUserExporter;
+	private static UserExporter _portalUserExporter;
 
 }

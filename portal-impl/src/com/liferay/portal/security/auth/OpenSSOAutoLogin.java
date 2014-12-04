@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.PortalUserImporterUtil;
+import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.opensso.OpenSSOUtil;
@@ -159,11 +159,11 @@ public class OpenSSOAutoLogin extends BaseAutoLogin {
 					PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
 				if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-					user = PortalUserImporterUtil.importUser(
+					user = UserImporterUtil.importUser(
 						companyId, StringPool.BLANK, screenName);
 				}
 				else {
-					user = PortalUserImporterUtil.importUser(
+					user = UserImporterUtil.importUser(
 						companyId, emailAddress, StringPool.BLANK);
 				}
 			}

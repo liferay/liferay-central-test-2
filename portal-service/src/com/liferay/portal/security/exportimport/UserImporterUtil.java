@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security;
+package com.liferay.portal.security.exportimport;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.model.User;
@@ -23,11 +23,11 @@ import com.liferay.portal.model.User;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public class PortalUserImporterUtil {
+public class UserImporterUtil {
 
-	public static PortalUserImporter getPortalUserImporter() {
+	public static UserImporter getPortalUserImporter() {
 		PortalRuntimePermission.checkGetBeanProperty(
-			PortalUserImporterUtil.class);
+			UserImporterUtil.class);
 
 		return _portalUserImporter;
 	}
@@ -70,12 +70,12 @@ public class PortalUserImporterUtil {
 		getPortalUserImporter().importUsers(ldapServerId, companyId);
 	}
 
-	public void setPortalUserImporter(PortalUserImporter portalUserImporter) {
+	public void setPortalUserImporter(UserImporter portalUserImporter) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_portalUserImporter = portalUserImporter;
 	}
 
-	private static PortalUserImporter _portalUserImporter;
+	private static UserImporter _portalUserImporter;
 
 }

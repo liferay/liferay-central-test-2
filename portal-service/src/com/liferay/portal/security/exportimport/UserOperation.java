@@ -12,31 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.security;
-
-import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.User;
-
-import java.io.Serializable;
-
-import java.util.Map;
+package com.liferay.portal.security.exportimport;
 
 /**
- * @author Michael C. Han
  * @author Marcellus Tavares
  */
-public interface PortalUserExporter {
+public enum UserOperation {
 
-	public void exportUser(
-			Contact contact, Map<String, Serializable> contactExpandoAttributes)
-		throws Exception;
-
-	public void exportUser(
-			long userId, long userGroupId, UserOperation userOperation)
-		throws Exception;
-
-	public void exportUser(
-			User user, Map<String, Serializable> userExpandoAttributes)
-		throws Exception;
+	ADD, REMOVE, UPDATE
 
 }

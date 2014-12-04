@@ -17,10 +17,9 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.UserOperation;
+import com.liferay.portal.security.exportimport.UserOperation;
 
 import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
