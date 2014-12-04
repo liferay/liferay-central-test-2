@@ -30,6 +30,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;

@@ -35,6 +35,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 
 import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

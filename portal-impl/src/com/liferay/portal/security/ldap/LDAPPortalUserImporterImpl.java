@@ -63,7 +63,9 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 
 import java.io.Serializable;
+
 import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -350,8 +352,8 @@ public class LDAPPortalUserImporterImpl
 			}
 
 			LockLocalServiceUtil.lock(
-				defaultUserId, UserImporterUtil.class.getName(),
-				companyId, LDAPPortalUserImporterImpl.class.getName(), false,
+				defaultUserId, UserImporterUtil.class.getName(), companyId,
+				LDAPPortalUserImporterImpl.class.getName(), false,
 				PropsValues.LDAP_IMPORT_LOCK_EXPIRATION_TIME);
 
 			long[] ldapServerIds = StringUtil.split(

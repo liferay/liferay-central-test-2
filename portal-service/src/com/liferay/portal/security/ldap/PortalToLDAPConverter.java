@@ -20,6 +20,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.exportimport.UserOperation;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;

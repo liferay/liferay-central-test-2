@@ -27,6 +27,7 @@ import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 

@@ -51,8 +51,7 @@ public class UserImporterUtil {
 	public static User importUserByScreenName(long companyId, String screenName)
 		throws Exception {
 
-		return getUserImporter().importUserByScreenName(
-			companyId, screenName);
+		return getUserImporter().importUserByScreenName(companyId, screenName);
 	}
 
 	public static void importUsers() throws Exception {
