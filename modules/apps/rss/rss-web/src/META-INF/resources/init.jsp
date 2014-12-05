@@ -31,9 +31,9 @@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.util.PortalUtil" %><%@
-page import="com.liferay.rss.RSSFeed" %><%@
-page import="com.liferay.rss.RSSFeedEntry" %><%@
-page import="com.liferay.rss.web.context.RSSDisplayContext" %>
+page import="com.liferay.rss.web.context.RSSDisplayContext" %><%@
+page import="com.liferay.rss.web.util.RSSFeed" %><%@
+page import="com.liferay.rss.web.util.RSSFeedEntry" %>
 
 <%@ page import="com.sun.syndication.feed.synd.SyndEntry" %><%@
 page import="com.sun.syndication.feed.synd.SyndFeed" %><%@
