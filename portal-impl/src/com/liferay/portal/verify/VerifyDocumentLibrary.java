@@ -184,31 +184,20 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Criterion originalMimeTypeCriterion =
-						RestrictionsFactoryUtil.eq(
-							"mimeType", originalMimeTypes[0]);
+					Criterion criterion = RestrictionsFactoryUtil.eq(
+						"mimeType", originalMimeTypes[0]);
 
 					for (int i = 1; i < originalMimeTypes.length; i++) {
-						originalMimeTypeCriterion =
-							RestrictionsFactoryUtil.or(
-								originalMimeTypeCriterion,
-								RestrictionsFactoryUtil.eq(
-									"mimeType", originalMimeTypes[i]));
+						criterion = RestrictionsFactoryUtil.or(
+							criterion,
+							RestrictionsFactoryUtil.eq(
+								"mimeType", originalMimeTypes[i]));
 					}
 
-					dynamicQuery.add(originalMimeTypeCriterion);
+					dynamicQuery.add(criterion);
 				}
 
-		});
-
-		if (_log.isDebugEnabled()) {
-			long count = actionableDynamicQuery.performCount();
-
-			_log.debug(
-				"Processing " + count + " documents for mime types: " +
-					StringUtil.merge(originalMimeTypes, StringPool.COMMA));
-		}
-
+			});
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
@@ -257,9 +246,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 					String mimeType = getMimeType(inputStream, title);
 
-					String originalMimeType = dlFileVersion.getMimeType();
-
-					if (mimeType.equals(originalMimeType)) {
+					if (mimeType.equals(dlFileVersion.getMimeType())) {
 						return;
 					}
 
@@ -271,7 +258,8 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					try {
 						DLFileEntry dlFileEntry = dlFileVersion.getFileEntry();
 
-						if (dlFileEntry.getVersion().equals(
+						if (Validator.equals(
+								dlFileEntry.getVersion(),
 								dlFileVersion.getVersion())) {
 
 							dlFileEntry.setMimeType(mimeType);
@@ -283,7 +271,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to find file entry " +
+								"Unable to get file entry " +
 									dlFileVersion.getFileEntryId(),
 								e);
 						}
@@ -291,6 +279,14 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 				}
 
 			});
+
+		if (_log.isDebugEnabled()) {
+			long count = actionableDynamicQuery.performCount();
+
+			_log.debug(
+				"Processing " + count + " file versions with mime types: " +
+					StringUtil.merge(originalMimeTypes, StringPool.COMMA));
+		}
 
 		actionableDynamicQuery.performActions();
 	}
