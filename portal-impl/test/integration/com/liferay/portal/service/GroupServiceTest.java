@@ -583,8 +583,8 @@ public class GroupServiceTest {
 				group1.getGroupId(), group11.getGroupId(), group1.getName(),
 				group1.getDescription(), group1.getType(),
 				group1.isManualMembership(), group1.getMembershipRestriction(),
-				group1.getFriendlyURL(), group1.isActive(),
-				ServiceContextTestUtil.getServiceContext());
+				group1.getFriendlyURL(), group1.isInheritContent(),
+				group1.isActive(), ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A child group cannot be its parent group");
 		}
@@ -611,8 +611,8 @@ public class GroupServiceTest {
 				group1.getGroupId(), group1111.getGroupId(), group1.getName(),
 				group1.getDescription(), group1.getType(),
 				group1.isManualMembership(), group1.getMembershipRestriction(),
-				group1.getFriendlyURL(), group1.isActive(),
-				ServiceContextTestUtil.getServiceContext());
+				group1.getFriendlyURL(), group1.isInheritContent(),
+				group1.isActive(), ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A child group cannot be its parent group");
 		}
@@ -638,7 +638,8 @@ public class GroupServiceTest {
 				stagingGroup.getName(), stagingGroup.getDescription(),
 				stagingGroup.getType(), stagingGroup.isManualMembership(),
 				stagingGroup.getMembershipRestriction(),
-				stagingGroup.getFriendlyURL(), stagingGroup.isActive(),
+				stagingGroup.getFriendlyURL(), stagingGroup.isInheritContent(),
+				stagingGroup.isActive(),
 				ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A group cannot have its live group as parent");
@@ -658,8 +659,8 @@ public class GroupServiceTest {
 				group.getGroupId(), group.getGroupId(), group.getName(),
 				group.getDescription(), group.getType(),
 				group.isManualMembership(), group.getMembershipRestriction(),
-				group.getFriendlyURL(), group.isActive(),
-				ServiceContextTestUtil.getServiceContext());
+				group.getFriendlyURL(), group.isInheritContent(),
+				group.isActive(), ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A group cannot be its own parent");
 		}

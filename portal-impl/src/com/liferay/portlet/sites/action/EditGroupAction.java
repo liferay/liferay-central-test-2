@@ -473,8 +473,8 @@ public class EditGroupAction extends PortletAction {
 		GroupServiceUtil.updateGroup(
 			groupId, group.getParentGroupId(), group.getName(),
 			group.getDescription(), group.getType(), group.isManualMembership(),
-			group.getMembershipRestriction(), group.getFriendlyURL(), active,
-			serviceContext);
+			group.getMembershipRestriction(), group.getFriendlyURL(),
+			group.isInheritContent(), active, serviceContext);
 	}
 
 	protected Group updateGroup(ActionRequest actionRequest) throws Exception {
