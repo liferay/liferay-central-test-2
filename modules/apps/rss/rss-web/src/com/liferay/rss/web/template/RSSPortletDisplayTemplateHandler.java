@@ -22,9 +22,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplateConstants;
-import com.liferay.rss.RSSFeed;
 import com.liferay.rss.web.configuration.RSSWebConfigurationValues;
 import com.liferay.rss.web.constants.RSSPortletKeys;
+import com.liferay.rss.web.util.RSSFeed;
 
 import java.util.List;
 import java.util.Locale;

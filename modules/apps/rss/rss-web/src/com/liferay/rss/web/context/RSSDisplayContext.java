@@ -18,13 +18,12 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.rss.RSSFeed;
+import com.liferay.rss.web.util.RSSFeed;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
