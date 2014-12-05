@@ -85,12 +85,13 @@ public class UserNotificationManagerUtil {
 			userNotificationDefinitionsServiceTrackerMap =
 				_instance._userNotificationDefinitions;
 
-		for (String key :
+		for (String portletId :
 				userNotificationDefinitionsServiceTrackerMap.keySet()) {
 
 			userNotificationDefinitionsMap.put(
-				key,
-				userNotificationDefinitionsServiceTrackerMap.getService(key));
+				portletId,
+				userNotificationDefinitionsServiceTrackerMap.getService(
+					portletId));
 		}
 
 		return Collections.unmodifiableMap(userNotificationDefinitionsMap);
