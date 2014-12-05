@@ -7638,9 +7638,9 @@ public class PortalImpl implements Portal {
 
 		categoriesMap = new LinkedHashMap<String, List<Portlet>>();
 
-		Group group = themeDisplay.getSiteGroup();
-
 		for (String category : categories) {
+			Group group = themeDisplay.getSiteGroup();
+
 			if (group.isInheritContent() &&
 				category.equals(
 					PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT)) {
