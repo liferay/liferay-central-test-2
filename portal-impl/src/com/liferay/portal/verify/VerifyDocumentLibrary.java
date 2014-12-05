@@ -356,8 +356,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 								_log.warn(
 									"Unable to rename duplicate title for " +
 										"file entry " +
-										dlFileEntry.getFileEntryId() +
-										": " + e.getMessage(),
+											dlFileEntry.getFileEntryId(),
 									e);
 							}
 						}
@@ -384,13 +383,13 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 								_log.warn(
 									"Unable to rename duplicate title for " +
 										"file entry " +
-											dlFileEntry.getFileEntryId() +
-												": " + e.getMessage(),
+											dlFileEntry.getFileEntryId(),
 									e);
 							}
 						}
 					}
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -570,7 +569,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		dlFileEntry.setFileName(fileName);
 
-		DLFileEntry renamedFileEntry =
+		DLFileEntry renamedDLFileEntry =
 			DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
 
 		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
@@ -586,7 +585,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					" for file entry " + dlFileEntry.getFileEntryId());
 		}
 
-		return renamedFileEntry;
+		return renamedDLFileEntry;
 	}
 
 	protected void updateClassNameId() {
@@ -676,7 +675,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		VerifyDocumentLibrary.class);
 
 }
