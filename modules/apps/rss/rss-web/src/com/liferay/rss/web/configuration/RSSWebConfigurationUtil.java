@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 /**
  * @author Eudaldo Alonso
  */
-public class RSSConfigurationUtil {
+public class RSSWebConfigurationUtil {
 
 	public static String get(String key) {
 		return _configuration.get(key);
@@ -28,6 +28,6 @@ public class RSSConfigurationUtil {
 
 	private static final Configuration _configuration =
 		ConfigurationFactoryUtil.getConfiguration(
-			RSSConfigurationUtil.class.getClassLoader(), "portlet");
+			RSSWebConfigurationUtil.class.getClassLoader(), "portlet");
 
 }

@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 /**
  * @author Eudaldo Alonso
  */
-public class RSSConfigurationValues {
+public class RSSWebConfigurationValues {
 
 	public static final String DISPLAY_TEMPLATES_CONFIG = GetterUtil.getString(
-		RSSConfigurationUtil.get("display.templates.config"));
+		RSSWebConfigurationUtil.get("display.templates.config"));
 
 }
