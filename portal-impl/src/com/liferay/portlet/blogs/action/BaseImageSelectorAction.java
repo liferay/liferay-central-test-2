@@ -76,7 +76,7 @@ public abstract class BaseImageSelectorAction
 		}
 
 		throw new CoverImageNameException(
-			"Invalid cover image for fileName " + fileName);
+			"Invalid cover image for file name " + fileName);
 	}
 
 	protected abstract long getMaxFileSize();
