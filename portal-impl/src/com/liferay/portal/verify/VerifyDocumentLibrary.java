@@ -114,34 +114,34 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 	}
 
 	protected void checkDLFileEntryMetadata() throws Exception {
-		List<DLFileEntryMetadata> dlFileEntryMetadataWithNoStructures =
+		List<DLFileEntryMetadata> noStructuresDLFileEntryMetadatas =
 			DLFileEntryMetadataLocalServiceUtil.
 				getNoStructuresFileEntryMetadatas();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Deleting " + dlFileEntryMetadataWithNoStructures.size() +
+				"Deleting " + noStructuresDLFileEntryMetadatas.size() +
 					" file entry metadatas with no structures");
 		}
 
 		for (DLFileEntryMetadata dlFileEntryMetadata :
-				dlFileEntryMetadataWithNoStructures ) {
+				noStructuresDLFileEntryMetadatas ) {
 
 			deleteUnusedDLFileEntryMetadata(dlFileEntryMetadata);
 		}
 
-		List<DLFileEntryMetadata> dlFileEntryMetadataMismatchedCompanyIds =
+		List<DLFileEntryMetadata> mismatchedCompanyIdDLFileEntryMetadatas =
 			DLFileEntryMetadataLocalServiceUtil.
 				getMismatchedCompanyIdFileEntryMetadatas();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Deleting " + dlFileEntryMetadataWithNoStructures.size() +
+				"Deleting " + noStructuresDLFileEntryMetadatas.size() +
 					" file entry metadatas with mismatched company IDs");
 		}
 
 		for (DLFileEntryMetadata dlFileEntryMetadata :
-				dlFileEntryMetadataMismatchedCompanyIds ) {
+				mismatchedCompanyIdDLFileEntryMetadatas) {
 
 			deleteUnusedDLFileEntryMetadata(dlFileEntryMetadata);
 		}
