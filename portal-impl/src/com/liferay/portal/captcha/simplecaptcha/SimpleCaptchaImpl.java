@@ -392,8 +392,11 @@ public class SimpleCaptchaImpl implements Captcha {
 		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
 
 		if (request instanceof UploadPortletRequest) {
+			UploadPortletRequest uploadPortletRequest =
+				(UploadPortletRequest)request;
+
 			PortletRequest portletRequest =
-				((UploadPortletRequest)request).getPortletRequest();
+				uploadPortletRequest.getPortletRequest();
 
 			PortletSession portletSession = portletRequest.getPortletSession();
 
@@ -414,8 +417,11 @@ public class SimpleCaptchaImpl implements Captcha {
 
 		if (valid) {
 			if (request instanceof UploadPortletRequest) {
+				UploadPortletRequest uploadPortletRequest =
+					(UploadPortletRequest)request;
+
 				PortletRequest portletRequest =
-					((UploadPortletRequest)request).getPortletRequest();
+					uploadPortletRequest.getPortletRequest();
 
 				PortletSession portletSession =
 					portletRequest.getPortletSession();

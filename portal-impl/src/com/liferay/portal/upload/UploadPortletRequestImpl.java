@@ -44,13 +44,13 @@ public class UploadPortletRequestImpl
 	extends HttpServletRequestWrapper implements UploadPortletRequest {
 
 	public UploadPortletRequestImpl(
-		PortletRequest portletRequest,
-		UploadServletRequest uploadServletRequest, String namespace) {
+		UploadServletRequest uploadServletRequest,
+		PortletRequest portletRequest, String namespace) {
 
 		super(uploadServletRequest);
 
-		_portletRequest = portletRequest;
 		_uploadServletRequest = uploadServletRequest;
+		_portletRequest = portletRequest;
 		_namespace = namespace;
 	}
 
