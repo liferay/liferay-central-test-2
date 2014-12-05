@@ -30,8 +30,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Eudaldo Alonso
  */
-@Component(immediate = true, service = RSSUpgrade.class)
-public class RSSUpgrade {
+@Component(immediate = true, service = RSSWebUpgrade.class)
+public class RSSWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
