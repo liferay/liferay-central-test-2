@@ -28,23 +28,23 @@
 
 	<#assign fields = ddmReader.getFields("geolocation") />
 
-	<#assign coordinatesJSONObjectList = [] />
+	<#assign coordinatesJSONObjects = [] />
 
 	<#list fields.iterator() as field>
 		<#if (field.isRepeatable())>
 			<#list field.getValue() as value >
 				<#assign coordinatesJSONObject = jsonFactoryUtil.createJSONObject(value) />
 
-				<#assign coordinatesJSONObjectList = coordinatesJSONObjectList + [coordinatesJSONObject] />
+				<#assign coordinatesJSONObjects = coordinatesJSONObjects + [coordinatesJSONObject] />
 			</#list>
 		<#else>
 			<#assign coordinatesJSONObject = jsonFactoryUtil.createJSONObject(field.getValue()) />
 
-			<#assign coordinatesJSONObjectList = coordinatesJSONObjectList + [coordinatesJSONObject] />
+			<#assign coordinatesJSONObjects = coordinatesJSONObjects + [coordinatesJSONObject] />
 		</#if>
 	</#list>
 
-	<#list coordinatesJSONObjectList as coordinatesJSONObject>
+	<#list coordinatesJSONObjects as coordinatesJSONObject>
 		<#assign featureJSONObject = jsonFactoryUtil.createJSONObject() />
 
 		<@liferay.silently featureJSONObject.put("type", "Feature") />
