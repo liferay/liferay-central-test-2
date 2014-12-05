@@ -45,8 +45,6 @@ long smallImageFileEntryId = BeanParamUtil.getLong(entry, request, "smallImageFi
 
 boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
-
-String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
 %>
 
 <c:if test="<%= showHeader %>">
@@ -115,12 +113,13 @@ String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.BLOGS_IMAGE_E
 				<portlet:param name="struts_action" value="/blogs/cover_image_selector" />
 			</portlet:actionURL>
 
-			<%
-			long coverImageMaxFileSize = PrefsPropsUtil.getLong(PropsKeys.BLOGS_IMAGE_COVER_MAX_SIZE);
-			%>
-
 			<div class="lfr-blogs-cover-image-selector">
-				<liferay-ui:image-selector draggableImage="vertical" fileEntryId="<%= coverImageFileEntryId %>" maxFileSize="<%= coverImageMaxFileSize %>" paramName="coverImageFileEntry" uploadURL="<%= coverImageSelectorURL %>" validExtensions='<%= StringUtil.merge(imageExtensions, ", ") %>' />
+
+				<%
+				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
+				%>
+
+				<liferay-ui:image-selector draggableImage="vertical" fileEntryId="<%= coverImageFileEntryId %>" maxFileSize="<%= PrefsPropsUtil.getLong(PropsKeys.BLOGS_IMAGE_COVER_MAX_SIZE) %>" paramName="coverImageFileEntry" uploadURL="<%= coverImageSelectorURL %>" validExtensions='<%= StringUtil.merge(imageExtensions, ", ") %>' />
 			</div>
 
 			<div class="entry-title">
