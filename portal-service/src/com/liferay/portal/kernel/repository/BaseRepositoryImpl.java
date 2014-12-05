@@ -648,9 +648,8 @@ public abstract class BaseRepositoryImpl
 
 	@Override
 	public Folder updateFolder(
-			long folderId, long parentFolderId, String name, String description,
-			ServiceContext serviceContext)
-		throws PortalException {
+		long folderId, long parentFolderId, String name, String description,
+		ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
