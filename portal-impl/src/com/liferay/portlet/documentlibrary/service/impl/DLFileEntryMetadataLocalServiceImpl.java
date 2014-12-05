@@ -124,7 +124,7 @@ public class DLFileEntryMetadataLocalServiceImpl
 	}
 
 	@Override
-	public List<DLFileEntryMetadata> getNoStructureFileEntryMetadatas() {
+	public List<DLFileEntryMetadata> getNoStructuresFileEntryMetadatas() {
 		return dlFileEntryMetadataFinder.findByNoStructures();
 	}
 

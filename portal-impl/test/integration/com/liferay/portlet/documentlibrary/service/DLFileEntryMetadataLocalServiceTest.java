@@ -159,7 +159,7 @@ public class DLFileEntryMetadataLocalServiceTest {
 
 			List<DLFileEntryMetadata> dlFileEntryMetadatas =
 				DLFileEntryMetadataLocalServiceUtil.
-					getNoStructureFileEntryMetadatas();
+					getNoStructuresFileEntryMetadatas();
 
 			Assert.assertEquals(1, dlFileEntryMetadatas.size());
 			Assert.assertEquals(

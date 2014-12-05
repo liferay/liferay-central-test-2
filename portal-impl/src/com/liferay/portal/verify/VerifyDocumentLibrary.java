@@ -116,7 +116,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 	protected void checkDLFileEntryMetadata() throws Exception {
 		List<DLFileEntryMetadata> dlFileEntryMetadataWithNoStructures =
 			DLFileEntryMetadataLocalServiceUtil.
-				getNoStructureFileEntryMetadatas();
+				getNoStructuresFileEntryMetadatas();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
