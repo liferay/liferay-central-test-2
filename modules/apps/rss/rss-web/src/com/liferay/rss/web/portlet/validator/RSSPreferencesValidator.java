@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.rss.web;
+package com.liferay.rss.web.portlet.validator;
 
 import com.liferay.portal.kernel.util.Validator;
 
