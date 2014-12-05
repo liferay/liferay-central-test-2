@@ -120,7 +120,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Deleting " + noStructuresDLFileEntryMetadatas.size() +
+				"Deleting " + mismatchedCompanyIdDLFileEntryMetadatas.size() +
 					" file entry metadatas with mismatched company IDs");
 		}
 
