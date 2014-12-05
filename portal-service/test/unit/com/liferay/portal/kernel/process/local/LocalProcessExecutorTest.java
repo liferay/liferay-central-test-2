@@ -798,7 +798,7 @@ public class LocalProcessExecutorTest {
 			LogRecord logRecord = logRecords.get(0);
 
 			Assert.assertEquals(
-				"Error on invoking generic process callable",
+				"Unable to invoke generic process callable",
 				logRecord.getMessage());
 
 			Throwable throwable = logRecord.getThrown();

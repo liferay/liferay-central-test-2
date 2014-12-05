@@ -327,7 +327,7 @@ public class LocalProcessExecutor implements ProcessExecutor {
 					}
 					catch (Throwable t) {
 						_log.error(
-							"Error on invoking generic process callable", t);
+							"Unable to invoke generic process callable", t);
 					}
 				}
 			}
