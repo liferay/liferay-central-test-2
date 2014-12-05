@@ -278,8 +278,8 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 
 		byte[] bytes = FileUtil.getBytes(
 			getClass(),
-			"/com/liferay/portlet/documentlibrary/service/dependencies/" +
-				"ddmstructure.xml");
+			"/com/liferay/portlet/documentlibrary/service/dependencies" +
+				"/ddmstructure.xml");
 
 		serviceContext.setAttribute("definition", new String(bytes));
 
