@@ -4695,10 +4695,12 @@ public class PortalImpl implements Portal {
 				scopeGroupId = doAsGroupId;
 			}
 
-			if ((group != null) && group.isInheritContent() &&
-				!layout.getGroup().isControlPanel()) {
+			if ((group != null) && group.isInheritContent()) {
+				Group layoutGroup = layout.getGroup();
 
-				scopeGroupId = group.getParentGroupId();
+				if (!layoutGroup.isControlPanel()) {
+					scopeGroupId = group.getParentGroupId();
+				}
 			}
 
 			if ((portletId != null) && (group != null) &&
