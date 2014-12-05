@@ -22,6 +22,38 @@ Group liveGroup = (Group)request.getAttribute("site.liveGroup");
 LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)request.getAttribute("site.layoutSetPrototype");
 boolean showPrototypes = GetterUtil.getBoolean(request.getAttribute("site.showPrototypes"));
 
+long parentGroupId = ParamUtil.getLong(request, "parentGroupSearchContainerPrimaryKeys", (group != null) ? group.getParentGroupId() : GroupConstants.DEFAULT_PARENT_GROUP_ID);
+
+if (parentGroupId <= 0) {
+	parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+
+	if (liveGroup != null) {
+		parentGroupId = liveGroup.getParentGroupId();
+	}
+}
+
+Group parentGroup = null;
+
+if ((group == null) && (parentGroupId == GroupConstants.DEFAULT_PARENT_GROUP_ID) && !permissionChecker.isCompanyAdmin()) {
+	List<Group> manageableGroups = new ArrayList<Group>();
+
+	for (Group curGroup : user.getGroups()) {
+		if (GroupPermissionUtil.contains(permissionChecker, curGroup, ActionKeys.MANAGE_SUBGROUPS)) {
+			manageableGroups.add(curGroup);
+		}
+	}
+
+	if (manageableGroups.size() == 1) {
+		Group manageableGroup = manageableGroups.get(0);
+
+		parentGroupId = manageableGroup.getGroupId();
+	}
+}
+
+if (parentGroupId != GroupConstants.DEFAULT_PARENT_GROUP_ID) {
+	parentGroup = GroupLocalServiceUtil.fetchGroup(parentGroupId);
+}
+
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 
 LayoutSet privateLayoutSet = null;
@@ -69,38 +101,6 @@ if (liveGroup != null) {
 }
 else if (group != null) {
 	typeSettingsProperties = group.getTypeSettingsProperties();
-}
-
-long parentGroupId = ParamUtil.getLong(request, "parentGroupSearchContainerPrimaryKeys", (group != null) ? group.getParentGroupId() : GroupConstants.DEFAULT_PARENT_GROUP_ID);
-
-if (parentGroupId <= 0) {
-	parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
-
-	if (liveGroup != null) {
-		parentGroupId = liveGroup.getParentGroupId();
-	}
-}
-
-Group parentGroup = null;
-
-if ((group == null) && (parentGroupId == GroupConstants.DEFAULT_PARENT_GROUP_ID) && !permissionChecker.isCompanyAdmin()) {
-	List<Group> manageableGroups = new ArrayList<Group>();
-
-	for (Group curGroup : user.getGroups()) {
-		if (GroupPermissionUtil.contains(permissionChecker, curGroup, ActionKeys.MANAGE_SUBGROUPS)) {
-			manageableGroups.add(curGroup);
-		}
-	}
-
-	if (manageableGroups.size() == 1) {
-		Group manageableGroup = manageableGroups.get(0);
-
-		parentGroupId = manageableGroup.getGroupId();
-	}
-}
-
-if (parentGroupId != GroupConstants.DEFAULT_PARENT_GROUP_ID) {
-	parentGroup = GroupLocalServiceUtil.fetchGroup(parentGroupId);
 }
 %>
 
