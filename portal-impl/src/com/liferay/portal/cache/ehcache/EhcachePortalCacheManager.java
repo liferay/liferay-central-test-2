@@ -232,7 +232,7 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 					}
 					else {
 						_log.error(
-							"Unable to reconfig cache with name " +
+							"Unable to reconfigure cache with name " +
 								portalCacheName);
 					}
 				}
