@@ -63,8 +63,10 @@ public class RSSPortletDisplayTemplateHandler
 
 	@Override
 	public String getResourceName() {
+		Class<?> clazz = getClass();
+
 		BundleReference bundleReference =
-			(BundleReference)getClass().getClassLoader();
+			(BundleReference)clazz.getClassLoader();
 
 		Bundle bundle = bundleReference.getBundle();
 
