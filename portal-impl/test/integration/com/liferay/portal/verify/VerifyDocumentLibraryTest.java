@@ -83,7 +83,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 	}
 
 	@Test
-	public void testDeleteDLFileEntryMetadataWithMismatchCompanyId()
+	public void testDeleteMismatchCompanyIdDLFileEntryMetadatas()
 		throws Exception {
 
 		DLFileEntry dlFileEntry = addDLFileEntryWithFileEntryType();
@@ -118,7 +118,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 	}
 
 	@Test
-	public void testDeleteDLFileEntryMetadataWithNoStructure()
+	public void testDeleteNoStructuresDLFileEntryMetadatas()
 		throws Exception {
 
 		DLFileEntry dlFileEntry = addDLFileEntryWithFileEntryType();
