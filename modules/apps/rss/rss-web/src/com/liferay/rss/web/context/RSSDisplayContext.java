@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
