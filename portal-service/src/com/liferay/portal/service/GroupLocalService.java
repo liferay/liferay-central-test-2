@@ -600,7 +600,7 @@ public interface GroupLocalService extends BaseLocalService,
 
 	/**
 	* @deprecated As of 7.0.0, replaced by {@link
-	com.liferay.portal.model.Group#getDescriptiveName(Locale)
+	Group#getDescriptiveName(Locale)
 	*/
 	@java.lang.Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -610,7 +610,7 @@ public interface GroupLocalService extends BaseLocalService,
 
 	/**
 	* @deprecated As of 7.0.0, replaced by {@link
-	com.liferay.portal.model.Group#getDescriptiveName(Locale)
+	Group#getDescriptiveName(Locale)
 	*/
 	@java.lang.Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -2285,13 +2285,6 @@ public interface GroupLocalService extends BaseLocalService,
 	found or if the friendly URL was invalid or could one not be
 	created
 	*/
-	public com.liferay.portal.model.Group updateGroup(long groupId,
-		long parentGroupId, java.lang.String name,
-		java.lang.String description, int type, boolean manualMembership,
-		int membershipRestriction, java.lang.String friendlyURL,
-		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException;
-
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		long parentGroupId, java.lang.String name,
 		java.lang.String description, int type, boolean manualMembership,
