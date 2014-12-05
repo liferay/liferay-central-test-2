@@ -114,22 +114,6 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 	}
 
 	protected void checkDLFileEntryMetadata() throws Exception {
-		List<DLFileEntryMetadata> noStructuresDLFileEntryMetadatas =
-			DLFileEntryMetadataLocalServiceUtil.
-				getNoStructuresFileEntryMetadatas();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Deleting " + noStructuresDLFileEntryMetadatas.size() +
-					" file entry metadatas with no structures");
-		}
-
-		for (DLFileEntryMetadata dlFileEntryMetadata :
-				noStructuresDLFileEntryMetadatas ) {
-
-			deleteUnusedDLFileEntryMetadata(dlFileEntryMetadata);
-		}
-
 		List<DLFileEntryMetadata> mismatchedCompanyIdDLFileEntryMetadatas =
 			DLFileEntryMetadataLocalServiceUtil.
 				getMismatchedCompanyIdFileEntryMetadatas();
@@ -142,6 +126,22 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		for (DLFileEntryMetadata dlFileEntryMetadata :
 				mismatchedCompanyIdDLFileEntryMetadatas) {
+
+			deleteUnusedDLFileEntryMetadata(dlFileEntryMetadata);
+		}
+
+		List<DLFileEntryMetadata> noStructuresDLFileEntryMetadatas =
+			DLFileEntryMetadataLocalServiceUtil.
+				getNoStructuresFileEntryMetadatas();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Deleting " + noStructuresDLFileEntryMetadatas.size() +
+					" file entry metadatas with no structures");
+		}
+
+		for (DLFileEntryMetadata dlFileEntryMetadata :
+				noStructuresDLFileEntryMetadatas ) {
 
 			deleteUnusedDLFileEntryMetadata(dlFileEntryMetadata);
 		}
