@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.rss.web.configuration;
+package com.liferay.rss.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
@@ -39,7 +39,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ConfigurationAction.class
 )
-public class RSSConfiguration extends DefaultConfigurationAction {
+public class RSSConfigurationAction extends DefaultConfigurationAction {
 
 	@Override
 	public void processAction(
