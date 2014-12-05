@@ -40,13 +40,13 @@ public class DLFileEntryMetadataFinderImpl
 		DLFileEntryMetadataFinder.class.getName() + ".findByNoStructures";
 
 	@Override
-	public List<DLFileEntryMetadata> findByNoStructures() {
+	public List<DLFileEntryMetadata> findByMismatchedCompanyId() {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_NO_STRUCTURES);
+			String sql = CustomSQLUtil.get(FIND_BY_MISMATCHED_COMPANY_ID);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -65,13 +65,13 @@ public class DLFileEntryMetadataFinderImpl
 	}
 
 	@Override
-	public List<DLFileEntryMetadata> findByMismatchedCompanyId() {
+	public List<DLFileEntryMetadata> findByNoStructures() {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_MISMATCHED_COMPANY_ID);
+			String sql = CustomSQLUtil.get(FIND_BY_NO_STRUCTURES);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
