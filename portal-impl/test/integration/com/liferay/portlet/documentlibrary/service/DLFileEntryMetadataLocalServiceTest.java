@@ -71,7 +71,7 @@ public class DLFileEntryMetadataLocalServiceTest {
 				_group, TestPropsValues.getUserId());
 
 		byte[] testFileBytes = FileUtil.getBytes(
-			getClass(), _TEST_DDM_STRUCTURE);
+			getClass(), "dependencies/ddmstructure.xml");
 
 		serviceContext.setAttribute("definition", new String(testFileBytes));
 
@@ -79,18 +79,14 @@ public class DLFileEntryMetadataLocalServiceTest {
 
 		serviceContext.setLanguageId(LocaleUtil.toLanguageId(user.getLocale()));
 
-		_dlFileEntryType =
-			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
-				TestPropsValues.getUserId(), _group.getGroupId(),
-				"Test Structure", StringPool.BLANK, new long[0],
-				serviceContext);
+		_dlFileEntryType = DLFileEntryTypeLocalServiceUtil.addFileEntryType(
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			RandomTestUtil.randomString(), StringPool.BLANK, new long[0],
+			serviceContext);
 
 		List<DDMStructure> ddmStructures = _dlFileEntryType.getDDMStructures();
 
 		_ddmStructure = ddmStructures.get(0);
-
-		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
-			RandomTestUtil.randomBytes());
 
 		Map<String, Fields> fieldsMap = new HashMap<String, Fields>();
 
@@ -102,6 +98,9 @@ public class DLFileEntryMetadataLocalServiceTest {
 		fields.put(nameField);
 
 		fieldsMap.put(_ddmStructure.getStructureKey(), fields);
+
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			RandomTestUtil.randomBytes());
 
 		_dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), _group.getGroupId(),
@@ -146,7 +145,7 @@ public class DLFileEntryMetadataLocalServiceTest {
 	}
 
 	@Test
-	public void testGetNoStructureFileEntryMetadatas() throws Exception {
+	public void testGetNoStructuresFileEntryMetadatas() throws Exception {
 		try {
 			DLFileVersion dlFileVersion = _dlFileEntry.getFileVersion();
 
@@ -171,9 +170,6 @@ public class DLFileEntryMetadataLocalServiceTest {
 			}
 		}
 	}
-
-	private static final String _TEST_DDM_STRUCTURE =
-		"dependencies/ddmstructure.xml";
 
 	private DDMStructure _ddmStructure;
 	private DLFileEntry _dlFileEntry;

@@ -86,7 +86,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 	public void testDeleteMismatchCompanyIdDLFileEntryMetadatas()
 		throws Exception {
 
-		DLFileEntry dlFileEntry = addDLFileEntryWithFileEntryType();
+		DLFileEntry dlFileEntry = addDLFileEntry();
 
 		DLFileEntryType dlFileEntryType = dlFileEntry.getDLFileEntryType();
 
@@ -94,11 +94,11 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 
 		DDMStructure ddmStructure = ddmStructures.get(0);
 
-		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
-
 		ddmStructure.setCompanyId(12345);
 
 		DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure);
+
+		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
 		DLFileEntryMetadata dlFileEntryMetadata =
 			DLFileEntryMetadataLocalServiceUtil.fetchFileEntryMetadata(
@@ -118,10 +118,8 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 	}
 
 	@Test
-	public void testDeleteNoStructuresDLFileEntryMetadatas()
-		throws Exception {
-
-		DLFileEntry dlFileEntry = addDLFileEntryWithFileEntryType();
+	public void testDeleteNoStructuresDLFileEntryMetadatas() throws Exception {
+		DLFileEntry dlFileEntry = addDLFileEntry();
 
 		DLFileEntryType dlFileEntryType = dlFileEntry.getDLFileEntryType();
 
@@ -273,19 +271,17 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 		doVerify();
 	}
 
-	@Rule
-	public final SynchronousDestinationTestRule synchronousDestinationTestRule =
-		SynchronousDestinationTestRule.INSTANCE;
-
-	protected DLFileEntry addDLFileEntryWithFileEntryType() throws Exception {
+	protected DLFileEntry addDLFileEntry() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group, TestPropsValues.getUserId());
 
-		byte[] testFileBytes = FileUtil.getBytes(
-			getClass(), _TEST_DDM_STRUCTURE);
+		byte[] bytes = FileUtil.getBytes(
+			getClass(),
+			"/com/liferay/portlet/documentlibrary/service/dependencies/" +
+				"ddmstructure.xml");
 
-		serviceContext.setAttribute("definition", new String(testFileBytes));
+		serviceContext.setAttribute("definition", new String(bytes));
 
 		User user = TestPropsValues.getUser();
 
@@ -294,15 +290,12 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
 				TestPropsValues.getUserId(), _group.getGroupId(),
-				"Test Structure", StringPool.BLANK, new long[0],
+				RandomTestUtil.randomString(), StringPool.BLANK, new long[0],
 				serviceContext);
 
 		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
 
 		DDMStructure ddmStructure = ddmStructures.get(0);
-
-		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
-			RandomTestUtil.randomBytes());
 
 		Map<String, Fields> fieldsMap = new HashMap<String, Fields>();
 
@@ -314,6 +307,9 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 		fields.put(nameField);
 
 		fieldsMap.put(ddmStructure.getStructureKey(), fields);
+
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			RandomTestUtil.randomBytes());
 
 		return DLFileEntryLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), _group.getGroupId(),
@@ -328,10 +324,6 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 	protected VerifyProcess getVerifyProcess() {
 		return new VerifyDocumentLibrary();
 	}
-
-	private static final String _TEST_DDM_STRUCTURE =
-		"/com/liferay/portlet/documentlibrary/service/dependencies/" +
-			"ddmstructure.xml";
 
 	@DeleteAfterTestRun
 	private Group _group;
