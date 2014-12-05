@@ -492,8 +492,8 @@ public class EditGroupAction extends PortletAction {
 		String description = null;
 		int type = 0;
 		String friendlyURL = null;
-		boolean active = false;
 		boolean inheritContent = false;
+		boolean active = false;
 		boolean manualMembership = true;
 
 		int membershipRestriction =
@@ -524,11 +524,11 @@ public class EditGroupAction extends PortletAction {
 			description = ParamUtil.getString(actionRequest, "description");
 			type = ParamUtil.getInteger(actionRequest, "type");
 			friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
-			active = ParamUtil.getBoolean(actionRequest, "active");
-			inheritContent = ParamUtil.getBoolean(
-				actionRequest, "inheritContent");
 			manualMembership = ParamUtil.getBoolean(
 				actionRequest, "manualMembership");
+			inheritContent = ParamUtil.getBoolean(
+				actionRequest, "inheritContent");
+			active = ParamUtil.getBoolean(actionRequest, "active");
 
 			liveGroup = GroupServiceUtil.addGroup(
 				parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, name,
@@ -550,15 +550,15 @@ public class EditGroupAction extends PortletAction {
 				actionRequest, "description", liveGroup.getDescription());
 			type = ParamUtil.getInteger(
 				actionRequest, "type", liveGroup.getType());
-			friendlyURL = ParamUtil.getString(
-				actionRequest, "friendlyURL", liveGroup.getFriendlyURL());
-			active = ParamUtil.getBoolean(
-				actionRequest, "active", liveGroup.getActive());
-			inheritContent = ParamUtil.getBoolean(
-				actionRequest, "inheritContent", liveGroup.getInheritContent());
 			manualMembership = ParamUtil.getBoolean(
 				actionRequest, "manualMembership",
 				liveGroup.isManualMembership());
+			friendlyURL = ParamUtil.getString(
+				actionRequest, "friendlyURL", liveGroup.getFriendlyURL());
+			inheritContent = ParamUtil.getBoolean(
+				actionRequest, "inheritContent", liveGroup.getInheritContent());
+			active = ParamUtil.getBoolean(
+				actionRequest, "active", liveGroup.getActive());
 
 			liveGroup = GroupServiceUtil.updateGroup(
 				liveGroupId, parentGroupId, name, description, type,
