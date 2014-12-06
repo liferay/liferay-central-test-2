@@ -65,6 +65,8 @@
 			<fileset dir="${javac.srcdir}" excludes="**/*.java" />
 		</copy>
 
+		<record action="start" name="${ant.project.name}/javac.output.txt" />
+
 		<javac
 			classpathref="${javac.classpathref}"
 			compiler="${javac.compiler}"
@@ -76,6 +78,23 @@
 			nowarn="${javac.nowarn}"
 			srcdir="${javac.srcdir}"
 		/>
+
+		<record action="stop" name="${ant.project.name}/javac.output.txt" />
+
+		<loadfile srcfile="javac.output.txt" property="javac.output" />
+
+		<delete file="javac.output.txt" />
+
+		<if>
+			<or>
+				<contains string="${javac.output}" substring="a deprecated API" />
+				<contains string="${javac.output}" substring="[deprecation]" />
+			</or>
+			<then>
+				<echo append="true" file="../javac.output.txt" message="${line.separator}${ant.project.name}${line.separator}" />
+				<echo append="true" file="../javac.output.txt" message="${javac.output}" />
+			</then>
+		</if>
 
 		<echo file="${javac.destdir}/.touch"></echo>
 	</target>
