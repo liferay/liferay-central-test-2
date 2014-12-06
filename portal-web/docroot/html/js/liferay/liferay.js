@@ -243,7 +243,7 @@ Liferay = window.Liferay || {};
 	};
 })(AUI.$, AUI._, Liferay);
 
-(function(A, Liferay){
+(function(A, Liferay) {
 	A.mix(
 		A.namespace('config.io'),
 		{
