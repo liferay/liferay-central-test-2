@@ -168,7 +168,7 @@
 					return url;
 				}
 
-				public String getRebaseError(String githubJenkinsFailureURL) {
+				public String getRebaseErrorMessage(String githubJenkinsFailureURL) {
 					String consoleOutput = toString(githubJenkinsFailureURL + "/logText/progressiveText");
 
 					int x = consoleOutput.indexOf("[EnvInject] - Variables injected successfully.");
@@ -296,7 +296,7 @@
 						sb.append("<pre>RESULT: ");
 
 						if (githubJenkinsFailureURL.contains("source")) {
-							sb.append(getRebaseError(githubJenkinsFailureURL));
+							sb.append(getRebaseErrorMessage(githubJenkinsFailureURL));
 						}
 						else {
 							sb.append(jsonObject.get("result"));
