@@ -19,8 +19,6 @@
 			<fileset dir="${project.dir}/lib/development" includes="junit.jar" />
 		</path>
 
-		<record action="start" name="${ant.project.name}/javac.output.txt" />
-
 		<javac
 			classpathref="web.classpath"
 			compiler="${javac.compiler}"
@@ -32,22 +30,5 @@
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
-
-		<record action="stop" name="${ant.project.name}/javac.output.txt" />
-
-		<loadfile srcfile="javac.output.txt" property="javac.output" />
-
-		<if>
-			<or>
-				<contains string="${javac.output}" substring="a deprecated API" />
-				<contains string="${javac.output}" substring="[deprecation]" />
-			</or>
-			<then>
-				<echo append="true" file="../javac.output.txt" message="${line.separator}${ant.project.name}${line.separator}" />
-				<echo append="true" file="../javac.output.txt" message="${javac.output}" />
-			</then>
-		</if>
-
-		<delete file="javac.output.txt" />
 	</target>
 </project>
