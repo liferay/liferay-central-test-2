@@ -19,6 +19,8 @@
 			<fileset dir="${project.dir}/lib/development" includes="junit.jar" />
 		</path>
 
+		<record action="start" name="${ant.project.name}/javac.output.txt" />
+
 		<javac
 			classpathref="web.classpath"
 			compiler="${javac.compiler}"
@@ -30,5 +32,9 @@
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
+
+		<record action="stop" name="${ant.project.name}/javac.output.txt" />
+
+		<check-deprecation />
 	</target>
 </project>
