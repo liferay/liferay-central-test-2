@@ -545,25 +545,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</sequential>
 	</macrodef>
 
-	<macrodef name="check-deprecation">
-		<sequential>
-			<loadfile srcfile="javac.output.txt" property="javac.output" />
-
-			<delete file="javac.output.txt" />
-
-			<if>
-				<or>
-					<contains string="${javac.output}" substring="a deprecated API" />
-					<contains string="${javac.output}" substring="[deprecation]" />
-				</or>
-				<then>
-					<echo append="true" file="../javac.output.txt" message="${line.separator}${ant.project.name}${line.separator}" />
-					<echo append="true" file="../javac.output.txt" message="${javac.output}" />
-				</then>
-			</if>
-		</sequential>
-	</macrodef>
-
 	<macrodef name="check-fix-pack-requirements">
 		<attribute default="${app.server.dir}/patching-tool/patches" name="fix.pack.dir" />
 		<attribute name="fix.pack.file.name" />

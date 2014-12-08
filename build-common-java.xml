@@ -65,8 +65,6 @@
 			<fileset dir="${javac.srcdir}" excludes="**/*.java" />
 		</copy>
 
-		<record action="start" name="${ant.project.name}/javac.output.txt" />
-
 		<javac
 			classpathref="${javac.classpathref}"
 			compiler="${javac.compiler}"
@@ -78,10 +76,6 @@
 			nowarn="${javac.nowarn}"
 			srcdir="${javac.srcdir}"
 		/>
-
-		<record action="stop" name="${ant.project.name}/javac.output.txt" />
-
-		<check-deprecation />
 
 		<echo file="${javac.destdir}/.touch"></echo>
 	</target>
