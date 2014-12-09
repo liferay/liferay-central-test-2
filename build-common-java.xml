@@ -65,7 +65,7 @@
 			<fileset dir="${javac.srcdir}" excludes="**/*.java" />
 		</copy>
 
-		<record action="start" name="${ant.project.name}/javac.output.txt" />
+		<record action="start" name="${project.dir}/${ant.project.name}/javac.output.txt" />
 
 		<javac
 			classpathref="${javac.classpathref}"
@@ -79,11 +79,11 @@
 			srcdir="${javac.srcdir}"
 		/>
 
-		<record action="stop" name="${ant.project.name}/javac.output.txt" />
+		<record action="stop" name="${project.dir}/${ant.project.name}/javac.output.txt" />
 
-		<loadfile property="javac.output.txt.content" srcfile="javac.output.txt" />
+		<loadfile property="javac.output.txt.content" srcfile="${project.dir}/${ant.project.name}/javac.output.txt" />
 
-		<delete file="javac.output.txt" />
+		<delete file="${project.dir}/${ant.project.name}/javac.output.txt" />
 
 		<if>
 			<or>
@@ -91,8 +91,8 @@
 				<contains string="${javac.output.txt.content}" substring="[deprecation]" />
 			</or>
 			<then>
-				<echo append="true" file="../javac.output.txt" message="${line.separator}${ant.project.name}${line.separator}" />
-				<echo append="true" file="../javac.output.txt" message="${javac.output.txt.content}" />
+				<echo append="true" file="${project.dir}/javac.output.txt" message="${line.separator}${ant.project.name}${line.separator}" />
+				<echo append="true" file="${project.dir}/javac.output.txt" message="${javac.output.txt.content}" />
 			</then>
 		</if>
 
