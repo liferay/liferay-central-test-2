@@ -437,6 +437,8 @@
 		<antcall target="print-current-time" />
 
 		<record action="stop" name="ant.output.txt" />
+
+		<delete file="ant.output.txt" />
 	</target>
 
 	<target name="compile-test">
