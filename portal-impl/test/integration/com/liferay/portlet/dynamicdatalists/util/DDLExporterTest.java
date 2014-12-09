@@ -249,8 +249,8 @@ public class DDLExporterTest {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("layoutId", layout.getLayoutId());
 		jsonObject.put("groupId", layout.getGroupId());
+		jsonObject.put("layoutId", layout.getLayoutId());
 		jsonObject.put("privateLayout", layout.getPrivateLayout());
 
 		return jsonObject.toString();

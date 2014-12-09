@@ -61,10 +61,10 @@ public class DDLCSVExporter extends BaseDDLExporter {
 		List<DDLRecord> records = DDLRecordLocalServiceUtil.getRecords(
 			recordSetId, status, start, end, orderByComparator);
 
-		Iterator<DDLRecord> itr = records.iterator();
+		Iterator<DDLRecord> iterator = records.iterator();
 
-		while (itr.hasNext()) {
-			DDLRecord record = itr.next();
+		while (iterator.hasNext()) {
+			DDLRecord record = iterator.next();
 
 			DDLRecordVersion recordVersion = record.getRecordVersion();
 
@@ -87,7 +87,7 @@ public class DDLCSVExporter extends BaseDDLExporter {
 
 			sb.append(getStatusMessage(recordVersion.getStatus()));
 
-			if (itr.hasNext()) {
+			if (iterator.hasNext()) {
 				sb.append(StringPool.NEW_LINE);
 			}
 		}
