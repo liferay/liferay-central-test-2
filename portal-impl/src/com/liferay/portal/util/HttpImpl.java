@@ -1441,7 +1441,8 @@ public class HttpImpl implements Http {
 				sb.append(location);
 				sb.append(" yields a file of size ");
 				sb.append(contentLengthLong);
-				sb.append(" bytes, which cannot be converted to a byte array");
+				sb.append(
+					" bytes that is too large to convert to a byte array");
 
 				throw new OutOfMemoryError(sb.toString());
 			}
@@ -1631,7 +1632,7 @@ public class HttpImpl implements Http {
 
 			InputStream inputStream = httpMethod.getResponseBodyAsStream();
 
-			final HttpMethod httpMethodRef = httpMethod;
+			final HttpMethod referenceHttpMethod = httpMethod;
 
 			final Reference<InputStream> reference = FinalizeManager.register(
 				inputStream,
@@ -1639,7 +1640,7 @@ public class HttpImpl implements Http {
 
 					@Override
 					public void doFinalize(Reference<?> reference) {
-						httpMethodRef.releaseConnection();
+						referenceHttpMethod.releaseConnection();
 					}
 
 				},
@@ -1651,7 +1652,7 @@ public class HttpImpl implements Http {
 				public void close() throws IOException {
 					super.close();
 
-					httpMethodRef.releaseConnection();
+					referenceHttpMethod.releaseConnection();
 
 					reference.clear();
 				}
