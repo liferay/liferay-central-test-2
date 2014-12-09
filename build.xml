@@ -395,6 +395,8 @@
 	</target>
 
 	<target name="compile">
+		<record action="start" name="ant.output.txt" />
+
 		<setup-sdk />
 
 		<ant-execute
@@ -419,7 +421,7 @@
 		<if>
 			<available file="javac.output.txt" />
 			<then>
-				<fail message="Deprecated APIs detected. Please see javac.output.txt for details." />
+				<echo message="Deprecated APIs detected. Please see javac.output.txt for details." />
 			</then>
 		</if>
 
@@ -433,6 +435,8 @@
 		<antcall target="jar" />
 
 		<antcall target="print-current-time" />
+
+		<record action="stop" name="ant.output.txt" />
 	</target>
 
 	<target name="compile-test">
@@ -1073,11 +1077,7 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 	</target>
 
 	<target name="start">
-		<record action="start" name="ant.output.txt" />
-
 		<antcall target="compile" />
-
-		<record action="stop" name="ant.output.txt" />
 
 		<echo>The "start" target is now deprecated. Please use the "compile" target instead.</echo>
 	</target>

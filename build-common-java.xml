@@ -81,18 +81,18 @@
 
 		<record action="stop" name="${ant.project.name}/javac.output.txt" />
 
-		<loadfile srcfile="javac.output.txt" property="javac.output" />
+		<loadfile property="javac.output.txt.content" srcfile="javac.output.txt" />
 
 		<delete file="javac.output.txt" />
 
 		<if>
 			<or>
-				<contains string="${javac.output}" substring="a deprecated API" />
-				<contains string="${javac.output}" substring="[deprecation]" />
+				<contains string="${javac.output.txt.content}" substring="a deprecated API" />
+				<contains string="${javac.output.txt.content}" substring="[deprecation]" />
 			</or>
 			<then>
 				<echo append="true" file="../javac.output.txt" message="${line.separator}${ant.project.name}${line.separator}" />
-				<echo append="true" file="../javac.output.txt" message="${javac.output}" />
+				<echo append="true" file="../javac.output.txt" message="${javac.output.txt.content}" />
 			</then>
 		</if>
 
