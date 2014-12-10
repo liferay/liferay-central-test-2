@@ -751,6 +751,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 		assetEntryQuery.setAnyTagIds(anyAssetTagIds);
 
+		assetEntryQuery.setListable(true);
 		assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
 
 		for (String assetTagName : notAllAssetTagNames) {
@@ -766,8 +767,6 @@ public class AssetPublisherImpl implements AssetPublisher {
 			siteGroupIds, notAnyAssetTagNames);
 
 		assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
-
-		assetEntryQuery.setListable(true);
 
 		return assetEntryQuery;
 	}
