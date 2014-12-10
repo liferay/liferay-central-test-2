@@ -54,8 +54,7 @@ public class UpgradeAsset extends UpgradeProcess {
 				AssetEntryTable.TABLE_SQL_ADD_INDEXES);
 		}
 
-		updateAssetClassTypeId();
-		updateAssetListable();
+		updateAssetEntries();
 		updateAssetVocabularies();
 	}
 
@@ -85,7 +84,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 	}
 
-	protected void updateAssetClassTypeId() throws Exception {
+	protected void updateAssetEntries() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(JournalArticle.class);
 
 		Connection con = null;
@@ -116,17 +115,8 @@ public class UpgradeAsset extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-	}
-
-	protected void updateAssetListable() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 
 		try {
-			long classNameId = PortalUtil.getClassNameId(
-				JournalArticle.class.getName());
-
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBundler sb = new StringBundler(9);
