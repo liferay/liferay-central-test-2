@@ -1052,8 +1052,8 @@ public class DataFactory {
 			journalArticleModel.getCreateDate(),
 			journalArticleModel.getModifiedDate(),
 			getJournalArticleClassNameId(), resourcePrimKey, resourceUuid,
-			_defaultJournalDDMStructureModel.getStructureId(), true,
-			journalArticleModel.getIndexable(), ContentTypes.TEXT_HTML,
+			_defaultJournalDDMStructureModel.getStructureId(),
+			journalArticleModel.isIndexable(), true, ContentTypes.TEXT_HTML,
 			journalArticleModel.getTitle());
 	}
 
@@ -1074,8 +1074,8 @@ public class DataFactory {
 		return newAssetEntryModel(
 			mbMessageModel.getGroupId(), mbMessageModel.getCreateDate(),
 			mbMessageModel.getModifiedDate(), classNameId,
-			mbMessageModel.getMessageId(), mbMessageModel.getUuid(), 0, visible,
-			true, ContentTypes.TEXT_HTML, mbMessageModel.getSubject());
+			mbMessageModel.getMessageId(), mbMessageModel.getUuid(), 0, true,
+			visible, ContentTypes.TEXT_HTML, mbMessageModel.getSubject());
 	}
 
 	public AssetEntryModel newAssetEntryModel(MBThreadModel mbThreadModel) {
@@ -1083,8 +1083,8 @@ public class DataFactory {
 			mbThreadModel.getGroupId(), mbThreadModel.getCreateDate(),
 			mbThreadModel.getModifiedDate(),
 			_classNameModelsMap.get(MBThread.class.getName()),
-			mbThreadModel.getThreadId(), mbThreadModel.getUuid(), 0, false,
-			true, StringPool.BLANK,
+			mbThreadModel.getThreadId(), mbThreadModel.getUuid(), 0, true,
+			false, StringPool.BLANK,
 			String.valueOf(mbThreadModel.getRootMessageId()));
 	}
 
@@ -2420,8 +2420,8 @@ public class DataFactory {
 
 	protected AssetEntryModel newAssetEntryModel(
 		long groupId, Date createDate, Date modifiedDate, long classNameId,
-		long classPK, String uuid, long classTypeId, boolean visible,
-		boolean listable, String mimeType, String title) {
+		long classPK, String uuid, long classTypeId, boolean listable,
+		boolean visible, String mimeType, String title) {
 
 		AssetEntryModel assetEntryModel = new AssetEntryModelImpl();
 
@@ -2436,8 +2436,8 @@ public class DataFactory {
 		assetEntryModel.setClassPK(classPK);
 		assetEntryModel.setClassUuid(uuid);
 		assetEntryModel.setClassTypeId(classTypeId);
-		assetEntryModel.setVisible(visible);
 		assetEntryModel.setListable(listable);
+		assetEntryModel.setVisible(visible);
 		assetEntryModel.setStartDate(createDate);
 		assetEntryModel.setEndDate(nextFutureDate());
 		assetEntryModel.setPublishDate(createDate);

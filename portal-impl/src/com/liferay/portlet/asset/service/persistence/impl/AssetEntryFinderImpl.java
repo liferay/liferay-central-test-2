@@ -283,12 +283,12 @@ public class AssetEntryFinderImpl
 			sb.append(" AND (AssetEntry.entryId != ?)");
 		}
 
-		if (entryQuery.isVisible() != null) {
-			sb.append(" AND (visible = ?)");
-		}
-
 		if (entryQuery.isListable() != null) {
 			sb.append(" AND (listable = ?)");
+		}
+
+		if (entryQuery.isVisible() != null) {
+			sb.append(" AND (visible = ?)");
 		}
 
 		if (entryQuery.isExcludeZeroViewCount()) {
@@ -452,12 +452,12 @@ public class AssetEntryFinderImpl
 			qPos.add(entryQuery.getLinkedAssetEntryId());
 		}
 
-		if (entryQuery.isVisible() != null) {
-			qPos.add(entryQuery.isVisible());
-		}
-
 		if (entryQuery.isListable() != null) {
 			qPos.add(entryQuery.isListable());
+		}
+
+		if (entryQuery.isVisible() != null) {
+			qPos.add(entryQuery.isVisible());
 		}
 
 		if (Validator.isNotNull(entryQuery.getKeywords())) {
