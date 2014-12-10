@@ -163,7 +163,9 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 				<h3><liferay-ui:message key="abstract" /></h3>
 
-				<p class="explanation"><liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(PrefsPropsUtil.getLong(PropsKeys.BLOGS_IMAGE_SMALL_MAX_SIZE), locale) %>" key="an-abstract-is-a-brief-summary-of-a-blog-entry" /></p>
+				<p class="explanation">
+					<liferay-ui:message arguments="<%= TextFormatter.formatStorageSize(PrefsPropsUtil.getLong(PropsKeys.BLOGS_IMAGE_SMALL_MAX_SIZE), locale) %>" key="an-abstract-is-a-brief-summary-of-a-blog-entry" />
+				</p>
 
 				<div class="entry-abstract-options" id="<portlet:namespace />entryAbstractOptions">
 					<aui:input checked="<%= !customAbstract %>" label='<%= LanguageUtil.format(request, "use-first-x-characters-of-the-content-entry", pageAbstractLength, false) %>' name="customAbstract" type="radio" value="<%= false %>" />
@@ -192,7 +194,9 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 				<div class="email-entry-updated-wrapper">
 					<h3><liferay-ui:message key="email-notifications" /></h3>
 
-					<p class="explanation"><liferay-ui:message key="comments-regarding-the-blog-entry-update" /></p>
+					<p class="explanation">
+						<liferay-ui:message key="comments-regarding-the-blog-entry-update" />
+					</p>
 
 					<%
 					boolean sendEmailEntryUpdated = ParamUtil.getBoolean(request, "sendEmailEntryUpdated");
@@ -254,7 +258,9 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 				<div class="pingback-enabled-wrapper">
 					<h3><liferay-ui:message key="pingback" /></h3>
 
-					<p class="explanation"><liferay-ui:message key="a-pingback-is-a-comment-that-is-created-when-you-link-to-another-blog-post-where-pingbacks-are-enabled" /></p>
+					<p class="explanation">
+						<liferay-ui:message key="a-pingback-is-a-comment-that-is-created-when-you-link-to-another-blog-post-where-pingbacks-are-enabled" />
+					</p>
 
 					<aui:input helpMessage="to-allow-pingbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" label="enabled" name="allowPingbacks" value="<%= allowPingbacks %>" />
 				</div>
