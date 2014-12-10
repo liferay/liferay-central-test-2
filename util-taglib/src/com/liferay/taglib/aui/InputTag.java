@@ -96,6 +96,7 @@ public class InputTag extends BaseInputTag {
 		return field;
 	}
 
+	@Override
 	public String getInputName() {
 		String inputName = getName();
 
@@ -292,9 +293,11 @@ public class InputTag extends BaseInputTag {
 
 		request.setAttribute(getAttributeNamespace() + "value", getValue());
 
-		Map<String, ValidatorTag> validators = getValidators();
+		Map<String, ValidatorTag> validatorTags = getValidatorTags();
 
-		if ((validators != null) && (validators.get("required") != null)) {
+		if ((validatorTags != null) &&
+			(validatorTags.get("required") != null)) {
+
 			setNamespacedAttribute(
 				request, "required", Boolean.TRUE.toString());
 		}

@@ -43,15 +43,16 @@ public abstract class BaseValidatorTagSupport extends IncludeTag {
 	public void addValidatorTag(
 		String validatorName, ValidatorTag validatorTag) {
 
-		if (_validators == null) {
-			_validators = new HashMap<String, ValidatorTag>();
+		if (_validatorTags == null) {
+			_validatorTags = new HashMap<String, ValidatorTag>();
 		}
 
-		_validators.put(validatorName, validatorTag);
+		_validatorTags.put(validatorName, validatorTag);
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
-		updateFormValidators();
+		updateFormValidatorTags();
 
 		return super.doEndTag();
 	}
@@ -62,15 +63,15 @@ public abstract class BaseValidatorTagSupport extends IncludeTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_validators = null;
+		_validatorTags = null;
 	}
 
-	protected Map<String, ValidatorTag> getValidators() {
-		return _validators;
+	protected Map<String, ValidatorTag> getValidatorTags() {
+		return _validatorTags;
 	}
 
-	protected void updateFormValidators() {
-		if (_validators == null) {
+	protected void updateFormValidatorTags() {
+		if (_validatorTags == null) {
 			return;
 		}
 
@@ -83,12 +84,12 @@ public abstract class BaseValidatorTagSupport extends IncludeTag {
 
 		if (validatorTagsMap != null) {
 			List<ValidatorTag> validatorTags = ListUtil.fromMapValues(
-				_validators);
+				_validatorTags);
 
 			validatorTagsMap.put(getInputName(), validatorTags);
 		}
 	}
 
-	private Map<String, ValidatorTag> _validators;
+	private Map<String, ValidatorTag> _validatorTags;
 
 }
