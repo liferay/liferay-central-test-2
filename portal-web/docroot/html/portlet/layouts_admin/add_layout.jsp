@@ -24,8 +24,6 @@ boolean privateLayout = layoutsAdminDisplayContext.isPrivateLayout();
 long parentPlid = LayoutConstants.DEFAULT_PLID;
 long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
-String tabs1 = layoutsAdminDisplayContext.getTabs1();
-
 if (layout.isTypeControlPanel()) {
 	if (layoutsAdminDisplayContext.getSelPlid() != 0) {
 		selLayout = LayoutLocalServiceUtil.getLayout(layoutsAdminDisplayContext.getSelPlid());
@@ -49,8 +47,8 @@ String[] types = LayoutTypeControllerTracker.getTypes();
 <c:if test="<%= !portletName.equals(PortletKeys.DOCKBAR) %>">
 	<portlet:renderURL var="backURL">
 		<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set" />
+		<portlet:param name="tabs1" value="<%= layoutsAdminDisplayContext.getTabs1() %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-		<portlet:param name="tabs1" value="<%= tabs1 %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:header
@@ -65,8 +63,8 @@ String[] types = LayoutTypeControllerTracker.getTypes();
 
 <portlet:renderURL var="editLayoutRenderURL" windowState="<%= themeDisplay.isStateExclusive() ? LiferayWindowState.EXCLUSIVE.toString() : WindowState.NORMAL.toString() %>">
 	<portlet:param name="struts_action" value='<%= portletName.equals(PortletKeys.DOCKBAR) ? "/layouts_admin/add_layout" : "/layouts_admin/edit_layouts" %>' />
+	<portlet:param name="tabs1" value="<%= layoutsAdminDisplayContext.getTabs1() %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="tabs1" value="<%= tabs1 %>" />
 </portlet:renderURL>
 
 <aui:form action="<%= editLayoutActionURL %>" enctype="multipart/form-data" method="post" name="addPageFm" onSubmit="event.preventDefault()">
