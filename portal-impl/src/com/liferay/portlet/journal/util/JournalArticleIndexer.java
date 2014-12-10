@@ -697,22 +697,22 @@ public class JournalArticleIndexer extends BaseIndexer {
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-
-					if (!PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
-						Property statusProperty = PropertyFactoryUtil.forName(
-							"status");
-
-						Integer[] statuses = {
-							WorkflowConstants.STATUS_APPROVED,
-							WorkflowConstants.STATUS_IN_TRASH
-						};
-
-						dynamicQuery.add(statusProperty.in(statuses));
+					if (PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
+						return;
 					}
+
+					Property statusProperty = PropertyFactoryUtil.forName(
+						"status");
+
+					Integer[] statuses = {
+						WorkflowConstants.STATUS_APPROVED,
+						WorkflowConstants.STATUS_IN_TRASH
+					};
+
+					dynamicQuery.add(statusProperty.in(statuses));
 				}
 
 			});
-
 		actionableDynamicQuery.setCompanyId(companyId);
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
