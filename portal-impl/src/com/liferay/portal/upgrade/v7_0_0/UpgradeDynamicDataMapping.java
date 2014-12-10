@@ -232,7 +232,6 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		}
 
 		addStructureVersions();
-
 		addTemplateVersions();
 	}
 
