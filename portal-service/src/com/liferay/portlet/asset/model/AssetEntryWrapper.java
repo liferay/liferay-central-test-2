@@ -63,8 +63,8 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		attributes.put("classPK", getClassPK());
 		attributes.put("classUuid", getClassUuid());
 		attributes.put("classTypeId", getClassTypeId());
-		attributes.put("visible", getVisible());
 		attributes.put("listable", getListable());
+		attributes.put("visible", getVisible());
 		attributes.put("startDate", getStartDate());
 		attributes.put("endDate", getEndDate());
 		attributes.put("publishDate", getPublishDate());
@@ -151,16 +151,16 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 			setClassTypeId(classTypeId);
 		}
 
-		Boolean visible = (Boolean)attributes.get("visible");
-
-		if (visible != null) {
-			setVisible(visible);
-		}
-
 		Boolean listable = (Boolean)attributes.get("listable");
 
 		if (listable != null) {
 			setListable(listable);
+		}
+
+		Boolean visible = (Boolean)attributes.get("visible");
+
+		if (visible != null) {
+			setVisible(visible);
 		}
 
 		Date startDate = (Date)attributes.get("startDate");

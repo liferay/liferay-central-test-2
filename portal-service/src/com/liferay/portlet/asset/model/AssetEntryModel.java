@@ -268,27 +268,6 @@ public interface AssetEntryModel extends AttachedModel, BaseModel<AssetEntry>,
 	public void setClassTypeId(long classTypeId);
 
 	/**
-	 * Returns the visible of this asset entry.
-	 *
-	 * @return the visible of this asset entry
-	 */
-	public boolean getVisible();
-
-	/**
-	 * Returns <code>true</code> if this asset entry is visible.
-	 *
-	 * @return <code>true</code> if this asset entry is visible; <code>false</code> otherwise
-	 */
-	public boolean isVisible();
-
-	/**
-	 * Sets whether this asset entry is visible.
-	 *
-	 * @param visible the visible of this asset entry
-	 */
-	public void setVisible(boolean visible);
-
-	/**
 	 * Returns the listable of this asset entry.
 	 *
 	 * @return the listable of this asset entry
@@ -308,6 +287,27 @@ public interface AssetEntryModel extends AttachedModel, BaseModel<AssetEntry>,
 	 * @param listable the listable of this asset entry
 	 */
 	public void setListable(boolean listable);
+
+	/**
+	 * Returns the visible of this asset entry.
+	 *
+	 * @return the visible of this asset entry
+	 */
+	public boolean getVisible();
+
+	/**
+	 * Returns <code>true</code> if this asset entry is visible.
+	 *
+	 * @return <code>true</code> if this asset entry is visible; <code>false</code> otherwise
+	 */
+	public boolean isVisible();
+
+	/**
+	 * Sets whether this asset entry is visible.
+	 *
+	 * @param visible the visible of this asset entry
+	 */
+	public void setVisible(boolean visible);
 
 	/**
 	 * Returns the start date of this asset entry.

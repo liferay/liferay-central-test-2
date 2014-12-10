@@ -65,10 +65,10 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		sb.append(classUuid);
 		sb.append(", classTypeId=");
 		sb.append(classTypeId);
-		sb.append(", visible=");
-		sb.append(visible);
 		sb.append(", listable=");
 		sb.append(listable);
+		sb.append(", visible=");
+		sb.append(visible);
 		sb.append(", startDate=");
 		sb.append(startDate);
 		sb.append(", endDate=");
@@ -143,8 +143,8 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		}
 
 		assetEntryImpl.setClassTypeId(classTypeId);
-		assetEntryImpl.setVisible(visible);
 		assetEntryImpl.setListable(listable);
+		assetEntryImpl.setVisible(visible);
 
 		if (startDate == Long.MIN_VALUE) {
 			assetEntryImpl.setStartDate(null);
@@ -239,8 +239,8 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		classPK = objectInput.readLong();
 		classUuid = objectInput.readUTF();
 		classTypeId = objectInput.readLong();
-		visible = objectInput.readBoolean();
 		listable = objectInput.readBoolean();
+		visible = objectInput.readBoolean();
 		startDate = objectInput.readLong();
 		endDate = objectInput.readLong();
 		publishDate = objectInput.readLong();
@@ -285,8 +285,8 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		}
 
 		objectOutput.writeLong(classTypeId);
-		objectOutput.writeBoolean(visible);
 		objectOutput.writeBoolean(listable);
+		objectOutput.writeBoolean(visible);
 		objectOutput.writeLong(startDate);
 		objectOutput.writeLong(endDate);
 		objectOutput.writeLong(publishDate);
@@ -351,8 +351,8 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 	public long classPK;
 	public String classUuid;
 	public long classTypeId;
-	public boolean visible;
 	public boolean listable;
+	public boolean visible;
 	public long startDate;
 	public long endDate;
 	public long publishDate;
