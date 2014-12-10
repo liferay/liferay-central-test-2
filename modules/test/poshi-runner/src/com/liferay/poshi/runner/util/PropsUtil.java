@@ -26,7 +26,7 @@ import java.util.Properties;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PoshiRunnerPropsUtil {
+public class PropsUtil {
 
 	public static String get(String key) {
 		return _instance._get(key);
@@ -44,7 +44,7 @@ public class PoshiRunnerPropsUtil {
 		_instance._set(key, value);
 	}
 
-	private PoshiRunnerPropsUtil() {
+	private PropsUtil() {
 		try {
 			String[] propertiesFileNames = {
 				"classes/poshi-runner.properties", "poshi-runner-ext.properties"
@@ -99,7 +99,7 @@ public class PoshiRunnerPropsUtil {
 		_props.setProperty(key, value);
 	}
 
-	private static PoshiRunnerPropsUtil _instance = new PoshiRunnerPropsUtil();
+	private static PropsUtil _instance = new PropsUtil();
 
 	private Properties _props = new Properties();
 

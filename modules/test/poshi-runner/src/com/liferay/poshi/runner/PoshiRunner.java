@@ -14,7 +14,7 @@
 
 package com.liferay.poshi.runner;
 
-import com.liferay.poshi.runner.util.PoshiRunnerPropsUtil;
+import com.liferay.poshi.runner.util.PropsUtil;
 
 import java.io.File;
 
@@ -31,7 +31,7 @@ import org.dom4j.io.SAXReader;
 public class PoshiRunner extends TestCase {
 
 	public PoshiRunner() {
-		PoshiRunnerPropsUtil.printProperties();
+		PropsUtil.printProperties();
 	}
 
 	public void testPoshiRunner() throws Exception {
