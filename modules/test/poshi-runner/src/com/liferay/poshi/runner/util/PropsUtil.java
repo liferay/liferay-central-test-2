@@ -14,8 +14,6 @@
 
 package com.liferay.poshi.runner.util;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import java.util.Collections;
@@ -47,20 +45,19 @@ public class PropsUtil {
 	private PropsUtil() {
 		try {
 			String[] propertiesFileNames = {
-				"classes/poshi-runner.properties", "poshi-runner-ext.properties"
+				"poshi-runner.properties", "poshi-runner-ext.properties"
 			};
 
 			for (String propertiesFileName : propertiesFileNames) {
-				File file = new File(propertiesFileName);
+				Class<?> clazz = getClass();
 
-				InputStream is = new FileInputStream(file);
+				ClassLoader classLoader = clazz.getClassLoader();
 
-				if (file.exists()) {
-					is = new FileInputStream(file);
+				InputStream inputStream = classLoader.getResourceAsStream(
+					propertiesFileName);
 
-					if (is != null) {
-						_props.load(is);
-					}
+				if (inputStream != null) {
+					_props.load(inputStream);
 				}
 			}
 
