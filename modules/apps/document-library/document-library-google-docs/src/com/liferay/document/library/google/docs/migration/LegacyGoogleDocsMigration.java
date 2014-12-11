@@ -61,7 +61,7 @@ public class LegacyGoogleDocsMigration {
 		}
 	}
 
-	public boolean isMigrationNeeded() throws PortalException {
+	public boolean isMigrationNeeded() {
 		if (_dlFileEntryType == null) {
 			return false;
 		}
@@ -110,9 +110,7 @@ public class LegacyGoogleDocsMigration {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					DLFileEntry dlFileEntry = (DLFileEntry)object;
 
 					LegacyGoogleDocsMetadataHelper
