@@ -1881,7 +1881,7 @@ public class OrganizationLocalServiceImpl
 			groupLocalService.updateSite(group.getGroupId(), site);
 		}
 
-		// Child Organizations
+		// Organizations
 
 		if (createSite) {
 			List<Organization> childOrganizations =
