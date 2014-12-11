@@ -38,6 +38,7 @@ public class AntCommands implements Callable<Void> {
 	@Override
 	public Void call() throws Exception {
 		Runtime runtime = Runtime.getRuntime();
+
 		StringBuilder sb = new StringBuilder();
 
 		if (!OSDetector.isWindows()) {
