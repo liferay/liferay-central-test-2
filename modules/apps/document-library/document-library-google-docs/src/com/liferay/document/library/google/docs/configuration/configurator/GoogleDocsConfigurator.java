@@ -47,6 +47,7 @@ public class GoogleDocsConfigurator {
 
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
+
 				@Override
 				public void performAction(Object object)
 					throws PortalException {
@@ -77,6 +78,7 @@ public class GoogleDocsConfigurator {
 							addGoogleDocsDLFileEntryType();
 					}
 				}
+
 			}
 		);
 

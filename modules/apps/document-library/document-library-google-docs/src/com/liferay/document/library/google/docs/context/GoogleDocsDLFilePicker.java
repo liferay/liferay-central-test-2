@@ -37,6 +37,7 @@ public class GoogleDocsDLFilePicker implements DLFilePicker {
 
 		_namespace = namespace;
 		_onFilePickCallback = onFilePickCallback;
+
 		_googleDocsConfigurationHelper = new GoogleDocsConfigurationHelper(
 			themeDisplay.getCompanyId());
 	}
