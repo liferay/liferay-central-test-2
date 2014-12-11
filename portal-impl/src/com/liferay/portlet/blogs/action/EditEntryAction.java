@@ -214,10 +214,6 @@ public class EditEntryAction extends PortletAction {
 					JSONObject blogsEntryFileEntryReferencesJSONObject =
 						JSONFactoryUtil.createJSONObject();
 
-					FileEntry attachmentFileEntry =
-						blogsEntryAttachmentFileEntryReference.
-							getBlogsEntryAttachmentFileEntry();
-
 					blogsEntryFileEntryReferencesJSONObject.put(
 						"attributeDataImageId",
 						EditorConstants.ATTRIBUTE_DATA_IMAGE_ID);
@@ -229,12 +225,16 @@ public class EditEntryAction extends PortletAction {
 					blogsEntryFileEntryReferencesJSONObject.put(
 						"fileEntryUrl",
 						PortletFileRepositoryUtil.getPortletFileEntryURL(
-							null, attachmentFileEntry, StringPool.BLANK));
+							null,
+							blogsEntryAttachmentFileEntryReference.
+								getBlogsEntryAttachmentFileEntry(),
+							StringPool.BLANK));
 
 					jsonArray.put(blogsEntryFileEntryReferencesJSONObject);
 				}
 
 				jsonObject.put("blogsEntryAttachmentReferences", jsonArray);
+
 				jsonObject.put("entryId", entry.getEntryId());
 				jsonObject.put("redirect", redirect);
 				jsonObject.put("updateRedirect", updateRedirect);
@@ -316,7 +316,7 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 		catch (Throwable t) {
-			_log.error(t);
+			_log.error(t, t);
 
 			setForward(actionRequest, "portlet.blogs.error");
 		}
@@ -580,12 +580,11 @@ public class EditEntryAction extends PortletAction {
 		ImageSelector smallImageImageSelector = new ImageSelector(
 			smallImageFileEntryId, smallImageURL, null);
 
-		BlogsEntry entry = null;
-		String oldUrlTitle = StringPool.BLANK;
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BlogsEntry.class.getName(), actionRequest);
 
+		BlogsEntry entry = null;
+		String oldUrlTitle = StringPool.BLANK;
 		List<BlogsEntryAttachmentFileEntryReference>
 			blogsEntryAttachmentFileEntryReferences = new ArrayList<>();
 
@@ -623,8 +622,6 @@ public class EditEntryAction extends PortletAction {
 				BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 			}
 
-			// Attachments
-
 			for (FileEntry tempBlogsEntryAttachment :
 					tempBlogsEntryAttachments) {
 
@@ -659,16 +656,17 @@ public class EditEntryAction extends PortletAction {
 			BlogsEntryAttachmentFileEntryHelper blogsEntryAttachmentHelper =
 				new BlogsEntryAttachmentFileEntryHelper();
 
-			List<FileEntry> tempBlogsEntryAttachments =
+			List<FileEntry> tempBlogsEntryAttachmentFileEntries =
 				blogsEntryAttachmentHelper.
 					getTempBlogsEntryAttachmentFileEntries(content);
 
-			if (!tempBlogsEntryAttachments.isEmpty()) {
+			if (!tempBlogsEntryAttachmentFileEntries.isEmpty()) {
 				blogsEntryAttachmentFileEntryReferences =
 					blogsEntryAttachmentHelper.
 						addBlogsEntryAttachmentFileEntries(
 							entry.getGroupId(), themeDisplay.getUserId(),
-							entry.getEntryId(), tempBlogsEntryAttachments);
+							entry.getEntryId(),
+							tempBlogsEntryAttachmentFileEntries);
 
 				content = blogsEntryAttachmentHelper.updateContent(
 					content, blogsEntryAttachmentFileEntryReferences);
@@ -681,13 +679,11 @@ public class EditEntryAction extends PortletAction {
 					smallImageImageSelector, serviceContext);
 			}
 
-			// Attachments
-
-			for (FileEntry tempBlogsEntryAttachment :
-					tempBlogsEntryAttachments) {
+			for (FileEntry tempBlogsEntryAttachmentFileEntry :
+					tempBlogsEntryAttachmentFileEntries) {
 
 				PortletFileRepositoryUtil.deletePortletFileEntry(
-					tempBlogsEntryAttachment.getFileEntryId());
+					tempBlogsEntryAttachmentFileEntry.getFileEntryId());
 			}
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
@@ -708,7 +704,7 @@ public class EditEntryAction extends PortletAction {
 
 	private TransactionAttribute _transactionAttribute =
 		TransactionAttributeBuilder.build(
-			Propagation.REQUIRED, new Class<?>[]{Exception.class});
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	private class UpdateEntryCallable implements Callable<Object[]> {
 
