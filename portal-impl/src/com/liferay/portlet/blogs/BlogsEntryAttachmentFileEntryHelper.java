@@ -102,14 +102,14 @@ public class BlogsEntryAttachmentFileEntryHelper {
 			sb.append("=\\s?\"");
 			sb.append(
 				blogsEntryAttachmentFileEntryReference.
-					getTempAttachmentFileEntryId());
+					getTempBlogsEntryAttachmentFileEntryId());
 			sb.append("\".*src=\\s?\"(.*)\".*/>");
 
 			content = content.replaceAll(
 				sb.toString(),
 				getBlogsEntryAttachmentFileEntryLink(
 					blogsEntryAttachmentFileEntryReference.
-						getAttachmentFileEntry()));
+						getBlogsEntryAttachmentFileEntry()));
 		}
 
 		return content;

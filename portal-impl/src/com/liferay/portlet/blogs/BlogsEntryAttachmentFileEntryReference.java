@@ -23,21 +23,23 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 public class BlogsEntryAttachmentFileEntryReference {
 
 	public BlogsEntryAttachmentFileEntryReference(
-		long tempAttachmentFileEntryId, FileEntry attachmentFileEntry) {
+		long tempBlogsEntryAttachmentFileEntryId,
+		FileEntry blogsEntryAttachmentFileEntry) {
 
-		_tempAttachmentFileEntryId = tempAttachmentFileEntryId;
-		_attachmentFileEntry = attachmentFileEntry;
+		_tempBlogsEntryAttachmentFileEntryId =
+			tempBlogsEntryAttachmentFileEntryId;
+		_blogsEntryAttachmentFileEntry = blogsEntryAttachmentFileEntry;
 	}
 
-	public FileEntry getAttachmentFileEntry() {
-		return _attachmentFileEntry;
+	public FileEntry getBlogsEntryAttachmentFileEntry() {
+		return _blogsEntryAttachmentFileEntry;
 	}
 
-	public long getTempAttachmentFileEntryId() {
-		return _tempAttachmentFileEntryId;
+	public long getTempBlogsEntryAttachmentFileEntryId() {
+		return _tempBlogsEntryAttachmentFileEntryId;
 	}
 
-	private final FileEntry _attachmentFileEntry;
-	private final long _tempAttachmentFileEntryId;
+	private final FileEntry _blogsEntryAttachmentFileEntry;
+	private final long _tempBlogsEntryAttachmentFileEntryId;
 
 }

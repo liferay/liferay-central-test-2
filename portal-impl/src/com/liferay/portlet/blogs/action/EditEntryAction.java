@@ -216,7 +216,7 @@ public class EditEntryAction extends PortletAction {
 
 					FileEntry attachmentFileEntry =
 						blogsEntryAttachmentFileEntryReference.
-							getAttachmentFileEntry();
+							getBlogsEntryAttachmentFileEntry();
 
 					blogsEntryFileEntryReferencesJSONObject.put(
 						"attributeDataImageId",
@@ -225,7 +225,7 @@ public class EditEntryAction extends PortletAction {
 						"fileEntryId",
 						String.valueOf(
 							blogsEntryAttachmentFileEntryReference.
-								getTempAttachmentFileEntryId()));
+								getTempBlogsEntryAttachmentFileEntryId()));
 					blogsEntryFileEntryReferencesJSONObject.put(
 						"fileEntryUrl",
 						PortletFileRepositoryUtil.getPortletFileEntryURL(
