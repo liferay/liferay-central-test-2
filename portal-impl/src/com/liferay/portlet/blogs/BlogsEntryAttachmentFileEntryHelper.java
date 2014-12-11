@@ -107,7 +107,7 @@ public class BlogsEntryAttachmentFileEntryHelper {
 
 			content = content.replaceAll(
 				sb.toString(),
-				getAttachmentFileEntryLink(
+				getBlogsEntryAttachmentFileEntryLink(
 					blogsEntryAttachmentFileEntryReference.
 						getAttachmentFileEntry()));
 		}
@@ -129,11 +129,11 @@ public class BlogsEntryAttachmentFileEntryHelper {
 			true);
 	}
 
-	protected String getAttachmentFileEntryLink(
-		FileEntry blogsAttachmentEntryFileEntry) {
+	protected String getBlogsEntryAttachmentFileEntryLink(
+		FileEntry blogsEntryAttachmentEntryFileEntry) {
 
 		String fileEntryURL = PortletFileRepositoryUtil.getPortletFileEntryURL(
-			null, blogsAttachmentEntryFileEntry, StringPool.BLANK);
+			null, blogsEntryAttachmentEntryFileEntry, StringPool.BLANK);
 
 		return "<img src=\"" + fileEntryURL + "\" />";
 	}
