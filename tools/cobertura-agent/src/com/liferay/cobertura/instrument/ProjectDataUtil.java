@@ -51,7 +51,9 @@ public class ProjectDataUtil {
 	public static ProjectData captureProjectData() {
 		runMergeHooks();
 
-		synchronized (ProjectDataUtil.class.getName().intern()) {
+		String className = ProjectDataUtil.class.getName();
+
+		synchronized (className.intern()) {
 			FileLock fileLock = _lockFile();
 
 			try {
@@ -232,7 +234,9 @@ public class ProjectDataUtil {
 					}
 				}
 
-				synchronized (ProjectDataUtil.class.getName().intern()) {
+				String className = ProjectDataUtil.class.getName();
+
+				synchronized (className.intern()) {
 					FileLock fileLock = _lockFile();
 
 					try {
