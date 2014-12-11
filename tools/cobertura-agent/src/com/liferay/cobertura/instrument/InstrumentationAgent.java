@@ -151,16 +151,7 @@ public class InstrumentationAgent {
 			}
 		}
 
-		// Ensure TouchCollector is loaded before retransform.
-		// A class can be instrumented for code coverage in a new classloader,
-		// but failed to initialize due to an ExceptionInInitializerError.
-		// Therefor its reference to TouchCollector has not be resolved.
-		// But that class will still be redefined in the end to its original
-		// form, and that will sucessfully resolve TouchCollector for the first
-		// time, in its original form. It will cause TouchCollector#<clinit>
-		// being invoked, which in turn calls ProjectData#initialize() to add
-		// net.sourceforge.cobertura.coveragedata.SaveTimer into shutdown hook,
-		// causing a jvm shutdown issue.
+		// See LPS-52161
 
 		modifiableClasses.add(TouchCollector.class);
 
