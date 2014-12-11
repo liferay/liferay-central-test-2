@@ -166,10 +166,6 @@ public class GoogleDocsMetadataHelper {
 					GoogleDocsConstants.DDM_FIELD_NAME_DESCRIPTION, ""));
 			fields.put(
 				new Field(
-					ddmStructureId, GoogleDocsConstants.DDM_FIELD_NAME_URL,
-					""));
-			fields.put(
-				new Field(
 					ddmStructureId,
 					GoogleDocsConstants.DDM_FIELD_NAME_EMBEDDABLE_URL, ""));
 			fields.put(
@@ -183,11 +179,15 @@ public class GoogleDocsMetadataHelper {
 				new Field(
 					ddmStructureId, GoogleDocsConstants.DDM_FIELD_NAME_NAME,
 					""));
+			fields.put(
+				new Field(
+					ddmStructureId, GoogleDocsConstants.DDM_FIELD_NAME_URL,
+					""));
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setUserId(_dlFileVersion.getUserId());
 			serviceContext.setScopeGroupId(_dlFileVersion.getGroupId());
+			serviceContext.setUserId(_dlFileVersion.getUserId());
 
 			long ddmStorageId = _storageEngine.create(
 				_dlFileVersion.getCompanyId(), ddmStructureId, fields,
