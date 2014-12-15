@@ -570,13 +570,13 @@ public class UserFinderImpl
 					params2.put("usersOrgs", organizationIds);
 				}
 				else {
-					Map<Serializable, Organization> map =
+					Map<Serializable, Organization> organizations =
 						OrganizationUtil.fetchByPrimaryKeys(
 							new HashSet<Serializable>(organizationIds));
 
 					params2.put(
 						"usersOrgsTree",
-						new ArrayList<Organization>(map.values()));
+						new ArrayList<Organization>(organizations.values()));
 				}
 			}
 
@@ -643,13 +643,13 @@ public class UserFinderImpl
 							new Long[organizationIds.size()]));
 				}
 				else {
-					Map<Serializable, Organization> map =
+					Map<Serializable, Organization> organizations =
 						OrganizationUtil.fetchByPrimaryKeys(
 							new HashSet<Serializable>(organizationIds));
 
 					params2.put(
 						"usersOrgsTree",
-						new ArrayList<Organization>(map.values()));
+						new ArrayList<Organization>(organizations.values()));
 				}
 			}
 
