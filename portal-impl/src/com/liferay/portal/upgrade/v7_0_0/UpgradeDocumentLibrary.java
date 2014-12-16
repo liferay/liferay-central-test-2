@@ -49,18 +49,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 
-		// DLFolder
-
-		try {
-			runSQL("alter_column_type DLFolder name VARCHAR(255) null");
-		}
-		catch (SQLException sqle) {
-			upgradeTable(
-				DLFolderTable.TABLE_NAME, DLFolderTable.TABLE_COLUMNS,
-				DLFolderTable.TABLE_SQL_CREATE,
-				DLFolderTable.TABLE_SQL_ADD_INDEXES);
-		}
-
 		// DLFileEntry
 
 		runSQL("alter table DLFileEntry add fileName VARCHAR(255) null");
@@ -77,7 +65,19 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		updateFileVersionFileNames();
 
-		updateClassNameIds();
+		// DLFolder
+
+		try {
+			runSQL("alter_column_type DLFolder name VARCHAR(255) null");
+		}
+		catch (SQLException sqle) {
+			upgradeTable(
+				DLFolderTable.TABLE_NAME, DLFolderTable.TABLE_COLUMNS,
+				DLFolderTable.TABLE_SQL_CREATE,
+				DLFolderTable.TABLE_SQL_ADD_INDEXES);
+		}
+
+		updateRepositoryClassNameIds();
 	}
 
 	protected boolean hasFileEntry(long groupId, long folderId, String fileName)
@@ -112,31 +112,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateClassNameIds() throws Exception {
-		long liferayRepositoryClassNameId = PortalUtil.getClassNameId(
-			LiferayRepository.class);
-		long portletRepositoryClassNameId = PortalUtil.getClassNameId(
-			PortletRepository.class);
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update Repository set classNameId = ? where classNameId = ?");
-
-			ps.setLong(1, portletRepositoryClassNameId);
-			ps.setLong(2, liferayRepositoryClassNameId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
 		}
 	}
 
@@ -505,6 +480,31 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateRepositoryClassNameIds() throws Exception {
+		long liferayRepositoryClassNameId = PortalUtil.getClassNameId(
+			LiferayRepository.class);
+		long portletRepositoryClassNameId = PortalUtil.getClassNameId(
+			PortletRepository.class);
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update Repository set classNameId = ? where classNameId = ?");
+
+			ps.setLong(1, portletRepositoryClassNameId);
+			ps.setLong(2, liferayRepositoryClassNameId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
