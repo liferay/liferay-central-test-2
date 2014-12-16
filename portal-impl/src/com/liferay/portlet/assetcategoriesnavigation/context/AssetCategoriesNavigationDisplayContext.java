@@ -107,17 +107,15 @@ public class AssetCategoriesNavigationDisplayContext {
 	public List<KeyValuePair> getAvailableVocabularyNames()
 		throws PortalException {
 
-		Set<Long> availableAssetVocabularyIdsSet = SetUtil.fromArray(
-			getAvailableAssetVocabularyIds());
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		List<KeyValuePair> availableVocabularNames =
+			new ArrayList<KeyValuePair>();
 
 		long[] assetVocabularyIds = getAssetVocabularyIds();
 
-		List<KeyValuePair> typesRightList = new ArrayList<KeyValuePair>();
-
 		Arrays.sort(assetVocabularyIds);
+
+		Set<Long> availableAssetVocabularyIdsSet = SetUtil.fromArray(
+			getAvailableAssetVocabularyIds());
 
 		for (long assetVocabularyId : availableAssetVocabularyIdsSet) {
 			if (Arrays.binarySearch(
@@ -129,24 +127,22 @@ public class AssetCategoriesNavigationDisplayContext {
 
 				assetVocabulary = assetVocabulary.toEscapedModel();
 
-				typesRightList.add(
+				availableVocabularNames.add(
 					new KeyValuePair(
 						String.valueOf(assetVocabularyId),
-						getTitle(assetVocabulary, themeDisplay)));
+						getTitle(assetVocabulary)));
 			}
 		}
 
 		return ListUtil.sort(
-			typesRightList, new KeyValuePairComparator(false, true));
+			availableVocabularNames, new KeyValuePairComparator(false, true));
 	}
 
 	public List<KeyValuePair> getCurrentVocabularyNames()
 		throws PortalException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
+		List<KeyValuePair> currentVocabularNames =
+			new ArrayList<KeyValuePair>();
 
 		for (long assetVocabularyId : getAssetVocabularyIds()) {
 			AssetVocabulary assetVocabulary =
@@ -155,13 +151,13 @@ public class AssetCategoriesNavigationDisplayContext {
 
 			assetVocabulary = assetVocabulary.toEscapedModel();
 
-			typesLeftList.add(
+			currentVocabularNames.add(
 				new KeyValuePair(
 					String.valueOf(assetVocabularyId),
-					getTitle(assetVocabulary, themeDisplay)));
+					getTitle(assetVocabulary)));
 		}
 
-		return typesLeftList;
+		return currentVocabularNames;
 	}
 
 	public List<AssetVocabulary> getDDMTemplateAssetVocabularies()
@@ -187,7 +183,7 @@ public class AssetCategoriesNavigationDisplayContext {
 		return _ddmTemplateAssetVocabularies;
 	}
 
-	public String getDisplayStyle() throws PortalException {
+	public String getDisplayStyle() {
 		if (_displayStyle != null) {
 			return _displayStyle;
 		}
@@ -198,7 +194,7 @@ public class AssetCategoriesNavigationDisplayContext {
 		return _displayStyle;
 	}
 
-	public long getDisplayStyleGroupId() throws PortalException {
+	public long getDisplayStyleGroupId() {
 		if (_displayStyleGroupId != null) {
 			return _displayStyleGroupId;
 		}
@@ -213,7 +209,7 @@ public class AssetCategoriesNavigationDisplayContext {
 		return _displayStyleGroupId;
 	}
 
-	public boolean isAllAssetVocabularies() throws PortalException {
+	public boolean isAllAssetVocabularies() {
 		if (_allAssetVocabularies != null) {
 			return _allAssetVocabularies;
 		}
@@ -225,8 +221,9 @@ public class AssetCategoriesNavigationDisplayContext {
 		return _allAssetVocabularies;
 	}
 
-	protected String getTitle(
-		AssetVocabulary assetVocabulary, ThemeDisplay themeDisplay) {
+	protected String getTitle(AssetVocabulary assetVocabulary) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String title = assetVocabulary.getTitle(themeDisplay.getLanguageId());
 
