@@ -35,7 +35,7 @@ import java.util.Properties;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class DefaultLDAPSettingsImpl implements LDAPSettings {
+public class DefaultLDAPSettings implements LDAPSettings {
 
 	@Override
 	public String getAuthSearchFilter(
@@ -257,6 +257,6 @@ public class DefaultLDAPSettingsImpl implements LDAPSettings {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		DefaultLDAPSettingsImpl.class);
+		DefaultLDAPSettings.class);
 
 }

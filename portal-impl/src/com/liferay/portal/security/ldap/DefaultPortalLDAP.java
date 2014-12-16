@@ -67,7 +67,7 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Hugo Huijser
  * @author Edward Han
  */
-public class DefaultPortalLDAPImpl implements PortalLDAP {
+public class DefaultPortalLDAP implements PortalLDAP {
 
 	@Override
 	public LdapContext getContext(long ldapServerId, long companyId)
@@ -990,7 +990,6 @@ public class DefaultPortalLDAPImpl implements PortalLDAP {
 		return sb.toString();
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DefaultPortalLDAPImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DefaultPortalLDAP.class);
 
 }
