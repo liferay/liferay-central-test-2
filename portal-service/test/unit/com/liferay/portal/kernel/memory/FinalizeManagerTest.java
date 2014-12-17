@@ -246,11 +246,11 @@ public class FinalizeManagerTest {
 
 		// First GC to trigger Object#finalize
 
-		if (referenceType == ReferenceType.SOFT) {
-			GCUtil.fullGC(true);
-		}
-		else if (referenceType == ReferenceType.PHANTOM) {
+		if (referenceType == ReferenceType.PHANTOM) {
 			GCUtil.gc(false);
+		}
+		else if (referenceType == ReferenceType.SOFT) {
+			GCUtil.fullGC(true);
 		}
 		else {
 			GCUtil.gc(true);
