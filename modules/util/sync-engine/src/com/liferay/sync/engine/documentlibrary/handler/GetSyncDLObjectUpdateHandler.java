@@ -372,8 +372,6 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 
 		String sourceVersion = sourceSyncFile.getVersion();
 
-		Path sourceFilePath = Paths.get(sourceSyncFile.getFilePathName());
-
 		boolean filePathChanged = processFilePathChange(
 			sourceSyncFile, targetSyncFile);
 
@@ -393,7 +391,9 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 
 		SyncFileService.update(sourceSyncFile);
 
-		if (filePathChanged && !Files.exists(sourceFilePath)) {
+		Path filePath = Paths.get(targetSyncFile.getFilePathName());
+
+		if (filePathChanged && !Files.exists(filePath)) {
 			if (targetSyncFile.isFolder()) {
 				Path targetFilePath = Paths.get(filePathName);
 
@@ -408,8 +408,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 			}
 		}
 		else if (targetSyncFile.isFile() &&
-				 hasFileChanged(
-					 sourceSyncFile, targetSyncFile, sourceFilePath)) {
+				 hasFileChanged(sourceSyncFile, targetSyncFile, filePath)) {
 
 			downloadFile(
 				sourceSyncFile, sourceVersion,
