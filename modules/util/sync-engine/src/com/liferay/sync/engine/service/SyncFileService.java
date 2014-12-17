@@ -458,6 +458,20 @@ public class SyncFileService {
 		return syncFile;
 	}
 
+	public static void setStatuses(
+		SyncFile parentSyncFile, int state, int uiEvent) {
+
+		try {
+			_syncFilePersistence.updateByFilePathName(
+				parentSyncFile.getFilePathName(), state, uiEvent);
+		}
+		catch (SQLException sqle) {
+			if (_logger.isDebugEnabled()) {
+				_logger.debug(sqle.getMessage(), sqle);
+			}
+		}
+	}
+
 	public static void unregisterModelListener(
 		ModelListener<SyncFile> modelListener) {
 
