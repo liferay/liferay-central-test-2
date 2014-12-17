@@ -1456,17 +1456,14 @@ ${marketplace.portlet.properties}</echo>
 
 				<property name="results.xml.file" value="portal-web/test-results/functional/TEST-${env.BUILD_FLOW_JOB_NAME}_${env.BUILD_FLOW_BUILD_NUMBER}_${test.class}.xml" />
 
-				<echo file="${results.xml.file}"><![CDATA[<?xml version="1.0" encoding="UTF-8" ?>
+				<echo file="${results.xml.file}"><![CDATA[<?xml version="1.0"?>
+
 <testsuite>
-<testcase classname="${test.class.name}" name="${test.method.name}" time="0.00">
-<failure message="Jenkins failure prior to running test">Jenkins failure prior to running test</failure>
-</testcase>
-<system-out>
-<![CDATA[]]]]><![CDATA[>
-</system-out>
-<system-err>
-<![CDATA[]]]]><![CDATA[>
-</system-err>
+	<testcase classname="${test.class.name}" name="${test.method.name}" time="0.00">
+		<failure message="Jenkins failure prior to running test.">Jenkins failure prior to running test.</failure>
+	</testcase>
+	<system-out></system-out>
+	<system-err></system-err>
 </testsuite>]]></echo>
 
 				<record-testray-components />
