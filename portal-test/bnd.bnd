@@ -1,8 +1,8 @@
-Bundle-Version: 6.2.0
 Bundle-Name: Liferay Portal Test
+Bundle-Version: 6.2.0
 Export-Package:\
-	com.liferay.portal.util.test,\
-	com.liferay.portal.test.randomizerbumpers
+	com.liferay.portal.test.randomizerbumpers,\
+	com.liferay.portal.util.test
 Include-Resource:\
 	classes,\
 	@${project.dir}/../lib/development/dumbster.jar,\
