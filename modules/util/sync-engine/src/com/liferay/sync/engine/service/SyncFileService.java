@@ -440,16 +440,7 @@ public class SyncFileService {
 	}
 
 	public static SyncFile resyncFolder(SyncFile syncFile) throws Exception {
-
-		// Sync file
-
-		syncFile.setState(SyncFile.STATE_SYNCED);
-
-		update(syncFile);
-
-		// Sync files
-
-		resyncChildSyncFiles(syncFile);
+		setStatuses(syncFile, SyncFile.STATE_SYNCED, SyncFile.UI_EVENT_DEFAULT);
 
 		// Remote
 
@@ -479,9 +470,6 @@ public class SyncFileService {
 	}
 
 	public static SyncFile unsyncFolder(String filePathName) throws Exception {
-
-		// Sync file
-
 		SyncFile syncFile = SyncFileService.fetchSyncFile(filePathName);
 
 		if (syncFile == null) {
@@ -490,13 +478,8 @@ public class SyncFileService {
 				SyncFile.STATE_UNSYNCED, 0, null);
 		}
 
-		syncFile.setState(SyncFile.STATE_UNSYNCED);
-
-		update(syncFile);
-
-		// Sync files
-
-		unsyncChildSyncFiles(syncFile);
+		setStatuses(
+			syncFile, SyncFile.STATE_UNSYNCED, SyncFile.UI_EVENT_DEFAULT);
 
 		return syncFile;
 	}
@@ -646,40 +629,6 @@ public class SyncFileService {
 		}
 
 		return syncFile;
-	}
-
-	protected static void resyncChildSyncFiles(SyncFile syncFile)
-		throws Exception {
-
-		List<SyncFile> childSyncFiles = _syncFilePersistence.queryForEq(
-			"parentFolderId", syncFile.getTypePK());
-
-		for (SyncFile childSyncFile : childSyncFiles) {
-			childSyncFile.setState(SyncFile.STATE_SYNCED);
-
-			update(childSyncFile);
-
-			if (childSyncFile.isFolder()) {
-				resyncChildSyncFiles(childSyncFile);
-			}
-		}
-	}
-
-	protected static void unsyncChildSyncFiles(SyncFile syncFile)
-		throws Exception {
-
-		List<SyncFile> childSyncFiles = _syncFilePersistence.queryForEq(
-			"parentFolderId", syncFile.getTypePK());
-
-		for (SyncFile childSyncFile : childSyncFiles) {
-			childSyncFile.setState(SyncFile.STATE_UNSYNCED);
-
-			update(childSyncFile);
-
-			if (childSyncFile.isFolder()) {
-				unsyncChildSyncFiles(childSyncFile);
-			}
-		}
 	}
 
 	private static String _getName(Path filePath, SyncFile syncFile) {
