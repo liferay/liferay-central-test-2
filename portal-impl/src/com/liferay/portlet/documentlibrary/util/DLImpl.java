@@ -1378,8 +1378,8 @@ public class DLImpl implements DL {
 			Validator.equals(
 				serviceContext.getCommand(), Constants.UPDATE_WEBDAV)) {
 
-			return
-				serviceContext.getPortalURL() + serviceContext.getCurrentURL();
+			return serviceContext.getPortalURL() +
+				serviceContext.getCurrentURL();
 		}
 
 		HttpServletRequest request = serviceContext.getRequest();
