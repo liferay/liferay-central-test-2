@@ -188,18 +188,13 @@ public abstract class BaseIndexer implements Indexer {
 			SearchPermissionChecker searchPermissionChecker =
 				SearchEngineUtil.getSearchPermissionChecker();
 
-			long[] groupIds = null;
+			long[] groupIds = searchContext.getGroupIds();
 
-			String contextGroupId = (String)searchContext.getAttribute
-				("groupId");
+			long groupId = GetterUtil.getLong(
+				searchContext.getAttribute("groupId"));
 
-			if (Validator.isNotNull(contextGroupId) &&
-				!contextGroupId.equals("0")) {
-
-				groupIds = new long[]{Long.parseLong(contextGroupId)};
-			}
-			else {
-				groupIds = searchContext.getGroupIds();
+			if (groupId > 0) {
+				groupIds = new long[] {groupId};
 			}
 
 			facetQuery =
