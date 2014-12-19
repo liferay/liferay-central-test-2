@@ -81,8 +81,7 @@ public class ExportUsersAction extends PortletAction {
 				DynamicActionRequest dynamicActionRequest =
 					new DynamicActionRequest(actionRequest);
 
-				dynamicActionRequest.setParameter(
-					"keywords", StringPool.BLANK);
+				dynamicActionRequest.setParameter("keywords", StringPool.BLANK);
 
 				actionRequest = dynamicActionRequest;
 			}
