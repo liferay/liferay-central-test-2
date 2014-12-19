@@ -30,7 +30,9 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Eudaldo Alonso
  */
-@Component(immediate = true, service = AssetCategoriesNavigationWebUpgrade.class)
+@Component(
+	immediate = true, service = AssetCategoriesNavigationWebUpgrade.class
+)
 public class AssetCategoriesNavigationWebUpgrade {
 
 	@Reference(unbind = "-")
