@@ -3,7 +3,7 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>com_liferay_asset_categories_navigation_web_portlet_CategoriesNavigationPortlet</portlet-name>
+		<portlet-name>com_liferay_asset_categories_navigation_web_portlet_AssetCategoriesNavigationPortlet</portlet-name>
 		<permissions>
 			<supports>
 				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>

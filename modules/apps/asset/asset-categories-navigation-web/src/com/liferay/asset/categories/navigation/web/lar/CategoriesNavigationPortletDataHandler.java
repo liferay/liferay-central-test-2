@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=com_liferay_asset_categories_navigation_web_portlet_CategoriesNavigationPortlet"
+		"javax.portlet.name=com_liferay_asset_categories_navigation_web_portlet_AssetCategoriesNavigationPortlet"
 	},
 	service = PortletDataHandler.class
 )
