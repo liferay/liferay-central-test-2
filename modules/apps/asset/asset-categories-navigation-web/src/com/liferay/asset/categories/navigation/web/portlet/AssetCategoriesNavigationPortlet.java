@@ -14,7 +14,7 @@
 
 package com.liferay.asset.categories.navigation.web.portlet;
 
-import com.liferay.asset.categories.navigation.web.upgrade.CategoriesNavigationWebUpgrade;
+import com.liferay.asset.categories.navigation.web.upgrade.AssetCategoriesNavigationWebUpgrade;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
@@ -54,8 +54,9 @@ import org.osgi.service.component.annotations.Reference;
 public class AssetCategoriesNavigationPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
-	protected void setCategoriesNavigationUpgrade(
-		CategoriesNavigationWebUpgrade categoriesNavigationWebUpgrade) {
+	protected void setAssetCategoriesNavigationUpgrade(
+		AssetCategoriesNavigationWebUpgrade
+			assetCategoriesNavigationWebUpgrade) {
 	}
 
 }

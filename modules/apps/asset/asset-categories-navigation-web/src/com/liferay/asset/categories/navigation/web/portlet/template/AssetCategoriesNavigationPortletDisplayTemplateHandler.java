@@ -14,8 +14,8 @@
 
 package com.liferay.asset.categories.navigation.web.portlet.template;
 
-import com.liferay.asset.categories.navigation.web.configuration.CategoriesNavigationWebConfigurationValues;
-import com.liferay.asset.categories.navigation.web.constants.CategoriesNavigationPortletKeys;
+import com.liferay.asset.categories.navigation.web.configuration.AssetCategoriesNavigationWebConfigurationValues;
+import com.liferay.asset.categories.navigation.web.constants.AssetCategoriesNavigationPortletKeys;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portletdisplaytemplate.BasePortletDisplayTemplateHandler;
 import com.liferay.portal.kernel.template.TemplateHandler;
@@ -43,7 +43,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name="+ CategoriesNavigationPortletKeys.CATEGORIES_NAVIGATION
+		"javax.portlet.name="+ AssetCategoriesNavigationPortletKeys.ASSET_CATEGORIES_NAVIGATION
 	},
 	service = TemplateHandler.class
 )
@@ -61,7 +61,7 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 			"content.Language");
 
 		String portletTitle = PortalUtil.getPortletTitle(
-			CategoriesNavigationPortletKeys.CATEGORIES_NAVIGATION,
+			AssetCategoriesNavigationPortletKeys.ASSET_CATEGORIES_NAVIGATION,
 			resourceBundle);
 
 		return portletTitle.concat(StringPool.SPACE).concat(
@@ -70,7 +70,7 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 
 	@Override
 	public String getResourceName() {
-		return CategoriesNavigationPortletKeys.CATEGORIES_NAVIGATION;
+		return AssetCategoriesNavigationPortletKeys.ASSET_CATEGORIES_NAVIGATION;
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return CategoriesNavigationWebConfigurationValues.
+		return AssetCategoriesNavigationWebConfigurationValues.
 			DISPLAY_TEMPLATES_CONFIG;
 	}
 

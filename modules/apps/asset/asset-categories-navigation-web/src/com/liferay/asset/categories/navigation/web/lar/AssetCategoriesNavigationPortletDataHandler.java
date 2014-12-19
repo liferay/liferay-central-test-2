@@ -42,10 +42,10 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = PortletDataHandler.class
 )
-public class CategoriesNavigationPortletDataHandler
+public class AssetCategoriesNavigationPortletDataHandler
 	extends DefaultConfigurationPortletDataHandler {
 
-	public CategoriesNavigationPortletDataHandler() {
+	public AssetCategoriesNavigationPortletDataHandler() {
 		setDataLevel(DataLevel.PORTLET_INSTANCE);
 		setPublishToLiveByDefault(true);
 	}

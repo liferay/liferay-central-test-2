@@ -12,15 +12,17 @@
  * details.
  */
 
-package com.liferay.asset.categories.navigation.web.constants;
+package com.liferay.asset.categories.navigation.web.configuration;
+
+import com.liferay.portal.kernel.util.GetterUtil;
 
 /**
  * @author Eudaldo Alonso
  */
-public class CategoriesNavigationPortletKeys {
+public class AssetCategoriesNavigationWebConfigurationValues {
 
-	public static final String CATEGORIES_NAVIGATION =
-		"com_liferay_asset_categories_navigation_web_portlet_" +
-			"CategoriesNavigationPortlet";
+	public static final String DISPLAY_TEMPLATES_CONFIG = GetterUtil.getString(
+		AssetCategoriesNavigationWebConfigurationUtil.get(
+			"display.templates.config"));
 
 }

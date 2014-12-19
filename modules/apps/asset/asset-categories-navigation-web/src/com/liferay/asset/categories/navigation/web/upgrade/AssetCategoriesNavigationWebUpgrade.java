@@ -30,8 +30,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Eudaldo Alonso
  */
-@Component(immediate = true, service = CategoriesNavigationWebUpgrade.class)
-public class CategoriesNavigationWebUpgrade {
+@Component(immediate = true, service = AssetCategoriesNavigationWebUpgrade.class)
+public class AssetCategoriesNavigationWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
@@ -54,7 +54,7 @@ public class CategoriesNavigationWebUpgrade {
 					new String[] {
 						"122",
 						"com_liferay_asset_categories_navigation_web_portlet_" +
-							"CategoriesNavigationPortlet"
+							"AssetCategoriesNavigationPortlet"
 					}
 				};
 			}

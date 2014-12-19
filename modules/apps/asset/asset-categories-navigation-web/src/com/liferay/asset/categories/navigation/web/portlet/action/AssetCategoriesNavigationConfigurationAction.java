@@ -29,6 +29,6 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ConfigurationAction.class
 )
-public class CategoriesNavigationConfigurationAction
+public class AssetCategoriesNavigationConfigurationAction
 	extends DefaultConfigurationAction {
 }

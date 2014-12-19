@@ -42,9 +42,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Eudaldo Alonso
  */
-public class CategoriesNavigationDisplayContext {
+public class AssetCategoriesNavigationDisplayContext {
 
-	public CategoriesNavigationDisplayContext(
+	public AssetCategoriesNavigationDisplayContext(
 		HttpServletRequest request, PortletPreferences portletPreferences) {
 
 		_request = request;

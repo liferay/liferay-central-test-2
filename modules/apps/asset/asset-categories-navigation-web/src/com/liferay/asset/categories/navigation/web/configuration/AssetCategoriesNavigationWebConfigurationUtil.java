@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 /**
  * @author Eudaldo Alonso
  */
-public class CategoriesNavigationWebConfigurationUtil {
+public class AssetCategoriesNavigationWebConfigurationUtil {
 
 	public static String get(String key) {
 		return _configuration.get(key);
@@ -28,7 +28,8 @@ public class CategoriesNavigationWebConfigurationUtil {
 
 	private static final Configuration _configuration =
 		ConfigurationFactoryUtil.getConfiguration(
-			CategoriesNavigationWebConfigurationUtil.class.getClassLoader(),
+			AssetCategoriesNavigationWebConfigurationUtil.class.
+				getClassLoader(),
 			"portlet");
 
 }
