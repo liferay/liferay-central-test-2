@@ -26,20 +26,20 @@
 
 	<aui:fieldset>
 		<aui:select label="vocabularies" name="preferences--allAssetVocabularies--">
-			<aui:option label="all" selected="<%= categoriesNavigationDisplayContext.isAllAssetVocabularies() %>" value="<%= true %>" />
-			<aui:option label="filter[action]" selected="<%= !categoriesNavigationDisplayContext.isAllAssetVocabularies() %>" value="<%= false %>" />
+			<aui:option label="all" selected="<%= assetCategoriesNavigationDisplayContext.isAllAssetVocabularies() %>" value="<%= true %>" />
+			<aui:option label="filter[action]" selected="<%= !assetCategoriesNavigationDisplayContext.isAllAssetVocabularies() %>" value="<%= false %>" />
 		</aui:select>
 
 		<aui:input name="preferences--assetVocabularyIds--" type="hidden" />
 
-		<div class="<%= categoriesNavigationDisplayContext.isAllAssetVocabularies() ? "hide" : "" %>" id="<portlet:namespace />assetVocabulariesBoxes">
+		<div class="<%= assetCategoriesNavigationDisplayContext.isAllAssetVocabularies() ? "hide" : "" %>" id="<portlet:namespace />assetVocabulariesBoxes">
 			<liferay-ui:input-move-boxes
 				leftBoxName="currentAssetVocabularyIds"
-				leftList="<%= categoriesNavigationDisplayContext.getCurrentVocabularyNames() %>"
+				leftList="<%= assetCategoriesNavigationDisplayContext.getCurrentVocabularyNames() %>"
 				leftReorder="true"
 				leftTitle="current"
 				rightBoxName="availableAssetVocabularyIds"
-				rightList="<%= categoriesNavigationDisplayContext.getAvailableVocabularyNames() %>"
+				rightList="<%= assetCategoriesNavigationDisplayContext.getAvailableVocabularyNames() %>"
 				rightTitle="available"
 			/>
 		</div>
@@ -52,8 +52,8 @@
 
 			<liferay-ui:ddm-template-selector
 				classNameId="<%= PortalUtil.getClassNameId(templateHandler.getClassName()) %>"
-				displayStyle="<%= categoriesNavigationDisplayContext.getDisplayStyle() %>"
-				displayStyleGroupId="<%= categoriesNavigationDisplayContext.getDisplayStyleGroupId() %>"
+				displayStyle="<%= assetCategoriesNavigationDisplayContext.getDisplayStyle() %>"
+				displayStyleGroupId="<%= assetCategoriesNavigationDisplayContext.getDisplayStyleGroupId() %>"
 				refreshURL="<%= configurationRenderURL %>"
 				showEmptyOption="<%= true %>"
 			/>
