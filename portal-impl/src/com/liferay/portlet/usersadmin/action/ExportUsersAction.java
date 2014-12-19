@@ -78,13 +78,13 @@ public class ExportUsersAction extends PortletAction {
 			String keywords = ParamUtil.getString(actionRequest, "keywords");
 
 			if (Validator.isNotNull(keywords)) {
-				DynamicActionRequest adjustedActionRequest =
+				DynamicActionRequest dynamicActionRequest =
 					new DynamicActionRequest(actionRequest);
 
-				adjustedActionRequest.setParameter(
+				dynamicActionRequest.setParameter(
 					"keywords", StringPool.BLANK);
 
-				actionRequest = adjustedActionRequest;
+				actionRequest = dynamicActionRequest;
 			}
 
 			String csv = getUsersCSV(actionRequest, actionResponse);
