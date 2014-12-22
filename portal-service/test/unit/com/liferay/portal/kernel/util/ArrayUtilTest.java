@@ -461,7 +461,7 @@ public class ArrayUtilTest {
 
 	@Test
 	public void testRemoveFromBooleanArray() {
-		boolean[] array = new boolean[] {true, true, false};
+		boolean[] array = {true, true, false};
 
 		array = ArrayUtil.remove(array, false);
 
@@ -470,7 +470,7 @@ public class ArrayUtilTest {
 
 	@Test
 	public void testRemoveFromBooleanEmptyArray() {
-		boolean[] array = new boolean[] {};
+		boolean[] array = {};
 
 		array = ArrayUtil.remove(array, false);
 
