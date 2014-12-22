@@ -49,13 +49,16 @@ public class SocialRelationLocalServiceTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
+
+		// Users
+
 		for (String screenNamePrefix : new String[] {"dlc", "fra"}) {
 			for (int i = 1; i <= 9; i++) {
 				UserTestUtil.addUser(screenNamePrefix + i, false, null);
 			}
 		}
 
-		// Bi Type
+		// Bi type
 
 		User dlc1User = UserLocalServiceUtil.getUserByScreenName(
 			TestPropsValues.getCompanyId(), "dlc1");
@@ -144,7 +147,7 @@ public class SocialRelationLocalServiceTest {
 			dlc1User.getUserId(), dlc2User.getUserId(),
 			SocialRelationConstants.TYPE_BI_ROMANTIC_PARTNER);
 
-		// Uni Type
+		// Uni type
 
 		User fra1User = UserLocalServiceUtil.getUserByScreenName(
 			TestPropsValues.getCompanyId(), "fra1");
