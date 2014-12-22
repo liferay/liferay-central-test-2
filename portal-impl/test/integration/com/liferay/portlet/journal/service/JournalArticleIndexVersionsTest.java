@@ -70,7 +70,7 @@ public class JournalArticleIndexVersionsTest {
 	}
 
 	@Test
-	public void testDeleteAllArticleVersion() throws Exception {
+	public void testDeleteAllArticleVersions() throws Exception {
 		long initialSearchCount = searchCount();
 
 		JournalArticle article = JournalTestUtil.addArticle(
@@ -124,7 +124,7 @@ public class JournalArticleIndexVersionsTest {
 	}
 
 	@Test
-	public void testExpireAllArticleVersion() throws Exception {
+	public void testExpireAllArticleVersions() throws Exception {
 		long initialSearchCount = searchCount();
 
 		JournalArticle article = JournalTestUtil.addArticle(
