@@ -420,9 +420,10 @@ public class QuartzSchedulerEngineTest {
 		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 	}
 
-	@AdviseWith(adviceClasses = {
-		EnableSchedulerAdvice.class, PortalLocalServiceUtilAdvice.class
-	})
+	@AdviseWith(
+		adviceClasses = {
+			EnableSchedulerAdvice.class, PortalLocalServiceUtilAdvice.class
+		})
 	@Test
 	public void testSchedule1() throws Exception {
 		List<SchedulerResponse> schedulerResponses =
@@ -754,14 +755,15 @@ public class QuartzSchedulerEngineTest {
 
 			PortletApp portletApp = new PortletAppImpl(portletId);
 
-			portletApp.setServletContext(new MockServletContext() {
+			portletApp.setServletContext(
+				new MockServletContext() {
 
-				@Override
-				public ClassLoader getClassLoader() {
-					return Thread.currentThread().getContextClassLoader();
-				}
+					@Override
+					public ClassLoader getClassLoader() {
+						return Thread.currentThread().getContextClassLoader();
+					}
 
-			});
+				});
 
 			portlet.setPortletApp(portletApp);
 
