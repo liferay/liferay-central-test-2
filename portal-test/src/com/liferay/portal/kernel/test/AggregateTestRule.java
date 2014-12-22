@@ -41,7 +41,7 @@ public class AggregateTestRule implements TestRule {
 		_testRules = testRules;
 
 		if (sort) {
-			Arrays.sort(_testRules, _TEST_RULE_COMPARATOR);
+			Arrays.sort(_testRules, _testRuleComparator);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class AggregateTestRule implements TestRule {
 		"com.liferay.portal.test.SynchronousDestinationTestRule"
 	};
 
-	private static final Comparator<TestRule> _TEST_RULE_COMPARATOR =
+	private static final Comparator<TestRule> _testRuleComparator =
 		new Comparator<TestRule>() {
 
 			@Override
