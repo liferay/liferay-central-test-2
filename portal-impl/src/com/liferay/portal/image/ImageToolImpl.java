@@ -499,7 +499,7 @@ public class ImageToolImpl implements ImageTool {
 			}
 
 			if (renderedImage == null) {
-				throw new IOException("Unsupported Image Type");
+				throw new IOException("Unsupported image type");
 			}
 		}
 		finally {
