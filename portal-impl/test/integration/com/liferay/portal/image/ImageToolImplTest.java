@@ -195,16 +195,25 @@ public class ImageToolImplTest {
 			StringUtil.equalsIgnoreCase(expectedType, resultType));
 
 		if (expectedDataBuffer instanceof DataBufferByte) {
+			DataBufferByte expectedDataBufferByte =
+				(DataBufferByte)expectedDataBuffer;
+			DataBufferByte resultDataBufferByte =
+				(DataBufferByte)resultDataBuffer;
+
 			Assert.assertTrue(
 				Arrays.deepEquals(
-					((DataBufferByte)expectedDataBuffer).getBankData(),
-					((DataBufferByte)resultDataBuffer).getBankData()));
+					expectedDataBufferByte.getBankData(),
+					resultDataBufferByte.getBankData()));
 		}
 		else if (expectedDataBuffer instanceof DataBufferInt) {
+			DataBufferInt expectedDataBufferInt =
+				(DataBufferInt)expectedDataBuffer;
+			DataBufferInt resultDataBufferInt = (DataBufferInt)resultDataBuffer;
+
 			Assert.assertTrue(
 				Arrays.deepEquals(
-					((DataBufferInt)expectedDataBuffer).getBankData(),
-					((DataBufferInt)resultDataBuffer).getBankData()));
+					expectedDataBufferInt.getBankData(),
+					resultDataBufferInt.getBankData()));
 		}
 		else {
 			Assert.fail();
