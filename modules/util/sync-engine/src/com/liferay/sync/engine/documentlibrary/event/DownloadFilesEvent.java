@@ -49,7 +49,7 @@ public class DownloadFilesEvent extends BaseEvent {
 		Session session = SessionManager.getSession(getSyncAccountId());
 
 		session.executeAsynchronousPost(
-			syncAccount.getUrl() + _URL_PATH, getParameters(), _handler, true);
+			syncAccount.getUrl() + _URL_PATH, getParameters(), _handler);
 	}
 
 	private static final String _URL_PATH = "/sync-web/download/zip";

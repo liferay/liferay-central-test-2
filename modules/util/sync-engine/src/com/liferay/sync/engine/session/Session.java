@@ -211,7 +211,7 @@ public class Session {
 
 	public void executeAsynchronousPost(
 			final String urlPath, final Map<String, Object> parameters,
-			final Handler<Void> handler, final boolean urlEncodedForm)
+			final Handler<Void> handler)
 		throws Exception {
 
 		Runnable runnable = new Runnable() {
@@ -219,7 +219,7 @@ public class Session {
 			@Override
 			public void run() {
 				try {
-					executePost(urlPath, parameters, handler, urlEncodedForm);
+					executePost(urlPath, parameters, handler);
 				}
 				catch (Exception e) {
 					handler.handleException(e);
@@ -251,29 +251,28 @@ public class Session {
 	}
 
 	public HttpResponse executePost(
-			String urlPath, Map<String, Object> parameters,
-			boolean urlEncodedForm)
+			String urlPath, Map<String, Object> parameters)
 		throws Exception {
 
 		HttpPost httpPost = new HttpPost(urlPath);
 
 		httpPost.setHeader("Sync-JWT", _token);
 
-		_buildHttpPostBody(httpPost, parameters, urlEncodedForm);
+		_buildHttpPostBody(httpPost, parameters);
 
 		return _httpClient.execute(_httpHost, httpPost, getBasicHttpContext());
 	}
 
 	public <T> T executePost(
 			String urlPath, Map<String, Object> parameters,
-			Handler<? extends T> handler, boolean urlEncodedForm)
+			Handler<? extends T> handler)
 		throws Exception {
 
 		HttpPost httpPost = new HttpPost(urlPath);
 
 		httpPost.setHeader("Sync-JWT", _token);
 
-		_buildHttpPostBody(httpPost, parameters, urlEncodedForm);
+		_buildHttpPostBody(httpPost, parameters);
 
 		return _httpClient.execute(
 			_httpHost, httpPost, handler, getBasicHttpContext());
@@ -317,18 +316,10 @@ public class Session {
 	}
 
 	private void _buildHttpPostBody(
-			HttpPost httpPost, Map<String, Object> parameters,
-			boolean urlEncodedForm)
+			HttpPost httpPost, Map<String, Object> parameters)
 		throws Exception {
 
-		HttpEntity httpEntity = null;
-
-		if (urlEncodedForm) {
-			httpEntity = _getURLEncodedFormEntity(parameters);
-		}
-		else {
-			httpEntity = _getEntity(parameters);
-		}
+		HttpEntity httpEntity = _getEntity(parameters);
 
 		httpPost.setEntity(httpEntity);
 	}
@@ -348,19 +339,13 @@ public class Session {
 
 		Path deltaFilePath = (Path)parameters.get("deltaFilePath");
 		Path filePath = (Path)parameters.get("filePath");
+		String zipFileIds = (String)parameters.get("zipFileIds");
 		Path zipFilePath = (Path)parameters.get("zipFilePath");
 
 		MultipartEntityBuilder multipartEntityBuilder =
 			_getMultipartEntityBuilder(parameters);
 
-		if (zipFilePath != null) {
-			multipartEntityBuilder.addPart(
-				"zipFile",
-				_getFileBody(
-					zipFilePath, "application/zip",
-					String.valueOf(zipFilePath.getFileName())));
-		}
-		else if (deltaFilePath != null) {
+		if (deltaFilePath != null) {
 			multipartEntityBuilder.addPart(
 				"deltaFile",
 				_getFileBody(
@@ -373,6 +358,16 @@ public class Session {
 				_getFileBody(
 					filePath, (String)parameters.get("mimeType"),
 					(String)parameters.get("title")));
+		}
+		else if (zipFileIds != null) {
+			return _getURLEncodedFormEntity(parameters);
+		}
+		else if (zipFilePath != null) {
+			multipartEntityBuilder.addPart(
+				"zipFile",
+				_getFileBody(
+					zipFilePath, "application/zip",
+					String.valueOf(zipFilePath.getFileName())));
 		}
 
 		return multipartEntityBuilder.build();
