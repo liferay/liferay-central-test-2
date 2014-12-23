@@ -50,7 +50,7 @@
 		<pathelement location="${project.dir}/lib/portal/velocity.jar" />
 	</path>
 
-	<extension-point name="subprojects" depends="build-alloy,build-alloy-editor,build-ckeditor,build-css,build-dtd,build-tinymce,build-vaadin" />
+	<extension-point name="build-portal-web-dependencies" depends="build-alloy,build-alloy-editor,build-ckeditor,build-css,build-dtd,build-tinymce,build-vaadin" />
 
 	<target name="build-alloy" depends="build-alloy-bootstrap,build-alloy-font-awesome">
 		<path id="alloy.zip.path">
@@ -1078,7 +1078,7 @@ Please set the property "jdk.6.home" in build.properties.
 		</antcall>
 	</target>
 
-	<target name="deploy" depends="compile,subprojects">
+	<target name="deploy" depends="compile,build-portal-web-dependencies">
 		<antcall target="build-common-web.deploy" />
 
 		<if>
@@ -1195,7 +1195,7 @@ Please set the property "jdk.6.home" in build.properties.
 		</jshint>
 	</target>
 
-	<target name="war" depends="compile,subprojects">
+	<target name="war" depends="compile,build-portal-web-dependencies">
 		<war
 			basedir="docroot"
 			destfile="${war.file}.war"
