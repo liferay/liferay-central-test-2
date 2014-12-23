@@ -99,7 +99,7 @@ public class DownloadFilesHandler extends BaseHandler {
 					while (fields.hasNext()) {
 						Map.Entry<String, JsonNode> field = fields.next();
 
-						Handler handler = handlers.get(field.getKey());
+						Handler<Void> handler = handlers.get(field.getKey());
 
 						JsonNode fieldValue = field.getValue();
 

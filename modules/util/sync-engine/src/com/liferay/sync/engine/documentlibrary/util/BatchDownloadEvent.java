@@ -61,7 +61,7 @@ public class BatchDownloadEvent {
 
 		_totalFileSize += size;
 
-		_eventsCount++;
+		_eventCount++;
 
 		String zipFileId =
 			syncFile.getSyncFileId() + "_" + System.currentTimeMillis();
@@ -84,8 +84,8 @@ public class BatchDownloadEvent {
 		_handlers.put(
 			zipFileId, (DownloadFileHandler)downloadFileEvent.getHandler());
 
-		if ((_eventsCount >= PropsValues.SYNC_BATCH_EVENTS_TOTAL_COUNT) ||
-			(_totalFileSize >= PropsValues.SYNC_BATCH_EVENTS_TOTAL_FILE_SIZE)) {
+		if ((_eventCount >= PropsValues.SYNC_BATCH_EVENTS_MAX_COUNT) ||
+			(_totalFileSize >= PropsValues.SYNC_BATCH_EVENTS_MAX_TOTAL_FILE_SIZE)) {
 
 			fireBatchEvent();
 		}
@@ -95,7 +95,7 @@ public class BatchDownloadEvent {
 
 	public synchronized void fireBatchEvent() {
 		try {
-			if (_closed || (_eventsCount == 0)) {
+			if (_closed || (_eventCount == 0)) {
 				return;
 			}
 
@@ -130,7 +130,7 @@ public class BatchDownloadEvent {
 	private List<Map<String, Object>> _batchParameters =
 		new ArrayList<Map<String, Object>>();
 	private boolean _closed;
-	private int _eventsCount;
+	private int _eventCount;
 	private Map<String, DownloadFileHandler> _handlers =
 		new HashMap<String, DownloadFileHandler>();
 	private long _syncAccountId;

@@ -86,14 +86,14 @@ public class BatchEvent {
 
 			_batchParameters.add(parameters);
 
-			_eventsCount++;
+			_eventCount++;
 
 			_handlers.put(zipFileId, event.getHandler());
 
-			if ((_eventsCount >=
-					PropsValues.SYNC_BATCH_EVENTS_TOTAL_COUNT) ||
+			if ((_eventCount >=
+					PropsValues.SYNC_BATCH_EVENTS_MAX_COUNT) ||
 				(_totalFileSize >=
-					PropsValues.SYNC_BATCH_EVENTS_TOTAL_FILE_SIZE)) {
+					PropsValues.SYNC_BATCH_EVENTS_MAX_TOTAL_FILE_SIZE)) {
 
 				fireBatchEvent();
 			}
@@ -109,7 +109,7 @@ public class BatchEvent {
 
 	public synchronized void fireBatchEvent() {
 		try {
-			if (_closed || (_eventsCount == 0)) {
+			if (_closed || (_eventCount == 0)) {
 				return;
 			}
 
@@ -149,15 +149,15 @@ public class BatchEvent {
 	protected boolean addFile(Path filePath, String zipFileId)
 		throws IOException {
 
-		long size = Files.size(filePath);
+		long fileSize = Files.size(filePath);
 
-		if (size >= PropsValues.SYNC_BATCH_EVENTS_MAX_FILE_SIZE) {
+		if (fileSize >= PropsValues.SYNC_BATCH_EVENTS_MAX_FILE_SIZE) {
 			return false;
 		}
 
 		writeFilePathToZip(filePath, zipFileId);
 
-		_totalFileSize += size;
+		_totalFileSize += fileSize;
 
 		return true;
 	}
@@ -210,8 +210,9 @@ public class BatchEvent {
 	private List<Map<String, Object>> _batchParameters =
 		new ArrayList<Map<String, Object>>();
 	private boolean _closed;
-	private int _eventsCount;
-	private Map<String, Handler> _handlers = new HashMap<String, Handler>();
+	private int _eventCount;
+	private Map<String, Handler<Void>> _handlers = 
+		new HashMap<String, Handler<Void>>();
 	private long _syncAccountId;
 	private long _totalFileSize;
 	private Path _zipFilePath;
