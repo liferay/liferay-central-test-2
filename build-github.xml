@@ -201,9 +201,9 @@
 				}
 
 				public String getRemoteGithubJenkinsUrl() {
-					JSONObject rootJSONObject = toJSONObject(project.getProperty("github.jenkins.url") + "/api/json");
+					JSONObject jsonObject = toJSONObject(project.getProperty("github.jenkins.url") + "/api/json");
 
-					JSONObject primaryViewJSONObject = rootJSONObject.get("primaryView");
+					JSONObject primaryViewJSONObject = jsonObject.get("primaryView");
 
 					return primaryViewJSONObject.get("url");
 				}
