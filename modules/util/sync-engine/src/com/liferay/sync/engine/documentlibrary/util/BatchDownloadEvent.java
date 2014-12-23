@@ -85,7 +85,8 @@ public class BatchDownloadEvent {
 			zipFileId, (DownloadFileHandler)downloadFileEvent.getHandler());
 
 		if ((_eventCount >= PropsValues.SYNC_BATCH_EVENTS_MAX_COUNT) ||
-			(_totalFileSize >= PropsValues.SYNC_BATCH_EVENTS_MAX_TOTAL_FILE_SIZE)) {
+			(_totalFileSize >=
+				PropsValues.SYNC_BATCH_EVENTS_MAX_TOTAL_FILE_SIZE)) {
 
 			fireBatchEvent();
 		}

@@ -211,7 +211,7 @@ public class BatchEvent {
 		new ArrayList<Map<String, Object>>();
 	private boolean _closed;
 	private int _eventCount;
-	private Map<String, Handler<Void>> _handlers = 
+	private Map<String, Handler<Void>> _handlers =
 		new HashMap<String, Handler<Void>>();
 	private long _syncAccountId;
 	private long _totalFileSize;
