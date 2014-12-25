@@ -201,14 +201,14 @@ public interface GroupService extends BaseService {
 	* Returns the group with the name.
 	*
 	* @param companyId the primary key of the company
-	* @param name the group's name
-	* @return the group with the name
+	* @param groupKey the group key
+	* @return the group with the group key
 	* @throws PortalException if a matching group could not be found or if the
 	current user did not have permission to view the group
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Group getGroup(long companyId,
-		java.lang.String name)
+		java.lang.String groupKey)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**

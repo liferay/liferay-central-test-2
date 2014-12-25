@@ -341,16 +341,16 @@ public class GroupServiceSoap {
 	* Returns the group with the name.
 	*
 	* @param companyId the primary key of the company
-	* @param name the group's name
-	* @return the group with the name
+	* @param groupKey the group key
+	* @return the group with the group key
 	* @throws PortalException if a matching group could not be found or if the
 	current user did not have permission to view the group
 	*/
 	public static com.liferay.portal.model.GroupSoap getGroup(long companyId,
-		java.lang.String name) throws RemoteException {
+		java.lang.String groupKey) throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(companyId,
-					name);
+					groupKey);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}

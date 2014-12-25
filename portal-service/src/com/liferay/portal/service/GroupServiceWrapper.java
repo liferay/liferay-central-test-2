@@ -222,16 +222,16 @@ public class GroupServiceWrapper implements GroupService,
 	* Returns the group with the name.
 	*
 	* @param companyId the primary key of the company
-	* @param name the group's name
-	* @return the group with the name
+	* @param groupKey the group key
+	* @return the group with the group key
 	* @throws PortalException if a matching group could not be found or if the
 	current user did not have permission to view the group
 	*/
 	@Override
 	public com.liferay.portal.model.Group getGroup(long companyId,
-		java.lang.String name)
+		java.lang.String groupKey)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _groupService.getGroup(companyId, name);
+		return _groupService.getGroup(companyId, groupKey);
 	}
 
 	/**

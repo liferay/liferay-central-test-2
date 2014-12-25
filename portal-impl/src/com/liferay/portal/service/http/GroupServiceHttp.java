@@ -397,14 +397,14 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group getGroup(
-		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String groupKey)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class,
 					"getGroup", _getGroupParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, name);
+					companyId, groupKey);
 
 			Object returnObj = null;
 
