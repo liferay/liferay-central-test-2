@@ -1074,7 +1074,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  groupKey the group's key
-	 * @return the group with the groupKey and associated company, or
+	 * @return the group with the group key and associated company, or
 	 *         <code>null</code> if a matching group could not be found
 	 */
 	@Override
@@ -1218,7 +1218,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  groupKey the group's key
-	 * @return the group with the groupKey
+	 * @return the group with the group key
 	 * @throws PortalException if a matching group could not be found
 	 */
 	@Override
@@ -2013,7 +2013,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  groupKey the group's key
-	 * @return the group with the groupKey and associated company, or
+	 * @return the group with the group key and associated company, or
 	 *         <code>null</code> if a matching group could not be found
 	 */
 	@Override
@@ -2026,7 +2026,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  groupKey the group's key
-	 * @return the group with the groupKey and associated company
+	 * @return the group with the group key and associated company
 	 * @throws PortalException if a matching group could not be found
 	 */
 	@Override
