@@ -200,7 +200,7 @@
 					return fixJSON(errorMessage);
 				}
 
-				public String getRemoteGithubJenkinsUrl() {
+				public String getRemoteGithubJenkinsURL() {
 					JSONObject jsonObject = toJSONObject(project.getProperty("github.jenkins.url") + "/api/json");
 
 					JSONObject primaryViewJSONObject = jsonObject.get("primaryView");
@@ -294,7 +294,7 @@
 				String[] githubJenkinsJobInvocationUrlPaths = githubJenkinsJobInvocationUrlPathsString.split(" ");
 
 				for (String githubJenkinsJobInvocationUrlPath : githubJenkinsJobInvocationUrlPaths) {
-					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsUrl() + githubJenkinsJobInvocationUrlPath;
+					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationUrlPath;
 
 					sb.append("<li><a href=\\\"");
 					sb.append(remoteGithubJenkinsJobInvocationUrl);
@@ -329,7 +329,7 @@
 
 				for (String githubJenkinsFailureURLPath : githubJenkinsFailureURLPaths) {
 					String localGithubJenkinsFailureURL = project.getProperty("github.jenkins.url") + githubJenkinsFailureURLPath;
-					String remoteGithubJenkinsFailureURL = getRemoteGithubJenkinsUrl() + githubJenkinsFailureURLPath;
+					String remoteGithubJenkinsFailureURL = getRemoteGithubJenkinsURL() + githubJenkinsFailureURLPath;
 
 					JSONObject jsonObject = toJSONObject(localGithubJenkinsFailureURL + "/api/json");
 
@@ -417,7 +417,7 @@
 					return url;
 				}
 
-				public String getRemoteGithubJenkinsUrl() {
+				public String getRemoteGithubJenkinsURL() {
 					JSONObject jsonObject = toJSONObject(project.getProperty("github.jenkins.url") + "/api/json");
 
 					JSONObject primaryViewJSONObject = jsonObject.get("primaryView");
@@ -511,7 +511,7 @@
 				String[] githubJenkinsJobInvocationUrlPaths = githubJenkinsJobInvocationUrlPathsString.split(" ");
 
 				for (String githubJenkinsJobInvocationUrlPath : githubJenkinsJobInvocationUrlPaths) {
-					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsUrl() + githubJenkinsJobInvocationUrlPath;
+					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationUrlPath;
 
 					sb.append("<li><a href=\\\"");
 					sb.append(remoteGithubJenkinsJobInvocationUrl);
