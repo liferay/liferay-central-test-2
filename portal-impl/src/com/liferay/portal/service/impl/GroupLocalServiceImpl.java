@@ -686,7 +686,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 
-			if (group.getGroupKey().equals(GroupConstants.GUEST)) {
+			if (group.isGuest()) {
 				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 					group.getGroupId(), false);
 
