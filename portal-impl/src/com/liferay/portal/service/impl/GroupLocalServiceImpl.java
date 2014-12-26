@@ -1069,11 +1069,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the group with the matching groupKey by first searching the
+	 * Returns the group with the matching group key by first searching the
 	 * system groups and then using the finder cache.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  groupKey the group's key
+	 * @param  groupKey the group key
 	 * @return the group with the group key and associated company, or
 	 *         <code>null</code> if a matching group could not be found
 	 */
@@ -1214,10 +1214,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the group with the matching groupKey.
+	 * Returns the group with the matching group key.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  groupKey the group's key
+	 * @param  groupKey the group key
 	 * @return the group with the group key
 	 * @throws PortalException if a matching group could not be found
 	 */
@@ -2012,7 +2012,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * system groups and then using the finder cache.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  groupKey the group's key
+	 * @param  groupKey the group key
 	 * @return the group with the group key and associated company, or
 	 *         <code>null</code> if a matching group could not be found
 	 */
@@ -2025,7 +2025,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * Returns the group with the matching group key.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  groupKey the group's key
+	 * @param  groupKey the group key
 	 * @return the group with the group key and associated company
 	 * @throws PortalException if a matching group could not be found
 	 */
