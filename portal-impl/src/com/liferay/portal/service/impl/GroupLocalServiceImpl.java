@@ -3278,10 +3278,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String className = group.getClassName();
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
+		String groupKey = name;
 		friendlyURL = getFriendlyURL(
 			group.getCompanyId(), groupId, classNameId, classPK,
 			StringPool.BLANK, friendlyURL);
-		String groupKey = name;
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
 			validateGroupKey(
