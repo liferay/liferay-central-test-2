@@ -289,12 +289,12 @@
 				sb.append("<h1>See below links for more information.</h1>");
 				sb.append("<ul>");
 
-				String githubJenkinsJobInvocationUrlPathsString = project.getProperty("github.jenkins.job.invocation.url.paths");
+				String githubJenkinsJobInvocationURLPathsString = project.getProperty("github.jenkins.job.invocation.url.paths");
 
-				String[] githubJenkinsJobInvocationUrlPaths = githubJenkinsJobInvocationUrlPathsString.split(" ");
+				String[] githubJenkinsJobInvocationURLPaths = githubJenkinsJobInvocationURLPathsString.split(" ");
 
-				for (String githubJenkinsJobInvocationUrlPath : githubJenkinsJobInvocationUrlPaths) {
-					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationUrlPath;
+				for (String githubJenkinsJobInvocationURLPath : githubJenkinsJobInvocationURLPaths) {
+					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationURLPath;
 
 					sb.append("<li><a href=\\\"");
 					sb.append(remoteGithubJenkinsJobInvocationUrl);
@@ -506,12 +506,12 @@
 				sb.append("<h1>See below links for more information.</h1>");
 				sb.append("<ul>");
 
-				String githubJenkinsJobInvocationUrlPathsString = project.getProperty("github.jenkins.job.invocation.url.paths");
+				String githubJenkinsJobInvocationURLPathsString = project.getProperty("github.jenkins.job.invocation.url.paths");
 
-				String[] githubJenkinsJobInvocationUrlPaths = githubJenkinsJobInvocationUrlPathsString.split(" ");
+				String[] githubJenkinsJobInvocationURLPaths = githubJenkinsJobInvocationURLPathsString.split(" ");
 
-				for (String githubJenkinsJobInvocationUrlPath : githubJenkinsJobInvocationUrlPaths) {
-					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationUrlPath;
+				for (String githubJenkinsJobInvocationURLPath : githubJenkinsJobInvocationURLPaths) {
+					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationURLPath;
 
 					sb.append("<li><a href=\\\"");
 					sb.append(remoteGithubJenkinsJobInvocationUrl);
