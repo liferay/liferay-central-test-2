@@ -247,7 +247,7 @@ public class GroupImpl extends GroupBaseImpl {
 		else if (isUserPersonalSite()) {
 			name = LanguageUtil.get(locale, "user-personal-site");
 		}
-		else if (getGroupKey().equals(GroupConstants.GUEST)) {
+		else if (isGuest()) {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				getCompanyId());
 
