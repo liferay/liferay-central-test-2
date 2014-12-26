@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + AssetTagsPortletKeys.TAGS_CLOUD
+		"javax.portlet.name=" + AssetTagsPortletKeys.ASSET_TAGS_CLOUD
 	},
 	service = ConfigurationAction.class
 )

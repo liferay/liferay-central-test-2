@@ -41,7 +41,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + AssetTagsPortletKeys.TAGS_NAVIGATION
+		"javax.portlet.name=" + AssetTagsPortletKeys.ASSET_TAGS_NAVIGATION
 	},
 	service = TemplateHandler.class
 )
@@ -59,7 +59,7 @@ public class AssetTagsNavigationPortletDisplayTemplateHandler
 			"content.Language");
 
 		String portletTitle = PortalUtil.getPortletTitle(
-			AssetTagsPortletKeys.TAGS_NAVIGATION, resourceBundle);
+			AssetTagsPortletKeys.ASSET_TAGS_NAVIGATION, resourceBundle);
 
 		return portletTitle.concat(StringPool.SPACE).concat(
 			LanguageUtil.get(locale, "template"));
@@ -67,7 +67,7 @@ public class AssetTagsNavigationPortletDisplayTemplateHandler
 
 	@Override
 	public String getResourceName() {
-		return AssetTagsPortletKeys.TAGS_NAVIGATION;
+		return AssetTagsPortletKeys.ASSET_TAGS_NAVIGATION;
 	}
 
 	@Override
