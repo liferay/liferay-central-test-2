@@ -286,7 +286,7 @@
 					sb.append("</p>");
 				}
 
-				sb.append("<h1>See below links for more information.</h1>");
+				sb.append("<h1>See the following links for more information.</h1>");
 				sb.append("<ul>");
 
 				String githubJenkinsJobInvocationURLPathsString = project.getProperty("github.jenkins.job.invocation.url.paths");
@@ -503,7 +503,7 @@
 					sb.append("</p>");
 				}
 
-				sb.append("<h1>See below links for more information.</h1>");
+				sb.append("<h1>See the following links for more information.</h1>");
 				sb.append("<ul>");
 
 				String githubJenkinsJobInvocationURLPathsString = project.getProperty("github.jenkins.job.invocation.url.paths");
