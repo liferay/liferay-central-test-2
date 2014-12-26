@@ -294,12 +294,12 @@
 				String[] githubJenkinsJobInvocationURLPaths = githubJenkinsJobInvocationURLPathsString.split(" ");
 
 				for (String githubJenkinsJobInvocationURLPath : githubJenkinsJobInvocationURLPaths) {
-					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationURLPath;
+					String remoteGithubJenkinsJobInvocationURL = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationURLPath;
 
 					sb.append("<li><a href=\\\"");
-					sb.append(remoteGithubJenkinsJobInvocationUrl);
+					sb.append(remoteGithubJenkinsJobInvocationURL);
 					sb.append("\\\">");
-					sb.append(remoteGithubJenkinsJobInvocationUrl);
+					sb.append(remoteGithubJenkinsJobInvocationURL);
 					sb.append("</a></li>");
 				}
 
@@ -511,12 +511,12 @@
 				String[] githubJenkinsJobInvocationURLPaths = githubJenkinsJobInvocationURLPathsString.split(" ");
 
 				for (String githubJenkinsJobInvocationURLPath : githubJenkinsJobInvocationURLPaths) {
-					String remoteGithubJenkinsJobInvocationUrl = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationURLPath;
+					String remoteGithubJenkinsJobInvocationURL = getRemoteGithubJenkinsURL() + githubJenkinsJobInvocationURLPath;
 
 					sb.append("<li><a href=\\\"");
-					sb.append(remoteGithubJenkinsJobInvocationUrl);
+					sb.append(remoteGithubJenkinsJobInvocationURL);
 					sb.append("\\\">");
-					sb.append(remoteGithubJenkinsJobInvocationUrl);
+					sb.append(remoteGithubJenkinsJobInvocationURL);
 					sb.append("</a></li>");
 				}
 
