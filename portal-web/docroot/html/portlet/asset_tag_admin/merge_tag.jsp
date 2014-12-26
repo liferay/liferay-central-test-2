@@ -29,9 +29,9 @@ long[] mergeTagIds = StringUtil.split(ParamUtil.getString(renderRequest, "mergeT
 <portlet:actionURL name="mergeTag" var="mergeURL" />
 
 <aui:form action="<%= mergeURL %>" method="post" name="fm" onSubmit="event.preventDefault();">
-	<aui:input name="mergeTagIds" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="mvcPath" type="hidden" value="/html/portlet/asset_tag_admin/merge_tag.jsp" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="mergeTagIds" type="hidden" />
 
 	<div class="merge-tags">
 		<span class="merge-tags-label">

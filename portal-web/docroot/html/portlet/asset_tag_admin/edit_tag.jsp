@@ -70,8 +70,8 @@ else {
 <portlet:actionURL name="editTag" var="editTagURL" />
 
 <aui:form action="<%= editTagURL %>" method="post" name="fm">
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="mvcPath" type="hidden" value="/html/portlet/asset_tag_admin/edit_tag.jsp" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<liferay-ui:error exception="<%= AssetTagException.class %>">
 
