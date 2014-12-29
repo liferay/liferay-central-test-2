@@ -130,11 +130,19 @@ public class SharedSessionWrapper implements HttpSession {
 		return session.getSessionContext();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public Object getValue(String name) {
 		return getAttribute(name);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public String[] getValueNames() {
 		List<String> names = ListUtil.fromEnumeration(getAttributeNames());
@@ -156,6 +164,10 @@ public class SharedSessionWrapper implements HttpSession {
 		return session.isNew();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void putValue(String name, Object value) {
 		setAttribute(name, value);
@@ -168,6 +180,10 @@ public class SharedSessionWrapper implements HttpSession {
 		session.removeAttribute(name);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void removeValue(String name) {
 		removeAttribute(name);
