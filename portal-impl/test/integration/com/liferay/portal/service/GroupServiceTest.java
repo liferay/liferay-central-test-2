@@ -58,9 +58,11 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.util.test.BlogsTestUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -560,12 +562,17 @@ public class GroupServiceTest {
 		Layout layout = LayoutTestUtil.addLayout(group);
 
 		Assert.assertFalse(layout.hasScopeGroup());
+		
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+		
+		nameMap.put(
+			LocaleUtil.getDefault(), layout.getName(LocaleUtil.getDefault()));
 
 		Group scope = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			Layout.class.getName(), layout.getPlid(),
-			GroupConstants.DEFAULT_LIVE_GROUP_ID,
-			layout.getName(LocaleUtil.getDefault()), null, 0, true,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap,
+			(Map<Locale, String>)null, 0, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 
@@ -816,11 +823,16 @@ public class GroupServiceTest {
 
 			Layout scopeLayout = LayoutTestUtil.addLayout(group);
 
+			Map<Locale, String> nameMap = new HashMap<Locale, String>();
+			
+			nameMap.put(
+				LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
 			return GroupLocalServiceUtil.addGroup(
 				TestPropsValues.getUserId(),
 				GroupConstants.DEFAULT_PARENT_GROUP_ID, Layout.class.getName(),
 				scopeLayout.getPlid(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
-				RandomTestUtil.randomString(), null, 0, true,
+				nameMap, (Map<Locale, String>)null, 0, true,
 				GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false,
 				true, null);
 		}
