@@ -17,10 +17,8 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 
 import java.io.InputStream;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -269,6 +267,10 @@ public class LiferayServletContext implements ServletContext {
 		return _servletContext.getServerInfo();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public Servlet getServlet(String name) {
 		return null;
@@ -279,6 +281,10 @@ public class LiferayServletContext implements ServletContext {
 		return _servletContext.getServletContextName();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public Enumeration<String> getServletNames() {
 		return Collections.enumeration(new ArrayList<String>());
@@ -296,6 +302,10 @@ public class LiferayServletContext implements ServletContext {
 		return _servletContext.getServletRegistrations();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public Enumeration<Servlet> getServlets() {
 		return Collections.enumeration(new ArrayList<Servlet>());
@@ -306,6 +316,10 @@ public class LiferayServletContext implements ServletContext {
 		return _servletContext.getSessionCookieConfig();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void log(Exception exception, String message) {
 		_servletContext.log(message, exception);
