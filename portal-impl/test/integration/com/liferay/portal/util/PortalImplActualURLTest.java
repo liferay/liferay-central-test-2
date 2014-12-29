@@ -49,7 +49,6 @@ import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
@@ -109,13 +108,18 @@ public class PortalImplActualURLTest {
 
 	@Test
 	public void testJournalArticleFriendlyURL() throws Exception {
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(
+			LocaleUtil.getDefault(), "Test " + RandomTestUtil.nextInt());
+
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext();
 
 		_group = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			StringPool.BLANK, 0, GroupConstants.DEFAULT_LIVE_GROUP_ID,
-			"Test " + RandomTestUtil.nextInt(), StringPool.BLANK,
+			nameMap, RandomTestUtil.randomLocaleStringMap(),
 			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, StringPool.BLANK,
 			true, true, serviceContext);
