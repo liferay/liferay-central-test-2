@@ -229,13 +229,11 @@ public class GroupServiceTest {
 		groupParams.put("manualMembership", Boolean.TRUE);
 		groupParams.put("site", Boolean.TRUE);
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
 		Assert.assertEquals(
 			1,
 			GroupLocalServiceUtil.searchCount(
 				TestPropsValues.getCompanyId(), null,
-				group.getDescription(themeDisplay.getLocale()), groupParams));
+				group.getDescription(getLocale()), groupParams));
 	}
 
 	@Test
@@ -255,13 +253,11 @@ public class GroupServiceTest {
 		groupParams.put("manualMembership", Boolean.TRUE);
 		groupParams.put("site", Boolean.TRUE);
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
 		Assert.assertEquals(
 			1,
 			GroupLocalServiceUtil.searchCount(
 				TestPropsValues.getCompanyId(), null,
-				group.getDescription(themeDisplay.getLocale()), groupParams));
+				group.getDescription(getLocale()), groupParams));
 	}
 
 	@Test
@@ -275,13 +271,11 @@ public class GroupServiceTest {
 		groupParams.put("manualMembership", Boolean.TRUE);
 		groupParams.put("site", Boolean.TRUE);
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
 		Assert.assertEquals(
 			1,
 			GroupLocalServiceUtil.searchCount(
 				TestPropsValues.getCompanyId(), null,
-				group.getName(themeDisplay.getLocale()), groupParams));
+				group.getName(getLocale()), groupParams));
 	}
 
 	@Test
@@ -301,13 +295,11 @@ public class GroupServiceTest {
 		groupParams.put("manualMembership", Boolean.TRUE);
 		groupParams.put("site", Boolean.TRUE);
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
 		Assert.assertEquals(
 			1,
 			GroupLocalServiceUtil.searchCount(
 				TestPropsValues.getCompanyId(), null,
-				group.getName(themeDisplay.getLocale()), groupParams));
+				group.getName(getLocale()), groupParams));
 	}
 
 	@Test
@@ -442,7 +434,7 @@ public class GroupServiceTest {
 			scopeDescriptiveName.equals(
 				group.getName(themeDisplay.getLocale())));
 	}
-
+	
 	@Test
 	public void testGroupIsChildSiteScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
@@ -842,6 +834,12 @@ public class GroupServiceTest {
 		else {
 			return GroupTestUtil.addGroup();
 		}
+	}
+
+	protected Locale getLocale() {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+	
+		return themeDisplay.getLocale();
 	}
 
 	protected void givePermissionToManageSubsites(User user, Group group)
