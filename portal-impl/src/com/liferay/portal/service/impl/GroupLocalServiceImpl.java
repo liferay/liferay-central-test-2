@@ -1134,9 +1134,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Group fetchUserGroup(long companyId, long userId)
-		throws PortalException {
-
+	public Group fetchUserGroup(long companyId, long userId) {
 		long classNameId = classNameLocalService.getClassNameId(User.class);
 
 		return groupPersistence.fetchByC_C_C(companyId, classNameId, userId);
