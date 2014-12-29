@@ -662,7 +662,7 @@
 				<file-name>lib/development/pmd-core.jar</file-name>
 				<version>5.2.3</version>
 				<project-name>PMD</project-name>
-				<project-url>http://pmd.sourceforge.net/</project-url>
+				<project-url>http://pmd.sourceforge.net</project-url>
 				<licenses>
 					<license>
 						<license-name>BSD Style License</license-name>
@@ -674,7 +674,7 @@
 				<file-name>lib/development/pmd-java.jar</file-name>
 				<version>5.2.3</version>
 				<project-name>PMD</project-name>
-				<project-url>http://pmd.sourceforge.net/</project-url>
+				<project-url>http://pmd.sourceforge.net</project-url>
 				<licenses>
 					<license>
 						<license-name>BSD Style License</license-name>
@@ -810,7 +810,7 @@
 				<file-name>lib/development/saxon.jar</file-name>
 				<version>9.1.0.8</version>
 				<project-name>Saxon-B</project-name>
-				<project-url>http://saxon.sourceforge.net//</project-url>
+				<project-url>http://saxon.sourceforge.net</project-url>
 				<licenses>
 					<license>
 						<license-name>MPL 1.0</license-name>
