@@ -44,9 +44,7 @@ import java.util.ResourceBundle;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-
 import javax.servlet.http.HttpServletRequest;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -580,6 +578,10 @@ public class LocalizationImpl implements Localization {
 		return name.concat(StringPool.UNDERLINE).concat(languageId);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public Map<Locale, String> getLocalizedParameter(
 		PortletRequest portletRequest, String parameter) {
@@ -587,6 +589,10 @@ public class LocalizationImpl implements Localization {
 		return getLocalizationMap(portletRequest, parameter);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public String getPreferencesKey(String key, String languageId) {
 		String defaultLanguageId = LocaleUtil.toLanguageId(

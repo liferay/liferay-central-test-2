@@ -208,6 +208,10 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			userId, fileEntryId, version, serviceContext);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void updateAsset(
 		long userId, FileEntry fileEntry, FileVersion fileVersion,

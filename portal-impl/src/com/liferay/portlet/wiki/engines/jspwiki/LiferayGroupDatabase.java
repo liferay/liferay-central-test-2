@@ -19,7 +19,6 @@ import com.ecyrd.jspwiki.auth.authorize.Group;
 import com.ecyrd.jspwiki.auth.authorize.GroupDatabase;
 
 import java.security.Principal;
-
 import java.util.Properties;
 
 /**
@@ -27,6 +26,10 @@ import java.util.Properties;
  */
 public class LiferayGroupDatabase implements GroupDatabase {
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void commit() {
 	}

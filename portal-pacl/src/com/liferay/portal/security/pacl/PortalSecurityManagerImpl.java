@@ -90,9 +90,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.ReflectPermission;
-
 import java.net.SocketPermission;
-
 import java.security.AccessControlContext;
 import java.security.AccessController;
 import java.security.Permission;
@@ -101,7 +99,6 @@ import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.security.ProtectionDomain;
-
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -111,16 +108,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.ccpp.Profile;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.naming.spi.InitialContextFactoryBuilder;
 import javax.naming.spi.NamingManager;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-
 import javax.sql.DataSource;
 
 import org.springframework.aop.framework.AdvisedSupport;
@@ -216,6 +210,10 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void checkMemberAccess(Class<?> clazz, int accessibility) {
 		if (clazz == null) {

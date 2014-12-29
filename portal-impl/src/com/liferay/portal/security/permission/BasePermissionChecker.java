@@ -166,10 +166,18 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 		return signedIn;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void resetValues() {
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void setValues(PortletRequest portletRequest) {
 	}

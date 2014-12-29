@@ -47,7 +47,6 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.File;
 import java.io.InputStream;
-
 import java.util.List;
 import java.util.Map;
 
@@ -299,6 +298,10 @@ public class LiferayLocalRepository
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,

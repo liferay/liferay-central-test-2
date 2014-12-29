@@ -21,7 +21,6 @@ import com.liferay.util.servlet.NullServletOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-
 import java.util.Locale;
 
 import javax.portlet.ActionResponse;
@@ -29,7 +28,6 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.ResourceResponse;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -90,6 +88,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		return false;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public String encodeRedirectUrl(String url) {
 		return null;
@@ -100,6 +102,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		return null;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public String encodeUrl(String url) {
 		return _portletResponse.encodeURL(url);
@@ -362,6 +368,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void setStatus(int status, String message) {
 		setStatus(status);
