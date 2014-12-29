@@ -12,15 +12,14 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.util.liferayselenium;
+package com.liferay.poshi.runner.selenium;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.OSDetector;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portalweb.util.TestPropsValues;
+import com.liferay.poshi.runner.util.GetterUtil;
+import com.liferay.poshi.runner.util.OSDetector;
+import com.liferay.poshi.runner.util.PropsValues;
+import com.liferay.poshi.runner.util.StringPool;
+import com.liferay.poshi.runner.util.StringUtil;
+import com.liferay.poshi.runner.util.Validator;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -61,7 +60,7 @@ public abstract class BaseWebDriverImpl
 				_sikuliImagesDirName, "linux", "windows");
 		}
 
-		if (!TestPropsValues.MOBILE_DEVICE_ENABLED) {
+		if (!PropsValues.MOBILE_DEVICE_ENABLED) {
 			WebDriver.Options options = webDriver.manage();
 
 			WebDriver.Window window = options.window();
@@ -151,7 +150,7 @@ public abstract class BaseWebDriverImpl
 
 	@Override
 	public void assertLiferayErrors() throws Exception {
-		if (!TestPropsValues.TEST_ASSERT_LIFERAY_ERRORS) {
+		if (!PropsValues.TEST_ASSERT_LIFERAY_ERRORS) {
 			return;
 		}
 
@@ -350,7 +349,7 @@ public abstract class BaseWebDriverImpl
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		char[] chars = text.toCharArray();
 
@@ -584,7 +583,7 @@ public abstract class BaseWebDriverImpl
 
 	@Override
 	public void saveScreenshot() throws Exception {
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
+		if (!PropsValues.SAVE_SCREENSHOT) {
 			return;
 		}
 
@@ -599,7 +598,7 @@ public abstract class BaseWebDriverImpl
 	public void saveScreenshotBeforeAction(boolean actionFailed)
 		throws Exception {
 
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
+		if (!PropsValues.SAVE_SCREENSHOT) {
 			return;
 		}
 
@@ -831,8 +830,8 @@ public abstract class BaseWebDriverImpl
 	@Override
 	public void waitForConfirmation(String pattern) throws Exception {
 		int timeout =
-			TestPropsValues.TIMEOUT_EXPLICIT_WAIT /
-				TestPropsValues.TIMEOUT_IMPLICIT_WAIT;
+			PropsValues.TIMEOUT_EXPLICIT_WAIT /
+				PropsValues.TIMEOUT_IMPLICIT_WAIT;
 
 		for (int second = 0;; second++) {
 			if (second >= timeout) {
@@ -938,7 +937,7 @@ public abstract class BaseWebDriverImpl
 	private String _clipBoard = "";
 	private String _dependenciesDirName =
 		"portal-web//test//functional//com//liferay//portalweb//dependencies//";
-	private String _outputDirName = TestPropsValues.OUTPUT_DIR_NAME;
+	private String _outputDirName = PropsValues.OUTPUT_DIR_NAME;
 	private String _primaryTestSuiteName;
 	private String _projectDirName;
 	private String _sikuliImagesDirName =

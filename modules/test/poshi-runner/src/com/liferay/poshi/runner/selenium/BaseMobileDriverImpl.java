@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.util.liferayselenium;
+package com.liferay.poshi.runner.selenium;
 
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portalweb.util.TestPropsValues;
+import com.liferay.poshi.runner.util.PropsValues;
 
 import io.appium.java_client.MobileDriver;
 
@@ -112,7 +111,7 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public void assertLiferayErrors() throws Exception {
-		if (!TestPropsValues.TEST_ASSERT_LIFERAY_ERRORS) {
+		if (!PropsValues.TEST_ASSERT_LIFERAY_ERRORS) {
 			return;
 		}
 
@@ -472,7 +471,7 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public void saveScreenshot() throws Exception {
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
+		if (!PropsValues.SAVE_SCREENSHOT) {
 			return;
 		}
 
@@ -488,7 +487,7 @@ public abstract class BaseMobileDriverImpl
 	public void saveScreenshotBeforeAction(boolean actionFailed)
 		throws Exception {
 
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
+		if (!PropsValues.SAVE_SCREENSHOT) {
 			return;
 		}
 
@@ -660,7 +659,7 @@ public abstract class BaseMobileDriverImpl
 		JavascriptExecutor javascriptExecutor =
 			(JavascriptExecutor)wrappedWebDriver;
 
-		StringBundler sb = new StringBundler(5);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("YUI().use('node-event-simulate', function(Y) {");
 		sb.append("var node = Y.one('");
@@ -808,7 +807,7 @@ public abstract class BaseMobileDriverImpl
 
 	private String _dependenciesDirName =
 		"portal-web//test//functional//com//liferay//portalweb//dependencies//";
-	private String _outputDirName = TestPropsValues.OUTPUT_DIR_NAME;
+	private String _outputDirName = PropsValues.OUTPUT_DIR_NAME;
 	private String _primaryTestSuiteName;
 	private String _projectDirName;
 	private String _sikuliImagesDirName =
