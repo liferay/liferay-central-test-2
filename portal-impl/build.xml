@@ -1589,10 +1589,10 @@ public class Creole10Parser]]></replacevalue>
 		<taskdef name="pmd" classpathref="project.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
 
 		<pmd shortFilenames="true">
-			<sourceLanguage name="java" version="${ant.build.javac.source}" />
+			<fileset dir="${project.dir}" excludes="${pmd.java.excludes}" includes="${pmd.java.includes}" />
+			<formatter toConsole="true" type="text" />
 			<ruleset>${pmd.java.ruleset}</ruleset>
-			<formatter type="text" toConsole="true" />
-			<fileset dir="${project.dir}" includes="${pmd.java.includes}" excludes="${pmd.java.excludes}" />
+			<sourceLanguage name="java" version="${ant.build.javac.source}" />
 		</pmd>
 	</target>
 
