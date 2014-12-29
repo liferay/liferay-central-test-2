@@ -91,6 +91,15 @@ public class GroupTestUtil {
 			return group;
 		}
 
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(LocaleUtil.getDefault(), name);
+
+		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
+		descriptionMap.put(
+			LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
 		int type = GroupConstants.TYPE_SITE_OPEN;
 		String friendlyURL =
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
@@ -99,16 +108,6 @@ public class GroupTestUtil {
 		boolean manualMembership = true;
 		int membershipRestriction =
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION;
-
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, RandomTestUtil.randomString());
 
 		return GroupLocalServiceUtil.addGroup(
 			userId, parentGroupId, null, 0,
@@ -132,6 +131,15 @@ public class GroupTestUtil {
 			return group;
 		}
 
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(LocaleUtil.getDefault(), name);
+
+		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
+		descriptionMap.put(
+			LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
 		int type = GroupConstants.TYPE_SITE_OPEN;
 		String friendlyURL =
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
@@ -144,16 +152,6 @@ public class GroupTestUtil {
 		if (serviceContext == null) {
 			serviceContext = ServiceContextTestUtil.getServiceContext();
 		}
-
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, RandomTestUtil.randomString());
 
 		return GroupServiceUtil.addGroup(
 			parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap,

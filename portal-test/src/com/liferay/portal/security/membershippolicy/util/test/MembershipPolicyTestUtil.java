@@ -72,18 +72,18 @@ public class MembershipPolicyTestUtil {
 
 	public static Group addGroup() throws Exception {
 		String name = RandomTestUtil.randomString();
-		String friendlyURL =
-			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
-
-		Locale locale = LocaleUtil.getDefault();
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(locale, name);
+		nameMap.put(LocaleUtil.getDefault(), name);
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(locale, "This is a test group");
+		descriptionMap.put(
+			LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
+		String friendlyURL =
+			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
 
 		return GroupServiceUtil.addGroup(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID,
