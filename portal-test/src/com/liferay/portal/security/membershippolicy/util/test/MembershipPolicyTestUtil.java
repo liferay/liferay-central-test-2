@@ -77,17 +77,13 @@ public class MembershipPolicyTestUtil {
 
 		nameMap.put(LocaleUtil.getDefault(), name);
 
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(
-			LocaleUtil.getDefault(), RandomTestUtil.randomString());
-
 		String friendlyURL =
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
 
 		return GroupServiceUtil.addGroup(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID,
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, descriptionMap,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap,
+			RandomTestUtil.randomLocaleStringMap(),
 			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, true,
 			true, populateServiceContext(Group.class, true));

@@ -109,17 +109,13 @@ public class PortalImplActualURLTest {
 
 	@Test
 	public void testJournalArticleFriendlyURL() throws Exception {
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(
-			LocaleUtil.getDefault(), "Test " + RandomTestUtil.nextInt());
-
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext();
 
 		_group = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
-			StringPool.BLANK, 0, GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap,
+			StringPool.BLANK, 0, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(),
 			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, StringPool.BLANK,
