@@ -21,6 +21,7 @@ import com.liferay.util.servlet.NullServletOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+
 import java.util.Locale;
 
 import javax.portlet.ActionResponse;
@@ -28,6 +29,7 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.ResourceResponse;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -89,7 +91,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -103,7 +105,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -369,7 +371,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

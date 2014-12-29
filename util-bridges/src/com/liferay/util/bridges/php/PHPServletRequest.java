@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -123,7 +124,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

@@ -44,7 +44,9 @@ import java.util.ResourceBundle;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
+
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -579,7 +581,7 @@ public class LocalizationImpl implements Localization {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -590,7 +592,7 @@ public class LocalizationImpl implements Localization {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

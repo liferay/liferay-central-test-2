@@ -131,7 +131,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -140,7 +140,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -165,7 +165,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -181,7 +181,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

@@ -47,6 +47,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.File;
 import java.io.InputStream;
+
 import java.util.List;
 import java.util.Map;
 
@@ -299,7 +300,7 @@ public class LiferayLocalRepository
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

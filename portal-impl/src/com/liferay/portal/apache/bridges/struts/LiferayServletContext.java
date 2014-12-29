@@ -17,8 +17,10 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 
 import java.io.InputStream;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -268,7 +270,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -282,7 +284,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -303,7 +305,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
@@ -317,7 +319,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

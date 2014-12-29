@@ -209,7 +209,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
