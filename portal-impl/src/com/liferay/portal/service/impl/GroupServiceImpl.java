@@ -48,7 +48,6 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -158,20 +157,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return addGroup(
-			parentGroupId, liveGroupId, nameMap, descriptionMap, type,
-			manualMembership, membershipRestriction, friendlyURL, site, false,
-			active, serviceContext);
+			parentGroupId, liveGroupId, getLocalizationMap(name),
+			getLocalizationMap(description), type, manualMembership,
+			membershipRestriction, friendlyURL, site, false, active,
+			serviceContext);
 	}
 
 	/**
@@ -207,21 +197,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return addGroup(
-			parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap,
-			descriptionMap, type, true,
-			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, site,
-			active, serviceContext);
+			parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			getLocalizationMap(name), getLocalizationMap(description), type,
+			true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL,
+			site, active, serviceContext);
 	}
 
 	/**
@@ -1194,20 +1174,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return updateGroup(
-			groupId, parentGroupId, nameMap, descriptionMap, type,
-			manualMembership, membershipRestriction, friendlyURL,
-			inheritContent, active, serviceContext);
+			groupId, parentGroupId, getLocalizationMap(name),
+			getLocalizationMap(description), type, manualMembership,
+			membershipRestriction, friendlyURL, inheritContent, active,
+			serviceContext);
 	}
 
 	/**
@@ -1283,6 +1254,14 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		}
 
 		return filteredGroups;
+	}
+
+	protected Map<Locale, String> getLocalizationMap(String value) {
+		Map<Locale, String> map = new HashMap<Locale, String>();
+	
+		map.put(LocaleUtil.getDefault(), value);
+		
+		return map;
 	}
 
 }

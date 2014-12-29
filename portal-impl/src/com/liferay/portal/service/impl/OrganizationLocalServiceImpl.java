@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -74,7 +73,6 @@ import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -83,7 +81,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -299,14 +296,10 @@ public class OrganizationLocalServiceImpl
 			}
 		}
 
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(LocaleUtil.getDefault(), name);
-
 		Group group = groupLocalService.addGroup(
 			userId, parentGroupId, Organization.class.getName(), organizationId,
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, null,
-			GroupConstants.TYPE_SITE_PRIVATE, false,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, getLocalizationMap(name),
+			null, GroupConstants.TYPE_SITE_PRIVATE, false,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, site, true,
 			null);
 
@@ -1876,12 +1869,8 @@ public class OrganizationLocalServiceImpl
 		}
 
 		if (createSite || !oldName.equals(name) || organizationGroup) {
-			Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-			nameMap.put(LocaleUtil.getDefault(), name);
-
 			groupLocalService.updateGroup(
-				group.getGroupId(), parentGroupId, nameMap,
+				group.getGroupId(), parentGroupId, getLocalizationMap(name),
 				group.getDescriptionMap(), group.getType(),
 				group.isManualMembership(), group.getMembershipRestriction(),
 				group.getFriendlyURL(), group.isInheritContent(),

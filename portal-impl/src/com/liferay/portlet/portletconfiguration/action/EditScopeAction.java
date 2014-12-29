@@ -177,9 +177,9 @@ public class EditScopeAction extends PortletAction {
 					layout.isPrivateLayout());
 
 			if (!scopeLayout.hasScopeGroup()) {
-				String name = String.valueOf(scopeLayout.getPlid());
-
 				Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+				String name = String.valueOf(scopeLayout.getPlid());
 
 				nameMap.put(LocaleUtil.getDefault(), name);
 

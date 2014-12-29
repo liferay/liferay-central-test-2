@@ -111,7 +111,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -226,6 +225,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		className = GetterUtil.getString(className);
 		long classNameId = classNameLocalService.getClassNameId(className);
+
 		String groupKey = StringPool.BLANK;
 		String friendlyName = StringPool.BLANK;
 
@@ -460,22 +460,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return addGroup(
-			userId, parentGroupId, className, classPK, liveGroupId, nameMap,
-			descriptionMap, type, manualMembership, membershipRestriction,
-			friendlyURL, site, false, active, serviceContext);
+			userId, parentGroupId, className, classPK, liveGroupId,
+			getLocalizationMap(name), getLocalizationMap(description), type,
+			manualMembership, membershipRestriction, friendlyURL, site, false,
+			active, serviceContext);
 	}
-
+	
 	/**
 	 * Adds the group using the default live group.
 	 *
@@ -511,21 +502,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			boolean site, boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return addGroup(
 			userId, parentGroupId, className, classPK,
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, descriptionMap, type,
-			true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL,
-			site, active, serviceContext);
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, getLocalizationMap(name),
+			getLocalizationMap(description), type, true,
+			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, site,
+			active, serviceContext);
 	}
 
 	/**
@@ -564,19 +546,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			boolean site, boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return addGroup(
 			userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, className, classPK,
-			liveGroupId, nameMap, descriptionMap, type, true,
+			liveGroupId, getLocalizationMap(name),
+			getLocalizationMap(description), type, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, site,
 			active, serviceContext);
 	}
@@ -615,21 +588,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return addGroup(
 			userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, className, classPK,
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, descriptionMap, type,
-			true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL,
-			site, active, serviceContext);
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, getLocalizationMap(name),
+			getLocalizationMap(description), type, true,
+			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, site,
+			active, serviceContext);
 	}
 
 	/**
@@ -679,16 +643,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (count == 0) {
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
-			Locale locale = LocaleUtil.getDefault();
-
-			Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-			nameMap.put(locale, GroupConstants.GLOBAL);
-
 			groupLocalService.addGroup(
 				defaultUserId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
 				Company.class.getName(), companyId,
-				GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, null, 0, true,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID,
+				getLocalizationMap(GroupConstants.GLOBAL), null, 0, true,
 				GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,
 				GroupConstants.GLOBAL_FRIENDLY_URL, true, true, null);
 		}
@@ -749,16 +708,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					site = false;
 				}
 
-				Locale locale = LocaleUtil.getDefault();
-
-				Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-				nameMap.put(locale, groupKey);
-
 				group = groupLocalService.addGroup(
 					defaultUserId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
 					className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
-					nameMap, null, type, true,
+					getLocalizationMap(groupKey), null, type, true,
 					GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL,
 					site, true, null);
 
@@ -3343,6 +3296,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String className = group.getClassName();
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
+
 		String groupKey = StringPool.BLANK;
 
 		if (nameMap != null) {
@@ -3465,20 +3419,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
 		return updateGroup(
-			groupId, parentGroupId, nameMap, descriptionMap, type,
-			manualMembership, membershipRestriction, friendlyURL,
-			inheritContent, active, serviceContext);
+			groupId, parentGroupId, getLocalizationMap(name),
+			getLocalizationMap(description), type, manualMembership,
+			membershipRestriction, friendlyURL, inheritContent, active,
+			serviceContext);
 	}
 
 	/**
