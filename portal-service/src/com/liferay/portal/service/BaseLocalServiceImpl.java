@@ -14,11 +14,11 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import com.liferay.portal.kernel.util.LocaleUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,9 +33,9 @@ public abstract class BaseLocalServiceImpl implements BaseLocalService {
 
 	protected Map<Locale, String> getLocalizationMap(String value) {
 		Map<Locale, String> map = new HashMap<Locale, String>();
-	
+
 		map.put(LocaleUtil.getDefault(), value);
-		
+
 		return map;
 	}
 

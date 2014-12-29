@@ -111,6 +111,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -466,7 +467,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			manualMembership, membershipRestriction, friendlyURL, site, false,
 			active, serviceContext);
 	}
-	
+
 	/**
 	 * Adds the group using the default live group.
 	 *

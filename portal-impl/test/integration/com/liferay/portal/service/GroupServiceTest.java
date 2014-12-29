@@ -436,7 +436,7 @@ public class GroupServiceTest {
 			scopeDescriptiveName.equals(
 				group.getName(themeDisplay.getLocale())));
 	}
-	
+
 	@Test
 	public void testGroupIsChildSiteScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
@@ -562,9 +562,9 @@ public class GroupServiceTest {
 		Layout layout = LayoutTestUtil.addLayout(group);
 
 		Assert.assertFalse(layout.hasScopeGroup());
-		
+
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-		
+
 		nameMap.put(
 			LocaleUtil.getDefault(), layout.getName(LocaleUtil.getDefault()));
 
@@ -824,9 +824,8 @@ public class GroupServiceTest {
 			Layout scopeLayout = LayoutTestUtil.addLayout(group);
 
 			Map<Locale, String> nameMap = new HashMap<Locale, String>();
-			
-			nameMap.put(
-				LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
+			nameMap.put(LocaleUtil.getDefault(), RandomTestUtil.randomString());
 
 			return GroupLocalServiceUtil.addGroup(
 				TestPropsValues.getUserId(),
@@ -850,7 +849,7 @@ public class GroupServiceTest {
 
 	protected Locale getLocale() {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
-	
+
 		return themeDisplay.getLocale();
 	}
 

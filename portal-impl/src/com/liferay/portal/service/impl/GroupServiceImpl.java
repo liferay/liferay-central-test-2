@@ -48,6 +48,7 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1258,9 +1259,9 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	protected Map<Locale, String> getLocalizationMap(String value) {
 		Map<Locale, String> map = new HashMap<Locale, String>();
-	
+
 		map.put(LocaleUtil.getDefault(), value);
-		
+
 		return map;
 	}
 
