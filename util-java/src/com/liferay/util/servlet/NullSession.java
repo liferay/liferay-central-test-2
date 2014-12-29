@@ -88,11 +88,19 @@ public class NullSession implements HttpSession {
 		return null;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public Object getValue(String name) {
 		return getAttribute(name);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public String[] getValueNames() {
 		List<String> names = ListUtil.fromEnumeration(getAttributeNames());
@@ -110,6 +118,10 @@ public class NullSession implements HttpSession {
 		return _new;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void putValue(String name, Object value) {
 		setAttribute(name, value);
@@ -120,6 +132,10 @@ public class NullSession implements HttpSession {
 		_attributes.remove(name);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
 	@Override
 	public void removeValue(String name) {
 		removeAttribute(name);

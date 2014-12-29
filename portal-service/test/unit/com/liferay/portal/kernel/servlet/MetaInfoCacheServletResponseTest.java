@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -465,6 +464,10 @@ public class MetaInfoCacheServletResponseTest {
 					statusReference.set(status);
 				}
 
+				/**
+				 * @deprecated
+				 */
+				@Deprecated
 				@Override
 				public void setStatus(int status, String message) {
 					statusReference.set(status);
@@ -1219,6 +1222,10 @@ public class MetaInfoCacheServletResponseTest {
 				statusReference.set(status);
 			}
 
+			/**
+			 * @deprecated
+			 */
+			@Deprecated
 			@Override
 			public void setStatus(int status, String message) {
 				statusReference.set(status);
@@ -1380,6 +1387,10 @@ public class MetaInfoCacheServletResponseTest {
 					statusReference.set(status);
 				}
 
+				/**
+				 * @deprecated
+				 */
+				@Deprecated
 				@Override
 				public void setStatus(int status, String message) {
 					statusReference.set(status);
