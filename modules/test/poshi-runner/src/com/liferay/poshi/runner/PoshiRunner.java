@@ -56,9 +56,13 @@ public class PoshiRunner extends TestCase {
 		LiferaySelenium liferaySelenium = SeleniumUtil.getSelenium();
 
 		liferaySelenium.open("http://www.google.com/");
+
 		liferaySelenium.waitForVisible("//input[@id='gbqfq']");
+
 		liferaySelenium.type("//input[@id='gbqfq']", "Liferay");
+
 		liferaySelenium.waitForTextPresent("Liferay");
+
 		liferaySelenium.assertTextPresent("Liferay");
 	}
 
