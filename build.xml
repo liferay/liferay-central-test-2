@@ -71,7 +71,7 @@
 	</target>
 
 	<target name="clean">
-		<parallel failonany="true" threadcount="${ant.parallel.thread.count}">
+		<parallel failonany="true" threadcount="${parallel.thread.count}">
 			<ant dir="benchmarks" target="clean" inheritAll="false" />
 
 			<ant dir="classes" target="clean" inheritAll="false" />
