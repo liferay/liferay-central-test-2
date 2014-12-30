@@ -12,37 +12,20 @@
  * details.
  */
 
-package com.liferay.portalweb.util;
+package com.liferay.poshi.runner.selenium;
 
-import com.liferay.portal.kernel.util.ProxyUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portalweb.portal.util.liferayselenium.AppiumMobileDriverImpl;
-import com.liferay.portalweb.portal.util.liferayselenium.ChromeWebDriverImpl;
-import com.liferay.portalweb.portal.util.liferayselenium.DefaultSeleniumImpl;
-import com.liferay.portalweb.portal.util.liferayselenium.FirefoxWebDriverImpl;
-import com.liferay.portalweb.portal.util.liferayselenium.InternetExplorerWebDriverImpl;
-import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
-import com.liferay.portalweb.portal.util.liferayselenium.SafariWebDriverImpl;
-import com.liferay.portalweb.util.logger.LoggerHandler;
-
-import com.thoughtworks.selenium.Selenium;
+import com.liferay.poshi.runner.util.PropsValues;
+import com.liferay.poshi.runner.util.StringPool;
 
 import java.io.File;
-
-import org.openqa.selenium.WebDriver;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class SeleniumUtil extends TestPropsValues {
+public class SeleniumUtil extends PropsValues {
 
 	public static LiferaySelenium getSelenium() {
 		return _instance._getSelenium();
-	}
-
-	public static String getTimestamp() {
-		return _instance._getTimestamp();
 	}
 
 	public static void startSelenium() {
@@ -53,20 +36,12 @@ public class SeleniumUtil extends TestPropsValues {
 		_instance._stopSelenium();
 	}
 
-	private SeleniumUtil() {
-		_timestamp = Time.getTimestamp();
-	}
-
 	private LiferaySelenium _getSelenium() {
 		if (_selenium == null) {
 			_startSelenium();
 		}
 
 		return _selenium;
-	}
-
-	private String _getTimestamp() {
-		return _timestamp;
 	}
 
 	private void _startSelenium() {
@@ -83,92 +58,38 @@ public class SeleniumUtil extends TestPropsValues {
 			portalURL = "http://localhost:8180/console";
 		}
 
-		if (SELENIUM_IMPLEMENTATION.equals(Selenium.class.getName())) {
-			LiferaySelenium liferaySelenium = new DefaultSeleniumImpl(
-				projectDir, portalURL);
-
-			Class<?> clazz = getClass();
-
-			liferaySelenium.setContext(clazz.getName());
-
-			if (SELENIUM_LOGGER_ENABLED) {
-				_selenium = _wrapWithLoggerHandler(liferaySelenium);
-			}
-			else {
-				_selenium = liferaySelenium;
-			}
+		if (MOBILE_DEVICE_ENABLED) {
+			_selenium = new AppiumMobileDriverImpl(projectDir, portalURL);
 		}
-		else if (SELENIUM_IMPLEMENTATION.equals(WebDriver.class.getName())) {
-			if (MOBILE_DEVICE_ENABLED) {
-				if (SELENIUM_LOGGER_ENABLED) {
-					_selenium = _wrapWithLoggerHandler(
-						new AppiumMobileDriverImpl(projectDir, portalURL));
-				}
-				else {
-					_selenium = new AppiumMobileDriverImpl(
-						projectDir, portalURL);
-				}
+		else {
+			if (BROWSER_TYPE.equals("*chrome") ||
+				BROWSER_TYPE.equals("*firefox")) {
+
+				_selenium = new FirefoxWebDriverImpl(projectDir, portalURL);
+			}
+			else if (BROWSER_TYPE.equals("*googlechrome")) {
+				System.setProperty(
+					"webdriver.chrome.driver",
+					SELENIUM_EXECUTABLE_DIR_NAME + "\\chromedriver.exe");
+
+				_selenium = new ChromeWebDriverImpl(projectDir, portalURL);
+			}
+			else if (BROWSER_TYPE.equals("*iehta") ||
+					 BROWSER_TYPE.equals("*iexplore")) {
+
+				System.setProperty(
+					"webdriver.ie.driver",
+					SELENIUM_EXECUTABLE_DIR_NAME + "\\IEDriverServer.exe");
+
+				_selenium = new InternetExplorerWebDriverImpl(
+					projectDir, portalURL);
+			}
+			else if (BROWSER_TYPE.equals("*safari")) {
+				_selenium = new SafariWebDriverImpl(projectDir, portalURL);
 			}
 			else {
-				if (BROWSER_TYPE.equals("*chrome") ||
-					BROWSER_TYPE.equals("*firefox")) {
-
-					if (SELENIUM_LOGGER_ENABLED) {
-						_selenium = _wrapWithLoggerHandler(
-							new FirefoxWebDriverImpl(projectDir, portalURL));
-					}
-					else {
-						_selenium = new FirefoxWebDriverImpl(
-							projectDir, portalURL);
-					}
-				}
-				else if (BROWSER_TYPE.equals("*googlechrome")) {
-					System.setProperty(
-						"webdriver.chrome.driver",
-						TestPropsValues.SELENIUM_EXECUTABLE_DIR_NAME +
-							"\\chromedriver.exe");
-
-					if (SELENIUM_LOGGER_ENABLED) {
-						_selenium = _wrapWithLoggerHandler(
-							new ChromeWebDriverImpl(projectDir, portalURL));
-					}
-					else {
-						_selenium = new ChromeWebDriverImpl(
-							projectDir, portalURL);
-					}
-				}
-				else if (BROWSER_TYPE.equals("*iehta") ||
-						 BROWSER_TYPE.equals("*iexplore")) {
-
-					System.setProperty(
-						"webdriver.ie.driver",
-						TestPropsValues.SELENIUM_EXECUTABLE_DIR_NAME +
-							"\\IEDriverServer.exe");
-
-					if (SELENIUM_LOGGER_ENABLED) {
-						_selenium = _wrapWithLoggerHandler(
-							new InternetExplorerWebDriverImpl(
-								projectDir, portalURL));
-					}
-					else {
-						_selenium = new InternetExplorerWebDriverImpl(
-							projectDir, portalURL);
-					}
-				}
-				else if (BROWSER_TYPE.equals("*safari")) {
-					if (SELENIUM_LOGGER_ENABLED) {
-						_selenium = _wrapWithLoggerHandler(
-							new SafariWebDriverImpl(projectDir, portalURL));
-					}
-					else {
-						_selenium = new SafariWebDriverImpl(
-							projectDir, portalURL);
-					}
-				}
-				else {
-					throw new RuntimeException(
-						"Invalid browser type " + BROWSER_TYPE);
-				}
+				throw new RuntimeException(
+					"Invalid browser type " + BROWSER_TYPE);
 			}
 		}
 	}
@@ -183,21 +104,8 @@ public class SeleniumUtil extends TestPropsValues {
 		_selenium = null;
 	}
 
-	private LiferaySelenium _wrapWithLoggerHandler(
-		LiferaySelenium liferaySelenium) {
-
-		Class<?> clazz = getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
-
-		return (LiferaySelenium)ProxyUtil.newProxyInstance(
-			classLoader, new Class<?>[] {LiferaySelenium.class},
-			new LoggerHandler(liferaySelenium));
-	}
-
 	private static final SeleniumUtil _instance = new SeleniumUtil();
 
 	private LiferaySelenium _selenium;
-	private final String _timestamp;
 
 }
