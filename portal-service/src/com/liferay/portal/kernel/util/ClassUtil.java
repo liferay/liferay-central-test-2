@@ -268,7 +268,7 @@ public class ClassUtil {
 		if (annotationNameMatcher.matches()) {
 			String annotationClassName = annotationNameMatcher.group(1);
 
-			tokens.add(annotationClassName.replace("@", ""));
+			tokens.add(annotationClassName);
 		}
 		else if (annotationParametersMatcher.matches()) {
 			String annotationClassName = annotationParametersMatcher.group(1);
