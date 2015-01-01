@@ -1296,6 +1296,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	public CacheModel<${entity.name}> toCacheModel() {
 		${entity.name}CacheModel ${entity.varName}CacheModel = new ${entity.name}CacheModel();
 
+		<#if entity.hasCompoundPK()>
+			${entity.varName}CacheModel.${entity.PKVarName} = getPrimaryKey();
+		</#if>
+
 		<#list entity.regularColList as column>
 			<#if column.type != "Blob">
 				<#if column.type == "Date">
@@ -1326,10 +1330,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 			${entity.varName}CacheModel.${cacheField.name} = get${methodName}();
 		</#list>
-
-		<#if entity.hasCompoundPK()>
-			${entity.varName}CacheModel.${entity.PKVarName} = getPrimaryKey();
-		</#if>
 
 		return ${entity.varName}CacheModel;
 	}

@@ -66,10 +66,8 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 
 			return true;
 		}
-		else{
-			return false;
-		}
 
+		return false;
 	}
 
 	@Override
