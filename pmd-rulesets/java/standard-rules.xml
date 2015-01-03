@@ -22,17 +22,16 @@
 		<priority>2</priority>
 		<example><![CDATA[
 
-// unnecessary creation, just reference Boolean.TRUE;
+// Unnecessary creation, just reference Boolean.TRUE
 
-Boolean bar = new Boolean("true");
+new Boolean("true");
 
-// unnecessary creation, just reference Boolean.FALSE;
+// Unnecessary creation, just reference Boolean.FALSE
 
-Boolean buz = Boolean.valueOf(false);
+Boolean.valueOf(false);
 	]]>
 		</example>
 	</rule>
-
 	<rule
 		class="net.sourceforge.pmd.lang.java.rule.basic.OverrideBothEqualsAndHashcodeRule"
 		externalInfoUrl="http://pmd.sourceforge.net/snapshot/pmd-java/rules/java/basic.html#OverrideBothEqualsAndHashcode"
