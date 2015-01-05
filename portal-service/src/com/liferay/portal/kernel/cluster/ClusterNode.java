@@ -193,10 +193,10 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 		sb.append(_bindInetAddress);
 		sb.append(", clusterNodeId=");
 		sb.append(_clusterNodeId);
-		sb.append(", portalProtocol=");
-		sb.append(_portalProtocol);
 		sb.append(", portalInetSocketAddress=");
 		sb.append(_portalInetSocketAddress);
+		sb.append(", portalProtocol=");
+		sb.append(_portalProtocol);
 		sb.append("}");
 
 		return sb.toString();

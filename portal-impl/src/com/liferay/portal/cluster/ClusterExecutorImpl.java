@@ -418,8 +418,8 @@ public class ClusterExecutorImpl
 
 		if (Validator.isNull(PropsValues.PORTAL_INSTANCE_INET_SOCKET_ADDRESS)) {
 			throw new IllegalArgumentException(
-				"Portal instance inet socket address is not configured, " +
-					"please set it by \"portal.instance.inet.socket.address\"");
+				"Portal instance host name and port needs to be set in the " +
+					"property \"portal.instance.inet.socket.address\"");
 		}
 
 		String[] parts = StringUtil.split(
@@ -427,7 +427,7 @@ public class ClusterExecutorImpl
 
 		if (parts.length != 2) {
 			throw new IllegalArgumentException(
-				"Unable to parse portal InetSocketAddress from " +
+				"Unable to parse the portal instance host name and port from " +
 					PropsValues.PORTAL_INSTANCE_INET_SOCKET_ADDRESS);
 		}
 
@@ -438,7 +438,7 @@ public class ClusterExecutorImpl
 		}
 		catch (UnknownHostException uhe) {
 			throw new IllegalArgumentException(
-				"Unable to parse portal InetSocketAddress host from " +
+				"Unable to parse the portal instance host name and port from " +
 					PropsValues.PORTAL_INSTANCE_INET_SOCKET_ADDRESS, uhe);
 		}
 
