@@ -40,8 +40,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsImpl;
 import com.liferay.portal.uuid.PortalUUIDImpl;
 
-import java.net.UnknownHostException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -175,7 +173,7 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 			SetBadPortalInetSocketAddressAdvice.class
 		})
 	@Test
-	public void testErrorLogAndExceptions() throws UnknownHostException {
+	public void testErrorLogAndExceptions() {
 		SetBadPortalInetSocketAddressAdvice.setPort(8080);
 
 		PortalUtil portalUtil = new PortalUtil();
