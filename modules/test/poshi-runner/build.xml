@@ -7,7 +7,7 @@
 	<!--<property name="auto.deploy.dir" value="${liferay.home}/osgi/modules" />-->
 
 	<target name="start-poshi-runner" depends="compile">
-		<fail message="Please set the property 'test.case.name'" unless="test.case.name" />
+		<fail message="Please set the property ${test.case.name}." unless="test.case.name" />
 
 		<mkdir dir="test-results" />
 
