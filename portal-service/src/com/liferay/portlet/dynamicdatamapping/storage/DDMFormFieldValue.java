@@ -114,9 +114,9 @@ public class DDMFormFieldValue {
 		int hash = HashUtil.hash(0, _instanceId);
 
 		hash = HashUtil.hash(hash, _name);
-		hash = HashUtil.hash(hash, _value);
+		hash = HashUtil.hash(hash, _nestedDDMFormFieldValues);
 
-		return HashUtil.hash(hash, _nestedDDMFormFieldValues);
+		return HashUtil.hash(hash, _value);
 	}
 
 	public void setDDMFormValues(DDMFormValues ddmFormValues) {
