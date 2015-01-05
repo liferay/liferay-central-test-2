@@ -176,15 +176,15 @@ public class FileUtil {
 			fileName = fileName.replace(blacklistChar, "_");
 		}
 
-		for (String blacklistLastChar :
+		for (String blacklistCharLast :
 				PropsValues.SYNC_FILE_BLACKLIST_CHARS_LAST) {
 
-			if (blacklistLastChar.startsWith("\\u")) {
-				blacklistLastChar = StringEscapeUtils.unescapeJava(
-					blacklistLastChar);
+			if (blacklistCharLast.startsWith("\\u")) {
+				blacklistCharLast = StringEscapeUtils.unescapeJava(
+					blacklistCharLast);
 			}
 
-			if (fileName.endsWith(blacklistLastChar)) {
+			if (fileName.endsWith(blacklistCharLast)) {
 				fileName = fileName.substring(0, fileName.length() - 1);
 			}
 		}
