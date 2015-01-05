@@ -729,6 +729,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.util.HttpUtil#decodePath
+	 */
 	private String _decodePath(String path) {
 		path = StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
 		path = URLCodec.decodeURL(path, StringPool.UTF8);
