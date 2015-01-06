@@ -32,7 +32,20 @@ public class SecurityPortletContainerWrapperTest {
 			new SecurityPortletContainerWrapper(portletContainer);
 
 		Assert.assertTrue(
+			securityPortletContainerWrapper.isValidPortletId("aaa"));
+		Assert.assertTrue(
+			securityPortletContainerWrapper.isValidPortletId("AAA"));
+		Assert.assertTrue(
+			securityPortletContainerWrapper.isValidPortletId("123"));
+		Assert.assertTrue(
+			securityPortletContainerWrapper.isValidPortletId("aA1"));
+		Assert.assertTrue(
+			securityPortletContainerWrapper.isValidPortletId("aaa_bbb"));
+		Assert.assertTrue(
 			securityPortletContainerWrapper.isValidPortletId("aaa#bbb"));
+		Assert.assertFalse(
+			securityPortletContainerWrapper.isValidPortletId(
+				"2_INSTANCE_'\"><script>alert(1)</script>"));
 	}
 
 }
