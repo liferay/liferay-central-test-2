@@ -44,12 +44,6 @@ public class SecureXMLBuilderUtil {
 		return getSecureXMLBuilder().newXMLReader();
 	}
 
-	public void setSecureXMLBuilder(SecureXMLBuilder secureXMLBuilder) {
-		PortalRuntimePermission.checkSetBeanProperty(getClass());
-
-		_secureXMLBuilder = secureXMLBuilder;
-	}
-
 	public static DocumentBuilderFactory unsafeDocumentBuilderFactory() {
 		return getSecureXMLBuilder().unsafeDocumentBuilderFactory();
 	}
@@ -60,6 +54,12 @@ public class SecureXMLBuilderUtil {
 
 	public static XMLReader unsafeXMLReader() {
 		return getSecureXMLBuilder().unsafeXMLReader();
+	}
+
+	public void setSecureXMLBuilder(SecureXMLBuilder secureXMLBuilder) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
+		_secureXMLBuilder = secureXMLBuilder;
 	}
 
 	private static SecureXMLBuilder _secureXMLBuilder;
