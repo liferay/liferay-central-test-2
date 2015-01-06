@@ -46,8 +46,9 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to initialize safe DocumentBuilderFactory! Your " +
-					"system may be vulnerable to XML Bomb attacks!", e);
+				"Unable to initialize safe document builder factory to " +
+					"protect from XML Bomb attacks",
+				e);
 		}
 
 		try {
@@ -56,8 +57,9 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to initialize safe DocumentBuilderFactory! Your " +
-					"system may be vulnerable to XML Bomb attacks!", e);
+				"Unable to initialize safe document builder factory to " +
+					"protect from XML Bomb attacks",
+				e);
 		}
 
 		try {
@@ -69,8 +71,9 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to initialize safe DocumentBuilderFactory! Your " +
-					"system may be vulnerable to XXE attacks!", e);
+				"Unable to initialize safe document builder factory to " +
+					"protect from XXE attacks",
+				e);
 		}
 
 		return documentBuilderFactory;
@@ -106,8 +109,9 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to initialize safe SAX parser! Your system may be " +
-					"vulnerable to XML Bomb attacks!", e);
+				"Unable to initialize safe SAX parser to protect from XML " +
+					"Bomb attacks",
+				e);
 		}
 
 		try {
@@ -116,8 +120,9 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to initialize safe SAX parser! Your system may be " +
-					"vulnerable to XXE attacks!", e);
+				"Unable to initialize safe SAX parser to protect from XXE " +
+					"attacks",
+				e);
 		}
 
 		return xmlReader;
@@ -138,7 +143,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to initialize unsafe DocumentBuilderFactory!", e);
+				"Unable to initialize unsafe document builder factory", e);
 		}
 
 		return documentBuilderFactory;
@@ -169,7 +174,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 			xmlReader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, false);
 		}
 		catch (Exception e) {
-			_log.error("Unable to initialize unsafe SAX parser!", e);
+			_log.error("Unable to initialize unsafe SAX parser", e);
 		}
 
 		return xmlReader;
