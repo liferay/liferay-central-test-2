@@ -189,7 +189,6 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 	private static final String _FEATURES_EXTERNAL_PARAMETER_ENTITIES =
 		"http://xml.org/sax/features/external-parameter-entities";
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		SecureXMLBuilderImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(SecureXMLBuilderImpl.class);
 
 }
