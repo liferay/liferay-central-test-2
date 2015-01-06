@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `87c168f`.*
+*This document has been reviewed through commit `87f85c5`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -666,7 +666,7 @@ preferences.
 
 ---------------------------------------
 
-### Removed the `createFlyouts` Method from `liferay/util.js` and Related Resources`
+### Removed the `createFlyouts` Method from `liferay/util.js` and Related Resources
 - **Date:** 2014-Dec-18
 - **JIRA Ticket:** LPS-52275
 
