@@ -51,7 +51,8 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 
 		try {
-			documentBuilderFactory.setFeature(_FEATURES_DISALLOW_DTD, true);
+			documentBuilderFactory.setFeature(
+				_FEATURES_DISALLOW_DOCTYPE_DECL, true);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -101,7 +102,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 
 		try {
-			xmlReader.setFeature(_FEATURES_DISALLOW_DTD, true);
+			xmlReader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, true);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -132,7 +133,8 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 
 		try {
-			documentBuilderFactory.setFeature(_FEATURES_DISALLOW_DTD, false);
+			documentBuilderFactory.setFeature(
+				_FEATURES_DISALLOW_DOCTYPE_DECL, false);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -164,7 +166,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 
 		try {
-			xmlReader.setFeature(_FEATURES_DISALLOW_DTD, false);
+			xmlReader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, false);
 		}
 		catch (Exception e) {
 			_log.error("Unable to initialize unsafe SAX parser!", e);
@@ -173,7 +175,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		return xmlReader;
 	}
 
-	private static final String _FEATURES_DISALLOW_DTD =
+	private static final String _FEATURES_DISALLOW_DOCTYPE_DECL =
 		"http://apache.org/xml/features/disallow-doctype-decl";
 
 	private static final String _FEATURES_EXTERNAL_GENERAL_ENTITIES =
