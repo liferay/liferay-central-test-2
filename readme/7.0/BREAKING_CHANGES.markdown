@@ -676,7 +676,9 @@ This method has been completely removed from core files.
 
 #### Who is affected?
 
-This change only affects third party developers who are explicitly calling `Liferay.Util.createFlyouts` for the creation of flyout menus. It will not affect any menus in core files.
+This change only affects third party developers who are explicitly calling
+`Liferay.Util.createFlyouts` for the creation of flyout menus. It will not
+affect any menus in core files.
 
 #### How should I update my code?
 
@@ -684,6 +686,7 @@ If you are using `createFlyouts` you can achieve the same behavior with css.
 
 #### Why was this change made?
 
-This method was removed due to there being no working use cases in Portal, and it's overall lack of functionality.
+This method was removed due to there being no working use cases in Portal, and
+it's overall lack of functionality.
 
 ---------------------------------------
