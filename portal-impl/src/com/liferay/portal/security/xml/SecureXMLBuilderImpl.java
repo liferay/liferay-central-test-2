@@ -85,10 +85,8 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 
 		xmlInputFactory.setProperty(
 			XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
-
 		xmlInputFactory.setProperty(
 			XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
-
 		xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
 
 		return xmlInputFactory;
