@@ -481,9 +481,9 @@ public class Watcher implements Runnable {
 		SyncAccount syncAccount = SyncAccountService.fetchSyncAccount(
 			_watchEventListener.getSyncAccountId());
 
-		String filePathName = filePath.toString();
+		Path path = java.nio.file.Paths.get(syncAccount.getFilePathName());
 
-		if (filePathName.equals(syncAccount.getFilePathName())) {
+		if (Files.notExists(path)) {
 			syncAccount.setActive(false);
 			syncAccount.setUiEvent(
 				SyncAccount.UI_EVENT_SYNC_ACCOUNT_FOLDER_MISSING);
