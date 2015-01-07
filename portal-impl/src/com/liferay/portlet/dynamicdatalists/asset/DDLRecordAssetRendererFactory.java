@@ -93,9 +93,8 @@ public class DDLRecordAssetRendererFactory extends BaseAssetRendererFactory {
 
 	@Override
 	public PortletURL getURLAdd(
-			LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws PortalException {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.DYNAMIC_DATA_LISTS);
