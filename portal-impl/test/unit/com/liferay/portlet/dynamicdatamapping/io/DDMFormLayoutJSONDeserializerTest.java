@@ -52,16 +52,13 @@ public class DDMFormLayoutJSONDeserializerTest extends BaseDDMTestCase {
 			createDDMFormLayoutRow(
 				createDDMFormLayoutColumns("text1", "text2")),
 			ddmFormLayoutRows.get(0));
-
 		assertEquals(
 			createDDMFormLayoutRow(
 				createDDMFormLayoutColumns("text3", "text4", "text5", "text6")),
 			ddmFormLayoutRows.get(1));
-
 		assertEquals(
 			createDDMFormLayoutRow(createDDMFormLayoutColumns("text7")),
 			ddmFormLayoutRows.get(2));
-
 		assertEquals(
 			createDDMFormLayoutRow(
 				createDDMFormLayoutColumns("text8", "text9", "text10")),
@@ -75,7 +72,6 @@ public class DDMFormLayoutJSONDeserializerTest extends BaseDDMTestCase {
 		Assert.assertEquals(
 			expectedDDMFormLayoutColumn.getDDMFormFieldName(),
 			actualDDMFormLayoutColumn.getDDMFormFieldName());
-
 		Assert.assertEquals(
 			expectedDDMFormLayoutColumn.getSize(),
 			actualDDMFormLayoutColumn.getSize());
@@ -84,15 +80,17 @@ public class DDMFormLayoutJSONDeserializerTest extends BaseDDMTestCase {
 	protected void assertEquals(
 		DDMFormLayoutRow expectedDDMFormLayoutRow,
 		DDMFormLayoutRow actualDDMFormLayoutRow) {
+		
+		List<DDMFormLayoutColumn> expectedDDMFormLayoutColumns =
+			expectedDDMFormLayoutRow.getDDMFormLayoutColumns();
 
-		int i = 0;
-
-		for (DDMFormLayoutColumn expectedDDMFormLayoutColumn :
-				expectedDDMFormLayoutRow.getDDMFormLayoutColumns()) {
+		for (int i = 0; i < expectedDDMFormLayoutColumns.size(); i++) {
+			DDMFormLayoutColumn expectedDDMFormLayoutColumn =
+				expectedDDMFormLayoutColumns.get(i);
 
 			assertEquals(
 				expectedDDMFormLayoutColumn,
-				actualDDMFormLayoutRow.getDDMFormLayoutColumn(i++));
+				actualDDMFormLayoutRow.getDDMFormLayoutColumn(i));
 		}
 	}
 

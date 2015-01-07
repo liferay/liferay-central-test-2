@@ -52,11 +52,9 @@ public class DDMFormLayoutJSONSerializerTest extends BaseDDMTestCase {
 		ddmFormLayout.addDDMFormLayoutRow(
 			createDDMFormLayoutRow(
 				createDDMFormLayoutColumns("text1", "text2")));
-
 		ddmFormLayout.addDDMFormLayoutRow(
 			createDDMFormLayoutRow(
 				createDDMFormLayoutColumns("text3", "text4", "text5")));
-
 		ddmFormLayout.addDDMFormLayoutRow(
 			createDDMFormLayoutRow(createDDMFormLayoutColumns("text6")));
 
