@@ -121,9 +121,7 @@ public class NettyFabricClient implements FabricClient {
 	}
 
 	@Override
-	public synchronized java.util.concurrent.Future<?> disconnect()
-		throws InterruptedException {
-
+	public synchronized java.util.concurrent.Future<?> disconnect() {
 		if (_channel == null) {
 			throw new IllegalStateException(
 				"Netty fabric client is not started");
