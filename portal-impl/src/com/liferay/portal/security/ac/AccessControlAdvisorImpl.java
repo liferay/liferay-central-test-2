@@ -52,22 +52,26 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 		throws SecurityException {
 
 		if (AccessControlThreadLocal.isRemoteAccess()) {
-			for (AccessControlPolicy policy : _policies) {
-				policy.onServiceRemoteAccess(
+			for (AccessControlPolicy accessControlPolicy :
+					_accessControlPolicies) {
+
+				accessControlPolicy.onServiceRemoteAccess(
 					methodInvocation.getMethod(),
 					methodInvocation.getArguments(), accessControlled);
 			}
 		}
 		else {
-			for (AccessControlPolicy policy : _policies) {
-				policy.onServiceAccess(
+			for (AccessControlPolicy accessControlPolicy :
+					_accessControlPolicies) {
+
+				accessControlPolicy.onServiceAccess(
 					methodInvocation.getMethod(),
 					methodInvocation.getArguments(), accessControlled);
 			}
 		}
 	}
 
-	private final List<AccessControlPolicy> _policies =
+	private final List<AccessControlPolicy> _accessControlPolicies =
 		new CopyOnWriteArrayList<>();
 	private final ServiceTracker<?, AccessControlPolicy> _serviceTracker;
 
@@ -84,7 +88,7 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 			AccessControlPolicy accessControlPolicy = registry.getService(
 				serviceReference);
 
-			_policies.add(accessControlPolicy);
+			_accessControlPolicies.add(accessControlPolicy);
 
 			return accessControlPolicy;
 		}
@@ -92,19 +96,19 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 		@Override
 		public void modifiedService(
 			ServiceReference<AccessControlPolicy> serviceReference,
-			AccessControlPolicy service) {
+			AccessControlPolicy accessControlPolicy) {
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<AccessControlPolicy> serviceReference,
-			AccessControlPolicy service) {
+			AccessControlPolicy accessControlPolicy) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
 
-			_policies.remove(service);
+			_accessControlPolicies.remove(accessControlPolicy);
 		}
 
 	}
