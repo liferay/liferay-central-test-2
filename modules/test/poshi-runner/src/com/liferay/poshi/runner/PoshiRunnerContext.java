@@ -64,7 +64,7 @@ public class PoshiRunnerContext {
 		return _rootElements.get("testcase#" + className);
 	}
 
-	private static void _initFileMaps() throws Exception {
+	private static void _readFiles() throws Exception {
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(_BASE_DIR);
@@ -160,7 +160,7 @@ public class PoshiRunnerContext {
 
 	static {
 		try {
-			_initFileMaps();
+			_readFiles();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
