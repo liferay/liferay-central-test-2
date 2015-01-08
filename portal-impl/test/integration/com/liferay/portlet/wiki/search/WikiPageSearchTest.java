@@ -106,9 +106,10 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 
 	@Test
 	public void testSpecificFields() throws Exception {
-		WikiPageSearchTestHelper helper = new WikiPageSearchTestHelper();
+		WikiPageSearchTestHelper wikiPageSearchTestHelper =
+			new WikiPageSearchTestHelper();
 
-		helper.searchSpecificFields();
+		wikiPageSearchTestHelper.searchSpecificFields();
 	}
 
 	@Override
@@ -219,11 +220,11 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 	protected class WikiPageSearchTestHelper {
 
 		/**
-		 * https://dev.liferay.com/discover/portal/-/knowledge_base/6-2/searching-for-content-in-liferay
-		 * "Searching for specific fields"
+		 * See https://dev.liferay.com/discover/portal/-/knowledge_base/6-2/searching-for-content-in-liferay
 		 */
 		public void searchSpecificFields() throws Exception {
-			Assume.assumeTrue(isSpecificFieldsImplementedForSearchEngine());
+			Assume.assumeTrue(
+				isSearchSpecificFieldsImplementedForSearchEngine());
 
 			addPageWithTitle(RandomTestUtil.randomString());
 			addPageWithTitle("foo");
@@ -264,7 +265,7 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 					getBaseModelClass(), group.getGroupId(), searchContext));
 		}
 
-		protected boolean isSpecificFieldsImplementedForSearchEngine() {
+		protected boolean isSearchSpecificFieldsImplementedForSearchEngine() {
 			SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
 				SearchEngineUtil.getDefaultSearchEngineId());
 
