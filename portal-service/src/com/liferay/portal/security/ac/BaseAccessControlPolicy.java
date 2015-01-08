@@ -30,7 +30,7 @@ public abstract class BaseAccessControlPolicy implements AccessControlPolicy {
 
 	@Override
 	public void onServiceRemoteAccess(
-			Method targetMethod, Object[] arguments,
+			Method method, Object[] arguments,
 			AccessControlled accessControlled)
 		throws SecurityException {
 	}
