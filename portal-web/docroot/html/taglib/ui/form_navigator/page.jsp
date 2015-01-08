@@ -317,7 +317,7 @@ if (Validator.isNotNull(historyKey)) {
 					var redirect = A.one('#<portlet:namespace />redirect');
 
 					if (redirect) {
-						var url = new A.Url(redirect.val() || '<%= portletURL.toString() %>');
+						var url = new A.Url(redirect.val() || '<%= portletURL %>');
 
 						url.setAnchor(null);
 						url.setParameter('<portlet:namespace />historyKey', sectionId);
