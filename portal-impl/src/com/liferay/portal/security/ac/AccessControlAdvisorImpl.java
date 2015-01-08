@@ -20,8 +20,6 @@ import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
 
-import java.lang.reflect.Method;
-
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
