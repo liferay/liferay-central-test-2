@@ -29,39 +29,39 @@ import org.dom4j.Element;
 public class PoshiRunnerContext {
 
 	public static Element getActionCommandElement(String classCommandName) {
-		return _commandElementMap.get("action#" + classCommandName);
+		return _commandElements.get("action#" + classCommandName);
 	}
 
 	public static Element getActionRootElement(String className) {
-		return _rootElementMap.get("action#" + className);
+		return _rootElements.get("action#" + className);
 	}
 
 	public static Element getFunctionCommandElement(String classCommandName) {
-		return _commandElementMap.get("function#" + classCommandName);
+		return _commandElements.get("function#" + classCommandName);
 	}
 
 	public static Element getFunctionRootElement(String className) {
-		return _rootElementMap.get("function#" + className);
+		return _rootElements.get("function#" + className);
 	}
 
 	public static Element getMacroCommandElement(String classCommandName) {
-		return _commandElementMap.get("macro#" + classCommandName);
+		return _commandElements.get("macro#" + classCommandName);
 	}
 
 	public static Element getMacroRootElement(String className) {
-		return _rootElementMap.get("macro#" + className);
+		return _rootElements.get("macro#" + className);
 	}
 
 	public static String getPathLocator(String pathLocatorKey) {
-		return _pathLocatorMap.get(pathLocatorKey);
+		return _pathLocators.get(pathLocatorKey);
 	}
 
 	public static Element getTestcaseCommandElement(String classCommandName) {
-		return _commandElementMap.get("testcase#" + classCommandName);
+		return _commandElements.get("testcase#" + classCommandName);
 	}
 
 	public static Element getTestcaseRootElement(String className) {
-		return _rootElementMap.get("testcase#" + className);
+		return _rootElements.get("testcase#" + className);
 	}
 
 	private static void _initFileMaps() throws Exception {
@@ -92,14 +92,14 @@ public class PoshiRunnerContext {
 				Element element = PoshiRunnerUtil.getRootElementFromFilePath(
 					filePath);
 
-				_rootElementMap.put(classType + "#" + className, element);
+				_rootElements.put(classType + "#" + className, element);
 
 				if (element.element("set-up") != null) {
 					Element setUpElement = element.element("set-up");
 
 					String classCommandName = className + "#set-up";
 
-					_commandElementMap.put(
+					_commandElements.put(
 						classType + "#" + classCommandName, setUpElement);
 				}
 
@@ -108,7 +108,7 @@ public class PoshiRunnerContext {
 
 					String classCommandName = className + "#tear-down";
 
-					_commandElementMap.put(
+					_commandElements.put(
 						classType + "#" + classCommandName, tearDownElement);
 				}
 
@@ -118,7 +118,7 @@ public class PoshiRunnerContext {
 					String classCommandName =
 						className + "#" + commandElement.attributeValue("name");
 
-					_commandElementMap.put(
+					_commandElements.put(
 						classType + "#" + classCommandName, commandElement);
 				}
 			}
@@ -140,7 +140,7 @@ public class PoshiRunnerContext {
 					Element locatorKeyElement = tdElements.get(0);
 					Element locatorElement = tdElements.get(1);
 
-					_pathLocatorMap.put(
+					_pathLocators.put(
 						className + "#" + locatorKeyElement.getText(),
 						locatorElement.getText());
 				}
@@ -151,11 +151,11 @@ public class PoshiRunnerContext {
 	private static final String _BASE_DIR = PoshiRunnerUtil.getCanonicalPath(
 		"../../../portal-web/test/functional/com/liferay/portalweb/");
 
-	private static final Map<String, Element> _commandElementMap =
+	private static final Map<String, Element> _commandElements =
 		new HashMap<String, Element>();
-	private static final Map<String, String> _pathLocatorMap =
+	private static final Map<String, String> _pathLocators =
 		new HashMap<String, String>();
-	private static final Map<String, Element> _rootElementMap =
+	private static final Map<String, Element> _rootElements =
 		new HashMap<String, Element>();
 
 	static {
