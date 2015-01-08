@@ -27,7 +27,7 @@ public interface AccessControlPolicy {
 		throws SecurityException;
 
 	public void onServiceRemoteAccess(
-			Method targetMethod, Object[] arguments,
+			Method method, Object[] arguments,
 			AccessControlled accessControlled)
 		throws SecurityException;
 
