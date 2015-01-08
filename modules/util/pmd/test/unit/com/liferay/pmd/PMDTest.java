@@ -102,6 +102,7 @@ public class PMDTest extends AutoBalanceTestCase {
 		formatter.setType("text");
 
 		_pmdTask.addFormatter(formatter);
+
 		_pmdTask.setRuleSetFiles(
 			StringUtil.replace(
 				_buildProperties.getProperty("pmd.java.ruleset"), "${sdk.dir}",
@@ -133,7 +134,7 @@ public class PMDTest extends AutoBalanceTestCase {
 
 			if (!logRecords.isEmpty()) {
 				AssertionError assertionError = new AssertionError(
-					"PMD Java logging error");
+					"PMD Java log error");
 
 				for (LogRecord logRecord : logRecords) {
 					assertionError.addSuppressed(
