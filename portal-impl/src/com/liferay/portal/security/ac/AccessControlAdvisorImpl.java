@@ -51,21 +51,18 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 			AccessControlled accessControlled)
 		throws SecurityException {
 
-		Object[] arguments = methodInvocation.getArguments();
-		Method targetMethod = methodInvocation.getMethod();
-
-		boolean remoteAccess = AccessControlThreadLocal.isRemoteAccess();
-
-		if (remoteAccess) {
+		if (AccessControlThreadLocal.isRemoteAccess()) {
 			for (AccessControlPolicy policy : _policies) {
 				policy.onServiceRemoteAccess(
-					targetMethod, arguments, accessControlled);
+					methodInvocation.getMethod(),
+					methodInvocation.getArguments(), accessControlled);
 			}
 		}
 		else {
 			for (AccessControlPolicy policy : _policies) {
 				policy.onServiceAccess(
-					targetMethod, arguments, accessControlled);
+					methodInvocation.getMethod(),
+					methodInvocation.getArguments(), accessControlled);
 			}
 		}
 	}
