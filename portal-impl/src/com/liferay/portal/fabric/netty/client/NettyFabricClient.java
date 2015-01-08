@@ -359,7 +359,7 @@ public class NettyFabricClient implements FabricClient {
 					_log.info(
 						"Try to reconnect " +
 							_nettyFabricClientConfig.getReconnectInterval() +
-								"ms later");
+								" ms later");
 				}
 			}
 			else {
