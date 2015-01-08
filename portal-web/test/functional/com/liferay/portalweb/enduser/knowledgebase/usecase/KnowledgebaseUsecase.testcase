@@ -19,6 +19,7 @@
 			<var name="portletName" value="Knowledge Base" />
 		</execute>
 
+		<execute action="CPKnowledgebaseadmin#assertClick" locator-key1="ADD_BUTTON" value1="Add" />
 		<execute action="CPKnowledgebaseadmin#assertClick" locator-key1="ADD_ARTICLE_BUTTON" value1="Add Article" />
 
 		<execute action="CPKnowledgebaseadminAddarticle#type" locator-key1="TITLE_FIELD" value1="KB Admin Article" />
@@ -374,18 +375,16 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationCP" />
 
-		<execute macro="KBArticleSuggestion#gotoStatus">
-			<var name="status" value="New" />
+		<execute macro="KBArticleSuggestion#goToSuggestionStatusNew">
 			<var name="suggestionCount" value="1" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#moveToStatusCP">
+		<execute macro="KBArticleSuggestion#moveToInProgressStatus">
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
-			<var name="status" value="In Progress" />
+			<var name="kbSuggestionBody" value="Knowledge Base Article Suggestion" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#gotoStatus">
-			<var name="status" value="In Progress" />
+		<execute macro="KBArticleSuggestion#goToSuggestionStatusInProgress">
 			<var name="suggestionCount" value="1" />
 		</execute>
 
@@ -400,18 +399,17 @@
 
 		<execute macro="KBArticle#goBackCP" />
 
-		<execute macro="KBArticleSuggestion#moveToStatusCP">
+		<execute macro="KBArticleSuggestion#moveToResolvedStatus">
 			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
-			<var name="status" value="Resolved" />
+			<var name="kbSuggestionBody" value="Knowledge Base Article Suggestion" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#gotoStatus">
-			<var name="status" value="Resolved" />
+		<execute macro="KBArticleSuggestion#goToSuggestionStatusResolved">
 			<var name="suggestionCount" value="1" />
 		</execute>
 
 		<execute macro="KBArticleSuggestion#deleteCP">
-			<var name="kbArticleTitle" value="Knowledge Base Article Title" />
+			<var name="kbSuggestionBody" value="Knowledge Base Article Suggestion" />
 		</execute>
 
 		<execute macro="Page#gotoContentCP">
@@ -420,31 +418,22 @@
 
 		<execute macro="KBArticle#gotoSuggestionsNavigationCP" />
 
-		<execute macro="KBArticleSuggestion#gotoStatus">
-			<var name="status" value="New" />
+		<execute macro="KBArticleSuggestion#goToSuggestionStatusNew">
 			<var name="suggestionCount" value="0" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#viewDefault">
-			<var name="status" value="New" />
-		</execute>
+		<execute macro="KBArticleSuggestion#viewDefaultNew" />
 
-		<execute macro="KBArticleSuggestion#gotoStatus">
-			<var name="status" value="In Progress" />
+		<execute macro="KBArticleSuggestion#goToSuggestionStatusInProgress">
 			<var name="suggestionCount" value="0" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#viewDefault">
-			<var name="status" value="In Progress" />
-		</execute>
+		<execute macro="KBArticleSuggestion#viewDefaultInProgress" />
 
-		<execute macro="KBArticleSuggestion#gotoStatus">
-			<var name="status" value="Resolved" />
+		<execute macro="KBArticleSuggestion#goToSuggestionStatusResolved">
 			<var name="suggestionCount" value="0" />
 		</execute>
 
-		<execute macro="KBArticleSuggestion#viewDefault">
-			<var name="status" value="Resolved" />
-		</execute>
+		<execute macro="KBArticleSuggestion#viewDefaultResolved" />
 	</command>
 </definition>
