@@ -106,10 +106,10 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 
 	@Test
 	public void testSpecificFields() throws Exception {
-		WikiPageSearchTestHelper wikiPageSearchTestHelper =
-			new WikiPageSearchTestHelper();
+		TestSpecificFieldsHelper testSpecificFieldsHelper =
+			new TestSpecificFieldsHelper();
 
-		wikiPageSearchTestHelper.searchSpecificFields();
+		testSpecificFieldsHelper.searchSpecificFields();
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 			page, TestPropsValues.getUserId(), keywords, serviceContext);
 	}
 
-	protected class WikiPageSearchTestHelper {
+	protected class TestSpecificFieldsHelper {
 
 		/**
 		 * See https://dev.liferay.com/discover/portal/-/knowledge_base/6-2/searching-for-content-in-liferay
@@ -237,7 +237,7 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 			assertSearch("title:foo -title:bar", 1);
 		}
 
-		protected WikiPageSearchTestHelper() throws Exception {
+		protected TestSpecificFieldsHelper() throws Exception {
 			_serviceContext = ServiceContextTestUtil.getServiceContext(
 				group.getGroupId());
 
