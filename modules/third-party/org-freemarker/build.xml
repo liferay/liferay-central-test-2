@@ -21,7 +21,7 @@
 		/>
 
 		<antcall target="patch">
-			<param name="patch.destination" value="**/DebugBreak.java,**/EnvironmentSuspendedEvent.java,**/DebuggerServer.java,**/DebuggerService.java,**/RmiDebuggedEnvironmentImpl.java,**/RmiDebuggerImpl.java,**/RmiDebuggerService.java" />
+			<param name="patch.destination" value="**/DebugBreak.java,**/DebuggerServer.java,**/DebuggerService.java,**/EnvironmentSuspendedEvent.java,**/RmiDebuggedEnvironmentImpl.java,**/RmiDebuggerImpl.java,**/RmiDebuggerService.java" />
 			<param name="patch.original.lib.name" value="${original.lib.name}" />
 			<param name="patch.original.lib.url" value="${original.lib.url}" />
 			<param name="patch.original.lib.version" value="${original.lib.version}" />
