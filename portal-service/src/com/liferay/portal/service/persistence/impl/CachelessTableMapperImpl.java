@@ -67,21 +67,21 @@ public class CachelessTableMapperImpl
 	protected boolean containsTableMapping(
 		long leftPrimaryKey, long rightPrimaryKey, boolean updateCache) {
 
-		List<Integer> countList = null;
+		List<Integer> counts = null;
 
 		try {
-			countList = getTableMappingSqlQuery.execute(
+			counts = getTableMappingSqlQuery.execute(
 				leftPrimaryKey, rightPrimaryKey);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 
-		if (countList.isEmpty()) {
+		if (counts.isEmpty()) {
 			return false;
 		}
 
-		int count = countList.get(0);
+		int count = counts.get(0);
 
 		if (count == 0) {
 			return false;
