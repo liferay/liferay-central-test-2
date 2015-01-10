@@ -33,9 +33,9 @@ import org.xml.sax.XMLReader;
 /**
  * @author Tomas Polesovsky
  */
-public class DoctypeStrippingXMLReader implements XMLReader {
+public class StripDoctypeXMLReader implements XMLReader {
 
-	public DoctypeStrippingXMLReader(XMLReader xmlReader) {
+	public StripDoctypeXMLReader(XMLReader xmlReader) {
 		_xmlReader = xmlReader;
 	}
 
@@ -119,8 +119,8 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 			InputStream inputStream = inputSource.getByteStream();
 
 			if (inputStream != null) {
-				final SimpleDoctypeStrippingFilter filter =
-					new SimpleDoctypeStrippingFilter(inputStream);
+				final StripDoctypeFilter filter =
+					new StripDoctypeFilter(inputStream);
 
 				inputSource.setByteStream(
 					new FilterInputStream(inputStream) {
@@ -143,8 +143,8 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 			Reader reader = inputSource.getCharacterStream();
 
 			if (reader != null) {
-				final SimpleDoctypeStrippingFilter filter =
-					new SimpleDoctypeStrippingFilter(reader);
+				final StripDoctypeFilter filter =
+					new StripDoctypeFilter(reader);
 
 				inputSource.setCharacterStream(
 					new FilterReader(reader) {

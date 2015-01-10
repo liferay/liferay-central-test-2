@@ -98,7 +98,7 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 
 	@Override
 	public XMLReader newXMLReader() {
-		XMLReader xmlReader = new DoctypeStrippingXMLReader(new SAXParser());
+		XMLReader xmlReader = new StripDoctypeXMLReader(new SAXParser());
 
 		if (!PropsValues.XML_SECURITY_ENABLED) {
 			return xmlReader;

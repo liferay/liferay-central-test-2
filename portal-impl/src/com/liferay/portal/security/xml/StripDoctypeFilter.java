@@ -23,13 +23,13 @@ import java.io.Reader;
 /**
  * @author Tomas Polesovsky
  */
-public class SimpleDoctypeStrippingFilter {
+public class StripDoctypeFilter {
 
-	public SimpleDoctypeStrippingFilter(InputStream inputStream) {
+	public StripDoctypeFilter(InputStream inputStream) {
 		this._inputStream = inputStream;
 	}
 
-	public SimpleDoctypeStrippingFilter(Reader reader) {
+	public StripDoctypeFilter(Reader reader) {
 		this._reader = reader;
 	}
 
