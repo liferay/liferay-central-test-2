@@ -28,7 +28,9 @@ import com.liferay.portal.security.xml.SecureXMLFactoryProviderUtil;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
 import java.net.URL;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,10 +47,12 @@ import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
 import org.apache.tika.mime.MimeTypesReaderMetKeys;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import org.xml.sax.InputSource;
 
 /**
