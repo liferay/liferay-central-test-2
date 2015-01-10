@@ -65,7 +65,7 @@ public class StripDoctypeFilter {
 			if ((buffer[0] == '!') && (buffer[1] == 'D')) {
 				while (true) {
 					int doctypeContent = readFromSource();
-					
+
 					if (doctypeContent == '[') {
 						entityDeclaration = true;
 					}
@@ -90,26 +90,6 @@ public class StripDoctypeFilter {
 		return c;
 	}
 
-	public int read(char[] chars, int offset, int length) throws IOException {
-		int read = 0;
-
-		for (read = 0; read < length; read++) {
-			int c = read();
-
-			if (c == -1) {
-				if (read == 0) {
-					return -1;
-				}
-
-				return read;
-			}
-
-			chars[offset + read] = (char)c;
-		}
-
-		return read;
-	}
-
 	public int read(byte[] bytes, int offset, int length) throws IOException {
 		int read = 0;
 
@@ -130,6 +110,32 @@ public class StripDoctypeFilter {
 		return read;
 	}
 
+	public int read(char[] chars, int offset, int length) throws IOException {
+		int read = 0;
+
+		for (read = 0; read < length; read++) {
+			int c = read();
+
+			if (c == -1) {
+				if (read == 0) {
+					return -1;
+				}
+
+				return read;
+			}
+
+			chars[offset + read] = (char)c;
+		}
+
+		return read;
+	}
+
+	protected int readFromBuffer() {
+		_bufferLength--;
+
+		return _buffer[_bufferLength];
+	}
+
 	protected int readFromSource() throws IOException {
 		if (_inputStream != null) {
 			return _inputStream.read();
@@ -142,12 +148,6 @@ public class StripDoctypeFilter {
 		throw new IllegalStateException("No underlying source available");
 	}
 
-	protected int readFromBuffer() {
-		_bufferLength--;
-
-		return _buffer[_bufferLength];
-	}
-
 	protected void setBuffer(int[] buffer) {
 		_buffer = buffer;
 
@@ -156,11 +156,11 @@ public class StripDoctypeFilter {
 		_bufferLength = _buffer.length;
 	}
 
+	private int[] _buffer;
+	private int _bufferLength;
 	private boolean _documentStarted;
 	private InputStream _inputStream;
 	private Reader _reader;
 	private boolean entityDeclaration;
-	private int[] _buffer;
-	private int _bufferLength;
 
 }

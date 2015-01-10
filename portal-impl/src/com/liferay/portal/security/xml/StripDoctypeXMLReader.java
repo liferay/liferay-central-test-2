@@ -40,50 +40,8 @@ public class StripDoctypeXMLReader implements XMLReader {
 	}
 
 	@Override
-	public boolean getFeature(String name)
-		throws SAXNotRecognizedException, SAXNotSupportedException {
-
-		return _xmlReader.getFeature(name);
-	}
-
-	@Override
-	public void setFeature(String name, boolean value)
-		throws SAXNotRecognizedException, SAXNotSupportedException {
-
-		if (_FEATURES_DISALLOW_DOCTYPE_DECL.equals(name)) {
-			_disallowDoctypeDecl = value;
-		}
-
-		_xmlReader.setFeature(name, value);
-	}
-
-	@Override
-	public Object getProperty(String name)
-		throws SAXNotRecognizedException, SAXNotSupportedException {
-
-		return _xmlReader.getProperty(name);
-	}
-
-	@Override
-	public void setProperty(String name, Object value)
-		throws SAXNotRecognizedException, SAXNotSupportedException {
-
-		_xmlReader.setProperty(name, value);
-	}
-
-	@Override
-	public void setEntityResolver(EntityResolver resolver) {
-		_xmlReader.setEntityResolver(resolver);
-	}
-
-	@Override
-	public EntityResolver getEntityResolver() {
-		return _xmlReader.getEntityResolver();
-	}
-
-	@Override
-	public void setDTDHandler(DTDHandler handler) {
-		_xmlReader.setDTDHandler(handler);
+	public ContentHandler getContentHandler() {
+		return _xmlReader.getContentHandler();
 	}
 
 	@Override
@@ -92,23 +50,27 @@ public class StripDoctypeXMLReader implements XMLReader {
 	}
 
 	@Override
-	public void setContentHandler(ContentHandler handler) {
-		_xmlReader.setContentHandler(handler);
-	}
-
-	@Override
-	public ContentHandler getContentHandler() {
-		return _xmlReader.getContentHandler();
-	}
-
-	@Override
-	public void setErrorHandler(ErrorHandler handler) {
-		_xmlReader.setErrorHandler(handler);
+	public EntityResolver getEntityResolver() {
+		return _xmlReader.getEntityResolver();
 	}
 
 	@Override
 	public ErrorHandler getErrorHandler() {
 		return _xmlReader.getErrorHandler();
+	}
+
+	@Override
+	public boolean getFeature(String name)
+		throws SAXNotRecognizedException, SAXNotSupportedException {
+
+		return _xmlReader.getFeature(name);
+	}
+
+	@Override
+	public Object getProperty(String name)
+		throws SAXNotRecognizedException, SAXNotSupportedException {
+
+		return _xmlReader.getProperty(name);
 	}
 
 	@Override
@@ -129,11 +91,11 @@ public class StripDoctypeXMLReader implements XMLReader {
 						public int read() throws IOException {
 							return stripDoctypeFilter.read();
 						}
-	
+
 						@Override
 						public int read(byte[] bytes, int offset, int length)
 							throws IOException {
-	
+
 							return stripDoctypeFilter.read(
 								bytes, offset, length);
 						}
@@ -175,10 +137,48 @@ public class StripDoctypeXMLReader implements XMLReader {
 		_xmlReader.parse(systemId);
 	}
 
+	@Override
+	public void setContentHandler(ContentHandler handler) {
+		_xmlReader.setContentHandler(handler);
+	}
+
+	@Override
+	public void setDTDHandler(DTDHandler handler) {
+		_xmlReader.setDTDHandler(handler);
+	}
+
+	@Override
+	public void setEntityResolver(EntityResolver resolver) {
+		_xmlReader.setEntityResolver(resolver);
+	}
+
+	@Override
+	public void setErrorHandler(ErrorHandler handler) {
+		_xmlReader.setErrorHandler(handler);
+	}
+
+	@Override
+	public void setFeature(String name, boolean value)
+		throws SAXNotRecognizedException, SAXNotSupportedException {
+
+		if (_FEATURES_DISALLOW_DOCTYPE_DECL.equals(name)) {
+			_disallowDoctypeDecl = value;
+		}
+
+		_xmlReader.setFeature(name, value);
+	}
+
+	@Override
+	public void setProperty(String name, Object value)
+		throws SAXNotRecognizedException, SAXNotSupportedException {
+
+		_xmlReader.setProperty(name, value);
+	}
+
 	private static final String _FEATURES_DISALLOW_DOCTYPE_DECL =
 		"http://apache.org/xml/features/disallow-doctype-decl";
 
 	private boolean _disallowDoctypeDecl;
-	private XMLReader _xmlReader;
+	private final XMLReader _xmlReader;
 
 }
