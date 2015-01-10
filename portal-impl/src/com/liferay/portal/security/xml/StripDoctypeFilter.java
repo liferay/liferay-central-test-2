@@ -38,31 +38,31 @@ public class StripDoctypeFilter {
 			return readFromBuffer();
 		}
 
-		int first = readFromSource();
+		int c = readFromSource();
 
 		if (_documentStarted) {
-			return first;
+			return c;
 		}
 
-		if (first == '<') {
-			int[] next = new int[2];
+		if (c == '<') {
+			int[] buffer = new int[2];
 
-			next[0] = readFromSource();
-			next[1] = readFromSource();
+			buffer[0] = readFromSource();
+			buffer[1] = readFromSource();
 
-			if (next[0] == '?') {
-				setBuffer(next);
+			if (buffer[0] == '?') {
+				setBuffer(buffer);
 
-				return first;
+				return c;
 			}
 
-			if ((next[0] == '!') && (next[1] == '-')) {
-				setBuffer(next);
+			if ((buffer[0] == '!') && (buffer[1] == '-')) {
+				setBuffer(buffer);
 
-				return first;
+				return c;
 			}
 
-			if ((next[0] == '!') && (next[1] == 'D')) {
+			if ((buffer[0] == '!') && (buffer[1] == 'D')) {
 				while (true) {
 					int doctypeContent = readFromSource();
 					
@@ -82,12 +82,12 @@ public class StripDoctypeFilter {
 				}
 			}
 
-			setBuffer(next);
+			setBuffer(buffer);
 
 			_documentStarted = true;
 		}
 
-		return first;
+		return c;
 	}
 
 	public int read(char[] chars, int offset, int length) throws IOException {
