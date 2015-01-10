@@ -138,23 +138,23 @@ public class StripDoctypeXMLReader implements XMLReader {
 	}
 
 	@Override
-	public void setContentHandler(ContentHandler handler) {
-		_xmlReader.setContentHandler(handler);
+	public void setContentHandler(ContentHandler contentHandler) {
+		_xmlReader.setContentHandler(contentHandler);
 	}
 
 	@Override
-	public void setDTDHandler(DTDHandler handler) {
-		_xmlReader.setDTDHandler(handler);
+	public void setDTDHandler(DTDHandler dtdHandler) {
+		_xmlReader.setDTDHandler(dtdHandler);
 	}
 
 	@Override
-	public void setEntityResolver(EntityResolver resolver) {
-		_xmlReader.setEntityResolver(resolver);
+	public void setEntityResolver(EntityResolver entityResolver) {
+		_xmlReader.setEntityResolver(entityResolver);
 	}
 
 	@Override
-	public void setErrorHandler(ErrorHandler handler) {
-		_xmlReader.setErrorHandler(handler);
+	public void setErrorHandler(ErrorHandler errorHandler) {
+		_xmlReader.setErrorHandler(errorHandler);
 	}
 
 	@Override
