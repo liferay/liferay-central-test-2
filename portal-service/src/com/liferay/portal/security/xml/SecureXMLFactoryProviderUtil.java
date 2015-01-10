@@ -45,18 +45,6 @@ public class SecureXMLFactoryProviderUtil {
 		return getSecureXMLBuilder().newXMLReader();
 	}
 
-	public static DocumentBuilderFactory unsafeDocumentBuilderFactory() {
-		return getSecureXMLBuilder().unsafeDocumentBuilderFactory();
-	}
-
-	public static XMLInputFactory unsafeXMLInputFactory() {
-		return getSecureXMLBuilder().unsafeXMLInputFactory();
-	}
-
-	public static XMLReader unsafeXMLReader() {
-		return getSecureXMLBuilder().unsafeXMLReader();
-	}
-
 	public void setSecureXMLBuilder(
 		SecureXMLFactoryProvider secureXMLFactoryProvider) {
 

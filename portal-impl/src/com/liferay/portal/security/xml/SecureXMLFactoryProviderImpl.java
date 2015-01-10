@@ -128,58 +128,6 @@ public class SecureXMLFactoryProviderImpl implements SecureXMLFactoryProvider {
 		return xmlReader;
 	}
 
-	@Override
-	public DocumentBuilderFactory unsafeDocumentBuilderFactory() {
-		DocumentBuilderFactory documentBuilderFactory =
-			newDocumentBuilderFactory();
-
-		if (!PropsValues.XML_SECURITY_ENABLED) {
-			return documentBuilderFactory;
-		}
-
-		try {
-			documentBuilderFactory.setFeature(
-				_FEATURES_DISALLOW_DOCTYPE_DECL, false);
-		}
-		catch (Exception e) {
-			_log.error(
-				"Unable to initialize unsafe document builder factory", e);
-		}
-
-		return documentBuilderFactory;
-	}
-
-	@Override
-	public XMLInputFactory unsafeXMLInputFactory() {
-		XMLInputFactory xmlInputFactory = newXMLInputFactory();
-
-		if (!PropsValues.XML_SECURITY_ENABLED) {
-			return xmlInputFactory;
-		}
-
-		xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
-
-		return xmlInputFactory;
-	}
-
-	@Override
-	public XMLReader unsafeXMLReader() {
-		XMLReader xmlReader = newXMLReader();
-
-		if (!PropsValues.XML_SECURITY_ENABLED) {
-			return xmlReader;
-		}
-
-		try {
-			xmlReader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, false);
-		}
-		catch (Exception e) {
-			_log.error("Unable to initialize unsafe SAX parser", e);
-		}
-
-		return xmlReader;
-	}
-
 	private static final String _FEATURES_DISALLOW_DOCTYPE_DECL =
 		"http://apache.org/xml/features/disallow-doctype-decl";
 

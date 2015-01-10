@@ -30,10 +30,4 @@ public interface SecureXMLFactoryProvider {
 
 	public XMLReader newXMLReader();
 
-	public DocumentBuilderFactory unsafeDocumentBuilderFactory();
-
-	public XMLInputFactory unsafeXMLInputFactory();
-
-	public XMLReader unsafeXMLReader();
-
 }
