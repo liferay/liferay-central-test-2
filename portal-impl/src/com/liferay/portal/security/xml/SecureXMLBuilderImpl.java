@@ -63,13 +63,11 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		}
 
 		try {
+			documentBuilderFactory.setExpandEntityReferences(false);
 			documentBuilderFactory.setFeature(
 				_FEATURES_EXTERNAL_GENERAL_ENTITIES, false);
-
 			documentBuilderFactory.setFeature(
 				_FEATURES_EXTERNAL_PARAMETER_ENTITIES, false);
-
-			documentBuilderFactory.setExpandEntityReferences(false);
 		}
 		catch (Exception e) {
 			_log.error(
