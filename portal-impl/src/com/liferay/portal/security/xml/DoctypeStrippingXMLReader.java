@@ -116,7 +116,7 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 		throws IOException, SAXException {
 
 		if (_disallowDoctypeDecl) {
-			final InputStream inputStream = inputSource.getByteStream();
+			InputStream inputStream = inputSource.getByteStream();
 
 			if (inputStream != null) {
 				final SimpleDoctypeStrippingFilter filter =
@@ -140,14 +140,14 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 					});
 			}
 
-			Reader characterStream = inputSource.getCharacterStream();
+			Reader reader = inputSource.getCharacterStream();
 
-			if (characterStream != null) {
+			if (reader != null) {
 				final SimpleDoctypeStrippingFilter filter =
-					new SimpleDoctypeStrippingFilter(characterStream);
+					new SimpleDoctypeStrippingFilter(reader);
 
 				inputSource.setCharacterStream(
-					new FilterReader(characterStream) {
+					new FilterReader(reader) {
 
 						@Override
 						public int read() throws IOException {
