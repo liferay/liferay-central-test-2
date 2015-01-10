@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet.taglib;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.registry.Registry;
@@ -37,7 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TagDynamicIncludeUtil {
 
-	public static List<TagDynamicInclude> getDynamicIncludes(
+	public static List<TagDynamicInclude> getTagDynamicIncludes(
 		String tagClassName, String tagDynamicId, String tagPoint) {
 
 		String key = _getKey(tagClassName, tagDynamicId, tagPoint);
@@ -45,13 +46,13 @@ public class TagDynamicIncludeUtil {
 		return _instance._tagDynamicIncludes.getService(key);
 	}
 
-	public static boolean hasDynamicInclude(
+	public static boolean hasTagDynamicInclude(
 		String tagClassName, String tagDynamicId, String tagPoint) {
 
-		List<TagDynamicInclude> dynamicIncludes = getDynamicIncludes(
+		List<TagDynamicInclude> tagDynamicIncludes = getTagDynamicIncludes(
 			tagClassName, tagDynamicId, tagPoint);
 
-		if ((dynamicIncludes == null) || dynamicIncludes.isEmpty()) {
+		if ((tagDynamicIncludes == null) || tagDynamicIncludes.isEmpty()) {
 			return false;
 		}
 
@@ -63,27 +64,27 @@ public class TagDynamicIncludeUtil {
 		String tagClassName, String tagDynamicId, String tagPoint,
 		boolean ascendingPriority) {
 
-		List<TagDynamicInclude> dynamicIncludes = getDynamicIncludes(
+		List<TagDynamicInclude> tagDynamicIncludes = getTagDynamicIncludes(
 			tagClassName, tagDynamicId, tagPoint);
 
-		if ((dynamicIncludes == null) || dynamicIncludes.isEmpty()) {
+		if ((tagDynamicIncludes == null) || tagDynamicIncludes.isEmpty()) {
 			return;
 		}
 
 		Iterator<TagDynamicInclude> iterator = null;
 
 		if (ascendingPriority) {
-			iterator = dynamicIncludes.iterator();
+			iterator = tagDynamicIncludes.iterator();
 		}
 		else {
-			iterator = ListUtil.reverseIterator(dynamicIncludes);
+			iterator = ListUtil.reverseIterator(tagDynamicIncludes);
 		}
 
 		while (iterator.hasNext()) {
-			TagDynamicInclude dynamicInclude = iterator.next();
+			TagDynamicInclude tagDynamicInclude = iterator.next();
 
 			try {
-				dynamicInclude.include(
+				tagDynamicInclude.include(
 					request, response, tagClassName, tagDynamicId, tagPoint);
 			}
 			catch (Exception e) {
@@ -98,9 +99,9 @@ public class TagDynamicIncludeUtil {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(tagClassName);
-		sb.append('#');
+		sb.append(CharPool.POUND);
 		sb.append(tagPoint);
-		sb.append('#');
+		sb.append(CharPool.POUND);
 		sb.append(tagDynamicId);
 
 		return sb.toString();
@@ -123,7 +124,7 @@ public class TagDynamicIncludeUtil {
 
 					try {
 						tagDynamicInclude.register(
-							new TagDynamicInclude.TagItemRegistry() {
+							new TagDynamicInclude.TagDynamicIncludeRegistry() {
 
 								@Override
 								public void register(
@@ -135,12 +136,14 @@ public class TagDynamicIncludeUtil {
 
 									emitter.emit(key);
 								}
+
 							});
 					}
 					finally {
 						registry.ungetService(serviceReference);
 					}
 				}
+
 			});
 
 		_tagDynamicIncludes.open();

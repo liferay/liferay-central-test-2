@@ -63,8 +63,9 @@ public class DoIncludeJSPDynamicInclude extends BaseDynamicInclude {
 	}
 
 	@Override
-	public void register(ItemRegistry itemRegistry) {
-		itemRegistry.register("com.liferay.taglib.util.ThemeUtil#doIncludeJS");
+	public void register(DynamicIncludeRegistry dynamicIncludeRegistry) {
+		dynamicIncludeRegistry.register(
+			"com.liferay.taglib.util.ThemeUtil#doIncludeJS");
 	}
 
 }

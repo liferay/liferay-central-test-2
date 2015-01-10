@@ -97,7 +97,7 @@ public class DynamicIncludeUtil {
 						serviceReference);
 
 					dynamicInclude.register(
-						new DynamicInclude.ItemRegistry() {
+						new DynamicInclude.DynamicIncludeRegistry() {
 
 							@Override
 							public void register(String key) {
@@ -108,6 +108,7 @@ public class DynamicIncludeUtil {
 
 					registry.ungetService(serviceReference);
 				}
+
 			});
 
 		_dynamicIncludes.open();

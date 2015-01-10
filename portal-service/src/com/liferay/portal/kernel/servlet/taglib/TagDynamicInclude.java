@@ -29,9 +29,9 @@ public interface TagDynamicInclude {
 			String tagClassName, String tagDynamicId, String tagPoint)
 		throws IOException;
 
-	public void register(TagItemRegistry tagItemRegistry);
+	public void register(TagDynamicIncludeRegistry tagDynamicIncludeRegistry);
 
-	public interface TagItemRegistry {
+	public interface TagDynamicIncludeRegistry {
 
 		public void register(
 			String tagClassName, String tagDynamicId, String tagPoint);
