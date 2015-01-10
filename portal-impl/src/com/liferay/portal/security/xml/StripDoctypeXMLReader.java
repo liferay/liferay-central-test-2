@@ -119,7 +119,7 @@ public class StripDoctypeXMLReader implements XMLReader {
 			InputStream inputStream = inputSource.getByteStream();
 
 			if (inputStream != null) {
-				final StripDoctypeFilter filter =
+				final StripDoctypeFilter stripDoctypeFilter =
 					new StripDoctypeFilter(inputStream);
 
 				inputSource.setByteStream(
@@ -127,14 +127,15 @@ public class StripDoctypeXMLReader implements XMLReader {
 
 						@Override
 						public int read() throws IOException {
-							return filter.read();
+							return stripDoctypeFilter.read();
 						}
 	
 						@Override
 						public int read(byte[] bytes, int offset, int length)
 							throws IOException {
 	
-							return filter.read(bytes, offset, length);
+							return stripDoctypeFilter.read(
+								bytes, offset, length);
 						}
 
 					});
@@ -143,7 +144,7 @@ public class StripDoctypeXMLReader implements XMLReader {
 			Reader reader = inputSource.getCharacterStream();
 
 			if (reader != null) {
-				final StripDoctypeFilter filter =
+				final StripDoctypeFilter stripDoctypeFilter =
 					new StripDoctypeFilter(reader);
 
 				inputSource.setCharacterStream(
@@ -151,14 +152,15 @@ public class StripDoctypeXMLReader implements XMLReader {
 
 						@Override
 						public int read() throws IOException {
-							return filter.read();
+							return stripDoctypeFilter.read();
 						}
 
 						@Override
 						public int read(char[] chars, int offset, int length)
 							throws IOException {
 
-							return filter.read(chars, offset, length);
+							return stripDoctypeFilter.read(
+								chars, offset, length);
 						}
 
 					});

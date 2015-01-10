@@ -26,11 +26,11 @@ import java.io.Reader;
 public class StripDoctypeFilter {
 
 	public StripDoctypeFilter(InputStream inputStream) {
-		this._inputStream = inputStream;
+		_inputStream = inputStream;
 	}
 
 	public StripDoctypeFilter(Reader reader) {
-		this._reader = reader;
+		_reader = reader;
 	}
 
 	public int read() throws IOException {
@@ -46,39 +46,37 @@ public class StripDoctypeFilter {
 
 		if (first == '<') {
 			int[] next = new int[2];
+
 			next[0] = readFromSource();
 			next[1] = readFromSource();
 
 			if (next[0] == '?') {
 				setBuffer(next);
+
 				return first;
 			}
 
 			if ((next[0] == '!') && (next[1] == '-')) {
 				setBuffer(next);
+
 				return first;
 			}
 
 			if ((next[0] == '!') && (next[1] == 'D')) {
 				while (true) {
 					int doctypeContent = readFromSource();
+					
+					if (doctypeContent == '[') {
+						entityDeclaration = true;
+					}
+					else if (doctypeContent == ']') {
+						entityDeclaration = false;
+					}
+					else if (doctypeContent == '>') {
+						if (!entityDeclaration) {
+							_documentStarted = true;
 
-					switch (doctypeContent) {
-						case '[': {
-							entityDeclaration = true;
-							break;
-						}
-
-						case ']': {
-							entityDeclaration = false;
-							break;
-						}
-
-						case '>': {
-							if (!entityDeclaration) {
-								_documentStarted = true;
-								return readFromSource();
-							}
+							return readFromSource();
 						}
 					}
 				}
@@ -144,25 +142,28 @@ public class StripDoctypeFilter {
 	}
 
 	protected boolean bufferEmpty() {
-		return _bufferLen == 0;
+		return _bufferLength == 0;
 	}
 
 	protected int readFromBuffer() {
-		_bufferLen--;
-		return _buffer[_bufferLen];
+		_bufferLength--;
+
+		return _buffer[_bufferLength];
 	}
 
-	protected void setBuffer(int[] buff) {
-		_buffer = buff;
+	protected void setBuffer(int[] buffer) {
+		_buffer = buffer;
+
 		ArrayUtil.reverse(_buffer);
-		_bufferLen = _buffer.length;
+
+		_bufferLength = _buffer.length;
 	}
 
 	private boolean _documentStarted;
 	private InputStream _inputStream;
 	private Reader _reader;
-	boolean entityDeclaration = false;
+	private boolean entityDeclaration;
 	private int[] _buffer;
-	private int _bufferLen = 0;
+	private int _bufferLength = 0;
 
 }
