@@ -34,7 +34,7 @@ public class StripDoctypeFilter {
 	}
 
 	public int read() throws IOException {
-		if (!bufferEmpty()) {
+		if (_bufferLength > 0) {
 			return readFromBuffer();
 		}
 
@@ -83,16 +83,17 @@ public class StripDoctypeFilter {
 			}
 
 			setBuffer(next);
+
 			_documentStarted = true;
 		}
 
 		return first;
 	}
 
-	public int read(char[] cbuf, int off, int len) throws IOException {
-		int read;
+	public int read(char[] chars, int offset, int length) throws IOException {
+		int read = 0;
 
-		for (read = 0; read < len; read++) {
+		for (read = 0; read < length; read++) {
 			int c = read();
 
 			if (c == -1) {
@@ -103,16 +104,16 @@ public class StripDoctypeFilter {
 				return read;
 			}
 
-			cbuf[off + read] = (char)c;
+			chars[offset + read] = (char)c;
 		}
 
 		return read;
 	}
 
-	public int read(byte[] buffer, int off, int len) throws IOException {
-		int read;
+	public int read(byte[] bytes, int offset, int length) throws IOException {
+		int read = 0;
 
-		for (read = 0; read < len; read++) {
+		for (read = 0; read < length; read++) {
 			int c = read();
 
 			if (c == -1) {
@@ -123,7 +124,7 @@ public class StripDoctypeFilter {
 				return read;
 			}
 
-			buffer[off + read] = (byte) (c & 0xFF);
+			bytes[offset + read] = (byte) (c & 0xFF);
 		}
 
 		return read;
@@ -139,10 +140,6 @@ public class StripDoctypeFilter {
 		}
 
 		throw new IllegalStateException("No underlying source available");
-	}
-
-	protected boolean bufferEmpty() {
-		return _bufferLength == 0;
 	}
 
 	protected int readFromBuffer() {
