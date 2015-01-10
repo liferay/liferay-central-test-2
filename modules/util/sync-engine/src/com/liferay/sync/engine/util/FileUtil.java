@@ -260,6 +260,8 @@ public class FileUtil {
 
 		if (_syncFileIgnoreNames.contains(fileName) ||
 			(!Files.isDirectory(filePath) && fileName.startsWith("~$")) ||
+			(!Files.isDirectory(filePath) && fileName.startsWith("~") &&
+			 fileName.endsWith(".tmp")) ||
 			(PropsValues.SYNC_FILE_IGNORE_HIDDEN && isHidden(filePath)) ||
 			Files.isSymbolicLink(filePath) || fileName.endsWith(".lnk")) {
 
