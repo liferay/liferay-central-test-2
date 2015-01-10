@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
 	property = {"tagClassName=com.liferay.taglib.aui.FormTag"},
 	service = TagDynamicIdFactory.class
 )
-public class SampleFormTagIdFactory implements TagDynamicIdFactory {
+public class SampleFormTagDynamicIdFactory implements TagDynamicIdFactory {
 
 	@Override
 	public String getTagDynamicId(
