@@ -161,6 +161,6 @@ public class StripDoctypeFilter {
 	private Reader _reader;
 	private boolean entityDeclaration;
 	private int[] _buffer;
-	private int _bufferLength = 0;
+	private int _bufferLength;
 
 }
