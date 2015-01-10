@@ -22,7 +22,7 @@ import org.xml.sax.XMLReader;
 /**
  * @author Tomas Polesovsky
  */
-public interface SecureXMLBuilder {
+public interface SecureXMLFactoryProvider {
 
 	public DocumentBuilderFactory newDocumentBuilderFactory();
 

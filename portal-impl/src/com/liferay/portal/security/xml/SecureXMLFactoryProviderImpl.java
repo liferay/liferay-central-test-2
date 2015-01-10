@@ -29,7 +29,7 @@ import org.xml.sax.XMLReader;
 /**
  * @author Tomas Polesovsky
  */
-public class SecureXMLBuilderImpl implements SecureXMLBuilder {
+public class SecureXMLFactoryProviderImpl implements SecureXMLFactoryProvider {
 
 	@Override
 	public DocumentBuilderFactory newDocumentBuilderFactory() {
@@ -190,6 +190,6 @@ public class SecureXMLBuilderImpl implements SecureXMLBuilder {
 		"http://xml.org/sax/features/external-parameter-entities";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SecureXMLBuilderImpl.class);
+		SecureXMLFactoryProviderImpl.class);
 
 }

@@ -24,12 +24,13 @@ import org.xml.sax.XMLReader;
 /**
  * @author Tomas Polesovsky
  */
-public class SecureXMLBuilderUtil {
+public class SecureXMLFactoryProviderUtil {
 
-	public static SecureXMLBuilder getSecureXMLBuilder() {
-		PortalRuntimePermission.checkGetBeanProperty(SecureXMLBuilder.class);
+	public static SecureXMLFactoryProvider getSecureXMLBuilder() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			SecureXMLFactoryProvider.class);
 
-		return _secureXMLBuilder;
+		return _secureXMLFactoryProvider;
 	}
 
 	public static DocumentBuilderFactory newDocumentBuilderFactory() {
@@ -56,12 +57,14 @@ public class SecureXMLBuilderUtil {
 		return getSecureXMLBuilder().unsafeXMLReader();
 	}
 
-	public void setSecureXMLBuilder(SecureXMLBuilder secureXMLBuilder) {
+	public void setSecureXMLBuilder(
+		SecureXMLFactoryProvider secureXMLFactoryProvider) {
+
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-		_secureXMLBuilder = secureXMLBuilder;
+		_secureXMLFactoryProvider = secureXMLFactoryProvider;
 	}
 
-	private static SecureXMLBuilder _secureXMLBuilder;
+	private static SecureXMLFactoryProvider _secureXMLFactoryProvider;
 
 }
