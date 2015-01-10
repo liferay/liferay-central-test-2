@@ -22,19 +22,21 @@ import com.liferay.registry.collections.ServiceTrackerMap;
  */
 public class TagDynamicIdFactoryRegistry {
 
-	public static TagDynamicIdFactory getTagIdFactory(String tagClassName) {
-		return _instance._tagIdFactories.getService(tagClassName);
+	public static TagDynamicIdFactory getTagDynamicIdFactory(
+		String tagClassName) {
+
+		return _instance._tagDynamicIdFactories.getService(tagClassName);
 	}
 
 	private TagDynamicIdFactoryRegistry() {
-		_tagIdFactories.open();
+		_tagDynamicIdFactories.open();
 	}
 
 	private static final TagDynamicIdFactoryRegistry _instance =
 		new TagDynamicIdFactoryRegistry();
 
 	private final ServiceTrackerMap<String, TagDynamicIdFactory>
-		_tagIdFactories = ServiceTrackerCollections.singleValueMap(
+		_tagDynamicIdFactories = ServiceTrackerCollections.singleValueMap(
 			TagDynamicIdFactory.class, "tagClassName");
 
 }

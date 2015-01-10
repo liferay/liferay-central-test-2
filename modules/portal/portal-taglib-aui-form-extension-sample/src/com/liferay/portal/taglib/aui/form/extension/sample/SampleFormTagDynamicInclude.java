@@ -46,8 +46,8 @@ public class SampleFormTagDynamicInclude implements TagDynamicInclude {
 	}
 
 	@Override
-	public void register(TagItemRegistry registry) {
-		registry.register(
+	public void register(TagItemRegistry tagItemRegistry) {
+		tagItemRegistry.register(
 			"com.liferay.taglib.aui.FormTag", PortletKeys.LOGIN + "-fm",
 			"doStartTag#before");
 	}

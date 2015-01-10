@@ -96,13 +96,15 @@ public class DynamicIncludeUtil {
 					DynamicInclude dynamicInclude = registry.getService(
 						serviceReference);
 
-					dynamicInclude.register(new DynamicInclude.ItemRegistry() {
+					dynamicInclude.register(
+						new DynamicInclude.ItemRegistry() {
 
-						@Override
-						public void register(String key) {
-							emitter.emit(key);
-						}
-					});
+							@Override
+							public void register(String key) {
+								emitter.emit(key);
+							}
+
+						});
 
 					registry.ungetService(serviceReference);
 				}
