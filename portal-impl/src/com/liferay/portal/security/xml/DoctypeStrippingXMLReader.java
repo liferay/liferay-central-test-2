@@ -35,8 +35,8 @@ import org.xml.sax.XMLReader;
  */
 public class DoctypeStrippingXMLReader implements XMLReader {
 
-	public DoctypeStrippingXMLReader(XMLReader _xmlReader) {
-		this._xmlReader = _xmlReader;
+	public DoctypeStrippingXMLReader(XMLReader xmlReader) {
+		_xmlReader = xmlReader;
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 	public void setFeature(String name, boolean value)
 		throws SAXNotRecognizedException, SAXNotSupportedException {
 
-		if (_FEATURES_DISALLOW_DTD.equals(name)) {
-			_disallowDTD = value;
+		if (_FEATURES_DISALLOW_DOCTYPE_DECL.equals(name)) {
+			_disallowDoctypeDecl = value;
 		}
 
 		_xmlReader.setFeature(name, value);
@@ -112,53 +112,60 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 	}
 
 	@Override
-	public void parse(InputSource input) throws IOException, SAXException {
-		if (_disallowDTD) {
-			final InputStream byteStream = input.getByteStream();
+	public void parse(InputSource inputSource)
+		throws IOException, SAXException {
 
-			if (byteStream != null) {
+		if (_disallowDoctypeDecl) {
+			final InputStream inputStream = inputSource.getByteStream();
+
+			if (inputStream != null) {
 				final SimpleDoctypeStrippingFilter filter =
-					new SimpleDoctypeStrippingFilter(byteStream);
+					new SimpleDoctypeStrippingFilter(inputStream);
 
-				input.setByteStream(new FilterInputStream(byteStream) {
-					@Override
-					public int read() throws IOException {
-						return filter.read();
-					}
+				inputSource.setByteStream(
+					new FilterInputStream(inputStream) {
 
-					@Override
-					public int read(byte[] b, int off, int len)
-						throws IOException {
+						@Override
+						public int read() throws IOException {
+							return filter.read();
+						}
+	
+						@Override
+						public int read(byte[] bytes, int offset, int length)
+							throws IOException {
+	
+							return filter.read(bytes, offset, length);
+						}
 
-						return filter.read(b, off, len);
-					}
-				});
+					});
 			}
 
-			Reader characterStream = input.getCharacterStream();
+			Reader characterStream = inputSource.getCharacterStream();
 
 			if (characterStream != null) {
 				final SimpleDoctypeStrippingFilter filter =
 					new SimpleDoctypeStrippingFilter(characterStream);
 
-				input.setCharacterStream(
+				inputSource.setCharacterStream(
 					new FilterReader(characterStream) {
+
 						@Override
 						public int read() throws IOException {
 							return filter.read();
 						}
 
 						@Override
-						public int read(char[] cbuf, int off, int len)
+						public int read(char[] chars, int offset, int length)
 							throws IOException {
 
-							return filter.read(cbuf, off, len);
+							return filter.read(chars, offset, length);
 						}
+
 					});
 			}
 		}
 
-		_xmlReader.parse(input);
+		_xmlReader.parse(inputSource);
 	}
 
 	@Override
@@ -166,10 +173,10 @@ public class DoctypeStrippingXMLReader implements XMLReader {
 		_xmlReader.parse(systemId);
 	}
 
-	private static final String _FEATURES_DISALLOW_DTD =
+	private static final String _FEATURES_DISALLOW_DOCTYPE_DECL =
 		"http://apache.org/xml/features/disallow-doctype-decl";
 
-	private boolean _disallowDTD;
+	private boolean _disallowDoctypeDecl;
 	private XMLReader _xmlReader;
 
 }
