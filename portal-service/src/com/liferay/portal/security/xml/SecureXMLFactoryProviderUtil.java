@@ -26,7 +26,7 @@ import org.xml.sax.XMLReader;
  */
 public class SecureXMLFactoryProviderUtil {
 
-	public static SecureXMLFactoryProvider getSecureXMLBuilder() {
+	public static SecureXMLFactoryProvider getSecureXMLFactoryProvider() {
 		PortalRuntimePermission.checkGetBeanProperty(
 			SecureXMLFactoryProvider.class);
 
@@ -34,18 +34,18 @@ public class SecureXMLFactoryProviderUtil {
 	}
 
 	public static DocumentBuilderFactory newDocumentBuilderFactory() {
-		return getSecureXMLBuilder().newDocumentBuilderFactory();
+		return getSecureXMLFactoryProvider().newDocumentBuilderFactory();
 	}
 
 	public static XMLInputFactory newXMLInputFactory() {
-		return getSecureXMLBuilder().newXMLInputFactory();
+		return getSecureXMLFactoryProvider().newXMLInputFactory();
 	}
 
 	public static XMLReader newXMLReader() {
-		return getSecureXMLBuilder().newXMLReader();
+		return getSecureXMLFactoryProvider().newXMLReader();
 	}
 
-	public void setSecureXMLBuilder(
+	public void setSecureXMLFactoryProvider(
 		SecureXMLFactoryProvider secureXMLFactoryProvider) {
 
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
