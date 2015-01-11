@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.MimeTypes;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.xml.SecureXMLFactoryProviderUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -214,7 +213,7 @@ public class MimeTypesImpl implements MimeTypes, MimeTypesReaderMetKeys {
 
 	protected void read(InputStream stream) throws Exception {
 		DocumentBuilderFactory documentBuilderFactory =
-			SecureXMLFactoryProviderUtil.newDocumentBuilderFactory();
+			DocumentBuilderFactory.newInstance();
 
 		DocumentBuilder documentBuilder =
 			documentBuilderFactory.newDocumentBuilder();
