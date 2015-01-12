@@ -62,11 +62,11 @@ public class RepositoryClassDefinition
 	public LocalRepository createLocalRepository(long repositoryId)
 		throws PortalException {
 
-		InitializedDocumentRepository documentRepositoryProxy =
+		InitializedDocumentRepository initializedDocumentRepository =
 			new InitializedDocumentRepository();
 
 		DefaultCapabilityRegistry defaultCapabilityRegistry =
-			new DefaultCapabilityRegistry(documentRepositoryProxy);
+			new DefaultCapabilityRegistry(initializedDocumentRepository);
 
 		_repositoryDefiner.registerCapabilities(defaultCapabilityRegistry);
 
@@ -74,7 +74,7 @@ public class RepositoryClassDefinition
 			new DefaultRepositoryEventRegistry(_rootRepositoryEventTrigger);
 
 		setUpCommonCapabilities(
-			documentRepositoryProxy, defaultCapabilityRegistry,
+			initializedDocumentRepository, defaultCapabilityRegistry,
 			defaultRepositoryEventRegistry);
 
 		defaultCapabilityRegistry.registerCapabilityRepositoryEvents(
@@ -91,7 +91,7 @@ public class RepositoryClassDefinition
 				wrappedLocalRepository, defaultCapabilityRegistry,
 				defaultRepositoryEventRegistry);
 
-		documentRepositoryProxy.setDocumentRepository(
+		initializedDocumentRepository.setDocumentRepository(
 			capabilityLocalRepository);
 
 		return capabilityLocalRepository;
@@ -101,11 +101,11 @@ public class RepositoryClassDefinition
 	public Repository createRepository(long repositoryId)
 		throws PortalException {
 
-		InitializedDocumentRepository documentRepositoryProxy =
+		InitializedDocumentRepository initializedDocumentRepository =
 			new InitializedDocumentRepository();
 
 		DefaultCapabilityRegistry defaultCapabilityRegistry =
-			new DefaultCapabilityRegistry(documentRepositoryProxy);
+			new DefaultCapabilityRegistry(initializedDocumentRepository);
 
 		_repositoryDefiner.registerCapabilities(defaultCapabilityRegistry);
 
@@ -113,7 +113,7 @@ public class RepositoryClassDefinition
 			new DefaultRepositoryEventRegistry(_rootRepositoryEventTrigger);
 
 		setUpCommonCapabilities(
-			documentRepositoryProxy, defaultCapabilityRegistry,
+			initializedDocumentRepository, defaultCapabilityRegistry,
 			defaultRepositoryEventRegistry);
 
 		Repository repository = _repositoryFactory.createRepository(
@@ -132,7 +132,8 @@ public class RepositoryClassDefinition
 			wrappedRepository, defaultCapabilityRegistry,
 			defaultRepositoryEventRegistry);
 
-		documentRepositoryProxy.setDocumentRepository(capabilityRepository);
+		initializedDocumentRepository.setDocumentRepository(
+			capabilityRepository);
 
 		return capabilityRepository;
 	}
