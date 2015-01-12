@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.repository.registry.CapabilityRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryDefiner;
 import com.liferay.portal.kernel.repository.registry.RepositoryFactoryRegistry;
 import com.liferay.portal.kernel.util.ProxyUtil;
-import com.liferay.portal.repository.InitializedDocumentRepositoryProxy;
+import com.liferay.portal.repository.InitializedDocumentRepository;
 import com.liferay.portal.repository.capabilities.CapabilityLocalRepository;
 import com.liferay.portal.repository.capabilities.CapabilityRepository;
 import com.liferay.portal.repository.capabilities.ConfigurationCapabilityImpl;
@@ -62,8 +62,8 @@ public class RepositoryClassDefinition
 	public LocalRepository createLocalRepository(long repositoryId)
 		throws PortalException {
 
-		InitializedDocumentRepositoryProxy documentRepositoryProxy =
-			new InitializedDocumentRepositoryProxy();
+		InitializedDocumentRepository documentRepositoryProxy =
+			new InitializedDocumentRepository();
 
 		DefaultCapabilityRegistry defaultCapabilityRegistry =
 			new DefaultCapabilityRegistry(documentRepositoryProxy);
@@ -101,8 +101,8 @@ public class RepositoryClassDefinition
 	public Repository createRepository(long repositoryId)
 		throws PortalException {
 
-		InitializedDocumentRepositoryProxy documentRepositoryProxy =
-			new InitializedDocumentRepositoryProxy();
+		InitializedDocumentRepository documentRepositoryProxy =
+			new InitializedDocumentRepository();
 
 		DefaultCapabilityRegistry defaultCapabilityRegistry =
 			new DefaultCapabilityRegistry(documentRepositoryProxy);

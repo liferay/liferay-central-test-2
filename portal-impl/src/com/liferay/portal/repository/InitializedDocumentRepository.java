@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * @author Adolfo Pérez
  */
-public class InitializedDocumentRepositoryProxy implements DocumentRepository {
+public class InitializedDocumentRepository implements DocumentRepository {
 
 	@Override
 	public FileEntry addFileEntry(
