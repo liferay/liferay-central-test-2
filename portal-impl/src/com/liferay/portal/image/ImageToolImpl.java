@@ -671,34 +671,35 @@ public class ImageToolImpl implements ImageTool {
 	}
 
 	protected void orderImageReaderServiceProviders() {
-		IIORegistry defaultInstance = IIORegistry.getDefaultInstance();
+		IIORegistry defaultIIORegistry = IIORegistry.getDefaultInstance();
 
-		ImageReaderSpi firstProvider = null;
-		ImageReaderSpi secondProvider = null;
+		ImageReaderSpi firstImageReaderSpi = null;
+		ImageReaderSpi secondImageReaderSpi = null;
 
-		Iterator<ImageReaderSpi> serviceProviders =
-			defaultInstance.getServiceProviders(ImageReaderSpi.class, true);
+		Iterator<ImageReaderSpi> imageReaderSpis =
+			defaultIIORegistry.getServiceProviders(ImageReaderSpi.class, true);
 
-		while (serviceProviders.hasNext()) {
-			ImageReaderSpi serviceProvider = serviceProviders.next();
+		while (imageReaderSpis.hasNext()) {
+			ImageReaderSpi imageReaderSpi = imageReaderSpis.next();
 
-			if (serviceProvider instanceof CMYKJPEGImageReaderSpi) {
-				secondProvider = serviceProvider;
+			if (imageReaderSpi instanceof CMYKJPEGImageReaderSpi) {
+				secondImageReaderSpi = imageReaderSpi;
 			}
 			else {
-				String[] formatNames = serviceProvider.getFormatNames();
+				String[] formatNames = imageReaderSpi.getFormatNames();
 
 				if (ArrayUtil.contains(formatNames, TYPE_JPEG, true) ||
 					ArrayUtil.contains(formatNames, "jpeg", true)) {
 
-					firstProvider = serviceProvider;
+					firstImageReaderSpi = imageReaderSpi;
 				}
 			}
 		}
 
-		if ((firstProvider != null) && (secondProvider != null)) {
-			defaultInstance.setOrdering(
-				ImageReaderSpi.class, firstProvider, secondProvider);
+		if ((firstImageReaderSpi != null) && (secondImageReaderSpi != null)) {
+			defaultIIORegistry.setOrdering(
+				ImageReaderSpi.class, firstImageReaderSpi,
+				secondImageReaderSpi);
 		}
 	}
 
