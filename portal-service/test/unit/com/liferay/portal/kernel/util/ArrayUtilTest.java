@@ -123,18 +123,18 @@ public class ArrayUtilTest {
 
 	@Test
 	public void testContainsByteArray() throws Exception {
-		byte[] array1 = {2, 3};
+		byte[] array = {2, 3};
 
-		Assert.assertFalse(ArrayUtil.contains(array1, (byte)1));
-		Assert.assertTrue(ArrayUtil.contains(array1, (byte)2));
+		Assert.assertFalse(ArrayUtil.contains(array, (byte)1));
+		Assert.assertTrue(ArrayUtil.contains(array, (byte)2));
 	}
 
 	@Test
 	public void testContainsCharArray() throws Exception {
-		char[] array1 = {'b', 'c'};
+		char[] array = {'a', 'b'};
 
-		Assert.assertFalse(ArrayUtil.contains(array1, 'a'));
-		Assert.assertTrue(ArrayUtil.contains(array1, 'b'));
+		Assert.assertFalse(ArrayUtil.contains(array, 'C'));
+		Assert.assertTrue(ArrayUtil.contains(array, 'a'));
 	}
 
 	@Test
@@ -179,17 +179,13 @@ public class ArrayUtilTest {
 
 	@Test
 	public void testContainsStringArray() throws Exception {
-		String a = "a";
-		String b = "b";
-
-		String[] array = {a, b};
+		String[] array = {"a", "b"};
 
 		Assert.assertFalse(ArrayUtil.contains(array, "c", true));
 		Assert.assertFalse(ArrayUtil.contains(array, "C", false));
-		Assert.assertTrue(ArrayUtil.contains(array, a, true));
-		Assert.assertTrue(ArrayUtil.contains(array, a, false));
-		Assert.assertTrue(
-			ArrayUtil.contains(array, StringUtil.toUpperCase(a), true));
+		Assert.assertTrue(ArrayUtil.contains(array, "a", true));
+		Assert.assertTrue(ArrayUtil.contains(array, "a", false));
+		Assert.assertTrue(ArrayUtil.contains(array, "A", true));
 	}
 
 	@Test
