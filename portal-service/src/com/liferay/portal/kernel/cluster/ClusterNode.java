@@ -117,10 +117,10 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 		ClusterNode clusterNode = (ClusterNode)obj;
 
 		if (Validator.equals(_clusterNodeId, clusterNode._clusterNodeId) &&
-			Validator.equals(_portalProtocol, clusterNode._portalProtocol) &&
 			Validator.equals(
 				_portalInetSocketAddress,
-				clusterNode._portalInetSocketAddress)) {
+				clusterNode._portalInetSocketAddress) &&
+			Validator.equals(_portalProtocol, clusterNode._portalProtocol)) {
 
 			return true;
 		}
