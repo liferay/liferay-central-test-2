@@ -50,13 +50,13 @@ if (permissionChecker.isContentReviewer(user.getCompanyId(), scopeGroupId)) {
 	status = WorkflowConstants.STATUS_ANY;
 }
 
-DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
-
-String[] mediaGalleryMimeTypes = dlPortletInstanceSettings.getMimeTypes();
-
 Map<String, Object> contextObjects = new HashMap<String, Object>();
 
 contextObjects.put("dlPortletInstanceSettings", dlPortletInstanceSettings);
+
+DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
+
+String[] mediaGalleryMimeTypes = dlPortletInstanceSettings.getMimeTypes();
 
 List fileEntries = DLAppServiceUtil.getGroupFileEntries(scopeGroupId, 0, folderId, mediaGalleryMimeTypes, status, 0, SearchContainer.MAX_DELTA, null);
 %>
