@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import java.net.UnknownHostException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +28,7 @@ import org.junit.Test;
 public class FutureClusterResponsesTest {
 
 	@Test
-	public void testMultipleResponseFailure() throws UnknownHostException {
+	public void testMultipleResponseFailure() {
 		List<Address> addresses = new ArrayList<>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
@@ -65,7 +63,7 @@ public class FutureClusterResponsesTest {
 	}
 
 	@Test
-	public void testMultipleResponseSuccess() throws UnknownHostException {
+	public void testMultipleResponseSuccess() {
 		List<Address> addresses = new ArrayList<>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
@@ -126,7 +124,7 @@ public class FutureClusterResponsesTest {
 	}
 
 	@Test
-	public void testSingleResponseSuccess() throws UnknownHostException {
+	public void testSingleResponseSuccess() {
 		List<Address> addresses = new ArrayList<>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
