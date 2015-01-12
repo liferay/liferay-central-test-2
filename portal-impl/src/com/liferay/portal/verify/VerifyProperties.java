@@ -385,11 +385,11 @@ public class VerifyProperties extends VerifyProcess {
 		// Translator
 
 		new String[] {
-			"translator.default.languages", "translator.default.languages",
+			"translator.default.languages", "translation.id",
 			"com.liferay.translator.web"
 		},
 		new String[] {
-			"translator.languages", "translator.languages",
+			"translator.languages", "language.ids",
 			"com.liferay.translator.web"
 		},
 
