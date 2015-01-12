@@ -616,7 +616,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 					article.getResourcePrimKey(),
 					new int[] {
 						WorkflowConstants.STATUS_APPROVED,
-						WorkflowConstants.STATUS_IN_TRASH});
+						WorkflowConstants.STATUS_IN_TRASH
+					});
 
 			if ((latestIndexableArticle != null) &&
 				latestIndexableArticle.isIndexable()) {
