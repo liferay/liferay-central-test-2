@@ -71,7 +71,7 @@ public class TranslatorUtil {
 	public static Map<String, String> getLanguageIdsMap(
 		Locale locale, TranslatorConfiguration translatorConfiguration) {
 
-		Map<String, String> languageIdsMap = new HashMap();
+		Map<String, String> languageIdsMap = new HashMap<>();
 
 		String translatorLanguages =
 			translatorConfiguration.getTranslatorLanguages();
