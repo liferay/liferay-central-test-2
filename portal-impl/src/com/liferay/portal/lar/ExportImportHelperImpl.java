@@ -137,8 +137,6 @@ import java.util.regex.Pattern;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.apache.xerces.parsers.SAXParser;
-
 import org.xml.sax.InputSource;
 
 /**
