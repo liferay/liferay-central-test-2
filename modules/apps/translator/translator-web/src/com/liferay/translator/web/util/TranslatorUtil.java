@@ -73,8 +73,7 @@ public class TranslatorUtil {
 
 		Map<String, String> languageIdsMap = new HashMap<>();
 
-		String translatorLanguages =
-			translatorConfiguration.getLanguageIds();
+		String translatorLanguages = translatorConfiguration.getLanguageIds();
 
 		String[] languageIds = StringUtil.split(
 			translatorLanguages, StringPool.COMMA);
