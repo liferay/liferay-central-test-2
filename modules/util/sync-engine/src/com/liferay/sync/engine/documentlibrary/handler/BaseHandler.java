@@ -123,7 +123,7 @@ public class BaseHandler implements Handler<Void> {
 			if (message.equals("Connection reset") ||
 				message.equals("The target server failed to respond")) {
 
-				retryServerConnection(SyncAccount.UI_EVENT_DEFAULT);
+				retryServerConnection(SyncAccount.UI_EVENT_NONE);
 			}
 			else {
 				retryServerConnection(
