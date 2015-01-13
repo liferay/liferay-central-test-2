@@ -1894,13 +1894,13 @@ public class PortalImpl implements Portal {
 	public List<Group> getCurrentAndAncestorSiteGroups(long[] groupIds)
 		throws PortalException {
 
-		Set<Group> groups = new LinkedHashSet<Group>();
+		Set<Group> groups = new LinkedHashSet<>();
 
 		for (int i = 0; i < groupIds.length; i++) {
 			groups.addAll(getCurrentAndAncestorSiteGroups(groupIds[i]));
 		}
 
-		return new ArrayList<Group>(groups);
+		return new ArrayList<>(groups);
 	}
 
 	@Override
