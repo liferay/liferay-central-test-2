@@ -274,9 +274,9 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		else {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unexpected cluster node id " +
+					"Unexpected cluster node ID " +
 						clusterNode.getClusterNodeId() +
-							" for response container with uuid " + uuid);
+							" for response container with UUID " + uuid);
 			}
 		}
 	}
