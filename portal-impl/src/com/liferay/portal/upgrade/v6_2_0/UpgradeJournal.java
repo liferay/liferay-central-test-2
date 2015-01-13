@@ -223,6 +223,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 		updateStructures();
 		updateTemplates();
+
 		updateAssetClassTypeId();
 
 		super.doUpgrade();
