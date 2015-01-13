@@ -47,17 +47,13 @@ public abstract class BaseWebDriverImpl
 		String dependenciesDirName =
 			"portal-web//test//functional//com//liferay//portalweb//" +
 				"dependencies//";
-
 		String outputDirName = PropsValues.OUTPUT_DIR_NAME;
-
 		String sikuliImagesDirName = dependenciesDirName + "sikuli//linux//";
 
 		if (OSDetector.isWindows()) {
 			dependenciesDirName = StringUtil.replace(
 				dependenciesDirName, "//", "\\");
-
 			outputDirName = StringUtil.replace(outputDirName, "//", "\\");
-
 			projectDirName = StringUtil.replace(projectDirName, "//", "\\");
 
 			sikuliImagesDirName = StringUtil.replace(
@@ -67,11 +63,8 @@ public abstract class BaseWebDriverImpl
 		}
 
 		_dependenciesDirName = dependenciesDirName;
-
 		_outputDirName = outputDirName;
-
 		_projectDirName = projectDirName;
-
 		_sikuliImagesDirName = sikuliImagesDirName;
 
 		if (!PropsValues.MOBILE_DEVICE_ENABLED) {

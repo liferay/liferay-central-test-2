@@ -111,9 +111,7 @@ public class ThemeLoader {
 		_servletContext = servletContext;
 
 		boolean loadFromServletContext = true;
-
 		File fileStorage = null;
-
 		String themesPath = null;
 
 		try {
@@ -156,9 +154,7 @@ public class ThemeLoader {
 		}
 
 		_loadFromServletContext = loadFromServletContext;
-
 		_fileStorage = fileStorage;
-
 		_themesPath = themesPath;
 
 		loadThemes();
