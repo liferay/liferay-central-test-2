@@ -43,7 +43,8 @@ public class FileAvailabilityUtil {
 			return true;
 		}
 
-		Map<String, Boolean> availabilities = getAvailabilities(servletContext);
+		Map<String, Boolean> availabilities = _getAvailabilities(
+			servletContext);
 
 		Boolean available = availabilities.get(path);
 
@@ -72,8 +73,7 @@ public class FileAvailabilityUtil {
 		return available;
 	}
 
-	@SuppressWarnings("unchecked")
-	private static Map<String, Boolean> getAvailabilities(
+	private static Map<String, Boolean> _getAvailabilities(
 		ServletContext servletContext) {
 
 		Map<String, Boolean> availabilities =
