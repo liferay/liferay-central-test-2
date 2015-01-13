@@ -121,7 +121,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.io.File;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -138,6 +137,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 /**
  * @author Zsolt Berentey
