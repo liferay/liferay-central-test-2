@@ -1150,7 +1150,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				format(fileName);
 			}
 			catch (Exception e) {
-				throw new Exception("Failed to parse " + fileName, e);
+				throw new Exception("Unable to parse " + fileName, e);
 			}
 		}
 	}
