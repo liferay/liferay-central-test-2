@@ -281,9 +281,9 @@ public class JspServlet extends HttpServlet {
 				return null;
 			}
 
-			List<URL> entries = Collections.list(enumeration);
+			List<URL> urls = Collections.list(enumeration);
 
-			return entries.get(entries.size() - 1);
+			return urls.get(urls.size() - 1);
 		}
 
 		private URL getResource(String path) {
@@ -321,10 +321,7 @@ public class JspServlet extends HttpServlet {
 
 				return _jspBundle.getEntry(path);
 			}
-			catch (MalformedURLException e) {
-
-				// Ignore
-
+			catch (MalformedURLException murle) {
 			}
 
 			return null;
@@ -340,7 +337,7 @@ public class JspServlet extends HttpServlet {
 			try {
 				return url.openStream();
 			}
-			catch (IOException e) {
+			catch (IOException ioe) {
 				return null;
 			}
 		}

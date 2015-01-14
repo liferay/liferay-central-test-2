@@ -91,7 +91,7 @@ public class JspCompiler extends Jsr199JavaCompiler {
 
 		if (!(classLoader instanceof JspBundleClassloader)) {
 			throw new IllegalStateException(
-				"ClassLoader is not instance of JspBundleClassloader");
+				"Class loader is not an instance of JspBundleClassloader");
 		}
 
 		JspBundleClassloader jspBundleClassloader =
