@@ -61,9 +61,8 @@ public class DLDisplayContextFactoryProviderImpl
 			new DefaultDLEditFileEntryDisplayContext(
 				request, response, dlFileEntryType);
 
-		for (
-			DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
-			_dlDisplayContextFactoryReferences) {
+		for (DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
+				_dlDisplayContextFactoryReferences) {
 
 			DLDisplayContextFactory dlDisplayContextFactory =
 				dlDisplayContextFactoryReference.getDLDisplayContextFactory();
@@ -87,9 +86,8 @@ public class DLDisplayContextFactoryProviderImpl
 			new DefaultDLEditFileEntryDisplayContext(
 				request, response, fileEntry);
 
-		for (
-			DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
-			_dlDisplayContextFactoryReferences) {
+		for (DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
+				_dlDisplayContextFactoryReferences) {
 
 			DLDisplayContextFactory dlDisplayContextFactory =
 				dlDisplayContextFactoryReference.getDLDisplayContextFactory();
@@ -143,9 +141,8 @@ public class DLDisplayContextFactoryProviderImpl
 			return dlViewFileVersionDisplayContext;
 		}
 
-		for (
-			DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
-			_dlDisplayContextFactoryReferences) {
+		for (DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
+				_dlDisplayContextFactoryReferences) {
 
 			DLDisplayContextFactory dlDisplayContextFactory =
 				dlDisplayContextFactoryReference.getDLDisplayContextFactory();
