@@ -309,6 +309,20 @@ public class PortalImpl implements Portal {
 
 	public PortalImpl() {
 
+		// Always allow do as user service tracker
+
+		try {
+			Registry registry = RegistryUtil.getRegistry();
+
+			_alwaysAllowDoAsUserServiceTracker = registry.trackServices(
+				AlwaysAllowDoAsUser.class,
+				new AlwaysAllowDoAsUserServiceTrackerCustomizer());
+
+			_alwaysAllowDoAsUserServiceTracker.open();
+		}
+		catch (NullPointerException npe) {
+		}
+
 		// Computer name
 
 		String computerName = System.getProperty("env.COMPUTERNAME");
@@ -525,18 +539,6 @@ public class PortalImpl implements Portal {
 		}
 		else {
 			_validPortalDomainCheckDisabled = false;
-		}
-
-		try {
-			Registry registry = RegistryUtil.getRegistry();
-
-			_alwaysAllowDoAsUserServiceTracker = registry.trackServices(
-				AlwaysAllowDoAsUser.class,
-				new AlwaysAllowDoAsUserServiceTrackerCustomizer());
-
-			_alwaysAllowDoAsUserServiceTracker.open();
-		}
-		catch (NullPointerException npe) {
 		}
 	}
 
@@ -8470,7 +8472,7 @@ public class PortalImpl implements Portal {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Add AlwaysAllowDoAsUser " +
+					"Add alway sallow do as user " +
 						ClassUtil.getClassName(alwaysAllowDoAsUser));
 			}
 
@@ -8479,7 +8481,7 @@ public class PortalImpl implements Portal {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"There are " + _alwaysAllowDoAsUsers.size() +
-						" AlwaysAllowDoAsUser instances");
+						" alway sallow do as user instances");
 			}
 
 			return alwaysAllowDoAsUser;
@@ -8502,7 +8504,7 @@ public class PortalImpl implements Portal {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Delete AlwaysAllowDoAsUser " +
+					"Delete alway sallow do as user " +
 						ClassUtil.getClassName(alwaysAllowDoAsUser));
 			}
 
@@ -8511,7 +8513,7 @@ public class PortalImpl implements Portal {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"There are " + _alwaysAllowDoAsUsers.size() +
-						" AlwaysAllowDoAsUser instances");
+						" alway sallow do as user instances");
 			}
 		}
 
