@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.context;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.registry.ServiceReference;
 
 /**
@@ -37,14 +38,25 @@ public class DLDisplayContextFactoryReference
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
 		if (!(obj instanceof DLDisplayContextFactoryReference)) {
 			return false;
 		}
 
-		DLDisplayContextFactoryReference that =
+		DLDisplayContextFactoryReference dlDisplayContextFactoryReference =
 			(DLDisplayContextFactoryReference)obj;
 
-		return _serviceReference.equals(that._serviceReference);
+		if (Validator.equals(
+				_serviceReference,
+				dlDisplayContextFactoryReference._serviceReference)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public DLDisplayContextFactory getDLDisplayContextFactory() {
