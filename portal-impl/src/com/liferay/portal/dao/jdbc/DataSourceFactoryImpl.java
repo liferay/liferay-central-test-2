@@ -218,29 +218,31 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 				key = "user";
 			}
 
-			// Ignore Liferay properties
+			// Ignore Liferay property
 
 			if (isPropertyLiferay(key)) {
 				continue;
 			}
 
-			// Ignore DBCP properties
+			// Ignore DBCP property
 
 			if (isPropertyDBCP(key)) {
 				continue;
 			}
 
-			// Ignore HikariCP properties
+			// Ignore HikariCP property
 
 			if (isPropertyHikariCP(key)) {
 				continue;
 			}
 
-			// Ignore Tomcat
+			// Ignore Tomcat JDBC property
 
 			if (isPropertyTomcat(key)) {
 				continue;
 			}
+
+			// Set C3PO property
 
 			try {
 				BeanUtil.setProperty(comboPooledDataSource, key, value);
@@ -248,7 +250,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Property " + key + " is not a valid C3PO property");
+						"Property " + key + " is an invalid C3PO property");
 				}
 			}
 		}
@@ -280,31 +282,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();
 
-			// Ignore C3P0 properties
-
-			if (isPropertyC3PO(key)) {
-				continue;
-			}
-
-			// Ignore Liferay properties
-
-			if (isPropertyLiferay(key)) {
-				continue;
-			}
-
-			// Ignore DBCP properties
-
-			if (isPropertyDBCP(key)) {
-				continue;
-			}
-
-			// Ignore Tomcat
-
-			if (isPropertyTomcat(key)) {
-				continue;
-			}
-
-			// Mapping keys for HikariCP
+			// Map org.apache.commons.dbcp.BasicDataSource to Hikari CP
 
 			if (StringUtil.equalsIgnoreCase(key, "url")) {
 				key = "jdbcUrl";
@@ -315,14 +293,39 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 				key = "connectionCustomizerClassName";
 			}
 
+			// Ignore Liferay property
+
+			if (isPropertyLiferay(key)) {
+				continue;
+			}
+
+			// Ignore C3P0 property
+
+			if (isPropertyC3PO(key)) {
+				continue;
+			}
+
+			// Ignore DBCP property
+
+			if (isPropertyDBCP(key)) {
+				continue;
+			}
+
+			// Ignore Tomcat JDBC property
+
+			if (isPropertyTomcat(key)) {
+				continue;
+			}
+
+			// Set HikariCP property
+
 			try {
 				BeanUtil.setProperty(hikariDataSource, key, value);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Property " + key + " is not a valid HikariCP " +
-							"Connection Pool property");
+						"Property " + key + " is an invalid HikariCP property");
 				}
 			}
 		}
@@ -339,23 +342,25 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();
 
-			// Ignore Liferay properties
+			// Ignore Liferay property
 
 			if (isPropertyLiferay(key)) {
 				continue;
 			}
 
-			// Ignore HikariCP properties
+			// Ignore C3P0 property
+
+			if (isPropertyC3PO(key)) {
+				continue;
+			}
+
+			// Ignore HikariCP property
 
 			if (isPropertyHikariCP(key)) {
 				continue;
 			}
 
-			// Ignore C3P0 properties
-
-			if (isPropertyC3PO(key)) {
-				continue;
-			}
+			// Set Tomcat JDBC property
 
 			try {
 				BeanUtil.setProperty(poolProperties, key, value);
@@ -363,8 +368,8 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Property " + key + " is not a valid Tomcat JDBC " +
-							"Connection Pool property");
+						"Property " + key + " is an invalid Tomcat JDBC " +
+							"property");
 				}
 			}
 		}
