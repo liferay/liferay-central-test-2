@@ -46,8 +46,8 @@ public class JarUtil {
 			_log.info("Downloading " + url + " to " + path);
 		}
 
-		try (InputStream is = url.openStream()) {
-			Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+		try (InputStream inputStream = url.openStream()) {
+			Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
 		}
 
 		if (_log.isInfoEnabled()) {
