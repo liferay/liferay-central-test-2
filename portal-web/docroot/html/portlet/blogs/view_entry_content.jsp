@@ -171,7 +171,9 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						}
 						%>
 
-						<p><%= StringUtil.shorten(HtmlUtil.stripHtml(summary), pageAbstractLength) %></p>
+						<p>
+							<%= StringUtil.shorten(HtmlUtil.stripHtml(summary), pageAbstractLength) %>
+						</p>
 
 						<div class="read-more">
 							<aui:a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"hide-accessible", HtmlUtil.escape(entry.getTitle())} %>' key="read-more-x-about-x" translateArguments="<%= false %>" /> &raquo;</aui:a>
