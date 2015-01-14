@@ -320,7 +320,7 @@ public class BaseWebDAVTestCase {
 		return _FOLDER_NAME;
 	}
 
-	protected String getGroupFriendlyUrl() {
+	protected String getGroupFriendlyURL() {
 		return _GROUP_FRIENDLY_URL;
 	}
 

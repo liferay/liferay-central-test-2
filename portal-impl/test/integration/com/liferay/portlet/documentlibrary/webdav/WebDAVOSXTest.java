@@ -77,7 +77,7 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 
 		try {
 			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				PortalUtil.getDefaultCompanyId(), getGroupFriendlyUrl());
+				PortalUtil.getDefaultCompanyId(), getGroupFriendlyURL());
 
 			Folder folder = DLAppLocalServiceUtil.getFolder(
 				group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
