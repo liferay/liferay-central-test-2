@@ -121,7 +121,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			_log.debug(PropertiesUtil.toString(sortedProperties));
 		}
 
-		testClassForName(properties);
+		testDatabaseClass(properties);
 
 		DataSource dataSource = null;
 
@@ -267,7 +267,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 	protected DataSource initDataSourceHikariCP(Properties properties)
 		throws Exception {
 
-		testPoolClass(_HIKARICP_DATASOURCE_CLASS_NAME);
+		testLiferayPoolProviderClass(_HIKARICP_DATASOURCE_CLASS_NAME);
 
 		Thread currentThread = Thread.currentThread();
 
@@ -474,7 +474,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		}
 	}
 
-	protected void testClassForName(Properties properties) throws Exception {
+	protected void testDatabaseClass(Properties properties) throws Exception {
 		String driverClassName = properties.getProperty("driverClassName");
 
 		try {
@@ -496,26 +496,27 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 				throw cnfe;
 			}
 
-			ClassLoader globalClassLoader =
-				SystemException.class.getClassLoader();
+			ClassLoader classLoader = SystemException.class.getClassLoader();
 
-			if (!(globalClassLoader instanceof URLClassLoader)) {
+			if (!(classLoader instanceof URLClassLoader)) {
 				_log.error(
-					"Unable to install jar, global ClassLoader is not " +
-						"URLClassLoader");
+					"Unable to install JAR because the system class loader " +
+						"is not an instance of URLClassLoader");
 
 				return;
 			}
 
 			JarUtil.downloadAndInstallJar(
 				new URL(url), PropsValues.LIFERAY_LIB_GLOBAL_DIR, name,
-				(URLClassLoader)globalClassLoader);
+				(URLClassLoader)classLoader);
 		}
 	}
 
-	protected void testPoolClass(String classname) throws Exception {
+	protected void testLiferayPoolProviderClass(String className)
+		throws Exception {
+
 		try {
-			Class.forName(classname);
+			Class.forName(className);
 		}
 		catch (ClassNotFoundException cnfe) {
 			if (!ServerDetector.isGeronimo() && !ServerDetector.isJetty() &&
@@ -535,20 +536,19 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 				throw cnfe;
 			}
 
-			ClassLoader portalClassLoader =
-				ClassLoaderUtil.getPortalClassLoader();
+			ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-			if (!(portalClassLoader instanceof URLClassLoader)) {
+			if (!(classLoader instanceof URLClassLoader)) {
 				_log.error(
-					"Unable to install jar, portal ClassLoader is not " +
-						"URLClassLoader");
+					"Unable to install JAR because the portal class loader " +
+						"is not an instance of URLClassLoader");
 
 				return;
 			}
 
 			JarUtil.downloadAndInstallJar(
 				new URL(url), PropsValues.LIFERAY_LIB_PORTAL_DIR, name,
-				(URLClassLoader)portalClassLoader);
+				(URLClassLoader)classLoader);
 		}
 	}
 
