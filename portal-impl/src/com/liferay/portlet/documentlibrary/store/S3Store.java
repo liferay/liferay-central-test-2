@@ -562,7 +562,7 @@ public class S3Store extends BaseStore {
 		Jets3tProperties jets3tProperties = new Jets3tProperties();
 
 		jets3tProperties.loadAndReplaceProperties(
-			_JETS3T_PROPERTIES, "liferay");
+			_jets3tProperties, "liferay");
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Jets3t properties: " + jets3tProperties.getProperties());
@@ -693,7 +693,7 @@ public class S3Store extends BaseStore {
 	private static final String _BUCKET_NAME = PropsUtil.get(
 		PropsKeys.DL_STORE_S3_BUCKET_NAME);
 
-	private static final Properties _JETS3T_PROPERTIES =
+	private static final Properties _jets3tProperties =
 		PropsUtil.getProperties(PropsKeys.DL_STORE_S3_JETS3T, true);
 
 	private static final String _SECRET_KEY = PropsUtil.get(
