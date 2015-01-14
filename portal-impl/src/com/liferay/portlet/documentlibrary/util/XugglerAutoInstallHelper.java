@@ -79,25 +79,27 @@ public class XugglerAutoInstallHelper {
 		PortalClassLoaderUtil.setClassLoader(
 			ClassLoader.getSystemClassLoader());
 
-		Xuggler xuggler = new XugglerImpl();
-
 		try {
-			xuggler.installNativeLibraries(xugglerJarFile, null);
-		}
-		catch (Exception e) {
-			throw new ProcessException(e);
+			Xuggler xuggler = new XugglerImpl();
+
+			try {
+				xuggler.installNativeLibraries(xugglerJarFile, null);
+			}
+			catch (Exception e) {
+				throw new ProcessException(e);
+			}
+
+			if (xuggler.isNativeLibraryInstalled()) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Xuggler installed successfully");
+				}
+			}
+			else {
+				_log.error("Xuggler auto install failed");
+			}
 		}
 		finally {
 			PortalClassLoaderUtil.setClassLoader(classLoader);
-		}
-
-		if (xuggler.isNativeLibraryInstalled()) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Xuggler installed successfully");
-			}
-		}
-		else {
-			_log.error("Xuggler auto install failed");
 		}
 	}
 
