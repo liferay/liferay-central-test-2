@@ -5642,7 +5642,7 @@ public class PortalImpl implements Portal {
 			strutsAction.equals("/image_gallery_display/edit_file_entry") ||
 			strutsAction.equals("/image_gallery_display/edit_image") ||
 			actionName.equals("addFile") ||
-			_isRegisteredAlwaysAllowDoAsUser(path, strutsAction, actionName) ) {
+			isAlwaysAllowDoAsUser(path, strutsAction, actionName) ) {
 
 			try {
 				alwaysAllowDoAsUser = isAlwaysAllowDoAsUser(request);
@@ -8329,7 +8329,7 @@ public class PortalImpl implements Portal {
 		themeDisplay.setLocale(locale);
 	}
 
-	private boolean _isRegisteredAlwaysAllowDoAsUser(
+	protected boolean isAlwaysAllowDoAsUser(
 		String path, String strutsAction, String actionName) {
 
 		for (AlwaysAllowDoAsUser alwaysAllowDoAsUser : _alwaysAllowDoAsUsers) {
