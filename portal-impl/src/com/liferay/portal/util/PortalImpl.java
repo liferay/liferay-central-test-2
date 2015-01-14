@@ -228,20 +228,15 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 
 import java.awt.image.RenderedImage;
-
 import java.io.IOException;
 import java.io.Serializable;
-
 import java.lang.reflect.Method;
-
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -282,7 +277,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -530,11 +524,11 @@ public class PortalImpl implements Portal {
 		try {
 			Registry registry = RegistryUtil.getRegistry();
 
-			_alwaysAllowDoAsUserTracker = registry.trackServices(
+			_alwaysAllowDoAsUserServiceTracker = registry.trackServices(
 				AlwaysAllowDoAsUser.class,
-				new AlwaysAllowAsDoUserServiceTrackerCustomizer());
+				new AlwaysAllowDoAsUserServiceTrackerCustomizer());
 
-			_alwaysAllowDoAsUserTracker.open();
+			_alwaysAllowDoAsUserServiceTracker.open();
 		}
 		catch (NullPointerException npe) {
 		}
@@ -5642,7 +5636,7 @@ public class PortalImpl implements Portal {
 			strutsAction.equals("/image_gallery_display/edit_file_entry") ||
 			strutsAction.equals("/image_gallery_display/edit_image") ||
 			actionName.equals("addFile") ||
-			isAlwaysAllowDoAsUser(path, strutsAction, actionName) ) {
+			isAlwaysAllowDoAsUser(path, strutsAction, actionName)) {
 
 			try {
 				alwaysAllowDoAsUser = isAlwaysAllowDoAsUser(request);
@@ -8157,6 +8151,34 @@ public class PortalImpl implements Portal {
 		return true;
 	}
 
+	protected boolean isAlwaysAllowDoAsUser(
+		String path, String strutsAction, String actionName) {
+
+		for (AlwaysAllowDoAsUser alwaysAllowDoAsUser : _alwaysAllowDoAsUsers) {
+			Collection<String> paths = alwaysAllowDoAsUser.getPaths();
+	
+			if (paths.contains(path)) {
+				return true;
+			}
+	
+			Collection<String> strutsActions =
+				alwaysAllowDoAsUser.getStrutsActions();
+	
+			if (strutsActions.contains(strutsAction)) {
+				return true;
+			}
+	
+			Collection<String> actionNames =
+				alwaysAllowDoAsUser.getActionNames();
+	
+			if (actionNames.contains(actionName)) {
+				return true;
+			}
+		}
+	
+		return false;
+	}
+
 	/**
 	 * @deprecated As of 6.2.0, with no direct replacement
 	 */
@@ -8329,34 +8351,6 @@ public class PortalImpl implements Portal {
 		themeDisplay.setLocale(locale);
 	}
 
-	protected boolean isAlwaysAllowDoAsUser(
-		String path, String strutsAction, String actionName) {
-
-		for (AlwaysAllowDoAsUser alwaysAllowDoAsUser : _alwaysAllowDoAsUsers) {
-			Collection<String> paths = alwaysAllowDoAsUser.getPaths();
-
-			if (paths.contains(path)) {
-				return true;
-			}
-
-			Collection<String> strutsActions =
-				alwaysAllowDoAsUser.getStrutsActions();
-
-			if (strutsActions.contains(strutsAction)) {
-				return true;
-			}
-
-			Collection<String> actionNames =
-				alwaysAllowDoAsUser.getActionNames();
-
-			if (actionNames.contains(actionName)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	private static Log _logWebServerServlet = LogFactoryUtil.getLog(
 		WebServerServlet.class);
 
@@ -8390,7 +8384,7 @@ public class PortalImpl implements Portal {
 	private final List<AlwaysAllowDoAsUser> _alwaysAllowDoAsUsers =
 		new ArrayList<>();
 	private ServiceTracker<AlwaysAllowDoAsUser, AlwaysAllowDoAsUser>
-		_alwaysAllowDoAsUserTracker;
+		_alwaysAllowDoAsUserServiceTracker;
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
 		Pattern.CASE_INSENSITIVE);
@@ -8455,9 +8449,9 @@ public class PortalImpl implements Portal {
 	private String[] _sortedSystemSiteRoles;
 	private final boolean _validPortalDomainCheckDisabled;
 
-	private class AlwaysAllowAsDoUserServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer<
-			AlwaysAllowDoAsUser, AlwaysAllowDoAsUser> {
+	private class AlwaysAllowDoAsUserServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer
+			<AlwaysAllowDoAsUser, AlwaysAllowDoAsUser> {
 
 		@Override
 		public AlwaysAllowDoAsUser addingService(
@@ -8471,15 +8465,15 @@ public class PortalImpl implements Portal {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Add AlwaysAllowDoAsUser " +
-						alwaysAllowDoAsUser.getClass().getName());
+						ClassUtil.getClassName(alwaysAllowDoAsUser));
 			}
 
 			_alwaysAllowDoAsUsers.add(alwaysAllowDoAsUser);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"AlwaysAllowDoAsUsers size " +
-						_alwaysAllowDoAsUsers.size());
+					"There are " + _alwaysAllowDoAsUsers.size() +
+						" AlwaysAllowDoAsUser instances");
 			}
 
 			return alwaysAllowDoAsUser;
@@ -8510,8 +8504,8 @@ public class PortalImpl implements Portal {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"alwaysAllowDoAsUsers size " +
-						_alwaysAllowDoAsUsers.size());
+					"There are " + _alwaysAllowDoAsUsers.size() +
+						" AlwaysAllowDoAsUser instances");
 			}
 		}
 
