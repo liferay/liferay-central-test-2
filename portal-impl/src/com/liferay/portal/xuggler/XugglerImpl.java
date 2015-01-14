@@ -43,12 +43,12 @@ public class XugglerImpl implements Xuggler {
 			String name, ProgressTracker progressTracker)
 		throws Exception {
 
-		ClassLoader portalClassLoader = ClassLoaderUtil.getPortalClassLoader();
+		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		if (!(portalClassLoader instanceof URLClassLoader)) {
+		if (!(classLoader instanceof URLClassLoader)) {
 			_log.error(
-				"Unable to install jar, portal ClassLoader is not " +
-					"URLClassLoader");
+				"Unable to install JAR because the portal class loader is " +
+					"not an instance of URLClassLoader");
 
 			return;
 		}
@@ -61,7 +61,7 @@ public class XugglerImpl implements Xuggler {
 			JarUtil.downloadAndInstallJar(
 				new URL(PropsValues.XUGGLER_JAR_URL + name),
 				PropsValues.LIFERAY_LIB_PORTAL_DIR, name,
-				(URLClassLoader)portalClassLoader);
+				(URLClassLoader)classLoader);
 		}
 		catch (Exception e) {
 			_log.error("Unable to install jar " + name, e);
