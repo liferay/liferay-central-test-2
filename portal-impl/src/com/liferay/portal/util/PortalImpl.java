@@ -228,15 +228,20 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 
 import java.awt.image.RenderedImage;
+
 import java.io.IOException;
 import java.io.Serializable;
+
 import java.lang.reflect.Method;
+
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -277,6 +282,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.StateAwareResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8156,26 +8162,26 @@ public class PortalImpl implements Portal {
 
 		for (AlwaysAllowDoAsUser alwaysAllowDoAsUser : _alwaysAllowDoAsUsers) {
 			Collection<String> paths = alwaysAllowDoAsUser.getPaths();
-	
+
 			if (paths.contains(path)) {
 				return true;
 			}
-	
+
 			Collection<String> strutsActions =
 				alwaysAllowDoAsUser.getStrutsActions();
-	
+
 			if (strutsActions.contains(strutsAction)) {
 				return true;
 			}
-	
+
 			Collection<String> actionNames =
 				alwaysAllowDoAsUser.getActionNames();
-	
+
 			if (actionNames.contains(actionName)) {
 				return true;
 			}
 		}
-	
+
 		return false;
 	}
 
