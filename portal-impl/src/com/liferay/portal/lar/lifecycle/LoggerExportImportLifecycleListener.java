@@ -54,7 +54,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout export failed in group " + portletDataContext.getGroupId(),
+			"Layout export failed for group " + portletDataContext.getGroupId(),
 			throwable);
 	}
 
@@ -63,7 +63,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout export started in group " +
+			"Layout export started for group " +
 				portletDataContext.getGroupId());
 	}
 
@@ -73,7 +73,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout export succeeded in group " +
+			"Layout export succeeded for group " +
 				portletDataContext.getGroupId());
 	}
 
@@ -83,7 +83,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout import failed in group " + portletDataContext.getGroupId(),
+			"Layout import failed for group " + portletDataContext.getGroupId(),
 			throwable);
 	}
 
@@ -92,7 +92,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout import started in group " +
+			"Layout import started for group " +
 				portletDataContext.getGroupId());
 	}
 
@@ -102,7 +102,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout import succeeded in group " +
+			"Layout import succeeded for group " +
 				portletDataContext.getGroupId());
 	}
 
@@ -113,7 +113,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout publication failed in group " +
+			"Layout publication failed for group " +
 				exportImportConfiguration.getGroupId(),
 			throwable);
 	}
@@ -124,7 +124,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout publication started in group " +
+			"Layout publication started for group " +
 				exportImportConfiguration.getGroupId());
 	}
 
@@ -134,7 +134,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout publication succeeded in group " +
+			"Layout publication succeeded for group " +
 				exportImportConfiguration.getGroupId());
 	}
 
@@ -145,7 +145,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout remote publication failed in group " +
+			"Layout remote publication failed for group " +
 				exportImportConfiguration.getGroupId(),
 			throwable);
 	}
@@ -156,7 +156,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout publication started in group " +
+			"Layout publication started for group " +
 				exportImportConfiguration.getGroupId());
 	}
 
@@ -166,7 +166,7 @@ public class LoggerExportImportLifecycleListener
 		throws Exception {
 
 		_log.debug(
-			"Layout remote publication succeeded in group " +
+			"Layout remote publication succeeded for group " +
 				exportImportConfiguration.getGroupId());
 	}
 
