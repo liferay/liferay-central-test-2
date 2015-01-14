@@ -73,7 +73,7 @@ public interface ResultRow {
 
 	public void addJSP(String path, String cssClass);
 
-	void addJSP(
+	public void addJSP(
 		String path, String cssClass, ServletContext servletContext,
 		HttpServletRequest request, HttpServletResponse response);
 
