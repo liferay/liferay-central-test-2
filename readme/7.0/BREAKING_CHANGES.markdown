@@ -700,18 +700,18 @@ its overall lack of functionality.
 
 The *Asset Tag Properties* have been removed. The service no longer exists and
 the Asset Tag Service API no longer has this parameter. The behavior associated
-with tag properties in the Asset Publisher and XSL portlets have also been
+with tag properties in the Asset Publisher and XSL portlets has also been
 removed.
 
 #### Who is affected?
 
-This affects any plugin using the Asset Tag Properties service.
+This affects any plugin that uses the Asset Tag Properties service.
 
 #### How should I update my code?
 
 If you are using this functionality, you can achieve the same behavior with
-*Asset Category Properties*. If you are using the Asset Tag Service, update your
-method calls by removing the `properties[]` parameter.
+*Asset Category Properties*. If you are using the Asset Tag Service, remove the
+`String[]` tag properties parameter from your calls to the service's methods.
 
 #### Why was this change made?
 
