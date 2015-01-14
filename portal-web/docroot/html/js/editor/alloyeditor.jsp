@@ -61,12 +61,14 @@ if (Validator.isNotNull(onInitMethod)) {
 }
 
 String placeholder = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:placeholder"));
+
 boolean showSource = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:showSource"));
-boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
 
 if (alloyEditorMode.equals("text")) {
 	showSource = false;
 }
+
+boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
 %>
 
 <c:if test="<%= !skipEditorLoading %>">
