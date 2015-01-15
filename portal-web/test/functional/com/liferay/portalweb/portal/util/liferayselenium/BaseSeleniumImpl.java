@@ -58,11 +58,8 @@ public abstract class BaseSeleniumImpl
 		}
 
 		_dependenciesDirName = dependenciesDirName;
-
 		_outputDirName = outputDirName;
-
 		_projectDirName = projectDirName;
-
 		_sikuliImagesDirName = sikuliImagesDirName;
 
 		initCommandProcessor();

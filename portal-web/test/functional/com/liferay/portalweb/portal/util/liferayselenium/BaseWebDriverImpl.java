@@ -68,11 +68,8 @@ public abstract class BaseWebDriverImpl
 		}
 
 		_dependenciesDirName = dependenciesDirName;
-
 		_outputDirName = outputDirName;
-
 		_projectDirName = projectDirName;
-
 		_sikuliImagesDirName = sikuliImagesDirName;
 
 		if (!TestPropsValues.MOBILE_DEVICE_ENABLED) {
