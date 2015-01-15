@@ -133,20 +133,20 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 
 		Attributes attributes = new BasicAttributes(true);
 
-		Attribute objectClass = new BasicAttribute(_OBJECT_CLASS);
+		Attribute objectClassAttribute = new BasicAttribute(_OBJECT_CLASS);
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
-		String[] defaultObjectClasses = PrefsPropsUtil.getStringArray(
+		String[] defaultObjectClassNames = PrefsPropsUtil.getStringArray(
 			userGroup.getCompanyId(),
 			PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix,
 			StringPool.COMMA);
 
-		for (String defaultObjectClass : defaultObjectClasses) {
-			objectClass.add(defaultObjectClass);
+		for (String defaultObjectClassName : defaultObjectClassNames) {
+			objectClassAttribute.add(defaultObjectClassName);
 		}
 
-		attributes.put(objectClass);
+		attributes.put(objectClassAttribute);
 
 		addAttributeMapping(
 			groupMappings.getProperty(GroupConverterKeys.GROUP_NAME),
@@ -199,20 +199,20 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 
 		Attributes attributes = new BasicAttributes(true);
 
-		Attribute objectClass = new BasicAttribute(_OBJECT_CLASS);
+		Attribute objectClassAttribute = new BasicAttribute(_OBJECT_CLASS);
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
-		String[] defaultObjectClasses = PrefsPropsUtil.getStringArray(
+		String[] defaultObjectClassNames = PrefsPropsUtil.getStringArray(
 			user.getCompanyId(),
 			PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix,
 			StringPool.COMMA);
 
-		for (String defaultObjectClass : defaultObjectClasses) {
-			objectClass.add(defaultObjectClass);
+		for (String defaultObjectClassName : defaultObjectClassNames) {
+			objectClassAttribute.add(defaultObjectClassName);
 		}
 
-		attributes.put(objectClass);
+		attributes.put(objectClassAttribute);
 
 		addAttributeMapping(
 			userMappings.getProperty(UserConverterKeys.UUID), user.getUuid(),
