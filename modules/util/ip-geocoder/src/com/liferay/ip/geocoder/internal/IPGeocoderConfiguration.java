@@ -24,8 +24,8 @@ public interface IPGeocoderConfiguration {
 
 	@Meta.AD(
 		description =
-			"The path where the database will be stored. By default it will " +
-				"be stored in java.io.tmpdir/liferay/geoip/GeoIPCity.dat",
+			"The path where the database will be stored, with a default path " +
+				"of ${java.io.tmpdir}/liferay/geoip/GeoIPCity.dat",
 		name = "File Path", required = false)
 	public String filePath();
 
@@ -33,8 +33,7 @@ public interface IPGeocoderConfiguration {
 		deflt =
 			"http://cdn.mirrors.liferay.com/geolite.maxmind.com/download/" +
 				"geoip/database/GeoLiteCity.dat.xz", 
-		description =
-			"The URL to download the Geo IP City Database",
+		description = "The URL of the Geo IP City database",
 		name = "File URL", required = true)
 	public String fileURL();
 
