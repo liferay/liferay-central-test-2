@@ -1440,11 +1440,11 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 			String oldLinkToLayout = matcher.group(0);
 
-			String plidSub = StringPool.AT + oldPlid;
-
 			String newLinkToLayout = StringUtil.replaceFirst(
 				oldLinkToLayout,
-				new String[] {plidSub, String.valueOf(oldLayoutId)},
+				new String[] {
+					StringPool.AT + oldPlid, String.valueOf(oldLayoutId)
+				},
 				new String[] {StringPool.BLANK, String.valueOf(newLayoutId)});
 
 			if ((oldGroupId != 0) && (oldGroupId != newGroupId)) {
