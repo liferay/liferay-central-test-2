@@ -29,7 +29,7 @@ public class PasswordEncryptorUtil {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getDefaultPasswordAlgorithmType()}
+	 *             #getDefaultPasswordAlgorithmType}
 	 */
 	@Deprecated
 	public static String PASSWORDS_ENCRYPTION_ALGORITHM = StringPool.BLANK;
