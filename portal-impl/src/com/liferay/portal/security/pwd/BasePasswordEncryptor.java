@@ -50,7 +50,7 @@ public abstract class BasePasswordEncryptor implements PasswordEncryptor {
 
 	@Override
 	public String getDefaultPasswordAlgorithmType() {
-		return defaultAlgorithmType;
+		return _PASSWORDS_ENCRYPTION_ALGORITHM;
 	}
 
 	protected abstract String doEncrypt(
@@ -58,7 +58,7 @@ public abstract class BasePasswordEncryptor implements PasswordEncryptor {
 			String encryptedPassword)
 		throws PwdEncryptorException;
 
-	protected String defaultAlgorithmType =
+	private static final String _PASSWORDS_ENCRYPTION_ALGORITHM =
 		StringUtil.toUpperCase(
 			GetterUtil.getString(
 				PropsUtil.get(PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM)));
