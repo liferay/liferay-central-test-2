@@ -32,9 +32,9 @@ public interface IPGeocoderConfiguration {
 	@Meta.AD(
 		deflt =
 			"http://cdn.mirrors.liferay.com/geolite.maxmind.com/download/" +
-				"geoip/database/GeoLiteCity.dat.xz", 
-		description = "The URL of the Geo IP City database",
-		name = "File URL", required = true)
+				"geoip/database/GeoLiteCity.dat.xz",
+		description = "The URL of the Geo IP City database", name = "File URL",
+		required = true)
 	public String fileURL();
 
 }
