@@ -3724,7 +3724,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 							"&ticketKey=" + ticket.getKey();
 		}
 		else {
-			if (!PasswordEncryptorUtil.getDefaultPasswordAlgorithmType().equals(
+			if (!Validator.equals(
+					PasswordEncryptorUtil.getDefaultPasswordAlgorithmType(),
 					PasswordEncryptorUtil.TYPE_NONE)) {
 
 				if (LDAPSettingsUtil.isPasswordPolicyEnabled(
