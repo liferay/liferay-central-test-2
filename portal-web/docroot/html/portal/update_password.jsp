@@ -58,7 +58,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 							UserPasswordException.MustBeLonger upe = (UserPasswordException.MustBeLonger)SessionErrors.get(request, UserPasswordException.MustBeLonger.class.getName());
 							%>
 
-							<%= LanguageUtil.format(request, "that-password-is-too-short-please-make-sure-your-password-is-at-least-x-characters-long", String.valueOf(upe.minLength), false) %>
+							<%= LanguageUtil.format(request, "that-password-is-too-short", String.valueOf(upe.minLength), false) %>
 						</c:when>
 
 						<c:when test="<%= SessionErrors.contains(request, UserPasswordException.MustComplyWithModelListeners.class.getName()) %>">
@@ -71,7 +71,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 							UserPasswordException.MustComplyWithRegex upe = (UserPasswordException.MustComplyWithRegex)SessionErrors.get(request, UserPasswordException.MustComplyWithRegex.class.getName());
 							%>
 
-							<%= LanguageUtil.format(request, "that-password-does-not-comply-with-regex-x-please-enter-in-a-different-password", upe.regex, false) %>
+							<%= LanguageUtil.format(request, "that-password-does-not-comply-with-the-regular-expression", upe.regex, false) %>
 						</c:when>
 
 						<c:when test="<%= SessionErrors.contains(request, UserPasswordException.MustMatch.class.getName()) %>">
@@ -91,7 +91,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 						</c:when>
 
 						<c:when test="<%= SessionErrors.contains(request, UserPasswordException.MustNotContainDictionaryWords.class.getName()) %>">
-							<liferay-ui:message key="that-password-uses-common-dictionary-words-please-enter-in-a-different-password" />
+							<liferay-ui:message key="that-password-uses-common-dictionary-words" />
 						</c:when>
 
 						<c:otherwise>

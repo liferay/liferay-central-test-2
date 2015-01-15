@@ -82,7 +82,7 @@ birthdayCalendar.set(Calendar.YEAR, 1970);
 		UserPasswordException.MustBeLonger upe = (UserPasswordException.MustBeLonger)errorException;
 		%>
 
-		<%= LanguageUtil.format(request, "that-password-is-too-short-please-make-sure-your-password-is-at-least-x-characters-long", String.valueOf(upe.minLength), false) %>
+		<%= LanguageUtil.format(request, "that-password-is-too-short", String.valueOf(upe.minLength), false) %>
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= UserPasswordException.MustComplyWithModelListeners.class %>" message="that-password-is-invalid-please-enter-in-a-different-password" />
@@ -93,12 +93,12 @@ birthdayCalendar.set(Calendar.YEAR, 1970);
 		UserPasswordException.MustComplyWithRegex upe = (UserPasswordException.MustComplyWithRegex)errorException;
 		%>
 
-		<%= LanguageUtil.format(request, "that-password-does-not-comply-with-regex-x-please-enter-in-a-different-password", upe.regex, false) %>
+		<%= LanguageUtil.format(request, "that-password-does-not-comply-with-the-regular-expression", upe.regex, false) %>
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= UserPasswordException.MustMatch.class %>" message="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
 	<liferay-ui:error exception="<%= UserPasswordException.MustNotBeTrivial.class %>" message="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
-	<liferay-ui:error exception="<%= UserPasswordException.MustNotContainDictionaryWords.class %>" message="that-password-uses-common-dictionary-words-please-enter-in-a-different-password" />
+	<liferay-ui:error exception="<%= UserPasswordException.MustNotContainDictionaryWords.class %>" message="that-password-uses-common-dictionary-words" />
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 	<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeDuplicate.class %>" message="the-screen-name-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />

@@ -49,7 +49,7 @@ else {
 	UserPasswordException.MustBeLonger upe = (UserPasswordException.MustBeLonger)errorException;
 	%>
 
-	<%= LanguageUtil.format(request, "that-password-is-too-short-please-make-sure-your-password-is-at-least-x-characters-long", String.valueOf(upe.minLength), false) %>
+	<%= LanguageUtil.format(request, "that-password-is-too-short", String.valueOf(upe.minLength), false) %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= UserPasswordException.MustComplyWithModelListeners.class %>" message="that-password-is-invalid-please-enter-in-a-different-password" />
@@ -60,11 +60,11 @@ else {
 	UserPasswordException.MustComplyWithRegex upe = (UserPasswordException.MustComplyWithRegex)errorException;
 	%>
 
-	<%= LanguageUtil.format(request, "that-password-does-not-comply-with-regex-x-please-enter-in-a-different-password", upe.regex, false) %>
+	<%= LanguageUtil.format(request, "that-password-does-not-comply-with-the-regular-expression", upe.regex, false) %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= UserPasswordException.MustMatch.class %>" message="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
-<liferay-ui:error exception="<%= UserPasswordException.MustMatchCurrentPassword.class %>" message="the-password-you-entered-for-current-password-does-not-match-your-current-password" />
+<liferay-ui:error exception="<%= UserPasswordException.MustMatchCurrentPassword.class %>" message="the-password-you-entered-for-the-current-password-does-not-match-your-current-password" />
 <liferay-ui:error exception="<%= UserPasswordException.MustNotBeChanged.class %>" message="your-password-cannot-be-changed" />
 
 <liferay-ui:error exception="<%= UserPasswordException.MustNotBeChangedYet.class %>">
@@ -73,13 +73,13 @@ else {
 	UserPasswordException.MustNotBeChangedYet upe = (UserPasswordException.MustNotBeChangedYet)errorException;
 	%>
 
-	<%= LanguageUtil.format(request, "you-cannot-change-your-password-yet-please-wait-until-x-before-changing-your-password-again", String.valueOf(upe.changeableDate), false) %>
+	<%= LanguageUtil.format(request, "you-cannot-change-your-password-yet", String.valueOf(upe.changeableDate), false) %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= UserPasswordException.MustNotBeEqualToCurrent.class %>" message="your-new-password-cannot-be-the-same-as-your-old-password-please-enter-in-a-different-password" />
 <liferay-ui:error exception="<%= UserPasswordException.MustNotBeRecentlyUsed.class %>" message="that-password-has-already-been-used-please-enter-in-a-different-password" />
 <liferay-ui:error exception="<%= UserPasswordException.MustNotBeTrivial.class %>" message="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
-<liferay-ui:error exception="<%= UserPasswordException.MustNotContainDictionaryWords.class %>" message="that-password-uses-common-dictionary-words-please-enter-in-a-different-password" />
+<liferay-ui:error exception="<%= UserPasswordException.MustNotContainDictionaryWords.class %>" message="that-password-uses-common-dictionary-words" />
 
 <aui:fieldset>
 
