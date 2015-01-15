@@ -818,7 +818,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 		else if (Validator.equals(url.getProtocol(), "wsjar")) {
 
-			// Websphere use a custom wsjar protocol to represent JAR files
+			// WebSphere uses a custom wsjar protocol to represent JAR files
 
 			fileName = url.getFile();
 
@@ -840,7 +840,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 		else if (Validator.equals(url.getProtocol(), "zip")) {
 
-			// Weblogic use a custom zip protocol to represent JAR files
+			// Weblogic uses a custom zip protocol to represent JAR files
 
 			fileName = url.getFile();
 
