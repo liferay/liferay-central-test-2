@@ -1411,16 +1411,14 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 		Matcher matcher = _importLinksToLayoutPattern.matcher(content);
 
-		while (matcher.find()) {
-			Map<Long, Long> layoutPlids =
-				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-					Layout.class);
+		Map<Long, Long> layoutPlids =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				Layout.class);
 
+		while (matcher.find()) {
 			long oldPlid = GetterUtil.getLong(matcher.group(4));
 
 			Long newPlid = MapUtil.getLong(layoutPlids, oldPlid);
-
-			Layout layout = LayoutLocalServiceUtil.fetchLayout(newPlid);
 
 			long oldGroupId = GetterUtil.getLong(matcher.group(6));
 
@@ -1429,6 +1427,8 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			long oldLayoutId = GetterUtil.getLong(matcher.group(1));
 
 			long newLayoutId = oldLayoutId;
+
+			Layout layout = LayoutLocalServiceUtil.fetchLayout(newPlid);
 
 			if (layout != null) {
 				newGroupId = layout.getGroupId();
