@@ -85,6 +85,6 @@ public class AssetMetadataTag extends IncludeTag {
 	private String _className = StringPool.BLANK;
 	private long _classPK;
 	private boolean _filterByMetadata;
-	private String[] _metadataFields = null;
+	private String[] _metadataFields;
 
 }
