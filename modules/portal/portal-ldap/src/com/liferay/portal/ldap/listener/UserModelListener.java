@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.ldap.listeners;
+package com.liferay.portal.ldap.listener;
 
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.kernel.language.LanguageUtil;
