@@ -260,10 +260,12 @@ public class PluginsEnvironmentBuilder {
 				continue;
 			}
 
-			int pos = dirName.indexOf("/.ivy");
-			String eclipseRelativeDir = "/portal" + dirName.substring(pos);
+			int index = dirName.indexOf("/.ivy");
 
-			addClasspathEntry(sb, eclipseRelativeDir + "/" + fileName);
+			String eclipseRelativeDirName =
+				"/portal" + dirName.substring(index);
+
+			addClasspathEntry(sb, eclipseRelativeDirName + "/" + fileName);
 
 			return;
 		}
