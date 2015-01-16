@@ -2144,6 +2144,7 @@ public class IntrabandProxyUtilTest {
 
 			@SuppressWarnings("unused")
 			private String[] PROXY_METHOD_SIGNATURES;
+
 		}
 
 		try {
