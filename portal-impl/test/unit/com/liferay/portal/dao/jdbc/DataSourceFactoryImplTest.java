@@ -55,11 +55,11 @@ public class DataSourceFactoryImplTest {
 	@Before
 	public void setUp() {
 		_properties.setProperty("driverClassName", "org.hsqldb.jdbcDriver");
+		_properties.setProperty("maximumPoolSize", "10");
+		_properties.setProperty("password", "");
+		_properties.setProperty("poolName", "TestJDBCPool");
 		_properties.setProperty("url", "jdbc:hsqldb:mem:testDB;shutdown=true");
 		_properties.setProperty("username", "sa");
-		_properties.setProperty("password", "");
-		_properties.setProperty("maximumPoolSize", "10");
-		_properties.setProperty("poolName", "TestJDBCPool");
 	}
 
 	@After
