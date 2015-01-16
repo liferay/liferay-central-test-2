@@ -1665,7 +1665,7 @@ public class IntrabandProxyUtilTest {
 						"Unknow method index " + i +
 							" for proxy methods mappings " +
 								ReflectionTestUtil.getFieldValue(
-									skeletonClass, "_proxyMethodsMapping"),
+									skeletonClass, "_PROXY_METHODS_MAPPING"),
 						throwable.getMessage());
 				}
 				finally {
@@ -1754,14 +1754,14 @@ public class IntrabandProxyUtilTest {
 		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 		Field proxyMethodsMappingField = _assertDeclaredField(
-			skeletonClass, "_proxyMethodsMapping",
+			skeletonClass, "_PROXY_METHODS_MAPPING",
 			Modifier.PRIVATE | Modifier.STATIC | Modifier.FINAL, String.class);
 
 		Assert.assertEquals(sb.toString(), proxyMethodsMappingField.get(null));
 
 		Field logField = _assertDeclaredField(
-			skeletonClass, "_log", Modifier.PRIVATE | Modifier.STATIC,
-			Log.class);
+			skeletonClass, "_log",
+			Modifier.FINAL | Modifier.PRIVATE | Modifier.STATIC, Log.class);
 
 		LogWrapper logWrapper = (LogWrapper)logField.get(null);
 
@@ -2165,7 +2165,7 @@ public class IntrabandProxyUtilTest {
 			class TestValidateClass2 {
 
 				@SuppressWarnings("unused")
-				private String _proxyMethodsMapping;
+				private String _PROXY_METHODS_MAPPING;
 			}
 
 			try {
@@ -2177,7 +2177,7 @@ public class IntrabandProxyUtilTest {
 			catch (IllegalArgumentException iae) {
 				Assert.assertEquals(
 					"Field " + TestValidateClass2.class.getDeclaredField(
-							"_proxyMethodsMapping") +
+							"_PROXY_METHODS_MAPPING") +
 						" is expected to be of type " + String.class +
 							" and static",
 					iae.getMessage());
@@ -2724,13 +2724,13 @@ public class IntrabandProxyUtilTest {
 	private static class TestValidateClass {
 
 		@SuppressWarnings("unused")
+		private static String _PROXY_METHODS_MAPPING;
+
+		@SuppressWarnings("unused")
 		private static String[] PROXY_METHOD_SIGNATURES;
 
 		@SuppressWarnings("unused")
 		private static Log _log;
-
-		@SuppressWarnings("unused")
-		private static String _proxyMethodsMapping;
 
 		@SuppressWarnings("unused")
 		private static byte _proxyType;
