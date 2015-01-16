@@ -366,7 +366,7 @@ public class IntrabandProxyUtil {
 		classNode.access |= Opcodes.ACC_PUBLIC;
 
 		FieldNode proxyMethodsMappingFieldNode = ASMUtil.findFieldNode(
-			classNode.fields, "_proxyMethodsMapping");
+			classNode.fields, "_PROXY_METHODS_MAPPING");
 
 		proxyMethodsMappingFieldNode.access |= Opcodes.ACC_FINAL;
 
@@ -1011,7 +1011,7 @@ public class IntrabandProxyUtil {
 		"PROXY_METHOD_SIGNATURES";
 
 	private static final String _PROXY_METHODS_MAPPING_FIELD_NAME =
-		"_proxyMethodsMapping";
+		"_PROXY_METHODS_MAPPING";
 
 	private static final Type _REGISTRATION_REFERENCE_TYPE = Type.getType(
 		RegistrationReference.class);
