@@ -396,6 +396,17 @@ public class PluginsEnvironmentBuilder {
 		return jars;
 	}
 
+	protected boolean hasModulesGitIgnore(String dirName) {
+		int index = dirName.indexOf("/modules/");
+
+		if (index == -1) {
+			return false;
+		}
+
+		return _fileUtil.exists(
+			dirName.substring(0, index) + "/modules/.gitignore");
+	}
+
 	protected void setupJarProject(
 			String dirName, String fileName, List<String> dependencyJars,
 			boolean sharedProject)
@@ -423,6 +434,12 @@ public class PluginsEnvironmentBuilder {
 
 		File gitignoreFile = new File(
 			projectDir.getCanonicalPath() + "/.gitignore");
+
+		if (hasModulesGitIgnore(dirName)) {
+			gitignoreFile.delete();
+
+			return;
+		}
 
 		String[] gitIgnores = importSharedJars.toArray(
 			new String[importSharedJars.size()]);
