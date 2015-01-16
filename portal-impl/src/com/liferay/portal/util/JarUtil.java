@@ -52,7 +52,7 @@ public class JarUtil {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Mapping url from :" + urlString + ", to :" + newURLString);
+					"Swapping URL from " + urlString + " to " + newURLString);
 			}
 		}
 
