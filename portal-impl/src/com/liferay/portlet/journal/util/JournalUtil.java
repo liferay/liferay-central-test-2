@@ -1304,9 +1304,6 @@ public class JournalUtil {
 			Attribute availableLocalesAttribute = newRootElement.attribute(
 				"available-locales");
 
-			String defaultImportLanguageId = LocaleUtil.toLanguageId(
-				defaultImportLocale);
-
 			if (availableLocalesAttribute == null) {
 
 				// If this is nonexistent create an empty one and the upcoming
@@ -1317,6 +1314,9 @@ public class JournalUtil {
 					(Attribute)newRootElement.addAttribute(
 						"available-locales", StringPool.BLANK);
 			}
+
+			String defaultImportLanguageId = LocaleUtil.toLanguageId(
+				defaultImportLocale);
 
 			if (!StringUtil.contains(
 					availableLocalesAttribute.getValue(),
