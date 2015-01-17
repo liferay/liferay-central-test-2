@@ -15,11 +15,31 @@
 
 	<macrodef name="resolve-dynamic-jars">
 		<sequential>
-			<get
-				dest="${app.server.lib.portal.dir}"
-				skipexisting="true"
-				src="http://mirrors/repo1.maven.org/maven2/com/zaxxer/HikariCP-java6/2.2.5/HikariCP-java6-2.2.5.jar"
-			/>
+			<property file="${project.dir}/portal-impl/src/portal.properties" prefix="portal" />
+
+			<trycatch>
+				<try>
+					<propertyregex
+						input="${portal.setup.liferay.pool.provider.jar.url[hikaricp]}"
+						property="mirrors.hikaricp.url"
+						regexp="http://"
+						replace="http://mirrors/"
+					/>
+
+					<get
+						dest="${app.server.lib.portal.dir}/${portal.setup.liferay.pool.provider.jar.name[hikaricp]}"
+						skipexisting="true"
+						src="${mirrors.hikaricp.url}"
+					/>
+				</try>
+				<catch>
+					<get
+						dest="${app.server.lib.portal.dir}/${portal.setup.liferay.pool.provider.jar.name[hikaricp]}"
+						skipexisting="true"
+						src="${portal.setup.liferay.pool.provider.jar.url[hikaricp]}"
+					/>
+				</catch>
+			</trycatch>
 		</sequential>
 	</macrodef>
 
