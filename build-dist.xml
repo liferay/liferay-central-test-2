@@ -13,13 +13,15 @@
 		</else>
 	</if>
 
-	<target name="resolve-dynamic-jars">
-		<get
-			dest="${app.server.lib.portal.dir}"
-			skipexisting="true"
-			src="http://mirrors/repo1.maven.org/maven2/com/zaxxer/HikariCP-java6/2.2.5/HikariCP-java6-2.2.5.jar"
-		/>
-	</target>
+	<macrodef name="resolve-dynamic-jars">
+		<sequential>
+			<get
+				dest="${app.server.lib.portal.dir}"
+				skipexisting="true"
+				src="http://mirrors/repo1.maven.org/maven2/com/zaxxer/HikariCP-java6/2.2.5/HikariCP-java6-2.2.5.jar"
+			/>
+		</sequential>
+	</macrodef>
 
 	<macrodef name="update-plugins-includes-plugin">
 		<attribute name="plugins.includes.plugin.bundle" />
@@ -67,7 +69,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.geronimo.deploy.dir}" />
@@ -87,7 +89,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
@@ -109,7 +111,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<if>
 			<equals arg1="${app.server.jboss.major.version}" arg2="5" />
@@ -147,7 +149,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.jboss.deploy.dir}" />
@@ -173,7 +175,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.jboss.deploy.dir}" />
@@ -195,7 +197,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.jetty.deploy.dir}" />
@@ -217,7 +219,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.jonas.deploy.dir}" />
@@ -320,7 +322,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.resin.deploy.dir}" />
@@ -557,7 +559,7 @@
 
 		<app-server-properties-reset />
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.tcserver.deploy.dir}" />
@@ -594,7 +596,7 @@
 			</then>
 		</if>
 
-		<antcall target="resolve-dynamic-jars" />
+		<resolve-dynamic-jars />
 
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-${app.server.tomcat.version}/webapps" />
