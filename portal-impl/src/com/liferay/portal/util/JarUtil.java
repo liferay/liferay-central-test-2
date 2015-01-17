@@ -64,8 +64,8 @@ public class JarUtil {
 			catch (UnknownHostException uhe) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Host \"mirrors\" is not resolvable, give up url " +
-							"swapping");
+						"Unable to swap URL from " + urlString + " to " +
+							newURLString);
 				}
 			}
 		}
