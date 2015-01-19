@@ -2271,7 +2271,7 @@ public class DLFileEntryLocalServiceImpl
 				StorageEngineUtil.getDDMFormValues(
 					latestFileEntryMetadata.getDDMStorageId());
 
-			if (!lastDDMFormValues.getDDMFormFieldValues().containsAll(
+			if (!lastDDMFormValues.equals(
 					latestDDMFormValues.getDDMFormFieldValues())) {
 
 				return false;
