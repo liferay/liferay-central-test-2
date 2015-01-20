@@ -729,7 +729,11 @@ public class NettyRepositoryTest {
 
 			});
 
-		Level level = logging ? Level.ALL : Level.OFF;
+		Level level = Level.OFF;
+
+		if (logging) {
+			level = Level.ALL;
+		}
 
 		try (CaptureHandler captureHandler =
 				JDKLoggerTestUtil.configureJDKLogger(
