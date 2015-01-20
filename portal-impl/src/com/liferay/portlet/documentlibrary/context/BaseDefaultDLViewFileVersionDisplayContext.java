@@ -256,7 +256,7 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 	}
 
 	@Override
-	public boolean isVersionInfoVisible() throws PortalException {
+	public boolean isVersionInfoVisible() {
 		return true;
 	}
 

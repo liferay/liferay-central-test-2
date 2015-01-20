@@ -179,7 +179,7 @@ public class DefaultDLEditFileEntryDisplayContext
 	}
 
 	@Override
-	public boolean isVersionInfoVisible() throws PortalException {
+	public boolean isVersionInfoVisible() {
 		return true;
 	}
 
