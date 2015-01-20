@@ -19,19 +19,16 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.tools.DBLoader;
 import com.liferay.portal.tools.ToolDependencies;
 import com.liferay.portal.tools.sql.SQLQueryProvider;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-
 import java.util.Properties;
 import java.util.ServiceLoader;
 
@@ -70,11 +67,11 @@ public class SampleSQLBuilderTest {
 
 		DB db = DBFactoryUtil.getDB();
 
-		String sqlTables = _readSQL(sqlQueryProvider.getTables());
+		String sqlTables = StringUtil.read(sqlQueryProvider.getTables());
 
 		db.runSQLTemplateString(connection, sqlTables, false, true);
 
-		String sqlIndexes = _readSQL(sqlQueryProvider.getIndexes());
+		String sqlIndexes = StringUtil.read(sqlQueryProvider.getIndexes());
 
 		db.runSQLTemplateString(connection, sqlIndexes, false, true);
 	}
@@ -168,19 +165,6 @@ public class SampleSQLBuilderTest {
 
 		for (SQLQueryProvider sqlQueryProvider : serviceLoader) {
 			_executeSQLQueryProvider(connection, sqlQueryProvider);
-		}
-	}
-
-	private String _readSQL(InputStream inputStream) throws IOException {
-		File file = null;
-
-		try {
-			file = FileUtil.createTempFile(inputStream);
-
-			return FileUtil.read(file);
-		}
-		finally {
-			file.delete();
 		}
 	}
 
