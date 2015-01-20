@@ -149,7 +149,7 @@ public class DefaultDLEditFileEntryDisplayContext
 	}
 
 	@Override
-	public boolean isFolderSelectionVisible() throws PortalException {
+	public boolean isFolderSelectionVisible() {
 		return _showSelectFolder;
 	}
 
