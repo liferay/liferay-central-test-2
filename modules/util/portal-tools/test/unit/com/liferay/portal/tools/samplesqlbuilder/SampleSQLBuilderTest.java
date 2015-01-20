@@ -26,9 +26,11 @@ import com.liferay.portal.tools.ToolDependencies;
 import com.liferay.portal.tools.sql.SQLQueryProvider;
 
 import java.io.File;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+
 import java.util.Properties;
 import java.util.ServiceLoader;
 
@@ -67,13 +69,13 @@ public class SampleSQLBuilderTest {
 
 		DB db = DBFactoryUtil.getDB();
 
-		String sqlTables = StringUtil.read(sqlQueryProvider.getTables());
+		String tablesSQL = StringUtil.read(sqlQueryProvider.getTablesSQL());
 
-		db.runSQLTemplateString(connection, sqlTables, false, true);
+		db.runSQLTemplateString(connection, tablesSQL, false, true);
 
-		String sqlIndexes = StringUtil.read(sqlQueryProvider.getIndexes());
+		String indexesSQL = StringUtil.read(sqlQueryProvider.getIndexesSQL());
 
-		db.runSQLTemplateString(connection, sqlIndexes, false, true);
+		db.runSQLTemplateString(connection, indexesSQL, false, true);
 	}
 
 	private void _initProperties(Properties properties, String outputDir) {
@@ -141,7 +143,7 @@ public class SampleSQLBuilderTest {
 			DBLoader.loadHypersonic(
 				connection, sqlDir + "/indexes/indexes-hypersonic.sql");
 
-			_loadSQLQueryProviderExtensions(connection);
+			_loadSQLQueryProviders(connection);
 
 			DBLoader.loadHypersonic(
 				connection, outputDir + "/sample-hypersonic.sql");
@@ -155,7 +157,7 @@ public class SampleSQLBuilderTest {
 		}
 	}
 
-	private void _loadSQLQueryProviderExtensions(Connection connection)
+	private void _loadSQLQueryProviders(Connection connection)
 		throws Exception {
 
 		ServiceLoader<SQLQueryProvider> serviceLoader = ServiceLoader.load(

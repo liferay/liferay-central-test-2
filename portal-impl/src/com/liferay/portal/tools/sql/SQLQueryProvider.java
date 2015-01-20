@@ -21,8 +21,8 @@ import java.io.InputStream;
  */
 public interface SQLQueryProvider {
 
-	public InputStream getIndexes();
+	public InputStream getIndexesSQL();
 
-	public InputStream getTables();
+	public InputStream getTablesSQL();
 
 }
