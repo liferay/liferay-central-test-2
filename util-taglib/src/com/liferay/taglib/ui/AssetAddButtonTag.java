@@ -121,6 +121,7 @@ public class AssetAddButtonTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:asset-add-button:classNameIds", classNameIds);
+
 		request.setAttribute(
 			"liferay-ui:asset-add-button:classTypeIds", _classTypeIds);
 
@@ -131,6 +132,7 @@ public class AssetAddButtonTag extends IncludeTag {
 		}
 
 		request.setAttribute("liferay-ui:asset-add-button:groupIds", groupIds);
+
 		request.setAttribute("liferay-ui:asset-add-button:redirect", _redirect);
 	}
 
