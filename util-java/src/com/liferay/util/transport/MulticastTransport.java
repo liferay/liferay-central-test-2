@@ -99,7 +99,7 @@ public class MulticastTransport extends Thread implements Transport {
 		catch (IOException ioe) {
 			if (!_connected) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Error on disconnect ", ioe);
+					_log.debug("Unable to disconnect", ioe);
 				}
 
 				return;
