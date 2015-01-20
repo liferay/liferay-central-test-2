@@ -68,12 +68,13 @@ public class SampleSQLBuilderTest {
 			Connection connection, SQLQueryProvider sqlQueryProvider)
 		throws Exception {
 
-		String sqlIndexes = _readSQL(sqlQueryProvider.getIndexes());
-		String sqlTables = _readSQL(sqlQueryProvider.getTables());
-
 		DB db = DBFactoryUtil.getDB();
 
+		String sqlTables = _readSQL(sqlQueryProvider.getTables());
+
 		db.runSQLTemplateString(connection, sqlTables, false, true);
+
+		String sqlIndexes = _readSQL(sqlQueryProvider.getIndexes());
 
 		db.runSQLTemplateString(connection, sqlIndexes, false, true);
 	}
