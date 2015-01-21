@@ -1227,21 +1227,14 @@ Please set the property "jdk.6.home" in build.properties.
 		<ant dir=".." target="deploy-properties" inheritAll="false" />
 	</target>
 
-	<target name="download-nodejs">
-		<ant-execute
-			ant.dir="${project.dir}/tools/sdk"
-			ant.target="download-nodejs"
-		/>
-	</target>
-
-	<target name="exec-node" depends="download-nodejs">
+	<target name="exec-node">
 		<ant-execute
 			ant.dir="${project.dir}/tools/sdk"
 			ant.target="exec-node"
 		/>
 	</target>
 
-	<target name="exec-npm" depends="download-nodejs">
+	<target name="exec-npm">
 		<ant-execute
 			ant.dir="${project.dir}/tools/sdk"
 			ant.target="exec-npm"
