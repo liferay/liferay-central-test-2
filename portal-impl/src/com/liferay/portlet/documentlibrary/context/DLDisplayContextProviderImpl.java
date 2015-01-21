@@ -114,7 +114,7 @@ public class DLDisplayContextProviderImpl implements DLDisplayContextProvider {
 
 		for (
 			DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
-			_dlDisplayContextFactoryReferences) {
+				_dlDisplayContextFactoryReferences) {
 
 			DLDisplayContextFactory dlDisplayContextFactory =
 				dlDisplayContextFactoryReference.getDLDisplayContextFactory();
@@ -143,7 +143,7 @@ public class DLDisplayContextProviderImpl implements DLDisplayContextProvider {
 
 		for (
 			DLDisplayContextFactoryReference dlDisplayContextFactoryReference :
-			_dlDisplayContextFactoryReferences) {
+				_dlDisplayContextFactoryReferences) {
 
 			DLDisplayContextFactory dlDisplayContextFactory =
 				dlDisplayContextFactoryReference.getDLDisplayContextFactory();
