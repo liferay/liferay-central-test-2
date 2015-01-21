@@ -1247,6 +1247,7 @@ Please set the property "jdk.6.home" in build.properties.
 
 	<target name="node-execute">
 		<ant-execute
+			ant.build.file="build-node.xml"
 			ant.dir="${project.dir}/tools/sdk"
 			ant.target="node-execute"
 		/>
@@ -1254,6 +1255,7 @@ Please set the property "jdk.6.home" in build.properties.
 
 	<target name="npm-execute">
 		<ant-execute
+			ant.build.file="build-node.xml"
 			ant.dir="${project.dir}/tools/sdk"
 			ant.target="npm-execute"
 		/>
