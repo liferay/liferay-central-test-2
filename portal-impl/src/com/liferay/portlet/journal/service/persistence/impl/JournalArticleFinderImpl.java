@@ -869,11 +869,7 @@ public class JournalArticleFinderImpl
 			}
 
 			qPos.add(classNameId);
-
-			for (String ddmStructureKey : ddmStructureKeys) {
-				qPos.add(ddmStructureKey);
-			}
-
+			qPos.add(ddmStructureKeys);
 			qPos.add(queryDefinition.getStatus());
 
 			Iterator<Long> itr = q.iterate();
@@ -1227,11 +1223,7 @@ public class JournalArticleFinderImpl
 			}
 
 			qPos.add(classNameId);
-
-			for (String ddmStructureKey : ddmStructureKeys) {
-				qPos.add(ddmStructureKey);
-			}
-
+			qPos.add(ddmStructureKeys);
 			qPos.add(queryDefinition.getStatus());
 
 			return (List<JournalArticle>)QueryUtil.list(
