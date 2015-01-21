@@ -24,13 +24,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ERROR_MESSAGE</td>
+	<td>//div[contains(@class, 'alert') and contains(@class,'alert-danger')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>INFO_MESSAGE</td>
 	<td>//div[contains(@class,'alert') and contains(@class,'alert-info')]</td>
 	<td></td>
 </tr>
 <tr>
+	<td>FORM_ERROR_MESSAGE</td>
+	<td>//form//div[contains(@class, 'alert') and contains(@class,'alert-danger')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CONFIRMATION</td>
 	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCOPE_SELECTOR_BUTTON</td>
+	<td>//div[contains(@class,'lfr-title-scope-selector')]//a[contains(@class,'dropdown-toggle')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCOPE_MENU</td>
+	<td>//ul[contains(@class,'dropdown-menu')]/li/a/span[contains(.,'${key_kbPageScope}')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -45,7 +65,7 @@
 </tr>
 <tr>
 	<td>ACTIONS_BUTTON</td>
-	<td>//a[contains(.,'Actions')]</td>
+	<td>//a/span[contains(.,'Actions')]</td>
 	<td></td>
 </tr>
 <tr>
