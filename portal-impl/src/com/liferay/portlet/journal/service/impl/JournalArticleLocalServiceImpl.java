@@ -2618,7 +2618,7 @@ public class JournalArticleLocalServiceImpl
 			return getStructureArticles(ddmStructureKeys);
 		}
 
-		QueryDefinition<JournalArticle> queryDefinitionApproved =
+		QueryDefinition<JournalArticle> approvedQueryDefinition =
 			new QueryDefinition<JournalArticle>(
 				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, new ArticleVersionComparator());
@@ -2628,9 +2628,9 @@ public class JournalArticleLocalServiceImpl
 		articles.addAll(
 			journalArticleFinder.findByG_C_S(
 				0, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-				ddmStructureKeys, queryDefinitionApproved));
+				ddmStructureKeys, approvedQueryDefinition));
 
-		QueryDefinition<JournalArticle> queryDefinitionTrash =
+		QueryDefinition<JournalArticle> trashQueryDefinition =
 			new QueryDefinition<JournalArticle>(
 				WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, new ArticleVersionComparator());
@@ -2638,7 +2638,7 @@ public class JournalArticleLocalServiceImpl
 		articles.addAll(
 			journalArticleFinder.findByG_C_S(
 				0, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-				ddmStructureKeys, queryDefinitionTrash));
+				ddmStructureKeys, trashQueryDefinition));
 
 		return articles;
 	}
