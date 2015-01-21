@@ -258,7 +258,6 @@
 					See modules/third-party/org-freemarker/build.xml
 				</comments>
 			</library>
-			</library>
 			<library>
 				<file-name>lib/development/gson.jar</file-name>
 				<version>2.2.4</version>
