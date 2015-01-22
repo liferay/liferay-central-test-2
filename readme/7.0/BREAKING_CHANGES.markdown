@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `d774a2f`.*
+*This document has been reviewed through commit `8e08451`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -719,27 +719,27 @@ The Asset Tag Properties were deprecated for the 6.2 version of Liferay Portal.
 
 ---------------------------------------
 
-### Removed *asset.publisher.asset.entry.query.processors*
+### Removed the `asset.publisher.asset.entry.query.processors` Property
 - **Date:** 2015-Jan-22
 - **JIRA Ticket:** LPS-52966
 
 #### What changed?
 
-The *asset.publisher.asset.entry.query.processors* property has been removed.
+The `asset.publisher.asset.entry.query.processors` property has been removed
+from `portal.properties`.
 
 #### Who is affected?
 
 This affects any hook that uses the
-*asset.publisher.asset.entry.query.processors* property.
+`asset.publisher.asset.entry.query.processors` property.
 
 #### How should I update my code?
 
 If you are using this property to register Asset Entry Query Processors, they
-have to be registered in a different way. Your Asset Entery Query Processor
-should implements the interface
-`implements com.liferay.portlet.assetpublisher.util.AssetEntryQueryProcessor`
-and it should have the annotation
-`@Component(service=AssetEntryQueryProcessor.class)`.
+must be registered in a different way. Your Asset Entry Query Processor should
+implement the `com.liferay.portlet.assetpublisher.util.AssetEntryQueryProcessor`
+interface and it should have the
+`@Component(service=AssetEntryQueryProcessor.class)` annotation.
 
 #### Why was this change made?
 
