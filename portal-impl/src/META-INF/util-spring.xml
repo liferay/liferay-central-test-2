@@ -478,6 +478,7 @@
 	</bean>
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
+		<property name="unsecureSAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.xmlrpc.XmlRpc" class="com.liferay.portal.xmlrpc.XmlRpcImpl" />
 	<bean id="com.liferay.portal.kernel.xmlrpc.XmlRpcUtil" class="com.liferay.portal.kernel.xmlrpc.XmlRpcUtil">

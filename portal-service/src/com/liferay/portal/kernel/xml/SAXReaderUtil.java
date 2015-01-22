@@ -124,6 +124,12 @@ public class SAXReaderUtil {
 		return _saxReader;
 	}
 
+	public static SAXReader getUnsecureSAXReader() {
+		PortalRuntimePermission.checkGetBeanProperty(SAXReaderUtil.class);
+
+		return _unsecureSAXReader;
+	}
+
 	public static Document read(File file) throws DocumentException {
 		return getSAXReader().read(file);
 	}
@@ -220,6 +226,13 @@ public class SAXReaderUtil {
 		_saxReader = saxReader;
 	}
 
+	public void setUnsecureSAXReader(SAXReader unsecureSAXReader) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
+		_unsecureSAXReader = unsecureSAXReader;
+	}
+
 	private static SAXReader _saxReader;
+	private static SAXReader _unsecureSAXReader;
 
 }
