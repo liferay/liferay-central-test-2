@@ -633,7 +633,7 @@
 			</library>
 			<library>
 				<file-name>lib/development/org.freemarker-2.3.17.LIFERAY-PATCHED-1.jar</file-name>
-				<version>2.3.17.LIFERAY-PATCHED-1</version>				
+				<version>2.3.17.LIFERAY-PATCHED-1</version>
 				<project-name>FreeMarker</project-name>
 				<project-url>http://www.freemarker.org</project-url>
 				<licenses>
@@ -643,7 +643,7 @@
 					</license>
 				</licenses>
 				<comments>
-					See modules/third-party/org-freemarker/build.xml
+					See modules/third-party/org-freemarker/build.xml.
 				</comments>
 			</library>
 			<library>
