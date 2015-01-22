@@ -69,23 +69,24 @@ public class AxisExtender {
 	private static class BundleRegistrationInfo {
 
 		public BundleRegistrationInfo(
-			ServiceRegistration<Filter> authVerifierFilterRegistration,
-			ServiceRegistration<Servlet> axisServletRegistration,
+			ServiceRegistration<Filter> authVerifierFilterServiceRegistration,
+			ServiceRegistration<Servlet> axisServletServiceRegistration,
 			ServiceRegistration<ServletContextHelper>
-				bundleServletContextRegistration) {
+				bundleServletContextServiceRegistration) {
 
-			_authVerifierFilterRegistration = authVerifierFilterRegistration;
-			_axisServletRegistration = axisServletRegistration;
+			_authVerifierFilterServiceRegistration =
+				authVerifierFilterServiceRegistration;
+			_axisServletServiceRegistration = axisServletServiceRegistration;
 			_bundleServletContextRegistration =
-				bundleServletContextRegistration;
+				bundleServletContextServiceRegistration;
 		}
 
 		public ServiceRegistration<Filter> getAuthVerifierFilterRegistration() {
-			return _authVerifierFilterRegistration;
+			return _authVerifierFilterServiceRegistration;
 		}
 
 		public ServiceRegistration<Servlet> getAxisServletRegistration() {
-			return _axisServletRegistration;
+			return _axisServletServiceRegistration;
 		}
 
 		public ServiceRegistration<ServletContextHelper>
@@ -95,8 +96,9 @@ public class AxisExtender {
 		}
 
 		private final ServiceRegistration<Filter>
-			_authVerifierFilterRegistration;
-		private final ServiceRegistration<Servlet> _axisServletRegistration;
+			_authVerifierFilterServiceRegistration;
+		private final ServiceRegistration<Servlet>
+			_axisServletServiceRegistration;
 		private final ServiceRegistration<ServletContextHelper>
 			_bundleServletContextRegistration;
 
@@ -134,6 +136,8 @@ public class AxisExtender {
 					bundleContext.registerService(
 						ServletContextHelper.class,
 						new ServletContextHelper(bundle) {
+
+							@Override
 							public URL getResource(String name) {
 								if (name.startsWith("/")) {
 									name = name.substring(1);
@@ -141,7 +145,8 @@ public class AxisExtender {
 
 								return bundle.getResource(name);
 							}
-						}, properties);
+						},
+						properties);
 
 			properties = new Hashtable<>();
 
