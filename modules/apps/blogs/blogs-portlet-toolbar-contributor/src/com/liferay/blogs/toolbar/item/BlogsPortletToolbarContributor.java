@@ -46,8 +46,6 @@ public class BlogsPortletToolbarContributor
 	public List<MenuItem> getContentAdditionMenuItems(
 		PortletRequest portletRequest) {
 
-		List<MenuItem> menuItems = new ArrayList<>();
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -57,6 +55,8 @@ public class BlogsPortletToolbarContributor
 
 			return null;
 		}
+
+		List<MenuItem> menuItems = new ArrayList<>();
 
 		menuItems.add(getAddEntryMenuItem(portletRequest, themeDisplay));
 
