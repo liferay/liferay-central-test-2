@@ -365,8 +365,10 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 			"/com/liferay/portlet/documentlibrary/context/dependencies" +
 				"/open_in_ms_office_js.ftl";
 
+		Class<?> clazz = getClass();
+
 		URLTemplateResource urlTemplateResource = new URLTemplateResource(
-			javaScript, getClass().getResource(javaScript));
+			javaScript, clazz.getResource(javaScript));
 
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL, urlTemplateResource, false);
