@@ -128,6 +128,7 @@ public class DLDisplayContextProviderImpl implements DLDisplayContextProvider {
 		return dlViewFileVersionDisplayContext;
 	}
 
+	@Override
 	public DLViewFileVersionDisplayContext
 		getDLViewFileVersionDisplayContext(
 			HttpServletRequest request, HttpServletResponse response,
