@@ -12,26 +12,22 @@
  * details.
  */
 
-package com.liferay.portal.kernel.template;
+package com.liferay.portal.template;
+
+import com.liferay.portal.kernel.template.TemplateConstants;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * @author Tina Tian
+ * @author Igor Spasic
  */
-public interface TemplateManager {
+public class FreemarkerTemplateResourceLoader
+	extends DefaultTemplateResourceLoader {
 
-	public void destroy();
-
-	public void destroy(ClassLoader classLoader);
-
-	public String getName();
-
-	public Template getTemplate(
-		TemplateResource templateResource, boolean restricted);
-
-	public Template getTemplate(
-		TemplateResource templateResource,
-		TemplateResource errorTemplateResource, boolean restricted);
-
-	public void init() throws TemplateException;
+	public FreemarkerTemplateResourceLoader() {
+		super(
+			TemplateConstants.LANG_TYPE_FTL,
+			PropsValues.FREEMARKER_ENGINE_TEMPLATE_PARSERS,
+			PropsValues.FREEMARKER_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL);
+	}
 
 }
