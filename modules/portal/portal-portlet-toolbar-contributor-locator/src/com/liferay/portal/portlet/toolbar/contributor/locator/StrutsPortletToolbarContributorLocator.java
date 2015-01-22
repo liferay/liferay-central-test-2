@@ -101,8 +101,7 @@ public class StrutsPortletToolbarContributorLocator
 	protected void setServletContext(ServletContext servletContext) {
 	}
 
-	private static
-		ServiceTrackerMap<String, List<PortletToolbarContributor>>
-			_serviceTrackerMap;
+	private static ServiceTrackerMap<String, List<PortletToolbarContributor>>
+		_serviceTrackerMap;
 
 }
