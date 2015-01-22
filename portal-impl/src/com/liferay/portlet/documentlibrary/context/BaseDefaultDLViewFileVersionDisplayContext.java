@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.context;
 
-import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -75,7 +74,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.portlet.PortletRequest;
@@ -179,7 +177,7 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 	}
 
 	@Override
-	public boolean isVersionInfoVisible() throws PortalException {
+	public boolean isVersionInfoVisible() {
 		return true;
 	}
 
@@ -923,18 +921,6 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
 
 		return portletDisplay.isWebDAVEnabled();
-	}
-
-	private String _processFreeMarkerTemplate(
-		String name, Map<String, String> context) {
-
-		try {
-			return FreeMarkerUtil.process(name, context);
-		}
-		catch (Exception e) {
-			throw new SystemException(
-				"Unable to process Freemarker template", e);
-		}
 	}
 
 	private static final UUID _UUID = UUID.fromString(
