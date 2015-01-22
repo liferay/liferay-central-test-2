@@ -50,7 +50,8 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 		if (className.equals(ObjectConstructor.class.getName())) {
 			throw new TemplateException(
 				"Instantiating " + className + " is not allowed in the " +
-					"template for security reasons", environment);
+					"template for security reasons",
+				environment);
 		}
 
 		for (String restrictedClassName :
@@ -59,7 +60,8 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 			if (className.equals(restrictedClassName)) {
 				throw new TemplateException(
 					"Instantiating " + className + " is not allowed in the " +
-						"template for security reasons", environment);
+						"template for security reasons",
+					environment);
 			}
 		}
 

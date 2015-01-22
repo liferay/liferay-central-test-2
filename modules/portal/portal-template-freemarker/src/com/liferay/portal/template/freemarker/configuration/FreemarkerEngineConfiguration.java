@@ -22,9 +22,6 @@ import aQute.bnd.annotation.metatype.Meta;
 @Meta.OCD(id = "com.liferay.portal.template.freemarker")
 public interface FreemarkerEngineConfiguration {
 
-	public static final String FREEMARKER_ENGINE_TEMPLATE_PARSERS =
-		"freemarker.engine.template.parsers";
-
 	@Meta.AD(deflt = "false", required = false)
 	public boolean localizedLookup();
 
