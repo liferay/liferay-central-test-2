@@ -11,4 +11,4 @@ Import-Package:\
 	*
 Include-Resource:\
 	classes,\
-	@lib/freemarker.jar
+	@lib/org.freemarker.jar
