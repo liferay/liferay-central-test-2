@@ -16,6 +16,8 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * @author Sergio González
  */
@@ -109,16 +111,16 @@ public class Menu extends BaseUIItem {
 		_triggerCssClass = triggerCssClass;
 	}
 
-	private String _cssClass;
-	private String _direction;
+	private String _cssClass = StringPool.BLANK;
+	private String _direction = StringPool.BLANK;
 	private boolean _extended;
-	private String _icon;
-	private String _label;
+	private String _icon = StringPool.BLANK;
+	private String _label = StringPool.BLANK;
 	private List<MenuItem> _menuItems;
-	private String _message;
+	private String _message = StringPool.BLANK;
 	private boolean _showArrow;
 	private boolean _showExpanded;
 	private boolean _showWhenSingleIcon;
-	private String _triggerCssClass;
+	private String _triggerCssClass = StringPool.BLANK;
 
 }

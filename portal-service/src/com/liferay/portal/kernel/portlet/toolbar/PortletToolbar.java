@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.portlet.toolbar.contributor.PortletToolbarContr
 import com.liferay.portal.kernel.portlet.toolbar.contributor.locator.PortletToolbarContributorLocator;
 import com.liferay.portal.kernel.servlet.taglib.ui.Menu;
 import com.liferay.portal.kernel.servlet.taglib.ui.MenuItem;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
@@ -81,15 +80,11 @@ public class PortletToolbar {
 
 		menu.setCssClass("portlet-options");
 		menu.setDirection("down");
-		menu.setExtended(false);
 		menu.setIcon("../aui/plus-sign-2");
-		menu.setLabel(StringPool.BLANK);
 		menu.setMenuItems(contentAdditionMenuItems);
 		menu.setMessage("add");
 		menu.setShowArrow(true);
-		menu.setShowExpanded(false);
 		menu.setShowWhenSingleIcon(true);
-		menu.setTriggerCssClass(StringPool.BLANK);
 
 		return menu;
 	}

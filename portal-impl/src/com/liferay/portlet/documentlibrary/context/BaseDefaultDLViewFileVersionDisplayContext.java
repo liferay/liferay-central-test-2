@@ -158,15 +158,11 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 
 		Menu menu = new Menu();
 
-		menu.setCssClass(StringPool.BLANK);
 		menu.setDirection(direction);
 		menu.setExtended(extended);
 		menu.setIcon(icon);
-		menu.setLabel(StringPool.BLANK);
 		menu.setMenuItems(getMenuItems());
 		menu.setMessage(messsage);
-		menu.setShowArrow(false);
-		menu.setShowExpanded(false);
 		menu.setShowWhenSingleIcon(
 			dlActionsDisplayContext.isShowWhenSingleIconActionButton());
 		menu.setTriggerCssClass("btn btn-default");
