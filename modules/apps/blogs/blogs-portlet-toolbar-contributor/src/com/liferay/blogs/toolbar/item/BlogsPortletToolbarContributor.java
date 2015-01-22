@@ -67,20 +67,20 @@ public class BlogsPortletToolbarContributor
 	protected URLMenuItem getAddEntryMenuItem(
 		PortletRequest portletRequest, ThemeDisplay themeDisplay) {
 
-		PortletURL addEntry = PortletURLFactoryUtil.create(
+		PortletURL portletURL = PortletURLFactoryUtil.create(
 			portletRequest, PortletKeys.BLOGS, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
-		addEntry.setParameter("struts_action", "/blogs/edit_entry");
+		portletURL.setParameter("struts_action", "/blogs/edit_entry");
 
 		String currentURL = PortalUtil.getCurrentURL(portletRequest);
 
-		addEntry.setParameter("redirect", currentURL);
-		addEntry.setParameter("backURL", currentURL);
+		portletURL.setParameter("redirect", currentURL);
+		portletURL.setParameter("backURL", currentURL);
 
 		URLMenuItem urlMenuItem = new URLMenuItem();
 
-		urlMenuItem.setURL(addEntry.toString());
+		urlMenuItem.setURL(portletURL.toString());
 		urlMenuItem.setLabel(
 			LanguageUtil.get(themeDisplay.getLocale(), "add-entry"));
 
