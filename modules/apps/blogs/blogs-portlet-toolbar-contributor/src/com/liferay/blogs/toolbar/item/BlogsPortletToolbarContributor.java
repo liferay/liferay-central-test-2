@@ -67,6 +67,11 @@ public class BlogsPortletToolbarContributor
 	protected URLMenuItem getAddEntryMenuItem(
 		PortletRequest portletRequest, ThemeDisplay themeDisplay) {
 
+		URLMenuItem urlMenuItem = new URLMenuItem();
+
+		urlMenuItem.setLabel(
+			LanguageUtil.get(themeDisplay.getLocale(), "add-entry"));
+
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			portletRequest, PortletKeys.BLOGS, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
@@ -78,11 +83,7 @@ public class BlogsPortletToolbarContributor
 		portletURL.setParameter("redirect", currentURL);
 		portletURL.setParameter("backURL", currentURL);
 
-		URLMenuItem urlMenuItem = new URLMenuItem();
-
 		urlMenuItem.setURL(portletURL.toString());
-		urlMenuItem.setLabel(
-			LanguageUtil.get(themeDisplay.getLocale(), "add-entry"));
 
 		return urlMenuItem;
 	}
