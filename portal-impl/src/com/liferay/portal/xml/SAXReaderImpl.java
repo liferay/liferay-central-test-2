@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.xml.Text;
 import com.liferay.portal.kernel.xml.XMLSchema;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.security.xml.SecureXMLFactoryProvider;
+import com.liferay.portal.security.xml.SecureXMLFactoryProviderImpl;
 import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PropsValues;
@@ -57,6 +58,23 @@ import org.dom4j.DocumentFactory;
 public class SAXReaderImpl implements SAXReader {
 
 	public static SAXReaderImpl getInstance() {
+		if (_instance != null) {
+			return _instance;
+		}
+
+		synchronized (SAXReaderImpl.class) {
+			if (_instance != null) {
+				return _instance;
+			}
+
+			_instance = new SAXReaderImpl(true);
+
+			SecureXMLFactoryProvider secureXMLFactoryProvider =
+				new SecureXMLFactoryProviderImpl();
+
+			_instance.setSecureXMLFactoryProvider(secureXMLFactoryProvider);
+		}
+
 		return _instance;
 	}
 
@@ -653,10 +671,7 @@ public class SAXReaderImpl implements SAXReader {
 
 	private static final Log _log = LogFactoryUtil.getLog(SAXReaderImpl.class);
 
-	private static final SAXReaderImpl _instance = new SAXReaderImpl();
-
-	private final DocumentFactory _documentFactory =
-		DocumentFactory.getInstance();
+	private static SAXReaderImpl _instance;
 
 	private final DocumentFactory _documentFactory =
 		DocumentFactory.getInstance();
