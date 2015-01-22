@@ -345,7 +345,7 @@ public class VelocityTemplateTest {
 		}
 
 		@Override
-		public Reader getReader() throws IOException {
+		public Reader getReader() {
 			if (_templateId.equals(_TEMPLATE_FILE_NAME)) {
 				return new StringReader(_TEST_TEMPLATE_CONTENT);
 			}
