@@ -253,7 +253,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		}
 		catch (Exception e) {
 			throw new TemplateException(
-				"Unable to Initialize Freemarker manager");
+				"Unable to Initialize FreeMarker manager");
 		}
 
 		_configuration.setDefaultEncoding(StringPool.UTF8);
@@ -273,7 +273,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 				_freemarkerEngineConfiguration.templateExceptionHandler());
 		}
 		catch (Exception e) {
-			throw new TemplateException("Unable to init freemarker manager", e);
+			throw new TemplateException("Unable to init FreeMarker manager", e);
 		}
 
 		if (isEnableDebuggerService()) {
