@@ -86,12 +86,10 @@ public class FreemarkerTemplateResourceLoader implements TemplateResourceLoader{
 
 	@Reference(unbind = "-")
 	protected void setMultiVMPoolUtil(MultiVMPoolUtil multiVMPoolUtil) {
-		// This reference ensures that MultipVMPoolUtil is ready for use.
 	}
 
 	@Reference(unbind = "-")
 	protected void setSingleVMPoolUtil(SingleVMPoolUtil singleVMPoolUtil) {
-		// This reference ensures that SingleVMPoolUtil is ready for use.
 	}
 
 	private static volatile DefaultTemplateResourceLoader
