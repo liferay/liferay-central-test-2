@@ -77,22 +77,26 @@ public class AxisExtender {
 			_authVerifierFilterServiceRegistration =
 				authVerifierFilterServiceRegistration;
 			_axisServletServiceRegistration = axisServletServiceRegistration;
-			_bundleServletContextRegistration =
+			_bundleServletContextHelperServiceRegistration =
 				bundleServletContextServiceRegistration;
 		}
 
-		public ServiceRegistration<Filter> getAuthVerifierFilterRegistration() {
+		public ServiceRegistration<Filter>
+			getAuthVerifierFilterServiceRegistration() {
+
 			return _authVerifierFilterServiceRegistration;
 		}
 
-		public ServiceRegistration<Servlet> getAxisServletRegistration() {
+		public ServiceRegistration<Servlet>
+			getAxisServletServiceRegistration() {
+
 			return _axisServletServiceRegistration;
 		}
 
 		public ServiceRegistration<ServletContextHelper>
-			getBundleServletContextRegistration() {
+			getBundleServletContextHelperServiceRegistration() {
 
-			return _bundleServletContextRegistration;
+			return _bundleServletContextHelperServiceRegistration;
 		}
 
 		private final ServiceRegistration<Filter>
@@ -100,7 +104,7 @@ public class AxisExtender {
 		private final ServiceRegistration<Servlet>
 			_axisServletServiceRegistration;
 		private final ServiceRegistration<ServletContextHelper>
-			_bundleServletContextRegistration;
+			_bundleServletContextHelperServiceRegistration;
 
 	}
 
@@ -111,10 +115,10 @@ public class AxisExtender {
 		public BundleRegistrationInfo addingBundle(
 			final Bundle bundle, BundleEvent event) {
 
-			URL serviceConfig = bundle.getResource(
+			URL url = bundle.getResource(
 				"/WEB-INF/server-config.wsdd");
 
-			if (serviceConfig == null) {
+			if (url == null) {
 				return null;
 			}
 
@@ -122,17 +126,15 @@ public class AxisExtender {
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
-			String symbolicName = bundle.getSymbolicName();
-
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME,
-				symbolicName);
+				bundle.getSymbolicName());
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH,
-				"/" + symbolicName);
+				"/" + bundle.getSymbolicName());
 
 			ServiceRegistration<ServletContextHelper>
-				bundleServletContextRegistration =
+				bundleServletContextHelperServiceRegistration =
 					bundleContext.registerService(
 						ServletContextHelper.class,
 						new ServletContextHelper(bundle) {
@@ -152,7 +154,7 @@ public class AxisExtender {
 
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-				symbolicName);
+				bundle.getSymbolicName());
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_NAME,
 				"AuthVerifierFilter");
@@ -160,7 +162,7 @@ public class AxisExtender {
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_PATTERN,
 				"/api/axis/*");
 
-			ServiceRegistration<Filter> authVerifierFilterRegistration =
+			ServiceRegistration<Filter> authVerifierFilterServiceRegistration =
 				bundleContext.registerService(
 					Filter.class, new AuthVerifierFilter(), properties);
 
@@ -168,7 +170,7 @@ public class AxisExtender {
 
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-				symbolicName);
+				bundle.getSymbolicName());
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
 				"AxisServlet");
@@ -177,13 +179,14 @@ public class AxisExtender {
 				"/api/axis/*");
 			properties.put("servlet.init.httpMethods", "GET,POST,HEAD");
 
-			ServiceRegistration<Servlet> axisServletRegistration =
+			ServiceRegistration<Servlet> axisServletServiceRegistration =
 				bundleContext.registerService(
 					Servlet.class, new AxisServlet(), properties);
 
 			return new BundleRegistrationInfo(
-				authVerifierFilterRegistration, axisServletRegistration,
-				bundleServletContextRegistration);
+				authVerifierFilterServiceRegistration,
+				axisServletServiceRegistration,
+				bundleServletContextHelperServiceRegistration);
 		}
 
 		@Override
@@ -202,35 +205,35 @@ public class AxisExtender {
 			BundleRegistrationInfo bundleRegistrationInfo) {
 
 			ServiceRegistration<Servlet> axisServletRegistration =
-				bundleRegistrationInfo.getAxisServletRegistration();
+				bundleRegistrationInfo.getAxisServletServiceRegistration();
 
 			try {
 				axisServletRegistration.unregister();
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 
 			ServiceRegistration<Filter> authVerifierFilterRegistration =
-				bundleRegistrationInfo.getAuthVerifierFilterRegistration();
+				bundleRegistrationInfo.getAuthVerifierFilterServiceRegistration();
 
 			try {
 				authVerifierFilterRegistration.unregister();
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 
-			ServiceRegistration<
-				ServletContextHelper> bundleServletContextRegistration =
+			ServiceRegistration<ServletContextHelper>
+				servletContextHelperServiceRegistration =
 					bundleRegistrationInfo.
-						getBundleServletContextRegistration();
+						getBundleServletContextHelperServiceRegistration();
 
 			try {
-				bundleServletContextRegistration.unregister();
+				servletContextHelperServiceRegistration.unregister();
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
