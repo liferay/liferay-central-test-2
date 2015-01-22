@@ -89,25 +89,11 @@ public class PortletToolbar {
 		return menu;
 	}
 
-	private static void _addPortletToolbarContributorLocator(
-		PortletToolbarContributorLocator portletToolbarContributorLocator) {
-
-		_portletToolbarContributorLocators.add(
-			portletToolbarContributorLocator);
-	}
-
-	private static void _removePortletToolbarContributorLocator(
-		PortletToolbarContributorLocator portletToolbarContributorLocator) {
-
-		_portletToolbarContributorLocators.remove(
-			portletToolbarContributorLocator);
-	}
-
 	private static final List<PortletToolbarContributorLocator>
 		_portletToolbarContributorLocators = new CopyOnWriteArrayList<>();
 
-	private final ServiceTracker<
-		PortletToolbarContributorLocator, PortletToolbarContributorLocator>
+	private final ServiceTracker
+		<PortletToolbarContributorLocator, PortletToolbarContributorLocator>
 			_serviceTracker;
 
 	private static class PortletToolbarServiceTrackerCustomizer
@@ -125,7 +111,7 @@ public class PortletToolbar {
 			PortletToolbarContributorLocator portletToolbarContributorLocator =
 				registry.getService(serviceReference);
 
-			_addPortletToolbarContributorLocator(
+			_portletToolbarContributorLocators.add(
 				portletToolbarContributorLocator);
 
 			return portletToolbarContributorLocator;
@@ -146,7 +132,7 @@ public class PortletToolbar {
 
 			registry.ungetService(serviceReference);
 
-			_removePortletToolbarContributorLocator(
+			_portletToolbarContributorLocators.remove(
 				portletToolbarContributorLocator);
 		}
 
