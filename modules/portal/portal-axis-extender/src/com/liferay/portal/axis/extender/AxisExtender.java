@@ -113,10 +113,9 @@ public class AxisExtender {
 
 		@Override
 		public BundleRegistrationInfo addingBundle(
-			final Bundle bundle, BundleEvent event) {
+			final Bundle bundle, BundleEvent bundleEvent) {
 
-			URL url = bundle.getResource(
-				"/WEB-INF/server-config.wsdd");
+			URL url = bundle.getResource("/WEB-INF/server-config.wsdd");
 
 			if (url == null) {
 				return null;
@@ -191,46 +190,47 @@ public class AxisExtender {
 
 		@Override
 		public void modifiedBundle(
-			Bundle bundle, BundleEvent event,
+			Bundle bundle, BundleEvent bundleEvent,
 			BundleRegistrationInfo bundleRegistrationInfo) {
 
-			removedBundle(bundle, event, bundleRegistrationInfo);
+			removedBundle(bundle, bundleEvent, bundleRegistrationInfo);
 
-			addingBundle(bundle, event);
+			addingBundle(bundle, bundleEvent);
 		}
 
 		@Override
 		public void removedBundle(
-			Bundle bundle, BundleEvent event,
+			Bundle bundle, BundleEvent bundleEvent,
 			BundleRegistrationInfo bundleRegistrationInfo) {
 
-			ServiceRegistration<Servlet> axisServletRegistration =
+			ServiceRegistration<Servlet> axisServletServiceRegistration =
 				bundleRegistrationInfo.getAxisServletServiceRegistration();
 
 			try {
-				axisServletRegistration.unregister();
+				axisServletServiceRegistration.unregister();
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 
-			ServiceRegistration<Filter> authVerifierFilterRegistration =
-				bundleRegistrationInfo.getAuthVerifierFilterServiceRegistration();
+			ServiceRegistration<Filter> authVerifierFilterServiceRegistration =
+				bundleRegistrationInfo.
+					getAuthVerifierFilterServiceRegistration();
 
 			try {
-				authVerifierFilterRegistration.unregister();
+				authVerifierFilterServiceRegistration.unregister();
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 
 			ServiceRegistration<ServletContextHelper>
-				servletContextHelperServiceRegistration =
+				bundleServletContextHelperServiceRegistration =
 					bundleRegistrationInfo.
 						getBundleServletContextHelperServiceRegistration();
 
 			try {
-				servletContextHelperServiceRegistration.unregister();
+				bundleServletContextHelperServiceRegistration.unregister();
 			}
 			catch (Exception e) {
 				_log.error(e, e);
