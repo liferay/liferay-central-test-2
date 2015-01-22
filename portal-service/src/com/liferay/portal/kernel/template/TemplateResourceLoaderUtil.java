@@ -100,7 +100,7 @@ public class TemplateResourceLoaderUtil {
 		throws TemplateException {
 
 		TemplateResourceLoader templateResourceLoader =
-			_getTemplateResourceLoaderChecked(templateResourceLoaderName);
+			_getTemplateResourceLoader(templateResourceLoaderName);
 
 		templateResourceLoader.clearCache();
 	}
@@ -110,7 +110,7 @@ public class TemplateResourceLoaderUtil {
 		throws TemplateException {
 
 		TemplateResourceLoader templateResourceLoader =
-			_getTemplateResourceLoaderChecked(templateResourceLoaderName);
+			_getTemplateResourceLoader(templateResourceLoaderName);
 
 		templateResourceLoader.clearCache(templateId);
 	}
@@ -120,18 +120,12 @@ public class TemplateResourceLoaderUtil {
 		throws TemplateException {
 
 		TemplateResourceLoader templateResourceLoader =
-			_getTemplateResourceLoaderChecked(templateResourceLoaderName);
+			_getTemplateResourceLoader(templateResourceLoaderName);
 
 		return templateResourceLoader.getTemplateResource(templateId);
 	}
 
 	private TemplateResourceLoader _getTemplateResourceLoader(
-		String templateResourceLoaderName) {
-
-		return _templateResourceLoaders.get(templateResourceLoaderName);
-	}
-
-	private TemplateResourceLoader _getTemplateResourceLoaderChecked(
 			String templateResourceLoaderName)
 		throws TemplateException {
 
@@ -156,7 +150,7 @@ public class TemplateResourceLoaderUtil {
 		throws TemplateException {
 
 		TemplateResourceLoader templateResourceLoader =
-			_getTemplateResourceLoaderChecked(templateResourceLoaderName);
+			_getTemplateResourceLoader(templateResourceLoaderName);
 
 		return templateResourceLoader.hasTemplateResource(templateId);
 	}
