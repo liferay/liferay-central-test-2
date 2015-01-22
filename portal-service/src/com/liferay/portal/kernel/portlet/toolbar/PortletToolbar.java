@@ -69,10 +69,11 @@ public class PortletToolbar {
 					portletToolbarContributor.getContentAdditionMenuItems(
 						portletRequest);
 
-				if (curContentAdditionMenuItems != null) {
-					contentAdditionMenuItems.addAll(
-						curContentAdditionMenuItems);
+				if (curContentAdditionMenuItems == null) {
+					continue;
 				}
+
+				contentAdditionMenuItems.addAll(curContentAdditionMenuItems);
 			}
 		}
 
