@@ -55,7 +55,8 @@ public class TemplateResourceLoaderUtil {
 	}
 
 	public static TemplateResourceLoader getTemplateResourceLoader(
-		String templateResourceLoaderName) {
+			String templateResourceLoaderName)
+		throws TemplateException {
 
 		return _instance._getTemplateResourceLoader(templateResourceLoaderName);
 	}
