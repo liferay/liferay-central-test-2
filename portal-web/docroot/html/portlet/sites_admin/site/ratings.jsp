@@ -39,7 +39,7 @@ else {
 	<p><liferay-ui:message key="changing-rating-type-could-lead-to-inaccurate-info" /></p>
 </div>
 
-<p><liferay-ui:message key="select-the-rating-type-for-the-portlets" /></p>
+<p><liferay-ui:message key="select-the-rating-type-for-the-following-portlets" /></p>
 
 <aui:fieldset>
 
