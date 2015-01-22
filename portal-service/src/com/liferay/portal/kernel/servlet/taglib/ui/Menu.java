@@ -21,25 +21,6 @@ import java.util.List;
  */
 public class Menu extends BaseUIItem {
 
-	public Menu(
-		String cssClass, String direction, boolean extended, String icon,
-		String label, List<MenuItem> menuItems, String message,
-		boolean showArrow, boolean showExpanded, boolean showWhenSingleIcon,
-		String triggerCssClass) {
-
-		_cssClass = cssClass;
-		_direction = direction;
-		_extended = extended;
-		_icon = icon;
-		_label = label;
-		_menuItems = menuItems;
-		_message = message;
-		_showArrow = showArrow;
-		_showExpanded = showExpanded;
-		_showWhenSingleIcon = showWhenSingleIcon;
-		_triggerCssClass = triggerCssClass;
-	}
-
 	public String getCssClass() {
 		return _cssClass;
 	}
@@ -84,16 +65,60 @@ public class Menu extends BaseUIItem {
 		return _showWhenSingleIcon;
 	}
 
-	private final String _cssClass;
-	private final String _direction;
-	private final boolean _extended;
-	private final String _icon;
-	private final String _label;
-	private final List<MenuItem> _menuItems;
-	private final String _message;
-	private final boolean _showArrow;
-	private final boolean _showExpanded;
-	private final boolean _showWhenSingleIcon;
-	private final String _triggerCssClass;
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
+	public void setDirection(String direction) {
+		_direction = direction;
+	}
+
+	public void setExtended(boolean extended) {
+		_extended = extended;
+	}
+
+	public void setIcon(String icon) {
+		_icon = icon;
+	}
+
+	public void setLabel(String label) {
+		_label = label;
+	}
+
+	public void setMenuItems(List<MenuItem> menuItems) {
+		_menuItems = menuItems;
+	}
+
+	public void setMessage(String message) {
+		_message = message;
+	}
+
+	public void setShowArrow(boolean showArrow) {
+		_showArrow = showArrow;
+	}
+
+	public void setShowExpanded(boolean showExpanded) {
+		_showExpanded = showExpanded;
+	}
+
+	public void setShowWhenSingleIcon(boolean showWhenSingleIcon) {
+		_showWhenSingleIcon = showWhenSingleIcon;
+	}
+
+	public void setTriggerCssClass(String triggerCssClass) {
+		_triggerCssClass = triggerCssClass;
+	}
+
+	private String _cssClass;
+	private String _direction;
+	private boolean _extended;
+	private String _icon;
+	private String _label;
+	private List<MenuItem> _menuItems;
+	private String _message;
+	private boolean _showArrow;
+	private boolean _showExpanded;
+	private boolean _showWhenSingleIcon;
+	private String _triggerCssClass;
 
 }

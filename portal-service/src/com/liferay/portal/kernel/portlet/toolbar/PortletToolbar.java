@@ -77,10 +77,21 @@ public class PortletToolbar {
 			}
 		}
 
-		return new Menu(
-			"portlet-options", "down", false, "../aui/plus-sign-2",
-			StringPool.BLANK, contentAdditionMenuItems, "add", true, false,
-			true, StringPool.BLANK);
+		Menu menu = new Menu();
+
+		menu.setCssClass("portlet-options");
+		menu.setDirection("down");
+		menu.setExtended(false);
+		menu.setIcon("../aui/plus-sign-2");
+		menu.setLabel(StringPool.BLANK);
+		menu.setMenuItems(contentAdditionMenuItems);
+		menu.setMessage("add");
+		menu.setShowArrow(true);
+		menu.setShowExpanded(false);
+		menu.setShowWhenSingleIcon(true);
+		menu.setTriggerCssClass(StringPool.BLANK);
+
+		return menu;
 	}
 
 	private static void _addPortletToolbarContributorLocator(
