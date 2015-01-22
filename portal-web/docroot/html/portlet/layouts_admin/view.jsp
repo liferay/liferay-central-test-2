@@ -184,7 +184,7 @@ Group selGroup = layoutsAdminDisplayContext.getSelGroup();
 					</c:choose>
 
 					<%
-					request.setAttribute("privateLayout", layoutsAdminDisplayContext.isPrivateLayout());
+					request.setAttribute(WebKeys.PRIVATE_LAYOUT, layoutsAdminDisplayContext.isPrivateLayout());
 					%>
 
 					<liferay-staging:menu cssClass="manage-pages-branch-menu" extended="<%= true %>" icon="/common/tool.png" message="" selPlid="<%= layoutsAdminDisplayContext.getSelPlid() %>" showManageBranches="<%= true %>"  />

@@ -87,7 +87,7 @@ if (layout != null) {
 									<c:when test="<%= (group.isStagingGroup() || group.isStagedRemotely()) && branchingEnabled %>">
 
 										<%
-										request.setAttribute("privateLayout", privateLayout);
+										request.setAttribute(WebKeys.PRIVATE_LAYOUT, privateLayout);
 										request.setAttribute("view.jsp-layoutBranch", layoutBranch);
 										request.setAttribute("view.jsp-layoutRevision", layoutRevision);
 										request.setAttribute("view.jsp-layoutSetBranch", layoutSetBranch);
