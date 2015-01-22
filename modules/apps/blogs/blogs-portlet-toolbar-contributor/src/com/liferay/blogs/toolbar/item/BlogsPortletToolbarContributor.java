@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletRequest;
@@ -53,7 +54,7 @@ public class BlogsPortletToolbarContributor
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			return null;
+			return Collections.<MenuItem>emptyList();
 		}
 
 		List<MenuItem> menuItems = new ArrayList<>();
