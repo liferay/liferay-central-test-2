@@ -62,8 +62,6 @@ public class LiferayTemplateCache extends TemplateCache {
 			String templateId, Locale locale, String encoding, boolean parse)
 		throws IOException {
 
-		// WEIRD STATEMENT NOT SURE WHAT COMES BACK
-
 		for (String macroTemplateId :
 				_freemarkerEngineConfiguration.macroLibrary()) {
 
