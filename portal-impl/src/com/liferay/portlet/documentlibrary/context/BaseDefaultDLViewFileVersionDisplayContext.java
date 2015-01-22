@@ -129,14 +129,18 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 
 	@Override
 	public Menu getMenu() throws PortalException {
-		DLActionsDisplayContext dlActionsDisplayContext =
-			_getDLActionsDisplayContext();
+		Menu menu = new Menu();
 
 		String direction = "left";
+
+		DLActionsDisplayContext dlActionsDisplayContext =
+			_getDLActionsDisplayContext();
 
 		if (dlActionsDisplayContext.isShowMinimalActionsButton()) {
 			direction = "down";
 		}
+
+		menu.setDirection(direction);
 
 		boolean extended = true;
 
@@ -144,25 +148,26 @@ public abstract class BaseDefaultDLViewFileVersionDisplayContext
 			extended = false;
 		}
 
+		menu.setExtended(extended);
+
 		String icon = StringPool.BLANK;
 
 		if (dlActionsDisplayContext.isShowMinimalActionsButton()) {
 			icon = null;
 		}
 
-		String messsage = StringPool.BLANK;
+		menu.setIcon(icon);
+
+		menu.setMenuItems(getMenuItems());
+
+		String message = StringPool.BLANK;
 
 		if (dlActionsDisplayContext.isShowMinimalActionsButton()) {
-			messsage = "actions";
+			message = "actions";
 		}
 
-		Menu menu = new Menu();
+		menu.setMessage(message);
 
-		menu.setDirection(direction);
-		menu.setExtended(extended);
-		menu.setIcon(icon);
-		menu.setMenuItems(getMenuItems());
-		menu.setMessage(messsage);
 		menu.setShowWhenSingleIcon(
 			dlActionsDisplayContext.isShowWhenSingleIconActionButton());
 		menu.setTriggerCssClass("btn btn-default");

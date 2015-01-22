@@ -48,6 +48,12 @@ public class PortletToolbar {
 	public Menu getContentAdditionMenu(
 		String portletId, PortletRequest portletRequest) {
 
+		Menu menu = new Menu();
+
+		menu.setCssClass("portlet-options");
+		menu.setDirection("down");
+		menu.setIcon("../aui/plus-sign-2");
+
 		List<MenuItem> contentAdditionMenuItems = new ArrayList<>();
 
 		for (PortletToolbarContributorLocator
@@ -77,12 +83,8 @@ public class PortletToolbar {
 			}
 		}
 
-		Menu menu = new Menu();
-
-		menu.setCssClass("portlet-options");
-		menu.setDirection("down");
-		menu.setIcon("../aui/plus-sign-2");
 		menu.setMenuItems(contentAdditionMenuItems);
+
 		menu.setMessage("add");
 		menu.setShowArrow(true);
 		menu.setShowWhenSingleIcon(true);
