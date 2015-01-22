@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.kernel.xml.Text;
 import com.liferay.portal.kernel.xml.XMLSchema;
 import com.liferay.portal.kernel.xml.XPath;
+import com.liferay.portal.security.xml.SecureXMLFactoryProvider;
 import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PropsValues;
@@ -46,8 +47,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.xerces.parsers.SAXParser;
 
 import org.dom4j.DocumentFactory;
 
@@ -175,6 +174,13 @@ public class SAXReaderImpl implements SAXReader {
 		}
 
 		return oldProcessingInstructions;
+	}
+
+	public SAXReaderImpl() {
+	}
+
+	public SAXReaderImpl(boolean unsecure) {
+		this._unsecure = unsecure;
 	}
 
 	@Override
@@ -525,6 +531,12 @@ public class SAXReaderImpl implements SAXReader {
 		return toNewNodes(xPath.selectNodes(nodeImpl.getWrappedNode()));
 	}
 
+	public void setSecureXMLFactoryProvider(
+		SecureXMLFactoryProvider secureXMLFactoryProvider) {
+
+		_secureXMLFactoryProvider = secureXMLFactoryProvider;
+	}
+
 	@Override
 	public void sort(List<Node> nodes, String xPathExpression) {
 		org.dom4j.XPath xPath = _documentFactory.createXPath(xPathExpression);
@@ -549,14 +561,18 @@ public class SAXReaderImpl implements SAXReader {
 		}
 
 		try {
-			reader = new org.dom4j.io.SAXReader(new SAXParser(), validate);
+			reader = new org.dom4j.io.SAXReader(
+				_secureXMLFactoryProvider.newXMLReader(), validate);
+
+			if (_UNSECURE) {
+				reader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, false);
+				reader.setFeature(_FEATURES_LOAD_DTD_GRAMMAR, validate);
+				reader.setFeature(_FEATURES_LOAD_EXTERNAL_DTD, validate);
+			}
 
 			reader.setEntityResolver(new EntityResolver());
 
 			reader.setFeature(_FEATURES_DYNAMIC, validate);
-			reader.setFeature(_FEATURES_EXTERNAL_GENERAL_ENTITIES, validate);
-			reader.setFeature(_FEATURES_LOAD_DTD_GRAMMAR, validate);
-			reader.setFeature(_FEATURES_LOAD_EXTERNAL_DTD, validate);
 			reader.setFeature(_FEATURES_VALIDATION, validate);
 			reader.setFeature(_FEATURES_VALIDATION_SCHEMA, validate);
 			reader.setFeature(
@@ -568,7 +584,8 @@ public class SAXReaderImpl implements SAXReader {
 					"XSD validation is disabled because " + e.getMessage());
 			}
 
-			reader = new org.dom4j.io.SAXReader(false);
+			reader = new org.dom4j.io.SAXReader(
+				_secureXMLFactoryProvider.newXMLReader(), false);
 
 			reader.setEntityResolver(new EntityResolver());
 		}
@@ -605,11 +622,11 @@ public class SAXReaderImpl implements SAXReader {
 		return saxReader;
 	}
 
+	private static final String _FEATURES_DISALLOW_DOCTYPE_DECL =
+		"http://apache.org/xml/features/disallow-doctype-decl";
+
 	private static final String _FEATURES_DYNAMIC =
 		"http://apache.org/xml/features/validation/dynamic";
-
-	private static final String _FEATURES_EXTERNAL_GENERAL_ENTITIES =
-		"http://xml.org/sax/features/external-general-entities";
 
 	private static final String _FEATURES_LOAD_DTD_GRAMMAR =
 		"http://apache.org/xml/features/nonvalidating/load-dtd-grammar";
@@ -632,11 +649,17 @@ public class SAXReaderImpl implements SAXReader {
 	private static final String _PROPERTY_SCHEMA_SOURCE =
 		"http://java.sun.com/xml/jaxp/properties/schemaSource";
 
+	private static final boolean _UNSECURE = false;
+
 	private static final Log _log = LogFactoryUtil.getLog(SAXReaderImpl.class);
 
 	private static final SAXReaderImpl _instance = new SAXReaderImpl();
 
 	private final DocumentFactory _documentFactory =
 		DocumentFactory.getInstance();
+
+	private final DocumentFactory _documentFactory =
+		DocumentFactory.getInstance();
+	private SecureXMLFactoryProvider _secureXMLFactoryProvider;
 
 }
