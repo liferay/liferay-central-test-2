@@ -1301,6 +1301,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 	/**
 	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	@Override
 	public void registerAssetQueryProcessor(
 		String assetQueryProcessorClassName,
