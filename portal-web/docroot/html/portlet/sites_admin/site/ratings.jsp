@@ -47,7 +47,6 @@ else {
 	String[] portletIds = PortletRatingsDefinitionUtil.getPortletIds();
 
 	for (String portletId : portletIds) {
-
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 	%>
 
@@ -57,23 +56,23 @@ else {
 		String[] classNames = PortletRatingsDefinitionUtil.getClassNames(portletId);
 
 		for (String className : classNames) {
-			String propertyName = className + StringPool.UNDERLINE + "RatingsType";
+			String propertyKey = className + StringPool.UNDERLINE + "RatingsType";
 
 			PortletRatingsDefinition.RatingsType defaultRatingsType = PortletRatingsDefinitionUtil.getDefaultType(portletId, className);
 
-			String companyRatingsTypeString = PrefsParamUtil.getString(companyPortletPreferences, request, propertyName, defaultRatingsType.toString());
+			String companyRatingsTypeString = PrefsParamUtil.getString(companyPortletPreferences, request, propertyKey, defaultRatingsType.toString());
 
-			String ratingsTypeString = PropertiesParamUtil.getString(groupTypeSettings, request, propertyName, companyRatingsTypeString);
+			String ratingsTypeString = PropertiesParamUtil.getString(groupTypeSettings, request, propertyKey, companyRatingsTypeString);
 		%>
 
 			<div class="ratings-type-select">
-				<aui:select label='<%= (classNames.length > 1) ? ResourceActionsUtil.getModelResource(locale, className) : "" %>' name='<%= "TypeSettingsProperties--" + propertyName + "--" %>'>
+				<aui:select label='<%= (classNames.length > 1) ? ResourceActionsUtil.getModelResource(locale, className) : "" %>' name='<%= "TypeSettingsProperties--" + propertyKey + "--" %>'>
 
 					<%
-					for (PortletRatingsDefinition.RatingsType curRatingsType : PortletRatingsDefinition.RatingsType.values()) {
+					for (PortletRatingsDefinition.RatingsType ratingsType : PortletRatingsDefinition.RatingsType.values()) {
 					%>
 
-						<aui:option label="<%= LanguageUtil.get(request, curRatingsType.getValue()) %>" selected="<%= ratingsTypeString.equals(curRatingsType.getValue()) %>" value="<%= curRatingsType.getValue() %>" />
+						<aui:option label="<%= LanguageUtil.get(request, ratingsType.getValue()) %>" selected="<%= ratingsTypeString.equals(ratingsType.getValue()) %>" value="<%= ratingsType.getValue() %>" />
 
 					<%
 					}
