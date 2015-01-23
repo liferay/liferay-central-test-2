@@ -13,11 +13,11 @@
 
 	<#assign functionCommand = function?substring(x + 1)>
 
-	<#assign functionLocatorCount = seleniumBuilderContext.getFunctionLocatorCount(seleniumBuilderFileUtil.getObjectName(function?substring(0, x)))>
-
 	"${seleniumBuilderFileUtil.getVariableName(function?substring(0, x))}Function#${functionCommand}",
 
 	new String[] {
+
+	<#assign functionLocatorCount = seleniumBuilderContext.getFunctionLocatorCount(seleniumBuilderFileUtil.getObjectName(function?substring(0, x)))>
 
 	<#list 1..functionLocatorCount as i>
 		"",

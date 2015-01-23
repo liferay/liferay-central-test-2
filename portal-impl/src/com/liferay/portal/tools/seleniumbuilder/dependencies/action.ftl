@@ -70,9 +70,10 @@ public class ${actionSimpleClassName} extends
 			<#assign commandName = commandElement.attributeValue("name")>
 
 			<#assign functionReturnType = seleniumBuilderContext.getFunctionReturnType(seleniumBuilderFileUtil.getObjectName(commandName))>
-			<#assign functionLocatorCount = seleniumBuilderContext.getFunctionLocatorCount(seleniumBuilderFileUtil.getObjectName(commandName))>
 
 			public ${functionReturnType} ${commandName}(
+
+			<#assign functionLocatorCount = seleniumBuilderContext.getFunctionLocatorCount(seleniumBuilderFileUtil.getObjectName(commandName))>
 
 			<#list 1..functionLocatorCount as i>
 				String locator${i}, String locatorKey${i}, String value${i}
