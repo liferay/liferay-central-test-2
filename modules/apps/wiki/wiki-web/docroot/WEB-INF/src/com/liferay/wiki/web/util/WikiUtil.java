@@ -43,7 +43,7 @@ import javax.portlet.RenderRequest;
 /**
  * @author Ivan Zaera
  */
-public class WikiWebUtil {
+public class WikiUtil {
 
 	public static Map<String, String> getEmailFromDefinitionTerms(
 		RenderRequest request) {

@@ -21,7 +21,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.service.WikiNodeServiceUtil;
 import com.liferay.wiki.web.settings.WikiPortletInstanceSettings;
-import com.liferay.wiki.web.util.WikiWebUtil;
+import com.liferay.wiki.web.util.WikiUtil;
 
 import java.util.List;
 
@@ -71,12 +71,12 @@ public class WikiConfigurationDisplayContext {
 	private void _populateNodes() throws PortalException {
 		_allNodes = WikiNodeServiceUtil.getNodes(_scopeGroupId);
 
-		_allNodeNames = WikiWebUtil.getNodeNames(_allNodes);
+		_allNodeNames = WikiUtil.getNodeNames(_allNodes);
 
 		_visibleNodeNames = _wikiPortletInstanceSettings.getVisibleNodes();
 
 		if (ArrayUtil.isNotEmpty(_visibleNodeNames)) {
-			_allNodes = WikiWebUtil.orderNodes(_allNodes, _visibleNodeNames);
+			_allNodes = WikiUtil.orderNodes(_allNodes, _visibleNodeNames);
 		}
 		else {
 			_visibleNodeNames = _allNodeNames.toArray(

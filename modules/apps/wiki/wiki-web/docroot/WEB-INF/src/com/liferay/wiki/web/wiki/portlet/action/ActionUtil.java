@@ -37,7 +37,7 @@ import com.liferay.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.wiki.service.WikiNodeServiceUtil;
 import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.wiki.service.WikiPageServiceUtil;
-import com.liferay.wiki.web.util.WikiWebUtil;
+import com.liferay.wiki.web.util.WikiUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -79,7 +79,7 @@ public class ActionUtil {
 				themeDisplay.getDefaultUserId(), serviceContext);
 		}
 		else {
-			node = WikiWebUtil.getFirstNode(portletRequest);
+			node = WikiUtil.getFirstNode(portletRequest);
 
 			if (node == null) {
 				throw new PrincipalException();
