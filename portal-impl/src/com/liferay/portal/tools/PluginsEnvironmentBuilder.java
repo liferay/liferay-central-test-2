@@ -168,7 +168,7 @@ public class PluginsEnvironmentBuilder {
 		if (string.contains(dependencyName)) {
 			System.out.println(
 				"Skipping duplicate " + dependencyName + " " + version);
-	
+
 			return;
 		}
 
