@@ -29,7 +29,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.wiki.service.permission.WikiNodePermission;
-import com.liferay.wiki.web.configuration.WikiPortletInstanceSettings;
+import com.liferay.wiki.web.settings.WikiPortletInstanceSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;

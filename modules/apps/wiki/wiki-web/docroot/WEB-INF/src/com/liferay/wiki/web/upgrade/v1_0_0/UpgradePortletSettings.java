@@ -18,7 +18,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.wiki.constants.WikiPortletKeys;
 import com.liferay.wiki.settings.WikiSettings;
 import com.liferay.wiki.util.WikiConstants;
-import com.liferay.wiki.web.configuration.WikiPortletInstanceSettings;
+import com.liferay.wiki.web.settings.WikiPortletInstanceSettings;
 
 /**
  * @author Iván Zaera

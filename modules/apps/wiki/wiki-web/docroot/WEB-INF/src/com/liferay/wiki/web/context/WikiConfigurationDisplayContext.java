@@ -20,7 +20,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.service.WikiNodeServiceUtil;
-import com.liferay.wiki.web.configuration.WikiPortletInstanceSettings;
+import com.liferay.wiki.web.settings.WikiPortletInstanceSettings;
 import com.liferay.wiki.web.util.WikiWebUtil;
 
 import java.util.List;
