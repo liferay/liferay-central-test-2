@@ -25,8 +25,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-String headerTitle = LanguageUtil.get(request, "add-site-roles-to");
-
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 if (group != null) {
@@ -45,8 +43,6 @@ Organization organization = null;
 
 if (group.isOrganization()) {
 	roleType = RoleConstants.TYPE_ORGANIZATION;
-
-	headerTitle = LanguageUtil.get(request, "add-organization-roles-to");
 
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
 }
@@ -95,7 +91,7 @@ request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
 	backURL="<%= redirect %>"
 	escapeXml="<%= false %>"
 	localizeTitle="<%= false %>"
-	title='<%= headerTitle + ": " + LanguageUtil.get(request, "users") %>'
+	title='<%= LanguageUtil.get(request, group.isOrganization() ? "add-organization-roles-to" : "add-site-roles-to") + ": " + LanguageUtil.get(request, "users") %>'
 />
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
