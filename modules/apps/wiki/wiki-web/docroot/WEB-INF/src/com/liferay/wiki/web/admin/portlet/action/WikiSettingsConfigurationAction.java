@@ -23,7 +23,8 @@ import javax.portlet.PortletConfig;
 /**
  * @author Iván Zaera
  */
-public class ConfigurationActionImpl extends SettingsConfigurationAction {
+public class WikiSettingsConfigurationAction
+	extends SettingsConfigurationAction {
 
 	@Override
 	public void processAction(

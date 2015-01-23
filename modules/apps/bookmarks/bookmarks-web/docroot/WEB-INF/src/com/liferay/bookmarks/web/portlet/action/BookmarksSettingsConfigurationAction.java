@@ -28,7 +28,8 @@ import javax.portlet.PortletConfig;
 /**
  * @author Sergio González
  */
-public class ConfigurationActionImpl extends SettingsConfigurationAction {
+public class BookmarksSettingsConfigurationAction
+	extends SettingsConfigurationAction {
 
 	@Override
 	public void processAction(
