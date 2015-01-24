@@ -13,7 +13,6 @@
 		<execute action="CPKnowledgebaseadmin#assertTextEquals" locator-key1="SUGGESTION_CONTENT" value1="${kbSuggestionBody}" />
 		<execute action="CPKnowledgebaseadmin#assertClickNoError" locator-key1="SUGGESTION_DELETE_BUTTON" value1="Delete" />
 		<execute action="CPKnowledgebaseadmin#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to delete this? It will be deleted immediately." />
-
 		<execute action="CPKnowledgebaseadmin#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Suggestion deleted successfully." />
 	</command>
 
