@@ -41,6 +41,7 @@
 		String iconOff = (String)dynamicAttributes.get("iconOff");
 		String iconOn = (String)dynamicAttributes.get("iconOn");
 		String labelOff = (String)dynamicAttributes.get("labelOff");
+
 		String labelOn = (String)dynamicAttributes.get("labelOn");
 
 		if (localizeLabel) {
