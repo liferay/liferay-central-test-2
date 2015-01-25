@@ -76,44 +76,44 @@ public class PortletSessionAttributeMapTest {
 
 	@Test
 	public void testContainsKey() {
-		_doTestContainsKey(true);
-		_doTestContainsKey(false);
+		testContainsKey(true);
+		testContainsKey(false);
 	}
 
 	@Test
 	public void testContainsValue() {
-		_doTestContainsValue(true);
-		_doTestContainsValue(false);
+		testContainsValue(true);
+		testContainsValue(false);
 	}
 
 	@Test
 	public void testEntrySet() {
-		_doTestEntrySet(true);
-		_doTestEntrySet(false);
+		testEntrySet(true);
+		testEntrySet(false);
 	}
 
 	@Test
 	public void testEqualsAndHashCode() {
-		_doTestEqualsAndHashCode(true);
-		_doTestEqualsAndHashCode(false);
+		testEqualsAndHashCode(true);
+		testEqualsAndHashCode(false);
 	}
 
 	@Test
 	public void testGet() {
-		_doTestGet(true);
-		_doTestGet(false);
+		testGet(true);
+		testGet(false);
 	}
 
 	@Test
 	public void testIsEmpty() {
-		_doTestIsEmpty(true);
-		_doTestIsEmpty(false);
+		testIsEmpty(true);
+		testIsEmpty(false);
 	}
 
 	@Test
 	public void testKeySet() {
-		_doTestKeySet(true);
-		_doTestKeySet(false);
+		testKeySet(true);
+		testKeySet(false);
 	}
 
 	@Test
@@ -157,8 +157,8 @@ public class PortletSessionAttributeMapTest {
 
 	@Test
 	public void testSize() {
-		_doTestSize(true);
-		_doTestSize(false);
+		testSize(true);
+		testSize(false);
 	}
 
 	@Test
@@ -238,37 +238,37 @@ public class PortletSessionAttributeMapTest {
 
 	@Test
 	public void testValues() {
-		_doTestValues(true);
-		_doTestValues(false);
+		testValues(true);
+		testValues(false);
 	}
 
-	private void _doTestContainsKey(boolean portletScope) {
+	protected void testContainsKey(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Assert.assertFalse(portletSessionAttributeMap.containsKey(null));
 		Assert.assertTrue(
 			portletSessionAttributeMap.containsKey(
-				_encodeKey(portletScope, _KEY_1)));
+				encodeKey(portletScope, _KEY_1)));
 		Assert.assertTrue(
 			portletSessionAttributeMap.containsKey(
-				_encodeKey(portletScope, _KEY_2)));
+				encodeKey(portletScope, _KEY_2)));
 		Assert.assertTrue(
 			portletSessionAttributeMap.containsKey(
-				_encodeKey(portletScope, _KEY_3)));
+				encodeKey(portletScope, _KEY_3)));
 		Assert.assertFalse(
 			portletSessionAttributeMap.containsKey(
-				_encodeKey(portletScope, _KEY_4)));
+				encodeKey(portletScope, _KEY_4)));
 		Assert.assertFalse(
 			portletSessionAttributeMap.containsKey(
-				_encodeKey(portletScope, _KEY_5)));
+				encodeKey(portletScope, _KEY_5)));
 	}
 
-	private void _doTestContainsValue(boolean portletScope) {
+	protected void testContainsValue(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Assert.assertFalse(portletSessionAttributeMap.containsValue(null));
 		Assert.assertTrue(portletSessionAttributeMap.containsValue(_value1));
@@ -278,10 +278,10 @@ public class PortletSessionAttributeMapTest {
 		Assert.assertFalse(portletSessionAttributeMap.containsValue(_value5));
 	}
 
-	private void _doTestEntrySet(boolean portletScope) {
+	protected void testEntrySet(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Set<Entry<String, Object>> entrySet =
 			portletSessionAttributeMap.entrySet();
@@ -289,95 +289,95 @@ public class PortletSessionAttributeMapTest {
 		Assert.assertEquals(3, entrySet.size());
 		Assert.assertTrue(
 			entrySet.contains(
-				new SimpleEntry<>(_encodeKey(portletScope, _KEY_1), _value1)));
+				new SimpleEntry<>(encodeKey(portletScope, _KEY_1), _value1)));
 		Assert.assertTrue(
 			entrySet.contains(
-				new SimpleEntry<>(_encodeKey(portletScope, _KEY_2), _value2)));
+				new SimpleEntry<>(encodeKey(portletScope, _KEY_2), _value2)));
 		Assert.assertTrue(
 			entrySet.contains(
-				new SimpleEntry<>(_encodeKey(portletScope, _KEY_3), _value3)));
+				new SimpleEntry<>(encodeKey(portletScope, _KEY_3), _value3)));
 	}
 
-	private void _doTestEqualsAndHashCode(boolean portletScope) {
+	protected void testEqualsAndHashCode(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Map<String, Object> map = new HashMap<>();
 
-		map.put(_encodeKey(portletScope, _KEY_1), _value1);
-		map.put(_encodeKey(portletScope, _KEY_2), _value2);
-		map.put(_encodeKey(portletScope, _KEY_3), _value3);
+		map.put(encodeKey(portletScope, _KEY_1), _value1);
+		map.put(encodeKey(portletScope, _KEY_2), _value2);
+		map.put(encodeKey(portletScope, _KEY_3), _value3);
 
 		Assert.assertEquals(map, portletSessionAttributeMap);
 		Assert.assertEquals(
 			map.hashCode(), portletSessionAttributeMap.hashCode());
 	}
 
-	private void _doTestGet(boolean portletScope) {
+	protected void testGet(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Assert.assertNull(portletSessionAttributeMap.get(null));
 		Assert.assertSame(
 			_value1,
-			portletSessionAttributeMap.get(_encodeKey(portletScope, _KEY_1)));
+			portletSessionAttributeMap.get(encodeKey(portletScope, _KEY_1)));
 		Assert.assertSame(
 			_value2,
-			portletSessionAttributeMap.get(_encodeKey(portletScope, _KEY_2)));
+			portletSessionAttributeMap.get(encodeKey(portletScope, _KEY_2)));
 		Assert.assertSame(
 			_value3,
-			portletSessionAttributeMap.get(_encodeKey(portletScope, _KEY_3)));
+			portletSessionAttributeMap.get(encodeKey(portletScope, _KEY_3)));
 		Assert.assertNull(
-			portletSessionAttributeMap.get(_encodeKey(portletScope, _KEY_4)));
+			portletSessionAttributeMap.get(encodeKey(portletScope, _KEY_4)));
 		Assert.assertNull(
-			portletSessionAttributeMap.get(_encodeKey(portletScope, _KEY_5)));
+			portletSessionAttributeMap.get(encodeKey(portletScope, _KEY_5)));
 	}
 
-	private void _doTestIsEmpty(boolean portletScope) {
+	protected void testIsEmpty(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Assert.assertFalse(portletSessionAttributeMap.isEmpty());
 
 		portletSessionAttributeMap = new PortletSessionAttributeMap(
-			new MockHttpSession(), _getScopePrefix(portletScope));
+			new MockHttpSession(), getScopePrefix(portletScope));
 
 		Assert.assertTrue(portletSessionAttributeMap.isEmpty());
 	}
 
-	private void _doTestKeySet(boolean portletScope) {
+	protected void testKeySet(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Set<String> keySet = portletSessionAttributeMap.keySet();
 
 		Assert.assertEquals(3, keySet.size());
-		Assert.assertTrue(keySet.contains(_encodeKey(portletScope, _KEY_1)));
-		Assert.assertTrue(keySet.contains(_encodeKey(portletScope, _KEY_2)));
-		Assert.assertTrue(keySet.contains(_encodeKey(portletScope, _KEY_3)));
+		Assert.assertTrue(keySet.contains(encodeKey(portletScope, _KEY_1)));
+		Assert.assertTrue(keySet.contains(encodeKey(portletScope, _KEY_2)));
+		Assert.assertTrue(keySet.contains(encodeKey(portletScope, _KEY_3)));
 	}
 
-	private void _doTestSize(boolean portletScope) {
+	protected void testSize(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Assert.assertEquals(3, portletSessionAttributeMap.size());
 
 		portletSessionAttributeMap = new PortletSessionAttributeMap(
-			new MockHttpSession(), _getScopePrefix(portletScope));
+			new MockHttpSession(), getScopePrefix(portletScope));
 
 		Assert.assertEquals(0, portletSessionAttributeMap.size());
 	}
 
-	private void _doTestValues(boolean portletScope) {
+	protected void testValues(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
-				_session, _getScopePrefix(portletScope));
+				_session, getScopePrefix(portletScope));
 
 		Collection<Object> values = portletSessionAttributeMap.values();
 
@@ -387,7 +387,7 @@ public class PortletSessionAttributeMapTest {
 		Assert.assertTrue(values.contains(_value3));
 	}
 
-	private String _encodeKey(boolean portletScope, String key) {
+	protected String encodeKey(boolean portletScope, String key) {
 		if (portletScope) {
 			return key;
 		}
@@ -395,7 +395,7 @@ public class PortletSessionAttributeMapTest {
 		return _SCOPE_PREFIX.concat(key);
 	}
 
-	private String _getScopePrefix(boolean portletScope) {
+	protected String getScopePrefix(boolean portletScope) {
 		if (portletScope) {
 			return _SCOPE_PREFIX;
 		}
