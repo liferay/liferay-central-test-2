@@ -242,6 +242,22 @@ public class PortletSessionAttributeMapTest {
 		testValues(false);
 	}
 
+	protected String encodeKey(boolean portletScope, String key) {
+		if (portletScope) {
+			return key;
+		}
+
+		return _SCOPE_PREFIX.concat(key);
+	}
+
+	protected String getScopePrefix(boolean portletScope) {
+		if (portletScope) {
+			return _SCOPE_PREFIX;
+		}
+
+		return null;
+	}
+
 	protected void testContainsKey(boolean portletScope) {
 		PortletSessionAttributeMap portletSessionAttributeMap =
 			new PortletSessionAttributeMap(
@@ -385,22 +401,6 @@ public class PortletSessionAttributeMapTest {
 		Assert.assertTrue(values.contains(_value1));
 		Assert.assertTrue(values.contains(_value2));
 		Assert.assertTrue(values.contains(_value3));
-	}
-
-	protected String encodeKey(boolean portletScope, String key) {
-		if (portletScope) {
-			return key;
-		}
-
-		return _SCOPE_PREFIX.concat(key);
-	}
-
-	protected String getScopePrefix(boolean portletScope) {
-		if (portletScope) {
-			return _SCOPE_PREFIX;
-		}
-
-		return null;
 	}
 
 	private static final String _KEY_1 = "key1";
