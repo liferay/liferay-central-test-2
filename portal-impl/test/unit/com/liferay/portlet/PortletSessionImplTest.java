@@ -320,6 +320,5 @@ public class PortletSessionImplTest {
 	private final Object _value3 = new Object();
 	private final Object _value4 = new Object();
 	private final Object _value5 = new Object();
-	private final Object _value6 = new Object();
 
 }
