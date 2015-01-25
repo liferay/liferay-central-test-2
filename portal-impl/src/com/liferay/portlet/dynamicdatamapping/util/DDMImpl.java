@@ -104,7 +104,7 @@ public class DDMImpl implements DDM {
 	public static final String TYPE_SELECT = "select";
 
 	@Override
-	public DDMDisplay getDDMDisplay(long classNameId) throws PortalException {
+	public DDMDisplay getDDMDisplay(long classNameId) {
 		List<DDMDisplay> ddmDisplays = DDMDisplayRegistryUtil.getDDMDisplays();
 
 		for (DDMDisplay ddmDisplay : ddmDisplays) {
