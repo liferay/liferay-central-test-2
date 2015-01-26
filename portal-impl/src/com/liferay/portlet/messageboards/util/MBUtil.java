@@ -432,6 +432,7 @@ public class MBUtil {
 
 		definitionTerms.put(
 			"[$PORTLET_NAME$]", HtmlUtil.escape(portletDisplay.getTitle()));
+
 		definitionTerms.put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(

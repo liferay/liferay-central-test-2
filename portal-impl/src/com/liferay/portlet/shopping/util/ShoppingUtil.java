@@ -761,6 +761,7 @@ public class ShoppingUtil {
 
 		definitionTerms.put(
 			"[$PORTLET_NAME$]", HtmlUtil.escape(portletDisplay.getTitle()));
+
 		definitionTerms.put(
 			"[$TO_ADDRESS$]",
 			LanguageUtil.get(

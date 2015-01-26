@@ -962,6 +962,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 		definitionTerms.put(
 			"[$PORTLET_NAME$]", HtmlUtil.escape(portletDisplay.getTitle()));
+
 		definitionTerms.put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(
