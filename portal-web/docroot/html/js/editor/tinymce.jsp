@@ -18,7 +18,9 @@
 
 <%
 String contents = (String)request.getAttribute("liferay-ui:input-editor:contents");
+
 String contentsLanguageId = (String)request.getAttribute("liferay-ui:input-editor:contentsLanguageId");
+
 Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
 
 contentsLanguageId = LocaleUtil.toLanguageId(contentsLocale);
