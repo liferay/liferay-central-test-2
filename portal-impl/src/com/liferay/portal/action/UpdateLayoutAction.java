@@ -382,7 +382,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 		if (addPortletProvider == null) {
 			addPortletProvider = _serviceTrackerMap.getService(
-				AddPortletProvider.ANY_CLASSNAME);
+				AddPortletProvider.CLASS_NAME_ANY);
 		}
 
 		if (addPortletProvider != null) {

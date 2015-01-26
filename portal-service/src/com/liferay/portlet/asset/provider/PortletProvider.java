@@ -25,7 +25,7 @@ public interface PortletProvider {
 
 	public static final String ACTION_VIEW = "view";
 
-	public static final String ANY_CLASSNAME = "any-classname";
+	public static final String CLASS_NAME_ANY = "any-class-name";
 
 	public String getPortletId();
 

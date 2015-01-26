@@ -24,7 +24,7 @@ import com.liferay.portlet.asset.provider.PortletProvider;
  */
 @OSGiBeanProperties(
 	property = {
-		"model.class.name=" + PortletProvider.ANY_CLASSNAME
+		"model.class.name=" + PortletProvider.CLASS_NAME_ANY
 	}
 )
 public class AssetBrowserPortletProvider implements BrowsePortletProvider {
