@@ -19,6 +19,9 @@ import com.liferay.poshi.runner.selenium.SeleniumUtil;
 
 import java.lang.reflect.Method;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.dom4j.Element;
 
 /**
@@ -27,49 +30,30 @@ import org.dom4j.Element;
  */
 public class PoshiRunnerExecutor {
 
-	public static Object invoke(Method method, Object obj, String[] parameters)
-		throws Exception {
-
-		return method.invoke(obj);
-	}
-
 	public static void runSeleniumElement(Element element) throws Exception {
-		String argument1 = element.attributeValue("argument1");
-		String argument2 = element.attributeValue("argument2");
-		String argument3 = element.attributeValue("argument3");
+		List<Class> parameterClasses = new ArrayList<>();
+		List<String> arguments = new ArrayList<>();
+
 		String selenium = element.attributeValue("selenium");
 
-		int x = PoshiRunnerContext.getSeleniumParameterCount(selenium);
+		int parameterCount = PoshiRunnerContext.getSeleniumParameterCount(
+			selenium);
+
+		for (int i = 0; i < parameterCount; i++) {
+			parameterClasses.add(String.class);
+
+			String argument = element.attributeValue("argument" + (i + 1));
+
+			arguments.add(argument);
+		}
 
 		Class clazz = _liferaySelenium.getClass();
 
-		if (x == 0) {
-			Method method = clazz.getMethod(selenium, null);
+		Method method = clazz.getMethod(
+			selenium,
+			parameterClasses.toArray(new Class[parameterClasses.size()]));
 
-			invoke(method, _liferaySelenium, new String[] {});
-		}
-		else if (x == 1) {
-			Method method = clazz.getMethod(
-				selenium, new Class[] {String.class});
-
-			invoke(method, _liferaySelenium, new String[] {argument1});
-		}
-		else if (x == 2) {
-			Method method = clazz.getMethod(
-				selenium, new Class[] {String.class, String.class});
-
-			invoke(
-				method, _liferaySelenium, new String[] {argument1, argument2});
-		}
-		else if (x == 3) {
-			Method method = clazz.getMethod(
-				selenium,
-				new Class[] {String.class, String.class, String.class});
-
-			invoke(
-				method, _liferaySelenium,
-				new String[] {argument1, argument2, argument3});
-		}
+		method.invoke(clazz, arguments.toArray(new String[arguments.size()]));
 	}
 
 	private static final LiferaySelenium _liferaySelenium =
