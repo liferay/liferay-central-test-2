@@ -232,7 +232,7 @@ public class JspServlet extends HttpServlet {
 		return _jspServlet.toString();
 	}
 
-	private void collectTaglibProviderBundles(List<Bundle> bundles) {
+	protected void collectTaglibProviderBundles(List<Bundle> bundles) {
 		BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
 		for (BundleWire bundleWire :
@@ -256,7 +256,7 @@ public class JspServlet extends HttpServlet {
 		}
 	}
 
-	private ServletContext getServletContextWrapper(
+	protected ServletContext getServletContextWrapper(
 		ServletContext servletContext) {
 
 		if (_jspServletContext == null) {
