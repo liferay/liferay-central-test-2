@@ -30,15 +30,7 @@ public class PoshiRunnerExecutor {
 	public static Object invoker(Method method, Object obj, String[] parameters)
 		throws Exception {
 
-		if (parameters.length == 0) {
-			Object invokedObject = method.invoke(obj);
-
-			return invokedObject;
-		}
-
-		Object invokedObject = method.invoke(obj, parameters);
-
-		return invokedObject;
+		return method.invoke(obj);
 	}
 
 	public static void runSeleniumElement(Element element) throws Exception {
