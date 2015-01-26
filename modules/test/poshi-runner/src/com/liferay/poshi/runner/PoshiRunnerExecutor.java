@@ -27,7 +27,7 @@ import org.dom4j.Element;
  */
 public class PoshiRunnerExecutor {
 
-	public static Object invoker(Method method, Object obj, String[] parameters)
+	public static Object invoke(Method method, Object obj, String[] parameters)
 		throws Exception {
 
 		return method.invoke(obj);
@@ -46,19 +46,19 @@ public class PoshiRunnerExecutor {
 		if (x == 0) {
 			Method method = clazz.getMethod(selenium, null);
 
-			invoker(method, _liferaySelenium, new String[] {});
+			invoke(method, _liferaySelenium, new String[] {});
 		}
 		else if (x == 1) {
 			Method method = clazz.getMethod(
 				selenium, new Class[] {String.class});
 
-			invoker(method, _liferaySelenium, new String[] {argument1});
+			invoke(method, _liferaySelenium, new String[] {argument1});
 		}
 		else if (x == 2) {
 			Method method = clazz.getMethod(
 				selenium, new Class[] {String.class, String.class});
 
-			invoker(
+			invoke(
 				method, _liferaySelenium, new String[] {argument1, argument2});
 		}
 		else if (x == 3) {
@@ -66,7 +66,7 @@ public class PoshiRunnerExecutor {
 				selenium,
 				new Class[] {String.class, String.class, String.class});
 
-			invoker(
+			invoke(
 				method, _liferaySelenium,
 				new String[] {argument1, argument2, argument3});
 		}
