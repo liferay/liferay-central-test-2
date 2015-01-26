@@ -61,7 +61,7 @@ public class RatingsDataTransformerUtil {
 		_serviceTracker.open();
 	}
 
-	private String _getPropertyName(String className) {
+	private String _getPropertyKey(String className) {
 		return className + StringPool.UNDERLINE + "RatingsType";
 	}
 
@@ -82,13 +82,13 @@ public class RatingsDataTransformerUtil {
 				portletId);
 
 			for (final String className : classNames) {
-				String propertyName = _getPropertyName(className);
+				String propertyKey = _getPropertyKey(className);
 
 				_transformRatingsData(
 					"companyId", companyId, className,
 					oldPortletPreferences.getValue(
-						propertyName, StringPool.BLANK),
-					properties.getProperty(propertyName));
+						propertyKey, StringPool.BLANK),
+					properties.getProperty(propertyKey));
 			}
 		}
 	}
@@ -110,12 +110,12 @@ public class RatingsDataTransformerUtil {
 				portletId);
 
 			for (final String className : classNames) {
-				String propertyName = _getPropertyName(className);
+				String propertyKey = _getPropertyKey(className);
 
 				_transformRatingsData(
 					"groupId", groupId, className,
-					oldProperties.getProperty(propertyName),
-					properties.getProperty(propertyName));
+					oldProperties.getProperty(propertyKey),
+					properties.getProperty(propertyKey));
 			}
 		}
 	}

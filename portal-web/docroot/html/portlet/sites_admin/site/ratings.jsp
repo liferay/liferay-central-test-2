@@ -36,10 +36,10 @@ else {
 <h3><liferay-ui:message key="ratings" /></h3>
 
 <div class="alert alert-info">
-	<p><liferay-ui:message key="changing-rating-type-could-lead-to-inaccurate-info" /></p>
+	<p><liferay-ui:message key="changing-ratings-type-could-lead-to-inaccurate-information" /></p>
 </div>
 
-<p><liferay-ui:message key="select-the-rating-type-for-the-following-portlets" /></p>
+<p><liferay-ui:message key="select-the-ratings-type-for-the-following-portlets" /></p>
 
 <aui:fieldset>
 
@@ -50,7 +50,9 @@ else {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 	%>
 
-		<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %></p>
+		<p>
+			<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
+		</p>
 
 		<%
 		String[] classNames = PortletRatingsDefinitionUtil.getClassNames(portletId);

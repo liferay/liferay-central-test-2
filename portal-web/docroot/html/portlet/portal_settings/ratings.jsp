@@ -25,10 +25,10 @@ PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(com
 <h3><liferay-ui:message key="ratings" /></h3>
 
 <div class="alert alert-info">
-	<p><liferay-ui:message key="changing-rating-type-could-lead-to-inaccurate-info" /></p>
+	<p><liferay-ui:message key="changing-ratings-type-could-lead-to-inaccurate-information" /></p>
 </div>
 
-<p><liferay-ui:message key="select-the-rating-type-for-the-portlets" /></p>
+<p><liferay-ui:message key="select-the-ratings-type-for-the-following-portlets" /></p>
 
 <aui:fieldset>
 
@@ -36,11 +36,12 @@ PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(com
 	String[] portletIds = PortletRatingsDefinitionUtil.getPortletIds();
 
 	for (String portletId : portletIds) {
-
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 	%>
 
-		<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %></p>
+		<p>
+			<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
+		</p>
 
 		<%
 		String[] classNames = PortletRatingsDefinitionUtil.getClassNames(portletId);
@@ -53,15 +54,15 @@ PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(com
 			</c:if>
 
 			<%
-			String propertyName = className + StringPool.UNDERLINE + "RatingsType";
+			String propertyKey = className + StringPool.UNDERLINE + "RatingsType";
 
 			PortletRatingsDefinition.RatingsType defaultRatingsType = PortletRatingsDefinitionUtil.getDefaultRatingsType(portletId, className);
 
-			String ratingsTypeString = PrefsParamUtil.getString(companyPortletPreferences, request, propertyName, defaultRatingsType.toString());
+			String ratingsTypeString = PrefsParamUtil.getString(companyPortletPreferences, request, propertyKey, defaultRatingsType.toString());
 			%>
 
 			<div class="row-fields">
-				<aui:select label='<%= (classNames.length > 1) ? ResourceActionsUtil.getModelResource(locale, className) : "" %>' name='<%= "settings--" + propertyName + "--" %>'>
+				<aui:select label='<%= (classNames.length > 1) ? ResourceActionsUtil.getModelResource(locale, className) : "" %>' name='<%= "settings--" + propertyKey + "--" %>'>
 
 					<%
 					for (PortletRatingsDefinition.RatingsType curRatingsType : PortletRatingsDefinition.RatingsType.values()) {
