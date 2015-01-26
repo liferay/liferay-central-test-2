@@ -58,7 +58,7 @@ else {
 		for (String className : classNames) {
 			String propertyKey = className + StringPool.UNDERLINE + "RatingsType";
 
-			PortletRatingsDefinition.RatingsType defaultRatingsType = PortletRatingsDefinitionUtil.getDefaultType(portletId, className);
+			PortletRatingsDefinition.RatingsType defaultRatingsType = PortletRatingsDefinitionUtil.getDefaultRatingsType(portletId, className);
 
 			String companyRatingsTypeString = PrefsParamUtil.getString(companyPortletPreferences, request, propertyKey, defaultRatingsType.toString());
 

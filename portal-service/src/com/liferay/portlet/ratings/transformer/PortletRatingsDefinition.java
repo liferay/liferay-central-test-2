@@ -22,7 +22,7 @@ public interface PortletRatingsDefinition {
 
 	public String[] getClassNames();
 
-	public RatingsType getDefaultType(String className);
+	public RatingsType getDefaultRatingsType(String className);
 
 	public static enum RatingsType {
 

@@ -128,7 +128,7 @@ public class RatingsTag extends IncludeTag {
 
 		if (portlet != null) {
 			PortletRatingsDefinition.RatingsType defaultRatingsType =
-				PortletRatingsDefinitionUtil.getDefaultType(
+				PortletRatingsDefinitionUtil.getDefaultRatingsType(
 					portlet.getPortletId(), _className);
 
 			if (defaultRatingsType != null) {
