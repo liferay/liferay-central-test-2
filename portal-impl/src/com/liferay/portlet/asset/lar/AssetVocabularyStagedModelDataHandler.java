@@ -126,6 +126,13 @@ public class AssetVocabularyStagedModelDataHandler
 			AssetVocabulary.class, vocabulary.getVocabularyId());
 
 		portletDataContext.addZipEntry(vocabularyPath, vocabulary);
+
+		Element assetVocabularyElement =
+			portletDataContext.getExportDataElement(vocabulary);
+
+		portletDataContext.addReferenceElement(
+			vocabulary, assetVocabularyElement, vocabulary,
+			PortletDataContext.REFERENCE_TYPE_DEPENDENCY, false);
 	}
 
 	@Override
