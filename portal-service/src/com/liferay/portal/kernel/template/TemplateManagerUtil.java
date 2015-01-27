@@ -173,7 +173,7 @@ public class TemplateManagerUtil {
 			_templateManagers.values();
 
 		for (TemplateManager templateManager : templateManagers) {
-			if (templateManager.getName().equals(templateManagerName)) {
+			if (templateManagerName.equals(templateManager.getName())) {
 				return templateManager;
 			}
 		}
@@ -189,7 +189,7 @@ public class TemplateManagerUtil {
 			_templateManagers.values();
 
 		for (TemplateManager templateManager : templateManagers) {
-			if (templateManager.getName().equals(templateManagerName)) {
+			if (templateManagerName.equals(templateManager.getName())) {
 				return templateManager;
 			}
 		}
@@ -222,7 +222,7 @@ public class TemplateManagerUtil {
 			_templateManagers.values();
 
 		for (TemplateManager templateManager : templateManagers) {
-			if (templateManager.getName().equals(templateManagerName)) {
+			if (templateManagerName.equals(templateManager.getName())) {
 				return true;
 			}
 		}
