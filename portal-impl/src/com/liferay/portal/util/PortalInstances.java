@@ -486,7 +486,7 @@ public class PortalInstances {
 				}
 			}
 
-			// LDAP Import
+			// LDAP import
 
 			try {
 				if (LDAPSettingsUtil.isImportOnStartup(companyId)) {
