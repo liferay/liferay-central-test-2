@@ -360,7 +360,7 @@ public class MBMessageStagedModelDataHandler
 
 			threadIds.put(message.getThreadId(), importedMessage.getThreadId());
 
-			// keep thread UUID
+			// Keep thread UUID
 
 			MBThread thread = importedMessage.getThread();
 
