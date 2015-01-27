@@ -393,16 +393,18 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 
-			if (method.getName().equals("getClassLoader")) {
+			String methodName = method.getName();
+
+			if (methodName.equals("getClassLoader")) {
 				return _classLoader;
 			}
-			else if (method.getName().equals("getResource")) {
+			else if (methodName.equals("getResource")) {
 				return getResource((String)args[0]);
 			}
-			else if (method.getName().equals("getResourceAsStream")) {
+			else if (methodName.equals("getResourceAsStream")) {
 				return getResourceAsStream((String)args[0]);
 			}
-			else if (method.getName().equals("getResourcePaths")) {
+			else if (methodName.equals("getResourcePaths")) {
 				return getResourcePaths((String)args[0]);
 			}
 
@@ -457,7 +459,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 			if (!path.startsWith("/META-INF/") &&
 				!path.startsWith("/WEB-INF/")) {
 
-				url = _bundle.getResource("/META-INF/resources".concat(path));
+				url = _bundle.getResource("/META-INF/resources" + path);
 			}
 
 			return url;
