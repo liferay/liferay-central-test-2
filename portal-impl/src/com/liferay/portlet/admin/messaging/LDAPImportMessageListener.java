@@ -26,11 +26,12 @@ public class LDAPImportMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		if (Math.round(
-				(System.currentTimeMillis() -
-					UserImporterUtil.getLastImportTime()) / 60000.0) >=
-						PropsValues.LDAP_IMPORT_INTERVAL) {
+		long time =
+			System.currentTimeMillis() - UserImporterUtil.getLastImportTime();
 
+		time = Math.round(time / 60000.0);
+
+		if (time >= PropsValues.LDAP_IMPORT_INTERVAL) {
 			UserImporterUtil.importUsers();
 		}
 	}
