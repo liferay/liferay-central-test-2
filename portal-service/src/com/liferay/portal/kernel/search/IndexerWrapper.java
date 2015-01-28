@@ -54,7 +54,7 @@ public class IndexerWrapper implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getClassName()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getClassName}
 	 */
 	@Deprecated
 	@Override
@@ -93,7 +93,7 @@ public class IndexerWrapper implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getClassName()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getClassName}
 	 */
 	@Deprecated
 	@Override

@@ -47,7 +47,7 @@ public class DummyIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getSearchClassNames()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getSearchClassNames}
 	 */
 	@Deprecated
 	@Override
@@ -83,7 +83,7 @@ public class DummyIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getClassName()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getClassName}
 	 */
 	@Deprecated
 	@Override

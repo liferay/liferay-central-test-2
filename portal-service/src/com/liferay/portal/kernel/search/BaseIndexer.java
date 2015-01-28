@@ -136,7 +136,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getSearchClassNames()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getSearchClassNames}
 	 */
 	@Deprecated
 	@Override
@@ -270,7 +270,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getClassName()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getClassName}
 	 */
 	@Deprecated
 	@Override
@@ -280,7 +280,7 @@ public abstract class BaseIndexer implements Indexer {
 
 	@Override
 	public String[] getSearchClassNames() {
-		return new String[]{getClassName()};
+		return new String[] {getClassName()};
 	}
 
 	@Override
@@ -1699,7 +1699,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 replaced by {@link #getClassName()}
+	 * @deprecated As of 7.0.0 replaced by {@link #getClassName}
 	 */
 	@Deprecated
 	protected String getPortletId(SearchContext searchContext) {

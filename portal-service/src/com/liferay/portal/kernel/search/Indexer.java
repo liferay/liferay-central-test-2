@@ -42,7 +42,7 @@ public interface Indexer {
 	public String getClassName();
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getSearchClassNames()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getSearchClassNames}
 	 */
 	@Deprecated
 	public String[] getClassNames();
@@ -61,7 +61,7 @@ public interface Indexer {
 	public IndexerPostProcessor[] getIndexerPostProcessors();
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getClassName()}
+	 * @deprecated As of 7.0.0, replaced by {@link #getClassName}
 	 */
 	@Deprecated
 	public String getPortletId();
