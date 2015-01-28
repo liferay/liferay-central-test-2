@@ -220,7 +220,7 @@ public class SampleSQLBuilder {
 
 			String s = null;
 
-			while ((_freemarkerThrowable == null) &&
+			while ((_freeMarkerThrowable == null) &&
 				   ((s = unsyncBufferedReader.readLine()) != null)) {
 
 				s = s.trim();
@@ -238,9 +238,9 @@ public class SampleSQLBuilder {
 			}
 		}
 
-		if (_freemarkerThrowable != null) {
+		if (_freeMarkerThrowable != null) {
 			throw new Exception(
-				"Unable to process freemarker template ", _freemarkerThrowable);
+				"Unable to process FreeMarker template ", _freeMarkerThrowable);
 		}
 
 		for (Map.Entry<String, StringBundler> entry : insertSQLs.entrySet()) {
@@ -310,7 +310,7 @@ public class SampleSQLBuilder {
 					FreeMarkerUtil.process(_script, context, sampleSQLWriter);
 				}
 				catch (Throwable t) {
-					_freemarkerThrowable = t;
+					_freeMarkerThrowable = t;
 				}
 				finally {
 					for (String csvFileName : _csvFileNames) {
@@ -451,7 +451,7 @@ public class SampleSQLBuilder {
 	private final String[] _csvFileNames;
 	private final DataFactory _dataFactory;
 	private final String _dbType;
-	private volatile Throwable _freemarkerThrowable;
+	private volatile Throwable _freeMarkerThrowable;
 	private final int _optimizeBufferSize;
 	private final String _outputDir;
 	private final String _script;
