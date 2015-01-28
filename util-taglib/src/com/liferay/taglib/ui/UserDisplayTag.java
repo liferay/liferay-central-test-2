@@ -55,6 +55,23 @@ public class UserDisplayTag extends TagSupport {
 			request.setAttribute(
 				"liferay-ui:user-display:author", String.valueOf(_author));
 			request.setAttribute(
+				"liferay-ui:user-display:displayStyle",
+				String.valueOf(_displayStyle));
+
+			if (Validator.isNull(_imageCssClass)) {
+				_imageCssClass = "img-circle";
+			}
+
+			request.setAttribute(
+				"liferay-ui:user-display:imageCssClass", _imageCssClass);
+
+			request.setAttribute(
+				"liferay-ui:user-display:showUserDetails",
+				String.valueOf(_showUserDetails));
+			request.setAttribute(
+				"liferay-ui:user-display:showUserName",
+				String.valueOf(_showUserName));
+			request.setAttribute(
 				"liferay-ui:user-display:user-id", String.valueOf(_userId));
 			request.setAttribute(
 				"liferay-ui:user-display:user-name", _userName);
@@ -76,23 +93,6 @@ public class UserDisplayTag extends TagSupport {
 				pageContext.removeAttribute("userDisplay");
 			}
 
-			request.setAttribute(
-				"liferay-ui:user-display:displayStyle",
-				String.valueOf(_displayStyle));
-
-			if (Validator.isNull(_imageCssClass)) {
-				_imageCssClass = "img-circle";
-			}
-
-			request.setAttribute(
-				"liferay-ui:user-display:imageCssClass", _imageCssClass);
-
-			request.setAttribute(
-				"liferay-ui:user-display:showUserDetails",
-				String.valueOf(_showUserDetails));
-			request.setAttribute(
-				"liferay-ui:user-display:showUserName",
-				String.valueOf(_showUserName));
 			request.setAttribute("liferay-ui:user-display:url", _url);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
