@@ -761,18 +761,6 @@ public class UIItemsBuilder {
 		return portletDisplay.isWebDAVEnabled();
 	}
 
-	private String _processFreeMarkerTemplate(
-		String name, Map<String, String> context) {
-
-		try {
-			return FreeMarkerUtil.process(name, context);
-		}
-		catch (Exception e) {
-			throw new SystemException(
-				"Unable to process Freemarker template", e);
-		}
-	}
-
 	private String _currentURL;
 	private DLFileShortcut _dlFileShortcut;
 	private final FileEntry _fileEntry;
