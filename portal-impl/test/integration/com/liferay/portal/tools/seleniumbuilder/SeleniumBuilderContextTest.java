@@ -112,12 +112,12 @@ public class SeleniumBuilderContextTest {
 
 		test(
 			"ActionExecuteElementInvalidAttributeValue_2.action",
-			"Error 1006: Invalid function attribute value in " + _DIR_NAME +
+			"Error 1011: Invalid function name Clicks at " + _DIR_NAME +
 				"/ActionExecuteElementInvalidAttributeValue_2.action:4");
 
 		test(
 			"ActionExecuteElementInvalidAttributeValue_3.action",
-			"Error 1006: Invalid function attribute value in " + _DIR_NAME +
+			"Error 1011: Invalid function name clickAt at " + _DIR_NAME +
 				"/ActionExecuteElementInvalidAttributeValue_3.action:4");
 	}
 
@@ -164,16 +164,16 @@ public class SeleniumBuilderContextTest {
 	public void testFunctionConditionElement1006_5() throws Exception {
 		test(
 			"FunctionConditionElement1006_5.function",
-			"Error 1006: Invalid function attribute value in " + _DIR_NAME +
-				"/FunctionConditionElement1006_5.function:4");
+			"Error 1011: Invalid function name IsElementPresents at " +
+				_DIR_NAME + "/FunctionConditionElement1006_5.function:4");
 	}
 
 	@Test
 	public void testFunctionConditionElement1006_6() throws Exception {
 		test(
 			"FunctionConditionElement1006_6.function",
-			"Error 1006: Invalid function attribute value in " + _DIR_NAME +
-				"/FunctionConditionElement1006_6.function:4");
+			"Error 1011: Invalid function name isElementPresents at " +
+				_DIR_NAME + "/FunctionConditionElement1006_6.function:4");
 	}
 
 	@Test
@@ -204,7 +204,7 @@ public class SeleniumBuilderContextTest {
 	public void testFunctionExecuteElement1006_3() throws Exception {
 		test(
 			"FunctionExecuteElement1006_3.function",
-			"Error 1006: Invalid function attribute value in " + _DIR_NAME +
+			"Error 1011: Invalid function name Clicks at " + _DIR_NAME +
 				"/FunctionExecuteElement1006_3.function:3");
 	}
 
@@ -212,7 +212,7 @@ public class SeleniumBuilderContextTest {
 	public void testFunctionExecuteElement1006_4() throws Exception {
 		test(
 			"FunctionExecuteElement1006_4.function",
-			"Error 1006: Invalid function attribute value in " + _DIR_NAME +
+			"Error 1011: Invalid function name clickAt at " + _DIR_NAME +
 				"/FunctionExecuteElement1006_4.function:3");
 	}
 
