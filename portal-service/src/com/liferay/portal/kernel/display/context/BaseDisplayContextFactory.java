@@ -15,7 +15,7 @@
 package com.liferay.portal.kernel.display.context;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class BaseDisplayContextFactory implements DisplayContextFactory {
 }

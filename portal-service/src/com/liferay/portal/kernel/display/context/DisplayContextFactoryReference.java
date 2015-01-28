@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.registry.ServiceReference;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class DisplayContextFactoryReference<T extends DisplayContextFactory>
 	implements Comparable<DisplayContextFactoryReference> {

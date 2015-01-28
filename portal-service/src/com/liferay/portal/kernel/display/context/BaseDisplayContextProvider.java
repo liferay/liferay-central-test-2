@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class BaseDisplayContextProvider<T extends DisplayContextFactory>
 	implements DisplayContextProvider {

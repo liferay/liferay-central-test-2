@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class DLDisplayContextProviderUtil {
 

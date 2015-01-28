@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.display.context;
 import java.util.UUID;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public interface DisplayContext {
 

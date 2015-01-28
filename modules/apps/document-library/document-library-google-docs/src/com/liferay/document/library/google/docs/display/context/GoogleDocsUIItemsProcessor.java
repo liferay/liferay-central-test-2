@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class GoogleDocsUIItemsProcessor {
 
