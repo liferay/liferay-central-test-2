@@ -53,6 +53,8 @@ public class UserDisplayTag extends TagSupport {
 				(HttpServletRequest)pageContext.getRequest();
 
 			request.setAttribute(
+				"liferay-ui:user-display:author", String.valueOf(_author));
+			request.setAttribute(
 				"liferay-ui:user-display:user-id", String.valueOf(_userId));
 			request.setAttribute(
 				"liferay-ui:user-display:user-name", _userName);
@@ -86,8 +88,6 @@ public class UserDisplayTag extends TagSupport {
 				"liferay-ui:user-display:imageCssClass", _imageCssClass);
 
 			request.setAttribute(
-				"liferay-ui:user-display:isAuthor", String.valueOf(_isAuthor));
-			request.setAttribute(
 				"liferay-ui:user-display:showUserDetails",
 				String.valueOf(_showUserDetails));
 			request.setAttribute(
@@ -109,6 +109,10 @@ public class UserDisplayTag extends TagSupport {
 		}
 	}
 
+	public void setAuthor(boolean author) {
+		_author = author;
+	}
+
 	public void setDisplayStyle(Object displayStyle) {
 		_displayStyle = GetterUtil.getInteger(displayStyle);
 	}
@@ -119,10 +123,6 @@ public class UserDisplayTag extends TagSupport {
 
 	public void setImageCssClass(String imageCssClass) {
 		_imageCssClass = imageCssClass;
-	}
-
-	public void setIsAuthor(boolean isAuthor) {
-		_isAuthor = isAuthor;
 	}
 
 	public void setShowUserDetails(boolean showUserDetails) {
@@ -173,10 +173,10 @@ public class UserDisplayTag extends TagSupport {
 	private static final String _START_PAGE =
 		"/html/taglib/ui/user_display/start.jsp";
 
+	private boolean _author;
 	private int _displayStyle = 1;
 	private String _endPage;
 	private String _imageCssClass;
-	private boolean _isAuthor = false;
 	private boolean _showUserDetails = true;
 	private boolean _showUserName = true;
 	private String _startPage;

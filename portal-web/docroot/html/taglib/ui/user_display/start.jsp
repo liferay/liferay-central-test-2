@@ -17,12 +17,12 @@
 <%@ include file="/html/taglib/ui/user_display/init.jsp" %>
 
 <%
-if (Validator.isNull(url) && (userDisplay != null)) {
-	url = userDisplay.getDisplayURL(themeDisplay);
+if (author) {
+	imageCssClass += " author";
 }
 
-if (isAuthor) {
-	imageCssClass += " author";
+if (Validator.isNull(url) && (userDisplay != null)) {
+	url = userDisplay.getDisplayURL(themeDisplay);
 }
 %>
 
