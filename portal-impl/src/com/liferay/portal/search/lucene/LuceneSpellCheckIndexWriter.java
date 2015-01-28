@@ -128,12 +128,12 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 			languageId, Field.Store.YES, FieldInfo.IndexOptions.DOCS_ONLY,
 			true);
 		addField(
-			document, com.liferay.portal.kernel.search.Field.SPELL_CHECK_WORD,
-			Boolean.TRUE.toString(), Field.Store.YES,
-			FieldInfo.IndexOptions.DOCS_ONLY, true);
-		addField(
 			document, com.liferay.portal.kernel.search.Field.PRIORITY,
 			String.valueOf(weight), Field.Store.YES,
+			FieldInfo.IndexOptions.DOCS_ONLY, true);
+		addField(
+			document, com.liferay.portal.kernel.search.Field.SPELL_CHECK_WORD,
+			Boolean.TRUE.toString(), Field.Store.YES,
 			FieldInfo.IndexOptions.DOCS_ONLY, true);
 		addField(
 			document, com.liferay.portal.kernel.search.Field.TYPE,
