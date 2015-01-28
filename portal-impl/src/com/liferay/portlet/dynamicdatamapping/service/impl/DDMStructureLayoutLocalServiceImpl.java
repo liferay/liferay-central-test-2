@@ -42,7 +42,6 @@ public class DDMStructureLayoutLocalServiceImpl
 		throws PortalException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		Date now = new Date();
 
 		long structureLayoutId = counterLocalService.increment();
