@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.registry.collections;
+package com.liferay.osgi.servicetrackermap;
 
 /**
  * @author Carlos Sierra Andrés
