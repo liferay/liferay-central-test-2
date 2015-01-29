@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.iframe.web.util;
+package com.liferay.iframe.web.constants;
 
 /**
  * @author Brian Wing Shun Chan

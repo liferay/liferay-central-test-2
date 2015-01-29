@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.sso.cas.configuration.CASConfiguration;
-import com.liferay.portal.sso.cas.util.WebKeys;
+import com.liferay.portal.sso.cas.constants.CASWebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.HashMap;
@@ -43,7 +43,6 @@ import org.jasig.cas.client.util.CommonUtils;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
 import org.jasig.cas.client.validation.TicketValidator;
-
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
@@ -149,10 +148,10 @@ public class CASFilter extends BaseFilter {
 
 		String pathInfo = request.getPathInfo();
 
-		Object forceLogout = session.getAttribute(WebKeys.CAS_FORCE_LOGOUT);
+		Object forceLogout = session.getAttribute(CASWebKeys.CAS_FORCE_LOGOUT);
 
 		if (forceLogout != null) {
-			session.removeAttribute(WebKeys.CAS_FORCE_LOGOUT);
+			session.removeAttribute(CASWebKeys.CAS_FORCE_LOGOUT);
 
 			String logoutUrl = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CAS_LOGOUT_URL,
@@ -177,7 +176,7 @@ public class CASFilter extends BaseFilter {
 			return;
 		}
 		else {
-			String login = (String)session.getAttribute(WebKeys.CAS_LOGIN);
+			String login = (String)session.getAttribute(CASWebKeys.CAS_LOGIN);
 
 			if (Validator.isNotNull(login)) {
 				processFilter(CASFilter.class, request, response, filterChain);
@@ -223,7 +222,7 @@ public class CASFilter extends BaseFilter {
 
 				login = attributePrincipal.getName();
 
-				session.setAttribute(WebKeys.CAS_LOGIN, login);
+				session.setAttribute(CASWebKeys.CAS_LOGIN, login);
 			}
 		}
 

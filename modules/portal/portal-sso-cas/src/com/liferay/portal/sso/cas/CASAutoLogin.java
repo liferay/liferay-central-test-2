@@ -31,7 +31,7 @@ import com.liferay.portal.security.auth.BaseAutoLogin;
 import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.sso.cas.configuration.CASConfiguration;
-import com.liferay.portal.sso.cas.util.WebKeys;
+import com.liferay.portal.sso.cas.constants.CASWebKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -78,10 +78,10 @@ public class CASAutoLogin extends BaseAutoLogin {
 		HttpSession session = request.getSession();
 
 		if (e instanceof NoSuchUserException) {
-			session.removeAttribute(WebKeys.CAS_LOGIN);
+			session.removeAttribute(CASWebKeys.CAS_LOGIN);
 
 			session.setAttribute(
-				WebKeys.CAS_NO_SUCH_USER_EXCEPTION, Boolean.TRUE);
+				CASWebKeys.CAS_NO_SUCH_USER_EXCEPTION, Boolean.TRUE);
 		}
 
 		_log.error(e, e);
@@ -105,19 +105,19 @@ public class CASAutoLogin extends BaseAutoLogin {
 			return null;
 		}
 
-		String login = (String)session.getAttribute(WebKeys.CAS_LOGIN);
+		String login = (String)session.getAttribute(CASWebKeys.CAS_LOGIN);
 
 		if (Validator.isNull(login)) {
 			Object noSuchUserException = session.getAttribute(
-				WebKeys.CAS_NO_SUCH_USER_EXCEPTION);
+				CASWebKeys.CAS_NO_SUCH_USER_EXCEPTION);
 
 			if (noSuchUserException == null) {
 				return null;
 			}
 
-			session.removeAttribute(WebKeys.CAS_NO_SUCH_USER_EXCEPTION);
+			session.removeAttribute(CASWebKeys.CAS_NO_SUCH_USER_EXCEPTION);
 
-			session.setAttribute(WebKeys.CAS_FORCE_LOGOUT, Boolean.TRUE);
+			session.setAttribute(CASWebKeys.CAS_FORCE_LOGOUT, Boolean.TRUE);
 
 			String redirect = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL,

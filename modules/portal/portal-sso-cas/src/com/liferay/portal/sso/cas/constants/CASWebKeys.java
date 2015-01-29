@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.sso.cas.util;
+package com.liferay.portal.sso.cas.constants;
 
 /**
  * @author Michael C. Han
  */
-public interface WebKeys {
+public interface CASWebKeys {
 
 	public static final String CAS_FORCE_LOGOUT = "CAS_FORCE_LOGOUT";
 
