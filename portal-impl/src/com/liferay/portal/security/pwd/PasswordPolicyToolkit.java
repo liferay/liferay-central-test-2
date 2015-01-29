@@ -40,25 +40,6 @@ import java.util.Random;
 public class PasswordPolicyToolkit extends BasicToolkit {
 
 	public PasswordPolicyToolkit() {
-		_validatorLowerCaseCharsetArray = getSortedCharArray(
-			PropsValues.
-				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_LOWERCASE);
-		_validatorNumbersCharsetArray = getSortedCharArray(
-			PropsValues.
-				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_NUMBERS);
-		_validatorSymbolsCharsetArray = getSortedCharArray(
-			PropsValues.
-				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_SYMBOLS);
-		_validatorUpperCaseCharsetArray = getSortedCharArray(
-			PropsValues.
-				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_UPPERCASE);
-
-		_validatorAlphanumericCharsetArray = ArrayUtil.append(
-			_validatorLowerCaseCharsetArray, _validatorUpperCaseCharsetArray,
-			_validatorNumbersCharsetArray);
-
-		Arrays.sort(_validatorAlphanumericCharsetArray);
-
 		_generatorLowerCaseCharsetArray = getSortedCharArray(
 			PropsValues.
 				PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR_CHARSET_LOWERCASE);
@@ -94,6 +75,26 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 				PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR_CHARSET_UPPERCASE);
 
 		_generatorCompleteCharset = sb.toString();
+
+		_validatorLowerCaseCharsetArray = getSortedCharArray(
+			PropsValues.
+				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_LOWERCASE);
+		_validatorNumbersCharsetArray = getSortedCharArray(
+			PropsValues.
+				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_NUMBERS);
+		_validatorSymbolsCharsetArray = getSortedCharArray(
+			PropsValues.
+				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_SYMBOLS);
+		_validatorUpperCaseCharsetArray = getSortedCharArray(
+			PropsValues.
+				PASSWORDS_PASSWORDPOLICYTOOLKIT_VALIDATOR_CHARSET_UPPERCASE);
+
+		_validatorAlphanumericCharsetArray = ArrayUtil.append(
+			_validatorLowerCaseCharsetArray, _validatorUpperCaseCharsetArray,
+			_validatorNumbersCharsetArray);
+
+		Arrays.sort(_validatorAlphanumericCharsetArray);
+
 	}
 
 	@Override
