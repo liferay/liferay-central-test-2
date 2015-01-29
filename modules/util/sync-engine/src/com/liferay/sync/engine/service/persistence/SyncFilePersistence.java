@@ -131,7 +131,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		filePathName = StringUtils.replace(filePathName, "\\", "\\\\");
 
-		where.like("filePathName", new SelectArg(filePathName + "%"));
+		where.like("filePathName", new SelectArg(filePathName + "/%"));
 
 		where.and();
 
