@@ -698,28 +698,27 @@ its overall lack of functionality.
 
 #### What changed?
 
-Discussion comments are now displayed using the former *Combination* thread
-view, and the number of levels displayed in the tree are limited.
+Discussion comments are now displayed using the *Combination* thread view, and
+the number of levels displayed in the tree is limited.
 
 #### Who is affected?
 
-This affects installations using the `discussion.thread.view=flat` property from
-`portal.properties`, which was the default value.
+This affects installations that specify portal property setting
+`discussion.thread.view=flat`, which was the default setting.
 
 #### How should I update my code?
 
 There is no need to update anything since the portal property has been removed
-and the `combintation` thread view is now hard-coded.
+and the `combination` thread view is now hard-coded.
 
 #### Why was this change made?
 
-Flat view comments were originally implemented to solve performance issues with
-comment pagination when using a tree view.
+Flat view comments were originally implemented as an option to tree view
+comments, which were having performance issues with comment pagination.
 
-A new pagination implementation is now available that doesn't impact
-performance, and allows comments to display in a hierarchical view, making it
-easier to see the replies history. Therefore, the `flat` thread view is no
-longer needed.
+Portal now uses a new pagination implementation that performs well. It allows
+comments to display in a hierarchical view, making it easier to see reply
+history. Therefore, the `flat` thread view is no longer needed.
 
 ---------------------------------------
 
