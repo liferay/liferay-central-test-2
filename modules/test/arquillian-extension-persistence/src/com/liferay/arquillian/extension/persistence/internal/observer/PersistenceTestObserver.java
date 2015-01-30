@@ -31,10 +31,9 @@ public class PersistenceTestObserver {
 	public void afterTest(@Observes EventContext<After> eventContext)
 		throws Throwable {
 
-		PersistenceTestInitializer persistenceTestInitializer =
-			_instance.get();
+		PersistenceTestInitializer persistenceTestInitializer = _instance.get();
 
-		persistenceTestInitializer.release(modelListeners);
+		persistenceTestInitializer.release(_modelListeners);
 	}
 
 	public void beforeTest(@Observes EventContext<Before> eventContext)
@@ -42,12 +41,12 @@ public class PersistenceTestObserver {
 
 		PersistenceTestInitializer persistenceTestInitializer = _instance.get();
 
-		modelListeners = persistenceTestInitializer.init();
+		_modelListeners = persistenceTestInitializer.init();
 	}
 
 	@Inject
 	private Instance<PersistenceTestInitializer> _instance;
 
-	private Object modelListeners;
+	private Object _modelListeners;
 
 }
