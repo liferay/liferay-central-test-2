@@ -45,14 +45,12 @@ public class LiferayEventTestRunnerAdapter {
 	public void after(@Observes EventContext<After> eventContext)
 		throws Throwable {
 
-		After afterEvent = eventContext.getEvent();
-
-		Method testMethod = afterEvent.getTestMethod();
-
-		ExpectedLogs expectedLogs = getAnnotation(afterEvent);
-
 		LogAssertionExecutor logAssertionExecutor =
 			_logAssertionExecutorInstance.get();
+
+		After afterEvent = eventContext.getEvent();
+
+		ExpectedLogs expectedLogs = getAnnotation(afterEvent);
 
 		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
 			expectedLogs);
@@ -61,6 +59,8 @@ public class LiferayEventTestRunnerAdapter {
 
 		DeleteAfterTestRunExecutor deleteAfterTestExecutor =
 			_deleteAfterTestExecutorInstance.get();
+
+		Method testMethod = afterEvent.getTestMethod();
 
 		deleteAfterTestExecutor.deleteFieldsAfterTest(
 			afterEvent.getTestInstance(), testMethod.getDeclaringClass());
@@ -71,10 +71,10 @@ public class LiferayEventTestRunnerAdapter {
 	public void afterClass(@Observes EventContext<AfterClass> eventContext)
 		throws Throwable {
 
-		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
-
 		LogAssertionExecutor logAssertionExecutor =
 			_logAssertionExecutorInstance.get();
+
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
 
 		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
 			expectedLogs);
@@ -92,10 +92,10 @@ public class LiferayEventTestRunnerAdapter {
 	public void before(@Observes EventContext<Before> eventContext)
 		throws Throwable {
 
-		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
-
 		LogAssertionExecutor logAssertionExecutor =
 			_logAssertionExecutorInstance.get();
+
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
 
 		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
 			expectedLogs);
@@ -108,10 +108,10 @@ public class LiferayEventTestRunnerAdapter {
 	public void beforeClass(@Observes EventContext<BeforeClass> eventContext)
 		throws Throwable {
 
-		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
-
 		LogAssertionExecutor logAssertionExecutor =
 			_logAssertionExecutorInstance.get();
+
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
 
 		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
 			expectedLogs);
@@ -135,10 +135,10 @@ public class LiferayEventTestRunnerAdapter {
 	public void test(@Observes EventContext<Test> eventContext)
 		throws Throwable {
 
-		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
-
 		LogAssertionExecutor logAssertionExecutor =
 			_logAssertionExecutorInstance.get();
+
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
 
 		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
 			expectedLogs);
