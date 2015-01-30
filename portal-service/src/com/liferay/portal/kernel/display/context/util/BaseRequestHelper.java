@@ -36,7 +36,9 @@ public abstract class BaseRequestHelper {
 
 	public long getCompanyId() {
 		if (_companyId == null) {
-			_companyId = getThemeDisplay().getCompanyId();
+			ThemeDisplay themeDisplay = getThemeDisplay();
+
+			_companyId = themeDisplay.getCompanyId();
 		}
 
 		return _companyId;
@@ -44,7 +46,9 @@ public abstract class BaseRequestHelper {
 
 	public Layout getLayout() {
 		if (_layout == null) {
-			_layout = getThemeDisplay().getLayout();
+			ThemeDisplay themeDisplay = getThemeDisplay();
+
+			_layout = themeDisplay.getLayout();
 		}
 
 		return _layout;
@@ -52,7 +56,9 @@ public abstract class BaseRequestHelper {
 
 	public Locale getLocale() {
 		if (_locale == null) {
-			_locale = getThemeDisplay().getLocale();
+			ThemeDisplay themeDisplay = getThemeDisplay();
+
+			_locale = themeDisplay.getLocale();
 		}
 
 		return _locale;
@@ -60,7 +66,9 @@ public abstract class BaseRequestHelper {
 
 	public PermissionChecker getPermissionChecker() {
 		if (_permissionChecker == null) {
-			_permissionChecker = getThemeDisplay().getPermissionChecker();
+			ThemeDisplay themeDisplay = getThemeDisplay();
+
+			_permissionChecker = themeDisplay.getPermissionChecker();
 		}
 
 		return _permissionChecker;
@@ -68,7 +76,9 @@ public abstract class BaseRequestHelper {
 
 	public PortletDisplay getPortletDisplay() {
 		if (_portletDisplay == null) {
-			_portletDisplay = getThemeDisplay().getPortletDisplay();
+			ThemeDisplay themeDisplay = getThemeDisplay();
+
+			_portletDisplay = themeDisplay.getPortletDisplay();
 		}
 
 		return _portletDisplay;
@@ -76,7 +86,9 @@ public abstract class BaseRequestHelper {
 
 	public String getPortletId() {
 		if (_portletId == null) {
-			_portletId = getPortletDisplay().getId();
+			PortletDisplay portletDisplay = getPortletDisplay();
+
+			_portletId = portletDisplay.getId();
 		}
 
 		return _portletId;
@@ -84,7 +96,9 @@ public abstract class BaseRequestHelper {
 
 	public String getPortletName() {
 		if (_portletName == null) {
-			_portletName = getPortletDisplay().getPortletName();
+			PortletDisplay portletDisplay = getPortletDisplay();
+
+			_portletName = portletDisplay.getPortletName();
 		}
 
 		return _portletName;
@@ -92,7 +106,9 @@ public abstract class BaseRequestHelper {
 
 	public String getPortletResource() {
 		if (_portletResource == null) {
-			_portletResource = getPortletDisplay().getPortletResource();
+			PortletDisplay portletDisplay = getPortletDisplay();
+
+			_portletResource = portletDisplay.getPortletResource();
 		}
 
 		return _portletResource;
@@ -104,7 +120,9 @@ public abstract class BaseRequestHelper {
 
 	public String getResourcePortletId() {
 		if (_resourcePortletId == null) {
-			if (getPortletId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+			String portletId = getPortletId();
+
+			if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 				_resourcePortletId = getPortletResource();
 			}
 			else {
@@ -117,7 +135,9 @@ public abstract class BaseRequestHelper {
 
 	public String getResourcePortletName() {
 		if (_resourcePortletName == null) {
-			if (getPortletId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+			String portletId = getPortletId();
+
+			if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 				_resourcePortletName = getPortletResource();
 			}
 			else {
@@ -130,7 +150,9 @@ public abstract class BaseRequestHelper {
 
 	public long getScopeGroupId() {
 		if (_scopeGroupId == null) {
-			_scopeGroupId = getThemeDisplay().getScopeGroupId();
+			ThemeDisplay themeDisplay = getThemeDisplay();
+
+			_scopeGroupId = themeDisplay.getScopeGroupId();
 		}
 
 		return _scopeGroupId;
@@ -138,7 +160,7 @@ public abstract class BaseRequestHelper {
 
 	public ThemeDisplay getThemeDisplay() {
 		if (_themeDisplay == null) {
-			_themeDisplay = (ThemeDisplay) _request.getAttribute(
+			_themeDisplay = (ThemeDisplay)_request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 		}
 

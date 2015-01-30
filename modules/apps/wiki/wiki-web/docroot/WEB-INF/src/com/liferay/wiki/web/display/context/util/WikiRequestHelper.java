@@ -35,7 +35,9 @@ public class WikiRequestHelper extends BaseRequestHelper {
 	public WikiPortletInstanceSettings getWikiPortletInstanceSettings() {
 		try {
 			if (_wikiPortletInstanceSettings == null) {
-				if (getPortletId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+				String portletId = getPortletId();
+
+				if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 					_wikiPortletInstanceSettings =
 						WikiPortletInstanceSettings.getInstance(
 							getLayout(), getResourcePortletId(),
@@ -58,7 +60,9 @@ public class WikiRequestHelper extends BaseRequestHelper {
 	public WikiSettings getWikiSettings() {
 		try {
 			if (_wikiSettings == null) {
-				if (getPortletId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+				String portletId = getPortletId();
+
+				if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 					_wikiSettings = WikiSettings.getInstance(
 						getScopeGroupId(), getRequest().getParameterMap());
 				}

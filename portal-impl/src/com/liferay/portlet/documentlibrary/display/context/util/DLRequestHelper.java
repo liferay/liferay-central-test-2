@@ -35,7 +35,9 @@ public class DLRequestHelper extends BaseRequestHelper {
 	public DLPortletInstanceSettings getDLPortletInstanceSettings() {
 		try {
 			if (_dlPortletInstanceSettings == null) {
-				if (getPortletId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+				String portletId = getPortletId();
+
+				if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 					_dlPortletInstanceSettings =
 						DLPortletInstanceSettings.getInstance(
 							getLayout(), getResourcePortletId(),
@@ -58,7 +60,9 @@ public class DLRequestHelper extends BaseRequestHelper {
 	public DLSettings getDLSettings() {
 		try {
 			if (_dlSettings == null) {
-				if (getPortletId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+				String portletId = getPortletId();
+
+				if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 					_dlSettings = DLSettings.getInstance(
 						getScopeGroupId(), getRequest().getParameterMap());
 				}
