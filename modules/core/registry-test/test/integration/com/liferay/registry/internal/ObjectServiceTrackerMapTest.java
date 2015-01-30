@@ -23,7 +23,6 @@ import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -192,56 +191,6 @@ public class ObjectServiceTrackerMapTest {
 			serviceRegistration3.unregister();
 
 			Assert.assertNull(serviceTrackerMap.getService("aTarget"));
-		}
-	}
-
-	@Test
-	public void testGetServiceWithCustomComparator() {
-		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-				ServiceTrackerCollections.singleValueMap(
-					TrackedOne.class, "(target=*)",
-					new ServiceTrackerCollections.
-						PropertyServiceReferenceMapper<String, TrackedOne>(
-							"target"),
-					new Comparator<ServiceReference<TrackedOne>>() {
-
-						@Override
-						public int compare(
-							ServiceReference<TrackedOne> serviceReference1,
-							ServiceReference<TrackedOne> serviceReference2) {
-
-							return -1;
-						}
-
-					}
-				)) {
-
-			serviceTrackerMap.open();
-
-			TrackedOne trackedOne1 = new TrackedOne();
-
-			ServiceRegistration<TrackedOne> serviceRegistration1 =
-				registerService(trackedOne1);
-
-			TrackedOne trackedOne2 = new TrackedOne();
-
-			ServiceRegistration<TrackedOne> serviceRegistration2 =
-				registerService(trackedOne2);
-
-			Assert.assertEquals(
-				trackedOne2, serviceTrackerMap.getService("aTarget"));
-
-			serviceRegistration1.unregister();
-			serviceRegistration2.unregister();
-
-			serviceRegistration2 = registerService(trackedOne2);
-			serviceRegistration1 = registerService(trackedOne1);
-
-			Assert.assertEquals(
-				trackedOne1, serviceTrackerMap.getService("aTarget"));
-
-			serviceRegistration1.unregister();
-			serviceRegistration2.unregister();
 		}
 	}
 
@@ -507,43 +456,6 @@ public class ObjectServiceTrackerMapTest {
 			serviceRegistration2.unregister();
 			serviceRegistration3.unregister();
 			serviceRegistration4.unregister();
-		}
-	}
-
-	@Test
-	public void testOperationBalancesOutGetServiceAndUngetService() {
-		RegistryWrapper registryWrapper = getRegistryWrapper();
-
-		try (ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
-				createServiceTrackerMap()) {
-
-			ServiceRegistration<TrackedOne> serviceRegistration1 =
-				registerService(new TrackedOne());
-			ServiceRegistration<TrackedOne> serviceRegistration2 =
-				registerService(new TrackedOne());
-
-			serviceRegistration2.unregister();
-
-			serviceRegistration2 = registerService(new TrackedOne());
-
-			serviceRegistration2.unregister();
-
-			serviceRegistration1.unregister();
-
-			Map<ServiceReference<?>, AtomicInteger> serviceReferenceCountsMap =
-				registryWrapper.getServiceReferenceCountsMap();
-
-			Collection<AtomicInteger> serviceReferenceCounts =
-				serviceReferenceCountsMap.values();
-
-			Assert.assertEquals(3, serviceReferenceCounts.size());
-
-			for (AtomicInteger serviceReferenceCount : serviceReferenceCounts) {
-				Assert.assertEquals(0, serviceReferenceCount.get());
-			}
-		}
-		finally {
-			RegistryUtil.setRegistry(registryWrapper.getWrappedRegistry());
 		}
 	}
 

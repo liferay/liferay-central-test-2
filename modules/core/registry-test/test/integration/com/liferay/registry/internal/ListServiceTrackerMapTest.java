@@ -215,48 +215,6 @@ public class ListServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testOperationBalancesOutGetServiceAndUngetService() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		RegistryWrapper registryWrapper = new RegistryWrapper(registry);
-
-		RegistryUtil.setRegistry(registryWrapper);
-
-		try (ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
-				createServiceTrackerMap()) {
-
-			ServiceRegistration<TrackedOne> serviceRegistration1 =
-				registerService(new TrackedOne());
-
-			ServiceRegistration<TrackedOne> serviceRegistration2 =
-				registerService(new TrackedOne());
-
-			serviceRegistration2.unregister();
-
-			serviceRegistration2 = registerService(new TrackedOne());
-
-			serviceRegistration2.unregister();
-
-			serviceRegistration1.unregister();
-
-			Map<ServiceReference<?>, AtomicInteger> serviceReferenceCountsMap =
-				registryWrapper.getServiceReferenceCountsMap();
-
-			Collection<AtomicInteger> serviceReferenceCounts =
-				serviceReferenceCountsMap.values();
-
-			Assert.assertEquals(3, serviceReferenceCounts.size());
-
-			for (AtomicInteger serviceReferenceCount : serviceReferenceCounts) {
-				Assert.assertEquals(0, serviceReferenceCount.get());
-			}
-		}
-		finally {
-			RegistryUtil.setRegistry(registry);
-		}
-	}
-
-	@Test
 	public void testUnkeyedServiceReferencesBalanceRefCount() {
 		Registry registry = RegistryUtil.getRegistry();
 
