@@ -39,13 +39,13 @@ public class ExtensionInstanceProducer {
 			serviceLoader.onlyOne(PersistenceTestInitializer.class));
 	}
 
+	@Inject
+	private Instance<Injector> _injectorInstance;
+
 	@ApplicationScoped
 	@Inject
 	private InstanceProducer<PersistenceTestInitializer>
 		_persistenceTestInitializerInstanceProducer;
-
-	@Inject
-	private Instance<Injector> _injectorInstance;
 
 	@Inject
 	private Instance<ServiceLoader> _serviceLoaderInstance;

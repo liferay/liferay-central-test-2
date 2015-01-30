@@ -43,5 +43,5 @@ public class PersistenceTestRule extends BaseTestRule<Object, Object> {
 
 	private static final PersistenceTestInitializer
 		_persistenceTestInitializer = new PersistenceTestInitializerImpl();
-	
+
 }
