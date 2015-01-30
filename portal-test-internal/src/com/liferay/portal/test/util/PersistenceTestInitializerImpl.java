@@ -26,7 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Cristina González
  */
-public class InitPersistenceTestImpl implements InitPersistenceTest {
+public class PersistenceTestInitializerImpl
+	implements PersistenceTestInitializer {
 
 	@Override
 	public Object init() {

@@ -17,7 +17,7 @@ package com.liferay.portal.test.util;
 /**
  * @author Cristina González
  */
-public interface InitPersistenceTest {
+public interface PersistenceTestInitializer {
 
 	public Object init();
 

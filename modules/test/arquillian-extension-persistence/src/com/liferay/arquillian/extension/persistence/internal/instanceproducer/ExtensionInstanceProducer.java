@@ -14,7 +14,7 @@
 
 package com.liferay.arquillian.extension.persistence.internal.instanceproducer;
 
-import com.liferay.portal.test.util.InitPersistenceTest;
+import com.liferay.portal.test.util.PersistenceTestInitializer;
 
 import org.jboss.arquillian.config.descriptor.api.ArquillianDescriptor;
 import org.jboss.arquillian.core.api.Injector;
@@ -35,14 +35,14 @@ public class ExtensionInstanceProducer {
 
 		ServiceLoader serviceLoader = _serviceLoaderInstance.get();
 
-		_initPersistenceTestInstanceProducer.set(
-			serviceLoader.onlyOne(InitPersistenceTest.class));
+		_persistenceTestInitializerInstanceProducer.set(
+			serviceLoader.onlyOne(PersistenceTestInitializer.class));
 	}
 
 	@ApplicationScoped
 	@Inject
-	private InstanceProducer<InitPersistenceTest>
-		_initPersistenceTestInstanceProducer;
+	private InstanceProducer<PersistenceTestInitializer>
+		_persistenceTestInitializerInstanceProducer;
 
 	@Inject
 	private Instance<Injector> _injectorInstance;

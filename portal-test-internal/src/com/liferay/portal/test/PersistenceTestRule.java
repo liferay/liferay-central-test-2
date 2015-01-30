@@ -15,8 +15,8 @@
 package com.liferay.portal.test;
 
 import com.liferay.portal.kernel.test.BaseTestRule;
-import com.liferay.portal.test.util.InitPersistenceTest;
-import com.liferay.portal.test.util.InitPersistenceTestImpl;
+import com.liferay.portal.test.util.PersistenceTestInitializer;
+import com.liferay.portal.test.util.PersistenceTestInitializerImpl;
 
 import org.junit.runner.Description;
 
@@ -30,18 +30,18 @@ public class PersistenceTestRule extends BaseTestRule<Object, Object> {
 
 	@Override
 	protected void afterMethod(Description description, Object modelListeners) {
-		_initPersistenceTest.release(modelListeners);
+		_persistenceTestInitializer.release(modelListeners);
 	}
 
 	@Override
 	protected Object beforeMethod(Description description) {
-		return _initPersistenceTest.init();
+		return _persistenceTestInitializer.init();
 	}
 
 	private PersistenceTestRule() {
 	}
 
-	private static final InitPersistenceTest _initPersistenceTest =
-		new InitPersistenceTestImpl();
-
+	private static final PersistenceTestInitializer
+		_persistenceTestInitializer = new PersistenceTestInitializerImpl();
+	
 }

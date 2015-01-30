@@ -16,8 +16,8 @@ package com.liferay.arquillian.extension.persistence;
 
 import com.liferay.arquillian.extension.persistence.internal.instanceproducer.ExtensionInstanceProducer;
 import com.liferay.arquillian.extension.persistence.internal.observer.PersistenceTestObserver;
-import com.liferay.portal.test.util.InitPersistenceTest;
-import com.liferay.portal.test.util.InitPersistenceTestImpl;
+import com.liferay.portal.test.util.PersistenceTestInitializer;
+import com.liferay.portal.test.util.PersistenceTestInitializerImpl;
 
 import org.jboss.arquillian.core.spi.LoadableExtension;
 
@@ -32,7 +32,8 @@ public class PersistenceTestScenarioExtension implements LoadableExtension {
 		builder.observer(PersistenceTestObserver.class);
 
 		builder.service(
-			InitPersistenceTest.class, InitPersistenceTestImpl.class);
+			PersistenceTestInitializer.class,
+			PersistenceTestInitializerImpl.class);
 	}
 
 }

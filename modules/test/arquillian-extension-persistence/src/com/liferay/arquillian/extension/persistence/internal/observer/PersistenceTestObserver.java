@@ -14,7 +14,7 @@
 
 package com.liferay.arquillian.extension.persistence.internal.observer;
 
-import com.liferay.portal.test.util.InitPersistenceTest;
+import com.liferay.portal.test.util.PersistenceTestInitializer;
 
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
@@ -31,23 +31,22 @@ public class PersistenceTestObserver {
 	public void afterTest(@Observes EventContext<After> eventContext)
 		throws Throwable {
 
-		InitPersistenceTest initPersistenceTest =
-			_initPersistenceTestInstance.get();
+		PersistenceTestInitializer persistenceTestInitializer =
+			_instance.get();
 
-		initPersistenceTest.release(modelListeners);
+		persistenceTestInitializer.release(modelListeners);
 	}
 
 	public void beforeTest(@Observes EventContext<Before> eventContext)
 		throws Throwable {
 
-		InitPersistenceTest initPersistenceTest =
-			_initPersistenceTestInstance.get();
+		PersistenceTestInitializer persistenceTestInitializer = _instance.get();
 
-		modelListeners = initPersistenceTest.init();
+		modelListeners = persistenceTestInitializer.init();
 	}
 
 	@Inject
-	private Instance<InitPersistenceTest> _initPersistenceTestInstance;
+	private Instance<PersistenceTestInitializer> _instance;
 
 	private Object modelListeners;
 
