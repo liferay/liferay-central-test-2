@@ -735,11 +735,11 @@ This affects any hook that uses the
 
 #### How should I update my code?
 
-If you are using this property to register Asset Entry Query Processors, they
-must be registered in a different way. Your Asset Entry Query Processor should
-implement the `com.liferay.portlet.assetpublisher.util.AssetEntryQueryProcessor`
-interface and it should have the
-`@Component(service=AssetEntryQueryProcessor.class)` annotation.
+If you are using this property to register Asset Entry Query Processors, your
+Asset Entry Query Processor must implement the
+`com.liferay.portlet.assetpublisher.util.AssetEntryQueryProcessor` interface and
+must specify the `@Component(service=AssetEntryQueryProcessor.class)`
+annotation.
 
 #### Why was this change made?
 
