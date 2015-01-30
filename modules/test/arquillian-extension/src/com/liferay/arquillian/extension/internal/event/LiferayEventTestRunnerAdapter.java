@@ -18,7 +18,7 @@ import com.liferay.portal.test.util.ClearThreadLocalExecutor;
 import com.liferay.portal.test.util.DeleteAfterTestRunExecutor;
 import com.liferay.portal.test.util.InitTestLiferayContextExecutor;
 import com.liferay.portal.test.util.UniqueStringRandomizerBumperExecutor;
-
+import java.lang.reflect.Method;
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.api.annotation.Observes;
@@ -41,6 +41,13 @@ public class LiferayEventTestRunnerAdapter {
 
 		DeleteAfterTestRunExecutor deleteAfterTestExecutor =
 			_deleteAfterTestExecutorInstance.get();
+
+		After afterEvent = eventContext.getEvent();
+
+		Method testMethod = afterEvent.getTestMethod();
+
+		deleteAfterTestExecutor.deleteFieldsAfterTest(
+			afterEvent.getTestInstance(), testMethod.getDeclaringClass());
 	}
 
 	public void afterClass(@Observes EventContext<AfterClass> eventContext)
