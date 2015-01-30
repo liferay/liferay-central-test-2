@@ -322,16 +322,16 @@ public class AssetPublisherPortletDataHandler
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		Company company = CompanyLocalServiceUtil.getCompanyById(
-			portletDataContext.getCompanyId());
-
-		Group companyGroup = company.getGroup();
-
 		StagedModelDataHandlerUtil.importReferenceStagedModels(
 			portletDataContext, AssetVocabulary.class);
 
 		StagedModelDataHandlerUtil.importReferenceStagedModels(
 			portletDataContext, AssetCategory.class);
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(
+			portletDataContext.getCompanyId());
+
+		Group companyGroup = company.getGroup();
 
 		String anyAssetTypeClassName = portletPreferences.getValue(
 			"anyAssetType", StringPool.BLANK);
