@@ -791,22 +791,22 @@ allowed. That exception has been deprecated and replaced with
 
 #### Who is affected?
 
-This affects developers who have written code that catch the
-`ReservedUserScreenNameException`.
+This affects developers who have written code that catches the
+`ReservedUserScreenNameException` while calling the affected methods.
 
 #### How should I update my code?
 
-You should replace the `ReservedUserScreenNameException` with 
-`UserScreenNameException.MustNotBeReserved`.
+You should replace catching exception `ReservedUserScreenNameException` with
+catching exception `UserScreenNameException.MustNotBeReserved`.
 
 #### Why was this change made?
 
 A new pattern has been defined for exceptions that provides higher expressivity
 in their names and also more information regarding why the exception was thrown.
 
-The new `UserScreenNameException.MustNotBeReserved` exception has all the
+The new exception `UserScreenNameException.MustNotBeReserved` has all the
 necessary information about why the exception was thrown and its context. In
-particular, it contains the `userId`, the problematic `screenName`, and the list
-of `reservedScreenNames`.
+particular, it contains the user ID, the problematic screen name, and the list
+of reserved screen names.
 
 ---------------------------------------
