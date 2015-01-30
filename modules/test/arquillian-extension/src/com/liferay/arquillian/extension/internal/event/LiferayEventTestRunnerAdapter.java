@@ -14,20 +14,28 @@
 
 package com.liferay.arquillian.extension.internal.event;
 
+import com.liferay.portal.log.CaptureAppender;
+import com.liferay.portal.test.log.ExpectedLogs;
+import com.liferay.portal.test.log.LogAssertionExecutor;
 import com.liferay.portal.test.util.ClearThreadLocalExecutor;
 import com.liferay.portal.test.util.DeleteAfterTestRunExecutor;
 import com.liferay.portal.test.util.InitTestLiferayContextExecutor;
 import com.liferay.portal.test.util.UniqueStringRandomizerBumperExecutor;
+
 import java.lang.reflect.Method;
+
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.api.annotation.Observes;
 import org.jboss.arquillian.core.spi.EventContext;
+import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.arquillian.test.spi.event.suite.After;
 import org.jboss.arquillian.test.spi.event.suite.AfterClass;
 import org.jboss.arquillian.test.spi.event.suite.Before;
 import org.jboss.arquillian.test.spi.event.suite.BeforeClass;
+import org.jboss.arquillian.test.spi.event.suite.ClassEvent;
 import org.jboss.arquillian.test.spi.event.suite.Test;
+import org.jboss.arquillian.test.spi.event.suite.TestEvent;
 
 /**
  * @author Cristina González
@@ -37,21 +45,39 @@ public class LiferayEventTestRunnerAdapter {
 	public void after(@Observes EventContext<After> eventContext)
 		throws Throwable {
 
+		After afterEvent = eventContext.getEvent();
+
+		Method testMethod = afterEvent.getTestMethod();
+
+		ExpectedLogs expectedLogs = getAnnotation(afterEvent);
+
+		LogAssertionExecutor logAssertionExecutor =
+			_logAssertionExecutorInstance.get();
+
+		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
+			expectedLogs);
+
 		eventContext.proceed();
 
 		DeleteAfterTestRunExecutor deleteAfterTestExecutor =
 			_deleteAfterTestExecutorInstance.get();
 
-		After afterEvent = eventContext.getEvent();
-
-		Method testMethod = afterEvent.getTestMethod();
-
 		deleteAfterTestExecutor.deleteFieldsAfterTest(
 			afterEvent.getTestInstance(), testMethod.getDeclaringClass());
+
+		logAssertionExecutor.endAssert(expectedLogs, captureAppender);
 	}
 
 	public void afterClass(@Observes EventContext<AfterClass> eventContext)
 		throws Throwable {
+
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
+
+		LogAssertionExecutor logAssertionExecutor =
+			_logAssertionExecutorInstance.get();
+
+		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
+			expectedLogs);
 
 		eventContext.proceed();
 
@@ -59,16 +85,36 @@ public class LiferayEventTestRunnerAdapter {
 			_clearThreadLocalExecutorInstance.get();
 
 		clearThreadLocalExecutor.clearThreadLocal();
+
+		logAssertionExecutor.endAssert(expectedLogs, captureAppender);
 	}
 
 	public void before(@Observes EventContext<Before> eventContext)
 		throws Throwable {
 
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
+
+		LogAssertionExecutor logAssertionExecutor =
+			_logAssertionExecutorInstance.get();
+
+		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
+			expectedLogs);
+
 		eventContext.proceed();
+
+		logAssertionExecutor.endAssert(expectedLogs, captureAppender);
 	}
 
 	public void beforeClass(@Observes EventContext<BeforeClass> eventContext)
 		throws Throwable {
+
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
+
+		LogAssertionExecutor logAssertionExecutor =
+			_logAssertionExecutorInstance.get();
+
+		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
+			expectedLogs);
 
 		InitTestLiferayContextExecutor initTestLiferayContextExecutor =
 			_initTestLiferayContextExecutorInstance.get();
@@ -82,12 +128,54 @@ public class LiferayEventTestRunnerAdapter {
 		uniqueStringRandomizerBumperExecutor.reset();
 
 		eventContext.proceed();
+
+		logAssertionExecutor.endAssert(expectedLogs, captureAppender);
 	}
 
 	public void test(@Observes EventContext<Test> eventContext)
 		throws Throwable {
 
+		ExpectedLogs expectedLogs = getAnnotation(eventContext.getEvent());
+
+		LogAssertionExecutor logAssertionExecutor =
+			_logAssertionExecutorInstance.get();
+
+		CaptureAppender captureAppender = logAssertionExecutor.startAssert(
+			expectedLogs);
+
 		eventContext.proceed();
+
+		logAssertionExecutor.endAssert(expectedLogs, captureAppender);
+	}
+
+	protected ExpectedLogs getAnnotation(ClassEvent classEvent) {
+		TestClass testClass = classEvent.getTestClass();
+
+		return testClass.getAnnotation(ExpectedLogs.class);
+	}
+
+	protected ExpectedLogs getAnnotation(Object object) {
+		if (object instanceof ClassEvent) {
+			return getAnnotation((ClassEvent)object);
+		}
+		else if (object instanceof TestEvent) {
+			return getAnnotation((TestEvent)object);
+		}
+
+		throw new RuntimeException(
+			"Object " + object + " is not a class event or test event");
+	}
+
+	protected ExpectedLogs getAnnotation(TestEvent testEvent) {
+		Method method = testEvent.getTestMethod();
+
+		ExpectedLogs expectedLogs = method.getAnnotation(ExpectedLogs.class);
+
+		if (expectedLogs != null) {
+			return expectedLogs;
+		}
+
+		return getAnnotation((ClassEvent)testEvent);
 	}
 
 	@Inject
@@ -101,6 +189,9 @@ public class LiferayEventTestRunnerAdapter {
 	@Inject
 	private Instance<InitTestLiferayContextExecutor>
 		_initTestLiferayContextExecutorInstance;
+
+	@Inject
+	private Instance<LogAssertionExecutor> _logAssertionExecutorInstance;
 
 	@Inject
 	private Instance<UniqueStringRandomizerBumperExecutor>
