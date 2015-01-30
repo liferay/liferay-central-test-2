@@ -778,34 +778,35 @@ Portal.
 
 ---------------------------------------
 
-### UserLocalService throws the new UserScreenNameException.MustNotBeReserved instead of ReservedUserScreenNameException
+### Replaced the `ReservedUserScreenNameException` with `UserScreenNameException.MustNotBeReserved` in `UserLocalService`
 - **Date:** 2015-Jan-29
 - **JIRA Ticket:** LPS-53113
 
 #### What changed?
 
-Previous to Liferay 7, several methods of UserLocalService could throw a
-ReservedUserScreenNameException when a User is set an screen name which is not
-allowed. From Liferay 7 forward that exception has been deprecated and replaced
-with UserScreenNameException.MustNotBeReserved
+Previous to Liferay 7, several methods of `UserLocalService` could throw a
+`ReservedUserScreenNameException` when a user set a screen name that was not
+allowed. That exception has been deprecated and replaced with
+`UserScreenNameException.MustNotBeReserved`.
 
 #### Who is affected?
 
-Developers who have written code that catch ReservedUserScreenNameException
+This affects developers who have written code that catch the
+`ReservedUserScreenNameException`.
 
 #### How should I update my code?
 
-Replace ReservedUserScreenNameException with 
-UserScreenNameException.MustNotBeReserved
+You should replace the `ReservedUserScreenNameException` with 
+`UserScreenNameException.MustNotBeReserved`.
 
 #### Why was this change made?
 
-A new pattern has been defined for exceptions that provides higher expresivity
+A new pattern has been defined for exceptions that provides higher expressivity
 in their names and also more information regarding why the exception was thrown.
 
-The new exception (UserScreenNameException.MustNotBeReserved) has all the 
-necessary information about the reason why the exception was thrown and its 
-context. In particular it contains the userId, the problematic screenName and
-the list of reservedScreenNames.
+The new `UserScreenNameException.MustNotBeReserved` exception has all the
+necessary information about why the exception was thrown and its context. In
+particular, it contains the `userId`, the problematic `screenName`, and the list
+of `reservedScreenNames`.
 
 ---------------------------------------
