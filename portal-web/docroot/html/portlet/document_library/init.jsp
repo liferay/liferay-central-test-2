@@ -89,9 +89,11 @@ PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPre
 
 DLRequestHelper dlRequestHelper = new DLRequestHelper(request);
 
-String portletResource = dlRequestHelper.getPortletResource();
 String portletId = dlRequestHelper.getResourcePortletId();
+
 portletName = dlRequestHelper.getResourcePortletName();
+
+String portletResource = dlRequestHelper.getPortletResource();
 
 DLPortletInstanceSettings dlPortletInstanceSettings = dlRequestHelper.getDLPortletInstanceSettings();
 DLSettings dlSettings = dlRequestHelper.getDLSettings();

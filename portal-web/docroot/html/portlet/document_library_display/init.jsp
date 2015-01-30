@@ -34,8 +34,8 @@ if (layout.isTypeControlPanel()) {
 
 DLDisplayRequestHelper dlDisplayRequestHelper = new DLDisplayRequestHelper(request);
 
-String portletResource = dlDisplayRequestHelper.getPortletResource();
 String portletId = dlDisplayRequestHelper.getResourcePortletId();
+String portletResource = dlDisplayRequestHelper.getPortletResource();
 
 DLPortletInstanceSettings dlPortletInstanceSettings = dlDisplayRequestHelper.getDLPortletInstanceSettings();
 
