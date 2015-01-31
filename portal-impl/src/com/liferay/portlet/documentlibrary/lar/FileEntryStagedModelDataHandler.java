@@ -433,13 +433,13 @@ public class FileEntryStagedModelDataHandler
 					updateFileEntry = true;
 				}
 				else {
-					InputStream existingFileVersionContentStream = null;
+					InputStream existingFileVersionInputStream = null;
 
 					try {
-						existingFileVersionContentStream =
+						existingFileVersionInputStream =
 							latestExistingFileVersion.getContentStream(false);
 
-						if (existingFileVersionContentStream == null) {
+						if (existingFileVersionInputStream == null) {
 							updateFileEntry = true;
 						}
 					}
@@ -449,8 +449,8 @@ public class FileEntryStagedModelDataHandler
 						}
 					}
 					finally {
-						if (existingFileVersionContentStream != null) {
-							existingFileVersionContentStream.close();
+						if (existingFileVersionInputStream != null) {
+							existingFileVersionInputStream.close();
 						}
 					}
 				}
