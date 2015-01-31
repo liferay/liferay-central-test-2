@@ -37,11 +37,11 @@ public class PoshiRunnerExecutor {
 			String childElementName = childElement.getName();
 
 			if (childElementName.equals("execute")) {
-				if (childElement.attributeValue("selenium") != null) {
-					runSeleniumElement(childElement);
-				}
-				else if (childElement.attributeValue("function") != null) {
+				if (childElement.attributeValue("function") != null) {
 					runFunctionElement(childElement);
+				}
+				else if (childElement.attributeValue("selenium") != null) {
+					runSeleniumElement(childElement);
 				}
 			}
 		}
