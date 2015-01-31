@@ -29,7 +29,7 @@ public class TransactionInvokerImpl implements TransactionInvoker {
 			TransactionAttribute transactionAttribute, Callable<T> callable)
 		throws Throwable {
 
-		return TransactionalCallableUtil.call(
+		return TransactionHandlerUtil.invoke(
 			TransactionAttributeBuilder.build(
 				true, transactionAttribute.getIsolation(),
 				transactionAttribute.getPropagation(),
