@@ -426,7 +426,8 @@ public class FileEntryStagedModelDataHandler
 
 				boolean updateFileEntry = false;
 
-				if (!fileVersion.getUuid().equals(
+				if (!Validator.equals(
+						fileVersion.getUuid(),
 						latestExistingFileVersion.getUuid())) {
 
 					updateFileEntry = true;
@@ -445,6 +446,11 @@ public class FileEntryStagedModelDataHandler
 					catch (Exception e) {
 						if (_log.isDebugEnabled()) {
 							_log.debug(e, e);
+						}
+					}
+					finally {
+						if (existingFileVersionContentStream != null) {
+							existingFileVersionContentStream.close();
 						}
 					}
 				}
