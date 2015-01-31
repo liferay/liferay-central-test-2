@@ -27,9 +27,9 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 /**
  * @author Shuyang Zhou
  */
-public class TransactionalCallableUtil {
+public class TransactionHandlerUtil {
 
-	public static <T> T call(
+	public static <T> T invoke(
 			TransactionAttribute transactionAttribute, Callable<T> callable)
 		throws Throwable {
 
