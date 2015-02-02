@@ -116,9 +116,7 @@ import org.springframework.context.ApplicationContext;
 public class ModuleFrameworkImpl implements ModuleFramework {
 
 	public ModuleFrameworkImpl() {
-		String liferayLibPortalDir = _getLiferayLibPortalDir();
-
-		_liferayLibPortalDir = StringUtil.toLowerCase(liferayLibPortalDir);
+		_liferayLibPortalDir = _getLiferayLibPortalDir();
 	}
 
 	@Override
@@ -866,7 +864,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			liferayLibPortalDir = liferayLibPortalDir.substring(1);
 		}
 
-		return liferayLibPortalDir;
+		return StringUtil.toLowerCase(liferayLibPortalDir);
 	}
 
 	private String _getSystemPackagesExtra() {
