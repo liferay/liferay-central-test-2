@@ -755,8 +755,13 @@ public class PortletRequestModel implements Serializable {
 
 				@Override
 				public boolean filter(Map.Entry<String, Object> entry) {
-					return _isValidAttributeName(entry.getKey()) &&
-						_isValidAttributeValue(entry.getValue());
+					if (_isValidAttributeName(entry.getKey()) &&
+						_isValidAttributeValue(entry.getValue())) {
+
+						return true;
+					}
+
+					return false;
 				}
 
 			};

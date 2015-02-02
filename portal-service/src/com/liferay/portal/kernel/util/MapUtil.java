@@ -41,10 +41,12 @@ public class MapUtil {
 		final PredicateFilter<K> predicateFilter) {
 
 		return new PredicateFilter<Map.Entry<K, ?>>() {
+
 			@Override
 			public boolean filter(Map.Entry<K, ?> entry) {
 				return predicateFilter.filter(entry.getKey());
 			}
+
 		};
 	}
 
@@ -52,10 +54,12 @@ public class MapUtil {
 		entryValuePredicateFilter(final PredicateFilter<V> predicateFilter) {
 
 		return new PredicateFilter<Map.Entry<?, V>>() {
+
 			@Override
 			public boolean filter(Map.Entry<?, V> entry) {
 				return predicateFilter.filter(entry.getValue());
 			}
+
 		};
 	}
 

@@ -391,7 +391,8 @@ public class MapUtilTest {
 			inputMap.put("5", "five");
 
 			Map<String, String> outputMap = MapUtil.filter(
-				inputMap, new PredicateFilter<Map.Entry<String, ?>>() {
+				inputMap,
+				new PredicateFilter<Map.Entry<String, ?>>() {
 
 					@Override
 					public boolean filter(Map.Entry<String, ?> entry) {
@@ -404,8 +405,7 @@ public class MapUtilTest {
 						return false;
 					}
 
-				}
-			);
+				});
 
 			Assert.assertEquals(2, outputMap.size());
 			Assert.assertEquals("two", outputMap.get("2"));
@@ -441,13 +441,15 @@ public class MapUtilTest {
 			inputMap.put("5", 5);
 
 			Map<String, Integer> outputMap = MapUtil.filterByValues(
-				inputMap, new PredicateFilter<Number>() {
+				inputMap,
+				new PredicateFilter<Number>() {
 
-				@Override
-				public boolean filter(Number number) {
-					return (number.intValue() % 2 == 0);
-				}
-			});
+					@Override
+					public boolean filter(Number number) {
+						return (number.intValue() % 2 == 0);
+					}
+
+				});
 
 			Assert.assertEquals(2, outputMap.size());
 			Assert.assertEquals((Integer)2, outputMap.get("2"));
@@ -455,7 +457,7 @@ public class MapUtilTest {
 		}
 
 		@Test
-		public void shouldAllowFilterBySuperTypeANdOutputtoSupertype() {
+		public void shouldAllowFilterBySuperTypeAndOutputToSupertype() {
 			Map<String, Integer> inputMap = new HashMap<>();
 
 			inputMap.put("1", 1);
@@ -469,10 +471,12 @@ public class MapUtilTest {
 			MapUtil.filter(
 				inputMap, outputMap,
 				new PredicateFilter<Map.Entry<?, Number>>() {
+
 					@Override
 					public boolean filter(Map.Entry<?, Number> entry) {
 						return (entry.getValue().intValue() % 2 == 0);
 					}
+
 				});
 
 			Assert.assertEquals(2, outputMap.size());
