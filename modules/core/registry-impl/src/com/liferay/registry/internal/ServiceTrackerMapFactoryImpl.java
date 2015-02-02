@@ -48,8 +48,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -70,8 +70,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -98,8 +98,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -126,8 +126,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -158,8 +158,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -181,8 +181,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -198,8 +198,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -221,8 +221,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -248,8 +248,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 							serviceReferenceComparatorAdapter);
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -276,8 +276,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -307,8 +307,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 							serviceReferenceComparatorAdapter);
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
@@ -329,8 +329,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
-		catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
 		}
 	}
 
