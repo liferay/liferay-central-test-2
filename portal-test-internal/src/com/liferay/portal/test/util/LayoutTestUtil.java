@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util.test;
+package com.liferay.portal.test.util;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
