@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util.subscriptions;
+package com.liferay.portlet.subscriptions;
 
 import com.liferay.portal.util.test.MailServiceTestUtil;
 
@@ -22,18 +22,18 @@ import org.junit.Test;
 /**
  * @author Roberto Díaz
  */
-public abstract class BaseSubscriptionContainerModelTestCase
+public abstract class BaseSubscriptionRootContainerModelTestCase
 	extends BaseSubscriptionTestCase {
 
 	@Test
 	public void
-			testSubscriptionContainerModelWhenAddingBaseModelInContainerModel()
+			testSubscriptionRootContainerModelWhenAddingBaseModelInContainerModel()
 		throws Exception {
 
-		long containerModelId = addContainerModel(
-			BaseSubscriptionTestCase.PARENT_CONTAINER_MODEL_ID_DEFAULT);
+		addSubscriptionContainerModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		addSubscriptionContainerModel(containerModelId);
+		long containerModelId = addContainerModel(
+			PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
 		addBaseModel(containerModelId);
 
@@ -42,29 +42,25 @@ public abstract class BaseSubscriptionContainerModelTestCase
 
 	@Test
 	public void
-			testSubscriptionContainerModelWhenAddingBaseModelInRootContainerModel()
+			testSubscriptionRootContainerModelWhenAddingBaseModelInRootContainerModel()
 		throws Exception {
 
-		long containerModelId = addContainerModel(
-			BaseSubscriptionTestCase.PARENT_CONTAINER_MODEL_ID_DEFAULT);
+		addSubscriptionContainerModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		addSubscriptionContainerModel(containerModelId);
+		addBaseModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		addBaseModel(
-			BaseSubscriptionTestCase.PARENT_CONTAINER_MODEL_ID_DEFAULT);
-
-		Assert.assertEquals(0, MailServiceTestUtil.getInboxSize());
+		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
 	}
 
 	@Test
 	public void
-			testSubscriptionContainerModelWhenAddingBaseModelInSubcontainerModel()
+			testSubscriptionRootContainerModelWhenAddingBaseModelInSubcontainerModel()
 		throws Exception {
 
-		long containerModelId = addContainerModel(
-			BaseSubscriptionTestCase.PARENT_CONTAINER_MODEL_ID_DEFAULT);
+		addSubscriptionContainerModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		addSubscriptionContainerModel(containerModelId);
+		long containerModelId = addContainerModel(
+			PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
 		long subcontainerModelId = addContainerModel(containerModelId);
 
@@ -75,7 +71,7 @@ public abstract class BaseSubscriptionContainerModelTestCase
 
 	@Test
 	public void
-			testSubscriptionContainerModelWhenUpdatingBaseModelInContainerModel()
+			testSubscriptionRootContainerModelWhenUpdatingBaseModelInContainerModel()
 		throws Exception {
 
 		long containerModelId = addContainerModel(
@@ -83,7 +79,7 @@ public abstract class BaseSubscriptionContainerModelTestCase
 
 		long baseModelId = addBaseModel(containerModelId);
 
-		addSubscriptionContainerModel(containerModelId);
+		addSubscriptionContainerModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
 		updateBaseModel(baseModelId);
 
@@ -92,24 +88,21 @@ public abstract class BaseSubscriptionContainerModelTestCase
 
 	@Test
 	public void
-			testSubscriptionContainerModelWhenUpdatingBaseModelInRootContainerModel()
+			testSubscriptionRootContainerModelWhenUpdatingBaseModelInRootContainerModel()
 		throws Exception {
-
-		long containerModelId = addContainerModel(
-			PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
 		long baseModelId = addBaseModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		addSubscriptionContainerModel(containerModelId);
+		addSubscriptionContainerModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
 		updateBaseModel(baseModelId);
 
-		Assert.assertEquals(0, MailServiceTestUtil.getInboxSize());
+		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
 	}
 
 	@Test
 	public void
-			testSubscriptionContainerModelWhenUpdatingBaseModelInSubcontainerModel()
+			testSubscriptionRootContainerModelWhenUpdatingBaseModelInSubcontainerModel()
 		throws Exception {
 
 		long containerModelId = addContainerModel(
@@ -119,7 +112,7 @@ public abstract class BaseSubscriptionContainerModelTestCase
 
 		long baseModelId = addBaseModel(subcontainerModelId);
 
-		addSubscriptionContainerModel(containerModelId);
+		addSubscriptionContainerModel(PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
 		updateBaseModel(baseModelId);
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util.subscriptions;
+package com.liferay.portlet.subscriptions;
 
 import com.dumbster.smtp.MailMessage;
 
