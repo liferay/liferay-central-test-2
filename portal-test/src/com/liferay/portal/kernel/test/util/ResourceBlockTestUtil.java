@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util.test;
+package com.liferay.portal.kernel.test.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.ResourceBlock;

@@ -12,29 +12,31 @@
  * details.
  */
 
-package com.liferay.portal.util.test;
+package com.liferay.portal.kernel.test.util;
 
-import com.liferay.portal.kernel.search.SearchContext;
+import java.io.File;
+import java.io.InputStream;
+
+import java.net.URL;
 
 /**
  * @author Manuel de la Peña
  */
-public class SearchContextTestUtil {
+public class DependenciesTestUtil {
 
-	public static SearchContext getSearchContext() throws Exception {
-		return getSearchContext(TestPropsValues.getGroupId());
-	}
-
-	public static SearchContext getSearchContext(long groupId)
+	public static File getDependencyAsFile(Class<?> clazz, String name)
 		throws Exception {
 
-		SearchContext searchContext = new SearchContext();
+		URL url = clazz.getResource("dependencies/" + name);
 
-		searchContext.setCompanyId(TestPropsValues.getCompanyId());
-		searchContext.setGroupIds(new long[] {groupId});
-		searchContext.setUserId(TestPropsValues.getUserId());
+		return new File(url.toURI());
+	}
 
-		return searchContext;
+	public static InputStream getDependencyAsInputStream(
+			Class<?> clazz, String name)
+		throws Exception {
+
+		return clazz.getResourceAsStream("dependencies/" + name);
 	}
 
 }
