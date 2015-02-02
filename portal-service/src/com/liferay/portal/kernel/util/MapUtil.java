@@ -63,24 +63,23 @@ public class MapUtil {
 		};
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <K, V, K2 extends K, V2 extends V> void filter(
+	public static <K1, V1, K2 extends K1, V2 extends V1> void filter(
 		Map<? extends K2, ? extends V2> inputMap,
 		Map<? super K2, ? super V2> outputMap,
-		PredicateFilter<? super Map.Entry<K, V>> predicateFilter) {
+		PredicateFilter<? super Map.Entry<K1, V1>> predicateFilter) {
 
 		for (Map.Entry<? extends K2, ? extends V2> entry :
 				inputMap.entrySet()) {
 
-			if (predicateFilter.filter((Map.Entry<K, V>)entry)) {
+			if (predicateFilter.filter((Map.Entry<K1, V1>)entry)) {
 				outputMap.put(entry.getKey(), entry.getValue());
 			}
 		}
 	}
 
-	public static <K, V, K2 extends K, V2 extends V> Map<K2, V2> filter(
+	public static <K1, V1, K2 extends K1, V2 extends V1> Map<K2, V2> filter(
 		Map<K2, V2> inputMap,
-		PredicateFilter<? super Map.Entry<K, V>> predicateFilter) {
+		PredicateFilter<? super Map.Entry<K1, V1>> predicateFilter) {
 
 		Map<K2, V2> outputMap = new HashMap<>();
 
