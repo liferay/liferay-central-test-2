@@ -12,11 +12,13 @@
  * details.
  */
 
-package com.liferay.polls.service.persistence;
+package com.liferay.polls.service.persistence.test;
 
 import com.liferay.polls.exception.NoSuchChoiceException;
 import com.liferay.polls.model.PollsChoice;
 import com.liferay.polls.service.PollsChoiceLocalServiceUtil;
+import com.liferay.polls.service.persistence.PollsChoicePersistence;
+import com.liferay.polls.service.persistence.PollsChoiceUtil;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;

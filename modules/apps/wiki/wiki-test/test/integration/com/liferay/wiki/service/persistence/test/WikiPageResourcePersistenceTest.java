@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.service.persistence;
+package com.liferay.wiki.service.persistence.test;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -36,6 +36,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.wiki.exception.NoSuchPageResourceException;
 import com.liferay.wiki.model.WikiPageResource;
 import com.liferay.wiki.service.WikiPageResourceLocalServiceUtil;
+import com.liferay.wiki.service.persistence.WikiPageResourcePersistence;
+import com.liferay.wiki.service.persistence.WikiPageResourceUtil;
 
 import org.jboss.arquillian.junit.Arquillian;
 

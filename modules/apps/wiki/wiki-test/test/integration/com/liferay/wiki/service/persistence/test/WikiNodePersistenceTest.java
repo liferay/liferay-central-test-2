@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.service.persistence;
+package com.liferay.wiki.service.persistence.test;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -37,6 +37,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.wiki.exception.NoSuchNodeException;
 import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.wiki.service.persistence.WikiNodePersistence;
+import com.liferay.wiki.service.persistence.WikiNodeUtil;
 
 import org.jboss.arquillian.junit.Arquillian;
 

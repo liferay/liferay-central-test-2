@@ -12,11 +12,13 @@
  * details.
  */
 
-package com.liferay.bookmarks.service.persistence;
+package com.liferay.bookmarks.service.persistence.test;
 
 import com.liferay.bookmarks.exception.NoSuchEntryException;
 import com.liferay.bookmarks.model.BookmarksEntry;
 import com.liferay.bookmarks.service.BookmarksEntryLocalServiceUtil;
+import com.liferay.bookmarks.service.persistence.BookmarksEntryPersistence;
+import com.liferay.bookmarks.service.persistence.BookmarksEntryUtil;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
