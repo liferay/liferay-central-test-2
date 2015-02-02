@@ -95,9 +95,11 @@ public class PoshiRunnerContext {
 			List<Element> tdElements = trElement.elements("td");
 
 			Element locatorKeyElement = tdElements.get(0);
-			Element locatorElement = tdElements.get(1);
 
 			String locatorKey = locatorKeyElement.getText();
+
+			Element locatorElement = tdElements.get(1);
+
 			String locator = locatorElement.getText();
 
 			if (locatorKey.equals("EXTEND_ACTION_PATH")) {
