@@ -1,3 +1,4 @@
+/* @generated */
 /*
  * Copyright 2008-2011 Uwe Pachler
  *
@@ -27,8 +28,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -175,7 +178,7 @@ public class BSDPathWatchService extends PathWatchService{
 		byte[] b = new byte[1];
 		write(closePipeWriteFd, b, 1);
 		synchronized(changeLock){
-			boolean eventsAdded = cancelImpl(pathWatchKey);
+			boolean eventsAdded = cancelImpl(pathWatchKey, true);
 			if(eventsAdded)
 				queueKey(pathWatchKey);
 			
@@ -185,7 +188,7 @@ public class BSDPathWatchService extends PathWatchService{
 		}
 	}
 
-	private boolean cancelImpl(PathWatchKey pathWatchKey){
+	private boolean cancelImpl(PathWatchKey pathWatchKey, boolean removeKey){
 		PathImpl pathImpl = (PathImpl)pathWatchKey.getPath();
 		String pathString = pathImpl.getFile().getPath();
 		Integer dirfdInteger = dirs.get(pathString);
@@ -220,7 +223,10 @@ public class BSDPathWatchService extends PathWatchService{
 		if((key.getFlags() & FLAG_FILTER_ENTRY_MODIFY) != 0)
 			--numKeysRequiringPolling;
 		
-		keys.remove(dirfdInteger);
+		if (removeKey) {
+			keys.remove(dirfdInteger);
+		}
+
 		dirs.remove(pathString);
 		
 		return eventAdded;
@@ -369,13 +375,13 @@ public class BSDPathWatchService extends PathWatchService{
 
 						// check if watch key has become invalid
 						if( (fflags & NOTE_DELETE)!=0 || (fflags & NOTE_REVOKE)!=0)
-							eventsAdded = cancelImpl(key);
+							eventsAdded = cancelImpl(key, true);
 						else{
 							try {
 								// poll key's directory
 								eventsAdded = key.poll();
 							} catch (FileNotFoundException ex) {
-								eventsAdded = cancelImpl(key);
+								eventsAdded = cancelImpl(key, true);
 							}
 						}
 						if(eventsAdded)
@@ -383,7 +389,16 @@ public class BSDPathWatchService extends PathWatchService{
 					}
 				} else if(numKeysRequiringPolling > 0){
 					// if we timed out and we have keys that need to be polled
-					for(PollingPathWatchKey key : keys.values()){
+                    
+					Set<Entry<Integer, PollingPathWatchKey>> entrySet = keys.entrySet();
+
+					Iterator<Entry<Integer, PollingPathWatchKey>> iterator = entrySet.iterator();
+                    
+					while(iterator.hasNext()) {
+						Entry<Integer, PollingPathWatchKey> entry = iterator.next();
+
+						PollingPathWatchKey key = entry.getValue();
+                        
 						// only poll keys that have the modification flag set -
 						// CREATE/DELETE are flagged in kevent
 						if((key.getFlags() & FLAG_FILTER_ENTRY_MODIFY) == 0)
@@ -392,7 +407,9 @@ public class BSDPathWatchService extends PathWatchService{
 						try {
 							eventsAdded = key.poll();
 						} catch (FileNotFoundException ex) {
-							eventsAdded = cancelImpl(key);
+							eventsAdded = cancelImpl(key, false);
+                            
+							iterator.remove();
 						}
 						if(eventsAdded)
 							queueKey(key);

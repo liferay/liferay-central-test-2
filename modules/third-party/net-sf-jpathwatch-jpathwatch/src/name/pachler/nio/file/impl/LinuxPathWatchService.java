@@ -1,3 +1,4 @@
+/* @generated */
 /*
  * Copyright 2008-2011 Uwe Pachler
  *
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -441,15 +443,20 @@ public class LinuxPathWatchService extends PathWatchService
 			throw new ClosedWatchServiceException();
 		int wd = -1;
 
-		for(Entry<Integer,LinuxPathWatchKey> entry : keys.entrySet())
-		{
+		Set<Entry<Integer,LinuxPathWatchKey>> entrySet = keys.entrySet();
+
+		Iterator<Entry<Integer,LinuxPathWatchKey>> iterator = entrySet.iterator();
+
+		while(iterator.hasNext()) {
+			Entry<Integer,LinuxPathWatchKey> entry = iterator.next();
+
 			if(entry.getValue() == pathWatchKey)
 			{
 				wd = entry.getKey().intValue();
 				if((pathWatchKey.getFlags() & FLAG_FILTER_KEY_INVALID) != 0)
 					inotifyEventHandler(wd, IN_IGNORED, 0, null);
 				pathWatchKey.invalidate();
-				keys.remove(entry.getKey());
+				iterator.remove();
 				break;
 			}
 		}
