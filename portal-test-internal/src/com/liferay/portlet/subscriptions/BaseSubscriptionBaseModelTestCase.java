@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.subscriptions;
 
-import com.liferay.portal.util.test.MailServiceTestUtil;
+import com.liferay.portal.kernel.test.util.MailServiceTestUtil;
 
 import org.junit.Assert;
 import org.junit.Test;
