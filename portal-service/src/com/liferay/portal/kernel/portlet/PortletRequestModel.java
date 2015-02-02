@@ -750,7 +750,7 @@ public class PortletRequestModel implements Serializable {
 	protected Map<String, Object> filterInvalidAttributes(
 		Map<String, Object> map) {
 
-		PredicateFilter predicateFilter =
+		PredicateFilter<Map.Entry<String, Object>> predicateFilter =
 			new PredicateFilter<Map.Entry<String, Object>>() {
 
 				@Override

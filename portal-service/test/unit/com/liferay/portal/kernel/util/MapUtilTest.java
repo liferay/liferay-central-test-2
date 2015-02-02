@@ -480,8 +480,8 @@ public class MapUtilTest {
 				});
 
 			Assert.assertEquals(2, outputMap.size());
-			Assert.assertEquals((Integer)2, outputMap.get("2"));
-			Assert.assertEquals((Integer) 4, outputMap.get("4"));
+			Assert.assertEquals(2, outputMap.get("2"));
+			Assert.assertEquals(4, outputMap.get("4"));
 		}
 
 	}
