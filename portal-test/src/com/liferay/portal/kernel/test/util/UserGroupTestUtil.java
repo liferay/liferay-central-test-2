@@ -14,11 +14,11 @@
 
 package com.liferay.portal.kernel.test.util;
 
+import com.liferay.portal.kernel.test.randomizerbumpers.NumericStringRandomizerBumper;
+import com.liferay.portal.kernel.test.randomizerbumpers.UniqueStringRandomizerBumper;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.test.randomizerbumpers.NumericStringRandomizerBumper;
-import com.liferay.portal.test.randomizerbumpers.UniqueStringRandomizerBumper;
 
 /**
  * @author Roberto Díaz

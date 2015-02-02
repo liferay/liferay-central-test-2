@@ -12,21 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.test.randomizerbumpers;
-
-import com.liferay.portal.kernel.util.Validator;
+package com.liferay.portal.kernel.test.randomizerbumpers;
 
 /**
  * @author Shuyang Zhou
  */
-public class NumericStringRandomizerBumper implements RandomizerBumper<String> {
+public interface RandomizerBumper<T> {
 
-	public static final NumericStringRandomizerBumper INSTANCE =
-		new NumericStringRandomizerBumper();
-
-	@Override
-	public boolean accept(String randomValue) {
-		return !Validator.isNumber(randomValue);
-	}
+	public boolean accept(T randomValue);
 
 }

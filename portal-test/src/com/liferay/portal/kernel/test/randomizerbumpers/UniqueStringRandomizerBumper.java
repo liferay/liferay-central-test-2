@@ -12,13 +12,29 @@
  * details.
  */
 
-package com.liferay.portal.test.randomizerbumpers;
+package com.liferay.portal.kernel.test.randomizerbumpers;
+
+import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
+
+import java.util.Set;
 
 /**
  * @author Shuyang Zhou
  */
-public interface RandomizerBumper<T> {
+public class UniqueStringRandomizerBumper implements RandomizerBumper<String> {
 
-	public boolean accept(T randomValue);
+	public static final UniqueStringRandomizerBumper INSTANCE =
+		new UniqueStringRandomizerBumper();
+
+	public static void reset() {
+		_randomValues.clear();
+	}
+
+	@Override
+	public boolean accept(String randomValue) {
+		return _randomValues.add(randomValue);
+	}
+
+	private static final Set<String> _randomValues = new ConcurrentHashSet<>();
 
 }

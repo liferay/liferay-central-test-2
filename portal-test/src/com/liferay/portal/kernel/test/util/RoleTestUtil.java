@@ -15,12 +15,12 @@
 package com.liferay.portal.kernel.test.util;
 
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.kernel.test.randomizerbumpers.NumericStringRandomizerBumper;
+import com.liferay.portal.kernel.test.randomizerbumpers.UniqueStringRandomizerBumper;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.test.randomizerbumpers.NumericStringRandomizerBumper;
-import com.liferay.portal.test.randomizerbumpers.UniqueStringRandomizerBumper;
 
 /**
  * @author Roberto Díaz

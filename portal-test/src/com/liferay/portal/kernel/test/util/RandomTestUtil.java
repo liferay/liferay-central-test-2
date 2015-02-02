@@ -15,10 +15,10 @@
 package com.liferay.portal.kernel.test.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.test.randomizerbumpers.RandomizerBumper;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PwdGenerator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.test.randomizerbumpers.RandomizerBumper;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
