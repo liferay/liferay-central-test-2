@@ -27,10 +27,10 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
-import com.liferay.portal.util.subscriptions.BaseSubscriptionBaseModelTestCase;
 import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portal.util.test.RoleTestUtil;
 import com.liferay.portal.util.test.ServiceContextTestUtil;
+import com.liferay.portlet.subscriptions.BaseSubscriptionBaseModelTestCase;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
