@@ -246,6 +246,7 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 							_bundleContext, clazz, filterString,
 							serviceReferenceMapperWrapper,
 							serviceReferenceComparatorAdapter);
+
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
 		catch (InvalidSyntaxException ise) {
@@ -297,6 +298,7 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 			ServiceReferenceComparatorAdapter<SR>
 				serviceReferenceComparatorAdapter =
 					new ServiceReferenceComparatorAdapter<>(comparator);
+
 			com.liferay.osgi.servicetrackermap.ServiceTrackerMap<K, S>
 				serviceTrackerMap =
 					com.liferay.osgi.servicetrackermap.ServiceTrackerMapFactory.
@@ -305,6 +307,7 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 							serviceReferenceMapperWrapper,
 							serviceTrackerCustomizerAdapter,
 							serviceReferenceComparatorAdapter);
+
 			return new ServiceTrackerMapWrapper<>(serviceTrackerMap);
 		}
 		catch (InvalidSyntaxException ise) {

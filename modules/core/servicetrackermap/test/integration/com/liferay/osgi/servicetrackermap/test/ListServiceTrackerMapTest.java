@@ -216,9 +216,10 @@ public class ListServiceTrackerMapTest {
 
 	@Test
 	public void testOperationBalancesOutGetServiceAndUngetService() {
-        BundleContextWrapper bundleContextWrapper = wrapContext();
+		BundleContextWrapper bundleContextWrapper = wrapContext();
 
-        ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap = createServiceTrackerMap(bundleContextWrapper);
+		ServiceTrackerMap<String, List<TrackedOne>> serviceTrackerMap =
+			createServiceTrackerMap(bundleContextWrapper);
 
 		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
 			new TrackedOne());
@@ -235,9 +236,10 @@ public class ListServiceTrackerMapTest {
 		serviceRegistration1.unregister();
 
 		Map<ServiceReference<?>, AtomicInteger> serviceReferenceCountsMap =
-            bundleContextWrapper.getServiceReferenceCountsMap();
+			bundleContextWrapper.getServiceReferenceCountsMap();
 
-		Collection<AtomicInteger> serviceReferenceCounts = serviceReferenceCountsMap.values();
+		Collection<AtomicInteger> serviceReferenceCounts =
+			serviceReferenceCountsMap.values();
 
 		Assert.assertEquals(3, serviceReferenceCounts.size());
 
@@ -249,17 +251,21 @@ public class ListServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testUnkeyedServiceReferencesBalanceRefCount() throws InvalidSyntaxException {
-        BundleContextWrapper bundleContextWrapper = wrapContext();
+	public void testUnkeyedServiceReferencesBalanceRefCount()
+		throws InvalidSyntaxException {
 
-        ServiceTrackerMap<TrackedOne, TrackedOne> serviceTrackerMap = ServiceTrackerMapFactory.singleValueMap(
-            bundleContextWrapper, TrackedOne.class, null,
-				new ServiceReferenceMapper<TrackedOne, TrackedOne>() {
+		BundleContextWrapper bundleContextWrapper = wrapContext();
+
+		ServiceTrackerMap<TrackedOne, TrackedOne> serviceTrackerMap =
+			ServiceTrackerMapFactory.singleValueMap(
+				bundleContextWrapper, TrackedOne.class, null,
+					new ServiceReferenceMapper<TrackedOne, TrackedOne>() {
 
 					@Override
-					public void map(ServiceReference<TrackedOne> serviceReference, Emitter<TrackedOne> emitter) {
-
-                    }
+					public void map(
+						ServiceReference<TrackedOne> serviceReference,
+						Emitter<TrackedOne> emitter) {
+					}
 
 				});
 
@@ -271,9 +277,10 @@ public class ListServiceTrackerMapTest {
 			new TrackedOne());
 
 		Map<ServiceReference<?>, AtomicInteger> serviceReferenceCountsMap =
-            bundleContextWrapper.getServiceReferenceCountsMap();
+			bundleContextWrapper.getServiceReferenceCountsMap();
 
-		Collection<AtomicInteger> serviceReferenceCounts = serviceReferenceCountsMap.values();
+		Collection<AtomicInteger> serviceReferenceCounts =
+			serviceReferenceCountsMap.values();
 
 		Assert.assertEquals(0, serviceReferenceCounts.size());
 
@@ -285,55 +292,65 @@ public class ListServiceTrackerMapTest {
 		serviceTrackerMap.close();
 	}
 
-	protected ServiceRegistration<TrackedOne> registerService(TrackedOne trackedOne) {
+	protected ServiceTrackerMap<String, List<TrackedOne>>
+		createServiceTrackerMap(BundleContext bundleContext) {
+
+		try {
+			_serviceTrackerMap = ServiceTrackerMapFactory.multiValueMap(
+				bundleContext, TrackedOne.class, "target");
+		}
+		catch (InvalidSyntaxException ise) {
+			throw new RuntimeException(ise);
+		}
+
+		_serviceTrackerMap.open();
+
+		return _serviceTrackerMap;
+	}
+
+	protected ServiceRegistration<TrackedOne> registerService(
+		TrackedOne trackedOne) {
 
 		return registerService(trackedOne, "aTarget");
 	}
 
-	protected ServiceRegistration<TrackedOne> registerService(TrackedOne trackedOne, int ranking) {
+	protected ServiceRegistration<TrackedOne> registerService(
+		TrackedOne trackedOne, int ranking) {
 
 		return registerService(trackedOne, ranking, "aTarget");
 	}
 
-	protected ServiceRegistration<TrackedOne> registerService(TrackedOne trackedOne, int ranking, String target) {
+	protected ServiceRegistration<TrackedOne> registerService(
+		TrackedOne trackedOne, int ranking, String target) {
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put("service.ranking", ranking);
 		properties.put("target", target);
 
-		return _bundleContext.registerService(TrackedOne.class, trackedOne, properties);
+		return _bundleContext.registerService(
+			TrackedOne.class, trackedOne, properties);
 	}
 
-	protected ServiceRegistration<TrackedOne> registerService(TrackedOne trackedOne, String target) {
+	protected ServiceRegistration<TrackedOne> registerService(
+		TrackedOne trackedOne, String target) {
+
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put("target", target);
 
-		return _bundleContext.registerService(TrackedOne.class, trackedOne, properties);
+		return _bundleContext.registerService(
+			TrackedOne.class, trackedOne, properties);
+	}
+
+	protected BundleContextWrapper wrapContext() {
+		return new BundleContextWrapper(_bundleContext);
 	}
 
 	@ArquillianResource
 	private Bundle _bundle;
 
-	protected ServiceTrackerMap<String, List<TrackedOne>> createServiceTrackerMap(BundleContext bundleContext) {
-        try {
-            _serviceTrackerMap = ServiceTrackerMapFactory.multiValueMap(bundleContext, TrackedOne.class, "target");
-        }
-        catch (InvalidSyntaxException e) {
-            throw new RuntimeException(e);
-        }
-
-        _serviceTrackerMap.open();
-
-		return _serviceTrackerMap;
-	}
-
 	private BundleContext _bundleContext;
 	private ServiceTrackerMap<String, List<TrackedOne>> _serviceTrackerMap;
-
-    protected BundleContextWrapper wrapContext() {
-        return new BundleContextWrapper(_bundleContext);
-    }
 
 }

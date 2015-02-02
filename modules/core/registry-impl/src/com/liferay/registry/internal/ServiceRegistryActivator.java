@@ -52,13 +52,12 @@ public class ServiceRegistryActivator implements BundleActivator {
 		_registryRegistration.unregister();
 		_serviceTrackerMapFactoryRegistration.unregister();
 
-		ServiceTrackerMapFactoryUtil.setServiceTrackerMapFactory(null);
-
 		RegistryUtil.setRegistry(null);
+
+		ServiceTrackerMapFactoryUtil.setServiceTrackerMapFactory(null);
 	}
 
 	private ServiceRegistration<Registry> _registryRegistration;
-
 	private ServiceRegistration<ServiceTrackerMapFactory>
 		_serviceTrackerMapFactoryRegistration;
 

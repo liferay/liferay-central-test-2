@@ -39,173 +39,194 @@ import org.osgi.framework.ServiceRegistration;
  */
 public class BundleContextWrapper implements BundleContext {
 
-    private BundleContext wrapped;
+	public BundleContextWrapper(BundleContext bundleContext) {
+		if (bundleContext == null)throw new IllegalArgumentException();
 
-    public BundleContextWrapper(BundleContext bundleContext) {
-        if (bundleContext == null)
-            throw new IllegalArgumentException();
+		this._bundleContext = bundleContext;
+	}
 
-        this.wrapped = bundleContext;
-    }
+	@Override
+	public void addBundleListener(BundleListener bundleListener) {
+		_bundleContext.addBundleListener(bundleListener);
+	}
 
-    @Override
-    public String getProperty(String s) {
-        return wrapped.getProperty(s);
-    }
+	@Override
+	public void addFrameworkListener(FrameworkListener frameworkListener) {
+		_bundleContext.addFrameworkListener(frameworkListener);
+	}
 
-    @Override
-    public Bundle getBundle() {
-        return wrapped.getBundle();
-    }
+	@Override
+	public void addServiceListener(ServiceListener serviceListener) {
+		_bundleContext.addServiceListener(serviceListener);
+	}
 
-    @Override
-    public Bundle installBundle(String s, InputStream inputStream) throws BundleException {
-        return wrapped.installBundle(s, inputStream);
-    }
+	@Override
+	public void addServiceListener(
+			ServiceListener serviceListener, String filter)
+		throws InvalidSyntaxException {
 
-    @Override
-    public Bundle installBundle(String s) throws BundleException {
-        return wrapped.installBundle(s);
-    }
+		_bundleContext.addServiceListener(serviceListener, filter);
+	}
 
-    @Override
-    public Bundle getBundle(long l) {
-        return wrapped.getBundle(l);
-    }
+	@Override
+	public Filter createFilter(String s) throws InvalidSyntaxException {
+		return _bundleContext.createFilter(s);
+	}
 
-    @Override
-    public Bundle[] getBundles() {
-        return wrapped.getBundles();
-    }
+	@Override
+	public ServiceReference<?>[] getAllServiceReferences(
+			String clazz, String filter)
+		throws InvalidSyntaxException {
 
-    @Override
-    public void addServiceListener(ServiceListener serviceListener, String s) throws InvalidSyntaxException {
-        wrapped.addServiceListener(serviceListener, s);
-    }
+		return _bundleContext.getAllServiceReferences(clazz, filter);
+	}
 
-    @Override
-    public void addServiceListener(ServiceListener serviceListener) {
-        wrapped.addServiceListener(serviceListener);
-    }
+	@Override
+	public Bundle getBundle() {
+		return _bundleContext.getBundle();
+	}
 
-    @Override
-    public void removeServiceListener(ServiceListener serviceListener) {
-        wrapped.removeServiceListener(serviceListener);
-    }
+	@Override
+	public Bundle getBundle(long id) {
+		return _bundleContext.getBundle(id);
+	}
 
-    @Override
-    public void addBundleListener(BundleListener bundleListener) {
-        wrapped.addBundleListener(bundleListener);
-    }
+	@Override
+	public Bundle getBundle(String location) {
+		return _bundleContext.getBundle(location);
+	}
 
-    @Override
-    public void removeBundleListener(BundleListener bundleListener) {
-        wrapped.removeBundleListener(bundleListener);
-    }
+	@Override
+	public Bundle[] getBundles() {
+		return _bundleContext.getBundles();
+	}
 
-    @Override
-    public void addFrameworkListener(FrameworkListener frameworkListener) {
-        wrapped.addFrameworkListener(frameworkListener);
-    }
+	@Override
+	public File getDataFile(String fileName) {
+		return _bundleContext.getDataFile(fileName);
+	}
 
-    @Override
-    public void removeFrameworkListener(FrameworkListener frameworkListener) {
-        wrapped.removeFrameworkListener(frameworkListener);
-    }
+	@Override
+	public String getProperty(String key) {
+		return _bundleContext.getProperty(key);
+	}
 
-    @Override
-    public ServiceRegistration<?> registerService(String[] strings, Object o, Dictionary<String, ?> stringDictionary) {
-        return wrapped.registerService(strings, o, stringDictionary);
-    }
+	@Override
+	public <S> S getService(ServiceReference<S> serviceReference) {
+		AtomicInteger serviceReferenceCount = _serviceReferenceCountsMap.get(
+			serviceReference);
 
-    @Override
-    public ServiceRegistration<?> registerService(String s, Object o, Dictionary<String, ?> stringDictionary) {
-        return wrapped.registerService(s, o, stringDictionary);
-    }
+		if (serviceReferenceCount == null) {
+			serviceReferenceCount = new AtomicInteger(0);
 
-    @Override
-    public <S> ServiceRegistration<S> registerService(Class<S> sClass, S s, Dictionary<String, ?> stringDictionary) {
-        return wrapped.registerService(sClass, s, stringDictionary);
-    }
+			AtomicInteger previousServiceReferenceCount =
+				_serviceReferenceCountsMap.putIfAbsent(
+					serviceReference, serviceReferenceCount);
 
-    @Override
-    public ServiceReference<?>[] getServiceReferences(String s, String s2) throws InvalidSyntaxException {
-        return wrapped.getServiceReferences(s, s2);
-    }
+			if (previousServiceReferenceCount != null) {
+				serviceReferenceCount = previousServiceReferenceCount;
+			}
+		}
 
-    @Override
-    public ServiceReference<?>[] getAllServiceReferences(String s, String s2) throws InvalidSyntaxException {
-        return wrapped.getAllServiceReferences(s, s2);
-    }
+		serviceReferenceCount.incrementAndGet();
 
-    @Override
-    public ServiceReference<?> getServiceReference(String s) {
-        return wrapped.getServiceReference(s);
-    }
+		return _bundleContext.getService(serviceReference);
+	}
 
-    @Override
-    public <S> ServiceReference<S> getServiceReference(Class<S> sClass) {
-        return wrapped.getServiceReference(sClass);
-    }
+	@Override
+	public <S> ServiceReference<S> getServiceReference(Class<S> clazz) {
+		return _bundleContext.getServiceReference(clazz);
+	}
 
-    @Override
-    public <S> Collection<ServiceReference<S>> getServiceReferences(Class<S> sClass, String s)
-        throws InvalidSyntaxException {
+	@Override
+	public ServiceReference<?> getServiceReference(String clazz) {
+		return _bundleContext.getServiceReference(clazz);
+	}
 
-        return wrapped.getServiceReferences(sClass, s);
-    }
+	public Map<ServiceReference<?>, AtomicInteger>
+		getServiceReferenceCountsMap() {
 
-    @Override
-    public <S> S getService(ServiceReference<S> serviceReference) {
-        AtomicInteger serviceReferenceCount = _serviceReferenceCountsMap.get(serviceReference);
+			return _serviceReferenceCountsMap;
+	}
 
-        if (serviceReferenceCount == null) {
-            serviceReferenceCount = new AtomicInteger(0);
+	@Override
+	public <S> Collection<ServiceReference<S>> getServiceReferences(
+			Class<S> clazz, String filter)
+		throws InvalidSyntaxException {
 
-            AtomicInteger previousServiceReferenceCount = _serviceReferenceCountsMap.putIfAbsent(
-                serviceReference, serviceReferenceCount);
+		return _bundleContext.getServiceReferences(clazz, filter);
+	}
 
-            if (previousServiceReferenceCount != null) {
-                serviceReferenceCount = previousServiceReferenceCount;
-            }
-        }
+	@Override
+	public ServiceReference<?>[] getServiceReferences(
+			String clazz, String filter)
+		throws InvalidSyntaxException {
 
-        serviceReferenceCount.incrementAndGet();
+		return _bundleContext.getServiceReferences(clazz, filter);
+	}
 
-        return wrapped.getService(serviceReference);
-    }
+	@Override
+	public Bundle installBundle(String location) throws BundleException {
+		return _bundleContext.installBundle(location);
+	}
 
-    @Override
-    public boolean ungetService(ServiceReference<?> serviceReference) {
-        AtomicInteger serviceReferenceCount = _serviceReferenceCountsMap.get(serviceReference);
+	@Override
+	public Bundle installBundle(String location, InputStream inputStream)
+		throws BundleException {
 
-        if (serviceReferenceCount != null) {
-            serviceReferenceCount.decrementAndGet();
-        }
+		return _bundleContext.installBundle(location, inputStream);
+	}
 
-        return wrapped.ungetService(serviceReference);
-    }
+	@Override
+	public <S> ServiceRegistration<S> registerService(
+		Class<S> clazz, S service, Dictionary<String, ?> properties) {
 
-    @Override
-    public File getDataFile(String s) {
-        return wrapped.getDataFile(s);
-    }
+		return _bundleContext.registerService(clazz, service, properties);
+	}
 
-    @Override
-    public Filter createFilter(String s) throws InvalidSyntaxException {
-        return wrapped.createFilter(s);
-    }
+	@Override
+	public ServiceRegistration<?> registerService(
+		String clazz, Object service, Dictionary<String, ?> properties) {
 
-    @Override
-    public Bundle getBundle(String s) {
-        return wrapped.getBundle(s);
-    }
+		return _bundleContext.registerService(clazz, service, properties);
+	}
 
-    private ConcurrentHashMap<ServiceReference<?>, AtomicInteger> _serviceReferenceCountsMap =
-        new ConcurrentHashMap<ServiceReference<?>, AtomicInteger>();
+	@Override
+	public ServiceRegistration<?> registerService(
+		String[] classes, Object service, Dictionary<String, ?> properties) {
 
-    public Map<ServiceReference<?>, AtomicInteger> getServiceReferenceCountsMap() {
+		return _bundleContext.registerService(classes, service, properties);
+	}
 
-        return _serviceReferenceCountsMap;
-    }
+	@Override
+	public void removeBundleListener(BundleListener bundleListener) {
+		_bundleContext.removeBundleListener(bundleListener);
+	}
+
+	@Override
+	public void removeFrameworkListener(FrameworkListener frameworkListener) {
+		_bundleContext.removeFrameworkListener(frameworkListener);
+	}
+
+	@Override
+	public void removeServiceListener(ServiceListener serviceListener) {
+		_bundleContext.removeServiceListener(serviceListener);
+	}
+
+	@Override
+	public boolean ungetService(ServiceReference<?> serviceReference) {
+		AtomicInteger serviceReferenceCount = _serviceReferenceCountsMap.get(
+			serviceReference);
+
+		if (serviceReferenceCount != null) {
+			serviceReferenceCount.decrementAndGet();
+		}
+
+		return _bundleContext.ungetService(serviceReference);
+	}
+
+	private final BundleContext _bundleContext;
+	private final ConcurrentHashMap<ServiceReference<?>, AtomicInteger>
+		_serviceReferenceCountsMap = new ConcurrentHashMap<>();
+
 }
