@@ -146,9 +146,9 @@ public class SoyTemplate extends AbstractTemplate {
 
 			SoyFileSet soyFileSet = getSoyFileSet();
 
-			SoyTofu tofu = soyFileSet.compileToTofu();
+			SoyTofu soyTofu = soyFileSet.compileToTofu();
 
-			Renderer renderer = tofu.newRenderer(namespace);
+			Renderer renderer = soyTofu.newRenderer(namespace);
 
 			renderer.setData(getSoyContext());
 
