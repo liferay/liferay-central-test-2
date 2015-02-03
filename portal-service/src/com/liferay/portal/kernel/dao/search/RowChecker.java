@@ -71,7 +71,7 @@ public class RowChecker {
 
 	public String getAllRowsCheckBox(HttpServletRequest request) {
 		return getAllRowsCheckbox(
-			getLocale(request), _allRowIds, StringUtil.quote(_rowIds));
+			request, _allRowIds, StringUtil.quote(_rowIds));
 	}
 
 	public String getAllRowsId() {
@@ -161,7 +161,7 @@ public class RowChecker {
 	}
 
 	protected String getAllRowsCheckbox(
-		Locale locale, String name, String checkBoxRowIds) {
+		HttpServletRequest request, String name, String checkBoxRowIds) {
 
 		if (Validator.isNull(name)) {
 			return StringPool.BLANK;
@@ -172,12 +172,7 @@ public class RowChecker {
 		sb.append("<input name=\"");
 		sb.append(name);
 		sb.append("\" title=\"");
-
-		if (locale == null) {
-			locale = LocaleUtil.getDefault();
-		}
-
-		sb.append(LanguageUtil.get(locale, "select-all"));
+		sb.append(LanguageUtil.get(getLocale(request), "select-all"));
 		sb.append("\" type=\"checkbox\" ");
 		sb.append("onClick=\"Liferay.Util.checkAll(");
 		sb.append("AUI().one(this).ancestor('");
@@ -190,14 +185,23 @@ public class RowChecker {
 	}
 
 	protected Locale getLocale(HttpServletRequest request) {
+		Locale locale = null;
+
 		if (request != null) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			return themeDisplay.getLocale();
+			locale = themeDisplay.getLocale();
+		}
+		else {
+			locale = LocaleThreadLocal.getThemeDisplayLocale();
 		}
 
-		return LocaleThreadLocal.getThemeDisplayLocale();
+		if (locale == null) {
+			locale = LocaleUtil.getDefault();
+		}
+
+		return locale;
 	}
 
 	protected String getNamespacedValue(String value) {
