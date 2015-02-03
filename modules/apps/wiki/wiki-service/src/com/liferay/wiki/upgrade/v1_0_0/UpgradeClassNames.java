@@ -33,7 +33,8 @@ public class UpgradeClassNames extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		List<ClassNameDependency> classNameDependencies =
 			Collections.singletonList(
-				new ResourcePermissionClassNameDependency());
+				(ClassNameDependency)
+					(new ResourcePermissionClassNameDependency()));
 
 		ClassNameDependencyUpgrader classNameDependencyUpgrader =
 			new ClassNameDependencyUpgrader(
@@ -43,14 +44,14 @@ public class UpgradeClassNames extends UpgradeProcess {
 		classNameDependencyUpgrader.upgrade();
 
 		classNameDependencyUpgrader = new ClassNameDependencyUpgrader(
-			"com.liferay.portlet.wiki.model.WikiNode",
-			WikiNode.class.getName(), classNameDependencies);
+			"com.liferay.portlet.wiki.model.WikiNode", WikiNode.class.getName(),
+			classNameDependencies);
 
 		classNameDependencyUpgrader.upgrade();
 
 		classNameDependencyUpgrader = new ClassNameDependencyUpgrader(
-			"com.liferay.portlet.wiki.model.WikiPage",
-			WikiPage.class.getName(), classNameDependencies);
+			"com.liferay.portlet.wiki.model.WikiPage", WikiPage.class.getName(),
+			classNameDependencies);
 
 		classNameDependencyUpgrader.upgrade();
 	}

@@ -34,7 +34,8 @@ public class UpgradeClassNames extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		List<ClassNameDependency> classNameDependencies =
 			Collections.singletonList(
-				new ResourcePermissionClassNameDependency());
+				(ClassNameDependency)
+					(new ResourcePermissionClassNameDependency()));
 
 		ClassNameDependencyUpgrader classNameDependencyUpgrader =
 			new ClassNameDependencyUpgrader(

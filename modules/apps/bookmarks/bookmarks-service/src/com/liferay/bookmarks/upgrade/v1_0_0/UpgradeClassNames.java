@@ -32,7 +32,8 @@ public class UpgradeClassNames extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		List<ClassNameDependency> classNameDependencies =
-			Collections.singletonList(new ResourceBlockClassNameDependency());
+			Collections.singletonList(
+				(ClassNameDependency)(new ResourceBlockClassNameDependency()));
 
 		ClassNameDependencyUpgrader classNameDependencyUpgrader =
 			new ClassNameDependencyUpgrader(
