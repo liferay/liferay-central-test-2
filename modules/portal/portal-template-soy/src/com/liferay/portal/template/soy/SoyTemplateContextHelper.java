@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.soy;
+package com.liferay.portal.template.soy;
 
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.template.TemplateContextHelper;

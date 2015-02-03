@@ -12,11 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.soy;
+package com.liferay.portal.template.soy;
 
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.URLTemplateResource;
+import com.liferay.portal.template.soy.SoyManager;
+import com.liferay.portal.template.soy.SoyTemplateContextHelper;
 
 import java.net.URL;
 
@@ -67,7 +69,7 @@ public class SoyManagerTestHelper {
 	}
 
 	private static final String _TPL_PATH =
-		"com/liferay/portal/soy/dependencies/";
+		"com/liferay/portal/template/soy/dependencies/";
 
 	private SoyManager _soyManager;
 

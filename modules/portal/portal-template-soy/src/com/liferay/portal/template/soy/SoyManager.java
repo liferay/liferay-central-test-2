@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.soy;
+package com.liferay.portal.template.soy;
 
 import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.SoyFileSet.Builder;
