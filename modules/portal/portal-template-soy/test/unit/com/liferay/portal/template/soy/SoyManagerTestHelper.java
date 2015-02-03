@@ -17,8 +17,6 @@ package com.liferay.portal.template.soy;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.URLTemplateResource;
-import com.liferay.portal.template.soy.SoyManager;
-import com.liferay.portal.template.soy.SoyTemplateContextHelper;
 
 import java.net.URL;
 

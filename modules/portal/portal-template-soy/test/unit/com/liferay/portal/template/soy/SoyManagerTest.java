@@ -57,9 +57,8 @@ public class SoyManagerTest {
 	public void testProcessTemplateWithContext() throws Exception {
 		Template template = _soyManagerTestHelper.getTemplate("context.soy");
 
-		template.put("namespace", "soy.test.withContext");
-
 		template.put("name", "Bruno Basto");
+		template.put("namespace", "soy.test.withContext");
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
