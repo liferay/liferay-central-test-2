@@ -26,16 +26,16 @@ public class ClassNameDependencyUpgrader {
 
 	public ClassNameDependencyUpgrader(
 		String oldValue, String newValue,
-		List<ClassNameDependency> dependencies) {
+		List<ClassNameDependency> classNameDependencies) {
 
 		_oldValue = oldValue;
 		_newValue = newValue;
 
-		if (dependencies == null) {
+		if (classNameDependencies == null) {
 			_classNameDependencies = new ArrayList<>();
 		}
 		else {
-			_classNameDependencies = dependencies;
+			_classNameDependencies = classNameDependencies;
 		}
 	}
 
@@ -44,8 +44,8 @@ public class ClassNameDependencyUpgrader {
 
 		table.updateColumnValue("value", _oldValue, _newValue);
 
-		for (ClassNameDependency dependency : _classNameDependencies) {
-			dependency.update(_oldValue, _newValue);
+		for (ClassNameDependency classNameDependency : _classNameDependencies) {
+			classNameDependency.update(_oldValue, _newValue);
 		}
 	}
 

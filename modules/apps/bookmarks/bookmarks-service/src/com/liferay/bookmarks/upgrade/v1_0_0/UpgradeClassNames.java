@@ -19,7 +19,7 @@ import com.liferay.bookmarks.model.BookmarksFolder;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.classname.ClassNameDependency;
 import com.liferay.portal.upgrade.util.classname.ClassNameDependencyUpgrader;
-import com.liferay.portal.upgrade.util.classname.dependency.ResourceBlockDependency;
+import com.liferay.portal.upgrade.util.classname.dependency.ResourceBlockClassNameDependency;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,34 +29,27 @@ import java.util.List;
  */
 public class UpgradeClassNames extends UpgradeProcess {
 
-	protected List<ClassNameDependency> buildDependencies() {
-		ClassNameDependency classNameDependency = new ResourceBlockDependency();
-
-		return Collections.singletonList(classNameDependency);
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
-		List<ClassNameDependency> classNameDependencies = buildDependencies();
+		List<ClassNameDependency> classNameDependencies =
+			Collections.singletonList(new ResourceBlockClassNameDependency());
 
 		ClassNameDependencyUpgrader classNameDependencyUpgrader =
 			new ClassNameDependencyUpgrader(
-				"com.liferay.portlet.bookmarks.model.BookmarksEntry",
-				BookmarksEntry.class.getName(), classNameDependencies);
-
-		classNameDependencyUpgrader.upgrade();
-
-		classNameDependencyUpgrader =
-			new ClassNameDependencyUpgrader(
-				"com.liferay.portlet.bookmarks.model.BookmarksFolder",
-				BookmarksFolder.class.getName(), classNameDependencies );
-
-		classNameDependencyUpgrader.upgrade();
-
-		classNameDependencyUpgrader =
-			new ClassNameDependencyUpgrader(
 				"com.liferay.portlet.bookmarks", "com.liferay.bookmarks",
 				classNameDependencies);
+
+		classNameDependencyUpgrader.upgrade();
+
+		classNameDependencyUpgrader = new ClassNameDependencyUpgrader(
+			"com.liferay.portlet.bookmarks.model.BookmarksEntry",
+			BookmarksEntry.class.getName(), classNameDependencies);
+
+		classNameDependencyUpgrader.upgrade();
+
+		classNameDependencyUpgrader = new ClassNameDependencyUpgrader(
+			"com.liferay.portlet.bookmarks.model.BookmarksFolder",
+			BookmarksFolder.class.getName(), classNameDependencies );
 
 		classNameDependencyUpgrader.upgrade();
 	}

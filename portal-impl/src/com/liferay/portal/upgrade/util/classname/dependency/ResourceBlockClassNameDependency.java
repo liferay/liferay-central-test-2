@@ -20,12 +20,12 @@ import com.liferay.portal.upgrade.util.classname.ClassNameDependency;
 /**
  * @author Miguel Pastor
  */
-public class ResourcePermissionDependency implements ClassNameDependency {
+public class ResourceBlockClassNameDependency implements ClassNameDependency {
 
 	@Override
 	public void update(String oldValue, String newValue) {
 		updateResourceAction(oldValue, newValue);
-		updateResourcePermission(oldValue, newValue);
+		updateResourceBlock(oldValue, newValue);
 	}
 
 	protected void updateResourceAction(String oldName, String newName) {
@@ -34,8 +34,8 @@ public class ResourcePermissionDependency implements ClassNameDependency {
 		table.updateColumnValue("name", oldName, newName);
 	}
 
-	protected void updateResourcePermission(String oldName, String newName) {
-		Table table = new Table("ResourcePermission");
+	protected void updateResourceBlock(String oldName, String newName) {
+		Table table = new Table("ResourceBlock");
 
 		table.updateColumnValue("name", oldName, newName);
 	}

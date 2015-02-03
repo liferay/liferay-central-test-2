@@ -17,7 +17,7 @@ package com.liferay.wiki.upgrade.v1_0_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.classname.ClassNameDependency;
 import com.liferay.portal.upgrade.util.classname.ClassNameDependencyUpgrader;
-import com.liferay.portal.upgrade.util.classname.dependency.ResourcePermissionDependency;
+import com.liferay.portal.upgrade.util.classname.dependency.ResourcePermissionClassNameDependency;
 import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.model.WikiPage;
 
@@ -29,35 +29,28 @@ import java.util.List;
  */
 public class UpgradeClassNames extends UpgradeProcess {
 
-	protected List<ClassNameDependency> buildDependencies() {
-		ClassNameDependency classNameDependency =
-			new ResourcePermissionDependency();
-
-		return Collections.singletonList(classNameDependency);
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
-		List<ClassNameDependency> classNameDependencies = buildDependencies();
+		List<ClassNameDependency> classNameDependencies =
+			Collections.singletonList(
+				new ResourcePermissionClassNameDependency());
 
 		ClassNameDependencyUpgrader classNameDependencyUpgrader =
 			new ClassNameDependencyUpgrader(
-				"com.liferay.portlet.wiki.model.WikiNode",
-				WikiNode.class.getName(), classNameDependencies);
-
-		classNameDependencyUpgrader.upgrade();
-
-		classNameDependencyUpgrader =
-			new ClassNameDependencyUpgrader(
-				"com.liferay.portlet.wiki.model.WikiPage",
-				WikiPage.class.getName(), classNameDependencies);
-
-		classNameDependencyUpgrader.upgrade();
-
-		classNameDependencyUpgrader =
-			new ClassNameDependencyUpgrader(
 				"com.liferay.portlet.wiki", "com.liferay.wiki",
 				classNameDependencies);
+
+		classNameDependencyUpgrader.upgrade();
+
+		classNameDependencyUpgrader = new ClassNameDependencyUpgrader(
+			"com.liferay.portlet.wiki.model.WikiNode",
+			WikiNode.class.getName(), classNameDependencies);
+
+		classNameDependencyUpgrader.upgrade();
+
+		classNameDependencyUpgrader = new ClassNameDependencyUpgrader(
+			"com.liferay.portlet.wiki.model.WikiPage",
+			WikiPage.class.getName(), classNameDependencies);
 
 		classNameDependencyUpgrader.upgrade();
 	}
