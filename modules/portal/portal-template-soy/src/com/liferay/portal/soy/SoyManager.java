@@ -20,7 +20,6 @@ import com.google.template.soy.SoyFileSet.Builder;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
-import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManager;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.template.BaseTemplateManager;
@@ -57,7 +56,7 @@ public class SoyManager extends BaseTemplateManager {
 	}
 
 	@Override
-	public void init() throws TemplateException {
+	public void init() {
 		if (_builder != null) {
 			return;
 		}
