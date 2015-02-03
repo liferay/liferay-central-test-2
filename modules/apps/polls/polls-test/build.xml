@@ -5,8 +5,4 @@
 	<property name="import.shared" value="polls-service" />
 
 	<import file="../../../../tools/sdk/build-common-osgi-plugin.xml" />
-
-	<target name="compile">
-		<antcall target="compile-test" />
-	</target>
 </project>
