@@ -84,7 +84,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -136,7 +135,6 @@ import com.liferay.portal.security.pwd.RegExpToolkit;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PortalUtil;
@@ -159,6 +157,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -369,51 +368,53 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		long[] roleIds = ArrayUtil.toArray(
-			roleIdSet.toArray(new Long[roleIdSet.size()]));
+		long[] roleIds = ArrayUtil.toLongArray(roleIdSet);
 
 		roleIds = UsersAdminUtil.addRequiredRoles(user, roleIds);
 
-		Set<Long> regularRoleIdSet = new HashSet<Long>();
+		Set<Long> regularRoleIdSet = new HashSet<>();
 
-		Set<Long> groupRoleIdSet = new HashSet<Long>();
+		Set<Long> groupRoleIdSet = new HashSet<>();
 
 		for (long roleId : roleIds) {
 			Role role = roleLocalService.getRole(roleId);
 
 			if (role.getType() == RoleConstants.TYPE_REGULAR) {
 				regularRoleIdSet.add(roleId);
-			} else {
+			}
+			else {
 				groupRoleIdSet.add(roleId);
 			}
 		}
 
-		long[] regularRoleIds = ArrayUtil.toArray(
-			regularRoleIdSet.toArray(new Long[regularRoleIdSet.size()]));
+		long[] regularRoleIds = ArrayUtil.toLongArray(regularRoleIdSet);
 
 		userPersistence.addRoles(userId, regularRoleIds);
 
 		List<UserGroupRole> previousUserGroupRoles =
 			userGroupRolePersistence.findByUserId(userId);
 
-		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
+		Set<UserGroupRole> userGroupRoles = new LinkedHashSet<>();
 
 		long[] groupIds = user.getGroupIds();
 
 		for (long groupRoleId : groupRoleIdSet) {
 			for (long groupId : groupIds) {
-				UserGroupRolePK userGroupRolePK = new UserGroupRolePK(userId, groupId, groupRoleId);
+				UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
+					userId, groupId, groupRoleId);
 
-				UserGroupRole userGroupRole =
-						UserGroupRoleLocalServiceUtil.createUserGroupRole(
-							userGroupRolePK);
+				UserGroupRole userGroupRole = userGroupRolePersistence.create(
+					userGroupRolePK);
 
 				userGroupRoles.add(userGroupRole);
 			}
 		}
 
+		List<UserGroupRole> userGroupRolesList = new ArrayList<>(
+			userGroupRoles);
+
 		updateUserGroupRoles(
-			user, groupIds, null, userGroupRoles, previousUserGroupRoles);
+			user, groupIds, null, userGroupRolesList, previousUserGroupRoles);
 	}
 
 	/**
