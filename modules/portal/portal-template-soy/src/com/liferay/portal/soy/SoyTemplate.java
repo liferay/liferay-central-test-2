@@ -101,31 +101,23 @@ public class SoyTemplate extends AbstractTemplate {
 	protected void handleException(Exception exception, Writer writer)
 		throws TemplateException {
 
-		if ((exception instanceof Exception)) {
-			put("exception", exception.getMessage());
+		put("exception", exception.getMessage());
 
-			if (templateResource instanceof StringTemplateResource) {
-				StringTemplateResource stringTemplateResource =
-					(StringTemplateResource)templateResource;
+		if (templateResource instanceof StringTemplateResource) {
+			StringTemplateResource stringTemplateResource =
+				(StringTemplateResource)templateResource;
 
-				put("script", stringTemplateResource.getContent());
-			}
-
-			try {
-				processTemplate(errorTemplateResource, writer);
-			}
-			catch (Exception e) {
-				throw new TemplateException(
-					"Unable to process Soy template " +
-						errorTemplateResource.getTemplateId(),
-					e);
-			}
+			put("script", stringTemplateResource.getContent());
 		}
-		else {
+
+		try {
+			processTemplate(errorTemplateResource, writer);
+		}
+		catch (Exception e) {
 			throw new TemplateException(
 				"Unable to process Soy template " +
-					templateResource.getTemplateId(),
-				exception);
+					errorTemplateResource.getTemplateId(),
+				e);
 		}
 	}
 
