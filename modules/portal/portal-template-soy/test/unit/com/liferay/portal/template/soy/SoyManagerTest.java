@@ -48,9 +48,7 @@ public class SoyManagerTest {
 
 		template.processTemplate(unsyncStringWriter);
 
-		String result = unsyncStringWriter.toString();
-
-		Assert.assertEquals("Hello World!", result);
+		Assert.assertEquals("Hello World!", unsyncStringWriter.toString());
 	}
 
 	@Test
@@ -66,7 +64,8 @@ public class SoyManagerTest {
 
 		String result = unsyncStringWriter.toString();
 
-		Assert.assertEquals("Hello! My name is Bruno Basto.", result);
+		Assert.assertEquals(
+			"Hello! My name is Bruno Basto.", unsyncStringWriter.toString());
 	}
 
 	@Test(expected = TemplateException.class)
