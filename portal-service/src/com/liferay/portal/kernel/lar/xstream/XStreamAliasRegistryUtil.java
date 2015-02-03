@@ -40,9 +40,9 @@ public class XStreamAliasRegistryUtil {
 	public static ClassLoader getAliasesClassLoader(
 		ClassLoader masterClassLoader) {
 
-		Map<Class<?>, String> aliases = _instance._getAliases();
-
 		Set<ClassLoader> classLoaders = new HashSet<>();
+
+		Map<Class<?>, String> aliases = _instance._getAliases();
 
 		for (Class<?> clazz : aliases.keySet()) {
 			classLoaders.add(clazz.getClassLoader());
