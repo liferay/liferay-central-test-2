@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.journal.util.test;
+package com.liferay.portlet.test.journal.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Hits;
