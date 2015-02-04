@@ -368,37 +368,33 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
+		Set<Long> groupRoleIdsSet = new HashSet<>();
+		Set<Long> regularRoleIdsSet = new HashSet<>();
+
 		long[] roleIds = ArrayUtil.toLongArray(roleIdSet);
 
 		roleIds = UsersAdminUtil.addRequiredRoles(user, roleIds);
-
-		Set<Long> regularRoleIdSet = new HashSet<>();
-
-		Set<Long> groupRoleIdSet = new HashSet<>();
 
 		for (long roleId : roleIds) {
 			Role role = roleLocalService.getRole(roleId);
 
 			if (role.getType() == RoleConstants.TYPE_REGULAR) {
-				regularRoleIdSet.add(roleId);
+				regularRoleIdsSet.add(roleId);
 			}
 			else {
-				groupRoleIdSet.add(roleId);
+				groupRoleIdsSet.add(roleId);
 			}
 		}
 
-		long[] regularRoleIds = ArrayUtil.toLongArray(regularRoleIdSet);
+		long[] regularRoleIds = ArrayUtil.toLongArray(regularRoleIdsSet);
 
 		userPersistence.addRoles(userId, regularRoleIds);
 
-		List<UserGroupRole> previousUserGroupRoles =
-			userGroupRolePersistence.findByUserId(userId);
-
-		Set<UserGroupRole> userGroupRoles = new LinkedHashSet<>();
+		Set<UserGroupRole> userGroupRolesSet = new LinkedHashSet<>();
 
 		long[] groupIds = user.getGroupIds();
 
-		for (long groupRoleId : groupRoleIdSet) {
+		for (long groupRoleId : groupRoleIdsSet) {
 			for (long groupId : groupIds) {
 				UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
 					userId, groupId, groupRoleId);
@@ -406,15 +402,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				UserGroupRole userGroupRole = userGroupRolePersistence.create(
 					userGroupRolePK);
 
-				userGroupRoles.add(userGroupRole);
+				userGroupRolesSet.add(userGroupRole);
 			}
 		}
 
-		List<UserGroupRole> userGroupRolesList = new ArrayList<>(
-			userGroupRoles);
+		List<UserGroupRole> previousUserGroupRoles =
+			userGroupRolePersistence.findByUserId(userId);
 
 		updateUserGroupRoles(
-			user, groupIds, null, userGroupRolesList, previousUserGroupRoles);
+			user, groupIds, null, new ArrayList<>(userGroupRolesSet),
+			previousUserGroupRoles);
 	}
 
 	/**
