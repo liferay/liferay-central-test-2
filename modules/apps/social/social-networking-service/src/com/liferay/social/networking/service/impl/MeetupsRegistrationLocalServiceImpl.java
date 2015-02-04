@@ -28,6 +28,7 @@ import java.util.List;
 public class MeetupsRegistrationLocalServiceImpl
 	extends MeetupsRegistrationLocalServiceBaseImpl {
 
+	@Override
 	public MeetupsRegistration getMeetupsRegistration(
 			long userId, long meetupsEntryId)
 		throws PortalException {
@@ -36,6 +37,7 @@ public class MeetupsRegistrationLocalServiceImpl
 			userId, meetupsEntryId);
 	}
 
+	@Override
 	public List<MeetupsRegistration> getMeetupsRegistrations(
 		long meetupsEntryId, int status, int start, int end) {
 
@@ -43,11 +45,13 @@ public class MeetupsRegistrationLocalServiceImpl
 			meetupsEntryId, status, start, end);
 	}
 
+	@Override
 	public int getMeetupsRegistrationsCount(long meetupsEntryId, int status) {
 		return meetupsRegistrationPersistence.countByME_S(
 			meetupsEntryId, status);
 	}
 
+	@Override
 	public MeetupsRegistration updateMeetupsRegistration(
 			long userId, long meetupsEntryId, int status, String comments)
 		throws PortalException {

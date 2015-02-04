@@ -32,6 +32,7 @@ import java.util.List;
 public class MeetupsEntryLocalServiceImpl
 	extends MeetupsEntryLocalServiceBaseImpl {
 
+	@Override
 	public MeetupsEntry addMeetupsEntry(
 			long userId, String title, String description, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
@@ -102,14 +103,17 @@ public class MeetupsEntryLocalServiceImpl
 		return meetupsEntry;
 	}
 
+	@Override
 	public List<MeetupsEntry> getMeetupsEntriesByCompany(long companyId) {
 		return meetupsEntryPersistence.findByCompanyId(companyId);
 	}
 
+	@Override
 	public List<MeetupsEntry> getMeetupsEntriesByUser(long userId) {
 		return meetupsEntryPersistence.findByUserId(userId);
 	}
 
+	@Override
 	public MeetupsEntry updateMeetupsEntry(
 			long userId, long meetupsEntryId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,

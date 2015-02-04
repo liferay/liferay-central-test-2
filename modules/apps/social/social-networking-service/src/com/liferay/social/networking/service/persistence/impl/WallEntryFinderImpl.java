@@ -33,7 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WallEntryFinderImpl
-	extends BasePersistenceImpl implements WallEntryFinder {
+	extends BasePersistenceImpl<WallEntry> implements WallEntryFinder {
 
 	public static final String COUNT_BY_G1_G2_U1_U2 =
 		WallEntryFinder.class.getName() + ".countByG1_G2_U1_U2";
@@ -41,6 +41,7 @@ public class WallEntryFinderImpl
 	public static final String FIND_BY_G1_G2_U1_U2 =
 		WallEntryFinder.class.getName() + ".findByG1_G2_U1_U2";
 
+	@Override
 	public int countByG1_G2_U1_U2(
 		long groupId1, long groupId2, long userId1, long userId2) {
 
@@ -82,6 +83,7 @@ public class WallEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<WallEntry> findByG1_G2_U1_U2(
 		long groupId1, long groupId2, long userId1, long userId2, int start,
 		int end) {

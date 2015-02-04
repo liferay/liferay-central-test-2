@@ -153,7 +153,7 @@ public class SummaryPortlet extends MVCPortlet {
 		List<User> users = _userLocalService.search(
 			themeDisplay.getCompanyId(), null,
 			WorkflowConstants.STATUS_APPROVED, userParams, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, (OrderByComparator)null);
+			QueryUtil.ALL_POS, (OrderByComparator<User>)null);
 
 		if (users.isEmpty()) {
 			Role adminRole = _roleLocalService.getRole(
@@ -166,7 +166,8 @@ public class SummaryPortlet extends MVCPortlet {
 			users = _userLocalService.search(
 				themeDisplay.getCompanyId(), null,
 				WorkflowConstants.STATUS_APPROVED, userParams,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				(OrderByComparator<User>)null);
 		}
 
 		JSONObject extraDataJSONObject = getExtraDataJSONObject(actionRequest);
@@ -203,7 +204,7 @@ public class SummaryPortlet extends MVCPortlet {
 		List<User> users = _userLocalService.search(
 			themeDisplay.getCompanyId(), null,
 			WorkflowConstants.STATUS_APPROVED, userParams, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, (OrderByComparator)null);
+			QueryUtil.ALL_POS, (OrderByComparator<User>)null);
 
 		if (users.isEmpty()) {
 			Role adminRole = _roleLocalService.getRole(
@@ -216,7 +217,8 @@ public class SummaryPortlet extends MVCPortlet {
 			users = _userLocalService.search(
 				themeDisplay.getCompanyId(), null,
 				WorkflowConstants.STATUS_APPROVED, userParams,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				(OrderByComparator<User>)null);
 		}
 
 		JSONObject extraDataJSONObject = getExtraDataJSONObject(actionRequest);

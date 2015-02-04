@@ -40,6 +40,7 @@ import javax.mail.internet.InternetAddress;
  */
 public class WallEntryLocalServiceImpl extends WallEntryLocalServiceBaseImpl {
 
+	@Override
 	public WallEntry addWallEntry(
 			long groupId, long userId, String comments,
 			ThemeDisplay themeDisplay)
@@ -90,6 +91,7 @@ public class WallEntryLocalServiceImpl extends WallEntryLocalServiceBaseImpl {
 		return wallEntry;
 	}
 
+	@Override
 	public void deleteWallEntries(long groupId) throws PortalException {
 		List<WallEntry> wallEntries = wallEntryPersistence.findByGroupId(
 			groupId);
@@ -123,10 +125,12 @@ public class WallEntryLocalServiceImpl extends WallEntryLocalServiceBaseImpl {
 		return wallEntry;
 	}
 
+	@Override
 	public List<WallEntry> getWallEntries(long groupId, int start, int end) {
 		return wallEntryPersistence.findByGroupId(groupId, start, end);
 	}
 
+	@Override
 	public int getWallEntriesCount(long groupId) {
 		return wallEntryPersistence.countByGroupId(groupId);
 	}
@@ -136,6 +140,7 @@ public class WallEntryLocalServiceImpl extends WallEntryLocalServiceBaseImpl {
 		return wallEntryPersistence.findByPrimaryKey(wallEntryId);
 	}
 
+	@Override
 	public List<WallEntry> getWallToWallEntries(
 		long groupId1, long groupId2, long userId1, long userId2, int start,
 		int end) {
@@ -144,6 +149,7 @@ public class WallEntryLocalServiceImpl extends WallEntryLocalServiceBaseImpl {
 			groupId1, groupId2, userId1, userId2, start, end);
 	}
 
+	@Override
 	public int getWallToWallEntriesCount(
 		long groupId1, long groupId2, long userId1, long userId2) {
 
@@ -151,6 +157,7 @@ public class WallEntryLocalServiceImpl extends WallEntryLocalServiceBaseImpl {
 			groupId1, groupId2, userId1, userId2);
 	}
 
+	@Override
 	public WallEntry updateWallEntry(long wallEntryId, String comments)
 		throws PortalException {
 
