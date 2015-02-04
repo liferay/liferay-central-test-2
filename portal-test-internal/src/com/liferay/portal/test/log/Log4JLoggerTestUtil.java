@@ -17,8 +17,8 @@ package com.liferay.portal.test.log;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogWrapper;
-
 import com.liferay.portal.log.Log4jLogImpl;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
