@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.social.networking.web.meetups.constants;
+package com.liferay.social.networking.web.meetups.util;
 
 /**
  * @author Brian Wing Shun Chan
