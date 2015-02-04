@@ -154,8 +154,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				<c:if test="<%= ratingsEnabled && !TrashUtil.isInTrash(message.getClassName(), message.getClassPK()) %>">
 
 					<%
-					RatingsEntry ratingsEntry = getRatingsEntry(ratingsEntries, message.getMessageId());
-					RatingsStats ratingStats = getRatingsStats(ratingsStatsList, message.getMessageId());
+					RatingsEntry ratingsEntry = _getRatingsEntry(ratingsEntries, message.getMessageId());
+					RatingsStats ratingStats = _getRatingsStats(ratingsStatsList, message.getMessageId());
 					%>
 
 					<liferay-ui:ratings
@@ -337,7 +337,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 <%!
 public static final String EDITOR_TEXT_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.taglib.ui.discussion.jsp";
 
-private RatingsEntry getRatingsEntry(List<RatingsEntry> ratingEntries, long classPK) {
+private RatingsEntry _getRatingsEntry(List<RatingsEntry> ratingEntries, long classPK) {
 	for (RatingsEntry ratingsEntry : ratingEntries) {
 		if (ratingsEntry.getClassPK() == classPK) {
 			return ratingsEntry;
@@ -347,7 +347,7 @@ private RatingsEntry getRatingsEntry(List<RatingsEntry> ratingEntries, long clas
 	return null;
 }
 
-private RatingsStats getRatingsStats(List<RatingsStats> ratingsStatsList, long classPK) {
+private RatingsStats _getRatingsStats(List<RatingsStats> ratingsStatsList, long classPK) {
 	for (RatingsStats ratingsStats : ratingsStatsList) {
 		if (ratingsStats.getClassPK() == classPK) {
 			return ratingsStats;
