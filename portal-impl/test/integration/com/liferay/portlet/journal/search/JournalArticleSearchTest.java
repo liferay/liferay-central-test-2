@@ -80,9 +80,6 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			SynchronousDestinationTestRule.INSTANCE);
 
-	/**
-	 * See https://issues.liferay.com/browse/LPS-53192
-	 */
 	@Test
 	public void testMatchNotOnlyCompanyIdButAlsoQueryTerms() throws Exception {
 		SearchContext searchContext = new SearchContext();
@@ -163,7 +160,8 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		throws Exception {
 
 		IdempotentRetryAssert.assertRetry(
-			3, TimeUnit.SECONDS, new Callable<Void>() {
+			3, TimeUnit.SECONDS,
+			new Callable<Void>() {
 
 				@Override
 				public Void call() throws Exception {
