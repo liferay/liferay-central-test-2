@@ -36,11 +36,11 @@ MBMessage rootMessage = (MBMessage)request.getAttribute("liferay-ui:discussion:r
 List<RatingsEntry> ratingsEntries = (List<RatingsEntry>)request.getAttribute("liferay-ui:discussion:ratingsEntries");
 List<RatingsStats> ratingsStatsList = (List<RatingsStats>)request.getAttribute("liferay-ui:discussion:ratingsStatsList");
 
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
 index++;
 
 request.setAttribute("liferay-ui:discussion:index", new Integer(index));
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <c:if test="<%= !(!message.isApproved() && ((message.getUserId() != user.getUserId()) || user.isDefaultUser()) && !permissionChecker.isGroupAdmin(scopeGroupId)) && MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
