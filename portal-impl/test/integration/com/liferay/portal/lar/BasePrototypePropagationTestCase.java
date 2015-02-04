@@ -32,7 +32,7 @@ import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.test.util.LayoutTestUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.test.journal.util.JournalTestUtil;
-import com.liferay.portlet.util.PortletKeys;
+import com.liferay.portlet.test.util.PortletKeys;
 
 import java.util.Date;
 import java.util.HashMap;
