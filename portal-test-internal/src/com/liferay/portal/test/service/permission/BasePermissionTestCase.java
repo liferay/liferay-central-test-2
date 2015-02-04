@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service.permission;
+package com.liferay.portal.test.service.permission;
 
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
