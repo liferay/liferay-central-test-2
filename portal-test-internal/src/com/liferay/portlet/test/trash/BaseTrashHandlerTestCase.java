@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.trash;
+package com.liferay.portlet.test.trash;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
