@@ -111,11 +111,11 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 
 		document.addText(
 			Field.DESCRIPTION, exportImportConfiguration.getDescription());
+		document.addText(Field.NAME, exportImportConfiguration.getName());
+		document.addKeyword(Field.TYPE, exportImportConfiguration.getType());
 		document.addNumber(
 			"exportImportConfigurationId",
 			exportImportConfiguration.getExportImportConfigurationId());
-		document.addText(Field.NAME, exportImportConfiguration.getName());
-		document.addKeyword(Field.TYPE, exportImportConfiguration.getType());
 
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
