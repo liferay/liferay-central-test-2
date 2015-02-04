@@ -21,7 +21,7 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.service.permission.BasePermissionTestCase;
 import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.portlet.journal.util.test.JournalTestUtil;
+import com.liferay.portlet.test.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
 import org.junit.ClassRule;

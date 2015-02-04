@@ -27,7 +27,7 @@ import com.liferay.portal.test.search.BaseSearchTestCase;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.portlet.journal.util.test.JournalTestUtil;
+import com.liferay.portlet.test.journal.util.JournalTestUtil;
 
 import org.junit.ClassRule;
 import org.junit.Ignore;
