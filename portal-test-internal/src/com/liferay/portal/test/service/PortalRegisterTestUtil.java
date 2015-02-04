@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.test.service;
 
 import com.liferay.portal.asset.LayoutRevisionAssetRendererFactory;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;

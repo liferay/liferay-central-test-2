@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.test.service;
 
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -49,6 +49,10 @@ import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portal.kernel.test.util.RoleTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
