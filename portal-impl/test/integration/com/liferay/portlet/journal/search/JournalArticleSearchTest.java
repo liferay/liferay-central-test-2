@@ -90,7 +90,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 		query.addTerm("title", RandomTestUtil.randomString());
 
-		assertSearch(0, query, searchContext);
+		assertEquals(0, query, searchContext);
 	}
 
 	@Ignore()
@@ -154,12 +154,12 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 			RandomTestUtil.randomString(50), approved, serviceContext);
 	}
 
-	protected void assertSearch(
+	protected void assertEquals(
 			final long length, final BooleanQuery query,
 			final SearchContext searchContext)
 		throws Exception {
 
-		IdempotentRetryAssert.assertRetry(
+		IdempotentRetryAssert.retryAssert(
 			3, TimeUnit.SECONDS,
 			new Callable<Void>() {
 

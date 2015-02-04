@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class IdempotentRetryAssert {
 
-	public static <T> T assertRetry(
+	public static <T> T retryAssert(
 			long timeout, TimeUnit timeUnit, Callable<T> callable)
 		throws Exception {
 
