@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.asset.util.test;
+package com.liferay.portlet.test.asset.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
