@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.verify;
+package com.liferay.portal.test.verify;
 
+import com.liferay.portal.verify.VerifyProcess;
 import org.junit.Test;
 
 /**
