@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.util;
+package com.liferay.portlet.test.util;
 
 /**
  * @author Miguel Pastor
