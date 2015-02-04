@@ -48,7 +48,7 @@ public class SoyManagerTest {
 
 		template.processTemplate(unsyncStringWriter);
 
-		Assert.assertEquals("Hello World!", unsyncStringWriter.toString());
+		Assert.assertEquals("Hello!", unsyncStringWriter.toString());
 	}
 
 	@Test
