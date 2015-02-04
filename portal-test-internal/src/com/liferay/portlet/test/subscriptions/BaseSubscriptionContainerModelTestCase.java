@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.subscriptions;
+package com.liferay.portlet.test.subscriptions;
 
 import com.liferay.portal.kernel.test.util.MailServiceTestUtil;
 
