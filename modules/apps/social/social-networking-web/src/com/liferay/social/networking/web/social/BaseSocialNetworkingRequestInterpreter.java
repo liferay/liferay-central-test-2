@@ -32,8 +32,8 @@ import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestFeedEntry;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
-import com.liferay.social.networking.web.friends.social.FriendsActivityKeys;
-import com.liferay.social.networking.web.friends.social.FriendsRequestKeys;
+import com.liferay.social.networking.friends.social.FriendsActivityKeys;
+import com.liferay.social.networking.friends.social.FriendsRequestKeys;
 
 /**
  * @author Adolfo Pérez

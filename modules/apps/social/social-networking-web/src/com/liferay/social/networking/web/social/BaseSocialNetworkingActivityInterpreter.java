@@ -20,7 +20,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
-import com.liferay.social.networking.web.friends.social.FriendsActivityKeys;
+import com.liferay.social.networking.friends.social.FriendsActivityKeys;
 
 /**
  * @author Adolfo Pérez

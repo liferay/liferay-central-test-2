@@ -45,8 +45,8 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRequestLocalService;
-import com.liferay.social.networking.web.friends.social.FriendsRequestKeys;
-import com.liferay.social.networking.web.members.social.MembersRequestKeys;
+import com.liferay.social.networking.friends.social.FriendsRequestKeys;
+import com.liferay.social.networking.members.social.MembersRequestKeys;
 
 import java.util.LinkedHashMap;
 import java.util.List;

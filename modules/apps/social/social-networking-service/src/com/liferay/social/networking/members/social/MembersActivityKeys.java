@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.social.networking.web.members.social;
+package com.liferay.social.networking.members.social;
 
 /**
  * @author Brian Wing Shun Chan
