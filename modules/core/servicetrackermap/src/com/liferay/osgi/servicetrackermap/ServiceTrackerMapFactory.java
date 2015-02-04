@@ -175,7 +175,7 @@ public class ServiceTrackerMapFactory {
 	}
 
 	public static class PropertyServiceReferenceComparator <T>
-			implements Comparator<ServiceReference<T>> {
+		implements Comparator<ServiceReference<T>> {
 
 		public PropertyServiceReferenceComparator(String propertyKey) {
 			_propertyKey = propertyKey;

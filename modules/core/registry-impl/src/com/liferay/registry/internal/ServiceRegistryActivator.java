@@ -34,7 +34,7 @@ public class ServiceRegistryActivator implements BundleActivator {
 
 		RegistryUtil.setRegistry(registry);
 
-		_registryRegistration = bundleContext.registerService(
+		_registryServiceRegistration = bundleContext.registerService(
 			Registry.class, registry, null);
 
 		ServiceTrackerMapFactoryImpl serviceTrackerMapFactory =
@@ -43,22 +43,23 @@ public class ServiceRegistryActivator implements BundleActivator {
 		ServiceTrackerMapFactoryUtil.setServiceTrackerMapFactory(
 			serviceTrackerMapFactory);
 
-		_serviceTrackerMapFactoryRegistration = bundleContext.registerService(
-			ServiceTrackerMapFactory.class, serviceTrackerMapFactory, null);
+		_serviceTrackerMapFactoryServiceRegistration =
+			bundleContext.registerService(
+				ServiceTrackerMapFactory.class, serviceTrackerMapFactory, null);
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		_registryRegistration.unregister();
-		_serviceTrackerMapFactoryRegistration.unregister();
+		_registryServiceRegistration.unregister();
+		_serviceTrackerMapFactoryServiceRegistration.unregister();
 
 		RegistryUtil.setRegistry(null);
 
 		ServiceTrackerMapFactoryUtil.setServiceTrackerMapFactory(null);
 	}
 
-	private ServiceRegistration<Registry> _registryRegistration;
+	private ServiceRegistration<Registry> _registryServiceRegistration;
 	private ServiceRegistration<ServiceTrackerMapFactory>
-		_serviceTrackerMapFactoryRegistration;
+		_serviceTrackerMapFactoryServiceRegistration;
 
 }
