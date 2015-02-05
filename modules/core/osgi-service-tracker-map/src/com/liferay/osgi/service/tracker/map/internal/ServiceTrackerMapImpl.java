@@ -131,7 +131,8 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 				new Holder<>();
 
 			_serviceReferenceMapper.map(
-				serviceReference, new ServiceReferenceMapper.Emitter<K>() {
+				serviceReference,
+				new ServiceReferenceMapper.Emitter<K>() {
 
 					@Override
 					public void emit(K key) {
@@ -170,6 +171,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 						serviceTrackerBucket.store(
 							serviceReferenceServiceTuple);
 					}
+
 				});
 
 			return holder.get();
@@ -191,7 +193,8 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 				serviceReferenceServiceTuple) {
 
 			_serviceReferenceMapper.map(
-				serviceReference, new ServiceReferenceMapper.Emitter<K>() {
+				serviceReference,
+				new ServiceReferenceMapper.Emitter<K>() {
 
 					@Override
 					public void emit(K key) {
@@ -209,6 +212,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 							_serviceTrackerBuckets.remove(key);
 						}
 					}
+
 				});
 
 			_serviceTrackerCustomizer.removedService(
