@@ -153,14 +153,16 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 				new Name("Import-Package"));
 
 			if (importPackage != null) {
-				_importPackages.addAll(Arrays.asList(StringUtil.split(importPackage)));
+				_importPackages.addAll(
+					Arrays.asList(StringUtil.split(importPackage)));
 			}
 
 			String exportPackage = (String)mainAttributes.remove(
 				new Name("Export-Package"));
 
 			if (exportPackage != null) {
-				_exportPackages.addAll(Arrays.asList(StringUtil.split(exportPackage)));
+				_exportPackages.addAll(
+					Arrays.asList(StringUtil.split(exportPackage)));
 			}
 
 			for (Map.Entry<Object, Object> entry : mainAttributes.entrySet()) {
@@ -218,7 +220,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 
 	protected void addBundleClassPathFiles(
 		ManifestAssetBuilder manifestAssetBuilder, JavaArchive javaArchive) {
-		
+
 		String[] bundleClassPathFileNames = StringUtil.split(
 			PropsUtil.get("bundle.classpath.files"), CharPool.SEMICOLON);
 
@@ -264,20 +266,6 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 	}
 
-	protected File getMavenFile(
-		String groupId, String artifactId, String version) {
-
-		MavenResolverSystem mavenResolverSystem = Maven.resolver();
-
-		MavenStrategyStage mavenStrategyStage = mavenResolverSystem.resolve(
-			groupId + ":" + artifactId + ":jar:" + version);
-
-		MavenFormatStage mavenFormatStage =
-			mavenStrategyStage.withoutTransitivity();
-
-		return mavenFormatStage.asSingleFile();
-	}
-
 	protected Set<String> getJarPackageNames(
 			String groupId, String artifactId, String version)
 		throws IOException {
@@ -319,6 +307,20 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 
 		return packageNames;
+	}
+
+	protected File getMavenFile(
+		String groupId, String artifactId, String version) {
+
+		MavenResolverSystem mavenResolverSystem = Maven.resolver();
+
+		MavenStrategyStage mavenStrategyStage = mavenResolverSystem.resolve(
+			groupId + ":" + artifactId + ":jar:" + version);
+
+		MavenFormatStage mavenFormatStage =
+			mavenStrategyStage.withoutTransitivity();
+
+		return mavenFormatStage.asSingleFile();
 	}
 
 	protected void registerRemoteLoadableExtensions(
