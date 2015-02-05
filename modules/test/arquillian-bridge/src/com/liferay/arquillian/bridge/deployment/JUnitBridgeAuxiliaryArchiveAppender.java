@@ -32,15 +32,15 @@ public class JUnitBridgeAuxiliaryArchiveAppender
 
 	@Override
 	public Archive<?> createAuxiliaryArchive() {
-		JavaArchive archive = ShrinkWrap.create(
+		JavaArchive javaArchive = ShrinkWrap.create(
 			JavaArchive.class, "arquillian-junit-bridge.jar");
 
-		archive.add(EmptyAsset.INSTANCE, "/arquillian.remote.marker");
-		archive.addAsServiceProviderAndClasses(
+		javaArchive.add(EmptyAsset.INSTANCE, "/arquillian.remote.marker");
+		javaArchive.addAsServiceProviderAndClasses(
 			RemoteLoadableExtension.class, LiferayArquillianExtension.class);
-		archive.addClass(JUnitBridgeObserver.class);
+		javaArchive.addClass(JUnitBridgeObserver.class);
 
-		return archive;
+		return javaArchive;
 	}
 
 }
