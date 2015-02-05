@@ -3,7 +3,7 @@
 
 <project>
 	<property name="import.shared" value="registry-api,osgi-service-tracker-map" />
-	<property name="osgi.runtime.dependencies" value="org.eclipse.osgi.jar,com.liferay.osgi.service.tracker.map.jar" />
+	<property name="osgi.runtime.dependencies" value="com.liferay.osgi.service.tracker.map.jar,org.eclipse.osgi.jar" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
