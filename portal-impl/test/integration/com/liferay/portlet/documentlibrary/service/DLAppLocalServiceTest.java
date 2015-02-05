@@ -168,12 +168,12 @@ public class DLAppLocalServiceTest {
 		public void shouldOnlyDeleteRequestedRepository()
 			throws PortalException {
 
-			ServiceContext serviceContext =
-				ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 			LocalRepository localRepository =
 				RepositoryLocalServiceUtil.getLocalRepositoryImpl(
 					_repository.getRepositoryId());
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 			FileEntry fileEntry = localRepository.addFileEntry(
 				serviceContext.getUserId(),
@@ -185,10 +185,8 @@ public class DLAppLocalServiceTest {
 
 			DLAppLocalServiceUtil.deleteAll(_group.getGroupId());
 
-			fileEntry = localRepository.getFileEntry(
-				fileEntry.getFileEntryId());
-
-			Assert.assertNotNull(fileEntry);
+			Assert.assertNotNull(
+				localRepository.getFileEntry(fileEntry.getFileEntryId()));
 		}
 
 		@DeleteAfterTestRun
