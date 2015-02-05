@@ -73,7 +73,7 @@ public class ArquillianBundleActivator implements BundleActivator {
 			return _bundleActivators;
 		}
 
-		_bundleActivators = new ArrayList<>();
+		List<BundleActivator> bundleActivators = new ArrayList<>();
 
 		Class<?> clazz = getClass();
 
@@ -83,10 +83,12 @@ public class ArquillianBundleActivator implements BundleActivator {
 				"/META-INF/services/" + BundleActivator.class.getName(), true));
 
 		for (String className : classNames) {
-			_bundleActivators.add(
+			bundleActivators.add(
 				(BundleActivator)InstanceFactory.newInstance(
 					clazz.getClassLoader(), className));
 		}
+
+		_bundleActivators = bundleActivators;
 
 		return _bundleActivators;
 	}
