@@ -53,14 +53,14 @@ public class ArquillianBundleActivator implements BundleActivator {
 		_jmxTestRunner.registerMBean(
 			ManagementFactory.getPlatformMBeanServer());
 
-		for (BundleActivator bundleActivator : _getBundleActivators()) {
+		for (BundleActivator bundleActivator : getBundleActivators()) {
 			bundleActivator.start(bundleContext);
 		}
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		for (BundleActivator bundleActivator : _getBundleActivators()) {
+		for (BundleActivator bundleActivator : getBundleActivators()) {
 			bundleActivator.stop(bundleContext);
 		}
 
@@ -68,7 +68,7 @@ public class ArquillianBundleActivator implements BundleActivator {
 			ManagementFactory.getPlatformMBeanServer());
 	}
 
-	private List<BundleActivator> _getBundleActivators() throws Exception {
+	protected List<BundleActivator> getBundleActivators() throws Exception {
 		if (_bundleActivators != null) {
 			return _bundleActivators;
 		}
@@ -77,12 +77,12 @@ public class ArquillianBundleActivator implements BundleActivator {
 
 		Class<?> clazz = getClass();
 
-		for (String className : StringUtil.splitLines(
-				StringUtil.read(
-					clazz.getClassLoader(),
-					"/META-INF/services/" + BundleActivator.class.getName(),
-					true))) {
+		String[] classNames = StringUtil.splitLines(
+			StringUtil.read(
+				clazz.getClassLoader(),
+				"/META-INF/services/" + BundleActivator.class.getName(), true));
 
+		for (String className : classNames) {
 			_bundleActivators.add(
 				(BundleActivator)InstanceFactory.newInstance(
 					clazz.getClassLoader(), className));
