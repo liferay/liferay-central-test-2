@@ -62,67 +62,73 @@ public class JUnitBridgeObserver {
 
 		Class<?> clazz = arquillianTestClass.getJavaClass();
 
-		org.junit.runners.model.TestClass testClass =
+		org.junit.runners.model.TestClass junitTestClass =
 			new org.junit.runners.model.TestClass(clazz);
 
 		Object target = test.getTestInstance();
 
-		statement = _withBefores(statement, Before.class, testClass, target);
-		statement = _withAfters(statement, After.class, testClass, target);
+		statement = withBefores(
+			statement, Before.class, junitTestClass, target);
+
+		statement = withAfters(statement, After.class, junitTestClass, target);
 
 		Method method = test.getTestMethod();
 
-		statement = _withRules(
-			statement, Rule.class, testClass, target,
+		statement = withRules(
+			statement, Rule.class, junitTestClass, target,
 			Description.createTestDescription(clazz, method.getName()));
-		statement = _withBefores(statement, BeforeClass.class, testClass, null);
-		statement = _withAfters(statement, AfterClass.class, testClass, null);
-		statement = _withRules(
-			statement, ClassRule.class, testClass, null,
+
+		statement = withBefores(
+			statement, BeforeClass.class, junitTestClass, null);
+
+		statement = withAfters(
+			statement, AfterClass.class, junitTestClass, null);
+
+		statement = withRules(
+			statement, ClassRule.class, junitTestClass, null,
 			Description.createSuiteDescription(clazz));
 
 		statement.evaluate();
 	}
 
-	private Statement _withAfters(
+	protected Statement withAfters(
 		Statement statement, Class<? extends Annotation> afterClass,
-		org.junit.runners.model.TestClass testClass, Object target) {
+		org.junit.runners.model.TestClass junitTestClass, Object target) {
 
-		List<FrameworkMethod> afterFrameworkMethods =
-			testClass.getAnnotatedMethods(afterClass);
+		List<FrameworkMethod> frameworkMethods =
+			junitTestClass.getAnnotatedMethods(afterClass);
 
-		if (!afterFrameworkMethods.isEmpty()) {
-			statement = new RunAfters(statement, afterFrameworkMethods, target);
+		if (!frameworkMethods.isEmpty()) {
+			statement = new RunAfters(statement, frameworkMethods, target);
 		}
 
 		return statement;
 	}
 
-	private Statement _withBefores(
+	protected Statement withBefores(
 		Statement statement, Class<? extends Annotation> beforeClass,
-		org.junit.runners.model.TestClass testClass, Object target) {
+		org.junit.runners.model.TestClass junitTestClass, Object target) {
 
-		List<FrameworkMethod> beforeFrameworkMethods =
-			testClass.getAnnotatedMethods(beforeClass);
+		List<FrameworkMethod> frameworkMethods =
+			junitTestClass.getAnnotatedMethods(beforeClass);
 
-		if (!beforeFrameworkMethods.isEmpty()) {
-			statement = new RunBefores(
-				statement, beforeFrameworkMethods, target);
+		if (!frameworkMethods.isEmpty()) {
+			statement = new RunBefores(statement, frameworkMethods, target);
 		}
 
 		return statement;
 	}
 
-	private Statement _withRules(
+	protected Statement withRules(
 		Statement statement, Class<? extends Annotation> ruleClass,
-		org.junit.runners.model.TestClass testClass, Object target,
+		org.junit.runners.model.TestClass junitTestClass, Object target,
 		Description description) {
 
-		List<TestRule> testRules = testClass.getAnnotatedMethodValues(
+		List<TestRule> testRules = junitTestClass.getAnnotatedMethodValues(
 			target, ruleClass, TestRule.class);
 
 		testRules.addAll(
-			testClass.getAnnotatedFieldValues(
+			junitTestClass.getAnnotatedFieldValues(
 				target, ruleClass, TestRule.class));
 
 		if (!testRules.isEmpty()) {
