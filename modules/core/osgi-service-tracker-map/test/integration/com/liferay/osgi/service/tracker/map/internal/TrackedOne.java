@@ -22,13 +22,13 @@ public class TrackedOne {
 	public TrackedOne() {}
 
 	public TrackedOne(String key) {
-		this.key = key;
+		_key = key;
 	}
 
 	public String getKey() {
-		return key;
+		return _key;
 	}
 
-	private String key;
+	private String _key;
 
 }
