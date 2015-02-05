@@ -54,6 +54,7 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 		}
 	}
 
+	@Override
 	public <K, S> ServiceTrackerMap<K, List<S>> multiValueMap(
 		Class<S> clazz, String filterString,
 		final ServiceReferenceMapper<K, S> serviceReferenceMapper) {
@@ -317,6 +318,7 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 		}
 	}
 
+	@Override
 	public <SR, S> ServiceTrackerMap<String, S> singleValueMap(
 		Class<SR> clazz, String propertyKey,
 		ServiceTrackerCustomizer<SR, S> serviceTrackerCustomizer) {
