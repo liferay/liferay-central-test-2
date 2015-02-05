@@ -37,11 +37,6 @@ import org.osgi.jmx.framework.ServiceStateMBean;
 public class LiferayJMXDeployableContainer
 	extends JMXDeployableContainer<JMXContainerConfiguration> {
 
-	public static final String DEFAULT_JMX_SERVICE_URL =
-		"service:jmx:rmi:///jndi/rmi://localhost:8099/jmxrmi";
-
-	public static final long DEFAULT_JMX_TIMEOUT = 30;
-
 	@Override
 	public Class<JMXContainerConfiguration> getConfigurationClass() {
 		return JMXContainerConfiguration.class;
@@ -54,7 +49,8 @@ public class LiferayJMXDeployableContainer
 			GetterUtil.getString(PropsUtil.get("jmx.password")));
 		config.setJmxServiceURL(
 			GetterUtil.getString(
-				PropsUtil.get("jmx.url"), DEFAULT_JMX_SERVICE_URL));
+				PropsUtil.get("jmx.url"),
+				"service:jmx:rmi:///jndi/rmi://localhost:8099/jmxrmi"));
 		config.setJmxUsername(
 			GetterUtil.getString(PropsUtil.get("jmx.username")));
 
@@ -64,7 +60,7 @@ public class LiferayJMXDeployableContainer
 	@Override
 	public void start() throws LifecycleException {
 		long timeout = GetterUtil.getLong(
-			PropsUtil.get("jmx.timeout"), DEFAULT_JMX_TIMEOUT);
+			PropsUtil.get("jmx.timeout"), 30);
 
 		MBeanServerConnection mbeanServer = null;
 
