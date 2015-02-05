@@ -689,16 +689,16 @@
 
 	<macrodef name="setup-testable-tomcat-jmx">
 		<sequential>
-			<var name="jmx.opts.value" value="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=${jmx.remote.authenticate} -Dcom.sun.management.jmxremote.port=${jmx.remote.port} -Dcom.sun.management.jmxremote.ssl=${jmx.remote.ssl}" />
+			<var name="testable.tomcat.jmx.opts" value="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=${jmx.remote.authenticate} -Dcom.sun.management.jmxremote.port=${jmx.remote.port} -Dcom.sun.management.jmxremote.ssl=${jmx.remote.ssl}" />
 
 			<if>
 				<not>
-					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.bat" substring="${jmx.opts.value}" />
+					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.bat" substring="${testable.tomcat.jmx.opts}" />
 				</not>
 				<then>
 					<echo file="${app.server.tomcat.dir}/bin/setenv.bat" append="true">
 						<![CDATA[
-							set JMX_OPTS="${jmx.opts.value}"
+							set JMX_OPTS="${testable.tomcat.jmx.opts}"
 
 							set CATALINA_OPTS="%CATALINA_OPTS% %JMX_OPTS%"
 						]]>
@@ -708,12 +708,12 @@
 
 			<if>
 				<not>
-					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.sh" substring="${jmx.opts.value}" />
+					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.sh" substring="${testable.tomcat.jmx.opts}" />
 				</not>
 				<then>
 					<echo file="${app.server.tomcat.dir}/bin/setenv.sh" append="true">
 						<![CDATA[
-							JMX_OPTS="${jmx.opts.value}"
+							JMX_OPTS="${testable.tomcat.jmx.opts}"
 
 							CATALINA_OPTS="${CATALINA_OPTS} ${JMX_OPTS}"
 						]]>
