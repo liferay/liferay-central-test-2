@@ -49,11 +49,10 @@ public class ModuleDeploymentScenarioGenerator
 
 	@Override
 	public List<DeploymentDescription> generate(TestClass testClass) {
-		File workingFolder = new File(System.getProperty("user.dir"));
-
 		try {
-			Project project = new Project(
-				new Workspace(workingFolder), workingFolder);
+			File userDir = new File(System.getProperty("user.dir"));
+
+			Project project = new Project(new Workspace(userDir), userDir);
 
 			Properties properties = project.getProperties();
 
