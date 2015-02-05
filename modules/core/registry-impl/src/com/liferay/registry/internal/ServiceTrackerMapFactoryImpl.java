@@ -85,7 +85,6 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 		ServiceReferenceMapperWrapper<K, S> serviceReferenceMapperWrapper =
 			new ServiceReferenceMapperWrapper<>(serviceReferenceMapper);
-
 		ServiceReferenceComparatorAdapter<S> serviceReferenceComparatorAdapter =
 			new ServiceReferenceComparatorAdapter<>(comparator);
 
@@ -113,7 +112,6 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 		ServiceReferenceMapperWrapper<K, SR> serviceReferenceMapperWrapper =
 			new ServiceReferenceMapperWrapper<>(serviceReferenceMapper);
-
 		ServiceTrackerCustomizerAdapter<SR, S> serviceTrackerCustomizerAdapter =
 			new ServiceTrackerCustomizerAdapter<>(serviceTrackerCustomizer);
 
@@ -140,13 +138,13 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 		ServiceTrackerCustomizer<SR, S> serviceTrackerCustomizer,
 		Comparator<ServiceReference<SR>> comparator) {
 
-		ServiceReferenceComparatorAdapter<SR>
-			serviceReferenceComparatorAdapter =
-				new ServiceReferenceComparatorAdapter<>(comparator);
 		ServiceReferenceMapperWrapper<K, SR> serviceReferenceMapperWrapper =
 			new ServiceReferenceMapperWrapper<>(serviceReferenceMapper);
 		ServiceTrackerCustomizerAdapter<SR, S> serviceTrackerCustomizerAdapter =
 			new ServiceTrackerCustomizerAdapter<>(serviceTrackerCustomizer);
+		ServiceReferenceComparatorAdapter<SR>
+			serviceReferenceComparatorAdapter =
+				new ServiceReferenceComparatorAdapter<>(comparator);
 
 		try {
 			com.liferay.osgi.service.tracker.map.ServiceTrackerMap<K, List<S>>
@@ -237,7 +235,6 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 		ServiceReferenceMapperWrapper<K, S> serviceReferenceMapperWrapper =
 			new ServiceReferenceMapperWrapper<>(serviceReferenceMapper);
-
 		ServiceReferenceComparatorAdapter<S> serviceReferenceComparatorAdapter =
 			new ServiceReferenceComparatorAdapter<>(comparator);
 
@@ -265,7 +262,6 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 		ServiceReferenceMapperWrapper<K, SR> serviceReferenceMapperWrapper =
 			new ServiceReferenceMapperWrapper<>(serviceReferenceMapper);
-
 		ServiceTrackerCustomizerAdapter<SR, S> serviceTrackerCustomizerAdapter =
 			new ServiceTrackerCustomizerAdapter<>(serviceTrackerCustomizer);
 
@@ -375,12 +371,12 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 
 		@Override
 		public int compare(
-			org.osgi.framework.ServiceReference<S> sr1,
-			org.osgi.framework.ServiceReference<S> sr2) {
+			org.osgi.framework.ServiceReference<S> serviceReference1,
+			org.osgi.framework.ServiceReference<S> serviceReference2) {
 
 			return _comparator.compare(
-				new ServiceReferenceWrapper<S>(sr1),
-				new ServiceReferenceWrapper<S>(sr2));
+				new ServiceReferenceWrapper<S>(serviceReference1),
+				new ServiceReferenceWrapper<S>(serviceReference2));
 		}
 
 		private final Comparator<ServiceReference<S>> _comparator;
