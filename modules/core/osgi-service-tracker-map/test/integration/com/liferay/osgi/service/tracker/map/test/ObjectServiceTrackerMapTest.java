@@ -210,7 +210,7 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testGetServiceWithCustomResolver()
+	public void testGetServiceWithCustomServiceReferenceMapper()
 		throws InvalidSyntaxException {
 
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
