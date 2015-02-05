@@ -2089,7 +2089,7 @@ public class StagingImpl implements Staging {
 			GetterUtil.getString(group.getTypeSettingsProperty(param)));
 	}
 
-	protected boolean isCompanyGroup(Group group, HttpPrincipal httpPrincipal) {
+	protected boolean isCompanyGroup(HttpPrincipal httpPrincipal, Group group) {
 		ClassName className = ClassNameServiceHttp.fetchClassName(
 			httpPrincipal, String.valueOf(group.getClassNameId()));
 
@@ -2375,7 +2375,7 @@ public class StagingImpl implements Staging {
 				httpPrincipal, remoteGroupId);
 
 			if (group.isCompany() ^
-				isCompanyGroup(remoteGroup, httpPrincipal)) {
+					isCompanyGroup(httpPrincipal, remoteGroup)) {
 
 				RemoteExportException ree = new RemoteExportException(
 					RemoteExportException.INVALID_GROUP);
