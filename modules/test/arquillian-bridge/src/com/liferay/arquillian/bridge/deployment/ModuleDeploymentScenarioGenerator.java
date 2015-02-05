@@ -99,7 +99,7 @@ public class ModuleDeploymentScenarioGenerator
 					zipExporter.exportTo(file);
 
 					System.out.println(
-						"Dumpped file " + file.getAbsolutePath());
+						"Dumped file " + file.getAbsolutePath());
 				}
 
 				return Collections.singletonList(
