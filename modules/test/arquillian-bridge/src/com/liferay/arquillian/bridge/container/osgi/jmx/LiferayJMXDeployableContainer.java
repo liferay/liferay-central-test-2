@@ -59,8 +59,7 @@ public class LiferayJMXDeployableContainer
 
 	@Override
 	public void start() throws LifecycleException {
-		long timeout = GetterUtil.getLong(
-			PropsUtil.get("jmx.timeout"), 30);
+		long timeout = GetterUtil.getLong(PropsUtil.get("jmx.timeout"), 30);
 
 		MBeanServerConnection mbeanServer = null;
 
