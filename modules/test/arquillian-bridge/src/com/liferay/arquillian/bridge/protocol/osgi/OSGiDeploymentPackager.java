@@ -131,7 +131,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 		catch (Exception e) {
 			throw new IllegalArgumentException(
-				"Unable to repackage OSGi bundle: " + javaArchive, e);
+				"Unable to repackage OSGi bundle " + javaArchive, e);
 		}
 	}
 
