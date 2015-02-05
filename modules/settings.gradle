@@ -1,1 +1,1 @@
-apply from: "$sdkDir/settings.gradle";
+apply from: "$lfrSdkDir/settings.gradle";
