@@ -189,14 +189,14 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 						PropsUtil.get("bundle.import.exclude.packages"),
 						CharPool.SEMICOLON)));
 
-			_osgiManifestBuilder.addImportPackages(
-				_imports.toArray(new String[_imports.size()]));
-			_osgiManifestBuilder.addExportPackages(
-				_exports.toArray(new String[_exports.size()]));
-			_osgiManifestBuilder.addBundleClasspath(
-				StringUtil.merge(_classPathFiles));
 			_osgiManifestBuilder.addBundleActivator(
 				ArquillianBundleActivator.class);
+			_osgiManifestBuilder.addBundleClasspath(
+				StringUtil.merge(_classPathFiles));
+			_osgiManifestBuilder.addExportPackages(
+				_exports.toArray(new String[_exports.size()]));
+			_osgiManifestBuilder.addImportPackages(
+				_imports.toArray(new String[_imports.size()]));
 
 			return new ByteArrayAsset(_osgiManifestBuilder.openStream());
 		}
