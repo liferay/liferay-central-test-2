@@ -2375,7 +2375,7 @@ public class StagingImpl implements Staging {
 				httpPrincipal, remoteGroupId);
 
 			if (group.isCompany() ^
-					isCompanyGroup(httpPrincipal, remoteGroup)) {
+				isCompanyGroup(httpPrincipal, remoteGroup)) {
 
 				RemoteExportException ree = new RemoteExportException(
 					RemoteExportException.INVALID_GROUP);
