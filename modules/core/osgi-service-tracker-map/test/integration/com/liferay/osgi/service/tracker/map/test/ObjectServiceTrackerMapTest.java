@@ -325,13 +325,12 @@ public class ObjectServiceTrackerMapTest {
 						ServiceReference<TrackedOne> serviceReference,
 						Emitter<String> emitter) {
 
-						TrackedOne service = _bundleContext.getService(
+						TrackedOne trackedOne = _bundleContext.getService(
 							serviceReference);
 
-						String targetProperty =
-							(String) serviceReference.getProperty("target");
-
-						emitter.emit(targetProperty + "-" + service.getKey());
+						emitter.emit(
+							serviceReference.getProperty("target") + "-" +
+								trackedOne.getKey());
 
 						_bundleContext.ungetService(serviceReference);
 					}
@@ -350,36 +349,38 @@ public class ObjectServiceTrackerMapTest {
 					@Override
 					public void modifiedService(
 						ServiceReference<TrackedOne> serviceReference,
-						TrackedTwo service) {
+						TrackedTwo trackedTwo) {
 
-						removedService(serviceReference, service);
+						removedService(serviceReference, trackedTwo);
 					}
 
 					@Override
 					public void removedService(
 						ServiceReference<TrackedOne> serviceReference,
-						TrackedTwo service) {
+						TrackedTwo trackedTwo) {
 
 						_bundleContext.ungetService(serviceReference);
 					}
+
 				});
 
 		serviceTrackerMap.open();
 
-		TrackedOne one = new TrackedOne("1");
+		TrackedOne trackedOne1 = new TrackedOne("1");
 
-		registerService(one, "one");
+		registerService(trackedOne1, "one");
 
-		TrackedOne two = new TrackedOne("2");
-		registerService(two, "two");
+		TrackedOne trackedOne2 = new TrackedOne("2");
 
-		TrackedTwo twoOne = serviceTrackerMap.getService("one-1");
+		registerService(trackedOne2, "two");
 
-		Assert.assertEquals(one, twoOne.getTrackedOne());
+		TrackedTwo trackedTwo1 = serviceTrackerMap.getService("one-1");
 
-		TrackedTwo twoTwo = serviceTrackerMap.getService("two-2");
+		Assert.assertEquals(trackedOne1, trackedTwo1.getTrackedOne());
 
-		Assert.assertEquals(two, twoTwo.getTrackedOne());
+		TrackedTwo trackedTwo2 = serviceTrackerMap.getService("two-2");
+
+		Assert.assertEquals(trackedOne2, trackedTwo2.getTrackedOne());
 
 		serviceTrackerMap.close();
 	}
