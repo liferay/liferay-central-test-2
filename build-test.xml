@@ -693,21 +693,6 @@
 
 			<if>
 				<not>
-					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.sh" substring="${jmx.opts.value}" />
-				</not>
-				<then>
-					<echo file="${app.server.tomcat.dir}/bin/setenv.sh" append="true">
-						<![CDATA[
-							JMX_OPTS="${jmx.opts.value}"
-
-							CATALINA_OPTS="${CATALINA_OPTS} ${JMX_OPTS}"
-						]]>
-					</echo>
-				</then>
-			</if>
-
-			<if>
-				<not>
 					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.bat" substring="${jmx.opts.value}" />
 				</not>
 				<then>
@@ -716,6 +701,21 @@
 							set JMX_OPTS="${jmx.opts.value}"
 
 							set CATALINA_OPTS="%CATALINA_OPTS% %JMX_OPTS%"
+						]]>
+					</echo>
+				</then>
+			</if>
+
+			<if>
+				<not>
+					<resourcecontains resource="${app.server.tomcat.dir}/bin/setenv.sh" substring="${jmx.opts.value}" />
+				</not>
+				<then>
+					<echo file="${app.server.tomcat.dir}/bin/setenv.sh" append="true">
+						<![CDATA[
+							JMX_OPTS="${jmx.opts.value}"
+
+							CATALINA_OPTS="${CATALINA_OPTS} ${JMX_OPTS}"
 						]]>
 					</echo>
 				</then>
