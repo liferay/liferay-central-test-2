@@ -90,7 +90,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 			ManifestAssetBuilder manifestAssetBuilder =
 				new ManifestAssetBuilder(manifest);
 
-			_registerRemoteLoadableExtensions(
+			registerRemoteLoadableExtensions(
 				javaArchive, manifestAssetBuilder,
 				testDeployment.getAuxiliaryArchives());
 
@@ -100,8 +100,8 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 						PropsUtil.get("bundle.import.packages"),
 						CharPool.SEMICOLON)));
 
-			_addBundleImportFiles(manifestAssetBuilder);
-			_addBundleClassPathFiles(manifestAssetBuilder, javaArchive);
+			addBundleImportFiles(manifestAssetBuilder);
+			addBundleClassPathFiles(manifestAssetBuilder, javaArchive);
 
 			javaArchive.addClass(ArquillianBundleActivator.class);
 
@@ -216,7 +216,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 
 	}
 
-	private void _addBundleClassPathFiles(
+	protected void addBundleClassPathFiles(
 		ManifestAssetBuilder manifestAssetBuilder, JavaArchive javaArchive) {
 
 		for (String bundleClassPathFile :
@@ -232,7 +232,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 					"Malformed maven coordinates " + bundleClassPathFile);
 			}
 
-			File file = _fetchMavenFile(
+			File file = fetchMavenFile(
 				coordinates[0], coordinates[1], coordinates[2]);
 
 			String path = "lib/" + file.getName();
@@ -243,7 +243,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 	}
 
-	private void _addBundleImportFiles(
+	protected void addBundleImportFiles(
 			ManifestAssetBuilder manifestAssetBuilder)
 		throws IOException {
 
@@ -260,12 +260,12 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 			}
 
 			manifestAssetBuilder.addImports(
-				_listPackagesInJarFile(
+				listPackagesInJarFile(
 					coordinates[0], coordinates[1], coordinates[2]));
 		}
 	}
 
-	private File _fetchMavenFile(
+	protected File fetchMavenFile(
 		String groupId, String artifactId, String version) {
 
 		MavenResolverSystem mavenResolverSystem = Maven.resolver();
@@ -279,13 +279,13 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		return mavenFormatStage.asSingleFile();
 	}
 
-	private Set<String> _listPackagesInJarFile(
+	protected Set<String> listPackagesInJarFile(
 			String groupId, String artifactId, String version)
 		throws IOException {
 
 		Set<String> packageNames = new HashSet<>();
 
-		File file = _fetchMavenFile(groupId, artifactId, version);
+		File file = fetchMavenFile(groupId, artifactId, version);
 
 		try (JarFile jarFile = new JarFile(file)) {
 			Enumeration<JarEntry> enumeration = jarFile.entries();
@@ -314,14 +314,14 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		return packageNames;
 	}
 
-	private void _registerRemoteLoadableExtensions(
+	protected void registerRemoteLoadableExtensions(
 			JavaArchive javaArchive, ManifestAssetBuilder manifestAssetBuilder,
 			Collection<Archive<?>> auxiliaryArchives)
 		throws IOException {
 
 		for (Archive<?> auxiliaryArchive : auxiliaryArchives) {
 			Node remoteLoadableExtensionNode = auxiliaryArchive.get(
-				_REMOTE_LOADABLE_EXTENSION_FILE);
+				_REMOTE_LOADABLE_EXTENSION_FILE_NAME);
 
 			if (remoteLoadableExtensionNode == null) {
 				continue;
@@ -329,7 +329,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 
 			javaArchive.add(
 				remoteLoadableExtensionNode.getAsset(),
-				_REMOTE_LOADABLE_EXTENSION_FILE);
+				_REMOTE_LOADABLE_EXTENSION_FILE_NAME);
 
 			String path = "extension/" + auxiliaryArchive.getName();
 
@@ -368,7 +368,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 	}
 
-	private static final String _REMOTE_LOADABLE_EXTENSION_FILE =
+	private static final String _REMOTE_LOADABLE_EXTENSION_FILE_NAME =
 		"/META-INF/services/" +
 			RemoteLoadableExtension.class.getCanonicalName();
 
