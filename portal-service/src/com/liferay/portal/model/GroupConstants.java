@@ -42,8 +42,8 @@ public class GroupConstants {
 	public static final int MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS = 1;
 
 	public static final String[] SYSTEM_GROUPS = {
-		CONTROL_PANEL, GUEST, GroupConstants.USER_PERSONAL_SITE,
-		GroupConstants.USER_PERSONAL_PANEL
+		CONTROL_PANEL, GUEST, GroupConstants.USER_PERSONAL_PANEL,
+		GroupConstants.USER_PERSONAL_SITE
 	};
 
 	public static final int TYPE_SITE_OPEN = 1;
