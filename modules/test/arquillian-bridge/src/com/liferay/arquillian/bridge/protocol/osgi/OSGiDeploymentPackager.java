@@ -124,7 +124,7 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 
 				zipExporter.exportTo(file);
 
-				System.out.println("Dumpped file " + file.getAbsolutePath());
+				System.out.println("Dumped file " + file.getAbsolutePath());
 			}
 
 			return javaArchive;
