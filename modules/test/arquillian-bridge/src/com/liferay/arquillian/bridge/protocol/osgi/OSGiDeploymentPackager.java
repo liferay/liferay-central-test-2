@@ -153,14 +153,14 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 				new Name("Import-Package"));
 
 			if (importPackage != null) {
-				_imports.addAll(Arrays.asList(StringUtil.split(importPackage)));
+				_importPackages.addAll(Arrays.asList(StringUtil.split(importPackage)));
 			}
 
 			String exportPackage = (String)mainAttributes.remove(
 				new Name("Export-Package"));
 
 			if (exportPackage != null) {
-				_exports.addAll(Arrays.asList(StringUtil.split(exportPackage)));
+				_exportPackages.addAll(Arrays.asList(StringUtil.split(exportPackage)));
 			}
 
 			for (Map.Entry<Object, Object> entry : mainAttributes.entrySet()) {
@@ -175,15 +175,15 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 
 		public void addBundleClassPathFile(String classPathFile) {
-			_classPathFiles.add(classPathFile);
+			_classPathFileNames.add(classPathFile);
 		}
 
 		public void addImports(Collection<String> imports) {
-			_imports.addAll(imports);
+			_importPackages.addAll(imports);
 		}
 
 		public Asset build() {
-			_imports.removeAll(
+			_importPackages.removeAll(
 				Arrays.asList(
 					StringUtil.split(
 						PropsUtil.get("bundle.import.exclude.packages"),
@@ -192,11 +192,11 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 			_osgiManifestBuilder.addBundleActivator(
 				ArquillianBundleActivator.class);
 			_osgiManifestBuilder.addBundleClasspath(
-				StringUtil.merge(_classPathFiles));
+				StringUtil.merge(_classPathFileNames));
 			_osgiManifestBuilder.addExportPackages(
-				_exports.toArray(new String[_exports.size()]));
+				_exportPackages.toArray(new String[_exportPackages.size()]));
 			_osgiManifestBuilder.addImportPackages(
-				_imports.toArray(new String[_imports.size()]));
+				_importPackages.toArray(new String[_importPackages.size()]));
 
 			return new ByteArrayAsset(_osgiManifestBuilder.openStream());
 		}
@@ -207,10 +207,10 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		}
 
 		private final List<String> _bundleActivators = new ArrayList<>();
-		private final List<String> _classPathFiles = new ArrayList<>(
+		private final List<String> _classPathFileNames = new ArrayList<>(
 			Arrays.asList(StringPool.PERIOD));
-		private final List<String> _exports = new ArrayList<>();
-		private final List<String> _imports = new ArrayList<>();
+		private final List<String> _exportPackages = new ArrayList<>();
+		private final List<String> _importPackages = new ArrayList<>();
 		private final OSGiManifestBuilder _osgiManifestBuilder =
 			OSGiManifestBuilder.newInstance();
 
@@ -218,28 +218,27 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 
 	protected void addBundleClassPathFiles(
 		ManifestAssetBuilder manifestAssetBuilder, JavaArchive javaArchive) {
+		
+		String[] bundleClassPathFileNames = StringUtil.split(
+			PropsUtil.get("bundle.classpath.files"), CharPool.SEMICOLON);
 
-		for (String bundleClassPathFile :
-				StringUtil.split(
-					PropsUtil.get("bundle.classpath.files"),
-					CharPool.SEMICOLON)) {
-
+		for (String bundleClassPathFileName : bundleClassPathFileNames) {
 			String[] coordinates = StringUtil.split(
-				bundleClassPathFile, CharPool.COMMA);
+				bundleClassPathFileName, CharPool.COMMA);
 
 			if (coordinates.length != 3) {
 				throw new IllegalArgumentException(
-					"Malformed maven coordinates " + bundleClassPathFile);
+					"Malformed Maven coordinates " + bundleClassPathFileName);
 			}
 
-			File file = fetchMavenFile(
+			File file = getMavenFile(
 				coordinates[0], coordinates[1], coordinates[2]);
 
-			String path = "lib/" + file.getName();
+			String libDirName = "lib/" + file.getName();
 
-			javaArchive.addAsResource(new FileAsset(file), path);
+			javaArchive.addAsResource(new FileAsset(file), libDirName);
 
-			manifestAssetBuilder.addBundleClassPathFile(path);
+			manifestAssetBuilder.addBundleClassPathFile(libDirName);
 		}
 	}
 
@@ -247,25 +246,25 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 			ManifestAssetBuilder manifestAssetBuilder)
 		throws IOException {
 
-		for (String bundleClassPathFile :
-				StringUtil.split(
-					PropsUtil.get("bundle.import.files"), CharPool.SEMICOLON)) {
+		String[] bundleImportFileNames = StringUtil.split(
+			PropsUtil.get("bundle.import.files"), CharPool.SEMICOLON);
 
+		for (String bundleImportFileName : bundleImportFileNames) {
 			String[] coordinates = StringUtil.split(
-				bundleClassPathFile, CharPool.COMMA);
+				bundleImportFileName, CharPool.COMMA);
 
 			if (coordinates.length != 3) {
 				throw new IllegalArgumentException(
-					"Malformed maven coordinates " + bundleClassPathFile);
+					"Malformed Maven coordinates " + bundleImportFileName);
 			}
 
 			manifestAssetBuilder.addImports(
-				listPackagesInJarFile(
+				getJarPackageNames(
 					coordinates[0], coordinates[1], coordinates[2]));
 		}
 	}
 
-	protected File fetchMavenFile(
+	protected File getMavenFile(
 		String groupId, String artifactId, String version) {
 
 		MavenResolverSystem mavenResolverSystem = Maven.resolver();
@@ -279,13 +278,13 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 		return mavenFormatStage.asSingleFile();
 	}
 
-	protected Set<String> listPackagesInJarFile(
+	protected Set<String> getJarPackageNames(
 			String groupId, String artifactId, String version)
 		throws IOException {
 
 		Set<String> packageNames = new HashSet<>();
 
-		File file = fetchMavenFile(groupId, artifactId, version);
+		File file = getMavenFile(groupId, artifactId, version);
 
 		try (JarFile jarFile = new JarFile(file)) {
 			Enumeration<JarEntry> enumeration = jarFile.entries();
@@ -293,21 +292,29 @@ public class OSGiDeploymentPackager implements DeploymentPackager {
 			while (enumeration.hasMoreElements()) {
 				JarEntry jarEntry = enumeration.nextElement();
 
-				if (!jarEntry.isDirectory()) {
-					String name = jarEntry.getName();
-
-					if (name.endsWith(".class")) {
-						int index = name.lastIndexOf('/');
-
-						if (index >= 0) {
-							name = name.substring(0, index);
-
-							if (!name.isEmpty()) {
-								packageNames.add(name.replace('/', '.'));
-							}
-						}
-					}
+				if (jarEntry.isDirectory()) {
+					continue;
 				}
+
+				String name = jarEntry.getName();
+
+				if (!name.endsWith(".class")) {
+					continue;
+				}
+
+				int index = name.lastIndexOf('/');
+
+				if (index < 0) {
+					continue;
+				}
+
+				name = name.substring(0, index);
+
+				if (name.isEmpty()) {
+					continue;
+				}
+
+				packageNames.add(name.replace('/', '.'));
 			}
 		}
 
