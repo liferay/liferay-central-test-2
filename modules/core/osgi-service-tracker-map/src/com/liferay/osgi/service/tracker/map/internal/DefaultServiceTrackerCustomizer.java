@@ -25,12 +25,12 @@ public class DefaultServiceTrackerCustomizer<S>
 	implements ServiceTrackerCustomizer<S, S> {
 
 	public DefaultServiceTrackerCustomizer(BundleContext bundleContext) {
-		this.bundleContext = bundleContext;
+		_bundleContext = bundleContext;
 	}
 
 	@Override
 	public S addingService(ServiceReference<S> serviceReference) {
-		return bundleContext.getService(serviceReference);
+		return _bundleContext.getService(serviceReference);
 	}
 
 	@Override
@@ -44,9 +44,9 @@ public class DefaultServiceTrackerCustomizer<S>
 	public void removedService(
 		ServiceReference<S> serviceReference, S service) {
 
-		bundleContext.ungetService(serviceReference);
+		_bundleContext.ungetService(serviceReference);
 	}
 
-	private final BundleContext bundleContext;
+	private final BundleContext _bundleContext;
 
 }
