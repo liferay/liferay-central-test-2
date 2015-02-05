@@ -251,7 +251,7 @@ public class ListServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testUnkeyedServiceReferencesBalanceRefCount()
+	public void testUnkeyedServiceReferencesBalanceReferenceCount()
 		throws InvalidSyntaxException {
 
 		BundleContextWrapper bundleContextWrapper = wrapContext();
@@ -259,15 +259,15 @@ public class ListServiceTrackerMapTest {
 		ServiceTrackerMap<TrackedOne, TrackedOne> serviceTrackerMap =
 			ServiceTrackerMapFactory.singleValueMap(
 				bundleContextWrapper, TrackedOne.class, null,
-					new ServiceReferenceMapper<TrackedOne, TrackedOne>() {
+				new ServiceReferenceMapper<TrackedOne, TrackedOne>() {
 
-					@Override
-					public void map(
-						ServiceReference<TrackedOne> serviceReference,
-						Emitter<TrackedOne> emitter) {
-					}
+				@Override
+				public void map(
+					ServiceReference<TrackedOne> serviceReference,
+					Emitter<TrackedOne> emitter) {
+				}
 
-				});
+			});
 
 		serviceTrackerMap.open();
 

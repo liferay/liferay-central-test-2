@@ -161,13 +161,15 @@ public class ObjectServiceTrackerMapTest {
 		throws InvalidSyntaxException {
 
 		ServiceTrackerMapFactory.
-			PropertyServiceReferenceMapper<String, TrackedOne> target =
-				new ServiceTrackerMapFactory.PropertyServiceReferenceMapper<>(
-					"target");
+			PropertyServiceReferenceMapper<String, TrackedOne>
+				propertyServiceReferenceMapper =
+					new ServiceTrackerMapFactory.
+						PropertyServiceReferenceMapper<>("target");
 
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			ServiceTrackerMapFactory.singleValueMap(
-				_bundleContext, TrackedOne.class, "(target=*)", target,
+				_bundleContext, TrackedOne.class, "(target=*)",
+				propertyServiceReferenceMapper,
 				new Comparator<ServiceReference<TrackedOne>>() {
 
 					@Override
@@ -178,8 +180,7 @@ public class ObjectServiceTrackerMapTest {
 						return -1;
 					}
 
-				}
-			);
+				});
 
 		serviceTrackerMap.open();
 
@@ -255,7 +256,7 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testGetServiceWithServiceCustomizer()
+	public void testGetServiceWithServiceTrackerCustomizer()
 		throws InvalidSyntaxException {
 
 		ServiceTrackerMap<String, TrackedTwo> serviceTrackerMap =
@@ -286,30 +287,32 @@ public class ObjectServiceTrackerMapTest {
 
 						_bundleContext.ungetService(serviceReference);
 					}
+
 				});
 
 		serviceTrackerMap.open();
 
-		TrackedOne one = new TrackedOne();
+		TrackedOne trackedOne1 = new TrackedOne();
 
-		registerService(one, "one");
+		registerService(trackedOne1, "one");
 
-		TrackedOne two = new TrackedOne();
-		registerService(two, "two");
+		TrackedOne trackedOne2 = new TrackedOne();
 
-		TrackedTwo twoOne = serviceTrackerMap.getService("one");
+		registerService(trackedOne2, "two");
 
-		Assert.assertEquals(one, twoOne.getTrackedOne());
+		TrackedTwo trackedTwo1 = serviceTrackerMap.getService("one");
 
-		TrackedTwo twoTwo = serviceTrackerMap.getService("two");
+		Assert.assertEquals(trackedOne1, trackedTwo1.getTrackedOne());
 
-		Assert.assertEquals(two, twoTwo.getTrackedOne());
+		TrackedTwo trackedTwo2 = serviceTrackerMap.getService("two");
+
+		Assert.assertEquals(trackedOne2, trackedTwo2.getTrackedOne());
 
 		serviceTrackerMap.close();
 	}
 
 	@Test
-	public void testGetServiceWithServiceCustomizerAndServiceReferenceMapper()
+	public void testGetServiceWithServiceTrackerCustomizerAndServiceReferenceMapper()
 		throws InvalidSyntaxException {
 
 		ServiceTrackerMap<String, TrackedTwo> serviceTrackerMap =
@@ -332,6 +335,7 @@ public class ObjectServiceTrackerMapTest {
 
 						_bundleContext.ungetService(serviceReference);
 					}
+
 				},
 				new ServiceTrackerCustomizer<TrackedOne, TrackedTwo>() {
 
@@ -426,7 +430,7 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testUnkeyedServiceReferencesBalanceRefCount()
+	public void testUnkeyedServiceReferencesBalanceReferenceCount()
 		throws InvalidSyntaxException {
 
 		BundleContextWrapper wrappedBundleContext = wrapContext();
