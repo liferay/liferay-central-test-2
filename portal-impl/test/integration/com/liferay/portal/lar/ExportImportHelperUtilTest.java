@@ -487,8 +487,7 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 		Layout layout = LayoutTestUtil.addLayout(_stagingGroup);
 
 		LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), RandomTestUtil.randomString(),
-			layout.getPlid());
+			_stagingGroup.getGroupId(), "Child Layout", layout.getPlid());
 
 		long[] selectedLayoutIds = new long[] {layout.getLayoutId()};
 

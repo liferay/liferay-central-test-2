@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
-import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -50,6 +49,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
 import com.liferay.portlet.dynamicdatamapping.util.test.DDMStructureTestHelper;
 
 import java.io.File;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -245,7 +245,7 @@ public class DDLExporterTest {
 
 	protected String createLinkToPageDDMFormFieldValue() throws Exception {
 		Layout layout = LayoutTestUtil.addLayout(
-			_group.getGroupId(), RandomTestUtil.randomString(), false);
+			_group.getGroupId(), "Link to Page content", false);
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 

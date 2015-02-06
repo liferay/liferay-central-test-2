@@ -187,11 +187,10 @@ public class LayoutSetPrototypePropagationTest
 
 		setLinkEnabled(true);
 
+		LayoutTestUtil.addLayout(group.getGroupId(), "testpage", false);
+
 		LayoutTestUtil.addLayout(
-			group.getGroupId(), RandomTestUtil.randomString(), false);
-		LayoutTestUtil.addLayout(
-			_layoutSetPrototypeGroup.getGroupId(),
-			RandomTestUtil.randomString(), true);
+			_layoutSetPrototypeGroup.getGroupId(), "testpage", true);
 
 		propagateChanges(group);
 
