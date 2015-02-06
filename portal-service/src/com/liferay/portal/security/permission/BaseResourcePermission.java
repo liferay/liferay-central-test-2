@@ -40,8 +40,6 @@ public abstract class BaseResourcePermission
 			return hasPermission.booleanValue();
 		}
 
-		// If the group is a staging group, check the live group.
-
 		Group group = GroupLocalServiceUtil.fetchGroup(classPK);
 
 		if ((group != null) && group.isStagingGroup()) {
