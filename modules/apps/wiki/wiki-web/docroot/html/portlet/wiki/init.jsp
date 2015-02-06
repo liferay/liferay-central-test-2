@@ -67,9 +67,9 @@ WikiSettings wikiSettings = wikiRequestHelper.getWikiSettings();
 
 WikiPortletInstanceSettingsHelper wikiPortletInstanceSettingsHelper = new WikiPortletInstanceSettingsHelper(wikiRequestHelper);
 
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
 WikiServiceConfiguration wikiServiceConfiguration = WikiServiceConfigurationProvider.getWikiServiceConfiguration();
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/wiki/init-ext.jsp" %>
