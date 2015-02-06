@@ -35,16 +35,16 @@ public class FullNameField {
 		_name = name;
 	}
 
-	public void setValues(String[] values) {
-		_values = values;
-	}
-
 	public void setRequired(boolean required) {
 		_required = required;
 	}
 
+	public void setValues(String[] values) {
+		_values = values;
+	}
+
 	private String _name;
-	private String[] _values;
 	private boolean _required;
+	private String[] _values;
 
 }
