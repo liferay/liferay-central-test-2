@@ -3769,7 +3769,7 @@ public class ServiceBuilder {
 			sb.append(tag.getName());
 			sb.append(" ");
 
-			if (_tpl.equals(_tplServiceSoap)) {
+			if (_currentTplName.equals(_tplServiceSoap)) {
 				if (tagValue.startsWith(
 						"com.liferay.portal.kernel.exception.PortalException"))
 				{
@@ -5044,7 +5044,7 @@ public class ServiceBuilder {
 	private String _processTemplate(String name, Map<String, Object> context)
 		throws Exception {
 
-		_tpl = name;
+		_currentTplName = name;
 
 		return StringUtil.strip(FreeMarkerUtil.process(name, context), '\r');
 	}
@@ -5240,7 +5240,7 @@ public class ServiceBuilder {
 	private String _targetEntityName;
 	private String _testDir;
 	private String _testOutputPath;
-	private String _tpl;
+	private String _currentTplName;
 	private String _tplActionableDynamicQuery =
 		_TPL_ROOT + "actionable_dynamic_query.ftl";
 	private String _tplBadAliasNames = _TPL_ROOT + "bad_alias_names.txt";
