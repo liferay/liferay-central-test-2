@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class ServiceConfigurationBeanSettingsTest {
 
-	public static final String TEMPLATE_CONTENT = "template content";
+	public static final String TEMPLATE_CONTENT = "Template Content";
 
 	@Before
 	public void setUp() {

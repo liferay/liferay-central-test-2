@@ -76,8 +76,8 @@ public class LocationVariableResolver {
 	private String _resolveFile(String location) {
 		if (!location.startsWith("///")) {
 			throw new IllegalArgumentException(
-				"Invalid file location " + location + " (only local file " +
-					"URIs starting with file:/// are supported");
+				"Invalid file location " + location + " because only local " +
+					"file URIs starting with file:/// are supported");
 		}
 
 		try {

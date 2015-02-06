@@ -35,6 +35,7 @@ public class ServiceConfigurationBeanSettings extends BaseSettings
 		super(parentSettings);
 
 		_serviceConfigurationBean = serviceConfigurationBean;
+
 		_locationVariableResolver = new LocationVariableResolver(
 			resourceManager);
 	}
