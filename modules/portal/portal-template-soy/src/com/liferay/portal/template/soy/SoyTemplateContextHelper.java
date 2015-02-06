@@ -29,9 +29,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Bruno Basto
  */
 @Component(
-	immediate = true, service = {
-		SoyTemplateContextHelper.class, TemplateContextHelper.class
-	}
+	immediate = true,
+	service = {SoyTemplateContextHelper.class, TemplateContextHelper.class}
 )
 public class SoyTemplateContextHelper extends TemplateContextHelper {
 
