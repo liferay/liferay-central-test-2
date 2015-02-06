@@ -23,8 +23,8 @@ public class FullNameField {
 		return _name;
 	}
 
-	public String[] getOptions() {
-		return _options;
+	public String[] getValues() {
+		return _values;
 	}
 
 	public boolean isRequired() {
@@ -35,8 +35,8 @@ public class FullNameField {
 		_name = name;
 	}
 
-	public void setOptions(String[] options) {
-		_options = options;
+	public void setValues(String[] values) {
+		_values = values;
 	}
 
 	public void setRequired(boolean required) {
@@ -44,7 +44,7 @@ public class FullNameField {
 	}
 
 	private String _name;
-	private String[] _options;
+	private String[] _values;
 	private boolean _required;
 
 }

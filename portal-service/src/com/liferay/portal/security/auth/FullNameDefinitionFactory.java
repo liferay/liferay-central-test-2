@@ -52,12 +52,12 @@ public class FullNameDefinitionFactory {
 
 			fullNameField.setName(userNameField);
 
-			String[] options = StringUtil.split(
+			String[] values = StringUtil.split(
 				LanguageUtil.get(
 					locale, "lang.user.name." + userNameField + ".values",
 					StringPool.BLANK));
 
-			fullNameField.setOptions(options);
+			fullNameField.setValues(values);
 
 			String requiredFieldNames = LanguageUtil.get(
 				locale, "lang.user.name.required.field.names");
