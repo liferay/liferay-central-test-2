@@ -1040,7 +1040,7 @@
 
 	<target name="setup-testable-tomcat">
 		<setup-testable-tomcat
-			property.file="${project.dir}/test.run.properties"
+			test.run.properties.file="${project.dir}/test.run.properties"
 		/>
 	</target>
 
