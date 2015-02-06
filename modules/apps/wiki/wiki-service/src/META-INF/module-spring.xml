@@ -30,7 +30,7 @@
 		</osgi:service-properties>
 	</osgi:service>
 	<bean id="com.liferay.wiki.service.persistence.WikiNodePersistence" class="com.liferay.wiki.service.persistence.impl.WikiNodePersistenceImpl" parent="basePersistence" />
-	<osgi:service ref="com.liferay.wiki.service.persistence.WikiNodePersistence" interface="com.liferay.wiki.service.persistence.WikiNodePersistence" />
+	<osgi:service interface="com.liferay.wiki.service.persistence.WikiNodePersistence" ref="com.liferay.wiki.service.persistence.WikiNodePersistence" />
 	<bean id="com.liferay.wiki.service.WikiPageLocalService" class="com.liferay.wiki.service.impl.WikiPageLocalServiceImpl" >
 		<property name="wikiServiceConfiguration" ref="com.liferay.wiki.configuration.WikiServiceConfiguration" />
 		<property name="wikiSettingsProvider" ref="com.liferay.wiki.settings.WikiSettingsProvider" />
@@ -51,9 +51,9 @@
 		</osgi:service-properties>
 	</osgi:service>
 	<bean id="com.liferay.wiki.service.persistence.WikiPagePersistence" class="com.liferay.wiki.service.persistence.impl.WikiPagePersistenceImpl" parent="basePersistence" />
-	<osgi:service ref="com.liferay.wiki.service.persistence.WikiPagePersistence" interface="com.liferay.wiki.service.persistence.WikiPagePersistence" />
+	<osgi:service interface="com.liferay.wiki.service.persistence.WikiPagePersistence" ref="com.liferay.wiki.service.persistence.WikiPagePersistence" />
 	<bean id="com.liferay.wiki.service.persistence.WikiPageFinder" class="com.liferay.wiki.service.persistence.impl.WikiPageFinderImpl" parent="basePersistence" />
-	<osgi:service ref="com.liferay.wiki.service.persistence.WikiPageFinder" interface="com.liferay.wiki.service.persistence.WikiPageFinder" />
+	<osgi:service interface="com.liferay.wiki.service.persistence.WikiPageFinder" interface="com.liferay.wiki.service.persistence.WikiPageFinder" />
 	<bean id="com.liferay.wiki.service.WikiPageResourceLocalService" class="com.liferay.wiki.service.impl.WikiPageResourceLocalServiceImpl" />
 	<osgi:service interface="com.liferay.wiki.service.WikiPageResourceLocalService" ref="com.liferay.wiki.service.WikiPageResourceLocalService">
 		<osgi:service-properties>
@@ -62,6 +62,6 @@
 		</osgi:service-properties>
 	</osgi:service>
 	<bean id="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.wiki.service.persistence.impl.WikiPageResourcePersistenceImpl" parent="basePersistence" />
-	<osgi:service ref="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" interface="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" />
+	<osgi:service interface="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" ref="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" />
 	<osgi:reference id="com.liferay.wiki.settings.WikiSettingsProvider" availability="mandatory" filter="(class.name=com.liferay.wiki.settings.WikiSettings)" interface="com.liferay.portal.kernel.settings.SettingsProvider" />
 </beans>
