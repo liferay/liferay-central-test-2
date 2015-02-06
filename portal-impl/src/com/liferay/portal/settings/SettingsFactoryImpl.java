@@ -197,9 +197,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			getServiceConfigurationBeanSettings(
 				portletId, portalPropertiesSettings);
 
-		long groupId = layout.getGroupId();
-
-		long companyId = getCompanyId(groupId);
+		long companyId = getCompanyId(layout.getGroupId());
 
 		Settings portalPreferencesSettings = getPortalPreferencesSettings(
 			companyId, serviceConfigurationBeanSettings);
@@ -210,7 +208,8 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 		Settings groupPortletPreferencesSettings =
 			getGroupPortletPreferencesSettings(
-				groupId, portletId, companyPortletPreferencesSettings);
+				layout.getGroupId(), portletId,
+				companyPortletPreferencesSettings);
 
 		Settings portletInstancePortletPreferencesSettings =
 			getPortletInstancePortletPreferencesSettings(
