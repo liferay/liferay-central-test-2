@@ -25,13 +25,13 @@ import org.junit.Test;
  */
 public class ServiceConfigurationBeanSettingsTest {
 
-	public static final String TEMPLATE_CONTENTS = "template contents";
+	public static final String TEMPLATE_CONTENT = "template content";
 
 	@Before
 	public void setUp() {
 		_serviceConfigurationBean = new ServiceConfigurationBean();
 
-		_mockResourceManager = new MockResourceManager(TEMPLATE_CONTENTS);
+		_mockResourceManager = new MockResourceManager(TEMPLATE_CONTENT);
 
 		_serviceConfigurationBeanSettings =
 			new ServiceConfigurationBeanSettings(
@@ -75,7 +75,7 @@ public class ServiceConfigurationBeanSettingsTest {
 	@Test
 	public void testGetValueWithLocationVariable() {
 		Assert.assertEquals(
-			TEMPLATE_CONTENTS,
+			TEMPLATE_CONTENT,
 			_serviceConfigurationBeanSettings.getValue(
 				"locationVariableValue", "defaultValue"));
 

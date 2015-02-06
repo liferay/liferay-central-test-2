@@ -28,13 +28,13 @@ import java.util.List;
 */
 public class MockResourceManager implements ResourceManager, ResourceRetriever {
 
-	public MockResourceManager(String contents) {
-		_contents = contents;
+	public MockResourceManager(String content) {
+		_content = content;
 	}
 
 	@Override
 	public InputStream getInputStream() {
-		return new ByteArrayInputStream(_contents.getBytes());
+		return new ByteArrayInputStream(_content.getBytes());
 	}
 
 	public List<String> getRequestedLocations() {
@@ -48,7 +48,7 @@ public class MockResourceManager implements ResourceManager, ResourceRetriever {
 		return this;
 	}
 
-	private final String _contents;
+	private final String _content;
 	private final List<String> _requestedLocations = new ArrayList<>();
 
 }
