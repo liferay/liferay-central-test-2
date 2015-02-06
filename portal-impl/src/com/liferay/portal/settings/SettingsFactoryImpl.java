@@ -96,13 +96,13 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	public Settings getGroupServiceSettings(long groupId, String serviceName)
 		throws PortalException {
 
+		long companyId = getCompanyId(groupId);
+
 		Settings portalPropertiesSettings = getPortalPropertiesSettings();
 
 		Settings serviceConfigurationBeanSettings =
 			getServiceConfigurationBeanSettings(
 				serviceName, portalPropertiesSettings);
-
-		long companyId = getCompanyId(groupId);
 
 		Settings portalPreferencesSettings = getPortalPreferencesSettings(
 			companyId, serviceConfigurationBeanSettings);
