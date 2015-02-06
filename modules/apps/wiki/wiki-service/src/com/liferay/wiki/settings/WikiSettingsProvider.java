@@ -70,7 +70,7 @@ public class WikiSettingsProvider implements SettingsProvider<WikiSettings> {
 	protected static WikiSettingsProvider getWikiSettingsProvider() {
 		if (_wikiSettingsProvider == null) {
 			throw new IllegalStateException(
-				"WikiSettingsProvider is not available");
+				"Wiki settings provider is not available");
 		}
 
 		return _wikiSettingsProvider;
