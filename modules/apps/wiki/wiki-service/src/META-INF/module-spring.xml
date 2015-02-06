@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService" class="com.liferay.wiki.service.impl.WikiNodeLocalServiceImpl" >
+	<osgi:reference id="com.liferay.wiki.configuration.WikiServiceConfiguration" availability="mandatory" interface="com.liferay.wiki.configuration.WikiServiceConfiguration" />
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService" class="com.liferay.wiki.service.impl.WikiNodeLocalServiceImpl">
 		<property name="wikiServiceConfiguration" ref="com.liferay.wiki.configuration.WikiServiceConfiguration" />
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeService" class="com.liferay.wiki.service.impl.WikiNodeServiceImpl" />
@@ -63,5 +64,4 @@
 	<bean id="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.wiki.service.persistence.impl.WikiPageResourcePersistenceImpl" parent="basePersistence" />
 	<osgi:service ref="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" interface="com.liferay.wiki.service.persistence.WikiPageResourcePersistence" />
 	<osgi:reference id="com.liferay.wiki.settings.WikiSettingsProvider" availability="mandatory" filter="(class.name=com.liferay.wiki.settings.WikiSettings)" interface="com.liferay.portal.kernel.settings.SettingsProvider" />
-	<osgi:reference id="com.liferay.wiki.configuration.WikiServiceConfiguration" availability="mandatory" interface="com.liferay.wiki.configuration.WikiServiceConfiguration" />
 </beans>
