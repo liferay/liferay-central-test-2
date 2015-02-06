@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class LocationVariableResolverTest {
 

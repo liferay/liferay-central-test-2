@@ -24,7 +24,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 @Component(
 	configurationPid = "com.liferay.wiki.service", immediate = true,

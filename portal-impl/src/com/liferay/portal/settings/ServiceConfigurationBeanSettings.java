@@ -23,7 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class ServiceConfigurationBeanSettings extends BaseSettings
 	implements Settings {

@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 @Component(
 	configurationPid = "com.liferay.wiki.service", immediate = true,

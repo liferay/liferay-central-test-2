@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import java.util.Map;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public interface SettingsProvider<T> {
 

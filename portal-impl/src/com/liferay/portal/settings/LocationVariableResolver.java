@@ -23,7 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * @author Ivan Zaera
+ * @author Iván Zaera
  */
 public class LocationVariableResolver {
 
