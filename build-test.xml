@@ -679,6 +679,7 @@
 
 	<macrodef name="setup-testable-tomcat">
 		<attribute name="property.file" />
+
 		<sequential>
 			<property file="@{property.file}" />
 
