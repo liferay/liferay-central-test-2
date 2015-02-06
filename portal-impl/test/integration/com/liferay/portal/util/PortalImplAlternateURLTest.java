@@ -17,6 +17,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -175,7 +176,7 @@ public class PortalImplAlternateURLTest {
 			_group.getGroupId(), groupAvailableLocales, groupDefaultLocale);
 
 		Layout layout = LayoutTestUtil.addLayout(
-			_group.getGroupId(), "welcome", false);
+			_group.getGroupId(), RandomTestUtil.randomString(), false);
 
 		String canonicalURL = generateURL(
 			portalDomain, StringPool.BLANK, _group.getFriendlyURL(),
