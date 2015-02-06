@@ -4687,7 +4687,10 @@ if (ppstate.equals("normal")) {
 			</then>
 		</if>
 
-		<start-app-server app.server.bundle.index="${app.server.bundle.index}" testable.portal.started.marker.file="${testable.portal.started.marker.file}" />
+		<start-app-server
+			app.server.bundle.index="${app.server.bundle.index}"
+			testable.portal.started.marker.file="${testable.portal.started.marker.file}"
+		/>
 	</target>
 
 	<target name="start-chrome-driver">
