@@ -191,13 +191,13 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	public Settings getPortletInstanceSettings(Layout layout, String portletId)
 		throws PortalException {
 
+		long companyId = getCompanyId(layout.getGroupId());
+
 		Settings portalPropertiesSettings = getPortalPropertiesSettings();
 
 		Settings serviceConfigurationBeanSettings =
 			getServiceConfigurationBeanSettings(
 				portletId, portalPropertiesSettings);
-
-		long companyId = getCompanyId(layout.getGroupId());
 
 		Settings portalPreferencesSettings = getPortalPreferencesSettings(
 			companyId, serviceConfigurationBeanSettings);
