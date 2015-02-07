@@ -2399,7 +2399,7 @@ public class HookHotDeployListener
 			customJsps.add(portalJsp);
 		}
 
-		Map<String, String> collidingCustomJsps = new HashMap<>();
+		Map<String, String> conflictingCustomJsps = new HashMap<>();
 
 		for (Map.Entry<String, CustomJspBag> entry :
 				_customJspBagsMap.entrySet()) {
@@ -2412,34 +2412,31 @@ public class HookHotDeployListener
 
 			String currentServletContextName = entry.getKey();
 
-			String currentCustomJspDir = currentCustomJspBag.getCustomJspDir();
 			List<String> currentCustomJsps =
 				currentCustomJspBag.getCustomJsps();
 
 			for (String currentCustomJsp : currentCustomJsps) {
 				String currentPortalJsp = getPortalJsp(
-					currentCustomJsp, currentCustomJspDir);
+					currentCustomJsp, currentCustomJspBag.getCustomJspDir());
 
 				if (customJsps.contains(currentPortalJsp)) {
-					collidingCustomJsps.put(
+					conflictingCustomJsps.put(
 						currentPortalJsp, currentServletContextName);
 				}
 			}
 		}
 
-		if (collidingCustomJsps.isEmpty()) {
+		if (conflictingCustomJsps.isEmpty()) {
 			return;
 		}
 
-		_log.error(
-			servletContextName + " is colliding with the currently installed " +
-				"hooks");
+		_log.error(servletContextName + " conflicts with the installed hooks");
 
 		if (_log.isDebugEnabled()) {
 			Log log = SanitizerLogWrapper.allowCRLF(_log);
 
 			StringBundler sb = new StringBundler(
-				collidingCustomJsps.size() * 4 + 2);
+				conflictingCustomJsps.size() * 4 + 2);
 
 			sb.append("Colliding JSP files in ");
 			sb.append(servletContextName);
@@ -2448,13 +2445,13 @@ public class HookHotDeployListener
 			int i = 0;
 
 			for (Map.Entry<String, String> entry :
-					collidingCustomJsps.entrySet()) {
+					conflictingCustomJsps.entrySet()) {
 
 				sb.append(entry.getKey());
 				sb.append(" with ");
 				sb.append(entry.getValue());
 
-				if ((i + 1) < collidingCustomJsps.size()) {
+				if ((i + 1) < conflictingCustomJsps.size()) {
 					sb.append(StringPool.NEW_LINE);
 				}
 

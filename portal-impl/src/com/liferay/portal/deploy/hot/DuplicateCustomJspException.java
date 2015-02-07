@@ -14,12 +14,12 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 
 /**
  * @author Zoltán Takács
  */
-public class DuplicateCustomJspException extends PortalException {
+public class DuplicateCustomJspException extends HotDeployException {
 
 	public DuplicateCustomJspException() {
 	}
