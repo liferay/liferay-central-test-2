@@ -505,7 +505,7 @@ public class UsersAdminImpl implements UsersAdmin {
 
 			long regionId = ParamUtil.getLong(
 				actionRequest, "addressRegionId" + addressesIndex);
-			int typeId = ParamUtil.getInteger(
+			long typeId = ParamUtil.getLong(
 				actionRequest, "addressTypeId" + addressesIndex);
 			boolean mailing = ParamUtil.getBoolean(
 				actionRequest, "addressMailing" + addressesIndex);
@@ -571,7 +571,7 @@ public class UsersAdminImpl implements UsersAdmin {
 				continue;
 			}
 
-			int typeId = ParamUtil.getInteger(
+			long typeId = ParamUtil.getLong(
 				actionRequest, "emailAddressTypeId" + emailAddressesIndex);
 
 			boolean primary = false;
@@ -735,7 +735,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			long orgLaborId = ParamUtil.getLong(
 				actionRequest, "orgLaborId" + orgLaborsIndex);
 
-			int typeId = ParamUtil.getInteger(
+			long typeId = ParamUtil.getLong(
 				actionRequest, "orgLaborTypeId" + orgLaborsIndex, -1);
 
 			if (typeId == -1) {
@@ -831,7 +831,7 @@ public class UsersAdminImpl implements UsersAdmin {
 				continue;
 			}
 
-			int typeId = ParamUtil.getInteger(
+			long typeId = ParamUtil.getLong(
 				actionRequest, "phoneTypeId" + phonesIndex);
 
 			boolean primary = false;
@@ -1108,7 +1108,7 @@ public class UsersAdminImpl implements UsersAdmin {
 				continue;
 			}
 
-			int typeId = ParamUtil.getInteger(
+			long typeId = ParamUtil.getLong(
 				actionRequest, "websiteTypeId" + websitesIndex);
 
 			boolean primary = false;
