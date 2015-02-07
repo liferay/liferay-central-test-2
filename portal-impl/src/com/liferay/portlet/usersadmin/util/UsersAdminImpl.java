@@ -1284,7 +1284,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			String zip = address.getZip();
 			long regionId = address.getRegionId();
 			long countryId = address.getCountryId();
-			int typeId = address.getTypeId();
+			long typeId = address.getTypeId();
 			boolean mailing = address.isMailing();
 			boolean primary = address.isPrimary();
 
@@ -1325,7 +1325,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			long emailAddressId = emailAddress.getEmailAddressId();
 
 			String address = emailAddress.getAddress();
-			int typeId = emailAddress.getTypeId();
+			long typeId = emailAddress.getTypeId();
 			boolean primary = emailAddress.isPrimary();
 
 			if (emailAddressId <= 0) {
@@ -1363,7 +1363,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		for (OrgLabor orgLabor : orgLabors) {
 			long orgLaborId = orgLabor.getOrgLaborId();
 
-			int typeId = orgLabor.getTypeId();
+			long typeId = orgLabor.getTypeId();
 			int sunOpen = orgLabor.getSunOpen();
 			int sunClose = orgLabor.getSunClose();
 			int monOpen = orgLabor.getMonOpen();
@@ -1417,7 +1417,7 @@ public class UsersAdminImpl implements UsersAdmin {
 
 			String number = phone.getNumber();
 			String extension = phone.getExtension();
-			int typeId = phone.getTypeId();
+			long typeId = phone.getTypeId();
 			boolean primary = phone.isPrimary();
 
 			if (phoneId <= 0) {
@@ -1455,7 +1455,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			long websiteId = website.getWebsiteId();
 
 			String url = website.getUrl();
-			int typeId = website.getTypeId();
+			long typeId = website.getTypeId();
 			boolean primary = website.isPrimary();
 
 			if (websiteId <= 0) {

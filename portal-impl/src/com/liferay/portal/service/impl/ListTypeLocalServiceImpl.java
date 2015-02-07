@@ -38,7 +38,7 @@ public class ListTypeLocalServiceImpl extends ListTypeLocalServiceBaseImpl {
 			return listType;
 		}
 
-		int listTypeId = (int)counterLocalService.increment(
+		long listTypeId = counterLocalService.increment(
 			ListType.class.getName());
 
 		listType = listTypePersistence.create(listTypeId);
@@ -52,7 +52,7 @@ public class ListTypeLocalServiceImpl extends ListTypeLocalServiceBaseImpl {
 	}
 
 	@Override
-	public ListType getListType(int listTypeId) throws PortalException {
+	public ListType getListType(long listTypeId) throws PortalException {
 		return listTypePersistence.findByPrimaryKey(listTypeId);
 	}
 
@@ -62,7 +62,7 @@ public class ListTypeLocalServiceImpl extends ListTypeLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void validate(int listTypeId, long classNameId, String type)
+	public void validate(long listTypeId, long classNameId, String type)
 		throws PortalException {
 
 		ClassName className = classNameLocalService.getClassName(classNameId);
@@ -71,7 +71,7 @@ public class ListTypeLocalServiceImpl extends ListTypeLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void validate(int listTypeId, String type) throws PortalException {
+	public void validate(long listTypeId, String type) throws PortalException {
 		ListType listType = listTypePersistence.fetchByPrimaryKey(listTypeId);
 
 		if ((listType == null) || !listType.getType().equals(type)) {

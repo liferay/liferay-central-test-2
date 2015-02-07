@@ -26,7 +26,7 @@ import java.util.List;
 public class ListTypeServiceImpl extends ListTypeServiceBaseImpl {
 
 	@Override
-	public ListType getListType(int listTypeId) throws PortalException {
+	public ListType getListType(long listTypeId) throws PortalException {
 		return listTypeLocalService.getListType(listTypeId);
 	}
 
@@ -36,14 +36,14 @@ public class ListTypeServiceImpl extends ListTypeServiceBaseImpl {
 	}
 
 	@Override
-	public void validate(int listTypeId, long classNameId, String type)
+	public void validate(long listTypeId, long classNameId, String type)
 		throws PortalException {
 
 		listTypeLocalService.validate(listTypeId, classNameId, type);
 	}
 
 	@Override
-	public void validate(int listTypeId, String type) throws PortalException {
+	public void validate(long listTypeId, String type) throws PortalException {
 		listTypeLocalService.validate(listTypeId, type);
 	}
 
