@@ -150,7 +150,8 @@ public class
 	@Override
 	public void updateStatus(
 			long replierUserId, long membershipRequestId, String replyComments,
-			long statusId, boolean addUserToGroup, ServiceContext serviceContext)
+			long statusId, boolean addUserToGroup,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		validate(replyComments);

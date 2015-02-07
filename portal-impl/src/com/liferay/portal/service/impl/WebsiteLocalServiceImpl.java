@@ -40,8 +40,8 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	@Deprecated
 	@Override
 	public Website addWebsite(
-			long userId, String className, long classPK, String url, long typeId,
-			boolean primary)
+			long userId, String className, long classPK, String url,
+			long typeId, boolean primary)
 		throws PortalException {
 
 		return addWebsite(
@@ -51,8 +51,8 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 	@Override
 	public Website addWebsite(
-			long userId, String className, long classPK, String url, long typeId,
-			boolean primary, ServiceContext serviceContext)
+			long userId, String className, long classPK, String url,
+			long typeId, boolean primary, ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
