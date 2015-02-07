@@ -733,9 +733,7 @@ public class HookHotDeployListener
 
 		int pos = customJsp.indexOf(customJspDir);
 
-		String portalJsp = customJsp.substring(pos + customJspDir.length());
-
-		return portalJsp;
+		return customJsp.substring(pos + customJspDir.length());
 	}
 
 	protected File getPortalJspBackupFile(File portalJspFile) {
@@ -1004,16 +1002,14 @@ public class HookHotDeployListener
 
 			sb.append("Custom JSP files:\n");
 
-			int i = 0;
+			for (int i = 0; i < customJsps.size(); i++) {
+				String customJsp = customJsps.get(0);
 
-			for (String customJsp : customJsps) {
 				sb.append(customJsp);
 
 				if ((i + 1) < customJsps.size()) {
 					sb.append(StringPool.NEW_LINE);
 				}
-
-				i++;
 			}
 
 			Log log = SanitizerLogWrapper.allowCRLF(_log);
@@ -2394,11 +2390,11 @@ public class HookHotDeployListener
 			String servletContextName, CustomJspBag customJspBag)
 		throws DuplicateCustomJspException {
 
-		String customJspDir = customJspBag.getCustomJspDir();
 		Set<String> customJsps = new HashSet<>();
 
 		for (String customJsp : customJspBag.getCustomJsps()) {
-			String portalJsp = getPortalJsp(customJsp, customJspDir);
+			String portalJsp = getPortalJsp(
+				customJsp, customJspBag.getCustomJspDir());
 
 			customJsps.add(portalJsp);
 		}
@@ -2408,13 +2404,13 @@ public class HookHotDeployListener
 		for (Map.Entry<String, CustomJspBag> entry :
 				_customJspBagsMap.entrySet()) {
 
-			CustomJspBag currentCustomJspBag = (CustomJspBag)entry.getValue();
+			CustomJspBag currentCustomJspBag = entry.getValue();
 
 			if (!currentCustomJspBag.isCustomJspGlobal()) {
 				continue;
 			}
 
-			String currentServletContextName = (String)entry.getKey();
+			String currentServletContextName = entry.getKey();
 
 			String currentCustomJspDir = currentCustomJspBag.getCustomJspDir();
 			List<String> currentCustomJsps =
@@ -2454,9 +2450,9 @@ public class HookHotDeployListener
 			for (Map.Entry<String, String> entry :
 					collidingCustomJsps.entrySet()) {
 
-				sb.append((String)entry.getKey());
+				sb.append(entry.getKey());
 				sb.append(" with ");
-				sb.append((String)entry.getValue());
+				sb.append(entry.getValue());
 
 				if ((i + 1) < collidingCustomJsps.size()) {
 					sb.append(StringPool.NEW_LINE);
