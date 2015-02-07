@@ -372,7 +372,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	 */
 	@Override
-	public ListType[] findByType_PrevAndNext(int listTypeId, String type,
+	public ListType[] findByType_PrevAndNext(long listTypeId, String type,
 		OrderByComparator<ListType> orderByComparator)
 		throws NoSuchListTypeException {
 		ListType listType = findByPrimaryKey(listTypeId);
@@ -1040,7 +1040,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @return the new list type
 	 */
 	@Override
-	public ListType create(int listTypeId) {
+	public ListType create(long listTypeId) {
 		ListType listType = new ListTypeImpl();
 
 		listType.setNew(true);
@@ -1057,7 +1057,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	 */
 	@Override
-	public ListType remove(int listTypeId) throws NoSuchListTypeException {
+	public ListType remove(long listTypeId) throws NoSuchListTypeException {
 		return remove((Serializable)listTypeId);
 	}
 
@@ -1246,7 +1246,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	 */
 	@Override
-	public ListType findByPrimaryKey(int listTypeId)
+	public ListType findByPrimaryKey(long listTypeId)
 		throws NoSuchListTypeException {
 		return findByPrimaryKey((Serializable)listTypeId);
 	}
@@ -1303,7 +1303,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @return the list type, or <code>null</code> if a list type with the primary key could not be found
 	 */
 	@Override
-	public ListType fetchByPrimaryKey(int listTypeId) {
+	public ListType fetchByPrimaryKey(long listTypeId) {
 		return fetchByPrimaryKey((Serializable)listTypeId);
 	}
 

@@ -85,7 +85,7 @@ public class ListTypePersistenceTest {
 
 	@Test
 	public void testCreate() throws Exception {
-		int pk = RandomTestUtil.nextInt();
+		long pk = RandomTestUtil.nextLong();
 
 		ListType listType = _persistence.create(pk);
 
@@ -112,7 +112,7 @@ public class ListTypePersistenceTest {
 
 	@Test
 	public void testUpdateExisting() throws Exception {
-		int pk = RandomTestUtil.nextInt();
+		long pk = RandomTestUtil.nextLong();
 
 		ListType newListType = _persistence.create(pk);
 
@@ -173,7 +173,7 @@ public class ListTypePersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyMissing() throws Exception {
-		int pk = RandomTestUtil.nextInt();
+		long pk = RandomTestUtil.nextLong();
 
 		try {
 			_persistence.findByPrimaryKey(pk);
@@ -211,7 +211,7 @@ public class ListTypePersistenceTest {
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
-		int pk = RandomTestUtil.nextInt();
+		long pk = RandomTestUtil.nextLong();
 
 		ListType missingListType = _persistence.fetchByPrimaryKey(pk);
 
@@ -241,9 +241,9 @@ public class ListTypePersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
-		int pk1 = RandomTestUtil.nextInt();
+		long pk1 = RandomTestUtil.nextLong();
 
-		int pk2 = RandomTestUtil.nextInt();
+		long pk2 = RandomTestUtil.nextLong();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
@@ -260,7 +260,7 @@ public class ListTypePersistenceTest {
 		throws Exception {
 		ListType newListType = addListType();
 
-		int pk = RandomTestUtil.nextInt();
+		long pk = RandomTestUtil.nextLong();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
@@ -348,7 +348,7 @@ public class ListTypePersistenceTest {
 				_dynamicQueryClassLoader);
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("listTypeId",
-				RandomTestUtil.nextInt()));
+				RandomTestUtil.nextLong()));
 
 		List<ListType> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -387,7 +387,7 @@ public class ListTypePersistenceTest {
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property("listTypeId"));
 
 		dynamicQuery.add(RestrictionsFactoryUtil.in("listTypeId",
-				new Object[] { RandomTestUtil.nextInt() }));
+				new Object[] { RandomTestUtil.nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -415,7 +415,7 @@ public class ListTypePersistenceTest {
 	}
 
 	protected ListType addListType() throws Exception {
-		int pk = RandomTestUtil.nextInt();
+		long pk = RandomTestUtil.nextLong();
 
 		ListType listType = _persistence.create(pk);
 

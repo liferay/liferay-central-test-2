@@ -89,7 +89,7 @@ public abstract class ListTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the new list type
 	 */
 	@Override
-	public ListType createListType(int listTypeId) {
+	public ListType createListType(long listTypeId) {
 		return listTypePersistence.create(listTypeId);
 	}
 
@@ -102,7 +102,7 @@ public abstract class ListTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public ListType deleteListType(int listTypeId) throws PortalException {
+	public ListType deleteListType(long listTypeId) throws PortalException {
 		return listTypePersistence.remove(listTypeId);
 	}
 
@@ -201,7 +201,7 @@ public abstract class ListTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public ListType fetchListType(int listTypeId) {
+	public ListType fetchListType(long listTypeId) {
 		return listTypePersistence.fetchByPrimaryKey(listTypeId);
 	}
 
@@ -213,7 +213,7 @@ public abstract class ListTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws PortalException if a list type with the primary key could not be found
 	 */
 	@Override
-	public ListType getListType(int listTypeId) throws PortalException {
+	public ListType getListType(long listTypeId) throws PortalException {
 		return listTypePersistence.findByPrimaryKey(listTypeId);
 	}
 

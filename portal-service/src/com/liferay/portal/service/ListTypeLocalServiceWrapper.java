@@ -56,7 +56,7 @@ public class ListTypeLocalServiceWrapper implements ListTypeLocalService,
 	* @return the new list type
 	*/
 	@Override
-	public com.liferay.portal.model.ListType createListType(int listTypeId) {
+	public com.liferay.portal.model.ListType createListType(long listTypeId) {
 		return _listTypeLocalService.createListType(listTypeId);
 	}
 
@@ -80,7 +80,7 @@ public class ListTypeLocalServiceWrapper implements ListTypeLocalService,
 	* @throws PortalException if a list type with the primary key could not be found
 	*/
 	@Override
-	public com.liferay.portal.model.ListType deleteListType(int listTypeId)
+	public com.liferay.portal.model.ListType deleteListType(long listTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _listTypeLocalService.deleteListType(listTypeId);
 	}
@@ -180,7 +180,7 @@ public class ListTypeLocalServiceWrapper implements ListTypeLocalService,
 	}
 
 	@Override
-	public com.liferay.portal.model.ListType fetchListType(int listTypeId) {
+	public com.liferay.portal.model.ListType fetchListType(long listTypeId) {
 		return _listTypeLocalService.fetchListType(listTypeId);
 	}
 
@@ -207,7 +207,7 @@ public class ListTypeLocalServiceWrapper implements ListTypeLocalService,
 	* @throws PortalException if a list type with the primary key could not be found
 	*/
 	@Override
-	public com.liferay.portal.model.ListType getListType(int listTypeId)
+	public com.liferay.portal.model.ListType getListType(long listTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _listTypeLocalService.getListType(listTypeId);
 	}
@@ -275,13 +275,14 @@ public class ListTypeLocalServiceWrapper implements ListTypeLocalService,
 	}
 
 	@Override
-	public void validate(int listTypeId, long classNameId, java.lang.String type)
+	public void validate(long listTypeId, long classNameId,
+		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_listTypeLocalService.validate(listTypeId, classNameId, type);
 	}
 
 	@Override
-	public void validate(int listTypeId, java.lang.String type)
+	public void validate(long listTypeId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_listTypeLocalService.validate(listTypeId, type);
 	}

@@ -137,7 +137,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	* @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	*/
 	public com.liferay.portal.model.ListType[] findByType_PrevAndNext(
-		int listTypeId, java.lang.String type,
+		long listTypeId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.ListType> orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException;
 
@@ -230,7 +230,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	* @param listTypeId the primary key for the new list type
 	* @return the new list type
 	*/
-	public com.liferay.portal.model.ListType create(int listTypeId);
+	public com.liferay.portal.model.ListType create(long listTypeId);
 
 	/**
 	* Removes the list type with the primary key from the database. Also notifies the appropriate model listeners.
@@ -239,7 +239,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	* @return the list type that was removed
 	* @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	*/
-	public com.liferay.portal.model.ListType remove(int listTypeId)
+	public com.liferay.portal.model.ListType remove(long listTypeId)
 		throws com.liferay.portal.NoSuchListTypeException;
 
 	public com.liferay.portal.model.ListType updateImpl(
@@ -252,7 +252,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	* @return the list type
 	* @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	*/
-	public com.liferay.portal.model.ListType findByPrimaryKey(int listTypeId)
+	public com.liferay.portal.model.ListType findByPrimaryKey(long listTypeId)
 		throws com.liferay.portal.NoSuchListTypeException;
 
 	/**
@@ -261,7 +261,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	* @param listTypeId the primary key of the list type
 	* @return the list type, or <code>null</code> if a list type with the primary key could not be found
 	*/
-	public com.liferay.portal.model.ListType fetchByPrimaryKey(int listTypeId);
+	public com.liferay.portal.model.ListType fetchByPrimaryKey(long listTypeId);
 
 	@Override
 	public java.util.Map<java.io.Serializable, com.liferay.portal.model.ListType> fetchByPrimaryKeys(

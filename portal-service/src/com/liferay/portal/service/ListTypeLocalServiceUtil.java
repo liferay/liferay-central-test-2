@@ -64,7 +64,7 @@ public class ListTypeLocalServiceUtil {
 	* @return the new list type
 	*/
 	public static com.liferay.portal.model.ListType createListType(
-		int listTypeId) {
+		long listTypeId) {
 		return getService().createListType(listTypeId);
 	}
 
@@ -87,7 +87,7 @@ public class ListTypeLocalServiceUtil {
 	* @throws PortalException if a list type with the primary key could not be found
 	*/
 	public static com.liferay.portal.model.ListType deleteListType(
-		int listTypeId)
+		long listTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteListType(listTypeId);
 	}
@@ -180,7 +180,7 @@ public class ListTypeLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.ListType fetchListType(
-		int listTypeId) {
+		long listTypeId) {
 		return getService().fetchListType(listTypeId);
 	}
 
@@ -204,7 +204,7 @@ public class ListTypeLocalServiceUtil {
 	* @return the list type
 	* @throws PortalException if a list type with the primary key could not be found
 	*/
-	public static com.liferay.portal.model.ListType getListType(int listTypeId)
+	public static com.liferay.portal.model.ListType getListType(long listTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getListType(listTypeId);
 	}
@@ -265,13 +265,13 @@ public class ListTypeLocalServiceUtil {
 		return getService().updateListType(listType);
 	}
 
-	public static void validate(int listTypeId, long classNameId,
+	public static void validate(long listTypeId, long classNameId,
 		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().validate(listTypeId, classNameId, type);
 	}
 
-	public static void validate(int listTypeId, java.lang.String type)
+	public static void validate(long listTypeId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().validate(listTypeId, type);
 	}

@@ -65,7 +65,7 @@ public interface ListTypeLocalService extends BaseLocalService,
 	* @param listTypeId the primary key for the new list type
 	* @return the new list type
 	*/
-	public com.liferay.portal.model.ListType createListType(int listTypeId);
+	public com.liferay.portal.model.ListType createListType(long listTypeId);
 
 	/**
 	* Deletes the list type from the database. Also notifies the appropriate model listeners.
@@ -85,7 +85,7 @@ public interface ListTypeLocalService extends BaseLocalService,
 	* @throws PortalException if a list type with the primary key could not be found
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.liferay.portal.model.ListType deleteListType(int listTypeId)
+	public com.liferay.portal.model.ListType deleteListType(long listTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
@@ -162,7 +162,7 @@ public interface ListTypeLocalService extends BaseLocalService,
 		com.liferay.portal.kernel.dao.orm.Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.ListType fetchListType(int listTypeId);
+	public com.liferay.portal.model.ListType fetchListType(long listTypeId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery();
@@ -182,7 +182,7 @@ public interface ListTypeLocalService extends BaseLocalService,
 	* @throws PortalException if a list type with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.ListType getListType(int listTypeId)
+	public com.liferay.portal.model.ListType getListType(long listTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
@@ -235,9 +235,10 @@ public interface ListTypeLocalService extends BaseLocalService,
 	public com.liferay.portal.model.ListType updateListType(
 		com.liferay.portal.model.ListType listType);
 
-	public void validate(int listTypeId, long classNameId, java.lang.String type)
+	public void validate(long listTypeId, long classNameId,
+		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public void validate(int listTypeId, java.lang.String type)
+	public void validate(long listTypeId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException;
 }
