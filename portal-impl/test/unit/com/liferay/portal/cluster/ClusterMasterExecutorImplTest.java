@@ -74,7 +74,8 @@ public class ClusterMasterExecutorImplTest {
 	}
 
 	@Test
-	public void testClusterMasterTokenClusterEventListener() throws Exception {
+	public void testClusterMasterTokenClusterEventListener()
+		throws UnknownHostException {
 
 		// Test 1, cluster event listener is invoked when lock is not changed
 
@@ -152,7 +153,7 @@ public class ClusterMasterExecutorImplTest {
 	}
 
 	@Test
-	public void testDestroy() throws Exception {
+	public void testDestroy() throws UnknownHostException {
 
 		// Test 1, desctory when cluster link is enabled
 
@@ -359,7 +360,7 @@ public class ClusterMasterExecutorImplTest {
 	}
 
 	@Test
-	public void testGetMasterAddressString() throws Exception {
+	public void testGetMasterAddressString() throws UnknownHostException {
 
 		// Test 1, master to slave
 
@@ -405,7 +406,8 @@ public class ClusterMasterExecutorImplTest {
 	}
 
 	@Test
-	public void testGetMasterAddressStringWithException() throws Exception {
+	public void testGetMasterAddressStringWithException()
+		throws UnknownHostException {
 
 		// Test 1, current owner is not alive
 
@@ -492,7 +494,7 @@ public class ClusterMasterExecutorImplTest {
 	}
 
 	@Test
-	public void testInitialize() throws Exception {
+	public void testInitialize() throws UnknownHostException {
 
 		// Test 1, initialize when cluster link is disabled
 
