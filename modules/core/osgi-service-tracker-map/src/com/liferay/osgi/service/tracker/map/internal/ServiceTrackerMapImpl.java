@@ -114,12 +114,12 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		@Override
 		public void emit(K key) {
 			if ((_serviceReferenceServiceTuple == null) &&
-				!_invokedCustomizer) {
+				!_invokedServiceTrackerCustomizer) {
 
 				TS service = _serviceTrackerCustomizer.addingService(
 					_serviceReference);
 
-					_invokedCustomizer = true;
+				_invokedServiceTrackerCustomizer = true;
 
 				if (service == null) {
 					return;
@@ -154,10 +154,10 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 			return _serviceReferenceServiceTuple;
 		}
 
-		private boolean _invokedCustomizer = false;
+		private boolean _invokedServiceTrackerCustomizer;
 		private final ServiceReference<SR> _serviceReference;
 		private ServiceReferenceServiceTuple<SR, TS>
-			_serviceReferenceServiceTuple = null;
+			_serviceReferenceServiceTuple;
 
 	}
 
@@ -169,11 +169,12 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		public ServiceReferenceServiceTuple<SR, TS> addingService(
 			final ServiceReference<SR> serviceReference) {
 
-			DefaultEmitter emitter = new DefaultEmitter(serviceReference);
+			DefaultEmitter defaultEmitter = new DefaultEmitter(
+				serviceReference);
 
-			_serviceReferenceMapper.map(serviceReference, emitter);
+			_serviceReferenceMapper.map(serviceReference, defaultEmitter);
 
-			return emitter.getServiceReferenceServiceTuple();
+			return defaultEmitter.getServiceReferenceServiceTuple();
 		}
 
 		@Override

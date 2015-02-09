@@ -146,6 +146,7 @@ public class ObjectServiceTrackerMapTest {
 			ServiceTrackerMapFactory.singleValueMap(
 				_bundleContext, TrackedOne.class, "(target=*)",
 				new ServiceReferenceMapper<String, TrackedOne>() {
+
 					@Override
 					public void map(
 						ServiceReference<TrackedOne> serviceReference,
@@ -154,6 +155,7 @@ public class ObjectServiceTrackerMapTest {
 						emitter.emit("one");
 						emitter.emit("two");
 					}
+
 				},
 				new ServiceTrackerCustomizer<TrackedOne, TrackedOne>() {
 
