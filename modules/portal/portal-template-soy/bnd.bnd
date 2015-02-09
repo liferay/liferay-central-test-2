@@ -13,8 +13,8 @@ Include-Resource:\
 	@lib/asm.jar,\
 	@lib/cglib.jar,\
 	@lib/guava.jar,\
-	@lib/guice-assistedinject.jar,\
 	@lib/guice.jar,\
+	@lib/guice-assistedinject.jar,\
 	@lib/guice-multibindings.jar,\
 	@lib/icu4j.jar,\
 	@lib/javax.inject.jar,\
