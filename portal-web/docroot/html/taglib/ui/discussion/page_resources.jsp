@@ -55,9 +55,9 @@ for (;rootIndexPage < range[1] - 1; rootIndexPage++) {
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
 
-	request.setAttribute("liferay-ui:discussion:rootMessage", rootMessage);
 	request.setAttribute("liferay-ui:discussion:ratingsEntries", ratingsEntries);
 	request.setAttribute("liferay-ui:discussion:ratingsStatsList", ratingsStatsList);
+	request.setAttribute("liferay-ui:discussion:rootMessage", rootMessage);
 %>
 
 	<liferay-util:include page="/html/taglib/ui/discussion/view_message_thread.jsp" />
