@@ -6,9 +6,9 @@
 /*/*/ivy.xml.MD5
 /*/*/javadoc
 /*/*/lib
-/*/*/tmp
 /*/*/test-classes
 /*/*/test-results
+/*/*/tmp
 /*/*/*/bin
 /*/*/*/docroot/WEB-INF/classes
 /*/*/*/docroot/WEB-INF/lib
@@ -17,6 +17,6 @@
 /*/*/*/ivy.xml.MD5
 /*/*/*/javadoc
 /*/*/*/lib
-/*/*/*/tmp
 /*/*/*/test-classes
 /*/*/*/test-results
+/*/*/*/tmp
