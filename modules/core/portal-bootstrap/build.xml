@@ -24,7 +24,7 @@
 
 		<mkdir dir="tmp" />
 
-		<unjar src="lib/system.packages.extra.jar" dest="tmp" overwrite="true">
+		<unjar dest="tmp" src="lib/system.packages.extra.jar" overwrite="true">
 			<patternset includes="META-INF/MANIFEST.MF" />
 		</unjar>
 

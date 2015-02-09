@@ -617,12 +617,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			sb.append(StringPool.COMMA);
 		}
 
+		Manifest extraPackagesManifest = null;
+
 		Class<?> clazz = getClass();
 
 		InputStream inputStream = clazz.getResourceAsStream(
 			"/META-INF/system.packages.extra.mf");
-
-		Manifest extraPackagesManifest = null;
 
 		try {
 			extraPackagesManifest = new Manifest(inputStream);
