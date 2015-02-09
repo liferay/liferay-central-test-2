@@ -46,7 +46,7 @@ List<RatingsStats> ratingsStatsList = RatingsStatsLocalServiceUtil.getStats(MBDi
 int[] range = treeWalker.getChildrenRange(rootMessage);
 
 for (;rootIndexPage < range[1] - 1; rootIndexPage++) {
-	if (index >= (initialIndex + PropsValues.DISCUSSION_DELTA_VALUE)) {
+	if (index >= (initialIndex + PropsValues.DISCUSSION_COMMENTS_DELTA_VALUE)) {
 		break;
 	}
 

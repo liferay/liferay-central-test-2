@@ -194,7 +194,7 @@ int messagesCount = messages.size();
 
 							rootIndexPage = j;
 
-							if ((index + 1) > PropsValues.DISCUSSION_DELTA_VALUE) {
+							if ((index + 1) > PropsValues.DISCUSSION_COMMENTS_DELTA_VALUE) {
 								moreCommentsPagination = true;
 
 								break;
