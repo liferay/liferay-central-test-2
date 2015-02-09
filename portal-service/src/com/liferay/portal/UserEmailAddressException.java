@@ -131,8 +131,7 @@ public class UserEmailAddressException extends PortalException {
 
 			super(
 				String.format(
-					"Email address %s must not be a reserved one " +
-						"such as: %s",
+					"Email address %s must not be a reserved one such as: %s",
 					emailAddress, StringUtil.merge(reservedEmailAddresses)));
 
 			this.emailAddress = emailAddress;
