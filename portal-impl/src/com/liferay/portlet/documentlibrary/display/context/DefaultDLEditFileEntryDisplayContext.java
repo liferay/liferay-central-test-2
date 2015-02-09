@@ -156,11 +156,6 @@ public class DefaultDLEditFileEntryDisplayContext
 	}
 
 	@Override
-	public boolean isMountFolderVisible() {
-		return _showMountFolder;
-	}
-
-	@Override
 	public boolean isPublishButtonDisabled() {
 		DLPortletInstanceSettings dlPortletInstanceSettings =
 			_dlRequestHelper.getDLPortletInstanceSettings();
@@ -234,9 +229,6 @@ public class DefaultDLEditFileEntryDisplayContext
 			_fileVersionDisplayContextHelper =
 				new FileVersionDisplayContextHelper(_fileVersion);
 
-			_showMountFolder = ParamUtil.getBoolean(
-				request, "showMountFolder");
-
 			_showSelectFolder = ParamUtil.getBoolean(
 				request, "showSelectFolder");
 		}
@@ -278,8 +270,6 @@ public class DefaultDLEditFileEntryDisplayContext
 	private final FileVersion _fileVersion;
 	private final FileVersionDisplayContextHelper
 		_fileVersionDisplayContextHelper;
-
-	private final boolean _showMountFolder;
 	private final boolean _showSelectFolder;
 
 }

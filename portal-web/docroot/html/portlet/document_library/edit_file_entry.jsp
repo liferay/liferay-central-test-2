@@ -118,8 +118,6 @@ if (fileEntry == null) {
 else {
 	dlEditFileEntryDisplayContext = DLDisplayContextProviderUtil.getDLEditFileEntryDisplayContext(request, response, fileEntry);
 }
-
-String showMountFolders = String.valueOf(dlEditFileEntryDisplayContext.isMountFolderVisible());
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
@@ -300,7 +298,6 @@ String showMountFolders = String.valueOf(dlEditFileEntryDisplayContext.isMountFo
 									title: '<liferay-ui:message arguments="folder" key="select-x" />',
 
 									<liferay-portlet:renderURL var="selectFolderURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-										<portlet:param name="showMountFolders" value="<%= showMountFolders %>" />
 										<portlet:param name="struts_action" value='<%= "/document_library/select_folder" %>' />
 									</liferay-portlet:renderURL>
 

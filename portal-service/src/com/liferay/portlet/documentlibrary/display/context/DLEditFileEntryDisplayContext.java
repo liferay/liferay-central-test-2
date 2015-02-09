@@ -50,8 +50,6 @@ public interface DLEditFileEntryDisplayContext extends DLDisplayContext {
 
 	public boolean isFolderSelectionVisible() throws PortalException;
 
-	public boolean isMountFolderVisible() throws PortalException;
-
 	public boolean isPublishButtonDisabled() throws PortalException;
 
 	public boolean isPublishButtonVisible() throws PortalException;

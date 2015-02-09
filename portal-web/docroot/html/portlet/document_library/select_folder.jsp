@@ -34,8 +34,6 @@ if (folder != null) {
 }
 
 DLVisualizationHelper dlVisualizationHelper = new DLVisualizationHelper(dlRequestHelper);
-
-boolean showMountFolders = ParamUtil.getBoolean(request, "showMountFolders", true);
 %>
 
 <aui:form method="post" name="selectFolderFm">
@@ -79,11 +77,11 @@ boolean showMountFolders = ParamUtil.getBoolean(request, "showMountFolders", tru
 
 	<liferay-ui:search-container
 		iteratorURL="<%= portletURL %>"
-		total="<%= DLAppServiceUtil.getFoldersCount(repositoryId, folderId, showMountFolders) %>"
+		total="<%= DLAppServiceUtil.getFoldersCount(repositoryId, folderId, dlVisualizationHelper.isMountFolderVisible()) %>"
 	>
 
 		<liferay-ui:search-container-results
-			results="<%= DLAppServiceUtil.getFolders(repositoryId, folderId, showMountFolders, searchContainer.getStart(), searchContainer.getEnd()) %>"
+			results="<%= DLAppServiceUtil.getFolders(repositoryId, folderId, dlVisualizationHelper.isMountFolderVisible(), searchContainer.getStart(), searchContainer.getEnd()) %>"
 		/>
 
 		<liferay-ui:search-container-row
