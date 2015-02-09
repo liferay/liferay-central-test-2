@@ -41,7 +41,7 @@ public class DLVisualizationHelper {
 
 	public boolean isMountFolderVisible() {
 		return ParamUtil.getBoolean(
-			_dlRequestHelper.getRequest(), "showMountFolder");
+			_dlRequestHelper.getRequest(), "showMountFolder", true);
 	}
 
 	public boolean isShowMinimalActionsButton() {
