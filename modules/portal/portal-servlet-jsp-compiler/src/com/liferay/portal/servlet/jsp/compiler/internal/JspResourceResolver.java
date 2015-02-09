@@ -144,10 +144,10 @@ public class JspResourceResolver implements ResourceResolver {
 			ClassLoader classLoader = bundleWiring.getClassLoader();
 
 			try {
-				Enumeration<URL> resources2 = classLoader.getResources(path);
+				Enumeration<URL> enumeration = classLoader.getResources(path);
 
-				if ((resources2 != null) && resources2.hasMoreElements()) {
-					urls = Collections.list(resources2);
+				if ((enumeration != null) && enumeration.hasMoreElements()) {
+					urls = Collections.list(enumeration);
 				}
 			}
 			catch (IOException ioe) {
@@ -203,11 +203,11 @@ public class JspResourceResolver implements ResourceResolver {
 			"osgi.wiring.package");
 
 		for (BundleWire bundleWire : providedWires) {
-			BundleCapability capability = bundleWire.getCapability();
+			BundleCapability bundleCapability = bundleWire.getCapability();
 
-			Map<String, Object> attributes = capability.getAttributes();
+			Map<String, Object> attributes = bundleCapability.getAttributes();
 
-			if (attributes.get("osgi.wiring.package").equals(packageName)) {
+			if (packageName.equals(attributes.get("osgi.wiring.package"))) {
 				return true;
 			}
 		}

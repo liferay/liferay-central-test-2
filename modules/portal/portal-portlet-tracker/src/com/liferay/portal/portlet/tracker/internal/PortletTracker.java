@@ -1256,6 +1256,7 @@ public class PortletTracker
 			}
 
 			_bundlePortletApp = null;
+
 			_serviceRegistrations.clear();
 		}
 
