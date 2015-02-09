@@ -172,37 +172,40 @@ public class EditDiscussionAction extends PortletAction {
 			resourceRequest, "ratingsEnabled");
 		long userId = ParamUtil.getLong(resourceRequest, "userId");
 
-		HttpServletRequest servletRequest = PortalUtil.getHttpServletRequest(
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			resourceRequest);
 
-		servletRequest.setAttribute(
-			"liferay-ui:discussion:className", className);
-		servletRequest.setAttribute(
+		request.setAttribute("liferay-ui:discussion:className", className);
+		request.setAttribute(
 			"liferay-ui:discussion:classPK", String.valueOf(classPK));
-		servletRequest.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:hideControls", String.valueOf(hideControls));
-		servletRequest.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:permissionClassName", permissionClassName);
-		servletRequest.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:permissionClassPK",
 			String.valueOf(permissionClassPK));
-		servletRequest.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(ratingsEnabled));
-		servletRequest.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:userId", String.valueOf(userId));
 
 		int index = ParamUtil.getInteger(resourceRequest, "index");
+
+		request.setAttribute(
+			"liferay-ui:discussion:index", String.valueOf(index));
+
 		String randomNamespace = ParamUtil.getString(
 			resourceRequest, "randomNamespace");
+
+		request.setAttribute(
+			"liferay-ui:discussion:randomNamespace", randomNamespace);
+
 		int rootIndexPage = ParamUtil.getInteger(
 			resourceRequest, "rootIndexPage");
 
-		servletRequest.setAttribute(
-			"liferay-ui:discussion:index", String.valueOf(index));
-		servletRequest.setAttribute(
-			"liferay-ui:discussion:randomNamespace", randomNamespace);
-		servletRequest.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:rootIndexPage",
 			String.valueOf(rootIndexPage));
 
