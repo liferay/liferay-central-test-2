@@ -36,8 +36,8 @@ Export-Package:\
 	com.liferay.portal.upgrade.util.classname.dependency,\
 	com.liferay.portal.upgrade.v7_0_0,\
 	com.liferay.portal.upload,\
-	com.liferay.portal.verify,\
 	com.liferay.portal.util,\
+	com.liferay.portal.verify,\
 	com.liferay.portal.xml,\
 	com.liferay.portlet,\
 	com.liferay.portlet.asset,\
