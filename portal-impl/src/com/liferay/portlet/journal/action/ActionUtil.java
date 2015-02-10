@@ -89,7 +89,6 @@ public class ActionUtil {
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
 		String articleId = deleteArticleId;
 		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
 		double version = 0;
@@ -122,7 +121,6 @@ public class ActionUtil {
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
 		String articleId = expireArticleId;
 		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
 		double version = 0;
