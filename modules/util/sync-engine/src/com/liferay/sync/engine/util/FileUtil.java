@@ -264,6 +264,18 @@ public class FileUtil {
 		return false;
 	}
 
+	public static void setModifiedTime(Path filePath, long modifiedTime)
+		throws IOException {
+
+		if (!Files.exists(filePath)) {
+			return;
+		}
+
+		FileTime fileTime = FileTime.fromMillis(modifiedTime);
+
+		Files.setLastModifiedTime(filePath, fileTime);
+	}
+
 	public static boolean isModified(SyncFile syncFile) {
 		if (syncFile.getFilePathName() == null) {
 			return true;

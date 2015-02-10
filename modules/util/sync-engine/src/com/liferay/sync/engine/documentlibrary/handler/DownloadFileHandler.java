@@ -139,9 +139,7 @@ public class DownloadFileHandler extends BaseHandler {
 				SyncFileService.updateFileKeySyncFile(syncFile, tempFilePath);
 			}
 
-			FileTime fileTime = FileTime.fromMillis(syncFile.getModifiedTime());
-
-			Files.setLastModifiedTime(tempFilePath, fileTime);
+			FileUtil.setModifiedTime(tempFilePath, syncFile.getModifiedTime());
 
 			Files.move(
 				tempFilePath, filePath, StandardCopyOption.ATOMIC_MOVE,
