@@ -15,13 +15,9 @@
 			/>
 		</delete>
 
-		<path id="antlr.classpath">
-			<fileset dir="lib" />
-		</path>
-
 		<java
 			classname="org.antlr.v4.Tool"
-			classpathref="antlr.classpath"
+			classpathref="plugin.classpath"
 			dir="src/com/liferay/dynamicdatamapping/query/impl/grammar"
 			fork="true"
 			maxmemory="1024m"
