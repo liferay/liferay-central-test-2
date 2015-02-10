@@ -1,4 +1,4 @@
-Bundle-Name: Liferay DDM Query
+Bundle-Name: Liferay Dynamic Data Mapping Query
 Bundle-SymbolicName: com.liferay.dynamicdatamapping.query
 Bundle-Version: 1.0.0
 Export-Package: com.liferay.dynamicdatamapping.query.api
