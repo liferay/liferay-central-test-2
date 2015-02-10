@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -94,7 +95,7 @@ public class CSSSourceProcessor extends BaseSourceProcessor {
 		String[] excludes = {
 			"**\\.ivy\\**", "**\\.sass-cache\\**", "**\\aui_deprecated.css",
 			"**\\expected\\**", "**\\js\\aui\\**", "**\\js\\editor\\**",
-			"**\\js\\misc\\**", "**\\testfiles\\**", "**\\VAADIN\\**"
+			"**\\js\\misc\\**", "**\\VAADIN\\**"
 		};
 		String[] includes = {"**\\*.css"};
 
