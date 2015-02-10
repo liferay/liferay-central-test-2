@@ -14,7 +14,7 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.query.impl.parser;
+package com.liferay.dynamic.data.mapping.query.impl.parser;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
