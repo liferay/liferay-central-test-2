@@ -148,9 +148,6 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 
 		Map<String, String> namesMap = new HashMap<>();
 
-		FullNameDefinition fullNameDefinition =
-			FullNameDefinitionFactory.getInstance(locale);
-
 		if (Validator.isNotNull(firstName)) {
 			if (useInitials) {
 				firstName = firstName.substring(0, 1);
@@ -182,9 +179,7 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 			}
 			catch (NoSuchListTypeException nslte) {
 				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Ignoring full name prefix " + prefixId + " because" +
-							" it cannot be found", nslte);
+					_log.debug("Ignoring full name prefix " + prefixId, nslte);
 				}
 			}
 			catch (PortalException pe) {
@@ -203,15 +198,16 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 			}
 			catch (NoSuchListTypeException nslte) {
 				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Ignoring full name suffix " + suffixId + " because" +
-							" it cannot be found", nslte);
+					_log.debug("Ignoring full name suffix " + suffixId, nslte);
 				}
 			}
 			catch (PortalException pe) {
 				throw new SystemException(pe);
 			}
 		}
+
+		FullNameDefinition fullNameDefinition =
+			FullNameDefinitionFactory.getInstance(locale);
 
 		for (FullNameField fullNameField :
 				fullNameDefinition.getFullNameFields()) {
