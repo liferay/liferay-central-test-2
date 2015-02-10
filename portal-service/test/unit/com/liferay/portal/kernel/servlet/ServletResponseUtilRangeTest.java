@@ -280,9 +280,11 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 
 		String contentType = mockHttpServletResponse.getContentType();
 
-		Assert.assertTrue(contentType.startsWith(_CONTENT_TYPE_BOUNDARY_PREFACE));
+		Assert.assertTrue(
+			contentType.startsWith(_CONTENT_TYPE_BOUNDARY_PREFACE));
 
-		String boundary = contentType.substring(_CONTENT_TYPE_BOUNDARY_PREFACE.length());
+		String boundary = contentType.substring(
+			_CONTENT_TYPE_BOUNDARY_PREFACE.length());
 
 		String responseBody = mockHttpServletResponse.getContentAsString();
 
@@ -318,6 +320,9 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		}
 	}
 
+	private static final String _CONTENT_TYPE_BOUNDARY_PREFACE =
+		"multipart/byteranges; boundary=";
+
 	@Mock
 	private com.liferay.portal.kernel.util.File _file;
 
@@ -329,8 +334,5 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 
 	@Mock
 	private HttpServletResponse _response;
-
-	private static final String _CONTENT_TYPE_BOUNDARY_PREFACE =
-		"multipart/byteranges; boundary=";
 
 }
