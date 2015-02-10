@@ -12,8 +12,10 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.type;
+package com.liferay.dynamic.data.mapping.type;
 
+import com.liferay.dynamic.data.mapping.type.TextDDMFormFieldValueAccessor;
+import com.liferay.dynamic.data.mapping.type.TextDDMFormFieldValueRendererAccessor;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -26,7 +28,6 @@ import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;

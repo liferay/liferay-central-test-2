@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.type;
+package com.liferay.dynamic.data.mapping.type;
 
 import com.liferay.portlet.dynamicdatamapping.model.Value;
 import com.liferay.portlet.dynamicdatamapping.registry.DDMFormFieldValueAccessor;
