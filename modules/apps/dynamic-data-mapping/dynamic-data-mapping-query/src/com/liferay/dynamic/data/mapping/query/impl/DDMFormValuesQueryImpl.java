@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.query.impl;
+package com.liferay.dynamic.data.mapping.query.impl;
 
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQuery;
-import com.liferay.dynamicdatamapping.query.impl.model.DDMFormValuesFilter;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQuery;
+import com.liferay.dynamic.data.mapping.query.impl.model.DDMFormValuesFilter;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormFieldValue;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
 

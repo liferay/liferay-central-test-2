@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.query.impl.model;
+package com.liferay.dynamic.data.mapping.query.impl.model;
 
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormFieldValue;
 

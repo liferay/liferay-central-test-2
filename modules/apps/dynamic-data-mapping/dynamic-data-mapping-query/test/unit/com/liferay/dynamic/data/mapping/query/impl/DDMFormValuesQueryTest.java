@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.query.impl;
+package com.liferay.dynamic.data.mapping.query.impl;
 
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQuery;
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQueryFactory;
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQuerySyntaxException;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQuery;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQueryFactory;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQuerySyntaxException;
+import com.liferay.dynamic.data.mapping.query.impl.DDMFormValuesQueryFactoryImpl;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
@@ -36,7 +37,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;

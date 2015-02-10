@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.dynamicdatamapping.query.impl;
+package com.liferay.dynamic.data.mapping.query.impl;
 
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQuery;
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQueryFactory;
-import com.liferay.dynamicdatamapping.query.api.DDMFormValuesQuerySyntaxException;
-import com.liferay.dynamicdatamapping.query.impl.parser.DDMFormValuesQueryLexer;
-import com.liferay.dynamicdatamapping.query.impl.parser.DDMFormValuesQueryParser;
-import com.liferay.dynamicdatamapping.query.impl.parser.DDMFormValuesQueryParser.PathContext;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQuery;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQueryFactory;
+import com.liferay.dynamic.data.mapping.query.api.DDMFormValuesQuerySyntaxException;
+import com.liferay.dynamic.data.mapping.query.impl.parser.DDMFormValuesQueryLexer;
+import com.liferay.dynamic.data.mapping.query.impl.parser.DDMFormValuesQueryParser;
+import com.liferay.dynamic.data.mapping.query.impl.parser.DDMFormValuesQueryParser.PathContext;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -27,7 +27,6 @@ import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
 import org.osgi.service.component.annotations.Component;
 
 /**
