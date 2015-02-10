@@ -103,7 +103,12 @@ birthdayCalendar.set(Calendar.YEAR, 1970);
 	<liferay-ui:error exception="<%= UserPasswordException.MustNotContainDictionaryWords.class %>" message="that-password-uses-common-dictionary-words" />
 
 	<liferay-ui:error exception="<%= UserScreenNameException.MustBeAlphaNumeric.class %>" focusField="screenName">
-		<liferay-ui:message arguments="<%= ((UserScreenNameException.MustBeAlphaNumeric)errorException).getValidSpecialCharsAsString() %>" key="please-enter-a-valid-alphanumeric-screen-name" translateArguments="<%= false %>" />
+
+		<%
+		UserScreenNameException.MustBeAlphaNumeric usn = (UserScreenNameException.MustBeAlphaNumeric)errorException;
+		%>
+
+		<liferay-ui:message arguments="<%= usn.getValidSpecialCharsAsString() %>" key="please-enter-a-valid-alphanumeric-screen-name" translateArguments="<%= false %>" />
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeDuplicate.class %>" focusField="screenName" message="the-screen-name-you-requested-is-already-taken" />
