@@ -69,13 +69,10 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 
 	@Test
 	public void testGetMultipleRanges() throws IOException {
-		long length = 1000;
-		String rangeHeader = "bytes=1-3,3-8,9-11,12-12,30-";
-
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=1-3,3-8,9-11,12-12,30-");
 
 		List<Range> ranges = ServletResponseUtil.getRanges(
-			_request, _response, length);
+			_request, _response, 1000);
 
 		Assert.assertEquals(ranges.size(), 5);
 		assertRange(ranges.get(0), 1, 3, 3);
@@ -89,7 +86,6 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 	public void testGetRangesPerSpec() throws IOException {
 
 		// https://tools.ietf.org/html/rfc7233#section-2.1
-		// Additional examples, assuming a representation of length 10000:
 
 		long length = 10000;
 
@@ -98,8 +94,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		// Or:
 		// 		bytes=9500-
 
-		String rangeHeader = "bytes=-500";
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=-500");
 
 		List<Range> ranges = ServletResponseUtil.getRanges(
 			_request, _response, length);
@@ -107,8 +102,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		Assert.assertEquals(ranges.size(), 1);
 		assertRange(ranges.get(0), 9500, 9999, 500);
 
-		rangeHeader = "bytes=9500-";
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=9500-");
 
 		ranges = ServletResponseUtil.getRanges(_request, _response, length);
 
@@ -118,8 +112,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		// The first and last bytes only (bytes 0 and 9999):
 		// 		bytes=0-0,-1
 
-		rangeHeader = "bytes=0-0,-1";
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=0-0,-1");
 
 		ranges = ServletResponseUtil.getRanges(_request, _response, length);
 
@@ -132,8 +125,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		// 		bytes=500-600,601-999
 		// 		bytes=500-700,601-999
 
-		rangeHeader = "bytes=500-600,601-999";
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=500-600,601-999");
 
 		ranges = ServletResponseUtil.getRanges(_request, _response, length);
 
@@ -141,8 +133,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		assertRange(ranges.get(0), 500, 600, 101);
 		assertRange(ranges.get(1), 601, 999, 399);
 
-		rangeHeader = "bytes=500-700,601-999";
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=500-700,601-999");
 
 		ranges = ServletResponseUtil.getRanges(_request, _response, length);
 
@@ -153,13 +144,10 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 
 	@Test
 	public void testGetRangesSimple() throws IOException {
-		long length = 1000;
-		String rangeHeader = "bytes=0-999";
-
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=0-999");
 
 		List<Range> ranges = ServletResponseUtil.getRanges(
-			_request, _response, length);
+			_request, _response, 1000);
 
 		Assert.assertEquals(ranges.size(), 1);
 		assertRange(ranges.get(0), 0, 999, 1000);
@@ -168,13 +156,10 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 	@Test
 	public void testWriteWithRanges() throws IOException {
 		byte[] content = new byte[1000];
+
 		Arrays.fill(content, (byte) 48);
 
-		// ByteArrayInputStream
-
 		testWriteWith(new ByteArrayInputStream(content), content);
-
-		// FileInputStream
 
 		File tempFile = FileUtil.createTempFile();
 
@@ -188,8 +173,6 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		finally {
 			tempFile.delete();
 		}
-
-		// Other InputStream
 
 		testWriteWith(
 			new BufferedInputStream(new ByteArrayInputStream(content)),
@@ -262,9 +245,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 	protected void testWriteWith(InputStream inputStream, byte[] content)
 		throws IOException {
 
-		String rangeHeader = "bytes=0-9,980-989,980-999,990-999";
-
-		setUpRange(_request, rangeHeader);
+		setUpRange(_request, "bytes=0-9,980-989,980-999,990-999");
 
 		List<Range> ranges = ServletResponseUtil.getRanges(
 			_request, _response, content.length);
