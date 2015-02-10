@@ -74,37 +74,42 @@ public class SassCompiler {
 		Sass_File_Context sassFileContext = null;
 
 		try {
-			final Sass_Options opt = _sassLibrary.sass_make_options();
-
-			_sassLibrary.sass_option_set_input_path(opt, inputFile);
-			_sassLibrary.sass_option_set_output_path(opt, "");
-			_sassLibrary.sass_option_set_image_path(opt, imgPath);
-			_sassLibrary.sass_option_set_output_style(
-				opt, Sass_Output_Style.SASS_STYLE_COMPACT);
-			_sassLibrary.sass_option_set_source_comments(opt, sourceComments);
-			_sassLibrary.sass_option_set_include_path(opt, includePaths);
-
 			sassFileContext = _sassLibrary.sass_make_file_context(inputFile);
-			_sassLibrary.sass_file_context_set_options(sassFileContext, opt);
+
+			Sass_Options sassOptions = _sassLibrary.sass_make_options();
+
+			_sassLibrary.sass_option_set_image_path(sassOptions, imgPath);
+			_sassLibrary.sass_option_set_include_path(sassOptions, includePaths);
+			_sassLibrary.sass_option_set_input_path(sassOptions, inputFile);
+			_sassLibrary.sass_option_set_output_path(sassOptions, "");
+			_sassLibrary.sass_option_set_output_style(
+				sassOptions, Sass_Output_Style.SASS_STYLE_COMPACT);
+			_sassLibrary.sass_option_set_source_comments(
+				sassOptions, sourceComments);
+
+			_sassLibrary.sass_file_context_set_options(
+				sassFileContext, sassOptions);
 
 			_sassLibrary.sass_compile_file_context(sassFileContext);
 
-			final Sass_Context context = _sassLibrary.sass_file_context_get_context(
-				sassFileContext);
-			final int errorStatus = _sassLibrary.sass_context_get_error_status(
-				context);
+			Sass_Context sassContext =
+				_sassLibrary.sass_file_context_get_context(sassFileContext);
+
+			int errorStatus = _sassLibrary.sass_context_get_error_status(
+				sassContext);
 
 			if (errorStatus != 0) {
-				String errorMsg = _sassLibrary.sass_context_get_error_message(
-					context);
-				throw new SassCompilerException(errorMsg);
+				String errorMessage =
+					_sassLibrary.sass_context_get_error_message(sassContext);
+
+				throw new SassCompilerException(errorMessage);
 			}
 
-			final String outputString = _sassLibrary.sass_context_get_output_string(
-				context);
+			String outputString = _sassLibrary.sass_context_get_output_string(
+				sassContext);
 
 			if ((outputString == null) || (outputString == null)) {
-				throw new SassCompilerException("libsass returned null");
+				throw new SassCompilerException("Null output");
 			}
 
 			return outputString;
