@@ -6028,11 +6028,11 @@ public class JournalArticleLocalServiceImpl
 	protected void checkArticlesByReviewDate(Date reviewDate)
 		throws PortalException {
 
+		List<JournalArticle> latestArticles = new ArrayList<>();
+
 		List<JournalArticle> articles = journalArticleFinder.findByReviewDate(
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, reviewDate,
 			_previousCheckDate);
-
-		List<JournalArticle> latestArticles = new ArrayList<>();
 
 		for (JournalArticle article : articles) {
 			long groupId = article.getGroupId();
