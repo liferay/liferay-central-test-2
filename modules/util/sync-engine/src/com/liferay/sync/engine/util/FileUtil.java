@@ -44,7 +44,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -92,15 +91,9 @@ public class FileUtil {
 
 		try {
 			if (OSDetector.isApple()) {
-				Xattrj xattrj = _getXattrj();
+				Xattrj xattrj = getXattrj();
 
 				if (xattrj == null) {
-					return "";
-				}
-
-				String[] list = xattrj.listAttributes(filePath.toFile());
-
-				if (!ArrayUtils.contains(list, "fileKey")) {
 					return "";
 				}
 
@@ -110,9 +103,8 @@ public class FileUtil {
 				if (fileKey == null) {
 					return "";
 				}
-				else {
-					return fileKey;
-				}
+
+				return fileKey;
 			}
 			else {
 				UserDefinedFileAttributeView userDefinedFileAttributeView =
@@ -419,7 +411,7 @@ public class FileUtil {
 
 	public static void writeFileKey(Path filePath, String fileKey) {
 		if (OSDetector.isApple()) {
-			Xattrj xattrj = _getXattrj();
+			Xattrj xattrj = getXattrj();
 
 			if (xattrj == null) {
 				return;
@@ -472,6 +464,23 @@ public class FileUtil {
 		}
 	}
 
+	protected static Xattrj getXattrj() {
+		if (_xattrj != null) {
+			return _xattrj;
+		}
+
+		try {
+			_xattrj = new Xattrj();
+
+			return _xattrj;
+		}
+		catch (IOException ioe) {
+			_logger.error(ioe.getMessage(), ioe);
+
+			return null;
+		}
+	}
+
 	protected static boolean isOfficeTempFile(String fileName, Path filePath) {
 		if (Files.isDirectory(filePath)) {
 			return false;
@@ -484,21 +493,6 @@ public class FileUtil {
 		}
 
 		return false;
-	}
-
-	private static Xattrj _getXattrj() {
-		if (_xattrj != null) {
-			return _xattrj;
-		}
-
-		try {
-			return _xattrj = new Xattrj();
-		}
-		catch (IOException ioe) {
-			_logger.error(ioe.getMessage(), ioe);
-
-			return null;
-		}
 	}
 
 	private static final Charset _CHARSET = Charset.forName("UTF-8");

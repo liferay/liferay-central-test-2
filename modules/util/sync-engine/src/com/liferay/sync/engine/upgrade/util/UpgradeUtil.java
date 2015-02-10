@@ -78,13 +78,12 @@ public class UpgradeUtil {
 			return;
 		}
 
-		UpgradeProcess upgradeProcess_v2_0_6 = new UpgradeProcess_2_0_6();
+		UpgradeProcess upgradeProcess = new UpgradeProcess_2_0_6();
 
-		if (buildNumber < upgradeProcess_v2_0_6.getThreshold()) {
-			_logger.info(
-				"Upgrading to {}", upgradeProcess_v2_0_6.getThreshold());
+		if (buildNumber < upgradeProcess.getThreshold()) {
+			_logger.info("Upgrading to {}", upgradeProcess.getThreshold());
 
-			upgradeProcess_v2_0_6.upgrade();
+			upgradeProcess.upgrade();
 		}
 
 		SyncPropService.updateSyncProp(
