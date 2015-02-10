@@ -609,6 +609,7 @@ public class ServletResponseUtil {
 				(ByteArrayInputStream)inputStream;
 
 			byteArrayInputStream.reset();
+
 			byteArrayInputStream.skip(start);
 
 			StreamUtil.transfer(byteArrayInputStream, outputStream, length);
