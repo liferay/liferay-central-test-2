@@ -14,7 +14,6 @@
 
 package com.liferay.dynamic.data.mapping.type;
 
-import com.liferay.dynamic.data.mapping.type.TextDDMFormFieldValueAccessor;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portlet.dynamicdatamapping.model.LocalizedValue;
 import com.liferay.portlet.dynamicdatamapping.model.UnlocalizedValue;
