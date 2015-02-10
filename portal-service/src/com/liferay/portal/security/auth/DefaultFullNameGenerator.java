@@ -56,6 +56,7 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 		return shortenFullName(fullName);
 	}
 
+	@Override
 	public String getLocalizedFullName(
 		String firstName, String middleName, String lastName, Locale locale,
 		long prefixId, long suffixId) {
@@ -225,7 +226,11 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 	}
 
 	protected boolean isFullNameTooLong(String fullName) {
-		return fullName.length() > UserConstants.FULL_NAME_MAX_LENGTH;
+		if (fullName.length() > UserConstants.FULL_NAME_MAX_LENGTH) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected String shortenFullName(String fullName) {
@@ -236,7 +241,7 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 			sb.append(UserConstants.FULL_NAME_MAX_LENGTH);
 			sb.append(" characters for user ");
 			sb.append(fullName);
-			sb.append(". Full name has been shortened.");
+			sb.append(". Full name was shortened.");
 
 			_log.info(sb.toString());
 		}
