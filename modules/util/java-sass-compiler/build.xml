@@ -9,72 +9,71 @@
 	<target name="compile">
 		<if>
 			<not>
-				<available file="src/com/liferay/tools/jsc/libsass/SassLibrary.java" />
+				<available file="src/com/liferay/sass/compiler/libsass/SassLibrary.java" />
 			</not>
 			<then>
-				<if>
-					<not>
-						<available file="jnaerator-0.11-shaded.jar" />
-					</not>
-					<then>
-						<get
-							dest="jnaerator-0.11-shaded.jar"
-							src="https://oss.sonatype.org/content/groups/public/com/nativelibs4java/jnaerator/0.11/jnaerator-0.11-shaded.jar"
-						/>
-					</then>
-				</if>
-
-				<if>
-					<not>
-						<available file="libsass-3.1.0.zip" />
-					</not>
-					<then>
-						<get
-							dest="libsass-3.1.0.zip"
-							src="https://github.com/sass/libsass/archive/3.1.0.zip"
-						/>
-					</then>
-				</if>
+				<get
+					dest="libsass-3.1.0.zip"
+					src="https://github.com/sass/libsass/archive/3.1.0.zip"
+				/>
 
 				<unzip
-					dest="${basedir}"
+					dest="tmp"
 					src="libsass-3.1.0.zip"
 				/>
 
+				<delete file="libsass-3.1.0.zip" />
+
+				<get
+					dest="jnaerator-0.11-shaded.jar"
+					src="https://oss.sonatype.org/content/groups/public/com/nativelibs4java/jnaerator/0.11/jnaerator-0.11-shaded.jar"
+				/>
+
 				<java
-					dir="libsass-3.1.0"
+					dir="tmp/libsass-3.1.0"
 					jar="jnaerator-0.11-shaded.jar"
 					fork="true"
 					failonerror="true"
 				>
-					<arg line="-f -library sass -mode Directory -o ../src -package com.liferay.tools.jsc.libsass -runtime JNAerator sass_context.h" />
+					<arg line="-f -library sass -mode Directory -o ../src -package com.liferay.sass.compiler.libsass -runtime JNAerator sass_context.h" />
 				</java>
+
+				<delete file="jnaerator-0.11-shaded.jar" />
+
+				<concat destfile="src/com/liferay/sass/compiler/libsass/SassLibrary.java">
+					<header>/* @generated */</header>
+					<fileset file="tmp/src/com/liferay/sass/compiler/libsass/SassLibrary.java" />
+				</concat>
+
+				<delete dir="tmp" />
 			</then>
 		</if>
 
 		<if>
 			<not>
-				<available file="spec-tests.zip" />
+				<available file="test/unit/com/liferay/sass/compiler/dependencies/sass-spec" />
 			</not>
 			<then>
-				<mkdir dir="test/unit/com/liferay/tools/jsc/testfiles/" />
+				<mkdir dir="test/unit/com/liferay/sass/compiler/dependencies/sass-spec" />
 
 				<get
-					dest="spec-tests.zip"
+					dest="sass-spec.zip"
 					src="https://github.com/sass/sass-spec/archive/3818b9d686765461add05e996d990b085e15a348.zip"
 				/>
+
+				<unzip
+					dest="test/unit/com/liferay/sass/compiler/dependencies/sass-spec"
+					src="sass-spec.zip"
+				>
+					<patternset>
+						<include name="**/spec/basic/**" />
+					</patternset>
+					<cutdirsmapper dirs="3" />
+				</unzip>
+
+				<delete file="sass-spec.zip" />
 			</then>
 		</if>
-
-		<unzip
-			dest="test/unit/com/liferay/tools/jsc/testfiles"
-			src="spec-tests.zip"
-		>
-			<patternset>
-				<include name="**/spec/basic/**" />
-			</patternset>
-			<cutdirsmapper dirs="3" />
-		</unzip>
 
 		<compile
 			module.dir="${basedir}"
