@@ -108,7 +108,7 @@ public class SassCompiler {
 			String outputString = _sassLibrary.sass_context_get_output_string(
 				sassContext);
 
-			if ((outputString == null) || (outputString == null)) {
+			if ((outputString == null)) {
 				throw new SassCompilerException("Null output");
 			}
 
