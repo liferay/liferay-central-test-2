@@ -89,10 +89,8 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 
 		long length = 10000;
 
-		// The final 500 bytes (byte offsets 9500-9999, inclusive):
-		// 		bytes=-500
-		// Or:
-		// 		bytes=9500-
+		// The final 500 bytes (byte offsets 9500-9999, inclusive): bytes=-500
+		// or bytes=9500-
 
 		setUpRange(_request, "bytes=-500");
 
@@ -109,8 +107,7 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		Assert.assertEquals(ranges.size(), 1);
 		assertRange(ranges.get(0), 9500, 9999, 500);
 
-		// The first and last bytes only (bytes 0 and 9999):
-		// 		bytes=0-0,-1
+		// The first and last bytes only (bytes 0 and 9999): bytes=0-0,-1
 
 		setUpRange(_request, "bytes=0-0,-1");
 
@@ -121,9 +118,8 @@ public class ServletResponseUtilRangeTest extends PowerMockito {
 		assertRange(ranges.get(1), 9999, 9999, 1);
 
 		// Other valid (but not canonical) specifications of the second 500
-		// bytes (byte offsets 500-999, inclusive):
-		// 		bytes=500-600,601-999
-		// 		bytes=500-700,601-999
+		// bytes (byte offsets 500-999, inclusive): bytes=500-600,601-999 or
+		// bytes=500-700,601-999
 
 		setUpRange(_request, "bytes=500-600,601-999");
 
