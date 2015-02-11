@@ -502,6 +502,7 @@
 	<bean id="com.liferay.portal.language.LanguageResources" class="com.liferay.portal.language.LanguageResources">
 		<property name="config" value="content.Language,content.Language-ext" />
 	</bean>
+	<bean id="com.liferay.portal.lar.PortletDataContextIndexer" class="com.liferay.portal.lar.PortletDataContextIndexer" />
 	<bean id="com.liferay.portal.layoutconfiguration.util.JettyThreadLocalBinder" class="com.liferay.portal.layoutconfiguration.util.JettyThreadLocalBinder">
 		<property name="threadLocalSources">
 			<map>
@@ -1161,7 +1162,6 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.layoutsadmin.util.ExportImportConfigurationIndexer" class="com.liferay.portlet.layoutsadmin.util.ExportImportConfigurationIndexer" />
-	<bean id="com.liferay.portal.lar.PortletDataContextIndexer" class="com.liferay.portal.lar.PortletDataContextIndexer" />
 	<bean id="com.liferay.portlet.layoutsadmin.util.SitemapUtil" class="com.liferay.portlet.layoutsadmin.util.SitemapUtil">
 		<property name="sitemap">
 			<bean class="com.liferay.portlet.layoutsadmin.util.SitemapImpl" />
