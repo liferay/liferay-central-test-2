@@ -35,19 +35,19 @@ public class ServiceTrackerMapModelAdapterBuilderLocator
 	implements ModelAdapterBuilderLocator, Closeable {
 
 	public ServiceTrackerMapModelAdapterBuilderLocator() {
-		_modelAdapterBuildersMap.open();
+		_modelAdapterBuilders.open();
 	}
 
 	@Override
 	public void close() {
-		_modelAdapterBuildersMap.close();
+		_modelAdapterBuilders.close();
 	}
 
 	@Override
 	public <T, V> ModelAdapterBuilder<T, V> locate(
 		Class<T> adapteeModelClass, Class<V> adaptedModelClass) {
 
-		return _modelAdapterBuildersMap.getService(
+		return _modelAdapterBuilders.getService(
 			getKey(adapteeModelClass, adaptedModelClass));
 	}
 
@@ -59,54 +59,53 @@ public class ServiceTrackerMapModelAdapterBuilderLocator
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	private final ServiceTrackerMap<String, ModelAdapterBuilder>
-		_modelAdapterBuildersMap =
-			ServiceTrackerCollections.singleValueMap(
-				ModelAdapterBuilder.class, null,
-				new ServiceReferenceMapper<String, ModelAdapterBuilder>() {
+		_modelAdapterBuilders = ServiceTrackerCollections.singleValueMap(
+			ModelAdapterBuilder.class, null,
+			new ServiceReferenceMapper<String, ModelAdapterBuilder>() {
 
-					@Override
-					public void map(
-						ServiceReference<ModelAdapterBuilder> serviceReference,
-						Emitter<String> emitter) {
+				@Override
+				public void map(
+					ServiceReference<ModelAdapterBuilder> serviceReference,
+					Emitter<String> emitter) {
 
-						Registry registry = RegistryUtil.getRegistry();
+					Registry registry = RegistryUtil.getRegistry();
 
-						ModelAdapterBuilder modelAdapterBuilder =
-							registry.getService(serviceReference);
+					ModelAdapterBuilder modelAdapterBuilder =
+						registry.getService(serviceReference);
 
-						Type genericInterface =
-							ReflectionUtil.getGenericInterface(
-								modelAdapterBuilder, ModelAdapterBuilder.class);
+					Type genericInterface =
+						ReflectionUtil.getGenericInterface(
+							modelAdapterBuilder, ModelAdapterBuilder.class);
 
-						if ((genericInterface == null) ||
-							!(genericInterface instanceof ParameterizedType)) {
+					if ((genericInterface == null) ||
+						!(genericInterface instanceof ParameterizedType)) {
 
-							return;
-						}
-
-						ParameterizedType parameterizedType =
-							(ParameterizedType)genericInterface;
-
-						Type[] typeArguments =
-							parameterizedType.getActualTypeArguments();
-
-						if (ArrayUtil.isEmpty(typeArguments) ||
-							(typeArguments.length != 2)) {
-
-							return;
-						}
-
-						try {
-							Class adapteeModelClass = (Class)typeArguments[0];
-							Class adaptedModelClass = (Class)typeArguments[1];
-
-							emitter.emit(
-								getKey(adapteeModelClass, adaptedModelClass));
-						}
-						catch (ClassCastException cce) {
-							return;
-						}
+						return;
 					}
-				});
+
+					ParameterizedType parameterizedType =
+						(ParameterizedType)genericInterface;
+
+					Type[] typeArguments =
+						parameterizedType.getActualTypeArguments();
+
+					if (ArrayUtil.isEmpty(typeArguments) ||
+						(typeArguments.length != 2)) {
+
+						return;
+					}
+
+					try {
+						Class adapteeModelClass = (Class)typeArguments[0];
+						Class adaptedModelClass = (Class)typeArguments[1];
+
+						emitter.emit(
+							getKey(adapteeModelClass, adaptedModelClass));
+					}
+					catch (ClassCastException cce) {
+						return;
+					}
+				}
+			});
 
 }
