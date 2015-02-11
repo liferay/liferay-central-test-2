@@ -61,6 +61,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
@@ -100,6 +101,7 @@ import java.util.Locale;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -128,18 +130,17 @@ public class EditUserAction extends PortletAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String prefix = ParamUtil.getString(actionRequest, "prefixValue");
-		String suffix = ParamUtil.getString(actionRequest, "suffixValue");
-
-		long prefixId = ListTypeLocalServiceUtil.addListType(
-			prefix, ListTypeConstants.CONTACT_PREFIX).getPrimaryKey();
-		long suffixId = ListTypeLocalServiceUtil.addListType(
-			suffix, ListTypeConstants.CONTACT_SUFFIX).getPrimaryKey();
-
 		DynamicActionRequest dynamicActionRequest = new DynamicActionRequest(
 			actionRequest);
 
+		long prefixId = getListTypeId(
+			actionRequest, "prefixValue", ListTypeConstants.CONTACT_PREFIX);
+
 		dynamicActionRequest.setParameter("prefixId", String.valueOf(prefixId));
+
+		long suffixId = getListTypeId(
+			actionRequest, "suffixValue", ListTypeConstants.CONTACT_SUFFIX);
+
 		dynamicActionRequest.setParameter("suffixId", String.valueOf(suffixId));
 
 		actionRequest = dynamicActionRequest;
@@ -536,6 +537,19 @@ public class EditUserAction extends PortletAction {
 		}
 
 		return getAnnouncementsDeliveries(actionRequest);
+	}
+
+	protected long getListTypeId(
+			PortletRequest portletRequest, String parameterName, String type)
+		throws Exception {
+
+		String parameterValue = ParamUtil.getString(
+			portletRequest, parameterName);
+
+		ListType listType = ListTypeLocalServiceUtil.addListType(
+			parameterValue, type);
+
+		return listType.getListTypeId();
 	}
 
 	protected User updateLockout(ActionRequest actionRequest) throws Exception {
