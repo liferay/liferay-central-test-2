@@ -59,11 +59,11 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			return;
 		}
 
-		org.jgroups.Address sourceAddress = message.getSrc();
+		org.jgroups.Address sourceJGroupsAddress = message.getSrc();
 
 		Channel channel = _clusterExecutorImpl.getControlChannel();
 
-		if (sourceAddress.equals(channel.getAddress())) {
+		if (sourceJGroupsAddress.equals(channel.getAddress())) {
 			return;
 		}
 
@@ -72,14 +72,14 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				ClusterRequest clusterRequest = (ClusterRequest)obj;
 
 				processClusterRequest(
-					clusterRequest, new AddressImpl(sourceAddress));
+					clusterRequest, new AddressImpl(sourceJGroupsAddress));
 			}
 			else if (obj instanceof ClusterNodeResponse) {
 				ClusterNodeResponse clusterNodeResponse =
 					(ClusterNodeResponse)obj;
 
 				processClusterResponse(
-					clusterNodeResponse, new AddressImpl(sourceAddress));
+					clusterNodeResponse, new AddressImpl(sourceJGroupsAddress));
 			}
 			else if (_log.isWarnEnabled()) {
 				_log.warn(
