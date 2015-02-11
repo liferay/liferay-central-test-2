@@ -49,23 +49,22 @@ public class IndexingExportImportLifecycleListener
 			ExportImportLifecycleEvent exportImportLifecycleEvent)
 		throws Exception {
 
-		int code = exportImportLifecycleEvent.getCode();
-		boolean isLayoutImportInProcess =
+		boolean layoutImportInProcess =
 			exportImportLifecycleEvent.getProcessFlag(
 				ExportImportLifecycleConstants.
 					PROCESS_FLAG_LAYOUT_IMPORT_IN_PROCESS);
-		boolean isPortletImportInProcess =
+		boolean portletImportInProcess =
 			exportImportLifecycleEvent.getProcessFlag(
 				ExportImportLifecycleConstants.
 					PROCESS_FLAG_PORTLET_IMPORT_IN_PROCESS);
 
-		if (((code !=
+		if (((exportImportLifecycleEvent.getCode() !=
 				ExportImportLifecycleConstants.EVENT_LAYOUT_IMPORT_SUCCEEDED) ||
-			 !isLayoutImportInProcess) &&
-			((code !=
+			 !layoutImportInProcess) &&
+			((exportImportLifecycleEvent.getCode() !=
 				ExportImportLifecycleConstants.
 					EVENT_PORTLET_IMPORT_SUCCEEDED) ||
-			 !isPortletImportInProcess)) {
+			 !portletImportInProcess)) {
 
 			return;
 		}
@@ -108,7 +107,7 @@ public class IndexingExportImportLifecycleListener
 				}
 				catch (SearchException se) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Cannot reindex user with id " + userId, se);
+						_log.debug("Unable to reindex user " + userId, se);
 					}
 				}
 			}
@@ -122,9 +121,7 @@ public class IndexingExportImportLifecycleListener
 		}
 		catch (SearchException se) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"An error occurred during running the portlet data " +
-						"context indexer", se);
+				_log.debug("Unable to reindex portlet data context", se);
 			}
 		}
 	}
