@@ -16,6 +16,7 @@ package com.liferay.portal.model.adapter;
 
 import com.liferay.portal.model.adapter.builder.ModelAdapterBuilder;
 import com.liferay.portal.model.adapter.builder.ModelAdapterBuilderLocator;
+import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceTracker;
 
@@ -31,7 +32,6 @@ public class ModelAdapterUtil {
 		return doAdapt(adapteeModel, adapteeModelClass, adaptedModelClass);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T, V> V adapt(T adapteeModel, Class<V> adaptedModelClass) {
 		Class<T> adapteeModelClass = (Class<T>)adapteeModel.getClass();
 
@@ -58,11 +58,14 @@ public class ModelAdapterUtil {
 
 	private static final
 		ServiceTracker<ModelAdapterBuilderLocator, ModelAdapterBuilderLocator>
-			_modelAdapterBuilderLocatorServiceTracker =
-				RegistryUtil.getRegistry().trackServices(
-					ModelAdapterBuilderLocator.class);
+			_modelAdapterBuilderLocatorServiceTracker;
 
 	static {
+		Registry registry = RegistryUtil.getRegistry();
+
+		_modelAdapterBuilderLocatorServiceTracker = registry.trackServices(
+			ModelAdapterBuilderLocator.class);
+
 		_modelAdapterBuilderLocatorServiceTracker.open();
 	}
 
