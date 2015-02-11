@@ -44,7 +44,6 @@ public class ServiceTrackerMapModelAdapterBuilderLocator
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T, V> ModelAdapterBuilder<T, V> locate(
 		Class<T> adapteeModelClass, Class<V> adaptedModelClass) {
 
