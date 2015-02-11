@@ -97,7 +97,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 	}
 
 	private final ServiceReferenceMapper<K, SR> _serviceReferenceMapper;
-	private final ServiceTracker<SR, ServiceReferenceServiceTuple<SR, TS>>
+	private final ServiceTracker<SR, ServiceReferenceServiceTuple<SR, TS, K>>
 		_serviceTracker;
 	private final ConcurrentHashMap<K, ServiceTrackerBucket<SR, TS, R>>
 		_serviceTrackerBuckets = new ConcurrentHashMap<>();
@@ -148,7 +148,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 			serviceTrackerBucket.store(_serviceReferenceServiceTuple);
 		}
 
-		public ServiceReferenceServiceTuple<SR, TS>
+		public ServiceReferenceServiceTuple<SR, TS, K>
 			getServiceReferenceServiceTuple() {
 
 			return _serviceReferenceServiceTuple;
@@ -156,17 +156,18 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 
 		private boolean _invokedServiceTrackerCustomizer;
 		private final ServiceReference<SR> _serviceReference;
-		private ServiceReferenceServiceTuple<SR, TS>
+		private ServiceReferenceServiceTuple<SR, TS, K>
 			_serviceReferenceServiceTuple;
 
 	}
 
 	private class ServiceReferenceServiceTrackerCustomizer
 		implements
-			ServiceTrackerCustomizer<SR, ServiceReferenceServiceTuple<SR, TS>> {
+			ServiceTrackerCustomizer
+				<SR, ServiceReferenceServiceTuple<SR, TS, K>> {
 
 		@Override
-		public ServiceReferenceServiceTuple<SR, TS> addingService(
+		public ServiceReferenceServiceTuple<SR, TS, K> addingService(
 			final ServiceReference<SR> serviceReference) {
 
 			DefaultEmitter defaultEmitter = new DefaultEmitter(
@@ -180,7 +181,8 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		@Override
 		public void modifiedService(
 			ServiceReference<SR> service,
-			ServiceReferenceServiceTuple<SR, TS> serviceReferenceServiceTuple) {
+			ServiceReferenceServiceTuple<SR, TS, K> 
+				serviceReferenceServiceTuple) {
 
 			_serviceTrackerCustomizer.modifiedService(
 				service, serviceReferenceServiceTuple.getService());
@@ -189,7 +191,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		@Override
 		public void removedService(
 			final ServiceReference<SR> serviceReference,
-			final ServiceReferenceServiceTuple<SR, TS>
+			final ServiceReferenceServiceTuple<SR, TS, K>
 				serviceReferenceServiceTuple) {
 
 			_serviceReferenceMapper.map(
