@@ -97,6 +97,29 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		_serviceTracker.open();
 	}
 
+	private void removeKeys(
+		ServiceReferenceServiceTuple<SR, TS, K> serviceReferenceServiceTuple) {
+
+		List<K> emittedKeys = serviceReferenceServiceTuple.getEmittedKeys();
+
+		for (K emittedKey : emittedKeys) {
+			ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
+				_serviceTrackerBuckets.get(emittedKey);
+
+			if (serviceTrackerBucket == null) {
+				continue;
+			}
+
+			serviceTrackerBucket.remove(serviceReferenceServiceTuple);
+
+			if (serviceTrackerBucket.isDisposable()) {
+				_serviceTrackerBuckets.remove(emittedKey);
+			}
+		}
+
+		emittedKeys.clear();
+	}
+
 	private void storeKey(
 		K key,
 		ServiceReferenceServiceTuple<SR, TS, K> serviceReferenceServiceTuple) {
@@ -204,24 +227,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 			final ServiceReferenceServiceTuple<SR, TS, K>
 				serviceReferenceServiceTuple) {
 
-			List<K> emittedKeys = serviceReferenceServiceTuple.getEmittedKeys();
-
-			for (K emittedKey : emittedKeys) {
-				ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
-					_serviceTrackerBuckets.get(emittedKey);
-
-				if (serviceTrackerBucket == null) {
-					continue;
-				}
-
-				serviceTrackerBucket.remove(serviceReferenceServiceTuple);
-
-				if (serviceTrackerBucket.isDisposable()) {
-					_serviceTrackerBuckets.remove(emittedKey);
-				}
-			}
-
-			emittedKeys.clear();
+			removeKeys(serviceReferenceServiceTuple);
 
 			_serviceTrackerCustomizer.removedService(
 				serviceReference, serviceReferenceServiceTuple.getService());
