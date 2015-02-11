@@ -6,7 +6,8 @@ Include-Resource:\
 	classes,\
 	@lib/jna.jar,\
 	@lib/jnaerator-runtime.jar,\
-	@lib/ochafik-util.jar
+	@lib/ochafik-util.jar,\
+	resources
 Main-Class: com.liferay.sass.compiler.SassCompiler
 Private-Package:\
 	com.liferay.tools.jsc.libsass,\
