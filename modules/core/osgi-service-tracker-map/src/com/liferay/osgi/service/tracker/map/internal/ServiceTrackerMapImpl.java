@@ -97,6 +97,30 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		_serviceTracker.open();
 	}
 
+	private void storeKey(
+		K key,
+		ServiceReferenceServiceTuple<SR, TS, K> serviceReferenceServiceTuple) {
+
+		ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
+			_serviceTrackerBuckets.get(key);
+
+		if (serviceTrackerBucket == null) {
+			ServiceTrackerBucket<SR, TS, R> newServiceTrackerBucket =
+				_serviceTrackerMapBucketFactory.create();
+
+			serviceTrackerBucket = _serviceTrackerBuckets.putIfAbsent(
+				key, newServiceTrackerBucket);
+
+			if (serviceTrackerBucket == null) {
+				serviceTrackerBucket = newServiceTrackerBucket;
+			}
+		}
+
+		serviceTrackerBucket.store(serviceReferenceServiceTuple);
+
+		serviceReferenceServiceTuple.addEmittedKey(key);
+	}
+
 	private final ServiceReferenceMapper<K, SR> _serviceReferenceMapper;
 	private final ServiceTracker<SR, ServiceReferenceServiceTuple<SR, TS, K>>
 		_serviceTracker;
@@ -131,24 +155,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 						_serviceReference, service);
 			}
 
-			ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
-				_serviceTrackerBuckets.get(key);
-
-			if (serviceTrackerBucket == null) {
-				ServiceTrackerBucket<SR, TS, R> newServiceTrackerBucket =
-					_serviceTrackerMapBucketFactory.create();
-
-				serviceTrackerBucket = _serviceTrackerBuckets.putIfAbsent(
-					key, newServiceTrackerBucket);
-
-				if (serviceTrackerBucket == null) {
-					serviceTrackerBucket = newServiceTrackerBucket;
-				}
-			}
-
-			serviceTrackerBucket.store(_serviceReferenceServiceTuple);
-			
-			serviceReferenceServiceTuple.addEmittedKey(key);
+			storeKey(key, _serviceReferenceServiceTuple);
 		}
 
 		public ServiceReferenceServiceTuple<SR, TS, K>
