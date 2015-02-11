@@ -35,17 +35,22 @@ if (selContact != null) {
 	birthday.setTime(selContact.getBirthday());
 }
 
-String languageId = request.getParameter("languageId");
+Locale userLocale = null;
 
-Locale userLocale;
+String languageId = request.getParameter("languageId");
 
 if (Validator.isNotNull(languageId)) {
 	userLocale = LocaleUtil.fromLanguageId(languageId);
 }
 else {
-	User defaultUser = company.getDefaultUser();
+	if (selUser != null) {
+		userLocale = selUser.getLocale();
+	}
+	else {
+		User defaultUser = company.getDefaultUser();
 
-	userLocale = Validator.isNotNull(selUser) ? selUser.getLocale() : LocaleUtil.fromLanguageId(defaultUser.getLanguageId());
+		LocaleUtil.fromLanguageId(defaultUser.getLanguageId());
+	}
 }
 %>
 
