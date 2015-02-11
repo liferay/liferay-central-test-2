@@ -19,7 +19,7 @@
 <%
 User selUser = (User)request.getAttribute("user.selUser");
 
-if (Validator.isNull(selUser)) {
+if (selUser == null) {
 	selUser = PortalUtil.getSelectedUser(request);
 }
 
