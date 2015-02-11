@@ -30,7 +30,6 @@ public class ServiceReferenceServiceTuple<SR, TS, K>
 
 		_serviceReference = serviceReference;
 		_service = service;
-		_emittedKeys = new ArrayList<>();
 	}
 
 	public void addEmittedKey(K key) {
@@ -79,7 +78,7 @@ public class ServiceReferenceServiceTuple<SR, TS, K>
 		return _serviceReference.hashCode();
 	}
 
-	private final List<K> _emittedKeys;
+	private final List<K> _emittedKeys = new ArrayList<>();
 	private final TS _service;
 	private final ServiceReference<SR> _serviceReference;
 

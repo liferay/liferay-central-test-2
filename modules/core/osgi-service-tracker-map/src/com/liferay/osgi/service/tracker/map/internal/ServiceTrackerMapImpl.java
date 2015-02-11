@@ -229,6 +229,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 				public void emit(K key) {
 					storeKey(key, serviceReferenceServiceTuple);
 				}
+
 			});
 		}
 
