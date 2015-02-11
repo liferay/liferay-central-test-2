@@ -67,12 +67,11 @@ public class SAXReaderImpl implements SAXReader {
 				return _instance;
 			}
 
-			_instance = new SAXReaderImpl(true);
+			_instance = new SAXReaderImpl();
 
-			SecureXMLFactoryProvider secureXMLFactoryProvider =
-				new SecureXMLFactoryProviderImpl();
-
-			_instance.setSecureXMLFactoryProvider(secureXMLFactoryProvider);
+			_instance.setSecure(false);
+			_instance.setSecureXMLFactoryProvider(
+				new SecureXMLFactoryProviderImpl());
 		}
 
 		return _instance;
@@ -192,13 +191,6 @@ public class SAXReaderImpl implements SAXReader {
 		}
 
 		return oldProcessingInstructions;
-	}
-
-	public SAXReaderImpl() {
-	}
-
-	public SAXReaderImpl(boolean unsecure) {
-		this._unsecure = unsecure;
 	}
 
 	@Override
@@ -549,6 +541,10 @@ public class SAXReaderImpl implements SAXReader {
 		return toNewNodes(xPath.selectNodes(nodeImpl.getWrappedNode()));
 	}
 
+	public void setSecure(boolean secure) {
+		_secure = secure;
+	}
+
 	public void setSecureXMLFactoryProvider(
 		SecureXMLFactoryProvider secureXMLFactoryProvider) {
 
@@ -582,19 +578,18 @@ public class SAXReaderImpl implements SAXReader {
 			reader = new org.dom4j.io.SAXReader(
 				_secureXMLFactoryProvider.newXMLReader(), validate);
 
-			if (_UNSECURE) {
-				reader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, false);
-				reader.setFeature(_FEATURES_LOAD_DTD_GRAMMAR, validate);
-				reader.setFeature(_FEATURES_LOAD_EXTERNAL_DTD, validate);
-			}
-
 			reader.setEntityResolver(new EntityResolver());
-
 			reader.setFeature(_FEATURES_DYNAMIC, validate);
 			reader.setFeature(_FEATURES_VALIDATION, validate);
 			reader.setFeature(_FEATURES_VALIDATION_SCHEMA, validate);
 			reader.setFeature(
 				_FEATURES_VALIDATION_SCHEMA_FULL_CHECKING, validate);
+
+			if (!_secure) {
+				reader.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, false);
+				reader.setFeature(_FEATURES_LOAD_DTD_GRAMMAR, validate);
+				reader.setFeature(_FEATURES_LOAD_EXTERNAL_DTD, validate);
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -667,14 +662,13 @@ public class SAXReaderImpl implements SAXReader {
 	private static final String _PROPERTY_SCHEMA_SOURCE =
 		"http://java.sun.com/xml/jaxp/properties/schemaSource";
 
-	private static final boolean _UNSECURE = false;
-
 	private static final Log _log = LogFactoryUtil.getLog(SAXReaderImpl.class);
 
 	private static SAXReaderImpl _instance;
 
 	private final DocumentFactory _documentFactory =
 		DocumentFactory.getInstance();
+	private boolean _secure;
 	private SecureXMLFactoryProvider _secureXMLFactoryProvider;
 
 }
