@@ -73,9 +73,8 @@ public class ServiceTrackerMapModelAdapterBuilderLocator
 					ModelAdapterBuilder modelAdapterBuilder =
 						registry.getService(serviceReference);
 
-					Type genericInterface =
-						ReflectionUtil.getGenericInterface(
-							modelAdapterBuilder, ModelAdapterBuilder.class);
+					Type genericInterface = ReflectionUtil.getGenericInterface(
+						modelAdapterBuilder, ModelAdapterBuilder.class);
 
 					if ((genericInterface == null) ||
 						!(genericInterface instanceof ParameterizedType)) {
@@ -106,6 +105,7 @@ public class ServiceTrackerMapModelAdapterBuilderLocator
 						return;
 					}
 				}
+
 			});
 
 }
