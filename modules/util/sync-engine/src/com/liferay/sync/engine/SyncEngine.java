@@ -271,10 +271,7 @@ public class SyncEngine {
 		_running = false;
 	}
 
-	protected static void fireDeleteEvents(
-			Path filePath, final long syncAccountId)
-		throws IOException {
-
+	protected static void fireDeleteEvents(Path filePath) throws IOException {
 		long startTime = System.currentTimeMillis();
 
 		Files.walkFileTree(
@@ -330,6 +327,12 @@ public class SyncEngine {
 			filePath.toString(), startTime);
 
 		for (SyncFile deletedSyncFile : deletedSyncFiles) {
+			if (deletedSyncFile.getTypePK() == 0) {
+				SyncFileService.deleteSyncFile(deletedSyncFile);
+
+				continue;
+			}
+
 			if (deletedSyncFile.isFolder()) {
 				FileEventUtil.deleteFolder(
 					deletedSyncFile.getSyncAccountId(), deletedSyncFile);
@@ -414,7 +417,7 @@ public class SyncEngine {
 			Path filePath, long syncAccountId)
 		throws IOException {
 
-		fireDeleteEvents(filePath, syncAccountId);
+		fireDeleteEvents(filePath);
 
 		FileEventUtil.retryFileTransfers(syncAccountId);
 	}
