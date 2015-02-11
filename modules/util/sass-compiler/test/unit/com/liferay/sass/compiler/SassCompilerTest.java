@@ -33,7 +33,7 @@ import org.junit.Test;
 public class SassCompilerTest {
 
 	@Before
-	public void extendSearchPath() throws Exception {
+	public void setUp() throws Exception {
 		NativeLibrary.addSearchPath(
 			"sass", new File(getLibraryPath()).getCanonicalPath());
 	}
@@ -78,25 +78,6 @@ public class SassCompilerTest {
 		return "test-classes/unit";
 	}
 
-	private String getLibraryPath() {
-		StringBuilder sb = new StringBuilder("resources/");
-
-		sb.append(
-			Platform.isLinux() ? "linux" :
-			Platform.isMac() ? "darwin" :
-			Platform.isWindows() ? "win32" : "");
-
-		if (!Platform.isMac()) {
-			sb.append("-x86");
-
-			if (Platform.is64Bit()) {
-				sb.append("-64");
-			}
-		}
-
-		return sb.toString();
-	}
-
 	protected String read(InputStream inputStream) throws Exception {
 		if (inputStream == null) {
 			return null;
@@ -134,6 +115,25 @@ public class SassCompilerTest {
 		string = string.replaceAll("\\n|\\r", "");
 
 		return string.replaceAll("\\s+", " ");
+	}
+
+	private String getLibraryPath() {
+		StringBuilder sb = new StringBuilder("resources/");
+
+		sb.append(
+			Platform.isLinux() ? "linux" :
+			Platform.isMac() ? "darwin" :
+			Platform.isWindows() ? "win32" : "");
+
+		if (!Platform.isMac()) {
+			sb.append("-x86");
+
+			if (Platform.is64Bit()) {
+				sb.append("-64");
+			}
+		}
+
+		return sb.toString();
 	}
 
 }

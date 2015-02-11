@@ -27,8 +27,8 @@ import org.junit.Test;
 public class SassLibraryTest {
 
 	@Before
-	public void extendSearchPath() throws Exception {
-		new SassCompilerTest().extendSearchPath();
+	public void setUp() throws Exception {
+		new SassCompilerTest().setUp();
 	}
 
 	@Test
