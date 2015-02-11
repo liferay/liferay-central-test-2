@@ -213,12 +213,23 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 
 		@Override
 		public void modifiedService(
-			ServiceReference<SR> service,
-			ServiceReferenceServiceTuple<SR, TS, K> 
+			ServiceReference<SR> serviceReference,
+			final ServiceReferenceServiceTuple<SR, TS, K>
 				serviceReferenceServiceTuple) {
 
+			removeKeys(serviceReferenceServiceTuple);
+
 			_serviceTrackerCustomizer.modifiedService(
-				service, serviceReferenceServiceTuple.getService());
+				serviceReference, serviceReferenceServiceTuple.getService());
+
+			_serviceReferenceMapper.map(
+				serviceReference, new ServiceReferenceMapper.Emitter<K>() {
+
+				@Override
+				public void emit(K key) {
+					storeKey(key, serviceReferenceServiceTuple);
+				}
+			});
 		}
 
 		@Override
