@@ -21,6 +21,7 @@ import com.liferay.osgi.service.tracker.map.ServiceTrackerBucketFactory;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMap;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -146,6 +147,8 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 			}
 
 			serviceTrackerBucket.store(_serviceReferenceServiceTuple);
+			
+			serviceReferenceServiceTuple.addEmittedKey(key);
 		}
 
 		public ServiceReferenceServiceTuple<SR, TS, K>
@@ -194,28 +197,24 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 			final ServiceReferenceServiceTuple<SR, TS, K>
 				serviceReferenceServiceTuple) {
 
-			_serviceReferenceMapper.map(
-				serviceReference,
-				new ServiceReferenceMapper.Emitter<K>() {
+			List<K> emittedKeys = serviceReferenceServiceTuple.getEmittedKeys();
 
-					@Override
-					public void emit(K key) {
-						ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
-							_serviceTrackerBuckets.get(key);
+			for (K emittedKey : emittedKeys) {
+				ServiceTrackerBucket<SR, TS, R> serviceTrackerBucket =
+					_serviceTrackerBuckets.get(emittedKey);
 
-						if (serviceTrackerBucket == null) {
-							return;
-						}
+				if (serviceTrackerBucket == null) {
+					continue;
+				}
 
-						serviceTrackerBucket.remove(
-							serviceReferenceServiceTuple);
+				serviceTrackerBucket.remove(serviceReferenceServiceTuple);
 
-						if (serviceTrackerBucket.isDisposable()) {
-							_serviceTrackerBuckets.remove(key);
-						}
-					}
+				if (serviceTrackerBucket.isDisposable()) {
+					_serviceTrackerBuckets.remove(emittedKey);
+				}
+			}
 
-				});
+			emittedKeys.clear();
 
 			_serviceTrackerCustomizer.removedService(
 				serviceReference, serviceReferenceServiceTuple.getService());
