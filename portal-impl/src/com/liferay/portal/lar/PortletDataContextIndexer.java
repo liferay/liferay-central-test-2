@@ -69,10 +69,10 @@ public class PortletDataContextIndexer extends BaseIndexer {
 		Map<String, Map<?, ?>> newPrimaryKeysMaps =
 			portletDataContext.getNewPrimaryKeysMaps();
 
-		for (Map.Entry<String, Map<?, ?>> newPrimaryKeysMapsEntry :
+		for (Map.Entry<String, Map<?, ?>> entry :
 				newPrimaryKeysMaps.entrySet()) {
 
-			String className = newPrimaryKeysMapsEntry.getKey();
+			String className = entry.getKey();
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(className);
 
@@ -80,7 +80,7 @@ public class PortletDataContextIndexer extends BaseIndexer {
 				continue;
 			}
 
-			Map<?, ?> newPrimaryKeysMap = newPrimaryKeysMapsEntry.getValue();
+			Map<?, ?> newPrimaryKeysMap = entry.getValue();
 
 			for (Object object : newPrimaryKeysMap.values()) {
 				long classPK = GetterUtil.getLong(object);
