@@ -101,8 +101,7 @@ public class MBSubscriptionSender
 		if (contextUserId == user.getUserId() ) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Skip user notification for current user in context: " +
-						contextUserId);
+					"Skip notification for context user " + contextUserId);
 			}
 
 			return;
