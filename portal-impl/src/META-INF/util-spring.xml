@@ -472,13 +472,19 @@
 			<bean class="com.liferay.portal.workflow.permission.WorkflowPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.xml.SAXReader" class="com.liferay.portal.xml.SAXReaderImpl">
-		<property name="secureXMLFactoryProvider" ref="com.liferay.portal.security.xml.SecureXMLFactoryProvider" />
-		<property name="unsecure" value="true" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
-		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
-		<property name="unsecureSAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
+		<property name="secureSAXReader">
+			<bean class="com.liferay.portal.xml.SAXReaderImpl">
+				<property name="secure" value="false" />
+				<property name="secureXMLFactoryProvider" ref="com.liferay.portal.security.xml.SecureXMLFactoryProvider" />
+			</bean>
+		</property>
+		<property name="unsecureSAXReader">
+			<bean class="com.liferay.portal.xml.SAXReaderImpl">
+				<property name="secure" value="false" />
+				<property name="secureXMLFactoryProvider" ref="com.liferay.portal.security.xml.SecureXMLFactoryProvider" />
+			</bean>
+		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.xmlrpc.XmlRpc" class="com.liferay.portal.xmlrpc.XmlRpcImpl" />
 	<bean id="com.liferay.portal.kernel.xmlrpc.XmlRpcUtil" class="com.liferay.portal.kernel.xmlrpc.XmlRpcUtil">
@@ -519,7 +525,7 @@
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
 			<bean class="com.liferay.portal.model.ModelHintsImpl">
-				<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
+				<property name="SAXReader" ref="#{com.liferay.portal.kernel.xml.SAXReaderUtil.secureSAXReader}" />
 			</bean>
 		</property>
 	</bean>
