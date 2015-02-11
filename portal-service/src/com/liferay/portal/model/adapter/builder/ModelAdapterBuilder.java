@@ -19,6 +19,6 @@ package com.liferay.portal.model.adapter.builder;
  */
 public interface ModelAdapterBuilder<T, V> {
 
-	V build(T adapteeModel);
+	public V build(T adapteeModel);
 
 }

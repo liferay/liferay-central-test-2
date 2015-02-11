@@ -24,7 +24,6 @@ import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -40,7 +39,7 @@ public class ServiceTrackerMapModelAdapterBuilderLocator
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void close() {
 		_modelAdapterBuildersMap.close();
 	}
 
