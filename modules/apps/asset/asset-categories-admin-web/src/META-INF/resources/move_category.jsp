@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
 AssetCategory category = AssetCategoryLocalServiceUtil.fetchCategory(categoryId);
@@ -24,8 +26,6 @@ AssetCategory category = AssetCategoryLocalServiceUtil.fetchCategory(categoryId)
 AssetCategory parentCategory = category.getParentCategory();
 
 long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
-
-String redirect = ParamUtil.getString(request, "redirect");
 
 if (Validator.isNull(redirect)) {
 	PortletURL backURL = renderResponse.createRenderURL();

@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
 AssetCategory category = null;
@@ -28,8 +30,6 @@ if (categoryId > 0) {
 long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 
 AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
-
-String redirect = ParamUtil.getString(request, "redirect");
 
 if (Validator.isNull(redirect)) {
 	PortletURL backURL = renderResponse.createRenderURL();
