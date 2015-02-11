@@ -159,10 +159,30 @@ public class SyncEngine {
 			return;
 		}
 
-		SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
-
 		SyncAccount syncAccount = ServerEventUtil.synchronizeSyncAccount(
 			syncAccountId);
+
+		Path filePath = Paths.get(syncAccount.getFilePathName());
+
+		SyncFile syncFile = SyncFileService.fetchSyncFile(
+			syncAccount.getFilePathName());
+
+		if (FileUtil.getFileKey(filePath) != syncFile.getSyncFileId()) {
+			syncAccount.setActive(false);
+			syncAccount.setUiEvent(
+				SyncAccount.UI_EVENT_SYNC_ACCOUNT_FOLDER_MISSING);
+
+			SyncAccountService.update(syncAccount);
+
+			return;
+		}
+		else if (!syncAccount.isActive()) {
+			SyncAccountService.activateSyncAccount(syncAccountId, false);
+
+			return;
+		}
+
+		SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
 
 		Path dataFilePath = FileUtil.getFilePath(
 			syncAccount.getFilePathName(), ".data");
@@ -179,8 +199,6 @@ public class SyncEngine {
 
 			ServerEventUtil.synchronizeSyncSites(syncAccountId);
 		}
-
-		Path filePath = Paths.get(syncAccount.getFilePathName());
 
 		SyncWatchEventProcessor syncWatchEventProcessor =
 			new SyncWatchEventProcessor(syncAccountId);
@@ -216,10 +234,8 @@ public class SyncEngine {
 
 		UpgradeUtil.upgrade();
 
-		for (long activeSyncAccountId :
-				SyncAccountService.getActiveSyncAccountIds()) {
-
-			scheduleSyncAccountTasks(activeSyncAccountId);
+		for (SyncAccount syncAccount : SyncAccountService.findAll()) {
+			scheduleSyncAccountTasks(syncAccount.getSyncAccountId());
 		}
 
 		SyncEngineUtil.fireSyncEngineStateChanged(
