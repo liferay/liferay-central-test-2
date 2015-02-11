@@ -24,7 +24,7 @@ FullNameDefinition fullNameDefinition = FullNameDefinitionFactory.getInstance(us
 <div id="<portlet:namespace />userNameFields">
 
 	<%
-	for (FullNameField fullNameField: fullNameDefinition.getFullNameFields()) {
+	for (FullNameField fullNameField : fullNameDefinition.getFullNameFields()) {
 		String fieldName = CamelCaseUtil.toCamelCase(fullNameField.getName());
 	%>
 
@@ -40,13 +40,15 @@ FullNameDefinition fullNameDefinition = FullNameDefinitionFactory.getInstance(us
 				<aui:select disabled="<%= !UsersAdminUtil.hasUpdateFieldPermission(permissionChecker, user, selUser, fieldName) %>" label="<%= fieldName %>" name='<%= fieldName.concat("Value") %>' showEmptyOption="<%= true %>">
 
 					<%
-					String selected = StringPool.BLANK;
+					String listTypeName = StringPool.BLANK;
 
-					if (Validator.isNotNull(selContact)) {
+					if (selContact != null) {
 						int listTypeId = BeanParamUtil.getInteger(selContact, request, fieldName.concat("Id"));
 
 						try {
-							selected = ListTypeServiceUtil.getListType(listTypeId).getName();
+							ListType listType = ListTypeServiceUtil.getListType(listTypeId);
+
+							listTypeName = listType.getName();
 						}
 						catch (Exception e) {
 						}
@@ -55,7 +57,7 @@ FullNameDefinition fullNameDefinition = FullNameDefinitionFactory.getInstance(us
 					for (String value : fullNameField.getValues()) {
 					%>
 
-						<aui:option label="<%= value %>" selected="<%= selected.equals(value) %>" value="<%= value %>" />
+						<aui:option label="<%= value %>" selected="<%= listTypeName.equals(value) %>" value="<%= value %>" />
 
 					<%
 					}
