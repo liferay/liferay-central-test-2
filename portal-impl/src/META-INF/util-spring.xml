@@ -28,7 +28,6 @@
 			<bean class="com.liferay.portal.audit.AuditMessageFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.model.adapter.builder.ServiceTrackerMapModelAdapterBuilderLocator" class="com.liferay.portal.model.adapter.builder.ServiceTrackerMapModelAdapterBuilderLocator" />
 	<bean id="com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusRegistry" class="com.liferay.portal.backgroundtask.BackgroundTaskStatusRegistryImpl" />
 	<bean id="com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusRegistryUtil" class="com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusRegistryUtil">
 		<property name="backgroundTaskStatusRegistry" ref="com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusRegistry" />
@@ -526,6 +525,7 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.model.adapter.builder.ServiceTrackerMapModelAdapterBuilderLocator" class="com.liferay.portal.model.adapter.builder.ServiceTrackerMapModelAdapterBuilderLocator" />
 	<bean id="com.liferay.portal.plugin.PluginPackageIndexer" class="com.liferay.portal.plugin.PluginPackageIndexer" />
 	<bean id="com.liferay.portal.portletfilerepository.PortletFileRepository" class="com.liferay.portal.portletfilerepository.PortletFileRepositoryImpl" />
 	<bean id="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" class="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil">
