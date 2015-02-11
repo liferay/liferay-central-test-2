@@ -232,7 +232,8 @@ public class SAXReaderUtil {
 	}
 
 	public void setUnsecureSAXReader(SAXReader unsecureSAXReader) {
-		PortalRuntimePermission.checkSetBeanProperty(getClass());
+		PortalRuntimePermission.checkSetBeanProperty(
+			getClass(), "unsecureSAXReader");
 
 		_unsecureSAXReader = unsecureSAXReader;
 	}
