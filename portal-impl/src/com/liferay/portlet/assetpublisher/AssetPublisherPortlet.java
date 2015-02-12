@@ -129,19 +129,19 @@ public class AssetPublisherPortlet extends MVCPortlet {
 				jsonObject.put("value", dateFormat.format(fieldValue));
 			}
 			else if (fieldValue instanceof Double) {
-				jsonObject.put("value", (Double) fieldValue);
+				jsonObject.put("value", (Double)fieldValue);
 			}
 			else if (fieldValue instanceof Float) {
-				jsonObject.put("value", (Float) fieldValue);
+				jsonObject.put("value", (Float)fieldValue);
 			}
 			else if (fieldValue instanceof Integer) {
-				jsonObject.put("value", (Integer) fieldValue);
+				jsonObject.put("value", (Integer)fieldValue);
 			}
 			else if (fieldValue instanceof Number) {
 				jsonObject.put("value", String.valueOf(fieldValue));
 			}
 			else {
-				jsonObject.put("value", (String) fieldValue);
+				jsonObject.put("value", (String)fieldValue);
 			}
 
 			writeJSON(resourceRequest, resourceResponse, jsonObject);

@@ -1411,8 +1411,9 @@ public class AssetPublisherUtil {
 
 	private static final List<AssetEntryQueryProcessor>
 		_assetEntryQueryProcessors = new CopyOnWriteArrayList<>();
-	private static final ServiceTracker
-		<AssetEntryQueryProcessor, AssetEntryQueryProcessor> _serviceTracker;
+	private static final
+		ServiceTracker<AssetEntryQueryProcessor, AssetEntryQueryProcessor>
+			_serviceTracker;
 
 	private static final Accessor<AssetEntry, String> _titleAccessor =
 		new Accessor<AssetEntry, String>() {
