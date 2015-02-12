@@ -122,7 +122,12 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 									userId="<%= previousEntry.getUserId() %>"
 									userName="<%= previousEntry.getUserName() %>"
 								>
-									<liferay-ui:message arguments="<%= LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - previousEntry.getCreateDate().getTime(), true) %>" key="x-ago" translateArguments="<%= false %>" />
+
+									<%
+									Date createDate = previousEntry.getCreateDate();
+									%>
+
+									<liferay-ui:message arguments="<%= LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true) %>" key="x-ago" translateArguments="<%= false %>" />
 								</liferay-ui:user-display>
 							</div>
 						</div>
@@ -166,8 +171,12 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 									userId="<%= nextEntry.getUserId() %>"
 									userName="<%= nextEntry.getUserName() %>"
 								>
-									<liferay-ui:message
-											arguments="<%= LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - nextEntry.getCreateDate().getTime(), true) %>" key="x-ago" translateArguments="<%= false %>" />
+
+									<%
+									Date createDate = nextEntry.getCreateDate();
+									%>
+
+									<liferay-ui:message arguments="<%= LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true) %>" key="x-ago" translateArguments="<%= false %>" />
 								</liferay-ui:user-display>
 							</div>
 						</div>
@@ -178,19 +187,19 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	</c:if>
 </c:if>
 
-<c:if test="<%= blogsPortletInstanceSettings.isEnableComments() %>">
-	<liferay-ui:panel-container extended="<%= false %>" id="blogsCommentsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" id="blogsCommentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(request, "x-comments", MBMessageLocalServiceUtil.getDiscussionMessagesCount(BlogsEntry.class.getName(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED)) %>'>
-			<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() && !portletId.equals(PortletKeys.BLOGS_ADMIN) %>">
 				<aui:input inlineLabel="left" name="trackbackURL" type="resource" value='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>' />
+<c:if test="<%= blogsPortletInstanceSettings.isEnableComments() %>">
+			<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() && !portletId.equals(PortletKeys.BLOGS_ADMIN) %>">
+		<liferay-ui:panel collapsible="<%= true %>" id="blogsCommentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(request, "x-comments", MBMessageLocalServiceUtil.getDiscussionMessagesCount(BlogsEntry.class.getName(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED)) %>'>
+	<liferay-ui:panel-container extended="<%= false %>" id="blogsCommentsPanelContainer" persistState="<%= true %>">
 			</c:if>
 
 			<portlet:actionURL var="discussionURL">
 				<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
 			</portlet:actionURL>
 
-			<portlet:resourceURL var="discussionPaginationURL">
 				<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
+			<portlet:resourceURL var="discussionPaginationURL">
 			</portlet:resourceURL>
 
 			<liferay-ui:discussion

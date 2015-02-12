@@ -106,9 +106,8 @@ public class BlogsEntryImpl extends BlogsEntryBaseImpl {
 		long smallImageId = getSmallImageId();
 
 		if (smallImageId != 0) {
-			return
-				themeDisplay.getPathImage() + "/blogs/entry?img_id=" +
-					getSmallImageId() + "&t=" +
+			return themeDisplay.getPathImage() + "/blogs/entry?img_id=" +
+				getSmallImageId() + "&t=" +
 					WebServerServletTokenUtil.getToken(getSmallImageId());
 		}
 
