@@ -80,47 +80,47 @@
 		/>
 	</target>
 
-	<target name="build-darwin">
-		<antcall target="native-lib">
+	<target name="build-libsass-darwin">
+		<antcall target="build-libsass">
 			<param name="libname" value="libsass.dylib" />
 			<param name="make" value="make" />
 			<param name="resourceloc" value="darwin" />
 		</antcall>
 	</target>
 
-	<target name="build-linux-x86">
-		<antcall target="native-lib">
+	<target name="build-libsass-linux-x86">
+		<antcall target="build-libsass">
 			<param name="libname" value="libsass.so" />
 			<param name="make" value="make" />
 			<param name="resourceloc" value="linux-x86" />
 		</antcall>
 	</target>
 
-	<target name="build-linux-x86-64">
-		<antcall target="native-lib">
+	<target name="build-libsass-linux-x86-64">
+		<antcall target="build-libsass">
 			<param name="libname" value="libsass.so" />
 			<param name="make" value="make" />
 			<param name="resourceloc" value="linux-x86-64" />
 		</antcall>
 	</target>
 
-	<target name="build-win32-x86">
-		<antcall target="native-lib">
+	<target name="build-libsass-win32-x86">
+		<antcall target="build-libsass">
 			<param name="libname" value="sass.dll" />
 			<param name="make" value="mingw32-make.exe" />
 			<param name="resourceloc" value="win32-x86" />
 		</antcall>
 	</target>
 
-	<target name="build-win32-x86-64">
-		<antcall target="native-lib">
+	<target name="build-libsass-win32-x86-64">
+		<antcall target="build-libsass">
 			<param name="libname" value="sass.dll" />
 			<param name="make" value="mingw32-make.exe" />
 			<param name="resourceloc" value="win32-x86-64" />
 		</antcall>
 	</target>
 
-	<target name="native-lib">
+	<target name="build-libsass">
 		<if>
 			<not>
 				<available file="libsass-3.1.0.zip" />
