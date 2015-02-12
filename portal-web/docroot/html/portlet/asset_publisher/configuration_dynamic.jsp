@@ -180,8 +180,6 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 							<div class="asset-subtypefields-wrapper hide" id="<portlet:namespace /><%= className %>subtypeFieldsWrapper">
 
 								<%
-								String eventName = renderResponse.getNamespace() + "selectDDMStructureField";
-
 								for (ClassType classType: classTypes) {
 									if (classType.getClassTypeFieldsCount() == 0) {
 										continue;
@@ -194,7 +192,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 											<portlet:param name="portletResource" value="<%= assetPublisherDisplayContext.getPortletResource() %>" />
 											<portlet:param name="className" value="<%= assetRendererFactory.getClassName() %>" />
 											<portlet:param name="classTypeId" value="<%= String.valueOf(classType.getClassTypeId()) %>" />
-											<portlet:param name="eventName" value="<%= eventName %>" />
+											<portlet:param name="eventName" value='<%= renderResponse.getNamespace() + "selectDDMStructureField" %>' />
 										</liferay-portlet:renderURL>
 
 										<span class="asset-subtypefields-popup" id="<portlet:namespace /><%= classType.getClassTypeId() %>_<%= className %>PopUpButton">
