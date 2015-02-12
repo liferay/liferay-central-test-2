@@ -10,6 +10,6 @@ Include-Resource:\
 	resources
 Main-Class: com.liferay.sass.compiler.SassCompiler
 Private-Package:\
-	com.liferay.tools.jsc.libsass,\
+	com.liferay.sass.compiler.libsass,\
 	com.ochafik.*,\
 	com.sun.jna
