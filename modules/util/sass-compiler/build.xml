@@ -79,4 +79,75 @@
 			module.dir="${basedir}"
 		/>
 	</target>
+
+	<target name="build-darwin">
+		<antcall target="build-native-lib">
+			<param name="libname" value="libsass.dylib" />
+			<param name="make" value="make" />
+			<param name="resourceloc" value="darwin" />
+		</antcall>
+	</target>
+
+	<target name="build-linux-x86">
+		<antcall target="build-native-lib">
+			<param name="libname" value="libsass.so" />
+			<param name="make" value="make" />
+			<param name="resourceloc" value="linux-x86" />
+		</antcall>
+	</target>
+
+	<target name="build-linux-x86-64">
+		<antcall target="build-native-lib">
+			<param name="libname" value="libsass.so" />
+			<param name="make" value="make" />
+			<param name="resourceloc" value="linux-x86-64" />
+		</antcall>
+	</target>
+
+	<target name="build-win32-x86">
+		<antcall target="build-native-lib">
+			<param name="libname" value="sass.dll" />
+			<param name="make" value="mingw32-make.exe" />
+			<param name="resourceloc" value="win32-x86" />
+		</antcall>
+	</target>
+
+	<target name="build-win32-x86-64">
+		<antcall target="build-native-lib">
+			<param name="libname" value="sass.dll" />
+			<param name="make" value="mingw32-make.exe" />
+			<param name="resourceloc" value="win32-x86-64" />
+		</antcall>
+	</target>
+
+	<target name="build-native-lib">
+		<if>
+			<not>
+				<available file="libsass-3.1.0.zip" />
+			</not>
+			<then>
+				<get
+					dest="libsass-3.1.0.zip"
+					src="https://github.com/sass/libsass/archive/3.1.0.zip"
+				/>
+			</then>
+		</if>
+
+		<unzip
+			dest="tmp"
+			src="libsass-3.1.0.zip"
+		/>
+
+		<patch dir="tmp/libsass-3.1.0" patchfile="patches/LPS-52961.patch" />
+
+		<exec dir="tmp/libsass-3.1.0" command="${make} shared" />
+
+		<copy todir="resources/${resourceloc}">
+			<fileset dir="tmp/libsass-3.1.0/lib">
+				<filename name="${libname}" />
+			</fileset>
+		</copy>
+
+		<delete dir="tmp" />
+	</target>
 </project>
