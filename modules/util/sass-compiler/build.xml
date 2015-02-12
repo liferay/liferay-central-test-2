@@ -29,9 +29,15 @@
 				src="libsass-3.1.0.zip"
 			/>
 
-			<patch dir="tmp/libsass-3.1.0" patchfile="patches/LPS-52961.patch" />
+			<patch
+				dir="tmp/libsass-3.1.0"
+				patchfile="patches/LPS-52961.patch"
+			/>
 
-			<exec dir="tmp/libsass-3.1.0" command="@{libsass.make.file} shared" />
+			<exec
+				command="@{libsass.make.file} shared"
+				dir="tmp/libsass-3.1.0"
+			/>
 
 			<copy todir="resources/@{libsass.resources.dir}">
 				<fileset dir="tmp/libsass-3.1.0/lib">
