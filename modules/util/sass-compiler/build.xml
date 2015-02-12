@@ -7,9 +7,9 @@
 	<property name="auto.deploy.dir" value="../../../lib/development/" />
 
 	<macrodef name="build-libsass">
-		<attribute name="libname" />
-		<attribute name="make" />
-		<attribute name="resourceloc" />
+		<attribute name="libsass.lib.file" />
+		<attribute name="libsass.make.file" />
+		<attribute name="libsass.resources.dir" />
 
 		<sequential>
 			<if>
@@ -31,11 +31,11 @@
 
 			<patch dir="tmp/libsass-3.1.0" patchfile="patches/LPS-52961.patch" />
 
-			<exec dir="tmp/libsass-3.1.0" command="@{make} shared" />
+			<exec dir="tmp/libsass-3.1.0" command="@{libsass.make.file} shared" />
 
-			<copy todir="resources/@{resourceloc}">
+			<copy todir="resources/@{libsass.resources.dir}">
 				<fileset dir="tmp/libsass-3.1.0/lib">
-					<filename name="@{libname}" />
+					<filename name="@{libsass.lib.file}" />
 				</fileset>
 			</copy>
 
@@ -45,41 +45,41 @@
 
 	<target name="build-libsass-darwin">
 		<build-libsass
-			libname="libsass.dylib"
-			make="make"
-			resourceloc="darwin"
+			libsass.lib.file="libsass.dylib"
+			libsass.make.file="make"
+			libsass.resources.dir="darwin"
 		/>
 	</target>
 
 	<target name="build-libsass-linux-x86">
 		<build-libsass
-			libname="libsass.so"
-			make="make"
-			resourceloc="linux-x86"
+			libsass.lib.file="libsass.so"
+			libsass.make.file="make"
+			libsass.resources.dir="linux-x86"
 		/>
 	</target>
 
 	<target name="build-libsass-linux-x86-64">
 		<build-libsass
-			libname="libsass.so"
-			make="make"
-			resourceloc="linux-x86-64"
+			libsass.lib.file="libsass.so"
+			libsass.make.file="make"
+			libsass.resources.dir="linux-x86-64"
 		/>
 	</target>
 
 	<target name="build-libsass-win32-x86">
 		<build-libsass
-			libname="sass.dll"
-			make="mingw32-make.exe"
-			resourceloc="win32-x86"
+			libsass.lib.file="sass.dll"
+			libsass.make.file="mingw32-make.exe"
+			libsass.resources.dir="win32-x86"
 		/>
 	</target>
 
 	<target name="build-libsass-win32-x86-64">
 		<build-libsass
-			libname="sass.dll"
-			make="mingw32-make.exe"
-			resourceloc="win32-x86-64"
+			libsass.lib.file="sass.dll"
+			libsass.make.file="mingw32-make.exe"
+			libsass.resources.dir="win32-x86-64"
 		/>
 	</target>
 
