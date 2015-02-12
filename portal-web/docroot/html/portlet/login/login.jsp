@@ -114,7 +114,7 @@
 				UserLockoutException.PasswordPolicyLockout ule = (UserLockoutException.PasswordPolicyLockout)errorException;
 				%>
 
-				<liferay-ui:message arguments="<%= ule.getUnlockDate() %>" key="this-account-is-locked-until-x" translateArguments="<%= false %>" />
+				<liferay-ui:message arguments="<%= ule.user.getUnlockDate() %>" key="this-account-is-locked-until-x" translateArguments="<%= false %>" />
 			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= UserPasswordException.class %>" message="authentication-failed" />

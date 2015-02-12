@@ -15,7 +15,6 @@
 package com.liferay.portal;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 
@@ -81,18 +80,10 @@ public class UserLockoutException extends PortalException {
 						"be automatically unlocked on %s",
 					user.getUserId(), user.getLockoutDate(),
 					passwordPolicy.getName(),
-					DateUtil.newDate(
-						user.getLockoutDate().getTime() +
-							passwordPolicy.getLockoutDuration() * 1000)));
+					user.getUnlockDate(passwordPolicy)));
 
 			this.user = user;
 			this.passwordPolicy = passwordPolicy;
-		}
-
-		public String getUnlockDate() {
-			return DateUtil.newDate(
-				this.user.getLockoutDate().getTime() +
-					this.passwordPolicy.getLockoutDuration() * 1000).toString();
 		}
 
 		public final PasswordPolicy passwordPolicy;
