@@ -359,7 +359,7 @@ public class PoshiRunnerExecutor {
 			}
 		}
 
-		if ((element.element("else") != null) && (condition == false)) {
+		if ((element.element("else") != null) && !condition) {
 			Element elseElement = element.element("else");
 
 			parseElement(elseElement);
