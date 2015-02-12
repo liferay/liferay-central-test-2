@@ -33,7 +33,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 <c:choose>
 	<c:when test="<%= SessionErrors.contains(request, UserLockoutException.LDAPLockout.class.getName()) %>">
 		<div class="alert alert-danger">
-			<liferay-ui:message key="this-account-has-been-locked" />
+			<liferay-ui:message key="this-account-is-locked" />
 		</div>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, UserLockoutException.PasswordPolicyLockout.class.getName()) %>">
@@ -43,7 +43,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 			UserLockoutException.PasswordPolicyLockout ule = (UserLockoutException.PasswordPolicyLockout)SessionErrors.get(request, UserLockoutException.PasswordPolicyLockout.class.getName());
 			%>
 
-			<liferay-ui:message arguments="<%= ule.getUnlockDate() %>" key="this-account-has-been-locked-until-x" translateArguments="<%= false %>" />
+			<liferay-ui:message arguments="<%= ule.getUnlockDate() %>" key="this-account-is-locked-until-x" translateArguments="<%= false %>" />
 		</div>
 	</c:when>
 	<c:otherwise>
