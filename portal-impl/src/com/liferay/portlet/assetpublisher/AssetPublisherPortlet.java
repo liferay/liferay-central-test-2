@@ -38,9 +38,7 @@ import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-
 import java.text.DateFormat;
-
 import java.util.Date;
 
 import javax.portlet.ActionRequest;
@@ -50,7 +48,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
 import javax.servlet.ServletException;
 
 /**
@@ -60,7 +57,7 @@ public class AssetPublisherPortlet extends MVCPortlet {
 
 	public void getFieldValue(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -147,6 +144,7 @@ public class AssetPublisherPortlet extends MVCPortlet {
 			writeJSON(resourceRequest, resourceResponse, jsonObject);
 		}
 		catch (Exception e) {
+			throw new PortletException(e);
 		}
 	}
 
