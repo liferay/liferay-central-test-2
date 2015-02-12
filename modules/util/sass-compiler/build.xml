@@ -6,6 +6,83 @@
 
 	<property name="auto.deploy.dir" value="../../../lib/development/" />
 
+	<macrodef name="build-libsass">
+		<attribute name="libname" />
+		<attribute name="make" />
+		<attribute name="resourceloc" />
+
+		<sequential>
+			<if>
+				<not>
+					<available file="libsass-3.1.0.zip" />
+				</not>
+				<then>
+					<get
+						dest="libsass-3.1.0.zip"
+						src="https://github.com/sass/libsass/archive/3.1.0.zip"
+					/>
+				</then>
+			</if>
+
+			<unzip
+				dest="tmp"
+				src="libsass-3.1.0.zip"
+			/>
+
+			<patch dir="tmp/libsass-3.1.0" patchfile="patches/LPS-52961.patch" />
+
+			<exec dir="tmp/libsass-3.1.0" command="@{make} shared" />
+
+			<copy todir="resources/@{resourceloc}">
+				<fileset dir="tmp/libsass-3.1.0/lib">
+					<filename name="@{libname}" />
+				</fileset>
+			</copy>
+
+			<delete dir="tmp" />
+		</sequential>
+	</macrodef>
+
+	<target name="build-libsass-darwin">
+		<build-libsass
+			libname="libsass.dylib"
+			make="make"
+			resourceloc="darwin"
+		/>
+	</target>
+
+	<target name="build-libsass-linux-x86">
+		<build-libsass
+			libname="libsass.so"
+			make="make"
+			resourceloc="linux-x86"
+		/>
+	</target>
+
+	<target name="build-libsass-linux-x86-64">
+		<build-libsass
+			libname="libsass.so"
+			make="make"
+			resourceloc="linux-x86-64"
+		/>
+	</target>
+
+	<target name="build-libsass-win32-x86">
+		<build-libsass
+			libname="sass.dll"
+			make="mingw32-make.exe"
+			resourceloc="win32-x86"
+		/>
+	</target>
+
+	<target name="build-libsass-win32-x86-64">
+		<build-libsass
+			libname="sass.dll"
+			make="mingw32-make.exe"
+			resourceloc="win32-x86-64"
+		/>
+	</target>
+
 	<target name="compile">
 		<if>
 			<not>
@@ -79,81 +156,4 @@
 			module.dir="${basedir}"
 		/>
 	</target>
-
-	<target name="build-libsass-darwin">
-		<build-libsass
-			libname="libsass.dylib"
-			make="make"
-			resourceloc="darwin"
-		/>
-	</target>
-
-	<target name="build-libsass-linux-x86">
-		<build-libsass
-			libname="libsass.so"
-			make="make"
-			resourceloc="linux-x86"
-		/>
-	</target>
-
-	<target name="build-libsass-linux-x86-64">
-		<build-libsass
-			libname="libsass.so"
-			make="make"
-			resourceloc="linux-x86-64"
-		/>
-	</target>
-
-	<target name="build-libsass-win32-x86">
-		<build-libsass
-			libname="sass.dll"
-			make="mingw32-make.exe"
-			resourceloc="win32-x86"
-		/>
-	</target>
-
-	<target name="build-libsass-win32-x86-64">
-		<build-libsass
-			libname="sass.dll"
-			make="mingw32-make.exe"
-			resourceloc="win32-x86-64"
-		/>
-	</target>
-
-	<macrodef name="build-libsass">
-		<attribute name="libname" />
-		<attribute name="make" />
-		<attribute name="resourceloc" />
-
-		<sequential>
-			<if>
-				<not>
-					<available file="libsass-3.1.0.zip" />
-				</not>
-				<then>
-					<get
-						dest="libsass-3.1.0.zip"
-						src="https://github.com/sass/libsass/archive/3.1.0.zip"
-					/>
-				</then>
-			</if>
-
-			<unzip
-				dest="tmp"
-				src="libsass-3.1.0.zip"
-			/>
-
-			<patch dir="tmp/libsass-3.1.0" patchfile="patches/LPS-52961.patch" />
-
-			<exec dir="tmp/libsass-3.1.0" command="@{make} shared" />
-
-			<copy todir="resources/@{resourceloc}">
-				<fileset dir="tmp/libsass-3.1.0/lib">
-					<filename name="@{libname}" />
-				</fileset>
-			</copy>
-
-			<delete dir="tmp" />
-		</sequential>
-	</macrodef>
 </project>
