@@ -1,6 +1,7 @@
 Each native library requires a specifc environment in order to build.
-Once on the correct environment, run the related ant build task for creating
-the library, e.g. "ant build-linux-x86-64" for building the linux 64 library.
+Once on the correct environment, run the related Ant build task for creating
+the library (e.g. "ant build-libsass-linux-x86-64" for building the Linux 64-bit
+library).
 
 resources/darwin/libsass.dylib
 	- install OSX 10.7.5
