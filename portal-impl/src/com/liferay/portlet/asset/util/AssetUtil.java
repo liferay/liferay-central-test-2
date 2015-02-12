@@ -102,7 +102,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetUtil {
 
-	public static final int ASSET_ABSTRACT_LENGTH = 200;
+	public static final int ASSET_ENTRY_ABSTRACT_LENGTH = 200;
 
 	public static final String CLASSNAME_SEPARATOR = "_CLASSNAME_";
 

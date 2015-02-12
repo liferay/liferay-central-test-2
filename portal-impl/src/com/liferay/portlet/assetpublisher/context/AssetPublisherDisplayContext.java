@@ -71,7 +71,7 @@ public class AssetPublisherDisplayContext {
 		if (_abstractLength == null) {
 			_abstractLength = GetterUtil.getInteger(
 				_portletPreferences.getValue("abstractLength", null),
-				AssetUtil.ASSET_ABSTRACT_LENGTH);
+				AssetUtil.ASSET_ENTRY_ABSTRACT_LENGTH);
 		}
 
 		return _abstractLength;
