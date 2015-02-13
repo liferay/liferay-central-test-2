@@ -530,6 +530,6 @@ public class PoshiRunnerExecutor {
 
 	private static final LiferaySelenium _liferaySelenium =
 		SeleniumUtil.getSelenium();
-	private static Object _returnObject = null;
+	private static Object _returnObject;
 
 }
