@@ -74,10 +74,11 @@ public class BindConfigurationActionCommand implements ActionCommand {
 			WebKeys.THEME_DISPLAY);
 
 		String factoryPid = ParamUtil.getString(portletRequest, "factoryPid");
+
 		String pid = ParamUtil.getString(portletRequest, "pid", factoryPid);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Binding attributes for service: " + pid);
+			_log.debug("Binding attributes for service " + pid);
 		}
 
 		ConfigurationHelper configurationHelper = new ConfigurationHelper(
@@ -127,14 +128,14 @@ public class BindConfigurationActionCommand implements ActionCommand {
 		throws PortletException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Props to be bound: " + properties);
+			_log.debug("Properties: " + properties);
 		}
 
 		try {
 			if (configuration == null) {
 				if (configurationModel.isFactory()) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Creating factory pid");
+						_log.debug("Creating factory PID");
 					}
 
 					configuration =
@@ -144,7 +145,7 @@ public class BindConfigurationActionCommand implements ActionCommand {
 				}
 				else {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Creating instance pid");
+						_log.debug("Creating instance PID");
 					}
 
 					configuration = _configurationAdmin.getConfiguration(
@@ -162,7 +163,8 @@ public class BindConfigurationActionCommand implements ActionCommand {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Config Properties: " + configuration.getProperties());
+					"Configuration properties: " +
+						configuration.getProperties());
 			}
 
 			Enumeration<String> keys = properties.keys();
