@@ -47,11 +47,11 @@ public class PoshiRunner extends TestCase {
 
 		PoshiRunnerVariablesUtil.pushCommandMap();
 
-		Element setupElement = PoshiRunnerContext.getTestcaseCommandElement(
+		Element setUpElement = PoshiRunnerContext.getTestcaseCommandElement(
 			_CLASS_NAME + "#set-up");
 
-		if (setupElement != null) {
-			PoshiRunnerExecutor.parseElement(setupElement);
+		if (setUpElement != null) {
+			PoshiRunnerExecutor.parseElement(setUpElement);
 		}
 	}
 
