@@ -16,6 +16,7 @@ package com.liferay.poshi.runner;
 
 import com.liferay.poshi.runner.selenium.LiferaySelenium;
 import com.liferay.poshi.runner.selenium.SeleniumUtil;
+import com.liferay.poshi.runner.util.GetterUtil;
 
 import java.lang.reflect.Method;
 
@@ -535,7 +536,7 @@ public class PoshiRunnerExecutor {
 		int maxIterations = 15;
 
 		if (element.attributeValue("max-iterations") != null) {
-			maxIterations = Integer.parseInt(
+			maxIterations = GetterUtil.getInteger(
 				element.attributeValue("max-iterations"));
 		}
 
