@@ -95,7 +95,7 @@ public class ConfigurationHelper {
 			String languageId, String factoryPid)
 		throws IOException {
 
-		List<ConfigurationModel> models = new ArrayList<>();
+		List<ConfigurationModel> configurationModels = new ArrayList<>();
 
 		StringBundler filter = new StringBundler(5);
 
@@ -116,7 +116,7 @@ public class ConfigurationHelper {
 		}
 
 		if (configurations == null) {
-			return models;
+			return configurationModels;
 		}
 
 		ConfigurationModel configurationModel = getConfigurationModel(
@@ -127,10 +127,10 @@ public class ConfigurationHelper {
 				configurationModel, configuration,
 				configuration.getBundleLocation(), false);
 
-			models.add(curConfigurationModel);
+			configurationModels.add(curConfigurationModel);
 		}
 
-		return models;
+		return configurationModels;
 	}
 
 	public String render(
