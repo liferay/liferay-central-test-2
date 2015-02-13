@@ -78,6 +78,7 @@ public class VelocityTemplateTest {
 		RegistryUtil.setRegistry(new BasicRegistryImpl());
 
 		MultiVMPoolUtil multiVMPoolUtil = new MultiVMPoolUtil();
+
 		MultiVMPoolImpl multiVMPoolImpl = new MultiVMPoolImpl();
 
 		multiVMPoolImpl.setPortalCacheManager(
@@ -88,6 +89,7 @@ public class VelocityTemplateTest {
 		multiVMPoolUtil.setMultiVMPool(multiVMPoolImpl);
 
 		SingleVMPoolUtil singleVMPoolUtil = new SingleVMPoolUtil();
+
 		SingleVMPoolImpl singleVMPoolImpl = new SingleVMPoolImpl();
 
 		singleVMPoolImpl.setPortalCacheManager(
