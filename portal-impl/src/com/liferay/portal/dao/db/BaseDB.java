@@ -766,7 +766,6 @@ public abstract class BaseDB implements DB {
 				TemplateConstants.LANG_TYPE_VM, stringTemplateResource, false);
 
 			template.put("counter", new SimpleCounter());
-
 			template.put("portalUUIDUtil", PortalUUIDUtil.class);
 
 			template.processTemplate(unsyncStringWriter);

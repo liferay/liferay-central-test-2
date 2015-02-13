@@ -637,7 +637,7 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.template.velocity"
 		},
 
-		// XSL content
+		// XSL Content
 
 		new String[] {
 			"xsl.content.xml.doctype.declaration.allowed",
