@@ -73,7 +73,7 @@ public class Watcher implements Runnable {
 		_filePath = filePath;
 		_watchEventListener = watchEventListener;
 
-		if (OSDetector.isWindows()) {
+		if (OSDetector.isWindows() || OSDetector.isApple()) {
 			_recursive = false;
 		}
 		else {
@@ -388,7 +388,7 @@ public class Watcher implements Runnable {
 
 			fireWatchEventListener(eventType, filePath);
 
-			if (Files.isDirectory(filePath)) {
+			if (_recursive && Files.isDirectory(filePath)) {
 				walkFileTree(filePath);
 			}
 		}
@@ -401,6 +401,7 @@ public class Watcher implements Runnable {
 			if (_downloadedFilePathNames.remove(filePath.toString()) ||
 				(removeCreatedFilePathName(filePath.toString()) &&
 				 !FileUtil.isValidChecksum(filePath)) ||
+				Files.notExists(filePath) ||
 				Files.isDirectory(filePath)) {
 
 				return;

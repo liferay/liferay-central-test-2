@@ -395,6 +395,13 @@ public class SyncWatchEventProcessor implements Runnable {
 	}
 
 	protected void doRun() throws Exception {
+		SyncAccount syncAccount = SyncAccountService.fetchSyncAccount(
+			_syncAccountId);
+
+		if (syncAccount.getState() != SyncAccount.STATE_CONNECTED) {
+			return;
+		}
+
 		SyncWatchEvent lastSyncWatchEvent =
 			SyncWatchEventService.fetchLastSyncWatchEvent(_syncAccountId);
 
@@ -551,15 +558,29 @@ public class SyncWatchEventProcessor implements Runnable {
 	}
 
 	protected void queueSyncWatchEvent(
-		String filePathName, SyncWatchEvent syncWatchEvent) {
+		String parentFilePathName, SyncWatchEvent syncWatchEvent) {
 
 		List<SyncWatchEvent> syncWatchEvents =
-			_dependentSyncWatchEventsMaps.get(filePathName);
+			_dependentSyncWatchEventsMaps.get(parentFilePathName);
 
 		if (syncWatchEvents == null) {
 			syncWatchEvents = new ArrayList<>();
 
-			_dependentSyncWatchEventsMaps.put(filePathName, syncWatchEvents);
+			_dependentSyncWatchEventsMaps.put(
+				parentFilePathName, syncWatchEvents);
+		}
+		else {
+			String eventType = syncWatchEvent.getEventType();
+			String filePathName = syncWatchEvent.getFilePathName();
+
+			SyncWatchEvent lastSyncWatchEvent = syncWatchEvents.get(
+				syncWatchEvents.size() - 1);
+
+			if (filePathName.equals(lastSyncWatchEvent.getFilePathName()) &&
+				eventType.equals(lastSyncWatchEvent.getEventType())) {
+
+				return;
+			}
 		}
 
 		syncWatchEvents.add(syncWatchEvent);
