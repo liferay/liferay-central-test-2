@@ -120,13 +120,11 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 		_macroTemplateIds = (Vector<String>)extendedProperties.get(
 			VelocityEngine.VM_LIBRARY);
-
 		_resourceModificationCheckInterval = GetterUtil.getInteger(
 			extendedProperties.get(
 				"liferay." + VelocityEngine.RESOURCE_LOADER +
 					".resourceModificationCheckInterval"),
 			60);
-
 		_templateResourceLoader =
 			(TemplateResourceLoader)extendedProperties.get(
 				VelocityTemplateResourceLoader.class.getName());
