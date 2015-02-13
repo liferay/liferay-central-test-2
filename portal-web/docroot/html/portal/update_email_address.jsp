@@ -39,7 +39,7 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 		<div class="alert alert-danger">
 			<c:choose>
 				<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.MustBeEqual.class.getName()) %>">
-						<liferay-ui:message key="the-email-addresses-you-entered-do-not-match-each-other" />
+						<liferay-ui:message key="the-email-addresses-you-entered-do-not-match" />
 				</c:when>
 				<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.MustNotBeDuplicate.class.getName()) %>">
 						<liferay-ui:message key="the-email-address-you-requested-is-already-taken" />
