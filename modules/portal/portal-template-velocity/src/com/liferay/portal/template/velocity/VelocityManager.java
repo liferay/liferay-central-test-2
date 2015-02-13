@@ -55,9 +55,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Peter Fellwock
  */
 @Component(
-		configurationPid = "com.liferay.portal.template.velocity",
-		configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
-		service = TemplateManager.class
+	configurationPid = "com.liferay.portal.template.velocity",
+	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
+	service = TemplateManager.class
 )
 public class VelocityManager extends BaseTemplateManager {
 
