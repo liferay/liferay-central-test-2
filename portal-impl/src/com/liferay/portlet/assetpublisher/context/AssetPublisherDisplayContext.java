@@ -1043,7 +1043,7 @@ public class AssetPublisherDisplayContext {
 	private Boolean _enableRatings;
 	private Boolean _enableRelatedAssets;
 	private Boolean _enableRSS;
-	private boolean _enableSetAsDefualtAssetPublisher;
+	private final boolean _enableSetAsDefualtAssetPublisher;
 	private Boolean _enableSocialBookmarks;
 	private Boolean _enableTagBasedNavigation;
 	private Boolean _excludeZeroViewCount;
