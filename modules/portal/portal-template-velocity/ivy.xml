@@ -17,10 +17,10 @@
 	</publications>
 
 	<dependencies defaultconf="default">
-		<dependency org="org.apache.velocity" name="velocity" rev="1.6.4" />
 		<dependency name="org.osgi.compendium" org="org.osgi" rev="5.0.0" />
 		<dependency name="org.osgi.core" org="org.osgi" rev="5.0.0" />
+		<dependency name="velocity" org="org.apache.velocity" rev="1.6.4" />
+		<dependency name="velocity-tools" org="velocity-tools" rev="1.4" />
 		<dependency conf="test->default" name="junit" org="junit" rev="4.11" />
-		<dependency org="velocity-tools" name="velocity-tools" rev="1.4" />
 	</dependencies>
 </ivy-module>
