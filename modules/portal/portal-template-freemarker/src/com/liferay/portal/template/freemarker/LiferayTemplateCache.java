@@ -47,9 +47,7 @@ public class LiferayTemplateCache extends TemplateCache {
 		TemplateResourceLoader templateResourceLoader) {
 
 		_configuration = configuration;
-
 		_freemarkerEngineConfiguration = freemarkerEngineConfiguration;
-
 		_templateResourceLoader = templateResourceLoader;
 
 		String cacheName = TemplateResource.class.getName();

@@ -67,6 +67,7 @@ public class FreeMarkerTemplateTest {
 		RegistryUtil.setRegistry(new BasicRegistryImpl());
 
 		MultiVMPoolUtil multiVMPoolUtil = new MultiVMPoolUtil();
+
 		MultiVMPoolImpl multiVMPoolImpl = new MultiVMPoolImpl();
 
 		multiVMPoolImpl.setPortalCacheManager(
@@ -77,6 +78,7 @@ public class FreeMarkerTemplateTest {
 		multiVMPoolUtil.setMultiVMPool(multiVMPoolImpl);
 
 		SingleVMPoolUtil singleVMPoolUtil = new SingleVMPoolUtil();
+
 		SingleVMPoolImpl singleVMPoolImpl = new SingleVMPoolImpl();
 
 		singleVMPoolImpl.setPortalCacheManager(
