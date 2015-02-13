@@ -14,6 +14,7 @@
 
 package com.liferay.configuration.admin.web.portlet.action;
 
+import com.liferay.configuration.admin.web.constants.ConfigurationAdminPortletKeys;
 import com.liferay.configuration.admin.web.model.ConfigurationModel;
 import com.liferay.configuration.admin.web.util.ConfigurationHelper;
 import com.liferay.configuration.admin.web.util.ConfigurationModelToDDMFormConverter;
@@ -58,8 +59,7 @@ import org.osgi.service.metatype.MetaTypeService;
 	immediate = true,
 	property = {
 		"action.command.name=bindConfiguration",
-		"javax.portlet.name=com_liferay_configuration_admin_web_portlet_" +
-			"ConfigurationAdminPortlet"
+		"javax.portlet.name=" + ConfigurationAdminPortletKeys.CONFIGURATION_ADMIN
 	},
 	service = ActionCommand.class
 )
