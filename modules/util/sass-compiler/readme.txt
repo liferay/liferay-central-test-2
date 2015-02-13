@@ -25,7 +25,7 @@ For resources/linux-x86-64/libsass.so:
 For resources/win32-x86/sass.dll:
 	- Install Windows 7 32-bit.
 	- Download tdm-gcc 32-bit from http://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm-gcc-4.9.2.exe/download.
-	- Run tdm-gcc 32-bit installer and then click "Create".
+	- Run the tdm-gcc 32-bit installer and then click "Create".
 	- Install with all the defaults.
 	- Go to the installation folder C:\TDM-GCC-32\bin.
 	- Copy gcc.exe to a new file named cc.exe.
@@ -34,7 +34,7 @@ For resources/win32-x86/sass.dll:
 For resources/win32-x86-64/sass.dll:
 	- Install Windows 7 64-bit.
 	- Download tdm64-gcc 64-bit from http://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm64-gcc-4.9.2-3.exe/download.
-	- Run tdm64-gcc 64-bit installer and then click "Create".
+	- Run the tdm64-gcc 64-bit installer and then click "Create".
 	- Install with all the defaults.
 	- Go to the installation folder C:\TDM64-GCC-32\bin.
 	- Copy gcc.exe to a new file named cc.exe.
