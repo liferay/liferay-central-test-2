@@ -76,6 +76,7 @@ public class PDFProcessorTest {
 	public void tearDown() {
 		if (_cleanUpDLProcessor != null) {
 			DLProcessorRegistryUtil.unregister(_cleanUpDLProcessor);
+
 			DLProcessorRegistryUtil.register(_originalDLProcessor);
 		}
 	}
