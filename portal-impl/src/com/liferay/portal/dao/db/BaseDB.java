@@ -748,7 +748,7 @@ public abstract class BaseDB implements DB {
 		return validIndexNames;
 	}
 
-	protected String evaluateVM(String templateID, String templateContent)
+	protected String evaluateVM(String templateId, String templateContent)
 		throws Exception {
 
 		ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
@@ -760,7 +760,7 @@ public abstract class BaseDB implements DB {
 				ClassLoaderUtil.getPortalClassLoader());
 
 			StringTemplateResource stringTemplateResource =
-				new StringTemplateResource(templateID, templateContent);
+				new StringTemplateResource(templateId, templateContent);
 
 			Template template = TemplateManagerUtil.getTemplate(
 				TemplateConstants.LANG_TYPE_VM, stringTemplateResource, false);
