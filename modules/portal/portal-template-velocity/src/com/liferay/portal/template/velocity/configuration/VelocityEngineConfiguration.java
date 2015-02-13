@@ -44,13 +44,13 @@ public interface VelocityEngineConfiguration {
 	public String[] resourceParsers();
 
 	@Meta.AD(
-			deflt = "java.lang.Class|java.lang.ClassLoader|java.lang.Thread",
-			required = false
+		deflt = "java.lang.Class|java.lang.ClassLoader|java.lang.Thread",
+		required = false
 	)
 	public String[] restrictedClasses();
 
 	@Meta.AD(
-			deflt = "", required = false
+		deflt = "", required = false
 	)
 	public String[] restrictedPackages();
 
