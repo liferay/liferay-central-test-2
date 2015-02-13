@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.backgroundtask;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portal.model.Lock;
@@ -28,8 +27,8 @@ import com.liferay.portal.service.LockLocalServiceUtil;
 @ProviderType
 public class BackgroundTaskLockHelperUtil {
 
-	public static boolean isLockedBackgroundTask(BackgroundTask backgroundTask)
-		throws PortalException {
+	public static boolean isLockedBackgroundTask(
+		BackgroundTask backgroundTask) {
 
 		return LockLocalServiceUtil.isLocked(
 			BackgroundTaskExecutor.class.getName(), getLockKey(backgroundTask));
@@ -45,9 +44,7 @@ public class BackgroundTaskLockHelperUtil {
 			owner);
 	}
 
-	public static void unlockBackgroundTask(BackgroundTask backgroundTask)
-		throws PortalException {
-
+	public static void unlockBackgroundTask(BackgroundTask backgroundTask) {
 		String owner =
 			backgroundTask.getName() + StringPool.POUND +
 				backgroundTask.getBackgroundTaskId();
