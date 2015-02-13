@@ -82,7 +82,7 @@ public class PDFProcessorTest {
 
 	@Test
 	public void testShouldCleanUpProcessorsOnCancelCheckOut() throws Exception {
-		AtomicBoolean cleanedUp = registerCleanUpDLProcessor();
+		AtomicBoolean cleanUp = registerCleanUpDLProcessor();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			_serviceContext.getScopeGroupId(),
@@ -96,12 +96,12 @@ public class PDFProcessorTest {
 
 		DLAppServiceUtil.cancelCheckOut(fileEntry.getFileEntryId());
 
-		Assert.assertTrue(cleanedUp.get());
+		Assert.assertTrue(cleanUp.get());
 	}
 
 	@Test
 	public void testShouldCleanUpProcessorsOnDelete() throws Exception {
-		AtomicBoolean cleanedUp = registerCleanUpDLProcessor();
+		AtomicBoolean cleanUp = registerCleanUpDLProcessor();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			_serviceContext.getScopeGroupId(),
@@ -112,12 +112,12 @@ public class PDFProcessorTest {
 
 		DLAppServiceUtil.deleteFileEntry(fileEntry.getFileEntryId());
 
-		Assert.assertTrue(cleanedUp.get());
+		Assert.assertTrue(cleanUp.get());
 	}
 
 	@Test
 	public void testShouldCleanUpProcessorsOnUpdate() throws Exception {
-		AtomicBoolean cleanedUp = registerCleanUpDLProcessor();
+		AtomicBoolean cleanUp = registerCleanUpDLProcessor();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			_serviceContext.getScopeGroupId(),
@@ -132,14 +132,14 @@ public class PDFProcessorTest {
 			StringUtil.randomString(), StringUtil.randomString(), true,
 			_PDF_DATA.getBytes(), _serviceContext);
 
-		Assert.assertTrue(cleanedUp.get());
+		Assert.assertTrue(cleanUp.get());
 	}
 
 	@Test
 	public void testShouldCleanUpProcessorsOnUpdateAndCheckIn()
 		throws Exception {
 
-		AtomicBoolean cleanedUp = registerCleanUpDLProcessor();
+		AtomicBoolean cleanUp = registerCleanUpDLProcessor();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			_serviceContext.getScopeGroupId(),
@@ -158,7 +158,7 @@ public class PDFProcessorTest {
 			StringUtil.randomString(), StringUtil.randomString(), true,
 			inputStream, bytes.length, _serviceContext);
 
-		Assert.assertTrue(cleanedUp.get());
+		Assert.assertTrue(cleanUp.get());
 	}
 
 	@Test
@@ -210,7 +210,7 @@ public class PDFProcessorTest {
 			StringUtil.randomString(), StringUtil.randomString(),
 			StringUtil.randomString(), _PDF_DATA.getBytes(), _serviceContext);
 
-		String previousVersion = fileEntry.getVersion();
+		String version = fileEntry.getVersion();
 
 		fileEntry = DLAppServiceUtil.updateFileEntry(
 			fileEntry.getFileEntryId(), StringUtil.randomString() + ".pdf",
@@ -218,10 +218,10 @@ public class PDFProcessorTest {
 			StringUtil.randomString(), StringUtil.randomString(), true,
 			_PDF_DATA.getBytes(), _serviceContext);
 
-		Assert.assertNotEquals(previousVersion, fileEntry.getVersion());
+		Assert.assertNotEquals(version, fileEntry.getVersion());
 
 		DLAppServiceUtil.revertFileEntry(
-			fileEntry.getFileEntryId(), previousVersion, _serviceContext);
+			fileEntry.getFileEntryId(), version, _serviceContext);
 
 		Assert.assertEquals(1, count.get());
 	}
@@ -311,7 +311,7 @@ public class PDFProcessorTest {
 	public void testShouldCreateNewPreviewOnUpdateAndCheckInWithContent()
 		throws Exception {
 
-		AtomicInteger newCount = registerPDFProcessorMessageListener(
+		AtomicInteger count = registerPDFProcessorMessageListener(
 			EventType.GENERATE_NEW);
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
@@ -331,7 +331,7 @@ public class PDFProcessorTest {
 			StringUtil.randomString(), StringUtil.randomString(), true,
 			inputStream, bytes.length, _serviceContext);
 
-		Assert.assertEquals(2, newCount.get());
+		Assert.assertEquals(2, count.get());
 	}
 
 	@Test
@@ -360,7 +360,7 @@ public class PDFProcessorTest {
 	protected static AtomicInteger registerPDFProcessorMessageListener(
 		final EventType eventType) {
 
-		final AtomicInteger counter = new AtomicInteger();
+		final AtomicInteger count = new AtomicInteger();
 
 		MessageBusUtil.registerMessageListener(
 			DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR,
@@ -371,31 +371,31 @@ public class PDFProcessorTest {
 					Object[] payload = (Object[])message.getPayload();
 
 					if (eventType.isMatch(payload[0])) {
-						counter.incrementAndGet();
+						count.incrementAndGet();
 					}
 				}
 
 			});
 
-		return counter;
+		return count;
 	}
 
 	protected AtomicBoolean registerCleanUpDLProcessor() {
 		_originalDLProcessor = DLProcessorRegistryUtil.getDLProcessor(
 			DLProcessorConstants.PDF_PROCESSOR);
 
-		final AtomicBoolean cleanedUp = new AtomicBoolean(false);
+		final AtomicBoolean cleanUp = new AtomicBoolean(false);
 
 		_cleanUpDLProcessor = new PDFProcessorImpl() {
 
 			@Override
 			public void cleanUp(FileEntry fileEntry) {
-				cleanedUp.set(true);
+				cleanUp.set(true);
 			}
 
 			@Override
 			public void cleanUp(FileVersion fileVersion) {
-				cleanedUp.set(true);
+				cleanUp.set(true);
 			}
 
 			@Override
@@ -428,7 +428,7 @@ public class PDFProcessorTest {
 
 		DLProcessorRegistryUtil.register(_cleanUpDLProcessor);
 
-		return cleanedUp;
+		return cleanUp;
 	}
 
 	protected enum EventType {
@@ -446,7 +446,11 @@ public class PDFProcessorTest {
 
 			@Override
 			public boolean isMatch(Object object) {
-				return object == null;
+				if (object == null) {
+					return true;
+				}
+
+				return false;
 			}
 
 		};
