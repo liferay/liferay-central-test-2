@@ -2,9 +2,9 @@
 <!DOCTYPE project>
 
 <project>
-	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
+	<property name="auto.deploy.dir" value="../../../lib/portal" />
 
-	<property name="auto.deploy.dir" value="../../../lib/portal/" />
+	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
 	<macrodef name="build-libsass">
 		<attribute name="libsass.lib.file" />
