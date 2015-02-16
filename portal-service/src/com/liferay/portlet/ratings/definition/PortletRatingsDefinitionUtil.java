@@ -89,8 +89,7 @@ public class PortletRatingsDefinitionUtil {
 
 			if (ArrayUtil.isEmpty(classNames)) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Property \"model.class.name\" is not set");
+					_log.warn("Property \"model.class.name\" is not set");
 				}
 
 				return null;
