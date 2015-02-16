@@ -77,7 +77,7 @@ public class PortalClientBuilder {
 
 		File parentFile = file.getParentFile();
 
-		_axisServlet = _createAxisServlet(parentFile.getParentFile());
+		_axisHttpServlet = _createAxisHttpServlet(parentFile.getParentFile());
 
 		Document document = SAXReaderUtil.read(new File(fileName));
 
@@ -112,7 +112,7 @@ public class PortalClientBuilder {
 		}
 	}
 
-	private HttpServlet _createAxisServlet(final File docRoot)
+	private HttpServlet _createAxisHttpServlet(final File docRootDir)
 		throws ServletException {
 
 		AxisServlet axisServlet = new AxisServlet();
@@ -123,7 +123,8 @@ public class PortalClientBuilder {
 
 					@Override
 					public Resource getResource(String name) {
-						return new FileSystemResource(new File(docRoot, name));
+						return new FileSystemResource(
+							new File(docRootDir, name));
 					}
 
 					@Override
@@ -148,7 +149,7 @@ public class PortalClientBuilder {
 
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest(
-				_axisServlet.getServletContext(), "GET", path);
+				_axisHttpServlet.getServletContext(), "GET", path);
 
 		mockHttpServletRequest.setPathInfo(path.substring(index));
 		mockHttpServletRequest.setQueryString(url.getQuery());
@@ -161,7 +162,7 @@ public class PortalClientBuilder {
 			new MockHttpServletResponse();
 
 		try {
-			_axisServlet.service(
+			_axisHttpServlet.service(
 				mockHttpServletRequest, mockHttpServletResponse);
 		}
 		catch (ServletException se) {
@@ -228,7 +229,7 @@ public class PortalClientBuilder {
 		FileUtil.write(mappingFile, sb.toString());
 	}
 
-	private final HttpServlet _axisServlet;
+	private final HttpServlet _axisHttpServlet;
 
 	private class DirectURLConnection extends URLConnection {
 
