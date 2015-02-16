@@ -103,13 +103,20 @@ public class PortletRatingsDefinitionUtil {
 
 			RatingsType defaultRatingsType =
 				portletRatingsDefinition.getDefaultRatingsType();
+
+			if (defaultRatingsType == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Default ratings type is null");
+				}
+
+				return null;
+			}
+
 			String portletId = portletRatingsDefinition.getPortletId();
 
-			if ((defaultRatingsType == null) || Validator.isNull(portletId)) {
+			if (Validator.isNull(portletId)) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"PortletRatingsDefinition must contain " +
-							"portletId and defaultRatingsType");
+					_log.warn("Portlet ID is null");
 				}
 
 				return null;
