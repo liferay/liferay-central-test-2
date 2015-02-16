@@ -106,9 +106,7 @@ public class PortletRatingsDefinitionUtil {
 				portletRatingsDefinition.getDefaultRatingsType();
 			String portletId = portletRatingsDefinition.getPortletId();
 
-			if ((defaultRatingsType == null) ||
-				Validator.isNull(portletId)) {
-
+			if ((defaultRatingsType == null) || Validator.isNull(portletId)) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"PortletRatingsDefinition must contain " +
