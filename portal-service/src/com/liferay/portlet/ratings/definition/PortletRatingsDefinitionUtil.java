@@ -64,85 +64,89 @@ public class PortletRatingsDefinitionUtil {
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortletRatingsDefinitionUtil.class);
 
-	private static final
-		ServiceTrackerMap<String, PortletRatingsDefinitionValues>
-			_serviceTrackerMap = ServiceTrackerCollections.singleValueMap(
-				PortletRatingsDefinition.class, "model.class.name",
+	private static final ServiceTrackerCustomizer
+		<PortletRatingsDefinition, PortletRatingsDefinitionValues>
+			_serviceTrackerCustomizer =
 				new ServiceTrackerCustomizer
 					<PortletRatingsDefinition,
 						PortletRatingsDefinitionValues>() {
 
-				@Override
-				public PortletRatingsDefinitionValues addingService(
-					ServiceReference<PortletRatingsDefinition>
-						serviceReference) {
+		@Override
+		public PortletRatingsDefinitionValues addingService(
+			ServiceReference<PortletRatingsDefinition> serviceReference) {
 
-					String[] classNames = null;
+			String[] classNames = null;
 
-					Object modelClassName = serviceReference.getProperty(
-						"model.class.name");
+			Object modelClassName = serviceReference.getProperty(
+				"model.class.name");
 
-					if (modelClassName instanceof Object[]) {
-						classNames = (String[])modelClassName;
-					}
-					else {
-						classNames = new String[] {(String)modelClassName};
-					}
+			if (modelClassName instanceof Object[]) {
+				classNames = (String[])modelClassName;
+			}
+			else {
+				classNames = new String[] {(String)modelClassName};
+			}
 
-					if (ArrayUtil.isEmpty(classNames)) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"PortletRatingsDefinition must contain " +
-									"javax.portlet.name");
-						}
-
-						return null;
-					}
-
-					Registry registry = RegistryUtil.getRegistry();
-
-					PortletRatingsDefinition portletRatingsDefinition =
-						registry.getService(serviceReference);
-
-					RatingsType defaultRatingsType =
-						portletRatingsDefinition.getDefaultRatingsType();
-					String portletId = portletRatingsDefinition.getPortletId();
-
-					if ((defaultRatingsType == null) ||
-						Validator.isNull(portletId)) {
-
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"PortletRatingsDefinition must contain " +
-									"portletId and defaultRatingsType");
-						}
-
-						return null;
-					}
-
-					return new PortletRatingsDefinitionValues(
-						classNames, defaultRatingsType, portletId);
+			if (ArrayUtil.isEmpty(classNames)) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"PortletRatingsDefinition must contain " +
+							"javax.portlet.name");
 				}
 
-				@Override
-				public void modifiedService(
-					ServiceReference<PortletRatingsDefinition> serviceReference,
-					PortletRatingsDefinitionValues
-						portletRatingsDefinitionValues) {
+				return null;
+			}
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			PortletRatingsDefinition portletRatingsDefinition =
+				registry.getService(serviceReference);
+
+			RatingsType defaultRatingsType =
+				portletRatingsDefinition.getDefaultRatingsType();
+			String portletId = portletRatingsDefinition.getPortletId();
+
+			if ((defaultRatingsType == null) ||
+				Validator.isNull(portletId)) {
+
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"PortletRatingsDefinition must contain " +
+							"portletId and defaultRatingsType");
 				}
 
-				@Override
-				public void removedService(
-					ServiceReference<PortletRatingsDefinition> serviceReference,
-					PortletRatingsDefinitionValues
-						portletRatingsDefinitionValues) {
+				return null;
+			}
 
-					Registry registry = RegistryUtil.getRegistry();
+			return new PortletRatingsDefinitionValues(
+				classNames, defaultRatingsType, portletId);
+		}
 
-					registry.ungetService(serviceReference);
-				}
+		@Override
+		public void modifiedService(
+			ServiceReference<PortletRatingsDefinition> serviceReference,
+			PortletRatingsDefinitionValues
+				portletRatingsDefinitionValues) {
+		}
 
-			});
+		@Override
+		public void removedService(
+			ServiceReference<PortletRatingsDefinition> serviceReference,
+			PortletRatingsDefinitionValues
+				portletRatingsDefinitionValues) {
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			registry.ungetService(serviceReference);
+		}
+
+	};
+
+	private static final ServiceTrackerMap
+		<String, PortletRatingsDefinitionValues> _serviceTrackerMap =
+			ServiceTrackerCollections.singleValueMap(
+				PortletRatingsDefinition.class, "model.class.name",
+				_serviceTrackerCustomizer);
 
 	static {
 		_serviceTrackerMap.open();
