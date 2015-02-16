@@ -113,9 +113,7 @@ public class RatingsDataTransformerUtil {
 				PortletRatingsDefinitionUtil.
 					getPortletRatingsDefinitionValuesMap();
 
-		for (final String className :
-				portletRatingsDefinitionValuesMap.keySet()) {
-
+		for (String className : portletRatingsDefinitionValuesMap.keySet()) {
 			String propertyKey = getPropertyKey(className);
 
 			_transformRatingsData(
