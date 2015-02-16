@@ -15,7 +15,7 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * @author André de Oliveira
+ * @author AndrÃ© de Oliveira
  * @author Miguel Angelo Caldas Gallindo
  */
 public interface QueryVisitor<T> {
