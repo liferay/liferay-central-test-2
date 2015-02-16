@@ -61,22 +61,22 @@ public class CompanyPortletRatingsDefinitionDisplayContext {
 				continue;
 			}
 
-			String propertyKey = RatingsDataTransformerUtil.getPropertyKey(
-				className);
-
-			RatingsType defaultRatingsType =
-				portletRatingsDefinitionValues.getDefaultRatingsType();
+			String portletId = portletRatingsDefinitionValues.getPortletId();
 
 			Map<String, RatingsType> ratingsTypeMap = new HashMap<>();
 
+			String propertyKey = RatingsDataTransformerUtil.getPropertyKey(
+				className);
+
+			RatingsType ratingsType =
+				portletRatingsDefinitionValues.getDefaultRatingsType();
+
 			String companyRatingsTypeString = PrefsParamUtil.getString(
 				companyPortletPreferences, request, propertyKey,
-				defaultRatingsType.getValue());
+				ratingsType.getValue());
 
 			ratingsTypeMap.put(
 				className, RatingsType.parse(companyRatingsTypeString));
-
-			String portletId = portletRatingsDefinitionValues.getPortletId();
 
 			_companyRatingsTypeMaps.put(portletId, ratingsTypeMap);
 		}

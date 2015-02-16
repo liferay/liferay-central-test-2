@@ -73,23 +73,25 @@ public class GroupPortletRatingsDefinitionDisplayContext {
 				continue;
 			}
 
-			String propertyKey = RatingsDataTransformerUtil.getPropertyKey(
-				className);
+			String portletId = portletRatingsDefinitionValues.getPortletId();
 
 			Map<String, RatingsType> ratingsTypeMap = new HashMap<>();
+
+			String propertyKey = RatingsDataTransformerUtil.getPropertyKey(
+				className);
 
 			Map<String, Map<String, RatingsType>> companyRatingsTypeMaps =
 				_companyPortletRatingsDefinitionDisplayContext.
 					getCompanyRatingsTypeMaps();
 
-			String portletId = portletRatingsDefinitionValues.getPortletId();
-
 			Map<String, RatingsType> companyRatingsTypeMap =
 				companyRatingsTypeMaps.get(portletId);
 
+			RatingsType ratingsType = companyRatingsTypeMap.get(className);
+
 			String groupRatingsTypeString = PropertiesParamUtil.getString(
 				groupTypeSettings, request, propertyKey,
-				companyRatingsTypeMap.get(className).getValue());
+				ratingsType.getValue());
 
 			ratingsTypeMap.put(
 				className, RatingsType.parse(groupRatingsTypeString));
