@@ -237,7 +237,7 @@ public class PortalClientBuilder {
 		}
 
 		@Override
-		public void connect() throws IOException {
+		public void connect() {
 		}
 
 		@Override
@@ -255,7 +255,7 @@ public class PortalClientBuilder {
 	private class DirectURLStreamHandler extends URLStreamHandler {
 
 		@Override
-		protected URLConnection openConnection(URL url) throws IOException {
+		protected URLConnection openConnection(URL url) {
 			return new DirectURLConnection(url);
 		}
 
