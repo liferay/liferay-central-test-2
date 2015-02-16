@@ -683,23 +683,9 @@ public abstract class BaseIndexer implements Indexer {
 
 		document.addNumber(Field.VIEW_COUNT, assetEntry.getViewCount());
 
-		Map<Locale, String> titleMap = assetEntry.getTitleMap();
-
-		Locale[] availableLocales = LanguageUtil.getAvailableLocales(
-			assetEntry.getGroupId());
-
-		String defaultTitle = titleMap.get(
-			LocaleUtil.fromLanguageId(assetEntry.getDefaultLanguageId()));
-
-		for (Locale availableLocale : availableLocales) {
-			if (!titleMap.containsKey(availableLocale) ||
-				Validator.isNull(titleMap.get(availableLocale))) {
-
-				titleMap.put(availableLocale, defaultTitle);
-			}
-		}
-
-		document.addLocalizedKeyword("localized_title", titleMap, true, true);
+		document.addLocalizedKeyword(
+			"localized_title",
+			populateMap(assetEntry, assetEntry.getTitleMap()), true, true);
 		document.addKeyword("visible", assetEntry.isVisible());
 	}
 
@@ -1838,6 +1824,26 @@ public abstract class BaseIndexer implements Indexer {
 		document.addText("region", regions.toArray(new String[regions.size()]));
 		document.addText("street", streets.toArray(new String[streets.size()]));
 		document.addText("zip", zips.toArray(new String[zips.size()]));
+	}
+
+	protected Map<Locale, String> populateMap(
+		AssetEntry assetEntry, Map<Locale, String> map) {
+
+		Locale[] availableLocales = LanguageUtil.getAvailableLocales(
+			assetEntry.getGroupId());
+
+		String defaultValue = map.get(
+			LocaleUtil.fromLanguageId(assetEntry.getDefaultLanguageId()));
+
+		for (Locale availableLocale : availableLocales) {
+			if (!map.containsKey(availableLocale) ||
+				Validator.isNull(map.get(availableLocale))) {
+
+				map.put(availableLocale, defaultValue);
+			}
+		}
+
+		return map;
 	}
 
 	protected void postProcessFullQuery(
