@@ -20,9 +20,9 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Peter Fellwock
  */
 @Meta.OCD(
-	id = "com.liferay.portal.template.freemarker.configuration.FreemarkerEngineConfiguration"
+	id = "com.liferay.portal.template.freemarker.configuration.FreeMarkerEngineConfiguration"
 )
-public interface FreemarkerEngineConfiguration {
+public interface FreeMarkerEngineConfiguration {
 
 	@Meta.AD(deflt = "false", required = false)
 	public boolean localizedLookup();

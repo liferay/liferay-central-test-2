@@ -26,7 +26,7 @@ import org.osgi.framework.FrameworkUtil;
 /**
  * @author Carlos Sierra Andrés
  */
-public class FreemarkerOSGiServlet extends FreemarkerServlet {
+public class FreeMarkerOSGiServlet extends FreemarkerServlet {
 
 	@Override
 	protected TemplateLoader createTemplateLoader(String templatePath) {
