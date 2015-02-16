@@ -77,6 +77,8 @@ public class BreadcrumbTag extends IncludeTag {
 	protected List<BreadcrumbEntry> getBreadcrumbEntries(
 		HttpServletRequest request) {
 
+		List<BreadcrumbEntry> breadcrumbEntries = Collections.emptyList();
+
 		List<Integer> breadcrumbEntryTypes = new ArrayList<>();
 
 		if (_showCurrentGroup) {
@@ -98,8 +100,6 @@ public class BreadcrumbTag extends IncludeTag {
 		if (_showPortletBreadcrumb) {
 			breadcrumbEntryTypes.add(BreadcrumbUtil.ENTRY_TYPE_PORTLET);
 		}
-
-		List<BreadcrumbEntry> breadcrumbEntries = Collections.emptyList();
 
 		try {
 			breadcrumbEntries = BreadcrumbUtil.getBreadcrumbEntries(
