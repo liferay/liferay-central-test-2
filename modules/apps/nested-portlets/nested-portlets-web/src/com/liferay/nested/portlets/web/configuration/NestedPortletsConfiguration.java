@@ -20,9 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Raymond Augé
  */
 @Meta.OCD(
-	id =
-		"com.liferay.nested.portlets.web.configuration." +
-			"NestedPortletsConfiguration",
+	id = "com.liferay.nested.portlets.web.configuration.NestedPortletsConfiguration",
 	localization = "content.Language"
 )
 public interface NestedPortletsConfiguration {

@@ -39,8 +39,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Bruno Farache
  */
 @Component(
-	configurationPid =
-		"com.liferay.portal.sso.ntlm.configuration.NtlmConfiguration",
+	configurationPid = "com.liferay.portal.sso.ntlm.configuration.NtlmConfiguration",
 	immediate = true, service = AutoLogin.class
 )
 public class NtlmAutoLogin extends BaseAutoLogin {

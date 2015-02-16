@@ -38,8 +38,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	configurationPid =
-		"com.liferay.xsl.content.web.configuration.XSLContentConfiguration",
+	configurationPid = "com.liferay.xsl.content.web.configuration.XSLContentConfiguration",
 	immediate = true,
 	property = {
 		"com.liferay.portlet.css-class-wrapper=portlet-xsl-content",

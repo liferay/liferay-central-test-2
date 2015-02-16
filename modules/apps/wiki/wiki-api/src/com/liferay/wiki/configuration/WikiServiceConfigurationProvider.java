@@ -27,8 +27,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Iván Zaera
  */
 @Component(
-	configurationPid =
-		"com.liferay.wiki.configuration.WikiServiceConfiguration",
+	configurationPid = "com.liferay.wiki.configuration.WikiServiceConfiguration",
 	immediate = true, service = WikiServiceConfiguration.class
 )
 public class WikiServiceConfigurationProvider

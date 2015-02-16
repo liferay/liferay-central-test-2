@@ -20,9 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Jorge Ferrer
  */
 @Meta.OCD(
-	id =
-		"com.liferay.amazon.rankings.web.configuration." +
-			"AmazonRankingsConfiguration"
+	id = "com.liferay.amazon.rankings.web.configuration.AmazonRankingsConfiguration"
 )
 public interface AmazonRankingsConfiguration {
 

@@ -78,8 +78,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Edward Han
  */
 @Component(
-	configurationPid =
-		"com.liferay.portal.ldap.configuration.LDAPConfiguration",
+	configurationPid = "com.liferay.portal.ldap.configuration.LDAPConfiguration",
 	immediate = true, service = PortalLDAP.class
 )
 public class DefaultPortalLDAP implements PortalLDAP {

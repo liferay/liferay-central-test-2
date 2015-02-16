@@ -49,8 +49,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Peter Fellwock
  */
 @Component(
-	configurationPid =
-		"com.liferay.translator.web.configuration.TranslatorConfiguration",
+	configurationPid = "com.liferay.translator.web.configuration.TranslatorConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"com.liferay.portlet.css-class-wrapper=portlet-translator",
