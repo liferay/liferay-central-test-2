@@ -90,8 +90,7 @@ public class PortletRatingsDefinitionUtil {
 			if (ArrayUtil.isEmpty(classNames)) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"PortletRatingsDefinition must contain " +
-							"javax.portlet.name");
+						"Property \"model.class.name\" is not set");
 				}
 
 				return null;
