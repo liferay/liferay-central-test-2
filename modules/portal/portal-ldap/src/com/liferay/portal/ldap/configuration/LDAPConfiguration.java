@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.ldap.configuration.LDAPConfigurationp",
+	id = "com.liferay.portal.ldap.configuration.LDAPConfiguration",
 	localization = "content.Language"
 )
 public interface LDAPConfiguration {
