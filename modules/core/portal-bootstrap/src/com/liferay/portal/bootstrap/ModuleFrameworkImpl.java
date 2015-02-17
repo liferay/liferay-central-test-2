@@ -93,7 +93,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 	@Override
 	public long addBundle(String location) throws PortalException {
-		Bundle bundle = addBundle(location, null, true);
+		Bundle bundle = _addBundle(location, null, true);
 
 		return bundle.getBundleId();
 	}
@@ -102,12 +102,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 	public long addBundle(String location, InputStream inputStream)
 		throws PortalException {
 
-		Bundle bundle = addBundle(location, inputStream, true);
+		Bundle bundle = _addBundle(location, inputStream, true);
 
 		return bundle.getBundleId();
 	}
 
-	public Bundle addBundle(
+	private Bundle _addBundle(
 			String location, InputStream inputStream, boolean checkPermission)
 		throws PortalException {
 
@@ -726,7 +726,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 				return;
 			}
 
-			Bundle bundle = addBundle(
+			Bundle bundle = _addBundle(
 				initialBundleURL.toString(), inputStream, false);
 
 			if ((bundle == null) || _isFragmentBundle(bundle)) {
