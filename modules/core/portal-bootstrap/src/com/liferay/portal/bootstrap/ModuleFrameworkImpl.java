@@ -450,7 +450,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		throws PortalException {
 
 		if (_framework == null) {
-			throw new IllegalStateException("Framework not initialized!");
+			throw new IllegalStateException("Framework is not initialized");
 		}
 
 		if (checkPermission) {
