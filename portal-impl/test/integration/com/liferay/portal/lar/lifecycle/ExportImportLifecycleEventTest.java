@@ -77,7 +77,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		ExportImportLifecycleEventListenerRegistryUtil.register(
 			new MockExportImportLifecycleListener());
 
-		_firedExportImportLifecycleEventsMap = new HashMap();
+		_firedExportImportLifecycleEventsMap = new HashMap<>();
 	}
 
 	@Test
@@ -209,6 +209,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		Date startDate = new Date(endDate.getTime() - Time.HOUR);
 
 		LayoutTestUtil.addLayout(_group, false);
+
 		JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
