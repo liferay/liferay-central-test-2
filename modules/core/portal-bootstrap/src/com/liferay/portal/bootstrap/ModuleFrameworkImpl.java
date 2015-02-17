@@ -107,38 +107,6 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return bundle.getBundleId();
 	}
 
-	private Bundle _addBundle(
-			String location, InputStream inputStream, boolean checkPermission)
-		throws PortalException {
-
-		if (_framework == null) {
-			throw new IllegalStateException("Framework not initialized!");
-		}
-
-		if (checkPermission) {
-			_checkPermission();
-		}
-
-		BundleContext bundleContext = _framework.getBundleContext();
-
-		if (inputStream != null) {
-			Bundle bundle = getBundle(bundleContext, inputStream);
-
-			if (bundle != null) {
-				return bundle;
-			}
-		}
-
-		try {
-			return bundleContext.installBundle(location, inputStream);
-		}
-		catch (BundleException be) {
-			_log.error(be, be);
-
-			throw new PortalException(be);
-		}
-	}
-
 	/**
 	 * @see com.liferay.modulesadmin.portlet.ModulesAdminPortlet#getBundle(
 	 *      BundleContext, InputStream)
@@ -469,6 +437,38 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		try {
 			bundle.update(inputStream);
+		}
+		catch (BundleException be) {
+			_log.error(be, be);
+
+			throw new PortalException(be);
+		}
+	}
+
+	private Bundle _addBundle(
+			String location, InputStream inputStream, boolean checkPermission)
+		throws PortalException {
+
+		if (_framework == null) {
+			throw new IllegalStateException("Framework not initialized!");
+		}
+
+		if (checkPermission) {
+			_checkPermission();
+		}
+
+		BundleContext bundleContext = _framework.getBundleContext();
+
+		if (inputStream != null) {
+			Bundle bundle = getBundle(bundleContext, inputStream);
+
+			if (bundle != null) {
+				return bundle;
+			}
+		}
+
+		try {
+			return bundleContext.installBundle(location, inputStream);
 		}
 		catch (BundleException be) {
 			_log.error(be, be);
