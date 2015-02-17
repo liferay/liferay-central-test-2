@@ -363,35 +363,14 @@ public class SyncWatchEventProcessor implements Runnable {
 			return;
 		}
 
-		FileEventUtil.deleteFile(_syncAccountId, syncFile);
-	}
+		String type = syncFile.getType();
 
-	protected void deleteFolder(SyncWatchEvent syncWatchEvent)
-		throws Exception {
-
-		Path filePath = Paths.get(syncWatchEvent.getFilePathName());
-
-		SyncFile syncFile = SyncFileService.fetchSyncFile(filePath.toString());
-
-		if ((syncFile == null) ||
-			Files.exists(Paths.get(syncFile.getFilePathName()))) {
-
-			return;
+		if (type.equals(SyncFile.TYPE_FILE)) {
+			FileEventUtil.deleteFile(_syncAccountId, syncFile);
 		}
-		else if ((syncFile.getState() == SyncFile.STATE_ERROR) ||
-				 (syncFile.getState() == SyncFile.STATE_UNSYNCED)) {
-
-			SyncFileService.deleteSyncFile(syncFile);
-
-			return;
+		else {
+			FileEventUtil.deleteFolder(_syncAccountId, syncFile);
 		}
-		else if (isPendingTypePK(syncFile)) {
-			queueSyncWatchEvent(syncFile.getFilePathName(), syncWatchEvent);
-
-			return;
-		}
-
-		FileEventUtil.deleteFolder(_syncAccountId, syncFile);
 	}
 
 	protected void doRun() throws Exception {
@@ -598,17 +577,10 @@ public class SyncWatchEventProcessor implements Runnable {
 			}
 		}
 		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_DELETE)) {
-			if (fileType.equals(SyncFile.TYPE_FILE)) {
-				deleteFile(syncWatchEvent);
-			}
-			else {
-				deleteFolder(syncWatchEvent);
-			}
+			deleteFile(syncWatchEvent);
 		}
 		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_MODIFY)) {
-			if (fileType.equals(SyncFile.TYPE_FILE)) {
-				modifyFile(syncWatchEvent);
-			}
+			modifyFile(syncWatchEvent);
 		}
 		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_MOVE)) {
 			moveFile(syncWatchEvent);

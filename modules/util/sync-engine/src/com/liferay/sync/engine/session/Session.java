@@ -240,7 +240,6 @@ public class Session {
 					executePost(urlPath, parameters, handler);
 				}
 				catch (Exception e) {
-					e.printStackTrace();
 					handler.handleException(e);
 				}
 			}

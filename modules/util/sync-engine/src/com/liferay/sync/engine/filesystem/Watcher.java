@@ -133,8 +133,7 @@ public class Watcher implements Runnable {
 		}
 		else {
 			watchKey = jpathwatchFilePath.register(
-				_watchService,
-				ExtendedWatchEventKind.ENTRY_RENAME_FROM,
+				_watchService, ExtendedWatchEventKind.ENTRY_RENAME_FROM,
 				ExtendedWatchEventKind.ENTRY_RENAME_TO,
 				ExtendedWatchEventKind.KEY_INVALID,
 				StandardWatchEventKind.ENTRY_CREATE,
