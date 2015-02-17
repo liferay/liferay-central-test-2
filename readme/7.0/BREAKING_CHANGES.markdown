@@ -979,7 +979,7 @@ IDs.
 
 ------------------------------------------------------------------------------
 
-### Moved the `AssetPublisherUtil` class and removed it from the public API 
+### Moved the `AssetPublisherUtil` Class and Removed It from the Public API
 - **Date:** 2015-Feb-11
 - **JIRA Ticket:** LPS-52744
 
