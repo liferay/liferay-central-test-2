@@ -1013,7 +1013,7 @@ different parts of the portal.
 
 #### What changed?
 
-All operations that used the `Fields` class has been removed from the
+All operations that used the `Fields` class have been removed from the
 `StorageAdapter` interface.
 
 #### Who is affected?
@@ -1023,7 +1023,7 @@ operations.
 
 #### How should I update my code?
 
-You should replace your code to use the `DDMFormValues` class instead of the
+You should update your code to use the `DDMFormValues` class instead of the
 `Fields` class.
 
 #### Why was this change made?
