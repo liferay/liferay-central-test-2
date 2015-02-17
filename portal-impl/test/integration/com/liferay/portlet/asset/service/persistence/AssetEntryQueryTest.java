@@ -839,8 +839,8 @@ public class AssetEntryQueryTest {
 		for (int i = 0; i < scores.length; i++) {
 			BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
 				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(),
-				displayDateCalendar.getTime(), serviceContext);
+				RandomTestUtil.randomString(), displayDateCalendar.getTime(),
+				serviceContext);
 
 			RatingsEntryServiceUtil.updateEntry(
 				BlogsEntry.class.getName(), blogsEntry.getEntryId(), scores[i]);
