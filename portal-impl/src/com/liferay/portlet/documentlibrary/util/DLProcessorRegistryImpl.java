@@ -281,11 +281,11 @@ public class DLProcessorRegistryImpl implements DLProcessorRegistry {
 
 						Registry registry = RegistryUtil.getRegistry();
 
-						DLProcessor service = registry.getService(
+						DLProcessor dlProcessor = registry.getService(
 							serviceReference);
 
 						try {
-							emitter.emit(service.getType());
+							emitter.emit(dlProcessor.getType());
 						}
 						finally {
 							registry.ungetService(serviceReference);
