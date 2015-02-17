@@ -58,7 +58,7 @@ public class XSLTemplate implements Template {
 		XSLTemplateResource xslTemplateResource,
 		TemplateResource errorTemplateResource,
 		TemplateContextHelper templateContextHelper,
-		XSLEngineConfiguration xSLEngineConfiguration) {
+		XSLEngineConfiguration xslEngineConfiguration) {
 
 		if (xslTemplateResource == null) {
 			throw new IllegalArgumentException("XSL template resource is null");
@@ -78,7 +78,7 @@ public class XSLTemplate implements Template {
 		try {
 			_transformerFactory.setFeature(
 				XMLConstants.FEATURE_SECURE_PROCESSING,
-				xSLEngineConfiguration.secureProcesingEnabled());
+				xslEngineConfiguration.secureProcesingEnabled());
 		}
 		catch (TransformerConfigurationException tce) {
 		}
