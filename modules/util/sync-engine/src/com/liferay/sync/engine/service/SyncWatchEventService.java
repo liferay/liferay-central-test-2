@@ -32,7 +32,7 @@ public class SyncWatchEventService {
 
 	public static SyncWatchEvent addSyncWatchEvent(
 			String eventType, String filePathName, String fileType,
-			long syncAccountId)
+			String previousFilePathName, long syncAccountId)
 		throws Exception {
 
 		SyncWatchEvent syncWatchEvent = new SyncWatchEvent();
@@ -40,6 +40,7 @@ public class SyncWatchEventService {
 		syncWatchEvent.setEventType(eventType);
 		syncWatchEvent.setFilePathName(filePathName);
 		syncWatchEvent.setFileType(fileType);
+		syncWatchEvent.setPreviousFilePathName(previousFilePathName);
 		syncWatchEvent.setSyncAccountId(syncAccountId);
 		syncWatchEvent.setTimestamp(System.currentTimeMillis());
 

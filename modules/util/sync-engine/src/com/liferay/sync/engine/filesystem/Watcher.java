@@ -122,6 +122,8 @@ public class Watcher implements Runnable {
 			watchKey = jpathwatchFilePath.register(
 				_watchService,
 				new WatchEvent.Kind[] {
+					ExtendedWatchEventKind.ENTRY_RENAME_FROM,
+					ExtendedWatchEventKind.ENTRY_RENAME_TO,
 					ExtendedWatchEventKind.KEY_INVALID,
 					StandardWatchEventKind.ENTRY_CREATE,
 					StandardWatchEventKind.ENTRY_DELETE,
@@ -131,7 +133,10 @@ public class Watcher implements Runnable {
 		}
 		else {
 			watchKey = jpathwatchFilePath.register(
-				_watchService, ExtendedWatchEventKind.KEY_INVALID,
+				_watchService,
+				ExtendedWatchEventKind.ENTRY_RENAME_FROM,
+				ExtendedWatchEventKind.ENTRY_RENAME_TO,
+				ExtendedWatchEventKind.KEY_INVALID,
 				StandardWatchEventKind.ENTRY_CREATE,
 				StandardWatchEventKind.ENTRY_DELETE,
 				StandardWatchEventKind.ENTRY_MODIFY);
@@ -238,188 +243,7 @@ public class Watcher implements Runnable {
 		}
 	}
 
-	protected void addCreatedFilePathName(String filePathName) {
-		clearCreatedFilePathNames();
-
-		long now = System.currentTimeMillis();
-
-		while (_createdFilePathNames.putIfAbsent(now, filePathName) != null) {
-			now++;
-		}
-	}
-
-	protected void clearCreatedFilePathNames() {
-		Map<Long, String> map = _createdFilePathNames.headMap(
-			System.currentTimeMillis() - 5000);
-
-		map.clear();
-	}
-
-	protected void fireWatchEventListener(String eventType, Path filePath) {
-		_watchEventListener.watchEvent(eventType, filePath);
-	}
-
-	protected Path getFilePath() {
-		return _filePath;
-	}
-
-	protected void initWatchService() {
-		FileSystem fileSystem = FileSystems.getDefault();
-
-		_watchService = fileSystem.newWatchService();
-	}
-
-	protected boolean isIgnoredFilePath(Path filePath) {
-		if (Files.notExists(filePath)) {
-			return true;
-		}
-
-		String fileName = String.valueOf(filePath.getFileName());
-
-		if (FileUtil.isIgnoredFilePath(filePath) ||
-			((Files.isDirectory(filePath) && (fileName.length() > 100)) ||
-			 (!Files.isDirectory(filePath) && (fileName.length() > 255)))) {
-
-			if (_logger.isDebugEnabled()) {
-				_logger.debug("Ignored file path {}", filePath);
-			}
-
-			return true;
-		}
-
-		if (!OSDetector.isWindows()) {
-			String sanitizedFileName = FileUtil.getSanitizedFileName(
-				fileName, FilenameUtils.getExtension(fileName));
-
-			if (!sanitizedFileName.equals(fileName)) {
-				String sanitizedFilePathName = FileUtil.getFilePathName(
-					String.valueOf(filePath.getParent()), sanitizedFileName);
-
-				sanitizedFilePathName = FileUtil.getNextFilePathName(
-					sanitizedFilePathName);
-
-				FileUtil.moveFile(
-					filePath, java.nio.file.Paths.get(sanitizedFilePathName));
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	protected void processFailedFilePaths() throws IOException {
-		for (Path failedFilePath : _failedFilePaths) {
-			if (Files.notExists(failedFilePath)) {
-				_failedFilePaths.remove(failedFilePath);
-
-				continue;
-			}
-
-			if (!Files.isReadable(failedFilePath)) {
-				continue;
-			}
-
-			_failedFilePaths.remove(failedFilePath);
-
-			if (Files.isDirectory(failedFilePath)) {
-				registerFilePath(failedFilePath);
-			}
-			else {
-				SyncFile syncFile = SyncFileService.fetchSyncFile(
-					failedFilePath.toString());
-
-				if (syncFile == null) {
-					fireWatchEventListener(
-						SyncWatchEvent.EVENT_TYPE_CREATE, failedFilePath);
-				}
-				else if (FileUtil.isModified(syncFile, failedFilePath)) {
-					fireWatchEventListener(
-						SyncWatchEvent.EVENT_TYPE_MODIFY, failedFilePath);
-				}
-			}
-		}
-	}
-
-	protected void processMissingFilePath(Path missingFilePath) {
-		SyncAccount syncAccount = SyncAccountService.fetchSyncAccount(
-			_watchEventListener.getSyncAccountId());
-
-		Path syncAccountFilePath = java.nio.file.Paths.get(
-			syncAccount.getFilePathName());
-
-		if (Files.notExists(syncAccountFilePath)) {
-			syncAccount.setActive(false);
-			syncAccount.setUiEvent(
-				SyncAccount.UI_EVENT_SYNC_ACCOUNT_FOLDER_MISSING);
-
-			SyncAccountService.update(syncAccount);
-		}
-		else {
-			SyncSite syncSite = SyncSiteService.fetchSyncSite(
-				missingFilePath.toString(), syncAccount.getSyncAccountId());
-
-			if (syncSite != null) {
-				syncSite.setActive(false);
-				syncSite.setUiEvent(SyncSite.UI_EVENT_SYNC_SITE_FOLDER_MISSING);
-
-				SyncSiteService.update(syncSite);
-			}
-		}
-	}
-
-	protected void processWatchEvent(String eventType, Path filePath)
-		throws IOException {
-
-		if (!_recursive && filePath.startsWith(_filePath.resolve(".data"))) {
-			return;
-		}
-
-		if (eventType.equals(SyncWatchEvent.EVENT_TYPE_CREATE)) {
-			if (isIgnoredFilePath(filePath)) {
-				return;
-			}
-
-			addCreatedFilePathName(filePath.toString());
-
-			if (_downloadedFilePathNames.remove(filePath.toString())) {
-				return;
-			}
-
-			fireWatchEventListener(eventType, filePath);
-
-			if (_recursive && Files.isDirectory(filePath)) {
-				walkFileTree(filePath);
-			}
-		}
-		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_DELETE)) {
-			processMissingFilePath(filePath);
-
-			fireWatchEventListener(SyncWatchEvent.EVENT_TYPE_DELETE, filePath);
-		}
-		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_MODIFY)) {
-			if (_downloadedFilePathNames.remove(filePath.toString()) ||
-				(removeCreatedFilePathName(filePath.toString()) &&
-				 !FileUtil.isValidChecksum(filePath)) ||
-				Files.notExists(filePath) ||
-				Files.isDirectory(filePath)) {
-
-				return;
-			}
-
-			fireWatchEventListener(SyncWatchEvent.EVENT_TYPE_MODIFY, filePath);
-		}
-	}
-
-	protected boolean removeCreatedFilePathName(String filePathName) {
-		clearCreatedFilePathNames();
-
-		Collection<String> filePathNames = _createdFilePathNames.values();
-
-		return filePathNames.remove(filePathName);
-	}
-
-	protected void walkFileTree(Path filePath) throws IOException {
+	public void walkFileTree(Path filePath) throws IOException {
 		if (isIgnoredFilePath(filePath)) {
 			return;
 		}
@@ -507,6 +331,202 @@ public class Watcher implements Runnable {
 
 			}
 		);
+	}
+
+	protected void addCreatedFilePathName(String filePathName) {
+		clearCreatedFilePathNames();
+
+		long now = System.currentTimeMillis();
+
+		while (_createdFilePathNames.putIfAbsent(now, filePathName) != null) {
+			now++;
+		}
+	}
+
+	protected void clearCreatedFilePathNames() {
+		Map<Long, String> map = _createdFilePathNames.headMap(
+			System.currentTimeMillis() - 5000);
+
+		map.clear();
+	}
+
+	protected void fireWatchEventListener(String eventType, Path filePath) {
+		_watchEventListener.watchEvent(eventType, filePath);
+	}
+
+	protected Path getFilePath() {
+		return _filePath;
+	}
+
+	protected void initWatchService() {
+		FileSystem fileSystem = FileSystems.getDefault();
+
+		_watchService = fileSystem.newWatchService();
+	}
+
+	protected boolean isIgnoredFilePath(Path filePath) {
+		if (Files.notExists(filePath)) {
+			return true;
+		}
+
+		String fileName = String.valueOf(filePath.getFileName());
+
+		if (FileUtil.isIgnoredFilePath(filePath) ||
+			((Files.isDirectory(filePath) && (fileName.length() > 100)) ||
+			 (!Files.isDirectory(filePath) && (fileName.length() > 255)))) {
+
+			if (_logger.isDebugEnabled()) {
+				_logger.debug("Ignored file path {}", filePath);
+			}
+
+			return true;
+		}
+
+		if (!OSDetector.isWindows()) {
+			String sanitizedFileName = FileUtil.getSanitizedFileName(
+				fileName, FilenameUtils.getExtension(fileName));
+
+			if (!sanitizedFileName.equals(fileName)) {
+				String sanitizedFilePathName = FileUtil.getFilePathName(
+					String.valueOf(filePath.getParent()), sanitizedFileName);
+
+				sanitizedFilePathName = FileUtil.getNextFilePathName(
+					sanitizedFilePathName);
+
+				FileUtil.moveFile(
+					filePath, java.nio.file.Paths.get(sanitizedFilePathName));
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	protected void processFailedFilePaths() throws IOException {
+		for (Path failedFilePath : _failedFilePaths) {
+			if (Files.notExists(failedFilePath)) {
+				_failedFilePaths.remove(failedFilePath);
+
+				continue;
+			}
+
+			if (!Files.isReadable(failedFilePath)) {
+				continue;
+			}
+
+			_failedFilePaths.remove(failedFilePath);
+
+			if (Files.isDirectory(failedFilePath)) {
+				registerFilePath(failedFilePath);
+			}
+
+			SyncFile syncFile = SyncFileService.fetchSyncFile(
+				failedFilePath.toString());
+
+			if (syncFile == null) {
+				fireWatchEventListener(
+					SyncWatchEvent.EVENT_TYPE_CREATE, failedFilePath);
+			}
+			else if (FileUtil.isModified(syncFile, failedFilePath)) {
+				fireWatchEventListener(
+					SyncWatchEvent.EVENT_TYPE_MODIFY, failedFilePath);
+			}
+		}
+	}
+
+	protected void processMissingFilePath(Path missingFilePath) {
+		SyncAccount syncAccount = SyncAccountService.fetchSyncAccount(
+			_watchEventListener.getSyncAccountId());
+
+		Path syncAccountFilePath = java.nio.file.Paths.get(
+			syncAccount.getFilePathName());
+
+		if (Files.notExists(syncAccountFilePath)) {
+			syncAccount.setActive(false);
+			syncAccount.setUiEvent(
+				SyncAccount.UI_EVENT_SYNC_ACCOUNT_FOLDER_MISSING);
+
+			SyncAccountService.update(syncAccount);
+		}
+		else {
+			SyncSite syncSite = SyncSiteService.fetchSyncSite(
+				missingFilePath.toString(), syncAccount.getSyncAccountId());
+
+			if (syncSite != null) {
+				syncSite.setActive(false);
+				syncSite.setUiEvent(SyncSite.UI_EVENT_SYNC_SITE_FOLDER_MISSING);
+
+				SyncSiteService.update(syncSite);
+			}
+		}
+	}
+
+	protected void processWatchEvent(String eventType, Path filePath)
+		throws IOException {
+
+		if (!_recursive && filePath.startsWith(_filePath.resolve(".data"))) {
+			return;
+		}
+
+		if (eventType.equals(SyncWatchEvent.EVENT_TYPE_CREATE)) {
+			if (isIgnoredFilePath(filePath)) {
+				return;
+			}
+
+			addCreatedFilePathName(filePath.toString());
+
+			if (_downloadedFilePathNames.remove(filePath.toString())) {
+				return;
+			}
+
+			fireWatchEventListener(eventType, filePath);
+
+			if (Files.isDirectory(filePath)) {
+				walkFileTree(filePath);
+			}
+		}
+		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_DELETE)) {
+			processMissingFilePath(filePath);
+
+			if (Files.notExists(filePath.getParent())) {
+				return;
+			}
+
+			fireWatchEventListener(SyncWatchEvent.EVENT_TYPE_DELETE, filePath);
+		}
+		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_MODIFY)) {
+			if (_downloadedFilePathNames.remove(filePath.toString()) ||
+				(removeCreatedFilePathName(filePath.toString()) &&
+				 !FileUtil.isValidChecksum(filePath)) ||
+				Files.notExists(filePath) ||
+				Files.isDirectory(filePath)) {
+
+				return;
+			}
+
+			fireWatchEventListener(SyncWatchEvent.EVENT_TYPE_MODIFY, filePath);
+		}
+		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_RENAME_FROM)) {
+			fireWatchEventListener(
+				SyncWatchEvent.EVENT_TYPE_RENAME_FROM, filePath);
+		}
+		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_RENAME_TO)) {
+			if (isIgnoredFilePath(filePath)) {
+				return;
+			}
+
+			fireWatchEventListener(
+				SyncWatchEvent.EVENT_TYPE_RENAME_TO, filePath);
+		}
+	}
+
+	protected boolean removeCreatedFilePathName(String filePathName) {
+		clearCreatedFilePathNames();
+
+		Collection<String> filePathNames = _createdFilePathNames.values();
+
+		return filePathNames.remove(filePathName);
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(

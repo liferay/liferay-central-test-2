@@ -14,6 +14,7 @@
 
 package com.liferay.sync.engine.filesystem;
 
+import com.barbarysoftware.watchservice.ExtendedWatchEventKind;
 import com.barbarysoftware.watchservice.StandardWatchEventKind;
 import com.barbarysoftware.watchservice.WatchEvent;
 import com.barbarysoftware.watchservice.WatchKey;
@@ -53,7 +54,9 @@ public class MacOSXWatcher extends Watcher {
 		WatchableFile watchableFile = new WatchableFile(filePath.toFile());
 
 		watchableFile.register(
-			_watchService, StandardWatchEventKind.ENTRY_CREATE,
+			_watchService, ExtendedWatchEventKind.ENTRY_RENAME_FROM,
+			ExtendedWatchEventKind.ENTRY_RENAME_TO,
+			StandardWatchEventKind.ENTRY_CREATE,
 			StandardWatchEventKind.ENTRY_DELETE,
 			StandardWatchEventKind.ENTRY_MODIFY);
 
@@ -100,7 +103,8 @@ public class MacOSXWatcher extends Watcher {
 
 				if (!watchKey.reset()) {
 					if (_logger.isTraceEnabled()) {
-						_logger.trace("Unregistered file path {}", getFilePath());
+						_logger.trace(
+							"Unregistered file path {}", getFilePath());
 					}
 
 					if (Files.notExists(getFilePath())) {
