@@ -56,12 +56,11 @@ public class BlogsTestUtil {
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 
-			BlogsEntry entry =
-				BlogsEntryLocalServiceUtil.addEntry(
-					userId, title, RandomTestUtil.randomString(),
-					RandomTestUtil.randomString(),
-					RandomTestUtil.randomString(), displayCalendar.getTime(),
-					true, true, new String[0], null, null, serviceContext);
+			BlogsEntry entry = BlogsEntryLocalServiceUtil.addEntry(
+				userId, title, RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				displayCalendar.getTime(), true, true, new String[0], null,
+				null, serviceContext);
 
 			if (approved) {
 				return updateStatus(entry, serviceContext);
