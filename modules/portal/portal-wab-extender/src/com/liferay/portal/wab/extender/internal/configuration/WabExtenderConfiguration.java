@@ -27,6 +27,6 @@ public interface WabExtenderConfiguration {
 	@Meta.AD(
 		deflt = "60000", required = false
 	)
-	long stopTimeout();
+	public long stopTimeout();
 
 }
