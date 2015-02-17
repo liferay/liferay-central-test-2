@@ -385,12 +385,16 @@ public class BlogsEntryStatusTransitionTest {
 		ServiceContext serviceContext = new ServiceContext();
 
 		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
+
+		serviceContext.setAttribute("trackbacks", trackbacks);
+
+		serviceContext.setCommand(Constants.UPDATE);
+
 		String layoutFullURL = PortalUtil.getLayoutFullURL(
 			entry.getGroupId(), PortletKeys.BLOGS);
 
-		serviceContext.setAttribute("trackbacks", trackbacks);
-		serviceContext.setCommand(Constants.UPDATE);
 		serviceContext.setLayoutFullURL(layoutFullURL);
+
 		serviceContext.setScopeGroupId(entry.getGroupId());
 
 		return serviceContext;

@@ -837,14 +837,13 @@ public class AssetEntryQueryTest {
 			2012, 1, 1);
 
 		for (int i = 0; i < scores.length; i++) {
-			BlogsEntry entry =
-				BlogsEntryLocalServiceUtil.addEntry(
-					TestPropsValues.getUserId(), RandomTestUtil.randomString(),
-					RandomTestUtil.randomString(),
-					displayDateCalendar.getTime(), serviceContext);
+			BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(),
+				displayDateCalendar.getTime(), serviceContext);
 
 			RatingsEntryServiceUtil.updateEntry(
-				BlogsEntry.class.getName(), entry.getEntryId(), scores[i]);
+				BlogsEntry.class.getName(), blogsEntry.getEntryId(), scores[i]);
 		}
 
 		threadLocalCache.removeAll();
