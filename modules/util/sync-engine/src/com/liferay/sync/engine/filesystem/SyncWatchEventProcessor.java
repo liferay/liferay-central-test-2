@@ -493,8 +493,8 @@ public class SyncWatchEventProcessor implements Runnable {
 		}
 		else {
 			SyncFileService.moveFolderSyncFile(
-					targetFilePath, parentSyncFile.getTypePK(), _syncAccountId,
-					syncFile);
+				targetFilePath, parentSyncFile.getTypePK(), _syncAccountId,
+				syncFile);
 		}
 
 		renameFile(syncWatchEvent);

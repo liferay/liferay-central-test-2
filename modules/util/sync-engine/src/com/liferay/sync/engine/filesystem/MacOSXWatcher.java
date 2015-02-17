@@ -127,7 +127,7 @@ public class MacOSXWatcher extends Watcher {
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		Watcher.class);
+		MacOSXWatcher.class);
 
 	private WatchService _watchService;
 
