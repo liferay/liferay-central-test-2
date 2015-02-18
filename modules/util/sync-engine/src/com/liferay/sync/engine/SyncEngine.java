@@ -21,6 +21,7 @@ import com.liferay.sync.engine.documentlibrary.util.BatchDownloadEvent;
 import com.liferay.sync.engine.documentlibrary.util.BatchEventManager;
 import com.liferay.sync.engine.documentlibrary.util.FileEventUtil;
 import com.liferay.sync.engine.documentlibrary.util.ServerEventUtil;
+import com.liferay.sync.engine.filesystem.JPathWatchWatcher;
 import com.liferay.sync.engine.filesystem.MacOSXWatcher;
 import com.liferay.sync.engine.filesystem.SyncWatchEventProcessor;
 import com.liferay.sync.engine.filesystem.Watcher;
@@ -218,7 +219,7 @@ public class SyncEngine {
 			watcher = new MacOSXWatcher(filePath, watchEventListener);
 		}
 		else {
-			watcher = new Watcher(filePath, watchEventListener);
+			watcher = new JPathWatchWatcher(filePath, watchEventListener);
 		}
 
 		_executorService.execute(watcher);

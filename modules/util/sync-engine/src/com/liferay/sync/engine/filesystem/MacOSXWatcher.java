@@ -47,7 +47,7 @@ public class MacOSXWatcher extends Watcher {
 
 	@Override
 	public void registerFilePath(Path filePath) throws IOException {
-		if (!filePath.equals(getFilePath())) {
+		if (!filePath.equals(getBaseFilePath())) {
 			return;
 		}
 
@@ -104,11 +104,11 @@ public class MacOSXWatcher extends Watcher {
 				if (!watchKey.reset()) {
 					if (_logger.isTraceEnabled()) {
 						_logger.trace(
-							"Unregistered file path {}", getFilePath());
+							"Unregistered file path {}", getBaseFilePath());
 					}
 
-					if (Files.notExists(getFilePath())) {
-						processMissingFilePath(getFilePath());
+					if (Files.notExists(getBaseFilePath())) {
+						processMissingFilePath(getBaseFilePath());
 					}
 				}
 			}
@@ -122,8 +122,22 @@ public class MacOSXWatcher extends Watcher {
 	public void unregisterFilePath(Path filePath) {
 	}
 
+	@Override
 	protected void initWatchService() {
 		_watchService = WatchService.newWatchService();
+	}
+
+	@Override
+	protected void processWatchEvent(String eventType, Path filePath)
+		throws IOException {
+
+		Path baseFilePath = getBaseFilePath();
+
+		if (filePath.startsWith(baseFilePath.resolve(".data"))) {
+			return;
+		}
+
+		doProcessWatchEvent(eventType, filePath);
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
