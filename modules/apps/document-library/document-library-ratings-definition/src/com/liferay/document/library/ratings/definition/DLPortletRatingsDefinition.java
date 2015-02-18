@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.messageboards.ratings.definition;
+package com.liferay.document.library.ratings.definition;
 
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.ratings.RatingsType;
@@ -25,19 +25,19 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"model.class.name=com.liferay.portlet.messageboards.model.MBMessage"
+		"model.class.name=com.liferay.portlet.documentlibrary.model.DLFileEntry"
 	}
 )
-public class MBPortletRatingsDefinition implements PortletRatingsDefinition {
+public class DLPortletRatingsDefinition implements PortletRatingsDefinition {
 
 	@Override
 	public RatingsType getDefaultRatingsType() {
-		return RatingsType.THUMBS;
+		return RatingsType.STARS;
 	}
 
 	@Override
 	public String getPortletId() {
-		return PortletKeys.MESSAGE_BOARDS;
+		return PortletKeys.DOCUMENT_LIBRARY;
 	}
 
 }
