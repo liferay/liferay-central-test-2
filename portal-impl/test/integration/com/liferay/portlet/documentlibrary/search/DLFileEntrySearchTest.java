@@ -202,17 +202,12 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 			DDMFormValues.class.getName() + ddmStructure.getStructureId(),
 			ddmFormValues);
 
-		long repositoryId = serviceContext.getScopeGroupId();
-		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-		String sourceFileName = "Text.txt";
-		String mimeType = ContentTypes.TEXT_PLAIN;
-		String title = RandomTestUtil.randomString();
-		byte[] bytes = content.getBytes();
-		int workflowAction = WorkflowConstants.ACTION_PUBLISH;
-
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
-			repositoryId, folderId, sourceFileName, mimeType, title, bytes,
-			workflowAction, serviceContext);
+			serviceContext.getScopeGroupId(),
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Text.txt",
+			ContentTypes.TEXT_PLAIN, RandomTestUtil.randomString(),
+			content.getBytes(), WorkflowConstants.ACTION_PUBLISH,
+			serviceContext);
 
 		return (DLFileEntry)fileEntry.getModel();
 	}
