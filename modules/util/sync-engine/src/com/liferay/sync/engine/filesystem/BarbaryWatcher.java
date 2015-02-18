@@ -37,9 +37,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Shinn Lok
  */
-public class MacOSXWatcher extends Watcher {
+public class BarbaryWatcher extends Watcher {
 
-	public MacOSXWatcher(Path filePath, WatchEventListener watchEventListener)
+	public BarbaryWatcher(Path filePath, WatchEventListener watchEventListener)
 		throws IOException {
 
 		super(filePath, watchEventListener);
@@ -141,7 +141,7 @@ public class MacOSXWatcher extends Watcher {
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		MacOSXWatcher.class);
+		BarbaryWatcher.class);
 
 	private WatchService _watchService;
 
