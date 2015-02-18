@@ -152,7 +152,7 @@ public abstract class TestOrderHelper {
 			});
 	}
 
-	private void addSearchableAssetEntries(
+	protected void addSearchableAssetEntries(
 			String[] unsortedValues, DDMStructure ddmStructure,
 			DDMTemplate ddmTemplate)
 		throws Exception {
@@ -167,7 +167,7 @@ public abstract class TestOrderHelper {
 		}
 	}
 
-	private DDMStructure addDDMStructure(String dataType, String type)
+	protected DDMStructure addDDMStructure(String dataType, String type)
 		throws Exception {
 
 		String definition = DDMStructureTestUtil.getSampleStructureDefinition(
@@ -179,14 +179,14 @@ public abstract class TestOrderHelper {
 			getSearchableAssetEntryStructureClassName(), definition);
 	}
 
-	private DDMTemplate addDDMTemplate(DDMStructure ddmStructure)
+	protected DDMTemplate addDDMTemplate(DDMStructure ddmStructure)
 		throws Exception {
 
 		return DDMTemplateTestUtil.addTemplate(
 			_serviceContext.getScopeGroupId(), ddmStructure.getStructureId());
 	}
 
-	private void assertArrayEquals(
+	protected void assertArrayEquals(
 			String[] sortedValues, AssetEntryQuery assetEntryQuery,
 			AssetRendererFactory assetRendererFactory)
 		throws Exception {
@@ -209,7 +209,7 @@ public abstract class TestOrderHelper {
 		Assert.assertArrayEquals(sortedValues, values);
 	}
 
-	private AssetEntryQuery createAssetEntryQuery(DDMStructure ddmStructure)
+	protected AssetEntryQuery createAssetEntryQuery(DDMStructure ddmStructure)
 		throws Exception {
 
 		AssetEntryQuery assetEntryQuery =
@@ -244,7 +244,7 @@ public abstract class TestOrderHelper {
 		return value.getString(LocaleUtil.getDefault());
 	}
 
-	private Hits search(AssetEntryQuery assetEntryQuery) throws Exception {
+	protected Hits search(AssetEntryQuery assetEntryQuery) throws Exception {
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
