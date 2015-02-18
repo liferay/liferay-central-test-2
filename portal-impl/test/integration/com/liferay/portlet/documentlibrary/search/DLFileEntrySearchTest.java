@@ -96,7 +96,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper = new DLFileEntrySearchTestOrderHelper(
 			group);
 
-		orderTestHelper.orderByDDMBooleanField();
+		orderTestHelper.testOrderByDDMBooleanField();
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper = new DLFileEntrySearchTestOrderHelper(
 			group);
 
-		orderTestHelper.orderByDDMIntegerField();
+		orderTestHelper.testOrderByDDMIntegerField();
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper = new DLFileEntrySearchTestOrderHelper(
 			group);
 
-		orderTestHelper.orderByDDMNumberField();
+		orderTestHelper.testOrderByDDMNumberField();
 	}
 
 	@Test
@@ -120,7 +120,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper = new DLFileEntrySearchTestOrderHelper(
 			group);
 
-		orderTestHelper.orderByDDMTextField();
+		orderTestHelper.testOrderByDDMTextField();
 	}
 
 	@Ignore()
@@ -388,7 +388,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		}
 
 		@Override
-		protected BaseModel<?> addSearchableAsset(
+		protected BaseModel<?> addSearchableAssetEntry(
 				BaseModel<?> parentBaseModel, String keywords,
 				DDMStructure ddmStructure, DDMTemplate ddmTemplate,
 				ServiceContext serviceContext)
@@ -398,12 +398,12 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		}
 
 		@Override
-		protected String getSearchableAssetClassName() {
+		protected String getSearchableAssetEntryClassName() {
 			return getBaseModelClassName();
 		}
 
 		@Override
-		protected BaseModel<?> getSearchableAssetParentBaseModel(
+		protected BaseModel<?> getSearchableAssetEntryParentBaseModel(
 				Group group, ServiceContext serviceContext)
 			throws Exception {
 
@@ -411,7 +411,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		}
 
 		@Override
-		protected String getSearchableAssetStructureClassName() {
+		protected String getSearchableAssetEntryStructureClassName() {
 			return DLFileEntryMetadata.class.getName();
 		}
 

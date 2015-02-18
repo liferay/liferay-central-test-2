@@ -99,7 +99,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.orderByDDMBooleanField();
+		orderTestHelper.testOrderByDDMBooleanField();
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.orderByDDMIntegerField();
+		orderTestHelper.testOrderByDDMIntegerField();
 	}
 
 	@Test
@@ -115,7 +115,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.orderByDDMNumberField();
+		orderTestHelper.testOrderByDDMNumberField();
 	}
 
 	@Test
@@ -123,7 +123,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		TestOrderHelper orderTestHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.orderByDDMTextField();
+		orderTestHelper.testOrderByDDMTextField();
 	}
 
 	@Ignore()
@@ -373,7 +373,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		}
 
 		@Override
-		protected BaseModel<?> addSearchableAsset(
+		protected BaseModel<?> addSearchableAssetEntry(
 				BaseModel<?> parentBaseModel, String keywords,
 				DDMStructure ddmStructure, DDMTemplate ddmTemplate,
 				ServiceContext serviceContext)
@@ -385,12 +385,12 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		}
 
 		@Override
-		protected String getSearchableAssetClassName() {
+		protected String getSearchableAssetEntryClassName() {
 			return getBaseModelClassName();
 		}
 
 		@Override
-		protected BaseModel<?> getSearchableAssetParentBaseModel(
+		protected BaseModel<?> getSearchableAssetEntryParentBaseModel(
 				Group group, ServiceContext serviceContext)
 			throws Exception {
 
@@ -398,7 +398,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 		}
 
 		@Override
-		protected String getSearchableAssetStructureClassName() {
+		protected String getSearchableAssetEntryStructureClassName() {
 			return getBaseModelClassName();
 		}
 

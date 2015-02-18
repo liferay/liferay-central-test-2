@@ -58,30 +58,30 @@ import org.junit.Assume;
  */
 public abstract class TestOrderHelper {
 
-	public void orderByDDMBooleanField() throws Exception {
-		orderByDDMField(
+	public void testOrderByDDMBooleanField() throws Exception {
+		testOrderByDDMField(
 			new String[] {"false", "true", "false", "true"},
 			new String[] {"false", "false", "true", "true"}, "boolean",
 			"checkbox");
 	}
 
-	public void orderByDDMIntegerField() throws Exception {
-		orderByDDMField(
+	public void testOrderByDDMIntegerField() throws Exception {
+		testOrderByDDMField(
 			new String[] {"1", "10", "3", "2"},
 			new String[] {"1", "2", "3", "10"}, "integer", "ddm-integer");
 	}
 
-	public void orderByDDMNumberField() throws Exception {
+	public void testOrderByDDMNumberField() throws Exception {
 		Assume.assumeTrue(isOrderByDDMNumberFieldImplementedForSearchEngine());
 
-		orderByDDMField(
+		testOrderByDDMField(
 			new String[] {"3", "3.14", "12.34", "2.72", "1.41", "23.45", "20"},
 			new String[] {"1.41", "2.72", "3", "3.14", "12.34", "20", "23.45"},
 			"number", "ddm-number");
 	}
 
-	public void orderByDDMTextField() throws Exception {
-		orderByDDMField(
+	public void testOrderByDDMTextField() throws Exception {
+		testOrderByDDMField(
 			new String[] {"A", "D", "C", "B"},
 			new String[] {"A", "B", "C", "D"}, "string", "text");
 	}
@@ -93,18 +93,18 @@ public abstract class TestOrderHelper {
 			group.getGroupId());
 	}
 
-	protected abstract BaseModel<?> addSearchableAsset(
+	protected abstract BaseModel<?> addSearchableAssetEntry(
 			BaseModel<?> parentBaseModel, String keywords,
 			DDMStructure ddmStructure, DDMTemplate ddmTemplate,
 			ServiceContext serviceContext)
 		throws Exception;
 
-	protected abstract String getSearchableAssetClassName();
+	protected abstract String getSearchableAssetEntryClassName();
 
-	protected abstract BaseModel<?> getSearchableAssetParentBaseModel(
+	protected abstract BaseModel<?> getSearchableAssetEntryParentBaseModel(
 		Group group, ServiceContext serviceContext) throws Exception;
 
-	protected abstract String getSearchableAssetStructureClassName();
+	protected abstract String getSearchableAssetEntryStructureClassName();
 
 	protected boolean isOrderByDDMNumberFieldImplementedForSearchEngine() {
 		SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
@@ -119,23 +119,23 @@ public abstract class TestOrderHelper {
 		return false;
 	}
 
-	protected void orderByDDMField(
+	protected void testOrderByDDMField(
 			String[] unsortedValues, final String[] sortedValues,
 			String dataType, String type)
 		throws Exception {
 
-		DDMStructure ddmStructure = _addStructure(dataType, type);
+		DDMStructure ddmStructure = addDDMStructure(dataType, type);
 
-		DDMTemplate ddmTemplate = _addTemplate(ddmStructure);
+		DDMTemplate ddmTemplate = addDDMTemplate(ddmStructure);
 
-		_addSearchableAssets(unsortedValues, ddmStructure, ddmTemplate);
+		addSearchableAssetEntries(unsortedValues, ddmStructure, ddmTemplate);
 
-		final AssetEntryQuery assetEntryQuery = _createAssetEntryQuery(
+		final AssetEntryQuery assetEntryQuery = createAssetEntryQuery(
 			ddmStructure);
 
 		final AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				getSearchableAssetClassName());
+				getSearchableAssetEntryClassName());
 
 		IdempotentRetryAssert.retryAssert(
 			3, TimeUnit.SECONDS,
@@ -143,7 +143,7 @@ public abstract class TestOrderHelper {
 
 				@Override
 				public Void call() throws Exception {
-					_assertArrayEquals(
+					assertArrayEquals(
 						sortedValues, assetEntryQuery, assetRendererFactory);
 
 					return null;
@@ -152,22 +152,22 @@ public abstract class TestOrderHelper {
 			});
 	}
 
-	private void _addSearchableAssets(
+	private void addSearchableAssetEntries(
 			String[] unsortedValues, DDMStructure ddmStructure,
 			DDMTemplate ddmTemplate)
 		throws Exception {
 
-		BaseModel<?> parentBaseModel = getSearchableAssetParentBaseModel(
+		BaseModel<?> parentBaseModel = getSearchableAssetEntryParentBaseModel(
 			_group, _serviceContext);
 
 		for (String unsortedValue : unsortedValues) {
-			addSearchableAsset(
+			addSearchableAssetEntry(
 				parentBaseModel, unsortedValue, ddmStructure, ddmTemplate,
 				_serviceContext);
 		}
 	}
 
-	private DDMStructure _addStructure(String dataType, String type)
+	private DDMStructure addDDMStructure(String dataType, String type)
 		throws Exception {
 
 		String definition = DDMStructureTestUtil.getSampleStructureDefinition(
@@ -176,22 +176,22 @@ public abstract class TestOrderHelper {
 
 		return DDMStructureTestUtil.addStructure(
 			_serviceContext.getScopeGroupId(),
-			getSearchableAssetStructureClassName(), definition);
+			getSearchableAssetEntryStructureClassName(), definition);
 	}
 
-	private DDMTemplate _addTemplate(DDMStructure ddmStructure)
+	private DDMTemplate addDDMTemplate(DDMStructure ddmStructure)
 		throws Exception {
 
 		return DDMTemplateTestUtil.addTemplate(
 			_serviceContext.getScopeGroupId(), ddmStructure.getStructureId());
 	}
 
-	private void _assertArrayEquals(
+	private void assertArrayEquals(
 			String[] sortedValues, AssetEntryQuery assetEntryQuery,
 			AssetRendererFactory assetRendererFactory)
 		throws Exception {
 
-		Hits hits = _search(assetEntryQuery);
+		Hits hits = search(assetEntryQuery);
 
 		List<AssetEntry> assetEntries = AssetUtil.getAssetEntries(hits);
 
@@ -203,19 +203,19 @@ public abstract class TestOrderHelper {
 			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
 				assetEntry.getClassPK());
 
-			values[i] = _getValue(assetRenderer);
+			values[i] = getValue(assetRenderer);
 		}
 
 		Assert.assertArrayEquals(sortedValues, values);
 	}
 
-	private AssetEntryQuery _createAssetEntryQuery(DDMStructure ddmStructure)
+	private AssetEntryQuery createAssetEntryQuery(DDMStructure ddmStructure)
 		throws Exception {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(),
-				new String[]{getSearchableAssetClassName()});
+				new String[]{getSearchableAssetEntryClassName()});
 
 		String orderByCol1 = DDMIndexerUtil.encodeName(
 			ddmStructure.getStructureId(), "name");
@@ -226,7 +226,7 @@ public abstract class TestOrderHelper {
 		return assetEntryQuery;
 	}
 
-	private String _getValue(AssetRenderer assetRenderer) throws Exception {
+	private String getValue(AssetRenderer assetRenderer) throws Exception {
 		DDMFormValuesReader ddmFormValuesReader =
 			assetRenderer.getDDMFormValuesReader();
 
@@ -244,7 +244,7 @@ public abstract class TestOrderHelper {
 		return value.getString(LocaleUtil.getDefault());
 	}
 
-	private Hits _search(AssetEntryQuery assetEntryQuery) throws Exception {
+	private Hits search(AssetEntryQuery assetEntryQuery) throws Exception {
 		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
