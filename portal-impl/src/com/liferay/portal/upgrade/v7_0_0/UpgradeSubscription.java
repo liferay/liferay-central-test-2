@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.PortalUtil;
@@ -64,10 +65,15 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
-			
+
 			String className = PortalUtil.getClassName(classNameId);
 
-			String sql = _getGroupIdSQLs.get(className);
+			String[] groupIdSQLParts = StringUtil.split(
+				_getGroupIdSQLPartsMap.get(className));
+
+			String sql =
+				"select " + groupIdSQLParts[1] + " from " + groupIdSQLParts[0] +
+					" where " + groupIdSQLParts[2] + " = ?";
 
 			ps = con.prepareStatement(sql);
 
@@ -174,58 +180,49 @@ public class UpgradeSubscription extends UpgradeProcess {
 		}
 	}
 
-	private static final Map<String, String> _getGroupIdSQLs = new HashMap<>();
+	private static final Map<String, String> _getGroupIdSQLPartsMap =
+		new HashMap<>();
 
 	static {
-		_getGroupIdSQLs.put(
-			BlogsEntry.class.getName(),
-			"select groupId from BlogsEntry where entryId = ?");
-		_getGroupIdSQLs.put(
-			DDMStructure.class.getName(),
-			"select groupId from DDMStructure where structureId = ?");
-		_getGroupIdSQLs.put(
-			DLFileEntry.class.getName(),
-			"select groupId from DLFileEntry where fileEntryId = ?");
-		_getGroupIdSQLs.put(
+		_getGroupIdSQLPartsMap.put(
+			BlogsEntry.class.getName(), "BlogsEntry,groupId,entryId");
+		_getGroupIdSQLPartsMap.put(
+			DDMStructure.class.getName(), "DDMStructure,groupId,structureId");
+		_getGroupIdSQLPartsMap.put(
+			DLFileEntry.class.getName(), "DLFileEntry,groupId,fileEntryId");
+		_getGroupIdSQLPartsMap.put(
 			DLFileEntryType.class.getName(),
-			"select groupId from DLFileEntryType where fileEntryTypeId = ?");
-		_getGroupIdSQLs.put(
-			DLFolder.class.getName(),
-			"select groupId from DLFolder where folderId = ?");
-		_getGroupIdSQLs.put(
-			JournalFolder.class.getName(),
-			"select groupId from JournalFolder where folderId = ?");
-		_getGroupIdSQLs.put(
-			Layout.class.getName(),
-			"select groupId from Layout where plid = ?");
-		_getGroupIdSQLs.put(
-			MBCategory.class.getName(),
-			"select groupId from MBCategory where categoryId = ?");
-		_getGroupIdSQLs.put(
-			MBThread.class.getName(),
-			"select groupId from MBThread where threadId = ?");
-		_getGroupIdSQLs.put(
+			"DLFileEntryType,groupId,fileEntryTypeId");
+		_getGroupIdSQLPartsMap.put(
+			DLFolder.class.getName(), "DLFolder,groupId,folderId");
+		_getGroupIdSQLPartsMap.put(
+			JournalFolder.class.getName(), "JournalFolder,groupId,folderId");
+		_getGroupIdSQLPartsMap.put(
+			Layout.class.getName(), "Layout,groupId,plid");
+		_getGroupIdSQLPartsMap.put(
+			MBCategory.class.getName(), "MBCategory,groupId,categoryId");
+		_getGroupIdSQLPartsMap.put(
+			MBThread.class.getName(), "MBThread,groupId,threadId");
+		_getGroupIdSQLPartsMap.put(
 			SCProductEntry.class.getName(),
-			"select groupId from SCProductEntry where productEntryId = ?");
-		_getGroupIdSQLs.put(
-			ShoppingOrder.class.getName(),
-			"select groupId from ShoppingOrder where orderId = ?");
-		_getGroupIdSQLs.put(
+			"SCProductEntry,groupId,productEntryId");
+		_getGroupIdSQLPartsMap.put(
+			ShoppingOrder.class.getName(), "ShoppingOrder,groupId,orderId");
+		_getGroupIdSQLPartsMap.put(
 			WorkflowInstance.class.getName(),
-			"select groupId from WorkflowInstance where workflowInstanceId = " +
-				"?");
-		_getGroupIdSQLs.put(
+			"WorkflowInstance,groupId,workflowInstanceId");
+		_getGroupIdSQLPartsMap.put(
 			"com.liferay.bookmarks.model.BookmarksEntry",
-			"select groupId from BookmarksEntry where entryId = ?");
-		_getGroupIdSQLs.put(
+			"BookmarksEntry,groupId,entryId");
+		_getGroupIdSQLPartsMap.put(
 			"com.liferay.bookmarks.model.BookmarksFolder",
-			"select groupId from BookmarksFolder where folderId = ?");
-		_getGroupIdSQLs.put(
+			"BookmarksFolder,groupId,folderId");
+		_getGroupIdSQLPartsMap.put(
 			"com.liferay.portlet.wiki.model.WikiNode",
-			"select groupId from WikiNode where nodeId = ?");
-		_getGroupIdSQLs.put(			
+			"WikiNode,groupId,nodeId");
+		_getGroupIdSQLPartsMap.put(
 			"com.liferay.portlet.wiki.model.WikiPage",
-			"select groupId from WikiPage where resourcePrimKey = ?");
+			"WikiPage,groupId,resourcePrimKey");
 	}
 
 }
