@@ -69,12 +69,12 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 			BulkOperationCapability.class, bulkOperationCapability);
 
 		capabilityRegistry.addSupportedCapability(
+			ProcessorCapability.class, _processorCapability);
+		capabilityRegistry.addSupportedCapability(
 			SyncCapability.class,
 			new LiferaySyncCapability(bulkOperationCapability));
 		capabilityRegistry.addSupportedCapability(
 			WorkflowCapability.class, _liferayWorkflowCapability);
-		capabilityRegistry.addSupportedCapability(
-			ProcessorCapability.class, _processorCapability);
 	}
 
 	@Override
