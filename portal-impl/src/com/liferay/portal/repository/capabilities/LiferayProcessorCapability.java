@@ -35,12 +35,12 @@ public class LiferayProcessorCapability
 	implements ProcessorCapability, RepositoryWrapperAware {
 
 	@Override
-	public void cleanUp(FileEntry fileEntry) throws PortalException {
+	public void cleanUp(FileEntry fileEntry) {
 		DLProcessorRegistryUtil.cleanUp(fileEntry);
 	}
 
 	@Override
-	public void cleanUp(FileVersion fileVersion) throws PortalException {
+	public void cleanUp(FileVersion fileVersion) {
 		DLProcessorRegistryUtil.cleanUp(fileVersion);
 	}
 
@@ -50,7 +50,7 @@ public class LiferayProcessorCapability
 	}
 
 	@Override
-	public void generateNew(FileEntry fileEntry) throws PortalException {
+	public void generateNew(FileEntry fileEntry) {
 		registerDLProcessorCallback(fileEntry, null);
 	}
 
