@@ -14,7 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.form.values.factory.impl;
 
-import com.liferay.dynamic.data.mapping.form.values.factory.api.DDMFormValuesFactory;
+import com.liferay.dynamic.data.mapping.form.values.factory.DDMFormValuesFactory;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;

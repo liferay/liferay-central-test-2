@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.form.values.factory.api;
+package com.liferay.dynamic.data.mapping.form.values.factory;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
