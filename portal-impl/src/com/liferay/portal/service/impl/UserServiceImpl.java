@@ -110,7 +110,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS)) {
 
 			// Allow any user to join open sites
-			
+
 			boolean hasPermission = false;
 
 			if (userIds.length == 1) {
