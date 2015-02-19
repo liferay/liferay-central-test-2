@@ -41,9 +41,7 @@ public interface WikiServiceConfiguration {
 	public String emailFromName();
 
 	@Meta.AD(
-		deflt =
-			"${resource:com/liferay/wiki/dependencies" +
-				"/email_page_added_body.tmpl}",
+		deflt = "${resource:com/liferay/wiki/configuration/dependencies/email_page_added_body.tmpl}",
 		required = false
 	)
 	public String emailPageAddedBody();
@@ -54,17 +52,13 @@ public interface WikiServiceConfiguration {
 	public boolean emailPageAddedEnabled();
 
 	@Meta.AD(
-		deflt =
-			"${resource:com/liferay/wiki/dependencies" +
-				"/email_page_added_subject.tmpl}",
+		deflt = "${resource:com/liferay/wiki/configuration/dependencies/email_page_added_subject.tmpl}",
 		required = false
 	)
 	public String emailPageAddedSubject();
 
 	@Meta.AD(
-		deflt =
-			"${resource:com/liferay/wiki/dependencies" +
-				"/email_page_updated_body.tmpl}",
+		deflt = "${resource:com/liferay/wiki/configuration/dependencies/email_page_updated_body.tmpl}",
 		required = false
 	)
 	public String emailPageUpdatedBody();
@@ -75,9 +69,7 @@ public interface WikiServiceConfiguration {
 	public boolean emailPageUpdatedEnabled();
 
 	@Meta.AD(
-		deflt =
-			"${resource:com/liferay/wiki/dependencies" +
-				"/email_page_updated_subject.tmpl}",
+		deflt = "${resource:com/liferay/wiki/configuration/dependencies/email_page_updated_subject.tmpl}",
 		required = false
 	)
 	public String emailPageUpdatedSubject();
