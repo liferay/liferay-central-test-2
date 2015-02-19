@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `7763533`.*
+*This document has been reviewed through commit `d8fd00d`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1032,35 +1032,34 @@ This change has been made due to the deprecation of the `Fields` class.
 
 ---------------------------------------
 
-### DLProcessor needs to implement a new method getType()
+### Created a New `getType()` Method That is Implemented in `DLProcessor`
 - **Date:** 2015-Feb-17
 - **JIRA Ticket:** LPS-53574
 
 #### What changed?
 
-DLProcessor has a new method getType()
+The `DLProcessor` interface has a new method `getType()`.
 
 #### Who is affected?
 
-All developers who have created DLProcessor
+This affects developers who have created `DLProcessor`.
 
 #### How should I update my code?
 
-You need to implement the method in the DLProcessor and return the type of
-Processor. You can check the class DLProcessorConstants to see the types.
-class.
+You should implement the new method in the `DLProcessor`, and return the type of
+processor. You can check the class `DLProcessorConstants` to see processor
+types.
 
 #### Why was this change made?
 
-Before we were forcing developers to extend one of the existing DLProcessors and
-we were checking the instance of the class to determine what type of processor
-was.
+Previous to Liferay 7, developers were forced to extend one of the existing
+`DLProcessor` classes, and check the instance of that class to determine what
+type of processor was being used.
 
-With the new change developers don't need to extend any particular class to
-create their own DLProcessor.
+With this change, developers no longer need to extend any particular class to
+create their own `DLProcessor`.
 
 ---------------------------------------
-
 ### DDM Template search operation need to pass resourceClassNameId parameter
 - **Date:** 2015-Mar-03
 - **JIRA Ticket:** LPS-52990
