@@ -59,8 +59,7 @@ public class EmailAddressGeneratorFactoryTest {
 		EmailAddressGenerator emailAddressGenerator =
 			EmailAddressGeneratorFactory.getInstance();
 
-		Assert.assertTrue(
-			emailAddressGenerator.isGenerated("2@generated.com"));
+		Assert.assertTrue(emailAddressGenerator.isGenerated("2@generated.com"));
 	}
 
 }
