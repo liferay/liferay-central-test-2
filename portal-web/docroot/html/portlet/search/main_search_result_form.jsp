@@ -27,11 +27,10 @@ String downloadURL = null;
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
-viewFullContentURL.setPortletMode(PortletMode.VIEW);
-viewFullContentURL.setWindowState(WindowState.MAXIMIZED);
-
 viewFullContentURL.setParameter("struts_action", "/search/view_content");
 viewFullContentURL.setParameter("redirect", currentURL);
+viewFullContentURL.setPortletMode(PortletMode.VIEW);
+viewFullContentURL.setWindowState(WindowState.MAXIMIZED);
 
 String viewURL = null;
 
