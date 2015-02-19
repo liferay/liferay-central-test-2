@@ -185,8 +185,7 @@ public class UploadImageAction extends PortletAction {
 					return;
 				}
 
-				serveTempImageFile(
-					resourceResponse, tempFileEntry.getContentStream());
+				serveTempImageFile(resourceResponse, inputStream);
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
