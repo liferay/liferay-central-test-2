@@ -30,8 +30,7 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPid = "com.liferay.wiki.configuration.WikiServiceConfiguration",
 	immediate = true, service = WikiServiceConfiguration.class
 )
-public class WikiServiceConfigurationImpl
-	implements WikiServiceConfiguration {
+public class WikiServiceConfigurationImpl implements WikiServiceConfiguration {
 
 	public static WikiServiceConfiguration getWikiServiceConfiguration() {
 		if (_wikiServiceConfigurationImpl == null) {
@@ -128,8 +127,7 @@ public class WikiServiceConfigurationImpl
 		_wikiServiceConfigurationImpl = null;
 	}
 
-	private static WikiServiceConfigurationImpl
-		_wikiServiceConfigurationImpl;
+	private static WikiServiceConfigurationImpl _wikiServiceConfigurationImpl;
 
 	private volatile WikiServiceConfiguration _wikiServiceConfiguration;
 

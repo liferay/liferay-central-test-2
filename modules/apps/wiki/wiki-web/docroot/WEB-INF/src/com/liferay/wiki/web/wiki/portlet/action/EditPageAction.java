@@ -273,8 +273,7 @@ public class EditPageAction extends PortletAction {
 			}
 			catch (NoSuchPageException nspe2) {
 				WikiServiceConfiguration wikiServiceConfiguration =
-					WikiServiceConfigurationImpl.
-						getWikiServiceConfiguration();
+					WikiServiceConfigurationImpl.getWikiServiceConfiguration();
 
 				if (title.equals(wikiServiceConfiguration.frontPageName()) &&
 					(version == 0)) {

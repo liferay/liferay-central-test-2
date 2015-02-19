@@ -14,8 +14,6 @@
 
 package com.liferay.bookmarks.settings;
 
-import aQute.bnd.annotation.metatype.Configurable;
-
 import com.liferay.bookmarks.configuration.BookmarksServiceConfiguration;
 import com.liferay.bookmarks.constants.BookmarksConstants;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -30,7 +28,6 @@ import java.util.Map;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
 /**
@@ -89,16 +86,16 @@ public class BookmarksSettingsProvider
 		_bookmarksSettingsProvider = this;
 	}
 
+	@Deactivate
+	protected void deactivate() {
+		_bookmarksSettingsProvider = null;
+	}
+
 	@Reference(unbind = "-")
 	protected void setBookmarksServiceConfiguration(
 		BookmarksServiceConfiguration bookmarksServiceConfiguration) {
 
 		_bookmarksServiceConfiguration = bookmarksServiceConfiguration;
-	}
-
-	@Deactivate
-	protected void deactivate() {
-		_bookmarksSettingsProvider = null;
 	}
 
 	@Reference
