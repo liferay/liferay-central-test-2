@@ -14,7 +14,7 @@
 
 package com.liferay.language.web.portlet.template;
 
-import com.liferay.language.web.configuration.LanguageConfigurationValues;
+import com.liferay.language.web.configuration.LanguageWebConfigurationValues;
 import com.liferay.language.web.constants.LanguagePortletKeys;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portletdisplaytemplate.BasePortletDisplayTemplateHandler;
@@ -99,7 +99,7 @@ public class LanguagePortletDisplayTemplateHandler
 
 	@Override
 	protected String getTemplatesConfigPath() {
-		return LanguageConfigurationValues.DISPLAY_TEMPLATES_CONFIG;
+		return LanguageWebConfigurationValues.DISPLAY_TEMPLATES_CONFIG;
 	}
 
 }

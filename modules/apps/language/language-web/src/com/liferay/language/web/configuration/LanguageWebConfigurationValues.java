@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 /**
  * @author Eudaldo Alonso
  */
-public class LanguageConfigurationValues {
+public class LanguageWebConfigurationValues {
 
 	public static final String DISPLAY_TEMPLATES_CONFIG = GetterUtil.getString(
 		LanguageWebConfigurationUtil.get("display.templates.config"));
