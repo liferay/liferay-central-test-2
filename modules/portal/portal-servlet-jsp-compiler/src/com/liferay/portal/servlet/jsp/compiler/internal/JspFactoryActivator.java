@@ -18,6 +18,8 @@ import com.liferay.taglib.servlet.JspFactorySwapper;
 
 import javax.servlet.jsp.JspFactory;
 
+import org.apache.jasper.runtime.JspFactoryImpl;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -28,8 +30,7 @@ public class JspFactoryActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		JspFactory.setDefaultFactory(
-			new org.apache.jasper.runtime.JspFactoryImpl());
+		JspFactory.setDefaultFactory(new JspFactoryImpl());
 
 		JspFactorySwapper.swap();
 	}
