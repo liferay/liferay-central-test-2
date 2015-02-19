@@ -3352,6 +3352,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	@BeanReference(type = WikiServiceConfiguration.class)
 	private WikiServiceConfiguration _wikiServiceConfiguration;
+
 	@BeanReference(type = WikiSettingsProvider.class)
 	private SettingsProvider<WikiSettings> _wikiSettingsProvider;
 
