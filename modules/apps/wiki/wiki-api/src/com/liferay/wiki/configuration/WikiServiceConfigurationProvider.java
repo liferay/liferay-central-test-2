@@ -46,10 +46,6 @@ public class WikiServiceConfigurationProvider
 		return _wikiServiceConfiguration.defaultFormat();
 	}
 
-	public String displayTemplatesConfig() {
-		return _wikiServiceConfiguration.displayTemplatesConfig();
-	}
-
 	public String emailFromAddress() {
 		return _wikiServiceConfiguration.emailFromAddress();
 	}

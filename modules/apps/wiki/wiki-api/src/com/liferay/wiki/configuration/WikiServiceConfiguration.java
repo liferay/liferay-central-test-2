@@ -30,16 +30,6 @@ public interface WikiServiceConfiguration {
 	)
 	public String defaultFormat();
 
-	/**
-	 * Set the location of the XML file containing the configuration of the
-	 * default display templates for the Wiki portlet.
-	 */
-	@Meta.AD(
-		deflt = "com/liferay/wiki/dependencies/portlet-display-templates.xml",
-		required = false
-	)
-	public String displayTemplatesConfig();
-
 	@Meta.AD(
 		deflt = "", required = false
 	)
