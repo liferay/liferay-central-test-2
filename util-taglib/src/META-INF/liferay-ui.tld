@@ -528,51 +528,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>asset-links</name>
-		<tag-class>com.liferay.taglib.ui.AssetLinksTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>assetEntryId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>className</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classPK</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>asset-metadata</name>
-		<tag-class>com.liferay.taglib.ui.AssetMetadataTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>className</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classPK</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>filterByMetadata</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>metadataFields</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>asset-display</name>
 		<tag-class>com.liferay.taglib.ui.AssetDisplayTag</tag-class>
 		<body-content>JSP</body-content>
@@ -634,6 +589,51 @@
 		<attribute>
 			<name>viewURL</name>
 			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>asset-links</name>
+		<tag-class>com.liferay.taglib.ui.AssetLinksTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>assetEntryId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>className</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>classPK</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>asset-metadata</name>
+		<tag-class>com.liferay.taglib.ui.AssetMetadataTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>classPK</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>filterByMetadata</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>metadataFields</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
