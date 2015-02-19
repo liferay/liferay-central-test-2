@@ -1018,21 +1018,22 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		PushbackInputStream pbis = new PushbackInputStream(inputStream, 3);
+		PushbackInputStream pushbackInputStream = new PushbackInputStream(
+			inputStream, 3);
 
 		byte[] magicBytes = new byte[3];
 
-		pbis.read(magicBytes);
-		pbis.unread(magicBytes);
+		pushbackInputStream.read(magicBytes);
 
-		inputStream = pbis;
+		pushbackInputStream.unread(magicBytes);
 
-		if (ArrayUtil.containsAll(_flashMagicBytes[0], magicBytes) ||
-			ArrayUtil.containsAll(_flashMagicBytes[1], magicBytes) ||
-			ArrayUtil.containsAll(_flashMagicBytes[2], magicBytes)) {
+		inputStream = pushbackInputStream;
 
-			fileName = FileUtil.stripExtension(fileName).concat(
-				StringPool.PERIOD).concat("swf");
+		if (ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[0], magicBytes) ||
+			ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[1], magicBytes) ||
+			ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[2], magicBytes)) {
+
+			fileName = FileUtil.stripExtension(fileName) + ".swf";
 		}
 
 		// Determine proper content type
@@ -1354,6 +1355,9 @@ public class WebServerServlet extends HttpServlet {
 		return user;
 	}
 
+	private static final byte[][] _FLASH_MAGIC_BYTES =
+		{{0x46, 0x57, 0x53}, {0x43, 0x57, 0x53}, {0x5a, 0x57, 0x53}};
+
 	private static final boolean _WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT =
 		StringUtil.equalsIgnoreCase(
 			PropsValues.WEB_SERVER_SERVLET_VERSION_VERBOSITY,
@@ -1370,8 +1374,6 @@ public class WebServerServlet extends HttpServlet {
 		PropsValues.WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES);
 	private static final Format _dateFormat =
 		FastDateFormatFactoryUtil.getSimpleDateFormat("d MMM yyyy HH:mm z");
-	private static final byte[][] _flashMagicBytes =
-		{ {0x46, 0x57, 0x53}, {0x43, 0x57, 0x53}, {0x5a, 0x57, 0x53} };
 
 	private boolean _lastModified = true;
 	private TemplateResource _templateResource;

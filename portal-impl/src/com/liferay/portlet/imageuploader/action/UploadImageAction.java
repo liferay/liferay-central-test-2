@@ -167,19 +167,20 @@ public class UploadImageAction extends PortletAction {
 
 				InputStream inputStream = tempFileEntry.getContentStream();
 
-				PushbackInputStream pbis = new PushbackInputStream(
-					inputStream, 3);
+				PushbackInputStream pushbackInputStream =
+					new PushbackInputStream(inputStream, 3);
 
 				byte[] magicBytes = new byte[3];
 
-				pbis.read(magicBytes);
-				pbis.unread(magicBytes);
+				pushbackInputStream.read(magicBytes);
 
-				inputStream = pbis;
+				pushbackInputStream.unread(magicBytes);
 
-				if (ArrayUtil.containsAll(_flashMagicBytes[0], magicBytes) ||
-					ArrayUtil.containsAll(_flashMagicBytes[1], magicBytes) ||
-					ArrayUtil.containsAll(_flashMagicBytes[2], magicBytes)) {
+				inputStream = pushbackInputStream;
+
+				if (ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[0], magicBytes) ||
+					ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[1], magicBytes) ||
+					ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[2], magicBytes)) {
 
 					return;
 				}
@@ -430,10 +431,10 @@ public class UploadImageAction extends PortletAction {
 		PortletResponseUtil.write(mimeResponse, bytes);
 	}
 
+	private static final byte[][] _FLASH_MAGIC_BYTES =
+		{{0x46, 0x57, 0x53}, {0x43, 0x57, 0x53}, {0x5a, 0x57, 0x53}};
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		UploadImageAction.class);
-
-	private static final byte[][] _flashMagicBytes =
-		{ {0x46, 0x57, 0x53}, {0x43, 0x57, 0x53}, {0x5a, 0x57, 0x53} };
 
 }
