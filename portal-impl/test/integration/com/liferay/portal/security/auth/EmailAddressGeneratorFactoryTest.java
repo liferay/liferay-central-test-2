@@ -41,9 +41,8 @@ public class EmailAddressGeneratorFactoryTest {
 		EmailAddressGenerator emailAddressGenerator =
 			EmailAddressGeneratorFactory.getInstance();
 
-		String emailAddress = emailAddressGenerator.generate(1, 2);
-
-		Assert.assertEquals("2@generated.com", emailAddress);
+		Assert.assertEquals(
+			"2@generated.com", emailAddressGenerator.generate(1, 2));
 	}
 
 	@Test
@@ -51,13 +50,8 @@ public class EmailAddressGeneratorFactoryTest {
 		EmailAddressGenerator emailAddressGenerator =
 			EmailAddressGeneratorFactory.getInstance();
 
-		boolean fake = emailAddressGenerator.isFake("2@fake.com");
-
-		Assert.assertTrue(fake);
-
-		fake = emailAddressGenerator.isFake("2@generated.com");
-
-		Assert.assertFalse(fake);
+		Assert.assertTrue(emailAddressGenerator.isFake("2@fake.com"));
+		Assert.assertFalse(emailAddressGenerator.isFake("2@generated.com"));
 	}
 
 	@Test
@@ -65,10 +59,8 @@ public class EmailAddressGeneratorFactoryTest {
 		EmailAddressGenerator emailAddressGenerator =
 			EmailAddressGeneratorFactory.getInstance();
 
-		boolean generated = emailAddressGenerator.isGenerated(
-			"2@generated.com");
-
-		Assert.assertTrue(generated);
+		Assert.assertTrue(
+			emailAddressGenerator.isGenerated("2@generated.com"));
 	}
 
 }
