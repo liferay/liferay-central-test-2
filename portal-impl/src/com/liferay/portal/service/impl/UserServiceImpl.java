@@ -515,7 +515,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 		catch (PrincipalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No users found", pe);
+				_log.warn("Unable to get guest or current user ID", pe);
 			}
 		}
 
@@ -1511,7 +1511,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 		catch (PrincipalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No users found", pe);
+				_log.warn("Unable to get guest or current user ID", pe);
 			}
 		}
 
