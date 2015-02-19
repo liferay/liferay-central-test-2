@@ -106,12 +106,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			return;
 		}
 
-		boolean hasPermission = GroupPermissionUtil.contains(
-			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
-
-		if (!hasPermission) {
+		if (!GroupPermissionUtil.contains(
+				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS)) {
 
 			// Allow any user to join open sites
+			
+			boolean hasPermission = false;
 
 			if (userIds.length == 1) {
 				User user = getUser();
