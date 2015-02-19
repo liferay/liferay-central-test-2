@@ -34,7 +34,7 @@ public class EmailAddressGeneratorFactoryIntegrationPointTest {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
-			new SyntheticBundleRule("bundle.emailAddressGeneratorFactory"));
+			new SyntheticBundleRule("bundle.emailaddressgeneratorfactory"));
 
 	@Test
 	public void testGenerate() {
