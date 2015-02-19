@@ -21,10 +21,26 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 
 /**
+ * Provides the PortletToolbarContributor interface which is responsible for
+ * extending the portlet toolbar by adding more elements.
+ *
+ * <p>
+ * Implementations of this class are OSGI components that are registered in the
+ * OSGI Registry. The way this component is registered in OSGI Registry needs
+ * to be consistent with the way the PortletToolbarContributorLocator
+ * implementations searches in the registry.
+ * </p>
+ *
  * @author Sergio González
  */
 public interface PortletToolbarContributor {
 
+	/**
+	 * Returns a list of Menu that will be rendered in the portlet toolbar
+	 *
+	 * @return a list of PortletToolbarContributor for a particular request and
+	 *         portletId
+	 */
 	public List<Menu> getPortletTitleMenus(PortletRequest portletRequest);
 
 }

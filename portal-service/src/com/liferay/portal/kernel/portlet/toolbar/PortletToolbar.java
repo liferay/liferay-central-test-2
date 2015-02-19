@@ -33,6 +33,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.portlet.PortletRequest;
 
 /**
+ * This class is responsible for providing the elements that will be rendered
+ * in the portlet toolbar. To obtain those elements it delegates the task to the
+ * {@link PortletToolbarContributorLocator} instances registered in OSGI.
+ *
  * @author Sergio González
  */
 public class PortletToolbar {
