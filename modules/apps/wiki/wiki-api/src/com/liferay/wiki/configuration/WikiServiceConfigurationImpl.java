@@ -30,16 +30,16 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPid = "com.liferay.wiki.configuration.WikiServiceConfiguration",
 	immediate = true, service = WikiServiceConfiguration.class
 )
-public class WikiServiceConfigurationProvider
+public class WikiServiceConfigurationImpl
 	implements WikiServiceConfiguration {
 
 	public static WikiServiceConfiguration getWikiServiceConfiguration() {
-		if (_wikiServiceConfigurationProvider == null) {
+		if (_wikiServiceConfigurationImpl == null) {
 			throw new IllegalStateException(
 				"WikiServiceConfiguration is not yet available");
 		}
 
-		return _wikiServiceConfigurationProvider;
+		return _wikiServiceConfigurationImpl;
 	}
 
 	public String defaultFormat() {
@@ -120,16 +120,16 @@ public class WikiServiceConfigurationProvider
 		_wikiServiceConfiguration = Configurable.createConfigurable(
 			WikiServiceConfiguration.class, properties);
 
-		_wikiServiceConfigurationProvider = this;
+		_wikiServiceConfigurationImpl = this;
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_wikiServiceConfigurationProvider = null;
+		_wikiServiceConfigurationImpl = null;
 	}
 
-	private static WikiServiceConfigurationProvider
-		_wikiServiceConfigurationProvider;
+	private static WikiServiceConfigurationImpl
+		_wikiServiceConfigurationImpl;
 
 	private volatile WikiServiceConfiguration _wikiServiceConfiguration;
 
