@@ -1357,9 +1357,9 @@ public abstract class BaseAssetSearchTestCase {
 		for (int i = 0; i < assetEntries.length; i++) {
 			AssetEntry assetEntry = assetEntries[i];
 
-			String field = assetEntry.getTitle(LocaleUtil.getDefault());
+			String title = assetEntry.getTitle(LocaleUtil.getDefault());
 
-			Assert.assertEquals(field, orderedTitles[i]);
+			Assert.assertEquals(title, orderedTitles[i]);
 		}
 	}
 
@@ -1434,21 +1434,19 @@ public abstract class BaseAssetSearchTestCase {
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		AssetEntry[] assetEntries;
-
 		for (Locale locale : locales) {
 			searchContext.setLocale(locale);
 
-			assetEntries = search(assetEntryQuery, searchContext);
+			AssetEntry[] assetEntries = search(assetEntryQuery, searchContext);
 
 			for (int i = 0; i < assetEntries.length; i++) {
 				AssetEntry assetEntry = assetEntries[i];
 
-				String field = assetEntry.getTitle(locale);
+				String title = assetEntry.getTitle(locale);
 
 				Map<Locale, String> orderedTitleMap = orderedTitleMaps.get(i);
 
-				Assert.assertEquals(orderedTitleMap.get(locale), field);
+				Assert.assertEquals(orderedTitleMap.get(locale), title);
 			}
 		}
 	}
