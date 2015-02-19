@@ -18,15 +18,6 @@ import com.liferay.portal.kernel.test.rule.BaseTestRule;
 import com.liferay.portal.test.rule.callback.SyntheticBundleTestCallback;
 
 /**
- * Creates and installs a bundle from the named sub-package of the test class.
- *
- * <p>For example, if the test class is <code>bar.FooTest</code> a <code>new
- * SyntheticBundleRule("fee")</code> on <code>FooTest</code> will create a
- * bundle of the contents of the <code>bar.fee</code> package. This sub-package
- * should also contain a <code>bnd.bnd</code> file describing the bundle. A
- * special property <code>${bundle.package}</code> containing the name of the
- * bundle package is available to simplify writing the bnd file contents.</p>
- *
  * @author Raymond Augé
  */
 public class SyntheticBundleRule extends BaseTestRule<Long, Long> {
