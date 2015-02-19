@@ -27,7 +27,7 @@ import org.junit.Test;
 /**
  * @author Raymond Augé
  */
-public class EmailAddressGeneratorFactoryIntegrationPointTest {
+public class EmailAddressGeneratorFactoryTest {
 
 	@ClassRule
 	@Rule
