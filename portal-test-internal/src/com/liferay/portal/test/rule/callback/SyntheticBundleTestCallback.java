@@ -36,8 +36,8 @@ import org.junit.runner.Description;
  */
 public class SyntheticBundleTestCallback extends BaseTestCallback<Long, Long> {
 
-	public SyntheticBundleTestCallback(String bundlePackage) {
-		_bundlePackage = bundlePackage;
+	public SyntheticBundleTestCallback(String bundlePackageName) {
+		_bundlePackageName = bundlePackageName;
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class SyntheticBundleTestCallback extends BaseTestCallback<Long, Long> {
 		}
 
 		ModuleFrameworkUtilAdapter.stopBundle(bundleId);
+
 		ModuleFrameworkUtilAdapter.uninstallBundle(bundleId);
 	}
 
@@ -82,31 +83,34 @@ public class SyntheticBundleTestCallback extends BaseTestCallback<Long, Long> {
 		try {
 			URL url = clazz.getResource("");
 
-			if (!url.getProtocol().equals("file")) {
+			String protocol = url.getProtocol();
+
+			if (!protocol.equals("file")) {
 				throw new IllegalStateException(
-					"This only works from test classes which are on the " +
-						"file system.");
+					"Test classes are not on the file system");
 			}
 
-			Package packageObject = clazz.getPackage();
-			String packageName = packageObject.getName();
-			String packagePath = packageName.replace('.', '/') + '/';
-
 			String basePath = url.getPath();
-			int index = basePath.indexOf(packagePath);
+
+			Package pkg = clazz.getPackage();
+
+			String packageName = pkg.getName();
+
+			int index = basePath.indexOf(packageName.replace('.', '/') + '/');
+
 			basePath = basePath.substring(0, index);
 
-			File base = new File(basePath);
+			File baseDir = new File(basePath);
 
-			builder.setBase(base);
-			builder.setClasspath(new File[] {base});
+			builder.setBase(baseDir);
+			builder.setClasspath(new File[] {baseDir});
+			builder.setProperty(
+				"bundle.package", packageName + "." + _bundlePackageName);
+
+			Properties properties = builder.getProperties();
 
 			InputStream inputStream = clazz.getResourceAsStream(
-				_bundlePackage.replace('.', '/') + "/bnd.bnd");
-
-			builder.setProperty(
-				"bundle.package", packageName + "." + _bundlePackage);
-			Properties properties = builder.getProperties();
+				_bundlePackageName.replace('.', '/') + "/bnd.bnd");
 
 			properties.load(inputStream);
 
@@ -117,16 +121,13 @@ public class SyntheticBundleTestCallback extends BaseTestCallback<Long, Long> {
 
 			jar.write(outputStream);
 
-			inputStream = new UnsyncByteArrayInputStream(
-				outputStream.toByteArray());
-
-			return inputStream;
+			return new UnsyncByteArrayInputStream(outputStream.toByteArray());
 		}
 		finally {
 			builder.close();
 		}
 	}
 
-	private final String _bundlePackage;
+	private final String _bundlePackageName;
 
 }
