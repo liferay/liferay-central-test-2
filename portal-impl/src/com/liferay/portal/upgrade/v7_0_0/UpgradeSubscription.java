@@ -64,8 +64,10 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
+			
+			String className = PortalUtil.getClassName(classNameId);
 
-			String sql = _getGroupIdSQLs.get(classNameId);
+			String sql = _getGroupIdSQLs.get(className);
 
 			ps = con.prepareStatement(sql);
 
@@ -172,61 +174,57 @@ public class UpgradeSubscription extends UpgradeProcess {
 		}
 	}
 
-	private static final Map<Long, String> _getGroupIdSQLs = new HashMap<>();
+	private static final Map<String, String> _getGroupIdSQLs = new HashMap<>();
 
 	static {
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(BlogsEntry.class.getName()),
+			BlogsEntry.class.getName(),
 			"select groupId from BlogsEntry where entryId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(DDMStructure.class.getName()),
+			DDMStructure.class.getName(),
 			"select groupId from DDMStructure where structureId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(DLFileEntry.class.getName()),
+			DLFileEntry.class.getName(),
 			"select groupId from DLFileEntry where fileEntryId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(DLFileEntryType.class.getName()),
+			DLFileEntryType.class.getName(),
 			"select groupId from DLFileEntryType where fileEntryTypeId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(DLFolder.class.getName()),
+			DLFolder.class.getName(),
 			"select groupId from DLFolder where folderId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(JournalFolder.class.getName()),
+			JournalFolder.class.getName(),
 			"select groupId from JournalFolder where folderId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(Layout.class.getName()),
+			Layout.class.getName(),
 			"select groupId from Layout where plid = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(MBCategory.class.getName()),
+			MBCategory.class.getName(),
 			"select groupId from MBCategory where categoryId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(MBThread.class.getName()),
+			MBThread.class.getName(),
 			"select groupId from MBThread where threadId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(SCProductEntry.class.getName()),
+			SCProductEntry.class.getName(),
 			"select groupId from SCProductEntry where productEntryId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(ShoppingOrder.class.getName()),
+			ShoppingOrder.class.getName(),
 			"select groupId from ShoppingOrder where orderId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(WorkflowInstance.class.getName()),
+			WorkflowInstance.class.getName(),
 			"select groupId from WorkflowInstance where workflowInstanceId = " +
 				"?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(
-				"com.liferay.bookmarks.model.BookmarksEntry"),
+			"com.liferay.bookmarks.model.BookmarksEntry",
 			"select groupId from BookmarksEntry where entryId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(
-				"com.liferay.bookmarks.model.BookmarksFolder"),
+			"com.liferay.bookmarks.model.BookmarksFolder",
 			"select groupId from BookmarksFolder where folderId = ?");
 		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(
-				"com.liferay.portlet.wiki.model.WikiNode"),
+			"com.liferay.portlet.wiki.model.WikiNode",
 			"select groupId from WikiNode where nodeId = ?");
-		_getGroupIdSQLs.put(
-			PortalUtil.getClassNameId(
-				"com.liferay.portlet.wiki.model.WikiPage"),
+		_getGroupIdSQLs.put(			
+			"com.liferay.portlet.wiki.model.WikiPage",
 			"select groupId from WikiPage where resourcePrimKey = ?");
 	}
 
