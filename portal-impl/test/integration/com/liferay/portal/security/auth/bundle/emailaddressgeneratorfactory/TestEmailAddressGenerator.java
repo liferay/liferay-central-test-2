@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.bundle.emailAddressGeneratorFactory;
+package com.liferay.portal.security.auth.bundle.emailaddressgeneratorfactory;
 
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 
