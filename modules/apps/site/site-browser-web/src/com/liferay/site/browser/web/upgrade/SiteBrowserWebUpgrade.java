@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.journal.content.web.portlet.upgrade;
+package com.liferay.site.browser.web.upgrade;
 
-import com.liferay.journal.content.web.constants.JournalContentPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
+import com.liferay.site.browser.web.constants.SiteBrowserPortletKeys;
 
 import java.util.Collections;
 
@@ -31,8 +31,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Eudaldo Alonso
  */
-@Component(immediate = true, service = JournalContentUpgrade.class)
-public class JournalContentUpgrade {
+@Component(immediate = true, service = SiteBrowserWebUpgrade.class)
+public class SiteBrowserWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
@@ -53,7 +53,7 @@ public class JournalContentUpgrade {
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
 					new String[] {
-						"56", JournalContentPortletKeys.JOURNAL_CONTENT
+						"185", SiteBrowserPortletKeys.SITE_BROWSER
 					}
 				};
 			}
@@ -61,7 +61,7 @@ public class JournalContentUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.journal.content.web",
+			"com.liferay.site.browser.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
 			false);
 	}

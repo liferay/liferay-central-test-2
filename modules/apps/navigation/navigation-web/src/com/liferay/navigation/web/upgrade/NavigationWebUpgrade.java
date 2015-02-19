@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.translator.web.upgrade;
+package com.liferay.navigation.web.upgrade;
 
+import com.liferay.navigation.web.constants.NavigationPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -28,13 +29,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Raymond Augé
- * @author Peter Fellwock
+ * @author Eudaldo Alonso
  */
-@Component(
-	immediate = true, service = TranslatorUpgrade.class
-)
-public class TranslatorUpgrade {
+@Component(immediate = true, service = NavigationWebUpgrade.class)
+public class NavigationWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
@@ -43,7 +41,7 @@ public class TranslatorUpgrade {
 		_releaseLocalService = releaseLocalService;
 	}
 
-	@Reference(target = "(original.bean=true)", unbind = "-")
+	@Reference(target = "(original.bean=*)", unbind = "-")
 	protected void setServletContext(ServletContext servletContext) {
 	}
 
@@ -54,17 +52,14 @@ public class TranslatorUpgrade {
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
-					new String[] {
-						"26",
-						"com_liferay_translator_web_portlet_TranslatorPortlet"
-					}
+					new String[] {"71", NavigationPortletKeys.NAVIGATION}
 				};
 			}
 
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.translator.web",
+			"com.liferay.navigation.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
 			false);
 	}

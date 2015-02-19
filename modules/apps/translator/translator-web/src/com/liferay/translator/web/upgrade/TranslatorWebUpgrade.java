@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.site.browser.web.portlet.upgrade;
+package com.liferay.translator.web.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
-import com.liferay.site.browser.web.constants.SiteBrowserPortletKeys;
 
 import java.util.Collections;
 
@@ -29,10 +28,13 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Eudaldo Alonso
+ * @author Raymond Augé
+ * @author Peter Fellwock
  */
-@Component(immediate = true, service = SiteBrowserUpgrade.class)
-public class SiteBrowserUpgrade {
+@Component(
+	immediate = true, service = TranslatorWebUpgrade.class
+)
+public class TranslatorWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
@@ -41,7 +43,7 @@ public class SiteBrowserUpgrade {
 		_releaseLocalService = releaseLocalService;
 	}
 
-	@Reference(target = "(original.bean=*)", unbind = "-")
+	@Reference(target = "(original.bean=true)", unbind = "-")
 	protected void setServletContext(ServletContext servletContext) {
 	}
 
@@ -53,7 +55,8 @@ public class SiteBrowserUpgrade {
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
 					new String[] {
-						"185", SiteBrowserPortletKeys.SITE_BROWSER
+						"26",
+						"com_liferay_translator_web_portlet_TranslatorPortlet"
 					}
 				};
 			}
@@ -61,7 +64,7 @@ public class SiteBrowserUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.site.browser.web",
+			"com.liferay.translator.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
 			false);
 	}

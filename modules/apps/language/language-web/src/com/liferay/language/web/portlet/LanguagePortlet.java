@@ -53,7 +53,8 @@ import org.osgi.service.component.annotations.Reference;
 public class LanguagePortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
-	protected void setLanguageUpgrade(LanguageWebUpgrade LanguageWebUpgrade) {
+	protected void setLanguageWebUpgrade(
+		LanguageWebUpgrade LanguageWebUpgrade) {
 	}
 
 }
