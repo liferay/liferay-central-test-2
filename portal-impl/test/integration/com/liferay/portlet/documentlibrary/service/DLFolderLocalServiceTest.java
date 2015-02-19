@@ -69,7 +69,7 @@ public class DLFolderLocalServiceTest {
 
 		Assert.assertNotNull(assetEntry);
 
-		List<DLFolder> baseDLFolders =
+		List<DLFolder> noAssetDLFolders =
 			DLFolderLocalServiceUtil.getNoAssetFolders();
 
 		AssetEntryLocalServiceUtil.deleteAssetEntry(assetEntry);
@@ -77,7 +77,7 @@ public class DLFolderLocalServiceTest {
 		List<DLFolder> dlFolders = new ArrayList<>(
 			DLFolderLocalServiceUtil.getNoAssetFolders());
 
-		dlFolders.removeAll(baseDLFolders);
+		dlFolders.removeAll(noAssetDLFolders);
 
 		Assert.assertEquals(1, dlFolders.size());
 		Assert.assertEquals(dlFolder, dlFolders.get(0));
