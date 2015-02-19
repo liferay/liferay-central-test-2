@@ -16,6 +16,7 @@ package com.liferay.portal.webserver;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.flash.FlashMagicBytesUtil;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -33,7 +34,6 @@ import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.URLTemplateResource;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DigesterUtil;
@@ -102,7 +102,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PushbackInputStream;
 
 import java.net.URL;
 
@@ -1018,21 +1017,12 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		PushbackInputStream pushbackInputStream = new PushbackInputStream(
-			inputStream, 3);
+		FlashMagicBytesUtil.Result flashMagicBytesUtilResult =
+			FlashMagicBytesUtil.check(inputStream);
 
-		byte[] magicBytes = new byte[3];
+		inputStream = flashMagicBytesUtilResult.getInputStream();
 
-		pushbackInputStream.read(magicBytes);
-
-		pushbackInputStream.unread(magicBytes);
-
-		inputStream = pushbackInputStream;
-
-		if (ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[0], magicBytes) ||
-			ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[1], magicBytes) ||
-			ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[2], magicBytes)) {
-
+		if (flashMagicBytesUtilResult.isFlash()) {
 			fileName = FileUtil.stripExtension(fileName) + ".swf";
 		}
 
@@ -1354,9 +1344,6 @@ public class WebServerServlet extends HttpServlet {
 
 		return user;
 	}
-
-	private static final byte[][] _FLASH_MAGIC_BYTES =
-		{{0x46, 0x57, 0x53}, {0x43, 0x57, 0x53}, {0x5a, 0x57, 0x53}};
 
 	private static final boolean _WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT =
 		StringUtil.equalsIgnoreCase(

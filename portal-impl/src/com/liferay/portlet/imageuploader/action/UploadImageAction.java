@@ -17,6 +17,7 @@ package com.liferay.portlet.imageuploader.action;
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.flash.FlashMagicBytesUtil;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -29,7 +30,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -59,7 +59,6 @@ import java.awt.image.RenderedImage;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.PushbackInputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -165,27 +164,16 @@ public class UploadImageAction extends PortletAction {
 				FileEntry tempFileEntry = getTempImageFileEntry(
 					resourceRequest);
 
-				InputStream inputStream = tempFileEntry.getContentStream();
+				FlashMagicBytesUtil.Result flashMagicBytesUtilResult =
+					FlashMagicBytesUtil.check(tempFileEntry.getContentStream());
 
-				PushbackInputStream pushbackInputStream =
-					new PushbackInputStream(inputStream, 3);
-
-				byte[] magicBytes = new byte[3];
-
-				pushbackInputStream.read(magicBytes);
-
-				pushbackInputStream.unread(magicBytes);
-
-				inputStream = pushbackInputStream;
-
-				if (ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[0], magicBytes) ||
-					ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[1], magicBytes) ||
-					ArrayUtil.containsAll(_FLASH_MAGIC_BYTES[2], magicBytes)) {
-
+				if (flashMagicBytesUtilResult.isFlash()) {
 					return;
 				}
 
-				serveTempImageFile(resourceResponse, inputStream);
+				serveTempImageFile(
+					resourceResponse,
+					flashMagicBytesUtilResult.getInputStream());
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
@@ -429,9 +417,6 @@ public class UploadImageAction extends PortletAction {
 
 		PortletResponseUtil.write(mimeResponse, bytes);
 	}
-
-	private static final byte[][] _FLASH_MAGIC_BYTES =
-		{{0x46, 0x57, 0x53}, {0x43, 0x57, 0x53}, {0x5a, 0x57, 0x53}};
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		UploadImageAction.class);
