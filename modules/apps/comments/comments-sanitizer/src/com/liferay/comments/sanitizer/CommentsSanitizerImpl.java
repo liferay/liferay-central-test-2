@@ -22,9 +22,11 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
+
 import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;
 
@@ -80,21 +82,20 @@ public class CommentsSanitizerImpl implements Sanitizer {
 
 		htmlPolicyBuilder.allowStandardUrlProtocols();
 
-		Map<String, String[]> allowedContentElementAttributes =
-			_commentsAllowedContent.getAllowedContentElementAttributes();
+		Map<String, String[]> attributeNames =
+			_commentsAllowedContent.getAttributeNames();
 
-		for (String allowedContentElement :
-				allowedContentElementAttributes.keySet()) {
+		for (String elementName : attributeNames.keySet()) {
+			String[] attributesNames = attributeNames.get(elementName);
 
-			String[] allowedContentAttributes =
-				allowedContentElementAttributes.get(allowedContentElement);
+			if (attributesNames != null) {
+				HtmlPolicyBuilder.AttributeBuilder attributeBuilder =
+					htmlPolicyBuilder.allowAttributes(attributesNames);
 
-			if (allowedContentAttributes != null) {
-				htmlPolicyBuilder.allowAttributes(allowedContentAttributes).
-					onElements(allowedContentElement);
+				attributeBuilder.onElements(elementName);
 			}
 
-			htmlPolicyBuilder.allowElements(allowedContentElement);
+			htmlPolicyBuilder.allowElements(elementName);
 		}
 
 		PolicyFactory policyFactory = htmlPolicyBuilder.toFactory();

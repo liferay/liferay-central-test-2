@@ -28,42 +28,35 @@ import java.util.regex.Pattern;
 public class CommentsAllowedContent {
 
 	public CommentsAllowedContent(String allowedContent) {
-		Matcher matcher = _paddingPattern.matcher(allowedContent);
+		Matcher matcher = _pattern.matcher(allowedContent);
 
 		allowedContent = matcher.replaceAll(StringPool.BLANK);
 
-		String[] allowedContentElementAttributesArray = StringUtil.split(
+		String[] allowedContentParts = StringUtil.split(
 			allowedContent, StringPool.SEMICOLON);
 
-		for (String allowedContentElementAttributes :
-				allowedContentElementAttributesArray) {
+		for (String allowedContentPart : allowedContentParts) {
+			String elementName = allowedContentPart;
+			String[] attributeNames = new String[0];
 
-			int x = allowedContentElementAttributes.indexOf(
-				StringPool.OPEN_BRACKET);
-			int y = allowedContentElementAttributes.indexOf(
-				StringPool.CLOSE_BRACKET);
-
-			String allowedContentElement = allowedContentElementAttributes;
-			String[] allowedContentAttributes = new String[0];
+			int x = allowedContentPart.indexOf(StringPool.OPEN_BRACKET);
+			int y = allowedContentPart.indexOf(StringPool.CLOSE_BRACKET);
 
 			if ((x != -1) && (y != -1)) {
-				allowedContentElement =
-					allowedContentElementAttributes.substring(0, x);
-				allowedContentAttributes = StringUtil.split(
-					allowedContentElementAttributes.substring(x + 1, y));
+				elementName = allowedContentPart.substring(0, x);
+				attributeNames = StringUtil.split(
+					allowedContentPart.substring(x + 1, y));
 			}
 
-			_allowedContentElementAttributes.put(
-				allowedContentElement, allowedContentAttributes);
+			_attributeNamesMap.put(elementName, attributeNames);
 		}
 	}
 
-	public Map<String, String[]> getAllowedContentElementAttributes() {
-		return _allowedContentElementAttributes;
+	public Map<String, String[]> getAttributeNames() {
+		return _attributeNamesMap;
 	}
 
-	private final Map<String, String[]> _allowedContentElementAttributes =
-		new HashMap<>();
-	private final Pattern _paddingPattern = Pattern.compile("\\s+");
+	private final Map<String, String[]> _attributeNamesMap = new HashMap<>();
+	private final Pattern _pattern = Pattern.compile("\\s+");
 
 }
