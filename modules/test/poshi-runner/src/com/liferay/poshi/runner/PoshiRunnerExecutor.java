@@ -461,7 +461,7 @@ public class PoshiRunnerExecutor {
 		throws Exception {
 
 		List<String> arguments = new ArrayList<>();
-		List<Class> parameterClasses = new ArrayList<>();
+		List<Class<?>> parameterClasses = new ArrayList<>();
 
 		String selenium = executeElement.attributeValue("selenium");
 
@@ -511,14 +511,15 @@ public class PoshiRunnerExecutor {
 
 		LiferaySelenium liferaySelenium = SeleniumUtil.getSelenium();
 
-		Class clazz = liferaySelenium.getClass();
+		Class<?> clazz = liferaySelenium.getClass();
 
 		Method method = clazz.getMethod(
 			selenium,
 			parameterClasses.toArray(new Class[parameterClasses.size()]));
 
 		_returnObject = method.invoke(
-			liferaySelenium, arguments.toArray(new String[arguments.size()]));
+			liferaySelenium,
+			(Object[])arguments.toArray(new String[arguments.size()]));
 	}
 
 	public static void runVarElement(Element element) throws Exception {
