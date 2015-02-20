@@ -1126,7 +1126,7 @@ public class LiferaySeleniumHelper {
 			LiferaySelenium liferaySelenium, String image)
 		throws Exception {
 
-		ScreenRegion desktopScreenRegion = new DesktopScreenRegion();
+		ScreenRegion screenRegion = new DesktopScreenRegion();
 
 		liferaySelenium.pause("1000");
 
@@ -1136,9 +1136,7 @@ public class LiferaySeleniumHelper {
 
 		ImageTarget imageTarget = new ImageTarget(file);
 
-		ScreenRegion screenRegion = desktopScreenRegion.wait(imageTarget, 5000);
-
-		if (screenRegion != null) {
+		if (screenRegion.wait(imageTarget, 5000) != null) {
 			throw new Exception("Element is present");
 		}
 	}
@@ -1147,7 +1145,7 @@ public class LiferaySeleniumHelper {
 			LiferaySelenium liferaySelenium, String image)
 		throws Exception {
 
-		ScreenRegion desktopScreenRegion = new DesktopScreenRegion();
+		ScreenRegion screenRegion = new DesktopScreenRegion();
 
 		liferaySelenium.pause("1000");
 
@@ -1157,7 +1155,7 @@ public class LiferaySeleniumHelper {
 
 		ImageTarget imageTarget = new ImageTarget(file);
 
-		ScreenRegion screenRegion = desktopScreenRegion.wait(imageTarget, 5000);
+		screenRegion = screenRegion.wait(imageTarget, 5000);
 
 		if (screenRegion == null) {
 			throw new Exception("Element is not present");
