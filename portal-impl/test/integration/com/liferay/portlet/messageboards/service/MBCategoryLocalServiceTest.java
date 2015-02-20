@@ -69,7 +69,6 @@ public class MBCategoryLocalServiceTest {
 		addCategory();
 
 		MBCategory excludedCategory1 = addCategory();
-
 		MBCategory excludedCategory2 = addCategory();
 
 		Assert.assertEquals(
@@ -168,7 +167,6 @@ public class MBCategoryLocalServiceTest {
 		addCategory();
 
 		MBCategory excludedCategory = addCategory();
-
 		MBCategory draftCategory = addCategory();
 
 		MBCategoryLocalServiceUtil.updateStatus(

@@ -56,8 +56,8 @@ public class MBUserNotificationTest extends BaseUserNotificationTestCase {
 	@Override
 	protected BaseModel<?> addBaseModel() throws Exception {
 		ServiceContext serviceContext =
-				ServiceContextTestUtil.getServiceContext(
-					group.getGroupId(), TestPropsValues.getUserId());
+			ServiceContextTestUtil.getServiceContext(
+				group.getGroupId(), TestPropsValues.getUserId());
 
 		MBTestUtil.populateNotificationsServiceContext(
 			serviceContext, Constants.ADD);
