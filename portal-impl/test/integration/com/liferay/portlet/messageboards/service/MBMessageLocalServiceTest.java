@@ -203,11 +203,11 @@ public class MBMessageLocalServiceTest {
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
-				_group.getGroupId(), categoryId, threadId, parentMessageId,
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				MBMessageConstants.DEFAULT_FORMAT, inputStreamOVPs, false, 0.0,
-				false, serviceContext);
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
+			_group.getGroupId(), categoryId, threadId, parentMessageId,
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			MBMessageConstants.DEFAULT_FORMAT, inputStreamOVPs, false, 0.0,
+			false, serviceContext);
 	}
 
 	@DeleteAfterTestRun

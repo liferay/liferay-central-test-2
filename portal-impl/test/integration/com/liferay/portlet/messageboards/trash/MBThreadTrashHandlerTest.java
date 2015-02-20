@@ -153,12 +153,10 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		MBCategory category = (MBCategory)parentBaseModel;
 
-		String keywords = getSearchKeywords();
-
 		MBMessage message = MBTestUtil.addMessageWithWorkflow(
 			serviceContext.getUserId(), category.getGroupId(),
-			category.getCategoryId(), keywords, keywords, approved,
-			serviceContext);
+			category.getCategoryId(), getSearchKeywords(), getSearchKeywords(),
+			approved, serviceContext);
 
 		return message.getThread();
 	}

@@ -159,12 +159,10 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 			return;
 		}
 
+		User user = TestPropsValues.getUser();
 		String className = ExportImportClassedModelUtil.getClassName(
 			stagedModel);
-
 		long classPK = ExportImportClassedModelUtil.getClassPK(stagedModel);
-
-		User user = TestPropsValues.getUser();
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
