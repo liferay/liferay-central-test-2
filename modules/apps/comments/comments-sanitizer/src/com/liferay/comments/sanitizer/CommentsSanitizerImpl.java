@@ -15,7 +15,6 @@
 package com.liferay.comments.sanitizer;
 
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
-import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.util.PropsValues;
@@ -43,29 +42,26 @@ public class CommentsSanitizerImpl implements Sanitizer {
 
 	@Override
 	public byte[] sanitize(
-			long companyId, long groupId, long userId, String className,
-			long classPK, String contentType, String[] modes, byte[] bytes,
-			Map<String, Object> options)
-		throws SanitizerException {
+		long companyId, long groupId, long userId, String className,
+		long classPK, String contentType, String[] modes, byte[] bytes,
+		Map<String, Object> options) {
 
 		return bytes;
 	}
 
 	@Override
 	public void sanitize(
-			long companyId, long groupId, long userId, String className,
-			long classPK, String contentType, String[] modes,
-			InputStream inputStream, OutputStream outputStream,
-			Map<String, Object> options)
-		throws SanitizerException {
+		long companyId, long groupId, long userId, String className,
+		long classPK, String contentType, String[] modes,
+		InputStream inputStream, OutputStream outputStream,
+		Map<String, Object> options) {
 	}
 
 	@Override
 	public String sanitize(
-			long companyId, long groupId, long userId, String className,
-			long classPK, String contentType, String[] modes, String s,
-			Map<String, Object> options)
-		throws SanitizerException {
+		long companyId, long groupId, long userId, String className,
+		long classPK, String contentType, String[] modes, String s,
+		Map<String, Object> options) {
 
 		if (MapUtil.isEmpty(options)) {
 			return s;
