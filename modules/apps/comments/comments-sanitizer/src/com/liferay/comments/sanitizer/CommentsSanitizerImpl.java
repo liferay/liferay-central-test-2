@@ -15,17 +15,16 @@
 package com.liferay.comments.sanitizer;
 
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
-
 import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;
 
@@ -69,7 +68,7 @@ public class CommentsSanitizerImpl implements Sanitizer {
 
 		boolean discussion = GetterUtil.getBoolean(options.get("discussion"));
 
-		if (!discussion || !contentType.equals("text/html")) {
+		if (!discussion || !contentType.equals(ContentTypes.TEXT_HTML)) {
 			return s;
 		}
 
