@@ -14,12 +14,11 @@
 
 package com.liferay.language.web.upgrade;
 
-import com.liferay.language.web.constants.LanguagePortletKeys;
+import com.liferay.language.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.language.web.upgrade.v1_0_0.UpgradePortletPreferences;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
-import com.liferay.portal.upgrade.util.UpgradePortletId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,18 +53,7 @@ public class LanguageWebUpgrade {
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
-		upgradeProcesses.add(
-			new UpgradePortletId() {
-
-				@Override
-				protected String[][] getRenamePortletIdsArray() {
-					return new String[][] {
-						new String[] {"82", LanguagePortletKeys.LANGUAGE}
-					};
-				}
-
-			}
-		);
+		upgradeProcesses.add(new UpgradePortletId());
 
 		upgradeProcesses.add(new UpgradePortletPreferences());
 
