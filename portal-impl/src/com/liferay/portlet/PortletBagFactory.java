@@ -168,7 +168,7 @@ public class PortletBagFactory {
 			newPreferencesValidatorInstances(portlet);
 
 		ResourceBundleTracker resourceBundleTracker = new ResourceBundleTracker(
-			portlet, _classLoader);
+			_classLoader, portlet);
 
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), _servletContext, portletInstance,

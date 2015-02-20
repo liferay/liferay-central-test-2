@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.language;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,7 +39,7 @@ public class UTF8Control extends Control {
 	public ResourceBundle newBundle(
 			String baseName, Locale locale, String format,
 			ClassLoader classLoader, boolean reload)
-		throws IllegalAccessException, InstantiationException, IOException {
+		throws IOException {
 
 		String resourceName = toResourceName(
 			toBundleName(baseName, locale), "properties");
@@ -48,12 +50,12 @@ public class UTF8Control extends Control {
 			URL url = classLoader.getResource(resourceName);
 
 			if (url != null) {
-				URLConnection connection = url.openConnection();
+				URLConnection urlConnection = url.openConnection();
 
-				if (connection != null) {
-					connection.setUseCaches(false);
+				if (urlConnection != null) {
+					urlConnection.setUseCaches(false);
 
-					inputStream = connection.getInputStream();
+					inputStream = urlConnection.getInputStream();
 				}
 			}
 		}
@@ -65,11 +67,13 @@ public class UTF8Control extends Control {
 			return null;
 		}
 
-		try (InputStream in = inputStream) {
-			return new PropertyResourceBundle(new InputStreamReader(in, _UTF8));
+		try {
+			return new PropertyResourceBundle(
+				new InputStreamReader(inputStream, StringPool.UTF8));
+		}
+		finally {
+			inputStream.close();
 		}
 	}
-
-	private static final String _UTF8 = "UTF-8";
 
 }

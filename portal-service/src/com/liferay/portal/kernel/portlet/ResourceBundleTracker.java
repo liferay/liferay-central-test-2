@@ -44,14 +44,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ResourceBundleTracker implements Closeable {
 
-	public ResourceBundleTracker(Portlet portlet, ClassLoader classLoader) {
-		_baseName = portlet.getResourceBundle();
+	public ResourceBundleTracker(ClassLoader classLoader, Portlet portlet) {
 		_classLoader = classLoader;
+		_portlet = portlet;
 
 		Set<String> supportedLanguageIds = portlet.getSupportedLocales();
 
 		if (supportedLanguageIds.isEmpty()) {
-			supportedLanguageIds = _LOCALES;
+			supportedLanguageIds = _LANGUAGE_IDS;
 		}
 
 		_supportedLanguageIds = supportedLanguageIds;
@@ -106,10 +106,10 @@ public class ResourceBundleTracker implements Closeable {
 
 			ServiceReference<ResourceBundle> serviceReference = entry.getKey();
 
-			Object languageIdProperty = serviceReference.getProperty(
+			Object serviceReferenceLanguageId = serviceReference.getProperty(
 				"language.id");
 
-			if (languageId.equals(languageIdProperty)) {
+			if (languageId.equals(serviceReferenceLanguageId)) {
 				return entry.getValue();
 			}
 		}
@@ -119,15 +119,15 @@ public class ResourceBundleTracker implements Closeable {
 		}
 
 		return ResourceBundle.getBundle(
-			_baseName, LocaleUtil.fromLanguageId(languageId), _classLoader,
-			UTF8Control.INSTANCE);
+			_portlet.getResourceBundle(), LocaleUtil.fromLanguageId(languageId),
+			_classLoader, UTF8Control.INSTANCE);
 	}
 
-	private static final Set<String> _LOCALES = SetUtil.fromArray(
+	private static final Set<String> _LANGUAGE_IDS = SetUtil.fromArray(
 		PropsUtil.getArray(PropsKeys.LOCALES));
 
-	private final String _baseName;
 	private final ClassLoader _classLoader;
+	private final Portlet _portlet;
 	private final Map<ServiceReference<ResourceBundle>, ResourceBundle>
 		_resourceBundles = new ConcurrentHashMap<>();
 	private final StringServiceRegistrationMap<ResourceBundle>
