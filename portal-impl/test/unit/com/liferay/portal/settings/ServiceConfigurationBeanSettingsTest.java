@@ -123,7 +123,6 @@ public class ServiceConfigurationBeanSettingsTest extends PowerMockito {
 			return true;
 		}
 
-		@SuppressWarnings("unused")
 		public String locationVariableValue() {
 			return "${resource:template.ftl}";
 		}

@@ -34,8 +34,6 @@ public class PropertiesSettingsTest extends PowerMockito {
 		_properties.put(_SINGLE_KEY, _SINGLE_VALUE);
 		_properties.put(_MULTIPLE_KEY, _MULTIPLE_VALUES);
 
-		Class<? extends PropertiesSettingsTest> clazz = getClass();
-
 		_mockLocationVariableResolver = mock(LocationVariableResolver.class);
 
 		_propertiesSettings = new PropertiesSettings(
