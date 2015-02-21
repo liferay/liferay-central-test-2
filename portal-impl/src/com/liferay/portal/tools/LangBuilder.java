@@ -128,14 +128,14 @@ public class LangBuilder {
 		_createProperties(content, "eu"); // Basque
 		_createProperties(content, "bg"); // Bulgarian
 		_createProperties(content, "ca"); // Catalan
-		//_createProperties(content, "zh_CN"); // Chinese (China)
-		//_createProperties(content, "zh_TW"); // Chinese (Taiwan)
+		_createProperties(content, "zh_CN"); // Chinese (China)
+		_createProperties(content, "zh_TW"); // Chinese (Taiwan)
 		_createProperties(content, "hr"); // Croatian
 		_createProperties(content, "cs"); // Czech
 		_createProperties(content, "da"); // Danish
-		//_createProperties(content, "nl"); // Dutch (Netherlands)
+		_createProperties(content, "nl"); // Dutch (Netherlands)
 		_createProperties(content, "nl_BE", "nl"); // Dutch (Belgium)
-		/*_createProperties(content, "et"); // Estonian
+		_createProperties(content, "et"); // Estonian
 		_createProperties(content, "fi"); // Finnish
 		_createProperties(content, "fr"); // French
 		_createProperties(content, "gl"); // Galician
@@ -165,7 +165,7 @@ public class LangBuilder {
 		_createProperties(content, "sv"); // Swedish
 		_createProperties(content, "tr"); // Turkish
 		_createProperties(content, "uk"); // Ukrainian
-		_createProperties(content, "vi"); // Vietnamese*/
+		_createProperties(content, "vi"); // Vietnamese
 	}
 
 	private void _createProperties(String content, String languageId)
