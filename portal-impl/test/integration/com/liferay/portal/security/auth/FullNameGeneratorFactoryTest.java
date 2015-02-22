@@ -39,7 +39,7 @@ public class FullNameGeneratorFactoryTest {
 			new SyntheticBundleRule("bundle.fullnamegeneratorfactory"));
 
 	@Test
-	public void testFullName() {
+	public void testGetFullName() {
 		FullNameGenerator fullNameGenerator =
 			FullNameGeneratorFactory.getInstance();
 
@@ -49,7 +49,7 @@ public class FullNameGeneratorFactoryTest {
 	}
 
 	@Test
-	public void testLocalizedFullName() {
+	public void testGetLocalizedFullName() {
 		FullNameGenerator fullNameGenerator =
 			FullNameGeneratorFactory.getInstance();
 
@@ -69,10 +69,10 @@ public class FullNameGeneratorFactoryTest {
 		FullNameGenerator fullNameGenerator =
 			FullNameGeneratorFactory.getInstance();
 
-		String[] splitName = fullNameGenerator.splitFullName(
+		String[] splitFullName = fullNameGenerator.splitFullName(
 			"John Stephen Piper");
 
-		Assert.assertEquals(3, splitName.length);
+		Assert.assertEquals(3, splitFullName.length);
 	}
 
 }

@@ -42,9 +42,7 @@ public class ScreenNameValidatorFactoryTest {
 			ScreenNameValidatorFactory.getInstance();
 
 		Assert.assertTrue(screenNameValidator.validate(1, "lftest"));
-
 		Assert.assertFalse(screenNameValidator.validate(2, "lftest"));
-
 		Assert.assertFalse(screenNameValidator.validate(1, "bob"));
 	}
 

@@ -43,10 +43,8 @@ public class FullNameValidatorFactoryTest {
 
 		Assert.assertTrue(
 			fullNameValidator.validate(1, "Brian", "middleName", "lastName"));
-
 		Assert.assertFalse(
 			fullNameValidator.validate(2, "Brian", "middleName", "lastName"));
-
 		Assert.assertFalse(
 			fullNameValidator.validate(1, "Peter", "middleName", "lastName"));
 	}

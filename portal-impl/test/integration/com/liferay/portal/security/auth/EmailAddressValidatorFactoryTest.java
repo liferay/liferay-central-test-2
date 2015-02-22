@@ -44,11 +44,9 @@ public class EmailAddressValidatorFactoryTest {
 		Assert.assertTrue(
 			emailAddressValidator.validate(
 				1, "TestEmailAddressValidator@liferay-test.com"));
-
 		Assert.assertFalse(
 			emailAddressValidator.validate(
 				2, "TestEmailAddressValidator@liferay-test.com"));
-
 		Assert.assertFalse(
 			emailAddressValidator.validate(1, "not@liferay-test.com"));
 	}
