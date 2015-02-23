@@ -31,7 +31,6 @@ import com.thoughtworks.qdox.model.JavaMethod;
 import java.io.File;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -394,38 +393,21 @@ public class JavaClass {
 			return;
 		}
 
+		Pattern pattern = Pattern.compile(
+			"\t(private |protected |public )(static )?(transient )?(final)?" +
+				"([\\s\\S]*?)" + javaTerm.getName());
+
 		String javaTermContent = javaTerm.getContent();
 
-		String[] javaTermWordsArray = javaTermContent.trim().split(
-			StringPool.SPACE);
+		Matcher matcher = pattern.matcher(javaTermContent);
 
-		List<String> javaTermWords = Arrays.asList(javaTermWordsArray);
-
-		javaTermWords = new ArrayList<>(javaTermWords);
-
-		boolean isFinal = javaTermWords.contains("final");
-		boolean isStatic = javaTermWords.contains("static");
-		int typeIndex = javaTermWords.indexOf(javaTerm.getName()) - 1;
-
-		if (typeIndex < 0) {
-			typeIndex = javaTermWords.indexOf(javaTerm.getName() + ";") - 1;
+		if (!matcher.find()) {
+			return;
 		}
 
-		String javaFieldType = javaTermWords.get(typeIndex);
-		String currentWord = javaTermWords.get(typeIndex - 1);
-
-		while(currentWord.endsWith(StringPool.COMMA)) {
-			javaFieldType = currentWord + javaFieldType;
-			typeIndex--;
-			currentWord = javaTermWords.get(typeIndex - 1 );
-		}
-
-		StringBundler sb = new StringBundler(typeIndex*2);
-
-		for (int i = 1; i < typeIndex; i++) {
-			sb.append(javaTermWords.get(i));
-			sb.append(StringPool.SPACE);
-		}
+		boolean isFinal = Validator.isNotNull(matcher.group(4));
+		boolean isStatic = Validator.isNotNull(matcher.group(2));
+		String javaFieldType = StringUtil.trim(matcher.group(5));
 
 		if (isFinal && isStatic && javaFieldType.startsWith("Map<")) {
 			checkMutableFieldType(javaTerm);
@@ -446,8 +428,11 @@ public class JavaClass {
 			}
 		}
 		else {
+			String modifierDefinition = javaTermContent.substring(
+				matcher.start(1), matcher.start(5));
+
 			checkFinalableFieldType(
-				javaTerm, annotationsExclusions, sb.toString());
+				javaTerm, annotationsExclusions, modifierDefinition);
 		}
 	}
 
