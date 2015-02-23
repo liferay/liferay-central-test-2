@@ -102,13 +102,10 @@ public class BeanLocatorLifecycleManager
 				applicationContext.getAutowireCapableBeanFactory());
 		}
 		catch (Exception e) {
-			if ( _log.isErrorEnabled())
-				_log.error(
-					"Unexpected error while refreshing " +
-						applicationContext.getDisplayName() + ". This could " +
-							"cause some memory leaks on multiple " +
-								" re-deployments");
-		}
+			_log.error(
+				"Unexpected error while refreshing " +
+					applicationContext.getDisplayName() + " which may" +
+						"cause memory leaks on multiple redeployments");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
