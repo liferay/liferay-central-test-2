@@ -158,8 +158,8 @@ public class BeanReferenceRefreshUtil {
 			catch (NoSuchBeanDefinitionException nsbde) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Bean " + referencedBeanName + " is defined " +
-							"in the portal");
+						"Bean " + referencedBeanName + " is defined in the " +
+							"portal");
 				}
 
 				return PortalBeanLocatorUtil.locate(referencedBeanName);
