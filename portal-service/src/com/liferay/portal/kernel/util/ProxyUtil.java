@@ -114,21 +114,21 @@ public class ProxyUtil {
 		if ((constructorWeakReference == null) ||
 			((constructor = constructorWeakReference.get()) == null)) {
 
-				try {
-					constructor = clazz.getConstructor(_argumentsClazz);
+			try {
+				constructor = clazz.getConstructor(_argumentsClazz);
 
-					constructor.setAccessible(true);
+				constructor.setAccessible(true);
 
-					WeakReference<Constructor<?>> weakReference =
-						new WeakReference<Constructor<?>>(constructor);
+				WeakReference<Constructor<?>> weakReference =
+					new WeakReference<Constructor<?>>(constructor);
 
-					_constructors.put(clazz, weakReference);
+				_constructors.put(clazz, weakReference);
 
-					return constructor;
-				}
-				catch (Exception e) {
-					throw new InternalError(e.toString());
-				}
+				return constructor;
+			}
+			catch (Exception e) {
+				throw new InternalError(e.toString());
+			}
 		}
 		else {
 			return constructor;
