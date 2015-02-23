@@ -126,7 +126,7 @@ public class FileUtil {
 
 		for (SyncFile deletedSyncFile : deletedSyncFiles) {
 			if (deletedSyncFile.getTypePK() == 0) {
-				SyncFileService.deleteSyncFile(deletedSyncFile);
+				SyncFileService.deleteSyncFile(deletedSyncFile, false);
 
 				continue;
 			}
