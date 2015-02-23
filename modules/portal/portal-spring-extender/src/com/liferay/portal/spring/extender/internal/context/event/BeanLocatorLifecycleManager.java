@@ -106,6 +106,7 @@ public class BeanLocatorLifecycleManager
 				"Unexpected error while refreshing " +
 					applicationContext.getDisplayName() + " which may" +
 						"cause memory leaks on multiple redeployments");
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
