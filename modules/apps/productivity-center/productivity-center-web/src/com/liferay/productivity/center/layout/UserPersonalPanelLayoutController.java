@@ -48,19 +48,19 @@ import org.osgi.service.http.context.ServletContextHelper;
  * @author Adolfo Pérez
  */
 @Component(
-	immediate = true, property = { "layout.type=user_personal_panel" },
+	immediate = true, property = {"layout.type=user_personal_panel"},
 	service = LayoutTypeController.class
 )
 public class UserPersonalPanelLayoutController implements LayoutTypeController {
 
 	@Override
 	public String[] getConfigurationActionDelete() {
-		return _NO_CONFIGURATION_ACTIONS;
+		return StringPool.EMPTY_ARRAY;
 	}
 
 	@Override
 	public String[] getConfigurationActionUpdate() {
-		return _NO_CONFIGURATION_ACTIONS;
+		return StringPool.EMPTY_ARRAY;
 	}
 
 	@Override
@@ -160,8 +160,6 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 
 	private static final String _EDIT_PAGE =
 		"/layout/edit/user_personal_panel.jsp";
-
-	private static final String[] _NO_CONFIGURATION_ACTIONS = new String[0];
 
 	private static final boolean _SITEMAPABLE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LAYOUT_SITEMAPABLE), true);
