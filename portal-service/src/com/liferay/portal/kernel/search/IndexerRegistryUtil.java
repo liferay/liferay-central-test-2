@@ -145,6 +145,7 @@ public class IndexerRegistryUtil {
 			Class<?> clazz = indexer.getClass();
 
 			_indexers.put(clazz.getName(), indexer);
+
 			_indexers.put(indexer.getClassName(), indexer);
 
 			return indexer;
@@ -166,6 +167,7 @@ public class IndexerRegistryUtil {
 			Class<?> clazz = indexer.getClass();
 
 			_indexers.remove(clazz.getName());
+
 			_indexers.remove(indexer.getClassName());
 		}
 
