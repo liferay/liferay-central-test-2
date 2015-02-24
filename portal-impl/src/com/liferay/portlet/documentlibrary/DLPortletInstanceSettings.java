@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.settings.FallbackKeys;
 import com.liferay.portal.kernel.settings.ParameterMapSettings;
 import com.liferay.portal.kernel.settings.Settings;
-import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
 import com.liferay.portal.kernel.settings.TypedSettings;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -182,10 +181,7 @@ public class DLPortletInstanceSettings {
 		DLUtil.getAllMediaGalleryMimeTypes());
 
 	static {
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerSettingsMetadata(
+		SettingsFactoryUtil.registerSettingsMetadata(
 			DLPortletInstanceSettings.class, null, _getFallbackKeys());
 	}
 
