@@ -33,7 +33,7 @@ public class SettingsDescriptorTest {
 
 		Collection<String> expectedAllKeys = Arrays.asList(
 			"boolean", "long", "string", "stringArray1", "stringArray2",
-			"nonRenamedProperty");
+			"unrenamedProperty");
 
 		Assert.assertEquals(allKeys.size(), expectedAllKeys.size());
 		Assert.assertTrue(allKeys.containsAll(expectedAllKeys));
@@ -78,7 +78,7 @@ public class SettingsDescriptorTest {
 			return 0;
 		}
 
-		@Settings.Property(name = "nonRenamedProperty")
+		@Settings.Property(name = "unrenamedProperty")
 		public String getRenamedProperty() {
 			return "";
 		}
