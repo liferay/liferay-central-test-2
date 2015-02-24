@@ -72,6 +72,12 @@ public class SettingsFactoryUtil {
 		return getSettingsFactory().getServerSettings(settingsId);
 	}
 
+	public static SettingsDescriptor<?> getSettingsDescriptor(
+		String settingsId) {
+
+		return getSettingsFactory().getSettingsDescriptor(settingsId);
+	}
+
 	public static SettingsFactory getSettingsFactory() {
 		PortalRuntimePermission.checkGetBeanProperty(SettingsFactoryUtil.class);
 

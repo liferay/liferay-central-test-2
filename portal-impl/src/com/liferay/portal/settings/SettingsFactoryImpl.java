@@ -196,7 +196,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	}
 
 	@Override
-	public <T> SettingsDescriptor<T> getSettingsDescriptor(String settingsId) {
+	public SettingsDescriptor<?> getSettingsDescriptor(String settingsId) {
 		return _settingsDescriptors.get(settingsId);
 	}
 
@@ -389,7 +389,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		new ConcurrentHashMap<>();
 	private final ConcurrentMap<String, Object> _serviceConfigurationBeans =
 		new ConcurrentHashMap<>();
-	private final Map<String, SettingsDescriptor> _settingsDescriptors =
+	private final Map<String, SettingsDescriptor<?>> _settingsDescriptors =
 		new ConcurrentHashMap<>();
 
 }
