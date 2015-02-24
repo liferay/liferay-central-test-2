@@ -32,7 +32,7 @@ public class SettingsDescriptorTest {
 		Set<String> allKeys = _settingsDescriptor.getAllKeys();
 
 		Collection<String> expectedAllKeys = Arrays.asList(
-			"boolean", "long", "string", "stringArray", "stringArray2",
+			"boolean", "long", "string", "stringArray1", "stringArray2",
 			"nonRenamedProperty");
 
 		Assert.assertEquals(allKeys.size(), expectedAllKeys.size());
@@ -44,7 +44,7 @@ public class SettingsDescriptorTest {
 		Set<String> multiValuedKeys = _settingsDescriptor.getMultiValuedKeys();
 
 		Collection<String> expectedMultiValuedKeys = Arrays.asList(
-			"stringArray", "stringArray2");
+			"stringArray1", "stringArray2");
 
 		Assert.assertEquals(
 			multiValuedKeys.size(), expectedMultiValuedKeys.size());
@@ -87,7 +87,7 @@ public class SettingsDescriptorTest {
 			return "";
 		}
 
-		public String[] getStringArray() {
+		public String[] getStringArray1() {
 			return new String[0];
 		}
 
