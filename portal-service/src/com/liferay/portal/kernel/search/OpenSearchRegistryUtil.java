@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
@@ -56,9 +54,6 @@ public class OpenSearchRegistryUtil {
 
 		_serviceTracker.open();
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		OpenSearchRegistryUtil.class);
 
 	private static final OpenSearchRegistryUtil _instance =
 		new OpenSearchRegistryUtil();

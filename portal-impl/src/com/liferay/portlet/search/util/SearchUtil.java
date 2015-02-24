@@ -62,7 +62,7 @@ public class SearchUtil extends Action {
 	public static Tuple getElements(
 		String xml, String className, int inactiveGroupsCount) {
 
-		List<Element> resultRows = new ArrayList();
+		List<Element> resultRows = new ArrayList<>();
 		int totalRows = 0;
 
 		try {
