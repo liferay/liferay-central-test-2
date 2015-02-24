@@ -72,18 +72,15 @@ public class SearchUtil extends Action {
 
 			Element rootElement = document.getRootElement();
 
-			List<Element> entries = rootElement.elements("entry");
+			List<Element> elements = rootElement.elements("entry");
 
 			total = GetterUtil.getInteger(
 				rootElement.elementText(
 					OpenSearchUtil.getQName(
 						"totalResults", OpenSearchUtil.OS_NAMESPACE)));
 
-			for (Element element : entries) {
+			for (Element element : elements) {
 				try {
-
-					// Group id
-
 					long entryScopeGroupId = GetterUtil.getLong(
 						element.elementText(
 							OpenSearchUtil.getQName(
@@ -112,7 +109,7 @@ public class SearchUtil extends Action {
 				}
 				catch (Exception e) {
 					_log.error(
-						"Error retrieving individual search result of type " +
+						"Unable to retrieve individual search result for " +
 							className,
 						e);
 
@@ -121,7 +118,7 @@ public class SearchUtil extends Action {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error displaying content of type " + className, e);
+			_log.error("Unable to display content for " + className, e);
 		}
 
 		return new Tuple(result, total);
