@@ -3182,6 +3182,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 			</then>
 		</if>
 
+		<get-testcase-property property.name="ignore.errors" />
+
 		<if>
 			<isset property="ignore.errors" />
 			<then>
@@ -3227,6 +3229,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 			</then>
 		</if>
 
+		<get-testcase-property property.name="mobile.device.enabled" />
+
 		<if>
 			<equals arg1="${mobile.device.enabled}" arg2="true" />
 			<then>
@@ -3237,6 +3241,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 				</echo>
 			</then>
 		</if>
+
+		<get-testcase-property property.name="sharepoint.enabled" />
 
 		<if>
 			<equals arg1="${sharepoint.enabled}" arg2="true" />
@@ -3298,6 +3304,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 				</echo>
 			</then>
 		</if>
+
+		<get-testcase-property property.name="test.assert.javascript.errors" />
 
 		<if>
 			<equals arg1="${test.assert.javascript.errors}" arg2="false" />
@@ -3369,6 +3377,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 			</then>
 		</if>
 
+		<get-testcase-property property.name="portal.url" />
+
 		<if>
 			<equals arg1="${test.selenium.unit.enabled}" arg2="true" />
 			<then>
@@ -3433,6 +3443,8 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 				</echo>
 			</then>
 		</if>
+
+		<get-testcase-property property.name="timeout.explicit.wait" />
 
 		<if>
 			<isset property="timeout.explicit.wait" />
