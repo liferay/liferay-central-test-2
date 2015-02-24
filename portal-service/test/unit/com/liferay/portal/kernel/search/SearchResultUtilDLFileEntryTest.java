@@ -175,7 +175,7 @@ public class SearchResultUtilDLFileEntryTest
 		String title = RandomTestUtil.randomString();
 		String content = RandomTestUtil.randomString();
 
-		Summary summary = new Summary(null, title, content, null);
+		Summary summary = new Summary(null, title, content);
 
 		doReturn(
 			summary

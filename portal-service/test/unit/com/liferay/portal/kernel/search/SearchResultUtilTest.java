@@ -24,7 +24,6 @@ import java.util.Locale;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletURL;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -110,13 +109,12 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		Indexer indexer = Mockito.mock(Indexer.class);
 
 		Summary summary = new Summary(
-			null, SearchTestUtil.SUMMARY_TITLE, SearchTestUtil.SUMMARY_CONTENT,
-			null);
+			null, SearchTestUtil.SUMMARY_TITLE, SearchTestUtil.SUMMARY_CONTENT);
 
 		when(
 			indexer.getSummary(
 				(Document)Matchers.any(), Matchers.anyString(),
-				(PortletURL)Matchers.any(), (PortletRequest)Matchers.isNull(),
+				(PortletRequest)Matchers.isNull(),
 				(PortletResponse)Matchers.isNull())
 		).thenReturn(
 			summary
