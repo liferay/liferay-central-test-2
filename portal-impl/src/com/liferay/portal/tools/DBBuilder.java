@@ -61,8 +61,8 @@ public class DBBuilder {
 		_databaseTypes = databaseTypes;
 
 		try {
-			if (!sqlDir.endsWith("/WEB-INF/sql") &&
-				!sqlDir.endsWith("/META-INF/sql")) {
+			if (!sqlDir.endsWith("/META-INF/sql") &&
+				!sqlDir.endsWith("/WEB-INF/sql")) {
 
 				_buildSQLFile(sqlDir, "portal");
 				_buildSQLFile(sqlDir, "portal-tables");
