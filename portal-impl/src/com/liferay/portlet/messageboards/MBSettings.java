@@ -258,8 +258,6 @@ public class MBSettings {
 		return fallbackKeys;
 	}
 
-	private static final String[] _MULTI_VALUED_KEYS = {"ranks"};
-
 	static {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
