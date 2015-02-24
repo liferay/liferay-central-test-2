@@ -19,29 +19,11 @@
 		<sequential>
 			<property file="${project.dir}/portal-impl/src/portal.properties" prefix="portal" />
 
-			<propertyregex
-				input="${portal.setup.liferay.pool.provider.jar.url[hikaricp]}"
-				property="mirrors.hikaricp.url"
-				regexp="http://"
-				replace="http://mirrors/"
+			<mirrors-get
+				dest="@{app.server.lib.portal.dir}/${portal.setup.liferay.pool.provider.jar.name[hikaricp]}"
+				skipexisting="true"
+				src="${portal.setup.liferay.pool.provider.jar.url[hikaricp]}"
 			/>
-
-			<trycatch>
-				<try>
-					<get
-						dest="@{app.server.lib.portal.dir}/${portal.setup.liferay.pool.provider.jar.name[hikaricp]}"
-						skipexisting="true"
-						src="${mirrors.hikaricp.url}"
-					/>
-				</try>
-				<catch>
-					<get
-						dest="@{app.server.lib.portal.dir}/${portal.setup.liferay.pool.provider.jar.name[hikaricp]}"
-						skipexisting="true"
-						src="${portal.setup.liferay.pool.provider.jar.url[hikaricp]}"
-					/>
-				</catch>
-			</trycatch>
 		</sequential>
 	</macrodef>
 
@@ -400,7 +382,7 @@
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.tcat.zip.name}"
 					src="${app.server.tcat.zip.url}"
 					verbose="true"
@@ -1094,7 +1076,7 @@ release was successful.</echo>
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.geronimo.zip.name}"
 					src="${app.server.geronimo.zip.url}"
 					verbose="true"
@@ -1164,7 +1146,7 @@ release was successful.</echo>
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
 					src="${app.server.glassfish.zip.url}"
 					verbose="true"
@@ -1267,7 +1249,7 @@ release was successful.</echo>
 					<then>
 						<trycatch>
 							<try>
-								<get
+								<mirrors-get
 									dest="${app.server.parent.dir}/${app.server.jboss.zip.name}"
 									src="${app.server.jboss.zip.url}"
 									verbose="true"
@@ -1285,7 +1267,7 @@ this task.
 						</trycatch>
 					</then>
 					<else>
-						<get
+						<mirrors-get
 							dest="${app.server.parent.dir}/${app.server.jboss.zip.name}"
 							src="${app.server.jboss.zip.url}"
 							verbose="true"
@@ -1657,7 +1639,7 @@ this task.
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.jetty.zip.name}"
 					src="${app.server.jetty.zip.url}"
 					verbose="true"
@@ -1772,7 +1754,7 @@ this task.
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.jonas.zip.name}"
 					src="${app.server.jonas.zip.url}"
 					verbose="true"
@@ -1938,7 +1920,7 @@ this task.
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.resin.zip.name}"
 					src="${app.server.resin.zip.url}"
 					verbose="true"
@@ -2021,7 +2003,7 @@ this task.
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.tcserver.zip.name}"
 					src="${app.server.tcserver.zip.url}"
 					verbose="true"
@@ -2113,7 +2095,7 @@ this task.
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get
+				<mirrors-get
 					dest="${app.server.parent.dir}/${app.server.tomcat.zip.name}"
 					src="${app.server.tomcat.zip.url}"
 					verbose="true"
@@ -2245,7 +2227,7 @@ this task.
 					<then>
 						<mkdir dir="${app.server.parent.dir}" />
 
-						<get
+						<mirrors-get
 							dest="${app.server.parent.dir}"
 							src="${app.server.weblogic.zip.url}"
 						/>
