@@ -53,9 +53,9 @@ public class SettingsDescriptor<T> {
 			Method[] methods = _getPropertyMethods();
 
 			for (Method method : methods) {
-				Class<?> propertyClass = method.getReturnType();
+				Class<?> clazz = method.getReturnType();
 
-				if (propertyClass == String[].class) {
+				if (clazz == String[].class) {
 					_multiValuedKeys.add(_getPropertyName(method));
 				}
 			}
