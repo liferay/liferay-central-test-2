@@ -13,6 +13,7 @@ _sass_cache_*.css
 cobertura.ser
 
 **/.sonar
+**/pmd-reports
 
 /*.ant-*
 /*.ipr
@@ -66,7 +67,6 @@ cobertura.ser
 /osgi/modules/*/classes
 /osgi/modules/*/docroot/WEB-INF/classes
 /osgi/modules/*/lib/*.jar
-/osgi/modules/*/pmd-reports
 /osgi/modules/*/test-classes
 /osgi/modules/*/test-coverage
 /osgi/modules/*/test-results
