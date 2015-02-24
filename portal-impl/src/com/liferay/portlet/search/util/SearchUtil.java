@@ -62,8 +62,8 @@ public class SearchUtil extends Action {
 	public static Tuple getElements(
 		String xml, String className, int inactiveGroupsCount) {
 
-		List<Element> result = new ArrayList();
-		int total = 0;
+		List<Element> resultRows = new ArrayList();
+		int totalRows = 0;
 
 		try {
 			xml = XMLFormatter.stripInvalidChars(xml);
@@ -74,7 +74,7 @@ public class SearchUtil extends Action {
 
 			List<Element> elements = rootElement.elements("entry");
 
-			total = GetterUtil.getInteger(
+			totalRows = GetterUtil.getInteger(
 				rootElement.elementText(
 					OpenSearchUtil.getQName(
 						"totalResults", OpenSearchUtil.OS_NAMESPACE)));
@@ -99,13 +99,13 @@ public class SearchUtil extends Action {
 						}
 
 						if (!entryGroup.isActive()) {
-							total--;
+							totalRows--;
 
 							continue;
 						}
 					}
 
-					result.add(element);
+					resultRows.add(element);
 				}
 				catch (Exception e) {
 					_log.error(
@@ -113,7 +113,7 @@ public class SearchUtil extends Action {
 							className,
 						e);
 
-					total--;
+					totalRows--;
 				}
 			}
 		}
@@ -121,7 +121,7 @@ public class SearchUtil extends Action {
 			_log.error("Unable to display content for " + className, e);
 		}
 
-		return new Tuple(result, total);
+		return new Tuple(resultRows, totalRows);
 	}
 
 	public static List<OpenSearch> getOpenSearchInstances(
