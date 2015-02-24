@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsDescriptor;
-import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -318,11 +317,8 @@ public class SettingsConfigurationAction
 	protected void updateMultiValuedKeys(ActionRequest actionRequest) {
 		String settingsId = getSettingsId(actionRequest);
 
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
 		SettingsDescriptor<?> settingsDescriptor =
-			settingsFactory.getSettingsDescriptor(settingsId);
+			SettingsFactoryUtil.getSettingsDescriptor(settingsId);
 
 		Set<String> multiValuedKeys = settingsDescriptor.getMultiValuedKeys();
 
