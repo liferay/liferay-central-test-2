@@ -69,7 +69,7 @@ public class BaselineJarTask extends BaseBndTask {
 	}
 
 	protected void doBaselineJar(
-			Jar jar, File output, aQute.bnd.build.Project bndProject)
+			Jar jar, File outputFile, aQute.bnd.build.Project bndProject)
 		throws Exception {
 
 		if (_reportLevelIsOff) {
@@ -88,7 +88,7 @@ public class BaselineJarTask extends BaseBndTask {
 
 		try {
 			if (baselineJar == null) {
-				bndProject.deploy(output);
+				bndProject.deploy(outputFile);
 
 				return;
 			}
