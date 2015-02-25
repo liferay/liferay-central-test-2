@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.tokenbased.auth;
+package com.liferay.portal.sso.token.auth;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
@@ -28,10 +28,10 @@ import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.BaseAutoLogin;
 import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.sso.tokenbased.configuration.TokenBasedConfiguration;
-import com.liferay.portal.sso.tokenbased.constants.TokenBasedPropsKeys;
-import com.liferay.portal.sso.tokenbased.spi.TokenLocation;
-import com.liferay.portal.sso.tokenbased.spi.TokenRetriever;
+import com.liferay.portal.sso.token.configuration.TokenBasedConfiguration;
+import com.liferay.portal.sso.token.constants.TokenBasedPropsKeys;
+import com.liferay.portal.sso.token.spi.TokenLocation;
+import com.liferay.portal.sso.token.spi.TokenRetriever;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -54,7 +54,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.tokenbased.configuration.TokenBasedConfiguration",
+	configurationPid = "com.liferay.portal.sso.token.configuration.TokenBasedConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	service = AutoLogin.class
 )

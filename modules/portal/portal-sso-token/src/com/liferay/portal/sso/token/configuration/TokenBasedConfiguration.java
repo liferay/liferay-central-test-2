@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.tokenbased.configuration;
+package com.liferay.portal.sso.token.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.tokenbased.configuration.TokenBasedConfiguration",
+	id = "com.liferay.portal.sso.token.configuration.TokenBasedConfiguration",
 	localization = "content.Language"
 )
 public interface TokenBasedConfiguration {

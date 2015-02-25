@@ -12,13 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.sso.tokenbased.spi;
+package com.liferay.portal.sso.token.spi;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Michael C. Han
  */
-public enum TokenLocation {
+public interface LogoutProcessor {
 
-	COOKIE, REQUEST, REQUEST_HEADER, SESSION
+	public LogoutProcessorType getLogoutProcessorType();
+
+	public void logout(
+			HttpServletRequest request, HttpServletResponse response,
+			String... parameters)
+		throws IOException;
 
 }

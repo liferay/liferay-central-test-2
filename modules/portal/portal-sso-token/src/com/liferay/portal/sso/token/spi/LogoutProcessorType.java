@@ -12,17 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.sso.tokenbased.constants;
+package com.liferay.portal.sso.token.spi;
 
 /**
  * @author Michael C. Han
  */
-public class TokenBasedPropsKeys {
+public enum LogoutProcessorType {
 
-	public static final String ENABLED = "enabled";
-
-	public static final String IMPORT_FROM_LDAP = "import.from.ldap";
-
-	public static final String USER_TOKEN_NAME = "user.token.name";
+	COOKIE, REDIRECT
 
 }

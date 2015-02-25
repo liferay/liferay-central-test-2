@@ -12,23 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.sso.tokenbased.spi;
+package com.liferay.portal.sso.token.auth;
 
-import java.io.IOException;
+import com.liferay.portal.kernel.util.CookieKeys;
+import com.liferay.portal.sso.token.spi.TokenLocation;
+import com.liferay.portal.sso.token.spi.TokenRetriever;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Michael C. Han
  */
-public interface LogoutProcessor {
+@Component(immediate = true, service = TokenRetriever.class)
+public class CookieTokenRetriever implements TokenRetriever {
 
-	public LogoutProcessorType getLogoutProcessorType();
+	@Override
+	public String getLoginToken(
+		HttpServletRequest request, String userTokenName) {
 
-	public void logout(
-			HttpServletRequest request, HttpServletResponse response,
-			String... parameters)
-		throws IOException;
+		return CookieKeys.getCookie(request, userTokenName, false);
+	}
+
+	@Override
+	public TokenLocation getTokenLocation() {
+		return TokenLocation.COOKIE;
+	}
 
 }

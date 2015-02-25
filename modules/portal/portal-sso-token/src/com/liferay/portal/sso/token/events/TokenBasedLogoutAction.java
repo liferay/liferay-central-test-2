@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.tokenbased.events;
+package com.liferay.portal.sso.token.events;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
@@ -24,10 +24,10 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.sso.tokenbased.configuration.TokenBasedConfiguration;
-import com.liferay.portal.sso.tokenbased.constants.TokenBasedPropsKeys;
-import com.liferay.portal.sso.tokenbased.spi.LogoutProcessor;
-import com.liferay.portal.sso.tokenbased.spi.LogoutProcessorType;
+import com.liferay.portal.sso.token.configuration.TokenBasedConfiguration;
+import com.liferay.portal.sso.token.constants.TokenBasedPropsKeys;
+import com.liferay.portal.sso.token.spi.LogoutProcessor;
+import com.liferay.portal.sso.token.spi.LogoutProcessorType;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Map;
@@ -49,7 +49,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.tokenbased.configuration.TokenBasedConfiguration",
+	configurationPid = "com.liferay.portal.sso.token.configuration.TokenBasedConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {"key=logout.events.post"}, service = LifecycleAction.class
 )
