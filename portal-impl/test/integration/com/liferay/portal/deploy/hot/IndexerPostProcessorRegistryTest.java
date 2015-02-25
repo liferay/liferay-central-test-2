@@ -54,16 +54,16 @@ public class IndexerPostProcessorRegistryTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		_registry = new IndexerPostProcessorRegistry();
+		_indexerPostProcessorRegistry = new IndexerPostProcessorRegistry();
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_registry.close();
+		_indexerPostProcessorRegistry.close();
 	}
 
 	@Test
-	public void testMultipleEntityIndexerPostProcessors() throws Exception {
+	public void testMultipleModelIndexerPostProcessors() throws Exception {
 		Indexer userIndexer = IndexerRegistryUtil.getIndexer(
 			User.class.getName());
 
@@ -89,7 +89,6 @@ public class IndexerPostProcessorRegistryTest {
 			userGroupIndexerPostProcessors[0];
 
 		assertNotNull(userGroupIndexerPostProcessor);
-
 		assertEquals(userIndexerPostProcessor, userGroupIndexerPostProcessor);
 	}
 
@@ -120,24 +119,26 @@ public class IndexerPostProcessorRegistryTest {
 			mbThreadIndexerPostProcessors[0];
 
 		assertNotNull(mbThreadIndexerPostProcessor);
-
 		assertEquals(
 			mbMessageIndexerPostProcessor, mbThreadIndexerPostProcessor);
 	}
 
 	@Test
-	public void testNumOfIndexerPostProcessors() throws Exception {
+	public void testIndexerPostProcessorsSize() throws Exception {
 		Field serviceTrackerField = ReflectionUtil.getDeclaredField(
 			IndexerPostProcessorRegistry.class, "_serviceTracker");
 
 		ServiceTracker<?, ?> serviceTracker =
-			(ServiceTracker<?, ?>)serviceTrackerField.get(_registry);
+			(ServiceTracker<?, ?>)serviceTrackerField.get(
+				_indexerPostProcessorRegistry);
+			
+		Object[] services = serviceTracker.getServices();
 
-		assertEquals(4, serviceTracker.getServices().length);
+		assertEquals(4, services.length);
 	}
 
 	@Test
-	public void testSingleEntityIndexerPostProcessor() throws Exception {
+	public void testSingleModelIndexerPostProcessor() throws Exception {
 		Indexer contactIndexer = IndexerRegistryUtil.getIndexer(
 			Contact.class.getName());
 
@@ -168,6 +169,6 @@ public class IndexerPostProcessorRegistryTest {
 		assertNotNull(blogsIndexerPostProcessor);
 	}
 
-	private static IndexerPostProcessorRegistry _registry;
+	private static IndexerPostProcessorRegistry _indexerPostProcessorRegistry;
 
 }
