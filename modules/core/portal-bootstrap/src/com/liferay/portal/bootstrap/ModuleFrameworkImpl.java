@@ -703,9 +703,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		try {
 			if (!location.startsWith("file:")) {
-				location = "file:".concat(
-					PropsValues.MODULE_FRAMEWORK_BASE_DIR.concat(
-						"/static/").concat(location));
+				location =
+					"file:" + PropsValues.MODULE_FRAMEWORK_BASE_DIR +
+						"/static/" + location);
 			}
 
 			URL initialBundleURL = new URL(location);
@@ -774,7 +774,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 			if (ignoredClass.equals(interfaceClassName) ||
 				(ignoredClass.endsWith(StringPool.STAR) &&
-				interfaceClassName.startsWith(
+				 interfaceClassName.startsWith(
 					ignoredClass.substring(0, ignoredClass.length() - 1)))) {
 
 				return true;
