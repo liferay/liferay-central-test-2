@@ -129,13 +129,13 @@ page import="javax.portlet.PortletURL" %>
 <portlet:defineObjects />
 
 <%
-AssetPublisherDisplayContext assetPublisherDisplayContext = new AssetPublisherDisplayContext(request, portletPreferences);
-
-Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
+
+AssetPublisherDisplayContext assetPublisherDisplayContext = new AssetPublisherDisplayContext(request, portletPreferences);
+
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%@ include file="/init-ext.jsp" %>
