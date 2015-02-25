@@ -24,8 +24,8 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.sso.token.configuration.TokenBasedConfiguration;
-import com.liferay.portal.sso.token.constants.TokenBasedPropsKeys;
+import com.liferay.portal.sso.token.configuration.TokenConfiguration;
+import com.liferay.portal.sso.token.constants.TokenPropsKeys;
 import com.liferay.portal.sso.token.spi.LogoutProcessor;
 import com.liferay.portal.sso.token.spi.LogoutProcessorType;
 import com.liferay.portal.util.PortalUtil;
@@ -49,11 +49,11 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.token.configuration.TokenBasedConfiguration",
+	configurationPid = "com.liferay.portal.sso.token.configuration.TokenConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {"key=logout.events.post"}, service = LifecycleAction.class
 )
-public class TokenBasedLogoutAction extends Action {
+public class TokenLogoutAction extends Action {
 
 	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
@@ -61,7 +61,7 @@ public class TokenBasedLogoutAction extends Action {
 			long companyId = PortalUtil.getCompanyId(request);
 
 			if (!PrefsPropsUtil.getBoolean(
-					companyId, TokenBasedPropsKeys.ENABLED,
+					companyId, TokenPropsKeys.ENABLED,
 					_tokenBasedConfiguration.enabled())) {
 
 				return;
@@ -102,7 +102,7 @@ public class TokenBasedLogoutAction extends Action {
 	@Modified
 	protected void activate(Map<String, Object> properties) {
 		_tokenBasedConfiguration = Configurable.createConfigurable(
-			TokenBasedConfiguration.class, properties);
+			TokenConfiguration.class, properties);
 	}
 
 	@Reference(
@@ -120,10 +120,10 @@ public class TokenBasedLogoutAction extends Action {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		TokenBasedLogoutAction.class);
+		TokenLogoutAction.class);
 
 	private final Map<LogoutProcessorType, LogoutProcessor> _logoutProcessors =
 		new ConcurrentHashMap<>();
-	private volatile TokenBasedConfiguration _tokenBasedConfiguration;
+	private volatile TokenConfiguration _tokenBasedConfiguration;
 
 }

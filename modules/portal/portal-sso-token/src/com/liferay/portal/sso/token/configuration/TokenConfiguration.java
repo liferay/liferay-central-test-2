@@ -20,10 +20,10 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.token.configuration.TokenBasedConfiguration",
+	id = "com.liferay.portal.sso.token.configuration.TokenConfiguration",
 	localization = "content.Language"
 )
-public interface TokenBasedConfiguration {
+public interface TokenConfiguration {
 
 	@Meta.AD(deflt ="SMIDENTITY,SMSESSION", required = false)
 	public String authenticationCookies();

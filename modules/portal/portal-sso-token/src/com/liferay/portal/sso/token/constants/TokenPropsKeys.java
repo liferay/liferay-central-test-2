@@ -17,7 +17,7 @@ package com.liferay.portal.sso.token.constants;
 /**
  * @author Michael C. Han
  */
-public class TokenBasedPropsKeys {
+public class TokenPropsKeys {
 
 	public static final String ENABLED = "enabled";
 

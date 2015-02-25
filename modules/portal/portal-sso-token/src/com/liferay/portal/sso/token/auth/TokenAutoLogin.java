@@ -28,8 +28,8 @@ import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.BaseAutoLogin;
 import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.sso.token.configuration.TokenBasedConfiguration;
-import com.liferay.portal.sso.token.constants.TokenBasedPropsKeys;
+import com.liferay.portal.sso.token.configuration.TokenConfiguration;
+import com.liferay.portal.sso.token.constants.TokenPropsKeys;
 import com.liferay.portal.sso.token.spi.TokenLocation;
 import com.liferay.portal.sso.token.spi.TokenRetriever;
 import com.liferay.portal.util.PortalUtil;
@@ -54,17 +54,17 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.token.configuration.TokenBasedConfiguration",
+	configurationPid = "com.liferay.portal.sso.token.configuration.TokenConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	service = AutoLogin.class
 )
-public class TokenBasedAutoLogin extends BaseAutoLogin {
+public class TokenAutoLogin extends BaseAutoLogin {
 
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
 		_tokenBasedConfiguration = Configurable.createConfigurable(
-			TokenBasedConfiguration.class, properties);
+			TokenConfiguration.class, properties);
 	}
 
 	@Override
@@ -75,14 +75,14 @@ public class TokenBasedAutoLogin extends BaseAutoLogin {
 		long companyId = PortalUtil.getCompanyId(request);
 
 		if (!PrefsPropsUtil.getBoolean(
-				companyId, TokenBasedPropsKeys.ENABLED,
+				companyId, TokenPropsKeys.ENABLED,
 			_tokenBasedConfiguration.enabled())) {
 
 			return null;
 		}
 
 		String userTokenName = PrefsPropsUtil.getString(
-			companyId, TokenBasedPropsKeys.USER_TOKEN_NAME,
+			companyId, TokenPropsKeys.USER_TOKEN_NAME,
 			_tokenBasedConfiguration.userTokenName());
 
 		TokenLocation tokenLocation = TokenLocation.valueOf(
@@ -136,7 +136,7 @@ public class TokenBasedAutoLogin extends BaseAutoLogin {
 		User user = null;
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, TokenBasedPropsKeys.IMPORT_FROM_LDAP,
+				companyId, TokenPropsKeys.IMPORT_FROM_LDAP,
 				_tokenBasedConfiguration.importFromLDAP())) {
 
 			try {
@@ -191,9 +191,9 @@ public class TokenBasedAutoLogin extends BaseAutoLogin {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		TokenBasedAutoLogin.class);
+		TokenAutoLogin.class);
 
-	private volatile TokenBasedConfiguration _tokenBasedConfiguration;
+	private volatile TokenConfiguration _tokenBasedConfiguration;
 	private final Map<TokenLocation, TokenRetriever> _tokenRetrievers =
 		new ConcurrentHashMap<>();
 
