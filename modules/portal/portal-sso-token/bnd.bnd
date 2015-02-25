@@ -1,6 +1,3 @@
-Bundle-Description: Implmentation of Liferay Portal SSO integration \
-	that works with token based SSO solutions like Shibboleth, \
-	OAM, Siteminder
 Bundle-Name: Liferay Portal SSO Token
 Bundle-SymbolicName: com.liferay.portal.sso.token
 Bundle-Version: 1.0.0
