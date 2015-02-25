@@ -39,11 +39,11 @@ public abstract class BasePortletToolbarContributorLocator
 	public List<PortletToolbarContributor> getPortletToolbarContributors(
 		String portletId, PortletRequest portletRequest) {
 
-		String parameter = ParamUtil.getString(
+		String value = ParamUtil.getString(
 			portletRequest, getParameterName(), "-");
 
 		List<PortletToolbarContributor> portletToolbarContributors =
-			_serviceTrackerMap.getService(getKey(portletId, parameter));
+			_serviceTrackerMap.getService(getKey(portletId, value));
 
 		if (ListUtil.isEmpty(portletToolbarContributors)) {
 			portletToolbarContributors = _serviceTrackerMap.getService(
@@ -66,10 +66,10 @@ public abstract class BasePortletToolbarContributorLocator
 
 					String portletName = (String)serviceReference.getProperty(
 						"javax.portlet.name");
-					String propertyValue = (String)serviceReference.getProperty(
+					String value = (String)serviceReference.getProperty(
 						getPropertyName());
 
-					emitter.emit(getKey(portletName, propertyValue));
+					emitter.emit(getKey(portletName, value));
 				}
 
 			});
@@ -81,14 +81,14 @@ public abstract class BasePortletToolbarContributorLocator
 		_serviceTrackerMap.close();
 	}
 
-	protected String getKey(String portletId, String propertyValue) {
+	protected String getKey(String portletId, String value) {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(portletId);
 		sb.append(StringPool.PERIOD);
 		sb.append(getPropertyName());
 		sb.append(StringPool.PERIOD);
-		sb.append(propertyValue);
+		sb.append(value);
 
 		return sb.toString();
 	}
