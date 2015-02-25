@@ -295,13 +295,6 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.asset.categories.navigation.web"
 		},
 		new String[] {
-			"asset.tags.navigation.display.templates.config",
-			"display.templates.config", "com.liferay.asset.tags.web"
-		},
-
-		// Asset Publisher
-
-		new String[] {
 			"asset.publisher.check.interval", "check.interval",
 			"com.liferay.asset.publisher.web"
 		},
@@ -353,6 +346,10 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"asset.publisher.search.with.index", "search.with.index",
 			"com.liferay.asset.publisher.web"
+		},
+		new String[] {
+			"asset.tags.navigation.display.templates.config",
+			"display.templates.config", "com.liferay.asset.tags.web"
 		},
 
 		// Bookmarks
