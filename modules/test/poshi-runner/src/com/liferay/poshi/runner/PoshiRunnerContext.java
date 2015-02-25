@@ -74,7 +74,7 @@ public class PoshiRunnerContext {
 	}
 
 	public static String getFilePath(String fileName) {
-		return _filePathMap.get(fileName);
+		return _filePaths.get(fileName);
 	}
 
 	public static Element getFunctionCommandElement(String classCommandName) {
@@ -166,7 +166,7 @@ public class PoshiRunnerContext {
 			String locator = locatorElement.getText();
 
 			if (locatorKey.equals("EXTEND_ACTION_PATH")) {
-				for (String extendFilePath : _filePathArray) {
+				for (String extendFilePath : _filePathsArray) {
 					if (extendFilePath.endsWith("/" + locator + ".path")) {
 						extendFilePath = _BASE_DIR + "/" + extendFilePath;
 
@@ -195,9 +195,9 @@ public class PoshiRunnerContext {
 
 		directoryScanner.scan();
 
-		_filePathArray = directoryScanner.getIncludedFiles();
+		_filePathsArray = directoryScanner.getIncludedFiles();
 
-		for (String filePath : _filePathArray) {
+		for (String filePath : _filePathsArray) {
 			filePath = _BASE_DIR + "/" + filePath;
 
 			String className = PoshiRunnerGetterUtil.getClassNameFromFilePath(
@@ -205,7 +205,7 @@ public class PoshiRunnerContext {
 			String classType = PoshiRunnerGetterUtil.getClassTypeFromFilePath(
 				filePath);
 
-			_filePathMap.put(className + "." + classType, filePath);
+			_filePaths.put(className + "." + classType, filePath);
 
 			if (classType.equals("action") || classType.equals("function") ||
 				classType.equals("macro") || classType.equals("testcase")) {
@@ -318,8 +318,8 @@ public class PoshiRunnerContext {
 		new HashMap<>();
 	private static final Map<String, Element> _commandElements =
 		new HashMap<>();
-	private static String[] _filePathArray;
-	private static final Map<String, String> _filePathMap = new HashMap<>();
+	private static String[] _filePathsArray;
+	private static final Map<String, String> _filePaths = new HashMap<>();
 	private static final Map<String, Integer> _functionLocatorCounts =
 		new HashMap<>();
 	private static final Map<String, String> _pathLocators = new HashMap<>();
