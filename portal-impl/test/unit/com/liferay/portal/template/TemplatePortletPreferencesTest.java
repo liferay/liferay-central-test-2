@@ -76,7 +76,7 @@ public class TemplatePortletPreferencesTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_executorService = Executors.newFixedThreadPool(_NUM_THREADS);
+		_executorService = Executors.newFixedThreadPool(_THREADS_SIZE);
 
 		_templatePortletPreferences = new TemplatePortletPreferences();
 	}
@@ -90,9 +90,9 @@ public class TemplatePortletPreferencesTest {
 	public void testSetValue() throws Exception {
 		Callable<String> callable = new TemplateCallable();
 
-		List<Future<String>> futures = new ArrayList<>(_NUM_THREADS);
+		List<Future<String>> futures = new ArrayList<>(_THREADS_SIZE);
 
-		for (int i = 0; i < _NUM_THREADS; i++) {
+		for (int i = 0; i < _THREADS_SIZE; i++) {
 			futures.add(_executorService.submit(callable));
 		}
 
@@ -109,12 +109,12 @@ public class TemplatePortletPreferencesTest {
 		}
 	}
 
-	private static final int _NUM_THREADS;
+	private static final int _THREADS_SIZE;
 
 	static {
 		Runtime runtime = Runtime.getRuntime();
 
-		_NUM_THREADS = runtime.availableProcessors();
+		_THREADS_SIZE = runtime.availableProcessors();
 	}
 
 	private ExecutorService _executorService;
