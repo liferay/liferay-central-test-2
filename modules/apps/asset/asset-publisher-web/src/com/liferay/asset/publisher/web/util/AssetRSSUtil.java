@@ -190,8 +190,8 @@ public class AssetRSSUtil {
 			portletPreferences.getValue("rssDelta", "20"));
 
 		return AssetPublisherUtil.getAssetEntries(
-				portletPreferences, themeDisplay.getLayout(),
-				themeDisplay.getScopeGroupId(), rssDelta, true);
+			portletPreferences, themeDisplay.getLayout(),
+			themeDisplay.getScopeGroupId(), rssDelta, true);
 	}
 
 	protected static String getAssetPublisherURL(PortletRequest portletRequest)
