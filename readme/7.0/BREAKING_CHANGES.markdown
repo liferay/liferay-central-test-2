@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `d8fd00d`.*
+*This document has been reviewed through commit `334abf3`.*
 
 ## Breaking Changes Contribution Guidelines
 
