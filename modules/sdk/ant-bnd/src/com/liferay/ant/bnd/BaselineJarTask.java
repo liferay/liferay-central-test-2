@@ -203,7 +203,7 @@ public class BaselineJarTask extends BaseBndTask {
 		if ((_file == null) || !_file.exists() || _file.isDirectory()) {
 			if (_file != null) {
 				project.log(
-					"file is either missing or is a directory " +
+					"File is either missing or is a directory " +
 						_file.getAbsolutePath(),
 					Project.MSG_ERR);
 			}
@@ -306,17 +306,17 @@ public class BaselineJarTask extends BaseBndTask {
 
 		Jar[] jars = builder.builds();
 
-		// Report both task failures and bnd build failures
+		// Report both task failures and BND build failures
 
 		boolean taskFailed = report();
 		boolean bndFailed = report(builder);
 
-		// Fail this build if failure is not ok and either the task failed or
-		// the bnd build failed
+		// Fail this build if failure is not acceptable and either the task
+		// failed or the BND build failed
 
 		if (taskFailed || bndFailed) {
 			throw new BuildException(
-				"bnd failed",
+				"BND failed",
 				new org.apache.tools.ant.Location(_file.getAbsolutePath()));
 		}
 
