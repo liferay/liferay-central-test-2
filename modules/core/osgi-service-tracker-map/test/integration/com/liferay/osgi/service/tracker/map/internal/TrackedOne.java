@@ -20,6 +20,7 @@ package com.liferay.osgi.service.tracker.map.internal;
 public class TrackedOne {
 
 	public TrackedOne() {
+		_key = null;
 	}
 
 	public TrackedOne(String key) {
