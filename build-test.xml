@@ -3459,7 +3459,7 @@ app.server.tomcat.dir=${app.server.parent.dir}/tomcat-7.0.27</echo>
 					app.server.jboss.version=6.1.0
 					app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.1
 					app.server.jboss.zip.name=jboss-eap-6.1.0.zip
-					app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/jboss-eap-6.1.0.zip
+					app.server.jboss.zip.url=http://www.jboss.org/jbossas/downloads/jboss-eap-6.1.0.zip
 				</app-server-properties-update>
 
 				<antcall target="prepare-test-bundle">

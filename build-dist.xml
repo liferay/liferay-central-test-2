@@ -142,7 +142,7 @@
 			app.server.jboss.version=6.0.1
 			app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.0
 			app.server.jboss.zip.name=jboss-eap-6.0.1.zip
-			app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/jboss-eap-6.0.1.zip
+			app.server.jboss.zip.url=http://www.jboss.org/jbossas/downloads/jboss-eap-6.0.1.zip
 		</app-server-properties-update>
 
 		<antcall target="unzip-jboss" inheritAll="false" />
@@ -168,7 +168,7 @@
 			app.server.jboss.version=6.1.0
 			app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.1
 			app.server.jboss.zip.name=jboss-eap-6.1.0.zip
-			app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/jboss-eap-6.1.0.zip
+			app.server.jboss.zip.url=http://www.jboss.org/jbossas/downloads/jboss-eap-6.1.0.zip
 		</app-server-properties-update>
 
 		<antcall target="unzip-jboss" inheritAll="false" />
@@ -2218,21 +2218,16 @@ this task.
 
 	<target name="unzip-weblogic-original">
 		<if>
-			<matches pattern="http://mirrors" string="${app.server.weblogic.zip.url}" />
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.weblogic.zip.name}" />
+			</not>
 			<then>
-				<if>
-					<not>
-						<available file="${app.server.parent.dir}/${app.server.weblogic.zip.name}" />
-					</not>
-					<then>
-						<mkdir dir="${app.server.parent.dir}" />
+				<mkdir dir="${app.server.parent.dir}" />
 
-						<mirrors-get
-							dest="${app.server.parent.dir}"
-							src="${app.server.weblogic.zip.url}"
-						/>
-					</then>
-				</if>
+				<mirrors-get
+					dest="${app.server.parent.dir}"
+					src="${app.server.weblogic.zip.url}"
+				/>
 			</then>
 		</if>
 
