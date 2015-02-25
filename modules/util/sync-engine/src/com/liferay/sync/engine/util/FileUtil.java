@@ -479,6 +479,10 @@ public class FileUtil {
 	}
 
 	public static void writeFileKey(Path filePath, String fileKey) {
+		if (!Files.exists(filePath)) {
+			return;
+		}
+
 		if (OSDetector.isApple()) {
 			Xattrj xattrj = getXattrj();
 
