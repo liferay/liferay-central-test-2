@@ -63,33 +63,17 @@ public class IndexerPostProcessorRegistryTest {
 	}
 
 	@Test
-	public void testMultipleModelIndexerPostProcessors() throws Exception {
-		Indexer userIndexer = IndexerRegistryUtil.getIndexer(
-			User.class.getName());
+	public void testIndexerPostProcessorsSize() throws Exception {
+		Field serviceTrackerField = ReflectionUtil.getDeclaredField(
+			IndexerPostProcessorRegistry.class, "_serviceTracker");
 
-		IndexerPostProcessor[] userIndexerPostProcessors =
-			userIndexer.getIndexerPostProcessors();
+		ServiceTracker<?, ?> serviceTracker =
+			(ServiceTracker<?, ?>)serviceTrackerField.get(
+				_indexerPostProcessorRegistry);
 
-		assertEquals(1, userIndexerPostProcessors.length);
+		Object[] services = serviceTracker.getServices();
 
-		IndexerPostProcessor userIndexerPostProcessor =
-			userIndexerPostProcessors[0];
-
-		assertNotNull(userIndexerPostProcessor);
-
-		Indexer userGroupIndexer = IndexerRegistryUtil.getIndexer(
-			UserGroup.class.getName());
-
-		IndexerPostProcessor[] userGroupIndexerPostProcessors =
-			userGroupIndexer.getIndexerPostProcessors();
-
-		assertEquals(1, userGroupIndexerPostProcessors.length);
-
-		IndexerPostProcessor userGroupIndexerPostProcessor =
-			userGroupIndexerPostProcessors[0];
-
-		assertNotNull(userGroupIndexerPostProcessor);
-		assertEquals(userIndexerPostProcessor, userGroupIndexerPostProcessor);
+		assertEquals(4, services.length);
 	}
 
 	@Test
@@ -124,33 +108,33 @@ public class IndexerPostProcessorRegistryTest {
 	}
 
 	@Test
-	public void testIndexerPostProcessorsSize() throws Exception {
-		Field serviceTrackerField = ReflectionUtil.getDeclaredField(
-			IndexerPostProcessorRegistry.class, "_serviceTracker");
+	public void testMultipleModelIndexerPostProcessors() throws Exception {
+		Indexer userIndexer = IndexerRegistryUtil.getIndexer(
+			User.class.getName());
 
-		ServiceTracker<?, ?> serviceTracker =
-			(ServiceTracker<?, ?>)serviceTrackerField.get(
-				_indexerPostProcessorRegistry);
-			
-		Object[] services = serviceTracker.getServices();
+		IndexerPostProcessor[] userIndexerPostProcessors =
+			userIndexer.getIndexerPostProcessors();
 
-		assertEquals(4, services.length);
-	}
+		assertEquals(1, userIndexerPostProcessors.length);
 
-	@Test
-	public void testSingleModelIndexerPostProcessor() throws Exception {
-		Indexer contactIndexer = IndexerRegistryUtil.getIndexer(
-			Contact.class.getName());
+		IndexerPostProcessor userIndexerPostProcessor =
+			userIndexerPostProcessors[0];
 
-		IndexerPostProcessor[] contactIndexerPostProcessors =
-			contactIndexer.getIndexerPostProcessors();
+		assertNotNull(userIndexerPostProcessor);
 
-		assertEquals(1, contactIndexerPostProcessors.length);
+		Indexer userGroupIndexer = IndexerRegistryUtil.getIndexer(
+			UserGroup.class.getName());
 
-		IndexerPostProcessor contactIndexerPostProcessor =
-			contactIndexerPostProcessors[0];
+		IndexerPostProcessor[] userGroupIndexerPostProcessors =
+			userGroupIndexer.getIndexerPostProcessors();
 
-		assertNotNull(contactIndexerPostProcessor);
+		assertEquals(1, userGroupIndexerPostProcessors.length);
+
+		IndexerPostProcessor userGroupIndexerPostProcessor =
+			userGroupIndexerPostProcessors[0];
+
+		assertNotNull(userGroupIndexerPostProcessor);
+		assertEquals(userIndexerPostProcessor, userGroupIndexerPostProcessor);
 	}
 
 	@Test
@@ -167,6 +151,22 @@ public class IndexerPostProcessorRegistryTest {
 			blogIndexerPostProcessors[0];
 
 		assertNotNull(blogsIndexerPostProcessor);
+	}
+
+	@Test
+	public void testSingleModelIndexerPostProcessor() throws Exception {
+		Indexer contactIndexer = IndexerRegistryUtil.getIndexer(
+			Contact.class.getName());
+
+		IndexerPostProcessor[] contactIndexerPostProcessors =
+			contactIndexer.getIndexerPostProcessors();
+
+		assertEquals(1, contactIndexerPostProcessors.length);
+
+		IndexerPostProcessor contactIndexerPostProcessor =
+			contactIndexerPostProcessors[0];
+
+		assertNotNull(contactIndexerPostProcessor);
 	}
 
 	private static IndexerPostProcessorRegistry _indexerPostProcessorRegistry;
