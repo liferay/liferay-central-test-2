@@ -109,8 +109,13 @@ public class TemplatePortletPreferencesTest {
 		}
 	}
 
-	private static final int _NUM_THREADS =
-		Runtime.getRuntime().availableProcessors();
+	private static final int _NUM_THREADS;
+
+	static {
+		Runtime runtime = Runtime.getRuntime();
+
+		_NUM_THREADS = runtime.availableProcessors();
+	}
 
 	private ExecutorService _executorService;
 	private TemplatePortletPreferences _templatePortletPreferences;
