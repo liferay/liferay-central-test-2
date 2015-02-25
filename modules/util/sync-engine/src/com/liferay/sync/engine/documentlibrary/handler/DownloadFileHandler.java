@@ -98,10 +98,9 @@ public class DownloadFileHandler extends BaseHandler {
 
 	@Override
 	public boolean handlePortalException(String exception) throws Exception {
-		boolean isNoSuchFileVersionException = exception.equals(
-			"com.liferay.portlet.documentlibrary.NoSuchFileVersionException");
-
-		if (isNoSuchFileVersionException &&
+		if (exception.equals(
+				"com.liferay.portlet.documentlibrary." +
+					"NoSuchFileVersionException") &&
 			(Boolean)getParameterValue("patch")) {
 
 			if (_logger.isDebugEnabled()) {
