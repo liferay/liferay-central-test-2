@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
@@ -63,7 +64,7 @@ public class TokenAutoLogin extends BaseAutoLogin {
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_tokenBasedConfiguration = Configurable.createConfigurable(
+		_tokenConfiguration = Configurable.createConfigurable(
 			TokenConfiguration.class, properties);
 	}
 
@@ -76,23 +77,23 @@ public class TokenAutoLogin extends BaseAutoLogin {
 
 		if (!PrefsPropsUtil.getBoolean(
 				companyId, TokenPropsKeys.ENABLED,
-			_tokenBasedConfiguration.enabled())) {
+			_tokenConfiguration.enabled())) {
 
 			return null;
 		}
 
 		String userTokenName = PrefsPropsUtil.getString(
 			companyId, TokenPropsKeys.USER_TOKEN_NAME,
-			_tokenBasedConfiguration.userTokenName());
+			_tokenConfiguration.userTokenName());
 
 		TokenLocation tokenLocation = TokenLocation.valueOf(
-			_tokenBasedConfiguration.tokenLocation());
+			_tokenConfiguration.tokenLocation());
 
 		TokenRetriever tokenRetriever = _tokenRetrievers.get(tokenLocation);
 
 		if (tokenRetriever == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No TokenRetriever defined for : " + tokenLocation);
+				_log.warn("No token retriever found for " + tokenLocation);
 			}
 
 			return null;
@@ -100,7 +101,7 @@ public class TokenAutoLogin extends BaseAutoLogin {
 
 		String login = tokenRetriever.getLoginToken(request, userTokenName);
 
-		User user = _retrieveUser(companyId, login);
+		User user = getUser(companyId, login);
 
 		addRedirect(request);
 
@@ -126,18 +127,18 @@ public class TokenAutoLogin extends BaseAutoLogin {
 		_tokenRetrievers.remove(tokenRetriever.getTokenLocation());
 	}
 
-	private User _retrieveUser(long companyId, String login)
+	protected User getUser(long companyId, String login)
 		throws PortalException {
+
+		User user = null;
 
 		String authType = PrefsPropsUtil.getString(
 			companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
 			PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
-		User user = null;
-
 		if (PrefsPropsUtil.getBoolean(
 				companyId, TokenPropsKeys.IMPORT_FROM_LDAP,
-				_tokenBasedConfiguration.importFromLDAP())) {
+				_tokenConfiguration.importFromLDAP())) {
 
 			try {
 				if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
@@ -150,18 +151,23 @@ public class TokenAutoLogin extends BaseAutoLogin {
 				}
 				else {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Incompatible setting for: " +
-								PropsKeys.COMPANY_SECURITY_AUTH_TYPE +
-								". Please configure to either: " +
-								CompanyConstants.AUTH_TYPE_EA + " or " +
-								CompanyConstants.AUTH_TYPE_SN);
+						StringBundler sb = new StringBundler();
+
+						sb.append("The property \"");
+						sb.append(PropsKeys.COMPANY_SECURITY_AUTH_TYPE);
+						sb.append("\" must be set to either \"");
+						sb.append(CompanyConstants.AUTH_TYPE_EA);
+						sb.append("\" or \"");
+						sb.append(CompanyConstants.AUTH_TYPE_SN);
+						sb.append("\"");
+
+						_log.warn(sb.toString());
 					}
 				}
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Cannot import from LDAP", e);
+					_log.warn("Unable to import from LDAP", e);
 				}
 			}
 		}
@@ -193,7 +199,7 @@ public class TokenAutoLogin extends BaseAutoLogin {
 	private static final Log _log = LogFactoryUtil.getLog(
 		TokenAutoLogin.class);
 
-	private volatile TokenConfiguration _tokenBasedConfiguration;
+	private volatile TokenConfiguration _tokenConfiguration;
 	private final Map<TokenLocation, TokenRetriever> _tokenRetrievers =
 		new ConcurrentHashMap<>();
 
