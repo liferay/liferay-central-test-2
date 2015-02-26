@@ -114,19 +114,6 @@ public class TokenAutoLogin extends BaseAutoLogin {
 		return credentials;
 	}
 
-	@Reference(
-		cardinality = ReferenceCardinality.AT_LEAST_ONE,
-		policy = ReferencePolicy.DYNAMIC,
-		policyOption = ReferencePolicyOption.GREEDY
-	)
-	protected void setTokenRetriever(TokenRetriever tokenRetriever) {
-		_tokenRetrievers.put(tokenRetriever.getTokenLocation(), tokenRetriever);
-	}
-
-	protected void unsetTokenRetriever(TokenRetriever tokenRetriever) {
-		_tokenRetrievers.remove(tokenRetriever.getTokenLocation());
-	}
-
 	protected User getUser(long companyId, String login)
 		throws PortalException {
 
@@ -196,8 +183,20 @@ public class TokenAutoLogin extends BaseAutoLogin {
 		return user;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		TokenAutoLogin.class);
+	@Reference(
+		cardinality = ReferenceCardinality.AT_LEAST_ONE,
+		policy = ReferencePolicy.DYNAMIC,
+		policyOption = ReferencePolicyOption.GREEDY
+	)
+	protected void setTokenRetriever(TokenRetriever tokenRetriever) {
+		_tokenRetrievers.put(tokenRetriever.getTokenLocation(), tokenRetriever);
+	}
+
+	protected void unsetTokenRetriever(TokenRetriever tokenRetriever) {
+		_tokenRetrievers.remove(tokenRetriever.getTokenLocation());
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(TokenAutoLogin.class);
 
 	private volatile TokenConfiguration _tokenConfiguration;
 	private final Map<TokenLocation, TokenRetriever> _tokenRetrievers =
