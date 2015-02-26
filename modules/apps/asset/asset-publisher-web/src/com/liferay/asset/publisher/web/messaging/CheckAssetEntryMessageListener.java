@@ -127,7 +127,8 @@ public class CheckAssetEntryMessageListener
 	}
 
 	@Reference
-	protected void setPortlet(AssetPublisherPortlet assetPublisherPortlet) {
+	protected void setAssetPublisherPortlet(
+		AssetPublisherPortlet assetPublisherPortlet) {
 	}
 
 	private SchedulerEntry _schedulerEntry;
