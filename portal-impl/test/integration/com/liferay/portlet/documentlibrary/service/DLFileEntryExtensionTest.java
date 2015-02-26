@@ -198,51 +198,51 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 	@Test
 	public void testAddFileEntryBasic01() throws Exception {
-		doTestAddFileEntryBasic(_FILE_NAME, "Test.pdf", "txt", "Test.pdf.txt");
+		testAddFileEntryBasic(_FILE_NAME, "Test.pdf", "txt", "Test.pdf.txt");
 	}
 
 	@Test
 	public void testAddFileEntryBasic02() throws Exception {
-		doTestAddFileEntryBasic(_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
+		testAddFileEntryBasic(_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic03() throws Exception {
-		doTestAddFileEntryBasic(
+		testAddFileEntryBasic(
 			_FILE_NAME, _STRIPPED_FILE_NAME, "txt", _FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic04() throws Exception {
-		doTestAddFileEntryBasic(_FILE_NAME, "", "txt", _FILE_NAME);
+		testAddFileEntryBasic(_FILE_NAME, "", "txt", _FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic05() throws Exception {
-		doTestAddFileEntryBasic(
+		testAddFileEntryBasic(
 			_STRIPPED_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic06() throws Exception {
-		doTestAddFileEntryBasic(
+		testAddFileEntryBasic(
 			_STRIPPED_FILE_NAME, _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic07() throws Exception {
-		doTestAddFileEntryBasic(
+		testAddFileEntryBasic(
 			_STRIPPED_FILE_NAME, "", "", _STRIPPED_FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic08() throws Exception {
-		doTestAddFileEntryBasic("", _FILE_NAME, "txt", _FILE_NAME);
+		testAddFileEntryBasic("", _FILE_NAME, "txt", _FILE_NAME);
 	}
 
 	@Test
 	public void testAddFileEntryBasic09() throws Exception {
-		doTestAddFileEntryBasic(
+		testAddFileEntryBasic(
 			"", _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
 	}
 
@@ -480,7 +480,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 			RandomTestUtil.randomBytes(), serviceContext);
 	}
 
-	protected void doTestAddFileEntryBasic(
+	protected void testAddFileEntryBasic(
 			String sourceFileName, String title, String extension,
 			String titleWithExtension)
 		throws Exception {
