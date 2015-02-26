@@ -63,7 +63,7 @@ public class SyncAccountService {
 				syncAccountId);
 
 			for (SyncSite syncSite : syncSites) {
-				syncSite.setRemoteSyncTime(0);
+				syncSite.setRemoteSyncTime(-1);
 
 				SyncSiteService.update(syncSite);
 			}
@@ -121,6 +121,7 @@ public class SyncAccountService {
 					FileUtil.getFilePathName(
 						syncAccount.getFilePathName(), syncSiteName));
 
+				syncSite.setRemoteSyncTime(-1);
 				syncSite.setSyncAccountId(syncAccount.getSyncAccountId());
 
 				SyncSiteService.update(syncSite);
