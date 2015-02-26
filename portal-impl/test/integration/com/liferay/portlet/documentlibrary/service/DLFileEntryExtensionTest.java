@@ -231,8 +231,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 	@Test
 	public void testAddFileEntryBasic07() throws Exception {
-		testAddFileEntryBasic(
-			_STRIPPED_FILE_NAME, "", "", _STRIPPED_FILE_NAME);
+		testAddFileEntryBasic(_STRIPPED_FILE_NAME, "", "", _STRIPPED_FILE_NAME);
 	}
 
 	@Test
@@ -242,8 +241,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 	@Test
 	public void testAddFileEntryBasic09() throws Exception {
-		testAddFileEntryBasic(
-			"", _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
+		testAddFileEntryBasic("", _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
 	}
 
 	@Test
