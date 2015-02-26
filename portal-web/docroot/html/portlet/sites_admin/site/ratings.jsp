@@ -105,7 +105,7 @@ CompanyPortletRatingsDefinitionDisplayContext companyPortletRatingsDefinitionDis
 	form.on(
 		'submit',
 		function(event) {
-			if (ratingsTypeChanged && !confirm('<%= UnicodeLanguageUtil.get(request, "if-there-is-existing-ratings-data-those-values-will-be-adapted-to-match-the-new-ratings-type-although-this-may-not-be-accurate") %>')) {
+			if (ratingsTypeChanged && !confirm('<%= UnicodeLanguageUtil.get(request, "existing-ratings-data-values-will-be-adapted-to-match-the-new-ratings-type-even-though-it-may-not-be-accurate") %>')) {
 				event.preventDefault();
 
 				event.stopImmediatePropagation();
