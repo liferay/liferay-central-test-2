@@ -94,7 +94,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		}
 		catch (Throwable t) {
 			if (_log.isInfoEnabled()) {
-				_log.info(t, t);
+				_log.info(t);
 			}
 		}
 
@@ -114,7 +114,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		}
 		catch (Throwable t) {
 			if (_log.isInfoEnabled()) {
-				_log.info(t, t);
+				_log.info(t);
 			}
 		}
 
@@ -133,7 +133,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		}
 		catch (Throwable t) {
 			if (_log.isInfoEnabled()) {
-				_log.info(t, t);
+				_log.info(t);
 			}
 		}
 
@@ -155,7 +155,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		}
 		catch (Throwable t) {
 			if (_log.isInfoEnabled()) {
-				_log.info(t, t);
+				_log.info(t);
 			}
 		}
 
@@ -175,7 +175,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		}
 		catch (Throwable t) {
 			if (_log.isInfoEnabled()) {
-				_log.info(t, t);
+				_log.info(t);
 			}
 		}
 
@@ -218,7 +218,7 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		}
 		catch (Throwable t) {
 			if (_log.isInfoEnabled()) {
-				_log.info(t, t);
+				_log.info(t);
 			}
 		}
 
