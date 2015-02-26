@@ -20,8 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.token.configuration.TokenConfiguration",
-	localization = "content.Language"
+	id = "com.liferay.portal.sso.token.configuration.TokenConfiguration"
 )
 public interface TokenConfiguration {
 
