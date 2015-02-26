@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.util.block.function;
+package com.liferay.portalweb.functions;
 
 import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
 
