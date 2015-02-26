@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.sso.token.configuration.TokenConfiguration;
 import com.liferay.portal.sso.token.constants.TokenPropsKeys;
-import com.liferay.portal.sso.token.spi.LogoutProcessor;
-import com.liferay.portal.sso.token.spi.LogoutProcessorType;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Map;

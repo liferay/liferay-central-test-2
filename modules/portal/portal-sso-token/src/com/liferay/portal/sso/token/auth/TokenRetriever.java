@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.token.spi;
+package com.liferay.portal.sso.token.auth;
 
 import javax.servlet.http.HttpServletRequest;
 

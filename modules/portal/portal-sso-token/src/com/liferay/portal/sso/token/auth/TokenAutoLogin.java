@@ -31,8 +31,6 @@ import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.sso.token.configuration.TokenConfiguration;
 import com.liferay.portal.sso.token.constants.TokenPropsKeys;
-import com.liferay.portal.sso.token.spi.TokenLocation;
-import com.liferay.portal.sso.token.spi.TokenRetriever;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 

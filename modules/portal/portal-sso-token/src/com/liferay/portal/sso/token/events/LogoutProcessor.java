@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.token.spi;
+package com.liferay.portal.sso.token.events;
 
 import java.io.IOException;
 

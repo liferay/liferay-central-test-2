@@ -14,9 +14,6 @@
 
 package com.liferay.portal.sso.token.auth;
 
-import com.liferay.portal.sso.token.spi.TokenLocation;
-import com.liferay.portal.sso.token.spi.TokenRetriever;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

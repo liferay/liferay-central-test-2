@@ -17,8 +17,6 @@ package com.liferay.portal.sso.token.events;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.sso.token.spi.LogoutProcessor;
-import com.liferay.portal.sso.token.spi.LogoutProcessorType;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.sso.token.spi;
+package com.liferay.portal.sso.token.auth;
 
 /**
  * @author Michael C. Han
  */
-public enum LogoutProcessorType {
+public enum TokenLocation {
 
-	COOKIE, REDIRECT
+	COOKIE, REQUEST, REQUEST_HEADER, SESSION
 
 }
