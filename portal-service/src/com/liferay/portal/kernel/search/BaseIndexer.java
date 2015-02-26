@@ -278,9 +278,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	@Override
-	public String getQueryString(SearchContext searchContext, Query query)
-		throws SearchException {
-
+	public String getQueryString(SearchContext searchContext, Query query) {
 		return SearchEngineUtil.getQueryString(searchContext, query);
 	}
 

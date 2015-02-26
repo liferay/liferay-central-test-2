@@ -91,9 +91,7 @@ public class DummyIndexer implements Indexer {
 	}
 
 	@Override
-	public String getQueryString(SearchContext searchContext, Query query)
-		throws SearchException {
-
+	public String getQueryString(SearchContext searchContext, Query query) {
 		return StringPool.BLANK;
 	}
 

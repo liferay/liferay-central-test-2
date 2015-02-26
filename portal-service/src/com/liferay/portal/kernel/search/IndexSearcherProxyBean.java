@@ -47,9 +47,7 @@ public class IndexSearcherProxyBean
 	}
 
 	@Override
-	public String getQueryString(SearchContext searchContext, Query query)
-		throws ParseException {
-
+	public String getQueryString(SearchContext searchContext, Query query) {
 		throw new UnsupportedOperationException();
 	}
 
