@@ -195,12 +195,6 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 		mockHttpServletRequest.setAttribute(
 			WebKeys.USER_ID, TestPropsValues.getUserId());
 
-		when(
-			portletRequest.getHttpServletRequest()
-		).thenReturn(
-			mockHttpServletRequest
-		);
-
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		themeDisplay.setLocale(LocaleUtil.getDefault());
@@ -209,6 +203,12 @@ public class ExportImportLifecycleEventTest extends PowerMockito {
 			portletRequest.getAttribute(WebKeys.THEME_DISPLAY)
 		).thenReturn(
 			themeDisplay
+		);
+
+		when(
+			portletRequest.getHttpServletRequest()
+		).thenReturn(
+			mockHttpServletRequest
 		);
 
 		try {
