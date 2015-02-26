@@ -386,7 +386,7 @@ public class SearchEngineUtil {
 		try {
 			return indexSearcher.getQueryString(searchContext, query);
 		}
-		catch (ParseException e) {
+		catch (ParseException pe) {
 		}
 
 		return StringPool.BLANK;
