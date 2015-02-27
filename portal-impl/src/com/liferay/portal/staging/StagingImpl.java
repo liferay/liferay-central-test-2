@@ -269,8 +269,7 @@ public class StagingImpl implements Staging {
 			String portletId)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		long userId = PortalUtil.getUserId(portletRequest);
 
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
@@ -279,13 +278,15 @@ public class StagingImpl implements Staging {
 			portletRequest, sourceGroupId, false, sourcePlid, portletId,
 			ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE);
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
-				themeDisplay.getUserId(), sourceGroupId, sourcePlid,
-				targetGroupId, targetPlid, portletId, parameterMap,
-				Constants.PUBLISH_TO_LIVE, dateRange.getStartDate(),
-				dateRange.getEndDate(), themeDisplay.getLocale(),
-				themeDisplay.getTimeZone());
+				userId, sourceGroupId, sourcePlid, targetGroupId, targetPlid,
+				portletId, parameterMap, Constants.PUBLISH_TO_LIVE,
+				dateRange.getStartDate(), dateRange.getEndDate(),
+				themeDisplay.getLocale(), themeDisplay.getTimeZone());
 
 		ServiceContext serviceContext = new ServiceContext();
 
