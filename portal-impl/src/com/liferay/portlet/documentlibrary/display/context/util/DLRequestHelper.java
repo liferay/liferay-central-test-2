@@ -38,9 +38,11 @@ public class DLRequestHelper extends BaseRequestHelper {
 				String portletId = getPortletId();
 
 				if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+					HttpServletRequest request = getRequest();
+
 					_dlGroupServiceSettings =
 						DLGroupServiceSettings.getInstance(
-							getScopeGroupId(), getRequest().getParameterMap());
+							getScopeGroupId(), request.getParameterMap());
 				}
 				else {
 					_dlGroupServiceSettings =
@@ -61,10 +63,12 @@ public class DLRequestHelper extends BaseRequestHelper {
 				String portletId = getPortletId();
 
 				if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+					HttpServletRequest request = getRequest();
+
 					_dlPortletInstanceSettings =
 						DLPortletInstanceSettings.getInstance(
 							getLayout(), getResourcePortletId(),
-							getRequest().getParameterMap());
+							request.getParameterMap());
 				}
 				else {
 					_dlPortletInstanceSettings =

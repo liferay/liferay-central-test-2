@@ -23,7 +23,7 @@ import java.util.Map;
  * @author Iván Zaera
  */
 public interface PortletInstanceSettingsProvider
-		<T extends PortletInstanceSettings> {
+	<T extends PortletInstanceSettings> {
 
 	public T getPortletInstanceSettings(Layout layout, String portletId)
 		throws PortalException;
