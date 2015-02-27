@@ -92,15 +92,15 @@ public abstract class BaseTestCase {
 		SyncAccountService.update(syncAccount);
 
 		PowerMockito.stub(
-			PowerMockito.method(SyncEngine.class, "isRunning")
-		).toReturn(
-			true
-		);
-
-		PowerMockito.stub(
 			PowerMockito.method(SyncEngine.class, "getExecutorService")
 		).toReturn(
 			Executors.newCachedThreadPool()
+		);
+
+		PowerMockito.stub(
+			PowerMockito.method(SyncEngine.class, "isRunning")
+		).toReturn(
+			true
 		);
 	}
 
