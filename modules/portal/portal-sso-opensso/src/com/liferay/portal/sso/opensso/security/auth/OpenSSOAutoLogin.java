@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.opensso.auth;
+package com.liferay.portal.sso.opensso.security.auth;
 
 import aQute.bnd.annotation.metatype.Configurable;
 

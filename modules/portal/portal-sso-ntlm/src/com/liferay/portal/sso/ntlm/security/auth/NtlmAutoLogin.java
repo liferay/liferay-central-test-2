@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.ntlm.auth;
+package com.liferay.portal.sso.ntlm.security.auth;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
