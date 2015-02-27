@@ -524,7 +524,7 @@ public class MailEngine {
 	private static String _sanitizeCRLF(String text) {
 		return StringUtil.replace(
 			text, new String[] {StringPool.NEW_LINE, StringPool.RETURN},
-			new String[]{StringPool.SPACE, StringPool.SPACE});
+			new String[] {StringPool.SPACE, StringPool.SPACE});
 	}
 
 	private static void _send(
