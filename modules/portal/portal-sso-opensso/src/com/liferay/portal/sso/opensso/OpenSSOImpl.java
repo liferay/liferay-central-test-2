@@ -50,6 +50,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(immediate = true, service = OpenSSO.class)
 public class OpenSSOImpl implements OpenSSO {
 
+	@Override
 	public Map<String, String> getAttributes(
 		HttpServletRequest request, String serviceUrl) {
 
@@ -224,12 +225,14 @@ public class OpenSSOImpl implements OpenSSO {
 		return cookieNames;
 	}
 
+	@Override
 	public String getSubjectId(HttpServletRequest request, String serviceUrl) {
 		String cookieName = getCookieNames(serviceUrl)[0];
 
 		return CookieKeys.getCookie(request, cookieName);
 	}
 
+	@Override
 	public boolean isAuthenticated(
 			HttpServletRequest request, String serviceUrl)
 		throws IOException {
@@ -294,6 +297,7 @@ public class OpenSSOImpl implements OpenSSO {
 		return authenticated;
 	}
 
+	@Override
 	public boolean isValidServiceUrl(String serviceUrl) {
 		if (Validator.isNull(serviceUrl)) {
 			return false;
@@ -308,6 +312,7 @@ public class OpenSSOImpl implements OpenSSO {
 		return true;
 	}
 
+	@Override
 	public boolean isValidUrl(String url) {
 		if (Validator.isNull(url)) {
 			return false;
@@ -351,6 +356,7 @@ public class OpenSSOImpl implements OpenSSO {
 		return true;
 	}
 
+	@Override
 	public boolean isValidUrls(String[] urls) {
 		for (String url : urls) {
 			if (!isValidUrl(url)) {
