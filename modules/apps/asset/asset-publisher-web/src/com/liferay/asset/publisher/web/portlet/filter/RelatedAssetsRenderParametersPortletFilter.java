@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.relatedassets.filter;
+package com.liferay.asset.publisher.web.portlet.filter;
 
 import com.liferay.portal.kernel.servlet.DynamicServletRequest;
 import com.liferay.portal.theme.ThemeDisplay;
