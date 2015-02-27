@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.token.auth;
+package com.liferay.portal.sso.token.security.auth;
 
 /**
  * @author Michael C. Han

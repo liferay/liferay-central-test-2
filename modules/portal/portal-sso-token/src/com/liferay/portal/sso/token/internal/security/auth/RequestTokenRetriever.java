@@ -12,18 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.sso.token.auth;
+package com.liferay.portal.sso.token.internal.security.auth;
+
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.sso.token.security.auth.TokenLocation;
+import com.liferay.portal.sso.token.security.auth.TokenRetriever;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Michael C. Han
  */
-public interface TokenRetriever {
+@Component(immediate = true, service = TokenRetriever.class)
+public class RequestTokenRetriever implements TokenRetriever {
 
+	@Override
 	public String getLoginToken(
-		HttpServletRequest request, String userTokenName);
+		HttpServletRequest request, String userTokenName) {
 
-	public TokenLocation getTokenLocation();
+		return ParamUtil.getString(request, userTokenName);
+	}
+
+	@Override
+	public TokenLocation getTokenLocation() {
+		return TokenLocation.REQUEST;
+	}
 
 }

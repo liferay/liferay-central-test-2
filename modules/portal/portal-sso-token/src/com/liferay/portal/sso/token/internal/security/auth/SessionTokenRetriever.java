@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.sso.token.internal.auth;
+package com.liferay.portal.sso.token.internal.security.auth;
 
-import com.liferay.portal.sso.token.auth.TokenLocation;
-import com.liferay.portal.sso.token.auth.TokenRetriever;
+import com.liferay.portal.sso.token.security.auth.TokenLocation;
+import com.liferay.portal.sso.token.security.auth.TokenRetriever;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
