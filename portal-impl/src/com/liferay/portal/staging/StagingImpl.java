@@ -292,8 +292,7 @@ public class StagingImpl implements Staging {
 		ExportImportConfiguration exportImportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
 				addExportImportConfiguration(
-					themeDisplay.getUserId(), sourceGroupId, portletId,
-					StringPool.BLANK,
+					userId, sourceGroupId, portletId, StringPool.BLANK,
 					ExportImportConfigurationConstants.TYPE_IMPORT_PORTLET,
 					settingsMap, WorkflowConstants.STATUS_DRAFT,
 					serviceContext);
@@ -306,7 +305,7 @@ public class StagingImpl implements Staging {
 			exportImportConfiguration.getExportImportConfigurationId());
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTask(
-			themeDisplay.getUserId(), exportImportConfiguration.getGroupId(),
+			userId, exportImportConfiguration.getGroupId(),
 			exportImportConfiguration.getName(), null,
 			PortletStagingBackgroundTaskExecutor.class, taskContextMap,
 			serviceContext);
