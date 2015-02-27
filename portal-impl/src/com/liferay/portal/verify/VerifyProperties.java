@@ -669,7 +669,7 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.sso.opensso"
 		},
 		new String[] {
-			"login.url", "login.url", "com.liferay.portal.sso.opensso"
+			"open.sso.login.url", "login.url", "com.liferay.portal.sso.opensso"
 		},
 		new String[] {
 			"open.sso.logout.on.session.expiration",
