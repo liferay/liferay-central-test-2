@@ -143,7 +143,7 @@
 
 				<bndexpand propertyfile="${project.dir}/common.bnd" />
 
-				<bnd eclipse="false" failok="false" exceptions="true" inherit="true" output="${jar.file}.jar">
+				<bnd eclipse="false" exceptions="true" failok="false" inherit="true" output="${jar.file}.jar">
 					<property name="-sourcepath" value="." />
 					<classpath>
 						<pathelement location="classes" />
