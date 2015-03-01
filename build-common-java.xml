@@ -144,15 +144,15 @@
 				<bndexpand propertyfile="${project.dir}/common.bnd" />
 
 				<bnd eclipse="false" exceptions="true" failok="false" inherit="true" output="${jar.file}.jar">
-					<property name="-sourcepath" value="." />
+					<bndfiles>
+						<fileset dir=".">
+							<include name="bnd.bnd" />
+						</fileset>
+					</bndfiles>
 					<classpath>
 						<pathelement location="classes" />
 					</classpath>
-					<bndfiles>
-						<fileset dir=".">
-							<include name="bnd.bnd"/>
-						</fileset>
-					</bndfiles>
+					<property name="-sourcepath" value="." />
 				</bnd>
 			</then>
 			<else>
