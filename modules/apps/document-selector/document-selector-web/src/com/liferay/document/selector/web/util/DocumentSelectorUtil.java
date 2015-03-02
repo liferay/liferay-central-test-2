@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.documentselector.web.util;
+package com.liferay.document.selector.web.util;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;

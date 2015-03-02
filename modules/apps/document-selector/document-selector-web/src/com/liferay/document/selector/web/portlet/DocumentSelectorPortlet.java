@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.documentselector.web.portlet;
+package com.liferay.document.selector.web.portlet;
 
-import com.liferay.documentselector.web.util.DocumentSelectorUtil;
+import com.liferay.document.selector.web.util.DocumentSelectorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

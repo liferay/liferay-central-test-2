@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.documentselector.web.constants;
+package com.liferay.document.selector.web.constants;
 
 /**
  * @author Jose A. Jimenez
@@ -20,6 +20,6 @@ package com.liferay.documentselector.web.constants;
 public class DocumentSelectorPortletKeys {
 
 	public static final String DOCUMENT_SELECTOR =
-		"com_liferay_documentselector_web_portlet_DocumentSelectorPortlet";
+		"com_liferay_document_selector_web_portlet_DocumentSelectorPortlet";
 
 }

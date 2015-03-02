@@ -25,7 +25,7 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.documentselector.web.util.DocumentSelectorUtil" %><%@
+<%@ page import="com.liferay.document.selector.web.util.DocumentSelectorUtil" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.configuration.Filter" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@

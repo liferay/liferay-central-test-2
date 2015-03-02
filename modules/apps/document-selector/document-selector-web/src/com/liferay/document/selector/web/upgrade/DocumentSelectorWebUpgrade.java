@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.documentselector.web.upgrade;
+package com.liferay.document.selector.web.upgrade;
 
-import com.liferay.documentselector.web.constants.DocumentSelectorPortletKeys;
+import com.liferay.document.selector.web.constants.DocumentSelectorPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -61,7 +61,7 @@ public class DocumentSelectorWebUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.documentselector.web",
+			"com.liferay.document.selector.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 0,
 			false);
 	}
