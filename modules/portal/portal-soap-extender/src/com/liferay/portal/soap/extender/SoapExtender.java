@@ -340,9 +340,7 @@ public class SoapExtender {
 			catch (Throwable t) {
 				_bundleContext.ungetService(serviceReference);
 
-				if (_logger.isErrorEnabled()) {
-					_logger.error(t.getMessage(), t);
-				}
+				_logger.error(t.getMessage(), t);
 
 				return null;
 			}
@@ -366,14 +364,19 @@ public class SoapExtender {
 			ServiceReference<Object> serviceReference,
 			ServerTrackingInformation serverTrackingInformation) {
 
-			serverTrackingInformation.getServer().destroy();
+			Server server = serverTrackingInformation.getServer();
+			
+			server.destroy();
 
-			serverTrackingInformation.getServiceTracker().close();
+			ServiceTracker<Handler<?>, Handler<?>> serviceTracker =
+				serverTrackingInformation.getServiceTracker();
+			
+			serviceTracker.close();
 
 			_bundleContext.ungetService(serviceReference);
 		}
 
-		private Map<String, Object> getPropertiesAsMap(
+		protected Map<String, Object> getPropertiesAsMap(
 			ServiceReference<Object> serviceReference) {
 
 			String[] propertyKeys = serviceReference.getPropertyKeys();
@@ -389,31 +392,30 @@ public class SoapExtender {
 			return properties;
 		}
 
-		private ServiceTracker<Handler<?>, Handler<?>> trackHandlers(
+		protected ServiceTracker<Handler<?>, Handler<?>> trackHandlers(
 			String address, final Server server) {
 
-			String handlersFilterString =
+			String filterString =
 				"(&(objectClass=" + Handler.class.getName() +
 					")(soap.address=" + address + "))";
 
-			Filter handlersFilter;
+			Filter filter = null;
 
 			try {
-				handlersFilter = _bundleContext.createFilter(
-					handlersFilterString);
+				filter = _bundleContext.createFilter(filterString);
 			}
 			catch (InvalidSyntaxException ise) {
 				throw new RuntimeException(ise);
 			}
 
-			ServiceTracker<Handler<?>, Handler<?>> handlerServiceTracker =
+			ServiceTracker<Handler<?>, Handler<?>> serviceTracker =
 				new ServiceTracker<>(
-					_bundleContext, handlersFilter,
+					_bundleContext, filter,
 					new HandlerServiceTrackerCustomizer(server));
 
-			handlerServiceTracker.open();
+			serviceTracker.open();
 
-			return handlerServiceTracker;
+			return serviceTracker;
 		}
 
 		private final Bus _bus;
