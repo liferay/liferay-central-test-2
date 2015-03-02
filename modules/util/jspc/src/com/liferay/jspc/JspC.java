@@ -43,8 +43,8 @@ public class JspC extends org.apache.jasper.JspC {
 	}
 
 	@Override
-	public void scanFiles(File base) throws JasperException {
-		super.scanFiles(base);
+	public void scanFiles(File baseDir) throws JasperException {
+		super.scanFiles(baseDir);
 
 		Iterator<String> iterator = pages.iterator();
 
