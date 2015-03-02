@@ -68,10 +68,12 @@ public class SoapExtender {
 
 	protected void registerCXFServlet(Bus bus, String contextPath) {
 		Dictionary<String, Object> properties = new Hashtable<>();
+		
+		Class<?> clazz = getClass();
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME,
-			_CONTEXT_NAME);
+			clazz.getName());
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH, contextPath);
 
@@ -84,7 +86,7 @@ public class SoapExtender {
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			_CONTEXT_NAME);
+			clazz.getName());
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME, "CXFServlet");
 		properties.put(
@@ -138,7 +140,7 @@ public class SoapExtender {
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Unable to unregister CXF servlet " +
+					"Unable to unregister servlet " +
 						_servletServiceRegistration);
 			}
 		}
@@ -154,8 +156,6 @@ public class SoapExtender {
 			}
 		}
 	}
-
-	private static final String _CONTEXT_NAME = "LIFERAY_CXF_CONTEXT";
 
 	private static final Logger _logger = LoggerFactory.getLogger(
 		SoapExtender.class);
