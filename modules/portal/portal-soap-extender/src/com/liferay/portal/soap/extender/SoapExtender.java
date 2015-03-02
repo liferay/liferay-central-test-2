@@ -150,12 +150,12 @@ public class SoapExtender {
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, "/*");
 
-		CXFNonSpringServlet cxfServlet = new CXFNonSpringServlet();
+		CXFNonSpringServlet cxfNonSpringServlet = new CXFNonSpringServlet();
 
-		cxfServlet.setBus(bus);
+		cxfNonSpringServlet.setBus(bus);
 
 		_servletServiceRegistration = _bundleContext.registerService(
-			Servlet.class, cxfServlet, properties);
+			Servlet.class, cxfNonSpringServlet, properties);
 	}
 
 	private static final String _CONTEXT_NAME = "LIFERAY_CXF_CONTEXT";
