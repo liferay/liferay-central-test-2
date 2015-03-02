@@ -1211,19 +1211,19 @@ public class ThreadPoolExecutorTest {
 	}
 
 	@Test
-	public void testTerminationFuture() throws InterruptedException {
+	public void testTerminationNoticeableFuture() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
 
-		NoticeableFuture<Void> terminationFutute =
-			threadPoolExecutor.terminationFuture();
+		NoticeableFuture<Void> terminationNoticeableFutute =
+			threadPoolExecutor.terminationNoticeableFuture();
 
-		Assert.assertFalse(terminationFutute.isDone());
-		Assert.assertFalse(terminationFutute.cancel(true));
+		Assert.assertFalse(terminationNoticeableFutute.isDone());
+		Assert.assertFalse(terminationNoticeableFutute.cancel(true));
 
 		final AtomicBoolean marker = new AtomicBoolean();
 
-		terminationFutute.addFutureListener(
+		terminationNoticeableFutute.addFutureListener(
 			new FutureListener<Void>() {
 
 				@Override
@@ -1237,7 +1237,7 @@ public class ThreadPoolExecutorTest {
 
 		Assert.assertTrue(
 			threadPoolExecutor.awaitTermination(1, TimeUnit.SECONDS));
-		Assert.assertTrue(terminationFutute.isDone());
+		Assert.assertTrue(terminationNoticeableFutute.isDone());
 		Assert.assertTrue(marker.get());
 	}
 
