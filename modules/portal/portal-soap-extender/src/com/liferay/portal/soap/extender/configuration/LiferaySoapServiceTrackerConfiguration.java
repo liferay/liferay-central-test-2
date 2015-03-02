@@ -15,7 +15,6 @@
 package com.liferay.portal.soap.extender.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
-import aQute.bnd.annotation.metatype.Meta.AD;
 
 /**
  * @author Carlos Sierra Andrés
@@ -23,12 +22,12 @@ import aQute.bnd.annotation.metatype.Meta.AD;
 @Meta.OCD(id = "com.liferay.portal.soap.extender")
 public interface LiferaySoapServiceTrackerConfiguration {
 
-	@AD(
+	@Meta.AD(
 		deflt = "/soap", required = false
 	)
 	public String contextPath();
 
-	@AD(name = "soap.extensions", required = false)
+	@Meta.AD(name = "soap.extensions", required = false)
 	public String[] extensions();
 
 }
