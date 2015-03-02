@@ -16,7 +16,7 @@ package com.liferay.portal.soap.extender.configuration;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
-import com.liferay.portal.soap.extender.LiferaySoapServiceTracker;
+import com.liferay.portal.soap.extender.SoapExtender;
 
 import org.apache.felix.dm.DependencyManager;
 import org.apache.felix.dm.ServiceDependency;
@@ -51,8 +51,8 @@ public class LiferaySoapServiceTrackerConfigAdmin {
 
 		ExtensionManager extensionManager = new ExtensionManager();
 
-		LiferaySoapServiceTracker liferaySoapServiceTracker =
-			new LiferaySoapServiceTracker(
+		SoapExtender liferaySoapServiceTracker =
+			new SoapExtender(
 				componentContext.getBundleContext(),
 				_liferaySoapServiceTrackerConfiguration.contextPath(),
 				extensionManager);

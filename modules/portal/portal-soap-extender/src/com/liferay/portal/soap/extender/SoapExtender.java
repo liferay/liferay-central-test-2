@@ -51,9 +51,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Carlos Sierra Andrés
  */
-public class LiferaySoapServiceTracker {
+public class SoapExtender {
 
-	public LiferaySoapServiceTracker(
+	public SoapExtender(
 		BundleContext bundleContext, String contextPath,
 		ExtensionManager extensionManager) {
 
@@ -160,7 +160,7 @@ public class LiferaySoapServiceTracker {
 	private static final String _CONTEXT_NAME = "LIFERAY_CXF_CONTEXT";
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		LiferaySoapServiceTracker.class);
+		SoapExtender.class);
 
 	private final BundleContext _bundleContext;
 	private final String _contextPath;
