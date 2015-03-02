@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.jspc;
+package com.liferay.jasper.jspc;
 
 import java.io.File;
 
