@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Modified;
 	configurationPid = "com.liferay.portal.soap.extender.SoapExtenderConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true
 )
-public class LiferaySoapServiceTrackerConfigAdmin {
+public class SoapExtenderConfigurationAdmin {
 
 	@Activate
 	protected void activate(final ComponentContext componentContext) {
