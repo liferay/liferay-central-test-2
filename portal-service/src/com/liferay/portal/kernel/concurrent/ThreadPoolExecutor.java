@@ -625,12 +625,12 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 	private final DefaultNoticeableFuture<Void>
 		_terminationDefaultNoticeableFuture =
 			new DefaultNoticeableFuture<Void>() {
-	
+
 				@Override
 				public boolean cancel(boolean mayInterruptIfRunning) {
 					return false;
 				}
-	
+
 			};
 
 	private volatile ThreadFactory _threadFactory;
