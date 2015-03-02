@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Carlos Sierra Andrés
  */
 @Component(
-	configurationPid = "com.liferay.portal.soap.extender",
+	configurationPid = "com.liferay.portal.soap.extender.SoapExtenderConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true
 )
 public class LiferaySoapServiceTrackerConfigAdmin {
@@ -44,7 +44,7 @@ public class LiferaySoapServiceTrackerConfigAdmin {
 
 		_liferaySoapServiceTrackerConfiguration =
 			Configurable.createConfigurable(
-				LiferaySoapServiceTrackerConfiguration.class,
+				SoapExtenderConfiguration.class,
 				componentContext.getProperties());
 
 		_component = dependencyManager.createComponent();
@@ -95,7 +95,7 @@ public class LiferaySoapServiceTrackerConfigAdmin {
 	}
 
 	private org.apache.felix.dm.Component _component;
-	private LiferaySoapServiceTrackerConfiguration
+	private SoapExtenderConfiguration
 		_liferaySoapServiceTrackerConfiguration;
 
 }

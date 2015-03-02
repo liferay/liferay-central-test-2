@@ -19,8 +19,8 @@ import aQute.bnd.annotation.metatype.Meta;
 /**
  * @author Carlos Sierra Andrés
  */
-@Meta.OCD(id = "com.liferay.portal.soap.extender")
-public interface LiferaySoapServiceTrackerConfiguration {
+@Meta.OCD(id = "com.liferay.portal.soap.extender.SoapExtenderConfiguration")
+public interface SoapExtenderConfiguration {
 
 	@Meta.AD(
 		deflt = "/soap", required = false
