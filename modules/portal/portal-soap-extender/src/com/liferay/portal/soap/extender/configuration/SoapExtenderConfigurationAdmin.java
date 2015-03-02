@@ -43,8 +43,7 @@ public class SoapExtenderConfigurationAdmin {
 			componentContext.getBundleContext());
 
 		_soapExtenderConfiguration = Configurable.createConfigurable(
-			SoapExtenderConfiguration.class,
-			componentContext.getProperties());
+			SoapExtenderConfiguration.class, componentContext.getProperties());
 
 		_component = dependencyManager.createComponent();
 

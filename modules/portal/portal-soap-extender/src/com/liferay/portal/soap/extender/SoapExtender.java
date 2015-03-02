@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
+
 import javax.xml.namespace.QName;
 import javax.xml.ws.Binding;
 import javax.xml.ws.handler.Handler;
@@ -34,6 +35,7 @@ import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.apache.cxf.jaxws.support.JaxWsEndpointImpl;
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
@@ -45,6 +47,7 @@ import org.osgi.service.http.context.ServletContextHelper;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +63,45 @@ public class SoapExtender {
 		_bundleContext = bundleContext;
 		_contextPath = contextPath;
 		_extensionManager = extensionManager;
+	}
+
+	protected Bus createBus() {
+		CXFBusFactory cxfBusFactory = (CXFBusFactory)CXFBusFactory.newInstance(
+			CXFBusFactory.class.getName());
+
+		return cxfBusFactory.createBus(_extensionManager.getExtensions());
+	}
+
+	protected void registerCXFServlet(Bus bus, String contextPath) {
+		Dictionary<String, Object> properties = new Hashtable<>();
+
+		properties.put(
+			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME,
+			_CONTEXT_NAME);
+		properties.put(
+			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH, contextPath);
+
+		_servletContextHelperRegistration = _bundleContext.registerService(
+			ServletContextHelper.class,
+			new ServletContextHelper(_bundleContext.getBundle()) {},
+			properties);
+
+		properties = new Hashtable<>();
+
+		properties.put(
+			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
+			_CONTEXT_NAME);
+		properties.put(
+			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME, "CXFServlet");
+		properties.put(
+			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, "/*");
+
+		CXFNonSpringServlet cxfNonSpringServlet = new CXFNonSpringServlet();
+
+		cxfNonSpringServlet.setBus(bus);
+
+		_servletServiceRegistration = _bundleContext.registerService(
+			Servlet.class, cxfNonSpringServlet, properties);
 	}
 
 	protected void start() {
@@ -117,45 +159,6 @@ public class SoapExtender {
 						_serverServiceTracker);
 			}
 		}
-	}
-
-	protected Bus createBus() {
-		CXFBusFactory cxfBusFactory = (CXFBusFactory)CXFBusFactory.newInstance(
-			CXFBusFactory.class.getName());
-
-		return cxfBusFactory.createBus(_extensionManager.getExtensions());
-	}
-
-	protected void registerCXFServlet(Bus bus, String contextPath) {
-		Dictionary<String, Object> properties = new Hashtable<>();
-
-		properties.put(
-			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME,
-			_CONTEXT_NAME);
-		properties.put(
-			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH, contextPath);
-
-		_servletContextHelperRegistration = _bundleContext.registerService(
-			ServletContextHelper.class,
-			new ServletContextHelper(_bundleContext.getBundle()) {},
-			properties);
-
-		properties = new Hashtable<>();
-
-		properties.put(
-			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
-			_CONTEXT_NAME);
-		properties.put(
-			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME, "CXFServlet");
-		properties.put(
-			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, "/*");
-
-		CXFNonSpringServlet cxfNonSpringServlet = new CXFNonSpringServlet();
-
-		cxfNonSpringServlet.setBus(bus);
-
-		_servletServiceRegistration = _bundleContext.registerService(
-			Servlet.class, cxfNonSpringServlet, properties);
 	}
 
 	private static final String _CONTEXT_NAME = "LIFERAY_CXF_CONTEXT";
@@ -365,12 +368,12 @@ public class SoapExtender {
 			ServerTrackingInformation serverTrackingInformation) {
 
 			Server server = serverTrackingInformation.getServer();
-			
+
 			server.destroy();
 
 			ServiceTracker<Handler<?>, Handler<?>> serviceTracker =
 				serverTrackingInformation.getServiceTracker();
-			
+
 			serviceTracker.close();
 
 			_bundleContext.ungetService(serviceReference);
