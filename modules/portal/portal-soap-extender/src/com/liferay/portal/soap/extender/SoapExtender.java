@@ -63,18 +63,18 @@ public class SoapExtender {
 	}
 
 	protected void start() {
-		Bus bus = _createBus();
+		Bus bus = createBus();
 
 		BusFactory.setDefaultBus(bus);
 
-		_registerCXFServlet(bus, _contextPath);
+		registerCXFServlet(bus, _contextPath);
 
 		try {
-			Filter servicesFilter = _bundleContext.createFilter(
-				"(&(soap.address=*)(jaxws=true))");
+			Filter filter = _bundleContext.createFilter(
+				"(&(jaxws=true)(soap.address=*))");
 
 			_serverServiceTracker = new ServiceTracker<>(
-				_bundleContext, servicesFilter,
+				_bundleContext, filter,
 				new ServerServiceTrackerCustomizer(bus));
 		}
 		catch (InvalidSyntaxException ise) {
@@ -91,7 +91,8 @@ public class SoapExtender {
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Could not close servicetracker " + _serverServiceTracker);
+					"Unable to close server service tracker " +
+						_serverServiceTracker);
 			}
 		}
 
@@ -101,7 +102,7 @@ public class SoapExtender {
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Could not unregister CXF servlet " +
+					"Unable to unregister CXF servlet " +
 						_servletServiceRegistration);
 			}
 		}
@@ -112,20 +113,20 @@ public class SoapExtender {
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Could not unregister Servlet context " +
+					"Unable to unregister servlet context " +
 						_serverServiceTracker);
 			}
 		}
 	}
 
-	private Bus _createBus() {
-		CXFBusFactory busFactory = (CXFBusFactory)CXFBusFactory.newInstance(
+	protected Bus createBus() {
+		CXFBusFactory cxfBusFactory = (CXFBusFactory)CXFBusFactory.newInstance(
 			CXFBusFactory.class.getName());
 
-		return busFactory.createBus(_extensionManager.getExtensions());
+		return cxfBusFactory.createBus(_extensionManager.getExtensions());
 	}
 
-	private void _registerCXFServlet(Bus bus, String contextPath) {
+	protected void registerCXFServlet(Bus bus, String contextPath) {
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put(
