@@ -91,7 +91,6 @@ String[] mimeTypes = DocumentSelectorUtil.getMimeTypes(request);
 
 	<liferay-ui:error exception="<%= FileNameException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
-
 	<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
 
 	<liferay-ui:error exception="<%= SourceFileNameException.class %>">
