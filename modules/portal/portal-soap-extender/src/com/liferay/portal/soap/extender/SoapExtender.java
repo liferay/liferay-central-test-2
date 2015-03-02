@@ -77,10 +77,11 @@ public class SoapExtender {
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH, contextPath);
 
-		_servletContextHelperRegistration = _bundleContext.registerService(
-			ServletContextHelper.class,
-			new ServletContextHelper(_bundleContext.getBundle()) {},
-			properties);
+		_servletContextHelperServiceRegistration =
+			_bundleContext.registerService(
+				ServletContextHelper.class,
+				new ServletContextHelper(_bundleContext.getBundle()) {},
+				properties);
 
 		properties = new Hashtable<>();
 
@@ -140,19 +141,19 @@ public class SoapExtender {
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Unable to unregister servlet " +
+					"Unable to unregister servlet service registration " +
 						_servletServiceRegistration);
 			}
 		}
 
 		try {
-			_servletContextHelperRegistration.unregister();
+			_servletContextHelperServiceRegistration.unregister();
 		}
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Unable to unregister servlet context " +
-						_serverServiceTracker);
+					"Unable to unregister servlet context helper service " +
+						"registration " + _serverServiceTracker);
 			}
 		}
 	}
@@ -166,7 +167,7 @@ public class SoapExtender {
 	private ServiceTracker<Object, ServerTrackingInformation>
 		_serverServiceTracker;
 	private ServiceRegistration<ServletContextHelper>
-		_servletContextHelperRegistration;
+		_servletContextHelperServiceRegistration;
 	private ServiceRegistration<Servlet> _servletServiceRegistration;
 
 	private static class ServerTrackingInformation {
