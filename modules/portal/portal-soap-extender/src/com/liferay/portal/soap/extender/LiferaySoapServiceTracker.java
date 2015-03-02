@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
-
 import javax.xml.namespace.QName;
 import javax.xml.ws.Binding;
 import javax.xml.ws.handler.Handler;
@@ -35,7 +34,6 @@ import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.apache.cxf.jaxws.support.JaxWsEndpointImpl;
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
@@ -47,7 +45,6 @@ import org.osgi.service.http.context.ServletContextHelper;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -206,45 +203,47 @@ public class LiferaySoapServiceTracker {
 
 		@Override
 		public Handler<?> addingService(
-			ServiceReference<Handler<?>> reference) {
+			ServiceReference<Handler<?>> serviceReference) {
 
-			Handler<?> handler = _bundleContext.getService(reference);
+			Handler<?> handler = _bundleContext.getService(serviceReference);
 
 			JaxWsEndpointImpl jaxWsEndpoint =
 				(JaxWsEndpointImpl) _server.getEndpoint();
 
 			Binding binding = jaxWsEndpoint.getJaxwsBinding();
 
-			List<Handler> handlerChain = binding.getHandlerChain();
+			@SuppressWarnings("rawtypes")
+			List<Handler> handlers = binding.getHandlerChain();
 
-			handlerChain.add(handler);
+			handlers.add(handler);
 
-			binding.setHandlerChain(handlerChain);
+			binding.setHandlerChain(handlers);
 
 			return handler;
 		}
 
 		@Override
 		public void modifiedService(
-			ServiceReference<Handler<?>> reference, Handler<?> service) {
+			ServiceReference<Handler<?>> serviceReference, Handler<?> handler) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<Handler<?>> reference, Handler<?> handler) {
+			ServiceReference<Handler<?>> serviceReference, Handler<?> handler) {
 
 			JaxWsEndpointImpl jaxWsEndpoint =
-				(JaxWsEndpointImpl) _server.getEndpoint();
+				(JaxWsEndpointImpl)_server.getEndpoint();
 
 			Binding binding = jaxWsEndpoint.getJaxwsBinding();
 
-			List<Handler> handlerChain = binding.getHandlerChain();
+			@SuppressWarnings("rawtypes")
+			List<Handler> handlers = binding.getHandlerChain();
 
-			handlerChain.remove(handler);
+			handlers.remove(handler);
 
-			binding.setHandlerChain(handlerChain);
+			binding.setHandlerChain(handlers);
 
-			_bundleContext.ungetService(reference);
+			_bundleContext.ungetService(serviceReference);
 		}
 
 		private final Server _server;
