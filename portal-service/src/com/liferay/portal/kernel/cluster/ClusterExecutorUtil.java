@@ -66,7 +66,7 @@ public class ClusterExecutorUtil {
 
 		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterExecutorUtil has not been initialized");
+				_log.warn("ClusterExecutorUtil was not initialized");
 			}
 
 			return null;
