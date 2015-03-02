@@ -90,7 +90,7 @@ public class LiferaySoapServiceTrackerConfigAdmin {
 	}
 
 	private String _createExtensionFilter(String extensionName) {
-		return "(&(soap.cxf.extension=true)(soap.extension.name=" +
+		return "(&(soap.extension=true)(soap.extension.name=" +
 			extensionName + ")(soap.extension.class=*))";
 	}
 
