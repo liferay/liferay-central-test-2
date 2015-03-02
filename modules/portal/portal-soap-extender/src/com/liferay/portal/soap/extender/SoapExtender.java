@@ -267,12 +267,12 @@ public class SoapExtender {
 			JaxWsServerFactoryBean jaxWsServerFactoryBean =
 				new JaxWsServerFactoryBean();
 
+			jaxWsServerFactoryBean.setBus(_bus);
+
 			Map<String, Object> properties = getPropertiesAsMap(
 				serviceReference);
 
 			jaxWsServerFactoryBean.setProperties(properties);
-
-			jaxWsServerFactoryBean.setBus(_bus);
 
 			Object addressObject = serviceReference.getProperty("soap.address");
 
@@ -290,6 +290,8 @@ public class SoapExtender {
 
 				jaxWsServerFactoryBean.setEndpointName(endpointName);
 			}
+
+			jaxWsServerFactoryBean.setServiceBean(service);
 
 			Object serviceClassObject = serviceReference.getProperty(
 				"soap.service.class");
@@ -309,8 +311,6 @@ public class SoapExtender {
 				jaxWsServerFactoryBean.setWsdlLocation(
 					wsdlLocationObject.toString());
 			}
-
-			jaxWsServerFactoryBean.setServiceBean(service);
 
 			Thread thread = Thread.currentThread();
 
