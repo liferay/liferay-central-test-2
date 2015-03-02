@@ -68,7 +68,7 @@ public class SoapExtender {
 
 	protected void registerCXFServlet(Bus bus, String contextPath) {
 		Dictionary<String, Object> properties = new Hashtable<>();
-		
+
 		Class<?> clazz = getClass();
 
 		properties.put(
