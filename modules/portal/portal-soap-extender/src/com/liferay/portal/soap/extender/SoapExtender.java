@@ -281,7 +281,7 @@ public class SoapExtender {
 			jaxWsServerFactoryBean.setAddress(address);
 
 			Object endpointNameObject = serviceReference.getProperty(
-				"soap.endpointName");
+				"soap.endpoint.name");
 
 			if ((endpointNameObject != null) &&
 				endpointNameObject instanceof QName) {
@@ -292,7 +292,7 @@ public class SoapExtender {
 			}
 
 			Object serviceClassObject = serviceReference.getProperty(
-				"soap.serviceClass");
+				"soap.service.class");
 
 			if ((serviceClassObject != null) &&
 				serviceClassObject instanceof Class<?>) {
@@ -303,7 +303,7 @@ public class SoapExtender {
 			}
 
 			Object wsdlLocationObject = serviceReference.getProperty(
-				"soap.wsdlLocation");
+				"soap.wsdl.location");
 
 			if (wsdlLocationObject != null) {
 				jaxWsServerFactoryBean.setWsdlLocation(
