@@ -42,25 +42,21 @@ public class SoapExtenderConfigurationAdmin {
 		DependencyManager dependencyManager = new DependencyManager(
 			componentContext.getBundleContext());
 
-		_liferaySoapServiceTrackerConfiguration =
-			Configurable.createConfigurable(
-				SoapExtenderConfiguration.class,
-				componentContext.getProperties());
+		_soapExtenderConfiguration = Configurable.createConfigurable(
+			SoapExtenderConfiguration.class,
+			componentContext.getProperties());
 
 		_component = dependencyManager.createComponent();
 
 		ExtensionManager extensionManager = new ExtensionManager();
 
-		SoapExtender liferaySoapServiceTracker =
-			new SoapExtender(
-				componentContext.getBundleContext(),
-				_liferaySoapServiceTrackerConfiguration.contextPath(),
-				extensionManager);
+		SoapExtender soapExtender = new SoapExtender(
+			componentContext.getBundleContext(),
+			_soapExtenderConfiguration.contextPath(), extensionManager);
 
-		_component.setImplementation(liferaySoapServiceTracker);
+		_component.setImplementation(soapExtender);
 
-		String[] extensions =
-			_liferaySoapServiceTrackerConfiguration.extensions();
+		String[] extensions = _soapExtenderConfiguration.extensions();
 
 		if (extensions != null) {
 			for (String extension : extensions) {
@@ -95,7 +91,6 @@ public class SoapExtenderConfigurationAdmin {
 	}
 
 	private org.apache.felix.dm.Component _component;
-	private SoapExtenderConfiguration
-		_liferaySoapServiceTrackerConfiguration;
+	private SoapExtenderConfiguration _soapExtenderConfiguration;
 
 }
