@@ -423,11 +423,11 @@ public class LayoutStagedModelDataHandler
 
 				StringBundler sb = new StringBundler(6);
 
-				sb.append("Layout with layout id ");
+				sb.append("Layout with layout ID ");
 				sb.append(layout.getLayoutId());
-				sb.append(" cannot be propagated because the friendlyURL ");
-				sb.append("conflicts with the friendlyURL of layout with ");
-				sb.append("layout id ");
+				sb.append(" cannot be propagated because the friendly URL ");
+				sb.append("conflicts with the friendly URL of layout with ");
+				sb.append("layout ID ");
 				sb.append(mergeFailFriendlyURLLayout.getLayoutId());
 
 				_log.warn(sb.toString());
