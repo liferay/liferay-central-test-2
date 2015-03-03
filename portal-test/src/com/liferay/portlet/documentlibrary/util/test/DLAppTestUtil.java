@@ -112,7 +112,4 @@ public abstract class DLAppTestUtil {
 		return DLAppLocalServiceUtil.getFileEntry(fileEntry.getFileEntryId());
 	}
 
-	private static final String _CONTENT =
-		"Content: Enterprise. Open Source. For Life.";
-
 }
