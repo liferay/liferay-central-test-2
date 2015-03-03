@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.cluster.ClusterEvent;
 import com.liferay.portal.kernel.cluster.ClusterEventListener;
 import com.liferay.portal.kernel.cluster.ClusterEventType;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
-import com.liferay.portal.kernel.cluster.ClusterLink;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
@@ -393,7 +392,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 					boolean clusterForwardMessage = GetterUtil.getBoolean(
 						MessageValuesThreadLocal.getValue(
-							ClusterLink.CLUSTER_FORWARD_MESSAGE));
+							SKIP_LOAD_INDEX_FROM_CLUSTER));
 
 					if (clusterForwardMessage) {
 						if (_log.isInfoEnabled()) {
