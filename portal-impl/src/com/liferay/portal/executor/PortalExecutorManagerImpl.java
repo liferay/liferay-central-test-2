@@ -75,10 +75,10 @@ public class PortalExecutorManagerImpl implements PortalExecutorManager {
 			_threadPoolExecutors.putIfAbsent(name, threadPoolExecutor);
 
 		if (previousThreadPoolExecutor == null) {
-			NoticeableFuture<Void> tterminationNoticeableFuture =
+			NoticeableFuture<Void> terminationNoticeableFuture =
 				threadPoolExecutor.terminationNoticeableFuture();
 
-			tterminationNoticeableFuture .addFutureListener(
+			terminationNoticeableFuture.addFutureListener(
 				new UnregisterFutureListener(name));
 		}
 
