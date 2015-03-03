@@ -612,7 +612,7 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 
 			Assert.assertEquals(timestamp, clusterNodeResponse.getResult());
 
-			// Test 4, test threadlocal
+			// Test 4, test thread local
 
 			Assert.assertTrue(ClusterInvokeThreadLocal.isEnabled());
 
