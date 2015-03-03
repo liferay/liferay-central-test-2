@@ -44,7 +44,8 @@ import org.osgi.service.component.annotations.Modified;
  * @author Samuel Kong
  */
 @Component(
-	configurationPid = "com.liferay.xsl.content.web", immediate = true,
+	configurationPid = "com.liferay.xsl.content.web.configuration.XSLContentConfiguration",
+	immediate = true,
 	property = {
 		"javax.portlet.name=" + XSLContentPortletKeys.XSL_CONTENT,
 		"valid.url.prefixes=@portlet_context_url@"
