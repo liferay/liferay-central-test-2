@@ -585,11 +585,11 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 
 			// Test 2, invoke with exception
 
-			String timeStamp = String.valueOf(System.currentTimeMillis());
+			String timestamp = String.valueOf(System.currentTimeMillis());
 
 			clusterNodeResponse = clusterExecutorImpl.executeClusterRequest(
 				ClusterRequest.createMulticastRequest(
-					new MethodHandler(testMethod3MethodKey, timeStamp)));
+					new MethodHandler(testMethod3MethodKey, timestamp)));
 
 			try {
 				clusterNodeResponse.getResult();
@@ -599,18 +599,18 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 			catch (InvocationTargetException ite) {
 				Throwable throwable = ite.getTargetException();
 
-				Assert.assertEquals(timeStamp, throwable.getMessage());
+				Assert.assertEquals(timestamp, throwable.getMessage());
 			}
 
 			// Test 3, invoke without exception
 
-			timeStamp = String.valueOf(System.currentTimeMillis());
+			timestamp = String.valueOf(System.currentTimeMillis());
 
 			clusterNodeResponse = clusterExecutorImpl.executeClusterRequest(
 				ClusterRequest.createMulticastRequest(
-					new MethodHandler(testMethod1MethodKey, timeStamp)));
+					new MethodHandler(testMethod1MethodKey, timestamp)));
 
-			Assert.assertEquals(timeStamp, clusterNodeResponse.getResult());
+			Assert.assertEquals(timestamp, clusterNodeResponse.getResult());
 
 			// Test 4, test threadlocal
 
