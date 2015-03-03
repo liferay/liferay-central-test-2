@@ -42,8 +42,8 @@ public class MessageValuesThreadLocal {
 			return;
 		}
 
-		for (String key : messageValues.keySet()) {
-			message.put(key, messageValues.get(key));
+		for (Map.Entry<String, Object> entry : messageValues.entrySet()) {
+			message.put(entry.getKey(), entry.getValue());
 		}
 	}
 
@@ -80,7 +80,7 @@ public class MessageValuesThreadLocal {
 	}
 
 	private static final String _THREAD_LOCAL_KEY_PREFIX =
-		"_THREAD_LOCAL_KEY_PREFIX";
+		"_THREAD_LOCAL_KEY_PREFIX#";
 
 	private static final ThreadLocal<Map<String, Object>>
 		_messageValuesThreadLocal =

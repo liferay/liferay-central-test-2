@@ -390,11 +390,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 					indexAccessor = new SynchronizedIndexAccessorImpl(
 						indexAccessor);
 
-					boolean clusterForwardMessage = GetterUtil.getBoolean(
-						MessageValuesThreadLocal.getValue(
-							SKIP_LOAD_INDEX_FROM_CLUSTER));
+					if (GetterUtil.getBoolean(
+							MessageValuesThreadLocal.getValue(
+								SKIP_LOAD_INDEX_FROM_CLUSTER))) {
 
-					if (clusterForwardMessage) {
 						if (_log.isInfoEnabled()) {
 							_log.info(
 								"Skip Luncene index files cluster loading " +

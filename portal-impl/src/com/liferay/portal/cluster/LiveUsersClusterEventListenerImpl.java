@@ -44,11 +44,15 @@ public class LiveUsersClusterEventListenerImpl implements ClusterEventListener {
 
 		String command = null;
 
-		if (clusterEventType.equals(ClusterEventType.DEPART)) {
+		if (clusterEventType == ClusterEventType.DEPART) {
 			command = "removeClusterNode";
 		}
-		else if (clusterEventType.equals(ClusterEventType.JOIN)) {
+		else if (clusterEventType == ClusterEventType.JOIN) {
 			command = "addClusterNode";
+		}
+		else {
+			throw new IllegalArgumentException(
+				"Unknown cluster event type " + clusterEventType);
 		}
 
 		for (ClusterNode clusterNode : clusterNodes) {
