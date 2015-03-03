@@ -80,7 +80,7 @@ public class MessageValuesThreadLocal {
 	}
 
 	private static final String _THREAD_LOCAL_KEY_PREFIX =
-		"_THREAD_LOCAL_KEY_PREFIX#";
+		"THREAD_LOCAL_KEY_PREFIX#";
 
 	private static final ThreadLocal<Map<String, Object>>
 		_messageValuesThreadLocal =
