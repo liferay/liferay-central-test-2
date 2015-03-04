@@ -395,6 +395,16 @@ public class BaselineJarTask extends BaseBndTask {
 		return _baselineResportsDirName;
 	}
 
+	protected Map<? extends Object, ? extends Object> getBndFileProperties()
+		throws Exception {
+
+		Properties properties = new Properties();
+
+		properties.load(new FileInputStream(_bndFile));
+
+		return properties;
+	}
+
 	protected String getShortDelta(Delta delta) {
 		if (delta == Delta.ADDED) {
 			return "+";
@@ -450,16 +460,6 @@ public class BaselineJarTask extends BaseBndTask {
 		log(output, Project.MSG_WARN);
 
 		persistLog(output);
-	}
-
-	protected Map<? extends Object, ? extends Object> getBndFileProperties()
-		throws Exception {
-
-		Properties properties = new Properties();
-
-		properties.load(new FileInputStream(_bndFile));
-
-		return properties;
 	}
 
 	private static final String _BASELINE_REPORTS_DIR = "baseline-reports";
