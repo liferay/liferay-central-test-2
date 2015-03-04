@@ -54,22 +54,21 @@ public class XSLContentUtil {
 	public static String replaceUrlTokens(
 		ThemeDisplay themeDisplay, String url) {
 
-		Bundle bundle = FrameworkUtil.getBundle(XSLContentUtil.class);
-
-		String symbolicName = bundle.getSymbolicName();
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(PortalUtil.getPathModule());
 		sb.append(StringPool.SLASH);
-		sb.append(symbolicName.replaceAll("[^a-zA-Z0-9]", StringPool.BLANK));
 
-		String portletContextUrl = sb.toString();
+		Bundle bundle = FrameworkUtil.getBundle(XSLContentUtil.class);
+
+		String symbolicName = bundle.getSymbolicName();
+
+		sb.append(symbolicName.replaceAll("[^a-zA-Z0-9]", StringPool.BLANK));
 
 		return StringUtil.replace(
 			url, new String[] {"@portal_url@", "@portlet_context_url@"},
-			new String[] {themeDisplay.getPortalURL(), portletContextUrl});
+			new String[] {themeDisplay.getPortalURL(), sb.toString()});
 	}
 
 	public static String transform(
