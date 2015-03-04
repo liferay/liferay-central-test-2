@@ -39,6 +39,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		_messageIdsMap = new HashMap<>();
 
 		List<MBMessage> messages = null;
+		MBMessage rootMessage = null;
 
 		try {
 			messages = messageLocalService.getThreadMessages(
@@ -48,7 +49,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 				MBMessage curMessage = messages.get(i);
 
 				if (curMessage.isRoot()) {
-					_rootMessage = curMessage;
+					rootMessage = curMessage;
 				}
 
 				long parentMessageId = curMessage.getParentMessageId();
@@ -65,6 +66,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		}
 
 		_messages = messages;
+		_rootMessage = rootMessage;
 	}
 
 	/**
@@ -156,6 +158,6 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 	private final Map<Long, Integer> _messageIdsMap;
 	private final List<MBMessage> _messages;
 	private boolean _odd;
-	private MBMessage _rootMessage;
+	private final MBMessage _rootMessage;
 
 }
