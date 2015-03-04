@@ -52,13 +52,14 @@ public class ReleaseToRepoTask extends BaseBndTask {
 
 	@Override
 	protected void doExecute() throws Exception {
-		BaselineProcessor processor = new BaselineProcessor();
+		BaselineProcessor baselineProcessor = new BaselineProcessor();
 
-		Properties properties = processor.getProperties();
+		Properties properties = baselineProcessor.getProperties();
+
 		properties.putAll(project.getProperties());
 
 		try {
-			Deployer deployer = new Deployer(processor);
+			Deployer deployer = new Deployer(baselineProcessor);
 
 			if (_deployRepo != null) {
 				deployer.deploy(_deployRepo, _file);
@@ -68,9 +69,9 @@ public class ReleaseToRepoTask extends BaseBndTask {
 			}
 		}
 		finally {
-			report(processor);
+			report(baselineProcessor);
 
-			processor.close();
+			baselineProcessor.close();
 		}
 	}
 
