@@ -47,12 +47,12 @@ public class BaselineJarTask extends BaseBndTask {
 		_bndFile = bndFile;
 	}
 
-	public void setNewerJar(File newerJar) {
-		_newerJar = newerJar;
+	public void setNewJarFile(File newJarFile) {
+		_newJarFile = newJarFile;
 	}
 
-	public void setOldJar(File olderJar) {
-		_olderJar = olderJar;
+	public void setOldJarFile(File oldJarFile) {
+		_oldJarFile = oldJarFile;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class BaselineJarTask extends BaseBndTask {
 			throw new BuildException("file is invalid");
 		}
 
-		if (_newerJar == null) {
+		if (_newJarFile == null) {
 			throw new BuildException("outputPath is invalid");
 		}
 
@@ -107,7 +107,7 @@ public class BaselineJarTask extends BaseBndTask {
 			}
 
 			_logFile = new File(
-				baselineReportsDir, _newerJar.getName() + ".log");
+				baselineReportsDir, _newJarFile.getName() + ".log");
 
 			if (_logFile.exists()) {
 				_logFile.delete();
@@ -156,21 +156,21 @@ public class BaselineJarTask extends BaseBndTask {
 		properties.putAll(project.getProperties());
 		properties.putAll(getFileProperties());
 
-		Jar newerJar = new Jar(_newerJar);
+		Jar newerJar = new Jar(_newJarFile);
 
 		Jar olderJar = null;
 
-		if (_olderJar != null) {
-			if (!_olderJar.exists() || _olderJar.isDirectory() ||
-				!_olderJar.canRead()) {
+		if (_oldJarFile != null) {
+			if (!_oldJarFile.exists() || _oldJarFile.isDirectory() ||
+				!_oldJarFile.canRead()) {
 
 				baselineProcessor.warning(
 					"Baseline file %s is invalid. Check if it exists, " +
 						"is reablable, and not a directory.",
-					_olderJar);
+					_oldJarFile);
 			}
 			else {
-				olderJar = new Jar(_olderJar);
+				olderJar = new Jar(_oldJarFile);
 			}
 		}
 		else {
@@ -467,8 +467,8 @@ public class BaselineJarTask extends BaseBndTask {
 	private File _bndFile;
 	private boolean _headerPrinted;
 	private File _logFile;
-	private File _newerJar;
-	private File _olderJar;
+	private File _newJarFile;
+	private File _oldJarFile;
 	private PrintWriter _printWriter;
 	private String _reportLevel;
 	private boolean _reportLevelIsDiff;

@@ -158,7 +158,7 @@
 				<baseline-jar
 					bndFile="bnd.bnd"
 					bndRootFile="${project.dir}/common.bnd"
-					newerJar="${jar.file}.jar"
+					newJarFile="${jar.file}.jar"
 				/>
 			</then>
 			<else>
