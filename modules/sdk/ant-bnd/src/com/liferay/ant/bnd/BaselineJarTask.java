@@ -77,11 +77,11 @@ public class BaselineJarTask extends BaseBndTask {
 					Project.MSG_ERR);
 			}
 
-			throw new BuildException("file is invalid");
+			throw new BuildException("Bnd file is invalid");
 		}
 
 		if (_newJarFile == null) {
-			throw new BuildException("outputPath is invalid");
+			throw new BuildException("New jar file is invalid");
 		}
 
 		_reportLevel = project.getProperty("baseline.jar.report.level");
@@ -103,7 +103,7 @@ public class BaselineJarTask extends BaseBndTask {
 
 			if (!baselineReportsDir.exists() && !baselineReportsDir.mkdir()) {
 				throw new BuildException(
-					"Unable tocreate " + baselineReportsDir.getName());
+					"Unable to create " + baselineReportsDir.getName());
 			}
 
 			_logFile = new File(
@@ -153,12 +153,13 @@ public class BaselineJarTask extends BaseBndTask {
 		BaselineProcessor baselineProcessor = new BaselineProcessor();
 
 		Properties properties = baselineProcessor.getProperties();
+
 		properties.putAll(project.getProperties());
-		properties.putAll(getFileProperties());
+		properties.putAll(getBndFileProperties());
 
-		Jar newerJar = new Jar(_newJarFile);
+		Jar newJar = new Jar(_newJarFile);
 
-		Jar olderJar = null;
+		Jar oldJar = null;
 
 		if (_oldJarFile != null) {
 			if (!_oldJarFile.exists() || _oldJarFile.isDirectory() ||
@@ -166,26 +167,26 @@ public class BaselineJarTask extends BaseBndTask {
 
 				baselineProcessor.warning(
 					"Baseline file %s is invalid. Check if it exists, " +
-						"is reablable, and not a directory.",
+						"is reablable, and is not a directory.",
 					_oldJarFile);
 			}
 			else {
-				olderJar = new Jar(_oldJarFile);
+				oldJar = new Jar(_oldJarFile);
 			}
 		}
 		else {
-			olderJar = baselineProcessor.getBaselineJar();
+			oldJar = baselineProcessor.getBaselineJar();
 		}
 
 		try {
-			if (olderJar == null) {
+			if (oldJar == null) {
 				return;
 			}
 
 			Baseline baseline = new Baseline(
 				baselineProcessor, new DiffPluginImpl());
 
-			Set<Info> infos = baseline.baseline(newerJar, olderJar, null);
+			Set<Info> infos = baseline.baseline(newJar, oldJar, null);
 
 			if (infos.isEmpty()) {
 				return;
@@ -269,10 +270,10 @@ public class BaselineJarTask extends BaseBndTask {
 			report(baselineProcessor);
 
 			baselineProcessor.close();
-			newerJar.close();
+			newJar.close();
 
-			if (olderJar != null) {
-				olderJar.close();
+			if (oldJar != null) {
+				oldJar.close();
 			}
 
 			if (_printWriter != null) {
@@ -451,14 +452,14 @@ public class BaselineJarTask extends BaseBndTask {
 		persistLog(output);
 	}
 
-	private Map<? extends Object, ? extends Object> getFileProperties()
+	protected Map<? extends Object, ? extends Object> getBndFileProperties()
 		throws Exception {
 
-		Properties fileProperties = new Properties();
+		Properties properties = new Properties();
 
-		fileProperties.load(new FileInputStream(_bndFile));
+		properties.load(new FileInputStream(_bndFile));
 
-		return fileProperties;
+		return properties;
 	}
 
 	private static final String _BASELINE_REPORTS_DIR = "baseline-reports";
