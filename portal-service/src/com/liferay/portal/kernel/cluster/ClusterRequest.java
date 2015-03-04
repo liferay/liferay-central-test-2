@@ -44,7 +44,7 @@ public class ClusterRequest implements Serializable {
 		if ((targetClusterNodeIds == null) ||
 			(targetClusterNodeIds.length == 0)) {
 
-			throw new NullPointerException("targetClusterNodeIds is null");
+			throw new NullPointerException("Target cluster node IDs is null");
 		}
 
 		return new ClusterRequest(payload, false, false, targetClusterNodeIds);
@@ -106,7 +106,7 @@ public class ClusterRequest implements Serializable {
 		String... targetClusterNodeIds) {
 
 		if (payload == null) {
-			throw new NullPointerException("payload is null");
+			throw new NullPointerException("Payload is null");
 		}
 
 		_payload = payload;
