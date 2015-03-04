@@ -1,3 +1,4 @@
+/* @generated */
 /**
  * This class is mostly a copy of methods from
  * https://github.com/bndtools/bnd/blob/2.4.1.REL/biz.aQute.bndlib/src/aQute/bnd/build/ProjectBuilder.java
