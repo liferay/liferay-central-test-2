@@ -17,12 +17,12 @@
 	</publications>
 
 	<dependencies defaultconf="default">
-		<dependency conf="runtime->default" name="arquillian-container-liferay" org="org.arquillian.liferay" rev="1.0.0.Final-SNAPSHOT" />
-		<dependency conf="runtime->default" name="arquillian-deployment-generator-bnd" org="org.arquillian.liferay" rev="1.0.0.Final-SNAPSHOT" />
 		<dependency name="aQute.bnd" org="com.liferay" rev="2.3.0" />
 		<dependency name="arquillian-junit-container" org="org.jboss.arquillian.junit" rev="1.1.7.Final" />
 		<dependency name="jbosgi-metadata" org="org.jboss.osgi.metadata" rev="4.0.0.CR1" />
 		<dependency name="junit" org="junit" rev="4.12" />
 		<dependency name="org.osgi.enterprise" org="org.osgi" rev="5.0.0" />
+		<dependency conf="runtime->default" name="arquillian-container-liferay" org="org.arquillian.liferay" rev="1.0.0.Final-SNAPSHOT" />
+		<dependency conf="runtime->default" name="arquillian-deployment-generator-bnd" org="org.arquillian.liferay" rev="1.0.0.Final-SNAPSHOT" />
 	</dependencies>
 </ivy-module>
