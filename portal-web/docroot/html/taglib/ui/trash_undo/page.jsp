@@ -181,7 +181,7 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 			</aui:form>
 		</div>
 
-		<aui:script>
+		<aui:script sandbox="<%= true %>">
 			$('#<%= restoreNamespace %>undo').on(
 				'click',
 				function(event) {
