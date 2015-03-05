@@ -41,6 +41,8 @@ List<ExportImportConfiguration> recentExportImportConfigurations = ExportImportC
 		<aui:script sandbox="<%= true %>">
 			var publishGlobalLink = $('#<portlet:namespace /><%= groupId + "publishGlobalLink" %>');
 
+			publishGlobalLink.off('click');
+
 			publishGlobalLink.on(
 				'click',
 				function(event) {
@@ -168,6 +170,8 @@ List<ExportImportConfiguration> recentExportImportConfigurations = ExportImportC
 			<aui:script sandbox="<%= true %>">
 				var publishLink = $('#<portlet:namespace /><%= layoutSetBranchId + "publishLink" %>');
 
+				publishLink.off('click');
+
 				publishLink.on(
 					'click',
 					function(event) {
@@ -211,6 +215,8 @@ List<ExportImportConfiguration> recentExportImportConfigurations = ExportImportC
 
 			<aui:script sandbox="<%= true %>">
 				var layoutSetBranchesLink = $('#<portlet:namespace />manageLayoutSetBranches');
+
+				layoutSetBranchesLink.off('click');
 
 				layoutSetBranchesLink.on(
 					'click',
