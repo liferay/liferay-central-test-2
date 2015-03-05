@@ -107,7 +107,7 @@
 					<portlet:param name="tabs2" value="current-and-previous" />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
-					<portlet:param name="quickPublish" value="<%= String.valueOf(true) %>" />
+					<portlet:param name="quickPublish" value="<%= Boolean.TRUE.toString() %>" />
 				</portlet:renderURL>
 
 				<portlet:renderURL var="confirmationURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
