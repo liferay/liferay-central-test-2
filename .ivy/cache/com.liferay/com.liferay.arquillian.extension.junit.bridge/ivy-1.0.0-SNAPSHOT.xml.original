@@ -61,5 +61,17 @@
    <version>5.0.0</version>
    <scope>compile</scope>
   </dependency>
+  <dependency>
+   <groupId>org.arquillian.liferay</groupId>
+   <artifactId>arquillian-container-liferay</artifactId>
+   <version>1.0.0.Final-SNAPSHOT</version>
+   <scope>runtime</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.arquillian.liferay</groupId>
+   <artifactId>arquillian-deployment-generator-bnd</artifactId>
+   <version>1.0.0.Final-SNAPSHOT</version>
+   <scope>runtime</scope>
+  </dependency>
  </dependencies>
 </project>

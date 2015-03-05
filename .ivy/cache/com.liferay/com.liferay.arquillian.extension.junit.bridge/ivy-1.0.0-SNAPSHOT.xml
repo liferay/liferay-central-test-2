@@ -4,7 +4,7 @@
 		module="com.liferay.arquillian.extension.junit.bridge"
 		revision="1.0.0-SNAPSHOT"
 		status="integration"
-		publication="20150304151355"
+		publication="20150305120217"
 	>
 		<license name="LGPL 2.1" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" />
 		<description homepage="">
@@ -33,5 +33,7 @@
 		<dependency org="org.jboss.osgi.metadata" name="jbosgi-metadata" rev="4.0.0.CR1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="junit" name="junit" rev="4.12" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.osgi" name="org.osgi.enterprise" rev="5.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="org.arquillian.liferay" name="arquillian-container-liferay" rev="1.0.0.Final-SNAPSHOT" force="true" conf="runtime->compile(*),runtime(*),master(*)"/>
+		<dependency org="org.arquillian.liferay" name="arquillian-deployment-generator-bnd" rev="1.0.0.Final-SNAPSHOT" force="true" conf="runtime->compile(*),runtime(*),master(*)"/>
 	</dependencies>
 </ivy-module>

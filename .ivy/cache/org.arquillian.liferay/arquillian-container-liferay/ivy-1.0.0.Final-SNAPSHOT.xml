@@ -4,7 +4,7 @@
 		module="arquillian-container-liferay"
 		revision="1.0.0.Final-SNAPSHOT"
 		status="integration"
-		publication="20150303051153"
+		publication="20150304091041"
 	>
 		<description homepage="">
 		Arquillian Container Adapter for Liferay Portal Server. OSGi incontainer deployment.
@@ -163,7 +163,8 @@
 	</publications>
 	<dependencies>
 		<dependency org="biz.aQute.bnd" name="bndlib" rev="2.4.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
-		<dependency org="org.jboss.arquillian.container" name="arquillian-container-karaf-remote" rev="2.1.0.CR16" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)">
+		<dependency org="junit" name="junit" rev="4.12" force="true" conf="test->runtime(*),master(*)"/>
+		<dependency org="org.jboss.arquillian.container" name="arquillian-container-karaf-remote" rev="2.1.0.CR18" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)">
 			<exclude org="org.jboss.arquillian.junit" module="arquillian-junit-container" name="*" type="*" ext="*" conf="" matcher="exact"/>
 		</dependency>
 		<dependency org="org.osgi" name="org.osgi.core" rev="5.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
