@@ -140,14 +140,14 @@ public class BaseClusterTestCase {
 
 			_countDownLatch.await(10, TimeUnit.MINUTES);
 
-			List<org.jgroups.Message> jGroupsMessageList = _jGroupsMessages.get(
+			List<org.jgroups.Message> jGroupsMessages = _jGroupsMessages.get(
 				receiver);
 
-			if ((jGroupsMessageList == null) || jGroupsMessageList.isEmpty()) {
+			if ((jGroupsMessages == null) || jGroupsMessages.isEmpty()) {
 				return null;
 			}
 
-			for (org.jgroups.Message jGroupsMessage : jGroupsMessageList) {
+			for (org.jgroups.Message jGroupsMessage : jGroupsMessages) {
 				if (sourceAddress.equals(jGroupsMessage.getSrc())) {
 					return jGroupsMessage.getObject();
 				}
@@ -169,23 +169,23 @@ public class BaseClusterTestCase {
 		public void doReceive(ProceedingJoinPoint proceedingJoinPoint) {
 			Receiver receiver = (Receiver)proceedingJoinPoint.getThis();
 
-			List<org.jgroups.Message> jGroupsMessageList = _jGroupsMessages.get(
+			List<org.jgroups.Message> jGroupsMessages = _jGroupsMessages.get(
 				receiver);
 
-			if (jGroupsMessageList == null) {
-				jGroupsMessageList = new ArrayList<>();
+			if (jGroupsMessages == null) {
+				jGroupsMessages = new ArrayList<>();
 
-				List<org.jgroups.Message> previousJgroupsMessageList =
-					_jGroupsMessages.putIfAbsent(receiver, jGroupsMessageList);
+				List<org.jgroups.Message> previousJgroupsMessages =
+					_jGroupsMessages.putIfAbsent(receiver, jGroupsMessages);
 
-				if (previousJgroupsMessageList != null) {
-					jGroupsMessageList = previousJgroupsMessageList;
+				if (previousJgroupsMessages != null) {
+					jGroupsMessages = previousJgroupsMessages;
 				}
 			}
 
 			Object[] args = proceedingJoinPoint.getArgs();
 
-			jGroupsMessageList.add((org.jgroups.Message)args[0]);
+			jGroupsMessages.add((org.jgroups.Message)args[0]);
 
 			_countDownLatch.countDown();
 		}
