@@ -47,7 +47,7 @@ public class PropertiesDocBuilder {
 			new PropertiesDocBuilder(arguments);
 		}
 		catch (Exception e) {
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 	}
 

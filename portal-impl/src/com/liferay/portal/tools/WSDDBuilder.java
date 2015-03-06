@@ -51,7 +51,7 @@ public class WSDDBuilder {
 			wsddBuilder.build();
 		}
 		catch (Exception e) {
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 	}
 

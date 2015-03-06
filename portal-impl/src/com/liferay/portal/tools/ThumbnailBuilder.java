@@ -48,7 +48,7 @@ public class ThumbnailBuilder {
 				originalFile, thumbnailFile, height, width, overwrite);
 		}
 		catch (Exception e) {
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 	}
 

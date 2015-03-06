@@ -55,7 +55,7 @@ public class DBBuilder {
 			new DBBuilder(databaseName, databaseTypes, sqlDir);
 		}
 		catch (Exception e) {
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 	}
 

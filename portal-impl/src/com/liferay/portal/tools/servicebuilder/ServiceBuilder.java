@@ -340,7 +340,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.spring_xml=" + _TPL_ROOT + "spring_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml_session=" + _TPL_ROOT + "spring_xml_session.ftl");
 
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 
 		try {

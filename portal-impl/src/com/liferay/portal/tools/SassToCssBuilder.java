@@ -100,7 +100,7 @@ public class SassToCssBuilder {
 			new SassToCssBuilder(dirNames, docrootDirName, portalCommonDirName);
 		}
 		catch (Exception e) {
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 	}
 

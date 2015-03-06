@@ -42,7 +42,7 @@ public class XMLAttributesSorter {
 			new XMLAttributesSorter(args);
 		}
 		catch (Exception e) {
-			ArgumentsUtil.processException(arguments, e);
+			ArgumentsUtil.processMainException(arguments, e);
 		}
 	}
 

@@ -51,13 +51,13 @@ public class ArgumentsUtil {
 		return arguments;
 	}
 
-	public static void processException(
+	public static void processMainException(
 			Map<String, String> arguments, Exception e)
 		throws Exception {
 
-		String throwExceptions = arguments.get("throw.exceptions");
+		String throwMainException = arguments.get("tools.throw.main.exception");
 
-		if (GetterUtil.getBoolean(throwExceptions, true)) {
+		if (GetterUtil.getBoolean(throwMainException, true)) {
 			throw e;
 		}
 
