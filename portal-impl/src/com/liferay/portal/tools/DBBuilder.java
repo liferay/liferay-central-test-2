@@ -57,7 +57,7 @@ public class DBBuilder {
 		catch (Exception e) {
 			e.printStackTrace();
 
-			if (ArgumentsUtil.shouldThrowExceptions(arguments)) {
+			if (ArgumentsUtil.isThrowExceptions(arguments)) {
 				throw e;
 			}
 		}

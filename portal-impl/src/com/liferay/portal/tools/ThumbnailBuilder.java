@@ -50,7 +50,7 @@ public class ThumbnailBuilder {
 		catch (Exception e) {
 			e.printStackTrace();
 
-			if (ArgumentsUtil.shouldThrowExceptions(arguments)) {
+			if (ArgumentsUtil.isThrowExceptions(arguments)) {
 				throw e;
 			}
 		}
