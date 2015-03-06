@@ -250,7 +250,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 
 			List<SyncFile> syncFiles = _syncDLObjectUpdate.getSyncDLObjects();
 
-			if (syncFiles.size() > 0) {
+			if (!syncFiles.isEmpty()) {
 				super.logResponse(response);
 			}
 			else {
