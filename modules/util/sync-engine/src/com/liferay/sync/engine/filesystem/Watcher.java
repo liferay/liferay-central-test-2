@@ -393,7 +393,7 @@ public abstract class Watcher implements Runnable {
 		Watcher.class);
 
 	private static final Logger _watcherEventsLogger = LoggerFactory.getLogger(
-		"WATCHER-EVENTS");
+		"WATCHER_EVENTS_LOGGER");
 
 	private final Path _baseFilePath;
 	private final ConcurrentNavigableMap<Long, String> _createdFilePathNames =
