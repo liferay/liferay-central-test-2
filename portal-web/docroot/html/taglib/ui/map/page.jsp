@@ -53,14 +53,14 @@ name = namespace + name;
 		</script>
 
 		<%
-		String mapsAPIUrl = protocol + "://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=Liferay.Maps.onGMapsReady";
+		String mapsAPIURL = protocol + "://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=Liferay.Maps.onGMapsReady";
 
 		if (Validator.isNotNull(apiKey)) {
-			mapsAPIUrl += "&key=" + apiKey;
+			mapsAPIURL += "&key=" + apiKey;
 		}
 		%>
 
-		<script src="<%= mapsAPIUrl %>" type="text/javascript"></script>
+		<script src="<%= mapsAPIURL %>" type="text/javascript"></script>
 	</liferay-util:html-bottom>
 </c:if>
 
