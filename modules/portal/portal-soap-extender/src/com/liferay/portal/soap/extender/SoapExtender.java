@@ -151,7 +151,7 @@ public class SoapExtender {
 		catch (Exception e) {
 			if (_logger.isWarnEnabled()) {
 				_logger.warn(
-					"Could not unregister jaxws provider " +
+					"Unable to unregister JAX-WS provider " +
 						_providerServiceRegistration);
 			}
 		}
