@@ -23,9 +23,9 @@ String apiKey = GetterUtil.getString(request.getAttribute("liferay-ui:map:apiKey
 boolean geolocation = GetterUtil.getBoolean(request.getAttribute("liferay-ui:map:geolocation"));
 double latitude = (Double)request.getAttribute("liferay-ui:map:latitude");
 double longitude = (Double)request.getAttribute("liferay-ui:map:longitude");
-String provider = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:provider"));
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:name"));
 String points = GetterUtil.getString(request.getAttribute("liferay-ui:map:points"));
+String provider = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:provider"));
 
 if (Validator.isNull(provider)) {
 	Group group = layout.getGroup();
