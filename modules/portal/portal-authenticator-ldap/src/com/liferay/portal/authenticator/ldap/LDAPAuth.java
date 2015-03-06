@@ -70,10 +70,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	configurationPid = "com.liferay.portal.authenticator.ldap.configuration.LDAPAuthConfiguration",
-	immediate = true,
-	property = {
-		"key=auth.pipeline.pre"
-	},
+	immediate = true, property = {"key=auth.pipeline.pre"},
 	service = Authenticator.class
 )
 public class LDAPAuth implements Authenticator {
