@@ -2598,12 +2598,12 @@ public class HookHotDeployListener
 			_customJsps = customJsps;
 		}
 
-		public InputStream getCustomJspInputStream(String customJsp) {
-			return _servletContext.getResourceAsStream(customJsp);
-		}
-
 		public String getCustomJspDir() {
 			return _customJspDir;
+		}
+
+		public InputStream getCustomJspInputStream(String customJsp) {
+			return _servletContext.getResourceAsStream(customJsp);
 		}
 
 		public List<String> getCustomJsps() {
