@@ -53,112 +53,117 @@ public class Provider extends javax.xml.ws.spi.Provider {
 	public Endpoint createAndPublishEndpoint(
 		String address, Object implementor) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createAndPublishEndpoint(address, implementor);
 	}
 
 	@Override
 	public Endpoint createAndPublishEndpoint(
-		String address, Object implementor, WebServiceFeature... features) {
+		String address, Object implementor,
+		WebServiceFeature... webServiceFeatures) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createAndPublishEndpoint(
-			address, implementor, features);
+			address, implementor, webServiceFeatures);
 	}
 
 	@Override
 	public Endpoint createEndpoint(
 		String bindingId, Class<?> implementorClass, Invoker invoker,
-		WebServiceFeature... features) {
+		WebServiceFeature... webServiceFeatures) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createEndpoint(
-			bindingId, implementorClass, invoker, features);
+			bindingId, implementorClass, invoker, webServiceFeatures);
 	}
 
 	@Override
 	public Endpoint createEndpoint(String bindingId, Object implementor) {
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createEndpoint(bindingId, implementor);
 	}
 
 	@Override
 	public Endpoint createEndpoint(
-		String bindingId, Object implementor, WebServiceFeature... features) {
+		String bindingId, Object implementor,
+		WebServiceFeature... webServiceFeatures) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
-		return provider.createEndpoint(bindingId, implementor, features);
+		return provider.createEndpoint(
+			bindingId, implementor, webServiceFeatures);
 	}
 
 	@Override
 	public ServiceDelegate createServiceDelegate(
-		URL wsdlDocumentLocation, QName serviceName,
+		URL wsdlURL, QName serviceQName,
 		Class<? extends Service> serviceClass) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createServiceDelegate(
-			wsdlDocumentLocation, serviceName, serviceClass);
+			wsdlURL, serviceQName, serviceClass);
 	}
 
 	@Override
 	public ServiceDelegate createServiceDelegate(
-		URL wsdlDocumentLocation, QName serviceName,
-		Class<? extends Service> serviceClass, WebServiceFeature... features) {
+		URL wsdlURL, QName serviceQName, Class<? extends Service> serviceClass,
+		WebServiceFeature... webServiceFeatures) {
 
-		return _getProvider().createServiceDelegate(
-			wsdlDocumentLocation, serviceName, serviceClass, features);
+		return getProvider().createServiceDelegate(
+			wsdlURL, serviceQName, serviceClass, webServiceFeatures);
 	}
 
 	@Override
 	public W3CEndpointReference createW3CEndpointReference(
-		String address, QName serviceName, QName portName,
-		List<Element> metadata, String wsdlDocumentLocation,
-		List<Element> referenceParameters) {
+		String address, QName serviceQName, QName portQName,
+		List<Element> metadataElements, String wsdlURL,
+		List<Element> referenceParameterElements) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createW3CEndpointReference(
-			address, serviceName, portName, metadata, wsdlDocumentLocation,
-			referenceParameters);
+			address, serviceQName, portQName, metadataElements, wsdlURL,
+			referenceParameterElements);
 	}
 
 	@Override
 	public W3CEndpointReference createW3CEndpointReference(
-		String address, QName interfaceName, QName serviceName, QName portName,
-		List<Element> metadata, String wsdlDocumentLocation,
+		String address, QName interfaceQName, QName serviceQName,
+		QName portQName, List<Element> metadata, String wsdlURL,
 		List<Element> referenceParameters, List<Element> elements,
 		Map<QName, String> attributes) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.createW3CEndpointReference(
-			address, interfaceName, serviceName, portName, metadata,
-			wsdlDocumentLocation, referenceParameters, elements, attributes);
+			address, interfaceQName, serviceQName, portQName, metadata, wsdlURL,
+			referenceParameters, elements, attributes);
 	}
 
 	@Override
 	public <T> T getPort(
 		EndpointReference endpointReference, Class<T> serviceEndpointInterface,
-		WebServiceFeature... features) {
+		WebServiceFeature... webServiceFeatures) {
 
-		javax.xml.ws.spi.Provider provider = _getProvider();
+		javax.xml.ws.spi.Provider provider = getProvider();
 
 		return provider.getPort(
-			endpointReference, serviceEndpointInterface, features);
+			endpointReference, serviceEndpointInterface, webServiceFeatures);
 	}
 
 	@Override
-	public EndpointReference readEndpointReference(Source eprInfoset) {
-		return _getProvider().readEndpointReference(eprInfoset);
+	public EndpointReference readEndpointReference(Source source) {
+		javax.xml.ws.spi.Provider provider = getProvider();
+
+		return provider.readEndpointReference(source);
 	}
 
-	private javax.xml.ws.spi.Provider _getProvider() {
+	protected javax.xml.ws.spi.Provider getProvider() {
 		try {
 			return _serviceTracker.waitForService(10 * 1000L);
 		}
