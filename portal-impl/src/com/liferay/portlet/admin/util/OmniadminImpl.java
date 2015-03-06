@@ -29,6 +29,7 @@ import com.liferay.portal.util.PropsValues;
  */
 public class OmniadminImpl implements Omniadmin {
 
+	@Override
 	public boolean isOmniadmin(long userId) {
 		try {
 			User user = UserLocalServiceUtil.fetchUser(userId);
@@ -44,6 +45,7 @@ public class OmniadminImpl implements Omniadmin {
 		}
 	}
 
+	@Override
 	public boolean isOmniadmin(User user) {
 		long userId = user.getUserId();
 
