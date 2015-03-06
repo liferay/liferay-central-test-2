@@ -818,7 +818,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletBagFactory.setClassLoader(
 				ClassLoaderPool.getClassLoader(servletContextName));
-
 			portletBagFactory.setServletContext(servletContext);
 			portletBagFactory.setWARFile(true);
 
