@@ -3,7 +3,6 @@
 
 <project>
 	<property name="import.shared" value="portal-authenticator-ldap" />
-	<property name="osgi.auto.update.xml" value="true" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
