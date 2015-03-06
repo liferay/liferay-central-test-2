@@ -47,11 +47,7 @@ public class PropertiesDocBuilder {
 			new PropertiesDocBuilder(arguments);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 

@@ -35,18 +35,14 @@ import java.util.Map;
  */
 public class PropertiesDocIndexBuilder {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
 		try {
 			new PropertiesDocIndexBuilder(arguments);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 

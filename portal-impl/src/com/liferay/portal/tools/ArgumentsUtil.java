@@ -25,12 +25,6 @@ import java.util.Map;
  */
 public class ArgumentsUtil {
 
-	public static boolean isThrowExceptions(Map<String, String> arguments) {
-		String throwExceptions = arguments.get("throw.exceptions");
-	
-		return GetterUtil.getBoolean(throwExceptions, true);
-	}
-
 	public static Map<String, String> parseArguments(String[] args) {
 		Map<String, String> arguments = new ArgumentsMap();
 
@@ -55,6 +49,19 @@ public class ArgumentsUtil {
 		}
 
 		return arguments;
+	}
+
+	public static void processException(
+			Map<String, String> arguments, Exception e)
+		throws Exception {
+
+		String throwExceptions = arguments.get("throw.exceptions");
+
+		if (GetterUtil.getBoolean(throwExceptions, true)) {
+			throw e;
+		}
+
+		e.printStackTrace();
 	}
 
 }

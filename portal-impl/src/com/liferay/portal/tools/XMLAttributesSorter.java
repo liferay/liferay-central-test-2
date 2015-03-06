@@ -42,11 +42,7 @@ public class XMLAttributesSorter {
 			new XMLAttributesSorter(args);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 

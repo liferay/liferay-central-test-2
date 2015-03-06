@@ -55,11 +55,7 @@ public class DBBuilder {
 			new DBBuilder(databaseName, databaseTypes, sqlDir);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 

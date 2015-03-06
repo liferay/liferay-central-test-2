@@ -44,11 +44,7 @@ public class SeleniumBuilder {
 			new SeleniumBuilder(args);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 

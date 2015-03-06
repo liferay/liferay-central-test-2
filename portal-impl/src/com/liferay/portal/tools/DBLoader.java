@@ -92,11 +92,7 @@ public class DBLoader {
 			new DBLoader(databaseName, databaseType, sqlDir, fileName);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 

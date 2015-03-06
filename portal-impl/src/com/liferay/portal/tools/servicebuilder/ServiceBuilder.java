@@ -267,8 +267,6 @@ public class ServiceBuilder {
 				testDir, true);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
 			System.out.println(
 				"Please set these arguments. Sample values are:\n" +
 				"\n" +
@@ -342,9 +340,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.spring_xml=" + _TPL_ROOT + "spring_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml_session=" + _TPL_ROOT + "spring_xml_session.ftl");
 
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 
 		try {

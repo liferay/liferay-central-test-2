@@ -71,11 +71,7 @@ public class LangBuilder {
 			new LangBuilder(langDir, langFile, langPlugin, langTranslate);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (ArgumentsUtil.isThrowExceptions(arguments)) {
-				throw e;
-			}
+			ArgumentsUtil.processException(arguments, e);
 		}
 	}
 
