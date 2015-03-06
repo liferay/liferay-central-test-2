@@ -5240,10 +5240,10 @@ Please set "ie.driver.zip" in test.properties to point to "IEDriverServer_x64_2.
 						try {
 							File file = new File(logFilePath);
 
-							String fileContent = FileUtils.readFileToString(file);
+							String content = FileUtils.readFileToString(file);
 
-							if (fileContent.contains(pluginName + " is available for use") ||
-								fileContent.contains(pluginName + " are available for use")) {
+							if (content.contains(pluginName + " is available for use") ||
+								content.contains(pluginName + " are available for use")) {
 
 								break;
 							}
