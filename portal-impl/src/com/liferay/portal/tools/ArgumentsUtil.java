@@ -28,7 +28,7 @@ public class ArgumentsUtil {
 	public static boolean isThrowExceptions(Map<String, String> arguments) {
 		String throwExceptions = arguments.get("throw.exceptions");
 	
-		return GetterUtil.getBoolean(throwExceptions, false);
+		return GetterUtil.getBoolean(throwExceptions, true);
 	}
 
 	public static Map<String, String> parseArguments(String[] args) {
