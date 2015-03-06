@@ -1,4 +1,4 @@
-Bundle-Name: Liferay Portal LDAP Authenticator
+Bundle-Name: Liferay Portal Authenticator LDAP
 Bundle-SymbolicName: com.liferay.portal.authenticator.ldap
 Bundle-Version: 1.0.0
 Export-Package:\
