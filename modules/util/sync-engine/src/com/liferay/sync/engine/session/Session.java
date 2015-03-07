@@ -113,8 +113,11 @@ public class Session {
 		CredentialsProvider credentialsProvider =
 			new BasicCredentialsProvider();
 
+		_httpHost = new HttpHost(
+			url.getHost(), url.getPort(), url.getProtocol());
+
 		credentialsProvider.setCredentials(
-			new AuthScope(url.getHost(), url.getPort()),
+			new AuthScope(_httpHost),
 			new UsernamePasswordCredentials(login, password));
 
 		httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
@@ -152,8 +155,6 @@ public class Session {
 
 		_httpClient = httpClientBuilder.build();
 
-		_httpHost = new HttpHost(
-			url.getHost(), url.getPort(), url.getProtocol());
 		_token = null;
 
 		Runnable runnable = new Runnable() {
