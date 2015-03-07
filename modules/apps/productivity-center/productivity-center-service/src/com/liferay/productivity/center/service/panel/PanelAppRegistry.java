@@ -49,8 +49,8 @@ public class PanelAppRegistry {
 
 	private static final PanelAppRegistry _instance = new PanelAppRegistry();
 
-	private final ServiceTrackerMap<String, List<PanelApp>>
-		_serviceTrackerMap = ServiceTrackerCollections.multiValueMap(
+	private final ServiceTrackerMap<String, List<PanelApp>> _serviceTrackerMap =
+		ServiceTrackerCollections.multiValueMap(
 			PanelApp.class, "(panel.category=*)",
 			PanelEntryServiceReferenceMapper.<PanelApp>create());
 
