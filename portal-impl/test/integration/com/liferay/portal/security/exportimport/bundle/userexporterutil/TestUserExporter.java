@@ -40,21 +40,27 @@ public class TestUserExporter implements UserExporter {
 	public void exportUser(
 		Contact contact, Map<String, Serializable> contactExpandoAttributes) {
 
-		_atomicReference.set("exportUser.contact.contactExpandoAttributes");
+		_atomicReference.set(
+			TestUserExporter.class.getName() + "#exportUser(" +
+				Contact.class.getName() + ", " + Map.class.getName() + ")");
 	}
 
 	@Override
 	public void exportUser(
 		long userId, long userGroupId, UserOperation userOperation) {
 
-		_atomicReference.set("exportUser.userId.userGroupId.userOperation");
+		_atomicReference.set(
+			TestUserExporter.class.getName() + "#exportUser(long, long, " +
+				UserOperation.class.getName() + ")");
 	}
 
 	@Override
 	public void exportUser(
 		User user, Map<String, Serializable> userExpandoAttributes) {
 
-		_atomicReference.set("exportUser.user.userExpandoAttributes");
+		_atomicReference.set(
+			TestUserExporter.class.getName() + "#exportUser(" +
+				User.class.getName() + ", " + Map.class.getName() + ")");
 	}
 
 	@Reference(target = "(test=AtomicState)")
