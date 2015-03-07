@@ -43,8 +43,8 @@ public class PanelEntryServiceReferenceMapper<T extends PanelEntry>
 
 		if (Validator.isNull(categoryKey)) {
 			_log.error(
-				"Error while registering PanelEntry: PanelCategory " +
-					categoryKey + " not found.");
+				"Unable to register panel entry because of missing " +
+					"service property \"panel.category\"");
 		}
 		else {
 			emitter.emit(categoryKey);
