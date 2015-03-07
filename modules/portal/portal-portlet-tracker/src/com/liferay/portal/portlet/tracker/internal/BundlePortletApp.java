@@ -49,7 +49,7 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 		_pluginPackage = new BundlePluginPackage(bundle, this);
 		_portletApp = portalPortletModel.getPortletApp();
 
-		_servletContextName = _getServletContextName(bundle);
+		_servletContextName = getServletContextName(bundle);
 
 		if ((httpServiceEndpoint.length() > 0) &&
 			httpServiceEndpoint.endsWith("/")) {
@@ -225,7 +225,7 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 		_portletApp.setWARFile(warFile);
 	}
 
-	private String _getServletContextName(Bundle bundle) {
+	protected String getServletContextName(Bundle bundle) {
 		Dictionary<String, String> headers = bundle.getHeaders();
 
 		String header = headers.get("Servlet-Context-Name");
