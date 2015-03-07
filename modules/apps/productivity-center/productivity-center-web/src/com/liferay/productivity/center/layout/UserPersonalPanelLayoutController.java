@@ -72,7 +72,7 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 		throws Exception {
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-			Portal.PATH_MODULE + StringPool.SLASH + "productivitycenter" +
+			Portal.PATH_MODULE + StringPool.SLASH + "productivity_center_web" +
 				_VIEW_PATH);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
