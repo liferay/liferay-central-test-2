@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.productivity.center.taglib.ui;
+package com.liferay.productivity.center.servlet.taglib.ui;
 
+import com.liferay.productivity.center.panel.PanelApp;
 import com.liferay.productivity.center.panel.PanelCategory;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -22,7 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Adolfo Pérez
  */
-public class PanelCategoryTag extends IncludeTag {
+public class PanelAppTag extends IncludeTag {
+
+	public void setPanelApp(PanelApp panelApp) {
+		_panelApp = panelApp;
+	}
 
 	public void setPanelCategory(PanelCategory panelCategory) {
 		_panelCategory = panelCategory;
@@ -36,12 +41,14 @@ public class PanelCategoryTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"productivity-center-ui:panel-category:panelCategory",
-			_panelCategory);
+			"productivity-center-ui:panel-app:panelApp", _panelApp);
+		request.setAttribute(
+			"productivity-center-ui:panel-app:panelCategory", _panelCategory);
 	}
 
-	private static final String _PAGE = "/taglib/ui/panel_category/page.jsp";
+	private static final String _PAGE = "/taglib/ui/panel_app/page.jsp";
 
+	private PanelApp _panelApp;
 	private PanelCategory _panelCategory;
 
 }

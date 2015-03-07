@@ -12,7 +12,7 @@
 	<uri>http://liferay.com/tld/productivity-center/ui</uri>
 	<tag>
 		<name>panel</name>
-		<tag-class>com.liferay.productivity.center.taglib.ui.PanelTag</tag-class>
+		<tag-class>com.liferay.productivity.center.servlet.taglib.ui.PanelTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelCategory</name>
@@ -27,7 +27,7 @@
 	</tag>
 	<tag>
 		<name>panel-app</name>
-		<tag-class>com.liferay.productivity.center.taglib.ui.PanelAppTag</tag-class>
+		<tag-class>com.liferay.productivity.center.servlet.taglib.ui.PanelAppTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelApp</name>
@@ -47,7 +47,7 @@
 	</tag>
 	<tag>
 		<name>panel-category</name>
-		<tag-class>com.liferay.productivity.center.taglib.ui.PanelCategoryTag</tag-class>
+		<tag-class>com.liferay.productivity.center.servlet.taglib.ui.PanelCategoryTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelCategory</name>
@@ -62,7 +62,7 @@
 	</tag>
 	<tag>
 		<name>panel-content</name>
-		<tag-class>com.liferay.productivity.center.taglib.ui.PanelContentTag</tag-class>
+		<tag-class>com.liferay.productivity.center.servlet.taglib.ui.PanelContentTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>portletId</name>
