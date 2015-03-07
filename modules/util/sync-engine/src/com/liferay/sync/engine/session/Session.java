@@ -135,18 +135,8 @@ public class Session {
 
 		if (trustSelfSigned) {
 			try {
-				SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
-
-				sslContextBuilder.loadTrustMaterial(
-					null, new TrustSelfSignedStrategy());
-
-				SSLConnectionSocketFactory sslConnectionSocketFactory =
-					new SSLConnectionSocketFactory(
-						sslContextBuilder.build(),
-						SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
 				httpClientBuilder.setSSLSocketFactory(
-					sslConnectionSocketFactory);
+					_getTrustingSSLSocketFactory());
 			}
 			catch (Exception e) {
 				_logger.error(e.getMessage(), e);
@@ -441,6 +431,20 @@ public class Session {
 			ContentType.create(
 				ContentType.TEXT_PLAIN.getMimeType(),
 				Charset.forName("UTF-8")));
+	}
+
+	@SuppressWarnings("deprecation")
+	private SSLConnectionSocketFactory _getTrustingSSLSocketFactory()
+		throws Exception {
+
+		SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
+
+		sslContextBuilder.loadTrustMaterial(
+			null, new TrustSelfSignedStrategy());
+
+		return new SSLConnectionSocketFactory(
+				sslContextBuilder.build(),
+				SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 	}
 
 	private HttpEntity _getURLEncodedFormEntity(Map<String, Object> parameters)
