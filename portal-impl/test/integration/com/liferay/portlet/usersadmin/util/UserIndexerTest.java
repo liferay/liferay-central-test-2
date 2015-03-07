@@ -96,7 +96,6 @@ public class UserIndexerTest {
 
 		assertHits("!", 0);
 		assertHits("!" + RandomTestUtil.randomString(), 0);
-
 		assertHits("@", 0);
 		assertHits("@" + RandomTestUtil.randomString(), 0);
 	}
