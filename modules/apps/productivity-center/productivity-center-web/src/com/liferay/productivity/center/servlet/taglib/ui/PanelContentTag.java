@@ -28,6 +28,13 @@ public class PanelContentTag extends IncludeTag {
 	}
 
 	@Override
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_portletId = null;
+	}
+
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

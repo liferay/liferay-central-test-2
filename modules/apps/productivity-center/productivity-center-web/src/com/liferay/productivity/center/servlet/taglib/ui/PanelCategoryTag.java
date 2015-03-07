@@ -29,6 +29,13 @@ public class PanelCategoryTag extends IncludeTag {
 	}
 
 	@Override
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_panelCategory = null;
+	}
+
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

@@ -34,6 +34,14 @@ public class PanelAppTag extends IncludeTag {
 	}
 
 	@Override
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_panelApp = null;
+		_panelCategory = null;
+	}
+
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
