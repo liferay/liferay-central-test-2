@@ -443,8 +443,8 @@ public class Session {
 			null, new TrustSelfSignedStrategy());
 
 		return new SSLConnectionSocketFactory(
-				sslContextBuilder.build(),
-				SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			sslContextBuilder.build(),
+			SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 	}
 
 	private HttpEntity _getURLEncodedFormEntity(Map<String, Object> parameters)
