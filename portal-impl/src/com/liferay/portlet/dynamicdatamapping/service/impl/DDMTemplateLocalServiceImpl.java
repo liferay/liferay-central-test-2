@@ -412,7 +412,7 @@ public class DDMTemplateLocalServiceImpl
 				Group companyGroup = groupLocalService.getCompanyGroup(
 					template.getCompanyId());
 
-				int count;
+				int count = 0;
 
 				if (template.getGroupId() == companyGroup.getGroupId()) {
 					count = JournalArticleUtil.countByC_DDMTK(
@@ -1569,8 +1569,9 @@ public class DDMTemplateLocalServiceImpl
 			(smallImageBytes.length > smallImageMaxSize)) {
 
 			throw new TemplateSmallImageSizeException(
-				"Size of Image " + smallImageName + " exceeds maximum. " +
-					smallImageBytes.length + " > " + smallImageMaxSize);
+				"Image " + smallImageName + " has " + smallImageBytes.length +
+					" bytes and exceeds the maximum size of " +
+						smallImageMaxSize);
 		}
 	}
 
