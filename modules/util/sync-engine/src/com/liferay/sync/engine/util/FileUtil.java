@@ -26,6 +26,8 @@ import java.io.InputStream;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
@@ -211,6 +213,17 @@ public class FileUtil {
 			_logger.error(e.getMessage(), e);
 
 			return -1;
+		}
+	}
+
+	public static FileLock getFileLock(FileChannel fileChannel) {
+		try {
+			return fileChannel.tryLock();
+		}
+		catch (Exception e) {
+			_logger.error(e.getMessage(), e);
+
+			return null;
 		}
 	}
 
@@ -484,6 +497,19 @@ public class FileUtil {
 		}
 		catch (Exception e) {
 			_logger.error(e.getMessage(), e);
+		}
+	}
+
+	public static void releaseFileLock(FileLock fileLock) {
+		try {
+			if (fileLock != null) {
+				fileLock.release();
+			}
+		}
+		catch (Exception e) {
+			if (_logger.isDebugEnabled()) {
+				_logger.debug(e.getMessage(), e);
+			}
 		}
 	}
 
