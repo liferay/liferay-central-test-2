@@ -34,16 +34,16 @@ public class ItemSelectorImplTest extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		_mediaItemSelectorCriterion = new MediaItemSelectorCriterion();
-
-		_mediaItemSelectorCriterion.setFileExtension("jpg");
-		_mediaItemSelectorCriterion.setMaxSize(2048);
-
 		_flickrItemSelectorCriterion = new FlickrItemSelectorCriterion();
 
 		_flickrItemSelectorCriterion.setDesiredReturnTypes(URL.class);
 
 		_itemSelectorImpl = new ItemSelectorImpl();
+
+		_mediaItemSelectorCriterion = new MediaItemSelectorCriterion();
+
+		_mediaItemSelectorCriterion.setFileExtension("jpg");
+		_mediaItemSelectorCriterion.setMaxSize(2048);
 	}
 
 	@Test
