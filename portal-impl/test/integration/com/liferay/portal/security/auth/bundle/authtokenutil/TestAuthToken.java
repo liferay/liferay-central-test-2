@@ -14,9 +14,7 @@
 
 package com.liferay.portal.security.auth.bundle.authtokenutil;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.auth.AuthToken;
-import com.liferay.portal.security.auth.PrincipalException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,12 +31,11 @@ public class TestAuthToken implements AuthToken {
 
 	@Deprecated
 	@Override
-	public void check(HttpServletRequest request) throws PortalException {
+	public void check(HttpServletRequest request) {
 	}
 
 	@Override
-	public void checkCSRFToken(HttpServletRequest request, String origin)
-		throws PrincipalException {
+	public void checkCSRFToken(HttpServletRequest request, String origin) {
 	}
 
 	@Override
@@ -50,7 +47,7 @@ public class TestAuthToken implements AuthToken {
 	public String getToken(
 		HttpServletRequest request, long plid, String portletId) {
 
-		return "TEST_TOKEN_BY_PLID_AND_PORTLETID";
+		return "TEST_TOKEN_BY_PLID_AND_PORTLET_ID";
 	}
 
 	@Override

@@ -15,6 +15,7 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
@@ -23,7 +24,6 @@ import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
@@ -47,21 +47,23 @@ public class AuthTokenUtilTest {
 	@Test
 	public void testGetTokenByPlidAndPortletId() {
 		Assert.assertEquals(
-			"TEST_TOKEN_BY_PLID_AND_PORTLETID",
+			"TEST_TOKEN_BY_PLID_AND_PORTLET_ID",
 			AuthTokenUtil.getToken(
-				new MockHttpServletRequest(), 0L, "portletId"));
+				new MockHttpServletRequest(), 0L,
+				RandomTestUtil.randomString()));
 	}
 
 	@Test
 	public void testIsValidPortletInvocationToken() {
 		Assert.assertTrue(
 			AuthTokenUtil.isValidPortletInvocationToken(
-				new MockHttpServletRequest(), 0L, "portletId", "struts action",
+				new MockHttpServletRequest(), 0L, RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(),
 				"VALID_PORTLET_INVOCATION_TOKEN"));
-
 		Assert.assertFalse(
 			AuthTokenUtil.isValidPortletInvocationToken(
-				new MockHttpServletRequest(), 0L, "portletId", "struts action",
+				new MockHttpServletRequest(), 0L, RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(),
 				"INVALID_PORTLET_INVOCATION_TOKEN"));
 	}
 
