@@ -67,34 +67,30 @@ public class BlogsEntryEditorDisplayContext {
 	}
 
 	protected void populateCoverImageCaptionEditorData() throws JSONException {
-		JSONObject editorCoverImageCaptionJSONObject =
+		JSONObject editorConfigJSONObject =
 			JSONFactoryUtil.createJSONObject();
 
-		editorCoverImageCaptionJSONObject.put("allowedContent", "a");
-		editorCoverImageCaptionJSONObject.put("disallowedContent", "br");
+		editorConfigJSONObject.put("allowedContent", "a");
+		editorConfigJSONObject.put("disallowedContent", "br");
 
-		JSONObject editorCoverImageCaptionToolbar =
+		JSONObject toolbarJSONObject =
 			JSONFactoryUtil.createJSONObject();
 
-		JSONArray editorCoverImageCaptionToolbarOptions =
-			JSONFactoryUtil.createJSONArray("['a']");
+		JSONArray stylesJSONObject = JSONFactoryUtil.createJSONArray("['a']");
 
-		editorCoverImageCaptionToolbar.put(
-			"styles", editorCoverImageCaptionToolbarOptions);
+		toolbarJSONObject.put("styles", stylesJSONObject);
 
-		editorCoverImageCaptionJSONObject.put(
-			"toolbars", editorCoverImageCaptionToolbar);
+		editorConfigJSONObject.put("toolbars", toolbarJSONObject);
 
 		_coverImageCaptionEditorData.put(
-			"editorConfig", editorCoverImageCaptionJSONObject);
+			"editorConfig", editorConfigJSONObject);
 
-		JSONObject editorCoverImageCaptionOptionsJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		JSONObject editorOptionsJSONObject = JSONFactoryUtil.createJSONObject();
 
-		editorCoverImageCaptionOptionsJSONObject.put("textMode", Boolean.TRUE);
+		editorOptionsJSONObject.put("textMode", Boolean.TRUE);
 
 		_coverImageCaptionEditorData.put(
-			"editorOptions", editorCoverImageCaptionOptionsJSONObject);
+			"editorOptions", editorOptionsJSONObject);
 	}
 
 	protected Map<String, Object> populateTextEditorData() {
