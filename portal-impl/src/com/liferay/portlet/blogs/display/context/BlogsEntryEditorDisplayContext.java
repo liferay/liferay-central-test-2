@@ -56,7 +56,7 @@ public class BlogsEntryEditorDisplayContext {
 		return _textEditorData;
 	}
 
-	protected void populateContentEditorData() throws JSONException {
+	protected void populateContentEditorData() {
 		PortletURL uploadEditorImageURL =
 			_liferayPortletResponse.createActionURL();
 
