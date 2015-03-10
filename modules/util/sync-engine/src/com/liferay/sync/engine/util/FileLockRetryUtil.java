@@ -32,14 +32,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class FileLockRetryUtil {
 
-	public static void registerFilePathCallable(
-		FilePathCallable filePathCallable) {
-
-		_filePathCallables.add(filePathCallable);
+	public static void registerPathCallable(PathCallable pathCallable) {
+		_pathCallables.add(pathCallable);
 	}
 
-	private static final List<FilePathCallable> _filePathCallables =
-		new ArrayList<>();
+	private static final List<PathCallable> _pathCallables = new ArrayList<>();
 
 	static {
 		ScheduledExecutorService scheduledExecutorService =
@@ -49,18 +46,17 @@ public class FileLockRetryUtil {
 
 			@Override
 			public void run() {
-				Iterator<FilePathCallable> iterator =
-					_filePathCallables.iterator();
+				Iterator<PathCallable> iterator = _pathCallables.iterator();
 
 				while (iterator.hasNext()) {
-					FilePathCallable filePathCallable = iterator.next();
+					PathCallable pathCallable = iterator.next();
 
 					FileChannel fileChannel = null;
 
 					FileLock fileLock = null;
 
 					try {
-						Path filePath = filePathCallable.getFilePath();
+						Path filePath = pathCallable.getPath();
 
 						if (Files.notExists(filePath)) {
 							iterator.remove();
@@ -69,7 +65,7 @@ public class FileLockRetryUtil {
 						}
 
 						if (Files.isDirectory(filePath)) {
-							filePathCallable.call();
+							pathCallable.call();
 
 							iterator.remove();
 						}
@@ -82,7 +78,7 @@ public class FileLockRetryUtil {
 						}
 
 						if (fileLock != null) {
-							filePathCallable.call();
+							pathCallable.call();
 
 							iterator.remove();
 						}

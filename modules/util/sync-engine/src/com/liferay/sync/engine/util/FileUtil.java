@@ -78,7 +78,7 @@ public class FileUtil {
 			Files.deleteIfExists(filePath);
 		}
 		catch (Exception e) {
-			FilePathCallable filePathCallable = new FilePathCallable(filePath) {
+			PathCallable pathCallable = new PathCallable(filePath) {
 
 				@Override
 				public Object call() throws Exception {
@@ -93,7 +93,7 @@ public class FileUtil {
 
 			};
 
-			FileLockRetryUtil.registerFilePathCallable(filePathCallable);
+			FileLockRetryUtil.registerPathCallable(pathCallable);
 		}
 	}
 
@@ -522,8 +522,7 @@ public class FileUtil {
 				StandardCopyOption.REPLACE_EXISTING);
 		}
 		catch (Exception e) {
-			FilePathCallable filePathCallable =
-				new FilePathCallable(sourceFilePath) {
+			PathCallable pathCallable = new PathCallable(sourceFilePath) {
 
 					@Override
 					public Object call() throws Exception {
@@ -544,7 +543,7 @@ public class FileUtil {
 
 				};
 
-			FileLockRetryUtil.registerFilePathCallable(filePathCallable);
+			FileLockRetryUtil.registerPathCallable(pathCallable);
 		}
 	}
 
@@ -578,7 +577,7 @@ public class FileUtil {
 			return;
 		}
 
-		FilePathCallable filePathCallable = new FilePathCallable(filePath) {
+		PathCallable pathCallable = new PathCallable(filePath) {
 
 			@Override
 			public Object call() throws Exception {
@@ -589,7 +588,7 @@ public class FileUtil {
 
 		};
 
-		FileLockRetryUtil.registerFilePathCallable(filePathCallable);
+		FileLockRetryUtil.registerPathCallable(pathCallable);
 	}
 
 	protected static void checkFilePath(Path filePath) {

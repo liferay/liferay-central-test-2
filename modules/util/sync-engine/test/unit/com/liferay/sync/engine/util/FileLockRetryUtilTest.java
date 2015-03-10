@@ -65,7 +65,7 @@ public class FileLockRetryUtilTest {
 
 		final CountDownLatch countDownLatch = new CountDownLatch(2);
 
-		FilePathCallable filePathCallable = new FilePathCallable(_filePath) {
+		PathCallable pathCallable = new PathCallable(_filePath) {
 
 			@Override
 			public Object call() throws Exception {
@@ -78,7 +78,7 @@ public class FileLockRetryUtilTest {
 
 		};
 
-		FileLockRetryUtil.registerFilePathCallable(filePathCallable);
+		FileLockRetryUtil.registerPathCallable(pathCallable);
 
 		Assert.assertTrue(Files.exists(_filePath));
 

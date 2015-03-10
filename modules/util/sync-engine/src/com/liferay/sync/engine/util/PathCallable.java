@@ -21,14 +21,14 @@ import java.util.concurrent.Callable;
 /**
  * @author Shinn Lok
  */
-public abstract class FilePathCallable implements Callable {
+public abstract class PathCallable implements Callable {
 
-	public FilePathCallable(Path filePath) {
-		_filePath = filePath;
+	public PathCallable(Path path) {
+		_path = path;
 	}
 
-	public Path getFilePath() {
-		return _filePath;
+	public Path getPath() {
+		return _path;
 	}
 
 	public long getStartTime() {
@@ -37,6 +37,6 @@ public abstract class FilePathCallable implements Callable {
 
 	private static final long _START_TIME = System.currentTimeMillis();
 
-	private final Path _filePath;
+	private final Path _path;
 
 }
