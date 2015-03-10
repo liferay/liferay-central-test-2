@@ -7,7 +7,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-	<bean id="applicationContextCreator" class="com.liferay.portal.spring.extender.internal.context.ModuleApplicationContextCreator" />
-	<bean id="osgiApplicationContextListener" class="com.liferay.portal.spring.extender.internal.context.event.BeanLocatorLifecycleManager" />
-	<bean id="taskExecutor" class="org.springframework.core.task.SyncTaskExecutor" />
+	<bean id="com.liferay.portal.spring.extender.internal.context.ModuleApplicationContextCreator" class="com.liferay.portal.spring.extender.internal.context.ModuleApplicationContextCreator" />
+	<bean id="com.liferay.portal.spring.extender.internal.context.event.BeanLocatorLifecycleManager" class="com.liferay.portal.spring.extender.internal.context.event.BeanLocatorLifecycleManager" />
+	<bean id="org.springframework.core.task.SyncTaskExecutor" class="org.springframework.core.task.SyncTaskExecutor" />
 </beans>
