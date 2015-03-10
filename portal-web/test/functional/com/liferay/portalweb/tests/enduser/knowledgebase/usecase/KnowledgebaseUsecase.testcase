@@ -645,9 +645,8 @@
 			<var name="pageName" value="Search Page" />
 		</execute>
 
-		<execute macro="Search#viewIncrementalSearchWithSpecialCharactersPG">
+		<execute macro="Search#viewIncrementalSearchPG">
 			<var name="kbArticleTitle" value="Knowledge Base Article's Title" />
-			<var name="kbArticleTitleSpecialCharacters" value="Knowledge Base" />
 			<var name="searchTerm" value="Knowledge" />
 		</execute>
 	</command>

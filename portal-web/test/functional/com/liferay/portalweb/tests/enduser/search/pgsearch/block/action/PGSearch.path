@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>INCREMENTAL_SEARCH_SUGGESTION</td>
-	<td>//div[@class='yui3-aclist-content']//li[contains(@data-text,'${key_kbArticleTitle}')]</td>
+	<td>//div[@class='yui3-aclist-content']//li[contains(@data-text,"${key_kbArticleTitle}")]</td>
 	<td></td>
 </tr>
 <!--The title attribute for the search comment changes depending on language.-->
