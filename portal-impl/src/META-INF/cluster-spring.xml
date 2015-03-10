@@ -26,7 +26,7 @@
 		</property>
 		<property name="parentChainableMethodAdvice" ref="serviceAdvice" />
 	</bean>
-	<bean name="com.liferay.portal.cluster.JGroupsClusterChannelFactory" class="com.liferay.portal.cluster.JGroupsClusterChannelFactory" />
+	<bean id="com.liferay.portal.cluster.JGroupsClusterChannelFactory" class="com.liferay.portal.cluster.JGroupsClusterChannelFactory" />
 	<bean id="com.liferay.portal.kernel.cluster.ClusterExecutor" class="com.liferay.portal.cluster.ClusterExecutorImpl" >
 		<property name="clusterChannelFactory" ref="com.liferay.portal.cluster.JGroupsClusterChannelFactory" />
 	</bean>
