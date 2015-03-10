@@ -524,24 +524,24 @@ public class FileUtil {
 		catch (Exception e) {
 			PathCallable pathCallable = new PathCallable(sourceFilePath) {
 
-					@Override
-					public Object call() throws Exception {
-						FileTime fileTime = Files.getLastModifiedTime(
-							targetFilePath);
+				@Override
+				public Object call() throws Exception {
+					FileTime fileTime = Files.getLastModifiedTime(
+						targetFilePath);
 
-						if (fileTime.toMillis() <= getStartTime()) {
-							Files.move(
-								sourceFilePath, targetFilePath,
-								StandardCopyOption.REPLACE_EXISTING);
-						}
-						else {
-							Files.deleteIfExists(sourceFilePath);
-						}
-
-						return null;
+					if (fileTime.toMillis() <= getStartTime()) {
+						Files.move(
+							sourceFilePath, targetFilePath,
+							StandardCopyOption.REPLACE_EXISTING);
+					}
+					else {
+						Files.deleteIfExists(sourceFilePath);
 					}
 
-				};
+					return null;
+				}
+
+			};
 
 			FileLockRetryUtil.registerPathCallable(pathCallable);
 		}
