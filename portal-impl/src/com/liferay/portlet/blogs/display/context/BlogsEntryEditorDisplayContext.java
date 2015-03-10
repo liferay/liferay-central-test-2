@@ -67,14 +67,12 @@ public class BlogsEntryEditorDisplayContext {
 	}
 
 	protected void populateCoverImageCaptionEditorData() throws JSONException {
-		JSONObject editorConfigJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		JSONObject editorConfigJSONObject = JSONFactoryUtil.createJSONObject();
 
 		editorConfigJSONObject.put("allowedContent", "a");
 		editorConfigJSONObject.put("disallowedContent", "br");
 
-		JSONObject toolbarJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		JSONObject toolbarJSONObject = JSONFactoryUtil.createJSONObject();
 
 		JSONArray stylesJSONObject = JSONFactoryUtil.createJSONArray("['a']");
 
