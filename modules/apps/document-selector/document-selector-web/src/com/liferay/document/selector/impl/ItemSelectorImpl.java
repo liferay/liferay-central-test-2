@@ -28,7 +28,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletURLFactoryUtil;
 
 import java.lang.reflect.InvocationTargetException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +40,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import org.apache.commons.beanutils.BeanUtils;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferencePolicyOption;
@@ -77,7 +75,7 @@ public class ItemSelectorImpl implements ItemSelector {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List<ItemSelectorViewRenderer<?>> getItemSelectorViewRenderers(
 		Map<String, String> parameters) {
 
@@ -290,8 +288,8 @@ public class ItemSelectorImpl implements ItemSelector {
 				return String.class;
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
+			@SuppressWarnings("rawtypes")
 			public Class<Class<?>> getTypeClass() {
 				return (Class)Class.class;
 			}
