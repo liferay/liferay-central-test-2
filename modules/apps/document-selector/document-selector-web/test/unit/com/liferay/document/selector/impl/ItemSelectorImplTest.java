@@ -56,23 +56,17 @@ public class ItemSelectorImplTest extends PowerMockito {
 			MediaItemSelectorCriterion.class.getName() + "," +
 				FlickrItemSelectorCriterion.class.getName(),
 			parameters.get("criteria"));
-
 		Assert.assertNull(parameters.get("0_desiredReturnTypes"));
-
 		Assert.assertEquals(
 			String.valueOf(_mediaItemSelectorCriterion.getMaxSize()),
 			parameters.get("0_maxSize"));
-
 		Assert.assertEquals(
 			_mediaItemSelectorCriterion.getFileExtension(),
 			parameters.get("0_fileExtension"));
-
 		Assert.assertEquals(
 			URL.class.getName(), parameters.get("1_desiredReturnTypes"));
-
 		Assert.assertEquals(
 			_flickrItemSelectorCriterion.getUser(), parameters.get("1_user"));
-
 		Assert.assertEquals(5, parameters.size());
 	}
 
@@ -101,7 +95,6 @@ public class ItemSelectorImplTest extends PowerMockito {
 		Assert.assertEquals(
 			_mediaItemSelectorCriterion.getMaxSize(),
 			mediaItemSelectorCriterion.getMaxSize());
-
 		Assert.assertEquals(
 			MediaItemSelectorView.HTML,
 			mediaItemSelectorViewRenderer.getHTML());
@@ -117,7 +110,6 @@ public class ItemSelectorImplTest extends PowerMockito {
 		Assert.assertEquals(
 			_flickrItemSelectorCriterion.getUser(),
 			flickrItemSelectorCriterion.getUser());
-
 		Assert.assertEquals(
 			FlickrItemSelectorView.HTML,
 			flickrItemSelectorViewRenderer.getHTML());
@@ -128,7 +120,6 @@ public class ItemSelectorImplTest extends PowerMockito {
 	private void _setUpItemSelectionCriterionHandlers() {
 		_itemSelectorImpl.setItemSelectionCriterionHandler(
 			new MediaItemSelectorCriterionHandler());
-
 		_itemSelectorImpl.setItemSelectionCriterionHandler(
 			new FlickrItemSelectorCriterionHandler());
 	}
