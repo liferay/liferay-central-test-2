@@ -96,11 +96,9 @@ if (feed != null) {
 	feedURL = new PortletURLImpl(request, PortletKeys.JOURNAL, targetLayoutPlid, PortletRequest.RESOURCE_PHASE);
 
 	feedURL.setCacheability(ResourceURL.FULL);
-
-	feedURL.setResourceID("rss");
-
 	feedURL.setParameter("groupId", String.valueOf(groupId));
 	feedURL.setParameter("feedId", String.valueOf(feedId));
+	feedURL.setResourceID("rss");
 }
 %>
 
