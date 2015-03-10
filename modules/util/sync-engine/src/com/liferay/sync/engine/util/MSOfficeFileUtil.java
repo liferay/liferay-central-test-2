@@ -48,7 +48,7 @@ public class MSOfficeFileUtil {
 		return false;
 	}
 
-	public static boolean isOfficeTempCreatedFile(Path filePath) {
+	public static boolean isTempCreatedFile(Path filePath) {
 		if (Files.isDirectory(filePath)) {
 			return false;
 		}
@@ -64,7 +64,7 @@ public class MSOfficeFileUtil {
 		return false;
 	}
 
-	public static boolean isOfficeTempRenamedFile(Path filePath) {
+	public static boolean isTempRenamedFile(Path filePath) {
 		if (Files.isDirectory(filePath)) {
 			return false;
 		}
