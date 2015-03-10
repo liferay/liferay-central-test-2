@@ -73,6 +73,30 @@ public class FileUtil {
 		return checksum1.equals(checksum2);
 	}
 
+	public static void deleteFile(final Path filePath) {
+		try {
+			Files.deleteIfExists(filePath);
+		}
+		catch (Exception e) {
+			FilePathCallable filePathCallable = new FilePathCallable(filePath) {
+
+				@Override
+				public Object call() throws Exception {
+					FileTime fileTime = Files.getLastModifiedTime(filePath);
+
+					if (fileTime.toMillis() <= getStartTime()) {
+						Files.deleteIfExists(filePath);
+					}
+
+					return null;
+				}
+
+			};
+
+			FileLockRetryUtil.registerFilePathCallable(filePathCallable);
+		}
+	}
+
 	public static void fireDeleteEvents(Path filePath) throws IOException {
 		long startTime = System.currentTimeMillis();
 
@@ -487,16 +511,40 @@ public class FileUtil {
 		return true;
 	}
 
-	public static void moveFile(Path sourceFilePath, Path targetFilePath) {
-		checkFilePath(sourceFilePath);
+	public static void moveFile(
+		final Path sourceFilePath, final Path targetFilePath) {
 
 		try {
+			checkFilePath(sourceFilePath);
+
 			Files.move(
 				sourceFilePath, targetFilePath,
 				StandardCopyOption.REPLACE_EXISTING);
 		}
 		catch (Exception e) {
-			_logger.error(e.getMessage(), e);
+			FilePathCallable filePathCallable =
+				new FilePathCallable(sourceFilePath) {
+
+					@Override
+					public Object call() throws Exception {
+						FileTime fileTime = Files.getLastModifiedTime(
+							targetFilePath);
+
+						if (fileTime.toMillis() <= getStartTime()) {
+							Files.move(
+								sourceFilePath, targetFilePath,
+								StandardCopyOption.REPLACE_EXISTING);
+						}
+						else {
+							Files.deleteIfExists(sourceFilePath);
+						}
+
+						return null;
+					}
+
+				};
+
+			FileLockRetryUtil.registerFilePathCallable(filePathCallable);
 		}
 	}
 
@@ -525,8 +573,51 @@ public class FileUtil {
 		Files.setLastModifiedTime(filePath, fileTime);
 	}
 
-	public static void writeFileKey(Path filePath, String fileKey) {
-		if (!Files.exists(filePath)) {
+	public static void writeFileKey(final Path filePath, final String fileKey) {
+		if (FileUtil.getFileKey(filePath) == Long.parseLong(fileKey)) {
+			return;
+		}
+
+		FilePathCallable filePathCallable = new FilePathCallable(filePath) {
+
+			@Override
+			public Object call() throws Exception {
+				doWriteFileKey(filePath, fileKey);
+
+				return null;
+			}
+
+		};
+
+		FileLockRetryUtil.registerFilePathCallable(filePathCallable);
+	}
+
+	protected static void checkFilePath(Path filePath) {
+
+		// Check to see if the file or folder is still being written to. If
+		// it is, wait until the process is finished before making any future
+		// modifications. This is used to prevent file system interruptions.
+
+		try {
+			while (true) {
+				long size1 = FileUtils.sizeOf(filePath.toFile());
+
+				Thread.sleep(1000);
+
+				long size2 = FileUtils.sizeOf(filePath.toFile());
+
+				if (size1 == size2) {
+					break;
+				}
+			}
+		}
+		catch (Exception e) {
+			_logger.error(e.getMessage(), e);
+		}
+	}
+
+	protected static void doWriteFileKey(Path filePath, String fileKey) {
+		if (FileUtil.getFileKey(filePath) == Long.parseLong(fileKey)) {
 			return;
 		}
 
@@ -563,30 +654,6 @@ public class FileUtil {
 			catch (Exception e) {
 				_logger.error(e.getMessage(), e);
 			}
-		}
-	}
-
-	protected static void checkFilePath(Path filePath) {
-
-		// Check to see if the file or folder is still being written to. If
-		// it is, wait until the process is finished before making any future
-		// modifications. This is used to prevent file system interruptions.
-
-		try {
-			while (true) {
-				long size1 = FileUtils.sizeOf(filePath.toFile());
-
-				Thread.sleep(1000);
-
-				long size2 = FileUtils.sizeOf(filePath.toFile());
-
-				if (size1 == size2) {
-					break;
-				}
-			}
-		}
-		catch (Exception e) {
-			_logger.error(e.getMessage(), e);
 		}
 	}
 

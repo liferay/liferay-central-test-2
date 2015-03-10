@@ -16,6 +16,7 @@ package com.liferay.sync.engine.util;
 
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
@@ -25,9 +26,6 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Shinn Lok
@@ -39,9 +37,6 @@ public class FileLockRetryUtil {
 
 		_filePathCallables.add(filePathCallable);
 	}
-
-	private static final Logger _logger = LoggerFactory.getLogger(
-		FileLockRetryUtil.class);
 
 	private static final List<FilePathCallable> _filePathCallables =
 		new ArrayList<>();
@@ -67,11 +62,24 @@ public class FileLockRetryUtil {
 					try {
 						Path filePath = filePathCallable.getFilePath();
 
-						fileChannel = FileChannel.open(
-							filePath, StandardOpenOption.READ,
-							StandardOpenOption.WRITE);
+						if (Files.notExists(filePath)) {
+							iterator.remove();
 
-						fileLock = FileUtil.getFileLock(fileChannel);
+							continue;
+						}
+
+						if (Files.isDirectory(filePath)) {
+							filePathCallable.call();
+
+							iterator.remove();
+						}
+						else {
+							fileChannel = FileChannel.open(
+								filePath, StandardOpenOption.READ,
+								StandardOpenOption.WRITE);
+
+							fileLock = FileUtil.getFileLock(fileChannel);
+						}
 
 						if (fileLock != null) {
 							filePathCallable.call();
@@ -80,9 +88,6 @@ public class FileLockRetryUtil {
 						}
 					}
 					catch (Exception e) {
-						if (_logger.isDebugEnabled()) {
-							_logger.debug(e.getMessage(), e);
-						}
 					}
 					finally {
 						FileUtil.releaseFileLock(fileLock);
@@ -95,7 +100,7 @@ public class FileLockRetryUtil {
 		};
 
 		scheduledExecutorService.scheduleAtFixedRate(
-			runnable, 0, 1, TimeUnit.SECONDS);
+			runnable, 0, 5, TimeUnit.SECONDS);
 	}
 
 }
