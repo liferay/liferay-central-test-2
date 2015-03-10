@@ -73,6 +73,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.SSLContexts;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -437,7 +438,7 @@ public class Session {
 	private SSLConnectionSocketFactory _getTrustingSSLSocketFactory()
 		throws Exception {
 
-		SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
+		SSLContextBuilder sslContextBuilder = SSLContexts.custom();
 
 		sslContextBuilder.loadTrustMaterial(
 			null, new TrustSelfSignedStrategy());
