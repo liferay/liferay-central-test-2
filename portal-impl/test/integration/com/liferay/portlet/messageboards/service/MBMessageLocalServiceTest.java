@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
@@ -76,7 +75,7 @@ public class MBMessageLocalServiceTest {
 
 	@Test
 	public void testDeleteAttachmentsWhenUpdatingMessageAndTrashDisabled()
-		throws PortalException {
+		throws Exception {
 
 		TrashUtil.disableTrash(_group);
 
@@ -100,7 +99,7 @@ public class MBMessageLocalServiceTest {
 
 	@Test
 	public void testDeleteAttachmentsWhenUpdatingMessageAndTrashEnabled()
-		throws PortalException {
+		throws Exception {
 
 		MBMessage message = addMessage(null, true);
 
@@ -129,7 +128,7 @@ public class MBMessageLocalServiceTest {
 	}
 
 	@Test
-	public void testGetNoAssetMessages() throws PortalException {
+	public void testGetNoAssetMessages() throws Exception {
 		addMessage(null, false);
 
 		MBMessage message = addMessage(null, false);
@@ -149,7 +148,7 @@ public class MBMessageLocalServiceTest {
 	}
 
 	@Test
-	public void testThreadLastPostDate() throws PortalException {
+	public void testThreadLastPostDate() throws Exception {
 		Date date = new Date();
 
 		MBMessage parentMessage = addMessage(null, false, date);
@@ -181,14 +180,14 @@ public class MBMessageLocalServiceTest {
 
 	protected MBMessage addMessage(
 			MBMessage parentMessage, boolean addAttachments)
-		throws PortalException {
+		throws Exception {
 
 		return addMessage(parentMessage, addAttachments, new Date());
 	}
 
 	protected MBMessage addMessage(
 			MBMessage parentMessage, boolean addAttachments, Date date)
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
