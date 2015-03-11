@@ -21,13 +21,14 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 
 /**
- * Provides an interface responsible for
- * extending the portlet toolbar by adding more elements.
+ * Provides an interface responsible for extending the portlet toolbar by adding
+ * more elements.
  *
  * <p>
- * Implementations of this class must be OSGI components that are registered in the
- * OSGI Registry. The way that this component is registered in the OSGI Registry must
- * be consistent with the way the {@link com.liferay.portal.kernel.portlet.toolbar.contributor.locator.PortletToolbarContributorLocator}
+ * Implementations of this class must be OSGI components that are registered in
+ * the OSGI Registry. The way that this component is registered in the OSGI
+ * Registry must be consistent with the way the {@link
+ * com.liferay.portal.kernel.portlet.toolbar.contributor.locator.PortletToolbarContributorLocator}
  * implementations search for it in the registry.
  * </p>
  *
@@ -38,6 +39,7 @@ public interface PortletToolbarContributor {
 	/**
 	 * Returns menus to be rendered in the portlet toolbar.
 	 *
+	 * @param  portletRequest the portlet request
 	 * @return menus to be rendered in the portlet toolbar
 	 */
 	public List<Menu> getPortletTitleMenus(PortletRequest portletRequest);
