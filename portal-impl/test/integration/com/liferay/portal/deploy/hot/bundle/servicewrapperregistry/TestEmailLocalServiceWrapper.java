@@ -14,7 +14,6 @@
 
 package com.liferay.portal.deploy.hot.bundle.servicewrapperregistry;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.EmailAddressLocalService;
 import com.liferay.portal.service.EmailAddressLocalServiceWrapper;
@@ -43,9 +42,7 @@ public class TestEmailLocalServiceWrapper
 	}
 
 	@Override
-	public EmailAddress getEmailAddress(long emailAddressId)
-		throws PortalException {
-
+	public EmailAddress getEmailAddress(long emailAddressId) {
 		EmailAddress emailAddress = createEmailAddress(1);
 
 		emailAddress.setAddress("email@liferay.com");
