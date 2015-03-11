@@ -47,11 +47,9 @@ import javax.portlet.PortletRequest;
 public interface PortletToolbarContributorLocator {
 
 	/**
-	 * Returns a list of PortletToolbarContributor for a particular request and
-	 * portletId.
+	 * Returns portlet toolbar contributors for a particular portlet and request.
 	 *
-	 * @return a list of PortletToolbarContributor for a particular request and
-	 *         portletId
+	 * @return portlet toolbar contributors for a particular portlet and request
 	 */
 	public List<PortletToolbarContributor> getPortletToolbarContributors(
 		String portletId, PortletRequest portletRequest);
