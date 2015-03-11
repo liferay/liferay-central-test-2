@@ -128,9 +128,7 @@ public class JavadocFormatter {
 
 		directoryScanner.setBasedir(_inputDir);
 		directoryScanner.setExcludes(
-			new String[] {
-				"**\\classes\\**", "**\\portal-client\\**", "**\\templates\\**"
-			});
+			new String[] {"**\\classes\\**", "**\\portal-client\\**"});
 
 		for (String limit : limits) {
 			List<String> includes = new ArrayList<>();
