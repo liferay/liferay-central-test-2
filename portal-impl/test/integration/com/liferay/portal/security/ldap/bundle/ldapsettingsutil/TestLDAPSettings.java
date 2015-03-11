@@ -44,7 +44,9 @@ public class TestLDAPSettings implements LDAPSettings {
 		throws Exception {
 
 		Properties properties = new Properties();
-		properties.setProperty("ldapServerId", ldapServerId + "");
+
+		properties.setProperty("ldapServerId", String.valueOf(ldapServerId));
+
 		return properties;
 	}
 
@@ -53,7 +55,9 @@ public class TestLDAPSettings implements LDAPSettings {
 		throws Exception {
 
 		Properties properties = new Properties();
-		properties.setProperty("ldapServerId", ldapServerId + "");
+
+		properties.setProperty("ldapServerId", String.valueOf(ldapServerId));
+
 		return properties;
 	}
 
@@ -62,7 +66,9 @@ public class TestLDAPSettings implements LDAPSettings {
 		throws Exception {
 
 		Properties properties = new Properties();
+
 		properties.setProperty("ldapServerId", ldapServerId + "");
+
 		return properties;
 	}
 
@@ -89,7 +95,9 @@ public class TestLDAPSettings implements LDAPSettings {
 		throws Exception {
 
 		Properties properties = new Properties();
+
 		properties.setProperty("ldapServerId", ldapServerId + "");
+
 		return properties;
 	}
 
@@ -98,7 +106,9 @@ public class TestLDAPSettings implements LDAPSettings {
 		throws Exception {
 
 		Properties properties = new Properties();
+
 		properties.setProperty("ldapServerId", ldapServerId + "");
+
 		return properties;
 	}
 
