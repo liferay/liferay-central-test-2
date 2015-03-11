@@ -223,8 +223,6 @@ public class PortalLDAPUtilTest {
 			Assert.assertEquals("1:1", name);
 		}
 		catch (Exception e) {
-			System.out.println("hello failue!");
-			e.printStackTrace();
 			Assert.fail();
 		}
 	}
