@@ -39,33 +39,42 @@ public class BBCodeTranslatorUtilTest {
 
 	@Test
 	public void testEmoticonDescriptions() {
-		Assert.assertEquals(
-			3, BBCodeTranslatorUtil.getEmoticonDescriptions().length);
+		String[] emoticonDescriptions =
+			BBCodeTranslatorUtil.getEmoticonDescriptions();
+
+		Assert.assertEquals(3, emoticonDescriptions.length);
 	}
 
 	@Test
 	public void testEmoticonFiles() {
-		Assert.assertEquals(2, BBCodeTranslatorUtil.getEmoticonFiles().length);
+		String[] emoticonFiles = BBCodeTranslatorUtil.getEmoticonFiles();
+
+		Assert.assertEquals(2, emoticonFiles.length);
 	}
 
 	@Test
 	public void testEmoticonSymbols() {
-		Assert.assertEquals(
-			4, BBCodeTranslatorUtil.getEmoticonSymbols().length);
+		String[] emoticonSymbols = BBCodeTranslatorUtil.getEmoticonSymbols();
+
+		Assert.assertEquals(4, emoticonSymbols.length);
 	}
 
 	@Test
 	public void testGetBBCodeTranslator() {
+		BBCodeTranslator bbCodeTranslator =
+			BBCodeTranslatorUtil.getBBCodeTranslator();
+			
+		Class<?> clazz = bbCodeTranslator.getClass();
+
 		Assert.assertEquals(
-			TestBBCodeTranslator.class.getName(),
-			BBCodeTranslatorUtil.getBBCodeTranslator().getClass().getName());
+			TestBBCodeTranslator.class.getName(), clazz.getName());
 	}
 
 	@Test
 	public void testHTML() {
-		String htmlTag =
-			TestBBCodeTranslator.START_TAG + "1" + TestBBCodeTranslator.END_TAG;
-		Assert.assertEquals(htmlTag, BBCodeTranslatorUtil.getHTML("1"));
+		Assert.assertEquals(
+			TestBBCodeTranslator.START_TAG + "1" + TestBBCodeTranslator.END_TAG,
+			BBCodeTranslatorUtil.getHTML("1"));
 	}
 
 	@Test
