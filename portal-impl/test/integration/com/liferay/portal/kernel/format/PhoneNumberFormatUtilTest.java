@@ -66,7 +66,6 @@ public class PhoneNumberFormatUtilTest {
 	public void testValidate() {
 		Assert.assertTrue(
 			PhoneNumberFormatUtil.validate(TestPhoneNumberFormat.FORMATTED));
-
 		Assert.assertFalse(
 			PhoneNumberFormatUtil.validate(TestPhoneNumberFormat.UNFORMATTED));
 	}
