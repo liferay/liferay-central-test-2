@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `334abf3`.*
+*This document has been reviewed through commit `68d6f19`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1060,32 +1060,34 @@ With this change, developers no longer need to extend any particular class to
 create their own `DLProcessor`.
 
 ---------------------------------------
-### DDM Template search operation need to pass resourceClassNameId parameter
+
+### Added Required Parameter `resourceClassNameId` for DDM Template Search Operations
 - **Date:** 2015-Mar-03
 - **JIRA Ticket:** LPS-52990
 
 #### What changed?
 
-DDM Template `search` and `searchCount` operations have a new parameter called
-resourceClassNameid
+The DDM template `search` and `searchCount` operations have a new parameter
+called `resourceClassNameId`.
 
 #### Who is affected?
 
-All developers who have direct calls to DDMTemplateService or 
-DDMTemplateLocalService
+This affects developers who have direct calls to the `DDMTemplateService` or 
+`DDMTemplateLocalService`.
 
 #### How should I update my code?
 
-You need to add the resourceClassNameId parameter to your calls. The 
-resourceClassNameId represents the resource that owns the permission for the
-DDMTemplate. For example, if the template is a WCM Template resourceClassNameId 
-points to JournalArticle classNameId, if it's a DDL Template it points to
-DDLRecordSet classNameId, if it's a ADT template it points to 
-PortletDisplayTemplate classNameId
+You should add the `resourceClassNameId` parameter to your calls. This parameter
+represents the resource that owns the permission for the DDM template. For
+example, if the template is a WCM template, the `resourceClassNameId` points to
+the `JournalArticle`'s `classNameId`. If the template is a DDL template, the
+`resourceClassNameId` points to the `DDLRecordSet`'s `classNameId`. If the
+template is an ADT template, the `resourceClassNameId` points to the
+`PortletDisplayTemplate`'s `classNameId`.
 
 #### Why was this change made?
 
-This change was made in order to implement model resource permissions to 
-DDM Templates, such as VIEW, DELETE, PERMISSIONS, UPDATE.
+This change was made in order to implement model resource permissions for
+DDM templates, such as `VIEW`, `DELETE`, `PERMISSIONS`, and `UPDATE`.
 
 ---------------------------------------
