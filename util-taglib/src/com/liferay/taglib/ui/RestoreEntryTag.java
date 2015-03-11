@@ -77,6 +77,6 @@ public class RestoreEntryTag extends IncludeTag {
 
 	private String _overrideMessage = _OVERRIDE_MESSAGE;
 	private String _renameMessage = _RENAME_MESSAGE;
-	private PortletURL _restoreURL = null;
+	private PortletURL _restoreURL;
 
 }
