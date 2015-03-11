@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.ldap.bundle.portalldaputil;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.ldap.PortalLDAP;
 
 import java.util.List;
@@ -41,8 +42,7 @@ public class TestPortalLDAP implements PortalLDAP {
 	public LdapContext getContext(long ldapServerId, long companyId)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() + "#getContext(long, long)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -53,9 +53,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String credentials)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() +
-				"#getContext(long, String, String, String)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -64,8 +62,7 @@ public class TestPortalLDAP implements PortalLDAP {
 	public Binding getGroup(long ldapServerId, long companyId, String groupName)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() + "#getGroup(long, long, String)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -76,10 +73,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String fullDistinguishedName)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() +
-				"#getGroupAttributes(long, long, " +
-					LdapContext.class.getName() + "String)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -90,10 +84,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String fullDistinguishedName, boolean includeReferenceAttributes)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() +
-				"#getGroupAttributes(long, long, " +
-					LdapContext.class.getName() + "String, boolean)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -158,10 +149,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String filter, Attribute attribute)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() + "#getMultivaluedAttribute(long, " +
-				LdapContext.class.getName() + "String, String" +
-					Attribute.class.getName() +")");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -180,9 +168,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String emailAddress)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() +
-				"#getUser(long, long, String, String)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -193,9 +179,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String emailAddress, boolean checkOriginalEmail)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() +
-				"#getUser(long, long, String, String, boolean)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
@@ -206,9 +190,7 @@ public class TestPortalLDAP implements PortalLDAP {
 			String fullDistinguishedName)
 		throws Exception {
 
-		_atomicReference.set(
-			TestPortalLDAP.class.getName() + "#getUserAttributes(long, long," +
-				LdapContext.class.getName() + ", String)");
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		return null;
 	}
