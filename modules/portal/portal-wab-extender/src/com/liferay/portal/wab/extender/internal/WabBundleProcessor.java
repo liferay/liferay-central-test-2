@@ -15,9 +15,9 @@
 package com.liferay.portal.wab.extender.internal;
 
 import com.liferay.portal.kernel.util.HashMapDictionary;
-import com.liferay.portal.wab.extender.internal.adaptor.FilterExceptionAdaptor;
-import com.liferay.portal.wab.extender.internal.adaptor.ServletContextListenerExceptionAdaptor;
-import com.liferay.portal.wab.extender.internal.adaptor.ServletExceptionAdaptor;
+import com.liferay.portal.wab.extender.internal.adapter.FilterExceptionAdapter;
+import com.liferay.portal.wab.extender.internal.adapter.ServletContextListenerExceptionAdapter;
+import com.liferay.portal.wab.extender.internal.adapter.ServletExceptionAdapter;
 import com.liferay.portal.wab.extender.internal.definition.FilterDefinition;
 import com.liferay.portal.wab.extender.internal.definition.ListenerDefinition;
 import com.liferay.portal.wab.extender.internal.definition.ServletDefinition;
@@ -44,11 +44,9 @@ import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionListener;
-
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.felix.utils.log.Logger;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
@@ -395,8 +393,8 @@ public class WabBundleProcessor implements ServletContextListener {
 					value);
 			}
 
-			FilterExceptionAdaptor filterExceptionAdaptor =
-				new FilterExceptionAdaptor(filterDefinition.getFilter());
+			FilterExceptionAdapter filterExceptionAdaptor =
+				new FilterExceptionAdapter(filterDefinition.getFilter());
 
 			ServiceRegistration<Filter> serviceRegistration =
 				_bundleContext.registerService(
@@ -444,9 +442,9 @@ public class WabBundleProcessor implements ServletContextListener {
 				continue;
 			}
 
-			ServletContextListenerExceptionAdaptor
+			ServletContextListenerExceptionAdapter
 				servletContextListenerExceptionAdaptor =
-					new ServletContextListenerExceptionAdaptor(
+					new ServletContextListenerExceptionAdapter(
 						(ServletContextListener)
 							listenerDefinition.getEventListener());
 
@@ -509,8 +507,8 @@ public class WabBundleProcessor implements ServletContextListener {
 					value);
 			}
 
-			ServletExceptionAdaptor servletExceptionAdaptor =
-				new ServletExceptionAdaptor(servletDefinition.getServlet());
+			ServletExceptionAdapter servletExceptionAdaptor =
+				new ServletExceptionAdapter(servletDefinition.getServlet());
 
 			ServiceRegistration<Servlet> serviceRegistration =
 				_bundleContext.registerService(

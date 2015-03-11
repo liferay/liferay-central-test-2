@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.wab.extender.internal.adaptor;
+package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -26,24 +25,15 @@ import javax.servlet.ServletResponse;
 /**
  * @author Raymond Augé
  */
-public class FilterExceptionAdaptor implements Filter {
+public class ServletExceptionAdapter implements Servlet {
 
-	public FilterExceptionAdaptor(Filter filter) {
-		_filter = filter;
+	public ServletExceptionAdapter(Servlet servlet) {
+		_servlet = servlet;
 	}
 
 	@Override
 	public void destroy() {
-		_filter.destroy();
-	}
-
-	@Override
-	public void doFilter(
-			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain filterChain)
-		throws IOException, ServletException {
-
-		_filter.doFilter(servletRequest, servletResponse, filterChain);
+		_servlet.destroy();
 	}
 
 	public Exception getException() {
@@ -51,16 +41,34 @@ public class FilterExceptionAdaptor implements Filter {
 	}
 
 	@Override
-	public void init(FilterConfig filterConfig) {
+	public ServletConfig getServletConfig() {
+		return _servlet.getServletConfig();
+	}
+
+	@Override
+	public String getServletInfo() {
+		return _servlet.getServletInfo();
+	}
+
+	@Override
+	public void init(ServletConfig servletConfig) throws ServletException {
 		try {
-			_filter.init(filterConfig);
+			_servlet.init(servletConfig);
 		}
 		catch (Exception e) {
 			_exception = e;
 		}
 	}
 
+	@Override
+	public void service(
+			ServletRequest servletRequest, ServletResponse servletResponse)
+		throws IOException, ServletException {
+
+		_servlet.service(servletRequest, servletResponse);
+	}
+
 	private Exception _exception;
-	private final Filter _filter;
+	private final Servlet _servlet;
 
 }

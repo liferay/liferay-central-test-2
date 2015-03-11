@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.wab.extender.internal.adaptor;
+package com.liferay.portal.wab.extender.internal.adapter;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,10 +20,10 @@ import javax.servlet.ServletContextListener;
 /**
  * @author Raymond Augé
  */
-public class ServletContextListenerExceptionAdaptor
+public class ServletContextListenerExceptionAdapter
 	implements ServletContextListener {
 
-	public ServletContextListenerExceptionAdaptor(
+	public ServletContextListenerExceptionAdapter(
 		ServletContextListener servletContextListener) {
 
 		_servletContextListener = servletContextListener;

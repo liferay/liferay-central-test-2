@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.wab.extender.internal.adaptor;
+package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.io.IOException;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -25,15 +26,24 @@ import javax.servlet.ServletResponse;
 /**
  * @author Raymond Augé
  */
-public class ServletExceptionAdaptor implements Servlet {
+public class FilterExceptionAdapter implements Filter {
 
-	public ServletExceptionAdaptor(Servlet servlet) {
-		_servlet = servlet;
+	public FilterExceptionAdapter(Filter filter) {
+		_filter = filter;
 	}
 
 	@Override
 	public void destroy() {
-		_servlet.destroy();
+		_filter.destroy();
+	}
+
+	@Override
+	public void doFilter(
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain filterChain)
+		throws IOException, ServletException {
+
+		_filter.doFilter(servletRequest, servletResponse, filterChain);
 	}
 
 	public Exception getException() {
@@ -41,34 +51,16 @@ public class ServletExceptionAdaptor implements Servlet {
 	}
 
 	@Override
-	public ServletConfig getServletConfig() {
-		return _servlet.getServletConfig();
-	}
-
-	@Override
-	public String getServletInfo() {
-		return _servlet.getServletInfo();
-	}
-
-	@Override
-	public void init(ServletConfig servletConfig) throws ServletException {
+	public void init(FilterConfig filterConfig) {
 		try {
-			_servlet.init(servletConfig);
+			_filter.init(filterConfig);
 		}
 		catch (Exception e) {
 			_exception = e;
 		}
 	}
 
-	@Override
-	public void service(
-			ServletRequest servletRequest, ServletResponse servletResponse)
-		throws IOException, ServletException {
-
-		_servlet.service(servletRequest, servletResponse);
-	}
-
 	private Exception _exception;
-	private final Servlet _servlet;
+	private final Filter _filter;
 
 }
