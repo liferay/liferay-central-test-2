@@ -143,7 +143,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to unregister MBean" +
+							"Unable to unregister mbean" +
 								objectName.getCanonicalName(),
 							e);
 					}
@@ -187,7 +187,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 			if (Validator.isNull(objectName)) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"No object name found for :" + dynamicMBean.getClass());
+						"No object name found for " + dynamicMBean.getClass());
 				}
 
 				return dynamicMBean;
@@ -207,7 +207,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Cannot register mbean", e);
+					_log.warn("Unable to register mbean", e);
 				}
 			}
 
@@ -240,7 +240,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Cannot unregister mbean", e);
+					_log.warn("Unable to unregister mbean", e);
 				}
 			}
 		}
