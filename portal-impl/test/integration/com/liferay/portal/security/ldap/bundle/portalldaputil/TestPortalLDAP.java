@@ -41,7 +41,8 @@ public class TestPortalLDAP implements PortalLDAP {
 	public LdapContext getContext(long ldapServerId, long companyId)
 		throws Exception {
 
-		_atomicReference.set(_CLASS_NAME + "#getContext(long, long)");
+		_atomicReference.set(
+			TestPortalLDAP.class.getName() + "#getContext(long, long)");
 
 		return null;
 	}
@@ -53,7 +54,8 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-			_CLASS_NAME + "#getContext(long, String, String, String)");
+			TestPortalLDAP.class.getName() +
+				"#getContext(long, String, String, String)");
 
 		return null;
 	}
@@ -62,7 +64,8 @@ public class TestPortalLDAP implements PortalLDAP {
 	public Binding getGroup(long ldapServerId, long companyId, String groupName)
 		throws Exception {
 
-		_atomicReference.set(_CLASS_NAME + "#getGroup(long, long, String)");
+		_atomicReference.set(
+			TestPortalLDAP.class.getName() + "#getGroup(long, long, String)");
 
 		return null;
 	}
@@ -74,7 +77,8 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-				_CLASS_NAME + "#getGroupAttributes(long, long, " +
+			TestPortalLDAP.class.getName() +
+				"#getGroupAttributes(long, long, " +
 					LdapContext.class.getName() + "String)");
 
 		return null;
@@ -87,7 +91,8 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-				_CLASS_NAME + "#getGroupAttributes(long, long, " +
+			TestPortalLDAP.class.getName() +
+				"#getGroupAttributes(long, long, " +
 					LdapContext.class.getName() + "String, boolean)");
 
 		return null;
@@ -154,9 +159,9 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-				_CLASS_NAME + "#getMultivaluedAttribute(long, " +
-						LdapContext.class.getName() + "String, String" +
-						Attribute.class.getName() +")");
+			TestPortalLDAP.class.getName() + "#getMultivaluedAttribute(long, " +
+				LdapContext.class.getName() + "String, String" +
+					Attribute.class.getName() +")");
 
 		return null;
 	}
@@ -176,7 +181,8 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-			_CLASS_NAME + "#getUser(long, long, String, String)");
+			TestPortalLDAP.class.getName() +
+				"#getUser(long, long, String, String)");
 
 		return null;
 	}
@@ -188,7 +194,8 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-			_CLASS_NAME + "#getUser(long, long, String, String, boolean)");
+			TestPortalLDAP.class.getName() +
+				"#getUser(long, long, String, String, boolean)");
 
 		return null;
 	}
@@ -200,8 +207,8 @@ public class TestPortalLDAP implements PortalLDAP {
 		throws Exception {
 
 		_atomicReference.set(
-				_CLASS_NAME + "#getUserAttributes(long, long," +
-					LdapContext.class.getName() + ", String)");
+			TestPortalLDAP.class.getName() + "#getUserAttributes(long, long," +
+				LdapContext.class.getName() + ", String)");
 
 		return null;
 	}
@@ -303,8 +310,6 @@ public class TestPortalLDAP implements PortalLDAP {
 	protected void getAtomicReference(AtomicReference atomicReference) {
 		_atomicReference = atomicReference;
 	}
-
-	private static final String _CLASS_NAME = TestPortalLDAP.class.getName();
 
 	private AtomicReference _atomicReference;
 
