@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy.bundle.organizationmembershippolicyfactory;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroupRole;
@@ -42,22 +41,18 @@ public class TestOrganizationMembershipPolicy
 
 	@Override
 	public void checkMembership(
-			long[] userIds, long[] addOrganizationIds,
-			long[] removeOrganizationIds)
-		throws PortalException {
+		long[] userIds, long[] addOrganizationIds,
+		long[] removeOrganizationIds) {
 	}
 
 	@Override
 	public void checkRoles(
-			List<UserGroupRole> addUserGroupRoles,
-			List<UserGroupRole> removeUserGroupRoles)
-		throws PortalException {
+		List<UserGroupRole> addUserGroupRoles,
+		List<UserGroupRole> removeUserGroupRoles) {
 	}
 
 	@Override
-	public boolean isMembershipAllowed(long userId, long organizationId)
-		throws PortalException {
-
+	public boolean isMembershipAllowed(long userId, long organizationId) {
 		if (userId == 1) {
 			return true;
 		}
@@ -67,9 +62,7 @@ public class TestOrganizationMembershipPolicy
 
 	@Override
 	public boolean isMembershipProtected(
-			PermissionChecker permissionChecker, long userId,
-			long organizationId)
-		throws PortalException {
+		PermissionChecker permissionChecker, long userId, long organizationId) {
 
 		if (userId == 1) {
 			return true;
@@ -79,9 +72,7 @@ public class TestOrganizationMembershipPolicy
 	}
 
 	@Override
-	public boolean isMembershipRequired(long userId, long organizationId)
-		throws PortalException {
-
+	public boolean isMembershipRequired(long userId, long organizationId) {
 		if (userId == 1) {
 			return true;
 		}
@@ -90,8 +81,8 @@ public class TestOrganizationMembershipPolicy
 	}
 
 	@Override
-	public boolean isRoleAllowed(long userId, long organizationId, long roleId)
-		throws PortalException {
+	public boolean isRoleAllowed(
+		long userId, long organizationId, long roleId) {
 
 		if (userId == 1) {
 			return true;
@@ -102,9 +93,8 @@ public class TestOrganizationMembershipPolicy
 
 	@Override
 	public boolean isRoleProtected(
-			PermissionChecker permissionChecker, long userId,
-			long organizationId, long roleId)
-		throws PortalException {
+		PermissionChecker permissionChecker, long userId, long organizationId,
+		long roleId) {
 
 		if (userId == 1) {
 			return true;
@@ -114,8 +104,8 @@ public class TestOrganizationMembershipPolicy
 	}
 
 	@Override
-	public boolean isRoleRequired(long userId, long organizationId, long roleId)
-		throws PortalException {
+	public boolean isRoleRequired(
+		long userId, long organizationId, long roleId) {
 
 		if (userId == 1) {
 			return true;
@@ -126,43 +116,39 @@ public class TestOrganizationMembershipPolicy
 
 	@Override
 	public void propagateMembership(
-			long[] userIds, long[] addOrganizationIds,
-			long[] removeOrganizationIds)
-		throws PortalException {
+		long[] userIds, long[] addOrganizationIds,
+		long[] removeOrganizationIds) {
 	}
 
 	@Override
 	public void propagateRoles(
-			List<UserGroupRole> addUserGroupRoles,
-			List<UserGroupRole> removeUserGroupRoles)
-		throws PortalException {
+		List<UserGroupRole> addUserGroupRoles,
+		List<UserGroupRole> removeUserGroupRoles) {
 	}
 
 	@Override
-	public void verifyPolicy() throws PortalException {
+	public void verifyPolicy() {
 	}
 
 	@Override
-	public void verifyPolicy(Organization organization) throws PortalException {
-	}
-
-	@Override
-	public void verifyPolicy(
-			Organization organization, Organization oldOrganization,
-			List<AssetCategory> oldAssetCategories, List<AssetTag> oldAssetTags,
-			Map<String, Serializable> oldExpandoAttributes)
-		throws PortalException {
-	}
-
-	@Override
-	public void verifyPolicy(Role role) throws PortalException {
+	public void verifyPolicy(Organization organization) {
 	}
 
 	@Override
 	public void verifyPolicy(
-			Role role, Role oldRole,
-			Map<String, Serializable> oldExpandoAttributes)
-		throws PortalException {
+		Organization organization, Organization oldOrganization,
+		List<AssetCategory> oldAssetCategories, List<AssetTag> oldAssetTags,
+		Map<String, Serializable> oldExpandoAttributes) {
+	}
+
+	@Override
+	public void verifyPolicy(Role role) {
+	}
+
+	@Override
+	public void verifyPolicy(
+		Role role, Role oldRole,
+		Map<String, Serializable> oldExpandoAttributes) {
 	}
 
 }
