@@ -125,10 +125,10 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetGroups1() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getGroups(
+			byte[] bytes = PortalLDAPUtil.getGroups(
 				1, 1, null, new byte[1], 1, null);
 
-			Assert.assertEquals(byteArray.length, 1);
+			Assert.assertEquals(bytes.length, 1);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -138,10 +138,10 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetGroups2() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getGroups(
+			byte[] bytes = PortalLDAPUtil.getGroups(
 				2, null, new byte[2], 2, "baseDN", "groupFilter", null);
 
-			Assert.assertEquals(byteArray.length, 2);
+			Assert.assertEquals(bytes.length, 2);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -151,10 +151,10 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetGroups3() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getGroups(
+			byte[] bytes = PortalLDAPUtil.getGroups(
 				3, 3, null, new byte[3], 3, new String[3], null);
 
-			Assert.assertEquals(byteArray.length, 3);
+			Assert.assertEquals(bytes.length, 3);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -164,11 +164,11 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetGroups4() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getGroups(
+			byte[] bytes = PortalLDAPUtil.getGroups(
 				4, null, new byte[4], 4, "baseDN", "groupFilter", new String[4],
 				null);
 
-			Assert.assertEquals(byteArray.length, 4);
+			Assert.assertEquals(bytes.length, 4);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -219,6 +219,7 @@ public class PortalLDAPUtilTest {
 	public void testGetNameInNamespace() {
 		try {
 			String name = PortalLDAPUtil.getNameInNamespace(1, 1, null);
+
 			Assert.assertEquals("1:1", name);
 		}
 		catch (Exception e) {
@@ -259,10 +260,10 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetUsers1() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getUsers(
+			byte[] bytes = PortalLDAPUtil.getUsers(
 				1, 1, null, new byte[1], 1, null);
 
-			Assert.assertEquals(byteArray.length, 1);
+			Assert.assertEquals(bytes.length, 1);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -272,10 +273,10 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetUsers2() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getUsers(
+			byte[] bytes = PortalLDAPUtil.getUsers(
 				2, null, new byte[2], 2, "baseDN", "userFilter", null);
 
-			Assert.assertEquals(byteArray.length, 2);
+			Assert.assertEquals(bytes.length, 2);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -285,10 +286,10 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetUsers3() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getUsers(
+			byte[] bytes = PortalLDAPUtil.getUsers(
 				3, 3, null, new byte[3], 3, new String[3], null);
 
-			Assert.assertEquals(byteArray.length, 3);
+			Assert.assertEquals(bytes.length, 3);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -298,11 +299,11 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testGetUsers4() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.getUsers(
+			byte[] bytes = PortalLDAPUtil.getUsers(
 				4, null, new byte[4], 4, "baseDN", "userFilter", new String[4],
 				null);
 
-			Assert.assertEquals(byteArray.length, 4);
+			Assert.assertEquals(bytes.length, 4);
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -326,7 +327,6 @@ public class PortalLDAPUtilTest {
 		try {
 			Assert.assertTrue(
 				PortalLDAPUtil.hasUser(1, 1, "test", "test@liferay-test.com"));
-
 			Assert.assertFalse(
 				PortalLDAPUtil.hasUser(2, 1, "test", "test@liferay-test.com"));
 		}
@@ -340,7 +340,6 @@ public class PortalLDAPUtilTest {
 		try {
 			Assert.assertTrue(
 				PortalLDAPUtil.isGroupMember(1, 1, "testGroup", "testUser"));
-
 			Assert.assertFalse(
 				PortalLDAPUtil.isGroupMember(2, 1, "testGroup", "testUser"));
 		}
@@ -355,7 +354,6 @@ public class PortalLDAPUtilTest {
 			Assert.assertTrue(
 				PortalLDAPUtil.isUserGroupMember(
 					1, 1, "testGroup", "testUser"));
-
 			Assert.assertFalse(
 				PortalLDAPUtil.isUserGroupMember(
 					2, 1, "testGroup", "testUser"));
@@ -368,11 +366,11 @@ public class PortalLDAPUtilTest {
 	@Test
 	public void testSearchLDAP() {
 		try {
-			byte[] byteArray = PortalLDAPUtil.searchLDAP(
+			byte[] bytes = PortalLDAPUtil.searchLDAP(
 				1, null, new byte[1], 1, "baseDN", "filter", new String[1],
 				null);
 
-			Assert.assertEquals(byteArray.length, 1);
+			Assert.assertEquals(bytes.length, 1);
 		}
 		catch (Exception e) {
 			Assert.fail();
