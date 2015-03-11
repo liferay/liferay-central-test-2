@@ -128,12 +128,7 @@ public class JavadocFormatter {
 
 		directoryScanner.setBasedir(_inputDir);
 		directoryScanner.setExcludes(
-			new String[] {
-				"**\\classes\\**", "**\\portal-client\\**",
-				"**\\src\\PortletViewController.java",
-				"**\\template\\Template.java",
-				"**\\wiki\\configuration\\WikiGroupServiceConfiguration.java"
-			});
+			new String[] {"**\\classes\\**", "**\\portal-client\\**"});
 
 		for (String limit : limits) {
 			List<String> includes = new ArrayList<>();
