@@ -111,7 +111,7 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 	}
 
 	@Override
-	public boolean isMaxMessagesCountExceeded() {
+	public boolean isDiscussionMaxComments() {
 		if (_message.isDiscussion() &&
 			(PropsValues.DISCUSSION_MAX_COMMENTS > 0) &&
 			(PropsValues.DISCUSSION_MAX_COMMENTS <= _discussionMessagesCount)) {

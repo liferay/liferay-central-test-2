@@ -169,7 +169,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Message
 
-		validateDiscussionMessagesCount(className, classPK);
+		validateDiscussionMaxComments(className, classPK);
 
 		long categoryId = MBCategoryConstants.DISCUSSION_CATEGORY_ID;
 
@@ -2489,7 +2489,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateDiscussionMessagesCount(
+	protected void validateDiscussionMaxComments(
 			String className, long classPK)
 		throws PortalException {
 
