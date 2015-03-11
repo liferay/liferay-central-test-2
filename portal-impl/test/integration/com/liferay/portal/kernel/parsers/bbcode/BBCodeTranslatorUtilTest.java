@@ -63,7 +63,7 @@ public class BBCodeTranslatorUtilTest {
 	public void testGetBBCodeTranslator() {
 		BBCodeTranslator bbCodeTranslator =
 			BBCodeTranslatorUtil.getBBCodeTranslator();
-			
+
 		Class<?> clazz = bbCodeTranslator.getClass();
 
 		Assert.assertEquals(
