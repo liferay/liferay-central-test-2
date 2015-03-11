@@ -1042,22 +1042,22 @@ The `DLProcessor` interface has a new method `getType()`.
 
 #### Who is affected?
 
-This affects developers who have created `DLProcessor`.
+This affects developers who have created a `DLProcessor`.
 
 #### How should I update my code?
 
-You should implement the new method in the `DLProcessor`, and return the type of
-processor. You can check the class `DLProcessorConstants` to see processor
-types.
+You should implement the new method and return the type of processor. You can
+check the class `DLProcessorConstants` to see processor types.
 
 #### Why was this change made?
 
 Previous to Liferay 7, developers were forced to extend one of the existing
-`DLProcessor` classes, and check the instance of that class to determine what
-type of processor was being used.
+`DLProcessor` classes and developers using the extended class had to check the
+instance of that class to determine its processor type.
 
 With this change, developers no longer need to extend any particular class to
-create their own `DLProcessor`.
+create their own `DLProcessor` and their processor's type can be clearly
+specified by a constant from the class `DLProcessorConstants`.
 
 ---------------------------------------
 
