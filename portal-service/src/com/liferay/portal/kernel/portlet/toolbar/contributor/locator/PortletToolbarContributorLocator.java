@@ -21,24 +21,25 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 
 /**
- * Provides the PortletToolbarContributorLocator interface which is responsible
- * for providing PortletToolbarContributors that will extend the portlet toolbar
+ * Provides an interface responsible
+ * for providing {@link PortletToolbarContributor} instances that extend the portlet toolbar
  * by adding more elements.
  *
  * <p>
- * Implementations of this class will need to use OSGI Registry to return
- * PortletToolbarContributor implementations. The way the
- * PortletToolbarContributor are registered in OSGI Registry needs to be synced
- * with the way PortletToolbarContributorLocator will search for them.
+ * Implementations of this class must use the OSGI Registry to return
+ * {@link PortletToolbarContributor} implementations. The way that the
+ * {@link PortletToolbarContributor}s are registered in OSGI Registry must be synchronized
+ * with the way that implementations of this class searches for them.
  * </p>
  *
- * <p>Typically, PortletToolbarContributorLocator will be implemented based on
- * the MVC pattern used the by the portlet. This will allow to have different
+ * <p>
+ * Typically, implementations of this class leverage
+ * the MVC pattern used the by the portlet. This allows for different
  * extensions to the portlet toolbar for different views of the portlet.
  * </p>
  *
  * <p>
- * Implementations of this class are required to be OSGI components.
+ * Implementations of this class must be OSGI components.
  * </p>
  *
  * @author Sergio González
