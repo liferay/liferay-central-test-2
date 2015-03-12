@@ -77,15 +77,17 @@ public class ValidatorTagImpl
 		_custom = ModelHintsUtil.isCustomValidator(name);
 
 		if (_custom) {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
+			StringBundler sb = new StringBundler(3);
 
 			String namespace = baseValidatorTagSupport.getInputName();
 
-			StringBundler sb = new StringBundler(3);
-
 			sb.append(namespace);
+
 			sb.append(StringPool.UNDERLINE);
+
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
 			sb.append(PortalUtil.getUniqueElementId(request, namespace, name));
 
 			name = sb.toString();
