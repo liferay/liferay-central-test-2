@@ -31,6 +31,8 @@ import com.liferay.portal.security.xml.SecureXMLFactoryProviderImpl;
 import com.liferay.portal.security.xml.SecureXMLFactoryProviderUtil;
 import com.liferay.portal.util.LocalizationImpl;
 import com.liferay.portal.xml.SAXReaderImpl;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLImplTest;
+import com.liferay.portlet.dynamicdatamapping.util.test.DDMStructureTestUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,10 +44,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.mockito.Matchers;
 import org.mockito.Mock;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -250,9 +250,9 @@ public class UpgradeDynamicDataListsTest extends PowerMockito {
 			props.getArray(PropsKeys.XML_SECURITY_WHITELIST)
 		).thenReturn(
 			new String[] {
-				"com.liferay.portlet.dynamicdatamapping.util.DDMXMLImplTest",
-				"com.liferay.portlet.dynamicdatamapping.util.test." +
-					"DDMStructureTestUtil"}
+				DDMStructureTestUtil.class.getName(),
+				DDMXMLImplTest.class.getName()
+			}
 		);
 
 		PropsUtil.setProps(props);

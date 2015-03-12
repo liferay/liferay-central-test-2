@@ -53,11 +53,12 @@ import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.util.DDMImpl;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLImplTest;
+import com.liferay.portlet.dynamicdatamapping.util.test.DDMStructureTestUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -67,12 +68,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.runner.RunWith;
-
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -613,9 +612,9 @@ public abstract class BaseDDMTestCase extends PowerMockito {
 			props.getArray(PropsKeys.XML_SECURITY_WHITELIST)
 		).thenReturn(
 			new String[] {
-				"com.liferay.portlet.dynamicdatamapping.util.DDMXMLImplTest",
-				"com.liferay.portlet.dynamicdatamapping.util.test." +
-					"DDMStructureTestUtil"}
+				DDMStructureTestUtil.class.getName(),
+				DDMXMLImplTest.class.getName()
+			}
 		);
 
 		PropsUtil.setProps(props);

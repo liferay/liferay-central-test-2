@@ -39,6 +39,8 @@ import com.liferay.portlet.dynamicdatamapping.model.UnlocalizedValue;
 import com.liferay.portlet.dynamicdatamapping.model.Value;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormFieldValue;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLImplTest;
+import com.liferay.portlet.dynamicdatamapping.util.test.DDMStructureTestUtil;
 
 import java.util.LinkedHashSet;
 import java.util.Locale;
@@ -47,16 +49,13 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
 import org.skyscreamer.jsonassert.JSONAssert;
 
 /**
@@ -591,9 +590,9 @@ public class UpgradeDynamicMappingTest extends PowerMockito {
 			props.getArray(PropsKeys.XML_SECURITY_WHITELIST)
 		).thenReturn(
 			new String[] {
-				"com.liferay.portlet.dynamicdatamapping.util.DDMXMLImplTest",
-				"com.liferay.portlet.dynamicdatamapping.util.test." +
-					"DDMStructureTestUtil"}
+				DDMStructureTestUtil.class.getName(),
+				DDMXMLImplTest.class.getName()
+			}
 		);
 
 		PropsUtil.setProps(props);
