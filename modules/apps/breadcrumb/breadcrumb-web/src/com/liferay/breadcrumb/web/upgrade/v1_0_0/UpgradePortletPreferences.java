@@ -60,11 +60,11 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		else {
 			portletPreferences.reset("displayStyle");
 
-			_log.error(
-				"Display Styles for Breadcrumb are no longer supported." +
-				"You can use Application Display Templates instead. The " +
-				"Breadcrumb portlet using the Display Style " + displayStyle +
-				"will now use the default Display Style.");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Display styles for breadcrumbs are deprecated in favor " +
+						"of application display templates");
+			}
 		}
 	}
 
