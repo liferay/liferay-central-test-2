@@ -71,8 +71,8 @@ public class BreadcrumbDisplayContext {
 				}
 				catch (PortalException e) {
 					_log.error(
-						"Error obtaining DDM Template with key " +
-						PropsValues.BREADCRUMB_DDM_TEMPLATE_KEY_DEFAULT);
+						"Unable to get dynamic data mapping template with key" +
+							PropsValues.BREADCRUMB_DDM_TEMPLATE_KEY_DEFAULT);
 				}
 			}
 		}
