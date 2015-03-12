@@ -449,8 +449,6 @@ public class TrashImpl implements Trash {
 		portletURL.setParameter(
 			"mvcPath", "/html/portlet/trash/view_content.jsp");
 		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
-		portletURL.setParameter(
-			"status", String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
 
 		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
 			className, classPK);
@@ -465,6 +463,8 @@ public class TrashImpl implements Trash {
 		}
 
 		portletURL.setParameter("type", trashRenderer.getType());
+		portletURL.setParameter(
+			"status", String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
 		portletURL.setParameter("showActions", Boolean.FALSE.toString());
 		portletURL.setParameter("showAssetMetadata", Boolean.TRUE.toString());
 		portletURL.setParameter("showEditURL", Boolean.FALSE.toString());

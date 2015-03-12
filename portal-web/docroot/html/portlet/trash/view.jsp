@@ -158,7 +158,6 @@ if (Validator.isNotNull(keywords)) {
 			PortletURL viewContentURL = renderResponse.createRenderURL();
 
 			viewContentURL.setParameter("mvcPath", "/html/portlet/trash/view_content.jsp");
-			viewContentURL.setParameter("status", String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
 			viewContentURL.setParameter("redirect", currentURL);
 
 			if (entry.getRootEntry() != null) {
@@ -170,6 +169,7 @@ if (Validator.isNotNull(keywords)) {
 			}
 
 			viewContentURL.setParameter("type", trashRenderer.getType());
+			viewContentURL.setParameter("status", String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
 			viewContentURL.setParameter("showActions", Boolean.FALSE.toString());
 			viewContentURL.setParameter("showEditURL", Boolean.FALSE.toString());
 
