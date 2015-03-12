@@ -538,7 +538,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private boolean _isIndexReadOnly() {
 		if (_indexWriter == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Index in read only mode");
+				_log.debug("Index is in read only mode");
 			}
 
 			return true;
