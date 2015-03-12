@@ -394,7 +394,6 @@ public class ExportImportConfigurationLocalServiceImpl
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-
 		attributes.put("description", description);
 		attributes.put("groupId", groupId);
 		attributes.put("name", name);
