@@ -29,13 +29,11 @@ if (dataSample != null) {
 	<!--
 	<%
 	List<DataSample> dataSamples = DataSampleThreadLocal.getDataSamples();
+
+	for (DataSample curDataSample : dataSamples) {
 	%>
 
-	<%
-	for (DataSample sample : dataSamples) {
-	%>
-
-		<%= sample %><br />
+		<%= curDataSample %><br />
 
 	<%
 	}
