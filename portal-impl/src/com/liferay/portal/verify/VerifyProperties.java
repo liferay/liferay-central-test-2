@@ -835,6 +835,7 @@ public class VerifyProperties extends VerifyProcess {
 		"com.liferay.portal.servlet.filters.doubleclick.DoubleClickFilter",
 		"com.liferay.portal.servlet.filters.charbufferpool." +
 			"CharBufferPoolFilter",
+		"com.liferay.portal.servlet.filters.monitoring.MonitoringFilter",
 		"com.liferay.portal.servlet.filters.validhtml.ValidHtmlFilter",
 		"commons.pool.enabled", "convert.processes", "discussion.thread.view",
 		"dl.file.entry.read.count.enabled",
