@@ -194,7 +194,7 @@ public class JavadocFormatter {
 				}
 				catch (Exception e) {
 					if (!(e instanceof ParseException) ||
-						!fileName.contains("/sdk/tools/templates/")) {
+						!fileName.contains("/tools/templates/")) {
 
 						throw new RuntimeException(
 							"Unable to format file " + fileName, e);
