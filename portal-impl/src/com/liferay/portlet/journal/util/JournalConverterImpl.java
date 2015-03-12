@@ -608,7 +608,6 @@ public class JournalConverterImpl implements JournalConverter {
 		String fieldType = ddmStructure.getFieldType(fieldName);
 		String indexType = ddmStructure.getFieldProperty(
 			fieldName, "indexType");
-
 		boolean multiple = GetterUtil.getBoolean(
 			ddmStructure.getFieldProperty(fieldName, "multiple"));
 
