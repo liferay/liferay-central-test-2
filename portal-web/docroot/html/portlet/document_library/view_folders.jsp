@@ -18,6 +18,7 @@
 
 <%
 String browseBy = ParamUtil.getString(request, "browseBy");
+
 String curEntry = ParamUtil.getString(request, "curEntry");
 String deltaEntry = ParamUtil.getString(request, "deltaEntry");
 
@@ -77,9 +78,9 @@ else if ((folderId != rootFolderId) || expandFolder) {
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/document_library/view");
-portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("curEntry", curEntry);
 portletURL.setParameter("deltaEntry", deltaEntry);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 
 SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, null, null, "curFolder", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
