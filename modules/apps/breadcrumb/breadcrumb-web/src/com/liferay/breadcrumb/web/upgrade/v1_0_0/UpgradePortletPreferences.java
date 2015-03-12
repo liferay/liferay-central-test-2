@@ -36,7 +36,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		return new String[] {BreadcrumbPortletKeys.BREADCRUMB};
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void upgradeDisplayStyle(PortletPreferences portletPreferences)
 		throws ReadOnlyException {
 
