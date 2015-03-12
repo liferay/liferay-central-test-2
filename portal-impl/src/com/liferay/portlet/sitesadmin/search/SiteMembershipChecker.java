@@ -48,7 +48,7 @@ public class SiteMembershipChecker extends RowChecker {
 			user = (User)((Object[])obj)[0];
 		}
 		else {
-			throw new IllegalArgumentException(obj + " is not a User");
+			throw new IllegalArgumentException(obj + " is not a user");
 		}
 
 		try {
