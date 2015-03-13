@@ -128,8 +128,8 @@ public class TrashImpl implements Trash {
 			request, rootContainerModelTitle, containerModelURL.toString());
 
 		addBreadcrumbEntries(
-				request, liferayPortletResponse, className, classPK,
-				"containerModelId", containerModelURL, false);
+			request, liferayPortletResponse, className, classPK,
+			"containerModelId", containerModelURL, false);
 	}
 
 	@Override
@@ -184,10 +184,9 @@ public class TrashImpl implements Trash {
 			ArrayUtil.toStringArray(restoreTrashEntryIds.toArray()));
 
 		SessionMessages.add(
-				actionRequest,
-				PortalUtil.getPortletId(actionRequest) +
-						SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data
-		);
+			actionRequest,
+			PortalUtil.getPortletId(actionRequest) +
+				SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
 	}
 
 	@Override
@@ -331,8 +330,8 @@ public class TrashImpl implements Trash {
 			group.getParentLiveGroupTypeSettingsProperties();
 
 		return GetterUtil.getInteger(
-				typeSettingsProperties.getProperty("trashEntriesMaxAge"),
-				trashEntriesMaxAge);
+			typeSettingsProperties.getProperty("trashEntriesMaxAge"),
+			trashEntriesMaxAge);
 	}
 
 	@Override
