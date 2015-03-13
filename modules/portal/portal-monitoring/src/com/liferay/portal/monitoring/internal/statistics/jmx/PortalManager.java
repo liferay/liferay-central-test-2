@@ -47,7 +47,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getAverageTime() throws MonitoringException {
+	public long getAverageTime() {
 		return _serverSummaryStatistics.getAverageTime();
 	}
 
@@ -74,7 +74,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getErrorCount() throws MonitoringException {
+	public long getErrorCount() {
 		return _serverSummaryStatistics.getErrorCount();
 	}
 
@@ -93,7 +93,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getMaxTime() throws MonitoringException {
+	public long getMaxTime() {
 		return _serverSummaryStatistics.getMaxTime();
 	}
 
@@ -108,7 +108,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getMinTime() throws MonitoringException {
+	public long getMinTime() {
 		return _serverSummaryStatistics.getMinTime();
 	}
 
@@ -123,7 +123,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getRequestCount() throws MonitoringException {
+	public long getRequestCount() {
 		return _serverSummaryStatistics.getRequestCount();
 	}
 
@@ -150,7 +150,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getSuccessCount() throws MonitoringException {
+	public long getSuccessCount() {
 		return _serverSummaryStatistics.getSuccessCount();
 	}
 
@@ -169,7 +169,7 @@ public class PortalManager extends StandardMBean implements PortalManagerMBean {
 	}
 
 	@Override
-	public long getTimeoutCount() throws MonitoringException {
+	public long getTimeoutCount() {
 		return _serverSummaryStatistics.getTimeoutCount();
 	}
 

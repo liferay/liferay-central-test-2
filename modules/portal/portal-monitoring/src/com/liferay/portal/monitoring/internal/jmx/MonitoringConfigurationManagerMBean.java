@@ -30,10 +30,12 @@ public interface MonitoringConfigurationManagerMBean
 
 	public String[] getNamespaces();
 
+	@Override
 	public boolean isMonitorPortalRequest();
 
 	public void setLevel(String namespace, String levelName);
 
+	@Override
 	public void setMonitorPortalRequest(boolean monitorPortalRequest);
 
 	public void setMonitorPortletRequests(boolean monitorPortletRequests);

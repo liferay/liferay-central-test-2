@@ -26,8 +26,6 @@ import com.liferay.portal.monitoring.configuration.MonitoringConfiguration;
 import com.liferay.portal.monitoring.internal.util.MonitoringWebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
-import java.io.IOException;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,9 +47,7 @@ public class MonitoringTopHeadDynamicInclude extends BaseDynamicInclude {
 
 	@Override
 	public void include(
-			HttpServletRequest request, HttpServletResponse response,
-			String key)
-		throws IOException {
+		HttpServletRequest request, HttpServletResponse response, String key) {
 
 		if (!_monitoringConfiguration.monitorPortalRequest()) {
 			return;
