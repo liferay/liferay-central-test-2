@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Brian Wing Shun Chan
  */
 @Component(
-	immediate = true, property = { "name=portalSummaryStatistics" },
+	immediate = true, property = {"name=portalSummaryStatistics"},
 	service = ServerSummaryStatistics.class
 )
 public class ServerSummaryStatistics implements SummaryStatistics {

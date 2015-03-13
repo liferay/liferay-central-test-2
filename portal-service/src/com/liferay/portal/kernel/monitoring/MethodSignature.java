@@ -112,10 +112,11 @@ public class MethodSignature {
 		sb.append(_className);
 		sb.append(", methodName=");
 		sb.append(_methodName);
-
 		sb.append(", parameterTypeNames=");
+
 		StringBundler parameterTypeNamesSB = new StringBundler(
 			_parameterTypeNames);
+
 		sb.append(parameterTypeNamesSB.toString());
 
 		sb.append("}");

@@ -34,8 +34,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Brian Wing Shun Chan
  */
 @Component(
-	immediate = true, property = { "namespace=com.liferay.monitoring.Portal" },
-	service = { DataSampleProcessor.class, ServerStatistics.class }
+	immediate = true, property = {"namespace=com.liferay.monitoring.Portal"},
+	service = {DataSampleProcessor.class, ServerStatistics.class}
 )
 public class ServerStatistics
 	implements DataSampleProcessor<PortalRequestDataSample> {
@@ -162,12 +162,12 @@ public class ServerStatistics
 
 	@Activate
 	protected void activate() {
-		CompanyStatistics systemCompanyStatistics = new CompanyStatistics();
+		CompanyStatistics companyStatistics = new CompanyStatistics();
 
 		_companyStatisticsByCompanyId.put(
-			systemCompanyStatistics.getCompanyId(), systemCompanyStatistics);
+			companyStatistics.getCompanyId(), companyStatistics);
 		_companyStatisticsByWebId.put(
-			systemCompanyStatistics.getWebId(), systemCompanyStatistics);
+			companyStatistics.getWebId(), companyStatistics);
 	}
 
 	private CompanyLocalService _companyLocalService;

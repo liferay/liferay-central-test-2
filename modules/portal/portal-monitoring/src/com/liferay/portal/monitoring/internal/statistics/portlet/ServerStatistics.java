@@ -175,12 +175,12 @@ public class ServerStatistics
 
 	@Activate
 	protected void activate() {
-		CompanyStatistics systemCompanyStatistics = new CompanyStatistics();
+		CompanyStatistics companyStatistics = new CompanyStatistics();
 
 		_companyStatisticsByCompanyId.put(
-			systemCompanyStatistics.getCompanyId(), systemCompanyStatistics);
+			companyStatistics.getCompanyId(), companyStatistics);
 		_companyStatisticsByWebId.put(
-			systemCompanyStatistics.getWebId(), systemCompanyStatistics);
+			companyStatistics.getWebId(), companyStatistics);
 	}
 
 	private CompanyLocalService _companyLocalService;
