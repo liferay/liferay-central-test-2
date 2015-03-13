@@ -81,7 +81,6 @@ public class MonitoringBottomDynamicInclude extends BaseDynamicInclude {
 
 		for (DataSample curDataSample : dataSamples) {
 			sb.append(curDataSample.toString());
-
 			sb.append("\n");
 		}
 
