@@ -1,7 +1,7 @@
-Bundle-Name: Liferay Recycle Bin Web
+Bundle-Name: Liferay Trash Web
 Bundle-SymbolicName: com.liferay.trash.web
 Bundle-Version: 1.0.0
-Import-Package: \
+Import-Package:\
 	com.liferay.portlet.trash.model.impl,\
 	*
 Include-Resource:\
