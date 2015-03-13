@@ -30,8 +30,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class PortletManager extends StandardMBean
-	implements PortletManagerMBean {
+public class PortletManager
+	extends StandardMBean implements PortletManagerMBean {
 
 	public PortletManager(Class<?> mBeanInterface)
 		throws NotCompliantMBeanException {

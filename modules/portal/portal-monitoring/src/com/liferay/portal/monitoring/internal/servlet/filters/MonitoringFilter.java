@@ -51,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
 		"servlet-filter-name=Monitoring Filter", "url-pattern=/c/*",
 		"url-pattern=/group/*", "url-pattern=/user/*", "url-pattern=/web/*"
 	},
-	service = { Filter.class, PortalMonitoringControl.class }
+	service = {Filter.class, PortalMonitoringControl.class}
 )
 public class MonitoringFilter extends BaseFilter
 	implements PortalMonitoringControl {
