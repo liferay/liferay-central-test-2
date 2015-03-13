@@ -4,7 +4,7 @@
 		module="org.eclipse.osgi"
 		revision="3.10.100-SNAPSHOT"
 		status="integration"
-		publication="20150308175435"
+		publication="20150308145435"
 	>
 		<description homepage="" />
 		<m:properties__releaseName>Mars</m:properties__releaseName>

@@ -4,7 +4,7 @@
 		module="org.eclipse.equinox.console"
 		revision="1.1.100-SNAPSHOT"
 		status="integration"
-		publication="20150308180104"
+		publication="20150308150104"
 	>
 		<description homepage="" />
 		<m:properties__cbi-snapshots-repo.url>https://repo.eclipse.org/content/repositories/cbi-snapshots/</m:properties__cbi-snapshots-repo.url>

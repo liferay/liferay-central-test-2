@@ -4,7 +4,7 @@
 		module="eclipse-platform-parent"
 		revision="4.5.0-SNAPSHOT"
 		status="integration"
-		publication="20150308175140"
+		publication="20150308145140"
 	>
 		<description homepage="" />
 		<m:properties__releaseName>Mars</m:properties__releaseName>

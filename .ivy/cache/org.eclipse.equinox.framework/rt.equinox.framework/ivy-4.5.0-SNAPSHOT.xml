@@ -4,7 +4,7 @@
 		module="rt.equinox.framework"
 		revision="4.5.0-SNAPSHOT"
 		status="integration"
-		publication="20150308175709"
+		publication="20150308145709"
 	>
 		<description homepage="" />
 		<m:properties__cbi-snapshots-repo.url>https://repo.eclipse.org/content/repositories/cbi-snapshots/</m:properties__cbi-snapshots-repo.url>
