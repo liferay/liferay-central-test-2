@@ -41,8 +41,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class MonitoringMessageListener extends BaseMessageListener
-	implements MonitoringControl {
+public class MonitoringMessageListener
+	extends BaseMessageListener implements MonitoringControl {
 
 	public void afterPropertiesSet() {
 		Registry registry = RegistryUtil.getRegistry();
