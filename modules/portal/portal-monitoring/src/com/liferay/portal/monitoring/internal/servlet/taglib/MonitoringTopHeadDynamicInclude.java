@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.internal.ui;
+package com.liferay.portal.monitoring.internal.servlet.taglib;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
