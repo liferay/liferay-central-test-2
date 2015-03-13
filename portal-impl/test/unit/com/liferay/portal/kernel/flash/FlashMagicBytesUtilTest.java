@@ -60,14 +60,15 @@ public class FlashMagicBytesUtilTest {
 
 		byte[] buffer = new byte[4096];
 
-		int size = returnedInputStream.read(buffer);
+		int length = returnedInputStream.read(buffer);
 
-		if (size == _EOF) {
+		if (length == _EOF) {
 			Assert.assertEquals(0, bytes.length);
+
 			return;
 		}
 
-		Assert.assertEquals(bytes.length, size);
+		Assert.assertEquals(bytes.length, length);
 	}
 
 	private static final byte[] _CWS = {0x43, 0x57, 0x53};
