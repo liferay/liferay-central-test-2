@@ -62,16 +62,16 @@ public class GetMethodImpl implements Method {
 			}
 
 			if (is != null) {
+				String fileName = resource.getDisplayName();
+
 				FlashMagicBytesUtil.Result flashMagicBytesUtilResult =
 					FlashMagicBytesUtil.check(is);
-
-				is = flashMagicBytesUtilResult.getInputStream();
-
-				String fileName = resource.getDisplayName();
 
 				if (flashMagicBytesUtilResult.isFlash()) {
 					fileName = FileUtil.stripExtension(fileName) + ".swf";
 				}
+
+				is = flashMagicBytesUtilResult.getInputStream();
 
 				try {
 					ServletResponseUtil.sendFile(

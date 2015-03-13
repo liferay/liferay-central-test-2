@@ -139,11 +139,11 @@ public class GetPageAttachmentAction extends PortletAction {
 		FlashMagicBytesUtil.Result flashMagicBytesUtilResult =
 			FlashMagicBytesUtil.check(is);
 
-		is = flashMagicBytesUtilResult.getInputStream();
-
 		if (flashMagicBytesUtilResult.isFlash()) {
 			fileName = FileUtil.stripExtension(fileName) + ".swf";
 		}
+
+		is = flashMagicBytesUtilResult.getInputStream();
 
 		ServletResponseUtil.sendFile(
 			request, response, fileName, is, fileEntry.getSize(),
