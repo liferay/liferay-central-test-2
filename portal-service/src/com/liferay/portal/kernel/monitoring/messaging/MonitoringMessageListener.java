@@ -197,13 +197,13 @@ public class MonitoringMessageListener extends BaseMessageListener
 		@Override
 		public void modifiedService(
 			ServiceReference<DataSampleProcessor> serviceReference,
-			DataSampleProcessor service) {
+			DataSampleProcessor dataSampleProcessor) {
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<DataSampleProcessor> serviceReference,
-			DataSampleProcessor service) {
+			DataSampleProcessor dataSampleProcessor) {
 
 			String namespace = (String)serviceReference.getProperty(
 				"namespace");
@@ -212,7 +212,7 @@ public class MonitoringMessageListener extends BaseMessageListener
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No namespace defined for service " +
-							service.getClass());
+							dataSampleProcessor.getClass());
 				}
 
 				return;
@@ -220,8 +220,7 @@ public class MonitoringMessageListener extends BaseMessageListener
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			DataSampleProcessor<DataSample> dataSampleProcessor =
-				registry.getService(serviceReference);
+			dataSampleProcessor = registry.getService(serviceReference);
 
 			unregisterDataSampleProcessor(namespace, dataSampleProcessor);
 		}
