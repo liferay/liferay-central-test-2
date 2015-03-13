@@ -161,9 +161,12 @@ public class MonitoringMessageListener extends BaseMessageListener
 	private final Map<String, List<DataSampleProcessor<DataSample>>>
 		_dataSampleProcessors = new ConcurrentHashMap<>();
 	private final Map<String, Level> _levels = new ConcurrentHashMap<>();
+
+	@SuppressWarnings("rawtypes")
 	private ServiceTracker<DataSampleProcessor, DataSampleProcessor>
 		_serviceTracker;
 
+	@SuppressWarnings("rawtypes")
 	private class DataSampleProcessorServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
 			<DataSampleProcessor, DataSampleProcessor> {
