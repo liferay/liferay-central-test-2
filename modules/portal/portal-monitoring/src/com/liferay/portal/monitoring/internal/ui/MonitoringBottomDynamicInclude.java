@@ -24,11 +24,10 @@ import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.monitoring.configuration.MonitoringConfiguration;
-import com.liferay.portal.monitoring.internal.util.MonitoringWebKeys;
+import com.liferay.portal.monitoring.constants.MonitoringWebKeys;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.util.List;
 import java.util.Map;
 
