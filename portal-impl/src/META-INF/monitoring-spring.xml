@@ -14,7 +14,7 @@
 	</bean>
 	<bean id="serviceMonitorAdvice" class="com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice" />
 
-	<!-- JMX -->
+	<!-- Messaging -->
 
 	<bean id="destination.monitoring" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/monitoring" />

@@ -169,7 +169,6 @@ public class MonitoringMessageListener extends BaseMessageListener
 			<DataSampleProcessor, DataSampleProcessor> {
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public DataSampleProcessor addingService(
 			ServiceReference<DataSampleProcessor> serviceReference) {
 
@@ -187,7 +186,7 @@ public class MonitoringMessageListener extends BaseMessageListener
 			else {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"No namespace defined for service: " +
+						"No namespace defined for service " +
 							dataSampleProcessor.getClass());
 				}
 			}
@@ -202,7 +201,6 @@ public class MonitoringMessageListener extends BaseMessageListener
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public void removedService(
 			ServiceReference<DataSampleProcessor> serviceReference,
 			DataSampleProcessor service) {
@@ -213,7 +211,7 @@ public class MonitoringMessageListener extends BaseMessageListener
 			if (Validator.isNull(namespace)) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"No namespace defined for service: " +
+						"No namespace defined for service " +
 							service.getClass());
 				}
 
