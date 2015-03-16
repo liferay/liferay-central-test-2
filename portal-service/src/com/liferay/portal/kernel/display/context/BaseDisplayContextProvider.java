@@ -45,7 +45,7 @@ public class BaseDisplayContextProvider<T extends DisplayContextFactory>
 		_serviceTracker.open();
 	}
 
-	public void close() {
+	public void destroy() {
 		_serviceTracker.close();
 	}
 

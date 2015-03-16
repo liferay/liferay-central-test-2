@@ -50,7 +50,7 @@ public class DLDisplayContextProviderTest {
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_baseDisplayContextProvider.close();
+		_baseDisplayContextProvider.destroy();
 	}
 
 	@Test
