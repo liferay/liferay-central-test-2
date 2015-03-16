@@ -70,7 +70,10 @@ public class JournalArticleImageLocalServiceImpl
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Article image was already deleted", pe);
+				_log.warn(
+					"Unable to delete image " +
+						articleImage.getArticleImageId(),
+					pe);
 			}
 		}
 
