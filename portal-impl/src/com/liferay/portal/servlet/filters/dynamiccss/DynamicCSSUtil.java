@@ -585,9 +585,7 @@ public class DynamicCSSUtil {
 
 					RubyException rubyException = raiseException.getException();
 
-					_log.error(
-						String.valueOf(
-							rubyException.message.toJava(String.class)));
+					_log.error(rubyException.message.toJava(String.class));
 
 					IRubyObject iRubyObject = rubyException.getBacktrace();
 
@@ -597,7 +595,7 @@ public class DynamicCSSUtil {
 					for (int i = 0; i < rubyArray.size(); i++) {
 						Object object = rubyArray.get(i);
 
-						_log.error(String.valueOf(object));
+						_log.error(object);
 					}
 				}
 				else {
