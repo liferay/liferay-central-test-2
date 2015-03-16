@@ -6923,8 +6923,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected boolean hasModifiedLatestApprovedVersion(
-			long groupId, String articleId, double version)
-		throws PortalException {
+		long groupId, String articleId, double version) {
 
 		JournalArticle article = fetchLatestArticle(
 			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
