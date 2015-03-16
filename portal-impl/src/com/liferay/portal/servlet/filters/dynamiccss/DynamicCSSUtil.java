@@ -563,10 +563,9 @@ public class DynamicCSSUtil {
 		}
 
 		if (_sassCompiler != null) {
-			String inputPaths =
-				commonSassPath + File.pathSeparator + cssThemePath;
-
-			content = _sassCompiler.compileString(content, inputPaths, "");
+			content = _sassCompiler.compileString(
+				content, commonSassPath + File.pathSeparator + cssThemePath,
+				"");
 		}
 		else {
 			File sassTempDir = _getSassTempDir(servletContext);
