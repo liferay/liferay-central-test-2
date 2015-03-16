@@ -30,25 +30,26 @@ import java.util.Set;
 /**
  * @author Raymond Augé
  */
-public class SassResourcePlugin implements AnalyzerPlugin {
+public class SassAnalyzerPlugin implements AnalyzerPlugin {
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
-		Parameters header = OSGiHeader.parseHeader(analyzer.getProperty(_SASS));
+		Parameters parameters = OSGiHeader.parseHeader(
+			analyzer.getProperty("-sass"));
 
-		if (header.isEmpty()) {
+		if (parameters.isEmpty()) {
 			return false;
 		}
 
-		Instructions instructions = new Instructions(header);
+		Instructions instructions = new Instructions(parameters);
 
 		Jar jar = analyzer.getJar();
 
 		Map<String, Resource> resources = jar.getResources();
 
-		Set<String> keySet = new HashSet<String>(resources.keySet());
+		Set<String> keys = new HashSet<String>(resources.keySet());
 
-		for (String key : keySet) {
+		for (String key : keys) {
 			for (Instruction instruction : instructions.keySet()) {
 				if (key.contains("/.sass-cache/") && instruction.matches(key)) {
 					if (instruction.isNegated()) {
@@ -57,17 +58,17 @@ public class SassResourcePlugin implements AnalyzerPlugin {
 
 					Resource resource = jar.remove(key);
 
-					if (resource != null) {
-						jar.putResource(
-							key.replace("/.sass-cache/", "/"), resource, true);
+					if (resource == null) {
+						continue;
 					}
+
+					jar.putResource(
+						key.replace("/.sass-cache/", "/"), resource, true);
 				}
 			}
 		}
 
 		return false;
 	}
-
-	private static final String _SASS = "-sass";
 
 }
