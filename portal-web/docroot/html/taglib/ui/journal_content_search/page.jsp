@@ -20,13 +20,13 @@
 boolean showListed = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-content-search:showListed"));
 String targetPortletId = (String)request.getAttribute("liferay-ui:journal-content-search:targetPortletId");
 
-PortletPreferences defaultPreferences = PortletPreferencesFactoryUtil.fromDefaultXML(PortletConstants.DEFAULT_PREFERENCES);
+PortletPreferences defaultPortletPreferences = PortletPreferencesFactoryUtil.fromDefaultXML(PortletConstants.DEFAULT_PREFERENCES);
 
-defaultPreferences.setValue("showListed", String.valueOf(showListed));
-defaultPreferences.setValue("targetPortletId", targetPortletId);
+defaultPortletPreferences.setValue("showListed", String.valueOf(showListed));
+defaultPortletPreferences.setValue("targetPortletId", targetPortletId);
 %>
 
 <liferay-portlet:runtime
-	defaultPreferences="<%= defaultPreferences.toString() %>"
+	defaultPreferences="<%= defaultPortletPreferences.toString() %>"
 	portletName="com_liferay_journal_content_search_web_portlet_JournalContentSearchPortlet"
 />
