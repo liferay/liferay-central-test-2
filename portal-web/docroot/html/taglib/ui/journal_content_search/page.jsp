@@ -26,4 +26,7 @@ defaultPreferences.setValue("showListed", String.valueOf(showListed));
 defaultPreferences.setValue("targetPortletId", targetPortletId);
 %>
 
-<liferay-portlet:runtime defaultPreferences="<%= defaultPreferences.toString() %>" portletName="com_liferay_journal_content_search_web_portlet_JournalContentSearchPortlet" />
+<liferay-portlet:runtime
+	defaultPreferences="<%= defaultPreferences.toString() %>"
+	portletName="com_liferay_journal_content_search_web_portlet_JournalContentSearchPortlet"
+/>
