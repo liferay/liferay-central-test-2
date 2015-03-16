@@ -273,7 +273,7 @@ public class JournalPortlet extends MVCPortlet {
 
 			sb.append("Folder ");
 			sb.append(newFolderId);
-			sb.append(" does not allow the structures for these articles: ");
+			sb.append(" does not allow the structures for articles: ");
 			sb.append(StringUtil.merge(invalidArticleIds));
 
 			throw new InvalidDDMStructureException(sb.toString());
