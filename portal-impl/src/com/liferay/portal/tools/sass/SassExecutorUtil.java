@@ -67,6 +67,9 @@ public class SassExecutorUtil {
 	public static void init(String docrootDirName, String portalCommonDirName)
 		throws IOException {
 
+		_docrootDirName = docrootDirName;
+		_portalCommonDirName = portalCommonDirName;
+
 		int threads = 1;
 
 		try {
@@ -99,9 +102,6 @@ public class SassExecutorUtil {
 				SassExecutorUtil.class.getClassLoader()));
 
 		_mainThread = Thread.currentThread();
-
-		_docrootDirName = docrootDirName;
-		_portalCommonDirName = portalCommonDirName;
 	}
 
 	public static String parse(String fileName, String content) {
