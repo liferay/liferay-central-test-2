@@ -49,8 +49,8 @@ for (long mergeTagId : mergeTagIds) {
 
 <aui:form action="<%= mergeURL %>" method="post" name="fm" onSubmit="event.preventDefault();">
 	<aui:input name="mvcPath" type="hidden" value="/merge_tag.jsp" />
-	<aui:input name="groupId" type="hidden" value="<%= scopeGroupId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= scopeGroupId %>" />
 
 	<div class="merge-tags">
 		<span class="merge-tags-label">
