@@ -67,7 +67,7 @@ public class ClusterRequestReceiver extends BaseClusterReceiver {
 	@Override
 	protected void doReceive(Object messagePayload, Address srcAddress) {
 		ClusterChannel clusterChannel =
-			_clusterExecutorImpl.getControlChannel();
+			_clusterExecutorImpl.getClusterChannel();
 
 		if (srcAddress.equals(clusterChannel.getLocalAddress())) {
 			return;
@@ -128,7 +128,7 @@ public class ClusterRequestReceiver extends BaseClusterReceiver {
 		}
 
 		ClusterChannel clusterChannel =
-			_clusterExecutorImpl.getControlChannel();
+			_clusterExecutorImpl.getClusterChannel();
 
 		try {
 			clusterChannel.sendUnicastMessage(responsePayload, sourceAddress);
@@ -144,7 +144,7 @@ public class ClusterRequestReceiver extends BaseClusterReceiver {
 		String uuid = clusterNodeResponse.getUuid();
 
 		FutureClusterResponses futureClusterResponses =
-			_clusterExecutorImpl.getExecutionResults(uuid);
+			_clusterExecutorImpl.getFutureClusterResponses(uuid);
 
 		if (futureClusterResponses == null) {
 			if (_log.isInfoEnabled()) {
