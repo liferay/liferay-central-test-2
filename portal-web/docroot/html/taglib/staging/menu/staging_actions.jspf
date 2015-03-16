@@ -105,6 +105,7 @@
 						layoutSetBranch = layoutSetBranches.get(0);
 
 						confirmationURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranch.getLayoutSetBranchId()));
+
 						publishRenderURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranch.getLayoutSetBranchId()));
 						%>
 
@@ -123,6 +124,7 @@
 			<liferay-util:buffer var="publishOnControlPanelLink">
 				<aui:a cssClass='<%= linkCssClass + " publish-link" %>' href="<%= publishRenderURL.toString() %>" id='<%= layoutSetBranchId + "publishLink" %>' label="<%= publishMessage %>" />
 			</liferay-util:buffer>
+
 			<liferay-util:buffer var="publishOnLayoutLink">
 				<aui:a cssClass='<%= linkCssClass + " publish-link" %>' href="<%= confirmationURL.toString() %>" id='<%= layoutSetBranchId + "publishToLiveLink" %>' label="publish-to-live" />
 			</liferay-util:buffer>

@@ -47,8 +47,6 @@ public class ExportImportConfigurationFactory {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		User user = themeDisplay.getUser();
-
 		long sourceGroupId = ParamUtil.getLong(portletRequest, "sourceGroupId");
 		long targetGroupId = ParamUtil.getLong(portletRequest, "targetGroupId");
 		boolean privateLayout = ParamUtil.getBoolean(
@@ -58,7 +56,8 @@ public class ExportImportConfigurationFactory {
 			portletRequest);
 
 		return buildDefaultLocalPublishingExportImportConfiguration(
-			user, sourceGroupId, targetGroupId, privateLayout, parameterMap);
+			themeDisplay.getUser(), sourceGroupId, targetGroupId, privateLayout,
+			parameterMap);
 	}
 
 	public static ExportImportConfiguration
@@ -73,9 +72,9 @@ public class ExportImportConfigurationFactory {
 	}
 
 	public static ExportImportConfiguration
-		buildDefaultLocalPublishingExportImportConfiguration(
-			User user, long sourceGroupId, long targetGroupId,
-			boolean privateLayout, Map<String, String[]> parameterMap)
+			buildDefaultLocalPublishingExportImportConfiguration(
+				User user, long sourceGroupId, long targetGroupId,
+				boolean privateLayout, Map<String, String[]> parameterMap)
 		throws PortalException {
 
 		Map<String, Serializable> settingsMap =
@@ -95,14 +94,12 @@ public class ExportImportConfigurationFactory {
 	}
 
 	public static ExportImportConfiguration
-		buildDefaultRemotePublishingExportImportConfiguration(
-			PortletRequest portletRequest)
+			buildDefaultRemotePublishingExportImportConfiguration(
+				PortletRequest portletRequest)
 		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		User user = themeDisplay.getUser();
 
 		long sourceGroupId = ParamUtil.getLong(portletRequest, "sourceGroupId");
 		boolean privateLayout = ParamUtil.getBoolean(
@@ -120,8 +117,9 @@ public class ExportImportConfigurationFactory {
 			portletRequest);
 
 		return buildDefaultRemotePublishingExportImportConfiguration(
-			user, sourceGroupId, privateLayout, remoteAddress, remotePort,
-			remotePathContext, secureConnection, remoteGroupId, parameterMap);
+			themeDisplay.getUser(), sourceGroupId, privateLayout, remoteAddress,
+			remotePort, remotePathContext, secureConnection, remoteGroupId,
+			parameterMap);
 	}
 
 	public static ExportImportConfiguration
