@@ -159,10 +159,10 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 	public DDMTemplate getDefaultPortletDisplayTemplateDDMTemplate(
 		long groupId, long classNameId) {
 
+		DDMTemplate defaultDDMTemplate = null;
+
 		TemplateHandler templateHandler =
 			TemplateHandlerRegistryUtil.getTemplateHandler(classNameId);
-
-		DDMTemplate defaultDDMTemplate = null;
 
 		if (templateHandler != null) {
 			defaultDDMTemplate = getPortletDisplayTemplateDDMTemplate(
