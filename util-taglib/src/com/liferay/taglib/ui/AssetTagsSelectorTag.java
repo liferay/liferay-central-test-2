@@ -170,7 +170,7 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		"/html/taglib/ui/asset_tags_selector/page.jsp";
 
 	private String _addCallback;
-	private boolean _allowAddEntry;
+	private boolean _allowAddEntry = true;
 	private boolean _autoFocus;
 	private String _className;
 	private long _classPK;
