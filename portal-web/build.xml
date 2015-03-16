@@ -522,11 +522,12 @@
 
 	<target name="build-css" depends="build-themes">
 		<property name="sass.tmp.dir" value="${basedir}/sass_tmp_dir" />
+
+		<mkdir dir="${sass.tmp.dir}" />
+
 		<path id="web-lib.classpath">
 			<fileset dir="${project.dir}/lib/portal" includes="*.jar" />
 		</path>
-
-		<mkdir dir="${sass.tmp.dir}" />
 
 		<java
 			classname="com.liferay.portal.tools.SassToCssBuilder"
