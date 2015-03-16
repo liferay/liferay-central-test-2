@@ -83,11 +83,9 @@ public class DDMTemplateSelectorTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		long classNameId = PortalUtil.getClassNameId(_className);
-
 		request.setAttribute(
 			"liferay-ui:ddm-template-select:classNameId",
-			String.valueOf(classNameId));
+			String.valueOf(PortalUtil.getClassNameId(_className)));
 		request.setAttribute(
 			"liferay-ui:ddm-template-select:displayStyle", _displayStyle);
 		request.setAttribute(
