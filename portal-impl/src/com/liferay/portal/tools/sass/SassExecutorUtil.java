@@ -117,10 +117,10 @@ public class SassExecutorUtil {
 
 		if (_sassCompiler != null) {
 			try {
-				String includePath =
-					_portalCommonDirName + File.pathSeparator + cssThemePath;
-
-				return _sassCompiler.compileString(content, includePath, "");
+				return _sassCompiler.compileString(
+					content,
+					_portalCommonDirName + File.pathSeparator + cssThemePath,
+					"");
 			}
 			catch (Exception e) {
 				e.printStackTrace();
