@@ -237,7 +237,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public AssetTag fetchTag(long groupId, String name) throws PortalException {
+	public AssetTag fetchTag(long groupId, String name) {
 		return assetTagPersistence.fetchByG_N(groupId, name);
 	}
 
@@ -311,9 +311,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public long[] getTagIds(long groupId, String[] names)
-		throws PortalException {
-
+	public long[] getTagIds(long groupId, String[] names) {
 		List<Long> tagIds = new ArrayList<>(names.length);
 
 		for (String name : names) {
@@ -330,9 +328,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public long[] getTagIds(long[] groupIds, String name)
-		throws PortalException {
-
+	public long[] getTagIds(long[] groupIds, String name) {
 		List<Long> tagIds = new ArrayList<>(groupIds.length);
 
 		for (long groupId : groupIds) {
@@ -349,9 +345,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public long[] getTagIds(long[] groupIds, String[] names)
-		throws PortalException {
-
+	public long[] getTagIds(long[] groupIds, String[] names) {
 		long[] tagsIds = new long[0];
 
 		for (long groupId : groupIds) {
@@ -422,7 +416,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public boolean hasTag(long groupId, String name) throws PortalException {
+	public boolean hasTag(long groupId, String name) {
 		AssetTag tag = fetchTag(groupId, name);
 
 		if (tag != null) {
