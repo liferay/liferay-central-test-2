@@ -337,7 +337,7 @@ public class JournalFeedStagedModelDataHandler
 				sb.append(" cannot be imported because layout with friendly ");
 				sb.append("URL ");
 				sb.append(feed.getTargetLayoutFriendlyUrl());
-				sb.append(" does not exist - ");
+				sb.append(" does not exist: ");
 				sb.append(ftlfurle.getMessage());
 
 				_log.warn(sb.toString());
