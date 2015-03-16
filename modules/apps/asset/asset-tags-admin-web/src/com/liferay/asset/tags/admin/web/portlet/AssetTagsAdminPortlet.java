@@ -122,15 +122,18 @@ public class AssetTagsAdminPortlet extends MVCPortlet {
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		String[] mergeTagNames = StringUtil.split(
-			ParamUtil.getString(actionRequest, "mergeTagNames"));
-
 		String targetTagName = ParamUtil.getString(
 			actionRequest, "targetTagName");
 
 		AssetTag targetTag = AssetTagLocalServiceUtil.fetchTag(
 			groupId, targetTagName);
+
+		if (targetTag == null) {
+			continue;
+		}
+
+		String[] mergeTagNames = StringUtil.split(
+			ParamUtil.getString(actionRequest, "mergeTagNames"));
 
 		for (String mergeTagName : mergeTagNames) {
 			if (targetTagName.equals(mergeTagName)) {
