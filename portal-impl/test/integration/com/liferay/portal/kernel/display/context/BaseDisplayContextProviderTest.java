@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.display.context;
 
-import com.liferay.portal.kernel.display.context.bundle.basedisplaycontextprovider.TestDLDisplayContextFactoryImpl;
+import com.liferay.portal.kernel.display.context.bundle.basedisplaycontextfactory.TestBaseDisplayContextFactoryImpl;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
@@ -33,14 +33,14 @@ import org.junit.Test;
 /**
  * @author Manuel de la Peña
  */
-public class DLDisplayContextProviderTest {
+public class BaseDisplayContextProviderTest {
 
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
-			new SyntheticBundleRule("bundle.basedisplaycontextprovider"));
+			new SyntheticBundleRule("bundle.basedisplaycontextfactory"));
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -55,21 +55,23 @@ public class DLDisplayContextProviderTest {
 
 	@Test
 	public void testDisplayContextHasBeenRegistered() throws Exception {
+		DLDisplayContextFactory dlDisplayContextFactoryExtension = null;
+
 		Iterable<DLDisplayContextFactory> displayContextFactories =
 			_baseDisplayContextProvider.getDisplayContextFactories();
 
 		Iterator<DLDisplayContextFactory> iterator =
 			displayContextFactories.iterator();
 
-		DLDisplayContextFactory dlDisplayContextFactoryExtension = null;
-
-		String className = TestDLDisplayContextFactoryImpl.class.getName();
-
 		while (iterator.hasNext()) {
 			DLDisplayContextFactory dlDisplayContextFactory = iterator.next();
 
+			Class<?> clazz = dlDisplayContextFactory.getClass();
+
+			String className = clazz.getName();
+
 			if (className.equals(
-					dlDisplayContextFactory.getClass().getName())) {
+					TestBaseDisplayContextFactoryImpl.class.getName())) {
 
 				dlDisplayContextFactoryExtension = dlDisplayContextFactory;
 			}

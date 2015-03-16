@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.display.context.bundle.basedisplaycontextprovider;
+package com.liferay.portal.kernel.display.context.bundle.basedisplaycontextfactory;
 
 import com.liferay.portlet.documentlibrary.display.context.BaseDLDisplayContextFactory;
 import com.liferay.portlet.documentlibrary.display.context.DLDisplayContextFactory;
@@ -25,6 +25,6 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true, service = DLDisplayContextFactory.class
 )
-public class TestDLDisplayContextFactoryImpl
+public class TestBaseDisplayContextFactoryImpl
 	extends BaseDLDisplayContextFactory {
 }
