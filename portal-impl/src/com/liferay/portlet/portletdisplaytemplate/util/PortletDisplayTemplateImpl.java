@@ -354,9 +354,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 				PortletDisplayTemplateConstants.ENTRY, entries.get(0));
 		}
 
-			contextObjects.put(
-					PortletDisplayTemplateConstants.LOCALE,
-					request.getLocale());
+		contextObjects.put(
+			PortletDisplayTemplateConstants.LOCALE, request.getLocale());
 
 		contextObjects.put(PortletDisplayTemplateConstants.REQUEST, request);
 
@@ -376,8 +375,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			PortletURL currentURL = PortletURLUtil.getCurrent(
 				renderRequest, renderResponse);
 
-			contextObjects.put(
-					PortletDisplayTemplateConstants.CURRENT_URL,
+		contextObjects.put(
+				PortletDisplayTemplateConstants.CURRENT_URL,
 					currentURL.toString());
 		}
 
