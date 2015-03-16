@@ -344,8 +344,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			Map<String, Object> contextObjects)
 		throws Exception {
 
-			contextObjects.put(
-					PortletDisplayTemplateConstants.TEMPLATE_ID,
+		contextObjects.put(
+			PortletDisplayTemplateConstants.TEMPLATE_ID,
 			ddmTemplate.getTemplateId());
 		contextObjects.put(PortletDisplayTemplateConstants.ENTRIES, entries);
 
@@ -375,9 +375,9 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			PortletURL currentURL = PortletURLUtil.getCurrent(
 				renderRequest, renderResponse);
 
-		contextObjects.put(
+			contextObjects.put(
 				PortletDisplayTemplateConstants.CURRENT_URL,
-					currentURL.toString());
+				currentURL.toString());
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
