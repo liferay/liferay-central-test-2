@@ -117,8 +117,8 @@ public class DDMFormLayoutJSONSerializerImpl
 	protected JSONObject toJSONObject(DDMFormLayoutPage ddmFormLayoutPage) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		addTitle(jsonObject, ddmFormLayoutPage.getTitle());
 		addRows(jsonObject, ddmFormLayoutPage.getDDMFormLayoutRows());
+		addTitle(jsonObject, ddmFormLayoutPage.getTitle());
 
 		return jsonObject;
 	}
