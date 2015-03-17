@@ -90,12 +90,26 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 			Matcher matcher = _packagePattern.matcher(packageRef.getFQN());
 
-			if (matcher.matches() &&
-				!packages.containsKey(packageRef)) {
-
+			if (matcher.matches() && !packages.containsKey(packageRef)) {
 				packages.put(packageRef, new Attrs());
 			}
 		}
+	}
+
+	protected void addTaglibRequirement(
+		Set<String> taglibRequirements, String uri) {
+
+		Parameters parameters = new Parameters();
+
+		Attrs attrs = new Attrs();
+
+		attrs.put(
+			Constants.FILTER_DIRECTIVE,
+			"\"(&(osgi.extender=jsp.taglib)(uri=" + uri + "))\"");
+
+		parameters.put("osgi.extender", attrs);
+
+		taglibRequirements.add(parameters.toString());
 	}
 
 	protected void addTaglibRequirements(Analyzer analyzer, String content) {
@@ -132,24 +146,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 
 		analyzer.setProperty(
-			Constants.REQUIRE_CAPABILITY,
-			Strings.join(taglibRequirements));
-	}
-
-	protected void addTaglibRequirement(
-		Set<String> taglibRequirements, String uri) {
-
-		Parameters parameters = new Parameters();
-
-		Attrs attrs = new Attrs();
-
-		attrs.put(
-			Constants.FILTER_DIRECTIVE,
-			"\"(&(osgi.extender=jsp.taglib)(uri=" + uri + "))\"");
-
-		parameters.put("osgi.extender", attrs);
-
-		taglibRequirements.add(parameters.toString());
+			Constants.REQUIRE_CAPABILITY, Strings.join(taglibRequirements));
 	}
 
 	protected Set<String> analyzePackageImports(String content) {
