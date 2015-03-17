@@ -1180,10 +1180,9 @@ public class CMISRepository extends BaseCmisRepository {
 	public FileVersion toFileVersion(Document version) throws PortalException {
 		RepositoryEntry repositoryEntry = getRepositoryEntry(version.getId());
 
-		long fileVersionId = repositoryEntry.getRepositoryEntryId();
-		String uuid = repositoryEntry.getUuid();
-
-		return new CMISFileVersion(this, uuid, fileVersionId, version);
+		return new CMISFileVersion(
+			this, repositoryEntry.getUuid(),
+			repositoryEntry.getRepositoryEntryId(), version);
 	}
 
 	public Folder toFolder(
@@ -1193,10 +1192,9 @@ public class CMISRepository extends BaseCmisRepository {
 		RepositoryEntry repositoryEntry = getRepositoryEntry(
 			cmisFolder.getId());
 
-		long folderId = repositoryEntry.getRepositoryEntryId();
-		String uuid = repositoryEntry.getUuid();
-
-		return new CMISFolder(this, uuid, folderId, cmisFolder);
+		return new CMISFolder(
+			this, repositoryEntry.getUuid(),
+			repositoryEntry.getRepositoryEntryId(), cmisFolder);
 	}
 
 	@Override
@@ -2110,11 +2108,9 @@ public class CMISRepository extends BaseCmisRepository {
 			repositoryEntry = getRepositoryEntry(document.getId());
 		}
 
-		long fileEntryId = repositoryEntry.getRepositoryEntryId();
-		String uuid = repositoryEntry.getUuid();
-
 		FileEntry fileEntry = new CMISFileEntry(
-			this, uuid, fileEntryId, document);
+			this, repositoryEntry.getUuid(),
+			repositoryEntry.getRepositoryEntryId(), document);
 
 		FileVersion fileVersion = null;
 

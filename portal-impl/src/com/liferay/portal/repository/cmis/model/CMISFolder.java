@@ -246,6 +246,8 @@ public class CMISFolder extends CMISModel implements Folder {
 			parentFolder = folder.getParentFolder();
 		}
 		else {
+			Session session = _cmisRepository.getSession();
+
 			String path = _cmisFolder.getPath();
 
 			path = path.substring(0, path.lastIndexOf(CharPool.SLASH));
@@ -253,8 +255,6 @@ public class CMISFolder extends CMISModel implements Folder {
 			if (path.length() == 0) {
 				path = StringPool.SLASH;
 			}
-
-			Session session = (Session)_cmisRepository.getSession();
 
 			CmisObject parentCmisFolder = session.getObjectByPath(path);
 
