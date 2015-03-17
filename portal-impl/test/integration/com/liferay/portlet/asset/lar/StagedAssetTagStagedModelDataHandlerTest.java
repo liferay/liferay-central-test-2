@@ -61,11 +61,11 @@ public class StagedAssetTagStagedModelDataHandlerTest
 	@Override
 	protected StagedModel getStagedModel(String uuid, Group group) {
 		try {
-			AssetTag tag = AssetTagLocalServiceUtil.getTag(
+			AssetTag assetTag = AssetTagLocalServiceUtil.getTag(
 				group.getGroupId(), uuid);
 
 			return ModelAdapterUtil.adapt(
-				tag, AssetTag.class, StagedAssetTag.class);
+				assetTag, AssetTag.class, StagedAssetTag.class);
 		}
 		catch (Exception e) {
 			return null;
