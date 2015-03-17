@@ -62,12 +62,12 @@ public class PortletPreferencesFactoryImplTest {
 
 	@Test
 	public void testGetLayoutPortletSetup() throws Exception {
-		String prefName = RandomTestUtil.randomString(20);
-		String[] prefValues = new String[] {RandomTestUtil.randomString(20)};
+		String name = RandomTestUtil.randomString(20);
+		String[] values = new String[] {RandomTestUtil.randomString(20)};
 
 		String portletPreferencesXML =
 			PortletPreferencesTestUtil.getPortletPreferencesXML(
-				prefName, prefValues);
+				name, values);
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			_layout, _portlet, portletPreferencesXML);
@@ -77,23 +77,22 @@ public class PortletPreferencesFactoryImplTest {
 				_layout, _PORTLET_ID);
 
 		Assert.assertArrayEquals(
-			layoutPortletSetup.getValues(prefName, null), prefValues);
+			layoutPortletSetup.getValues(name, null), values);
 	}
 
 	@Test
 	public void testGetLayoutPortletSetupCustomizableColumn() throws Exception {
-		String prefName = RandomTestUtil.randomString(20);
-		String[] prefValues = new String[] {RandomTestUtil.randomString(20)};
+		long ownerId = _USER_ID;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
+		String customizableColumnPortletId = PortletConstants.assemblePortletId(
+			_PORTLET_ID, _USER_ID, null);
+
+		String name = RandomTestUtil.randomString(20);
+		String[] values = new String[] {RandomTestUtil.randomString(20)};
 
 		String portletPreferencesXML =
 			PortletPreferencesTestUtil.getPortletPreferencesXML(
-				prefName, prefValues);
-
-		long ownerId = _USER_ID;
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
-
-		String customizableColumnPortletId = PortletConstants.assemblePortletId(
-			_PORTLET_ID, _USER_ID, null);
+				name, values);
 
 		PortletPreferencesLocalServiceUtil.addPortletPreferences(
 			TestPropsValues.getCompanyId(), ownerId, ownerType,
@@ -105,7 +104,7 @@ public class PortletPreferencesFactoryImplTest {
 				_layout, customizableColumnPortletId);
 
 		Assert.assertArrayEquals(
-			layoutPortletSetup.getValues(prefName, null), prefValues);
+			layoutPortletSetup.getValues(name, null), values);
 	}
 
 	private static final String _PORTLET_ID = RandomTestUtil.randomString(10);
