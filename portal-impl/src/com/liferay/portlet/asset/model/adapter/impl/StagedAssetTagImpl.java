@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.asset.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.adapter.StagedAssetTag;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;

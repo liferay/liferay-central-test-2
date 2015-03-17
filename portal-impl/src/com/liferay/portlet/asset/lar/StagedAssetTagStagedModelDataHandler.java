@@ -25,8 +25,8 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.adapter.ModelAdapterUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.asset.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 
 import java.util.List;

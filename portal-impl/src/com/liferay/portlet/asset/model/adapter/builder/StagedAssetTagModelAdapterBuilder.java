@@ -15,8 +15,8 @@
 package com.liferay.portlet.asset.model.adapter.builder;
 
 import com.liferay.portal.model.adapter.builder.ModelAdapterBuilder;
-import com.liferay.portlet.asset.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.model.adapter.impl.StagedAssetTagImpl;
 
 /**

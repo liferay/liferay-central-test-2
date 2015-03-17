@@ -22,8 +22,8 @@ import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.adapter.ModelAdapterUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
-import com.liferay.portlet.asset.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.adapter.StagedAssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.util.test.AssetTestUtil;
 

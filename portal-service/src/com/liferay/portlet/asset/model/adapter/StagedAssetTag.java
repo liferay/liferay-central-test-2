@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.asset.adapter;
+package com.liferay.portlet.asset.model.adapter;
 
 import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portlet.asset.model.AssetTag;
