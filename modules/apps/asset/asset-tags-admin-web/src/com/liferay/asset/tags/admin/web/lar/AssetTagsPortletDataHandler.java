@@ -191,6 +191,15 @@ public class AssetTagsPortletDataHandler extends BasePortletDataHandler {
 			}
 
 		});
+		exportActionableDynamicQuery.setBaseLocalService(
+			AssetTagLocalServiceUtil.getService());
+		exportActionableDynamicQuery.setClass(AssetTag.class);
+		exportActionableDynamicQuery.setClassLoader(
+			this.getClass().getClassLoader());
+		exportActionableDynamicQuery.setCompanyId(
+			portletDataContext.getCompanyId());
+		exportActionableDynamicQuery.setGroupId(
+			portletDataContext.getScopeGroupId());
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
@@ -206,16 +215,6 @@ public class AssetTagsPortletDataHandler extends BasePortletDataHandler {
 				}
 
 			});
-
-		exportActionableDynamicQuery.setBaseLocalService(
-			AssetTagLocalServiceUtil.getService());
-		exportActionableDynamicQuery.setClass(AssetTag.class);
-		exportActionableDynamicQuery.setClassLoader(
-			this.getClass().getClassLoader());
-		exportActionableDynamicQuery.setCompanyId(
-			portletDataContext.getCompanyId());
-		exportActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
 		exportActionableDynamicQuery.setPrimaryKeyPropertyName("tagId");
 		exportActionableDynamicQuery.setStagedModelType(
 			new StagedModelType(StagedAssetTag.class));
