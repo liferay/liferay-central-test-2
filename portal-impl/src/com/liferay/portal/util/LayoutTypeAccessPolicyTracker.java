@@ -14,9 +14,9 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.model.DefaultLayoutTypeAccessPolicy;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypeAccessPolicy;
+import com.liferay.portal.model.impl.DefaultLayoutTypeAccessPolicyImpl;
 import com.liferay.registry.ServiceReference;
 import com.liferay.registry.collections.ServiceReferenceMapper;
 import com.liferay.registry.collections.ServiceTrackerCollections;
@@ -48,7 +48,7 @@ public class LayoutTypeAccessPolicyTracker {
 			_serviceTrackerMap.getService(type);
 
 		if (layoutTypeAccessPolicy == null) {
-			return DefaultLayoutTypeAccessPolicy.create();
+			return DefaultLayoutTypeAccessPolicyImpl.create();
 		}
 
 		return layoutTypeAccessPolicy;

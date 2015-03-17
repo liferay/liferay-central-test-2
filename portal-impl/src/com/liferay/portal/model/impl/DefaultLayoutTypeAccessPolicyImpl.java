@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
@@ -20,6 +20,11 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypeAccessPolicy;
+import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -38,13 +43,13 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletMode;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Adolfo Pérez
  */
-public class DefaultLayoutTypeAccessPolicy implements LayoutTypeAccessPolicy {
+public class DefaultLayoutTypeAccessPolicyImpl
+	implements LayoutTypeAccessPolicy {
 
 	public static LayoutTypeAccessPolicy create() {
 		return _instance;
@@ -378,6 +383,6 @@ public class DefaultLayoutTypeAccessPolicy implements LayoutTypeAccessPolicy {
 	}
 
 	private static final LayoutTypeAccessPolicy _instance =
-		new DefaultLayoutTypeAccessPolicy();
+		new DefaultLayoutTypeAccessPolicyImpl();
 
 }
