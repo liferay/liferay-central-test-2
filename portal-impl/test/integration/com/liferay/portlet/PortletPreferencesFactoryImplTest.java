@@ -82,10 +82,12 @@ public class PortletPreferencesFactoryImplTest {
 
 	@Test
 	public void testGetLayoutPortletSetupCustomizableColumn() throws Exception {
-		long ownerId = _USER_ID;
+		long userId = RandomTestUtil.randomLong();
+
+		long ownerId = userId;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
 		String customizableColumnPortletId = PortletConstants.assemblePortletId(
-			_PORTLET_ID, _USER_ID, null);
+			_PORTLET_ID, userId, null);
 
 		String name = RandomTestUtil.randomString(20);
 		String[] values = new String[] {RandomTestUtil.randomString(20)};
@@ -108,8 +110,6 @@ public class PortletPreferencesFactoryImplTest {
 	}
 
 	private static final String _PORTLET_ID = RandomTestUtil.randomString(10);
-
-	private static final long _USER_ID = RandomTestUtil.randomLong();
 
 	@DeleteAfterTestRun
 	private Group _group;
