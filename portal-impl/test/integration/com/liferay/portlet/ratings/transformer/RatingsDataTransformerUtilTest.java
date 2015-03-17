@@ -65,7 +65,8 @@ public class RatingsDataTransformerUtilTest {
 
 			portletPreferences.setValue(
 				"com.liferay.portlet.messageboards.model.MBDiscussion" +
-				"_RatingsType", "like");
+					"_RatingsType",
+				"like");
 			portletPreferences.setValue(
 				"com.liferay.portlet.journal.model.JournalArticle_RatingsType",
 				"like");
@@ -74,7 +75,8 @@ public class RatingsDataTransformerUtilTest {
 				"like");
 			portletPreferences.setValue(
 				"com.liferay.portlet.documentlibrary.model.DLFileEntry" +
-				"_RatingsType", "like");
+					"_RatingsType",
+				"like");
 			portletPreferences.setValue(
 				"com.liferay.bookmarks.model.BookmarksEntry_RatingsType",
 				"like");
@@ -89,7 +91,8 @@ public class RatingsDataTransformerUtilTest {
 				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.portlet.messageboards.model.MBDiscussion" +
-				"_RatingsType", "stars");
+					"_RatingsType",
+				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.portlet.journal.model.JournalArticle_RatingsType",
 				"stars");
@@ -98,7 +101,8 @@ public class RatingsDataTransformerUtilTest {
 				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.portlet.documentlibrary.model.DLFileEntry" +
-				"_RatingsType", "stars");
+					"_RatingsType",
+				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.bookmarks.model.BookmarksEntry_RatingsType",
 				"stars");
@@ -125,7 +129,8 @@ public class RatingsDataTransformerUtilTest {
 
 			unicodePreferences.setProperty(
 				"com.liferay.portlet.messageboards.model.MBDiscussion" +
-				"_RatingsType", "like");
+					"_RatingsType",
+				"like");
 			unicodePreferences.setProperty(
 				"com.liferay.portlet.journal.model.JournalArticle_RatingsType",
 				"like");
@@ -134,7 +139,8 @@ public class RatingsDataTransformerUtilTest {
 				"like");
 			unicodePreferences.setProperty(
 				"com.liferay.portlet.documentlibrary.model.DLFileEntry" +
-				"_RatingsType", "like");
+					"_RatingsType",
+				"like");
 			unicodePreferences.setProperty(
 				"com.liferay.bookmarks.model.BookmarksEntry_RatingsType",
 				"like");
@@ -149,7 +155,8 @@ public class RatingsDataTransformerUtilTest {
 				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.portlet.messageboards.model.MBDiscussion" +
-				"_RatingsType", "stars");
+					"_RatingsType",
+				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.portlet.journal.model.JournalArticle_RatingsType",
 				"stars");
@@ -158,7 +165,8 @@ public class RatingsDataTransformerUtilTest {
 				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.portlet.documentlibrary.model.DLFileEntry" +
-				"_RatingsType", "stars");
+					"_RatingsType",
+				"stars");
 			unicodeProperties.setProperty(
 				"com.liferay.bookmarks.model.BookmarksEntry_RatingsType",
 				"stars");
