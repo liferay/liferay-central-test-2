@@ -66,15 +66,15 @@ public class StagedAssetTagStagedModelDataHandler
 
 		dynamicQuery.add(nameProperty.eq(uuid));
 
-		List<AssetTag> tags = AssetTagLocalServiceUtil.dynamicQuery(
+		List<AssetTag> assetTags = AssetTagLocalServiceUtil.dynamicQuery(
 			dynamicQuery);
 
-		if (ListUtil.isEmpty(tags)) {
+		if (ListUtil.isEmpty(assetTags)) {
 			return null;
 		}
 
 		return ModelAdapterUtil.adapt(
-			tags.get(0), AssetTag.class, StagedAssetTag.class);
+			assetTags.get(0), AssetTag.class, StagedAssetTag.class);
 	}
 
 	@Override
@@ -82,10 +82,10 @@ public class StagedAssetTagStagedModelDataHandler
 		String uuid, long groupId) {
 
 		try {
-			AssetTag tag = AssetTagLocalServiceUtil.getTag(groupId, uuid);
+			AssetTag assetTag = AssetTagLocalServiceUtil.getTag(groupId, uuid);
 
 			return ModelAdapterUtil.adapt(
-				tag, AssetTag.class, StagedAssetTag.class);
+				assetTag, AssetTag.class, StagedAssetTag.class);
 		}
 		catch (PortalException e) {
 			return null;
@@ -122,11 +122,11 @@ public class StagedAssetTagStagedModelDataHandler
 			StagedAssetTag stagedAssetTag)
 		throws Exception {
 
-		Element tagElement = portletDataContext.getExportDataElement(
+		Element assetTagElement = portletDataContext.getExportDataElement(
 			stagedAssetTag);
 
 		portletDataContext.addClassedModel(
-			tagElement, ExportImportPathUtil.getModelPath(stagedAssetTag),
+			assetTagElement, ExportImportPathUtil.getModelPath(stagedAssetTag),
 			stagedAssetTag);
 	}
 
