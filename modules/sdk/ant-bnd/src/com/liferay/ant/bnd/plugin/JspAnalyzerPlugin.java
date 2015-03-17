@@ -46,22 +46,22 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
-		Parameters header = OSGiHeader.parseHeader(
+		Parameters parameters = OSGiHeader.parseHeader(
 			analyzer.getProperty("-jsp"));
 
-		if (header.isEmpty()) {
+		if (parameters.isEmpty()) {
 			return false;
 		}
 
-		Instructions instructions = new Instructions(header);
+		Instructions instructions = new Instructions(parameters);
 
 		Jar jar = analyzer.getJar();
 
 		Map<String, Resource> resources = jar.getResources();
 
-		Set<String> keySet = new HashSet<String>(resources.keySet());
+		Set<String> keys = new HashSet<String>(resources.keySet());
 
-		for (String key : keySet) {
+		for (String key : keys) {
 			for (Instruction instruction : instructions.keySet()) {
 				if (instruction.matches(key)) {
 					if (instruction.isNegated()) {
@@ -74,7 +74,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 						resource.openInputStream(), "UTF-8");
 
 					addPackageImports(analyzer, jsp);
-					addTaglibRequirement(analyzer, jsp);
+					addTaglibRequirements(analyzer, jsp);
 				}
 			}
 		}
@@ -82,63 +82,63 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return false;
 	}
 
-	private void addPackageImports(Analyzer analyzer, String content) {
-		Packages referredPackages = analyzer.getReferred();
-		Set<String> imports = analyzePackageImports(content);
+	protected void addPackageImports(Analyzer analyzer, String content) {
+		Packages packages = analyzer.getReferred();
 
-		for (String packageName : imports) {
+		for (String packageName : analyzePackageImports(content)) {
 			PackageRef packageRef = analyzer.getPackageRef(packageName);
 
 			Matcher matcher = _packagePattern.matcher(packageRef.getFQN());
 
 			if (matcher.matches() &&
-				!referredPackages.containsKey(packageRef)) {
+				!packages.containsKey(packageRef)) {
 
-				referredPackages.put(packageRef, new Attrs());
+				packages.put(packageRef, new Attrs());
 			}
 		}
 	}
 
-	private void addTaglibRequirement(Analyzer analyzer, String content) {
-		Set<String> taglibURIs = analyzeTagLibURIs(content);
-		TreeSet<String> requirements = new TreeSet<String>();
+	protected void addTaglibRequirements(Analyzer analyzer, String content) {
+		Set<String> taglibRequirements = new TreeSet<String>();
 
-		for (String uri : taglibURIs) {
+		for (String uri : analyzeTagLibURIs(content)) {
 			if (Arrays.binarySearch(_JSTL_CORE_URIS, uri) < 0) {
-				addTaglibRequirement(requirements, uri);
+				addTaglibRequirement(taglibRequirements, uri);
 			}
 		}
 
-		if (requirements.isEmpty()) {
+		if (taglibRequirements.isEmpty()) {
 			return;
 		}
 
-		String propertyValue = analyzer.getProperty(
-			Constants.REQUIRE_CAPABILITY);
+		String value = analyzer.getProperty(Constants.REQUIRE_CAPABILITY);
 
-		if (propertyValue != null) {
-			Parameters parameters = OSGiHeader.parseHeader(propertyValue);
+		if (value != null) {
+			Parameters parameters = OSGiHeader.parseHeader(value);
 
 			for (Entry<String, Attrs> entry : parameters.entrySet()) {
-				Attrs value = entry.getValue();
 				StringBuilder sb = new StringBuilder(entry.getKey());
 
-				if (value != null) {
+				Attrs attrs = entry.getValue();
+
+				if (attrs != null) {
 					sb.append(";");
 
-					value.append(sb);
+					attrs.append(sb);
 				}
 
-				requirements.add(sb.toString());
+				taglibRequirements.add(sb.toString());
 			}
 		}
 
-		String header = Strings.join(requirements);
-
-		analyzer.setProperty(Constants.REQUIRE_CAPABILITY, header);
+		analyzer.setProperty(
+			Constants.REQUIRE_CAPABILITY,
+			Strings.join(taglibRequirements));
 	}
 
-	private void addTaglibRequirement(Set<String> requires, String uri) {
+	protected void addTaglibRequirement(
+		Set<String> taglibRequirements, String uri) {
+
 		Parameters parameters = new Parameters();
 
 		Attrs attrs = new Attrs();
@@ -149,10 +149,10 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 		parameters.put("osgi.extender", attrs);
 
-		requires.add(parameters.toString());
+		taglibRequirements.add(parameters.toString());
 	}
 
-	private Set<String> analyzePackageImports(String content) {
+	protected Set<String> analyzePackageImports(String content) {
 		int contentX = -1;
 		int contentY = content.length();
 
@@ -191,11 +191,11 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return packageNames;
 	}
 
-	private Set<String> analyzeTagLibURIs(String content) {
+	protected Set<String> analyzeTagLibURIs(String content) {
 		int contentX = -1;
 		int contentY = content.length();
 
-		Set<String> uris = new HashSet<String>();
+		Set<String> taglibURis = new HashSet<String>();
 
 		while (true) {
 			contentX = content.lastIndexOf("<%@", contentY);
@@ -206,24 +206,24 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 			contentY = contentX;
 
-			int uriX = content.indexOf("uri=\"", contentY);
+			int importX = content.indexOf("uri=\"", contentY);
 			int importY = -1;
 
-			if (uriX != -1) {
-				uriX = uriX + "uri=\"".length();
-				importY = content.indexOf("\"", uriX);
+			if (importX != -1) {
+				importX = importX + "uri=\"".length();
+				importY = content.indexOf("\"", importX);
 			}
 
-			if ((uriX != -1) && (importY != -1)) {
-				String s = content.substring(uriX, importY);
+			if ((importX != -1) && (importY != -1)) {
+				String s = content.substring(importX, importY);
 
-				uris.add(s);
+				taglibURis.add(s);
 			}
 
 			contentY -= 3;
 		}
 
-		return uris;
+		return taglibURis;
 	}
 
 	private static final String[] _JSTL_CORE_URIS = new String[] {
