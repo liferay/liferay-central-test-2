@@ -66,8 +66,7 @@ public class PortletPreferencesFactoryImplTest {
 		String[] values = new String[] {RandomTestUtil.randomString(20)};
 
 		String portletPreferencesXML =
-			PortletPreferencesTestUtil.getPortletPreferencesXML(
-				name, values);
+			PortletPreferencesTestUtil.getPortletPreferencesXML(name, values);
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			_layout, _portlet, portletPreferencesXML);
@@ -93,8 +92,7 @@ public class PortletPreferencesFactoryImplTest {
 		String[] values = new String[] {RandomTestUtil.randomString(20)};
 
 		String portletPreferencesXML =
-			PortletPreferencesTestUtil.getPortletPreferencesXML(
-				name, values);
+			PortletPreferencesTestUtil.getPortletPreferencesXML(name, values);
 
 		PortletPreferencesLocalServiceUtil.addPortletPreferences(
 			TestPropsValues.getCompanyId(), ownerId, ownerType,
