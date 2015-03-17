@@ -1870,8 +1870,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private void _readPortletXML(
 			String servletContextName, PluginPackage pluginPackage,
-			PortletApp portletApp, Map<String, Portlet> portletsMap,
-			Element portletElement)
+			PortletApp portletApp, Element portletElement,
+			Map<String, Portlet> portletsMap)
 		throws PortletIdException {
 
 		String portletName = portletElement.elementText("portlet-name");
@@ -2260,8 +2260,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		for (Element portletElement : rootElement.elements("portlet")) {
 			_readPortletXML(
-				servletContextName, pluginPackage, portletApp, portletsMap,
-				portletElement);
+				servletContextName, pluginPackage, portletApp, portletElement,
+				portletsMap);
 		}
 
 		for (Element filterElement : rootElement.elements("filter")) {
