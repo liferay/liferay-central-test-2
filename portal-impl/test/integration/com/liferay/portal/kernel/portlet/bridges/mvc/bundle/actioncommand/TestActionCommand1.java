@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache;
+package com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.ActionCommand;
 
@@ -27,12 +27,12 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"action.command.name=" + TestActionCommand2.TEST_ACTION_COMMAND_NAME,
+		"action.command.name=" + TestActionCommand1.TEST_ACTION_COMMAND_NAME,
 		"javax.portlet.name=" + TestPortlet.PORTLET_NAME
 	},
 	service = ActionCommand.class
 )
-public class TestActionCommand2 implements ActionCommand {
+public class TestActionCommand1 implements ActionCommand {
 
 	public static final String TEST_ACTION_COMMAND_ATTRIBUTE =
 		"TEST_ACTION_COMMAND_ATTRIBUTE";

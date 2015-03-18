@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache;
+package com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
 public class TestPortlet extends MVCPortlet {
 
 	public static final String PORTLET_NAME =
-		"com_liferay_portal_kernel_portlet_bridges_mvc_bundle_" +
-			"actioncommandcache_TestPortlet";
+		"com_liferay_portal_kernel_portlet_bridges_mvc_bundle_actioncommand_" +
+			"TestPortlet";
 
 }

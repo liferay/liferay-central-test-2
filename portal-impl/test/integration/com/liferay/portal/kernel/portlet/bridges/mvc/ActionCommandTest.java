@@ -14,9 +14,9 @@
 
 package com.liferay.portal.kernel.portlet.bridges.mvc;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand1;
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand2;
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestPortlet;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand.TestActionCommand1;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand.TestActionCommand2;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand.TestPortlet;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -36,21 +36,20 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.springframework.mock.web.portlet.MockActionRequest;
 import org.springframework.mock.web.portlet.MockActionResponse;
 
 /**
  * @author Manuel de la Peña
  */
-public class ActionCommandCacheTest {
+public class ActionCommandTest {
 
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
-			new SyntheticBundleRule("bundle.actioncommandcache"));
+			new SyntheticBundleRule("bundle.actioncommand"));
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
