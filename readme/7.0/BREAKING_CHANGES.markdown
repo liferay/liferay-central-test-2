@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `68d6f19`.*
+*This document has been reviewed through commit `6006f66`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1092,44 +1092,44 @@ DDM templates, such as `VIEW`, `DELETE`, `PERMISSIONS`, and `UPDATE`.
 
 ---------------------------------------
 
-### Taglib <liferay-ui:restore-entry /> has changed its usage
-- **Date:** 2015-Mar-1
+### Changed Usage of `liferay-ui:restore-entry` Taglib
+- **Date:** 2015-Mar-01
 - **JIRA Ticket:** LPS-54106
 
 #### What changed?
 
-The usage of this taglib serves a different purpose now. Now it renders the UI
-to restore elements from the Recycle Bin.
+The usage of the taglib `liferay-ui:restore-entry` serves a different purpose
+now. It renders the UI to restore elements from the Recycle Bin.
 
 #### Who is affected?
 
-Anyone using the taglib liferay-ui:restore-entry.
+This affects developers using the taglib `liferay-ui:restore-entry`.
 
 #### How should I update my code?
 
-You need to replace the call to your taglib with this code. The CheckEntryURL
-should be an ActionURL of your portlet which checks if the current entry can
-be restored form the Recycle Bin. The duplicateEntryURL should be a RenderURL of
-your portlet that renders the UI to restore the entry resolving the conflicts
-(if they exist). In order to generate that URL you can use the taglib
-<liferay-ui:restore-entry /> which has been refactored for this usage.
+You should replace the call to your taglib with the code listed below:
 
-```
-<aui:script use="liferay-restore-entry">
-	new Liferay.RestoreEntry(
-	{
-			checkEntryURL: '<%= checkEntryURL.toString() %>',
-			duplicateEntryURL: '<%= duplicateEntryURL.toString() %>',
-			namespace: '<portlet:namespace />'
-		}
-	);
-</aui:script>
-```
+    <aui:script use="liferay-restore-entry">
+        new Liferay.RestoreEntry(
+        {
+                checkEntryURL: '<%= checkEntryURL.toString() %>',
+                duplicateEntryURL: '<%= duplicateEntryURL.toString() %>',
+                namespace: '<portlet:namespace />'
+            }
+        );
+    </aui:script>
+
+The `checkEntryURL` should be an `ActionURL` of your portlet, which checks if
+the current entry can be restored form the Recycle Bin. The `duplicateEntryURL`
+should be a `RenderURL` of your portlet that renders the UI to restore the entry
+resolving the conflicts, if they exist. In order to generate that URL, you can
+use the taglib `liferay-ui:restore-entry`, which has been refactored for this
+usage.
 
 #### Why was this change made?
 
-This change allows the Trash Portlet to be an independent module. Its actions
-and views are not used anymore by the taglib and they are now responsability of
+This change allows the Trash portlet to be an independent module. Its actions
+and views are no longer used by the taglib; they are now the responsability of
 each plugin.
 
 ---------------------------------------
