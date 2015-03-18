@@ -20,6 +20,6 @@ package com.liferay.site.navigation.menu.web.constants;
 public class NavigationPortletKeys {
 
 	public static final String NAVIGATION =
-		"com_liferay_navigation_web_portlet_NavigationPortlet";
+		"com_liferay_site_navigation_menu_web_portlet_NavigationPortlet";
 
 }

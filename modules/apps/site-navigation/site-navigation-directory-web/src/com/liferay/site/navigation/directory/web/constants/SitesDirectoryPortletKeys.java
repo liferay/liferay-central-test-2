@@ -20,6 +20,7 @@ package com.liferay.site.navigation.directory.web.constants;
 public class SitesDirectoryPortletKeys {
 
 	public static final String SITES_DIRECTORY =
-		"com_liferay_sites_directory_web_portlet_SitesDirectoryPortlet";
+		"com_liferay_site_navigation_directory_web_portlet_" +
+			"SitesDirectoryPortlet";
 
 }

@@ -20,6 +20,6 @@ package com.liferay.site.navigation.breadcrumb.web.constants;
 public class BreadcrumbPortletKeys {
 
 	public static final String BREADCRUMB =
-		"com_liferay_breadcrumb_web_portlet_BreadcrumbPortlet";
+		"com_liferay_site_navigation_breadcrumb_web_portlet_BreadcrumbPortlet";
 
 }

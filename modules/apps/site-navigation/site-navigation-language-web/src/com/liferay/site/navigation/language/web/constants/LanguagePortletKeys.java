@@ -20,6 +20,6 @@ package com.liferay.site.navigation.language.web.constants;
 public class LanguagePortletKeys {
 
 	public static final String LANGUAGE =
-		"com_liferay_language_web_portlet_LanguagePortlet";
+		"com_liferay_site_navigation_language_web_portlet_LanguagePortlet";
 
 }
