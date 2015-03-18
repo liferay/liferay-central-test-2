@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.portlet.bridges.mvc;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand1;
 import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand2;
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommandPortlet;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestPortlet;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -58,7 +58,7 @@ public class ActionCommandCacheTest {
 
 		Filter portletFilter = registry.getFilter(
 			"(&(objectClass=javax.portlet.Portlet)(javax.portlet.name=" +
-				TestActionCommandPortlet.PORTLET_NAME + "))");
+				TestPortlet.PORTLET_NAME + "))");
 
 		_portletServiceTracker = registry.trackServices(portletFilter);
 

@@ -32,6 +32,8 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestPortlet extends GenericPortlet {
 
-	public static final String PORTLET_NAME = "TEST_PORTLET_NAME";
+	public static final String PORTLET_NAME =
+		"com_liferay_portal_kernel_portlet_bundle_resourcebundletracker_" +
+			"TestPortlet";
 
 }

@@ -26,13 +26,14 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + TestActionCommandPortlet.PORTLET_NAME
+		"javax.portlet.name=" + TestPortlet.PORTLET_NAME
 	},
 	service = Portlet.class
 )
-public class TestActionCommandPortlet extends MVCPortlet {
+public class TestPortlet extends MVCPortlet {
 
 	public static final String PORTLET_NAME =
-		"TEST_ACTION_COMMAND_PORTLET_NAME";
+		"com_liferay_portal_kernel_portlet_bridges_mvc_bundle_" +
+			"actioncommandcache_TestPortlet";
 
 }

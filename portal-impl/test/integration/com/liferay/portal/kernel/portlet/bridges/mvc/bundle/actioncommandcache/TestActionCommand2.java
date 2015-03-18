@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"action.command.name=" + TestActionCommand2.TEST_ACTION_COMMAND_NAME,
-		"javax.portlet.name=" + TestActionCommandPortlet.PORTLET_NAME
+		"javax.portlet.name=" + TestPortlet.PORTLET_NAME
 	},
 	service = ActionCommand.class
 )
