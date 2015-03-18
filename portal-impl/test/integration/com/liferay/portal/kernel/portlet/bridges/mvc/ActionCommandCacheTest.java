@@ -93,33 +93,29 @@ public class ActionCommandCacheTest {
 
 	@Test
 	public void testProcessActionMultipleActionCommands() throws Exception {
-		MockActionRequest actionRequest = new MockActionRequest();
+		MockActionRequest mockActionRequest = new MockActionRequest();
 
-		StringBuilder actionName = new StringBuilder(3);
+		mockActionRequest.addParameter(
+			ActionRequest.ACTION_NAME,
+			TestActionCommand1.TEST_ACTION_COMMAND_NAME + StringPool.COMMA +
+				TestActionCommand2.TEST_ACTION_COMMAND_NAME);
 
-		actionName.append(TestActionCommand1.TEST_ACTION_COMMAND_NAME);
-		actionName.append(StringPool.COMMA);
-		actionName.append(TestActionCommand2.TEST_ACTION_COMMAND_NAME);
-
-		actionRequest.addParameter(
-			ActionRequest.ACTION_NAME, actionName.toString());
-
-		_genericPortlet.processAction(actionRequest, new MockActionResponse());
+		_genericPortlet.processAction(
+			mockActionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
-			actionRequest.getAttribute(
+			mockActionRequest.getAttribute(
 				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
 			TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
-			actionRequest.getAttribute(
+			mockActionRequest.getAttribute(
 				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
-
 		Assert.assertNotNull(
-			actionRequest.getAttribute(
+			mockActionRequest.getAttribute(
 				TestActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
 			TestActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE,
-			actionRequest.getAttribute(
+			mockActionRequest.getAttribute(
 				TestActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE));
 	}
 
