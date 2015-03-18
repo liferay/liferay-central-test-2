@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.portlet.bridges.mvc;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand1;
 import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommand2;
 import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache.TestActionCommandPortlet;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -78,17 +78,17 @@ public class ActionCommandCacheTest {
 
 		actionRequest.addParameter(
 			ActionRequest.ACTION_NAME,
-			TestActionCommand.TEST_ACTION_COMMAND_NAME);
+			TestActionCommand1.TEST_ACTION_COMMAND_NAME);
 
 		_portlet.processAction(actionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
 			actionRequest.getAttribute(
-				TestActionCommand.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
-			TestActionCommand.TEST_ACTION_COMMAND_ATTRIBUTE,
+			TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
 			actionRequest.getAttribute(
-				TestActionCommand.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class ActionCommandCacheTest {
 
 		StringBuilder actionName = new StringBuilder(3);
 
-		actionName.append(TestActionCommand.TEST_ACTION_COMMAND_NAME);
+		actionName.append(TestActionCommand1.TEST_ACTION_COMMAND_NAME);
 		actionName.append(StringPool.COMMA);
 		actionName.append(TestActionCommand2.TEST_ACTION_COMMAND_NAME);
 
@@ -108,11 +108,11 @@ public class ActionCommandCacheTest {
 
 		Assert.assertNotNull(
 			actionRequest.getAttribute(
-				TestActionCommand.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
-			TestActionCommand.TEST_ACTION_COMMAND_ATTRIBUTE,
+			TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
 			actionRequest.getAttribute(
-				TestActionCommand.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 
 		Assert.assertNotNull(
 			actionRequest.getAttribute(

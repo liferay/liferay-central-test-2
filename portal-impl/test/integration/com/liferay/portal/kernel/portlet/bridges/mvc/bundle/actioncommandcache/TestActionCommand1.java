@@ -27,12 +27,12 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"action.command.name=" + TestActionCommand.TEST_ACTION_COMMAND_NAME,
+		"action.command.name=" + TestActionCommand1.TEST_ACTION_COMMAND_NAME,
 		"javax.portlet.name=" + TestActionCommandPortlet.PORTLET_NAME
 	},
 	service = ActionCommand.class
 )
-public class TestActionCommand implements ActionCommand {
+public class TestActionCommand1 implements ActionCommand {
 
 	public static final String TEST_ACTION_COMMAND_ATTRIBUTE =
 		"TEST_ACTION_COMMAND_ATTRIBUTE";
