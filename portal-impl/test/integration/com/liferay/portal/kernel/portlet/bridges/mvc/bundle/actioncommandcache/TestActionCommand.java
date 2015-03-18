@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommandcache;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.ActionCommand;
 
-import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
@@ -43,8 +42,7 @@ public class TestActionCommand implements ActionCommand {
 
 	@Override
 	public boolean processCommand(
-			PortletRequest portletRequest, PortletResponse portletResponse)
-		throws PortletException {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		portletRequest.setAttribute(
 			TEST_ACTION_COMMAND_ATTRIBUTE, TEST_ACTION_COMMAND_ATTRIBUTE);
