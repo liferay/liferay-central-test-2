@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.marketplace.messaging;
+package com.liferay.marketplace.web.messaging;
 
 import com.liferay.marketplace.model.App;
 import com.liferay.marketplace.service.AppLocalServiceUtil;

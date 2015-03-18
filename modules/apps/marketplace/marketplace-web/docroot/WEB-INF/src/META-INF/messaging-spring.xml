@@ -10,8 +10,8 @@
 
 	<!-- Listeners -->
 
-	<bean id="messageListener.hot_deploy" class="com.liferay.marketplace.messaging.HotDeployMessageListener" />
-	<bean id="messageListener.marketplace" class="com.liferay.marketplace.messaging.MarketplaceMessageListener" />
+	<bean id="messageListener.hot_deploy" class="com.liferay.marketplace.web.messaging.HotDeployMessageListener" />
+	<bean id="messageListener.marketplace" class="com.liferay.marketplace.web.messaging.MarketplaceMessageListener" />
 
 	<!-- Configurator -->
 

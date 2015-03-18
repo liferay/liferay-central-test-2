@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.marketplace.store.portlet;
+package com.liferay.marketplace.web.store.portlet;
 
 import com.liferay.marketplace.model.App;
 import com.liferay.marketplace.service.AppLocalServiceUtil;
 import com.liferay.marketplace.service.AppServiceUtil;
-import com.liferay.marketplace.util.MarketplaceLicenseUtil;
 import com.liferay.marketplace.util.MarketplaceUtil;
-import com.liferay.marketplace.util.PortletPropsValues;
+import com.liferay.marketplace.web.util.MarketplaceLicenseUtil;
+import com.liferay.marketplace.web.util.PortletPropsValues;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.marketplace.appmanager.portlet;
+package com.liferay.marketplace.web.appmanager.portlet;
 
 import com.liferay.marketplace.service.AppServiceUtil;
 import com.liferay.portal.kernel.deploy.DeployManagerUtil;
@@ -264,7 +264,7 @@ public class AppManagerPortlet extends MVCPortlet {
 			String fileName = null;
 
 			if (Validator.isNotNull(deploymentContext)) {
-				fileName = DEPLOY_TO_PREFIX + deploymentContext + ".war";
+				fileName = _DEPLOY_TO_PREFIX + deploymentContext + ".war";
 			}
 			else {
 				fileName = url.substring(url.lastIndexOf(CharPool.SLASH) + 1);
@@ -352,6 +352,6 @@ public class AppManagerPortlet extends MVCPortlet {
 		}
 	}
 
-	private final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
+	private static final String _DEPLOY_TO_PREFIX = "DEPLOY_TO__";
 
 }

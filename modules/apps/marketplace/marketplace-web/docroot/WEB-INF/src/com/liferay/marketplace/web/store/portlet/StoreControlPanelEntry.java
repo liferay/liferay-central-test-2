@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.marketplace.appmanager.portlet;
+package com.liferay.marketplace.web.store.portlet;
 
+import com.liferay.marketplace.web.util.PortletPropsValues;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -22,12 +23,16 @@ import com.liferay.portlet.BaseControlPanelEntry;
 /**
  * @author Ryan Park
  */
-public class AppManagerControlPanelEntry extends BaseControlPanelEntry {
+public class StoreControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
 	public boolean hasAccessPermission(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
+
+		if (!PortletPropsValues.MARKETPLACE_STORE_ENABLED) {
+			return false;
+		}
 
 		return permissionChecker.isOmniadmin();
 	}

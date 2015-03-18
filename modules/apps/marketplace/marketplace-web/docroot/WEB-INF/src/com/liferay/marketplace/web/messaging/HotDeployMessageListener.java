@@ -12,23 +12,20 @@
  * details.
  */
 
-package com.liferay.marketplace.util;
+package com.liferay.marketplace.web.messaging;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.portlet.PortletProps;
+import com.liferay.marketplace.service.AppLocalServiceUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
+import com.liferay.portal.kernel.messaging.Message;
 
 /**
  * @author Ryan Park
  */
-public class PortletPropsValues {
+public class HotDeployMessageListener extends BaseMessageListener {
 
-	public static final boolean MARKETPLACE_STORE_ENABLED =
-		GetterUtil.getBoolean(
-			PortletProps.get(PortletPropsKeys.MARKETPLACE_STORE_ENABLED), true);
-
-	public static final String MARKETPLACE_URL =
-		GetterUtil.getString(
-			PortletProps.get(PortletPropsKeys.MARKETPLACE_URL),
-			"https://mp.liferay.com");
+	@Override
+	protected void doReceive(Message message) throws Exception {
+		AppLocalServiceUtil.clearInstalledAppsCache();
+	}
 
 }

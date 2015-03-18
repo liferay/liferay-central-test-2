@@ -12,15 +12,24 @@
  * details.
  */
 
-package com.liferay.marketplace.util;
+package com.liferay.marketplace.web.appmanager.portlet;
+
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
  * @author Ryan Park
  */
-public class PortletKeys extends com.liferay.portal.util.PortletKeys {
+public class AppManagerControlPanelEntry extends BaseControlPanelEntry {
 
-	public static final String MY_MARKETPLACE = "2_WAR_marketplaceportlet";
+	@Override
+	public boolean hasAccessPermission(
+			PermissionChecker permissionChecker, Group group, Portlet portlet)
+		throws Exception {
 
-	public static final String STORE = "1_WAR_marketplaceportlet";
+		return permissionChecker.isOmniadmin();
+	}
 
 }
