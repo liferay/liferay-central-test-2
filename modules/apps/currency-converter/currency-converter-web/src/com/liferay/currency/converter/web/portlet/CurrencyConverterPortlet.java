@@ -97,6 +97,18 @@ public class CurrencyConverterPortlet extends MVCPortlet {
 			CurrencyConverterConfiguration.class, properties);
 	}
 
+	@Override
+	protected void doDispatch(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		renderRequest.setAttribute(
+			CurrencyConverterConfiguration.class.getName(),
+			_currencyConverterConfiguration);
+
+		super.doDispatch(renderRequest, renderResponse);
+	}
+
 	@Reference(unbind = "-")
 	protected void setCurrencyConverterWebUpgrade(
 		CurrencyConverterWebUpgrade currencyConverterWebUpgrade) {
