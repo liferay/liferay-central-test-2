@@ -14,9 +14,9 @@
 
 package com.liferay.site.navigation.breadcrumb.web.portlet.action;
 
-import com.liferay.site.navigation.breadcrumb.web.constants.BreadcrumbPortletKeys;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
+import com.liferay.site.navigation.breadcrumb.web.constants.BreadcrumbPortletKeys;
 
 import org.osgi.service.component.annotations.Component;
 

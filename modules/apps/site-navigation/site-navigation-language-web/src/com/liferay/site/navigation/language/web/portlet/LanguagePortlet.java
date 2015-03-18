@@ -14,8 +14,8 @@
 
 package com.liferay.site.navigation.language.web.portlet;
 
-import com.liferay.site.navigation.language.web.upgrade.LanguageWebUpgrade;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.site.navigation.language.web.upgrade.LanguageWebUpgrade;
 
 import javax.portlet.Portlet;
 

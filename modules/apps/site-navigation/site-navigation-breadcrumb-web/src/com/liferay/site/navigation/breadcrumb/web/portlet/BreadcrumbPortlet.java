@@ -14,8 +14,8 @@
 
 package com.liferay.site.navigation.breadcrumb.web.portlet;
 
-import com.liferay.site.navigation.breadcrumb.web.upgrade.BreadcrumbWebUpgrade;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.site.navigation.breadcrumb.web.upgrade.BreadcrumbWebUpgrade;
 
 import javax.portlet.Portlet;
 

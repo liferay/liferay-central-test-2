@@ -14,7 +14,6 @@
 
 package com.liferay.site.navigation.breadcrumb.web.context;
 
-import com.liferay.site.navigation.breadcrumb.web.configuration.BreadcrumbConfigurationValues;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -26,6 +25,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplateUtil;
+import com.liferay.site.navigation.breadcrumb.web.configuration.BreadcrumbConfigurationValues;
 
 import javax.portlet.PortletPreferences;
 

@@ -14,11 +14,10 @@
 
 package com.liferay.site.navigation.menu.web.portlet.action;
 
-import com.liferay.site.navigation.menu.web.constants.NavigationPortletKeys;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
-
 import com.liferay.site.navigation.menu.web.constants.NavigationPortletKeys;
+
 import org.osgi.service.component.annotations.Component;
 
 /**

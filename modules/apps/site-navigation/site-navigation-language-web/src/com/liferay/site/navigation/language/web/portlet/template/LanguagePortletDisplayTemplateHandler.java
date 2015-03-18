@@ -14,8 +14,6 @@
 
 package com.liferay.site.navigation.language.web.portlet.template;
 
-import com.liferay.site.navigation.language.web.configuration.LanguageWebConfigurationValues;
-import com.liferay.site.navigation.language.web.constants.LanguagePortletKeys;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portletdisplaytemplate.BasePortletDisplayTemplateHandler;
 import com.liferay.portal.kernel.template.TemplateHandler;
@@ -23,6 +21,8 @@ import com.liferay.portal.kernel.template.TemplateVariableGroup;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplateConstants;
+import com.liferay.site.navigation.language.web.configuration.LanguageWebConfigurationValues;
+import com.liferay.site.navigation.language.web.constants.LanguagePortletKeys;
 
 import java.util.List;
 import java.util.Locale;

@@ -14,11 +14,11 @@
 
 package com.liferay.site.navigation.language.web.upgrade;
 
-import com.liferay.site.navigation.language.web.upgrade.v1_0_0.UpgradePortletId;
-import com.liferay.site.navigation.language.web.upgrade.v1_0_0.UpgradePortletPreferences;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
+import com.liferay.site.navigation.language.web.upgrade.v1_0_0.UpgradePortletId;
+import com.liferay.site.navigation.language.web.upgrade.v1_0_0.UpgradePortletPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,8 @@ public class LanguageWebUpgrade {
 		upgradeProcesses.add(new UpgradePortletPreferences());
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.site.navigation.language.web", upgradeProcesses, 1, 1, false);
+			"com.liferay.site.navigation.language.web", upgradeProcesses, 1, 1,
+			false);
 	}
 
 	private ReleaseLocalService _releaseLocalService;

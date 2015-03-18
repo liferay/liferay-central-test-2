@@ -14,11 +14,11 @@
 
 package com.liferay.site.navigation.menu.web.upgrade;
 
-import com.liferay.site.navigation.menu.web.constants.NavigationPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
+import com.liferay.site.navigation.menu.web.constants.NavigationPortletKeys;
 
 import java.util.Collections;
 
