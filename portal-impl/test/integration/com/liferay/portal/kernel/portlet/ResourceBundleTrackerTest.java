@@ -55,8 +55,8 @@ public class ResourceBundleTrackerTest {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(objectClass=javax.portlet.Portlet)(javax.portlet.name=" +
-				TestPortlet.PORTLET_NAME + "))");
+			"(&(javax.portlet.name=" + TestPortlet.PORTLET_NAME +
+				")(objectClass=javax.portlet.Portlet))");
 
 		_genericPortletServiceTracker = registry.trackServices(filter);
 
