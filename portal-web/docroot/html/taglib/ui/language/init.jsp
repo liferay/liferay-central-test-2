@@ -27,7 +27,6 @@ String formAction = (String)request.getAttribute("liferay-ui:language:formAction
 
 if (Validator.isNull(formAction)) {
 	formAction = themeDisplay.getPathMain() + "/portal/update_language?p_l_id=" + themeDisplay.getPlid();
-
 	formAction = HttpUtil.setParameter(formAction, "redirect", PortalUtil.getCurrentURL(request));
 }
 
