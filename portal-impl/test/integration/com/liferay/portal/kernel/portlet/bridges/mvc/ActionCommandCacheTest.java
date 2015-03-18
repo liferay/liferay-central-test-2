@@ -60,16 +60,16 @@ public class ActionCommandCacheTest {
 			"(&(javax.portlet.name=" + TestPortlet.PORTLET_NAME +
 				")(objectClass=javax.portlet.Portlet))");
 
-		_portletServiceTracker = registry.trackServices(filter);
+		_genericPortletServiceTracker = registry.trackServices(filter);
 
-		_portletServiceTracker.open();
+		_genericPortletServiceTracker.open();
 
-		_portlet = _portletServiceTracker.getService();
+		_genericPortlet = _genericPortletServiceTracker.getService();
 	}
 
 	@AfterClass
 	public static void tearDownClass() {
-		_portletServiceTracker.close();
+		_genericPortletServiceTracker.close();
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class ActionCommandCacheTest {
 			ActionRequest.ACTION_NAME,
 			TestActionCommand1.TEST_ACTION_COMMAND_NAME);
 
-		_portlet.processAction(actionRequest, new MockActionResponse());
+		_genericPortlet.processAction(actionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
 			actionRequest.getAttribute(
@@ -104,7 +104,7 @@ public class ActionCommandCacheTest {
 		actionRequest.addParameter(
 			ActionRequest.ACTION_NAME, actionName.toString());
 
-		_portlet.processAction(actionRequest, new MockActionResponse());
+		_genericPortlet.processAction(actionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
 			actionRequest.getAttribute(
@@ -123,8 +123,8 @@ public class ActionCommandCacheTest {
 				TestActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE));
 	}
 
-	private static GenericPortlet _portlet;
+	private static GenericPortlet _genericPortlet;
 	private static ServiceTracker<GenericPortlet, GenericPortlet>
-		_portletServiceTracker;
+		_genericPortletServiceTracker;
 
 }
