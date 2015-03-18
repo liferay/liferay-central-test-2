@@ -1019,7 +1019,7 @@ public class LiferaySeleniumHelper {
 			}
 		}
 
-		// LPS-54334, temporary workaround until Ray Auge can fix
+		// LPS-54334, temporary workaround until Raymond Augé fixes it
 
 		if (line.contains(
 				"org.eclipse.equinox.http.servlet.internal.servlet." +
