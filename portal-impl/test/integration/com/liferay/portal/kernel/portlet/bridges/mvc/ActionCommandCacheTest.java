@@ -73,21 +73,22 @@ public class ActionCommandCacheTest {
 	}
 
 	@Test
-	public void testProcessAction() throws Exception {
-		MockActionRequest actionRequest = new MockActionRequest();
+	public void testProcessActionOneActionCommand() throws Exception {
+		MockActionRequest mockActionRequest = new MockActionRequest();
 
-		actionRequest.addParameter(
+		mockActionRequest.addParameter(
 			ActionRequest.ACTION_NAME,
 			TestActionCommand1.TEST_ACTION_COMMAND_NAME);
 
-		_genericPortlet.processAction(actionRequest, new MockActionResponse());
+		_genericPortlet.processAction(
+			mockActionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
-			actionRequest.getAttribute(
+			mockActionRequest.getAttribute(
 				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
 			TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
-			actionRequest.getAttribute(
+			mockActionRequest.getAttribute(
 				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 	}
 
