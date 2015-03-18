@@ -410,6 +410,10 @@ public class VerifyProperties extends VerifyProcess {
 		// Breadcrumb
 
 		new String[] {
+			"breadcrumb.display.style.default", "ddm.template.key.default",
+			"com.liferay.breadcrumb.web"
+		},
+		new String[] {
 			"breadcrumb.display.templates.config", "display.templates.config",
 			"com.liferay.breadcrumb.web"
 		},
@@ -419,10 +423,6 @@ public class VerifyProperties extends VerifyProcess {
 		},
 		new String[] {
 			"breadcrumb.show.parent.groups", "show.parent.groups",
-			"com.liferay.breadcrumb.web"
-		},
-		new String[] {
-			"breadcrumb.display.style.default", "ddm.template.key.default",
 			"com.liferay.breadcrumb.web"
 		},
 
