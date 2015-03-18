@@ -54,25 +54,25 @@ public class ResourceBundleTrackerTest {
 	public static void setUpClass() throws Exception {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter portletFilter = registry.getFilter(
+		Filter filter = registry.getFilter(
 			"(&(objectClass=javax.portlet.Portlet)(javax.portlet.name=" +
 				TestPortlet.PORTLET_NAME + "))");
 
-		_portletServiceTracker = registry.trackServices(portletFilter);
+		_genericPortletServiceTracker = registry.trackServices(filter);
 
-		_portletServiceTracker.open();
+		_genericPortletServiceTracker.open();
 
-		_portlet = _portletServiceTracker.getService();
+		_genericPortlet = _genericPortletServiceTracker.getService();
 	}
 
 	@AfterClass
 	public static void tearDownClass() {
-		_portletServiceTracker.close();
+		_genericPortletServiceTracker.close();
 	}
 
 	@Test
 	public void testGetResourceBundleFromPortletConfig() throws Exception {
-		PortletConfig portletConfig = _portlet.getPortletConfig();
+		PortletConfig portletConfig = _genericPortlet.getPortletConfig();
 
 		Locale locale = LocaleUtil.fromLanguageId("es_ES");
 
@@ -89,8 +89,8 @@ public class ResourceBundleTrackerTest {
 			resourceBundle.getString("resourcebundle-extension-key"));
 	}
 
-	private static GenericPortlet _portlet;
+	private static GenericPortlet _genericPortlet;
 	private static ServiceTracker<GenericPortlet, GenericPortlet>
-		_portletServiceTracker;
+		_genericPortletServiceTracker;
 
 }
