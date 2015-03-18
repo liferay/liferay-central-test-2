@@ -138,7 +138,7 @@ public class BreadcrumbTag extends IncludeTag {
 	private long _ddmTemplateGroupId;
 	private String _ddmTemplateKey;
 	private boolean _showCurrentGroup = true;
-	private boolean _showGuestGroup = false;
+	private boolean _showGuestGroup;
 	private boolean _showLayout = true;
 	private boolean _showParentGroups = true;
 	private boolean _showPortletBreadcrumb = true;
