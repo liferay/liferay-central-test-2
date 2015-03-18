@@ -73,26 +73,6 @@ public class ActionCommandCacheTest {
 	}
 
 	@Test
-	public void testProcessActionOneActionCommand() throws Exception {
-		MockActionRequest mockActionRequest = new MockActionRequest();
-
-		mockActionRequest.addParameter(
-			ActionRequest.ACTION_NAME,
-			TestActionCommand1.TEST_ACTION_COMMAND_NAME);
-
-		_genericPortlet.processAction(
-			mockActionRequest, new MockActionResponse());
-
-		Assert.assertNotNull(
-			mockActionRequest.getAttribute(
-				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
-		Assert.assertEquals(
-			TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
-			mockActionRequest.getAttribute(
-				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
-	}
-
-	@Test
 	public void testProcessActionMultipleActionCommands() throws Exception {
 		MockActionRequest mockActionRequest = new MockActionRequest();
 
@@ -118,6 +98,26 @@ public class ActionCommandCacheTest {
 			TestActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE,
 			mockActionRequest.getAttribute(
 				TestActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE));
+	}
+
+	@Test
+	public void testProcessActionOneActionCommand() throws Exception {
+		MockActionRequest mockActionRequest = new MockActionRequest();
+
+		mockActionRequest.addParameter(
+			ActionRequest.ACTION_NAME,
+			TestActionCommand1.TEST_ACTION_COMMAND_NAME);
+
+		_genericPortlet.processAction(
+			mockActionRequest, new MockActionResponse());
+
+		Assert.assertNotNull(
+			mockActionRequest.getAttribute(
+				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
+		Assert.assertEquals(
+			TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
+			mockActionRequest.getAttribute(
+				TestActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
 	}
 
 	private static GenericPortlet _genericPortlet;
