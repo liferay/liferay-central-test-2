@@ -56,11 +56,11 @@ public class ActionCommandCacheTest {
 	public static void setUpClass() throws Exception {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter portletFilter = registry.getFilter(
-			"(&(objectClass=javax.portlet.Portlet)(javax.portlet.name=" +
-				TestPortlet.PORTLET_NAME + "))");
+		Filter filter = registry.getFilter(
+			"(&(javax.portlet.name=" + TestPortlet.PORTLET_NAME +
+				")(objectClass=javax.portlet.Portlet))");
 
-		_portletServiceTracker = registry.trackServices(portletFilter);
+		_portletServiceTracker = registry.trackServices(filter);
 
 		_portletServiceTracker.open();
 
