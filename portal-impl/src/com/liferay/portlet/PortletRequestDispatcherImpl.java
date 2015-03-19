@@ -206,7 +206,7 @@ public class PortletRequestDispatcherImpl
 
 				httpServletRequest = createDynamicServletRequest(
 					httpServletRequest, portletRequestImpl,
-					extractParameterMap(queryString));
+					toParameterMap(queryString));
 			}
 
 			Portlet portlet = portletRequestImpl.getPortlet();
@@ -294,20 +294,21 @@ public class PortletRequestDispatcherImpl
 		}
 	}
 
-	protected Map<String, String[]> extractParameterMap(String queryString) {
+	protected Map<String, String[]> toParameterMap(String queryString) {
 		Map<String, String[]> parameterMap = new HashMap<>();
 
-		for (String element :
+		for (String parameter :
 				StringUtil.split(queryString, CharPool.AMPERSAND)) {
 
-			String[] elementParts = StringUtil.split(element, CharPool.EQUAL);
+			String[] parameterArray = StringUtil.split(
+				parameter, CharPool.EQUAL);
 
-			String name = elementParts[0];
+			String name = parameterArray[0];
 
 			String value = StringPool.BLANK;
 
-			if (elementParts.length == 2) {
-				value = elementParts[1];
+			if (parameterArray.length == 2) {
+				value = parameterArray[1];
 			}
 
 			String[] values = parameterMap.get(name);
