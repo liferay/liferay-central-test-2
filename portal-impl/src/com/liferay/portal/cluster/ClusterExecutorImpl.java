@@ -548,14 +548,6 @@ public class ClusterExecutorImpl
 		}
 
 		private ClusterNodeStatus(ClusterNode clusterNode, Address address) {
-			if (clusterNode == null) {
-				throw new NullPointerException("Cluster node is null");
-			}
-
-			if (address == null) {
-				throw new NullPointerException("Address is null");
-			}
-
 			_clusterNode = clusterNode;
 			_address = address;
 		}
