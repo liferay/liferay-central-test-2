@@ -466,7 +466,7 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.currency.converter.web"
 		},
 
-		// Facebook Connect SSO
+		// Facebook Connect
 
 		new String[] {
 			"facebook.connect.auth.enabled", "enabled",

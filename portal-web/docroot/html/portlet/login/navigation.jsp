@@ -40,7 +40,6 @@
 		%>
 
 		<liferay-util:dynamic-include key="/html/portlet/login/navigation.jsp#post" />
-
 	</liferay-ui:icon-list>
 </liferay-util:buffer>
 

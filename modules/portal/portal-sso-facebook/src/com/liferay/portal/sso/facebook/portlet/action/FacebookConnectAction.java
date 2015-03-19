@@ -84,7 +84,7 @@ public class FacebookConnectAction extends BaseStrutsAction {
 
 		if (!_facebookConnect.isEnabled(themeDisplay.getCompanyId())) {
 			throw new PrincipalException();
-			}
+		}
 
 		HttpSession session = request.getSession();
 
@@ -108,7 +108,7 @@ public class FacebookConnectAction extends BaseStrutsAction {
 			}
 		}
 		else {
-			return _forwardsMap.get("/common/referer_jsp.jsp");
+			return _forwards.get("/common/referer_jsp.jsp");
 		}
 
 		response.sendRedirect(redirect);
@@ -118,17 +118,15 @@ public class FacebookConnectAction extends BaseStrutsAction {
 
 	@Activate
 	protected void activate(Map<String, Object> properties) {
-		_forwardsMap.put(
-			"portlet.login.login",
-			GetterUtil.getString(properties, "portlet.login.login"));
-
-		_forwardsMap.put(
-			"portlet.login.update_account",
-			GetterUtil.getString(properties, "portlet.login.update_account"));
-
-		_forwardsMap.put(
+		_forwards.put(
 			"/common/referer_jsp.jsp",
 			GetterUtil.getString(properties, "/common/referer_jsp.jsp"));
+		_forwards.put(
+			"portlet.login.login",
+			GetterUtil.getString(properties, "portlet.login.login"));
+		_forwards.put(
+			"portlet.login.update_account",
+			GetterUtil.getString(properties, "portlet.login.update_account"));
 	}
 
 	protected User addUser(
@@ -330,7 +328,7 @@ public class FacebookConnectAction extends BaseStrutsAction {
 			}
 		}
 		else {
-			return _forwardsMap.get("/common/referer_jsp.jsp");
+			return _forwards.get("/common/referer_jsp.jsp");
 		}
 
 		response.sendRedirect(redirect);
@@ -399,6 +397,6 @@ public class FacebookConnectAction extends BaseStrutsAction {
 	}
 
 	private FacebookConnect _facebookConnect;
-	private final Map<String, String> _forwardsMap = new HashMap<>();
+	private final Map<String, String> _forwards = new HashMap<>();
 
 }
