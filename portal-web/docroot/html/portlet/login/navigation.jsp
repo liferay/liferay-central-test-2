@@ -18,7 +18,6 @@
 
 <liferay-util:buffer var="navigation">
 	<liferay-ui:icon-list>
-
 		<liferay-util:dynamic-include key="/html/portlet/login/navigation.jsp#pre" />
 
 		<%
