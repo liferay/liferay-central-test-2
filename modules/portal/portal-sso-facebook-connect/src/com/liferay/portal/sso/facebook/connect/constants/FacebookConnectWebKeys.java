@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.facebook.constants;
+package com.liferay.portal.sso.facebook.connect.constants;
 
 /**
  * @author Michael C. Han

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.facebook;
+package com.liferay.portal.sso.facebook.connect;
 
 import aQute.bnd.annotation.metatype.Configurable;
 
@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.sso.facebook.configuration.FacebookConfiguration;
-import com.liferay.portal.sso.facebook.constants.FacebookConnectWebKeys;
+import com.liferay.portal.sso.facebook.connect.configuration.FacebookConfiguration;
+import com.liferay.portal.sso.facebook.connect.constants.FacebookConnectWebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Map;
@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Mika Koivisto
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.facebook.configuration.FacebookConfiguration",
+	configurationPid = "com.liferay.portal.sso.facebook.connect.configuration.FacebookConfiguration",
 	immediate = true, service = FacebookConnect.class
 )
 public class FacebookConnectImpl implements FacebookConnect {

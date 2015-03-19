@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.facebook.auth;
+package com.liferay.portal.sso.facebook.connect.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.facebook.FacebookConnect;
@@ -23,7 +23,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.BaseAutoLogin;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.sso.facebook.constants.FacebookConnectWebKeys;
+import com.liferay.portal.sso.facebook.connect.constants.FacebookConnectWebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;

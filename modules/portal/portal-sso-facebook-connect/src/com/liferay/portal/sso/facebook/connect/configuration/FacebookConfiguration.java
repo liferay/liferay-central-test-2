@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.facebook.configuration;
+package com.liferay.portal.sso.facebook.connect.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.facebook.configuration.FacebookConfiguration"
+	id = "com.liferay.portal.sso.facebook.connect.configuration.FacebookConfiguration"
 )
 public interface FacebookConfiguration {
 

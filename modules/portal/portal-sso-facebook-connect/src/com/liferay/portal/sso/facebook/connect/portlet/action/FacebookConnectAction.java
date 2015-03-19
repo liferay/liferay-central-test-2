@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.facebook.portlet.action;
+package com.liferay.portal.sso.facebook.connect.portlet.action;
 
 import com.liferay.portal.kernel.facebook.FacebookConnect;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -34,7 +34,7 @@ import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.sso.facebook.constants.FacebookConnectWebKeys;
+import com.liferay.portal.sso.facebook.connect.constants.FacebookConnectWebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;

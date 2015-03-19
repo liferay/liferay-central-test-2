@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.sso.facebook.servlet.taglib;
+package com.liferay.portal.sso.facebook.connect.servlet.taglib;
 
 import com.liferay.portal.kernel.facebook.FacebookConnect;
 import com.liferay.portal.kernel.log.Log;
@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
 import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.sso.facebook.constants.FacebookConnectWebKeys;
+import com.liferay.portal.sso.facebook.connect.constants.FacebookConnectWebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.IOException;
@@ -108,7 +108,7 @@ public class FacebookNavigationPreDynamicInclude extends BaseDynamicInclude {
 	}
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.portal.sso.facebook)"
+		target = "(osgi.web.symbolicname=com.liferay.portal.sso.facebook.connect)"
 	)
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
