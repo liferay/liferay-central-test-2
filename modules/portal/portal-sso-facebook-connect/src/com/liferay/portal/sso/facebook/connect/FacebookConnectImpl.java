@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.sso.facebook.connect.configuration.FacebookConfiguration;
+import com.liferay.portal.sso.facebook.connect.configuration.FacebookConnectConfiguration;
 import com.liferay.portal.sso.facebook.connect.constants.FacebookConnectWebKeys;
 import com.liferay.portal.util.PortalUtil;
 
@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Mika Koivisto
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.facebook.connect.configuration.FacebookConfiguration",
+	configurationPid = "com.liferay.portal.sso.facebook.connect.configuration.FacebookConnectConfiguration",
 	immediate = true, service = FacebookConnect.class
 )
 public class FacebookConnectImpl implements FacebookConnect {
@@ -219,12 +219,12 @@ public class FacebookConnectImpl implements FacebookConnect {
 	@Modified
 	protected void activate(Map<String, Object> properties) {
 		_facebookConfiguration = Configurable.createConfigurable(
-			FacebookConfiguration.class, properties);
+			FacebookConnectConfiguration.class, properties);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		FacebookConnectImpl.class);
 
-	private volatile FacebookConfiguration _facebookConfiguration;
+	private volatile FacebookConnectConfiguration _facebookConfiguration;
 
 }

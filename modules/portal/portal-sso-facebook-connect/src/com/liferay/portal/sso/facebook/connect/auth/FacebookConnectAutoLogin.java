@@ -37,7 +37,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Wilson Man
  */
 @Component(immediate = true, service = AutoLogin.class)
-public class FacebookAutoLogin extends BaseAutoLogin {
+public class FacebookConnectAutoLogin extends BaseAutoLogin {
 
 	@Override
 	protected String[] doLogin(

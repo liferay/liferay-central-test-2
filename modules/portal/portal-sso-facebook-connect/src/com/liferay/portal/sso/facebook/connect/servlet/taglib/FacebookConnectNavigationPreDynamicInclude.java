@@ -41,7 +41,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true, service = DynamicInclude.class
 )
-public class FacebookNavigationPreDynamicInclude extends BaseDynamicInclude {
+public class FacebookConnectNavigationPreDynamicInclude
+	extends BaseDynamicInclude {
 
 	@Override
 	public void include(
@@ -87,10 +88,10 @@ public class FacebookNavigationPreDynamicInclude extends BaseDynamicInclude {
 		}
 		catch (ServletException se) {
 			if (_log.isErrorEnabled()) {
-				_log.error("Unable to include jsp", se);
+				_log.error("Unable to include JSP", se);
 			}
 
-			throw new IOException("Unable to include jsp", se);
+			throw new IOException("Unable to include JSP", se);
 		}
 	}
 
@@ -118,7 +119,7 @@ public class FacebookNavigationPreDynamicInclude extends BaseDynamicInclude {
 		"/META-INF/resources/html/portlet/login/navigation/facebook.jsp";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		FacebookNavigationPreDynamicInclude.class);
+		FacebookConnectNavigationPreDynamicInclude.class);
 
 	private FacebookConnect _facebookConnect;
 	private ServletContext _servletContext;
