@@ -27,10 +27,7 @@ Import-Package: \
 	\
 	com.liferay.portlet,\
 	com.liferay.portlet.expando.model,\
-	\
-	javax.portlet,\
-	javax.servlet,\
-	javax.servlet.http
+	*
 Include-Resource:\
 	WEB-INF/classes/=@docroot/WEB-INF/lib/util-java.jar!/com/liferay/util/bean/PortletBeanLocatorUtil.class,\
 	WEB-INF/classes/=@docroot/WEB-INF/lib/util-java.jar!/com/liferay/util/portlet/PortletProps.class
