@@ -134,37 +134,38 @@ public class PortletRequestDispatcherImpl
 		}
 	}
 
-	protected HttpServletRequest createDynamicRequest(
-		Map<String, String[]> queryParams, HttpServletRequest request,
-		PortletRequestImpl portletRequestImpl) {
+	protected HttpServletRequest createDynamicServletRequest(
+		HttpServletRequest request, PortletRequestImpl portletRequestImpl,
+		Map<String, String[]> parameterMap) {
 
-		DynamicServletRequest dynamicRequest;
+		DynamicServletRequest dynamicServletRequest = null;
 
 		if (portletRequestImpl.isPrivateRequestAttributes()) {
 			String portletNamespace = PortalUtil.getPortletNamespace(
 				portletRequestImpl.getPortletName());
 
-			dynamicRequest = new NamespaceServletRequest(
+			dynamicServletRequest = new NamespaceServletRequest(
 				request, portletNamespace, portletNamespace);
 		}
 		else {
-			dynamicRequest = new DynamicServletRequest(request);
+			dynamicServletRequest = new DynamicServletRequest(request);
 		}
 
-		for (Map.Entry<String, String[]> entry : queryParams.entrySet()) {
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
 			String name = entry.getKey();
+
 			String[] values = entry.getValue();
 
-			String[] oldValues = dynamicRequest.getParameterValues(name);
+			String[] oldValues = dynamicServletRequest.getParameterValues(name);
 
 			if (oldValues != null) {
 				values = ArrayUtil.append(values, oldValues);
 			}
 
-			dynamicRequest.setParameterValues(name, values);
+			dynamicServletRequest.setParameterValues(name, values);
 		}
 
-		return dynamicRequest;
+		return dynamicServletRequest;
 	}
 
 	protected void dispatch(
@@ -201,9 +202,9 @@ public class PortletRequestDispatcherImpl
 				pathNoQueryString = _path.substring(0, pos);
 				queryString = _path.substring(pos + 1);
 
-				request = createDynamicRequest(
-					extractQueryParameters(queryString), request,
-					portletRequestImpl);
+				request = createDynamicServletRequest(
+					request, portletRequestImpl,
+					extractParameterMap(queryString));
 			}
 
 			Portlet portlet = portletRequestImpl.getPortlet();
@@ -291,25 +292,26 @@ public class PortletRequestDispatcherImpl
 		}
 	}
 
-	protected Map<String, String[]> extractQueryParameters(String queryString) {
-		Map<String, String[]> queryParams = new HashMap<>();
+	protected Map<String, String[]> extractParameterMap(String queryString) {
+		Map<String, String[]> parameterMap = new HashMap<>();
 
-		for (String element : StringUtil.split(
-				queryString, CharPool.AMPERSAND)) {
+		for (String element :
+				StringUtil.split(queryString, CharPool.AMPERSAND)) {
 
-			String[] nameValuePair = StringUtil.split(element, CharPool.EQUAL);
+			String[] elementParts = StringUtil.split(element, CharPool.EQUAL);
 
-			String name = nameValuePair[0];
+			String name = elementParts[0];
+
 			String value = StringPool.BLANK;
 
-			if (nameValuePair.length == 2) {
-				value = nameValuePair[1];
+			if (elementParts.length == 2) {
+				value = elementParts[1];
 			}
 
-			String[] values = queryParams.get(name);
+			String[] values = parameterMap.get(name);
 
 			if (values == null) {
-				queryParams.put(name, new String[] {value});
+				parameterMap.put(name, new String[] {value});
 			}
 			else {
 				String[] newValues = new String[values.length + 1];
@@ -318,11 +320,11 @@ public class PortletRequestDispatcherImpl
 
 				newValues[newValues.length - 1] = value;
 
-				queryParams.put(name, newValues);
+				parameterMap.put(name, newValues);
 			}
 		}
 
-		return queryParams;
+		return parameterMap;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

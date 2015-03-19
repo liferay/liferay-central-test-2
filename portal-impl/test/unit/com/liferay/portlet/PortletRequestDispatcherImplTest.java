@@ -89,7 +89,7 @@ public class PortletRequestDispatcherImplTest {
 	}
 
 	@Test
-	public void testIncludeWithQueryParams() throws Exception {
+	public void testIncludeWithQueryString() throws Exception {
 		PortletRequestDispatcherImpl portletRequestDispatcher =
 			new PortletRequestDispatcherImpl(
 				new TestRequestDispatcher(
@@ -216,13 +216,17 @@ public class PortletRequestDispatcherImplTest {
 		}
 
 		@Override
-		public void forward(ServletRequest request, ServletResponse response) {
-			assertPropogatedInformation((HttpServletRequest)request);
+		public void forward(
+			ServletRequest servletRequest, ServletResponse servletResponse) {
+
+			assertPropogatedInformation((HttpServletRequest)servletRequest);
 		}
 
 		@Override
-		public void include(ServletRequest request, ServletResponse response) {
-			assertPropogatedInformation((HttpServletRequest)request);
+		public void include(
+			ServletRequest servletRequest, ServletResponse servletResponse) {
+
+			assertPropogatedInformation((HttpServletRequest)servletRequest);
 		}
 
 		private TestRequestDispatcher(
