@@ -32,11 +32,11 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class TestToolkit implements Toolkit {
 
-	public static String TEST_PASSWORD = "test.password.testtoolkit";
+	public static String PASSWORD = "shibboleth";
 
 	@Override
 	public String generate(PasswordPolicy passwordPolicy) {
-		return TEST_PASSWORD;
+		return PASSWORD;
 	}
 
 	@Override

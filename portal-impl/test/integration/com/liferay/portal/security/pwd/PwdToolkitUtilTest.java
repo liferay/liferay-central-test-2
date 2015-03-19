@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.pwd;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.security.pwd.bundle.pwdtoolkitutil.TestToolkit;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -54,7 +53,7 @@ public class PwdToolkitUtilTest {
 	@Test
 	public void testGenerated() {
 		Assert.assertEquals(
-			TestToolkit.TEST_PASSWORD, PwdToolkitUtil.generate(null));
+			TestToolkit.PASSWORD, PwdToolkitUtil.generate(null));
 	}
 
 	@Test
@@ -73,7 +72,7 @@ public class PwdToolkitUtilTest {
 		try {
 			PwdToolkitUtil.validate(1, 1, "passwd", "passwd", null);
 		}
-		catch (PortalException e) {
+		catch (Exception e) {
 			Assert.fail();
 		}
 
