@@ -249,8 +249,8 @@ public class PortletRequestDispatcherImpl
 		}
 
 		PortletServletRequest portletServletRequest = new PortletServletRequest(
-			httpServletRequest, portletRequest, pathInfo, queryString, requestURI,
-			servletPath, _named, include);
+			httpServletRequest, portletRequest, pathInfo, queryString,
+			requestURI, servletPath, _named, include);
 
 		PortletServletResponse portletServletResponse =
 			new PortletServletResponse(
