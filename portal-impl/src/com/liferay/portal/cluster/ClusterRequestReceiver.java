@@ -79,8 +79,7 @@ public class ClusterRequestReceiver extends BaseClusterReceiver {
 					(ClusterRequest)messagePayload, srcAddress);
 			}
 			else if (messagePayload instanceof ClusterNodeResponse) {
-				processClusterResponse(
-					(ClusterNodeResponse)messagePayload, srcAddress);
+				processClusterResponse((ClusterNodeResponse)messagePayload);
 			}
 			else if (_log.isWarnEnabled()) {
 				_log.warn(
@@ -117,7 +116,7 @@ public class ClusterRequestReceiver extends BaseClusterReceiver {
 	}
 
 	protected void processClusterResponse(
-		ClusterNodeResponse clusterNodeResponse, Address sourceAddress) {
+		ClusterNodeResponse clusterNodeResponse) {
 
 		String uuid = clusterNodeResponse.getUuid();
 
