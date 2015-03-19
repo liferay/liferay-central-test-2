@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
 import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.sso.facebook.constants.FacebookConnectWebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.IOException;
@@ -63,17 +64,20 @@ public class FacebookNavigationPreDynamicInclude extends BaseDynamicInclude {
 			themeDisplay.getCompanyId());
 
 		request.setAttribute(
-			"facebookAuthRedirectURL", facebookAuthRedirectURL);
+			FacebookConnectWebKeys.FACEBOOK_AUTH_REDIRECT_URL,
+			facebookAuthRedirectURL);
 
 		String facebookAuthURL = _facebookConnect.getAuthURL(
 			themeDisplay.getCompanyId());
 
-		request.setAttribute("facebookAuthURL", facebookAuthURL);
+		request.setAttribute(
+			FacebookConnectWebKeys.FACEBOOK_AUTH_URL, facebookAuthURL);
 
 		String facebookAppId = _facebookConnect.getAppId(
 			themeDisplay.getCompanyId());
 
-		request.setAttribute("facebookAppId", facebookAppId);
+		request.setAttribute(
+			FacebookConnectWebKeys.FACEBOOK_APP_ID, facebookAppId);
 
 		RequestDispatcher requestDispatcher =
 			_servletContext.getRequestDispatcher(_JSP_PATH);

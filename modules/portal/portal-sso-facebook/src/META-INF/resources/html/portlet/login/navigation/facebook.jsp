@@ -26,11 +26,9 @@
 </portlet:renderURL>
 
 <%
-String facebookAuthRedirectURL = (String)request.getAttribute("facebookAuthRedirectURL");
-
-String facebookAuthURL = (String)request.getAttribute("facebookAuthURL");
-
-String facebookAppId = (String)request.getAttribute("facebookAppId");
+String facebookAuthRedirectURL = (String)request.getAttribute(FacebookConnectWebKeys.FACEBOOK_AUTH_REDIRECT_URL);
+String facebookAuthURL = (String)request.getAttribute(FacebookConnectWebKeys.FACEBOOK_AUTH_URL);
+String facebookAppId = (String)request.getAttribute(FacebookConnectWebKeys.FACEBOOK_APP_ID);
 
 facebookAuthRedirectURL = HttpUtil.addParameter(facebookAuthRedirectURL, "redirect", HttpUtil.encodeURL(loginRedirectURL));
 
