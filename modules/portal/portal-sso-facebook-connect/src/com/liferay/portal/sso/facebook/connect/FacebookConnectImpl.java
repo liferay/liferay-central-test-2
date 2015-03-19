@@ -106,28 +106,28 @@ public class FacebookConnectImpl implements FacebookConnect {
 	public String getAccessTokenURL(long companyId) {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_TOKEN_URL,
-			_facebookConfiguration.oauthTokenURL());
+			_facebookConnectConfiguration.oauthTokenURL());
 	}
 
 	@Override
 	public String getAppId(long companyId) {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_APP_ID,
-			_facebookConfiguration.appId());
+			_facebookConnectConfiguration.appId());
 	}
 
 	@Override
 	public String getAppSecret(long companyId) {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_APP_SECRET,
-			_facebookConfiguration.appSecret());
+			_facebookConnectConfiguration.appSecret());
 	}
 
 	@Override
 	public String getAuthURL(long companyId) {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_AUTH_URL,
-			_facebookConfiguration.oauthAuthURL());
+			_facebookConnectConfiguration.oauthAuthURL());
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class FacebookConnectImpl implements FacebookConnect {
 	public String getGraphURL(long companyId) {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_GRAPH_URL,
-			_facebookConfiguration.graphURL());
+			_facebookConnectConfiguration.graphURL());
 	}
 
 	@Override
@@ -198,33 +198,33 @@ public class FacebookConnectImpl implements FacebookConnect {
 	public String getRedirectURL(long companyId) {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL,
-			_facebookConfiguration.oauthRedirectURL());
+			_facebookConnectConfiguration.oauthRedirectURL());
 	}
 
 	@Override
 	public boolean isEnabled(long companyId) {
 		return PrefsPropsUtil.getBoolean(
 			companyId, PropsKeys.FACEBOOK_CONNECT_AUTH_ENABLED,
-			_facebookConfiguration.enabled());
+			_facebookConnectConfiguration.enabled());
 	}
 
 	@Override
 	public boolean isVerifiedAccountRequired(long companyId) {
 		return PrefsPropsUtil.getBoolean(
 			companyId, PropsKeys.FACEBOOK_CONNECT_VERIFIED_ACCOUNT_REQUIRED,
-			_facebookConfiguration.verifiedAccountRequired());
+			_facebookConnectConfiguration.verifiedAccountRequired());
 	}
 
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_facebookConfiguration = Configurable.createConfigurable(
+		_facebookConnectConfiguration = Configurable.createConfigurable(
 			FacebookConnectConfiguration.class, properties);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		FacebookConnectImpl.class);
 
-	private volatile FacebookConnectConfiguration _facebookConfiguration;
+	private volatile FacebookConnectConfiguration _facebookConnectConfiguration;
 
 }
