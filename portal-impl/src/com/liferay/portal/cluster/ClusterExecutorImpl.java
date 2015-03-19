@@ -93,7 +93,7 @@ public class ClusterExecutorImpl
 		_executorService.shutdownNow();
 
 		_clusterEventListeners.clear();
-		_clusterNodeStatusMap.clear();
+		_clusterNodeStatuses.clear();
 		_futureClusterResponses.clear();
 		_localClusterNodeStatus = null;
 	}
@@ -107,7 +107,7 @@ public class ClusterExecutorImpl
 		Set<String> clusterNodeIds = new HashSet<>();
 
 		if (clusterRequest.isMulticast()) {
-			clusterNodeIds = new HashSet<>(_clusterNodeStatusMap.keySet());
+			clusterNodeIds = new HashSet<>(_clusterNodeStatuses.keySet());
 
 			if (clusterRequest.isSkipLocal()) {
 				clusterNodeIds.remove(
@@ -142,7 +142,7 @@ public class ClusterExecutorImpl
 		}
 		else {
 			for (String clusterNodeId : clusterNodeIds) {
-				ClusterNodeStatus clusterNodeStatus = _clusterNodeStatusMap.get(
+				ClusterNodeStatus clusterNodeStatus = _clusterNodeStatuses.get(
 					clusterNodeId);
 
 				if (clusterNodeStatus == null) {
@@ -181,7 +181,7 @@ public class ClusterExecutorImpl
 		List<ClusterNode> clusterNodes = new ArrayList<>();
 
 		for (ClusterNodeStatus clusterNodeStatus :
-				_clusterNodeStatusMap.values()) {
+				_clusterNodeStatuses.values()) {
 
 			clusterNodes.add(clusterNodeStatus.getClusterNode());
 		}
@@ -250,7 +250,7 @@ public class ClusterExecutorImpl
 			return false;
 		}
 
-		return _clusterNodeStatusMap.containsKey(clusterNodeId);
+		return _clusterNodeStatuses.containsKey(clusterNodeId);
 	}
 
 	@Override
@@ -431,7 +431,7 @@ public class ClusterExecutorImpl
 		List<ClusterNode> departClusterNodes = new ArrayList<>();
 
 		Collection<ClusterNodeStatus> clusterNodeStatusCollection =
-			_clusterNodeStatusMap.values();
+			_clusterNodeStatuses.values();
 
 		Iterator<ClusterNodeStatus> iterator =
 			clusterNodeStatusCollection.iterator();
@@ -463,7 +463,7 @@ public class ClusterExecutorImpl
 	}
 
 	private boolean _memberJoined(ClusterNodeStatus clusterNodeStatus) {
-		ClusterNodeStatus oldClusterNodeStatus = _clusterNodeStatusMap.put(
+		ClusterNodeStatus oldClusterNodeStatus = _clusterNodeStatuses.put(
 			clusterNodeStatus.getClusterNodeId(), clusterNodeStatus);
 
 		if (oldClusterNodeStatus != null) {
@@ -496,7 +496,7 @@ public class ClusterExecutorImpl
 	private ClusterChannelFactory _clusterChannelFactory;
 	private final CopyOnWriteArrayList<ClusterEventListener>
 		_clusterEventListeners = new CopyOnWriteArrayList<>();
-	private final Map<String, ClusterNodeStatus> _clusterNodeStatusMap =
+	private final Map<String, ClusterNodeStatus> _clusterNodeStatuses =
 		new ConcurrentHashMap<>();
 	private ClusterReceiver _clusterReceiver;
 	private ExecutorService _executorService;
@@ -519,8 +519,9 @@ public class ClusterExecutorImpl
 
 			ClusterNodeStatus clusterNodeStatus = (ClusterNodeStatus)obj;
 
-			if ( _clusterNode.equals(clusterNodeStatus._clusterNode)&&
-				_address.equals(clusterNodeStatus._address)) {
+			if (Validator.equals(_address, clusterNodeStatus._address) &&
+				Validator.equals(
+					_clusterNode, clusterNodeStatus._clusterNode)) {
 
 				return true;
 			}
