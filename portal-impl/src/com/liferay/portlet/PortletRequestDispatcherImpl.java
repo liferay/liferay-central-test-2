@@ -86,10 +86,10 @@ public class PortletRequestDispatcherImpl
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws IllegalStateException, IOException, PortletException {
 
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			portletResponse);
+		HttpServletResponse httpServletResponse =
+			PortalUtil.getHttpServletResponse(portletResponse);
 
-		if (response.isCommitted()) {
+		if (httpServletResponse.isCommitted()) {
 			throw new IllegalStateException("Response is already committed");
 		}
 
@@ -135,7 +135,8 @@ public class PortletRequestDispatcherImpl
 	}
 
 	protected HttpServletRequest createDynamicServletRequest(
-		HttpServletRequest request, PortletRequestImpl portletRequestImpl,
+		HttpServletRequest httpServletRequest,
+		PortletRequestImpl portletRequestImpl,
 		Map<String, String[]> parameterMap) {
 
 		DynamicServletRequest dynamicServletRequest = null;
@@ -145,10 +146,11 @@ public class PortletRequestDispatcherImpl
 				portletRequestImpl.getPortletName());
 
 			dynamicServletRequest = new NamespaceServletRequest(
-				request, portletNamespace, portletNamespace);
+				httpServletRequest, portletNamespace, portletNamespace);
 		}
 		else {
-			dynamicServletRequest = new DynamicServletRequest(request);
+			dynamicServletRequest = new DynamicServletRequest(
+				httpServletRequest);
 		}
 
 		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
@@ -180,12 +182,12 @@ public class PortletRequestDispatcherImpl
 		PortletResponseImpl portletResponseImpl =
 			PortletResponseImpl.getPortletResponseImpl(portletResponse);
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
+		HttpServletRequest httpServletRequest =
+			PortalUtil.getHttpServletRequest(portletRequest);
 
-		request.setAttribute(
+		httpServletRequest.setAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
-		request.setAttribute(
+		httpServletRequest.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 
 		String pathInfo = null;
@@ -202,8 +204,8 @@ public class PortletRequestDispatcherImpl
 				pathNoQueryString = _path.substring(0, pos);
 				queryString = _path.substring(pos + 1);
 
-				request = createDynamicServletRequest(
-					request, portletRequestImpl,
+				httpServletRequest = createDynamicServletRequest(
+					httpServletRequest, portletRequestImpl,
 					extractParameterMap(queryString));
 			}
 
@@ -247,7 +249,7 @@ public class PortletRequestDispatcherImpl
 		}
 
 		PortletServletRequest portletServletRequest = new PortletServletRequest(
-			request, portletRequest, pathInfo, queryString, requestURI,
+			httpServletRequest, portletRequest, pathInfo, queryString, requestURI,
 			servletPath, _named, include);
 
 		PortletServletResponse portletServletResponse =
