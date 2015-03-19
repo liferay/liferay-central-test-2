@@ -237,7 +237,7 @@ public class ClusterExecutorImpl
 				getConfiguredPortalInetSocketAddress());
 		}
 
-		memberJoined(_localClusterNodeStatus);
+		_memberJoined(_localClusterNodeStatus);
 
 		sendNotifyRequest();
 
@@ -409,7 +409,7 @@ public class ClusterExecutorImpl
 		Serializable requestPayload = clusterRequest.getPayload();
 
 		if (requestPayload instanceof ClusterNodeStatus) {
-			if (memberJoined((ClusterNodeStatus)requestPayload)) {
+			if (_memberJoined((ClusterNodeStatus)requestPayload)) {
 				return ClusterRequest.createMulticastRequest(
 					_localClusterNodeStatus, true);
 			}
@@ -425,30 +425,6 @@ public class ClusterExecutorImpl
 		}
 
 		return clusterNodeResponse;
-	}
-
-	protected boolean memberJoined(ClusterNodeStatus clusterNodeStatus) {
-		ClusterNodeStatus oldClusterNodeStatus = _clusterNodeStatusMap.put(
-			clusterNodeStatus.getClusterNodeId(), clusterNodeStatus);
-
-		if (oldClusterNodeStatus != null) {
-			if (!oldClusterNodeStatus.equals(clusterNodeStatus)) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Updated cluster node " +
-							clusterNodeStatus.getClusterNode());
-				}
-			}
-
-			return false;
-		}
-
-		ClusterEvent clusterEvent = ClusterEvent.join(
-			clusterNodeStatus.getClusterNode());
-
-		fireClusterEvent(clusterEvent);
-
-		return true;
 	}
 
 	protected void memberRemoved(List<Address> departAddresses) {
@@ -484,6 +460,30 @@ public class ClusterExecutorImpl
 			_localClusterNodeStatus, true);
 
 		_clusterChannel.sendMulticastMessage(clusterRequest);
+	}
+
+	private boolean _memberJoined(ClusterNodeStatus clusterNodeStatus) {
+		ClusterNodeStatus oldClusterNodeStatus = _clusterNodeStatusMap.put(
+			clusterNodeStatus.getClusterNodeId(), clusterNodeStatus);
+
+		if (oldClusterNodeStatus != null) {
+			if (!oldClusterNodeStatus.equals(clusterNodeStatus)) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Updated cluster node " +
+							clusterNodeStatus.getClusterNode());
+				}
+			}
+
+			return false;
+		}
+
+		ClusterEvent clusterEvent = ClusterEvent.join(
+			clusterNodeStatus.getClusterNode());
+
+		fireClusterEvent(clusterEvent);
+
+		return true;
 	}
 
 	private static final String _LIFERAY_CONTROL_CHANNEL_NAME =
