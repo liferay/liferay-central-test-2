@@ -25,9 +25,9 @@
 
 <%@ page import="com.liferay.marketplace.model.App" %><%@
 page import="com.liferay.marketplace.service.AppLocalServiceUtil" %><%@
-page import="com.liferay.marketplace.util.MarketplaceConstants" %><%@
-page import="com.liferay.marketplace.util.PortletKeys" %><%@
 page import="com.liferay.marketplace.util.comparator.PluginComparator" %><%@
+page import="com.liferay.marketplace.web.util.MarketplaceConstants" %><%@
+page import="com.liferay.marketplace.web.util.PortletKeys" %><%@
 page import="com.liferay.portal.kernel.deploy.DeployManagerUtil" %><%@
 page import="com.liferay.portal.kernel.plugin.RequiredPluginPackageException" %><%@
 page import="com.liferay.portal.kernel.servlet.ServletContextPool" %><%@

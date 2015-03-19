@@ -14,14 +14,14 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "manage");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("mvcPath", "/app_manager/view.jsp");
+portletURL.setParameter("mvcPath", "/html/portlet/app_manager/view.jsp");
 portletURL.setParameter("toolbarItem", toolbarItem);
 %>
 
@@ -49,9 +49,9 @@ portletURL.setParameter("toolbarItem", toolbarItem);
 
 <c:choose>
 	<c:when test='<%= toolbarItem.equals("install") %>'>
-		<%@ include file="/app_manager/install_apps.jspf" %>
+		<%@ include file="/html/portlet/app_manager/install_apps.jspf" %>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/app_manager/manage.jspf" %>
+		<%@ include file="/html/portlet/app_manager/manage.jspf" %>
 	</c:otherwise>
 </c:choose>
