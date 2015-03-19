@@ -406,10 +406,10 @@ public class ClusterExecutorImpl
 	protected Serializable handleReceivedClusterRequest(
 		ClusterRequest clusterRequest) {
 
-		Serializable requestPayload = clusterRequest.getPayload();
+		Serializable payload = clusterRequest.getPayload();
 
-		if (requestPayload instanceof ClusterNodeStatus) {
-			if (_memberJoined((ClusterNodeStatus)requestPayload)) {
+		if (payload instanceof ClusterNodeStatus) {
+			if (_memberJoined((ClusterNodeStatus)payload)) {
 				return ClusterRequest.createMulticastRequest(
 					_localClusterNodeStatus, true);
 			}
@@ -433,16 +433,16 @@ public class ClusterExecutorImpl
 		Collection<ClusterNodeStatus> clusterNodeStatusCollection =
 			_clusterNodeStatusMap.values();
 
-		Iterator<ClusterNodeStatus> itr =
+		Iterator<ClusterNodeStatus> iterator =
 			clusterNodeStatusCollection.iterator();
 
-		while (itr.hasNext()) {
-			ClusterNodeStatus clusterNodeStatus = itr.next();
+		while (iterator.hasNext()) {
+			ClusterNodeStatus clusterNodeStatus = iterator.next();
 
 			if (departAddresses.contains(clusterNodeStatus.getAddress())) {
 				departClusterNodes.add(clusterNodeStatus.getClusterNode());
 
-				itr.remove();
+				iterator.remove();
 			}
 		}
 

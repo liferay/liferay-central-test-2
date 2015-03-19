@@ -75,15 +75,12 @@ public class ClusterRequestReceiver extends BaseClusterReceiver {
 
 		try {
 			if (messagePayload instanceof ClusterRequest) {
-				ClusterRequest clusterRequest = (ClusterRequest)messagePayload;
-
-				processClusterRequest(clusterRequest, srcAddress);
+				processClusterRequest(
+					(ClusterRequest)messagePayload, srcAddress);
 			}
 			else if (messagePayload instanceof ClusterNodeResponse) {
-				ClusterNodeResponse clusterNodeResponse =
-					(ClusterNodeResponse)messagePayload;
-
-				processClusterResponse(clusterNodeResponse, srcAddress);
+				processClusterResponse(
+					(ClusterNodeResponse)messagePayload, srcAddress);
 			}
 			else if (_log.isWarnEnabled()) {
 				_log.warn(
