@@ -33,7 +33,6 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
-import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
 
 /**
@@ -156,9 +155,7 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		ManagedService managedService = new ManagedService() {
 
 			@Override
-			public void updated(Dictionary<String, ?> properties)
-				throws ConfigurationException {
-
+			public void updated(Dictionary<String, ?> properties) {
 				if (properties == null) {
 					properties = _emptDictionary;
 				}
