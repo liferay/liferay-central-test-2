@@ -47,6 +47,7 @@ public class TestLDAPUserImporter implements LDAPUserImporter {
 		Attributes attributes, String password) {
 
 		User user = new UserImpl();
+
 		user.setCompanyId(companyId);
 
 		return user;
@@ -58,6 +59,7 @@ public class TestLDAPUserImporter implements LDAPUserImporter {
 		String screenName) {
 
 		User user = new UserImpl();
+
 		user.setCompanyId(companyId);
 
 		return user;
@@ -68,6 +70,7 @@ public class TestLDAPUserImporter implements LDAPUserImporter {
 		long companyId, String emailAddress, String screenName) {
 
 		User user = new UserImpl();
+
 		user.setCompanyId(companyId);
 
 		return user;
@@ -76,6 +79,7 @@ public class TestLDAPUserImporter implements LDAPUserImporter {
 	@Override
 	public User importUserByScreenName(long companyId, String screenName) {
 		User user = new UserImpl();
+
 		user.setCompanyId(companyId);
 
 		return user;
