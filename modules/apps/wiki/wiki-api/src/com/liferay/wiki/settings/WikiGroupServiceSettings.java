@@ -22,6 +22,5 @@ import com.liferay.wiki.configuration.WikiGroupServiceConfiguration;
  */
 public interface WikiGroupServiceSettings
 	extends GroupServiceSettings, WikiGroupServiceConfiguration,
-		WikiGroupServiceSettingsExtra
-{
+			WikiGroupServiceSettingsExtra {
 }

@@ -44,7 +44,7 @@ public class WikiGroupServiceSettingsDefinition implements SettingsDefinition {
 
 	@Override
 	public String[] getSettingsIds() {
-		return new String[] { WikiConstants.SERVICE_NAME };
+		return new String[] {WikiConstants.SERVICE_NAME};
 	}
 
 }
