@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
  */
 public class PortalLogListenerImpl implements SynchronousLogListener {
 
-
 	public void logged(LogEntry logEntry) {
 		if (!(logEntry instanceof ExtendedLogEntry)) {
 			return;
@@ -71,8 +70,8 @@ public class PortalLogListenerImpl implements SynchronousLogListener {
 
 		_log(
 			bundle.getSymbolicName(), extendedLogEntry.getLevel(),
-			bundle.getBundleId(), extendedLogEntry.getMessage(),
-			context, extendedLogEntry.getException());
+			bundle.getBundleId(), extendedLogEntry.getMessage(), context,
+			extendedLogEntry.getException());
 	}
 
 	private synchronized void _log(

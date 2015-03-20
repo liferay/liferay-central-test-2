@@ -49,9 +49,9 @@ public class LiferayLogHook
 		ServiceReference<ExtendedLogReaderService> extendedLogServiceReference =
 			bundleContext.getServiceReference(ExtendedLogReaderService.class);
 
-		if(extendedLogServiceReference!=null){
+		if (extendedLogServiceReference!= null) {
 			ExtendedLogReaderService extendedLogReaderService =
-					bundleContext.getService(extendedLogServiceReference);
+				bundleContext.getService(extendedLogServiceReference);
 
 			extendedLogReaderService.addLogListener(_portalLogListenerImpl);
 		}
@@ -68,6 +68,6 @@ public class LiferayLogHook
 		extendedLogReaderService.removeLogListener(_portalLogListenerImpl);
 	}
 
-	private PortalLogListenerImpl _portalLogListenerImpl;
+	private final PortalLogListenerImpl _portalLogListenerImpl;
 
 }
