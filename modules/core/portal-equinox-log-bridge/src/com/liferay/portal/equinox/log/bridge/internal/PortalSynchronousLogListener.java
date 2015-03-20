@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * @author Raymond Augé
  * @author Kamesh Sampath
  */
-public class PortalLogListenerImpl implements SynchronousLogListener {
+public class PortalSynchronousLogListener implements SynchronousLogListener {
 
 	@Override
 	public void logged(LogEntry logEntry) {

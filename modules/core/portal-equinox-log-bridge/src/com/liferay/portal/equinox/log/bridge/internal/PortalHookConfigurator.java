@@ -27,11 +27,11 @@ import org.osgi.framework.ServiceReference;
  * @author Raymond Augé
  * @author Kamesh Sampath
  */
-public class LiferayLogHook
+public class PortalHookConfigurator
 	implements ActivatorHookFactory, BundleActivator, HookConfigurator {
 
-	public LiferayLogHook() {
-		_portalLogListenerImpl = new PortalLogListenerImpl();
+	public PortalHookConfigurator() {
+		_portalSynchronousLogListener = new PortalSynchronousLogListener();
 	}
 
 	@Override
@@ -53,7 +53,8 @@ public class LiferayLogHook
 			ExtendedLogReaderService extendedLogReaderService =
 				bundleContext.getService(serviceReference);
 
-			extendedLogReaderService.addLogListener(_portalLogListenerImpl);
+			extendedLogReaderService.addLogListener(
+				_portalSynchronousLogListener);
 		}
 	}
 
@@ -65,9 +66,10 @@ public class LiferayLogHook
 		ExtendedLogReaderService extendedLogReaderService =
 			bundleContext.getService(serviceReference);
 
-		extendedLogReaderService.removeLogListener(_portalLogListenerImpl);
+		extendedLogReaderService.removeLogListener(
+			_portalSynchronousLogListener);
 	}
 
-	private final PortalLogListenerImpl _portalLogListenerImpl;
+	private final PortalSynchronousLogListener _portalSynchronousLogListener;
 
 }
