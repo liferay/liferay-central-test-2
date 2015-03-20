@@ -187,9 +187,12 @@ public class TemplateHandlerRegistryUtil {
 		private void _addTemplate(TemplateHandler templateHandler)
 			throws Exception {
 
-			long companyId = PortalUtil.getDefaultCompanyId();
+			long classNameId = PortalUtil.getClassNameId(
+				templateHandler.getClassName());
 
 			ServiceContext serviceContext = new ServiceContext();
+
+			long companyId = PortalUtil.getDefaultCompanyId();
 
 			Group group = GroupLocalServiceUtil.getCompanyGroup(companyId);
 
@@ -198,9 +201,6 @@ public class TemplateHandlerRegistryUtil {
 			long userId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
 			serviceContext.setUserId(userId);
-
-			long classNameId = PortalUtil.getClassNameId(
-				templateHandler.getClassName());
 
 			List<Element> templateElements =
 				templateHandler.getDefaultTemplateElements();
