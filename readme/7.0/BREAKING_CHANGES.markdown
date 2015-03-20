@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `9d19c60`.*
+*This document has been reviewed through commit `6fbd2f4`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1165,28 +1165,28 @@ look and feel of your application.
 
 ---------------------------------------
 
-### Taglib `liferay-ui:ddm-template-selector` has changed its usage
+### Changed Usage of `liferay-ui:ddm-template-selector` Taglib
 - **Date:** 2015-Mar-16
 - **JIRA Ticket:** LPS-53790
 
 #### What changed?
 
-The attribute `classNameId` of the mentioned taglib has changed to className.
-
+The attribute `classNameId` of the `liferay-ui:ddm-template-selector` taglib has
+changed to `className`.
 
 #### Who is affected?
 
-Anyone using the `liferay-ui:ddm-template-selector` taglib.
-
+This affects developers using the `liferay-ui:ddm-template-selector` taglib.
 
 #### How should I update my code?
 
-Use the className instead of the classNameId.
-
+You should replace the `classNameId` attribute with `className`.
 
 #### Why was this change made?
 
-To simplify the usage of this taglib.
+Application Display Templates were being referenced by their UUID, which was
+usually not known by the developer. This change was made to simplify the usage
+of this taglib.
 
 ---------------------------------------
 
