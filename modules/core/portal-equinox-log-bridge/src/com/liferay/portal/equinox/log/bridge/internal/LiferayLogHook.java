@@ -46,12 +46,12 @@ public class LiferayLogHook
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		ServiceReference<ExtendedLogReaderService> extendedLogServiceReference =
+		ServiceReference<ExtendedLogReaderService> serviceReference =
 			bundleContext.getServiceReference(ExtendedLogReaderService.class);
 
-		if (extendedLogServiceReference!= null) {
+		if (serviceReference!= null) {
 			ExtendedLogReaderService extendedLogReaderService =
-				bundleContext.getService(extendedLogServiceReference);
+				bundleContext.getService(serviceReference);
 
 			extendedLogReaderService.addLogListener(_portalLogListenerImpl);
 		}

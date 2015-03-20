@@ -49,16 +49,21 @@ public class PortalLogListenerImpl implements SynchronousLogListener {
 				frameworkLogEntry.getMessage(), frameworkLogEntry.getContext(),
 				frameworkLogEntry.getThrowable());
 
-			FrameworkLogEntry[] children = frameworkLogEntry.getChildren();
+			FrameworkLogEntry[] childFrameworkLogEntries =
+				frameworkLogEntry.getChildren();
 
-			if ((children != null) && (children.length > 0)) {
-				for (FrameworkLogEntry curFrameworkLogEntry : children) {
+			if ((childFrameworkLogEntries != null) &&
+				(childFrameworkLogEntries.length > 0)) {
+
+				for (FrameworkLogEntry childFrameworkLogEntry :
+						childFrameworkLogEntries) {
+
 					_log(
-						curFrameworkLogEntry.getEntry(),
-						curFrameworkLogEntry.getSeverity(),
-						curFrameworkLogEntry.getMessage(),
-						curFrameworkLogEntry.getContext(),
-						curFrameworkLogEntry.getThrowable());
+						childFrameworkLogEntry.getEntry(),
+						childFrameworkLogEntry.getSeverity(),
+						childFrameworkLogEntry.getMessage(),
+						childFrameworkLogEntry.getContext(),
+						childFrameworkLogEntry.getThrowable());
 				}
 			}
 
