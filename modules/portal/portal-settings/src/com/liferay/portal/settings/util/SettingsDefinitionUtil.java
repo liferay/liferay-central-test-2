@@ -48,12 +48,12 @@ public class SettingsDefinitionUtil {
 			for (Annotation annotation : annotations) {
 				Class<? extends Annotation> clazz = annotation.getClass();
 
-				Class<?> iface = clazz.getInterfaces()[0];
+				Class<?> interfaceClass = clazz.getInterfaces()[0];
 
-				String name = iface.getName();
+				String name = interfaceClass.getName();
 
 				if (name.equals(Meta.OCD.class.getName())) {
-					Method method = iface.getMethod("id");
+					Method method = interfaceClass.getMethod("id");
 
 					return (String)method.invoke(annotation);
 				}
