@@ -1869,12 +1869,6 @@ public class DLAppHelperLocalServiceImpl
 				dlGroupServiceSettings.getEmailFileEntryAddedBody();
 		}
 
-		Map<Locale, String> localizedSubjectMap =
-			subjectLocalizedValuesMap.getLocalizationMap();
-
-		Map<Locale, String> localizedBodyMap =
-			bodyLocalizedValuesMap.getLocalizationMap();
-
 		FileEntry fileEntry = fileVersion.getFileEntry();
 
 		Folder folder = null;
@@ -1918,8 +1912,10 @@ public class DLAppHelperLocalServiceImpl
 		subscriptionSender.setEntryURL(entryURL);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setLocalizedBodyMap(localizedBodyMap);
-		subscriptionSender.setLocalizedSubjectMap(localizedSubjectMap);
+		subscriptionSender.setLocalizedBodyMap(
+			bodyLocalizedValuesMap.getLocalizationMap());
+		subscriptionSender.setLocalizedSubjectMap(
+			subjectLocalizedValuesMap.getLocalizationMap());
 		subscriptionSender.setMailId(
 			"file_entry", fileVersion.getFileEntryId());
 
