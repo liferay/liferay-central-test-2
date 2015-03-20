@@ -47,7 +47,6 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		SettingsFactory settingsFactory) {
 
 		_settingsDefinition = settingsDefinition;
-
 		_bundleContext = bundleContext;
 		_configurationAdmin = configurationAdmin;
 		_settingsFactory = settingsFactory;
@@ -59,10 +58,11 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 				settingsDefinition, settingsFactory);
 		}
 		else {
+			String className = SettingsDefinitionUtil.getSettingsClassName(
+				settingsDefinition);
+
 			throw new IllegalArgumentException(
-				"Unable to determine service level for class " +
-					SettingsDefinitionUtil.getSettingsClassName(
-						settingsDefinition));
+				"Unable to determine service level for class " + className);
 		}
 
 		_configurationBeanBuilder = new ConfigurationBeanBuilder<>(
@@ -71,10 +71,10 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 
 	public void start() {
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Starting lifecycle of settings class " +
-					SettingsDefinitionUtil.getSettingsClassName(
-						_settingsDefinition));
+			String className = SettingsDefinitionUtil.getSettingsClassName(
+				_settingsDefinition);
+
+			_log.debug("Starting lifecycle of settings class " + className);
 		}
 
 		_registerManagedService();
@@ -88,19 +88,20 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		_registerSettingsProvider();
 
 		if (_log.isInfoEnabled()) {
+			String className = SettingsDefinitionUtil.getSettingsClassName(
+				_settingsDefinition);
+
 			_log.info(
-				"Started lifecycle of settings class " +
-					SettingsDefinitionUtil.getSettingsClassName(
-						_settingsDefinition));
+				"Started lifecycle of settings class " + className);
 		}
 	}
 
 	public void stop() {
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Stopping lifecycle of settings class " +
-					SettingsDefinitionUtil.getSettingsClassName(
-						_settingsDefinition));
+			String className = SettingsDefinitionUtil.getSettingsClassName(
+				_settingsDefinition);
+
+			_log.debug("Stopping lifecycle of settings class " + className);
 		}
 
 		_unregisterSettingsProvider();
@@ -112,10 +113,10 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		_unregisterManagedService();
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Stopped lifecycle of settings class " +
-					SettingsDefinitionUtil.getSettingsClassName(
-						_settingsDefinition));
+			String className = SettingsDefinitionUtil.getSettingsClassName(
+				_settingsDefinition);
+
+			_log.info("Stopped lifecycle of settings class " + className);
 		}
 	}
 
@@ -145,15 +146,17 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 			_EMPTY_DICTIONARY);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Registered configuration bean service " +
-					SettingsDefinitionUtil.getConfigurationBeanClassName(
-						_settingsDefinition));
+			String className =
+				SettingsDefinitionUtil.getConfigurationBeanClassName(
+					_settingsDefinition);
+
+			_log.debug("Registered configuration bean service " + className);
 		}
 	}
 
 	private void _registerManagedService() {
 		ManagedService managedService = new ManagedService() {
+
 			@Override
 			public void updated(Dictionary<String, ?> properties)
 				throws ConfigurationException {
@@ -164,6 +167,7 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 
 				_configurationBeanBuilder.updateProperties(properties);
 			}
+
 		};
 
 		Dictionary<String, String> properties = new HashMapDictionary<>();
@@ -179,10 +183,11 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 			_getConfigurationProperties());
 
 		if (_log.isDebugEnabled()) {
+			String pid = SettingsDefinitionUtil.getConfigurationPid(
+				_settingsDefinition);
+
 			_log.debug(
-				"Registered listener for changes in configurationPid " +
-					SettingsDefinitionUtil.getConfigurationPid(
-						_settingsDefinition));
+				"Registered listener for changes in configurationPid " + pid);
 		}
 	}
 
@@ -201,11 +206,14 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 			_settingsProviderBuilder.getSettingsProvider(), properties);
 
 		if (_log.isDebugEnabled()) {
+			String settingsClassName =
+				SettingsDefinitionUtil.getSettingsClassName(
+					_settingsDefinition);
+
 			_log.debug(
 				"Registered settings provider service " +
 					settingsProviderServiceClass.getName() + "<" +
-					SettingsDefinitionUtil.getSettingsClassName(
-						_settingsDefinition) + ">");
+						settingsClassName + ">");
 		}
 	}
 
@@ -215,10 +223,12 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		_configurationBeanServiceRegistration = null;
 
 		if (_log.isDebugEnabled()) {
+			String className =
+				SettingsDefinitionUtil.getConfigurationBeanClassName(
+					_settingsDefinition);
+
 			_log.debug(
-				"Unregistered configuration bean service " +
-					SettingsDefinitionUtil.getConfigurationBeanClassName(
-						_settingsDefinition));
+				"Unregistered configuration bean service " + className);
 		}
 	}
 
@@ -228,10 +238,11 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		_managedServiceServiceRegistration = null;
 
 		if (_log.isDebugEnabled()) {
+			String pid = SettingsDefinitionUtil.getConfigurationPid(
+				_settingsDefinition);
+
 			_log.debug(
-				"Unregistered listener for changes in configurationPid " +
-					SettingsDefinitionUtil.getConfigurationPid(
-						_settingsDefinition));
+				"Unregistered listener for changes in configurationPid " + pid);
 		}
 	}
 
@@ -243,12 +254,14 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		if (_log.isDebugEnabled()) {
 			Class<?> settingsProviderServiceClass =
 				_settingsProviderBuilder.getSettingsProviderServiceClass();
+			String settingsClassName =
+				SettingsDefinitionUtil.getSettingsClassName(
+					_settingsDefinition);
 
 			_log.debug(
 				"Unregistered settings provider service " +
 					settingsProviderServiceClass.getName() + "<" +
-					SettingsDefinitionUtil.getSettingsClassName(
-						_settingsDefinition) + ">");
+						settingsClassName + ">");
 		}
 	}
 
