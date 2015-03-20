@@ -202,7 +202,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 	@Override
 	public void registerSettingsDefinition(
-		SettingsDefinition settingsDefinition, Object configurationBean) {
+		SettingsDefinition<?, ?> settingsDefinition, Object configurationBean) {
 
 		SettingsDescriptor settingsDescriptor =
 			new SettingsDefinitionSettingsDescriptor(settingsDefinition);
@@ -223,7 +223,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 	@Override
 	public void unregisterSettingsDefinition(
-		SettingsDefinition settingsDefinition) {
+		SettingsDefinition<?, ?> settingsDefinition) {
 
 		SettingsDescriptor settingsDescriptor =
 			new SettingsDefinitionSettingsDescriptor(settingsDefinition);
