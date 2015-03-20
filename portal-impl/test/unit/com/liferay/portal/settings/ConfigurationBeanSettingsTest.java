@@ -88,7 +88,7 @@ public class ConfigurationBeanSettingsTest extends PowerMockito {
 			true
 		);
 
-		final String expectedValue = "Once upon a time...";
+		String expectedValue = "Once upon a time...";
 
 		when(
 			_mockLocationVariableResolver.resolve(
