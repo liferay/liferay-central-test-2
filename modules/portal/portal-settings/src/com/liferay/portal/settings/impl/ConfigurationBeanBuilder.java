@@ -51,12 +51,14 @@ public class ConfigurationBeanBuilder<C> {
 			configurationBeanClass.getClassLoader(),
 			new Class[] {configurationBeanClass},
 			new InvocationHandler() {
+
 				@Override
 				public Object invoke(Object proxy, Method method, Object[] args)
 					throws Throwable {
 
 					return method.invoke(_configurable, args);
 				}
+
 			});
 	}
 
@@ -70,11 +72,11 @@ public class ConfigurationBeanBuilder<C> {
 
 	public void updateProperties(Dictionary<String, ?> properties) {
 		if (_log.isInfoEnabled()) {
+			String pid = SettingsDefinitionUtil.getConfigurationPid(
+				_settingsDefinition);
+
 			_log.info(
-				"Configuration with configurationPid " +
-					SettingsDefinitionUtil.getConfigurationPid(
-						_settingsDefinition) +
-					" changed");
+				"Configuration with configurationPid " + pid + " changed");
 		}
 
 		_configurable = Configurable.createConfigurable(
