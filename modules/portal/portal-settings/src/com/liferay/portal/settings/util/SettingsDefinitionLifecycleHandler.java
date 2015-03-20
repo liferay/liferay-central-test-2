@@ -91,8 +91,7 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 			String className = SettingsDefinitionUtil.getSettingsClassName(
 				_settingsDefinition);
 
-			_log.info(
-				"Started lifecycle of settings class " + className);
+			_log.info("Started lifecycle of settings class " + className);
 		}
 	}
 
@@ -227,8 +226,7 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 				SettingsDefinitionUtil.getConfigurationBeanClassName(
 					_settingsDefinition);
 
-			_log.debug(
-				"Unregistered configuration bean service " + className);
+			_log.debug("Unregistered configuration bean service " + className);
 		}
 	}
 
