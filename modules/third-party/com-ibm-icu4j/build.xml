@@ -13,6 +13,10 @@
 	</target>
 
 	<target name="jar">
+		<process-ivy
+			module.dir="${basedir}"
+		/>
+
 		<taskdef
 			classname="com.tonicsystems.jarjar.JarJarTask"
 			classpath="lib/jarjar.jar"
