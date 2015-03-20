@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.settings.TypedSettings;
 import com.liferay.portal.kernel.settings.definition.SettingsDefinition;
 
 import java.lang.reflect.Constructor;
+
 import java.util.Map;
 
 /**

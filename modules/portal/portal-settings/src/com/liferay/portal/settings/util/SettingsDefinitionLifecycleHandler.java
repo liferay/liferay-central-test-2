@@ -25,6 +25,7 @@ import com.liferay.portal.settings.impl.GroupServiceSettingsProviderBuilder;
 import com.liferay.portal.settings.impl.SettingsProviderBuilder;
 
 import java.io.IOException;
+
 import java.util.Dictionary;
 
 import org.osgi.framework.BundleContext;
