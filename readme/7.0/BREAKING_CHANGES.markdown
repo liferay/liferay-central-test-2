@@ -1136,7 +1136,7 @@ each plugin.
 
 ### Replaced Display Styles with ADTs in Breadcrumb Portlet
 - **Date:** 2015-Mar-12
-- **JIRA Ticket:** LPS-54106
+- **JIRA Ticket:** LPS-53577
 
 #### What changed?
 
