@@ -43,19 +43,19 @@ public class TestUserImporter implements UserImporter {
 		long ldapServerId, long companyId, String emailAddress,
 		String screenName) {
 
-		return _getTestUser(companyId, screenName);
+		return getUser(companyId, screenName);
 	}
 
 	@Override
 	public User importUser(
 		long companyId, String emailAddress, String screenName) {
 
-		return _getTestUser(companyId, screenName);
+		return getUser(companyId, screenName);
 	}
 
 	@Override
 	public User importUserByScreenName(long companyId, String screenName) {
-		return _getTestUser(companyId, screenName);
+		return getUser(companyId, screenName);
 	}
 
 	@Override
@@ -78,10 +78,12 @@ public class TestUserImporter implements UserImporter {
 		_atomicReference = atomicReference;
 	}
 
-	private User _getTestUser(long companyId, String screenName) {
+	protected User getUser(long companyId, String screenName) {
 		User user = new UserImpl();
+
 		user.setCompanyId(companyId);
 		user.setScreenName(screenName);
+
 		return user;
 	}
 
