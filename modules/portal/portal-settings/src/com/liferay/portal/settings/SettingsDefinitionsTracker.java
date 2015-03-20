@@ -126,10 +126,9 @@ public class SettingsDefinitionsTracker {
 	private ConfigurationAdmin _configurationAdmin;
 	private final ConcurrentHashSet<SettingsDefinition<?, ?>>
 		_pendingSettingsDefinitions = new ConcurrentHashSet<>();
-	private final ConcurrentMap
-			<SettingsDefinition<?, ?>,
-				SettingsDefinitionLifecycleHandler<?, ?>>
-		_settingsDefinitionLifecycleHandlers = new ConcurrentHashMap<>();
+	private final ConcurrentMap <SettingsDefinition<?, ?>,
+		SettingsDefinitionLifecycleHandler<?, ?>>
+			_settingsDefinitionLifecycleHandlers = new ConcurrentHashMap<>();
 	private SettingsFactory _settingsFactory;
 
 }
