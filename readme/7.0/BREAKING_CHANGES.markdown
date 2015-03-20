@@ -1061,37 +1061,6 @@ specified by a constant from the class `DLProcessorConstants`.
 
 ---------------------------------------
 
-### Added Required Parameter `resourceClassNameId` for DDM Template Search Operations
-- **Date:** 2015-Mar-03
-- **JIRA Ticket:** LPS-52990
-
-#### What changed?
-
-The DDM template `search` and `searchCount` operations have a new parameter
-called `resourceClassNameId`.
-
-#### Who is affected?
-
-This affects developers who have direct calls to the `DDMTemplateService` or 
-`DDMTemplateLocalService`.
-
-#### How should I update my code?
-
-You should add the `resourceClassNameId` parameter to your calls. This parameter
-represents the resource that owns the permission for the DDM template. For
-example, if the template is a WCM template, the `resourceClassNameId` points to
-the `JournalArticle`'s `classNameId`. If the template is a DDL template, the
-`resourceClassNameId` points to the `DDLRecordSet`'s `classNameId`. If the
-template is an ADT template, the `resourceClassNameId` points to the
-`PortletDisplayTemplate`'s `classNameId`.
-
-#### Why was this change made?
-
-This change was made in order to implement model resource permissions for DDM
-templates, such as `VIEW`, `DELETE`, `PERMISSIONS`, and `UPDATE`.
-
----------------------------------------
-
 ### Changed the Usage of the `liferay-ui:restore-entry` Tag
 - **Date:** 2015-Mar-01
 - **JIRA Ticket:** LPS-54106
@@ -1131,6 +1100,37 @@ refactored for this usage.
 This change allows the Trash portlet to be an independent module. Its actions
 and views are no longer used by the tag; they are now the responsability of
 each plugin.
+
+---------------------------------------
+
+### Added Required Parameter `resourceClassNameId` for DDM Template Search Operations
+- **Date:** 2015-Mar-03
+- **JIRA Ticket:** LPS-52990
+
+#### What changed?
+
+The DDM template `search` and `searchCount` operations have a new parameter
+called `resourceClassNameId`.
+
+#### Who is affected?
+
+This affects developers who have direct calls to the `DDMTemplateService` or 
+`DDMTemplateLocalService`.
+
+#### How should I update my code?
+
+You should add the `resourceClassNameId` parameter to your calls. This parameter
+represents the resource that owns the permission for the DDM template. For
+example, if the template is a WCM template, the `resourceClassNameId` points to
+the `JournalArticle`'s `classNameId`. If the template is a DDL template, the
+`resourceClassNameId` points to the `DDLRecordSet`'s `classNameId`. If the
+template is an ADT template, the `resourceClassNameId` points to the
+`PortletDisplayTemplate`'s `classNameId`.
+
+#### Why was this change made?
+
+This change was made in order to implement model resource permissions for DDM
+templates, such as `VIEW`, `DELETE`, `PERMISSIONS`, and `UPDATE`.
 
 ---------------------------------------
 
