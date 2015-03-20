@@ -31,9 +31,9 @@ import java.util.Map;
  * @author Iván Zaera
  */
 public class GroupServiceSettingsProviderBuilder
-		<S extends GroupServiceSettings, C>
+	<S extends GroupServiceSettings, C>
 	implements GroupServiceSettingsProvider<S>,
-		SettingsProviderBuilder<GroupServiceSettingsProvider<S>> {
+			   SettingsProviderBuilder<GroupServiceSettingsProvider<S>> {
 
 	public GroupServiceSettingsProviderBuilder(
 		SettingsDefinition<S, C> settingsDefinition,
@@ -89,7 +89,6 @@ public class GroupServiceSettingsProviderBuilder
 		return (Class)GroupServiceSettingsProvider.class;
 	}
 
-	@SuppressWarnings("unchecked")
 	private S _getSettings(Settings settings) throws Exception {
 		Class<?> settingsExtraClass =
 			_settingsDefinition.getSettingsExtraClass();
@@ -117,22 +116,22 @@ public class GroupServiceSettingsProviderBuilder
 	}
 
 	private void _validateSettingsDefinition(
-		SettingsDefinition settingsDefinition) {
+		SettingsDefinition<S, C> settingsDefinition) {
 
 		Class<?> settingsClass = settingsDefinition.getSettingsClass();
 
 		if (!GroupServiceSettings.class.isAssignableFrom(settingsClass)) {
 			throw new IllegalArgumentException(
-				"Settings class " + settingsClass.getName() + " does not " +
-					"implement GroupServiceSettings");
+				"Settings class " + settingsClass.getName() + " is not a " +
+					"group service settings");
 		}
 
 		String[] settingsIds = settingsDefinition.getSettingsIds();
 
 		if (settingsIds.length != 1) {
 			throw new IllegalArgumentException(
-				"GroupServiceSettings definitions must return a single " +
-					"settingsId");
+				"Group service settings definitions must return a single " +
+					"settings ID");
 		}
 	}
 
