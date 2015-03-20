@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.marketplace.hook.events;
+package com.liferay.marketplace.web.events;
 
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
