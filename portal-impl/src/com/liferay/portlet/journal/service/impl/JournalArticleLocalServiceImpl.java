@@ -6249,7 +6249,7 @@ public class JournalArticleLocalServiceImpl
 		for (Node imageNode : imageNodes) {
 			Element imageEl = (Element)imageNode;
 
-			String instanceId = imageEl.attributeValue("instance-id");
+			String elInstanceId = imageEl.attributeValue("instance-id");
 			String elName = imageEl.attributeValue("name");
 			String elIndex = imageEl.attributeValue("index");
 
@@ -6272,7 +6272,7 @@ public class JournalArticleLocalServiceImpl
 
 				imageId = journalArticleImageLocalService.getArticleImageId(
 					newArticle.getGroupId(), newArticle.getArticleId(),
-					newArticle.getVersion(), instanceId, name, languageId);
+					newArticle.getVersion(), elInstanceId, name, languageId);
 
 				imageLocalService.updateImage(imageId, oldImage.getTextObj());
 
