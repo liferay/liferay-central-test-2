@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `6006f66`.*
+*This document has been reviewed through commit `9d19c60`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1134,40 +1134,34 @@ each plugin.
 
 ---------------------------------------
 
-### Display Styles for the Breadcrumb Portlet have been replaced by ADT
+### Replaced Display Styles with ADTs in Breadcrumb Portlet
 - **Date:** 2015-Mar-12
 - **JIRA Ticket:** LPS-54106
 
 #### What changed?
 
-The custom display styles of the breadcrumb tag added using JSPs won't work
-anymore. They have been replaced by Application Display Templates.
-
+The custom display styles of the breadcrumb tag added using JSPs no longer work.
+They have been replaced by Application Display Templates (ADT).
 
 #### Who is affected?
 
-Anyone using the properties.
+This affects developers using the following properties:
 
-```
-breadcrumb.display.style.default=horizontal
+    breadcrumb.display.style.default=horizontal
 
-
-breadcrumb.display.style.options=horizontal,vertical
-```
-
+    breadcrumb.display.style.options=horizontal,vertical
 
 #### How should I update my code?
 
-You need to convert your jsps with custom styles for the breadcrumb with
-Application Display Templates (ADT) for the breadcrumb and use those. ADT can be
-created from the UI of the portal in Site Settings >>
-Application Display Tempaltes or also programatically.
-
+You should convert JSPs that have custom styles for the breadcrumb to ADTs for
+the breadcrumb. ADTs can be created from the UI of the Portal by navigating to
+*Site Settings* &rarr; *Application Display Templates*. ADTs can also be created
+programatically.
 
 #### Why was this change made?
 
-Application Display Templates provide more flexibility that JSPs since coding
-is not needed to change the look and feel of your application.
+ADTs provide more flexibility than JSPs since coding is not needed to change the
+look and feel of your application.
 
 ---------------------------------------
 
