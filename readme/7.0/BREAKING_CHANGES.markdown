@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `6fbd2f4`.*
+*This document has been reviewed through commit `9447c53`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1190,38 +1190,41 @@ of this taglib.
 
 ---------------------------------------
 
-### Preview of assets has changed its usage
+### Changed Usage of Asset Preview
 - **Date:** 2015-Mar-16
 - **JIRA Ticket:** LPS-53972
 
 #### What changed?
 
-The way assets are being previewed. Now, a taglib should be used instead of
-directly including the JSP referenced by assetRenderer.getPreviewPath.
+This changes the way assets are previewed. A taglib is now used instead of
+directly including the JSP referenced by the `assetRenderer.getPreviewPath`
+method.
 
 #### Who is affected?
 
 This affects developers who have written code that directly calls the
-assetRenderer.getPreviewPath method. E.g:
+`assetRenderer.getPreviewPath` method. An example of calling this method before
+this change is available below:
 
-<liferay-util:include
-	page="<%= assetRenderer.getPreviewPath(liferayPortletRequest, liferayPortletResponse) %>"
-	portletId="<%= assetRendererFactory.getPortletId() %>"
-	servletContext="<%= application %>"
-/>
+    <liferay-util:include
+        page="<%= assetRenderer.getPreviewPath(liferayPortletRequest, liferayPortletResponse) %>"
+        portletId="<%= assetRendererFactory.getPortletId() %>"
+        servletContext="<%= application %>"
+    />
 
 #### How should I update my code?
 
-You need to replace the call to include the preview JSP with the taglib
-liferay-ui:asset-display passing the parameter template as "preview".
+You should replace the call to include the preview JSP with the taglib
+`liferay-ui:asset-display`, passing the parameter `template` as a preview. For
+example:
 
-```
-<liferay-ui:asset-display
-	assetEntry="<%= assetEntry %>"
-	template="<%= AssetRenderer.TEMPLATE_PREVIEW %>"
-/>
-```
+    <liferay-ui:asset-display
+        assetEntry="<%= assetEntry %>"
+        template="<%= AssetRenderer.TEMPLATE_PREVIEW %>"
+    />
 
 #### Why was this change made?
 
-To simplify the usage of the functionality.
+This change simplifies the usage of the asset preview.
+
+---------------------------------------
