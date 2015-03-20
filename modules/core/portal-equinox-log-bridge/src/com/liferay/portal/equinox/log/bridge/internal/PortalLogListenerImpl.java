@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PortalLogListenerImpl implements SynchronousLogListener {
 
+	@Override
 	public void logged(LogEntry logEntry) {
 		if (!(logEntry instanceof ExtendedLogEntry)) {
 			return;
@@ -45,7 +46,6 @@ public class PortalLogListenerImpl implements SynchronousLogListener {
 
 			_log(
 				frameworkLogEntry.getEntry(), frameworkLogEntry.getSeverity(),
-				frameworkLogEntry.getBundleCode(),
 				frameworkLogEntry.getMessage(), frameworkLogEntry.getContext(),
 				frameworkLogEntry.getThrowable());
 
@@ -56,7 +56,6 @@ public class PortalLogListenerImpl implements SynchronousLogListener {
 					_log(
 						curFrameworkLogEntry.getEntry(),
 						curFrameworkLogEntry.getSeverity(),
-						curFrameworkLogEntry.getBundleCode(),
 						curFrameworkLogEntry.getMessage(),
 						curFrameworkLogEntry.getContext(),
 						curFrameworkLogEntry.getThrowable());
@@ -70,13 +69,13 @@ public class PortalLogListenerImpl implements SynchronousLogListener {
 
 		_log(
 			bundle.getSymbolicName(), extendedLogEntry.getLevel(),
-			bundle.getBundleId(), extendedLogEntry.getMessage(), context,
+			extendedLogEntry.getMessage(), context,
 			extendedLogEntry.getException());
 	}
 
 	private synchronized void _log(
-		String category, int level, long bundleId, String message,
-		Object context, Throwable throwable) {
+		String category, int level, String message, Object context,
+		Throwable throwable) {
 
 		if (context == null) {
 			context = "";
