@@ -6988,7 +6988,7 @@ public class JournalArticleLocalServiceImpl
 		}
 		else if (action.equals("move_from") &&
 				 JournalUtil.getEmailArticleMovedFromFolderEnabled(
-					preferences)) {
+					 preferences)) {
 		}
 		else if (action.equals("update") &&
 				 JournalUtil.getEmailArticleUpdatedEnabled(preferences)) {
