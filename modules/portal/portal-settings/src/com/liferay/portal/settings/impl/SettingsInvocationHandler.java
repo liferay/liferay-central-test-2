@@ -37,7 +37,6 @@ public class SettingsInvocationHandler<S, C> implements InvocationHandler {
 		_typedSettings = typedSettings;
 	}
 
-	@SuppressWarnings("unchecked")
 	public S createProxy() {
 		return (S)ProxyUtil.newProxyInstance(
 			_settingsClass.getClassLoader(), new Class[] {_settingsClass},
@@ -75,37 +74,37 @@ public class SettingsInvocationHandler<S, C> implements InvocationHandler {
 		throws NoSuchMethodException, IllegalAccessException,
 			InvocationTargetException, InstantiationException {
 
-		String name = method.getName();
 		Class<?> returnType = method.getReturnType();
 
 		if (returnType.equals(boolean.class)) {
-			return _typedSettings.getBooleanValue(name);
+			return _typedSettings.getBooleanValue(method.getName());
 		}
 		else if (returnType.equals(double.class)) {
-			return _typedSettings.getDoubleValue(name);
+			return _typedSettings.getDoubleValue(method.getName());
 		}
 		else if (returnType.equals(float.class)) {
-			return _typedSettings.getFloatValue(name);
+			return _typedSettings.getFloatValue(method.getName());
 		}
 		else if (returnType.equals(int.class)) {
-			return _typedSettings.getIntegerValue(name);
+			return _typedSettings.getIntegerValue(method.getName());
 		}
 		else if (returnType.equals(LocalizedValuesMap.class)) {
-			return _typedSettings.getLocalizedValuesMap(name);
+			return _typedSettings.getLocalizedValuesMap(method.getName());
 		}
 		else if (returnType.equals(long.class)) {
-			return _typedSettings.getLongValue(name);
+			return _typedSettings.getLongValue(method.getName());
 		}
 		else if (returnType.equals(String.class)) {
-			return _typedSettings.getValue(name);
+			return _typedSettings.getValue(method.getName());
 		}
 		else if (returnType.equals(String[].class)) {
-			return _typedSettings.getValues(name);
+			return _typedSettings.getValues(method.getName());
 		}
 
 		Constructor<?> constructor = returnType.getConstructor(String.class);
 
-		return constructor.newInstance(_typedSettings.getValue(name));
+		return constructor.newInstance(
+			_typedSettings.getValue(method.getName()));
 	}
 
 	private final Class<S> _settingsClass;
