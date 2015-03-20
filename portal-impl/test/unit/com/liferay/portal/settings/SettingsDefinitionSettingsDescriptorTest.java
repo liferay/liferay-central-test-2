@@ -36,6 +36,7 @@ public class SettingsDefinitionSettingsDescriptorTest {
 	@Before
 	public void setUp() {
 		SettingsDefinition settingsDefinition = new SettingsDefinition() {
+
 			@Override
 			public Class<?> getSettingsClass() {
 				return MockSettings.class;
@@ -55,6 +56,7 @@ public class SettingsDefinitionSettingsDescriptorTest {
 			public String[] getSettingsIds() {
 				return _SETTINGS_IDS;
 			}
+
 		};
 
 		_settingsDefinitionSettingsDescriptor =
