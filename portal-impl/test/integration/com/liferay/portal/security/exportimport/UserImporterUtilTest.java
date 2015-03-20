@@ -77,7 +77,7 @@ public class UserImporterUtilTest {
 	}
 
 	@Test
-	public void testImportUser3() {
+	public void testImportUserByScreenName() {
 		try {
 			User user = UserImporterUtil.importUserByScreenName(3, "test");
 
@@ -89,7 +89,7 @@ public class UserImporterUtilTest {
 	}
 
 	@Test
-	public void testNoReturnImportUser1() {
+	public void testImportUsers1() {
 		_atomicState.reset();
 
 		try {
@@ -103,7 +103,7 @@ public class UserImporterUtilTest {
 	}
 
 	@Test
-	public void testNoReturnImportUser2() {
+	public void testImportUsers2() {
 		_atomicState.reset();
 
 		try {
@@ -117,7 +117,7 @@ public class UserImporterUtilTest {
 	}
 
 	@Test
-	public void testNoReturnImportUser3() {
+	public void testImportUsers3() {
 		_atomicState.reset();
 
 		try {
