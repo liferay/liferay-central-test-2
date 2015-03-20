@@ -2839,6 +2839,7 @@ public class PortalImpl implements Portal {
 
 		actualParams.put(
 			namespace + "type", new String[] {assetRendererFactory.getType()});
+
 		actualParams.put(
 			namespace + "urlTitle",
 			new String[] {journalArticle.getUrlTitle()});
