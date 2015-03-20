@@ -112,11 +112,7 @@ public class AnnotatedSettingsDescriptor implements SettingsDescriptor {
 				"Invalid method name for getter " + propertyMethod.getName());
 		}
 
-		String nameFirstLetter = StringUtil.toLowerCase(name.substring(0, 1));
-
-		String nameRest = name.substring(1);
-
-		return nameFirstLetter + nameRest;
+		return StringUtil.toLowerCase(name.substring(0, 1)) + name.substring(1);
 	}
 
 	private void _initAllKeys(Method[] propertyMethods) {
