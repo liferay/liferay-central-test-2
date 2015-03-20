@@ -25,7 +25,6 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import org.testng.Assert;
 
 /**
@@ -35,29 +34,30 @@ public class SettingsDefinitionSettingsDescriptorTest {
 
 	@Before
 	public void setUp() {
-		SettingsDefinition settingsDefinition = new SettingsDefinition() {
+		SettingsDefinition<MockSettings, MockConfiguration> settingsDefinition =
+			new SettingsDefinition<MockSettings, MockConfiguration>() {
 
-			@Override
-			public Class<?> getSettingsClass() {
-				return MockSettings.class;
-			}
-
-			@Override
-			public Class<?> getConfigurationBeanClass() {
-				return MockConfiguration.class;
-			}
-
-			@Override
-			public Class<?> getSettingsExtraClass() {
-				return null;
-			}
-
-			@Override
-			public String[] getSettingsIds() {
-				return _SETTINGS_IDS;
-			}
-
-		};
+				@Override
+				public Class<MockSettings> getSettingsClass() {
+					return MockSettings.class;
+				}
+	
+				@Override
+				public Class<MockConfiguration> getConfigurationBeanClass() {
+					return MockConfiguration.class;
+				}
+	
+				@Override
+				public Class<?> getSettingsExtraClass() {
+					return null;
+				}
+	
+				@Override
+				public String[] getSettingsIds() {
+					return _SETTINGS_IDS;
+				}
+	
+			};
 
 		_settingsDefinitionSettingsDescriptor =
 			new SettingsDefinitionSettingsDescriptor(settingsDefinition);

@@ -25,7 +25,6 @@ import com.liferay.portal.settings.impl.GroupServiceSettingsProviderBuilder;
 import com.liferay.portal.settings.impl.SettingsProviderBuilder;
 
 import java.io.IOException;
-
 import java.util.Dictionary;
 
 import org.osgi.framework.BundleContext;
@@ -40,6 +39,7 @@ import org.osgi.service.cm.ManagedService;
  */
 public class SettingsDefinitionLifecycleHandler<S, C> {
 
+	@SuppressWarnings("rawtypes")
 	public SettingsDefinitionLifecycleHandler(
 		SettingsDefinition<S, C> settingsDefinition,
 		BundleContext bundleContext, ConfigurationAdmin configurationAdmin,
@@ -186,6 +186,7 @@ public class SettingsDefinitionLifecycleHandler<S, C> {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private void _registerSettingsProvider() {
 		Dictionary<String, String> properties = new HashMapDictionary<>();
 
