@@ -30,7 +30,7 @@ public class SettingsDefinitionSettingsDescriptor
 	implements SettingsDescriptor {
 
 	public SettingsDefinitionSettingsDescriptor(
-		SettingsDefinition settingsDefinition) {
+		SettingsDefinition<?, ?> settingsDefinition) {
 
 		_settingsDefinition = settingsDefinition;
 
@@ -91,7 +91,7 @@ public class SettingsDefinitionSettingsDescriptor
 
 	private final Set<String> _allKeys = new HashSet<>();
 	private final Set<String> _multiValuedKeys = new HashSet<>();
-	private final SettingsDefinition _settingsDefinition;
+	private final SettingsDefinition<?, ?> _settingsDefinition;
 	private final Set<String> _settingsIds = new HashSet<>();
 
 }
