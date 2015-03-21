@@ -54,14 +54,13 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 
 		Instructions instructions = new Instructions(parameters);
+		boolean matches = false;
 
 		Jar jar = analyzer.getJar();
 
 		Map<String, Resource> resources = jar.getResources();
 
 		Set<String> keys = new HashSet<String>(resources.keySet());
-
-		boolean matches = false;
 
 		for (String key : keys) {
 			for (Instruction instruction : instructions.keySet()) {
@@ -86,7 +85,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		if (matches) {
 			Packages packages = analyzer.getReferred();
 
-			for (String packageName : _REQUIRED_PACKAGES) {
+			for (String packageName : _REQUIRED_PACKAGE_NAMES) {
 				PackageRef packageRef = analyzer.getPackageRef(packageName);
 
 				Matcher matcher = _packagePattern.matcher(packageRef.getFQN());
@@ -247,7 +246,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		"http://java.sun.com/jsp/jstl/sql", "http://java.sun.com/jsp/jstl/xml"
 	};
 
-	private static final String[] _REQUIRED_PACKAGES = new String[] {
+	private static final String[] _REQUIRED_PACKAGE_NAMES = new String[] {
 		"javax.servlet", "javax.servlet.http"
 	};
 
