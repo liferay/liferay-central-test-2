@@ -165,7 +165,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 		if ((settingsScope != null) &&
 			((parameterMap == null) ||
-			 (parameterMap.get("settingsScope") == null))) {
+			 !parameterMap.containsKey("settingsScope"))) {
 
 			liferayPortletURL.setParameter("settingsScope", settingsScope);
 		}
