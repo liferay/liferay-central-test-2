@@ -349,7 +349,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			long groupId, String portletId, String name)
 		throws PortalException {
 
-		PortletItem portletItem;
+		PortletItem portletItem = null;
 
 		try {
 			portletItem = PortletItemLocalServiceUtil.getPortletItem(
