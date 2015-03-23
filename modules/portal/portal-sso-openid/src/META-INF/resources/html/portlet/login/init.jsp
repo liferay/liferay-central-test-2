@@ -21,8 +21,7 @@
 
 <%@ page import="com.liferay.portal.DuplicateOpenIdException" %><%@
 page import="com.liferay.portal.UserEmailAddressException" %><%@
-page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
-page import="com.liferay.portal.sso.openid.constants.OpenIdWebKeys" %>
+page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%@ page import="javax.portlet.WindowState" %>
 

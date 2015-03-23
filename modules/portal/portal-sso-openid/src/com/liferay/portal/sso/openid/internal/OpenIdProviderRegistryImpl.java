@@ -20,6 +20,7 @@ import com.liferay.portal.sso.openid.OpenIdProvider;
 import com.liferay.portal.sso.openid.OpenIdProviderRegistry;
 
 import java.net.URL;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;

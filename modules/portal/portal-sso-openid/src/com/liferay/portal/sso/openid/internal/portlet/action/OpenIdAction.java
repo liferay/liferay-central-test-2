@@ -209,8 +209,7 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 
 			_consumerManager.setAssociations(
 				new InMemoryConsumerAssociationStore());
-			_consumerManager.setNonceVerifier(
-				new InMemoryNonceVerifier(5000));
+			_consumerManager.setNonceVerifier(new InMemoryNonceVerifier(5000));
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
@@ -504,7 +503,7 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 
 		for (String openIdAXType : openIdAXTypes) {
 			openIdAXType =
-				StringUtil.toUpperCase(openIdAXType.substring(0, 1)) + 
+				StringUtil.toUpperCase(openIdAXType.substring(0, 1)) +
 					openIdAXType.substring(1, openIdAXType.length());
 
 			fetchRequest.addAttribute(
@@ -563,8 +562,8 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 
 	private static final Log _log = LogFactoryUtil.getLog(OpenIdAction.class);
 
-	private final Map<String, String> _forwards = new HashMap<>();
 	private ConsumerManager _consumerManager;
+	private final Map<String, String> _forwards = new HashMap<>();
 	private OpenId _openId;
 	private OpenIdProviderRegistry _openIdProviderRegistry;
 
