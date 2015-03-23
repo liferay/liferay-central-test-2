@@ -14,8 +14,6 @@
 
 package com.liferay.portal.sso.openid.internal.portlet.action;
 
-import aQute.bnd.annotation.metatype.Configurable;
-
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -43,7 +41,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.sso.openid.OpenIdProvider;
 import com.liferay.portal.sso.openid.OpenIdProviderRegistry;
-import com.liferay.portal.sso.openid.configuration.OpenIdConfiguration;
 import com.liferay.portal.sso.openid.constants.OpenIdWebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -206,9 +203,6 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 		_forwards.put(
 			"portlet.login.open_id",
 			GetterUtil.getString(properties, "portlet.login.open_id"));
-
-		_openIdConfiguration = Configurable.createConfigurable(
-			OpenIdConfiguration.class, properties);
 
 		try {
 			_manager = new ConsumerManager();
@@ -569,7 +563,6 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 	private final Map<String, String> _forwards = new HashMap<>();
 	private ConsumerManager _manager;
 	private OpenId _openId;
-	private volatile OpenIdConfiguration _openIdConfiguration;
 	private OpenIdProviderRegistry _openIdProviderRegistry;
 
 }
