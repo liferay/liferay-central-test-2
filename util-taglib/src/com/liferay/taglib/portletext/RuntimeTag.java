@@ -132,6 +132,8 @@ public class RuntimeTag extends TagSupport {
 
 			Layout layout = themeDisplay.getLayout();
 
+			request.setAttribute(WebKeys.PORTLET_DECORATE, false);
+
 			Portlet portlet = getPortlet(
 				themeDisplay.getCompanyId(), portletId);
 
@@ -145,7 +147,6 @@ public class RuntimeTag extends TagSupport {
 					renderPortletPreferences);
 			}
 
-			request.setAttribute(WebKeys.PORTLET_DECORATE, false);
 			request.setAttribute(WebKeys.SETTINGS_SCOPE, settingsScope);
 
 			JSONObject jsonObject = null;
