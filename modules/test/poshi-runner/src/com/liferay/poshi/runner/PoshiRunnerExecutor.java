@@ -191,7 +191,7 @@ public class PoshiRunnerExecutor {
 			}
 			else if (childElementName.equals("var")) {
 				try {
-					runVarElement(childElement);
+					runVarElement(childElement, true);
 				}
 				catch (Exception e) {
 					throw new PoshiRunnerException(e);
@@ -211,10 +211,7 @@ public class PoshiRunnerExecutor {
 		List<Element> executeVarElements = executeElement.elements("var");
 
 		for (Element executeVarElement : executeVarElements) {
-			String name = executeVarElement.attributeValue("name");
-			String value = executeVarElement.attributeValue("value");
-
-			PoshiRunnerVariablesUtil.putIntoExecuteMap(name, value);
+			runVarElement(executeVarElement, false);
 		}
 
 		String actionClassCommandName = executeElement.attributeValue("action");
@@ -354,10 +351,7 @@ public class PoshiRunnerExecutor {
 		List<Element> executeVarElements = executeElement.elements("var");
 
 		for (Element executeVarElement : executeVarElements) {
-			String name = executeVarElement.attributeValue("name");
-			String value = executeVarElement.attributeValue("value");
-
-			PoshiRunnerVariablesUtil.putIntoExecuteMap(name, value);
+			runVarElement(executeVarElement, false);
 		}
 
 		String classCommandName = executeElement.attributeValue("function");
@@ -495,19 +489,13 @@ public class PoshiRunnerExecutor {
 		List<Element> rootVarElements = rootElement.elements("var");
 
 		for (Element rootVarElement : rootVarElements) {
-			String name = rootVarElement.attributeValue("name");
-			String value = rootVarElement.attributeValue("value");
-
-			PoshiRunnerVariablesUtil.putIntoExecuteMap(name, value);
+			runVarElement(rootVarElement, false);
 		}
 
 		List<Element> executeVarElements = executeElement.elements("var");
 
 		for (Element executeVarElement : executeVarElements) {
-			String name = executeVarElement.attributeValue("name");
-			String value = executeVarElement.attributeValue("value");
-
-			PoshiRunnerVariablesUtil.putIntoExecuteMap(name, value);
+			runVarElement(executeVarElement, false);
 		}
 
 		PoshiRunnerVariablesUtil.pushCommandMap();
@@ -609,7 +597,7 @@ public class PoshiRunnerExecutor {
 		}
 	}
 
-	public static void runVarElement(Element element)
+	public static void runVarElement(Element element, boolean isCommandVar)
 		throws PoshiRunnerException {
 
 		String varName = element.attributeValue("name");
@@ -629,6 +617,20 @@ public class PoshiRunnerExecutor {
 				varValue = PoshiRunnerGetterUtil.getVarMethodValue(
 					classCommandName);
 			}
+			else if ((element.attributeValue("group") != null) &&
+					 (element.attributeValue("pattern") != null) &&
+					 (element.attributeValue("input") != null)) {
+
+				String input = element.attributeValue("input");
+				String group = element.attributeValue("group");
+				String pattern = element.attributeValue("pattern");
+
+				String method =
+					"RegexUtil#replace(" + input + "," + pattern + "," + group +
+					")";
+
+				varValue = PoshiRunnerGetterUtil.getVarMethodValue(method);
+			}
 			else {
 				varValue = element.elementText("var");
 			}
@@ -636,7 +638,12 @@ public class PoshiRunnerExecutor {
 
 		varValue = PoshiRunnerVariablesUtil.replaceCommandVars(varValue);
 
-		PoshiRunnerVariablesUtil.putIntoCommandMap(varName, varValue);
+		if (isCommandVar) {
+			PoshiRunnerVariablesUtil.putIntoCommandMap(varName, varValue);
+		}
+		else {
+			PoshiRunnerVariablesUtil.putIntoExecuteMap(varName, varValue);
+		}
 	}
 
 	public static void runWhileElement(Element element)
