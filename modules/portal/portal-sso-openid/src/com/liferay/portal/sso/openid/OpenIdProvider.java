@@ -51,7 +51,7 @@ public class OpenIdProvider {
 	}
 
 	public void setAxSchema(String axSchema) {
-		StringUtil.split(axSchema, StringPool.COMMA);
+		_axSchema = StringUtil.split(axSchema, StringPool.COMMA);
 	}
 
 	public void setAxSchema(String[] axSchema) {
