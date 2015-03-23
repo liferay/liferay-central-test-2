@@ -30,3 +30,7 @@ page import="com.liferay.portal.sso.openid.constants.OpenIdWebKeys" %>
 page import="org.openid4java.consumer.ConsumerException" %><%@
 page import="org.openid4java.discovery.DiscoveryException" %><%@
 page import="org.openid4java.message.MessageException" %>
+
+<%
+WindowState windowState = liferayPortletRequest.getWindowState();
+%>

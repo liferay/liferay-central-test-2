@@ -21,6 +21,4 @@ public interface OpenIdWebKeys {
 
 	public static final String OPEN_ID_DISCO = "openid-disco";
 
-	public static final String WINDOW_STATE = "WINDOW_STATE";
-
 }

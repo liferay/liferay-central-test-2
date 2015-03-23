@@ -16,17 +16,10 @@ package com.liferay.portal.sso.openid.internal.servlet.taglib;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
 import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
-import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.sso.openid.constants.OpenIdWebKeys;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
-
-import javax.portlet.PortletRequest;
-import javax.portlet.WindowState;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -48,16 +41,6 @@ public class OpenIdLoginDynamicInclude extends BaseDynamicInclude {
 			HttpServletRequest request, HttpServletResponse response,
 			String key)
 		throws IOException {
-
-		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		LiferayPortletRequest liferayPortletRequest =
-			PortalUtil.getLiferayPortletRequest(portletRequest);
-
-		WindowState windowState = liferayPortletRequest.getWindowState();
-
-		request.setAttribute(OpenIdWebKeys.WINDOW_STATE, windowState);
 
 		RequestDispatcher requestDispatcher =
 			_servletContext.getRequestDispatcher(_JSP_PATH);
