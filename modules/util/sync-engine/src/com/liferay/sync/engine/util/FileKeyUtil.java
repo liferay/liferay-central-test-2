@@ -101,8 +101,16 @@ public class FileKeyUtil {
 		return false;
 	}
 
-	public static void writeFileKey(final Path filePath, final String fileKey) {
+	public static void writeFileKey(
+		final Path filePath, final String fileKey, boolean checkLock) {
+
 		if (hasFileKey(filePath, Long.parseLong(fileKey))) {
+			return;
+		}
+
+		if (!checkLock) {
+			doWriteFileKey(filePath, fileKey);
+
 			return;
 		}
 

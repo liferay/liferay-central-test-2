@@ -129,7 +129,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 			SyncFileService.update(syncFile);
 
 			FileKeyUtil.writeFileKey(
-				filePath, String.valueOf(syncFile.getSyncFileId()));
+				filePath, String.valueOf(syncFile.getSyncFileId()), false);
 		}
 		else {
 			SyncFileService.update(syncFile);
@@ -275,7 +275,8 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 			sourceSyncFile.setState(SyncFile.STATE_SYNCED);
 
 			FileKeyUtil.writeFileKey(
-				targetFilePath, String.valueOf(sourceSyncFile.getSyncFileId()));
+				targetFilePath, String.valueOf(sourceSyncFile.getSyncFileId()),
+				false);
 		}
 		else {
 			downloadFile(sourceSyncFile, null, 0, false);
@@ -464,7 +465,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 
 				FileKeyUtil.writeFileKey(
 					targetFilePath,
-					String.valueOf(sourceSyncFile.getSyncFileId()));
+					String.valueOf(sourceSyncFile.getSyncFileId()), false);
 			}
 			else {
 				downloadFile(sourceSyncFile, null, 0, false);
