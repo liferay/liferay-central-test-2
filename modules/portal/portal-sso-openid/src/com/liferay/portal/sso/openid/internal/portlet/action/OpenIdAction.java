@@ -205,10 +205,12 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 			GetterUtil.getString(properties, "portlet.login.open_id"));
 
 		try {
-			_manager = new ConsumerManager();
+			_consumerManager = new ConsumerManager();
 
-			_manager.setAssociations(new InMemoryConsumerAssociationStore());
-			_manager.setNonceVerifier(new InMemoryNonceVerifier(5000));
+			_consumerManager.setAssociations(
+				new InMemoryConsumerAssociationStore());
+			_consumerManager.setNonceVerifier(
+				new InMemoryNonceVerifier(5000));
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
@@ -225,31 +227,29 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 	}
 
 	protected String getScreenName(String openId) {
-		String result = normalize(openId);
+		String screenName = normalize(openId);
 
-		if (result.startsWith(Http.HTTP_WITH_SLASH)) {
-			result = result.substring(Http.HTTP_WITH_SLASH.length());
+		if (screenName.startsWith(Http.HTTP_WITH_SLASH)) {
+			screenName = screenName.substring(Http.HTTP_WITH_SLASH.length());
 		}
 
-		if (result.startsWith(Http.HTTPS_WITH_SLASH)) {
-			result = result.substring(Http.HTTPS_WITH_SLASH.length());
+		if (screenName.startsWith(Http.HTTPS_WITH_SLASH)) {
+			screenName = screenName.substring(Http.HTTPS_WITH_SLASH.length());
 		}
 
-		result = StringUtil.replace(
-			result, new String[] {StringPool.SLASH, StringPool.UNDERLINE},
+		screenName = StringUtil.replace(
+			screenName, new String[] {StringPool.SLASH, StringPool.UNDERLINE},
 			new String[] {StringPool.PERIOD, StringPool.PERIOD});
 
-		return result;
+		return screenName;
 	}
 
 	protected String normalize(String identity) {
-		String result = identity;
-
-		if (result.endsWith(StringPool.SLASH)) {
-			result = result.substring(0, result.length() - 1);
+		if (identity.endsWith(StringPool.SLASH)) {
+			return identity.substring(0, identity.length() - 1);
 		}
 
-		return result;
+		return identity;
 	}
 
 	protected String readOpenIdResponse(
@@ -276,7 +276,7 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 
 		String receivingURL = ParamUtil.getString(request, "openid.return_to");
 
-		VerificationResult verificationResult = _manager.verify(
+		VerificationResult verificationResult = _consumerManager.verify(
 			receivingURL, parameterList, discoveryInformation);
 
 		Identifier identifier = verificationResult.getVerifiedId();
@@ -461,14 +461,17 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 		portletURL.setParameter(Constants.CMD, Constants.READ);
 		portletURL.setParameter("struts_action", "/login/open_id");
 
-		List<DiscoveryInformation> discoveries = _manager.discover(openId);
+		List<DiscoveryInformation> discoveryInformationList =
+			_consumerManager.discover(openId);
 
-		DiscoveryInformation discovered = _manager.associate(discoveries);
+		DiscoveryInformation discoveryInformation = _consumerManager.associate(
+			discoveryInformationList);
 
-		session.setAttribute(OpenIdWebKeys.OPEN_ID_DISCO, discovered);
+		session.setAttribute(OpenIdWebKeys.OPEN_ID_DISCO, discoveryInformation);
 
-		AuthRequest authRequest = _manager.authenticate(
-			discovered, portletURL.toString(), themeDisplay.getPortalURL());
+		AuthRequest authRequest = _consumerManager.authenticate(
+			discoveryInformation, portletURL.toString(),
+			themeDisplay.getPortalURL());
 
 		if (UserLocalServiceUtil.fetchUserByOpenId(
 				themeDisplay.getCompanyId(), openId) != null) {
@@ -495,14 +498,14 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 
 		OpenIdProvider openIdProvider =
 			_openIdProviderRegistry.getOpenIdProvider(
-				discovered.getOPEndpoint());
+				discoveryInformation.getOPEndpoint());
 
 		String[] openIdAXTypes = openIdProvider.getAxSchema();
 
 		for (String openIdAXType : openIdAXTypes) {
 			openIdAXType =
-				StringUtil.toUpperCase(openIdAXType.substring(0, 1)).concat(
-					openIdAXType.substring(1, openIdAXType.length()));
+				StringUtil.toUpperCase(openIdAXType.substring(0, 1)) + 
+					openIdAXType.substring(1, openIdAXType.length());
 
 			fetchRequest.addAttribute(
 				openIdAXType,
@@ -561,7 +564,7 @@ public class OpenIdAction extends BaseStrutsPortletAction {
 	private static final Log _log = LogFactoryUtil.getLog(OpenIdAction.class);
 
 	private final Map<String, String> _forwards = new HashMap<>();
-	private ConsumerManager _manager;
+	private ConsumerManager _consumerManager;
 	private OpenId _openId;
 	private OpenIdProviderRegistry _openIdProviderRegistry;
 
