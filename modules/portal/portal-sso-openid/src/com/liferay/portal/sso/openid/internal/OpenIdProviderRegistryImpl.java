@@ -15,11 +15,11 @@
 package com.liferay.portal.sso.openid.internal;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.sso.openid.OpenIdProvider;
 import com.liferay.portal.sso.openid.OpenIdProviderRegistry;
 
 import java.net.URL;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -58,12 +58,8 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 
 	@Override
 	public OpenIdProvider getOpenIdProvider(URL url) {
-		String hostName = url.getHost();
-
 		for (OpenIdProvider openIdProvider : _openIdProviders.values()) {
-			String openIdURLString = openIdProvider.getUrl();
-
-			if (hostName.equals(openIdURLString)) {
+			if (Validator.equals(openIdProvider.getUrl(), url.getHost())) {
 				return openIdProvider;
 			}
 		}
@@ -96,6 +92,7 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 		setOpenIdProvider(defaultOpenIdProvider);
 
 		OpenIdProvider yahooOpenIdProvider = new OpenIdProvider();
+
 		yahooOpenIdProvider.setAxSchema(
 			GetterUtil.getString(properties, "open.id.ax.schema[yahoo]"));
 		yahooOpenIdProvider.setAxTypeEmail(
