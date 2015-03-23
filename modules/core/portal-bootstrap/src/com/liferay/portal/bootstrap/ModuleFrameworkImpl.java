@@ -761,12 +761,11 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 	private boolean _isFragmentBundle(Bundle bundle) {
 		BundleRevision bundleRevision = bundle.adapt(BundleRevision.class);
 
-		if ((bundleRevision.getTypes() & BundleRevision.TYPE_FRAGMENT) == 0 ) {
+		if ((bundleRevision.getTypes() & BundleRevision.TYPE_FRAGMENT) == 0) {
 			return false;
 		}
-		else {
-			return true;
-		}
+
+		return true;
 	}
 
 	private boolean _isIgnoredInterface(String interfaceClassName) {
