@@ -79,7 +79,7 @@ public class RuntimeTag extends TagSupport {
 		throws Exception {
 
 		doTag(
-			portletName, queryString, _DEFAULT_SETTINGS_SCOPE,
+			portletName, queryString, _SETTINGS_SCOPE_DEFAULT,
 			defaultPreferences, pageContext, request, response);
 	}
 
@@ -145,8 +145,8 @@ public class RuntimeTag extends TagSupport {
 					renderPortletPreferences);
 			}
 
-			request.setAttribute(WebKeys.SETTINGS_SCOPE, settingsScope);
 			request.setAttribute(WebKeys.PORTLET_DECORATE, false);
+			request.setAttribute(WebKeys.SETTINGS_SCOPE, settingsScope);
 
 			JSONObject jsonObject = null;
 
@@ -283,14 +283,14 @@ public class RuntimeTag extends TagSupport {
 		return null;
 	}
 
-	private static final String _DEFAULT_SETTINGS_SCOPE =
-		PortletPreferencesFactoryConstants.SCOPE_GROUP;
+	private static final String _SETTINGS_SCOPE_DEFAULT =
+		PortletPreferencesFactoryConstants.SETTINGS_SCOPE_GROUP;
 
 	private static final Log _log = LogFactoryUtil.getLog(RuntimeTag.class);
 
 	private String _defaultPreferences;
 	private String _portletName;
 	private String _queryString;
-	private String _settingsScope = _DEFAULT_SETTINGS_SCOPE;
+	private String _settingsScope = _SETTINGS_SCOPE_DEFAULT;
 
 }

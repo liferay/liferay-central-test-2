@@ -210,7 +210,8 @@ public class EditConfigurationAction extends PortletAction {
 
 		if (Validator.isNull(settingsScope) ||
 			settingsScope.equals(
-				PortletPreferencesFactoryConstants.SCOPE_PORTLET_INSTANCE)) {
+				PortletPreferencesFactoryConstants.
+					SETTINGS_SCOPE_PORTLET_INSTANCE)) {
 
 			return null;
 		}

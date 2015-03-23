@@ -146,7 +146,8 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			String previewWidth = ParamUtil.getString(request, "previewWidth");
 			settingsScope = ParamUtil.getString(
 				request, "settingsScope",
-				PortletPreferencesFactoryConstants.SCOPE_PORTLET_INSTANCE);
+				PortletPreferencesFactoryConstants.
+					SETTINGS_SCOPE_PORTLET_INSTANCE);
 
 			liferayPortletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_configuration");

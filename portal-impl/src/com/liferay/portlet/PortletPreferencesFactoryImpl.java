@@ -450,14 +450,14 @@ public class PortletPreferencesFactoryImpl
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 
 		if (settingsScope.equals(
-				PortletPreferencesFactoryConstants.SCOPE_COMPANY)) {
+				PortletPreferencesFactoryConstants.SETTINGS_SCOPE_COMPANY)) {
 
 			ownerId = companyId;
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 			plid = PortletKeys.PREFS_PLID_SHARED;
 		}
 		else if (settingsScope.equals(
-					PortletPreferencesFactoryConstants.SCOPE_GROUP)) {
+					PortletPreferencesFactoryConstants.SETTINGS_SCOPE_GROUP)) {
 
 			ownerId = siteGroupId;
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
@@ -465,7 +465,7 @@ public class PortletPreferencesFactoryImpl
 		}
 		else if (settingsScope.equals(
 					PortletPreferencesFactoryConstants.
-						SCOPE_PORTLET_INSTANCE)) {
+						SETTINGS_SCOPE_PORTLET_INSTANCE)) {
 
 			ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;

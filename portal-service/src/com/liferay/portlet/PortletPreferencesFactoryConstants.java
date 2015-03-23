@@ -19,10 +19,11 @@ package com.liferay.portlet;
  */
 public interface PortletPreferencesFactoryConstants {
 
-	public static final String SCOPE_COMPANY = "company";
+	public static final String SETTINGS_SCOPE_COMPANY = "company";
 
-	public static final String SCOPE_GROUP = "group";
+	public static final String SETTINGS_SCOPE_GROUP = "group";
 
-	public static final String SCOPE_PORTLET_INSTANCE = "portletInstance";
+	public static final String SETTINGS_SCOPE_PORTLET_INSTANCE =
+		"portletInstance";
 
 }
