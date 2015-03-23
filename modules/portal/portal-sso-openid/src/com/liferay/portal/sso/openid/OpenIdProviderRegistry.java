@@ -23,7 +23,7 @@ import java.util.Collection;
  */
 public interface OpenIdProviderRegistry {
 
-	public static final String DEFAULT_OPEN_ID_PROVIDER_NAME = "default";
+	public static final String OPEN_ID_PROVIDER_NAME_DEFAULT = "default";
 
 	public OpenIdProvider getOpenIdProvider(String name);
 

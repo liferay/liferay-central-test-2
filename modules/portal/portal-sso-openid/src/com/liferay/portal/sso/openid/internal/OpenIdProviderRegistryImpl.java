@@ -68,7 +68,7 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 			}
 		}
 
-		return _openIdProviders.get(DEFAULT_OPEN_ID_PROVIDER_NAME);
+		return _openIdProviders.get(OPEN_ID_PROVIDER_NAME_DEFAULT);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 		defaultOpenIdProvider.setAxTypeLastName(
 			GetterUtil.getString(
 				properties, "open.id.ax.type.lastname[default]"));
-		defaultOpenIdProvider.setName(DEFAULT_OPEN_ID_PROVIDER_NAME);
+		defaultOpenIdProvider.setName(OPEN_ID_PROVIDER_NAME_DEFAULT);
 
 		setOpenIdProvider(defaultOpenIdProvider);
 
