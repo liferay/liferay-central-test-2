@@ -56,6 +56,7 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 		return _openIdProviders.get(name);
 	}
 
+	@Override
 	public OpenIdProvider getOpenIdProvider(URL url) {
 		String hostName = url.getHost();
 
