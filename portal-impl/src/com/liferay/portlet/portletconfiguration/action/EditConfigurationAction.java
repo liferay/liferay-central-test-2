@@ -80,7 +80,7 @@ public class EditConfigurationAction extends PortletAction {
 			actionRequest, "settingsScope");
 
 		PortletPreferences portletPreferences = getPortletPreferences(
-			themeDisplay, settingsScope, portlet.getPortletId());
+			themeDisplay, portlet.getPortletId(), settingsScope);
 
 		actionRequest = ActionUtil.getWrappedActionRequest(
 			actionRequest, portletPreferences);
@@ -206,7 +206,7 @@ public class EditConfigurationAction extends PortletAction {
 	}
 
 	protected PortletPreferences getPortletPreferences(
-		ThemeDisplay themeDisplay, String settingsScope, String portletId) {
+		ThemeDisplay themeDisplay, String portletId, String settingsScope) {
 
 		if (Validator.isNull(settingsScope) ||
 			settingsScope.equals(
