@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/login/init.jsp" %>
 
 <%
-String openId = ParamUtil.getString(request, "openId");
-
 WindowState windowState = (WindowState)request.getAttribute(OpenIdWebKeys.WINDOW_STATE);
+
+String openId = ParamUtil.getString(request, "openId");
 %>
 
 <portlet:actionURL var="openIdURL">
