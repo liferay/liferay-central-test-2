@@ -24,6 +24,7 @@
 	<classpathentry kind="lib" path="lib/httpcore.jar" />
 	<classpathentry kind="lib" path="lib/nekohtml.jar" />
 	<classpathentry kind="lib" path="lib/openid4java.jar" />
+	<classpathentry kind="lib" path="lib/org.apache.xml.resolver.jar" />
 	<classpathentry kind="lib" path="lib/xercesImpl.jar" />
 	<classpathentry kind="lib" path="lib/xml-apis.jar" />
 	<classpathentry kind="output" path="bin" />
