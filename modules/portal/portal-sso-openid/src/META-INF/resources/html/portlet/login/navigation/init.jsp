@@ -14,18 +14,11 @@
  */
 --%>
 
-<%@ include file="/html/portlet/login/navigation/init.jsp" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%
-ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<portlet:renderURL var="openIdURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
-	<portlet:param name="struts_action" value="/login/open_id" />
-</portlet:renderURL>
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %><%@
+page import="com.liferay.portal.theme.ThemeDisplay" %>
 
-<liferay-ui:icon
-	message="open-id"
-	src='<%= themeDisplay.getPathThemeImages() + "/common/openid.gif" %>'
-	url="<%= openIdURL %>"
-/>
+<%@ page import="javax.portlet.WindowState" %>
