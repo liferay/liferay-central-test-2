@@ -74,10 +74,11 @@ public class DDMFormLayoutTransformer {
 	protected Map<String, Object> getPage(DDMFormLayoutPage ddmFormLayoutPage) {
 		Map<String, Object> page = new HashMap<>();
 
+		page.put("rows", getRows(ddmFormLayoutPage.getDDMFormLayoutRows()));
+
 		LocalizedValue title = ddmFormLayoutPage.getTitle();
 
 		page.put("title", title.getString(_locale));
-		page.put("rows", getRows(ddmFormLayoutPage.getDDMFormLayoutRows()));
 
 		return page;
 	}
