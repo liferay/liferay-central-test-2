@@ -132,7 +132,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 					packages.put(packageRef, new Attrs());
 
-					addApiUses(s, packageRef, analyzer, packages);
+					addApiUses(s, packageRef, analyzer);
 				}
 			}
 
@@ -141,16 +141,15 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	}
 
 	protected void addApiUses(
-		String s, PackageRef packageRef, Analyzer analyzer, Packages packages) {
+		String s, PackageRef packageRef, Analyzer analyzer) {
 
 		for (Jar jar : analyzer.getClasspath()) {
-			addJarApiUses(jar, s, packageRef, analyzer, packages);
+			addJarApiUses(jar, s, packageRef, analyzer);
 		}
 	}
 
 	protected void addJarApiUses(
-		Jar jar, String s, PackageRef packageRef, Analyzer analyzer,
-		Packages packages) {
+		Jar jar, String s, PackageRef packageRef, Analyzer analyzer) {
 
 		Map<String, Map<String, Resource>> directories = jar.getDirectories();
 
@@ -169,7 +168,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 					continue;
 				}
 
-				addResourceApiUses(key, entry.getValue(), analyzer, packages);
+				addResourceApiUses(key, entry.getValue(), analyzer);
 			}
 		}
 		else {
@@ -178,7 +177,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			if (resourceMap.containsKey(fqnToPath)) {
 				Resource resource = resourceMap.get(fqnToPath);
 
-				addResourceApiUses(s, resource, analyzer, packages);
+				addResourceApiUses(s, resource, analyzer);
 			}
 		}
 	}
@@ -231,8 +230,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	}
 
 	protected void addResourceApiUses(
-		String fqnToPath, Resource resource, Analyzer analyzer,
-		Packages packages) {
+		String fqnToPath, Resource resource, Analyzer analyzer) {
 
 		Clazz clazz = null;
 
@@ -255,6 +253,8 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		Set<PackageRef> packageRefs = clazz.getAPIUses();
 
 		for (PackageRef packageRef : packageRefs) {
+			Packages packages = analyzer.getReferred();
+
 			packages.put(packageRef, new Attrs());
 		}
 	}
