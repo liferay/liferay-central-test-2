@@ -224,8 +224,7 @@ public class LayoutStagingBackgroundTaskExecutor
 				}
 				else if ((file != null) && _log.isErrorEnabled()) {
 					_log.error(
-						"Temporary LAR file is kept at " +
-							file.getAbsolutePath());
+						"Kept temporary LAR file " + file.getAbsolutePath());
 				}
 
 				throw e;
@@ -236,7 +235,7 @@ public class LayoutStagingBackgroundTaskExecutor
 			}
 			else if ((file != null) && _log.isDebugEnabled()) {
 				_log.debug(
-					"Temporary LAR file is kept at " + file.getAbsolutePath());
+					"Kept temporary LAR file " + file.getAbsolutePath());
 			}
 
 			return missingReferences;
