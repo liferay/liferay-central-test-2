@@ -109,10 +109,6 @@
 					float: left;
 					margin: 5px;
 					position: static;
-
-					&.info-link-container {
-						float: right;
-					}
 				}
 
 				&.dropdown .dropdown-menu {
@@ -498,13 +494,6 @@
 		}
 	}
 
-	.page-customization-bar-container {
-		position: absolute;
-		right: 0;
-		top: 0;
-		width: 100%;
-	}
-
 	.staging-controls .staging-bar li.dropdown {
 		&.live-link.open .dropdown-menu {
 			&:after {
@@ -541,37 +530,5 @@
 		margin-top: -2px;
 		vertical-align: middle;
 		width: 16px;
-	}
-
-	.diamond {
-		display: none;
-	}
-
-	.info-button {
-		margin-right: 5px;
-		right: auto;
-		top: auto;
-
-		a {
-			color: #555;
-			display: block;
-			font-size: 20px;
-			padding: 10px 15px;
-			position: relative;
-
-			&:focus, &:hover {
-				background-color: #FFF;
-				color: #0077B3;
-				text-decoration: none;
-			}
-		}
-	}
-
-	.info-link-container {
-		width: auto;
-
-		&.open .info-button a {
-			background-color: #FFF;
-		}
 	}
 }
