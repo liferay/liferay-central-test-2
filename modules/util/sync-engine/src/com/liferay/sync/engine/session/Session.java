@@ -95,10 +95,9 @@ public class Session {
 
 		builder.setConnectTimeout(PropsValues.SYNC_HTTP_CONNECTION_TIMEOUT);
 
+		httpClientBuilder.setDefaultRequestConfig(builder.build());
 		httpClientBuilder.setMaxConnPerRoute(1000);
 		httpClientBuilder.setMaxConnTotal(1000);
-
-		httpClientBuilder.setDefaultRequestConfig(builder.build());
 		httpClientBuilder.setRoutePlanner(getHttpRoutePlanner());
 
 		_anonymousHttpClient = httpClientBuilder.build();
