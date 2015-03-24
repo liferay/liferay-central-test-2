@@ -516,6 +516,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 
 		private HibernatePortalCacheManager(CacheManager cacheManager) {
 			_cacheManager = cacheManager;
+
 			_name = cacheManager.getName();
 		}
 
