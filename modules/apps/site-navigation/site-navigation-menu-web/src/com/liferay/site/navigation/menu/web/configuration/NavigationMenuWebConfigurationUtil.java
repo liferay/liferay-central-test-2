@@ -37,6 +37,7 @@ public class NavigationMenuWebConfigurationUtil {
 
 	private static final Configuration _configuration =
 		ConfigurationFactoryUtil.getConfiguration(
-			NavigationMenuWebConfigurationUtil.class.getClassLoader(), "portlet");
+			NavigationMenuWebConfigurationUtil.class.getClassLoader(),
+			"portlet");
 
 }

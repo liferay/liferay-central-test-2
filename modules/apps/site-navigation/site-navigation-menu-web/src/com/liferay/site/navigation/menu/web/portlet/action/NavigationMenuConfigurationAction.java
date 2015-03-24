@@ -32,5 +32,6 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = ConfigurationAction.class
 )
-public class NavigationMenuConfigurationAction extends DefaultConfigurationAction {
+public class NavigationMenuConfigurationAction
+	extends DefaultConfigurationAction {
 }
