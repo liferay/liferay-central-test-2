@@ -79,11 +79,11 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public DLFileVersion cancelCheckOut(long fileEntryId)
 		throws PortalException {
 
-		boolean isLocked = lockLocalService.isLocked(
+		boolean locked = lockLocalService.isLocked(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		try {
-			if (isLocked && !hasFileEntryLock(fileEntryId) &&
+			if (locked && !hasFileEntryLock(fileEntryId) &&
 				!_hasOverrideCheckoutPermission(fileEntryId)) {
 
 				throw new PrincipalException();
