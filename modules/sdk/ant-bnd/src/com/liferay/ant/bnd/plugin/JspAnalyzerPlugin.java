@@ -52,7 +52,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
-		getManifestInfoFromClasspath(analyzer);
+		processManifest(analyzer);
 
 		Parameters parameters = OSGiHeader.parseHeader(
 			analyzer.getProperty("-jsp"));
@@ -250,7 +250,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 	}
 
-	protected void getManifestInfoFromClasspath(Analyzer analyzer) {
+	protected void processManifest(Analyzer analyzer) {
 		Packages packages = analyzer.getClasspathExports();
 
 		for (Jar jar : analyzer.getClasspath()) {
