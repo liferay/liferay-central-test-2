@@ -84,6 +84,28 @@ import org.slf4j.LoggerFactory;
  */
 public class Session {
 
+	public static HttpClient getAnonymousHttpClient() {
+		if (_anonymousHttpClient != null) {
+			return _anonymousHttpClient;
+		}
+
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+
+		RequestConfig.Builder builder = RequestConfig.custom();
+
+		builder.setConnectTimeout(PropsValues.SYNC_HTTP_CONNECTION_TIMEOUT);
+
+		httpClientBuilder.setMaxConnPerRoute(1000);
+		httpClientBuilder.setMaxConnTotal(1000);
+
+		httpClientBuilder.setDefaultRequestConfig(builder.build());
+		httpClientBuilder.setRoutePlanner(getHttpRoutePlanner());
+
+		_anonymousHttpClient = httpClientBuilder.build();
+
+		return _anonymousHttpClient;
+	}
+
 	public static HttpRoutePlanner getHttpRoutePlanner() {
 		if (_httpRoutePlanner != null) {
 			return _httpRoutePlanner;
@@ -457,6 +479,7 @@ public class Session {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		Session.class);
 
+	private static HttpClient _anonymousHttpClient;
 	private static HttpRoutePlanner _httpRoutePlanner;
 	private static final ScheduledExecutorService _scheduledExecutorService =
 		Executors.newSingleThreadScheduledExecutor();
