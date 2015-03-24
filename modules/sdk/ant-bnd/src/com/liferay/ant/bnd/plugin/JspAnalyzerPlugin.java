@@ -119,20 +119,20 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			}
 
 			if ((importX != -1) && (importY != -1)) {
-				String s = content.substring(importX, importY);
+				String contentFragment = content.substring(importX, importY);
 
-				int index = s.lastIndexOf('.');
+				int index = contentFragment.lastIndexOf('.');
 
 				if (index != -1) {
 					Packages packages = analyzer.getReferred();
 
-					String packageName = s.substring(0, index);
+					String packageName = contentFragment.substring(0, index);
 
 					PackageRef packageRef = analyzer.getPackageRef(packageName);
 
 					packages.put(packageRef, new Attrs());
 
-					addApiUses(s, packageRef, analyzer);
+					addApiUses(analyzer, contentFragment, packageRef);
 				}
 			}
 
@@ -141,15 +141,15 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	}
 
 	protected void addApiUses(
-		String s, PackageRef packageRef, Analyzer analyzer) {
+		Analyzer analyzer, String content, PackageRef packageRef) {
 
 		for (Jar jar : analyzer.getClasspath()) {
-			addJarApiUses(jar, s, packageRef, analyzer);
+			addJarApiUses(analyzer, content, packageRef, jar);
 		}
 	}
 
 	protected void addJarApiUses(
-		Jar jar, String s, PackageRef packageRef, Analyzer analyzer) {
+		Analyzer analyzer, String content, PackageRef packageRef, Jar jar) {
 
 		Map<String, Map<String, Resource>> directories = jar.getDirectories();
 
@@ -160,7 +160,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			return;
 		}
 
-		if (s.endsWith("*")) {
+		if (content.endsWith("*")) {
 			for (Entry<String, Resource> entry : resourceMap.entrySet()) {
 				String key = entry.getKey();
 
@@ -168,16 +168,16 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 					continue;
 				}
 
-				addResourceApiUses(key, entry.getValue(), analyzer);
+				addResourceApiUses(analyzer, key, entry.getValue());
 			}
 		}
 		else {
-			String fqnToPath = Descriptors.fqnToPath(s);
+			String fqnToPath = Descriptors.fqnToPath(content);
 
 			if (resourceMap.containsKey(fqnToPath)) {
 				Resource resource = resourceMap.get(fqnToPath);
 
-				addResourceApiUses(s, resource, analyzer);
+				addResourceApiUses(analyzer, content, resource);
 			}
 		}
 	}
@@ -230,7 +230,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	}
 
 	protected void addResourceApiUses(
-		String fqnToPath, Resource resource, Analyzer analyzer) {
+		Analyzer analyzer, String fqnToPath, Resource resource) {
 
 		Clazz clazz = null;
 
