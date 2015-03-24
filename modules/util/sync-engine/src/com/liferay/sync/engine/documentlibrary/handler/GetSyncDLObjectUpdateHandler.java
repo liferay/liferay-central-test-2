@@ -112,7 +112,11 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 				}
 
 				if (!_firedProcessingState) {
-					fireProcessingState();
+					SyncEngineUtil.fireSyncEngineStateChanged(
+						getSyncAccountId(),
+						SyncEngineUtil.SYNC_ENGINE_STATE_PROCESSING);
+
+					_firedProcessingState = true;
 				}
 			}
 
@@ -122,7 +126,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 					getSyncAccountId());
 
 				SyncSite syncSite = SyncSiteService.fetchSyncSite(
-					(Long)event.getParameterValue("repositoryId"),
+					(Long) event.getParameterValue("repositoryId"),
 					getSyncAccountId());
 
 				if ((syncAccount == null) ||
@@ -139,13 +143,19 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 
 			protected void doCancel() {
 				if (_firedProcessingState) {
-					fireProcessedState();
+					SyncEngineUtil.fireSyncEngineStateChanged(
+						getSyncAccountId(),
+						SyncEngineUtil.SYNC_ENGINE_STATE_PROCESSED);
+
+					_firedProcessingState = false;
 				}
 
 				event.cancel();
 
 				_scheduledFuture.cancel(true);
 			}
+
+			private boolean _firedProcessingState;
 
 		};
 
@@ -298,20 +308,6 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 		}
 	}
 
-	protected void fireProcessedState() {
-		SyncEngineUtil.fireSyncEngineStateChanged(
-			getSyncAccountId(), SyncEngineUtil.SYNC_ENGINE_STATE_PROCESSED);
-
-		_firedProcessingState = false;
-	}
-
-	protected void fireProcessingState() {
-		SyncEngineUtil.fireSyncEngineStateChanged(
-			getSyncAccountId(), SyncEngineUtil.SYNC_ENGINE_STATE_PROCESSING);
-
-		_firedProcessingState = true;
-	}
-
 	protected boolean isIgnoredFilePath(
 		SyncFile syncFile, String filePathName) {
 
@@ -394,7 +390,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 
 	@Override
 	protected void processFinally() {
-		_scheduledFuture.cancel(true);
+		_scheduledFuture.cancel(false);
 	}
 
 	protected void processSyncFile(SyncFile targetSyncFile) {
@@ -584,7 +580,6 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		GetSyncDLObjectUpdateHandler.class);
 
-	private static boolean _firedProcessingState;
 	private static final ScheduledExecutorService _scheduledExecutorService =
 		Executors.newScheduledThreadPool(5);
 	private static SyncDLObjectUpdate _syncDLObjectUpdate;
