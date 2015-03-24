@@ -4,8 +4,7 @@
 	<import file="build-test.xml" />
 
 	<macrodef name="update-tck-war-version">
-		<attribute name="filename" />
-		<attribute name="version" default="2.4" />
+		<attribute name="tck.war.file" />
 
 		<sequential>
 			<tstamp>
@@ -14,7 +13,7 @@
 
 			<mkdir dir="${tstamp.value}" />
 
-			<unwar dest="${tstamp.value}" src="@{filename}">
+			<unwar dest="${tstamp.value}" src="@{tck.war.file}">
 				<patternset>
 					<include name="WEB-INF/web.xml" />
 				</patternset>
@@ -29,10 +28,10 @@
 ]]></replacetoken>
 					<replacevalue></replacevalue>
 				</replacefilter>
-				<replacefilter token="&lt;web-app&gt;" value="&lt;web-app version=&quot;@{version}&quot;&gt;" />
+				<replacefilter token="&lt;web-app&gt;" value="&lt;web-app version=&quot;2.4&quot;&gt;" />
 			</replace>
 
-			<zip destfile="@{filename}" update="true">
+			<zip destfile="@{tck.war.file}" update="true">
 				<fileset dir="${tstamp.value}" />
 			</zip>
 
@@ -60,26 +59,25 @@
 			replace="/"
 		/>
 
-		<fileset
-			dir="tools/tck/dist/${test.directory}"
-			id="tck-wars"
-			includes="**/*.war"
-		/>
-
-		<for param="file">
+		<for param="tck.war.file">
 			<path>
-				<fileset refid="tck-wars" />
+				<fileset
+					dir="tools/tck/dist/${test.directory}"
+					includes="**/*.war"
+				/>
 			</path>
 			<sequential>
 				<update-tck-war-version
-					filename="@{file}"
+					tck.war.file="@{tck.war.file}"
+				/>
+
+				<copy
+					file="@{tck.war.file}"
+					flatten="true"
+					todir="${liferay.home}/deploy"
 				/>
 			</sequential>
 		</for>
-
-		<copy todir="${liferay.home}/deploy" flatten="true">
-			<fileset refid="tck-wars" />
-		</copy>
 	</target>
 
 	<target name="prepare-tck">
