@@ -52,7 +52,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
-		processManifest(analyzer);
+		addManifestPackageImports(analyzer);
 
 		Parameters parameters = OSGiHeader.parseHeader(
 			analyzer.getProperty("-jsp"));
@@ -82,7 +82,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 					String jsp = IO.collect(
 						resource.openInputStream(), "UTF-8");
 
-					analyzePackageImports(analyzer, jsp);
+					addApiUses(analyzer, jsp);
 					addTaglibRequirements(analyzer, jsp);
 
 					matches = true;
@@ -91,13 +91,15 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 
 		if (matches) {
-			addPackageImports(analyzer, _REQUIRED_PACKAGE_NAMES);
+			addRequiredPackageImports(analyzer, _REQUIRED_PACKAGE_NAMES);
 		}
 
 		return false;
 	}
 
-	protected void addPackageImports(Analyzer analyzer, String[] packageNames) {
+	protected void addRequiredPackageImports(
+		Analyzer analyzer, String[] packageNames) {
+
 		Packages packages = analyzer.getReferred();
 
 		for (String packageName : packageNames) {
@@ -130,7 +132,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	protected void addTaglibRequirements(Analyzer analyzer, String content) {
 		Set<String> taglibRequirements = new TreeSet<String>();
 
-		for (String uri : analyzeTagLibURIs(content)) {
+		for (String uri : getTaglibURIs(content)) {
 			if (Arrays.binarySearch(_JSTL_CORE_URIS, uri) < 0) {
 				addTaglibRequirement(taglibRequirements, uri);
 			}
@@ -164,7 +166,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			Constants.REQUIRE_CAPABILITY, Strings.join(taglibRequirements));
 	}
 
-	protected void analyzePackageImports(Analyzer analyzer, String content) {
+	protected void addApiUses(Analyzer analyzer, String content) {
 		int contentX = -1;
 		int contentY = content.length();
 
@@ -199,7 +201,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 					packages.put(packageRef, new Attrs());
 
-					findApiUses(s, packageRef, analyzer, packages);
+					addApiUses(s, packageRef, analyzer, packages);
 				}
 			}
 
@@ -207,7 +209,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 	}
 
-	protected Set<String> analyzeTagLibURIs(String content) {
+	protected Set<String> getTaglibURIs(String content) {
 		int contentX = -1;
 		int contentY = content.length();
 
@@ -242,15 +244,15 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return taglibURis;
 	}
 
-	protected void findApiUses(
+	protected void addApiUses(
 		String s, PackageRef packageRef, Analyzer analyzer, Packages packages) {
 
 		for (Jar jar : analyzer.getClasspath()) {
-			processJar(jar, s, packageRef, analyzer, packages);
+			addJarApiUses(jar, s, packageRef, analyzer, packages);
 		}
 	}
 
-	protected void processJar(
+	protected void addJarApiUses(
 		Jar jar, String s, PackageRef packageRef, Analyzer analyzer,
 		Packages packages) {
 
@@ -271,7 +273,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 					continue;
 				}
 
-				processResource(key, entry.getValue(), analyzer, packages);
+				addResourceApiUses(key, entry.getValue(), analyzer, packages);
 			}
 		}
 		else {
@@ -280,12 +282,12 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			if (resourceMap.containsKey(fqnToPath)) {
 				Resource resource = resourceMap.get(fqnToPath);
 
-				processResource(s, resource, analyzer, packages);
+				addResourceApiUses(s, resource, analyzer, packages);
 			}
 		}
 	}
 
-	protected void processManifest(Analyzer analyzer) {
+	protected void addManifestPackageImports(Analyzer analyzer) {
 		Packages packages = analyzer.getClasspathExports();
 
 		for (Jar jar : analyzer.getClasspath()) {
@@ -316,7 +318,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 	}
 
-	protected void processResource(
+	protected void addResourceApiUses(
 		String fqnToPath, Resource resource, Analyzer analyzer,
 		Packages packages) {
 
