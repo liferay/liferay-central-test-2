@@ -70,10 +70,8 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 	public GetSyncDLObjectUpdateHandler(final Event event) {
 		super(event);
 
-		GetSyncContextEvent getSyncContextHeartbeatEvent =
-			new GetSyncContextEvent(
-				event.getSyncAccountId(),
-				Collections.<String, Object>emptyMap()) {
+		GetSyncContextEvent getSyncContextEvent = new GetSyncContextEvent(
+			event.getSyncAccountId(), Collections.<String, Object>emptyMap()) {
 
 			@Override
 			public void run() {
@@ -128,7 +126,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 		};
 
 		_scheduledFuture = _scheduledExecutorService.scheduleAtFixedRate(
-			getSyncContextHeartbeatEvent, 15, 5, TimeUnit.SECONDS);
+			getSyncContextEvent, 15, 5, TimeUnit.SECONDS);
 	}
 
 	@Override
