@@ -199,7 +199,7 @@ public class Session {
 	}
 
 	public void executeAsynchronousGet(
-			final String urlPath, final Handler<Void> handler)
+			final HttpGet httpGet, final Handler<Void> handler)
 		throws Exception {
 
 		Runnable runnable = new Runnable() {
@@ -207,7 +207,7 @@ public class Session {
 			@Override
 			public void run() {
 				try {
-					executeGet(urlPath, handler);
+					executeGet(httpGet, handler);
 				}
 				catch (Exception e) {
 					handler.handleException(e);
@@ -220,7 +220,7 @@ public class Session {
 	}
 
 	public void executeAsynchronousPost(
-			final String urlPath, final Map<String, Object> parameters,
+			final HttpPost httpPost, final Map<String, Object> parameters,
 			final Handler<Void> handler)
 		throws Exception {
 
@@ -229,7 +229,7 @@ public class Session {
 			@Override
 			public void run() {
 				try {
-					executePost(urlPath, parameters, handler);
+					executePost(httpPost, parameters, handler);
 				}
 				catch (Exception e) {
 					handler.handleException(e);
@@ -241,18 +241,14 @@ public class Session {
 		_executorService.execute(runnable);
 	}
 
-	public HttpResponse executeGet(String urlPath) throws Exception {
-		HttpGet httpGet = new HttpGet(urlPath);
-
+	public HttpResponse executeGet(HttpGet httpGet) throws Exception {
 		httpGet.setHeader("Sync-JWT", _token);
 
 		return _httpClient.execute(_httpHost, httpGet, getBasicHttpContext());
 	}
 
-	public <T> T executeGet(String urlPath, Handler<? extends T> handler)
+	public <T> T executeGet(HttpGet httpGet, Handler<? extends T> handler)
 		throws Exception {
-
-		HttpGet httpGet = new HttpGet(urlPath);
 
 		httpGet.setHeader("Sync-JWT", _token);
 
@@ -261,10 +257,8 @@ public class Session {
 	}
 
 	public HttpResponse executePost(
-			String urlPath, Map<String, Object> parameters)
+			HttpPost httpPost, Map<String, Object> parameters)
 		throws Exception {
-
-		HttpPost httpPost = new HttpPost(urlPath);
 
 		httpPost.setHeader("Sync-JWT", _token);
 
@@ -274,11 +268,9 @@ public class Session {
 	}
 
 	public <T> T executePost(
-			String urlPath, Map<String, Object> parameters,
+			HttpPost httpPost, Map<String, Object> parameters,
 			Handler<? extends T> handler)
 		throws Exception {
-
-		HttpPost httpPost = new HttpPost(urlPath);
 
 		httpPost.setHeader("Sync-JWT", _token);
 
