@@ -1,3 +1,94 @@
+.dockbar {
+	.nav {
+		&.staging-nav-items {
+			margin: 0;
+			position: static;
+
+			li.dropdown.active > .dropdown-toggle {
+				display: block;
+			}
+
+			.staging-link {
+				position: static;
+			}
+		}
+
+		> li.staging-toggle {
+			&.active {
+				> a {
+					background-color: $navbar-default-link-active-bg;
+				}
+
+				a, > a {
+					color: $navbar-default-link-active-color;
+				}
+			}
+
+			a {
+				text-decoration: none;
+
+				&:focus {
+					z-index: 1;
+				}
+			}
+
+			.dropdown-menu a {
+				color: $dropdown-link-color;
+
+				@include respond-to(phone, tablet) {
+					color: $navbar-default-link-color;
+				}
+
+				&:focus, &:hover {
+					color: $link-hover-color;
+				}
+
+				&.btn-success {
+					color: $btn-success-color;
+				}
+			}
+
+			.dropdown-toggle:focus {
+				outline: thin dotted;
+				outline: 5px auto -webkit-focus-ring-color;
+				outline-offset: -2px;
+			}
+		}
+
+		.staging-controls {
+			position: static;
+		}
+	}
+
+	.staging-controls .staging-bar li.dropdown {
+		&.live-link.open .dropdown-menu {
+			&:after {
+				left: 73px;
+			}
+
+			&:before {
+				left: 72px;
+			}
+		}
+
+		.dropdown-menu {
+			left: 0;
+			margin-left: 10px;
+			width: 100%;
+		}
+	}
+
+	.staging-bar {
+		&, li.staging-toggle {
+			position: static;
+		}
+
+		.layout-revision-info {
+			max-width: 50%
+		}
+	}
+}
+
 .variation-selector {
 	display: block;
 	font-size: 1.2em;
