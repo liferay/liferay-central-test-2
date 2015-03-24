@@ -492,6 +492,10 @@
 
 	.nav-navigation {
 		float: left;
+
+		.dropdown-menu {
+			box-shadow: none;
+		}
 	}
 
 	.page-customization-bar-container {

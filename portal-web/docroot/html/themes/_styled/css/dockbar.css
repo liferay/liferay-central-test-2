@@ -1,5 +1,6 @@
 @import "bourbon";
 @import "mixins";
+
 @import "aui/bootstrap/variables";
 @import "aui_variables";
 
@@ -9,29 +10,10 @@
 @import "dockbar/split";
 
 @import "dockbar/misc";
-
 @import "dockbar/staging";
 
 @import "dockbar/add_panel";
 
 @import "dockbar/menus";
 @import "dockbar/page_customization";
-
-
-/* -------- Extras -------- */
-
-.dockbar {
-	.container, .container-fluid {
-		> .nav > li.info-items {
-			@include background-image(none);
-		}
-	}
-
-	.nav-navigation {
-		.dropdown-menu {
-			box-shadow: none;
-		}
-	}
-}
-
 @import "dockbar/responsive";
