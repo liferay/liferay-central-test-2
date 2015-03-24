@@ -97,75 +97,6 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return false;
 	}
 
-	protected void addRequiredPackageImports(
-		Analyzer analyzer, String[] packageNames) {
-
-		Packages packages = analyzer.getReferred();
-
-		for (String packageName : packageNames) {
-			PackageRef packageRef = analyzer.getPackageRef(packageName);
-
-			Matcher matcher = _packagePattern.matcher(packageRef.getFQN());
-
-			if (matcher.matches() && !packages.containsKey(packageRef)) {
-				packages.put(packageRef, new Attrs());
-			}
-		}
-	}
-
-	protected void addTaglibRequirement(
-		Set<String> taglibRequirements, String uri) {
-
-		Parameters parameters = new Parameters();
-
-		Attrs attrs = new Attrs();
-
-		attrs.put(
-			Constants.FILTER_DIRECTIVE,
-			"\"(&(osgi.extender=jsp.taglib)(uri=" + uri + "))\"");
-
-		parameters.put("osgi.extender", attrs);
-
-		taglibRequirements.add(parameters.toString());
-	}
-
-	protected void addTaglibRequirements(Analyzer analyzer, String content) {
-		Set<String> taglibRequirements = new TreeSet<String>();
-
-		for (String uri : getTaglibURIs(content)) {
-			if (Arrays.binarySearch(_JSTL_CORE_URIS, uri) < 0) {
-				addTaglibRequirement(taglibRequirements, uri);
-			}
-		}
-
-		if (taglibRequirements.isEmpty()) {
-			return;
-		}
-
-		String value = analyzer.getProperty(Constants.REQUIRE_CAPABILITY);
-
-		if (value != null) {
-			Parameters parameters = OSGiHeader.parseHeader(value);
-
-			for (Entry<String, Attrs> entry : parameters.entrySet()) {
-				StringBuilder sb = new StringBuilder(entry.getKey());
-
-				Attrs attrs = entry.getValue();
-
-				if (attrs != null) {
-					sb.append(";");
-
-					attrs.append(sb);
-				}
-
-				taglibRequirements.add(sb.toString());
-			}
-		}
-
-		analyzer.setProperty(
-			Constants.REQUIRE_CAPABILITY, Strings.join(taglibRequirements));
-	}
-
 	protected void addApiUses(Analyzer analyzer, String content) {
 		int contentX = -1;
 		int contentY = content.length();
@@ -207,41 +138,6 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 			contentY -= 3;
 		}
-	}
-
-	protected Set<String> getTaglibURIs(String content) {
-		int contentX = -1;
-		int contentY = content.length();
-
-		Set<String> taglibURis = new HashSet<String>();
-
-		while (true) {
-			contentX = content.lastIndexOf("<%@", contentY);
-
-			if (contentX == -1) {
-				break;
-			}
-
-			contentY = contentX;
-
-			int importX = content.indexOf("uri=\"", contentY);
-			int importY = -1;
-
-			if (importX != -1) {
-				importX = importX + "uri=\"".length();
-				importY = content.indexOf("\"", importX);
-			}
-
-			if ((importX != -1) && (importY != -1)) {
-				String s = content.substring(importX, importY);
-
-				taglibURis.add(s);
-			}
-
-			contentY -= 3;
-		}
-
-		return taglibURis;
 	}
 
 	protected void addApiUses(
@@ -318,6 +214,22 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 	}
 
+	protected void addRequiredPackageImports(
+		Analyzer analyzer, String[] packageNames) {
+
+		Packages packages = analyzer.getReferred();
+
+		for (String packageName : packageNames) {
+			PackageRef packageRef = analyzer.getPackageRef(packageName);
+
+			Matcher matcher = _packagePattern.matcher(packageRef.getFQN());
+
+			if (matcher.matches() && !packages.containsKey(packageRef)) {
+				packages.put(packageRef, new Attrs());
+			}
+		}
+	}
+
 	protected void addResourceApiUses(
 		String fqnToPath, Resource resource, Analyzer analyzer,
 		Packages packages) {
@@ -345,6 +257,94 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		for (PackageRef packageRef : packageRefs) {
 			packages.put(packageRef, new Attrs());
 		}
+	}
+
+	protected void addTaglibRequirement(
+		Set<String> taglibRequirements, String uri) {
+
+		Parameters parameters = new Parameters();
+
+		Attrs attrs = new Attrs();
+
+		attrs.put(
+			Constants.FILTER_DIRECTIVE,
+			"\"(&(osgi.extender=jsp.taglib)(uri=" + uri + "))\"");
+
+		parameters.put("osgi.extender", attrs);
+
+		taglibRequirements.add(parameters.toString());
+	}
+
+	protected void addTaglibRequirements(Analyzer analyzer, String content) {
+		Set<String> taglibRequirements = new TreeSet<String>();
+
+		for (String uri : getTaglibURIs(content)) {
+			if (Arrays.binarySearch(_JSTL_CORE_URIS, uri) < 0) {
+				addTaglibRequirement(taglibRequirements, uri);
+			}
+		}
+
+		if (taglibRequirements.isEmpty()) {
+			return;
+		}
+
+		String value = analyzer.getProperty(Constants.REQUIRE_CAPABILITY);
+
+		if (value != null) {
+			Parameters parameters = OSGiHeader.parseHeader(value);
+
+			for (Entry<String, Attrs> entry : parameters.entrySet()) {
+				StringBuilder sb = new StringBuilder(entry.getKey());
+
+				Attrs attrs = entry.getValue();
+
+				if (attrs != null) {
+					sb.append(";");
+
+					attrs.append(sb);
+				}
+
+				taglibRequirements.add(sb.toString());
+			}
+		}
+
+		analyzer.setProperty(
+			Constants.REQUIRE_CAPABILITY, Strings.join(taglibRequirements));
+	}
+
+	protected Set<String> getTaglibURIs(String content) {
+		int contentX = -1;
+		int contentY = content.length();
+
+		Set<String> taglibURis = new HashSet<String>();
+
+		while (true) {
+			contentX = content.lastIndexOf("<%@", contentY);
+
+			if (contentX == -1) {
+				break;
+			}
+
+			contentY = contentX;
+
+			int importX = content.indexOf("uri=\"", contentY);
+			int importY = -1;
+
+			if (importX != -1) {
+				importX = importX + "uri=\"".length();
+				importY = content.indexOf("\"", importX);
+			}
+
+			if ((importX != -1) && (importY != -1)) {
+				String s = content.substring(importX, importY);
+
+				taglibURis.add(s);
+			}
+
+			contentY -= 3;
+		}
+
+		return taglibURis;
 	}
 
 	private static final String[] _JSTL_CORE_URIS = new String[] {
