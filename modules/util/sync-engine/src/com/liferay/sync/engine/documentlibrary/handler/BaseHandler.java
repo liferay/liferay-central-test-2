@@ -72,34 +72,7 @@ public class BaseHandler implements Handler<Void> {
 			_logger.debug("Handling exception {}", e.toString());
 		}
 
-		if (e instanceof FileNotFoundException) {
-			SyncFile syncFile = (SyncFile)getParameterValue("syncFile");
-
-			String message = e.getMessage();
-
-			if (message.contains("The process cannot access the file")) {
-				if (_logger.isTraceEnabled()) {
-					_logger.trace(
-						"Retrying event {} for sync file {}", _event, syncFile);
-				}
-
-				ExecutorService executorService =
-					SyncEngine.getEventProcessorExecutorService();
-
-				executorService.execute(_event);
-			}
-			else if (syncFile.getVersion() == null) {
-				SyncFileService.deleteSyncFile(syncFile, false);
-			}
-		}
-		else if ((e instanceof ConnectTimeoutException) ||
-				 (e instanceof HttpHostConnectException) ||
-				 (e instanceof SocketTimeoutException) ||
-				 (e instanceof UnknownHostException)) {
-
-			retryServerConnection(SyncAccount.UI_EVENT_CONNECTION_EXCEPTION);
-		}
-		else if (e instanceof ClientProtocolException) {
+		if (e instanceof ClientProtocolException) {
 			if (e instanceof HttpResponseException) {
 				HttpResponseException hre = (HttpResponseException)e;
 
@@ -118,6 +91,33 @@ public class BaseHandler implements Handler<Void> {
 			// extraneous HttpStatus.SC_UNAUTHORIZED exceptions.
 
 			retryServerConnection(SyncAccount.UI_EVENT_CONNECTION_EXCEPTION);
+		}
+		else if ((e instanceof ConnectTimeoutException) ||
+				 (e instanceof HttpHostConnectException) ||
+				 (e instanceof SocketTimeoutException) ||
+				 (e instanceof UnknownHostException)) {
+
+			retryServerConnection(SyncAccount.UI_EVENT_CONNECTION_EXCEPTION);
+		}
+		else if (e instanceof FileNotFoundException) {
+			SyncFile syncFile = (SyncFile)getParameterValue("syncFile");
+
+			String message = e.getMessage();
+
+			if (message.contains("The process cannot access the file")) {
+				if (_logger.isTraceEnabled()) {
+					_logger.trace(
+						"Retrying event {} for sync file {}", _event, syncFile);
+				}
+
+				ExecutorService executorService =
+					SyncEngine.getEventProcessorExecutorService();
+
+				executorService.execute(_event);
+			}
+			else if (syncFile.getVersion() == null) {
+				SyncFileService.deleteSyncFile(syncFile, false);
+			}
 		}
 		else if ((e instanceof NoHttpResponseException) ||
 				 (e instanceof SocketException)) {
