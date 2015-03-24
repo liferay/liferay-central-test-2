@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.form.renderer.impl;
+package com.liferay.dynamic.data.mapping.form.renderer.internal;
 
 import aQute.bnd.annotation.component.Deactivate;
 

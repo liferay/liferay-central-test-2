@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.form.renderer.impl;
 
+import com.liferay.dynamic.data.mapping.form.renderer.internal.DDMFormLayoutTransformer;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayoutColumn;
