@@ -257,19 +257,22 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 			try {
 				Manifest manifest = jar.getManifest();
 
-				if (manifest != null) {
-					Domain domain = Domain.domain(manifest);
-					Parameters parameters = domain.getExportPackage();
+				if (manifest == null) {
+					continue;
+				}
 
-					for (Entry<String, Attrs> entry : parameters.entrySet()) {
-						PackageRef packageRef = analyzer.getPackageRef(
-							entry.getKey());
+				Domain domain = Domain.domain(manifest);
 
-						Attrs attrs = packages.get(packageRef);
+				Parameters parameters = domain.getExportPackage();
 
-						if (attrs.isEmpty()) {
-							packages.put(packageRef, entry.getValue());
-						}
+				for (Entry<String, Attrs> entry : parameters.entrySet()) {
+					PackageRef packageRef = analyzer.getPackageRef(
+						entry.getKey());
+
+					Attrs attrs = packages.get(packageRef);
+
+					if (attrs.isEmpty()) {
+						packages.put(packageRef, entry.getValue());
 					}
 				}
 			}
