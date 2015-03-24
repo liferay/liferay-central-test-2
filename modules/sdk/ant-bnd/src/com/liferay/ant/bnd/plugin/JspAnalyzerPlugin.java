@@ -250,37 +250,6 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		}
 	}
 
-	protected void processManifest(Analyzer analyzer) {
-		Packages packages = analyzer.getClasspathExports();
-
-		for (Jar jar : analyzer.getClasspath()) {
-			try {
-				Manifest manifest = jar.getManifest();
-
-				if (manifest == null) {
-					continue;
-				}
-
-				Domain domain = Domain.domain(manifest);
-
-				Parameters parameters = domain.getExportPackage();
-
-				for (Entry<String, Attrs> entry : parameters.entrySet()) {
-					PackageRef packageRef = analyzer.getPackageRef(
-						entry.getKey());
-
-					Attrs attrs = packages.get(packageRef);
-
-					if (attrs.isEmpty()) {
-						packages.put(packageRef, entry.getValue());
-					}
-				}
-			}
-			catch (Exception e) {
-			}
-		}
-	}
-
 	protected void processJar(
 		Jar jar, String s, PackageRef packageRef, Analyzer analyzer,
 		Packages packages) {
@@ -310,6 +279,37 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 				Resource resource = resourceMap.get(fqnToPath);
 
 				processResource(s, resource, analyzer, packages);
+			}
+		}
+	}
+
+	protected void processManifest(Analyzer analyzer) {
+		Packages packages = analyzer.getClasspathExports();
+
+		for (Jar jar : analyzer.getClasspath()) {
+			try {
+				Manifest manifest = jar.getManifest();
+
+				if (manifest == null) {
+					continue;
+				}
+
+				Domain domain = Domain.domain(manifest);
+
+				Parameters parameters = domain.getExportPackage();
+
+				for (Entry<String, Attrs> entry : parameters.entrySet()) {
+					PackageRef packageRef = analyzer.getPackageRef(
+						entry.getKey());
+
+					Attrs attrs = packages.get(packageRef);
+
+					if (attrs.isEmpty()) {
+						packages.put(packageRef, entry.getValue());
+					}
+				}
+			}
+			catch (Exception e) {
 			}
 		}
 	}
