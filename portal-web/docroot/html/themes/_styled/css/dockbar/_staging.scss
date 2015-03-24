@@ -1,18 +1,5 @@
 .dockbar {
 	.nav {
-		&.staging-nav-items {
-			margin: 0;
-			position: static;
-
-			li.dropdown.active > .dropdown-toggle {
-				display: block;
-			}
-
-			.staging-link {
-				position: static;
-			}
-		}
-
 		> li.staging-toggle {
 			&.active {
 				> a {
