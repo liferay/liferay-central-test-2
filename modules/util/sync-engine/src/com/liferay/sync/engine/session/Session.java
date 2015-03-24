@@ -190,6 +190,73 @@ public class Session {
 			runnable, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
+	public void asynchronousExecute(
+			final HttpGet httpGet, final Handler<Void> handler)
+		throws Exception {
+
+		Runnable runnable = new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					execute(httpGet, handler);
+				}
+				catch (Exception e) {
+					handler.handleException(e);
+				}
+			}
+
+		};
+
+		_executorService.execute(runnable);
+	}
+
+	public void asynchronousExecute(
+			final HttpPost httpPost, final Map<String, Object> parameters,
+			final Handler<Void> handler)
+		throws Exception {
+
+		Runnable runnable = new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					execute(httpPost, parameters, handler);
+				}
+				catch (Exception e) {
+					handler.handleException(e);
+				}
+			}
+
+		};
+
+		_executorService.execute(runnable);
+	}
+
+	public HttpResponse execute(
+			HttpPost httpPost, Map<String, Object> parameters)
+		throws Exception {
+
+		httpPost.setHeader("Sync-JWT", _token);
+
+		_buildHttpPostBody(httpPost, parameters);
+
+		return _httpClient.execute(_httpHost, httpPost, getBasicHttpContext());
+	}
+
+	public <T> T execute(
+			HttpPost httpPost, Map<String, Object> parameters,
+			Handler<? extends T> handler)
+		throws Exception {
+
+		httpPost.setHeader("Sync-JWT", _token);
+
+		_buildHttpPostBody(httpPost, parameters);
+
+		return _httpClient.execute(
+			_httpHost, httpPost, handler, getBasicHttpContext());
+	}
+
 	public HttpResponse execute(HttpRequest httpRequest) throws Exception {
 		return execute(httpRequest, getBasicHttpContext());
 	}
@@ -218,88 +285,6 @@ public class Session {
 		httpRequest.setHeader("Sync-JWT", _token);
 
 		return _httpClient.execute(_httpHost, httpRequest, httpContext);
-	}
-
-	public void executeAsynchronousGet(
-			final HttpGet httpGet, final Handler<Void> handler)
-		throws Exception {
-
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					executeGet(httpGet, handler);
-				}
-				catch (Exception e) {
-					handler.handleException(e);
-				}
-			}
-
-		};
-
-		_executorService.execute(runnable);
-	}
-
-	public void executeAsynchronousPost(
-			final HttpPost httpPost, final Map<String, Object> parameters,
-			final Handler<Void> handler)
-		throws Exception {
-
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					executePost(httpPost, parameters, handler);
-				}
-				catch (Exception e) {
-					handler.handleException(e);
-				}
-			}
-
-		};
-
-		_executorService.execute(runnable);
-	}
-
-	public HttpResponse executeGet(HttpGet httpGet) throws Exception {
-		httpGet.setHeader("Sync-JWT", _token);
-
-		return _httpClient.execute(_httpHost, httpGet, getBasicHttpContext());
-	}
-
-	public <T> T executeGet(HttpGet httpGet, Handler<? extends T> handler)
-		throws Exception {
-
-		httpGet.setHeader("Sync-JWT", _token);
-
-		return _httpClient.execute(
-			_httpHost, httpGet, handler, getBasicHttpContext());
-	}
-
-	public HttpResponse executePost(
-			HttpPost httpPost, Map<String, Object> parameters)
-		throws Exception {
-
-		httpPost.setHeader("Sync-JWT", _token);
-
-		_buildHttpPostBody(httpPost, parameters);
-
-		return _httpClient.execute(_httpHost, httpPost, getBasicHttpContext());
-	}
-
-	public <T> T executePost(
-			HttpPost httpPost, Map<String, Object> parameters,
-			Handler<? extends T> handler)
-		throws Exception {
-
-		httpPost.setHeader("Sync-JWT", _token);
-
-		_buildHttpPostBody(httpPost, parameters);
-
-		return _httpClient.execute(
-			_httpHost, httpPost, handler, getBasicHttpContext());
 	}
 
 	public BasicHttpContext getBasicHttpContext() {

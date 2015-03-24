@@ -85,7 +85,7 @@ public abstract class BaseEvent implements Event {
 
 		_httpPost = new HttpPost(urlPath);
 
-		session.executePost(_httpPost, parameters, handler);
+		session.execute(_httpPost, parameters, handler);
 	}
 
 	public void executeGet(String urlPath) throws Exception {
@@ -96,7 +96,7 @@ public abstract class BaseEvent implements Event {
 
 		_httpGet = new HttpGet(syncAccount.getUrl() + urlPath);
 
-		session.executeGet(_httpGet, _handler);
+		session.execute(_httpGet, _handler);
 	}
 
 	public void executePost(String urlPath, Map<String, Object> parameters)
@@ -110,7 +110,7 @@ public abstract class BaseEvent implements Event {
 		_httpPost = new HttpPost(
 			syncAccount.getUrl() + "/api/jsonws" + urlPath);
 
-		session.executePost(_httpPost, parameters, _handler);
+		session.execute(_httpPost, parameters, _handler);
 	}
 
 	@Override
