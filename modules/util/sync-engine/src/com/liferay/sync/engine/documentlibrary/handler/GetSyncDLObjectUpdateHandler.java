@@ -70,9 +70,9 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 	public GetSyncDLObjectUpdateHandler(final Event event) {
 		super(event);
 
-		GetSyncContextEvent getSyncContextHeartbeatEvent = 
+		GetSyncContextEvent getSyncContextHeartbeatEvent =
 			new GetSyncContextEvent(
-				event.getSyncAccountId(), 
+				event.getSyncAccountId(),
 				Collections.<String, Object>emptyMap()) {
 
 			@Override
