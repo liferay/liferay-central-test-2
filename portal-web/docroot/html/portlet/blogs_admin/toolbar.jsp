@@ -43,7 +43,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
 				var="permissionsURL"
 				windowState="<%= LiferayWindowState.POP_UP.toString() %>"
-				/>
+			/>
 
 			<aui:nav-item href="<%= permissionsURL %>" label="permissions" title="edit-permissions" useDialog="<%= true %>" />
 		</c:if>
