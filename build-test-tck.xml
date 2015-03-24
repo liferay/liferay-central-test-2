@@ -3,21 +3,26 @@
 <project name="portal-test-tck" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<macrodef name="replace-war-version">
+	<macrodef name="update-tck-war-version">
 		<attribute name="filename" />
 		<attribute name="version" default="2.4" />
-		<sequential>
-			<mkdir dir="${basedir}/temp" />
 
-			<unwar src="@{filename}" dest="${basedir}/temp">
+		<sequential>
+			<tstamp>
+				<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+			</tstamp>
+
+			<mkdir dir="${tstamp.value}" />
+
+			<unwar dest="${tstamp.value}" src="@{filename}">
 				<patternset>
 					<include name="WEB-INF/web.xml" />
 				</patternset>
 			</unwar>
 
-			<fixcrlf file="${basedir}/temp/WEB-INF/web.xml" eol="lf" />
+			<fixcrlf file="${tstamp.value}/WEB-INF/web.xml" eol="lf" />
 
-			<replace file="${basedir}/temp/WEB-INF/web.xml">
+			<replace file="${tstamp.value}/WEB-INF/web.xml">
 				<replacefilter>
 					<replacetoken><![CDATA[
 <!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN' 'http://java.sun.com/dtd/web-app_2_3.dtd'>
@@ -28,10 +33,10 @@
 			</replace>
 
 			<zip destfile="@{filename}" update="true">
-				<fileset dir="${basedir}/temp" />
+				<fileset dir="${tstamp.value}" />
 			</zip>
 
-			<delete dir="${basedir}/temp" />
+			<delete dir="${tstamp.value}" />
 		</sequential>
 	</macrodef>
 
@@ -66,7 +71,9 @@
 				<fileset refid="tck-wars" />
 			</path>
 			<sequential>
-				<replace-war-version filename="@{file}" />
+				<update-tck-war-version
+					filename="@{file}"
+				/>
 			</sequential>
 		</for>
 
