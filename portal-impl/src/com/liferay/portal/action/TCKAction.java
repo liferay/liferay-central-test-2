@@ -102,9 +102,9 @@ public class TCKAction extends Action {
 			for (int i = 0; i < portletIds.length; i++) {
 				String portletId = portletIds[i];
 
-				// Have to update render weight for portlets both in company and
-				// global pools, as company pool holds portlet clones from
-				// global pool.
+				// Update the render weight for portlets in both the company and
+				// global pools since the company pool holds clones from the
+				// global pool
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					layout.getCompanyId(), portletId);
