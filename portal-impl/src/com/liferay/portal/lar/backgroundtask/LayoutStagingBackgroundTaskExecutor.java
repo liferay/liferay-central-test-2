@@ -234,8 +234,7 @@ public class LayoutStagingBackgroundTaskExecutor
 				FileUtil.delete(file);
 			}
 			else if ((file != null) && _log.isDebugEnabled()) {
-				_log.debug(
-					"Kept temporary LAR file " + file.getAbsolutePath());
+				_log.debug("Kept temporary LAR file " + file.getAbsolutePath());
 			}
 
 			return missingReferences;
