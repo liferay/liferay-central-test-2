@@ -255,6 +255,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		Packages packages) {
 
 		Map<String, Map<String, Resource>> directories = jar.getDirectories();
+
 		Map<String, Resource> resourceMap = directories.get(
 			packageRef.getPath());
 
@@ -264,12 +265,13 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 		if (s.endsWith("*")) {
 			for (Entry<String, Resource> entry : resourceMap.entrySet()) {
-				if (!entry.getKey().endsWith(".class")) {
+				String key = entry.getKey();
+
+				if (!key.endsWith(".class")) {
 					continue;
 				}
 
-				processResource(
-					entry.getKey(), entry.getValue(), analyzer, packages);
+				processResource(key, entry.getValue(), analyzer, packages);
 			}
 		}
 		else {
@@ -321,7 +323,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		Clazz clazz = null;
 
 		try {
-			InputStream in = resource.openInputStream();
+			InputStream inputStream = resource.openInputStream();
 
 			clazz = new Clazz(analyzer, fqnToPath, resource);
 
@@ -329,17 +331,17 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 				clazz.parseClassFile();
 			}
 			finally {
-				in.close();
+				inputStream.close();
 			}
 		}
 		catch (Throwable e) {
 			return;
 		}
 
-		Set<PackageRef> apiUses = clazz.getAPIUses();
+		Set<PackageRef> packageRefs = clazz.getAPIUses();
 
-		for (PackageRef curPackageRef : apiUses) {
-			packages.put(curPackageRef, new Attrs());
+		for (PackageRef packageRef : packageRefs) {
+			packages.put(packageRef, new Attrs());
 		}
 	}
 
