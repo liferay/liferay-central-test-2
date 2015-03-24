@@ -52,9 +52,6 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
-
-		// Do this first step regardless of whether we have JSPs or not.
-
 		getManifestInfoFromClasspath(analyzer);
 
 		Parameters parameters = OSGiHeader.parseHeader(
@@ -100,10 +97,10 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		return false;
 	}
 
-	protected void addPackageImports(Analyzer analyzer, String[] imports) {
+	protected void addPackageImports(Analyzer analyzer, String[] packageNames) {
 		Packages packages = analyzer.getReferred();
 
-		for (String packageName : imports) {
+		for (String packageName : packageNames) {
 			PackageRef packageRef = analyzer.getPackageRef(packageName);
 
 			Matcher matcher = _packagePattern.matcher(packageRef.getFQN());
@@ -171,8 +168,6 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 		int contentX = -1;
 		int contentY = content.length();
 
-		Packages packages = analyzer.getReferred();
-
 		while (true) {
 			contentX = content.lastIndexOf("<%@", contentY);
 
@@ -196,6 +191,8 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 				int index = s.lastIndexOf('.');
 
 				if (index != -1) {
+					Packages packages = analyzer.getReferred();
+
 					String packageName = s.substring(0, index);
 
 					PackageRef packageRef = analyzer.getPackageRef(packageName);
