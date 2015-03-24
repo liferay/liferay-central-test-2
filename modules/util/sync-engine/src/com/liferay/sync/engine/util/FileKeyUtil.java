@@ -102,13 +102,13 @@ public class FileKeyUtil {
 	}
 
 	public static void writeFileKey(
-		final Path filePath, final String fileKey, boolean checkLock) {
+		final Path filePath, final String fileKey, boolean acquireFileLock) {
 
 		if (hasFileKey(filePath, Long.parseLong(fileKey))) {
 			return;
 		}
 
-		if (!checkLock) {
+		if (!acquireFileLock) {
 			doWriteFileKey(filePath, fileKey);
 
 			return;
