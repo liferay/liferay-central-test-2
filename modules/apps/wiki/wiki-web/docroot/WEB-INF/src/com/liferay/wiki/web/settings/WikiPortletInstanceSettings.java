@@ -22,5 +22,5 @@ import com.liferay.wiki.web.configuration.WikiPortletInstanceConfiguration;
  */
 public interface WikiPortletInstanceSettings
 	extends PortletInstanceSettings, WikiPortletInstanceConfiguration,
-		WikiPortletInstanceSettingsExtra {
+			WikiPortletInstanceSettingsExtra {
 }

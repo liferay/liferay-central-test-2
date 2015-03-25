@@ -26,8 +26,8 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(immediate = true)
 public class WikiPortletInstanceSettingsDefinition
-	implements SettingsDefinition<WikiPortletInstanceSettings,
-		WikiPortletInstanceConfiguration> {
+	implements SettingsDefinition
+		<WikiPortletInstanceSettings, WikiPortletInstanceConfiguration> {
 
 	@Override
 	public Class<WikiPortletInstanceConfiguration> getConfigurationBeanClass() {
@@ -48,7 +48,8 @@ public class WikiPortletInstanceSettingsDefinition
 	public String[] getSettingsIds() {
 		return new String[] {
 			WikiPortletKeys.WIKI, WikiPortletKeys.WIKI_ADMIN,
-			WikiPortletKeys.WIKI_DISPLAY};
+			WikiPortletKeys.WIKI_DISPLAY
+		};
 	}
 
 }
