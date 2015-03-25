@@ -72,9 +72,6 @@ public class VerifyPermissionTest extends BaseVerifyProcessTestCase {
 
 		Role powerUserRole = RoleLocalServiceUtil.getRole(
 			TestPropsValues.getCompanyId(), RoleConstants.POWER_USER);
-		Role userRole = RoleLocalServiceUtil.getRole(
-			TestPropsValues.getCompanyId(), RoleConstants.USER);
-
 		String primKey = PortletPermissionUtil.getPrimaryKey(
 			layout.getPlid(), PortletKeys.DOCKBAR);
 
@@ -85,6 +82,9 @@ public class VerifyPermissionTest extends BaseVerifyProcessTestCase {
 				powerUserRole.getRoleId());
 
 		Assert.assertNull(resourcePermission);
+
+		Role userRole = RoleLocalServiceUtil.getRole(
+			TestPropsValues.getCompanyId(), RoleConstants.USER);
 
 		resourcePermission =
 			ResourcePermissionLocalServiceUtil.getResourcePermission(
