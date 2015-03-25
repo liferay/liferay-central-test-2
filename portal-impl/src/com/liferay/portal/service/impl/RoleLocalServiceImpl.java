@@ -1039,7 +1039,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			else {
 				int count = roleFinder.countByR_U(role.getRoleId(), userId);
 
-				value = (count > 0);
+				if (count > 0) {
+					value = true;
+				}
+				else {
+					value = false;
+				}
 			}
 
 			threadLocalCache.put(key, value);
