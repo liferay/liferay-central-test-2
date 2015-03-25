@@ -697,8 +697,8 @@ public class SyncWatchEventProcessor implements Runnable {
 		if ((syncFile != null) &&
 			((syncFile.getRepositoryId() !=
 				parentSyncFile.getRepositoryId()) ||
-			(syncFile.getSyncAccountId() !=
-				parentSyncFile.getSyncAccountId()))) {
+			 (syncFile.getSyncAccountId() !=
+				 parentSyncFile.getSyncAccountId()))) {
 
 			return false;
 		}

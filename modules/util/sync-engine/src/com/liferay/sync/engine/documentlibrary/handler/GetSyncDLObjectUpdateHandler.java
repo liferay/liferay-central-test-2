@@ -126,7 +126,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 					getSyncAccountId());
 
 				SyncSite syncSite = SyncSiteService.fetchSyncSite(
-					(Long) event.getParameterValue("repositoryId"),
+					(Long)event.getParameterValue("repositoryId"),
 					getSyncAccountId());
 
 				if ((syncAccount == null) ||
