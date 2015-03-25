@@ -45,7 +45,7 @@
 		<c:if test="<%= PortalUtil.isRSSFeedsEnabled() %>">
 			<liferay-ui:section>
 				<liferay-ui:rss-settings
-					delta="<%= Integer.valueOf(wikiPortletInstanceSettings.rssDelta()) %>"
+					delta="<%= GetterUtil.getInteger(wikiPortletInstanceSettings.rssDelta()) %>"
 					displayStyle="<%= wikiPortletInstanceSettings.rssDisplayStyle() %>"
 					enabled="<%= wikiPortletInstanceSettings.enableRss() %>"
 					feedType="<%= wikiPortletInstanceSettings.rssFeedType() %>"
