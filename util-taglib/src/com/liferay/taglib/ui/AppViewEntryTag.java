@@ -217,6 +217,14 @@ public class AppViewEntryTag extends IncludeTag {
 		_version = null;
 	}
 
+	protected ServletContext getActionJspServletContext() {
+		if (_actionJspServletContext != null) {
+			return _actionJspServletContext;
+		}
+
+		return servletContext;
+	}
+
 	@Override
 	protected String getPage() {
 		return _PAGE;
@@ -230,14 +238,9 @@ public class AppViewEntryTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:app-view-entry:actionJsp", _actionJsp);
-
-		if (_actionJspServletContext == null) {
-			_actionJspServletContext = servletContext;
-		}
-
 		request.setAttribute(
 			"liferay-ui:app-view-entry:actionJspServletContext",
-			_actionJspServletContext);
+			getActionJspServletContext());
 		request.setAttribute(
 			"liferay-ui:app-view-entry:assetCategoryClassName",
 			_assetCategoryClassName);
