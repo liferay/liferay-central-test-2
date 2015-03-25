@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.template;
 
 import com.liferay.portal.kernel.template.bundle.templatehandlerregistryutil.TestTemplateHandler;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
@@ -42,55 +43,36 @@ public class TemplateHandlerRegistryUtilTest {
 
 	@Test
 	public void testGetClassNameIds() {
-		long[] classNameIds = TemplateHandlerRegistryUtil.getClassNameIds();
+		long classNameId = PortalUtil.getClassNameId(
+			TestTemplateHandler.class.getName());
 
-		Class<TestTemplateHandler> clazz = TestTemplateHandler.class;
-
-		String testTemplateHandlerClassName = clazz.getName();
-
-		long portalUtilClassNameId = PortalUtil.getClassNameId(
-			testTemplateHandlerClassName);
-
-		boolean found = false;
-
-		for (long classNameId : classNameIds) {
-			if (portalUtilClassNameId == classNameId) {
-				found = true;
-			}
-		}
-
-		Assert.assertTrue(found);
+		Assert.assertTrue(
+			ArrayUtil.contains(
+				TemplateHandlerRegistryUtil.getClassNameIds(), classNameId));
 	}
 
 	@Test
 	public void testGetTemplateHandlerByClassId() {
-		Class<TestTemplateHandler> clazz = TestTemplateHandler.class;
-
-		String testTemplateHandlerClassName = clazz.getName();
-
-		long portalUtilClassNameId = PortalUtil.getClassNameId(
-			testTemplateHandlerClassName);
+		long classNameId = PortalUtil.getClassNameId(
+			TestTemplateHandler.class.getName());
 
 		TemplateHandler templateHandler =
-			TemplateHandlerRegistryUtil.getTemplateHandler(
-				portalUtilClassNameId);
+			TemplateHandlerRegistryUtil.getTemplateHandler(classNameId);
 
 		Assert.assertEquals(
-			testTemplateHandlerClassName, templateHandler.getClassName());
+			TestTemplateHandler.class.getName(),
+			templateHandler.getClassName());
 	}
 
 	@Test
 	public void testGetTemplateHandlerByClassName() {
-		Class<TestTemplateHandler> clazz = TestTemplateHandler.class;
-
-		String testTemplateHandlerClassName = clazz.getName();
-
 		TemplateHandler templateHandler =
 			TemplateHandlerRegistryUtil.getTemplateHandler(
-				testTemplateHandlerClassName);
+				TestTemplateHandler.class.getName());
 
 		Assert.assertEquals(
-			testTemplateHandlerClassName, templateHandler.getClassName());
+			TestTemplateHandler.class.getName(),
+			templateHandler.getClassName());
 	}
 
 	@Test
@@ -98,21 +80,15 @@ public class TemplateHandlerRegistryUtilTest {
 		List<TemplateHandler> templateHandlers =
 			TemplateHandlerRegistryUtil.getTemplateHandlers();
 
-		Class<TestTemplateHandler> clazz = TestTemplateHandler.class;
-
-		String testTemplateHandlerClassName = clazz.getName();
-
-		boolean found = false;
-
 		for (TemplateHandler templateHandler : templateHandlers) {
-			if (testTemplateHandlerClassName.equals(templateHandler.
-					getClassName())) {
+			String className = templateHandler.getClassName();
 
-				found = true;
+			if (className.equals(TestTemplateHandler.class.getName())) {
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 }
