@@ -1530,6 +1530,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		"[a-z]+[-_a-zA-Z0-9]*");
 	protected static Pattern emptyCollectionPattern = Pattern.compile(
 		"Collections\\.EMPTY_(LIST|MAP|SET)");
+
 	protected static FileImpl fileUtil = new FileImpl() {
 
 		@Override
