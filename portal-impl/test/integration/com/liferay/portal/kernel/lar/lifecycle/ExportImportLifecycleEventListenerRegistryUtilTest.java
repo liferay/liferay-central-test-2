@@ -42,53 +42,65 @@ public class ExportImportLifecycleEventListenerRegistryUtilTest {
 				"bundle.exportimportlifecycleeventlistenerregistryutil"));
 
 	@Test
-	public void testAsyncInstance() {
-		Set<ExportImportLifecycleListener> asyncListeners =
+	public void testGetAsyncExportImportLifecycleListeners() {
+		boolean found = false;
+
+		Set<ExportImportLifecycleListener> exportImportLifecycleListeners =
 			ExportImportLifecycleEventListenerRegistryUtil.
 				getAsyncExportImportLifecycleListeners();
 
-		Class<TestAsyncExportImportLifecycleListener> clazz =
-			TestAsyncExportImportLifecycleListener.class;
+		for (ExportImportLifecycleListener exportImportLifecycleListener :
+				exportImportLifecycleListeners) {
 
-		String testClassName = clazz.getName();
+			Class<?> clazz = exportImportLifecycleListener.getClass();
 
-		Class<? extends ExportImportLifecycleListener> asyncClazz;
+			String className = clazz.getName();
 
-		for (ExportImportLifecycleListener asyncListener : asyncListeners) {
-			asyncClazz = asyncListener.getClass();
+			if (className.equals(
+					TestAsyncExportImportLifecycleListener.class.getName())) {
 
-			if (testClassName.equals(asyncClazz.getName())) {
-				Assert.assertTrue(true);
-				return;
+				found = true;
+			}
+			else if (className.equals(
+						TestSyncExportImportLifecycleListener.class.
+							getName())) {
+
+				Assert.fail();
 			}
 		}
 
-		Assert.fail();
+		Assert.assertTrue(found);
 	}
 
 	@Test
-	public void testSyncInstance() {
-		Set<ExportImportLifecycleListener> syncListeners =
+	public void testGetSyncExportImportLifecycleListeners() {
+		boolean found = false;
+
+		Set<ExportImportLifecycleListener> exportImportLifecycleListeners =
 			ExportImportLifecycleEventListenerRegistryUtil.
 				getSyncExportImportLifecycleListeners();
 
-		Class<TestSyncExportImportLifecycleListener> clazz =
-			TestSyncExportImportLifecycleListener.class;
+		for (ExportImportLifecycleListener exportImportLifecycleListener :
+				exportImportLifecycleListeners) {
 
-		String testClassName = clazz.getName();
+			Class<?> clazz = exportImportLifecycleListener.getClass();
 
-		Class<? extends ExportImportLifecycleListener> syncClazz;
+			String className = clazz.getName();
 
-		for (ExportImportLifecycleListener syncListener : syncListeners) {
-			syncClazz = syncListener.getClass();
+			if (className.equals(
+					TestAsyncExportImportLifecycleListener.class.getName())) {
 
-			if (testClassName.equals(syncClazz.getName())) {
-				Assert.assertTrue(true);
-				return;
+				Assert.fail();
+			}
+			else if (className.equals(
+						TestSyncExportImportLifecycleListener.class.
+							getName())) {
+
+				found = true;
 			}
 		}
 
-		Assert.fail();
+		Assert.assertTrue(found);
 	}
 
 }
