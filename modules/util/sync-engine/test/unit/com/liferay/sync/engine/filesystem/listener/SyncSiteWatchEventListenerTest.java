@@ -61,11 +61,11 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 		Set<Long> activeSyncSiteIds = SyncSiteService.getActiveSyncSiteIds(
 			syncAccount.getSyncAccountId());
 
-		activeSyncSiteIds.remove(_syncSite2.getSyncSiteId());
 		activeSyncSiteIds.remove(_syncSite1.getSyncSiteId());
+		activeSyncSiteIds.remove(_syncSite2.getSyncSiteId());
 
-		SyncSiteService.deleteSyncSite(_syncSite2.getSyncSiteId());
 		SyncSiteService.deleteSyncSite(_syncSite1.getSyncSiteId());
+		SyncSiteService.deleteSyncSite(_syncSite2.getSyncSiteId());
 
 		super.tearDown();
 	}
