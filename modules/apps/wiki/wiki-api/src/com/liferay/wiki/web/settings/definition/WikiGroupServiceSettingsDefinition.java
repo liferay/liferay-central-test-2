@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(immediate = true)
 public class WikiGroupServiceSettingsDefinition
 	implements SettingsDefinition<WikiGroupServiceSettings,
-		WikiGroupServiceConfiguration> {
+			   WikiGroupServiceConfiguration> {
 
 	@Override
 	public Class<WikiGroupServiceConfiguration> getConfigurationBeanClass() {
