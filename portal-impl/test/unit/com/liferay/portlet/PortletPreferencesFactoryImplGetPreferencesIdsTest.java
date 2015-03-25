@@ -82,11 +82,11 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getCompanyPortlet()
+			getCompanyPortlet()
 		);
 
-		boolean modeEditGuest = false;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -97,10 +97,10 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_TYPE_COMPANY,
 			portletPreferencesIds.getOwnerType());
 		Assert.assertEquals(
-			"The ownerId should be the id of the company",
+			"The owner ID should be the ID of the company",
 			_layout.getCompanyId(), portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The plid shouldn't have a real value",
+			"The PLID should not be a real value",
 			PortletKeys.PREFS_PLID_SHARED, portletPreferencesIds.getPlid());
 	}
 
@@ -112,11 +112,11 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getGroupPortlet()
+			getGroupPortlet()
 		);
 
-		boolean modeEditGuest = false;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -127,10 +127,10 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_TYPE_GROUP,
 			portletPreferencesIds.getOwnerType());
 		Assert.assertEquals(
-			"The ownerId should be the id of the group", siteGroupId,
+			"The owner ID should be the ID of the group", siteGroupId,
 			portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The plid shouldn't have a real value",
+			"The PLID should not be a real value",
 			PortletKeys.PREFS_PLID_SHARED, portletPreferencesIds.getPlid());
 	}
 
@@ -142,11 +142,11 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getGroupLayoutPortlet()
+			getGroupLayoutPortlet()
 		);
 
-		boolean modeEditGuest = false;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -157,12 +157,12 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
 			portletPreferencesIds.getOwnerType());
 		Assert.assertEquals(
-			"The ownerId should have the default value",
+			"The owner ID should be the default value",
 			PortletKeys.PREFS_OWNER_ID_DEFAULT,
 			portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The plid should be that of the current layout", _layout.getPlid(),
-			portletPreferencesIds.getPlid());
+			"The PLID should be the PLID of the current layout",
+			_layout.getPlid(), portletPreferencesIds.getPlid());
 	}
 
 	@Test
@@ -173,11 +173,11 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getUserPortlet()
+			getUserPortlet()
 		);
 
-		boolean modeEditGuest = false;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -188,10 +188,10 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_TYPE_USER,
 			portletPreferencesIds.getOwnerType());
 		Assert.assertEquals(
-			"The ownerId should be the id of the user who added it", _USER_ID,
+			"The owner ID should be the ID of the user who added it", _USER_ID,
 			portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The plid shouldn't have a real value",
+			"The PLID should not be a real value",
 			PortletKeys.PREFS_PLID_SHARED, portletPreferencesIds.getPlid());
 	}
 
@@ -203,11 +203,11 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getUserLayoutPortlet()
+			getUserLayoutPortlet()
 		);
 
-		boolean modeEditGuest = false;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = false;
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -218,11 +218,11 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletKeys.PREFS_OWNER_TYPE_USER,
 			portletPreferencesIds.getOwnerType());
 		Assert.assertEquals(
-			"The ownerId should be the id of the user who added it", _USER_ID,
+			"The owner ID should be the ID of the user who added it", _USER_ID,
 			portletPreferencesIds.getOwnerId());
 		Assert.assertEquals(
-			"The plid should be that of the current layout", _layout.getPlid(),
-			portletPreferencesIds.getPlid());
+			"The PLID should be the PLID of the current layout",
+			_layout.getPlid(), portletPreferencesIds.getPlid());
 	}
 
 	@Test(expected = PrincipalException.class)
@@ -235,7 +235,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getGroupPortlet()
+			getGroupPortlet()
 		);
 
 		PowerMockito.mockStatic(LayoutPermissionUtil.class);
@@ -248,15 +248,16 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			true
 		);
 
-		boolean modeEditGuest = true;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = true;
 
 		PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 			siteGroupId, _USER_ID, _layout, _PORTLET_ID, modeEditGuest);
 	}
 
 	@Test(expected = PrincipalException.class)
-	public void testPreferencesWithModeEditGuestInPubLayoutWithoutPermission()
+	public void
+			testPreferencesWithModeEditGuestInPublicLayoutWithoutPermission()
 		throws Exception {
 
 		_layout.setPrivateLayout(false);
@@ -267,7 +268,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getGroupPortlet()
+			getGroupPortlet()
 		);
 
 		PowerMockito.mockStatic(LayoutPermissionUtil.class);
@@ -280,15 +281,15 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			false
 		);
 
-		boolean modeEditGuest = true;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = true;
 
 		PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 			siteGroupId, _USER_ID, _layout, _PORTLET_ID, modeEditGuest);
 	}
 
 	@Test
-	public void testPreferencesWithModeEditGuestInPubLayoutWithPermission()
+	public void testPreferencesWithModeEditGuestInPublicLayoutWithPermission()
 		throws Exception {
 
 		_layout.setPrivateLayout(false);
@@ -299,7 +300,7 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			PortletLocalServiceUtil.getPortletById(
 				_layout.getCompanyId(), _PORTLET_ID)
 		).thenReturn(
-			_getGroupPortlet()
+			getGroupPortlet()
 		);
 
 		PowerMockito.mockStatic(LayoutPermissionUtil.class);
@@ -312,14 +313,14 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 			true
 		);
 
-		boolean modeEditGuest = true;
 		long siteGroupId = _layout.getGroupId();
+		boolean modeEditGuest = true;
 
 		PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 			siteGroupId, _USER_ID, _layout, _PORTLET_ID, modeEditGuest);
 	}
 
-	private Portlet _getCompanyPortlet() {
+	protected Portlet getCompanyPortlet() {
 		Portlet portlet = new PortletImpl();
 
 		portlet.setPreferencesCompanyWide(true);
@@ -327,42 +328,42 @@ public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 		return portlet;
 	}
 
-	private Portlet _getGroupLayoutPortlet() {
+	protected Portlet getGroupLayoutPortlet() {
 		Portlet portlet = new PortletImpl();
 
 		portlet.setPreferencesCompanyWide(false);
-		portlet.setPreferencesUniquePerLayout(true);
 		portlet.setPreferencesOwnedByGroup(true);
-
-		return portlet;
-	}
-
-	private Portlet _getGroupPortlet() {
-		Portlet portlet = new PortletImpl();
-
-		portlet.setPreferencesCompanyWide(false);
-		portlet.setPreferencesUniquePerLayout(false);
-		portlet.setPreferencesOwnedByGroup(true);
-
-		return portlet;
-	}
-
-	private Portlet _getUserLayoutPortlet() {
-		Portlet portlet = new PortletImpl();
-
-		portlet.setPreferencesCompanyWide(false);
 		portlet.setPreferencesUniquePerLayout(true);
-		portlet.setPreferencesOwnedByGroup(false);
 
 		return portlet;
 	}
 
-	private Portlet _getUserPortlet() {
+	protected Portlet getGroupPortlet() {
 		Portlet portlet = new PortletImpl();
 
 		portlet.setPreferencesCompanyWide(false);
+		portlet.setPreferencesOwnedByGroup(true);
 		portlet.setPreferencesUniquePerLayout(false);
+
+		return portlet;
+	}
+
+	protected Portlet getUserLayoutPortlet() {
+		Portlet portlet = new PortletImpl();
+
+		portlet.setPreferencesCompanyWide(false);
 		portlet.setPreferencesOwnedByGroup(false);
+		portlet.setPreferencesUniquePerLayout(true);
+
+		return portlet;
+	}
+
+	protected Portlet getUserPortlet() {
+		Portlet portlet = new PortletImpl();
+
+		portlet.setPreferencesCompanyWide(false);
+		portlet.setPreferencesOwnedByGroup(false);
+		portlet.setPreferencesUniquePerLayout(false);
 
 		return portlet;
 	}
