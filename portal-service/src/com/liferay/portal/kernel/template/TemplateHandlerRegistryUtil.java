@@ -36,7 +36,6 @@ import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
-import com.liferay.registry.collections.StringServiceRegistrationMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,8 +102,6 @@ public class TemplateHandlerRegistryUtil {
 	private static final TemplateHandlerRegistryUtil _instance =
 		new TemplateHandlerRegistryUtil();
 
-	private final StringServiceRegistrationMap<TemplateHandler>
-		_serviceRegistrations = new StringServiceRegistrationMap<>();
 	private final ServiceTracker<TemplateHandler, TemplateHandler>
 		_serviceTracker;
 	private final Map<String, TemplateHandler> _templateHandlers =
