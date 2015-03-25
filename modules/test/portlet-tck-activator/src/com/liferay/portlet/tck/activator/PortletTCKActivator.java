@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.tck.activator;
+package com.liferay.portlet.tck.activator;
 
 import com.liferay.portal.struts.StrutsActionRegistryUtil;
 
@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Matthew Tambara
  */
 @Component
-public class TCKActivator {
+public class PortletTCKActivator {
 
 	@Activate
 	protected void activate() {
@@ -45,7 +45,7 @@ public class TCKActivator {
 
 	private static final String _TCK_PATH = "/portal/tck";
 
-	private static final TCKStrutsAction _tckStrutsAction =
-		new TCKStrutsAction();
+	private static final PortletTCKStrutsAction _tckStrutsAction =
+		new PortletTCKStrutsAction();
 
 }

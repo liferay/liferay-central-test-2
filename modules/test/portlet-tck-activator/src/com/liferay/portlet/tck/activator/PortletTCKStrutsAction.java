@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.tck.activator;
+package com.liferay.portlet.tck.activator;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Brian Wing Shun Chan
  */
-public class TCKStrutsAction extends BaseStrutsAction {
+public class PortletTCKStrutsAction extends BaseStrutsAction {
 
 	@Override
 	public String execute(
@@ -185,6 +185,6 @@ public class TCKStrutsAction extends BaseStrutsAction {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		TCKStrutsAction.class);
+		PortletTCKStrutsAction.class);
 
 }
