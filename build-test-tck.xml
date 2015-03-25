@@ -176,7 +176,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 
 		<antcall target="deploy-tck-wars" />
 
-		<ant target="deploy" dir="modules/test/portlet-tck-activator" />
+		<ant target="deploy" dir="modules/test/portlet-tck-bridge" />
 
 		<parallel>
 			<exec dir="${app.server.tomcat.bin.dir}" executable="catalina${file.suffix.bat}" resolveexecutable="true">

@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Portlet TCK Activator
-Bundle-SymbolicName: com.liferay.portlet.tck.activator
-Bundle-Version: 1.0.0
-Include-Resource: classes

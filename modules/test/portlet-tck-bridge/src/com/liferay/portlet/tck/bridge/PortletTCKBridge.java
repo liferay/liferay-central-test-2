@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.tck.activator;
+package com.liferay.portlet.tck.bridge;
 
 import com.liferay.portal.struts.StrutsActionRegistryUtil;
 
@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Matthew Tambara
  */
 @Component
-public class PortletTCKActivator {
+public class PortletTCKBridge {
 
 	@Activate
 	protected void activate() {
