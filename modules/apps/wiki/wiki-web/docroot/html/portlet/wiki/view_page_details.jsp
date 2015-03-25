@@ -157,7 +157,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "details
 		</th>
 		<td class="table-cell">
 			<liferay-ui:rss
-				delta="<%= Integer.valueOf(wikiPortletInstanceSettings.rssDelta()) %>"
+				delta="<%= GetterUtil.getInteger(wikiPortletInstanceSettings.rssDelta()) %>"
 				displayStyle="<%= wikiPortletInstanceSettings.rssDisplayStyle() %>"
 				feedType="<%= wikiPortletInstanceSettings.rssFeedType() %>"
 				url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() %>'
