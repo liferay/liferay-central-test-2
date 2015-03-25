@@ -702,9 +702,8 @@ public class SyncWatchEventProcessor implements Runnable {
 
 			return false;
 		}
-		else {
-			return true;
-		}
+
+		return true;
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(

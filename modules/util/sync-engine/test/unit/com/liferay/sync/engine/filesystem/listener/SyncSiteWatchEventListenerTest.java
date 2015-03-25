@@ -41,8 +41,8 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_syncSite = SyncSiteTestUtil.addSyncSite(
-			10158, FileUtil.getFilePathName(filePathName, "test-site"), 10185,
+		_syncSite1 = SyncSiteTestUtil.addSyncSite(
+			10158, FileUtil.getFilePathName(filePathName, "test-site1"), 10185,
 			syncAccount.getSyncAccountId());
 		_syncSite2 = SyncSiteTestUtil.addSyncSite(
 			10158, FileUtil.getFilePathName(filePathName, "test-site2"), 10186,
@@ -51,7 +51,7 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 		Set<Long> activeSyncSiteIds = SyncSiteService.getActiveSyncSiteIds(
 			syncAccount.getSyncAccountId());
 
-		activeSyncSiteIds.add(_syncSite.getSyncSiteId());
+		activeSyncSiteIds.add(_syncSite1.getSyncSiteId());
 		activeSyncSiteIds.add(_syncSite2.getSyncSiteId());
 	}
 
@@ -62,21 +62,21 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 			syncAccount.getSyncAccountId());
 
 		activeSyncSiteIds.remove(_syncSite2.getSyncSiteId());
-		activeSyncSiteIds.remove(_syncSite.getSyncSiteId());
+		activeSyncSiteIds.remove(_syncSite1.getSyncSiteId());
 
 		SyncSiteService.deleteSyncSite(_syncSite2.getSyncSiteId());
-		SyncSiteService.deleteSyncSite(_syncSite.getSyncSiteId());
+		SyncSiteService.deleteSyncSite(_syncSite1.getSyncSiteId());
 
 		super.tearDown();
 	}
 
 	@Test
-	public void testWatchEvent() {
+	public void testWatchEvent1() {
 		SyncSiteWatchEventListener syncSiteWatchEventListener =
 			new SyncSiteWatchEventListener(syncAccount.getSyncAccountId());
 
 		String sourceFilePathName = FileUtil.getFilePathName(
-			filePathName, "test-site", "a.txt");
+			filePathName, "test-site1", "a.txt");
 
 		syncSiteWatchEventListener.watchEvent(
 			SyncWatchEvent.EVENT_TYPE_RENAME_FROM,
@@ -103,14 +103,14 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 			new SyncSiteWatchEventListener(syncAccount.getSyncAccountId());
 
 		String sourceFilePathName = FileUtil.getFilePathName(
-			filePathName, "test-site", "a.txt");
+			filePathName, "test-site1", "a.txt");
 
 		syncSiteWatchEventListener.watchEvent(
 			SyncWatchEvent.EVENT_TYPE_RENAME_FROM,
 			Paths.get(sourceFilePathName));
 
 		String targetFilePathName = FileUtil.getFilePathName(
-			filePathName, "test-site", "test", "a.txt");
+			filePathName, "test-site1", "test", "a.txt");
 
 		syncSiteWatchEventListener.watchEvent(
 			SyncWatchEvent.EVENT_TYPE_RENAME_TO, Paths.get(targetFilePathName));
@@ -123,7 +123,7 @@ public class SyncSiteWatchEventListenerTest extends BaseTestCase {
 			SyncWatchEvent.EVENT_TYPE_MOVE, lastSyncWatchEvent.getEventType());
 	}
 
-	private static SyncSite _syncSite;
+	private static SyncSite _syncSite1;
 	private static SyncSite _syncSite2;
 
 }
