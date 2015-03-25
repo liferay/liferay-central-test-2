@@ -1552,7 +1552,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 			}
 			catch (CharacterCodingException cce) {
 				throw new Error(
-					file.getCanonicalPath()+
+					file.getCanonicalPath() +
 						" contains invalid UTF-8 byte sequence",
 					cce);
 			}
