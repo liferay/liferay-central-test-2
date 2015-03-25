@@ -17,7 +17,6 @@ package com.liferay.portlet;
 import com.liferay.portal.cache.SingleVMPoolImpl;
 import com.liferay.portal.cache.memory.MemoryPortalCacheManager;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -53,7 +52,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
 	@Before
-	public void setUp() throws PortalException {
+	public void setUp() {
 		SingleVMPoolUtil singleVMPoolUtil = new SingleVMPoolUtil();
 
 		SingleVMPoolImpl singleVMPoolImpl = new SingleVMPoolImpl();
