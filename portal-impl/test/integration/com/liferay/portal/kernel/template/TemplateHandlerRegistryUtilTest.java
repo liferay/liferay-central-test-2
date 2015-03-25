@@ -52,12 +52,10 @@ public class TemplateHandlerRegistryUtilTest {
 	}
 
 	@Test
-	public void testGetTemplateHandlerByClassId() {
-		long classNameId = PortalUtil.getClassNameId(
-			TestTemplateHandler.class.getName());
-
+	public void testGetTemplateHandlerByClassName() {
 		TemplateHandler templateHandler =
-			TemplateHandlerRegistryUtil.getTemplateHandler(classNameId);
+			TemplateHandlerRegistryUtil.getTemplateHandler(
+				TestTemplateHandler.class.getName());
 
 		Assert.assertEquals(
 			TestTemplateHandler.class.getName(),
@@ -65,10 +63,12 @@ public class TemplateHandlerRegistryUtilTest {
 	}
 
 	@Test
-	public void testGetTemplateHandlerByClassName() {
+	public void testGetTemplateHandlerByClassNameId() {
+		long classNameId = PortalUtil.getClassNameId(
+			TestTemplateHandler.class.getName());
+
 		TemplateHandler templateHandler =
-			TemplateHandlerRegistryUtil.getTemplateHandler(
-				TestTemplateHandler.class.getName());
+			TemplateHandlerRegistryUtil.getTemplateHandler(classNameId);
 
 		Assert.assertEquals(
 			TestTemplateHandler.class.getName(),
