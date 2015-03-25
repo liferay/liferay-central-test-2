@@ -30,11 +30,11 @@ import java.lang.reflect.Method;
 public class SettingsInvocationHandler<S, C> implements InvocationHandler {
 
 	public SettingsInvocationHandler(
-		Class<S> settingsClass, Object settingsExtraImplementation,
+		Class<S> settingsClass, Object settingsExtraInstance,
 		TypedSettings typedSettings) {
 
 		_settingsClass = settingsClass;
-		_settingsExtraImplementation = settingsExtraImplementation;
+		_settingsExtraInstance = settingsExtraInstance;
 		_typedSettings = typedSettings;
 	}
 
@@ -69,11 +69,11 @@ public class SettingsInvocationHandler<S, C> implements InvocationHandler {
 		throws IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
 
-		Class<?> clazz = _settingsExtraImplementation.getClass();
+		Class<?> clazz = _settingsExtraInstance.getClass();
 
 		method = clazz.getMethod(method.getName(), method.getParameterTypes());
 
-		return method.invoke(_settingsExtraImplementation, args);
+		return method.invoke(_settingsExtraInstance, args);
 	}
 
 	private Object _invokeTypedSettings(Method method, Object[] args)
@@ -169,7 +169,7 @@ public class SettingsInvocationHandler<S, C> implements InvocationHandler {
 	}
 
 	private final Class<S> _settingsClass;
-	private final Object _settingsExtraImplementation;
+	private final Object _settingsExtraInstance;
 	private final TypedSettings _typedSettings;
 
 }

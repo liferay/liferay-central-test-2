@@ -102,13 +102,12 @@ public class PortletInstanceSettingsProviderBuilder
 
 		TypedSettings typedSettings = new TypedSettings(settings);
 
-		Object settingsExtraImplementation = constructor.newInstance(
-			typedSettings);
+		Object settingsExtraInstance = constructor.newInstance(typedSettings);
 
 		SettingsInvocationHandler<P, C> settingsInvocationHandler =
 			new SettingsInvocationHandler<>(
-				_settingsDefinition.getSettingsClass(),
-				settingsExtraImplementation, typedSettings);
+				_settingsDefinition.getSettingsClass(), settingsExtraInstance,
+				typedSettings);
 
 		return settingsInvocationHandler.createProxy();
 	}
