@@ -71,7 +71,7 @@ WikiNode node = (WikiNode)row.getObject();
 
 	<c:if test="<%= wikiPortletInstanceSettings.enableRss() %>">
 		<liferay-ui:rss
-			delta="<%= Integer.valueOf(wikiPortletInstanceSettings.rssDelta()) %>"
+			delta="<%= GetterUtil.getInteger(wikiPortletInstanceSettings.rssDelta()) %>"
 			displayStyle="<%= wikiPortletInstanceSettings.rssDisplayStyle() %>"
 			feedType="<%= wikiPortletInstanceSettings.rssFeedType() %>"
 			url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() %>'
