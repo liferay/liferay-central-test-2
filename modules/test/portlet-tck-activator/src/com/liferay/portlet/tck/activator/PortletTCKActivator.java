@@ -31,21 +31,18 @@ public class PortletTCKActivator {
 
 	@Activate
 	protected void activate() {
-		StrutsActionRegistryUtil.register(_TCK_PATH, _tckStrutsAction);
+		StrutsActionRegistryUtil.register(_PATH, new PortletTCKStrutsAction());
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		StrutsActionRegistryUtil.unregister(_TCK_PATH);
+		StrutsActionRegistryUtil.unregister(_PATH);
 	}
 
 	@Reference(target = "(original.bean=*)", unbind = "-")
 	protected void setServletContext(ServletContext servletContext) {
 	}
 
-	private static final String _TCK_PATH = "/portal/tck";
-
-	private static final PortletTCKStrutsAction _tckStrutsAction =
-		new PortletTCKStrutsAction();
+	private static final String _PATH = "/portal/tck";
 
 }
