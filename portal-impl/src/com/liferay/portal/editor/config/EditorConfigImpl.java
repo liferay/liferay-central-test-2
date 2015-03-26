@@ -48,12 +48,12 @@ public class EditorConfigImpl implements EditorConfig {
 
 	@Override
 	public Map<String, Object> getData() {
-		Map<String, Object> coverImageCaptionEditorData = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
 
-		coverImageCaptionEditorData.put("editorConfig", _configJSONObject);
-		coverImageCaptionEditorData.put("editorOptions", _optionsJSONObject);
+		data.put("editorConfig", _configJSONObject);
+		data.put("editorOptions", _optionsJSONObject);
 
-		return coverImageCaptionEditorData;
+		return data;
 	}
 
 	private JSONObject _populateConfigJSONObject(
