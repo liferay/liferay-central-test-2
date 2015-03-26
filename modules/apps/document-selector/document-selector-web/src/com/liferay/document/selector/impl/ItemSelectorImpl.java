@@ -99,7 +99,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			new ArrayList<>();
 
 		List<Class<? extends ItemSelectorCriterion>>
-			itemSelectorCriterionClasses = _getItemSelectorCriterionClasses(
+			itemSelectorCriterionClasses = getItemSelectorCriterionClasses(
 				parameters);
 
 		for (int i = 0; i<itemSelectorCriterionClasses.size(); i++) {
@@ -108,7 +108,7 @@ public class ItemSelectorImpl implements ItemSelector {
 
 			String paramPrefix = i + "_";
 
-			_addItemSelectorViewRenderers(
+			addItemSelectorViewRenderers(
 				(List)itemSelectorViewRenderers, parameters, paramPrefix,
 				itemSelectorCriterionClass);
 		}
@@ -134,7 +134,7 @@ public class ItemSelectorImpl implements ItemSelector {
 
 		Map<String, String[]> parameters = new HashMap<>();
 
-		_populateCriteria(parameters, itemSelectorCriteria);
+		populateCriteria(parameters, itemSelectorCriteria);
 
 		for (int i = 0; i < itemSelectorCriteria.length; i++) {
 			ItemSelectorCriterion itemSelectorCriterion =
@@ -142,10 +142,10 @@ public class ItemSelectorImpl implements ItemSelector {
 
 			String paramPrefix = i + "_";
 
-			_populateDesiredReturnTypes(
+			populateDesiredReturnTypes(
 				parameters, paramPrefix, itemSelectorCriterion);
 
-			_populateItemSelectorCriteria(
+			populateItemSelectorCriteria(
 				parameters, paramPrefix, itemSelectorCriterion);
 		}
 
@@ -179,16 +179,16 @@ public class ItemSelectorImpl implements ItemSelector {
 			itemSelectorCriterionClass.getName());
 	}
 
-	private <T extends ItemSelectorCriterion>
-		void _addItemSelectorViewRenderers(
+	protected <T extends ItemSelectorCriterion>
+		void addItemSelectorViewRenderers(
 			List<ItemSelectorViewRenderer<T>> itemSelectorViewRenderers,
 			Map<String, String[]> parameters, String paramPrefix,
 			Class<T> itemSelectorCriterionClass) {
 
 		ItemSelectorCriterionHandler<T> itemSelectorCriterionHandler =
-			_getItemSelectorCriterionHandler(itemSelectorCriterionClass);
+			getItemSelectorCriterionHandler(itemSelectorCriterionClass);
 
-		T itemSelectorCriterion = _getItemSelectorCriterion(
+		T itemSelectorCriterion = getItemSelectorCriterion(
 			parameters, paramPrefix, itemSelectorCriterionClass);
 
 		List<ItemSelectorView<T>> itemSelectorViews =
@@ -203,7 +203,7 @@ public class ItemSelectorImpl implements ItemSelector {
 		}
 	}
 
-	private <T extends ItemSelectorCriterion> T _getItemSelectorCriterion(
+	protected <T extends ItemSelectorCriterion> T getItemSelectorCriterion(
 		Map<String, String[]> parameters, String paramPrefix,
 		Class<T> itemSelectorCriterionClass) {
 
@@ -216,7 +216,7 @@ public class ItemSelectorImpl implements ItemSelector {
 				if (key.startsWith(paramPrefix)) {
 					properties.put(
 						key.substring(paramPrefix.length()),
-						_getValue(parameters, key));
+						getValue(parameters, key));
 				}
 			}
 
@@ -232,10 +232,10 @@ public class ItemSelectorImpl implements ItemSelector {
 		}
 	}
 
-	private List<Class<? extends ItemSelectorCriterion>>
-		_getItemSelectorCriterionClasses(Map<String, String[]> parameters) {
+	protected List<Class<? extends ItemSelectorCriterion>>
+		getItemSelectorCriterionClasses(Map<String, String[]> parameters) {
 
-		String criteria = _getValue(parameters, PARAM_CRITERIA);
+		String criteria = getValue(parameters, PARAM_CRITERIA);
 
 		String[] itemSelectorCriterionClassNames = criteria.split(",");
 
@@ -256,16 +256,15 @@ public class ItemSelectorImpl implements ItemSelector {
 		return itemSelectorCriterionClasses;
 	}
 
-	@SuppressWarnings("unchecked")
-	private <T extends ItemSelectorCriterion> ItemSelectorCriterionHandler<T>
-		_getItemSelectorCriterionHandler(Class<T> itemSelectorCriterionClass) {
+	protected <T extends ItemSelectorCriterion> ItemSelectorCriterionHandler<T>
+		getItemSelectorCriterionHandler(Class<T> itemSelectorCriterionClass) {
 
 		return (ItemSelectorCriterionHandler<T>)
 			_itemSelectionCriterionHandlers.get(
 				itemSelectorCriterionClass.getName());
 	}
 
-	private String _getValue(
+	protected String getValue(
 		Map<String, String[]> parameters, String name) {
 
 		String[] values = parameters.get(name);
@@ -278,7 +277,7 @@ public class ItemSelectorImpl implements ItemSelector {
 		}
 	}
 
-	private void _populateCriteria(
+	protected void populateCriteria(
 		Map<String, String[]> parameters,
 		ItemSelectorCriterion[] itemSelectorCriteria) {
 
@@ -309,7 +308,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			new String[] {ArrayUtil.toString(itemSelectorCriteria, accessor)});
 	}
 
-	private void _populateDesiredReturnTypes(
+	protected void populateDesiredReturnTypes(
 		Map<String, String[]> parameters, String paramPrefix,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
@@ -353,8 +352,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			});
 	}
 
-	@SuppressWarnings("unchecked")
-	private void _populateItemSelectorCriteria(
+	protected void populateItemSelectorCriteria(
 		Map<String, String[]> parameters, String paramPrefix,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
