@@ -77,7 +77,16 @@ public class ItemSelectorImpl implements ItemSelector {
 			portletRequest, DocumentSelectorPortletKeys.DOCUMENT_SELECTOR,
 			themeDisplay.getPlid(), PortletRequest.ACTION_PHASE);
 
-		_setPopup(portletURL);
+		try {
+			portletURL.setPortletMode(PortletMode.VIEW);
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
+		}
+		catch (PortletModeException pme) {
+			throw new SystemException(pme);
+		}
+		catch (WindowStateException wse) {
+			throw new SystemException(wse);
+		}
 
 		portletURL.setParameter(
 			ActionRequest.ACTION_NAME,
@@ -114,19 +123,6 @@ public class ItemSelectorImpl implements ItemSelector {
 		}
 
 		return itemSelectorViewRenderers;
-	}
-
-	protected void _setPopup(PortletURL portletURL) {
-		try {
-			portletURL.setPortletMode(PortletMode.VIEW);
-			portletURL.setWindowState(LiferayWindowState.POP_UP);
-		}
-		catch (PortletModeException pme) {
-			throw new SystemException(pme);
-		}
-		catch (WindowStateException wse) {
-			throw new SystemException(wse);
-		}
 	}
 
 	protected <T extends ItemSelectorCriterion>
