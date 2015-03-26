@@ -200,13 +200,13 @@ public class PortalExecutorManagerImpl implements PortalExecutorManager {
 		@Override
 		public void modifiedService(
 			ServiceReference<ThreadPoolExecutor> serviceReference,
-			ThreadPoolExecutor service) {
+			ThreadPoolExecutor threadPoolExecutor) {
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<ThreadPoolExecutor> serviceReference,
-			ThreadPoolExecutor service) {
+			ThreadPoolExecutor threadPoolExecutor) {
 		}
 
 	}

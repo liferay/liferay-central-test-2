@@ -80,6 +80,7 @@ public class PortalExecutorManagerTestCallback
 
 	private PortalExecutorManagerTestCallback() {
 		RegistryUtil.setRegistry(new BasicRegistryImpl());
+
 		Registry registry = RegistryUtil.getRegistry();
 
 		_portalExecutorManager = new MockPortalExecutorManager();
