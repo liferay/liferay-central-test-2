@@ -42,7 +42,7 @@ public class TestFacetFactory implements FacetFactory {
 	public Facet newInstance(SearchContext searchContext) {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 
-		return new TestFacetImpl();
+		return new TestFacet();
 	}
 
 	@Reference(target = "(test=AtomicState)")

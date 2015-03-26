@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.search.facet.util;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacetFactory;
-import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacetImpl;
+import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacet;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
@@ -65,7 +65,7 @@ public class FacetFactoryUtilTest {
 			Facet facet = FacetFactoryUtil.create(null, facetConfiguration);
 
 			Assert.assertTrue(_atomicState.isSet());
-			Assert.assertEquals(facet.getFieldName(), TestFacetImpl.FIELD_NAME);
+			Assert.assertEquals(facet.getFieldName(), TestFacet.FIELD_NAME);
 		}
 		catch (Exception e) {
 			Assert.fail();

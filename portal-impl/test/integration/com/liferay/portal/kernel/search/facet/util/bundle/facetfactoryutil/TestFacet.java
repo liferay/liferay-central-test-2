@@ -20,9 +20,13 @@ import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
-public class TestFacetImpl implements Facet {
 
-	public static final String FIELD_NAME = "TestFacetImpl.FieldName";
+/**
+ * @author Peter Fellwock
+ */
+public class TestFacet implements Facet {
+
+	public static final String FIELD_NAME = "FIELD_NAME";
 
 	@Override
 	public BooleanClause getFacetClause() {
