@@ -75,7 +75,11 @@ public final class LoggerUtil {
 	}
 
 	public static boolean isLoggerStarted() {
-		return _webDriver != null;
+		if (_webDriver != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static void setClassName(LoggerElement loggerElement) {
