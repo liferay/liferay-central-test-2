@@ -37,12 +37,14 @@ import org.osgi.service.component.annotations.Component;
 public class BlogsContentEditorConfigContributor
 	implements EditorConfigContributor {
 
+	@Override
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
 		LiferayPortletResponse liferayPortletResponse) {
 	}
 
+	@Override
 	public void populateOptionsJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
