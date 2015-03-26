@@ -132,9 +132,9 @@ public class ItemSelectorImpl implements ItemSelector {
 	protected Map<String, String[]> getItemSelectorParameters(
 		ItemSelectorCriterion... itemSelectorCriteria) {
 
-		Map<String, String[]> params = new HashMap<>();
+		Map<String, String[]> parameters = new HashMap<>();
 
-		_populateCriteria(params, itemSelectorCriteria);
+		_populateCriteria(parameters, itemSelectorCriteria);
 
 		for (int i = 0; i < itemSelectorCriteria.length; i++) {
 			ItemSelectorCriterion itemSelectorCriterion =
@@ -143,21 +143,21 @@ public class ItemSelectorImpl implements ItemSelector {
 			String paramPrefix = i + "_";
 
 			_populateDesiredReturnTypes(
-				params, paramPrefix, itemSelectorCriterion);
+				parameters, paramPrefix, itemSelectorCriterion);
 
 			_populateItemSelectorCriteria(
-				params, paramPrefix, itemSelectorCriterion);
+				parameters, paramPrefix, itemSelectorCriterion);
 		}
 
-		return params;
+		return parameters;
 	}
 
 	@Reference(
 		cardinality = ReferenceCardinality.MULTIPLE,
 		policy = ReferencePolicy.DYNAMIC
 	)
-	protected <T extends ItemSelectorCriterion>
-		void setItemSelectionCriterionHandler(
+	protected <T extends ItemSelectorCriterion> void
+		setItemSelectionCriterionHandler(
 			ItemSelectorCriterionHandler<T> itemSelectionCriterionHandler) {
 
 		Class<T> itemSelectorCriterionClass =
@@ -204,7 +204,7 @@ public class ItemSelectorImpl implements ItemSelector {
 	}
 
 	private <T extends ItemSelectorCriterion> T _getItemSelectorCriterion(
-		Map<String, String[]> params, String paramPrefix,
+		Map<String, String[]> parameters, String paramPrefix,
 		Class<T> itemSelectorCriterionClass) {
 
 		try {
@@ -212,11 +212,11 @@ public class ItemSelectorImpl implements ItemSelector {
 
 			Map<String, String> properties = new HashMap<>();
 
-			for (String key : params.keySet()) {
+			for (String key : parameters.keySet()) {
 				if (key.startsWith(paramPrefix)) {
 					properties.put(
 						key.substring(paramPrefix.length()),
-						_getParameter(params, key));
+						_getParameter(parameters, key));
 				}
 			}
 
@@ -279,7 +279,7 @@ public class ItemSelectorImpl implements ItemSelector {
 	}
 
 	private void _populateCriteria(
-		Map<String, String[]> params,
+		Map<String, String[]> parameters,
 		ItemSelectorCriterion[] itemSelectorCriteria) {
 
 		Accessor<ItemSelectorCriterion, String> accessor =
@@ -304,13 +304,13 @@ public class ItemSelectorImpl implements ItemSelector {
 
 			};
 
-		params.put(
+		parameters.put(
 			PARAM_CRITERIA,
 			new String[] {ArrayUtil.toString(itemSelectorCriteria, accessor)});
 	}
 
 	private void _populateDesiredReturnTypes(
-		Map<String, String[]> params, String paramPrefix,
+		Map<String, String[]> parameters, String paramPrefix,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		Set<Class<?>> desiredReturnTypes =
@@ -343,7 +343,7 @@ public class ItemSelectorImpl implements ItemSelector {
 
 		};
 
-		params.put(
+		parameters.put(
 			paramPrefix + "desiredReturnTypes",
 			new String[] {
 				ArrayUtil.toString(
@@ -354,7 +354,7 @@ public class ItemSelectorImpl implements ItemSelector {
 
 	@SuppressWarnings("unchecked")
 	private void _populateItemSelectorCriteria(
-		Map<String, String[]> params, String paramPrefix,
+		Map<String, String[]> parameters, String paramPrefix,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		try {
@@ -372,7 +372,8 @@ public class ItemSelectorImpl implements ItemSelector {
 
 				Object value = entry.getValue();
 
-				params.put(paramPrefix + key, new String[] {value.toString()});
+				parameters.put(
+					paramPrefix + key, new String[] {value.toString()});
 			}
 		}
 		catch (InvocationTargetException | NoSuchMethodException |
