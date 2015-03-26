@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypeAccessPolicy;
 import com.liferay.portal.model.LayoutTypeController;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 
 import java.util.Map;
@@ -47,17 +46,12 @@ public class LayoutTypeURLImpl extends LayoutTypePortletImpl {
 	}
 
 	protected boolean hasViewPermission() {
-		Layout layout = getLayout();
-
-		LayoutTypeAccessPolicy layoutTypeAccessPolicy =
-			getLayoutTypeAccessPolicy();
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		try {
+			LayoutTypeAccessPolicy layoutTypeAccessPolicy =
+				getLayoutTypeAccessPolicy();
+
 			return layoutTypeAccessPolicy.isViewLayoutAllowed(
-				permissionChecker, layout);
+				PermissionThreadLocal.getPermissionChecker(), getLayout());
 		}
 		catch (PortalException pe) {
 			_log.error(pe);
