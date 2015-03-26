@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.navigation.breadcrumb.web.portlet.provider;
+package com.liferay.site.navigation.breadcrumb.web.provider;
 
 import com.liferay.portal.kernel.provider.ViewPortletProvider;
 import com.liferay.site.navigation.breadcrumb.web.constants.BreadcrumbPortletKeys;
