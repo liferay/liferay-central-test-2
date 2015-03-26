@@ -12,16 +12,15 @@
  * details.
  */
 
-package com.liferay.blogs.portlet.editor.config;
+package com.liferay.blogs.editor.config;
 
 import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Map;
-
-import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -31,16 +30,21 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=33", "javax.portlet.name=161",
-		"editor.config.key=contentEditor"
+		"editor.config.key=descriptionEditor",
+		"editor.config.key=subtitleEditor", "editor.config.key=titleEditor"
 	}
 )
-public class BlogsContentEditorConfigContributor
+public class BlogsTextEditorConfigContributor
 	implements EditorConfigContributor {
 
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
 		LiferayPortletResponse liferayPortletResponse) {
+
+		jsonObject.put("allowedContent", "p");
+		jsonObject.put("disallowedContent", "br");
+		jsonObject.put("toolbars", JSONFactoryUtil.createJSONObject());
 	}
 
 	public void populateOptionsJSONObject(
@@ -48,13 +52,7 @@ public class BlogsContentEditorConfigContributor
 		ThemeDisplay themeDisplay,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL uploadEditorImageURL =
-			liferayPortletResponse.createActionURL();
-
-		uploadEditorImageURL.setParameter(
-			"struts_action", "/blogs/upload_editor_image");
-
-		jsonObject.put("uploadURL", uploadEditorImageURL.toString());
+		jsonObject.put("textMode", Boolean.TRUE);
 	}
 
 }
