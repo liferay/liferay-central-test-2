@@ -28,12 +28,10 @@ import java.util.List;
 public class LoggerElement {
 
 	public LoggerElement() {
-		Date date = new Date();
-
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"yyyyMMddHHmmssSSS");
 
-		_id = simpleDateFormat.format(date);
+		_id = simpleDateFormat.format(new Date());
 	}
 
 	public LoggerElement(String id) {
@@ -81,15 +79,16 @@ public class LoggerElement {
 
 		sb.append("<");
 		sb.append(_name);
-		sb.append(" id=\"");
-		sb.append(_id);
-		sb.append("\"");
 
 		if (Validator.isNotNull(_className)) {
 			sb.append(" class=\"");
 			sb.append(_className);
 			sb.append("\"");
 		}
+
+		sb.append(" id=\"");
+		sb.append(_id);
+		sb.append("\"");
 
 		boolean hasChildren = _childLoggerElements.size() > 0;
 		boolean hasText = Validator.isNotNull(_text);
