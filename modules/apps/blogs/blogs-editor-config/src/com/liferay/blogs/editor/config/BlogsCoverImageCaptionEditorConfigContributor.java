@@ -47,18 +47,18 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 		jsonObject.put("allowedContent", "a");
 		jsonObject.put("disallowedContent", "br");
 
-		JSONObject toolbarJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
 		try {
 			JSONArray stylesJSONObject = JSONFactoryUtil.createJSONArray(
 				"['a']");
 
-			toolbarJSONObject.put("styles", stylesJSONObject);
+			toolbarsJSONObject.put("styles", stylesJSONObject);
 		}
 		catch (JSONException jsone) {
 		}
 
-		jsonObject.put("toolbars", toolbarJSONObject);
+		jsonObject.put("toolbars", toolbarsJSONObject);
 	}
 
 	@Override
