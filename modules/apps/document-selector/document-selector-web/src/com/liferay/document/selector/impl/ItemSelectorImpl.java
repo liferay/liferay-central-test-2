@@ -216,7 +216,7 @@ public class ItemSelectorImpl implements ItemSelector {
 				if (key.startsWith(paramPrefix)) {
 					properties.put(
 						key.substring(paramPrefix.length()),
-						_getParameter(parameters, key));
+						_getValue(parameters, key));
 				}
 			}
 
@@ -235,7 +235,7 @@ public class ItemSelectorImpl implements ItemSelector {
 	private List<Class<? extends ItemSelectorCriterion>>
 		_getItemSelectorCriterionClasses(Map<String, String[]> parameters) {
 
-		String criteria = _getParameter(parameters, PARAM_CRITERIA);
+		String criteria = _getValue(parameters, PARAM_CRITERIA);
 
 		String[] itemSelectorCriterionClassNames = criteria.split(",");
 
@@ -265,16 +265,16 @@ public class ItemSelectorImpl implements ItemSelector {
 				itemSelectorCriterionClass.getName());
 	}
 
-	private String _getParameter(
-		Map<String, String[]> parameters, String param) {
+	private String _getValue(
+		Map<String, String[]> parameters, String name) {
 
-		String[] strings = parameters.get(param);
+		String[] values = parameters.get(name);
 
-		if (ArrayUtil.isEmpty(strings)) {
+		if (ArrayUtil.isEmpty(values)) {
 			return StringPool.BLANK;
 		}
 		else {
-			return strings[0];
+			return values[0];
 		}
 	}
 
@@ -349,7 +349,8 @@ public class ItemSelectorImpl implements ItemSelector {
 				ArrayUtil.toString(
 					desiredReturnTypes.toArray(
 						new Class<?>[desiredReturnTypes.size()]),
-					accessor)});
+					accessor)
+			});
 	}
 
 	@SuppressWarnings("unchecked")
@@ -376,8 +377,8 @@ public class ItemSelectorImpl implements ItemSelector {
 					paramPrefix + key, new String[] {value.toString()});
 			}
 		}
-		catch (InvocationTargetException | NoSuchMethodException |
-			IllegalAccessException e) {
+		catch (IllegalAccessException | InvocationTargetException |
+			   NoSuchMethodException e) {
 
 			throw new SystemException(
 				"Unable to marshall item selector criterion", e);
