@@ -261,9 +261,8 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 			return article.getPrimaryKey();
 		}
-		else {
-			return article.getResourcePrimKey();
-		}
+
+		return article.getResourcePrimKey();
 	}
 
 	@Override
