@@ -99,8 +99,7 @@ public class TrashEntryLocalServiceUtil {
 		return getService().createTrashEntry(entryId);
 	}
 
-	public static void deleteEntries(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static void deleteEntries(long groupId) {
 		getService().deleteEntries(groupId);
 	}
 

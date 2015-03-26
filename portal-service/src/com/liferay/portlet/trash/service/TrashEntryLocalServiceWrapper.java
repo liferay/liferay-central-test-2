@@ -95,8 +95,7 @@ public class TrashEntryLocalServiceWrapper implements TrashEntryLocalService,
 	}
 
 	@Override
-	public void deleteEntries(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public void deleteEntries(long groupId) {
 		_trashEntryLocalService.deleteEntries(groupId);
 	}
 
