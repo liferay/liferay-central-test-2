@@ -66,27 +66,28 @@ public class LiferayCacheManagerPeerProviderFactory
 			throw new RuntimeException("portalPropertyKey is null");
 		}
 
-		String[] portalPropertiesArray = PropsUtil.getArray(portalPropertyKey);
+		String[] values = PropsUtil.getArray(portalPropertyKey);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"portalPropertyKey " + portalPropertyKey + " has value " +
-					Arrays.toString(portalPropertiesArray));
+					Arrays.toString(values));
 		}
 
 		Properties portalProperties = new Properties();
 
-		for (String portalProperty : portalPropertiesArray) {
-			String[] elements = StringUtil.split(
-				portalProperty, CharPool.EQUAL);
+		for (String value : values) {
+			String[] valueParts = StringUtil.split(
+				value, CharPool.EQUAL);
 
-			if (elements.length != 2) {
+			if (valueParts.length != 2) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Ignore deformed property :" + portalProperty);
+					_log.warn("Ignore malformed value " + value);
 				}
 			}
 
-			portalProperties.put(elements[0], _htmlUtil.unescape(elements[1]));
+			portalProperties.put(
+				valueParts[0], _htmlUtil.unescape(valueParts[1]));
 		}
 
 		if (_log.isDebugEnabled()) {
