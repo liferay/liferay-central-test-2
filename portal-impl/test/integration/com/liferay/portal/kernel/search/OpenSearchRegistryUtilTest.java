@@ -44,9 +44,8 @@ public class OpenSearchRegistryUtilTest {
 		OpenSearch openSearch = OpenSearchRegistryUtil.getOpenSearch(
 			TestOpenSearch.class);
 
-		String testOpenSearchClassName = TestOpenSearch.class.getName();
-
-		Assert.assertEquals(testOpenSearchClassName, openSearch.getClassName());
+		Assert.assertEquals(
+			TestOpenSearch.class.getName(), openSearch.getClassName());
 	}
 
 	@Test
@@ -54,16 +53,10 @@ public class OpenSearchRegistryUtilTest {
 		List<OpenSearch> openSearches =
 			OpenSearchRegistryUtil.getOpenSearchInstances();
 
-		String testOpenSearchClassName = TestOpenSearch.class.getName();
-
-		String openSearchClassName = null;
-
 		for (OpenSearch openSearch : openSearches) {
-			openSearchClassName = openSearch.getClassName();
+			String openSearchClassName = openSearch.getClassName();
 
-			if (testOpenSearchClassName.equals(openSearchClassName)) {
-				Assert.assertTrue(true);
-
+			if (openSearchClassName.equals(TestOpenSearch.class.getName())) {
 				return;
 			}
 		}

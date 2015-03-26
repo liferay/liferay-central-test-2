@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.search.bundle.opensearchregistryutil;
 
 import com.liferay.portal.kernel.search.OpenSearch;
-import com.liferay.portal.kernel.search.SearchException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,26 +41,22 @@ public class TestOpenSearch implements OpenSearch {
 
 	@Override
 	public String search(
-			HttpServletRequest request, long groupId, long userId,
-			String keywords, int startPage, int itemsPerPage, String format)
-		throws SearchException {
+		HttpServletRequest request, long groupId, long userId, String keywords,
+		int startPage, int itemsPerPage, String format) {
 
 		return groupId + ":" + userId;
 	}
 
 	@Override
 	public String search(
-			HttpServletRequest request, long userId, String keywords,
-			int startPage, int itemsPerPage, String format)
-		throws SearchException {
+		HttpServletRequest request, long userId, String keywords, int startPage,
+		int itemsPerPage, String format) {
 
-		return startPage + ":" + userId;
+		return userId + ":" + startPage;
 	}
 
 	@Override
-	public String search(HttpServletRequest request, String url)
-		throws SearchException {
-
+	public String search(HttpServletRequest request, String url) {
 		return url;
 	}
 
