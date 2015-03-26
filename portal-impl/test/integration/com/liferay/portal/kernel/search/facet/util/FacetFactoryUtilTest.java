@@ -16,8 +16,8 @@ package com.liferay.portal.kernel.search.facet.util;
 
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
-import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacetFactory;
 import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacet;
+import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacetFactory;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
