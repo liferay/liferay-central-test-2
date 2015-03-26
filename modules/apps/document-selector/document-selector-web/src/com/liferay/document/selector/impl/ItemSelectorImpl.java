@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 @Component(service = ItemSelector.class)
 public class ItemSelectorImpl implements ItemSelector {
 
-	public static final String PARAM_CRITERIA = "criteria";
+	public static final String PARAMETER_CRITERIA = "criteria";
 
 	@Override
 	public PortletURL getItemSelectorURL(
@@ -144,8 +144,7 @@ public class ItemSelectorImpl implements ItemSelector {
 		for (ItemSelectorView<T> itemSelectorView : itemSelectorViews) {
 			itemSelectorViewRenderers.add(
 				new ItemSelectorViewRenderer<T>(
-					itemSelectorView, itemSelectorCriterion)
-			);
+					itemSelectorView, itemSelectorCriterion));
 		}
 	}
 
@@ -159,11 +158,13 @@ public class ItemSelectorImpl implements ItemSelector {
 			Map<String, String> properties = new HashMap<>();
 
 			for (String key : parameters.keySet()) {
-				if (key.startsWith(paramPrefix)) {
-					properties.put(
-						key.substring(paramPrefix.length()),
-						getValue(parameters, key));
+				if (!key.startsWith(paramPrefix)) {
+					continue;
 				}
+
+				properties.put(
+					key.substring(paramPrefix.length()),
+					getValue(parameters, key));
 			}
 
 			BeanUtils.populate(itemSelectorCriterion, properties);
@@ -181,7 +182,7 @@ public class ItemSelectorImpl implements ItemSelector {
 	protected List<Class<? extends ItemSelectorCriterion>>
 		getItemSelectorCriterionClasses(Map<String, String[]> parameters) {
 
-		String criteria = getValue(parameters, PARAM_CRITERIA);
+		String criteria = getValue(parameters, PARAMETER_CRITERIA);
 
 		String[] itemSelectorCriterionClassNames = criteria.split(",");
 
@@ -225,7 +226,6 @@ public class ItemSelectorImpl implements ItemSelector {
 
 			populateDesiredReturnTypes(
 				parameters, paramPrefix, itemSelectorCriterion);
-
 			populateItemSelectorCriteria(
 				parameters, paramPrefix, itemSelectorCriterion);
 		}
@@ -239,9 +239,8 @@ public class ItemSelectorImpl implements ItemSelector {
 		if (ArrayUtil.isEmpty(values)) {
 			return StringPool.BLANK;
 		}
-		else {
-			return values[0];
-		}
+
+		return values[0];
 	}
 
 	protected void populateCriteria(
@@ -271,7 +270,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			};
 
 		parameters.put(
-			PARAM_CRITERIA,
+			PARAMETER_CRITERIA,
 			new String[] {ArrayUtil.toString(itemSelectorCriteria, accessor)});
 	}
 
