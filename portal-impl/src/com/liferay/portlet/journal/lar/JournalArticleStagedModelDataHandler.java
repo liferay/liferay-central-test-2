@@ -776,9 +776,9 @@ public class JournalArticleStagedModelDataHandler
 			sb.append(articleImage.getLanguageId());
 		}
 
-		String imageKey = sb.toString();
-
 		Element imageElement = portletDataContext.getExportDataElement(image);
+
+		String imageKey = sb.toString();
 
 		imageElement.addAttribute("image-key", imageKey);
 
