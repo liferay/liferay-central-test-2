@@ -91,7 +91,7 @@ public class EditorConfigFactoryImpl implements EditorConfigFactory {
 		List<EditorConfigContributor> editorConfigContributors, String key) {
 
 		List<EditorConfigContributor> curEditorConfigContributors =
-			_editorConfigServiceTrackerMap.getService(key);
+			_serviceTrackerMap.getService(key);
 
 		if (ListUtil.isNotEmpty(curEditorConfigContributors)) {
 			editorConfigContributors.addAll(curEditorConfigContributors);
@@ -124,13 +124,9 @@ public class EditorConfigFactoryImpl implements EditorConfigFactory {
 		return sb.toString();
 	}
 
-	private static final
-		ServiceTrackerMap<String, List<EditorConfigContributor>>
-		_editorConfigServiceTrackerMap =
-			ServiceTrackerCollections.multiValueMap(
-				EditorConfigContributor.class,
-				"(|(editor.config.key=*)(editor.impl=*)(javax.portlet.name=*))",
-				new ServiceReferenceMapper<String, EditorConfigContributor>() {
+	private static final ServiceReferenceMapper<String, EditorConfigContributor>
+		_serviceReferenceMapper =
+			new ServiceReferenceMapper<String, EditorConfigContributor>() {
 
 				@Override
 				public void map(
@@ -170,10 +166,17 @@ public class EditorConfigFactoryImpl implements EditorConfigFactory {
 					}
 				}
 
-			});
+			};
+
+	private static final ServiceTrackerMap
+		<String, List<EditorConfigContributor>> _serviceTrackerMap =
+			ServiceTrackerCollections.multiValueMap(
+				EditorConfigContributor.class,
+				"(|(editor.config.key=*)(editor.impl=*)(javax.portlet.name=*))",
+				_serviceReferenceMapper);
 
 	static {
-		_editorConfigServiceTrackerMap.open();
+		_serviceTrackerMap.open();
 	}
 
 }
