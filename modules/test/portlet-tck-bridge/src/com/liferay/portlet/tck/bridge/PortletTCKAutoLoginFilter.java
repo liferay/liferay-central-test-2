@@ -47,14 +47,11 @@ public class PortletTCKAutoLoginFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		// TCK tests have 2 GetRemoteUserNullTestPortlet, one for ActionRequest,
-		// the other one for RenderRequest. Those 2 tests are special ones that
-		// requires the current user is not login.
-		// Technically those tests are not well designed, as they are
-		// supposed to do an explicitly logout before performing the test
-		// logic, rather than assuming current user has not login.
-		// Since we have no way to change the TCK tests, we have to use this
-		// hacky way to skip auto login for these 2 tests.
+		// The portlet TCK has two tests named GetRemoteUserNullTestPortlet. One
+		// tests an action request and the other tests a render request. Those
+		// two tests assume that the current user is not authenticated. This
+		// filter skips automatic authentication as a workaround for those two
+		// tests.
 
 		HttpSession httpSession = request.getSession();
 
