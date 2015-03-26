@@ -30,13 +30,11 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestUserNotificationHandler implements UserNotificationHandler {
 
-	public static final String LINK = "http://www.liferay.com/";
+	public static final String LINK = "http://www.liferay.com";
 
-	public static final String PORTLET_ID =
-		"TestUserNotificationHandler.PortledId";
+	public static final String PORTLET_ID = "PORTLET_ID";
 
-	public static final String SELECTOR =
-		"TestUserNotificationHandler.Selector";
+	public static final String SELECTOR = "SELECTOR";
 
 	@Override
 	public String getPortletId() {

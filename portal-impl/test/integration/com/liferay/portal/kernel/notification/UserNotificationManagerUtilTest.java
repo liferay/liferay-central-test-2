@@ -50,31 +50,25 @@ public class UserNotificationManagerUtilTest {
 			userNotificationHandlersMap =
 				UserNotificationManagerUtil.getUserNotificationHandlers();
 
-		if (userNotificationHandlersMap == null) {
-			Assert.fail();
-		}
+		Assert.assertNotNull(userNotificationHandlersMap);
 
 		Map<String, UserNotificationHandler> userNotificationHandlers =
 			userNotificationHandlersMap.get(
 				TestUserNotificationHandler.SELECTOR);
 
-		if (userNotificationHandlers == null) {
-			Assert.fail();
-		}
+		Assert.assertNotNull(userNotificationHandlers);
 
 		UserNotificationHandler userNotificationHandler =
 			userNotificationHandlers.get(
 				TestUserNotificationHandler.PORTLET_ID);
 
-		if (userNotificationHandler == null) {
-			Assert.fail();
-		}
+		Assert.assertNotNull(userNotificationHandler);
 
 		Class<? extends UserNotificationHandler> clazz =
 			userNotificationHandler.getClass();
 
 		Assert.assertEquals(
-			clazz.getName(), TestUserNotificationHandler.class.getName());
+			TestUserNotificationHandler.class.getName(), clazz.getName());
 	}
 
 	@Test
@@ -92,8 +86,8 @@ public class UserNotificationManagerUtilTest {
 					null);
 
 			Assert.assertEquals(
-					userNotificationFeedEntry.getLink(),
-					TestUserNotificationHandler.LINK);
+				TestUserNotificationHandler.LINK,
+				userNotificationFeedEntry.getLink());
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -103,11 +97,11 @@ public class UserNotificationManagerUtilTest {
 	@Test
 	public void testIsDeliver() {
 		try {
-			boolean isDeliver = UserNotificationManagerUtil.isDeliver(
+			boolean deliver = UserNotificationManagerUtil.isDeliver(
 				1, TestUserNotificationHandler.SELECTOR,
 				TestUserNotificationHandler.PORTLET_ID, 1, 1, 1, null);
 
-			Assert.assertTrue(isDeliver);
+			Assert.assertTrue(deliver);
 		}
 		catch (Exception e) {
 			Assert.fail();
