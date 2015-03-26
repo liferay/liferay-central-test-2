@@ -384,7 +384,7 @@ public class SearchEngineUtil {
 		}
 		catch (ParseException pe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Error parsing the query", pe);
+				_log.debug("Unable to parse query " + query, pe);
 			}
 		}
 
