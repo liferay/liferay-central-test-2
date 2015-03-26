@@ -129,56 +129,6 @@ public class ItemSelectorImpl implements ItemSelector {
 		}
 	}
 
-	protected Map<String, String[]> getItemSelectorParameters(
-		ItemSelectorCriterion... itemSelectorCriteria) {
-
-		Map<String, String[]> parameters = new HashMap<>();
-
-		populateCriteria(parameters, itemSelectorCriteria);
-
-		for (int i = 0; i < itemSelectorCriteria.length; i++) {
-			ItemSelectorCriterion itemSelectorCriterion =
-				itemSelectorCriteria[i];
-
-			String paramPrefix = i + "_";
-
-			populateDesiredReturnTypes(
-				parameters, paramPrefix, itemSelectorCriterion);
-
-			populateItemSelectorCriteria(
-				parameters, paramPrefix, itemSelectorCriterion);
-		}
-
-		return parameters;
-	}
-
-	@Reference(
-		cardinality = ReferenceCardinality.MULTIPLE,
-		policy = ReferencePolicy.DYNAMIC
-	)
-	protected <T extends ItemSelectorCriterion> void
-		setItemSelectionCriterionHandler(
-			ItemSelectorCriterionHandler<T> itemSelectionCriterionHandler) {
-
-		Class<T> itemSelectorCriterionClass =
-			itemSelectionCriterionHandler.getItemSelectorCriterionClass();
-
-		_itemSelectionCriterionHandlers.put(
-			itemSelectorCriterionClass.getName(),
-			itemSelectionCriterionHandler);
-	}
-
-	protected <T extends ItemSelectorCriterion>
-		void unsetItemSelectionCriterionHandler(
-			ItemSelectorCriterionHandler<T> itemSelectionCriterionHandler) {
-
-		Class<T> itemSelectorCriterionClass =
-			itemSelectionCriterionHandler.getItemSelectorCriterionClass();
-
-		_itemSelectionCriterionHandlers.remove(
-			itemSelectorCriterionClass.getName());
-	}
-
 	protected <T extends ItemSelectorCriterion>
 		void addItemSelectorViewRenderers(
 			List<ItemSelectorViewRenderer<T>> itemSelectorViewRenderers,
@@ -264,9 +214,30 @@ public class ItemSelectorImpl implements ItemSelector {
 				itemSelectorCriterionClass.getName());
 	}
 
-	protected String getValue(
-		Map<String, String[]> parameters, String name) {
+	protected Map<String, String[]> getItemSelectorParameters(
+		ItemSelectorCriterion... itemSelectorCriteria) {
 
+		Map<String, String[]> parameters = new HashMap<>();
+
+		populateCriteria(parameters, itemSelectorCriteria);
+
+		for (int i = 0; i < itemSelectorCriteria.length; i++) {
+			ItemSelectorCriterion itemSelectorCriterion =
+				itemSelectorCriteria[i];
+
+			String paramPrefix = i + "_";
+
+			populateDesiredReturnTypes(
+				parameters, paramPrefix, itemSelectorCriterion);
+
+			populateItemSelectorCriteria(
+				parameters, paramPrefix, itemSelectorCriterion);
+		}
+
+		return parameters;
+	}
+
+	protected String getValue(Map<String, String[]> parameters, String name) {
 		String[] values = parameters.get(name);
 
 		if (ArrayUtil.isEmpty(values)) {
@@ -376,11 +347,38 @@ public class ItemSelectorImpl implements ItemSelector {
 			}
 		}
 		catch (IllegalAccessException | InvocationTargetException |
-			   NoSuchMethodException e) {
+			NoSuchMethodException e) {
 
 			throw new SystemException(
 				"Unable to marshall item selector criterion", e);
 		}
+	}
+
+	@Reference(
+		cardinality = ReferenceCardinality.MULTIPLE,
+		policy = ReferencePolicy.DYNAMIC
+	)
+	protected <T extends ItemSelectorCriterion> void
+		setItemSelectionCriterionHandler(
+			ItemSelectorCriterionHandler<T> itemSelectionCriterionHandler) {
+
+		Class<T> itemSelectorCriterionClass =
+			itemSelectionCriterionHandler.getItemSelectorCriterionClass();
+
+		_itemSelectionCriterionHandlers.put(
+			itemSelectorCriterionClass.getName(),
+			itemSelectionCriterionHandler);
+	}
+
+	protected <T extends ItemSelectorCriterion>
+		void unsetItemSelectionCriterionHandler(
+			ItemSelectorCriterionHandler<T> itemSelectionCriterionHandler) {
+
+		Class<T> itemSelectorCriterionClass =
+			itemSelectionCriterionHandler.getItemSelectorCriterionClass();
+
+		_itemSelectionCriterionHandlers.remove(
+			itemSelectorCriterionClass.getName());
 	}
 
 	private final ConcurrentMap<String, ItemSelectorCriterionHandler<?>>
