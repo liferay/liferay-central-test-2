@@ -129,8 +129,8 @@ public class EditorConfigFactoryImpl implements EditorConfigFactory {
 		_editorConfigServiceTrackerMap =
 			ServiceTrackerCollections.multiValueMap(
 				EditorConfigContributor.class,
-				"(|(javax.portlet.name=*)(editor.config.key=*)(editor.impl=*))",
-				new ServiceReferenceMapper <String, EditorConfigContributor>() {
+				"(|(editor.config.key=*)(editor.impl=*)(javax.portlet.name=*))",
+				new ServiceReferenceMapper<String, EditorConfigContributor>() {
 
 				@Override
 				public void map(
