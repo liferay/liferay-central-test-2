@@ -20,7 +20,6 @@ import com.liferay.document.selector.ItemSelectorCriterionHandler;
 import com.liferay.document.selector.ItemSelectorView;
 import com.liferay.document.selector.ItemSelectorViewRenderer;
 import com.liferay.document.selector.web.constants.DocumentSelectorPortletKeys;
-import com.liferay.document.selector.web.portlet.DocumentSelectorPortlet;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.Accessor;
@@ -88,9 +87,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			throw new SystemException(wse);
 		}
 
-		portletURL.setParameter(
-			ActionRequest.ACTION_NAME,
-			DocumentSelectorPortlet.ACTION_SHOW_ITEM_SELECTOR);
+		portletURL.setParameter(ActionRequest.ACTION_NAME, "showItemSelector");
 
 		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
 			portletURL.setParameter(entry.getKey(), entry.getValue());

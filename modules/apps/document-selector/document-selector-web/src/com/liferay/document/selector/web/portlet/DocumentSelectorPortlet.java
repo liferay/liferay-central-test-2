@@ -93,8 +93,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class DocumentSelectorPortlet extends MVCPortlet {
 
-	public static final String ACTION_SHOW_ITEM_SELECTOR = "showItemSelector";
-
 	public void addFileEntry(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
