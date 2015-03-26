@@ -120,11 +120,11 @@ public class JournalArticleWorkflowHandler
 		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 			"serviceContext");
 
-		String portletId = PortletProviderUtil.getPortletId(
-			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
-
 		String articleURL = PortalUtil.getControlPanelFullURL(
-			serviceContext.getScopeGroupId(), portletId, null);
+			serviceContext.getScopeGroupId(),
+			PortletProviderUtil.getPortletId(
+				JournalArticle.class.getName(), PortletProvider.Action.EDIT),
+				null);
 
 		return JournalArticleLocalServiceUtil.updateStatus(
 			userId, article, status, articleURL, serviceContext,

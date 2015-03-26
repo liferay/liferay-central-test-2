@@ -572,17 +572,17 @@ public class JournalRSSUtil {
 
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
-						feed.getGroupId(), article.getArticleId(),
-						ddmRendererTemplateKey, null, languageId, 1,
-						new PortletRequestModel() {
+					feed.getGroupId(), article.getArticleId(),
+					ddmRendererTemplateKey, null, languageId, 1,
+					new PortletRequestModel() {
 
-							@Override
-							public String toXML() {
-								return _XML_REQUUEST;
-							}
+						@Override
+						public String toXML() {
+							return _XML_REQUUEST;
+						}
 
-						},
-						themeDisplay);
+					},
+					themeDisplay);
 
 			if (articleDisplay != null) {
 				content = articleDisplay.getContent();

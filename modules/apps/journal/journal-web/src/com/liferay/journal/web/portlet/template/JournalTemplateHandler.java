@@ -70,9 +70,8 @@ public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 
 	@Override
 	public String getTemplatesHelpPropertyKey() {
-		return
-			JournalWebConfigurationValues.
-				JOURNAL_ARTICLE_TEMPLATE_LANGUAGE_CONTENT;
+		return JournalWebConfigurationValues.
+			JOURNAL_ARTICLE_TEMPLATE_LANGUAGE_CONTENT;
 	}
 
 	@Override

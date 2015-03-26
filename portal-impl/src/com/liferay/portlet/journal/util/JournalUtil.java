@@ -834,11 +834,10 @@ public class JournalUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String portletId = PortletProviderUtil.getPortletId(
-			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
-
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			portletRequest, portletId,
+			portletRequest,
+			PortletProviderUtil.getPortletId(
+				JournalArticle.class.getName(), PortletProvider.Action.EDIT),
 			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
 			PortletRequest.RENDER_PHASE);
 

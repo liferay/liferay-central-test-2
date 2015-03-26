@@ -5932,12 +5932,14 @@ public class JournalArticleLocalServiceImpl
 
 		StringBundler sb = new StringBundler(13);
 
+		sb.append(articleURL);
+		sb.append(StringPool.AMPERSAND);
+
 		String portletId = PortletProviderUtil.getPortletId(
 			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
 
-		sb.append(articleURL);
-		sb.append(StringPool.AMPERSAND);
 		sb.append(PortalUtil.getPortletNamespace(portletId));
+
 		sb.append("groupId=");
 		sb.append(groupId);
 		sb.append(StringPool.AMPERSAND);
@@ -6040,11 +6042,11 @@ public class JournalArticleLocalServiceImpl
 	protected void checkArticlesByDisplayDate(Date displayDate)
 		throws PortalException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByLtD_S(
-			displayDate, WorkflowConstants.STATUS_SCHEDULED);
-
 		String portletId = PortletProviderUtil.getPortletId(
 			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
+
+		List<JournalArticle> articles = journalArticlePersistence.findByLtD_S(
+			displayDate, WorkflowConstants.STATUS_SCHEDULED);
 
 		for (JournalArticle article : articles) {
 			ServiceContext serviceContext = new ServiceContext();
@@ -7114,6 +7116,7 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
 
 		subscriptionSender.setPortletId(portletId);
+
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setScopeGroupId(article.getGroupId());
 		subscriptionSender.setServiceContext(serviceContext);
@@ -7286,6 +7289,7 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
 
 		subscriptionSender.setPortletId(portletId);
+
 		subscriptionSender.setScopeGroupId(article.getGroupId());
 		subscriptionSender.setServiceContext(serviceContext);
 

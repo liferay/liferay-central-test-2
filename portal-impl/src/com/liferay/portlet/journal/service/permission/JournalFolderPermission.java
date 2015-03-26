@@ -66,12 +66,12 @@ public class JournalFolderPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException {
 
+		String portletId = PortletProviderUtil.getPortletId(
+			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
+
 		if (actionId.equals(ActionKeys.ADD_FOLDER)) {
 			actionId = ActionKeys.ADD_SUBFOLDER;
 		}
-
-		String portletId = PortletProviderUtil.getPortletId(
-			JournalArticle.class.getName(), PortletProvider.Action.EDIT);
 
 		Boolean hasPermission = StagingPermissionUtil.hasPermission(
 			permissionChecker, folder.getGroupId(),
