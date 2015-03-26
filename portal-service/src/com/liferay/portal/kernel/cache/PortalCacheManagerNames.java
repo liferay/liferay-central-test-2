@@ -19,13 +19,10 @@ package com.liferay.portal.kernel.cache;
  */
 public interface PortalCacheManagerNames {
 
-	public static final String HIBERNATE_PORTAL_CACHE_MANAGER =
-		"HIBERNATE_PORTAL_CACHE_MANAGER";
+	public static final String HIBERNATE = "HIBERNATE_PORTAL_CACHE_MANAGER";
 
-	public static final String MULTI_VM_PORTAL_CACHE_MANAGER =
-		"MULTI_VM_PORTAL_CACHE_MANAGER";
+	public static final String MULTI_VM = "MULTI_VM_PORTAL_CACHE_MANAGER";
 
-	public static final String SINGLE_VM_PORTAL_CACHE_MANAGER =
-		"SINGLE_VM_PORTAL_CACHE_MANAGER";
+	public static final String SINGLE_VM = "SINGLE_VM_PORTAL_CACHE_MANAGER";
 
 }

@@ -77,8 +77,7 @@ public class LiferayCacheManagerPeerProviderFactory
 		Properties portalProperties = new Properties();
 
 		for (String value : values) {
-			String[] valueParts = StringUtil.split(
-				value, CharPool.EQUAL);
+			String[] valueParts = StringUtil.split(value, CharPool.EQUAL);
 
 			if (valueParts.length != 2) {
 				if (_log.isWarnEnabled()) {
