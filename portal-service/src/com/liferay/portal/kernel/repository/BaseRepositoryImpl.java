@@ -423,13 +423,13 @@ public abstract class BaseRepositoryImpl
 	@Deprecated
 	@Override
 	public String[] getSupportedConfigurations() {
-		return _EMPTY_CONFIGURATIONS;
+		return _SUPPORTED_CONFIGURATIONS;
 	}
 
 	@Deprecated
 	@Override
 	public String[][] getSupportedParameters() {
-		return _EMPTY_PARAMETERS;
+		return _SUPPORTED_PARAMETERS;
 	}
 
 	public UnicodeProperties getTypeSettingsProperties() {
@@ -752,9 +752,9 @@ public abstract class BaseRepositoryImpl
 	protected RepositoryEntryLocalService repositoryEntryLocalService;
 	protected UserLocalService userLocalService;
 
-	private static final String[] _EMPTY_CONFIGURATIONS = {};
+	private static final String[] _SUPPORTED_CONFIGURATIONS = {};
 
-	private static final String[][] _EMPTY_PARAMETERS = {};
+	private static final String[][] _SUPPORTED_PARAMETERS = {};
 
 	private long _companyId;
 	private long _groupId;

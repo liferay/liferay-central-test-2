@@ -36,7 +36,7 @@ import com.liferay.portal.repository.capabilities.LiferayRepositoryEventTriggerC
  */
 public class RepositoryClassDefinition
 	implements RepositoryConfiguration, RepositoryFactory,
-		RepositoryFactoryRegistry {
+			   RepositoryFactoryRegistry {
 
 	public static final RepositoryClassDefinition fromRepositoryDefiner(
 		RepositoryDefiner repositoryDefiner) {

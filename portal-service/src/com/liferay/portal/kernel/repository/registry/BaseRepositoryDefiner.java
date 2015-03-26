@@ -26,12 +26,12 @@ public abstract class BaseRepositoryDefiner implements RepositoryDefiner {
 
 	@Override
 	public String[] getSupportedConfigurations() {
-		return _EMPTY_CONFIGURATIONS;
+		return _SUPPORTED_CONFIGURATIONS;
 	}
 
 	@Override
 	public String[][] getSupportedParameters() {
-		return _EMPTY_PARAMETERS;
+		return _SUPPORTED_PARAMETERS;
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public abstract class BaseRepositoryDefiner implements RepositoryDefiner {
 	public abstract void registerRepositoryFactory(
 		RepositoryFactoryRegistry repositoryFactoryRegistry);
 
-	private static final String[] _EMPTY_CONFIGURATIONS = {};
+	private static final String[] _SUPPORTED_CONFIGURATIONS = {};
 
-	private static final String[][] _EMPTY_PARAMETERS = {};
+	private static final String[][] _SUPPORTED_PARAMETERS = {};
 
 }
