@@ -29,9 +29,9 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=33", "javax.portlet.name=161",
 		"editor.config.key=descriptionEditor",
-		"editor.config.key=subtitleEditor", "editor.config.key=titleEditor"
+		"editor.config.key=subtitleEditor", "editor.config.key=titleEditor",
+		"javax.portlet.name=33", "javax.portlet.name=161"
 	}
 )
 public class BlogsTextEditorConfigContributor

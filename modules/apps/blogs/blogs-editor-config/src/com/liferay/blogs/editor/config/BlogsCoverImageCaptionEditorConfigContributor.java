@@ -31,13 +31,14 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=33", "javax.portlet.name=161",
-		"editor.config.key=coverImageCaptionEditor"
+		"editor.config.key=coverImageCaptionEditor", "javax.portlet.name=33",
+		"javax.portlet.name=161"
 	}
 )
 public class BlogsCoverImageCaptionEditorConfigContributor
 	implements EditorConfigContributor {
 
+	@Override
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
@@ -60,6 +61,7 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 		jsonObject.put("toolbars", toolbarJSONObject);
 	}
 
+	@Override
 	public void populateOptionsJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
