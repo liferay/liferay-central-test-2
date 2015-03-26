@@ -121,11 +121,11 @@ public class ItemSelectorImpl implements ItemSelector {
 			portletURL.setPortletMode(PortletMode.VIEW);
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
 		}
-		catch (WindowStateException wse) {
-			throw new SystemException(wse);
-		}
 		catch (PortletModeException pme) {
 			throw new SystemException(pme);
+		}
+		catch (WindowStateException wse) {
+			throw new SystemException(wse);
 		}
 	}
 
