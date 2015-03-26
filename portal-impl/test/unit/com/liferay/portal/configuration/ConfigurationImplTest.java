@@ -122,10 +122,10 @@ public class ConfigurationImplTest {
 
 		Assert.assertEquals("value1", configurationImpl.get("key1"));
 
-		// This is the limitation of Commons Configuration. For multi value
-		// property with variable interpolation, when you get the value as a
-		// single line, it does not reolve the variable. But it resolves fine
-		// when you get the values as array.
+		// This is a limitation of Commons Configuration where it does not
+		// resolve variables for multivalue properties with variable
+		// interpolation when you get the value as a single line although
+		// variables resolve when you get the values as an array
 
 		Assert.assertEquals("${key1},value2", configurationImpl.get("key2"));
 		Assert.assertArrayEquals(
