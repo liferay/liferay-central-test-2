@@ -32,7 +32,7 @@ public class ItemSelectorViewRenderers {
 
 	public static ItemSelectorViewRenderers get(PortletRequest portletRequest) {
 		return (ItemSelectorViewRenderers)portletRequest.getAttribute(
-			_REQUEST_ATTRIBUTE);
+			ItemSelectorViewRenderers.class.getName());
 	}
 
 	public ItemSelectorViewRenderers(
@@ -54,8 +54,8 @@ public class ItemSelectorViewRenderers {
 
 		String title = itemSelectorView.getTitle(_locale);
 
-		_titles.add(title);
 		_itemSelectorViewRenderers.put(title, itemSelectorViewRenderer);
+		_titles.add(title);
 	}
 
 	public ItemSelectorViewRenderer<?> getItemSelectorViewRenderer(
@@ -69,11 +69,9 @@ public class ItemSelectorViewRenderers {
 	}
 
 	public void store(PortletRequest portletRequest) {
-		portletRequest.setAttribute(_REQUEST_ATTRIBUTE, this);
+		portletRequest.setAttribute(
+			ItemSelectorViewRenderers.class.getName(), this);
 	}
-
-	private static final String _REQUEST_ATTRIBUTE =
-		ItemSelectorViewRenderers.class.getName();
 
 	private final Map<String, ItemSelectorViewRenderer<?>>
 		_itemSelectorViewRenderers = new HashMap<>();
