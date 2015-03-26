@@ -72,9 +72,7 @@ import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelNameCo
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelSizeComparator;
 
 import java.io.InputStream;
-
 import java.math.BigInteger;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -876,11 +874,13 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Deprecated
 	@Override
 	public String[] getSupportedConfigurations() {
 		return _cmisRepositoryHandler.getSupportedConfigurations();
 	}
 
+	@Deprecated
 	@Override
 	public String[][] getSupportedParameters() {
 		return _cmisRepositoryHandler.getSupportedParameters();

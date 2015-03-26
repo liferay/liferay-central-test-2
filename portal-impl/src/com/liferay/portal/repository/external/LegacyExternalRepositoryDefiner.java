@@ -42,6 +42,7 @@ public class LegacyExternalRepositoryDefiner extends BaseRepositoryDefiner {
 		return _className;
 	}
 
+	@Deprecated
 	@Override
 	public String[] getSupportedConfigurations() {
 		try {
@@ -55,6 +56,7 @@ public class LegacyExternalRepositoryDefiner extends BaseRepositoryDefiner {
 		}
 	}
 
+	@Deprecated
 	@Override
 	public String[][] getSupportedParameters() {
 		try {
