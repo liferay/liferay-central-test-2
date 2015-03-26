@@ -67,7 +67,7 @@ public class ItemSelectorImpl implements ItemSelector {
 		PortletRequest portletRequest,
 		ItemSelectorCriterion... itemSelectorCriteria) {
 
-		Map<String, String[]> params = getItemSelectorParameters(
+		Map<String, String[]> parameters = getItemSelectorParameters(
 			itemSelectorCriteria);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
@@ -83,7 +83,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			ActionRequest.ACTION_NAME,
 			DocumentSelectorPortlet.ACTION_SHOW_ITEM_SELECTOR);
 
-		for (Map.Entry<String, String[]> entry : params.entrySet()) {
+		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
 			portletURL.setParameter(entry.getKey(), entry.getValue());
 		}
 
