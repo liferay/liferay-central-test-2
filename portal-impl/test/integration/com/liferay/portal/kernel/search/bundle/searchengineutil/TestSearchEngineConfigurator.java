@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.search.bundle.searchengineutil;
 
 import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.SearchEngineConfigurator;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -32,20 +33,14 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class TestSearchEngineConfigurator implements SearchEngineConfigurator {
 
-	public static final String VERIFY_DESTROY =
-		"TestSearchEngineConfigurator.destroy";
-
-	public static final String VERIFY_INIT =
-		"TestSearchEngineConfigurator.init";
-
 	@Override
 	public void afterPropertiesSet() {
-		_atomicReference.set(VERIFY_INIT);
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 
 	@Override
 	public void destroy() {
-		_atomicReference.set(VERIFY_DESTROY);
+		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 
 	@Override

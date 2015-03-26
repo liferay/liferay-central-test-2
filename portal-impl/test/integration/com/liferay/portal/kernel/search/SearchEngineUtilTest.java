@@ -53,7 +53,9 @@ public class SearchEngineUtilTest {
 	@Test
 	public void testAfterPropertiesSet() {
 		Assert.assertEquals(
-			TestSearchEngineConfigurator.VERIFY_INIT, _atomicState.get());
+			TestSearchEngineConfigurator.class.getName() +
+				"#afterPropertiesSet#38",
+			_atomicState.get());
 	}
 
 	private static AtomicState _atomicState;
