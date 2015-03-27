@@ -82,10 +82,7 @@ public final class SummaryLoggerHandler {
 
 		String summary = null;
 
-		if (element.attributeValue("summary") != null) {
-			summary = element.attributeValue("summary");
-		}
-		else if (element.attributeValue("action") != null) {
+		if (element.attributeValue("action") != null) {
 			summary = PoshiRunnerContext.getActionCommandSummary(
 				element.attributeValue("action"));
 		}
@@ -96,6 +93,9 @@ public final class SummaryLoggerHandler {
 		else if (element.attributeValue("macro") != null) {
 			summary = PoshiRunnerContext.getMacroCommandSummary(
 				element.attributeValue("macro"));
+		}
+		else if (element.attributeValue("summary") != null) {
+			summary = element.attributeValue("summary");
 		}
 
 		if (summary != null) {
