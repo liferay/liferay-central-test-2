@@ -46,6 +46,13 @@ public class MentionsEditorConfigContributor
 		ThemeDisplay themeDisplay,
 		LiferayPortletResponse liferayPortletResponse) {
 
+		JSONObject autoCompleteConfigJSONObject =
+			JSONFactoryUtil.createJSONObject();
+
+		autoCompleteConfigJSONObject.put("requestTemplate", "query={query}");
+
+		JSONArray triggerJSONArray = JSONFactoryUtil.createJSONArray();
+
 		JSONObject triggerJSONObject = JSONFactoryUtil.createJSONObject();
 
 		triggerJSONObject.put(
@@ -60,6 +67,7 @@ public class MentionsEditorConfigContributor
 				PortalUtil.getPortletNamespace("1_WAR_mentionsportlet");
 
 		triggerJSONObject.put("source", source);
+
 		triggerJSONObject.put("term", "@");
 		triggerJSONObject.put("tplReplace", "{mention}");
 
@@ -76,12 +84,11 @@ public class MentionsEditorConfigContributor
 
 		triggerJSONObject.put("tplResults", sb.toString());
 
-		JSONArray triggerJSONArray = JSONFactoryUtil.createJSONArray();
-
 		triggerJSONArray.put(triggerJSONObject);
 
-		JSONObject autoCompleteConfigJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		autoCompleteConfigJSONObject.put("trigger", triggerJSONArray);
+
+		jsonObject.put("autocomplete", autoCompleteConfigJSONObject);
 
 		String extraPlugins = jsonObject.getString("extraPlugins");
 
@@ -92,11 +99,7 @@ public class MentionsEditorConfigContributor
 			extraPlugins = "autocomplete";
 		}
 
-		autoCompleteConfigJSONObject.put("requestTemplate", "query={query}");
-		autoCompleteConfigJSONObject.put("trigger", triggerJSONArray);
-
 		jsonObject.put("extraPlugins", extraPlugins);
-		jsonObject.put("autocomplete", autoCompleteConfigJSONObject);
 	}
 
 	@Override
