@@ -622,18 +622,13 @@ public class PoshiRunnerExecutor {
 					 (element.attributeValue("input") != null) &&
 					 (element.attributeValue("pattern") != null)) {
 
-				String group = element.attributeValue("group");
-				String input = element.attributeValue("input");
-				String pattern = element.attributeValue("pattern");
-
 				StringBuilder sb = new StringBuilder();
 
 				sb.append("RegexUtil#replace(");
-				sb.append(input);
+				sb.append(element.attributeValue("input"));
 				sb.append(StringPool.COMMA);
-				sb.append(pattern);
-				sb.append(StringPool.COMMA);
-				sb.append(group);
+				sb.append(element.attributeValue("pattern"));
+				sb.append(element.attributeValue("group"));
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				varValue = PoshiRunnerGetterUtil.getVarMethodValue(
