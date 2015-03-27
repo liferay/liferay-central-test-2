@@ -40,20 +40,6 @@ import java.util.regex.Pattern;
  */
 public class RTLCSSConverter {
 
-	private static final Pattern _percentPattern = Pattern.compile("\\d+%");
-
-	private static final Pattern _percentOrLengthPattern = Pattern.compile(
-		"(\\d+)([a-z]{2}|%)");
-
-	private static final List<String> _reverseImageStyles = Arrays.asList(
-		"background", "background-image");
-
-	private static final List<String> _shorthandRadiusStyles = Arrays.asList(
-		"-moz-border-radius", "-webkit-border-radius", "border-radius");
-
-	private static final List<String> _shorthandStyles = Arrays.asList(
-		"border-color", "border-style", "border-width", "margin", "padding");
-
 	public RTLCSSConverter() {
 		_cssWriterSettings = new CSSWriterSettings(ECSSVersion.CSS30, true);
 	}
@@ -375,10 +361,19 @@ public class RTLCSSConverter {
 
 	private static final List<String> _backgroundPositionStyles = Arrays.asList(
 		"background-position");
+	private static final Pattern _percentOrLengthPattern = Pattern.compile(
+		"(\\d+)([a-z]{2}|%)");
+	private static final Pattern _percentPattern = Pattern.compile("\\d+%");
 	private static final Map<String, String> _replacementStyles =
 		new HashMap<>();
+	private static final List<String> _reverseImageStyles = Arrays.asList(
+		"background", "background-image");
 	private static final List<String> _reverseStyles = Arrays.asList(
 		"clear", "direction", "float", "text-align");
+	private static final List<String> _shorthandRadiusStyles = Arrays.asList(
+		"-moz-border-radius", "-webkit-border-radius", "border-radius");
+	private static final List<String> _shorthandStyles = Arrays.asList(
+		"border-color", "border-style", "border-width", "margin", "padding");
 
 	static {
 		_replacementStyles.put(
