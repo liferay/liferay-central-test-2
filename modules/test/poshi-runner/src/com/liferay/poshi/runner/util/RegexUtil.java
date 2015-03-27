@@ -29,7 +29,7 @@ public class RegexUtil {
 		Matcher matcher = pattern.matcher(content);
 
 		while (matcher.find()) {
-			return matcher.group(Integer.parseInt(group));
+			return matcher.group(GetterUtil.getInteger(group));
 		}
 
 		return null;
