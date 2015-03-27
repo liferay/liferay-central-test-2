@@ -89,13 +89,13 @@ public class RTLCSSConverter {
 				else if (SHORTHAND_RADIUS_STYLES.contains(strippedProperty)) {
 					convertShorthandRadius(cssStyleRule, property);
 				}
-				else if (REVERSE_STYLES.contains(strippedProperty)) {
+				else if (_reverseStyles.contains(strippedProperty)) {
 					reverseStyle(cssStyleRule, property);
 				}
 				else if (REVERSE_IMAGE_STYLES.contains(strippedProperty)) {
 					reverseImage(cssStyleRule, property);
 				}
-				else if (BGPOSITION_STYLES.contains(strippedProperty)) {
+				else if (_backgroundPositionStyles.contains(strippedProperty)) {
 					convertBGPosition(cssStyleRule, property);
 				}
 			}
@@ -373,14 +373,12 @@ public class RTLCSSConverter {
 		return property.replaceAll("\\**\\b", "");
 	}
 
-	private static final List<String> BGPOSITION_STYLES = Arrays.asList(
+	private static final List<String> _backgroundPositionStyles = Arrays.asList(
 		"background-position");
-
-	private static final List<String> REVERSE_STYLES = Arrays.asList(
-		"text-align", "float", "clear", "direction");
-
 	private static final Map<String, String> _replacementStyles =
 		new HashMap<>();
+	private static final List<String> _reverseStyles = Arrays.asList(
+		"text-align", "float", "clear", "direction");
 
 	static {
 		_replacementStyles.put("margin-left", "margin-right");
