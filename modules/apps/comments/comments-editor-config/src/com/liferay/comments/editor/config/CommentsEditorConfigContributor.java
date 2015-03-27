@@ -36,6 +36,7 @@ import org.osgi.service.component.annotations.Component;
 public class CommentsEditorConfigContributor
 	implements EditorConfigContributor {
 
+	@Override
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
@@ -46,6 +47,7 @@ public class CommentsEditorConfigContributor
 		jsonObject.put("toolbars", JSONFactoryUtil.createJSONObject());
 	}
 
+	@Override
 	public void populateOptionsJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
