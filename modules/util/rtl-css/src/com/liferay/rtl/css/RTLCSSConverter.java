@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.rtl;
+package com.liferay.rtl.css;
 
 import com.helger.commons.charset.CCharset;
 import com.helger.css.ECSSVersion;
