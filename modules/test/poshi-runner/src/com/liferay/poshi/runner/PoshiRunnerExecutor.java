@@ -598,7 +598,7 @@ public class PoshiRunnerExecutor {
 		}
 	}
 
-	public static void runVarElement(Element element, boolean isCommandVar)
+	public static void runVarElement(Element element, boolean commandVar)
 		throws PoshiRunnerException {
 
 		String varName = element.attributeValue("name");
@@ -646,7 +646,7 @@ public class PoshiRunnerExecutor {
 
 		varValue = PoshiRunnerVariablesUtil.replaceCommandVars(varValue);
 
-		if (isCommandVar) {
+		if (commandVar) {
 			PoshiRunnerVariablesUtil.putIntoCommandMap(varName, varValue);
 		}
 		else {
