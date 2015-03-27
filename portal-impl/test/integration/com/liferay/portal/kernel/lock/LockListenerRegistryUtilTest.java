@@ -39,12 +39,11 @@ public class LockListenerRegistryUtilTest {
 
 	@Test
 	public void testGetLockListener() {
-		String className = TestLockListener.class.getName();
-
 		LockListener lockListener = LockListenerRegistryUtil.getLockListener(
-			className);
+			TestLockListener.class.getName());
 
-		Assert.assertEquals(lockListener.getClassName(), className);
+		Assert.assertEquals(
+			lockListener.getClassName(), TestLockListener.class.getName());
 	}
 
 }
