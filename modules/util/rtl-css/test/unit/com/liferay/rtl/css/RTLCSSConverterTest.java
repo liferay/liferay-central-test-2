@@ -43,7 +43,7 @@ public class RTLCSSConverterTest {
 	}
 
 	@Test
-	public void testAsterick() throws Exception {
+	public void testAsterisk() throws Exception {
 		RTLCSSConverter rtlCssConverter = new RTLCSSConverter();
 
 		Assert.assertNotNull(rtlCssConverter);
