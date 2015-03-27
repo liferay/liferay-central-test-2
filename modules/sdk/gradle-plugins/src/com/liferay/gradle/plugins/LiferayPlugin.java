@@ -40,14 +40,15 @@ import org.gradle.api.tasks.SourceSet;
 public class LiferayPlugin extends BasePlugin {
 
 	protected void configureClean() {
-		project.afterEvaluate(new Action<Project>() {
+		project.afterEvaluate(
+			new Action<Project>() {
 
-			@Override
-			public void execute(Project project) {
-				configureCleanAfterEvaluate();
-			}
-
-		});
+				@Override
+				public void execute(Project project) {
+					configureCleanAfterEvaluate();
+				}
+	
+			});
 	}
 
 	protected void configureCleanAfterEvaluate() {
