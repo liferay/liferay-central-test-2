@@ -190,13 +190,14 @@ public class BreadcrumbUtil {
 
 		if (Validator.isNotNull(portletDisplay.getId()) &&
 			!portletDisplay.isFocused() &&
-			!portletDisplay.getId().equals(
+			!Validator.equals(
+				portletDisplay.getId(),
 				PortletProviderUtil.getPortletId(
 					BreadcrumbEntry.class.getName(),
 					PortletProvider.Action.VIEW))) {
 
-				name = name.concat(
-					StringPool.UNDERLINE.concat(portletDisplay.getId()));
+			name = name.concat(
+				StringPool.UNDERLINE.concat(portletDisplay.getId()));
 		}
 
 		List<BreadcrumbEntry> portletBreadcrumbEntries =
