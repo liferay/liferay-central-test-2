@@ -36,6 +36,7 @@ public class LoggerElement {
 
 	public LoggerElement(String id) {
 		_id = id;
+
 		_writtenToLogger = true;
 	}
 
