@@ -40,6 +40,7 @@ import org.osgi.service.component.annotations.Component;
 public class MentionsEditorConfigContributor
 	implements EditorConfigContributor {
 
+	@Override
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
@@ -98,6 +99,7 @@ public class MentionsEditorConfigContributor
 		jsonObject.put("autocomplete", autoCompleteConfigJSONObject);
 	}
 
+	@Override
 	public void populateOptionsJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
