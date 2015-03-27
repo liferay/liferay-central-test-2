@@ -41,6 +41,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(property = {"editor.impl=alloyeditor"})
 public class AlloyEditorConfigContributor implements EditorConfigContributor {
 
+	@Override
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
@@ -132,6 +133,7 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		jsonObject.put("toolbarsJSONObject", toolbarsJSONObject);
 	}
 
+	@Override
 	public void populateOptionsJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
