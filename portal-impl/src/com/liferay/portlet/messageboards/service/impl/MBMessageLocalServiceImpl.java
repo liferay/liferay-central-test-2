@@ -543,8 +543,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (discussion == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Cannot delete discussion message for class name " +
-						className + " and class pk " + classPK +
+					"Unable to delete discussion message for class name " +
+						className + " and class PK " + classPK +
 							" because it does not exist");
 			}
 
