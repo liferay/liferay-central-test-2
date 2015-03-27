@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.sdk.gradle.plugins.internal.util;
+package com.liferay.gradle.plugins.internal.util;
 
 /**
  * @author Andrea Di Giorgi

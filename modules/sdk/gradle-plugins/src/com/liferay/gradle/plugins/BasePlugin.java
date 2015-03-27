@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.sdk.gradle.plugins;
+package com.liferay.gradle.plugins;
 
 import java.util.Collections;
 import java.util.Map;

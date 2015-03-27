@@ -12,14 +12,13 @@
  * details.
  */
 
-package com.liferay.sdk.gradle.plugins;
+package com.liferay.gradle.plugins;
 
-import com.liferay.sdk.gradle.plugins.internal.extensions.LiferayExtension;
-import com.liferay.sdk.gradle.plugins.internal.util.StringUtil;
-import com.liferay.sdk.gradle.plugins.internal.util.Validator;
+import com.liferay.gradle.plugins.internal.extensions.LiferayExtension;
+import com.liferay.gradle.plugins.internal.util.StringUtil;
+import com.liferay.gradle.plugins.internal.util.Validator;
 
 import java.io.File;
-
 import java.util.Collections;
 import java.util.Set;
 

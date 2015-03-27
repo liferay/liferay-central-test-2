@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.sdk.gradle.plugins.internal.extensions;
+package com.liferay.gradle.plugins.internal.extensions;
 
 import java.io.File;
 import java.io.FileInputStream;
