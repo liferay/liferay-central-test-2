@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.editor.alloyeditor.config;
+package com.liferay.frontend.alloy.editor.config;
 
 import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
