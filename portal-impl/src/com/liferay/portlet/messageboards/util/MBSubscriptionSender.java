@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.messageboards.util;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -37,9 +36,7 @@ public class MBSubscriptionSender
 		super(resourceName);
 	}
 
-	public void addMailingListSubscriber(long groupId, long categoryId)
-		throws PortalException {
-
+	public void addMailingListSubscriber(long groupId, long categoryId) {
 		if (_calledAddMailingListSubscriber) {
 			throw new IllegalStateException();
 		}
