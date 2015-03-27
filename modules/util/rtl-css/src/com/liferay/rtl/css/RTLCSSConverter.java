@@ -166,10 +166,11 @@ public class RTLCSSConverter {
 		if (cssExpressionMemberTermSimples.size() == 4) {
 			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple2 =
 				cssExpressionMemberTermSimples.get(1);
-			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple4 =
-				cssExpressionMemberTermSimples.get(3);
 
 			String value = cssExpressionMemberTermSimple2.getValue();
+
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple4 =
+				cssExpressionMemberTermSimples.get(3);
 
 			cssExpressionMemberTermSimple2.setValue(
 				cssExpressionMemberTermSimple4.getValue());
@@ -178,128 +179,175 @@ public class RTLCSSConverter {
 		}
 	}
 
-	protected void convertShorthandRadius(CSSStyleRule style, String property) {
-		CSSDeclaration declaration =
-			style.getDeclarationOfPropertyNameCaseInsensitive(property);
+	protected void convertShorthandRadius(
+		CSSStyleRule cssStyleRule, String property) {
 
-		if (declaration != null) {
-			CSSExpression expression = declaration.getExpression();
-			List< CSSExpressionMemberTermSimple> members =
-				expression.getAllSimpleMembers();
+		CSSDeclaration cssDeclaration =
+			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(property);
 
-			if (members.size() == 4) {
-				CSSExpressionMemberTermSimple member1 = members.get(0);
-				CSSExpressionMemberTermSimple member2 = members.get(1);
-				CSSExpressionMemberTermSimple member3 = members.get(2);
-				CSSExpressionMemberTermSimple member4 = members.get(3);
-				String temp = member1.getValue();
-				member1.setValue(member2.getValue());
-				member2.setValue(temp);
-				temp = member3.getValue();
-				member3.setValue(member4.getValue());
-				member4.setValue(temp);
-			}
-			else if (members.size() == 3) {
-				CSSExpressionMemberTermSimple member1 = members.get(0);
-				CSSExpressionMemberTermSimple member2 = members.get(1);
-				CSSExpressionMemberTermSimple member3 = members.get(2);
-				String temp = member1.getValue();
-				member1.setValue(member2.getValue());
-				member2.setValue(temp);
-				temp = member3.getValue();
-				member3.setValue(member1.getValue());
-				expression.addTermSimple(temp);
-			}
+		if (cssDeclaration == null) {
+			return;
+		}
+
+		CSSExpression cssExpression = cssDeclaration.getExpression();
+
+		List<CSSExpressionMemberTermSimple> cssExpressionMemberTermSimples =
+			cssExpression.getAllSimpleMembers();
+
+		if (cssExpressionMemberTermSimples.size() == 4) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
+				cssExpressionMemberTermSimples.get(0);
+
+			String value = cssExpressionMemberTermSimple1.getValue();
+
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple2 =
+				cssExpressionMemberTermSimples.get(1);
+
+			cssExpressionMemberTermSimple1.setValue(
+				cssExpressionMemberTermSimple2.getValue());
+
+			cssExpressionMemberTermSimple2.setValue(value);
+
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple3 =
+				cssExpressionMemberTermSimples.get(2);
+
+			value = cssExpressionMemberTermSimple3.getValue();
+
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple4 =
+				cssExpressionMemberTermSimples.get(3);
+
+			cssExpressionMemberTermSimple3.setValue(
+				cssExpressionMemberTermSimple4.getValue());
+
+			cssExpressionMemberTermSimple4.setValue(value);
+		}
+		else if (cssExpressionMemberTermSimples.size() == 3) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple1 =
+				cssExpressionMemberTermSimples.get(0);
+
+			String value = cssExpressionMemberTermSimple1.getValue();
+
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple2 =
+				cssExpressionMemberTermSimples.get(1);
+
+			cssExpressionMemberTermSimple1.setValue(
+				cssExpressionMemberTermSimple2.getValue());
+
+			cssExpressionMemberTermSimple2.setValue(value);
+
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple3 =
+				cssExpressionMemberTermSimples.get(2);
+
+			value = cssExpressionMemberTermSimple3.getValue();
+
+			cssExpressionMemberTermSimple3.setValue(
+				cssExpressionMemberTermSimple1.getValue());
+
+			cssExpression.addTermSimple(value);
 		}
 	}
 
-	protected void replaceStyle(CSSStyleRule style, String property) {
-		replaceStyle(style, property, false);
-		replaceStyle(style, property, true);
+	protected void replaceStyle(CSSStyleRule cssStyleRule, String property) {
+		replaceStyle(cssStyleRule, property, false);
+		replaceStyle(cssStyleRule, property, true);
 	}
 
 	protected void replaceStyle(
-		CSSStyleRule style, String property, boolean addAsterisk) {
+		CSSStyleRule cssStyleRule, String property, boolean addAsterisk) {
 
-		String asterisk = addAsterisk ? "*" : "";
+		String asterisk = "";
+		
+		if (addAsterisk) {
+			asterisk = "*";
+		}
 
-		CSSDeclaration declaration =
-				style.getDeclarationOfPropertyNameCaseInsensitive(
-					asterisk + property);
+		CSSDeclaration cssDeclaration =
+			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(
+				asterisk + property);
 
 		String replacementProperty = REPLACEMENT_STYLES.get(property);
 
-		CSSDeclaration replacementDeclaration =
-				style.getDeclarationOfPropertyNameCaseInsensitive(
-					asterisk + replacementProperty);
-
-		if (declaration != null) {
-			declaration.setProperty(asterisk + replacementProperty);
+		if (cssDeclaration != null) {
+			cssDeclaration.setProperty(asterisk + replacementProperty);
 		}
 
-		if (replacementDeclaration != null) {
-			replacementDeclaration.setProperty(asterisk + property);
+		CSSDeclaration replacementCSSDeclaration =
+			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(
+				asterisk + replacementProperty);
+
+		if (replacementCSSDeclaration != null) {
+			replacementCSSDeclaration.setProperty(asterisk + property);
 		}
 	}
 
-	protected void reverseImage(CSSStyleRule style, String property) {
-		CSSDeclaration declaration =
-			style.getDeclarationOfPropertyNameCaseInsensitive(property);
+	protected void reverseImage(CSSStyleRule cssStyleRule, String property) {
+		CSSDeclaration cssDeclaration =
+			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(property);
 
-		if (declaration != null) {
-			CSSExpression expression = declaration.getExpression();
-			List<ICSSExpressionMember> members = expression.getAllMembers();
+		if (cssDeclaration == null) {
+			return;
+		}
 
-			for (ICSSExpressionMember member : members) {
-				if (member instanceof CSSExpressionMemberTermURI) {
-					CSSExpressionMemberTermURI termMember =
-						(CSSExpressionMemberTermURI)member;
+		CSSExpression cssExpression = cssDeclaration.getExpression();
 
-					String uri = termMember.getURIString();
+		List<ICSSExpressionMember> icssExpressionMembers =
+			cssExpression.getAllMembers();
 
-					if (uri.contains("right")) {
-						uri = uri.replaceAll("right", "left");
-					}
-					else {
-						uri = uri.replaceAll("left", "right");
-					}
+		for (ICSSExpressionMember icssExpressionMember :
+				icssExpressionMembers) {
 
-					termMember.setURIString(uri);
+			if (icssExpressionMember instanceof CSSExpressionMemberTermURI) {
+				CSSExpressionMemberTermURI cssExpressionMemberTermURI =
+					(CSSExpressionMemberTermURI)icssExpressionMember;
+
+				String uri = cssExpressionMemberTermURI.getURIString();
+
+				if (uri.contains("right")) {
+					uri = uri.replaceAll("right", "left");
 				}
+				else {
+					uri = uri.replaceAll("left", "right");
+				}
+
+				cssExpressionMemberTermURI.setURIString(uri);
 			}
 		}
 	}
 
-	protected void reverseStyle(CSSStyleRule style, String property) {
-		CSSDeclaration declaration =
-			style.getDeclarationOfPropertyNameCaseInsensitive(property);
+	protected void reverseStyle(CSSStyleRule cssStyleRule, String property) {
+		CSSDeclaration cssDeclaration =
+			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(property);
 
-		if (declaration != null) {
-			CSSExpression expression = declaration.getExpression();
-			List< CSSExpressionMemberTermSimple> members =
-				expression.getAllSimpleMembers();
+		if (cssDeclaration == null) {
+			return;
+		}
 
-			if (members.size() > 0) {
-				CSSExpressionMemberTermSimple member = members.get(0);
+		CSSExpression cssExpression = cssDeclaration.getExpression();
 
-				String value = member.getValue();
+		List<CSSExpressionMemberTermSimple> cssExpressionMemberTermSimples =
+			cssExpression.getAllSimpleMembers();
 
-				if (value.contains("right")) {
-					value = value.replace("right", "left");
-				}
-				else {
-					value = value.replace("left", "right");
-				}
+		if (cssExpressionMemberTermSimples.size() > 0) {
+			CSSExpressionMemberTermSimple cssExpressionMemberTermSimple =
+				cssExpressionMemberTermSimples.get(0);
 
-				if (value.contains("rtl")) {
-					value = value.replace("rtl", "ltr");
-				}
-				else {
-					value = value.replace("ltr", "rtl");
-				}
+			String value = cssExpressionMemberTermSimple.getValue();
 
-				member.setValue(value);
+			if (value.contains("right")) {
+				value = value.replace("right", "left");
 			}
+			else {
+				value = value.replace("left", "right");
+			}
+
+			if (value.contains("rtl")) {
+				value = value.replace("rtl", "ltr");
+			}
+			else {
+				value = value.replace("ltr", "rtl");
+			}
+
+			cssExpressionMemberTermSimple.setValue(value);
 		}
 	}
 
@@ -310,26 +358,20 @@ public class RTLCSSConverter {
 	private final CSSWriterSettings _cssWriterSettings;
 
 	private static final List<String> BGPOSITION_STYLES = Arrays.asList(
-			"background-position"
-	);
-
+		"background-position");
 	private static final List<String> REVERSE_STYLES = Arrays.asList(
-			"text-align", "float", "clear", "direction"
-	);
+		"text-align", "float", "clear", "direction");
 	private static final Map<String, String> REPLACEMENT_STYLES =
 		new HashMap<>();
 
 	public static final List<String> SHORTHAND_STYLES = Arrays.asList(
-			"padding", "margin", "border-color", "border-width", "border-style"
-	);
+		"padding", "margin", "border-color", "border-width", "border-style");
 
 	public static final List<String> SHORTHAND_RADIUS_STYLES = Arrays.asList(
-			"-webkit-border-radius", "-moz-border-radius", "border-radius"
-	);
+		"-webkit-border-radius", "-moz-border-radius", "border-radius");
 
 	public static final List<String> REVERSE_IMAGE_STYLES = Arrays.asList(
-			"background", "background-image"
-	);
+		"background", "background-image");
 
 	public static final Pattern REGEX_PERCENT = Pattern.compile("\\d+%");
 
@@ -347,20 +389,21 @@ public class RTLCSSConverter {
 		REPLACEMENT_STYLES.put(
 			"border-bottom-right-radius", "border-bottom-left-radius");
 		REPLACEMENT_STYLES.put(
-				"-webkit-border-bottom-right-radius",
-				"-webkit-border-bottom-left-radius");
+			"-webkit-border-bottom-right-radius",
+			"-webkit-border-bottom-left-radius");
 		REPLACEMENT_STYLES.put(
-				"-moz-border-radius-bottomright",
-				"-moz-border-radius-bottomleft");
+			"-moz-border-radius-bottomright",
+			"-moz-border-radius-bottomleft");
 		REPLACEMENT_STYLES.put(
 			"border-radius-topleft", "border-radius-topright");
 		REPLACEMENT_STYLES.put(
 			"border-top-right-radius", "border-top-left-radius");
 		REPLACEMENT_STYLES.put(
-				"-webkit-border-top-right-radius",
-				"-webkit-border-top-left-radius");
+			"-webkit-border-top-right-radius",
+			"-webkit-border-top-left-radius");
 		REPLACEMENT_STYLES.put(
 			"-moz-border-radius-topright", "-moz-border-radius-topleft");
 		REPLACEMENT_STYLES.put("left", "right");
 	}
+
 }
