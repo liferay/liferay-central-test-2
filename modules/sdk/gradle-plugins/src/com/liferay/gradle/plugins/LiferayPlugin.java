@@ -85,11 +85,12 @@ public class LiferayPlugin extends BasePlugin {
 	}
 
 	protected void configureSourceSets() {
-		Set<File> srcDirs = Collections.singleton(_extension.getPluginSrcDir());
-
 		SourceSet sourceSet = getSourceSet(SourceSet.MAIN_SOURCE_SET_NAME);
 
 		SourceDirectorySet javaDirectorySet = sourceSet.getJava();
+
+		Set<File> srcDirs = Collections.singleton(
+			_liferayExtension.getPluginSrcDir());
 
 		javaDirectorySet.setSrcDirs(srcDirs);
 
@@ -101,21 +102,22 @@ public class LiferayPlugin extends BasePlugin {
 	protected void configureVersion() {
 		String version = null;
 
-		String moduleFullVersion = _extension.getPluginPackageProperty(
+		String moduleFullVersion = _liferayExtension.getPluginPackageProperty(
 			"module-full-version");
 
 		if (Validator.isNotNull(moduleFullVersion)) {
 			version = moduleFullVersion;
 		}
 		else {
-			String bundleVersion = _extension.getBndProperty("Bundle-Version");
+			String bundleVersion = _liferayExtension.getBndProperty(
+				"Bundle-Version");
 
 			if (Validator.isNotNull(bundleVersion)) {
 				version = bundleVersion;
 			}
 			else {
 				String moduleIncrementalVersion =
-					_extension.getPluginPackageProperty(
+					_liferayExtension.getPluginPackageProperty(
 						"module-incremental-version");
 
 				version = PORTAL_VERSION + "." + moduleIncrementalVersion;
@@ -136,7 +138,7 @@ public class LiferayPlugin extends BasePlugin {
 	protected void doApply() throws Exception {
 		applyPlugin(WarPlugin.class);
 
-		_extension = createExtension(_EXTENSION_NAME, LiferayExtension.class);
+		_liferayExtension = createExtension("liferay", LiferayExtension.class);
 
 		configureSourceSets();
 		configureVersion();
@@ -145,8 +147,6 @@ public class LiferayPlugin extends BasePlugin {
 		configureClean();
 	}
 
-	private static final String _EXTENSION_NAME = "liferay";
-
-	private LiferayExtension _extension;
+	private LiferayExtension _liferayExtension;
 
 }
