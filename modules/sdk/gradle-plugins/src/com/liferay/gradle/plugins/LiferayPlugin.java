@@ -19,6 +19,7 @@ import com.liferay.gradle.plugins.internal.util.StringUtil;
 import com.liferay.gradle.plugins.internal.util.Validator;
 
 import java.io.File;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -47,7 +48,7 @@ public class LiferayPlugin extends BasePlugin {
 				public void execute(Project project) {
 					configureCleanAfterEvaluate();
 				}
-	
+
 			});
 	}
 
