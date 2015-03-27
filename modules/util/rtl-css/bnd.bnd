@@ -7,6 +7,5 @@ Include-Resource:\
 	@lib/annotations.jar,\
 	@lib/ph-commons.jar,\
 	@lib/ph-css.jar,\
-	@lib/slf4j-api.jar,\
-	resources
+	@lib/slf4j-api.jar
 Main-Class: com.liferay.rtl.css.RTLConverter
