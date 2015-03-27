@@ -106,6 +106,7 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
 
 		jsonObject.put("language", languageId.replace("iw_", "he_"));
+
 		jsonObject.put("srcNode", "#" + name);
 
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
