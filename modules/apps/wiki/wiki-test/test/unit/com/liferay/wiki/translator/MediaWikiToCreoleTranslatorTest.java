@@ -290,15 +290,6 @@ public class MediaWikiToCreoleTranslatorTest {
 
 	@Test
 	public void testNowikiWithFormat() throws Exception {
-		String content =
-			"previous line\n<nowiki>\nmonospace\n''second'' " +
-				"line\n</nowiki>\nnext line";
-
-		String expected =
-			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
-				"previous line\n{{{{\nmonospace\n''second'' line\n}}}}\nnext" +
-					" line";
-
 		DigesterUtil digesterUtil = new DigesterUtil();
 
 		Digester digester = Mockito.mock(Digester.class);
@@ -310,6 +301,15 @@ public class MediaWikiToCreoleTranslatorTest {
 		);
 
 		digesterUtil.setDigester(digester);
+
+		String content =
+			"previous line\n<nowiki>\nmonospace\n''second'' " +
+				"line\n</nowiki>\nnext line";
+
+		String expected =
+			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
+				"previous line\n{{{{\nmonospace\n''second'' line\n}}}}\nnext" +
+					" line";
 
 		String actual = _mediaWikiToCreoleTranslator.translate(content);
 
