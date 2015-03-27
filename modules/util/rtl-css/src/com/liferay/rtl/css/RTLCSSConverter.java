@@ -40,6 +40,20 @@ import java.util.regex.Pattern;
  */
 public class RTLCSSConverter {
 
+	public static final Pattern REGEX_PERCENT = Pattern.compile("\\d+%");
+
+	public static final Pattern REGEX_PERCENT_OR_LENGTH = Pattern.compile(
+		"(\\d+)([a-z]{2}|%)");
+
+	public static final List<String> REVERSE_IMAGE_STYLES = Arrays.asList(
+		"background", "background-image");
+
+	public static final List<String> SHORTHAND_RADIUS_STYLES = Arrays.asList(
+		"-webkit-border-radius", "-moz-border-radius", "border-radius");
+
+	public static final List<String> SHORTHAND_STYLES = Arrays.asList(
+		"padding", "margin", "border-color", "border-width", "border-style");
+
 	public RTLCSSConverter() {
 		_cssWriterSettings = new CSSWriterSettings(ECSSVersion.CSS30, true);
 	}
@@ -58,7 +72,7 @@ public class RTLCSSConverter {
 		StringBundler sb = new StringBundler(cssStyleRules.size());
 
 		for (CSSStyleRule cssStyleRule : cssStyleRules) {
-			for (String property : REPLACEMENT_STYLES.keySet()) {
+			for (String property : _replacementStyles.keySet()) {
 				replaceStyle(cssStyleRule, property);
 			}
 
@@ -92,7 +106,9 @@ public class RTLCSSConverter {
 		return sb.toString();
 	}
 
-	protected void convertBGPosition(CSSStyleRule cssStyleRule, String property) {
+	protected void convertBGPosition(
+		CSSStyleRule cssStyleRule, String property) {
+
 		CSSDeclaration cssDeclaration =
 			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(property);
 
@@ -150,7 +166,9 @@ public class RTLCSSConverter {
 		}
 	}
 
-	protected void convertShorthand(CSSStyleRule cssStyleRule, String property) {
+	protected void convertShorthand(
+		CSSStyleRule cssStyleRule, String property) {
+
 		CSSDeclaration cssDeclaration =
 			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(property);
 
@@ -256,7 +274,7 @@ public class RTLCSSConverter {
 		CSSStyleRule cssStyleRule, String property, boolean addAsterisk) {
 
 		String asterisk = "";
-		
+
 		if (addAsterisk) {
 			asterisk = "*";
 		}
@@ -265,7 +283,7 @@ public class RTLCSSConverter {
 			cssStyleRule.getDeclarationOfPropertyNameCaseInsensitive(
 				asterisk + property);
 
-		String replacementProperty = REPLACEMENT_STYLES.get(property);
+		String replacementProperty = _replacementStyles.get(property);
 
 		if (cssDeclaration != null) {
 			cssDeclaration.setProperty(asterisk + replacementProperty);
@@ -355,55 +373,42 @@ public class RTLCSSConverter {
 		return property.replaceAll("\\**\\b", "");
 	}
 
-	private final CSSWriterSettings _cssWriterSettings;
-
 	private static final List<String> BGPOSITION_STYLES = Arrays.asList(
 		"background-position");
+
 	private static final List<String> REVERSE_STYLES = Arrays.asList(
 		"text-align", "float", "clear", "direction");
-	private static final Map<String, String> REPLACEMENT_STYLES =
+
+	private static final Map<String, String> _replacementStyles =
 		new HashMap<>();
 
-	public static final List<String> SHORTHAND_STYLES = Arrays.asList(
-		"padding", "margin", "border-color", "border-width", "border-style");
-
-	public static final List<String> SHORTHAND_RADIUS_STYLES = Arrays.asList(
-		"-webkit-border-radius", "-moz-border-radius", "border-radius");
-
-	public static final List<String> REVERSE_IMAGE_STYLES = Arrays.asList(
-		"background", "background-image");
-
-	public static final Pattern REGEX_PERCENT = Pattern.compile("\\d+%");
-
-	public static final Pattern REGEX_PERCENT_OR_LENGTH = Pattern.compile(
-		"(\\d+)([a-z]{2}|%)");
-
 	static {
-		REPLACEMENT_STYLES.put("margin-left", "margin-right");
-		REPLACEMENT_STYLES.put("padding-left", "padding-right");
-		REPLACEMENT_STYLES.put("border-left", "border-right");
-		REPLACEMENT_STYLES.put("border-left-color", "border-right-color");
-		REPLACEMENT_STYLES.put("border-left-width", "border-right-width");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put("margin-left", "margin-right");
+		_replacementStyles.put("padding-left", "padding-right");
+		_replacementStyles.put("border-left", "border-right");
+		_replacementStyles.put("border-left-color", "border-right-color");
+		_replacementStyles.put("border-left-width", "border-right-width");
+		_replacementStyles.put(
 			"border-radius-bottomleft", "border-radius-bottomright");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put(
 			"border-bottom-right-radius", "border-bottom-left-radius");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put(
 			"-webkit-border-bottom-right-radius",
 			"-webkit-border-bottom-left-radius");
-		REPLACEMENT_STYLES.put(
-			"-moz-border-radius-bottomright",
-			"-moz-border-radius-bottomleft");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put(
+			"-moz-border-radius-bottomright", "-moz-border-radius-bottomleft");
+		_replacementStyles.put(
 			"border-radius-topleft", "border-radius-topright");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put(
 			"border-top-right-radius", "border-top-left-radius");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put(
 			"-webkit-border-top-right-radius",
 			"-webkit-border-top-left-radius");
-		REPLACEMENT_STYLES.put(
+		_replacementStyles.put(
 			"-moz-border-radius-topright", "-moz-border-radius-topleft");
-		REPLACEMENT_STYLES.put("left", "right");
+		_replacementStyles.put("left", "right");
 	}
+
+	private final CSSWriterSettings _cssWriterSettings;
 
 }

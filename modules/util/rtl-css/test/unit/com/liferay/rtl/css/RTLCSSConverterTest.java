@@ -20,13 +20,15 @@ import com.helger.css.decl.CSSStyleRule;
 import com.helger.css.decl.CascadingStyleSheet;
 import com.helger.css.reader.CSSReader;
 import com.helger.css.writer.CSSWriterSettings;
+
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.rtl.css.RTLCSSConverter;
 
 import java.io.InputStream;
+
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
