@@ -71,11 +71,10 @@ public class MentionsEditorConfigContributor
 		triggerJSONObject.put("term", "@");
 		triggerJSONObject.put("tplReplace", "{mention}");
 
-		StringBundler sb = new StringBundler(8);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("<div class=\"display-style-3 taglib-user-display\">");
-		sb.append("<span>");
-		sb.append("<span class=\"user-profile-image\" ");
+		sb.append("<span><span class=\"user-profile-image\" ");
 		sb.append("style=\"background-image: url('{portraitURL}');");
 		sb.append("background-size: 32px 32px; height: 32px; width: 32px;\">");
 		sb.append("</span><span class=\"user-name\">{fullName}</span>");
