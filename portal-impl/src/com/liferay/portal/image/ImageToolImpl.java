@@ -274,16 +274,16 @@ public class ImageToolImpl implements ImageTool {
 	public void encodeGIF(RenderedImage renderedImage, OutputStream os)
 		throws IOException {
 
-			BufferedImage bufferedImage = getBufferedImage(renderedImage);
+		BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
-			if (!(bufferedImage.getColorModel() instanceof IndexColorModel)) {
-				bufferedImage = convertImageType(
-					bufferedImage, BufferedImage.TYPE_BYTE_INDEXED);
-			}
+		if (!(bufferedImage.getColorModel() instanceof IndexColorModel)) {
+			bufferedImage = convertImageType(
+				bufferedImage, BufferedImage.TYPE_BYTE_INDEXED);
+		}
 
-			Gif89Encoder encoder = new Gif89Encoder(bufferedImage);
+		Gif89Encoder encoder = new Gif89Encoder(bufferedImage);
 
-			encoder.encode(os);
+		encoder.encode(os);
 	}
 
 	@Override
