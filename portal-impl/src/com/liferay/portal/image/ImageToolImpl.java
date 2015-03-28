@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Image;
@@ -275,10 +274,6 @@ public class ImageToolImpl implements ImageTool {
 	public void encodeGIF(RenderedImage renderedImage, OutputStream os)
 		throws IOException {
 
-		if (JavaDetector.isJDK6()) {
-			ImageIO.write(renderedImage, TYPE_GIF, os);
-		}
-		else {
 			BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
 			if (!(bufferedImage.getColorModel() instanceof IndexColorModel)) {
@@ -289,7 +284,6 @@ public class ImageToolImpl implements ImageTool {
 			Gif89Encoder encoder = new Gif89Encoder(bufferedImage);
 
 			encoder.encode(os);
-		}
 	}
 
 	@Override
