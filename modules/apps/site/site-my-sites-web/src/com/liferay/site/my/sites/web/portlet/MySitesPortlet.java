@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.mysites.web.portlet;
+package com.liferay.site.my.sites.web.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -27,7 +27,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.site.mysites.web.upgrade.MySitesWebUpgrade;
+import com.liferay.site.my.sites.web.upgrade.MySitesWebUpgrade;
 
 import java.util.HashSet;
 import java.util.Set;

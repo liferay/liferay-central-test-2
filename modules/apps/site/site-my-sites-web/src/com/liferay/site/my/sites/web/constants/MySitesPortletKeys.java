@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.mysites.web.constants;
+package com.liferay.site.my.sites.web.constants;
 
 /**
  * @author Eudaldo Alonso
@@ -20,6 +20,6 @@ package com.liferay.site.mysites.web.constants;
 public class MySitesPortletKeys {
 
 	public static final String MY_SITES =
-		"com_liferay_site_mysites_web_portlet_MySitesPortlet";
+		"com_liferay_site_my_sites_web_portlet_MySitesPortlet";
 
 }

@@ -1,5 +1,5 @@
-Bundle-Name: Liferay My Sites Web
-Bundle-SymbolicName: com.liferay.site.mysites.web
+Bundle-Name: Liferay Site My Sites Web
+Bundle-SymbolicName: com.liferay.site.my.sites.web
 Bundle-Version: 1.0.0
 Include-Resource:\
 	classes,\

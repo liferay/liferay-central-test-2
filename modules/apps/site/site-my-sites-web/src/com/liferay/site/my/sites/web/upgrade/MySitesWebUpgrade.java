@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.site.mysites.web.upgrade;
+package com.liferay.site.my.sites.web.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
-import com.liferay.site.mysites.web.constants.MySitesPortletKeys;
+import com.liferay.site.my.sites.web.constants.MySitesPortletKeys;
 
 import java.util.Collections;
 
@@ -59,7 +59,7 @@ public class MySitesWebUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.site.mysites",
+			"com.liferay.site.my.sites",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 1,
 			false);
 	}

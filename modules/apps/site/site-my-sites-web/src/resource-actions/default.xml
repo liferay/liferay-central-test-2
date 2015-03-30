@@ -4,7 +4,7 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>com_liferay_site_mysites_web_portlet_MySitesPortlet</portlet-name>
+		<portlet-name>com_liferay_site_my_sites_web_portlet_MySitesPortlet</portlet-name>
 		<permissions>
 			<supports>
 				<action-key>ADD_TO_PAGE</action-key>
