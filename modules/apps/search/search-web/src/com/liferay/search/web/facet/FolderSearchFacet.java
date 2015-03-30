@@ -68,11 +68,6 @@ public class FolderSearchFacet extends BaseSearchFacet {
 	}
 
 	@Override
-		public String getId() {
-			return FolderSearchFacet.class.getName();
-		}
-
-	@Override
 	public String getDisplayView() {
 		return "/facets/view/folders.jsp";
 	}
@@ -80,6 +75,11 @@ public class FolderSearchFacet extends BaseSearchFacet {
 	@Override
 	public String getFieldName() {
 		return Field.FOLDER_ID;
+	}
+
+	@Override
+	public String getId() {
+		return FolderSearchFacet.class.getName();
 	}
 
 	@Override
