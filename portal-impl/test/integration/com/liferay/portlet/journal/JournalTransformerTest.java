@@ -64,15 +64,13 @@ public class JournalTransformerTest {
 		DDMForm ddmForm = new DDMForm();
 
 		ddmForm.addAvailableLocale(LocaleUtil.US);
-		ddmForm.setDefaultLocale(LocaleUtil.US);
-
-		ddmForm.addDDMFormField(
-			DDMFormTestUtil.createTextDDMFormField(
-				"name", false, false, false));
-
 		ddmForm.addDDMFormField(
 			DDMFormTestUtil.createTextDDMFormField(
 				"link", false, false, false));
+		ddmForm.addDDMFormField(
+			DDMFormTestUtil.createTextDDMFormField(
+				"name", false, false, false));
+		ddmForm.setDefaultLocale(LocaleUtil.US);
 
 		_ddmStructure = DDMStructureTestUtil.addStructure(
 			JournalArticle.class.getName(), ddmForm);

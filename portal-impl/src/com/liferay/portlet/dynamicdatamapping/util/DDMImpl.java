@@ -166,7 +166,6 @@ public class DDMImpl implements DDM {
 
 		long ddmStructureClassNameId = PortalUtil.getClassNameId(
 			DDMStructure.class);
-
 		long ddmTemplateClassNameId = PortalUtil.getClassNameId(
 			DDMTemplate.class);
 
@@ -558,11 +557,9 @@ public class DDMImpl implements DDM {
 		addDDMFormFieldLocalizedProperty(
 			jsonObject, "label", ddmFormField.getLabel(), locale, defaultLocale,
 			ddmFormField.getType());
-
 		addDDMFormFieldLocalizedProperty(
 			jsonObject, "predefinedValue", ddmFormField.getPredefinedValue(),
 			locale, defaultLocale, ddmFormField.getType());
-
 		addDDMFormFieldLocalizedProperty(
 			jsonObject, "tip", ddmFormField.getTip(), locale, defaultLocale,
 			ddmFormField.getType());
