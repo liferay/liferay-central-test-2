@@ -174,8 +174,10 @@ public class LiferayPlugin extends BasePlugin {
 	protected void configureTaskClean() {
 		Task cleanTask = getTask(CLEAN_TASK_NAME);
 
-		// Depends on
+		configureTaskCleanDependsOn(cleanTask);
+	}
 
+	protected void configureTaskCleanDependsOn(Task cleanTask) {
 		for (Task task : project.getTasks()) {
 			String taskName =
 				CLEAN_TASK_NAME + StringUtil.capitalize(task.getName());
@@ -190,19 +192,20 @@ public class LiferayPlugin extends BasePlugin {
 			compileConfiguration.getAllDependencies();
 
 		for (Dependency dependency : compileDependencies) {
-			if (dependency instanceof ProjectDependency) {
-				ProjectDependency projectDependency =
-					(ProjectDependency)dependency;
-
-				Project dependencyProject =
-					projectDependency.getDependencyProject();
-
-				String taskName =
-					dependencyProject.getPath() + Project.PATH_SEPARATOR +
-						CLEAN_TASK_NAME;
-
-				cleanTask.dependsOn(taskName);
+			if (!(dependency instanceof ProjectDependency)) {
+				continue;
 			}
+
+			ProjectDependency projectDependency = (ProjectDependency)dependency;
+
+			Project dependencyProject =
+				projectDependency.getDependencyProject();
+
+			String taskName =
+				dependencyProject.getPath() + Project.PATH_SEPARATOR +
+					CLEAN_TASK_NAME;
+
+			cleanTask.dependsOn(taskName);
 		}
 	}
 
@@ -214,18 +217,22 @@ public class LiferayPlugin extends BasePlugin {
 	protected void configureTaskWar() {
 		War warTask = (War)getTask(WarPlugin.WAR_TASK_NAME);
 
-		CopySpecInternal rootSpec = warTask.getRootSpec();
+		configureTaskWarDuplicatesStrategy(warTask);
+		configureTaskWarExclude(warTask);
+		configureTaskWarFilesMatching(warTask);
+		configureTaskWarOutputs(warTask);
+		configureTaskWarRenameDependencies(warTask);
+	}
 
-		// Duplicates strategy
-
+	protected void configureTaskWarDuplicatesStrategy(War warTask) {
 		warTask.setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE);
+	}
 
-		// Exclude
-
+	protected void configureTaskWarExclude(War warTask) {
 		warTask.exclude("WEB-INF/lib");
+	}
 
-		// Files matching
-
+	protected void configureTaskWarFilesMatching(War warTask) {
 		final Closure<String> filterLiferayHookXmlClosure =
 			new Closure<String>(null) {
 
@@ -269,10 +276,10 @@ public class LiferayPlugin extends BasePlugin {
 				}
 
 			});
+	}
 
-		// Manifest
-
-		File manifestFile;
+	protected void configureTaskWarManifest(War warTask) {
+		File manifestFile = null;
 
 		if (_liferayExtension.isOsgiPlugin()) {
 			manifestFile = project.file("src/META-INF/MANIFEST.MF");
@@ -287,26 +294,33 @@ public class LiferayPlugin extends BasePlugin {
 			manifest.from(manifestFile);
 		}
 		else {
-			for (CopySpecInternal childSpec : rootSpec.getChildren()) {
+			CopySpecInternal copySpecInternal = warTask.getRootSpec();
+
+			for (CopySpecInternal childCopySpecInternal :
+					copySpecInternal.getChildren()) {
+
 				CopySpecResolver copySpecResolver =
-					childSpec.buildRootResolver();
+					childCopySpecInternal.buildRootResolver();
 
-				RelativePath destPath = copySpecResolver.getDestPath();
+				RelativePath destRelativePath = copySpecResolver.getDestPath();
 
-				if ("META-INF".equals(destPath.getPathString())) {
-					childSpec.exclude("**");
+				String destRelativePathString =
+					destRelativePath.getPathString();
+
+				if (destRelativePathString.equals("META-INF")) {
+					childCopySpecInternal.exclude("**");
 				}
 			}
 		}
+	}
 
-		// Outputs
-
+	protected void configureTaskWarOutputs(War warTask) {
 		TaskOutputs taskOutputs = warTask.getOutputs();
 
 		taskOutputs.file(warTask.getArchivePath());
+	}
 
-		// Rename dependencies
-
+	protected void configureTaskWarRenameDependencies(War warTask) {
 		Closure<String> renameDependencyClosure = new Closure<String>(null) {
 
 			@SuppressWarnings("unused")
@@ -314,19 +328,60 @@ public class LiferayPlugin extends BasePlugin {
 				Map<String, String> newDependencyNames =
 					_getNewDependencyNames();
 
-				String newName = newDependencyNames.get(name);
+				String newDependencyName = newDependencyNames.get(name);
 
-				if (Validator.isNotNull(newName)) {
-					return newName;
+				if (Validator.isNotNull(newDependencyName)) {
+					return newDependencyName;
 				}
 
 				return name;
 			}
 
+			private Map<String, String> _getNewDependencyNames() {
+				if (_newDependencyNames != null) {
+					return _newDependencyNames;
+				}
+
+				_newDependencyNames = new HashMap<>();
+
+				Configuration compileConfiguration = getConfiguration(
+					JavaPlugin.COMPILE_CONFIGURATION_NAME);
+
+				ResolvedConfiguration resolvedConfiguration =
+					compileConfiguration.getResolvedConfiguration();
+
+				for (ResolvedArtifact resolvedArtifact :
+						resolvedConfiguration.getResolvedArtifacts()) {
+
+					ResolvedModuleVersion resolvedModuleVersion =
+						resolvedArtifact.getModuleVersion();
+
+					ModuleVersionIdentifier moduleVersionIdentifier =
+						resolvedModuleVersion.getId();
+
+					String oldDependencyName =
+						moduleVersionIdentifier.getName() + "-" +
+							moduleVersionIdentifier.getVersion() + ".jar";
+					String newDependencyName =
+						moduleVersionIdentifier.getName() + ".jar";
+
+					_newDependencyNames.put(
+						oldDependencyName, newDependencyName);
+				}
+
+				return _newDependencyNames;
+			}
+
+			private Map<String, String> _newDependencyNames;
+
 		};
 
-		for (CopySpecInternal childSpec : rootSpec.getChildren()) {
-			childSpec.rename(renameDependencyClosure);
+		CopySpecInternal copySpecInternal = warTask.getRootSpec();
+
+		for (CopySpecInternal childCopySpecInternal :
+				copySpecInternal.getChildren()) {
+
+			childCopySpecInternal.rename(renameDependencyClosure);
 		}
 	}
 
@@ -386,37 +441,6 @@ public class LiferayPlugin extends BasePlugin {
 				};
 
 			});
-	}
-
-	private Map<String, String> _getNewDependencyNames() {
-		if (_newDependencyNames == null) {
-			_newDependencyNames = new HashMap<>();
-
-			Configuration compileConfiguration = getConfiguration(
-				JavaPlugin.COMPILE_CONFIGURATION_NAME);
-
-			ResolvedConfiguration resolvedConfiguration =
-				compileConfiguration.getResolvedConfiguration();
-
-			for (ResolvedArtifact resolvedArtifact :
-					resolvedConfiguration.getResolvedArtifacts()) {
-
-				ResolvedModuleVersion moduleVersion =
-					resolvedArtifact.getModuleVersion();
-
-				ModuleVersionIdentifier moduleVersionIdentifier =
-					moduleVersion.getId();
-
-				String oldName =
-					moduleVersionIdentifier.getName() + "-" +
-						moduleVersionIdentifier.getVersion() + ".jar";
-				String newName = moduleVersionIdentifier.getName() + ".jar";
-
-				_newDependencyNames.put(oldName, newName);
-			}
-		}
-
-		return _newDependencyNames;
 	}
 
 	private LiferayExtension _liferayExtension;
