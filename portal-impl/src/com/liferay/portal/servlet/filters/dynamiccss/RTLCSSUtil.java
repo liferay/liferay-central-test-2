@@ -36,9 +36,11 @@ public class RTLCSSUtil {
 		String rtlCss = css;
 
 		try {
-			RTLCSSConverter rtlCSSConverter = new RTLCSSConverter();
+			if (_rtlCSSConverter == null) {
+				_rtlCSSConverter = new RTLCSSConverter();
+			}
 
-			rtlCss = rtlCSSConverter.process(rtlCss);
+			rtlCss = _rtlCSSConverter.process(rtlCss);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -47,9 +49,6 @@ public class RTLCSSUtil {
 		}
 
 		return rtlCss;
-	}
-
-	public static void init() {
 	}
 
 	public static boolean isExcludedPath(String filePath) {
@@ -68,5 +67,6 @@ public class RTLCSSUtil {
 
 	private static final Pattern[] _patterns = PatternFactory.compile(
 		PropsValues.RTL_CSS_EXCLUDED_PATHS_REGEXP);
+	private static RTLCSSConverter _rtlCSSConverter;
 
 }
