@@ -257,7 +257,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void assertBaseModelsCount(
-			final int expected, final SearchContext searchContext)
+			final int expectedCount, final SearchContext searchContext)
 		throws Exception {
 
 		IdempotentRetryAssert.retryAssert(
@@ -266,9 +266,9 @@ public abstract class BaseSearchTestCase {
 
 				@Override
 				public Void call() throws Exception {
-					int baseModelsCount = searchBaseModelsCount(searchContext);
+					int actualCount = searchBaseModelsCount(searchContext);
 
-					Assert.assertEquals(expected, baseModelsCount);
+					Assert.assertEquals(expectedCount, actualCount);
 
 					return null;
 				}
@@ -277,20 +277,22 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void assertBaseModelsCount(
-			int expected, String keywords, SearchContext searchContext)
+			int expectedCount, String keywords, SearchContext searchContext)
 		throws Exception {
 
 		searchContext.setKeywords(keywords);
 
-		assertBaseModelsCount(expected, searchContext);
+		assertBaseModelsCount(expectedCount, searchContext);
 	}
 
-	protected void assertGroupEntriesCount(long expected) throws Exception {
-		assertGroupEntriesCount(expected, 0);
+	protected void assertGroupEntriesCount(long expectedCount)
+		throws Exception {
+
+		assertGroupEntriesCount(expectedCount, 0);
 	}
 
 	protected void assertGroupEntriesCount(
-			final long expected, final long userId)
+			final long expectedCount, final long userId)
 		throws Exception {
 
 		IdempotentRetryAssert.retryAssert(
@@ -299,10 +301,10 @@ public abstract class BaseSearchTestCase {
 
 				@Override
 				public Void call() throws Exception {
-					long groupEntriesCount = searchGroupEntriesCount(
+					long actualCount = searchGroupEntriesCount(
 						group.getGroupId(), userId);
 
-					Assert.assertEquals(expected, groupEntriesCount);
+					Assert.assertEquals(expectedCount, actualCount);
 
 					return null;
 				}
@@ -310,10 +312,10 @@ public abstract class BaseSearchTestCase {
 			});
 	}
 
-	protected void assertGroupEntriesCount(long expected, User user)
+	protected void assertGroupEntriesCount(long expectedCount, User user)
 		throws Exception {
 
-		assertGroupEntriesCount(expected, user.getUserId());
+		assertGroupEntriesCount(expectedCount, user.getUserId());
 	}
 
 	protected void deleteBaseModel(BaseModel<?> baseModel) throws Exception {

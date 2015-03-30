@@ -1158,17 +1158,17 @@ public abstract class BaseAssetSearchTestCase {
 	}
 
 	protected void assertCount(
-			int expected, AssetEntryQuery assetEntryQuery,
+			int expectedCount, AssetEntryQuery assetEntryQuery,
 			SearchContext searchContext)
 		throws Exception {
 
 		assertCount(
-			expected, assetEntryQuery, searchContext, QueryUtil.ALL_POS,
+			expectedCount, assetEntryQuery, searchContext, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 	}
 
 	protected void assertCount(
-			final int expected, final AssetEntryQuery assetEntryQuery,
+			final int expectedCount, final AssetEntryQuery assetEntryQuery,
 			final SearchContext searchContext, final int start, final int end)
 		throws Exception {
 
@@ -1178,10 +1178,10 @@ public abstract class BaseAssetSearchTestCase {
 
 				@Override
 				public Void call() throws Exception {
-					int count = searchCount(
+					int actualCount = searchCount(
 						assetEntryQuery, searchContext, start, end);
 
-					Assert.assertEquals(expected, count);
+					Assert.assertEquals(expectedCount, actualCount);
 
 					return null;
 				}
