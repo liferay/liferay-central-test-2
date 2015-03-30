@@ -49,7 +49,6 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		}
 
 		User user = userLocalService.getUserById(userId);
-
 		Date now = new Date();
 
 		long sacpEntryId = counterLocalService.increment();
@@ -146,7 +145,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public int getCompanySACPEntryCount(long companyId) {
+	public int getCompanySACPEntriesCount(long companyId) {
 		return sacpEntryPersistence.countByCompanyId(companyId);
 	}
 
