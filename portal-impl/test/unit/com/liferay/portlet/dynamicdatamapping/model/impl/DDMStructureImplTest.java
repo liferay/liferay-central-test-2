@@ -50,10 +50,10 @@ public class DDMStructureImplTest extends BaseDDMTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		setUpDDMStructureLocalServiceUtil();
-		setUpDDMTemplateLocalServiceUtil();
 		setUpDDMFormJSONDeserializerUtil();
 		setUpDDMFormJSONSerializerUtil();
+		setUpDDMStructureLocalServiceUtil();
+		setUpDDMTemplateLocalServiceUtil();
 		setUpHtmlUtil();
 		setUpJSONFactoryUtil();
 		setUpLocaleUtil();
