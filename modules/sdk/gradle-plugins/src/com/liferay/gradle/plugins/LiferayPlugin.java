@@ -104,16 +104,17 @@ public class LiferayPlugin extends BasePlugin {
 	protected void configureSourceSets() {
 		SourceSet sourceSet = getSourceSet(SourceSet.MAIN_SOURCE_SET_NAME);
 
-		SourceDirectorySet javaDirectorySet = sourceSet.getJava();
+		SourceDirectorySet javaSourceDirectorySet = sourceSet.getJava();
 
 		Set<File> srcDirs = Collections.singleton(
 			_liferayExtension.getPluginSrcDir());
 
-		javaDirectorySet.setSrcDirs(srcDirs);
+		javaSourceDirectorySet.setSrcDirs(srcDirs);
 
-		SourceDirectorySet resourcesDirectorySet = sourceSet.getResources();
+		SourceDirectorySet resourcesSourceDirectorySet =
+			sourceSet.getResources();
 
-		resourcesDirectorySet.setSrcDirs(srcDirs);
+		resourcesSourceDirectorySet.setSrcDirs(srcDirs);
 	}
 
 	protected void configureTaskClean() {
@@ -178,35 +179,34 @@ public class LiferayPlugin extends BasePlugin {
 	}
 
 	protected void configureTaskWarFilesMatching(War warTask) {
-		final Closure<String> filterLiferayHookXmlClosure =
-			new Closure<String>(null) {
+		final Closure<String> closure = new Closure<String>(null) {
 
 			@SuppressWarnings("unused")
 			public String doCall(String line) {
-				if (line.contains("content/Language*.properties")) {
-					StringBuilder sb = new StringBuilder();
-
-					File contentDir = new File(
-						_liferayExtension.getPluginSrcDir(), "content");
-
-					File[] files = contentDir.listFiles();
-
-					for (int i = 0; i < files.length; i++) {
-						File file = files[i];
-
-						sb.append("\t<language-properties>content/");
-						sb.append(file.getName());
-						sb.append("</language-properties>");
-
-						if ((i + 1) < files.length) {
-							sb.append("\n");
-						}
-					}
-
-					return sb.toString();
+				if (!line.contains("content/Language*.properties")) {
+					return line;
 				}
 
-				return line;
+				StringBuilder sb = new StringBuilder();
+
+				File contentDir = new File(
+					_liferayExtension.getPluginSrcDir(), "content");
+
+				File[] files = contentDir.listFiles();
+
+				for (int i = 0; i < files.length; i++) {
+					File file = files[i];
+
+					sb.append("\t<language-properties>content/");
+					sb.append(file.getName());
+					sb.append("</language-properties>");
+
+					if ((i + 1) < files.length) {
+						sb.append("\n");
+					}
+				}
+
+				return sb.toString();
 			}
 
 		};
@@ -217,7 +217,7 @@ public class LiferayPlugin extends BasePlugin {
 
 				@Override
 				public void execute(FileCopyDetails fileCopyDetails) {
-					fileCopyDetails.filter(filterLiferayHookXmlClosure);
+					fileCopyDetails.filter(closure);
 				}
 
 			});
@@ -266,7 +266,7 @@ public class LiferayPlugin extends BasePlugin {
 	}
 
 	protected void configureTaskWarRenameDependencies(War warTask) {
-		Closure<String> renameDependencyClosure = new Closure<String>(null) {
+		Closure<String> closure = new Closure<String>(null) {
 
 			@SuppressWarnings("unused")
 			public String doCall(String name) {
@@ -326,7 +326,7 @@ public class LiferayPlugin extends BasePlugin {
 		for (CopySpecInternal childCopySpecInternal :
 				copySpecInternal.getChildren()) {
 
-			childCopySpecInternal.rename(renameDependencyClosure);
+			childCopySpecInternal.rename(closure);
 		}
 	}
 
