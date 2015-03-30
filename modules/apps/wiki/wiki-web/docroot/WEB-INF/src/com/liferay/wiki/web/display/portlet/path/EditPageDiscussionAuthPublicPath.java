@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.web.display.path;
+package com.liferay.wiki.web.display.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
@@ -28,10 +28,10 @@ import org.osgi.service.component.annotations.Modified;
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki_display/edit_page_attachment",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki_display/edit_page_discussion",
 	service = AuthPublicPath.class
 )
-public class EditPageAttachmentAuthPublicPath extends BaseAuthPublicPath {
+public class EditPageDiscussionAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {
