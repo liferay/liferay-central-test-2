@@ -166,11 +166,10 @@ public class RepositoryClassDefinitionCatalogImpl
 			RepositoryDefiner repositoryDefiner = registry.getService(
 				serviceReference);
 
+			String className = repositoryDefiner.getClassName();
 			RepositoryClassDefinition repositoryClassDefinition =
 				RepositoryClassDefinition.fromRepositoryDefiner(
 					repositoryDefiner);
-
-			String className = repositoryDefiner.getClassName();
 
 			if (repositoryDefiner.isExternalRepository()) {
 				_externalRepositoryClassDefinitions.put(
@@ -188,11 +187,10 @@ public class RepositoryClassDefinitionCatalogImpl
 			ServiceReference<RepositoryDefiner> serviceReference,
 			RepositoryDefiner repositoryDefiner) {
 
+			String className = repositoryDefiner.getClassName();
 			RepositoryClassDefinition repositoryClassDefinition =
 				RepositoryClassDefinition.fromRepositoryDefiner(
 					repositoryDefiner);
-
-			String className = repositoryDefiner.getClassName();
 
 			if (repositoryDefiner.isExternalRepository()) {
 				_externalRepositoryClassDefinitions.put(
