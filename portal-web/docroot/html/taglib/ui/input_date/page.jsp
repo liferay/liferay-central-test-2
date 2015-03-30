@@ -24,12 +24,12 @@ if (GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:di
 }
 
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:cssClass"));
-boolean disabled = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:input-date:disabled"));
-String dayParam = GetterUtil.getString((String) request.getAttribute("liferay-ui:input-date:dayParam"));
-int dayValue = GetterUtil.getInteger((String) request.getAttribute("liferay-ui:input-date:dayValue"));
+boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
+String dayParam = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:dayParam"));
+int dayValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:dayValue"));
 Date firstEnabledDate = GetterUtil.getDate(request.getAttribute("liferay-ui:input-date:firstEnabledDate"), DateFormatFactoryUtil.getDate(locale), null);
 Date lastEnabledDate = GetterUtil.getDate(request.getAttribute("liferay-ui:input-date:lastEnabledDate"), DateFormatFactoryUtil.getDate(locale), null);
-String monthParam = GetterUtil.getString((String) request.getAttribute("liferay-ui:input-date:monthParam"));
+String monthParam = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:monthParam"));
 int monthValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:monthValue"));
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:name"));
 boolean nullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:nullable"));
