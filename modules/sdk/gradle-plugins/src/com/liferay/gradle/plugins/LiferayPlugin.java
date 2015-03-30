@@ -389,6 +389,5 @@ public class LiferayPlugin extends BasePlugin {
 	}
 
 	private LiferayExtension _liferayExtension;
-	private Map<String, String> _newDependencyNames;
 
 }
