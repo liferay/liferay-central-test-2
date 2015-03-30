@@ -60,11 +60,11 @@ page import="javax.portlet.WindowState" %>
 <portlet:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
-
-WindowState windowState = liferayPortletRequest.getWindowState();
 %>
 
 <%@ include file="/init-ext.jsp" %>
