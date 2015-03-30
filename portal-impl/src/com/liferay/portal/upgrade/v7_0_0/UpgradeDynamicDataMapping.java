@@ -309,7 +309,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		return DDMFormLayoutJSONSerializerUtil.serialize(ddmFormLayout);
 	}
 
-	protected String toJSONContent(DDMForm ddmForm, String xml)
+	protected String toJSON(DDMForm ddmForm, String xml)
 		throws PortalException {
 
 		DDMFormValuesXSDDeserializer ddmFormValuesXSDDeserializer =
@@ -321,7 +321,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		return DDMFormValuesJSONSerializerUtil.serialize(ddmFormValues);
 	}
 
-	protected String toJSONDefinition(DDMForm ddmForm) throws Exception {
+	protected String toJSON(DDMForm ddmForm) throws Exception {
 		return DDMFormJSONSerializerUtil.serialize(ddmForm);
 	}
 
@@ -345,7 +345,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			if (rs.next()) {
 				String xml = rs.getString("data_");
 
-				updateContent(contentId, toJSONContent(ddmForm, xml));
+				updateContent(contentId, toJSON(ddmForm, xml));
 			}
 		}
 		finally {
@@ -446,7 +446,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 				DDMForm ddmForm = getDDMForm(structureId);
 
-				String definition = toJSONDefinition(ddmForm);
+				String definition = toJSON(ddmForm);
 
 				upgradeStructureDefinition(structureId, definition);
 
@@ -499,7 +499,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					DDMForm ddmForm = DDMFormXSDDeserializerUtil.deserialize(
 						script);
 
-					script = toJSONDefinition(ddmForm);
+					script = toJSON(ddmForm);
 
 					upgradeTemplateScript(templateId, script);
 				}
