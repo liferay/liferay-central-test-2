@@ -69,15 +69,16 @@ public class AssetEntriesSearchFacet extends BaseSearchFacet {
 
 		jsonObject.put("frequencyThreshold", 1);
 
-		JSONArray assetTypesJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (String assetType : getAssetTypes()) {
-			assetTypesJSONArray.put(assetType);
+			jsonArray.put(assetType);
 		}
 
-		jsonObject.put("values", assetTypesJSONArray);
+		jsonObject.put("values", jsonArray);
 
 		facetConfiguration.setDataJSONObject(jsonObject);
+
 		facetConfiguration.setFieldName(getFieldName());
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
@@ -108,21 +109,23 @@ public class AssetEntriesSearchFacet extends BaseSearchFacet {
 
 		int frequencyThreshold = ParamUtil.getInteger(
 			actionRequest, getClassName() + "frequencyThreshold", 1);
+
+		jsonObject.put("frequencyThreshold", frequencyThreshold);
+
 		String[] assetTypes = StringUtil.split(
 			ParamUtil.getString(actionRequest, getClassName() + "assetTypes"));
 
-		JSONArray assetTypesJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		if (ArrayUtil.isEmpty(assetTypes)) {
 			assetTypes = getAssetTypes();
 		}
 
 		for (String assetType : assetTypes) {
-			assetTypesJSONArray.put(assetType);
+			jsonArray.put(assetType);
 		}
 
-		jsonObject.put("frequencyThreshold", frequencyThreshold);
-		jsonObject.put("values", assetTypesJSONArray);
+		jsonObject.put("values", jsonArray);
 
 		return jsonObject;
 	}

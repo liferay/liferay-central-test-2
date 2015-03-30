@@ -57,6 +57,7 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 		jsonObject.put("showAssetCount", true);
 
 		facetConfiguration.setDataJSONObject(jsonObject);
+
 		facetConfiguration.setFieldName(getFieldName());
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
