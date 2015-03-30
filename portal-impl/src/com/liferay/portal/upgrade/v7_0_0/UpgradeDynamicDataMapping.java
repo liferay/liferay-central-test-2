@@ -309,6 +309,10 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		return DDMFormLayoutJSONSerializerUtil.serialize(ddmFormLayout);
 	}
 
+	protected String toJSON(DDMForm ddmForm) throws Exception {
+		return DDMFormJSONSerializerUtil.serialize(ddmForm);
+	}
+
 	protected String toJSON(DDMForm ddmForm, String xml)
 		throws PortalException {
 
@@ -319,10 +323,6 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			ddmForm, xml);
 
 		return DDMFormValuesJSONSerializerUtil.serialize(ddmFormValues);
-	}
-
-	protected String toJSON(DDMForm ddmForm) throws Exception {
-		return DDMFormJSONSerializerUtil.serialize(ddmForm);
 	}
 
 	protected void updateContent(DDMForm ddmForm, long contentId)
