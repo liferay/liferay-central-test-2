@@ -33,13 +33,13 @@ import org.osgi.service.component.annotations.Modified;
 )
 public class ViewChartAuthPublicPath extends BaseAuthPublicPath {
 
-	@Modified
-	public void modified(Map<String, String> properties) {
+	@Activate
+	protected void activate(Map<String, String> properties) {
 		updatePath(properties);
 	}
 
-	@Activate
-	protected void activate(Map<String, String> properties) {
+	@Modified
+	protected void modified(Map<String, String> properties) {
 		updatePath(properties);
 	}
 
