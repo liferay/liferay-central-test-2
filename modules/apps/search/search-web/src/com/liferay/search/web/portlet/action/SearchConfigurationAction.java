@@ -48,14 +48,11 @@ public class SearchConfigurationAction extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		JSONArray newFacetsJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		JSONArray facetsJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (SearchFacet searchFacet : SearchFacetTracker.getSearchFacets()) {
-			boolean displayFacet = ParamUtil.getBoolean(
-				actionRequest, searchFacet.getClassName() + "displayFacet");
-			double weight = ParamUtil.getDouble(
-				actionRequest, searchFacet.getClassName() + "weight");
-
 			JSONObject facetJSONObject = JSONFactoryUtil.createJSONObject();
 
 			facetJSONObject.put("className", searchFacet.getClassName());
@@ -64,15 +61,21 @@ public class SearchConfigurationAction extends DefaultConfigurationAction {
 			facetJSONObject.put("label", searchFacet.getLabel());
 			facetJSONObject.put("order", searchFacet.getOrder());
 			facetJSONObject.put("id", searchFacet.getId());
+
+			boolean displayFacet = ParamUtil.getBoolean(
+				actionRequest, searchFacet.getClassName() + "displayFacet");
+
 			facetJSONObject.put("static", !displayFacet);
+
+			double weight = ParamUtil.getDouble(
+				actionRequest, searchFacet.getClassName() + "weight");
+
 			facetJSONObject.put("weight", weight);
 
-			newFacetsJSONArray.put(facetJSONObject);
+			facetsJSONArray.put(facetJSONObject);
 		}
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("facets", newFacetsJSONArray);
+		jsonObject.put("facets", facetsJSONArray);
 
 		setPreference(
 			actionRequest, "searchConfiguration", jsonObject.toString());
