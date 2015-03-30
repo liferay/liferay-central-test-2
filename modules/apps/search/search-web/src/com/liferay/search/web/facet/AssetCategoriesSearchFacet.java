@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.search.web.facets;
+package com.liferay.search.web.facet;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true, service = SearchFacet.class
 )
-public class AssetTagsSearchFacet extends BaseSearchFacet {
+public class AssetCategoriesSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getClassName() {
@@ -41,7 +41,7 @@ public class AssetTagsSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getConfigurationView() {
-		return "/facets/configuration/asset_tags.jsp";
+		return "/facets/configuration/asset_categories.jsp";
 	}
 
 	@Override
@@ -62,24 +62,24 @@ public class AssetTagsSearchFacet extends BaseSearchFacet {
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
 		facetConfiguration.setStatic(false);
-		facetConfiguration.setWeight(1.4);
+		facetConfiguration.setWeight(1.3);
 
 		return facetConfiguration;
 	}
 
 	@Override
 	public String getDisplayView() {
-		return "/facets/view/asset_tags.jsp";
+		return "/facets/view/asset_categories.jsp";
 	}
 
 	@Override
 	public String getFieldName() {
-		return Field.ASSET_TAG_NAMES;
+		return Field.ASSET_CATEGORY_IDS;
 	}
 
 	@Override
 	public String getId() {
-		return AssetTagsSearchFacet.class.getName();
+		return AssetCategoriesSearchFacet.class.getName();
 	}
 
 	@Override
@@ -105,12 +105,12 @@ public class AssetTagsSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getLabel() {
-		return "tag";
+		return "category";
 	}
 
 	@Override
 	public String getTitle() {
-		return "tag";
+		return "category";
 	}
 
 }

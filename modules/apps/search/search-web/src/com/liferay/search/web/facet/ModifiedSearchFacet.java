@@ -12,14 +12,16 @@
  * details.
  */
 
-package com.liferay.search.web.facets;
+package com.liferay.search.web.facet;
 
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.facet.MultiValueFacet;
+import com.liferay.portal.kernel.search.facet.ModifiedFacet;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.search.web.util.SearchFacet;
 
 import javax.portlet.ActionRequest;
@@ -32,16 +34,16 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true, service = SearchFacet.class
 )
-public class UserSearchFacet extends BaseSearchFacet {
+public class ModifiedSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getClassName() {
-		return MultiValueFacet.class.getName();
+		return ModifiedFacet.class.getName();
 	}
 
 	@Override
 	public String getConfigurationView() {
-		return "/facets/configuration/users.jsp";
+		return "/facets/configuration/modified.jsp";
 	}
 
 	@Override
@@ -52,61 +54,96 @@ public class UserSearchFacet extends BaseSearchFacet {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("frequencyThreshold", 1);
-		jsonObject.put("maxTerms", 10);
-		jsonObject.put("showAssetCount", true);
+		jsonObject.put("frequencyThreshold", 0);
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (int i = 0; i < _labels.length; i++) {
+			JSONObject range = JSONFactoryUtil.createJSONObject();
+
+			range.put("label", _labels[i]);
+			range.put("range", _ranges[i]);
+
+			jsonArray.put(range);
+		}
+
+		jsonObject.put("ranges", jsonArray);
 
 		facetConfiguration.setDataJSONObject(jsonObject);
 		facetConfiguration.setFieldName(getFieldName());
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
 		facetConfiguration.setStatic(false);
-		facetConfiguration.setWeight(1.1);
+		facetConfiguration.setWeight(1.0);
 
 		return facetConfiguration;
 	}
 
 	@Override
+		public String getId() {
+			return ModifiedSearchFacet.class.getName();
+		}
+
+	@Override
 	public String getDisplayView() {
-		return "/facets/view/users.jsp";
+		return "/facets/view/modified.jsp";
 	}
 
 	@Override
 	public String getFieldName() {
-		return Field.USER_NAME;
-	}
-
-	@Override
-	public String getId() {
-		return UserSearchFacet.class.getName();
+		return Field.MODIFIED_DATE;
 	}
 
 	@Override
 	public JSONObject getJSONData(ActionRequest actionRequest) {
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+		JSONObject data = JSONFactoryUtil.createJSONObject();
 
 		int frequencyThreshold = ParamUtil.getInteger(
 			actionRequest, getClassName() + "frequencyThreshold", 1);
-		int maxTerms = ParamUtil.getInteger(
-			actionRequest, getClassName() + "maxTerms", 10);
-		boolean showAssetCount = ParamUtil.getBoolean(
-			actionRequest, getClassName() + "showAssetCount", true);
 
-		jsonObject.put("frequencyThreshold", frequencyThreshold);
-		jsonObject.put("maxTerms", maxTerms);
-		jsonObject.put("showAssetCount", showAssetCount);
+		data.put("frequencyThreshold", frequencyThreshold);
 
-		return jsonObject;
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		String[] rangesIndexes = StringUtil.split(
+			ParamUtil.getString(
+				actionRequest, getClassName() + "rangesIndexes"));
+
+		for (String rangesIndex : rangesIndexes) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			String label = ParamUtil.getString(
+				actionRequest, getClassName() + "label_" + rangesIndex);
+			String range = ParamUtil.getString(
+				actionRequest, getClassName() + "range_" + rangesIndex);
+
+			jsonObject.put("label", label);
+			jsonObject.put("range", range);
+
+			jsonArray.put(jsonObject);
+		}
+
+		data.put("ranges", jsonArray);
+
+		return data;
 	}
 
 	@Override
 	public String getLabel() {
-		return "user";
+		return "modified";
 	}
 
 	@Override
 	public String getTitle() {
-		return "user";
+		return "modified-date";
 	}
+
+	private final String[] _labels = new String[] {
+		"past-hour", "past-24-hours", "past-week", "past-month", "past-year"
+	};
+	private final String[] _ranges = new String[] {
+		"[past-hour TO *]", "[past-24-hours TO *]", "[past-week TO *]",
+		"[past-month TO *]", "[past-year TO *]"
+	};
 
 }

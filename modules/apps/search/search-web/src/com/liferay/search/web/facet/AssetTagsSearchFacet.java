@@ -12,16 +12,14 @@
  * details.
  */
 
-package com.liferay.search.web.facets;
+package com.liferay.search.web.facet;
 
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.facet.ModifiedFacet;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.search.web.util.SearchFacet;
 
 import javax.portlet.ActionRequest;
@@ -34,16 +32,16 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true, service = SearchFacet.class
 )
-public class ModifiedSearchFacet extends BaseSearchFacet {
+public class AssetTagsSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getClassName() {
-		return ModifiedFacet.class.getName();
+		return MultiValueFacet.class.getName();
 	}
 
 	@Override
 	public String getConfigurationView() {
-		return "/facets/configuration/modified.jsp";
+		return "/facets/configuration/asset_tags.jsp";
 	}
 
 	@Override
@@ -54,96 +52,65 @@ public class ModifiedSearchFacet extends BaseSearchFacet {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("frequencyThreshold", 0);
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (int i = 0; i < _labels.length; i++) {
-			JSONObject range = JSONFactoryUtil.createJSONObject();
-
-			range.put("label", _labels[i]);
-			range.put("range", _ranges[i]);
-
-			jsonArray.put(range);
-		}
-
-		jsonObject.put("ranges", jsonArray);
+		jsonObject.put("displayStyle", "list");
+		jsonObject.put("frequencyThreshold", 1);
+		jsonObject.put("maxTerms", 10);
+		jsonObject.put("showAssetCount", true);
 
 		facetConfiguration.setDataJSONObject(jsonObject);
 		facetConfiguration.setFieldName(getFieldName());
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
 		facetConfiguration.setStatic(false);
-		facetConfiguration.setWeight(1.0);
+		facetConfiguration.setWeight(1.4);
 
 		return facetConfiguration;
 	}
 
 	@Override
-		public String getId() {
-			return ModifiedSearchFacet.class.getName();
-		}
-
-	@Override
 	public String getDisplayView() {
-		return "/facets/view/modified.jsp";
+		return "/facets/view/asset_tags.jsp";
 	}
 
 	@Override
 	public String getFieldName() {
-		return Field.MODIFIED_DATE;
+		return Field.ASSET_TAG_NAMES;
+	}
+
+	@Override
+	public String getId() {
+		return AssetTagsSearchFacet.class.getName();
 	}
 
 	@Override
 	public JSONObject getJSONData(ActionRequest actionRequest) {
-		JSONObject data = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+		String displayStyle = ParamUtil.getString(
+			actionRequest, getClassName() + "displayStyle", "list");
 		int frequencyThreshold = ParamUtil.getInteger(
 			actionRequest, getClassName() + "frequencyThreshold", 1);
+		int maxTerms = ParamUtil.getInteger(
+			actionRequest, getClassName() + "maxTerms", 10);
+		boolean showAssetCount = ParamUtil.getBoolean(
+			actionRequest, getClassName() + "showAssetCount", true);
 
-		data.put("frequencyThreshold", frequencyThreshold);
+		jsonObject.put("displayStyle", displayStyle);
+		jsonObject.put("frequencyThreshold", frequencyThreshold);
+		jsonObject.put("maxTerms", maxTerms);
+		jsonObject.put("showAssetCount", showAssetCount);
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		String[] rangesIndexes = StringUtil.split(
-			ParamUtil.getString(
-				actionRequest, getClassName() + "rangesIndexes"));
-
-		for (String rangesIndex : rangesIndexes) {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-			String label = ParamUtil.getString(
-				actionRequest, getClassName() + "label_" + rangesIndex);
-			String range = ParamUtil.getString(
-				actionRequest, getClassName() + "range_" + rangesIndex);
-
-			jsonObject.put("label", label);
-			jsonObject.put("range", range);
-
-			jsonArray.put(jsonObject);
-		}
-
-		data.put("ranges", jsonArray);
-
-		return data;
+		return jsonObject;
 	}
 
 	@Override
 	public String getLabel() {
-		return "modified";
+		return "tag";
 	}
 
 	@Override
 	public String getTitle() {
-		return "modified-date";
+		return "tag";
 	}
-
-	private final String[] _labels = new String[] {
-		"past-hour", "past-24-hours", "past-week", "past-month", "past-year"
-	};
-	private final String[] _ranges = new String[] {
-		"[past-hour TO *]", "[past-24-hours TO *]", "[past-week TO *]",
-		"[past-month TO *]", "[past-year TO *]"
-	};
 
 }

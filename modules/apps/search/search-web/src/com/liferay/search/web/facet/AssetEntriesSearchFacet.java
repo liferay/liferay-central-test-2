@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.search.web.facets;
+package com.liferay.search.web.facet;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;

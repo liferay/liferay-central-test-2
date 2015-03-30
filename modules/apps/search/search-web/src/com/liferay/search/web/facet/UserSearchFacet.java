@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.search.web.facets;
+package com.liferay.search.web.facet;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true, service = SearchFacet.class
 )
-public class AssetCategoriesSearchFacet extends BaseSearchFacet {
+public class UserSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getClassName() {
@@ -41,7 +41,7 @@ public class AssetCategoriesSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getConfigurationView() {
-		return "/facets/configuration/asset_categories.jsp";
+		return "/facets/configuration/users.jsp";
 	}
 
 	@Override
@@ -52,7 +52,6 @@ public class AssetCategoriesSearchFacet extends BaseSearchFacet {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("displayStyle", "list");
 		jsonObject.put("frequencyThreshold", 1);
 		jsonObject.put("maxTerms", 10);
 		jsonObject.put("showAssetCount", true);
@@ -62,32 +61,30 @@ public class AssetCategoriesSearchFacet extends BaseSearchFacet {
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
 		facetConfiguration.setStatic(false);
-		facetConfiguration.setWeight(1.3);
+		facetConfiguration.setWeight(1.1);
 
 		return facetConfiguration;
 	}
 
 	@Override
 	public String getDisplayView() {
-		return "/facets/view/asset_categories.jsp";
+		return "/facets/view/users.jsp";
 	}
 
 	@Override
 	public String getFieldName() {
-		return Field.ASSET_CATEGORY_IDS;
+		return Field.USER_NAME;
 	}
 
 	@Override
 	public String getId() {
-		return AssetCategoriesSearchFacet.class.getName();
+		return UserSearchFacet.class.getName();
 	}
 
 	@Override
 	public JSONObject getJSONData(ActionRequest actionRequest) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		String displayStyle = ParamUtil.getString(
-			actionRequest, getClassName() + "displayStyle", "list");
 		int frequencyThreshold = ParamUtil.getInteger(
 			actionRequest, getClassName() + "frequencyThreshold", 1);
 		int maxTerms = ParamUtil.getInteger(
@@ -95,7 +92,6 @@ public class AssetCategoriesSearchFacet extends BaseSearchFacet {
 		boolean showAssetCount = ParamUtil.getBoolean(
 			actionRequest, getClassName() + "showAssetCount", true);
 
-		jsonObject.put("displayStyle", displayStyle);
 		jsonObject.put("frequencyThreshold", frequencyThreshold);
 		jsonObject.put("maxTerms", maxTerms);
 		jsonObject.put("showAssetCount", showAssetCount);
@@ -105,12 +101,12 @@ public class AssetCategoriesSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getLabel() {
-		return "category";
+		return "user";
 	}
 
 	@Override
 	public String getTitle() {
-		return "category";
+		return "user";
 	}
 
 }

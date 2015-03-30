@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.search.web.facets;
+package com.liferay.search.web.facet;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.facet.ScopeFacet;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.search.web.util.SearchFacet;
@@ -32,16 +32,16 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true, service = SearchFacet.class
 )
-public class ScopeSearchFacet extends BaseSearchFacet {
+public class FolderSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getClassName() {
-		return ScopeFacet.class.getName();
+		return MultiValueFacet.class.getName();
 	}
 
 	@Override
 	public String getConfigurationView() {
-		return "/facets/configuration/scopes.jsp";
+		return "/facets/configuration/folders.jsp";
 	}
 
 	@Override
@@ -61,24 +61,24 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 		facetConfiguration.setLabel(getLabel());
 		facetConfiguration.setOrder(getOrder());
 		facetConfiguration.setStatic(false);
-		facetConfiguration.setWeight(1.6);
+		facetConfiguration.setWeight(1.2);
 
 		return facetConfiguration;
 	}
 
 	@Override
-	public String getId() {
-		return ScopeSearchFacet.class.getName();
-	}
+		public String getId() {
+			return FolderSearchFacet.class.getName();
+		}
 
 	@Override
 	public String getDisplayView() {
-		return "/facets/view/scopes.jsp";
+		return "/facets/view/folders.jsp";
 	}
 
 	@Override
 	public String getFieldName() {
-		return Field.GROUP_ID;
+		return Field.FOLDER_ID;
 	}
 
 	@Override
@@ -101,12 +101,12 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 
 	@Override
 	public String getLabel() {
-		return "site";
+		return "folder";
 	}
 
 	@Override
 	public String getTitle() {
-		return "sites";
+		return "folder";
 	}
 
 }
