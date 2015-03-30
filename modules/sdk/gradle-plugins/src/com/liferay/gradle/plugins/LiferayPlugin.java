@@ -59,41 +59,6 @@ import org.gradle.api.tasks.bundling.War;
  */
 public class LiferayPlugin extends BasePlugin {
 
-	protected void configureTaskClean() {
-		Task cleanTask = getTask(CLEAN_TASK_NAME);
-
-		// Depends on
-
-		for (Task task : project.getTasks()) {
-			String taskName =
-				CLEAN_TASK_NAME + StringUtil.capitalize(task.getName());
-
-			cleanTask.dependsOn(taskName);
-		}
-
-		Configuration compileConfiguration = getConfiguration(
-			JavaPlugin.COMPILE_CONFIGURATION_NAME);
-
-		Set<Dependency> compileDependencies =
-			compileConfiguration.getAllDependencies();
-
-		for (Dependency dependency : compileDependencies) {
-			if (dependency instanceof ProjectDependency) {
-				ProjectDependency projectDependency =
-					(ProjectDependency)dependency;
-
-				Project dependencyProject =
-					projectDependency.getDependencyProject();
-
-				String taskName =
-					dependencyProject.getPath() + Project.PATH_SEPARATOR +
-						CLEAN_TASK_NAME;
-
-				cleanTask.dependsOn(taskName);
-			}
-		}
-	}
-
 	protected void configureDependencies() {
 		DependencyHandler dependencyHandler = project.getDependencies();
 
@@ -206,37 +171,44 @@ public class LiferayPlugin extends BasePlugin {
 		resourcesDirectorySet.setSrcDirs(srcDirs);
 	}
 
+	protected void configureTaskClean() {
+		Task cleanTask = getTask(CLEAN_TASK_NAME);
+
+		// Depends on
+
+		for (Task task : project.getTasks()) {
+			String taskName =
+				CLEAN_TASK_NAME + StringUtil.capitalize(task.getName());
+
+			cleanTask.dependsOn(taskName);
+		}
+
+		Configuration compileConfiguration = getConfiguration(
+			JavaPlugin.COMPILE_CONFIGURATION_NAME);
+
+		Set<Dependency> compileDependencies =
+			compileConfiguration.getAllDependencies();
+
+		for (Dependency dependency : compileDependencies) {
+			if (dependency instanceof ProjectDependency) {
+				ProjectDependency projectDependency =
+					(ProjectDependency)dependency;
+
+				Project dependencyProject =
+					projectDependency.getDependencyProject();
+
+				String taskName =
+					dependencyProject.getPath() + Project.PATH_SEPARATOR +
+						CLEAN_TASK_NAME;
+
+				cleanTask.dependsOn(taskName);
+			}
+		}
+	}
+
 	protected void configureTasks() {
 		configureTaskClean();
 		configureTaskWar();
-	}
-
-	protected void configureVersion() {
-		String version = null;
-
-		String moduleFullVersion = _liferayExtension.getPluginPackageProperty(
-			"module-full-version");
-
-		if (Validator.isNotNull(moduleFullVersion)) {
-			version = moduleFullVersion;
-		}
-		else {
-			String bundleVersion = _liferayExtension.getBndProperty(
-				"Bundle-Version");
-
-			if (Validator.isNotNull(bundleVersion)) {
-				version = bundleVersion;
-			}
-			else {
-				String moduleIncrementalVersion =
-					_liferayExtension.getPluginPackageProperty(
-						"module-incremental-version");
-
-				version = PORTAL_VERSION + "." + moduleIncrementalVersion;
-			}
-		}
-
-		project.setVersion(version);
 	}
 
 	protected void configureTaskWar() {
@@ -356,6 +328,34 @@ public class LiferayPlugin extends BasePlugin {
 		for (CopySpecInternal childSpec : rootSpec.getChildren()) {
 			childSpec.rename(renameDependencyClosure);
 		}
+	}
+
+	protected void configureVersion() {
+		String version = null;
+
+		String moduleFullVersion = _liferayExtension.getPluginPackageProperty(
+			"module-full-version");
+
+		if (Validator.isNotNull(moduleFullVersion)) {
+			version = moduleFullVersion;
+		}
+		else {
+			String bundleVersion = _liferayExtension.getBndProperty(
+				"Bundle-Version");
+
+			if (Validator.isNotNull(bundleVersion)) {
+				version = bundleVersion;
+			}
+			else {
+				String moduleIncrementalVersion =
+					_liferayExtension.getPluginPackageProperty(
+						"module-incremental-version");
+
+				version = PORTAL_VERSION + "." + moduleIncrementalVersion;
+			}
+		}
+
+		project.setVersion(version);
 	}
 
 	protected void configureWebAppDirName() {
