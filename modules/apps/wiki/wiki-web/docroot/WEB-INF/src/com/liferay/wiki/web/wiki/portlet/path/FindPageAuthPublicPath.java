@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.web.display.path;
+package com.liferay.wiki.web.wiki.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
@@ -24,14 +24,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Roberto Díaz
+ * @author Iván Zaera
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki_display/edit_page_discussion",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/find_page",
 	service = AuthPublicPath.class
 )
-public class EditPageDiscussionPath extends BaseAuthPublicPath {
+public class FindPageAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {

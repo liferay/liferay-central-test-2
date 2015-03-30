@@ -28,10 +28,10 @@ import org.osgi.service.component.annotations.Modified;
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/find_entry",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/open_entry",
 	service = AuthPublicPath.class
 )
-public class FindEntryPath extends BaseAuthPublicPath {
+public class OpenEntryAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {

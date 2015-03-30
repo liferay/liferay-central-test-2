@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.polls.web.polls.portlet.path;
+package com.liferay.wiki.web.display.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
@@ -24,22 +24,22 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Miguel Pastor
+ * @author Roberto Díaz
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/polls/view_chart",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki_display/edit_page_attachment",
 	service = AuthPublicPath.class
 )
-public class ViewChartPath extends BaseAuthPublicPath {
-
-	@Modified
-	public void modified(Map<String, String> properties) {
-		updatePath(properties);
-	}
+public class EditPageAttachmentAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {
+		updatePath(properties);
+	}
+
+	@Modified
+	protected void modified(Map<String, String> properties) {
 		updatePath(properties);
 	}
 

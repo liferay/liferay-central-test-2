@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.web.admin.portlet.path;
+package com.liferay.bookmarks.web.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
@@ -24,14 +24,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Roberto Díaz
+ * @author Miguel Pastor
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki_admin/edit_page_attachment",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/find_entry",
 	service = AuthPublicPath.class
 )
-public class EditPageAttachmentPath extends BaseAuthPublicPath {
+public class FindEntryAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {

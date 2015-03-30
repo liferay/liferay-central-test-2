@@ -24,14 +24,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Iván Zaera
+ * @author Roberto Díaz
  */
 @Component(
-	immediate = true, property =
-		BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/get_page_attachment",
+	immediate = true,
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/edit_page_attachment",
 	service = AuthPublicPath.class
 )
-public class GetPageAttachmentPath extends BaseAuthPublicPath {
+public class EditPageAttachmentAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {

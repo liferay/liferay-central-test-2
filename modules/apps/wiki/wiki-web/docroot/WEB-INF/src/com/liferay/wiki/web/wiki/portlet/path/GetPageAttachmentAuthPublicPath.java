@@ -28,10 +28,10 @@ import org.osgi.service.component.annotations.Modified;
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/rss",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/get_page_attachment",
 	service = AuthPublicPath.class
 )
-public class RSSPath extends BaseAuthPublicPath {
+public class GetPageAttachmentAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {

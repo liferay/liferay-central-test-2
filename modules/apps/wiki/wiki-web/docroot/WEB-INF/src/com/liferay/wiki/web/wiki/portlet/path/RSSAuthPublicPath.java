@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.web.portlet.path;
+package com.liferay.wiki.web.wiki.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
 import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
@@ -24,14 +24,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Miguel Pastor
+ * @author Iván Zaera
  */
 @Component(
 	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/bookmarks/find_folder",
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/rss",
 	service = AuthPublicPath.class
 )
-public class FindFolderPath extends BaseAuthPublicPath {
+public class RSSAuthPublicPath extends BaseAuthPublicPath {
 
 	@Activate
 	protected void activate(Map<String, String> properties) {
