@@ -59,7 +59,7 @@ import org.gradle.api.tasks.bundling.War;
  */
 public class LiferayPlugin extends BasePlugin {
 
-	protected void configureClean() {
+	protected void configureTaskClean() {
 		Task cleanTask = getTask(CLEAN_TASK_NAME);
 
 		// Depends on
@@ -207,8 +207,8 @@ public class LiferayPlugin extends BasePlugin {
 	}
 
 	protected void configureTasks() {
-		configureClean();
-		configureWar();
+		configureTaskClean();
+		configureTaskWar();
 	}
 
 	protected void configureVersion() {
@@ -239,7 +239,7 @@ public class LiferayPlugin extends BasePlugin {
 		project.setVersion(version);
 	}
 
-	protected void configureWar() {
+	protected void configureTaskWar() {
 		War warTask = (War)getTask(WarPlugin.WAR_TASK_NAME);
 
 		CopySpecInternal rootSpec = warTask.getRootSpec();
