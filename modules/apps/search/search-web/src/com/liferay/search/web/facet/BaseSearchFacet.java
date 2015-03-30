@@ -131,8 +131,6 @@ public abstract class BaseSearchFacet implements SearchFacet {
 				facetJSONObject.getJSONObject("data"));
 		}
 
-		facetConfiguration.setDisplayStyle(
-			facetJSONObject.getString("displayStyle"));
 		facetConfiguration.setFieldName(facetJSONObject.getString("fieldName"));
 		facetConfiguration.setLabel(facetJSONObject.getString("label"));
 		facetConfiguration.setOrder(facetJSONObject.getString("order"));
