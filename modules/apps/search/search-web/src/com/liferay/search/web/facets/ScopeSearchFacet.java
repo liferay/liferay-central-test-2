@@ -67,9 +67,9 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 	}
 
 	@Override
-		public String getId() {
-			return ScopeSearchFacet.class.getName();
-		}
+	public String getId() {
+		return ScopeSearchFacet.class.getName();
+	}
 
 	@Override
 	public String getDisplayView() {
