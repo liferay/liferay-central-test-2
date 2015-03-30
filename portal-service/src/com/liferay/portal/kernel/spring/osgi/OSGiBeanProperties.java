@@ -181,38 +181,38 @@ public @interface OSGiBeanProperties {
 				OSGiBeanProperties.class);
 
 			if (osgiBeanProperties == null) {
-				return _getInterfaces(clazz, new HashSet<Class<?>>());
+				return _getInterfaceClasses(clazz, new HashSet<Class<?>>());
 			}
 
-			Class<?>[] service = osgiBeanProperties.service();
+			Class<?>[] serviceClasses = osgiBeanProperties.service();
 
-			if (service.length == 0) {
-				return _getInterfaces(clazz, new HashSet<Class<?>>());
+			if (serviceClasses.length == 0) {
+				return _getInterfaceClasses(clazz, new HashSet<Class<?>>());
 			}
 
-			for (Class<?> serviceClazz : service) {
+			for (Class<?> serviceClazz : serviceClasses) {
 				serviceClazz.cast(object);
 			}
 
 			return new HashSet<>(Arrays.asList(osgiBeanProperties.service()));
 		}
 
-		private static Set<Class<?>> _getInterfaces(
-			Class<?> clazz, Set<Class<?>> interfaces) {
+		private static Set<Class<?>> _getInterfaceClasses(
+			Class<?> clazz, Set<Class<?>> interfaceClasses) {
 
 			if (clazz.isInterface()) {
-				interfaces.add(clazz);
+				interfaceClasses.add(clazz);
 			}
 
 			for (Class<?> interfaceClass : clazz.getInterfaces()) {
-				_getInterfaces(interfaceClass, interfaces);
+				_getInterfaceClasses(interfaceClass, interfaceClasses);
 			}
 
 			if ((clazz = clazz.getSuperclass()) != null) {
-				_getInterfaces(clazz, interfaces);
+				_getInterfaceClasses(clazz, interfaceClasses);
 			}
 
-			return interfaces;
+			return interfaceClasses;
 		}
 
 	}
