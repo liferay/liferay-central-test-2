@@ -58,11 +58,11 @@ public class ModifiedSearchFacet extends BaseSearchFacet {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (int i = 0; i < _labels.length; i++) {
+		for (int i = 0; i < _LABELS.length; i++) {
 			JSONObject range = JSONFactoryUtil.createJSONObject();
 
-			range.put("label", _labels[i]);
-			range.put("range", _ranges[i]);
+			range.put("label", _LABELS[i]);
+			range.put("range", _RANGES[i]);
 
 			jsonArray.put(range);
 		}
@@ -80,9 +80,9 @@ public class ModifiedSearchFacet extends BaseSearchFacet {
 	}
 
 	@Override
-		public String getId() {
-			return ModifiedSearchFacet.class.getName();
-		}
+	public String getId() {
+		return ModifiedSearchFacet.class.getName();
+	}
 
 	@Override
 	public String getDisplayView() {
@@ -138,10 +138,11 @@ public class ModifiedSearchFacet extends BaseSearchFacet {
 		return "modified-date";
 	}
 
-	private final String[] _labels = new String[] {
+	private static final String[] _LABELS = new String[] {
 		"past-hour", "past-24-hours", "past-week", "past-month", "past-year"
 	};
-	private final String[] _ranges = new String[] {
+
+	private static final String[] _RANGES = new String[] {
 		"[past-hour TO *]", "[past-24-hours TO *]", "[past-week TO *]",
 		"[past-month TO *]", "[past-year TO *]"
 	};
