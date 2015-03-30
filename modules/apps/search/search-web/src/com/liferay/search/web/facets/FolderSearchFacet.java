@@ -71,6 +71,7 @@ public class FolderSearchFacet extends BaseSearchFacet {
 			return FolderSearchFacet.class.getName();
 		}
 
+	@Override
 	public String getDisplayView() {
 		return "/facets/view/folders.jsp";
 	}

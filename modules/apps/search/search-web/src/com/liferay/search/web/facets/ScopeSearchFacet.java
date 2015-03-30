@@ -71,6 +71,7 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 			return ScopeSearchFacet.class.getName();
 		}
 
+	@Override
 	public String getDisplayView() {
 		return "/facets/view/scopes.jsp";
 	}

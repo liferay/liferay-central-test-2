@@ -92,6 +92,7 @@ public class AssetEntriesSearchFacet extends BaseSearchFacet {
 			return AssetEntriesSearchFacet.class.getName();
 		}
 
+	@Override
 	public String getDisplayView() {
 		return "/facets/view/asset_entries.jsp";
 	}

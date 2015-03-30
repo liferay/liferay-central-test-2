@@ -84,6 +84,7 @@ public class ModifiedSearchFacet extends BaseSearchFacet {
 			return ModifiedSearchFacet.class.getName();
 		}
 
+	@Override
 	public String getDisplayView() {
 		return "/facets/view/modified.jsp";
 	}
