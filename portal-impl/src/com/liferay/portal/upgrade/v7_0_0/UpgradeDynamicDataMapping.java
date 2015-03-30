@@ -253,7 +253,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 	}
 
 	protected DDMForm getDDMForm(long structureId) throws Exception {
-		DDMForm ddmForm = _ddmFormMap.get(structureId);
+		DDMForm ddmForm = _ddmForms.get(structureId);
 
 		if (ddmForm != null) {
 			return ddmForm;
@@ -289,7 +289,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					ddmFormFields.addAll(parentDDMForm.getDDMFormFields());
 				}
 
-				_ddmFormMap.put(structureId, ddmForm);
+				_ddmForms.put(structureId, ddmForm);
 
 				return ddmForm;
 			}
@@ -589,7 +589,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 	private static final Log _log = LogFactoryUtil.getLog(
 		UpgradeDynamicDataMapping.class);
 
-	private final Map<Long, DDMForm> _ddmFormMap = new HashMap<>();
+	private final Map<Long, DDMForm> _ddmForms = new HashMap<>();
 
 	private class DDMFormValuesXSDDeserializer {
 
