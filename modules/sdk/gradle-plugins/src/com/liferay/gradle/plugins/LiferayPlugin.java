@@ -60,83 +60,56 @@ import org.gradle.api.tasks.bundling.War;
 public class LiferayPlugin extends BasePlugin {
 
 	protected void configureDependencies() {
+		configureDependenciesCompile();
+		configureDependenciesProvidedCompile();
+	}
+
+	protected void configureDependencies(
+		String configurationName, String... dependencyNotations) {
+
 		DependencyHandler dependencyHandler = project.getDependencies();
 
-		// Compile
+		for (String dependencyNotation : dependencyNotations) {
+			dependencyHandler.add(configurationName, dependencyNotation);
+		}
+	}
 
+	protected void configureDependenciesCompile() {
 		File serviceJarFile = project.file(
 			"docroot/WEB-INF/lib/" + project.getName() + "-service.jar");
 
 		if (serviceJarFile.exists()) {
+			DependencyHandler dependencyHandler = project.getDependencies();
+
 			dependencyHandler.add(
 				JavaPlugin.COMPILE_CONFIGURATION_NAME,
 				project.files(serviceJarFile));
 		}
+	}
 
-		// Provided compile
-
-		dependencyHandler.add(
+	protected void configureDependenciesProvidedCompile() {
+		configureDependencies(
 			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"biz.aQute.bnd:biz.aQute.bnd:2.4.1");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"com.liferay.portal:portal-service:7.0.0-SNAPSHOT");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"hsqldb:hsqldb:1.8.0.7");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"javax.activation:activation:1.1");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"javax.ccpp:ccpp:1.0");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME, "javax.jms:jms:1.1");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"javax.mail:mail:1.4");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"javax.portlet:portlet-api:2.0");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"javax.servlet.jsp:jsp-api:2.1");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"javax.servlet:javax.servlet-api:3.0.1");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"mysql:mysql-connector-java:5.1.23");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME, "net.sf:jargs:1.0");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"net.sourceforge.jtds:jtds:1.2.6");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-			"org.eclipse.persistence:javax.persistence:2.0.0");
-		dependencyHandler.add(
-			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
+			"biz.aQute.bnd:biz.aQute.bnd:2.4.1",
+			"com.liferay.portal:portal-service:7.0.0-SNAPSHOT",
+			"hsqldb:hsqldb:1.8.0.7", "javax.activation:activation:1.1",
+			"javax.ccpp:ccpp:1.0", "javax.jms:jms:1.1", "javax.mail:mail:1.4",
+			"javax.portlet:portlet-api:2.0", "javax.servlet.jsp:jsp-api:2.1",
+			"javax.servlet:javax.servlet-api:3.0.1",
+			"mysql:mysql-connector-java:5.1.23", "net.sf:jargs:1.0",
+			"net.sourceforge.jtds:jtds:1.2.6",
+			"org.eclipse.persistence:javax.persistence:2.0.0",
 			"postgresql:postgresql:9.2-1002.jdbc4");
 
 		String pluginType = _liferayExtension.getPluginType();
 
 		if (!pluginType.equals("theme")) {
-			dependencyHandler.add(
+			configureDependencies(
 				WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-				"com.liferay.portal:util-bridges:7.0.0-SNAPSHOT");
-			dependencyHandler.add(
-				WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-				"com.liferay.portal:util-java:7.0.0-SNAPSHOT");
-			dependencyHandler.add(
-				WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-				"com.liferay.portal:util-taglib:7.0.0-SNAPSHOT");
-			dependencyHandler.add(
-				WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-				"commons-logging:commons-logging:1.1.1");
-			dependencyHandler.add(
-				WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
-				"log4j:log4j:1.2.16");
+				"com.liferay.portal:util-bridges:7.0.0-SNAPSHOT",
+				"com.liferay.portal:util-java:7.0.0-SNAPSHOT",
+				"com.liferay.portal:util-taglib:7.0.0-SNAPSHOT",
+				"commons-logging:commons-logging:1.1.1", "log4j:log4j:1.2.16");
 		}
 	}
 
