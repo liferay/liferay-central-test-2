@@ -64,16 +64,6 @@ public class LiferayPlugin extends BasePlugin {
 		configureDependenciesProvidedCompile();
 	}
 
-	protected void configureDependencies(
-		String configurationName, String... dependencyNotations) {
-
-		DependencyHandler dependencyHandler = project.getDependencies();
-
-		for (String dependencyNotation : dependencyNotations) {
-			dependencyHandler.add(configurationName, dependencyNotation);
-		}
-	}
-
 	protected void configureDependenciesCompile() {
 		File serviceJarFile = project.file(
 			"docroot/WEB-INF/lib/" + project.getName() + "-service.jar");
@@ -88,7 +78,7 @@ public class LiferayPlugin extends BasePlugin {
 	}
 
 	protected void configureDependenciesProvidedCompile() {
-		configureDependencies(
+		addDependencies(
 			WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
 			"biz.aQute.bnd:biz.aQute.bnd:2.4.1",
 			"com.liferay.portal:portal-service:7.0.0-SNAPSHOT",
@@ -104,7 +94,7 @@ public class LiferayPlugin extends BasePlugin {
 		String pluginType = _liferayExtension.getPluginType();
 
 		if (!pluginType.equals("theme")) {
-			configureDependencies(
+			addDependencies(
 				WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
 				"com.liferay.portal:util-bridges:7.0.0-SNAPSHOT",
 				"com.liferay.portal:util-java:7.0.0-SNAPSHOT",

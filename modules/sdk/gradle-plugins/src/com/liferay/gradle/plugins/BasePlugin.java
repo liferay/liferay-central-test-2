@@ -23,6 +23,7 @@ import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
+import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.plugins.Convention;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.plugins.JavaPluginConvention;
@@ -44,6 +45,16 @@ public abstract class BasePlugin implements Plugin<Project> {
 		}
 		catch (Exception e) {
 			throw new GradleException("Unable to apply plugin", e);
+		}
+	}
+
+	protected void addDependencies(
+		String configurationName, String... dependencyNotations) {
+
+		DependencyHandler dependencyHandler = project.getDependencies();
+
+		for (String dependencyNotation : dependencyNotations) {
+			dependencyHandler.add(configurationName, dependencyNotation);
 		}
 	}
 
