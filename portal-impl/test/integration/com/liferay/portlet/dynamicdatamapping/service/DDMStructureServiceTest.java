@@ -189,12 +189,11 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		DDMStructure copyStructure = copyStructure(structure);
 
 		Assert.assertEquals(structure.getGroupId(), copyStructure.getGroupId());
+		JSONAssert.assertEquals(
+			structure.getDefinition(), copyStructure.getDefinition(), false);
 		Assert.assertEquals(
 			structure.getStorageType(), copyStructure.getStorageType());
 		Assert.assertEquals(structure.getType(), copyStructure.getType());
-
-		JSONAssert.assertEquals(
-			structure.getDefinition(), copyStructure.getDefinition(), false);
 	}
 
 	@Test
