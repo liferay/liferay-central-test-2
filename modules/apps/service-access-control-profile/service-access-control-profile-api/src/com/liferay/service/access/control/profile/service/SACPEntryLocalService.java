@@ -47,6 +47,12 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SACPEntryLocalServiceUtil} to access the s a c p entry local service. Add custom service methods to {@link com.liferay.service.access.control.profile.service.impl.SACPEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
+		long companyId, long userId, java.lang.String allowedServices,
+		java.lang.String name,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds the s a c p entry to the database. Also notifies the appropriate model listeners.
@@ -57,6 +63,16 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
 		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry);
+
+	public void addSACPEntryResources(
+		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry,
+		boolean addGroupPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public void addSACPEntryResources(
+		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Creates a new s a c p entry with the primary key. Does not add the s a c p entry to the database.
@@ -80,10 +96,12 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	*
 	* @param sacpEntry the s a c p entry
 	* @return the s a c p entry that was removed
+	* @throws PortalException
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry);
+		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the s a c p entry with the primary key from the database. Also notifies the appropriate model listeners.
@@ -188,6 +206,18 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	public java.lang.String getBeanIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+		long companyId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.control.profile.model.SACPEntry> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompanySACPEntriesCount(long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.portal.kernel.lar.PortletDataContext portletDataContext);
 
@@ -219,6 +249,11 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getSACPEntriesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the s a c p entry with the primary key.
@@ -261,4 +296,16 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
 		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry);
+
+	public com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
+		long sacpEntryId, java.lang.String allowedServices,
+		java.lang.String name,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public void updateSACPEntryResources(
+		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

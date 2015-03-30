@@ -120,10 +120,12 @@ public abstract class SACPEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param sacpEntry the s a c p entry
 	 * @return the s a c p entry that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public SACPEntry deleteSACPEntry(SACPEntry sacpEntry) {
+	public SACPEntry deleteSACPEntry(SACPEntry sacpEntry)
+		throws PortalException {
 		return sacpEntryPersistence.remove(sacpEntry);
 	}
 
