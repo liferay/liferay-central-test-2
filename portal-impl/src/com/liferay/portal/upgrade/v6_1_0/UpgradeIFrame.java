@@ -75,8 +75,8 @@ public class UpgradeIFrame extends BaseUpgradePortletPreferences {
 			portletPreferences.setValue("formUserName", userName);
 		}
 
-		portletPreferences.reset("userName");
 		portletPreferences.reset("user-name");
+		portletPreferences.reset("userName");
 	}
 
 }
