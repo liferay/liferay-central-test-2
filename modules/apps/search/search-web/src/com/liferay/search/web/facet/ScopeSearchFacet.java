@@ -68,11 +68,6 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 	}
 
 	@Override
-	public String getId() {
-		return ScopeSearchFacet.class.getName();
-	}
-
-	@Override
 	public String getDisplayView() {
 		return "/facets/view/scopes.jsp";
 	}
@@ -80,6 +75,11 @@ public class ScopeSearchFacet extends BaseSearchFacet {
 	@Override
 	public String getFieldName() {
 		return Field.GROUP_ID;
+	}
+
+	@Override
+	public String getId() {
+		return ScopeSearchFacet.class.getName();
 	}
 
 	@Override
