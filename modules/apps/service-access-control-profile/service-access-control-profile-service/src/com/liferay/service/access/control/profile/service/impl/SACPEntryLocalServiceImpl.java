@@ -62,7 +62,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		sacpEntry.setTitleMap(titleMap);
 		sacpEntry.setUserId(userId);
 		sacpEntry.setUserName(user.getFullName());
-		sacpEntry.setUuid(user.getUserUuid());
+		sacpEntry.setUuid(serviceContext.getUuid());
 
 		sacpEntryPersistence.update(sacpEntry, serviceContext);
 
