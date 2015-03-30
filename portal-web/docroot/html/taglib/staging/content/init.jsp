@@ -54,6 +54,4 @@ Date startDate = dateRange.getStartDate();
 Date endDate = dateRange.getEndDate();
 
 List<Portlet> dataSiteLevelPortlets = LayoutExporter.getDataSiteLevelPortlets(company.getCompanyId(), false);
-
-boolean exportImportConfigurationEditing = !cmd.equals(Constants.PUBLISH_TO_LIVE) && !cmd.equals(Constants.PUBLISH_TO_REMOTE);
 %>
