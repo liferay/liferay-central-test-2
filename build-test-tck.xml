@@ -50,11 +50,11 @@
 		</if>
 
 		<propertyregex
-				global="true"
-				input="${test.packages}."
-				property="test.directories"
-				regexp="\."
-				replace="/"
+			global="true"
+			input="${test.packages}."
+			property="test.directories"
+			regexp="\."
+			replace="/"
 		/>
 
 		<antcall target="prepare-tck" />
@@ -100,8 +100,8 @@
 			</sequential>
 		</for>
 
-		<echo file="${liferay.home}/osgi/modules/com.liferay.portlet.tck.bridge.configuration.PortletTCKBridgeConfiguration.cfg">servletContextNames=${servlet.context.names}
-handShakeServerPort=${portlet.tck.bridge.handshake.port}</echo>
+		<echo file="${liferay.home}/osgi/modules/com.liferay.portlet.tck.bridge.configuration.PortletTCKBridgeConfiguration.cfg">handShakeServerPort=${portlet.tck.bridge.handshake.port}
+servletContextNames=${servlet.context.names}</echo>
 
 		<ant dir="modules/test/portlet-tck-bridge" target="deploy" />
 	</target>
@@ -156,14 +156,12 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 						packageGroups.add(new ArrayList());
 					}
 
-					int packageGroupIndex = 0;
+					for (int i = 0; i < packageNames.size(); i++) {
+						String packageName = packageNames.get(i);
 
-					for (String packageName : packageNames) {
-						List packageGroup = packageGroups.get(packageGroupIndex % groupsSize);
+						List packageGroup = packageGroups.get(i % groupsSize);
 
 						packageGroup.add(packageName);
-
-						packageGroupIndex++;
 					}
 
 					return packageGroups;
