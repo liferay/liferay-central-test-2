@@ -116,6 +116,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		return deleteSACPEntry(sacpEntry);
 	}
 
+	@Override
 	public SACPEntry delteSACPEntry(SACPEntry sacpEntry)
 		throws PortalException {
 
