@@ -38,8 +38,6 @@ import org.gradle.api.artifacts.ResolvedArtifact;
 import org.gradle.api.artifacts.ResolvedConfiguration;
 import org.gradle.api.artifacts.ResolvedModuleVersion;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
-import org.gradle.api.artifacts.dsl.RepositoryHandler;
-import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
 import org.gradle.api.file.DuplicatesStrategy;
 import org.gradle.api.file.FileCopyDetails;
 import org.gradle.api.file.RelativePath;
@@ -101,22 +99,6 @@ public class LiferayPlugin extends BasePlugin {
 				"com.liferay.portal:util-taglib:7.0.0-SNAPSHOT",
 				"commons-logging:commons-logging:1.1.1", "log4j:log4j:1.2.16");
 		}
-	}
-
-	protected void configureRepositories() {
-		RepositoryHandler repositoryHandler = project.getRepositories();
-
-		repositoryHandler.maven(
-			new Action<MavenArtifactRepository>() {
-
-				@Override
-				public void execute(
-					MavenArtifactRepository mavenArtifactRepository) {
-
-					mavenArtifactRepository.setUrl(REPOSITORY_URL);
-				}
-
-			});
 	}
 
 	protected void configureSourceSets() {

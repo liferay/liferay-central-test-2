@@ -17,6 +17,7 @@ package com.liferay.gradle.plugins;
 import java.util.Collections;
 import java.util.Map;
 
+import org.gradle.api.Action;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -24,6 +25,8 @@ import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.artifacts.dsl.RepositoryHandler;
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
 import org.gradle.api.plugins.Convention;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.plugins.JavaPluginConvention;
@@ -62,6 +65,22 @@ public abstract class BasePlugin implements Plugin<Project> {
 		Map<String, Class<T>> args = Collections.singletonMap("plugin", clazz);
 
 		project.apply(args);
+	}
+
+	protected void configureRepositories() {
+		RepositoryHandler repositoryHandler = project.getRepositories();
+
+		repositoryHandler.maven(
+			new Action<MavenArtifactRepository>() {
+
+				@Override
+				public void execute(
+					MavenArtifactRepository mavenArtifactRepository) {
+
+					mavenArtifactRepository.setUrl(REPOSITORY_URL);
+				}
+
+			});
 	}
 
 	protected <T> T createExtension(String name, Class<T> clazz) {
