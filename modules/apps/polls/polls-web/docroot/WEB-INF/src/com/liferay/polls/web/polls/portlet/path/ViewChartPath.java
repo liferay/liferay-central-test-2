@@ -15,6 +15,7 @@
 package com.liferay.polls.web.polls.portlet.path;
 
 import com.liferay.portal.kernel.struts.path.AuthPublicPath;
+import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
 
 import java.util.Map;
 
@@ -27,39 +28,19 @@ import org.osgi.service.component.annotations.Modified;
  */
 @Component(
 	immediate = true,
-	property = ViewChartPath.AUTH_PUBLIC_PATH + "=/polls/view_chart"
+	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/polls/view_chart",
+	service = AuthPublicPath.class
 )
-public class ViewChartPath implements AuthPublicPath {
-
-	public static final String AUTH_PUBLIC_PATH = "auth.public.path";
+public class ViewChartPath extends BaseAuthPublicPath {
 
 	@Modified
 	public void modified(Map<String, String> properties) {
 		updatePath(properties);
 	}
 
-	@Override
-	public String path() {
-		return _path;
-	}
-
 	@Activate
 	protected void activate(Map<String, String> properties) {
 		updatePath(properties);
 	}
-
-	protected void updatePath(Map<String, String> properties) {
-		if (!properties.containsKey(AUTH_PUBLIC_PATH)) {
-			_path = null;
-
-			return;
-		}
-
-		String path = properties.get(AUTH_PUBLIC_PATH);
-
-		_path = path;
-	}
-
-	private String _path;
 
 }
