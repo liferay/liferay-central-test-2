@@ -62,27 +62,27 @@ public class PortletTCKBridge {
 		StrutsActionRegistryUtil.register(_PATH, new PortletTCKStrutsAction());
 
 		FutureTask<Void> futureTask = new FutureTask<>(
-			new HandShakeServerCallable(
+			new HandshakeServerCallable(
 				Configurable.createConfigurable(
 					PortletTCKBridgeConfiguration.class,
 					componentContext.getProperties())));
 
-		_handShakeServerFuture = futureTask;
+		_handshakeServerFuture = futureTask;
 
-		Thread handShakeServerThread = new Thread(
-			futureTask, "Hand shake server thread");
+		Thread handshakeServerThread = new Thread(
+			futureTask, "Handshake server thread");
 
-		handShakeServerThread.setDaemon(true);
+		handshakeServerThread.setDaemon(true);
 
-		handShakeServerThread.start();
+		handshakeServerThread.start();
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		Future<Void> handShakeServerFuture = _handShakeServerFuture;
+		Future<Void> handshakeServerFuture = _handshakeServerFuture;
 
-		if (handShakeServerFuture != null) {
-			handShakeServerFuture.cancel(true);
+		if (handshakeServerFuture != null) {
+			handshakeServerFuture.cancel(true);
 		}
 
 		StrutsActionRegistryUtil.unregister(_PATH);
@@ -97,9 +97,9 @@ public class PortletTCKBridge {
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortletTCKBridge.class);
 
-	private volatile Future<Void> _handShakeServerFuture;
+	private volatile Future<Void> _handshakeServerFuture;
 
-	private static class HandShakeServerCallable implements Callable<Void> {
+	private static class HandshakeServerCallable implements Callable<Void> {
 
 		@Override
 		public Void call() throws IOException {
@@ -114,7 +114,7 @@ public class PortletTCKBridge {
 			}
 
 			try (ServerSocket serverSocket = new ServerSocket(
-					_portletTCKBridgeConfiguration.handShakeServerPort())) {
+					_portletTCKBridgeConfiguration.handshakeServerPort())) {
 
 				serverSocket.setSoTimeout(100);
 
@@ -134,7 +134,7 @@ public class PortletTCKBridge {
 			return null;
 		}
 
-		private HandShakeServerCallable(
+		private HandshakeServerCallable(
 			PortletTCKBridgeConfiguration portletTCKBridgeConfiguration) {
 
 			_portletTCKBridgeConfiguration = portletTCKBridgeConfiguration;

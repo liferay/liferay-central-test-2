@@ -25,7 +25,7 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface PortletTCKBridgeConfiguration {
 
 	@Meta.AD(deflt = "8239", required = false)
-	public int handShakeServerPort();
+	public int handshakeServerPort();
 
 	@Meta.AD(deflt = "", required = false)
 	public String[] servletContextNames();
