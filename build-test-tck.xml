@@ -197,13 +197,13 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 					return packageNames;
 				}
 
-				int allTestClassGroupsSize = Integer.parseInt(project.getProperty("test.class.groups.size"));
+				int testClassGroupsSize = Integer.parseInt(project.getProperty("test.class.groups.size"));
 
-				List groupPackageNamesList = getGroupPackageNamesList(getPackageNames(), allTestClassGroupsSize);
+				List groupPackageNamesList = getGroupPackageNamesList(getPackageNames(), testClassGroupsSize);
 
 				StringBuilder sb = new StringBuilder();
 
-				for (int i = 0; i < allTestClassGroupsSize; i++) {
+				for (int i = 0; i < testClassGroupsSize; i++) {
 					List groupPackageNames = groupPackageNamesList.get(i);
 
 					sb.append("TEST_CLASS_GROUP_");
@@ -224,12 +224,12 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 
 				sb.append("TEST_CLASS_GROUPS=");
 
-				for (int i = 0; i < allTestClassGroupsSize; i++) {
+				for (int i = 0; i < testClassGroupsSize; i++) {
 					sb.append(i);
 					sb.append(" ");
 				}
 
-				if (allTestClassGroupsSize > 0) {
+				if (testClassGroupsSize > 0) {
 					sb.setLength(sb.length() - 1);
 				}
 
@@ -260,7 +260,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 			<socket server="localhost" port="${portlet.tck.bridge.handshake.port}" />
 		</waitfor>
 
-		<fail message="Timeout on waiting TCK wars deployment!" if="tck.wars.deployment.timeout" />
+		<fail message="Timeout while waiting for TCK wars to deploy." if="tck.wars.deployment.timeout" />
 
 		<condition property="tsant.file.suffix.bat" value=".bat" else="">
 			<contains string="${os.name}" substring="Windows" casesensitive="false" />
