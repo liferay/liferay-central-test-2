@@ -59,7 +59,7 @@
 
 		<antcall target="prepare-tck" />
 
-		<var name="servlet.context.names" value="" />
+		<var name="tck.servlet.context.names" value="" />
 
 		<for list="${test.directories}" param="test.directory">
 			<sequential>
@@ -72,17 +72,17 @@
 					</path>
 
 					<sequential>
-						<local name="servlet.context.name" />
+						<local name="tck.servlet.context.name" />
 
-						<basename property="servlet.context.name" file="@{tck.war.file}" suffix=".war" />
+						<basename property="tck.servlet.context.name" file="@{tck.war.file}" suffix=".war" />
 
 						<if>
-							<equals arg1="${servlet.context.names}" arg2="" />
+							<equals arg1="${tck.servlet.context.names}" arg2="" />
 							<then>
-								<var name="servlet.context.names" value="${servlet.context.name}" />
+								<var name="tck.servlet.context.names" value="${tck.servlet.context.name}" />
 							</then>
 							<else>
-								<var name="servlet.context.names" value="${servlet.context.names}|${servlet.context.name}" />
+								<var name="tck.servlet.context.names" value="${tck.servlet.context.names}|${tck.servlet.context.name}" />
 							</else>
 						</if>
 
@@ -101,7 +101,7 @@
 		</for>
 
 		<echo file="${liferay.home}/osgi/modules/com.liferay.portlet.tck.bridge.configuration.PortletTCKBridgeConfiguration.cfg">handShakeServerPort=${portlet.tck.bridge.handshake.port}
-servletContextNames=${servlet.context.names}</echo>
+servletContextNames=${tck.servlet.context.names}</echo>
 
 		<ant dir="modules/test/portlet-tck-bridge" target="deploy" />
 	</target>
