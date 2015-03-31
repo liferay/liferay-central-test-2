@@ -976,6 +976,16 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="PGCalendarAgendaView#SCHEDULER_EVENT_SPECIFIC" value1="${eventTitleEdit}" />
 	</command>
 
+	<command name="expandDetailsPanelCmd">
+		<if>
+			<condition function="IsElementPresent" locator1="PGCalendarAddevent#DETAILS_PANEL_COLLAPSED" />
+			<then>
+				<execute function="Click" locator1="PGCalendarAddevent#DETAILS_PANEL_COLLAPSED" />
+				<execute function="AssertElementPresent" locator1="PGCalendarAddevent#DETAILS_PANEL_EXPANDED" />
+			</then>
+		</if>
+	</command>
+
 	<command name="gotoAdd">
 		<execute macro="CalendarEvent#changeViewPG">
 			<var name="viewType" value="Week" />
@@ -1124,13 +1134,7 @@
 		<if>
 			<isset var="calendarName" />
 			<then>
-				<if>
-					<condition function="IsElementPresent" locator1="PGCalendarAddevent#DETAILS_PANEL_COLLAPSED" />
-					<then>
-						<execute function="Click" locator1="PGCalendarAddevent#DETAILS_PANEL_COLLAPSED" />
-						<execute function="AssertElementPresent" locator1="PGCalendarAddevent#DETAILS_PANEL_EXPANDED" />
-					</then>
-				</if>
+				<execute macro="CalendarEvent#expandDetailsPanelCmd" />
 
 				<execute function="Select" locator1="PGCalendarAddevent#DETAILS_CALENDAR_SELECT" value1="${calendarName}" />
 			</then>
@@ -1236,30 +1240,13 @@
 	</command>
 
 	<command name="viewAvailableCalendars">
-		<if>
-			<condition function="IsElementPresent" locator1="PGCalendarAddevent#DETAILS_PANEL_COLLAPSED" />
-			<then>
-				<execute function="Click" locator1="PGCalendarAddevent#DETAILS_PANEL_COLLAPSED" />
-				<execute function="AssertElementPresent" locator1="PGCalendarAddevent#DETAILS_PANEL_EXPANDED" />
-			</then>
-		</if>
+		<execute macro="CalendarEvent#expandDetailsPanelCmd" />
 
 		<for list="${availableCalendarList}" param="availableCalendarName">
 			<var name="key_calendarName" value="${availableCalendarName}" />
 
 			<execute function="AssertElementPresent" locator1="PGCalendarAddevent#DETAILS_CALENDAR_SELECT_OPTION" />
 		</for>
-
-		<if>
-			<isset var="unavailableCalendarList" />
-			<then>
-				<for list="${unavailableCalendarList}" param="unavailableCalendarName">
-					<var name="key_calendarName" value="${unavailableCalendarName}" />
-
-					<execute function="AssertElementNotPresent" locator1="PGCalendarAddevent#DETAILS_CALENDAR_SELECT_OPTION" />
-				</for>
-			</then>
-		</if>
 	</command>
 
 	<command name="viewColorDefaultPG">
@@ -1578,6 +1565,16 @@
 		<execute function="AssertElementNotPresent" locator1="PGCalendarVieweventdetails#AVERAGE_STAR_EMPTY_5" />
 
 		<execute function="SelectFrame" value1="relative=top" />
+	</command>
+
+	<command name="viewUnavailableCalendarsNotPresent">
+		<execute macro="CalendarEvent#expandDetailsPanelCmd" />
+
+		<for list="${unavailableCalendarList}" param="unavailableCalendarName">
+			<var name="key_calendarName" value="${unavailableCalendarName}" />
+
+			<execute function="AssertElementNotPresent" locator1="PGCalendarAddevent#DETAILS_CALENDAR_SELECT_OPTION" />
+		</for>
 	</command>
 
 	<command name="viewWeekPG">

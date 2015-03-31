@@ -2233,6 +2233,9 @@
 
 		<execute macro="CalendarEvent#viewAvailableCalendars">
 			<var name="availableCalendarList" value="Liferay,Test Test" />
+		</execute>
+
+		<execute macro="CalendarEvent#viewUnavailableCalendarsNotPresent">
 			<var name="unavailableCalendarList" value="${userLoginFullName},${siteName}" />
 		</execute>
 
@@ -2248,7 +2251,10 @@
 		<execute macro="CalendarEvent#gotoAdd" />
 
 		<execute macro="CalendarEvent#viewAvailableCalendars">
-			<var name="availableCalendarList" value="Liferay,Test Test,Site Name" />
+			<var name="availableCalendarList" value="Liferay,Test Test,${siteName}" />
+		</execute>
+
+		<execute macro="CalendarEvent#viewUnavailableCalendarsNotPresent">
 			<var name="unavailableCalendarList" value="${userLoginFullName}" />
 		</execute>
 	</command>
