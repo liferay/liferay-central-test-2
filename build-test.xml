@@ -1123,12 +1123,6 @@
 					</unzip>
 
 					<delete file="tomcat.zip" />
-
-					<copy
-						file="${app.server.tomcat.dir}/conf/tomcat-users.xml"
-						overwrite="true"
-						tofile="${app.server.tomcat.dir}/conf/tomcat-users.xml.orig"
-					/>
 				</then>
 			</if>
 
@@ -1139,6 +1133,30 @@
 				<copy path="/tomcat-users/role[@rolename='manager-jmx']/@rolename" property="role.manager-jmx.exists" />
 				<copy path="/tomcat-users/role[@rolename='manager-status']/@rolename" property="role.manager-status.exists" />
 				<copy path="/tomcat-users/user[@username='${app.server.tomcat.manager.user}']/@username" property="user.exists" />
+
+				<call path="/">
+					<actions>
+						<if>
+							<not>
+								<and>
+									<isset property="role.tomcat.exists" />
+									<isset property="role.manager-gui.exists" />
+									<isset property="role.manager-script.exists" />
+									<isset property="role.manager-jmx.exists" />
+									<isset property="role.manager-status.exists" />
+									<isset property="user.exists" />
+								</and>
+							</not>
+							<then>
+								<copy
+									file="${app.server.tomcat.dir}/conf/tomcat-users.xml"
+									overwrite="true"
+									tofile="${app.server.tomcat.dir}/conf/tomcat-users.xml.orig"
+								/>
+							</then>
+						</if>
+					</actions>
+				</call>
 
 				<insert path="/tomcat-users" unless="role.tomcat.exists"><![CDATA[
 					<role rolename="tomcat" />
