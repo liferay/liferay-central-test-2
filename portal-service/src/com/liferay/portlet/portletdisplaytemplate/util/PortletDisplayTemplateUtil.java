@@ -66,7 +66,6 @@ public class PortletDisplayTemplateUtil {
 	 * @param  displayStyle the display style stored in the portlet
 	 *         configuration
 	 * @return the template key of the portlet display template's DDM template
-	 *         from the display style stored in the portlet configuration
 	 */
 	public static String getDDMTemplateKey(String displayStyle) {
 		return getPortletDisplayTemplate().getDDMTemplateKey(displayStyle);
@@ -88,11 +87,13 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the default portlet display template's DDM template of the given
-	 * classNameId.
+	 * Returns the default portlet display template's DDM template from the
+	 * class name ID.
 	 *
-	 * @return the default portlet display template's DDM template of the given
-	 *         classNameId.
+	 * @param  groupId the primary key of the group
+	 * @param  classNameId the primary key of the class name of the model the
+	 *         display style is related to
+	 * @return the default portlet display template's DDM template
 	 */
 	public static DDMTemplate getDefaultPortletDisplayTemplateDDMTemplate(
 		long groupId, long classNameId) {
@@ -111,18 +112,16 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the portlet display template's DDM template of the given
-	 * classNameId that matches the group and display style stored in the
-	 * portlet configuration.
+	 * Returns the portlet display template's DDM template from the class name
+	 * ID that matches the group and display style stored in the portlet
+	 * configuration.
 	 *
 	 * @param  groupId the primary key of the group
 	 * @param  classNameId the primary key of the class name of the model the
 	 *         display style is related to
 	 * @param  displayStyle the display style stored in the portlet
 	 *         configuration
-	 * @return the portlet display template's DDM template of the given
-	 * 		   classNameId that matches the group and the display style stored
-	 * 		   in the portlet configuration
+	 * @return the portlet display template's DDM template
 	 */
 	public static DDMTemplate getPortletDisplayTemplateDDMTemplate(
 		long groupId, long classNameId, String displayStyle) {
@@ -191,12 +190,11 @@ public class PortletDisplayTemplateUtil {
 	 * Returns the result of rendering the DDM template with the entries in the
 	 * page context.
 	 *
-	 * @param  request the request with which the template is rendered.
-	 * @param  response the response with which the template is rendered.
+	 * @param  request the request with which the template is rendered
+	 * @param  response the response with which the template is rendered
 	 * @param  ddmTemplate the DDM template
 	 * @param  entries the entries that are rendered in the template
-	 * @return the result of rendering the DDM template with the entries in the
-	 *         page context
+	 * @return the result of rendering the DDM template
 	 * @throws Exception if the DDM template could not be rendered
 	 */
 	public static String renderDDMTemplate(
@@ -212,14 +210,13 @@ public class PortletDisplayTemplateUtil {
 	 * Returns the result of rendering the DDM template with the entries in the
 	 * page context and template context.
 	 *
-	 * @param  request the request with which the template is rendered.
-	 * @param  response the response with which the template is rendered.
+	 * @param  request the request with which the template is rendered
+	 * @param  response the response with which the template is rendered
 	 * @param  ddmTemplate the DDM template
 	 * @param  entries the entries that are rendered in the template
 	 * @param  contextObjects the map of objects defining the context in which
 	 *         the template is rendered
-	 * @return the result of rendering the DDM template with the entries in the
-	 *         page context and template context
+	 * @return the result of rendering the DDM template
 	 * @throws Exception if the DDM template could not be rendered
 	 */
 	public static String renderDDMTemplate(
