@@ -34,12 +34,12 @@ public class PortletDisplayTemplateUtil {
 	 * Returns the portlet display template's DDM template matching the group
 	 * and display style stored in the portlet configuration.
 	 *
-	 * @param  groupId the primary key of the group
-	 * @param  displayStyle the display style stored in the portlet
-	 *         configuration
-	 * @return the portlet display template's DDM template matching the group
-	 *         and the display style stored in the portlet configuration
-	 * @deprecated As of 7.0.0, replaced by {@link #getPortletDisplayTemplateDDMTemplate(long, long, String)}
+	 * @param      groupId the primary key of the group
+	 * @param      displayStyle the display style stored in the portlet
+	 *             configuration
+	 * @return     the portlet display template's DDM template
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #getPortletDisplayTemplateDDMTemplate(long, long, String)}
 	 */
 	@Deprecated
 	public static DDMTemplate fetchDDMTemplate(
@@ -75,10 +75,9 @@ public class PortletDisplayTemplateUtil {
 	 * Returns the UUID of the portlet display template's DDM template from the
 	 * display style stored in the portlet configuration.
 	 *
-	 * @param  displayStyle the display style stored in the portlet
-	 *         configuration
-	 * @return the UUID of the portlet display template's DDM template from the
-	 *         display style stored in the portlet configuration
+	 * @param      displayStyle the display style stored in the portlet
+	 *             configuration
+	 * @return     the UUID of the portlet display template's DDM template
 	 * @deprecated As of 7.0.0, replaced by {@link #getDDMTemplateKey(String)}
 	 */
 	@Deprecated
@@ -136,13 +135,13 @@ public class PortletDisplayTemplateUtil {
 	 * matching the group and the display style stored in the portlet
 	 * configuration.
 	 *
-	 * @param  groupId the primary key of the group
-	 * @param  displayStyle the display style stored in the portlet
-	 *         configuration
-	 * @return the primary key of the portlet display template's DDM template
-	 *         matching the group and the display style stored in the portlet
-	 *         configuration
-	 * @deprecated As of 7.0.0, replaced by {@link #getPortletDisplayTemplateDDMTemplate(long, long, String)}
+	 * @param      groupId the primary key of the group
+	 * @param      displayStyle the display style stored in the portlet
+	 *             configuration
+	 * @return     the primary key of the portlet display template's DDM
+	 *             template
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #getPortletDisplayTemplateDDMTemplate(long, long, String)}
 	 */
 	@Deprecated
 	public static long getPortletDisplayTemplateDDMTemplateId(
@@ -237,8 +236,7 @@ public class PortletDisplayTemplateUtil {
 	 * @param  response the response with which the template is rendered.
 	 * @param  ddmTemplateId the primary key of the DDM template
 	 * @param  entries the entries that are rendered in the template
-	 * @return the result of rendering the DDM template with the entries in the
-	 *         page context
+	 * @return the result of rendering the DDM template
 	 * @throws Exception if the DDM template could not be rendered
 	 */
 	public static String renderDDMTemplate(
@@ -260,8 +258,7 @@ public class PortletDisplayTemplateUtil {
 	 * @param  entries the entries that are rendered in the template
 	 * @param  contextObjects the map of objects defining the context in which
 	 *         the template is rendered
-	 * @return the result of rendering the DDM template with the entries in the
-	 *         page context and template context
+	 * @return the result of rendering the DDM template
 	 * @throws Exception if the DDM template could not be rendered
 	 */
 	public static String renderDDMTemplate(
