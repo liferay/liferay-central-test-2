@@ -33,7 +33,7 @@ public class BasicRegistryImplTest {
 	}
 
 	@Test
-	public void testEmptyTrackerNPE() {
+	public void testEmptyServiceTracker() {
 		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceTracker<EventListener, Object> serviceTracker =
