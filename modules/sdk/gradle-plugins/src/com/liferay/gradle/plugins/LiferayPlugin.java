@@ -86,7 +86,7 @@ public class LiferayPlugin extends BasePlugin {
 
 		task.setDescription(
 			"Initializes build.gradle by migrating information from legacy " +
-				"files");
+				"files.");
 	}
 
 	protected void addTasks() {
