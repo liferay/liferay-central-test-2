@@ -140,7 +140,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 			ReflectionUtil.throwException(ise);
 		}
 
-		_serviceTracker = new ServiceTracker<Object, Object>(
+		_serviceTracker = new ServiceTracker<>(
 			_bundleContext, filter, new MBeanServiceTrackerCustomizer());
 
 		_serviceTracker.open();
@@ -229,7 +229,6 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 	private MBeanServer _mBeanServer;
 	private final Map<String, ObjectName> _objectNameCache =
 		new ConcurrentHashMap<>();
-
 	private ServiceTracker<Object, Object> _serviceTracker;
 
 	private class MBeanServiceTrackerCustomizer
