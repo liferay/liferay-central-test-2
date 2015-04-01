@@ -61,8 +61,8 @@ public class InitGradleTask extends DefaultTask {
 		xmlParser.setFeature(
 			"http://apache.org/xml/features/disallow-doctype-decl", false);
 
-		_buildXmlNode = _loadXml(xmlParser, "build.xml");
-		_ivyXmlNode = _loadXml(xmlParser, "ivy.xml");
+		_buildXmlNode = loadXml(xmlParser, "build.xml");
+		_ivyXmlNode = loadXml(xmlParser, "ivy.xml");
 
 		List<String> contents = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class InitGradleTask extends DefaultTask {
 		List<String> contents = new ArrayList<>();
 
 		if (_ivyXmlNode != null) {
-			Node dependenciesNode = _getNode(_ivyXmlNode, "dependencies");
+			Node dependenciesNode = getNode(_ivyXmlNode, "dependencies");
 
 			if (dependenciesNode != null) {
 				Iterator<Node> itr = dependenciesNode.iterator();
@@ -97,7 +97,7 @@ public class InitGradleTask extends DefaultTask {
 					String name = (String)dependencyNode.attribute("name");
 					String version = (String)dependencyNode.attribute("rev");
 
-					contents.add(_wrapDependency(group, name, version));
+					contents.add(wrapDependency(group, name, version));
 				}
 			}
 		}
@@ -111,16 +111,16 @@ public class InitGradleTask extends DefaultTask {
 				requiredDeploymentContexts.split(",");
 
 			for (String deploymentContext : requiredDeploymentContextsArray) {
-				String serviceJarFileName = _getServiceJarFileName(
+				String serviceJarFileName = getServiceJarFileName(
 					deploymentContext);
 
 				if (FileUtil.exists(_project, serviceJarFileName)) {
-					contents.add(_wrapServiceJarDependency(serviceJarFileName));
+					contents.add(wrapServiceJarDependency(serviceJarFileName));
 				}
 			}
 		}
 
-		String importShared = _getBuildXmlProperty("import.shared");
+		String importShared = getBuildXmlProperty("import.shared");
 
 		if (Validator.isNotNull(importShared)) {
 			Map<String, String> projectNamePathMap = new HashMap<>();
@@ -141,11 +141,11 @@ public class InitGradleTask extends DefaultTask {
 						"Unable to find project dependency " + projectName);
 				}
 
-				contents.add(_wrapProjectDependency(projectPath));
+				contents.add(wrapProjectDependency(projectPath));
 			}
 		}
 
-		return _wrapContents(
+		return wrapContents(
 			contents, 1, "(", JavaPlugin.COMPILE_CONFIGURATION_NAME, ")");
 	}
 
@@ -173,14 +173,14 @@ public class InitGradleTask extends DefaultTask {
 					String portalDependencyVersion = portalDependency[2];
 
 					contents.add(
-						_wrapDependency(
+						wrapDependency(
 							portalDependencyGroup, portalDependencyName,
 							portalDependencyVersion));
 				}
 			}
 		}
 
-		return _wrapContents(
+		return wrapContents(
 			contents, 1, "(", WarPlugin.PROVIDED_COMPILE_CONFIGURATION_NAME,
 			")");
 	}
@@ -190,7 +190,7 @@ public class InitGradleTask extends DefaultTask {
 		List<String> contents = new ArrayList<>();
 
 		if (_ivyXmlNode != null) {
-			Node dependenciesNode = _getNode(_ivyXmlNode, "dependencies");
+			Node dependenciesNode = getNode(_ivyXmlNode, "dependencies");
 
 			if (dependenciesNode != null) {
 				Iterator<Node> itr = dependenciesNode.iterator();
@@ -208,12 +208,12 @@ public class InitGradleTask extends DefaultTask {
 					String name = (String)dependencyNode.attribute("name");
 					String version = (String)dependencyNode.attribute("rev");
 
-					contents.add(_wrapDependency(group, name, version));
+					contents.add(wrapDependency(group, name, version));
 				}
 			}
 		}
 
-		return _wrapContents(
+		return wrapContents(
 			contents, 1, "(", JavaPlugin.TEST_COMPILE_CONFIGURATION_NAME, ")");
 	}
 
@@ -224,7 +224,7 @@ public class InitGradleTask extends DefaultTask {
 		contents.addAll(getBuildDependenciesProvidedCompile());
 		contents.addAll(getBuildDependenciesTestCompile());
 
-		return _wrapContents(contents, 0, " {", "dependencies", "}");
+		return wrapContents(contents, 0, " {", "dependencies", "}");
 	}
 
 	protected List<String> getBuildGradleLiferay() {
@@ -233,31 +233,31 @@ public class InitGradleTask extends DefaultTask {
 		String pluginType = _liferayExtension.getPluginType();
 
 		if (pluginType.equals("theme")) {
-			String themeParent = _getBuildXmlProperty("theme.parent");
+			String themeParent = getBuildXmlProperty("theme.parent");
 
 			if (Validator.isNotNull(themeParent)) {
-				contents.add(_wrapProperty("themeParent", themeParent));
+				contents.add(wrapProperty("themeParent", themeParent));
 			}
 
-			String themeType = _getBuildXmlProperty("theme.type", "vm");
+			String themeType = getBuildXmlProperty("theme.type", "vm");
 
-			contents.add(_wrapProperty("themeType", themeType));
+			contents.add(wrapProperty("themeType", themeType));
 		}
 
 		if (!contents.isEmpty()) {
-			contents = _wrapContents(
+			contents = wrapContents(
 				contents, 0, " {", LiferayPlugin.EXTENSION_NAME, "}");
 		}
 
 		return contents;
 	}
 
-	private String _getBuildXmlProperty(String key) {
-		return _getBuildXmlProperty(key, null);
+	protected String getBuildXmlProperty(String key) {
+		return getBuildXmlProperty(key, null);
 	}
 
 	@SuppressWarnings("unchecked")
-	private String _getBuildXmlProperty(String key, String defaultValue) {
+	protected String getBuildXmlProperty(String key, String defaultValue) {
 		NodeList propertyNodeList = (NodeList)_buildXmlNode.get("property");
 
 		Iterator<Node> itr = propertyNodeList.iterator();
@@ -275,7 +275,7 @@ public class InitGradleTask extends DefaultTask {
 		return defaultValue;
 	}
 
-	private Node _getNode(Node parentNode, String name) {
+	protected Node getNode(Node parentNode, String name) {
 		NodeList nodeList = (NodeList)parentNode.get(name);
 
 		if (nodeList.isEmpty()) {
@@ -285,7 +285,7 @@ public class InitGradleTask extends DefaultTask {
 		return (Node)nodeList.get(0);
 	}
 
-	private String _getServiceJarFileName(String deploymentContext) {
+	protected String getServiceJarFileName(String deploymentContext) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("../../");
@@ -299,7 +299,7 @@ public class InitGradleTask extends DefaultTask {
 		return sb.toString();
 	}
 
-	private Node _loadXml(XmlParser xmlParser, String fileName)
+	protected Node loadXml(XmlParser xmlParser, String fileName)
 		throws Exception {
 
 		File file = _project.file(fileName);
@@ -311,7 +311,7 @@ public class InitGradleTask extends DefaultTask {
 		return xmlParser.parse(file);
 	}
 
-	private List<String> _wrapContents(
+	protected List<String> wrapContents(
 		List<String> contents, int indentCount, String leftClose, String name,
 		String rightClose) {
 
@@ -336,7 +336,7 @@ public class InitGradleTask extends DefaultTask {
 		return contents;
 	}
 
-	private String _wrapDependency(String group, String name, String version) {
+	protected String wrapDependency(String group, String name, String version) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\t\t[group: \"");
@@ -350,11 +350,11 @@ public class InitGradleTask extends DefaultTask {
 		return sb.toString();
 	}
 
-	private String _wrapProjectDependency(String projectPath) {
+	protected String wrapProjectDependency(String projectPath) {
 		return "\t\tproject(\"" + projectPath + "\"),";
 	}
 
-	private String _wrapProperty(String name, String value) {
+	protected String wrapProperty(String name, String value) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append('\t');
@@ -366,7 +366,7 @@ public class InitGradleTask extends DefaultTask {
 		return sb.toString();
 	}
 
-	private String _wrapServiceJarDependency(String serviceJarFileName) {
+	protected String wrapServiceJarDependency(String serviceJarFileName) {
 		return "\t\tfiles(\"" + serviceJarFileName + "\"),";
 	}
 
