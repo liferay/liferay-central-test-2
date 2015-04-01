@@ -378,7 +378,7 @@ public class JournalArticleLocalServiceImpl
 		article.setTitleMap(titleMap, locale);
 		article.setUrlTitle(
 			getUniqueUrlTitle(
-				groupId, id, articleId, title, null, serviceContext));
+				id, groupId, articleId, title, null, serviceContext));
 		article.setDescriptionMap(descriptionMap, locale);
 		article.setContent(content);
 		article.setDDMStructureKey(ddmStructureKey);
@@ -5194,7 +5194,7 @@ public class JournalArticleLocalServiceImpl
 		article.setTitleMap(titleMap, locale);
 		article.setUrlTitle(
 			getUniqueUrlTitle(
-				groupId, article.getId(), article.getArticleId(), title,
+				article.getId(), groupId, article.getArticleId(), title,
 				latestArticle.getUrlTitle(), serviceContext));
 		article.setDescriptionMap(descriptionMap, locale);
 		article.setContent(content);
@@ -5433,7 +5433,7 @@ public class JournalArticleLocalServiceImpl
 			article.setTitleMap(oldArticle.getTitleMap(), defaultLocale);
 			article.setUrlTitle(
 				getUniqueUrlTitle(
-					groupId, id, articleId, title, oldArticle.getUrlTitle(),
+					id, groupId, articleId, title, oldArticle.getUrlTitle(),
 					serviceContext));
 			article.setDescriptionMap(oldArticle.getDescriptionMap());
 			article.setDDMStructureKey(oldArticle.getDDMStructureKey());
@@ -6916,7 +6916,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected String getUniqueUrlTitle(
-			long groupId, long id, String articleId, String title,
+			long id, long groupId, String articleId, String title,
 			String oldUrlTitle, ServiceContext serviceContext)
 		throws PortalException {
 
