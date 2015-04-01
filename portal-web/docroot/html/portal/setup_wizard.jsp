@@ -361,34 +361,32 @@
 
 					<c:choose>
 						<c:when test="<%= propertiesFileCreated %>">
+							<div class="alert alert-success">
+								<liferay-ui:message key="your-configuration-was-saved-sucessfully" />
+							</div>
 
-								<div class="alert alert-success">
-									<liferay-ui:message key="your-configuration-was-saved-sucessfully" />
-								</div>
-
-								<p class="lfr-setup-notice">
-
-									<%
-									String taglibArguments = "<span class=\"lfr-inline-code\">" + PropsValues.LIFERAY_HOME + StringPool.SLASH + SetupWizardUtil.PROPERTIES_FILE_NAME + "</span>";
-									%>
-
-									<liferay-ui:message arguments="<%= taglibArguments %>" key="the-configuration-was-saved-in" translateArguments="<%= false %>" />
-								</p>
+							<p class="lfr-setup-notice">
 
 								<%
-								boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED));
+								String taglibArguments = "<span class=\"lfr-inline-code\">" + PropsValues.LIFERAY_HOME + StringPool.SLASH + SetupWizardUtil.PROPERTIES_FILE_NAME + "</span>";
 								%>
 
-								<c:if test="<%= !passwordUpdated %>">
-									<p class="lfr-setup-notice">
-										<liferay-ui:message arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" key="your-password-is-x.-you-will-be-required-to-change-your-password-the-next-time-you-log-into-the-portal" translateArguments="<%= false %>" />
-									</p>
-								</c:if>
+								<liferay-ui:message arguments="<%= taglibArguments %>" key="the-configuration-was-saved-in" translateArguments="<%= false %>" />
+							</p>
 
-								<div class="alert alert-info">
-									<liferay-ui:message key="changes-will-take-effect-once-the-portal-is-restarted-please-restart-the-portal-now" />
-								</div>
+							<%
+							boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED));
+							%>
 
+							<c:if test="<%= !passwordUpdated %>">
+								<p class="lfr-setup-notice">
+									<liferay-ui:message arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" key="your-password-is-x.-you-will-be-required-to-change-your-password-the-next-time-you-log-into-the-portal" translateArguments="<%= false %>" />
+								</p>
+							</c:if>
+
+							<div class="alert alert-info">
+								<liferay-ui:message key="changes-will-take-effect-once-the-portal-is-restarted-please-restart-the-portal-now" />
+							</div>
 						</c:when>
 						<c:otherwise>
 							<p>
