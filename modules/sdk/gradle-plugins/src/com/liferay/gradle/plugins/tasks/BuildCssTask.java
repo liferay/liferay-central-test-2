@@ -47,7 +47,7 @@ public class BuildCssTask extends BasePortalToolsTask {
 			project, _PORTAL_WEB_CONFIGURATION_NAME);
 
 		_portalWebConfiguration.setDescription(
-			"The portal-web version to be used for compiling the Sass files.");
+			"The portal-web configuration used for compiling CSS files.");
 		_portalWebConfiguration.setVisible(false);
 
 		GradleUtil.executeIfEmpty(
