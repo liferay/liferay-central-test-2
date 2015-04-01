@@ -79,7 +79,7 @@ public class LiferayPlugin extends BasePlugin {
 	protected void addTaskBuildCss() {
 		Task task = addTask("buildCss", BuildCssTask.class);
 
-		task.setDescription("Compiles the Sass files in the project.");
+		task.setDescription("Compiles CSS files.");
 		task.setGroup(org.gradle.api.plugins.BasePlugin.BUILD_GROUP);
 	}
 
