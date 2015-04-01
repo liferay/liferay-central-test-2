@@ -390,7 +390,6 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		throws PortalException {
 
 		File file = null;
-		MissingReferences missingReferences = null;
 
 		try {
 			ExportImportThreadLocal.setLayoutImportInProcess(true);
@@ -408,11 +407,15 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 			layoutLocalService.importLayoutsDataDeletions(
 				userId, folder.getGroupId(), privateLayout, parameterMap, file);
 
-			missingReferences = layoutLocalService.validateImportLayoutsFile(
-				userId, folder.getGroupId(), privateLayout, parameterMap, file);
+			MissingReferences missingReferences =
+				layoutLocalService.validateImportLayoutsFile(
+					userId, folder.getGroupId(), privateLayout, parameterMap,
+					file);
 
 			layoutLocalService.importLayouts(
 				userId, folder.getGroupId(), privateLayout, parameterMap, file);
+
+			return missingReferences;
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -420,8 +423,6 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		finally {
 			ExportImportThreadLocal.setLayoutImportInProcess(false);
 		}
-
-		return missingReferences;
 	}
 
 	@Override
