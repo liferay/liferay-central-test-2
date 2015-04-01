@@ -124,7 +124,6 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 	}
 
 	@Activate
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void activate(ComponentContext componentContext) {
 		_bundleContext = componentContext.getBundleContext();
 
@@ -141,7 +140,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 			ReflectionUtil.throwException(ise);
 		}
 
-		_serviceTracker = new ServiceTracker(
+		_serviceTracker = new ServiceTracker<Object, Object>(
 			_bundleContext, filter, new MBeanServiceTrackerCustomizer());
 
 		_serviceTracker.open();
@@ -231,15 +230,13 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 	private final Map<String, ObjectName> _objectNameCache =
 		new ConcurrentHashMap<>();
 
-	@SuppressWarnings("rawtypes")
-	private ServiceTracker _serviceTracker;
+	private ServiceTracker<Object, Object> _serviceTracker;
 
-	@SuppressWarnings("rawtypes")
 	private class MBeanServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer {
+		implements ServiceTrackerCustomizer<Object, Object> {
 
 		@Override
-		public Object addingService(ServiceReference serviceReference) {
+		public Object addingService(ServiceReference<Object> serviceReference) {
 			String objectName = GetterUtil.getString(
 				serviceReference.getProperty("jmx.objectname"));
 
@@ -250,7 +247,6 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 				objectNameCacheKey = objectName;
 			}
 
-			@SuppressWarnings("unchecked")
 			Object service = _bundleContext.getService(serviceReference);
 
 			try {
@@ -268,12 +264,12 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 
 		@Override
 		public void modifiedService(
-			ServiceReference serviceReference, Object service) {
+			ServiceReference<Object> serviceReference, Object service) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference serviceReference, Object service) {
+			ServiceReference<Object> serviceReference, Object service) {
 
 			String objectName = GetterUtil.getString(
 				serviceReference.getProperty("jmx.objectname"));
