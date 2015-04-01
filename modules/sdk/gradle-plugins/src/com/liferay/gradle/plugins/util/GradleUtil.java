@@ -51,14 +51,14 @@ public class GradleUtil {
 		Project project, String configurationName, String group, String name,
 		String version, boolean transitive) {
 
+		DependencyHandler dependencyHandler = project.getDependencies();
+
 		Map<String, Object> dependencyNotation = new HashMap<>();
 
 		dependencyNotation.put("group", group);
 		dependencyNotation.put("name", name);
-		dependencyNotation.put("version", version);
 		dependencyNotation.put("transitive", transitive);
-
-		DependencyHandler dependencyHandler = project.getDependencies();
+		dependencyNotation.put("version", version);
 
 		return dependencyHandler.add(configurationName, dependencyNotation);
 	}

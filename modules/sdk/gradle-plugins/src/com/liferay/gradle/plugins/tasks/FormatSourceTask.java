@@ -40,7 +40,7 @@ public class FormatSourceTask extends BasePortalToolsTask {
 
 	@Override
 	public String getMain() {
-		return _MAIN;
+		return "com.liferay.portal.tools.sourceformatter.SourceFormatter";
 	}
 
 	@Override
@@ -55,12 +55,7 @@ public class FormatSourceTask extends BasePortalToolsTask {
 
 	@Override
 	protected String getToolName() {
-		return _TOOL_NAME;
+		return "SourceFormatter";
 	}
-
-	private static final String _MAIN =
-		"com.liferay.portal.tools.sourceformatter.SourceFormatter";
-
-	private static final String _TOOL_NAME = "SourceFormatter";
 
 }
