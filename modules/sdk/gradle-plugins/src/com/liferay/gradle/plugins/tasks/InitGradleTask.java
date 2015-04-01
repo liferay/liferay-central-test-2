@@ -160,21 +160,19 @@ public class InitGradleTask extends DefaultTask {
 				",");
 
 			for (String fileName : portalDependencyJarsArray) {
-				String[] portalDependency = _portalDependencies.get(fileName);
+				String[] portalDependencyNotation =
+					_portalDependencyNotations.get(fileName);
 
-				if (portalDependency == null) {
+				if (portalDependencyNotation == null) {
 					System.out.println(
 						"Unable to find portal dependency " + fileName);
 				}
 				else {
-					String portalDependencyGroup = portalDependency[0];
-					String portalDependencyName = portalDependency[1];
-					String portalDependencyVersion = portalDependency[2];
+					String group = portalDependencyNotation[0];
+					String name = portalDependencyNotation[1];
+					String version = portalDependencyNotation[2];
 
-					contents.add(
-						wrapDependency(
-							portalDependencyGroup, portalDependencyName,
-							portalDependencyVersion));
+					contents.add(wrapDependency(group, name, version));
 				}
 			}
 		}
@@ -367,136 +365,113 @@ public class InitGradleTask extends DefaultTask {
 		return "\t\tfiles(\"" + serviceJarFileName + "\"),";
 	}
 
-	private static final Map<String, String[]> _portalDependencies =
-		new HashMap<>();
-
-	static {
-		_portalDependencies.put(
-			"antlr2.jar", new String[] {"antlr", "antlr", "2.7.7"});
-		_portalDependencies.put(
-			"axis.jar", new String[] {"axis", "axis", "1.4"});
-		_portalDependencies.put(
-			"backport-concurrent.jar",
-			new String[] {
-				"backport-util-concurrent", "backport-util-concurrent", "3.1"
-			});
-		_portalDependencies.put(
-			"bsf.jar", new String[] {"bsf", "bsf", "2.4.0"});
-		_portalDependencies.put(
-			"commons-beanutils.jar",
-			new String[] {"commons-beanutils", "commons-beanutils", "1.8.2"});
-		_portalDependencies.put(
-			"commons-codec.jar",
-			new String[] {"commons-codec", "commons-codec", "1.9"});
-		_portalDependencies.put(
-			"commons-collections.jar",
-			new String[] {
-				"commons-collections", "commons-collections", "3.2.1"
-			});
-		_portalDependencies.put(
-			"commons-digester.jar",
-			new String[] {"commons-digester", "commons-digester", "1.8"});
-		_portalDependencies.put(
-			"commons-discovery.jar",
-			new String[] {"commons-discovery", "commons-discovery", "0.4"});
-		_portalDependencies.put(
-			"commons-fileupload.jar",
-			new String[] {"commons-fileupload", "commons-fileupload", "1.3.1"});
-		_portalDependencies.put(
-			"commons-httpclient.jar",
-			new String[] {"commons-httpclient", "commons-httpclient", "3.1"});
-		_portalDependencies.put(
-			"commons-io.jar", new String[] {"commons-io", "commons-io", "2.1"});
-		_portalDependencies.put(
-			"commons-lang.jar",
-			new String[] {"commons-lang", "commons-lang", "2.6"});
-		_portalDependencies.put(
-			"commons-logging.jar",
-			new String[] {"commons-logging", "commons-logging", "1.1.3"});
-		_portalDependencies.put(
-			"commons-math.jar",
-			new String[] {"org.apache.commons", "commons-math", "2.0"});
-		_portalDependencies.put(
-			"commons-validator.jar",
-			new String[] {"commons-validator", "commons-validator", "1.3.1"});
-		_portalDependencies.put(
-			"dom4j.jar", new String[] {"dom4j", "dom4j", "1.6.1"});
-		_portalDependencies.put(
-			"hibernate-core.jar",
-			new String[] {"org.hibernate", "hibernate-core", "3.6.10.Final"});
-		_portalDependencies.put(
-			"ical4j.jar", new String[] {"org.mnode.ical4j", "ical4j", "1.0.2"});
-		_portalDependencies.put(
-			"jabsorb.jar", new String[] {"org.jabsorb", "jabsorb", "1.3.1"});
-		_portalDependencies.put(
-			"jaxrpc.jar", new String[] {"javax.xml", "jaxrpc", "1.1"});
-		_portalDependencies.put(
-			"jcommon.jar", new String[] {"jfree", "jcommon", "1.0.16"});
-		_portalDependencies.put(
-			"jdom.jar", new String[] {"org.jopendocument", "jdom", "1.1.1"});
-		_portalDependencies.put(
-			"jericho-html.jar",
-			new String[] {"net.htmlparser.jericho", "jericho-html", "3.1"});
-		_portalDependencies.put(
-			"jfreechart.jar", new String[] {"jfree", "jfreechart", "1.0.13"});
-		_portalDependencies.put(
-			"jruby.jar", new String[] {"org.jruby", "jruby", "1.6.5"});
-		_portalDependencies.put(
-			"json-java.jar",
-			new String[] {"com.liferay", "com.liferay.org.json", "1.0.0"});
-		_portalDependencies.put(
-			"jstl-api.jar",
-			new String[] {"javax.servlet.jsp.jstl", "jstl-api", "1.2"});
-		_portalDependencies.put(
-			"jstl-impl.jar",
-			new String[] {"org.glassfish.web", "jstl-impl", "1.2"});
-		_portalDependencies.put(
-			"jutf7.jar", new String[] {"com.beetstra.jutf7", "jutf7", "0.9.0"});
-		_portalDependencies.put(
-			"nekohtml.jar",
-			new String[] {"net.sourceforge.nekohtml", "nekohtml", "1.9.14"});
-		_portalDependencies.put(
-			"oro.jar", new String[] {"oro", "oro", "2.0.8"});
-		_portalDependencies.put(
-			"portals-bridges.jar",
-			new String[] {
-				"org.apache.portals.bridges", "portals-bridges-common", "1.0"
-			});
-		_portalDependencies.put(
-			"rhino.jar", new String[] {"org.mozilla", "rhino", "1.7R4"});
-		_portalDependencies.put(
-			"rome.jar", new String[] {"rome", "rome", "1.0"});
-		_portalDependencies.put(
-			"saaj-api.jar", new String[] {"javax.xml.soap", "saaj-api", "1.3"});
-		_portalDependencies.put(
-			"saaj-impl.jar",
-			new String[] {"com.sun.xml.messaging.saaj", "saaj-impl", "1.3"});
-		_portalDependencies.put(
-			"slf4j-api.jar", new String[] {"org.slf4j", "slf4j-api", "1.7.2"});
-		_portalDependencies.put(
-			"struts.jar",
-			new String[] {
-				"com.liferay", "org.apache.struts", "1.2.9.LIFERAY-PATCHED-1"
-			});
-		_portalDependencies.put(
-			"util-slf4j.jar",
-			new String[] {
-				"com.liferay.portal", "util-slf4j", "7.0.0-SNAPSHOT"
-			});
-		_portalDependencies.put(
-			"wsdl4j.jar", new String[] {"wsdl4j", "wsdl4j", "1.6.1"});
-		_portalDependencies.put(
-			"xercesImpl.jar", new String[] {"xerces", "xercesImpl", "2.11.0"});
-		_portalDependencies.put(
-			"xml-apis.jar", new String[] {"xml-apis", "xml-apis", "1.4.01"});
-		_portalDependencies.put(
-			"xmlsec.jar",
-			new String[] {"org.apache.santuario", "xmlsec", "1.4.5"});
-	}
+	private static final PortalDependencyNotations _portalDependencyNotations =
+		new PortalDependencyNotations();
 
 	private Node _buildXmlNode;
 	private Node _ivyXmlNode;
 	private LiferayExtension _liferayExtension;
 	private Project _project;
+
+	private static class PortalDependencyNotations {
+
+		public PortalDependencyNotations() {
+			_put("antlr2.jar", "antlr", "antlr", "2.7.7");
+			_put("axis.jar", "axis", "axis", "1.4");
+			_put(
+				"backport-concurrent.jar", "backport-util-concurrent",
+				"backport-util-concurrent", "3.1");
+			_put("bsf.jar", "bsf", "bsf", "2.4.0");
+			_put(
+				"commons-beanutils.jar", "commons-beanutils",
+				"commons-beanutils", "1.8.2");
+			_put("commons-codec.jar", "commons-codec", "commons-codec", "1.9");
+			_put(
+				"commons-collections.jar", "commons-collections",
+				"commons-collections", "3.2.1");
+			_put(
+				"commons-digester.jar", "commons-digester", "commons-digester",
+				"1.8");
+			_put(
+				"commons-discovery.jar", "commons-discovery",
+				"commons-discovery", "0.4");
+			_put(
+				"commons-fileupload.jar", "commons-fileupload",
+				"commons-fileupload", "1.3.1");
+			_put(
+				"commons-httpclient.jar", "commons-httpclient",
+				"commons-httpclient", "3.1");
+			_put("commons-io.jar", "commons-io", "commons-io", "2.1");
+			_put("commons-lang.jar", "commons-lang", "commons-lang", "2.6");
+			_put(
+				"commons-logging.jar", "commons-logging", "commons-logging",
+				"1.1.3");
+			_put(
+				"commons-math.jar", "org.apache.commons", "commons-math",
+				"2.0");
+			_put(
+				"commons-validator.jar", "commons-validator",
+				"commons-validator", "1.3.1");
+			_put("dom4j.jar", "dom4j", "dom4j", "1.6.1");
+			_put(
+				"hibernate-core.jar", "org.hibernate", "hibernate-core",
+				"3.6.10.Final");
+			_put("ical4j.jar", "org.mnode.ical4j", "ical4j", "1.0.2");
+			_put("jabsorb.jar", "org.jabsorb", "jabsorb", "1.3.1");
+			_put("jaxrpc.jar", "javax.xml", "jaxrpc", "1.1");
+			_put("jcommon.jar", "jfree", "jcommon", "1.0.16");
+			_put("jdom.jar", "org.jopendocument", "jdom", "1.1.1");
+			_put(
+				"jericho-html.jar", "net.htmlparser.jericho", "jericho-html",
+				"3.1");
+			_put("jfreechart.jar", "jfree", "jfreechart", "1.0.13");
+			_put("jruby.jar", "org.jruby", "jruby", "1.6.5");
+			_put(
+				"json-java.jar", "com.liferay", "com.liferay.org.json",
+				"1.0.0");
+			_put("jstl-api.jar", "javax.servlet.jsp.jstl", "jstl-api", "1.2");
+			_put("jstl-impl.jar", "org.glassfish.web", "jstl-impl", "1.2");
+			_put("jutf7.jar", "com.beetstra.jutf7", "jutf7", "0.9.0");
+			_put(
+				"nekohtml.jar", "net.sourceforge.nekohtml", "nekohtml",
+				"1.9.14");
+			_put("oro.jar", "oro", "oro", "2.0.8");
+			_put(
+				"portals-bridges.jar", "org.apache.portals.bridges",
+				"portals-bridges-common", "1.0");
+			_put("rhino.jar", "org.mozilla", "rhino", "1.7R4");
+			_put("rome.jar", "rome", "rome", "1.0");
+			_put("saaj-api.jar", "javax.xml.soap", "saaj-api", "1.3");
+			_put(
+				"saaj-impl.jar", "com.sun.xml.messaging.saaj", "saaj-impl",
+				"1.3");
+			_put("slf4j-api.jar", "org.slf4j", "slf4j-api", "1.7.2");
+			_put(
+				"struts.jar", "com.liferay", "org.apache.struts",
+				"1.2.9.LIFERAY-PATCHED-1");
+			_put(
+				"util-slf4j.jar", "com.liferay.portal", "util-slf4j",
+				"7.0.0-SNAPSHOT");
+			_put("wsdl4j.jar", "wsdl4j", "wsdl4j", "1.6.1");
+			_put("xercesImpl.jar", "xerces", "xercesImpl", "2.11.0");
+			_put("xml-apis.jar", "xml-apis", "xml-apis", "1.4.01");
+			_put("xmlsec.jar", "org.apache.santuario", "xmlsec", "1.4.5");
+		}
+
+		public String[] get(String fileName) {
+			return _portalDependencyNotations.get(fileName);
+		}
+
+		private void _put(
+			String fileName, String group, String name, String version) {
+
+			_portalDependencyNotations.put(
+				fileName, new String[] {group, name, version});
+		}
+
+		private final Map<String, String[]> _portalDependencyNotations =
+			new HashMap<>();
+
+	}
 
 }
