@@ -111,7 +111,7 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 	@Override
 	public long getRefreshTime() {
-		return Time.MINUTE * _rssWebConfiguration.rssFeedTime();
+		return Time.MINUTE * _rssWebConfiguration.feedTime();
 	}
 
 	private final RSSWebConfiguration _rssWebConfiguration;

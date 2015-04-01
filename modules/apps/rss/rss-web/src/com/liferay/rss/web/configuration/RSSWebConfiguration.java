@@ -27,6 +27,6 @@ public interface RSSWebConfiguration {
 	@Meta.AD(
 		deflt = "20", required = false
 	)
-	public int rssFeedTime();
+	public int feedTime();
 
 }
