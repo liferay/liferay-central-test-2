@@ -46,8 +46,7 @@ public class RSSPortletInstanceSettingsDefinition
 
 	@Override
 	public String[] getSettingsIds() {
-		return new String[] {
-			RSSPortletKeys.RSS};
+		return new String[] {RSSPortletKeys.RSS};
 	}
 
 }
