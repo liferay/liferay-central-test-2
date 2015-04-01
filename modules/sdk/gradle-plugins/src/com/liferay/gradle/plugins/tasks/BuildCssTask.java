@@ -188,9 +188,9 @@ public class BuildCssTask extends BasePortalToolsTask {
 				FileTree fileTree = project.zipTree(
 					_portalWebConfiguration.getSingleFile());
 
-				CopySpec fromCopySpec = copySpec.from(fileTree);
+				CopySpec fileTreeCopySpec = copySpec.from(fileTree);
 
-				fromCopySpec.include("html/css/**/*", "html/themes/**/*");
+				fileTreeCopySpec.include("html/css/**/*", "html/themes/**/*");
 
 				copySpec.into(portalWebDir);
 			}
