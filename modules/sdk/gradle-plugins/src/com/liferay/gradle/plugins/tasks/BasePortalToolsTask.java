@@ -29,9 +29,9 @@ import org.gradle.process.JavaExecSpec;
 /**
  * @author Andrea Di Giorgi
  */
-public abstract class BasePortalToolTask extends JavaExec {
+public abstract class BasePortalToolsTask extends JavaExec {
 
-	public BasePortalToolTask() {
+	public BasePortalToolsTask() {
 		project = getProject();
 
 		liferayExtension = GradleUtil.getExtension(
