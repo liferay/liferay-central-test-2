@@ -61,20 +61,19 @@ public class InitGradleTask extends DefaultTask {
 		xmlParser.setFeature(
 			"http://apache.org/xml/features/disallow-doctype-decl", false);
 
-		_buildXmlNode = loadXml(xmlParser, "build.xml");
-		_ivyXmlNode = loadXml(xmlParser, "ivy.xml");
+		_buildXmlNode = readXml(xmlParser, "build.xml");
+		_ivyXmlNode = readXml(xmlParser, "ivy.xml");
+
+		File buildGradleFile = _project.file("build.gradle");
 
 		List<String> contents = new ArrayList<>();
 
 		contents.addAll(getBuildGradleDependencies());
 		contents.addAll(getBuildGradleLiferay());
 
-		File buildGradleFile = _project.file("build.gradle");
-
 		FileUtil.write(buildGradleFile, contents);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<String> getBuildDependenciesCompile() {
 		List<String> contents = new ArrayList<>();
 
@@ -82,10 +81,10 @@ public class InitGradleTask extends DefaultTask {
 			Node dependenciesNode = getNode(_ivyXmlNode, "dependencies");
 
 			if (dependenciesNode != null) {
-				Iterator<Node> itr = dependenciesNode.iterator();
+				Iterator<Node> iterator = dependenciesNode.iterator();
 
-				while (itr.hasNext()) {
-					Node dependencyNode = itr.next();
+				while (iterator.hasNext()) {
+					Node dependencyNode = iterator.next();
 
 					String conf = (String)dependencyNode.attribute("conf");
 
@@ -185,7 +184,6 @@ public class InitGradleTask extends DefaultTask {
 			")");
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<String> getBuildDependenciesTestCompile() {
 		List<String> contents = new ArrayList<>();
 
@@ -193,10 +191,10 @@ public class InitGradleTask extends DefaultTask {
 			Node dependenciesNode = getNode(_ivyXmlNode, "dependencies");
 
 			if (dependenciesNode != null) {
-				Iterator<Node> itr = dependenciesNode.iterator();
+				Iterator<Node> iterator = dependenciesNode.iterator();
 
-				while (itr.hasNext()) {
-					Node dependencyNode = itr.next();
+				while (iterator.hasNext()) {
+					Node dependencyNode = iterator.next();
 
 					String conf = (String)dependencyNode.attribute("conf");
 
@@ -256,14 +254,13 @@ public class InitGradleTask extends DefaultTask {
 		return getBuildXmlProperty(key, null);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected String getBuildXmlProperty(String key, String defaultValue) {
 		NodeList propertyNodeList = (NodeList)_buildXmlNode.get("property");
 
-		Iterator<Node> itr = propertyNodeList.iterator();
+		Iterator<Node> iterator = propertyNodeList.iterator();
 
-		while (itr.hasNext()) {
-			Node propertyNode = itr.next();
+		while (iterator.hasNext()) {
+			Node propertyNode = iterator.next();
 
 			String propertyNodeName = (String)propertyNode.attribute("name");
 
@@ -299,7 +296,7 @@ public class InitGradleTask extends DefaultTask {
 		return sb.toString();
 	}
 
-	protected Node loadXml(XmlParser xmlParser, String fileName)
+	protected Node readXml(XmlParser xmlParser, String fileName)
 		throws Exception {
 
 		File file = _project.file(fileName);
