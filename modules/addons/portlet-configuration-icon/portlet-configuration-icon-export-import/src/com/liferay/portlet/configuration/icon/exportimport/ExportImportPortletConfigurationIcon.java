@@ -93,7 +93,7 @@ public class ExportImportPortletConfigurationIcon
 	}
 
 	@Override
-	public boolean showToolTip() {
+	public boolean isToolTip() {
 		return false;
 	}
 

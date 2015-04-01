@@ -59,7 +59,7 @@ public class EditDefaultsPortletConfigurationIcon
 	}
 
 	@Override
-	public boolean showToolTip() {
+	public boolean isToolTip() {
 		return false;
 	}
 

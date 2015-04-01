@@ -75,6 +75,11 @@ public class IGooglePortletConfigurationIcon
 	}
 
 	@Override
+	public boolean isLabel() {
+		return true;
+	}
+
+	@Override
 	public boolean isShow() {
 		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
 
@@ -91,11 +96,6 @@ public class IGooglePortletConfigurationIcon
 		}
 
 		return false;
-	}
-
-	@Override
-	public boolean showLabel() {
-		return true;
 	}
 
 }

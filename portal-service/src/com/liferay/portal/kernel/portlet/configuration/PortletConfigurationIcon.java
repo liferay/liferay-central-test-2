@@ -59,16 +59,16 @@ public interface PortletConfigurationIcon {
 
 	public double getWeight();
 
+	public boolean isLabel();
+
 	public boolean isLocalizeMessage();
 
 	public boolean isShow();
 
+	public boolean isToolTip();
+
+	public boolean isUseDialog();
+
 	public void setRequest(HttpServletRequest request);
-
-	public boolean showLabel();
-
-	public boolean showToolTip();
-
-	public boolean showUseDialog();
 
 }

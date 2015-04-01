@@ -84,7 +84,7 @@ public class MinimizePortletConfigurationIcon
 	}
 
 	@Override
-	public boolean showToolTip() {
+	public boolean isToolTip() {
 		return false;
 	}
 

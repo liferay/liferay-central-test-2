@@ -113,8 +113,23 @@ public abstract class BasePortletConfigurationIcon
 	}
 
 	@Override
+	public boolean isLabel() {
+		return false;
+	}
+
+	@Override
 	public boolean isLocalizeMessage() {
 		return true;
+	}
+
+	@Override
+	public boolean isToolTip() {
+		return false;
+	}
+
+	@Override
+	public boolean isUseDialog() {
+		return false;
 	}
 
 	@Override
@@ -123,21 +138,6 @@ public abstract class BasePortletConfigurationIcon
 
 		_themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
-	}
-
-	@Override
-	public boolean showLabel() {
-		return false;
-	}
-
-	@Override
-	public boolean showToolTip() {
-		return false;
-	}
-
-	@Override
-	public boolean showUseDialog() {
-		return false;
 	}
 
 	protected HttpServletRequest _request;

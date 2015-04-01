@@ -72,7 +72,7 @@ public class ClosePortletConfigurationIcon
 	}
 
 	@Override
-	public boolean showToolTip() {
+	public boolean isToolTip() {
 		return false;
 	}
 

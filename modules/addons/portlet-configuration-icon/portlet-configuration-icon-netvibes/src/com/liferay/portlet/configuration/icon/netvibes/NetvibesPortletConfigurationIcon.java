@@ -89,6 +89,11 @@ public class NetvibesPortletConfigurationIcon
 	}
 
 	@Override
+	public boolean isLabel() {
+		return true;
+	}
+
+	@Override
 	public boolean isShow() {
 		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
 
@@ -105,11 +110,6 @@ public class NetvibesPortletConfigurationIcon
 		}
 
 		return false;
-	}
-
-	@Override
-	public boolean showLabel() {
-		return true;
 	}
 
 }

@@ -45,7 +45,7 @@
 				id="<%= portletConfigurationIcon.getId() %>"
 				image="<%= portletConfigurationIcon.getImage() %>"
 				imageHover="<%= portletConfigurationIcon.getImageHover() %>"
-				label="<%= portletConfigurationIcon.showLabel() %>"
+				label="<%= portletConfigurationIcon.isLabel() %>"
 				lang="<%= portletConfigurationIcon.getLang() %>"
 				linkCssClass="<%= portletConfigurationIcon.getLinkCssClass() %>"
 				localizeMessage="<%= portletConfigurationIcon.isLocalizeMessage() %>"
@@ -55,9 +55,9 @@
 				src="<%= portletConfigurationIcon.getSrc() %>"
 				srcHover="<%= portletConfigurationIcon.getSrcHover() %>"
 				target="<%= portletConfigurationIcon.getTarget() %>"
-				toolTip="<%= portletConfigurationIcon.showToolTip() %>"
+				toolTip="<%= portletConfigurationIcon.isToolTip() %>"
 				url="<%= portletConfigurationIcon.getURL() %>"
-				useDialog="<%= portletConfigurationIcon.showUseDialog() %>"
+				useDialog="<%= portletConfigurationIcon.isUseDialog() %>"
 			/>
 		</c:if>
 

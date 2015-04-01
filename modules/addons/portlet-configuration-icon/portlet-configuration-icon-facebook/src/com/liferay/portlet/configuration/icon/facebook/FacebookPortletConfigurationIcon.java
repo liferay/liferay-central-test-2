@@ -71,6 +71,11 @@ public class FacebookPortletConfigurationIcon
 	}
 
 	@Override
+	public boolean isLabel() {
+		return true;
+	}
+
+	@Override
 	public boolean isShow() {
 		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
 
@@ -96,11 +101,6 @@ public class FacebookPortletConfigurationIcon
 		}
 
 		return false;
-	}
-
-	@Override
-	public boolean showLabel() {
-		return true;
 	}
 
 }
