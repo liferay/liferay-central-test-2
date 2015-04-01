@@ -4259,14 +4259,14 @@ public class ServiceBuilder {
 		return dimensions;
 	}
 
-	private JavaClass _getJavaClass(String filePath) throws IOException {
-		filePath = StringUtil.replace(
-			filePath, CharPool.BACK_SLASH, CharPool.SLASH);
+	private JavaClass _getJavaClass(String fileName) throws IOException {
+		fileName = StringUtil.replace(
+			fileName, CharPool.BACK_SLASH, CharPool.SLASH);
 
-		int pos = filePath.lastIndexOf("/src/") + 5;
+		int pos = fileName.lastIndexOf("/src/") + 5;
 
 		String fullyQualifiedClassName = StringUtil.replace(
-			filePath.substring(pos, filePath.length() - 5), CharPool.SLASH,
+			fileName.substring(pos, fileName.length() - 5), CharPool.SLASH,
 			CharPool.PERIOD);
 
 		JavaClass javaClass = _javaClasses.get(fullyQualifiedClassName);
@@ -4278,7 +4278,7 @@ public class ServiceBuilder {
 
 			JavaDocBuilder builder = new JavaDocBuilder(classLibrary);
 
-			File file = new File(filePath);
+			File file = new File(fileName);
 
 			if (!file.exists()) {
 				return null;
