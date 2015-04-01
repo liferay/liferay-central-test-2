@@ -30,6 +30,7 @@ public class LanguageEntry {
 
 		_duplicateLanguages = duplicateLanguages;
 		_locale = locale;
+		_url = url;
 
 		_languageId = LocaleUtil.toLanguageId(locale);
 
@@ -39,8 +40,6 @@ public class LanguageEntry {
 		else {
 			_selected = false;
 		}
-
-		_url = url;
 	}
 
 	public String getLanguageId() {

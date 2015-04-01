@@ -10,7 +10,6 @@
 		name='${namespace + formName}'
 		useNamespace=false
 	>
-
 		<@aui["select"]
 			changesContext=true
 			label=""

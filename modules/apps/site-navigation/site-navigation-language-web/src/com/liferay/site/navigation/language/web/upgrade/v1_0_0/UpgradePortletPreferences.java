@@ -40,14 +40,14 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 	protected void upgradeDisplayStyle(PortletPreferences portletPreferences)
 		throws ReadOnlyException {
 
-		String displayStylePreference = portletPreferences.getValue(
+		String displayStyleString = portletPreferences.getValue(
 			"displayStyle", null);
 
-		if (Validator.isNull(displayStylePreference)) {
+		if (Validator.isNull(displayStyleString)) {
 			return;
 		}
 
-		int displayStyle = GetterUtil.getInteger(displayStylePreference);
+		int displayStyle = GetterUtil.getInteger(displayStyleString);
 
 		if (displayStyle == LIST_ICON) {
 			portletPreferences.setValue(
