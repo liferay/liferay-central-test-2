@@ -80,13 +80,15 @@ public class BuildCssTask extends BasePortalToolsTask {
 	public List<String> getArgs() {
 		List<String> args = new ArrayList<>(3);
 
+		args.add("sass.dir=/");
+
 		File sassDocrootDir = getSassDocrootDir();
+
+		args.add("sass.docroot.dir=" + sassDocrootDir.toString());
 
 		File sassPortalCommonDir = new File(
 			getPortalWebDir(), "html/css/common");
 
-		args.add("sass.dir=/");
-		args.add("sass.docroot.dir=" + sassDocrootDir.toString());
 		args.add("sass.portal.common.dir=" + sassPortalCommonDir.toString());
 
 		return args;
