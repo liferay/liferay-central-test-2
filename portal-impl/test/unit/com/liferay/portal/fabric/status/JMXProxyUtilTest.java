@@ -331,6 +331,7 @@ public class JMXProxyUtilTest {
 			public int hashCode() {
 				return super.hashCode();
 			}
+
 		}
 
 		Assert.assertFalse(

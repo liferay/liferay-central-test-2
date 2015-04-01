@@ -324,6 +324,7 @@ public class TaskQueueTest {
 		Thread.sleep(TestUtil.SHORT_WAIT);
 
 		syncThrowableThread.interrupt();
+
 		syncThrowableThread.sync();
 	}
 

@@ -154,8 +154,8 @@ public class BaseIntrabandTest {
 							_TYPE, datagramReceiveHandler2);
 
 						throw new AssertionError(
-							"Register datagram receive handle should fail " +
-								"with a NullPointerException");
+							"Registering a datagram receive handle should " +
+								"fail with a NullPointerException");
 					}
 
 				});
