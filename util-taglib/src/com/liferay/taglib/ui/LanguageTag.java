@@ -98,10 +98,10 @@ public class LanguageTag extends IncludeTag {
 		Locale[] locales, Locale currentLocale, boolean displayCurrentLocale,
 		String formAction, String parameterName) {
 
-		Map langCounts = new HashMap();
+		Map<String, Integer> langCounts = new HashMap<>();
 
 		for (Locale locale : locales) {
-			Integer count = (Integer)langCounts.get(locale.getLanguage());
+			Integer count = langCounts.get(locale.getLanguage());
 
 			if (count == null) {
 				count = new Integer(1);
@@ -116,7 +116,7 @@ public class LanguageTag extends IncludeTag {
 		Set<String> duplicateLanguages = new HashSet<>();
 
 		for (Locale locale : locales) {
-			Integer count = (Integer)langCounts.get(locale.getLanguage());
+			Integer count = langCounts.get(locale.getLanguage());
 
 			if (count.intValue() != 1) {
 				duplicateLanguages.add(locale.getLanguage());
