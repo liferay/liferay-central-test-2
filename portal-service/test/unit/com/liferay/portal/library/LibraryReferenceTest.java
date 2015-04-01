@@ -107,9 +107,9 @@ public class LibraryReferenceTest {
 
 			Node kindNode = namedNodeMap.getNamedItem("kind");
 
-			String kind = kindNode.getNodeValue();
+			String value = kindNode.getNodeValue();
 
-			if (!kind.equals("lib")) {
+			if (!value.equals("lib")) {
 				continue;
 			}
 
@@ -120,9 +120,10 @@ public class LibraryReferenceTest {
 	}
 
 	private static void _initLibJars() throws IOException {
-		for (String line : Files.readAllLines(
-			Paths.get(_LIB, "/versions-ignore.txt"),
-			Charset.forName("UTF-8"))) {
+		for (String line :
+				Files.readAllLines(
+					Paths.get(_LIB, "/versions-ignore.txt"),
+					Charset.forName("UTF-8"))) {
 
 			line = line.trim();
 
