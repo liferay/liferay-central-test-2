@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.hot.deploy.jmx.mbean.manager;
+package com.liferay.hot.deploy.jmx.listener.mbean.manager;
 
-import com.liferay.hot.deploy.jmx.statistics.PluginStatisticsManager;
+import com.liferay.hot.deploy.jmx.listener.statistics.PluginStatisticsManager;
 
 import java.util.List;
 

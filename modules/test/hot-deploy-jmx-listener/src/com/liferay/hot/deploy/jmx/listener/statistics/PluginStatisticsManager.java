@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.hot.deploy.jmx.statistics;
+package com.liferay.hot.deploy.jmx.listener.statistics;
 
 import java.util.List;
 

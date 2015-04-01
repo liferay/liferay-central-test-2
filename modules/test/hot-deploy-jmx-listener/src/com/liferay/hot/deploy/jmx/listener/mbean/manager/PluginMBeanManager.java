@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.hot.deploy.jmx.mbean.manager;
+package com.liferay.hot.deploy.jmx.listener.mbean.manager;
 
 import java.util.List;
 
