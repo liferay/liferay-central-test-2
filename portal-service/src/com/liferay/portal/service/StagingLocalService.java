@@ -106,6 +106,5 @@ public interface StagingLocalService extends BaseLocalService {
 	@java.lang.Deprecated
 	public com.liferay.portal.kernel.lar.MissingReferences validateStagingRequest(
 		long userId, long stagingRequestId, boolean privateLayout,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
-		throws PortalException;
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap);
 }

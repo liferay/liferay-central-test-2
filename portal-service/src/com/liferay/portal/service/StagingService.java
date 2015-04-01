@@ -73,6 +73,11 @@ public interface StagingService extends BaseService {
 	public void updateStagingRequest(long stagingRequestId,
 		java.lang.String fileName, byte[] bytes) throws PortalException;
 
+	/**
+	* @deprecated As of 7.0.0, replaced by {@link #publishStagingRequest(long,
+	boolean, java.util.Map)}
+	*/
+	@java.lang.Deprecated
 	public com.liferay.portal.kernel.lar.MissingReferences validateStagingRequest(
 		long stagingRequestId, boolean privateLayout,
 		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)

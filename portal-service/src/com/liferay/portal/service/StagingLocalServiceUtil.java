@@ -140,8 +140,7 @@ public class StagingLocalServiceUtil {
 	@Deprecated
 	public static com.liferay.portal.kernel.lar.MissingReferences validateStagingRequest(
 		long userId, long stagingRequestId, boolean privateLayout,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap) {
 		return getService()
 				   .validateStagingRequest(userId, stagingRequestId,
 			privateLayout, parameterMap);
