@@ -379,6 +379,12 @@ public class UserIndexerTest {
 		return getUser(hits);
 	}
 
+	protected User getUser(Hits hits) throws PortalException {
+		long userId = UserIndexer.getUserId(hits.doc(0));
+
+		return UserLocalServiceUtil.getUser(userId);
+	}
+
 	protected boolean isAPIWithoutQueryParserImplementedForSearchEngine() {
 		return !isSearchEngineVendor("Lucene", "Solr");
 	}
@@ -389,6 +395,13 @@ public class UserIndexerTest {
 
 	protected boolean isEmptyQueryImplementedForSearchEngine() {
 		return !isSearchEngineVendor("Solr");
+	}
+
+	protected boolean isSearchEngineVendor(String... vendors) {
+		SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
+			SearchEngineUtil.getDefaultSearchEngineId());
+
+		return ArrayUtil.contains(vendors, searchEngine.getVendor(), true);
 	}
 
 	protected boolean isTwoEndedSubstringSearchImplementedForSearchEngine() {
@@ -412,19 +425,6 @@ public class UserIndexerTest {
 		user = assertSearchOneUser("middleName", middleName);
 
 		Assert.assertEquals(middleName, user.getMiddleName());
-	}
-
-	protected User getUser(Hits hits) throws PortalException {
-		long userId = UserIndexer.getUserId(hits.doc(0));
-
-		return UserLocalServiceUtil.getUser(userId);
-	}
-
-	protected boolean isSearchEngineVendor(String... vendors) {
-		SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
-			SearchEngineUtil.getDefaultSearchEngineId());
-
-		return ArrayUtil.contains(vendors, searchEngine.getVendor(), true);
 	}
 
 	private Indexer _indexer;
