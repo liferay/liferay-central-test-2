@@ -101,7 +101,7 @@ public class MBeanRegistryImpl implements MBeanRegistry {
 	@Override
 	public void unregister(
 			String objectNameCacheKey, ObjectName defaultObjectName)
-		throws InstanceNotFoundException, MBeanRegistrationException {
+		throws MBeanRegistrationException {
 
 		synchronized (_objectNameCache) {
 			ObjectName objectName = _objectNameCache.remove(objectNameCacheKey);
