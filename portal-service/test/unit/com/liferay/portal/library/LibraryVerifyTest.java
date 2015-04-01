@@ -65,32 +65,32 @@ public class LibraryVerifyTest {
 
 	@Test
 	public void testEclipseProjectJarsInLib() {
-		_doSearchForReferencingNonExistJars(_classpathJars, _CLASSPATH_PATH);
+		testNonexistentJarReferences(_classpathJars, _CLASSPATH_PATH);
 	}
 
 	@Test
 	public void testLibJarsInEclipseProject() {
-		_doSearchForMissingReferences(_classpathJars, _CLASSPATH_PATH);
+		testMissingJarReferences(_classpathJars, _CLASSPATH_PATH);
 	}
 
 	@Test
 	public void testLibJarsInNetBeansProject() {
-		_doSearchForMissingReferences(_nbProjectJars, _NBPROJECT_PATH);
+		testMissingJarReferences(_nbProjectJars, _NBPROJECT_PATH);
 	}
 
 	@Test
 	public void testLibJarsInVersions() {
-		_doSearchForMissingReferences(_versionsJars, _VERSIONS_PATH);
+		testMissingJarReferences(_versionsJars, _VERSIONS_PATH);
 	}
 
 	@Test
 	public void testNetBeansProjectJarsInLib() {
-		_doSearchForReferencingNonExistJars(_nbProjectJars, _NBPROJECT_PATH);
+		testNonexistentJarReferences(_nbProjectJars, _NBPROJECT_PATH);
 	}
 
 	@Test
 	public void testVersionsJarsInLib() {
-		_doSearchForReferencingNonExistJars(_versionsJars, _VERSIONS_PATH);
+		testNonexistentJarReferences(_versionsJars, _VERSIONS_PATH);
 	}
 
 	private static void _initEclipseProjectJars(DocumentBuilder documentBuilder)
@@ -180,7 +180,7 @@ public class LibraryVerifyTest {
 		}
 	}
 
-	private void _doSearchForMissingReferences(
+	protected void testMissingJarReferences(
 		Set<String> searchInJars, String sourcePath) {
 
 		for (String searchForJar : _libJars) {
@@ -196,7 +196,7 @@ public class LibraryVerifyTest {
 		}
 	}
 
-	private void _doSearchForReferencingNonExistJars(
+	protected void testNonexistentJarReferences(
 		Set<String> searchForJars, String sourcePath) {
 
 		for (String searchForJar : searchForJars) {
