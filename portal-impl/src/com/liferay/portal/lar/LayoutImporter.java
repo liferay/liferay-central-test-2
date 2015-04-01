@@ -331,7 +331,6 @@ public class LayoutImporter {
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.booleanValue());
-
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importLogo = MapUtil.getBoolean(
