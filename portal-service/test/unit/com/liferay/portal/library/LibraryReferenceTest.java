@@ -56,73 +56,69 @@ public class LibraryReferenceTest {
 		DocumentBuilder documentBuilder =
 			documentBuilderFactory.newDocumentBuilder();
 
-		_initEclipseProjectJars(documentBuilder);
-
-		_initNetBeansProjectJars(documentBuilder);
-
+		_initEclipseJars(documentBuilder);
+		_initNetBeansJars(documentBuilder);
 		_initVersionsJars(documentBuilder);
 	}
 
 	@Test
-	public void testEclipseProjectJarsInLib() {
-		testNonexistentJarReferences(_classpathJars, _CLASSPATH_PATH);
+	public void testEclipseJarsInLib() {
+		testNonexistentJarReferences(_eclipseJars, _ECLIPSE_FILE_NAME);
 	}
 
 	@Test
-	public void testLibJarsInEclipseProject() {
-		testMissingJarReferences(_classpathJars, _CLASSPATH_PATH);
+	public void testLibJarsInEclipse() {
+		testMissingJarReferences(_eclipseJars, _ECLIPSE_FILE_NAME);
 	}
 
 	@Test
-	public void testLibJarsInNetBeansProject() {
-		testMissingJarReferences(_nbProjectJars, _NBPROJECT_PATH);
+	public void testLibJarsInNetBeans() {
+		testMissingJarReferences(_netBeansJars, _NETBEANS_FILE_NAME);
 	}
 
 	@Test
 	public void testLibJarsInVersions() {
-		testMissingJarReferences(_versionsJars, _VERSIONS_PATH);
+		testMissingJarReferences(_versionsJars, _VERSIONS_FILE_NAME);
 	}
 
 	@Test
-	public void testNetBeansProjectJarsInLib() {
-		testNonexistentJarReferences(_nbProjectJars, _NBPROJECT_PATH);
+	public void testNetBeansJarsInLib() {
+		testNonexistentJarReferences(_netBeansJars, _NETBEANS_FILE_NAME);
 	}
 
 	@Test
 	public void testVersionsJarsInLib() {
-		testNonexistentJarReferences(_versionsJars, _VERSIONS_PATH);
+		testNonexistentJarReferences(_versionsJars, _VERSIONS_FILE_NAME);
 	}
 
-	protected void testMissingJarReferences(
-		Set<String> searchInJars, String sourcePath) {
-
-		for (String searchForJar : _libJars) {
-			if (sourcePath.equals(_VERSIONS_PATH) &&
-				_excludeJars.contains(searchForJar)) {
+	protected void testMissingJarReferences(Set<String> jars, String fileName) {
+		for (String jar : _libJars) {
+			if (fileName.equals(_VERSIONS_FILE_NAME) &&
+				_excludeJars.contains(jar)) {
 
 				continue;
 			}
 
 			Assert.assertTrue(
-				sourcePath + " is missing the reference to " + searchForJar,
-				searchInJars.contains(searchForJar));
+				fileName + " is missing a reference to " + jar,
+				jars.contains(jar));
 		}
 	}
 
 	protected void testNonexistentJarReferences(
-		Set<String> searchForJars, String sourcePath) {
+		Set<String> jars, String fileName) {
 
-		for (String searchForJar : searchForJars) {
+		for (String jar : jars) {
 			Assert.assertTrue(
-				sourcePath + " is referencing a non-exist jar " + searchForJar,
-				_libJars.contains(searchForJar));
+				fileName + " has a nonexistent reference to " + jar,
+				_libJars.contains(jar));
 		}
 	}
 
-	private static void _initEclipseProjectJars(DocumentBuilder documentBuilder)
+	private static void _initEclipseJars(DocumentBuilder documentBuilder)
 		throws Exception {
 
-		Document document = documentBuilder.parse(new File(_CLASSPATH_PATH));
+		Document document = documentBuilder.parse(new File(_ECLIPSE_FILE_NAME));
 
 		NodeList nodelist = document.getElementsByTagName("classpathentry");
 
@@ -135,20 +131,20 @@ public class LibraryReferenceTest {
 
 			String value = kindNode.getNodeValue();
 
-			if (!value.equals("lib")) {
+			if (!value.equals(_LIB_DIR_NAME)) {
 				continue;
 			}
 
 			Node pathNode = namedNodeMap.getNamedItem("path");
 
-			_classpathJars.add(pathNode.getNodeValue());
+			_eclipseJars.add(pathNode.getNodeValue());
 		}
 	}
 
 	private static void _initLibJars() throws IOException {
 		for (String line :
 				Files.readAllLines(
-					Paths.get(_LIB, "/versions-ignore.txt"),
+					Paths.get(_LIB_DIR_NAME, "/versions-ignore.txt"),
 					Charset.forName("UTF-8"))) {
 
 			line = line.trim();
@@ -159,7 +155,7 @@ public class LibraryReferenceTest {
 		}
 
 		Files.walkFileTree(
-			Paths.get(_LIB),
+			Paths.get(_LIB_DIR_NAME),
 			new SimpleFileVisitor<Path>() {
 
 				@Override
@@ -178,25 +174,26 @@ public class LibraryReferenceTest {
 			});
 	}
 
-	private static void _initNetBeansProjectJars(
-			DocumentBuilder documentBuilder)
+	private static void _initNetBeansJars(DocumentBuilder documentBuilder)
 		throws Exception {
 
-		Document document = documentBuilder.parse(new File(_NBPROJECT_PATH));
+		Document document = documentBuilder.parse(
+			new File(_NETBEANS_FILE_NAME));
 
 		NodeList nodelist = document.getElementsByTagName("classpath");
 
 		for (int i = 0; i < nodelist.getLength(); i++) {
 			Node node = nodelist.item(i);
 
-			_nbProjectJars.add(node.getTextContent());
+			_netBeansJars.add(node.getTextContent());
 		}
 	}
 
 	private static void _initVersionsJars(DocumentBuilder documentBuilder)
 		throws Exception {
 
-		Document document = documentBuilder.parse(new File(_VERSIONS_PATH));
+		Document document = documentBuilder.parse(
+			new File(_VERSIONS_FILE_NAME));
 
 		NodeList nodelist = document.getElementsByTagName("file-name");
 
@@ -207,18 +204,19 @@ public class LibraryReferenceTest {
 		}
 	}
 
-	private static final String _CLASSPATH_PATH = ".classpath";
+	private static final String _ECLIPSE_FILE_NAME = ".classpath";
 
-	private static final String _LIB = "lib";
+	private static final String _LIB_DIR_NAME = "lib";
 
-	private static final String _NBPROJECT_PATH = "nbproject/project.xml";
+	private static final String _NETBEANS_FILE_NAME = "nbproject/project.xml";
 
-	private static final String _VERSIONS_PATH = _LIB + "/versions.xml";
+	private static final String _VERSIONS_FILE_NAME =
+		_LIB_DIR_NAME + "/versions.xml";
 
-	private static final Set<String> _classpathJars = new HashSet<>();
+	private static final Set<String> _eclipseJars = new HashSet<>();
 	private static final Set<String> _excludeJars = new HashSet<>();
 	private static final Set<String> _libJars = new HashSet<>();
-	private static final Set<String> _nbProjectJars = new HashSet<>();
+	private static final Set<String> _netBeansJars = new HashSet<>();
 	private static final Set<String> _versionsJars = new HashSet<>();
 
 }
