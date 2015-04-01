@@ -93,6 +93,32 @@ public class LibraryReferenceTest {
 		testNonexistentJarReferences(_versionsJars, _VERSIONS_PATH);
 	}
 
+	protected void testMissingJarReferences(
+		Set<String> searchInJars, String sourcePath) {
+
+		for (String searchForJar : _libJars) {
+			if (sourcePath.equals(_VERSIONS_PATH) &&
+				_excludeJars.contains(searchForJar)) {
+
+				continue;
+			}
+
+			Assert.assertTrue(
+				sourcePath + " is missing the reference to " + searchForJar,
+				searchInJars.contains(searchForJar));
+		}
+	}
+
+	protected void testNonexistentJarReferences(
+		Set<String> searchForJars, String sourcePath) {
+
+		for (String searchForJar : searchForJars) {
+			Assert.assertTrue(
+				sourcePath + " is referencing a non-exist jar " + searchForJar,
+				_libJars.contains(searchForJar));
+		}
+	}
+
 	private static void _initEclipseProjectJars(DocumentBuilder documentBuilder)
 		throws Exception {
 
@@ -178,32 +204,6 @@ public class LibraryReferenceTest {
 			Node node = nodelist.item(i);
 
 			_versionsJars.add(node.getTextContent());
-		}
-	}
-
-	protected void testMissingJarReferences(
-		Set<String> searchInJars, String sourcePath) {
-
-		for (String searchForJar : _libJars) {
-			if (sourcePath.equals(_VERSIONS_PATH) &&
-				_excludeJars.contains(searchForJar)) {
-
-				continue;
-			}
-
-			Assert.assertTrue(
-				sourcePath + " is missing the reference to " + searchForJar,
-				searchInJars.contains(searchForJar));
-		}
-	}
-
-	protected void testNonexistentJarReferences(
-		Set<String> searchForJars, String sourcePath) {
-
-		for (String searchForJar : searchForJars) {
-			Assert.assertTrue(
-				sourcePath + " is referencing a non-exist jar " + searchForJar,
-				_libJars.contains(searchForJar));
 		}
 	}
 
