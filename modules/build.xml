@@ -3,6 +3,7 @@
 
 <project>
 	<path id="plugins.includes.path">
+		<dirset dir="addons/portlet-configuration-icons" includes="*" />
 		<dirset dir="apps/amazon-rankings" includes="*" />
 		<dirset dir="apps/asset" includes="*" />
 		<dirset dir="apps/blogs" includes="*" />
@@ -42,7 +43,6 @@
 		<dirset dir="core" includes="*" />
 		<dirset dir="frontend" includes="*" />
 		<dirset dir="portal" excludes="portal-taglib-aui-form-extension-sample" includes="*" />
-		<dirset dir="portal-addons/portlet-configuration-icons" includes="*" />
 		<dirset dir="util" includes="pmd,portal-tools,sass-compiler" />
 	</path>
 
