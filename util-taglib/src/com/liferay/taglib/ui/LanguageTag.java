@@ -152,13 +152,12 @@ public class LanguageTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
+			"liferay-ui:language:displayCurrentLocale",
+			String.valueOf(_displayCurrentLocale));
+		request.setAttribute(
 			"liferay-ui:language:displayStyle", getDisplayStyle());
 		request.setAttribute(
 			"liferay-ui:language:displayStyleGroupId", _ddmTemplateGroupId);
-
-		request.setAttribute(
-			"liferay-ui:language:displayCurrentLocale",
-			String.valueOf(_displayCurrentLocale));
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -176,26 +175,26 @@ public class LanguageTag extends IncludeTag {
 
 		request.setAttribute("liferay-ui:language:formAction", formAction);
 		request.setAttribute("liferay-ui:language:formName", _formName);
-		request.setAttribute("liferay-ui:language:languageId", _languageId);
-
-		Locale[] locales = null;
-
-		if (ArrayUtil.isEmpty(_languageIds)) {
-			locales = LanguageUtil.getAvailableLocales(
-				themeDisplay.getSiteGroupId());
-		}
-		else {
-			locales = LocaleUtil.fromLanguageIds(_languageIds);
-		}
-
-		request.setAttribute("liferay-ui:language:locales", locales);
-		request.setAttribute("liferay-ui:language:name", _name);
-
 		request.setAttribute(
 			"liferay-ui:language:languageEntries",
 			getLanguageEntries(
-				locales, themeDisplay.getLocale(), _displayCurrentLocale,
+				getLocales(), themeDisplay.getLocale(), _displayCurrentLocale,
 				formAction, _name));
+		request.setAttribute("liferay-ui:language:languageId", _languageId);
+		request.setAttribute("liferay-ui:language:locales", getLocales());
+		request.setAttribute("liferay-ui:language:name", _name);
+	}
+
+	protected Locale[] getLocales() {
+		if (ArrayUtil.isNotEmpty(_languageIds)) {
+			return LocaleUtil.fromLanguageIds(_languageIds);
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+	
+		return LanguageUtil.getAvailableLocales(
+			themeDisplay.getSiteGroupId());
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/language/page.jsp";
