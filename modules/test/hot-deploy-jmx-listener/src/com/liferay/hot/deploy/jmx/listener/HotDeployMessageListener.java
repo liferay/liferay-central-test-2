@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -49,10 +50,10 @@ public class HotDeployMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) {
-		String command = message.getString("command");
+		String command = GetterUtil.getString(message.getString("command"));
 		String servletContextName = message.getString("servletContextName");
 
-		if ("deploy".equals(command)) {
+		if (command.equals("deploy")) {
 			if (_pluginStatisticsManager.registerLegacyPlugin(
 					servletContextName)) {
 
@@ -64,7 +65,7 @@ public class HotDeployMessageListener extends BaseMessageListener {
 				_log.warn("Duplicated deployment of " + servletContextName);
 			}
 		}
-		else if ("undeploy".equals(command)) {
+		else if (command.equals("undeploy")) {
 			if (_pluginStatisticsManager.unregisterLegacyPlugin(
 					servletContextName)) {
 
