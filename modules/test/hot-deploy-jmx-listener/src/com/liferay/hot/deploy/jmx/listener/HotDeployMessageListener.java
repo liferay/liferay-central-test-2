@@ -58,11 +58,13 @@ public class HotDeployMessageListener extends BaseMessageListener {
 					servletContextName)) {
 
 				if (_log.isInfoEnabled()) {
-					_log.info(servletContextName + " was deployed");
+					_log.info("Deployed " + servletContextName);
 				}
 			}
 			else if (_log.isWarnEnabled()) {
-				_log.warn("Duplicated deployment of " + servletContextName);
+				_log.warn(
+					"Not deploying " + servletContextName +
+						" because it is already deployed");
 			}
 		}
 		else if (command.equals("undeploy")) {
@@ -70,13 +72,13 @@ public class HotDeployMessageListener extends BaseMessageListener {
 					servletContextName)) {
 
 				if (_log.isInfoEnabled()) {
-					_log.info(servletContextName + " was undeployed");
+					_log.info("Undeployed " + servletContextName);
 				}
 			}
 			else if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to undeploy " + servletContextName +
-						", as it was not deployed");
+					"Not undeploying " + servletContextName +
+						" because it was not deployed");
 			}
 		}
 		else if (_log.isWarnEnabled()) {
