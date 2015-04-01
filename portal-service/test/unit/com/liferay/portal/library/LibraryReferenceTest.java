@@ -44,7 +44,7 @@ import org.w3c.dom.NodeList;
  * @author Matthew Tambara
  * @author Shuyang Zhou
  */
-public class ReferenceTest {
+public class LibraryReferenceTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
