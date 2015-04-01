@@ -447,9 +447,8 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	@Deprecated
 	@Override
 	public MissingReferences validateStagingRequest(
-			long userId, long stagingRequestId, boolean privateLayout,
-			Map<String, String[]> parameterMap)
-		throws PortalException {
+		long userId, long stagingRequestId, boolean privateLayout,
+		Map<String, String[]> parameterMap) {
 
 		return new MissingReferences();
 	}

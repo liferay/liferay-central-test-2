@@ -65,9 +65,7 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 	}
 
 	@Override
-	public BackgroundTaskResult execute(BackgroundTask backgroundTask)
-		throws PortalException {
-
+	public BackgroundTaskResult execute(BackgroundTask backgroundTask) {
 		ExportImportConfiguration exportImportConfiguration =
 			getExportImportConfiguration(backgroundTask);
 
