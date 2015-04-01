@@ -95,13 +95,15 @@ public class LanguageTag extends IncludeTag {
 	}
 
 	protected List<LanguageEntry> getLanguageEntries(
-		Locale[] locales, Locale currentLocale, boolean displayCurrentLocale,
-		String formAction, String parameterName) {
+		Locale[] locales, boolean displayCurrentLocale, String formAction,
+		String parameterName) {
 
-		Map<String, Integer> langCounts = new HashMap<>();
+		List<LanguageEntry> languageEntries = new ArrayList<>();
+
+		Map<String, Integer> counts = new HashMap<>();
 
 		for (Locale locale : locales) {
-			Integer count = langCounts.get(locale.getLanguage());
+			Integer count = counts.get(locale.getLanguage());
 
 			if (count == null) {
 				count = new Integer(1);
@@ -110,25 +112,26 @@ public class LanguageTag extends IncludeTag {
 				count = new Integer(count.intValue() + 1);
 			}
 
-			langCounts.put(locale.getLanguage(), count);
+			counts.put(locale.getLanguage(), count);
 		}
 
 		Set<String> duplicateLanguages = new HashSet<>();
 
 		for (Locale locale : locales) {
-			Integer count = langCounts.get(locale.getLanguage());
+			Integer count = counts.get(locale.getLanguage());
 
 			if (count.intValue() != 1) {
 				duplicateLanguages.add(locale.getLanguage());
 			}
 		}
 
-		List<LanguageEntry> languageEntries = new ArrayList<>();
-
 		for (Locale locale : locales) {
 			String url = null;
 
-			if (!LocaleUtil.equals(locale, currentLocale)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			if (!LocaleUtil.equals(locale, themeDisplay.getLocale())) {
 				url = HttpUtil.addParameter(
 					formAction, parameterName, LocaleUtil.toLanguageId(locale));
 			}
@@ -138,7 +141,7 @@ public class LanguageTag extends IncludeTag {
 
 			languageEntries.add(
 				new LanguageEntry(
-					duplicateLanguages, currentLocale, locale, url));
+					duplicateLanguages, themeDisplay.getLocale(), locale, url));
 		}
 
 		return languageEntries;
@@ -158,31 +161,35 @@ public class LanguageTag extends IncludeTag {
 			"liferay-ui:language:displayStyle", getDisplayStyle());
 		request.setAttribute(
 			"liferay-ui:language:displayStyleGroupId", _ddmTemplateGroupId);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String formAction = _formAction;
-
-		if (Validator.isNull(formAction)) {
-			formAction =
-				themeDisplay.getPathMain() +
-					"/portal/update_language?p_l_id=" + themeDisplay.getPlid();
-
-			formAction = HttpUtil.setParameter(
-				formAction, "redirect", PortalUtil.getCurrentURL(request));
-		}
-
-		request.setAttribute("liferay-ui:language:formAction", formAction);
+		request.setAttribute("liferay-ui:language:formAction", getFormAction());
 		request.setAttribute("liferay-ui:language:formName", _formName);
 		request.setAttribute(
 			"liferay-ui:language:languageEntries",
 			getLanguageEntries(
-				getLocales(), themeDisplay.getLocale(), _displayCurrentLocale,
-				formAction, _name));
+				getLocales(), _displayCurrentLocale, getFormAction(), _name));
 		request.setAttribute("liferay-ui:language:languageId", _languageId);
 		request.setAttribute("liferay-ui:language:locales", getLocales());
 		request.setAttribute("liferay-ui:language:name", _name);
+	}
+
+	protected String getFormAction() {
+		String formAction = _formAction;
+
+		if (Validator.isNotNull(formAction)) {
+			return formAction;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		formAction =
+			themeDisplay.getPathMain() +
+				"/portal/update_language?p_l_id=" + themeDisplay.getPlid();
+
+		formAction = HttpUtil.setParameter(
+			formAction, "redirect", PortalUtil.getCurrentURL(request));
+		
+		return formAction;
 	}
 
 	protected Locale[] getLocales() {
