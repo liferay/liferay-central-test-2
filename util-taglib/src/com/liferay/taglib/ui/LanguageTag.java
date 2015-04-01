@@ -94,6 +94,25 @@ public class LanguageTag extends IncludeTag {
 		return null;
 	}
 
+	protected String getFormAction() {
+		String formAction = _formAction;
+
+		if (Validator.isNotNull(formAction)) {
+			return formAction;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		formAction =
+			themeDisplay.getPathMain() +
+				"/portal/update_language?p_l_id=" + themeDisplay.getPlid();
+		formAction = HttpUtil.setParameter(
+			formAction, "redirect", PortalUtil.getCurrentURL(request));
+
+		return formAction;
+	}
+
 	protected List<LanguageEntry> getLanguageEntries(
 		Locale[] locales, boolean displayCurrentLocale, String formAction,
 		String parameterName) {
@@ -147,6 +166,17 @@ public class LanguageTag extends IncludeTag {
 		return languageEntries;
 	}
 
+	protected Locale[] getLocales() {
+		if (ArrayUtil.isNotEmpty(_languageIds)) {
+			return LocaleUtil.fromLanguageIds(_languageIds);
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return LanguageUtil.getAvailableLocales(themeDisplay.getSiteGroupId());
+	}
+
 	@Override
 	protected String getPage() {
 		return _PAGE;
@@ -170,38 +200,6 @@ public class LanguageTag extends IncludeTag {
 		request.setAttribute("liferay-ui:language:languageId", _languageId);
 		request.setAttribute("liferay-ui:language:locales", getLocales());
 		request.setAttribute("liferay-ui:language:name", _name);
-	}
-
-	protected String getFormAction() {
-		String formAction = _formAction;
-
-		if (Validator.isNotNull(formAction)) {
-			return formAction;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		formAction =
-			themeDisplay.getPathMain() +
-				"/portal/update_language?p_l_id=" + themeDisplay.getPlid();
-
-		formAction = HttpUtil.setParameter(
-			formAction, "redirect", PortalUtil.getCurrentURL(request));
-		
-		return formAction;
-	}
-
-	protected Locale[] getLocales() {
-		if (ArrayUtil.isNotEmpty(_languageIds)) {
-			return LocaleUtil.fromLanguageIds(_languageIds);
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-	
-		return LanguageUtil.getAvailableLocales(
-			themeDisplay.getSiteGroupId());
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/language/page.jsp";
