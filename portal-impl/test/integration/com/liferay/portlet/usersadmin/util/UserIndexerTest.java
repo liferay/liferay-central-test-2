@@ -133,14 +133,12 @@ public class UserIndexerTest {
 	public void testLuceneQueryParserUnfriendlyCharacters() throws Exception {
 		Assume.assumeTrue(isAPIWithoutQueryParserImplementedForSearchEngine());
 
-		User user = addUser();
+		User user1 = addUser();
+		User user2 = assertSearchOneUser("@");
 
-		User user1 = assertSearchOneUser("@");
-
-		Assert.assertEquals(user.getEmailAddress(), user1.getEmailAddress());
+		Assert.assertEquals(user1.getEmailAddress(), user2.getEmailAddress());
 
 		assertHits("@" + RandomTestUtil.randomString(), 0);
-
 		assertHits("!", 0);
 		assertHits("!" + RandomTestUtil.randomString(), 0);
 	}
@@ -177,9 +175,7 @@ public class UserIndexerTest {
 
 		addUserNameFields(firstName, lastName, middleName);
 
-		User user;
-
-		user = assertSearchOneUser("Fir");
+		User user = assertSearchOneUser("Fir");
 
 		Assert.assertEquals("First", user.getFirstName());
 
@@ -372,7 +368,7 @@ public class UserIndexerTest {
 	protected User assertSearchOneUser(String keywords) throws Exception {
 		Hits hits = assertHits(keywords, 1);
 
-		return _getUser(hits);
+		return getUser(hits);
 	}
 
 	protected User assertSearchOneUser(String field, String value)
@@ -380,23 +376,23 @@ public class UserIndexerTest {
 
 		Hits hits = assertHits(field, value, 1);
 
-		return _getUser(hits);
+		return getUser(hits);
 	}
 
 	protected boolean isAPIWithoutQueryParserImplementedForSearchEngine() {
-		return !_isSearchEngineVendor("Lucene", "Solr");
+		return !isSearchEngineVendor("Lucene", "Solr");
 	}
 
 	protected boolean isCaseInsensitiveNameFieldsImplementedForSearchEngine() {
-		return !_isSearchEngineVendor("Lucene");
+		return !isSearchEngineVendor("Lucene");
 	}
 
 	protected boolean isEmptyQueryImplementedForSearchEngine() {
-		return !_isSearchEngineVendor("Solr");
+		return !isSearchEngineVendor("Solr");
 	}
 
 	protected boolean isTwoEndedSubstringSearchImplementedForSearchEngine() {
-		return !_isSearchEngineVendor("Solr");
+		return !isSearchEngineVendor("Solr");
 	}
 
 	protected void testNameFields(
@@ -405,9 +401,7 @@ public class UserIndexerTest {
 
 		addUserNameFields(firstName, lastName, middleName);
 
-		User user;
-
-		user = assertSearchOneUser("firstName", firstName);
+		User user = assertSearchOneUser("firstName", firstName);
 
 		Assert.assertEquals(firstName, user.getFirstName());
 
@@ -420,13 +414,13 @@ public class UserIndexerTest {
 		Assert.assertEquals(middleName, user.getMiddleName());
 	}
 
-	private User _getUser(Hits hits) throws PortalException {
+	protected User getUser(Hits hits) throws PortalException {
 		long userId = UserIndexer.getUserId(hits.doc(0));
 
 		return UserLocalServiceUtil.getUser(userId);
 	}
 
-	private boolean _isSearchEngineVendor(String... vendors) {
+	protected boolean isSearchEngineVendor(String... vendors) {
 		SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
 			SearchEngineUtil.getDefaultSearchEngineId());
 
