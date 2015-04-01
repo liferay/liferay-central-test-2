@@ -44,14 +44,16 @@ public abstract class BasePortalToolTask extends JavaExec {
 			"The " + getToolName() + " tool to be used in this project.");
 		configuration.setVisible(false);
 
-		GradleUtil.executeIfEmpty(configuration, new Action<Configuration>() {
+		GradleUtil.executeIfEmpty(
+			configuration,
+			new Action<Configuration>() {
 
-			@Override
-			public void execute(Configuration configuration) {
-				addDependencies();
-			}
+				@Override
+				public void execute(Configuration configuration) {
+					addDependencies();
+				}
 
-		});
+			});
 	}
 
 	@Override
@@ -89,12 +91,12 @@ public abstract class BasePortalToolTask extends JavaExec {
 	public abstract String getMain();
 
 	@Override
-	public JavaExec setArgs(Iterable<?> applicationArgs) {
+	public JavaExec setArgs(Iterable<?> args) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public JavaExec setClasspath(FileCollection classpath) {
+	public JavaExec setClasspath(FileCollection fileCollection) {
 		throw new UnsupportedOperationException();
 	}
 
