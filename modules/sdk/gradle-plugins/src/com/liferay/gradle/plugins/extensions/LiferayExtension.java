@@ -34,8 +34,6 @@ public class LiferayExtension {
 		_pluginPackageProperties = _loadProperties(
 			"docroot/WEB-INF/liferay-plugin-package.properties");
 
-		_portalVersion = "7.0.0-SNAPSHOT";
-
 		File pluginSrcDir = project.file("docroot/WEB-INF/src");
 
 		if (!pluginSrcDir.exists()) {
@@ -111,7 +109,7 @@ public class LiferayExtension {
 	private final Properties _pluginPackageProperties;
 	private final File _pluginSrcDir;
 	private final String _pluginType;
-	private String _portalVersion;
+	private String _portalVersion = "7.0.0-SNAPSHOT";
 	private final Project _project;
 	private File _tmpDir;
 
