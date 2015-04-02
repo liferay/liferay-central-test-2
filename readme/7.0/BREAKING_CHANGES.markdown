@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `9447c53`.*
+*This document has been reviewed through commit `9d512fe`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1233,7 +1233,7 @@ This change simplifies using asset previews.
 
 ### Replaced the Language Portlet's Display Styles with ADTs
 - **Date:** 2015-Mar-30
-- **JIRA Ticket:** LPS-53577
+- **JIRA Ticket:** LPS-54419
 
 #### What changed?
 
