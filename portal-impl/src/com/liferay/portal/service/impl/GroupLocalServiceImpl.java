@@ -3929,9 +3929,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				Set<Group> rolePermissionsGroups = new HashSet<>();
 
 				if (resourceBlockLocalService.isSupported(resourceName)) {
+					List<ResourceTypePermission> resourceTypePermissions =
+						resourceTypePermissionPersistence.findByRoleId(
+							resourceRoleId);
+
 					for (ResourceTypePermission resourceTypePermission :
-							resourceTypePermissionPersistence.findByRoleId(
-								resourceRoleId)) {
+							resourceTypePermissions) {
 
 						if ((resourceTypePermission.getCompanyId() ==
 								companyId) &&
@@ -3949,9 +3952,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					}
 				}
 				else {
+					List<ResourcePermission> resourcePermissions =
+						resourcePermissionPersistence.findByC_N_S(
+							companyId, resourceName, resourceScope);
+
 					for (ResourcePermission resourcePermission :
-							resourcePermissionPersistence.findByC_N_S(
-								companyId, resourceName, resourceScope)) {
+							resourcePermissions) {
 
 						if ((resourcePermission.getRoleId() ==
 								resourceRoleId) &&
