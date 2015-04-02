@@ -474,6 +474,17 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				public void addCriteria(DynamicQuery dynamicQuery) {
 					addCriteriaMethod.addCriteria(dynamicQuery);
 
+					Disjunction disjunction =
+						RestrictionsFactoryUtil.disjunction();
+
+					Property classPKProperty = PropertyFactoryUtil.forName(
+						"classPK");
+
+					disjunction.add(classPKProperty.eq(0L));
+
+					DynamicQuery ddmStructureDynamicQuery =
+						DDMStructureLocalServiceUtil.dynamicQuery();
+
 					Property classNameIdProperty = PropertyFactoryUtil.forName(
 						"classNameId");
 
@@ -483,25 +494,15 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 					dynamicQuery.add(
 						classNameIdProperty.eq(ddmStructureClassNameId));
 
-					DynamicQuery ddmStructureDynamicQuery =
-						DDMStructureLocalServiceUtil.dynamicQuery();
-
-					ddmStructureDynamicQuery.setProjection(
-						ProjectionFactoryUtil.property("structureId"));
-
 					long articleClassNameId = PortalUtil.getClassNameId(
 						JournalArticle.class);
 
 					ddmStructureDynamicQuery.add(
 						classNameIdProperty.eq(articleClassNameId));
 
-					Disjunction disjunction =
-						RestrictionsFactoryUtil.disjunction();
+					ddmStructureDynamicQuery.setProjection(
+						ProjectionFactoryUtil.property("structureId"));
 
-					Property classPKProperty = PropertyFactoryUtil.forName(
-						"classPK");
-
-					disjunction.add(classPKProperty.eq(0L));
 					disjunction.add(
 						classPKProperty.in(ddmStructureDynamicQuery));
 
