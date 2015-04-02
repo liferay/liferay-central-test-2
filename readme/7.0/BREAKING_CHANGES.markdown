@@ -1274,15 +1274,12 @@ parameter passed to the method.
  
 #### Who is affected?
 
-This affects developers who have direct calls to:
+This affects developers who have direct calls to the following methods:
 
-- The `addTag` method in `AssetTagService` or `AssetTagLocalService`
-- The `addCategory` method in `AssetCategoryService` or
-`AssetCategoryLocalService`
-- The `addVocabulary` method in `AssetVocabularyService` or
-`AssetVocabularyLocalService`
-- The `updateFolder` method in `JournalFolderService` or
-`JournalFolderLocalService`
+- `addTag` in `AssetTagService` or `AssetTagLocalService`
+- `addCategory` in `AssetCategoryService` or `AssetCategoryLocalService`
+- `addVocabulary` in `AssetVocabularyService` or `AssetVocabularyLocalService`
+- `updateFolder` in `JournalFolderService` or `JournalFolderLocalService`
 
 #### How should I update my code?
 
@@ -1327,9 +1324,9 @@ This affects developers who have written code that uses these tags.
 
 #### How should I update my code?
 
-The tag `liferay-ui:icon` can replace the call to the previous tags. 
-All the previous tags have been converted into Java classes that implement
-the methods that the `icon` tag requires.
+The tag `liferay-ui:icon` can replace the call to the previous tags. All the
+previous tags have been converted into Java classes that implement the methods
+that the `icon` tag requires.
 
 See the modules `portlet-configuration-icon-*` in the `modules/portal-addons`
 folder.
