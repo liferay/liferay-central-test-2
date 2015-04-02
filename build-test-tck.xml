@@ -39,7 +39,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="clear-tck-dependencies">
+	<target name="clean-up-tck-dependencies">
 		<delete file="${liferay.home}/osgi/modules/com.liferay.portlet.tck.bridge.jar" />
 
 		<delete includeemptydirs="true">
@@ -72,7 +72,7 @@
 		</if>
 
 		<chmod
-			dir="tools/tck/bin/"
+			dir="tools/tck/bin"
 			includes="tsant*"
 			perm="744"
 		/>
@@ -299,7 +299,7 @@ servletContextNames=${tck.servlet.context.names}</echo>
 			</sequential>
 		</for>
 
-		<antcall target="clear-tck-dependencies" />
+		<antcall target="clean-up-tck-dependencies" />
 	</target>
 
 	<target name="test-class-group">
