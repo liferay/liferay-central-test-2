@@ -58,7 +58,7 @@ public class ParallelDestination extends BaseAsyncDestination {
 	protected void dispatch(
 		Set<MessageListener> messageListeners, final Message message) {
 
-		final Thread dispatchThread = Thread.currentThread();
+		final Thread currentThread = Thread.currentThread();
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
@@ -76,7 +76,7 @@ public class ParallelDestination extends BaseAsyncDestination {
 						_log.error("Unable to process message " + message, mle);
 					}
 					finally {
-						if (Thread.currentThread() != dispatchThread) {
+						if (Thread.currentThread() != currentThread) {
 							ThreadLocalCacheManager.clearAll(Lifecycle.REQUEST);
 
 							CentralizedThreadLocal.
