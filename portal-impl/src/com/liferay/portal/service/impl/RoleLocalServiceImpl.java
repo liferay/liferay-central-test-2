@@ -1029,7 +1029,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				return value;
 			}
 
-			value = PermissionCacheUtil.getHasUserRole(userId, role);
+			value = PermissionCacheUtil.getUserRole(userId, role);
 
 			if (value == null) {
 				int count = roleFinder.countByR_U(role.getRoleId(), userId);
@@ -1041,7 +1041,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 					value = false;
 				}
 
-				PermissionCacheUtil.putHasUserRole(userId, role, value);
+				PermissionCacheUtil.putUserRole(userId, role, value);
 			}
 
 			threadLocalCache.put(key, value);
