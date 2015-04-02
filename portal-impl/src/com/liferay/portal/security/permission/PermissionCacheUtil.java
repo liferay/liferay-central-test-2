@@ -186,8 +186,8 @@ public class PermissionCacheUtil {
 		_userPermissionCheckerBagPortalCache = MultiVMPoolUtil.getCache(
 			USER_PERMISSION_CHECKER_BAG_CACHE_NAME,
 			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
-	private static final PortalCache<String, Boolean>
-		_userRolePortalCache = MultiVMPoolUtil.getCache(
+	private static final PortalCache<String, Boolean> _userRolePortalCache =
+		MultiVMPoolUtil.getCache(
 			USER_ROLE_CACHE_NAME,
 			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
