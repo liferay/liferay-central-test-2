@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `9d512fe`.*
+*This document has been reviewed through commit `82c4a36`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1262,36 +1262,40 @@ code.
 
 ---------------------------------------
 
-### Added Required Parameter `groupId` for adding Tags, Categories or Vocabularies
+### Added Required Parameter `groupId` for Adding Tags, Categories, and Vocabularies
 - **Date:** 2015-Mar-31
 - **JIRA Ticket:** LPS-54570
 
 #### What changed?
 
-The API for adding tags, categories or vocabularies requires now passing the
- groupId parameter. Previously, it had to be included in the ServiceContext
- parameter passed to the method.
+The API for adding tags, categories, and vocabularies now requires passing the
+`groupId` parameter. Previously, it had to be included in the `ServiceContext`
+parameter passed to the method.
  
-
 #### Who is affected?
 
 This affects developers who have direct calls to:
- - `AssetTagService` or `AssetTagLocalService`: method addTag
- - `AssetCategoryService` or `AssetCategoryLocalService`: method addCategory
- - `AssetVocabularyService` or `AssetVocabularyLocalService`: method addVocabulary
- - `JournalFolderService` or `JournalFolderLocalService`: method updateFolder
+
+- The `addTag` method in `AssetTagService` or `AssetTagLocalService`
+- The `addCategory` method in `AssetCategoryService` or
+`AssetCategoryLocalService`
+- The `addVocabulary` method in `AssetVocabularyService` or
+`AssetVocabularyLocalService`
+- The `updateFolder` method in `JournalFolderService` or
+`JournalFolderLocalService`
 
 #### How should I update my code?
 
-You should add the `groupId` parameter to your calls. This parameter
-represents the site in which you are creating the tag, category or vocabulary.
-It can be obtained from the themeDisplay (themeDisplay.getScopeGroupId()) or 
-also from the ServiceContext (serviceContext.getScopeGroupId())
+You should add the `groupId` parameter to your calls. This parameter represents
+the site in which you are creating the tag, category, or vocabulary. It can be
+obtained from the `themeDisplay` or `serviceContext` using
+`themeDisplay.getScopeGroupId()` or `serviceContext.getScopeGroupId()`,
+respectively.
 
 #### Why was this change made?
 
-This change was made in order improve the API. The groupId parameter was always
-required but it was hidden by the ServiceContext object.
+This change was made in order improve the API. The `groupId` parameter was
+always required, but it was hidden by the `ServiceContext` object.
 
 ---------------------------------------
 
