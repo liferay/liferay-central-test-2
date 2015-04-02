@@ -1,1 +1,30 @@
-{"defaultLanguageId":"en_US","availableLanguageIds":["en_US"],"fields":[{"localizable":true,"label":{"en_US":"Content"},"type":"ddm-text-html","fieldNamespace":"ddm","tip":{"en_US":""},"predefinedValue":{"en_US":""},"indexType":"keyword","dataType":"html","readOnly":false,"showLabel":true,"name":"content","repeatable":false,"required":false,"multiple":false}]}
+{
+  "availableLanguageIds": [
+    "en_US"
+  ],
+  "defaultLanguageId": "en_US",
+  "fields": [
+    {
+      "dataType": "html",
+      "fieldNamespace": "ddm",
+      "indexType": "keyword",
+      "label": {
+        "en_US": "Content"
+      },
+      "localizable": true,
+      "multiple": false,
+      "name": "content",
+      "predefinedValue": {
+        "en_US": ""
+      },
+      "readOnly": false,
+      "repeatable": false,
+      "required": false,
+      "showLabel": true,
+      "tip": {
+        "en_US": ""
+      },
+      "type": "ddm-text-html"
+    }
+  ]
+}
