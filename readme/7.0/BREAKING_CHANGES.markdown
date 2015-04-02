@@ -20,7 +20,7 @@ feature or API will be dropped in an upcoming version.
 replaces an old API, in spite of the old API being kept in Liferay Portal for
 backwards compatibility.
 
-*This document has been reviewed through commit `82c4a36`.*
+*This document has been reviewed through commit `768b181`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -1299,34 +1299,45 @@ always required, but it was hidden by the `ServiceContext` object.
 
 ---------------------------------------
 
-### The taglibs portlet:icon-* have been removed
+### Removed the Tags `portlet:icon-*`
 - **Date:** 2015-Mar-31
 - **JIRA Ticket:** LPS-54620
 
 #### What changed?
 
-The following taglibs haven been removed: portlet:icon-close, 
-portlet:icon-configuration, portlet:icon-edit, portlet:icon-edit-defaults,
-portlet:icon-edit-guest, portlet:icon-export-import, portlet:icon-help,
-portlet:icon-maximize, portlet:icon-minimize, portlet:icon-portlet-css,
-portlet:icon-print, portlet:icon-refresh, portlet:icon-staging      
+The following tags have been removed:
+
+- `portlet:icon-close`
+- `portlet:icon-configuration`
+- `portlet:icon-edit`
+- `portlet:icon-edit-defaults`
+- `portlet:icon-edit-guest`
+- `portlet:icon-export-import`
+- `portlet:icon-help`
+- `portlet:icon-maximize`
+- `portlet:icon-minimize`
+- `portlet:icon-portlet-css`
+- `portlet:icon-print`
+- `portlet:icon-refresh`
+- `portlet:icon-staging`
 
 #### Who is affected?
 
-This affects developers who have written code that uses these taglibs.
+This affects developers who have written code that uses these tags.
 
 #### How should I update my code?
 
-The taglib liferay-ui:icon can replace the call to the previous taglibs. 
-All the previous taglibs have been converted into Java classes that implement
-the methods that the icon taglib needs.
+The tag `liferay-ui:icon` can replace the call to the previous tags. 
+All the previous tags have been converted into Java classes that implement
+the methods that the `icon` tag requires.
 
-See the modules portlet-configuration-icon-* in the portal-addons folder.
+See the modules `portlet-configuration-icon-*` in the `modules/portal-addons`
+folder.
 
 #### Why was this change made?
 
-These taglibs were used to generate the configuration icon of portlets and this
-functionaly will be managed from now with OSGI modules instead of taglibs since
-those provide more flexibility and can be included from any app.
+These tags were used to generate the configuration icon of portlets. This
+functionality will now be managed from OSGi modules instead of tags since OSGi
+modules provide more flexibility and can be included in any app.
 
 ---------------------------------------
