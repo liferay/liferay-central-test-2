@@ -119,11 +119,9 @@ public class PoshiRunnerGetterUtil {
 	public static Element getRootElementFromFilePath(String filePath)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
-
-		boolean isCDATA = false;
-
+		boolean cdata = false;
 		int lineNumber = 1;
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader bufferedReader = new BufferedReader(
 			new StringReader(FileUtil.read(filePath)));
@@ -133,12 +131,12 @@ public class PoshiRunnerGetterUtil {
 		while ((line = bufferedReader.readLine()) != null) {
 			Matcher matcher = _tagPattern.matcher(line);
 
-			if (line.contains("<![CDATA[") || isCDATA) {
+			if (line.contains("<![CDATA[") || cdata) {
 				if (line.contains("]]>")) {
-					isCDATA = false;
+					cdata = false;
 				}
 				else {
-					isCDATA = true;
+					cdata = true;
 				}
 
 				if (line.contains("<![CDATA[") && matcher.find()) {
