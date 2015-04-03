@@ -36,14 +36,14 @@ public final class SummaryLoggerHandler {
 			return;
 		}
 
-		LoggerElement statusLoggerElement = LoggerElement.getInstance();
+		LoggerElement statusLoggerElement = new LoggerElement();
 
 		statusLoggerElement.setName("span");
 		statusLoggerElement.setText(" --> FAILED");
 
 		_sentenceLoggerElement.addChildLoggerElement(statusLoggerElement);
 
-		LoggerElement errorLoggerElement = LoggerElement.getInstance();
+		LoggerElement errorLoggerElement = new LoggerElement();
 
 		String stackTrace = PoshiRunnerStackTraceUtil.getStackTrace(message);
 
@@ -64,7 +64,7 @@ public final class SummaryLoggerHandler {
 			return;
 		}
 
-		LoggerElement statusLoggerElement = LoggerElement.getInstance();
+		LoggerElement statusLoggerElement = new LoggerElement();
 
 		statusLoggerElement.setName("span");
 		statusLoggerElement.setText(" --> PASSED");
@@ -89,7 +89,7 @@ public final class SummaryLoggerHandler {
 
 		_startLogging(element);
 
-		_sentenceLoggerElement = LoggerElement.getInstance();
+		_sentenceLoggerElement = new LoggerElement();
 
 		_sentenceLoggerElement.setText(summary);
 
