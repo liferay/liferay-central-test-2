@@ -1208,7 +1208,7 @@
 			</execute>
 
 			<echo file="${user.home}/.android/avd/deviceName.avd/config.ini" append="true">
-	hw.keyboard=yes
+				hw.keyboard=yes
 			</echo>
 
 			<exec executable="/bin/bash" os="${os.unix}" spawn="true">
