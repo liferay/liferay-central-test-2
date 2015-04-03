@@ -20,7 +20,9 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Michael Hashimoto
@@ -31,7 +33,19 @@ public class LoggerElement {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"yyyyMMddHHmmssSSS");
 
-		_id = simpleDateFormat.format(new Date());
+		long time = System.currentTimeMillis();
+
+		while (true) {
+			String id = simpleDateFormat.format(new Date(time++));
+
+			if (!_usedIds.contains(id)) {
+				_usedIds.add(id);
+
+				_id = id;
+
+				break;
+			}
+		}
 	}
 
 	public LoggerElement(String id) {
@@ -141,6 +155,8 @@ public class LoggerElement {
 
 		return sb.toString();
 	}
+
+	private static final Set<String> _usedIds = new HashSet<>();
 
 	private final List<LoggerElement> _childLoggerElements = new ArrayList<>();
 	private String _className = "";
