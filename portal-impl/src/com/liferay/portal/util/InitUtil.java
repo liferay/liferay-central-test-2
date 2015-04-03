@@ -196,7 +196,7 @@ public class InitUtil {
 			}
 
 			ApplicationContext applicationContext = new ArrayApplicationContext(
-				PropsValues.SPRING_CONFIGS_INFRASTRUCTURE);
+				PropsValues.SPRING_INFRASTRUCTURE_CONFIGS);
 
 			if (initModuleFramework) {
 				ModuleFrameworkUtilAdapter.registerContext(applicationContext);

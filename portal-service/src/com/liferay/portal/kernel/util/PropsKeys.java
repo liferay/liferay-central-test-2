@@ -2429,8 +2429,6 @@ public interface PropsKeys {
 
 	public static final String SPRING_CONFIGS = "spring.configs";
 
-	public static final String SPRING_CONFIGS_INFRASTRUCTURE = "spring.configs.infrastructure";
-
 	public static final String SPRING_HIBERNATE_CONFIGURATION_PROXY_FACTORY_PRELOAD_CLASSLOADER_CLASSES = "spring.hibernate.configuration.proxy.factory.preload.classloader.classes";
 
 	public static final String SPRING_HIBERNATE_DATA_SOURCE = "spring.hibernate.data.source";
@@ -2440,6 +2438,8 @@ public interface PropsKeys {
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY = "spring.hibernate.session.factory";
 
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY_PRELOAD_CLASSLOADER_CLASSES = "spring.hibernate.session.factory.preload.classloader.classes";
+
+	public static final String SPRING_INFRASTRUCTURE_CONFIGS = "spring.infrastructure.configs";
 
 	public static final String SPRING_PORTLET_CONFIGS = "spring.portlet.configs";
 

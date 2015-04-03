@@ -245,7 +245,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 			ArrayApplicationContext applicationContext =
 				new ArrayApplicationContext(
-					PropsValues.SPRING_CONFIGS_INFRASTRUCTURE);
+					PropsValues.SPRING_INFRASTRUCTURE_CONFIGS);
 
 			servletContext.setAttribute(
 				PortalApplicationContext.PARENT_CONTEXT_KEY,
