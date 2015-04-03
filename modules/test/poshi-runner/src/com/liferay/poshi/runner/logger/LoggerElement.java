@@ -28,12 +28,6 @@ import java.util.List;
 public class LoggerElement {
 
 	public LoggerElement() {
-		try {
-			Thread.sleep(1);
-		}
-		catch (Exception e) {
-		}
-
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"yyyyMMddHHmmssSSS");
 
