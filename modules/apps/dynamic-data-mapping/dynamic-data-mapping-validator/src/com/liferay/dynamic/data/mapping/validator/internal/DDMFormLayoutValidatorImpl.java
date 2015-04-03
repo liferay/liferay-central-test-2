@@ -53,8 +53,7 @@ public class DDMFormLayoutValidatorImpl implements DDMFormLayoutValidator {
 
 		if (defaultLocale == null) {
 			throw new DDMFormLayoutValidationException(
-				"The default locale property was never set for DDM form " +
-					"layout");
+				"DDM form layout does not have a default locale");
 		}
 	}
 
@@ -77,8 +76,8 @@ public class DDMFormLayoutValidatorImpl implements DDMFormLayoutValidator {
 
 					if (ddmFormFieldNames.contains(ddmFormFieldName)) {
 						throw new DDMFormLayoutValidationException(
-							"The field name " + ddmFormFieldName +
-								" was defined more than once");
+							"Field name " + ddmFormFieldName +
+								" is defined more than once");
 					}
 
 					ddmFormFieldNames.add(ddmFormFieldName);
@@ -99,9 +98,8 @@ public class DDMFormLayoutValidatorImpl implements DDMFormLayoutValidator {
 
 			if (!defaultLocale.equals(title.getDefaultLocale())) {
 				throw new DDMFormLayoutValidationException(
-					"Invalid default locale set for page title. Page titles " +
-						"default locale should be equal to DDM Form Layout " +
-							"default locale");
+					"DDM form layout page title's default locale is not the " +
+						"same as the DDM form layout's default locale");
 			}
 		}
 	}
@@ -124,8 +122,8 @@ public class DDMFormLayoutValidatorImpl implements DDMFormLayoutValidator {
 
 					if ((columnSize <= 0) || (columnSize > _MAX_ROW_SIZE)) {
 						throw new DDMFormLayoutValidationException(
-							"Invalid column size. Column size must be " +
-								"positive and less than maximum row size (12)");
+							"Invalid column size, it must be positive and " +
+								"less than maximum row size of 12");
 					}
 
 					rowSize += ddmFormLayoutColumn.getSize();
@@ -133,8 +131,8 @@ public class DDMFormLayoutValidatorImpl implements DDMFormLayoutValidator {
 
 				if (rowSize != _MAX_ROW_SIZE) {
 					throw new DDMFormLayoutValidationException(
-						"Invalid row size. The sum of all columns of a row " +
-							"must be less than maximum row size (12)");
+						"Invalid row size, the sum of all column sizes of a " +
+							"row must be less than maximum row size of 12");
 				}
 			}
 		}
