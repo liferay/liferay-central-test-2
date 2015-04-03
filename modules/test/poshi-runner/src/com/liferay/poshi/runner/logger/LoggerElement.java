@@ -27,11 +27,8 @@ import java.util.List;
  */
 public class LoggerElement {
 
-	public LoggerElement() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-			"yyyyMMddHHmmssSSS");
-
-		_id = simpleDateFormat.format(new Date());
+	public static synchronized LoggerElement getInstance() {
+		return new LoggerElement();
 	}
 
 	public LoggerElement(String id) {
@@ -140,6 +137,13 @@ public class LoggerElement {
 		}
 
 		return sb.toString();
+	}
+
+	private LoggerElement() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+			"yyyyMMddHHmmssSSS");
+
+		_id = simpleDateFormat.format(new Date());
 	}
 
 	private final List<LoggerElement> _childLoggerElements = new ArrayList<>();
