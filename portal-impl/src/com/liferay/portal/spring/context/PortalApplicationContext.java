@@ -40,8 +40,9 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class PortalApplicationContext extends XmlWebApplicationContext {
 
-	public static final String PARENT_CONTEXT_KEY =
-		PortalApplicationContext.class.getName() + "PARENT";
+	public static final String PARENT_APPLICATION_CONTEXT =
+		PortalApplicationContext.class.getName() +
+			"#PARENT_APPLICATION_CONTEXT";
 
 	@Override
 	public ApplicationContext getParent() {
@@ -53,9 +54,10 @@ public class PortalApplicationContext extends XmlWebApplicationContext {
 		super.setServletContext(servletContext);
 
 		_parentApplicationContext =
-			(ApplicationContext)servletContext.getAttribute(PARENT_CONTEXT_KEY);
+			(ApplicationContext)servletContext.getAttribute(
+				PARENT_APPLICATION_CONTEXT);
 
-		this.setParent(_parentApplicationContext);
+		setParent(_parentApplicationContext);
 	}
 
 	@Override
