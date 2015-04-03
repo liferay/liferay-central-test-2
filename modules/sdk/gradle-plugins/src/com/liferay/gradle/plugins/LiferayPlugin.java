@@ -36,11 +36,11 @@ public class LiferayPlugin implements Plugin<Project> {
 		else {
 			String projectName = project.getName();
 
-			if (!projectName.endsWith("-shared")) {
-				plugin = new LiferayWebAppPlugin();
+			if (projectName.endsWith("-shared")) {
+				plugin = new LiferayJavaPlugin();
 			}
 			else {
-				plugin = new LiferayJavaPlugin();
+				plugin = new LiferayWebAppPlugin();
 			}
 		}
 
