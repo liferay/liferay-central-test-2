@@ -30,7 +30,7 @@ import org.dom4j.io.SAXReader;
  * @author Raymond Augé
  */
 @DoPrivileged
-public class ModelHintsImpl extends BaseModelHintsImpl {
+public class DefaultModelHintsImpl extends BaseModelHintsImpl {
 
 	@Override
 	public ModelHintsCallback getModelHintsCallback() {

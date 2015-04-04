@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.microsofttranslator.MicrosoftTranslatorFactoryImpl;
-import com.liferay.portal.model.ModelHintsImpl;
+import com.liferay.portal.model.DefaultModelHintsImpl;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.security.auth.DefaultFullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGenerator;
@@ -137,7 +137,7 @@ public class ToolDependencies {
 
 		ModelHintsUtil modelHintsUtil = new ModelHintsUtil();
 
-		ModelHintsImpl modelHintsImpl = new ModelHintsImpl();
+		DefaultModelHintsImpl modelHintsImpl = new DefaultModelHintsImpl();
 
 		modelHintsImpl.afterPropertiesSet();
 
