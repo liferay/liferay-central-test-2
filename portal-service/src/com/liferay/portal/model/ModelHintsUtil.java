@@ -35,8 +35,8 @@ public class ModelHintsUtil {
 		return getModelHints().getDefaultHints(model);
 	}
 
-	public static Object getFieldsEl(String model, String field) {
-		return getModelHints().getFieldsEl(model, field);
+	public static Object getFieldsElement(String model, String field) {
+		return getModelHints().getFieldsElement(model, field);
 	}
 
 	public static Map<String, String> getHints(String model, String field) {

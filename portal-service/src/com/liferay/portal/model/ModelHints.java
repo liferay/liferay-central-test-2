@@ -30,7 +30,7 @@ public interface ModelHints {
 
 	public Map<String, String> getDefaultHints(String model);
 
-	public Object getFieldsEl(String model, String field);
+	public Object getFieldsElement(String model, String field);
 
 	public Map<String, String> getHints(String model, String field);
 

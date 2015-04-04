@@ -102,7 +102,7 @@ public abstract class BaseModelHintsImpl implements ModelHints {
 	}
 
 	@Override
-	public Object getFieldsEl(String model, String field) {
+	public Object getFieldsElement(String model, String field) {
 		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
 			model);
 
