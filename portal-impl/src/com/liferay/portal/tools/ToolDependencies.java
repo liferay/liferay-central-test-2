@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.microsofttranslator.MicrosoftTranslatorFactoryImpl;
 import com.liferay.portal.model.DefaultModelHintsImpl;
@@ -125,23 +124,13 @@ public class ToolDependencies {
 
 		saxReaderUtil.setSecureSAXReader(secureSAXReader);
 
-		SAXReader saxReader = new SAXReaderImpl();
-
-		saxReaderUtil.setUnsecureSAXReader(saxReader);
+		saxReaderUtil.setUnsecureSAXReader(new SAXReaderImpl());
 
 		SecureXMLFactoryProviderUtil secureXMLFactoryProviderUtil =
 			new SecureXMLFactoryProviderUtil();
 
 		secureXMLFactoryProviderUtil.setSecureXMLFactoryProvider(
 			new SecureXMLFactoryProviderImpl());
-
-		ModelHintsUtil modelHintsUtil = new ModelHintsUtil();
-
-		DefaultModelHintsImpl modelHintsImpl = new DefaultModelHintsImpl();
-
-		modelHintsImpl.afterPropertiesSet();
-
-		modelHintsUtil.setModelHints(modelHintsImpl);
 
 		SingleVMPoolImpl singleVMPoolImpl = new SingleVMPoolImpl();
 
@@ -150,6 +139,17 @@ public class ToolDependencies {
 				ToolDependencies.class.getName()));
 
 		singleVMPoolUtil.setSingleVMPool(singleVMPoolImpl);
+
+		// DefaultModelHintsImpl requires SecureXMLFactoryProviderUtil
+
+		ModelHintsUtil modelHintsUtil = new ModelHintsUtil();
+
+		DefaultModelHintsImpl defaultModelHintsImpl =
+			new DefaultModelHintsImpl();
+
+		defaultModelHintsImpl.afterPropertiesSet();
+
+		modelHintsUtil.setModelHints(defaultModelHintsImpl);
 	}
 
 	public static void wireDeployers() {
