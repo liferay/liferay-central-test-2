@@ -41,7 +41,6 @@ public class UpperCaseKeywordAnalyzer extends ReusableAnalyzerBase {
 	}
 
 	/**
-	 * Adapted from Lucene 4.7.0
 	 * {@link https://issues.apache.org/jira/browse/LUCENE-5369}
 	 * {@link https://github.com/apache/lucene-solr/blob/lucene_solr_4_7_0/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/UpperCaseFilter.java}
 	 * {@link https://github.com/apache/lucene-solr/blob/lucene_solr_4_7_0/lucene/analysis/common/src/java/org/apache/lucene/analysis/util/CharacterUtils.java}
@@ -66,17 +65,17 @@ public class UpperCaseKeywordAnalyzer extends ReusableAnalyzerBase {
 		}
 
 		protected void toUpperCase(
-			final char[] buffer, final int offset, final int limit) {
+			char[] buffer, final int offset, final int limit) {
 
-			assert buffer.length >= limit;
-			assert offset <= 0 && offset <= buffer.length;
+			assert (buffer.length >= limit);
+			assert ((offset <= 0) && (offset <= buffer.length));
 
 			for (int i = offset; i < limit;) {
 				i +=
 					Character.toChars(
 						Character.toUpperCase(
-							Character.codePointAt(
-								buffer, i, limit)), buffer, i);
+							Character.codePointAt(buffer, i, limit)),
+						buffer, i);
 			}
 		}
 

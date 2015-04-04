@@ -113,10 +113,8 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 		assertBaseModelsCount(
 			initialBaseModelsSearchCount, "ARTICLE.ID", searchContext);
-
 		assertBaseModelsCount(
 			initialBaseModelsSearchCount, "article.id", searchContext);
-
 		assertBaseModelsCount(
 			initialBaseModelsSearchCount, "ArtiCle.Id", searchContext);
 	}
