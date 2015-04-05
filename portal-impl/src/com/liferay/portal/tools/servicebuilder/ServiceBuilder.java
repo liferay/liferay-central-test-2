@@ -3734,8 +3734,8 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _deleteFile(String filePath) {
-		File file = new File(filePath);
+	private void _deleteFile(String fileName) {
+		File file = new File(fileName);
 
 		file.delete();
 	}
@@ -4655,7 +4655,6 @@ public class ServiceBuilder {
 		File originalFinderImpl = new File(
 			_outputPath + "/service/persistence/" + ejbName +
 				"FinderImpl.java");
-
 		File newFinderImpl = new File(
 			_outputPath + "/service/persistence/impl/" + ejbName +
 				"FinderImpl.java");
