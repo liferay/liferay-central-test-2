@@ -548,14 +548,13 @@ public class ServiceBuilder {
 			jalopyXmlFile = new File("../../misc/jalopy.xml");
 		}
 
-		if (!jalopyXmlFile.exists()) {
-			jalopyXmlFile = _readJalopyXmlFromClassLoader();
-		}
-
-		try {
+		if (jalopyXmlFile.exists()) {
 			Jalopy.setConvention(jalopyXmlFile);
 		}
-		catch (FileNotFoundException fnfe) {
+		else {
+			URL url = _readJalopyXmlFromClassLoader();
+
+			Jalopy.setConvention(url);
 		}
 
 		if (jalopySettings == null) {
@@ -1955,18 +1954,17 @@ public class ServiceBuilder {
 		return SAXReaderFactory.getSAXReader(null, false, false);
 	}
 
-	private static File _readJalopyXmlFromClassLoader() {
+	private static URL _readJalopyXmlFromClassLoader() {
 		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
 
 		URL url = classLoader.getResource("jalopy.xml");
 
-		try {
-			return new File(url.toURI());
-		}
-		catch (Exception e) {
+		if (url == null) {
 			throw new RuntimeException(
-				"Unable to load jalopy.xml from the class loader", e);
+				"Unable to load jalopy.xml from the class loader.");
 		}
+
+		return url;
 	}
 
 	private static void _readResourceActionModels(
