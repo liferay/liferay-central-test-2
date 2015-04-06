@@ -101,7 +101,7 @@ public class LoggerElement {
 	public LoggerElement loggerElement(String name) {
 		List<LoggerElement> loggerElements = loggerElements(name);
 
-		if (loggerElements.size() > 0) {
+		if (!loggerElements.isEmpty()) {
 			return loggerElements.get(0);
 		}
 
