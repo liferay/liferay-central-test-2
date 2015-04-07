@@ -87,12 +87,18 @@ public class TestStagedModelDataHandler
 		return null;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	@Deprecated
 	@Override
 	public void importCompanyStagedModel(
 		PortletDataContext portletDataContext, Element element) {
 	}
 
+	/**
+	 * @deprecated
+	 */
 	@Deprecated
 	@Override
 	public void importCompanyStagedModel(

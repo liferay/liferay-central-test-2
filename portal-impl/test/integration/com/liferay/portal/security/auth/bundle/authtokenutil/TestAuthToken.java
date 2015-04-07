@@ -29,6 +29,9 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestAuthToken implements AuthToken {
 
+	/**
+	 * @deprecated
+	 */
 	@Deprecated
 	@Override
 	public void check(HttpServletRequest request) {

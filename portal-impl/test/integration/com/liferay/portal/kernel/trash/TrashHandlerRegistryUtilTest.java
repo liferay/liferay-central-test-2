@@ -46,7 +46,7 @@ public class TrashHandlerRegistryUtilTest {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			testClassName);
 
-		Class clazz = trashHandler.getClass();
+		Class<?> clazz = trashHandler.getClass();
 
 		String className = clazz.getName();
 
@@ -63,7 +63,7 @@ public class TrashHandlerRegistryUtilTest {
 			TrashHandlerRegistryUtil.getTrashHandlers();
 
 		for (TrashHandler trashHandler : trashHandlers) {
-			Class clazz = trashHandler.getClass();
+			Class<?> clazz = trashHandler.getClass();
 
 			String className = clazz.getName();
 

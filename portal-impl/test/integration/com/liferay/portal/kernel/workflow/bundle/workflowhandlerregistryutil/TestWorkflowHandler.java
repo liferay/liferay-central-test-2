@@ -74,6 +74,9 @@ public class TestWorkflowHandler implements WorkflowHandler<Object> {
 		return null;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	@Deprecated
 	@Override
 	public String getSummary(long classPK, Locale locale) {
