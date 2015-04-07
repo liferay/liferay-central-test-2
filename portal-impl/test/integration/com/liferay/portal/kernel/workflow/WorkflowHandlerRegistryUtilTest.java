@@ -58,12 +58,13 @@ public class WorkflowHandlerRegistryUtilTest {
 
 	@Test
 	public void testGetWorkflowHandler() {
-		String className = TestWorkflowHandler.class.getName();
-
 		WorkflowHandler<Object> workflowHandler =
-			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+			WorkflowHandlerRegistryUtil.getWorkflowHandler(
+				TestWorkflowHandler.class.getName());
 
-		Assert.assertEquals(className, workflowHandler.getClassName());
+		Assert.assertEquals(
+			TestWorkflowHandler.class.getName(),
+			workflowHandler.getClassName());
 	}
 
 	@Test
@@ -75,7 +76,7 @@ public class WorkflowHandlerRegistryUtilTest {
 		List<WorkflowHandler<?>> workflowHandlers =
 			WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
-		for (WorkflowHandler workflowHandler : workflowHandlers) {
+		for (WorkflowHandler<?> workflowHandler : workflowHandlers) {
 			if (className.equals(workflowHandler.getClassName())) {
 				found = true;
 			}

@@ -23,6 +23,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -43,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {"service.ranking:Integer=" + Integer.MAX_VALUE}
 )
-public class TestWorkflowHandler implements WorkflowHandler {
+public class TestWorkflowHandler implements WorkflowHandler<Object> {
 
 	@Override
 	public AssetRenderer getAssetRenderer(long classPK) {
@@ -72,6 +73,7 @@ public class TestWorkflowHandler implements WorkflowHandler {
 		return null;
 	}
 
+	@Deprecated
 	@Override
 	public String getSummary(long classPK, Locale locale) {
 		return null;
@@ -160,12 +162,15 @@ public class TestWorkflowHandler implements WorkflowHandler {
 	@Override
 	public void startWorkflowInstance(
 		long companyId, long groupId, long userId, long classPK, Object model,
-		Map workflowContext) {
+		Map<String, Serializable> workflowContext) {
 	}
 
 	@Override
-	public Object updateStatus(int status, Map workflowContext) {
+	public Object updateStatus(
+		int status, Map<String, Serializable> workflowContext) {
+
 		_atomicReference.set(StackTraceUtil.getCallerKey());
+
 		return null;
 	}
 
