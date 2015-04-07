@@ -43,8 +43,6 @@ public class RepositoryClassDefinitionCatalogImplTest {
 
 	@Test
 	public void testGetExternalRepositoryClassDefinitions() {
-		boolean found = false;
-
 		Iterable<RepositoryClassDefinition> repositoryClassDefinitions =
 			RepositoryClassDefinitionCatalogUtil.
 				getExternalRepositoryClassDefinitions();
@@ -55,30 +53,21 @@ public class RepositoryClassDefinitionCatalogImplTest {
 			if (_TEST_EXTERNAL_CLASS_NAME.equals(
 					repositoryClassDefinition.getClassName())) {
 
-				found = true;
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 	@Test
 	public void testGetExternalRepositoryClassNames() {
-		boolean found = false;
-
 		Collection<String> externalRepositoryClassNames =
 			RepositoryClassDefinitionCatalogUtil.
 				getExternalRepositoryClassNames();
 
-		for (String externalRepositoryClassName :
-				externalRepositoryClassNames) {
-
-			if (_TEST_EXTERNAL_CLASS_NAME.equals(externalRepositoryClassName)) {
-				found = true;
-			}
-		}
-
-		Assert.assertTrue(found);
+		Assert.assertTrue(
+			externalRepositoryClassNames.contains(_TEST_EXTERNAL_CLASS_NAME));
 	}
 
 	@Test
