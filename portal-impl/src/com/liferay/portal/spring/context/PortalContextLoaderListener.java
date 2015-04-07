@@ -171,7 +171,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 				_log.error(e, e);
 			}
 
-			_applicationContext.close();
+			_arrayApplicationContext.close();
 		}
 		finally {
 			PortalContextLoaderLifecycleThreadLocal.setDestroying(false);
@@ -245,14 +245,15 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		try {
 			ModuleFrameworkUtilAdapter.initFramework();
 
-			_applicationContext = new ArrayApplicationContext(
+			_arrayApplicationContext = new ArrayApplicationContext(
 				PropsValues.SPRING_INFRASTRUCTURE_CONFIGS);
 
 			servletContext.setAttribute(
 				PortalApplicationContext.PARENT_APPLICATION_CONTEXT,
-				_applicationContext);
+				_arrayApplicationContext);
 
-			ModuleFrameworkUtilAdapter.registerContext(_applicationContext);
+			ModuleFrameworkUtilAdapter.registerContext(
+				_arrayApplicationContext);
 
 			ModuleFrameworkUtilAdapter.startFramework();
 		}
@@ -397,7 +398,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 	}
 
-	private ArrayApplicationContext _applicationContext;
+	private ArrayApplicationContext _arrayApplicationContext;
 	private IndexerPostProcessorRegistry _indexerPostProcessorRegistry;
 	private SchedulerEntryRegistry _schedulerEntryRegistry;
 	private ServiceWrapperRegistry _serviceWrapperRegistry;
