@@ -46,35 +46,30 @@ public class AtomCollectionAdapterRegistryUtilTest {
 			AtomCollectionAdapterRegistryUtil.getAtomCollectionAdapter(
 				TestAtomCollectionAdapter.COLLECTION_NAME);
 
-		Class<? extends AtomCollectionAdapter> clazz =
-			atomCollectionAdapter.getClass();
-
-		String className = clazz.getName();
+		Class<?> clazz = atomCollectionAdapter.getClass();
 
 		Assert.assertEquals(
-			TestAtomCollectionAdapter.class.getName(), className);
+			TestAtomCollectionAdapter.class.getName(), clazz.getName());
 	}
 
 	@Test
 	public void testGetAtomCollectionAdapters() {
-		boolean found = false;
-
-		List<AtomCollectionAdapter<?>> atomCollectionAdapterList =
+		List<AtomCollectionAdapter<?>> atomCollectionAdapters =
 			AtomCollectionAdapterRegistryUtil.getAtomCollectionAdapters();
 
 		for (AtomCollectionAdapter<?> atomCollectionAdapter :
-				atomCollectionAdapterList) {
+				atomCollectionAdapters) {
 
 			String collectionName = atomCollectionAdapter.getCollectionName();
 
 			if (TestAtomCollectionAdapter.COLLECTION_NAME.equals(
 					collectionName)) {
 
-				found = true;
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 }
