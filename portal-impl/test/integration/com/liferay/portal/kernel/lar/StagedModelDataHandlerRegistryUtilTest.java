@@ -46,39 +46,30 @@ public class StagedModelDataHandlerRegistryUtilTest {
 			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
 				TestStagedModelDataHandler.CLASS_NAMES[0]);
 
-		Class<? extends StagedModelDataHandler> clazz =
-			stagedModelDataHandler.getClass();
-
-		String className = clazz.getName();
+		Class<?> clazz = stagedModelDataHandler.getClass();
 
 		Assert.assertEquals(
-			TestStagedModelDataHandler.class.getName(), className);
+			TestStagedModelDataHandler.class.getName(), clazz.getName());
 	}
 
 	@Test
 	public void testGetStagedModelDataHandlers() {
-		boolean found = false;
-
-		String testStagedModelDataHandlerClassName =
-			TestStagedModelDataHandler.class.getName();
-
 		List<StagedModelDataHandler<?>> stagedModelDataHandlers =
 			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandlers();
 
 		for (StagedModelDataHandler<?> stagedModelDataHandler :
 				stagedModelDataHandlers) {
 
-			Class<? extends StagedModelDataHandler> clazz =
-				stagedModelDataHandler.getClass();
+			Class<?> clazz = stagedModelDataHandler.getClass();
 
 			String className = clazz.getName();
 
-			if (testStagedModelDataHandlerClassName.equals(className)) {
-				found = true;
+			if (className.equals(TestStagedModelDataHandler.class.getName())) {
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 }

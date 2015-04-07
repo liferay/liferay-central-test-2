@@ -15,10 +15,9 @@
 package com.liferay.portal.kernel.lar.bundle.stagedmodeldatahandlerregistryutil;
 
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.StagedModelDataHandler;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.model.StagedModel;
+import com.liferay.portal.model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,8 @@ import org.osgi.service.component.annotations.Component;
 		"service.ranking:Integer=" + Integer.MAX_VALUE
 	}
 )
-public class TestStagedModelDataHandler implements StagedModelDataHandler {
+public class TestStagedModelDataHandler
+	implements StagedModelDataHandler<User> {
 
 	public static final String[] CLASS_NAMES =
 		{TestStagedModelDataHandler.class.getName()};
@@ -45,23 +45,21 @@ public class TestStagedModelDataHandler implements StagedModelDataHandler {
 
 	@Override
 	public void exportStagedModel(
-		PortletDataContext portletDataContext, StagedModel stagedModel) {
+		PortletDataContext portletDataContext, User user) {
 	}
 
 	@Override
-	public StagedModel fetchMissingReference(String uuid, long groupId) {
+	public User fetchMissingReference(String uuid, long groupId) {
 		return null;
 	}
 
 	@Override
-	public StagedModel fetchStagedModelByUuidAndGroupId(
-		String uuid, long groupId) {
-
+	public User fetchStagedModelByUuidAndGroupId(String uuid, long groupId) {
 		return null;
 	}
 
 	@Override
-	public List fetchStagedModelsByUuidAndCompanyId(
+	public List<User> fetchStagedModelsByUuidAndCompanyId(
 		String uuid, long companyId) {
 
 		return null;
@@ -73,7 +71,7 @@ public class TestStagedModelDataHandler implements StagedModelDataHandler {
 	}
 
 	@Override
-	public String getDisplayName(StagedModel StagedModel) {
+	public String getDisplayName(User user) {
 		return null;
 	}
 
@@ -83,17 +81,19 @@ public class TestStagedModelDataHandler implements StagedModelDataHandler {
 	}
 
 	@Override
-	public Map getReferenceAttributes(
-		PortletDataContext portletDataContext, StagedModel stagedModel) {
+	public Map<String, String> getReferenceAttributes(
+		PortletDataContext portletDataContext, User user) {
 
 		return null;
 	}
 
+	@Deprecated
 	@Override
 	public void importCompanyStagedModel(
 		PortletDataContext portletDataContext, Element element) {
 	}
 
+	@Deprecated
 	@Override
 	public void importCompanyStagedModel(
 		PortletDataContext portletDataContext, String uuid, long classPK) {
@@ -112,14 +112,12 @@ public class TestStagedModelDataHandler implements StagedModelDataHandler {
 
 	@Override
 	public void importStagedModel(
-			PortletDataContext portletDataContext, StagedModel stagedModel)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, User user) {
 	}
 
 	@Override
 	public void restoreStagedModel(
-			PortletDataContext portletDataContext, StagedModel stagedModel)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, User user) {
 	}
 
 	@Override
