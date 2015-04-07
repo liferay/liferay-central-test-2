@@ -32,7 +32,8 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {"service.ranking:Integer=" + Integer.MAX_VALUE}
 )
-public class TestAtomCollectionAdapter implements AtomCollectionAdapter {
+public class TestAtomCollectionAdapter
+	implements AtomCollectionAdapter<Object> {
 
 	public static final String COLLECTION_NAME = "collection_name";
 
@@ -54,7 +55,7 @@ public class TestAtomCollectionAdapter implements AtomCollectionAdapter {
 	}
 
 	@Override
-	public List getEntryAuthors(Object entry) {
+	public List<String> getEntryAuthors(Object entry) {
 		return null;
 	}
 
