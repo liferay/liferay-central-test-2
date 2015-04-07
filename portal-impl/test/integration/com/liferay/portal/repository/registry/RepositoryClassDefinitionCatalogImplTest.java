@@ -50,7 +50,7 @@ public class RepositoryClassDefinitionCatalogImplTest {
 		for (RepositoryClassDefinition repositoryClassDefinition :
 				repositoryClassDefinitions) {
 
-			if (_TEST_EXTERNAL_CLASS_NAME.equals(
+			if (_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME.equals(
 					repositoryClassDefinition.getClassName())) {
 
 				return;
@@ -67,24 +67,26 @@ public class RepositoryClassDefinitionCatalogImplTest {
 				getExternalRepositoryClassNames();
 
 		Assert.assertTrue(
-			externalRepositoryClassNames.contains(_TEST_EXTERNAL_CLASS_NAME));
+			externalRepositoryClassNames.contains(
+				_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME));
 	}
 
 	@Test
 	public void testGetRepositoryClassDefinition() {
 		RepositoryClassDefinition repositoryClassDefinition =
 			RepositoryClassDefinitionCatalogUtil.getRepositoryClassDefinition(
-				_TEST_CLASS_NAME);
+				_REPOSITORY_DEFINER_CLASS_NAME);
 
 		Assert.assertEquals(
-			_TEST_CLASS_NAME, repositoryClassDefinition.getClassName());
+			_REPOSITORY_DEFINER_CLASS_NAME,
+			repositoryClassDefinition.getClassName());
 
 		RepositoryClassDefinition repositoryExternalClassDefinition =
-				RepositoryClassDefinitionCatalogUtil.
-					getRepositoryClassDefinition(_TEST_EXTERNAL_CLASS_NAME);
+			RepositoryClassDefinitionCatalogUtil.getRepositoryClassDefinition(
+				_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME);
 
 		Assert.assertEquals(
-			_TEST_EXTERNAL_CLASS_NAME,
+			_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME,
 			repositoryExternalClassDefinition.getClassName());
 	}
 
@@ -101,7 +103,7 @@ public class RepositoryClassDefinitionCatalogImplTest {
 		for (RepositoryClassDefinition repositoryClassDefinition :
 				repositoryClassDefinitions) {
 
-			if (_TEST_EXTERNAL_CLASS_NAME.equals(
+			if (_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME.equals(
 					repositoryClassDefinition.getClassName())) {
 
 				return;
@@ -120,15 +122,9 @@ public class RepositoryClassDefinitionCatalogImplTest {
 		Collection<String> externalRepositoryClassNames =
 			repositoryClassDefinitionCatalog.getExternalRepositoryClassNames();
 
-		for (String externalRepositoryClassName :
-				externalRepositoryClassNames) {
-
-			if (_TEST_EXTERNAL_CLASS_NAME.equals(externalRepositoryClassName)) {
-				return;
-			}
-		}
-
-		Assert.fail();
+		Assert.assertTrue(
+			externalRepositoryClassNames.contains(
+				_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME));
 	}
 
 	@Test
@@ -139,24 +135,25 @@ public class RepositoryClassDefinitionCatalogImplTest {
 
 		RepositoryClassDefinition repositoryClassDefinition =
 			repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
-				_TEST_CLASS_NAME);
+				_REPOSITORY_DEFINER_CLASS_NAME);
 
 		Assert.assertEquals(
-			_TEST_CLASS_NAME, repositoryClassDefinition.getClassName());
+			_REPOSITORY_DEFINER_CLASS_NAME,
+			repositoryClassDefinition.getClassName());
 
 		RepositoryClassDefinition repositoryExternalClassDefinition =
 			repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
-				_TEST_EXTERNAL_CLASS_NAME);
+				_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME);
 
 		Assert.assertEquals(
-			_TEST_EXTERNAL_CLASS_NAME,
+			_EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME,
 			repositoryExternalClassDefinition.getClassName());
 	}
 
-	private static final String _TEST_CLASS_NAME =
-		TestRepositoryDefiner.class.getName();
-
-	private static final String _TEST_EXTERNAL_CLASS_NAME =
+	private static final String _EXTERNAL_REPOSITORY_DEFINER_CLASS_NAME =
 		TestExternalRepositoryDefiner.class.getName();
+
+	private static final String _REPOSITORY_DEFINER_CLASS_NAME =
+		TestRepositoryDefiner.class.getName();
 
 }
