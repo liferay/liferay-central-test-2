@@ -62,8 +62,8 @@ public class AtomCollectionAdapterRegistryUtilTest {
 
 			String collectionName = atomCollectionAdapter.getCollectionName();
 
-			if (TestAtomCollectionAdapter.COLLECTION_NAME.equals(
-					collectionName)) {
+			if (collectionName.equals(
+					TestAtomCollectionAdapter.COLLECTION_NAME)) {
 
 				return;
 			}

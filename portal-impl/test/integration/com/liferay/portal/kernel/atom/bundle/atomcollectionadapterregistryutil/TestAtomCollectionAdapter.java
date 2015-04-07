@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Component;
 public class TestAtomCollectionAdapter
 	implements AtomCollectionAdapter<Object> {
 
-	public static final String COLLECTION_NAME = "collection_name";
+	public static final String COLLECTION_NAME = "TestAtomCollectionAdapter";
 
 	@Override
 	public void deleteEntry(
