@@ -41,24 +41,16 @@ public class TrashHandlerRegistryUtilTest {
 
 	@Test
 	public void testGetTrashHandler() {
-		String testClassName = TestTrashHandler.class.getName();
-
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			testClassName);
+			TestTrashHandler.class.getName());
 
 		Class<?> clazz = trashHandler.getClass();
 
-		String className = clazz.getName();
-
-		Assert.assertEquals(testClassName, className);
+		Assert.assertEquals(TestTrashHandler.class.getName(), clazz.getName());
 	}
 
 	@Test
 	public void testGetTrashHandlers() {
-		boolean found = false;
-
-		String testClassName = TestTrashHandler.class.getName();
-
 		List<TrashHandler> trashHandlers =
 			TrashHandlerRegistryUtil.getTrashHandlers();
 
@@ -67,12 +59,12 @@ public class TrashHandlerRegistryUtilTest {
 
 			String className = clazz.getName();
 
-			if (testClassName.equals(className)) {
-				found = true;
+			if (className.equals(TestTrashHandler.class.getName())) {
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 }

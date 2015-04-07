@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
 public class TestAuthToken implements AuthToken {
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override

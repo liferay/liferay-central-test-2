@@ -75,7 +75,7 @@ public class TestWorkflowHandler implements WorkflowHandler<Object> {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
 	@Override
