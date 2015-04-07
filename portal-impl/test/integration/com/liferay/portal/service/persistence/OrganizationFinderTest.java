@@ -15,6 +15,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.TransactionalTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.OrganizationTestUtil;
@@ -26,13 +27,11 @@ import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 
 import java.util.LinkedHashMap;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -66,15 +65,6 @@ public class OrganizationFinderTest {
 			_user.getUserId(), _organization);
 	}
 
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		UserLocalServiceUtil.deleteUser(_user);
-
-		OrganizationLocalServiceUtil.deleteOrganization(_organization);
-
-		GroupLocalServiceUtil.deleteGroup(_group);
-	}
-
 	@Test
 	public void testCountByKeywordsWithVaryingParameterOrder() {
 		LinkedHashMap<String, Object> params1 = new LinkedHashMap<>();
@@ -102,8 +92,13 @@ public class OrganizationFinderTest {
 		Assert.assertEquals(count1, count2);
 	}
 
+	@DeleteAfterTestRun
 	private static Group _group;
+
+	@DeleteAfterTestRun
 	private static Organization _organization;
+
+	@DeleteAfterTestRun
 	private static User _user;
 
 }
