@@ -237,9 +237,7 @@ public class SchedulerEngineHelperUtil {
 		getSchedulerEngineHelper().initialize();
 	}
 
-	public static boolean isClusteredSchedulerEngine()
-		throws SchedulerException {
-
+	public static boolean isClusteredSchedulerEngine() {
 		return getSchedulerEngineHelper().isClusteredSchedulerEngine();
 	}
 

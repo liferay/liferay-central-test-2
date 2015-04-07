@@ -27,10 +27,9 @@ import org.junit.Assert;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleException;
 import org.osgi.framework.BundleListener;
+import org.osgi.framework.Filter;
 import org.osgi.framework.FrameworkListener;
-import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
@@ -70,7 +69,7 @@ public class MockComponentContext implements ComponentContext {
 	}
 
 	@Override
-	public ServiceReference getServiceReference() {
+	public ServiceReference<?> getServiceReference() {
 		return null;
 	}
 
@@ -86,7 +85,8 @@ public class MockComponentContext implements ComponentContext {
 
 	@Override
 	public Object locateService(
-		String serviceName, ServiceReference serviceReference) {
+		String serviceName,
+		@SuppressWarnings("rawtypes") ServiceReference serviceReference) {
 
 		return null;
 	}
@@ -114,21 +114,17 @@ public class MockComponentContext implements ComponentContext {
 
 		@Override
 		public void addServiceListener(
-				ServiceListener serviceListener, String serviceName)
-			throws InvalidSyntaxException {
+			ServiceListener serviceListener, String serviceName) {
 		}
 
 		@Override
-		public org.osgi.framework.Filter createFilter(String filterName)
-			throws InvalidSyntaxException {
-
+		public Filter createFilter(String filterString) {
 			return null;
 		}
 
 		@Override
 		public ServiceReference<?>[] getAllServiceReferences(
-				String serviceName, String filter)
-			throws InvalidSyntaxException {
+			String serviceName, String filterString) {
 
 			return null;
 		}
@@ -180,28 +176,26 @@ public class MockComponentContext implements ComponentContext {
 
 		@Override
 		public <S> Collection<ServiceReference<S>> getServiceReferences(
-				Class<S> clazz, String serviceName)
-			throws InvalidSyntaxException {
+			Class<S> clazz, String serviceName) {
 
 			return null;
 		}
 
 		@Override
 		public ServiceReference<?>[] getServiceReferences(
-				String serviceName, String filter)
-			throws InvalidSyntaxException {
+			String serviceName, String filterString) {
 
 			return null;
 		}
 
 		@Override
-		public Bundle installBundle(String bundleName) throws BundleException {
+		public Bundle installBundle(String bundleName) {
 			return null;
 		}
 
 		@Override
-		public Bundle installBundle(String bundleName, InputStream inputStream)
-			throws BundleException {
+		public Bundle installBundle(
+			String bundleName, InputStream inputStream) {
 
 			return null;
 		}
@@ -212,12 +206,11 @@ public class MockComponentContext implements ComponentContext {
 
 			Assert.assertEquals(
 				PortalInetSocketAddressEventListener.class, clazz);
-
 			Assert.assertNotNull(object);
-
 			Assert.assertTrue(dictionary.isEmpty());
 
 			return new ServiceRegistration<S>() {
+
 				@Override
 				public ServiceReference<S> getReference() {
 					return null;
@@ -230,6 +223,7 @@ public class MockComponentContext implements ComponentContext {
 				@Override
 				public void unregister() {
 				}
+
 			};
 		}
 

@@ -122,17 +122,17 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 			return;
 		}
 
-		ClusterNode localClusterNode = _clusterExecutor.getLocalClusterNode();
-
-		_localClusterNodeId = localClusterNode.getClusterNodeId();
-
 		_clusterEventListener = new ClusterMasterTokenClusterEventListener();
 
 		_clusterExecutor.addClusterEventListener(_clusterEventListener);
 
-		String masterClusterNodeId = getMasterClusterNodeId();
+		ClusterNode localClusterNode = _clusterExecutor.getLocalClusterNode();
+
+		_localClusterNodeId = localClusterNode.getClusterNodeId();
 
 		_enabled = true;
+
+		String masterClusterNodeId = getMasterClusterNodeId();
 
 		notifyMasterTokenTransitionListeners(
 			_localClusterNodeId.equals(masterClusterNodeId));

@@ -34,18 +34,24 @@ public class SchedulerClusterInvokeAcceptor implements ClusterInvokeAcceptor {
 			return false;
 		}
 
-		StorageType storageType = (StorageType)context.get(
-			SchedulerEngine.STORAGE_TYPE);
+		boolean pluginReady = (Boolean)context.get(
+			ClusterSchedulerEngine.PLUGIN_READY);
+
+		if (!pluginReady) {
+			return false;
+		}
 
 		boolean portalReady = (Boolean)context.get(
 			ClusterSchedulerEngine.PORTAL_READY);
 
-		boolean pluginReady = (Boolean)context.get(
-			ClusterSchedulerEngine.PLUGIN_READY);
+		if (!portalReady) {
+			return false;
+		}
 
-		if ((storageType == StorageType.PERSISTED) || !portalReady ||
-			!pluginReady) {
+		StorageType storageType = (StorageType)context.get(
+			SchedulerEngine.STORAGE_TYPE);
 
+		if (storageType == StorageType.PERSISTED) {
 			return false;
 		}
 

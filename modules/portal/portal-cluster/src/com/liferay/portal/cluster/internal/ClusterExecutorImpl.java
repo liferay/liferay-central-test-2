@@ -239,9 +239,6 @@ public class ClusterExecutorImpl implements ClusterExecutor {
 			ClusterExecutorConfiguration.class,
 			componentContext.getProperties());
 
-		String controlChannelProperties = getControlChannelProperties(
-			componentContext.getProperties());
-
 		BundleContext bundleContext = componentContext.getBundleContext();
 
 		ClusterExecutorPortalInetSocketAddressEventListener
@@ -252,6 +249,9 @@ public class ClusterExecutorImpl implements ClusterExecutor {
 			PortalInetSocketAddressEventListener.class,
 			clusterExecutorPortalInetSocketAddressEventListener,
 			new HashMapDictionary<String, Object>());
+
+		String controlChannelProperties = getControlChannelProperties(
+			componentContext.getProperties());
 
 		initialize(controlChannelProperties);
 	}
@@ -447,10 +447,8 @@ public class ClusterExecutorImpl implements ClusterExecutor {
 			channelPropertiesControl, channelNamePrefix + "control",
 			_clusterReceiver);
 
-		String clusterNodeId = generateClusterNodeId();
-
 		ClusterNode localClusterNode = new ClusterNode(
-			clusterNodeId, _clusterChannel.getBindInetAddress());
+			generateClusterNodeId(), _clusterChannel.getBindInetAddress());
 
 		_localClusterNodeStatus = new ClusterNodeStatus(
 			localClusterNode, _clusterChannel.getLocalAddress());
