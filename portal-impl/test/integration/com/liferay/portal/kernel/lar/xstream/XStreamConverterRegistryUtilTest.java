@@ -41,11 +41,6 @@ public class XStreamConverterRegistryUtilTest {
 
 	@Test
 	public void testGetXStreamConverters() {
-		boolean found = false;
-
-		String TestXStreamConverterClassName =
-			TestXStreamConverter.class.getName();
-
 		Set<XStreamConverter> xStreamConverters =
 			XStreamConverterRegistryUtil.getXStreamConverters();
 
@@ -55,12 +50,12 @@ public class XStreamConverterRegistryUtilTest {
 
 			String className = clazz.getName();
 
-			if (TestXStreamConverterClassName.equals(className)) {
-				found = true;
+			if (className.equals(TestXStreamConverter.class.getName())) {
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 }
