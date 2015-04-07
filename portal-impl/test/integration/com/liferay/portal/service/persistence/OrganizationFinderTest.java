@@ -66,7 +66,7 @@ public class OrganizationFinderTest {
 	}
 
 	@Test
-	public void testCountByKeywordsWithVaryingParameterOrder() {
+	public void testCountByKeywordsWithDifferentParameterOrder() {
 		LinkedHashMap<String, Object> params1 = new LinkedHashMap<>();
 
 		params1.put("usersOrgs", _user.getUserId());
