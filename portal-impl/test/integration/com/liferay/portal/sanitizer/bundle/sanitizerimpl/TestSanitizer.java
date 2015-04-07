@@ -66,7 +66,7 @@ public class TestSanitizer implements Sanitizer {
 	}
 
 	@Reference(target = "(test=AtomicState)")
-	protected void getAtomicReference(AtomicReference atomicReference) {
+	protected void getAtomicReference(AtomicReference<String> atomicReference) {
 		_atomicReference = atomicReference;
 	}
 
