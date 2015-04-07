@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.atom.bundle.atomcollectionadapterregistryutil;
 
 import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.atom.AtomEntryContent;
-import com.liferay.portal.kernel.atom.AtomException;
 import com.liferay.portal.kernel.atom.AtomRequestContext;
 
 import java.io.InputStream;
@@ -49,8 +48,7 @@ public class TestAtomCollectionAdapter implements AtomCollectionAdapter {
 
 	@Override
 	public Object getEntry(
-			String resourceName, AtomRequestContext atomRequestContext)
-		throws AtomException {
+		String resourceName, AtomRequestContext atomRequestContext) {
 
 		return null;
 	}
@@ -88,8 +86,8 @@ public class TestAtomCollectionAdapter implements AtomCollectionAdapter {
 	}
 
 	@Override
-	public Iterable getFeedEntries(AtomRequestContext atomRequestContext)
-		throws AtomException {
+	public Iterable<Object> getFeedEntries(
+		AtomRequestContext atomRequestContext) {
 
 		return null;
 	}
@@ -105,12 +103,12 @@ public class TestAtomCollectionAdapter implements AtomCollectionAdapter {
 	}
 
 	@Override
-	public String getMediaName(Object entry) throws AtomException {
+	public String getMediaName(Object entry) {
 		return null;
 	}
 
 	@Override
-	public InputStream getMediaStream(Object entry) throws AtomException {
+	public InputStream getMediaStream(Object entry) {
 		return null;
 	}
 
