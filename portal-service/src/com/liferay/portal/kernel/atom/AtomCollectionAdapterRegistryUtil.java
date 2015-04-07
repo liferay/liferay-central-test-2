@@ -24,7 +24,6 @@ import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
-import com.liferay.registry.collections.ServiceRegistrationMap;
 
 import java.util.List;
 import java.util.Map;
@@ -75,8 +74,6 @@ public class AtomCollectionAdapterRegistryUtil {
 
 	private final Map<String, AtomCollectionAdapter<?>>
 		_atomCollectionAdapters = new ConcurrentHashMap<>();
-	private final ServiceRegistrationMap<AtomCollectionAdapter<?>>
-		_serviceRegistrations = new ServiceRegistrationMap<>();
 	private final
 		ServiceTracker<AtomCollectionAdapter<?>, AtomCollectionAdapter<?>>
 			_serviceTracker;
