@@ -173,7 +173,6 @@ public class InputEditorTag extends IncludeTag {
 		_onBlurMethod = null;
 		_onFocusMethod = null;
 		_onInitMethod = null;
-		_page = null;
 		_placeholder = null;
 		_resizable = true;
 		_showSource = true;
@@ -358,7 +357,6 @@ public class InputEditorTag extends IncludeTag {
 	private String _onChangeMethod;
 	private String _onFocusMethod;
 	private String _onInitMethod;
-	private String _page;
 	private String _placeholder;
 	private boolean _resizable = true;
 	private boolean _showSource = true;
