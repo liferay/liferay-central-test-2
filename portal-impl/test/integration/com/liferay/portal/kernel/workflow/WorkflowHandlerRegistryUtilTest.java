@@ -69,24 +69,22 @@ public class WorkflowHandlerRegistryUtilTest {
 
 	@Test
 	public void testGetWorkflowHandlers() {
-		boolean found = false;
-
-		String className = TestWorkflowHandler.class.getName();
-
 		List<WorkflowHandler<?>> workflowHandlers =
 			WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
 		for (WorkflowHandler<?> workflowHandler : workflowHandlers) {
-			if (className.equals(workflowHandler.getClassName())) {
-				found = true;
+			String className = workflowHandler.getClassName();
+
+			if (className.equals(TestWorkflowHandler.class.getName())) {
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 	@Test
-	public void testStartWorkflowInstance() {
+	public void testStartWorkflowInstance1() {
 		_atomicState.reset();
 
 		try {
