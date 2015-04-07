@@ -1,4 +1,4 @@
-Bundle-Description: Test Bundle for StagedModelDataHandlerRegistryUtil
+Bundle-Description: Test Bundle for StagedModelDataHandlerRegistryUtilTest
 Bundle-Version: 1.0.0
 Private-Package: $(bundle.package).*
 
