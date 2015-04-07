@@ -93,7 +93,8 @@ public class PoshiRunnerValidation {
 			if (Validator.isNull(attribute.getValue())) {
 				throw new PoshiRunnerException(
 					"Missing " + attributeName + " attribute value\n" +
-						filePath + ": " + element.attributeValue("line-number"));
+						filePath + ": " +
+							element.attributeValue("line-number"));
 			}
 
 			if (attributeName.equals("line-number")) {
