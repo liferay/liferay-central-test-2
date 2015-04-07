@@ -90,8 +90,6 @@ public class RepositoryClassDefinitionCatalogImplTest {
 
 	@Test
 	public void testInstanceGetExternalRepositoryClassDefinitions() {
-		boolean found = false;
-
 		RepositoryClassDefinitionCatalog repositoryClassDefinitionCatalog =
 			RepositoryClassDefinitionCatalogUtil.
 				getRepositoryClassDefinitionCatalog();
@@ -106,17 +104,15 @@ public class RepositoryClassDefinitionCatalogImplTest {
 			if (_TEST_EXTERNAL_CLASS_NAME.equals(
 					repositoryClassDefinition.getClassName())) {
 
-				found = true;
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 	@Test
 	public void testInstanceGetExternalRepositoryClassNames() {
-		boolean found = false;
-
 		RepositoryClassDefinitionCatalog repositoryClassDefinitionCatalog =
 			RepositoryClassDefinitionCatalogUtil.
 				getRepositoryClassDefinitionCatalog();
@@ -128,18 +124,18 @@ public class RepositoryClassDefinitionCatalogImplTest {
 				externalRepositoryClassNames) {
 
 			if (_TEST_EXTERNAL_CLASS_NAME.equals(externalRepositoryClassName)) {
-				found = true;
+				return;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.fail();
 	}
 
 	@Test
 	public void testInstanceGetRepositoryClassDefinition() {
 		RepositoryClassDefinitionCatalog repositoryClassDefinitionCatalog =
-				RepositoryClassDefinitionCatalogUtil.
-					getRepositoryClassDefinitionCatalog();
+			RepositoryClassDefinitionCatalogUtil.
+				getRepositoryClassDefinitionCatalog();
 
 		RepositoryClassDefinition repositoryClassDefinition =
 			repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
@@ -149,8 +145,8 @@ public class RepositoryClassDefinitionCatalogImplTest {
 			_TEST_CLASS_NAME, repositoryClassDefinition.getClassName());
 
 		RepositoryClassDefinition repositoryExternalClassDefinition =
-				repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
-					_TEST_EXTERNAL_CLASS_NAME);
+			repositoryClassDefinitionCatalog.getRepositoryClassDefinition(
+				_TEST_EXTERNAL_CLASS_NAME);
 
 		Assert.assertEquals(
 			_TEST_EXTERNAL_CLASS_NAME,
