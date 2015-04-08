@@ -146,13 +146,13 @@ public class FileUtil {
 	}
 
 	private static void _invokeAntMethodUnzip(
-		final AntBuilder antBuilder, File sourceFIle, File destinationFile,
+		final AntBuilder antBuilder, File sourceFile, File destinationFile,
 		final int cutDirs, final String[] excludes, final String[] includes) {
 
 		Map<String, Object> args = new HashMap<>();
 
 		args.put("dest", destinationFile);
-		args.put("src", sourceFIle);
+		args.put("src", sourceFile);
 
 		Closure<Void> closure = new Closure<Void>(null) {
 
