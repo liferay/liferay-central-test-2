@@ -773,9 +773,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		for (String ignoredClass :
 				PropsValues.MODULE_FRAMEWORK_SERVICES_IGNORED_INTERFACES) {
 
-			boolean isNegated = ignoredClass.startsWith(StringPool.EXCLAMATION);
-
-			if (!isNegated &&
+			if (!ignoredClass.startsWith(StringPool.EXCLAMATION) &&
 				(ignoredClass.equals(interfaceClassName) ||
 				 (ignoredClass.endsWith(StringPool.STAR) &&
 				  interfaceClassName.startsWith(
