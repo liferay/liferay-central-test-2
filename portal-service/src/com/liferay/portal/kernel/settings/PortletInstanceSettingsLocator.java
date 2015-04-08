@@ -36,7 +36,7 @@ public class PortletInstanceSettingsLocator implements SettingsLocator {
 	}
 
 	@Override
-	public Settings retrieveSettings() throws SettingsException {
+	public Settings getSettings() throws SettingsException {
 		long companyId = getCompanyId(_layout.getGroupId());
 
 		Settings portalPropertiesSettings =

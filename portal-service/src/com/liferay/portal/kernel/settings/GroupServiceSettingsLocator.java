@@ -35,7 +35,7 @@ public class GroupServiceSettingsLocator implements SettingsLocator {
 	}
 
 	@Override
-	public Settings retrieveSettings() throws SettingsException {
+	public Settings getSettings() throws SettingsException {
 		long companyId = getCompanyId(_groupId);
 
 		Settings portalPropertiesSettings =

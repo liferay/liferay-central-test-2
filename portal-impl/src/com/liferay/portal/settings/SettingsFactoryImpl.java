@@ -102,7 +102,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	public Settings getSettings(SettingsLocator settingsLocator)
 		throws SettingsException {
 
-		Settings settings = settingsLocator.retrieveSettings();
+		Settings settings = settingsLocator.getSettings();
 
 		return applyFallbackKeys(settingsLocator.getSettingsId(), settings);
 	}
