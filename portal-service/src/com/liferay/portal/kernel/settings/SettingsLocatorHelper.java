@@ -75,11 +75,9 @@ public class SettingsLocatorHelper {
 		try {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			long companyId = group.getCompanyId();
-
 			return PortletPreferencesLocalServiceUtil.getStrictPreferences(
-				companyId, groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0,
-				settingsId);
+				group.getCompanyId(), groupId,
+				PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, settingsId);
 		}
 		catch (PortalException pe) {
 			throw new SettingsException(pe);
