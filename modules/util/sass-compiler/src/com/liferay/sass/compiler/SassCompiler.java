@@ -77,44 +77,44 @@ public class SassCompiler {
 		Sass_File_Context sassFileContext = null;
 
 		try {
-			sassFileContext = _LiferaysassLibrary.sass_make_file_context(
+			sassFileContext = _liferaysassLibrary.sass_make_file_context(
 				inputFile);
 
-			Sass_Options sassOptions = _LiferaysassLibrary.sass_make_options();
+			Sass_Options sassOptions = _liferaysassLibrary.sass_make_options();
 
-			_LiferaysassLibrary.sass_option_set_image_path(
+			_liferaysassLibrary.sass_option_set_image_path(
 				sassOptions, imgPath);
-			_LiferaysassLibrary.sass_option_set_include_path(
+			_liferaysassLibrary.sass_option_set_include_path(
 				sassOptions, includePaths);
-			_LiferaysassLibrary.sass_option_set_input_path(
+			_liferaysassLibrary.sass_option_set_input_path(
 				sassOptions, inputFile);
-			_LiferaysassLibrary.sass_option_set_output_path(sassOptions, "");
-			_LiferaysassLibrary.sass_option_set_output_style(
+			_liferaysassLibrary.sass_option_set_output_path(sassOptions, "");
+			_liferaysassLibrary.sass_option_set_output_style(
 				sassOptions, Sass_Output_Style.SASS_STYLE_COMPACT);
-			_LiferaysassLibrary.sass_option_set_source_comments(
+			_liferaysassLibrary.sass_option_set_source_comments(
 				sassOptions, sourceComments);
 
-			_LiferaysassLibrary.sass_file_context_set_options(
+			_liferaysassLibrary.sass_file_context_set_options(
 				sassFileContext, sassOptions);
 
-			_LiferaysassLibrary.sass_compile_file_context(sassFileContext);
+			_liferaysassLibrary.sass_compile_file_context(sassFileContext);
 
 			Sass_Context sassContext =
-				_LiferaysassLibrary.sass_file_context_get_context(
+				_liferaysassLibrary.sass_file_context_get_context(
 					sassFileContext);
 
-			int errorStatus = _LiferaysassLibrary.sass_context_get_error_status(
+			int errorStatus = _liferaysassLibrary.sass_context_get_error_status(
 				sassContext);
 
 			if (errorStatus != 0) {
 				String errorMessage =
-					_LiferaysassLibrary.sass_context_get_error_message(
+					_liferaysassLibrary.sass_context_get_error_message(
 						sassContext);
 
 				throw new SassCompilerException(errorMessage);
 			}
 
-			String output = _LiferaysassLibrary.sass_context_get_output_string(
+			String output = _liferaysassLibrary.sass_context_get_output_string(
 				sassContext);
 
 			if (output == null) {
@@ -126,7 +126,7 @@ public class SassCompiler {
 		finally {
 			try {
 				if (sassFileContext != null) {
-					_LiferaysassLibrary.sass_delete_file_context(
+					_liferaysassLibrary.sass_delete_file_context(
 						sassFileContext);
 				}
 			}
@@ -150,41 +150,41 @@ public class SassCompiler {
 		try {
 			Memory pointer = toPointer(input);
 
-			sassDataContext = _LiferaysassLibrary.sass_make_data_context(
+			sassDataContext = _liferaysassLibrary.sass_make_data_context(
 				pointer);
 
-			Sass_Options sassOptions = _LiferaysassLibrary.sass_make_options();
+			Sass_Options sassOptions = _liferaysassLibrary.sass_make_options();
 
-			_LiferaysassLibrary.sass_option_set_image_path(
+			_liferaysassLibrary.sass_option_set_image_path(
 				sassOptions, imgPath);
-			_LiferaysassLibrary.sass_option_set_include_path(
+			_liferaysassLibrary.sass_option_set_include_path(
 				sassOptions, includePath);
-			_LiferaysassLibrary.sass_option_set_output_style(
+			_liferaysassLibrary.sass_option_set_output_style(
 				sassOptions, Sass_Output_Style.SASS_STYLE_COMPACT);
-			_LiferaysassLibrary.sass_option_set_source_comments(
+			_liferaysassLibrary.sass_option_set_source_comments(
 				sassOptions, sourceComments);
 
-			_LiferaysassLibrary.sass_data_context_set_options(
+			_liferaysassLibrary.sass_data_context_set_options(
 				sassDataContext, sassOptions);
 
-			_LiferaysassLibrary.sass_compile_data_context(sassDataContext);
+			_liferaysassLibrary.sass_compile_data_context(sassDataContext);
 
 			Sass_Context sassContext =
-				_LiferaysassLibrary.sass_data_context_get_context(
+				_liferaysassLibrary.sass_data_context_get_context(
 					sassDataContext);
 
-			int errorStatus = _LiferaysassLibrary.sass_context_get_error_status(
+			int errorStatus = _liferaysassLibrary.sass_context_get_error_status(
 				sassContext);
 
 			if (errorStatus != 0) {
 				String errorMessage =
-					_LiferaysassLibrary.sass_context_get_error_message(
+					_liferaysassLibrary.sass_context_get_error_message(
 						sassContext);
 
 				throw new SassCompilerException(errorMessage);
 			}
 
-			String output = _LiferaysassLibrary.sass_context_get_output_string(
+			String output = _liferaysassLibrary.sass_context_get_output_string(
 				sassContext);
 
 			if (output == null) {
@@ -196,7 +196,7 @@ public class SassCompiler {
 		finally {
 			try {
 				if (sassDataContext != null) {
-					_LiferaysassLibrary.sass_delete_data_context(
+					_liferaysassLibrary.sass_delete_data_context(
 						sassDataContext);
 				}
 			}
@@ -247,7 +247,7 @@ public class SassCompiler {
 		}
 	}
 
-	private static final LiferaysassLibrary _LiferaysassLibrary =
+	private static final LiferaysassLibrary _liferaysassLibrary =
 		LiferaysassLibrary.INSTANCE;
 
 }
