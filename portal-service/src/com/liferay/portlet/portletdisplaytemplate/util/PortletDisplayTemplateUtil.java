@@ -86,8 +86,8 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the default portlet display template's DDM template from the
-	 * class name ID.
+	 * Returns the default portlet display template's DDM template that's
+	 * associated with the class name ID.
 	 *
 	 * @param  groupId the primary key of the group
 	 * @param  classNameId the primary key of the class name of the model the
@@ -111,9 +111,9 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the portlet display template's DDM template from the class name
-	 * ID that matches the group and display style stored in the portlet
-	 * configuration.
+	 * Returns the portlet display template's DDM template that's associated
+	 * with the class name ID and that matches the group and display style
+	 * stored in the portlet configuration.
 	 *
 	 * @param  groupId the primary key of the group
 	 * @param  classNameId the primary key of the class name of the model the
