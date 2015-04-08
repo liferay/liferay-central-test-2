@@ -65,9 +65,9 @@ public class FileUtil {
 		return readProperties(file);
 	}
 
-	public static String relativize(File file, File start) {
+	public static String relativize(File file, File startFile) {
 		Path path = file.toPath();
-		Path startPath = start.toPath();
+		Path startPath = startFile.toPath();
 
 		if (!path.startsWith(startPath)) {
 			return null;
@@ -79,7 +79,7 @@ public class FileUtil {
 	}
 
 	public static void unzip(
-		Project project, final File source, final File destination,
+		Project project, final File sourceFile, final File destinationFile,
 		final int cutDirs, final String[] excludes, final String[] includes) {
 
 		Closure<Void> closure = new Closure<Void>(null) {
@@ -87,7 +87,7 @@ public class FileUtil {
 			@SuppressWarnings("unused")
 			public void doCall(AntBuilder antBuilder) {
 				_invokeAntMethodUnzip(
-					antBuilder, source, destination, cutDirs, excludes,
+					antBuilder, sourceFile, destinationFile, cutDirs, excludes,
 					includes);
 			}
 
@@ -146,13 +146,13 @@ public class FileUtil {
 	}
 
 	private static void _invokeAntMethodUnzip(
-		final AntBuilder antBuilder, File source, File destination,
+		final AntBuilder antBuilder, File sourceFIle, File destinationFile,
 		final int cutDirs, final String[] excludes, final String[] includes) {
 
 		Map<String, Object> args = new HashMap<>();
 
-		args.put("dest", destination);
-		args.put("src", source);
+		args.put("dest", destinationFile);
+		args.put("src", sourceFIle);
 
 		Closure<Void> closure = new Closure<Void>(null) {
 

@@ -110,6 +110,7 @@ public class LiferayThemePlugin extends LiferayWebAppPlugin {
 		}
 	}
 
+	@Override
 	protected void configureDependenciesProvidedCompile(
 		Project project, LiferayExtension liferayExtension) {
 
