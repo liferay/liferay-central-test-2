@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class FindStrutsAction extends BaseStrutsAction {
 
 	public FindStrutsAction() {
-		_findActionDelegate = new BaseFindActionDelegate() {
+		_findActionHelper = new BaseFindActionHelper() {
 
 			@Override
 			public long getGroupId(long primaryKey) throws Exception {
@@ -78,7 +78,7 @@ public abstract class FindStrutsAction extends BaseStrutsAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		_findActionDelegate.execute(request, response);
+		_findActionHelper.execute(request, response);
 
 		return null;
 	}
@@ -107,6 +107,6 @@ public abstract class FindStrutsAction extends BaseStrutsAction {
 			getPrimaryKeyParameterName(), String.valueOf(primaryKey));
 	}
 
-	private final FindActionDelegate _findActionDelegate;
+	private final FindActionHelper _findActionHelper;
 
 }

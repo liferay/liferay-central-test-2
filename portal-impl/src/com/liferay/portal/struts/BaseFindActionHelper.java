@@ -51,7 +51,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Adolfo Pérez
  */
-public abstract class BaseFindActionDelegate implements FindActionDelegate {
+public abstract class BaseFindActionHelper implements FindActionHelper {
 
 	@Override
 	public void execute(
@@ -316,7 +316,7 @@ public abstract class BaseFindActionDelegate implements FindActionDelegate {
 		return layout;
 	}
 
-	protected BaseFindActionDelegate() {
+	protected BaseFindActionHelper() {
 		_portletIds = initPortletIds();
 
 		if (ArrayUtil.isEmpty(_portletIds)) {
@@ -325,7 +325,7 @@ public abstract class BaseFindActionDelegate implements FindActionDelegate {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		BaseFindActionDelegate.class);
+		BaseFindActionHelper.class);
 
 	private final String[] _portletIds;
 

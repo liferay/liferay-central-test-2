@@ -30,7 +30,7 @@ import org.apache.struts.action.ActionMapping;
 public abstract class FindAction extends Action {
 
 	public FindAction() {
-		_findActionDelegate = new BaseFindActionDelegate() {
+		_findActionHelper = new BaseFindActionHelper() {
 
 			@Override
 			public long getGroupId(long primaryKey) throws Exception {
@@ -79,7 +79,7 @@ public abstract class FindAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		_findActionDelegate.execute(request, response);
+		_findActionHelper.execute(request, response);
 
 		return null;
 	}
@@ -108,6 +108,6 @@ public abstract class FindAction extends Action {
 			getPrimaryKeyParameterName(), String.valueOf(primaryKey));
 	}
 
-	private final FindActionDelegate _findActionDelegate;
+	private final FindActionHelper _findActionHelper;
 
 }

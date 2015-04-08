@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Adolfo Pérez
  */
-public interface FindActionDelegate {
+public interface FindActionHelper {
 
 	public void execute(
 			HttpServletRequest request, HttpServletResponse response)
