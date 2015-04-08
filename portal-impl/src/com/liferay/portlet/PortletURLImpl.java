@@ -853,8 +853,7 @@ public class PortletURLImpl
 		if (themeDisplay == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to generate to string because themeDisplay is " +
-						"null");
+					"Unable to generate string because theme display is null");
 			}
 
 			return StringPool.BLANK;
