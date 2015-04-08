@@ -255,15 +255,15 @@ public class LiferayThemePlugin extends LiferayWebAppPlugin {
 		LiferayThemeExtension liferayThemeExtension =
 			(LiferayThemeExtension)liferayExtension;
 
-		War warTask = (War)GradleUtil.getTask(project, WarPlugin.WAR_TASK_NAME);
+		War war = (War)GradleUtil.getTask(project, WarPlugin.WAR_TASK_NAME);
 
-		configureTaskWarExclude(warTask, liferayThemeExtension);
+		configureTaskWarExclude(war, liferayThemeExtension);
 	}
 
 	protected void configureTaskWarExclude(
-		War warTask, LiferayThemeExtension liferayThemeExtension) {
+		War war, LiferayThemeExtension liferayThemeExtension) {
 
-		Project project = warTask.getProject();
+		Project project = war.getProject();
 
 		File diffsDir = getDiffsDir(project, liferayThemeExtension);
 
@@ -272,7 +272,7 @@ public class LiferayThemePlugin extends LiferayWebAppPlugin {
 				diffsDir, getWebAppDir(project));
 
 			if (Validator.isNotNull(relativeDiffsDir)) {
-				warTask.exclude(relativeDiffsDir + "/**");
+				war.exclude(relativeDiffsDir + "/**");
 			}
 		}
 	}
