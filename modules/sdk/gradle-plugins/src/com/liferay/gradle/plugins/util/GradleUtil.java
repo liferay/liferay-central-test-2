@@ -218,8 +218,7 @@ public class GradleUtil {
 		while (iterator.hasNext()) {
 			Dependency dependency = iterator.next();
 
-			String dependencyNotation = _getDependencyNotation(
-				dependency);
+			String dependencyNotation = _getDependencyNotation(dependency);
 
 			if (ArrayUtil.contains(dependencyNotations, dependencyNotation)) {
 				iterator.remove();

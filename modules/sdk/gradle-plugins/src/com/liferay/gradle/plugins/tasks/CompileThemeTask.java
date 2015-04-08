@@ -169,8 +169,8 @@ public class CompileThemeTask extends DefaultTask {
 		include = prefix + include;
 
 		FileUtil.unzip(
-			_project, getPortalWebFile(), getThemeRootDir(), 3,
-			excludes, new String[] {include});
+			_project, getPortalWebFile(), getThemeRootDir(), 3, excludes,
+			new String[] {include});
 	}
 
 	protected void copyThemeParent() {
