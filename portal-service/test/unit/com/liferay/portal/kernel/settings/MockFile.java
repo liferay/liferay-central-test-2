@@ -20,7 +20,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-
 import java.util.List;
 import java.util.Properties;
 
@@ -30,31 +29,27 @@ import java.util.Properties;
 public class MockFile implements com.liferay.portal.kernel.util.File {
 
 	@Override
-	public void copyDirectory(File source, File destination)
-		throws IOException {
+	public void copyDirectory(File source, File destination) {
 	}
 
 	@Override
-	public void copyDirectory(String sourceDirName, String destinationDirName)
-		throws IOException {
+	public void copyDirectory(String sourceDirName, String destinationDirName) {
 	}
 
 	@Override
-	public void copyFile(File source, File destination) throws IOException {
+	public void copyFile(File source, File destination) {
 	}
 
 	@Override
-	public void copyFile(File source, File destination, boolean lazy)
-		throws IOException {
+	public void copyFile(File source, File destination, boolean lazy) {
 	}
 
 	@Override
-	public void copyFile(String source, String destination) throws IOException {
+	public void copyFile(String source, String destination) {
 	}
 
 	@Override
-	public void copyFile(String source, String destination, boolean lazy)
-		throws IOException {
+	public void copyFile(String source, String destination, boolean lazy) {
 	}
 
 	@Override
@@ -63,12 +58,12 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public File createTempFile(byte[] bytes) throws IOException {
+	public File createTempFile(byte[] bytes) {
 		return null;
 	}
 
 	@Override
-	public File createTempFile(InputStream is) throws IOException {
+	public File createTempFile(InputStream is) {
 		return null;
 	}
 
@@ -163,29 +158,28 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public byte[] getBytes(Class<?> clazz, String fileName) throws IOException {
+	public byte[] getBytes(Class<?> clazz, String fileName) {
 		return new byte[0];
 	}
 
 	@Override
-	public byte[] getBytes(File file) throws IOException {
+	public byte[] getBytes(File file) {
 		return new byte[0];
 	}
 
 	@Override
-	public byte[] getBytes(InputStream is) throws IOException {
+	public byte[] getBytes(InputStream is) {
 		return new byte[0];
 	}
 
 	@Override
-	public byte[] getBytes(InputStream is, int bufferSize) throws IOException {
+	public byte[] getBytes(InputStream is, int bufferSize) {
 		return new byte[0];
 	}
 
 	@Override
 	public byte[] getBytes(
-			InputStream inputStream, int bufferSize, boolean cleanUpStream)
-		throws IOException {
+		InputStream inputStream, int bufferSize, boolean cleanUpStream) {
 
 		return new byte[0];
 	}
@@ -196,7 +190,7 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public String getMD5Checksum(File file) throws IOException {
+	public String getMD5Checksum(File file) {
 		return null;
 	}
 
@@ -211,7 +205,7 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public boolean isAscii(File file) throws IOException {
+	public boolean isAscii(File file) {
 		return false;
 	}
 
@@ -260,17 +254,17 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public String read(File file) throws IOException {
+	public String read(File file) {
 		return null;
 	}
 
 	@Override
-	public String read(File file, boolean raw) throws IOException {
+	public String read(File file, boolean raw) {
 		return null;
 	}
 
 	@Override
-	public String read(String fileName) throws IOException {
+	public String read(String fileName) {
 		return null;
 	}
 
@@ -310,11 +304,11 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public void touch(File file) throws IOException {
+	public void touch(File file) {
 	}
 
 	@Override
-	public void touch(String fileName) throws IOException {
+	public void touch(String fileName) {
 	}
 
 	@Override
@@ -322,7 +316,7 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public void write(File file, byte[] bytes) throws IOException {
+	public void write(File file, byte[] bytes) {
 	}
 
 	@Override
@@ -341,70 +335,63 @@ public class MockFile implements com.liferay.portal.kernel.util.File {
 	}
 
 	@Override
-	public void write(File file, byte[] bytes, int offset, int length)
-		throws IOException {
+	public void write(File file, byte[] bytes, int offset, int length) {
 	}
 
 	@Override
 	public void write(
-			File file, byte[] bytes, int offset, int length, boolean append)
-		throws IOException {
+		File file, byte[] bytes, int offset, int length, boolean append) {
 	}
 
 	@Override
-	public void write(File file, InputStream is) throws IOException {
+	public void write(File file, InputStream is) {
 	}
 
 	@Override
-	public void write(File file, String s) throws IOException {
+	public void write(File file, String s) {
 	}
 
 	@Override
-	public void write(File file, String s, boolean lazy) throws IOException {
+	public void write(File file, String s, boolean lazy) {
 	}
 
 	@Override
-	public void write(File file, String s, boolean lazy, boolean append)
-		throws IOException {
+	public void write(File file, String s, boolean lazy, boolean append) {
 	}
 
 	@Override
-	public void write(String fileName, byte[] bytes) throws IOException {
+	public void write(String fileName, byte[] bytes) {
 	}
 
 	@Override
-	public void write(String fileName, InputStream is) throws IOException {
+	public void write(String fileName, InputStream is) {
 	}
 
 	@Override
-	public void write(String fileName, String s) throws IOException {
+	public void write(String fileName, String s) {
 	}
 
 	@Override
-	public void write(String fileName, String s, boolean lazy)
-		throws IOException {
+	public void write(String fileName, String s, boolean lazy) {
 	}
 
 	@Override
-	public void write(String fileName, String s, boolean lazy, boolean append)
-		throws IOException {
+	public void write(String fileName, String s, boolean lazy, boolean append) {
 	}
 
 	@Override
-	public void write(String pathName, String fileName, String s)
-		throws IOException {
-	}
-
-	@Override
-	public void write(String pathName, String fileName, String s, boolean lazy)
-		throws IOException {
+	public void write(String pathName, String fileName, String s) {
 	}
 
 	@Override
 	public void write(
-			String pathName, String fileName, String s, boolean lazy,
-			boolean append)
-		throws IOException {
+		String pathName, String fileName, String s, boolean lazy) {
+	}
+
+	@Override
+	public void write(
+		String pathName, String fileName, String s, boolean lazy,
+		boolean append) {
 	}
 
 }
