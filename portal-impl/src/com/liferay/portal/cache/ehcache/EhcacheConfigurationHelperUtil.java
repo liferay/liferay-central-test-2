@@ -399,13 +399,12 @@ public class EhcacheConfigurationHelperUtil {
 	private static final Log _log = LogFactoryUtil.getLog(
 		EhcacheConfigurationHelperUtil.class);
 
-	private static final HtmlImpl _htmlUtil = new HtmlImpl();
 	private static final Map<NotificationScope, CacheListenerScope>
 		_cacheListenerScopes = new EnumMap<>(NotificationScope.class);
+	private static final HtmlImpl _htmlUtil = new HtmlImpl();
 
 	static {
-		_cacheListenerScopes.put(
-			NotificationScope.ALL, CacheListenerScope.ALL);
+		_cacheListenerScopes.put(NotificationScope.ALL, CacheListenerScope.ALL);
 		_cacheListenerScopes.put(
 			NotificationScope.LOCAL, CacheListenerScope.LOCAL);
 		_cacheListenerScopes.put(
