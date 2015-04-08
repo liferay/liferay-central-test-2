@@ -80,15 +80,15 @@ public class FileUtil {
 
 	public static void unzip(
 		Project project, final File source, final File destination,
-		final int cutDirs, final String[] includes, final String[] excludes) {
+		final int cutDirs, final String[] excludes, final String[] includes) {
 
 		Closure<Void> closure = new Closure<Void>(null) {
 
 			@SuppressWarnings("unused")
 			public void doCall(AntBuilder antBuilder) {
 				_invokeAntMethodUnzip(
-					antBuilder, source, destination, cutDirs, includes,
-					excludes);
+					antBuilder, source, destination, cutDirs, excludes,
+					includes);
 			}
 
 		};
@@ -118,8 +118,8 @@ public class FileUtil {
 	}
 
 	private static void _invokeAntMethodPatternset(
-		final AntBuilder antBuilder, final String[] includes,
-		final String[] excludes) {
+		final AntBuilder antBuilder, final String[] excludes,
+		final String[] includes) {
 
 		Closure<Void> closure = new Closure<Void>(null) {
 
@@ -147,7 +147,7 @@ public class FileUtil {
 
 	private static void _invokeAntMethodUnzip(
 		final AntBuilder antBuilder, File source, File destination,
-		final int cutDirs, final String[] includes, final String[] excludes) {
+		final int cutDirs, final String[] excludes, final String[] includes) {
 
 		Map<String, Object> args = new HashMap<>();
 
@@ -163,7 +163,7 @@ public class FileUtil {
 						antBuilder, "cutdirsmapper", "dirs", cutDirs);
 				}
 
-				_invokeAntMethodPatternset(antBuilder, includes, excludes);
+				_invokeAntMethodPatternset(antBuilder, excludes, includes);
 			}
 
 		};

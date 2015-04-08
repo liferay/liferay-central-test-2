@@ -161,7 +161,7 @@ public class CompileThemeTask extends DefaultTask {
 	}
 
 	protected void copyPortalThemeDir(
-		String theme, String include, String[] excludes) {
+		String theme, String[] excludes, String include) {
 
 		String prefix = "html/themes/" + theme + "/";
 
@@ -170,7 +170,7 @@ public class CompileThemeTask extends DefaultTask {
 
 		FileUtil.unzip(
 			_project, getPortalWebFile(), getThemeRootDir(), 3,
-			new String[] {include}, excludes);
+			excludes, new String[] {include});
 	}
 
 	protected void copyThemeParent() {
@@ -202,12 +202,12 @@ public class CompileThemeTask extends DefaultTask {
 		String themeType = getThemeType();
 
 		copyPortalThemeDir(
-			themeParent, "**",
-			new String[] {
+			themeParent, new String[] {
 				"**/.sass-cache/**", "_diffs/**", "templates/**"
-			});
+			},
+			"**");
 
-		copyPortalThemeDir(themeParent, "templates/*." + themeType, null);
+		copyPortalThemeDir(themeParent, null, "templates/*." + themeType);
 	}
 
 	protected void copyThemeParentProject() {
@@ -239,17 +239,17 @@ public class CompileThemeTask extends DefaultTask {
 	}
 
 	protected void copyThemeParentStyled() {
-		copyPortalThemeDir("_styled", "**", null);
+		copyPortalThemeDir("_styled", null, "**");
 	}
 
 	protected void copyThemeParentUnstyled() {
 		String themeType = getThemeType();
 
-		copyPortalThemeDir("_unstyled", "**", new String[] {"templates/**"});
+		copyPortalThemeDir("_unstyled", new String[] {"templates/**"}, "**");
 
 		copyPortalThemeDir(
-			"_unstyled", "templates/**/*." + themeType,
-			new String[] {"templates/init." + themeType});
+			"_unstyled", new String[] {"templates/init." + themeType},
+			"templates/**/*." + themeType);
 	}
 
 	private static final String[] _PORTAL_THEMES = {
