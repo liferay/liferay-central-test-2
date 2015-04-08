@@ -67,10 +67,11 @@ public class WabFactory extends AbstractExtender {
 
 		try {
 			_saxParserFactory.setFeature(_FEATURES_DISALLOW_DOCTYPE_DECL, true);
-			_saxParserFactory.setFeature(_SAX_EXTERNAL_GENERAL_ENTITIES, false);
 			_saxParserFactory.setFeature(
-				_SAX_EXTERNAL_PARAMETER_ENTITIES, false);
-			_saxParserFactory.setFeature(_SAX_LOAD_EXTERNAL_DTD, false);
+				_FEATURES_EXTERNAL_GENERAL_ENTITIES, false);
+			_saxParserFactory.setFeature(
+				_FEATURES_EXTERNAL_PARAMETER_ENTITIES, false);
+			_saxParserFactory.setFeature(_FEATURES_LOAD_EXTERNAL_DTD, false);
 		}
 		catch (ParserConfigurationException | SAXNotRecognizedException |
 			SAXNotSupportedException e) {
@@ -140,13 +141,13 @@ public class WabFactory extends AbstractExtender {
 	private static final String _FEATURES_DISALLOW_DOCTYPE_DECL =
 		"http://apache.org/xml/features/disallow-doctype-decl";
 
-	private static final String _SAX_EXTERNAL_GENERAL_ENTITIES =
+	private static final String _FEATURES_EXTERNAL_GENERAL_ENTITIES =
 		"http://xml.org/sax/features/external-general-entities";
 
-	private static final String _SAX_EXTERNAL_PARAMETER_ENTITIES =
+	private static final String _FEATURES_EXTERNAL_PARAMETER_ENTITIES =
 		"http://xml.org/sax/features/external-parameter-entities";
 
-	private static final String _SAX_LOAD_EXTERNAL_DTD =
+	private static final String _FEATURES_LOAD_EXTERNAL_DTD =
 		"http://apache.org/xml/features/nonvalidating/load-external-dtd";
 
 	private BundleContext _bundleContext;
