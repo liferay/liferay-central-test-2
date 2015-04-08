@@ -5,8 +5,8 @@
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
 	<macrodef name="build-libsass">
-		<attribute name="libsass.lib.file" />
-		<attribute name="libsass.lib.finalname" />
+		<attribute name="libsass.lib.input.file" />
+		<attribute name="libsass.lib.output.file" />
 		<attribute name="libsass.make.exe" />
 		<attribute name="libsass.resources.dir" />
 
@@ -40,12 +40,12 @@
 
 			<copy todir="resources/@{libsass.resources.dir}">
 				<fileset dir="tmp/libsass-3.1.0/lib">
-					<filename name="@{libsass.lib.file}" />
+					<filename name="@{libsass.lib.input.file}" />
 				</fileset>
 				<filtermapper>
 					<replacestring
-						from="@{libsass.lib.file}"
-						to="@{libsass.lib.finalname}"
+						from="@{libsass.lib.input.file}"
+						to="@{libsass.lib.output.file}"
 					/>
 				</filtermapper>
 			</copy>
@@ -56,8 +56,8 @@
 
 	<target name="build-libsass-darwin">
 		<build-libsass
-			libsass.lib.file="libsass.dylib"
-			libsass.lib.finalname="libliferaysass.dylib"
+			libsass.lib.input.file="libsass.dylib"
+			libsass.lib.output.file="libliferaysass.dylib"
 			libsass.make.exe="make"
 			libsass.resources.dir="darwin"
 		/>
@@ -65,8 +65,8 @@
 
 	<target name="build-libsass-linux-x86">
 		<build-libsass
-			libsass.lib.file="libsass.so"
-			libsass.lib.finalname="libliferaysass.so"
+			libsass.lib.input.file="libsass.so"
+			libsass.lib.output.file="libliferaysass.so"
 			libsass.make.exe="make"
 			libsass.resources.dir="linux-x86"
 		/>
@@ -74,8 +74,8 @@
 
 	<target name="build-libsass-linux-x86-64">
 		<build-libsass
-			libsass.lib.file="libsass.so"
-			libsass.lib.finalname="libliferaysass.so"
+			libsass.lib.input.file="libsass.so"
+			libsass.lib.output.file="libliferaysass.so"
 			libsass.make.exe="make"
 			libsass.resources.dir="linux-x86-64"
 		/>
@@ -83,8 +83,8 @@
 
 	<target name="build-libsass-win32-x86">
 		<build-libsass
-			libsass.lib.file="sass.dll"
-			libsass.lib.finalname="liferaysass.dll"
+			libsass.lib.input.file="sass.dll"
+			libsass.lib.output.file="liferaysass.dll"
 			libsass.make.exe="mingw32-make.exe"
 			libsass.resources.dir="win32-x86"
 		/>
@@ -92,8 +92,8 @@
 
 	<target name="build-libsass-win32-x86-64">
 		<build-libsass
-			libsass.lib.file="sass.dll"
-			libsass.lib.finalname="liferaysass.dll"
+			libsass.lib.input.file="sass.dll"
+			libsass.lib.output.file="liferaysass.dll"
 			libsass.make.exe="mingw32-make.exe"
 			libsass.resources.dir="win32-x86-64"
 		/>
@@ -139,7 +139,7 @@
 				/>
 
 				<concat destfile="src/com/liferay/sass/compiler/libsass/LiferaysassLibrary.java">
-					<header>/* @generated */</header>
+					<header >/* @generated */</header>
 					<filelist dir="tmp" files="LiferaysassLibrary.java" />
 				</concat>
 
