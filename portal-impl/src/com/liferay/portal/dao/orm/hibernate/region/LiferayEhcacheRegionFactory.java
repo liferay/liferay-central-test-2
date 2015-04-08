@@ -117,18 +117,17 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 
 	@Override
 	public void start(Settings settings, Properties properties) {
-		String configFile = null;
-
-		if (properties != null) {
-			configFile = (String)properties.get(
-				NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME);
-		}
-
 		HibernatePortalCacheManager hibernatePortalCacheManager =
 			new HibernatePortalCacheManager();
 
 		hibernatePortalCacheManager.setClusterAware(true);
-		hibernatePortalCacheManager.setConfigFile(configFile);
+
+		if (properties != null) {
+			hibernatePortalCacheManager.setConfigFile(
+				(String)properties.get(
+					NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME));
+		}
+
 		hibernatePortalCacheManager.setDefaultConfigFile(
 			_DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE);
 		hibernatePortalCacheManager.setMpiOnly(true);
@@ -145,9 +144,10 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		hibernatePortalCacheManager.afterPropertiesSet();
 
 		manager = hibernatePortalCacheManager.getEhcacheManager();
-		_hibernatePortalCacheManager = hibernatePortalCacheManager;
 
 		mbeanRegistrationHelper.registerMBean(manager, properties);
+
+		_hibernatePortalCacheManager = hibernatePortalCacheManager;
 	}
 
 	@Override

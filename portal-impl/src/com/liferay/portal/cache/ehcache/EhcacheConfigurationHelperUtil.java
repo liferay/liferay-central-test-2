@@ -70,12 +70,12 @@ public class EhcacheConfigurationHelperUtil {
 		Configuration ehcacheConfiguration =
 			ConfigurationFactory.parseConfiguration(configurationURL);
 
-		_handlePeerFacotryConfigurations(
+		_handlePeerFactoryConfigurations(
 			ehcacheConfiguration.
 				getCacheManagerPeerProviderFactoryConfiguration(),
 			clusterAware);
 
-		_handlePeerFacotryConfigurations(
+		_handlePeerFactoryConfigurations(
 			ehcacheConfiguration.
 				getCacheManagerPeerListenerFactoryConfigurations(),
 			clusterAware);
@@ -164,7 +164,7 @@ public class EhcacheConfigurationHelperUtil {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private static void _handlePeerFacotryConfigurations(
+	private static void _handlePeerFactoryConfigurations(
 		List<FactoryConfiguration> factoryConfigurations,
 		boolean clusterAware) {
 
@@ -238,7 +238,7 @@ public class EhcacheConfigurationHelperUtil {
 				cacheEventListenerFactoryConfiguration.getProperties(),
 				cacheEventListenerFactoryConfiguration. getPropertySeparator());
 
-			CacheListenerScope cacheListenerScope = _scopeMap.get(
+			CacheListenerScope cacheListenerScope = _cacheListenerScopes.get(
 				cacheEventListenerFactoryConfiguration.getListenFor());
 
 			if (factoryClassName.equals(
@@ -323,11 +323,11 @@ public class EhcacheConfigurationHelperUtil {
 			return factoryClassName;
 		}
 
-		String[] valueParts = StringUtil.split(
+		String[] factoryClassNameParts = StringUtil.split(
 			factoryClassName, CharPool.EQUAL);
 
-		if (valueParts[0].equals(_PORTAL_PROPERTY_KEY)) {
-			return PropsUtil.get(valueParts[1]);
+		if (factoryClassNameParts[0].equals(_PORTAL_PROPERTY_KEY)) {
+			return PropsUtil.get(factoryClassNameParts[1]);
 		}
 
 		if (_log.isWarnEnabled()) {
@@ -400,13 +400,16 @@ public class EhcacheConfigurationHelperUtil {
 		EhcacheConfigurationHelperUtil.class);
 
 	private static final HtmlImpl _htmlUtil = new HtmlImpl();
-	private static final Map<NotificationScope, CacheListenerScope> _scopeMap =
-		new EnumMap<>(NotificationScope.class);
+	private static final Map<NotificationScope, CacheListenerScope>
+		_cacheListenerScopes = new EnumMap<>(NotificationScope.class);
 
 	static {
-		_scopeMap.put(NotificationScope.ALL, CacheListenerScope.ALL);
-		_scopeMap.put(NotificationScope.LOCAL, CacheListenerScope.LOCAL);
-		_scopeMap.put(NotificationScope.REMOTE, CacheListenerScope.REMOTE);
+		_cacheListenerScopes.put(
+			NotificationScope.ALL, CacheListenerScope.ALL);
+		_cacheListenerScopes.put(
+			NotificationScope.LOCAL, CacheListenerScope.LOCAL);
+		_cacheListenerScopes.put(
+			NotificationScope.REMOTE, CacheListenerScope.REMOTE);
 	}
 
 }
