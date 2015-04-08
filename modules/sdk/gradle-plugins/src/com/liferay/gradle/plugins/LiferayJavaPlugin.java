@@ -105,8 +105,7 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 			project, PORTAL_WEB_CONFIGURATION_NAME);
 
 		configuration.setDescription(
-			"The portal-web configuration used for compiling themes and CSS " +
-				"files.");
+			"Configures portal-web for compiling themes and CSS files.");
 		configuration.setVisible(false);
 
 		GradleUtil.executeIfEmpty(

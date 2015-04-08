@@ -76,7 +76,7 @@ public class LiferayThemePlugin extends LiferayWebAppPlugin {
 		compileThemeTask.dependsOn(BUILD_THUMBNAILS_TASK_NAME);
 
 		compileThemeTask.setDescription(
-			"Compiles the theme by merging the 'diffs' directory with the " +
+			"Compiles the theme by merging the \"diffs\" directory with the " +
 				"parent theme.");
 		compileThemeTask.setGroup(BasePlugin.BUILD_GROUP);
 
