@@ -218,7 +218,7 @@ public class GradleUtil {
 		while (iterator.hasNext()) {
 			Dependency dependency = iterator.next();
 
-			String dependencyNotation = _getDependencyStringNotation(
+			String dependencyNotation = _getDependencyNotation(
 				dependency);
 
 			if (ArrayUtil.contains(dependencyNotations, dependencyNotation)) {
@@ -235,7 +235,7 @@ public class GradleUtil {
 		return dependencyHandler.add(configurationName, dependencyNotation);
 	}
 
-	private static String _getDependencyStringNotation(Dependency dependency) {
+	private static String _getDependencyNotation(Dependency dependency) {
 		StringBuilder sb = new StringBuilder();
 
 		if (Validator.isNotNull(dependency.getGroup())) {
