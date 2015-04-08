@@ -25,25 +25,25 @@ import org.junit.Test;
 public class JspCompilerTest {
 
 	@Test
-	public void testGetTldUri_1() throws Exception {
+	public void testGetTldUri1() throws Exception {
 		JspCompiler jspCompiler = new JspCompiler();
 
 		URL url = JspCompilerTest.class.getResource("dependencies/test_1.tld");
 
-		Assert.assertEquals("This is a test!", jspCompiler.getTldUri(url));
+		Assert.assertEquals("This is a test.", jspCompiler.getTldUri(url));
 	}
 
 	@Test
-	public void testGetTldUri_2() throws Exception {
+	public void testGetTldUri2() throws Exception {
 		JspCompiler jspCompiler = new JspCompiler();
 
 		URL url = JspCompilerTest.class.getResource("dependencies/test_2.tld");
 
-		Assert.assertEquals("This is a test!", jspCompiler.getTldUri(url));
+		Assert.assertEquals("This is a test.", jspCompiler.getTldUri(url));
 	}
 
 	@Test
-	public void testGetTldUri_3() throws Exception {
+	public void testGetTldUri3() throws Exception {
 		JspCompiler jspCompiler = new JspCompiler();
 
 		URL url = JspCompilerTest.class.getResource("dependencies/test_3.tld");
@@ -52,7 +52,7 @@ public class JspCompilerTest {
 	}
 
 	@Test
-	public void testGetTldUri_4() throws Exception {
+	public void testGetTldUri4() throws Exception {
 		JspCompiler jspCompiler = new JspCompiler();
 
 		URL url = JspCompilerTest.class.getResource("dependencies/test_4.tld");
