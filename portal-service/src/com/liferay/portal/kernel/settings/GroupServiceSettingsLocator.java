@@ -30,11 +30,6 @@ public class GroupServiceSettingsLocator implements SettingsLocator {
 	}
 
 	@Override
-	public String getSettingsId() {
-		return _serviceName;
-	}
-
-	@Override
 	public Settings getSettings() throws SettingsException {
 		long companyId = getCompanyId(_groupId);
 
@@ -55,6 +50,11 @@ public class GroupServiceSettingsLocator implements SettingsLocator {
 
 		return _settingsLocatorHelper.getGroupPortletPreferencesSettings(
 			_groupId, _serviceName, companyPortletPreferencesSettings);
+	}
+
+	@Override
+	public String getSettingsId() {
+		return _serviceName;
 	}
 
 	protected long getCompanyId(long groupId) throws SettingsException {

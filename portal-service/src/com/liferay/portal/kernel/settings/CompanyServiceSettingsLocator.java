@@ -26,11 +26,6 @@ public class CompanyServiceSettingsLocator implements SettingsLocator {
 	}
 
 	@Override
-	public String getSettingsId() {
-		return _serviceName;
-	}
-
-	@Override
 	public Settings getSettings() {
 		Settings portalPropertiesSettings =
 			_settingsLocatorHelper.getPortalPropertiesSettings();
@@ -45,6 +40,11 @@ public class CompanyServiceSettingsLocator implements SettingsLocator {
 
 		return _settingsLocatorHelper.getCompanyPortletPreferencesSettings(
 			_companyId, _serviceName, portalPreferencesSettings);
+	}
+
+	@Override
+	public String getSettingsId() {
+		return _serviceName;
 	}
 
 	private final long _companyId;

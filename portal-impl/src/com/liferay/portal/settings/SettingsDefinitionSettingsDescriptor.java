@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.settings.SettingsDescriptor;
 import com.liferay.portal.kernel.settings.definition.SettingsDefinition;
 
 import java.lang.reflect.Method;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
