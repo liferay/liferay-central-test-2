@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.settings.SettingsDescriptor;
 import com.liferay.portal.kernel.settings.definition.SettingsDefinition;
 
 import java.lang.reflect.Method;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,6 +61,7 @@ public class SettingsDefinitionSettingsDescriptor
 		return _multiValuedKeys;
 	}
 
+	@Override
 	public ResourceManager getResourceManager() {
 		return _resourceManager;
 	}

@@ -29,10 +29,12 @@ public class GroupServiceSettingsLocator implements SettingsLocator {
 		_serviceName = serviceName;
 	}
 
+	@Override
 	public String getSettingsId() {
 		return _serviceName;
 	}
 
+	@Override
 	public Settings retrieveSettings() throws SettingsException {
 		long companyId = getCompanyId(_groupId);
 

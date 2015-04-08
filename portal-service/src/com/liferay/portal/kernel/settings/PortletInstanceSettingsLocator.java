@@ -30,10 +30,12 @@ public class PortletInstanceSettingsLocator implements SettingsLocator {
 		_portletId = portletId;
 	}
 
+	@Override
 	public String getSettingsId() {
 		return _portletId;
 	}
 
+	@Override
 	public Settings retrieveSettings() throws SettingsException {
 		long companyId = getCompanyId(_layout.getGroupId());
 

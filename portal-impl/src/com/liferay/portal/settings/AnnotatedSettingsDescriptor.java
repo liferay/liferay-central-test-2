@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.settings.SettingsDescriptor;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -53,6 +52,7 @@ public class AnnotatedSettingsDescriptor implements SettingsDescriptor {
 		return _allKeys;
 	}
 
+	@Override
 	public Object getConfigurationBean() {
 		return _configurationBean;
 	}
@@ -62,6 +62,7 @@ public class AnnotatedSettingsDescriptor implements SettingsDescriptor {
 		return _multiValuedKeys;
 	}
 
+	@Override
 	public ResourceManager getResourceManager() {
 		return _resourceManager;
 	}

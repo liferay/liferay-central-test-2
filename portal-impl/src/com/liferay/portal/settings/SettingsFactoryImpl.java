@@ -98,6 +98,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			settingsId, portalPropertiesSettings);
 	}
 
+	@Override
 	public Settings getSettings(SettingsLocator settingsLocator)
 		throws SettingsException {
 

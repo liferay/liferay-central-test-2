@@ -25,10 +25,12 @@ public class CompanyServiceSettingsLocator implements SettingsLocator {
 		_serviceName = serviceName;
 	}
 
+	@Override
 	public String getSettingsId() {
 		return _serviceName;
 	}
 
+	@Override
 	public Settings retrieveSettings() {
 		Settings portalPropertiesSettings =
 			_settingsLocatorHelper.getPortalPropertiesSettings();
