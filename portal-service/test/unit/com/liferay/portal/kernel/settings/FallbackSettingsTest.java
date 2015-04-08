@@ -12,10 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.settings.impl;
-
-import com.liferay.portal.kernel.settings.FallbackKeys;
-import com.liferay.portal.kernel.settings.Settings;
+package com.liferay.portal.kernel.settings;
 
 import org.junit.Assert;
 import org.junit.Test;

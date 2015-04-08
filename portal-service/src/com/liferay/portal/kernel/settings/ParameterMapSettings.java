@@ -12,10 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.kernel.settings.impl;
+package com.liferay.portal.kernel.settings;
 
-import com.liferay.portal.kernel.settings.BaseSettings;
-import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Map;

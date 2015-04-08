@@ -12,13 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.kernel.settings.impl;
+package com.liferay.portal.kernel.settings;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.settings.BaseModifiableSettings;
-import com.liferay.portal.kernel.settings.ModifiableSettings;
-import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 

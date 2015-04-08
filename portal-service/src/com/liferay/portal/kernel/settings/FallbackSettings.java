@@ -12,11 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.settings.impl;
-
-import com.liferay.portal.kernel.settings.BaseSettings;
-import com.liferay.portal.kernel.settings.FallbackKeys;
-import com.liferay.portal.kernel.settings.Settings;
+package com.liferay.portal.kernel.settings;
 
 /**
  * @author Iván Zaera

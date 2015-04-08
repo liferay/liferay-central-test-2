@@ -14,6 +14,7 @@
 
 package com.liferay.portal.settings.impl;
 
+import com.liferay.portal.kernel.settings.ParameterMapSettings;
 import com.liferay.portal.kernel.settings.PortletInstanceSettings;
 import com.liferay.portal.kernel.settings.PortletInstanceSettingsLocator;
 import com.liferay.portal.kernel.settings.PortletInstanceSettingsProvider;
@@ -22,7 +23,6 @@ import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.settings.TypedSettings;
 import com.liferay.portal.kernel.settings.definition.SettingsDefinition;
-import com.liferay.portal.kernel.settings.impl.ParameterMapSettings;
 import com.liferay.portal.model.Layout;
 
 import java.lang.reflect.Constructor;
