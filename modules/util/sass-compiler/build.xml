@@ -139,7 +139,7 @@
 				/>
 
 				<concat destfile="src/com/liferay/sass/compiler/libsass/LiferaysassLibrary.java">
-					<header >/* @generated */</header>
+					<header>/* @generated */</header>
 					<filelist dir="tmp" files="LiferaysassLibrary.java" />
 				</concat>
 
