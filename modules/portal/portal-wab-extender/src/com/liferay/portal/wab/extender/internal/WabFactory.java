@@ -61,12 +61,6 @@ public class WabFactory extends AbstractExtender {
 		_eventUtil = new EventUtil(_bundleContext);
 		_logger = new Logger(_bundleContext);
 
-		Dictionary<String, Object> properties =
-			componentContext.getProperties();
-
-		_wabExtenderConfiguration = Configurable.createConfigurable(
-			WabExtenderConfiguration.class, properties);
-
 		_saxParserFactory.setNamespaceAware(false);
 		_saxParserFactory.setValidating(false);
 		_saxParserFactory.setXIncludeAware(false);
@@ -83,6 +77,12 @@ public class WabFactory extends AbstractExtender {
 
 			ReflectionUtil.throwException(e);
 		}
+
+		Dictionary<String, Object> properties =
+			componentContext.getProperties();
+
+		_wabExtenderConfiguration = Configurable.createConfigurable(
+			WabExtenderConfiguration.class, properties);
 
 		try {
 			_webBundleDeployer = new WebBundleDeployer(
