@@ -1296,9 +1296,9 @@ public class PortletImpl extends PortletBaseImpl {
 			return _portletDataHandlerClass;
 		}
 
-		Class portletDataHandlerClass = portletDataHandler.getClass();
+		Class<?> clazz = portletDataHandler.getClass();
 
-		return portletDataHandlerClass.getName();
+		return clazz.getName();
 	}
 
 	/**
