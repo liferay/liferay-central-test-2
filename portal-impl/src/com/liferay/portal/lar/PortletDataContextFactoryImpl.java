@@ -69,6 +69,12 @@ public class PortletDataContextFactoryImpl
 		clonePortletDataContext.setManifestSummary(
 			(ManifestSummary)manifestSummary.clone());
 
+		Map<String, Map<?, ?>> newPrimaryKeysMaps =
+			clonePortletDataContext.getNewPrimaryKeysMaps();
+
+		newPrimaryKeysMaps.putAll(
+			clonePortletDataContext.getNewPrimaryKeysMaps());
+
 		clonePortletDataContext.setParameterMap(
 			portletDataContext.getParameterMap());
 		clonePortletDataContext.setPortletId(portletDataContext.getPortletId());
@@ -87,14 +93,6 @@ public class PortletDataContextFactoryImpl
 			portletDataContext.getUserIdStrategy());
 		clonePortletDataContext.setUserPersonalSiteGroupId(
 			portletDataContext.getUserPersonalSiteGroupId());
-
-		Map<String, Map<?, ?>> newPrimaryKeysMaps =
-			portletDataContext.getNewPrimaryKeysMaps();
-
-		Map<String, Map<?, ?>> cloneNewPrimaryKeysMaps =
-			clonePortletDataContext.getNewPrimaryKeysMaps();
-
-		cloneNewPrimaryKeysMaps.putAll(newPrimaryKeysMaps);
 
 		return clonePortletDataContext;
 	}
