@@ -75,8 +75,8 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 		directDeployTask.dependsOn(WarPlugin.WAR_TASK_NAME);
 
 		directDeployTask.setDescription(
-			"Processes the war archive just like it was run through Liferay " +
-				"Auto Deployer.");
+			"Processes a WAR file as if it was picked up by the Liferay auto " +
+				"deploy directory");
 		directDeployTask.setGroup(WarPlugin.WEB_APP_GROUP);
 
 		return directDeployTask;
