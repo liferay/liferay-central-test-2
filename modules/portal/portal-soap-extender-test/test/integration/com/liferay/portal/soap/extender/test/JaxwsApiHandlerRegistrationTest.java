@@ -34,10 +34,10 @@ import org.junit.runner.RunWith;
 /**
  * @author Carlos Sierra Andrés
  */
-@BndFile("bnd-handlers-api.bnd")
+@BndFile("bnd-api-handler.bnd")
 @RunAsClient
 @RunWith(Arquillian.class)
-public class JaxwsHandlerRegistrationAsApiTest {
+public class JaxwsApiHandlerRegistrationTest {
 
 	@Test
 	public void testHandlerIsRegistered() throws Exception {

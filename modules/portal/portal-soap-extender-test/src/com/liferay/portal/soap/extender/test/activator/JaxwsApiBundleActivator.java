@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.soap.extender.test.activators.simple;
+package com.liferay.portal.soap.extender.test.activator;
 
 import com.liferay.portal.soap.extender.test.service.GreeterImpl;
 

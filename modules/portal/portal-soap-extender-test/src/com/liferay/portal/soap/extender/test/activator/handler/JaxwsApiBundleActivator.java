@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.soap.extender.test.activators.handlers;
+package com.liferay.portal.soap.extender.test.activator.handler;
 
-import com.liferay.portal.soap.extender.test.handlers.SampleComponentHandler;
+import com.liferay.portal.soap.extender.test.handler.SampleComponentHandler;
 import com.liferay.portal.soap.extender.test.service.GreeterImpl;
 
 import java.util.List;
@@ -29,7 +29,7 @@ import org.osgi.framework.BundleContext;
 /**
  * @author Carlos Sierra Andrés
  */
-public class JaxwsApiBundleActivatorWithHandlers implements BundleActivator {
+public class JaxwsApiBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.soap.extender.test.handlers;
+package com.liferay.portal.soap.extender.test.handler;
 
 import java.net.URL;
 
