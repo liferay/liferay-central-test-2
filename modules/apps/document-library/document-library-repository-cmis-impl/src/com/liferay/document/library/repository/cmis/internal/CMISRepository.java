@@ -16,7 +16,6 @@ package com.liferay.document.library.repository.cmis.internal;
 
 import com.liferay.document.library.repository.cmis.BaseCmisRepository;
 import com.liferay.document.library.repository.cmis.CMISRepositoryHandler;
-import com.liferay.document.library.repository.cmis.internal.constants.PortalPropsValues;
 import com.liferay.document.library.repository.cmis.internal.model.CMISFileEntry;
 import com.liferay.document.library.repository.cmis.internal.model.CMISFileVersion;
 import com.liferay.document.library.repository.cmis.internal.model.CMISFolder;
@@ -44,8 +43,11 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -1529,7 +1531,7 @@ public class CMISRepository extends BaseCmisRepository {
 	protected void deleteMappedFileEntry(Document document)
 		throws PortalException {
 
-		if (PortalPropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_NONE) {
+		if (_DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_NONE) {
 			return;
 		}
 
@@ -1551,7 +1553,7 @@ public class CMISRepository extends BaseCmisRepository {
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder)
 		throws PortalException {
 
-		if (PortalPropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_NONE) {
+		if (_DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_NONE) {
 			return;
 		}
 
@@ -1573,9 +1575,7 @@ public class CMISRepository extends BaseCmisRepository {
 					repositoryEntryLocalService.deleteRepositoryEntry(
 						getRepositoryId(), cmisObject.getId());
 
-					if (PortalPropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH ==
-							_DELETE_DEEP) {
-
+					if (_DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_DEEP) {
 						deleteMappedFolder(cmisSubfolder);
 					}
 				}
@@ -2285,6 +2285,10 @@ public class CMISRepository extends BaseCmisRepository {
 	private static final int _DELETE_DEEP = -1;
 
 	private static final int _DELETE_NONE = 0;
+
+	private static final int _DL_REPOSITORY_CMIS_DELETE_DEPTH =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.DL_REPOSITORY_CMIS_DELETE_DEPTH));
 
 	private static final Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 

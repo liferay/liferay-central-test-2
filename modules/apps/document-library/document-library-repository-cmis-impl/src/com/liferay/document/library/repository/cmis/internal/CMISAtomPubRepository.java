@@ -17,10 +17,12 @@ package com.liferay.document.library.repository.cmis.internal;
 import com.liferay.document.library.repository.cmis.CMISRepositoryHandler;
 import com.liferay.document.library.repository.cmis.Session;
 import com.liferay.document.library.repository.cmis.internal.constants.CMISRepositoryConstants;
-import com.liferay.document.library.repository.cmis.internal.constants.PortalPropsValues;
 import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -63,8 +65,8 @@ public class CMISAtomPubRepository extends CMISRepositoryHandler {
 			password = PrincipalThreadLocal.getPassword();
 		}
 		else {
-			login = PortalPropsValues.DL_REPOSITORY_GUEST_USERNAME;
-			password = PortalPropsValues.DL_REPOSITORY_GUEST_PASSWORD;
+			login = _DL_REPOSITORY_GUEST_USERNAME;
+			password = _DL_REPOSITORY_GUEST_PASSWORD;
 		}
 
 		parameters.put(SessionParameter.PASSWORD, password);
@@ -85,5 +87,13 @@ public class CMISAtomPubRepository extends CMISRepositoryHandler {
 		return CMISRepositoryUtil.getTypeSettingsValue(
 			typeSettingsProperties, typeSettingsKey);
 	}
+
+	private static final String _DL_REPOSITORY_GUEST_PASSWORD =
+		GetterUtil.getString(
+			PropsUtil.get(PropsKeys.DL_REPOSITORY_GUEST_PASSWORD));
+
+	private static final String _DL_REPOSITORY_GUEST_USERNAME =
+		GetterUtil.getString(
+			PropsUtil.get(PropsKeys.DL_REPOSITORY_GUEST_USERNAME));
 
 }
