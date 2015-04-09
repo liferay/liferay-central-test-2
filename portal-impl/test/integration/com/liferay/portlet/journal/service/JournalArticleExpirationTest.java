@@ -71,22 +71,22 @@ public class JournalArticleExpirationTest {
 
 	@Test
 	public void testExpireApprovedArticle() throws Exception {
-		testExpireArticle(true, _NO_CHANGE);
+		testExpireArticle(true, _MODE_DEFAULT);
 	}
 
 	@Test
-	public void testExpireApprovedArticlePostponedExpiring() throws Exception {
-		testExpireArticle(true, _POSTPONE_EXPIRE);
+	public void testExpireApprovedArticlePostponeExpiration() throws Exception {
+		testExpireArticle(true, _MODE_POSTPONE_EXPIRIRATION);
 	}
 
 	@Test
 	public void testExpireDraftArticle() throws Exception {
-		testExpireArticle(false, _NO_CHANGE);
+		testExpireArticle(false, _MODE_DEFAULT);
 	}
 
 	@Test
-	public void testExpireDraftArticlePostponedExpiring() throws Exception {
-		testExpireArticle(false, _POSTPONE_EXPIRE);
+	public void testExpireDraftArticlePostponeExpiration() throws Exception {
+		testExpireArticle(false, _MODE_POSTPONE_EXPIRIRATION);
 	}
 
 	protected JournalArticle addArticle(long groupId, boolean approved)
@@ -157,7 +157,7 @@ public class JournalArticleExpirationTest {
 	protected void testExpireArticle(boolean approved, int mode)
 		throws Exception {
 
-		// Add Expiring, Approved Article
+		// Add expiring, approved Article
 
 		JournalArticle article = addArticle(_group.getGroupId(), approved);
 
@@ -180,7 +180,7 @@ public class JournalArticleExpirationTest {
 		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
 
 		if (approved) {
-			if (mode == _POSTPONE_EXPIRE) {
+			if (mode == _MODE_POSTPONE_EXPIRIRATION) {
 				Assert.assertFalse(article.isExpired());
 			}
 			else {
@@ -195,17 +195,18 @@ public class JournalArticleExpirationTest {
 	protected JournalArticle updateArticle(JournalArticle article, int mode)
 		throws Exception {
 
-		if (mode == _POSTPONE_EXPIRE) {
-			ServiceContext serviceContext =
-				ServiceContextTestUtil.getServiceContext(article.getGroupId());
-
-			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
+		if (mode == _MODE_POSTPONE_EXPIRIRATION) {
 			Calendar displayDateCalendar = new GregorianCalendar();
+
 			displayDateCalendar.setTime(article.getDisplayDate());
 
 			Calendar expirationDateCalendar = getExpirationCalendar(
 				Time.YEAR, 1);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(article.getGroupId());
+
+			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 			return JournalArticleLocalServiceUtil.updateArticle(
 				TestPropsValues.getUserId(), article.getGroupId(),
@@ -227,14 +228,13 @@ public class JournalArticleExpirationTest {
 				0, true, article.getIndexable(), article.isSmallImage(),
 				article.getSmallImageURL(), null, null, null, serviceContext);
 		}
-		else {
-			return article;
-		}
+
+		return article;
 	}
 
-	private static final int _NO_CHANGE = 0;
+	private static final int _MODE_DEFAULT = 0;
 
-	private static final int _POSTPONE_EXPIRE = 1;
+	private static final int _MODE_POSTPONE_EXPIRIRATION = 1;
 
 	@DeleteAfterTestRun
 	private Group _group;
