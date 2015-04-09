@@ -184,7 +184,7 @@ public class DirectDeployTask extends BasePortalImplToolsTask {
 
 	private File _appServerDeployDir;
 	private String _appServerType;
-	private boolean _customPortletXml = false;
+	private boolean _customPortletXml;
 	private boolean _unpackWar = true;
 	private File _webAppFile;
 	private String _webAppType;
