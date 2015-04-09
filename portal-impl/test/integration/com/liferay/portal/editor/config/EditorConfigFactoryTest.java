@@ -60,13 +60,12 @@ public class EditorConfigFactoryTest {
 	}
 
 	@Test
-	public void
-			testEditorConfigKeyAndEditorNameOverridesPortletNameAndEditorNameEditorConfig()
+	public void testEditorConfigKeyAndEditorNameOverridesPortletNameAndEditorNameEditorConfig()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("editor.name", _EDITOR_NAME);
@@ -117,7 +116,7 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("service.ranking", 1000);
@@ -162,7 +161,7 @@ public class EditorConfigFactoryTest {
 	public void testGetEditorConfigByEditorName() throws Exception {
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("service.ranking", 1000);
@@ -213,7 +212,7 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("service.ranking", 1000);
@@ -262,7 +261,7 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("editor.name", _EDITOR_NAME);
@@ -315,7 +314,7 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("javax.portlet.name", _PORTLET_NAME);
@@ -367,7 +366,7 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("javax.portlet.name", _PORTLET_NAME);
@@ -417,7 +416,7 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		HashMap<String, Object> properties = new HashMap<>();
+		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("javax.portlet.name", _PORTLET_NAME);
 		properties.put("service.ranking", 1000);
