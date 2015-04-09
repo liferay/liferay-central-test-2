@@ -212,25 +212,25 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
+		EditorConfigContributor textFormatEditorConfigContributor =
+			new TextFormatEditorConfigContributor();
+
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("service.ranking", 1000);
 
-		EditorConfigContributor textFormatEditorConfigContributor =
-			new TextFormatEditorConfigContributor();
-
 		_editorConfigContributorServiceRegistration1 = registry.registerService(
 			EditorConfigContributor.class, textFormatEditorConfigContributor,
 			properties);
+
+		EditorConfigContributor videoEditorVideoConfigContributor =
+			new VideoEditorConfigContributor();
 
 		properties = new HashMap<>();
 
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("service.ranking", 2000);
-
-		EditorConfigContributor videoEditorVideoConfigContributor =
-			new VideoEditorConfigContributor();
 
 		_editorConfigContributorServiceRegistration2 = registry.registerService(
 			EditorConfigContributor.class, videoEditorVideoConfigContributor,
@@ -255,11 +255,13 @@ public class EditorConfigFactoryTest {
 	}
 
 	@Test
-	public void
-			testPortletNameAndEditorConfigKeyAndEditorNameOverridesPortletNameAndEditorConfigKeyEditorConfig()
+	public void testPortletNameAndEditorConfigKeyAndEditorNameOverridesPortletNameAndEditorConfigKeyEditorConfig()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+
+		EditorConfigContributor textFormatEditorConfigContributor =
+			new TextFormatEditorConfigContributor();
 
 		Map<String, Object> properties = new HashMap<>();
 
@@ -268,21 +270,18 @@ public class EditorConfigFactoryTest {
 		properties.put("javax.portlet.name", _PORTLET_NAME);
 		properties.put("service.ranking", 1000);
 
-		EditorConfigContributor textFormatEditorConfigContributor =
-			new TextFormatEditorConfigContributor();
-
 		_editorConfigContributorServiceRegistration1 = registry.registerService(
 			EditorConfigContributor.class, textFormatEditorConfigContributor,
 			properties);
+
+		EditorConfigContributor emoticonsEditorConfigContributor =
+			new EmoticonsEditorConfigContributor();
 
 		properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("javax.portlet.name", _PORTLET_NAME);
 		properties.put("service.ranking", 1000);
-
-		EditorConfigContributor emoticonsEditorConfigContributor =
-			new EmoticonsEditorConfigContributor();
 
 		_editorConfigContributorServiceRegistration2 = registry.registerService(
 			EditorConfigContributor.class, emoticonsEditorConfigContributor,
@@ -308,11 +307,13 @@ public class EditorConfigFactoryTest {
 	}
 
 	@Test
-	public void
-			testPortletNameAndEditorConfigKeyOverridesEditorConfigKeyAndEditorNameEditorConfig()
+	public void testPortletNameAndEditorConfigKeyOverridesEditorConfigKeyAndEditorNameEditorConfig()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+
+		EditorConfigContributor emoticonsEditorConfigContributor =
+			new EmoticonsEditorConfigContributor();
 
 		Map<String, Object> properties = new HashMap<>();
 
@@ -320,21 +321,18 @@ public class EditorConfigFactoryTest {
 		properties.put("javax.portlet.name", _PORTLET_NAME);
 		properties.put("service.ranking", 1000);
 
-		EditorConfigContributor emoticonsEditorConfigContributor =
-			new EmoticonsEditorConfigContributor();
-
 		_editorConfigContributorServiceRegistration1 = registry.registerService(
 			EditorConfigContributor.class, emoticonsEditorConfigContributor,
 			properties);
+
+		EditorConfigContributor textFormatEditorConfigContributor =
+			new TextFormatEditorConfigContributor();
 
 		properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("service.ranking", 1000);
-
-		EditorConfigContributor textFormatEditorConfigContributor =
-			new TextFormatEditorConfigContributor();
 
 		_editorConfigContributorServiceRegistration2 = registry.registerService(
 			EditorConfigContributor.class, textFormatEditorConfigContributor,
@@ -360,11 +358,13 @@ public class EditorConfigFactoryTest {
 	}
 
 	@Test
-	public void
-			testPortletNameAndEditorNameOverridesEditorConfigKeyEditorConfig()
+	public void testPortletNameAndEditorNameOverridesEditorConfigKeyEditorConfig()
 		throws Exception {
 
 		Registry registry = RegistryUtil.getRegistry();
+
+		EditorConfigContributor textFormatEditorConfigContributor =
+			new TextFormatEditorConfigContributor();
 
 		Map<String, Object> properties = new HashMap<>();
 
@@ -372,20 +372,17 @@ public class EditorConfigFactoryTest {
 		properties.put("javax.portlet.name", _PORTLET_NAME);
 		properties.put("service.ranking", 1000);
 
-		EditorConfigContributor textFormatEditorConfigContributor =
-			new TextFormatEditorConfigContributor();
-
 		_editorConfigContributorServiceRegistration1 = registry.registerService(
 			EditorConfigContributor.class, textFormatEditorConfigContributor,
 			properties);
+
+		EditorConfigContributor emoticonsEditorConfigContributor =
+			new EmoticonsEditorConfigContributor();
 
 		properties = new HashMap<>();
 
 		properties.put("editor.config.key", _CONFIG_KEY);
 		properties.put("service.ranking", 1000);
-
-		EditorConfigContributor emoticonsEditorConfigContributor =
-			new EmoticonsEditorConfigContributor();
 
 		_editorConfigContributorServiceRegistration2 = registry.registerService(
 			EditorConfigContributor.class, emoticonsEditorConfigContributor,
@@ -416,25 +413,25 @@ public class EditorConfigFactoryTest {
 
 		Registry registry = RegistryUtil.getRegistry();
 
+		EditorConfigContributor tablesEditorConfigContributor =
+			new TablesEditorConfigContributor();
+
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("javax.portlet.name", _PORTLET_NAME);
 		properties.put("service.ranking", 1000);
 
-		EditorConfigContributor tablesEditorConfigContributor =
-			new TablesEditorConfigContributor();
-
 		_editorConfigContributorServiceRegistration1 = registry.registerService(
 			EditorConfigContributor.class, tablesEditorConfigContributor,
 			properties);
+
+		EditorConfigContributor textFormatEditorConfigContributor =
+			new TextFormatEditorConfigContributor();
 
 		properties = new HashMap<>();
 
 		properties.put("editor.name", _EDITOR_NAME);
 		properties.put("service.ranking", 1000);
-
-		EditorConfigContributor textFormatEditorConfigContributor =
-			new TextFormatEditorConfigContributor();
 
 		_editorConfigContributorServiceRegistration2 = registry.registerService(
 			EditorConfigContributor.class, textFormatEditorConfigContributor,
