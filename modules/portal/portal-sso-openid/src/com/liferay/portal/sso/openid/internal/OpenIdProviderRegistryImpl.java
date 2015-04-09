@@ -77,34 +77,36 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		Collection<OpenIdProvider> providers = initOpenIdProviders(properties);
+		Collection<OpenIdProvider> openIdProviders = initOpenIdProviders(
+			properties);
 
-		for (OpenIdProvider provider : providers) {
-			setOpenIdProvider(provider);
+		for (OpenIdProvider openIdProvider : openIdProviders) {
+			setOpenIdProvider(openIdProvider);
 		}
 	}
 
 	protected Collection<OpenIdProvider> initOpenIdProviders(
 		Map<String, Object> properties) {
 
-		Map<String, OpenIdProvider> result = new HashMap<>(2);
+		Map<String, OpenIdProvider> openIdProviders = new HashMap<>(2);
 
 		for (String key : properties.keySet()) {
-			int pos = key.indexOf("[");
+			int index = key.indexOf("[");
 
-			if (pos < 0) {
+			if (index < 0) {
 				continue;
 			}
 
-			String name = key.substring(pos + 1, key.length() - 1);
+			String name = key.substring(index + 1, key.length() - 1);
 
-			OpenIdProvider openIdProvider = result.get(name);
+			OpenIdProvider openIdProvider = openIdProviders.get(name);
 
 			if (openIdProvider == null) {
 				openIdProvider = new OpenIdProvider();
+
 				openIdProvider.setName(name);
 
-				result.put(name, openIdProvider);
+				openIdProviders.put(name, openIdProvider);
 			}
 
 			String value = GetterUtil.getString(properties.get(key));
@@ -112,18 +114,16 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 			if (key.startsWith(_OPEN_ID_AX_SCHEMA)) {
 				openIdProvider.setAxSchema(StringUtil.split(value));
 			}
-			else if (key.startsWith(_OPEN_ID_AX_TYPE_URL)) {
+			else if (key.startsWith(_OPEN_ID_URL)) {
 				openIdProvider.setUrl(value);
 			}
 			else {
-				String attributeName = key.substring(
-					_OPEN_ID_AX_TYPE.length() + 1, pos);
-
-				openIdProvider.setAxTypes(attributeName, value);
+				openIdProvider.setAxTypes(
+					key.substring(_OPEN_ID_AX_TYPE.length() + 1, index), value);
 			}
 		}
 
-		return result.values();
+		return openIdProviders.values();
 	}
 
 	@Reference(
@@ -142,7 +142,7 @@ public class OpenIdProviderRegistryImpl implements OpenIdProviderRegistry {
 
 	private static final String _OPEN_ID_AX_TYPE = "open.id.ax.type";
 
-	private static final String _OPEN_ID_AX_TYPE_URL = "open.id.url";
+	private static final String _OPEN_ID_URL = "open.id.url";
 
 	private final Map<String, OpenIdProvider> _openIdProviders =
 		new HashMap<>();
