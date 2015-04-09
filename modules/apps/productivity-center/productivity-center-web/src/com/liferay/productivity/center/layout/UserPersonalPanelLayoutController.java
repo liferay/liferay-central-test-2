@@ -84,12 +84,12 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 			response, unsyncStringWriter);
 
 		try {
-			injectPanelEntryRegistries(request);
+			setPanelEntryRegistries(request);
 
 			requestDispatcher.include(request, pipingServletResponse);
 		}
 		finally {
-			cleanUpPanelEntryRegistries(request);
+			removePanelEntryRegistries(request);
 		}
 
 		return unsyncStringWriter.toString();
@@ -112,11 +112,12 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 		String contentType = pipingServletResponse.getContentType();
 
 		try {
-			injectPanelEntryRegistries(request);
+			setPanelEntryRegistries(request);
+
 			requestDispatcher.include(request, pipingServletResponse);
 		}
 		finally {
-			cleanUpPanelEntryRegistries(request);
+			removePanelEntryRegistries(request);
 		}
 
 		if (contentType != null) {
@@ -165,13 +166,13 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 		}
 	}
 
-	protected void cleanUpPanelEntryRegistries(HttpServletRequest request) {
+	protected void removePanelEntryRegistries(HttpServletRequest request) {
 		request.removeAttribute(ProductivityCenterWebKeys.PANEL_APP_REGISTRY);
 		request.removeAttribute(
 			ProductivityCenterWebKeys.PANEL_CATEGORY_REGISTRY);
 	}
 
-	protected void injectPanelEntryRegistries(HttpServletRequest request) {
+	protected void setPanelEntryRegistries(HttpServletRequest request) {
 		request.setAttribute(
 			ProductivityCenterWebKeys.PANEL_APP_REGISTRY, _panelAppRegistry);
 		request.setAttribute(
