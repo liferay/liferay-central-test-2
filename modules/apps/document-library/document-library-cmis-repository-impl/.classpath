@@ -11,6 +11,11 @@
 	<classpathentry kind="lib" path="/portal-master/lib/development/servlet-api.jar" />
 	<classpathentry kind="lib" path="/portal-master/lib/global/portlet.jar" />
 	<classpathentry kind="lib" path="/portal-master/lib/portal/bnd.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/chemistry-opencmis-client-api.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/chemistry-opencmis-client-bindings.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/chemistry-opencmis-client-impl.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/chemistry-opencmis-commons-api.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/chemistry-opencmis-commons-impl.jar" />
 	<classpathentry kind="lib" path="/portal-master/lib/portal/commons-logging.jar" />
 	<classpathentry kind="lib" path="/portal-master/lib/portal/log4j.jar" />
 	<classpathentry kind="lib" path="/portal-master/portal-service/portal-service.jar" />
