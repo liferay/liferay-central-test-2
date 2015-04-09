@@ -84,22 +84,6 @@ Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPa
 	<input <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= yearParamId %>" name="<%= namespace + HtmlUtil.escapeAttribute(yearParam) %>" type="hidden" value="<%= (!BrowserSnifferUtil.isMobile(request) && nullable) ? "" : yearValue %>" />
 </span>
 
-<%
-String calendarOptions = StringPool.BLANK;
-
-if (lastEnabledDate != null) {
-	calendarOptions += String.format("maximumDate: new Date(%s)", lastEnabledDate.getTime());
-}
-
-if (firstEnabledDate != null) {
-	if (Validator.isNotNull(calendarOptions)) {
-		calendarOptions += StringPool.COMMA;
-	}
-
-	calendarOptions += String.format("minimumDate: new Date(%s)", firstEnabledDate.getTime());
-}
-%>
-
 <aui:script use='<%= "aui-datepicker" + (BrowserSnifferUtil.isMobile(request) ? "-native" : StringPool.BLANK) %>'>
 	Liferay.component(
 		'<%= nameId %>DatePicker',
@@ -107,6 +91,23 @@ if (firstEnabledDate != null) {
 			var datePicker = new A.DatePicker<%= BrowserSnifferUtil.isMobile(request) ? "Native" : StringPool.BLANK %>(
 				{
 					calendar: {
+
+						<%
+						String calendarOptions = StringPool.BLANK;
+
+						if (lastEnabledDate != null) {
+							calendarOptions += String.format("maximumDate: new Date(%s)", lastEnabledDate.getTime());
+						}
+
+						if (firstEnabledDate != null) {
+							if (Validator.isNotNull(calendarOptions)) {
+								calendarOptions += StringPool.COMMA;
+							}
+
+							calendarOptions += String.format("minimumDate: new Date(%s)", firstEnabledDate.getTime());
+						}
+						%>
+
 						<%= calendarOptions %>
 					},
 					container: '#<%= randomNamespace %>displayDate',
