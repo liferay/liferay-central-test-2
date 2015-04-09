@@ -456,13 +456,13 @@ public class EditorConfigFactoryTest {
 			"tablesButton", toolbarsJSONObject.getString("button3"));
 	}
 
-	private static final String _CONFIG_KEY = "testField";
+	private static final String _CONFIG_KEY = "testEditorConfigKey";
 
-	private static final String _EDITOR_NAME = "testeditorname";
+	private static final String _EDITOR_NAME = "testEditorName1";
 
-	private static final String _EDITOR_NAME_2 = "testeditorname2";
+	private static final String _EDITOR_NAME_2 = "testEditorName2";
 
-	private static final String _PORTLET_NAME = "test_portlet_name";
+	private static final String _PORTLET_NAME = "testPortletName";
 
 	private ServiceRegistration<EditorConfigContributor>
 		_editorConfigContributorServiceRegistration1;
