@@ -241,10 +241,10 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 			return;
 		}
 
-		War warTask = (War)GradleUtil.getTask(
+		War war = (War)GradleUtil.getTask(
 			directDeployTask.getProject(), WarPlugin.WAR_TASK_NAME);
 
-		directDeployTask.setWebAppFile(warTask.getArchivePath());
+		directDeployTask.setWebAppFile(war.getArchivePath());
 	}
 
 	protected void configureTaskDirectDeployWebAppType(
@@ -269,21 +269,21 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 	protected void configureTaskWar(
 		Project project, LiferayExtension liferayExtension) {
 
-		War warTask = (War)GradleUtil.getTask(project, WarPlugin.WAR_TASK_NAME);
+		War war = (War)GradleUtil.getTask(project, WarPlugin.WAR_TASK_NAME);
 
-		configureTaskWarDuplicatesStrategy(warTask);
-		configureTaskWarExcludeManifest(warTask);
-		configureTaskWarFilesMatching(warTask);
-		configureTaskWarOutputs(warTask);
-		configureTaskWarRenameDependencies(warTask);
+		configureTaskWarDuplicatesStrategy(war);
+		configureTaskWarExcludeManifest(war);
+		configureTaskWarFilesMatching(war);
+		configureTaskWarOutputs(war);
+		configureTaskWarRenameDependencies(war);
 	}
 
-	protected void configureTaskWarDuplicatesStrategy(War warTask) {
-		warTask.setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE);
+	protected void configureTaskWarDuplicatesStrategy(War war) {
+		war.setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE);
 	}
 
-	protected void configureTaskWarExcludeManifest(War warTask) {
-		CopySpecInternal copySpecInternal = warTask.getRootSpec();
+	protected void configureTaskWarExcludeManifest(War war) {
+		CopySpecInternal copySpecInternal = war.getRootSpec();
 
 		for (CopySpecInternal childCopySpecInternal :
 				copySpecInternal.getChildren()) {
@@ -303,8 +303,8 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 		}
 	}
 
-	protected void configureTaskWarFilesMatching(War warTask) {
-		final Project project = warTask.getProject();
+	protected void configureTaskWarFilesMatching(War war) {
+		final Project project = war.getProject();
 
 		final Closure<String> closure = new Closure<String>(null) {
 
@@ -343,7 +343,7 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 
 		};
 
-		warTask.filesMatching(
+		war.filesMatching(
 			"WEB-INF/liferay-hook.xml",
 			new Action<FileCopyDetails>() {
 
@@ -355,14 +355,14 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 			});
 	}
 
-	protected void configureTaskWarOutputs(War warTask) {
-		TaskOutputs taskOutputs = warTask.getOutputs();
+	protected void configureTaskWarOutputs(War war) {
+		TaskOutputs taskOutputs = war.getOutputs();
 
-		taskOutputs.file(warTask.getArchivePath());
+		taskOutputs.file(war.getArchivePath());
 	}
 
-	protected void configureTaskWarRenameDependencies(War warTask) {
-		final Project project = warTask.getProject();
+	protected void configureTaskWarRenameDependencies(War war) {
+		final Project project = war.getProject();
 
 		Closure<String> closure = new Closure<String>(null) {
 
@@ -420,7 +420,7 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 
 		};
 
-		CopySpecInternal copySpecInternal = warTask.getRootSpec();
+		CopySpecInternal copySpecInternal = war.getRootSpec();
 
 		for (CopySpecInternal childCopySpecInternal :
 				copySpecInternal.getChildren()) {
