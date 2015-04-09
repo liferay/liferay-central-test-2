@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.journal.web.custom;
+package com.liferay.journal.web.customattributes;
 
 import com.liferay.journal.web.constants.JournalPortletKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
-import com.liferay.portlet.journal.model.JournalFolder;
+import com.liferay.portlet.journal.model.JournalArticle;
 
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Eudaldo Alonso
+ * @author Jorge Ferrer
  */
 @Component(
 	immediate = true,
@@ -32,17 +32,17 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = CustomAttributesDisplay.class
 )
-public class JournalFolderCustomAttributesDisplay
+public class JournalArticleCustomAttributesDisplay
 	extends BaseCustomAttributesDisplay {
 
 	@Override
 	public String getClassName() {
-		return JournalFolder.class.getName();
+		return JournalArticle.class.getName();
 	}
 
 	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/common/folder.png";
+		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
 }
