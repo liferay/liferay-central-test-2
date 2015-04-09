@@ -172,14 +172,6 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 			ProductivityCenterWebKeys.PANEL_CATEGORY_REGISTRY);
 	}
 
-	protected void setPanelEntryRegistries(HttpServletRequest request) {
-		request.setAttribute(
-			ProductivityCenterWebKeys.PANEL_APP_REGISTRY, _panelAppRegistry);
-		request.setAttribute(
-			ProductivityCenterWebKeys.PANEL_CATEGORY_REGISTRY,
-			_panelCategoryRegistry);
-	}
-
 	@Reference(unbind = "-")
 	protected void setPanelAppRegistry(PanelAppRegistry panelAppRegistry) {
 		_panelAppRegistry = panelAppRegistry;
@@ -190,6 +182,14 @@ public class UserPersonalPanelLayoutController implements LayoutTypeController {
 		PanelCategoryRegistry panelCategoryRegistry) {
 
 		_panelCategoryRegistry = panelCategoryRegistry;
+	}
+
+	protected void setPanelEntryRegistries(HttpServletRequest request) {
+		request.setAttribute(
+			ProductivityCenterWebKeys.PANEL_APP_REGISTRY, _panelAppRegistry);
+		request.setAttribute(
+			ProductivityCenterWebKeys.PANEL_CATEGORY_REGISTRY,
+			_panelCategoryRegistry);
 	}
 
 	@Reference(
