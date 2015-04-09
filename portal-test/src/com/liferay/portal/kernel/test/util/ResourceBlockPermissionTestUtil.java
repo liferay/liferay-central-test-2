@@ -60,28 +60,29 @@ public class ResourceBlockPermissionTestUtil {
 			List<String> actionIds)
 		throws PortalException {
 
-		List<String> actionsList = ResourceActionsUtil.getResourceActions(
-			portletResource, resourceName);
+		List<String> resourceActionsIds =
+			ResourceActionsUtil.getResourceActions(
+				portletResource, resourceName);
 
 		Map<Long, String[]> roleIdsToActionIds = new HashMap<>();
 
 		for (String roleName : roleNames) {
 			Role role = RoleLocalServiceUtil.getRole(companyId, roleName);
 
-			List<String> roleActions = ListUtil.copy(actionsList);
+			List<String> roleActionIds = ListUtil.copy(resourceActionsIds);
 
 			if (roleName.equals(RoleConstants.GUEST)) {
 				List<String> unsupportedActionIds =
 					ResourceActionsUtil.getResourceGuestUnsupportedActions(
 						portletResource, resourceName);
 
-				roleActions.removeAll(unsupportedActionIds);
+				roleActionIds.removeAll(unsupportedActionIds);
 			}
 
-			roleActions.removeAll(actionIds);
+			roleActionIds.removeAll(actionIds);
 
 			roleIdsToActionIds.put(
-				role.getRoleId(), ArrayUtil.toStringArray(roleActions));
+				role.getRoleId(), ArrayUtil.toStringArray(roleActionIds));
 		}
 
 		ResourceBlockLocalServiceUtil.setIndividualScopePermissions(
