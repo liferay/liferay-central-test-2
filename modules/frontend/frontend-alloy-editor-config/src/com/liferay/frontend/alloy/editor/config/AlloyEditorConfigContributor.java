@@ -62,6 +62,10 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		jsonObject.put(
 			"contentsLanguage", contentsLanguageId.replace("iw_", "he_"));
 
+		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
+
+		jsonObject.put("language", languageId.replace("iw_", "he_"));
+
 		if (liferayPortletResponse != null) {
 			LiferayPortletURL documentSelectorURL =
 				liferayPortletResponse.createRenderURL(
@@ -109,10 +113,6 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 
 			jsonObject.put("srcNode", "#" + name);
 		}
-
-		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
-
-		jsonObject.put("language", languageId.replace("iw_", "he_"));
 
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
