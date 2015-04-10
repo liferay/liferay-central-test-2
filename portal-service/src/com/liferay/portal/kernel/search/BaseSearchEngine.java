@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.generic.BooleanClauseFactoryImpl;
 import com.liferay.portal.kernel.search.generic.BooleanQueryFactoryImpl;
 import com.liferay.portal.kernel.search.generic.TermQueryFactoryImpl;
@@ -148,9 +146,6 @@ public class BaseSearchEngine implements SearchEngine {
 	public void setVendor(String vendor) {
 		_vendor = vendor;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		BaseSearchEngine.class);
 
 	private BooleanClauseFactory _booleanClauseFactory;
 	private BooleanQueryFactory _booleanQueryFactory;
