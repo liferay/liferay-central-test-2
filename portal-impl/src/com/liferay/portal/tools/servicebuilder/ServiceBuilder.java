@@ -128,11 +128,11 @@ public class ServiceBuilder {
 
 	public static final String AUTHOR = "Brian Wing Shun Chan";
 
-	public static Set<String> collectPermissionModels(
+	public static Set<String> collectResourceActionModels(
 			String implDir, String[] resourceActionsConfigs)
 		throws Exception {
 
-		Set<String> permissionModels = new HashSet<>();
+		Set<String> resourceActionModels = new HashSet<>();
 
 		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
 
@@ -147,8 +147,8 @@ public class ServiceBuilder {
 
 					InputStream inputStream = url.openStream();
 
-					_readPermissionModels(
-						implDir, inputStream, permissionModels);
+					_readResourceActionModels(
+						implDir, inputStream, resourceActionModels);
 				}
 			}
 			else {
@@ -170,13 +170,13 @@ public class ServiceBuilder {
 				}
 
 				try (InputStream curInputStream = inputStream) {
-					_readPermissionModels(
-						implDir, inputStream, permissionModels);
+					_readResourceActionModels(
+						implDir, inputStream, resourceActionModels);
 				}
 			}
 		}
 
-		return permissionModels;
+		return resourceActionModels;
 	}
 
 	public static String getContent(String fileName) throws Exception {
@@ -326,7 +326,7 @@ public class ServiceBuilder {
 		String targetEntityName = arguments.get("service.target.entity.name");
 		String testDir = arguments.get("service.test.dir");
 
-		Set<String> permissionModels = collectPermissionModels(
+		Set<String> resourceActionModels = collectResourceActionModels(
 			implDir, resourceActionsConfigs);
 
 		ModelHintsImpl modelHintsImpl = new ModelHintsImpl();
@@ -343,7 +343,7 @@ public class ServiceBuilder {
 				apiDir, autoImportDefaultReferences, autoNamespaceTables,
 				beanLocatorUtil, buildNumber, buildNumberIncrement, hbmFileName,
 				implDir, inputFileName, modelHintsFileName, osgiModule,
-				permissionModels, pluginName, propsUtil, readOnlyPrefixes,
+				resourceActionModels, pluginName, propsUtil, readOnlyPrefixes,
 				remotingFileName, resourcesDir, springFileName,
 				springNamespaces, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlSequencesFileName, targetEntityName, testDir, true);
@@ -618,7 +618,7 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables, String beanLocatorUtil,
 			long buildNumber, boolean buildNumberIncrement, String hbmFileName,
 			String implDir, String inputFileName, String modelHintsFileName,
-			boolean osgiModule, Set<String> permissionModels, String pluginName,
+			boolean osgiModule, Set<String> resourceActionModels, String pluginName,
 			String propsUtil, String[] readOnlyPrefixes,
 			String remotingFileName, String resourcesDir, String springFileName,
 			String[] springNamespaces, String sqlDir, String sqlFileName,
@@ -692,7 +692,7 @@ public class ServiceBuilder {
 			_implDir = implDir;
 			_modelHintsFileName = modelHintsFileName;
 			_osgiModule = osgiModule;
-			_permissionModels = permissionModels;
+			_resourceActionModels = resourceActionModels;
 			_pluginName = GetterUtil.getString(pluginName);
 			_propsUtil = propsUtil;
 			_readOnlyPrefixes = readOnlyPrefixes;
@@ -998,7 +998,7 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables, String beanLocatorUtil,
 			String hbmFileName, String implDir, String inputFileName,
 			String modelHintsFileName, boolean osgiModule,
-			Set<String> permissionModels, String pluginName, String propsUtil,
+			Set<String> resourceActionModels, String pluginName, String propsUtil,
 			String[] readOnlyPrefixes, String remotingFileName,
 			String resourcesDir, String springFileName,
 			String[] springNamespaces, String sqlDir, String sqlFileName,
@@ -1009,7 +1009,7 @@ public class ServiceBuilder {
 		this(
 			apiDir, autoImportDefaultReferences, autoNamespaceTables,
 			beanLocatorUtil, 1, true, hbmFileName, implDir, inputFileName,
-			modelHintsFileName, osgiModule, permissionModels, pluginName,
+			modelHintsFileName, osgiModule, resourceActionModels, pluginName,
 			propsUtil, readOnlyPrefixes, remotingFileName, resourcesDir,
 			springFileName, springNamespaces, sqlDir, sqlFileName,
 			sqlIndexesFileName, sqlSequencesFileName, targetEntityName, testDir,
@@ -1254,7 +1254,7 @@ public class ServiceBuilder {
 			_apiDir, _autoImportDefaultReferences, _autoNamespaceTables,
 			_beanLocatorUtil, _buildNumber, _buildNumberIncrement, _hbmFileName,
 			_implDir, refFileName, _modelHintsFileName, _osgiModule,
-			_permissionModels, _pluginName, _propsUtil, _readOnlyPrefixes,
+			_resourceActionModels, _pluginName, _propsUtil, _readOnlyPrefixes,
 			_remotingFileName, _resourcesDir, _springFileName,
 			_springNamespaces, _sqlDir, _sqlFileName, _sqlIndexesFileName,
 			_sqlSequencesFileName, _targetEntityName, _testDir, false);
@@ -1945,9 +1945,9 @@ public class ServiceBuilder {
 		}
 	}
 
-	private static void _readPermissionModels(
+	private static void _readResourceActionModels(
 			String implDir, InputStream inputStream,
-			Set<String> permissionModels)
+			Set<String> resourceActionModels)
 		throws Exception {
 
 		SAXReader saxReader = _getSAXReader();
@@ -1959,8 +1959,8 @@ public class ServiceBuilder {
 		List<Element> resourceElements = rootElement.elements("resource");
 
 		for (Element resourceElement : resourceElements) {
-			permissionModels.addAll(
-				collectPermissionModels(
+			resourceActionModels.addAll(
+				collectResourceActionModels(
 					implDir,
 					new String[] {resourceElement.attributeValue("file")}));
 		}
@@ -1971,7 +1971,7 @@ public class ServiceBuilder {
 		List<Node> nodes = xPath.selectNodes(rootElement);
 
 		for (Node node : nodes) {
-			permissionModels.add(node.getText().trim());
+			resourceActionModels.add(node.getText().trim());
 		}
 	}
 
@@ -5189,7 +5189,7 @@ public class ServiceBuilder {
 			txRequiredList.add(txRequired);
 		}
 
-		boolean permissionModel = _permissionModels.contains(
+		boolean resourceActionModel = _resourceActionModels.contains(
 			_packagePath + ".model." + ejbName);
 
 		_ejbList.add(
@@ -5201,7 +5201,7 @@ public class ServiceBuilder {
 				jsonEnabled, mvccEnabled, trashEnabled, deprecated, pkList,
 				regularColList, blobList, collectionList, columnList, order,
 				finderList, referenceList, unresolvedReferenceList,
-				txRequiredList, permissionModel));
+				txRequiredList, resourceActionModel));
 	}
 
 	private String _processTemplate(String name, Map<String, Object> context)
@@ -5398,7 +5398,7 @@ public class ServiceBuilder {
 	private boolean _osgiModule;
 	private String _outputPath;
 	private String _packagePath;
-	private Set<String> _permissionModels = new HashSet<>();
+	private Set<String> _resourceActionModels = new HashSet<>();
 	private String _pluginName;
 	private String _portletName = StringPool.BLANK;
 	private String _portletPackageName = StringPool.BLANK;

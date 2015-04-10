@@ -107,7 +107,7 @@ public class Entity {
 		List<EntityColumn> collectionList, List<EntityColumn> columnList,
 		EntityOrder order, List<EntityFinder> finderList,
 		List<Entity> referenceList, List<String> unresolvedReferenceList,
-		List<String> txRequiredList, boolean permissionModel) {
+		List<String> txRequiredList, boolean resourceActionModel) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -142,7 +142,7 @@ public class Entity {
 		_referenceList = referenceList;
 		_unresolvedReferenceList = unresolvedReferenceList;
 		_txRequiredList = txRequiredList;
-		_permissionModel = permissionModel;
+		_resourceActionModel = resourceActionModel;
 
 		if (_finderList != null) {
 			Set<EntityColumn> finderColumns = new HashSet<>();
@@ -735,7 +735,7 @@ public class Entity {
 	public boolean isPermissionCheckEnabled(EntityFinder finder) {
 		if (_name.equals("Group") || _name.equals("User") ||
 			finder.getName().equals("UUID_G") || !finder.isCollection() ||
-			!hasPrimitivePK() || !_permissionModel) {
+			!hasPrimitivePK() || !_resourceActionModel) {
 
 			return false;
 		}
@@ -900,7 +900,7 @@ public class Entity {
 	private final EntityOrder _order;
 	private final String _packagePath;
 	private List<String> _parentTransients;
-	private final boolean _permissionModel;
+	private final boolean _resourceActionModel;
 	private final String _persistenceClass;
 	private final List<EntityColumn> _pkList;
 	private boolean _portalReference;
