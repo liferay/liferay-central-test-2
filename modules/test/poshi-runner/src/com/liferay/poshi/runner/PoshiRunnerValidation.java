@@ -173,7 +173,7 @@ public class PoshiRunnerValidation {
 
 		List<Element> childElements = element.elements();
 
-		if (childElements.size() != 0) {
+		if (!childElements.isEmpty()) {
 			if (Validator.isNotNull(element.attributeValue("function")) ||
 				Validator.isNotNull(element.attributeValue("macro"))) {
 
