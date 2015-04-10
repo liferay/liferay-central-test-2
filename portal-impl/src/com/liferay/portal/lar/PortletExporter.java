@@ -614,8 +614,7 @@ public class PortletExporter {
 				_log.debug(
 					"Do not export portlet " +
 						portletDataContext.getPortletId() +
-							" because the portlet does not exist or it has " +
-								"been undeployed");
+							" because the portlet is not deployed");
 			}
 
 			return;
