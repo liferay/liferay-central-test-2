@@ -8,16 +8,16 @@
 		<author>Julio Camarero</author>
 	</authors>
 	<component name="A" bodyContent="true" writeJSP="false">
-		<description>An anchor (or link) that offers custom configuration and localization.</description>
+		<description>Creates an anchor (or link) that offers custom configuration and localization.</description>
 		<attributes>
 			<attribute>
-				<description>The role for assistive technologies to interpret HTML elements that have been used for something other than their intended purpose. For example, the <![CDATA[<code>&lt;p&gt;</code>]]> tag could be used for something other than a paragraph.</description>
+				<description>A role for assistive technologies to interpret HTML elements that have been used for something other than their intended purpose. For example, the <![CDATA[<code>&lt;p&gt;</code>]]> tag could be used for something other than a paragraph.</description>
 				<name>ariaRole</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -48,7 +48,7 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>The language for the anchor component, to assist search engines and web browsers in finding and rendering the anchor appropriately.</description>
+				<description>A language to associate with the anchor component, to assist search engines and web browsers in finding and rendering the anchor appropriately.</description>
 				<name>lang</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -67,7 +67,7 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>The target window in which the URL is opened. The default value is <![CDATA[<code>self</code>]]>. Possible values are <![CDATA[<code>blank</code>]]>, <![CDATA[<code>self</code>]]>, <![CDATA[<code>parent</code>]]>, <![CDATA[<code>top</code>]]>, and a unique frame's name.</description>
+				<description>A target window in which to open the URL. The default value is <![CDATA[<code>self</code>]]>. Possible values are <![CDATA[<code>blank</code>]]>, <![CDATA[<code>self</code>]]>, <![CDATA[<code>parent</code>]]>, <![CDATA[<code>top</code>]]>, and a unique frame's name.</description>
 				<name>target</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -169,7 +169,7 @@
 		<description>Creates a fully configurable button that offers portlet namespacing and custom icons.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component. These styles override the ones set by the <![CDATA[<code>primary</code>]]> attribute.</description>
+				<description>A CSS class for styling the component. These styles override the ones set by the <![CDATA[<code>primary</code>]]> attribute.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -193,13 +193,13 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>The icon to display on the button based on the icon CSS class value given. Possible CSS class values can be found at <![CDATA[<a href="http://marcoceppi.github.io/bootstrap-glyphicons/">here</a>]]>.</description>
+				<description>An icon to display on the button based on the icon CSS class value given. Possible CSS class values can be found at <![CDATA[<a href="http://marcoceppi.github.io/bootstrap-glyphicons/">here</a>]]>.</description>
 				<name>icon</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>The alignment for the button's icon. The default value is <![CDATA[<code>left</code>]]>.</description>
+				<description>An alignment for the button's icon. The default value is <![CDATA[<code>left</code>]]>.</description>
 				<name>iconAlign</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -263,7 +263,7 @@
 		<description>Creates a button row <![CDATA[<code>&lt;div&gt;</code>]]> tag to wrap <![CDATA[<code>&lt;aui:button&gt;</code>]]> components and offer additional styling.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -280,7 +280,7 @@
 		<description>Creates a column to display content in an <![CDATA[<code>&lt;aui:row&gt;</code>]]> component.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -423,13 +423,13 @@
 		<description>Creates a container <![CDATA[<code>&lt;div&gt;</code>]]> tag to wrap <![CDATA[<code>&lt;aui:row&gt;</code>]]> components and offer additional styling.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>Whether the container's size is fixed or is able to span the entire width of the viewport. The default value is <![CDATA[<code>true</code>]]>.</description>
+				<description>Whether to enable the container to span the entire width of the viewport. The default value is <![CDATA[<code>true</code>]]>.</description>
 				<name>fluid</name>
 				<inputType>boolean</inputType>
 				<outputType>boolean</outputType>
@@ -447,7 +447,7 @@
 		<description>Creates a <![CDATA[<code>&lt;div&gt;</code>]]> tag to wrap form fields and offer additional styling.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -525,7 +525,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -567,7 +567,7 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -672,13 +672,13 @@
 		<description>Creates a configurable input component.</description>
 		<attributes>
 			<attribute>
-				<description>Whether the input component gets focus by default.</description>
+				<description>Whether to focus on the input component by default.</description>
 				<name>autoFocus</name>
 				<inputType>boolean</inputType>
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>Whether the input component autosizes.</description>
+				<description>Whether to autosize the input component.</description>
 				<name>autoSize</name>
 				<inputType>boolean</inputType>
 				<outputType>boolean</outputType>
@@ -696,7 +696,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>Whether the input is selected. Note that this attribute is only enabled when <![CDATA[<code>type</code>]]> is <![CDATA[<code>radio</code>]]> or <![CDATA[<code>checkbox</code>]]>.</description>.
+				<description>Whether to select the input. Note that this attribute is only enabled when <![CDATA[<code>type</code>]]> is <![CDATA[<code>radio</code>]]> or <![CDATA[<code>checkbox</code>]]>.</description>.
 				<name>checked</name>
 				<inputType>boolean</inputType>
 				<outputType>boolean</outputType>
@@ -715,7 +715,7 @@
 				<defaultValue>-1</defaultValue>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -896,7 +896,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>Whether the input's field is resizeable, if the input is of type <![CDATA[<code>textarea</code>]]>.</description>
+				<description>Whether to make the input's field resizeable, if the input is of type <![CDATA[<code>textarea</code>]]>.</description>
 				<name>resizable</name>
 				<inputType>boolean</inputType>
 				<outputType>boolean</outputType>
@@ -1010,7 +1010,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1045,7 +1045,7 @@
 		<description>Creates a navigation bar to house navigation components.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1062,7 +1062,7 @@
 		<description>Creates a search component for an <![CDATA[<code>&lt;aui:nav-bar&gt;</code>]]> component.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1120,7 +1120,7 @@
 				<outputType>java.lang.String</outputType>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1227,7 +1227,7 @@
 		<description>Creates an option component for using in an <![CDATA[<code>&lt;aui:select&gt;</code>]]> component.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1318,7 +1318,7 @@
 		<description>Creates a row to hold <![CDATA[<code>&lt;aui:col&gt;</code>]]> components.</description>
 		<attributes>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1372,7 +1372,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>A CSS class for styling this component.</description>
+				<description>A CSS class for styling the component.</description>
 				<name>cssClass</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1419,7 +1419,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>The label's text alignment. Possible values are <![CDATA[<code>right</code>]]> and <![CDATA[<code>left</code>]]>.</description>
+				<description>An alignment for the label's text. Possible values are <![CDATA[<code>right</code>]]> and <![CDATA[<code>left</code>]]>.</description>
 				<name>inlineLabel</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1437,7 +1437,7 @@
 				<outputType>boolean</outputType>
 			</attribute>
 			<attribute>
-				<description>The list type that automatically generates the options. Possible values can be found in <![CDATA[<code>ListTypeImpl.java</code>]]>.</description>
+				<description>A list type in which to automatically generate the options. Possible values can be found in <![CDATA[<code>ListTypeImpl.java</code>]]>.</description>
 				<name>listType</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
@@ -1543,7 +1543,7 @@
 		<description>Creates a UI component for managing translation of associated content.</description>
 		<attributes>
 			<attribute>
-				<description>The available locales of translation languages to choose from.</description>
+				<description>Available locales of translation languages from which to choose.</description>
 				<name>availableLocales</name>
 				<inputType>java.util.Locale[]</inputType>
 				<outputType>java.util.Locale[]</outputType>
@@ -1700,7 +1700,7 @@
 				<defaultValue>true</defaultValue>
 			</attribute>
 			<attribute>
-				<description>The workflow status. Possible values are <![CDATA[<code>0</code>]]> (Approved), <![CDATA[<code>1</code>]]> (Pending), <![CDATA[<code>2</code>]]> (Draft), <![CDATA[<code>3</code>]]> (Expired), <![CDATA[<code>4</code>]]> (Denied), <![CDATA[<code>5</code>]]> (Inactive), <![CDATA[<code>6</code>]]> (Incomplete), <![CDATA[<code>7</code>]]> (Scheduled), and <![CDATA[<code>8</code>]]> (In-Trash). Any other value defaults to status (Any).</description>
+				<description>A workflow status. Possible values are <![CDATA[<code>0</code>]]> (Approved), <![CDATA[<code>1</code>]]> (Pending), <![CDATA[<code>2</code>]]> (Draft), <![CDATA[<code>3</code>]]> (Expired), <![CDATA[<code>4</code>]]> (Denied), <![CDATA[<code>5</code>]]> (Inactive), <![CDATA[<code>6</code>]]> (Incomplete), <![CDATA[<code>7</code>]]> (Scheduled), and <![CDATA[<code>8</code>]]> (In-Trash). Any other value defaults to status (Any).</description>
 				<name>status</name>
 				<inputType>java.lang.Integer</inputType>
 				<outputType>java.lang.Integer</outputType>
