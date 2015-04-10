@@ -173,9 +173,10 @@ public class ServiceBuilder {
 			else if (elementName.equals("exceptions")) {
 				element.detach();
 
-				List<Element> matchingElements = element.elements("exception");
+				List<Element> exceptionElementsList = element.elements(
+					"exception");
 
-				for (Element exceptionElement : matchingElements) {
+				for (Element exceptionElement : exceptionElementsList) {
 					exceptionElement.detach();
 
 					exceptionElements.put(
@@ -278,12 +279,13 @@ public class ServiceBuilder {
 		Set<String> resourceActionModels = _readResourceActionModels(
 			implDir, resourceActionsConfigs);
 
+		ModelHintsUtil modelHintsUtil = new ModelHintsUtil();
+
 		ModelHintsImpl modelHintsImpl = new ModelHintsImpl();
 
 		modelHintsImpl.setModelHintsConfigs(modelHintsConfigs);
-		modelHintsImpl.afterPropertiesSet();
 
-		ModelHintsUtil modelHintsUtil = new ModelHintsUtil();
+		modelHintsImpl.afterPropertiesSet();
 
 		modelHintsUtil.setModelHints(modelHintsImpl);
 
