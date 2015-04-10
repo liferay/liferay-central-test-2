@@ -1847,10 +1847,12 @@ public class ServiceBuilder {
 			Element serviceBuilderImportRootElement =
 				serviceBuilderImportDocument.getRootElement();
 
-			List<Element> childElements =
+			List<Element> serviceBuilderImportElements =
 				serviceBuilderImportRootElement.elements();
 
-			for (Element serviceBuilderImportElement : childElements) {
+			for (Element serviceBuilderImportElement :
+					serviceBuilderImportElements) {
+
 				serviceBuilderImportElement.detach();
 
 				rootElement.add(serviceBuilderImportElement);
