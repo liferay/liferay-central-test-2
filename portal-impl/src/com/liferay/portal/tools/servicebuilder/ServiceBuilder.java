@@ -292,8 +292,8 @@ public class ServiceBuilder {
 				apiDir, autoImportDefaultReferences, autoNamespaceTables,
 				beanLocatorUtil, buildNumber, buildNumberIncrement, hbmFileName,
 				implDir, inputFileName, modelHintsFileName, osgiModule,
-				resourceActionModels, pluginName, propsUtil, readOnlyPrefixes,
-				remotingFileName, resourcesDir, springFileName,
+				pluginName, propsUtil, readOnlyPrefixes, remotingFileName,
+				resourceActionModels, resourcesDir, springFileName,
 				springNamespaces, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlSequencesFileName, targetEntityName, testDir, true);
 		}
@@ -317,8 +317,8 @@ public class ServiceBuilder {
 				"\tservice.props.util=com.liferay.portal.util.PropsUtil\n" +
 				"\tservice.read.only.prefixes=" + _READ_ONLY_PREFIXES + "\n" +
 				"\tservice.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml\n" +
-				"\tservice.resources.dir=${basedir}/src\n" +
 				"\tservice.resource.actions.configs=" + _RESOURCE_ACTION_CONFIGS + "\n" +
+				"\tservice.resources.dir=${basedir}/src\n" +
 				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
 				"\tservice.spring.namespaces=beans\n" +
 				"\tservice.sql.dir=${basedir}/../sql\n" +
@@ -567,12 +567,13 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables, String beanLocatorUtil,
 			long buildNumber, boolean buildNumberIncrement, String hbmFileName,
 			String implDir, String inputFileName, String modelHintsFileName,
-			boolean osgiModule, Set<String> resourceActionModels, String pluginName,
-			String propsUtil, String[] readOnlyPrefixes,
-			String remotingFileName, String resourcesDir, String springFileName,
-			String[] springNamespaces, String sqlDir, String sqlFileName,
-			String sqlIndexesFileName, String sqlSequencesFileName,
-			String targetEntityName, String testDir, boolean build)
+			boolean osgiModule, String pluginName, String propsUtil,
+			String[] readOnlyPrefixes, String remotingFileName,
+			Set<String> resourceActionModels, String resourcesDir,
+			String springFileName, String[] springNamespaces, String sqlDir,
+			String sqlFileName, String sqlIndexesFileName,
+			String sqlSequencesFileName, String targetEntityName,
+			String testDir, boolean build)
 		throws Exception {
 
 		_tplBadAliasNames = _getTplProperty(
@@ -641,11 +642,11 @@ public class ServiceBuilder {
 			_implDir = implDir;
 			_modelHintsFileName = modelHintsFileName;
 			_osgiModule = osgiModule;
-			_resourceActionModels = resourceActionModels;
 			_pluginName = GetterUtil.getString(pluginName);
 			_propsUtil = propsUtil;
 			_readOnlyPrefixes = readOnlyPrefixes;
 			_remotingFileName = remotingFileName;
+			_resourceActionModels = resourceActionModels;
 			_resourcesDir = resourcesDir;
 			_springFileName = springFileName;
 
@@ -947,8 +948,8 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables, String beanLocatorUtil,
 			String hbmFileName, String implDir, String inputFileName,
 			String modelHintsFileName, boolean osgiModule,
-			Set<String> resourceActionModels, String pluginName, String propsUtil,
-			String[] readOnlyPrefixes, String remotingFileName,
+			String pluginName, String propsUtil, String[] readOnlyPrefixes,
+			String remotingFileName, Set<String> resourceActionModels,
 			String resourcesDir, String springFileName,
 			String[] springNamespaces, String sqlDir, String sqlFileName,
 			String sqlIndexesFileName, String sqlSequencesFileName,
@@ -958,9 +959,9 @@ public class ServiceBuilder {
 		this(
 			apiDir, autoImportDefaultReferences, autoNamespaceTables,
 			beanLocatorUtil, 1, true, hbmFileName, implDir, inputFileName,
-			modelHintsFileName, osgiModule, resourceActionModels, pluginName,
-			propsUtil, readOnlyPrefixes, remotingFileName, resourcesDir,
-			springFileName, springNamespaces, sqlDir, sqlFileName,
+			modelHintsFileName, osgiModule, pluginName, propsUtil,
+			readOnlyPrefixes, remotingFileName, resourceActionModels,
+			resourcesDir, springFileName, springNamespaces, sqlDir, sqlFileName,
 			sqlIndexesFileName, sqlSequencesFileName, targetEntityName, testDir,
 			true);
 	}
@@ -1203,8 +1204,8 @@ public class ServiceBuilder {
 			_apiDir, _autoImportDefaultReferences, _autoNamespaceTables,
 			_beanLocatorUtil, _buildNumber, _buildNumberIncrement, _hbmFileName,
 			_implDir, refFileName, _modelHintsFileName, _osgiModule,
-			_resourceActionModels, _pluginName, _propsUtil, _readOnlyPrefixes,
-			_remotingFileName, _resourcesDir, _springFileName,
+			_pluginName, _propsUtil, _readOnlyPrefixes, _remotingFileName,
+			_resourceActionModels, _resourcesDir, _springFileName,
 			_springNamespaces, _sqlDir, _sqlFileName, _sqlIndexesFileName,
 			_sqlSequencesFileName, _targetEntityName, _testDir, false);
 
