@@ -55,12 +55,12 @@ public class ClassLoaderResourceParserTest {
 			classLoaderResourceParser.getURL(
 				TemplateConstants.THEME_LOADER_SEPARATOR));
 
-		String templateId = "DummyFile";
-
 		Class<?> clazz = getClass();
 
 		classLoaderResourceParser = new ClassLoaderResourceParser(
 			clazz.getClassLoader());
+
+		String templateId = "DummyFile";
 
 		Assert.assertNull(classLoaderResourceParser.getURL(templateId));
 
