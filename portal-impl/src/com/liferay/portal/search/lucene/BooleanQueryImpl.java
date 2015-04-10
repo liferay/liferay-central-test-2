@@ -324,7 +324,7 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	private final org.apache.lucene.search.BooleanQuery _booleanQuery =
-		new org.apache.lucene.search.BooleanQuery();;
+		new org.apache.lucene.search.BooleanQuery();
 	private final LuceneQueryHelper _luceneQueryHelper;
 	private final QueryTranslator<?> _queryTranslator;
 
