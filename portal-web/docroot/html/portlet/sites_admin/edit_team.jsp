@@ -25,7 +25,7 @@ long teamId = BeanParamUtil.getLong(team, request, "teamId");
 
 long groupId = BeanParamUtil.getLong(team, request, "groupId");
 
-Group group = (Group)request.getAttribute(WebKeys.GROUP);
+Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 Organization organization = null;
 

@@ -26,7 +26,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Team team = (Team)request.getAttribute(WebKeys.TEAM);
 
-Group group = (Group)request.getAttribute(WebKeys.GROUP);
+Group group = GroupLocalServiceUtil.getGroup(team.getGroupId());
 
 Organization organization = null;
 

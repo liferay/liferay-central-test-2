@@ -87,7 +87,6 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getGroup(renderRequest);
 			ActionUtil.getTeam(renderRequest);
 		}
 		catch (Exception e) {
