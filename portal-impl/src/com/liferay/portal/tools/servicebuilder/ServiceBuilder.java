@@ -5398,7 +5398,6 @@ public class ServiceBuilder {
 	private boolean _osgiModule;
 	private String _outputPath;
 	private String _packagePath;
-	private Set<String> _resourceActionModels = new HashSet<>();
 	private String _pluginName;
 	private String _portletName = StringPool.BLANK;
 	private String _portletPackageName = StringPool.BLANK;
@@ -5406,6 +5405,7 @@ public class ServiceBuilder {
 	private String _propsUtil;
 	private String[] _readOnlyPrefixes;
 	private String _remotingFileName;
+	private Set<String> _resourceActionModels = new HashSet<>();
 	private String _resourcesDir;
 	private String _serviceOutputPath;
 	private String _springFileName;

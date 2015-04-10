@@ -900,7 +900,6 @@ public class Entity {
 	private final EntityOrder _order;
 	private final String _packagePath;
 	private List<String> _parentTransients;
-	private final boolean _resourceActionModel;
 	private final String _persistenceClass;
 	private final List<EntityColumn> _pkList;
 	private boolean _portalReference;
@@ -909,6 +908,7 @@ public class Entity {
 	private final List<Entity> _referenceList;
 	private final List<EntityColumn> _regularColList;
 	private final boolean _remoteService;
+	private final boolean _resourceActionModel;
 	private final String _sessionFactory;
 	private final String _table;
 	private List<String> _transients;
