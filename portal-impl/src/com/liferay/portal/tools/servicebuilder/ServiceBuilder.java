@@ -128,57 +128,6 @@ public class ServiceBuilder {
 
 	public static final String AUTHOR = "Brian Wing Shun Chan";
 
-	private static Set<String> _collectResourceActionModels(
-			String implDir, String[] resourceActionsConfigs)
-		throws Exception {
-
-		Set<String> resourceActionModels = new HashSet<>();
-
-		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
-
-		for (String config : resourceActionsConfigs) {
-			if (config.startsWith("classpath*:")) {
-				String name = config.substring("classpath*:".length());
-
-				Enumeration<URL> enu = classLoader.getResources(name);
-
-				while (enu.hasMoreElements()) {
-					URL url = enu.nextElement();
-
-					InputStream inputStream = url.openStream();
-
-					_readResourceActionModels(
-						implDir, inputStream, resourceActionModels);
-				}
-			}
-			else {
-				InputStream inputStream = classLoader.getResourceAsStream(
-					config);
-
-				if (inputStream == null) {
-					File file = new File(config);
-
-					if (!file.exists()) {
-						file = new File(implDir, config);
-					}
-
-					if (!file.exists()) {
-						continue;
-					}
-
-					inputStream = new FileInputStream(file);
-				}
-
-				try (InputStream curInputStream = inputStream) {
-					_readResourceActionModels(
-						implDir, inputStream, resourceActionModels);
-				}
-			}
-		}
-
-		return resourceActionModels;
-	}
-
 	public static String getContent(String fileName) throws Exception {
 		Document document = _getContentDocument(fileName);
 
@@ -326,7 +275,7 @@ public class ServiceBuilder {
 		String targetEntityName = arguments.get("service.target.entity.name");
 		String testDir = arguments.get("service.test.dir");
 
-		Set<String> resourceActionModels = _collectResourceActionModels(
+		Set<String> resourceActionModels = _readResourceActionModels(
 			implDir, resourceActionsConfigs);
 
 		ModelHintsImpl modelHintsImpl = new ModelHintsImpl();
@@ -1960,7 +1909,7 @@ public class ServiceBuilder {
 
 		for (Element resourceElement : resourceElements) {
 			resourceActionModels.addAll(
-				_collectResourceActionModels(
+				_readResourceActionModels(
 					implDir,
 					new String[] {resourceElement.attributeValue("file")}));
 		}
@@ -1973,6 +1922,57 @@ public class ServiceBuilder {
 		for (Node node : nodes) {
 			resourceActionModels.add(node.getText().trim());
 		}
+	}
+
+	private static Set<String> _readResourceActionModels(
+			String implDir, String[] resourceActionsConfigs)
+		throws Exception {
+
+		Set<String> resourceActionModels = new HashSet<>();
+
+		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
+
+		for (String config : resourceActionsConfigs) {
+			if (config.startsWith("classpath*:")) {
+				String name = config.substring("classpath*:".length());
+
+				Enumeration<URL> enu = classLoader.getResources(name);
+
+				while (enu.hasMoreElements()) {
+					URL url = enu.nextElement();
+
+					InputStream inputStream = url.openStream();
+
+					_readResourceActionModels(
+						implDir, inputStream, resourceActionModels);
+				}
+			}
+			else {
+				InputStream inputStream = classLoader.getResourceAsStream(
+					config);
+
+				if (inputStream == null) {
+					File file = new File(config);
+
+					if (!file.exists()) {
+						file = new File(implDir, config);
+					}
+
+					if (!file.exists()) {
+						continue;
+					}
+
+					inputStream = new FileInputStream(file);
+				}
+
+				try (InputStream curInputStream = inputStream) {
+					_readResourceActionModels(
+						implDir, inputStream, resourceActionModels);
+				}
+			}
+		}
+
+		return resourceActionModels;
 	}
 
 	private static String _stripFullyQualifiedClassNames(String content)
