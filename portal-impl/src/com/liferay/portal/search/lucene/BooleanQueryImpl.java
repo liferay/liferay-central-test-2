@@ -31,7 +31,8 @@ import java.util.List;
 public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 	public BooleanQueryImpl(
-		LuceneQueryHelper luceneQueryHelper, QueryTranslator queryTranslator) {
+		LuceneQueryHelper luceneQueryHelper,
+		QueryTranslator<?> queryTranslator) {
 
 		_luceneQueryHelper = luceneQueryHelper;
 		_queryTranslator = queryTranslator;
@@ -325,6 +326,6 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	private final org.apache.lucene.search.BooleanQuery _booleanQuery =
 		new org.apache.lucene.search.BooleanQuery();;
 	private final LuceneQueryHelper _luceneQueryHelper;
-	private final QueryTranslator _queryTranslator;
+	private final QueryTranslator<?> _queryTranslator;
 
 }

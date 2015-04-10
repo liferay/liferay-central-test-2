@@ -350,7 +350,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 		_luceneHelper = luceneHelper;
 	}
 
-	public void setQueryTranslator(QueryTranslator queryTranslator) {
+	public void setQueryTranslator(QueryTranslator<?> queryTranslator) {
 		_queryTranslator = queryTranslator;
 	}
 
@@ -650,7 +650,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 	}
 
 	private LuceneHelper _luceneHelper;
-	private QueryTranslator _queryTranslator;
+	private QueryTranslator<?> _queryTranslator;
 
 	private class TermCollectingFormatter implements Formatter {
 

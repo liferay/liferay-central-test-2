@@ -31,11 +31,11 @@ public class BooleanQueryFactoryImpl implements BooleanQueryFactory {
 		_luceneQueryHelper = luceneQueryHelper;
 	}
 
-	public void setQueryTranslator(QueryTranslator queryTranslator) {
+	public void setQueryTranslator(QueryTranslator<?> queryTranslator) {
 		_queryTranslator = queryTranslator;
 	}
 
 	private LuceneQueryHelper _luceneQueryHelper;
-	private QueryTranslator _queryTranslator;
+	private QueryTranslator<?> _queryTranslator;
 
 }
