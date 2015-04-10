@@ -818,7 +818,7 @@ public class AssetUtil {
 		return assetSearcher;
 	}
 
-	protected static String getDDMFieldType(String sortField)
+	protected static String getDDMFormFieldType(String sortField)
 		throws PortalException {
 
 		String[] sortFields = sortField.split(DDMIndexer.DDM_FIELD_SEPARATOR);
@@ -853,8 +853,14 @@ public class AssetUtil {
 			String orderByType, String sortField, Locale locale)
 		throws Exception {
 
+		String ddmFormFieldType = sortField;
+
+		if (ddmFormFieldType.startsWith(DDMIndexer.DDM_FIELD_PREFIX)) {
+			ddmFormFieldType = getDDMFormFieldType(ddmFormFieldType);
+		}
+
 		return SortFactoryUtil.getSort(
-			AssetEntry.class, getType(sortField),
+			AssetEntry.class, getSortType(ddmFormFieldType),
 			getOrderByCol(sortField, locale), isSortFieldInferred(sortField),
 			orderByType);
 	}
@@ -897,14 +903,6 @@ public class AssetUtil {
 		}
 
 		return sortType;
-	}
-
-	protected static int getType(String sortField) throws PortalException {
-		if (sortField.startsWith(DDMIndexer.DDM_FIELD_PREFIX)) {
-			sortField = getDDMFieldType(sortField);
-		}
-
-		return getSortType(sortField);
 	}
 
 	protected static boolean isSortFieldInferred(String sortField) {
