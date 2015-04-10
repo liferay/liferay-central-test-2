@@ -18,7 +18,6 @@
 
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader");
 
 Group group = null;
 
@@ -30,6 +29,7 @@ else {
 }
 
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader");
 
 FileEntry fileEntry = ExportImportHelperUtil.getTempFileEntry(groupId, themeDisplay.getUserId(), ExportImportHelper.TEMP_FOLDER_NAME);
 

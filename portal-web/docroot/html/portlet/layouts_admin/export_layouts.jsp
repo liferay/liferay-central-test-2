@@ -20,7 +20,6 @@
 
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD);
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 if (Validator.isNull(cmd)) {
 	cmd = Constants.EXPORT;
@@ -73,6 +72,8 @@ if (privateLayout) {
 else {
 	rootNodeName = LanguageUtil.get(request, "public-pages");
 }
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 String treeId = "layoutsExportTree" + liveGroupId + privateLayout;
 
