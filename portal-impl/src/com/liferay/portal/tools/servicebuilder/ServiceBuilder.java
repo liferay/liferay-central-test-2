@@ -128,7 +128,7 @@ public class ServiceBuilder {
 
 	public static final String AUTHOR = "Brian Wing Shun Chan";
 
-	public static Set<String> collectResourceActionModels(
+	private static Set<String> _collectResourceActionModels(
 			String implDir, String[] resourceActionsConfigs)
 		throws Exception {
 
@@ -326,7 +326,7 @@ public class ServiceBuilder {
 		String targetEntityName = arguments.get("service.target.entity.name");
 		String testDir = arguments.get("service.test.dir");
 
-		Set<String> resourceActionModels = collectResourceActionModels(
+		Set<String> resourceActionModels = _collectResourceActionModels(
 			implDir, resourceActionsConfigs);
 
 		ModelHintsImpl modelHintsImpl = new ModelHintsImpl();
@@ -1960,7 +1960,7 @@ public class ServiceBuilder {
 
 		for (Element resourceElement : resourceElements) {
 			resourceActionModels.addAll(
-				collectResourceActionModels(
+				_collectResourceActionModels(
 					implDir,
 					new String[] {resourceElement.attributeValue("file")}));
 		}
