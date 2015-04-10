@@ -78,9 +78,7 @@ public class InitGradleTask extends DefaultTask {
 		FileUtil.write(buildGradleFile, contents);
 	}
 
-	protected void addContents(
-		List<String> contents1, List<String> contents2) {
-
+	protected void addContents(List<String> contents1, List<String> contents2) {
 		if (contents2.isEmpty()) {
 			return;
 		}
