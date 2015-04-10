@@ -45,10 +45,10 @@ public class ModelHintsImpl extends BaseModelHintsImpl {
 	}
 
 	private final ModelHintsCallback _modelHintsCallback =
-		new BuildtimeModelHintsCallback();
+		new CompileTimeModelHintsCallback();
 	private String[] _modelHintsConfigs;
 
-	private class BuildtimeModelHintsCallback implements ModelHintsCallback {
+	private class CompileTimeModelHintsCallback implements ModelHintsCallback {
 
 		@Override
 		public void execute(ClassLoader classLoader, String name) {
