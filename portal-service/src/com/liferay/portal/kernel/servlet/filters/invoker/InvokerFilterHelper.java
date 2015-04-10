@@ -176,13 +176,15 @@ public class InvokerFilterHelper {
 	public void updateFilterMappings(String filterName, Filter filter) {
 		Filter previousFilter = _filters.put(filterName, filter);
 
-		if (previousFilter != null) {
-			for (int i = 0; i < _filterMappings.size(); i++) {
-				FilterMapping filterMapping = _filterMappings.get(i);
+		if (previousFilter == null) {
+			return;
+		}
 
-				if (filterMapping.getFilter() == previousFilter) {
-					_filterMappings.set(i, filterMapping.replaceFilter(filter));
-				}
+		for (int i = 0; i < _filterMappings.size(); i++) {
+			FilterMapping filterMapping = _filterMappings.get(i);
+
+			if (filterMapping.getFilter() == previousFilter) {
+				_filterMappings.set(i, filterMapping.replaceFilter(filter));
 			}
 		}
 	}
