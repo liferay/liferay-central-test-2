@@ -91,8 +91,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	@Override
-	public void addDate(Document doc, String field, Date value) {
-		doc.add(LuceneFields.getDate(field, value));
+	public void addDate(Document document, String field, Date value) {
+		document.add(LuceneFields.getDate(field, value));
 	}
 
 	@Override

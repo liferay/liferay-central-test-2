@@ -36,7 +36,7 @@ import org.apache.lucene.util.Version;
  */
 public interface LuceneHelper {
 
-	public void addDate(Document doc, String field, Date value);
+	public void addDate(Document document, String field, Date value);
 
 	public void addDocument(long companyId, Document document)
 		throws IOException;
