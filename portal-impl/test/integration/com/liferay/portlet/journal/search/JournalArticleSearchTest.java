@@ -135,66 +135,66 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 	@Test
 	public void testOrderByDDMBooleanField() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMBooleanField();
+		testOrderHelper.testOrderByDDMBooleanField();
 	}
 
 	@Test
 	public void testOrderByDDMBooleanFieldRepeatable() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMBooleanFieldRepeatable();
+		testOrderHelper.testOrderByDDMBooleanFieldRepeatable();
 	}
 
 	@Test
 	public void testOrderByDDMIntegerField() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMIntegerField();
+		testOrderHelper.testOrderByDDMIntegerField();
 	}
 
 	@Test
 	public void testOrderByDDMIntegerFieldRepeatable() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMIntegerFieldRepeatable();
+		testOrderHelper.testOrderByDDMIntegerFieldRepeatable();
 	}
 
 	@Test
 	public void testOrderByDDMNumberField() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMNumberField();
+		testOrderHelper.testOrderByDDMNumberField();
 	}
 
 	@Test
 	public void testOrderByDDMNumberFieldRepeatable() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMNumberFieldRepeatable();
+		testOrderHelper.testOrderByDDMNumberFieldRepeatable();
 	}
 
 	@Test
 	public void testOrderByDDMTextField() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMTextField();
+		testOrderHelper.testOrderByDDMTextField();
 	}
 
 	@Test
 	public void testOrderByDDMTextFieldRepeatable() throws Exception {
-		TestOrderHelper orderTestHelper =
+		TestOrderHelper testOrderHelper =
 			new JournalArticleSearchTestOrderHelper(group);
 
-		orderTestHelper.testOrderByDDMTextFieldRepeatable();
+		testOrderHelper.testOrderByDDMTextFieldRepeatable();
 	}
 
 	@Ignore()
