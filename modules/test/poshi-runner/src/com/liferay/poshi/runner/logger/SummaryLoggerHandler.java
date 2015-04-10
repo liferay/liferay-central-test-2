@@ -272,8 +272,7 @@ public final class SummaryLoggerHandler {
 			if ((element.attributeValue("function") != null) &&
 				varName.startsWith("locator")) {
 
-				varName = StringUtil.replace(
-					varName, "locator", "locator-key");
+				varName = StringUtil.replace(varName, "locator", "locator-key");
 
 				String locatorKey =
 					PoshiRunnerVariablesUtil.getValueFromCommandMap(varName);
