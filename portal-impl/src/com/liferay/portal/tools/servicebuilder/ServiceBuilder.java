@@ -128,18 +128,6 @@ public class ServiceBuilder {
 
 	public static final String AUTHOR = "Brian Wing Shun Chan";
 
-	public static final String MODEL_HINTS_CONFIGS =
-		"classpath*:META-INF/portal-model-hints.xml," +
-			"META-INF/portal-model-hints.xml," +
-				"classpath*:META-INF/ext-model-hints.xml," +
-					"META-INF/portlet-model-hints.xml";
-
-	public static final String READ_ONLY_PREFIXES =
-		"fetch,get,has,is,load,reindex,search";
-
-	public static final String RESOURCE_ACTION_CONFIGS =
-		"META-INF/resource-actions/default.xml,resource-actions/default.xml";
-
 	public static Set<String> collectPermissionModels(
 			String implDir, String[] resourceActionsConfigs)
 		throws Exception {
@@ -311,7 +299,7 @@ public class ServiceBuilder {
 		String[] modelHintsConfigs = StringUtil.split(
 			GetterUtil.getString(
 				arguments.get("service.model.hints.configs"),
-				MODEL_HINTS_CONFIGS));
+				_MODEL_HINTS_CONFIGS));
 		String modelHintsFileName = arguments.get("service.model.hints.file");
 		boolean osgiModule = GetterUtil.getBoolean(
 			arguments.get("service.osgi.module"));
@@ -320,12 +308,12 @@ public class ServiceBuilder {
 		String[] readOnlyPrefixes = StringUtil.split(
 			GetterUtil.getString(
 				arguments.get("service.read.only.prefixes"),
-				READ_ONLY_PREFIXES));
+				_READ_ONLY_PREFIXES));
 		String remotingFileName = arguments.get("service.remoting.file");
 		String[] resourceActionsConfigs = StringUtil.split(
 			GetterUtil.getString(
 				arguments.get("service.resource.actions.configs"),
-				RESOURCE_ACTION_CONFIGS));
+				_RESOURCE_ACTION_CONFIGS));
 		String resourcesDir = arguments.get("service.resources.dir");
 		String springFileName = arguments.get("service.spring.file");
 		String[] springNamespaces = StringUtil.split(
@@ -373,15 +361,15 @@ public class ServiceBuilder {
 				"\tservice.hbm.file=${basedir}/src/META-INF/portal-hbm.xml\n" +
 				"\tservice.impl.dir=${basedir}/src\n" +
 				"\tservice.input.file=${service.file}\n" +
-				"\tservice.model.hints.configs=" + MODEL_HINTS_CONFIGS + "\n" +
+				"\tservice.model.hints.configs=" + _MODEL_HINTS_CONFIGS + "\n" +
 				"\tservice.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml\n" +
 				"\tservice.osgi.module=false\n" +
 				"\tservice.plugin.name=\n" +
 				"\tservice.props.util=com.liferay.portal.util.PropsUtil\n" +
-				"\tservice.read.only.prefixes=" + READ_ONLY_PREFIXES + "\n" +
+				"\tservice.read.only.prefixes=" + _READ_ONLY_PREFIXES + "\n" +
 				"\tservice.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml\n" +
 				"\tservice.resources.dir=${basedir}/src\n" +
-				"\tservice.resource.actions.configs=" + RESOURCE_ACTION_CONFIGS + "\n" +
+				"\tservice.resource.actions.configs=" + _RESOURCE_ACTION_CONFIGS + "\n" +
 				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
 				"\tservice.spring.namespaces=beans\n" +
 				"\tservice.sql.dir=${basedir}/../sql\n" +
@@ -5357,6 +5345,17 @@ public class ServiceBuilder {
 			_createSQLTables(updateSQLFile, createTableSQL, entity, false);
 		}
 	}
+
+	private static final String _MODEL_HINTS_CONFIGS =
+		"classpath*:META-INF/portal-model-hints.xml,META-INF" +
+			"/portal-model-hints.xml,classpath*:META-INF" +
+				"/ext-model-hints.xml,META-INF/portlet-model-hints.xml";
+
+	private static final String _READ_ONLY_PREFIXES =
+		"fetch,get,has,is,load,reindex,search";
+
+	private static final String _RESOURCE_ACTION_CONFIGS =
+		"META-INF/resource-actions/default.xml,resource-actions/default.xml";
 
 	private static final int _SESSION_TYPE_LOCAL = 1;
 
