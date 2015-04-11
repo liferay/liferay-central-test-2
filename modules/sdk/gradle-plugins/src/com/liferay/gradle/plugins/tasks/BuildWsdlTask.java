@@ -53,7 +53,7 @@ public class BuildWsdlTask extends DefaultTask {
 			_project, _CONFIGURATION_NAME);
 
 		configuration.setDescription(
-			"Configures Apache Axis for generating the WSDL client stubs.");
+			"Configures Apache Axis for generating WSDL client stubs.");
 		configuration.setVisible(false);
 
 		GradleUtil.executeIfEmpty(
@@ -155,6 +155,7 @@ public class BuildWsdlTask extends DefaultTask {
 		File tmpBinDir = new File(tmpDir, "bin");
 
 		javaCompile.setDestinationDir(tmpBinDir);
+
 		javaCompile.setSource(generateTask.getOutputs());
 
 		return javaCompile;
@@ -170,6 +171,7 @@ public class BuildWsdlTask extends DefaultTask {
 		File tmpSrcDir = new File(tmpDir, "src");
 
 		javaExec.args("--output=" + FileUtil.getAbsolutePath(tmpSrcDir));
+
 		javaExec.args(FileUtil.getAbsolutePath(wsdlFile));
 		javaExec.setClasspath(getConfiguration());
 		javaExec.setMain("org.apache.axis.wsdl.WSDL2Java");

@@ -145,7 +145,7 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 		BuildWsdlTask buildWsdlTask = GradleUtil.addTask(
 			project, BUILD_WSDL_TASK_NAME, BuildWsdlTask.class);
 
-		buildWsdlTask.setDescription("Generates the WSDL client stubs.");
+		buildWsdlTask.setDescription("Generates WSDL client stubs.");
 		buildWsdlTask.setGroup(BasePlugin.BUILD_GROUP);
 
 		return buildWsdlTask;
