@@ -389,6 +389,64 @@ public class ServiceBuilder {
 		Introspector.flushCaches();
 	}
 
+	public static Set<String> readResourceActionModels(
+			String implDir, String[] resourceActionsConfigs)
+		throws Exception {
+
+		Set<String> resourceActionModels = new HashSet<>();
+
+		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
+
+		for (String config : resourceActionsConfigs) {
+			if (config.startsWith("classpath*:")) {
+				String name = config.substring("classpath*:".length());
+
+				Enumeration<URL> enu = classLoader.getResources(name);
+
+				while (enu.hasMoreElements()) {
+					URL url = enu.nextElement();
+
+					InputStream inputStream = url.openStream();
+
+					_readResourceActionModels(
+						implDir, inputStream, resourceActionModels);
+				}
+			}
+			else {
+				Enumeration<URL> urls = classLoader.getResources(config);
+
+				if (urls.hasMoreElements()) {
+					while (urls.hasMoreElements()) {
+						URL url = urls.nextElement();
+
+						try (InputStream inputStream = url.openStream()) {
+							_readResourceActionModels(
+								implDir, inputStream, resourceActionModels);
+						}
+					}
+				}
+				else {
+					File file = new File(config);
+
+					if (!file.exists()) {
+						file = new File(implDir, config);
+					}
+
+					if (!file.exists()) {
+						continue;
+					}
+
+					try (InputStream inputStream = new FileInputStream(file)) {
+						_readResourceActionModels(
+							implDir, inputStream, resourceActionModels);
+					}
+				}
+			}
+		}
+
+		return resourceActionModels;
+	}
+
 	public static String toHumanName(String name) {
 		if (name == null) {
 			return null;
@@ -1927,64 +1985,6 @@ public class ServiceBuilder {
 		for (Node node : nodes) {
 			resourceActionModels.add(node.getText().trim());
 		}
-	}
-
-	public static Set<String> readResourceActionModels(
-			String implDir, String[] resourceActionsConfigs)
-		throws Exception {
-
-		Set<String> resourceActionModels = new HashSet<>();
-
-		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
-
-		for (String config : resourceActionsConfigs) {
-			if (config.startsWith("classpath*:")) {
-				String name = config.substring("classpath*:".length());
-
-				Enumeration<URL> enu = classLoader.getResources(name);
-
-				while (enu.hasMoreElements()) {
-					URL url = enu.nextElement();
-
-					InputStream inputStream = url.openStream();
-
-					_readResourceActionModels(
-						implDir, inputStream, resourceActionModels);
-				}
-			}
-			else {
-				Enumeration<URL> urls = classLoader.getResources(config);
-
-				if (urls.hasMoreElements()) {
-					while (urls.hasMoreElements()) {
-						URL url = urls.nextElement();
-
-						try (InputStream inputStream = url.openStream()) {
-							_readResourceActionModels(
-								implDir, inputStream, resourceActionModels);
-						}
-					}
-				}
-				else {
-					File file = new File(config);
-
-					if (!file.exists()) {
-						file = new File(implDir, config);
-					}
-
-					if (!file.exists()) {
-						continue;
-					}
-
-					try (InputStream inputStream = new FileInputStream(file)) {
-						_readResourceActionModels(
-							implDir, inputStream, resourceActionModels);
-					}
-				}
-			}
-		}
-
-		return resourceActionModels;
 	}
 
 	private static String _stripFullyQualifiedClassNames(String content)
