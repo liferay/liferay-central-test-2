@@ -273,10 +273,11 @@ public class PoshiRunnerValidation {
 			Element element, String filePath)
 		throws PoshiRunnerException {
 
-		List<String> possibleAttributes = Arrays.asList(
+		List<String> possibleAttributeNames = Arrays.asList(
 			"line-number", "message");
 
-		_validatePossibleAttributeNames(element, possibleAttributes, filePath);
+		_validatePossibleAttributeNames(
+			element, possibleAttributeNames, filePath);
 
 		if (Validator.isNull(element.attributeValue("message")) &&
 			Validator.isNull(element.getText())) {
