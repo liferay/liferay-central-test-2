@@ -252,11 +252,11 @@ public abstract class BaseActionableDynamicQuery
 	protected void addOrderCriteria(DynamicQuery dynamicQuery) {
 		if (_addOrderCriteriaMethod != null) {
 			_addOrderCriteriaMethod.addOrderCriteria(dynamicQuery);
-
-			return;
 		}
-
-		dynamicQuery.addOrder(OrderFactoryUtil.asc(_primaryKeyPropertyName));
+		else {
+			dynamicQuery.addOrder(
+				OrderFactoryUtil.asc(_primaryKeyPropertyName));
+		}
 	}
 
 	protected long doPerformActions(long previousPrimaryKey)
