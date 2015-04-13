@@ -16,7 +16,6 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -74,81 +73,90 @@ public class VerifyLayout extends VerifyProcess {
 
 	protected void verifyLayoutIdFriendlyURL() throws Exception {
 		while (true) {
-			List<Layout> affectedLayouts =
-				getInvalidLayoutIdFriendlyURLLayouts();
+			List<Layout> layouts = getInvalidLayoutIdFriendlyURLLayouts();
 
-			if (affectedLayouts.isEmpty()) {
+			if (layouts.isEmpty()) {
 				break;
 			}
 
-			for (Layout layout : affectedLayouts) {
-				long layoutId = layout.getLayoutId();
-
-				String friendlyURL = layout.getFriendlyURL();
-
-				String newFriendlyURL = StringPool.SLASH + layoutId;
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Updating layout with friendlyURL: " + friendlyURL +
-						" to: " + newFriendlyURL);
-				}
-
-				List<LayoutFriendlyURL> layoutFriendlyURLs =
-					LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(
-						layout.getPlid());
-
-				for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
-					if (!friendlyURL.equals(
-							layoutFriendlyURL.getFriendlyURL())) {
-
-						continue;
-					}
-
-					try {
-						LayoutLocalServiceUtil.updateFriendlyURL(
-							layout.getUserId(), layout.getPlid(),
-							newFriendlyURL, layoutFriendlyURL.getLanguageId());
-					}
-					catch (LayoutFriendlyURLException lfurle) {
-						int type = lfurle.getType();
-
-						if (type == LayoutFriendlyURLException.DUPLICATE) {
-							continue;
-						}
-						else {
-							throw lfurle;
-						}
-					}
-				}
-
-				try {
-					Layout duplicateLayout =
-						LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
-							layout.getGroupId(), layout.isPrivateLayout(),
-							newFriendlyURL);
-
-					if (duplicateLayout != null) {
-						throw new LayoutFriendlyURLException(
-							LayoutFriendlyURLException.DUPLICATE);
-					}
-
-					layout.setFriendlyURL(newFriendlyURL);
-
-					LayoutLocalServiceUtil.updateLayout(layout);
-				}
-				catch (LayoutFriendlyURLException lfurle) {
-					int type = lfurle.getType();
-
-					if (type == LayoutFriendlyURLException.DUPLICATE) {
-						continue;
-					}
-					else {
-						throw lfurle;
-					}
+			for (Layout layout : layouts) {
+				if (verifyLayoutIdFriendlyURL(layout)) {
+					continue;
 				}
 			}
 		}
+	}
+
+	protected boolean verifyLayoutIdFriendlyURL(Layout layout)
+		throws Exception {
+	
+		long layoutId = layout.getLayoutId();
+	
+		String friendlyURL = layout.getFriendlyURL();
+	
+		String newFriendlyURL = StringPool.SLASH + layoutId;
+	
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Updating layout with friendlyURL: " + friendlyURL +
+				" to: " + newFriendlyURL);
+		}
+	
+		List<LayoutFriendlyURL> layoutFriendlyURLs =
+			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(
+				layout.getPlid());
+	
+		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
+			if (!friendlyURL.equals(
+					layoutFriendlyURL.getFriendlyURL())) {
+	
+				return true;
+			}
+	
+			try {
+				LayoutLocalServiceUtil.updateFriendlyURL(
+					layout.getUserId(), layout.getPlid(),
+					newFriendlyURL, layoutFriendlyURL.getLanguageId());
+			}
+			catch (LayoutFriendlyURLException lfurle) {
+				int type = lfurle.getType();
+	
+				if (type == LayoutFriendlyURLException.DUPLICATE) {
+					return true;
+				}
+				else {
+					throw lfurle;
+				}
+			}
+		}
+	
+		try {
+			Layout duplicateLayout =
+				LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					newFriendlyURL);
+	
+			if (duplicateLayout != null) {
+				throw new LayoutFriendlyURLException(
+					LayoutFriendlyURLException.DUPLICATE);
+			}
+	
+			layout.setFriendlyURL(newFriendlyURL);
+	
+			LayoutLocalServiceUtil.updateLayout(layout);
+		}
+		catch (LayoutFriendlyURLException lfurle) {
+			int type = lfurle.getType();
+	
+			if (type == LayoutFriendlyURLException.DUPLICATE) {
+				return true;
+			}
+			else {
+				throw lfurle;
+			}
+		}
+		
+		return false;
 	}
 
 	protected void verifyLayoutPrototypeLinkEnabled() throws Exception {
