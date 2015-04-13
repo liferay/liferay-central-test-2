@@ -90,16 +90,13 @@ public class VerifyLayout extends VerifyProcess {
 	protected boolean verifyLayoutIdFriendlyURL(Layout layout)
 		throws Exception {
 	
-		long layoutId = layout.getLayoutId();
-	
-		String friendlyURL = layout.getFriendlyURL();
-	
-		String newFriendlyURL = StringPool.SLASH + layoutId;
+		String oldFriendlyURL = layout.getFriendlyURL();
+		String newFriendlyURL = StringPool.SLASH + layout.getLayoutId();
 	
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Updating layout with friendlyURL: " + friendlyURL +
-				" to: " + newFriendlyURL);
+				"Updating layout " + layout.getPlid() + " from friendly URL " +
+					oldFriendlyURL + " to friendly URL " + newFriendlyURL);
 		}
 	
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
@@ -107,9 +104,7 @@ public class VerifyLayout extends VerifyProcess {
 				layout.getPlid());
 	
 		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
-			if (!friendlyURL.equals(
-					layoutFriendlyURL.getFriendlyURL())) {
-	
+			if (!oldFriendlyURL.equals(layoutFriendlyURL.getFriendlyURL())) {	
 				return true;
 			}
 	
