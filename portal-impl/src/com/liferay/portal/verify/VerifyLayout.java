@@ -52,6 +52,40 @@ public class VerifyLayout extends VerifyProcess {
 		verifyUuid();
 	}
 
+	protected List<Layout> getInvalidLayoutIdFriendlyURLLayouts()
+		throws Exception {
+
+		final List<Layout> layouts = new ArrayList<>();
+
+		ActionableDynamicQuery actionableDynamicQuery =
+			LayoutLocalServiceUtil.getActionableDynamicQuery();
+
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
+
+				@Override
+				public void performAction(Object object) {
+					Layout layout = (Layout)object;
+
+					String friendlyURL = layout.getFriendlyURL();
+
+					friendlyURL = friendlyURL.substring(1);
+
+					if (Validator.isNumber(friendlyURL) &&
+						!friendlyURL.equals(
+							String.valueOf(layout.getLayoutId()))) {
+
+						layouts.add(layout);
+					}
+				}
+
+			});
+
+		actionableDynamicQuery.performActions();
+
+		return layouts;
+	}
+
 	protected void verifyFriendlyURL() throws Exception {
 		List<Layout> layouts =
 			LayoutLocalServiceUtil.getNullFriendlyURLLayouts();
@@ -89,33 +123,33 @@ public class VerifyLayout extends VerifyProcess {
 
 	protected boolean verifyLayoutIdFriendlyURL(Layout layout)
 		throws Exception {
-	
+
 		String oldFriendlyURL = layout.getFriendlyURL();
 		String newFriendlyURL = StringPool.SLASH + layout.getLayoutId();
-	
+
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Updating layout " + layout.getPlid() + " from friendly URL " +
 					oldFriendlyURL + " to friendly URL " + newFriendlyURL);
 		}
-	
+
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
 			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(
 				layout.getPlid());
-	
+
 		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
-			if (!oldFriendlyURL.equals(layoutFriendlyURL.getFriendlyURL())) {	
+			if (!oldFriendlyURL.equals(layoutFriendlyURL.getFriendlyURL())) {
 				return true;
 			}
-	
+
 			try {
 				LayoutLocalServiceUtil.updateFriendlyURL(
-					layout.getUserId(), layout.getPlid(),
-					newFriendlyURL, layoutFriendlyURL.getLanguageId());
+					layout.getUserId(), layout.getPlid(), newFriendlyURL,
+					layoutFriendlyURL.getLanguageId());
 			}
 			catch (LayoutFriendlyURLException lfurle) {
 				int type = lfurle.getType();
-	
+
 				if (type == LayoutFriendlyURLException.DUPLICATE) {
 					return true;
 				}
@@ -124,25 +158,25 @@ public class VerifyLayout extends VerifyProcess {
 				}
 			}
 		}
-	
+
 		try {
 			Layout duplicateLayout =
 				LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
 					layout.getGroupId(), layout.isPrivateLayout(),
 					newFriendlyURL);
-	
+
 			if (duplicateLayout != null) {
 				throw new LayoutFriendlyURLException(
 					LayoutFriendlyURLException.DUPLICATE);
 			}
-	
+
 			layout.setFriendlyURL(newFriendlyURL);
-	
+
 			LayoutLocalServiceUtil.updateLayout(layout);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			int type = lfurle.getType();
-	
+
 			if (type == LayoutFriendlyURLException.DUPLICATE) {
 				return true;
 			}
@@ -150,7 +184,7 @@ public class VerifyLayout extends VerifyProcess {
 				throw lfurle;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -188,40 +222,6 @@ public class VerifyLayout extends VerifyProcess {
 		sb.append("Layout.sourcePrototypeLayoutUuid != '')");
 
 		runSQL(sb.toString());
-	}
-
-	protected List<Layout> getInvalidLayoutIdFriendlyURLLayouts()
-		throws Exception {
-
-		final List<Layout> layouts = new ArrayList<>();
-
-		ActionableDynamicQuery actionableDynamicQuery =
-			LayoutLocalServiceUtil.getActionableDynamicQuery();
-
-		actionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod() {
-
-				@Override
-				public void performAction(Object object) {
-					Layout layout = (Layout)object;
-
-					String friendlyURL = layout.getFriendlyURL();
-					
-					friendlyURL = friendlyURL.substring(1);
-
-					if (Validator.isNumber(friendlyURL) &&
-						!friendlyURL.equals(
-							String.valueOf(layout.getLayoutId()))) {
-
-						layouts.add(layout);
-					}
-				}
-
-			});
-
-		actionableDynamicQuery.performActions();
-
-		return layouts;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(VerifyLayout.class);
