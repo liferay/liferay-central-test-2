@@ -55,7 +55,7 @@ public class BuildXsdTask extends Zip {
 			_project, _CONFIGURATION_NAME);
 
 		configuration.setDescription(
-			"Configures Apache XMLBeans for generating XMLBeans types.");
+			"Configures Apache XMLBeans for generating XMLBeans bindings.");
 		configuration.setVisible(false);
 
 		GradleUtil.executeIfEmpty(
@@ -128,7 +128,7 @@ public class BuildXsdTask extends Zip {
 
 		javaCompile.setClasspath(getConfiguration());
 
-		final File tmpBinDir = new File(getTmpDir(), "bin");
+		File tmpBinDir = new File(getTmpDir(), "bin");
 
 		javaCompile.setDestinationDir(tmpBinDir);
 
@@ -146,7 +146,6 @@ public class BuildXsdTask extends Zip {
 
 		javaExec.args("-d");
 		javaExec.args(FileUtil.getAbsolutePath(tmpSrcDir));
-
 		javaExec.args("-srconly");
 
 		Iterable<File> xsdFiles = getXsdFiles();

@@ -159,7 +159,7 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 		BuildXsdTask buildXsdTask = GradleUtil.addTask(
 			project, BUILD_XSD_TASK_NAME, BuildXsdTask.class);
 
-		buildXsdTask.setDescription("Generates XMLBeans types.");
+		buildXsdTask.setDescription("Generates XMLBeans bindings.");
 		buildXsdTask.setGroup(BasePlugin.BUILD_GROUP);
 
 		return buildXsdTask;
