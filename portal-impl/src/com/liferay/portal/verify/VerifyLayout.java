@@ -75,7 +75,7 @@ public class VerifyLayout extends VerifyProcess {
 	protected void verifyLayoutIdFriendlyURL() throws Exception {
 		while (true) {
 			List<Layout> affectedLayouts =
-				_getAffectedLayoutIdFriendlyURLLayouts();
+				getInvalidLayoutIdFriendlyURLLayouts();
 
 			if (affectedLayouts.isEmpty()) {
 				break;
@@ -187,7 +187,7 @@ public class VerifyLayout extends VerifyProcess {
 		runSQL(sb.toString());
 	}
 
-	private List<Layout> _getAffectedLayoutIdFriendlyURLLayouts()
+	protected List<Layout> getInvalidLayoutIdFriendlyURLLayouts()
 		throws Exception {
 
 		final List<Layout> layouts = new ArrayList<>();
@@ -213,6 +213,7 @@ public class VerifyLayout extends VerifyProcess {
 						layouts.add(layout);
 					}
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
