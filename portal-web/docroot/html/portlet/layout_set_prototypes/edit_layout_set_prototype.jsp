@@ -21,11 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-long layoutSetPrototypeId = ParamUtil.getLong(request, "layoutSetPrototypeId");
-
 LayoutSetPrototype layoutSetPrototype = null;
 
-if (Validator.isNotNull(layoutSetPrototypeId)) {
+long layoutSetPrototypeId = ParamUtil.getLong(request, "layoutSetPrototypeId");
+
+if (layoutSetPrototypeId > 0) {
 	layoutSetPrototype = LayoutSetPrototypeServiceUtil.fetchLayoutSetPrototype(layoutSetPrototypeId);
 }
 else {
