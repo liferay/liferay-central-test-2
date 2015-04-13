@@ -100,7 +100,7 @@ public class AssetTagsSearchFacet extends BaseSearchFacet {
 		boolean showAssetCount = ParamUtil.getBoolean(
 			actionRequest, getClassName() + "showAssetCount", true);
 
-		jsonObject.put("displayStyle", displayStyle);
+		jsonObject.put("displayStyle", displayStyleFacet);
 		jsonObject.put("frequencyThreshold", frequencyThreshold);
 		jsonObject.put("maxTerms", maxTerms);
 		jsonObject.put("showAssetCount", showAssetCount);
