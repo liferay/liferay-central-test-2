@@ -12,29 +12,13 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.util;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Juan Gonzalez
  */
-public class RequiredFileEntryTypeException extends PortalException {
+public interface PortalPortProtocolEventListener {
 
-	public RequiredFileEntryTypeException() {
-		super();
-	}
-
-	public RequiredFileEntryTypeException(String msg) {
-		super(msg);
-	}
-
-	public RequiredFileEntryTypeException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public RequiredFileEntryTypeException(Throwable cause) {
-		super(cause);
-	}
+	public void portalPortProtocolConfigured(int port, Boolean secure);
 
 }
