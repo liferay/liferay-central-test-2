@@ -42,8 +42,8 @@ public class LuceneRepositorySearchQueryTermBuilder
 
 	@Override
 	public void addTerm(
-		BooleanQuery booleanQuery, SearchContext searchContext,
-		String field, String value) {
+		BooleanQuery booleanQuery, SearchContext searchContext, String field,
+		String value) {
 
 		if (Validator.isNull(value)) {
 			return;
