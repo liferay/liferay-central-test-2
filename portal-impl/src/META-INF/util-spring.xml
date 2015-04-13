@@ -1146,13 +1146,13 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler" class="com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler" />
+	<bean id="com.liferay.portlet.layoutprototypes.lar.LayoutPrototypeStagedModelDataHandler" class="com.liferay.portlet.layoutprototypes.lar.LayoutPrototypeStagedModelDataHandler" />
 	<bean id="com.liferay.portlet.layoutsadmin.util.ExportImportConfigurationIndexer" class="com.liferay.portlet.layoutsadmin.util.ExportImportConfigurationIndexer" />
 	<bean id="com.liferay.portlet.layoutsadmin.util.SitemapUtil" class="com.liferay.portlet.layoutsadmin.util.SitemapUtil">
 		<property name="sitemap">
 			<bean class="com.liferay.portlet.layoutsadmin.util.SitemapImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.layoutprototypes.lar.LayoutPrototypeStagedModelDataHandler" class="com.liferay.portlet.layoutprototypes.lar.LayoutPrototypeStagedModelDataHandler" />
 	<bean id="com.liferay.portlet.messageboards.asset.MBMessageAssetRendererFactory" class="com.liferay.portlet.messageboards.asset.MBMessageAssetRendererFactory" />
 	<bean id="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" class="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" />
 	<bean id="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" class="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" />
