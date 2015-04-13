@@ -244,14 +244,6 @@ public class LayoutStagedModelDataHandler
 		return portletIds;
 	}
 
-	protected String getFriendlyURL(String friendlyURL, long layoutId) {
-		if (!Validator.isNumber(friendlyURL.substring(1))) {
-			return friendlyURL;
-		}
-
-		return StringPool.SLASH + layoutId;
-	}
-
 	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, Layout layout)
@@ -933,6 +925,14 @@ public class LayoutStagedModelDataHandler
 		typeSettings.setProperty(
 			"url",
 			url.substring(0, x) + group.getFriendlyURL() + url.substring(y));
+	}
+
+	protected String getFriendlyURL(String friendlyURL, long layoutId) {
+		if (!Validator.isNumber(friendlyURL.substring(1))) {
+			return friendlyURL;
+		}
+
+		return StringPool.SLASH + layoutId;
 	}
 
 	protected String getUniqueFriendlyURL(
