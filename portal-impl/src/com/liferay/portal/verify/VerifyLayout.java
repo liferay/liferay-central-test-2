@@ -199,9 +199,7 @@ public class VerifyLayout extends VerifyProcess {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					Layout layout = (Layout)object;
 
 					String friendlyURL = layout.getFriendlyURL();
