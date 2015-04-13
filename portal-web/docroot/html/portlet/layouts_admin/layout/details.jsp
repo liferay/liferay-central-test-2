@@ -184,7 +184,7 @@ StringBuilder friendlyURLBase = new StringBuilder();
 					<%
 					request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
 
-					DynamicServletRequest dynamicServletRequest = new DynamicServletRequest(request, Collections.singletonMap("idPrefix", new String[]{"details"}));
+					DynamicServletRequest dynamicServletRequest = new DynamicServletRequest(request, Collections.singletonMap("idPrefix", new String[] {"details"}));
 					%>
 
 					<%= layoutTypeController.includeEditContent(dynamicServletRequest, response, selLayout) %>
