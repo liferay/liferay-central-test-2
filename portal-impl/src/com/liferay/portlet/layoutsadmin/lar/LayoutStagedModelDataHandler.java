@@ -244,7 +244,7 @@ public class LayoutStagedModelDataHandler
 		return portletIds;
 	}
 
-	protected String checkFriendlyURL(String friendlyURL, long layoutId) {
+	protected String getFriendlyURL(String friendlyURL, long layoutId) {
 		if (!Validator.isNumber(friendlyURL.substring(1))) {
 			return friendlyURL;
 		}
@@ -391,7 +391,7 @@ public class LayoutStagedModelDataHandler
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 					groupId, privateLayout);
 
-				friendlyURL = checkFriendlyURL(friendlyURL, layoutId);
+				friendlyURL = getFriendlyURL(friendlyURL, layoutId);
 			}
 		}
 		else if (layoutsImportMode.equals(
@@ -455,7 +455,7 @@ public class LayoutStagedModelDataHandler
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 					groupId, privateLayout);
 
-				friendlyURL = checkFriendlyURL(friendlyURL, layoutId);
+				friendlyURL = getFriendlyURL(friendlyURL, layoutId);
 			}
 		}
 
@@ -495,7 +495,7 @@ public class LayoutStagedModelDataHandler
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 					groupId, privateLayout);
 
-				friendlyURL = checkFriendlyURL(friendlyURL, layoutId);
+				friendlyURL = getFriendlyURL(friendlyURL, layoutId);
 			}
 			else {
 				importedLayout.setCreateDate(layout.getCreateDate());
