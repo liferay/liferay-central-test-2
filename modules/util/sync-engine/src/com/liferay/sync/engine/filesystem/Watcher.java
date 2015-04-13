@@ -334,7 +334,7 @@ public abstract class Watcher implements Runnable {
 
 			fireWatchEventListener(eventType, filePath);
 
-			if (OSDetector.isLinux() && Files.isDirectory(filePath)) {
+			if (!OSDetector.isApple() && Files.isDirectory(filePath)) {
 				walkFileTree(filePath);
 			}
 		}
@@ -342,6 +342,8 @@ public abstract class Watcher implements Runnable {
 			if (Files.exists(filePath)) {
 				return;
 			}
+
+			removeCreatedFilePathName(filePath.toString());
 
 			processMissingFilePath(filePath);
 
@@ -363,6 +365,8 @@ public abstract class Watcher implements Runnable {
 			fireWatchEventListener(SyncWatchEvent.EVENT_TYPE_MODIFY, filePath);
 		}
 		else if (eventType.equals(SyncWatchEvent.EVENT_TYPE_RENAME_FROM)) {
+			removeCreatedFilePathName(filePath.toString());
+
 			processMissingFilePath(getBaseFilePath());
 
 			fireWatchEventListener(
