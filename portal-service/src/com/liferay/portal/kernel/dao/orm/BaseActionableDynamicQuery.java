@@ -270,13 +270,13 @@ public abstract class BaseActionableDynamicQuery
 
 		dynamicQuery.add(property.gt(previousPrimaryKey));
 
-		addOrderCriteria(dynamicQuery);
-
 		dynamicQuery.setLimit(0, _interval);
 
 		addDefaultCriteria(dynamicQuery);
 
 		addCriteria(dynamicQuery);
+
+		addOrderCriteria(dynamicQuery);
 
 		Callable<Long> callable = new Callable<Long>() {
 
