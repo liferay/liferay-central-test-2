@@ -40,9 +40,8 @@ public class SyncUser extends BaseModel {
 		if (lastName.isEmpty()) {
 			return firstName;
 		}
-		else {
-			return firstName + " " + lastName;
-		}
+
+		return firstName + " " + lastName;
 	}
 
 	public String getJobTitle() {
