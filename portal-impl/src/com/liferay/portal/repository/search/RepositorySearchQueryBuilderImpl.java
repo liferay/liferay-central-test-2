@@ -136,7 +136,7 @@ public class RepositorySearchQueryBuilderImpl
 
 		BooleanQuery titleQuery = BooleanQueryFactoryUtil.create(searchContext);
 
-		getRepositorySearcQueryTermBuilder().addTerm(
+		_repositorySearchQueryTermBuilder.addTerm(
 			titleQuery, searchContext, Field.TITLE, keywords);
 
 		if (titleQuery.hasClauses() && !contains(searchQuery, titleQuery)) {
@@ -146,7 +146,7 @@ public class RepositorySearchQueryBuilderImpl
 		BooleanQuery userNameQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		getRepositorySearcQueryTermBuilder().addTerm(
+		_repositorySearchQueryTermBuilder.addTerm(
 			userNameQuery, searchContext, Field.USER_NAME, keywords);
 
 		if (userNameQuery.hasClauses() &&
@@ -158,7 +158,7 @@ public class RepositorySearchQueryBuilderImpl
 		BooleanQuery contentQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		getRepositorySearcQueryTermBuilder().addTerm(
+		_repositorySearchQueryTermBuilder.addTerm(
 			contentQuery, searchContext, Field.CONTENT, keywords);
 
 		if (contentQuery.hasClauses() && !contains(searchQuery, contentQuery)) {
@@ -262,12 +262,6 @@ public class RepositorySearchQueryBuilderImpl
 		}
 
 		return false;
-	}
-
-	protected RepositorySearchQueryTermBuilder
-		getRepositorySearcQueryTermBuilder() {
-
-			return _repositorySearchQueryTermBuilder;
 	}
 
 	private RepositorySearchQueryTermBuilder _repositorySearchQueryTermBuilder =
