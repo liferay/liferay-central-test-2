@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.repository.search.RepositorySearchQueryTermBuil
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -43,9 +42,8 @@ public class LuceneRepositorySearchQueryTermBuilder
 
 	@Override
 	public void addTerm(
-			BooleanQuery booleanQuery, SearchContext searchContext,
-			String field, String value)
-		throws ParseException {
+		BooleanQuery booleanQuery, SearchContext searchContext,
+		String field, String value) {
 
 		if (Validator.isNull(value)) {
 			return;
