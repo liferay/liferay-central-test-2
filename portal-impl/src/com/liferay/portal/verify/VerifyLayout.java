@@ -203,12 +203,12 @@ public class VerifyLayout extends VerifyProcess {
 					Layout layout = (Layout)object;
 
 					String friendlyURL = layout.getFriendlyURL();
+					
+					friendlyURL = friendlyURL.substring(1);
 
-					long layoutId = layout.getLayoutId();
-
-					if (Validator.isNumber(friendlyURL.substring(1)) &&
-						!friendlyURL.substring(1).equals(
-							String.valueOf(layoutId))) {
+					if (Validator.isNumber(friendlyURL) &&
+						!friendlyURL.equals(
+							String.valueOf(layout.getLayoutId()))) {
 
 						layouts.add(layout);
 					}
