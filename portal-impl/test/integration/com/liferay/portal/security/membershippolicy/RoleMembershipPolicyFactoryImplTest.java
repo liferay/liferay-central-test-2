@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.membershippolicy.bundle.rolemembershippolicyfactoryimpl.TestRoleMembershipPolicy;
@@ -57,17 +56,12 @@ public class RoleMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testCheckRoles() {
+	public void testCheckRoles() throws Exception {
 		_atomicState.reset();
 
 		long[] array = {1, 2, 3};
 
-		try {
-			RoleMembershipPolicyUtil.checkRoles(array, array, array);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		RoleMembershipPolicyUtil.checkRoles(array, array, array);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
@@ -98,69 +92,44 @@ public class RoleMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testIsRoleAllowed() {
-		try {
-			Assert.assertTrue(RoleMembershipPolicyUtil.isRoleAllowed(1, 1));
-			Assert.assertFalse(RoleMembershipPolicyUtil.isRoleAllowed(2, 2));
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+	public void testIsRoleAllowed() throws Exception {
+		Assert.assertTrue(RoleMembershipPolicyUtil.isRoleAllowed(1, 1));
+		Assert.assertFalse(RoleMembershipPolicyUtil.isRoleAllowed(2, 2));
 	}
 
 	@Test
-	public void testIsRoleRequired() {
-		try {
-			Assert.assertTrue(RoleMembershipPolicyUtil.isRoleRequired(1, 1));
-			Assert.assertFalse(RoleMembershipPolicyUtil.isRoleRequired(2, 2));
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+	public void testIsRoleRequired() throws Exception {
+		Assert.assertTrue(RoleMembershipPolicyUtil.isRoleRequired(1, 1));
+		Assert.assertFalse(RoleMembershipPolicyUtil.isRoleRequired(2, 2));
 	}
 
 	@Test
-	public void testPropagateRoles() {
+	public void testPropagateRoles() throws Exception {
 		_atomicState.reset();
 
 		long[] array = {1, 2, 3};
 
-		try {
-			RoleMembershipPolicyUtil.propagateRoles(array, array, array);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		RoleMembershipPolicyUtil.propagateRoles(array, array, array);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy1() {
+	public void testVerifyPolicy1() throws Exception {
 		_atomicState.reset();
 
-		try {
-			RoleMembershipPolicyUtil.verifyPolicy(new RoleImpl());
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		RoleMembershipPolicyUtil.verifyPolicy(new RoleImpl());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy2() {
+	public void testVerifyPolicy2() throws Exception {
 		_atomicState.reset();
 
-		try {
-			RoleMembershipPolicyUtil.verifyPolicy(
-				new RoleImpl(), new RoleImpl(),
-				new HashMap<String, Serializable>());
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		RoleMembershipPolicyUtil.verifyPolicy(
+			new RoleImpl(), new RoleImpl(),
+			new HashMap<String, Serializable>());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}

@@ -65,11 +65,10 @@ public class SiteMembershipPolicyFactoryImplTest {
 	public void testCheckMembership() {
 		_atomicState.reset();
 
-		long[] testData = {1, 2, 3};
+		long[] array = {1, 2, 3};
 
 		try {
-			SiteMembershipPolicyUtil.checkMembership(
-				testData, testData, testData);
+			SiteMembershipPolicyUtil.checkMembership(array, array, array);
 		}
 		catch (PortalException e) {
 			Assert.fail();
@@ -118,219 +117,142 @@ public class SiteMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testIsMembershipAllowed() {
-		try {
-			boolean value = SiteMembershipPolicyUtil.isMembershipAllowed(1, 1);
-
-			Assert.assertTrue(value);
-
-			value = SiteMembershipPolicyUtil.isMembershipAllowed(2, 2);
-
-			Assert.assertFalse(value);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+	public void testIsMembershipAllowed() throws Exception {
+		Assert.assertTrue(SiteMembershipPolicyUtil.isMembershipAllowed(1, 1));
+		Assert.assertFalse(SiteMembershipPolicyUtil.isMembershipAllowed(2, 2));
 	}
 
 	@Test
-	public void testisMembershipProtected() {
-		try {
-			boolean value = SiteMembershipPolicyUtil.isMembershipProtected(
-				null, 1, 1);
+	public void testisMembershipProtected() throws Exception {
+		boolean value = SiteMembershipPolicyUtil.isMembershipProtected(
+			null, 1, 1);
 
-			Assert.assertTrue(value);
+		Assert.assertTrue(value);
 
-			value = SiteMembershipPolicyUtil.isMembershipProtected(null, 2, 2);
+		value = SiteMembershipPolicyUtil.isMembershipProtected(null, 2, 2);
 
-			Assert.assertFalse(value);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		Assert.assertFalse(value);
 	}
 
 	@Test
-	public void testIsMembershipRequired() {
-		try {
-			boolean value = SiteMembershipPolicyUtil.isMembershipRequired(1, 1);
+	public void testIsMembershipRequired() throws Exception {
+		boolean value = SiteMembershipPolicyUtil.isMembershipRequired(1, 1);
 
-			Assert.assertTrue(value);
+		Assert.assertTrue(value);
 
-			value = SiteMembershipPolicyUtil.isMembershipRequired(2, 2);
+		value = SiteMembershipPolicyUtil.isMembershipRequired(2, 2);
 
-			Assert.assertFalse(value);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		Assert.assertFalse(value);
 	}
 
 	@Test
-	public void testIsRoleAllowed() {
-		try {
-			boolean value = SiteMembershipPolicyUtil.isRoleAllowed(1, 1, 1);
+	public void testIsRoleAllowed() throws Exception {
+		boolean value = SiteMembershipPolicyUtil.isRoleAllowed(1, 1, 1);
 
-			Assert.assertTrue(value);
+		Assert.assertTrue(value);
 
-			value = SiteMembershipPolicyUtil.isRoleAllowed(2, 2, 2);
+		value = SiteMembershipPolicyUtil.isRoleAllowed(2, 2, 2);
 
-			Assert.assertFalse(value);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		Assert.assertFalse(value);
 	}
 
 	@Test
-	public void testIsRoleProtected() {
-		try {
-			boolean value = SiteMembershipPolicyUtil.isRoleProtected(
-				null, 1, 1, 1);
+	public void testIsRoleProtected() throws Exception {
+		boolean value = SiteMembershipPolicyUtil.isRoleProtected(null, 1, 1, 1);
 
-			Assert.assertTrue(value);
+		Assert.assertTrue(value);
 
-			value = SiteMembershipPolicyUtil.isRoleProtected(null, 2, 2, 2);
+		value = SiteMembershipPolicyUtil.isRoleProtected(null, 2, 2, 2);
 
-			Assert.assertFalse(value);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		Assert.assertFalse(value);
 	}
 
 	@Test
-	public void testIsRoleRequired() {
-		try {
-			boolean value = SiteMembershipPolicyUtil.isRoleRequired(1, 1, 1);
+	public void testIsRoleRequired() throws Exception {
+		boolean value = SiteMembershipPolicyUtil.isRoleRequired(1, 1, 1);
 
-			Assert.assertTrue(value);
+		Assert.assertTrue(value);
 
-			value = SiteMembershipPolicyUtil.isRoleRequired(2, 2, 2);
+		value = SiteMembershipPolicyUtil.isRoleRequired(2, 2, 2);
 
-			Assert.assertFalse(value);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		Assert.assertFalse(value);
 	}
 
 	@Test
-	public void testPropagateMembership() {
+	public void testPropagateMembership() throws Exception {
 		_atomicState.reset();
 
-		long[] testData = {1, 2, 3};
+		long[] array = {1, 2, 3};
 
-		try {
-			SiteMembershipPolicyUtil.propagateMembership(
-				testData, testData, testData);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.propagateMembership(array, array, array);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testPropagateRolesp() {
+	public void testPropagateRoles() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.propagateRoles(null, null);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.propagateRoles(null, null);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy1() {
+	public void testVerifyPolicy1() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.verifyPolicy();
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.verifyPolicy();
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy2() {
+	public void testVerifyPolicy2() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.verifyPolicy(new TestGroup());
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.verifyPolicy(new TestGroup());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy3() {
+	public void testVerifyPolicy3() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.verifyPolicy(null, null, null);
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.verifyPolicy(null, null, null);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy4() {
+	public void testVerifyPolicy4() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.verifyPolicy(
-				new TestGroup(), new TestGroup(),
-				new ArrayList<AssetCategory>(), new ArrayList<AssetTag>(),
-				new HashMap<String, Serializable>(), new UnicodeProperties());
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.verifyPolicy(
+			new TestGroup(), new TestGroup(), new ArrayList<AssetCategory>(),
+			new ArrayList<AssetTag>(), new HashMap<String, Serializable>(),
+			new UnicodeProperties());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy5() {
+	public void testVerifyPolicy5() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.verifyPolicy(new RoleImpl());
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.verifyPolicy(new RoleImpl());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy6() {
+	public void testVerifyPolicy6() throws Exception {
 		_atomicState.reset();
 
-		try {
-			SiteMembershipPolicyUtil.verifyPolicy(
-				new RoleImpl(), new RoleImpl(),
-				new HashMap<String, Serializable>());
-		}
-		catch (PortalException e) {
-			Assert.fail();
-		}
+		SiteMembershipPolicyUtil.verifyPolicy(
+			new RoleImpl(), new RoleImpl(),
+			new HashMap<String, Serializable>());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
