@@ -46,7 +46,7 @@ public interface Settings {
 	@Target(ElementType.TYPE)
 	public @interface OverrideClass {
 
-		public Class value() default Object.class;
+		public Class<?> value() default Object.class;
 
 	}
 

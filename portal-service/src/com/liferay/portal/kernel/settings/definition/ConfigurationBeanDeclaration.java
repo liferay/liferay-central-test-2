@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.settings.definition;
  */
 public interface ConfigurationBeanDeclaration {
 
-	public Class getConfigurationBeanClass();
+	public Class<?> getConfigurationBeanClass();
 
 }
