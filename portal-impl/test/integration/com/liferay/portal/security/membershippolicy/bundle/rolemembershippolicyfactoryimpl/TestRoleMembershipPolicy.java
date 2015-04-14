@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy.bundle.rolemembershippolicyfactoryimpl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.security.membershippolicy.RoleMembershipPolicy;
@@ -69,12 +68,12 @@ public class TestRoleMembershipPolicy implements RoleMembershipPolicy {
 	}
 
 	@Override
-	public void verifyPolicy() throws PortalException {
+	public void verifyPolicy() {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 
 	@Override
-	public void verifyPolicy(Role role) throws PortalException {
+	public void verifyPolicy(Role role) {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 

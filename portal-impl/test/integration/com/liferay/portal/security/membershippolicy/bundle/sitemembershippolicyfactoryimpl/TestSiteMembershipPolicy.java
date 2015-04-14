@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy.bundle.sitemembershippolicyfactoryimpl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
@@ -153,7 +152,7 @@ public class TestSiteMembershipPolicy implements SiteMembershipPolicy {
 	}
 
 	@Override
-	public void verifyPolicy(Role role) throws PortalException {
+	public void verifyPolicy(Role role) {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 

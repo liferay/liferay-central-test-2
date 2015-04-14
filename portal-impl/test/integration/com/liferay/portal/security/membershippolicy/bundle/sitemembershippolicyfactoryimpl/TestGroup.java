@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy.bundle.sitemembershippolicyfactoryimpl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.BaseModel;
@@ -31,6 +30,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+/**
+ * @author Peter Fellwock
+ */
 public class TestGroup implements Group {
 
 	@Override
@@ -72,6 +75,10 @@ public class TestGroup implements Group {
 		return null;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	@Override
 	public List<Group> getChildrenWithLayouts(
 		boolean site, int start, int end) {
@@ -334,7 +341,7 @@ public class TestGroup implements Group {
 	}
 
 	@Override
-	public Group getParentGroup() throws PortalException {
+	public Group getParentGroup() {
 		return null;
 	}
 
@@ -495,11 +502,19 @@ public class TestGroup implements Group {
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	@Override
 	public boolean isChild(long groupId) {
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	@Override
 	public boolean isCommunity() {
 		return false;
@@ -861,7 +876,5 @@ public class TestGroup implements Group {
 	@Override
 	public void updateTreePath(String treePath) {
 	}
-
-	private static final long serialVersionUID = 1234567890L;
 
 }
