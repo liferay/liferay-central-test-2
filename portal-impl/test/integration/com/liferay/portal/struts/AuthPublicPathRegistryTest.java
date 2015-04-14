@@ -43,9 +43,8 @@ public class AuthPublicPathRegistryTest {
 
 		Assert.assertTrue(
 			AuthPublicPathRegistry.contains(testAuthPublicPath.path()));
-
 		Assert.assertFalse(
-			AuthPublicPathRegistry.contains("/unregistered/unknown/path/"));
+			AuthPublicPathRegistry.contains("/unregistered/unknown/path"));
 	}
 
 }
