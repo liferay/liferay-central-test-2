@@ -83,8 +83,7 @@ public class JspC extends org.apache.jasper.JspC {
 
 			if ((portalDir == null) || portalDir.isEmpty()) {
 				throw new RuntimeException(
-					"Portal dir must be specified to compile jsp for module " +
-						"web");
+					"The ssytem property \"jspc.portal.dir\" is not set");
 			}
 
 			try {
