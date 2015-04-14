@@ -152,9 +152,9 @@ summary.setQueryTerms(queryTerms);
 
 			summary = new Summary(null, mbMessage.getBody());
 
+			summary.setEscape(false);
 			summary.setHighlight(highlightEnabled);
 			summary.setQueryTerms(queryTerms);
-			summary.setEscape(false);
 		%>
 
 			<div class="entry-discussion">
