@@ -121,10 +121,11 @@ public class ExportImportDateUtil {
 	}
 
 	public static DateRange getDateRange(
-			ExportImportConfiguration configuration)
+			ExportImportConfiguration exportImportConfiguration)
 		throws PortalException {
 
-		Map<String, Serializable> settingsMap = configuration.getSettingsMap();
+		Map<String, Serializable> settingsMap =
+			exportImportConfiguration.getSettingsMap();
 
 		Date startDate = (Date)settingsMap.get("startDate");
 		Date endDate = (Date)settingsMap.get("endDate");
@@ -136,9 +137,9 @@ public class ExportImportDateUtil {
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)settingsMap.get("parameterMap");
 
-		String defaultRange = getDefaultDateRange(configuration);
-
-		String range = MapUtil.getString(parameterMap, RANGE, defaultRange);
+		String range = MapUtil.getString(
+			parameterMap, RANGE,
+			getDefaultDateRange(exportImportConfiguration));
 		int rangeLast = MapUtil.getInteger(parameterMap, "last");
 		int startDateAmPm = MapUtil.getInteger(parameterMap, "startDateAmPm");
 		int startDateYear = MapUtil.getInteger(parameterMap, "startDateYear");
@@ -169,12 +170,12 @@ public class ExportImportDateUtil {
 			portletId, groupId, plid, privateLayout, locale, timeZone);
 	}
 
-	public static DateRange getDateRange(long configurationId)
+	public static DateRange getDateRange(long exportImportConfigurationId)
 		throws PortalException {
 
 		ExportImportConfiguration exportImportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
-				getExportImportConfiguration(configurationId);
+				getExportImportConfiguration(exportImportConfigurationId);
 
 		return getDateRange(exportImportConfiguration);
 	}
@@ -429,42 +430,45 @@ public class ExportImportDateUtil {
 	}
 
 	protected static String getDefaultDateRange(
-		ExportImportConfiguration configuration) {
+		ExportImportConfiguration exportImportConfiguration) {
 
-		if (configuration.getType() == TYPE_EXPORT_LAYOUT) {
+		if (exportImportConfiguration.getType() == TYPE_EXPORT_LAYOUT) {
 			return RANGE_ALL;
 		}
-		else if (configuration.getType() == TYPE_EXPORT_PORTLET) {
+		else if (exportImportConfiguration.getType() == TYPE_EXPORT_PORTLET) {
 			return RANGE_ALL;
 		}
-		else if (configuration.getType() == TYPE_IMPORT_LAYOUT) {
+		else if (exportImportConfiguration.getType() == TYPE_IMPORT_LAYOUT) {
 			return RANGE_ALL;
 		}
-		else if (configuration.getType() == TYPE_IMPORT_PORTLET) {
+		else if (exportImportConfiguration.getType() == TYPE_IMPORT_PORTLET) {
 			return RANGE_ALL;
 		}
-		else if (configuration.getType() == TYPE_PUBLISH_LAYOUT_LOCAL) {
+		else if (exportImportConfiguration.getType() ==
+					TYPE_PUBLISH_LAYOUT_LOCAL) {
+
 			return RANGE_FROM_LAST_PUBLISH_DATE;
 		}
-		else if (configuration.getType() == TYPE_PUBLISH_LAYOUT_REMOTE) {
+		else if (exportImportConfiguration.getType() ==
+					TYPE_PUBLISH_LAYOUT_REMOTE) {
+
 			return RANGE_FROM_LAST_PUBLISH_DATE;
 		}
-		else if (configuration.getType() == TYPE_PUBLISH_PORTLET) {
+		else if (exportImportConfiguration.getType() == TYPE_PUBLISH_PORTLET) {
 			return RANGE_FROM_LAST_PUBLISH_DATE;
 		}
-		else if (configuration.getType() ==
+		else if (exportImportConfiguration.getType() ==
 					TYPE_SCHEDULED_PUBLISH_LAYOUT_LOCAL) {
 
 			return RANGE_FROM_LAST_PUBLISH_DATE;
 		}
-		else if (configuration.getType() ==
+		else if (exportImportConfiguration.getType() ==
 					TYPE_SCHEDULED_PUBLISH_LAYOUT_REMOTE) {
 
 			return RANGE_FROM_LAST_PUBLISH_DATE;
 		}
-		else {
-			return RANGE_ALL;
-		}
+
+		return RANGE_ALL;
 	}
 
 	protected static boolean isValidDateRange(
