@@ -78,8 +78,8 @@ public class JspC extends org.apache.jasper.JspC {
 	protected void initServletContext() {
 		super.initServletContext();
 
-		if (Boolean.getBoolean("module.web")) {
-			final String portalDir = System.getProperty("portal.dir");
+		if (Boolean.getBoolean("jspc.module.web")) {
+			final String portalDir = System.getProperty("jspc.portal.dir");
 
 			if ((portalDir == null) || portalDir.isEmpty()) {
 				throw new RuntimeException(
