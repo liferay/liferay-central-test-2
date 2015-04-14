@@ -235,7 +235,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			ConfigurationBeanDeclaration configurationBeanDeclaration)
 		throws SettingsException {
 
-		Class configurationBeanClass =
+		Class<?> configurationBeanClass =
 			configurationBeanDeclaration.getConfigurationBeanClass();
 
 		String settingsId = ConfigurationPidUtil.getConfigurationPid(
@@ -277,7 +277,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	protected void unsetConfigurationBeanDeclaration(
 		ConfigurationBeanDeclaration configurationBeanDeclaration) {
 
-		Class configurationBeanClass =
+		Class<?> configurationBeanClass =
 			configurationBeanDeclaration.getConfigurationBeanClass();
 
 		String settingsId = ConfigurationPidUtil.getConfigurationPid(
