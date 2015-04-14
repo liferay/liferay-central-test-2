@@ -126,19 +126,20 @@ public class ModelListenerRegistrationUtil {
 			ModelListener<?> modelListener = registry.getService(
 				serviceReference);
 
-			Class<?> clazz = _getModelListenerClass(modelListener);
+			Class<?> modelClass = _getModelClass(modelListener);
 
-			if (clazz == null) {
+			if (modelClass == null) {
 				return null;
 			}
 
-			List<ModelListener<?>> modelListeners = _modelListeners.get(clazz);
+			List<ModelListener<?>> modelListeners = _modelListeners.get(
+				modelClass);
 
 			if (modelListeners == null) {
 				modelListeners = new ArrayList<>();
 
 				List<ModelListener<?>> previousModelListeners =
-					_modelListeners.putIfAbsent(clazz, modelListeners);
+					_modelListeners.putIfAbsent(modelClass, modelListeners);
 
 				if (previousModelListeners != null) {
 					modelListeners = previousModelListeners;
@@ -165,18 +166,17 @@ public class ModelListenerRegistrationUtil {
 
 			registry.ungetService(serviceReference);
 
-			Class<?> clazz = _getModelListenerClass(modelListener);
+			Class<?> modelClass = _getModelClass(modelListener);
 
-			List<ModelListener<?>> modelListeners = _modelListeners.get(clazz);
+			List<ModelListener<?>> modelListeners = _modelListeners.get(
+				modelClass);
 
 			if (modelListeners != null) {
 				modelListeners.remove(modelListener);
 			}
 		}
 
-		private Class<?> _getModelListenerClass(
-			ModelListener<?> modelListener) {
-
+		private Class<?> _getModelClass(ModelListener<?> modelListener) {
 			Class<?> clazz = modelListener.getClass();
 
 			if (ProxyUtil.isProxyClass(clazz)) {
