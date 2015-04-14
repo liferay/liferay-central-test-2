@@ -148,11 +148,7 @@ public class PoshiRunnerContext {
 	}
 
 	public static boolean isCommandElement(String commandElementKey) {
-		if (_commandElements.containsKey(commandElementKey)) {
-			return true;
-		}
-
-		return false;
+		return _commandElements.containsKey(commandElementKey);
 	}
 
 	public static void readFiles() throws Exception {
