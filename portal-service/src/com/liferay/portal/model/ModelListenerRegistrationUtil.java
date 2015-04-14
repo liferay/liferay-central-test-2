@@ -43,11 +43,15 @@ public class ModelListenerRegistrationUtil {
 	}
 
 	public static void register(ModelListener<?> modelListener) {
-		_instance._register(modelListener.getClass().getName(), modelListener);
+		Class<?> clazz = modelListener.getClass();
+
+		_instance._register(clazz.getName(), modelListener);
 	}
 
 	public static void unregister(ModelListener<?> modelListener) {
-		_instance._unregister(modelListener.getClass().getName());
+		Class<?> clazz = modelListener.getClass();
+
+		_instance._unregister(clazz.getName());
 	}
 
 	private ModelListenerRegistrationUtil() {
@@ -68,11 +72,11 @@ public class ModelListenerRegistrationUtil {
 		if (modelListeners == null) {
 			modelListeners = new ArrayList<>();
 
-			List<ModelListener<?>> previousList = _modelListeners.putIfAbsent(
-				clazz, modelListeners);
+			List<ModelListener<?>> previousModelListeners =
+				_modelListeners.putIfAbsent(clazz, modelListeners);
 
-			if (previousList != null) {
-				modelListeners = previousList;
+			if (previousModelListeners != null) {
+				modelListeners = previousModelListeners;
 			}
 		}
 
@@ -122,7 +126,7 @@ public class ModelListenerRegistrationUtil {
 			ModelListener<?> modelListener = registry.getService(
 				serviceReference);
 
-			Class<?> clazz = _getModelListeners(modelListener);
+			Class<?> clazz = _getModelListenerClass(modelListener);
 
 			if (clazz == null) {
 				return null;
@@ -161,7 +165,7 @@ public class ModelListenerRegistrationUtil {
 
 			registry.ungetService(serviceReference);
 
-			Class<?> clazz = _getModelListeners(modelListener);
+			Class<?> clazz = _getModelListenerClass(modelListener);
 
 			List<ModelListener<?>> modelListeners = _modelListeners.get(clazz);
 
@@ -170,7 +174,9 @@ public class ModelListenerRegistrationUtil {
 			}
 		}
 
-		private Class<?> _getModelListeners(ModelListener<?> modelListener) {
+		private Class<?> _getModelListenerClass(
+			ModelListener<?> modelListener) {
+
 			Class<?> clazz = modelListener.getClass();
 
 			if (ProxyUtil.isProxyClass(clazz)) {
