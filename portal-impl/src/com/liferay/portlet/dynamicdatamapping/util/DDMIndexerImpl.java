@@ -121,6 +121,7 @@ public class DDMIndexerImpl implements DDMIndexer {
 					}
 					else if (value instanceof Number[]) {
 						Number[] numbers = (Number[])value;
+
 						Double[] doubles = new Double[numbers.length];
 
 						for (int i = 0; i < numbers.length; i++) {

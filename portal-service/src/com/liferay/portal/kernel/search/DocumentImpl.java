@@ -963,28 +963,28 @@ public class DocumentImpl implements Document {
 	}
 
 	protected void createNumberField(
-		String name, boolean typifySortable, Number value) {
+		String name, boolean typify, Number value) {
 
 		if (value == null) {
 			return;
 		}
 
-		String stringValue = String.valueOf(value);
+		String valueString = String.valueOf(value);
 
 		createSortableNumericField(
-			name, typifySortable, stringValue, value.getClass());
+			name, typify, valueString, value.getClass());
 
-		createField(name, stringValue);
+		createField(name, valueString);
 	}
 
 	protected <T extends Number & Comparable<? super T>> void createNumberField(
-		String name, boolean typifySortable, T... values) {
+		String name, boolean typify, T... values) {
 
 		if (values == null) {
 			return;
 		}
 
-		createSortableNumericField(name, typifySortable, values);
+		createSortableNumericField(name, typify, values);
 
 		createField(name, ArrayUtil.toStringArray(values));
 	}
