@@ -221,11 +221,11 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 		if (_configurationBeanManagedServices.containsKey(
 				configurationBeanClass)) {
 
-			_log.error(
-				"ConfigurationBeanDeclaration for configuration bean class " +
-					configurationBeanClass.getName() + " has been already " +
-					"started: only one ConfigurationBeanDeclaration per " +
-					"configuration bean is allowed.");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Configuration bean declaration for configuration bean " +
+						configurationBeanClass.getName() + " already exists");
+			}
 
 			return;
 		}
