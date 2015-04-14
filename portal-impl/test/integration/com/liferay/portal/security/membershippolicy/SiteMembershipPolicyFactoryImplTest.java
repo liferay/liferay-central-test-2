@@ -124,58 +124,36 @@ public class SiteMembershipPolicyFactoryImplTest {
 
 	@Test
 	public void testisMembershipProtected() throws Exception {
-		boolean value = SiteMembershipPolicyUtil.isMembershipProtected(
-			null, 1, 1);
-
-		Assert.assertTrue(value);
-
-		value = SiteMembershipPolicyUtil.isMembershipProtected(null, 2, 2);
-
-		Assert.assertFalse(value);
+		Assert.assertTrue(
+			SiteMembershipPolicyUtil.isMembershipProtected(null, 1, 1));
+		Assert.assertFalse(
+			SiteMembershipPolicyUtil.isMembershipProtected(null, 2, 2));
 	}
 
 	@Test
 	public void testIsMembershipRequired() throws Exception {
-		boolean value = SiteMembershipPolicyUtil.isMembershipRequired(1, 1);
-
-		Assert.assertTrue(value);
-
-		value = SiteMembershipPolicyUtil.isMembershipRequired(2, 2);
-
-		Assert.assertFalse(value);
+		Assert.assertTrue(SiteMembershipPolicyUtil.isMembershipRequired(1, 1));
+		Assert.assertFalse(SiteMembershipPolicyUtil.isMembershipRequired(2, 2));
 	}
 
 	@Test
 	public void testIsRoleAllowed() throws Exception {
-		boolean value = SiteMembershipPolicyUtil.isRoleAllowed(1, 1, 1);
-
-		Assert.assertTrue(value);
-
-		value = SiteMembershipPolicyUtil.isRoleAllowed(2, 2, 2);
-
-		Assert.assertFalse(value);
+		Assert.assertTrue(SiteMembershipPolicyUtil.isRoleAllowed(1, 1, 1));
+		Assert.assertFalse(SiteMembershipPolicyUtil.isRoleAllowed(2, 2, 2));
 	}
 
 	@Test
 	public void testIsRoleProtected() throws Exception {
-		boolean value = SiteMembershipPolicyUtil.isRoleProtected(null, 1, 1, 1);
-
-		Assert.assertTrue(value);
-
-		value = SiteMembershipPolicyUtil.isRoleProtected(null, 2, 2, 2);
-
-		Assert.assertFalse(value);
+		Assert.assertTrue(
+			SiteMembershipPolicyUtil.isRoleProtected(null, 1, 1, 1));
+		Assert.assertFalse(
+			SiteMembershipPolicyUtil.isRoleProtected(null, 2, 2, 2));
 	}
 
 	@Test
 	public void testIsRoleRequired() throws Exception {
-		boolean value = SiteMembershipPolicyUtil.isRoleRequired(1, 1, 1);
-
-		Assert.assertTrue(value);
-
-		value = SiteMembershipPolicyUtil.isRoleRequired(2, 2, 2);
-
-		Assert.assertFalse(value);
+		Assert.assertTrue(SiteMembershipPolicyUtil.isRoleRequired(1, 1, 1));
+		Assert.assertFalse(SiteMembershipPolicyUtil.isRoleRequired(2, 2, 2));
 	}
 
 	@Test
