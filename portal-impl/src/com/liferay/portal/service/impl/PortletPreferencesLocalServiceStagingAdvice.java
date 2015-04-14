@@ -125,29 +125,29 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		Method method = methodInvocation.getMethod();
 		Object[] arguments = methodInvocation.getArguments();
 
-		int plidPosition = -1;
+		int index = -1;
 
 		if ((arguments.length == 2) && (arguments[0] instanceof Long) &&
 			(arguments[1] instanceof String)) {
 
-			plidPosition = 0;
+			index = 0;
 		}
 		else if ((arguments.length == 3) && (arguments[0] instanceof Integer) &&
 				 (arguments[1] instanceof Long) &&
 				 (arguments[2] instanceof String)) {
 
-			plidPosition = 1;
+			index = 1;
 		}
 		else if (((arguments.length == 3) || (arguments.length == 4)) &&
 				 (arguments[2] instanceof Long)) {
 
-			plidPosition = 2;
+			index = 2;
 		}
 
 		long plid = 0;
 
-		if (plidPosition >= 0) {
-			plid = (Long)arguments[plidPosition];
+		if (index >= 0) {
+			plid = (Long)arguments[index];
 		}
 
 		LayoutRevision layoutRevision = getLayoutRevision(plid);
@@ -156,7 +156,7 @@ public class PortletPreferencesLocalServiceStagingAdvice
 			return methodInvocation.proceed();
 		}
 
-		arguments[plidPosition] = layoutRevision.getLayoutRevisionId();
+		arguments[index] = layoutRevision.getLayoutRevisionId();
 
 		return method.invoke(methodInvocation.getThis(), arguments);
 	}

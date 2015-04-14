@@ -111,7 +111,7 @@ public class VerifyPortletPreferences extends VerifyProcess {
 
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Removing portletPreferences " +
+							"Removing portlet preferences " +
 								portletPreferences.getPortletPreferencesId());
 					}
 

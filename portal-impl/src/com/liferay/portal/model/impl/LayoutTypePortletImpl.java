@@ -1482,18 +1482,18 @@ public class LayoutTypePortletImpl
 
 			if (portlet.isInstanceable()) {
 
-				// Instanceable portlets do not need to be cloned because
-				// they are already cloned. See the method getPortletById in
-				// the class PortletLocalServiceImpl and how it references
-				// the method getClonedInstance in the class PortletImpl.
+				// Instanceable portlets do not need to be cloned because they
+				// are already cloned. See the method getPortletById in the
+				// class PortletLocalServiceImpl and how it references the
+				// method getClonedInstance in the class PortletImpl.
 
 			}
 			else {
 				embeddedPortlet = (Portlet)embeddedPortlet.clone();
 			}
 
-			// We set embedded portlets as static on order to avoid adding
-			// the close and/or move icons.
+			// We set embedded portlets as static on order to avoid adding the
+			// close and/or move icons.
 
 			embeddedPortlet.setStatic(true);
 
