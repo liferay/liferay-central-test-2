@@ -15,11 +15,10 @@
 package com.liferay.productivity.center.service.util;
 
 import com.liferay.osgi.service.tracker.map.ServiceReferenceMapper;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.productivity.center.panel.PanelEntry;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.osgi.framework.ServiceReference;
 
@@ -52,7 +51,7 @@ public class PanelCategoryServiceReferenceMapper<T extends PanelEntry>
 		}
 	}
 
-	private static final Log _log = LogFactory.getLog(
+	private static final Log _log = LogFactoryUtil.getLog(
 		PanelCategoryServiceReferenceMapper.class);
 
 }
