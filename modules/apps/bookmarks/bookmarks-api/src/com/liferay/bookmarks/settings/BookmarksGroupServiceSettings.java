@@ -24,5 +24,5 @@ import com.liferay.portal.kernel.settings.Settings;
 @Settings.OverrideClass(BookmarksGroupServiceSettingsOverrideImpl.class)
 public interface BookmarksGroupServiceSettings
 	extends BookmarksGroupServiceConfiguration,
-	BookmarksGroupServiceSettingsOverride {
+			BookmarksGroupServiceSettingsOverride {
 }
