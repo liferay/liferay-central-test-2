@@ -23,7 +23,6 @@ import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portal.util.test.AtomicState;
 
 import java.io.Serializable;
-
 import java.util.HashMap;
 
 import org.junit.AfterClass;
@@ -118,13 +117,22 @@ public class RoleMembershipPolicyFactoryImplTest {
 	public void testVerifyPolicy1() throws Exception {
 		_atomicState.reset();
 
+		RoleMembershipPolicyUtil.verifyPolicy();
+
+		Assert.assertTrue(_atomicState.isSet());
+	}
+	
+	@Test
+	public void testVerifyPolicy2() throws Exception {
+		_atomicState.reset();
+
 		RoleMembershipPolicyUtil.verifyPolicy(new RoleImpl());
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
-	public void testVerifyPolicy2() throws Exception {
+	public void testVerifyPolicy3() throws Exception {
 		_atomicState.reset();
 
 		RoleMembershipPolicyUtil.verifyPolicy(
