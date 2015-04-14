@@ -22,18 +22,18 @@ public final class XMLLoggerHandler {
 	public static void generateXMLLog(String classCommandName) {
 		LoggerElement xmlLoggerElement = new LoggerElement();
 
-		xmlLoggerElement.setName("li");
 		xmlLoggerElement.setClassName("header");
+		xmlLoggerElement.setName("li");
 
 		LoggerElement btnContainerLoggerElement = new LoggerElement();
 
-		btnContainerLoggerElement.setName("div");
 		btnContainerLoggerElement.setClassName("btn-container");
+		btnContainerLoggerElement.setName("div");
 
 		LoggerElement btnLoggerElement = new LoggerElement();
 
-		btnLoggerElement.setName("button");
 		btnLoggerElement.setClassName("btn btn-collapse");
+		btnLoggerElement.setName("button");
 
 		btnContainerLoggerElement.addChildLoggerElement(btnLoggerElement);
 
@@ -41,13 +41,13 @@ public final class XMLLoggerHandler {
 
 		LoggerElement lineContainerLoggerElement = new LoggerElement();
 
-		lineContainerLoggerElement.setName("div");
 		lineContainerLoggerElement.setClassName("line-container");
+		lineContainerLoggerElement.setName("div");
 
 		LoggerElement lineLoggerElement = new LoggerElement();
 
-		lineLoggerElement.setName("h3");
 		lineLoggerElement.setClassName("test-case-command");
+		lineLoggerElement.setName("h3");
 		lineLoggerElement.setText(classCommandName);
 
 		lineContainerLoggerElement.addChildLoggerElement(lineLoggerElement);
