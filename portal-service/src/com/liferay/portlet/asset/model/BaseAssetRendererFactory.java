@@ -196,7 +196,6 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	@Deprecated
 	@Override
-	@SuppressWarnings("unused")
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
