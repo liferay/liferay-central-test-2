@@ -25,10 +25,10 @@ import org.apache.commons.io.FileUtils;
  */
 public class FileUtil {
 
-	public static void copyDirectory(File source, File destination)
+	public static void copyDirectory(File sourceDir, File destinationDir)
 		throws IOException {
 
-		FileUtils.copyDirectory(source, destination);
+		FileUtils.copyDirectory(sourceDir, destinationDir);
 	}
 
 	public static void copyDirectory(

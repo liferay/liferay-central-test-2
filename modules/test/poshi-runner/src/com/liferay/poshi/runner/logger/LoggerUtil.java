@@ -297,7 +297,7 @@ public final class LoggerUtil {
 
 	public static void stopLogger() throws Exception {
 		FileUtil.copyDirectory(
-			_getResourcesDir() + "css/", _CURRENT_DIR + "/test-results/css/");
+			_getResourcesDir() + "css", _CURRENT_DIR + "/test-results/css");
 
 		String content = (String)_javascriptExecutor.executeScript(
 			"return document.getElementsByTagName('html')[0].outerHTML;");
