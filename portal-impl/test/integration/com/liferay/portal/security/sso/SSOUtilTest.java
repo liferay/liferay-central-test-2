@@ -38,37 +38,33 @@ public class SSOUtilTest {
 
 	@Test
 	public void testGetSessionExpirationRedirectURL() {
-		String value = SSOUtil.getSessionExpirationRedirectURL(
-			1, "sessionExpirationRedirectURL");
-
-		Assert.assertEquals("getSessionExpirationRedirectUrl:1", value);
+		Assert.assertEquals(
+			"getSessionExpirationRedirectUrl:1",
+			SSOUtil.getSessionExpirationRedirectURL(
+				1, "sessionExpirationRedirectURL"));
 	}
 
 	@Test
 	public void testGetSignInURL() {
-		String value = SSOUtil.getSignInURL(1, "signInURL");
-
-		Assert.assertEquals("signInURL:1", value);
+		Assert.assertEquals(
+			"signInURL:1", SSOUtil.getSignInURL(1, "signInURL"));
 	}
 
 	@Test
 	public void testIsLoginRedirectRequired() {
 		Assert.assertTrue(SSOUtil.isLoginRedirectRequired(1));
-
 		Assert.assertFalse(SSOUtil.isLoginRedirectRequired(2));
 	}
 
 	@Test
 	public void testIsRedirectRequired() {
 		Assert.assertTrue(SSOUtil.isRedirectRequired(1));
-
 		Assert.assertFalse(SSOUtil.isRedirectRequired(2));
 	}
 
 	@Test
 	public void testIsSessionRedirectOnExpire() {
 		Assert.assertTrue(SSOUtil.isSessionRedirectOnExpire(1));
-
 		Assert.assertFalse(SSOUtil.isSessionRedirectOnExpire(2));
 	}
 
