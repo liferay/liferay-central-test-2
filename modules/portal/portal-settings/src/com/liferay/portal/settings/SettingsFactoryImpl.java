@@ -118,7 +118,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 		Settings settings = getSettings(settingsLocator);
 
-		Class<?> settingsOverrideClass = _getOverrideClass(clazz);
+		Class<?> settingsOverrideClass = getOverrideClass(clazz);
 
 		try {
 			TypedSettings typedSettings = new TypedSettings(settings);
@@ -175,7 +175,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			Settings.Config.class);
 
 		for (String settingsId : settingsConfig.settingsIds()) {
-			_register(settingsId, settingsDescriptor, fallbackKeys);
+			register(settingsId, settingsDescriptor, fallbackKeys);
 		}
 	}
 
@@ -246,7 +246,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 				new ConfigurationBeanClassSettingsDescriptor(
 					configurationBeanClass);
 
-		_register(settingsId, configurationBeanClassSettingsDescriptor, null);
+		register(settingsId, configurationBeanClassSettingsDescriptor, null);
 	}
 
 	@Reference(
@@ -264,7 +264,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 				new ConfigurationBeanClassSettingsDescriptor(
 					configurationBeanClass);
 
-		_register(settingsId, configurationBeanClassSettingsDescriptor, null);
+		register(settingsId, configurationBeanClassSettingsDescriptor, null);
 	}
 
 	@Reference(unbind = "-")
@@ -283,14 +283,14 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		String settingsId = ConfigurationPidUtil.getConfigurationPid(
 			configurationBeanClass);
 
-		_unregister(settingsId);
+		unregister(settingsId);
 	}
 
 	protected void unsetSettingsIdMapping(SettingsIdMapping settingsIdMapping) {
-		_unregister(settingsIdMapping.getSettingsId());
+		unregister(settingsIdMapping.getSettingsId());
 	}
 
-	private <T> Class<?> _getOverrideClass(Class<T> clazz) {
+	protected <T> Class<?> getOverrideClass(Class<T> clazz) {
 		Settings.OverrideClass overrideClass = clazz.getAnnotation(
 			Settings.OverrideClass.class);
 
@@ -305,7 +305,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		return overrideClass.value();
 	}
 
-	private void _register(
+	protected void register(
 		String settingsId, SettingsDescriptor settingsDescriptor,
 		FallbackKeys fallbackKeys) {
 
@@ -316,7 +316,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		}
 	}
 
-	private void _unregister(String settingsId) {
+	protected void unregister(String settingsId) {
 		_fallbackKeysMap.remove(settingsId);
 
 		_settingsDescriptors.remove(settingsId);
