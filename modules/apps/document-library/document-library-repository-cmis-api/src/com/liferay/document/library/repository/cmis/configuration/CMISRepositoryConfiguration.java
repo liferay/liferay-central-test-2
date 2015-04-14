@@ -21,7 +21,7 @@ import aQute.bnd.annotation.metatype.Meta;
  */
 @Meta.OCD(
 	id = "com.liferay.document.library.repository.cmis.configuration.CMISRepositoryConfiguration",
-	localization = "OSGI-INF/l10n/Language"
+	localization = "content/Language"
 )
 public interface CMISRepositoryConfiguration {
 
