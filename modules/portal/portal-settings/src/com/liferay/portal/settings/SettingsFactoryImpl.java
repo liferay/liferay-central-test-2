@@ -206,6 +206,21 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		}
 	}
 
+	protected <T> Class<?> getOverrideClass(Class<T> clazz) {
+		Settings.OverrideClass overrideClass = clazz.getAnnotation(
+			Settings.OverrideClass.class);
+
+		if (overrideClass == null) {
+			return null;
+		}
+
+		if (overrideClass.value() == Object.class) {
+			return null;
+		}
+
+		return overrideClass.value();
+	}
+
 	protected PortletItem getPortletItem(
 			long groupId, String portletId, String name)
 		throws PortalException {
@@ -225,6 +240,17 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		}
 
 		return portletItem;
+	}
+
+	protected void register(
+		String settingsId, SettingsDescriptor settingsDescriptor,
+		FallbackKeys fallbackKeys) {
+
+		_settingsDescriptors.put(settingsId, settingsDescriptor);
+
+		if (fallbackKeys != null) {
+			_fallbackKeysMap.put(settingsId, fallbackKeys);
+		}
 	}
 
 	@Reference(
@@ -273,6 +299,12 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		_settingsLocatorHelper = settingsLocatorHelper;
 	}
 
+	protected void unregister(String settingsId) {
+		_fallbackKeysMap.remove(settingsId);
+
+		_settingsDescriptors.remove(settingsId);
+	}
+
 	protected void unsetConfigurationBeanDeclaration(
 		ConfigurationBeanDeclaration configurationBeanDeclaration) {
 
@@ -287,38 +319,6 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 	protected void unsetSettingsIdMapping(SettingsIdMapping settingsIdMapping) {
 		unregister(settingsIdMapping.getSettingsId());
-	}
-
-	protected <T> Class<?> getOverrideClass(Class<T> clazz) {
-		Settings.OverrideClass overrideClass = clazz.getAnnotation(
-			Settings.OverrideClass.class);
-
-		if (overrideClass == null) {
-			return null;
-		}
-
-		if (overrideClass.value() == Object.class) {
-			return null;
-		}
-
-		return overrideClass.value();
-	}
-
-	protected void register(
-		String settingsId, SettingsDescriptor settingsDescriptor,
-		FallbackKeys fallbackKeys) {
-
-		_settingsDescriptors.put(settingsId, settingsDescriptor);
-
-		if (fallbackKeys != null) {
-			_fallbackKeysMap.put(settingsId, fallbackKeys);
-		}
-	}
-
-	protected void unregister(String settingsId) {
-		_fallbackKeysMap.remove(settingsId);
-
-		_settingsDescriptors.remove(settingsId);
 	}
 
 	private final ConcurrentMap<String, FallbackKeys> _fallbackKeysMap =

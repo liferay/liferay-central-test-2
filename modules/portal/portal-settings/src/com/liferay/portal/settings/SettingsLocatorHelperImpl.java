@@ -234,11 +234,11 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 			new ConfigurationBeanManagedService(
 				_bundleContext, configurationBeanClass);
 
-		_configurationBeanManagedServices.put(
-			configurationBeanClass, configurationBeanManagedService);
 		_configurationBeanClasses.put(
 			configurationBeanManagedService.getConfigurationPid(),
 			configurationBeanClass);
+		_configurationBeanManagedServices.put(
+			configurationBeanClass, configurationBeanManagedService);
 
 		configurationBeanManagedService.register();
 	}
@@ -266,7 +266,6 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 
 		_configurationBeanClasses.remove(
 			configurationBeanManagedService.getConfigurationPid());
-
 		_configurationBeanManagedServices.remove(configurationBeanClass);
 	}
 
