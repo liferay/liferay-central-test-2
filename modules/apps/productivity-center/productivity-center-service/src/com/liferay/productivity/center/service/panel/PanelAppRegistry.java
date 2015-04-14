@@ -18,7 +18,7 @@ import com.liferay.osgi.service.tracker.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMapFactory;
 import com.liferay.productivity.center.panel.PanelApp;
 import com.liferay.productivity.center.panel.PanelCategory;
-import com.liferay.productivity.center.service.util.ParentPanelCategoryServiceReferenceMapper;
+import com.liferay.productivity.center.service.util.PanelCategoryServiceReferenceMapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,8 +51,8 @@ public class PanelAppRegistry {
 		throws InvalidSyntaxException {
 
 		_serviceTrackerMap = ServiceTrackerMapFactory.multiValueMap(
-			bundleContext, PanelApp.class, "(panel.category=*)",
-			ParentPanelCategoryServiceReferenceMapper.<PanelApp>create());
+			bundleContext, PanelApp.class, "(panel.category.key=*)",
+			PanelCategoryServiceReferenceMapper.<PanelApp>create());
 
 		_serviceTrackerMap.open();
 	}

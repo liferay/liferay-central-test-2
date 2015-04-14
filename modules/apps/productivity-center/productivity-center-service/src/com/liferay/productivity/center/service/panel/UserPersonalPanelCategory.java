@@ -28,7 +28,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Adolfo Pérez
  */
 @Component(
-	immediate = true, property = {"panel.category=" + PanelCategoryKeys.ROOT},
+	immediate = true,
+	property = {"panel.category.key=" + PanelCategoryKeys.ROOT},
 	service = PanelCategory.class
 )
 public class UserPersonalPanelCategory implements PanelCategory {

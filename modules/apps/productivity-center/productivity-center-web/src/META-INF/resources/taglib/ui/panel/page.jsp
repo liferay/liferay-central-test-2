@@ -29,7 +29,7 @@ PanelCategoryRegistry panelCategoryRegistry = (PanelCategoryRegistry)request.get
 >
 
 	<%
-	for (PanelCategory childPanelCategory : panelCategoryRegistry.getPanelCategories(panelCategory)) {
+	for (PanelCategory childPanelCategory : panelCategoryRegistry.getChildPanelCategories(panelCategory)) {
 	%>
 
 		<productivity-center-ui:panel-category panelCategory="<%= childPanelCategory %>" servletContext="<%= application %>" />

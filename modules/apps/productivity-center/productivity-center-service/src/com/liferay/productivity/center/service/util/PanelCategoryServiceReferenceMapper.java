@@ -26,33 +26,33 @@ import org.osgi.framework.ServiceReference;
 /**
 * @author Adolfo Pérez
 */
-public class ParentPanelCategoryServiceReferenceMapper<T extends PanelEntry>
+public class PanelCategoryServiceReferenceMapper<T extends PanelEntry>
 	implements ServiceReferenceMapper<String, T> {
 
 	public static <S extends PanelEntry>
-		ParentPanelCategoryServiceReferenceMapper<S> create() {
+		PanelCategoryServiceReferenceMapper<S> create() {
 
-		return new ParentPanelCategoryServiceReferenceMapper<>();
+		return new PanelCategoryServiceReferenceMapper<>();
 	}
 
 	@Override
 	public void map(
 		ServiceReference<T> serviceReference, Emitter<String> emitter) {
 
-		String categoryKey = (String)serviceReference.getProperty(
-			"panel.category");
+		String panelCategoryKey = (String)serviceReference.getProperty(
+			"panel.category.key");
 
-		if (Validator.isNull(categoryKey)) {
+		if (Validator.isNull(panelCategoryKey)) {
 			_log.error(
 				"Unable to register panel entry because of missing " +
-					"service property \"panel.category\"");
+					"service property \"panel.category.key\"");
 		}
 		else {
-			emitter.emit(categoryKey);
+			emitter.emit(panelCategoryKey);
 		}
 	}
 
 	private static final Log _log = LogFactory.getLog(
-		ParentPanelCategoryServiceReferenceMapper.class);
+		PanelCategoryServiceReferenceMapper.class);
 
 }
