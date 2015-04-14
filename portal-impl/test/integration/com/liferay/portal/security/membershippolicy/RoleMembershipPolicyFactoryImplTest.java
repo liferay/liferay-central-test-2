@@ -60,10 +60,10 @@ public class RoleMembershipPolicyFactoryImplTest {
 	public void testCheckRoles() {
 		_atomicState.reset();
 
-		long[] testData = {1, 2, 3};
+		long[] array = {1, 2, 3};
 
 		try {
-			RoleMembershipPolicyUtil.checkRoles(testData, testData, testData);
+			RoleMembershipPolicyUtil.checkRoles(array, array, array);
 		}
 		catch (PortalException e) {
 			Assert.fail();
@@ -100,13 +100,8 @@ public class RoleMembershipPolicyFactoryImplTest {
 	@Test
 	public void testIsRoleAllowed() {
 		try {
-			boolean value = RoleMembershipPolicyUtil.isRoleAllowed(1, 1);
-
-			Assert.assertTrue(value);
-
-			value = RoleMembershipPolicyUtil.isRoleAllowed(2, 2);
-
-			Assert.assertFalse(value);
+			Assert.assertTrue(RoleMembershipPolicyUtil.isRoleAllowed(1, 1));
+			Assert.assertFalse(RoleMembershipPolicyUtil.isRoleAllowed(2, 2));
 		}
 		catch (PortalException e) {
 			Assert.fail();
@@ -116,13 +111,8 @@ public class RoleMembershipPolicyFactoryImplTest {
 	@Test
 	public void testIsRoleRequired() {
 		try {
-			boolean value = RoleMembershipPolicyUtil.isRoleRequired(1, 1);
-
-			Assert.assertTrue(value);
-
-			value = RoleMembershipPolicyUtil.isRoleRequired(2, 2);
-
-			Assert.assertFalse(value);
+			Assert.assertTrue(RoleMembershipPolicyUtil.isRoleRequired(1, 1));
+			Assert.assertFalse(RoleMembershipPolicyUtil.isRoleRequired(2, 2));
 		}
 		catch (PortalException e) {
 			Assert.fail();
@@ -133,11 +123,10 @@ public class RoleMembershipPolicyFactoryImplTest {
 	public void testPropagateRoles() {
 		_atomicState.reset();
 
-		long[] testData = {1, 2, 3};
+		long[] array = {1, 2, 3};
 
 		try {
-			RoleMembershipPolicyUtil.propagateRoles(
-				testData, testData, testData);
+			RoleMembershipPolicyUtil.propagateRoles(array, array, array);
 		}
 		catch (PortalException e) {
 			Assert.fail();
@@ -147,7 +136,7 @@ public class RoleMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testVerifyPolicy2() {
+	public void testVerifyPolicy1() {
 		_atomicState.reset();
 
 		try {
@@ -161,7 +150,7 @@ public class RoleMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testVerifyPolicy3() {
+	public void testVerifyPolicy2() {
 		_atomicState.reset();
 
 		try {
