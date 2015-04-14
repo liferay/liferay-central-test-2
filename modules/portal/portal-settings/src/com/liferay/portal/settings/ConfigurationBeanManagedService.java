@@ -24,7 +24,6 @@ import java.util.Dictionary;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceRegistration;
-import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
 
 /**
@@ -79,9 +78,7 @@ public class ConfigurationBeanManagedService implements ManagedService {
 	}
 
 	@Override
-	public void updated(Dictionary<String, ?> properties)
-		throws ConfigurationException {
-
+	public void updated(Dictionary<String, ?> properties) {
 		if (properties == null) {
 			properties = new HashMapDictionary<>();
 		}

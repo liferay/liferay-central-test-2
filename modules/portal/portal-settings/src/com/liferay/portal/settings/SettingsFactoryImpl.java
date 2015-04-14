@@ -232,8 +232,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		policy = ReferencePolicy.DYNAMIC
 	)
 	protected void setConfigurationBeanDeclaration(
-			ConfigurationBeanDeclaration configurationBeanDeclaration)
-		throws SettingsException {
+		ConfigurationBeanDeclaration configurationBeanDeclaration) {
 
 		Class<?> configurationBeanClass =
 			configurationBeanDeclaration.getConfigurationBeanClass();

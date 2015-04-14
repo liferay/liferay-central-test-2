@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.settings.LocationVariableResolver;
 import com.liferay.portal.kernel.settings.PortletPreferencesSettings;
 import com.liferay.portal.kernel.settings.PropertiesSettings;
 import com.liferay.portal.kernel.settings.Settings;
-import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
 import com.liferay.portal.kernel.settings.SettingsLocatorHelper;
 import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
@@ -208,8 +207,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 		policy = ReferencePolicy.DYNAMIC
 	)
 	protected void setConfigurationBeanDeclaration(
-			ConfigurationBeanDeclaration configurationBeanDeclaration)
-		throws SettingsException {
+		ConfigurationBeanDeclaration configurationBeanDeclaration) {
 
 		Class<?> configurationBeanClass =
 			configurationBeanDeclaration.getConfigurationBeanClass();
