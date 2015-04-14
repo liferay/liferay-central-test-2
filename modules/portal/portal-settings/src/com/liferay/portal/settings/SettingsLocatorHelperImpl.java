@@ -69,6 +69,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 			settingsId);
 	}
 
+	@Override
 	public Settings getCompanyPortletPreferencesSettings(
 		long companyId, String settingsId, Settings parentSettings) {
 
@@ -77,6 +78,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 			parentSettings);
 	}
 
+	@Override
 	public Settings getConfigurationBeanSettings(
 		String settingsId, Settings parentSettings) {
 
@@ -102,6 +104,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 		}
 	}
 
+	@Override
 	public Settings getGroupPortletPreferencesSettings(
 		long groupId, String settingsId, Settings parentSettings) {
 
@@ -114,6 +117,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 			companyId, PortletKeys.PREFS_OWNER_TYPE_COMPANY);
 	}
 
+	@Override
 	public Settings getPortalPreferencesSettings(
 		long companyId, Settings parentSettings) {
 
@@ -125,6 +129,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 		return PropsUtil.getProperties();
 	}
 
+	@Override
 	public Settings getPortalPropertiesSettings() {
 		return new PropertiesSettings(
 			new LocationVariableResolver(
@@ -150,6 +155,7 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 			portletId);
 	}
 
+	@Override
 	public Settings getPortletInstancePortletPreferencesSettings(
 		Layout layout, String portletId, Settings parentSettings) {
 
