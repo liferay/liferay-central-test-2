@@ -59,7 +59,7 @@ public final class XMLLoggerHandler {
 		LoggerElement childContainerLoggerElement = new LoggerElement();
 
 		childContainerLoggerElement.setClassName(
-			"child-container collapsible collapse");
+			"child-container collapse collapsible");
 		childContainerLoggerElement.setName("ul");
 
 		return childContainerLoggerElement;
