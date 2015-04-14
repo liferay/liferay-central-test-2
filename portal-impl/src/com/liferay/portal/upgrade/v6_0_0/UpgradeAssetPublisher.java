@@ -242,24 +242,28 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 
 			String assetUuid = assetTypeElementUuid.getStringValue();
 
-			List<JournalArticle> articles = JournalArticleUtil.findByUuid(
-				assetUuid);
+			List<JournalArticle> journalArticles =
+				JournalArticleUtil.findByUuid(assetUuid);
 
-			if (articles.size() > 0) {
-				JournalArticleResource resource =
-						JournalArticleResourceUtil.findByPrimaryKey(
-							articles.get(0).getResourcePrimKey());
-
-				rootElement.remove(assetTypeElementUuid);
-
-				assetTypeElementUuid.setText(resource.getUuid());
-
-				rootElement.add(assetTypeElementUuid);
-
-				document.setRootElement(rootElement);
-
-				assetEntryXmls[i] = document.formattedString(StringPool.BLANK);
+			if (journalArticles.isEmpty()) {
+				continue;
 			}
+
+			JournalArticle journalArticle = journalArticles.get(0);
+
+			JournalArticleResource journalArticleResource =
+				JournalArticleResourceUtil.findByPrimaryKey(
+					journalArticle.getResourcePrimKey());
+
+			rootElement.remove(assetTypeElementUuid);
+
+			assetTypeElementUuid.setText(journalArticleResource.getUuid());
+
+			rootElement.add(assetTypeElementUuid);
+
+			document.setRootElement(rootElement);
+
+			assetEntryXmls[i] = document.formattedString(StringPool.BLANK);
 		}
 	}
 
