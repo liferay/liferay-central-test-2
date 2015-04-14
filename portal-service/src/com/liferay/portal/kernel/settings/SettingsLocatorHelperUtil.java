@@ -42,8 +42,7 @@ public class SettingsLocatorHelperUtil {
 	}
 
 	public Settings getGroupPortletPreferencesSettings(
-			long groupId, String settingsId, Settings parentSettings)
-		throws SettingsException {
+		long groupId, String settingsId, Settings parentSettings) {
 
 		return getSettingsLocatorHelper().getGroupPortletPreferencesSettings(
 			groupId, settingsId, parentSettings);
