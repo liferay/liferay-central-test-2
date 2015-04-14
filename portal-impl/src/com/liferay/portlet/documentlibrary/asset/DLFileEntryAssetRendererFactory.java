@@ -136,6 +136,9 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
 		portletURL.setParameter(Constants.CMD, Constants.ADD);
+		portletURL.setParameter(
+			"folderId",
+			String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID));
 
 		long fileEntryTypeId =
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
@@ -146,9 +149,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 		portletURL.setParameter(
 			"fileEntryTypeId", String.valueOf(fileEntryTypeId));
-		portletURL.setParameter(
-			"folderId",
-			String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID));
+
 		portletURL.setParameter("showMountFolder", Boolean.FALSE.toString());
 		portletURL.setParameter("showSelectFolder", Boolean.TRUE.toString());
 
