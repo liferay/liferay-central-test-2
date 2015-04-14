@@ -69,12 +69,12 @@ public class AuthVerifierPipeline {
 	private AuthVerifierPipeline() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter authVerifierPipelineFilter = registry.getFilter(
+		Filter filter = registry.getFilter(
 			"(&(objectClass=" + AuthVerifier.class.getName() +
 				")(urls.includes=*))");
 
 		_serviceTracker = registry.trackServices(
-			authVerifierPipelineFilter, new AuthVerifierTrackerCustomizer());
+			filter, new AuthVerifierTrackerCustomizer());
 
 		_serviceTracker.open();
 	}

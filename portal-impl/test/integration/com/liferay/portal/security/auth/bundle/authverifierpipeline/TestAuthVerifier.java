@@ -48,15 +48,17 @@ public class TestAuthVerifier implements AuthVerifier {
 		AccessControlContext accessControlContext, Properties properties) {
 
 		AuthVerifierResult authVerifierResult = new AuthVerifierResult();
+
 		authVerifierResult.setPassword("best_password_ever");
-		authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
-		authVerifierResult.setUserId(1);
 
 		Map<String, Object> settings = new HashMap<>();
 
 		settings.put("auth.type", HttpServletRequest.BASIC_AUTH);
 
 		authVerifierResult.setSettings(settings);
+
+		authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
+		authVerifierResult.setUserId(1);
 
 		return authVerifierResult;
 	}
