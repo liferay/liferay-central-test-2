@@ -322,8 +322,6 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		_settingsDescriptors.remove(settingsId);
 	}
 
-	private final ConcurrentMap<String, Class<?>> _configurationBeanClasses =
-		new ConcurrentHashMap<>();
 	private final ConcurrentMap<String, FallbackKeys> _fallbackKeysMap =
 		new ConcurrentHashMap<>();
 	private final Map<String, SettingsDescriptor> _settingsDescriptors =
