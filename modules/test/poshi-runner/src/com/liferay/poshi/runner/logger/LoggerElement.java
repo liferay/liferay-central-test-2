@@ -256,6 +256,6 @@ public class LoggerElement {
 	private String _id;
 	private String _name = "div";
 	private String _text = "";
-	private boolean _writtenToLogger = false;
+	private boolean _writtenToLogger;
 
 }
