@@ -198,15 +198,6 @@ public class SiteMembershipPolicyFactoryImplTest {
 	public void testVerifyPolicy3() throws Exception {
 		_atomicState.reset();
 
-		SiteMembershipPolicyUtil.verifyPolicy(null, null, null);
-
-		Assert.assertTrue(_atomicState.isSet());
-	}
-
-	@Test
-	public void testVerifyPolicy4() throws Exception {
-		_atomicState.reset();
-
 		SiteMembershipPolicyUtil.verifyPolicy(
 			new TestGroup(), new TestGroup(), new ArrayList<AssetCategory>(),
 			new ArrayList<AssetTag>(), new HashMap<String, Serializable>(),
@@ -216,7 +207,7 @@ public class SiteMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testVerifyPolicy5() throws Exception {
+	public void testVerifyPolicy4() throws Exception {
 		_atomicState.reset();
 
 		SiteMembershipPolicyUtil.verifyPolicy(new RoleImpl());
@@ -225,7 +216,7 @@ public class SiteMembershipPolicyFactoryImplTest {
 	}
 
 	@Test
-	public void testVerifyPolicy6() throws Exception {
+	public void testVerifyPolicy5() throws Exception {
 		_atomicState.reset();
 
 		SiteMembershipPolicyUtil.verifyPolicy(
