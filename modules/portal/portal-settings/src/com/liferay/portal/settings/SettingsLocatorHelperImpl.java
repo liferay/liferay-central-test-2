@@ -264,9 +264,10 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 
 		configurationBeanManagedService.unregister();
 
-		_configurationBeanManagedServices.remove(configurationBeanClass);
 		_configurationBeanClasses.remove(
 			configurationBeanManagedService.getConfigurationPid());
+
+		_configurationBeanManagedServices.remove(configurationBeanClass);
 	}
 
 	protected void unsetSettingsIdMapping(SettingsIdMapping settingsIdMapping) {
