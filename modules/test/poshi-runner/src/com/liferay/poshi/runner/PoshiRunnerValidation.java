@@ -35,7 +35,7 @@ import org.dom4j.Element;
 public class PoshiRunnerValidation {
 
 	public static void validate() throws PoshiRunnerException {
-		_validateTestname();
+		_validateTestName();
 
 		String[] filePathsArray = PoshiRunnerContext.getFilePathsArray();
 
@@ -491,7 +491,7 @@ public class PoshiRunnerValidation {
 		_validateDefinitionElement(element, filePath);
 	}
 
-	private static void _validateTestname() throws PoshiRunnerException {
+	private static void _validateTestName() throws PoshiRunnerException {
 		String testName = PropsValues.TEST_NAME;
 
 		String className =
