@@ -169,18 +169,19 @@ public class FormNavigatorTag extends IncludeTag {
 		return categorySectionLabels;
 	}
 
-	protected String[] getLegacyCategorySections() {
+	protected String[] getDeprecatedCategorySections() {
 		if (_categorySections == null) {
 			return new String[0];
 		}
 
-		String[] sections = new String[0];
+		String[] deprecatedCategorySections = new String[0];
 
 		for (String[] categorySection : _categorySections) {
-			sections = ArrayUtil.append(sections, categorySection);
+			deprecatedCategorySections = ArrayUtil.append(
+				deprecatedCategorySections, categorySection);
 		}
 
-		return sections;
+		return deprecatedCategorySections;
 	}
 
 	@Override
@@ -200,6 +201,9 @@ public class FormNavigatorTag extends IncludeTag {
 			"liferay-ui:form-navigator:categorySectionLabels",
 			getCategorySectionLabels());
 		request.setAttribute(
+			"liferay-ui:form-navigator:deprecatedCategorySections",
+			getDeprecatedCategorySections());
+		request.setAttribute(
 			"liferay-ui:form-navigator:displayStyle", _displayStyle);
 		request.setAttribute(
 			"liferay-ui:form-navigator:formModelBean", _formModelBean);
@@ -209,9 +213,6 @@ public class FormNavigatorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:form-navigator:jspPath", _jspPath);
 		request.setAttribute(
 			"liferay-ui:form-navigator:htmlBottom", _htmlBottom);
-		request.setAttribute(
-			"liferay-ui:form-navigator:legacyCategorySections",
-			getLegacyCategorySections());
 		request.setAttribute(
 			"liferay-ui:form-navigator:showButtons",
 			String.valueOf(_showButtons));
