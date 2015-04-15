@@ -263,8 +263,8 @@ public class DumpIndexDeletionPolicyTest {
 		for (long i = 0; i < sourceIndexInput.length(); i++) {
 			Assert.assertEquals(
 				fileName + " has different source and target byte value at " +
-					i, sourceIndexInput.readByte(),
-				targetIndexInput.readByte());
+					i,
+				sourceIndexInput.readByte(), targetIndexInput.readByte());
 		}
 
 		sourceIndexInput.close();
@@ -286,8 +286,8 @@ public class DumpIndexDeletionPolicyTest {
 		Assert.assertEquals(
 			Arrays.toString(sourceFileNames) +
 				" does not have the same length as " +
-				Arrays.toString(targetFileNames), sourceFileNames.length,
-			targetFileNames.length);
+				Arrays.toString(targetFileNames),
+			sourceFileNames.length, targetFileNames.length);
 
 		for (String fileName : sourceFileNames) {
 			long sourceLength = sourceDirectory.fileLength(fileName);
