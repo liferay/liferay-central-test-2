@@ -1030,7 +1030,7 @@ public class MobileDriverToSeleniumBridge
 				WebDriverHelper.getElementPositionCenterY(this, locator) +
 				navigationBarHeight;
 
-			this.context("NATIVE_APP");
+			context("NATIVE_APP");
 
 			TouchAction touchAction = new TouchAction(this);
 
@@ -1038,7 +1038,7 @@ public class MobileDriverToSeleniumBridge
 
 			touchAction.perform();
 
-			this.context("WEBVIEW_1");
+			context("WEBVIEW_1");
 		}
 	}
 
