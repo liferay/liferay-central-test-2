@@ -75,13 +75,14 @@ public final class CommandLoggerHandler {
 		miscLoggerElement.setClassName("misc");
 		miscLoggerElement.setName("span");
 
+		lineContainerLoggerElement.addChildLoggerElement(miscLoggerElement);
+
 		LoggerElement commandNameLoggerElement = new LoggerElement();
 
 		commandNameLoggerElement.setClassName("command-name");
 		commandNameLoggerElement.setName("span");
 		commandNameLoggerElement.setText(element.attributeValue("function"));
 
-		lineContainerLoggerElement.addChildLoggerElement(miscLoggerElement);
 		lineContainerLoggerElement.addChildLoggerElement(
 			commandNameLoggerElement);
 
