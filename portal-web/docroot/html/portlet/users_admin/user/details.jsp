@@ -97,6 +97,7 @@ else {
 
 			<liferay-ui:message arguments="<%= sb.toString() %>" key="your-portal-administrator-has-disabled-the-ability-to-modify-the-following-fields" translateArguments="<%= false %>" />
 		</liferay-ui:error>
+
 		<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeDuplicate.class %>" focusField="screenName" message="the-screen-name-you-requested-is-already-taken" />
 		<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeNull.class %>" focusField="screenName" message="the-screen-name-cannot-be-blank" />
 		<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeNumeric.class %>" focusField="screenName" message="the-screen-name-cannot-contain-only-numeric-values" />
@@ -104,15 +105,14 @@ else {
 		<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeReservedForAnonymous.class %>" focusField="screenName" message="the-screen-name-you-requested-is-reserved-for-the-anonymous-user" />
 		<liferay-ui:error exception="<%= UserScreenNameException.MustNotBeUsedByGroup.class %>" focusField="screenName" message="the-screen-name-you-requested-is-already-taken-by-a-site" />
 		<liferay-ui:error exception="<%= UserScreenNameException.MustProduceValidFriendlyURL.class %>" focusField="screenName" message="the-screen-name-you-requested-must-produce-a-valid-friendly-url" />
+
 		<liferay-ui:error exception="<%= UserScreenNameException.MustValidate.class %>" focusField="screenName">
 
 			<%
 			UserScreenNameException.MustValidate usne = (UserScreenNameException.MustValidate)errorException;
-
-			String key = usne.screenNameValidator.getDescription(locale);
 			%>
 
-			<liferay-ui:message key="<%= key %>" />
+			<liferay-ui:message key="<%= screenNameValidator.getDescription(locale) %>" />
 		</liferay-ui:error>
 
 		<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
@@ -127,7 +127,7 @@ else {
 						ScreenNameValidator screenNameValidator = ScreenNameValidatorFactory.getInstance();
 						%>
 
-						<c:if test="<%= !screenNameValidator.getJSValidation().isEmpty() %>">
+						<c:if test="<%= Validator.isNotNull(screenNameValidator.getJSValidation()) %>">
 							<aui:validator errorMessage="<%= screenNameValidator.getDescription(locale) %>" name="custom">
 								<%= screenNameValidator.getJSValidation() %>
 							</aui:validator>
