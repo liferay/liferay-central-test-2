@@ -1010,7 +1010,7 @@ public class MobileDriverToSeleniumBridge
 					this);
 
 				int screenPositionY =
-					(elementPositionCenterY - viewportPositionTop) * 3 / 2 +
+					(((elementPositionCenterY - viewportPositionTop) * 3) / 2) +
 						navigationBarHeight;
 
 				sb.append(screenPositionY);
