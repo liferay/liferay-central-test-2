@@ -109,9 +109,10 @@ else {
 		<liferay-ui:error exception="<%= UserScreenNameException.MustValidate.class %>" focusField="screenName">
 
 			<%
+			UserScreenNameException.MustValidate usne = (UserScreenNameException.MustValidate)errorException;
 			%>
 
-			<liferay-ui:message key="<%= screenNameValidator.getDescription(locale) %>" />
+			<liferay-ui:message key="<%= usne.screenNameValidator.getDescription(locale) %>" />
 		</liferay-ui:error>
 
 		<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
