@@ -37,6 +37,7 @@ public class FormNavigatorEntryUtil {
 		String formNavigatorId, String categoryKey, User user,
 		T formModelBean) {
 
+		@SuppressWarnings("rawtypes")
 		List<FormNavigatorEntry<T>> formNavigatorEntries =
 			(List)_instance._formNavigatorEntries.getService(
 				_getKey(formNavigatorId, categoryKey));
@@ -48,6 +49,7 @@ public class FormNavigatorEntryUtil {
 	public static <T> List<FormNavigatorEntry<T>> getFormNavigatorEntries(
 		String formNavigatorId, User user, T formModelBean) {
 
+		@SuppressWarnings("rawtypes")
 		List<FormNavigatorEntry<T>> formNavigatorEntries =
 			(List)_instance._formNavigatorEntries.getService(
 				_getKey(formNavigatorId, null));
@@ -127,6 +129,7 @@ public class FormNavigatorEntryUtil {
 		return formNavigatorId + StringPool.PERIOD + categoryKey;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private FormNavigatorEntryUtil() {
 		_formNavigatorEntries = ServiceTrackerCollections.multiValueMap(
 			FormNavigatorEntry.class, null,
@@ -135,12 +138,12 @@ public class FormNavigatorEntryUtil {
 				@Override
 				public void map(
 					ServiceReference<FormNavigatorEntry> serviceReference,
-					final Emitter<String> emitter) {
+					Emitter<String> emitter) {
 
 					Registry registry = RegistryUtil.getRegistry();
 
-					FormNavigatorEntry formNavigatorEntry = registry.getService(
-						serviceReference);
+					FormNavigatorEntry<?> formNavigatorEntry =
+						registry.getService(serviceReference);
 
 					emitter.emit(
 						_getKey(
@@ -160,6 +163,7 @@ public class FormNavigatorEntryUtil {
 	private static final FormNavigatorEntryUtil _instance =
 		new FormNavigatorEntryUtil();
 
+	@SuppressWarnings("rawtypes")
 	private final ServiceTrackerMap<String, List<FormNavigatorEntry>>
 		_formNavigatorEntries;
 

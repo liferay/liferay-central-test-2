@@ -37,10 +37,10 @@ public class FormNavigatorCategoryUtil {
 	}
 
 	public static String[] getKeys(String formNavigatorId) {
+		List<String> keys = new ArrayList<>();
+
 		List<FormNavigatorCategory> formNavigatorCategories =
 			getFormNavigatorCategories(formNavigatorId);
-
-		List<String> keys = new ArrayList<>();
 
 		for (FormNavigatorCategory formNavigatorCategory :
 				formNavigatorCategories) {
@@ -56,10 +56,10 @@ public class FormNavigatorCategoryUtil {
 	}
 
 	public static String[] getLabels(String formNavigatorId) {
+		List<String> labels = new ArrayList<>();
+
 		List<FormNavigatorCategory> formNavigatorCategories =
 			getFormNavigatorCategories(formNavigatorId);
-
-		List<String> labels = new ArrayList<>();
 
 		for (FormNavigatorCategory formNavigatorCategory :
 				formNavigatorCategories) {
@@ -82,7 +82,7 @@ public class FormNavigatorCategoryUtil {
 				@Override
 				public void map(
 					ServiceReference<FormNavigatorCategory> serviceReference,
-					final Emitter<String> emitter) {
+					Emitter<String> emitter) {
 
 					Registry registry = RegistryUtil.getRegistry();
 
