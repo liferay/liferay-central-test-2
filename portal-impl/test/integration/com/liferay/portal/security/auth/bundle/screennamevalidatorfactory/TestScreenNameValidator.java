@@ -35,8 +35,8 @@ public class TestScreenNameValidator implements ScreenNameValidator {
 	}
 
 	@Override
-	public String getJSValidation() {
-		return "testJSValidation";
+	public String getAUIValidatorJS() {
+		return "function() {return true;}";
 	}
 
 	@Override

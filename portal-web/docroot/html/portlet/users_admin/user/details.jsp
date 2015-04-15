@@ -127,9 +127,9 @@ else {
 						ScreenNameValidator screenNameValidator = ScreenNameValidatorFactory.getInstance();
 						%>
 
-						<c:if test="<%= Validator.isNotNull(screenNameValidator.getJSValidation()) %>">
+						<c:if test="<%= Validator.isNotNull(screenNameValidator.getAUIValidatorJS()) %>">
 							<aui:validator errorMessage="<%= screenNameValidator.getDescription(locale) %>" name="custom">
-								<%= screenNameValidator.getJSValidation() %>
+								<%= screenNameValidator.getAUIValidatorJS() %>
 							</aui:validator>
 						</c:if>
 					</aui:input>

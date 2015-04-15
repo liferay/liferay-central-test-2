@@ -54,9 +54,10 @@ public class ScreenNameValidatorFactoryTest {
 	}
 
 	@Test
-	public void testGetJSValidation() {
+	public void testGetAUIValidatorJS() {
 		Assert.assertEquals(
-			"testJSValidation", _screenNameValidator.getJSValidation());
+			"function() {return true;}",
+			_screenNameValidator.getAUIValidatorJS());
 	}
 
 	@Test

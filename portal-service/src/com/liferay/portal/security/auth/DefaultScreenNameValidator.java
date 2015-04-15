@@ -41,7 +41,7 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 	}
 
 	@Override
-	public String getJSValidation() {
+	public String getAUIValidatorJS() {
 		return "function(val) {" +
 					"var pattern = new RegExp('[^A-Za-z0-9" +
 						getSpecialChars() + "]');" +

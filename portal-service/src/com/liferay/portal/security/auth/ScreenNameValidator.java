@@ -23,7 +23,7 @@ public interface ScreenNameValidator {
 
 	public String getDescription(Locale locale);
 
-	public String getJSValidation();
+	public String getAUIValidatorJS();
 
 	public boolean validate(long companyId, String screenName);
 
