@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.samplesqlbuilder;
+package com.liferay.portal.tools.sample.sql.builder;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterModel;
@@ -3006,7 +3006,7 @@ public class DataFactory {
 	private static final long _CURRENT_TIME = System.currentTimeMillis();
 
 	private static final String _DEPENDENCIES_DIR =
-		"com/liferay/portal/tools/samplesqlbuilder/dependencies/";
+		"com/liferay/portal/tools/sample/sql/builder/dependencies/";
 
 	private static final long _FUTURE_TIME =
 		System.currentTimeMillis() + Time.YEAR;

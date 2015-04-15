@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.samplesqlbuilder;
+package com.liferay.portal.tools.sample.sql.builder;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -126,7 +126,7 @@ public class SampleSQLBuilderTest {
 		properties.put("sample.sql.output.merge", "true");
 		properties.put(
 			"sample.sql.script",
-			"com/liferay/portal/tools/samplesqlbuilder/dependencies" +
+			"com/liferay/portal/tools/sample/sql/builder/dependencies" +
 				"/sample.ftl");
 		properties.put("sample.sql.virtual.hostname", "localhost");
 	}

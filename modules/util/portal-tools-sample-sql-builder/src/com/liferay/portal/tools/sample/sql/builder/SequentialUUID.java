@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.samplesqlbuilder;
+package com.liferay.portal.tools.sample.sql.builder;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
