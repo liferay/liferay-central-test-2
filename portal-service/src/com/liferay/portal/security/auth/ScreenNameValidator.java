@@ -21,9 +21,9 @@ import java.util.Locale;
  */
 public interface ScreenNameValidator {
 
-	public String getDescription(Locale locale);
-
 	public String getAUIValidatorJS();
+
+	public String getDescription(Locale locale);
 
 	public boolean validate(long companyId, String screenName);
 

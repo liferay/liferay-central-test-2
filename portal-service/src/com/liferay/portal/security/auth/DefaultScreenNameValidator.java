@@ -33,14 +33,6 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 	public static final String POSTFIX = "postfix";
 
 	@Override
-	public String getDescription(Locale locale) {
-		return LanguageUtil.format(
-			locale,
-			"the-screen-name-cannot-be-an-email-address-or-a-reserved-word",
-			new String[] {CYRUS + ", " + POSTFIX, getSpecialChars()}, false);
-	}
-
-	@Override
 	public String getAUIValidatorJS() {
 		return "function(val) {" +
 					"var pattern = new RegExp('[^A-Za-z0-9" +
@@ -50,6 +42,14 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 					"}" +
 					"return true;" +
 				"}";
+	}
+
+	@Override
+	public String getDescription(Locale locale) {
+		return LanguageUtil.format(
+			locale,
+			"the-screen-name-cannot-be-an-email-address-or-a-reserved-word",
+			new String[] {CYRUS + ", " + POSTFIX, getSpecialChars()}, false);
 	}
 
 	@Override

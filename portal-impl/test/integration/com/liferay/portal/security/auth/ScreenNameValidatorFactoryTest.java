@@ -46,18 +46,18 @@ public class ScreenNameValidatorFactoryTest {
 	}
 
 	@Test
+	public void testGetAUIValidatorJS() {
+		Assert.assertEquals(
+			"function() {return true;}",
+			_screenNameValidator.getAUIValidatorJS());
+	}
+
+	@Test
 	public void testGetDescription() {
 		Locale locale = LocaleUtil.getDefault();
 
 		Assert.assertEquals(
 			locale.toString(), _screenNameValidator.getDescription(locale));
-	}
-
-	@Test
-	public void testGetAUIValidatorJS() {
-		Assert.assertEquals(
-			"function() {return true;}",
-			_screenNameValidator.getAUIValidatorJS());
 	}
 
 	@Test

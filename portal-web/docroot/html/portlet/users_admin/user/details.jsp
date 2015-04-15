@@ -109,7 +109,6 @@ else {
 		<liferay-ui:error exception="<%= UserScreenNameException.MustValidate.class %>" focusField="screenName">
 
 			<%
-			UserScreenNameException.MustValidate usne = (UserScreenNameException.MustValidate)errorException;
 			%>
 
 			<liferay-ui:message key="<%= screenNameValidator.getDescription(locale) %>" />

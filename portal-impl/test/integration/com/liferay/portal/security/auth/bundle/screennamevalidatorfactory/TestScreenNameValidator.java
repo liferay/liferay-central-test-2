@@ -30,13 +30,13 @@ import org.osgi.service.component.annotations.Component;
 public class TestScreenNameValidator implements ScreenNameValidator {
 
 	@Override
-	public String getDescription(Locale locale) {
-		return locale.toString();
+	public String getAUIValidatorJS() {
+		return "function() {return true;}";
 	}
 
 	@Override
-	public String getAUIValidatorJS() {
-		return "function() {return true;}";
+	public String getDescription(Locale locale) {
+		return locale.toString();
 	}
 
 	@Override
