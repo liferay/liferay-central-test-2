@@ -65,7 +65,7 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 		return true;
 	}
 
-	private String getSpecialChars() {
+	protected String getSpecialChars() {
 		if (_specialChars == null) {
 			String specialChars = PropsUtil.get(
 				PropsKeys.USERS_SCREEN_NAME_SPECIAL_CHARACTERS);
@@ -77,7 +77,7 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 		return _specialChars;
 	}
 
-	private boolean hasInvalidChars(String screenName) {
+	protected boolean hasInvalidChars(String screenName) {
 		String validChars = "[A-Za-z0-9" + getSpecialChars() + "]+";
 
 		return !screenName.matches(validChars);
