@@ -12,29 +12,34 @@
  * details.
  */
 
-package com.liferay.portal.tools.servicebuilder;
-
-import java.util.List;
+package com.liferay.portal.tools.service.builder;
 
 /**
+ * @author Glenn Powell
  * @author Brian Wing Shun Chan
  */
-public class EntityOrder {
+public class EntityMapping {
 
-	public EntityOrder(boolean asc, List<EntityColumn> columns) {
-		_asc = asc;
-		_columns = columns;
+	public EntityMapping(String table, String entity1, String entity2) {
+		_table = table;
+		_entities[0] = entity1;
+		_entities[1] = entity2;
 	}
 
-	public List<EntityColumn> getColumns() {
-		return _columns;
+	public String getEntity(int index) {
+		try {
+			return _entities[index];
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 
-	public boolean isAscending() {
-		return _asc;
+	public String getTable() {
+		return _table;
 	}
 
-	private final boolean _asc;
-	private final List<EntityColumn> _columns;
+	private final String[] _entities = new String[2];
+	private final String _table;
 
 }

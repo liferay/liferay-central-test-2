@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.servicebuilder;
+package com.liferay.portal.tools.service.builder;
 
 import com.liferay.portal.model.BaseModelHintsImpl;
 import com.liferay.portal.model.ModelHintsCallback;
