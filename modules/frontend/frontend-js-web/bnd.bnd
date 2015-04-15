@@ -26,7 +26,6 @@ Import-Package:\
 	com.liferay.portal.kernel.template,\
 	com.liferay.portal.kernel.upload,\
 	com.liferay.portal.kernel.util,\
-	com.liferay.portal.kernel.web,\
 	com.liferay.portal.kernel.workflow,\
 	com.liferay.portal.kernel.xuggler,\
 	com.liferay.portal.layoutconfiguration.util,\
