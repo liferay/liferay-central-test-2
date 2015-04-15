@@ -64,14 +64,10 @@ public final class CommandLoggerHandler {
 	}
 
 	private static boolean _isCurrentCommand(Element element) {
-		if (element == _commandElement) {
-			return true;
-		}
-
-		return false;
+		return element.equals(_commandElement);
 	}
 
-	private static Element _commandElement = null;
+	private static Element _commandElement;
 	private static final LoggerElement _commandLogLoggerElement =
 		new LoggerElement("commandLog");
 
