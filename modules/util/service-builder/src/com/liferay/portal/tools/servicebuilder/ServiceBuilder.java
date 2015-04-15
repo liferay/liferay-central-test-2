@@ -129,10 +129,9 @@ public class ServiceBuilder {
 	public static final String AUTHOR = "Brian Wing Shun Chan";
 
 	public static final String MODEL_HINTS_CONFIGS =
-		"classpath*:META-INF/portal-model-hints.xml," +
-			"META-INF/portal-model-hints.xml," +
-				"classpath*:META-INF/ext-model-hints.xml," +
-					"META-INF/portlet-model-hints.xml";
+		"classpath*:META-INF/portal-model-hints.xml,META-INF" +
+			"/portal-model-hints.xml,classpath*:META-INF" +
+				"/ext-model-hints.xml,META-INF/portlet-model-hints.xml";
 
 	public static final String READ_ONLY_PREFIXES =
 		"fetch,get,has,is,load,reindex,search";
