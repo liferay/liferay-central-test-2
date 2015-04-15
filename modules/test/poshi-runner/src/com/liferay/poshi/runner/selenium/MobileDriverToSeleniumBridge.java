@@ -1001,6 +1001,7 @@ public class MobileDriverToSeleniumBridge
 				int screenPositionX = elementPositionCenterX * 3 / 2;
 
 				sb.append(screenPositionX);
+
 				sb.append(" ");
 
 				int elementPositionCenterY =
