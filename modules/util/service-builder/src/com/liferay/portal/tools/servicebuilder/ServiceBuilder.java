@@ -1960,7 +1960,7 @@ public class ServiceBuilder {
 
 		if (url == null) {
 			throw new RuntimeException(
-				"Unable to load jalopy.xml from the class loader.");
+				"Unable to load jalopy.xml from the class loader");
 		}
 
 		return url;
