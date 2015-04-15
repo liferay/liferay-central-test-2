@@ -34,14 +34,9 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 
 	@Override
 	public String getAUIValidatorJS() {
-		return "function(val) {" +
-					"var pattern = new RegExp('[^A-Za-z0-9" +
-						getSpecialChars() + "]');" +
-					"if (val.match(pattern)) {" +
-						"return false;" +
-					"}" +
-					"return true;" +
-				"}";
+		return "function(val) {var pattern = new RegExp('[^A-Za-z0-9" +
+			getSpecialChars() +
+				"]');if (val.match(pattern)) {return false;}return true;}";
 	}
 
 	@Override
@@ -78,9 +73,7 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 	}
 
 	protected boolean hasInvalidChars(String screenName) {
-		String validChars = "[A-Za-z0-9" + getSpecialChars() + "]+";
-
-		return !screenName.matches(validChars);
+		return !screenName.matches("[A-Za-z0-9" + getSpecialChars() + "]+");
 	}
 
 	private String _specialChars;
