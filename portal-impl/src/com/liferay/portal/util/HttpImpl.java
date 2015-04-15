@@ -1323,8 +1323,7 @@ public class HttpImpl implements Http {
 
 		if (urlConnection == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Could not open url connection to: " + url.toString());
+				_log.debug("Unable to not open a connection to " + url);
 			}
 
 			return null;
