@@ -5376,7 +5376,7 @@ public class ServiceBuilder {
 	private static final String _SQL_CREATE_TABLE = "create table ";
 
 	private static final String _TPL_ROOT =
-		"com/liferay/portal/tools/servicebuilder/dependencies/";
+		"com/liferay/portal/tools/service/builder/dependencies/";
 
 	private static Pattern _getterPattern = Pattern.compile(
 		"public .* get.*" + Pattern.quote("(") + "|public boolean is.*" +
