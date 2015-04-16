@@ -14,16 +14,12 @@
 
 package com.liferay.sass.compiler.ruby;
 
-import java.io.InputStream;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
 
 import org.jruby.RubyArray;
 import org.jruby.RubyException;
@@ -37,7 +33,7 @@ import org.jruby.runtime.builtin.IRubyObject;
 /**
  * @author David Truong
  */
-public class RubySassCompiler {
+public class RubySassCompiler implements AutoCloseable {
 
 	public RubySassCompiler() throws Exception {
 		this("", "", _COMPILE_MODE_JIT, _COMPILE_DEFAULT_THRESHOLD);
@@ -94,14 +90,19 @@ public class RubySassCompiler {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		InputStream is = classLoader.getResourceAsStream(_SCRIPT_PATH);
+		Path path = Paths.get(classLoader.getResource(_SCRIPT_PATH).toURI());
 
-		String rubyScript = IOUtils.toString(is);
+		String rubyScript = new String(Files.readAllBytes(path));
 
 		_scriptObject = _scriptingContainer.runScriptlet(rubyScript);
 
 		_docrootPath = docrootPath;
 		_includePath = includePath;
+	}
+
+	@Override
+	public void close() throws Exception {
+		_scriptingContainer.terminate();
 	}
 
 	public String compileFile(String fileName)
@@ -170,9 +171,6 @@ public class RubySassCompiler {
 	private static final String _COMPILE_MODE_FORCE = "force";
 
 	private static final String _COMPILE_MODE_JIT = "jit";
-
-	private static final String _RUBY_LIB_PATH =
-		System.getProperty("java.io.tmpdir") + "/liferay/ruby";
 
 	private static final String _SCRIPT_PATH =
 		"com/liferay/sass/compiler/ruby/dependencies/main.rb";
