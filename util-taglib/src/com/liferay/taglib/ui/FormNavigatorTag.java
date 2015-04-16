@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -121,13 +119,16 @@ public class FormNavigatorTag extends IncludeTag {
 		return categoryKeys;
 	}
 
-	protected String[] getCategoryLabels(Locale locale) {
+	protected String[] getCategoryLabels() {
 		if (_categoryNames != null) {
 			return _categoryNames;
 		}
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String[] categoryLabels = FormNavigatorCategoryUtil.getLabels(
-			_id, locale);
+			_id, themeDisplay.getLocale());
 
 		if (ArrayUtil.isEmpty(categoryLabels)) {
 			categoryLabels = new String[] {""};
@@ -207,13 +208,9 @@ public class FormNavigatorTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		request.setAttribute("liferay-ui:form-navigator:backURL", _backURL);
 		request.setAttribute(
-			"liferay-ui:form-navigator:categoryLabels",
-			getCategoryLabels(themeDisplay.getLocale()));
+			"liferay-ui:form-navigator:categoryLabels", getCategoryLabels());
 		request.setAttribute(
 			"liferay-ui:form-navigator:categorySectionKeys",
 			getCategorySectionKeys());
