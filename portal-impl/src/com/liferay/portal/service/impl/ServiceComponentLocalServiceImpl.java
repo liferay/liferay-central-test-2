@@ -360,21 +360,21 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected List<String> getModels(ClassLoader classLoader)
+	protected List<String> getModelNames(ClassLoader classLoader)
 		throws DocumentException, IOException {
 
-		List<String> models = new ArrayList<>();
+		List<String> modelNames = new ArrayList<>();
 
 		String xml = StringUtil.read(
 			classLoader, "META-INF/portlet-model-hints.xml");
 
-		models.addAll(getModels(xml));
+		modelNames.addAll(getModelNames(xml));
 
 		try {
 			xml = StringUtil.read(
 				classLoader, "META-INF/portlet-model-hints-ext.xml");
 
-			models.addAll(getModels(xml));
+			modelNames.addAll(getModelNames(xml));
 		}
 		catch (Exception e) {
 			if (_log.isInfoEnabled()) {
@@ -384,11 +384,11 @@ public class ServiceComponentLocalServiceImpl
 			}
 		}
 
-		return models;
+		return modelNames;
 	}
 
-	protected List<String> getModels(String xml) throws DocumentException {
-		List<String> models = new ArrayList<>();
+	protected List<String> getModelNames(String xml) throws DocumentException {
+		List<String> modelNames = new ArrayList<>();
 
 		Document document = SAXReaderUtil.read(xml);
 
@@ -399,10 +399,10 @@ public class ServiceComponentLocalServiceImpl
 		for (Element modelElement : modelElements) {
 			String name = modelElement.attributeValue("name");
 
-			models.add(name);
+			modelNames.add(name);
 		}
 
-		return models;
+		return modelNames;
 	}
 
 	protected List<String> getModifiedTableNames(
@@ -488,16 +488,15 @@ public class ServiceComponentLocalServiceImpl
 		List<String> modifiedTableNames = getModifiedTableNames(
 			previousServiceComponent.getTablesSQL(), tablesSQL);
 
-		List<String> models = getModels(classLoader);
+		List<String> modelNames = getModelNames(classLoader);
 
-		for (String name : models) {
-			int pos = name.lastIndexOf(".model.");
+		for (String modelName : modelNames) {
+			int pos = modelName.lastIndexOf(".model.");
 
-			name =
-				name.substring(0, pos) + ".model.impl." +
-					name.substring(pos + 7) + "ModelImpl";
-
-			Class<?> modelClass = Class.forName(name, true, classLoader);
+			Class<?> modelClass = Class.forName(
+				modelName.substring(0, pos) + ".model.impl." +
+					modelName.substring(pos + 7) + "ModelImpl",
+				true, classLoader);
 
 			Field dataSourceField = modelClass.getField("DATA_SOURCE");
 
