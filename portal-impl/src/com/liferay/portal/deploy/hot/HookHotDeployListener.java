@@ -1178,179 +1178,143 @@ public class HookHotDeployListener
 		throws Exception {
 
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					COMPANY_SETTINGS_FORM_CONFIGURATION)),
-			servletContextName, "configuration",
+			servletContextName, portalProperties,
+			COMPANY_SETTINGS_FORM_CONFIGURATION, "configuration",
 			FormNavigatorConstants.COMPANY_SETTINGS_FORM, "portal_settings");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					COMPANY_SETTINGS_FORM_IDENTIFICATION)),
-			servletContextName, "identification",
+			servletContextName, portalProperties,
+			COMPANY_SETTINGS_FORM_IDENTIFICATION, "identification",
 			FormNavigatorConstants.COMPANY_SETTINGS_FORM, "portal_settings");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					COMPANY_SETTINGS_FORM_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
+			servletContextName, portalProperties,
+			COMPANY_SETTINGS_FORM_MISCELLANEOUS, "miscellaneous",
 			FormNavigatorConstants.COMPANY_SETTINGS_FORM, "portal_settings");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(COMPANY_SETTINGS_FORM_SOCIAL)),
-			servletContextName, "social",
-			FormNavigatorConstants.COMPANY_SETTINGS_FORM, "portal_settings");
+			servletContextName, portalProperties, COMPANY_SETTINGS_FORM_SOCIAL,
+			"social", FormNavigatorConstants.COMPANY_SETTINGS_FORM,
+			"portal_settings");
 
 		initFormNavigatorEntry(
-			StringUtil.split(portalProperties.getProperty(LAYOUT_FORM_ADD)),
-			servletContextName, StringPool.BLANK,
-			FormNavigatorConstants.LAYOUT_FORM, "layouts_admin/layout");
+			servletContextName, portalProperties, LAYOUT_FORM_ADD,
+			StringPool.BLANK, FormNavigatorConstants.LAYOUT_FORM,
+			"layouts_admin/layout");
 		initFormNavigatorEntry(
-			StringUtil.split(portalProperties.getProperty(LAYOUT_FORM_UPDATE)),
-			servletContextName, StringPool.BLANK,
-			FormNavigatorConstants.LAYOUT_FORM, "layouts_admin/layout");
+			servletContextName, portalProperties, LAYOUT_FORM_UPDATE,
+			StringPool.BLANK, FormNavigatorConstants.LAYOUT_FORM,
+			"layouts_admin/layout");
 
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(LAYOUT_SET_FORM_UPDATE)),
-			servletContextName, StringPool.BLANK,
-			FormNavigatorConstants.LAYOUT_SET_FORM, "layouts_admin/layout_set");
+			servletContextName, portalProperties, LAYOUT_SET_FORM_UPDATE,
+			StringPool.BLANK, FormNavigatorConstants.LAYOUT_SET_FORM,
+			"layouts_admin/layout_set");
 
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					ORGANIZATIONS_FORM_ADD_IDENTIFICATION)),
-			servletContextName, "identification",
+			servletContextName, portalProperties,
+			ORGANIZATIONS_FORM_ADD_IDENTIFICATION, "identification",
 			FormNavigatorConstants.ORGANIZATIONS_FORM,
 			"users_admin/organization");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(ORGANIZATIONS_FORM_ADD_MAIN)),
-			servletContextName, "organization-information",
+			servletContextName, portalProperties, ORGANIZATIONS_FORM_ADD_MAIN,
+			"organization-information",
 			FormNavigatorConstants.ORGANIZATIONS_FORM,
 			"users_admin/organization");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					ORGANIZATIONS_FORM_ADD_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
-			FormNavigatorConstants.ORGANIZATIONS_FORM,
-			"users_admin/organization");
-
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION)),
-			servletContextName, "identification",
+			servletContextName, portalProperties,
+			ORGANIZATIONS_FORM_ADD_MISCELLANEOUS, "miscellaneous",
 			FormNavigatorConstants.ORGANIZATIONS_FORM,
 			"users_admin/organization");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(ORGANIZATIONS_FORM_UPDATE_MAIN)),
-			servletContextName, "organization-information",
+			servletContextName, portalProperties,
+			ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION, "identification",
 			FormNavigatorConstants.ORGANIZATIONS_FORM,
 			"users_admin/organization");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
+			servletContextName, portalProperties,
+			ORGANIZATIONS_FORM_UPDATE_MAIN, "organization-information",
+			FormNavigatorConstants.ORGANIZATIONS_FORM,
+			"users_admin/organization");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties,
+			ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS, "miscellaneous",
 			FormNavigatorConstants.ORGANIZATIONS_FORM,
 			"users_admin/organization");
 
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(SITES_FORM_ADD_ADVANCED)),
-			servletContextName, "advanced", FormNavigatorConstants.SITES_FORM,
+			servletContextName, portalProperties, SITES_FORM_ADD_ADVANCED,
+			"advanced", FormNavigatorConstants.SITES_FORM, "sites_admin/site");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties, SITES_FORM_ADD_MAIN,
+			"basic-information", FormNavigatorConstants.SITES_FORM,
 			"sites_admin/site");
 		initFormNavigatorEntry(
-			StringUtil.split(portalProperties.getProperty(SITES_FORM_ADD_MAIN)),
-			servletContextName, "basic-information",
-			FormNavigatorConstants.SITES_FORM, "sites_admin/site");
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(SITES_FORM_ADD_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
-			FormNavigatorConstants.SITES_FORM, "sites_admin/site");
-		initFormNavigatorEntry(
-			StringUtil.split(portalProperties.getProperty(SITES_FORM_ADD_SEO)),
-			servletContextName, "search-engine-optimization",
-			FormNavigatorConstants.SITES_FORM, "sites_admin/site");
-
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(SITES_FORM_UPDATE_ADVANCED)),
-			servletContextName, "advanced", FormNavigatorConstants.SITES_FORM,
+			servletContextName, portalProperties, SITES_FORM_ADD_MISCELLANEOUS,
+			"miscellaneous", FormNavigatorConstants.SITES_FORM,
 			"sites_admin/site");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(SITES_FORM_UPDATE_MAIN)),
-			servletContextName, "basic-information",
+			servletContextName, portalProperties, SITES_FORM_ADD_SEO,
+			"search-engine-optimization", FormNavigatorConstants.SITES_FORM,
+			"sites_admin/site");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties, SITES_FORM_UPDATE_ADVANCED,
+			"advanced", FormNavigatorConstants.SITES_FORM, "sites_admin/site");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties, SITES_FORM_UPDATE_MAIN,
+			"basic-information", FormNavigatorConstants.SITES_FORM,
+			"sites_admin/site");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties,
+			SITES_FORM_UPDATE_MISCELLANEOUS, "miscellaneous",
 			FormNavigatorConstants.SITES_FORM, "sites_admin/site");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(SITES_FORM_UPDATE_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
-			FormNavigatorConstants.SITES_FORM, "sites_admin/site");
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(SITES_FORM_UPDATE_SEO)),
-			servletContextName, "search-engine-optimization",
-			FormNavigatorConstants.SITES_FORM, "sites_admin/site");
+			servletContextName, portalProperties, SITES_FORM_UPDATE_SEO,
+			"search-engine-optimization", FormNavigatorConstants.SITES_FORM,
+			"sites_admin/site");
 
 		initFormNavigatorEntry(
-			StringUtil.split(portalProperties.getProperty(USERS_FORM_ADD_MAIN)),
-			servletContextName, "user-information",
+			servletContextName, portalProperties, USERS_FORM_ADD_IDENTIFICATION,
+			"identification", FormNavigatorConstants.USERS_FORM,
+			"users_admin/user");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties, USERS_FORM_ADD_MAIN,
+			"user-information", FormNavigatorConstants.USERS_FORM,
+			"users_admin/user");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties, USERS_FORM_ADD_MISCELLANEOUS,
+			"miscellaneous", FormNavigatorConstants.USERS_FORM,
+			"users_admin/user");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties,
+			USERS_FORM_MY_ACCOUNT_IDENTIFICATION, "identification",
 			FormNavigatorConstants.USERS_FORM, "users_admin/user");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(USERS_FORM_ADD_IDENTIFICATION)),
-			servletContextName, "identification",
+			servletContextName, portalProperties, USERS_FORM_MY_ACCOUNT_MAIN,
+			"user-information", FormNavigatorConstants.USERS_FORM,
+			"users_admin/user");
+		initFormNavigatorEntry(
+			servletContextName, portalProperties,
+			USERS_FORM_MY_ACCOUNT_MISCELLANEOUS, "miscellaneous",
 			FormNavigatorConstants.USERS_FORM, "users_admin/user");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(USERS_FORM_ADD_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
-			FormNavigatorConstants.USERS_FORM, "users_admin/user");
-
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(USERS_FORM_UPDATE_IDENTIFICATION)),
-			servletContextName, "identification",
+			servletContextName, portalProperties,
+			USERS_FORM_UPDATE_IDENTIFICATION, "identification",
 			FormNavigatorConstants.USERS_FORM, "users_admin/user");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(USERS_FORM_UPDATE_MAIN)),
-			servletContextName, "user-information",
-			FormNavigatorConstants.USERS_FORM, "users_admin/user");
+			servletContextName, portalProperties, USERS_FORM_UPDATE_MAIN,
+			"user-information", FormNavigatorConstants.USERS_FORM,
+			"users_admin/user");
 		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(USERS_FORM_UPDATE_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
-			FormNavigatorConstants.USERS_FORM, "users_admin/user");
-
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					USERS_FORM_MY_ACCOUNT_IDENTIFICATION)),
-			servletContextName, "identification",
-			FormNavigatorConstants.USERS_FORM, "users_admin/user");
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(USERS_FORM_MY_ACCOUNT_MAIN)),
-			servletContextName, "user-information",
-			FormNavigatorConstants.USERS_FORM, "users_admin/user");
-		initFormNavigatorEntry(
-			StringUtil.split(
-				portalProperties.getProperty(
-					USERS_FORM_MY_ACCOUNT_MISCELLANEOUS)),
-			servletContextName, "miscellaneous",
+			servletContextName, portalProperties,
+			USERS_FORM_UPDATE_MISCELLANEOUS, "miscellaneous",
 			FormNavigatorConstants.USERS_FORM, "users_admin/user");
 	}
 
 	protected void initFormNavigatorEntry(
-		String[] formNavigatorSections, String servletContextName,
-		String categoryKey, String formNavigatorId, String jspPath) {
+		String servletContextName, Properties portalProperties,
+		String portalPropertiesKey, String categoryKey, String formNavigatorId,
+		String jspPath) {
+
+		String[] formNavigatorSections = StringUtil.split(
+			portalProperties.getProperty(portalPropertiesKey));
 
 		for (int i = 0; i < formNavigatorSections.length; i++) {
 			String formNavigatorSection = formNavigatorSections[i];
