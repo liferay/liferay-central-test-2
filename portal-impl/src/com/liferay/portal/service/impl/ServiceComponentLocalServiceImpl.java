@@ -360,23 +360,6 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected List<String> getChangedTables(
-		List<String> tables1, List<String> tables2) {
-
-		List<String> changedModels = new ArrayList<>();
-
-		tables1.removeAll(tables2);
-
-		for (String tables : tables1) {
-			int startPos = tables.indexOf("create table ");
-			int endPos = tables.indexOf(" (");
-
-			changedModels.add(tables.substring(startPos + 13, endPos));
-		}
-
-		return changedModels;
-	}
-
 	protected List<String> getModels(ClassLoader classLoader)
 		throws DocumentException, IOException {
 
@@ -422,9 +405,26 @@ public class ServiceComponentLocalServiceImpl
 		return models;
 	}
 
-	protected List<String> getTables(String tablesSQL) {
-		return ListUtil.toList(
+	protected List<String> getModifiedTableNames(
+		String previousTablesSQL, String tablesSQL) {
+
+		List<String> modifiedTableNames = new ArrayList<>();
+
+		List<String> previousTablesSQLParts = ListUtil.toList(
+			StringUtil.split(previousTablesSQL, StringPool.SEMICOLON));
+		List<String> tablesSQLParts = ListUtil.toList(
 			StringUtil.split(tablesSQL, StringPool.SEMICOLON));
+
+		tablesSQLParts.removeAll(previousTablesSQLParts);
+
+		for (String tablesSQLPart : tablesSQLParts) {
+			int x = tablesSQLPart.indexOf("create table ");
+			int y = tablesSQLPart.indexOf(" (");
+
+			modifiedTableNames.add(tablesSQLPart.substring(x + 13, y));
+		}
+
+		return modifiedTableNames;
 	}
 
 	protected UpgradeTableListener getUpgradeTableListener(
@@ -485,10 +485,8 @@ public class ServiceComponentLocalServiceImpl
 			String tablesSQL)
 		throws Exception {
 
-		String previousTablesSQL = previousServiceComponent.getTablesSQL();
-
-		List<String> changedTables = getChangedTables(
-			getTables(tablesSQL), getTables(previousTablesSQL));
+		List<String> modifiedTableNames = getModifiedTableNames(
+			previousServiceComponent.getTablesSQL(), tablesSQL);
 
 		List<String> models = getModels(classLoader);
 
@@ -508,7 +506,7 @@ public class ServiceComponentLocalServiceImpl
 
 			String tableName = (String)tableNameField.get(null);
 
-			if (!changedTables.contains(tableName)) {
+			if (!modifiedTableNames.contains(tableName)) {
 				continue;
 			}
 
