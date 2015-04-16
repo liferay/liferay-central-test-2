@@ -23,7 +23,8 @@ import java.util.Locale;
  * @author Sergio González
  */
 @OSGiBeanProperties
-public class DeprecatedFormNavigatorEntry extends BaseFormNavigatorEntry {
+public class DeprecatedFormNavigatorEntry
+	extends BaseFormNavigatorEntry<Object> {
 
 	public DeprecatedFormNavigatorEntry(
 		String key, String label, String categoryKey, String formNavigatorId,

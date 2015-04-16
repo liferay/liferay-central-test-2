@@ -1377,7 +1377,7 @@ public class HookHotDeployListener
 		for (int i = 0; i < formNavigatorSections.length; i++) {
 			String formNavigatorSection = formNavigatorSections[i];
 
-			FormNavigatorEntry deprecatedFormNavigatorEntry =
+			FormNavigatorEntry<Object> deprecatedFormNavigatorEntry =
 				new DeprecatedFormNavigatorEntry(
 					formNavigatorSection, formNavigatorSection, categoryKey,
 					formNavigatorId, jspPath);
