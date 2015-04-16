@@ -50,7 +50,6 @@ public class FormNavigatorEntryUtil {
 	public static <T> List<FormNavigatorEntry<T>> getFormNavigatorEntries(
 		String formNavigatorId, User user, T formModelBean) {
 
-		@SuppressWarnings("rawtypes")
 		List<FormNavigatorEntry<T>> formNavigatorEntries = new ArrayList<>();
 
 		List<FormNavigatorCategory> formNavigatorCategories =
@@ -60,13 +59,12 @@ public class FormNavigatorEntryUtil {
 		for (FormNavigatorCategory formNavigatorCategory :
 				formNavigatorCategories) {
 
-			List curFormNavigatorEntries =
+			@SuppressWarnings("rawtypes")
+			List<FormNavigatorEntry<T>> curFormNavigatorEntries =
 				(List)_instance._formNavigatorEntries.getService(
 					_getKey(formNavigatorId, formNavigatorCategory.getKey()));
 
-			if (ListUtil.isNotEmpty(curFormNavigatorEntries)) {
-				formNavigatorEntries.addAll(curFormNavigatorEntries);
-			}
+			formNavigatorEntries.addAll(curFormNavigatorEntries);
 		}
 
 		return filterVisibleFormNavigatorEntries(
