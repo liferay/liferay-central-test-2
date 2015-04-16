@@ -196,7 +196,7 @@ public final class CommandLoggerHandler {
 		return element.equals(_commandElement);
 	}
 
-	private static int _btnLinkId = 0;
+	private static int _btnLinkId;
 	private static Element _commandElement;
 	private static LoggerElement _commandLoggerElement;
 	private static final LoggerElement _commandLogLoggerElement =
