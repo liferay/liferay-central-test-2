@@ -56,11 +56,7 @@ public class SiteRatingsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 				PortletRatingsDefinitionUtil.
 					getPortletRatingsDefinitionValuesMap();
 
-		if (portletRatingsDefinitionValuesMap.isEmpty()) {
-			return false;
-		}
-
-		return true;
+		return !portletRatingsDefinitionValuesMap.isEmpty();
 	}
 
 	@Override
