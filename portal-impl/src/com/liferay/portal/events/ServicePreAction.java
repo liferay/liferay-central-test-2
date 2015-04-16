@@ -1110,9 +1110,9 @@ public class ServicePreAction extends Action {
 			boolean hasViewStagingPermission = GroupPermissionUtil.contains(
 				permissionChecker, scopeGroup, ActionKeys.VIEW_STAGING);
 
-			if (!group.isControlPanel() && !group.isUserPersonalPanel() &&
-				!group.isUser() &&
-				!group.isUserGroup() && hasUpdateGroupPermission) {
+			if (!group.isControlPanel() && !group.isUser() &&
+				!group.isUserGroup() && !group.isUserPersonalPanel() &&
+				hasUpdateGroupPermission) {
 
 				themeDisplay.setShowSiteSettingsIcon(true);
 
