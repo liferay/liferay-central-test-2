@@ -88,38 +88,39 @@ public class SecureXMLFactoryProviderImplTest extends PowerMockito {
 
 		runXMLSecurityTest(
 			documentBuilderTestCase, _xmlBombBillionLaughsXML,
-			OutOfMemoryError.class, "Billion Laughs XML attack doesn't work!",
+			OutOfMemoryError.class, "Billion Laughs XML attack does not work.",
 			SAXParseException.class,
-			"Vulnerable to Billion Laughs XML attack!");
+			"Vulnerable to Billion Laughs XML attack.");
 		runXMLSecurityTest(
 			documentBuilderTestCase, _xmlBombQuadraticBlowupXML,
-			OutOfMemoryError.class, "Quadratic Blowup XML attack doesn't work!",
+			OutOfMemoryError.class,
+			"Quadratic Blowup XML attack does not work.",
 			SAXParseException.class,
-			"Vulnerable to Quadratic Blowup XML attack!");
+			"Vulnerable to Quadratic Blowup XML attack.");
 		runXMLSecurityTest(
 			documentBuilderTestCase, _xxeGeneralEntitiesXML1,
 			ConnectException.class,
-			"General Entities XXE attack using SYSTEM entity doesn't work!",
+			"General Entities XXE attack using SYSTEM entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to General Entities XXE attack using SYSTEM entity!");
+			"Vulnerable to General Entities XXE attack using SYSTEM entity.");
 		runXMLSecurityTest(
 			documentBuilderTestCase, _xxeGeneralEntitiesXML2,
 			ConnectException.class,
-			"General Entities XXE attack using PUBLIC entity doesn't work!",
+			"General Entities XXE attack using PUBLIC entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to General Entities XXE attack using PUBLIC entity!");
+			"Vulnerable to General Entities XXE attack using PUBLIC entity.");
 		runXMLSecurityTest(
 			documentBuilderTestCase, _xxeParameterEntitiesXML1,
 			ConnectException.class,
-			"Parameter Entities XXE using SYSTEM entity doesn't work!",
+			"Parameter Entities XXE using SYSTEM entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to Parameter Entities XXE using SYSTEM entity!");
+			"Vulnerable to Parameter Entities XXE using SYSTEM entity.");
 		runXMLSecurityTest(
 			documentBuilderTestCase, _xxeParameterEntitiesXML2,
 			ConnectException.class,
-			"Parameter Entities XXE attack using PUBLIC entity doesn't work!",
+			"Parameter Entities XXE attack using PUBLIC entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to Parameter Entities XXE attack using PUBLIC entity!");
+			"Vulnerable to Parameter Entities XXE attack using PUBLIC entity.");
 	}
 
 	@Test
@@ -141,35 +142,36 @@ public class SecureXMLFactoryProviderImplTest extends PowerMockito {
 
 		runXMLSecurityTest(
 			xmlInputFactoryTest, _xmlBombBillionLaughsXML,
-			OutOfMemoryError.class, "Billion Laughs XML attack doesn't work!",
-			null, "Vulnerable to Billion Laughs XML attack!");
+			OutOfMemoryError.class, "Billion Laughs XML attack does not work.",
+			null, "Vulnerable to Billion Laughs XML attack.");
 		runXMLSecurityTest(
 			xmlInputFactoryTest, _xmlBombQuadraticBlowupXML,
-			OutOfMemoryError.class, "Quadratic Blowup XML attack doesn't work!",
-			null, "Vulnerable to Quadratic Blowup XML attack!");
+			OutOfMemoryError.class,
+			"Quadratic Blowup XML attack does not work.", null,
+			"Vulnerable to Quadratic Blowup XML attack.");
 		runXMLSecurityTest(
 			xmlInputFactoryTest, _xxeGeneralEntitiesXML1,
 			ConnectException.class,
-			"General Entities XXE attack using SYSTEM entity doesn't work!",
+			"General Entities XXE attack using SYSTEM entity does not work.",
 			null,
-			"Vulnerable to General Entities XXE attack using SYSTEM entity!");
+			"Vulnerable to General Entities XXE attack using SYSTEM entity.");
 		runXMLSecurityTest(
 			xmlInputFactoryTest, _xxeGeneralEntitiesXML2,
 			ConnectException.class,
-			"General Entities XXE attack using PUBLIC entity doesn't work!",
+			"General Entities XXE attack using PUBLIC entity does not work.",
 			null,
-			"Vulnerable to  General Entities XXE attack using PUBLIC entity!");
+			"Vulnerable to  General Entities XXE attack using PUBLIC entity.");
 		runXMLSecurityTest(
 			xmlInputFactoryTest, _xxeParameterEntitiesXML1,
 			ConnectException.class,
-			"Parameter Entities XXE using SYSTEM entity doesn't work!", null,
-			"Vulnerable to Parameter Entities XXE using SYSTEM entity!");
+			"Parameter Entities XXE using SYSTEM entity does not work.", null,
+			"Vulnerable to Parameter Entities XXE using SYSTEM entity.");
 		runXMLSecurityTest(
 			xmlInputFactoryTest, _xxeParameterEntitiesXML2,
 			ConnectException.class,
-			"Parameter Entities XXE attack using PUBLIC entity doesn't work!",
+			"Parameter Entities XXE attack using PUBLIC entity does not work.",
 			null,
-			"Vulnerable to Parameter Entities XXE attack using PUBLIC entity!");
+			"Vulnerable to Parameter Entities XXE attack using PUBLIC entity.");
 	}
 
 	@Test
@@ -211,33 +213,33 @@ public class SecureXMLFactoryProviderImplTest extends PowerMockito {
 
 		runXMLSecurityTest(
 			xmlReaderTest, _xmlBombBillionLaughsXML, OutOfMemoryError.class,
-			"Billion Laughs XML attack doesn't work!", SAXParseException.class,
-			"Vulnerable to Billion Laughs XML attack!");
+			"Billion Laughs XML attack does not work.", SAXParseException.class,
+			"Vulnerable to Billion Laughs XML attack.");
 		runXMLSecurityTest(
 			xmlReaderTest, _xmlBombQuadraticBlowupXML, OutOfMemoryError.class,
-			"Quadratic Blowup XML attack doesn't work!",
+			"Quadratic Blowup XML attack does not work.",
 			SAXParseException.class,
-			"Vulnerable to Quadratic Blowup XML attack!");
+			"Vulnerable to Quadratic Blowup XML attack.");
 		runXMLSecurityTest(
 			xmlReaderTest, _xxeGeneralEntitiesXML1, ConnectException.class,
-			"General Entities XXE attack using SYSTEM entity doesn't work!",
+			"General Entities XXE attack using SYSTEM entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to General Entities XXE attack using SYSTEM entity!");
+			"Vulnerable to General Entities XXE attack using SYSTEM entity.");
 		runXMLSecurityTest(
 			xmlReaderTest, _xxeGeneralEntitiesXML2, ConnectException.class,
-			"General Entities XXE attack using PUBLIC entity doesn't work!",
+			"General Entities XXE attack using PUBLIC entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to General Entities XXE attack using PUBLIC entity!");
+			"Vulnerable to General Entities XXE attack using PUBLIC entity.");
 		runXMLSecurityTest(
 			xmlReaderTest, _xxeParameterEntitiesXML1, ConnectException.class,
-			"Parameter Entities XXE using SYSTEM entity doesn't work!",
+			"Parameter Entities XXE using SYSTEM entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to Parameter Entities XXE using SYSTEM entity!");
+			"Vulnerable to Parameter Entities XXE using SYSTEM entity.");
 		runXMLSecurityTest(
 			xmlReaderTest, _xxeParameterEntitiesXML2, ConnectException.class,
-			"Parameter Entities XXE attack using PUBLIC entity doesn't work!",
+			"Parameter Entities XXE attack using PUBLIC entity does not work.",
 			SAXParseException.class,
-			"Vulnerable to Parameter Entities XXE attack using PUBLIC entity!");
+			"Vulnerable to Parameter Entities XXE attack using PUBLIC entity.");
 	}
 
 	protected static String readDependency(String name) throws IOException {
