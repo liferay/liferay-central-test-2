@@ -499,10 +499,15 @@ public class ServiceComponentLocalServiceImpl
 
 			Class<?> modelClass = Class.forName(name, true, classLoader);
 
-			Field tableNameField = modelClass.getField("TABLE_NAME");
-			Field tableColumnsField = modelClass.getField("TABLE_COLUMNS");
-			Field tableSQLCreateField = modelClass.getField("TABLE_SQL_CREATE");
 			Field dataSourceField = modelClass.getField("DATA_SOURCE");
+
+			String dataSource = (String)dataSourceField.get(null);
+
+			if (!dataSource.equals(_DATA_SOURCE_DEFAULT)) {
+				continue;
+			}
+
+			Field tableNameField = modelClass.getField("TABLE_NAME");
 
 			String tableName = (String)tableNameField.get(null);
 
@@ -510,19 +515,19 @@ public class ServiceComponentLocalServiceImpl
 				continue;
 			}
 
-			Object[][] tableColumns = (Object[][])tableColumnsField.get(null);
-			String tableSQLCreate = (String)tableSQLCreateField.get(null);
-			String dataSource = (String)dataSourceField.get(null);
+			Field tableColumnsField = modelClass.getField("TABLE_COLUMNS");
 
-			if (!dataSource.equals(_DATA_SOURCE_DEFAULT)) {
-				continue;
-			}
+			Object[][] tableColumns = (Object[][])tableColumnsField.get(null);
 
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				tableName, tableColumns);
 
 			UpgradeTableListener upgradeTableListener = getUpgradeTableListener(
 				classLoader, modelClass);
+
+			Field tableSQLCreateField = modelClass.getField("TABLE_SQL_CREATE");
+
+			String tableSQLCreate = (String)tableSQLCreateField.get(null);
 
 			upgradeTable.setCreateSQL(tableSQLCreate);
 
