@@ -2910,8 +2910,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		fileNames.addAll(getFileNames(excludes, includes));
 
 		excludes = new String[] {
-			"**\\JavaDocFormatter.java", "**\\portal-client\\**",
-			"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
+			"**\\portal-client\\**", "**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
 			"**\\test\\**\\*PersistenceTest.java",
 			"**\\tools\\sourceformatter\\**"
 		};
