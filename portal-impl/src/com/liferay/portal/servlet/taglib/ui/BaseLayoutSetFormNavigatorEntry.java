@@ -14,6 +14,7 @@
 
 package com.liferay.portal.servlet.taglib.ui;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
@@ -40,6 +41,8 @@ public abstract class BaseLayoutSetFormNavigatorEntry
 	public abstract String getKey();
 
 	@Override
-	public abstract String getLabel(Locale locale);
+	public String getLabel(Locale locale) {
+		return LanguageUtil.get(locale, getKey());
+	}
 
 }

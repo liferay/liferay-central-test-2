@@ -14,10 +14,7 @@
 
 package com.liferay.portal.servlet.taglib.ui;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
-
-import java.util.Locale;
 
 /**
  * @author Sergio González
@@ -29,11 +26,6 @@ public class LayoutSetLookAndFeelFormNavigatorEntry
 	@Override
 	public String getKey() {
 		return "look-and-feel";
-	}
-
-	@Override
-	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "look-and-feel");
 	}
 
 	@Override

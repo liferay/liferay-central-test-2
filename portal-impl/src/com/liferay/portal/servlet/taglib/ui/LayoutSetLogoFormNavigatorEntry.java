@@ -15,7 +15,6 @@
 package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
@@ -23,8 +22,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-
-import java.util.Locale;
 
 /**
  * @author Sergio González
@@ -36,11 +33,6 @@ public class LayoutSetLogoFormNavigatorEntry
 	@Override
 	public String getKey() {
 		return "logo";
-	}
-
-	@Override
-	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "logo");
 	}
 
 	@Override
