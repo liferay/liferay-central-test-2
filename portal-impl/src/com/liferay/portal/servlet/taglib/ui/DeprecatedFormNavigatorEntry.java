@@ -59,7 +59,7 @@ public class DeprecatedFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return _jspPath + _key + ".jsp";
+		return _jspPath;
 	}
 
 	private final String _categoryKey;
