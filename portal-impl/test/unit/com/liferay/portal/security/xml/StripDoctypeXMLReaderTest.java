@@ -37,9 +37,9 @@ public class StripDoctypeXMLReaderTest {
 
 			InputStream is = new ByteArrayInputStream(xml.getBytes());
 
-			StripDoctypeFilter filter = new StripDoctypeFilter(is);
+			StripDoctypeFilter stripDoctypeFilter = new StripDoctypeFilter(is);
 
-			int length = filter.read(buff, 0, buff.length);
+			int length = stripDoctypeFilter.read(buff, 0, buff.length);
 
 			String result = new String(buff, 0, length);
 
@@ -56,9 +56,10 @@ public class StripDoctypeXMLReaderTest {
 
 			Reader reader = new StringReader(xml);
 
-			StripDoctypeFilter filter = new StripDoctypeFilter(reader);
+			StripDoctypeFilter stripDoctypeFilter = new StripDoctypeFilter(
+				reader);
 
-			int length = filter.read(chars, 0, chars.length);
+			int length = stripDoctypeFilter.read(chars, 0, chars.length);
 
 			String result = new String(chars, 0, length);
 
