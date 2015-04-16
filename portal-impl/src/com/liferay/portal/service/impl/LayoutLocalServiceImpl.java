@@ -1015,19 +1015,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
+			PortletExporter portletExporter = PortletExporter.getInstance();
+
 			Map<String, Serializable> settingsMap =
 				exportImportConfiguration.getSettingsMap();
 
+			long sourcePlid = MapUtil.getLong(settingsMap, "sourcePlid");
+			long sourceGroupId = MapUtil.getLong(settingsMap, "sourceGroupId");
 			String portletId = MapUtil.getString(settingsMap, "portletId");
 			Map<String, String[]> parameterMap =
 				(Map<String, String[]>)settingsMap.get("parameterMap");
-
-			long sourcePlid = MapUtil.getLong(settingsMap, "sourcePlid");
-			long sourceGroupId = MapUtil.getLong(settingsMap, "sourceGroupId");
 			DateRange dateRange = ExportImportDateUtil.getDateRange(
 				exportImportConfiguration);
-
-			PortletExporter portletExporter = PortletExporter.getInstance();
 
 			return portletExporter.exportPortletInfoAsFile(
 				sourcePlid, sourceGroupId, portletId, parameterMap,
@@ -2039,6 +2038,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
+			PortletImporter portletImporter = PortletImporter.getInstance();
+
 			Map<String, Serializable> settingsMap =
 				exportImportConfiguration.getSettingsMap();
 
@@ -2048,8 +2049,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String portletId = MapUtil.getString(settingsMap, "portletId");
 			Map<String, String[]> parameterMap =
 				(Map<String, String[]>)settingsMap.get("parameterMap");
-
-			PortletImporter portletImporter = PortletImporter.getInstance();
 
 			portletImporter.importPortletDataDeletions(
 				userId, targetPlid, targetGroupId, portletId, parameterMap,
@@ -2078,6 +2077,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
+			PortletImporter portletImporter = PortletImporter.getInstance();
+
 			Map<String, Serializable> settingsMap =
 				exportImportConfiguration.getSettingsMap();
 
@@ -2087,8 +2088,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String portletId = MapUtil.getString(settingsMap, "portletId");
 			Map<String, String[]> parameterMap =
 				(Map<String, String[]>)settingsMap.get("parameterMap");
-
-			PortletImporter portletImporter = PortletImporter.getInstance();
 
 			portletImporter.importPortletInfo(
 				userId, targetPlid, targetGroupId, portletId, parameterMap,
@@ -3375,6 +3374,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
+			PortletImporter portletImporter = PortletImporter.getInstance();
+
 			Map<String, Serializable> settingsMap =
 				exportImportConfiguration.getSettingsMap();
 
@@ -3384,8 +3385,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String portletId = MapUtil.getString(settingsMap, "portletId");
 			Map<String, String[]> parameterMap =
 				(Map<String, String[]>)settingsMap.get("parameterMap");
-
-			PortletImporter portletImporter = PortletImporter.getInstance();
 
 			return portletImporter.validateFile(
 				userId, targetPlid, targetGroupId, portletId, parameterMap,

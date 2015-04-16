@@ -292,9 +292,9 @@ public abstract class BasePortletExportImportTestCase
 			Map<String, String[]> importParameterMap)
 		throws Exception {
 
-		MapUtil.merge(getExportParameterMap(), exportParameterMap);
-
 		User user = TestPropsValues.getUser();
+
+		MapUtil.merge(getExportParameterMap(), exportParameterMap);
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildExportSettingsMap(
