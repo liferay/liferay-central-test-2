@@ -30,14 +30,14 @@
 			<not>
 				<uptodate
 					srcfile="${third.party.dir}/${alloy.file}"
-					targetfile="tmp/aui"
+					targetfile="tmp/META-INF/resources/html/js/aui"
 				/>
 			</not>
 			<then>
 
 				<!-- Prepare -->
 
-				<delete dir="tmp/aui" />
+				<delete dir="tmp/META-INF/resources/html/js/aui" />
 
 				<echo>${alloy.file}</echo>
 
@@ -113,13 +113,13 @@
 
  				<copy
 					file="${alloy.temp.dir}/aui_deprecated.css"
-					tofile="tmp/aui/aui_deprecated.css"
+					tofile="tmp/META-INF/resources/html/js/aui/aui_deprecated.css"
 					overwrite="true"
 				/>
 
 				<!-- JavaScript -->
 
-				<copy todir="tmp/aui" overwrite="true" preservelastmodified="true">
+				<copy todir="tmp/META-INF/resources/html/js/aui" overwrite="true" preservelastmodified="true">
 					<fileset dir="${alloy.build.dir}/" />
 				</copy>
 
@@ -145,28 +145,28 @@
 			<not>
 				<uptodate
 					srcfile="${third.party.dir}/${alloyeditor.file}"
-					targetfile="tmp/editor/alloyeditor"
+					targetfile="tmp/META-INF/resources/html/js/editor/alloyeditor"
 				/>
 			</not>
 			<then>
-				<delete dir="tmp/editor/alloyeditor" />
+				<delete dir="tmp/META-INF/resources/html/js/editor/alloyeditor" />
 
 				<echo>${alloyeditor.file}</echo>
 
-				<unzip src="${third.party.dir}/${alloyeditor.file}" dest="tmp/editor/_tmp" />
+				<unzip src="${third.party.dir}/${alloyeditor.file}" dest="tmp/META-INF/resources/html/js/editor/_tmp" />
 
-				<copy todir="tmp/editor/alloyeditor" overwrite="true" preservelastmodified="true">
-					<fileset dir="tmp/editor/_tmp/alloy-editor-${alloyeditor.version}/alloy-editor" />
+				<copy todir="tmp/META-INF/resources/html/js/editor/alloyeditor" overwrite="true" preservelastmodified="true">
+					<fileset dir="tmp/META-INF/resources/html/js/editor/_tmp/alloy-editor-${alloyeditor.version}/alloy-editor" />
 				</copy>
 
-				<copy todir="tmp/editor/alloyeditor" overwrite="true" preservelastmodified="true">
+				<copy todir="tmp/META-INF/resources/html/js/editor/alloyeditor" overwrite="true" preservelastmodified="true">
 					<fileset dir="${html.js.dir}/editor/alloyeditor_diffs" />
 				</copy>
 
-				<delete dir="tmp/editor/_tmp" />
+				<delete dir="tmp/META-INF/resources/html/js/editor/_tmp" />
 			</then>
 			<else>
-				<copy todir="tmp/editor/alloyeditor" preservelastmodified="true">
+				<copy todir="tmp/META-INF/resources/html/js/editor/alloyeditor" preservelastmodified="true">
 					<fileset dir="${html.js.dir}/editor/alloyeditor_diffs" />
 				</copy>
 			</else>
@@ -178,15 +178,15 @@
 			<not>
 				<uptodate
 					srcfile="${third.party.dir}/${ckeditor.file}"
-					targetfile="tmp/editor/ckeditor"
+					targetfile="tmp/META-INF/resources/html/js/editor/ckeditor"
 				/>
 			</not>
 			<then>
-				<delete dir="tmp/editor/ckeditor" />
+				<delete dir="tmp/META-INF/resources/html/js/editor/ckeditor" />
 
-				<unzip src="${third.party.dir}/${ckeditor.file}" dest="tmp/editor" />
+				<unzip src="${third.party.dir}/${ckeditor.file}" dest="tmp/META-INF/resources/html/js/editor" />
 
-				<copy todir="tmp/editor/ckeditor" overwrite="true" preservelastmodified="true">
+				<copy todir="tmp/META-INF/resources/html/js/editor/ckeditor" overwrite="true" preservelastmodified="true">
 					<fileset dir="${html.js.dir}/editor/ckeditor_diffs" />
 				</copy>
 
@@ -195,7 +195,7 @@
 				<antcall target="build-ckeditor-plugins-wsc" />
 			</then>
 			<else>
-				<copy todir="tmp/editor/ckeditor" preservelastmodified="true">
+				<copy todir="tmp/META-INF/resources/html/js/editor/ckeditor" preservelastmodified="true">
 					<fileset dir="${html.js.dir}/editor/ckeditor_diffs" />
 				</copy>
 			</else>
@@ -225,7 +225,7 @@
 		</if>
 
 		<unzip
-			dest="tmp/editor/ckeditor/plugins"
+			dest="tmp/META-INF/resources/html/js/editor/ckeditor/plugins"
 			src="${third.party.dir}/${scayt.file}"
 		/>
 	</target>
@@ -244,7 +244,7 @@
 		</if>
 
 		<unzip
-			dest="tmp/editor/ckeditor/plugins"
+			dest="tmp/META-INF/resources/html/js/editor/ckeditor/plugins"
 			src="${third.party.dir}/${wsc.file}"
 		/>
 	</target>
@@ -254,26 +254,26 @@
 			<not>
 				<uptodate
 					srcfile="${third.party.dir}/${tinymce.file}"
-					targetfile="tmp/editor/tiny_mce"
+					targetfile="tmp/META-INF/resources/html/js/editor/tiny_mce"
 				/>
 			</not>
 			<then>
-				<delete dir="tmp/editor/tiny_mce" />
-				<delete dir="tmp/editor/tinymce" />
+				<delete dir="tmp/META-INF/resources/html/js/editor/tiny_mce" />
+				<delete dir="tmp/META-INF/resources/html/js/editor/tinymce" />
 
-				<unzip src="${third.party.dir}/${tinymce.file}" dest="tmp/editor" />
+				<unzip src="${third.party.dir}/${tinymce.file}" dest="tmp/META-INF/resources/html/js/editor" />
 
-				<move todir="tmp/editor/tiny_mce" preservelastmodified="true">
-					<fileset dir="tmp/editor/tinymce/js/tinymce">
+				<move todir="tmp/META-INF/resources/html/js/editor/tiny_mce" preservelastmodified="true">
+					<fileset dir="tmp/META-INF/resources/html/js/editor/tinymce/js/tinymce">
 						<include name="*/**" />
 					</fileset>
 				</move>
 
-				<copy todir="tmp/editor/tiny_mce" overwrite="true" preservelastmodified="true">
+				<copy todir="tmp/META-INF/resources/html/js/editor/tiny_mce" overwrite="true" preservelastmodified="true">
 					<fileset dir="${html.js.dir}/editor/tiny_mce_diffs" />
 				</copy>
 
-				<delete dir="tmp/editor/tinymce" />
+				<delete dir="tmp/META-INF/resources/html/js/editor/tinymce" />
 			</then>
 		</if>
 	</target>
