@@ -179,8 +179,8 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Sending message: " + message + " from destination: " +
-					getName() + " to messageListeners: " + messageListeners);
+				"Sending message " + message + " from destination " +
+					getName() + " to message listeners " + messageListeners);
 		}
 
 		dispatch(messageListeners, message);
