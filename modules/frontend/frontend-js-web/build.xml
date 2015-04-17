@@ -59,7 +59,7 @@
 					/>
 				</concat>
 
-				<for param="dir">
+				<for param="aui.dir">
 					<path>
 						<dirset
 							dir="${alloy.build.dir}"
@@ -67,24 +67,24 @@
 						/>
 					</path>
 					<sequential>
-						<basename property="dir.name" file="@{dir}" />
+						<basename property="aui.dir.name" file="@{aui.dir}" />
 
 						<if>
 							<and>
-								<available file="${alloy.build.dir}/${dir.name}/assets/skins/sam/${dir.name}.css" />
-								<matches pattern="-deprecated" string="${dir.name}" />
+								<available file="${alloy.build.dir}/${aui.dir.name}/assets/skins/sam/${aui.dir.name}.css" />
+								<matches pattern="-deprecated" string="${aui.dir.name}" />
 							</and>
 							<then>
 								<concat append="true" destfile="${alloy.temp.dir}/aui_deprecated.css">
 									<filelist
-										dir="${alloy.build.dir}/${dir.name}/assets/skins/sam"
-										files="${dir.name}.css"
+										dir="${alloy.build.dir}/${aui.dir.name}/assets/skins/sam"
+										files="${aui.dir.name}.css"
 									/>
 								</concat>
 							</then>
 						</if>
 
-						<var name="dir.name" unset="true" />
+						<var name="aui.dir.name" unset="true" />
 					</sequential>
 				</for>
 
@@ -163,20 +163,21 @@
 					<fileset dir="${html.js.dir}/editor/alloyeditor_diffs" />
 				</copy>
 
-				<for param="file">
+				<for param="alloy.editor.file">
 					<path>
 						<fileset dir="tmp/META-INF/resources/html/js/editor/alloyeditor" includes="alloy-editor*.js" />
 					</path>
 					<sequential>
-						<var name="filename" unset="true" />
-						<basename property="filename" file="@{file}" suffix=".js" />
+						<basename property="alloy.editor.file.name" file="@{alloy.editor.file}" suffix=".js" />
 
-						<concat destfile="tmp/META-INF/resources/html/js/editor/alloyeditor/liferay-${filename}.js">
-							<fileset file="@{file}" />
+						<concat destfile="tmp/META-INF/resources/html/js/editor/alloyeditor/liferay-${alloy.editor.file.name}.js">
+							<fileset file="@{alloy.editor.file}" />
 							<fileset dir="${html.js.dir}/editor/alloyeditor_diffs/buttons" >
 								<include name="**/*.js" />
 							</fileset>
 						</concat>
+
+						<var name="alloy.editor.file.name" unset="true" />
 					</sequential>
 				</for>
 
@@ -187,20 +188,21 @@
 					<fileset dir="${html.js.dir}/editor/alloyeditor_diffs" />
 				</copy>
 
-				<for param="file">
+				<for param="alloy.editor.file">
 					<path>
 						<fileset dir="tmp/META-INF/resources/html/js/editor/alloyeditor" includes="alloy-editor*.js" />
 					</path>
 					<sequential>
-						<var name="filename" unset="true" />
-						<basename property="filename" file="@{file}" suffix=".js" />
+						<basename property="alloy.editor.file.name" file="@{alloy.editor.file}" suffix=".js" />
 
-						<concat destfile="tmp/META-INF/resources/html/js/editor/alloyeditor/liferay-${filename}.js">
-							<fileset file="@{file}" />
+						<concat destfile="tmp/META-INF/resources/html/js/editor/alloyeditor/liferay-${alloy.editor.file.name}.js">
+							<fileset file="@{alloy.editor.file}" />
 							<fileset dir="${html.js.dir}/editor/alloyeditor_diffs/buttons" >
 								<include name="**/*.js" />
 							</fileset>
 						</concat>
+
+						<var name="alloy.editor.file.name" unset="true" />
 					</sequential>
 				</for>
 			</else>
