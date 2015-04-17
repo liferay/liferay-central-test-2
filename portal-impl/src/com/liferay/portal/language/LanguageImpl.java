@@ -931,13 +931,11 @@ public class LanguageImpl implements Language, Serializable {
 		Map<String, Locale> localesMap = _groupLanguageCodeLocalesMap.get(
 			groupId);
 
-		if (localesMap != null) {
-			return localesMap.get(languageCode);
+		if (localesMap == null) {
+			_initGroupLocales(groupId);
+
+			localesMap = _groupLanguageCodeLocalesMap.get(groupId);
 		}
-
-		_initGroupLocales(groupId);
-
-		localesMap = _groupLanguageCodeLocalesMap.get(groupId);
 
 		return localesMap.get(languageCode);
 	}
