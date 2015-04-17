@@ -87,7 +87,8 @@ public class DynamicQueryTest {
 
 		for (ClassName className : dynamicQueryClassNames) {
 			if (_existingClassNames.contains(className)) {
-				Assert.fail("Returned class name is invalid");
+				Assert.fail(
+					"Returned class name should not contain " + className);
 			}
 		}
 	}
