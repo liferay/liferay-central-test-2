@@ -39,15 +39,15 @@ public class GroupConstants {
 
 	public static final String GUEST = "Guest";
 
-	public static final String TYPE_SETTINGS_KEY_INHERIT_LOCALES =
-		"inheritLocales";
-
 	public static final int MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS = 1;
 
 	public static final String[] SYSTEM_GROUPS = {
 		CONTROL_PANEL, GUEST, GroupConstants.USER_PERSONAL_PANEL,
 		GroupConstants.USER_PERSONAL_SITE
 	};
+
+	public static final String TYPE_SETTINGS_KEY_INHERIT_LOCALES =
+		"inheritLocales";
 
 	public static final int TYPE_SITE_OPEN = 1;
 

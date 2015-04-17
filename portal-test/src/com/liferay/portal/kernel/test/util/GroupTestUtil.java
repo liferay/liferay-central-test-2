@@ -199,7 +199,8 @@ public class GroupTestUtil {
 		}
 
 		typeSettingsProperties.put(
-			GroupConstants.TYPE_SETTINGS_KEY_INHERIT_LOCALES, String.valueOf(inheritLocales));
+			GroupConstants.TYPE_SETTINGS_KEY_INHERIT_LOCALES,
+			String.valueOf(inheritLocales));
 
 		if (availableLocales != null) {
 			typeSettingsProperties.put(
