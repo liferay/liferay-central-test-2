@@ -68,13 +68,13 @@ public class DynamicQueryImpl implements DynamicQuery {
 		}
 
 		int start = QueryUtil.ALL_POS;
-		
+
 		if (_start != null) {
 			start = _start.intValue();
 		}
 
 		int end = QueryUtil.ALL_POS;
-		
+
 		if (_end != null) {
 			end = _end.intValue();
 		}
