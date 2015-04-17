@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <!DOCTYPE project>
 
 <project>
@@ -8,6 +7,7 @@
 	<property name="original.lib.name" value="bobo-browse" />
 	<property name="original.lib.url" value="http://search.maven.org/remotecontent?filepath=com/browseengine/bobo" />
 	<property name="original.lib.version" value="3.2.0" />
+
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
 	<property name="auto.deploy.dir" value="${liferay.home}/osgi/modules" />
