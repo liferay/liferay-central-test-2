@@ -46,14 +46,14 @@ public class DynamicQueryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_originalClassNames = ClassNameLocalServiceUtil.getClassNames(
+		_existingClassNames = ClassNameLocalServiceUtil.getClassNames(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		for (int i = 0; i < _TEST_BATCH_SIZE; i++) {
+		for (int i = 0; i < _BATCH_SIZE; i++) {
 			ClassName className = ClassNameLocalServiceUtil.addClassName(
 				RandomTestUtil.randomString());
 
-			_classNames.add(className);
+			_newClassNames.add(className);
 		}
 	}
 
@@ -61,14 +61,14 @@ public class DynamicQueryTest {
 	public void testLowerBound() throws Exception {
 		DynamicQuery dynamicQuery = ClassNameLocalServiceUtil.dynamicQuery();
 
-		dynamicQuery.setLimit(_originalClassNames.size(), QueryUtil.ALL_POS);
+		dynamicQuery.setLimit(_existingClassNames.size(), QueryUtil.ALL_POS);
 
 		List<ClassName> dynamicQueryClassNames =
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
 
-		Assert.assertEquals(_TEST_BATCH_SIZE, dynamicQueryClassNames.size());
+		Assert.assertEquals(_BATCH_SIZE, dynamicQueryClassNames.size());
 	}
 
 	@Test
@@ -76,18 +76,17 @@ public class DynamicQueryTest {
 		DynamicQuery dynamicQuery = ClassNameLocalServiceUtil.dynamicQuery();
 
 		dynamicQuery.setLimit(
-			_originalClassNames.size(),
-			_originalClassNames.size() + _TEST_BATCH_SIZE);
+			_existingClassNames.size(),
+			_existingClassNames.size() + _BATCH_SIZE);
 
 		List<ClassName> dynamicQueryClassNames =
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
-		Assert.assertEquals(_TEST_BATCH_SIZE, dynamicQueryClassNames.size());
+		Assert.assertEquals(_BATCH_SIZE, dynamicQueryClassNames.size());
 
 		for (ClassName className : dynamicQueryClassNames) {
-			if (_originalClassNames.contains(className)) {
+			if (_existingClassNames.contains(className)) {
 				Assert.fail("Returned class name is invalid");
 			}
 		}
@@ -103,7 +102,6 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(0, dynamicQueryClassNames.size());
 	}
 
@@ -117,9 +115,8 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(
-			_originalClassNames.size() + _TEST_BATCH_SIZE,
+			_existingClassNames.size() + _BATCH_SIZE,
 			dynamicQueryClassNames.size());
 	}
 
@@ -133,7 +130,6 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(0, dynamicQueryClassNames.size());
 	}
 
@@ -145,9 +141,8 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(
-			_originalClassNames.size() + _TEST_BATCH_SIZE,
+			_existingClassNames.size() + _BATCH_SIZE,
 			dynamicQueryClassNames.size());
 	}
 
@@ -161,7 +156,6 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(0, dynamicQueryClassNames.size());
 	}
 
@@ -175,7 +169,6 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(1, dynamicQueryClassNames.size());
 	}
 
@@ -189,7 +182,6 @@ public class DynamicQueryTest {
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
 		Assert.assertEquals(0, dynamicQueryClassNames.size());
 	}
 
@@ -197,21 +189,20 @@ public class DynamicQueryTest {
 	public void testUpperBound() throws Exception {
 		DynamicQuery dynamicQuery = ClassNameLocalServiceUtil.dynamicQuery();
 
-		dynamicQuery.setLimit(QueryUtil.ALL_POS, _TEST_BATCH_SIZE);
+		dynamicQuery.setLimit(QueryUtil.ALL_POS, _BATCH_SIZE);
 
 		List<ClassName> dynamicQueryClassNames =
 			ClassNameLocalServiceUtil.dynamicQuery(dynamicQuery);
 
 		Assert.assertNotNull(dynamicQueryClassNames);
-
-		Assert.assertEquals(_TEST_BATCH_SIZE, dynamicQueryClassNames.size());
+		Assert.assertEquals(_BATCH_SIZE, dynamicQueryClassNames.size());
 	}
 
-	private static final int _TEST_BATCH_SIZE = 50;
+	private static final int _BATCH_SIZE = 50;
 
 	@DeleteAfterTestRun
-	private final List<ClassName> _classNames = new ArrayList<>();
+	private final List<ClassName> _newClassNames = new ArrayList<>();
 
-	private List<ClassName> _originalClassNames = null;
+	private List<ClassName> _existingClassNames;
 
 }
