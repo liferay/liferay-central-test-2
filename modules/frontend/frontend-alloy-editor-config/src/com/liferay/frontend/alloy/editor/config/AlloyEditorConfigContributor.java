@@ -68,6 +68,8 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
 
 		jsonObject.put("language", languageId.replace("iw_", "he_"));
+		jsonObject.put(
+			"removePlugins", "toolbar,elementspath,resize,liststyle,link");
 
 		if (liferayPortletResponse != null) {
 			LiferayPortletURL documentSelectorURL =
@@ -122,9 +124,6 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 
 			jsonObject.put("srcNode", name);
 		}
-
-		jsonObject.put(
-			"removePlugins", "toolbar,elementspath,resize,liststyle,link");
 
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
