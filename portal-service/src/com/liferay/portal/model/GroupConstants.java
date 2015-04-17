@@ -39,7 +39,8 @@ public class GroupConstants {
 
 	public static final String GUEST = "Guest";
 
-	public static final String INHERIT_LOCALES = "inheritLocales";
+	public static final String TYPE_SETTINGS_KEY_INHERIT_LOCALES =
+		"inheritLocales";
 
 	public static final int MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS = 1;
 

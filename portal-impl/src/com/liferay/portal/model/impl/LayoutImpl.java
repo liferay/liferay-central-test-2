@@ -409,7 +409,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 			if (!GetterUtil.getBoolean(
 					typeSettingsProperties.getProperty(
-						GroupConstants.INHERIT_LOCALES),
+						GroupConstants.TYPE_SETTINGS_KEY_INHERIT_LOCALES),
 					true)) {
 
 				String[] locales = StringUtil.split(
