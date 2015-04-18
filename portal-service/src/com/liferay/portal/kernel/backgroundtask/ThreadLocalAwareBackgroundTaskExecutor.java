@@ -39,7 +39,7 @@ public class ThreadLocalAwareBackgroundTaskExecutor
 	public BackgroundTaskResult execute(BackgroundTask backgroundTask)
 		throws Exception {
 
-		Map<String, Serializable> currentThreadLocalValues =
+		Map<String, Serializable> threadLocalValues =
 			_backgroundTaskThreadLocalManager.getThreadLocalValues();
 
 		try {
@@ -50,7 +50,7 @@ public class ThreadLocalAwareBackgroundTaskExecutor
 		}
 		finally {
 			_backgroundTaskThreadLocalManager.setThreadLocalValues(
-				currentThreadLocalValues);
+				threadLocalValues);
 		}
 	}
 

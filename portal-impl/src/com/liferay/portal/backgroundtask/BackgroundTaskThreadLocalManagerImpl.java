@@ -47,7 +47,7 @@ public class BackgroundTaskThreadLocalManagerImpl
 
 		Map<String, Serializable> threadLocalValues =
 			(Map<String, Serializable>)taskContextMap.get(
-				_THREAD_LOCAL_VALUES_KEY);
+				_KEY_THREAD_LOCAL_VALUES);
 
 		setThreadLocalValues(threadLocalValues);
 	}
@@ -64,14 +64,10 @@ public class BackgroundTaskThreadLocalManagerImpl
 
 		threadLocalValues.put(
 			"defaultLocale", LocaleThreadLocal.getDefaultLocale());
-
 		threadLocalValues.put("groupId", GroupThreadLocal.getGroupId());
-
 		threadLocalValues.put("principalName", PrincipalThreadLocal.getName());
-
 		threadLocalValues.put(
 			"siteDefaultLocale", LocaleThreadLocal.getSiteDefaultLocale());
-
 		threadLocalValues.put(
 			"themeDisplayLocale", LocaleThreadLocal.getThemeDisplayLocale());
 
@@ -84,13 +80,13 @@ public class BackgroundTaskThreadLocalManagerImpl
 
 		HashMap<String, Serializable> taskContextThreadLocalValues =
 			(HashMap<String, Serializable>)taskContextMap.get(
-				_THREAD_LOCAL_VALUES_KEY);
+				_KEY_THREAD_LOCAL_VALUES);
 
 		if (taskContextThreadLocalValues == null) {
 			taskContextThreadLocalValues = new HashMap<>();
 
 			taskContextMap.put(
-				_THREAD_LOCAL_VALUES_KEY, taskContextThreadLocalValues);
+				_KEY_THREAD_LOCAL_VALUES, taskContextThreadLocalValues);
 		}
 
 		Map<String, Serializable> currentThreadLocalValues =
@@ -174,7 +170,7 @@ public class BackgroundTaskThreadLocalManagerImpl
 		}
 	}
 
-	private static final String _THREAD_LOCAL_VALUES_KEY = "threadLocalValues";
+	private static final String _KEY_THREAD_LOCAL_VALUES = "threadLocalValues";
 
 	private PermissionCheckerFactory _permissionCheckerFactory;
 
