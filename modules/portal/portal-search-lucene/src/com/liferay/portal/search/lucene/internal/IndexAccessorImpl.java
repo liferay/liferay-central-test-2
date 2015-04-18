@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.resiliency.spi.SPI;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.internal.configuration.LuceneConfiguration;
 import com.liferay.portal.search.lucene.internal.dump.DumpIndexDeletionPolicy;
 import com.liferay.portal.search.lucene.internal.dump.IndexCommitSerializationUtil;
@@ -192,23 +193,20 @@ public class IndexAccessorImpl implements IndexAccessor {
 			_log.debug("Lucene store type " + luceneConfiguration.storeType());
 		}
 
-		if (luceneConfiguration.storeType().equals(_LUCENE_STORE_TYPE_FILE)) {
+		String storeType = luceneConfiguration.storeType();
+
+		if (storeType.equals(_LUCENE_STORE_TYPE_FILE)) {
 			_directory = _getLuceneDirFile();
 		}
-		else if (luceneConfiguration.storeType().equals(
-					_LUCENE_STORE_TYPE_JDBC)) {
-
+		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
 			throw new IllegalArgumentException(
 				"Store type JDBC is no longer supported in favor of SOLR");
 		}
-		else if (luceneConfiguration.storeType().equals(
-					_LUCENE_STORE_TYPE_RAM)) {
-
+		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
 			_directory = new RAMDirectory();
 		}
 		else {
-			throw new RuntimeException(
-				"Invalid store type " + luceneConfiguration.storeType());
+			throw new RuntimeException("Invalid store type " + storeType);
 		}
 
 		return _directory;
@@ -340,20 +338,19 @@ public class IndexAccessorImpl implements IndexAccessor {
 			_log.debug("Lucene store type " + luceneConfiguration.storeType());
 		}
 
-		if (luceneConfiguration.storeType().equals(_LUCENE_STORE_TYPE_FILE) ||
-			luceneConfiguration.storeType().equals(_LUCENE_STORE_TYPE_RAM)) {
+		String storeType = luceneConfiguration.storeType();
+
+		if (storeType.equals(_LUCENE_STORE_TYPE_FILE) ||
+			storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
 
 			_deleteAll();
 		}
-		else if (luceneConfiguration.storeType().equals(
-					_LUCENE_STORE_TYPE_JDBC)) {
-
+		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
 			throw new IllegalArgumentException(
 				"Store type JDBC is no longer supported in favor of SOLR");
 		}
 		else {
-			throw new RuntimeException(
-				"Invalid store type " + luceneConfiguration.storeType());
+			throw new RuntimeException("Invalid store type " + storeType);
 		}
 	}
 
@@ -399,14 +396,17 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private MergePolicy _getMergePolicy() throws Exception {
-		if (luceneConfiguration.mergePolicy().equals(
+		if (Validator.equals(
+				luceneConfiguration.mergePolicy(),
 				NoMergePolicy.class.getName())) {
 
 			return NoMergePolicy.NO_COMPOUND_FILES;
 		}
 
+		Class<?> clazz = getClass();
+
 		MergePolicy mergePolicy = (MergePolicy)InstanceFactory.newInstance(
-			getClass().getClassLoader(), luceneConfiguration.mergePolicy());
+			clazz.getClassLoader(), luceneConfiguration.mergePolicy());
 
 		if (mergePolicy instanceof LogMergePolicy) {
 			LogMergePolicy logMergePolicy = (LogMergePolicy)mergePolicy;
@@ -418,7 +418,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private MergeScheduler _getMergeScheduler() throws Exception {
-		if (luceneConfiguration.mergeScheduler().equals(
+		if (Validator.equals(
+				luceneConfiguration.mergeScheduler(),
 				NoMergeScheduler.class.getName())) {
 
 			return NoMergeScheduler.INSTANCE;
