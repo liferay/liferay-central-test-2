@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
+WikiURLHelper wikiURLHelper = new WikiURLHelper(wikiRequestHelper, renderResponse, wikiGroupServiceConfiguration);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/wiki/view_nodes");
@@ -50,13 +52,7 @@ searchContainer.setResults(results);
 
 <liferay-ui:error exception="<%= RequiredNodeException.class %>" message="the-last-main-node-is-required-and-cannot-be-deleted" />
 
-<%
-WikiURLHelper wikiURLHelper = new WikiURLHelper(wikiRequestHelper, renderResponse, wikiGroupServiceConfiguration);
-
-PortletURL searchURL = wikiURLHelper.getSearchURL();
-%>
-
-<aui:form action="<%= searchURL %>" method="get" name="fm">
+<aui:form action="<%= wikiURLHelper.getSearchURL() %>" method="get" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
 	<%

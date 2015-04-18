@@ -76,17 +76,17 @@ public class RenderURLParamsTag extends TagSupport {
 			portletURL = (PortletURL)pageContext.getAttribute(varImpl);
 		}
 
-		String params = StringPool.BLANK;
+		String paramsString = StringPool.BLANK;
 
 		if (portletURL != null) {
-			params = _toParamsString(portletURL, pageContext);
+			paramsString = _toParamsString(portletURL, pageContext);
 
 			JspWriter jspWriter = pageContext.getOut();
 
-			jspWriter.write(params);
+			jspWriter.write(paramsString);
 		}
 
-		return params;
+		return paramsString;
 	}
 
 	private static String _toParamsString(
