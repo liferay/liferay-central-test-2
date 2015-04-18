@@ -234,10 +234,10 @@ public class PerFieldAnalyzer extends Analyzer
 	protected void initializeAnalyzers() {
 		_analyzer = new StandardAnalyzer(_version);
 
+		KeywordAnalyzer keywordAnalyzer = new KeywordAnalyzer();
 		LikeKeywordAnalyzer likeKeywordAnalyzer = new LikeKeywordAnalyzer();
 		UpperCaseKeywordAnalyzer upperCaseKeywordAnalyzer =
 			new UpperCaseKeywordAnalyzer();
-		KeywordAnalyzer keywordAnalyzer = new KeywordAnalyzer();
 
 		addAnalyzer("articleId", upperCaseKeywordAnalyzer);
 		addAnalyzer("assetCategoryTitles?(_.+)?", likeKeywordAnalyzer);
