@@ -21,10 +21,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.MockLuceneConfiguration;
 import com.liferay.portal.search.lucene.internal.analyzer.PerFieldAnalyzer;
 import com.liferay.portal.search.lucene.internal.dump.IndexCommitSerializationUtil;
+import com.liferay.portal.util.FastDateFormatFactoryImpl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -36,15 +36,12 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.util.Version;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.mockito.Mockito;
-
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
@@ -75,10 +72,6 @@ public class IndexAccessorImplTest {
 		ComponentContext mockComponentContext = Mockito.mock(
 			ComponentContext.class);
 
-		Dictionary<String, Object> properties = new HashMapDictionary<>();
-
-		properties.put("version", "LUCENE_35");
-
 		BundleContext bundleContext = Mockito.mock(BundleContext.class);
 
 		Mockito.when(
@@ -94,6 +87,10 @@ public class IndexAccessorImplTest {
 		).thenReturn(
 			bundleContext
 		);
+
+		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+		properties.put("version", "LUCENE_35");
 
 		Mockito.when(
 			mockComponentContext.getProperties()
@@ -111,12 +108,14 @@ public class IndexAccessorImplTest {
 			perFieldAnalyzer, Version.LUCENE_35, _TEST_COMPANY_ID);
 
 		FileUtil fileUtil = new FileUtil();
+
 		fileUtil.setFile(new com.liferay.portal.util.FileImpl());
 
 		FastDateFormatFactoryUtil fastDateFormatFactoryUtil =
 			new FastDateFormatFactoryUtil();
+
 		fastDateFormatFactoryUtil.setFastDateFormatFactory(
-			new com.liferay.portal.util.FastDateFormatFactoryImpl());
+			new FastDateFormatFactoryImpl());
 	}
 
 	@After
