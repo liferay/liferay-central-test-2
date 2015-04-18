@@ -79,8 +79,7 @@ public class VerifyUUIDTest extends BaseVerifyProcessTestCase {
 	@ExpectedLogs(
 		expectedLogs = {
 			@ExpectedLog(
-				expectedLog =
-					"Unable to process runnable: Table ",
+				expectedLog = "Unable to process runnable: Table ",
 				expectedType = ExpectedType.PREFIX
 			)
 		},
@@ -90,12 +89,13 @@ public class VerifyUUIDTest extends BaseVerifyProcessTestCase {
 	public void testVerifyParallelUnknownModelWithUnknownPKColumnName()
 		throws Exception {
 
-		int modelCount = PropsValues.VERIFY_PROCESS_CONCURRENCY_THRESHOLD;
-
 		VerifiableUUIDModel[] verifiableUUIDModels =
-			new VerifiableUUIDModel[modelCount];
+			new VerifiableUUIDModel[
+				PropsValues.VERIFY_PROCESS_CONCURRENCY_THRESHOLD];
 
-		for (int i = 0; i < modelCount; i++) {
+		for (int i = 0; i < PropsValues.VERIFY_PROCESS_CONCURRENCY_THRESHOLD;
+				i++) {
+
 			verifiableUUIDModels[i] = new VerifiableUUIDModel() {
 
 				@Override
