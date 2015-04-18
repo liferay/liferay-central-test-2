@@ -79,12 +79,6 @@ public class IndexAccessorImplTest {
 
 		properties.put("version", "LUCENE_35");
 
-		Mockito.when(
-			mockComponentContext.getProperties()
-		).thenReturn(
-			properties
-		);
-
 		BundleContext bundleContext = Mockito.mock(BundleContext.class);
 
 		Mockito.when(
