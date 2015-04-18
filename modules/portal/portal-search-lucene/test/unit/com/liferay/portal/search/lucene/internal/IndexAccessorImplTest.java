@@ -76,24 +76,36 @@ public class IndexAccessorImplTest {
 			ComponentContext.class);
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
+
 		properties.put("version", "LUCENE_35");
 
 		Mockito.when(
-			mockComponentContext.getProperties()).thenReturn(properties);
+			mockComponentContext.getProperties()
+		).thenReturn(
+			properties
+		);
 
 		BundleContext bundleContext = Mockito.mock(BundleContext.class);
 
 		Mockito.when(
 			bundleContext.registerService(
 				Version.class, Version.LUCENE_35,
-				new Hashtable<String, Object>())).thenReturn(
-			Mockito.mock(ServiceRegistration.class));
+				new Hashtable<String, Object>())
+		).thenReturn(
+			Mockito.mock(ServiceRegistration.class)
+		);
 
 		Mockito.when(
-			mockComponentContext.getBundleContext()).thenReturn(bundleContext);
+			mockComponentContext.getBundleContext()
+		).thenReturn(
+			bundleContext
+		);
 
 		Mockito.when(
-			mockComponentContext.getProperties()).thenReturn(properties);
+			mockComponentContext.getProperties()
+		).thenReturn(
+			properties
+		);
 
 		PerFieldAnalyzer perFieldAnalyzer = new PerFieldAnalyzer();
 
