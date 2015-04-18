@@ -16,6 +16,8 @@ package com.liferay.portal.search.lucene.internal.analyzer;
 
 import com.liferay.portal.kernel.util.HashMapDictionary;
 
+import java.util.Dictionary;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Fieldable;
 
@@ -36,7 +38,7 @@ public class PerFieldAnalyzerTest extends PowerMockito {
 	public void setUp() {
 		_perFieldAnalyzer = new PerFieldAnalyzer();
 
-		HashMapDictionary<String, Object> hashMapDictionary =
+		Dictionary<String, Object> hashMapDictionary =
 			new HashMapDictionary<>();
 
 		hashMapDictionary.put("version", "LUCENE_35");
