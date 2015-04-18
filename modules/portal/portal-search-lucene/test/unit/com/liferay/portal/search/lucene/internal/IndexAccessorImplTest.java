@@ -22,9 +22,11 @@ import com.liferay.portal.search.MockLuceneConfiguration;
 import com.liferay.portal.search.lucene.internal.analyzer.PerFieldAnalyzer;
 import com.liferay.portal.search.lucene.internal.dump.IndexCommitSerializationUtil;
 import com.liferay.portal.util.FastDateFormatFactoryImpl;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -36,12 +38,15 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.util.Version;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.mockito.Mockito;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
@@ -63,6 +68,16 @@ public class IndexAccessorImplTest {
 	@Before
 	public void setUp() throws Exception {
 		_documentsCount = 1;
+
+		FastDateFormatFactoryUtil fastDateFormatFactoryUtil =
+			new FastDateFormatFactoryUtil();
+
+		fastDateFormatFactoryUtil.setFastDateFormatFactory(
+			new FastDateFormatFactoryImpl());
+
+		FileUtil fileUtil = new FileUtil();
+
+		fileUtil.setFile(new FileImpl());
 
 		IndexAccessorImpl.luceneConfiguration = new MockLuceneConfiguration();
 
@@ -106,16 +121,6 @@ public class IndexAccessorImplTest {
 
 		_indexAccessorImpl = new IndexAccessorImpl(
 			perFieldAnalyzer, Version.LUCENE_35, _TEST_COMPANY_ID);
-
-		FileUtil fileUtil = new FileUtil();
-
-		fileUtil.setFile(new com.liferay.portal.util.FileImpl());
-
-		FastDateFormatFactoryUtil fastDateFormatFactoryUtil =
-			new FastDateFormatFactoryUtil();
-
-		fastDateFormatFactoryUtil.setFastDateFormatFactory(
-			new FastDateFormatFactoryImpl());
 	}
 
 	@After
