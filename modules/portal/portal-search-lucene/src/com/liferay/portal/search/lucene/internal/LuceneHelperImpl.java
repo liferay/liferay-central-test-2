@@ -451,6 +451,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		IndexAccessorImpl.luceneConfiguration = _luceneConfiguration;
 		IndexAccessorImpl.luceneHelper = this;
+
 		IndexCommitSerializationUtil.luceneConfiguration = _luceneConfiguration;
 	}
 
@@ -479,6 +480,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			LuceneConfiguration.class, properties);
 
 		IndexAccessorImpl.luceneConfiguration = _luceneConfiguration;
+
 		IndexCommitSerializationUtil.luceneConfiguration = _luceneConfiguration;
 	}
 
