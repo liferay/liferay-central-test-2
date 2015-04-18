@@ -69,16 +69,6 @@ public class IndexAccessorImplTest {
 	public void setUp() throws Exception {
 		_documentsCount = 1;
 
-		FastDateFormatFactoryUtil fastDateFormatFactoryUtil =
-			new FastDateFormatFactoryUtil();
-
-		fastDateFormatFactoryUtil.setFastDateFormatFactory(
-			new FastDateFormatFactoryImpl());
-
-		FileUtil fileUtil = new FileUtil();
-
-		fileUtil.setFile(new FileImpl());
-
 		IndexAccessorImpl.luceneConfiguration = new MockLuceneConfiguration();
 
 		IndexCommitSerializationUtil.luceneConfiguration =
@@ -121,6 +111,16 @@ public class IndexAccessorImplTest {
 
 		_indexAccessorImpl = new IndexAccessorImpl(
 			perFieldAnalyzer, Version.LUCENE_35, _TEST_COMPANY_ID);
+
+		FastDateFormatFactoryUtil fastDateFormatFactoryUtil =
+			new FastDateFormatFactoryUtil();
+
+		fastDateFormatFactoryUtil.setFastDateFormatFactory(
+			new FastDateFormatFactoryImpl());
+
+		FileUtil fileUtil = new FileUtil();
+
+		fileUtil.setFile(new FileImpl());
 	}
 
 	@After
