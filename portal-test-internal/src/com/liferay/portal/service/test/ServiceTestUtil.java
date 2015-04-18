@@ -250,6 +250,8 @@ public class ServiceTestUtil {
 
 		_deleteDirectories();
 
+		// Search engine
+
 		try {
 			SearchEngineUtil.initialize(TestPropsValues.getCompanyId());
 		}

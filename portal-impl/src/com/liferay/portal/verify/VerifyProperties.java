@@ -722,7 +722,7 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.ldap"
 		},
 
-		// Lucene Search Engine
+		// Lucene
 
 		new String[] {
 			"lucene.analyzer.max.tokens", "analyzer.max.tokens",
