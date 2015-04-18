@@ -81,7 +81,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Andrea Di Giorgi
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.ntlm.configuration.NtlmConfiguration",
+	configurationPid = "com.liferay.portal.search.lucene.internal.configuration.LuceneConfiguration",
 	immediate = true, service = LuceneHelper.class
 )
 public class LuceneHelperImpl implements LuceneHelper {
