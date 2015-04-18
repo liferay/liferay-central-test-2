@@ -2,7 +2,7 @@
 <!DOCTYPE project>
 
 <project>
-	<property name="osgi.ide.dependencies" value="commons-lang.jar" />
+	<property name="osgi.ide.dependencies" value="aspectj-rt.jar" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
