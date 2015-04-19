@@ -35,8 +35,6 @@ boolean createNewPage = true;
 
 WikiURLHelper wikiURLHelper = new WikiURLHelper(wikiRequestHelper, renderResponse, wikiGroupServiceConfiguration);
 
-PortletURL searchURL = wikiURLHelper.getSearchURL();
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/wiki/search");
@@ -45,8 +43,8 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 portletURL.setParameter("keywords", keywords);
 %>
 
-<aui:form action="<%= searchURL %>" method="get" name="fm">
-	<liferay-portlet:renderURLParams portletURL="<%= searchURL %>" />
+<aui:form action="<%= wikiURLHelper.getSearchURL() %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams portletURL="<%= wikiURLHelper.getSearchURL() %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
