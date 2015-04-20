@@ -123,8 +123,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 					NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME));
 		}
 
-		hibernatePortalCacheManager.setDefaultConfigFile(
-			_DEFAULT_CONFIG_FILE);
+		hibernatePortalCacheManager.setDefaultConfigFile(_DEFAULT_CONFIG_FILE);
 		hibernatePortalCacheManager.setMpiOnly(true);
 		hibernatePortalCacheManager.setName(PortalCacheManagerNames.HIBERNATE);
 
