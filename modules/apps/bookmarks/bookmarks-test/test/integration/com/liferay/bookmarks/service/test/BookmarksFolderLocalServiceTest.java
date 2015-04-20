@@ -150,11 +150,11 @@ public class BookmarksFolderLocalServiceTest {
 			SubscriptionLocalServiceUtil.getUserSubscriptionsCount(
 				TestPropsValues.getUserId()));
 
+		boolean exists = false;
+
 		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getUserSubscriptions(
 				TestPropsValues.getUserId(), BookmarksFolder.class.getName());
-
-		boolean exists = false;
 
 		for (Subscription subscription : subscriptions) {
 			if (subscription.getClassName().equals(
