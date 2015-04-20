@@ -37,7 +37,7 @@ import org.dom4j.Element;
  */
 public class PoshiRunnerContext {
 
-	public static void clearFiles() {
+	public static void clear() {
 		_actionExtendClassName.clear();
 		_commandElements.clear();
 		_commandSummaries.clear();

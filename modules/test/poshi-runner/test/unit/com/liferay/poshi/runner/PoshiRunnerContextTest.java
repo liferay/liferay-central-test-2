@@ -42,7 +42,7 @@ public class PoshiRunnerContextTest extends TestCase {
 	@After
 	@Override
 	public void tearDown() throws Exception {
-		PoshiRunnerContext.clearFiles();
+		PoshiRunnerContext.clear();
 	}
 
 	@Test
