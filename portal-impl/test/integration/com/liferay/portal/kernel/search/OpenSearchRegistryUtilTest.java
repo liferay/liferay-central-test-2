@@ -50,10 +50,10 @@ public class OpenSearchRegistryUtilTest {
 
 	@Test
 	public void testGetOpenSearchInstances() {
+		boolean exists = false;
+
 		List<OpenSearch> openSearches =
 			OpenSearchRegistryUtil.getOpenSearchInstances();
-
-		boolean exists = false;
 
 		for (OpenSearch openSearch : openSearches) {
 			String openSearchClassName = openSearch.getClassName();

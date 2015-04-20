@@ -43,7 +43,7 @@ public class ExportImportLifecycleEventListenerRegistryUtilTest {
 
 	@Test
 	public void testGetAsyncExportImportLifecycleListeners() {
-		boolean found = false;
+		boolean exists = false;
 
 		Set<ExportImportLifecycleListener> exportImportLifecycleListeners =
 			ExportImportLifecycleEventListenerRegistryUtil.
@@ -63,18 +63,18 @@ public class ExportImportLifecycleEventListenerRegistryUtilTest {
 			if (className.equals(
 					TestAsyncExportImportLifecycleListener.class.getName())) {
 
-				found = true;
+				exists = true;
 
 				break;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.assertTrue(exists);
 	}
 
 	@Test
 	public void testGetSyncExportImportLifecycleListeners() {
-		boolean found = false;
+		boolean exists = false;
 
 		Set<ExportImportLifecycleListener> exportImportLifecycleListeners =
 			ExportImportLifecycleEventListenerRegistryUtil.
@@ -94,13 +94,13 @@ public class ExportImportLifecycleEventListenerRegistryUtilTest {
 			if (className.equals(
 					TestSyncExportImportLifecycleListener.class.getName())) {
 
-				found = true;
+				exists = true;
 
 				break;
 			}
 		}
 
-		Assert.assertTrue(found);
+		Assert.assertTrue(exists);
 	}
 
 }
