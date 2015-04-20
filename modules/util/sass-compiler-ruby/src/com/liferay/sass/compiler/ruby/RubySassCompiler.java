@@ -52,21 +52,6 @@ public class RubySassCompiler implements AutoCloseable {
 			int compilerThreshold)
 		throws Exception {
 
-		List<String> loadPaths = new ArrayList<>();
-
-		loadPaths.add("META-INF/jruby.home/lib/ruby/site_ruby/1.8");
-		loadPaths.add("META-INF/jruby.home/lib/ruby/site_ruby/shared");
-		loadPaths.add("META-INF/jruby.home/lib/ruby/1.8");
-		loadPaths.add("gems/chunky_png-1.3.4/lib");
-		loadPaths.add("gems/compass-1.0.1/lib");
-		loadPaths.add("gems/compass-core-1.0.3/lib");
-		loadPaths.add("gems/compass-import-once-1.0.5/lib");
-		loadPaths.add("gems/ffi-1.9.6-java/lib");
-		loadPaths.add("gems/multi_json-1.10.1/lib");
-		loadPaths.add("gems/rb-fsevent-0.9.4/lib");
-		loadPaths.add("gems/rb-inotify-0.9.5/lib");
-		loadPaths.add("gems/sass-3.4.13/lib");
-
 		_scriptingContainer = new ScriptingContainer(
 			LocalContextScope.THREADSAFE);
 
@@ -85,7 +70,23 @@ public class RubySassCompiler implements AutoCloseable {
 				RubyInstanceConfig.CompileMode.JIT);
 		}
 
+		List<String> loadPaths = new ArrayList<>();
+
+		loadPaths.add("META-INF/jruby.home/lib/ruby/site_ruby/1.8");
+		loadPaths.add("META-INF/jruby.home/lib/ruby/site_ruby/shared");
+		loadPaths.add("META-INF/jruby.home/lib/ruby/1.8");
+		loadPaths.add("gems/chunky_png-1.3.4/lib");
+		loadPaths.add("gems/compass-1.0.1/lib");
+		loadPaths.add("gems/compass-core-1.0.3/lib");
+		loadPaths.add("gems/compass-import-once-1.0.5/lib");
+		loadPaths.add("gems/ffi-1.9.6-java/lib");
+		loadPaths.add("gems/multi_json-1.10.1/lib");
+		loadPaths.add("gems/rb-fsevent-0.9.4/lib");
+		loadPaths.add("gems/rb-inotify-0.9.5/lib");
+		loadPaths.add("gems/sass-3.4.13/lib");
+
 		rubyInstanceConfig.setLoadPaths(loadPaths);
+
 		rubyInstanceConfig.setJitThreshold(compilerThreshold);
 
 		ClassLoader classLoader = getClass().getClassLoader();
