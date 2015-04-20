@@ -28,6 +28,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 
+import java.security.cert.X509Certificate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -392,7 +394,16 @@ public class Session {
 		SSLContextBuilder sslContextBuilder = SSLContexts.custom();
 
 		sslContextBuilder.loadTrustMaterial(
-			null, new TrustSelfSignedStrategy());
+			new TrustSelfSignedStrategy() {
+
+				@Override
+				public boolean isTrusted(
+					X509Certificate[] chain, String authType) {
+
+					return true;
+				}
+
+			});
 
 		return new SSLConnectionSocketFactory(
 			sslContextBuilder.build(), new NoopHostnameVerifier());
