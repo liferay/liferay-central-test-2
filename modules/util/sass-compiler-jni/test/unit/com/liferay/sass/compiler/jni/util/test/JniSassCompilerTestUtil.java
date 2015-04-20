@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * @author Gregory Amerson
  */
-public class SassTestUtil {
+public class JniSassCompilerTestUtil {
 
 	public static void addSearchPath() throws IOException {
 		NativeLibrary.addSearchPath("liferaysass", _getResourcesPath());

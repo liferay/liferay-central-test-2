@@ -15,7 +15,7 @@
 package com.liferay.sass.compiler.jni.libsass;
 
 import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary.Sass_File_Context;
-import com.liferay.sass.compiler.jni.util.test.SassTestUtil;
+import com.liferay.sass.compiler.jni.util.test.JniSassCompilerTestUtil;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class LiferaysassLibraryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		SassTestUtil.addSearchPath();
+		JniSassCompilerTestUtil.addSearchPath();
 	}
 
 	@Test

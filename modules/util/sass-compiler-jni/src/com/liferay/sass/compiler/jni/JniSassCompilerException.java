@@ -17,20 +17,20 @@ package com.liferay.sass.compiler.jni;
 /**
  * @author Gregory Amerson
  */
-public class SassCompilerException extends Exception {
+public class JniSassCompilerException extends Exception {
 
-	public SassCompilerException() {
+	public JniSassCompilerException() {
 	}
 
-	public SassCompilerException(String message) {
+	public JniSassCompilerException(String message) {
 		super(message);
 	}
 
-	public SassCompilerException(String message, Throwable throwable) {
+	public JniSassCompilerException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
 
-	public SassCompilerException(Throwable throwable) {
+	public JniSassCompilerException(Throwable throwable) {
 		super(throwable);
 	}
 

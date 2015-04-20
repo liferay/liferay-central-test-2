@@ -33,22 +33,22 @@ import java.io.Writer;
 /**
  * @author Gregory Amerson
  */
-public class SassCompiler {
+public class JniSassCompiler {
 
 	public static void main(String[] args) {
 		try {
-			new SassCompiler(args);
+			new JniSassCompiler(args);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public SassCompiler() {
+	public JniSassCompiler() {
 	}
 
-	public SassCompiler(String[] fileNames) throws Exception {
-		final SassCompiler sassCompiler = new SassCompiler();
+	public JniSassCompiler(String[] fileNames) throws Exception {
+		final JniSassCompiler sassCompiler = new JniSassCompiler();
 
 		for (String fileName : fileNames) {
 			File file = new File(fileName);
@@ -65,7 +65,7 @@ public class SassCompiler {
 
 	public String compileFile(
 			String inputFile, String includePath, String imgPath)
-		throws SassCompilerException {
+		throws JniSassCompilerException {
 
 		// NONE((byte)0), DEFAULT((byte)1), MAP((byte)2);
 
@@ -111,14 +111,14 @@ public class SassCompiler {
 					_liferaysassLibrary.sass_context_get_error_message(
 						sassContext);
 
-				throw new SassCompilerException(errorMessage);
+				throw new JniSassCompilerException(errorMessage);
 			}
 
 			String output = _liferaysassLibrary.sass_context_get_output_string(
 				sassContext);
 
 			if (output == null) {
-				throw new SassCompilerException("Null output");
+				throw new JniSassCompilerException("Null output");
 			}
 
 			return output;
@@ -131,7 +131,7 @@ public class SassCompiler {
 				}
 			}
 			catch (Throwable t) {
-				throw new SassCompilerException(t);
+				throw new JniSassCompilerException(t);
 			}
 		}
 	}
@@ -139,7 +139,7 @@ public class SassCompiler {
 	@SuppressWarnings("deprecation")
 	public String compileString(
 			String input, String includePath, String imgPath)
-		throws SassCompilerException {
+		throws JniSassCompilerException {
 
 		// NONE((byte)0), DEFAULT((byte)1), MAP((byte)2);
 
@@ -181,14 +181,14 @@ public class SassCompiler {
 					_liferaysassLibrary.sass_context_get_error_message(
 						sassContext);
 
-				throw new SassCompilerException(errorMessage);
+				throw new JniSassCompilerException(errorMessage);
 			}
 
 			String output = _liferaysassLibrary.sass_context_get_output_string(
 				sassContext);
 
 			if (output == null) {
-				throw new SassCompilerException("Null output");
+				throw new JniSassCompilerException("Null output");
 			}
 
 			return output;
@@ -201,7 +201,7 @@ public class SassCompiler {
 				}
 			}
 			catch (Throwable t) {
-				throw new SassCompilerException(t);
+				throw new JniSassCompilerException(t);
 			}
 		}
 	}

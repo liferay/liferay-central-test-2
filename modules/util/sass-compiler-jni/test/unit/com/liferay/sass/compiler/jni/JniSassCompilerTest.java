@@ -14,7 +14,7 @@
 
 package com.liferay.sass.compiler.jni;
 
-import com.liferay.sass.compiler.jni.util.test.SassTestUtil;
+import com.liferay.sass.compiler.jni.util.test.JniSassCompilerTestUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,16 +29,16 @@ import org.junit.Test;
 /**
  * @author Gregory Amerson
  */
-public class SassCompilerTest {
+public class JniSassCompilerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		SassTestUtil.addSearchPath();
+		JniSassCompilerTestUtil.addSearchPath();
 	}
 
 	@Test
 	public void testCompileFile() throws Exception {
-		SassCompiler sassCompiler = new SassCompiler();
+		JniSassCompiler sassCompiler = new JniSassCompiler();
 
 		Assert.assertNotNull(sassCompiler);
 
@@ -69,7 +69,7 @@ public class SassCompilerTest {
 
 	@Test
 	public void testCompileString() throws Exception {
-		SassCompiler sassCompiler = new SassCompiler();
+		JniSassCompiler sassCompiler = new JniSassCompiler();
 
 		Assert.assertNotNull(sassCompiler);
 
