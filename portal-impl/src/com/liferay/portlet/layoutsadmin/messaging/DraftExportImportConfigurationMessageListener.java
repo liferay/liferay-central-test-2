@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * @author Levente Hudák
  */
-public class DraftExportImportConfigurationsMessageListener
+public class DraftExportImportConfigurationMessageListener
 	extends BaseMessageListener {
 
 	@Override

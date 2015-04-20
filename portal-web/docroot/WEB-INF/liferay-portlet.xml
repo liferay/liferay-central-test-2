@@ -369,7 +369,7 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>layouts_admin</struts-path>
 		<scheduler-entry>
-			<scheduler-event-listener-class>com.liferay.portlet.layoutsadmin.messaging.DraftExportImportConfigurationsMessageListener</scheduler-event-listener-class>
+			<scheduler-event-listener-class>com.liferay.portlet.layoutsadmin.messaging.DraftExportImportConfigurationMessageListener</scheduler-event-listener-class>
 			<trigger>
 				<simple>
 					<property-key>staging.draft.export.import.configuration.check.interval</property-key>
