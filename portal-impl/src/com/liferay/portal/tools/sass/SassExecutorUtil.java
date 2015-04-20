@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.NamedThreadFactory;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
-import com.liferay.sass.compiler.SassCompiler;
+import com.liferay.sass.compiler.jni.SassCompiler;
 
 import java.io.File;
 import java.io.IOException;

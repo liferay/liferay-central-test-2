@@ -38,7 +38,7 @@ import com.liferay.portal.tools.SassToCssBuilder;
 import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.sass.compiler.SassCompiler;
+import com.liferay.sass.compiler.jni.SassCompiler;
 
 import java.io.File;
 
