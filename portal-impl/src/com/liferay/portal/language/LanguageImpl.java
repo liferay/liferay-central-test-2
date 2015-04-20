@@ -467,7 +467,7 @@ public class LanguageImpl implements Language, Serializable {
 		catch (Exception e) {
 		}
 
-		Set<Locale> localesSet = _groupLocalesSet.get(groupId);
+		Set<Locale> localesSet = _groupLocalesSetsMap.get(groupId);
 
 		if (localesSet != null) {
 			return localesSet;
@@ -475,7 +475,7 @@ public class LanguageImpl implements Language, Serializable {
 
 		_initGroupLocales(groupId);
 
-		return _groupLocalesSet.get(groupId);
+		return _groupLocalesSetsMap.get(groupId);
 	}
 
 	@Override
@@ -656,7 +656,7 @@ public class LanguageImpl implements Language, Serializable {
 		catch (Exception e) {
 		}
 
-		Set<Locale> localesSet = _groupLocalesSet.get(groupId);
+		Set<Locale> localesSet = _groupLocalesSetsMap.get(groupId);
 
 		if (localesSet != null) {
 			return localesSet.contains(locale);
@@ -664,7 +664,7 @@ public class LanguageImpl implements Language, Serializable {
 
 		_initGroupLocales(groupId);
 
-		localesSet = _groupLocalesSet.get(groupId);
+		localesSet = _groupLocalesSetsMap.get(groupId);
 
 		return localesSet.contains(locale);
 	}
@@ -970,12 +970,12 @@ public class LanguageImpl implements Language, Serializable {
 		}
 
 		_groupLanguageCodeLocalesMap.put(groupId, localesMap);
-		_groupLocalesSet.put(groupId, localesSet);
+		_groupLocalesSetsMap.put(groupId, localesSet);
 	}
 
 	private void _resetAvailableGroupLocales(long groupId) {
 		_groupLanguageCodeLocalesMap.remove(groupId);
-		_groupLocalesSet.remove(groupId);
+		_groupLocalesSetsMap.remove(groupId);
 	}
 
 	private void _resetAvailableLocales(long companyId) {
@@ -1011,7 +1011,7 @@ public class LanguageImpl implements Language, Serializable {
 	private final Set<String> _duplicateLanguageCodes;
 	private final Map<Long, Map<String, Locale>> _groupLanguageCodeLocalesMap =
 		new HashMap<>();
-	private final Map<Long, Set<Locale>> _groupLocalesSet = new HashMap<>();
+	private final Map<Long, Set<Locale>> _groupLocalesSetsMap = new HashMap<>();
 	private final Set<Locale> _localesBetaSet;
 	private final Map<String, Locale> _localesMap;
 	private final Set<Locale> _localesSet;
