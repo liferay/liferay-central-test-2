@@ -1246,7 +1246,7 @@ public class ServiceBuilder {
 
 			if (pos == -1) {
 				throw new ServiceBuilderException(
-					"Cannot find " + name + " in " +
+					"Uanble to find " + name + " in " +
 						ListUtil.toString(_ejbList, Entity.NAME_ACCESSOR));
 			}
 
