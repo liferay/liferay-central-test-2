@@ -38,10 +38,10 @@ public class DraftExportImportConfigurationsMessageListener
 
 	@Override
 	protected void doReceive(Message message) throws PortalException {
-		int draftExportImportConfigurationCleanupCount =
-			PropsValues.STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CLEANUP_COUNT;
+		if (PropsValues.
+				STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CLEAN_UP_COUNT ==
+					-1) {
 
-		if (draftExportImportConfigurationCleanupCount == -1) {
 			return;
 		}
 
@@ -57,7 +57,9 @@ public class DraftExportImportConfigurationsMessageListener
 		dynamicQuery.addOrder(order);
 
 		dynamicQuery.setLimit(
-			QueryUtil.ALL_POS, draftExportImportConfigurationCleanupCount);
+			QueryUtil.ALL_POS,
+			PropsValues.
+				STAGING_DRAFT_EXPORT_IMPORT_CONFIGURATION_CLEAN_UP_COUNT);
 
 		List<ExportImportConfiguration> exportImportConfigurations =
 			ExportImportConfigurationLocalServiceUtil.dynamicQuery(
