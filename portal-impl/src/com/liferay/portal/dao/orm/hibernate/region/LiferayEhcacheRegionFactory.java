@@ -124,7 +124,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		}
 
 		hibernatePortalCacheManager.setDefaultConfigFile(
-			_DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE);
+			_DEFAULT_CONFIG_FILE);
 		hibernatePortalCacheManager.setMpiOnly(true);
 		hibernatePortalCacheManager.setName(PortalCacheManagerNames.HIBERNATE);
 
@@ -169,7 +169,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		}
 	}
 
-	private static final String _DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE =
+	private static final String _DEFAULT_CONFIG_FILE =
 		"/ehcache/hibernate-clustered.xml";
 
 	private volatile PortalCacheManager<Serializable, Serializable>
