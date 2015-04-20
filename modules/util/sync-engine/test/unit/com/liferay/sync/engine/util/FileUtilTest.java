@@ -14,10 +14,6 @@
 
 package com.liferay.sync.engine.util;
 
-import com.liferay.sync.engine.util.FileUtil;
-import com.liferay.sync.engine.util.OSDetector;
-import com.liferay.sync.engine.util.PropsValues;
-
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
