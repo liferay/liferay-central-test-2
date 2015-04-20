@@ -1265,7 +1265,7 @@ public class ServiceBuilder {
 
 			if (pos == -1) {
 				throw new ServiceBuilderException(
-					"Cannot find " + refEntity + " in " +
+					"Unable to find " + refEntity + " in " +
 						ListUtil.toString(_ejbList, Entity.NAME_ACCESSOR));
 			}
 
@@ -1298,7 +1298,7 @@ public class ServiceBuilder {
 			}
 			catch (IOException ioe) {
 				throw new ServiceBuilderException(
-					"Cannot find " + refEntity + " in " +
+					"Unable to find " + refEntity + " in " +
 						ListUtil.toString(_ejbList, Entity.NAME_ACCESSOR));
 			}
 
