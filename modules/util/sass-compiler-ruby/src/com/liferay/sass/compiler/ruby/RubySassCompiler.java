@@ -14,6 +14,8 @@
 
 package com.liferay.sass.compiler.ruby;
 
+import java.net.URL;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,18 +41,21 @@ public class RubySassCompiler implements AutoCloseable {
 		this("", "", _COMPILE_MODE_JIT, _COMPILE_DEFAULT_THRESHOLD);
 	}
 
-	public RubySassCompiler(String docrootPath, String includePath)
+	public RubySassCompiler(String docrootDirName, String includeDirName)
 		throws Exception {
 
 		this(
-			docrootPath, includePath, _COMPILE_MODE_JIT,
+			docrootDirName, includeDirName, _COMPILE_MODE_JIT,
 			_COMPILE_DEFAULT_THRESHOLD);
 	}
 
 	public RubySassCompiler(
-			String docrootPath, String includePath, String compileMode,
+			String docrootDirName, String includeDirName, String compileMode,
 			int compilerThreshold)
 		throws Exception {
+
+		_docrootDirName = docrootDirName;
+		_includeDirName = includeDirName;
 
 		_scriptingContainer = new ScriptingContainer(
 			LocalContextScope.THREADSAFE);
@@ -89,16 +94,18 @@ public class RubySassCompiler implements AutoCloseable {
 
 		rubyInstanceConfig.setJitThreshold(compilerThreshold);
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
 
-		Path path = Paths.get(classLoader.getResource(_SCRIPT_PATH).toURI());
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		URL url = classLoader.getResource(
+			"com/liferay/sass/compiler/ruby/dependencies/main.rb");
+
+		Path path = Paths.get(url.toURI());
 
 		String rubyScript = new String(Files.readAllBytes(path));
 
 		_scriptObject = _scriptingContainer.runScriptlet(rubyScript);
-
-		_docrootPath = docrootPath;
-		_includePath = includePath;
 	}
 
 	@Override
@@ -108,7 +115,7 @@ public class RubySassCompiler implements AutoCloseable {
 
 	public String compileFile(String fileName) {
 		try {
-			Path path = Paths.get(_docrootPath.concat(fileName));
+			Path path = Paths.get(_docrootDirName.concat(fileName));
 
 			String input = new String(Files.readAllBytes(path));
 
@@ -122,23 +129,24 @@ public class RubySassCompiler implements AutoCloseable {
 	}
 
 	public String compileString(String input, String fileName) {
-		String filePath = _docrootPath.concat(fileName);
-
-		String cssThemePath = filePath;
-
-		int pos = filePath.lastIndexOf("/css/");
-
-		if (pos >= 0) {
-			cssThemePath = filePath.substring(0, pos + 4);
-		}
-
 		try {
-			Object[] args = new Object[] {
-				input, _includePath, filePath, cssThemePath, _TMP_DIR, false
-			};
+			fileName = _docrootDirName.concat(fileName);
+
+			String cssThemeDirName = fileName;
+
+			int index = fileName.lastIndexOf("/css/");
+
+			if (index >= 0) {
+				cssThemeDirName = fileName.substring(0, index + 4);
+			}
 
 			return _scriptingContainer.callMethod(
-				_scriptObject, "process", args, String.class);
+				_scriptObject, "process",
+				new Object[] {
+					input, _includeDirName, fileName, cssThemeDirName, _TMP_DIR,
+					false
+				},
+				String.class);
 		}
 		catch (Exception e) {
 			RaiseException raiseException = (RaiseException)e;
@@ -169,13 +177,10 @@ public class RubySassCompiler implements AutoCloseable {
 
 	private static final String _COMPILE_MODE_JIT = "jit";
 
-	private static final String _SCRIPT_PATH =
-		"com/liferay/sass/compiler/ruby/dependencies/main.rb";
-
 	private static final String _TMP_DIR = System.getProperty("java.io.tmpdir");
 
-	private final String _docrootPath;
-	private final String _includePath;
+	private final String _docrootDirName;
+	private final String _includeDirName;
 	private final ScriptingContainer _scriptingContainer;
 	private final Object _scriptObject;
 

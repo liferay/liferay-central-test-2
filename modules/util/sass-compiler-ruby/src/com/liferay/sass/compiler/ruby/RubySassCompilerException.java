@@ -26,6 +26,10 @@ public class RubySassCompilerException extends Exception {
 		super(message);
 	}
 
+	public RubySassCompilerException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
+
 	public RubySassCompilerException(Throwable throwable) {
 		super(throwable);
 	}

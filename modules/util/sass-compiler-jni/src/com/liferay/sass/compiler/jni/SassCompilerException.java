@@ -26,10 +26,12 @@ public class SassCompilerException extends Exception {
 		super(message);
 	}
 
+	public SassCompilerException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
+
 	public SassCompilerException(Throwable throwable) {
 		super(throwable);
 	}
-
-	private static final long serialVersionUID = -1843613263417826330L;
 
 }
