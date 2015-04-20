@@ -458,8 +458,8 @@ public class LocaleUtil {
 
 		int i = 0;
 
-		for (Locale tempLocale : locales) {
-			displayNames[i++] = tempLocale.getDisplayName(locale);
+		for (Locale curLocale : locales) {
+			displayNames[i++] = curLocale.getDisplayName(locale);
 		}
 
 		return displayNames;
