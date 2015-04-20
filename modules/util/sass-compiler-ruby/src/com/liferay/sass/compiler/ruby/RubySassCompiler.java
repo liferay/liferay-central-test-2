@@ -105,9 +105,7 @@ public class RubySassCompiler implements AutoCloseable {
 		_scriptingContainer.terminate();
 	}
 
-	public String compileFile(String fileName)
-		throws RubySassCompilerException {
-
+	public String compileFile(String fileName) {
 		try {
 			Path path = Paths.get(_docrootPath.concat(fileName));
 
@@ -122,9 +120,7 @@ public class RubySassCompiler implements AutoCloseable {
 		return null;
 	}
 
-	public String compileString(String input, String fileName)
-		throws RubySassCompilerException {
-
+	public String compileString(String input, String fileName) {
 		String filePath = _docrootPath.concat(fileName);
 
 		String cssThemePath = filePath;
