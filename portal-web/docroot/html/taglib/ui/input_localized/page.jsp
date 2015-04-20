@@ -158,7 +158,7 @@ if ((exception != null) && fieldName.equals(focusField)) {
 
 	<div class="hide-accessible" id="<portlet:namespace /><%= HtmlUtil.escapeAttribute(id + fieldSuffix) %>_desc"><%= defaultLocale.getDisplayName(LocaleUtil.fromLanguageId(LanguageUtil.getLanguageId(request))) %> <liferay-ui:message key="translation" /></div>
 
-	<c:if test="<%= (!availableLocales.isEmpty()) && Validator.isNull(languageId) %>">
+	<c:if test="<%= !availableLocales.isEmpty() && Validator.isNull(languageId) %>">
 
 		<%
 		languageIds.add(defaultLanguageId);
@@ -273,7 +273,7 @@ if ((exception != null) && fieldName.equals(focusField)) {
 </c:if>
 
 <c:choose>
-	<c:when test="<%= (!availableLocales.isEmpty()) && Validator.isNull(languageId) %>">
+	<c:when test="<%= !availableLocales.isEmpty() && Validator.isNull(languageId) %>">
 		<aui:script use="liferay-input-localized">
 			var defaultLanguageId = '<%= defaultLanguageId %>';
 
