@@ -64,7 +64,7 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.routing.HttpRoutePlanner;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ContentBody;
@@ -394,7 +394,7 @@ public class Session {
 		SSLContextBuilder sslContextBuilder = SSLContexts.custom();
 
 		sslContextBuilder.loadTrustMaterial(
-			new TrustSelfSignedStrategy() {
+			new TrustStrategy() {
 
 				@Override
 				public boolean isTrusted(
