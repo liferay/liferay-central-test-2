@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.sass.compiler;
+package com.liferay.sass.compiler.jni;
 
-import com.liferay.sass.compiler.util.test.SassTestUtil;
+import com.liferay.sass.compiler.jni.util.test.SassTestUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,7 +43,8 @@ public class SassCompilerTest {
 		Assert.assertNotNull(sassCompiler);
 
 		File sassSpecDir = new File(
-			getBaseDir(), "com/liferay/sass/compiler/dependencies/sass-spec");
+			getBaseDir(),
+			"com/liferay/sass/compiler/jni/dependencies/sass-spec");
 
 		for (File testDir : sassSpecDir.listFiles()) {
 			File inputFile = new File(testDir, "input.scss");

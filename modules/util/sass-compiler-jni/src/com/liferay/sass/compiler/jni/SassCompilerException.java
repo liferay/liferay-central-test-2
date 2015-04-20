@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.sass.compiler;
+package com.liferay.sass.compiler.jni;
 
 /**
  * @author Gregory Amerson

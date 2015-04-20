@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.sass.compiler;
+package com.liferay.sass.compiler.jni;
 
-import com.liferay.sass.compiler.libsass.LiferaysassLibrary;
-import com.liferay.sass.compiler.libsass.LiferaysassLibrary.Sass_Context;
-import com.liferay.sass.compiler.libsass.LiferaysassLibrary.Sass_Data_Context;
-import com.liferay.sass.compiler.libsass.LiferaysassLibrary.Sass_File_Context;
-import com.liferay.sass.compiler.libsass.LiferaysassLibrary.Sass_Options;
-import com.liferay.sass.compiler.libsass.LiferaysassLibrary.Sass_Output_Style;
+import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary;
+import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary.Sass_Context;
+import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary.Sass_Data_Context;
+import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary.Sass_File_Context;
+import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary.Sass_Options;
+import com.liferay.sass.compiler.jni.libsass.LiferaysassLibrary.Sass_Output_Style;
 
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
