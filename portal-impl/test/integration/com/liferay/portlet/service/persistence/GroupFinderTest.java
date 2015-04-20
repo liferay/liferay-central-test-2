@@ -110,11 +110,11 @@ public class GroupFinderTest {
 	public void testFindByC_C_N_DJoinByRoleResourcePermissions()
 		throws Exception {
 
+		boolean exists = false;
+
 		List<Group> groups = findByC_C_N_D(
 			_arbitraryResourceAction.getActionId(),
 			_resourcePermission.getName(), _resourcePermission.getRoleId());
-
-		boolean exists = false;
 
 		for (Group group : groups) {
 			if (group.getGroupId() == _group.getGroupId()) {

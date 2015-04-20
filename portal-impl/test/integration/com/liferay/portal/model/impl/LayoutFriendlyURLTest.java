@@ -358,7 +358,6 @@ public class LayoutFriendlyURLTest {
 		friendlyURLMap.put(LocaleUtil.US, "/home");
 
 		addLayout(_group.getGroupId(), false, friendlyURLMap);
-
 		addLayout(_group.getGroupId(), true, friendlyURLMap);
 	}
 

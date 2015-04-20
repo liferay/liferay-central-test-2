@@ -338,7 +338,6 @@ public class BlogsEntryLocalServiceTest {
 			Assert.assertEquals(
 				"Entry " + groupsEntry.getEntryId() + " is not in trash",
 				WorkflowConstants.STATUS_IN_TRASH, groupsEntry.getStatus());
-
 			Assert.assertEquals(
 				"Entry belongs to company " + groupsEntry.getCompanyId() +
 					" but should belong to company " + _user.getCompanyId(),

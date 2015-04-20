@@ -99,12 +99,12 @@ public class RoleFinderTest {
 
 	@Test
 	public void testFindByC_N_S_P_A() throws Exception {
+		boolean exists = false;
+
 		List<Role> roles = RoleFinderUtil.findByC_N_S_P_A(
 			_resourcePermission.getCompanyId(), _resourcePermission.getName(),
 			_resourcePermission.getScope(), _resourcePermission.getPrimKey(),
 			_arbitraryResourceAction.getActionId());
-
-		boolean exists = false;
 
 		for (Role role : roles) {
 			if (role.getRoleId() == _arbitraryRole.getRoleId()) {
@@ -122,11 +122,11 @@ public class RoleFinderTest {
 
 	@Test
 	public void testFindByR_N_A() throws Exception {
+		boolean exists = false;
+
 		List<Role> roles = RoleFinderUtil.findByR_N_A(
 			_resourceBlock.getResourceBlockId(), _resourceBlock.getName(),
 			_modelResourceAction.getActionId());
-
-		boolean exists = false;
 
 		for (Role role : roles) {
 			if (role.getRoleId() == _arbitraryRole.getRoleId()) {
