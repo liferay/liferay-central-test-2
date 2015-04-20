@@ -264,64 +264,37 @@ public class ${entity.name}PersistenceTest {
 	<#list entity.getFinderList() as finder>
 		@Test
 		public void testCountBy${finder.name}() throws Exception {
-				_persistence.countBy${finder.name}(
+			_persistence.countBy${finder.name}(
 
-				<#assign hasString = false>
+			<#assign hasString = false>
 
-				<#list finder.getColumns() as finderCol>
-					<#if finderCol.type == "boolean">
-						RandomTestUtil.randomBoolean()
-					<#elseif finderCol.type == "double">
-						RandomTestUtil.nextDouble()
-					<#elseif finderCol.type == "int">
-						RandomTestUtil.nextInt()
-					<#elseif finderCol.type == "long">
-						RandomTestUtil.nextLong()
-					<#elseif finderCol.type == "Date">
-						RandomTestUtil.nextDate()
-					<#elseif finderCol.type == "String">
-						<#assign hasString = true>
+			<#list finder.getColumns() as finderCol>
+				<#if finderCol.type == "boolean">
+					RandomTestUtil.randomBoolean()
+				<#elseif finderCol.type == "double">
+					RandomTestUtil.nextDouble()
+				<#elseif finderCol.type == "int">
+					RandomTestUtil.nextInt()
+				<#elseif finderCol.type == "long">
+					RandomTestUtil.nextLong()
+				<#elseif finderCol.type == "Date">
+					RandomTestUtil.nextDate()
+				<#elseif finderCol.type == "String">
+					<#assign hasString = true>
 
-						StringPool.BLANK
-					<#else>
-						(${finderCol.type})null
-					</#if>
-
-					<#if finderCol_has_next >
-						,
-					</#if>
-				</#list>
-
-				);
-
-				<#if hasString>
-					_persistence.countBy${finder.name}(
-
-						<#list finder.getColumns() as finderCol>
-							<#if finderCol.type == "boolean">
-								RandomTestUtil.randomBoolean()
-							<#elseif finderCol.type == "double">
-								0D
-							<#elseif finderCol.type == "int">
-								0
-							<#elseif finderCol.type == "long">
-								0L
-							<#elseif finderCol.type == "Date">
-								RandomTestUtil.nextDate()
-							<#elseif finderCol.type == "String">
-								StringPool.NULL
-							<#else>
-								(${finderCol.type})null
-							</#if>
-
-							<#if finderCol_has_next >
-								,
-							</#if>
-						</#list>
-
-					);
+					StringPool.BLANK
+				<#else>
+					(${finderCol.type})null
 				</#if>
 
+				<#if finderCol_has_next >
+					,
+				</#if>
+			</#list>
+
+			);
+
+			<#if hasString>
 				_persistence.countBy${finder.name}(
 
 					<#list finder.getColumns() as finderCol>
@@ -335,6 +308,8 @@ public class ${entity.name}PersistenceTest {
 							0L
 						<#elseif finderCol.type == "Date">
 							RandomTestUtil.nextDate()
+						<#elseif finderCol.type == "String">
+							StringPool.NULL
 						<#else>
 							(${finderCol.type})null
 						</#if>
@@ -345,6 +320,31 @@ public class ${entity.name}PersistenceTest {
 					</#list>
 
 				);
+			</#if>
+
+			_persistence.countBy${finder.name}(
+
+				<#list finder.getColumns() as finderCol>
+					<#if finderCol.type == "boolean">
+						RandomTestUtil.randomBoolean()
+					<#elseif finderCol.type == "double">
+						0D
+					<#elseif finderCol.type == "int">
+						0
+					<#elseif finderCol.type == "long">
+						0L
+					<#elseif finderCol.type == "Date">
+						RandomTestUtil.nextDate()
+					<#else>
+						(${finderCol.type})null
+					</#if>
+
+					<#if finderCol_has_next >
+						,
+					</#if>
+				</#list>
+
+			);
 		}
 
 		<#if finder.hasArrayableOperator()>
