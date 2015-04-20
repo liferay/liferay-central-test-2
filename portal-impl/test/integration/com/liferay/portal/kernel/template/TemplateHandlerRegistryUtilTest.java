@@ -77,10 +77,10 @@ public class TemplateHandlerRegistryUtilTest {
 
 	@Test
 	public void testGetTemplateHandlers() {
+		boolean exists = false;
+
 		List<TemplateHandler> templateHandlers =
 			TemplateHandlerRegistryUtil.getTemplateHandlers();
-
-		boolean exists = false;
 
 		for (TemplateHandler templateHandler : templateHandlers) {
 			String className = templateHandler.getClassName();

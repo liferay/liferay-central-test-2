@@ -688,7 +688,7 @@ public class LayoutSetPrototypePropagationTest
 			Assert.assertFalse(
 				"Able to add a child page to a page associated to a site " +
 					"template with link enabled",
-					layoutSetPrototypeLinkEnabled);
+				layoutSetPrototypeLinkEnabled);
 		}
 		catch (LayoutParentLayoutIdException lplie) {
 			Assert.assertTrue(
