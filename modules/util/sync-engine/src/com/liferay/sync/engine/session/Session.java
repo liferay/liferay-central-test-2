@@ -398,7 +398,7 @@ public class Session {
 
 				@Override
 				public boolean isTrusted(
-					X509Certificate[] chain, String authType) {
+					X509Certificate[] x509Certificates, String authType) {
 
 					return true;
 				}
