@@ -18,9 +18,13 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
+
 import java.io.File;
+
 import java.util.List;
+
 import org.apache.commons.io.FileUtils;
+
 import org.junit.Assert;
 import org.junit.Before;
 
