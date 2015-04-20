@@ -137,7 +137,7 @@
 	<classpathentry kind="lib" path="lib/portal/closure-compiler.jar"/>
 	<classpathentry kind="lib" path="lib/portal/com.liferay.rtl.css.jar"/>
 	<classpathentry kind="lib" path="lib/portal/com.liferay.ruby.gems.jar"/>
-	<classpathentry kind="lib" path="lib/portal/com.liferay.sass.compiler.jar"/>
+	<classpathentry kind="lib" path="lib/portal/com.liferay.sass.compiler.jni.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-codec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-collections.jar"/>
