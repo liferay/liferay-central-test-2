@@ -21,20 +21,10 @@ public class ServiceBuilderException extends RuntimeException {
 
 	public ServiceBuilderException(String message) {
 		super(message);
-
-		_message = message;
 	}
 
-	public ServiceBuilderException(String message, Throwable t) {
-		super(message, t);
-
-		_message = message;
+	public ServiceBuilderException(String message, Throwable throwable) {
+		super(message, throwable);
 	}
-
-	public String getServiceBuilderMessage() {
-		return _message;
-	}
-
-	private final String _message;
 
 }

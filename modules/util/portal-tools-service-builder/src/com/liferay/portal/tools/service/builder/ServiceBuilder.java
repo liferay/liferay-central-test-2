@@ -397,8 +397,7 @@ public class ServiceBuilder {
 				ServiceBuilderException serviceBuilderException =
 					(ServiceBuilderException)t;
 
-				System.err.println(
-					serviceBuilderException.getServiceBuilderMessage());
+				System.err.println(serviceBuilderException.getMessage());
 			}
 			else if (t instanceof Exception) {
 				System.out.println(message);
