@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
-mbGroupServiceSettings = MBGroupServiceSettings.getInstance(themeDisplay.getSiteGroupId(), request.getParameterMap());
-
 Set<Locale> locales = LanguageUtil.getAvailableLocales(themeDisplay.getSiteGroupId());
+
+mbGroupServiceSettings = MBGroupServiceSettings.getInstance(themeDisplay.getSiteGroupId(), request.getParameterMap());
 %>
 
 <liferay-portlet:actionURL portletConfiguration="<%= true %>" var="configurationActionURL">
