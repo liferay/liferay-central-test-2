@@ -28,15 +28,11 @@ public class RubySassCompilerTest {
 			Assert.assertNotNull(rubySassCompiler);
 
 			String expectedOutput = "foo {\n  margin: 42px; }\n";
-
-			String inputPath =
-				System.getProperty("user.dir") + "/test-classes/unit/" +
-				"com/liferay/sass/compiler/ruby/dependencies/input.scss";
-
-			String actualOutput = rubySassCompiler.compileFile(inputPath);
+			String actualOutput = rubySassCompiler.compileFile(
+				System.getProperty("user.dir") + "/test-classes/unit/com" +
+					"/liferay/sass/compiler/ruby/dependencies/input.scss");
 
 			Assert.assertEquals(expectedOutput, actualOutput);
-
 		}
 	}
 
@@ -46,7 +42,6 @@ public class RubySassCompilerTest {
 			Assert.assertNotNull(rubySassCompiler);
 
 			String expectedOutput = "foo {\n  margin: 42px; }\n";
-
 			String actualOutput = rubySassCompiler.compileString(
 				"foo { margin: 21px * 2; }", "");
 

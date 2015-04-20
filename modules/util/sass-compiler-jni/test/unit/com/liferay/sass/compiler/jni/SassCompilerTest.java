@@ -74,7 +74,6 @@ public class SassCompilerTest {
 		Assert.assertNotNull(sassCompiler);
 
 		String expectedOutput = "foo { margin: 42px; }";
-
 		String actualOutput = sassCompiler.compileString(
 			"foo { margin: 21px * 2; }", "", "");
 
