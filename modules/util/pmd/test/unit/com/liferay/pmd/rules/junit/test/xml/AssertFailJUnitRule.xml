@@ -5,26 +5,32 @@
 		<description><![CDATA[Not fail when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
+import java.io.Closeable;
+import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
-		try(Object object = new Object() {
+		try(Closeable closeable = new Closeable() {
+
 			@Override
-			public int hashCOde() {
-				return 1;
-			}
-		}) {
+			public void close() throws IOException {
+				System.out.println("close");
+			}}) {
+
 			// ...
 
 			Assert.fail();
 		}
-	    catch (Exception e) {
+		catch (Exception e) {
+
 			// ...
-	    }
+
+		}
 	}
 }
 			]]></code>
@@ -45,12 +51,12 @@ public class ClassTest {
 
 			Assert.fail();
 		}
-	    catch (Exception e) {
+		catch (Exception e) {
 			// ...
-	    }
-	    finally {
-	    	// ...
-	    }
+		}
+		finally {
+			// ...
+		}
 	}
 }
 			]]></code>
@@ -60,23 +66,31 @@ public class ClassTest {
 	<expected-problems>0</expected-problems>
 	<code><![CDATA[
 
+import java.io.Closeable;
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
 	@Test
 	public void test() {
-		try(int a = 2) {
+		try(Closeable closeable = new Closeable() {
+
+			@Override
+			public void close() throws IOException {
+				System.out.println("close");
+			}}) {
 			// ...
 
 			Assert.fail();
 		}
-	    catch (Exception e) {
+		catch (Exception e) {
 			// ...
-	    }
-	    finally {
-	    	// ...
-	    }
+		}
+		finally {
+			// ...
+		}
 	}
 }
 			]]></code>
@@ -94,9 +108,9 @@ public class ClassTest {
 	public void test() {
 		try {
 		}
-	    catch (Exception e) {
+		catch (Exception e) {
 			failMethod();
-	    }
+		}
 	}
 }
 			]]></code>
@@ -117,8 +131,8 @@ public class ClassTest {
 
 			Assert.fail();
 		}
-	    catch (Exception e) {
-	    }
+		catch (Exception e) {
+		}
 	}
 }
 			]]></code>
@@ -138,9 +152,9 @@ public class ClassTest {
 			// ...
 			Assert.fail();
 		}
-	    catch (Exception e) {
-	    	Assert.assertEqual("ERROR", e.getMessage());
-	    }
+		catch (Exception e) {
+			Assert.assertEqual("ERROR", e.getMessage());
+		}
 	}
 }
 			]]></code>
@@ -176,8 +190,8 @@ public class ClassTest {
 			// ...
 			Assert.fail();
 		}
-	    catch (Exception e) {
-	    }
+		catch (Exception e) {
+		}
 	}
 }
 			]]></code>
@@ -196,11 +210,11 @@ public class ClassTest {
 		try {
 			// ...
 		}
-	    catch (Exception e) {
-	    	{
-		    	Assert.fail();
-		    }
-	    }
+		catch (Exception e) {
+			{
+				Assert.fail();
+			}
+		}
 	}
 }
 			]]></code>
@@ -222,11 +236,11 @@ public class ClassTest {
 			// ...
 
 		}
-	    catch (Exception e) {
-	    	System.out.println(e.getMessage());
+		catch (Exception e) {
+			System.out.println(e.getMessage());
 
 			Assert.fail();
-	    }
+		}
 	}
 }
 			]]></code>
@@ -248,9 +262,9 @@ public class ClassTest {
 			// ...
 
 		}
-	    catch (Exception e) {
-		    Assert.fail();
-	    }
+		catch (Exception e) {
+			Assert.fail();
+		}
 	}
 }
 			]]></code>
