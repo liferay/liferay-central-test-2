@@ -121,12 +121,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 			backgroundTask.getTaskExecutorClassName());
 		AssertUtils.assertEquals(
 			taskContextMap, backgroundTask.getTaskContextMap());
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -155,12 +150,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 			backgroundTask.getBackgroundTaskId());
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 1);
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -198,12 +188,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 		FileEntry attachment = attachmentsFileEntries.get(0);
 
 		Assert.assertEquals(fileName, attachment.getTitle());
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -235,12 +220,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 			backgroundTask.getTaskExecutorClassName());
 		AssertUtils.assertEquals(
 			taskContextMap, backgroundTask.getTaskContextMap());
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -279,12 +259,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 		Assert.assertEquals(
 			BackgroundTaskConstants.STATUS_FAILED, backgroundTask.getStatus());
 		Assert.assertTrue(backgroundTask.isCompleted());
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -311,12 +286,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 			BackgroundTaskConstants.STATUS_IN_PROGRESS,
 			backgroundTask.getStatus());
 		Assert.assertFalse(backgroundTask.isCompleted());
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -343,12 +313,7 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 			BackgroundTaskConstants.STATUS_SUCCESSFUL,
 			backgroundTask.getStatus());
 		Assert.assertTrue(backgroundTask.isCompleted());
-
-		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
-
-		assertThreadLocalValues(threadLocalValues);
+		assertThreadLocalValues(backgroundTask);
 	}
 
 	@Test
@@ -371,10 +336,15 @@ public class BackgroundTaskLocalServiceTest extends BaseBackgroundTaskTestCase {
 
 		AssertUtils.assertEquals(
 			backgroundTask.getTaskContextMap(), taskContextMap);
+		assertThreadLocalValues(backgroundTask);
+	}
+
+	protected void assertThreadLocalValues(BackgroundTask backgroundTask) {
+		Map<String, Serializable> taskContextMap =
+			backgroundTask.getTaskContextMap();
 
 		Map<String, Serializable> threadLocalValues =
-			(Map<String, Serializable>)backgroundTask.getTaskContextMap().get(
-				"threadLocalValues");
+			(Map<String, Serializable>)taskContextMap.get("threadLocalValues");
 
 		assertThreadLocalValues(threadLocalValues);
 	}
