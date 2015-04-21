@@ -188,13 +188,11 @@ public class LoggerElement {
 		sb.append("<");
 		sb.append(_name);
 
-		Set<Entry<String, String>> attributeEntrySet = _attributes.entrySet();
-
-		for (Entry<String, String> attributeEntry : attributeEntrySet) {
+		for (Entry<String, String> entry : _attributes.entrySet()) {
 			sb.append(" ");
-			sb.append(attributeEntry.getKey());
+			sb.append(entry.getKey());
 			sb.append("=\"");
-			sb.append(attributeEntry.getValue());
+			sb.append(entry.getValue());
 			sb.append("\"");
 		}
 
