@@ -92,7 +92,7 @@ public final class LoggerUtil {
 		_javascriptExecutor.executeScript(sb.toString());
 	}
 
-	public static void executeJavascript(String script) {
+	public static void executeJavaScript(String script) {
 		_javascriptExecutor.executeScript(
 			StringEscapeUtils.escapeEcmaScript(script));
 	}
