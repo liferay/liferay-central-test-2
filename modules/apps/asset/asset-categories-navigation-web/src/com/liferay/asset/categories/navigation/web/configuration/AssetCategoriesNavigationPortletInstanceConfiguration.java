@@ -24,24 +24,16 @@ import aQute.bnd.annotation.metatype.Meta;
 )
 public interface AssetCategoriesNavigationPortletInstanceConfiguration {
 
-	@Meta.AD(
-		deflt = "true", required = false
-	)
+	@Meta.AD(deflt = "true", required = false)
 	public boolean allAssetVocabularies();
 
-	@Meta.AD(
-		deflt = "", required = false
-	)
+	@Meta.AD(deflt = "", required = false)
 	public String[] assetVocabularyIds();
 
-	@Meta.AD(
-			deflt = "", required = false
-	)
+	@Meta.AD(deflt = "", required = false)
 	public String displayStyle();
 
-	@Meta.AD(
-			deflt = "0", required = false
-	)
+	@Meta.AD(deflt = "0", required = false)
 	public long displayStyleGroupId(long defaultDisplayStyleGroupId);
 
 }
