@@ -53,57 +53,58 @@ public class LiferayRMICacheManagerPeerListenerFactory
 		return cacheManagerPeerListener;
 	}
 
-	private static final CacheReplicator _PLACE_HOLDER = new CacheReplicator() {
+	private static final CacheReplicator _cacheReplicator =
+		new CacheReplicator() {
 
-		@Override
-		public boolean alive() {
-			return true;
-		}
+			@Override
+			public boolean alive() {
+				return true;
+			}
 
-		@Override
-		public Object clone() {
-			return this;
-		}
+			@Override
+			public Object clone() {
+				return this;
+			}
 
-		@Override
-		public void dispose() {
-		}
+			@Override
+			public void dispose() {
+			}
 
-		@Override
-		public boolean isReplicateUpdatesViaCopy() {
-			return false;
-		}
+			@Override
+			public boolean isReplicateUpdatesViaCopy() {
+				return false;
+			}
 
-		@Override
-		public boolean notAlive() {
-			return false;
-		}
+			@Override
+			public boolean notAlive() {
+				return false;
+			}
 
-		@Override
-		public void notifyElementEvicted(Ehcache ehcache, Element element) {
-		}
+			@Override
+			public void notifyElementEvicted(Ehcache ehcache, Element element) {
+			}
 
-		@Override
-		public void notifyElementExpired(Ehcache ehcache, Element element) {
-		}
+			@Override
+			public void notifyElementExpired(Ehcache ehcache, Element element) {
+			}
 
-		@Override
-		public void notifyElementPut(Ehcache ehcache, Element element) {
-		}
+			@Override
+			public void notifyElementPut(Ehcache ehcache, Element element) {
+			}
 
-		@Override
-		public void notifyElementRemoved(Ehcache ehcache, Element element) {
-		}
+			@Override
+			public void notifyElementRemoved(Ehcache ehcache, Element element) {
+			}
 
-		@Override
-		public void notifyElementUpdated(Ehcache ehcache, Element element) {
-		}
+			@Override
+			public void notifyElementUpdated(Ehcache ehcache, Element element) {
+			}
 
-		@Override
-		public void notifyRemoveAll(Ehcache ehch) {
-		}
+			@Override
+			public void notifyRemoveAll(Ehcache ehch) {
+			}
 
-	};
+		};
 
 	private final CacheManagerPeerListenerFactory
 		_cacheManagerPeerListenerFactory =
@@ -192,6 +193,9 @@ public class LiferayRMICacheManagerPeerListenerFactory
 				return;
 			}
 
+			RegisteredEventListeners registeredEventListeners =
+				ehcache.getCacheEventNotificationService();
+
 			LiferayCacheDecorator liferayCacheDecorator =
 				(LiferayCacheDecorator)ehcache;
 
@@ -199,10 +203,7 @@ public class LiferayRMICacheManagerPeerListenerFactory
 				liferayCacheDecorator,
 				liferayCacheDecorator.getUnderlyingCache());
 
-			RegisteredEventListeners registeredEventListeners =
-				ehcache.getCacheEventNotificationService();
-
-			registeredEventListeners.unregisterListener(_PLACE_HOLDER);
+			registeredEventListeners.unregisterListener(_cacheReplicator);
 		}
 
 		private void _wrapEhcache(String cacheName) {
@@ -216,7 +217,7 @@ public class LiferayRMICacheManagerPeerListenerFactory
 			RegisteredEventListeners registeredEventListeners =
 				ehcache.getCacheEventNotificationService();
 
-			registeredEventListeners.registerListener(_PLACE_HOLDER);
+			registeredEventListeners.registerListener(_cacheReplicator);
 		}
 
 		private final CacheManager _cacheManager;
