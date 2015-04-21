@@ -97,8 +97,6 @@ public abstract class BaseBackgroundTaskTestCase {
 			_siteDefaultLocale, LocaleThreadLocal.getSiteDefaultLocale());
 		Assert.assertEquals(
 			_themeDisplayLocale, LocaleThreadLocal.getThemeDisplayLocale());
-
-		Assert.assertNull(PrincipalThreadLocal.getPassword());
 		Assert.assertNull(PrincipalThreadLocal.getPassword());
 	}
 
