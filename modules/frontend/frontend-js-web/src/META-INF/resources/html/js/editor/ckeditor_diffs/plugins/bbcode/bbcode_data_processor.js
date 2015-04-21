@@ -86,9 +86,9 @@
 
 	var TAG_BR = 'br';
 
-	var TAG_CODE = 'code';
-
 	var TAG_CITE = 'cite';
+
+	var TAG_CODE = 'code';
 
 	var TAG_DIV = 'div';
 
@@ -116,7 +116,7 @@
 	BBCodeDataProcessor.prototype = {
 		constructor: BBCodeDataProcessor,
 
-		toDataFormat: function(html, fixForBody ) {
+		toDataFormat: function(html, fixForBody) {
 			var instance = this;
 
 			html = html.replace(REGEX_PRE, '$&\n');
