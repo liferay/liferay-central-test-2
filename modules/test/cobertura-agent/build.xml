@@ -9,6 +9,6 @@
 			module.dir="${basedir}"
 		/>
 
-		<copy file="${plugin.file}" tofile="../../../lib/development/cobertura-agent.jar" />
+		<copy file="${plugin.file}" tofile="../../../lib/development/${plugin.name}.jar" />
 	</target>
 </project>
