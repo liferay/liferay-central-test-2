@@ -282,11 +282,11 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 			boolean staleCache = false;
 
 			for (String fileName : fileNames) {
-				long curLastModified = FileTimestampUtil.getTimestamp(
+				long lastModified = FileTimestampUtil.getTimestamp(
 					portalWebResourcesServletContext,
 					bundleDirName.concat(StringPool.SLASH).concat(fileName));
 
-				if (curLastModified > cacheFile.lastModified()) {
+				if (lastModified > cacheFile.lastModified()) {
 					staleCache = true;
 
 					break;
