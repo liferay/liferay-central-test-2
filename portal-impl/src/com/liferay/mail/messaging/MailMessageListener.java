@@ -44,9 +44,7 @@ public class MailMessageListener extends BaseMessageListener {
 
 		if (from == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Email was not sent, because 'from address' is not " +
-						"configured.");
+				_log.warn("Skipping email because the sender is not specified");
 			}
 
 			return;
