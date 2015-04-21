@@ -135,7 +135,6 @@ public abstract class BaseBackgroundTaskTestCase {
 
 		threadLocalValues.put("companyId", _companyId);
 		threadLocalValues.put("clusterInvoke", _clusterInvokeEnabled);
-
 		threadLocalValues.put("defaultLocale", _defaultLocale);
 		threadLocalValues.put("groupId", _groupId);
 		threadLocalValues.put("principalName", _principalName);
