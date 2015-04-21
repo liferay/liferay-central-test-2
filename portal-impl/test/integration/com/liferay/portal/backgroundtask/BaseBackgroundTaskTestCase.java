@@ -49,14 +49,8 @@ public abstract class BaseBackgroundTaskTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		_companyId = TestPropsValues.getCompanyId();
-		_clusterInvokeEnabled = true;
-		_defaultLocale = Locale.US;
-		_groupId = TestPropsValues.getGroupId();
-		_principalName = String.valueOf(_user.getUserId());
-		_siteDefaultLocale = Locale.CANADA;
-		_themeDisplayLocale = Locale.FRANCE;
-		_user = UserTestUtil.addUser();
+		_backgroundTaskThreadLocalManagerImpl =
+			new BackgroundTaskThreadLocalManagerImpl();
 
 		PermissionCheckerFactory permissionCheckerFactory = Mockito.mock(
 			PermissionCheckerFactory.class);
@@ -66,14 +60,23 @@ public abstract class BaseBackgroundTaskTestCase {
 
 		User user = Mockito.mock(User.class);
 
-		Mockito.when(permissionCheckerFactory.create(user)).thenReturn(
-			permissionChecker);
-
-		_backgroundTaskThreadLocalManagerImpl =
-			new BackgroundTaskThreadLocalManagerImpl();
+		Mockito.when(
+			permissionCheckerFactory.create(user)
+		).thenReturn(
+			permissionChecker
+		);
 
 		_backgroundTaskThreadLocalManagerImpl.setPermissionCheckerFactory(
 			permissionCheckerFactory);
+
+		_companyId = TestPropsValues.getCompanyId();
+		_clusterInvokeEnabled = true;
+		_defaultLocale = Locale.US;
+		_groupId = TestPropsValues.getGroupId();
+		_principalName = String.valueOf(_user.getUserId());
+		_siteDefaultLocale = Locale.CANADA;
+		_themeDisplayLocale = Locale.FRANCE;
+		_user = UserTestUtil.addUser();
 	}
 
 	@After
