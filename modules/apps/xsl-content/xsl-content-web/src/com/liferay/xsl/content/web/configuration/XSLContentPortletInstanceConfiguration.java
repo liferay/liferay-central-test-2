@@ -24,14 +24,10 @@ import aQute.bnd.annotation.metatype.Meta;
 )
 public interface XSLContentPortletInstanceConfiguration {
 
-	@Meta.AD(
-		deflt = "@portlet_context_url@/example.xml", required = false
-	)
+	@Meta.AD(deflt = "@portlet_context_url@/example.xml", required = false)
 	public String xmlUrl();
 
-	@Meta.AD(
-		deflt = "@portlet_context_url@/example.xsl", required = false
-	)
+	@Meta.AD(deflt = "@portlet_context_url@/example.xsl", required = false)
 	public String xslUrl();
 
 }
