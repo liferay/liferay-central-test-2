@@ -49,7 +49,6 @@ public abstract class BaseBackgroundTaskTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		_user = UserTestUtil.addUser();
 		_companyId = TestPropsValues.getCompanyId();
 		_clusterInvokeEnabled = true;
 		_defaultLocale = Locale.US;
@@ -57,6 +56,7 @@ public abstract class BaseBackgroundTaskTestCase {
 		_principalName = String.valueOf(_user.getUserId());
 		_siteDefaultLocale = Locale.CANADA;
 		_themeDisplayLocale = Locale.FRANCE;
+		_user = UserTestUtil.addUser();
 
 		PermissionCheckerFactory permissionCheckerFactory = Mockito.mock(
 			PermissionCheckerFactory.class);
