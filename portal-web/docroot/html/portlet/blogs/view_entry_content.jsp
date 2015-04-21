@@ -193,7 +193,6 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						</div>
 					</c:when>
 					<c:when test='<%= blogsPortletInstanceSettings.getDisplayStyle().equals(BlogsUtil.DISPLAY_STYLE_FULL_CONTENT) || strutsAction.equals("/blogs/view_entry") || strutsAction.equals("/blogs_admin/view_entry") %>'>
-
 						<div>
 							<%= entry.getContent() %>
 						</div>
