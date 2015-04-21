@@ -71,9 +71,9 @@ public class AssetCategoriesNavigationConfigurationAction
 								portletDisplay.getPortletResource())));
 
 			renderRequest.setAttribute(
-					AssetCategoriesNavigationPortletInstanceConfiguration.
-						class.getName(),
-					assetCategoriesNavigationPortletInstanceConfiguration);
+				AssetCategoriesNavigationPortletInstanceConfiguration.
+					class.getName(),
+				assetCategoriesNavigationPortletInstanceConfiguration);
 		}
 		catch (PortalException pe) {
 			throw new SystemException(pe);
