@@ -104,7 +104,6 @@ public abstract class BaseBackgroundTaskTestCase {
 		Map<String, Serializable> threadLocalValues) {
 
 		Assert.assertTrue(MapUtil.isNotEmpty(threadLocalValues));
-
 		Assert.assertEquals(7, threadLocalValues.size());
 		Assert.assertEquals(_companyId, threadLocalValues.get("companyId"));
 		Assert.assertEquals(
@@ -114,12 +113,11 @@ public abstract class BaseBackgroundTaskTestCase {
 		Assert.assertEquals(_groupId, threadLocalValues.get("groupId"));
 		Assert.assertEquals(
 			_principalName, threadLocalValues.get("principalName"));
+		Assert.assertNull(threadLocalValues.get("principalPassword"));
 		Assert.assertEquals(
 			_siteDefaultLocale, threadLocalValues.get("siteDefaultLocale"));
 		Assert.assertEquals(
 			_themeDisplayLocale, threadLocalValues.get("themeDisplayLocale"));
-
-		Assert.assertNull(threadLocalValues.get("principalPassword"));
 	}
 
 	protected void initalizeThreadLocals() {
