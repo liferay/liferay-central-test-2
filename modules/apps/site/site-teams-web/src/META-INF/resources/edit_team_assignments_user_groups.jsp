@@ -18,7 +18,6 @@
 
 <%
 String tabs1 = (String)request.getAttribute("edit_team_assignments.jsp-tabs1");
-
 String tabs2 = (String)request.getAttribute("edit_team_assignments.jsp-tabs2");
 
 int cur = (Integer)request.getAttribute("edit_team_assignments.jsp-cur");
@@ -44,9 +43,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 >
 	<portlet:renderURL var="searchURL">
 		<portlet:param name="mvcPath" value="/edit_team_assignments.jsp" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="tabs1" value="<%= tabs1 %>" />
 		<portlet:param name="tabs2" value="<%= tabs2 %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="teamId" value="<%= String.valueOf(team.getTeamId()) %>" />
 	</portlet:renderURL>
 
