@@ -2,10 +2,7 @@
 
 <test-data>
 	<test-code>
-		<description><![CDATA[
-Should NOT fail when there are a block as try parameter
-assertEquals ok
-	 ]]></description>
+		<description><![CDATA[Not fail when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
@@ -33,10 +30,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[
-Should NOT fail when there are a finally block
-assertEquals ok
-	 ]]></description>
+		<description><![CDATA[Not fail when there is call to Assert#fail inside a try block as the last parameter with a finally block.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
@@ -62,10 +56,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-	<description><![CDATA[
-Should NOT fail when there are a finally block
-assertEquals ok
-	 ]]></description>
+	<description><![CDATA[Not fail when there is a call to Assert#fail inside a 1.7 try block as the last parameter with a finally block.]]></description>
 	<expected-problems>0</expected-problems>
 	<code><![CDATA[
 
@@ -91,10 +82,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[
-Should NOT fail when there are a method that starts with fail
-assertEquals ok
-	 ]]></description>
+		<description><![CDATA[Not fail when there is call to a method that starts with fail.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
@@ -114,10 +102,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[
-Should NOT fail when there are an Assert.fail inside a Try block as the last statement
-assertEquals ok
-	 ]]></description>
+		<description><![CDATA[Not fail when there are is call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
@@ -139,10 +124,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[
-Should NOT fail when there are an Assert.fail inside a Try block as the last statement
-assertEquals ok
-	 ]]></description>
+		<description><![CDATA[Not fail when there is call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
@@ -164,10 +146,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[
-Should fail when there are an Assert.fail outside a Try/Catch block
-assertEquals bad
-	 ]]></description>
+		<description><![CDATA[Fail when there is call to Assert#fail outside a try/catch block.]]></description>
 		<expected-problems>1</expected-problems>
 		<code><![CDATA[
 
@@ -183,10 +162,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-	<description><![CDATA[
-Should NOT fail when there are an Assert.fail inside a Try block as the last statement
-assertEquals ok
-	 ]]></description>
+	<description><![CDATA[Not fail when there is call to Assert#fail inside a try block as the last statement.]]></description>
 	<expected-problems>0</expected-problems>
 	<code><![CDATA[
 
