@@ -73,10 +73,11 @@ public abstract class BaseBackgroundTaskTestCase {
 		_clusterInvokeEnabled = true;
 		_defaultLocale = Locale.US;
 		_groupId = TestPropsValues.getGroupId();
-		_principalName = String.valueOf(_user.getUserId());
 		_siteDefaultLocale = Locale.CANADA;
 		_themeDisplayLocale = Locale.FRANCE;
 		_user = UserTestUtil.addUser();
+
+		_principalName = String.valueOf(_user.getUserId());
 	}
 
 	@After
