@@ -59,7 +59,7 @@ public class SiteTeamsWebUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.site.teams",
+			"com.liferay.site.teams.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 1,
 			false);
 	}
