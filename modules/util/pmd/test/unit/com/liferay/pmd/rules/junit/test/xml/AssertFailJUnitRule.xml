@@ -44,20 +44,27 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try {
+
 			// ...
 
 			Assert.fail();
 		}
 		catch (Exception e) {
+
 			// ...
+
 		}
 		finally {
+
 			// ...
+
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
@@ -73,6 +80,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try(Closeable closeable = new Closeable() {
@@ -100,18 +108,24 @@ public class ClassTest {
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try {
+			//...
 		}
 		catch (Exception e) {
 			failMethod();
 		}
 	}
+
+	protected void failMethod() {
+		//...
+	}
+
 }
 			]]></code>
 	</test-code>
@@ -124,6 +138,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try {
@@ -134,6 +149,7 @@ public class ClassTest {
 		catch (Exception e) {
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
@@ -146,16 +162,20 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try {
+
 			// ...
+
 			Assert.fail();
 		}
 		catch (Exception e) {
-			Assert.assertEqual("ERROR", e.getMessage());
+			Assert.assertEquals("ERROR", e.getMessage());
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
@@ -168,10 +188,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		Assert.fail();
 	}
+
 }
 			]]></code>
 	</test-code>
@@ -184,15 +206,19 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try {
+
 			// ...
+
 			Assert.fail();
 		}
 		catch (Exception e) {
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
@@ -205,10 +231,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassTest {
+
 	@Test
 	public void test() {
 		try {
+
 			// ...
+
 		}
 		catch (Exception e) {
 			{
@@ -216,6 +245,7 @@ public class ClassTest {
 			}
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
