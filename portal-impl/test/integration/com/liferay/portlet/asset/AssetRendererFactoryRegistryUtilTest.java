@@ -78,11 +78,9 @@ public class AssetRendererFactoryRegistryUtilTest {
 
 	@Test
 	public void testGetAssetRendererFactoryByClassNameId() {
-		String className = TestAssetRendererFactory.class.getName();
-
 		PortalImpl portalImpl = new PortalImpl();
 
-		Long classNameId = portalImpl.getClassNameId(
+		long classNameId = portalImpl.getClassNameId(
 			TestAssetRendererFactory.class);
 
 		AssetRendererFactory assetRendererFactory =
@@ -91,24 +89,24 @@ public class AssetRendererFactoryRegistryUtilTest {
 
 		Class<?> clazz = assetRendererFactory.getClass();
 
-		Assert.assertEquals(className, clazz.getName());
+		Assert.assertEquals(
+			TestAssetRendererFactory.class.getName(), clazz.getName());
 	}
 
 	@Test
 	public void testGetAssetRendererFactoryByType() {
-		String className = TestAssetRendererFactory.class.getName();
-
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByType(
-				className);
+				TestAssetRendererFactory.class.getName());
 
 		Class<?> clazz = assetRendererFactory.getClass();
 
-		Assert.assertEquals(className, clazz.getName());
+		Assert.assertEquals(
+			TestAssetRendererFactory.class.getName(), clazz.getName());
 	}
 
 	@Test
-	public void testGetClassNameIds() {
+	public void testGetClassNameIds1() {
 		long[] classNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds(
 			1);
 
