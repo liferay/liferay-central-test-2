@@ -80,32 +80,31 @@ public class ItemSelectorImplTest extends PowerMockito {
 
 		Assert.assertEquals(
 			"itemSelectedCallback",
-			parameters.get(ItemSelectorImpl.PARAMETER_ITEM_SELECTED_CALLBACK)[0]
-		);
-
+			parameters.get(
+				ItemSelectorImpl.PARAMETER_ITEM_SELECTED_CALLBACK)[0]);
 		Assert.assertEquals(
 			MediaItemSelectorCriterion.class.getName() + "," +
 				FlickrItemSelectorCriterion.class.getName(),
 			parameters.get(ItemSelectorImpl.PARAMETER_CRITERIA)[0]);
 		Assert.assertNull(parameters.get("0_desiredReturnTypes"));
 		Assert.assertEquals(
-			String.valueOf(_mediaItemSelectorCriterion.getMaxSize()),
-			parameters.get("0_maxSize")[0]);
-		Assert.assertEquals(
-			_mediaItemSelectorCriterion.getFileExtension(),
-			parameters.get("0_fileExtension")[0]);
-		Assert.assertEquals(
 			URL.class.getName(), parameters.get("1_desiredReturnTypes")[0]);
 		Assert.assertEquals(
 			_flickrItemSelectorCriterion.getUser(),
 			parameters.get("1_user")[0]);
+		Assert.assertEquals(
+			_mediaItemSelectorCriterion.getFileExtension(),
+			parameters.get("0_fileExtension")[0]);
+		Assert.assertEquals(
+			String.valueOf(_mediaItemSelectorCriterion.getMaxSize()),
+			parameters.get("0_maxSize")[0]);
 
 		Assert.assertEquals(6, parameters.size());
 	}
 
 	@Test
 	public void testGetItemSelectorRendering() {
-		_setUpItemSelectionCriterionHandlers();
+		setUpItemSelectionCriterionHandlers();
 
 		PortletRequest portletRequest = getMockPortletRequest();
 
@@ -151,7 +150,6 @@ public class ItemSelectorImplTest extends PowerMockito {
 			(ItemSelectorView<?>)
 				flickrItemSelectorViewRenderer.getItemSelectorView()
 					instanceof FlickrItemSelectorView);
-
 		Assert.assertEquals(2, itemSelectorViewRenderers.size());
 	}
 
@@ -180,11 +178,11 @@ public class ItemSelectorImplTest extends PowerMockito {
 		return portletRequest;
 	}
 
-	private void _setUpItemSelectionCriterionHandlers() {
-		_itemSelectorImpl.setItemSelectionCriterionHandler(
-			new MediaItemSelectorCriterionHandler());
+	protected void setUpItemSelectionCriterionHandlers() {
 		_itemSelectorImpl.setItemSelectionCriterionHandler(
 			new FlickrItemSelectorCriterionHandler());
+		_itemSelectorImpl.setItemSelectionCriterionHandler(
+			new MediaItemSelectorCriterionHandler());
 	}
 
 	private FlickrItemSelectorCriterion _flickrItemSelectorCriterion;
