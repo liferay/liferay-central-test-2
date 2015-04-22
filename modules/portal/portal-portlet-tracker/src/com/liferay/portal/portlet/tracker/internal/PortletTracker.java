@@ -125,10 +125,13 @@ public class PortletTracker
 		String portletId = StringUtil.replace(
 			portletName, new String[] {".", "$"}, new String[] {"_", "_"});
 
-		if (portletId.length() > _PORTLET_ID_MAX_LENGTH) {
+		if (portletId.length() >
+				PortletInstance.PORTLET_INSTANCE_KEY_MAX_LENGTH) {
+
 			_log.error(
-				"Portlet id " + portletId + " has more than " +
-					_PORTLET_ID_MAX_LENGTH + " characters");
+				"Portlet ID " + portletId + " has more than " +
+					PortletInstance.PORTLET_INSTANCE_KEY_MAX_LENGTH +
+						" characters");
 
 			bundleContext.ungetService(serviceReference);
 
@@ -1199,9 +1202,6 @@ public class PortletTracker
 	}
 
 	private static final String _NAMESPACE = "com.liferay.portlet.";
-
-	private static final int _PORTLET_ID_MAX_LENGTH =
-		PortletInstance.PORTLET_INSTANCE_KEY_MAX_LENGTH;
 
 	private static final Log _log = LogFactoryUtil.getLog(PortletTracker.class);
 
