@@ -32,11 +32,11 @@ public class PortletInstance {
 			PortletInstance._USER_SEPARATOR.length() + 39;
 
 	public static PortletInstance fromPortletInstanceKey(
-		String portletInstanceId) {
+		String portletInstanceKey) {
 
 		return new PortletInstance(
-			_getPortletName(portletInstanceId), _getUserId(portletInstanceId),
-			_getInstanceId(portletInstanceId));
+			_getPortletName(portletInstanceKey), _getUserId(portletInstanceKey),
+			_getInstanceId(portletInstanceKey));
 	}
 
 	public PortletInstance(String portletName) {
@@ -110,33 +110,33 @@ public class PortletInstance {
 		return getPortletInstanceKey();
 	}
 
-	private static String _getInstanceId(String portletInstance) {
-		int pos = portletInstance.indexOf(_INSTANCE_SEPARATOR);
+	private static String _getInstanceId(String portletInstanceKey) {
+		int pos = portletInstanceKey.indexOf(_INSTANCE_SEPARATOR);
 
 		if (pos == -1) {
 			return null;
 		}
 
-		return portletInstance.substring(pos + _INSTANCE_SEPARATOR.length());
+		return portletInstanceKey.substring(pos + _INSTANCE_SEPARATOR.length());
 	}
 
-	private static String _getPortletName(String portletInstance) {
-		int x = portletInstance.indexOf(_USER_SEPARATOR);
-		int y = portletInstance.indexOf(_INSTANCE_SEPARATOR);
+	private static String _getPortletName(String portletInstanceKey) {
+		int x = portletInstanceKey.indexOf(_USER_SEPARATOR);
+		int y = portletInstanceKey.indexOf(_INSTANCE_SEPARATOR);
 
 		if ((x == -1) && (y == -1)) {
-			return portletInstance;
+			return portletInstanceKey;
 		}
 		else if (x != -1) {
-			return portletInstance.substring(0, x);
+			return portletInstanceKey.substring(0, x);
 		}
 
-		return portletInstance.substring(0, y);
+		return portletInstanceKey.substring(0, y);
 	}
 
-	private static long _getUserId(String portletInstance) {
-		int x = portletInstance.indexOf(_USER_SEPARATOR);
-		int y = portletInstance.indexOf(_INSTANCE_SEPARATOR);
+	private static long _getUserId(String portletInstanceKey) {
+		int x = portletInstanceKey.indexOf(_USER_SEPARATOR);
+		int y = portletInstanceKey.indexOf(_INSTANCE_SEPARATOR);
 
 		if (x == -1) {
 			return 0;
@@ -144,11 +144,11 @@ public class PortletInstance {
 
 		if (y != -1) {
 			return GetterUtil.getLong(
-				portletInstance.substring(x + _USER_SEPARATOR.length(), y));
+				portletInstanceKey.substring(x + _USER_SEPARATOR.length(), y));
 		}
 
 		return GetterUtil.getLong(
-			portletInstance.substring(x + _USER_SEPARATOR.length()));
+			portletInstanceKey.substring(x + _USER_SEPARATOR.length()));
 	}
 
 	private void validatePortletName(String portletName) {
