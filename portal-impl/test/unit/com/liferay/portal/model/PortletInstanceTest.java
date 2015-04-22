@@ -28,170 +28,189 @@ public class PortletInstanceTest {
 
 	@Test
 	public void testInstanceId1() {
-		PortletInstance portletInstance = new PortletInstance(PortletKeys.TEST);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
 		Assert.assertNull(portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId2() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, "1234"));
 
 		Assert.assertEquals("1234", portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId3() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234));
 
 		Assert.assertNull(portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId4() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234, "5678"));
 
 		Assert.assertEquals("5678", portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId5() {
-		PortletInstance portletInstance = new PortletInstance(
-			getWarPortletId());
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(getWarPortletId());
 
 		Assert.assertNull(portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId6() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), "1234"));
 
 		Assert.assertEquals("1234", portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId7() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234));
 
 		Assert.assertNull(portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId8() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234, "5678"));
 
 		Assert.assertEquals("5678", portletInstance.getInstanceId());
 	}
 
 	@Test
 	public void testInstanceId9() {
-		PortletInstance portletInstance = new PortletInstance(PortletKeys.TEST);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
 		Assert.assertFalse(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId10() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, "1234"));
 
 		Assert.assertTrue(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId11() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234));
 
 		Assert.assertFalse(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId12() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234, "5678"));
 
 		Assert.assertTrue(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId13() {
-		PortletInstance portletInstance = new PortletInstance(
-			getWarPortletId());
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(getWarPortletId());
 
 		Assert.assertFalse(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId14() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), "1234"));
 
 		Assert.assertTrue(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId15() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234));
 
 		Assert.assertFalse(portletInstance.hasInstanceId());
 	}
 
 	@Test
 	public void testInstanceId16() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234, "5678"));
 
 		Assert.assertTrue(portletInstance.hasInstanceId());
 	}
 
 	@Test(expected = InvalidParameterException.class)
 	public void testInvalidPortletName() {
-		new PortletInstance(getId("1234_INSTANCE_asdf", 1234, "5678"));
+		PortletInstance.fromPortletInstanceKey(
+			getId("1234_INSTANCE_asdf", 1234, "5678"));
 	}
 
 	@Test
 	public void testRootPortletId1() {
-		PortletInstance portletInstance = new PortletInstance(PortletKeys.TEST);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
 		Assert.assertEquals(PortletKeys.TEST, portletInstance.getPortletName());
 	}
 
 	@Test
 	public void testRootPortletId2() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, "1234"));
 
 		Assert.assertEquals(PortletKeys.TEST, portletInstance.getPortletName());
 	}
 
 	@Test
 	public void testRootPortletId3() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234));
 
 		Assert.assertEquals(PortletKeys.TEST, portletInstance.getPortletName());
 	}
 
 	@Test
 	public void testRootPortletId4() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234, "5678"));
 
 		Assert.assertEquals(PortletKeys.TEST, portletInstance.getPortletName());
 	}
 
 	@Test
 	public void testRootPortletId5() {
-		PortletInstance portletInstance = new PortletInstance(
-			getWarPortletId());
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(getWarPortletId());
 
 		Assert.assertEquals(
 			getWarPortletId(), portletInstance.getPortletName());
@@ -199,8 +218,9 @@ public class PortletInstanceTest {
 
 	@Test
 	public void testRootPortletId6() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), "1234"));
 
 		Assert.assertEquals(
 			getWarPortletId(), portletInstance.getPortletName());
@@ -208,8 +228,9 @@ public class PortletInstanceTest {
 
 	@Test
 	public void testRootPortletId7() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234));
 
 		Assert.assertEquals(
 			getWarPortletId(), portletInstance.getPortletName());
@@ -217,8 +238,9 @@ public class PortletInstanceTest {
 
 	@Test
 	public void testRootPortletId8() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234, "5678"));
 
 		Assert.assertEquals(
 			getWarPortletId(), portletInstance.getPortletName());
@@ -226,126 +248,140 @@ public class PortletInstanceTest {
 
 	@Test
 	public void testUserId1() {
-		PortletInstance portletInstance = new PortletInstance(PortletKeys.TEST);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
 		Assert.assertEquals(0, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId2() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, "1234"));
 
 		Assert.assertEquals(0, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId3() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234));
 
 		Assert.assertEquals(1234, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId4() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234, "5678"));
 
 		Assert.assertEquals(1234, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId5() {
-		PortletInstance portletInstance = new PortletInstance(
-			getWarPortletId());
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(getWarPortletId());
 
 		Assert.assertEquals(0, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId6() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), "1234"));
 
 		Assert.assertEquals(0, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId7() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234));
 
 		Assert.assertEquals(1234, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId8() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234, "5678"));
 
 		Assert.assertEquals(1234, portletInstance.getUserId());
 	}
 
 	@Test
 	public void testUserId9() {
-		PortletInstance portletInstance = new PortletInstance(PortletKeys.TEST);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
 		Assert.assertFalse(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId10() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, "1234"));
 
 		Assert.assertFalse(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId11() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234));
 
 		Assert.assertTrue(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId12() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(PortletKeys.TEST, 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(PortletKeys.TEST, 1234, "5678"));
 
 		Assert.assertTrue(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId13() {
-		PortletInstance portletInstance = new PortletInstance(
-			getWarPortletId());
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(getWarPortletId());
 
 		Assert.assertFalse(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId14() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), "1234"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), "1234"));
 
 		Assert.assertFalse(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId15() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234));
 
 		Assert.assertTrue(portletInstance.hasUserId());
 	}
 
 	@Test
 	public void testUserId16() {
-		PortletInstance portletInstance = new PortletInstance(
-			getId(getWarPortletId(), 1234, "5678"));
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getId(getWarPortletId(), 1234, "5678"));
 
 		Assert.assertTrue(portletInstance.hasUserId());
 	}

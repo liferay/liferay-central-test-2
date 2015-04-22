@@ -328,8 +328,8 @@ public class PortletPreferencesFinderImpl
 			return true;
 		}
 
-		PortletInstance portletInstance = new PortletInstance(
-			portletPreferencesPortletId);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletPreferencesPortletId);
 
 		return portletInstance.hasIdenticalPortletName(portletId);
 	}

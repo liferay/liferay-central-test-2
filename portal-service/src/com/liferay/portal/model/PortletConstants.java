@@ -153,7 +153,8 @@ public class PortletConstants {
 	 */
 	@Deprecated
 	public static String getInstanceId(String portletId) {
-		PortletInstance portletInstance = new PortletInstance(portletId);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletId);
 
 		return portletInstance.getInstanceId();
 	}
@@ -165,7 +166,8 @@ public class PortletConstants {
 	 * @return the root portlet ID of the portlet
 	 */
 	public static String getRootPortletId(String portletId) {
-		PortletInstance portletInstance = new PortletInstance(portletId);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletId);
 
 		return portletInstance.getPortletName();
 	}
@@ -179,7 +181,8 @@ public class PortletConstants {
 	 */
 	@Deprecated
 	public static long getUserId(String portletId) {
-		PortletInstance portletInstance = new PortletInstance(portletId);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletId);
 
 		return portletInstance.getUserId();
 	}
@@ -187,8 +190,10 @@ public class PortletConstants {
 	public static boolean hasIdenticalRootPortletId(
 		String portletId1, String portletId2) {
 
-		PortletInstance portletInstance1 = new PortletInstance(portletId1);
-		PortletInstance portletInstance2 = new PortletInstance(portletId2);
+		PortletInstance portletInstance1 =
+			PortletInstance.fromPortletInstanceKey(portletId1);
+		PortletInstance portletInstance2 =
+			PortletInstance.fromPortletInstanceKey(portletId2);
 
 		return portletInstance1.hasIdenticalPortletName(portletInstance2);
 	}
@@ -201,7 +206,8 @@ public class PortletConstants {
 	 *         <code>false</code> otherwise
 	 */
 	public static boolean hasInstanceId(String portletId) {
-		PortletInstance portletInstance = new PortletInstance(portletId);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletId);
 
 		return portletInstance.hasInstanceId();
 	}
@@ -214,7 +220,8 @@ public class PortletConstants {
 	 *         <code>false</code> otherwise
 	 */
 	public static boolean hasUserId(String portletId) {
-		PortletInstance portletInstance = new PortletInstance(portletId);
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletId);
 
 		return portletInstance.hasUserId();
 	}

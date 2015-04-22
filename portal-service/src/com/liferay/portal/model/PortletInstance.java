@@ -31,14 +31,16 @@ public class PortletInstance {
 		255 - PortletInstance._INSTANCE_SEPARATOR.length() +
 			PortletInstance._USER_SEPARATOR.length() + 39;
 
-	public static PortletInstance newInstanceFor(String portletName) {
-		return new PortletInstance(portletName, StringUtil.randomString(12));
-	}
+	public static PortletInstance fromPortletInstanceKey(
+		String portletInstanceId) {
 
-	public PortletInstance(String portletInstanceId) {
-		this(
+		return new PortletInstance(
 			_getPortletName(portletInstanceId), _getUserId(portletInstanceId),
 			_getInstanceId(portletInstanceId));
+	}
+
+	public static PortletInstance newInstanceFor(String portletName) {
+		return new PortletInstance(portletName, StringUtil.randomString(12));
 	}
 
 	public PortletInstance(String portletName, long userId) {

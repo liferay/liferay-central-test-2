@@ -60,7 +60,8 @@ public class UpgradePortletId extends UpgradeProcess {
 		String[] uninstanceablePortletIds = getUninstanceablePortletIds();
 
 		for (String portletId : uninstanceablePortletIds) {
-			PortletInstance portletInstance = new PortletInstance(portletId);
+			PortletInstance portletInstance =
+				PortletInstance.fromPortletInstanceKey(portletId);
 
 			if (portletInstance.hasInstanceId()) {
 				if (_log.isWarnEnabled()) {
