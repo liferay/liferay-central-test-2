@@ -386,27 +386,27 @@ public class PortletInstanceTest {
 		Assert.assertTrue(portletInstance.hasUserId());
 	}
 
-	protected String getPortletInstanceKey(String rootPortletId, long userId) {
+	protected String getPortletInstanceKey(String portletName, long userId) {
 		PortletInstance portletInstance = new PortletInstance(
-			rootPortletId, userId, null);
+			portletName, userId, null);
 
 		return portletInstance.getPortletInstanceKey();
 	}
 
 	protected String getPortletInstanceKey(
-		String rootPortletId, long userId, String instanceKey) {
+		String portletName, long userId, String instanceId) {
 
 		PortletInstance portletInstance = new PortletInstance(
-			rootPortletId, userId, instanceKey);
+			portletName, userId, instanceId);
 
 		return portletInstance.getPortletInstanceKey();
 	}
 
 	protected String getPortletInstanceKey(
-		String rootPortletId, String instanceKey) {
+		String portletName, String instanceId) {
 
 		PortletInstance portletInstance = new PortletInstance(
-			rootPortletId, instanceKey);
+			portletName, instanceId);
 
 		return portletInstance.getPortletInstanceKey();
 	}
