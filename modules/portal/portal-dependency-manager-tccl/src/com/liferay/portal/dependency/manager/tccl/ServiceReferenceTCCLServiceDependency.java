@@ -30,32 +30,31 @@ public class ServiceReferenceTCCLServiceDependency
 	extends ServiceDependencyImpl {
 
 	public ServiceReferenceTCCLServiceDependency(
-		BundleContext context, Logger logger) {
+		BundleContext bundleContext, Logger logger) {
 
-		super(context, logger);
+		super(bundleContext, logger);
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public void invoke(
 		Object[] callbackInstances, DependencyService dependencyService,
-		ServiceReference reference, Object service, String name) {
-
-		Bundle bundle = reference.getBundle();
-
-		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
-		ClassLoader bundleClassLoader = bundleWiring.getClassLoader();
+		ServiceReference serviceReference, Object service, String name) {
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		currentThread.setContextClassLoader(bundleClassLoader);
+		Bundle bundle = serviceReference.getBundle();
+
+		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+		currentThread.setContextClassLoader(bundleWiring.getClassLoader());
 
 		try {
 			super.invoke(
-				callbackInstances, dependencyService, reference, service, name);
+				callbackInstances, dependencyService, serviceReference, service,
+				name);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -66,26 +65,25 @@ public class ServiceReferenceTCCLServiceDependency
 	@SuppressWarnings("rawtypes")
 	public void invokeSwappedCallback(
 		Object[] callbackInstances, DependencyService component,
-		ServiceReference previousReference, Object previous,
-		ServiceReference currentServiceReference, Object current,
+		ServiceReference previousServiceReference, Object previousService,
+		ServiceReference currentServiceReference, Object currentService,
 		String swapCallback) {
-
-		Bundle bundle = currentServiceReference.getBundle();
-
-		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
-		ClassLoader bundleClassLoader = bundleWiring.getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		currentThread.setContextClassLoader(bundleClassLoader);
+		Bundle bundle = currentServiceReference.getBundle();
+
+		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+		currentThread.setContextClassLoader(bundleWiring.getClassLoader());
 
 		try {
 			super.invokeSwappedCallback(
-				callbackInstances, component, previousReference, previous,
-				currentServiceReference, current, swapCallback);
+				callbackInstances, component, previousServiceReference,
+				previousService, currentServiceReference, currentService,
+				swapCallback);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
