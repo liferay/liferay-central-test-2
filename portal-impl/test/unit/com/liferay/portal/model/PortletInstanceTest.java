@@ -96,76 +96,6 @@ public class PortletInstanceTest {
 		Assert.assertEquals("5678", portletInstance.getInstanceId());
 	}
 
-	@Test
-	public void testHasInstanceId1() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
-
-		Assert.assertFalse(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId2() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(
-				getPortletInstanceKey(PortletKeys.TEST, "1234"));
-
-		Assert.assertTrue(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId3() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(
-				getPortletInstanceKey(PortletKeys.TEST, 1234));
-
-		Assert.assertFalse(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId4() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(
-				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
-
-		Assert.assertTrue(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId5() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
-
-		Assert.assertFalse(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId6() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(
-				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
-
-		Assert.assertTrue(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId7() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(
-				getPortletInstanceKey(getPortletInstanceKey(), 1234));
-
-		Assert.assertFalse(portletInstance.hasInstanceId());
-	}
-
-	@Test
-	public void testHasInstanceId8() {
-		PortletInstance portletInstance =
-			PortletInstance.fromPortletInstanceKey(
-				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
-
-		Assert.assertTrue(portletInstance.hasInstanceId());
-	}
-
 	@Test(expected = InvalidParameterException.class)
 	public void testGetPortletInstanceKey() {
 		PortletInstance.fromPortletInstanceKey(
@@ -386,6 +316,80 @@ public class PortletInstanceTest {
 		Assert.assertTrue(portletInstance.hasUserId());
 	}
 
+	@Test
+	public void testHasInstanceId1() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
+
+		Assert.assertFalse(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId2() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getPortletInstanceKey(PortletKeys.TEST, "1234"));
+
+		Assert.assertTrue(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId3() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getPortletInstanceKey(PortletKeys.TEST, 1234));
+
+		Assert.assertFalse(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId4() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
+
+		Assert.assertTrue(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId5() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
+
+		Assert.assertFalse(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId6() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
+
+		Assert.assertTrue(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId7() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getPortletInstanceKey(getPortletInstanceKey(), 1234));
+
+		Assert.assertFalse(portletInstance.hasInstanceId());
+	}
+
+	@Test
+	public void testHasInstanceId8() {
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(
+				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
+
+		Assert.assertTrue(portletInstance.hasInstanceId());
+	}
+
+	protected String getPortletInstanceKey() {
+		return PortletKeys.TEST + PortletConstants.WAR_SEPARATOR + "context";
+	}
+
 	protected String getPortletInstanceKey(String portletName, long userId) {
 		PortletInstance portletInstance = new PortletInstance(
 			portletName, userId, null);
@@ -409,10 +413,6 @@ public class PortletInstanceTest {
 			portletName, instanceId);
 
 		return portletInstance.getPortletInstanceKey();
-	}
-
-	protected String getPortletInstanceKey() {
-		return PortletKeys.TEST + PortletConstants.WAR_SEPARATOR + "context";
 	}
 
 }
