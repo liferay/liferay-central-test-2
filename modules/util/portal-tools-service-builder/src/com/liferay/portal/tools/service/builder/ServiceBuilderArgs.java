@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 /**
  * @author Raymond Augé
  */
-public class ServiceBuilderBean {
+public class ServiceBuilderArgs {
 
 	public String getApiDir() {
 		return _apiDir;

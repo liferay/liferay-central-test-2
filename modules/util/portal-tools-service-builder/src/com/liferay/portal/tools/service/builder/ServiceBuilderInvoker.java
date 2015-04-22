@@ -29,18 +29,18 @@ import java.util.Set;
 public class ServiceBuilderInvoker {
 
 	public static ServiceBuilder invoke(
-			File baseDir, ServiceBuilderBean serviceBuilderBean)
+			File baseDir, ServiceBuilderArgs serviceBuilderArgs)
 		throws Exception {
 
 		Set<String> resourceActionModels =
 			ServiceBuilder.readResourceActionModels(
-				serviceBuilderBean.getApiDir(),
-				serviceBuilderBean.getResourceActionsConfigs());
+				serviceBuilderArgs.getApiDir(),
+				serviceBuilderArgs.getResourceActionsConfigs());
 
 		ModelHintsImpl modelHintsImpl = new ModelHintsImpl();
 
 		modelHintsImpl.setModelHintsConfigs(
-			serviceBuilderBean.getModelHintsConfigs());
+			serviceBuilderArgs.getModelHintsConfigs());
 
 		modelHintsImpl.afterPropertiesSet();
 
@@ -49,32 +49,32 @@ public class ServiceBuilderInvoker {
 		modelHintsUtil.setModelHints(modelHintsImpl);
 
 		return new ServiceBuilder(
-			_getAbsolutePath(baseDir, serviceBuilderBean.getApiDir()),
-			serviceBuilderBean.isAutoImportDefaultReferences(),
-			serviceBuilderBean.isAutoNamespaceTables(),
-			serviceBuilderBean.getBeanLocatorUtil(),
-			serviceBuilderBean.getBuildNumber(),
-			serviceBuilderBean.isBuildNumberIncrement(),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getHbmFileName()),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getImplDir()),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getInputFileName()),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getApiDir()),
+			serviceBuilderArgs.isAutoImportDefaultReferences(),
+			serviceBuilderArgs.isAutoNamespaceTables(),
+			serviceBuilderArgs.getBeanLocatorUtil(),
+			serviceBuilderArgs.getBuildNumber(),
+			serviceBuilderArgs.isBuildNumberIncrement(),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getHbmFileName()),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getImplDir()),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getInputFileName()),
 			_getAbsolutePath(
-				baseDir, serviceBuilderBean.getModelHintsFileName()),
-			serviceBuilderBean.isOsgiModule(),
-			serviceBuilderBean.getPluginName(),
-			serviceBuilderBean.getPropsUtil(),
-			serviceBuilderBean.getReadOnlyPrefixes(),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getRemotingFileName()),
+				baseDir, serviceBuilderArgs.getModelHintsFileName()),
+			serviceBuilderArgs.isOsgiModule(),
+			serviceBuilderArgs.getPluginName(),
+			serviceBuilderArgs.getPropsUtil(),
+			serviceBuilderArgs.getReadOnlyPrefixes(),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getRemotingFileName()),
 			resourceActionModels,
-			_getAbsolutePath(baseDir, serviceBuilderBean.getResourcesDir()),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getSpringFileName()),
-			serviceBuilderBean.getSpringNamespaces(),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getSqlDir()),
-			serviceBuilderBean.getSqlFileName(),
-			serviceBuilderBean.getSqlIndexesFileName(),
-			serviceBuilderBean.getSqlSequencesFileName(),
-			serviceBuilderBean.getTargetEntityName(),
-			_getAbsolutePath(baseDir, serviceBuilderBean.getTestDir()), true);
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getResourcesDir()),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getSpringFileName()),
+			serviceBuilderArgs.getSpringNamespaces(),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getSqlDir()),
+			serviceBuilderArgs.getSqlFileName(),
+			serviceBuilderArgs.getSqlIndexesFileName(),
+			serviceBuilderArgs.getSqlSequencesFileName(),
+			serviceBuilderArgs.getTargetEntityName(),
+			_getAbsolutePath(baseDir, serviceBuilderArgs.getTestDir()), true);
 	}
 
 	private static String _getAbsolutePath(File baseDir, String fileName) {

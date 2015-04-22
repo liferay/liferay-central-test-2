@@ -15,7 +15,7 @@
 package com.liferay.portal.tools.service.builder.ant;
 
 import com.liferay.portal.tools.service.builder.ServiceBuilder;
-import com.liferay.portal.tools.service.builder.ServiceBuilderBean;
+import com.liferay.portal.tools.service.builder.ServiceBuilderArgs;
 import com.liferay.portal.tools.service.builder.ServiceBuilderInvoker;
 
 import java.util.Set;
@@ -35,7 +35,7 @@ public class ServiceBuilderTask extends Task {
 			Project project = getProject();
 
 			ServiceBuilder serviceBuilder = ServiceBuilderInvoker.invoke(
-				project.getBaseDir(), _serviceBuilderBean);
+				project.getBaseDir(), _serviceBuilderArgs);
 
 			Set<String> modifiedFileNames =
 				serviceBuilder.getModifiedFileNames();
@@ -49,128 +49,128 @@ public class ServiceBuilderTask extends Task {
 	}
 
 	public void setApiDir(String apiDir) {
-		_serviceBuilderBean.setApiDir(apiDir);
+		_serviceBuilderArgs.setApiDir(apiDir);
 	}
 
 	public void setAutoImportDefaultReferences(
 		boolean autoImportDefaultReferences) {
 
-		_serviceBuilderBean.setAutoImportDefaultReferences(
+		_serviceBuilderArgs.setAutoImportDefaultReferences(
 			autoImportDefaultReferences);
 	}
 
 	public void setAutoNamespaceTables(boolean autoNamespaceTables) {
-		_serviceBuilderBean.setAutoNamespaceTables(autoNamespaceTables);
+		_serviceBuilderArgs.setAutoNamespaceTables(autoNamespaceTables);
 	}
 
 	public void setBeanLocatorUtil(String beanLocatorUtil) {
-		_serviceBuilderBean.setBeanLocatorUtil(beanLocatorUtil);
+		_serviceBuilderArgs.setBeanLocatorUtil(beanLocatorUtil);
 	}
 
 	public void setBuildNumber(long buildNumber) {
-		_serviceBuilderBean.setBuildNumber(buildNumber);
+		_serviceBuilderArgs.setBuildNumber(buildNumber);
 	}
 
 	public void setBuildNumberIncrement(boolean buildNumberIncrement) {
-		_serviceBuilderBean.setBuildNumberIncrement(buildNumberIncrement);
+		_serviceBuilderArgs.setBuildNumberIncrement(buildNumberIncrement);
 	}
 
 	public void setHbmFileName(String hbmFileName) {
-		_serviceBuilderBean.setHbmFileName(hbmFileName);
+		_serviceBuilderArgs.setHbmFileName(hbmFileName);
 	}
 
 	public void setImplDir(String implDir) {
-		_serviceBuilderBean.setImplDir(implDir);
+		_serviceBuilderArgs.setImplDir(implDir);
 	}
 
 	public void setInputFileName(String inputFileName) {
-		_serviceBuilderBean.setInputFileName(inputFileName);
+		_serviceBuilderArgs.setInputFileName(inputFileName);
 	}
 
 	public void setMergeModelHintsConfigs(String mergeModelHintsConfigs) {
-		_serviceBuilderBean.setMergeModelHintsConfigs(mergeModelHintsConfigs);
+		_serviceBuilderArgs.setMergeModelHintsConfigs(mergeModelHintsConfigs);
 	}
 
 	public void setMergeReadOnlyPrefixes(String mergeReadOnlyPrefixes) {
-		_serviceBuilderBean.setMergeReadOnlyPrefixes(mergeReadOnlyPrefixes);
+		_serviceBuilderArgs.setMergeReadOnlyPrefixes(mergeReadOnlyPrefixes);
 	}
 
 	public void setMergeResourceActionsConfigs(
 		String mergeResourceActionsConfigs) {
 
-		_serviceBuilderBean.setMergeResourceActionsConfigs(
+		_serviceBuilderArgs.setMergeResourceActionsConfigs(
 			mergeResourceActionsConfigs);
 	}
 
 	public void setModelHintsConfigs(String modelHintsConfigs) {
-		_serviceBuilderBean.setModelHintsConfigs(modelHintsConfigs);
+		_serviceBuilderArgs.setModelHintsConfigs(modelHintsConfigs);
 	}
 
 	public void setModelHintsFileName(String modelHintsFileName) {
-		_serviceBuilderBean.setModelHintsFileName(modelHintsFileName);
+		_serviceBuilderArgs.setModelHintsFileName(modelHintsFileName);
 	}
 
 	public void setOsgiModule(boolean osgiModule) {
-		_serviceBuilderBean.setOsgiModule(osgiModule);
+		_serviceBuilderArgs.setOsgiModule(osgiModule);
 	}
 
 	public void setPluginName(String pluginName) {
-		_serviceBuilderBean.setPluginName(pluginName);
+		_serviceBuilderArgs.setPluginName(pluginName);
 	}
 
 	public void setPropsUtil(String propsUtil) {
-		_serviceBuilderBean.setPropsUtil(propsUtil);
+		_serviceBuilderArgs.setPropsUtil(propsUtil);
 	}
 
 	public void setReadOnlyPrefixes(String readOnlyPrefixes) {
-		_serviceBuilderBean.setReadOnlyPrefixes(readOnlyPrefixes);
+		_serviceBuilderArgs.setReadOnlyPrefixes(readOnlyPrefixes);
 	}
 
 	public void setRemotingFileName(String remotingFileName) {
-		_serviceBuilderBean.setRemotingFileName(remotingFileName);
+		_serviceBuilderArgs.setRemotingFileName(remotingFileName);
 	}
 
 	public void setResourceActionsConfigs(String resourceActionsConfigs) {
-		_serviceBuilderBean.setResourceActionsConfigs(resourceActionsConfigs);
+		_serviceBuilderArgs.setResourceActionsConfigs(resourceActionsConfigs);
 	}
 
 	public void setResourcesDir(String resourcesDir) {
-		_serviceBuilderBean.setResourcesDir(resourcesDir);
+		_serviceBuilderArgs.setResourcesDir(resourcesDir);
 	}
 
 	public void setSpringFileName(String springFileName) {
-		_serviceBuilderBean.setSpringFileName(springFileName);
+		_serviceBuilderArgs.setSpringFileName(springFileName);
 	}
 
 	public void setSpringNamespaces(String springNamespaces) {
-		_serviceBuilderBean.setSpringNamespaces(springNamespaces);
+		_serviceBuilderArgs.setSpringNamespaces(springNamespaces);
 	}
 
 	public void setSqlDir(String sqlDir) {
-		_serviceBuilderBean.setSqlDir(sqlDir);
+		_serviceBuilderArgs.setSqlDir(sqlDir);
 	}
 
 	public void setSqlFileName(String sqlFileName) {
-		_serviceBuilderBean.setSqlFileName(sqlFileName);
+		_serviceBuilderArgs.setSqlFileName(sqlFileName);
 	}
 
 	public void setSqlIndexesFileName(String sqlIndexesFileName) {
-		_serviceBuilderBean.setSqlIndexesFileName(sqlIndexesFileName);
+		_serviceBuilderArgs.setSqlIndexesFileName(sqlIndexesFileName);
 	}
 
 	public void setSqlSequencesFileName(String sqlSequencesFileName) {
-		_serviceBuilderBean.setSqlSequencesFileName(sqlSequencesFileName);
+		_serviceBuilderArgs.setSqlSequencesFileName(sqlSequencesFileName);
 	}
 
 	public void setTargetEntityName(String targetEntityName) {
-		_serviceBuilderBean.setTargetEntityName(targetEntityName);
+		_serviceBuilderArgs.setTargetEntityName(targetEntityName);
 	}
 
 	public void setTestDir(String testDir) {
-		_serviceBuilderBean.setTestDir(testDir);
+		_serviceBuilderArgs.setTestDir(testDir);
 	}
 
-	private final ServiceBuilderBean _serviceBuilderBean =
-		new ServiceBuilderBean();
+	private final ServiceBuilderArgs _serviceBuilderArgs =
+		new ServiceBuilderArgs();
 
 }
