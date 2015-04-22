@@ -185,8 +185,8 @@ public class JournalContentPortletLayoutListener
 
 		Element rootElement = document.getRootElement();
 
-		String instanceId = rootElement.attributeValue("instance");
 		String portletId = rootElement.attributeValue("name");
+		String instanceId = rootElement.attributeValue("instance");
 
 		PortletInstance portletInstance = new PortletInstance(
 			portletId, instanceId);
