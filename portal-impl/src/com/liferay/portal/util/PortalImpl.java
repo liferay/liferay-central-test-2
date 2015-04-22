@@ -2797,7 +2797,7 @@ public class PortalImpl implements Portal {
 			defaultAssetPublisherPortletId;
 
 		if (Validator.isNull(defaultAssetPublisherPortletId)) {
-			PortletInstance portletInstance = PortletInstance.newInstanceFor(
+			PortletInstance portletInstance = new PortletInstance(
 				"com_liferay_asset_publisher_web_AssetPublisherPortlet");
 
 			defaultAssetPublisherPortletId =

@@ -72,8 +72,7 @@ public class UpgradePortletId extends UpgradeProcess {
 				continue;
 			}
 
-			PortletInstance newPortletInstance = PortletInstance.newInstanceFor(
-				portletId);
+			PortletInstance newPortletInstance = new PortletInstance(portletId);
 
 			String newPortletInstanceKey =
 				newPortletInstance.getPortletInstanceKey();

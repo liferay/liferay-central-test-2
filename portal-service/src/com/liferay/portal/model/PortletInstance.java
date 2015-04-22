@@ -39,8 +39,8 @@ public class PortletInstance {
 			_getInstanceId(portletInstanceId));
 	}
 
-	public static PortletInstance newInstanceFor(String portletName) {
-		return new PortletInstance(portletName, StringUtil.randomString(12));
+	public PortletInstance(String portletName) {
+		this(portletName, StringUtil.randomString(12));
 	}
 
 	public PortletInstance(String portletName, long userId) {
