@@ -185,11 +185,11 @@ public class JournalContentPortletLayoutListener
 
 		Element rootElement = document.getRootElement();
 
-		String portletId = rootElement.attributeValue("name");
+		String portletName = rootElement.attributeValue("name");
 		String instanceId = rootElement.attributeValue("instance");
 
 		PortletInstance portletInstance = new PortletInstance(
-			portletId, instanceId);
+			portletName, instanceId);
 
 		return portletInstance.getPortletInstanceKey();
 	}
