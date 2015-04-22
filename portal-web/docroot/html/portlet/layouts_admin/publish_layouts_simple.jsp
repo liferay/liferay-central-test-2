@@ -86,14 +86,12 @@ if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TY
 
 						<%
 						List<Portlet> dataSiteLevelPortlets = LayoutExporter.getDataSiteLevelPortlets(company.getCompanyId(), false);
-						Set<String> portletDataHandlerClasses = new HashSet<String>();
 
-						Date endDate = new Date();
-						Date startDate = ExportImportDateUtil.getLastPublishDate(selLayoutSet);
-
-						PortletDataContext portletDataContext = PortletDataContextFactoryUtil.createPreparePortletDataContext(company.getCompanyId(), layoutsAdminDisplayContext.getStagingGroupId(), startDate, endDate);
+						PortletDataContext portletDataContext = PortletDataContextFactoryUtil.createPreparePortletDataContext(company.getCompanyId(), layoutsAdminDisplayContext.getStagingGroupId(), ExportImportDateUtil.getLastPublishDate(selLayoutSet), new Date());
 
 						ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
+
+						Set<String> portletDataHandlerClasses = new HashSet<String>();
 
 						if (!dataSiteLevelPortlets.isEmpty()) {
 							for (Portlet portlet : dataSiteLevelPortlets) {
@@ -105,24 +103,19 @@ if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TY
 
 								portletDataHandlerClasses.add(portletDataHandlerClass);
 
-								String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
-
 								PortletDataHandler portletDataHandler = portlet.getPortletDataHandlerInstance();
 
 								portletDataHandler.prepareManifestSummary(portletDataContext);
 
 								long exportModelCount = portletDataHandler.getExportModelCount(manifestSummary);
-
 								long modelDeletionCount = manifestSummary.getModelDeletionCount(portletDataHandler.getDeletionSystemEventStagedModelTypes());
 
-								boolean displayCounts = (exportModelCount != 0) || (modelDeletionCount != 0);
+								Group liveGroup = layoutsAdminDisplayContext.getLiveGroup();
 
-								UnicodeProperties liveGroupTypeSettings = layoutsAdminDisplayContext.getLiveGroup().getTypeSettingsProperties();
+								UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
-								displayCounts = displayCounts && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingUtil.getStagedPortletId(portlet.getRootPortletId())), portletDataHandler.isPublishToLiveByDefault());
-
-								if (displayCounts) {
-								%>
+								if (((exportModelCount != 0) || (modelDeletionCount != 0)) && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingUtil.getStagedPortletId(portlet.getRootPortletId())), portletDataHandler.isPublishToLiveByDefault())) {
+						%>
 
 									<liferay-util:buffer var="badgeHTML">
 										<span class="badge badge-info"><%= (exportModelCount > 0) ? exportModelCount : StringPool.BLANK %></span>
@@ -131,10 +124,10 @@ if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TY
 									</liferay-util:buffer>
 
 									<li class="tree-item">
-										<liferay-ui:message key="<%= portletTitle + StringPool.SPACE + badgeHTML %>" />
+										<liferay-ui:message key="<%= PortalUtil.getPortletTitle(portlet, application, locale) + StringPool.SPACE + badgeHTML %>" />
 									</li>
 
-								<%
+						<%
 								}
 							}
 						}
