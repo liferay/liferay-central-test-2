@@ -157,7 +157,7 @@ public class PortletInstance {
 	}
 
 	private void validatePortletName(String portletName) {
-		for (String keyword : _PORTLET_NAME_RESERVED_KEYWORDS) {
+		for (String keyword : _PORTLET_NAME_KEYWORDS) {
 			if (!portletName.contains(keyword)) {
 				continue;
 			}
@@ -172,8 +172,8 @@ public class PortletInstance {
 
 	private static final String _USER_SEPARATOR = "_USER_";
 
-	private final String[] _PORTLET_NAME_RESERVED_KEYWORDS =
-		new String[] {_INSTANCE_SEPARATOR, _USER_SEPARATOR};
+	private final String[] _PORTLET_NAME_KEYWORDS =
+		{_INSTANCE_SEPARATOR, _USER_SEPARATOR};
 
 	private final String _instanceId;
 	private final String _portletName;
