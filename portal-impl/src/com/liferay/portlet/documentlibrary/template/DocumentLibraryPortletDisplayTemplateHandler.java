@@ -91,7 +91,6 @@ public class DocumentLibraryPortletDisplayTemplateHandler
 		templateVariableGroup.addCollectionVariable(
 			"documents", List.class, PortletDisplayTemplateConstants.ENTRIES,
 			"document", FileEntry.class, "curFileEntry", "title");
-
 		templateVariableGroup.addVariable("dl-util", DLUtil.class, "dlUtil");
 
 		String[] restrictedVariables = getRestrictedVariables(language);
