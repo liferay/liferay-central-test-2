@@ -74,12 +74,10 @@ if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TY
 
 						<%
 						LayoutSet selLayoutSet = layoutsAdminDisplayContext.getSelLayoutSet();
-
-						int pagesCount = selLayoutSet.getPageCount();
 						%>
 
 						<liferay-util:buffer var="badgeHTML">
-							<span class="badge badge-info"><%= (pagesCount > 0) ? pagesCount : LanguageUtil.get(request, "none") %></span>
+							<span class="badge badge-info"><%= (selLayoutSet.getPageCount() > 0) ? selLayoutSet.getPageCount() : LanguageUtil.get(request, "none") %></span>
 						</liferay-util:buffer>
 
 						<li class="tree-item">
