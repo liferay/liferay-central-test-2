@@ -261,6 +261,7 @@ public class ServiceBuilderBean {
 		}
 
 		_modelHintsConfigsSet = true;
+
 		_modelHintsConfigs = modelHintsConfigs;
 	}
 
@@ -272,6 +273,7 @@ public class ServiceBuilderBean {
 		}
 
 		_readOnlyPrefixesSet = true;
+
 		_readOnlyPrefixes = readOnlyPrefixes;
 	}
 
@@ -283,6 +285,7 @@ public class ServiceBuilderBean {
 		}
 
 		_resourceActionsConfigsSet = true;
+
 		_resourceActionsConfigs = resourceActionsConfigs;
 	}
 
