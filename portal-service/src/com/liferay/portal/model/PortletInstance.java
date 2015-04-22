@@ -102,7 +102,11 @@ public class PortletInstance {
 	}
 
 	public boolean hasUserId() {
-		return (_userId > 0);
+		if (_userId > 0) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
