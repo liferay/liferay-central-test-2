@@ -34,12 +34,16 @@ import javax.servlet.ServletResponse;
 public class WikiAttachmentItemSelectorView
 	implements ItemSelectorView<WikiAttachmentItemSelectorCriterion> {
 
-	public static final String ITEM_SELECTED_CALLBACK = "itemSelectedCallback";
+	public static final String ITEM_SELECTED_CALLBACK =
+		WikiAttachmentItemSelectorView.class.getName() +
+			"#ITEM_SELECTED_CALLBACK";
 
-	public static final String PORTLET_URL = "portletURL";
+	public static final String PORTLET_URL =
+		WikiAttachmentItemSelectorView.class.getName() + "#PORTLET_URL";
 
 	public static final String WIKI_ATTACHMENT_ITEM_SELECTOR_CRITERION =
-		"wikiAttachmentItemSelectorCriterion";
+		WikiAttachmentItemSelectorView.class.getName() +
+			"#WIKI_ATTACHMENT_ITEM_SELECTOR_CRITERION";
 
 	@Override
 	public Class<WikiAttachmentItemSelectorCriterion>
