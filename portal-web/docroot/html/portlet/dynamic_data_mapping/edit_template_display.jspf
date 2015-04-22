@@ -44,7 +44,7 @@ if (Validator.isNotNull(scriptContent)) {
 							TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler(templateHandlerClassNameId);
 
 							Class<?> clazz = ddmDisplay.getClass();
-							
+
 							if (templateHandler != null) {
 								clazz = templateHandler.getClass();
 							}
