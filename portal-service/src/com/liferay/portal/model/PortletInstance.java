@@ -105,7 +105,7 @@ public class PortletInstance {
 		if (_userId > 0) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
