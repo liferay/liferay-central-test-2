@@ -151,7 +151,6 @@ public class PortletConstants {
 	 * @param  portletId the portlet ID
 	 * @return the instance ID of the portlet
 	 */
-	@Deprecated
 	public static String getInstanceId(String portletId) {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(portletId);
@@ -179,7 +178,6 @@ public class PortletConstants {
 	 * @param  portletId the portlet ID
 	 * @return the user ID of the portlet
 	 */
-	@Deprecated
 	public static long getUserId(String portletId) {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(portletId);
