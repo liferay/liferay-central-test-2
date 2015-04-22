@@ -27,7 +27,7 @@ import org.junit.Test;
 public class PortletInstanceTest {
 
 	@Test
-	public void testInstanceId1() {
+	public void testGetInstanceId1() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
@@ -35,7 +35,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId2() {
+	public void testGetInstanceId2() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, "1234"));
@@ -44,7 +44,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId3() {
+	public void testGetInstanceId3() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234));
@@ -53,7 +53,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId4() {
+	public void testGetInstanceId4() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
@@ -62,7 +62,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId5() {
+	public void testGetInstanceId5() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
 
@@ -70,7 +70,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId6() {
+	public void testGetInstanceId6() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
@@ -79,7 +79,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId7() {
+	public void testGetInstanceId7() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234));
@@ -88,7 +88,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId8() {
+	public void testGetInstanceId8() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
@@ -97,7 +97,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId9() {
+	public void testHasInstanceId1() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
@@ -105,7 +105,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId10() {
+	public void testHasInstanceId2() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, "1234"));
@@ -114,7 +114,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId11() {
+	public void testHasInstanceId3() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234));
@@ -123,7 +123,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId12() {
+	public void testHasInstanceId4() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
@@ -132,7 +132,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId13() {
+	public void testHasInstanceId5() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
 
@@ -140,7 +140,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId14() {
+	public void testHasInstanceId6() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
@@ -149,7 +149,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId15() {
+	public void testHasInstanceId7() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234));
@@ -158,7 +158,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testInstanceId16() {
+	public void testHasInstanceId8() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
@@ -167,13 +167,13 @@ public class PortletInstanceTest {
 	}
 
 	@Test(expected = InvalidParameterException.class)
-	public void testInvalidPortletName() {
+	public void testGetPortletInstanceKey() {
 		PortletInstance.fromPortletInstanceKey(
 			getPortletInstanceKey("1234_INSTANCE_asdf", 1234, "5678"));
 	}
 
 	@Test
-	public void testRootPortletId1() {
+	public void testGetPortletName1() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
@@ -181,7 +181,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId2() {
+	public void testGetPortletName2() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, "1234"));
@@ -190,7 +190,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId3() {
+	public void testGetPortletName3() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234));
@@ -199,7 +199,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId4() {
+	public void testGetPortletName4() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
@@ -208,7 +208,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId5() {
+	public void testGetPortletName5() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
 
@@ -217,7 +217,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId6() {
+	public void testGetPortletName6() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
@@ -227,7 +227,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId7() {
+	public void testGetPortletName7() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234));
@@ -237,7 +237,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testRootPortletId8() {
+	public void testGetPortletName8() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
@@ -247,7 +247,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId1() {
+	public void testGetUserId1() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
@@ -255,7 +255,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId2() {
+	public void testGetUserId2() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, "1234"));
@@ -264,7 +264,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId3() {
+	public void testGetUserId3() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234));
@@ -273,7 +273,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId4() {
+	public void testGetUserId4() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
@@ -282,7 +282,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId5() {
+	public void testGetUserId5() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
 
@@ -290,7 +290,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId6() {
+	public void testGetUserId6() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
@@ -299,7 +299,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId7() {
+	public void testGetUserId7() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234));
@@ -308,7 +308,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId8() {
+	public void testGetUserId8() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
@@ -317,7 +317,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId9() {
+	public void testGetUserId9() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(PortletKeys.TEST);
 
@@ -325,7 +325,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId10() {
+	public void testGetUserId10() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, "1234"));
@@ -334,7 +334,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId11() {
+	public void testGetUserId11() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234));
@@ -343,7 +343,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId12() {
+	public void testGetUserId12() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(PortletKeys.TEST, 1234, "5678"));
@@ -352,7 +352,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId13() {
+	public void testGetUserId13() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(getPortletInstanceKey());
 
@@ -360,7 +360,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId14() {
+	public void testGetUserId14() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), "1234"));
@@ -369,7 +369,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId15() {
+	public void testGetUserId15() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234));
@@ -378,7 +378,7 @@ public class PortletInstanceTest {
 	}
 
 	@Test
-	public void testUserId16() {
+	public void testGetUserId16() {
 		PortletInstance portletInstance =
 			PortletInstance.fromPortletInstanceKey(
 				getPortletInstanceKey(getPortletInstanceKey(), 1234, "5678"));
