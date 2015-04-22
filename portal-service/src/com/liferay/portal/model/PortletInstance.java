@@ -115,13 +115,14 @@ public class PortletInstance {
 	}
 
 	private static String _getInstanceId(String portletInstanceKey) {
-		int pos = portletInstanceKey.indexOf(_INSTANCE_SEPARATOR);
+		int index = portletInstanceKey.indexOf(_INSTANCE_SEPARATOR);
 
-		if (pos == -1) {
+		if (index == -1) {
 			return null;
 		}
 
-		return portletInstanceKey.substring(pos + _INSTANCE_SEPARATOR.length());
+		return portletInstanceKey.substring(
+			index + _INSTANCE_SEPARATOR.length());
 	}
 
 	private static String _getPortletName(String portletInstanceKey) {
@@ -157,11 +158,13 @@ public class PortletInstance {
 
 	private void validatePortletName(String portletName) {
 		for (String keyword : _PORTLET_NAME_RESERVED_KEYWORDS) {
-			if (portletName.indexOf(keyword) != -1) {
-				throw new InvalidParameterException(
-					"The portletName '" + portletName +
-						"' must not contain the keyword " + keyword);
+			if (!portletName.contains(keyword)) {
+				continue;
 			}
+
+			throw new InvalidParameterException(
+				"The portletName '" + portletName +
+					"' must not contain the keyword " + keyword);
 		}
 	}
 
