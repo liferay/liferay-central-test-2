@@ -43,7 +43,11 @@ if (Validator.isNotNull(scriptContent)) {
 
 							TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler(templateHandlerClassNameId);
 
-							Class<?> clazz = (templateHandler != null) ? templateHandler.getClass() : ddmDisplay.getClass();
+							Class<?> clazz = ddmDisplay.getClass();
+							
+							if (templateHandler != null) {
+								clazz = templateHandler.getClass();
+							}
 
 							ResourceBundle resourceBundle = ResourceBundle.getBundle("content.Language", locale, clazz.getClassLoader());
 
@@ -62,7 +66,6 @@ if (Validator.isNotNull(scriptContent)) {
 
 											<li class="palette-item-container">
 												<span class="palette-item" data-content="<%= HtmlUtil.escapeAttribute(_getDataContent(templateVariableDefinition, language)) %>" data-title="<%= HtmlUtil.escapeAttribute(_getPaletteItemTitle(request, resourceBundle, templateVariableDefinition)) %>">
-
 													<%= LanguageUtil.get(request, resourceBundle, templateVariableDefinition.getLabel()) %>
 
 													<c:if test="<%= templateVariableDefinition.isCollection() || templateVariableDefinition.isRepeatable() %>">*</c:if>
