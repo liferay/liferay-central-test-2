@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.item.selector.web.attachment;
+package com.liferay.wiki.item.selector.web;
 
 import com.liferay.item.selector.BaseItemSelectorCriterion;
 import com.liferay.portal.kernel.repository.model.FileEntry;
