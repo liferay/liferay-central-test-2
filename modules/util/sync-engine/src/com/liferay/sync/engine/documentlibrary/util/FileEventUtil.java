@@ -176,8 +176,15 @@ public class FileEventUtil {
 	}
 
 	public static void downloadFile(long syncAccountId, SyncFile syncFile) {
+		downloadFile(syncAccountId, syncFile, true);
+	}
+
+	public static void downloadFile(
+		long syncAccountId, SyncFile syncFile, boolean batch) {
+
 		Map<String, Object> parameters = new HashMap<>();
 
+		parameters.put("batch", batch);
 		parameters.put("patch", false);
 		parameters.put("syncFile", syncFile);
 
