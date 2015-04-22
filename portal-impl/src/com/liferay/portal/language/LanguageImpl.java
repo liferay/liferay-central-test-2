@@ -770,7 +770,8 @@ public class LanguageImpl implements Language, Serializable {
 	private static CompanyLocalesBag _getCompanyLocalesBag() {
 		Long companyId = CompanyThreadLocal.getCompanyId();
 
-		CompanyLocalesBag companyLocalesBag = _companyLocalesBags.get(companyId);
+		CompanyLocalesBag companyLocalesBag = _companyLocalesBags.get(
+			companyId);
 
 		if (companyLocalesBag == null) {
 			companyLocalesBag = new CompanyLocalesBag(companyId);
