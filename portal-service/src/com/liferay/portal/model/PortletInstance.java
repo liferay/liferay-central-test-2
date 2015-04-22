@@ -27,12 +27,9 @@ import java.security.InvalidParameterException;
  */
 public class PortletInstance {
 
-	private static final String _INSTANCE_SEPARATOR = "_INSTANCE_";
-
-	private static final String _USER_SEPARATOR = "_USER_";
-
 	public static final int PORTLET_INSTANCE_KEY_MAX_LENGTH =
-		255 - _INSTANCE_SEPARATOR.length() + _USER_SEPARATOR.length() + 39;
+		255 - PortletInstance._INSTANCE_SEPARATOR.length() +
+			PortletInstance._USER_SEPARATOR.length() + 39;
 
 	public static PortletInstance newInstanceFor(String portletName) {
 		return new PortletInstance(portletName, StringUtil.randomString(12));
@@ -54,16 +51,6 @@ public class PortletInstance {
 		_portletName = portletName;
 		_userId = userId;
 		_instanceId = instanceId;
-	}
-
-	private void validatePortletName(String portletName) {
-		for (String keyword : _PORTLET_NAME_RESERVED_KEYWORDS) {
-			if (portletName.indexOf(keyword) != -1) {
-				throw new InvalidParameterException(
-					"The portletName '" + portletName +
-						"' must not contain the keyword " + keyword);
-			}
-		}
 	}
 
 	public PortletInstance(String portletName, String instanceId) {
@@ -160,6 +147,20 @@ public class PortletInstance {
 		return GetterUtil.getLong(
 			portletInstance.substring(x + _USER_SEPARATOR.length()));
 	}
+
+	private void validatePortletName(String portletName) {
+		for (String keyword : _PORTLET_NAME_RESERVED_KEYWORDS) {
+			if (portletName.indexOf(keyword) != -1) {
+				throw new InvalidParameterException(
+					"The portletName '" + portletName +
+						"' must not contain the keyword " + keyword);
+			}
+		}
+	}
+
+	private static final String _INSTANCE_SEPARATOR = "_INSTANCE_";
+
+	private static final String _USER_SEPARATOR = "_USER_";
 
 	private final String[] _PORTLET_NAME_RESERVED_KEYWORDS =
 		new String[] {_INSTANCE_SEPARATOR, _USER_SEPARATOR};

@@ -103,12 +103,12 @@ public class UpgradeNestedPortlets extends UpgradeProcess {
 		}
 	}
 
-	private static final String _INSTANCE_SEPARATOR = "_INSTANCE_";
-
 	private static final String _GET_LAYOUT =
 		"select plid, typeSettings from Layout where typeSettings like " +
 			"'%nested-column-ids=" + PortletKeys.NESTED_PORTLETS +
-				_INSTANCE_SEPARATOR + "%'";
+				UpgradeNestedPortlets._INSTANCE_SEPARATOR + "%'";
+
+	private static final String _INSTANCE_SEPARATOR = "_INSTANCE_";
 
 	private static final int _UNDERLINE_COUNT = StringUtil.count(
 		_INSTANCE_SEPARATOR, StringPool.UNDERLINE) + 1;
