@@ -41,6 +41,7 @@ public class ServiceBuilderInvoker {
 
 		modelHintsImpl.setModelHintsConfigs(
 			serviceBuilderBean.getModelHintsConfigs());
+
 		modelHintsImpl.afterPropertiesSet();
 
 		ModelHintsUtil modelHintsUtil = new ModelHintsUtil();
