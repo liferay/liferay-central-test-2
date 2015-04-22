@@ -291,7 +291,7 @@ public class ServiceBuilderBean {
 
 	private String _apiDir = "../portal-service/src";
 	private boolean _autoImportDefaultReferences = true;
-	private boolean _autoNamespaceTables = false;
+	private boolean _autoNamespaceTables;
 	private String _beanLocatorUtil =
 		"com.liferay.portal.kernel.bean.PortalBeanLocatorUtil";
 	private long _buildNumber = 1;
@@ -301,19 +301,19 @@ public class ServiceBuilderBean {
 	private String _inputFileName = "service.xml";
 	private String[] _modelHintsConfigs = StringUtil.split(
 		ServiceBuilder.MODEL_HINTS_CONFIGS);
-	private boolean _modelHintsConfigsSet = false;
+	private boolean _modelHintsConfigsSet;
 	private String _modelHintsFileName = "src/META-INF/portal-model-hints.xml";
-	private boolean _osgiModule = false;
+	private boolean _osgiModule;
 	private String _pluginName;
 	private String _propsUtil = "com.liferay.portal.util.PropsUtil";
 	private String[] _readOnlyPrefixes = StringUtil.split(
 		ServiceBuilder.READ_ONLY_PREFIXES);
-	private boolean _readOnlyPrefixesSet = false;
+	private boolean _readOnlyPrefixesSet;
 	private String _remotingFileName =
 		"../portal-web/docroot/WEB-INF/remoting-servlet.xml";
 	private String[] _resourceActionsConfigs = StringUtil.split(
 		ServiceBuilder.RESOURCE_ACTION_CONFIGS);
-	private boolean _resourceActionsConfigsSet = false;
+	private boolean _resourceActionsConfigsSet;
 	private String _resourcesDir = "src";
 	private String _springFileName = "src/META-INF/portal-spring.xml";
 	private String[] _springNamespaces = new String[] {"beans"};
