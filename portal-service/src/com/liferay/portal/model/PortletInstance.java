@@ -103,6 +103,7 @@ public class PortletInstance {
 		return (_userId > 0);
 	}
 
+	@Override
 	public String toString() {
 		return getPortletInstanceKey();
 	}
