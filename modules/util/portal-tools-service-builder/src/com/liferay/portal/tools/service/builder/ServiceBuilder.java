@@ -134,7 +134,7 @@ public class ServiceBuilder {
 			"/portal-model-hints.xml,classpath*:META-INF" +
 				"/ext-model-hints.xml,META-INF/portlet-model-hints.xml";
 
-	public static final String MODIFIED_FILES_ATTRIBUTE =
+	public static final String OUTPUT_KEY_MODIFIED_FILES =
 		"service.builder.modified.files";
 
 	public static final String READ_ONLY_PREFIXES =
