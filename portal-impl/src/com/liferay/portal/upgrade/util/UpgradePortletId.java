@@ -74,13 +74,13 @@ public class UpgradePortletId extends UpgradeProcess {
 			PortletInstance newPortletInstance = PortletInstance.newInstanceFor(
 				portletId);
 
-			String newPortletInstanceId =
+			String newPortletInstanceKey =
 				newPortletInstance.getPortletInstanceKey();
 
-			updateResourcePermission(portletId, newPortletInstanceId, false);
+			updateResourcePermission(portletId, newPortletInstanceKey, false);
 			updateInstanceablePortletPreferences(
-				portletId, newPortletInstanceId);
-			updateLayouts(portletId, newPortletInstanceId, true);
+				portletId, newPortletInstanceKey);
+			updateLayouts(portletId, newPortletInstanceKey, true);
 		}
 	}
 
