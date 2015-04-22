@@ -64,11 +64,11 @@ public class WikiAttachmentItemSelectorView
 			PortletURL portletURL, String itemSelectedCallback)
 		throws IOException, ServletException {
 
+		request.setAttribute(ITEM_SELECTED_CALLBACK, itemSelectedCallback);
+		request.setAttribute(PORTLET_URL, portletURL);
 		request.setAttribute(
 			WIKI_ATTACHMENT_ITEM_SELECTOR_CRITERION,
 			wikiAttachmentItemSelectorCriterion);
-		request.setAttribute(PORTLET_URL, portletURL);
-		request.setAttribute(ITEM_SELECTED_CALLBACK, itemSelectedCallback);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 			"/o/wiki-item-selector-web/attachments.jsp");
