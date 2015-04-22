@@ -256,8 +256,8 @@ public class ServiceBuilderBean {
 	private void _setModelHintsConfigs(String[] modelHintsConfigs) {
 		if (_modelHintsConfigsSet) {
 			throw new IllegalStateException(
-				"Only one of modelHintsConfigs and mergeModelHintsConfigs " +
-					"can be used.");
+				"Unable to call both setMergeModelHintsConfigs and " +
+					"setModelHintsConfigs");
 		}
 
 		_modelHintsConfigsSet = true;
@@ -267,8 +267,8 @@ public class ServiceBuilderBean {
 	private void _setReadOnlyPrefixes(String[] readOnlyPrefixes) {
 		if (_readOnlyPrefixesSet) {
 			throw new IllegalStateException(
-				"Only one of readOnlyPrefixes and mergeReadOnlyPrefixes " +
-					"can be used.");
+				"Unable to call both setMergeReadOnlyPrefixes and " +
+					"setReadOnlyPrefixes");
 		}
 
 		_readOnlyPrefixesSet = true;
@@ -278,8 +278,8 @@ public class ServiceBuilderBean {
 	private void _setResourceActionsConfigs(String[] resourceActionsConfigs) {
 		if (_resourceActionsConfigsSet) {
 			throw new IllegalStateException(
-				"Only one of resourceActionsConfigs and " +
-					"mergeResourceActionsConfigs can be used.");
+				"Unable to call both setMergeResourceActionsConfigs and " +
+					"setResourceActionsConfigs");
 		}
 
 		_resourceActionsConfigsSet = true;
