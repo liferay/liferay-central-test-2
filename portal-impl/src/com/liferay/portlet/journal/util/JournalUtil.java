@@ -1385,7 +1385,7 @@ public class JournalUtil {
 		templateManager.addContextObjects(
 			contextObjects, templateHandler.getCustomContextObjects());
 
-		return _transformer.transform(
+		return _journalTransformer.transform(
 			themeDisplay, contextObjects, tokens, viewMode, languageId,
 			document, portletRequestModel, script, langType,
 			propagateException);
@@ -1844,7 +1844,7 @@ public class JournalUtil {
 	private static Map<String, String> _customTokens;
 	private static final Pattern _friendlyURLPattern = Pattern.compile(
 		"[^a-z0-9_-]");
-	private static final JournalTransformer _transformer =
+	private static final JournalTransformer _journalTransformer =
 		new JournalTransformer(
 			PropsKeys.JOURNAL_TRANSFORMER_LISTENER,
 			PropsKeys.JOURNAL_ERROR_TEMPLATE, true);
