@@ -87,8 +87,8 @@ public class PortletConstants {
 	public static String assemblePortletId(String portletId, long userId) {
 		PortletInstance portletInstance = null;
 
-		String instanceId = getInstanceId(portletId);
 		String rootPortletId = getRootPortletId(portletId);
+		String instanceId = getInstanceId(portletId);
 
 		portletInstance = new PortletInstance(
 			rootPortletId, userId, instanceId);
