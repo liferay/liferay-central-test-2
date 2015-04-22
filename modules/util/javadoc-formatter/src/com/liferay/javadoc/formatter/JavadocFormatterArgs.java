@@ -19,7 +19,7 @@ import java.io.File;
 /**
  * @author Andrea Di Giorgi
  */
-public class JavadocFormatterBean {
+public class JavadocFormatterArgs {
 
 	public String getAuthor() {
 		return _author;
