@@ -38,7 +38,8 @@ public class CurrentConnectionImpl implements CurrentConnection {
 
 		if ((connectionHolder == null) ||
 			(connectionHolder.getConnectionHandle() == null)) {
-				return null;
+
+			return null;
 		}
 		else {
 			return connectionHolder.getConnection();
