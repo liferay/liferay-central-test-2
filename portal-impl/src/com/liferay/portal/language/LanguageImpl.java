@@ -631,7 +631,7 @@ public class LanguageImpl implements Language, Serializable {
 
 	@Override
 	public void init() {
-		_companyLocaleBags.clear();
+		_companyLocalesBags.clear();
 	}
 
 	@Override
@@ -770,12 +770,12 @@ public class LanguageImpl implements Language, Serializable {
 	private static CompanyLocalesBag _getCompanyLocalesBag() {
 		Long companyId = CompanyThreadLocal.getCompanyId();
 
-		CompanyLocalesBag companyLocalesBag = _companyLocaleBags.get(companyId);
+		CompanyLocalesBag companyLocalesBag = _companyLocalesBags.get(companyId);
 
 		if (companyLocalesBag == null) {
 			companyLocalesBag = new CompanyLocalesBag(companyId);
 
-			_companyLocaleBags.put(companyId, companyLocalesBag);
+			_companyLocalesBags.put(companyId, companyLocalesBag);
 		}
 
 		return companyLocalesBag;
@@ -921,7 +921,7 @@ public class LanguageImpl implements Language, Serializable {
 
 	private static final Log _log = LogFactoryUtil.getLog(LanguageImpl.class);
 
-	private static final Map<Long, CompanyLocalesBag> _companyLocaleBags =
+	private static final Map<Long, CompanyLocalesBag> _companyLocalesBags =
 		new ConcurrentHashMap<>();
 	private static final Pattern _pattern = Pattern.compile(
 		"Liferay\\.Language\\.get\\([\"']([^)]+)[\"']\\)");
@@ -930,7 +930,7 @@ public class LanguageImpl implements Language, Serializable {
 
 	static {
 		PortalCacheMapSynchronizeUtil.<Long, Serializable>synchronize(
-			_portalCache, _companyLocaleBags,
+			_portalCache, _companyLocalesBags,
 			new Synchronizer<Long, Serializable>() {
 
 				@Override
@@ -938,7 +938,7 @@ public class LanguageImpl implements Language, Serializable {
 					Map<? extends Long, ? extends Serializable> map, Long key,
 					Serializable value, int timeToLive) {
 
-					_companyLocaleBags.remove(key);
+					_companyLocalesBags.remove(key);
 				}
 
 			});
