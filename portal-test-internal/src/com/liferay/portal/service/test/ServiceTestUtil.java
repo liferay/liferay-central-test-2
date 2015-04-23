@@ -144,15 +144,17 @@ public class ServiceTestUtil {
 
 		// Messaging
 
+		MessageBusUtil messageBusUtil = new MessageBusUtil();
+
 		MessageBus messageBus = (MessageBus)PortalBeanLocatorUtil.locate(
 			MessageBus.class.getName());
+
+		messageBusUtil.setMessageBus(messageBus);
+
 		SynchronousMessageSender synchronousMessageSender =
 			(SynchronousMessageSender)PortalBeanLocatorUtil.locate(
 				SynchronousMessageSender.class.getName());
 
-		MessageBusUtil messageBusUtil = new MessageBusUtil();
-
-		messageBusUtil.setMessageBus(messageBus);
 		messageBusUtil.setSynchronousMessageSender(synchronousMessageSender);
 
 		// Scheduler
