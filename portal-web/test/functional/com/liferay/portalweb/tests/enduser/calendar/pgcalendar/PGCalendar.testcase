@@ -3011,8 +3011,9 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Calendar#hideOtherCalendar">
+		<execute macro="Calendar#chooseMenulistOption">
 			<var name="calendarName" value="userfn userln" />
+			<var name="menuListOption" value="Hide Calendar" />
 		</execute>
 
 		<execute macro="CalendarEvent#viewDefaultPG">

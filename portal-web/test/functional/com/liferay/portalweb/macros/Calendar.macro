@@ -540,14 +540,6 @@
 		</execute>
 	</command>
 
-	<command name="hideOtherCalendar">
-		<var name="key_calendarName" value="${calendarName}" />
-
-		<execute function="Click" locator1="PGCalendar#OTHER_CALENDARS_CALENDAR_MENULIST_ARROW" value1="${calendarName}" />
-
-		<execute function="AssertClick" locator1="PGCalendar#OTHER_CALENDARS_CALENDAR_MENULIST_HIDE_CALENDAR" value1="Hide Calendar" />
-	</command>
-
 	<command name="removeViewPermissionsPG">
 		<execute macro="CalendarEvent#changeViewPG">
 			<var name="viewType" value="Week" />
