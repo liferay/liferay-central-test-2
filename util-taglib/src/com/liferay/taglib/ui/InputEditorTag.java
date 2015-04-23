@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortalWebResourcesUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -28,12 +29,19 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.taglib.FileAvailabilityUtil;
+import com.liferay.registry.Filter;
+import com.liferay.registry.Registry;
+import com.liferay.registry.RegistryUtil;
+import com.liferay.registry.ServiceReference;
+import com.liferay.registry.ServiceTracker;
+import com.liferay.registry.ServiceTrackerCustomizer;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -268,9 +276,7 @@ public class InputEditorTag extends IncludeTag {
 			editorName = _EDITOR_WYSIWYG_DEFAULT;
 		}
 
-		if (!FileAvailabilityUtil.isAvailable(
-				servletContext, getPage(editorName))) {
-
+		if (!_editorTracker.hasEditor(editorName)) {
 			editorName = _EDITOR_WYSIWYG_DEFAULT;
 		}
 
@@ -351,6 +357,8 @@ public class InputEditorTag extends IncludeTag {
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
 		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
+	private static final EditorTracker _editorTracker = new EditorTracker();
+
 	private boolean _allowBrowseDocuments = true;
 	private boolean _autoCreate = true;
 	private String _configKey;
@@ -376,5 +384,58 @@ public class InputEditorTag extends IncludeTag {
 	private boolean _skipEditorLoading;
 	private String _toolbarSet = "liferay";
 	private String _width;
+
+	private static class EditorTracker
+		implements ServiceTrackerCustomizer<Object, Object> {
+
+		public EditorTracker() {
+			Registry registry = RegistryUtil.getRegistry();
+
+			Filter filter = registry.getFilter("(editor.wysiwyg=*)");
+
+			_serviceTracker = registry.trackServices(filter, this);
+
+			_serviceTracker.open();
+		}
+
+		@Override
+		public Object addingService(ServiceReference<Object> serviceReference) {
+			Registry registry = RegistryUtil.getRegistry();
+
+			String editorName = GetterUtil.getString(
+				serviceReference.getProperty("editor.wysiwyg"));
+
+			_editors.put(serviceReference, editorName);
+
+			return registry.getService(serviceReference);
+		}
+
+		public boolean hasEditor(String editorName) {
+			Collection<String> values = _editors.values();
+
+			return values.contains(editorName);
+		}
+
+		@Override
+		public void modifiedService(
+			ServiceReference<Object> serviceReference, Object service) {
+		}
+
+		@Override
+		public void removedService(
+			ServiceReference<Object> serviceReference, Object service) {
+
+			_editors.remove(serviceReference);
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			registry.ungetService(serviceReference);
+		}
+
+		private final Map<ServiceReference<Object>, String> _editors =
+			new ConcurrentHashMap<>();
+		private final ServiceTracker<Object, Object> _serviceTracker;
+
+	}
 
 }
