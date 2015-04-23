@@ -30,6 +30,7 @@ import org.apache.cxf.bus.CXFBusFactory;
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 import org.apache.felix.dm.DependencyManager;
 import org.apache.felix.dm.ServiceDependency;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.annotations.Activate;
@@ -39,6 +40,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.http.context.ServletContextHelper;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
