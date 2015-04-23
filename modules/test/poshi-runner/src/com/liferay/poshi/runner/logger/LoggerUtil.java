@@ -300,12 +300,12 @@ public final class LoggerUtil {
 
 		_javascriptExecutor = (JavascriptExecutor)_webDriver;
 
-		String cssContent = _readResourceFile(
+		String cssContent = _readResource(
 			"META-INF/resources/css/main_rtl.css");
 
 		FileUtil.write(_CURRENT_DIR + "/test-results/css/main.css", cssContent);
 
-		String htmlContent = _readResourceFile(
+		String htmlContent = _readResource(
 			"META-INF/resources/html/index.html");
 
 		FileUtil.write(_getHtmlFilePath(), htmlContent);
@@ -339,12 +339,12 @@ public final class LoggerUtil {
 		return sb.toString();
 	}
 
-	private static String _readResourceFile(String filePath) throws Exception {
+	private static String _readResource(String path) throws Exception {
 		StringBuilder sb = new StringBuilder();
 
 		ClassLoader classLoader = LoggerUtil.class.getClassLoader();
 
-		InputStream inputStream = classLoader.getResourceAsStream(filePath);
+		InputStream inputStream = classLoader.getResourceAsStream(path);
 
 		InputStreamReader inputStreamReader = new InputStreamReader(
 			inputStream);
