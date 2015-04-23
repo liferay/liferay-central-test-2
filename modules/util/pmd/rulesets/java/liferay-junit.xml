@@ -12,12 +12,12 @@
 	<rule
 		class="com.liferay.pmd.rules.junit.AssertFailJUnitRule"
 		language="java"
-		message="Don't declare Assert.fail inside a catch statement"
+		message="Do not call Assert#fail improperly"
 		name="AssertFailJUnitRule"
 		since="0.1"
 	>
 		<description>
-			Detect when a Assert#fail is used improperly.
+			Detect when Assert#fail is called improperly.
 		</description>
 		<priority>3</priority>
 		<example>
