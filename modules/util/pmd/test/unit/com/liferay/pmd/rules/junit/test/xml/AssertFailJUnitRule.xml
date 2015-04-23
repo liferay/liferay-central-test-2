@@ -2,7 +2,7 @@
 
 <test-data>
 	<test-code>
-		<description><![CDATA[Pass when there is call to a method with a name that starts with the word "fail".]]></description>
+		<description><![CDATA[Pass when there is a call to a method with a name that starts with the word "fail".]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
 			<![CDATA[
@@ -34,7 +34,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
+		<description><![CDATA[Pass when there is a call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
 			<![CDATA[
@@ -61,7 +61,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
+		<description><![CDATA[Pass when there is a call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
 			<![CDATA[
@@ -114,7 +114,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Pass when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
+		<description><![CDATA[Pass when there is a call to Assert#fail inside 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
 			<![CDATA[
@@ -154,7 +154,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement with a finally block.]]></description>
+		<description><![CDATA[Pass when there is a call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
 			<![CDATA[
@@ -189,7 +189,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Pass when there is a call to Assert#fail inside a 1.7 try block as the last statement with a finally block.]]></description>
+		<description><![CDATA[Pass when there is a call to Assert#fail inside a 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
 			<![CDATA[
@@ -234,7 +234,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Fail when there is call to Assert#fail outside a try/catch block.]]></description>
+		<description><![CDATA[Fail when there is a call to Assert#fail outside a try/catch block.]]></description>
 		<expected-problems>1</expected-problems>
 		<code>
 			<![CDATA[
@@ -254,7 +254,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Fail when there is call to Assert#fail inside a catch block.]]></description>
+		<description><![CDATA[Fail when there is a call to Assert#fail inside a catch block.]]></description>
 		<expected-problems>1</expected-problems>
 		<code>
 			<![CDATA[
@@ -281,7 +281,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Fail when there is call to Assert#fail inside a catch block.]]></description>
+		<description><![CDATA[Fail when there is a call to Assert#fail inside a catch block.]]></description>
 		<expected-problems>1</expected-problems>
 		<code>
 			<![CDATA[
@@ -310,7 +310,7 @@ public class Test {
 		</code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Fail when there is call to Assert#fail inside a catch block.]]></description>
+		<description><![CDATA[Fail when there is a call to Assert#fail inside a catch block.]]></description>
 		<expected-problems>1</expected-problems>
 		<code>
 			<![CDATA[
