@@ -66,7 +66,7 @@ public class DefaultSingleDestinationMessageSenderFactory
 
 			if (synchronousMessageSender == null) {
 				throw new IllegalStateException(
-					"No SynchronousMessageSender configured for: " + mode);
+					"No synchronous message sender configured for " + mode);
 			}
 
 			defaultSingleDestinationSynchronousMessageSender =
@@ -74,7 +74,6 @@ public class DefaultSingleDestinationMessageSenderFactory
 
 			defaultSingleDestinationSynchronousMessageSender.setDestinationName(
 				destinationName);
-
 			defaultSingleDestinationSynchronousMessageSender.
 				setSynchronousMessageSender(synchronousMessageSender);
 
