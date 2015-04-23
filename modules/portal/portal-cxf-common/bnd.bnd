@@ -20,8 +20,8 @@ Export-Package: \
 	org.apache.ws.commons.schema.*;version="2.1.0"
 Import-Package:\
 	!com.sun.*,\
-	!org.springframework.*,\
 	!javax.validation.*,\
+	!net.sf.cglib.proxy.*,\
 	!org.apache.abdera.*,\
 	!org.apache.aries.*,\
 	!org.apache.cxf.aegis.*,\
@@ -30,12 +30,12 @@ Import-Package:\
 	!org.apache.velocity.*,\
 	!org.apache.xml.resolver.*,\
 	!org.apache.xmlbeans.*,\
+	!org.junit.*,\
 	!org.jvnet.fastinfoset.*,\
 	!org.jvnet.staxex.*,\
-	!org.junit.*,\
 	!org.relaxng.datatype.*,\
 	!org.slf4j.spi.*,\
-	!net.sf.cglib.proxy.*,\
+	!org.springframework.*,\
 	*
 Include-Resource:\
 	classes,\
