@@ -25,7 +25,7 @@ DDLRecordSet recordSet = ddlFormDisplayContext.getRecordSet();
 <c:choose>
 	<c:when test="<%= (recordSet == null) %>">
 		<div class="alert alert-info">
-			<liferay-ui:message key="select-an-existing-form-or-add-a-form-to-be-displayed-in-this-portlet" />
+			<liferay-ui:message key="select-an-existing-form-or-add-a-form-to-be-displayed-in-this-application" />
 		</div>
 	</c:when>
 	<c:otherwise>
