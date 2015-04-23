@@ -344,11 +344,9 @@ public final class LoggerUtil {
 	}
 
 	private static String _readResourceFile(String filePath) throws Exception {
-		LoggerUtil loggerUtil = new LoggerUtil();
+		StringBuilder sb = new StringBuilder();
 
-		Class<?> clazz = loggerUtil.getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
+		ClassLoader classLoader = LoggerUtil.class.getClassLoader();
 
 		InputStream inputStream = classLoader.getResourceAsStream(filePath);
 
@@ -357,9 +355,7 @@ public final class LoggerUtil {
 
 		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-		StringBuilder sb = new StringBuilder();
-
-		String line;
+		String line = null;
 
 		while ((line = bufferedReader.readLine()) != null) {
 			sb.append(line);
