@@ -8,9 +8,9 @@ Bundle-ClassPath:\
 	lib/cxf-tools-common.jar,\
 	lib/cxf-tools-validator.jar,\
 	lib/stax2-api.jar,\
-	lib/xmlschema-core.jar,\
 	lib/woodstox-core-asl.jar,\
-	lib/wsdl4j.jar
+	lib/wsdl4j.jar,\
+	lib/xmlschema-core.jar
 Bundle-Name: Liferay Portal CXF Common
 Bundle-SymbolicName: com.liferay.portal.cxf.common
 Bundle-Version: 1.0.0
