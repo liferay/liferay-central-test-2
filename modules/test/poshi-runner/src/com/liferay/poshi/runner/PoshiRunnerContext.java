@@ -419,8 +419,6 @@ public class PoshiRunnerContext {
 	private static void _readSeleniumFiles() throws Exception {
 		Method[] methods = LiferaySelenium.class.getMethods();
 
-		Map<String, Integer> seleniumParameterCounts = new HashMap<>();
-
 		for (Method method : methods) {
 			Class[] parameterTypes = method.getParameterTypes();
 
