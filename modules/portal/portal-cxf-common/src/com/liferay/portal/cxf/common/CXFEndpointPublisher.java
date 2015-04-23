@@ -33,7 +33,6 @@ import org.apache.felix.dm.ServiceDependency;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
-import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
@@ -56,8 +55,7 @@ public class CXFEndpointPublisher {
 
 	@Activate
 	protected void activate(
-			BundleContext bundleContext, Map<String, Object> properties)
-		throws ConfigurationException {
+		BundleContext bundleContext, Map<String, Object> properties) {
 
 		_dependencyManager = new DependencyManager(bundleContext);
 
@@ -99,8 +97,7 @@ public class CXFEndpointPublisher {
 
 	@Modified
 	protected void modified(
-			BundleContext bundleContext, Map<String, Object> properties)
-		throws ConfigurationException {
+		BundleContext bundleContext, Map<String, Object> properties) {
 
 		deactivate();
 
