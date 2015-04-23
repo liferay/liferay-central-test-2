@@ -100,19 +100,6 @@
 {/template}
 
 /**
- * Prints all columns.
- *
- * @param columns
- */
-{template .multiple_page_form_row_columns}
-	{foreach $column in $columns}
-		{call ddm.multiple_page_form_row_column data="all"}
-			{param column: $column /}
-		{/call}
-	{/foreach}
-{/template}
-
-/**
  * Prints a column.
  *
  * @param column
@@ -123,6 +110,19 @@
 			{param field: $column.field /}
 		{/call}
 	</div>
+{/template}
+
+/**
+ * Prints all columns.
+ *
+ * @param columns
+ */
+{template .multiple_page_form_row_columns}
+	{foreach $column in $columns}
+		{call ddm.multiple_page_form_row_column data="all"}
+			{param column: $column /}
+		{/call}
+	{/foreach}
 {/template}
 
 /**
