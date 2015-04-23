@@ -59,7 +59,7 @@ public class MessageBusUtil {
 	}
 
 	public static MessageBus getMessageBus() {
-		return getInstance()._messageBus;
+		return _messageBus;
 	}
 
 	public static boolean hasMessageListener(String destination) {
