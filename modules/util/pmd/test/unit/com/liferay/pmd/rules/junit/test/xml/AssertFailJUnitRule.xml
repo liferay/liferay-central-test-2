@@ -4,7 +4,8 @@
 	<test-code>
 		<description><![CDATA[Pass when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -37,12 +38,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last parameter with a finally block.]]></description>
 		<expected-problems>0</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,12 +73,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
-	<description><![CDATA[Pass when there is a call to Assert#fail inside a 1.7 try block as the last parameter with a finally block.]]></description>
-	<expected-problems>0</expected-problems>
-	<code><![CDATA[
+		<description><![CDATA[Pass when there is a call to Assert#fail inside a 1.7 try block as the last parameter with a finally block.]]></description>
+		<expected-problems>0</expected-problems>
+		<code>
+			<![CDATA[
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -113,12 +118,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Pass when there is call to a method that starts with fail.]]></description>
 		<expected-problems>0</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Test;
 
@@ -143,7 +150,8 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Pass when there are is call to Assert#fail inside a try block as the last statement.]]></description>
@@ -167,12 +175,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -193,12 +203,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Fail when there is call to Assert#fail outside a try/catch block.]]></description>
 		<expected-problems>1</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -211,12 +223,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
-	<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
-	<expected-problems>0</expected-problems>
-	<code><![CDATA[
+		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
+		<expected-problems>0</expected-problems>
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -236,12 +250,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Fail when there is call to Assert#fail inside a catch block.]]></description>
 		<expected-problems>1</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -263,12 +279,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Fail when there is call to Assert#fail inside a catch block even if there are statements around Assert#fail.]]></description>
 		<expected-problems>1</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -290,12 +308,14 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 	<test-code>
 		<description><![CDATA[Fail when there is call to Assert#fail inside a catch block.]]></description>
 		<expected-problems>1</expected-problems>
-		<code><![CDATA[
+		<code>
+			<![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -315,6 +335,7 @@ public class Test {
 	}
 
 }
-			]]></code>
+			]]>
+		</code>
 	</test-code>
 </test-data>
