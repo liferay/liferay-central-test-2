@@ -33,7 +33,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * @author Phil Jones
+ * @author Philip Jones
  */
 public class LayoutTypeControllerTrackerTest {
 
