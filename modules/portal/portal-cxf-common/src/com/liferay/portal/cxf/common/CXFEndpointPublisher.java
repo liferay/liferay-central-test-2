@@ -78,8 +78,8 @@ public class CXFEndpointPublisher {
 
 				serviceDependency.setCallbacks(
 					servicesRegistrator, "addExtension", "-");
-				serviceDependency.setService(Object.class, extension);
 				serviceDependency.setRequired(true);
+				serviceDependency.setService(Object.class, extension);
 
 				component.add(serviceDependency);
 			}
