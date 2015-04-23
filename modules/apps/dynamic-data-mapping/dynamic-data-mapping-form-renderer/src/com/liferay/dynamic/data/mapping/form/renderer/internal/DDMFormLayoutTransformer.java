@@ -53,7 +53,6 @@ public class DDMFormLayoutTransformer {
 			"field",
 			_renderedDDMFormFieldsMap.get(
 				ddmFormLayoutColumn.getDDMFormFieldName()));
-
 		column.put("size", ddmFormLayoutColumn.getSize());
 
 		return column;
