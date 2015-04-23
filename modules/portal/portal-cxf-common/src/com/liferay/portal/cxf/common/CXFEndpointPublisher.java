@@ -153,6 +153,8 @@ public class CXFEndpointPublisher {
 					new ServletContextHelper(_bundleContext.getBundle()) {},
 					properties);
 
+			CXFNonSpringServlet cxfNonSpringServlet = new CXFNonSpringServlet();
+
 			CXFBusFactory cxfBusFactory =
 				(CXFBusFactory)CXFBusFactory.newInstance(
 					CXFBusFactory.class.getName());
@@ -169,8 +171,6 @@ public class CXFEndpointPublisher {
 				"CXFServlet");
 			properties.put(
 				HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, "/*");
-
-			CXFNonSpringServlet cxfNonSpringServlet = new CXFNonSpringServlet();
 
 			cxfNonSpringServlet.setBus(bus);
 
@@ -195,7 +195,7 @@ public class CXFEndpointPublisher {
 			catch (Exception e) {
 				if (_logger.isWarnEnabled()) {
 					_logger.warn(
-						"Unable to unregister CXF Bus service registration " +
+						"Unable to unregister CXF bus service registration " +
 							_busServiceRegistration);
 				}
 			}
