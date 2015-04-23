@@ -49,12 +49,9 @@ public class FirefoxWebDriverImpl extends BaseWebDriverImpl {
 					StringPool.FORWARD_SLASH);
 			}
 
-			PropsValues propsValues = new PropsValues();
-
-			Class<?> clazz = propsValues.getClass();
-
 			_firefoxProfile.addExtension(
-				clazz, "/META-INF/resources/addons/jserrorcollector.xpi");
+				FirefoxWebDriverImpl.class,
+				"/META-INF/resources/firefox/extensions/jserrorcollector.xpi");
 		}
 		catch (Exception e) {
 		}
