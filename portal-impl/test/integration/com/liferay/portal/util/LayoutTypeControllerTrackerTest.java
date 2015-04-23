@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypeController;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -46,7 +47,7 @@ public class LayoutTypeControllerTrackerTest {
 
 	@Test
 	public void testGetLayoutTypeController1() {
-		Layout layout = new MockLayoutImpl();
+		Layout layout = new TestLayoutImpl();
 
 		LayoutTypeController layoutTypeController =
 			LayoutTypeControllerTracker.getLayoutTypeController(layout);
@@ -74,7 +75,8 @@ public class LayoutTypeControllerTrackerTest {
 	@Test
 	public void testGetLayoutTypeController2() {
 		LayoutTypeController layoutTypeController =
-			LayoutTypeControllerTracker.getLayoutTypeController("string");
+			LayoutTypeControllerTracker.getLayoutTypeController(
+				RandomTestUtil.randomString());
 
 		Assert.assertNotNull(layoutTypeController);
 
@@ -104,6 +106,7 @@ public class LayoutTypeControllerTrackerTest {
 
 		LayoutTypeController layoutTypeController = layoutTypeControllers.get(
 			"testLayoutTypeController");
+
 		Class<?> clazz = layoutTypeController.getClass();
 
 		Assert.assertEquals(
@@ -119,7 +122,7 @@ public class LayoutTypeControllerTrackerTest {
 		boolean found = false;
 
 		for (String type : types) {
-			if ("testLayoutTypeController".equals(type)) {
+			if (type.equals("testLayoutTypeController")) {
 				found = true;
 			}
 		}
@@ -127,7 +130,7 @@ public class LayoutTypeControllerTrackerTest {
 		Assert.assertTrue(found);
 	}
 
-	private static class MockLayoutImpl extends LayoutImpl {
+	private static class TestLayoutImpl extends LayoutImpl {
 
 		@Override
 		public String getName() {
