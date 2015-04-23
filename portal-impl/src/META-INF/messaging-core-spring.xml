@@ -20,11 +20,6 @@
 	<bean id="com.liferay.portal.kernel.messaging.sender.DirectSynchronousMessageSender" class="com.liferay.portal.kernel.messaging.sender.DirectSynchronousMessageSender">
 		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultSynchronousMessageSender">
-		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
-		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
-		<property name="timeout" value="10000" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSenderFactoryUtil" class="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSenderFactoryUtil">
 		<property name="singleDestinationMessageSenderFactory">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSenderFactory">
@@ -37,6 +32,11 @@
 				</property>
 			</bean>
 		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultSynchronousMessageSender">
+		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
+		<property name="timeout" value="10000" />
 	</bean>
 
 	<!-- Destinations -->
