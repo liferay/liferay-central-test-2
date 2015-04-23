@@ -21,7 +21,3 @@ repositories {
 }
 
 apply plugin: "com.liferay.poshi.runner"
-
-poshiRunner {
-	baseDir = file("test")
-}
