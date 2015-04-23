@@ -338,6 +338,7 @@ public final class LoggerUtil {
 		testCaseCommandName = StringUtil.replace(testCaseCommandName, "#", "_");
 
 		sb.append(testCaseCommandName);
+
 		sb.append("/index.html");
 
 		return sb.toString();
