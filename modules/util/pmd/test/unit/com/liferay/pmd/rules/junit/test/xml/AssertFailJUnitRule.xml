@@ -2,6 +2,118 @@
 
 <test-data>
 	<test-code>
+		<description><![CDATA[Pass when there is call to a method with a name that starts with the word "fail".]]></description>
+		<expected-problems>0</expected-problems>
+		<code>
+			<![CDATA[
+
+import org.junit.Test;
+
+public class Test {
+
+	@Test
+	public void test() {
+		try {
+
+			// ...
+
+		}
+		catch (Exception e) {
+			failTest();
+		}
+	}
+
+	protected void failTest() {
+
+		// ...
+
+	}
+
+}
+			]]>
+		</code>
+	</test-code>
+	<test-code>
+		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
+		<expected-problems>0</expected-problems>
+		<code>
+			<![CDATA[
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class Test {
+
+	@Test
+	public void test() {
+		try {
+
+			// ...
+
+			Assert.fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+}
+			]]>
+		</code>
+	</test-code>
+	<test-code>
+		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
+		<expected-problems>0</expected-problems>
+		<code>
+			<![CDATA[
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class Test {
+
+	@Test
+	public void test() {
+		try {
+
+			// ...
+
+			Assert.fail();
+		}
+		catch (Exception e) {
+			Assert.assertEquals("...", e.getMessage());
+		}
+	}
+
+}
+			]]>
+		</code>
+	</test-code>
+	<test-code>
+		<description><![CDATA[Pass when there are is call to Assert#fail inside a try block as the last statement.]]></description>
+		<expected-problems>0</expected-problems>
+		<code><![CDATA[
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class Test {
+
+	@Test
+	public void test() {
+		try {
+			System.out.println("...");
+
+			Assert.fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+}
+			]]>
+		</code>
+	</test-code>
+	<test-code>
 		<description><![CDATA[Pass when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code>
@@ -114,118 +226,6 @@ public class Test {
 
 			// ...
 
-		}
-	}
-
-}
-			]]>
-		</code>
-	</test-code>
-	<test-code>
-		<description><![CDATA[Pass when there is call to a method with a name that starts with the word "fail".]]></description>
-		<expected-problems>0</expected-problems>
-		<code>
-			<![CDATA[
-
-import org.junit.Test;
-
-public class Test {
-
-	@Test
-	public void test() {
-		try {
-
-			// ...
-
-		}
-		catch (Exception e) {
-			failTest();
-		}
-	}
-
-	protected void failTest() {
-
-		// ...
-
-	}
-
-}
-			]]>
-		</code>
-	</test-code>
-	<test-code>
-		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
-		<expected-problems>0</expected-problems>
-		<code>
-			<![CDATA[
-
-import org.junit.Assert;
-import org.junit.Test;
-
-public class Test {
-
-	@Test
-	public void test() {
-		try {
-
-			// ...
-
-			Assert.fail();
-		}
-		catch (Exception e) {
-		}
-	}
-
-}
-			]]>
-		</code>
-	</test-code>
-	<test-code>
-		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
-		<expected-problems>0</expected-problems>
-		<code>
-			<![CDATA[
-
-import org.junit.Assert;
-import org.junit.Test;
-
-public class Test {
-
-	@Test
-	public void test() {
-		try {
-
-			// ...
-
-			Assert.fail();
-		}
-		catch (Exception e) {
-			Assert.assertEquals("...", e.getMessage());
-		}
-	}
-
-}
-			]]>
-		</code>
-	</test-code>
-	<test-code>
-		<description><![CDATA[Pass when there are is call to Assert#fail inside a try block as the last statement.]]></description>
-		<expected-problems>0</expected-problems>
-		<code><![CDATA[
-
-import org.junit.Assert;
-import org.junit.Test;
-
-public class Test {
-
-	@Test
-	public void test() {
-		try {
-			System.out.println("...");
-
-			Assert.fail();
-		}
-		catch (Exception e) {
 		}
 	}
 
