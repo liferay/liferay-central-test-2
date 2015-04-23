@@ -331,14 +331,9 @@ public final class LoggerUtil {
 
 		sb.append(_CURRENT_DIR);
 		sb.append("/test-results/");
-
-		String testCaseCommandName =
-			PoshiRunnerContext.getTestCaseCommandName();
-
-		testCaseCommandName = StringUtil.replace(testCaseCommandName, "#", "_");
-
-		sb.append(testCaseCommandName);
-
+		sb.append(
+			StringUtil.replace(
+				PoshiRunnerContext.getTestCaseCommandName(), "#", "_"));
 		sb.append("/index.html");
 
 		return sb.toString();
