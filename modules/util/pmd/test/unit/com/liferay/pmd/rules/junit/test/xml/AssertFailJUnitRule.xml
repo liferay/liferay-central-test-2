@@ -139,11 +139,11 @@ public class Test {
 
 		}
 		catch (Exception e) {
-			fail();
+			failTest();
 		}
 	}
 
-	protected void fail() {
+	protected void failTest() {
 
 		// ...
 
