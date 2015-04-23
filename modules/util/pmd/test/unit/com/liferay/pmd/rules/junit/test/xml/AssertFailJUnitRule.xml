@@ -2,16 +2,17 @@
 
 <test-data>
 	<test-code>
-		<description><![CDATA[Not fail when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
+		<description><![CDATA[Pass when there is call to Assert#fail inside 1.7 try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
+
 import java.io.Closeable;
 import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -32,18 +33,19 @@ public class ClassTest {
 
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Not fail when there is call to Assert#fail inside a try block as the last parameter with a finally block.]]></description>
+		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last parameter with a finally block.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -69,7 +71,7 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-	<description><![CDATA[Not fail when there is a call to Assert#fail inside a 1.7 try block as the last parameter with a finally block.]]></description>
+	<description><![CDATA[Pass when there is a call to Assert#fail inside a 1.7 try block as the last parameter with a finally block.]]></description>
 	<expected-problems>0</expected-problems>
 	<code><![CDATA[
 
@@ -79,7 +81,7 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -100,17 +102,18 @@ public class ClassTest {
 			// ...
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Not fail when there is call to a method that starts with fail.]]></description>
+		<description><![CDATA[Pass when there is call to a method that starts with fail.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -130,14 +133,14 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Not fail when there are is call to Assert#fail inside a try block as the last statement.]]></description>
+		<description><![CDATA[Pass when there are is call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -154,14 +157,14 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-		<description><![CDATA[Not fail when there is call to Assert#fail inside a try block as the last statement.]]></description>
+		<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
 		<expected-problems>0</expected-problems>
 		<code><![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -187,7 +190,7 @@ public class ClassTest {
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -198,14 +201,14 @@ public class ClassTest {
 			]]></code>
 	</test-code>
 	<test-code>
-	<description><![CDATA[Not fail when there is call to Assert#fail inside a try block as the last statement.]]></description>
+	<description><![CDATA[Pass when there is call to Assert#fail inside a try block as the last statement.]]></description>
 	<expected-problems>0</expected-problems>
 	<code><![CDATA[
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -230,7 +233,7 @@ public class ClassTest {
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -257,7 +260,7 @@ public class ClassTest {
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -272,6 +275,7 @@ public class ClassTest {
 			Assert.fail();
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
@@ -283,7 +287,7 @@ public class ClassTest {
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassTest {
+public class Test {
 
 	@Test
 	public void test() {
@@ -296,6 +300,7 @@ public class ClassTest {
 			Assert.fail();
 		}
 	}
+
 }
 			]]></code>
 	</test-code>
