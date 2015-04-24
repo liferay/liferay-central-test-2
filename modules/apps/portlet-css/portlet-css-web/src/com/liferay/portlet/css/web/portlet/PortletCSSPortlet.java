@@ -179,20 +179,23 @@ public class PortletCSSPortlet extends MVCPortlet {
 			_log.debug("Updating css " + css);
 		}
 
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(css);
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(css);
 
-		JSONObject portletData = jsonObj.getJSONObject("portletData");
+		JSONObject portletDataJSONObject = jsonObject.getJSONObject(
+			"portletData");
 
-		jsonObj.remove("portletData");
+		jsonObject.remove("portletData");
 
-		css = jsonObj.toString();
+		css = jsonObject.toString();
 
-		boolean useCustomTitle = portletData.getBoolean("useCustomTitle");
-		String showBorders = portletData.getString("showBorders");
+		boolean useCustomTitle = portletDataJSONObject.getBoolean(
+			"useCustomTitle");
+		String showBorders = portletDataJSONObject.getString("showBorders");
 		String linkToLayoutUuid = GetterUtil.getString(
-			portletData.getString("portletLinksTarget"));
+			portletDataJSONObject.getString("portletLinksTarget"));
 
-		JSONObject titles = portletData.getJSONObject("titles");
+		JSONObject titlesJSONObject = portletDataJSONObject.getJSONObject(
+			"titles");
 
 		for (Locale locale : LanguageUtil.getAvailableLocales(
 				themeDisplay.getSiteGroupId())) {
@@ -201,8 +204,9 @@ public class PortletCSSPortlet extends MVCPortlet {
 
 			String title = null;
 
-			if (titles.has(languageId)) {
-				title = GetterUtil.getString(titles.getString(languageId));
+			if (titlesJSONObject.has(languageId)) {
+				title = GetterUtil.getString(
+					titlesJSONObject.getString(languageId));
 			}
 
 			String rootPortletId = PortletConstants.getRootPortletId(portletId);
@@ -224,7 +228,8 @@ public class PortletCSSPortlet extends MVCPortlet {
 			"portletSetupUseCustomTitle", String.valueOf(useCustomTitle));
 
 		if (Validator.isNotNull(showBorders)) {
-			boolean showBordersBoolean = portletData.getBoolean("showBorders");
+			boolean showBordersBoolean = portletDataJSONObject.getBoolean(
+				"showBorders");
 
 			portletSetup.setValue(
 				"portletSetupShowBorders", String.valueOf(showBordersBoolean));
@@ -244,7 +249,7 @@ public class PortletCSSPortlet extends MVCPortlet {
 		portletSetup.setValue("portletSetupCss", css);
 
 		if (PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED) {
-			JSONObject wapData = jsonObj.getJSONObject("wapData");
+			JSONObject wapData = jsonObject.getJSONObject("wapData");
 
 			String wapInitialWindowState = wapData.getString(
 				"initialWindowState");
