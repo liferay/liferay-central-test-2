@@ -56,9 +56,7 @@ public class DDMFormRendererHelper {
 				ddmForm, createDDMFormRenderingContext(ddmForm));
 		}
 		catch (DDMFormRenderingException ddmfre) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to render DDM Form ", ddmfre);
-			}
+			_log.error("Unable to render DDM Form ", ddmfre);
 
 			throw new PortletException(ddmfre);
 		}
