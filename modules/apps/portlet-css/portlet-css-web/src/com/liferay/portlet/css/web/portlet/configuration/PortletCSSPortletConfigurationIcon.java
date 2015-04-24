@@ -39,7 +39,7 @@ public class PortletCSSPortletConfigurationIcon
 
 	@Override
 	public String getCssClass() {
-		return "portlet-css portlet-css-icon lfr-js-required";
+		return "lfr-js-required portlet-css portlet-css-icon";
 	}
 
 	@Override
