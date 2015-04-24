@@ -57,7 +57,7 @@ public class DDMDisplayRegistryUtilTest {
 
 		for (DDMDisplay dDMDisplay : dDMDisplays) {
 			Class<?> clazz = dDMDisplay.getClass();
-			
+
 			String className = clazz.getName();
 
 			if (className.equals(TestDDMDisplay.class.getName())) {
