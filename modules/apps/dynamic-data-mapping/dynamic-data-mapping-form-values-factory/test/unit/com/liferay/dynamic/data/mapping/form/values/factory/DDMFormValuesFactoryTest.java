@@ -628,16 +628,16 @@ public class DDMFormValuesFactoryTest extends PowerMockito {
 			DDMFormTestUtil.createTextDDMFormField(
 				"Name", false, false, false));
 
-		DDMFormField checkbockDDMFormField = DDMFormTestUtil.createDDMFormField(
+		DDMFormField checkboxDDMFormField = DDMFormTestUtil.createDDMFormField(
 			"Boolean", "Boolean", DDMFormFieldType.CHECKBOX, "boolean", false,
 			false, false);
 
 		LocalizedValue predefinedValue =
-			checkbockDDMFormField.getPredefinedValue();
+			checkboxDDMFormField.getPredefinedValue();
 
 		predefinedValue.addString(LocaleUtil.US, "false");
 
-		ddmForm.addDDMFormField(checkbockDDMFormField);
+		ddmForm.addDDMFormField(checkboxDDMFormField);
 
 		DDMFormValues expectedDDMFormValues = createDDMFormValues(
 			ddmForm, createAvailableLocales(LocaleUtil.US), LocaleUtil.US);
