@@ -53,14 +53,14 @@ public class DDMDisplayRegistryUtilTest {
 
 	@Test
 	public void testGetDDMDisplays() {
-		String testClassName = TestDDMDisplay.class.getName();
-
 		List<DDMDisplay> dDMDisplays = DDMDisplayRegistryUtil.getDDMDisplays();
 
 		for (DDMDisplay dDMDisplay : dDMDisplays) {
 			Class<?> clazz = dDMDisplay.getClass();
+			
+			String className = clazz.getName();
 
-			if (testClassName.equals(clazz.getName())) {
+			if (className.equals(TestDDMDisplay.class.getName())) {
 				return;
 			}
 		}
@@ -70,12 +70,10 @@ public class DDMDisplayRegistryUtilTest {
 
 	@Test
 	public void testGetPortletIds() {
-		String testClassName = TestDDMDisplay.class.getName();
-
 		String[] portletIds = DDMDisplayRegistryUtil.getPortletIds();
 
 		for (String portletId : portletIds) {
-			if (testClassName.equals(portletId)) {
+			if (portletId.equals(TestDDMDisplay.class.getName())) {
 				return;
 			}
 		}

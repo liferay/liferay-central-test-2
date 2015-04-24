@@ -163,6 +163,7 @@ public class TestDDMDisplay implements DDMDisplay {
 		return null;
 	}
 
+	@Deprecated
 	@Override
 	public String getViewTemplatesTitle(
 		DDMStructure structure, boolean controlPanel, Locale locale) {
