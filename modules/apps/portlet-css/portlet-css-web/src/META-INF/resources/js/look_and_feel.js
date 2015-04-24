@@ -1240,7 +1240,6 @@ AUI.add(
 				var getLookAndFeelURL = new Liferay.PortletURL.createURL(instance._baseResourcePortletURL);
 
 				getLookAndFeelURL.setParameter("portletId", instance._portletId);
-
 				getLookAndFeelURL.setResourceId('getLookAndFeel');
 
 				A.io.request(
