@@ -47,13 +47,13 @@ public abstract class CoverageDataContainer
 
 	@Override
 	public double getBranchCoverageRate() {
-		int numberOfValidBranches = 0;
 		int numberOfCoveredBranches = 0;
+		int numberOfValidBranches = 0;
 
 		for (CoverageData coverageData : children.values()) {
-			numberOfValidBranches += coverageData.getNumberOfValidBranches();
 			numberOfCoveredBranches +=
 				coverageData.getNumberOfCoveredBranches();
+			numberOfValidBranches += coverageData.getNumberOfValidBranches();
 		}
 
 		if (numberOfValidBranches == 0) {
@@ -65,12 +65,12 @@ public abstract class CoverageDataContainer
 
 	@Override
 	public double getLineCoverageRate() {
-		int numberOfValidLines = 0;
 		int numberOfCoveredLines = 0;
+		int numberOfValidLines = 0;
 
 		for (CoverageData coverageData : children.values()) {
-			numberOfValidLines += coverageData.getNumberOfValidLines();
 			numberOfCoveredLines += coverageData.getNumberOfCoveredLines();
+			numberOfValidLines += coverageData.getNumberOfValidLines();
 		}
 
 		if (numberOfValidLines == 0) {
@@ -139,13 +139,13 @@ public abstract class CoverageDataContainer
 			otherCoverageDataContainer.children;
 
 		for (Entry<Object, CoverageData> entry : otherChildren.entrySet()) {
-			CoverageData otherChild = entry.getValue();
+			CoverageData otherChildCoverageData = entry.getValue();
 
-			CoverageData myChild = children.putIfAbsent(
-				entry.getKey(), otherChild);
+			CoverageData myChildCoverageData = children.putIfAbsent(
+				entry.getKey(), otherChildCoverageData);
 
-			if (myChild != null) {
-				myChild.merge(otherChild);
+			if (myChildCoverageData != null) {
+				myChildCoverageData.merge(otherChildCoverageData);
 			}
 		}
 	}
