@@ -188,14 +188,13 @@ public class PortletCSSPortlet extends MVCPortlet {
 
 		css = jsonObject.toString();
 
-		boolean useCustomTitle = portletDataJSONObject.getBoolean(
-			"useCustomTitle");
-		String showBorders = portletDataJSONObject.getString("showBorders");
 		String linkToLayoutUuid = GetterUtil.getString(
 			portletDataJSONObject.getString("portletLinksTarget"));
-
+		String showBorders = portletDataJSONObject.getString("showBorders");
 		JSONObject titlesJSONObject = portletDataJSONObject.getJSONObject(
 			"titles");
+		boolean useCustomTitle = portletDataJSONObject.getBoolean(
+			"useCustomTitle");
 
 		for (Locale locale : LanguageUtil.getAvailableLocales(
 				themeDisplay.getSiteGroupId())) {
