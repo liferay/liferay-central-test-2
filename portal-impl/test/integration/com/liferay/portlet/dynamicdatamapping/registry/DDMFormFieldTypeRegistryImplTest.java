@@ -53,13 +53,13 @@ public class DDMFormFieldTypeRegistryImplTest {
 
 	@Test
 	public void testGetDDMFormFieldTypeNames() {
-		String className = TestDDMFormFieldType.class.getName();
-
 		Set<String> dDMFormFieldTypeNames =
 			DDMFormFieldTypeRegistryUtil.getDDMFormFieldTypeNames();
 
 		for (String dDMFormFieldTypeName : dDMFormFieldTypeNames) {
-			if (className.equals(dDMFormFieldTypeName)) {
+			if (dDMFormFieldTypeName.equals(
+					TestDDMFormFieldType.class.getName())) {
+
 				return;
 			}
 		}
@@ -69,23 +69,21 @@ public class DDMFormFieldTypeRegistryImplTest {
 
 	@Test
 	public void testInstanceGetDDMFormFieldType() {
-		String className = TestDDMFormFieldType.class.getName();
-
 		DDMFormFieldTypeRegistry dDMFormFieldTypeRegistry =
 			DDMFormFieldTypeRegistryUtil.getDDMFormFieldTypeRegistry();
 
 		DDMFormFieldType dDMFormFieldType =
-			dDMFormFieldTypeRegistry.getDDMFormFieldType(className);
+			dDMFormFieldTypeRegistry.getDDMFormFieldType(
+				TestDDMFormFieldType.class.getName());
 
 		Class<?> clazz = dDMFormFieldType.getClass();
 
-		Assert.assertEquals(className, clazz.getName());
+		Assert.assertEquals(
+			TestDDMFormFieldType.class.getName(), clazz.getName());
 	}
 
 	@Test
 	public void testInstanceGetDDMFormFieldTypeNames() {
-		String className = TestDDMFormFieldType.class.getName();
-
 		DDMFormFieldTypeRegistry dDMFormFieldTypeRegistry =
 			DDMFormFieldTypeRegistryUtil.getDDMFormFieldTypeRegistry();
 
@@ -93,7 +91,9 @@ public class DDMFormFieldTypeRegistryImplTest {
 			dDMFormFieldTypeRegistry.getDDMFormFieldTypeNames();
 
 		for (String dDMFormFieldTypeName : dDMFormFieldTypeNames) {
-			if (className.equals(dDMFormFieldTypeName)) {
+			if (dDMFormFieldTypeName.equals(
+					TestDDMFormFieldType.class.getName())) {
+
 				return;
 			}
 		}
