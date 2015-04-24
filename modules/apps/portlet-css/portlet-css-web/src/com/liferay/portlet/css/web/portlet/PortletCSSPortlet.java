@@ -40,6 +40,7 @@ import com.liferay.portlet.css.web.upgrade.PortletCSSWebUpgrade;
 import java.io.IOException;
 
 import java.util.Locale;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -196,9 +197,10 @@ public class PortletCSSPortlet extends MVCPortlet {
 		boolean useCustomTitle = portletDataJSONObject.getBoolean(
 			"useCustomTitle");
 
-		for (Locale locale : LanguageUtil.getAvailableLocales(
-				themeDisplay.getSiteGroupId())) {
+		Set<Locale> locales = LanguageUtil.getAvailableLocales(
+			themeDisplay.getSiteGroupId());
 
+		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
 			String title = null;
