@@ -1018,8 +1018,8 @@ public class SeleniumBuilderFileUtil {
 			for (Attribute attribute : attributes) {
 				String attributeName = attribute.getName();
 
-				if (!attributeName.equals("macro") &&
-					!attributeName.equals("line-number")) {
+				if (!attributeName.equals("line-number") &&
+					!attributeName.equals("macro")) {
 
 					throwValidationException(
 						1005, fileName, executeElement, attributeName);
@@ -1037,9 +1037,9 @@ public class SeleniumBuilderFileUtil {
 			for (Attribute attribute : attributes) {
 				String attributeName = attribute.getName();
 
-				if (!attributeName.equals("macro-desktop") &&
-					!attributeName.equals("macro-mobile") &&
-					!attributeName.equals("line-number")) {
+				if (!attributeName.equals("line-number") &&
+					!attributeName.equals("macro-desktop") &&
+					!attributeName.equals("macro-mobile")) {
 
 					throwValidationException(
 						1005, fileName, executeElement, attributeName);
@@ -1057,8 +1057,8 @@ public class SeleniumBuilderFileUtil {
 			for (Attribute attribute : attributes) {
 				String attributeName = attribute.getName();
 
-				if (!attributeName.equals("macro-mobile") &&
-					!attributeName.equals("line-number")) {
+				if (!attributeName.equals("line-number") &&
+					!attributeName.equals("macro")) {
 
 					throwValidationException(
 						1005, fileName, executeElement, attributeName);
