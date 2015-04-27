@@ -6299,8 +6299,8 @@ public class JournalArticleLocalServiceImpl
 				long imageId = GetterUtil.getLong(
 					dynamicContentEl.attributeValue("id"));
 				String languageId =
-					StringPool.UNDERLINE + dynamicContentEl.attributeValue(
-						"language-id");
+					StringPool.UNDERLINE +
+						dynamicContentEl.attributeValue("language-id");
 
 				Image oldImage = imageLocalService.fetchImage(imageId);
 
