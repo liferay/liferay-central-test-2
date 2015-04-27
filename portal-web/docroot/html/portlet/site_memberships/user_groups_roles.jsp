@@ -50,7 +50,6 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroupId));
 	rowChecker="<%= new UserGroupGroupRoleRoleChecker(renderResponse, userGroup, group) %>"
 	searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
 >
-
 	<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" cssClass="col-xs-12 form-search" placeholder="keywords" />
 
 	<%
