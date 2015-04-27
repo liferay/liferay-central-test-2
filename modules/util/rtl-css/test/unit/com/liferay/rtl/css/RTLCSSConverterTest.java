@@ -20,14 +20,16 @@ import com.helger.css.decl.CSSStyleRule;
 import com.helger.css.decl.CascadingStyleSheet;
 import com.helger.css.reader.CSSReader;
 import com.helger.css.writer.CSSWriterSettings;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author David Truong
@@ -170,8 +172,8 @@ public class RTLCSSConverterTest {
 	protected String read(String fileName) throws Exception {
 		Class<?> clazz = getClass();
 
-		Path path =
-			Paths.get(clazz.getResource("dependencies/" + fileName).toURI());
+		Path path = Paths.get(
+			clazz.getResource("dependencies/" + fileName).toURI());
 
 		return new String(Files.readAllBytes(path));
 	}
