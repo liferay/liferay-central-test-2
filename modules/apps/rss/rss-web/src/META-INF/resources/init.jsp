@@ -50,7 +50,6 @@ page import="java.util.List" %>
 
 <%
 RSSPortletInstanceConfiguration rssPortletInstanceConfiguration = portletDisplay.getPortletInstanceConfiguration(RSSPortletInstanceConfiguration.class);
-
 RSSWebConfiguration rssWebConfiguration = (RSSWebConfiguration)renderRequest.getAttribute(RSSWebConfiguration.class.getName());
 
 RSSDisplayContext rssDisplayContext = new RSSDisplayContext(rssPortletInstanceConfiguration, rssWebConfiguration);
