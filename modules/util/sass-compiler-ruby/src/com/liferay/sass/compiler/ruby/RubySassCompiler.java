@@ -94,29 +94,30 @@ public class RubySassCompiler implements AutoCloseable {
 	}
 
 	public String compileFile(
-			String inputFile, String includePath, String imgPath)
+			String inputFileName, String includeDirName, String imgDirName)
 		throws RubySassCompilerException {
 
 		try {
-			Path path = Paths.get(inputFile);
+			Path path = Paths.get(inputFileName);
 
 			String input = new String(Files.readAllBytes(path));
 
-			return compileString(input, includePath, imgPath);
+			return compileString(input, includeDirName, imgDirName);
 		}
 		catch (Exception e) {
-			throw new RubySassCompilerException("Unable to parse " + inputFile);
+			throw new RubySassCompilerException(
+				"Unable to parse " + inputFileName);
 		}
 	}
 
 	public String compileString(
-			String input, String includePath, String imgPath)
+			String input, String includeDirName, String imgDirName)
 		throws RubySassCompilerException {
 
 		try {
 			return _scriptingContainer.callMethod(
 				_scriptObject, "process",
-				new Object[] {input, includePath, _TMP_DIR, false},
+				new Object[] {input, includeDirName, _TMP_DIR, false},
 				String.class);
 		}
 		catch (Exception e) {

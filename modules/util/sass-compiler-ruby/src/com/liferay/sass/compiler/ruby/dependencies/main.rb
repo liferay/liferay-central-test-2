@@ -9,7 +9,6 @@ class SASSWrapper
 	end
 
 	def process(input, includePath, sassCachePath, debug=false)
-
 		load_paths = includePath.split(File::PATH_SEPARATOR)
 		load_paths += @load_paths
 
