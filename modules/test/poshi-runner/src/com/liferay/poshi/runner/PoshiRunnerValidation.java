@@ -152,7 +152,6 @@ public class PoshiRunnerValidation {
 
 		_validatePossibleAttributeNames(
 			element, possibleAttributeNames, filePath);
-
 		_validateRequiredAttributeNames(
 			element, Arrays.asList("name"), filePath);
 	}
@@ -178,7 +177,6 @@ public class PoshiRunnerValidation {
 
 			_validatePossibleAttributeNames(
 				element, possibleAttributeNames, filePath);
-
 			_validateRequiredAttributeNames(
 				element, Arrays.asList("default"), filePath);
 		}
@@ -193,7 +191,6 @@ public class PoshiRunnerValidation {
 
 			_validatePossibleAttributeNames(
 				element, possibleAttributeNames, filePath);
-
 			_validateRequiredAttributeNames(
 				element, Arrays.asList("component-name"), filePath);
 		}
@@ -563,7 +560,6 @@ public class PoshiRunnerValidation {
 
 				_validatePossibleAttributeNames(
 					childElement, possibleAttributeNames, filePath);
-
 				_validateRequiredAttributeNames(
 					childElement, Arrays.asList("name"), filePath);
 
@@ -575,7 +571,6 @@ public class PoshiRunnerValidation {
 
 				_validatePossibleAttributeNames(
 					childElement, attributeNames, filePath);
-
 				_validateRequiredAttributeNames(
 					childElement, attributeNames, filePath);
 			}
@@ -586,7 +581,6 @@ public class PoshiRunnerValidation {
 
 				_validatePossibleAttributeNames(
 					childElement, attributeNames, filePath);
-
 				_validateRequiredAttributeNames(
 					childElement, attributeNames, filePath);
 
