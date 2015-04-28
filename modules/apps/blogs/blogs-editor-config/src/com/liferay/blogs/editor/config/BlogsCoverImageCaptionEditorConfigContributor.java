@@ -47,7 +47,17 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 		jsonObject.put("allowedContent", "a");
 		jsonObject.put("disallowedContent", "br");
 		jsonObject.put("extraPlugins", "placeholder,selectionregion,uicore");
+		jsonObject.put("toolbars", getToolbarsJSONObject());
+	}
 
+	@Override
+	public void populateOptionsJSONObject(
+		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
+		ThemeDisplay themeDisplay,
+		LiferayPortletResponse liferayPortletResponse) {
+	}
+	
+	protected JSONObject getToolbarsJSONObject() {
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
 		try {
@@ -88,15 +98,8 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 		}
 		catch (JSONException jsone) {
 		}
-
-		jsonObject.put("toolbars", toolbarsJSONObject);
-	}
-
-	@Override
-	public void populateOptionsJSONObject(
-		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
-		ThemeDisplay themeDisplay,
-		LiferayPortletResponse liferayPortletResponse) {
+		
+		return toolbarsJSONObject;
 	}
 
 }
