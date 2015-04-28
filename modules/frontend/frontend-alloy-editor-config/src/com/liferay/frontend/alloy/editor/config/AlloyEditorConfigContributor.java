@@ -169,70 +169,70 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			JSONFactoryUtil.createJSONObject();
 
 		toolbarsStylesJSONObject.put(
-			"selections", getToolbarsStylesSelectionJSONArray());
+			"selections", getToolbarsStylesSelectionsJSONArray());
 		toolbarsStylesJSONObject.put("tabIndex", 1);
 
 		return toolbarsStylesJSONObject;
 	}
 
-	protected JSONArray getToolbarsStylesSelectionJSONArray() {
-		JSONArray toolbarsStylesSelectionJSONArray =
+	protected JSONArray getToolbarsStylesSelectionsJSONArray() {
+		JSONArray toolbarsStylesSelectionsJSONArray =
 			JSONFactoryUtil.createJSONArray();
 
 		try {	
 	
-			JSONObject toolbarsStylesSelectionLinkJSONObject =
+			JSONObject toolbarsStylesSelectionsLinkJSONObject =
 				JSONFactoryUtil.createJSONObject();
 	
-			toolbarsStylesSelectionLinkJSONObject.put(
+			toolbarsStylesSelectionsLinkJSONObject.put(
 				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
-			toolbarsStylesSelectionLinkJSONObject.put("name", "link");
-			toolbarsStylesSelectionLinkJSONObject.put("test", "link");
+			toolbarsStylesSelectionsLinkJSONObject.put("name", "link");
+			toolbarsStylesSelectionsLinkJSONObject.put("test", "link");
 	
-			toolbarsStylesSelectionJSONArray.put(
-				toolbarsStylesSelectionLinkJSONObject);
+			toolbarsStylesSelectionsJSONArray.put(
+				toolbarsStylesSelectionsLinkJSONObject);
 	
-			JSONObject toolbarsStylesSelectionImageJSONObject =
+			JSONObject toolbarsStylesSelectionsImageJSONObject =
 				JSONFactoryUtil.createJSONObject();
 	
-			toolbarsStylesSelectionImageJSONObject.put(
+			toolbarsStylesSelectionsImageJSONObject.put(
 				"buttons",
 				JSONFactoryUtil.createJSONArray("['imageLeft', 'imageRight']"));
-			toolbarsStylesSelectionImageJSONObject.put("name", "image");
-			toolbarsStylesSelectionImageJSONObject.put("test", "image");
+			toolbarsStylesSelectionsImageJSONObject.put("name", "image");
+			toolbarsStylesSelectionsImageJSONObject.put("test", "image");
 	
-			toolbarsStylesSelectionJSONArray.put(
-				toolbarsStylesSelectionImageJSONObject);
+			toolbarsStylesSelectionsJSONArray.put(
+				toolbarsStylesSelectionsImageJSONObject);
 	
-			JSONObject toolbarsStylesSelectionTextJSONObject =
+			JSONObject toolbarsStylesSelectionsTextJSONObject =
 				JSONFactoryUtil.createJSONObject();
 	
-			toolbarsStylesSelectionTextJSONObject.put(
+			toolbarsStylesSelectionsTextJSONObject.put(
 				"buttons",
 				JSONFactoryUtil.createJSONArray(
 					"['styles', 'bold', 'italic', 'underline', 'link', " +
 						"'twitter']"));
-			toolbarsStylesSelectionTextJSONObject.put("name", "text");
-			toolbarsStylesSelectionTextJSONObject.put("test", "text");
+			toolbarsStylesSelectionsTextJSONObject.put("name", "text");
+			toolbarsStylesSelectionsTextJSONObject.put("test", "text");
 	
-			toolbarsStylesSelectionJSONArray.put(
-				toolbarsStylesSelectionTextJSONObject);
+			toolbarsStylesSelectionsJSONArray.put(
+				toolbarsStylesSelectionsTextJSONObject);
 	
-			JSONObject toolbarsStylesSelectionTableJSONObject =
+			JSONObject toolbarsStylesSelectionsTableJSONObject =
 				JSONFactoryUtil.createJSONObject();
 	
-			toolbarsStylesSelectionTableJSONObject.put(
+			toolbarsStylesSelectionsTableJSONObject.put(
 				"buttons",
 				JSONFactoryUtil.createJSONArray(
 					"['tableRow', 'tableColumn', 'tableCell', 'tableRemove']"));
-			toolbarsStylesSelectionTableJSONObject.put(
+			toolbarsStylesSelectionsTableJSONObject.put(
 				"getArrowBoxClasses", "table");
-			toolbarsStylesSelectionTableJSONObject.put("name", "table");
-			toolbarsStylesSelectionTableJSONObject.put("setPosition", "table");
-			toolbarsStylesSelectionTableJSONObject.put("test", "table");
+			toolbarsStylesSelectionsTableJSONObject.put("name", "table");
+			toolbarsStylesSelectionsTableJSONObject.put("setPosition", "table");
+			toolbarsStylesSelectionsTableJSONObject.put("test", "table");
 	
-			toolbarsStylesSelectionJSONArray.put(
-				toolbarsStylesSelectionTableJSONObject);
+			toolbarsStylesSelectionsJSONArray.put(
+				toolbarsStylesSelectionsTableJSONObject);
 			}
 		catch (JSONException jsone) {
 			if (_log.isErrorEnabled()) {
@@ -240,7 +240,7 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			}
 		}
 
-		return toolbarsStylesSelectionJSONArray;
+		return toolbarsStylesSelectionsJSONArray;
 	}
 	
 	private static final Log _log = LogFactoryUtil.getLog(
