@@ -166,8 +166,8 @@ public class PoshiRunnerValidation {
 		String elementName = element.getName();
 
 		if (elementName.equals("and")) {
-			_validateHasNoAttributes(element, filePath);
 			_validateHasChildElements(element, filePath);
+			_validateHasNoAttributes(element, filePath);
 
 			List<Element> childElements = element.elements();
 
