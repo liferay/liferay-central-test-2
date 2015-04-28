@@ -345,8 +345,8 @@ public class PoshiRunnerValidation {
 	private static void _validateFunctionFile(Element element, String filePath)
 		throws PoshiRunnerException {
 
-		_validateHasChildElements(element, filePath);
 		_validateDefinitionElement(element, filePath);
+		_validateHasChildElements(element, filePath);
 
 		List<Element> childElements = element.elements();
 
@@ -359,8 +359,8 @@ public class PoshiRunnerValidation {
 						":" + childElement.attributeValue("line-number"));
 			}
 
-			_validateHasChildElements(childElement, filePath);
 			_validateCommandElement(childElement, filePath);
+			_validateHasChildElements(childElement, filePath);
 
 			_parseElements(childElement, filePath);
 		}
