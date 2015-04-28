@@ -40,9 +40,9 @@ public class VerifyRatings extends VerifyProcess {
 			StringBundler sb = new StringBundler(6);
 
 			sb.append("update RatingsStats set ");
-			sb.append(_UPDATE_TOTAL_ENTRIES);
-			sb.append(", ");
 			sb.append(_UPDATE_AVERAGE_SCORE);
+			sb.append(", ");
+			sb.append(_UPDATE_TOTAL_ENTRIES);
 			sb.append(", ");
 			sb.append(_UPDATE_TOTAL_SCORE);
 
