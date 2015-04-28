@@ -127,6 +127,17 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			jsonObject.put("srcNode", name);
 		}
 
+		jsonObject.put("toolbars", getToolbarsJSONObject());
+	}
+
+	@Override
+	public void populateOptionsJSONObject(
+		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
+		ThemeDisplay themeDisplay,
+		LiferayPortletResponse liferayPortletResponse) {
+	}
+
+	protected JSONObject getToolbarsJSONObject() {
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
 		try {
@@ -213,14 +224,7 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			}
 		}
 
-		jsonObject.put("toolbars", toolbarsJSONObject);
-	}
-
-	@Override
-	public void populateOptionsJSONObject(
-		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
-		ThemeDisplay themeDisplay,
-		LiferayPortletResponse liferayPortletResponse) {
+		return toolbarsJSONObject;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
