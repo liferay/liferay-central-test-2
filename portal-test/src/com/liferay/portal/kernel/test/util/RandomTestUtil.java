@@ -93,14 +93,6 @@ public class RandomTestUtil {
 		}
 	}
 
-	/**
-	 * Returns a random int between min and max specified values.
-	 *
-	 * @param min minimum value for the random int (inclusive)
-	 * @param max maximum value for the random int (inclusive)
-	 * @return random int value between min and max values
-	 * @throws IllegalArgumentException if min or max are not positive or if min is greater than max
-	 */
 	public static int randomInt(int min, int max)
 		throws IllegalArgumentException {
 
