@@ -30,11 +30,13 @@ import javax.servlet.http.HttpServletRequest;
 public class BreadcrumbDisplayContext {
 
 	public BreadcrumbDisplayContext(
-		HttpServletRequest request, BreadcrumbPortletInstanceConfiguration
-			breadcrumbPortletInstanceSettings) {
+		HttpServletRequest request,
+		BreadcrumbPortletInstanceConfiguration
+			breadcrumbPortletInstanceConfiguration) {
 
 		_request = request;
-		_breadcrumbPortletInstanceSettings = breadcrumbPortletInstanceSettings;
+		_breadcrumbPortletInstanceConfiguration =
+			breadcrumbPortletInstanceConfiguration;
 	}
 
 	public String getDDMTemplateKey() {
@@ -59,7 +61,7 @@ public class BreadcrumbDisplayContext {
 
 		_displayStyle = ParamUtil.getString(
 			_request, "displayStyle",
-			_breadcrumbPortletInstanceSettings.displayStyle());
+			_breadcrumbPortletInstanceConfiguration.displayStyle());
 
 		return _displayStyle;
 	}
@@ -74,7 +76,7 @@ public class BreadcrumbDisplayContext {
 
 		_displayStyleGroupId = ParamUtil.getLong(
 			_request, "displayStyleGroupId",
-			_breadcrumbPortletInstanceSettings.displayStyleGroupId(
+			_breadcrumbPortletInstanceConfiguration.displayStyleGroupId(
 				themeDisplay.getSiteGroupId()));
 
 		return _displayStyleGroupId;
@@ -97,7 +99,7 @@ public class BreadcrumbDisplayContext {
 
 		_showCurrentGroup = ParamUtil.getBoolean(
 			_request, "showCurrentGroup",
-			_breadcrumbPortletInstanceSettings.showCurrentGroup());
+			_breadcrumbPortletInstanceConfiguration.showCurrentGroup());
 
 		return _showCurrentGroup;
 	}
@@ -109,7 +111,7 @@ public class BreadcrumbDisplayContext {
 
 		_showGuestGroup = ParamUtil.getBoolean(
 			_request, "showGuestGroup",
-			_breadcrumbPortletInstanceSettings.showGuestGroup());
+			_breadcrumbPortletInstanceConfiguration.showGuestGroup());
 
 		return _showGuestGroup;
 	}
@@ -121,7 +123,7 @@ public class BreadcrumbDisplayContext {
 
 		_showLayout = ParamUtil.getBoolean(
 			_request, "showLayout",
-			_breadcrumbPortletInstanceSettings.showLayout());
+			_breadcrumbPortletInstanceConfiguration.showLayout());
 
 		return _showLayout;
 	}
@@ -133,7 +135,7 @@ public class BreadcrumbDisplayContext {
 
 		_showParentGroups = ParamUtil.getBoolean(
 			_request, "showParentGroups",
-			_breadcrumbPortletInstanceSettings.showParentGroups());
+			_breadcrumbPortletInstanceConfiguration.showParentGroups());
 
 		return _showParentGroups;
 	}
@@ -145,7 +147,7 @@ public class BreadcrumbDisplayContext {
 
 		_showPortletBreadcrumb = ParamUtil.getBoolean(
 			_request, "showPortletBreadcrumb",
-			_breadcrumbPortletInstanceSettings.showPortletBreadcrumb());
+			_breadcrumbPortletInstanceConfiguration.showPortletBreadcrumb());
 
 		return _showPortletBreadcrumb;
 	}
@@ -154,7 +156,7 @@ public class BreadcrumbDisplayContext {
 		BreadcrumbDisplayContext.class);
 
 	private final BreadcrumbPortletInstanceConfiguration
-		_breadcrumbPortletInstanceSettings;
+		_breadcrumbPortletInstanceConfiguration;
 	private String _ddmTemplateKey;
 	private String _displayStyle;
 	private long _displayStyleGroupId;
