@@ -141,82 +141,82 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
 		try {
-			JSONObject toolbarAddJSONObject =
+			JSONObject toolbarsAddJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			JSONArray toolbarAddButtonsJSONArray =
+			JSONArray toolbarsAddButtonsJSONArray =
 				JSONFactoryUtil.createJSONArray(
 					"['imageselector', 'table', 'hline']");
 
-			toolbarAddJSONObject.put("buttons", toolbarAddButtonsJSONArray);
-			toolbarAddJSONObject.put("tabIndex", 2);
+			toolbarsAddJSONObject.put("buttons", toolbarsAddButtonsJSONArray);
+			toolbarsAddJSONObject.put("tabIndex", 2);
 
-			toolbarsJSONObject.put("add", toolbarAddJSONObject);
+			toolbarsJSONObject.put("add", toolbarsAddJSONObject);
 
-			JSONObject toolbarStylesJSONObject =
+			JSONObject toolbarsStylesJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			JSONArray toolbarStylesSelectionJSONArray =
+			JSONArray toolbarsStylesSelectionJSONArray =
 				JSONFactoryUtil.createJSONArray();
 
-			JSONObject toolbarStylesSelectionLinkJSONObject =
+			JSONObject toolbarsStylesSelectionLinkJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			toolbarStylesSelectionLinkJSONObject.put(
+			toolbarsStylesSelectionLinkJSONObject.put(
 				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
-			toolbarStylesSelectionLinkJSONObject.put("name", "link");
-			toolbarStylesSelectionLinkJSONObject.put("test", "link");
+			toolbarsStylesSelectionLinkJSONObject.put("name", "link");
+			toolbarsStylesSelectionLinkJSONObject.put("test", "link");
 
-			toolbarStylesSelectionJSONArray.put(
-				toolbarStylesSelectionLinkJSONObject);
+			toolbarsStylesSelectionJSONArray.put(
+				toolbarsStylesSelectionLinkJSONObject);
 
-			JSONObject toolbarStylesSelectionImageJSONObject =
+			JSONObject toolbarsStylesSelectionImageJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			toolbarStylesSelectionImageJSONObject.put(
+			toolbarsStylesSelectionImageJSONObject.put(
 				"buttons",
 				JSONFactoryUtil.createJSONArray("['imageLeft', 'imageRight']"));
-			toolbarStylesSelectionImageJSONObject.put("name", "image");
-			toolbarStylesSelectionImageJSONObject.put("test", "image");
+			toolbarsStylesSelectionImageJSONObject.put("name", "image");
+			toolbarsStylesSelectionImageJSONObject.put("test", "image");
 
-			toolbarStylesSelectionJSONArray.put(
-				toolbarStylesSelectionImageJSONObject);
+			toolbarsStylesSelectionJSONArray.put(
+				toolbarsStylesSelectionImageJSONObject);
 
-			JSONObject toolbarStylesSelectionTextJSONObject =
+			JSONObject toolbarsStylesSelectionTextJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			toolbarStylesSelectionTextJSONObject.put(
+			toolbarsStylesSelectionTextJSONObject.put(
 				"buttons",
 				JSONFactoryUtil.createJSONArray(
 					"['styles', 'bold', 'italic', 'underline', 'link', " +
 						"'twitter']"));
-			toolbarStylesSelectionTextJSONObject.put("name", "text");
-			toolbarStylesSelectionTextJSONObject.put("test", "text");
+			toolbarsStylesSelectionTextJSONObject.put("name", "text");
+			toolbarsStylesSelectionTextJSONObject.put("test", "text");
 
-			toolbarStylesSelectionJSONArray.put(
-				toolbarStylesSelectionTextJSONObject);
+			toolbarsStylesSelectionJSONArray.put(
+				toolbarsStylesSelectionTextJSONObject);
 
-			JSONObject toolbarStylesSelectionTableJSONObject =
+			JSONObject toolbarsStylesSelectionTableJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			toolbarStylesSelectionTableJSONObject.put(
+			toolbarsStylesSelectionTableJSONObject.put(
 				"buttons",
 				JSONFactoryUtil.createJSONArray(
 					"['tableRow', 'tableColumn', 'tableCell', 'tableRemove']"));
-			toolbarStylesSelectionTableJSONObject.put(
+			toolbarsStylesSelectionTableJSONObject.put(
 				"getArrowBoxClasses", "table");
-			toolbarStylesSelectionTableJSONObject.put("name", "table");
-			toolbarStylesSelectionTableJSONObject.put("setPosition", "table");
-			toolbarStylesSelectionTableJSONObject.put("test", "table");
+			toolbarsStylesSelectionTableJSONObject.put("name", "table");
+			toolbarsStylesSelectionTableJSONObject.put("setPosition", "table");
+			toolbarsStylesSelectionTableJSONObject.put("test", "table");
 
-			toolbarStylesSelectionJSONArray.put(
-				toolbarStylesSelectionTableJSONObject);
+			toolbarsStylesSelectionJSONArray.put(
+				toolbarsStylesSelectionTableJSONObject);
 
-			toolbarStylesJSONObject.put(
-				"selections", toolbarStylesSelectionJSONArray);
-			toolbarStylesJSONObject.put("tabIndex", 1);
+			toolbarsStylesJSONObject.put(
+				"selections", toolbarsStylesSelectionJSONArray);
+			toolbarsStylesJSONObject.put("tabIndex", 1);
 
-			toolbarsJSONObject.put("styles", toolbarStylesJSONObject);
+			toolbarsJSONObject.put("styles", toolbarsStylesJSONObject);
 		}
 		catch (JSONException jsone) {
 			if (_log.isErrorEnabled()) {
