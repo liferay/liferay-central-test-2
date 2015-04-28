@@ -65,9 +65,7 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 
 		toolbarStylesJSONObject.put(
 			"selections", getToolbarStylesSelectionsJSONArray());
-
 		toolbarStylesJSONObject.put("tabIndex", 1);
-
 		toolbarsJSONObject.put("styles", toolbarStylesJSONObject);
 		
 		return toolbarsJSONObject;
