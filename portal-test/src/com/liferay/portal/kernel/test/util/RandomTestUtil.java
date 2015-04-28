@@ -103,7 +103,7 @@ public class RandomTestUtil {
 
 		if (max < min) {
 			throw new IllegalArgumentException(
-				"Max value must be greater than min value");
+				"Max value must be greater than the min value");
 		}
 
 		int value = _random.nextInt(max - min + 1) + min;
@@ -114,9 +114,8 @@ public class RandomTestUtil {
 		else if (value == 0) {
 			return randomInt(min, max);
 		}
-		else {
-			return -value;
-		}
+
+		return -value;
 	}
 
 	public static Map<Locale, String> randomLocaleStringMap() {
