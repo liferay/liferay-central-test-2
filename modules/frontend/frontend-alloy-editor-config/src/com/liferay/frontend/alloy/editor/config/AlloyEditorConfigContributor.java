@@ -216,21 +216,8 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			toolbarsStylesSelectionsJSONArray.put(
 				toolbarsStylesSelectionsTextJSONObject);
 
-			JSONObject toolbarsStylesSelectionsTableJSONObject =
-				JSONFactoryUtil.createJSONObject();
-
-			toolbarsStylesSelectionsTableJSONObject.put(
-				"buttons",
-				JSONFactoryUtil.createJSONArray(
-					"['tableRow', 'tableColumn', 'tableCell', 'tableRemove']"));
-			toolbarsStylesSelectionsTableJSONObject.put(
-				"getArrowBoxClasses", "table");
-			toolbarsStylesSelectionsTableJSONObject.put("name", "table");
-			toolbarsStylesSelectionsTableJSONObject.put("setPosition", "table");
-			toolbarsStylesSelectionsTableJSONObject.put("test", "table");
-
 			toolbarsStylesSelectionsJSONArray.put(
-				toolbarsStylesSelectionsTableJSONObject);
+				getToolbarsStylesSelectionsTableJSONObject());
 		}
 		catch (JSONException jsone) {
 			if (_log.isErrorEnabled()) {
@@ -239,6 +226,28 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		}
 
 		return toolbarsStylesSelectionsJSONArray;
+	}
+	
+	protected JSONObject getToolbarsStylesSelectionsTableJSONObject() {
+		JSONObject toolbarsStylesSelectionsTableJSONObject =
+			JSONFactoryUtil.createJSONObject();
+
+		try {
+			toolbarsStylesSelectionsTableJSONObject.put(
+				"buttons",
+				JSONFactoryUtil.createJSONArray(
+					"['tableRow', 'tableColumn', 'tableCell', 'tableRemove']"));
+		}
+		catch (JSONException jsone) {
+		}
+
+		toolbarsStylesSelectionsTableJSONObject.put(
+			"getArrowBoxClasses", "table");
+		toolbarsStylesSelectionsTableJSONObject.put("name", "table");
+		toolbarsStylesSelectionsTableJSONObject.put("setPosition", "table");
+		toolbarsStylesSelectionsTableJSONObject.put("test", "table");
+		
+		return toolbarsStylesSelectionsTableJSONObject;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
