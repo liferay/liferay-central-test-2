@@ -14,8 +14,6 @@
 
 package com.liferay.mentions.web.editor.config;
 
-import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
-
 import org.osgi.service.component.annotations.Component;
 
 /**

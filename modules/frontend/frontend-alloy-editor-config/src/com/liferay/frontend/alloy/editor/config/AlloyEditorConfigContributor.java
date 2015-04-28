@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.alloy.editor.config;
 
-import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
+import com.liferay.portal.kernel.editor.config.BaseEditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(property = {"editor.name=alloyeditor"})
-public class AlloyEditorConfigContributor implements EditorConfigContributor {
+public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 
 	@Override
 	public void populateConfigJSONObject(

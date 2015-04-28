@@ -14,7 +14,7 @@
 
 package com.liferay.blogs.editor.config;
 
-import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
+import com.liferay.portal.kernel.editor.config.BaseEditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Component;
 	}
 )
 public class BlogsCoverImageCaptionEditorConfigContributor
-	implements EditorConfigContributor {
+	extends BaseEditorConfigContributor {
 
 	@Override
 	public void populateConfigJSONObject(
