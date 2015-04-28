@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -192,28 +190,28 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 	protected JSONArray getToolbarsStylesSelectionsJSONArray() {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		try {
-			JSONObject toolbarsStylesSelectionsLinkJSONObject =
-				JSONFactoryUtil.createJSONObject();
-
-			toolbarsStylesSelectionsLinkJSONObject.put(
-				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
-			toolbarsStylesSelectionsLinkJSONObject.put("name", "link");
-			toolbarsStylesSelectionsLinkJSONObject.put("test", "link");
-
-			jsonArray.put(toolbarsStylesSelectionsLinkJSONObject);
-
-			jsonArray.put(getToolbarsStylesSelectionsImageJSONObject());
-			jsonArray.put(getToolbarsStylesSelectionsTextJSONObject());
-			jsonArray.put(getToolbarsStylesSelectionsTableJSONObject());
-		}
-		catch (JSONException jsone) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to create a JSON array from string");
-			}
-		}
+		jsonArray.put(getToolbarsStylesSelectionsLinkJSONObject());
+		jsonArray.put(getToolbarsStylesSelectionsImageJSONObject());
+		jsonArray.put(getToolbarsStylesSelectionsTextJSONObject());
+		jsonArray.put(getToolbarsStylesSelectionsTableJSONObject());
 
 		return jsonArray;
+	}
+
+	protected JSONObject getToolbarsStylesSelectionsLinkJSONObject() {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		try {
+			jsonObject.put(
+				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
+		}
+		catch (JSONException jsone) {
+		}
+
+		jsonObject.put("name", "link");
+		jsonObject.put("test", "link");
+
+		return jsonObject;
 	}
 
 	protected JSONObject getToolbarsStylesSelectionsTableJSONObject() {
@@ -254,8 +252,5 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 
 		return jsonObject;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		AlloyEditorConfigContributor.class);
 
 }
