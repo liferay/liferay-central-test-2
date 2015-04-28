@@ -16,7 +16,6 @@ package com.liferay.frontend.alloy.editor.config;
 
 import com.liferay.portal.kernel.editor.config.BaseEditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -138,15 +137,8 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 	protected JSONObject getToolbarsAddJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonObject.put(
-				"buttons",
-				JSONFactoryUtil.createJSONArray(
-					"['imageselector', 'table', 'hline']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonObject.put(
+			"buttons", toJSONArray("['imageselector', 'table', 'hline']"));
 		jsonObject.put("tabIndex", 2);
 
 		return jsonObject;
@@ -173,14 +165,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 	protected JSONObject getToolbarsStylesSelectionsImageJSONObject() {
 		JSONObject jsonNObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonNObject.put(
-				"buttons",
-				JSONFactoryUtil.createJSONArray("['imageLeft', 'imageRight']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonNObject.put("buttons", toJSONArray("['imageLeft', 'imageRight']"));
 		jsonNObject.put("name", "image");
 		jsonNObject.put("test", "image");
 
@@ -201,13 +186,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 	protected JSONObject getToolbarsStylesSelectionsLinkJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonObject.put(
-				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonObject.put("buttons", toJSONArray("['linkEdit']"));
 		jsonObject.put("name", "link");
 		jsonObject.put("test", "link");
 
@@ -217,15 +196,10 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 	protected JSONObject getToolbarsStylesSelectionsTableJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonObject.put(
-				"buttons",
-				JSONFactoryUtil.createJSONArray(
-					"['tableRow', 'tableColumn', 'tableCell', 'tableRemove']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonObject.put(
+			"buttons",
+			toJSONArray(
+				"['tableRow', 'tableColumn', 'tableCell', 'tableRemove']"));
 		jsonObject.put("getArrowBoxClasses", "table");
 		jsonObject.put("name", "table");
 		jsonObject.put("setPosition", "table");
@@ -237,16 +211,11 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 	protected JSONObject getToolbarsStylesSelectionsTextJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonObject.put(
-				"buttons",
-				JSONFactoryUtil.createJSONArray(
-					"['styles', 'bold', 'italic', 'underline', 'link', " +
-						"'twitter']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonObject.put(
+			"buttons",
+			toJSONArray(
+				"['styles', 'bold', 'italic', 'underline', 'link', " +
+					"'twitter']"));
 		jsonObject.put("name", "text");
 		jsonObject.put("test", "text");
 

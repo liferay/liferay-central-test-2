@@ -16,7 +16,6 @@ package com.liferay.blogs.editor.config;
 
 import com.liferay.portal.kernel.editor.config.BaseEditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -86,13 +85,7 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 	protected JSONObject getToolbarStylesSelectionsLinkJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonObject.put(
-				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonObject.put("buttons", toJSONArray("['linkEdit']"));
 		jsonObject.put("name", "link");
 		jsonObject.put("test", "link");
 
@@ -102,13 +95,7 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 	protected JSONObject getToolbarStylesSelectionsTextJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		try {
-			jsonObject.put(
-				"buttons", JSONFactoryUtil.createJSONArray("['link']"));
-		}
-		catch (JSONException jsone) {
-		}
-
+		jsonObject.put("buttons", toJSONArray("['link']"));
 		jsonObject.put("name", "text");
 		jsonObject.put("test", "text");
 
