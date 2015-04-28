@@ -382,26 +382,27 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 			serviceContext);
 	}
 
-	protected List<DDMStructure> filterStructures(List<DDMStructure> structures)
+	protected List<DDMStructure> filterStructures(
+			List<DDMStructure> ddmStructures)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		structures = ListUtil.copy(structures);
+		ddmStructures = ListUtil.copy(ddmStructures);
 
-		Iterator<DDMStructure> itr = structures.iterator();
+		Iterator<DDMStructure> itr = ddmStructures.iterator();
 
 		while (itr.hasNext()) {
-			DDMStructure structure = itr.next();
+			DDMStructure ddmStructure = itr.next();
 
 			if (!DDMStructurePermission.contains(
-					permissionChecker, structure, ActionKeys.VIEW)) {
+					permissionChecker, ddmStructure, ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
 		}
 
-		return structures;
+		return ddmStructures;
 	}
 
 }

@@ -288,22 +288,22 @@ public class JournalFolderLocalServiceImpl
 			return journalFolderPersistence.getDDMStructures(folderId);
 		}
 
-		List<DDMStructure> structures = null;
+		List<DDMStructure> ddmStructures = null;
 
 		folderId = getOverridedDDMStructuresFolderId(folderId);
 
 		if (folderId != JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			structures = journalFolderPersistence.getDDMStructures(folderId);
+			ddmStructures = journalFolderPersistence.getDDMStructures(folderId);
 		}
 		else {
 			long classNameId = classNameLocalService.getClassNameId(
 				JournalArticle.class);
 
-			structures = ddmStructurePersistence.findByG_C(
+			ddmStructures = ddmStructurePersistence.findByG_C(
 				groupIds, classNameId);
 		}
 
-		return structures;
+		return ddmStructures;
 	}
 
 	@Override
