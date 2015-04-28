@@ -168,9 +168,18 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		JSONObject toolbarsStylesJSONObject =
 			JSONFactoryUtil.createJSONObject();
 
+		toolbarsStylesJSONObject.put(
+			"selections", getToolbarsStylesSelectionJSONArray());
+		toolbarsStylesJSONObject.put("tabIndex", 1);
+
+		return toolbarsStylesJSONObject;
+	}
+
+	protected JSONArray getToolbarsStylesSelectionJSONArray() {
+		JSONArray toolbarsStylesSelectionJSONArray =
+			JSONFactoryUtil.createJSONArray();
+
 		try {	
-			JSONArray toolbarsStylesSelectionJSONArray =
-				JSONFactoryUtil.createJSONArray();
 	
 			JSONObject toolbarsStylesSelectionLinkJSONObject =
 				JSONFactoryUtil.createJSONObject();
@@ -224,20 +233,16 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 	
 			toolbarsStylesSelectionJSONArray.put(
 				toolbarsStylesSelectionTableJSONObject);
-	
-			toolbarsStylesJSONObject.put(
-				"selections", toolbarsStylesSelectionJSONArray);
-			toolbarsStylesJSONObject.put("tabIndex", 1);
-		}
+			}
 		catch (JSONException jsone) {
 			if (_log.isErrorEnabled()) {
 				_log.error("Unable to create a JSON array from string");
 			}
 		}
 
-		return toolbarsStylesJSONObject;
+		return toolbarsStylesSelectionJSONArray;
 	}
-
+	
 	private static final Log _log = LogFactoryUtil.getLog(
 		AlloyEditorConfigContributor.class);
 
