@@ -56,21 +56,20 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 		ThemeDisplay themeDisplay,
 		LiferayPortletResponse liferayPortletResponse) {
 	}
-	
+
 	protected JSONObject getToolbarsJSONObject() {
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
-		JSONObject toolbarStylesJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		JSONObject toolbarStylesJSONObject = JSONFactoryUtil.createJSONObject();
 
 		toolbarStylesJSONObject.put(
 			"selections", getToolbarStylesSelectionsJSONArray());
 		toolbarStylesJSONObject.put("tabIndex", 1);
 		toolbarsJSONObject.put("styles", toolbarStylesJSONObject);
-		
+
 		return toolbarsJSONObject;
 	}
-	
+
 	protected JSONArray getToolbarStylesSelectionsJSONArray() {
 		JSONArray toolbarStylesSelectionsJSONArray =
 			JSONFactoryUtil.createJSONArray();
@@ -79,13 +78,13 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 			getToolbarStylesSelectionsLinkJSONObject());
 		toolbarStylesSelectionsJSONArray.put(
 			getToolbarStylesSelectionsTextJSONObject());
-		
+
 		return toolbarStylesSelectionsJSONArray;
 	}
-	
+
 	protected JSONObject getToolbarStylesSelectionsLinkJSONObject() {
 		JSONObject toolbarStylesSelectionsLinkJSONObject =
-				JSONFactoryUtil.createJSONObject();
+			JSONFactoryUtil.createJSONObject();
 
 		try {
 			toolbarStylesSelectionsLinkJSONObject.put(
@@ -96,10 +95,10 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 
 		toolbarStylesSelectionsLinkJSONObject.put("name", "link");
 		toolbarStylesSelectionsLinkJSONObject.put("test", "link");
-		
+
 		return toolbarStylesSelectionsLinkJSONObject;
 	}
-	
+
 	protected JSONObject getToolbarStylesSelectionsTextJSONObject() {
 		JSONObject toolbarStylesSelectionsTextJSONObject =
 			JSONFactoryUtil.createJSONObject();
@@ -113,7 +112,7 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 
 		toolbarStylesSelectionsTextJSONObject.put("name", "text");
 		toolbarStylesSelectionsTextJSONObject.put("test", "text");
-		
+
 		return toolbarStylesSelectionsTextJSONObject;
 	}
 
