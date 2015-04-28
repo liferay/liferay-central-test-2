@@ -39,6 +39,7 @@ public class ServiceDependencyManagerTest {
 	@Test
 	public void testDependenciesFulfilled() {
 		Registry registry = RegistryUtil.getRegistry();
+
 		registry.registerService(TestInterface1.class, new TestInstance1());
 		registry.registerService(TestInterface2.class, new TestInstance2());
 
@@ -58,6 +59,7 @@ public class ServiceDependencyManagerTest {
 			@Override
 			public void destroy() {
 			}
+
 		});
 
 		serviceDependencyManager.registerDependencies(TestInterface2.class);
@@ -66,6 +68,7 @@ public class ServiceDependencyManagerTest {
 	@Test
 	public void testNoDependencies() {
 		Registry registry = RegistryUtil.getRegistry();
+
 		registry.registerService(TestInterface1.class, new TestInstance1());
 
 		ServiceDependencyManager serviceDependencyManager =
@@ -82,6 +85,7 @@ public class ServiceDependencyManagerTest {
 				@Override
 				public void destroy() {
 				}
+
 			});
 
 		serviceDependencyManager.registerDependencies(TestInterface2.class);

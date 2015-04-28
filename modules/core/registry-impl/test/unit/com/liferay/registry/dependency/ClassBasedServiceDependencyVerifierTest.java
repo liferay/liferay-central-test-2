@@ -37,21 +37,20 @@ public class ClassBasedServiceDependencyVerifierTest {
 	@Test
 	public void testVerifyImplementations() {
 		Registry registry = RegistryUtil.getRegistry();
+
 		registry.registerService(TestInstance1.class, new TestInstance1());
 		registry.registerService(TestInterface2.class, new TestInstance2());
 
-		ServiceReference serviceReference = registry.getServiceReference(
+		ServiceReference<?> serviceReference = registry.getServiceReference(
 			TestInstance1.class);
 
-		//test interfaces
 		ClassBasedServiceDependencyVerifier
-			classBasedServiceDependencyVerifier =
+			classBasedServiceDependencyVerifier1 =
 				new ClassBasedServiceDependencyVerifier(TestInstance1.class);
 
 		Assert.assertTrue(
-			classBasedServiceDependencyVerifier.verify(serviceReference));
+			classBasedServiceDependencyVerifier1.verify(serviceReference));
 
-		//test interfaces
 		ClassBasedServiceDependencyVerifier
 			classBasedServiceDependencyVerifier2 =
 				new ClassBasedServiceDependencyVerifier(TestInterface1.class);
@@ -63,24 +62,23 @@ public class ClassBasedServiceDependencyVerifierTest {
 	@Test
 	public void testVerifyInterfaces() {
 		Registry registry = RegistryUtil.getRegistry();
+
 		registry.registerService(TestInterface1.class, new TestInstance1());
 		registry.registerService(TestInterface2.class, new TestInstance2());
 
-		ServiceReference serviceReference = registry.getServiceReference(
+		ServiceReference<?> serviceReference1 = registry.getServiceReference(
 			TestInterface1.class);
-		ServiceReference serviceReference2 = registry.getServiceReference(
+		ServiceReference<?> serviceReference2 = registry.getServiceReference(
 			TestInterface2.class);
-		ServiceReference serviceReference3 = registry.getServiceReference(
+		ServiceReference<?> serviceReference3 = registry.getServiceReference(
 			TestInterface2.class);
 
-		//test interfaces
 		ClassBasedServiceDependencyVerifier
 			classBasedServiceDependencyVerifier =
 				new ClassBasedServiceDependencyVerifier(TestInstance1.class);
 
 		Assert.assertTrue(
-			classBasedServiceDependencyVerifier.verify(serviceReference));
-
+			classBasedServiceDependencyVerifier.verify(serviceReference1));
 		Assert.assertFalse(
 			classBasedServiceDependencyVerifier.verify(serviceReference2));
 

@@ -258,7 +258,9 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		_serviceDepenndecyManager = new ServiceDependencyManager();
 
 		_serviceDepenndecyManager.addServiceDependencyListener(
+
 			new ServiceDependencyListener() {
+
 				@Override
 				public void destroy() {
 					_indexerPostProcessorRegistry.close();
@@ -282,8 +284,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		_serviceDepenndecyManager.registerDependencies(
 			MessageBus.class, PortalExecutorManager.class,
-			SingleDestinationMessageSenderFactory.class
-		);
+			SingleDestinationMessageSenderFactory.class);
 
 		PortalContextLoaderLifecycleThreadLocal.setInitializing(true);
 
