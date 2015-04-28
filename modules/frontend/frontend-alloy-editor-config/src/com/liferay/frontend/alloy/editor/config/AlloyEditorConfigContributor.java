@@ -137,21 +137,29 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 		LiferayPortletResponse liferayPortletResponse) {
 	}
 
+	protected JSONObject getToolbarsAddJSONObject() {
+		JSONObject toolbarsAddJSONObject =
+			JSONFactoryUtil.createJSONObject();
+
+		try {
+			toolbarsAddJSONObject.put(
+				"buttons",
+				JSONFactoryUtil.createJSONArray(
+					"['imageselector', 'table', 'hline']"));
+		}
+		catch (JSONException jsone) {
+		}
+
+		toolbarsAddJSONObject.put("tabIndex", 2);
+		
+		return toolbarsAddJSONObject;
+	}
+
 	protected JSONObject getToolbarsJSONObject() {
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
 		try {
-			JSONObject toolbarsAddJSONObject =
-				JSONFactoryUtil.createJSONObject();
-
-			JSONArray toolbarsAddButtonsJSONArray =
-				JSONFactoryUtil.createJSONArray(
-					"['imageselector', 'table', 'hline']");
-
-			toolbarsAddJSONObject.put("buttons", toolbarsAddButtonsJSONArray);
-			toolbarsAddJSONObject.put("tabIndex", 2);
-
-			toolbarsJSONObject.put("add", toolbarsAddJSONObject);
+			toolbarsJSONObject.put("add", getToolbarsAddJSONObject());
 
 			JSONObject toolbarsStylesJSONObject =
 				JSONFactoryUtil.createJSONObject();
