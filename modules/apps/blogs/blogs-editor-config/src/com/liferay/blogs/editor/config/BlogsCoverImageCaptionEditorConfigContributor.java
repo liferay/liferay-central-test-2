@@ -58,62 +58,61 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 	}
 
 	protected JSONObject getToolbarsJSONObject() {
-		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		JSONObject toolbarStylesJSONObject = JSONFactoryUtil.createJSONObject();
+		jsonObject.put("styles", getToolbarsStylesJSONObject());
 
-		toolbarStylesJSONObject.put(
-			"selections", getToolbarStylesSelectionsJSONArray());
-		toolbarStylesJSONObject.put("tabIndex", 1);
-		toolbarsJSONObject.put("styles", toolbarStylesJSONObject);
+		return jsonObject;
+	}
 
-		return toolbarsJSONObject;
+	protected JSONObject getToolbarsStylesJSONObject() {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("selections", getToolbarStylesSelectionsJSONArray());
+		jsonObject.put("tabIndex", 1);
+
+		return jsonObject;
 	}
 
 	protected JSONArray getToolbarStylesSelectionsJSONArray() {
-		JSONArray toolbarStylesSelectionsJSONArray =
-			JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		toolbarStylesSelectionsJSONArray.put(
-			getToolbarStylesSelectionsLinkJSONObject());
-		toolbarStylesSelectionsJSONArray.put(
-			getToolbarStylesSelectionsTextJSONObject());
+		jsonArray.put(getToolbarStylesSelectionsLinkJSONObject());
+		jsonArray.put(getToolbarStylesSelectionsTextJSONObject());
 
-		return toolbarStylesSelectionsJSONArray;
+		return jsonArray;
 	}
 
 	protected JSONObject getToolbarStylesSelectionsLinkJSONObject() {
-		JSONObject toolbarStylesSelectionsLinkJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		try {
-			toolbarStylesSelectionsLinkJSONObject.put(
+			jsonObject.put(
 				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
 		}
 		catch (JSONException jsone) {
 		}
 
-		toolbarStylesSelectionsLinkJSONObject.put("name", "link");
-		toolbarStylesSelectionsLinkJSONObject.put("test", "link");
+		jsonObject.put("name", "link");
+		jsonObject.put("test", "link");
 
-		return toolbarStylesSelectionsLinkJSONObject;
+		return jsonObject;
 	}
 
 	protected JSONObject getToolbarStylesSelectionsTextJSONObject() {
-		JSONObject toolbarStylesSelectionsTextJSONObject =
-			JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		try {
-			toolbarStylesSelectionsTextJSONObject.put(
+			jsonObject.put(
 				"buttons", JSONFactoryUtil.createJSONArray("['link']"));
 		}
 		catch (JSONException jsone) {
 		}
 
-		toolbarStylesSelectionsTextJSONObject.put("name", "text");
-		toolbarStylesSelectionsTextJSONObject.put("test", "text");
+		jsonObject.put("name", "text");
+		jsonObject.put("test", "text");
 
-		return toolbarStylesSelectionsTextJSONObject;
+		return jsonObject;
 	}
 
 }
