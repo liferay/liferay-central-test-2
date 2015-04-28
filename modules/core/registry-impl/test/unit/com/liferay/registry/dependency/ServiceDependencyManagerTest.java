@@ -18,9 +18,6 @@ import com.liferay.registry.BasicRegistryImpl;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,14 +43,11 @@ public class ServiceDependencyManagerTest {
 		ServiceDependencyManager serviceDependencyManager =
 			new ServiceDependencyManager();
 
-		final Set<Boolean> completion = new HashSet<>();
-
 		serviceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
 
 			@Override
 			public void dependenciesFulfilled() {
-				completion.add(true);
 			}
 
 			@Override
