@@ -191,8 +191,8 @@ public final class XMLLoggerHandler {
 
 		LoggerElement loggerElement = new LoggerElement();
 
-		loggerElement.setName("li");
 		loggerElement.setClassName("line-group");
+		loggerElement.setName("li");
 
 		if (Validator.isNotNull(className)) {
 			loggerElement.addClassName(className);
@@ -200,7 +200,6 @@ public final class XMLLoggerHandler {
 
 		loggerElement.addChildLoggerElement(
 			_getBtnContainerLoggerElement(element));
-
 		loggerElement.addChildLoggerElement(
 			_getLineContainerLoggerElement(element));
 
@@ -234,7 +233,7 @@ public final class XMLLoggerHandler {
 
 		LoggerElement loggerElement = new LoggerElement();
 
-		if (elementName.equals("echo") || elementName.equals("description")) {
+		if (elementName.equals("description") || elementName.equals("echo")) {
 			loggerElement = _getEchoLoggerElement(element);
 		}
 		else if (elementName.equals("fail")) {
