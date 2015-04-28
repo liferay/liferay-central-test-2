@@ -370,8 +370,8 @@ public class JournalFeedLocalServiceImpl
 		for (DDMFormField ddmFormField : ddmFormFieldsMap.values()) {
 			String ddmFormFieldType = ddmFormField.getType();
 
-			if (!(ddmFormFieldType.equals("select") ||
-				  ddmFormFieldType.equals("radio"))) {
+			if (!(ddmFormFieldType.equals("radio") ||
+				  ddmFormFieldType.equals("select"))) {
 
 				continue;
 			}

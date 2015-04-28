@@ -255,7 +255,7 @@ if (feed != null) {
 							for (DDMFormField ddmFormField : ddmFormFieldsMap.values()) {
 								String ddmFormFieldType = ddmFormField.getType();
 
-								if (ddmFormFieldType.equals("select") || ddmFormFieldType.equals("radio")) {
+								if (ddmFormFieldType.equals("radio") || ddmFormFieldType.equals("select")) {
 									DDMFormFieldOptions ddmFormFieldOptions = ddmFormField.getDDMFormFieldOptions();
 
 									for (String optionValue : ddmFormFieldOptions.getOptionsValues()) {
