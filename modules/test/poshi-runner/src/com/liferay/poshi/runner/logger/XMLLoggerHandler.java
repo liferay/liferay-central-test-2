@@ -195,9 +195,14 @@ public final class XMLLoggerHandler {
 	}
 
 	private static boolean _isExecutingMacro(Element element) {
-		return (element.attributeValue("macro") != null ||
-			element.attributeValue("macro-desktop") != null ||
-			element.attributeValue("macro-mobile") != null);
+		if ((element.attributeValue("macro") != null) ||
+			(element.attributeValue("macro-desktop") != null) ||
+			(element.attributeValue("macro-mobile") != null)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
