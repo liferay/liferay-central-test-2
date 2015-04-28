@@ -199,21 +199,21 @@ public class JournalPortlet extends MVCPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteArticles(actionRequest, actionResponse, false);
+		deleteArticles(actionRequest, actionResponse, false);
 	}
 
 	public void deleteArticles(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteArticles(actionRequest, actionResponse, false);
+		deleteArticles(actionRequest, actionResponse, false);
 	}
 
 	public void deleteEntries(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteEntries(actionRequest, actionResponse, false);
+		deleteEntries(actionRequest, actionResponse, false);
 	}
 
 	public void deleteFeeds(
@@ -234,7 +234,7 @@ public class JournalPortlet extends MVCPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteFolders(actionRequest, actionResponse, false);
+		deleteFolders(actionRequest, actionResponse, false);
 	}
 
 	public void expireArticles(
@@ -292,7 +292,7 @@ public class JournalPortlet extends MVCPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteArticles(actionRequest, actionResponse, true);
+		deleteArticles(actionRequest, actionResponse, true);
 	}
 
 	public void moveEntries(
@@ -353,14 +353,14 @@ public class JournalPortlet extends MVCPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteEntries(actionRequest, actionResponse, true);
+		deleteEntries(actionRequest, actionResponse, true);
 	}
 
 	public void moveFoldersToTrash(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		doDeleteFolders(actionRequest, actionResponse, true);
+		deleteFolders(actionRequest, actionResponse, true);
 	}
 
 	public void previewArticle(
@@ -886,7 +886,7 @@ public class JournalPortlet extends MVCPortlet {
 			ddmStructureIds, restrinctionType, false, serviceContext);
 	}
 
-	protected void doDeleteArticles(
+	protected void deleteArticles(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			boolean moveToTrash)
 		throws Exception {
@@ -932,7 +932,7 @@ public class JournalPortlet extends MVCPortlet {
 		sendEditArticleRedirect(actionRequest, actionResponse);
 	}
 
-	protected void doDeleteEntries(
+	protected void deleteEntries(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			boolean moveToTrash)
 		throws Exception {
@@ -984,7 +984,7 @@ public class JournalPortlet extends MVCPortlet {
 		sendEditEntryRedirect(actionRequest, actionResponse);
 	}
 
-	protected void doDeleteFolders(
+	protected void deleteFolders(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			boolean moveToTrash)
 		throws Exception {
