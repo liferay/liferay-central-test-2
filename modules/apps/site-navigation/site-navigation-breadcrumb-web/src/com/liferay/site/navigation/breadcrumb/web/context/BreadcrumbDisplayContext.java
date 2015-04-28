@@ -30,8 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BreadcrumbDisplayContext {
 
 	public BreadcrumbDisplayContext(
-		HttpServletRequest request,
-		BreadcrumbPortletInstanceConfiguration
+		HttpServletRequest request, BreadcrumbPortletInstanceConfiguration
 			breadcrumbPortletInstanceConfiguration) {
 
 		_request = request;
