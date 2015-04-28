@@ -2032,8 +2032,7 @@ public class ServiceBuilder {
 					new String[] {resourceElement.attributeValue("file")}));
 		}
 
-		XPath xPath = document.createXPath(
-			"//model-resource/model-name");
+		XPath xPath = document.createXPath("//model-resource/model-name");
 
 		List<Element> elements = xPath.selectNodes(rootElement);
 
