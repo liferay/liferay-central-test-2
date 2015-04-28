@@ -207,7 +207,7 @@ public class AsyncBrokerTest {
 	public void testPhantomReferenceResurrectionNotSupportedWithLog()
 		throws ClassNotFoundException {
 
-		doTestPhantomReferenceResurrectionNotSupported(true);
+		testPhantomReferenceResurrectionNotSupported(true);
 	}
 
 	@AdviseWith(adviceClasses = ReflectionUtilAdvice.class)
@@ -216,7 +216,7 @@ public class AsyncBrokerTest {
 	public void testPhantomReferenceResurrectionNotSupportedWithoutLog()
 		throws ClassNotFoundException {
 
-		doTestPhantomReferenceResurrectionNotSupported(false);
+		testPhantomReferenceResurrectionNotSupported(false);
 	}
 
 	@Test
@@ -346,7 +346,7 @@ public class AsyncBrokerTest {
 		Assert.assertFalse(asyncBroker.takeWithResult(_KEY, _VALUE));
 	}
 
-	protected void doTestPhantomReferenceResurrectionNotSupported(
+	protected void testPhantomReferenceResurrectionNotSupported(
 			boolean withLog)
 		throws ClassNotFoundException {
 
