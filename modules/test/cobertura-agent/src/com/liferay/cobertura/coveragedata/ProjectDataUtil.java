@@ -137,7 +137,7 @@ public class ProjectDataUtil {
 			"_sessionDataThreadLocal");
 
 		try (ObjectInputStream objectInputStream = new ObjectInputStream(
-			new ByteArrayInputStream(sessionDataThreadLocal.get()))) {
+				new ByteArrayInputStream(sessionDataThreadLocal.get()))) {
 
 			return (ProjectData)objectInputStream.readObject();
 		}
@@ -194,7 +194,7 @@ public class ProjectDataUtil {
 			new ByteArrayOutputStream();
 
 		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-			byteArrayOutputStream)) {
+				byteArrayOutputStream)) {
 
 			objectOutputStream.writeObject(projectData);
 		}
