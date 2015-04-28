@@ -144,12 +144,12 @@ public class ServiceDependencyManager {
 
 		@Override
 		public void modifiedService(
-			ServiceReference<Object> serviceReference, Object object) {
+			ServiceReference<Object> serviceReference, Object service) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<Object> serviceReference, Object object) {
+			ServiceReference<Object> serviceReference, Object service) {
 		}
 
 		private final ServiceDependency _serviceDependency;
