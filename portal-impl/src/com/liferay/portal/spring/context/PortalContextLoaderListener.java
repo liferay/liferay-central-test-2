@@ -139,7 +139,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			_log.error(e, e);
 		}
 
-		_serviceDepenndecyManager.destroy();
+		_serviceDependecyManager.destroy();
 
 		try {
 			ModuleFrameworkUtilAdapter.stopRuntime();
@@ -255,9 +255,9 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			throw new RuntimeException(e);
 		}
 
-		_serviceDepenndecyManager = new ServiceDependencyManager();
+		_serviceDependecyManager = new ServiceDependencyManager();
 
-		_serviceDepenndecyManager.addServiceDependencyListener(
+		_serviceDependecyManager.addServiceDependencyListener(
 
 			new ServiceDependencyListener() {
 
@@ -282,7 +282,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 				private ServiceWrapperRegistry _serviceWrapperRegistry;
 			});
 
-		_serviceDepenndecyManager.registerDependencies(
+		_serviceDependecyManager.registerDependencies(
 			MessageBus.class, PortalExecutorManager.class,
 			SingleDestinationMessageSenderFactory.class);
 
@@ -405,6 +405,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 	}
 
 	private ArrayApplicationContext _arrayApplicationContext;
-	private ServiceDependencyManager _serviceDepenndecyManager;
+	private ServiceDependencyManager _serviceDependecyManager;
 
 }
