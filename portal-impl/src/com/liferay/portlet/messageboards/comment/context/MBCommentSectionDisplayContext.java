@@ -74,7 +74,6 @@ public class MBCommentSectionDisplayContext
 				ratingsEntries = RatingsEntryLocalServiceUtil.getEntries(
 					_discussionTaglibHelper.getUserId(),
 					CommentConstants.getDiscussionClassName(), classPKs);
-
 				ratingsStats = RatingsStatsLocalServiceUtil.getStats(
 					CommentConstants.getDiscussionClassName(), classPKs);
 			}
@@ -133,12 +132,20 @@ public class MBCommentSectionDisplayContext
 
 	@Override
 	public boolean isDiscussionVisible() throws PortalException {
-		return (getMessagesCount() > 1) || hasViewPermission();
+		if ((getMessagesCount() > 1) || hasViewPermission()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean isMessageThreadVisible() throws PortalException {
-		return getMessagesCount() > 1;
+		if (getMessagesCount() > 1) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected MBMessageDisplay getMBMessageDisplay() throws PortalException {

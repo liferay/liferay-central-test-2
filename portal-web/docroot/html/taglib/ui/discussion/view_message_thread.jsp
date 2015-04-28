@@ -17,23 +17,22 @@
 <%@ include file="/html/taglib/ui/discussion/init.jsp" %>
 
 <%
-DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
-DiscussionRequestHelper discussionRequestHelper = new DiscussionRequestHelper(request);
-
 CommentSectionDisplayContext commentSectionDisplayContext = (CommentSectionDisplayContext)request.getAttribute("liferay-ui:discussion:commentSectionDisplayContext");
-
 Comment comment = (Comment)request.getAttribute("liferay-ui:discussion:currentComment");
 
-CommentTreeDisplayContext commentTreeDisplayContext = new MBCommentTreeDisplayContext(discussionTaglibHelper, discussionRequestHelper, comment);
-
 int index = GetterUtil.getInteger(request.getAttribute("liferay-ui:discussion:index"));
-String randomNamespace = (String)request.getAttribute("liferay-ui:discussion:randomNamespace");
-
-Comment rootComment = (Comment)request.getAttribute("liferay-ui:discussion:rootComment");
 
 index++;
 
 request.setAttribute("liferay-ui:discussion:index", new Integer(index));
+
+String randomNamespace = (String)request.getAttribute("liferay-ui:discussion:randomNamespace");
+Comment rootComment = (Comment)request.getAttribute("liferay-ui:discussion:rootComment");
+
+DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
+DiscussionRequestHelper discussionRequestHelper = new DiscussionRequestHelper(request);
+
+CommentTreeDisplayContext commentTreeDisplayContext = new MBCommentTreeDisplayContext(discussionTaglibHelper, discussionRequestHelper, comment);
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
