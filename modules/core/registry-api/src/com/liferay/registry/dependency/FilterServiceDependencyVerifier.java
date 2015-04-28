@@ -20,10 +20,10 @@ import com.liferay.registry.ServiceReference;
 /**
  * @author Michael C. Han
  */
-public class FilterBasedServiceDependencyVerifier
+public class FilterServiceDependencyVerifier
 	implements ServiceDependencyVerifier {
 
-	public FilterBasedServiceDependencyVerifier(Filter filter) {
+	public FilterServiceDependencyVerifier(Filter filter) {
 		_filter = filter;
 	}
 

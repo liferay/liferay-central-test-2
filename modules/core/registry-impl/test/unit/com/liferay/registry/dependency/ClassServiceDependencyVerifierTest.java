@@ -26,7 +26,7 @@ import org.junit.Test;
 /**
  * @author Michael C. Han
  */
-public class ClassBasedServiceDependencyVerifierTest {
+public class ClassServiceDependencyVerifierTest {
 
 	@Before
 	public void setUp() {
@@ -44,19 +44,17 @@ public class ClassBasedServiceDependencyVerifierTest {
 		ServiceReference<?> serviceReference = registry.getServiceReference(
 			TestInstance1.class);
 
-		ClassBasedServiceDependencyVerifier
-			classBasedServiceDependencyVerifier1 =
-				new ClassBasedServiceDependencyVerifier(TestInstance1.class);
+		ClassServiceDependencyVerifier classServiceDependencyVerifier1 =
+			new ClassServiceDependencyVerifier(TestInstance1.class);
 
 		Assert.assertTrue(
-			classBasedServiceDependencyVerifier1.verify(serviceReference));
+			classServiceDependencyVerifier1.verify(serviceReference));
 
-		ClassBasedServiceDependencyVerifier
-			classBasedServiceDependencyVerifier2 =
-				new ClassBasedServiceDependencyVerifier(TestInterface1.class);
+		ClassServiceDependencyVerifier classServiceDependencyVerifier2 =
+			new ClassServiceDependencyVerifier(TestInterface1.class);
 
 		Assert.assertTrue(
-			classBasedServiceDependencyVerifier2.verify(serviceReference));
+			classServiceDependencyVerifier2.verify(serviceReference));
 	}
 
 	@Test
@@ -73,28 +71,25 @@ public class ClassBasedServiceDependencyVerifierTest {
 		ServiceReference<?> serviceReference3 = registry.getServiceReference(
 			TestInterface2.class);
 
-		ClassBasedServiceDependencyVerifier
-			classBasedServiceDependencyVerifier =
-				new ClassBasedServiceDependencyVerifier(TestInstance1.class);
+		ClassServiceDependencyVerifier classServiceDependencyVerifier =
+			new ClassServiceDependencyVerifier(TestInstance1.class);
 
 		Assert.assertTrue(
-			classBasedServiceDependencyVerifier.verify(serviceReference1));
+			classServiceDependencyVerifier.verify(serviceReference1));
 		Assert.assertFalse(
-			classBasedServiceDependencyVerifier.verify(serviceReference2));
+			classServiceDependencyVerifier.verify(serviceReference2));
 
-		ClassBasedServiceDependencyVerifier
-			classBasedServiceDependencyVerifier2 =
-				new ClassBasedServiceDependencyVerifier(TestInstance2.class);
+		ClassServiceDependencyVerifier classServiceDependencyVerifier2 =
+			new ClassServiceDependencyVerifier(TestInstance2.class);
 
 		Assert.assertTrue(
-			classBasedServiceDependencyVerifier2.verify(serviceReference2));
+			classServiceDependencyVerifier2.verify(serviceReference2));
 
-		ClassBasedServiceDependencyVerifier
-			classBasedServiceDependencyVerifier3 =
-				new ClassBasedServiceDependencyVerifier(TestInstance3.class);
+		ClassServiceDependencyVerifier classServiceDependencyVerifier3 =
+			new ClassServiceDependencyVerifier(TestInstance3.class);
 
 		Assert.assertFalse(
-			classBasedServiceDependencyVerifier3.verify(serviceReference3));
+			classServiceDependencyVerifier3.verify(serviceReference3));
 	}
 
 	private class TestInstance1 implements TestInterface1 {

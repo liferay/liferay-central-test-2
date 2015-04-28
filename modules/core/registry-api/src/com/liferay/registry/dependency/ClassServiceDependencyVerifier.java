@@ -21,10 +21,10 @@ import com.liferay.registry.ServiceReference;
 /**
  * @author Michael C. Han
  */
-public class ClassBasedServiceDependencyVerifier
+public class ClassServiceDependencyVerifier
 	implements ServiceDependencyVerifier {
 
-	public ClassBasedServiceDependencyVerifier(Class<?> clazz) {
+	public ClassServiceDependencyVerifier(Class<?> clazz) {
 		_clazz = clazz;
 	}
 
