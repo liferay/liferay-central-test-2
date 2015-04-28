@@ -280,6 +280,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 					_indexerPostProcessorRegistry;
 				private SchedulerEntryRegistry _schedulerEntryRegistry;
 				private ServiceWrapperRegistry _serviceWrapperRegistry;
+
 			});
 
 		_serviceDependecyManager.registerDependencies(
