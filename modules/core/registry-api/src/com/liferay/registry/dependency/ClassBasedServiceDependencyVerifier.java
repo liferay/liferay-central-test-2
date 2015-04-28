@@ -24,7 +24,7 @@ import com.liferay.registry.ServiceReference;
 public class ClassBasedServiceDependencyVerifier
 	implements ServiceDependencyVerifier {
 
-	public ClassBasedServiceDependencyVerifier(Class clazz) {
+	public ClassBasedServiceDependencyVerifier(Class<?> clazz) {
 		_clazz = clazz;
 	}
 
@@ -52,15 +52,15 @@ public class ClassBasedServiceDependencyVerifier
 
 		Object service = registry.getService(serviceReference);
 
-		Class serviceClass = service.getClass();
+		Class<?> serviceClass = service.getClass();
 
 		if (serviceClass.equals(_clazz)) {
 			return true;
 		}
 
-		Class[] interfaceClasses = serviceClass.getInterfaces();
+		Class<?>[] interfaceClasses = serviceClass.getInterfaces();
 
-		for (Class interfaceClass : interfaceClasses) {
+		for (Class<?> interfaceClass : interfaceClasses) {
 			if (interfaceClass.equals(_clazz)) {
 				return true;
 			}
@@ -69,6 +69,6 @@ public class ClassBasedServiceDependencyVerifier
 		return false;
 	}
 
-	private final Class _clazz;
+	private final Class<?> _clazz;
 
 }

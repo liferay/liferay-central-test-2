@@ -38,7 +38,7 @@ public class ServiceDependencyManager {
 	public void destroy() {
 		_serviceDependencies.clear();
 
-		for (ServiceTracker serviceTracker : _serviceTrackers) {
+		for (ServiceTracker<Object, Object> serviceTracker : _serviceTrackers) {
 			serviceTracker.close();
 		}
 
@@ -53,19 +53,20 @@ public class ServiceDependencyManager {
 		_serviceDependencyListeners.clear();
 	}
 
-	public synchronized void registerDependencies(Class... serviceClasses) {
+	public synchronized void registerDependencies(Class<?>... serviceClasses) {
 		Registry registry = RegistryUtil.getRegistry();
 
-		for (Class serviceClass : serviceClasses) {
+		for (Class<?> serviceClass : serviceClasses) {
 			ServiceDependency serviceDependency = new ServiceDependency(
 				serviceClass);
 
 			_serviceDependencies.add(serviceDependency);
 
-			ServiceTracker serviceTracker = registry.trackServices(
-				serviceClass,
-				new ServiceDependencyServiceTrackerCustomizer(
-					serviceDependency));
+			ServiceTracker<Object, Object> serviceTracker =
+				registry.trackServices(
+					(Class<Object>)serviceClass,
+					new ServiceDependencyServiceTrackerCustomizer(
+						serviceDependency));
 
 			serviceTracker.open();
 
@@ -81,10 +82,11 @@ public class ServiceDependencyManager {
 
 			_serviceDependencies.add(serviceDependency);
 
-			ServiceTracker serviceTracker = registry.trackServices(
-				filter,
-				new ServiceDependencyServiceTrackerCustomizer(
-					serviceDependency));
+			ServiceTracker<Object, Object> serviceTracker =
+				registry.trackServices(
+					filter,
+					new ServiceDependencyServiceTrackerCustomizer(
+						serviceDependency));
 
 			serviceTracker.open();
 
@@ -115,10 +117,11 @@ public class ServiceDependencyManager {
 	private final Set<ServiceDependency> _serviceDependencies = new HashSet<>();
 	private final Set<ServiceDependencyListener> _serviceDependencyListeners =
 		new HashSet<>();
-	private final Set<ServiceTracker> _serviceTrackers = new HashSet<>();
+	private final Set<ServiceTracker<Object, Object>> _serviceTrackers =
+		new HashSet<>();
 
 	private class ServiceDependencyServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer {
+		implements ServiceTrackerCustomizer<Object, Object> {
 
 		public ServiceDependencyServiceTrackerCustomizer(
 			ServiceDependency serviceDependency) {
@@ -127,7 +130,7 @@ public class ServiceDependencyManager {
 		}
 
 		@Override
-		public Object addingService(ServiceReference serviceReference) {
+		public Object addingService(ServiceReference<Object> serviceReference) {
 			Registry registry = RegistryUtil.getRegistry();
 
 			Object service = registry.getService(serviceReference);
@@ -141,12 +144,12 @@ public class ServiceDependencyManager {
 
 		@Override
 		public void modifiedService(
-			ServiceReference serviceReference, Object object) {
+			ServiceReference<Object> serviceReference, Object object) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference serviceReference, Object object) {
+			ServiceReference<Object> serviceReference, Object object) {
 		}
 
 		private final ServiceDependency _serviceDependency;

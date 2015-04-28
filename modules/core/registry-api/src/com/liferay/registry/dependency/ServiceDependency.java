@@ -22,7 +22,7 @@ import com.liferay.registry.ServiceReference;
  */
 public class ServiceDependency {
 
-	public ServiceDependency(Class clazz) {
+	public ServiceDependency(Class<?> clazz) {
 		_serviceDependencyVerifier = new ClassBasedServiceDependencyVerifier(
 			clazz);
 	}
