@@ -66,8 +66,8 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			"contentsLanguage", contentsLanguageId.replace("iw_", "he_"));
 		jsonObject.put(
 			"extraPlugins",
-			"dragresize,dropimages,placeholder,selectionregion,tableresize," +
-				"tabletools,uicore,autolink");
+			"autolink,dragresize,dropimages,placeholder,selectionregion," +
+				"tableresize,tabletools,uicore");
 
 		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
 
