@@ -64,14 +64,14 @@ public class AlloyEditorConfigContributor implements EditorConfigContributor {
 			"contentsLangDirection", HtmlUtil.escapeJS(contentsLanguageDir));
 		jsonObject.put(
 			"contentsLanguage", contentsLanguageId.replace("iw_", "he_"));
-
-		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
-
-		jsonObject.put("language", languageId.replace("iw_", "he_"));
 		jsonObject.put(
 			"extraPlugins",
 			"dragresize,dropimages,placeholder,selectionregion,tableresize," +
 				"tabletools,uicore,autolink");
+
+		String languageId = LocaleUtil.toLanguageId(themeDisplay.getLocale());
+
+		jsonObject.put("language", languageId.replace("iw_", "he_"));
 		jsonObject.put(
 			"removePlugins", "elementspath,link,liststyle,resize,toolbar");
 
