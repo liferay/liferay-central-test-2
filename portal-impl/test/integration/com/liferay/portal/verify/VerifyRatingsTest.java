@@ -51,25 +51,23 @@ public class VerifyRatingsTest extends BaseVerifyProcessTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		_previousCacheStatus = CacheRegistryUtil.isActive();
+		_active = CacheRegistryUtil.isActive();
 
 		CacheRegistryUtil.setActive(false);
 
-		_ratingsStats = RatingsTestUtil.addStats(
-			_TEST_CLASS_NAME, _TEST_CLASS_PK);
+		_ratingsStats = RatingsTestUtil.addStats(_CLASS_NAME, _CLASS_PK);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		List<RatingsEntry> ratingEntries =
-			RatingsEntryLocalServiceUtil.getEntries(
-				_TEST_CLASS_NAME, _TEST_CLASS_PK);
+			RatingsEntryLocalServiceUtil.getEntries(_CLASS_NAME, _CLASS_PK);
 
 		for (RatingsEntry ratingsEntry : ratingEntries) {
 			RatingsEntryLocalServiceUtil.deleteRatingsEntry(ratingsEntry);
 		}
 
-		CacheRegistryUtil.setActive(_previousCacheStatus);
+		CacheRegistryUtil.setActive(_active);
 	}
 
 	@Test
@@ -84,7 +82,7 @@ public class VerifyRatingsTest extends BaseVerifyProcessTestCase {
 		doVerify();
 
 		RatingsStats ratingStats = RatingsStatsLocalServiceUtil.getStats(
-			_TEST_CLASS_NAME, _TEST_CLASS_PK);
+			_CLASS_NAME, _CLASS_PK);
 
 		Assert.assertEquals(totalEntries, ratingStats.getTotalEntries());
 		Assert.assertEquals(totalScore, ratingStats.getTotalScore(), 0.0001);
@@ -97,7 +95,7 @@ public class VerifyRatingsTest extends BaseVerifyProcessTestCase {
 		doVerify();
 
 		RatingsStats ratingStats = RatingsStatsLocalServiceUtil.getStats(
-			_TEST_CLASS_NAME, _TEST_CLASS_PK);
+			_CLASS_NAME, _CLASS_PK);
 
 		Assert.assertEquals(0, ratingStats.getTotalEntries());
 		Assert.assertEquals(0.0, ratingStats.getTotalScore(), 0.0001);
@@ -109,7 +107,7 @@ public class VerifyRatingsTest extends BaseVerifyProcessTestCase {
 		User user = UserTestUtil.addUser();
 
 		RatingsTestUtil.addEntry(
-			_TEST_CLASS_NAME, _TEST_CLASS_PK, score, user.getUserId());
+			_CLASS_NAME, _CLASS_PK, score, user.getUserId());
 
 		return score;
 	}
@@ -119,11 +117,11 @@ public class VerifyRatingsTest extends BaseVerifyProcessTestCase {
 		return new VerifyRatings();
 	}
 
-	private static final String _TEST_CLASS_NAME = "testClassName";
+	private static final String _CLASS_NAME = VerifyRatingsTest.class.getName();
 
-	private static final int _TEST_CLASS_PK = 1;
+	private static final int _CLASS_PK = 1;
 
-	private boolean _previousCacheStatus;
+	private boolean _active;
 
 	@DeleteAfterTestRun
 	private RatingsStats _ratingsStats;

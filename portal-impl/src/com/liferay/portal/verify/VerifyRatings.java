@@ -64,12 +64,12 @@ public class VerifyRatings extends VerifyProcess {
 		"averageScore = coalesce((select sum(RatingsEntry.score) / count(1) " +
 			_SQL_FROM_WHERE_CLAUSE + "), 0)";
 
-	private static final String _SQL_UPDATE_TOTAL_SCORE =
-		"totalScore = coalesce((select sum(RatingsEntry.score) " +
-			_SQL_FROM_WHERE_CLAUSE + "), 0)";
-
 	private static final String _SQL_UPDATE_TOTAL_ENTRIES =
 		"totalEntries = coalesce((select count(1) " +
+			_SQL_FROM_WHERE_CLAUSE + "), 0)";
+
+	private static final String _SQL_UPDATE_TOTAL_SCORE =
+		"totalScore = coalesce((select sum(RatingsEntry.score) " +
 			_SQL_FROM_WHERE_CLAUSE + "), 0)";
 
 }
