@@ -64,7 +64,7 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 			JSONFactoryUtil.createJSONObject();
 
 		toolbarStylesJSONObject.put(
-			"selections", getToolbarStylesSelectionJSONArray());
+			"selections", getToolbarStylesSelectionsJSONArray());
 
 		toolbarStylesJSONObject.put("tabIndex", 1);
 
@@ -73,37 +73,37 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 		return toolbarsJSONObject;
 	}
 	
-	protected JSONArray getToolbarStylesSelectionJSONArray() {
-		JSONArray toolbarStylesSelectionJSONArray =
+	protected JSONArray getToolbarStylesSelectionsJSONArray() {
+		JSONArray toolbarStylesSelectionsJSONArray =
 			JSONFactoryUtil.createJSONArray();
 
 		try {
-			JSONObject toolbarStylesSelectionLinkJSONObject =
+			JSONObject toolbarStylesSelectionsLinkJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			toolbarStylesSelectionLinkJSONObject.put(
+			toolbarStylesSelectionsLinkJSONObject.put(
 				"buttons", JSONFactoryUtil.createJSONArray("['linkEdit']"));
-			toolbarStylesSelectionLinkJSONObject.put("name", "link");
-			toolbarStylesSelectionLinkJSONObject.put("test", "link");
+			toolbarStylesSelectionsLinkJSONObject.put("name", "link");
+			toolbarStylesSelectionsLinkJSONObject.put("test", "link");
 
-			toolbarStylesSelectionJSONArray.put(
-				toolbarStylesSelectionLinkJSONObject);
+			toolbarStylesSelectionsJSONArray.put(
+				toolbarStylesSelectionsLinkJSONObject);
 
-			JSONObject toolbarStylesSelectionTextJSONObject =
+			JSONObject toolbarStylesSelectionsTextJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
-			toolbarStylesSelectionTextJSONObject.put(
+			toolbarStylesSelectionsTextJSONObject.put(
 				"buttons", JSONFactoryUtil.createJSONArray("['link']"));
-			toolbarStylesSelectionTextJSONObject.put("name", "text");
-			toolbarStylesSelectionTextJSONObject.put("test", "text");
+			toolbarStylesSelectionsTextJSONObject.put("name", "text");
+			toolbarStylesSelectionsTextJSONObject.put("test", "text");
 
-			toolbarStylesSelectionJSONArray.put(
-				toolbarStylesSelectionTextJSONObject);
+			toolbarStylesSelectionsJSONArray.put(
+				toolbarStylesSelectionsTextJSONObject);
 		}
 		catch (JSONException jsone) {
 		}
 		
-		return toolbarStylesSelectionJSONArray;
+		return toolbarStylesSelectionsJSONArray;
 	}
 
 }
