@@ -40,11 +40,11 @@ public class VerifyRatings extends VerifyProcess {
 			StringBundler sb = new StringBundler(6);
 
 			sb.append("update RatingsStats set ");
-			sb.append(_UPDATE_AVERAGE_SCORE);
+			sb.append(_SQL_UPDATE_AVERAGE_SCORE);
 			sb.append(", ");
-			sb.append(_UPDATE_TOTAL_ENTRIES);
+			sb.append(_SQL_UPDATE_TOTAL_ENTRIES);
 			sb.append(", ");
-			sb.append(_UPDATE_TOTAL_SCORE);
+			sb.append(_SQL_UPDATE_TOTAL_SCORE);
 
 			ps = con.prepareStatement(sb.toString());
 
@@ -55,21 +55,21 @@ public class VerifyRatings extends VerifyProcess {
 		}
 	}
 
-	private static final String _FROM_WHERE_CLAUSE =
+	private static final String _SQL_FROM_WHERE_CLAUSE =
 		"from RatingsEntry where RatingsStats.classPK = RatingsEntry.classPK " +
-		"and RatingsStats.classNameId = RatingsEntry.classNameId group by " +
-		"classNameId, classPK";
+			"and RatingsStats.classNameId = RatingsEntry.classNameId " +
+				"group by classNameId, classPK";
 
-	private static final String _UPDATE_AVERAGE_SCORE =
+	private static final String _SQL_UPDATE_AVERAGE_SCORE =
 		"averageScore = coalesce((select sum(RatingsEntry.score) / count(1) " +
-			_FROM_WHERE_CLAUSE + "), 0)";
+			_SQL_FROM_WHERE_CLAUSE + "), 0)";
 
-	private static final String _UPDATE_TOTAL_SCORE =
+	private static final String _SQL_UPDATE_TOTAL_SCORE =
 		"totalScore = coalesce((select sum(RatingsEntry.score) " +
-			_FROM_WHERE_CLAUSE + "), 0)";
+			_SQL_FROM_WHERE_CLAUSE + "), 0)";
 
-	private static final String _UPDATE_TOTAL_ENTRIES =
+	private static final String _SQL_UPDATE_TOTAL_ENTRIES =
 		"totalEntries = coalesce((select count(1) " +
-			_FROM_WHERE_CLAUSE + "), 0)";
+			_SQL_FROM_WHERE_CLAUSE + "), 0)";
 
 }
