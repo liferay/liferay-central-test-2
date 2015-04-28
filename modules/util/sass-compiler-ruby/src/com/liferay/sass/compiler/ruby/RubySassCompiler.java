@@ -78,14 +78,18 @@ public class RubySassCompiler implements AutoCloseable {
 
 		rubyInstanceConfig.setJitThreshold(compilerThreshold);
 
+		String rubyScript = null;
+
 		Class<?> clazz = getClass();
 
-		String rubyScript;
-
-		try (InputStream is =
+		try (InputStream inputStream =
 				clazz.getResourceAsStream("dependencies/main.rb")) {
 
-			rubyScript = new Scanner(is, "UTF-8").useDelimiter("\\A").next();
+			Scanner scanner = new Scanner(inputStream, "UTF-8");
+
+			scanner.useDelimiter("\\A");
+
+			rubyScript = scanner.next();
 		}
 
 		_scriptObject = _scriptingContainer.runScriptlet(rubyScript);
