@@ -60,13 +60,24 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 	protected JSONObject getToolbarsJSONObject() {
 		JSONObject toolbarsJSONObject = JSONFactoryUtil.createJSONObject();
 
+		JSONObject toolbarStylesJSONObject =
+			JSONFactoryUtil.createJSONObject();
+
+		toolbarStylesJSONObject.put(
+			"selections", getToolbarStylesSelectionJSONArray());
+
+		toolbarStylesJSONObject.put("tabIndex", 1);
+
+		toolbarsJSONObject.put("styles", toolbarStylesJSONObject);
+		
+		return toolbarsJSONObject;
+	}
+	
+	protected JSONArray getToolbarStylesSelectionJSONArray() {
+		JSONArray toolbarStylesSelectionJSONArray =
+			JSONFactoryUtil.createJSONArray();
+
 		try {
-			JSONObject toolbarStylesJSONObject =
-				JSONFactoryUtil.createJSONObject();
-
-			JSONArray toolbarStylesSelectionJSONArray =
-				JSONFactoryUtil.createJSONArray();
-
 			JSONObject toolbarStylesSelectionLinkJSONObject =
 				JSONFactoryUtil.createJSONObject();
 
@@ -88,18 +99,11 @@ public class BlogsCoverImageCaptionEditorConfigContributor
 
 			toolbarStylesSelectionJSONArray.put(
 				toolbarStylesSelectionTextJSONObject);
-
-			toolbarStylesJSONObject.put(
-				"selections", toolbarStylesSelectionJSONArray);
-
-			toolbarStylesJSONObject.put("tabIndex", 1);
-
-			toolbarsJSONObject.put("styles", toolbarStylesJSONObject);
 		}
 		catch (JSONException jsone) {
 		}
 		
-		return toolbarsJSONObject;
+		return toolbarStylesSelectionJSONArray;
 	}
 
 }
