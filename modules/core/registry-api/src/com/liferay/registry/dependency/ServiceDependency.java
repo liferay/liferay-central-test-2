@@ -23,8 +23,7 @@ import com.liferay.registry.ServiceReference;
 public class ServiceDependency {
 
 	public ServiceDependency(Class<?> clazz) {
-		_serviceDependencyVerifier = new ClassServiceDependencyVerifier(
-			clazz);
+		_serviceDependencyVerifier = new ClassServiceDependencyVerifier(clazz);
 	}
 
 	public ServiceDependency(Filter filter) {
