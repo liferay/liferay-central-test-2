@@ -71,15 +71,18 @@ import java.util.logging.LogRecord;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
 import org.quartz.Calendar;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
@@ -95,6 +98,7 @@ import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.spi.JobFactory;
+
 import org.springframework.mock.web.MockServletContext;
 
 /**
@@ -157,8 +161,7 @@ public class QuartzSchedulerEngineTest {
 
 		Mockito.when(
 			messageBus.registerMessageListener(
-				Matchers.anyString(),
-				Matchers.any(MessageListener.class))
+				Matchers.anyString(), Matchers.any(MessageListener.class))
 		).then(
 			new Answer<Boolean>() {
 
@@ -177,8 +180,7 @@ public class QuartzSchedulerEngineTest {
 
 		Mockito.when(
 			messageBus.unregisterMessageListener(
-				Matchers.anyString(),
-				Matchers.any(MessageListener.class))
+				Matchers.anyString(), Matchers.any(MessageListener.class))
 		).then(
 			new Answer<Boolean>() {
 
@@ -510,7 +512,8 @@ public class QuartzSchedulerEngineTest {
 				_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER, schedulerResponses.size());
-		Assert.assertEquals(0, _synchronousDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 
 		Trigger trigger = new IntervalTrigger(
 			_TEST_JOB_NAME_PREFIX + "memory", _MEMORY_TEST_GROUP_NAME,
@@ -531,7 +534,8 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER + 1, schedulerResponses.size());
-		Assert.assertEquals(1, _synchronousDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			1, _synchronousDestination.getMessageListenerCount());
 	}
 
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
@@ -542,7 +546,8 @@ public class QuartzSchedulerEngineTest {
 				_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER, schedulerResponses.size());
-		Assert.assertEquals(0, _synchronousDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 
 		Trigger trigger = new IntervalTrigger(
 			_TEST_JOB_NAME_PREFIX + "memory", _MEMORY_TEST_GROUP_NAME,
@@ -556,7 +561,8 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER + 1, schedulerResponses.size());
-		Assert.assertEquals(0, _synchronousDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 	}
 
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
