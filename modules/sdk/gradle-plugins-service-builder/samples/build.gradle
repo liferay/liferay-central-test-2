@@ -1,17 +1,23 @@
 buildscript {
 	repositories {
 		mavenLocal()
-		mavenCentral()
+
+		maven {
+			url "http://cdn.repository.liferay.com/nexus/content/groups/public"
+		}
 	}
 
 	dependencies {
-		classpath "com.liferay:com.liferay.gradle.plugins.service.builder:latest.release"
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.service.builder", version: "latest.release"
 	}
 }
 
 repositories {
 	mavenLocal()
-	mavenCentral()
+
+	maven {
+		url "http://cdn.repository.liferay.com/nexus/content/groups/public"
+	}
 }
 
 apply plugin: "com.liferay.portal.tools.service.builder"
