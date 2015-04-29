@@ -72,7 +72,7 @@ public class JavadocFormatterTask extends JavaExec {
 		args.add(
 			"javadoc.init=" +
 				javadocFormatterArgs.isInitializeMissingJavadocs());
-		args.add("javadoc.input.dir=" + javadocFormatterArgs.getInputDir());
+		args.add("javadoc.input.dir=" + javadocFormatterArgs.getInputDirName());
 		args.add("javadoc.limit=" + _merge(javadocFormatterArgs.getLimits()));
 		args.add(
 			"javadoc.lowest.supported.java.version=" +

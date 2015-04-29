@@ -32,8 +32,8 @@ public class JavadocFormatterArgs {
 		return _author;
 	}
 
-	public String getInputDir() {
-		return _inputDir;
+	public String getInputDirName() {
+		return _inputDirName;
 	}
 
 	public String[] getLimits() {
@@ -66,8 +66,8 @@ public class JavadocFormatterArgs {
 		_initializeMissingJavadocs = initializeMissingJavadocs;
 	}
 
-	public void setInputDir(String inputDir) {
-		_inputDir = inputDir;
+	public void setInputDirName(String inputDirName) {
+		_inputDirName = inputDirName;
 	}
 
 	public void setLimits(String limits) {
@@ -94,7 +94,7 @@ public class JavadocFormatterArgs {
 
 	private String _author = AUTHOR;
 	private boolean _initializeMissingJavadocs;
-	private String _inputDir = "./";
+	private String _inputDirName = "./";
 	private String[] _limits = new String[0];
 	private double _lowestSupportedJavaVersion = LOWEST_SUPPORTED_JAVA_VERSION;
 	private String _outputFilePrefix = OUTPUT_FILE_PREFIX;

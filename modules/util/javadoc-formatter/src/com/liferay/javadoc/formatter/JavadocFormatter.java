@@ -111,20 +111,20 @@ public class JavadocFormatter {
 
 		_initializeMissingJavadocs = GetterUtil.getBoolean(init);
 
-		String inputDir = GetterUtil.getString(
+		String inputDirName = GetterUtil.getString(
 			arguments.get("javadoc.input.dir"));
 
-		if (Validator.isNull(inputDir) || inputDir.startsWith("$")) {
-			inputDir = "./";
+		if (Validator.isNull(inputDirName) || inputDirName.startsWith("$")) {
+			inputDirName = "./";
 		}
 
-		if (!inputDir.endsWith("/")) {
-			inputDir += "/";
+		if (!inputDirName.endsWith("/")) {
+			inputDirName += "/";
 		}
 
-		_inputDir = inputDir;
+		_inputDirName = inputDirName;
 
-		System.out.println("Input directory is " + _inputDir);
+		System.out.println("Input directory is " + _inputDirName);
 
 		String[] limits = StringUtil.split(arguments.get("javadoc.limit"), ",");
 
@@ -161,7 +161,7 @@ public class JavadocFormatter {
 
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		directoryScanner.setBasedir(_inputDir);
+		directoryScanner.setBasedir(_inputDirName);
 		directoryScanner.setExcludes(
 			new String[] {"**\\classes\\**", "**\\portal-client\\**"});
 
@@ -826,7 +826,7 @@ public class JavadocFormatter {
 
 	private void _format(String fileName) throws Exception {
 		String originalContent = new String(
-			Files.readAllBytes(Paths.get(_inputDir + fileName)),
+			Files.readAllBytes(Paths.get(_inputDirName + fileName)),
 			StringPool.UTF8);
 
 		if (fileName.contains("modules/third-party") ||
@@ -1194,7 +1194,7 @@ public class JavadocFormatter {
 	}
 
 	private Tuple _getJavadocsXmlTuple(String fileName) throws Exception {
-		File file = new File(_inputDir + fileName);
+		File file = new File(_inputDirName + fileName);
 
 		String absolutePath = file.getAbsolutePath();
 
@@ -1964,7 +1964,7 @@ public class JavadocFormatter {
 		formattedContent = formattedContent.trim();
 
 		if (!originalContent.equals(formattedContent)) {
-			File file = new File(_inputDir + fileName);
+			File file = new File(_inputDirName + fileName);
 
 			FileUtils.writeByteArrayToFile(
 				file, formattedContent.getBytes(StringPool.UTF8));
@@ -2136,7 +2136,7 @@ public class JavadocFormatter {
 
 	private final String _author;
 	private final boolean _initializeMissingJavadocs;
-	private final String _inputDir;
+	private final String _inputDirName;
 	private final Map<String, Tuple> _javadocxXmlTuples = new HashMap<>();
 	private Properties _languageProperties;
 	private final File _languagePropertiesFile;

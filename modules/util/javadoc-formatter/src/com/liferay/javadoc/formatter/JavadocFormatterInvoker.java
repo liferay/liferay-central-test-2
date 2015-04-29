@@ -40,7 +40,7 @@ public class JavadocFormatterInvoker {
 			String.valueOf(javadocFormatterArgs.isInitializeMissingJavadocs()));
 		arguments.put(
 			"javadoc.input.dir",
-			_getCanonicalPath(baseDir, javadocFormatterArgs.getInputDir()));
+			_getCanonicalPath(baseDir, javadocFormatterArgs.getInputDirName()));
 		arguments.put(
 			"javadoc.limit",
 			StringUtil.merge(javadocFormatterArgs.getLimits()));

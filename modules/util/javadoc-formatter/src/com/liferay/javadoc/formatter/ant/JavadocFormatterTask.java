@@ -61,7 +61,7 @@ public class JavadocFormatterTask extends Task {
 	}
 
 	public void setInputDir(String inputDir) {
-		_javadocFormatterArgs.setInputDir(inputDir);
+		_javadocFormatterArgs.setInputDirName(inputDir);
 	}
 
 	public void setLimits(String limits) {
