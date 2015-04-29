@@ -51,20 +51,39 @@ public class DefaultSynchronousMessageSenderTest {
 	public void setUp() {
 		Registry registry = Mockito.mock(Registry.class);
 
-		Mockito.when(registry.getRegistry()).thenReturn(registry);
+		Mockito.when(
+			registry.getRegistry()
+		).thenReturn(
+			registry
+		);
 
-		Mockito.when(registry.setRegistry(registry)).thenReturn(registry);
+		Mockito.when(
+			registry.setRegistry(registry)
+		).thenReturn(
+			registry
+		);
 
-		ServiceTracker serviceTracker = Mockito.mock(ServiceTracker.class);
+		ServiceTracker<Object, Object> serviceTracker = Mockito.mock(
+			ServiceTracker.class);
 
 		Mockito.when(
 			registry.trackServices(
-				(Class)Matchers.any(),
-				(ServiceTrackerCustomizer)Matchers.any())).thenReturn(
-			serviceTracker);
+				(Class<Object>)Matchers.any(),
+				(ServiceTrackerCustomizer<Object, Object>)Matchers.any())
+		).thenReturn(
+			serviceTracker
+		);
 
 		RegistryUtil.setRegistry(null);
 		RegistryUtil.setRegistry(registry);
+
+		EntityCacheUtil entityCacheUtil = new EntityCacheUtil();
+
+		entityCacheUtil.setEntityCache(Mockito.mock(EntityCache.class));
+
+		FinderCacheUtil finderCacheUtil = new FinderCacheUtil();
+
+		finderCacheUtil.setFinderCache(Mockito.mock(FinderCache.class));
 
 		_messageBus = new DefaultMessageBus();
 
@@ -85,19 +104,18 @@ public class DefaultSynchronousMessageSenderTest {
 		_portalExecutorManager = Mockito.mock(PortalExecutorManager.class);
 
 		Mockito.when(
-			_portalExecutorManager.getPortalExecutor(Mockito.anyString())).
-			thenReturn(new ThreadPoolExecutor(1, 1));
+			_portalExecutorManager.getPortalExecutor(Mockito.anyString())
+		).thenReturn(
+			new ThreadPoolExecutor(1, 1)
+		);
 
 		Mockito.when(
-			serviceTracker.getService()).thenReturn(_portalExecutorManager);
+			serviceTracker.getService()
+		).thenReturn(
+			_portalExecutorManager
+		);
 
 		synchronousDestination.open();
-
-		EntityCacheUtil entityCacheUtil = new EntityCacheUtil();
-		entityCacheUtil.setEntityCache(Mockito.mock(EntityCache.class));
-
-		FinderCacheUtil finderCacheUtil = new FinderCacheUtil();
-		finderCacheUtil.setFinderCache(Mockito.mock(FinderCache.class));
 	}
 
 	@After
@@ -108,12 +126,14 @@ public class DefaultSynchronousMessageSenderTest {
 	@Test
 	public void testSendToAsyncDestination() throws MessageBusException {
 		SerialDestination serialDestination = new SerialDestination() {
+
 			@Override
 			public void open() {
 				portalExecutorManager = _portalExecutorManager;
 
 				super.open();
 			}
+
 		};
 
 		serialDestination.setName("testSerialDestination");

@@ -48,7 +48,7 @@ public abstract class BaseMultiDestinationProxyBean {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by
-	 * {@link #setSynchronousMessageSenderMode(SynchronousMessageSender.Mode)} )
+	 * {@link #setSynchronousMessageSenderMode(SynchronousMessageSender.Mode)}
 	 */
 	@Deprecated
 	public void setSynchronousMessageSender(

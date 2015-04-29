@@ -133,33 +133,37 @@ public class QuartzSchedulerEngineTest {
 		registry.registerService(MessageBus.class, messageBus);
 
 		Mockito.when(
-			messageBus.getDestination(Matchers.anyString())).then(
+			messageBus.getDestination(Matchers.anyString())
+		).then(
+			new Answer<Destination>() {
 
-				new Answer<Destination>() {
+				@Override
+				public Destination answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
 
-					@Override
-					public Destination answer(InvocationOnMock invocationOnMock)
-						throws Throwable {
+					String destinationName =
+						(String)invocationOnMock.getArguments()[0];
 
-						String destinationName =
-							(String)invocationOnMock.getArguments()[0];
+					if (!_testDestination.getName().equals(
+							destinationName)) {
 
-						if (!_testDestination.getName().equals(
-								destinationName)) {
-
-							throw new IllegalArgumentException(
-								"Invalid destination: " + destinationName);
-						}
-
-						return _testDestination;
+						throw new IllegalArgumentException(
+							"Invalid destination: " + destinationName);
 					}
-				});
+
+					return _testDestination;
+				}
+
+			}
+		);
 
 		Mockito.when(
 			messageBus.registerMessageListener(
 				Matchers.anyString(),
-				Matchers.any(MessageListener.class))).then(
+				Matchers.any(MessageListener.class))
+		).then(
 			new Answer<Boolean>() {
+
 				@Override
 				public Boolean answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
@@ -169,13 +173,17 @@ public class QuartzSchedulerEngineTest {
 
 					return true;
 				}
-			});
+
+			}
+		);
 
 		Mockito.when(
 			messageBus.unregisterMessageListener(
 				Matchers.anyString(),
-				Matchers.any(MessageListener.class))).then(
+				Matchers.any(MessageListener.class))
+		).then(
 			new Answer<Boolean>() {
+
 				@Override
 				public Boolean answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
@@ -185,7 +193,9 @@ public class QuartzSchedulerEngineTest {
 
 					return true;
 				}
-			});
+
+			}
+		);
 
 		_testDestination = new SynchronousDestination();
 

@@ -87,8 +87,10 @@ public class IntrabandBridgeDestinationTest {
 			IntrabandBridgeDestinationTest.class.getName());
 
 		Mockito.when(
-			_messageBus.getDestination(_baseDestination.getName())).thenReturn(
-				_baseDestination);
+			_messageBus.getDestination(_baseDestination.getName())
+		).thenReturn(
+			_baseDestination
+		);
 
 		_intrabandBridgeDestination = new IntrabandBridgeDestination(
 			_baseDestination);

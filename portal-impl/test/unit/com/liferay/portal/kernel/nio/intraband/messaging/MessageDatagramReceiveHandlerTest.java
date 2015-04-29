@@ -126,8 +126,10 @@ public class MessageDatagramReceiveHandlerTest {
 		messageBus.addDestination(baseDestination);
 
 		Mockito.when(
-			messageBus.getDestination(Matchers.anyString())).thenReturn(
-				baseDestination);
+			messageBus.getDestination(Matchers.anyString())
+		).thenReturn(
+			baseDestination
+		);
 
 		datagram = Datagram.createRequestDatagram(
 			systemDataType.getValue(), messageRoutingBag.toByteArray());
@@ -238,8 +240,10 @@ public class MessageDatagramReceiveHandlerTest {
 		messageBus.addDestination(intrabandBridgeDestination);
 
 		Mockito.when(
-			messageBus.getDestination(Matchers.anyString())).thenReturn(
-				intrabandBridgeDestination);
+			messageBus.getDestination(Matchers.anyString())
+		).thenReturn(
+			intrabandBridgeDestination
+		);
 
 		datagram = Datagram.createRequestDatagram(
 			systemDataType.getValue(), messageRoutingBag.toByteArray());
