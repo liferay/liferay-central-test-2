@@ -15,8 +15,8 @@
 package com.liferay.portal.tools.service.builder.maven;
 
 import com.liferay.portal.tools.service.builder.ServiceBuilder;
+import com.liferay.portal.tools.service.builder.ServiceBuilderArgs;
 import com.liferay.portal.tools.service.builder.ServiceBuilderInvoker;
-import com.liferay.portal.tools.servicebuilder.ServiceBuilderArgs;
 
 import java.io.File;
 

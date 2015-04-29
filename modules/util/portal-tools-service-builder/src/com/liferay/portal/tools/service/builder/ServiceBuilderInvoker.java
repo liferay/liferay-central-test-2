@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.tools.servicebuilder.ServiceBuilderArgs;
 
 import java.io.File;
 

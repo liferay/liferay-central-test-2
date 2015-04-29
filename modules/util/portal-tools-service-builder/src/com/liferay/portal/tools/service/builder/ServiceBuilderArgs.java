@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.servicebuilder;
+package com.liferay.portal.tools.service.builder;
 
 /**
  * @author Raymond Augé
