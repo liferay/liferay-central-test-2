@@ -63,6 +63,11 @@ public class DownloadFileEvent extends BaseEvent {
 
 		StringBuilder sb = new StringBuilder();
 
+		SyncAccount syncAccount = SyncAccountService.fetchSyncAccount(
+			getSyncAccountId());
+
+		sb.append(syncAccount.getUrl());
+
 		sb.append(_URL_PATH);
 		sb.append("/");
 		sb.append(syncFile.getRepositoryId());
@@ -80,10 +85,7 @@ public class DownloadFileEvent extends BaseEvent {
 			sb.append(syncFile.getVersion());
 		}
 
-		SyncAccount syncAccount = SyncAccountService.fetchSyncAccount(
-			getSyncAccountId());
-
-		executeAsynchronousGet(syncAccount.getUrl() + sb.toString());
+		executeAsynchronousGet(sb.toString());
 	}
 
 	private static final String _URL_PATH = "/sync-web/download";
