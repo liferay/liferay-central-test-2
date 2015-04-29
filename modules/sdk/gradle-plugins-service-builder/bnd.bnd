@@ -4,4 +4,4 @@ Bundle-Version: 1.0.0
 Export-Package: com.liferay.gradle.plugins.service.builder
 Include-Resource:\
 	classes,\
-	@../../../portal-impl/portal-impl.jar!/com/liferay/portal/tools/servicebuilder/ServiceBuilderArgs.class
+	@../../../tools/sdk/dist/com.liferay.portal.tools.service.builder-1.0.0.jar!/com/liferay/portal/tools/service/builder/ServiceBuilderArgs.class

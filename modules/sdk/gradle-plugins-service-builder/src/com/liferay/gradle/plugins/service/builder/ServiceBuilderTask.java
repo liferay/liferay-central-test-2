@@ -14,7 +14,7 @@
 
 package com.liferay.gradle.plugins.service.builder;
 
-import com.liferay.portal.tools.servicebuilder.ServiceBuilderArgs;
+import com.liferay.portal.tools.service.builder.ServiceBuilderArgs;
 
 import java.io.File;
 
