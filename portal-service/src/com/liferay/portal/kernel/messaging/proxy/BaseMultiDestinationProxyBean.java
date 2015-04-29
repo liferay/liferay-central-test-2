@@ -29,7 +29,7 @@ public abstract class BaseMultiDestinationProxyBean {
 	public void afterPropertiesSet() {
 		_synchronousMessageSender =
 			SingleDestinationMessageSenderFactoryUtil.
-				getSynchronousMessageSender(_synchronousMessageSenderMode);
+				getSynchronousMessageSender(_mode);
 	}
 
 	public abstract String getDestinationName(ProxyRequest proxyRequest);
@@ -56,9 +56,9 @@ public abstract class BaseMultiDestinationProxyBean {
 	}
 
 	public void setSynchronousMessageSenderMode(
-		SynchronousMessageSender.Mode synchronousMessageSenderMode) {
+		SynchronousMessageSender.Mode mode) {
 
-		_synchronousMessageSenderMode = synchronousMessageSenderMode;
+		_mode = mode;
 	}
 
 	public Object synchronousSend(ProxyRequest proxyRequest) throws Exception {
@@ -87,7 +87,7 @@ public abstract class BaseMultiDestinationProxyBean {
 		return message;
 	}
 
+	private SynchronousMessageSender.Mode _mode;
 	private SynchronousMessageSender _synchronousMessageSender;
-	private SynchronousMessageSender.Mode _synchronousMessageSenderMode;
 
 }
