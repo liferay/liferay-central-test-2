@@ -180,7 +180,7 @@ public class MessageBusUtil {
 	private MessageBus _getMessageBus() {
 		try {
 			while (_serviceTracker.getService() == null) {
-				Thread.currentThread().sleep(500);
+				Thread.sleep(500);
 			}
 
 			return _serviceTracker.getService();
