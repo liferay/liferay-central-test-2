@@ -98,15 +98,17 @@ public abstract class BaseExportImportLifecycleListener
 		else if (code == EVENT_LAYOUT_IMPORT_STARTED) {
 			onLayoutImportStarted(getPortletDataContextAttribute(attributes));
 		}
-		else if ((code == EVENT_LAYOUT_IMPORT_SUCCEEDED) &&
-				 ((processFlag == PROCESS_FLAG_LAYOUT_IMPORT_IN_PROCESS) ||
-				  (processFlag == PROCESS_FLAG_LAYOUT_STAGING_IN_PROCESS))) {
-
-			onLayoutImportProcessFinished(
-				getPortletDataContextAttribute(attributes));
-		}
 		else if (code == EVENT_LAYOUT_IMPORT_SUCCEEDED) {
-			onLayoutImportSucceeded(getPortletDataContextAttribute(attributes));
+			if ((processFlag == PROCESS_FLAG_LAYOUT_IMPORT_IN_PROCESS) ||
+				(processFlag == PROCESS_FLAG_LAYOUT_STAGING_IN_PROCESS)) {
+
+				onLayoutImportProcessFinished(
+					getPortletDataContextAttribute(attributes));
+			}
+			else {
+				onLayoutImportSucceeded(
+					getPortletDataContextAttribute(attributes));
+			}
 		}
 		else if (code == EVENT_PORTLET_EXPORT_FAILED) {
 			onPortletExportFailed(
@@ -128,16 +130,17 @@ public abstract class BaseExportImportLifecycleListener
 		else if (code == EVENT_PORTLET_IMPORT_STARTED) {
 			onPortletImportStarted(getPortletDataContextAttribute(attributes));
 		}
-		else if ((code == EVENT_PORTLET_IMPORT_SUCCEEDED) &&
-				 ((processFlag == PROCESS_FLAG_PORTLET_IMPORT_IN_PROCESS) ||
-				  (processFlag == PROCESS_FLAG_PORTLET_STAGING_IN_PROCESS))) {
-
-			onPortletImportProcessFinished(
-				getPortletDataContextAttribute(attributes));
-		}
 		else if (code == EVENT_PORTLET_IMPORT_SUCCEEDED) {
-			onPortletImportSucceeded(
-				getPortletDataContextAttribute(attributes));
+			if ((processFlag == PROCESS_FLAG_PORTLET_IMPORT_IN_PROCESS) ||
+				(processFlag == PROCESS_FLAG_PORTLET_STAGING_IN_PROCESS)) {
+
+				onPortletImportProcessFinished(
+					getPortletDataContextAttribute(attributes));
+			}
+			else {
+				onPortletImportSucceeded(
+					getPortletDataContextAttribute(attributes));
+			}
 		}
 		else if (code == EVENT_PUBLICATION_LAYOUT_LOCAL_FAILED) {
 			onLayoutLocalPublicationFailed(
