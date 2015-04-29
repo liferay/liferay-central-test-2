@@ -2015,11 +2015,11 @@ public class LocalProcessExecutorTest {
 
 		@Override
 		public Serializable call() throws ProcessException {
-			BlockingQueue<Thread> threadQueue =
-				ReturnWithoutExitProcessCallable._threadQueue;
+			BlockingQueue<Thread> threadBlockingQueue =
+				ReturnWithoutExitProcessCallable._threadBlockingQueue;
 
 			try {
-				Thread thread = threadQueue.take();
+				Thread thread = threadBlockingQueue.take();
 
 				thread.interrupt();
 			}
@@ -2274,7 +2274,7 @@ public class LocalProcessExecutorTest {
 				processOutputStream.writeProcessCallable(
 					new ReturnProcessCallable<String>(_returnValue));
 
-				_threadQueue.put(Thread.currentThread());
+				_threadBlockingQueue.put(Thread.currentThread());
 
 				Thread.sleep(Long.MAX_VALUE);
 			}
@@ -2301,7 +2301,7 @@ public class LocalProcessExecutorTest {
 			return sb.toString();
 		}
 
-		private static final BlockingQueue<Thread> _threadQueue =
+		private static final BlockingQueue<Thread> _threadBlockingQueue =
 			new SynchronousQueue<>();
 		private static final long serialVersionUID = 1L;
 
