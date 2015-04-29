@@ -144,14 +144,14 @@ public class QuartzSchedulerEngineTest {
 					String destinationName =
 						(String)invocationOnMock.getArguments()[0];
 
-					if (!_testDestination.getName().equals(
+					if (!_synchronousDestination.getName().equals(
 							destinationName)) {
 
 						throw new IllegalArgumentException(
 							"Invalid destination: " + destinationName);
 					}
 
-					return _testDestination;
+					return _synchronousDestination;
 				}
 
 			}
@@ -168,7 +168,7 @@ public class QuartzSchedulerEngineTest {
 				public Boolean answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
 
-					_testDestination.register(
+					_synchronousDestination.register(
 						(MessageListener)invocationOnMock.getArguments()[1]);
 
 					return true;
@@ -188,7 +188,7 @@ public class QuartzSchedulerEngineTest {
 				public Boolean answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
 
-					_testDestination.unregister(
+					_synchronousDestination.unregister(
 						(MessageListener)invocationOnMock.getArguments()[1]);
 
 					return true;
@@ -197,11 +197,11 @@ public class QuartzSchedulerEngineTest {
 			}
 		);
 
-		_testDestination = new SynchronousDestination();
+		_synchronousDestination = new SynchronousDestination();
 
-		_testDestination.setName(_TEST_DESTINATION_NAME);
+		_synchronousDestination.setName(_TEST_DESTINATION_NAME);
 
-		MessageBusUtil.addDestination(_testDestination);
+		MessageBusUtil.addDestination(_synchronousDestination);
 
 		_quartzSchedulerEngine = new QuartzSchedulerEngine();
 
@@ -273,7 +273,8 @@ public class QuartzSchedulerEngineTest {
 		String testJobName = _TEST_JOB_NAME_PREFIX + "memory";
 
 		Assert.assertEquals(2 * _DEFAULT_JOB_NUMBER, schedulerResponses.size());
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 
 		Trigger trigger = new IntervalTrigger(
 			testJobName, _MEMORY_TEST_GROUP_NAME, _DEFAULT_INTERVAL);
@@ -292,7 +293,8 @@ public class QuartzSchedulerEngineTest {
 
 		Assert.assertEquals(
 			2 * _DEFAULT_JOB_NUMBER + 1, schedulerResponses.size());
-		Assert.assertEquals(1, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			1, _synchronousDestination.getMessageListenerCount());
 
 		_quartzSchedulerEngine.delete(
 			testJobName, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
@@ -300,7 +302,8 @@ public class QuartzSchedulerEngineTest {
 		schedulerResponses = _quartzSchedulerEngine.getScheduledJobs();
 
 		Assert.assertEquals(2 * _DEFAULT_JOB_NUMBER, schedulerResponses.size());
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 	}
 
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
@@ -509,7 +512,7 @@ public class QuartzSchedulerEngineTest {
 				_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER, schedulerResponses.size());
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(0, _synchronousDestination.getMessageListenerCount());
 
 		Trigger trigger = new IntervalTrigger(
 			_TEST_JOB_NAME_PREFIX + "memory", _MEMORY_TEST_GROUP_NAME,
@@ -530,7 +533,7 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER + 1, schedulerResponses.size());
-		Assert.assertEquals(1, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(1, _synchronousDestination.getMessageListenerCount());
 	}
 
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
@@ -541,7 +544,7 @@ public class QuartzSchedulerEngineTest {
 				_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER, schedulerResponses.size());
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(0, _synchronousDestination.getMessageListenerCount());
 
 		Trigger trigger = new IntervalTrigger(
 			_TEST_JOB_NAME_PREFIX + "memory", _MEMORY_TEST_GROUP_NAME,
@@ -555,7 +558,7 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER + 1, schedulerResponses.size());
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(0, _synchronousDestination.getMessageListenerCount());
 	}
 
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
@@ -690,7 +693,8 @@ public class QuartzSchedulerEngineTest {
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
 	@Test
 	public void testUnschedule3() throws Exception {
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 
 		String testJobName = _TEST_JOB_NAME_PREFIX + "memory";
 
@@ -712,7 +716,8 @@ public class QuartzSchedulerEngineTest {
 				testJobName, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
-		Assert.assertEquals(1, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			1, _synchronousDestination.getMessageListenerCount());
 
 		_quartzSchedulerEngine.unschedule(
 			testJobName, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
@@ -721,7 +726,8 @@ public class QuartzSchedulerEngineTest {
 			testJobName, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		_assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
-		Assert.assertEquals(0, _testDestination.getMessageListenerCount());
+		Assert.assertEquals(
+			0, _synchronousDestination.getMessageListenerCount());
 	}
 
 	@AdviseWith(adviceClasses = {EnableSchedulerAdvice.class})
@@ -891,7 +897,7 @@ public class QuartzSchedulerEngineTest {
 	private static final String _TEST_PORTLET_ID = "testPortletId";
 
 	private QuartzSchedulerEngine _quartzSchedulerEngine;
-	private SynchronousDestination _testDestination;
+	private SynchronousDestination _synchronousDestination;
 
 	private class MockScheduler implements Scheduler {
 
