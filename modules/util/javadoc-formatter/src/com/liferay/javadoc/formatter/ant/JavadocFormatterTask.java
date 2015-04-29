@@ -60,8 +60,8 @@ public class JavadocFormatterTask extends Task {
 			initializeMissingJavadocs);
 	}
 
-	public void setInputDir(String inputDir) {
-		_javadocFormatterArgs.setInputDirName(inputDir);
+	public void setInputDirName(String inputDirName) {
+		_javadocFormatterArgs.setInputDirName(inputDirName);
 	}
 
 	public void setLimits(String limits) {
