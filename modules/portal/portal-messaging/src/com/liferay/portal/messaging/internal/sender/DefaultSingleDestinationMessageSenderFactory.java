@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
  * @author Michael C. Han
  */
 @Component(
-	immediate = true, property = { "timeout=10000" },
+	immediate = true, property = {"timeout=10000"},
 	service = SingleDestinationMessageSenderFactory.class
 )
 public class DefaultSingleDestinationMessageSenderFactory
@@ -48,7 +48,7 @@ public class DefaultSingleDestinationMessageSenderFactory
 
 		DefaultSingleDestinationMessageSender
 			defaultSingleDestinationMessageSender =
-				_singleDestinationMessageSenders.get(destinationName);
+				_defaultSingleDestinationMessageSenders.get(destinationName);
 
 		if (defaultSingleDestinationMessageSender == null) {
 			defaultSingleDestinationMessageSender =
@@ -56,10 +56,9 @@ public class DefaultSingleDestinationMessageSenderFactory
 
 			defaultSingleDestinationMessageSender.setDestinationName(
 				destinationName);
-
 			defaultSingleDestinationMessageSender.setMessageBus(_messageBus);
 
-			_singleDestinationMessageSenders.put(
+			_defaultSingleDestinationMessageSenders.put(
 				destinationName, defaultSingleDestinationMessageSender);
 		}
 
@@ -73,7 +72,7 @@ public class DefaultSingleDestinationMessageSenderFactory
 
 		DefaultSingleDestinationSynchronousMessageSender
 			defaultSingleDestinationSynchronousMessageSender =
-				_singleDestinationSynchronousMessageSenders.get(
+				_defaultSingleDestinationSynchronousMessageSenders.get(
 					destinationName);
 
 		if (defaultSingleDestinationSynchronousMessageSender == null) {
@@ -93,7 +92,7 @@ public class DefaultSingleDestinationMessageSenderFactory
 			defaultSingleDestinationSynchronousMessageSender.
 				setSynchronousMessageSender(synchronousMessageSender);
 
-			_singleDestinationSynchronousMessageSenders.put(
+			_defaultSingleDestinationSynchronousMessageSenders.put(
 				destinationName,
 				defaultSingleDestinationSynchronousMessageSender);
 		}
@@ -170,11 +169,12 @@ public class DefaultSingleDestinationMessageSenderFactory
 		_synchronousMessageSenders.remove(getMode(properties));
 	}
 
-	private MessageBus _messageBus;
 	private final Map<String, DefaultSingleDestinationMessageSender>
-		_singleDestinationMessageSenders = new ConcurrentHashMap<>();
+		_defaultSingleDestinationMessageSenders = new ConcurrentHashMap<>();
 	private final Map<String, DefaultSingleDestinationSynchronousMessageSender>
-		_singleDestinationSynchronousMessageSenders = new ConcurrentHashMap<>();
+		_defaultSingleDestinationSynchronousMessageSenders =
+			new ConcurrentHashMap<>();
+	private MessageBus _messageBus;
 	private final Map<SynchronousMessageSender.Mode, SynchronousMessageSender>
 		_synchronousMessageSenders = new HashMap<>();
 
