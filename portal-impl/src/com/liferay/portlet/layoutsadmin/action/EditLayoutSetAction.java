@@ -160,6 +160,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 	 * @param  actionRequest the portlet request used to retrieve parameters
 	 * @throws Exception if an exception occurred
 	 */
+	@Override
 	protected void resetMergeFailCountAndMerge(ActionRequest actionRequest)
 		throws Exception {
 
