@@ -36,16 +36,14 @@ public class CacheExportImportLifecycleListener
 
 	@Override
 	protected void onLayoutImportProcessFinished(
-			PortletDataContext portletDataContext)
-		throws Exception {
+		PortletDataContext portletDataContext) {
 
 		clearCache();
 	}
 
 	@Override
 	protected void onPortletImportProcessFinished(
-			PortletDataContext portletDataContext)
-		throws Exception {
+		PortletDataContext portletDataContext) {
 
 		clearCache();
 	}
