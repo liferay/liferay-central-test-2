@@ -15,9 +15,12 @@
 				<available file="src" />
 			</not>
 			<then>
-				<get src="https://gdata-java-client.googlecode.com/files/gdata-samples.java-1.47.1.zip" dest="gdata-samples.java-1.47.1.zip" /> 
+				<get
+					dest="gdata-samples.java-1.47.1.zip" 
+					src="https://gdata-java-client.googlecode.com/files/gdata-samples.java-1.47.1.zip"
+				/>
 
-				<unzip src="gdata-samples.java-1.47.1.zip" dest=".">
+				<unzip dest="." src="gdata-samples.java-1.47.1.zip">
 					<patternset>
 						<include name="gdata/java/lib/gdata-appsforyourdomain-1.0.jar" />
 						<include name="gdata/java/lib/gdata-client-1.0.jar" />
@@ -33,7 +36,7 @@
 					</mapper>
 				</unzip>
 
-				<delete file="gdata-samples.java-1.47.1.zip"/>
+				<delete file="gdata-samples.java-1.47.1.zip" />
 			</then>
 		</if>
 
