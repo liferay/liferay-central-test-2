@@ -375,10 +375,10 @@ public final class SummaryLoggerHandler {
 		_minorStepLoggerElement = null;
 	}
 
-	private static LoggerElement _causeBodyLoggerElement = null;
-	private static Element _majorStepElement = null;
-	private static LoggerElement _majorStepLoggerElement = null;
-	private static LoggerElement _majorStepsLoggerElement = null;
+	private static LoggerElement _causeBodyLoggerElement;
+	private static Element _majorStepElement;
+	private static LoggerElement _majorStepLoggerElement;
+	private static LoggerElement _majorStepsLoggerElement;
 	private static Element _minorStepElement;
 	private static LoggerElement _minorStepLoggerElement;
 	private static LoggerElement _minorStepsLoggerElement;

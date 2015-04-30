@@ -151,6 +151,7 @@ public class PoshiRunner {
 
 	private void _runSetUp() throws Exception {
 		CommandLoggerHandler.logClassCommandName(_testClassName + "#set-up");
+
 		SummaryLoggerHandler.startMajorSteps();
 
 		_runClassCommandName(_testClassName + "#set-up");
@@ -160,6 +161,7 @@ public class PoshiRunner {
 		try {
 			CommandLoggerHandler.logClassCommandName(
 				_testClassName + "#tear-down");
+
 			SummaryLoggerHandler.startMajorSteps();
 
 			_runClassCommandName(_testClassName + "#tear-down");
