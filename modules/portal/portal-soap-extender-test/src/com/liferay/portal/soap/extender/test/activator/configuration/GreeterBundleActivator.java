@@ -37,7 +37,7 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class GreeterBundleActivator implements BundleActivator {
 
-	public void cleanup(BundleContext bundleContext) {
+	protected void cleanUp(BundleContext bundleContext) {
 		try {
 			_configAdminBundleActivator.stop(bundleContext);
 		}
@@ -93,7 +93,7 @@ public class GreeterBundleActivator implements BundleActivator {
 		}
 
 		if (servers.isEmpty()) {
-			cleanup(bundleContext);
+			cleanUp(bundleContext);
 
 			throw new IllegalStateException(
 				"Endpoint was not registered within 10 seconds");
@@ -102,7 +102,7 @@ public class GreeterBundleActivator implements BundleActivator {
 
 	@Override
 	public void stop(BundleContext bundleContext) {
-		cleanup(bundleContext);
+		cleanUp(bundleContext);
 	}
 
 	private ConfigurationAdminBundleActivator _configAdminBundleActivator;
