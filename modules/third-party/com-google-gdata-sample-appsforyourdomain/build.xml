@@ -24,7 +24,7 @@
 			</not>
 			<then>
 				<mirrors-get
-					dest="gdata-samples.java-1.47.1.zip" 
+					dest="gdata-samples.java-1.47.1.zip"
 					src="https://gdata-java-client.googlecode.com/files/gdata-samples.java-1.47.1.zip"
 				/>
 
