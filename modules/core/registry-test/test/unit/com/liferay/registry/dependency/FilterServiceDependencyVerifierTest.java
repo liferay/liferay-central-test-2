@@ -45,6 +45,7 @@ public class FilterServiceDependencyVerifierTest {
 		registry.registerService(TestInstance1.class, new TestInstance1());
 
 		Map<String, Object> properties = new HashMap<>();
+
 		properties.put("type", "test");
 
 		registry.registerService(
@@ -57,27 +58,26 @@ public class FilterServiceDependencyVerifierTest {
 			"(objectClass=com.liferay.registry.dependency." +
 				"FilterServiceDependencyVerifierTest$TestInstance1)");
 
-		FilterServiceDependencyVerifier filterServiceDependencyVerifier =
+		FilterServiceDependencyVerifier filterServiceDependencyVerifier1 =
 			new FilterServiceDependencyVerifier (filter1);
 
 		Assert.assertTrue(
-			filterServiceDependencyVerifier.verify(serviceReference));
+			filterServiceDependencyVerifier1.verify(serviceReference));
 
 		Filter filter2 = registry.getFilter(
 			"(&(objectClass=" + TestInterface2.class.getName() +
 				")(type=test))");
 
-		FilterServiceDependencyVerifier classServiceDependencyVerifier2 =
+		FilterServiceDependencyVerifier filterServiceDependencyVerifier2 =
 			new FilterServiceDependencyVerifier(filter2);
 
 		ServiceReference<?> serviceReference2 = registry.getServiceReference(
 			TestInterface2.class);
 
 		Assert.assertFalse(
-			classServiceDependencyVerifier2.verify(serviceReference));
-
+			filterServiceDependencyVerifier2.verify(serviceReference));
 		Assert.assertTrue(
-			classServiceDependencyVerifier2.verify(serviceReference2));
+			filterServiceDependencyVerifier2.verify(serviceReference2));
 	}
 
 	private class TestInstance1 implements TestInterface1 {
