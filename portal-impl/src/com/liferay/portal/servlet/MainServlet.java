@@ -827,10 +827,9 @@ public class MainServlet extends ActionServlet {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter systemEngineFilter = registry.getFilter(
-			"(search.engine.id=SYSTEM_ENGINE)");
+		Filter filter = registry.getFilter("(search.engine.id=SYSTEM_ENGINE)");
 
-		serviceDependencyManager.registerDependencies(systemEngineFilter);
+		serviceDependencyManager.registerDependencies(filter);
 	}
 
 	protected void initExt() throws Exception {
@@ -889,7 +888,6 @@ public class MainServlet extends ActionServlet {
 		Filter freeMarkerFilter = registry.getFilter(
 			"(&(language.type=" + TemplateConstants.LANG_TYPE_FTL +
 				")(objectClass=" + TemplateManager.class.getName() + "))");
-
 		Filter velocityFilter = registry.getFilter(
 			"(&(language.type=" + TemplateConstants.LANG_TYPE_VM +
 				")(objectClass=" + TemplateManager.class.getName() + "))");
