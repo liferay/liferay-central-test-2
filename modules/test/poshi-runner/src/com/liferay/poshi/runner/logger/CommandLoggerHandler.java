@@ -17,6 +17,7 @@ package com.liferay.poshi.runner.logger;
 import com.liferay.poshi.runner.PoshiRunnerContext;
 import com.liferay.poshi.runner.PoshiRunnerGetterUtil;
 import com.liferay.poshi.runner.PoshiRunnerVariablesUtil;
+import com.liferay.poshi.runner.selenium.LiferaySeleniumHelper;
 import com.liferay.poshi.runner.util.StringUtil;
 import com.liferay.poshi.runner.util.Validator;
 
@@ -29,7 +30,7 @@ import org.dom4j.Element;
  */
 public final class CommandLoggerHandler {
 
-	public static void failCommand(Element element) {
+	public static void failCommand(Element element) throws Exception {
 		if (!_isCurrentCommand(element)) {
 			return;
 		}
@@ -74,6 +75,8 @@ public final class CommandLoggerHandler {
 			return;
 		}
 
+		_takeScreenshot("before", _errorLinkId);
+
 		_commandElement = element;
 
 		_lineGroupLoggerElement = _getLineGroupLoggerElement(element);
@@ -82,7 +85,8 @@ public final class CommandLoggerHandler {
 	}
 
 	private static void _failLineGroupLoggerElement(
-		LoggerElement lineGroupLoggerElement) {
+			LoggerElement lineGroupLoggerElement)
+		throws Exception {
 
 		lineGroupLoggerElement.addClassName("failed");
 
@@ -180,7 +184,9 @@ public final class CommandLoggerHandler {
 		return loggerElement;
 	}
 
-	private static LoggerElement _getErrorContainerLoggerElement() {
+	private static LoggerElement _getErrorContainerLoggerElement()
+		throws Exception {
+
 		LoggerElement loggerElement = new LoggerElement();
 
 		loggerElement.setClassName("error-container hidden");
@@ -353,7 +359,9 @@ public final class CommandLoggerHandler {
 		return loggerElement;
 	}
 
-	private static LoggerElement _getScreenshotsLoggerElement(int errorLinkId) {
+	private static LoggerElement _getScreenshotsLoggerElement(int errorLinkId)
+		throws Exception {
+
 		LoggerElement loggerElement = new LoggerElement();
 
 		loggerElement.setAttribute(
@@ -362,6 +370,8 @@ public final class CommandLoggerHandler {
 
 		loggerElement.addChildLoggerElement(
 			_getScreenshotContainerLoggerElement("before", errorLinkId));
+
+		_takeScreenshot("after", errorLinkId);
 
 		loggerElement.addChildLoggerElement(
 			_getScreenshotContainerLoggerElement("after", errorLinkId));
@@ -421,6 +431,22 @@ public final class CommandLoggerHandler {
 
 	private static boolean _isCurrentCommand(Element element) {
 		return element.equals(_commandElement);
+	}
+
+	private static void _takeScreenshot(String screenshotName, int errorLinkId)
+		throws Exception {
+
+		String testClassCommandName =
+			PoshiRunnerContext.getTestCaseCommandName();
+
+		testClassCommandName = StringUtil.replace(
+			testClassCommandName, "#", "_");
+
+		String currentDir = PoshiRunnerGetterUtil.getCanonicalPath(".");
+
+		LiferaySeleniumHelper.captureScreen(
+			currentDir + "/test-results/" + testClassCommandName +
+				"/screenshot/" + screenshotName + errorLinkId + ".jpg");
 	}
 
 	private static int _btnLinkId;
