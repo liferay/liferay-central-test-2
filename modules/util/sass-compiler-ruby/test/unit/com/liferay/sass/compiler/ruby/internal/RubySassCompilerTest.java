@@ -33,10 +33,10 @@ public class RubySassCompilerTest {
 
 			Class<?> clazz = getClass();
 
-			URL inputUrl = clazz.getResource("dependencies/input.scss");
+			URL url = clazz.getResource("dependencies/input.scss");
 
 			String actualOutput = rubySassCompiler.compileFile(
-				inputUrl.getFile(), "", "");
+				url.getFile(), "", "");
 
 			Assert.assertEquals(expectedOutput, actualOutput);
 		}
