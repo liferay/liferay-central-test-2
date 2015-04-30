@@ -37,16 +37,6 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class GreeterBundleActivator implements BundleActivator {
 
-	protected void cleanUp(BundleContext bundleContext) {
-		try {
-			_configAdminBundleActivator.stop(bundleContext);
-		}
-		catch (Exception e) {
-		}
-
-		_serviceRegistration.unregister();
-	}
-
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		Dictionary<String, Object> properties = new Hashtable<>();
@@ -103,6 +93,16 @@ public class GreeterBundleActivator implements BundleActivator {
 	@Override
 	public void stop(BundleContext bundleContext) {
 		cleanUp(bundleContext);
+	}
+
+	protected void cleanUp(BundleContext bundleContext) {
+		try {
+			_configAdminBundleActivator.stop(bundleContext);
+		}
+		catch (Exception e) {
+		}
+
+		_serviceRegistration.unregister();
 	}
 
 	private ConfigurationAdminBundleActivator _configAdminBundleActivator;
