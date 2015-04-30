@@ -58,10 +58,8 @@ public class SchedulerLifecycle extends BasePortalLifecycle {
 					try {
 						schedulerEngineHelper.start();
 					}
-					catch (SchedulerException e) {
-						if (_log.isErrorEnabled()) {
-							_log.error("Unable to start scheduler engine", e);
-						}
+					catch (SchedulerException se) {
+						_log.error("Unable to start scheduler engine", se);
 					}
 				}
 
