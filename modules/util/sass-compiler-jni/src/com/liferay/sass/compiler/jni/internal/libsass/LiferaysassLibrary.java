@@ -1,4 +1,4 @@
-/* @generated *//* @generated */package com.liferay.sass.compiler.jni.internal.libsass;
+/* @generated */package com.liferay.sass.compiler.jni.internal.libsass;
 import com.ochafik.lang.jnaerator.runtime.LibraryExtractor;
 import com.ochafik.lang.jnaerator.runtime.MangledFunctionMapper;
 import com.ochafik.lang.jnaerator.runtime.NativeSize;
