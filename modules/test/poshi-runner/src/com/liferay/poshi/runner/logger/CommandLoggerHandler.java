@@ -17,6 +17,7 @@ package com.liferay.poshi.runner.logger;
 import com.liferay.poshi.runner.PoshiRunnerContext;
 import com.liferay.poshi.runner.PoshiRunnerGetterUtil;
 import com.liferay.poshi.runner.PoshiRunnerVariablesUtil;
+import com.liferay.poshi.runner.util.StringUtil;
 import com.liferay.poshi.runner.util.Validator;
 
 import java.util.List;
@@ -187,6 +188,9 @@ public final class CommandLoggerHandler {
 		loggerElement.addChildLoggerElement(
 			_getConsoleLoggerElement(_errorLinkId));
 
+		loggerElement.addChildLoggerElement(
+			_getScreenshotsLoggerElement(_errorLinkId));
+
 		_errorLinkId++;
 
 		return loggerElement;
@@ -317,6 +321,63 @@ public final class CommandLoggerHandler {
 		}
 
 		return sb.toString();
+	}
+
+	private static LoggerElement _getScreenshotContainerLoggerElement(
+		String screenshotName, int errorLinkId) {
+
+		LoggerElement loggerElement = new LoggerElement();
+
+		loggerElement.setClassName(screenshotName + " screenshot-container");
+
+		loggerElement.addChildLoggerElement(
+			_getScreenshotLoggerElement(screenshotName, errorLinkId));
+
+		loggerElement.addChildLoggerElement(
+			_getScreenshotSpanLoggerElement(
+				StringUtil.upperCaseFirstLetter(screenshotName)));
+
+		return loggerElement;
+	}
+
+	private static LoggerElement _getScreenshotLoggerElement(
+		String screenshotName, int errorLinkId) {
+
+		LoggerElement loggerElement = new LoggerElement();
+
+		loggerElement.setAttribute("alt", screenshotName + errorLinkId);
+		loggerElement.setAttribute(
+			"src", "screenshot/" + screenshotName + errorLinkId + ".jpg");
+		loggerElement.setName("img");
+
+		return loggerElement;
+	}
+
+	private static LoggerElement _getScreenshotsLoggerElement(int errorLinkId) {
+		LoggerElement loggerElement = new LoggerElement();
+
+		loggerElement.setAttribute(
+			"data-errorlinkid", "screenshots-" + errorLinkId);
+		loggerElement.setClassName("errorPanel screenshots toggle");
+
+		loggerElement.addChildLoggerElement(
+			_getScreenshotContainerLoggerElement("before", errorLinkId));
+
+		loggerElement.addChildLoggerElement(
+			_getScreenshotContainerLoggerElement("after", errorLinkId));
+
+		return loggerElement;
+	}
+
+	private static LoggerElement _getScreenshotSpanLoggerElement(
+		String screenshotName) {
+
+		LoggerElement loggerElement = new LoggerElement();
+
+		loggerElement.setName("span");
+		loggerElement.setText(StringUtil.upperCaseFirstLetter(screenshotName));
+
+		return loggerElement;
 	}
 
 	private static LoggerElement _getStepsHeaderLoggerElement() {
