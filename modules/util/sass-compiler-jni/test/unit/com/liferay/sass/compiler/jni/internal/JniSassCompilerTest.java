@@ -45,9 +45,9 @@ public class JniSassCompilerTest {
 
 		Class<?> clazz = getClass();
 
-		URL sassSpecUrl = clazz.getResource("dependencies/sass-spec");
+		URL url = clazz.getResource("dependencies/sass-spec");
 
-		File sassSpecDir = new File(sassSpecUrl.toURI());
+		File sassSpecDir = new File(url.toURI());
 
 		for (File testDir : sassSpecDir.listFiles()) {
 			File inputFile = new File(testDir, "input.scss");
