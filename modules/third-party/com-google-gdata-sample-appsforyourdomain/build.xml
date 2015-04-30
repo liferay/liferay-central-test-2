@@ -50,6 +50,8 @@
 				</replace>
 
 				<delete file="gdata-samples.java-1.47.1.zip" />
+
+				<touch file="src/source_formatter.ignore" />
 			</then>
 		</if>
 
