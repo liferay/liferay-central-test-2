@@ -32,9 +32,14 @@
 					<mapper>
 						<globmapper from="gdata/java/lib/*" to="lib/*" />
 						<globmapper from="gdata/java/sample/util/lib/*" to="lib/*" />
-						<globmapper from="gdata/java/*" to="src/*" />
+						<globmapper from="gdata/java/*" to="src/com/google/gdata/*" />
 					</mapper>
 				</unzip>
+
+				<replace dir="src" value="com.google.gdata.sample.appsforyourdomain">
+					<include name="**/*.java" />
+					<replacetoken>sample.appsforyourdomain</replacetoken>
+				</replace>
 
 				<delete file="gdata-samples.java-1.47.1.zip" />
 			</then>
