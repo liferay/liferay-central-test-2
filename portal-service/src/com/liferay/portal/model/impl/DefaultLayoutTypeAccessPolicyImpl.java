@@ -199,7 +199,7 @@ public class DefaultLayoutTypeAccessPolicyImpl
 		}
 
 		throw new PrincipalException(
-			"User does not have permission to access control panel portlet " +
+			"User does not have permission to access Control Panel portlet " +
 				portlet.getPortletId());
 	}
 

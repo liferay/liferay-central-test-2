@@ -169,11 +169,11 @@ public class SecurityPortletContainerWrapper implements PortletContainer {
 
 		if (!isValidPortletId(portlet.getPortletId())) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Invalid portlet id " + portlet.getPortletId());
+				_log.warn("Invalid portlet ID " + portlet.getPortletId());
 			}
 
 			throw new PrincipalException(
-				"Invalid portlet id " + portlet.getPortletId());
+				"Invalid portlet ID " + portlet.getPortletId());
 		}
 
 		if (portlet.isUndeployedPortlet()) {
@@ -335,7 +335,7 @@ public class SecurityPortletContainerWrapper implements PortletContainer {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
 				String.format(
-					"Action denied for user %s with url %s and portlet %s",
+					"User %s is not allowed to access URL %s and portlet %s",
 					PortalUtil.getUserId(request), url,
 					portlet.getPortletId()));
 		}
