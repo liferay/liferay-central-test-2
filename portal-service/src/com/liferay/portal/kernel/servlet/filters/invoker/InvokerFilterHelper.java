@@ -375,7 +375,7 @@ public class InvokerFilterHelper {
 			if (filterObjectValuePair == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"No filter and filter config exists with filter name " +
+						"No filter and filter config for filter name " +
 							filterName);
 				}
 
