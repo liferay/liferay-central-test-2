@@ -442,11 +442,10 @@ public final class CommandLoggerHandler {
 		testClassCommandName = StringUtil.replace(
 			testClassCommandName, "#", "_");
 
-		String currentDir = PoshiRunnerGetterUtil.getCanonicalPath(".");
-
 		LiferaySeleniumHelper.captureScreen(
-			currentDir + "/test-results/" + testClassCommandName +
-				"/screenshot/" + screenshotName + errorLinkId + ".jpg");
+			PoshiRunnerGetterUtil.getCanonicalPath(".") + "/test-results/" +
+				testClassCommandName + "/screenshot/" + screenshotName +
+					errorLinkId + ".jpg");
 	}
 
 	private static int _btnLinkId;
