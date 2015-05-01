@@ -121,10 +121,9 @@ public class ServiceDependencyManager {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(3);
 
-		sb.append("ServiceDependencyManager{");
-		sb.append("_serviceDependencies=");
+		sb.append("{serviceDependencies=");
 		sb.append(_serviceDependencies);
 		sb.append("}");
 

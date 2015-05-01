@@ -81,14 +81,13 @@ public class ServiceDependency {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(5);
 
-		sb.append("ServiceDependency{");
-		sb.append("_fulfilled=");
+		sb.append("{_fulfilled=");
 		sb.append(_fulfilled);
 		sb.append(", _serviceDependencyVerifier=");
 		sb.append(_serviceDependencyVerifier);
-		sb.append('}');
+		sb.append("}");
 
 		return sb.toString();
 	}
