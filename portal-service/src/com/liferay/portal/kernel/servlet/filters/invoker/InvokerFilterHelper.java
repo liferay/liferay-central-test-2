@@ -76,7 +76,7 @@ public class InvokerFilterHelper {
 		_filterMappingsMap.clear();
 		_filterNames.clear();
 
-		clearInvokerFilterChainsCache();
+		clearFilterChainsCache();
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -197,7 +197,7 @@ public class InvokerFilterHelper {
 
 		_filterNames.remove(filterName);
 
-		clearInvokerFilterChainsCache();
+		clearFilterChainsCache();
 	}
 
 	public void updateFilterMappings(String filterName, Filter filter) {
@@ -208,7 +208,7 @@ public class InvokerFilterHelper {
 			if (oldFilterMappings == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"No filter mapping is under filter name " + filterName);
+						"No filter mappings for filter name " + filterName);
 				}
 
 				return;
@@ -232,7 +232,7 @@ public class InvokerFilterHelper {
 		_invokerFilters.add(invokerFilter);
 	}
 
-	protected void clearInvokerFilterChainsCache() {
+	protected void clearFilterChainsCache() {
 		for (InvokerFilter invokerFilter : _invokerFilters) {
 			invokerFilter.clearFilterChainsCache();
 		}
@@ -472,7 +472,7 @@ public class InvokerFilterHelper {
 
 			registerFilterMapping(filterMapping, positionFilterName, after);
 
-			clearInvokerFilterChainsCache();
+			clearFilterChainsCache();
 
 			return filterMapping;
 		}
