@@ -37,12 +37,12 @@ import javax.servlet.http.HttpServletRequest;
 public class FilterMapping {
 
 	public FilterMapping(
-		Filter filter, FilterConfig filterConfig, List<String> urlPatterns,
-		List<String> dispatchers, String filterName) {
+		String filterName, Filter filter, FilterConfig filterConfig,
+		List<String> urlPatterns, List<String> dispatchers) {
 
+		_filterName = filterName;
 		_filter = filter;
 		_urlPatterns = urlPatterns;
-		_filterName = filterName;
 
 		String urlRegexPattern = filterConfig.getInitParameter(
 			"url-regex-pattern");
@@ -161,7 +161,7 @@ public class FilterMapping {
 
 	public FilterMapping replaceFilter(Filter filter) {
 		return new FilterMapping(
-			filter, _urlPatterns, _dispatchers, _filterName,
+			_filterName, filter, _urlPatterns, _dispatchers,
 			_urlRegexIgnorePattern, _urlRegexPattern);
 	}
 
@@ -189,14 +189,14 @@ public class FilterMapping {
 	}
 
 	private FilterMapping(
-		Filter filter, List<String> urlPatterns, Set<Dispatcher> dispatchers,
-		String filterName, Pattern urlRegexIgnorePattern,
+		String filterName, Filter filter, List<String> urlPatterns,
+		Set<Dispatcher> dispatchers, Pattern urlRegexIgnorePattern,
 		Pattern urlRegexPattern) {
 
+		_filterName = filterName;
 		_filter = filter;
 		_urlPatterns = urlPatterns;
 		_dispatchers = dispatchers;
-		_filterName = filterName;
 		_urlRegexIgnorePattern = urlRegexIgnorePattern;
 		_urlRegexPattern = urlRegexPattern;
 	}

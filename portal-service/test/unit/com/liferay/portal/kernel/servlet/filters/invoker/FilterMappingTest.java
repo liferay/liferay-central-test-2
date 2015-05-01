@@ -71,8 +71,8 @@ public class FilterMappingTest extends PowerMockito {
 		urlPatterns.add("/c/portal/login");
 
 		FilterMapping filterMapping = new FilterMapping(
-			_filter, _filterConfig, urlPatterns, _dispatchers,
-			StringPool.BLANK);
+			StringPool.BLANK, _filter, _filterConfig, urlPatterns,
+			_dispatchers);
 
 		String uri = "/c/portal/login";
 

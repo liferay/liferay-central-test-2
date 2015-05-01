@@ -383,9 +383,8 @@ public class InvokerFilterHelper {
 			}
 
 			FilterMapping filterMapping = new FilterMapping(
-					filterObjectValuePair.getKey(),
-					filterObjectValuePair.getValue(), urlPatterns, dispatchers,
-					filterName);
+				filterName, filterObjectValuePair.getKey(),
+				filterObjectValuePair.getValue(), urlPatterns, dispatchers);
 
 			registerFilterMapping(filterMapping, filterName, true);
 		}
@@ -468,8 +467,8 @@ public class InvokerFilterHelper {
 			updateFilterMappings(servletFilterName, filter);
 
 			FilterMapping filterMapping = new FilterMapping(
-				filter, filterConfig, urlPatterns, dispatchers,
-				servletFilterName);
+				servletFilterName, filter, filterConfig, urlPatterns,
+				dispatchers);
 
 			registerFilterMapping(filterMapping, positionFilterName, after);
 
