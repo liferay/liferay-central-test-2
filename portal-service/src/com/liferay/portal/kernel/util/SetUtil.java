@@ -231,7 +231,6 @@ public class SetUtil {
 		}
 
 		Set<T> set1 = _toSet(collection1);
-
 		Set<T> set2 = _toSet(collection2);
 
 		if (set1.size() > set2.size()) {
@@ -261,7 +260,6 @@ public class SetUtil {
 		}
 
 		Set<T> set1 = _toSet(collection1);
-
 		Set<T> set2 = _toSet(collection2);
 
 		Set<T> intersection = intersect(set1, set2);
