@@ -22,7 +22,6 @@ import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
-import com.liferay.registry.collections.ServiceRegistrationMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,8 +64,6 @@ public class XmlRpcMethodUtil {
 
 	private final Map<String, Map<String, Method>> _methodRegistry =
 		new ConcurrentHashMap<>();
-	private final ServiceRegistrationMap<Method> _serviceRegistrations =
-		new ServiceRegistrationMap<>();
 	private final ServiceTracker<Method, Method> _serviceTracker;
 
 	private class MethodServiceTrackerCustomizer
