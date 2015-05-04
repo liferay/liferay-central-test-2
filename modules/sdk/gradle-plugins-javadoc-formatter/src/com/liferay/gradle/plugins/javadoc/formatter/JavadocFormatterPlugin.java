@@ -66,7 +66,7 @@ public class JavadocFormatterPlugin implements Plugin<Project> {
 					addJavadocFormatterDependencies(project);
 				}
 
-		});
+			});
 
 		return configuration;
 	}

@@ -194,7 +194,7 @@ public class WSDLBuilderPlugin implements Plugin<Project> {
 					addWSDLBuilderDependencies(project);
 				}
 
-		});
+			});
 
 		return configuration;
 	}

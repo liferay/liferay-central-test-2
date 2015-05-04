@@ -154,7 +154,7 @@ public class XSDBuilderPlugin implements Plugin<Project> {
 					addXSDBuilderDependencies(project);
 				}
 
-		});
+			});
 
 		return configuration;
 	}
