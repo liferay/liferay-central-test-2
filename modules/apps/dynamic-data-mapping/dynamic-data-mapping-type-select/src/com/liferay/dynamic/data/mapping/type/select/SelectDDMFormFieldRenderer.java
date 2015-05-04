@@ -84,10 +84,10 @@ public class SelectDDMFormFieldRenderer extends BaseDDMFormFieldRenderer {
 			template, ddmFormField, ddmFormFieldRenderingContext);
 
 		template.put(
-			"options", getOptions(ddmFormField, ddmFormFieldRenderingContext));
-		template.put(
 			"multiple",
 			ddmFormField.isMultiple() ? "multiple" : StringPool.BLANK);
+		template.put(
+			"options", getOptions(ddmFormField, ddmFormFieldRenderingContext));
 	}
 
 	private TemplateResource _templateResource;
