@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
@@ -78,7 +79,7 @@ public class PortalImplTest {
 		mockHttpServletRequest = new MockHttpServletRequest();
 
 		mockHttpServletRequest.setPathInfo(
-			"/TestAlwaysAllowDoAsUser/integration/test");
+			"/TestAlwaysAllowDoAsUser/" + RandomTestUtil.randomString());
 
 		userId = PortalUtil.getUserId(mockHttpServletRequest);
 
