@@ -4735,6 +4735,11 @@ public class StringUtil {
 		}
 	}
 
+	protected static final char[] HEX_DIGITS = {
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+		'e', 'f'
+	};
+
 	/**
 	 * Returns <code>false</code> if the character is not whitespace or is equal
 	 * to any of the exception characters.
@@ -4828,11 +4833,6 @@ public class StringUtil {
 
 		return sb.toString();
 	}
-
-	protected static final char[] HEX_DIGITS = {
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-		'e', 'f'
-	};
 
 	private static final char[] _RANDOM_STRING_CHAR_TABLE = {
 		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
