@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=testPortletFilter",
+		"javax.portlet.name=InvokerFilterContainerImplTest",
 		"preinitialized.filter=true",
 		"service.ranking:Integer=" + Integer.MAX_VALUE
 	},

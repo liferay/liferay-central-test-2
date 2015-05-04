@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=testPortletFilter",
+		"javax.portlet.name=InvokerFilterContainerImplTest",
 		"preinitialized.filter=false",
 		"service.ranking:Integer=" + Integer.MAX_VALUE
 	},

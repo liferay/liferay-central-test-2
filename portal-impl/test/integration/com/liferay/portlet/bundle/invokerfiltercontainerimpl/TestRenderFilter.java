@@ -28,13 +28,13 @@ import org.osgi.service.component.annotations.Component;
  * @author Peter Fellwock
  */
 @Component(
-		immediate = true,
-		property = {
-			"javax.portlet.name=testPortletFilter",
-			"preinitialized.filter=true",
-			"service.ranking:Integer=" + Integer.MAX_VALUE
-		},
-		service = PortletFilter.class
+	immediate = true,
+	property = {
+		"javax.portlet.name=InvokerFilterContainerImplTest",
+		"preinitialized.filter=true",
+		"service.ranking:Integer=" + Integer.MAX_VALUE
+	},
+	service = PortletFilter.class
 )
 public class TestRenderFilter implements PortletFilter, RenderFilter {
 
