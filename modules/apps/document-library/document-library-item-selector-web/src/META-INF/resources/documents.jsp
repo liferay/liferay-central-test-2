@@ -294,9 +294,7 @@ if (folderId > 0) {
 			searchContext.setFolderIds(new long[]{folderId});
 			searchContext.setGroupIds(new long[]{groupId});
 			searchContext.setIncludeFolders(false);
-
 			searchContext.setKeywords(keywords);
-
 			searchContext.setScopeStrict(false);
 
 			int entryStart = ParamUtil.getInteger(request, "entryStart");
