@@ -63,7 +63,7 @@ public class BuildXSDTask extends Zip {
 	}
 
 	public void setInputDir(Object inputDirName) {
-		_inputDirName = (String)inputDirName;
+		_inputDirName = String.valueOf(inputDirName);
 	}
 
 	private String _inputDirName = "xsd";
