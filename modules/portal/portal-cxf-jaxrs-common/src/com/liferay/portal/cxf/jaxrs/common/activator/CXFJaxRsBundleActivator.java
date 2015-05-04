@@ -29,7 +29,7 @@ import org.osgi.framework.wiring.BundleWiring;
 /**
  * @author Carlos Sierra Andrés
  */
-public class SetUpActivator implements BundleActivator {
+public class CXFJaxRsBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
