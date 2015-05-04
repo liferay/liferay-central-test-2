@@ -58,6 +58,10 @@ public class ItemSelectorImplTest extends PowerMockito {
 		_mediaItemSelectorCriterion.setFileExtension("jpg");
 		_mediaItemSelectorCriterion.setMaxSize(2048);
 
+		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
+
+		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
+
 		PortletURLFactory portletURLFactory = mock(PortletURLFactory.class);
 
 		LiferayPortletURL mockLiferayPortletURL = mock(LiferayPortletURL.class);
@@ -70,9 +74,10 @@ public class ItemSelectorImplTest extends PowerMockito {
 			mockLiferayPortletURL
 		);
 
-		new PortletURLFactoryUtil().setPortletURLFactory(portletURLFactory);
+		PortletURLFactoryUtil portletURLFactoryUtil =
+			new PortletURLFactoryUtil();
 
-		new JSONFactoryUtil().setJSONFactory(new JSONFactoryImpl());
+		portletURLFactoryUtil.setPortletURLFactory(portletURLFactory);
 	}
 
 	@Test
