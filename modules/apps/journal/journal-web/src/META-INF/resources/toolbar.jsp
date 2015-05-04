@@ -19,22 +19,22 @@
 <%
 long folderId = GetterUtil.getLong((String)liferayPortletRequest.getAttribute("view.jsp-folderId"));
 
-PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-portletURL.setParameter("folderId", String.valueOf(folderId));
-
 String keywords = ParamUtil.getString(request, "keywords");
 
 boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisplayTerms.ADVANCED_SEARCH);
 
-boolean isSearch = Validator.isNull(keywords) && !advancedSearch;
+boolean search = Validator.isNull(keywords) && !advancedSearch;
+
+PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm1">
 	<aui:nav-bar>
 		<aui:nav collapsible="<%= true %>" cssClass="nav-display-style-buttons navbar-nav" icon="th-list" id="displayStyleButtons">
 
-			<c:if test="<%= !isSearch %>">
+			<c:if test="<%= !search %>">
 				<liferay-util:include page="/display_style_buttons.jsp" servletContext="<%= application %>" />
 			</c:if>
 		</aui:nav>
@@ -61,7 +61,7 @@ boolean isSearch = Validator.isNull(keywords) && !advancedSearch;
 				<aui:nav-item cssClass="item-remove" href="<%= taglibURL %>" iconCssClass='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "icon-trash" : "icon-remove" %>' label='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "move-to-the-recycle-bin" : "delete" %>' />
 			</aui:nav-item>
 
-			<c:if test="<%= !isSearch %>">
+			<c:if test="<%= !search %>">
 				<liferay-util:include page="/add_button.jsp" servletContext="<%= application %>" />
 
 				<liferay-util:include page="/sort_button.jsp" servletContext="<%= application %>" />

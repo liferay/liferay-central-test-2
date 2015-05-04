@@ -27,12 +27,12 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 
 String keywords = ParamUtil.getString(request, "keywords");
 
-boolean isSearch = strutsAction.equals("/document_library/search");
+boolean search = strutsAction.equals("/document_library/search");
 %>
 
 <aui:nav-bar>
 	<aui:nav collapsible="<%= true %>" cssClass="nav-display-style-buttons navbar-nav" icon="th-list" id="displayStyleButtons">
-		<c:if test="<%= !isSearch %>">
+		<c:if test="<%= !search %>">
 			<liferay-util:include page="/html/portlet/document_library/display_style_buttons.jsp" />
 		</c:if>
 	</aui:nav>
@@ -86,7 +86,7 @@ boolean isSearch = strutsAction.equals("/document_library/search");
 
 		<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
 
-		<c:if test="<%= !isSearch %>">
+		<c:if test="<%= !search %>">
 			<liferay-util:include page="/html/portlet/document_library/sort_button.jsp" />
 		</c:if>
 
