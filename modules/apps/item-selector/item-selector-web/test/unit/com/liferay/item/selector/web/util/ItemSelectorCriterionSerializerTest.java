@@ -39,7 +39,9 @@ public class ItemSelectorCriterionSerializerTest {
 			new ItemSelectorCriterionSerializer<>(
 				_flickrItemSelectorCriterion, _PREFIX);
 
-		new JSONFactoryUtil().setJSONFactory(new JSONFactoryImpl());
+		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
+
+		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 	}
 
 	@Test
