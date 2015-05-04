@@ -52,10 +52,8 @@ public class ItemSelectorCriterionSerializerTest {
 		String json = properties.get(
 			_PREFIX + ItemSelectorCriterionSerializer.JSON)[0];
 
-		json = _assertContainsAndRemove("\"user\":\"anonymous\"", json);
-
-		json = _assertContainsAndRemove(
-			"\"tags\":[\"me\",\"photo\",\"picture\"]", json);
+		json = _assert("\"tags\":[\"me\",\"photo\",\"picture\"]", json);
+		json = _assert("\"user\":\"anonymous\"", json);
 
 		Assert.assertEquals("{,}", json);
 	}
@@ -67,8 +65,8 @@ public class ItemSelectorCriterionSerializerTest {
 		properties.put(
 			_PREFIX + ItemSelectorCriterionSerializer.JSON,
 			new String[] {
-				"{\"user\":\"Joe Bloggs\"," +
-				"\"tags\":[\"tag1\",\"tag2\",\"tag3\"]}"
+				"{\"tags\":[\"tag1\",\"tag2\",\"tag3\"],\"user\":" +
+					"\"Joe Bloggs\"}"
 			});
 
 		_itemSelectorCriterionSerializer.setProperties(properties);
@@ -80,7 +78,7 @@ public class ItemSelectorCriterionSerializerTest {
 			_flickrItemSelectorCriterion.getTags());
 	}
 
-	private String _assertContainsAndRemove(String expected, String json) {
+	private String _assert(String expected, String json) {
 		Assert.assertTrue(json.contains(expected));
 
 		return json.replaceAll(Pattern.quote(expected), "");
