@@ -61,7 +61,8 @@ public class StorageAdapterRegistryImplTest {
 			StorageAdapterRegistryUtil.getStorageAdapterRegistry();
 
 		StorageAdapter storageAdapter =
-			storageAdapterRegistry.getStorageAdapter("testStorageAdapterImpl");
+			storageAdapterRegistry.getStorageAdapter(
+				TestStorageAdapterImpl.STORAGE_TYPE);
 
 		Assert.assertNotNull(storageAdapter);
 
@@ -80,7 +81,8 @@ public class StorageAdapterRegistryImplTest {
 
 		Assert.assertEquals(2, storageTypes.size());
 		Assert.assertTrue(storageTypes.contains("json"));
-		Assert.assertTrue(storageTypes.contains("testStorageAdapterImpl"));
+		Assert.assertTrue(
+			storageTypes.contains(TestStorageAdapterImpl.STORAGE_TYPE));
 	}
 
 }

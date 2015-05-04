@@ -32,6 +32,8 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestStorageAdapterImpl implements StorageAdapter {
 
+	public static final String STORAGE_TYPE = "STORAGE_TYPE";
+
 	@Override
 	public long create(
 		long companyId, long ddmStructureId, DDMFormValues ddmFormValues,
@@ -55,7 +57,7 @@ public class TestStorageAdapterImpl implements StorageAdapter {
 
 	@Override
 	public String getStorageType() {
-		return "testStorageAdapterImpl";
+		return STORAGE_TYPE;
 	}
 
 	@Override
