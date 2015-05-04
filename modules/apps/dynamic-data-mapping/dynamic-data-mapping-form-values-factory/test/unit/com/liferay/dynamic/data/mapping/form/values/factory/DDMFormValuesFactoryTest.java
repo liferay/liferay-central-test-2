@@ -62,8 +62,8 @@ public class DDMFormValuesFactoryTest extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		setUpDDMFormValuesJSONSerializerUtil();
 		setUpDDMFormFieldTypeRegistryUtil();
+		setUpDDMFormValuesJSONSerializerUtil();
 		setUpJSONFactoryUtil();
 		setUpLocaleUtil();
 	}
