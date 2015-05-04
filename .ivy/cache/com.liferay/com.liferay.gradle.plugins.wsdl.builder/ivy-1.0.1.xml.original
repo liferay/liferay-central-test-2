@@ -29,12 +29,12 @@
 		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
 		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
  <dependencies>
   <dependency>
    <groupId>com.liferay</groupId>
    <artifactId>com.liferay.gradle.util</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
+   <version>1.0.1</version>
    <scope>compile</scope>
   </dependency>
   <dependency>
