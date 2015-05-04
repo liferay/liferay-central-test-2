@@ -63,10 +63,10 @@ public class DLItemSelectorView
 			PortletURL portletURL, String itemSelectedCallback)
 		throws IOException, ServletException {
 
-		request.setAttribute(ITEM_SELECTED_CALLBACK, itemSelectedCallback);
-		request.setAttribute(PORTLET_URL, portletURL);
 		request.setAttribute(
 			DL_ITEM_SELECTOR_CRITERION, dlItemSelectorCriterion);
+		request.setAttribute(ITEM_SELECTED_CALLBACK, itemSelectedCallback);
+		request.setAttribute(PORTLET_URL, portletURL);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 			"/o/document-library-item-selector-web/documents.jsp");
