@@ -45,10 +45,11 @@ public class TestAlwaysAllowDoAsUser implements AlwaysAllowDoAsUser {
 	public Collection<String> getActionNames() {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 
-		Collection<String> paths = new ArrayList<>();
-		paths.add(ACTION_NAME);
+		Collection<String> actionNames = new ArrayList<>();
 
-		return paths;
+		actionNames.add(ACTION_NAME);
+
+		return actionNames;
 	}
 
 	@Override
@@ -56,6 +57,7 @@ public class TestAlwaysAllowDoAsUser implements AlwaysAllowDoAsUser {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 
 		Collection<String> paths = new ArrayList<>();
+
 		paths.add(PATH);
 
 		return paths;
@@ -65,10 +67,11 @@ public class TestAlwaysAllowDoAsUser implements AlwaysAllowDoAsUser {
 	public Collection<String> getStrutsActions() {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 
-		Collection<String> paths = new ArrayList<>();
-		paths.add(STRUTS_ACTION);
+		Collection<String> strutsActions = new ArrayList<>();
 
-		return paths;
+		strutsActions.add(STRUTS_ACTION);
+
+		return strutsActions;
 	}
 
 	@Reference(target = "(test=AtomicState)")
