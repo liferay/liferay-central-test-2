@@ -33,15 +33,15 @@ public class CXFJaxRsBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
+		Thread thread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = thread.getContextClassLoader();
+
 		Bundle bundle = bundleContext.getBundle();
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 		ClassLoader bundleClassLoader = bundleWiring.getClassLoader();
-
-		Thread thread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = thread.getContextClassLoader();
 
 		thread.setContextClassLoader(bundleClassLoader);
 
