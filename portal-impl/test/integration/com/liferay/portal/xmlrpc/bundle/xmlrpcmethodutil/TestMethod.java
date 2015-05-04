@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestMethod implements Method {
 
-	public static String METHOD = "METHOD";
+	public static String METHOD_NAME = "METHOD_NAME";
 
 	public static String TOKEN = "TOKEN";
 
@@ -39,7 +39,7 @@ public class TestMethod implements Method {
 
 	@Override
 	public String getMethodName() {
-		return METHOD;
+		return METHOD_NAME;
 	}
 
 	@Override

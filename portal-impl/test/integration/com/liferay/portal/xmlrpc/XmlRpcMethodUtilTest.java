@@ -41,7 +41,7 @@ public class XmlRpcMethodUtilTest {
 	@Test
 	public void testNoReturn() {
 		Method method = XmlRpcMethodUtil.getMethod(
-			TestMethod.TOKEN, TestMethod.METHOD);
+			TestMethod.TOKEN, TestMethod.METHOD_NAME);
 
 		Class<?> clazz = method.getClass();
 
