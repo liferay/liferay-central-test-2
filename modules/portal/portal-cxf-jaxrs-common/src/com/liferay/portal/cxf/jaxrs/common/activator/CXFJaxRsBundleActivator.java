@@ -58,10 +58,11 @@ public class CXFJaxRsBundleActivator implements BundleActivator {
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
+
+		// Clean up the cached instance so a new bundle can its place
+
 		Collection<ServiceReference<Bus>> serviceReferences =
 			bundleContext.getServiceReferences(Bus.class, null);
-
-		//Cleans up the cached instance so a new bundle can take our place
 
 		for (ServiceReference<Bus> serviceReference : serviceReferences) {
 			Bus bus = bundleContext.getService(serviceReference);
