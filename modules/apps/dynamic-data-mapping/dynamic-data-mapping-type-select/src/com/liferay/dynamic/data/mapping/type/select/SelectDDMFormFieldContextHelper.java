@@ -92,7 +92,7 @@ public class SelectDDMFormFieldContextHelper {
 			return ArrayUtil.toStringArray(jsonArray);
 		}
 		catch (JSONException jsone) {
-			_log.error("Unable to parse JSON array.", jsone);
+			_log.error("Unable to parse JSON array", jsone);
 
 			return GetterUtil.DEFAULT_STRING_VALUES;
 		}
