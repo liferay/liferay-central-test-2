@@ -16,7 +16,6 @@ package com.liferay.portlet.bundle.invokerfiltercontainerimpl;
 
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
-import javax.portlet.PortletException;
 import javax.portlet.filter.EventFilter;
 import javax.portlet.filter.FilterChain;
 import javax.portlet.filter.FilterConfig;
@@ -29,15 +28,15 @@ import org.osgi.service.component.annotations.Component;
  * @author Peter Fellwock
  */
 @Component(
-		immediate = true,
-		property = {
-			"javax.portlet.name=testPortletFilter",
-			"preinitialized.filter=true",
-			"service.ranking:Integer=" + Integer.MAX_VALUE
-		},
-		service = PortletFilter.class
+	immediate = true,
+	property = {
+		"javax.portlet.name=testPortletFilter",
+		"preinitialized.filter=true",
+		"service.ranking:Integer=" + Integer.MAX_VALUE
+	},
+	service = PortletFilter.class
 )
-public class TestPortletEventFilter implements PortletFilter, EventFilter {
+public class TestPortletEventFilter implements EventFilter, PortletFilter {
 
 	@Override
 	public void destroy() {
@@ -46,13 +45,14 @@ public class TestPortletEventFilter implements PortletFilter, EventFilter {
 
 	@Override
 	public void doFilter(
-		EventRequest arg0, EventResponse arg1, FilterChain arg2) {
+		EventRequest eventRequest, EventResponse eventResponse,
+		FilterChain filterChain) {
 
 		return;
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws PortletException {
+	public void init(FilterConfig filterConfig) {
 		return;
 	}
 

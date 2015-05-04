@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.bundle.invokerfiltercontainerimpl;
 
-import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
@@ -47,13 +46,14 @@ public class TestPortletResourceFilter
 
 	@Override
 	public void doFilter(
-		ResourceRequest arg0, ResourceResponse arg1, FilterChain arg2) {
+		ResourceRequest resourceRequest, ResourceResponse resourceResponse,
+		FilterChain filterChain) {
 
 		return;
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws PortletException {
+	public void init(FilterConfig filterConfig) {
 		return;
 	}
 

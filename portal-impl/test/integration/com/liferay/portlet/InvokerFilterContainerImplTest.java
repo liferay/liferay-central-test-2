@@ -57,8 +57,8 @@ public class InvokerFilterContainerImplTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-				new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
-				new SyntheticBundleRule("bundle.invokerfiltercontainerimpl"));
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			new SyntheticBundleRule("bundle.invokerfiltercontainerimpl"));
 
 	@BeforeClass
 	public static void setUpClass() {
@@ -71,12 +71,14 @@ public class InvokerFilterContainerImplTest {
 		String servletContextName = servletContext.getServletContextName();
 
 		PortletAppImpl portletAppImpl = new PortletAppImpl(servletContextName);
+
 		portletAppImpl.setWARFile(false);
 
 		Portlet portlet = new PortletImpl();
+
+		portlet.setPortletApp(portletAppImpl);
 		portlet.setPortletClass("com.liferay.portlet.StrutsPortlet");
 		portlet.setPortletId("testPortletFilter");
-		portlet.setPortletApp(portletAppImpl);
 
 		PortletContext portletContext = PortletContextFactory.create(
 			portlet, servletContext);
@@ -85,7 +87,7 @@ public class InvokerFilterContainerImplTest {
 			_invokerFilterContainerImpl = new InvokerFilterContainerImpl(
 				portlet, portletContext);
 		}
-		catch (PortletException e) {
+		catch (PortletException pe) {
 		}
 	}
 
@@ -95,16 +97,16 @@ public class InvokerFilterContainerImplTest {
 	}
 
 	@Test
-	public void testGetActionFilters() throws PortletException {
-		String className = TestPortletActionFilter.class.getName();
-
+	public void testGetActionFilters() {
 		List<ActionFilter> actionFilters =
 			_invokerFilterContainerImpl.getActionFilters();
 
 		for (ActionFilter actionFilter : actionFilters) {
 			Class<?> clazz = actionFilter.getClass();
 
-			if (className.equals(clazz.getName())) {
+			String className = clazz.getName();
+
+			if (className.equals(TestPortletActionFilter.class.getName())) {
 				return;
 			}
 		}
@@ -114,15 +116,15 @@ public class InvokerFilterContainerImplTest {
 
 	@Test
 	public void testGetEventFilters() {
-		String className = TestPortletEventFilter.class.getName();
-
 		List<EventFilter> eventFilters =
 			_invokerFilterContainerImpl.getEventFilters();
 
 		for (EventFilter eventFilter : eventFilters) {
 			Class<?> clazz = eventFilter.getClass();
 
-			if (className.equals(clazz.getName())) {
+			String className = clazz.getName();
+
+			if (className.equals(TestPortletEventFilter.class.getName())) {
 				return;
 			}
 		}
@@ -132,15 +134,15 @@ public class InvokerFilterContainerImplTest {
 
 	@Test
 	public void testGetRenderFilters() {
-		String className = TestPortletRenderFilter.class.getName();
-
 		List<RenderFilter> renderFilters =
 			_invokerFilterContainerImpl.getRenderFilters();
 
 		for (RenderFilter renderFilter : renderFilters) {
 			Class<?> clazz = renderFilter.getClass();
 
-			if (className.equals(clazz.getName())) {
+			String className = clazz.getName();
+
+			if (className.equals(TestPortletRenderFilter.class.getName())) {
 				return;
 			}
 		}
@@ -150,15 +152,15 @@ public class InvokerFilterContainerImplTest {
 
 	@Test
 	public void testGetResourceFilters() {
-		String className = TestPortletResourceFilter.class.getName();
-
 		List<ResourceFilter> resourceFilters =
 			_invokerFilterContainerImpl.getResourceFilters();
 
 		for (ResourceFilter resourceFilter : resourceFilters) {
 			Class<?> clazz = resourceFilter.getClass();
 
-			if (className.equals(clazz.getName())) {
+			String className = clazz.getName();
+
+			if (className.equals(TestPortletResourceFilter.class.getName())) {
 				return;
 			}
 		}

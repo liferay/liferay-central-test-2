@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.bundle.invokerfiltercontainerimpl;
 
-import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.filter.FilterChain;
@@ -46,13 +45,14 @@ public class TestPortletRenderFilter implements PortletFilter, RenderFilter {
 
 	@Override
 	public void doFilter(
-		RenderRequest arg0, RenderResponse arg1, FilterChain arg2) {
+		RenderRequest renderRequest, RenderResponse renderResponse,
+		FilterChain filterChain) {
 
 		return;
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws PortletException {
+	public void init(FilterConfig filterConfig) {
 		return;
 	}
 

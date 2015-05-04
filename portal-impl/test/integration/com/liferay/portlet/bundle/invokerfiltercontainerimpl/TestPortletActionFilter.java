@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletException;
 import javax.portlet.filter.ActionFilter;
 import javax.portlet.filter.FilterChain;
 import javax.portlet.filter.FilterConfig;
@@ -34,15 +33,15 @@ import org.osgi.service.component.annotations.Reference;
  * @author Peter Fellwock
  */
 @Component(
-		immediate = true,
-		property = {
-			"javax.portlet.name=testPortletFilter",
-			"preinitialized.filter=false",
-			"service.ranking:Integer=" + Integer.MAX_VALUE
-		},
-		service = PortletFilter.class
+	immediate = true,
+	property = {
+		"javax.portlet.name=testPortletFilter",
+		"preinitialized.filter=false",
+		"service.ranking:Integer=" + Integer.MAX_VALUE
+	},
+	service = PortletFilter.class
 )
-public class TestPortletActionFilter implements PortletFilter, ActionFilter {
+public class TestPortletActionFilter implements ActionFilter, PortletFilter {
 
 	@Override
 	public void destroy() {
@@ -51,13 +50,14 @@ public class TestPortletActionFilter implements PortletFilter, ActionFilter {
 
 	@Override
 	public void doFilter(
-		ActionRequest arg0, ActionResponse arg1, FilterChain arg2) {
+		ActionRequest actionRequest, ActionResponse actionResponse,
+		FilterChain filterChain) {
 
 		return;
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws PortletException {
+	public void init(FilterConfig filterConfig) {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 
