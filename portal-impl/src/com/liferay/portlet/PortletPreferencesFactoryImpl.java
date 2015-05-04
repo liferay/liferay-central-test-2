@@ -899,9 +899,7 @@ public class PortletPreferencesFactoryImpl
 				PortletPreferencesFactoryImpl.class.getName());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"CacheKeyGenerator implementation: " +
-					cacheKeyGenerator.getClass());
+			_log.debug("Cache key generator " + cacheKeyGenerator.getClass());
 		}
 
 		return String.valueOf(cacheKeyGenerator.getCacheKey(xml));
