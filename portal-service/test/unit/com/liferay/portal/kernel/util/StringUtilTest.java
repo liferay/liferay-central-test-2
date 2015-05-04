@@ -68,9 +68,11 @@ public class StringUtilTest {
 
 		for (int i = 0; i < data.length; i++) {
 			Assert.assertEquals(
-				hexString.charAt(i * 2), _HEX_DIGITS[(data[i] & 0xFF) >> 4]);
+				hexString.charAt(i * 2),
+				StringUtil.HEX_DIGITS[(data[i] & 0xFF) >> 4]);
 			Assert.assertEquals(
-				hexString.charAt(i * 2 + 1), _HEX_DIGITS[data[i] & 0x0F]);
+				hexString.charAt(i * 2 + 1),
+				StringUtil.HEX_DIGITS[data[i] & 0x0F]);
 		}
 	}
 
@@ -903,10 +905,5 @@ public class StringUtilTest {
 				s, wildcard, CharPool.UNDERLINE, CharPool.PERCENT,
 				CharPool.BACK_SLASH, true));
 	}
-
-	private static final char[] _HEX_DIGITS = {
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-		'e', 'f'
-	};
 
 }

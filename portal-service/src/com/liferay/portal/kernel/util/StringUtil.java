@@ -229,8 +229,8 @@ public class StringUtil {
 		char[] chars = new char[bytes.length * 2];
 
 		for (int i = 0; i < bytes.length; i++) {
-			chars[i * 2] = _HEX_DIGITS[(bytes[i] & 0xFF) >> 4];
-			chars[i * 2 + 1] = _HEX_DIGITS[bytes[i] & 0x0F];
+			chars[i * 2] = HEX_DIGITS[(bytes[i] & 0xFF) >> 4];
+			chars[i * 2 + 1] = HEX_DIGITS[bytes[i] & 0x0F];
 		}
 
 		return new String(chars);
@@ -3948,7 +3948,7 @@ public class StringUtil {
 		int index = 8;
 
 		do {
-			buffer[--index] = _HEX_DIGITS[i & 15];
+			buffer[--index] = HEX_DIGITS[i & 15];
 
 			i >>>= 4;
 		}
@@ -3983,7 +3983,7 @@ public class StringUtil {
 		int index = 16;
 
 		do {
-			buffer[--index] = _HEX_DIGITS[(int) (l & 15)];
+			buffer[--index] = HEX_DIGITS[(int) (l & 15)];
 
 			l >>>= 4;
 		}
@@ -4829,7 +4829,7 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	private static final char[] _HEX_DIGITS = {
+	protected static final char[] HEX_DIGITS = {
 		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
 		'e', 'f'
 	};
