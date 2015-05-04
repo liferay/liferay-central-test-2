@@ -1,5 +1,5 @@
-Bundle-Name: Liferay Wiki Engine Creole Web
-Bundle-SymbolicName: com.liferay.wiki.engine.creole.web
+Bundle-Name: Liferay Wiki Engine Creole
+Bundle-SymbolicName: com.liferay.wiki.engine.creole
 Bundle-Version: 1.0.0
 Export-Package:
 Import-Package: *
