@@ -58,6 +58,7 @@ public class PortalImplTest {
 
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
+
 		mockHttpServletRequest.setParameter(
 			"_TestAlwaysAllowDoAsUser_actionName",
 			TestAlwaysAllowDoAsUser.ACTION_NAME);
@@ -67,22 +68,21 @@ public class PortalImplTest {
 		mockHttpServletRequest.setParameter(
 			"p_p_id", "TestAlwaysAllowDoAsUser");
 
-		Long userId = PortalUtil.getUserId(mockHttpServletRequest);
+		long userId = PortalUtil.getUserId(mockHttpServletRequest);
 
-		Assert.assertEquals(Long.valueOf("0"), new Long(userId));
-
+		Assert.assertEquals(0, userId);
 		Assert.assertTrue(_atomicState.isSet());
 
 		_atomicState.reset();
 
 		mockHttpServletRequest = new MockHttpServletRequest();
+
 		mockHttpServletRequest.setPathInfo(
 			"/TestAlwaysAllowDoAsUser/integration/test");
 
 		userId = PortalUtil.getUserId(mockHttpServletRequest);
 
-		Assert.assertEquals(Long.valueOf("0"), new Long(userId));
-
+		Assert.assertEquals(0, userId);
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
