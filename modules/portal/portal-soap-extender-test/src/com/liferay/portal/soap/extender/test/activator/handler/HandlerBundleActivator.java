@@ -46,7 +46,7 @@ public class HandlerBundleActivator implements BundleActivator {
 			_greeterBundleActivator.start(bundleContext);
 		}
 		catch (Exception e) {
-			cleanup(bundleContext);
+			cleanUp(bundleContext);
 
 			throw e;
 		}
@@ -54,10 +54,10 @@ public class HandlerBundleActivator implements BundleActivator {
 
 	@Override
 	public void stop(BundleContext bundleContext) {
-		cleanup(bundleContext);
+		cleanUp(bundleContext);
 	}
 
-	protected void cleanup(BundleContext bundleContext) {
+	protected void cleanUp(BundleContext bundleContext) {
 		try {
 			_greeterBundleActivator.stop(bundleContext);
 		}

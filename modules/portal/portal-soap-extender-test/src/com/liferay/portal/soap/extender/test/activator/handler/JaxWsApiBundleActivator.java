@@ -54,16 +54,16 @@ public class JaxWsApiBundleActivator implements BundleActivator {
 			binding.setHandlerChain(handlers);
 		}
 		catch (Exception e) {
-			cleanup(bundleContext);
+			cleanUp(bundleContext);
 		}
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) {
-		cleanup(bundleContext);
+		cleanUp(bundleContext);
 	}
 
-	protected void cleanup(BundleContext bundleContext) {
+	protected void cleanUp(BundleContext bundleContext) {
 		try {
 			_configurationAdminBundleActivator.stop(bundleContext);
 		}
