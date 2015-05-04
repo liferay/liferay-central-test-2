@@ -39,15 +39,15 @@ public class ModelListenerRegistrationUtilTest {
 
 	@Test
 	public void testGetModelListeners() {
-		String testClassName = TestModelListener.class.getName();
-
 		ModelListener<Contact>[] modelListeners =
 			ModelListenerRegistrationUtil.getModelListeners(Contact.class);
 
 		for (ModelListener<Contact> modelListener : modelListeners) {
 			Class<?> clazz = modelListener.getClass();
 
-			if (testClassName.equals(clazz.getName())) {
+			String className = clazz.getName();
+
+			if (className.equals(TestModelListener.class.getName())) {
 				return;
 			}
 		}
