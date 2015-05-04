@@ -38,10 +38,10 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 	public static final String JSON = "json";
 
 	public ItemSelectorCriterionSerializer(
-		T itemSelectorCriterion, String paramPrefix) {
+		T itemSelectorCriterion, String prefix) {
 
 		_itemSelectorCriterion = itemSelectorCriterion;
-		_paramPrefix = paramPrefix;
+		_prefix = prefix;
 
 		_initSerializableFields();
 	}
@@ -54,7 +54,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 		jsonSerializer.include(_serializableFields);
 
 		properties.put(
-			_paramPrefix + JSON,
+			_prefix + JSON,
 			new String[] {jsonSerializer.serialize(_itemSelectorCriterion)});
 
 		return properties;
@@ -62,7 +62,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 
 	public void setProperties(Map<String, String[]> parameters) {
 		try {
-			String json = parameters.get(_paramPrefix + JSON)[0];
+			String json = parameters.get(_prefix + JSON)[0];
 
 			JSONDeserializer<Map> jsonDeserializer =
 				JSONFactoryUtil.createJSONDeserializer();
@@ -134,7 +134,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 	}
 
 	private final T _itemSelectorCriterion;
-	private final String _paramPrefix;
+	private final String _prefix;
 	private String[] _serializableFields;
 
 }

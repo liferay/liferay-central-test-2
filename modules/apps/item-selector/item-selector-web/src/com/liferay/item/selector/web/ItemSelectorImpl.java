@@ -176,18 +176,18 @@ public class ItemSelectorImpl implements ItemSelector {
 			Class<? extends ItemSelectorCriterion> itemSelectorCriterionClass =
 				itemSelectorCriterionClasses.get(i);
 
-			String paramPrefix = i + "_";
+			String prefix = i + "_";
 
 			itemSelectorCriteria.add(
 				getItemSelectorCriterion(
-					parameters, paramPrefix, itemSelectorCriterionClass));
+					parameters, prefix, itemSelectorCriterionClass));
 		}
 
 		return itemSelectorCriteria;
 	}
 
 	protected <T extends ItemSelectorCriterion> T getItemSelectorCriterion(
-		Map<String, String[]> parameters, String paramPrefix,
+		Map<String, String[]> parameters, String prefix,
 		Class<T> itemSelectorCriterionClass) {
 
 		try {
@@ -200,7 +200,7 @@ public class ItemSelectorImpl implements ItemSelector {
 
 			ItemSelectorCriterionSerializer<?> itemSelectorCriterionSerializer =
 				new ItemSelectorCriterionSerializer<>(
-					itemSelectorCriterion, paramPrefix);
+					itemSelectorCriterion, prefix);
 
 			itemSelectorCriterionSerializer.setProperties(parameters);
 
@@ -254,12 +254,12 @@ public class ItemSelectorImpl implements ItemSelector {
 			ItemSelectorCriterion itemSelectorCriterion =
 				itemSelectorCriteria[i];
 
-			String paramPrefix = i + "_";
+			String prefix = i + "_";
 
 			populateDesiredReturnTypes(
-				parameters, paramPrefix, itemSelectorCriterion);
+				parameters, prefix, itemSelectorCriterion);
 			populateItemSelectorCriteria(
-				parameters, paramPrefix, itemSelectorCriterion);
+				parameters, prefix, itemSelectorCriterion);
 		}
 
 		return parameters;
@@ -307,7 +307,7 @@ public class ItemSelectorImpl implements ItemSelector {
 	}
 
 	protected void populateDesiredReturnTypes(
-		Map<String, String[]> parameters, String paramPrefix,
+		Map<String, String[]> parameters, String prefix,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		Set<Class<?>> desiredReturnTypes =
@@ -341,7 +341,7 @@ public class ItemSelectorImpl implements ItemSelector {
 		};
 
 		parameters.put(
-			paramPrefix + "desiredReturnTypes",
+			prefix + "desiredReturnTypes",
 			new String[] {
 				ArrayUtil.toString(
 					desiredReturnTypes.toArray(
@@ -351,13 +351,13 @@ public class ItemSelectorImpl implements ItemSelector {
 	}
 
 	protected void populateItemSelectorCriteria(
-		Map<String, String[]> parameters, String paramPrefix,
+		Map<String, String[]> parameters, String prefix,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		ItemSelectorCriterionSerializer<ItemSelectorCriterion>
 			itemSelectorCriterionSerializer =
 				new ItemSelectorCriterionSerializer<>(
-					itemSelectorCriterion, paramPrefix);
+					itemSelectorCriterion, prefix);
 
 		parameters.putAll(itemSelectorCriterionSerializer.getProperties());
 	}
