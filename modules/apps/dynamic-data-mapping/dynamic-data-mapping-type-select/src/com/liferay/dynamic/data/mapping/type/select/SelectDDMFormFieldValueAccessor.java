@@ -43,7 +43,7 @@ public class SelectDDMFormFieldValueAccessor
 			return JSONFactoryUtil.createJSONArray(value.getString(locale));
 		}
 		catch (JSONException jsone) {
-			_log.error("Unable to parse JSON array.", jsone);
+			_log.error("Unable to parse JSON array", jsone);
 
 			return _EMPTY_JSON_ARRAY;
 		}
