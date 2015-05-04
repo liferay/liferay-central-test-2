@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = PortletFilter.class
 )
-public class TestEventFilter implements EventFilter, PortletFilter {
+public class TestEventFilter implements EventFilter {
 
 	@Override
 	public void destroy() {

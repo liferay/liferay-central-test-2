@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = PortletFilter.class
 )
-public class TestResourceFilter implements PortletFilter, ResourceFilter {
+public class TestResourceFilter implements ResourceFilter {
 
 	@Override
 	public void destroy() {
