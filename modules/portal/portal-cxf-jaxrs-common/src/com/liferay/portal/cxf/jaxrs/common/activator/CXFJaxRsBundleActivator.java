@@ -45,10 +45,15 @@ public class CXFJaxRsBundleActivator implements BundleActivator {
 
 		thread.setContextClassLoader(bundleClassLoader);
 
-		//INIT CACHE inside RuntimeDelegate so it is never looked up again
-		RuntimeDelegate.getInstance();
+		try {
 
-		thread.setContextClassLoader(contextClassLoader);
+			// Initialize instance so it is never looked up again
+
+			RuntimeDelegate.getInstance();
+		}
+		finally {
+			thread.setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	@Override
