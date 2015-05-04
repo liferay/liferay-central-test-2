@@ -90,9 +90,8 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 					_itemSelectorCriterion, serializableField, value);
 			}
 		}
-		catch (
-			IllegalAccessException | NoSuchMethodException |
-				InvocationTargetException e) {
+		catch (IllegalAccessException | InvocationTargetException |
+			NoSuchMethodException e) {
 
 			throw new SystemException(e);
 		}
@@ -115,9 +114,8 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 				list.add(key);
 			}
 		}
-		catch (
-			IllegalAccessException | InvocationTargetException |
-				NoSuchMethodException e) {
+		catch (IllegalAccessException | InvocationTargetException |
+			NoSuchMethodException e) {
 
 			throw new SystemException(e);
 		}
