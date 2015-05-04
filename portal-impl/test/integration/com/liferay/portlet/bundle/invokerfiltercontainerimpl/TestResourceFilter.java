@@ -14,34 +14,29 @@
 
 package com.liferay.portlet.bundle.invokerfiltercontainerimpl;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
-
-import java.util.concurrent.atomic.AtomicReference;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.filter.ActionFilter;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
 import javax.portlet.filter.FilterConfig;
 import javax.portlet.filter.PortletFilter;
+import javax.portlet.filter.ResourceFilter;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Philip Jones
  * @author Peter Fellwock
  */
 @Component(
-	immediate = true,
-	property = {
-		"javax.portlet.name=testPortletFilter",
-		"preinitialized.filter=false",
-		"service.ranking:Integer=" + Integer.MAX_VALUE
-	},
-	service = PortletFilter.class
+		immediate = true,
+		property = {
+			"javax.portlet.name=testPortletFilter",
+			"preinitialized.filter=true",
+			"service.ranking:Integer=" + Integer.MAX_VALUE
+		},
+		service = PortletFilter.class
 )
-public class TestPortletActionFilter implements ActionFilter, PortletFilter {
+public class TestResourceFilter implements PortletFilter, ResourceFilter {
 
 	@Override
 	public void destroy() {
@@ -50,7 +45,7 @@ public class TestPortletActionFilter implements ActionFilter, PortletFilter {
 
 	@Override
 	public void doFilter(
-		ActionRequest actionRequest, ActionResponse actionResponse,
+		ResourceRequest resourceRequest, ResourceResponse resourceResponse,
 		FilterChain filterChain) {
 
 		return;
@@ -58,14 +53,7 @@ public class TestPortletActionFilter implements ActionFilter, PortletFilter {
 
 	@Override
 	public void init(FilterConfig filterConfig) {
-		_atomicReference.set(StackTraceUtil.getCallerKey());
+		return;
 	}
-
-	@Reference(target = "(test=AtomicState)")
-	protected void getAtomicReference(AtomicReference<String> atomicReference) {
-		_atomicReference = atomicReference;
-	}
-
-	private AtomicReference<String> _atomicReference;
 
 }

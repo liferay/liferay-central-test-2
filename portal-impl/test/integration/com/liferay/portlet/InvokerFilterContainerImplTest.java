@@ -24,10 +24,10 @@ import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portal.test.rule.callback.MainServletTestCallback;
 import com.liferay.portal.util.test.AtomicState;
-import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestPortletActionFilter;
-import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestPortletEventFilter;
-import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestPortletRenderFilter;
-import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestPortletResourceFilter;
+import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestActionFilter;
+import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestEventFilter;
+import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestRenderFilter;
+import com.liferay.portlet.bundle.invokerfiltercontainerimpl.TestResourceFilter;
 
 import java.util.List;
 
@@ -106,7 +106,7 @@ public class InvokerFilterContainerImplTest {
 
 			String className = clazz.getName();
 
-			if (className.equals(TestPortletActionFilter.class.getName())) {
+			if (className.equals(TestActionFilter.class.getName())) {
 				return;
 			}
 		}
@@ -124,7 +124,7 @@ public class InvokerFilterContainerImplTest {
 
 			String className = clazz.getName();
 
-			if (className.equals(TestPortletEventFilter.class.getName())) {
+			if (className.equals(TestEventFilter.class.getName())) {
 				return;
 			}
 		}
@@ -142,7 +142,7 @@ public class InvokerFilterContainerImplTest {
 
 			String className = clazz.getName();
 
-			if (className.equals(TestPortletRenderFilter.class.getName())) {
+			if (className.equals(TestRenderFilter.class.getName())) {
 				return;
 			}
 		}
@@ -160,7 +160,7 @@ public class InvokerFilterContainerImplTest {
 
 			String className = clazz.getName();
 
-			if (className.equals(TestPortletResourceFilter.class.getName())) {
+			if (className.equals(TestResourceFilter.class.getName())) {
 				return;
 			}
 		}
