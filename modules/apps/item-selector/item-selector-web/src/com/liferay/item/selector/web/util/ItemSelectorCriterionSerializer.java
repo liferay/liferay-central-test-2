@@ -64,7 +64,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 		try {
 			String json = parameters.get(_prefix + JSON)[0];
 
-			JSONDeserializer<Map> jsonDeserializer =
+			JSONDeserializer<Map<String, ?>> jsonDeserializer =
 				JSONFactoryUtil.createJSONDeserializer();
 
 			Map<String, ?> map = jsonDeserializer.deserialize(json);
