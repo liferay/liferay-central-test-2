@@ -7,7 +7,7 @@ Bundle-ClassPath:\
 	lib/javax.json-api.jar,\
 	lib/javax.ws.rs-api.jar,\
 	lib/jettison.jar
-Bundle-Name: Liferay Portal CXF JAXRS Common
+Bundle-Name: Liferay Portal CXF JAX-RS Common
 Bundle-SymbolicName: com.liferay.portal.cxf.jaxrs.common
 Bundle-Version: 1.0.0
 Export-Package:\
