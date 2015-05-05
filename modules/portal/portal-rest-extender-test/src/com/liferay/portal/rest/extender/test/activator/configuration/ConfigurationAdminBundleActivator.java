@@ -67,10 +67,10 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			properties = new Hashtable<>();
 
+			properties.put("contextPaths", new String[] {"/rest-test"});
 			properties.put(
 				"jaxRsApplicationFilterStrings",
 				new String[] {"(jaxrs.application=true)"});
-			properties.put("contextPaths", new String[] {"/rest-test"});
 
 			_restConfiguration.update(properties);
 
