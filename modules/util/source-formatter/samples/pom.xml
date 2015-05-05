@@ -11,7 +11,6 @@
 	<name>Sample Source Formatter Project</name>
 	<version>1.0.0</version>
 	<description>Sample Source Formatter Project</description>
-
 	<build>
 		<plugins>
 			<plugin>
