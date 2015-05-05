@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 
 /**
  * @author Raymond Augé
@@ -31,9 +30,11 @@ import org.apache.maven.plugin.MojoFailureException;
 public class SourceFormatterMojo extends AbstractMojo {
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void execute() throws MojoExecutionException, MojoFailureException {
+	public void execute() throws MojoExecutionException {
 		try {
+			@SuppressWarnings("rawtypes")
+			Map pluginContext = getPluginContext();
+
 			SourceFormatter sourceFormatter = new SourceFormatter(
 				_sourceFormatterArgs);
 
@@ -41,8 +42,6 @@ public class SourceFormatterMojo extends AbstractMojo {
 
 			List<String> modifiedFileNames =
 				sourceFormatter.getModifiedFileNames();
-
-			Map pluginContext = getPluginContext();
 
 			pluginContext.put(
 				SourceFormatterArgs.OUTPUT_KEY_MODIFIED_FILES,
