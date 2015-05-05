@@ -17,7 +17,6 @@ package com.liferay.portal.comment;
 import com.liferay.portal.kernel.comment.Comment;
 import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.comment.Discussion;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.service.ServiceContext;
 
@@ -62,9 +61,8 @@ public class DummyCommentManagerImpl implements CommentManager {
 
 	@Override
 	public Discussion getDiscussion(
-			long userId, long groupId, String className, long classPK,
-			ServiceContext serviceContext)
-		throws PortalException {
+		long userId, long groupId, String className, long classPK,
+		ServiceContext serviceContext) {
 
 		return _discussion;
 	}

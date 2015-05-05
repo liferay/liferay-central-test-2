@@ -69,7 +69,7 @@ public class MBCommentSectionDisplayContext
 	}
 
 	@Override
-	public boolean isMessageThreadVisible() throws PortalException {
+	public boolean isMessageThreadVisible() {
 		if ((_rootComment != null) &&
 			(_rootComment.getThreadCommentsCount() > 1)) {
 
