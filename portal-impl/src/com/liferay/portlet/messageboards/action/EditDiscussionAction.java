@@ -285,11 +285,6 @@ public class EditDiscussionAction extends PortletAction {
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 		long parentMessageId = ParamUtil.getLong(
 			actionRequest, "parentMessageId");
-		String subject = ParamUtil.getString(actionRequest, "subject");
-		String body = ParamUtil.getString(actionRequest, "body");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			MBMessage.class.getName(), actionRequest);
 
 		if ((threadId == 0) && (parentMessageId != 0)) {
 			MBMessage parentMessage = MBMessageServiceUtil.getMessage(
@@ -297,6 +292,12 @@ public class EditDiscussionAction extends PortletAction {
 
 			threadId = parentMessage.getThreadId();
 		}
+
+		String subject = ParamUtil.getString(actionRequest, "subject");
+		String body = ParamUtil.getString(actionRequest, "body");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = null;
 
