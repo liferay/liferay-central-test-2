@@ -164,7 +164,6 @@ public class MBCommentManagerImpl implements CommentManager {
 
 			ratingsEntries = RatingsEntryLocalServiceUtil.getEntries(
 				userId, CommentConstants.getDiscussionClassName(), classPKs);
-
 			ratingsStats = RatingsStatsLocalServiceUtil.getStats(
 				CommentConstants.getDiscussionClassName(), classPKs);
 		}
