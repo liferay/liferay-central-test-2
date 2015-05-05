@@ -1843,7 +1843,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					StringPool.BLANK, WorkflowConstants.STATUS_APPROVED,
 					_userId, _userName, _createDate);
 
-				// Asset Entry
+				// Asset entry
 
 				addAssetEntry(
 					increment(), _groupId, _companyId, _userId, _userName,
