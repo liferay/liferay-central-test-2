@@ -28,8 +28,6 @@ request.setAttribute("liferay-ui:discussion:index", new Integer(index));
 
 String randomNamespace = (String)request.getAttribute("liferay-ui:discussion:randomNamespace");
 
-Comment rootComment = discussion.getRootComment();
-
 DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
 DiscussionRequestHelper discussionRequestHelper = new DiscussionRequestHelper(request);
 
@@ -88,6 +86,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					</aui:a>
 
 					<%
+					Comment rootComment = discussion.getRootComment();
+
 					Date createDate = comment.getCreateDate();
 
 					String createDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true);
