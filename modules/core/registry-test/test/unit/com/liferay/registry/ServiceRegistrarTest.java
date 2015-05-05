@@ -43,12 +43,13 @@ public class ServiceRegistrarTest {
 		try {
 			serviceRegistration1 = serviceRegistrar.registerService(
 				Foo.class, new Foo());
-
 			serviceRegistration2 = serviceRegistrar.registerService(
 				Foo.class, new Foo());
 
-			Assert.assertEquals(
-				2, serviceRegistrar.getServiceRegistrations().size());
+			Collection<ServiceRegistration<Foo>> serviceRegistrations =
+				serviceRegistrar.getServiceRegistrations();
+
+			Assert.assertEquals(2, serviceRegistrations.size());
 
 			Collection<Foo> services = registry.getServices(Foo.class, null);
 
