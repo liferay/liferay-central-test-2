@@ -1830,6 +1830,28 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					DLFileEntryConstants.VERSION_DEFAULT, file.length(),
 					DLFileEntryConstants.DEFAULT_READ_COUNT, 0, 0, 0, 0, false);
 
+				// Resource permissions
+
+				addResourcePermissions(
+					0, increment(), _companyId, DLFileEntry.class.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL, fileEntryId,
+					getRoleId(RoleConstants.OWNER), _userId,
+					getActionIdsLong(_ownerPermissions));
+
+				if (_groupId > 0) {
+					addResourcePermissions(
+						0, increment(), _companyId, DLFileEntry.class.getName(),
+						ResourceConstants.SCOPE_INDIVIDUAL, fileEntryId,
+						getRoleId(RoleConstants.SITE_MEMBER), 0,
+						getActionIdsLong(_groupPermissions));
+				}
+
+				addResourcePermissions(
+					0, increment(), _companyId, DLFileEntry.class.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL, fileEntryId,
+					getRoleId(RoleConstants.GUEST), 0,
+					getActionIdsLong(_guestPermissions));
+
 				// File version
 
 				addDLFileVersion(
@@ -1854,28 +1876,6 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					false, null, null, null, null,
 					MimeTypesUtil.getContentType(fileName), fileName,
 					StringPool.BLANK, StringPool.BLANK, null, null, 0, 0, 0, 0);
-
-				// Resource permissions
-
-				addResourcePermissions(
-					0, increment(), _companyId, DLFileEntry.class.getName(),
-					ResourceConstants.SCOPE_INDIVIDUAL, fileEntryId,
-					getRoleId(RoleConstants.OWNER), _userId,
-					getActionIdsLong(_ownerPermissions));
-
-				if (_groupId > 0) {
-					addResourcePermissions(
-						0, increment(), _companyId, DLFileEntry.class.getName(),
-						ResourceConstants.SCOPE_INDIVIDUAL, fileEntryId,
-						getRoleId(RoleConstants.SITE_MEMBER), 0,
-						getActionIdsLong(_groupPermissions));
-				}
-
-				addResourcePermissions(
-					0, increment(), _companyId, DLFileEntry.class.getName(),
-					ResourceConstants.SCOPE_INDIVIDUAL, fileEntryId,
-					getRoleId(RoleConstants.GUEST), 0,
-					getActionIdsLong(_guestPermissions));
 
 				// File
 
