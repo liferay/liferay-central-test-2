@@ -66,10 +66,10 @@ public class DummyCommentManagerImpl implements CommentManager {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		return EMPTY_DISCUSSION;
+		return _discussion;
 	}
 
-	private static final Discussion EMPTY_DISCUSSION = new Discussion() {
+	private static final Discussion _discussion = new Discussion() {
 
 		@Override
 		public boolean isMaxCommentsLimitExceeded() {
