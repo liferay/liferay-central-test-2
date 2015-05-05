@@ -145,7 +145,7 @@ public class BasicRegistryImpl implements Registry {
 
 	@Override
 	public <T> ServiceRegistrar<T> getServiceRegistrar(Class<T> clazz) {
-		return new ServiceRegistrar(this, clazz);
+		return new ServiceRegistrar<T>(this, clazz);
 	}
 
 	@Override
