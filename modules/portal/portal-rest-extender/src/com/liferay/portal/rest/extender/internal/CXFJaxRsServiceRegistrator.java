@@ -98,7 +98,7 @@ public class CXFJaxRsServiceRegistrator {
 	protected void registerApplication(Bus bus, Application application) {
 		RuntimeDelegate runtimeDelegate = RuntimeDelegate.getInstance();
 
-		JAXRSServerFactoryBean jaxrsServerFactoryBean =
+		JAXRSServerFactoryBean jaxRsServerFactoryBean =
 			runtimeDelegate.createEndpoint(
 				application, JAXRSServerFactoryBean.class);
 
@@ -109,23 +109,23 @@ public class CXFJaxRsServiceRegistrator {
 		jsonProvider.setSerializeAsArray(true);
 		jsonProvider.setSupportUnwrapped(true);
 
-		jaxrsServerFactoryBean.setBus(bus);
-		jaxrsServerFactoryBean.setProperties(_properties);
-		jaxrsServerFactoryBean.setProvider(jsonProvider);
+		jaxRsServerFactoryBean.setBus(bus);
+		jaxRsServerFactoryBean.setProperties(_properties);
+		jaxRsServerFactoryBean.setProvider(jsonProvider);
 
 		for (Object provider : _providers) {
-			jaxrsServerFactoryBean.setProvider(provider);
+			jaxRsServerFactoryBean.setProvider(provider);
 		}
 
 		for (Object service : _services) {
-			jaxrsServerFactoryBean.setServiceBean(service);
+			jaxRsServerFactoryBean.setServiceBean(service);
 		}
 
 		for (Object service : _services) {
-			jaxrsServerFactoryBean.setServiceBean(service);
+			jaxRsServerFactoryBean.setServiceBean(service);
 		}
 
-		Server server = jaxrsServerFactoryBean.create();
+		Server server = jaxRsServerFactoryBean.create();
 
 		server.start();
 
