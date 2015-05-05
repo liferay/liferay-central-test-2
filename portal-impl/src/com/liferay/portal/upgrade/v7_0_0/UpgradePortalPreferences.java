@@ -54,12 +54,12 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 
 		Element rootElement = document.getRootElement();
 
-		Iterator<Element> itr = rootElement.elementIterator();
+		Iterator<Element> iterator = rootElement.elementIterator();
 
 		Map<String, String> stagingPreferencesMap = new HashMap<>();
 
-		while (itr.hasNext()) {
-			Element preferenceElement = itr.next();
+		while (iterator.hasNext()) {
+			Element preferenceElement = iterator.next();
 
 			String preferenceName = preferenceElement.elementText("name");
 
