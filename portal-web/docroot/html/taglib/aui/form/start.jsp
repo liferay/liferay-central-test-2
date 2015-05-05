@@ -18,6 +18,7 @@
 
 <%
 String encType = (String)dynamicAttributes.get("enctype");
+
 String authToken = HttpUtil.getParameter(action, "p_auth", false);
 
 boolean moveAuthToken = false;
