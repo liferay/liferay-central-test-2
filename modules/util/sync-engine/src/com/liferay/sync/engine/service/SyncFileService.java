@@ -199,11 +199,11 @@ public class SyncFileService {
 
 				@Override
 				public Object call() throws Exception {
-					List<SyncFile> syncFiles =
+					List<SyncFile> childSyncFiles =
 						_syncFilePersistence.findByParentFilePathName(
 							syncFile.getFilePathName());
 
-					for (SyncFile childSyncFile : syncFiles) {
+					for (SyncFile childSyncFile : childSyncFiles) {
 						childSyncFile.setUiEvent(syncFile.getUiEvent());
 
 						doDeleteSyncFile(childSyncFile, notify);
