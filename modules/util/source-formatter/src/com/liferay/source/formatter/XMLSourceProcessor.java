@@ -1242,44 +1242,47 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		"**\\*.testxml", "**\\*.xml"
 	};
 
-	private static Pattern _commentPattern1 = Pattern.compile(
+	private static final Pattern _commentPattern1 = Pattern.compile(
 		">\n\t+<!--[\n ]");
-	private static Pattern _commentPattern2 = Pattern.compile(
+	private static final Pattern _commentPattern2 = Pattern.compile(
 		"[\t ]-->\n[\t<]");
 
 	private List<String> _columnNames;
 	private List<String> _numericalPortletNameElementExclusionFiles;
-	private Pattern _poshiClosingTagPattern = Pattern.compile("</[^>/]*>");
-	private Pattern _poshiCommandsPattern = Pattern.compile(
+	private final Pattern _poshiClosingTagPattern = Pattern.compile(
+		"</[^>/]*>");
+	private final Pattern _poshiCommandsPattern = Pattern.compile(
 		"\\<command.*name=\\\"([^\\\"]*)\\\".*\\>[\\s\\S]*?\\</command\\>" +
 			"[\\n|\\t]*?(?:[^(?:/\\>)]*?--\\>)*+");
-	private Pattern _poshiElementWithNoChildPattern = Pattern.compile(
+	private final Pattern _poshiElementWithNoChildPattern = Pattern.compile(
 		"\\\"[\\s]*\\>[\\n\\s\\t]*\\</[a-z\\-]+>");
-	private Pattern _poshiEndLinesAfterClosingElementPattern = Pattern.compile(
-		"(\\</[a-z\\-]+>)(\\n+)\\t*\\<[a-z]+");
-	private Pattern _poshiEndLinesBeforeClosingElementPattern = Pattern.compile(
-		"(\\n+)(\\t*</[a-z\\-]+>)");
-	private Pattern _poshiEndLinesPattern = Pattern.compile(
+	private final Pattern _poshiEndLinesAfterClosingElementPattern =
+		Pattern.compile("(\\</[a-z\\-]+>)(\\n+)\\t*\\<[a-z]+");
+	private final Pattern _poshiEndLinesBeforeClosingElementPattern =
+		Pattern.compile("(\\n+)(\\t*</[a-z\\-]+>)");
+	private final Pattern _poshiEndLinesPattern = Pattern.compile(
 		"\\>\\n\\n\\n+(\\t*\\<)");
-	private Pattern _poshiOpeningTagPattern = Pattern.compile(
+	private final Pattern _poshiOpeningTagPattern = Pattern.compile(
 		"<[^/][^>]*[^/]>");
-	private Pattern _poshiQuoteWithSlashPattern = Pattern.compile(
+	private final Pattern _poshiQuoteWithSlashPattern = Pattern.compile(
 		"\"[^\"]*\\>[^\"]*\"");
-	private Pattern _poshiSetUpPattern = Pattern.compile(
+	private final Pattern _poshiSetUpPattern = Pattern.compile(
 		"\\n[\\t]++\\<set-up\\>([\\s\\S]*?)\\</set-up\\>" +
 			"[\\n|\\t]*?(?:[^(?:/\\>)]*?--\\>)*+\\n");
-	private Pattern _poshiTabsPattern = Pattern.compile("\\n*([ \\t]*<).*");
-	private Pattern _poshiTearDownPattern = Pattern.compile(
+	private final Pattern _poshiTabsPattern = Pattern.compile(
+		"\\n*([ \\t]*<).*");
+	private final Pattern _poshiTearDownPattern = Pattern.compile(
 		"\\n[\\t]++\\<tear-down\\>([\\s\\S]*?)\\</tear-down\\>" +
 			"[\\n|\\t]*?(?:[^(?:/\\>)]*?--\\>)*+\\n");
-	private Pattern _poshiVariableLinePattern = Pattern.compile(
+	private final Pattern _poshiVariableLinePattern = Pattern.compile(
 		"([\\t]*+)(\\<var name=\\\"([^\\\"]*)\\\".*?/\\>.*+(?:\\</var\\>)??)");
-	private Pattern _poshiVariablesBlockPattern = Pattern.compile(
+	private final Pattern _poshiVariablesBlockPattern = Pattern.compile(
 		"((?:[\\t]*+\\<var.*?\\>\\n[\\t]*+){2,}?)" +
 			"(?:(?:\\n){1,}+|\\</execute\\>)");
-	private Pattern _poshiWholeTagPattern = Pattern.compile("<[^\\>^/]*\\/>");
+	private final Pattern _poshiWholeTagPattern = Pattern.compile(
+		"<[^\\>^/]*\\/>");
 	private String _tablesContent;
-	private Pattern _whereNotInSQLPattern = Pattern.compile(
+	private final Pattern _whereNotInSQLPattern = Pattern.compile(
 		"WHERE[ \t\n]+\\(*[a-zA-z0-9.]+ NOT IN");
 	private List<String> _xmlExclusionFiles;
 

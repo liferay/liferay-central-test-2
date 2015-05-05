@@ -1721,7 +1721,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	private SourceMismatchException _firstSourceMismatchException;
 	private Set<String> _immutableFieldTypes;
 	private String _mainReleaseVersion;
-	private List<String> _modifiedFileNames = new ArrayList<>();
+	private final List<String> _modifiedFileNames = new ArrayList<>();
 	private String _oldCopyright;
 	private Properties _portalLanguageProperties;
 	private Properties _properties;

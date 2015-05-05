@@ -108,7 +108,9 @@ public class CSSSourceProcessor extends BaseSourceProcessor {
 
 	private static final String[] _INCLUDES = {"**\\*.css"};
 
-	private Pattern _commentPattern = Pattern.compile("/\\* -+(.+)-+ \\*/");
-	private Pattern _hexColorPattern = Pattern.compile("#([0-9a-f]+)[\\( ;,]");
+	private final Pattern _commentPattern =
+		Pattern.compile("/\\* -+(.+)-+ \\*/");
+	private final Pattern _hexColorPattern = Pattern.compile(
+		"#([0-9a-f]+)[\\( ;,]");
 
 }
