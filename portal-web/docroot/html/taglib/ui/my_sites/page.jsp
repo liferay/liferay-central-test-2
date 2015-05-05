@@ -105,7 +105,7 @@ List<Group> mySiteGroups = user.getMySiteGroups(classNames, includeControlPanel,
 							}
 						}
 
-						long originalDoAsGroupId = themeDisplay.getDoAsGroupId();
+						long doAsGroupId = themeDisplay.getDoAsGroupId();
 
 						try {
 						%>
@@ -213,7 +213,7 @@ List<Group> mySiteGroups = user.getMySiteGroups(classNames, includeControlPanel,
 						<%
 						}
 						finally {
-							themeDisplay.setDoAsGroupId(originalDoAsGroupId);
+							themeDisplay.setDoAsGroupId(doAsGroupId);
 						}
 						%>
 
