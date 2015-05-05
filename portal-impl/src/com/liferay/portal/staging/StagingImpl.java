@@ -1589,8 +1589,8 @@ public class StagingImpl implements Staging {
 
 		try {
 			setRecentLayoutAttribute(
-				portalPreferences, layoutSetBranchId,
-				getRecentLayoutSetBranchIdKey(layoutSetId));
+				portalPreferences, getRecentLayoutSetBranchIdKey(layoutSetId),
+				layoutSetBranchId);
 		}
 		catch (JSONException jsone) {
 			if (_log.isWarnEnabled()) {
@@ -2344,8 +2344,9 @@ public class StagingImpl implements Staging {
 
 		try {
 			setRecentLayoutAttribute(
-				portalPreferences, layoutBranchId,
-				getRecentLayoutBranchIdKey(layoutSetBranchId, plid));
+				portalPreferences,
+				getRecentLayoutBranchIdKey(layoutSetBranchId, plid),
+				layoutBranchId);
 		}
 		catch (JSONException jsone) {
 			if (_log.isWarnEnabled()) {
@@ -2381,8 +2382,9 @@ public class StagingImpl implements Staging {
 			}
 			else {
 				setRecentLayoutAttribute(
-					portalPreferences, layoutRevisionId,
-					getRecentLayoutRevisionIdKey(layoutSetBranchId, plid));
+					portalPreferences,
+					getRecentLayoutRevisionIdKey(layoutSetBranchId, plid),
+					layoutRevisionId);
 			}
 		}
 		catch (PortalException pe) {
@@ -2496,7 +2498,7 @@ public class StagingImpl implements Staging {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(
 			preferencesString);
 
-		for (int i = 0; i < jsonArray.length(); i ++) {
+		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			if (jsonObject.has(layoutAttributeKey)) {
@@ -2509,8 +2511,8 @@ public class StagingImpl implements Staging {
 	}
 
 	private void setRecentLayoutAttribute(
-			PortalPreferences portalPreferences, long value,
-			String layoutAttributeKey)
+			PortalPreferences portalPreferences, String layoutAttributeKey,
+			long value)
 		throws JSONException {
 
 		String oldPortalPreferences = portalPreferences.getValue(
@@ -2524,7 +2526,7 @@ public class StagingImpl implements Staging {
 
 		boolean alreadyExists = false;
 
-		for (int i = 0; i < oldJsonArray.length(); i ++) {
+		for (int i = 0; i < oldJsonArray.length(); i++) {
 			JSONObject jsonObject = oldJsonArray.getJSONObject(i);
 
 			if (Validator.isNotNull(jsonObject.getString(layoutAttributeKey))) {
