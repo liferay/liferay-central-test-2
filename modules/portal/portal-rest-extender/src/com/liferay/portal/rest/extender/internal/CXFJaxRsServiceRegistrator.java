@@ -122,10 +122,6 @@ public class CXFJaxRsServiceRegistrator {
 			jaxRsServerFactoryBean.setServiceBean(service);
 		}
 
-		for (Object service : _services) {
-			jaxRsServerFactoryBean.setServiceBean(service);
-		}
-
 		Server server = jaxRsServerFactoryBean.create();
 
 		server.start();
