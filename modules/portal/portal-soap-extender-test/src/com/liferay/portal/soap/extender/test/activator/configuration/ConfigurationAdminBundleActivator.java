@@ -28,8 +28,6 @@ import org.osgi.service.cm.ConfigurationAdmin;
  */
 public class ConfigurationAdminBundleActivator implements BundleActivator {
 
-	public static final String _TEST_CONTEXT_PATH = "/soap-test";
-
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		ServiceReference<ConfigurationAdmin> serviceReference =
@@ -44,7 +42,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
-			properties.put("contextPath", _TEST_CONTEXT_PATH);
+			properties.put("contextPath", "/soap-test");
 
 			_cxfConfiguration.update(properties);
 
@@ -53,7 +51,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			properties = new Hashtable<>();
 
-			properties.put("contextPath", _TEST_CONTEXT_PATH);
+			properties.put("contextPath", "/soap-test");
 			properties.put("timeout", 10000);
 
 			_jaxWsApiConfiguration.update(properties);
@@ -63,7 +61,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			properties = new Hashtable<>();
 
-			properties.put("contextPaths", new String[] {_TEST_CONTEXT_PATH});
+			properties.put("contextPaths", new String[] {"/soap-test"});
 			properties.put(
 				"jaxWsHandlerFilterStrings", new String[] {"(soap.address=*)"});
 			properties.put(
