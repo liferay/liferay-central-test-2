@@ -200,7 +200,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 				<SR, ServiceReferenceServiceTuple<SR, TS, K>> {
 
 		@Override
-		@SuppressWarnings({"rawtypes","unchecked"})
+		@SuppressWarnings({"rawtypes", "unchecked"})
 		public ServiceReferenceServiceTuple<SR, TS, K> addingService(
 			final ServiceReference<SR> serviceReference) {
 
@@ -214,7 +214,7 @@ public class ServiceTrackerMapImpl<K, SR, TS, R>
 		}
 
 		@Override
-		@SuppressWarnings({"rawtypes","unchecked"})
+		@SuppressWarnings({"rawtypes", "unchecked"})
 		public void modifiedService(
 			ServiceReference<SR> serviceReference,
 			final ServiceReferenceServiceTuple<SR, TS, K>
