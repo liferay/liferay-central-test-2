@@ -102,6 +102,9 @@ public class CXFJaxRsServiceRegistrator {
 			runtimeDelegate.createEndpoint(
 				application, JAXRSServerFactoryBean.class);
 
+		jaxRsServerFactoryBean.setBus(bus);
+		jaxRsServerFactoryBean.setProperties(_properties);
+
 		JSONProvider<Object> jsonProvider = new JSONProvider<>();
 
 		jsonProvider.setDropCollectionWrapperElement(true);
@@ -109,8 +112,6 @@ public class CXFJaxRsServiceRegistrator {
 		jsonProvider.setSerializeAsArray(true);
 		jsonProvider.setSupportUnwrapped(true);
 
-		jaxRsServerFactoryBean.setBus(bus);
-		jaxRsServerFactoryBean.setProperties(_properties);
 		jaxRsServerFactoryBean.setProvider(jsonProvider);
 
 		for (Object provider : _providers) {
