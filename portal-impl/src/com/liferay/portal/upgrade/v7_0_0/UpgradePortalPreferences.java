@@ -61,19 +61,15 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 		while (itr.hasNext()) {
 			Element preferenceElement = itr.next();
 
-			Element nameElement = preferenceElement.element("name");
-
-			String preferenceName = nameElement.getText();
+			String preferenceName = preferenceElement.elementText("name");
 
 			if (preferenceName.contains(Staging.class.getName())) {
-				Element valueElement = preferenceElement.element("value");
-
-				String value = valueElement.getText();
+				String preferenceValue = preferenceElement.elementText("value");
 
 				int index = preferenceName.indexOf(StringPool.POUND);
 
 				stagingPreferencesMap.put(
-					preferenceName.substring(index + 1), value);
+					preferenceName.substring(index + 1), preferenceValue);
 			}
 			else {
 				newRootElement.add(preferenceElement.createCopy());
@@ -92,28 +88,25 @@ public class UpgradePortalPreferences extends UpgradeProcess {
 		}
 
 		if (stagingPreferencesJsonArray.length() > 0) {
-			Element stagingPreferencesElement = SAXReaderUtil.createElement(
+			Element preferenceElement = SAXReaderUtil.createElement(
 				"preference");
 
-			Element stagingPreferencesNameElement = SAXReaderUtil.createElement(
-				"name");
+			Element nameElement = SAXReaderUtil.createElement("name");
 
 			String stagingPreferencesName =
 				Staging.class.getName() + StringPool.POUND +
 				StagingConstants.STAGING_RECENT_LAYOUT_IDS_MAP;
 
-			stagingPreferencesNameElement.setText(stagingPreferencesName);
+			nameElement.setText(stagingPreferencesName);
 
-			Element stagingPreferencesValueElement =
-				SAXReaderUtil.createElement("value");
+			Element valueElement = SAXReaderUtil.createElement("value");
 
-			stagingPreferencesValueElement.setText(
-				stagingPreferencesJsonArray.toString());
+			valueElement.setText(stagingPreferencesJsonArray.toString());
 
-			stagingPreferencesElement.add(stagingPreferencesNameElement);
-			stagingPreferencesElement.add(stagingPreferencesValueElement);
+			preferenceElement.add(nameElement);
+			preferenceElement.add(valueElement);
 
-			newRootElement.add(stagingPreferencesElement);
+			newRootElement.add(preferenceElement);
 		}
 
 		return DDMXMLUtil.formatXML(newDocument);
