@@ -924,8 +924,6 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		Properties properties = new Properties();
 
-		SourceFormatterArgs sourceFormatterArgs = getSourceFormatterArgs();
-
 		File propertiesFile = new File(
 			sourceFormatterArgs.getBaseDirName(),
 			"portal-impl/src/portal.properties");

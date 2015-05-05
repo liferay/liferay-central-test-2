@@ -31,8 +31,6 @@ public interface SourceProcessor {
 
 	public List<String> getModifiedFileNames();
 
-	public SourceFormatterArgs getSourceFormatterArgs();
-
 	public void setSourceFormatterArgs(SourceFormatterArgs sourceFormatterArgs);
 
 }
