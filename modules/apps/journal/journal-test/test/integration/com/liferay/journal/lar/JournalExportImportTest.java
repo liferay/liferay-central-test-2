@@ -115,22 +115,19 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 
 		Assert.assertNotNull(liveArticle);
 
-		// create new article version
-
 		JournalTestUtil.updateArticle(article, RandomTestUtil.randomString());
 
-		int articleVersionsCount =
-			JournalArticleLocalServiceUtil.getArticlesCount(
-				group.getGroupId(), article.getArticleId());
+		int articlesCount = JournalArticleLocalServiceUtil.getArticlesCount(
+			group.getGroupId(), article.getArticleId());
 
-		Assert.assertEquals(2, articleVersionsCount);
+		Assert.assertEquals(2, articlesCount);
 
 		exportImportPortlet(PortletKeys.JOURNAL);
 
-		articleVersionsCount = JournalArticleLocalServiceUtil.getArticlesCount(
+		articlesCount = JournalArticleLocalServiceUtil.getArticlesCount(
 			importedGroup.getGroupId(), liveArticle.getArticleId());
 
-		Assert.assertEquals(2, articleVersionsCount);
+		Assert.assertEquals(2, articlesCount);
 	}
 
 	@Test
