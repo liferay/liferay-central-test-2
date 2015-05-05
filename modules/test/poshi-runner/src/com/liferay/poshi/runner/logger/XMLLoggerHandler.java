@@ -121,7 +121,7 @@ public final class XMLLoggerHandler {
 		loggerElement.setClassName("child-container collapse collapsible");
 		loggerElement.setName("ul");
 
-		if (Validator.isNotNull(rootElement)) {
+		if (rootElement != null) {
 			List<Element> rootVarElements = rootElement.elements("var");
 
 			for (Element rootVarElement : rootVarElements) {
@@ -130,7 +130,7 @@ public final class XMLLoggerHandler {
 			}
 		}
 
-		if (Validator.isNotNull(element)) {
+		if (element != null) {
 			List<Element> childElements = element.elements();
 
 			for (Element childElement : childElements) {
@@ -288,7 +288,6 @@ public final class XMLLoggerHandler {
 
 		loggerElement.addChildLoggerElement(
 			_getChildContainerLoggerElement(element));
-
 		loggerElement.addChildLoggerElement(
 			_getClosingLineContainerLoggerElement(element));
 
