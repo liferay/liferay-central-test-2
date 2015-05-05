@@ -70,7 +70,7 @@ public class SourceFormatterArgs {
 
 	public void setBaseDirName(String baseDirName) {
 		if (_fileNames != null) {
-			throw new RuntimeException("Filenames are already initialized.");
+			throw new RuntimeException("File names are already initialized");
 		}
 
 		if (!baseDirName.endsWith("/")) {
@@ -86,11 +86,11 @@ public class SourceFormatterArgs {
 
 	public void setFileNames(List<String> fileNames) {
 		if (_fileNames != null) {
-			throw new RuntimeException("Filenames are already initialized.");
+			throw new RuntimeException("File names are already initialized");
 		}
 
 		if (_baseDirName != BASE_DIR_NAME) {
-			throw new RuntimeException("Base directory was already set.");
+			throw new RuntimeException("Base directory was already set");
 		}
 
 		_baseDirName = "";
