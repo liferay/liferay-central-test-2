@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
  */
 @RunAsClient
 @RunWith(Arquillian.class)
-public class JaxRsComponentRegistrationTest1 {
+public class JaxRsComponentRegistrationTest {
 
 	@Test
 	public void testIsRegistered() throws Exception {
