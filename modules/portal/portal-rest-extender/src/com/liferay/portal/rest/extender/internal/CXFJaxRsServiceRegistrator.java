@@ -72,7 +72,7 @@ public class CXFJaxRsServiceRegistrator {
 	public synchronized void removeBus(Bus bus) {
 		_buses.remove(bus);
 
-		Map<Object, Server> servers = _serversPerBus.remove(bus);
+		Map<Object, Server> servers = _busServers.remove(bus);
 
 		if (servers == null) {
 			return;
@@ -138,7 +138,7 @@ public class CXFJaxRsServiceRegistrator {
 	}
 
 	protected void remove(Object application) {
-		for (Map<Object, Server> servers : _serversPerBus.values()) {
+		for (Map<Object, Server> servers : _busServers.values()) {
 			Server server = servers.remove(application);
 
 			if (server != null) {
@@ -156,12 +156,12 @@ public class CXFJaxRsServiceRegistrator {
 	}
 
 	protected void store(Bus bus, Object object, Server server) {
-		Map<Object, Server> servers = _serversPerBus.get(bus);
+		Map<Object, Server> servers = _busServers.get(bus);
 
 		if (servers == null) {
 			servers = new HashMap<>();
 
-			_serversPerBus.put(bus, servers);
+			_busServers.put(bus, servers);
 		}
 
 		servers.put(object, server);
@@ -171,7 +171,7 @@ public class CXFJaxRsServiceRegistrator {
 	private final Collection<Bus> _buses = new ArrayList<>();
 	private final Map<String, Object> _properties;
 	private final Collection<Object> _providers = new ArrayList<>();
-	private final Map<Bus, Map<Object, Server>> _serversPerBus =
+	private final Map<Bus, Map<Object, Server>> _busServers =
 		new IdentityHashMap<>();
 	private final Collection<Object> _services = new ArrayList<>();
 
