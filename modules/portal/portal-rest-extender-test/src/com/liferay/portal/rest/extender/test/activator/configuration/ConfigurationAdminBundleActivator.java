@@ -62,7 +62,8 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			_restConfiguration = configurationAdmin.createFactoryConfiguration(
 				"com.liferay.portal.rest.extender.configuration." +
-					"RestExtenderConfiguration", null);
+					"RestExtenderConfiguration",
+				null);
 
 			properties = new Hashtable<>();
 
