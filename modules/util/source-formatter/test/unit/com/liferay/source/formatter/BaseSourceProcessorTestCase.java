@@ -156,11 +156,11 @@ public class BaseSourceProcessorTestCase {
 			String actualFormattedContent = FileUtils.readFileToString(
 				new File(modifiedFileNames.get(0)));
 
-			URL expectedUrl = classLoader.getResource(
+			URL expectedURL = classLoader.getResource(
 				_DIR_NAME + "/expected/" + fileName + "." + originalExtension);
 
 			String expectedFormattedContent = IOUtils.toString(
-				expectedUrl, StringPool.UTF8);
+				expectedURL, StringPool.UTF8);
 
 			expectedFormattedContent = StringUtil.replace(
 				expectedFormattedContent, StringPool.RETURN_NEW_LINE,
