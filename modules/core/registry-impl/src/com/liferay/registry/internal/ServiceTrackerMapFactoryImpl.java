@@ -407,7 +407,8 @@ public class ServiceTrackerMapFactoryImpl implements ServiceTrackerMapFactory {
 				new EmitterWrapper<>(emitter));
 		}
 
-		private final ServiceReferenceMapper<K, ? super S> _serviceReferenceMapper;
+		private final ServiceReferenceMapper<K, ? super S>
+			_serviceReferenceMapper;
 
 	}
 
