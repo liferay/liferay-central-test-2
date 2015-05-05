@@ -2488,7 +2488,7 @@ public class StagingImpl implements Staging {
 	}
 
 	private long getRecentLayoutAttribute(
-			PortalPreferences portalPreferences, String layoutAttributeKey)
+			PortalPreferences portalPreferences, String key)
 		throws JSONException {
 
 		String preferencesString = portalPreferences.getValue(
@@ -2501,9 +2501,8 @@ public class StagingImpl implements Staging {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			if (jsonObject.has(layoutAttributeKey)) {
-				return GetterUtil.getLong(
-					jsonObject.getString(layoutAttributeKey));
+			if (jsonObject.has(key)) {
+				return GetterUtil.getLong(jsonObject.getString(key));
 			}
 		}
 
@@ -2511,30 +2510,29 @@ public class StagingImpl implements Staging {
 	}
 
 	private void setRecentLayoutAttribute(
-			PortalPreferences portalPreferences, String layoutAttributeKey,
-			long value)
+			PortalPreferences portalPreferences, String key, long value)
 		throws JSONException {
 
 		String oldPortalPreferences = portalPreferences.getValue(
 			Staging.class.getName(),
 			StagingConstants.STAGING_RECENT_LAYOUT_IDS_MAP);
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
 		JSONArray oldJsonArray = JSONFactoryUtil.createJSONArray(
 			oldPortalPreferences);
 
 		boolean alreadyExists = false;
 
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
 		for (int i = 0; i < oldJsonArray.length(); i++) {
 			JSONObject jsonObject = oldJsonArray.getJSONObject(i);
 
-			if (Validator.isNotNull(jsonObject.getString(layoutAttributeKey))) {
+			if (Validator.isNotNull(jsonObject.getString(key))) {
 				alreadyExists = true;
 
-				jsonObject.remove(layoutAttributeKey);
+				jsonObject.remove(key);
 
-				jsonObject.put(layoutAttributeKey, String.valueOf(value));
+				jsonObject.put(key, String.valueOf(value));
 			}
 
 			jsonArray.put(jsonObject);
@@ -2543,7 +2541,7 @@ public class StagingImpl implements Staging {
 		if (!alreadyExists) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			jsonObject.put(layoutAttributeKey, String.valueOf(value));
+			jsonObject.put(key, String.valueOf(value));
 
 			jsonArray.put(jsonObject);
 		}
