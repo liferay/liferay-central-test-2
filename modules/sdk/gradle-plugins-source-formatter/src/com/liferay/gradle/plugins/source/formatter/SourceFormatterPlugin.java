@@ -67,7 +67,7 @@ public class SourceFormatterPlugin implements Plugin<Project> {
 					addSourceFormatterDependencies(project);
 				}
 
-		});
+			});
 
 		return configuration;
 	}
