@@ -80,8 +80,8 @@ public final class PoshiRunnerStackTraceUtil {
 		_stackTrace.push(
 			_filePaths.peek() + ":" + element.attributeValue("line-number"));
 
-		String classCommandName;
-		String classType;
+		String classCommandName = null;
+		String classType = null;
 
 		if (element.attributeValue("function") != null) {
 			classCommandName = element.attributeValue("function");
