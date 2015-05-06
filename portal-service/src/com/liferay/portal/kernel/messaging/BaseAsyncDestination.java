@@ -79,6 +79,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		}
 	}
 
+	@Override
 	public void destroy() {
 		super.destroy();
 
