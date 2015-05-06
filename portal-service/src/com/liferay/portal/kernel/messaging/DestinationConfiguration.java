@@ -99,10 +99,10 @@ public class DestinationConfiguration implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 
-		sb.append("{_destinationType=");
-		sb.append(_destinationType);
-		sb.append(", _destinationName=");
+		sb.append("{_destinationName=");
 		sb.append(_destinationName);
+		sb.append(", _destinationType=");
+		sb.append(_destinationType);
 		sb.append(", _maximumQueueSize=");
 		sb.append(_maximumQueueSize);
 		sb.append(", _rejectedExecutionHandler=");
