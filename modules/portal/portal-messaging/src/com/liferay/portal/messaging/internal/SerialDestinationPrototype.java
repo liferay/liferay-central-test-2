@@ -27,17 +27,19 @@ import org.osgi.service.component.annotations.Reference;
  * @author Michael C. Han
  */
 @Component(
-	immediate = true, property = { "type=serial" },
+	immediate = true, property = {"type=serial"},
 	service = DestinationPrototype.class
 )
 public class SerialDestinationPrototype implements DestinationPrototype {
 
 	@Override
-	public Destination createDestination(DestinationConfiguration destinationConfiguration) {
+	public Destination createDestination(
+		DestinationConfiguration destinationConfiguration) {
+
 		SerialDestination serialDestination = new SerialDestination();
 
-		serialDestination.setName(destinationConfiguration.getDestinationName());
-
+		serialDestination.setName(
+			destinationConfiguration.getDestinationName());
 		serialDestination.setMaximumQueueSize(
 			destinationConfiguration.getMaximumQueueSize());
 		serialDestination.setRejectedExecutionHandler(
