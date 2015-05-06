@@ -58,81 +58,97 @@ public class RestExtender {
 
 		_component = _dependencyManager.createComponent();
 
-		_component.setImplementation(
-			new CXFJaxRsServiceRegistrator(properties));
+		CXFJaxRsServiceRegistrator cxfJaxRsServiceRegistrator =
+			new CXFJaxRsServiceRegistrator(properties);
 
-		addApplicationDependencies();
+		_component.setImplementation(cxfJaxRsServiceRegistrator);
+
 		addBusDependencies();
-		addProviderDependencies();
-		addServiceDependencies();
+		addJaxRsApplicationDependencies();
+		addJaxRsProviderServiceDependencies();
+		addJaxRsServiceDependencies();
 
 		_dependencyManager.add(_component);
 
 		_component.start();
 	}
 
-	protected void addApplicationDependencies() {
+	protected void addBusDependencies() {
 		RestExtenderConfiguration restExtenderConfiguration =
 			getRestExtenderConfiguration();
 
-		String[] applicationFilters =
+		String[] contextPaths = restExtenderConfiguration.contextPaths();
+
+		if (contextPaths == null) {
+			return;
+		}
+
+		for (String contextPath : contextPaths) {
+			addTCCLServiceDependency(
+				true, Bus.class,
+				"(" + HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH +
+					"=" + contextPath + ")",
+				"addBus", "removeBus");
+		}
+	}
+
+	protected void addJaxRsApplicationDependencies() {
+		RestExtenderConfiguration restExtenderConfiguration =
+			getRestExtenderConfiguration();
+
+		String[] jaxRsApplicationFilterStrings =
 			restExtenderConfiguration.jaxRsApplicationFilterStrings();
 
-		if (applicationFilters != null) {
-			for (String applicationFilter : applicationFilters) {
-				addTCCLDependency(
-					false, Application.class, applicationFilter,
-					"addApplication", "removeApplication");
-			}
+		if (jaxRsApplicationFilterStrings == null) {
+			return;
+		}
+
+		for (String jaxRsApplicationFilterString :
+				jaxRsApplicationFilterStrings) {
+
+			addTCCLServiceDependency(
+				false, Application.class, jaxRsApplicationFilterString,
+				"addApplication", "removeApplication");
 		}
 	}
 
-	protected void addBusDependencies() {
-		String[] contextPathStrings =
-			getRestExtenderConfiguration().contextPaths();
-
-		if (contextPathStrings != null) {
-			for (String contextPath : contextPathStrings) {
-				addTCCLDependency(
-					true, Bus.class,
-					"(" + HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH +
-						"=" + contextPath + ")", "addBus", "removeBus");
-			}
-		}
-	}
-
-	protected void addProviderDependencies() {
+	protected void addJaxRsProviderServiceDependencies() {
 		RestExtenderConfiguration soapExtenderConfiguration =
 			getRestExtenderConfiguration();
 
-		String[] providerFilters =
+		String[] jaxRsProviderFilterStrings =
 			soapExtenderConfiguration.jaxRsProviderFilterStrings();
 
-		if (providerFilters != null) {
-			for (String providerFilter : providerFilters) {
-				addTCCLDependency(
-					false, null, providerFilter, "addProvider",
-					"removeProvider");
-			}
+		if (jaxRsProviderFilterStrings == null) {
+			return;
+		}
+
+		for (String jaxRsProviderFilterString : jaxRsProviderFilterStrings) {
+			addTCCLServiceDependency(
+				false, null, jaxRsProviderFilterString, "addProvider",
+				"removeProvider");
 		}
 	}
 
-	protected void addServiceDependencies() {
+	protected void addJaxRsServiceDependencies() {
 		RestExtenderConfiguration soapExtenderConfiguration =
 			getRestExtenderConfiguration();
 
-		String[] serviceFilters =
+		String[] jaxRsServiceFilterStrings =
 			soapExtenderConfiguration.jaxRsServiceFilterStrings();
 
-		if (serviceFilters != null) {
-			for (String serviceFilter : serviceFilters) {
-				addTCCLDependency(
-					false, null, serviceFilter, "addService", "removeService");
-			}
+		if (jaxRsServiceFilterStrings == null) {
+			return;
+		}
+
+		for (String jaxRsServiceFilterString : jaxRsServiceFilterStrings) {
+			addTCCLServiceDependency(
+				false, null, jaxRsServiceFilterString, "addService",
+				"removeService");
 		}
 	}
 
-	protected ServiceDependency addTCCLDependency(
+	protected ServiceDependency addTCCLServiceDependency(
 		boolean required, Class<?> clazz, String filter, String addName,
 		String removeName) {
 
