@@ -28,12 +28,10 @@ request.setAttribute("liferay-ui:discussion:index", new Integer(index));
 
 String randomNamespace = (String)request.getAttribute("liferay-ui:discussion:randomNamespace");
 
-DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
 DiscussionRequestHelper discussionRequestHelper = new DiscussionRequestHelper(request);
+DiscussionTaglibHelper discussionTaglibHelper = new DiscussionTaglibHelper(request);
 
-CommentManager commentManager = CommentManagerUtil.getCommentManager();
-
-DiscussionPermission discussionPermission = commentManager.getDiscussionPermission(discussionRequestHelper.getPermissionChecker());
+DiscussionPermission discussionPermission = CommentManagerUtil.getDiscussionPermission(discussionRequestHelper.getPermissionChecker());
 
 CommentTreeDisplayContext commentTreeDisplayContext = CommentDisplayContextProviderUtil.getCommentTreeDisplayContext(request, response, discussionPermission, comment);
 
