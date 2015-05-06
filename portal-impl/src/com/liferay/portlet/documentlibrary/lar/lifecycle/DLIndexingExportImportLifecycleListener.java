@@ -62,9 +62,6 @@ public class DLIndexingExportImportLifecycleListener
 	}
 
 	protected void reindex(PortletDataContext portletDataContext) {
-
-		// Reindex file entries related to a ddm structure
-
 		Map<String, Long> ddmStructureIds =
 			(Map<String, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
@@ -108,8 +105,9 @@ public class DLIndexingExportImportLifecycleListener
 			catch (SearchException se) {
 				if (_log.isDebugEnabled() && (dlFileEntry != null)) {
 					_log.debug(
-						"Cannot reindex file entry after import: " +
-							dlFileEntry.getFileEntryId(), se);
+						"Unable to reindex file entry " +
+							dlFileEntry.getFileEntryId(),
+						se);
 				}
 			}
 		}
