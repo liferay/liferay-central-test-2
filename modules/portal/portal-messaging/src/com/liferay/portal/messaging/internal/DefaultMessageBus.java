@@ -51,8 +51,10 @@ public class DefaultMessageBus implements MessageBus {
 
 	@Override
 	public synchronized void addDestination(Destination destination) {
+		Class<?> clazz = destination.getClass();
+
 		if (SPIUtil.isSPI() &&
-			!destination.getClass().equals(IntrabandBridgeDestination.class)) {
+			!clazz.equals(IntrabandBridgeDestination.class)) {
 
 			destination = new IntrabandBridgeDestination(destination);
 		}
@@ -141,6 +143,7 @@ public class DefaultMessageBus implements MessageBus {
 			}
 
 			destination.removeDestinationEventListeners();
+
 			destination.unregisterMessageListeners();
 
 			for (MessageBusEventListener messageBusEventListener :
@@ -244,8 +247,10 @@ public class DefaultMessageBus implements MessageBus {
 	protected synchronized void addDestination(
 		Destination destination, Map<String, Object> properties) {
 
+		Class<?> clazz = destination.getClass();
+
 		if (SPIUtil.isSPI() &&
-			!destination.getClass().equals(IntrabandBridgeDestination.class)) {
+			!clazz.equals(IntrabandBridgeDestination.class)) {
 
 			destination = new IntrabandBridgeDestination(destination);
 		}
@@ -301,18 +306,18 @@ public class DefaultMessageBus implements MessageBus {
 	protected synchronized void registerMessageListener(
 		MessageListener messageListener, Map<String, Object> properties) {
 
-		String destinationName = MapUtil.getString(
-			properties, "destination.name");
-
-		ClassLoader operatingClassLoader = (ClassLoader)properties.get(
-			"operatingClassLoader");
-
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
+			ClassLoader operatingClassLoader = (ClassLoader)properties.get(
+				"operatingClassLoader");
+
 			currentThread.setContextClassLoader(operatingClassLoader);
+
+			String destinationName = MapUtil.getString(
+				properties, "destination.name");
 
 			registerMessageListener(destinationName, messageListener);
 		}
@@ -356,19 +361,21 @@ public class DefaultMessageBus implements MessageBus {
 
 		@Override
 		public Destination addingService(
-			ServiceReference<Destination> reference) {
+			ServiceReference<Destination> serviceReference) {
 
 			return _bundleContext.getService(reference);
 		}
 
 		@Override
 		public void modifiedService(
-			ServiceReference<Destination> reference, Destination destination) {
+			ServiceReference<Destination> serviceReference,
+			Destination destination) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<Destination> reference, Destination destination) {
+			ServiceReference<Destination> serviceReference,
+			Destination destination) {
 
 			destination.destroy();
 		}

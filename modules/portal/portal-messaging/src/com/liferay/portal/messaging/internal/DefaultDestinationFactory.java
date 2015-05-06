@@ -50,7 +50,9 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class DefaultDestinationFactory implements DestinationFactory {
 
 	@Override
-	public Destination createDestination(DestinationConfiguration destinationConfiguration) {
+	public Destination createDestination(
+		DestinationConfiguration destinationConfiguration) {
+
 		String type = destinationConfiguration.getDestinationType();
 
 		DestinationPrototype destinationPrototype = _destinationPrototypes.get(
@@ -141,8 +143,8 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		public DestinationConfiguration addingService(
 			ServiceReference<DestinationConfiguration> serviceReference) {
 
-			DestinationConfiguration destinationConfiguration = _bundleContext.getService(
-				serviceReference);
+			DestinationConfiguration destinationConfiguration =
+				_bundleContext.getService(serviceReference);
 
 			try {
 				synchronized (_serviceRegistrations) {
@@ -183,7 +185,8 @@ public class DefaultDestinationFactory implements DestinationFactory {
 
 			unregister(destinationConfiguration);
 
-			Destination destination = createDestination(destinationConfiguration);
+			Destination destination = createDestination(
+				destinationConfiguration);
 
 			Dictionary<String, Object> dictionary = new HashMapDictionary<>();
 
@@ -201,7 +204,9 @@ public class DefaultDestinationFactory implements DestinationFactory {
 			unregister(destinationConfiguration);
 		}
 
-		protected void unregister(DestinationConfiguration destinationConfiguration) {
+		protected void unregister(
+			DestinationConfiguration destinationConfiguration) {
+
 			synchronized (_serviceRegistrations) {
 				if (_serviceRegistrations.containsKey(
 						destinationConfiguration.getDestinationName())) {
