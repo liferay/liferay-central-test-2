@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.comment.Comment;
 import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.comment.Discussion;
 import com.liferay.portal.kernel.comment.DiscussionPermission;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
@@ -82,36 +81,32 @@ public class DummyCommentManagerImpl implements CommentManager {
 
 			@Override
 			public boolean hasAddPermission(
-					long companyId, long groupId, String className,
-					long classPK, long userId)
-				throws PortalException {
+				long companyId, long groupId, String className,
+				long classPK, long userId) {
 
 				return false;
 			}
 
 			@Override
 			public boolean hasDeletePermission(
-					long companyId, long groupId, String className,
-					long classPK, long commentId, long userId)
-				throws PortalException {
+				long companyId, long groupId, String className,
+				long classPK, long commentId, long userId) {
 
 				return false;
 			}
 
 			@Override
 			public boolean hasUpdatePermission(
-					long companyId, long groupId, String className,
-					long classPK, long commentId, long userId)
-				throws PortalException {
+				long companyId, long groupId, String className, long classPK,
+				long commentId, long userId) {
 
 				return false;
 			}
 
 			@Override
 			public boolean hasViewPermission(
-					long companyId, long groupId, String className,
-					long classPK, long userId)
-				throws PortalException {
+				long companyId, long groupId, String className, long classPK,
+				long userId) {
 
 				return false;
 			}
