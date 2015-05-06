@@ -53,14 +53,10 @@ public class SerialDestinationPrototype implements DestinationPrototype {
 	@Reference(unbind = "-")
 	protected void setPortalExecutorManager(
 		PortalExecutorManager portalExecutorManager) {
-
-		_portalExecutorManager = portalExecutorManager;
 	}
 
 	private static final int _WORKERS_CORE_SIZE = 1;
 
 	private static final int _WORKERS_MAX_SIZE = 1;
-
-	private PortalExecutorManager _portalExecutorManager;
 
 }
