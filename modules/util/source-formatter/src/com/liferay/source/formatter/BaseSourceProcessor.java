@@ -787,6 +787,9 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	protected String getAbsolutePath(File file) {
 		String absolutePath = file.getAbsolutePath();
 
+		absolutePath = StringUtil.replace(
+			absolutePath, CharPool.BACK_SLASH, CharPool.SLASH);
+
 		return StringUtil.replace(absolutePath, "/./", StringPool.SLASH);
 	}
 
