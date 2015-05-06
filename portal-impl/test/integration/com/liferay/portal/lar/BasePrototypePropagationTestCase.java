@@ -272,9 +272,7 @@ public abstract class BasePrototypePropagationTestCase {
 	protected Group group;
 
 	protected String initialLayoutTemplateId = "2_2_columns";
-
 	protected JournalArticle journalArticle;
-
 	protected Layout layout;
 
 	@DeleteAfterTestRun

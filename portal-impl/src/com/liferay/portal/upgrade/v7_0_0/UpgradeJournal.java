@@ -460,6 +460,7 @@ public class UpgradeJournal extends UpgradeBaseJournal {
 		}
 
 		updateBasicWebContentStructure();
+
 		addDDMTemplateLinks();
 	}
 
