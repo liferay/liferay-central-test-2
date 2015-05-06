@@ -55,10 +55,6 @@ public class ParallelDestinationPrototype implements DestinationPrototype {
 	@Reference(unbind = "-")
 	protected void setPortalExecutorManager(
 		PortalExecutorManager portalExecutorManager) {
-
-		_portalExecutorManager = portalExecutorManager;
 	}
-
-	private PortalExecutorManager _portalExecutorManager;
 
 }
