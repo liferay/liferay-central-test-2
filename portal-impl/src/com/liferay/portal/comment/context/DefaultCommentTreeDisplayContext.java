@@ -39,12 +39,12 @@ public class DefaultCommentTreeDisplayContext
 	extends BaseCommentDisplayContext implements CommentTreeDisplayContext {
 
 	public DefaultCommentTreeDisplayContext(
-		DiscussionTaglibHelper discussionTaglibHelper,
 		DiscussionRequestHelper discussionRequestHelper,
+		DiscussionTaglibHelper discussionTaglibHelper,
 		DiscussionPermission discussionPermission, Comment comment) {
 
-		_discussionTaglibHelper = discussionTaglibHelper;
 		_discussionRequestHelper = discussionRequestHelper;
+		_discussionTaglibHelper = discussionTaglibHelper;
 		_discussionPermission = discussionPermission;
 		_comment = comment;
 	}

@@ -30,12 +30,12 @@ public class DefaultCommentSectionDisplayContext
 	extends BaseCommentDisplayContext implements CommentSectionDisplayContext {
 
 	public DefaultCommentSectionDisplayContext(
-		DiscussionTaglibHelper discussionTaglibHelper,
 		DiscussionRequestHelper discussionRequestHelper,
+		DiscussionTaglibHelper discussionTaglibHelper,
 		DiscussionPermission discussionPermission, Discussion discussion) {
 
-		_discussionTaglibHelper = discussionTaglibHelper;
 		_discussionRequestHelper = discussionRequestHelper;
+		_discussionTaglibHelper = discussionTaglibHelper;
 		_discussionPermission = discussionPermission;
 		_rootComment = discussion.getRootComment();
 	}

@@ -43,14 +43,14 @@ public class CommentDisplayContextProviderImpl
 		HttpServletRequest request, HttpServletResponse response,
 		DiscussionPermission discussionPermission, Discussion discussion) {
 
-		DiscussionTaglibHelper discussionTaglibHelper =
-			new DiscussionTaglibHelper(request);
 		DiscussionRequestHelper discussionRequestHelper =
 			new DiscussionRequestHelper(request);
+		DiscussionTaglibHelper discussionTaglibHelper =
+			new DiscussionTaglibHelper(request);
 
 		CommentSectionDisplayContext commentSectionDisplayContext =
 			new DefaultCommentSectionDisplayContext(
-				discussionTaglibHelper, discussionRequestHelper,
+				discussionRequestHelper, discussionTaglibHelper,
 				discussionPermission, discussion);
 
 		for (CommentDisplayContextFactory commentDisplayContextFactory :
@@ -70,14 +70,14 @@ public class CommentDisplayContextProviderImpl
 		HttpServletRequest request, HttpServletResponse response,
 		DiscussionPermission discussionPermission, Comment comment) {
 
-		DiscussionTaglibHelper discussionTaglibHelper =
-			new DiscussionTaglibHelper(request);
 		DiscussionRequestHelper discussionRequestHelper =
 			new DiscussionRequestHelper(request);
+		DiscussionTaglibHelper discussionTaglibHelper =
+			new DiscussionTaglibHelper(request);
 
 		CommentTreeDisplayContext commentTreeDisplayContext =
 			new DefaultCommentTreeDisplayContext(
-				discussionTaglibHelper, discussionRequestHelper,
+				discussionRequestHelper, discussionTaglibHelper,
 				discussionPermission, comment);
 
 		for (CommentDisplayContextFactory commentDisplayContextFactory :
