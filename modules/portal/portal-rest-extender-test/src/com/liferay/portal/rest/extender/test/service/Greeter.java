@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 
 /**
- * @author Carlos Sierra Andrés
+ * @author Carlos Sierra AndrÃ©s
  */
 @Path("/testApp")
 public class Greeter extends Application {
