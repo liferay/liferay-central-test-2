@@ -363,7 +363,7 @@ public class DefaultMessageBus implements MessageBus {
 		public Destination addingService(
 			ServiceReference<Destination> serviceReference) {
 
-			return _bundleContext.getService(reference);
+			return _bundleContext.getService(serviceReference);
 		}
 
 		@Override

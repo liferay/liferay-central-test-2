@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.concurrent.RejectedExecutionHandler;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
@@ -96,14 +97,23 @@ public class DestinationConfiguration implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DestinationConfig{" +
-			"_destinationType='" + _destinationType + '\'' +
-			", _destinationName='" + _destinationName + '\'' +
-			", _maximumQueueSize=" + _maximumQueueSize +
-			", _rejectedExecutionHandler=" + _rejectedExecutionHandler +
-			", _workersCoreSize=" + _workersCoreSize +
-			", _workersMaxSize=" + _workersMaxSize +
-			'}';
+		StringBundler sb = new StringBundler(13);
+
+		sb.append("{_destinationType=");
+		sb.append(_destinationType);
+		sb.append(", _destinationName=");
+		sb.append(_destinationName);
+		sb.append(", _maximumQueueSize=");
+		sb.append(_maximumQueueSize);
+		sb.append(", _rejectedExecutionHandler=");
+		sb.append(_rejectedExecutionHandler);
+		sb.append(", _workersCoreSize=");
+		sb.append(_workersCoreSize);
+		sb.append(", _workersMaxSize=");
+		sb.append(_workersMaxSize);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private static final int _WORKERS_CORE_SIZE = 2;
