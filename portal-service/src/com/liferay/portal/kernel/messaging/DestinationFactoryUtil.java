@@ -26,10 +26,10 @@ import java.util.Collection;
 public class DestinationFactoryUtil {
 
 	public static Destination createDestination(
-		DestinationConfiguration destinationConfig) {
+		DestinationConfiguration destinationConfiguration) {
 
 		return _instance.getDestinationFactory().createDestination(
-			destinationConfig);
+			destinationConfiguration);
 	}
 
 	public static Collection<String> getTypes() {
@@ -46,7 +46,7 @@ public class DestinationFactoryUtil {
 		}
 		catch (InterruptedException e) {
 			throw new IllegalStateException(
-				"Unable to obtain reference for DestinationFactory", e);
+				"Unable to obtain reference for destination factory", e);
 		}
 	}
 

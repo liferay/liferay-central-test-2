@@ -21,7 +21,8 @@ import java.util.Collection;
  */
 public interface DestinationFactory {
 
-	public Destination createDestination(DestinationConfiguration destinationConfig);
+	public Destination createDestination(
+		DestinationConfiguration destinationConfiguration);
 
 	public Collection<String> getTypes();
 
