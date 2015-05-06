@@ -167,7 +167,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to instantiate destination: " +
+						"Unable to instantiate destination " +
 							destinationConfig,
 						e);
 				}
