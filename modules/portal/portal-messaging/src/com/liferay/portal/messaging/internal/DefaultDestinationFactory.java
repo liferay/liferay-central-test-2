@@ -58,7 +58,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 
 		if (destinationPrototype == null) {
 			throw new IllegalArgumentException(
-				"No prototype configured for : " + type);
+				"No prototype configured for " + type);
 		}
 
 		return destinationPrototype.createDestination(destinationConfig);
