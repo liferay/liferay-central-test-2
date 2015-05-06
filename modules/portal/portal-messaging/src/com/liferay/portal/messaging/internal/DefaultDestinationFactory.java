@@ -92,9 +92,10 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		DestinationPrototype destinationPrototype,
 		Map<String, Object> properties) {
 
-		String type = MapUtil.getString(properties, "type");
+		String destinationType = MapUtil.getString(
+			properties, "destination.type");
 
-		_destinationPrototypes.put(type, destinationPrototype);
+		_destinationPrototypes.put(destinationType, destinationPrototype);
 	}
 
 	@Deactivate
@@ -119,9 +120,10 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		DestinationPrototype destinationPrototype,
 		Map<String, Object> properties) {
 
-		String type = MapUtil.getString(properties, "type");
+		String destinationType = MapUtil.getString(
+			properties, "destination.type");
 
-		_destinationPrototypes.remove(type);
+		_destinationPrototypes.remove(destinationType);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
