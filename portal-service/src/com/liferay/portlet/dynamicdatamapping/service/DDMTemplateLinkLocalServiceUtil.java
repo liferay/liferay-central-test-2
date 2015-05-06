@@ -102,14 +102,13 @@ public class DDMTemplateLinkLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink deleteTemplateLink(
-		long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long classNameId, long classPK) {
 		return getService().deleteTemplateLink(classNameId, classPK);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink deleteTemplateLink(
-		com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink ddmTemplateLink) {
-		return getService().deleteTemplateLink(ddmTemplateLink);
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink templateLink) {
+		return getService().deleteTemplateLink(templateLink);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink deleteTemplateLink(
@@ -296,8 +295,7 @@ public class DDMTemplateLinkLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink updateTemplateLink(
-		long classNameId, long classPK, long templateId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long classNameId, long classPK, long templateId) {
 		return getService().updateTemplateLink(classNameId, classPK, templateId);
 	}
 

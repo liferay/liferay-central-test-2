@@ -100,10 +100,10 @@ public interface DDMTemplateLinkLocalService extends BaseLocalService,
 		throws PortalException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink deleteTemplateLink(
-		long classNameId, long classPK) throws PortalException;
+		long classNameId, long classPK);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink deleteTemplateLink(
-		com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink ddmTemplateLink);
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink templateLink);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink deleteTemplateLink(
 		long templateLinkId) throws PortalException;
@@ -256,8 +256,7 @@ public interface DDMTemplateLinkLocalService extends BaseLocalService,
 		com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink ddmTemplateLink);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink updateTemplateLink(
-		long classNameId, long classPK, long templateId)
-		throws PortalException;
+		long classNameId, long classPK, long templateId);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplateLink updateTemplateLink(
 		long templateLinkId, long templateId) throws PortalException;
