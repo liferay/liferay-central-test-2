@@ -99,16 +99,16 @@ public class DefaultDestinationFactory implements DestinationFactory {
 	protected void deactivate() {
 		_serviceTracker.close();
 
-		synchronized (_destinationServiceRegistrations) {
+		synchronized (_serviceRegistrations) {
 			for (ServiceRegistration<Destination>
 					destinationServiceRegistration :
-						_destinationServiceRegistrations.values()) {
+						_serviceRegistrations.values()) {
 
 				destinationServiceRegistration.unregister();
 			}
 		}
 
-		_destinationServiceRegistrations.clear();
+		_serviceRegistrations.clear();
 
 		_bundleContext = null;
 	}
@@ -129,7 +129,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 	private final Map<String, DestinationPrototype> _destinationPrototypes =
 		new ConcurrentHashMap<>();
 	private final Map<String, ServiceRegistration<Destination>>
-		_destinationServiceRegistrations = new HashMap<>();
+		_serviceRegistrations = new HashMap<>();
 	private ServiceTracker<DestinationConfig, DestinationConfig>
 		_serviceTracker;
 
@@ -145,7 +145,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 				serviceReference);
 
 			try {
-				synchronized (_destinationServiceRegistrations) {
+				synchronized (_serviceRegistrations) {
 					unregister(destinationConfig);
 
 					Destination destination = createDestination(
@@ -160,7 +160,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 						_bundleContext.registerService(
 							Destination.class, destination, dictionary);
 
-					_destinationServiceRegistrations.put(
+					_serviceRegistrations.put(
 						destination.getName(), serviceRegistration);
 				}
 			}
@@ -202,12 +202,12 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		}
 
 		protected void unregister(DestinationConfig destinationConfig) {
-			synchronized (_destinationServiceRegistrations) {
-				if (_destinationServiceRegistrations.containsKey(
+			synchronized (_serviceRegistrations) {
+				if (_serviceRegistrations.containsKey(
 						destinationConfig.getDestinationName())) {
 
 					ServiceRegistration<Destination> serviceRegistration =
-						_destinationServiceRegistrations.get(
+						_serviceRegistrations.get(
 							destinationConfig.getDestinationName());
 
 					serviceRegistration.unregister();
