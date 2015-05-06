@@ -1234,7 +1234,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		}
 
 		if (sourceFormatterArgs.isAutoFix()) {
-			FileUtils.writeStringToFile(file, newContent);
+			FileUtils.writeStringToFile(file, newContent, StringPool.UTF8);
 		}
 		else if (_firstSourceMismatchException == null) {
 			_firstSourceMismatchException = new SourceMismatchException(
