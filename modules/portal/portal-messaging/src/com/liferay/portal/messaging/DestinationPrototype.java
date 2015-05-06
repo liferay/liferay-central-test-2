@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.messaging.DestinationConfiguration;
  */
 public interface DestinationPrototype {
 
-	public Destination createDestination(DestinationConfiguration destinationConfig);
+	public Destination createDestination(
+		DestinationConfiguration destinationConfiguration);
 
 }

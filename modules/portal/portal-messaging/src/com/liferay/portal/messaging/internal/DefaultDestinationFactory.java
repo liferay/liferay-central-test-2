@@ -50,8 +50,8 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class DefaultDestinationFactory implements DestinationFactory {
 
 	@Override
-	public Destination createDestination(DestinationConfiguration destinationConfig) {
-		String type = destinationConfig.getDestinationType();
+	public Destination createDestination(DestinationConfiguration destinationConfiguration) {
+		String type = destinationConfiguration.getDestinationType();
 
 		DestinationPrototype destinationPrototype = _destinationPrototypes.get(
 			type);
@@ -61,7 +61,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 				"No prototype configured for " + type);
 		}
 
-		return destinationPrototype.createDestination(destinationConfig);
+		return destinationPrototype.createDestination(destinationConfiguration);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 
 		_serviceTracker = new ServiceTracker<>(
 			_bundleContext, DestinationConfiguration.class,
-			new DestinationConfigServiceTrackerCustomizer());
+			new DestinationConfigurationServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
@@ -133,7 +133,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 	private ServiceTracker<DestinationConfiguration, DestinationConfiguration>
 		_serviceTracker;
 
-	private class DestinationConfigServiceTrackerCustomizer
+	private class DestinationConfigurationServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
 			<DestinationConfiguration, DestinationConfiguration> {
 
@@ -141,15 +141,15 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		public DestinationConfiguration addingService(
 			ServiceReference<DestinationConfiguration> serviceReference) {
 
-			DestinationConfiguration destinationConfig = _bundleContext.getService(
+			DestinationConfiguration destinationConfiguration = _bundleContext.getService(
 				serviceReference);
 
 			try {
 				synchronized (_serviceRegistrations) {
-					unregister(destinationConfig);
+					unregister(destinationConfiguration);
 
 					Destination destination = createDestination(
-						destinationConfig);
+						destinationConfiguration);
 
 					Dictionary<String, Object> dictionary =
 						new HashMapDictionary<>();
@@ -168,22 +168,22 @@ public class DefaultDestinationFactory implements DestinationFactory {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to instantiate destination " +
-							destinationConfig,
+							destinationConfiguration,
 						e);
 				}
 			}
 
-			return destinationConfig;
+			return destinationConfiguration;
 		}
 
 		@Override
 		public void modifiedService(
 			ServiceReference<DestinationConfiguration> serviceReference,
-			DestinationConfiguration destinationConfig) {
+			DestinationConfiguration destinationConfiguration) {
 
-			unregister(destinationConfig);
+			unregister(destinationConfiguration);
 
-			Destination destination = createDestination(destinationConfig);
+			Destination destination = createDestination(destinationConfiguration);
 
 			Dictionary<String, Object> dictionary = new HashMapDictionary<>();
 
@@ -196,19 +196,19 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		@Override
 		public void removedService(
 			ServiceReference<DestinationConfiguration> serviceReference,
-			DestinationConfiguration destinationConfig) {
+			DestinationConfiguration destinationConfiguration) {
 
-			unregister(destinationConfig);
+			unregister(destinationConfiguration);
 		}
 
-		protected void unregister(DestinationConfiguration destinationConfig) {
+		protected void unregister(DestinationConfiguration destinationConfiguration) {
 			synchronized (_serviceRegistrations) {
 				if (_serviceRegistrations.containsKey(
-						destinationConfig.getDestinationName())) {
+						destinationConfiguration.getDestinationName())) {
 
 					ServiceRegistration<Destination> serviceRegistration =
 						_serviceRegistrations.get(
-							destinationConfig.getDestinationName());
+							destinationConfiguration.getDestinationName());
 
 					serviceRegistration.unregister();
 				}

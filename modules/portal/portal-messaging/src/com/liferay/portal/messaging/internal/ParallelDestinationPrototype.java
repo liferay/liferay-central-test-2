@@ -33,19 +33,19 @@ import org.osgi.service.component.annotations.Reference;
 public class ParallelDestinationPrototype implements DestinationPrototype {
 
 	@Override
-	public Destination createDestination(DestinationConfiguration destinationConfig) {
+	public Destination createDestination(DestinationConfiguration destinationConfiguration) {
 		ParallelDestination parallelDestination = new ParallelDestination();
 
-		parallelDestination.setName(destinationConfig.getDestinationName());
+		parallelDestination.setName(destinationConfiguration.getDestinationName());
 
 		parallelDestination.setMaximumQueueSize(
-			destinationConfig.getMaximumQueueSize());
+			destinationConfiguration.getMaximumQueueSize());
 		parallelDestination.setRejectedExecutionHandler(
-			destinationConfig.getRejectedExecutionHandler());
+			destinationConfiguration.getRejectedExecutionHandler());
 		parallelDestination.setWorkersCoreSize(
-			destinationConfig.getWorkersCoreSize());
+			destinationConfiguration.getWorkersCoreSize());
 		parallelDestination.setWorkersMaxSize(
-			destinationConfig.getWorkersMaxSize());
+			destinationConfiguration.getWorkersMaxSize());
 
 		parallelDestination.afterPropertiesSet();
 

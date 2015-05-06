@@ -33,15 +33,15 @@ import org.osgi.service.component.annotations.Reference;
 public class SerialDestinationPrototype implements DestinationPrototype {
 
 	@Override
-	public Destination createDestination(DestinationConfiguration destinationConfig) {
+	public Destination createDestination(DestinationConfiguration destinationConfiguration) {
 		SerialDestination serialDestination = new SerialDestination();
 
-		serialDestination.setName(destinationConfig.getDestinationName());
+		serialDestination.setName(destinationConfiguration.getDestinationName());
 
 		serialDestination.setMaximumQueueSize(
-			destinationConfig.getMaximumQueueSize());
+			destinationConfiguration.getMaximumQueueSize());
 		serialDestination.setRejectedExecutionHandler(
-			destinationConfig.getRejectedExecutionHandler());
+			destinationConfiguration.getRejectedExecutionHandler());
 		serialDestination.setWorkersCoreSize(_WORKERS_CORE_SIZE);
 		serialDestination.setWorkersMaxSize(_WORKERS_MAX_SIZE);
 

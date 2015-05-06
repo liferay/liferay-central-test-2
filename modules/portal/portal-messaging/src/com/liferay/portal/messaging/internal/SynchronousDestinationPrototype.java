@@ -31,11 +31,11 @@ import org.osgi.service.component.annotations.Component;
 public class SynchronousDestinationPrototype implements DestinationPrototype {
 
 	@Override
-	public Destination createDestination(DestinationConfiguration destinationConfig) {
+	public Destination createDestination(DestinationConfiguration destinationConfiguration) {
 		SynchronousDestination synchronousDestination =
 			new SynchronousDestination();
 
-		synchronousDestination.setName(destinationConfig.getDestinationName());
+		synchronousDestination.setName(destinationConfiguration.getDestinationName());
 
 		synchronousDestination.afterPropertiesSet();
 
