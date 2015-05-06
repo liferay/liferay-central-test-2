@@ -24,6 +24,6 @@ public interface DestinationFactory {
 	public Destination createDestination(
 		DestinationConfiguration destinationConfiguration);
 
-	public Collection<String> getTypes();
+	public Collection<String> getDestinationTypes();
 
 }

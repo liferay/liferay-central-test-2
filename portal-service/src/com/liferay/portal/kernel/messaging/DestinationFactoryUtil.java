@@ -32,8 +32,8 @@ public class DestinationFactoryUtil {
 			destinationConfiguration);
 	}
 
-	public static Collection<String> getTypes() {
-		return _instance.getDestinationFactory().getTypes();
+	public static Collection<String> getDestinationTypes() {
+		return _instance.getDestinationFactory().getDestinationTypes();
 	}
 
 	protected DestinationFactory getDestinationFactory() {

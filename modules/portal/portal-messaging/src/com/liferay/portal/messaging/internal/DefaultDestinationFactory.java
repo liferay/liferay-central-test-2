@@ -67,7 +67,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 	}
 
 	@Override
-	public Collection<String> getTypes() {
+	public Collection<String> getDestinationTypes() {
 		return Collections.unmodifiableCollection(
 			_destinationPrototypes.keySet());
 	}
