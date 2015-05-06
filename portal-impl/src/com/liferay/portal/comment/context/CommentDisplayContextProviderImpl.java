@@ -43,10 +43,10 @@ public class CommentDisplayContextProviderImpl
 		HttpServletRequest request, HttpServletResponse response,
 		DiscussionPermission discussionPermission, Discussion discussion) {
 
-		DiscussionRequestHelper discussionRequestHelper =
-			new DiscussionRequestHelper(request);
 		DiscussionTaglibHelper discussionTaglibHelper =
 			new DiscussionTaglibHelper(request);
+		DiscussionRequestHelper discussionRequestHelper =
+			new DiscussionRequestHelper(request);
 
 		CommentSectionDisplayContext commentSectionDisplayContext =
 			new DefaultCommentSectionDisplayContext(
