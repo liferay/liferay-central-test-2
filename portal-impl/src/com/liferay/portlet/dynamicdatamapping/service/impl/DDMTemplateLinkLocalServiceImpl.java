@@ -43,8 +43,8 @@ public class DDMTemplateLinkLocalServiceImpl
 	}
 
 	@Override
-	public DDMTemplateLink deleteTemplateLink(DDMTemplateLink ddmTemplateLink) {
-		return ddmTemplateLinkPersistence.remove(ddmTemplateLink);
+	public DDMTemplateLink deleteTemplateLink(DDMTemplateLink templateLink) {
+		return ddmTemplateLinkPersistence.remove(templateLink);
 	}
 
 	@Override
