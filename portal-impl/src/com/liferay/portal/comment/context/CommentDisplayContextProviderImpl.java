@@ -53,11 +53,11 @@ public class CommentDisplayContextProviderImpl
 				discussionTaglibHelper, discussionRequestHelper,
 				discussionPermission, discussion);
 
-		for (CommentDisplayContextFactory displayContextFactory :
+		for (CommentDisplayContextFactory commentDisplayContextFactory :
 				getDisplayContextFactories()) {
 
 			commentSectionDisplayContext =
-				displayContextFactory.getCommentSectionDisplayContext(
+				commentDisplayContextFactory.getCommentSectionDisplayContext(
 					commentSectionDisplayContext, request, response,
 					discussionPermission, discussion);
 		}
@@ -80,11 +80,11 @@ public class CommentDisplayContextProviderImpl
 				discussionTaglibHelper, discussionRequestHelper,
 				discussionPermission, comment);
 
-		for (CommentDisplayContextFactory displayContextFactory :
+		for (CommentDisplayContextFactory commentDisplayContextFactory :
 				getDisplayContextFactories()) {
 
 			commentTreeDisplayContext =
-				displayContextFactory.getCommentTreeDisplayContext(
+				commentDisplayContextFactory.getCommentTreeDisplayContext(
 					commentTreeDisplayContext, request, response,
 					discussionPermission, comment);
 		}
