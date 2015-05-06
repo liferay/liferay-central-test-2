@@ -26,7 +26,7 @@ import java.util.Collection;
 public class DestinationFactoryUtil {
 
 	public static Destination createDestination(
-		DestinationConfig destinationConfig) {
+		DestinationConfiguration destinationConfig) {
 
 		return _instance.getDestinationFactory().createDestination(
 			destinationConfig);

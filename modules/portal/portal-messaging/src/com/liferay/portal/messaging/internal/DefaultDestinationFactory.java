@@ -17,7 +17,7 @@ package com.liferay.portal.messaging.internal;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationConfig;
+import com.liferay.portal.kernel.messaging.DestinationConfiguration;
 import com.liferay.portal.kernel.messaging.DestinationFactory;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -50,7 +50,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class DefaultDestinationFactory implements DestinationFactory {
 
 	@Override
-	public Destination createDestination(DestinationConfig destinationConfig) {
+	public Destination createDestination(DestinationConfiguration destinationConfig) {
 		String type = destinationConfig.getDestinationType();
 
 		DestinationPrototype destinationPrototype = _destinationPrototypes.get(
@@ -75,7 +75,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		_bundleContext = bundleContext;
 
 		_serviceTracker = new ServiceTracker<>(
-			_bundleContext, DestinationConfig.class,
+			_bundleContext, DestinationConfiguration.class,
 			new DestinationConfigServiceTrackerCustomizer());
 
 		_serviceTracker.open();
@@ -130,18 +130,18 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		new ConcurrentHashMap<>();
 	private final Map<String, ServiceRegistration<Destination>>
 		_serviceRegistrations = new HashMap<>();
-	private ServiceTracker<DestinationConfig, DestinationConfig>
+	private ServiceTracker<DestinationConfiguration, DestinationConfiguration>
 		_serviceTracker;
 
 	private class DestinationConfigServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
-			<DestinationConfig, DestinationConfig> {
+			<DestinationConfiguration, DestinationConfiguration> {
 
 		@Override
-		public DestinationConfig addingService(
-			ServiceReference<DestinationConfig> serviceReference) {
+		public DestinationConfiguration addingService(
+			ServiceReference<DestinationConfiguration> serviceReference) {
 
-			DestinationConfig destinationConfig = _bundleContext.getService(
+			DestinationConfiguration destinationConfig = _bundleContext.getService(
 				serviceReference);
 
 			try {
@@ -178,8 +178,8 @@ public class DefaultDestinationFactory implements DestinationFactory {
 
 		@Override
 		public void modifiedService(
-			ServiceReference<DestinationConfig> serviceReference,
-			DestinationConfig destinationConfig) {
+			ServiceReference<DestinationConfiguration> serviceReference,
+			DestinationConfiguration destinationConfig) {
 
 			unregister(destinationConfig);
 
@@ -195,13 +195,13 @@ public class DefaultDestinationFactory implements DestinationFactory {
 
 		@Override
 		public void removedService(
-			ServiceReference<DestinationConfig> serviceReference,
-			DestinationConfig destinationConfig) {
+			ServiceReference<DestinationConfiguration> serviceReference,
+			DestinationConfiguration destinationConfig) {
 
 			unregister(destinationConfig);
 		}
 
-		protected void unregister(DestinationConfig destinationConfig) {
+		protected void unregister(DestinationConfiguration destinationConfig) {
 			synchronized (_serviceRegistrations) {
 				if (_serviceRegistrations.containsKey(
 						destinationConfig.getDestinationName())) {

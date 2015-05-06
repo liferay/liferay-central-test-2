@@ -15,13 +15,13 @@
 package com.liferay.portal.messaging;
 
 import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationConfig;
+import com.liferay.portal.kernel.messaging.DestinationConfiguration;
 
 /**
  * @author Michael C. Han
  */
 public interface DestinationPrototype {
 
-	public Destination createDestination(DestinationConfig destinationConfig);
+	public Destination createDestination(DestinationConfiguration destinationConfig);
 
 }

@@ -16,7 +16,7 @@ package com.liferay.portal.messaging.internal;
 
 import com.liferay.portal.kernel.executor.PortalExecutorManager;
 import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationConfig;
+import com.liferay.portal.kernel.messaging.DestinationConfiguration;
 import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.messaging.DestinationPrototype;
 
@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Reference;
 public class ParallelDestinationPrototype implements DestinationPrototype {
 
 	@Override
-	public Destination createDestination(DestinationConfig destinationConfig) {
+	public Destination createDestination(DestinationConfiguration destinationConfig) {
 		ParallelDestination parallelDestination = new ParallelDestination();
 
 		parallelDestination.setName(destinationConfig.getDestinationName());
