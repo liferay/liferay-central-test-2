@@ -501,10 +501,10 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 	private static class TransformerHolder {
 
 		public static Transformer getTransformer() {
-			return _TRANSFORMER;
+			return _transformer;
 		}
 
-		private static final Transformer _TRANSFORMER = new Transformer(
+		private static final Transformer _transformer = new Transformer(
 			PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE, true);
 
 	}
