@@ -207,7 +207,7 @@ if (!portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS)) {
 				form.fm('forceDisable').val(true);
 				form.fm('local').prop('checked', false);
 				form.fm('none').prop('checked', true);
-				form.fm('redirect').val('<portlet:renderURL><portlet:param name="mvcPath" value="/html/portlet/site_admin/edit_site.jsp" /><portlet:param name="historyKey" value='<%= renderResponse.getNamespace() + "staging" %>' /></portlet:renderURL>');
+				form.fm('redirect').val('<portlet:renderURL><portlet:param name="mvcPath" value="/edit_site.jsp" /><portlet:param name="historyKey" value='<%= renderResponse.getNamespace() + "staging" %>' /></portlet:renderURL>');
 				form.fm('remote').prop('checked', false);
 			}
 
