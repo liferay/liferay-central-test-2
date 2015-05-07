@@ -314,6 +314,8 @@ public class DDLImpl implements DDL {
 			RenderResponse renderResponse)
 		throws Exception {
 
+		Transformer transformer = TransformerHolder.getTransformer();
+
 		Map<String, Object> contextObjects = new HashMap<>();
 
 		contextObjects.put(
@@ -355,8 +357,6 @@ public class DDLImpl implements DDL {
 
 		templateManager.addContextObjects(
 			contextObjects, templateHandler.getCustomContextObjects());
-
-		Transformer transformer = TransformerHolder.getTransformer();
 
 		return transformer.transform(
 			themeDisplay, contextObjects, ddmTemplate.getScript(),
