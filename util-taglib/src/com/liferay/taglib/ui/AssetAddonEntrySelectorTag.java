@@ -62,13 +62,7 @@ public class AssetAddonEntrySelectorTag extends IncludeTag {
 		_title = null;
 	}
 
-	@Override
-	protected String getPage() {
-		return _PAGE;
-	}
-
-	@Override
-	protected void setAttributes(HttpServletRequest request) {
+	protected String getId() {
 		String id = _id;
 
 		if (Validator.isNull(id)) {
@@ -77,12 +71,23 @@ public class AssetAddonEntrySelectorTag extends IncludeTag {
 			id += StringPool.UNDERLINE;
 		}
 
+		return id;
+	}
+
+	@Override
+	protected String getPage() {
+		return _PAGE;
+	}
+
+	@Override
+	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:asset-addon-entry-selector:assetAddonEntries",
 			_assetAddonEntries);
 		request.setAttribute(
 			"liferay-ui:asset-addon-entry-selector:hiddenInput", _hiddenInput);
-		request.setAttribute("liferay-ui:asset-addon-entry-selector:id", id);
+		request.setAttribute(
+			"liferay-ui:asset-addon-entry-selector:id", getId());
 		request.setAttribute(
 			"liferay-ui:asset-addon-entry-selector:selectedAssetAddonEntries",
 			_selectedAssetAddonEntries);
