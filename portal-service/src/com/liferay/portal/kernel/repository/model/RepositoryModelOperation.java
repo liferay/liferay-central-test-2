@@ -23,7 +23,7 @@ public interface RepositoryModelOperation {
 
 	public void execute(FileEntry fileEntry) throws PortalException;
 
-	public void execute(FileShortcut shortcut) throws PortalException;
+	public void execute(FileShortcut fileShortcut) throws PortalException;
 
 	public void execute(FileVersion fileVersion) throws PortalException;
 
