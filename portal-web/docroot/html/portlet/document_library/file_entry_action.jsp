@@ -38,6 +38,9 @@ if (row != null) {
 	else if (result instanceof FileEntry) {
 		fileEntry = (FileEntry)result;
 	}
+	else if (result instanceof FileShortcut) {
+		fileShortcut = (FileShortcut)result;
+	}
 	else if (result instanceof TrashEntry) {
 		TrashEntry trashEntry = (TrashEntry)result;
 
@@ -49,9 +52,6 @@ if (row != null) {
 		else {
 			fileShortcut = DLAppLocalServiceUtil.getFileShortcut(trashEntry.getClassPK());
 		}
-	}
-	else if (result instanceof FileShortcut) {
-		fileShortcut = (FileShortcut)result;
 	}
 }
 else {
