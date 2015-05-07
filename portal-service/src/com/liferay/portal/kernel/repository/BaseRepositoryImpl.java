@@ -47,7 +47,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.List;
 
 /**
@@ -266,6 +265,7 @@ public abstract class BaseRepositoryImpl
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List<com.liferay.portal.kernel.repository.model.RepositoryEntry>
 		getFileEntriesAndFileShortcuts(
 			long folderId, int status, int start, int end)
@@ -307,6 +307,7 @@ public abstract class BaseRepositoryImpl
 		throws PortalException;
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List<com.liferay.portal.kernel.repository.model.RepositoryEntry>
 		getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, boolean includeMountFolders, int start,
@@ -316,6 +317,7 @@ public abstract class BaseRepositoryImpl
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List<com.liferay.portal.kernel.repository.model.RepositoryEntry>
 		getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, String[] mimeTypes,

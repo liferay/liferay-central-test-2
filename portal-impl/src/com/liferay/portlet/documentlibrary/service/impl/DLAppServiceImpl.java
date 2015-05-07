@@ -67,7 +67,6 @@ import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifi
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -1032,6 +1031,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	 * @throws PortalException if the folder could not be found
 	 */
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long repositoryId, long folderId, int status, int start, int end)
 		throws PortalException {
@@ -1571,6 +1571,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long repositoryId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
