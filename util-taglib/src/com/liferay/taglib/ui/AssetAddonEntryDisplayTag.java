@@ -38,8 +38,8 @@ public class AssetAddonEntryDisplayTag extends IncludeTag {
 			try {
 				assetAddonEntry.include(request, getResponse());
 			}
-			catch (IOException e) {
-				_log.error(e);
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
 			}
 		}
 
