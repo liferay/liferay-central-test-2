@@ -420,8 +420,8 @@ public class SiteAdminPortlet extends MVCPortlet {
 	}
 
 	@Reference(unbind = "-")
-	protected void setSitesAdminWebUpgrade(
-		SiteAdminWebUpgrade sitesAdminWebUpgrade) {
+	protected void setSiteAdminWebUpgrade(
+		SiteAdminWebUpgrade siteAdminWebUpgrade) {
 	}
 
 	protected void updateActive(ActionRequest actionRequest, boolean active)

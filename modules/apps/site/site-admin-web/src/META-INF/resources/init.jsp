@@ -138,7 +138,7 @@ page import="com.liferay.portlet.sites.util.SitesUtil" %><%@
 page import="com.liferay.portlet.sitesadmin.search.SiteChecker" %><%@
 page import="com.liferay.portlet.usersadmin.search.GroupSearch" %><%@
 page import="com.liferay.portlet.usersadmin.search.GroupSearchTerms" %><%@
-page import="com.liferay.site.admin.web.constants.SitesAdminPortletKeys" %><%@
+page import="com.liferay.site.admin.web.constants.SiteAdminPortletKeys" %><%@
 page import="com.liferay.util.PKParser" %>
 
 <%@ page import="java.util.ArrayList" %><%@

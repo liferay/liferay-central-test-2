@@ -23,7 +23,7 @@ String redirect = ParamUtil.getString(request, "redirect", viewOrganizationsRedi
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
-long groupId = ParamUtil.getLong(request, "groupId", portletName.equals(SitesAdminPortletKeys.SITE_SETTINGS) ? themeDisplay.getSiteGroupId() : 0);
+long groupId = ParamUtil.getLong(request, "groupId", portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS) ? themeDisplay.getSiteGroupId() : 0);
 
 Group group = null;
 
@@ -79,7 +79,7 @@ if (layoutSetPrototypeId > 0) {
 
 boolean showPrototypes = ParamUtil.getBoolean(request, "showPrototypes", true);
 
-if (!portletName.equals(SitesAdminPortletKeys.SITE_SETTINGS)) {
+if (!portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS)) {
 	if (group != null) {
 		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(locale), null);
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "edit"), currentURL);
@@ -92,7 +92,7 @@ if (!portletName.equals(SitesAdminPortletKeys.SITE_SETTINGS)) {
 }
 %>
 
-<liferay-ui:success key='<%= SitesAdminPortletKeys.SITE_SETTINGS + "requestProcessed" %>' message="site-was-added" />
+<liferay-ui:success key='<%= SiteAdminPortletKeys.SITE_SETTINGS + "requestProcessed" %>' message="site-was-added" />
 
 <c:if test="<%= (group == null) || !layout.isTypeControlPanel() %>">
 
