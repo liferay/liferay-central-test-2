@@ -63,57 +63,6 @@ public class RepositoryModelUtil {
 		}
 	}
 
-	public static List<RepositoryEntry> toRepositoryEntries(
-		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts) {
-
-		List<RepositoryEntry> repositoryEntries =
-			new ArrayList<>(dlFoldersAndDLFileEntriesAndDLFileShortcuts.size());
-
-		for (Object object : dlFoldersAndDLFileEntriesAndDLFileShortcuts) {
-			if (object instanceof DLFileEntry) {
-				DLFileEntry dlFileEntry = (DLFileEntry)object;
-
-				FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
-
-				repositoryEntries.add(fileEntry);
-			}
-			else if (object instanceof DLFolder) {
-				DLFolder dlFolder = (DLFolder)object;
-
-				Folder folder = new LiferayFolder(dlFolder);
-
-				repositoryEntries.add(folder);
-			}
-			else if (object instanceof DLFileShortcut) {
-				DLFileShortcut dlFileShortcut = (DLFileShortcut)object;
-
-				FileShortcut fileShortcut = new LiferayFileShortcut(
-					dlFileShortcut);
-
-				repositoryEntries.add(fileShortcut);
-			}
-			else {
-				throw new IllegalArgumentException(
-					String.format(
-						"Expected an instance of one of: %s; got %s",
-						Arrays.asList(
-							DLFileEntry.class.getName(),
-							DLFolder.class.getName(),
-							DLFileShortcutConstants.getClassName()),
-						object));
-			}
-		}
-
-		if (ListUtil.isUnmodifiableList(
-				dlFoldersAndDLFileEntriesAndDLFileShortcuts)) {
-
-			return Collections.unmodifiableList(repositoryEntries);
-		}
-		else {
-			return repositoryEntries;
-		}
-	}
-
 	public static List<FileShortcut> toFileShortcuts(
 		List<DLFileShortcut> dlFileShortcuts) {
 
@@ -167,6 +116,57 @@ public class RepositoryModelUtil {
 		}
 		else {
 			return folders;
+		}
+	}
+
+	public static List<RepositoryEntry> toRepositoryEntries(
+		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts) {
+
+		List<RepositoryEntry> repositoryEntries = new ArrayList<>(
+			dlFoldersAndDLFileEntriesAndDLFileShortcuts.size());
+
+		for (Object object : dlFoldersAndDLFileEntriesAndDLFileShortcuts) {
+			if (object instanceof DLFileEntry) {
+				DLFileEntry dlFileEntry = (DLFileEntry)object;
+
+				FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
+
+				repositoryEntries.add(fileEntry);
+			}
+			else if (object instanceof DLFolder) {
+				DLFolder dlFolder = (DLFolder)object;
+
+				Folder folder = new LiferayFolder(dlFolder);
+
+				repositoryEntries.add(folder);
+			}
+			else if (object instanceof DLFileShortcut) {
+				DLFileShortcut dlFileShortcut = (DLFileShortcut)object;
+
+				FileShortcut fileShortcut = new LiferayFileShortcut(
+					dlFileShortcut);
+
+				repositoryEntries.add(fileShortcut);
+			}
+			else {
+				throw new IllegalArgumentException(
+					String.format(
+						"Expected an instance of one of: %s; got %s",
+						Arrays.asList(
+							DLFileEntry.class.getName(),
+							DLFolder.class.getName(),
+							DLFileShortcutConstants.getClassName()),
+						object));
+			}
+		}
+
+		if (ListUtil.isUnmodifiableList(
+				dlFoldersAndDLFileEntriesAndDLFileShortcuts)) {
+
+			return Collections.unmodifiableList(repositoryEntries);
+		}
+		else {
+			return repositoryEntries;
 		}
 	}
 

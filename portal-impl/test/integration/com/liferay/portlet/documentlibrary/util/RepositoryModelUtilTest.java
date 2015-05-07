@@ -136,8 +136,7 @@ public class RepositoryModelUtilTest {
 
 		dlFileEntriesAndFileShortcuts.add(new Object());
 
-		RepositoryModelUtil.toRepositoryEntries(
-			dlFileEntriesAndFileShortcuts);
+		RepositoryModelUtil.toRepositoryEntries(dlFileEntriesAndFileShortcuts);
 	}
 
 	@Test
