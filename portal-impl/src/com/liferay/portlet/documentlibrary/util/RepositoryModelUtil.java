@@ -63,26 +63,26 @@ public class RepositoryModelUtil {
 		}
 	}
 
-	public static List<RepositoryEntry> toFileEntriesAndFileShortcutsAndFolders(
-		List<Object> dlFileEntriesAndDLFileShortcutsAndDLFolders) {
+	public static List<RepositoryEntry> toRepositoryEntries(
+		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts) {
 
-		List<RepositoryEntry> fileEntriesFileShortcutsAndFolders =
-			new ArrayList<>(dlFileEntriesAndDLFileShortcutsAndDLFolders.size());
+		List<RepositoryEntry> repositoryEntries =
+			new ArrayList<>(dlFoldersAndDLFileEntriesAndDLFileShortcuts.size());
 
-		for (Object object : dlFileEntriesAndDLFileShortcutsAndDLFolders) {
+		for (Object object : dlFoldersAndDLFileEntriesAndDLFileShortcuts) {
 			if (object instanceof DLFileEntry) {
 				DLFileEntry dlFileEntry = (DLFileEntry)object;
 
 				FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
 
-				fileEntriesFileShortcutsAndFolders.add(fileEntry);
+				repositoryEntries.add(fileEntry);
 			}
 			else if (object instanceof DLFolder) {
 				DLFolder dlFolder = (DLFolder)object;
 
 				Folder folder = new LiferayFolder(dlFolder);
 
-				fileEntriesFileShortcutsAndFolders.add(folder);
+				repositoryEntries.add(folder);
 			}
 			else if (object instanceof DLFileShortcut) {
 				DLFileShortcut dlFileShortcut = (DLFileShortcut)object;
@@ -90,7 +90,7 @@ public class RepositoryModelUtil {
 				FileShortcut fileShortcut = new LiferayFileShortcut(
 					dlFileShortcut);
 
-				fileEntriesFileShortcutsAndFolders.add(fileShortcut);
+				repositoryEntries.add(fileShortcut);
 			}
 			else {
 				throw new IllegalArgumentException(
@@ -105,13 +105,12 @@ public class RepositoryModelUtil {
 		}
 
 		if (ListUtil.isUnmodifiableList(
-				dlFileEntriesAndDLFileShortcutsAndDLFolders)) {
+				dlFoldersAndDLFileEntriesAndDLFileShortcuts)) {
 
-			return Collections.unmodifiableList(
-				fileEntriesFileShortcutsAndFolders);
+			return Collections.unmodifiableList(repositoryEntries);
 		}
 		else {
-			return fileEntriesFileShortcutsAndFolders;
+			return repositoryEntries;
 		}
 	}
 
