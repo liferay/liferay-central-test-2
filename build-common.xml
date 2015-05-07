@@ -473,8 +473,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</then>
 	</if>
 
-	<property name="whip.agent" value="-javaagent:${project.dir}/${junit.whip.jar}=${junit.whip.includes};${junit.whip.excludes}" />
-
 	<if>
 		<not>
 			<equals arg1="${junit.debug}" arg2="true" />
@@ -483,6 +481,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<var name="junit.debug.jpda" value="" />
 		</then>
 	</if>
+
+	<property name="whip.agent" value="-javaagent:${project.dir}/${junit.whip.jar}=${junit.whip.includes};${junit.whip.excludes}" />
 
 	<macrodef name="ant-execute">
 		<attribute default="build.xml" name="ant.build.file" />
