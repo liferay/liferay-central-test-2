@@ -29,13 +29,19 @@
 		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
 		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
  <dependencies>
   <dependency>
    <groupId>net.sourceforge.pmd</groupId>
    <artifactId>pmd-java</artifactId>
    <version>5.2.3</version>
    <scope>compile</scope>
+  </dependency>
+  <dependency>
+   <groupId>net.sourceforge.pmd</groupId>
+   <artifactId>pmd-test</artifactId>
+   <version>5.2.3</version>
+   <optional>true</optional>
   </dependency>
  </dependencies>
 </project>

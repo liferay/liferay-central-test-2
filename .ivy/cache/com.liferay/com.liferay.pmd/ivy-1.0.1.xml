@@ -2,9 +2,9 @@
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 	<info organisation="com.liferay"
 		module="com.liferay.pmd"
-		revision="1.0.0"
+		revision="1.0.1"
 		status="release"
-		publication="20150108105852"
+		publication="20150507140843"
 	>
 		<license name="LGPL 2.1" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" />
 		<description homepage="">
@@ -29,5 +29,6 @@
 	</publications>
 	<dependencies>
 		<dependency org="net.sourceforge.pmd" name="pmd-java" rev="5.2.3" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="net.sourceforge.pmd" name="pmd-test" rev="5.2.3" force="true" conf="optional->compile(*),master(*)"/>
 	</dependencies>
 </ivy-module>
