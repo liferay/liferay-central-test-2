@@ -37,7 +37,7 @@ public class Greeter extends Application {
 	@Path("/sayHello")
 	@Produces("text/plain")
 	public String sayHello() {
-		return "Hello!";
+		return "Hello.";
 	}
 
 }

@@ -37,7 +37,7 @@ public class JaxRsComponentRegistrationTest {
 	public void testIsRegistered() throws Exception {
 		URL url = new URL(_url, "/o/rest-test/testApp/sayHello");
 
-		Assert.assertEquals("Hello!", StringUtil.read(url.openStream()));
+		Assert.assertEquals("Hello.", StringUtil.read(url.openStream()));
 	}
 
 	@ArquillianResource
