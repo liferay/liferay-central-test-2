@@ -27,10 +27,10 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + SiteAdminPortletKeys.SITES_ADMIN},
+	property = {"javax.portlet.name=" + SiteAdminPortletKeys.SITE_ADMIN},
 	service = CustomAttributesDisplay.class
 )
-public class SitesAdminCustomAttributesDisplay
+public class SiteAdminCustomAttributesDisplay
 	extends BaseCustomAttributesDisplay {
 
 	@Override

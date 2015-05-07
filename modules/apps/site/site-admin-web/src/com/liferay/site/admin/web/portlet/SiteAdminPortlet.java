@@ -137,7 +137,7 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 	},
 	service = Portlet.class
 )
-public class SitesAdminPortlet extends MVCPortlet {
+public class SiteAdminPortlet extends MVCPortlet {
 
 	public void activate(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -206,7 +206,7 @@ public class SitesAdminPortlet extends MVCPortlet {
 
 				String controlPanelURL = HttpUtil.setParameter(
 					themeDisplay.getURLControlPanel(), "p_p_id",
-					SiteAdminPortletKeys.SITES_ADMIN);
+					SiteAdminPortletKeys.SITE_ADMIN);
 
 				controlPanelURL = HttpUtil.setParameter(
 					controlPanelURL, "controlPanelCategory",

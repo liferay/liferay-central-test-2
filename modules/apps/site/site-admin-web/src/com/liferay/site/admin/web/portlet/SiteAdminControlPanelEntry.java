@@ -34,10 +34,10 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + SiteAdminPortletKeys.SITES_ADMIN},
+	property = {"javax.portlet.name=" + SiteAdminPortletKeys.SITE_ADMIN},
 	service = ControlPanelEntry.class
 )
-public class SitesAdminControlPanelEntry extends BaseControlPanelEntry {
+public class SiteAdminControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
 	protected boolean hasPermissionImplicitlyGranted(
