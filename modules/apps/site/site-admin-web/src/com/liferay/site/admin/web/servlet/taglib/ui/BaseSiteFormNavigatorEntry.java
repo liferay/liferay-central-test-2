@@ -12,38 +12,21 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorCategory;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
-
-import java.util.Locale;
-
-import org.osgi.service.component.annotations.Component;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.servlet.taglib.ui.BaseFormNavigatorEntry;
 
 /**
  * @author Sergio González
  */
-@Component(
-	property = {"service.ranking:Integer=30"},
-	service = FormNavigatorCategory.class
-)
-public class SitesSEOFormNavigatorCategory implements FormNavigatorCategory {
+public abstract class BaseSiteFormNavigatorEntry
+	extends BaseFormNavigatorEntry<Group> {
 
 	@Override
 	public String getFormNavigatorId() {
 		return FormNavigatorConstants.FORM_NAVIGATOR_ID_SITES;
-	}
-
-	@Override
-	public String getKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_SEO;
-	}
-
-	@Override
-	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "search-engine-optimization");
 	}
 
 }

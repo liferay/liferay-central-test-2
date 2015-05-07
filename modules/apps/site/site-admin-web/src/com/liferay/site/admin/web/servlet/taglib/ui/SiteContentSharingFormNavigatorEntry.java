@@ -12,11 +12,13 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 
@@ -28,30 +30,38 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=30"},
+	property = {"service.ranking:Integer=20"},
 	service = FormNavigatorEntry.class
 )
-public class SiteCustomFieldsFormNavigatorEntry
+public class SiteContentSharingFormNavigatorEntry
 	extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	public String getCategoryKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_MISCELLANEOUS;
+		return FormNavigatorConstants.CATEGORY_KEY_SITES_ADVANCED;
 	}
 
 	@Override
 	public String getKey() {
-		return "custom-fields";
+		return "content-sharing";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "custom-fields");
+		return LanguageUtil.get(locale, "content-sharing");
 	}
 
 	@Override
 	public boolean isVisible(User user, Group group) {
-		if ((group == null) || group.isCompany()) {
+		if (group == null) {
+			return false;
+		}
+
+		int contentSharingWithChildrenEnabled = PrefsPropsUtil.getInteger(
+			group.getCompanyId(),
+			PropsKeys.SITES_CONTENT_SHARING_WITH_CHILDREN_ENABLED);
+
+		if (contentSharingWithChildrenEnabled == 0) {
 			return false;
 		}
 
@@ -60,7 +70,7 @@ public class SiteCustomFieldsFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return "/site/custom_fields.jsp";
+		return "/site/content_sharing.jsp";
 	}
 
 }

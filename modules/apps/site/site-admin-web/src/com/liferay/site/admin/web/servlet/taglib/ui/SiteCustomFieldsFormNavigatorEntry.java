@@ -12,13 +12,11 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 
@@ -30,37 +28,30 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=20"},
+	property = {"service.ranking:Integer=30"},
 	service = FormNavigatorEntry.class
 )
-public class SiteRecycleBinFormNavigatorEntry
+public class SiteCustomFieldsFormNavigatorEntry
 	extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	public String getCategoryKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_ADVANCED;
+		return FormNavigatorConstants.CATEGORY_KEY_SITES_MISCELLANEOUS;
 	}
 
 	@Override
 	public String getKey() {
-		return "recycle-bin";
+		return "custom-fields";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "recycle-bin");
+		return LanguageUtil.get(locale, "custom-fields");
 	}
 
 	@Override
 	public boolean isVisible(User user, Group group) {
-		if (group == null) {
-			return false;
-		}
-
-		boolean trashEnabled = PrefsPropsUtil.getBoolean(
-			group.getCompanyId(), PropsKeys.TRASH_ENABLED);
-
-		if (!trashEnabled) {
+		if ((group == null) || group.isCompany()) {
 			return false;
 		}
 
@@ -69,7 +60,7 @@ public class SiteRecycleBinFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return "/site/recycle_bin.jsp";
+		return "/site/custom_fields.jsp";
 	}
 
 }

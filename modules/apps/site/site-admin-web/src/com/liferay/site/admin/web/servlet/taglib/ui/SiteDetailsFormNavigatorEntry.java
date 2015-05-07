@@ -12,13 +12,11 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.User;
 
 import java.util.Locale;
 
@@ -28,11 +26,10 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=10"},
+	property = {"service.ranking:Integer=50"},
 	service = FormNavigatorEntry.class
 )
-public class SiteSiteTemplateFormNavigatorEntry
-	extends BaseSiteFormNavigatorEntry {
+public class SiteDetailsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	public String getCategoryKey() {
@@ -41,26 +38,17 @@ public class SiteSiteTemplateFormNavigatorEntry
 
 	@Override
 	public String getKey() {
-		return "site-template";
+		return "details";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "site-template");
-	}
-
-	@Override
-	public boolean isVisible(User user, Group group) {
-		if ((group == null) || group.isCompany()) {
-			return false;
-		}
-
-		return true;
+		return LanguageUtil.get(locale, "details");
 	}
 
 	@Override
 	protected String getJspPath() {
-		return "/site/site_template.jsp";
+		return "/site/details.jsp";
 	}
 
 }

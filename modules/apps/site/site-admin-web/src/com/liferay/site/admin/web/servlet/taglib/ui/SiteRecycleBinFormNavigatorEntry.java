@@ -12,11 +12,13 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 
@@ -28,10 +30,10 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=60"},
+	property = {"service.ranking:Integer=20"},
 	service = FormNavigatorEntry.class
 )
-public class SiteDefaultUserAssociationsFormNavigatorEntry
+public class SiteRecycleBinFormNavigatorEntry
 	extends BaseSiteFormNavigatorEntry {
 
 	@Override
@@ -41,17 +43,24 @@ public class SiteDefaultUserAssociationsFormNavigatorEntry
 
 	@Override
 	public String getKey() {
-		return "default-user-associations";
+		return "recycle-bin";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "default-user-associations");
+		return LanguageUtil.get(locale, "recycle-bin");
 	}
 
 	@Override
 	public boolean isVisible(User user, Group group) {
-		if ((group == null) || group.isCompany()) {
+		if (group == null) {
+			return false;
+		}
+
+		boolean trashEnabled = PrefsPropsUtil.getBoolean(
+			group.getCompanyId(), PropsKeys.TRASH_ENABLED);
+
+		if (!trashEnabled) {
 			return false;
 		}
 
@@ -60,7 +69,7 @@ public class SiteDefaultUserAssociationsFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return "/site/default_user_associations.jsp";
+		return "/site/recycle_bin.jsp";
 	}
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
@@ -28,10 +28,10 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=20"},
+	property = {"service.ranking:Integer=10"},
 	service = FormNavigatorEntry.class
 )
-public class SiteDocumentsAndMediaFormNavigatorEntry
+public class SiteSiteTemplateFormNavigatorEntry
 	extends BaseSiteFormNavigatorEntry {
 
 	@Override
@@ -41,12 +41,12 @@ public class SiteDocumentsAndMediaFormNavigatorEntry
 
 	@Override
 	public String getKey() {
-		return "documents-and-media";
+		return "site-template";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "documents-and-media");
+		return LanguageUtil.get(locale, "site-template");
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class SiteDocumentsAndMediaFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return "/site/documents_and_media.jsp";
+		return "/site/site_template.jsp";
 	}
 
 }

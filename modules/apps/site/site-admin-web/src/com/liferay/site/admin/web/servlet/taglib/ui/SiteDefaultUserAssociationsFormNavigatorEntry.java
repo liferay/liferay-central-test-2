@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
@@ -28,30 +28,30 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=40"},
+	property = {"service.ranking:Integer=60"},
 	service = FormNavigatorEntry.class
 )
-public class SiteCategorizationFormNavigatorEntry
+public class SiteDefaultUserAssociationsFormNavigatorEntry
 	extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	public String getCategoryKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_BASIC_INFORMATION;
+		return FormNavigatorConstants.CATEGORY_KEY_SITES_ADVANCED;
 	}
 
 	@Override
 	public String getKey() {
-		return "categorization";
+		return "default-user-associations";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "categorization");
+		return LanguageUtil.get(locale, "default-user-associations");
 	}
 
 	@Override
 	public boolean isVisible(User user, Group group) {
-		if ((group != null) && group.isCompany()) {
+		if ((group == null) || group.isCompany()) {
 			return false;
 		}
 
@@ -60,7 +60,7 @@ public class SiteCategorizationFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return "/site/categorization.jsp";
+		return "/site/default_user_associations.jsp";
 	}
 
 }

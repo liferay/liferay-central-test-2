@@ -12,11 +12,13 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorCategory;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
+import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 
 import java.util.Locale;
 
@@ -27,24 +29,37 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {"service.ranking:Integer=10"},
-	service = FormNavigatorCategory.class
+	service = FormNavigatorEntry.class
 )
-public class SitesMiscellaneousFormNavigatorCategory
-	implements FormNavigatorCategory {
+public class SiteRobotsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 
 	@Override
-	public String getFormNavigatorId() {
-		return FormNavigatorConstants.FORM_NAVIGATOR_ID_SITES;
+	public String getCategoryKey() {
+		return FormNavigatorConstants.CATEGORY_KEY_SITES_SEO;
 	}
 
 	@Override
 	public String getKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_MISCELLANEOUS;
+		return "robots";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "miscellaneous");
+		return LanguageUtil.get(locale, "robots");
+	}
+
+	@Override
+	public boolean isVisible(User user, Group group) {
+		if ((group == null) || group.isCompany()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	protected String getJspPath() {
+		return "/site/robots.jsp";
 	}
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
@@ -28,24 +28,25 @@ import org.osgi.service.component.annotations.Component;
  * @author Sergio González
  */
 @Component(
-	property = {"service.ranking:Integer=10"},
+	property = {"service.ranking:Integer=20"},
 	service = FormNavigatorEntry.class
 )
-public class SiteRobotsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
+public class SiteDocumentsAndMediaFormNavigatorEntry
+	extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	public String getCategoryKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_SEO;
+		return FormNavigatorConstants.CATEGORY_KEY_SITES_BASIC_INFORMATION;
 	}
 
 	@Override
 	public String getKey() {
-		return "robots";
+		return "documents-and-media";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "robots");
+		return LanguageUtil.get(locale, "documents-and-media");
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class SiteRobotsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	protected String getJspPath() {
-		return "/site/robots.jsp";
+		return "/site/documents_and_media.jsp";
 	}
 
 }

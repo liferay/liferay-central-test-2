@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.admin.web.taglib.ui;
+package com.liferay.site.admin.web.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
@@ -31,26 +31,26 @@ import org.osgi.service.component.annotations.Component;
 	property = {"service.ranking:Integer=30"},
 	service = FormNavigatorEntry.class
 )
-public class SiteMapsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
+public class SiteSiteURLFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	public String getCategoryKey() {
-		return FormNavigatorConstants.CATEGORY_KEY_SITES_ADVANCED;
+		return FormNavigatorConstants.CATEGORY_KEY_SITES_BASIC_INFORMATION;
 	}
 
 	@Override
 	public String getKey() {
-		return "maps";
+		return "site-url";
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "maps");
+		return LanguageUtil.get(locale, "site-url");
 	}
 
 	@Override
 	public boolean isVisible(User user, Group group) {
-		if (group == null) {
+		if ((group == null) || group.isCompany()) {
 			return false;
 		}
 
@@ -59,7 +59,7 @@ public class SiteMapsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 
 	@Override
 	protected String getJspPath() {
-		return "/site/maps.jsp";
+		return "/site/site_url.jsp";
 	}
 
 }
