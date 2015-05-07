@@ -120,15 +120,14 @@ public class ServiceDependencyManagerTest {
 			TrackedOne.class, TrackedTwo.class);
 
 		registry.registerService(TrackedOne.class, new TrackedOne());
-
 		registry.registerService(
 			TrackedTwo.class, new TrackedTwo(new TrackedOne()));
 
 		try {
 			Thread.sleep(100);
 		}
-		catch (InterruptedException e) {
-			Assert.fail(e.toString());
+		catch (InterruptedException ie) {
+			Assert.fail(ie.toString());
 		}
 
 		Assert.assertTrue(dependenciesSatisfied.get());
@@ -162,18 +161,17 @@ public class ServiceDependencyManagerTest {
 			"(objectClass=" + TrackedOne.class.getName() + ")");
 
 		serviceDependencyManager.registerDependencies(
-			new Class[] { TrackedTwo.class }, new Filter[] { filter1 });
+			new Class[] {TrackedTwo.class}, new Filter[] {filter1});
 
 		registry.registerService(TrackedOne.class, new TrackedOne());
-
 		registry.registerService(
 			TrackedTwo.class, new TrackedTwo(new TrackedOne()));
 
 		try {
 			Thread.sleep(100);
 		}
-		catch (InterruptedException e) {
-			Assert.fail(e.toString());
+		catch (InterruptedException ie) {
+			Assert.fail(ie.toString());
 		}
 
 		Assert.assertTrue(dependenciesSatisfied.get());
@@ -211,15 +209,14 @@ public class ServiceDependencyManagerTest {
 		serviceDependencyManager.registerDependencies(filter1, filter2);
 
 		registry.registerService(TrackedOne.class, new TrackedOne());
-
 		registry.registerService(
 			TrackedTwo.class, new TrackedTwo(new TrackedOne()));
 
 		try {
 			Thread.sleep(100);
 		}
-		catch (InterruptedException e) {
-			Assert.fail(e.toString());
+		catch (InterruptedException ie) {
+			Assert.fail(ie.toString());
 		}
 
 		Assert.assertTrue(dependenciesSatisfied.get());
@@ -257,16 +254,18 @@ public class ServiceDependencyManagerTest {
 		serviceDependencyManager.registerDependencies(filter1, filter2);
 
 		registry.registerService(TrackedOne.class, new TrackedOne());
-
 		registry.registerService(
 			TrackedTwo.class, new TrackedTwo(new TrackedOne()));
 
-		Thread dependencyWaiter = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				serviceDependencyManager.waitForDependencies(100);
-			}
-		});
+		Thread dependencyWaiter = new Thread(
+			new Runnable() {
+
+				@Override
+				public void run() {
+					serviceDependencyManager.waitForDependencies(100);
+				}
+
+			});
 
 		dependencyWaiter.setDaemon(true);
 
@@ -281,7 +280,7 @@ public class ServiceDependencyManagerTest {
 
 			Assert.assertTrue(dependenciesSatisfied.get());
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException ie) {
 		}
 	}
 
@@ -341,7 +340,7 @@ public class ServiceDependencyManagerTest {
 
 			Assert.assertFalse(dependenciesSatisfied.get());
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException ie) {
 		}
 	}
 
