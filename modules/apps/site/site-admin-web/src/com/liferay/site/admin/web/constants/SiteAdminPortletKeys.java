@@ -19,10 +19,10 @@ package com.liferay.site.admin.web.constants;
  */
 public class SiteAdminPortletKeys {
 
-	public static final String SITE_SETTINGS =
-		"com_liferay_site_admin_web_portlet_SiteSettingsPortlet";
-
 	public static final String SITE_ADMIN =
 		"com_liferay_site_admin_web_portlet_SiteAdminPortlet";
+
+	public static final String SITE_SETTINGS =
+		"com_liferay_site_admin_web_portlet_SiteSettingsPortlet";
 
 }
