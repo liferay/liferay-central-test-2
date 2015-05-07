@@ -63,13 +63,13 @@ public class RepositoryModelUtil {
 		}
 	}
 
-	public static List<RepositoryEntry> toFileEntriesFileShortcutsAndFolders(
-		List<Object> dlFileEntriesDLFileShortcutsAndDLFolders) {
+	public static List<RepositoryEntry> toFileEntriesAndFileShortcutsAndFolders(
+		List<Object> dlFileEntriesAndDLFileShortcutsAndDLFolders) {
 
 		List<RepositoryEntry> fileEntriesFileShortcutsAndFolders =
-			new ArrayList<>(dlFileEntriesDLFileShortcutsAndDLFolders.size());
+			new ArrayList<>(dlFileEntriesAndDLFileShortcutsAndDLFolders.size());
 
-		for (Object object : dlFileEntriesDLFileShortcutsAndDLFolders) {
+		for (Object object : dlFileEntriesAndDLFileShortcutsAndDLFolders) {
 			if (object instanceof DLFileEntry) {
 				DLFileEntry dlFileEntry = (DLFileEntry)object;
 
@@ -105,7 +105,7 @@ public class RepositoryModelUtil {
 		}
 
 		if (ListUtil.isUnmodifiableList(
-				dlFileEntriesDLFileShortcutsAndDLFolders)) {
+				dlFileEntriesAndDLFileShortcutsAndDLFolders)) {
 
 			return Collections.unmodifiableList(
 				fileEntriesFileShortcutsAndFolders);

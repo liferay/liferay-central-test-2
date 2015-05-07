@@ -109,7 +109,7 @@ public class RepositoryModelUtilTest {
 				queryDefinition);
 
 		List<RepositoryEntry> repositoryEntries =
-			RepositoryModelUtil.toFileEntriesFileShortcutsAndFolders(
+			RepositoryModelUtil.toFileEntriesAndFileShortcutsAndFolders(
 				foldersAndFileEntriesAndFileShortcuts);
 
 		Assert.assertEquals(
@@ -136,7 +136,7 @@ public class RepositoryModelUtilTest {
 
 		dlFileEntriesAndFileShortcuts.add(new Object());
 
-		RepositoryModelUtil.toFileEntriesFileShortcutsAndFolders(
+		RepositoryModelUtil.toFileEntriesAndFileShortcutsAndFolders(
 			dlFileEntriesAndFileShortcuts);
 	}
 
