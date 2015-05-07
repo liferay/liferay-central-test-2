@@ -63,15 +63,14 @@ public class AssetAddonEntrySelectorTag extends IncludeTag {
 	}
 
 	protected String getId() {
-		String id = _id;
-
-		if (Validator.isNull(id)) {
-			id = PortalUtil.generateRandomKey(
-				request, "taglib_ui_asset_addon_entry_selector_page");
-			id += StringPool.UNDERLINE;
+		if (Validator.isNotNull(_id)) {
+			return _id;
 		}
 
-		return id;
+		String id = PortalUtil.generateRandomKey(
+			request, "taglib_ui_asset_addon_entry_selector_page");
+
+		return id + StringPool.UNDERLINE;
 	}
 
 	@Override
