@@ -56,8 +56,7 @@ public class LiferayFileShortcut extends LiferayModel implements FileShortcut {
 
 	@Override
 	public boolean containsPermission(
-			PermissionChecker permissionChecker, String actionId)
-		throws PortalException {
+		PermissionChecker permissionChecker, String actionId) {
 
 		return DLFileShortcutPermission.contains(
 			permissionChecker, _dlFileShortcut, actionId);

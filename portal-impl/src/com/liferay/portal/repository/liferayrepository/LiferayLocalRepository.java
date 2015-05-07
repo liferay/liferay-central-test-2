@@ -418,8 +418,7 @@ public class LiferayLocalRepository
 
 	@Override
 	public void updateFileShortcuts(
-			long oldToFileEntryId, long newToFileEntryId)
-		throws PortalException {
+		long oldToFileEntryId, long newToFileEntryId) {
 
 		dlFileShortcutLocalService.updateFileShortcuts(
 			oldToFileEntryId, newToFileEntryId);

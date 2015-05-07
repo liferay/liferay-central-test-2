@@ -69,9 +69,8 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 
 	@Override
 	public FileShortcut addFileShortcut(
-			long userId, long folderId, long toFileEntryId,
-			ServiceContext serviceContext)
-		throws PortalException {
+		long userId, long folderId, long toFileEntryId,
+		ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -162,9 +161,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 	}
 
 	@Override
-	public FileShortcut getFileShortcut(long fileShortcutId)
-		throws PortalException {
-
+	public FileShortcut getFileShortcut(long fileShortcutId) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -269,17 +266,15 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 
 	@Override
 	public FileShortcut updateFileShortcut(
-			long userId, long fileShortcutId, long folderId, long toFileEntryId,
-			ServiceContext serviceContext)
-		throws PortalException {
+		long userId, long fileShortcutId, long folderId, long toFileEntryId,
+		ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void updateFileShortcuts(
-			long oldToFileEntryId, long newToFileEntryId)
-		throws PortalException {
+		long oldToFileEntryId, long newToFileEntryId) {
 	}
 
 	@Override
