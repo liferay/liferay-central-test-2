@@ -49,18 +49,17 @@ public class ServiceDependencyManagerTest {
 			new ServiceDependencyManager();
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
-			@Override
-			public void dependenciesFulfilled() {
-			}
+				@Override
+				public void dependenciesFulfilled() {
+				}
 
-			@Override
-			public void destroy() {
-			}
+				@Override
+				public void destroy() {
+				}
 
-		});
+			});
 
 		serviceDependencyManager.registerDependencies(TestInterface2.class);
 	}
@@ -75,7 +74,6 @@ public class ServiceDependencyManagerTest {
 			new ServiceDependencyManager();
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
@@ -102,7 +100,6 @@ public class ServiceDependencyManagerTest {
 		final AtomicBoolean dependenciesSatisfied = new AtomicBoolean(false);
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
@@ -143,7 +140,6 @@ public class ServiceDependencyManagerTest {
 		final AtomicBoolean dependenciesSatisfied = new AtomicBoolean(false);
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
@@ -157,11 +153,11 @@ public class ServiceDependencyManagerTest {
 
 			});
 
-		Filter filter1 = registry.getFilter(
+		Filter filter = registry.getFilter(
 			"(objectClass=" + TrackedOne.class.getName() + ")");
 
 		serviceDependencyManager.registerDependencies(
-			new Class[] {TrackedTwo.class}, new Filter[] {filter1});
+			new Class[] {TrackedTwo.class}, new Filter[] {filter});
 
 		registry.registerService(TrackedOne.class, new TrackedOne());
 		registry.registerService(
@@ -187,7 +183,6 @@ public class ServiceDependencyManagerTest {
 		final AtomicBoolean dependenciesSatisfied = new AtomicBoolean(false);
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
@@ -232,7 +227,6 @@ public class ServiceDependencyManagerTest {
 		final AtomicBoolean dependenciesSatisfied = new AtomicBoolean(false);
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
@@ -294,7 +288,6 @@ public class ServiceDependencyManagerTest {
 		final AtomicBoolean dependenciesSatisfied = new AtomicBoolean(false);
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
