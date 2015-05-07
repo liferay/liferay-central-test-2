@@ -21,7 +21,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.BaseControlPanelEntry;
 import com.liferay.portlet.ControlPanelEntry;
-import com.liferay.site.admin.web.constants.SitesAdminPortletKeys;
+import com.liferay.site.admin.web.constants.SiteAdminPortletKeys;
 
 import java.util.LinkedHashMap;
 
@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + SitesAdminPortletKeys.SITES_ADMIN},
+	property = {"javax.portlet.name=" + SiteAdminPortletKeys.SITES_ADMIN},
 	service = ControlPanelEntry.class
 )
 public class SitesControlPanelEntry extends BaseControlPanelEntry {

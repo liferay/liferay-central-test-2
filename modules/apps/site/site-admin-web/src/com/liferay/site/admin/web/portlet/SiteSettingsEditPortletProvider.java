@@ -16,7 +16,7 @@ package com.liferay.site.admin.web.portlet;
 
 import com.liferay.portal.kernel.portlet.BasePortletProvider;
 import com.liferay.portal.kernel.portlet.EditPortletProvider;
-import com.liferay.site.admin.web.constants.SitesAdminPortletKeys;
+import com.liferay.site.admin.web.constants.SiteAdminPortletKeys;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -33,7 +33,7 @@ public class SiteSettingsEditPortletProvider
 
 	@Override
 	public String getPortletId() {
-		return SitesAdminPortletKeys.SITE_SETTINGS;
+		return SiteAdminPortletKeys.SITE_SETTINGS;
 	}
 
 }

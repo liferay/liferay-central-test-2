@@ -17,7 +17,7 @@ package com.liferay.site.admin.web.constants;
 /**
  * @author Eudaldo Alonso
  */
-public class SitesAdminPortletKeys {
+public class SiteAdminPortletKeys {
 
 	public static final String SITE_SETTINGS =
 		"com_liferay_site_admin_web_portlet_SiteSettingsPortlet";

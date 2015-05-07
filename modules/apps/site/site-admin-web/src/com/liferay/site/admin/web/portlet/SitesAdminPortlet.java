@@ -82,7 +82,7 @@ import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.sites.util.Sites;
 import com.liferay.portlet.sites.util.SitesUtil;
-import com.liferay.site.admin.web.constants.SitesAdminPortletKeys;
+import com.liferay.site.admin.web.constants.SiteAdminPortletKeys;
 import com.liferay.site.admin.web.upgrade.SiteAdminWebUpgrade;
 
 import java.io.IOException;
@@ -202,11 +202,11 @@ public class SitesAdminPortlet extends MVCPortlet {
 				PortletURL siteAdministrationURL =
 					PortalUtil.getSiteAdministrationURL(
 						actionResponse, themeDisplay,
-						SitesAdminPortletKeys.SITE_SETTINGS);
+						SiteAdminPortletKeys.SITE_SETTINGS);
 
 				String controlPanelURL = HttpUtil.setParameter(
 					themeDisplay.getURLControlPanel(), "p_p_id",
-					SitesAdminPortletKeys.SITES_ADMIN);
+					SiteAdminPortletKeys.SITES_ADMIN);
 
 				controlPanelURL = HttpUtil.setParameter(
 					controlPanelURL, "controlPanelCategory",
@@ -220,7 +220,7 @@ public class SitesAdminPortlet extends MVCPortlet {
 
 				MultiSessionMessages.add(
 					actionRequest,
-					SitesAdminPortletKeys.SITE_SETTINGS + "requestProcessed");
+					SiteAdminPortletKeys.SITE_SETTINGS + "requestProcessed");
 			}
 			else {
 				long newRefererPlid = getRefererPlid(

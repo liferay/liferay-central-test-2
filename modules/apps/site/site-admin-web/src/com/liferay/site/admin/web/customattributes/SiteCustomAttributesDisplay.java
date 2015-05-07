@@ -18,7 +18,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
-import com.liferay.site.admin.web.constants.SitesAdminPortletKeys;
+import com.liferay.site.admin.web.constants.SiteAdminPortletKeys;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + SitesAdminPortletKeys.SITES_ADMIN},
+	property = {"javax.portlet.name=" + SiteAdminPortletKeys.SITES_ADMIN},
 	service = CustomAttributesDisplay.class
 )
 public class SiteCustomAttributesDisplay extends BaseCustomAttributesDisplay {

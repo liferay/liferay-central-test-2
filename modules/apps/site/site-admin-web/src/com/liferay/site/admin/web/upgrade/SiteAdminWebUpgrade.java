@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
-import com.liferay.site.admin.web.constants.SitesAdminPortletKeys;
+import com.liferay.site.admin.web.constants.SiteAdminPortletKeys;
 
 import java.util.Collections;
 
@@ -52,8 +52,8 @@ public class SiteAdminWebUpgrade {
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
-					new String[] {"134", SitesAdminPortletKeys.SITES_ADMIN},
-					new String[] {"165", SitesAdminPortletKeys.SITE_SETTINGS}
+					new String[] {"134", SiteAdminPortletKeys.SITES_ADMIN},
+					new String[] {"165", SiteAdminPortletKeys.SITE_SETTINGS}
 				};
 			}
 
