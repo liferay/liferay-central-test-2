@@ -151,9 +151,10 @@ public class RepositoryModelUtilTest {
 		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.getFileEntries(
 				_group.getGroupId(), _folder.getFolderId());
+				
+		DLFileEntry dlFileEntry = dlFileEntries.get(0);
 
-		List<DLFileShortcut> dlFileShortcuts = dlFileEntries.get(
-			0).getFileShortcuts();
+		List<DLFileShortcut> dlFileShortcuts = dlFileEntry.getFileShortcuts();
 
 		List<FileShortcut> fileShortcuts = RepositoryModelUtil.toFileShortcuts(
 			dlFileShortcuts);
