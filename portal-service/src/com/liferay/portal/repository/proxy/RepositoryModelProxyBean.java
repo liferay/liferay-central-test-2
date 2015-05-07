@@ -180,19 +180,20 @@ public abstract class RepositoryModelProxyBean {
 	}
 
 	protected List<RepositoryEntry> toObjectProxyBeans(
-		List<RepositoryEntry> objects) {
+		List<RepositoryEntry> repositoryEntries) {
 
-		if ((objects == null) || objects.isEmpty()) {
-			return objects;
+		if ((repositoryEntries == null) || repositoryEntries.isEmpty()) {
+			return repositoryEntries;
 		}
 
 		List<RepositoryEntry> objectProxyBeans = new ArrayList<>();
 
-		for (Object object : objects) {
-			objectProxyBeans.add((RepositoryEntry)newProxyBean(object));
+		for (RepositoryEntry repositoryEntry : repositoryEntries) {
+			objectProxyBeans.add(
+				(RepositoryEntry)newProxyBean(repositoryEntry));
 		}
 
-		if (ListUtil.isUnmodifiableList(objects)) {
+		if (ListUtil.isUnmodifiableList(repositoryEntries)) {
 			return Collections.unmodifiableList(objectProxyBeans);
 		}
 
