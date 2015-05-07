@@ -98,7 +98,7 @@ public class RepositoryModelUtilTest {
 	}
 
 	@Test
-	public void testToFileEntriesFileShortcutsAndFolders() throws Exception {
+	public void testToRepositoryEntries() throws Exception {
 		populateFolderWithDLFileEntries();
 		populateFolderWithDLFileShortcuts();
 		populateFolderWithDLFolders();
@@ -122,7 +122,7 @@ public class RepositoryModelUtilTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testToFileEntriesFileShortcutsAndFoldersWithIllegalArgument()
+	public void testToRepositoryEntriesWithIllegalArgument()
 		throws Exception {
 
 		populateFolderWithDLFileEntries();
