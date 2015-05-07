@@ -31,8 +31,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Eudaldo Alonso
  */
-@Component(immediate = true, service = SitesAdminWebUpgrade.class)
-public class SitesAdminWebUpgrade {
+@Component(immediate = true, service = SiteAdminWebUpgrade.class)
+public class SiteAdminWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(

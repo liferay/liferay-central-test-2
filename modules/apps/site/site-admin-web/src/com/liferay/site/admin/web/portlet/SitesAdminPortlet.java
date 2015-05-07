@@ -83,7 +83,7 @@ import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.sites.util.Sites;
 import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.site.admin.web.constants.SitesAdminPortletKeys;
-import com.liferay.site.admin.web.upgrade.SitesAdminWebUpgrade;
+import com.liferay.site.admin.web.upgrade.SiteAdminWebUpgrade;
 
 import java.io.IOException;
 
@@ -421,7 +421,7 @@ public class SitesAdminPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
 	protected void setSitesAdminWebUpgrade(
-		SitesAdminWebUpgrade sitesAdminWebUpgrade) {
+		SiteAdminWebUpgrade sitesAdminWebUpgrade) {
 	}
 
 	protected void updateActive(ActionRequest actionRequest, boolean active)
