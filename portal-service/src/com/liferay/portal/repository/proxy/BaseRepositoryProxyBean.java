@@ -505,11 +505,11 @@ public class BaseRepositoryProxyBean
 			int end, OrderByComparator<?> obc)
 		throws PortalException {
 
-		List<RepositoryEntry> objects =
+		List<RepositoryEntry> foldersAndFileEntriesAndFileShortcuts =
 			_baseRepository.getFoldersAndFileEntriesAndFileShortcuts(
 				folderId, status, includeMountFolders, start, end, obc);
 
-		return toObjectProxyBeans(objects);
+		return toObjectProxyBeans(foldersAndFileEntriesAndFileShortcuts);
 	}
 
 	@Override
@@ -519,12 +519,12 @@ public class BaseRepositoryProxyBean
 			OrderByComparator<?> obc)
 		throws PortalException {
 
-		List<RepositoryEntry> objects =
+		List<RepositoryEntry> foldersAndFileEntriesAndFileShortcuts =
 			_baseRepository.getFoldersAndFileEntriesAndFileShortcuts(
 				folderId, status, mimeTypes, includeMountFolders, start, end,
 				obc);
 
-		return toObjectProxyBeans(objects);
+		return toObjectProxyBeans(foldersAndFileEntriesAndFileShortcuts);
 	}
 
 	@Override
