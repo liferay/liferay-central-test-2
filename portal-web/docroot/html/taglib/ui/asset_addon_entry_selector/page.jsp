@@ -45,13 +45,13 @@
 </div>
 
 <aui:script use="liferay-asset-addon-entry-selector">
-	var entries = [];
+	var assetAddonEntries = [];
 
 	<%
 	for (AssetAddonEntry assetAddonEntry : assetAddonEntries) {
 	%>
 
-		entries.push(
+		assetAddonEntries.push(
 			{
 				icon: '<%= assetAddonEntry.getIcon() %>',
 				key: '<%= assetAddonEntry.getKey() %>',
@@ -78,7 +78,7 @@
 	var assetAddonEntrySelector = new Liferay.AssetAddonEntrySelector(
 		{
 			dialogTitle: '<liferay-ui:message key="<%= title %>" />',
-			entries: entries,
+			entries: assetAddonEntries,
 			rootNode: '#<%= namespace + id %>assetAddonEntrySelector',
 			selectedAssetAddonEntries: selectedAssetAddonEntries
 		}
