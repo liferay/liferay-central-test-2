@@ -344,6 +344,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			Map<String, Object> contextObjects)
 		throws Exception {
 
+		Transformer transformer = TransformerHolder.getTransformer();
+
 		contextObjects.put(
 			PortletDisplayTemplateConstants.TEMPLATE_ID,
 			ddmTemplate.getTemplateId());
@@ -430,8 +432,6 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		if (renderRequest != null) {
 			contextObjects.putAll(_getPortletPreferences(renderRequest));
 		}
-
-		Transformer transformer = TransformerHolder.getTransformer();
 
 		return transformer.transform(
 			themeDisplay, contextObjects, ddmTemplate.getScript(), language,
