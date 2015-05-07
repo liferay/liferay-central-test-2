@@ -68,6 +68,9 @@ public abstract class BaseAssetAddonEntry implements AssetAddonEntry {
 		return HashUtil.hash(0, getKey());
 	}
 
+	/**
+	 * @throws IOException
+	 */
 	@Override
 	public void include(
 			HttpServletRequest request, HttpServletResponse response)
