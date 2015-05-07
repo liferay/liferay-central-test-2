@@ -107,17 +107,17 @@ public class RepositoryModelUtilTest {
 			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		List<Object> foldersAndFileEntriesAndFileShortcuts =
+		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts =
 			DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
 				_group.getGroupId(), _folder.getFolderId(), new String[0], true,
 				queryDefinition);
 
 		List<RepositoryEntry> repositoryEntries =
 			RepositoryModelUtil.toRepositoryEntries(
-				foldersAndFileEntriesAndFileShortcuts);
+				dlFoldersAndDLFileEntriesAndDLFileShortcuts);
 
 		Assert.assertEquals(
-			foldersAndFileEntriesAndFileShortcuts.size(),
+			dlFoldersAndDLFileEntriesAndDLFileShortcuts.size(),
 			repositoryEntries.size());
 	}
 
@@ -133,14 +133,15 @@ public class RepositoryModelUtilTest {
 			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		List<Object> dlFileEntriesAndFileShortcuts =
+		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts =
 			DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
 				_group.getGroupId(), _folder.getFolderId(), new String[0], true,
 				queryDefinition);
 
-		dlFileEntriesAndFileShortcuts.add(new Object());
+		dlFoldersAndDLFileEntriesAndDLFileShortcuts.add(new Object());
 
-		RepositoryModelUtil.toRepositoryEntries(dlFileEntriesAndFileShortcuts);
+		RepositoryModelUtil.toRepositoryEntries(
+			dlFoldersAndDLFileEntriesAndDLFileShortcuts);
 	}
 
 	@Test
