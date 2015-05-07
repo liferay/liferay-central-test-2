@@ -173,6 +173,7 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 		return _extraSettingsProperties;
 	}
 
+	@Override
 	public List<DLFileShortcut> getFileShortcuts() {
 		return DLFileShortcutLocalServiceUtil.getFileShortcuts(
 			getFileEntryId());

@@ -151,6 +151,7 @@ public class FileShortcutWrapper
 		return _fileShortcut.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _fileShortcut.getUserName();
 	}
