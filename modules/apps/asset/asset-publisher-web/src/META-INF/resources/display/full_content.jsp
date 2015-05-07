@@ -47,10 +47,10 @@ boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue()
 
 request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, assetEntry);
 
+assetEntry = assetPublisherDisplayContext.incrementViewCounter(assetEntry);
+
 request.setAttribute("view.jsp-fullContentRedirect", currentURL);
 request.setAttribute("view.jsp-showIconLabel", true);
-
-assetEntry = assetPublisherDisplayContext.incrementViewCounter(assetEntry);
 %>
 
 <c:if test="<%= assetPublisherDisplayContext.isShowAssetTitle() %>">
