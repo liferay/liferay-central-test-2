@@ -49,6 +49,10 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+
+/**
+ * @author Roberto Díaz
+ */
 public class RepositoryModelUtilTest {
 
 	@ClassRule
