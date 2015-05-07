@@ -1411,11 +1411,6 @@ public class LocalProcessExecutorTest {
 
 		arguments.add(
 			"-D" + SystemProperties.SYSTEM_PROPERTIES_QUIET + "=true");
-		arguments.add("-Dwhip.static.instrument=true");
-
-		if (Boolean.getBoolean("whip.instrument.dump")) {
-			arguments.add("-Dwhip.instrument.dump=true");
-		}
 
 		if (Boolean.getBoolean("junit.debug")) {
 			arguments.add(jpdaOptions);
@@ -1434,6 +1429,12 @@ public class LocalProcessExecutorTest {
 		if (fileName != null) {
 			arguments.add("-Dwhip.datafile=" + fileName);
 		}
+
+		if (Boolean.getBoolean("whip.instrument.dump")) {
+			arguments.add("-Dwhip.instrument.dump=true");
+		}
+
+		arguments.add("-Dwhip.static.instrument=true");
 
 		return arguments;
 	}

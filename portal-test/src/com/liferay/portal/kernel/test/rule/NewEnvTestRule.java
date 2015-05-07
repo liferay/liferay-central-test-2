@@ -147,16 +147,13 @@ public class NewEnvTestRule implements TestRule {
 		List<String> arguments = new ArrayList<>();
 
 		arguments.add("-Djava.net.preferIPv4Stack=true");
-		arguments.add("-Dwhip.static.instrument=true");
-
-		if (Boolean.getBoolean("whip.instrument.dump")) {
-			arguments.add("-Dwhip.instrument.dump=true");
-		}
 
 		if (Boolean.getBoolean("junit.debug")) {
 			arguments.add(_JPDA_OPTIONS);
 			arguments.add("-Djunit.debug=true");
 		}
+
+		arguments.add("-Dliferay.mode=test");
 
 		String whipAgentLine = System.getProperty("whip.agent");
 
@@ -165,13 +162,17 @@ public class NewEnvTestRule implements TestRule {
 			arguments.add("-Dwhip.agent=" + whipAgentLine);
 		}
 
-		arguments.add("-Dliferay.mode=test");
-
 		String fileName = System.getProperty("whip.datafile");
 
 		if (fileName != null) {
 			arguments.add("-Dwhip.datafile=" + fileName);
 		}
+
+		if (Boolean.getBoolean("whip.instrument.dump")) {
+			arguments.add("-Dwhip.instrument.dump=true");
+		}
+
+		arguments.add("-Dwhip.static.instrument=true");
 
 		return arguments;
 	}
