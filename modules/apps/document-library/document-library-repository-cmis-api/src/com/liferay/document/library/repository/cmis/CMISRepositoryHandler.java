@@ -570,8 +570,7 @@ public abstract class CMISRepositoryHandler
 
 	@Override
 	public void updateFileShortcuts(
-			long oldToFileEntryId, long newToFileEntryId)
-		throws PortalException {
+		long oldToFileEntryId, long newToFileEntryId) {
 	}
 
 	@Override
