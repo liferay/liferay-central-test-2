@@ -123,9 +123,9 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "sites"
 						<%
 						PortletURL groupSelectorURL = PortletProviderUtil.getPortletURL(request, Group.class.getName(), PortletProvider.Action.BROWSE);
 
+						groupSelectorURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 						groupSelectorURL.setParameter("includeCurrentGroup", Boolean.FALSE.toString());
 						groupSelectorURL.setParameter("manualMembership", Boolean.TRUE.toString());
-						groupSelectorURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 						groupSelectorURL.setWindowState(LiferayWindowState.POP_UP);
 						%>
 

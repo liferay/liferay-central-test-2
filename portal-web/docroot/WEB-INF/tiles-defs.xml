@@ -1000,7 +1000,6 @@
 		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
 	</definition>
 
-
 	<!-- Sites Directory -->
 
 	<definition name="portlet.sites_directory" extends="portlet" />
