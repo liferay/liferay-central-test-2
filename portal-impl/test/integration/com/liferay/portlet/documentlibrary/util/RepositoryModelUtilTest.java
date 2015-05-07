@@ -99,60 +99,13 @@ public class RepositoryModelUtilTest {
 	}
 
 	@Test
-	public void testToRepositoryEntries() throws Exception {
-		populateFolderWithDLFileEntries();
-		populateFolderWithDLFileShortcuts();
-		populateFolderWithDLFolders();
-
-		QueryDefinition<?> queryDefinition = new QueryDefinition<>(
-			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-
-		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts =
-			DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
-				_group.getGroupId(), _folder.getFolderId(), new String[0], true,
-				queryDefinition);
-
-		List<RepositoryEntry> repositoryEntries =
-			RepositoryModelUtil.toRepositoryEntries(
-				dlFoldersAndDLFileEntriesAndDLFileShortcuts);
-
-		Assert.assertEquals(
-			dlFoldersAndDLFileEntriesAndDLFileShortcuts.size(),
-			repositoryEntries.size());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testToRepositoryEntriesWithIllegalArgument()
-		throws Exception {
-
-		populateFolderWithDLFileEntries();
-		populateFolderWithDLFileShortcuts();
-		populateFolderWithDLFolders();
-
-		QueryDefinition<?> queryDefinition = new QueryDefinition<>(
-			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-
-		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts =
-			DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
-				_group.getGroupId(), _folder.getFolderId(), new String[0], true,
-				queryDefinition);
-
-		dlFoldersAndDLFileEntriesAndDLFileShortcuts.add(new Object());
-
-		RepositoryModelUtil.toRepositoryEntries(
-			dlFoldersAndDLFileEntriesAndDLFileShortcuts);
-	}
-
-	@Test
 	public void testToFileShortcuts() throws Exception {
 		populateFolderWithDLFileShortcuts();
 
 		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.getFileEntries(
 				_group.getGroupId(), _folder.getFolderId());
-				
+
 		DLFileEntry dlFileEntry = dlFileEntries.get(0);
 
 		List<DLFileShortcut> dlFileShortcuts = dlFileEntry.getFileShortcuts();
@@ -226,6 +179,51 @@ public class RepositoryModelUtilTest {
 		}
 	}
 
+	@Test
+	public void testToRepositoryEntries() throws Exception {
+		populateFolderWithDLFileEntries();
+		populateFolderWithDLFileShortcuts();
+		populateFolderWithDLFolders();
+
+		QueryDefinition<?> queryDefinition = new QueryDefinition<>(
+			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+
+		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts =
+			DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
+				_group.getGroupId(), _folder.getFolderId(), new String[0], true,
+				queryDefinition);
+
+		List<RepositoryEntry> repositoryEntries =
+			RepositoryModelUtil.toRepositoryEntries(
+				dlFoldersAndDLFileEntriesAndDLFileShortcuts);
+
+		Assert.assertEquals(
+			dlFoldersAndDLFileEntriesAndDLFileShortcuts.size(),
+			repositoryEntries.size());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testToRepositoryEntriesWithIllegalArgument() throws Exception {
+		populateFolderWithDLFileEntries();
+		populateFolderWithDLFileShortcuts();
+		populateFolderWithDLFolders();
+
+		QueryDefinition<?> queryDefinition = new QueryDefinition<>(
+			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+
+		List<Object> dlFoldersAndDLFileEntriesAndDLFileShortcuts =
+			DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
+				_group.getGroupId(), _folder.getFolderId(), new String[0], true,
+				queryDefinition);
+
+		dlFoldersAndDLFileEntriesAndDLFileShortcuts.add(new Object());
+
+		RepositoryModelUtil.toRepositoryEntries(
+			dlFoldersAndDLFileEntriesAndDLFileShortcuts);
+	}
+
 	protected void populateFolderWithDLFileEntries() throws Exception {
 		for (int i = 0; i < 5; i++) {
 			DLTestUtil.addDLFileEntry(_folder.getFolderId());
@@ -253,7 +251,7 @@ public class RepositoryModelUtilTest {
 	}
 
 	private Folder _folder;
-	
+
 	@DeleteAfterTestRun
 	private Group _group;
 
