@@ -44,7 +44,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 			_escapedModel = false;
 		}
 		else {
-			_escapedModel= dlFolder.isEscapedModel();
+			_escapedModel = dlFolder.isEscapedModel();
 		}
 	}
 

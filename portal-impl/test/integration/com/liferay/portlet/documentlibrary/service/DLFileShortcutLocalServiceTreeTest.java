@@ -116,19 +116,6 @@ public class DLFileShortcutLocalServiceTreeTest {
 		}
 	}
 
-	protected FileShortcut addFileShortcut(
-			FileEntry fileEntry, long groupId, long folderId)
-		throws Exception {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(
-				groupId, TestPropsValues.getUserId());
-
-		return DLAppLocalServiceUtil.addFileShortcut(
-			TestPropsValues.getUserId(), groupId, folderId,
-			fileEntry.getFileEntryId(), serviceContext);
-	}
-
 	protected FileEntry addFileEntry(long folderId, String sourceFileName)
 		throws Exception {
 
@@ -140,6 +127,19 @@ public class DLFileShortcutLocalServiceTreeTest {
 			TestPropsValues.getUserId(), _group.getGroupId(), folderId,
 			sourceFileName, ContentTypes.TEXT_PLAIN,
 			RandomTestUtil.randomBytes(), serviceContext);
+	}
+
+	protected FileShortcut addFileShortcut(
+			FileEntry fileEntry, long groupId, long folderId)
+		throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				groupId, TestPropsValues.getUserId());
+
+		return DLAppLocalServiceUtil.addFileShortcut(
+			TestPropsValues.getUserId(), groupId, folderId,
+			fileEntry.getFileEntryId(), serviceContext);
 	}
 
 	protected void createTree() throws Exception {
@@ -166,8 +166,8 @@ public class DLFileShortcutLocalServiceTreeTest {
 		_fileShortcuts.add(fileShortcutAA);
 	}
 
-	private final List<FileShortcut> _fileShortcuts = new ArrayList<>();
 	private FileEntry _fileEntry;
+	private final List<FileShortcut> _fileShortcuts = new ArrayList<>();
 	private Folder _folder;
 
 	@DeleteAfterTestRun

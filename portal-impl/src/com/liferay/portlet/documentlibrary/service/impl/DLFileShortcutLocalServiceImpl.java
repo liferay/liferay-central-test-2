@@ -44,8 +44,8 @@ public class DLFileShortcutLocalServiceImpl
 
 	@Override
 	public DLFileShortcut addFileShortcut(
-			long userId, long groupId, long repositoryId,
-			long folderId, long toFileEntryId, ServiceContext serviceContext)
+			long userId, long groupId, long repositoryId, long folderId,
+			long toFileEntryId, ServiceContext serviceContext)
 		throws PortalException {
 
 		// File shortcut
