@@ -59,7 +59,7 @@ public class AssetAddonEntrySelectorTag extends IncludeTag {
 		_hiddenInput = null;
 		_id = null;
 		_selectedAssetAddonEntries = null;
-		_title = null;
+		_title = "select-entries";
 	}
 
 	protected String getId() {
