@@ -345,8 +345,8 @@ public class DefaultMessageBus implements MessageBus {
 		if (destination == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Cannot remove DestinationEventListener for : " +
-						destinationName + ". No destination found.");
+					"Unable to unregister destination event listener for " +
+						destinationName);
 			}
 
 			return;
