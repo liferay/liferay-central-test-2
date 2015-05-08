@@ -10,14 +10,6 @@
 	</tear-down>
 
 	<command name="DisplayStyleOptions" priority="5">
-		<var name="childSiteName1" value="Child SiteName 1" />
-		<var name="childSiteName2" value="Child SiteName 2" />
-		<var name="childSiteName3" value="Child SiteName 3" />
-		<var name="portletName" value="Sites Directory" />
-		<var name="siteName" value="Site Name" />
-		<var name="sitePageName" value="Site Page" />
-		<var name="sitePagePrivacy" value="Public" />
-
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Sites" />
 		</execute>
