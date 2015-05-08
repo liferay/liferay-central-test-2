@@ -73,8 +73,7 @@ public abstract class AbstractSearchEngineConfigurator
 				public void destroy() {
 				}
 
-			}
-		);
+			});
 
 		serviceDependencyManager.registerDependencies(
 			DestinationFactory.class, MessageBus.class);

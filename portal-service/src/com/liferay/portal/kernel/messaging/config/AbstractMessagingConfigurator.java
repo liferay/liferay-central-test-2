@@ -53,8 +53,8 @@ public abstract class AbstractMessagingConfigurator
 			new ServiceDependencyManager();
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -67,8 +67,8 @@ public abstract class AbstractMessagingConfigurator
 				@Override
 				public void destroy() {
 				}
-			}
-		);
+
+			});
 
 		serviceDependencyManager.registerDependencies(
 			DestinationFactory.class, MessageBus.class);
