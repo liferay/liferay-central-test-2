@@ -479,7 +479,6 @@ public final class XMLLoggerHandler {
 		for (Element childElement : childElements) {
 			loggerElement.addChildLoggerElement(
 				_getLineNumberItem(childElement.attributeValue("line-number")));
-
 			loggerElement.addChildLoggerElement(
 				_getLineContainerLoggerElement(childElement));
 		}
