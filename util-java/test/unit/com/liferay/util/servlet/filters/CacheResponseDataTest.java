@@ -59,7 +59,7 @@ public class CacheResponseDataTest {
 				SerializableUtil.serialize(cacheResponseData));
 
 		Assert.assertEquals(
-			"ContentType not correctly recreated",
+			"Content type not correctly recreated",
 			cacheResponseData.getContentType(),
 			deserializedCacheResponseData.getContentType());
 		Assert.assertEquals(
@@ -78,7 +78,7 @@ public class CacheResponseDataTest {
 			deserializedCacheResponseData.getByteBuffer();
 
 		Assert.assertArrayEquals(
-			"ByteBuffer data not correctly recreated",
+			"Byte buffer data not correctly recreated",
 			Arrays.copyOfRange(
 				byteBuffer.array(),
 				byteBuffer.arrayOffset() + byteBuffer.position(),
