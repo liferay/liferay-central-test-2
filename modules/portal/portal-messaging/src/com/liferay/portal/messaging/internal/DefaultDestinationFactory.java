@@ -49,11 +49,9 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		_destinationPrototypes.put(
 			DestinationConfiguration.DESTINATION_TYPE_PARALLEL,
 			new ParallelDestinationPrototype());
-
 		_destinationPrototypes.put(
 			DestinationConfiguration.DESTINATION_TYPE_SERIAL,
 			new SerialDestinationPrototype());
-
 		_destinationPrototypes.put(
 			DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS,
 			new SynchronousDestinationPrototype());
@@ -140,6 +138,7 @@ public class DefaultDestinationFactory implements DestinationFactory {
 		}
 
 		_serviceRegistrations.clear();
+
 		_destinationPrototypes.clear();
 
 		_bundleContext = null;

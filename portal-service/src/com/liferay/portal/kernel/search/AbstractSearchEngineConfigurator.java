@@ -58,8 +58,8 @@ public abstract class AbstractSearchEngineConfigurator
 			new ServiceDependencyManager();
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -72,6 +72,7 @@ public abstract class AbstractSearchEngineConfigurator
 				@Override
 				public void destroy() {
 				}
+
 			}
 		);
 
