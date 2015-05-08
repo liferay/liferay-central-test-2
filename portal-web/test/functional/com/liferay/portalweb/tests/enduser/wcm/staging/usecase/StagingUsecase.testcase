@@ -3716,7 +3716,7 @@
 		<execute macro="Staging#publishToLive" />
 	</command>
 
-	<command name="StagingWithPublishTemplate" priority="5" >
+	<command known-issues="LPS-51696" name="StagingWithPublishTemplate" priority="5" >
 		<execute macro="Page#gotoConfigurationCP">
 			<var name="portletName" value="Site Settings" />
 			<var name="siteName" value="Site Name" />
