@@ -151,7 +151,7 @@ public class LayoutsTreeUtil {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(selPlid);
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler(7);
 
 			sb.append("_getAncestorLayouts(selPlid=");
@@ -162,7 +162,7 @@ public class LayoutsTreeUtil {
 			sb.append(layout);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			_log.trace(sb.toString());
+			_log.debug(sb.toString());
 		}
 
 		ancestorLayouts.add(layout);
@@ -176,7 +176,7 @@ public class LayoutsTreeUtil {
 			String treeId)
 		throws Exception {
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler(13);
 
 			sb.append("_getLayoutTreeNodes(groupId=");
@@ -193,7 +193,7 @@ public class LayoutsTreeUtil {
 			sb.append(treeId);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			_log.trace(sb.toString());
+			_log.debug(sb.toString());
 		}
 
 		List<LayoutTreeNode> layoutTreeNodes = new ArrayList<>();
@@ -268,7 +268,7 @@ public class LayoutsTreeUtil {
 		String paginationJSON = SessionClicks.get(
 			session, key, JSONFactoryUtil.getNullJSON());
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			sb = new StringBundler(9);
 
 			sb.append("_getLoadedLayoutsCount(key=");
@@ -282,12 +282,12 @@ public class LayoutsTreeUtil {
 		JSONObject paginationJSONObject = JSONFactoryUtil.createJSONObject(
 			paginationJSON);
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			sb.append(", paginationJSONObject");
 			sb.append(paginationJSONObject);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			_log.trace(sb.toString());
+			_log.debug(sb.toString());
 		}
 
 		return paginationJSONObject.getInt(String.valueOf(layoutId), 0);
@@ -349,7 +349,7 @@ public class LayoutsTreeUtil {
 
 		end = Math.max(start, Math.min(end, layouts.size()));
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler(7);
 
 			sb.append("_paginateLayouts(loadedLayoutsCount=");
@@ -360,7 +360,7 @@ public class LayoutsTreeUtil {
 			sb.append(end);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			_log.trace(sb.toString());
+			_log.debug(sb.toString());
 		}
 
 		return layouts.subList(start, end);
@@ -371,7 +371,7 @@ public class LayoutsTreeUtil {
 			LayoutTreeNodes layoutTreeNodes)
 		throws Exception {
 
-		if (_log.isTraceEnabled()) {
+		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler(5);
 
 			sb.append("_toJSON(groupId=");
@@ -380,7 +380,7 @@ public class LayoutsTreeUtil {
 			sb.append(layoutTreeNodes);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			_log.trace(sb.toString());
+			_log.debug(sb.toString());
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
