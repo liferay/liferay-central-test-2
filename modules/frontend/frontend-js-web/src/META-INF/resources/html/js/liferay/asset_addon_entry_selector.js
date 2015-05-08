@@ -53,7 +53,7 @@ AUI.add(
 			{
 				ATTRS: {
 					assetAddonEntries: {
-						setter: '_setEntries',
+						setter: '_setAssetAddonEntries',
 						validator: Lang.isArray
 					},
 
@@ -201,7 +201,7 @@ AUI.add(
 						instance.set(STR_SELECTED_ASSET_ADDON_ENTRIES, selectedAssetAddonEntries);
 					},
 
-					_setEntries: function(val) {
+					_setAssetAddonEntries: function(val) {
 						var instance = this;
 
 						var entriesMap = {};
