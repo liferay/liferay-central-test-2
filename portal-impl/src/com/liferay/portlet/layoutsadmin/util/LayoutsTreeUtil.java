@@ -81,13 +81,9 @@ public class LayoutsTreeUtil {
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
-			StringBundler sb = new StringBundler(15);
+			StringBundler sb = new StringBundler(13);
 
-			sb.append("getLayoutsJSON");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("groupId=");
+			sb.append("getLayoutsJSON(groupId=");
 			sb.append(groupId);
 			sb.append(", privateLayout=");
 			sb.append(privateLayout);
@@ -99,7 +95,6 @@ public class LayoutsTreeUtil {
 			sb.append(incomplete);
 			sb.append(", treeId=");
 			sb.append(treeId);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.debug(sb.toString());
@@ -117,17 +112,12 @@ public class LayoutsTreeUtil {
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(5);
 
-			sb.append("getLayoutsJSON");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("groupId=");
+			sb.append("getLayoutsJSON(groupId=");
 			sb.append(groupId);
 			sb.append(", treeId=");
 			sb.append(treeId);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.debug(sb.toString());
@@ -162,19 +152,14 @@ public class LayoutsTreeUtil {
 		Layout layout = LayoutLocalServiceUtil.getLayout(selPlid);
 
 		if (_log.isTraceEnabled()) {
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(7);
 
-			sb.append("_getAncestorLayouts");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("selPlid=");
+			sb.append("_getAncestorLayouts(selPlid=");
 			sb.append(selPlid);
 			sb.append(", ancestorLayouts=");
 			sb.append(ancestorLayouts);
 			sb.append(", layout=");
 			sb.append(layout);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.trace(sb.toString());
@@ -192,13 +177,9 @@ public class LayoutsTreeUtil {
 		throws Exception {
 
 		if (_log.isTraceEnabled()) {
-			StringBundler sb = new StringBundler(15);
+			StringBundler sb = new StringBundler(13);
 
-			sb.append("_getLayoutTreeNodes");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("groupId=");
+			sb.append("_getLayoutTreeNodes(groupId=");
 			sb.append(groupId);
 			sb.append(", privateLayout=");
 			sb.append(privateLayout);
@@ -210,7 +191,6 @@ public class LayoutsTreeUtil {
 			sb.append(incomplete);
 			sb.append(", treeId=");
 			sb.append(treeId);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.trace(sb.toString());
@@ -289,13 +269,9 @@ public class LayoutsTreeUtil {
 			session, key, JSONFactoryUtil.getNullJSON());
 
 		if (_log.isTraceEnabled()) {
-			sb = new StringBundler(11);
+			sb = new StringBundler(9);
 
-			sb.append("_getLoadedLayoutsCount");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("key=");
+			sb.append("_getLoadedLayoutsCount(key=");
 			sb.append(key);
 			sb.append(", layoutId=");
 			sb.append(layoutId);
@@ -309,7 +285,6 @@ public class LayoutsTreeUtil {
 		if (_log.isTraceEnabled()) {
 			sb.append(", paginationJSONObject");
 			sb.append(paginationJSONObject);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.trace(sb.toString());
@@ -375,19 +350,14 @@ public class LayoutsTreeUtil {
 		end = Math.max(start, Math.min(end, layouts.size()));
 
 		if (_log.isTraceEnabled()) {
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(7);
 
-			sb.append("_paginateLayouts");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("loadedLayoutsCount=");
+			sb.append("_paginateLayouts(loadedLayoutsCount=");
 			sb.append(loadedLayoutsCount);
 			sb.append(", start=");
 			sb.append(start);
 			sb.append(", end=");
 			sb.append(end);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.trace(sb.toString());
@@ -402,17 +372,12 @@ public class LayoutsTreeUtil {
 		throws Exception {
 
 		if (_log.isTraceEnabled()) {
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(5);
 
-			sb.append("_toJSON");
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			sb.append("groupId=");
+			sb.append("_toJSON(groupId=");
 			sb.append(groupId);
 			sb.append(", layoutTreeNodes=");
 			sb.append(layoutTreeNodes);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			_log.trace(sb.toString());
@@ -549,15 +514,12 @@ public class LayoutsTreeUtil {
 
 		@Override
 		public String toString() {
-			StringBundler sb = new StringBundler(6);
+			StringBundler sb = new StringBundler(5);
 
-			sb.append(StringPool.OPEN_CURLY_BRACE);
-
-			sb.append("childLayoutTreeNodes=");
+			sb.append("{childLayoutTreeNodes=");
 			sb.append(_childLayoutTreeNodes);
 			sb.append(", layout=");
 			sb.append(_layout);
-
 			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			return sb.toString();
@@ -603,15 +565,12 @@ public class LayoutsTreeUtil {
 
 		@Override
 		public String toString() {
-			StringBundler sb = new StringBundler(6);
+			StringBundler sb = new StringBundler(5);
 
-			sb.append(StringPool.OPEN_CURLY_BRACE);
-
-			sb.append("layoutTreeNodesList=");
+			sb.append("{layoutTreeNodesList=");
 			sb.append(_layoutTreeNodesList);
 			sb.append(", total=");
 			sb.append(_total);
-
 			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			return sb.toString();
