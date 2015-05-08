@@ -81,8 +81,6 @@ public final class XMLLoggerHandler {
 
 		List<Element> childElements = element.elements();
 
-		String elementName = element.getName();
-
 		if ((!childElements.isEmpty() && !_isExecutingFunction(element)) ||
 			_isExecutingMacro(element)) {
 
