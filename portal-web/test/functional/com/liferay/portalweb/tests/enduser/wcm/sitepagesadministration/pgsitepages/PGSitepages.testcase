@@ -49,6 +49,8 @@
 			<var name="fieldName" value="Embedded Portlets" />
 		</execute>
 
+		<execute macro="WebContentNavigator#gotoEditPGViaWCD" />
+
 		<execute macro="WebContent#editPGViaWCD">
 			<var name="embeddedPortletTitle" value="Currency Converter" />
 			<var name="webContentContentEdit"><![CDATA[<runtime-portlet name="16" />]]></var>
