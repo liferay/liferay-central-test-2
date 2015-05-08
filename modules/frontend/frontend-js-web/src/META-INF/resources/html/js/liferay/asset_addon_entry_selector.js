@@ -52,14 +52,14 @@ AUI.add(
 		var AssetAddonEntrySelector = A.Component.create(
 			{
 				ATTRS: {
-					dialogTitle: {
-						validator: Lang.isString,
-						value: Liferay.Language.get('select-entries')
-					},
-
 					assetAddonEntries: {
 						setter: '_setEntries',
 						validator: Lang.isArray
+					},
+
+					dialogTitle: {
+						validator: Lang.isString,
+						value: Liferay.Language.get('select-entries')
 					},
 
 					selectedEntries: {
