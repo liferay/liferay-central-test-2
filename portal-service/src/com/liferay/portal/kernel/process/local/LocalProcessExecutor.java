@@ -85,11 +85,11 @@ public class LocalProcessExecutor implements ProcessExecutor {
 				// destroy the same process, but this is JDK's job to ensure
 				// that processes are destroyed in a thread safe manner.
 
-				Set<Entry<Process, NoticeableFuture<?>>> entrySet =
+				Set<Entry<Process, NoticeableFuture<?>>> set =
 					_managedProcesses.entrySet();
 
 				Iterator<Entry<Process, NoticeableFuture<?>>> iterator =
-					entrySet.iterator();
+					set.iterator();
 
 				while (iterator.hasNext()) {
 					Entry<Process, NoticeableFuture<?>> entry = iterator.next();
@@ -114,12 +114,12 @@ public class LocalProcessExecutor implements ProcessExecutor {
 			}
 		}
 
-		// Code coverage note, Whip's instrument logic sees a label on
-		// synchronized block exit and asks for coverage. But it does not
-		// understand this is actually the same as method exit. To overcome this
-		// limitation, the code logic has to explicitly leave the synchronized
-		// block before leaving the method. This limitation will be removed on
-		// further version of Whip releases.
+		// Whip's instrument logic sees a label on a synchronized block exit and
+		// asks for coverage, but it does not understand that this is actually
+		// the same as exiting a method. To overcome this limitation, the code
+		// logic has to explicitly leave the synchronized block before leaving
+		// the method. This limitation will be removed in a future version of
+		// Whip.
 
 		return processes;
 	}
