@@ -65,7 +65,7 @@ public class AbstractMessagingConfiguratorTest {
 
 		destinationConfigurations.add(
 			DestinationConfiguration.createSynchronousDestinationConfiguration(
-				"liferay/plugintest"));
+				"liferay/plugintest1"));
 		destinationConfigurations.add(
 			DestinationConfiguration.createParallelDestinationConfiguration(
 				"liferay/plugintest2"));
@@ -75,10 +75,12 @@ public class AbstractMessagingConfiguratorTest {
 
 		Map<String, List<MessageListener>> messageListeners = new HashMap<>();
 
-		List<MessageListener> testListeners = new ArrayList<>();
-		messageListeners.put("liferay/plugintest", testListeners);
+		List<MessageListener> messageListenersList = new ArrayList<>();
 
-		testListeners.add(new TestClassLoaderMessageListener(testClassLoader));
+		messageListeners.put("liferay/plugintest1", messageListenersList);
+
+		messageListenersList.add(
+			new TestClassLoaderMessageListener(testClassLoader));
 
 		pluginMessagingConfigurator.setMessageListeners(messageListeners);
 
@@ -90,26 +92,28 @@ public class AbstractMessagingConfiguratorTest {
 			"(&(objectClass=com.liferay.portal.kernel.messaging.Destination)" +
 				"(destination.name=*plugintest*))");
 
-		ServiceTracker<Destination, Destination> tracker =
+		ServiceTracker<Destination, Destination> serviceTracker =
 			registry.trackServices(filter);
 
-		tracker.open();
+		serviceTracker.open();
 
 		try {
-			while (ArrayUtil.isEmpty(tracker.getServices())) {
+			while (ArrayUtil.isEmpty(serviceTracker.getServices())) {
 				Thread.sleep(1000);
 			}
 
-			Object[] services = tracker.getServices();
+			Object[] services = serviceTracker.getServices();
 
 			Assert.assertEquals(2, services.length);
 
 			for (Object service : services) {
 				Destination destination = (Destination)service;
 
-				Assert.assertTrue(destination.getName().contains("plugintest"));
+				String destinationName = destination.getName();
 
-				if (destination.getName().equals("liferay/plugintest")) {
+				Assert.assertTrue(destinationName.contains("plugintest1"));
+
+				if (destinationName.equals("liferay/plugintest1")) {
 					Assert.assertEquals(
 						1, destination.getMessageListenerCount());
 				}
@@ -117,7 +121,7 @@ public class AbstractMessagingConfiguratorTest {
 				if (destination.getMessageListenerCount() > 0) {
 					Message message = new Message();
 
-					message.setDestinationName(destination.getName());
+					message.setDestinationName(destinationName);
 
 					destination.send(message);
 				}
@@ -138,7 +142,7 @@ public class AbstractMessagingConfiguratorTest {
 
 		destinationConfigurations.add(
 			DestinationConfiguration.createSynchronousDestinationConfiguration(
-				"liferay/portaltest"));
+				"liferay/portaltest1"));
 		destinationConfigurations.add(
 			DestinationConfiguration.createParallelDestinationConfiguration(
 				"liferay/portaltest2"));
@@ -148,15 +152,19 @@ public class AbstractMessagingConfiguratorTest {
 
 		Map<String, List<MessageListener>> messageListeners = new HashMap<>();
 
-		List<MessageListener> testListeners = new ArrayList<>();
-		messageListeners.put("liferay/portaltest", testListeners);
+		List<MessageListener> messageListenersList1 = new ArrayList<>();
 
-		testListeners.add(new TestMessageListener("liferay/portaltest"));
+		messageListeners.put("liferay/portaltest1", messageListenersList1);
 
-		List<MessageListener> testListeners2 = new ArrayList<>();
-		messageListeners.put("liferay/portaltest2", testListeners2);
+		messageListenersList1.add(
+			new TestMessageListener("liferay/portaltest"));
 
-		testListeners2.add(new TestMessageListener("liferay/portaltest2"));
+		List<MessageListener> messageListenersList2 = new ArrayList<>();
+
+		messageListeners.put("liferay/portaltest2", messageListenersList2);
+
+		messageListenersList2.add(
+			new TestMessageListener("liferay/portaltest2"));
 
 		defaultMessagingConfigurator.setMessageListeners(messageListeners);
 
@@ -168,26 +176,28 @@ public class AbstractMessagingConfiguratorTest {
 			"(&(objectClass=com.liferay.portal.kernel.messaging.Destination)" +
 				"(destination.name=*portaltest*))");
 
-		ServiceTracker<Destination, Destination> tracker =
+		ServiceTracker<Destination, Destination> serviceTracker =
 			registry.trackServices(filter);
 
-		tracker.open();
+		serviceTracker.open();
 
 		try {
-			while (ArrayUtil.isEmpty(tracker.getServices())) {
+			while (ArrayUtil.isEmpty(serviceTracker.getServices())) {
 				Thread.sleep(1000);
 			}
 
-			Object[] services = tracker.getServices();
+			Object[] services = serviceTracker.getServices();
 
 			Assert.assertEquals(2, services.length);
 
 			for (Object service : services) {
 				Destination destination = (Destination)service;
 
-				Assert.assertTrue(destination.getName().contains("portaltest"));
+				String destinationName = destination.getName();
 
-				if (destination.getName().equals("liferay/portaltest")) {
+				Assert.assertTrue(destinationName.contains("portaltest1"));
+
+				if (destinationName.equals("liferay/portaltest1")) {
 					Assert.assertEquals(
 						1, destination.getMessageListenerCount());
 				}
@@ -195,7 +205,7 @@ public class AbstractMessagingConfiguratorTest {
 				if (destination.getMessageListenerCount() > 0) {
 					Message message = new Message();
 
-					message.setDestinationName(destination.getName());
+					message.setDestinationName(destinationName);
 
 					destination.send(message);
 				}
