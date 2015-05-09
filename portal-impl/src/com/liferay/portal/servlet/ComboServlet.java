@@ -225,7 +225,7 @@ public class ComboServlet extends HttpServlet {
 					}
 
 					bytes = getResourceContent(
-						request, response, requestDispatcher, modulePath,
+						requestDispatcher, request, response, modulePath,
 						minifierType);
 				}
 
@@ -251,8 +251,8 @@ public class ComboServlet extends HttpServlet {
 	}
 
 	protected byte[] getResourceContent(
-			HttpServletRequest request, HttpServletResponse response,
-			RequestDispatcher requestDispatcher, String modulePath,
+			RequestDispatcher requestDispatcher, HttpServletRequest request,
+			HttpServletResponse response, String modulePath,
 			String minifierType)
 		throws Exception {
 
