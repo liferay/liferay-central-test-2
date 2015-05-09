@@ -175,7 +175,7 @@ public class AbstractMessagingConfiguratorTest {
 
 		try {
 			while (ArrayUtil.isEmpty(tracker.getServices())) {
-				Thread.currentThread().sleep(1000);
+				Thread.sleep(1000);
 			}
 
 			Object[] services = tracker.getServices();
