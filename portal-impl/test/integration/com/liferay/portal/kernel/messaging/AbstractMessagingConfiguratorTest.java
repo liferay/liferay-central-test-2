@@ -61,7 +61,7 @@ public class AbstractMessagingConfiguratorTest {
 			};
 
 		Set<DestinationConfiguration> destinationConfigurations =
-					new HashSet<>();
+			new HashSet<>();
 
 		destinationConfigurations.add(
 			DestinationConfiguration.createSynchronousDestinationConfiguration(
