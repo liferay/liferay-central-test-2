@@ -25,8 +25,6 @@ import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -75,7 +73,7 @@ public class ComboServletTest extends PowerMockito {
 	}
 
 	@Before
-	public void setUp() throws IOException, ServletException {
+	public void setUp() throws ServletException {
 		MockitoAnnotations.initMocks(this);
 
 		when(
