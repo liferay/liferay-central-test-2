@@ -518,7 +518,7 @@ public final class XMLLoggerHandler {
 		LoggerElement loggerElement = new LoggerElement();
 
 		loggerElement.setAttribute("data-btnlinkid", "var-" + _btnLinkVarId);
-		loggerElement.setClassName("collapsible parameter-container collapse");
+		loggerElement.setClassName("child-container collapse parameter-container");
 		loggerElement.setID(null);
 		loggerElement.setName("div");
 
