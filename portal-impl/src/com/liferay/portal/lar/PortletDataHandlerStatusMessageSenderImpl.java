@@ -45,7 +45,7 @@ public class PortletDataHandlerStatusMessageSenderImpl
 			new PortletDataHandlerStatusMessage(
 				messageType, portletId, manifestSummary);
 
-		_backgroundTaskStatusMessageSender.sendStatusMessage(
+		_backgroundTaskStatusMessageSender.setBackgroundTaskStatusMessage(
 			portletDataHandlerStatusMessage);
 	}
 
@@ -58,7 +58,7 @@ public class PortletDataHandlerStatusMessageSenderImpl
 			new PortletDataHandlerStatusMessage(
 				messageType, portletIds, manifestSummary);
 
-		_backgroundTaskStatusMessageSender.sendStatusMessage(
+		_backgroundTaskStatusMessageSender.setBackgroundTaskStatusMessage(
 			portletDataHandlerStatusMessage);
 	}
 
@@ -70,7 +70,7 @@ public class PortletDataHandlerStatusMessageSenderImpl
 			new PortletDataHandlerStatusMessage(
 				messageType, stagedModel, manifestSummary);
 
-		_backgroundTaskStatusMessageSender.sendStatusMessage(
+		_backgroundTaskStatusMessageSender.setBackgroundTaskStatusMessage(
 			portletDataHandlerStatusMessage);
 	}
 

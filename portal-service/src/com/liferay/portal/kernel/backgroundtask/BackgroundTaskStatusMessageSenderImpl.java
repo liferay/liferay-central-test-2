@@ -31,7 +31,6 @@ public class BackgroundTaskStatusMessageSenderImpl
 			new ServiceDependencyManager();
 
 		serviceDependencyManager.addServiceDependencyListener(
-
 			new ServiceDependencyListener() {
 
 				@Override
@@ -45,16 +44,15 @@ public class BackgroundTaskStatusMessageSenderImpl
 				@Override
 				public void destroy() {
 				}
-			}
 
-		);
+			});
 
 		serviceDependencyManager.registerDependencies(
 			SingleDestinationMessageSenderFactory.class);
 	}
 
 	@Override
-	public void sendStatusMessage(
+	public void setBackgroundTaskStatusMessage(
 		BackgroundTaskStatusMessage backgroundTaskStatusMessage) {
 
 		if (!BackgroundTaskThreadLocal.hasBackgroundTask()) {

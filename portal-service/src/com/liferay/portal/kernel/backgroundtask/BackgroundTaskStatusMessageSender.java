@@ -19,7 +19,7 @@ package com.liferay.portal.kernel.backgroundtask;
  */
 public interface BackgroundTaskStatusMessageSender {
 
-	public void sendStatusMessage(
+	public void setBackgroundTaskStatusMessage(
 		BackgroundTaskStatusMessage backgroundTaskStatusMessage);
 
 }
