@@ -89,8 +89,8 @@ public class AbstractMessagingConfiguratorTest {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(objectClass=com.liferay.portal.kernel.messaging.Destination)" +
-				"(destination.name=*plugintest*))");
+			"(&(destination.name=*plugintest*)(objectClass=com.liferay." +
+				"portal.kernel.messaging.Destination))");
 
 		ServiceTracker<Destination, Destination> serviceTracker =
 			registry.trackServices(filter);
@@ -173,8 +173,8 @@ public class AbstractMessagingConfiguratorTest {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(objectClass=com.liferay.portal.kernel.messaging.Destination)" +
-				"(destination.name=*portaltest*))");
+			"(&(destination.name=*portaltest*)(objectClass=com.liferay." +
+				"portal.kernel.messaging.Destination))");
 
 		ServiceTracker<Destination, Destination> serviceTracker =
 			registry.trackServices(filter);
