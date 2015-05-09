@@ -25,7 +25,7 @@
 
 	<!-- Proxy -->
 
-	<bean id="com.liferay.portal.scheduler.ClusterSchedulerEngineService" class="com.liferay.portal.scheduler.ClusterSchedulerEngine" factory-method="createClusterSchedulerEngine" >
+	<bean id="com.liferay.portal.scheduler.ClusterSchedulerEngineService" class="com.liferay.portal.scheduler.ClusterSchedulerEngine" factory-method="createClusterSchedulerEngine">
 		<constructor-arg name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineProxyBean" />
 	</bean>
 	<bean id="com.liferay.portal.scheduler.SchedulerEngineProxyBean" class="com.liferay.portal.scheduler.SchedulerEngineProxyBean">
@@ -59,19 +59,19 @@
 	<bean id="messagingConfigurator.scheduler" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinationConfigurations">
 			<util:set>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/scheduler_dispatch" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/scheduler_engine" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/scheduler_scripting" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />

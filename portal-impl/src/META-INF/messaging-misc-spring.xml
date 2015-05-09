@@ -58,145 +58,145 @@
 	<bean id="messagingConfigurator.misc" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinationConfigurations">
 			<util:set>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/async_service" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/background_task" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/background_task_status" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/convert_process" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/document_library_audio_processor" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/document_library_image_processor" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/document_library_pdf_processor" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/document_library_raw_metadata_processor" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/document_library_video_processor" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/export_import_lifecycle_event_async" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/export_import_lifecycle_event_sync" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/flags" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/flags" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/flags" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/flags" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/flags" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/hot_deploy" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/layouts_local_publisher" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/layouts_remote_publisher" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/live_users" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/marketplace" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/message_boards_mailing_list" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/subscription_clean_up" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/subscription_sender" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />

@@ -42,7 +42,7 @@
 	<bean id="messagingConfigurator.rules" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinationConfigurations">
 			<util:set>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/rules_engine" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />

@@ -110,43 +110,43 @@
 	<bean id="messagingConfigurator.workflow" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinationConfigurations">
 			<util:set>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_comparator" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_definition" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_engine" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_instance" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_log" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_status" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SERIAL" />
 					</constructor-arg>
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/workflow_task" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS" />

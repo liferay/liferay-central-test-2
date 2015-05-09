@@ -27,7 +27,7 @@
 	<bean id="messagingConfigurator.poller" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinationConfigurations">
 			<util:set>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/poller" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
@@ -35,7 +35,7 @@
 					<property name="workersCoreSize" value="25" />
 					<property name="workersMaxSize" value="25" />
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/poller_comet_response" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
@@ -43,7 +43,7 @@
 					<property name="workersCoreSize" value="10" />
 					<property name="workersMaxSize" value="10" />
 				</bean>
-				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration" >
+				<bean class="com.liferay.portal.kernel.messaging.DestinationConfiguration">
 					<constructor-arg name="destinationName" value="liferay/poller_response" />
 					<constructor-arg name="destinationType">
 						<util:constant static-field="com.liferay.portal.kernel.messaging.DestinationConfiguration.DESTINATION_TYPE_PARALLEL" />
