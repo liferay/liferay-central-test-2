@@ -319,8 +319,8 @@ public abstract class AbstractMessagingConfigurator
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		_destinationConfigurationServiceRegistrar = registry.getServiceRegistrar(
-			DestinationConfiguration.class);
+		_destinationConfigurationServiceRegistrar =
+			registry.getServiceRegistrar(DestinationConfiguration.class);
 
 		for (DestinationConfiguration destinationConfiguration :
 				_destinationConfigurations) {
@@ -456,10 +456,10 @@ public abstract class AbstractMessagingConfigurator
 	private static final Log _log = LogFactoryUtil.getLog(
 		AbstractMessagingConfigurator.class);
 
-	private ServiceRegistrar<DestinationConfiguration>
-		_destinationConfigurationServiceRegistrar;
 	private final Set<DestinationConfiguration> _destinationConfigurations =
 		new HashSet<>();
+	private ServiceRegistrar<DestinationConfiguration>
+		_destinationConfigurationServiceRegistrar;
 	private final Map<String, List<DestinationEventListener>>
 		_destinationEventListeners = new HashMap<>();
 	private ServiceRegistrar<DestinationEventListener>
