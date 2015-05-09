@@ -30,10 +30,10 @@ import java.util.Map;
 /**
  * @author Andrew Betts
  */
-public class PortletDataHandlerStatusMessage
+public class PortletDataHandlerBackgroundTaskStatusMessage
 	extends BackgroundTaskStatusMessage {
 
-	public PortletDataHandlerStatusMessage(
+	public PortletDataHandlerBackgroundTaskStatusMessage(
 		String messageType, String portletId, ManifestSummary manifestSummary) {
 
 		init(messageType, manifestSummary);
@@ -59,7 +59,7 @@ public class PortletDataHandlerStatusMessage
 		}
 	}
 
-	public PortletDataHandlerStatusMessage(
+	public PortletDataHandlerBackgroundTaskStatusMessage(
 		String messageType, String[] portletIds,
 		ManifestSummary manifestSummary) {
 
@@ -68,26 +68,29 @@ public class PortletDataHandlerStatusMessage
 		put("portletIds", portletIds);
 	}
 
-	public <T extends StagedModel> PortletDataHandlerStatusMessage(
-		String messageType, T stagedModel, ManifestSummary manifestSummary) {
-
-		init(messageType, manifestSummary);
-
-		StagedModelDataHandler<T> stagedModelDataHandler =
-			(StagedModelDataHandler<T>)
-				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
-					stagedModel.getModelClassName());
-
-		put(
-			"stagedModelName",
-			stagedModelDataHandler.getDisplayName(stagedModel));
-
-		put(
-			"stagedModelType",
-			String.valueOf(stagedModel.getStagedModelType()));
-
-		put("uuid", stagedModel.getUuid());
-	}
+	public <T extends StagedModel>
+		PortletDataHandlerBackgroundTaskStatusMessage(
+			String messageType, T stagedModel,
+			ManifestSummary manifestSummary) {
+	
+			init(messageType, manifestSummary);
+	
+			StagedModelDataHandler<T> stagedModelDataHandler =
+				(StagedModelDataHandler<T>)
+					StagedModelDataHandlerRegistryUtil.
+						getStagedModelDataHandler(
+							stagedModel.getModelClassName());
+	
+			put(
+				"stagedModelName",
+				stagedModelDataHandler.getDisplayName(stagedModel));
+	
+			put(
+				"stagedModelType",
+				String.valueOf(stagedModel.getStagedModelType()));
+	
+			put("uuid", stagedModel.getUuid());
+		}
 
 	protected void init(String messageType, ManifestSummary manifestSummary) {
 		put("messageType", messageType);

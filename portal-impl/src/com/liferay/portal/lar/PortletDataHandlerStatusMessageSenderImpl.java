@@ -41,12 +41,13 @@ public class PortletDataHandlerStatusMessageSenderImpl
 	public void sendStatusMessage(
 		String messageType, String portletId, ManifestSummary manifestSummary) {
 
-		PortletDataHandlerStatusMessage portletDataHandlerStatusMessage =
-			new PortletDataHandlerStatusMessage(
-				messageType, portletId, manifestSummary);
+		PortletDataHandlerBackgroundTaskStatusMessage
+			portletDataHandlerBackgroundTaskStatusMessage =
+				new PortletDataHandlerBackgroundTaskStatusMessage(
+					messageType, portletId, manifestSummary);
 
 		_backgroundTaskStatusMessageSender.setBackgroundTaskStatusMessage(
-			portletDataHandlerStatusMessage);
+			portletDataHandlerBackgroundTaskStatusMessage);
 	}
 
 	@Override
@@ -54,24 +55,26 @@ public class PortletDataHandlerStatusMessageSenderImpl
 		String messageType, String[] portletIds,
 		ManifestSummary manifestSummary) {
 
-		PortletDataHandlerStatusMessage portletDataHandlerStatusMessage =
-			new PortletDataHandlerStatusMessage(
-				messageType, portletIds, manifestSummary);
+		PortletDataHandlerBackgroundTaskStatusMessage
+			portletDataHandlerBackgroundTaskStatusMessage =
+				new PortletDataHandlerBackgroundTaskStatusMessage(
+					messageType, portletIds, manifestSummary);
 
 		_backgroundTaskStatusMessageSender.setBackgroundTaskStatusMessage(
-			portletDataHandlerStatusMessage);
+			portletDataHandlerBackgroundTaskStatusMessage);
 	}
 
 	@Override
 	public <T extends StagedModel> void sendStatusMessage(
 		String messageType, T stagedModel, ManifestSummary manifestSummary) {
 
-		PortletDataHandlerStatusMessage portletDataHandlerStatusMessage =
-			new PortletDataHandlerStatusMessage(
-				messageType, stagedModel, manifestSummary);
+		PortletDataHandlerBackgroundTaskStatusMessage
+			portletDataHandlerBackgroundTaskStatusMessage =
+				new PortletDataHandlerBackgroundTaskStatusMessage(
+					messageType, stagedModel, manifestSummary);
 
 		_backgroundTaskStatusMessageSender.setBackgroundTaskStatusMessage(
-			portletDataHandlerStatusMessage);
+			portletDataHandlerBackgroundTaskStatusMessage);
 	}
 
 	public void setBackgroundTaskStatusMessageSender(
