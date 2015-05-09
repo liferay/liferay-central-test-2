@@ -92,21 +92,6 @@ public class WSDDBuilderPlugin implements Plugin<Project> {
 			"com.liferay.portal.tools.wsdd.builder", "latest.release");
 	}
 
-	protected void configureBuildWSDDTask(Project project) {
-		TaskContainer taskContainer = project.getTasks();
-
-		taskContainer.withType(
-			BuildWSDDTask.class,
-			new Action<BuildWSDDTask>() {
-
-				@Override
-				public void execute(BuildWSDDTask buildWSDDTask) {
-					configureBuildWSDDTask(buildWSDDTask);
-				}
-
-			});
-	}
-
 	protected void configureBuildWSDDTask(BuildWSDDTask buildWSDDTask) {
 		if (Validator.isNotNull(buildWSDDTask.getBuilderClasspath())) {
 			return;
@@ -140,6 +125,21 @@ public class WSDDBuilderPlugin implements Plugin<Project> {
 		}
 
 		buildWSDDTask.setBuilderClasspath(fileCollection.getAsPath());
+	}
+
+	protected void configureBuildWSDDTask(Project project) {
+		TaskContainer taskContainer = project.getTasks();
+
+		taskContainer.withType(
+			BuildWSDDTask.class,
+			new Action<BuildWSDDTask>() {
+
+				@Override
+				public void execute(BuildWSDDTask buildWSDDTask) {
+					configureBuildWSDDTask(buildWSDDTask);
+				}
+
+			});
 	}
 
 }
