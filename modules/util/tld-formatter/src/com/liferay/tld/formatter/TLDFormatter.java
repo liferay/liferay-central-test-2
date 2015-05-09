@@ -72,6 +72,7 @@ public class TLDFormatter {
 					throws IOException {
 
 					Path fileNamePath = file.getFileName();
+
 					String fileName = fileNamePath.toString();
 
 					if (!fileName.endsWith(".tld") ||
