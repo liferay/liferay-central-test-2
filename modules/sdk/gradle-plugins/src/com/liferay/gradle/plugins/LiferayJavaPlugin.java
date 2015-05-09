@@ -38,6 +38,7 @@ import groovy.util.ConfigObject;
 import java.io.File;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -793,7 +794,9 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 
 		Set<File> srcDirs = javaSourceDirectorySet.getSrcDirs();
 
-		return srcDirs.iterator().next();
+		Iterator<File> iterator = srcDirs.iterator();
+
+		return iterator.next();
 	}
 
 	protected File getLibDir(Project project) {
@@ -809,7 +812,9 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 
 		Set<File> srcDirs = resourcesSourceDirectorySet.getSrcDirs();
 
-		return srcDirs.iterator().next();
+		Iterator<File> iterator = srcDirs.iterator();
+
+		return iterator.next();
 	}
 
 	protected File getServiceBaseDir(Project project) {
