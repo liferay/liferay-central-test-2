@@ -172,6 +172,14 @@ public class ServiceTestUtil {
 		}
 	}
 
+	private static Filter _registerDestinationFilter(String destinationName) {
+		Registry registry = RegistryUtil.getRegistry();
+
+		return registry.getFilter(
+			"(&(destination.name=" + destinationName +
+				")(objectClass=" + Destination.class.getName() + "))");
+	}
+
 	public static void initStaticServices() {
 
 		// Indexers
@@ -184,32 +192,16 @@ public class ServiceTestUtil {
 			ServiceDependencyManager serviceDependencyManager =
 				new ServiceDependencyManager();
 
-			Registry registry = RegistryUtil.getRegistry();
-
-			Filter audioProcessorFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_AUDIO_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter imageProcessFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter pdfProcessorFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter rawMetaDataProcessorFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter videoProcessorFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_VIDEO_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
+			Filter audioProcessorFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_AUDIO_PROCESSOR);
+			Filter imageProcessFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR);
+			Filter pdfProcessorFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR);
+			Filter rawMetaDataProcessorFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR);
+			Filter videoProcessorFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_VIDEO_PROCESSOR);
 
 			serviceDependencyManager.registerDependencies(
 				audioProcessorFilter, imageProcessFilter, pdfProcessorFilter,

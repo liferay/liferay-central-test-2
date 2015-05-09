@@ -105,35 +105,18 @@ public class SynchronousDestinationTestCallback
 			ServiceDependencyManager serviceDependencyManager =
 				new ServiceDependencyManager();
 
-			Registry registry = RegistryUtil.getRegistry();
-
-			Filter asyncFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.ASYNC_SERVICE +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter backgroundTaskFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.BACKGROUND_TASK +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter mailFilter = registry.getFilter(
-				"(&(destination.name=" + DestinationNames.MAIL +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter pdfProcessorFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter rawMetaDataProcessorFilter = registry.getFilter(
-				"(&(destination.name=" +
-					DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR +
-					")(objectClass=" + Destination.class.getName() + "))");
-
-			Filter subscrpitionSenderFilter = registry.getFilter(
-				"(&(destination.name=" + DestinationNames.SUBSCRIPTION_SENDER +
-					")(objectClass=" + Destination.class.getName() + "))");
+			Filter asyncFilter = _registerDestinationFilter(
+				DestinationNames.ASYNC_SERVICE);
+			Filter backgroundTaskFilter = _registerDestinationFilter(
+				DestinationNames.BACKGROUND_TASK);
+			Filter mailFilter = _registerDestinationFilter(
+				DestinationNames.MAIL);
+			Filter pdfProcessorFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR);
+			Filter rawMetaDataProcessorFilter = _registerDestinationFilter(
+				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR);
+			Filter subscrpitionSenderFilter = _registerDestinationFilter(
+				DestinationNames.SUBSCRIPTION_SENDER);
 
 			serviceDependencyManager.registerDependencies(
 				asyncFilter, backgroundTaskFilter, mailFilter,
@@ -204,6 +187,14 @@ public class SynchronousDestinationTestCallback
 
 		public void setSync(Sync sync) {
 			_sync = sync;
+		}
+
+		private Filter _registerDestinationFilter(String destinationName) {
+			Registry registry = RegistryUtil.getRegistry();
+
+			return registry.getFilter(
+				"(&(destination.name=" + destinationName +
+					")(objectClass=" + Destination.class.getName() + "))");
 		}
 
 		private final List<String> _absentDestinationNames = new ArrayList<>();
