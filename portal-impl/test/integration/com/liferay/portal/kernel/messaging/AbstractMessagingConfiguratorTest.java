@@ -216,7 +216,7 @@ public class AbstractMessagingConfiguratorTest {
 		}
 
 		@Override
-		public void receive(Message message) throws MessageListenerException {
+		public void receive(Message message) {
 			ClassLoader currentClassLoader =
 				Thread.currentThread().getContextClassLoader();
 
@@ -234,7 +234,7 @@ public class AbstractMessagingConfiguratorTest {
 		}
 
 		@Override
-		public void receive(Message message) throws MessageListenerException {
+		public void receive(Message message) {
 			Assert.assertEquals(_destinationName, message.getDestinationName());
 		}
 
