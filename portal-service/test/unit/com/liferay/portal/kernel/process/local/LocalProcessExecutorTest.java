@@ -1153,7 +1153,7 @@ public class LocalProcessExecutorTest {
 			LogRecord logRecord = logRecords.get(0);
 
 			Assert.assertEquals(
-				"Received a nonprocess callable piping back string piping " + 
+				"Received a nonprocess callable piping back string piping " +
 					"back object",
 				logRecord.getMessage());
 		}
