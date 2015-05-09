@@ -168,11 +168,12 @@ public class ComboServletTest extends PowerMockito {
 		);
 
 		_mockHttpServletRequest = new MockHttpServletRequest();
-		_mockHttpServletResponse = new MockHttpServletResponse();
 
 		_mockHttpServletRequest.setLocalAddr("localhost");
 		_mockHttpServletRequest.setLocalPort(8080);
 		_mockHttpServletRequest.setScheme("http");
+
+		_mockHttpServletResponse = new MockHttpServletResponse();
 	}
 
 	@Test
