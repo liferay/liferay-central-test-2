@@ -47,7 +47,7 @@ public class TLDFormatter {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
 		String baseDirName = GetterUtil.getString(
-			arguments.get("tld.base.dir"), _BASE_DIR_NAME);
+			arguments.get("tld.base.dir"), "./");
 		boolean plugin = GetterUtil.getBoolean(
 			arguments.get("tld.plugin"), true);
 
@@ -110,17 +110,18 @@ public class TLDFormatter {
 
 		_sortElements(root, "tag", "name");
 
-		List<Element> tagEls = root.elements("tag");
+		List<Element> tagElements = root.elements("tag");
 
-		for (Element tagEl : tagEls) {
-			_sortElements(tagEl, "attribute", "name");
+		for (Element tagElement : tagElements) {
+			_sortElements(tagElement, "attribute", "name");
 
-			Element dynamicAttributesEl = tagEl.element("dynamic-attributes");
+			Element dynamicAttributesElement = tagElement.element(
+				"dynamic-attributes");
 
-			if (dynamicAttributesEl != null) {
-				dynamicAttributesEl.detach();
+			if (dynamicAttributesElement != null) {
+				dynamicAttributesElement.detach();
 
-				tagEl.add(dynamicAttributesEl);
+				tagElement.add(dynamicAttributesElement);
 			}
 		}
 
@@ -167,8 +168,6 @@ public class TLDFormatter {
 			parentElement.add(element);
 		}
 	}
-
-	private static final String _BASE_DIR_NAME = "./";
 
 	private final boolean _plugin;
 
