@@ -217,8 +217,10 @@ public class AbstractMessagingConfiguratorTest {
 
 		@Override
 		public void receive(Message message) {
+			Thread currentThread = Thread.currentThread();
+
 			ClassLoader currentClassLoader =
-				Thread.currentThread().getContextClassLoader();
+				currentThread.getContextClassLoader();
 
 			Assert.assertEquals(_testClassLoader, currentClassLoader);
 		}
