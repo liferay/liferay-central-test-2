@@ -1125,12 +1125,12 @@ public class LocalProcessExecutorTest {
 	}
 
 	@Test
-	public void testNonProcessCallablePipingBackProcessCallable()
+	public void testNonpocessCallablePipingBackProcessCallable()
 		throws Exception {
 
-		NonProcessCallablePipingBackProcessCallable
+		NonprocessCallablePipingBackProcessCallable
 			nonProcessCallablePipingBackProcessCallable =
-				new NonProcessCallablePipingBackProcessCallable();
+				new NonprocessCallablePipingBackProcessCallable();
 
 		try (CaptureHandler captureHandler =
 				JDKLoggerTestUtil.configureJDKLogger(
@@ -1153,8 +1153,8 @@ public class LocalProcessExecutorTest {
 			LogRecord logRecord = logRecords.get(0);
 
 			Assert.assertEquals(
-				"Received a non-ProcessCallable piping back String " +
-					"piping back object",
+				"Received a nonprocess callable piping back string piping " + 
+					"back object",
 				logRecord.getMessage());
 		}
 
@@ -1537,6 +1537,7 @@ public class LocalProcessExecutorTest {
 				}) {
 
 			objectOutputStream.reset();
+
 			objectOutputStream.writeUnshared(serializable);
 		}
 
@@ -2305,7 +2306,7 @@ public class LocalProcessExecutorTest {
 
 	}
 
-	private static class NonProcessCallablePipingBackProcessCallable
+	private static class NonprocessCallablePipingBackProcessCallable
 		implements ProcessCallable<Serializable> {
 
 		@Override
@@ -2319,7 +2320,7 @@ public class LocalProcessExecutorTest {
 
 					outputStream.write(
 						_toHeadlessSerializationData(
-							"String piping back object"));
+							"string piping back object"));
 				}
 			}
 			catch (IOException ioe) {

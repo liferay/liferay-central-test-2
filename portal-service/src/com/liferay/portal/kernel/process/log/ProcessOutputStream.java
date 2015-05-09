@@ -61,6 +61,7 @@ public class ProcessOutputStream extends UnsyncByteArrayOutputStream {
 			}
 
 			_objectOutputStream.flush();
+
 			_objectOutputStream.reset();
 		}
 	}

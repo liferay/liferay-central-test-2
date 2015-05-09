@@ -320,7 +320,7 @@ public class LocalProcessExecutor implements ProcessExecutor {
 					if (!(obj instanceof ProcessCallable)) {
 						if (_log.isInfoEnabled()) {
 							_log.info(
-								"Received a non-ProcessCallable piping back " +
+								"Received a nonprocess callable piping back " +
 									obj);
 						}
 
