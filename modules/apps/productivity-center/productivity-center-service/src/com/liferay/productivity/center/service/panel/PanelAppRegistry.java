@@ -54,7 +54,7 @@ public class PanelAppRegistry {
 		_serviceTrackerMap = ServiceTrackerMapFactory.multiValueMap(
 			bundleContext, PanelApp.class, "(panel.category.key=*)",
 			new PanelCategoryServiceReferenceMapper(),
-			new AscendingServiceRankingServiceReferenceComparator());
+			new ServiceRankingPropertyServiceReferenceComparator());
 
 		_serviceTrackerMap.open();
 	}
@@ -66,11 +66,11 @@ public class PanelAppRegistry {
 
 	private ServiceTrackerMap<String, List<PanelApp>> _serviceTrackerMap;
 
-	private static class AscendingServiceRankingServiceReferenceComparator
+	private static class ServiceRankingPropertyServiceReferenceComparator
 		extends ServiceTrackerMapFactory.
 			PropertyServiceReferenceComparator<PanelApp> {
 
-		public AscendingServiceRankingServiceReferenceComparator() {
+		public ServiceRankingPropertyServiceReferenceComparator() {
 			super("service.ranking");
 		}
 
