@@ -266,7 +266,7 @@ if (Validator.isNotNull(historyKey)) {
 
 					var tabIndex = tabview.indexOf(tab);
 
-					if (tab && tabIndex > -1) {
+					if (tab && (tabIndex > -1)) {
 						tabview.selectChild(tabIndex);
 					}
 
