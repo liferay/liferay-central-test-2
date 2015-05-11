@@ -53,4 +53,8 @@ public class ContactNameException extends PortalException {
 
 	}
 
+	private ContactNameException(String msg) {
+		super(msg);
+	}
+
 }
