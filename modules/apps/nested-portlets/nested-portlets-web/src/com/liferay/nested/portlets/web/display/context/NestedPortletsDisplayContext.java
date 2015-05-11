@@ -90,8 +90,8 @@ public class NestedPortletsDisplayContext {
 
 				@Override
 				public boolean filter(LayoutTemplate layoutTemplate) {
-					return !(unSupportedLayoutTemplateIds.contains(
-						layoutTemplate.getLayoutTemplateId()));
+					return !unSupportedLayoutTemplateIds.contains(
+						layoutTemplate.getLayoutTemplateId());
 				}
 
 			});
