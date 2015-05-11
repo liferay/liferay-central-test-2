@@ -93,6 +93,9 @@ public class NestedPortletsPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String layoutTemplateId = StringPool.BLANK;
 
 		try {
@@ -114,9 +117,6 @@ public class NestedPortletsPortlet extends MVCPortlet {
 		String templateContent = StringPool.BLANK;
 
 		Map<String, String> columnIds = new HashMap<>();
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		if (Validator.isNotNull(layoutTemplateId)) {
 			Theme theme = themeDisplay.getTheme();
