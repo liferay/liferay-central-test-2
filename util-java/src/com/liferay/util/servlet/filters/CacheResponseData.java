@@ -41,10 +41,10 @@ public class CacheResponseData implements Serializable {
 		ByteBuffer byteBuffer = bufferCacheServletResponse.getByteBuffer();
 
 		_content = byteBuffer.array();
-		_offset = byteBuffer.arrayOffset() + byteBuffer.position();
-		_length = byteBuffer.remaining();
 		_contentType = bufferCacheServletResponse.getContentType();
 		_headers = bufferCacheServletResponse.getHeaders();
+		_length = byteBuffer.remaining();
+		_offset = byteBuffer.arrayOffset() + byteBuffer.position();
 	}
 
 	public Object getAttribute(String name) {
