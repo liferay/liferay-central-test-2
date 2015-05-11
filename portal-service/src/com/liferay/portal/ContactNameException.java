@@ -15,6 +15,7 @@
 package com.liferay.portal;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.security.auth.FullNameValidator;
 
 /**
@@ -44,7 +45,7 @@ public class ContactNameException extends PortalException {
 			super(
 				String.format(
 					"Contact full name must validate with %s",
-					fullNameValidator.getClass().getName()));
+					ClassUtil.getClassName(fullNameValidator)));
 
 			this.fullNameValidator = fullNameValidator;
 		}
