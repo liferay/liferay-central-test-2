@@ -73,10 +73,15 @@ public class DefaultWikiListPagesDisplayContext
 		List<MenuItem> menuItems = new ArrayList<>();
 
 		_addEditMenuItem(menuItems, wikiPage);
+
 		_addPermissionsMenuItem(menuItems, wikiPage);
+
 		_addCopyMenuItem(menuItems, wikiPage);
+
 		_addMoveMenuItem(menuItems, wikiPage);
+
 		_addSubscriptionMenuItem(menuItems, wikiPage);
+
 		_addDeleteMenuItem(menuItems, wikiPage);
 
 		menu.setMenuItems(menuItems);
