@@ -94,7 +94,7 @@ public class NestedPortletsDisplayContext {
 						layoutTemplate.getLayoutTemplateId()));
 				}
 
-		});
+			});
 	}
 
 	public boolean isPortletSetupShowBorders() {
