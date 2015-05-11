@@ -26,7 +26,7 @@ public class ContactNameException extends PortalException {
 	public static class MustHaveFirstName extends ContactNameException {
 
 		public MustHaveFirstName() {
-			super("First name is required for contacts");
+			super("Contacts must have a first name");
 		}
 
 	}
@@ -34,7 +34,7 @@ public class ContactNameException extends PortalException {
 	public static class MustHaveLastName extends ContactNameException {
 
 		public MustHaveLastName() {
-			super("Last name is required for contacts");
+			super("Contacts must have a last name");
 		}
 
 	}
