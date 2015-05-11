@@ -630,11 +630,11 @@ public class PoshiRunnerValidation {
 		if (fileName.equals("function")) {
 			Element firstChildElement = childElements.get(0);
 
-			List<String> possibleElementName = Arrays.asList(
+			List<String> possibleElementNames = Arrays.asList(
 				"condition", "contains");
 
 			_validateElementName(
-				firstChildElement, possibleElementName, filePath);
+				firstChildElement, possibleElementNames, filePath);
 
 			_validateConditionElement(firstChildElement, filePath);
 		}
