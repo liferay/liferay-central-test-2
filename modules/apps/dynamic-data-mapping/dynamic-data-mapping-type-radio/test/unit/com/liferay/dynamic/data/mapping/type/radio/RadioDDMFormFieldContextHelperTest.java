@@ -127,11 +127,11 @@ public class RadioDDMFormFieldContextHelperTest {
 		DDMFormFieldOptions ddmFormFieldOptions, String value,
 		LocalizedValue predefinedValue, Locale locale) {
 
-		RadioDDMFormFieldContextHelper selectDDMFormFieldContextHelper =
+		RadioDDMFormFieldContextHelper radioDDMFormFieldContextHelper =
 			new RadioDDMFormFieldContextHelper(
 				ddmFormFieldOptions, value, predefinedValue, locale);
 
-		return selectDDMFormFieldContextHelper.getOptions();
+		return radioDDMFormFieldContextHelper.getOptions();
 	}
 
 }

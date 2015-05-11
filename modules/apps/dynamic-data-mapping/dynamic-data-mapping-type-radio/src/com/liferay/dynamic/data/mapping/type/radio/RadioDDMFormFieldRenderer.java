@@ -64,14 +64,14 @@ public class RadioDDMFormFieldRenderer extends BaseDDMFormFieldRenderer {
 		DDMFormField ddmFormField,
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
 
-		RadioDDMFormFieldContextHelper selectDDMFormFieldContextHelper =
+		RadioDDMFormFieldContextHelper radioDDMFormFieldContextHelper =
 			new RadioDDMFormFieldContextHelper(
 				ddmFormField.getDDMFormFieldOptions(),
 				ddmFormFieldRenderingContext.getValue(),
 				ddmFormField.getPredefinedValue(),
 				ddmFormFieldRenderingContext.getLocale());
 
-		return selectDDMFormFieldContextHelper.getOptions();
+		return radioDDMFormFieldContextHelper.getOptions();
 	}
 
 	protected void populateRequiredContext(
