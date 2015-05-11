@@ -97,18 +97,18 @@ public class MessageBusManager
 			DestinationStatisticsManager destinationStatisticsManager =
 				new DestinationStatisticsManager(destination);
 
-			Dictionary<String, Object> mbeanProperties =
+			Dictionary<String, Object> mBeanProperties =
 				new HashMapDictionary<>();
 
-			mbeanProperties.put(
+			mBeanProperties.put(
 				"jmx.objectname", destinationStatisticsManager.getObjectName());
-			mbeanProperties.put(
+			mBeanProperties.put(
 				"jmx.objectname.cache.key",
 				destinationStatisticsManager.getObjectNameCacheKey());
 
 			serviceRegistration = _bundleContext.registerService(
 				DynamicMBean.class, destinationStatisticsManager,
-				mbeanProperties);
+				mBeanProperties);
 
 			_mbeanServiceRegistrations.put(
 				destination.getName(), serviceRegistration);

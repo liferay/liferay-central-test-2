@@ -51,7 +51,7 @@ public class DestinationStatisticsManagerTest {
 		ObjectName objectName = new ObjectName(
 			"com.liferay.portal.messaging:classification=" +
 				"messaging_destination,name=MessagingDestinationStatistics-" +
-				_destination.getName());
+					_destination.getName());
 
 		_mBeanServer.registerMBean(
 			new DestinationStatisticsManager(_destination), objectName);
