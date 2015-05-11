@@ -86,7 +86,8 @@ public class NestedPortletsDisplayContext {
 			getUnsupportedLayoutTemplateIds();
 
 		return ListUtil.filter(
-			layoutTemplates, new PredicateFilter<LayoutTemplate>() {
+			layoutTemplates,
+			new PredicateFilter<LayoutTemplate>() {
 
 				@Override
 				public boolean filter(LayoutTemplate layoutTemplate) {
