@@ -22,37 +22,6 @@ import com.liferay.portal.security.auth.FullNameValidator;
  */
 public class ContactNameException extends PortalException {
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by the inner classes
-	 */
-	@Deprecated
-	public ContactNameException() {
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by the inner classes
-	 */
-	@Deprecated
-	public ContactNameException(String msg) {
-		super(msg);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by the inner classes
-	 */
-	@Deprecated
-	public ContactNameException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by the inner classes
-	 */
-	@Deprecated
-	public ContactNameException(Throwable cause) {
-		super(cause);
-	}
-
 	public static class MustHaveFirstName extends ContactNameException {
 
 		public MustHaveFirstName() {
