@@ -15,7 +15,7 @@
 </tr>
 <tr>
 	<td>MEMBERSHIP_TYPE</td>
-	<td>//select[@name='_134_type']</td>
+	<td>//select[@name='_com_liferay_site_admin_web_portlet_SiteAdminPortlet_type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@
 <!--DETAILS-->
 <tr>
 	<td>DETAILS_NAME</td>
-	<td>//input[@id='_134_name']</td>
+	<td>//input[@id='_com_liferay_site_admin_web_portlet_SiteAdminPortlet_name']</td>
 	<td></td>
 </tr>
 <tr>
