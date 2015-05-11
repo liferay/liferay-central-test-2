@@ -40,7 +40,7 @@ public class RadioDDMFormFieldContextHelper {
 		LocalizedValue predefinedValue, Locale locale) {
 
 		_ddmFormFieldOptions = ddmFormFieldOptions;
-		_selectedValue = toString(value);
+		_value = toString(value);
 		_predefinedValue = toString(predefinedValue.getString(locale));
 		_locale = locale;
 	}
@@ -67,11 +67,11 @@ public class RadioDDMFormFieldContextHelper {
 	}
 
 	protected boolean isChecked(String optionValue) {
-		if (Validator.isNull(_selectedValue)) {
+		if (Validator.isNull(_value)) {
 			return Validator.equals(_predefinedValue, optionValue);
 		}
 
-		return Validator.equals(_selectedValue, optionValue);
+		return Validator.equals(_value, optionValue);
 	}
 
 	protected String toString(String value) {
@@ -97,6 +97,6 @@ public class RadioDDMFormFieldContextHelper {
 	private final DDMFormFieldOptions _ddmFormFieldOptions;
 	private final Locale _locale;
 	private final String _predefinedValue;
-	private final String _selectedValue;
+	private final String _value;
 
 }
