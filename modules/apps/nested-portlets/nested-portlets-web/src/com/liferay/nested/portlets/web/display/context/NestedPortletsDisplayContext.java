@@ -42,14 +42,13 @@ public class NestedPortletsDisplayContext {
 			NestedPortletsConfiguration nestedPortletsConfiguration)
 		throws SettingsException {
 
+		_request = request;
+		_nestedPortletsConfiguration = nestedPortletsConfiguration;
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		_request = request;
-
-		_nestedPortletsConfiguration = nestedPortletsConfiguration;
 
 		_nestedPortletsPortletInstanceConfiguration =
 			portletDisplay.getPortletInstanceConfiguration(
