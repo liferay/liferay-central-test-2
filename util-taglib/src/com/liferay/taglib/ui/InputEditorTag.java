@@ -394,7 +394,7 @@ public class InputEditorTag extends IncludeTag {
 		public EditorServiceTrackerCustomizer() {
 			Registry registry = RegistryUtil.getRegistry();
 
-			Filter filter = registry.getFilter("(editor.wysiwyg=*)");
+			Filter filter = registry.getFilter("(editor.name=*)");
 
 			_serviceTracker = registry.trackServices(filter, this);
 
@@ -406,15 +406,15 @@ public class InputEditorTag extends IncludeTag {
 			Registry registry = RegistryUtil.getRegistry();
 
 			String editorName = GetterUtil.getString(
-				serviceReference.getProperty("editor.wysiwyg"));
+				serviceReference.getProperty("editor.name"));
 
-			_editors.put(serviceReference, editorName);
+			_editorNames.put(serviceReference, editorName);
 
 			return registry.getService(serviceReference);
 		}
 
 		public boolean hasEditor(String editorName) {
-			Collection<String> values = _editors.values();
+			Collection<String> values = _editorNames.values();
 
 			return values.contains(editorName);
 		}
@@ -428,14 +428,14 @@ public class InputEditorTag extends IncludeTag {
 		public void removedService(
 			ServiceReference<Object> serviceReference, Object service) {
 
-			_editors.remove(serviceReference);
+			_editorNames.remove(serviceReference);
 
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
 		}
 
-		private final Map<ServiceReference<Object>, String> _editors =
+		private final Map<ServiceReference<Object>, String> _editorNames =
 			new ConcurrentHashMap<>();
 		private final ServiceTracker<Object, Object> _serviceTracker;
 

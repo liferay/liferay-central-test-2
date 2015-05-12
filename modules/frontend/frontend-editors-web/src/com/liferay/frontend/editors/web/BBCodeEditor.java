@@ -19,6 +19,6 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Raymond Augé
  */
-@Component(property = {"editor.wysiwyg=bbcode"}, service = Object.class)
+@Component(property = {"editor.name=bbcode"}, service = Object.class)
 public class BBCodeEditor {
 }

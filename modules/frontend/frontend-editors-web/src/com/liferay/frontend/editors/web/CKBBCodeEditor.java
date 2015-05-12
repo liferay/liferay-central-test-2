@@ -20,7 +20,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Raymond Augé
  */
 @Component(
-	property = {"editor.wysiwyg=ckeditor_bbcode"}, service = Object.class
+	property = {"editor.name=ckeditor_bbcode"}, service = Object.class
 )
 public class CKBBCodeEditor {
 }

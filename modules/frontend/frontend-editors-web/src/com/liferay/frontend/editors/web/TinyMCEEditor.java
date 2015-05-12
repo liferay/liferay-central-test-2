@@ -19,6 +19,6 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Raymond Augé
  */
-@Component(property = {"editor.wysiwyg=tinymce"}, service = Object.class)
+@Component(property = {"editor.name=tinymce"}, service = Object.class)
 public class TinyMCEEditor {
 }
