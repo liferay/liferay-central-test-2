@@ -826,14 +826,17 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathFriendlyURLPrivateUser(friendlyURLPrivateUserPath);
 		themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
 		themeDisplay.setPathImage(imagePath);
-		themeDisplay.setPathEditors(
-			PortalWebResourcesUtil.getContextPath(
-				PortalWebResourceConstants.RESOURCE_TYPE_EDITOR).concat(
-					"/html"));
-		themeDisplay.setPathJavaScript(
-			PortalWebResourcesUtil.getContextPath(
-				PortalWebResourceConstants.RESOURCE_TYPE_JS).concat(
-					"/html/js"));
+
+		String editorsPath = PortalWebResourcesUtil.getContextPath(
+			PortalWebResourceConstants.RESOURCE_TYPE_EDITOR);
+
+		themeDisplay.setPathEditors(editorsPath.concat("/html"));
+
+		String javaScriptPath = PortalWebResourcesUtil.getContextPath(
+			PortalWebResourceConstants.RESOURCE_TYPE_JS);
+
+		themeDisplay.setPathJavaScript(javaScriptPath.concat("/html/js"));
+
 		themeDisplay.setPathMain(mainPath);
 		themeDisplay.setPathSound(contextPath.concat("/html/sound"));
 		themeDisplay.setPermissionChecker(permissionChecker);
