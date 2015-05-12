@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/js/editor/init.jsp" %>
+<%@ include file="/html/editor/init.jsp" %>
 
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 

@@ -14,11 +14,11 @@
  */
 --%>
 
-<%@ include file="/html/js/editor/init.jsp" %>
+<%@ include file="/html/editor/init.jsp" %>
 
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<liferay-util:include page='<%= themeDisplay.getPathEditors() + "/html/js/editor/ckeditor.jsp" %>'>
+<liferay-util:include page='<%= themeDisplay.getPathEditors() + "/html/editor/ckeditor.jsp" %>'>
 	<liferay-util:param name="ckEditorConfigFileName" value="ckconfig_creole.jsp" />
 	<liferay-util:param name="hideImageResizing" value="<%= Boolean.TRUE.toString() %>" />
 </liferay-util:include>
