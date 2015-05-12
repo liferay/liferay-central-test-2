@@ -472,7 +472,7 @@ public final class XMLLoggerHandler {
 		loggerElement.addChildLoggerElement(
 			_getLineContainerLoggerElement(element));
 
-		_simpleStackTraceToLoggerElement.put(
+		_loggerElements.put(
 			PoshiRunnerStackTraceUtil.getSimpleStackTrace(), loggerElement);
 
 		return loggerElement;
@@ -618,8 +618,8 @@ public final class XMLLoggerHandler {
 
 	private static int _btnLinkCollapseId;
 	private static int _btnLinkVarId;
-	private static final Map<String, LoggerElement>
-		_simpleStackTraceToLoggerElement = new HashMap<>();
+	private static final Map<String, LoggerElement> _loggerElements =
+		new HashMap<>();
 	private static LoggerElement _xmlLogLoggerElement = null;
 
 }
