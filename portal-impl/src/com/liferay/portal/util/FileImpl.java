@@ -721,9 +721,9 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	@Override
 	public void mkdirs(String pathName) {
-		File path = new File(pathName);
+		File file = new File(pathName);
 
-		if (path.exists() && path.isDirectory()) {
+		if (file.exists() && file.isDirectory()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Directory " + pathName + " already exists");
 			}
@@ -732,7 +732,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 
 		try {
-			mkdirs(path);
+			mkdirs(file);
 		}
 		catch (IOException ioe) {
 			ReflectionUtil.throwException(ioe);
