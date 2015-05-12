@@ -32,8 +32,9 @@ import javax.servlet.http.HttpServletRequest;
 public class NavigationMenuDisplayContext {
 
 	public NavigationMenuDisplayContext(
-		HttpServletRequest request, NavigationMenuWebConfiguration
-			navigationMenuWebConfiguration) throws SettingsException {
+			HttpServletRequest request,
+			NavigationMenuWebConfiguration navigationMenuWebConfiguration)
+		throws SettingsException {
 
 		_request = request;
 		_navigationMenuWebConfiguration = navigationMenuWebConfiguration;
