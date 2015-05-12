@@ -210,8 +210,6 @@ public class JournalFolderLocalServiceImpl
 			}
 		}
 
-		// Dynamic data mapping structure links
-
 		for (DDMStructureLink ddmStructureLink : ddmStructureLinks ) {
 			ddmStructureLinkLocalService.deleteStructureLink(
 				ddmStructureLink.getStructureLinkId());
