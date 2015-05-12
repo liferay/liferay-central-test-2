@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.cache.PortalCacheManagerNames;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.resiliency.spi.cache.SPIPortalCacheManagerConfigurator;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.registry.Filter;
@@ -38,9 +39,10 @@ public class MultiVMPoolImpl implements MultiVMPool {
 	public MultiVMPoolImpl() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(7);
 
-		sb.append("(&(objectClass=" + PortalCacheManager.class.getName());
+		sb.append("(&(objectClass=");
+		sb.append(PortalCacheManager.class.getName());
 		sb.append(")(portal.cache.manager.name=");
 		sb.append(PortalCacheManagerNames.MULTI_VM);
 		sb.append(")(portal.cache.manager.type=");

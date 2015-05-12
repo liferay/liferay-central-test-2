@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.cache.PortalCacheManagerNames;
 import com.liferay.portal.kernel.cache.SingleVMPool;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.registry.Filter;
 import com.liferay.registry.Registry;
@@ -37,9 +38,10 @@ public class SingleVMPoolImpl implements SingleVMPool {
 	public SingleVMPoolImpl() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(7);
 
-		sb.append("(&(objectClass=" + PortalCacheManager.class.getName());
+		sb.append("(&(objectClass=");
+		sb.append(PortalCacheManager.class.getName());
 		sb.append(")(portal.cache.manager.name=");
 		sb.append(PortalCacheManagerNames.SINGLE_VM);
 		sb.append(")(portal.cache.manager.type=");
