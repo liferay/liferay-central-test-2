@@ -47,7 +47,6 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 			message="edit"
 			url="<%= taglibOnClick %>"
 		/>
-
 	</c:if>
 
 	<c:if test="<%= !workflowDefinition.isActive() %>">
