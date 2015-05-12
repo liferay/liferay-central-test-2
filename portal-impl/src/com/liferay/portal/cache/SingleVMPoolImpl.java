@@ -37,17 +37,21 @@ public class SingleVMPoolImpl implements SingleVMPool {
 	public SingleVMPoolImpl() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter filter = registry.getFilter(
-			"(&(portal.cache.manager.name=" +
-				PortalCacheManagerNames.SINGLE_VM +
-					")(portal.cache.manager.type=" +
-						PropsValues.PORTAL_CACHE_MANAGER_TYPE_SINGLE_VM +
-							")(objectClass=" +
-								PortalCacheManager.class.getName()+"))");
+		StringBundler sb = new StringBundler();
 
-		ServiceTracker<PortalCacheManager<? extends Serializable, ?>,
-			PortalCacheManager<? extends Serializable, ?>>
-				serviceTracker = registry.trackServices(filter);
+		sb.append("(&(objectClass=" + PortalCacheManager.class.getName());
+		sb.append(")(portal.cache.manager.name=");
+		sb.append(PortalCacheManagerNames.SINGLE_VM);
+		sb.append(")(portal.cache.manager.type=");
+		sb.append(PropsValues.PORTAL_CACHE_MANAGER_TYPE_SINGLE_VM);
+		sb.append("))");
+
+		Filter filter = registry.getFilter(sb.toString());
+
+		ServiceTracker<PortalCacheManager
+			<? extends Serializable, ? extends Serializable>, PortalCacheManager
+				<? extends Serializable, ? extends Serializable>>
+					serviceTracker = registry.trackServices(filter);
 
 		serviceTracker.open();
 

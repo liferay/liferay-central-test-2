@@ -49,10 +49,10 @@ public class MultiVMPoolImpl implements MultiVMPool {
 
 		Filter filter = registry.getFilter(sb.toString());
 
-		ServiceTracker<PortalCacheManager<? extends Serializable,
-				? extends Serializable>,
-			PortalCacheManager<? extends Serializable, ? extends Serializable>>
-				serviceTracker = registry.trackServices(filter);
+		ServiceTracker<PortalCacheManager
+			<? extends Serializable, ? extends Serializable>, PortalCacheManager
+				<? extends Serializable, ? extends Serializable>>
+					serviceTracker = registry.trackServices(filter);
 
 		serviceTracker.open();
 
@@ -62,7 +62,8 @@ public class MultiVMPoolImpl implements MultiVMPool {
 					serviceTracker.waitForService(0));
 		}
 		catch (Exception e) {
-			throw new IllegalStateException("Cannot initialize MultiVMPool", e);
+			throw new IllegalStateException(
+				"Unable to initialize multi VM pool", e);
 		}
 	}
 
