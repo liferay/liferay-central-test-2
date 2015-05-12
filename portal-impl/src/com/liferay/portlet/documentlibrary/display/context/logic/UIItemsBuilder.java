@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.repository.model.FileShortcut;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.DeleteMenuItem;
-import com.liferay.portal.kernel.servlet.taglib.ui.JavaScriptMenuItem1;
-import com.liferay.portal.kernel.servlet.taglib.ui.JavaScriptToolbarItem1;
-import com.liferay.portal.kernel.servlet.taglib.ui.JavaScriptUIItem1;
+import com.liferay.portal.kernel.servlet.taglib.ui.JavaScriptMenuItem;
+import com.liferay.portal.kernel.servlet.taglib.ui.JavaScriptToolbarItem;
+import com.liferay.portal.kernel.servlet.taglib.ui.JavaScriptUIItem;
 import com.liferay.portal.kernel.servlet.taglib.ui.MenuItem;
 import com.liferay.portal.kernel.servlet.taglib.ui.ToolbarItem;
 import com.liferay.portal.kernel.servlet.taglib.ui.URLMenuItem;
@@ -113,7 +113,7 @@ public class UIItemsBuilder {
 		}
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-undo",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-undo",
 			DLUIItemKeys.CANCEL_CHECKOUT,
 			UnicodeLanguageUtil.get(_request, "cancel-checkout[document]"),
 			getSubmitFormJavaScript(Constants.CANCEL_CHECKOUT, null));
@@ -141,7 +141,7 @@ public class UIItemsBuilder {
 		}
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-lock",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-lock",
 			DLUIItemKeys.CHECKIN, UnicodeLanguageUtil.get(_request, "checkin"),
 			getSubmitFormJavaScript(Constants.CHECKIN, null));
 	}
@@ -172,7 +172,7 @@ public class UIItemsBuilder {
 		}
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-unlock",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-unlock",
 			DLUIItemKeys.CHECKOUT,
 			UnicodeLanguageUtil.get(_request, "checkout[document]"),
 			getSubmitFormJavaScript(Constants.CHECKOUT, null));
@@ -233,7 +233,7 @@ public class UIItemsBuilder {
 		sb.append("}");
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-remove",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-remove",
 			DLUIItemKeys.DELETE, UnicodeLanguageUtil.get(_request, "delete"),
 			sb.toString());
 	}
@@ -371,7 +371,7 @@ public class UIItemsBuilder {
 			"folderId", String.valueOf(_fileEntry.getFolderId()));
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-trash",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-trash",
 			DLUIItemKeys.MOVE_TO_THE_RECYCLE_BIN,
 			UnicodeLanguageUtil.get(_request, "move-to-the-recycle-bin"),
 			getSubmitFormJavaScript(
@@ -393,8 +393,8 @@ public class UIItemsBuilder {
 
 		String onClick = getNamespace() + "openDocument('" + webDavURL + "');";
 
-		JavaScriptMenuItem1 javascriptMenuItem = _addJavaScriptUIItem(
-			new JavaScriptMenuItem1(), menuItems, "icon-file-alt",
+		JavaScriptMenuItem javascriptMenuItem = _addJavaScriptUIItem(
+			new JavaScriptMenuItem(), menuItems, "icon-file-alt",
 			DLUIItemKeys.OPEN_IN_MS_OFFICE, "open-in-ms-office", onClick);
 
 		String javaScript =
@@ -443,7 +443,7 @@ public class UIItemsBuilder {
 		sb.append("');");
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-file-alt",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-file-alt",
 			DLUIItemKeys.OPEN_IN_MS_OFFICE,
 			UnicodeLanguageUtil.get(_request, "open-in-ms-office"),
 			sb.toString());
@@ -508,7 +508,7 @@ public class UIItemsBuilder {
 		sb.append("'});");
 
 		_addJavaScriptUIItem(
-			new JavaScriptToolbarItem1(), toolbarItems, "icon-lock",
+			new JavaScriptToolbarItem(), toolbarItems, "icon-lock",
 			DLUIItemKeys.PERMISSIONS,
 			UnicodeLanguageUtil.get(_request, "permissions"), sb.toString());
 	}
@@ -633,7 +633,7 @@ public class UIItemsBuilder {
 		}
 	}
 
-	private <T extends JavaScriptUIItem1> T _addJavaScriptUIItem(
+	private <T extends JavaScriptUIItem> T _addJavaScriptUIItem(
 		T javascriptUIItem, List<? super T> javascriptUIItems, String icon,
 		String key, String label, String onClick ) {
 

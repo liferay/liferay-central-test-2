@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
 /**
  * @author Iván Zaera
  */
-public interface JavaScriptUIItem1 extends UIActionItem {
+public interface JavaScriptUIItem extends UIActionItem {
 
 	public String getOnClick();
 
