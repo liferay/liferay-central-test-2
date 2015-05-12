@@ -305,13 +305,15 @@ public abstract class TestOrderHelper {
 			return;
 		}
 
+		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
+
+		DDMFormField ddmFormField = ddmFormFields.get(0);
+
 		DDMFormFieldOptions ddmFormFieldOptions = new DDMFormFieldOptions();
 
 		for (String option : _unsortedValues) {
 			ddmFormFieldOptions.addOption(option);
 		}
-
-		DDMFormField ddmFormField = ddmForm.getDDMFormFields().get(0);
 
 		ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
 	}
