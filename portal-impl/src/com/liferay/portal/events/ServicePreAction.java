@@ -829,7 +829,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathEditors(
 			PortalWebResourcesUtil.getContextPath(
 				PortalWebResourceConstants.RESOURCE_TYPE_EDITOR).concat(
-					"/html/js"));
+					"/html"));
 		themeDisplay.setPathJavaScript(
 			PortalWebResourcesUtil.getContextPath(
 				PortalWebResourceConstants.RESOURCE_TYPE_JS).concat(
