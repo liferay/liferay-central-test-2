@@ -48,8 +48,8 @@ public class TestDDMFormFieldValueRenderer
 	}
 
 	@Override
-	public String render(List<DDMFormFieldValue> ddmFormFieldValue, Locale
-		locale) {
+	public String render(
+		List<DDMFormFieldValue> ddmFormFieldValue, Locale locale) {
 
 		return null;
 	}
