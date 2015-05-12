@@ -44,6 +44,7 @@ public class FriendlyURLMapperTrackerImplTest {
 	@Test
 	public void testGetFriendlyURLMapper() throws Exception {
 		Portlet portlet = new PortletImpl();
+
 		portlet.setPortletClass("com.liferay.portlet.StrutsPortlet");
 		portlet.setPortletId("FriendlyURLMapperTrackerImplTest");
 
