@@ -102,15 +102,14 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 
 	@Override
 	public Query getExcludeQuery(SearchContext searchContext) {
-		BooleanQuery excludeJournalArticleVersionsQuery =
-			BooleanQueryFactoryUtil.create(searchContext);
+		BooleanQuery excludeQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
 
-		excludeJournalArticleVersionsQuery.addRequiredTerm(
+		excludeQuery.addRequiredTerm(
 			Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
+		excludeQuery.addRequiredTerm("head", false);
 
-		excludeJournalArticleVersionsQuery.addRequiredTerm("head", false);
-
-		return excludeJournalArticleVersionsQuery;
+		return excludeQuery;
 	}
 
 	@Override

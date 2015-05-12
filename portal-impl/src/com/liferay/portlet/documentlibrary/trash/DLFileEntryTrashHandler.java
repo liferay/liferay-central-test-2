@@ -102,14 +102,14 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 
 	@Override
 	public Query getExcludeQuery(SearchContext searchContext) {
-		BooleanQuery excludeAttachmentsQuery = BooleanQueryFactoryUtil.create(
+		BooleanQuery excludeQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		excludeAttachmentsQuery.addRequiredTerm(
+		excludeQuery.addRequiredTerm(
 			Field.ENTRY_CLASS_NAME, DLFileEntryConstants.getClassName());
-		excludeAttachmentsQuery.addRequiredTerm(Field.HIDDEN, true);
+		excludeQuery.addRequiredTerm(Field.HIDDEN, true);
 
-		return excludeAttachmentsQuery;
+		return excludeQuery;
 	}
 
 	@Override
