@@ -17,11 +17,11 @@ package com.liferay.portal.servlet.taglib.ui;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 
 /**
- * @author Pei-Jung Lan
+ * @author Sergio González
  */
-@OSGiBeanProperties(property = {"service.ranking:Integer=60"})
-public class LayoutJavascriptFormNavigatorEntry
-	extends BaseLayoutFormNavigatorEntry {
+@OSGiBeanProperties(property = {"service.ranking:Integer=30"})
+public class LayoutSetJavaScriptFormNavigatorEntry1
+	extends BaseLayoutSetFormNavigatorEntry {
 
 	@Override
 	public String getKey() {
@@ -30,7 +30,7 @@ public class LayoutJavascriptFormNavigatorEntry
 
 	@Override
 	protected String getJspPath() {
-		return "/html/portlet/layouts_admin/layout/javascript.jsp";
+		return "/html/portlet/layouts_admin/layout_set/javascript.jsp";
 	}
 
 }
