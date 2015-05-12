@@ -19,8 +19,6 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Raymond Augé
  */
-@Component(
-	property = {"editor.name=ckeditor_bbcode"}, service = Object.class
-)
-public class CKBBCodeEditor {
+@Component(property = {"editor.name=alloyeditor"}, service = Object.class)
+public class AlloyEditorEditor {
 }
