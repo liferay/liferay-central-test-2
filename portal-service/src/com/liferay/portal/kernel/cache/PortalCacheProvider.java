@@ -78,8 +78,7 @@ public class PortalCacheProvider {
 			_portalCacheManagers;
 	private final
 		ServiceTracker<PortalCacheManager<? extends Serializable, ?>,
-			PortalCacheManager<? extends Serializable, ?>>
-				_serviceTracker;
+			PortalCacheManager<? extends Serializable, ?>> _serviceTracker;
 
 	private class PortalCacheProviderServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
