@@ -214,7 +214,7 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 
 		if (Validator.isNull(_name)) {
 			throw new IllegalArgumentException(
-				"Portal cache manager name must be specified.");
+				"Portal cache manager name is not specified");
 		}
 
 		initPortalCacheManager();
