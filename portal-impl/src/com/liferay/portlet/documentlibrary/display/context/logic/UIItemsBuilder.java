@@ -420,7 +420,7 @@ public class UIItemsBuilder {
 
 		template.processTemplate(unsyncStringWriter);
 
-		javascriptMenuItem.setJavascript(unsyncStringWriter.toString());
+		javascriptMenuItem.setJavaScript(unsyncStringWriter.toString());
 	}
 
 	public void addOpenInMsOfficeToolbarItem(List<ToolbarItem> toolbarItems)

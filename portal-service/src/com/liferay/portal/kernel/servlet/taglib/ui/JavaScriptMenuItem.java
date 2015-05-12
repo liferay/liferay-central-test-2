@@ -19,8 +19,8 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
  */
 public class JavaScriptMenuItem extends MenuItem implements JavaScriptUIItem {
 
-	public String getJavascript() {
-		return _javascript;
+	public String getJavaScript() {
+		return _javaScript;
 	}
 
 	@Override
@@ -28,8 +28,8 @@ public class JavaScriptMenuItem extends MenuItem implements JavaScriptUIItem {
 		return _onClick;
 	}
 
-	public void setJavascript(String javascript) {
-		_javascript = javascript;
+	public void setJavaScript(String javaScript) {
+		_javaScript = javaScript;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class JavaScriptMenuItem extends MenuItem implements JavaScriptUIItem {
 		_onClick = onClick;
 	}
 
-	private String _javascript;
+	private String _javaScript;
 	private String _onClick;
 
 }
