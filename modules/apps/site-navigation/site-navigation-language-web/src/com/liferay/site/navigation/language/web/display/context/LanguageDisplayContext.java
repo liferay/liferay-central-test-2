@@ -55,19 +55,8 @@ public class LanguageDisplayContext {
 				LanguagePortletInstanceConfiguration.class);
 	}
 
-	public String[] getAvailableLanguageIds() {
-		if (_availableLanguageIds != null) {
-			return _availableLanguageIds;
-		}
-
-		_availableLanguageIds = LocaleUtil.toLanguageIds(
-			LanguageUtil.getAvailableLocales(_themeDisplay.getSiteGroupId()));
-
-		return _availableLanguageIds;
-	}
-
-	public List<KeyValuePair> getAvailableLanguageList() {
-		List<KeyValuePair> availableLanguageList = new ArrayList<>();
+	public List<KeyValuePair> getAvailableLanguageIdKVPs() {
+		List<KeyValuePair> availableLanguageIdKVPs = new ArrayList<>();
 
 		String[] languageIds = getLanguageIds();
 
@@ -80,34 +69,45 @@ public class LanguageDisplayContext {
 			if (Arrays.binarySearch(languageIds, languageId) < 0) {
 				Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-				availableLanguageList.add(
+				availableLanguageIdKVPs.add(
 					new KeyValuePair(
 						languageId,
 						locale.getDisplayName(_themeDisplay.getLocale())));
 			}
 		}
 
-		availableLanguageList = ListUtil.sort(
-			availableLanguageList, new KeyValuePairComparator(false, true));
+		availableLanguageIdKVPs = ListUtil.sort(
+			availableLanguageIdKVPs, new KeyValuePairComparator(false, true));
 
-		return availableLanguageList;
+		return availableLanguageIdKVPs;
 	}
 
-	public List<KeyValuePair> getCurrentLanguageList() {
-		List<KeyValuePair> currentLanguageList = new ArrayList<>();
+	public String[] getAvailableLanguageIds() {
+		if (_availableLanguageIds != null) {
+			return _availableLanguageIds;
+		}
+
+		_availableLanguageIds = LocaleUtil.toLanguageIds(
+			LanguageUtil.getAvailableLocales(_themeDisplay.getSiteGroupId()));
+
+		return _availableLanguageIds;
+	}
+
+	public List<KeyValuePair> getCurrentLanguageIdKVPs() {
+		List<KeyValuePair> currentLanguageIdKVPs = new ArrayList<>();
 
 		String[] languageIds = getLanguageIds();
 
 		for (String languageId : languageIds) {
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-			currentLanguageList.add(
+			currentLanguageIdKVPs.add(
 				new KeyValuePair(
 					languageId,
 					locale.getDisplayName(_themeDisplay.getLocale())));
 		}
 
-		return currentLanguageList;
+		return currentLanguageIdKVPs;
 	}
 
 	public String getDDMTemplateKey() {

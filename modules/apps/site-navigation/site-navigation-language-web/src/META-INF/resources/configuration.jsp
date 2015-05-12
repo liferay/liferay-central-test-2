@@ -29,11 +29,11 @@
 
 		<liferay-ui:input-move-boxes
 			leftBoxName="currentLanguageIds"
-			leftList="<%= languageDisplayContext.getCurrentLanguageList() %>"
+			leftList="<%= languageDisplayContext.getCurrentLanguageIdKVPs() %>"
 			leftReorder="true"
 			leftTitle="current"
 			rightBoxName="availableLanguageIds"
-			rightList="<%= languageDisplayContext.getAvailableLanguageList() %>"
+			rightList="<%= languageDisplayContext.getAvailableLanguageIdKVPs() %>"
 			rightTitle="available"
 		/>
 	</aui:fieldset>
