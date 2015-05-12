@@ -48,5 +48,5 @@
 	<bean id="com.liferay.portal.servlet.taglib.ui.OrganizationWebsitesFormNavigatorEntry" class="com.liferay.portal.servlet.taglib.ui.OrganizationWebsitesFormNavigatorEntry" />
 	<bean id="com.liferay.portal.servlet.taglib.ui.UserIdentificationFormNavigatorCategory" class="com.liferay.portal.servlet.taglib.ui.UserIdentificationFormNavigatorCategory" />
 	<bean id="com.liferay.portal.servlet.taglib.ui.UserMiscellaneousFormNavigatorCategory" class="com.liferay.portal.servlet.taglib.ui.UserMiscellaneousFormNavigatorCategory" />
-	<bean id="com.liferay.portal.servlet.taglib.ui.UserUserInformationFormNavigatorCategory" class="com.liferay.portal.servlet.taglib.ui.UserUserInformationFormNavigatorCategory" />	
+	<bean id="com.liferay.portal.servlet.taglib.ui.UserUserInformationFormNavigatorCategory" class="com.liferay.portal.servlet.taglib.ui.UserUserInformationFormNavigatorCategory" />
 </beans>
