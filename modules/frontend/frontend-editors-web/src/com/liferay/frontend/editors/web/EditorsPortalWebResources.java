@@ -43,7 +43,7 @@ public class EditorsPortalWebResources implements PortalWebResources {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_EDITOR;
+		return PortalWebResourceConstants.RESOURCE_TYPE_EDITORS;
 	}
 
 	@Override
