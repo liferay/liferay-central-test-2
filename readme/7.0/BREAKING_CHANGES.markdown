@@ -1416,6 +1416,8 @@ The following portal properties (and the equivalent `PropsKeys` and
 - `company.settings.form.identification`
 - `company.settings.form.miscellaneous`
 - `company.settings.form.social`
+- `layout.form.add`
+- `layout.form.update`
 - `layout.set.form.update`
 - `organizations.form.add.identification`
 - `organizations.form.add.main`
