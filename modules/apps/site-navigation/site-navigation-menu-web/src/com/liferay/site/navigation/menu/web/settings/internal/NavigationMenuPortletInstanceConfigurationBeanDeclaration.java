@@ -27,7 +27,7 @@ public class NavigationMenuPortletInstanceConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
 	@Override
-	public Class getConfigurationBeanClass() {
+	public Class<?> getConfigurationBeanClass() {
 		return NavigationMenuPortletInstanceConfiguration.class;
 	}
 
