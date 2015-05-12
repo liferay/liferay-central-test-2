@@ -80,7 +80,7 @@ public class PortalWebResourcesUtil {
 					return url;
 				}
 			}
-			catch (MalformedURLException e) {
+			catch (MalformedURLException murle) {
 			}
 		}
 
@@ -133,7 +133,7 @@ public class PortalWebResourcesUtil {
 
 	private class PortalWebResourcesServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
-		<PortalWebResources, PortalWebResources> {
+			<PortalWebResources, PortalWebResources> {
 
 		@Override
 		public PortalWebResources addingService(
