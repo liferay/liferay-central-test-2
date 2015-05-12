@@ -37,11 +37,11 @@ page import="com.liferay.site.navigation.menu.web.display.context.NavigationMenu
 <portlet:defineObjects />
 
 <%
+String portletResource = ParamUtil.getString(request, "portletResource");
+
 NavigationMenuWebConfiguration navigationMenuWebConfiguration = (NavigationMenuWebConfiguration)renderRequest.getAttribute(NavigationMenuWebConfiguration.class.getName());
 
 NavigationMenuDisplayContext navigationMenuDisplayContext = new NavigationMenuDisplayContext(request, navigationMenuWebConfiguration);
-
-String portletResource = ParamUtil.getString(request, "portletResource");
 %>
 
 <%@ include file="/init-ext.jsp" %>
