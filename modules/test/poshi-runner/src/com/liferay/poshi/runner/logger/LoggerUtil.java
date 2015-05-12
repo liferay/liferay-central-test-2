@@ -356,7 +356,6 @@ public final class LoggerUtil {
 				htmlContent, "<link href=\"../css/main.css\"",
 				"<link href=\"" + sb.toString() + "/css/.sass-cache/" +
 					"main.css\"");
-
 			htmlContent = StringUtil.replace(
 				htmlContent, "<script src=\"../js/main.js\"",
 				"<script src=\"" + sb.toString() + "/js/main.js\"");
