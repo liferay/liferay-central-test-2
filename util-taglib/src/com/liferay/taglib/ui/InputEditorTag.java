@@ -277,7 +277,7 @@ public class InputEditorTag extends IncludeTag {
 			editorName = _EDITOR_WYSIWYG_DEFAULT;
 		}
 
-		if (!_editorTracker.hasEditor(editorName)) {
+		if (!_editorServiceTrackerCustomizer.hasEditor(editorName)) {
 			editorName = _EDITOR_WYSIWYG_DEFAULT;
 		}
 
@@ -359,7 +359,8 @@ public class InputEditorTag extends IncludeTag {
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
 		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
-	private static final EditorTracker _editorTracker = new EditorTracker();
+	private static final EditorServiceTrackerCustomizer
+		_editorServiceTrackerCustomizer = new EditorServiceTrackerCustomizer();
 
 	private boolean _allowBrowseDocuments = true;
 	private boolean _autoCreate = true;
@@ -387,10 +388,10 @@ public class InputEditorTag extends IncludeTag {
 	private String _toolbarSet = "liferay";
 	private String _width;
 
-	private static class EditorTracker
+	private static class EditorServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Object, Object> {
 
-		public EditorTracker() {
+		public EditorServiceTrackerCustomizer() {
 			Registry registry = RegistryUtil.getRegistry();
 
 			Filter filter = registry.getFilter("(editor.wysiwyg=*)");
