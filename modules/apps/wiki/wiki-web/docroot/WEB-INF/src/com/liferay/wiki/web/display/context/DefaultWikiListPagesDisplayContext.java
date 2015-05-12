@@ -116,13 +116,13 @@ public class DefaultWikiListPagesDisplayContext
 		portletURL.setParameter("title", StringPool.BLANK);
 		portletURL.setParameter("editTitle", "1");
 
-		URLToolbarItem addPageToolbarItem = new URLToolbarItem();
+		URLToolbarItem addPageURLToolbarItem = new URLToolbarItem();
 
-		addPageToolbarItem.setKey(WikiUIItemKeys.ADD_PAGE);
-		addPageToolbarItem.setLabel("add-page");
-		addPageToolbarItem.setURL(portletURL.toString());
+		addPageURLToolbarItem.setKey(WikiUIItemKeys.ADD_PAGE);
+		addPageURLToolbarItem.setLabel("add-page");
+		addPageURLToolbarItem.setURL(portletURL.toString());
 
-		toolbarItems.add(addPageToolbarItem);
+		toolbarItems.add(addPageURLToolbarItem);
 	}
 
 	private void _addCopyMenuItem(List<MenuItem> menuItems, WikiPage wikiPage)
@@ -132,11 +132,11 @@ public class DefaultWikiListPagesDisplayContext
 			return;
 		}
 
-		URLMenuItem menuItem = new URLMenuItem();
+		URLMenuItem urlMenuItem = new URLMenuItem();
 
-		menuItem.setIcon("icon-copy");
-		menuItem.setKey(WikiUIItemKeys.COPY);
-		menuItem.setLabel("copy");
+		urlMenuItem.setIcon("icon-copy");
+		urlMenuItem.setKey(WikiUIItemKeys.COPY);
+		urlMenuItem.setLabel("copy");
 
 		LiferayPortletResponse liferayPortletResponse =
 			_wikiRequestHelper.getLiferayPortletResponse();
@@ -153,9 +153,9 @@ public class DefaultWikiListPagesDisplayContext
 		portletURL.setParameter(
 			"templateTitle", HtmlUtil.unescape(wikiPage.getTitle()));
 
-		menuItem.setURL(portletURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
-		menuItems.add(menuItem);
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addDeleteMenuItem(List<MenuItem> menuItems, WikiPage wikiPage)
@@ -206,11 +206,11 @@ public class DefaultWikiListPagesDisplayContext
 				_wikiRequestHelper.getPermissionChecker(), wikiPage,
 				ActionKeys.DELETE)) {
 
-			URLMenuItem menuItem = new URLMenuItem();
+			URLMenuItem urlMenuItem = new URLMenuItem();
 
-			menuItem.setIcon("icon-remove");
-			menuItem.setKey(WikiUIItemKeys.DELETE);
-			menuItem.setLabel("discard-draft");
+			urlMenuItem.setIcon("icon-remove");
+			urlMenuItem.setKey(WikiUIItemKeys.DELETE);
+			urlMenuItem.setLabel("discard-draft");
 
 			LiferayPortletResponse liferayPortletResponse =
 				_wikiRequestHelper.getLiferayPortletResponse();
@@ -228,9 +228,9 @@ public class DefaultWikiListPagesDisplayContext
 			portletURL.setParameter(
 				"version", String.valueOf(wikiPage.getVersion()));
 
-			menuItem.setURL(portletURL.toString());
+			urlMenuItem.setURL(portletURL.toString());
 
-			menuItems.add(menuItem);
+			menuItems.add(urlMenuItem);
 		}
 	}
 
@@ -242,11 +242,11 @@ public class DefaultWikiListPagesDisplayContext
 			return;
 		}
 
-		URLMenuItem menuItem = new URLMenuItem();
+		URLMenuItem urlMenuItem = new URLMenuItem();
 
-		menuItem.setIcon("icon-edit");
-		menuItem.setKey(WikiUIItemKeys.EDIT);
-		menuItem.setLabel("edit");
+		urlMenuItem.setIcon("icon-edit");
+		urlMenuItem.setKey(WikiUIItemKeys.EDIT);
+		urlMenuItem.setLabel("edit");
 
 		LiferayPortletResponse liferayPortletResponse =
 			_wikiRequestHelper.getLiferayPortletResponse();
@@ -258,9 +258,9 @@ public class DefaultWikiListPagesDisplayContext
 		portletURL.setParameter(
 			"title", HtmlUtil.unescape(wikiPage.getTitle()));
 
-		menuItem.setURL(portletURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
-		menuItems.add(menuItem);
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addMoveMenuItem(List<MenuItem> menuItems, WikiPage wikiPage)
@@ -270,11 +270,11 @@ public class DefaultWikiListPagesDisplayContext
 			return;
 		}
 
-		URLMenuItem menuItem = new URLMenuItem();
+		URLMenuItem urlMenuItem = new URLMenuItem();
 
-		menuItem.setIcon("icon-move");
-		menuItem.setKey(WikiUIItemKeys.MOVE);
-		menuItem.setLabel("move");
+		urlMenuItem.setIcon("icon-move");
+		urlMenuItem.setKey(WikiUIItemKeys.MOVE);
+		urlMenuItem.setLabel("move");
 
 		LiferayPortletResponse liferayPortletResponse =
 			_wikiRequestHelper.getLiferayPortletResponse();
@@ -286,9 +286,9 @@ public class DefaultWikiListPagesDisplayContext
 		portletURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
 		portletURL.setParameter("title", StringPool.BLANK);
 
-		menuItem.setURL(portletURL.toString());
+		urlMenuItem.setURL(portletURL.toString());
 
-		menuItems.add(menuItem);
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addPermissionsMenuItem(
@@ -301,13 +301,13 @@ public class DefaultWikiListPagesDisplayContext
 			return;
 		}
 
-		URLMenuItem menuItem = new URLMenuItem();
+		URLMenuItem urlMenuItem = new URLMenuItem();
 
-		menuItem.setIcon("icon-lock");
-		menuItem.setKey(WikiUIItemKeys.PERMISSIONS);
-		menuItem.setLabel("permissions");
-		menuItem.setMethod("get");
-		menuItem.setUseDialog(true);
+		urlMenuItem.setIcon("icon-lock");
+		urlMenuItem.setKey(WikiUIItemKeys.PERMISSIONS);
+		urlMenuItem.setLabel("permissions");
+		urlMenuItem.setMethod("get");
+		urlMenuItem.setUseDialog(true);
 
 		String url = null;
 
@@ -321,9 +321,9 @@ public class DefaultWikiListPagesDisplayContext
 			throw new SystemException("Unable to create permissions URL", e);
 		}
 
-		menuItem.setURL(url);
+		urlMenuItem.setURL(url);
 
-		menuItems.add(menuItem);
+		menuItems.add(urlMenuItem);
 	}
 
 	private void _addSubscriptionMenuItem(
@@ -347,11 +347,11 @@ public class DefaultWikiListPagesDisplayContext
 				user.getCompanyId(), user.getUserId(), WikiPage.class.getName(),
 				wikiPage.getResourcePrimKey())) {
 
-			URLMenuItem menuItem = new URLMenuItem();
+			URLMenuItem urlMenuItem = new URLMenuItem();
 
-			menuItem.setIcon("icon-remove-sign");
-			menuItem.setKey(WikiUIItemKeys.UNSUBSCRIBE);
-			menuItem.setLabel("unsubscribe");
+			urlMenuItem.setIcon("icon-remove-sign");
+			urlMenuItem.setKey(WikiUIItemKeys.UNSUBSCRIBE);
+			urlMenuItem.setLabel("unsubscribe");
 
 			LiferayPortletResponse liferayPortletResponse =
 				_wikiRequestHelper.getLiferayPortletResponse();
@@ -367,16 +367,16 @@ public class DefaultWikiListPagesDisplayContext
 			portletURL.setParameter(
 				"title", HtmlUtil.unescape(wikiPage.getTitle()));
 
-			menuItem.setURL(portletURL.toString());
+			urlMenuItem.setURL(portletURL.toString());
 
-			menuItems.add(menuItem);
+			menuItems.add(urlMenuItem);
 		}
 		else {
-			URLMenuItem menuItem = new URLMenuItem();
+			URLMenuItem urlMenuItem = new URLMenuItem();
 
-			menuItem.setIcon("icon-ok-sign");
-			menuItem.setKey(WikiUIItemKeys.SUBSCRIBE);
-			menuItem.setLabel("subscribe");
+			urlMenuItem.setIcon("icon-ok-sign");
+			urlMenuItem.setKey(WikiUIItemKeys.SUBSCRIBE);
+			urlMenuItem.setLabel("subscribe");
 
 			LiferayPortletResponse liferayPortletResponse =
 				_wikiRequestHelper.getLiferayPortletResponse();
@@ -392,9 +392,9 @@ public class DefaultWikiListPagesDisplayContext
 			portletURL.setParameter(
 				"title", HtmlUtil.unescape(wikiPage.getTitle()));
 
-			menuItem.setURL(portletURL.toString());
+			urlMenuItem.setURL(portletURL.toString());
 
-			menuItems.add(menuItem);
+			menuItems.add(urlMenuItem);
 		}
 	}
 
