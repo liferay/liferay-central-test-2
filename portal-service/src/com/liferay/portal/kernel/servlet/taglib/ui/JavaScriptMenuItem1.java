@@ -17,10 +17,27 @@ package com.liferay.portal.kernel.servlet.taglib.ui;
 /**
  * @author Iván Zaera
  */
-public interface JavascriptUIItem extends UIActionItem {
+public class JavaScriptMenuItem1 extends MenuItem implements JavaScriptUIItem1 {
 
-	public String getOnClick();
+	public String getJavascript() {
+		return _javascript;
+	}
 
-	public void setOnClick(String onClick);
+	@Override
+	public String getOnClick() {
+		return _onClick;
+	}
+
+	public void setJavascript(String javascript) {
+		_javascript = javascript;
+	}
+
+	@Override
+	public void setOnClick(String onClick) {
+		_onClick = onClick;
+	}
+
+	private String _javascript;
+	private String _onClick;
 
 }
