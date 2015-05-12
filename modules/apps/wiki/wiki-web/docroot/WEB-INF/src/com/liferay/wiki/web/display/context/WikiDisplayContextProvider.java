@@ -114,16 +114,18 @@ public class WikiDisplayContextProvider {
 				WikiDisplayContextFactory> entry :
 					_wikiDisplayContextFactories.entrySet()) {
 
-			if (entry.getValue() == null) {
-				ServiceReference<WikiDisplayContextFactory> serviceReference =
-					entry.getKey();
-
-				WikiDisplayContextFactory wikiDisplayContextFactory =
-					_bundleContext.getService(serviceReference);
-
-				_wikiDisplayContextFactories.put(
-					serviceReference, wikiDisplayContextFactory);
+			if (entry.getValue() != null) {
+				continue;
 			}
+
+			ServiceReference<WikiDisplayContextFactory> serviceReference =
+				entry.getKey();
+
+			WikiDisplayContextFactory wikiDisplayContextFactory =
+				_bundleContext.getService(serviceReference);
+
+			_wikiDisplayContextFactories.put(
+				serviceReference, wikiDisplayContextFactory);
 		}
 	}
 
