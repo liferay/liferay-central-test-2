@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
  * @author Pei-Jung Lan
  */
 @OSGiBeanProperties(property = {"service.ranking:Integer=60"})
-public class LayoutJavaScriptFormNavigatorEntry1
+public class LayoutJavaScriptFormNavigatorEntry
 	extends BaseLayoutFormNavigatorEntry {
 
 	@Override
