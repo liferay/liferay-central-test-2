@@ -828,7 +828,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathImage(imagePath);
 
 		String editorsPath = PortalWebResourcesUtil.getContextPath(
-			PortalWebResourceConstants.RESOURCE_TYPE_EDITOR);
+			PortalWebResourceConstants.RESOURCE_TYPE_EDITORS);
 
 		themeDisplay.setPathEditors(editorsPath.concat("/html"));
 

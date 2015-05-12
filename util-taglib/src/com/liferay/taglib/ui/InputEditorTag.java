@@ -302,7 +302,7 @@ public class InputEditorTag extends IncludeTag {
 	protected RequestDispatcher getRequestDispatcher(String page) {
 		return DirectRequestDispatcherFactoryUtil.getRequestDispatcher(
 			PortalWebResourcesUtil.getServletContext(
-				PortalWebResourceConstants.RESOURCE_TYPE_EDITOR),
+				PortalWebResourceConstants.RESOURCE_TYPE_EDITORS),
 			page);
 	}
 
