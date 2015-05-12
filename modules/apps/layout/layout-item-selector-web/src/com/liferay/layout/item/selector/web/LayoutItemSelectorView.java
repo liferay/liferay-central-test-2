@@ -65,9 +65,9 @@ public class LayoutItemSelectorView
 		throws IOException, ServletException {
 
 		request.setAttribute(ITEM_SELECTED_CALLBACK, itemSelectedCallback);
-		request.setAttribute(PORTLET_URL, portletURL);
 		request.setAttribute(
 			LAYOUT_ITEM_SELECTOR_CRITERION, layoutItemSelectorCriterion);
+		request.setAttribute(PORTLET_URL, portletURL);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 			"/o/layout-item-selector-web/layouts.jsp");
