@@ -39,7 +39,7 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(portal.cache.manager._name=" +
+			"(&(portal.cache.manager.name=" +
 				PortalCacheManagerNames.MULTI_VM +
 					")(portal.cache.manager.type=" +
 						PropsValues.PORTAL_CACHE_MANAGER_TYPE_MULTI_VM +

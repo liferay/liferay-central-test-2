@@ -162,7 +162,7 @@ public class ToolDependencies {
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put(
-			"portal.cache.manager._name", PortalCacheManagerNames.SINGLE_VM);
+			"portal.cache.manager.name", PortalCacheManagerNames.SINGLE_VM);
 		properties.put(
 			"portal.cache.manager.type",
 			PropsValues.PORTAL_CACHE_MANAGER_TYPE_SINGLE_VM);
@@ -180,7 +180,7 @@ public class ToolDependencies {
 		properties = new HashMap<>();
 
 		properties.put(
-			"portal.cache.manager._name", PortalCacheManagerNames.MULTI_VM);
+			"portal.cache.manager.name", PortalCacheManagerNames.MULTI_VM);
 		properties.put(
 			"portal.cache.manager.type",
 			PropsValues.PORTAL_CACHE_MANAGER_TYPE_MULTI_VM);

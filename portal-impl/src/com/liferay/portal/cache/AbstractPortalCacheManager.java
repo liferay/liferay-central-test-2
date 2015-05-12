@@ -245,7 +245,7 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("portal.cache.manager._name", _name);
+		properties.put("portal.cache.manager.name", _name);
 		properties.put("portal.cache.manager.type", getType());
 
 		_serviceRegistrar.registerService(

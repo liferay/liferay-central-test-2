@@ -38,7 +38,7 @@ public class SingleVMPoolImpl implements SingleVMPool {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(portal.cache.manager._name=" +
+			"(&(portal.cache.manager.name=" +
 				PortalCacheManagerNames.SINGLE_VM +
 					")(portal.cache.manager.type=" +
 						PropsValues.PORTAL_CACHE_MANAGER_TYPE_SINGLE_VM +
