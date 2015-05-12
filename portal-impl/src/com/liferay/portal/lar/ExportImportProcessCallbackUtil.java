@@ -46,8 +46,9 @@ public class ExportImportProcessCallbackUtil {
 
 		if (callbackListList.isEmpty()) {
 
-			// Not within a transaction boundary, should only happen during an
-			// upgrade and verify process. See DBUpgrader#_disableTransactions.
+			// Not within a transaction boundary and should only happen during
+			// an upgrade or verify process. See
+			// DBUpgrader#_disableTransactions.
 
 			try {
 				callable.call();
