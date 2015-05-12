@@ -36,15 +36,15 @@ import org.jruby.embed.internal.LocalContextProvider;
  */
 public class RubySassCompiler implements AutoCloseable, SassCompiler {
 
-	public static final int COMPILE_THRESHOLD_DEFAULT = 5;
+	private static final int _COMPILE_THRESHOLD_DEFAULT = 5;
 
-	public static final String COMPILE_MODE_FORCE = "force";
+	private static final String _COMPILE_MODE_FORCE = "force";
 
-	public static final String COMPILE_MODE_JIT = "jit";
+	private static final String _COMPILE_MODE_JIT = "jit";
 
 	public RubySassCompiler() throws Exception {
 		this(
-			COMPILE_MODE_JIT, COMPILE_THRESHOLD_DEFAULT,
+			_COMPILE_MODE_JIT, _COMPILE_THRESHOLD_DEFAULT,
 			System.getProperty("java.io.tmpdir"));
 	}
 
@@ -63,11 +63,11 @@ public class RubySassCompiler implements AutoCloseable, SassCompiler {
 		RubyInstanceConfig rubyInstanceConfig =
 			localContextProvider.getRubyInstanceConfig();
 
-		if (COMPILE_MODE_FORCE.equals(compileMode)) {
+		if (_COMPILE_MODE_FORCE.equals(compileMode)) {
 			rubyInstanceConfig.setCompileMode(
 				RubyInstanceConfig.CompileMode.FORCE);
 		}
-		else if (COMPILE_MODE_JIT.equals(compileMode)) {
+		else if (_COMPILE_MODE_JIT.equals(compileMode)) {
 			rubyInstanceConfig.setCompileMode(
 				RubyInstanceConfig.CompileMode.JIT);
 		}
