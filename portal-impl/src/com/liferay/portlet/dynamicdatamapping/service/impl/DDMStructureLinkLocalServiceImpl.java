@@ -130,8 +130,8 @@ public class DDMStructureLinkLocalServiceImpl
 
 		List<DDMStructure> structures = new ArrayList<>();
 
-		List<DDMStructureLink> structureLinks : getStructureLinks(
-			classNameId, classPK)
+		List<DDMStructureLink> structureLinks = getStructureLinks(
+			classNameId, classPK);
 
 		for (DDMStructureLink structureLink : structureLinks) {
 			structures.add(structureLink.getStructure());
