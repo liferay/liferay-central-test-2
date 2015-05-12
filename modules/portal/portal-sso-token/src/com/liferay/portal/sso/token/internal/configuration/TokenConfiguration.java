@@ -28,8 +28,8 @@ import com.liferay.portal.sso.token.security.auth.TokenLocation;
 public interface TokenConfiguration {
 
 	@Meta.AD(
-		deflt ="SMIDENTITY|SMSESSION", description =
-			"Set this to cookie names that must be removed after logout.",
+		deflt ="SMIDENTITY|SMSESSION",
+		description = "Set this to the cookie names that must be removed after logout.",
 		required = false
 	)
 	public String[] authenticationCookies();
@@ -38,9 +38,8 @@ public interface TokenConfiguration {
 	public boolean enabled();
 
 	@Meta.AD(
-		deflt = "false", description =
-			"Set this to true to automatically import users from LDAP if they" +
-			" do not exist in the portal.",
+		deflt = "false",
+		description = "Set this to true to automatically import users from LDAP if they do not exist in the portal.",
 		required = false
 	)
 	public boolean importFromLDAP();
@@ -56,9 +55,8 @@ public interface TokenConfiguration {
 	public TokenLocation tokenLocation();
 
 	@Meta.AD(
-		deflt = "SM_USER", description =
-			"Set this to the name of the user token that authenticator passes" +
-			" to the portal.",
+		deflt = "SM_USER",
+		description = "Set this to the name of the user token that authenticator passes to the portal.",
 		required = false
 	)
 	public String userTokenName();
