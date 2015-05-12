@@ -20,8 +20,6 @@
 WikiNode node = (WikiNode)request.getAttribute(WikiWebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WikiWebKeys.WIKI_PAGE);
 
-WikiListPagesDisplayContext wikiListPagesDisplayContext = wikiDisplayContextProvider.getWikiListPagesDisplayContext(request, response, node);
-
 String type = ParamUtil.getString(request, "type");
 long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
@@ -392,6 +390,8 @@ for (int i = 0; i < results.size(); i++) {
 		var wikiPageButtonGroup = [];
 
 		<%
+		WikiListPagesDisplayContext wikiListPagesDisplayContext = wikiDisplayContextProvider.getWikiListPagesDisplayContext(request, response, node);
+
 		for (ToolbarItem toolbarItem : wikiListPagesDisplayContext.getToolbarItems()) {
 		%>
 
