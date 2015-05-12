@@ -51,7 +51,7 @@ public class StrutsActionRegistryUtilTest {
 			StrutsActionRegistryUtil.getActions();
 
 		ActionAdapter actionAdapter = (ActionAdapter)actions.get(
-			"StrutsActionRegistryUtilTest1");
+			"TestStrutsAction");
 
 		Assert.assertNotNull(actionAdapter);
 
@@ -62,7 +62,7 @@ public class StrutsActionRegistryUtilTest {
 		Assert.assertTrue(_atomicState.isSet());
 
 		PortletActionAdapter portletActionAdapter =
-			(PortletActionAdapter)actions.get("StrutsActionRegistryUtilTest2");
+			(PortletActionAdapter)actions.get("TestStrutsPortletAction");
 
 		Assert.assertNotNull(portletActionAdapter);
 
@@ -77,7 +77,7 @@ public class StrutsActionRegistryUtilTest {
 	public void testGetGetAction() throws Exception {
 		ActionAdapter actionAdapter =
 			(ActionAdapter)StrutsActionRegistryUtil.getAction(
-				"StrutsActionRegistryUtilTest1");
+				"TestStrutsAction");
 
 		Assert.assertNotNull(actionAdapter);
 
@@ -89,7 +89,7 @@ public class StrutsActionRegistryUtilTest {
 
 		PortletActionAdapter portletActionAdapter =
 			(PortletActionAdapter)StrutsActionRegistryUtil.getAction(
-				"StrutsActionRegistryUtilTest2");
+				"TestStrutsPortletAction");
 
 		Assert.assertNotNull(portletActionAdapter);
 

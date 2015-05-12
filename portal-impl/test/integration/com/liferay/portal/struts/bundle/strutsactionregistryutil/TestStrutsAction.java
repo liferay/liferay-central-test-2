@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"path=StrutsActionRegistryUtilTest1",
+		"path=TestStrutsAction",
 		"service.ranking:Integer=" + Integer.MAX_VALUE
 	}
 )
