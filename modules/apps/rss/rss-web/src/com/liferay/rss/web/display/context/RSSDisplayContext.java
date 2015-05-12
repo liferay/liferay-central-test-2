@@ -193,16 +193,16 @@ public class RSSDisplayContext {
 		return _showFeedTitle;
 	}
 
-	public String _displayStyle;
-	public long _displayStyleGroupId;
-	public Integer _entriesPerFeed;
-	public Integer _expandedEntriesPerFeed;
-	public String _feedImageAlignment;
-	public Boolean _showFeedDescription;
-	public Boolean _showFeedImage;
-	public Boolean _showFeedItemAuthor;
-	public Boolean _showFeedPublishedDate;
-	public Boolean _showFeedTitle;
+	private String _displayStyle;
+	private long _displayStyleGroupId;
+	private Integer _entriesPerFeed;
+	private Integer _expandedEntriesPerFeed;
+	private String _feedImageAlignment;
+	private Boolean _showFeedDescription;
+	private Boolean _showFeedImage;
+	private Boolean _showFeedItemAuthor;
+	private Boolean _showFeedPublishedDate;
+	private Boolean _showFeedTitle;
 
 	private final HttpServletRequest _request;
 	private final RSSPortletInstanceConfiguration
