@@ -54,6 +54,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext, Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout export failed for group " + portletDataContext.getGroupId(),
 			throwable);
@@ -62,6 +66,10 @@ public class LoggerExportImportLifecycleListener
 	@Override
 	protected void onLayoutExportStarted(PortletDataContext portletDataContext)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Layout export started for group " +
@@ -73,6 +81,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout export succeeded for group " +
 				portletDataContext.getGroupId());
@@ -83,6 +95,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext, Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout import failed for group " + portletDataContext.getGroupId(),
 			throwable);
@@ -91,6 +107,10 @@ public class LoggerExportImportLifecycleListener
 	@Override
 	protected void onLayoutImportStarted(PortletDataContext portletDataContext)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Layout import started for group " +
@@ -101,6 +121,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onLayoutImportSucceeded(
 			PortletDataContext portletDataContext)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Layout import succeeded for group " +
@@ -113,6 +137,10 @@ public class LoggerExportImportLifecycleListener
 			Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout publication failed for group " +
 				exportImportConfiguration.getGroupId(),
@@ -124,6 +152,10 @@ public class LoggerExportImportLifecycleListener
 			ExportImportConfiguration exportImportConfiguration)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout publication started for group " +
 				exportImportConfiguration.getGroupId());
@@ -133,6 +165,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onLayoutLocalPublicationSucceeded(
 			ExportImportConfiguration exportImportConfiguration)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Layout publication succeeded for group " +
@@ -145,6 +181,10 @@ public class LoggerExportImportLifecycleListener
 			Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout remote publication failed for group " +
 				exportImportConfiguration.getGroupId(),
@@ -156,6 +196,10 @@ public class LoggerExportImportLifecycleListener
 			ExportImportConfiguration exportImportConfiguration)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Layout publication started for group " +
 				exportImportConfiguration.getGroupId());
@@ -165,6 +209,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onLayoutRemotePublicationSucceeded(
 			ExportImportConfiguration exportImportConfiguration)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Layout remote publication succeeded for group " +
@@ -176,6 +224,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext, Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Portlet export failed for portlet " +
 				portletDataContext.getPortletId(),
@@ -185,6 +237,10 @@ public class LoggerExportImportLifecycleListener
 	@Override
 	protected void onPortletExportStarted(PortletDataContext portletDataContext)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Portlet export started for portlet " +
@@ -196,6 +252,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Portlet export succeeded for portlet " +
 				portletDataContext.getPortletId());
@@ -205,6 +265,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onPortletImportFailed(
 			PortletDataContext portletDataContext, Throwable throwable)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Portlet import failed for portlet " +
@@ -216,6 +280,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onPortletImportStarted(PortletDataContext portletDataContext)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Portlet import started for portlet " +
 				portletDataContext.getPortletId());
@@ -225,6 +293,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onPortletImportSucceeded(
 			PortletDataContext portletDataContext)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Portlet import succeeded for portlet " +
@@ -236,6 +308,10 @@ public class LoggerExportImportLifecycleListener
 			ExportImportConfiguration exportImportConfiguration,
 			Throwable throwable)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
@@ -251,6 +327,10 @@ public class LoggerExportImportLifecycleListener
 			ExportImportConfiguration exportImportConfiguration)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
 
@@ -263,6 +343,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onPortletPublicationSucceeded(
 			ExportImportConfiguration exportImportConfiguration)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
@@ -278,6 +362,10 @@ public class LoggerExportImportLifecycleListener
 			Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Staged model " + stagedModel.getStagedModelType() +
 				" export failed",
@@ -289,6 +377,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext, StagedModel stagedModel)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Staged model " + stagedModel.getStagedModelType() +
 				" export started");
@@ -298,6 +390,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onStagedModelExportSucceeded(
 			PortletDataContext portletDataContext, StagedModel stagedModel)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Staged model " + stagedModel.getStagedModelType() +
@@ -310,6 +406,10 @@ public class LoggerExportImportLifecycleListener
 			Throwable throwable)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Staged model " + stagedModel.getStagedModelType() +
 				" import failed",
@@ -321,6 +421,10 @@ public class LoggerExportImportLifecycleListener
 			PortletDataContext portletDataContext, StagedModel stagedModel)
 		throws Exception {
 
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
+
 		_log.debug(
 			"Staged model " + stagedModel.getStagedModelType() +
 				" import started");
@@ -330,6 +434,10 @@ public class LoggerExportImportLifecycleListener
 	protected void onStagedModelImportSucceeded(
 			PortletDataContext portletDataContext, StagedModel stagedModel)
 		throws Exception {
+
+		if (!_log.isDebugEnabled()) {
+			return;
+		}
 
 		_log.debug(
 			"Staged model " + stagedModel.getStagedModelType() +
