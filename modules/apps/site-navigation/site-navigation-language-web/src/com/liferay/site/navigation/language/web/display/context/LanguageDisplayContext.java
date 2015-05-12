@@ -67,14 +67,14 @@ public class LanguageDisplayContext {
 	}
 
 	public List<KeyValuePair> getAvailableLanguageList() {
-		Set<String> availableLanguageIdsSet = SetUtil.fromArray(
-			getAvailableLanguageIds());
+		List<KeyValuePair> availableLanguageList = new ArrayList<>();
 
 		String[] languageIds = getLanguageIds();
 
 		Arrays.sort(languageIds);
 
-		List<KeyValuePair> availableLanguageList = new ArrayList<>();
+		Set<String> availableLanguageIdsSet = SetUtil.fromArray(
+			getAvailableLanguageIds());
 
 		for (String languageId : availableLanguageIdsSet) {
 			if (Arrays.binarySearch(languageIds, languageId) < 0) {
