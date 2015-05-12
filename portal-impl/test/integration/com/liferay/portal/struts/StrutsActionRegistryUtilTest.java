@@ -88,8 +88,8 @@ public class StrutsActionRegistryUtilTest {
 		Assert.assertTrue(_atomicState.isSet());
 
 		PortletActionAdapter portletActionAdapter =
-				(PortletActionAdapter)StrutsActionRegistryUtil.getAction(
-					"StrutsActionRegistryUtilTest2");
+			(PortletActionAdapter)StrutsActionRegistryUtil.getAction(
+				"StrutsActionRegistryUtilTest2");
 
 		Assert.assertNotNull(portletActionAdapter);
 
