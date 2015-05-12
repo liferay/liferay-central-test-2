@@ -150,10 +150,9 @@ public class I18nServlet extends HttpServlet {
 
 		String i18nPath = StringPool.SLASH + i18nLanguageId;
 
-		boolean useDefault = PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE;
-
 		Locale locale = LocaleUtil.fromLanguageId(
-			i18nLanguageId, true, useDefault);
+			i18nLanguageId, true,
+			PropsValues.LOCALE_USE_DEFAULT_IF_NOT_AVAILABLE);
 
 		if (locale == null) {
 			return null;
