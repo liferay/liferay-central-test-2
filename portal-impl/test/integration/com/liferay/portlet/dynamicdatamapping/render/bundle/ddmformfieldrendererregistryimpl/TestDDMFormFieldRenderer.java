@@ -46,8 +46,9 @@ public class TestDDMFormFieldRenderer implements DDMFormFieldRenderer {
 	}
 
 	@Override
-	public String render(DDMFormField ddmFormField, DDMFormFieldRenderingContext
-		ddmFormFieldRenderingContext) {
+	public String render(
+		DDMFormField ddmFormField,
+		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
 
 		return null;
 	}

@@ -48,8 +48,8 @@ public class DDMFormFieldRendererRegistryImplTest {
 
 		Class<?> clazz = ddmFormFieldRenderer.getClass();
 
-		Assert.assertEquals(TestDDMFormFieldRenderer.class.getName(), clazz.
-			getName());
+		Assert.assertEquals(
+			TestDDMFormFieldRenderer.class.getName(), clazz.getName());
 	}
 
 }
