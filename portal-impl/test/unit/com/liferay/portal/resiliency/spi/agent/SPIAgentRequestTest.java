@@ -69,6 +69,7 @@ import javax.servlet.http.HttpSession;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -86,6 +87,11 @@ public class SPIAgentRequestTest {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			CodeCoverageAssertor.INSTANCE, NewEnvTestRule.INSTANCE);
+
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		ToolDependencies.wireCaches();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -358,8 +364,6 @@ public class SPIAgentRequestTest {
 		random.nextBytes(content);
 
 		_mockHttpServletRequest.setContent(content);
-
-		ToolDependencies.wireCaches();
 
 		spiAgentRequest = new SPIAgentRequest(
 			new HttpServletRequestWrapper(_mockHttpServletRequest));

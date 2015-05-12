@@ -45,6 +45,8 @@ public class TemplatePortletPreferencesTest {
 
 	@BeforeClass
 	public static void setUpClass() {
+		ToolDependencies.wireCaches();
+
 		HtmlUtil htmlUtil = new HtmlUtil();
 
 		htmlUtil.setHtml(new HtmlImpl());
@@ -54,8 +56,6 @@ public class TemplatePortletPreferencesTest {
 
 		secureXMLFactoryProviderUtil.setSecureXMLFactoryProvider(
 			new SecureXMLFactoryProviderImpl());
-
-		ToolDependencies.wireCaches();
 
 		PortletPreferencesFactoryUtil portletPreferencesFactoryUtil =
 			new PortletPreferencesFactoryUtil();

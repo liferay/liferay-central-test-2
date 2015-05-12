@@ -27,6 +27,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -34,6 +35,11 @@ import org.junit.Test;
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesFactoryImplUnitTest {
+
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		ToolDependencies.wireCaches();
+	}
 
 	@Before
 	public void setUp() {
@@ -46,8 +52,6 @@ public class PortletPreferencesFactoryImplUnitTest {
 
 		secureXMLFactoryProviderUtil.setSecureXMLFactoryProvider(
 			new SecureXMLFactoryProviderImpl());
-
-		ToolDependencies.wireCaches();
 
 		PortletPreferencesFactoryUtil portletPreferencesFactoryUtil =
 			new PortletPreferencesFactoryUtil();

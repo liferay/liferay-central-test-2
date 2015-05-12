@@ -30,6 +30,7 @@ import com.liferay.portal.util.PortletKeys;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -49,10 +50,13 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 public class PortletPreferencesFactoryImplGetPreferencesIdsTest {
 
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		ToolDependencies.wireCaches();
+	}
+
 	@Before
 	public void setUp() {
-		ToolDependencies.wireCaches();
-
 		PortletPreferencesFactoryUtil portletPreferencesFactoryUtil =
 			new PortletPreferencesFactoryUtil();
 

@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -38,8 +38,8 @@ public class SQLQueryTableNamesUtilTest {
 	public static final CodeCoverageAssertor codeCoverageAssertor =
 		CodeCoverageAssertor.INSTANCE;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUpClass() throws Exception {
 		ToolDependencies.wireCaches();
 	}
 
