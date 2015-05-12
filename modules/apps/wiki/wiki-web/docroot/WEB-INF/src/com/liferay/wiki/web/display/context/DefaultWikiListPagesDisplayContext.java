@@ -90,7 +90,7 @@ public class DefaultWikiListPagesDisplayContext
 	}
 
 	@Override
-	public List<ToolbarItem> getToolbarItems() throws PortalException {
+	public List<ToolbarItem> getToolbarItems() {
 		List<ToolbarItem> toolbarItems = new ArrayList<>();
 
 		_addAddPageToolbarItem(toolbarItems);
