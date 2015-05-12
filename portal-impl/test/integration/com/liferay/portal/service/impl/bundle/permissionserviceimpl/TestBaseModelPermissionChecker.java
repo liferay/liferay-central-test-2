@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.impl.bundle.permissionserviceimpl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.permission.BaseModelPermissionChecker;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -39,9 +38,8 @@ public class TestBaseModelPermissionChecker
 
 	@Override
 	public void checkBaseModel(
-			PermissionChecker permissionChecker, long groupId, long primaryKey,
-			String actionId)
-		throws PortalException {
+		PermissionChecker permissionChecker, long groupId, long primaryKey,
+		String actionId) {
 
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 
