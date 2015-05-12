@@ -95,7 +95,6 @@ if (group.getPrivateLayoutsPageCount() > 0) {
 </liferay-ui:tabs>
 
 <div class="alert" id="<portlet:namespace />selectPageMessage">
-
 	<aui:button cssClass="selector-button" disabled="<%= true %>" value="choose" />
 
 	<span class="selected-page-message">
