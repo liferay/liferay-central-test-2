@@ -146,6 +146,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -6020,24 +6021,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return Authenticator.DNE;
 		}
 
-		long companyId = user.getCompanyId();
-		long userId = user.getUserId();
-
 		try {
 			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				AuthPipeline.onFailureByEmailAddress(
-					PropsKeys.AUTH_FAILURE, companyId, login, headerMap,
-					parameterMap);
+					PropsKeys.AUTH_FAILURE, user.getCompanyId(), login,
+					headerMap, parameterMap);
 			}
 			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				AuthPipeline.onFailureByScreenName(
-					PropsKeys.AUTH_FAILURE, companyId, login, headerMap,
-					parameterMap);
+					PropsKeys.AUTH_FAILURE, user.getCompanyId(), login,
+					headerMap, parameterMap);
 			}
 			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				AuthPipeline.onFailureByUserId(
-					PropsKeys.AUTH_FAILURE, companyId, userId, headerMap,
-					parameterMap);
+					PropsKeys.AUTH_FAILURE, user.getCompanyId(),
+					user.getUserId(), headerMap, parameterMap);
 			}
 
 			user = userPersistence.fetchByPrimaryKey(user.getUserId());
@@ -6063,18 +6061,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 					if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 						AuthPipeline.onMaxFailuresByEmailAddress(
-							PropsKeys.AUTH_MAX_FAILURES, companyId, login,
-							headerMap, parameterMap);
+							PropsKeys.AUTH_MAX_FAILURES, user.getCompanyId(),
+							login, headerMap, parameterMap);
 					}
 					else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 						AuthPipeline.onMaxFailuresByScreenName(
-							PropsKeys.AUTH_MAX_FAILURES, companyId, login,
-							headerMap, parameterMap);
+							PropsKeys.AUTH_MAX_FAILURES, user.getCompanyId(),
+							login, headerMap, parameterMap);
 					}
 					else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 						AuthPipeline.onMaxFailuresByUserId(
-							PropsKeys.AUTH_MAX_FAILURES, companyId, userId,
-							headerMap, parameterMap);
+							PropsKeys.AUTH_MAX_FAILURES, user.getCompanyId(),
+							user.getUserId(), headerMap, parameterMap);
 					}
 				}
 			}
