@@ -98,7 +98,7 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 			}
 
 			OrderByComparator<PasswordPolicy> orderByComparator =
-				_getOrderByComparator(orderByCol, orderByType);
+				getOrderByComparator(orderByCol, orderByType);
 
 			setOrderableHeaders(orderableHeaders);
 			setOrderByCol(orderByCol);
@@ -110,7 +110,7 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 		}
 	}
 
-	private OrderByComparator<PasswordPolicy> _getOrderByComparator(
+	protected OrderByComparator<PasswordPolicy> getOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
