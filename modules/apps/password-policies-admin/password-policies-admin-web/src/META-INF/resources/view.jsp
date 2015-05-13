@@ -59,7 +59,9 @@ boolean passwordPolicyEnabled = LDAPSettingsUtil.isPasswordPolicyEnabled(company
 
 		<c:if test="<%= !passwordPolicyEnabled %>">
 			<aui:nav-bar-search searchContainer="<%= searchContainer %>">
-				<%@ include file="/password_policy_search.jsp" %>
+				<div class="col-xs-12 form-search">
+					<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="<%= PasswordPolicyDisplayTerms.NAME %>" placeholder='<%= LanguageUtil.get(request, "keywords") %>' />
+				</div>
 			</aui:nav-bar-search>
 		</c:if>
 	</aui:nav-bar>
