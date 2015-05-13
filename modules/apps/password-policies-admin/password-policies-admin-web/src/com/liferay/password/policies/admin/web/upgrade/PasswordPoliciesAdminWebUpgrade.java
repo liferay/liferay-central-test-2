@@ -33,9 +33,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Drew Brokke
  */
 @Component(
-	immediate = true, service = PasswordPoliciesAdminUpgrade.class
+	immediate = true, service = PasswordPoliciesAdminWebUpgrade.class
 )
-public class PasswordPoliciesAdminUpgrade {
+public class PasswordPoliciesAdminWebUpgrade {
 
 	@Reference(unbind = "-")
 	protected void setReleaseLocalService(
