@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.osgi.service.tracker.map;
+package com.liferay.registry.collections;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
+import com.liferay.registry.Registry;
+import com.liferay.registry.RegistryUtil;
+import com.liferay.registry.ServiceReference;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public final class ServiceReferenceMappers {
+public class ServiceReferenceMapperFactory {
 
-	public static <K, S> ServiceReferenceMapper<K, S> fromServiceMapper(
-		final BundleContext bundleContext,
+	public static <K, S> ServiceReferenceMapper<K, S> create(
 		final ServiceMapper<K, S> serviceMapper) {
 
 		return new ServiceReferenceMapper<K, S>() {
@@ -32,13 +32,15 @@ public final class ServiceReferenceMappers {
 			public void map(
 				ServiceReference<S> serviceReference, Emitter<K> emitter) {
 
-				S service = bundleContext.getService(serviceReference);
+				Registry registry = RegistryUtil.getRegistry();
+
+				S service = registry.getService(serviceReference);
 
 				try {
 					serviceMapper.map(service, emitter);
 				}
 				finally {
-					bundleContext.ungetService(serviceReference);
+					registry.ungetService(serviceReference);
 				}
 			}
 

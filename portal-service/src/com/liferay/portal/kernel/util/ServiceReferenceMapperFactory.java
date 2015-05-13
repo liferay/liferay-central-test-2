@@ -21,9 +21,9 @@ import com.liferay.registry.collections.ServiceReferenceMapper;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ServiceReferenceMappers {
+public class ServiceReferenceMapperFactory {
 
-	public static <K, S> ServiceReferenceMapper<K, S> fromAccessor(
+	public static <K, S> ServiceReferenceMapper<K, S> create(
 		final Accessor<S, K> accessor) {
 
 		return new ServiceReferenceMapper<K, S>() {
@@ -32,8 +32,8 @@ public class ServiceReferenceMappers {
 			public void map(
 				ServiceReference<S> serviceReference, Emitter<K> emitter) {
 
-				com.liferay.registry.collections.ServiceReferenceMappers.
-					fromServiceMapper(
+				com.liferay.registry.collections.ServiceReferenceMapperFactory.
+					create(
 						new ServiceMapper<K, S>() {
 
 							@Override
@@ -47,7 +47,7 @@ public class ServiceReferenceMappers {
 		};
 	}
 
-	public static <K, S> ServiceReferenceMapper<K, S> fromFunction(
+	public static <K, S> ServiceReferenceMapper<K, S> create(
 		final Function<S, K> function) {
 
 		return new ServiceReferenceMapper<K, S>() {
@@ -56,8 +56,8 @@ public class ServiceReferenceMappers {
 			public void map(
 				ServiceReference<S> serviceReference, Emitter<K> emitter) {
 
-				com.liferay.registry.collections.ServiceReferenceMappers.
-					fromServiceMapper(
+				com.liferay.registry.collections.ServiceReferenceMapperFactory.
+					create(
 						new ServiceMapper<K, S>() {
 
 							@Override
