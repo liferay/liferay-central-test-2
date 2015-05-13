@@ -24,7 +24,9 @@ String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:d
 	<div class="drop-here-indicator">
 		<div class="drop-icons">
 			<span aria-hidden="true" class="glyphicon glyphicon-picture"></span>
+
 			<span aria-hidden="true" class="glyphicon glyphicon-picture"></span>
+
 			<span aria-hidden="true" class="glyphicon glyphicon-picture"></span>
 		</div>
 
