@@ -51,9 +51,8 @@
 	<target name="build-alloy-bootstrap">
 		<property name="alloy.bootstrap.version" value="3.2.0-2" />
 
-		<property name="alloy.bootstrap.deploy.theme.dir" value="docroot/html/themes/_unstyled/css/aui" />
-
 		<property name="alloy.bootstrap.deploy.js.dir" value="${frontend.js.web.dir}/tmp/META-INF/resources/html/js/bootstrap" />
+		<property name="alloy.bootstrap.deploy.theme.dir" value="docroot/html/themes/_unstyled/css/aui" />
 
 		<path id="alloy.bootstrap.zip.path">
 			<fileset dir="third-party">
