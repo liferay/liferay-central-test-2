@@ -27,9 +27,12 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 <div class="lfr-item-viewer" id="<%= idPrefix %>ItemSelectorContainer">
 	<div class="drop-zone">
 		<label class="btn btn-primary" for="<%= idPrefix %>InputFile"><liferay-ui:message key="select-file" /></label>
+
 		<input class="hide" id="<%= idPrefix %>InputFile" type="file" />
 
-		<p><%= uploadMessage %></p>
+		<p>
+			<%= uploadMessage %>
+		</p>
 	</div>
 
 	<c:choose>
@@ -53,23 +56,22 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 						<%
 						FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
 
-						String imagePreviewURL = DLUtil.getImagePreviewURL(fileEntry, themeDisplay);
-						String imageURL = DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK);
-						String imageTitle = DLUtil.getTitleWithExtension(fileEntry);
-
-						String iconCssClass = DLUtil.getFileIconCssClass(fileEntry.getExtension());
-
-						String author = fileEntry.getUserName();
+						String title = DLUtil.getTitleWithExtension(fileEntry);
 						%>
 
 						<liferay-ui:search-container-column-text name="title">
-							<a class="item-preview" data-url="<%= HtmlUtil.escapeAttribute(imageURL) %>" href="<%= HtmlUtil.escapeHREF(imagePreviewURL) %>" title="<%= HtmlUtil.escapeAttribute(imageTitle) %>">
+							<a class="item-preview" data-url="<%= HtmlUtil.escapeAttribute(DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK)) %>" href="<%= HtmlUtil.escapeHREF(DLUtil.getImagePreviewURL(fileEntry, themeDisplay)) %>" title="<%= HtmlUtil.escapeAttribute(title) %>">
+
+								<%
+								String iconCssClass = DLUtil.getFileIconCssClass(fileEntry.getExtension());
+								%>
+
 								<c:if test="<%= Validator.isNotNull(iconCssClass) %>">
 									<i class="<%= iconCssClass %>"></i>
 								</c:if>
 
 								<span class="taglib-text">
-									<%= HtmlUtil.escape(imageTitle) %>
+									<%= HtmlUtil.escape(title) %>
 								</span>
 							</a>
 
@@ -81,7 +83,7 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 						<liferay-ui:search-container-column-status name="status" status="<%= latestFileVersion.getStatus() %>" />
 
 						<liferay-ui:search-container-column-text name="modified-date">
-							<liferay-ui:message arguments="<%= new String[] {LanguageUtil.getTimeDescription(locale, System.currentTimeMillis() - fileEntry.getModifiedDate().getTime(), true), HtmlUtil.escape(author)} %>" key="x-ago-by-x" translateArguments="<%= false %>" />
+							<liferay-ui:message arguments="<%= new String[] {LanguageUtil.getTimeDescription(locale, System.currentTimeMillis() - fileEntry.getModifiedDate().getTime(), true), HtmlUtil.escape(fileEntry.getUserName())} %>" key="x-ago-by-x" translateArguments="<%= false %>" />
 						</liferay-ui:search-container-column-text>
 
 					</liferay-ui:search-container-row>
@@ -96,11 +98,10 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 			<%
 			for (Object result : searchContainer.getResults()) {
 				FileEntry fileEntry = (FileEntry)result;
+
 				FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
 
-				String imagePreviewURL = DLUtil.getImagePreviewURL(fileEntry, themeDisplay);
-				String imageURL = DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK);
-				String imageTitle = DLUtil.getTitleWithExtension(fileEntry);
+				String title = DLUtil.getTitleWithExtension(fileEntry);
 			%>
 
 				<li class="list-group-item list-group-item-default">
@@ -115,8 +116,8 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 						</div>
 
 						<div class="text-primary">
-							<a class="item-preview" data-url="<%= HtmlUtil.escapeAttribute(imageURL) %>" href="<%= HtmlUtil.escapeHREF(imagePreviewURL) %>" title="<%= HtmlUtil.escapeAttribute(imageTitle) %>">
-								<%= HtmlUtil.escape(imageTitle) %>
+							<a class="item-preview" data-url="<%= HtmlUtil.escapeAttribute(DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK)) %>" href="<%= HtmlUtil.escapeHREF(DLUtil.getImagePreviewURL(fileEntry, themeDisplay)) %>" title="<%= HtmlUtil.escapeAttribute(title) %>">
+								<%= HtmlUtil.escape(title) %>
 							</a>
 
 							<%@ include file="/html/taglib/ui/item_selector_browser/metadata_view.jspf" %>
