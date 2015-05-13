@@ -63,10 +63,9 @@ public class ControlPanelMenuPortletProvider implements ViewPortletProvider {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			long companyId = themeDisplay.getCompanyId();
-
 			Group userPersonalPanelGroup = _groupLocalService.getGroup(
-				companyId, GroupConstants.USER_PERSONAL_PANEL);
+				themeDisplay.getCompanyId(),
+				GroupConstants.USER_PERSONAL_PANEL);
 
 			long plid = _layoutLocalService.getDefaultPlid(
 				userPersonalPanelGroup.getGroupId(), true);
