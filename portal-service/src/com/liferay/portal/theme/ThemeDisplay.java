@@ -1739,7 +1739,7 @@ public class ThemeDisplay
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 Since 7.0.0, with no direct replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public void setURLMyAccount(PortletURL urlMyAccount) {
