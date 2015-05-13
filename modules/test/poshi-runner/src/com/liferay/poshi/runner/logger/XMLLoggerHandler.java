@@ -127,15 +127,15 @@ public final class XMLLoggerHandler {
 
 		loggerElement.setAttribute("data-status01", status);
 
-		if (status.equals("pending")) {
-			LoggerUtil.executeJavaScript(
-				"loggerInterface.fire('line-trigger', '" +
-					loggerElement.getID() + "', " + true + ")");
-		}
-		else if (status.equals("conditional-fail") || status.equals("pass")) {
+		if (status.equals("conditional-fail") || status.equals("pass")) {
 			LoggerUtil.executeJavaScript(
 				"loggerInterface.fire('line-trigger', '" +
 					loggerElement.getID() + "', " + false + ")");
+		}
+		else if (status.equals("pending")) {
+			LoggerUtil.executeJavaScript(
+				"loggerInterface.fire('line-trigger', '" +
+					loggerElement.getID() + "', " + true + ")");
 		}
 	}
 
