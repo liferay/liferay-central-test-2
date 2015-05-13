@@ -1092,7 +1092,7 @@ public class LiferayRepository
 
 		long defaultFileEntryTypeId = ParamUtil.getLong(
 			serviceContext, "defaultFileEntryTypeId");
-		SortedArrayList<Long> fileEntryTypeIds = getLongList(
+		List<Long> fileEntryTypeIds = getLongList(
 			serviceContext, "dlFileEntryTypesSearchContainerPrimaryKeys");
 		int restrictionType = ParamUtil.getInteger(
 			serviceContext, "restrictionType");
@@ -1113,7 +1113,7 @@ public class LiferayRepository
 
 		long defaultFileEntryTypeId = ParamUtil.getLong(
 			serviceContext, "defaultFileEntryTypeId");
-		SortedArrayList<Long> fileEntryTypeIds = getLongList(
+		List<Long> fileEntryTypeIds = getLongList(
 			serviceContext, "dlFileEntryTypesSearchContainerPrimaryKeys");
 		int restrictionType = ParamUtil.getInteger(
 			serviceContext, "restrictionType");
