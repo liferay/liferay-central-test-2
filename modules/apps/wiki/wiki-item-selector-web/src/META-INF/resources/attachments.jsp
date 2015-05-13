@@ -20,13 +20,14 @@
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 PortletURL portletURL = (PortletURL)request.getAttribute(WikiAttachmentItemSelectorView.PORTLET_URL);
+
+SearchContainer wikiAttachmentsSearchContainer = new SearchContainer(renderRequest, null, null, "curPageAttachments", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+
 WikiAttachmentItemSelectorCriterion wikiAttachmentItemSelectorCriterion = (WikiAttachmentItemSelectorCriterion)request.getAttribute(WikiAttachmentItemSelectorView.WIKI_ATTACHMENT_ITEM_SELECTOR_CRITERION);
 
 WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.fetchWikiPageResource(wikiAttachmentItemSelectorCriterion.getWikiPageResourceId());
 
 WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
-
-SearchContainer wikiAttachmentsSearchContainer = new SearchContainer(renderRequest, null, null, "curPageAttachments", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
 wikiAttachmentsSearchContainer.setTotal(wikiPage.getAttachmentsFileEntriesCount());
 wikiAttachmentsSearchContainer.setResults(wikiPage.getAttachmentsFileEntries(wikiAttachmentsSearchContainer.getStart(), wikiAttachmentsSearchContainer.getEnd()));
