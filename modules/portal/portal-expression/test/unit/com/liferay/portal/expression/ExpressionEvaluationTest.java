@@ -36,7 +36,7 @@ public class ExpressionEvaluationTest {
 	}
 
 	@Test
-	public void testEvaluateBasicBooleanUnequalsExpression() throws Exception {
+	public void testEvaluateBasicBooleanNotEqualsExpression() throws Exception {
 		Expression<Boolean> expression =
 			_expressionFactory.createBooleanExpression("var1 != true");
 
