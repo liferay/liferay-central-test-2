@@ -795,9 +795,9 @@ if ((invokerPortlet != null) && (invokerPortlet.isStrutsPortlet() || invokerPort
 	request.removeAttribute(ComponentConstants.COMPONENT_CONTEXT);
 }
 
-String controlPanelMenuPortletId = PortletProviderUtil.getPortletId(PortalAdministrationApplicationType.SiteAdmin.CLASS_NAME, PortletProvider.Action.VIEW);
+String portalAdministrationApplicationTypeSiteAdminPortletId = PortletProviderUtil.getPortletId(PortalAdministrationApplicationType.SiteAdmin.CLASS_NAME, PortletProvider.Action.VIEW);
 
-if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.getId().equals(controlPanelMenuPortletId) && !portlet.isStatic()) {
+if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.getId().equals(portalAdministrationApplicationTypeSiteAdminPortletId) && !portlet.isStatic()) {
 	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 

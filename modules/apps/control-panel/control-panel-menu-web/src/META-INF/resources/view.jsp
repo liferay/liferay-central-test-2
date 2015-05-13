@@ -194,12 +194,12 @@
 		<aui:script use="liferay-control-panel">
 
 			<%
-			String controlPanelMenuPortletId = PortletProviderUtil.getPortletId(PortalAdministrationApplicationType.SiteAdmin.CLASS_NAME, PortletProvider.Action.VIEW);
+			String portalAdministrationApplicationTypeSiteAdminPortletId = PortletProviderUtil.getPortletId(PortalAdministrationApplicationType.SiteAdmin.CLASS_NAME, PortletProvider.Action.VIEW);
 			%>
 
 			new Liferay.ControlPanel(
 				{
-					namespace: '_<%= controlPanelMenuPortletId %>_'
+					namespace: '_<%= portalAdministrationApplicationTypeSiteAdminPortletId %>_'
 				}
 			);
 		</aui:script>
