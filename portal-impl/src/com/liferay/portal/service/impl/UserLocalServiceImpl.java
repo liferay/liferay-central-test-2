@@ -1318,12 +1318,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		Company company = companyLocalService.getCompany(companyId);
-		String authType = company.getAuthType();
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		handleAuthenticationFailure(
-			username, authType, user, new HashMap<String, String[]>(),
-			new HashMap<String, String[]>());
+			username, company.getAuthType(), user,
+			new HashMap<String, String[]>(), new HashMap<String, String[]>());
 
 		return 0;
 	}
