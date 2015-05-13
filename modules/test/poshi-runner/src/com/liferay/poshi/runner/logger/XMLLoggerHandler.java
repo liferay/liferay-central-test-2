@@ -130,12 +130,12 @@ public final class XMLLoggerHandler {
 		if (status.equals("conditional-fail") || status.equals("pass")) {
 			LoggerUtil.executeJavaScript(
 				"loggerInterface.fire('line-trigger', '" +
-					loggerElement.getID() + "', " + false + ")");
+					loggerElement.getID() + "', false)");
 		}
 		else if (status.equals("pending")) {
 			LoggerUtil.executeJavaScript(
 				"loggerInterface.fire('line-trigger', '" +
-					loggerElement.getID() + "', " + true + ")");
+					loggerElement.getID() + "', true)");
 		}
 	}
 
