@@ -107,7 +107,7 @@
 						]
 					},
 					'liferay-asset-addon-entry-selector': {
-						path: 'asset_add_on_entry_selector.js',
+						path: 'asset_addon_entry_selector.js',
 						requires: [
 							'aui-component',
 							'liferay-portlet-base',

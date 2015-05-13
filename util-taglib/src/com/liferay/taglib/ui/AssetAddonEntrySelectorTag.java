@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetAddonEntrySelectorTag extends IncludeTag {
 
-	public void setAssetAddonEntriesEntries(
+	public void setAssetAddonEntries(
 		List<AssetAddonEntry> assetAddonEntries) {
 
 		_assetAddonEntries = assetAddonEntries;
