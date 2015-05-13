@@ -110,8 +110,8 @@ public class SettingsInvocationHandler<S> implements InvocationHandler {
 
 		Constructor<?> constructor = returnType.getConstructor(String.class);
 
-			return constructor.newInstance(
-				_typedSettings.getValue(method.getName()));
+		return constructor.newInstance(
+			_typedSettings.getValue(method.getName()));
 	}
 
 	private final Class<S> _clazz;
