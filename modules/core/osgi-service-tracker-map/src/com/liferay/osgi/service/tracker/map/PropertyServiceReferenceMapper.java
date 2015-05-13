@@ -14,35 +14,36 @@
 
 package com.liferay.osgi.service.tracker.map;
 
-import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 /**
- * @author Carlos Sierra Andrés
+ * @author Carlos Sierra Andr�s
  */
-public final class ServiceReferenceMappers {
+public class PropertyServiceReferenceMapper<T, S>
+	implements ServiceReferenceMapper<T, S> {
 
-	public static <K, S> ServiceReferenceMapper<K, S> fromServiceMapper(
-		final BundleContext bundleContext,
-		final ServiceMapper<K, S> serviceMapper) {
-
-		return new ServiceReferenceMapper<K, S>() {
-
-			@Override
-			public void map(
-				ServiceReference<S> serviceReference, Emitter<K> emitter) {
-
-				S service = bundleContext.getService(serviceReference);
-
-				try {
-					serviceMapper.map(service, emitter);
-				}
-				finally {
-					bundleContext.ungetService(serviceReference);
-				}
-			}
-
-		};
+	public PropertyServiceReferenceMapper(String propertyKey) {
+		_propertyKey = propertyKey;
 	}
+
+	@Override
+	public void map(ServiceReference<S> serviceReference, Emitter<T> emitter) {
+		Object propertyValue = serviceReference.getProperty(_propertyKey);
+
+		if (propertyValue == null) {
+			return;
+		}
+
+		if (propertyValue instanceof Object[]) {
+			for (T t : (T[])propertyValue) {
+				emitter.emit(t);
+			}
+		}
+		else {
+			emitter.emit((T)propertyValue);
+		}
+	}
+
+	private final String _propertyKey;
 
 }

@@ -14,7 +14,6 @@
 
 package com.liferay.osgi.service.tracker.map;
 
-import com.liferay.osgi.service.tracker.map.ServiceReferenceMappers.PropertyServiceReferenceMapper;
 import com.liferay.osgi.service.tracker.map.internal.DefaultServiceTrackerCustomizer;
 import com.liferay.osgi.service.tracker.map.internal.MultiValueServiceTrackerBucketFactory;
 import com.liferay.osgi.service.tracker.map.internal.ServiceTrackerMapImpl;
