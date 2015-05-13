@@ -27,19 +27,23 @@ public class ServiceReferenceMappers {
 		final Accessor<S, K> accessor) {
 
 		return new ServiceReferenceMapper<K, S>() {
+
 			@Override
 			public void map(
 				ServiceReference<S> serviceReference, Emitter<K> emitter) {
 
 				com.liferay.registry.collections.ServiceReferenceMappers.
-					fromServiceMapper(new ServiceMapper<K, S>() {
+					fromServiceMapper(
+						new ServiceMapper<K, S>() {
 
-						@Override
-						public void map(S service, Emitter<K> emitter) {
-							emitter.emit(accessor.get(service));
-						}
-					});
+							@Override
+							public void map(S service, Emitter<K> emitter) {
+								emitter.emit(accessor.get(service));
+							}
+
+						});
 			}
+
 		};
 	}
 
@@ -47,19 +51,24 @@ public class ServiceReferenceMappers {
 		final Function<S, K> function) {
 
 		return new ServiceReferenceMapper<K, S>() {
+
 			@Override
 			public void map(
 				ServiceReference<S> serviceReference, Emitter<K> emitter) {
 
 				com.liferay.registry.collections.ServiceReferenceMappers.
-					fromServiceMapper(new ServiceMapper<K, S>() {
+					fromServiceMapper(
+						new ServiceMapper<K, S>() {
 
-						@Override
-						public void map(S service, Emitter<K> emitter) {
-							emitter.emit(function.apply(service));
-						}
-					});
+							@Override
+							public void map(S service, Emitter<K> emitter) {
+								emitter.emit(function.apply(service));
+							}
+
+						});
+
 			}
+
 		};
 	}
 

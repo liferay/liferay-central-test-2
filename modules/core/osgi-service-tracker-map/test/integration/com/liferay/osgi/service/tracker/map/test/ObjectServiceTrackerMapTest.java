@@ -228,8 +228,8 @@ public class ObjectServiceTrackerMapTest {
 		throws InvalidSyntaxException {
 
 		ServiceReferenceMapper<String, TrackedOne>
-				propertyServiceReferenceMapper =
-					new PropertyServiceReferenceMapper<>("target");
+			propertyServiceReferenceMapper =
+				new PropertyServiceReferenceMapper<>("target");
 
 		ServiceTrackerMap<String, TrackedOne> serviceTrackerMap =
 			ServiceTrackerMapFactory.singleValueMap(

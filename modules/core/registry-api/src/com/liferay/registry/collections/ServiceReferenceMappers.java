@@ -27,6 +27,7 @@ public class ServiceReferenceMappers {
 		final ServiceMapper<K, S> serviceMapper) {
 
 		return new ServiceReferenceMapper<K, S>() {
+
 			@Override
 			public void map(
 				ServiceReference<S> serviceReference, Emitter<K> emitter) {
@@ -42,6 +43,7 @@ public class ServiceReferenceMappers {
 					registry.ungetService(serviceReference);
 				}
 			}
+
 		};
 	}
 
