@@ -132,7 +132,7 @@ public final class XMLLoggerHandler {
 				"loggerInterface.fire('line-trigger', '" +
 					loggerElement.getID() + "', " + true + ")");
 		}
-		else if (status.equals("pass") || status.equals("conditional-fail")) {
+		else if (status.equals("conditional-fail") || status.equals("pass")) {
 			LoggerUtil.executeJavaScript(
 				"loggerInterface.fire('line-trigger', '" +
 					loggerElement.getID() + "', " + false + ")");
