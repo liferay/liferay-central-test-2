@@ -73,16 +73,20 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 			_searchContainer);
 		request.setAttribute(
 			"liferay-ui:item-selector-browser:tabName", _tabName);
-
+		request.setAttribute(
+			"liferay-ui:item-selector-browser:uploadMessage",
+			getUploadMessage());
+	}
+	
+	protected String getUploadMessage() {
 		if (Validator.isNull(_uploadMessage)) {
-			_uploadMessage = LanguageUtil.get(
-				request,
-				"upload-a-document-by-dropping-it-right-here-or-by-pressing-" +
-					"plus-icon");
+			return _uploadMessage;
 		}
 
-		request.setAttribute(
-			"liferay-ui:item-selector-browser:uploadMessage", _uploadMessage);
+		return LanguageUtil.get(
+			request,
+			"upload-a-document-by-dropping-it-right-here-or-by-pressing-plus-" +
+				"icon");
 	}
 
 	private static final String _PAGE =
