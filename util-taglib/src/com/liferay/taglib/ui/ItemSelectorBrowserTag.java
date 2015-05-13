@@ -34,7 +34,7 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 		_idPrefix = idPrefix;
 	}
 
-	public void setSearchContainer(SearchContainer searchContainer) {
+	public void setSearchContainer(SearchContainer<?> searchContainer) {
 		_searchContainer = searchContainer;
 	}
 
@@ -90,7 +90,7 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 
 	private String _displayStyle;
 	private String _idPrefix;
-	private SearchContainer _searchContainer;
+	private SearchContainer<?> _searchContainer;
 	private String _tabName;
 	private String _uploadMessage;
 
