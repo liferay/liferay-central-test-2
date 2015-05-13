@@ -38,7 +38,7 @@
 					<liferay-ui:message key="name" />:
 				</dt>
 				<dd>
-					<%= HtmlUtil.escape(imageTitle) %>
+					<%= HtmlUtil.escape(title) %>
 				</dd>
 				<dt>
 					<liferay-ui:message key="modified" />:
