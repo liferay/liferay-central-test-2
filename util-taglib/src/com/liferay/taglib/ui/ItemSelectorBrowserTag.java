@@ -62,6 +62,17 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected String getUploadMessage() {
+		if (Validator.isNull(_uploadMessage)) {
+			return _uploadMessage;
+		}
+
+		return LanguageUtil.get(
+			request,
+			"upload-a-document-by-dropping-it-right-here-or-by-pressing-plus-" +
+				"icon");
+	}
+
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
@@ -76,17 +87,6 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:item-selector-browser:uploadMessage",
 			getUploadMessage());
-	}
-	
-	protected String getUploadMessage() {
-		if (Validator.isNull(_uploadMessage)) {
-			return _uploadMessage;
-		}
-
-		return LanguageUtil.get(
-			request,
-			"upload-a-document-by-dropping-it-right-here-or-by-pressing-plus-" +
-				"icon");
 	}
 
 	private static final String _PAGE =
