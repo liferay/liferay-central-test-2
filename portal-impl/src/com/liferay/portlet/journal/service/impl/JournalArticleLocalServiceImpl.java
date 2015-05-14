@@ -6771,7 +6771,7 @@ public class JournalArticleLocalServiceImpl
 		tokens.put(
 			"ddm_structure_id", String.valueOf(ddmStructure.getStructureId()));
 
-		// This token is deprecated
+		// Deprecated token
 
 		tokens.put("structure_id", article.getDDMStructureKey());
 
@@ -6884,7 +6884,7 @@ public class JournalArticleLocalServiceImpl
 			tokens.put(
 				"ddm_template_id", String.valueOf(ddmTemplate.getTemplateId()));
 
-			// This token is deprecated
+			// Deprecated token
 
 			tokens.put("template_id", ddmTemplateKey);
 
