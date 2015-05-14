@@ -124,14 +124,14 @@ public class TinyMCEEditorConfigContributor
 			currentToolbarSet = "phone";
 		}
 
-		JSONArray currentToolbar = toolbarsJSONObject.getJSONArray(
+		JSONArray currentToolbarJSONArray = toolbarsJSONObject.getJSONArray(
 			currentToolbarSet);
 
-		if (currentToolbar == null) {
-			currentToolbar = toolbarsJSONObject.getJSONArray("liferay");
+		if (currentToolbarJSONArray == null) {
+			currentToolbarJSONArray = toolbarsJSONObject.getJSONArray("liferay");
 		}
 
-		return currentToolbar;
+		return currentToolbarJSONArray;
 	}
 
 	protected JSONArray getToolbarsEmailJSONArray(boolean showSource) {
