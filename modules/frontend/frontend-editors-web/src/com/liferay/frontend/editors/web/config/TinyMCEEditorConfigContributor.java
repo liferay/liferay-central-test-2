@@ -71,7 +71,6 @@ public class TinyMCEEditorConfigContributor
 		jsonArray.put(
 			"advlist autolink autosave link image lists charmap print " +
 				"preview hr anchor");
-
 		jsonArray.put("searchreplace wordcount fullscreen media");
 
 		if (showSource) {
@@ -88,7 +87,7 @@ public class TinyMCEEditorConfigContributor
 	protected JSONArray getStyleFormatsJSONArray() {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		String styleFormats[] = new String[] {
+		String styleFormats[] = {
 			"{inline: 'p', title: 'Normal'}",
 			"{block: 'h1', title: 'Heading 1'}",
 			"{block: 'h2', title: 'Heading 2'}",
