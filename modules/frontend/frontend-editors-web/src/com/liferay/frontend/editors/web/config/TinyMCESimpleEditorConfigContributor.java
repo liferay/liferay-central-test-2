@@ -57,8 +57,8 @@ public class TinyMCESimpleEditorConfigContributor
 		jsonObject.put("plugins", plugins);
 
 		String toolbar =
-			"bold italic underline | " +
-				"alignleft aligncenter alignright alignjustify | ";
+			"bold italic underline | alignleft aligncenter alignright " +
+				"alignjustify | ";
 
 		if (showSource) {
 			toolbar += "code ";
