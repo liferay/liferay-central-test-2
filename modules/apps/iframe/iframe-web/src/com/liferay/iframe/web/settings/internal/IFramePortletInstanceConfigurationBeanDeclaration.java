@@ -27,7 +27,7 @@ public class IFramePortletInstanceConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
 	@Override
-	public Class getConfigurationBeanClass() {
+	public Class<?> getConfigurationBeanClass() {
 		return IFramePortletInstanceConfiguration.class;
 	}
 
