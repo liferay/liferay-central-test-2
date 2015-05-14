@@ -205,22 +205,6 @@ public class IFrameDisplayContext {
 		return _heightNormal;
 	}
 
-	public String getHiddenVariables() {
-		if (_hiddenVariables != null) {
-			return _hiddenVariables;
-		}
-
-		_hiddenVariables =
-			_iFramePortletInstanceConfiguration.hiddenVariables();
-
-		if (Validator.isNull(_hiddenVariables)) {
-			_hiddenVariables = StringUtil.merge(
-				_iFrameConfiguration.hiddenVariables(), StringPool.SEMICOLON);
-		}
-
-		return _hiddenVariables;
-	}
-
 	public List<KeyValuePair> getHiddenVariableKVPs() {
 		List<KeyValuePair> hiddenVariableKVPs = new ArrayList<>();
 
@@ -246,6 +230,22 @@ public class IFrameDisplayContext {
 		return hiddenVariableKVPs;
 	}
 
+	public String getHiddenVariables() {
+		if (_hiddenVariables != null) {
+			return _hiddenVariables;
+		}
+
+		_hiddenVariables =
+			_iFramePortletInstanceConfiguration.hiddenVariables();
+
+		if (Validator.isNull(_hiddenVariables)) {
+			_hiddenVariables = StringUtil.merge(
+				_iFrameConfiguration.hiddenVariables(), StringPool.SEMICOLON);
+		}
+
+		return _hiddenVariables;
+	}
+
 	public String getHspace() {
 		if (_hspace != null) {
 			return _hspace;
@@ -266,8 +266,7 @@ public class IFrameDisplayContext {
 		int index = 0;
 
 		if (_iframeBaseSrc.length() > 6) {
-			index = _iframeBaseSrc.substring(7).lastIndexOf(
-				StringPool.SLASH);
+			index = _iframeBaseSrc.substring(7).lastIndexOf(StringPool.SLASH);
 
 			if (index != -1) {
 				_iframeBaseSrc = _iframeBaseSrc.substring(0, index + 8);
@@ -316,7 +315,7 @@ public class IFrameDisplayContext {
 			if (name.startsWith(_IFRAME_PREFIX)) {
 				iframeVariables.add(
 					name.substring(_IFRAME_PREFIX.length()) +
-						StringPool.EQUAL + request.getParameter(name));
+						StringPool.EQUAL + _request.getParameter(name));
 			}
 		}
 
