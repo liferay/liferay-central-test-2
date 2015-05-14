@@ -230,17 +230,17 @@ public class IFrameDisplayContext {
 		hiddenVariables.addAll(getIframeVariables());
 
 		for (String hiddenVariable : hiddenVariables) {
-			String hiddenKey = StringPool.BLANK;
-			String hiddenValue = StringPool.BLANK;
+			String key = StringPool.BLANK;
+			String value = StringPool.BLANK;
 
 			int pos = hiddenVariable.indexOf(StringPool.EQUAL);
 
 			if (pos != -1) {
-				hiddenKey = hiddenVariable.substring(0, pos);
-				hiddenValue = hiddenVariable.substring(pos + 1);
+				key = hiddenVariable.substring(0, pos);
+				value = hiddenVariable.substring(pos + 1);
 			}
 
-			hiddenVariableKVPs.add(new KeyValuePair(hiddenKey, hiddenValue));
+			hiddenVariableKVPs.add(new KeyValuePair(key, value));
 		}
 
 		return hiddenVariableKVPs;
