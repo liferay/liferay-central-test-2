@@ -6878,15 +6878,15 @@ public class JournalArticleLocalServiceImpl
 				}
 			}
 
-			// This token is deprecated
-
-			tokens.put("template_id", ddmTemplateKey);
-
 			tokens.put(
 				"ddm_template_key",
 				String.valueOf(ddmTemplate.getTemplateKey()));
 			tokens.put(
 				"ddm_template_id", String.valueOf(ddmTemplate.getTemplateId()));
+
+			// This token is deprecated
+
+			tokens.put("template_id", ddmTemplateKey);
 
 			String script = ddmTemplate.getScript();
 			String langType = ddmTemplate.getLanguage();
