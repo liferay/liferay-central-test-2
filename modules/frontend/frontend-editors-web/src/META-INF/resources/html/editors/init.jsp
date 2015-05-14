@@ -64,7 +64,7 @@ PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstan
 
 PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-	String namespace = AUIUtil.getNamespace(portletRequest, portletResponse);
+String namespace = AUIUtil.getNamespace(portletRequest, portletResponse);
 
 String currentURL = null;
 
