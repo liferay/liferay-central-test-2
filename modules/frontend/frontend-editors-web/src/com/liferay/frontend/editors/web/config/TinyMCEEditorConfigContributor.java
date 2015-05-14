@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -49,20 +48,17 @@ public class TinyMCEEditorConfigContributor
 			liferayPortletResponse);
 
 		jsonObject.put("mode", "exact");
-
-		boolean showSource = GetterUtil.getBoolean(
-			(String)inputEditorTaglibAttributes.get(
-				"liferay-ui:input-editor:showSource"));
-
-		jsonObject.put("plugins", getPluginsJSONArray(showSource));
+		jsonObject.put(
+			"plugins", getPluginsJSONArray(inputEditorTaglibAttributes));
 		jsonObject.put("style_formats", getStyleFormatsJSONArray());
 		jsonObject.put(
 			"toolbar",
-			getToolbarJSONArray(
-				inputEditorTaglibAttributes, themeDisplay, showSource));
+			getToolbarJSONArray(inputEditorTaglibAttributes, themeDisplay));
 	}
 
-	protected JSONArray getPluginsJSONArray(boolean showSource) {
+	protected JSONArray getPluginsJSONArray(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(
@@ -70,7 +66,7 @@ public class TinyMCEEditorConfigContributor
 				"preview hr anchor");
 		jsonArray.put("searchreplace wordcount fullscreen media");
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			jsonArray.put("code");
 		}
 
@@ -110,9 +106,10 @@ public class TinyMCEEditorConfigContributor
 
 	protected JSONArray getToolbarJSONArray(
 		Map<String, Object> inputEditorTaglibAttributes,
-		ThemeDisplay themeDisplay, boolean showSource) {
+		ThemeDisplay themeDisplay) {
 
-		JSONObject toolbarsJSONObject = getToolbarsJSONObject(showSource);
+		JSONObject toolbarsJSONObject = getToolbarsJSONObject(
+			inputEditorTaglibAttributes);
 
 		String toolbarSet = (String)inputEditorTaglibAttributes.get(
 			"liferay-ui:input-editor:toolbarSet");
@@ -134,7 +131,9 @@ public class TinyMCEEditorConfigContributor
 		return toolbarJSONArray;
 	}
 
-	protected JSONArray getToolbarsEmailJSONArray(boolean showSource) {
+	protected JSONArray getToolbarsEmailJSONArray(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		String firstRowButtons =
@@ -148,7 +147,7 @@ public class TinyMCEEditorConfigContributor
 			"cut copy paste bullist numlist | blockquote | undo redo | link " +
 				"unlink image ";
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			secondRowButtons += "code ";
 		}
 
@@ -159,19 +158,28 @@ public class TinyMCEEditorConfigContributor
 		return jsonArray;
 	}
 
-	protected JSONObject getToolbarsJSONObject(boolean showSource) {
+	protected JSONObject getToolbarsJSONObject(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("email", getToolbarsEmailJSONArray(showSource));
-		jsonObject.put("liferay", getToolbarsLiferayJSONArray(showSource));
+		jsonObject.put(
+			"email", getToolbarsEmailJSONArray(inputEditorTaglibAttributes));
+		jsonObject.put(
+			"liferay",
+			getToolbarsLiferayJSONArray(inputEditorTaglibAttributes));
 		jsonObject.put("phone", getToolbarsPhoneJSONArray());
-		jsonObject.put("simple", getToolbarsSimpleJSONArray(showSource));
-		jsonObject.put("tablet", getToolbarsTabletJSONArray(showSource));
+		jsonObject.put(
+			"simple", getToolbarsSimpleJSONArray(inputEditorTaglibAttributes));
+		jsonObject.put(
+			"tablet", getToolbarsTabletJSONArray(inputEditorTaglibAttributes));
 
 		return jsonObject;
 	}
 
-	protected JSONArray getToolbarsLiferayJSONArray(boolean showSource) {
+	protected JSONArray getToolbarsLiferayJSONArray(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(
@@ -183,7 +191,7 @@ public class TinyMCEEditorConfigContributor
 			"cut copy paste searchreplace bullist numlist | outdent indent " +
 				"blockquote | undo redo | link unlink anchor image media ";
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			secondRowButtons += "code";
 		}
 
@@ -204,14 +212,16 @@ public class TinyMCEEditorConfigContributor
 		return jsonArray;
 	}
 
-	protected JSONArray getToolbarsSimpleJSONArray(boolean showSource) {
+	protected JSONArray getToolbarsSimpleJSONArray(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		String firstRowButtons =
 			"bold italic underline strikethrough | bullist numlist | table | " +
 				"link unlink image";
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			firstRowButtons += " code";
 		}
 
@@ -220,7 +230,9 @@ public class TinyMCEEditorConfigContributor
 		return jsonArray;
 	}
 
-	protected JSONArray getToolbarsTabletJSONArray(boolean showSource) {
+	protected JSONArray getToolbarsTabletJSONArray(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(
@@ -230,7 +242,7 @@ public class TinyMCEEditorConfigContributor
 
 		String secondRowButtons = "bullist numlist | link unlink image";
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			secondRowButtons += " code";
 		}
 

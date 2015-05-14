@@ -17,7 +17,6 @@ package com.liferay.frontend.editors.web.config;
 import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Map;
@@ -44,13 +43,9 @@ public class TinyMCESimpleEditorConfigContributor
 			jsonObject, inputEditorTaglibAttributes, themeDisplay,
 			liferayPortletResponse);
 
-		boolean showSource = GetterUtil.getBoolean(
-			(String)inputEditorTaglibAttributes.get(
-				"liferay-ui:input-editor:showSource"));
-
 		String plugins = "contextmenu preview print";
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			plugins+= " code";
 		}
 
@@ -60,7 +55,7 @@ public class TinyMCESimpleEditorConfigContributor
 			"bold italic underline | alignleft aligncenter alignright " +
 				"alignjustify | ";
 
-		if (showSource) {
+		if (isShowSource(inputEditorTaglibAttributes)) {
 			toolbar += "code ";
 		}
 

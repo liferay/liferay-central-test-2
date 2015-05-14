@@ -103,6 +103,14 @@ public class BaseTinyMCEEditorConfigConfigurator
 		return tinyMCELanguage;
 	}
 
+	protected boolean isShowSource(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
+		return GetterUtil.getBoolean(
+			inputEditorTaglibAttributes.get(
+				"liferay-ui:input-editor:showSource"));
+	}
+
 	private static final Map<String, String> _tinyMCELanguages =
 		new HashMap<>();
 
