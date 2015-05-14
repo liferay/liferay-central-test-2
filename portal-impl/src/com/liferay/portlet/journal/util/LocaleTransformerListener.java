@@ -131,8 +131,8 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 			if (ddmStructure == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"DDM structure is not available. Not checking " +
-							"localizibilty.");
+						"Not checking localization because ynamic data " +
+							"mapping structure is not available");
 				}
 
 				return;
