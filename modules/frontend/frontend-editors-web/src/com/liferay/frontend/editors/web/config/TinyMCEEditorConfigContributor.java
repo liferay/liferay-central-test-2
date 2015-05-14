@@ -16,11 +16,8 @@ package com.liferay.frontend.editors.web.config;
 
 import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -105,14 +102,7 @@ public class TinyMCEEditorConfigContributor
 		};
 
 		for (String styleFormat : styleFormats) {
-			try {
-				jsonArray.put(JSONFactoryUtil.createJSONObject(styleFormat));
-			}
-			catch (JSONException jsone) {
-				_log.error(
-					"Unable to create a JSON object from: " + styleFormat,
-					jsone);
-			}
+			jsonArray.put(toJSONObject(styleFormat));
 		}
 
 		return jsonArray;
@@ -249,8 +239,5 @@ public class TinyMCEEditorConfigContributor
 
 		return jsonArray;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		TinyMCEEditorConfigContributor.class);
 
 }
