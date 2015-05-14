@@ -221,15 +221,15 @@ public class IFrameDisplayContext {
 		return _hiddenVariables;
 	}
 
-	public List<KeyValuePair> getHiddenVariablesKVP() {
-		List<KeyValuePair> hiddenVariablesKVP = new ArrayList<>();
+	public List<KeyValuePair> getHiddenVariableKVPs() {
+		List<KeyValuePair> hiddenVariableKVPs = new ArrayList<>();
 
-		List<String> hiddenVariableList = ListUtil.toList(
+		List<String> hiddenVariables = ListUtil.toList(
 			StringUtil.split(getHiddenVariables(), CharPool.SEMICOLON));
 
-		hiddenVariableList.addAll(getIframeVariables());
+		hiddenVariables.addAll(getIframeVariables());
 
-		for (String hiddenVariable : hiddenVariableList) {
+		for (String hiddenVariable : hiddenVariables) {
 			String hiddenKey = StringPool.BLANK;
 			String hiddenValue = StringPool.BLANK;
 
@@ -240,10 +240,10 @@ public class IFrameDisplayContext {
 				hiddenValue = hiddenVariable.substring(pos + 1);
 			}
 
-			hiddenVariablesKVP.add(new KeyValuePair(hiddenKey, hiddenValue));
+			hiddenVariableKVPs.add(new KeyValuePair(hiddenKey, hiddenValue));
 		}
 
-		return hiddenVariablesKVP;
+		return hiddenVariableKVPs;
 	}
 
 	public String getHspace() {
