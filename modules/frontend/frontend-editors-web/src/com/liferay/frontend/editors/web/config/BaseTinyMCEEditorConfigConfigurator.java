@@ -40,11 +40,11 @@ public class BaseTinyMCEEditorConfigConfigurator
 		ThemeDisplay themeDisplay,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		String pathThemeCss = HtmlUtil.escape(themeDisplay.getPathThemeCss());
+		String themeCssPath = HtmlUtil.escape(themeDisplay.getPathThemeCss());
 
 		jsonObject.put(
 			"content_css",
-			pathThemeCss + "/aui.css," + pathThemeCss + "/main.css");
+			themeCssPath + "/aui.css," + themeCssPath + "/main.css");
 
 		jsonObject.put("convert_urls", Boolean.FALSE);
 
