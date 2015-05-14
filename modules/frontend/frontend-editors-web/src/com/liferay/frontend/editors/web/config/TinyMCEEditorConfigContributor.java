@@ -93,12 +93,12 @@ public class TinyMCEEditorConfigContributor
 			"{block: 'pre', title: 'Preformatted Text'}",
 			"{inline: 'cite', title: 'Cited Work'}",
 			"{inline: 'code', title: 'Computer Code'}",
-			"{block: 'div', classes: 'portlet-msg-info', " +
-				"title: 'Info Message'}",
-			"{block: 'div', classes: 'portlet-msg-alert', " +
-				"title: 'Alert Message'}",
-			"{block: 'div', classes: 'portlet-msg-error', " +
-				"title: 'Error Message'}"
+			"{block: 'div', classes: 'portlet-msg-info', title: 'Info " +
+				"Message'}",
+			"{block: 'div', classes: 'portlet-msg-alert', title: 'Alert " +
+				"Message'}",
+			"{block: 'div', classes: 'portlet-msg-error', title: 'Error " +
+				"Message'}"
 		};
 
 		for (String styleFormat : styleFormats) {
