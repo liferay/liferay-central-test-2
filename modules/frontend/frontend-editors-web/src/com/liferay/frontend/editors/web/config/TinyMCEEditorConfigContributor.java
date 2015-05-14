@@ -136,24 +136,22 @@ public class TinyMCEEditorConfigContributor
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		String firstRowButtons =
+		jsonArray.put(
 			"fontselect fontsizeselect | forecolor backcolor | bold italic " +
 				"underline strikethrough | alignleft aligncenter alignright " +
-					"alignjustify";
+					"alignjustify");
 
-		jsonArray.put(firstRowButtons);
-
-		String secondRowButtons =
+		String buttons =
 			"cut copy paste bullist numlist | blockquote | undo redo | link " +
 				"unlink image ";
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
-			secondRowButtons += "code ";
+			buttons += "code ";
 		}
 
-		secondRowButtons += "| hr removeformat | preview print fullscreen";
+		buttons += "| hr removeformat | preview print fullscreen";
 
-		jsonArray.put(secondRowButtons);
+		jsonArray.put(buttons);
 
 		return jsonArray;
 	}
@@ -187,18 +185,19 @@ public class TinyMCEEditorConfigContributor
 				"bold italic underline strikethrough | alignleft aligncenter " +
 					"alignright alignjustify");
 
-		String secondRowButtons =
+		String buttons =
 			"cut copy paste searchreplace bullist numlist | outdent indent " +
 				"blockquote | undo redo | link unlink anchor image media ";
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
-			secondRowButtons += "code";
+			buttons += "code";
 		}
 
-		jsonArray.put(secondRowButtons);
+		jsonArray.put(buttons);
+
 		jsonArray.put(
-			"table | hr removeformat | subscript superscript | " +
-			"charmap emoticons | preview print fullscreen");
+			"table | hr removeformat | subscript superscript | charmap " +
+				"emoticons | preview print fullscreen");
 
 		return jsonArray;
 	}
@@ -217,15 +216,15 @@ public class TinyMCEEditorConfigContributor
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		String firstRowButtons =
+		String buttons =
 			"bold italic underline strikethrough | bullist numlist | table | " +
 				"link unlink image";
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
-			firstRowButtons += " code";
+			buttons += " code";
 		}
 
-		jsonArray.put(firstRowButtons);
+		jsonArray.put(buttons);
 
 		return jsonArray;
 	}
@@ -240,13 +239,13 @@ public class TinyMCEEditorConfigContributor
 				"strikethrough | alignleft aligncenter alignright " +
 					"alignjustify");
 
-		String secondRowButtons = "bullist numlist | link unlink image";
+		String buttons = "bullist numlist | link unlink image";
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
-			secondRowButtons += " code";
+			buttons += " code";
 		}
 
-		jsonArray.put(secondRowButtons);
+		jsonArray.put(buttons);
 
 		return jsonArray;
 	}
