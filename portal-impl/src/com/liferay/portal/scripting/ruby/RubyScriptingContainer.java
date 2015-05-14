@@ -77,6 +77,7 @@ public class RubyScriptingContainer
 		_scriptingContainer.terminate();
 	}
 
+	@Override
 	public org.jruby.embed.ScriptingContainer getRealScriptingContainer() {
 		return _scriptingContainer;
 	}
