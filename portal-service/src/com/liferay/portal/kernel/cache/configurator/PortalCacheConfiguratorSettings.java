@@ -23,7 +23,6 @@ public class PortalCacheConfiguratorSettings {
 		ClassLoader classLoader, String portalCacheConfigrationLocation) {
 
 		_classLoader = classLoader;
-
 		_portalCacheConfigrationLocation = portalCacheConfigrationLocation;
 	}
 
