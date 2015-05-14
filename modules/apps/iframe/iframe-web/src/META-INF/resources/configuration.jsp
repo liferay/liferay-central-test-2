@@ -40,11 +40,6 @@ String htmlAttributes =
 	<liferay-ui:panel-container extended="<%= true %>" id="iframeSettingsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeGeneralPanel" persistState="<%= true %>" title="general">
 			<aui:fieldset>
-
-				<%
-				WindowState windowState = liferayPortletRequest.getWindowState();
-				%>
-
 				<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>" cssClass="lfr-input-text-container" label="source-url" name="preferences--src--" prefix="<%= iFrameDisplayContext.isRelative() ? StringPool.TRIPLE_PERIOD : StringPool.BLANK %>" type="text" value="<%= iFrameDisplayContext.getSrc() %>" />
 
 				<aui:input label="relative-to-context-path" name="preferences--relative--" type="checkbox" value="<%= iFrameDisplayContext.isRelative() %>" />

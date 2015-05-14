@@ -40,6 +40,8 @@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <portlet:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
 IFrameConfiguration iFrameConfiguration = (IFrameConfiguration)renderRequest.getAttribute(IFrameConfiguration.class.getName());
 
 IFrameDisplayContext iFrameDisplayContext = new IFrameDisplayContext(iFrameConfiguration, renderRequest);
