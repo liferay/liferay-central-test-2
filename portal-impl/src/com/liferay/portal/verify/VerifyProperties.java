@@ -553,13 +553,6 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.iframe.web"
 		},
 
-		// Javascript Executor
-
-		new String[] {
-			"scripting.forbidden.classes", "forbidden.classes",
-			"com.liferay.portal.scripting.javascript"
-		},
-
 		// Journal
 
 		new String[] {
@@ -944,6 +937,13 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"rss.display.templates.config", "display.templates.config",
 			"com.liferay.rss.web"
+		},
+
+		// Scripting
+
+		new String[] {
+			"scripting.forbidden.classes", "forbidden.classes",
+			"com.liferay.portal.scripting.javascript"
 		},
 
 		// Search
