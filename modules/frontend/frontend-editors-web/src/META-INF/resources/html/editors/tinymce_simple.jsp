@@ -29,6 +29,7 @@ Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
 contentsLanguageId = LocaleUtil.toLanguageId(contentsLocale);
 
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui:input-editor:data");
 String editorName = (String)request.getAttribute("liferay-ui:input-editor:editorName");
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
 String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
@@ -48,14 +49,6 @@ if (Validator.isNotNull(onInitMethod)) {
 boolean resizable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:resizable"));
 boolean showSource = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:showSource"));
 boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
-
-Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui:input-editor:data");
-
-JSONObject editorConfigJSONObject = null;
-
-if (data != null) {
-	editorConfigJSONObject = (JSONObject)data.get("editorConfig");
-}
 %>
 
 <liferay-util:buffer var="editor">
@@ -178,6 +171,15 @@ if (data != null) {
 		},
 
 		initEditor: function() {
+
+			<%
+			JSONObject editorConfigJSONObject = null;
+
+			if (data != null) {
+				editorConfigJSONObject = (JSONObject)data.get("editorConfig");
+			}
+			%>
+
 			var editorConfig = <%= (editorConfigJSONObject != null) ? editorConfigJSONObject.toString() : "{}" %>;
 
 			var defaultConfig = {
