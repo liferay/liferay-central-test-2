@@ -6757,12 +6757,6 @@ public class JournalArticleLocalServiceImpl
 			"article_resource_pk",
 			String.valueOf(article.getResourcePrimKey()));
 
-		String defaultDDMTemplateKey = article.getDDMTemplateKey();
-
-		if (Validator.isNull(ddmTemplateKey)) {
-			ddmTemplateKey = defaultDDMTemplateKey;
-		}
-
 		DDMStructure ddmStructure = article.getDDMStructure();
 
 		tokens.put(
@@ -6774,6 +6768,12 @@ public class JournalArticleLocalServiceImpl
 		// Deprecated token
 
 		tokens.put("structure_id", article.getDDMStructureKey());
+
+		String defaultDDMTemplateKey = article.getDDMTemplateKey();
+
+		if (Validator.isNull(ddmTemplateKey)) {
+			ddmTemplateKey = defaultDDMTemplateKey;
+		}
 
 		Document document = article.getDocument();
 
