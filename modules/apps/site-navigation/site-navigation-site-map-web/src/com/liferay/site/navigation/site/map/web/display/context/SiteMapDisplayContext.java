@@ -39,9 +39,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Juergen Kappler
  */
-public class SitesMapDisplayContext {
+public class SiteMapDisplayContext {
 
-	public SitesMapDisplayContext(HttpServletRequest request)
+	public SiteMapDisplayContext(HttpServletRequest request)
 		throws SettingsException {
 
 		_request = request;

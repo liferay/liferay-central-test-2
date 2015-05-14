@@ -27,7 +27,7 @@ page import="com.liferay.portal.model.Layout" %><%@
 page import="com.liferay.portal.model.LayoutSet" %><%@
 page import="com.liferay.portal.service.LayoutLocalServiceUtil" %><%@
 page import="com.liferay.portal.util.LayoutDescription" %><%@
-page import="com.liferay.site.navigation.site.map.web.display.context.SitesMapDisplayContext" %>
+page import="com.liferay.site.navigation.site.map.web.display.context.SiteMapDisplayContext" %>
 
 <%@ page import="java.util.List" %>
 
@@ -35,7 +35,7 @@ page import="com.liferay.site.navigation.site.map.web.display.context.SitesMapDi
 <portlet:defineObjects />
 
 <%
-SitesMapDisplayContext sitesMapDisplayContext = new SitesMapDisplayContext(request);
+SiteMapDisplayContext siteMapDisplayContext = new SiteMapDisplayContext(request);
 %>
 
 <%@ include file="/init-ext.jsp" %>
