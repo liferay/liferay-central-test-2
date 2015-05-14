@@ -80,7 +80,7 @@ public class TinyMCEEditorConfigContributor
 	protected JSONArray getStyleFormatsJSONArray() {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		String styleFormats[] = {
+		String[] styleFormats = {
 			"{inline: 'p', title: 'Normal'}",
 			"{block: 'h1', title: 'Heading 1'}",
 			"{block: 'h2', title: 'Heading 2'}",
