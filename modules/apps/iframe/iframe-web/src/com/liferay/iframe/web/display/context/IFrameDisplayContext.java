@@ -263,14 +263,14 @@ public class IFrameDisplayContext {
 
 		_iframeBaseSrc = getIframeSrc();
 
-		int lastSlashPos = 0;
+		int index = 0;
 
 		if (_iframeBaseSrc.length() > 6) {
-			lastSlashPos = _iframeBaseSrc.substring(7).lastIndexOf(
+			index = _iframeBaseSrc.substring(7).lastIndexOf(
 				StringPool.SLASH);
 
-			if (lastSlashPos != -1) {
-				_iframeBaseSrc = _iframeBaseSrc.substring(0, lastSlashPos + 8);
+			if (index != -1) {
+				_iframeBaseSrc = _iframeBaseSrc.substring(0, index + 8);
 			}
 		}
 
@@ -315,8 +315,8 @@ public class IFrameDisplayContext {
 
 			if (name.startsWith(_IFRAME_PREFIX)) {
 				iframeVariables.add(
-					name.substring(_IFRAME_PREFIX.length()).concat(
-						StringPool.EQUAL).concat(_request.getParameter(name)));
+					name.substring(_IFRAME_PREFIX.length()) +
+						StringPool.EQUAL + request.getParameter(name));
 			}
 		}
 
