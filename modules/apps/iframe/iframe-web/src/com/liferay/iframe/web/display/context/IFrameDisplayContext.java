@@ -211,7 +211,7 @@ public class IFrameDisplayContext {
 		List<String> hiddenVariables = ListUtil.toList(
 			StringUtil.split(getHiddenVariables(), CharPool.SEMICOLON));
 
-		hiddenVariables.addAll(getIframeVariables());
+		hiddenVariables.addAll(getIFrameVariables());
 
 		for (String hiddenVariable : hiddenVariables) {
 			String key = StringPool.BLANK;
@@ -257,55 +257,55 @@ public class IFrameDisplayContext {
 	}
 
 	public String getIframeBaseSrc() {
-		if (_iframeBaseSrc != null) {
-			return _iframeBaseSrc;
+		if (_iFrameBaseSrc != null) {
+			return _iFrameBaseSrc;
 		}
 
-		_iframeBaseSrc = getIframeSrc();
+		_iFrameBaseSrc = getIframeSrc();
 
 		int index = 0;
 
-		if (_iframeBaseSrc.length() > 6) {
-			index = _iframeBaseSrc.substring(7).lastIndexOf(StringPool.SLASH);
+		if (_iFrameBaseSrc.length() > 6) {
+			index = _iFrameBaseSrc.substring(7).lastIndexOf(StringPool.SLASH);
 
 			if (index != -1) {
-				_iframeBaseSrc = _iframeBaseSrc.substring(0, index + 8);
+				_iFrameBaseSrc = _iFrameBaseSrc.substring(0, index + 8);
 			}
 		}
 
-		return _iframeBaseSrc;
+		return _iFrameBaseSrc;
 	}
 
 	public String getIframeSrc() {
-		if (_iframeSrc != null) {
-			return _iframeSrc;
+		if (_iFrameSrc != null) {
+			return _iFrameSrc;
 		}
 
-		_iframeSrc = StringPool.BLANK;
+		_iFrameSrc = StringPool.BLANK;
 
 		if (isRelative()) {
-			_iframeSrc = _themeDisplay.getPathContext();
+			_iFrameSrc = _themeDisplay.getPathContext();
 		}
 
-		_iframeSrc += (String)_request.getAttribute(IFrameWebKeys.IFRAME_SRC);
+		_iFrameSrc += (String)_request.getAttribute(IFrameWebKeys.IFRAME_SRC);
 
-		if (!ListUtil.isEmpty(getIframeVariables())) {
-			if (_iframeSrc.contains(StringPool.QUESTION)) {
-				_iframeSrc += StringPool.AMPERSAND;
+		if (!ListUtil.isEmpty(getIFrameVariables())) {
+			if (_iFrameSrc.contains(StringPool.QUESTION)) {
+				_iFrameSrc += StringPool.AMPERSAND;
 			}
 			else {
-				_iframeSrc += StringPool.QUESTION;
+				_iFrameSrc += StringPool.QUESTION;
 			}
 
-			_iframeSrc += StringUtil.merge(
-				getIframeVariables(), StringPool.AMPERSAND);
+			_iFrameSrc += StringUtil.merge(
+				getIFrameVariables(), StringPool.AMPERSAND);
 		}
 
-		return _iframeSrc;
+		return _iFrameSrc;
 	}
 
-	public List<String> getIframeVariables() {
-		List<String> iframeVariables = new ArrayList<>();
+	public List<String> getIFrameVariables() {
+		List<String> iFrameVariables = new ArrayList<>();
 
 		Enumeration<String> enu = _request.getParameterNames();
 
@@ -313,13 +313,13 @@ public class IFrameDisplayContext {
 			String name = enu.nextElement();
 
 			if (name.startsWith(_IFRAME_PREFIX)) {
-				iframeVariables.add(
+				iFrameVariables.add(
 					name.substring(_IFRAME_PREFIX.length()) +
 						StringPool.EQUAL + _request.getParameter(name));
 			}
 		}
 
-		return iframeVariables;
+		return iFrameVariables;
 	}
 
 	public String getLongdesc() {
@@ -525,11 +525,11 @@ public class IFrameDisplayContext {
 	private String _heightNormal;
 	private String _hiddenVariables;
 	private String _hspace;
-	private String _iframeBaseSrc;
+	private String _iFrameBaseSrc;
 	private final IFrameConfiguration _iFrameConfiguration;
 	private final IFramePortletInstanceConfiguration
 		_iFramePortletInstanceConfiguration;
-	private String _iframeSrc;
+	private String _iFrameSrc;
 	private String _longdesc;
 	private String _password;
 	private String _passwordField;
