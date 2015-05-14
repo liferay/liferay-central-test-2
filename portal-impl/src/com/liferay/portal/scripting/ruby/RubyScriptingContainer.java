@@ -38,12 +38,12 @@ public class RubyScriptingContainer
 	@Override
 	public <T> T callMethod(
 			Object scriptObject, String methodName, Object[] arguments,
-			Class<T> returnType)
+			Class<T> returnClass)
 		throws ScriptingException {
 
 		try {
 			return _scriptingContainer.callMethod(
-				scriptObject, methodName, arguments, returnType);
+				scriptObject, methodName, arguments, returnClass);
 		}
 		catch (RaiseException re) {
 			RubyException rubyException = re.getException();
@@ -57,14 +57,12 @@ public class RubyScriptingContainer
 
 			sb.append(
 				String.valueOf(rubyException.message.toJava(String.class)));
-
 			sb.append(StringPool.NEW_LINE);
 
 			for (int i = 0; i < rubyArray.size(); i++) {
 				Object object = rubyArray.get(i);
 
 				sb.append(String.valueOf(object));
-
 				sb.append(StringPool.NEW_LINE);
 			}
 
@@ -78,7 +76,7 @@ public class RubyScriptingContainer
 	}
 
 	@Override
-	public org.jruby.embed.ScriptingContainer getRealScriptingContainer() {
+	public org.jruby.embed.ScriptingContainer getWrappedScriptingContainer() {
 		return _scriptingContainer;
 	}
 
@@ -88,8 +86,8 @@ public class RubyScriptingContainer
 	}
 
 	@Override
-	public void setCurrentDirectory(String directory) {
-		_scriptingContainer.setCurrentDirectory(directory);
+	public void setCurrentDirName(String currentDirName) {
+		_scriptingContainer.setCurrentDirectory(currentDirName);
 	}
 
 	private final org.jruby.embed.ScriptingContainer _scriptingContainer;

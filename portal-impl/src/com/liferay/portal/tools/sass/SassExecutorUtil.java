@@ -79,7 +79,7 @@ public class SassExecutorUtil {
 
 			_scriptingContainer = rubyExecutor.getScriptingContainer();
 
-			_scriptingContainer.setCurrentDirectory(
+			_scriptingContainer.setCurrentDirName(
 				System.getProperty("user.dir"));
 
 			String rubyScript = StringUtil.read(

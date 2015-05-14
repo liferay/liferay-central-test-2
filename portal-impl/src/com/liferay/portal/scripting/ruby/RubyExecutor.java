@@ -206,7 +206,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		}
 
 		org.jruby.embed.ScriptingContainer scriptingContainer =
-			_scriptingContainer.getRealScriptingContainer();
+			_scriptingContainer.getWrappedScriptingContainer();
 
 		try {
 			LocalContextProvider localContextProvider =

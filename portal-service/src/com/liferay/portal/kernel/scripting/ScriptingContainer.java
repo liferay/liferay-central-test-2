@@ -21,15 +21,15 @@ public interface ScriptingContainer<S> {
 
 	public <T> T callMethod(
 			Object scriptObject, String methodName, Object[] arguments,
-			Class<T> returnType)
+			Class<T> returnClass)
 		throws ScriptingException;
 
 	public void destroy();
 
-	public S getRealScriptingContainer();
+	public S getWrappedScriptingContainer();
 
 	public Object runScriptlet(String scriptlet);
 
-	public void setCurrentDirectory(String directory);
+	public void setCurrentDirName(String currentDirName);
 
 }
