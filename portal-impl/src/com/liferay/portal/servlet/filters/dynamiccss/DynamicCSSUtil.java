@@ -590,7 +590,7 @@ public class DynamicCSSUtil {
 		"\\/([^\\/]+)-theme\\/", Pattern.CASE_INSENSITIVE);
 	private static final Pattern _portalThemePattern = Pattern.compile(
 		"themes\\/([^\\/]+)\\/css", Pattern.CASE_INSENSITIVE);
-	private static ScriptingContainer _scriptingContainer;
+	private static ScriptingContainer<?> _scriptingContainer;
 	private static Object _scriptObject;
 
 }

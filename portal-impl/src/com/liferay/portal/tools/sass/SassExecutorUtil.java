@@ -189,7 +189,7 @@ public class SassExecutorUtil {
 	private static String _portalCommonDirName;
 	private static final ConcurrentMap<String, SassFile> _sassFileCache =
 		new ConcurrentHashMap<>();
-	private static ScriptingContainer _scriptingContainer;
+	private static ScriptingContainer<?> _scriptingContainer;
 	private static Object _scriptObject;
 
 }

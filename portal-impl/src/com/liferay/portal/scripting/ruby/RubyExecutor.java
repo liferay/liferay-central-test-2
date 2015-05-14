@@ -176,7 +176,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		return LANGUAGE;
 	}
 
-	public ScriptingContainer getScriptingContainer() {
+	public ScriptingContainer<?> getScriptingContainer() {
 		return _scriptingContainer;
 	}
 
