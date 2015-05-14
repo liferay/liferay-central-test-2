@@ -6763,10 +6763,6 @@ public class JournalArticleLocalServiceImpl
 			ddmTemplateKey = defaultDDMTemplateKey;
 		}
 
-		// This token is deprecated
-
-		tokens.put("structure_id", article.getDDMStructureKey());
-
 		DDMStructure ddmStructure = article.getDDMStructure();
 
 		tokens.put(
@@ -6774,6 +6770,10 @@ public class JournalArticleLocalServiceImpl
 			String.valueOf(ddmStructure.getStructureKey()));
 		tokens.put(
 			"ddm_structure_id", String.valueOf(ddmStructure.getStructureId()));
+
+		// This token is deprecated
+
+		tokens.put("structure_id", article.getDDMStructureKey());
 
 		Document document = article.getDocument();
 
