@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.frontend.editors.web.config;
+package com.liferay.frontend.editors.web.editor.config;
 
 import com.liferay.portal.kernel.editor.config.BaseEditorConfigContributor;
 import com.liferay.portal.kernel.editor.config.EditorConfigContributor;
