@@ -50,11 +50,10 @@ public class BaseTinyMCEEditorConfigConfigurator
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("a[name|href|target|title|onclick],");
-		sb.append("img[class|src|border=0|alt|title|hspace|vspace|width|");
-		sb.append("height|align|onmouseover|onmouseout|name|usemap],");
-		sb.append("hr[class|width|size|noshade],font[face|size|color|style],");
-		sb.append("span[class|align|style]");
+		sb.append("a[name|href|target|title|onclick],img[class|src|border=0");
+		sb.append("|alt|title|hspace|vspace|width|height|align|onmouseover");
+		sb.append("|onmouseout|name|usemap],hr[class|width|size|noshade],");
+		sb.append("font[face|size|color|style],span[class|align|style]");
 
 		jsonObject.put("extended_valid_elements", sb.toString());
 
@@ -64,18 +63,18 @@ public class BaseTinyMCEEditorConfigConfigurator
 			"liferay-ui:input-editor:contentsLanguageId");
 
 		jsonObject.put("language", getTinyMCELanguage(contentsLanguageId));
+
 		jsonObject.put("menubar", Boolean.FALSE);
 		jsonObject.put("mode", "textareas");
 		jsonObject.put("relative_urls", Boolean.FALSE);
 		jsonObject.put("remove_script_host", Boolean.FALSE);
 
-		String name =
-			liferayPortletResponse.getNamespace() +
-				GetterUtil.getString(
-					(String)inputEditorTaglibAttributes.get(
-						"liferay-ui:input-editor:name"));
+		String name = GetterUtil.getString(
+			inputEditorTaglibAttributes.get("liferay-ui:input-editor:name"));
 
-		jsonObject.put("selector", "#" + name);
+		jsonObject.put(
+			"selector", "#" + liferayPortletResponse.getNamespace() + name);
+
 		jsonObject.put(
 			"toolbar",
 			"bold italic underline | alignleft aligncenter alignright | " +
