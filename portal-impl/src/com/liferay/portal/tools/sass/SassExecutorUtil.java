@@ -127,7 +127,7 @@ public class SassExecutorUtil {
 		}
 		else {
 			try {
-				return (String)_scriptingContainer.callMethod(
+				return _scriptingContainer.callMethod(
 					_scriptObject, "process",
 					new Object[] {
 						content, _portalCommonDirName, filePath, cssThemePath,

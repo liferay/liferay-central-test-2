@@ -560,7 +560,7 @@ public class DynamicCSSUtil {
 			};
 
 			try {
-				content = (String)_scriptingContainer.callMethod(
+				content = _scriptingContainer.callMethod(
 					_scriptObject, "process", arguments, String.class);
 			}
 			catch (Exception e) {
