@@ -124,29 +124,29 @@ public class TinyMCEEditorConfigContributor
 			currentToolbarSet = "phone";
 		}
 
-		JSONArray currentToolbarJSONArray = toolbarsJSONObject.getJSONArray(
+		JSONArray toolbarJSONArray = toolbarsJSONObject.getJSONArray(
 			currentToolbarSet);
 
-		if (currentToolbarJSONArray == null) {
-			currentToolbarJSONArray = toolbarsJSONObject.getJSONArray("liferay");
+		if (toolbarJSONArray == null) {
+			toolbarJSONArray = toolbarsJSONObject.getJSONArray("liferay");
 		}
 
-		return currentToolbarJSONArray;
+		return toolbarJSONArray;
 	}
 
 	protected JSONArray getToolbarsEmailJSONArray(boolean showSource) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		String firstRowButtons =
-			"fontselect fontsizeselect | forecolor backcolor | " +
-				"bold italic underline strikethrough | " +
-					"alignleft aligncenter alignright alignjustify";
+			"fontselect fontsizeselect | forecolor backcolor | bold italic " +
+				"underline strikethrough | alignleft aligncenter alignright " +
+					"alignjustify";
 
 		jsonArray.put(firstRowButtons);
 
 		String secondRowButtons =
-			"cut copy paste bullist numlist | blockquote | undo redo | " +
-				"link unlink image ";
+			"cut copy paste bullist numlist | blockquote | undo redo | link " +
+				"unlink image ";
 
 		if (showSource) {
 			secondRowButtons += "code ";
@@ -176,13 +176,12 @@ public class TinyMCEEditorConfigContributor
 
 		jsonArray.put(
 			"styleselect fontselect fontsizeselect | forecolor backcolor | " +
-				"bold italic underline strikethrough | " +
-					"alignleft aligncenter alignright alignjustify");
+				"bold italic underline strikethrough | alignleft aligncenter " +
+					"alignright alignjustify");
 
 		String secondRowButtons =
-			"cut copy paste searchreplace bullist numlist | " +
-				"outdent indent blockquote | undo redo | " +
-					"link unlink anchor image media ";
+			"cut copy paste searchreplace bullist numlist | outdent indent " +
+				"blockquote | undo redo | link unlink anchor image media ";
 
 		if (showSource) {
 			secondRowButtons += "code";
@@ -225,9 +224,9 @@ public class TinyMCEEditorConfigContributor
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(
-			"styleselect fontselect fontsizeselect | " +
-				"bold italic underline strikethrough | " +
-					"alignleft aligncenter alignright alignjustify");
+			"styleselect fontselect fontsizeselect | bold italic underline " +
+				"strikethrough | alignleft aligncenter alignright " +
+					"alignjustify");
 
 		String secondRowButtons = "bullist numlist | link unlink image";
 

@@ -48,7 +48,7 @@ public abstract class BaseEditorConfigContributor
 
 		return JSONFactoryUtil.createJSONObject();
 	}
-	
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		BaseEditorConfigContributor.class);
 
