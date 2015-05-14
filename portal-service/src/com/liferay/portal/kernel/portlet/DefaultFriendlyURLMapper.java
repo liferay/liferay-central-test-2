@@ -314,12 +314,10 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 				getPortletId(), instanceId);
 		}
 
-		if (_log.isErrorEnabled() &&
-			!isAllPublicRenderParameters(routeParameters)) {
-
+		if (!isAllPublicRenderParameters(routeParameters)) {
 			_log.error(
 				"Either p_p_id or instanceId must be provided for an " +
-				"instanceable portlet");
+					"instanceable portlet");
 		}
 
 		return null;
