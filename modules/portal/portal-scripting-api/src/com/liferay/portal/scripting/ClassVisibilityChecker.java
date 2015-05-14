@@ -28,18 +28,20 @@ public class ClassVisibilityChecker {
 	public static final String ALL_CLASSES = "all_classes";
 
 	public ClassVisibilityChecker(
-		Set<String> allowedClasses, Set<String> forbiddenClasses) {
+		Set<String> allowedClassNames, Set<String> forbiddenClassNames) {
 
-		_forbiddenClasses = forbiddenClasses;
+		_forbiddenClassNames = forbiddenClassNames;
 
-		if ((allowedClasses != null) && allowedClasses.contains(ALL_CLASSES)) {
+		if ((allowedClassNames != null) &&
+			allowedClassNames.contains(ALL_CLASSES)) {
+
 			_allowAll = true;
 		}
 		else {
 			_allowAll = false;
 		}
 
-		if (_forbiddenClasses.contains(ALL_CLASSES)) {
+		if (_forbiddenClassNames.contains(ALL_CLASSES)) {
 			_denyAll = true;
 		}
 		else {
@@ -49,8 +51,8 @@ public class ClassVisibilityChecker {
 		if (!_allowAll && !_denyAll) {
 			_allowedPatterns = new HashSet<>();
 
-			for (String allowedClass : allowedClasses) {
-				Pattern allowedPattern = Pattern.compile(allowedClass);
+			for (String allowedClassName : allowedClassNames) {
+				Pattern allowedPattern = Pattern.compile(allowedClassName);
 
 				_allowedPatterns.add(allowedPattern);
 			}
@@ -61,7 +63,7 @@ public class ClassVisibilityChecker {
 	}
 
 	public boolean isVisible(String className) {
-		if (_denyAll || _forbiddenClasses.contains(className)) {
+		if (_denyAll || _forbiddenClassNames.contains(className)) {
 			return false;
 		}
 
@@ -83,6 +85,6 @@ public class ClassVisibilityChecker {
 	private final boolean _allowAll;
 	private final Set<Pattern> _allowedPatterns;
 	private final boolean _denyAll;
-	private final Set<String> _forbiddenClasses;
+	private final Set<String> _forbiddenClassNames;
 
 }

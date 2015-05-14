@@ -27,9 +27,9 @@ public class JavaScriptClassVisibilityChecker
 	extends ClassVisibilityChecker implements ClassShutter {
 
 	public JavaScriptClassVisibilityChecker(
-		Set<String> allowedClasses, Set<String> forbiddenClasses) {
+		Set<String> allowedClassNames, Set<String> forbiddenClassNames) {
 
-		super(allowedClasses, forbiddenClasses);
+		super(allowedClassNames, forbiddenClassNames);
 	}
 
 	@Override
