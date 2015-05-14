@@ -385,7 +385,7 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 			PortalCacheConfiguratorSettings portalCacheConfiguratorSettings =
 				registry.getService(serviceReference);
 
-			if (_doReconfig(portalCacheConfiguratorSettings)) {
+			if (_reconfigure(portalCacheConfiguratorSettings)) {
 				return portalCacheConfiguratorSettings;
 			}
 
@@ -397,7 +397,7 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 			ServiceReference<PortalCacheConfiguratorSettings> serviceReference,
 			PortalCacheConfiguratorSettings portalCacheConfiguratorSettings) {
 
-			_doReconfig(portalCacheConfiguratorSettings);
+			_reconfigure(portalCacheConfiguratorSettings);
 		}
 
 		@Override
@@ -406,7 +406,7 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 			PortalCacheConfiguratorSettings portalCacheConfiguratorSettings) {
 		}
 
-		private boolean _doReconfig(
+		private boolean _reconfigure(
 			PortalCacheConfiguratorSettings portalCacheConfiguratorSettings) {
 
 			String portalCacheConfigurationLocation =
@@ -438,7 +438,7 @@ public abstract class AbstractPortalCacheManager<K extends Serializable, V>
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Reconfiguring caches in cache manager " + _name +
-						" using " + url);
+							" using " + url);
 				}
 
 				reconfigureCaches(url);
