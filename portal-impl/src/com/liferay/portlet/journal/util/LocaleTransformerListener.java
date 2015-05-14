@@ -169,14 +169,14 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 			}
 
 			if (!ddmStructure.isFieldTransient(name)) {
-				filterFields(element, ddmStructure, name, defaultLanguageId);
+				filter(element, ddmStructure, name, defaultLanguageId);
 			}
 
 			filterByLocalizability(element, defaultLanguageId, ddmStructure);
 		}
 	}
 
-	protected void filterFields(
+	protected void filter(
 			Element dynamicElementElement, DDMStructure ddmStructure,
 			String name, String defaultLanguageId)
 		throws PortalException {
