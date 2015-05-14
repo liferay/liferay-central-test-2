@@ -94,7 +94,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 			if (allowedClasses != null) {
 				context.setClassShutter(
 					new JavaScriptClassVisibilityChecker(
-						allowedClasses, _forbiddenClasses));
+						allowedClasses, _forbiddenClassNames));
 			}
 
 			compiledScript.exec(context, scriptable);
@@ -145,11 +145,12 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 			Configurable.createConfigurable(
 				JavaScriptExecutorConfiguration.class, properties);
 
-		String[] forbiddenClasses = StringUtil.split(
-			javaScriptExecutorConfiguration.forbiddenClasses(),
+		String[] forbiddenClassNames = StringUtil.split(
+			javaScriptExecutorConfiguration.forbiddenClassNames(),
 			StringPool.COMMA);
 
-		_forbiddenClasses = new HashSet<>(Arrays.asList(forbiddenClasses));
+		_forbiddenClassNames = new HashSet<>(
+			Arrays.asList(forbiddenClassNames));
 	}
 
 	protected Script getCompiledScript(
@@ -198,7 +199,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 	private static final String _CACHE_NAME =
 		JavaScriptExecutor.class.getName();
 
-	private volatile Set<String> _forbiddenClasses;
+	private volatile Set<String> _forbiddenClassNames;
 	private PortalCache<String, Script> _portalCache;
 
 }

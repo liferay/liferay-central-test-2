@@ -26,12 +26,9 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface JavaScriptExecutorConfiguration {
 
 	@Meta.AD(
-		deflt =
-			"com.liferay.portal.kernel.scripting.ScriptingUtil," +
-			"com.liferay.portal.scripting.internal.ScriptingImpl," +
-			"java.lang.System",
+		deflt = "com.liferay.portal.kernel.scripting.ScriptingUtil,com.liferay.portal.scripting.internal.ScriptingImpl,java.lang.System",
 		required = false
 	)
-	public String forbiddenClasses();
+	public String forbiddenClassNames();
 
 }
