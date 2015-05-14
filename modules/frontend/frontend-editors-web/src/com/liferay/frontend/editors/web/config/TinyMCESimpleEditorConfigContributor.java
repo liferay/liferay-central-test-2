@@ -56,17 +56,17 @@ public class TinyMCESimpleEditorConfigContributor
 
 		jsonObject.put("plugins", plugins);
 
-		String rowButtons =
+		String toolbar =
 			"bold italic underline | " +
 				"alignleft aligncenter alignright alignjustify | ";
 
 		if (showSource) {
-			rowButtons += "code ";
+			toolbar += "code ";
 		}
 
-		rowButtons += "preview print";
+		toolbar += "preview print";
 
-		jsonObject.put("toolbar", rowButtons);
+		jsonObject.put("toolbar", toolbar);
 	}
 
 }
