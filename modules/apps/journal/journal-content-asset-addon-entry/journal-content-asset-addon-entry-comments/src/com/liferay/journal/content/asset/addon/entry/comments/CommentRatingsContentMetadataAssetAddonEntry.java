@@ -26,7 +26,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Julio Camarero
  */
 @Component(
-	immediate = true, service = {ContentMetadataAssetAddonEntry.class, CommentRatingsContentMetadataAssetAddonEntry.class}
+	immediate = true,
+	service = {ContentMetadataAssetAddonEntry.class, CommentRatingsContentMetadataAssetAddonEntry.class}
 )
 public class CommentRatingsContentMetadataAssetAddonEntry
 	extends BaseAssetAddonEntry implements ContentMetadataAssetAddonEntry {
