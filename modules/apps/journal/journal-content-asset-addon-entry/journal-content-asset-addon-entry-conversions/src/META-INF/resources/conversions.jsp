@@ -32,15 +32,15 @@
 
 <%@ page import="java.util.ResourceBundle" %>
 
-<liferay-theme:defineObjects />
 <portlet:defineObjects />
 
-<%
-String viewMode = ParamUtil.getString(request, "viewMode");
+<liferay-theme:defineObjects />
 
+<%
 JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
 
 String extension = (String)request.getAttribute("extension");
+String viewMode = ParamUtil.getString(request, "viewMode");
 
 ResourceBundle resourceBundle = ResourceBundle.getBundle("content.Language", locale);
 %>

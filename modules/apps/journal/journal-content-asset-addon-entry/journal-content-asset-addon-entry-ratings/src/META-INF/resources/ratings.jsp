@@ -25,9 +25,9 @@
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 
 <%
-String viewMode = ParamUtil.getString(request, "viewMode");
-
 JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
+
+String viewMode = ParamUtil.getString(request, "viewMode");
 %>
 
 <c:if test="<%= !viewMode.equals(Constants.PRINT) %>">

@@ -36,17 +36,18 @@
 <portlet:defineObjects />
 
 <%
-String viewMode = ParamUtil.getString(request, "viewMode");
-
-JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
 CommentsContentMetadataAssetAddonEntry commentsContentMetadataAssetAddonEntry = (CommentsContentMetadataAssetAddonEntry)request.getAttribute(WebKeys.ASSET_ADDON_ENTRY);
+JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
 
-int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey(), WorkflowConstants.STATUS_APPROVED);
-
-PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+String viewMode = ParamUtil.getString(request, "viewMode");
 %>
 
 <div class="content-metadata-entry content-metadata-ratings">
+
+	<%
+	int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey(), WorkflowConstants.STATUS_APPROVED);
+	%>
+
 	<c:if test="<%= discussionMessagesCount > 0 %>">
 		<liferay-ui:header
 			title="comments"
@@ -58,6 +59,12 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 	<portlet:resourceURL var="discussionPaginationURL">
 		<portlet:param name="invokeTaglibDiscussion" value="<%= Boolean.TRUE.toString() %>" />
 	</portlet:resourceURL>
+
+	<%
+	PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+
+	String currentURL = currentURLObj.toString();
+	%>
 
 	<liferay-ui:discussion
 		className="<%= JournalArticle.class.getName() %>"
