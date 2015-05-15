@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true, service = UserToolAssetAddonEntry.class
 )
-public class DocConvertionUserToolAssetAddonEntry
+public class DOCConvertionUserToolAssetAddonEntry
 	extends BaseConvertionUserToolAssetAddonEntry
 	implements UserToolAssetAddonEntry {
 
