@@ -79,12 +79,12 @@ public class CommentsContentMetadataAssetAddonEntry
 
 	public boolean isCommentsRatingsSelected(HttpServletRequest request) {
 		if (_commentRatingsContentMetadataAssetAddonEntry != null) {
-			List<AssetAddonEntry> selectedEntries =
+			List<AssetAddonEntry> assetAddonEntries =
 				(List<AssetAddonEntry>)request.getAttribute(
 					WebKeys.ASSET_ADDON_ENTRIES);
 
-			if ((selectedEntries != null) &&
-				selectedEntries.contains(
+			if ((assetAddonEntries != null) &&
+				assetAddonEntries.contains(
 					_commentRatingsContentMetadataAssetAddonEntry)) {
 
 				return true;
