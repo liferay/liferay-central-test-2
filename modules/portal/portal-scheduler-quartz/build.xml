@@ -11,12 +11,12 @@
 
     <target name="build-service">
         <build-service
-                service.api.dir="src"
-                service.auto.namespace.tables="false"
-                service.hbm.file.name="module-hbm.xml"
-                service.spring.file.name="module-spring.xml"
-                service.sql.dir="src/META-INF/sql"
-                service.test.dir="test/integration"
-                />
+			service.api.dir="src"
+			service.auto.namespace.tables="false"
+			service.hbm.file.name="module-hbm.xml"
+			service.spring.file.name="module-spring.xml"
+			service.sql.dir="src/META-INF/sql"
+			service.test.dir="test/integration"
+		/>
     </target>
 </project>
