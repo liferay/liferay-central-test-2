@@ -72,16 +72,14 @@ public class SchedulerLifecycle extends BasePortalLifecycle {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(objectClass=" +
-				"com.liferay.portal.scheduler.quartz.internal." +
+			"(objectClass=com.liferay.portal.scheduler.quartz.internal." +
 				"QuartzSchemaManager)");
 
 		serviceDependencyManager.registerDependencies(
 			new Class[] {
 				ClusterMasterExecutor.class, SchedulerEngineHelper.class
 			},
-			new Filter[] {filter}
-		);
+			new Filter[] {filter});
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
