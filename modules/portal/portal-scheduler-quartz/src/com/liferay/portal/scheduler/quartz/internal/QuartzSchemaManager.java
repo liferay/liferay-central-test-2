@@ -85,14 +85,19 @@ public class QuartzSchemaManager {
 	}
 
 	private void populateSchema(Connection con) throws Exception {
-		InputStream is = getClass().getClassLoader().getResourceAsStream(
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		InputStream inputStream = classLoader.getResourceAsStream(
 			"/META-INF/sql/quartz-tables.sql");
 
-		if (is == null) {
-			throw new SystemException("Cannot open quartz sql file");
+		if (inputStream == null) {
+			throw new SystemException(
+				"Unable to read /META-INF/sql/quartz-tables.sql");
 		}
 
-		String template = StringUtil.read(is);
+		String template = StringUtil.read(inputStream);
 
 		DB db = DBFactoryUtil.getDB();
 
