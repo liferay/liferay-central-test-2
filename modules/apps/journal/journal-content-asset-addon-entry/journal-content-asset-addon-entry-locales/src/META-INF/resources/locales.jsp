@@ -20,8 +20,6 @@
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page contentType="text/html; charset=UTF-8" %>
-
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>

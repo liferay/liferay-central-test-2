@@ -18,8 +18,6 @@
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page contentType="text/html; charset=UTF-8" %>
-
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
