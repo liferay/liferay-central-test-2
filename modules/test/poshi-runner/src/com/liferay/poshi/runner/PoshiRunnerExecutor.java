@@ -108,8 +108,9 @@ public class PoshiRunnerExecutor {
 			List<Element> orElements = element.elements();
 
 			for (Element orElement : orElements) {
-				conditionalValue =
-					conditionalValue || evaluateConditionalElement(orElement);
+				if (!conditionalValue) {
+					conditionalValue = evaluateConditionalElement(orElement);
+				}
 
 				if (conditionalValue) {
 					break;
