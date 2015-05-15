@@ -181,17 +181,16 @@ public class EditDiscussionAction extends PortletAction {
 	}
 
 	protected void deleteComment(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String permissionClassName = ParamUtil.getString(
 			actionRequest, "permissionClassName");
 		long permissionClassPK = ParamUtil.getLong(
 			actionRequest, "permissionClassPK");
+		long commentId = ParamUtil.getLong(actionRequest, "commentId");
 		long permissionOwnerId = ParamUtil.getLong(
 			actionRequest, "permissionOwnerId");
-
-		long commentId = ParamUtil.getLong(actionRequest, "commentId");
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		DiscussionPermission discussionPermission =
 			CommentManagerUtil.getDiscussionPermission(
@@ -234,20 +233,18 @@ public class EditDiscussionAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+		long commentId = ParamUtil.getLong(actionRequest, "commentId");
+
 		String permissionClassName = ParamUtil.getString(
 			actionRequest, "permissionClassName");
 		long permissionClassPK = ParamUtil.getLong(
 			actionRequest, "permissionClassPK");
 		long permissionOwnerId = ParamUtil.getLong(
 			actionRequest, "permissionOwnerId");
-
-		long commentId = ParamUtil.getLong(actionRequest, "commentId");
-
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 		long parentCommentId = ParamUtil.getLong(
 			actionRequest, "parentCommentId");
-
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
 
