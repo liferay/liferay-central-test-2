@@ -83,7 +83,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			StringUtil.merge(contentMetadataAssetAddonEntryKeys));
 	}
 
-	protected String[] upgradeMultiValueAssetAddonEntry(
+	protected String[] upgradeMultiValueAssetAddonEntryKeys(
 			String[] assetAddonEntryKeys, PortletPreferences portletPreferences,
 			String preferenceKey, Map<String, String> newPreferenceValues)
 		throws Exception {
@@ -140,7 +140,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		extensions.put("pdf", "enablePDF");
 		extensions.put("txt", "enableTXT");
 
-		userToolAssetAddonEntryKeys = upgradeMultiValueAssetAddonEntry(
+		userToolAssetAddonEntryKeys = upgradeMultiValueAssetAddonEntryKeys(
 			userToolAssetAddonEntryKeys, portletPreferences, "extensions",
 			extensions);
 
