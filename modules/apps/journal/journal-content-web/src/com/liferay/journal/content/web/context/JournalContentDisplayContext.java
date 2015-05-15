@@ -234,7 +234,6 @@ public class JournalContentDisplayContext {
 			ListUtil.filter(
 				ContentMetadataAssetAddonEntryTracker.
 					getContentMetadataAssetAddonEntries(),
-
 				new PredicateFilter<ContentMetadataAssetAddonEntry>() {
 
 					@Override
@@ -256,17 +255,17 @@ public class JournalContentDisplayContext {
 		List<UserToolAssetAddonEntry> userToolAssetAddonEntries =
 			ListUtil.filter(
 				UserToolAssetAddonEntryTracker.getUserToolAssetAddonEntries(),
-			new PredicateFilter<UserToolAssetAddonEntry>() {
-
-				@Override
-				public boolean filter(
-					UserToolAssetAddonEntry userToolAssetAddonEntry) {
-
-					return userToolAssetAddonEntry.isEnabled();
-				}
-
-			});
-
+				new PredicateFilter<UserToolAssetAddonEntry>() {
+	
+					@Override
+					public boolean filter(
+						UserToolAssetAddonEntry userToolAssetAddonEntry) {
+	
+						return userToolAssetAddonEntry.isEnabled();
+					}
+	
+				});
+	
 		return ListUtil.sort(
 			userToolAssetAddonEntries,
 			new PropertyComparator("weight", true, false));
@@ -309,16 +308,16 @@ public class JournalContentDisplayContext {
 
 		_contentMetadataAssetAddonEntries = new ArrayList<>();
 
-		String contentMetadataAssetAddonEntryKeysPref =
+		String contentMetadataAssetAddonEntryKeysKeysString =
 			_portletPreferences.getValue(
 				"contentMetadataAssetAddonEntryKeys", null);
 
-		if (Validator.isNull(contentMetadataAssetAddonEntryKeysPref)) {
+		if (Validator.isNull(contentMetadataAssetAddonEntryKeysKeysString)) {
 			return _contentMetadataAssetAddonEntries;
 		}
 
 		String[] contentMetadataAssetAddonEntryKeys = StringUtil.split(
-			contentMetadataAssetAddonEntryKeysPref);
+			contentMetadataAssetAddonEntryKeysKeysString);
 
 		for (String contentMetadataAssetAddonEntryKey :
 				contentMetadataAssetAddonEntryKeys) {
@@ -350,15 +349,15 @@ public class JournalContentDisplayContext {
 
 		_userToolAssetAddonEntries = new ArrayList<>();
 
-		String userToolAssetAddonEntryKeysPref = _portletPreferences.getValue(
+		String userToolAssetAddonEntryKeysString = _portletPreferences.getValue(
 			"userToolAssetAddonEntryKeys", null);
 
-		if (Validator.isNull(userToolAssetAddonEntryKeysPref)) {
+		if (Validator.isNull(userToolAssetAddonEntryKeysString)) {
 			return _userToolAssetAddonEntries;
 		}
 
 		String[] userToolAssetAddonEntryKeys = StringUtil.split(
-			userToolAssetAddonEntryKeysPref);
+			userToolAssetAddonEntryKeysString);
 
 		for (String userToolAssetAddonEntryKey : userToolAssetAddonEntryKeys) {
 			UserToolAssetAddonEntry userToolAssetAddonEntry =
