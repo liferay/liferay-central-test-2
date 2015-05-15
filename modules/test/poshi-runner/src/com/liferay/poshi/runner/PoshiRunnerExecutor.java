@@ -56,8 +56,9 @@ public class PoshiRunnerExecutor {
 			conditionalValue = true;
 
 			for (Element andElement : andElements) {
-				conditionalValue =
-					conditionalValue && evaluateConditionalElement(andElement);
+				if (conditionalValue) {
+					conditionalValue = evaluateConditionalElement(andElement);
+				}
 
 				if (!conditionalValue) {
 					break;
