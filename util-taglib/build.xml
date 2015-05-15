@@ -42,7 +42,8 @@
 		<compile-java
 			javac.classpathref="project.classpath"
 			javac.destdir="classes"
-			javac.srcdir="src">
+			javac.srcdir="src"
+		>
 			<post-compile>
 				<copy file="classes/META-INF/aui.tld" overwrite="true" tofile="classes/META-INF/liferay-aui.tld" preservelastmodified="true" />
 

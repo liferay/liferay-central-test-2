@@ -25,7 +25,6 @@
 		<attribute name="javac.classpathref" />
 		<attribute name="javac.destdir" />
 		<attribute name="javac.srcdir" />
-
 		<element name="post-compile" optional="true" />
 
 		<sequential>
