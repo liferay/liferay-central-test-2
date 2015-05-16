@@ -992,6 +992,8 @@
 			junit.test.excludes=${junit.test.excludes}
 			liferay.home=${liferay.home}
 			lp.portal.project.dir=${project.dir}
+			microsoft.translator.client.id=${microsoft.translator.client.id}
+			microsoft.translator.client.secret=${microsoft.translator.client.secret}
 			module.framework.base.dir=${liferay.home}/osgi
 			-baselinerepo=${-baselinerepo}
 			-metatype=${-metatype}
