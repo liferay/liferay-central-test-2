@@ -29,7 +29,7 @@
 		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
 		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
  <dependencies>
   <dependency>
    <groupId>log4j</groupId>
@@ -42,6 +42,18 @@
    <artifactId>microsoft-translator-java-api</artifactId>
    <version>0.6.2</version>
    <scope>compile</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.apache.ant</groupId>
+   <artifactId>ant</artifactId>
+   <version>1.9.3</version>
+   <scope>provided</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.apache.maven</groupId>
+   <artifactId>maven-plugin-api</artifactId>
+   <version>3.0.4</version>
+   <scope>provided</scope>
   </dependency>
  </dependencies>
 </project>
