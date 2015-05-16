@@ -54,7 +54,7 @@ public class LangBuilderPlugin implements Plugin<Project> {
 			project, BUILD_LANG_TASK_NAME, BuildLangTask.class);
 
 		buildLangTask.setDescription(
-			"Runs Liferay Lang Builder to build language property files.");
+			"Runs Liferay Lang Builder to translate language property files.");
 
 		return buildLangTask;
 	}
