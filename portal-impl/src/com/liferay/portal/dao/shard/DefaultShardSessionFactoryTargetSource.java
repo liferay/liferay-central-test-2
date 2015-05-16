@@ -14,6 +14,8 @@
 
 package com.liferay.portal.dao.shard;
 
+import com.liferay.portal.kernel.dao.shard.ShardDataSourceTargetSource;
+import com.liferay.portal.kernel.dao.shard.ShardSessionFactoryTargetSource;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 import com.liferay.portal.spring.hibernate.PortalHibernateConfiguration;
 import com.liferay.portal.util.PropsValues;
@@ -31,7 +33,8 @@ import org.springframework.aop.TargetSource;
  * @author Michael Young
  * @author Alexander Chow
  */
-public class ShardSessionFactoryTargetSource implements TargetSource {
+public class DefaultShardSessionFactoryTargetSource
+	implements ShardSessionFactoryTargetSource, TargetSource {
 
 	public void afterPropertiesSet() throws Exception {
 		Map<String, DataSource> dataSources =
@@ -56,7 +59,8 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 		return _sessionFactories;
 	}
 
-	public SessionFactory getSessionFactory() {
+	@Override
+	public Object getSessionFactory() {
 		return _sessionFactory.get();
 	}
 
@@ -79,6 +83,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 	public void releaseTarget(Object target) throws Exception {
 	}
 
+	@Override
 	public void setSessionFactory(String shardName) {
 		_sessionFactory.set(_sessionFactories.get(shardName));
 	}

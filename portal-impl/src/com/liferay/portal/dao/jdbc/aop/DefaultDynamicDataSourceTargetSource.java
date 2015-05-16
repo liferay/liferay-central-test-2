@@ -14,6 +14,8 @@
 
 package com.liferay.portal.dao.jdbc.aop;
 
+import com.liferay.portal.kernel.dao.jdbc.aop.DynamicDataSourceTargetSource;
+import com.liferay.portal.kernel.dao.jdbc.aop.Operation;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -26,7 +28,8 @@ import org.springframework.aop.TargetSource;
 /**
  * @author Michael Young
  */
-public class DynamicDataSourceTargetSource implements TargetSource {
+public class DefaultDynamicDataSourceTargetSource
+	implements DynamicDataSourceTargetSource, TargetSource {
 
 	public Stack<String> getMethodStack() {
 		Stack<String> methodStack = _methodStack.get();
@@ -81,6 +84,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		return false;
 	}
 
+	@Override
 	public String popMethod() {
 		Stack<String> methodStack = getMethodStack();
 
@@ -91,6 +95,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		return method;
 	}
 
+	@Override
 	public void pushMethod(String method) {
 		Stack<String> methodStack = getMethodStack();
 
@@ -101,6 +106,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 	public void releaseTarget(Object target) throws Exception {
 	}
 
+	@Override
 	public void setOperation(Operation operation) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Method stack " + getMethodStack());
@@ -126,7 +132,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		DynamicDataSourceTargetSource.class);
+		DefaultDynamicDataSourceTargetSource.class);
 
 	private static final ThreadLocal<Stack<String>> _methodStack =
 		new ThreadLocal<>();

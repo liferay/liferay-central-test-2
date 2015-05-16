@@ -14,7 +14,7 @@
 
 package com.liferay.portal.scheduler.quartz;
 
-import com.liferay.portal.dao.shard.ShardDataSourceTargetSource;
+import com.liferay.portal.kernel.dao.shard.ShardDataSourceTargetSource;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
@@ -36,8 +36,7 @@ public class QuartzConnectionProvider implements ConnectionProvider {
 
 		try {
 			ShardDataSourceTargetSource shardDataSourceTargetSource =
-				(ShardDataSourceTargetSource)
-					InfrastructureUtil.getShardDataSourceTargetSource();
+				InfrastructureUtil.getShardDataSourceTargetSource();
 
 			if (shardDataSourceTargetSource != null) {
 				shardDataSourceTargetSource.resetDataSource();

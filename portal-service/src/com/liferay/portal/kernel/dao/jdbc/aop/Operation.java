@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.dao.jdbc.aop;
+package com.liferay.portal.kernel.dao.jdbc.aop;
 
 /**
  * @author Michael Young
