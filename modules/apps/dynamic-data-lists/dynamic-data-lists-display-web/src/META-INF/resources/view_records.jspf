@@ -22,7 +22,6 @@
 		emptyResultsMessage="no-forms-entries-were-found"
 		iteratorURL="<%= viewURL %>"
 	>
-
 		<aui:nav-bar>
 			<aui:nav-bar-search>
 				<%@ include file="/search.jspf" %>
