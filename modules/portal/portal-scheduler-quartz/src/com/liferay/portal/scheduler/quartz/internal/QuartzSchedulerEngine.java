@@ -437,9 +437,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				StackTraceElement[] stackTraceElements = re.getStackTrace();
 
 				for (StackTraceElement stackTraceElement : stackTraceElements) {
-					if (stackTraceElement.getClassName().contains(
-							ServerDetector.class.getName())) {
+					String className = stackTraceElement.getClassName();
 
+					if (className.contains(ServerDetector.class.getName())) {
 						if (_log.isInfoEnabled()) {
 							_log.info(re, re);
 						}
