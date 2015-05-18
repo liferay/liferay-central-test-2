@@ -76,13 +76,13 @@ public class CASFilter extends BaseFilter {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			CASConfiguration casCompanyServiceSettings =
+			CASConfiguration casConfiguration =
 				_settingsFactory.getSettings(
 					CASConfiguration.class,
 					new CompanyServiceSettingsLocator(
 						companyId, CASConstants.SERVICE_NAME));
 
-			if (casCompanyServiceSettings.enabled()) {
+			if (casConfiguration.enabled()) {
 				return true;
 			}
 		}
@@ -107,15 +107,15 @@ public class CASFilter extends BaseFilter {
 			return ticketValidator;
 		}
 
-		CASConfiguration casCompanyServiceSettings =
+		CASConfiguration casConfiguration =
 			_settingsFactory.getSettings(
 				CASConfiguration.class,
 				new CompanyServiceSettingsLocator(
 					companyId, CASConstants.SERVICE_NAME));
 
-		String serverName = casCompanyServiceSettings.serverName();
-		String serverUrl = casCompanyServiceSettings.serverURL();
-		String loginUrl = casCompanyServiceSettings.loginURL();
+		String serverName = casConfiguration.serverName();
+		String serverUrl = casConfiguration.serverURL();
+		String loginUrl = casConfiguration.loginURL();
 
 		Cas20ProxyTicketValidator cas20ProxyTicketValidator =
 			new Cas20ProxyTicketValidator(serverUrl);
@@ -144,7 +144,7 @@ public class CASFilter extends BaseFilter {
 
 		long companyId = PortalUtil.getCompanyId(request);
 
-		CASConfiguration casCompanyServiceSettings =
+		CASConfiguration casConfiguration =
 			_settingsFactory.getSettings(
 				CASConfiguration.class,
 				new CompanyServiceSettingsLocator(
@@ -157,7 +157,7 @@ public class CASFilter extends BaseFilter {
 		if (forceLogout != null) {
 			session.removeAttribute(CASWebKeys.CAS_FORCE_LOGOUT);
 
-			String logoutUrl = casCompanyServiceSettings.logoutURL();
+			String logoutUrl = casConfiguration.logoutURL();
 
 			response.sendRedirect(logoutUrl);
 
@@ -169,7 +169,7 @@ public class CASFilter extends BaseFilter {
 
 			session.invalidate();
 
-			String logoutUrl = casCompanyServiceSettings.logoutURL();
+			String logoutUrl = casConfiguration.logoutURL();
 
 			response.sendRedirect(logoutUrl);
 
@@ -184,9 +184,9 @@ public class CASFilter extends BaseFilter {
 				return;
 			}
 
-			String serverName = casCompanyServiceSettings.serverName();
+			String serverName = casConfiguration.serverName();
 
-			String serviceUrl = casCompanyServiceSettings.serviceURL();
+			String serviceUrl = casConfiguration.serviceURL();
 
 			if (Validator.isNull(serviceUrl)) {
 				serviceUrl = CommonUtils.constructServiceUrl(
@@ -196,7 +196,7 @@ public class CASFilter extends BaseFilter {
 			String ticket = ParamUtil.getString(request, "ticket");
 
 			if (Validator.isNull(ticket)) {
-				String loginUrl = casCompanyServiceSettings.loginURL();
+				String loginUrl = casConfiguration.loginURL();
 
 				loginUrl = HttpUtil.addParameter(
 					loginUrl, "service", serviceUrl);
