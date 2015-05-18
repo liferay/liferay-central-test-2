@@ -490,7 +490,7 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	protected byte[] getImageBytes(HttpServletRequest request, Image image)
-		throws NoSuchFileException {
+		throws PortalException {
 
 		byte[] textObj = image.getTextObj();
 
@@ -1207,7 +1207,7 @@ public class WebServerServlet extends HttpServlet {
 	protected void writeImage(
 			Image image, HttpServletRequest request,
 			HttpServletResponse response)
-		throws NoSuchFileException {
+		throws PortalException {
 
 		if (image == null) {
 			return;
