@@ -23,12 +23,12 @@ DDLRecordSet recordSet = ddlDisplayContext.getRecordSet();
 %>
 
 <c:choose>
-	<c:when test="<%= (recordSet == null) %>">
+	<c:when test="<%= recordSet == null %>">
 		<div class="alert alert-info">
 			<liferay-ui:message key="select-an-existing-form-or-add-a-form-to-be-displayed-in-this-application" />
 		</div>
 	</c:when>
-	<c:when test="<%= (ddlDisplayContext.getDisplayDDMTemplateId() > 0) %>">
+	<c:when test="<%= ddlDisplayContext.getDisplayDDMTemplateId() > 0 %>">
 		<%= ddlDisplayContext.getTemplateContent() %>
 	</c:when>
 	<c:otherwise>
