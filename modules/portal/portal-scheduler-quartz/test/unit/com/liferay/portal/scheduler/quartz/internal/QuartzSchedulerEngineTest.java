@@ -234,8 +234,11 @@ public class QuartzSchedulerEngineTest {
 
 		PortalUUID portalUUID = Mockito.mock(PortalUUID.class);
 
-		Mockito.when(portalUUID.generate()).then(
+		Mockito.when(
+			portalUUID.generate()
+		).then(
 			new Answer<String>() {
+
 				@Override
 				public String answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
@@ -246,8 +249,8 @@ public class QuartzSchedulerEngineTest {
 
 					return uuid.toString();
 				}
-			}
 
+			}
 		);
 
 		PortalUUIDUtil portalUUIDUtil = new PortalUUIDUtil();
@@ -256,40 +259,60 @@ public class QuartzSchedulerEngineTest {
 
 		Props props = Mockito.mock(Props.class);
 
-		Mockito.when(props.get(PropsKeys.SCHEDULER_ENABLED)).thenReturn("true");
+		Mockito.when(
+			props.get(PropsKeys.SCHEDULER_ENABLED)
+		).thenReturn(
+			"true"
+		);
 
 		PortletLocalService portletLocalService = Mockito.mock(
 			PortletLocalService.class);
 
 		Mockito.when(
-			portletLocalService.getPortletById(Mockito.anyString())).then(
-				new Answer<Portlet>() {
+			portletLocalService.getPortletById(Mockito.anyString())
+		).then(
+			new Answer<Portlet>() {
 
-					@Override
-					public Portlet answer(InvocationOnMock invocationOnMock)
-						throws Throwable {
+				@Override
+				public Portlet answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
 
-						ServletContext servletContext = Mockito.mock(
-							ServletContext.class);
-						Mockito.when(
-							servletContext.getClassLoader()).thenReturn(
-								Thread.currentThread().getContextClassLoader());
+					ServletContext servletContext = Mockito.mock(
+						ServletContext.class);
 
-						PortletApp portletApp = Mockito.mock(PortletApp.class);
-						Mockito.when(portletApp.getServletContext()).thenReturn(
-							servletContext);
+					Mockito.when(
+						servletContext.getClassLoader()
+					).thenReturn(
+						Thread.currentThread().getContextClassLoader()
+					);
 
-						Portlet portlet = Mockito.mock(Portlet.class);
-						Mockito.when(portlet.getPortletApp()).thenReturn(
-							portletApp);
+					PortletApp portletApp = Mockito.mock(PortletApp.class);
 
-						return portlet;
-					}
+					Mockito.when(
+						portletApp.getServletContext()
+					).thenReturn(
+						servletContext
+					);
 
+					Portlet portlet = Mockito.mock(Portlet.class);
+
+					Mockito.when(
+						portlet.getPortletApp()
+					).thenReturn(
+						portletApp
+					);
+
+					return portlet;
 				}
+
+			}
 		);
 
-		Mockito.when(props.get(PropsKeys.SCHEDULER_ENABLED)).thenReturn("true");
+		Mockito.when(
+			props.get(PropsKeys.SCHEDULER_ENABLED)
+		).thenReturn(
+			"true"
+		);
 
 		_quartzSchedulerEngine = new QuartzSchedulerEngine();
 
