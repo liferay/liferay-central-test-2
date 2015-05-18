@@ -40,6 +40,7 @@ public class LiferayBuildLoggerInstallerTask extends Task {
 
 					if (buildListener.getClass() == DefaultLogger.class) {
 						currentProject.removeBuildListener(buildListener);
+
 						currentProject.addBuildListener(
 							new LiferayBuildLogger(buildListener));
 					}
