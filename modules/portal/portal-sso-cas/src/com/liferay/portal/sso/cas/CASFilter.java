@@ -76,11 +76,10 @@ public class CASFilter extends BaseFilter {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			CASConfiguration casConfiguration =
-				_settingsFactory.getSettings(
-					CASConfiguration.class,
-					new CompanyServiceSettingsLocator(
-						companyId, CASConstants.SERVICE_NAME));
+			CASConfiguration casConfiguration = _settingsFactory.getSettings(
+				CASConfiguration.class,
+				new CompanyServiceSettingsLocator(
+					companyId, CASConstants.SERVICE_NAME));
 
 			if (casConfiguration.enabled()) {
 				return true;
@@ -107,11 +106,10 @@ public class CASFilter extends BaseFilter {
 			return ticketValidator;
 		}
 
-		CASConfiguration casConfiguration =
-			_settingsFactory.getSettings(
-				CASConfiguration.class,
-				new CompanyServiceSettingsLocator(
-					companyId, CASConstants.SERVICE_NAME));
+		CASConfiguration casConfiguration = _settingsFactory.getSettings(
+			CASConfiguration.class,
+			new CompanyServiceSettingsLocator(
+				companyId, CASConstants.SERVICE_NAME));
 
 		String serverName = casConfiguration.serverName();
 		String serverUrl = casConfiguration.serverURL();
@@ -144,11 +142,10 @@ public class CASFilter extends BaseFilter {
 
 		long companyId = PortalUtil.getCompanyId(request);
 
-		CASConfiguration casConfiguration =
-			_settingsFactory.getSettings(
-				CASConfiguration.class,
-				new CompanyServiceSettingsLocator(
-					companyId, CASConstants.SERVICE_NAME));
+		CASConfiguration casConfiguration = _settingsFactory.getSettings(
+			CASConfiguration.class,
+			new CompanyServiceSettingsLocator(
+				companyId, CASConstants.SERVICE_NAME));
 
 		String pathInfo = request.getPathInfo();
 

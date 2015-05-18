@@ -57,7 +57,7 @@ public interface CASConfiguration {
 
 	@Meta.AD(
 		deflt = "https://localhost:8080",
-		description = " Setting server name allows deep linking. See LEP-4423",
+		description = "Setting server name allows deep linking. See LEP-4423.",
 		required = false
 	)
 	public String serverName();
