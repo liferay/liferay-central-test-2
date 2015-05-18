@@ -108,218 +108,15 @@ public class QuartzSchedulerEngineTest {
 
 		PortalClassLoaderUtil.setClassLoader(currentClassLoader);
 
-		_jsonFactory = Mockito.mock(JSONFactory.class);
-
-		Mockito.when(
-			_jsonFactory.deserialize(Mockito.anyString())
-		).then(
-			new Answer<Object>() {
-
-				@Override
-				public Object answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					String base64 = (String)invocationOnMock.getArguments()[0];
-
-					byte[] bytes = Base64.decode(base64);
-
-					ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-					ObjectInputStream ois = new ObjectInputStream(bais);
-
-					return ois.readObject();
-				}
-
-			}
-		);
-
-		Mockito.when(
-			_jsonFactory.serialize(Mockito.anyObject())
-		).then(
-			new Answer<String>() {
-
-				@Override
-				public String answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					Object obj = invocationOnMock.getArguments()[0];
-
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-					ObjectOutputStream oos = new ObjectOutputStream(baos);
-
-					oos.writeObject(obj);
-
-					byte[] bytes = baos.toByteArray();
-
-					oos.close();
-
-					return Base64.encode(bytes);
-				}
-
-			}
-		);
-
-		MessageBus messageBus = Mockito.mock(MessageBus.class);
-
-		Mockito.when(
-			messageBus.getDestination(Matchers.anyString())
-		).then(
-			new Answer<Destination>() {
-
-				@Override
-				public Destination answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					String destinationName =
-						(String)invocationOnMock.getArguments()[0];
-
-					if (!Validator.equals(
-							_synchronousDestination.getName(),
-							destinationName)) {
-
-						throw new IllegalArgumentException(
-							"Invalid destination: " + destinationName);
-					}
-
-					return _synchronousDestination;
-				}
-
-			}
-		);
-
-		Mockito.when(
-			messageBus.registerMessageListener(
-				Matchers.anyString(), Matchers.any(MessageListener.class))
-		).then(
-			new Answer<Boolean>() {
-
-				@Override
-				public Boolean answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					_synchronousDestination.register(
-						(MessageListener)invocationOnMock.getArguments()[1]);
-
-					return true;
-				}
-
-			}
-		);
-
-		Mockito.when(
-			messageBus.unregisterMessageListener(
-				Matchers.anyString(), Matchers.any(MessageListener.class))
-		).then(
-			new Answer<Boolean>() {
-
-				@Override
-				public Boolean answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					_synchronousDestination.unregister(
-						(MessageListener)invocationOnMock.getArguments()[1]);
-
-					return true;
-				}
-
-			}
-		);
-
-		_synchronousDestination = new SynchronousDestination();
-
-		_synchronousDestination.setName(_TEST_DESTINATION_NAME);
-
-		messageBus.addDestination(_synchronousDestination);
-
-		PortalUUID portalUUID = Mockito.mock(PortalUUID.class);
-
-		Mockito.when(
-			portalUUID.generate()
-		).then(
-			new Answer<String>() {
-
-				@Override
-				public String answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					UUID uuid = new UUID(
-						SecureRandomUtil.nextLong(),
-						SecureRandomUtil.nextLong());
-
-					return uuid.toString();
-				}
-
-			}
-		);
-
-		PortalUUIDUtil portalUUIDUtil = new PortalUUIDUtil();
-
-		portalUUIDUtil.setPortalUUID(portalUUID);
-
-		Props props = Mockito.mock(Props.class);
-
-		Mockito.when(
-			props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn(
-			"true"
-		);
-
-		PortletLocalService portletLocalService = Mockito.mock(
-			PortletLocalService.class);
-
-		Mockito.when(
-			portletLocalService.getPortletById(Mockito.anyString())
-		).then(
-			new Answer<Portlet>() {
-
-				@Override
-				public Portlet answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					ServletContext servletContext = Mockito.mock(
-						ServletContext.class);
-
-					Mockito.when(
-						servletContext.getClassLoader()
-					).thenReturn(
-						Thread.currentThread().getContextClassLoader()
-					);
-
-					PortletApp portletApp = Mockito.mock(PortletApp.class);
-
-					Mockito.when(
-						portletApp.getServletContext()
-					).thenReturn(
-						servletContext
-					);
-
-					Portlet portlet = Mockito.mock(Portlet.class);
-
-					Mockito.when(
-						portlet.getPortletApp()
-					).thenReturn(
-						portletApp
-					);
-
-					return portlet;
-				}
-
-			}
-		);
-
-		Mockito.when(
-			props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn(
-			"true"
-		);
+		setUpPortalUUIDUtil();
 
 		_quartzSchedulerEngine = new QuartzSchedulerEngine();
 
-		_quartzSchedulerEngine.setJsonFactory(_jsonFactory);
-		_quartzSchedulerEngine.setMessageBus(messageBus);
-		_quartzSchedulerEngine.setPortletLocalService(portletLocalService);
-		_quartzSchedulerEngine.setProps(props);
+		_quartzSchedulerEngine.setJsonFactory(setUpJSONFactory());
+		_quartzSchedulerEngine.setMessageBus(setUpMessageBus());
+		_quartzSchedulerEngine.setPortletLocalService(
+			setUpPortletLocalService());
+		_quartzSchedulerEngine.setProps(setUpProps());
 
 		ReflectionTestUtil.setFieldValue(
 			_quartzSchedulerEngine, "_memoryScheduler",
@@ -549,7 +346,7 @@ public class QuartzSchedulerEngineTest {
 				_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+			assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 		}
 
 		_quartzSchedulerEngine.pause(
@@ -559,7 +356,7 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			_assertTriggerState(schedulerResponse, TriggerState.PAUSED);
+			assertTriggerState(schedulerResponse, TriggerState.PAUSED);
 		}
 
 		_quartzSchedulerEngine.resume(
@@ -569,7 +366,7 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+			assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 		}
 	}
 
@@ -580,7 +377,7 @@ public class QuartzSchedulerEngineTest {
 				_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
 				StorageType.PERSISTED);
 
-		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+		assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 
 		_quartzSchedulerEngine.pause(
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
@@ -590,7 +387,7 @@ public class QuartzSchedulerEngineTest {
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
 			StorageType.PERSISTED);
 
-		_assertTriggerState(schedulerResponse, TriggerState.PAUSED);
+		assertTriggerState(schedulerResponse, TriggerState.PAUSED);
 
 		_quartzSchedulerEngine.resume(
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
@@ -600,7 +397,7 @@ public class QuartzSchedulerEngineTest {
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
 			StorageType.PERSISTED);
 
-		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+		assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 	}
 
 	@Test
@@ -726,7 +523,7 @@ public class QuartzSchedulerEngineTest {
 			_MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			_assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
+			assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
 		}
 
 		// Unschedule persisted job
@@ -735,7 +532,7 @@ public class QuartzSchedulerEngineTest {
 			_PERSISTED_TEST_GROUP_NAME, StorageType.PERSISTED);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+			assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 		}
 
 		_quartzSchedulerEngine.unschedule(
@@ -745,7 +542,7 @@ public class QuartzSchedulerEngineTest {
 			_PERSISTED_TEST_GROUP_NAME, StorageType.PERSISTED);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			_assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
+			assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
 		}
 	}
 
@@ -758,7 +555,7 @@ public class QuartzSchedulerEngineTest {
 			_quartzSchedulerEngine.getScheduledJob(
 				_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
-		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+		assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 
 		_quartzSchedulerEngine.unschedule(
 			_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
@@ -766,7 +563,7 @@ public class QuartzSchedulerEngineTest {
 		schedulerResponse = _quartzSchedulerEngine.getScheduledJob(
 			_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
-		_assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
+		assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
 
 		// Unschedule persisted job
 
@@ -774,7 +571,7 @@ public class QuartzSchedulerEngineTest {
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
 			StorageType.PERSISTED);
 
-		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+		assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 
 		_quartzSchedulerEngine.unschedule(
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
@@ -784,7 +581,7 @@ public class QuartzSchedulerEngineTest {
 			_TEST_JOB_NAME_0, _PERSISTED_TEST_GROUP_NAME,
 			StorageType.PERSISTED);
 
-		_assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
+		assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
 	}
 
 	@Test
@@ -811,7 +608,7 @@ public class QuartzSchedulerEngineTest {
 			_quartzSchedulerEngine.getScheduledJob(
 				testJobName, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
-		_assertTriggerState(schedulerResponse, TriggerState.NORMAL);
+		assertTriggerState(schedulerResponse, TriggerState.NORMAL);
 		Assert.assertEquals(
 			1, _synchronousDestination.getMessageListenerCount());
 
@@ -821,7 +618,7 @@ public class QuartzSchedulerEngineTest {
 		schedulerResponse = _quartzSchedulerEngine.getScheduledJob(
 			testJobName, _MEMORY_TEST_GROUP_NAME, StorageType.MEMORY);
 
-		_assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
+		assertTriggerState(schedulerResponse, TriggerState.UNSCHEDULED);
 		Assert.assertEquals(
 			0, _synchronousDestination.getMessageListenerCount());
 	}
@@ -912,7 +709,7 @@ public class QuartzSchedulerEngineTest {
 
 	}
 
-	private void _assertTriggerState(
+	protected void assertTriggerState(
 		SchedulerResponse schedulerResponse,
 		TriggerState expectedTriggerState) {
 
@@ -923,6 +720,226 @@ public class QuartzSchedulerEngineTest {
 		TriggerState triggerState = jobState.getTriggerState();
 
 		Assert.assertEquals(expectedTriggerState, triggerState);
+	}
+
+	protected JSONFactory setUpJSONFactory() {
+		_jsonFactory = Mockito.mock(JSONFactory.class);
+
+		Mockito.when(
+			_jsonFactory.deserialize(Mockito.anyString())
+		).then(
+			new Answer<Object>() {
+
+				@Override
+				public Object answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					String base64 = (String)invocationOnMock.getArguments()[0];
+
+					byte[] bytes = Base64.decode(base64);
+
+					ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+
+					ObjectInputStream ois = new ObjectInputStream(bais);
+
+					return ois.readObject();
+				}
+
+			}
+		);
+
+		Mockito.when(
+			_jsonFactory.serialize(Mockito.anyObject())
+		).then(
+			new Answer<String>() {
+
+				@Override
+				public String answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					Object obj = invocationOnMock.getArguments()[0];
+
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+					ObjectOutputStream oos = new ObjectOutputStream(baos);
+
+					oos.writeObject(obj);
+
+					byte[] bytes = baos.toByteArray();
+
+					oos.close();
+
+					return Base64.encode(bytes);
+				}
+
+			}
+		);
+
+		return _jsonFactory;
+	}
+
+	protected MessageBus setUpMessageBus() {
+		MessageBus messageBus = Mockito.mock(MessageBus.class);
+
+		_synchronousDestination = new SynchronousDestination();
+
+		_synchronousDestination.setName(_TEST_DESTINATION_NAME);
+
+		messageBus.addDestination(_synchronousDestination);
+
+		Mockito.when(
+			messageBus.getDestination(Matchers.anyString())
+		).then(
+			new Answer<Destination>() {
+
+				@Override
+				public Destination answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					String destinationName =
+						(String)invocationOnMock.getArguments()[0];
+
+					if (!Validator.equals(
+							_synchronousDestination.getName(),
+							destinationName)) {
+
+						throw new IllegalArgumentException(
+							"Invalid destination: " + destinationName);
+					}
+
+					return _synchronousDestination;
+				}
+
+			}
+		);
+
+		Mockito.when(
+			messageBus.registerMessageListener(
+				Matchers.anyString(), Matchers.any(MessageListener.class))
+		).then(
+			new Answer<Boolean>() {
+
+				@Override
+				public Boolean answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					_synchronousDestination.register(
+						(MessageListener)invocationOnMock.getArguments()[1]);
+
+					return true;
+				}
+
+			}
+		);
+
+		Mockito.when(
+			messageBus.unregisterMessageListener(
+				Matchers.anyString(), Matchers.any(MessageListener.class))
+		).then(
+			new Answer<Boolean>() {
+
+				@Override
+				public Boolean answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					_synchronousDestination.unregister(
+						(MessageListener)invocationOnMock.getArguments()[1]);
+
+					return true;
+				}
+
+			}
+		);
+
+		return messageBus;
+	}
+
+	protected void setUpPortalUUIDUtil() {
+		PortalUUIDUtil portalUUIDUtil = new PortalUUIDUtil();
+
+		PortalUUID portalUUID = Mockito.mock(PortalUUID.class);
+
+		Mockito.when(
+			portalUUID.generate()
+		).then(
+			new Answer<String>() {
+
+				@Override
+				public String answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					UUID uuid = new UUID(
+						SecureRandomUtil.nextLong(),
+						SecureRandomUtil.nextLong());
+
+					return uuid.toString();
+				}
+
+			}
+		);
+
+		portalUUIDUtil.setPortalUUID(portalUUID);
+	}
+
+	protected PortletLocalService setUpPortletLocalService() {
+		PortletLocalService portletLocalService = Mockito.mock(
+			PortletLocalService.class);
+
+		Mockito.when(
+			portletLocalService.getPortletById(Mockito.anyString())
+		).then(
+			new Answer<Portlet>() {
+
+				@Override
+				public Portlet answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					Portlet portlet = Mockito.mock(Portlet.class);
+
+					PortletApp portletApp = Mockito.mock(PortletApp.class);
+
+					ServletContext servletContext = Mockito.mock(
+						ServletContext.class);
+
+					Thread currentThread = Thread.currentThread();
+
+					Mockito.when(
+						servletContext.getClassLoader()
+					).thenReturn(
+						currentThread.getContextClassLoader()
+					);
+
+					Mockito.when(
+						portletApp.getServletContext()
+					).thenReturn(
+						servletContext
+					);
+
+					Mockito.when(
+						portlet.getPortletApp()
+					).thenReturn(
+						portletApp
+					);
+
+					return portlet;
+				}
+
+			}
+		);
+
+		return portletLocalService;
+	}
+
+	protected Props setUpProps() {
+		Props props = Mockito.mock(Props.class);
+
+		Mockito.when(
+			props.get(PropsKeys.SCHEDULER_ENABLED)
+		).thenReturn(
+			"true"
+		);
+
+		return props;
 	}
 
 	private static final long _DEFAULT_INTERVAL = 10000;
