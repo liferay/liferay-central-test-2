@@ -130,8 +130,7 @@ public class JournalArticleIndexVersionsTest {
 	@Test
 	public void testExpireAllArticleVersions() throws Exception {
 		long initialSearchCount = searchCount(true);
-
-		long initialNonHeadSearchCount = searchCount(false);
+		long initialNonheadSearchCount = searchCount(false);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
@@ -148,8 +147,7 @@ public class JournalArticleIndexVersionsTest {
 		JournalTestUtil.expireArticle(_group.getGroupId(), updateArticle);
 
 		Assert.assertEquals(initialSearchCount, searchCount(true));
-
-		Assert.assertEquals(initialNonHeadSearchCount + 1, searchCount(false));
+		Assert.assertEquals(initialNonheadSearchCount + 1, searchCount(false));
 	}
 
 	@Test
@@ -214,9 +212,9 @@ public class JournalArticleIndexVersionsTest {
 			_group.getGroupId());
 
 		if (!head) {
-			searchContext.setAttribute("head", Boolean.FALSE);
 			searchContext.setAttribute(
 				Field.STATUS, WorkflowConstants.STATUS_ANY);
+			searchContext.setAttribute("head", Boolean.FALSE);
 		}
 
 		searchContext.setGroupIds(new long[] {_group.getGroupId()});
