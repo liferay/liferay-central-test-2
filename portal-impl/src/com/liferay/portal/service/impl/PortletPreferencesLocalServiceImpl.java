@@ -71,10 +71,10 @@ public class PortletPreferencesLocalServiceImpl
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Adding portletPreferences {companyId=" + companyId +
-					", ownerId=" + ownerId + ", ownerType=" + ownerType +
-						", plid=" + plid + ", portletId=" + portletId +
-							", defaultPreferences=" + defaultPreferences + "}");
+				"Add {companyId=" + companyId + ", ownerId=" + ownerId +
+					", ownerType=" + ownerType + ", plid=" + plid +
+						", portletId=" + portletId + ", defaultPreferences=" +
+							defaultPreferences + "}");
 		}
 
 		try {
@@ -113,9 +113,8 @@ public class PortletPreferencesLocalServiceImpl
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"delete portletPreferences {ownerId=" + ownerId +
-					", ownerType=" + ownerType + ", plid=" + plid +
-						", portletId=" + portletId + "}");
+				"Delete {ownerId=" + ownerId + ", ownerType=" + ownerType +
+					", plid=" + plid + ", portletId=" + portletId + "}");
 		}
 
 		portletPreferencesPersistence.removeByO_O_P_P(
@@ -125,7 +124,7 @@ public class PortletPreferencesLocalServiceImpl
 	@Override
 	public void deletePortletPreferencesByPlid(long plid) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("delete portletPreferences {plid=" + plid + "}");
+			_log.debug("Delete {plid=" + plid + "}");
 		}
 
 		portletPreferencesPersistence.removeByPlid(plid);
@@ -332,9 +331,9 @@ public class PortletPreferencesLocalServiceImpl
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"update portletPreferences {ownerId=" + ownerId +
-					", ownerType=" + ownerType + ", plid=" + plid +
-						", portletId=" + portletId + ", xml=" + xml + "}");
+				"Update {ownerId=" + ownerId + ", ownerType=" + ownerType +
+					", plid=" + plid + ", portletId=" + portletId + ", xml=" +
+						xml + "}");
 		}
 
 		PortletPreferences portletPreferences =
