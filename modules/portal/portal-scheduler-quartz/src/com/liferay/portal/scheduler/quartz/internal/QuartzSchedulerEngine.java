@@ -654,7 +654,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		String messageJSON = (String)jobDataMap.get(SchedulerEngine.MESSAGE);
 
 		if (_jsonFactory == null) {
-			throw new IllegalStateException("JSON Factory not initialized");
+			throw new IllegalStateException("JSON factory not initialized");
 		}
 
 		return (Message)_jsonFactory.deserialize(messageJSON);
@@ -1008,7 +1008,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		if (_portletLocalService == null) {
 			throw new IllegalStateException(
-				"PortletLocalService not properly initialiezd");
+				"Portlet local service not initialized");
 		}
 
 		String messageListenerClassName = message.getString(
@@ -1065,7 +1065,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		throws Exception {
 
 		if (_jsonFactory == null) {
-			throw new IllegalStateException("JSON Factory not initialized");
+			throw new IllegalStateException("JSON factory not initialized");
 		}
 
 		try {
