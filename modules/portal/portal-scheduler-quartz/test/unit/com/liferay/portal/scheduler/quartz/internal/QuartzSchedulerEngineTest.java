@@ -110,7 +110,9 @@ public class QuartzSchedulerEngineTest {
 
 		_jsonFactory = Mockito.mock(JSONFactory.class);
 
-		Mockito.when(_jsonFactory.serialize(Mockito.anyObject())).then(
+		Mockito.when(
+			_jsonFactory.serialize(Mockito.anyObject())
+		).then(
 			new Answer<String>() {
 
 				@Override
@@ -131,10 +133,13 @@ public class QuartzSchedulerEngineTest {
 
 					return Base64.encode(bytes);
 				}
+
 			}
 		);
 
-		Mockito.when(_jsonFactory.deserialize(Mockito.anyString())).then(
+		Mockito.when(
+			_jsonFactory.deserialize(Mockito.anyString())
+		).then(
 			new Answer<Object>() {
 
 				@Override
@@ -151,6 +156,7 @@ public class QuartzSchedulerEngineTest {
 
 					return ois.readObject();
 				}
+
 			}
 		);
 
