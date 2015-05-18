@@ -111,6 +111,29 @@ public class QuartzSchedulerEngineTest {
 		_jsonFactory = Mockito.mock(JSONFactory.class);
 
 		Mockito.when(
+			_jsonFactory.deserialize(Mockito.anyString())
+		).then(
+			new Answer<Object>() {
+
+				@Override
+				public Object answer(InvocationOnMock invocationOnMock)
+					throws Throwable {
+
+					String base64 = (String)invocationOnMock.getArguments()[0];
+
+					byte[] bytes = Base64.decode(base64);
+
+					ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+
+					ObjectInputStream ois = new ObjectInputStream(bais);
+
+					return ois.readObject();
+				}
+
+			}
+		);
+
+		Mockito.when(
 			_jsonFactory.serialize(Mockito.anyObject())
 		).then(
 			new Answer<String>() {
@@ -132,29 +155,6 @@ public class QuartzSchedulerEngineTest {
 					oos.close();
 
 					return Base64.encode(bytes);
-				}
-
-			}
-		);
-
-		Mockito.when(
-			_jsonFactory.deserialize(Mockito.anyString())
-		).then(
-			new Answer<Object>() {
-
-				@Override
-				public Object answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
-
-					String base64 = (String)invocationOnMock.getArguments()[0];
-
-					byte[] bytes = Base64.decode(base64);
-
-					ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-					ObjectInputStream ois = new ObjectInputStream(bais);
-
-					return ois.readObject();
 				}
 
 			}
