@@ -1217,12 +1217,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		Date now = new Date();
-
 		thread.setStatus(status);
 		thread.setStatusByUserId(user.getUserId());
 		thread.setStatusByUserName(user.getFullName());
-		thread.setStatusDate(now);
+		thread.setStatusDate(new Date());
 
 		mbThreadPersistence.update(thread);
 
