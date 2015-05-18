@@ -443,7 +443,7 @@ public class JournalArticleLocalServiceImpl
 				classPK, content, serviceContext);
 		}
 		else {
-			updateDDMLinks(groupId, id, ddmStructureKey, ddmTemplateKey, true);
+			updateDDMLinks(id, groupId, ddmStructureKey, ddmTemplateKey, true);
 		}
 
 		// Message boards
@@ -878,7 +878,7 @@ public class JournalArticleLocalServiceImpl
 		// Dynamic data mapping
 
 		updateDDMLinks(
-			groupId, id, oldArticle.getDDMStructureKey(),
+			id, groupId, oldArticle.getDDMStructureKey(),
 			oldArticle.getDDMTemplateKey(), true);
 
 		return newArticle;
@@ -5285,7 +5285,7 @@ public class JournalArticleLocalServiceImpl
 		}
 		else {
 			updateDDMLinks(
-				groupId, article.getId(), ddmStructureKey, ddmTemplateKey,
+				article.getId(), groupId, ddmStructureKey, ddmTemplateKey,
 				addNewVersion);
 		}
 
@@ -5499,7 +5499,7 @@ public class JournalArticleLocalServiceImpl
 			// Dynamic data mapping
 
 			updateDDMLinks(
-				groupId, id, oldArticle.getDDMStructureKey(),
+				id, groupId, oldArticle.getDDMStructureKey(),
 				oldArticle.getDDMTemplateKey(), true);
 		}
 		else {
@@ -7397,7 +7397,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void updateDDMLinks(
-			long groupId, long id, String ddmStructureKey,
+			long id, long groupId, String ddmStructureKey,
 			String ddmTemplateKey, boolean incrementVersion)
 		throws PortalException {
 
