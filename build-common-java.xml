@@ -101,8 +101,8 @@
 	</macrodef>
 
 	<macrodef name="jar-marco-cmd">
-		<element name="jar-pre" optional="true" />
 		<element name="jar-post" optional="true" />
+		<element name="jar-pre" optional="true" />
 
 		<sequential>
 			<if>
