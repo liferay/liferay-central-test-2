@@ -41,9 +41,10 @@ public class WebDAVUtilTest {
 
 	@Test
 	public void testGetStorage() {
-		WebDAVStorage webDAVStorage = WebDAVUtil.getStorage("WebDAVUtilTest");
+		WebDAVStorage webDAVStorage = WebDAVUtil.getStorage(
+			TestWebDAVStorage.TOKEN);
 
-		Class clazz = webDAVStorage.getClass();
+		Class<?> clazz = webDAVStorage.getClass();
 
 		Assert.assertEquals(TestWebDAVStorage.class.getName(), clazz.getName());
 	}
@@ -52,7 +53,7 @@ public class WebDAVUtilTest {
 	public void testGetStorageTokens() {
 		Collection<String> storageTokens = WebDAVUtil.getStorageTokens();
 
-		Assert.assertTrue(storageTokens.contains("WebDAVUtilTest"));
+		Assert.assertTrue(storageTokens.contains(TestWebDAVStorage.TOKEN));
 	}
 
 }

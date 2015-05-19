@@ -34,6 +34,8 @@ import org.osgi.service.component.annotations.Component;
 )
 public class TestWebDAVStorage implements WebDAVStorage {
 
+	public static final String TOKEN = "TOKEN";
+
 	@Override
 	public int copyCollectionResource(
 		WebDAVRequest webDAVRequest, Resource resource, String destination,
@@ -77,7 +79,7 @@ public class TestWebDAVStorage implements WebDAVStorage {
 
 	@Override
 	public String getToken() {
-		return "WebDAVUtilTest";
+		return TOKEN;
 	}
 
 	@Override
