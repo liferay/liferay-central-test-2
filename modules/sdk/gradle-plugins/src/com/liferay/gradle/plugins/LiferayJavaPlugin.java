@@ -164,8 +164,8 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 	}
 
 	protected void addConfigurations(Project project) {
-		addConfigurationProvided(project);
 		addConfigurationPortalWeb(project);
+		addConfigurationProvided(project);
 	}
 
 	protected void addDependenciesPortalWeb(Project project) {
