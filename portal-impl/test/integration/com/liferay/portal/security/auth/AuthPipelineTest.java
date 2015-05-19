@@ -52,60 +52,44 @@ public class AuthPipelineTest {
 
 	@Test
 	public void testAuthenticateByEmailAddress() throws AuthException {
-		long companyId = 0;
-		String emailAddress = RandomTestUtil.randomString();
-		String key = "auth.pipeline.pre";
-		String password = RandomTestUtil.randomString();
-
 		_atomicState.reset();
 
 		AuthPipeline.authenticateByEmailAddress(
-			key, companyId, emailAddress, password, null, null);
+			"auth.pipeline.pre", 0, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), null, null);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
 	public void testAuthenticateByScreenName() throws AuthException {
-		long companyId = 0;
-		String key = "auth.pipeline.pre";
-		String password = RandomTestUtil.randomString();
-		String screenName = RandomTestUtil.randomString();
-
 		_atomicState.reset();
 
 		AuthPipeline.authenticateByScreenName(
-			key, companyId, screenName, password, null, null);
+			"auth.pipeline.pre", 0, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), null, null);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
 	public void testAuthenticateByUserId() throws AuthException {
-		long companyId = 0;
-		String key = "auth.pipeline.pre";
-		String password = RandomTestUtil.randomString();
-		long userId = RandomTestUtil.randomLong();
-
 		_atomicState.reset();
 
 		AuthPipeline.authenticateByUserId(
-			key, companyId, userId, password, null, null);
+			"auth.pipeline.pre", 0, RandomTestUtil.randomLong(),
+			RandomTestUtil.randomString(), null, null);
 
 		Assert.assertTrue(_atomicState.isSet());
 	}
 
 	@Test
 	public void testOnFailureByScreenName() {
-		long companyId = 0;
-		String key = "auth.failure";
-		String screenName = RandomTestUtil.randomString();
-
 		_atomicState.reset();
 
 		try {
 			AuthPipeline.onFailureByScreenName(
-				key, companyId, screenName, null, null);
+				"auth.failure", 0, RandomTestUtil.randomString(), null, null);
 		}
 		catch (AuthException ae) {
 		}
@@ -115,14 +99,11 @@ public class AuthPipelineTest {
 
 	@Test
 	public void testOnFailureByUserId() {
-		long companyId = 0;
-		String key = "auth.failure";
-		long userId = RandomTestUtil.randomLong();
-
 		_atomicState.reset();
 
 		try {
-			AuthPipeline.onFailureByUserId(key, companyId, userId, null, null);
+			AuthPipeline.onFailureByUserId(
+				"auth.failure", 0, RandomTestUtil.randomLong(), null, null);
 		}
 		catch (AuthException ae) {
 		}
@@ -132,15 +113,12 @@ public class AuthPipelineTest {
 
 	@Test
 	public void testOnMaxFailuresByEmailAddress() {
-		long companyId = 0;
-		String emailAddress = RandomTestUtil.randomString();
-		String key = "auth.max.failures";
-
 		_atomicState.reset();
 
 		try {
 			AuthPipeline.onMaxFailuresByEmailAddress(
-				key, companyId, emailAddress, null, null);
+				"auth.max.failures", 0, RandomTestUtil.randomString(), null,
+				null);
 		}
 		catch (AuthException ae) {
 		}
@@ -150,15 +128,12 @@ public class AuthPipelineTest {
 
 	@Test
 	public void testOnMaxFailuresByScreenName() {
-		long companyId = 0;
-		String key = "auth.max.failures";
-		String screenName = RandomTestUtil.randomString();
-
 		_atomicState.reset();
 
 		try {
 			AuthPipeline.onMaxFailuresByScreenName(
-				key, companyId, screenName, null, null);
+				"auth.max.failures", 0, RandomTestUtil.randomString(), null,
+				null);
 		}
 		catch (AuthException ae) {
 		}
@@ -168,15 +143,12 @@ public class AuthPipelineTest {
 
 	@Test
 	public void testOnMaxFailuresByUserId() {
-		long companyId = 0;
-		String key = "auth.max.failures";
-		long userId = RandomTestUtil.randomLong();
-
 		_atomicState.reset();
 
 		try {
 			AuthPipeline.onMaxFailuresByUserId(
-				key, companyId, userId, null, null);
+				"auth.max.failures", 0, RandomTestUtil.randomLong(), null,
+				null);
 		}
 		catch (AuthException ae) {
 		}
