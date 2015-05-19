@@ -1317,8 +1317,8 @@
 				buildNumber =
 					(
 						SELECT MAX(buildNumber)
-						FROM ServiceComponent scTemp
-						WHERE ServiceComponent.buildNamespace = scTemp.buildNamespace
+						FROM ServiceComponent tempServiceComponent
+						WHERE ServiceComponent.buildNamespace = tempServiceComponent.buildNamespace
 					)
 			ORDER BY
 				buildNamespace DESC
