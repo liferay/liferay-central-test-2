@@ -122,7 +122,7 @@ public class JournalArticleServiceTest {
 	public void testAddArticleWithNotEmptyRequiredHTMLField() throws Exception {
 		Map<String, String> requiredFields = new HashMap<>();
 
-		requiredFields.put("HTML2030", "<p>Hello World!</p>");
+		requiredFields.put("HTML2030", "<p>Hello.</p>");
 
 		testAddArticleRequiredFields(
 			"test-ddm-structure-html-required-field.xml",
