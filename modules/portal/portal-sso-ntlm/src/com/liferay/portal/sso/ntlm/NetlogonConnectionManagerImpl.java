@@ -95,32 +95,11 @@ public class NetlogonConnectionManagerImpl
 			NetlogonCredentialUtil.computeNetlogonCredential(
 				clientChallenge, sessionKey);
 
-		long companyId = CompanyThreadLocal.getCompanyId();
-
-		int negotiateFlags = 0x600FFFFF;
-
-		try {
-			NtlmConfiguration ntlmConfiguration = _settingsFactory.getSettings(
-				NtlmConfiguration.class,
-				new CompanyServiceSettingsLocator(
-					companyId, NtlmConstants.SERVICE_NAME));
-
-			String negotiateFlagsString = ntlmConfiguration.negotiateFlags();
-
-			if (negotiateFlagsString.startsWith("0x")) {
-				negotiateFlags = Integer.valueOf(
-					negotiateFlagsString.substring(2), 16);
-			}
-		}
-		catch (SettingsException se) {
-			_log.error("Unable to get Ntlm settings", se);
-		}
-
 		NetrServerAuthenticate3 netrServerAuthenticate3 =
 			new NetrServerAuthenticate3(
 				domainControllerName, ntlmServiceAccount.getAccountName(), 2,
 				ntlmServiceAccount.getComputerName(), clientCredential,
-				new byte[8], negotiateFlags);
+				new byte[8], getNegotiateFlags());
 
 		dcerpcHandle.sendrecv(netrServerAuthenticate3);
 
@@ -160,6 +139,30 @@ public class NetlogonConnectionManagerImpl
 		hmact64.update(messageDigest.digest());
 
 		return hmact64.digest();
+	}
+
+	protected int getNegotiateFlags() {
+		int negotiateFlags = 0x600FFFFF;
+
+		try {
+			NtlmConfiguration ntlmConfiguration = _settingsFactory.getSettings(
+				NtlmConfiguration.class,
+				new CompanyServiceSettingsLocator(
+					CompanyThreadLocal.getCompanyId(),
+					NtlmConstants.SERVICE_NAME));
+
+			String negotiateFlagsString = ntlmConfiguration.negotiateFlags();
+
+			if (negotiateFlagsString.startsWith("0x")) {
+				negotiateFlags = Integer.valueOf(
+					negotiateFlagsString.substring(2), 16);
+			}
+		}
+		catch (SettingsException se) {
+			_log.error("Unable to get NTLM configuration", se);
+		}
+
+		return negotiateFlags;
 	}
 
 	@Reference
