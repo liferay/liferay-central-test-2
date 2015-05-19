@@ -73,9 +73,8 @@ public class SingleVMEhcachePortalCacheManager<K extends Serializable, V>
 	@Reference(
 		cardinality = ReferenceCardinality.OPTIONAL,
 		policy = ReferencePolicy.DYNAMIC,
-		policyOption = ReferencePolicyOption.GREEDY, target =
-			"(portal.cache.manager.name=" + PortalCacheManagerNames.SINGLE_VM +
-				")"
+		policyOption = ReferencePolicyOption.GREEDY,
+		target = "(portal.cache.manager.name=" + PortalCacheManagerNames.SINGLE_VM + ")"
 	)
 	protected void setPortalCacheConfiguratorSettings(
 		PortalCacheConfiguratorSettings portalCacheConfiguratorSettings) {
