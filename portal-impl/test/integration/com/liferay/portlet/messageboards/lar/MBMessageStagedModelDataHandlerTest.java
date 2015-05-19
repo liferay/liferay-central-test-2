@@ -210,8 +210,8 @@ public class MBMessageStagedModelDataHandlerTest
 						dependentStagedModel);
 				}
 				catch (NoSuchModelException nsme) {
-					if (!(nsme instanceof NoSuchFolderException) &&
-						!(nsme instanceof NoSuchFileEntryException)) {
+					if (!(nsme instanceof NoSuchFileEntryException) &&
+						!(nsme instanceof NoSuchFolderException)) {
 
 						throw nsme;
 					}
