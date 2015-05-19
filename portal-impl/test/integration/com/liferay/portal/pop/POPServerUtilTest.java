@@ -61,18 +61,17 @@ public class POPServerUtilTest {
 
 		List<MessageListener> messageListeners = POPServerUtil.getListeners();
 
-		if (messageListeners != null) {
-			for (MessageListener messageListenerWrapper : messageListeners) {
-				MessageListener messageListener =
-					((MessageListenerWrapper)messageListenerWrapper).
-						getMessageListener();
+		for (MessageListener messageListenerWrapper : messageListeners) {
+			MessageListener messageListener =
+				((MessageListenerWrapper)messageListenerWrapper).
+					getMessageListener();
 
-				Class<?> clazz = messageListener.getClass();
-				String className = TestMessageListener.class.getName();
+			Class<?> clazz = messageListener.getClass();
 
-				if (className.equals(clazz.getName())) {
-					return;
-				}
+			String className = TestMessageListener.class.getName();
+
+			if (className.equals(clazz.getName())) {
+				return;
 			}
 		}
 
