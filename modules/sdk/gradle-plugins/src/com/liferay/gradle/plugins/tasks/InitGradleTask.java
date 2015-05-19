@@ -288,12 +288,12 @@ public class InitGradleTask extends DefaultTask {
 	protected List<String> getBuildGradleLiferay() {
 		List<String> contents = new ArrayList<>();
 
-		String autoDeployDir = getBuildXmlProperty("auto.deploy.dir");
+		String autoDeployDirName = getBuildXmlProperty("auto.deploy.dir");
 
-		if (Validator.isNotNull(autoDeployDir)) {
-			autoDeployDir = convertBuildPropertyValue(autoDeployDir);
+		if (Validator.isNotNull(autoDeployDirName)) {
+			autoDeployDirName = convertBuildPropertyValue(autoDeployDirName);
 
-			contents.add(wrapPropertyFile("deployDir", autoDeployDir));
+			contents.add(wrapPropertyFile("deployDir", autoDeployDirName));
 		}
 
 		if (_liferayExtension instanceof LiferayThemeExtension) {
