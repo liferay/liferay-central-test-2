@@ -70,10 +70,8 @@ public class EhcacheConfigurationHelperUtil {
 
 		Configuration ehcacheConfiguration =
 			ConfigurationFactory.parseConfiguration(configurationURL);
-
 		boolean clusterEnabled = GetterUtil.getBoolean(
 			props.get(PropsKeys.CLUSTER_LINK_ENABLED));
-
 		boolean clusterLinkReplicationEnabled = GetterUtil.getBoolean(
 			props.get(PropsKeys.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED));
 
@@ -191,22 +189,21 @@ public class EhcacheConfigurationHelperUtil {
 		for (FactoryConfiguration factoryConfiguration :
 				factoryConfigurations) {
 
+			Properties properties = null;
+
 			factoryConfiguration.setClass(
 				_parseFactoryClassName(
 					factoryConfiguration.getFullyQualifiedClassPath(), props));
 
 			String propertiesString = factoryConfiguration.getProperties();
-			String propertySeparator =
-				factoryConfiguration.getPropertySeparator();
-
-			Properties properties = null;
 
 			if (Validator.isNull(propertiesString)) {
 				properties = new Properties();
 			}
 			else {
 				properties = _parseProperties(
-					propertiesString, propertySeparator, props);
+					propertiesString,
+					factoryConfiguration.getPropertySeparator(), props);
 			}
 
 			properties.put(PropsKeys.CLUSTER_LINK_ENABLED, clusterEnabled);
@@ -215,7 +212,8 @@ public class EhcacheConfigurationHelperUtil {
 				clusterLinkReplicationEnabled);
 
 			factoryConfiguration.setProperties(
-				_getPropertiesString(properties, propertySeparator));
+				_getPropertiesString(
+					properties, factoryConfiguration.getPropertySeparator()));
 		}
 	}
 
