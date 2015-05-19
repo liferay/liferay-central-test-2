@@ -37,7 +37,7 @@ public class PhoneStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {Phone.class.getName()};
 
 	@Override
-	public void deleteStagedModel(Phone phone) throws PortalException {
+	public void deleteStagedModel(Phone phone) {
 		PhoneLocalServiceUtil.deletePhone(phone);
 	}
 

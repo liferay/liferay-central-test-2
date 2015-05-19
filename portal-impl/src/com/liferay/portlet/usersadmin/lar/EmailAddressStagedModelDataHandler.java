@@ -37,9 +37,7 @@ public class EmailAddressStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {EmailAddress.class.getName()};
 
 	@Override
-	public void deleteStagedModel(EmailAddress emailAddress)
-		throws PortalException {
-
+	public void deleteStagedModel(EmailAddress emailAddress) {
 		EmailAddressLocalServiceUtil.deleteEmailAddress(emailAddress);
 	}
 

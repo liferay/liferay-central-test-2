@@ -15,7 +15,6 @@
 package com.liferay.portlet.mobiledevicerules.lar;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -50,14 +49,13 @@ public class MDRActionStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {MDRAction.class.getName()};
 
 	@Override
-	public void deleteStagedModel(MDRAction action) throws PortalException {
+	public void deleteStagedModel(MDRAction action) {
 		MDRActionLocalServiceUtil.deleteAction(action);
 	}
 
 	@Override
 	public void deleteStagedModel(
-			String uuid, long groupId, String className, String extraData)
-		throws PortalException {
+		String uuid, long groupId, String className, String extraData) {
 
 		MDRAction action = fetchStagedModelByUuidAndGroupId(uuid, groupId);
 

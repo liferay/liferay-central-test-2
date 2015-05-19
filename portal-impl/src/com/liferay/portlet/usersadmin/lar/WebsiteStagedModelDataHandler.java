@@ -53,7 +53,7 @@ public class WebsiteStagedModelDataHandler
 	}
 
 	@Override
-	public void deleteStagedModel(Website website) throws PortalException {
+	public void deleteStagedModel(Website website) {
 		WebsiteLocalServiceUtil.deleteWebsite(website);
 	}
 

@@ -37,7 +37,7 @@ public class AddressStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {Address.class.getName()};
 
 	@Override
-	public void deleteStagedModel(Address address) throws PortalException {
+	public void deleteStagedModel(Address address) {
 		AddressLocalServiceUtil.deleteAddress(address);
 	}
 

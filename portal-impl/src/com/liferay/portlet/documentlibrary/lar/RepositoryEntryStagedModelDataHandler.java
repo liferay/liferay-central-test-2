@@ -15,7 +15,6 @@
 package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -40,16 +39,13 @@ public class RepositoryEntryStagedModelDataHandler
 		{RepositoryEntry.class.getName()};
 
 	@Override
-	public void deleteStagedModel(RepositoryEntry repositoryEntry)
-		throws PortalException {
-
+	public void deleteStagedModel(RepositoryEntry repositoryEntry) {
 		RepositoryEntryLocalServiceUtil.deleteRepositoryEntry(repositoryEntry);
 	}
 
 	@Override
 	public void deleteStagedModel(
-			String uuid, long groupId, String className, String extraData)
-		throws PortalException {
+		String uuid, long groupId, String className, String extraData) {
 
 		RepositoryEntry repositoryEntry = fetchStagedModelByUuidAndGroupId(
 			uuid, groupId);

@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.lar.bundle.stagedmodeldatahandlerregistryutil;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.StagedModelDataHandler;
 import com.liferay.portal.kernel.xml.Element;
@@ -45,7 +44,7 @@ public class TestStagedModelDataHandler
 	}
 
 	@Override
-	public void deleteStagedModel(User user) throws PortalException {
+	public void deleteStagedModel(User user) {
 	}
 
 	@Override
