@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.template.bundle.templatemanagerutil;
 
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.template.TemplateException;
 
 import java.io.Writer;
 
@@ -83,7 +82,7 @@ public class TestTemplate implements Template {
 	}
 
 	@Override
-	public void processTemplate(Writer writer) throws TemplateException {
+	public void processTemplate(Writer writer) {
 	}
 
 	@Override
@@ -92,7 +91,7 @@ public class TestTemplate implements Template {
 	}
 
 	@Override
-	public void putAll(Map<? extends String, ? extends Object> m) {
+	public void putAll(Map<? extends String, ? extends Object> map) {
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class TemplateMangerUtilTest {
 			TestTemplateManager.TEST_TEMPLATE_MANAGER_NAME,
 			testTemplateResource, false);
 
-		Class clazz = template.getClass();
+		Class<?> clazz = template.getClass();
 
 		Assert.assertEquals(TestTemplate.class.getName(), clazz.getName());
 	}
@@ -63,7 +63,7 @@ public class TemplateMangerUtilTest {
 			TestTemplateManager.TEST_TEMPLATE_MANAGER_NAME,
 			testTemplateResource, null, false);
 
-		Class clazz = template.getClass();
+		Class<?> clazz = template.getClass();
 
 		Assert.assertEquals(TestTemplate.class.getName(), clazz.getName());
 	}
@@ -74,7 +74,7 @@ public class TemplateMangerUtilTest {
 			TemplateManagerUtil.getTemplateManager(
 				TestTemplateManager.TEST_TEMPLATE_MANAGER_NAME);
 
-		Class clazz = templateManager.getClass();
+		Class<?> clazz = templateManager.getClass();
 
 		Assert.assertEquals(
 			TestTemplateManager.class.getName(), clazz.getName());
@@ -98,7 +98,7 @@ public class TemplateMangerUtilTest {
 		TemplateManager templateManager = templateManagers.get(
 			TestTemplateManager.TEST_TEMPLATE_MANAGER_NAME);
 
-		Class clazz = templateManager.getClass();
+		Class<?> clazz = templateManager.getClass();
 
 		Assert.assertEquals(
 			TestTemplateManager.class.getName(), clazz.getName());

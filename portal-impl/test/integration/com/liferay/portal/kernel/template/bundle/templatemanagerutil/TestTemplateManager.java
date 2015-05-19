@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.template.bundle.templatemanagerutil;
 
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManager;
 import com.liferay.portal.kernel.template.TemplateResource;
 
@@ -133,7 +132,7 @@ public class TestTemplateManager implements TemplateManager {
 	}
 
 	@Override
-	public void init() throws TemplateException {
+	public void init() {
 		return;
 	}
 
