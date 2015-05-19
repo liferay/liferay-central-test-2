@@ -614,7 +614,7 @@ AUI.add(
 
 					if (styleEl.styleSheet) {
 
-						// for IE only
+						// For IE only
 
 						if (customStyles == EMPTY) {
 
