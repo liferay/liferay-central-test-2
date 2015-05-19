@@ -27,7 +27,7 @@
 	<macrodef name="jar-marco">
 		<sequential>
 			<jar-marco-cmd>
-				<pre-jar>
+				<jar-pre>
 					<ant dir="../util-bridges" target="jar" inheritAll="false" />
 					<ant dir="../util-java" target="jar" inheritAll="false" />
 					<ant dir="../util-taglib" target="jar" inheritAll="false" />
@@ -61,7 +61,7 @@
 							</if>
 						</sequential>
 					</for>
-				</pre-jar>
+				</jar-pre>
 			</jar-marco-cmd>
 		</sequential>
 	</macrodef>

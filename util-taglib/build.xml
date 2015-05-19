@@ -10,7 +10,7 @@
 	<macrodef name="compile-java">
 		<sequential>
 			<compile-java-cmd>
-				<post-compile>
+				<compile-java-post>
 					<copy file="classes/META-INF/aui.tld" overwrite="true" tofile="classes/META-INF/liferay-aui.tld" preservelastmodified="true" />
 
 					<replace file="classes/META-INF/liferay-aui.tld">
@@ -36,7 +36,7 @@
 						<replacetoken><![CDATA[<uri>http://java.sun.com/portlet</uri>]]></replacetoken>
 						<replacevalue><![CDATA[<uri>http://java.sun.com/portlet_2_0</uri>]]></replacevalue>
 					</replace>
-				</post-compile>
+				</compile-java-post>
 			</compile-java-cmd>
 		</sequential>
 	</macrodef>
@@ -44,7 +44,7 @@
 	<macrodef name="jar-marco">
 		<sequential>
 			<jar-marco-cmd>
-				<post-jar>
+				<jar-post>
 					<copy file="${jar.file}.jar" todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" preservelastmodified="true" />
 
 					<copy todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" preservelastmodified="true">
@@ -56,7 +56,7 @@
 					<copy overwrite="true" todir="${project.dir}/portal-web/docroot/WEB-INF/tld" preservelastmodified="true">
 						<fileset dir="classes/META-INF" includes="*.tld" />
 					</copy>
-				</post-jar>
+				</jar-post>
 			</jar-marco-cmd>
 		</sequential>
 	</macrodef>

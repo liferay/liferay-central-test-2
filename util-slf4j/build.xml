@@ -12,9 +12,9 @@
 	<macrodef name="jar-marco">
 		<sequential>
 			<jar-marco-cmd>
-				<post-jar>
+				<jar-post>
 					<copy file="${jar.file}.jar" todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" preservelastmodified="true" />
-				</post-jar>
+				</jar-post>
 			</jar-marco-cmd>
 		</sequential>
 	</macrodef>

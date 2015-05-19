@@ -31,7 +31,7 @@
 		<attribute default="project.classpath" name="javac.classpathref" />
 		<attribute default="classes" name="javac.destdir" />
 		<attribute default="src" name="javac.srcdir" />
-		<element name="post-compile" optional="true" />
+		<element name="compile-java-post" optional="true" />
 
 		<sequential>
 			<if>
@@ -86,7 +86,7 @@
 						</then>
 					</if>
 
-					<post-compile />
+					<compile-java-post />
 
 					<echo file="@{javac.destdir}/.touch"></echo>
 				</then>
@@ -101,8 +101,8 @@
 	</macrodef>
 
 	<macrodef name="jar-marco-cmd">
-		<element name="pre-jar" optional="true" />
-		<element name="post-jar" optional="true" />
+		<element name="jar-pre" optional="true" />
+		<element name="jar-post" optional="true" />
 
 		<sequential>
 			<if>
@@ -114,7 +114,7 @@
 				<then>
 					<compile-java />
 
-					<pre-jar />
+					<jar-pre />
 
 					<if>
 						<available file="bnd.bnd" />
@@ -152,7 +152,7 @@
 						</else>
 					</if>
 
-					<post-jar />
+					<jar-post />
 				</then>
 			</if>
 		</sequential>
