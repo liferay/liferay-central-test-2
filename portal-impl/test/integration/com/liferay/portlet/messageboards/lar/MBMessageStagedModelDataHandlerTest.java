@@ -50,7 +50,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.test.MBTestUtil;
 
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -189,6 +188,7 @@ public class MBMessageStagedModelDataHandlerTest
 			Group group)
 		throws Exception {
 
+		@SuppressWarnings("rawtypes")
 		StagedModelDataHandler stagedModelDataHandler =
 			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
 				ExportImportClassedModelUtil.getClassName(stagedModel));
