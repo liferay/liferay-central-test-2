@@ -38,4 +38,4 @@ Include-Resource:\
 	@lib/ehcache.jar!/com/*,\
 	@lib/ehcache.jar!/net/*,\
 	@lib/ehcache.jar!/org/*,\
-	@lib/ehcache.jar!/MATE-INF/*
+	@lib/ehcache.jar!/META-INF/*
