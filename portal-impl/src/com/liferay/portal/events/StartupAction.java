@@ -184,7 +184,7 @@ public class StartupAction extends SimpleAction {
 
 		DBUpgrader.verify();
 
-		// Cluster Master Token Listener
+		// Cluster master token listener
 
 		ServiceDependencyManager clusterMasterExecutorServiceDependencyManager =
 			new ServiceDependencyManager();
