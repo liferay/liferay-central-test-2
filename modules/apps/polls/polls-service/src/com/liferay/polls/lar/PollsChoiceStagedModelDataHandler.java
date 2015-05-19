@@ -19,7 +19,6 @@ import com.liferay.polls.model.PollsQuestion;
 import com.liferay.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -46,14 +45,13 @@ public class PollsChoiceStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {PollsChoice.class.getName()};
 
 	@Override
-	public void deleteStagedModel(PollsChoice choice) throws PortalException {
+	public void deleteStagedModel(PollsChoice choice) {
 		PollsChoiceLocalServiceUtil.deletePollsChoice(choice);
 	}
 
 	@Override
 	public void deleteStagedModel(
-			String uuid, long groupId, String className, String extraData)
-		throws PortalException {
+		String uuid, long groupId, String className, String extraData) {
 
 		PollsChoice pollsChoice = fetchStagedModelByUuidAndGroupId(
 			uuid, groupId);
