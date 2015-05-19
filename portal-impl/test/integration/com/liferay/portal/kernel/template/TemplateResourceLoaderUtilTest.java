@@ -47,7 +47,7 @@ public class TemplateResourceLoaderUtilTest {
 				TestTemplateResourceLoader.TEST_TEMPLATE_RESOURCE_LOADER_NAME,
 				TestTemplateResource.TEST_TEMPLATE_RESOURCE_TEMPLATE_ID);
 
-		Class clazz = templateResource.getClass();
+		Class<?> clazz = templateResource.getClass();
 
 		Assert.assertEquals(
 			TestTemplateResource.class.getName(), clazz.getName());
@@ -59,7 +59,7 @@ public class TemplateResourceLoaderUtilTest {
 			TemplateResourceLoaderUtil.getTemplateResourceLoader(
 				TestTemplateResourceLoader.TEST_TEMPLATE_RESOURCE_LOADER_NAME);
 
-		Class clazz = templateResourceLoader.getClass();
+		Class<?> clazz = templateResourceLoader.getClass();
 
 		Assert.assertEquals(
 			TestTemplateResourceLoader.class.getName(), clazz.getName());
