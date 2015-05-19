@@ -14,7 +14,7 @@
 
 	<macrodef name="compile-java">
 		<sequential>
-			<do-compile-java
+			<compile-java-cmd
 				javac.classpathref="web.classpath"
 			/>
 		</sequential>

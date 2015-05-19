@@ -23,11 +23,11 @@
 
 	<macrodef name="compile-java">
 		<sequential>
-			<do-compile-java />
+			<compile-java-cmd />
 		</sequential>
 	</macrodef>
 
-	<macrodef name="do-compile-java">
+	<macrodef name="compile-java-cmd">
 		<attribute default="project.classpath" name="javac.classpathref" />
 		<attribute default="classes" name="javac.destdir" />
 		<attribute default="src" name="javac.srcdir" />

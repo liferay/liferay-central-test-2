@@ -9,7 +9,7 @@
 
 	<macrodef name="compile-java">
 		<sequential>
-			<do-compile-java>
+			<compile-java-cmd>
 				<post-compile>
 					<copy file="classes/META-INF/aui.tld" overwrite="true" tofile="classes/META-INF/liferay-aui.tld" preservelastmodified="true" />
 
@@ -37,7 +37,7 @@
 						<replacevalue><![CDATA[<uri>http://java.sun.com/portlet_2_0</uri>]]></replacevalue>
 					</replace>
 				</post-compile>
-			</do-compile-java>
+			</compile-java-cmd>
 		</sequential>
 	</macrodef>
 
