@@ -29,12 +29,12 @@
 		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
 		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
  <dependencies>
   <dependency>
    <groupId>org.apache.ant</groupId>
    <artifactId>ant</artifactId>
-   <version>1.9.3</version>
+   <version>1.9.4</version>
    <scope>compile</scope>
   </dependency>
   <dependency>
