@@ -154,6 +154,7 @@ public class InitGradleTask extends DefaultTask {
 			Project rootProject = _project.getRootProject();
 
 			File projectDir = _project.getProjectDir();
+
 			File parentDir = projectDir.getParentFile();
 
 			for (Project project : rootProject.getSubprojects()) {
