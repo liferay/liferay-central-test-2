@@ -1578,7 +1578,7 @@ AUI.add(
 						}
 						else {
 							instance.eventHandlers.push(
-								Liferay.after('form:registered', instance._afterFormRegistered, instance);
+								Liferay.after('form:registered', instance._afterFormRegistered, instance)
 							);
 						}
 					},
