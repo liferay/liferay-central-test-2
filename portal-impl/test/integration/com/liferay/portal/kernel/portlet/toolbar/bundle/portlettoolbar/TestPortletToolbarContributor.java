@@ -28,6 +28,8 @@ import javax.portlet.PortletRequest;
 public class TestPortletToolbarContributor
 	implements PortletToolbarContributor {
 
+	public static final String LABEL = "LABEL";
+
 	@Override
 	public List<Menu> getPortletTitleMenus(PortletRequest portletRequest) {
 		List<Menu> portletTitleMenus = new ArrayList<>();
