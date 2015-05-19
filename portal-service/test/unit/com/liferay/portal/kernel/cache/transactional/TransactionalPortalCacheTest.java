@@ -761,14 +761,12 @@ public class TransactionalPortalCacheTest {
 	}
 
 	private void setEnableTransactionalCache(boolean enabled) {
-		PropsUtil propsUtil = new PropsUtil();
+		TestProps testProps = new TestProps();
 
-		MockProps mockProps = new MockProps();
-
-		mockProps.setProperty(
+		testProps.setProperty(
 			PropsKeys.TRANSACTIONAL_CACHE_ENABLED, Boolean.toString(enabled));
 
-		propsUtil.setProps(mockProps);
+		PropsUtil.setProps(testProps);
 	}
 
 	private static final String _KEY_1 = "KEY_1";
@@ -786,32 +784,39 @@ public class TransactionalPortalCacheTest {
 	private TestCacheReplicator<String, String> _testCacheReplicator;
 	private TransactionalPortalCache<String, String> _transactionalPortalCache;
 
-	private class MockProps implements Props {
+	private class TestProps implements Props {
 
+		@Override
 		public boolean contains(String key) {
 			return _properties.containsKey(key);
 		}
 
+		@Override
 		public String get(String key) {
 			return _properties.get(key);
 		}
 
+		@Override
 		public String get(String key, Filter filter) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public String[] getArray(String key) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public String[] getArray(String key, Filter filter) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Properties getProperties() {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Properties getProperties(String prefix, boolean removePrefix) {
 			throw new UnsupportedOperationException();
 		}
