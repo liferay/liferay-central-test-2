@@ -62,13 +62,28 @@ public class AutoLoginFilterTest {
 	public void testDoFilter() throws IOException, ServletException {
 		AutoLoginFilter autoLoginFilter = new AutoLoginFilter();
 
-		HttpSession httpSession = Mockito.mock(HttpSession.class);
-		Mockito.when(httpSession.getAttribute("j_username")).thenReturn(null);
-
 		HttpServletRequest httpServletRequest = Mockito.mock(
 			HttpServletRequest.class);
-		Mockito.when(httpServletRequest.getRequestURI()).thenReturn("");
-		Mockito.when(httpServletRequest.getSession()).thenReturn(httpSession);
+
+		Mockito.when(
+			httpServletRequest.getRequestURI()
+		).thenReturn(
+			""
+		);
+
+		HttpSession httpSession = Mockito.mock(HttpSession.class);
+
+		Mockito.when(
+			httpSession.getAttribute("j_username")
+		).thenReturn(
+			null
+		);
+
+		Mockito.when(
+			httpServletRequest.getSession()
+		).thenReturn(
+			httpSession
+		);
 
 		FilterChain filterChain = Mockito.mock(FilterChain.class);
 
