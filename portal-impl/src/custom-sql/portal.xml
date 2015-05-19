@@ -1307,7 +1307,7 @@
 				(Users_Roles.userId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.ServiceComponentFinder.findLatestVersionByBuildNamespace">
+	<sql id="com.liferay.portal.service.persistence.ServiceComponentFinder.findByMaxBuildNumber">
 		<![CDATA[
 			SELECT
 				{ServiceComponent.*}

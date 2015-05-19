@@ -31,19 +31,17 @@ public class ServiceComponentFinderImpl
 	extends BasePersistenceImpl<ServiceComponent>
 	implements ServiceComponentFinder {
 
-	public static final String FIND_LATEST_VERSION_BY_BUILDNAMESPACE =
-		ServiceComponentFinder.class.getName() +
-			".findLatestVersionByBuildNamespace";
+	public static final String FIND_BY_MAX_BUILD_NUMBER =
+		ServiceComponentFinder.class.getName() + ".findByMaxBuildNumber";
 
 	@Override
-	public List<ServiceComponent> findLatestVersionByBuildNamespace() {
+	public List<ServiceComponent> findByMaxBuildNumber() {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(
-				FIND_LATEST_VERSION_BY_BUILDNAMESPACE);
+			String sql = CustomSQLUtil.get(FIND_BY_MAX_BUILD_NUMBER);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 

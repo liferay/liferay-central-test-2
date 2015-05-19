@@ -174,8 +174,7 @@ public class ConvertDatabase extends BaseConvertProcess {
 			StartupHelperUtil.updateIndexes(db, connection, false);
 
 			List<ServiceComponent> serviceComponents =
-				ServiceComponentLocalServiceUtil.
-					getLatestServiceComponentsByBuildNamespace();
+				ServiceComponentLocalServiceUtil.getLatestServiceComponents();
 
 			Set<String> validIndexNames = new HashSet<>();
 

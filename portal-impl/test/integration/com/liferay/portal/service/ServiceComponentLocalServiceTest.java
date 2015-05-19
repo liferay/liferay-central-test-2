@@ -52,8 +52,7 @@ public class ServiceComponentLocalServiceTest {
 	@Test
 	public void testGetLatestServiceComponentsSingleVersion() throws Exception {
 		List<ServiceComponent> serviceComponents =
-			ServiceComponentLocalServiceUtil.
-				getLatestServiceComponentsByBuildNamespace();
+			ServiceComponentLocalServiceUtil.getLatestServiceComponents();
 
 		Assert.assertEquals(
 			2, serviceComponents.size() - _previousServiceComponentsCount);
@@ -77,8 +76,7 @@ public class ServiceComponentLocalServiceTest {
 			_SERVICE_COMPONENT_A, 2);
 
 		List<ServiceComponent> serviceComponents =
-			ServiceComponentLocalServiceUtil.
-				getLatestServiceComponentsByBuildNamespace();
+			ServiceComponentLocalServiceUtil.getLatestServiceComponents();
 
 		Assert.assertEquals(
 			2, serviceComponents.size() - _previousServiceComponentsCount);

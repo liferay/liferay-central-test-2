@@ -71,8 +71,8 @@ public class ServiceComponentLocalServiceImpl
 	}
 
 	@Override
-	public List<ServiceComponent> getLatestServiceComponentsByBuildNamespace() {
-		return serviceComponentFinder.findLatestVersionByBuildNamespace();
+	public List<ServiceComponent> getLatestServiceComponents() {
+		return serviceComponentFinder.findByMaxBuildNumber();
 	}
 
 	@Override
