@@ -856,7 +856,9 @@ public class AssetCategoryLocalServiceImpl
 			sb.append(vocabularyId);
 			sb.append("}");
 
-			throw new AssetCategoryNameException(sb.toString());
+			throw new AssetCategoryNameException(
+				"Category name cannot be null for category " + categoryId +
+					" and vocabulary " + vocabularyId);
 		}
 
 		AssetCategory category = assetCategoryPersistence.fetchByP_N_V(

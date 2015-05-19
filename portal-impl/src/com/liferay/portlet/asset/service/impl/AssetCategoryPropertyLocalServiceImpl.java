@@ -152,13 +152,11 @@ public class AssetCategoryPropertyLocalServiceImpl
 
 	protected void validate(String key, String value) throws PortalException {
 		if (!AssetUtil.isValidWord(key)) {
-			throw new CategoryPropertyKeyException(
-				"Key is not a valid word {key=" + key + "}");
+			throw new CategoryPropertyKeyException("Invalid key " + key);
 		}
 
 		if (!AssetUtil.isValidWord(value)) {
-			throw new CategoryPropertyValueException(
-				"Value is not a valid word {value=" + value + "}");
+			throw new CategoryPropertyValueException("Invalid value " + value);
 		}
 	}
 

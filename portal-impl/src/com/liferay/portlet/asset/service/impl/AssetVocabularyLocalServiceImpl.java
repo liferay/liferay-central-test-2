@@ -470,8 +470,7 @@ public class AssetVocabularyLocalServiceImpl
 	protected void validate(long groupId, String name) throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new VocabularyNameException(
-				"Category vocabulary name cannot be null for key {groupId=" +
-					groupId + "}");
+				"Category vocabulary name cannot be null for group " + groupId);
 		}
 
 		if (hasVocabulary(groupId, name)) {
