@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.portlet.toolbar;
 import com.liferay.portal.kernel.portlet.toolbar.bundle.portlettoolbar.TestPortletToolbarContributor;
 import com.liferay.portal.kernel.servlet.taglib.ui.Menu;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
@@ -50,7 +49,8 @@ public class PortletToolbarTest {
 		PortletToolbar portletToolbar = new PortletToolbar();
 
 		List<Menu> menus = portletToolbar.getPortletTitleMenus(
-			RandomTestUtil.randomString(), Mockito.mock(PortletRequest.class));
+			TestPortletToolbarContributor.LABEL,
+			Mockito.mock(PortletRequest.class));
 
 		for (Menu menu : menus) {
 			String label = menu.getLabel();
