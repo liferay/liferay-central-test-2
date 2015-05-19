@@ -42,28 +42,30 @@ public class ServiceComponentLocalServiceTest {
 
 	@Before
 	public void setUp() {
-		_previousServiceComponentsCount =
+		_serviceComponentsCount =
 			ServiceComponentLocalServiceUtil.getServiceComponentsCount();
 
-		_serviceComponentA = addServiceComponent(_SERVICE_COMPONENT_A, 1);
-		_serviceComponentB = addServiceComponent(_SERVICE_COMPONENT_B, 1);
+		_serviceComponent1 = addServiceComponent(_SERVICE_COMPONENT_1, 1);
+		_serviceComponent2 = addServiceComponent(_SERVICE_COMPONENT_2, 1);
 	}
 
 	@Test
-	public void testGetLatestServiceComponentsSingleVersion() throws Exception {
+	public void testGetLatestServiceComponentsWithSingleVersion()
+		throws Exception {
+
 		List<ServiceComponent> serviceComponents =
 			ServiceComponentLocalServiceUtil.getLatestServiceComponents();
 
 		Assert.assertEquals(
-			2, serviceComponents.size() - _previousServiceComponentsCount);
+			2, serviceComponents.size() - _serviceComponentsCount);
 
 		ServiceComponent latestServiceComponent = getServiceComponent(
-			serviceComponents, _SERVICE_COMPONENT_A);
+			serviceComponents, _SERVICE_COMPONENT_1);
 
 		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
 
 		latestServiceComponent = getServiceComponent(
-			serviceComponents, _SERVICE_COMPONENT_B);
+			serviceComponents, _SERVICE_COMPONENT_2);
 
 		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
 	}
@@ -73,21 +75,21 @@ public class ServiceComponentLocalServiceTest {
 		throws Exception {
 
 		ServiceComponent serviceComponent = addServiceComponent(
-			_SERVICE_COMPONENT_A, 2);
+			_SERVICE_COMPONENT_1, 2);
 
 		List<ServiceComponent> serviceComponents =
 			ServiceComponentLocalServiceUtil.getLatestServiceComponents();
 
 		Assert.assertEquals(
-			2, serviceComponents.size() - _previousServiceComponentsCount);
+			2, serviceComponents.size() - _serviceComponentsCount);
 
 		ServiceComponent latestServiceComponent = getServiceComponent(
-			serviceComponents, _SERVICE_COMPONENT_A);
+			serviceComponents, _SERVICE_COMPONENT_1);
 
 		Assert.assertEquals(2, latestServiceComponent.getBuildNumber());
 
 		latestServiceComponent = getServiceComponent(
-			serviceComponents, _SERVICE_COMPONENT_B);
+			serviceComponents, _SERVICE_COMPONENT_2);
 
 		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
 
@@ -115,9 +117,7 @@ public class ServiceComponentLocalServiceTest {
 		List<ServiceComponent> serviceComponents, String buildNamespace) {
 
 		for (ServiceComponent serviceComponent : serviceComponents) {
-			String currentBuildNamespace = serviceComponent.getBuildNamespace();
-
-			if (currentBuildNamespace.equals(buildNamespace)) {
+			if (buildNamespace.equals(serviceComponent.getBuildNamespace())) {
 				return serviceComponent;
 			}
 		}
@@ -125,16 +125,16 @@ public class ServiceComponentLocalServiceTest {
 		return null;
 	}
 
-	private static final String _SERVICE_COMPONENT_A = "serviceComponentA";
+	private static final String _SERVICE_COMPONENT_1 = "SERVICE_COMPONENT_1";
 
-	private static final String _SERVICE_COMPONENT_B = "serviceComponentB";
+	private static final String _SERVICE_COMPONENT_2 = "SERVICE_COMPONENT_2";
 
-	private int _previousServiceComponentsCount;
-
-	@DeleteAfterTestRun
-	private ServiceComponent _serviceComponentA;
+	private int _serviceComponentsCount;
 
 	@DeleteAfterTestRun
-	private ServiceComponent _serviceComponentB;
+	private ServiceComponent _serviceComponent1;
+
+	@DeleteAfterTestRun
+	private ServiceComponent _serviceComponent2;
 
 }
