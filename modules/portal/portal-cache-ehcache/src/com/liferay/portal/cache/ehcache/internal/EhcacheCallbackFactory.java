@@ -58,7 +58,7 @@ public class EhcacheCallbackFactory implements CallbackFactory {
 		try {
 			BootstrapCacheLoaderFactory<?> bootstrapCacheLoaderFactory =
 				(BootstrapCacheLoaderFactory<?>)InstanceFactory.newInstance(
-					getClass().getClassLoader(), className);
+					getClassLoader(), className);
 
 			return new EhcacheBootstrapLoaderAdapter(
 				bootstrapCacheLoaderFactory.createBootstrapCacheLoader(
@@ -88,7 +88,7 @@ public class EhcacheCallbackFactory implements CallbackFactory {
 		try {
 			CacheEventListenerFactory cacheEventListenerFactory =
 				(CacheEventListenerFactory)InstanceFactory.newInstance(
-					getClass().getClassLoader(), className);
+					getClassLoader(), className);
 
 			CacheEventListener cacheEventListener =
 				cacheEventListenerFactory.createCacheEventListener(properties);
@@ -144,8 +144,7 @@ public class EhcacheCallbackFactory implements CallbackFactory {
 		try {
 			CacheManagerEventListenerFactory cacheManagerEventListenerFactory =
 				(CacheManagerEventListenerFactory)
-					InstanceFactory.newInstance(
-						getClass().getClassLoader(), className);
+					InstanceFactory.newInstance(getClassLoader(), className);
 
 			return new EhcacheCacheManagerListenerAdapter(
 				cacheManagerEventListenerFactory.
@@ -161,6 +160,12 @@ public class EhcacheCallbackFactory implements CallbackFactory {
 
 			return null;
 		}
+	}
+
+	protected ClassLoader getClassLoader() {
+		Class<?> clazz = getClass();
+
+		return clazz.getClassLoader();
 	}
 
 	private EhcacheCallbackFactory() {
