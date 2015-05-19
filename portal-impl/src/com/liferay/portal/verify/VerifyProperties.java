@@ -352,7 +352,7 @@ public class VerifyProperties extends VerifyProcess {
 			"display.templates.config", "com.liferay.asset.tags.navigation.web"
 		},
 
-		//Auth Verifiers
+		// Auth Verifiers
 
 		new String[] {
 			"auth.verifier.DigestAuthenticationAuthVerifier.hosts.allowed",
