@@ -1316,9 +1316,12 @@
 			WHERE
 				buildNumber =
 					(
-						SELECT MAX(buildNumber)
-						FROM ServiceComponent tempServiceComponent
-						WHERE ServiceComponent.buildNamespace = tempServiceComponent.buildNamespace
+						SELECT
+							MAX(buildNumber)
+						FROM
+							ServiceComponent tempServiceComponent
+						WHERE
+							ServiceComponent.buildNamespace = tempServiceComponent.buildNamespace
 					)
 			ORDER BY
 				buildNamespace DESC
