@@ -33,6 +33,7 @@ public class TestPortletToolbarContributor
 		List<Menu> portletTitleMenus = new ArrayList<>();
 
 		Menu menu = new Menu();
+
 		menu.setLabel("PortletToolbarTest");
 
 		portletTitleMenus.add(menu);
