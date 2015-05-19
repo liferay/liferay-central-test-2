@@ -50,27 +50,6 @@ public class ServiceComponentLocalServiceTest {
 	}
 
 	@Test
-	public void testGetLatestServiceComponentsWithSingleVersion()
-		throws Exception {
-
-		List<ServiceComponent> serviceComponents =
-			ServiceComponentLocalServiceUtil.getLatestServiceComponents();
-
-		Assert.assertEquals(
-			2, serviceComponents.size() - _serviceComponentsCount);
-
-		ServiceComponent latestServiceComponent = getServiceComponent(
-			serviceComponents, _SERVICE_COMPONENT_1);
-
-		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
-
-		latestServiceComponent = getServiceComponent(
-			serviceComponents, _SERVICE_COMPONENT_2);
-
-		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
-	}
-
-	@Test
 	public void testGetLatestServiceComponentsWithMultipleVersions()
 		throws Exception {
 
@@ -95,6 +74,27 @@ public class ServiceComponentLocalServiceTest {
 
 		ServiceComponentLocalServiceUtil.deleteServiceComponent(
 			serviceComponent);
+	}
+
+	@Test
+	public void testGetLatestServiceComponentsWithSingleVersion()
+		throws Exception {
+
+		List<ServiceComponent> serviceComponents =
+			ServiceComponentLocalServiceUtil.getLatestServiceComponents();
+
+		Assert.assertEquals(
+			2, serviceComponents.size() - _serviceComponentsCount);
+
+		ServiceComponent latestServiceComponent = getServiceComponent(
+			serviceComponents, _SERVICE_COMPONENT_1);
+
+		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
+
+		latestServiceComponent = getServiceComponent(
+			serviceComponents, _SERVICE_COMPONENT_2);
+
+		Assert.assertEquals(1, latestServiceComponent.getBuildNumber());
 	}
 
 	protected ServiceComponent addServiceComponent(
@@ -129,12 +129,12 @@ public class ServiceComponentLocalServiceTest {
 
 	private static final String _SERVICE_COMPONENT_2 = "SERVICE_COMPONENT_2";
 
-	private int _serviceComponentsCount;
-
 	@DeleteAfterTestRun
 	private ServiceComponent _serviceComponent1;
 
 	@DeleteAfterTestRun
 	private ServiceComponent _serviceComponent2;
+
+	private int _serviceComponentsCount;
 
 }
