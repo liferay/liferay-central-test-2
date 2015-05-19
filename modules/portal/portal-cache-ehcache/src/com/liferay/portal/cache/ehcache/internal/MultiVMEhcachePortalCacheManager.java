@@ -62,13 +62,15 @@ public class MultiVMEhcachePortalCacheManager
 		setMpiOnly(true);
 		setName(PortalCacheManagerNames.MULTI_VM);
 
-		Thread thread = Thread.currentThread();
+		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader = thread.getContextClassLoader();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		Class<?> clazz = getClass();
 
 		ClassLoaderUtil.setContextClassLoader(
 			AggregateClassLoader.getAggregateClassLoader(
-				contextClassLoader, getClass().getClassLoader()));
+				contextClassLoader, clazz.getClassLoader()));
 
 		try {
 			initialize();
