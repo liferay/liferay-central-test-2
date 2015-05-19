@@ -323,7 +323,7 @@ public class AuthVerifierPipeline {
 			authVerifierConfiguration.setAuthVerifierClassName(
 				authVerifierClass.getName());
 			authVerifierConfiguration.setProperties(
-				loadProperties(serviceReference, authVerifierClass.getName()));
+				_loadProperties(serviceReference, authVerifierClass.getName()));
 
 			_authVerifierConfigurations.add(0, authVerifierConfiguration);
 
@@ -343,7 +343,7 @@ public class AuthVerifierPipeline {
 			newAuthVerifierConfiguration.setAuthVerifierClassName(
 				authVerifierConfiguration.getAuthVerifierClassName());
 			newAuthVerifierConfiguration.setProperties(
-				loadProperties(
+				_loadProperties(
 					serviceReference,
 					authVerifierConfiguration.getAuthVerifierClassName()));
 
@@ -365,35 +365,34 @@ public class AuthVerifierPipeline {
 			_authVerifierConfigurations.remove(authVerifierConfiguration);
 		}
 
-		private Properties loadProperties(
+		private Properties _loadProperties(
 			ServiceReference<AuthVerifier> serviceReference,
 			String authVerifierClassName) {
+
+			Properties properties = new Properties();
+
+			String authVerifierPropertyName = getAuthVerifierPropertyName(
+				authVerifierClassName);
 
 			Map<String, Object> serviceReferenceProperties =
 				serviceReference.getProperties();
 
-			Properties result = new Properties();
+			for (String key : serviceReferenceProperties.keySet()) {
+				String propertiesKey = key;
 
-			String authVerifierSettingsKey = getAuthVerifierPropertyName(
-				authVerifierClassName);
-
-			for (String settingsKey : serviceReferenceProperties.keySet()) {
-				String propertiesKey = settingsKey;
-
-				if (settingsKey.startsWith(authVerifierSettingsKey)) {
-					propertiesKey = settingsKey.substring(
-						authVerifierSettingsKey.length());
+				if (key.startsWith(authVerifierPropertyName)) {
+					propertiesKey = key.substring(
+						authVerifierPropertyName.length());
 				}
 
-				Object settingsValue = serviceReferenceProperties.get(
-					settingsKey);
+				Object value = serviceReferenceProperties.get(key);
 
-				if (settingsValue instanceof String) {
-					result.setProperty(propertiesKey, (String)settingsValue);
+				if (value instanceof String) {
+					properties.setProperty(propertiesKey, (String)value);
 				}
 			}
 
-			return result;
+			return properties;
 		}
 
 	}
