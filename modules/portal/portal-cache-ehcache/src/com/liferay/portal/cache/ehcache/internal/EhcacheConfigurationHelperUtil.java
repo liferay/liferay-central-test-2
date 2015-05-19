@@ -432,9 +432,9 @@ public class EhcacheConfigurationHelperUtil {
 		_cacheListenerScopes.put(
 			NotificationScope.REMOTE, CacheListenerScope.REMOTE);
 
-		_unescapeMap.put("lt", "<");
-		_unescapeMap.put("gt", ">");
 		_unescapeMap.put("amp", "&");
+		_unescapeMap.put("gt", ">");
+		_unescapeMap.put("lt", "<");
 		_unescapeMap.put("rsquo", "\u2019");
 		_unescapeMap.put("#034", "\"");
 		_unescapeMap.put("#039", "'");
