@@ -761,14 +761,14 @@ public class TransactionalPortalCacheTest {
 	}
 
 	private void setEnableTransactionalCache(boolean enabled) {
-		MockProps mockProps = new MockProps();
-
 		PropsUtil propsUtil = new PropsUtil();
 
-		propsUtil.setProps(mockProps);
+		MockProps mockProps = new MockProps();
 
 		mockProps.setProperty(
 			PropsKeys.TRANSACTIONAL_CACHE_ENABLED, Boolean.toString(enabled));
+
+		propsUtil.setProps(mockProps);
 	}
 
 	private static final String _KEY_1 = "KEY_1";
