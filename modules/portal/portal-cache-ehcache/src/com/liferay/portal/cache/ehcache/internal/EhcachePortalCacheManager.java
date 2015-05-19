@@ -172,15 +172,12 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 		setBlockingCacheAllowed(
 			GetterUtil.getBoolean(
 				props.get(PropsKeys.EHCACHE_BLOCKING_CACHE_ALLOWED)));
-
 		setBootstrapCacheLoaderEnabled(
 			GetterUtil.getBoolean(
 				props.get(PropsKeys.EHCACHE_BOOTSTRAP_CACHE_LOADER_ENABLED)));
-
 		setTransactionalCacheEnabled(
 			GetterUtil.getBoolean(
 				props.get(PropsKeys.TRANSACTIONAL_CACHE_ENABLED)));
-
 		setTransactionalCacheNames(
 			GetterUtil.getStringValues(
 				props.getArray(PropsKeys.TRANSACTIONAL_CACHE_NAMES)));
@@ -288,10 +285,11 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 			return false;
 		}
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
 
-		Thread.currentThread().setContextClassLoader(
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		currentThread.setContextClassLoader(
 			AggregateClassLoader.getAggregateClassLoader(
 				PortalClassLoaderUtil.getClassLoader(),
 				portalCacheConfiguratorSettings.getClassLoader()));
@@ -306,7 +304,7 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 			reconfigureCaches(url);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
 		return true;
