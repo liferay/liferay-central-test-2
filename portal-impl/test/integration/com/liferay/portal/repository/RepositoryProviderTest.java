@@ -88,8 +88,7 @@ public class RepositoryProviderTest {
 
 		DLFolder dlFolder = DLTestUtil.addDLFolder(_group.getGroupId());
 
-		RepositoryProviderUtil.getFolderLocalRepository(
-			dlFolder.getFolderId());
+		RepositoryProviderUtil.getFolderLocalRepository(dlFolder.getFolderId());
 	}
 
 	@Test
@@ -167,8 +166,7 @@ public class RepositoryProviderTest {
 	public void testCreateRepositoryFromExistingFolderId() throws Exception {
 		DLFolder dlFolder = DLTestUtil.addDLFolder(_group.getGroupId());
 
-		RepositoryProviderUtil.getFolderLocalRepository(
-			dlFolder.getFolderId());
+		RepositoryProviderUtil.getFolderLocalRepository(dlFolder.getFolderId());
 	}
 
 	@Test(expected = PrincipalException.class)
@@ -210,8 +208,7 @@ public class RepositoryProviderTest {
 
 				});
 
-			RepositoryProviderUtil.getFolderRepository(
-				dlFolder.getFolderId());
+			RepositoryProviderUtil.getFolderRepository(dlFolder.getFolderId());
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(

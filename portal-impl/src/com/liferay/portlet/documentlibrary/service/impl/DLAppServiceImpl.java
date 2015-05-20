@@ -3355,8 +3355,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			return RepositoryProviderUtil.getFileEntryRepository(
-				fileEntryId);
+			return RepositoryProviderUtil.getFileEntryRepository(fileEntryId);
 		}
 		catch (InvalidRepositoryIdException irie) {
 			StringBundler sb = new StringBundler(3);

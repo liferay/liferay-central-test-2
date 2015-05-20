@@ -333,6 +333,23 @@ public class RepositoryProviderImpl
 		}
 	}
 
+	protected List<Long> getGroupRepositoryIds(long groupId)
+		throws PortalException {
+
+		List<com.liferay.portal.model.Repository> repositories =
+			_repositoryLocalService.getGroupRepositories(groupId);
+
+		List<Long> repositoryIds = new ArrayList<>(repositories.size() + 1);
+
+		for (com.liferay.portal.model.Repository repository : repositories) {
+			repositoryIds.add(repository.getRepositoryId());
+		}
+
+		repositoryIds.add(groupId);
+
+		return repositoryIds;
+	}
+
 	protected long getRepositoryIdByFileEntryId(long fileEntryId) {
 		DLFileEntry dlFileEntry = _dlFileEntryLocalService.fetchDLFileEntry(
 			fileEntryId);
@@ -395,23 +412,6 @@ public class RepositoryProviderImpl
 		}
 
 		throw new InvalidRepositoryIdException("Missing a valid ID for image");
-	}
-
-	protected List<Long> getGroupRepositoryIds(long groupId)
-		throws PortalException {
-
-		List<com.liferay.portal.model.Repository> repositories =
-			_repositoryLocalService.getGroupRepositories(groupId);
-
-		List<Long> repositoryIds = new ArrayList<>(repositories.size() + 1);
-
-		for (com.liferay.portal.model.Repository repository : repositories) {
-			repositoryIds.add(repository.getRepositoryId());
-		}
-
-		repositoryIds.add(groupId);
-
-		return repositoryIds;
 	}
 
 	@BeanReference(type = DLFileEntryLocalService.class)

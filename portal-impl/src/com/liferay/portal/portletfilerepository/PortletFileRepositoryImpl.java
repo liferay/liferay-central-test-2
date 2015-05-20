@@ -292,8 +292,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			SystemEventHierarchyEntryThreadLocal.push(FileEntry.class);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getFileEntryLocalRepository(
-					fileEntryId);
+				RepositoryProviderUtil.getFileEntryLocalRepository(fileEntryId);
 
 			localRepository.deleteFileEntry(fileEntryId);
 		}
@@ -458,8 +457,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 		try {
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getFileEntryLocalRepository(
-					fileEntryId);
+				RepositoryProviderUtil.getFileEntryLocalRepository(fileEntryId);
 
 			return localRepository.getFileEntry(fileEntryId);
 		}
@@ -584,8 +582,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			DLAppHelperThreadLocal.setEnabled(false);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getFileEntryLocalRepository(
-					fileEntryId);
+				RepositoryProviderUtil.getFileEntryLocalRepository(fileEntryId);
 
 			return RepositoryTrashUtil.moveFileEntryToTrash(
 				userId, localRepository.getRepositoryId(), fileEntryId);
@@ -618,8 +615,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			DLAppHelperThreadLocal.setEnabled(false);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getFileEntryLocalRepository(
-					fileEntryId);
+				RepositoryProviderUtil.getFileEntryLocalRepository(fileEntryId);
 
 			RepositoryTrashUtil.restoreFileEntryFromTrash(
 				userId, localRepository.getRepositoryId(), fileEntryId);

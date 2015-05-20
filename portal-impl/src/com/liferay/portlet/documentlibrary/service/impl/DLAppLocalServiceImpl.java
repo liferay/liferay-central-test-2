@@ -1448,8 +1448,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			return RepositoryProviderUtil.getFolderLocalRepository(
-				folderId);
+			return RepositoryProviderUtil.getFolderLocalRepository(folderId);
 		}
 		catch (InvalidRepositoryIdException irie) {
 			StringBundler sb = new StringBundler(3);
