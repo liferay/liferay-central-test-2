@@ -109,7 +109,7 @@ public class MonitoringFilter extends BaseFilter
 			}
 			catch (PortalException pe) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Unable to retrieve layout: " + plid, pe);
+					_log.debug("Unable to retrieve layout " + plid, pe);
 				}
 			}
 		}
@@ -129,7 +129,6 @@ public class MonitoringFilter extends BaseFilter
 		throws IOException, ServletException {
 
 		long companyId = PortalUtil.getCompanyId(request);
-
 		long groupId = getGroupId(request);
 
 		DataSample dataSample = null;
