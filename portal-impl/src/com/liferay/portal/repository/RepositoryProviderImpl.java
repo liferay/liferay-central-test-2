@@ -333,6 +333,18 @@ public class RepositoryProviderImpl
 		}
 	}
 
+	protected long getFileEntryRepositoryId(long fileEntryId) {
+		DLFileEntry dlFileEntry = _dlFileEntryLocalService.fetchDLFileEntry(
+			fileEntryId);
+
+		if (dlFileEntry != null) {
+			return dlFileEntry.getRepositoryId();
+		}
+
+		throw new InvalidRepositoryIdException(
+			"Missing a valid ID for file entry");
+	}
+
 	protected List<Long> getGroupRepositoryIds(long groupId) {
 		List<com.liferay.portal.model.Repository> repositories =
 			_repositoryLocalService.getGroupRepositories(groupId);
@@ -346,18 +358,6 @@ public class RepositoryProviderImpl
 		repositoryIds.add(groupId);
 
 		return repositoryIds;
-	}
-
-	protected long getFileEntryRepositoryId(long fileEntryId) {
-		DLFileEntry dlFileEntry = _dlFileEntryLocalService.fetchDLFileEntry(
-			fileEntryId);
-
-		if (dlFileEntry != null) {
-			return dlFileEntry.getRepositoryId();
-		}
-
-		throw new InvalidRepositoryIdException(
-			"Missing a valid ID for file entry");
 	}
 
 	protected long getRepositoryIdByFileShortcutId(long fileShortcutId) {
