@@ -30,7 +30,7 @@ public class DuplicateFileException extends PortalException {
 		super(
 			String.format(
 				"{companyId=%s, repositoryId=%s, fileName=%s}",
-			companyId, repositoryId, fileName));
+				companyId, repositoryId, fileName));
 	}
 
 	public DuplicateFileException(
@@ -39,7 +39,7 @@ public class DuplicateFileException extends PortalException {
 		super(
 			String.format(
 				"{companyId=%s, repositoryId=%s, fileName=%s, version=%s}",
-			companyId, repositoryId, fileName, version));
+				companyId, repositoryId, fileName, version));
 	}
 
 	public DuplicateFileException(
@@ -49,7 +49,8 @@ public class DuplicateFileException extends PortalException {
 		super(
 			String.format(
 				"{companyId=%s, repositoryId=%s, fileName=%s, version=%s}",
-			companyId, repositoryId, fileName, version), cause);
+				companyId, repositoryId, fileName, version),
+			cause);
 	}
 
 	public DuplicateFileException(
@@ -58,7 +59,8 @@ public class DuplicateFileException extends PortalException {
 		super(
 			String.format(
 				"{companyId=%s, repositoryId=%s, fileName=%s}",
-			companyId, repositoryId, fileName), cause);
+				companyId, repositoryId, fileName),
+			cause);
 	}
 
 	public DuplicateFileException(String msg) {
