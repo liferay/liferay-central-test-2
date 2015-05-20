@@ -153,6 +153,11 @@
 	<td>//div[contains(@class,'entry') and contains(@class,'draft')]/div/h3</td>
 	<td></td>
 </tr>
+<tr>
+	<td>WORKFLOW_STATUS</td>
+	<td>//h3[contains(.,'Pending Approval')]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>

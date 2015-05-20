@@ -51,6 +51,46 @@
 		<execute macro="BlogsEntry#publish" />
 	</command>
 
+	<command name="addViaAP">
+		<if>
+			<isset var="siteScope" />
+			<then>
+				<var name="key_siteScope" value="${siteScope}" />
+
+				<execute function="AssertClick" locator1="PGAssetpublisher#ADD_NEW_DROPDOWN_IN_SCOPED_SITE" value1="Add New in ${siteScope}" />
+			</then>
+			<else>
+				<execute function="AssertClick" locator1="PGAssetpublisher#ADD_NEW_DROPDOWN" value1="Add New" />
+			</else>
+		</if>
+
+		<if>
+			<condition function="IsVisible" locator1="PGAssetpublisher#ADD_NEW_MENULIST_BLOGS_ENTRY" />
+			<then>
+				<execute function="AssertClick" locator1="PGAssetpublisher#ADD_NEW_MENULIST_BLOGS_ENTRY" value1="Blogs Entry" />
+			</then>
+			<else>
+				<execute function="AssertClick" locator1="PGAssetpublisher#ADD_BLOGS_ENTRY_BUTTON" value1="Add Blogs Entry" />
+			</else>
+		</if>
+
+		<execute function="SelectFrame" locator1="PGAssetpublisherAddnewblogsentry#BLOGS_ENTRY_IFRAME" />
+
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitle}" />
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent}" />
+
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+
+		<execute function="Pause" locator1="5000" />
+
+		<execute function="SelectFrame" value1="relative=top" />
+
+		<var name="key_assetTitle" value="${entryTitle}" />
+
+		<execute function="AssertTextEquals" locator1="PGAssetpublisher#ASSET_ABSTRACT_TITLE" value1="${entryTitle}" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="PGAssetpublisher#ASSET_ABSTRACT_DESCRIPTION" value1="${entryContent}" />
+	</command>
+
 	<command name="addWithCategory">
 		<execute function="AssertClick" locator1="Blogs#ADD_BLOGS_ENTRY" value1="Add" />
 
@@ -172,6 +212,35 @@
 		</if>
 
 		<execute macro="BlogsEntry#publish" />
+	</command>
+
+	<command name="addWithWorkflow">
+		<execute function="AssertClick" locator1="Blogs#ADD_BLOGS_ENTRY" value1="Add" />
+
+		<execute macro="BlogsEntry#addEntryContent">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entrySubtitle" value="${entrySubtitle}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="BlogsEntry#publishWithWorkflow" />
+	</command>
+
+	<command name="addWithWorkflowViaAP">
+		<execute function="AssertClick" locator1="PGAssetpublisher#ADD_NEW_DROPDOWN" value1="Add New" />
+
+		<execute function="AssertClick" locator1="PGAssetpublisher#ADD_NEW_MENULIST_BLOGS_ENTRY" value1="Blogs Entry" />
+
+		<execute function="SelectFrame" locator1="PGAssetpublisherAddnewblogsentry#BLOGS_ENTRY_IFRAME" />
+
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitle}" />
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent}" />
+
+		<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+
+		<execute function="Pause" locator1="5000" />
+
+		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
 	<command name="editEntryContentCP">

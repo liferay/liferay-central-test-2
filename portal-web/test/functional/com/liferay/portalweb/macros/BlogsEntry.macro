@@ -1156,6 +1156,14 @@
 		<execute function="AssertElementNotPresent" locator1="BlogsEntry#CONTENT" />
 	</command>
 
+	<command name="publishWithWorkflow">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute function="AssertClick" locator1="Button#SUBMIT_FOR_PUBLICATION" value1="Submit for Publication" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+	</command>
+
 	<command name="rate4StarsCP">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
@@ -1570,6 +1578,20 @@
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
+	<command name="viewEntryWithWorkflow">
+		<execute function="AssertTextEquals" locator1="BlogsEntry#WORKFLOW_STATUS" value1="Pending Approval" />
+		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
+
+		<if>
+			<isset var="entrySubtitle" />
+			<then>
+				<execute function="AssertTextEquals" locator1="BlogsEntry#SUBTITLE" value1="${entrySubtitle}" />
+			</then>
+		</if>
+
+		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+	</command>
+
 	<command name="viewFriendlyURLPG">
 		<var method="StringUtil#replace('${entryTitle}', ' ', '-')" name="entryTitleURL" />
 		<var method="StringUtil#lowerCase('${entryTitleURL}')" name="entryTitleURL" />
@@ -1681,6 +1703,7 @@
 
 		<execute function="AssertTextEquals" locator1="PGAssetpublisher#ASSET_ABSTRACT_TITLE" value1="${entryTitle}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="PGAssetpublisher#ASSET_ABSTRACT_DESCRIPTION" value1="${entryContent}" />
+
 		<execute function="AssertClick" locator1="PGAssetpublisher#ASSET_ABSTRACT_TITLE" value1="${entryTitle}" />
 
 		<execute function="AssertTextEquals" locator1="PGAssetpublisherAsset#ASSET_TITLE" value1="${entryTitle}" />
@@ -1996,15 +2019,8 @@
 	</command>
 
 	<command name="viewWithWorkflowCP">
-		<var name="key_entryTitle" value="${entryTitle}" />
-
-		<execute function="AssertTextEquals" locator1="CPBlogs#ENTRY_TABLE_TITLE" value1="${entryTitle}" />
-		<execute function="Click" locator1="CPBlogs#ENTRY_TABLE_TITLE" value1="${entryTitle}" />
-
-		<execute function="AssertTextEquals" locator1="CPBlogsEntry#ENTRY_TITLE_HEADER" value1="${entryTitle}" />
-		<execute function="AssertTextEquals" locator1="CPBlogsEntry#ENTRY_WORKFLOW_STATUS" value1="Pending Approval" />
-		<execute function="AssertTextEquals" locator1="CPBlogsEntry#ENTRY_TITLE_LINK" value1="${entryTitle}" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="CPBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
+		<execute function="AssertTextEquals" locator1="Blogs#ENTRY_TABLE_TITLE" value1="${entryTitle}" />
+		<execute function="AssertTextEquals" locator1="Blogs#ENTRY_TABLE_STATUS" value1="Pending" />
 	</command>
 
 	<command name="viewWithWorkflowPG">
