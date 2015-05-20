@@ -460,14 +460,14 @@ public final class CommandLoggerHandler {
 	}
 
 	private static void _linkLoggerElements(LoggerElement xmlLoggerElement) {
+		xmlLoggerElement.setAttribute("data-status01", "pending");
+
 		String functionLinkID = xmlLoggerElement.getAttributeValue(
 			"data-functionlinkid");
 
 		if (functionLinkID != null) {
 			_functionLinkId = Integer.parseInt(functionLinkID.substring(15));
 		}
-
-		xmlLoggerElement.setAttribute("data-status01", "pending");
 
 		xmlLoggerElement.setAttribute(
 			"data-functionlinkid", "functionLinkId-" + _functionLinkId);
