@@ -217,9 +217,7 @@ public class MBCommentManagerImpl implements CommentManager {
 	}
 
 	@Override
-	public boolean hasDiscussion(String className, long classPK)
-		throws PortalException {
-
+	public boolean hasDiscussion(String className, long classPK) {
 		MBDiscussion discussion = _mbDiscussionLocalService.fetchDiscussion(
 			className, classPK);
 
