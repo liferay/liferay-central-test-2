@@ -648,6 +648,12 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SAVE_STATUS" value1="Draft saved at" />
 	</command>
 
+	<command name="editContent">
+		<execute function="AssertTextEquals" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryContent}" />
+
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${entryEditContent}" />
+	</command>
+
 	<command name="editContentCP">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
@@ -709,6 +715,28 @@
 		</if>
 	</command>
 
+	<command name="editEntryContent">
+		<execute macro="BlogsEntry#editTitle">
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="entryTitleEdit" value="${entryTitleEdit}" />
+		</execute>
+
+		<if>
+			<isset var="entrySubtitleEdit" />
+			<then>
+				<execute macro="BlogsEntry#editSubtitle">
+					<var name="entrySubtitle" value="${entrySubtitle}" />
+					<var name="entrySubtitleEdit" value="${entrySubtitleEdit}" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="BlogsEntry#editContent">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryContentEdit" value="${entryContentEdit}" />
+		</execute>
+	</command>
+
 	<command name="editNoPermissionPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
@@ -739,6 +767,18 @@
 				<execute function="AssertTextEquals" locator1="PGBlogs#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 			</else>
 		</if>
+	</command>
+
+	<command name="editSubtitle">
+		<execute function="AssertTextEquals" locator1="AlloyEditor#SUBTITLE_FIELD" value1="${entrySubtitle}" />
+
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#SUBTITLE_FIELD" value1="${entryEditSubtitle}" />
+	</command>
+
+	<command name="editTitle">
+		<execute function="AssertTextEquals" locator1="AlloyEditor#TITLE_FIELD" value1="${entryTitle}" />
+
+		<execute function="Type#typeCKEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${entryEditTitle}" />
 	</command>
 
 	<command name="editTitleCP">
