@@ -131,10 +131,11 @@ public class ClusterSchedulerEngineTest {
 
 	@Test
 	public void testCreateClusterSchedulerEngine2() {
-		Mockito.when(_clusterLink.isEnabled()).thenReturn(true);
 		Mockito.when(
 			_props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn("false");
+		).thenReturn(
+			"false"
+		);
 
 		_schedulerEngineHelperImpl.setSchedulerEngine(_mockSchedulerEngine);
 
@@ -148,10 +149,11 @@ public class ClusterSchedulerEngineTest {
 
 	@Test
 	public void testCreateClusterSchedulerEngine3() {
-		Mockito.when(_clusterLink.isEnabled()).thenReturn(false);
 		Mockito.when(
-			_props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn("true");
+			_clusterLink.isEnabled()
+		).thenReturn(
+			false
+		);
 
 		_schedulerEngineHelperImpl.setSchedulerEngine(_mockSchedulerEngine);
 
@@ -165,10 +167,17 @@ public class ClusterSchedulerEngineTest {
 
 	@Test
 	public void testCreateClusterSchedulerEngine4() {
-		Mockito.when(_clusterLink.isEnabled()).thenReturn(false);
+		Mockito.when(
+			_clusterLink.isEnabled()
+		).thenReturn(
+			false
+		);
+
 		Mockito.when(
 			_props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn("false");
+		).thenReturn(
+			"false"
+		);
 
 		_schedulerEngineHelperImpl.setSchedulerEngine(_mockSchedulerEngine);
 
