@@ -168,8 +168,7 @@ public class RepositoryProviderImpl
 	public LocalRepository getLocalRepository(long repositoryId)
 		throws PortalException {
 
-		LocalRepository localRepository = _localRepositories.get(
-			repositoryId);
+		LocalRepository localRepository = _localRepositories.get(repositoryId);
 
 		if (localRepository != null) {
 			return localRepository;
