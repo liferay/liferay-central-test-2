@@ -173,9 +173,11 @@ public abstract class BaseStoreTestCase {
 		String directory = RandomTestUtil.randomString();
 
 		String fileName1 = directory + "/" + RandomTestUtil.randomString();
-		String fileName2 = directory + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+
+		String fileName2 = directory + "/" + RandomTestUtil.randomString();
+
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
 		store.deleteDirectory(companyId, repositoryId, directory);
@@ -195,9 +197,11 @@ public abstract class BaseStoreTestCase {
 		String subdirectory = directory + "/" + RandomTestUtil.randomString();
 
 		String fileName1 = directory + "/" + RandomTestUtil.randomString();
-		String fileName2 = subdirectory + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+
+		String fileName2 = subdirectory + "/" + RandomTestUtil.randomString();
+
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
 		store.deleteDirectory(companyId, repositoryId, directory);
