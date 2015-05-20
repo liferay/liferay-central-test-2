@@ -78,8 +78,7 @@ public class RepositoryProviderImpl
 	public LocalRepository getFileShortcutLocalRepository(long fileShortcutId)
 		throws PortalException {
 
-		return getLocalRepository(
-			getFileShortcutRepositoryId(fileShortcutId));
+		return getLocalRepository(getFileShortcutRepositoryId(fileShortcutId));
 	}
 
 	@Override
@@ -95,8 +94,7 @@ public class RepositoryProviderImpl
 	public LocalRepository getFileVersionLocalRepository(long fileVersionId)
 		throws PortalException {
 
-		return getLocalRepository(
-			getFileVersionRepositoryId(fileVersionId));
+		return getLocalRepository(getFileVersionRepositoryId(fileVersionId));
 	}
 
 	@Override
@@ -345,21 +343,6 @@ public class RepositoryProviderImpl
 			"Missing a valid ID for file entry");
 	}
 
-	protected List<Long> getGroupRepositoryIds(long groupId) {
-		List<com.liferay.portal.model.Repository> repositories =
-			_repositoryLocalService.getGroupRepositories(groupId);
-
-		List<Long> repositoryIds = new ArrayList<>(repositories.size() + 1);
-
-		for (com.liferay.portal.model.Repository repository : repositories) {
-			repositoryIds.add(repository.getRepositoryId());
-		}
-
-		repositoryIds.add(groupId);
-
-		return repositoryIds;
-	}
-
 	protected long getFileShortcutRepositoryId(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut =
 			_dlFileShortcutLocalService.fetchDLFileShortcut(fileShortcutId);
@@ -399,9 +382,22 @@ public class RepositoryProviderImpl
 		throw new InvalidRepositoryIdException("Missing a valid ID for folder");
 	}
 
-	protected long getImageRepositoryId(long imageId)
-		throws PortalException {
+	protected List<Long> getGroupRepositoryIds(long groupId) {
+		List<com.liferay.portal.model.Repository> repositories =
+			_repositoryLocalService.getGroupRepositories(groupId);
 
+		List<Long> repositoryIds = new ArrayList<>(repositories.size() + 1);
+
+		for (com.liferay.portal.model.Repository repository : repositories) {
+			repositoryIds.add(repository.getRepositoryId());
+		}
+
+		repositoryIds.add(groupId);
+
+		return repositoryIds;
+	}
+
+	protected long getImageRepositoryId(long imageId) throws PortalException {
 		DLFileEntry dlFileEntry =
 			DLFileEntryServiceUtil.fetchFileEntryByImageId(imageId);
 
