@@ -1978,13 +1978,13 @@ public class ClusterSchedulerEngineTest {
 	private static final MethodKey _getScheduledJobsMethodKey = new MethodKey(
 		SchedulerEngineHelperUtil.class, "getScheduledJobs", StorageType.class);
 
-	private MockClusterMasterExecutor _mockClusterMasterExecutor =
-		new MockClusterMasterExecutor();
 	private ClusterInvokeAcceptor _clusterInvokeAcceptor;
 	private ClusterLink _clusterLink;
 	private ClusterSchedulerEngine _clusterSchedulerEngine;
 	private Map<String, ObjectValuePair<SchedulerResponse, TriggerState>>
 		_memoryClusteredJobs;
+	private final MockClusterMasterExecutor _mockClusterMasterExecutor =
+		new MockClusterMasterExecutor();
 	private MockSchedulerEngine _mockSchedulerEngine;
 	private Props _props;
 	private SchedulerEngineHelperImpl _schedulerEngineHelperImpl;
