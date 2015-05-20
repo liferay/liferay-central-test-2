@@ -103,8 +103,8 @@ public class PortletRequestDataSample extends BaseDataSample {
 			return;
 		}
 
-		HttpServletRequest httpServletRequest =
-			portal.getHttpServletRequest(portletRequest);
+		HttpServletRequest httpServletRequest = portal.getHttpServletRequest(
+			portletRequest);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
