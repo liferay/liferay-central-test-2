@@ -117,10 +117,6 @@ public class ClusterSchedulerEngineTest {
 
 	@Test
 	public void testCreateClusterSchedulerEngine1() {
-		Mockito.when(
-			_props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn("true");
-
 		_schedulerEngineHelperImpl.setSchedulerEngine(_mockSchedulerEngine);
 
 		_schedulerEngineHelperImpl.activate();
