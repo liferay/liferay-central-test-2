@@ -112,22 +112,21 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 		super.getFileNames(fileNames, dirName, path);
 
-		ListIterator<String> itr = fileNames.listIterator();
+		ListIterator<String> iterator = fileNames.listIterator();
 
-		while (itr.hasNext()) {
-			String shortFileName = itr.next();
+		while (iterator.hasNext()) {
+			String shortFileName = iterator.next();
 
 			if (path.endsWith(_HOOK_EXTENSION)) {
 				shortFileName = FileUtil.stripExtension(shortFileName);
 			}
 
-			itr.set(unbuildPath(shortFileName));
+			iterator.set(unbuildPath(shortFileName));
 		}
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 as of 7.0, replaced by {@link
-	 *             #getFileNames(List, String, String)}
+	 * @deprecated As of 7.0.0, replaced by {@link #getFileNames(List, String, String)}
 	 */
 	@Deprecated
 	protected List<String> getAdvancedFileNames(
