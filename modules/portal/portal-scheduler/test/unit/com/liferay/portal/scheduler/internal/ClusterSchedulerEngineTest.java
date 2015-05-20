@@ -93,7 +93,11 @@ public class ClusterSchedulerEngineTest {
 	public void setUp() throws Exception {
 		_clusterLink = Mockito.mock(ClusterLink.class);
 
-		Mockito.when(_clusterLink.isEnabled()).thenReturn(true);
+		Mockito.when(
+			_clusterLink.isEnabled()
+		).thenReturn(
+			true
+		);
 
 		setUpPortalUUIDUtil();
 
@@ -113,7 +117,12 @@ public class ClusterSchedulerEngineTest {
 
 	@Test
 	public void testCreateClusterSchedulerEngine1() {
-		Mockito.when(_clusterLink.isEnabled()).thenReturn(true);
+		Mockito.when(
+			_clusterLink.isEnabled()
+		).thenReturn(
+			true
+		);
+
 		Mockito.when(
 			_props.get(PropsKeys.SCHEDULER_ENABLED)
 		).thenReturn("true");
