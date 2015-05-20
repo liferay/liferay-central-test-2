@@ -203,8 +203,6 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
 
-		// Change layoutIdMap to layoutIds in EIC
-
 		settingsMap.remove("layoutIdMap");
 
 		settingsMap.put("layoutIds", layoutIds);
