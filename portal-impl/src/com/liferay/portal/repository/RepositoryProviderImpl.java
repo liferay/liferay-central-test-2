@@ -168,7 +168,7 @@ public class RepositoryProviderImpl
 	public LocalRepository getLocalRepository(long repositoryId)
 		throws PortalException {
 
-		LocalRepository localRepository = _localRepositoriesByRepositoryId.get(
+		LocalRepository localRepository = _localRepositories.get(
 			repositoryId);
 
 		if (localRepository != null) {
@@ -181,7 +181,7 @@ public class RepositoryProviderImpl
 		checkRepository(repositoryId);
 		checkRepositoryAccess(repositoryId);
 
-		_localRepositoriesByRepositoryId.put(repositoryId, localRepository);
+		_localRepositories.put(repositoryId, localRepository);
 
 		return localRepository;
 	}
@@ -193,7 +193,7 @@ public class RepositoryProviderImpl
 
 	@Override
 	public Repository getRepository(long repositoryId) throws PortalException {
-		Repository repository = _repositoriesByRepositoryId.get(repositoryId);
+		Repository repository = _repositories.get(repositoryId);
 
 		if (repository != null) {
 			return repository;
@@ -204,22 +204,22 @@ public class RepositoryProviderImpl
 		checkRepository(repositoryId);
 		checkRepositoryAccess(repositoryId);
 
-		_repositoriesByRepositoryId.put(repositoryId, repository);
+		_repositories.put(repositoryId, repository);
 
 		return repository;
 	}
 
 	@Override
 	public void invalidate() {
-		_localRepositoriesByRepositoryId.clear();
-		_repositoriesByRepositoryId.clear();
+		_localRepositories.clear();
+		_repositories.clear();
 	}
 
 	@Override
 	public void invalidateRepository(long repositoryId) {
-		_localRepositoriesByRepositoryId.remove(repositoryId);
+		_localRepositories.remove(repositoryId);
 
-		_repositoriesByRepositoryId.remove(repositoryId);
+		_repositories.remove(repositoryId);
 	}
 
 	protected void checkFileEntryPermissions(long fileEntryId)
@@ -429,9 +429,9 @@ public class RepositoryProviderImpl
 	@BeanReference(type = RepositoryLocalService.class)
 	protected RepositoryLocalService _repositoryLocalService;
 
-	private final Map<Long, LocalRepository> _localRepositoriesByRepositoryId =
+	private final Map<Long, LocalRepository> _localRepositories =
 		new ConcurrentHashMap<>();
 	private final Map<Long, com.liferay.portal.kernel.repository.Repository>
-		_repositoriesByRepositoryId = new ConcurrentHashMap<>();
+		_repositories = new ConcurrentHashMap<>();
 
 }
