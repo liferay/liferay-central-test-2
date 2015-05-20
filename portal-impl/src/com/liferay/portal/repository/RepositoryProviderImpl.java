@@ -431,7 +431,7 @@ public class RepositoryProviderImpl
 
 	private final Map<Long, LocalRepository> _localRepositories =
 		new ConcurrentHashMap<>();
-	private final Map<Long, com.liferay.portal.kernel.repository.Repository>
-		_repositories = new ConcurrentHashMap<>();
+	private final Map<Long, Repository> _repositories =
+		new ConcurrentHashMap<>();
 
 }
