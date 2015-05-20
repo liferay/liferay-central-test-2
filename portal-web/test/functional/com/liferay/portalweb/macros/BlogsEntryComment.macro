@@ -7,7 +7,6 @@
 
 		<var name="key_entryComment" value="${entryComment}" />
 
-		<execute function="AssertClick#assertTextClickWaitForInlineCKEditor" locator1="CPBlogsEntry#COMMENTS_BE_THE_FIRST" value1="Be the first." />
 		<execute function="Type" locator1="CPBlogsEntry#COMMENTS_BODY_FIELD" value1="${entryComment}" />
 		<execute function="AssertClick#assertTextClickWaitForInlineCKEditor" locator1="CPBlogsEntry#COMMENTS_REPLY_BUTTON" value1="Reply" />
 
@@ -21,16 +20,6 @@
 		</execute>
 
 		<execute function="Pause" locator1="1000" />
-
-		<if>
-			<condition function="IsElementPresent" locator1="PGBlogsEntry#COMMENTS_BE_THE_FIRST" />
-			<then>
-				<execute function="AssertClick" locator1="PGBlogsEntry#COMMENTS_BE_THE_FIRST" value1="Be the first." />
-			</then>
-			<else>
-				<execute function="AssertClick" locator1="PGBlogsEntry#COMMENTS_ADD" value1="Add Comment" />
-			</else>
-		</if>
 
 		<execute function="Type" locator1="PGBlogsEntry#COMMENTS_BODY_FIELD" value1="${entryComment}" />
 
@@ -162,7 +151,6 @@
 		<var name="key_entryComment" value="${entryComment}" />
 
 		<execute function="AssertTextEquals" locator1="CPBlogsEntry#ENTRY_STATS_COMMENTS" value1="1 Comment" />
-		<execute function="AssertElementNotPresent" locator1="CPBlogsEntry#COMMENTS_BE_THE_FIRST" />
 		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="CPBlogsEntry#COMMENT" value1="${entryComment}" />
 	</command>
 
@@ -175,8 +163,6 @@
 		<var name="key_entryComment" value="${entryComment}" />
 
 		<execute function="AssertTextEquals" locator1="CPBlogsEntry#ENTRY_STATS_COMMENTS" value1="0 Comments" />
-		<execute function="AssertTextEquals#assertPartialText" locator1="CPBlogsEntry#COMMENTS_NO_COMMENTS_YET" value1="No comments yet." />
-		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="CPBlogsEntry#COMMENTS_BE_THE_FIRST" value1="Be the first." />
 		<execute function="AssertTextNotPresent" value1="${entryComment}" />
 	</command>
 
@@ -189,7 +175,6 @@
 		<var name="key_entryComment" value="${entryComment}" />
 
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#ENTRY_STATS_COMMENTS" value1="0 Comments" />
-		<execute function="AssertTextEquals" locator1="PGBlogsEntry#COMMENTS_BE_THE_FIRST" value1="Be the first." />
 		<execute function="AssertTextNotPresent" value1="${entryComment}" />
 	</command>
 
@@ -200,7 +185,6 @@
 		</execute>
 
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#ENTRY_STATS_COMMENTS" value1="1 Comment" />
-		<execute function="AssertElementNotPresent" locator1="PGBlogsEntry#COMMENTS_BE_THE_FIRST" />
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#COMMENT_USER_NAME" value1="${userFullName}" />
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#COMMENT" value1="${entryComment}" />
 	</command>
