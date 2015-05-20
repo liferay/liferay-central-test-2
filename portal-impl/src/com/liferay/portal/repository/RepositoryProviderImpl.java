@@ -340,7 +340,7 @@ public class RepositoryProviderImpl
 		}
 
 		throw new InvalidRepositoryIdException(
-			"Missing a valid ID for file entry");
+			"No repository associated with file entry " + fileEntryId);
 	}
 
 	protected long getFileShortcutRepositoryId(long fileShortcutId) {
@@ -352,7 +352,7 @@ public class RepositoryProviderImpl
 		}
 
 		throw new InvalidRepositoryIdException(
-			"Missing a valid ID for file shortcut");
+			"No repository associated with file shortcut " + fileShortcutId);
 	}
 
 	protected long getFileVersionRepositoryId(long fileVersionId) {
@@ -364,7 +364,7 @@ public class RepositoryProviderImpl
 		}
 
 		throw new InvalidRepositoryIdException(
-			"Missing a valid ID for file version");
+			"No repository associated with file version " + fileVersionId);
 	}
 
 	protected long getFolderRepositoryId(long folderId) {
@@ -379,7 +379,8 @@ public class RepositoryProviderImpl
 			}
 		}
 
-		throw new InvalidRepositoryIdException("Missing a valid ID for folder");
+		throw new InvalidRepositoryIdException(
+			"No repository associated with folder " + folderId);
 	}
 
 	protected List<Long> getGroupRepositoryIds(long groupId) {
@@ -405,7 +406,8 @@ public class RepositoryProviderImpl
 			return dlFileEntry.getRepositoryId();
 		}
 
-		throw new InvalidRepositoryIdException("Missing a valid ID for image");
+		throw new InvalidRepositoryIdException(
+			"No repository associated with image " + imageId);
 	}
 
 	@BeanReference(type = DLFileEntryLocalService.class)
