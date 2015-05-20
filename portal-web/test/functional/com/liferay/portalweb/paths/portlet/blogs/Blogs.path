@@ -54,6 +54,32 @@
 	<td>//tr[contains(.,'${key_entryTitle}')]/td/div/a</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--RSS_FEED-->
+<tr>
+	<td>RSS_FEED_TITLE</td>
+	<td>//*[@id='feedTitleText']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_FEED_SUBTITLE</td>
+	<td>//*[@id='feedSubtitleText']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_ENTRY_TITLE</td>
+	<td>//*[@class='entry']/*/*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_ENTRY_CONTENT</td>
+	<td>//*[@class='feedEntryContent']</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>

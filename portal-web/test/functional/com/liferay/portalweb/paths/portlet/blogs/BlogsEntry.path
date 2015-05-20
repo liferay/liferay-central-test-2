@@ -84,6 +84,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>FLAG</td>
+	<td>//div[contains(@class,'entry') and contains(@class,'approved') and contains(.,'${key_entryTitle}')]//span/a[contains(.,'Flag')]</td>
+	<td>Vocabulary 1</td>
+</tr>
+<tr>
 	<td>RELATED_ASSETS_LINK_IMAGE</td>
 	<td>//div[contains(@class,'entry') and contains(@class,'approved') and contains(.,'${key_entryTitle}')]//div/div[contains(@class,'asset-links')]/ul//a/i</td>
 	<td></td>

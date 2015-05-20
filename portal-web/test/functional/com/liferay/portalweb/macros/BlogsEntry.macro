@@ -867,6 +867,32 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="CPBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
+	<command name="entryAddPermissions">
+		<if>
+			<isset var="viewableBy" />
+			<then>
+				<execute function="Select" locator1="AssetPermissions#VIEWABLE_AS_SELECT" value1="${viewableBy}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="permissionDefinitionKey" />
+			<then>
+				<if>
+					<condition function="IsNotVisible" locator1="AssetPermissions#HIDE_OPTIONS_LINK" />
+					<then>
+						<execute function="AssertClick#assertPartialTextClickAt" locator1="AssetPermissions#MORE_OPTIONS_LINK" value1="More Options" />
+					</then>
+				</if>
+
+				<var name="key_permissionDefinitionKey" value="${permissionDefinitionKey}" />
+				<var name="key_roleName" value="${roleName}" />
+
+				<execute function="Check" locator1="AssetPermissions#PERMISSIONS_CHECKBOX" />
+			</then>
+		</if>
+	</command>
+
 	<command name="entryAddPermissionsCmd">
 		<if>
 			<isset var="viewableBy" />
@@ -900,6 +926,24 @@
 	<command name="entryAddSubtitleCmdPG">
 		<execute function="AssertTextEquals" locator1="PGBlogsAdd#SUBTITLE_FIELD_LABEL" value1="Subtitle" />
 		<execute function="Type" locator1="PGBlogsAdd#SUBTITLE_FIELD" value1="${entrySubtitle}" />
+	</command>
+
+	<command name="flag">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute function="AssertClick" locator1="BlogsEntry#FLAG" value1="Flag" />
+
+		<execute function="AssertTextEquals" locator1="ReportContent#HEADER" value1="Report Inappropriate Content" />
+		<execute function="AssertTextEquals" locator1="ReportContent#WARNING" value1="You are about to report a violation of our Terms of Use. All reports are strictly confidential." />
+		<execute function="AssertTextEquals" locator1="ReportContent#WARNING_TERMS_OF_USE_LINK" value1="Terms of Use" />
+
+		<execute function="Select" locator1="ReportContent#REASON_SELECT" value1="${flagReason}" />
+
+		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
+		<execute function="AssertTextEquals" locator1="ReportContent#SUCCESS_MESSAGE" value1="Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure Liferay is a safe environment for everyone." />
+
+		<execute function="Click" locator1="Button#CLOSE_IFRAME" />
 	</command>
 
 	<command name="flagPG">
@@ -1016,10 +1060,7 @@
 	</command>
 
 	<command name="moveToRecycleBinNoPermissionPG">
-		<var name="key_entryTitle" value="${entryTitle}" />
-
-		<execute function="AssertElementNotPresent" locator1="PGBlogs#ENTRY_RECYCLE_BIN" />
-		<execute function="AssertElementNotPresent" locator1="PGBlogs#ENTRY_RECYCLE_BIN" />
+		<execute function="AssertElementNotPresent" locator1="Link#MOVE_TO_THE_RECYCLING_BIN" />
 	</command>
 
 	<command name="moveToRecycleBinPG">
@@ -1136,12 +1177,16 @@
 		<var method="StringUtil#replace('${roleName}', ' ', '-')" name="key_roleName" />
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
 
-		<execute function="AssertClick" locator1="PGBlogs#ENTRY_PERMISSIONS" value1="Permissions" />
+		<execute function="AssertClick" locator1="Link#PERMISSIONS" value1="Permissions" />
 
 		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
+
 		<execute function="AssertTextEquals" locator1="Permissions#HEADER_TITLE" value1="${entryTitle}" />
+
 		<execute function="Uncheck" locator1="Permissions#CONTENT_PERMISSIONS_VIEW_CHECKBOX" value1="${roleName}" />
+
 		<execute function="AssertClick" locator1="Permissions#SAVE_BUTTON" value1="Save" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
@@ -1186,10 +1231,12 @@
 		<var name="key_entryContent" value="${entryContent}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
 
-		<execute function="Type" locator1="CPBlogsSearch#SEARCH_FIELD" value1="${entrySearchTerm}" />
-		<execute function="AssertClick" locator1="CPBlogsSearch#SEARCH_BUTTON" value1="Search" />
-		<execute function="AssertTextEquals" locator1="CPBlogsSearch#SEARCH_RESULTS_ENTRY_TITLE" value1="${entryTitle}" />
-		<execute function="AssertTextEquals" locator1="CPBlogsSearch#SEARCH_RESULTS_ENTRY_DESCRIPTION" value1="${entryContent}" />
+		<execute function="Type" locator1="Search#BASIC_SEARCH_FIELD" value1="${entrySearchTerm}" />
+
+		<execute function="AssertClick" locator1="Button#SEARCH" value1="Search" />
+
+		<execute function="AssertTextEquals" locator1="Search#SEARCH_RESULTS_ENTRY_TITLE" value1="${entryTitle}" />
+		<execute function="AssertTextEquals" locator1="Search#SEARCH_RESULTS_ENTRY_DESCRIPTION" value1="${entryContent}" />
 	</command>
 
 	<command name="searchNoCP">
@@ -1224,6 +1271,19 @@
 		</if>
 	</command>
 
+	<command name="searchNoResultsCP">
+		<var name="key_entryContent" value="${entryContent}" />
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute function="Type" locator1="Search#BASIC_SEARCH_FIELD" value1="${entrySearchTerm}" />
+
+		<execute function="AssertClick" locator1="Button#SEARCH" value1="Search" />
+
+		<execute function="AssertTextEquals" locator1="Message#INFO" value1="No entries were found that matched the keywords: ${entrySearchTerm}." />
+		<execute function="AssertElementNotPresent" locator1="Search#SEARCH_RESULTS_ENTRY_TITLE" value1="${entryTitle}" />
+		<execute function="AssertElementNotPresent" locator1="Search#SEARCH_RESULTS_ENTRY_DESCRIPTION" value1="${entryContent}" />
+	</command>
+
 	<command name="searchPG">
 		<var name="key_entryContent" value="${entryContent}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
@@ -1245,8 +1305,9 @@
 	</command>
 
 	<command name="subscribePG">
-		<execute function="AssertClick" locator1="PGBlogs#SUBSCRIBE_LINK" value1="Subscribe" />
-		<execute function="AssertTextEquals" locator1="PGBlogs#SUCCESS_MESSAGE" value1="Your request completed successfully." />
+		<execute function="AssertClick" locator1="Link#SUBSCRIBE" value1="Subscribe" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>
 
 	<command name="tearDownCP">
@@ -1486,6 +1547,10 @@
 		<execute function="AssertElementPresent" locator1="PGBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
+	<command name="viewEntryAuthorCP">
+		<execute function="AssertTextEquals" locator1="Blogs#ENTRY_TABLE_AUTHOR" value1="${entryAuthor}" />
+	</command>
+
 	<command name="viewEntryViaAPPG">
 		<var name="key_assetTitle" value="${assetTitle}" />
 
@@ -1533,18 +1598,26 @@
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
+	<command name="viewNoAddPermissions">
+		<execute function="AssertElementNotPresent" locator1="Blogs#ADD_BLOGS_ENTRY" />
+	</command>
+
 	<command name="viewNoEditLinkPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
-		<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
-		<execute function="AssertTextEquals" locator1="PGBlogs#ENTRY_CONTENT" value1="${entryContent}" />
-		<execute function="AssertElementNotPresent" locator1="PGBlogs#ENTRY_EDIT" />
+		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
+		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+		<execute function="AssertElementNotPresent" locator1="Link#EDIT" />
+	</command>
+
+	<command name="viewNoEditPermissions">
+		<execute function="AssertElementNotPresent" locator1="Link#EDIT" />
 	</command>
 
 	<command name="viewNoEntryAsGuestPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
-		<execute function="AssertElementNotPresent" locator1="PGBlogs#ENTRY_TITLE" value1="${entryTitle}" />
+		<execute function="AssertElementNotPresent" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
 	</command>
 
 	<command name="viewNoEntryAsGuestViaBlogsAggregatorPG">
@@ -1566,6 +1639,10 @@
 		<execute function="AssertTextNotPresent" value1="${entryTitle}" />
 	</command>
 
+	<command name="viewPermissionsNoPermission">
+		<execute function="AssertElementNotPresent" locator1="Link#PERMISSIONS" value1="Permissions" />
+	</command>
+
 	<command name="viewPermissionsNoPermissionPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
@@ -1575,10 +1652,12 @@
 	<command name="viewPermissionsPG">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
-		<execute function="AssertClick" locator1="PGBlogs#ENTRY_PERMISSIONS" value1="Permissions" />
+		<execute function="AssertClick" locator1="Link#PERMISSIONS" value1="Permissions" />
 
 		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
+
 		<execute function="AssertTextEquals" locator1="Permissions#HEADER_TITLE" value1="${entryTitle}" />
+
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
@@ -1683,10 +1762,10 @@
 	<command name="viewRSS">
 		<execute function="Open" locator1="http://localhost:8080/web/guest/blogs-page/-/blogs/rss" />
 
-		<execute function="AssertTextEquals" locator1="PGBlogsRSS#FEED_TITLE" value1="Liferay" />
-		<execute function="AssertTextEquals" locator1="PGBlogsRSS#FEED_SUBTITLE" value1="Liferay" />
-		<execute function="AssertTextEquals" locator1="PGBlogsRSS#ENTRY_TITLE" value1="${entryTitle}" />
-		<execute function="AssertTextEquals" locator1="PGBlogsRSS#ENTRY_CONTENT" value1="${entryContent}" />
+		<execute function="AssertTextEquals" locator1="Blogs#RSS_FEED_TITLE" value1="Liferay" />
+		<execute function="AssertTextEquals" locator1="Blogs#RSS_FEED_SUBTITLE" value1="Liferay" />
+		<execute function="AssertTextEquals" locator1="Blogs#RSS_ENTRY_TITLE" value1="${entryTitle}" />
+		<execute function="AssertTextEquals" locator1="Blogs#RSS_ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
 	<command name="viewScheduledCP">
@@ -1854,9 +1933,10 @@
 		<var method="StringUtil#replace('${roleName}', ' ', '-')" name="key_roleName" />
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
 
-		<execute function="AssertClick" locator1="PGBlogs#ENTRY_PERMISSIONS" value1="Permissions" />
+		<execute function="AssertClick" locator1="Link#PERMISSIONS" value1="Permissions" />
 
 		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
+
 		<execute function="AssertTextEquals" locator1="Permissions#HEADER_TITLE" value1="${entryTitle}" />
 
 		<if>
