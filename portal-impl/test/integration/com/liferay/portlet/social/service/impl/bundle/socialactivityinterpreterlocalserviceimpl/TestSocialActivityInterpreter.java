@@ -36,6 +36,8 @@ import org.osgi.service.component.annotations.Component;
 public class TestSocialActivityInterpreter
 	implements SocialActivityInterpreter {
 
+	public static final String SELECTOR = "SELECTOR";
+
 	@Override
 	public String[] getClassNames() {
 		return new String[] {TestSocialActivityInterpreter.class.getName()};
@@ -43,7 +45,7 @@ public class TestSocialActivityInterpreter
 
 	@Override
 	public String getSelector() {
-		return "SocialActivityInterpretorLocalServiceImplTest";
+		return SELECTOR;
 	}
 
 	@Override
