@@ -62,7 +62,7 @@ public class RepositoryProviderImpl
 	public LocalRepository getFileEntryLocalRepository(long fileEntryId)
 		throws PortalException {
 
-		return getLocalRepository(getRepositoryIdByFileEntryId(fileEntryId));
+		return getLocalRepository(getFileEntryRepositoryId(fileEntryId));
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class RepositoryProviderImpl
 
 		checkFileEntryPermissions(fileEntryId);
 
-		return getRepository(getRepositoryIdByFileEntryId(fileEntryId));
+		return getRepository(getFileEntryRepositoryId(fileEntryId));
 	}
 
 	@Override
@@ -350,7 +350,7 @@ public class RepositoryProviderImpl
 		return repositoryIds;
 	}
 
-	protected long getRepositoryIdByFileEntryId(long fileEntryId) {
+	protected long getFileEntryRepositoryId(long fileEntryId) {
 		DLFileEntry dlFileEntry = _dlFileEntryLocalService.fetchDLFileEntry(
 			fileEntryId);
 
