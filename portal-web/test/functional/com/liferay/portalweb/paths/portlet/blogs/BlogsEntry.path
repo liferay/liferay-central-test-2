@@ -59,6 +59,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CONTENT_ABSTRACT</td>
+	<td>//div[contains(@class,'entry-body')]/p[contains(.,'${key_entryAbstract}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CONTENT_GENERIC</td>
 	<td>//div[contains(@class,'entry-body')]/p</td>
 	<td></td>
