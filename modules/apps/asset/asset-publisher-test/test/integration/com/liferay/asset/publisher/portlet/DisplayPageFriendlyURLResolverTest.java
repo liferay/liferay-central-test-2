@@ -118,7 +118,7 @@ public class DisplayPageFriendlyURLResolverTest {
 		try {
 			PortalUtil.getActualURL(
 				_group.getGroupId(), false, Portal.PATH_MAIN,
-				"/-/non-existing-test-journal-article",
+				"/-/nonexistent-test-journal-article",
 				new HashMap<String, String[]>(), getRequestContext());
 
 			Assert.fail();
