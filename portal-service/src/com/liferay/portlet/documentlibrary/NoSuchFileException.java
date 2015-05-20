@@ -48,8 +48,9 @@ public class NoSuchFileException extends NoSuchModelException {
 
 		super(
 			String.format(
-				"{companyId=%s, repositoryId=%s, fileName=%s, version=%s}",
-				companyId, repositoryId, fileName, version),
+				"{companyId=%s, repositoryId=%s, fileName=%s, version=%s, " +
+					"cause=%s}",
+				companyId, repositoryId, fileName, version, cause),
 			cause);
 	}
 
@@ -58,8 +59,8 @@ public class NoSuchFileException extends NoSuchModelException {
 
 		super(
 			String.format(
-				"{companyId=%s, repositoryId=%s, fileName=%s}",
-				companyId, repositoryId, fileName),
+				"{companyId=%s, repositoryId=%s, fileName=%s, cause=%s}",
+				companyId, repositoryId, fileName, cause),
 			cause);
 	}
 
