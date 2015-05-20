@@ -41,16 +41,15 @@ public class S3StoreTest extends BaseStoreTestCase {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		Assume.assumeTrue(
-			"Property \"" + PropsKeys.DL_STORE_S3_ACCESS_KEY + "\" must be set",
+			"Property \"" + PropsKeys.DL_STORE_S3_ACCESS_KEY + "\" is not set",
 			Validator.isNotNull(
 				PropsUtil.get(PropsKeys.DL_STORE_S3_ACCESS_KEY)));
 		Assume.assumeTrue(
-			"Property \"" + PropsKeys.DL_STORE_S3_SECRET_KEY + "\" must be set",
+			"Property \"" + PropsKeys.DL_STORE_S3_SECRET_KEY + "\" is not set",
 			Validator.isNotNull(
 				PropsUtil.get(PropsKeys.DL_STORE_S3_SECRET_KEY)));
 		Assume.assumeTrue(
-			"Property \"" + PropsKeys.DL_STORE_S3_BUCKET_NAME +
-				"\" must be set",
+			"Property \"" + PropsKeys.DL_STORE_S3_BUCKET_NAME + "\" is not set",
 			Validator.isNotNull(
 				PropsUtil.get(PropsKeys.DL_STORE_S3_BUCKET_NAME)));
 	}

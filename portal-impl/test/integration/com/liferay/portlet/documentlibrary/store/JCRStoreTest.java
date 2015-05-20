@@ -39,6 +39,7 @@ public class JCRStoreTest extends BaseStoreTestCase {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		JCRFactoryUtil.prepare();
+
 		JCRFactoryUtil.initialize();
 	}
 

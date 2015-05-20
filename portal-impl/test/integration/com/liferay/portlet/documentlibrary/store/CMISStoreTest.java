@@ -57,19 +57,19 @@ public class CMISStoreTest extends BaseStoreTestCase {
 	public static void setUpClass() throws Exception {
 		Assume.assumeFalse(
 			"Property \"" + PropsKeys.DL_STORE_CMIS_CREDENTIALS_USERNAME +
-				"\" must be set",
+				"\" is not set",
 			PropsValues.DL_STORE_CMIS_CREDENTIALS_USERNAME.equals("none"));
 		Assume.assumeFalse(
 			"Property \"" + PropsKeys.DL_STORE_CMIS_CREDENTIALS_PASSWORD +
-				"\" must be set",
+				"\" is not set",
 			PropsValues.DL_STORE_CMIS_CREDENTIALS_PASSWORD.equals("none"));
 		Assume.assumeTrue(
 			"Property \"" + PropsKeys.SESSION_STORE_PASSWORD +
-				"\" must be true",
+				"\" is not set to true",
 			PropsValues.SESSION_STORE_PASSWORD);
 		Assume.assumeTrue(
 			"Property \"" + PropsKeys.COMPANY_SECURITY_AUTH_TYPE +
-				"\" must be " + CompanyConstants.AUTH_TYPE_SN,
+				"\" is not set to \"" + CompanyConstants.AUTH_TYPE_SN + "\"",
 			PropsValues.COMPANY_SECURITY_AUTH_TYPE.equals(
 				CompanyConstants.AUTH_TYPE_SN));
 	}
