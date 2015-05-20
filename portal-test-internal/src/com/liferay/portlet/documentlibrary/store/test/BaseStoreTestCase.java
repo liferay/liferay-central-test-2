@@ -345,12 +345,16 @@ public abstract class BaseStoreTestCase {
 		String subdirectory = directory + "/" + RandomTestUtil.randomString();
 
 		String fileName1 = directory + "/" + RandomTestUtil.randomString();
+
+		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+
 		String fileName2 = subdirectory + "/" + RandomTestUtil.randomString();
+
+		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
+
 		String fileName3 =
 			RandomTestUtil.randomString() + "/" + RandomTestUtil.randomString();
 
-		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
-		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 		store.addFile(companyId, repositoryId, fileName3, _DATA_VERSION_1);
 
 		String[] fileNames = store.getFileNames(
