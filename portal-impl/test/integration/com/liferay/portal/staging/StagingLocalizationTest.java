@@ -126,10 +126,10 @@ public class StagingLocalizationTest {
 			_sourceGroup.getGroupId(), "Title", "content",
 			LocaleUtil.fromLanguageId(defaultContentLanguageId));
 
+		User user = TestPropsValues.getUser();
+
 		Map<String, String[]> parameterMap =
 			ExportImportConfigurationParameterMapFactory.buildParameterMap();
-
-		User user = TestPropsValues.getUser();
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(

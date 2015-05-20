@@ -293,6 +293,8 @@ public class SitesImpl implements Sites {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		User user = UserLocalServiceUtil.getUser(userId);
+
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
 
@@ -300,11 +302,9 @@ public class SitesImpl implements Sites {
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			new String[] {Boolean.FALSE.toString()});
 
-		User user = UserLocalServiceUtil.getUser(userId);
-
 		Map<String, Serializable> exportSettingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
-				userId, sourceLayout.getGroupId(),
+				user.getUserId(), sourceLayout.getGroupId(),
 				sourceLayout.isPrivateLayout(),
 				new long[] {sourceLayout.getLayoutId()}, parameterMap,
 				user.getLocale(), user.getTimeZone());
@@ -312,8 +312,8 @@ public class SitesImpl implements Sites {
 		ExportImportConfiguration exportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
 				addExportImportConfiguration(
-					userId, sourceLayout.getGroupId(), StringPool.BLANK,
-					StringPool.BLANK,
+					user.getUserId(), sourceLayout.getGroupId(),
+					StringPool.BLANK, StringPool.BLANK,
 					ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT,
 					exportSettingsMap, WorkflowConstants.STATUS_DRAFT,
 					new ServiceContext());
@@ -603,15 +603,6 @@ public class SitesImpl implements Sites {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		LayoutSet layoutSet = layoutSetPrototype.getLayoutSet();
-
-		List<Layout> layoutSetPrototypeLayouts =
-			LayoutLocalServiceUtil.getLayouts(
-				layoutSet.getGroupId(), layoutSet.isPrivateLayout());
-
-		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
-			serviceContext);
-
 		User user = UserLocalServiceUtil.fetchUser(serviceContext.getUserId());
 
 		if (user == null) {
@@ -628,6 +619,15 @@ public class SitesImpl implements Sites {
 			user = UserLocalServiceUtil.getUser(
 				GetterUtil.getLong(PrincipalThreadLocal.getName()));
 		}
+
+		LayoutSet layoutSet = layoutSetPrototype.getLayoutSet();
+
+		List<Layout> layoutSetPrototypeLayouts =
+			LayoutLocalServiceUtil.getLayouts(
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout());
+
+		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
+			serviceContext);
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
