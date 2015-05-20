@@ -117,7 +117,7 @@ try {
 }
 catch (Exception e) {
 	if (_log.isWarnEnabled()) {
-		_log.warn("Error retrieving workflow instances", e);
+		_log.warn("Unable to retrieve workflow instances", e);
 	}
 %>
 
