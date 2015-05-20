@@ -38,11 +38,7 @@ public class TestSocialActivityInterpreter
 
 	@Override
 	public String[] getClassNames() {
-		String[] classNames = new String[1];
-
-		classNames[0] = TestSocialActivityInterpreter.class.getName();
-
-		return classNames;
+		return new String[] {TestSocialActivityInterpreter.class.getName()};
 	}
 
 	@Override
