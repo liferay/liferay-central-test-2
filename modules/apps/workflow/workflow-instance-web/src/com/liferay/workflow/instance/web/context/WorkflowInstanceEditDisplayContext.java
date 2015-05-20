@@ -105,8 +105,12 @@ public class WorkflowInstanceEditDisplayContext
 
 		User user = getUser(workflowLog.getUserId());
 
-		return user.isMale() ?
-			"x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself";
+		if (user.isMale()) {
+			return "x-assigned-the-task-to-himself";
+		}
+		else {
+			return "x-assigned-the-task-to-herself";
+		}
 	}
 
 	public Object getAssignedTheTaskToMessageArguments(WorkflowLog workflowLog)
