@@ -1760,6 +1760,73 @@ public class ClusterSchedulerEngineTest {
 
 	}
 
+	protected void assertSuppressErrorValue(
+		SchedulerResponse schedulerResponse, Object expectedValue) {
+
+		Message message = schedulerResponse.getMessage();
+
+		Assert.assertEquals(expectedValue, message.get(_SUPPRESS_ERROR));
+	}
+
+	protected void assertTriggerContent(
+		SchedulerResponse schedulerResponse, long expectedInterval) {
+
+		Trigger trigger = schedulerResponse.getTrigger();
+
+		Assert.assertEquals(expectedInterval, trigger.getTriggerContent());
+	}
+
+	protected void assertTriggerState(
+		SchedulerResponse schedulerResponse,
+		TriggerState expectedTriggerState) {
+
+		Message message = schedulerResponse.getMessage();
+
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
+
+		Assert.assertEquals(expectedTriggerState, jobState.getTriggerState());
+	}
+
+	protected SchedulerResponse getMemoryClusteredJob(
+		String jobName, String groupName) {
+
+		ObjectValuePair<SchedulerResponse, TriggerState> objectValuePair =
+			_memoryClusteredJobs.get(
+				groupName.concat(StringPool.PERIOD).concat(jobName));
+
+		if (objectValuePair == null) {
+			return null;
+		}
+
+		SchedulerResponse schedulerResponse = objectValuePair.getKey();
+
+		Message message = schedulerResponse.getMessage();
+
+		message.put(
+			SchedulerEngine.JOB_STATE,
+			new JobState(objectValuePair.getValue()));
+
+		return schedulerResponse;
+	}
+
+	protected List<SchedulerResponse> getMemoryClusteredJobs(String groupName) {
+		List<SchedulerResponse> schedulerResponses = new ArrayList<>();
+
+		for (ObjectValuePair<SchedulerResponse, TriggerState> objectValuePair :
+				_memoryClusteredJobs.values()) {
+
+			SchedulerResponse schedulerResponse = objectValuePair.getKey();
+
+			if (groupName.equals(schedulerResponse.getGroupName())) {
+				schedulerResponses.add(
+					getMemoryClusteredJob(
+						schedulerResponse.getJobName(), groupName));
+			}
+		}
+
+		return schedulerResponses;
+	}
+
 	protected void setUpClusterInvokeAcceptor() throws Exception {
 		Class<? extends ClusterInvokeAcceptor> clusterInvokeAcceptorClass =
 			(Class<? extends ClusterInvokeAcceptor>)Class.forName(
@@ -1889,73 +1956,6 @@ public class ClusterSchedulerEngineTest {
 		_schedulerEngineHelperImpl.setProps(_props);
 
 		_schedulerEngineHelperImpl.setClusterLink(_clusterLink);
-	}
-
-	protected void assertSuppressErrorValue(
-		SchedulerResponse schedulerResponse, Object expectedValue) {
-
-		Message message = schedulerResponse.getMessage();
-
-		Assert.assertEquals(expectedValue, message.get(_SUPPRESS_ERROR));
-	}
-
-	protected void assertTriggerContent(
-		SchedulerResponse schedulerResponse, long expectedInterval) {
-
-		Trigger trigger = schedulerResponse.getTrigger();
-
-		Assert.assertEquals(expectedInterval, trigger.getTriggerContent());
-	}
-
-	protected void assertTriggerState(
-		SchedulerResponse schedulerResponse,
-		TriggerState expectedTriggerState) {
-
-		Message message = schedulerResponse.getMessage();
-
-		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
-
-		Assert.assertEquals(expectedTriggerState, jobState.getTriggerState());
-	}
-
-	protected SchedulerResponse getMemoryClusteredJob(
-		String jobName, String groupName) {
-
-		ObjectValuePair<SchedulerResponse, TriggerState> objectValuePair =
-			_memoryClusteredJobs.get(
-				groupName.concat(StringPool.PERIOD).concat(jobName));
-
-		if (objectValuePair == null) {
-			return null;
-		}
-
-		SchedulerResponse schedulerResponse = objectValuePair.getKey();
-
-		Message message = schedulerResponse.getMessage();
-
-		message.put(
-			SchedulerEngine.JOB_STATE,
-			new JobState(objectValuePair.getValue()));
-
-		return schedulerResponse;
-	}
-
-	protected List<SchedulerResponse> getMemoryClusteredJobs(String groupName) {
-		List<SchedulerResponse> schedulerResponses = new ArrayList<>();
-
-		for (ObjectValuePair<SchedulerResponse, TriggerState> objectValuePair :
-				_memoryClusteredJobs.values()) {
-
-			SchedulerResponse schedulerResponse = objectValuePair.getKey();
-
-			if (groupName.equals(schedulerResponse.getGroupName())) {
-				schedulerResponses.add(
-					getMemoryClusteredJob(
-						schedulerResponse.getJobName(), groupName));
-			}
-		}
-
-		return schedulerResponses;
 	}
 
 	private static final long _DEFAULT_INTERVAL = 20000;
