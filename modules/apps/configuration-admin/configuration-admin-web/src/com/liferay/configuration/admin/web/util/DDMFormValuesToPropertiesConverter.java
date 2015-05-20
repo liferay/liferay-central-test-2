@@ -101,11 +101,11 @@ public class DDMFormValuesToPropertiesConverter {
 	protected String getDDMFormFieldValueString(
 		DDMFormFieldValue ddmFormFieldValue) {
 
-		String type = getDDMFormFieldType(ddmFormFieldValue.getName());
-
 		Value value = ddmFormFieldValue.getValue();
 
 		String valueString = value.getString(_locale);
+
+		String type = getDDMFormFieldType(ddmFormFieldValue.getName());
 
 		if (type.equals(DDMFormFieldType.SELECT)) {
 			try {
