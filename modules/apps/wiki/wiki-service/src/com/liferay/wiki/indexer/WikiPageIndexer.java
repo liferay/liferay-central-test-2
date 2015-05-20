@@ -79,15 +79,15 @@ public class WikiPageIndexer extends BaseIndexer {
 
 		long classPK = 0;
 
-		if (obj instanceof DLFileEntry) {
-			DLFileEntry dlFileEntry = (DLFileEntry)obj;
-
-			classPK = dlFileEntry.getClassPK();
-		}
-		else if (obj instanceof Comment) {
+		if (obj instanceof Comment) {
 			Comment comment = (Comment)obj;
 
 			classPK = comment.getClassPK();
+		}
+		else if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+			classPK = dlFileEntry.getClassPK();
 		}
 
 		WikiPage page = null;
