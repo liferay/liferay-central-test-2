@@ -118,12 +118,6 @@ public class ClusterSchedulerEngineTest {
 	@Test
 	public void testCreateClusterSchedulerEngine1() {
 		Mockito.when(
-			_clusterLink.isEnabled()
-		).thenReturn(
-			true
-		);
-
-		Mockito.when(
 			_props.get(PropsKeys.SCHEDULER_ENABLED)
 		).thenReturn("true");
 
