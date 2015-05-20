@@ -76,7 +76,7 @@ public class WorkflowInstancePortlet extends MVCPortlet {
 		String actionName = ParamUtil.getString(
 			actionRequest, ActionRequest.ACTION_NAME);
 
-		if (StringUtil.equalsIgnoreCase(actionName, _DISCUSSION_ACTION)) {
+		if (StringUtil.equalsIgnoreCase(actionName, "invokeTaglibDiscussion")) {
 			hideDefaultSuccessMessage(actionRequest);
 		}
 
@@ -164,8 +164,6 @@ public class WorkflowInstancePortlet extends MVCPortlet {
 
 		renderRequest.setAttribute(WebKeys.WORKFLOW_INSTANCE, workflowInstance);
 	}
-
-	private static final String _DISCUSSION_ACTION = "invokeTaglibDiscussion";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		WorkflowInstancePortlet.class);
