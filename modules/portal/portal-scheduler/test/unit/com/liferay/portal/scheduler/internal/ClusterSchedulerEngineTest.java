@@ -1881,8 +1881,6 @@ public class ClusterSchedulerEngineTest {
 	}
 
 	protected void setUpSchedulerEngineHelper(JSONFactory jsonFactory) {
-		_mockClusterMasterExecutor = new MockClusterMasterExecutor();
-
 		_schedulerEngineHelperImpl = new SchedulerEngineHelperImpl();
 
 		_schedulerEngineHelperImpl.setClusterMasterExecutor(
@@ -1979,8 +1977,9 @@ public class ClusterSchedulerEngineTest {
 
 	private static final MethodKey _getScheduledJobsMethodKey = new MethodKey(
 		SchedulerEngineHelperUtil.class, "getScheduledJobs", StorageType.class);
-	private static MockClusterMasterExecutor _mockClusterMasterExecutor;
 
+	private MockClusterMasterExecutor _mockClusterMasterExecutor =
+		new MockClusterMasterExecutor();
 	private ClusterInvokeAcceptor _clusterInvokeAcceptor;
 	private ClusterLink _clusterLink;
 	private ClusterSchedulerEngine _clusterSchedulerEngine;
