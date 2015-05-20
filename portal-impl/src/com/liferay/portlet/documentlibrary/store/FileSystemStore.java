@@ -461,32 +461,6 @@ public class FileSystemStore extends BaseStore {
 		}
 	}
 
-	protected void getFileNames(
-		List<String> fileNames, String dirName, String path) {
-
-		String[] pathDirNames = FileUtil.listDirs(path);
-
-		if (ArrayUtil.isNotEmpty(pathDirNames)) {
-			for (String pathDirName : pathDirNames) {
-				String subdirName = null;
-
-				if (Validator.isBlank(dirName)) {
-					subdirName = pathDirName;
-				}
-				else {
-					subdirName = dirName + StringPool.SLASH + pathDirName;
-				}
-
-				getFileNames(
-					fileNames, subdirName,
-					path + StringPool.SLASH + pathDirName);
-			}
-		}
-		else {
-			fileNames.add(dirName);
-		}
-	}
-
 	protected File getCompanyDir(long companyId) {
 		File companyDir = new File(_rootDir + StringPool.SLASH + companyId);
 
@@ -515,6 +489,32 @@ public class FileSystemStore extends BaseStore {
 			repositoryDir + StringPool.SLASH + fileName);
 
 		return fileNameDir;
+	}
+
+	protected void getFileNames(
+		List<String> fileNames, String dirName, String path) {
+
+		String[] pathDirNames = FileUtil.listDirs(path);
+
+		if (ArrayUtil.isNotEmpty(pathDirNames)) {
+			for (String pathDirName : pathDirNames) {
+				String subdirName = null;
+
+				if (Validator.isBlank(dirName)) {
+					subdirName = pathDirName;
+				}
+				else {
+					subdirName = dirName + StringPool.SLASH + pathDirName;
+				}
+
+				getFileNames(
+					fileNames, subdirName,
+					path + StringPool.SLASH + pathDirName);
+			}
+		}
+		else {
+			fileNames.add(dirName);
+		}
 	}
 
 	protected File getFileNameVersionFile(
