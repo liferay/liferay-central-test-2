@@ -391,7 +391,7 @@ public abstract class BaseStoreTestCase {
 	}
 
 	@Test
-	public void testGetFileNamesWithTwoLevelDeep() throws Exception {
+	public void testGetFileNamesWithTwoLevelsDeep() throws Exception {
 		String directory = RandomTestUtil.randomString();
 
 		String subdirectory = directory + "/" + RandomTestUtil.randomString();
