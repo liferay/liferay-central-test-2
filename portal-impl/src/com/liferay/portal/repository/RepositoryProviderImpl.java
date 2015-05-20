@@ -79,7 +79,7 @@ public class RepositoryProviderImpl
 		throws PortalException {
 
 		return getLocalRepository(
-			getRepositoryIdByFileShortcutId(fileShortcutId));
+			getFileShortcutRepositoryId(fileShortcutId));
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class RepositoryProviderImpl
 
 		checkFileShortcutPermissions(fileShortcutId);
 
-		return getRepository(getRepositoryIdByFileShortcutId(fileShortcutId));
+		return getRepository(getFileShortcutRepositoryId(fileShortcutId));
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class RepositoryProviderImpl
 		throws PortalException {
 
 		return getLocalRepository(
-			getRepositoryIdByFileVersionId(fileVersionId));
+			getFileVersionRepositoryId(fileVersionId));
 	}
 
 	@Override
@@ -105,14 +105,14 @@ public class RepositoryProviderImpl
 
 		checkFileVersionPermissions(fileVersionId);
 
-		return getRepository(getRepositoryIdByFileVersionId(fileVersionId));
+		return getRepository(getFileVersionRepositoryId(fileVersionId));
 	}
 
 	@Override
 	public LocalRepository getFolderLocalRepository(long folderId)
 		throws PortalException {
 
-		return getLocalRepository(getRepositoryIdByFolderId(folderId));
+		return getLocalRepository(getFolderRepositoryId(folderId));
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class RepositoryProviderImpl
 
 		checkFolderPermissions(folderId);
 
-		return getRepository(getRepositoryIdByFolderId(folderId));
+		return getRepository(getFolderRepositoryId(folderId));
 	}
 
 	@Override
@@ -158,12 +158,12 @@ public class RepositoryProviderImpl
 	public LocalRepository getImageLocalRepository(long imageId)
 		throws PortalException {
 
-		return getLocalRepository(getRepositoryIdByImageId(imageId));
+		return getLocalRepository(getImageRepositoryId(imageId));
 	}
 
 	@Override
 	public Repository getImageRepository(long imageId) throws PortalException {
-		return getRepository(getRepositoryIdByImageId(imageId));
+		return getRepository(getImageRepositoryId(imageId));
 	}
 
 	@Override
@@ -360,7 +360,7 @@ public class RepositoryProviderImpl
 		return repositoryIds;
 	}
 
-	protected long getRepositoryIdByFileShortcutId(long fileShortcutId) {
+	protected long getFileShortcutRepositoryId(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut =
 			_dlFileShortcutLocalService.fetchDLFileShortcut(fileShortcutId);
 
@@ -372,7 +372,7 @@ public class RepositoryProviderImpl
 			"Missing a valid ID for file shortcut");
 	}
 
-	protected long getRepositoryIdByFileVersionId(long fileVersionId) {
+	protected long getFileVersionRepositoryId(long fileVersionId) {
 		DLFileVersion dlFileVersion =
 			_dlFileVersionLocalService.fetchDLFileVersion(fileVersionId);
 
@@ -384,7 +384,7 @@ public class RepositoryProviderImpl
 			"Missing a valid ID for file version");
 	}
 
-	protected long getRepositoryIdByFolderId(long folderId) {
+	protected long getFolderRepositoryId(long folderId) {
 		DLFolder dlFolder = _dlFolderLocalService.fetchDLFolder(folderId);
 
 		if (dlFolder != null) {
@@ -399,7 +399,7 @@ public class RepositoryProviderImpl
 		throw new InvalidRepositoryIdException("Missing a valid ID for folder");
 	}
 
-	protected long getRepositoryIdByImageId(long imageId)
+	protected long getImageRepositoryId(long imageId)
 		throws PortalException {
 
 		DLFileEntry dlFileEntry =
