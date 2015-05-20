@@ -245,7 +245,6 @@ public abstract class BaseStoreTestCase {
 		Assert.assertFalse(
 			store.hasFile(
 				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
-
 		Assert.assertTrue(
 			store.hasFile(companyId, repositoryId, fileName, "1.1"));
 	}
@@ -299,9 +298,11 @@ public abstract class BaseStoreTestCase {
 	@Test
 	public void testGetFileNames() throws Exception {
 		String fileName1 = RandomTestUtil.randomString();
-		String fileName2 = RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+
+		String fileName2 = RandomTestUtil.randomString();
+
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
 		String[] fileNames = store.getFileNames(companyId, repositoryId);
