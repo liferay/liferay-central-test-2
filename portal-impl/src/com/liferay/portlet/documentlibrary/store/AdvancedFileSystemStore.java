@@ -307,15 +307,15 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 			return path;
 		}
 
-		String[] fragments = StringUtil.split(path, CharPool.SLASH);
+		String[] parts = StringUtil.split(path, CharPool.SLASH);
 
-		StringBundler sb = new StringBundler(fragments.length - 1);
+		StringBundler sb = new StringBundler(parts.length - 1);
 
-		for (int i = 0; i < fragments.length - 1; i++) {
-			sb.append(fragments[i]);
+		for (int i = 0; i < parts.length - 1; i++) {
+			sb.append(parts[i]);
 		}
 
-		String simpleName = fragments[fragments.length - 1];
+		String simpleName = parts[parts.length - 1];
 
 		if (simpleName.startsWith(sb.toString())) {
 			return simpleName;
