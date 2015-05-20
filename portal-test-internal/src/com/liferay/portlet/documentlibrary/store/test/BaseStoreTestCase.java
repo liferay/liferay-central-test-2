@@ -170,17 +170,17 @@ public abstract class BaseStoreTestCase {
 
 	@Test
 	public void testDeleteDirectory() throws Exception {
-		String directory = RandomTestUtil.randomString();
+		String dirName = RandomTestUtil.randomString();
 
-		String fileName1 = directory + "/" + RandomTestUtil.randomString();
+		String fileName1 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
 
-		String fileName2 = directory + "/" + RandomTestUtil.randomString();
+		String fileName2 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
-		store.deleteDirectory(companyId, repositoryId, directory);
+		store.deleteDirectory(companyId, repositoryId, dirName);
 
 		Assert.assertFalse(
 			store.hasFile(
@@ -192,19 +192,19 @@ public abstract class BaseStoreTestCase {
 
 	@Test
 	public void testDeleteDirectoryWithTwoLevelDeep() throws Exception {
-		String directory = RandomTestUtil.randomString();
+		String dirName = RandomTestUtil.randomString();
 
-		String subdirectory = directory + "/" + RandomTestUtil.randomString();
+		String subdirName = dirName + "/" + RandomTestUtil.randomString();
 
-		String fileName1 = directory + "/" + RandomTestUtil.randomString();
+		String fileName1 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
 
-		String fileName2 = subdirectory + "/" + RandomTestUtil.randomString();
+		String fileName2 = subdirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
-		store.deleteDirectory(companyId, repositoryId, directory);
+		store.deleteDirectory(companyId, repositoryId, dirName);
 
 		Assert.assertFalse(
 			store.hasFile(
@@ -317,18 +317,18 @@ public abstract class BaseStoreTestCase {
 
 	@Test
 	public void testGetFileNamesWithDirectoryOneLevelDeep() throws Exception {
-		String directory = RandomTestUtil.randomString();
+		String dirName = RandomTestUtil.randomString();
 
-		String fileName1 = directory + "/" + RandomTestUtil.randomString();
+		String fileName1 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
 
-		String fileName2 = directory + "/" + RandomTestUtil.randomString();
+		String fileName2 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
 		String[] fileNames = store.getFileNames(
-			companyId, repositoryId, directory);
+			companyId, repositoryId, dirName);
 
 		Assert.assertEquals(2, fileNames.length);
 
@@ -340,15 +340,15 @@ public abstract class BaseStoreTestCase {
 
 	@Test
 	public void testGetFileNamesWithDirectoryTwoLevelDeep() throws Exception {
-		String directory = RandomTestUtil.randomString();
+		String dirName = RandomTestUtil.randomString();
 
-		String subdirectory = directory + "/" + RandomTestUtil.randomString();
+		String subdirName = dirName + "/" + RandomTestUtil.randomString();
 
-		String fileName1 = directory + "/" + RandomTestUtil.randomString();
+		String fileName1 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
 
-		String fileName2 = subdirectory + "/" + RandomTestUtil.randomString();
+		String fileName2 = subdirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
@@ -358,7 +358,7 @@ public abstract class BaseStoreTestCase {
 		store.addFile(companyId, repositoryId, fileName3, _DATA_VERSION_1);
 
 		String[] fileNames = store.getFileNames(
-			companyId, repositoryId, directory);
+			companyId, repositoryId, dirName);
 
 		Assert.assertEquals(2, fileNames.length);
 
@@ -367,7 +367,7 @@ public abstract class BaseStoreTestCase {
 		Assert.assertTrue(fileNamesSet.contains(fileName1));
 		Assert.assertTrue(fileNamesSet.contains(fileName2));
 
-		fileNames = store.getFileNames(companyId, repositoryId, subdirectory);
+		fileNames = store.getFileNames(companyId, repositoryId, subdirName);
 
 		Assert.assertEquals(1, fileNames.length);
 		Assert.assertEquals(fileName2, fileNames[0]);
@@ -375,10 +375,10 @@ public abstract class BaseStoreTestCase {
 
 	@Test
 	public void testGetFileNamesWithInvalidDirectory() {
-		String directory = RandomTestUtil.randomString();
+		String dirName = RandomTestUtil.randomString();
 
 		String[] fileNames = store.getFileNames(
-			companyId, repositoryId, directory);
+			companyId, repositoryId, dirName);
 
 		Assert.assertEquals(0, fileNames.length);
 	}
@@ -392,15 +392,15 @@ public abstract class BaseStoreTestCase {
 
 	@Test
 	public void testGetFileNamesWithTwoLevelsDeep() throws Exception {
-		String directory = RandomTestUtil.randomString();
+		String dirName = RandomTestUtil.randomString();
 
-		String subdirectory = directory + "/" + RandomTestUtil.randomString();
+		String subdirName = dirName + "/" + RandomTestUtil.randomString();
 
-		String fileName1 = directory + "/" + RandomTestUtil.randomString();
+		String fileName1 = dirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
 
-		String fileName2 = subdirectory + "/" + RandomTestUtil.randomString();
+		String fileName2 = subdirName + "/" + RandomTestUtil.randomString();
 
 		store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
