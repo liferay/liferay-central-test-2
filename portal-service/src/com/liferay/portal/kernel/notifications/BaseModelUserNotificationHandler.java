@@ -131,13 +131,12 @@ public abstract class BaseModelUserNotificationHandler
 			message = "x-updated-a-x";
 		}
 
-		long userId = jsonObject.getLong("userId");
-
 		return LanguageUtil.format(
 			serviceContext.getLocale(), message,
 			new String[] {
 				HtmlUtil.escape(
-					PortalUtil.getUserName(userId, StringPool.BLANK)),
+					PortalUtil.getUserName(
+						jsonObject.getLong("userId"), StringPool.BLANK)),
 				StringUtil.toLowerCase(HtmlUtil.escape(typeName))
 			},
 			false);

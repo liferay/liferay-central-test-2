@@ -98,14 +98,13 @@ public class CommentsUserNotificationHandler
 			}
 		}
 
-		long userId = jsonObject.getLong("userId");
-
 		if (assetRenderer != null) {
 			message = LanguageUtil.format(
 				serviceContext.getLocale(), message,
 				new String[] {
 					HtmlUtil.escape(
-						PortalUtil.getUserName(userId, StringPool.BLANK)),
+						PortalUtil.getUserName(
+							jsonObject.getLong("userId"), StringPool.BLANK)),
 					HtmlUtil.escape(
 						assetRenderer.getTitle(serviceContext.getLocale()))
 				},
@@ -116,7 +115,8 @@ public class CommentsUserNotificationHandler
 				serviceContext.getLocale(), message,
 				new String[] {
 					HtmlUtil.escape(
-						PortalUtil.getUserName(userId, StringPool.BLANK))
+						PortalUtil.getUserName(
+							jsonObject.getLong("userId"), StringPool.BLANK))
 				},
 				false);
 		}
