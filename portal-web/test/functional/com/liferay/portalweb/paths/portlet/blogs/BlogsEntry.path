@@ -69,6 +69,31 @@
 	<td></td>
 </tr>
 <tr>
+	<td>VOCABULARY</td>
+	<td>//span[@class='taglib-asset-categories-summary' and contains(.,'${key_vocabularyName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CATEGORY</td>
+	<td>//span[@class='taglib-asset-categories-summary']/a[contains(.,'${key_categoryName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TAG</td>
+	<td>//div[contains(@class,'entry') and contains(@class,'approved') and contains(.,'${key_entryTitle}')]//span/a[contains(.,'${key_tagName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RELATED_ASSETS_LINK_IMAGE</td>
+	<td>//div[contains(@class,'entry') and contains(@class,'approved') and contains(.,'${key_entryTitle}')]//div/div[contains(@class,'asset-links')]/ul//a/i</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RELATED_ASSETS_TITLE</td>
+	<td>//div[contains(@class,'entry') and contains(@class,'approved') and contains(.,'${key_entryTitle}')]//div/div[contains(@class,'asset-links')]/ul//a[contains(.,'${key_assetTitle}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ENTRY_AUTHOR</td>
 	<td>//div[contains(@class,'entry-author')]//span[contains(@class,'user-name')]</td>
 	<td></td>
