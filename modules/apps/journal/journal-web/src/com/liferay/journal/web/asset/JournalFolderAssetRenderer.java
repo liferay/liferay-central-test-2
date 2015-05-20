@@ -124,6 +124,11 @@ public class JournalFolderAssetRenderer
 	}
 
 	@Override
+	public String getStatusLabel() {
+		return WorkflowConstants.getStatusLabel(_folder.getStatus());
+	}
+
+	@Override
 	public String getSummary(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
