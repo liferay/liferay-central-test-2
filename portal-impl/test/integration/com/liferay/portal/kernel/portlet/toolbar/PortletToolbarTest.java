@@ -51,7 +51,7 @@ public class PortletToolbarTest {
 		try {
 			Thread.sleep(1000);
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException ie) {
 		}
 
 		List<Menu> menus = portletToolbar.getPortletTitleMenus(
