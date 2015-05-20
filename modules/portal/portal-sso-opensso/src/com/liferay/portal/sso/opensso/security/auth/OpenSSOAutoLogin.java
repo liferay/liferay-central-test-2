@@ -228,13 +228,10 @@ public class OpenSSOAutoLogin extends BaseAutoLogin {
 	protected OpenSSOConfiguration getOpenSSOConfiguration(long companyId)
 		throws Exception {
 
-		OpenSSOConfiguration openSSOConfiguration =
-			_settingsFactory.getSettings(
-				OpenSSOConfiguration.class,
-				new CompanyServiceSettingsLocator(
-					companyId, OpenSSOConstants.SERVICE_NAME));
-
-		return openSSOConfiguration;
+		return _settingsFactory.getSettings(
+			OpenSSOConfiguration.class,
+			new CompanyServiceSettingsLocator(
+				companyId, OpenSSOConstants.SERVICE_NAME));
 	}
 
 	@Reference
