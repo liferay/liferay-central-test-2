@@ -548,20 +548,20 @@ public abstract class BaseStoreTestCase {
 		store.updateFile(
 			companyId, repositoryId, fileName, "1.1", _DATA_VERSION_2);
 
-		byte[] bytesFirstVersion = store.getFileAsBytes(
+		byte[] firstVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.0");
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_1, bytesFirstVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_1, firstVersionBytes));
 
-		byte[] bytesSecondVersion = store.getFileAsBytes(
+		byte[] secondVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.1");
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, bytesSecondVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, secondVersionBytes));
 
-		byte[] bytesCurrentVersion = store.getFileAsBytes(
+		byte[] currentVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName);
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, bytesCurrentVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, currentVersionBytes));
 	}
 
 	@Test
@@ -574,20 +574,20 @@ public abstract class BaseStoreTestCase {
 
 		store.updateFile(companyId, repositoryId, fileName, "1.1", file);
 
-		byte[] bytesFirstVersion = store.getFileAsBytes(
+		byte[] firstVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.0");
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_1, bytesFirstVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_1, firstVersionBytes));
 
-		byte[] bytesSecondVersion = store.getFileAsBytes(
+		byte[] secondVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.1");
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, bytesSecondVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, secondVersionBytes));
 
-		byte[] bytesCurrentVersion = store.getFileAsBytes(
+		byte[] currentVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName);
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, bytesCurrentVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, currentVersionBytes));
 	}
 
 	@Test
@@ -600,20 +600,20 @@ public abstract class BaseStoreTestCase {
 			companyId, repositoryId, fileName, "1.1",
 			new ByteArrayInputStream(_DATA_VERSION_2));
 
-		byte[] bytesFirstVersion = store.getFileAsBytes(
+		byte[] firstVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.0");
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_1, bytesFirstVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_1, firstVersionBytes));
 
-		byte[] bytesSecondVersion = store.getFileAsBytes(
+		byte[] secondVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.1");
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, bytesSecondVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, secondVersionBytes));
 
-		byte[] bytesCurrentVersion = store.getFileAsBytes(
+		byte[] currentVersionBytes = store.getFileAsBytes(
 			companyId, repositoryId, fileName);
 
-		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, bytesCurrentVersion));
+		Assert.assertTrue(Arrays.equals(_DATA_VERSION_2, currentVersionBytes));
 	}
 
 	@Test
