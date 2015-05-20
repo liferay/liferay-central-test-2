@@ -29,12 +29,13 @@ public class PortalRequestDataSample extends BaseDataSample {
 		long companyId, long groupId, String user, String requestURI,
 		String requestURL) {
 
+		_requestURL = requestURL;
+
 		setCompanyId(companyId);
 		setGroupId(groupId);
-		setUser(user);
-		setNamespace(MonitorNames.PORTAL);
 		setName(requestURI);
-		_requestURL = requestURL;
+		setNamespace(MonitorNames.PORTAL);
+		setUser(user);
 	}
 
 	public String getRequestURL() {
