@@ -44,21 +44,21 @@ public class PortletRequestDataSample extends BaseDataSample {
 		PortletRequestType requestType, PortletRequest portletRequest,
 		PortletResponse portletResponse, Portal portal) {
 
+		_requestType = requestType;
+
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;
 
 		Portlet portlet = liferayPortletResponse.getPortlet();
 
 		setCompanyId(portlet.getCompanyId());
-
 		setGroupId(portletRequest, portal);
-
-		setUser(portletRequest.getRemoteUser());
-		setNamespace(MonitorNames.PORTLET);
 		setName(portlet.getPortletName());
-		_portletId = portlet.getPortletId();
+		setNamespace(MonitorNames.PORTLET);
+		setUser(portletRequest.getRemoteUser());
+
 		_displayName = portlet.getDisplayName();
-		_requestType = requestType;
+		_portletId = portlet.getPortletId();
 	}
 
 	public String getDisplayName() {
@@ -125,7 +125,7 @@ public class PortletRequestDataSample extends BaseDataSample {
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to obtain scope group id", pe);
+				_log.debug("Unable to obtain scope group ID", pe);
 			}
 		}
 	}
