@@ -87,7 +87,7 @@ public class TempFileEntryUtil {
 		throws PortalException {
 
 		LocalRepository localRepository =
-			RepositoryProviderUtil.getLocalRepositoryByFileEntryId(fileEntryId);
+			RepositoryProviderUtil.getFileEntryLocalRepository(fileEntryId);
 
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
 

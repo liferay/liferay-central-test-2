@@ -130,7 +130,7 @@ public class RepositoryProviderImpl
 
 		List<LocalRepository> localRepositories = new ArrayList<>();
 
-		List<Long> repositoryIds = getRepositoryIdsByGroupId(groupId);
+		List<Long> repositoryIds = getGroupRepositoryIds(groupId);
 
 		for (long repositoryId : repositoryIds) {
 			localRepositories.add(getLocalRepository(repositoryId));
@@ -145,7 +145,7 @@ public class RepositoryProviderImpl
 
 		List<Repository> repositories = new ArrayList<>();
 
-		List<Long> repositoryIds = getRepositoryIdsByGroupId(groupId);
+		List<Long> repositoryIds = getGroupRepositoryIds(groupId);
 
 		for (long repositoryId : repositoryIds) {
 			repositories.add(getRepository(repositoryId));
@@ -397,11 +397,11 @@ public class RepositoryProviderImpl
 		throw new InvalidRepositoryIdException("Missing a valid ID for image");
 	}
 
-	protected List<Long> getRepositoryIdsByGroupId(long groupId)
+	protected List<Long> getGroupRepositoryIds(long groupId)
 		throws PortalException {
 
 		List<com.liferay.portal.model.Repository> repositories =
-			_repositoryLocalService.getRepositoriesByGroupId(groupId);
+			_repositoryLocalService.getGroupRepositories(groupId);
 
 		List<Long> repositoryIds = new ArrayList<>(repositories.size() + 1);
 

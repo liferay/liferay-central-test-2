@@ -226,7 +226,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 		throws PortalException {
 
 		Repository repository =
-			RepositoryProviderUtil.getRepositoryByFileShortcutId(classPK);
+			RepositoryProviderUtil.getFileShortcutRepository(classPK);
 
 		if (!repository.isCapabilityProvided(TrashCapability.class)) {
 			throw new InvalidRepositoryException(
@@ -242,7 +242,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 	@Override
 	protected Repository getRepository(long classPK) throws PortalException {
 		Repository repository =
-			RepositoryProviderUtil.getRepositoryByFileShortcutId(classPK);
+			RepositoryProviderUtil.getFileShortcutRepository(classPK);
 
 		if (!repository.isCapabilityProvided(TrashCapability.class)) {
 			throw new InvalidRepositoryException(

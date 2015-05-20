@@ -1393,7 +1393,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			return RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+			return RepositoryProviderUtil.getFileEntryLocalRepository(
 				fileEntryId);
 		}
 		catch (InvalidRepositoryIdException irie) {
@@ -1412,7 +1412,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			return RepositoryProviderUtil.getLocalRepositoryByFileShortcutId(
+			return RepositoryProviderUtil.getFileShortcutLocalRepository(
 				fileShortcutId);
 		}
 		catch (InvalidRepositoryIdException irie) {
@@ -1430,7 +1430,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			return RepositoryProviderUtil.getLocalRepositoryByFileVersionId(
+			return RepositoryProviderUtil.getFileVersionLocalRepository(
 				fileVersionId);
 		}
 		catch (InvalidRepositoryIdException irie) {
@@ -1448,7 +1448,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			return RepositoryProviderUtil.getLocalRepositoryByFolderId(
+			return RepositoryProviderUtil.getFolderLocalRepository(
 				folderId);
 		}
 		catch (InvalidRepositoryIdException irie) {

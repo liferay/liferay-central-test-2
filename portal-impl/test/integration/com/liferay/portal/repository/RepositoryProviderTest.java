@@ -63,7 +63,7 @@ public class RepositoryProviderTest {
 		DLFileEntry dlFileEntry = DLTestUtil.addDLFileEntry(
 			dlFolder.getFolderId());
 
-		RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+		RepositoryProviderUtil.getFileEntryLocalRepository(
 			dlFileEntry.getFileEntryId());
 	}
 
@@ -78,7 +78,7 @@ public class RepositoryProviderTest {
 
 		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
-		RepositoryProviderUtil.getLocalRepositoryByFileVersionId(
+		RepositoryProviderUtil.getFileVersionLocalRepository(
 			dlFileVersion.getFileVersionId());
 	}
 
@@ -88,7 +88,7 @@ public class RepositoryProviderTest {
 
 		DLFolder dlFolder = DLTestUtil.addDLFolder(_group.getGroupId());
 
-		RepositoryProviderUtil.getLocalRepositoryByFolderId(
+		RepositoryProviderUtil.getFolderLocalRepository(
 			dlFolder.getFolderId());
 	}
 
@@ -107,7 +107,7 @@ public class RepositoryProviderTest {
 
 		long fileEntryId = RandomTestUtil.randomLong();
 
-		RepositoryProviderUtil.getLocalRepositoryByFileEntryId(fileEntryId);
+		RepositoryProviderUtil.getFileEntryLocalRepository(fileEntryId);
 	}
 
 	@Test(expected = InvalidRepositoryIdException.class)
@@ -116,7 +116,7 @@ public class RepositoryProviderTest {
 
 		long fileVersionId = RandomTestUtil.randomLong();
 
-		RepositoryProviderUtil.getLocalRepositoryByFileVersionId(fileVersionId);
+		RepositoryProviderUtil.getFileVersionLocalRepository(fileVersionId);
 	}
 
 	@Test(expected = InvalidRepositoryIdException.class)
@@ -125,7 +125,7 @@ public class RepositoryProviderTest {
 
 		long folderId = RandomTestUtil.randomLong();
 
-		RepositoryProviderUtil.getLocalRepositoryByFolderId(folderId);
+		RepositoryProviderUtil.getFolderLocalRepository(folderId);
 	}
 
 	@Test(expected = RepositoryException.class)
@@ -144,7 +144,7 @@ public class RepositoryProviderTest {
 		DLFileEntry dlFileEntry = DLTestUtil.addDLFileEntry(
 			dlFolder.getFolderId());
 
-		RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+		RepositoryProviderUtil.getFileEntryLocalRepository(
 			dlFileEntry.getFileEntryId());
 	}
 
@@ -159,7 +159,7 @@ public class RepositoryProviderTest {
 
 		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(true);
 
-		RepositoryProviderUtil.getLocalRepositoryByFileVersionId(
+		RepositoryProviderUtil.getFileVersionLocalRepository(
 			dlFileVersion.getFileVersionId());
 	}
 
@@ -167,7 +167,7 @@ public class RepositoryProviderTest {
 	public void testCreateRepositoryFromExistingFolderId() throws Exception {
 		DLFolder dlFolder = DLTestUtil.addDLFolder(_group.getGroupId());
 
-		RepositoryProviderUtil.getLocalRepositoryByFolderId(
+		RepositoryProviderUtil.getFolderLocalRepository(
 			dlFolder.getFolderId());
 	}
 
@@ -210,7 +210,7 @@ public class RepositoryProviderTest {
 
 				});
 
-			RepositoryProviderUtil.getRepositoryByFolderId(
+			RepositoryProviderUtil.getFolderRepository(
 				dlFolder.getFolderId());
 		}
 		finally {
@@ -234,7 +234,7 @@ public class RepositoryProviderTest {
 
 		long fileEntryId = RandomTestUtil.randomLong();
 
-		RepositoryProviderUtil.getRepositoryByFileEntryId(fileEntryId);
+		RepositoryProviderUtil.getFileEntryRepository(fileEntryId);
 	}
 
 	@Test(expected = InvalidRepositoryIdException.class)
@@ -243,14 +243,14 @@ public class RepositoryProviderTest {
 
 		long fileVersionId = RandomTestUtil.randomLong();
 
-		RepositoryProviderUtil.getRepositoryByFileVersionId(fileVersionId);
+		RepositoryProviderUtil.getFileVersionRepository(fileVersionId);
 	}
 
 	@Test(expected = InvalidRepositoryIdException.class)
 	public void testCreateRepositoryFromNonexistentFolderId() throws Exception {
 		long folderId = RandomTestUtil.randomLong();
 
-		RepositoryProviderUtil.getRepositoryByFolderId(folderId);
+		RepositoryProviderUtil.getFolderRepository(folderId);
 	}
 
 	@Test(expected = RepositoryException.class)

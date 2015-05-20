@@ -327,7 +327,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 
 	@Override
 	protected Repository getRepository(long classPK) throws PortalException {
-		Repository repository = RepositoryProviderUtil.getRepositoryByFolderId(
+		Repository repository = RepositoryProviderUtil.getFolderRepository(
 			classPK);
 
 		if (!repository.isCapabilityProvided(TrashCapability.class)) {

@@ -243,7 +243,7 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 	}
 
 	protected DLFolder fetchDLFolder(long classPK) throws PortalException {
-		Repository repository = RepositoryProviderUtil.getRepositoryByFolderId(
+		Repository repository = RepositoryProviderUtil.getFolderRepository(
 			classPK);
 
 		if (!repository.isCapabilityProvided(TrashCapability.class)) {
@@ -256,7 +256,7 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 	}
 
 	protected DLFolder getDLFolder(long classPK) throws PortalException {
-		Repository repository = RepositoryProviderUtil.getRepositoryByFolderId(
+		Repository repository = RepositoryProviderUtil.getFolderRepository(
 			classPK);
 
 		if (!repository.isCapabilityProvided(TrashCapability.class)) {

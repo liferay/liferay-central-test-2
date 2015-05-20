@@ -292,7 +292,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			SystemEventHierarchyEntryThreadLocal.push(FileEntry.class);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+				RepositoryProviderUtil.getFileEntryLocalRepository(
 					fileEntryId);
 
 			localRepository.deleteFileEntry(fileEntryId);
@@ -332,7 +332,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			SystemEventHierarchyEntryThreadLocal.push(Folder.class);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getLocalRepositoryByFolderId(folderId);
+				RepositoryProviderUtil.getFolderLocalRepository(folderId);
 
 			localRepository.deleteFolder(folderId);
 		}
@@ -458,7 +458,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 		try {
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+				RepositoryProviderUtil.getFileEntryLocalRepository(
 					fileEntryId);
 
 			return localRepository.getFileEntry(fileEntryId);
@@ -547,7 +547,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 	public Folder getPortletFolder(long folderId) throws PortalException {
 		try {
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getLocalRepositoryByFolderId(folderId);
+				RepositoryProviderUtil.getFolderLocalRepository(folderId);
 
 			return localRepository.getFolder(folderId);
 		}
@@ -584,7 +584,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			DLAppHelperThreadLocal.setEnabled(false);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+				RepositoryProviderUtil.getFileEntryLocalRepository(
 					fileEntryId);
 
 			return RepositoryTrashUtil.moveFileEntryToTrash(
@@ -618,7 +618,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			DLAppHelperThreadLocal.setEnabled(false);
 
 			LocalRepository localRepository =
-				RepositoryProviderUtil.getLocalRepositoryByFileEntryId(
+				RepositoryProviderUtil.getFileEntryLocalRepository(
 					fileEntryId);
 
 			RepositoryTrashUtil.restoreFileEntryFromTrash(

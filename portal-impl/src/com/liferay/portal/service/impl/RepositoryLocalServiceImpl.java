@@ -187,7 +187,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return repositoryPersistence.fetchByG_N_P(groupId, name, portletId);
 	}
 
-	public List<Repository> getRepositoriesByGroupId(long groupId) {
+	public List<Repository> getGroupRepositories(long groupId) {
 		return repositoryPersistence.findByGroupId(groupId);
 	}
 
