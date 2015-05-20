@@ -242,12 +242,12 @@ public class FileSystemStore extends BaseStore {
 
 		List<String> fileNames = new ArrayList<>();
 
-		String[] directories = FileUtil.listDirs(repositoryDir);
+		String[] dirNames = FileUtil.listDirs(repositoryDir);
 
-		for (String directory : directories) {
-			doGetFileNames(
-				fileNames, directory,
-				repositoryDir.getPath() + StringPool.SLASH + directory);
+		for (String dirName : dirNames) {
+			getFileNames(
+				fileNames, dirName,
+				repositoryDir.getPath() + StringPool.SLASH + dirName);
 		}
 
 		return fileNames.toArray(new String[fileNames.size()]);
@@ -265,7 +265,7 @@ public class FileSystemStore extends BaseStore {
 
 		List<String> fileNames = new ArrayList<>();
 
-		doGetFileNames(fileNames, dirName, dirNameDir.getPath());
+		getFileNames(fileNames, dirName, dirNameDir.getPath());
 
 		Collections.sort(fileNames);
 
@@ -461,25 +461,25 @@ public class FileSystemStore extends BaseStore {
 		}
 	}
 
-	protected void doGetFileNames(
+	protected void getFileNames(
 		List<String> fileNames, String dirName, String path) {
 
-		String[] curFileNames = FileUtil.listDirs(path);
+		String[] pathDirNames = FileUtil.listDirs(path);
 
-		if (ArrayUtil.isNotEmpty(curFileNames)) {
-			for (String curFileName : curFileNames) {
-				String subDirName = null;
+		if (ArrayUtil.isNotEmpty(pathDirNames)) {
+			for (String pathDirName : pathDirNames) {
+				String subdirName = null;
 
 				if (Validator.isBlank(dirName)) {
-					subDirName = curFileName;
+					subdirName = pathDirName;
 				}
 				else {
-					subDirName = dirName + StringPool.SLASH + curFileName;
+					subdirName = dirName + StringPool.SLASH + pathDirName;
 				}
 
-				doGetFileNames(
-					fileNames, subDirName,
-					path + StringPool.SLASH + curFileName);
+				getFileNames(
+					fileNames, subdirName,
+					path + StringPool.SLASH + pathDirName);
 			}
 		}
 		else {

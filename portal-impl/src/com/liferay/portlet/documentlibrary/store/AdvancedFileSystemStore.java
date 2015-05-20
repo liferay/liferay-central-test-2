@@ -107,10 +107,10 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 	}
 
 	@Override
-	protected void doGetFileNames(
+	protected void getFileNames(
 		List<String> fileNames, String dirName, String path) {
 
-		super.doGetFileNames(fileNames, dirName, path);
+		super.getFileNames(fileNames, dirName, path);
 
 		ListIterator<String> itr = fileNames.listIterator();
 
@@ -127,7 +127,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 	/**
 	 * @deprecated As of 7.0.0 as of 7.0, replaced by {@link
-	 *             #doGetFileNames(List, String, String)}
+	 *             #getFileNames(List, String, String)}
 	 */
 	@Deprecated
 	protected List<String> getAdvancedFileNames(
@@ -135,7 +135,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 		List<String> fileNames = new ArrayList<>();
 
-		doGetFileNames(fileNames, StringPool.BLANK, fileName);
+		getFileNames(fileNames, StringPool.BLANK, fileName);
 
 		return fileNames;
 	}
