@@ -471,7 +471,7 @@ public abstract class BaseStoreTestCase {
 	@ExpectedLogs (
 		expectedLogs = {
 			@ExpectedLog (
-				expectedLog = "Cannot delete file {companyId=",
+				expectedLog = "Unable to delete file {companyId=",
 				expectedType = ExpectedType.PREFIX
 			)
 		},
@@ -486,7 +486,7 @@ public abstract class BaseStoreTestCase {
 	@ExpectedLogs (
 		expectedLogs = {
 			@ExpectedLog (
-				expectedLog = "Cannot delete file {companyId=",
+				expectedLog = "Unable to delete file {companyId=",
 				expectedType = ExpectedType.PREFIX
 			)
 		},
