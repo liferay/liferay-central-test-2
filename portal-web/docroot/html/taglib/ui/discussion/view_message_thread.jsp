@@ -17,8 +17,8 @@
 <%@ include file="/html/taglib/ui/discussion/init.jsp" %>
 
 <%
-DiscussionComment discussionComment = (DiscussionComment)request.getAttribute("liferay-ui:discussion:currentComment");
 Discussion discussion = (Discussion)request.getAttribute("liferay-ui:discussion:discussion");
+DiscussionComment discussionComment = (DiscussionComment)request.getAttribute("liferay-ui:discussion:discussionComment");
 
 int index = GetterUtil.getInteger(request.getAttribute("liferay-ui:discussion:index"));
 
@@ -293,7 +293,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 		<%
 		for (DiscussionComment curDiscussionComment : discussionComment.getThreadComments()) {
-			request.setAttribute("liferay-ui:discussion:currentComment", curDiscussionComment);
+			request.setAttribute("liferay-ui:discussion:discussionComment", curDiscussionComment);
 		%>
 
 			<liferay-util:include page="/html/taglib/ui/discussion/view_message_thread.jsp" />

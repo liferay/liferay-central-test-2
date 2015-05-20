@@ -161,10 +161,8 @@ CommentSectionDisplayContext commentSectionDisplayContext = CommentDisplayContex
 								break;
 							}
 
-							discussionComment = discussionCommentIterator.next();
-
-							request.setAttribute("liferay-ui:discussion:currentComment", discussionComment);
 							request.setAttribute("liferay-ui:discussion:discussion", discussion);
+							request.setAttribute("liferay-ui:discussion:discussionComment", discussionCommentIterator.next());
 							request.setAttribute("liferay-ui:discussion:randomNamespace", randomNamespace);
 						%>
 
