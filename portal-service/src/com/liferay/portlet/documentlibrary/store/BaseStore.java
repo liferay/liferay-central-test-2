@@ -597,21 +597,22 @@ public abstract class BaseStore implements Store {
 	}
 
 	protected void logFailedDeletion(
-		long companyId, long repositoryId, String fileName, String version) {
+		long companyId, long repositoryId, String fileName,
+		String versionLabel) {
 
 		if (_log.isWarnEnabled()) {
 			StringBundler sb = new StringBundler(9);
 
-			sb.append("Cannot delete file {companyId=");
+			sb.append("Unable to delete file {companyId=");
 			sb.append(companyId);
 			sb.append(", repositoryId=");
 			sb.append(repositoryId);
 			sb.append(", fileName=");
 			sb.append(fileName);
 
-			if (Validator.isNotNull(version)) {
+			if (Validator.isNotNull(versionLabel)) {
 				sb.append(", versionLabel=");
-				sb.append(version);
+				sb.append(versionLabel);
 			}
 
 			sb.append("} because it does not exist");
