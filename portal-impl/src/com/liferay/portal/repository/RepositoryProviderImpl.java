@@ -333,9 +333,7 @@ public class RepositoryProviderImpl
 		}
 	}
 
-	protected List<Long> getGroupRepositoryIds(long groupId)
-		throws PortalException {
-
+	protected List<Long> getGroupRepositoryIds(long groupId) {
 		List<com.liferay.portal.model.Repository> repositories =
 			_repositoryLocalService.getGroupRepositories(groupId);
 
