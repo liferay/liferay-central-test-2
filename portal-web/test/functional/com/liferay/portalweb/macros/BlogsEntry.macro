@@ -642,6 +642,12 @@
 		<execute function="AssertElementNotPresent" locator1="PGAssetpublisher#ASSET_ABSTRACT_TITLE" value1="${entryTitle}" />
 	</command>
 
+	<command name="autoSaveDraft">
+		<execute function="Pause" locator1="30000" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SAVE_STATUS" value1="Draft saved at" />
+	</command>
+
 	<command name="editContentCP">
 		<var name="key_entryTitle" value="${entryTitle}" />
 
@@ -1031,6 +1037,12 @@
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
+	<command name="saveAsDraft">
+		<execute function="AssertClick" locator1="Button#SAVE_AS_DRAFT" value1="Save as Draft" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
+	</command>
+
 	<command name="searchCP">
 		<var name="key_entryContent" value="${entryContent}" />
 		<var name="key_entryTitle" value="${entryTitle}" />
@@ -1199,7 +1211,7 @@
 	</command>
 
 	<command name="viewDefaultCP">
-		<execute function="AssertTextEquals" locator1="CPBlogs#INFO_MESSAGE" value1="No entries were found." />
+		<execute function="AssertTextEquals" locator1="Message#INFO" value1="No entries were found." />
 		<execute function="AssertTextNotPresent" value1="${entryTitle}" />
 	</command>
 
@@ -1249,6 +1261,20 @@
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#PREVIOUS" value1="Previous" />
 		<execute function="AssertTextEquals" locator1="PGBlogsEntry#NEXT" value1="Next" />
 		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="PGBlogsEntry#COMMENTS" value1="Comments" />
+	</command>
+
+	<command name="viewDraft">
+		<execute function="AssertTextEquals" locator1="BlogsEntry#DRAFT_ENTRY_STATUS" value1="Draft" />
+		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
+
+		<if>
+			<isset var="entrySubtitle" />
+			<then>
+				<execute function="AssertTextEquals" locator1="BlogsEntry#SUBTITLE" value1="${entrySubtitle}" />
+			</then>
+		</if>
+
+		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryTitle}" />
 	</command>
 
 	<command name="viewDraftCP">

@@ -98,6 +98,11 @@
 	<td>//div[contains(@class,'next-entry-content')]//span[contains(@class,'small-image')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>DRAFT_ENTRY_STATUS</td>
+	<td>//div[contains(@class,'entry') and contains(@class,'draft')]/div/h3</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
