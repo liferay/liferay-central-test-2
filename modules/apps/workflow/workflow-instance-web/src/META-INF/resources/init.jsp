@@ -51,8 +51,9 @@ page import="com.liferay.workflow.instance.web.context.WorkflowInstanceViewDispl
 
 <%@ page import="javax.portlet.PortletURL" %>
 
-<liferay-theme:defineObjects />
 <portlet:defineObjects />
+
+<liferay-theme:defineObjects />
 
 <%
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
