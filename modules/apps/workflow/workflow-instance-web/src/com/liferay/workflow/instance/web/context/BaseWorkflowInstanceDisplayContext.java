@@ -32,15 +32,16 @@ public abstract class BaseWorkflowInstanceDisplayContext {
 	public BaseWorkflowInstanceDisplayContext(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
+		this.renderRequest = renderRequest;
+		this.renderResponse = renderResponse;
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		this.dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
+		dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
 			themeDisplay.getLocale(), themeDisplay.getTimeZone());
 
-		this.renderRequest = renderRequest;
-		this.renderResponse = renderResponse;
-		this.workflowInstanceRequestHelper = new WorkflowInstanceRequestHelper(
+		workflowInstanceRequestHelper = new WorkflowInstanceRequestHelper(
 			renderRequest);
 	}
 
