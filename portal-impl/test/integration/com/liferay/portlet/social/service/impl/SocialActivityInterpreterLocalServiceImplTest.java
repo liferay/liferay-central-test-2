@@ -49,8 +49,7 @@ public class SocialActivityInterpreterLocalServiceImplTest {
 			SocialActivityInterpreterLocalServiceUtil.getActivityInterpreters();
 
 		List<SocialActivityInterpreter> socialActivityInterpreters =
-			activityInterpreters.get(
-				TestSocialActivityInterpreter.SELECTOR);
+			activityInterpreters.get(TestSocialActivityInterpreter.SELECTOR);
 
 		Assert.assertEquals(1, socialActivityInterpreters.size());
 
