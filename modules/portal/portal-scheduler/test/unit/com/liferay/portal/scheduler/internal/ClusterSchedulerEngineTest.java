@@ -1809,8 +1809,10 @@ public class ClusterSchedulerEngineTest {
 
 					return ois.readObject();
 				}
+
 			}
 		);
+
 		Mockito.when(
 			jsonFactory.serialize(Mockito.anyObject())
 		).then(
@@ -1834,6 +1836,7 @@ public class ClusterSchedulerEngineTest {
 
 					return Base64.encode(bytes);
 				}
+
 			}
 		);
 
@@ -1841,12 +1844,15 @@ public class ClusterSchedulerEngineTest {
 	}
 
 	protected void setUpPortalUUIDUtil() {
+		PortalUUIDUtil portalUUIDUtil = new PortalUUIDUtil();
+
 		PortalUUID portalUUID = Mockito.mock(PortalUUID.class);
 
 		Mockito.when(
 			portalUUID.generate()
 		).then(
 			new Answer<String>() {
+
 				@Override
 				public String answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
@@ -1857,11 +1863,9 @@ public class ClusterSchedulerEngineTest {
 
 					return uuid.toString();
 				}
+
 			}
-
 		);
-
-		PortalUUIDUtil portalUUIDUtil = new PortalUUIDUtil();
 
 		portalUUIDUtil.setPortalUUID(portalUUID);
 	}
@@ -1871,7 +1875,9 @@ public class ClusterSchedulerEngineTest {
 
 		Mockito.when(
 			_props.get(PropsKeys.SCHEDULER_ENABLED)
-		).thenReturn("true");
+		).thenReturn(
+			"true"
+		);
 	}
 
 	protected void setUpSchedulerEngineHelper(JSONFactory jsonFactory) {
@@ -1881,8 +1887,8 @@ public class ClusterSchedulerEngineTest {
 
 		_schedulerEngineHelperImpl.setClusterMasterExecutor(
 			_mockClusterMasterExecutor);
-		_schedulerEngineHelperImpl.setProps(_props);
 		_schedulerEngineHelperImpl.setJsonFactory(jsonFactory);
+		_schedulerEngineHelperImpl.setProps(_props);
 
 		_schedulerEngineHelperImpl.setClusterLink(_clusterLink);
 	}
