@@ -126,6 +126,16 @@ public class WorkflowTaskDisplayContext {
 		return assetRendererFactory.getAssetEntry(assetEntryId);
 	}
 
+	public AssetRenderer getAssetRenderer() throws PortalException {
+		long assetEntryVersionId = ParamUtil.getLong(
+			_workflowTaskRequestHelper.getRequest(), "assetEntryVersionId");
+
+		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
+
+		return assetRendererFactory.getAssetRenderer(
+			assetEntryVersionId, AssetRendererFactory.TYPE_LATEST);
+	}
+
 	public AssetRenderer getAssetRenderer(WorkflowTask workflowTask)
 		throws PortalException, PortletException {
 
@@ -141,16 +151,6 @@ public class WorkflowTaskDisplayContext {
 
 		return AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByType(
 			type);
-	}
-
-	public AssetRenderer getAssetRenderer() throws PortalException {
-		long assetEntryVersionId = ParamUtil.getLong(
-			_workflowTaskRequestHelper.getRequest(), "assetEntryVersionId");
-
-		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
-
-		return assetRendererFactory.getAssetRenderer(
-			assetEntryVersionId, AssetRendererFactory.TYPE_LATEST);
 	}
 
 	public String getAssetTitle(WorkflowTask workflowTask)
