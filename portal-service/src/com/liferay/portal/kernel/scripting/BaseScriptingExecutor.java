@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -57,6 +58,11 @@ public abstract class BaseScriptingExecutor implements ScriptingExecutor {
 		return null;
 	}
 
+	protected ClassLoader getAggregateClassLoader(ClassLoader... classLoaders) {
+		return AggregateClassLoader.getAggregateClassLoader(
+			getScriptingExecutorClassLoader(), classLoaders);
+	}
+
 	protected ClassLoader getScriptingExecutorClassLoader() {
 		return _scriptingExecutorClassLoader;
 	}
@@ -69,8 +75,7 @@ public abstract class BaseScriptingExecutor implements ScriptingExecutor {
 		if (!classLoader.equals(PortalClassLoaderUtil.getClassLoader())) {
 			_scriptingExecutorClassLoader =
 				AggregateClassLoader.getAggregateClassLoader(
-					PortalClassLoaderUtil.getClassLoader(),
-					classLoader);
+					PortalClassLoaderUtil.getClassLoader(), classLoader);
 		}
 		else {
 			_scriptingExecutorClassLoader = classLoader;

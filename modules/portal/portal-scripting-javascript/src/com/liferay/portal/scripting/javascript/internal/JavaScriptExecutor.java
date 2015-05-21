@@ -171,11 +171,8 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 			Context context = Context.enter();
 
 			if (ArrayUtil.isNotEmpty(classLoaders)) {
-				ClassLoader aggregateClassLoader =
-					AggregateClassLoader.getAggregateClassLoader(
-						getScriptingExecutorClassLoader(), classLoaders);
-
-				context.setApplicationClassLoader(aggregateClassLoader);
+				context.setApplicationClassLoader(
+					getAggregateClassLoader(classLoaders));
 			}
 
 			compiledScript = context.compileString(script, "script", 0, null);
