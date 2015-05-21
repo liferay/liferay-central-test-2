@@ -64,7 +64,7 @@ public class LayoutTemplatesListTag extends IncludeTag {
 	}
 
 	private static final String _PAGE =
-		"/html/taglib/ui/layout_template_list/page.jsp";
+		"/html/taglib/ui/layout_templates_list/page.jsp";
 
 	private String _layoutTemplateId;
 	private String _layoutTemplateIdPrefix;
