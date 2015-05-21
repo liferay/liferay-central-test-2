@@ -7,10 +7,13 @@
 
 		<var name="entryComment" value="${entryComment}" />
 
-		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryComment}" />
-		<execute function="AssertClick#assertTextClickWaitForInlineCKEditor" locator1="Button#REPLY" value1="Reply" />
+		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
 
-		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryComment}" />
+
+		<execute function="AssertClick" locator1="Button#REPLY" value1="Reply" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
 	</command>
 
 	<command name="addPG">
@@ -22,6 +25,8 @@
 		<execute function="Pause" locator1="1000" />
 
 		<var name="entryComment" value="${entryComment}" />
+
+		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
 
 		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryComment}" />
 
@@ -59,9 +64,12 @@
 		</execute>
 
 		<execute function="MouseOver" locator1="Comments#COMMENT_BODY" />
+
 		<execute function="AssertClickNoError" locator1="Comments#DELETE_LINK" value1="Delete" />
+
 		<execute function="Confirm#waitForConfirmation" value1="Are you sure you want to delete this? It will be deleted immediately." />
-		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
 		<execute function="AssertTextNotPresent" value1="${entryComment}" />
 	</command>
 
@@ -75,11 +83,14 @@
 			<equals arg1="${soPage}" arg2="true" />
 			<then>
 				<execute function="AssertClickNoError" locator1="Comments#DELETE_LINK" value1="Delete" />
+
 				<execute function="Confirm" value1="Are you sure you want to delete the selected comment?" />
 			</then>
 			<else>
 				<execute function="MouseOver" locator1="Comments#COMMENT_BODY" />
+
 				<execute function="AssertClickNoError" locator1="Comments#DELETE_LINK" value1="Delete" />
+
 				<execute function="Confirm" value1="Are you sure you want to delete this? It will be deleted immediately." />
 			</else>
 		</if>
@@ -97,12 +108,17 @@
 		<var name="entryCommentEdit" value="${entryCommentEdit}" />
 
 		<execute function="MouseOver" locator1="Comments#COMMENT_BODY" />
-		<execute function="AssertClick#assertTextClickWaitForInlineCKEditor" locator1="Comments#EDIT_LINK" value1="Edit" />
-		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryCommentEdit}" />
-		<execute function="AssertClick#assertTextClickWaitForInlineCKEditor" locator1="Button#PUBLISH" value1="Publish" />
 
-		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="Message#SUCCESS" value1="Your request processed successfully." />
-		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="Comments#COMMENT_BODY" value1="${entryCommentEdit}" />
+		<execute function="AssertClick" locator1="Comments#EDIT_LINK" value1="Edit" />
+
+		<execute function="AssertClick" locator1="Comments#COMMENT_FIELD" />
+
+		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryCommentEdit}" />
+
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
+		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="${entryCommentEdit}" />
 	</command>
 
 	<command name="editPG">
@@ -114,11 +130,16 @@
 		<var name="entryCommentEdit" value="${entryCommentEdit}" />
 
 		<execute function="MouseOver" locator1="Comments#COMMENT_BODY" />
-		<execute function="AssertClick" locator1="Comments#EDIT_LINK" value1="Edit" />
-		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryCommentEdit}" />
-		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
-		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
 
+		<execute function="AssertClick" locator1="Comments#EDIT_LINK" value1="Edit" />
+
+		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
+
+		<execute function="Type" locator1="Comments#COMMENT_FIELD" value1="${entryCommentEdit}" />
+
+		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
+
+		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
 		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY" value1="${entryCommentEdit}" />
 	</command>
 
@@ -135,6 +156,7 @@
 
 	<command name="subscribePG">
 		<execute function="AssertClick" locator1="Comments#SUBSCRIBE_TO_COMMENTS_LINK" value1="Subscribe to Comments" />
+
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request processed successfully." />
 	</command>
 
@@ -148,7 +170,7 @@
 		<var name="entryComment" value="${entryComment}" />
 
 		<execute function="AssertTextEquals" locator1="Comments#ENTRY_COUNT_PANEL" value1="${commentCount} Comment" />
-		<execute function="AssertTextEquals#assertTextWaitForInlineCKEditor" locator1="CPBlogsEntry#COMMENT" value1="${entryComment}" />
+		<execute function="AssertTextEquals" locator1="CPBlogsEntry#COMMENT" value1="${entryComment}" />
 	</command>
 
 	<command name="viewDefaultCP">
