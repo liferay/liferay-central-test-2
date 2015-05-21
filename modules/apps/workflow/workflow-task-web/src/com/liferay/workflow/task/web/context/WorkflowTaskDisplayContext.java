@@ -295,10 +295,8 @@ public class WorkflowTaskDisplayContext {
 	public WorkflowTaskSearch getPendingTasksAssignedToMyRoles()
 		throws PortalException {
 
-		int total = 0;
 		List<WorkflowTask> results = null;
-
-		String[] assetTypes = WorkflowHandlerUtil.getSearchableAssetTypes();
+		int total = 0;
 
 		WorkflowTaskSearch searchContainer = new WorkflowTaskSearch(
 			_renderRequest, "cur2", getPortletURL());
@@ -327,19 +325,20 @@ public class WorkflowTaskDisplayContext {
 			total = WorkflowTaskManagerUtil.searchCount(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
-				searchTerms.getKeywords(), assetTypes, false, true);
+				searchTerms.getKeywords(),
+				WorkflowHandlerUtil.getSearchableAssetTypes(), false, true);
 
 			searchContainer.setTotal(total);
 
 			results = WorkflowTaskManagerUtil.search(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
-				searchTerms.getKeywords(), assetTypes, false, true,
+				searchTerms.getKeywords(),
+				WorkflowHandlerUtil.getSearchableAssetTypes(), false, true,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				searchContainer.getOrderByComparator());
 		}
 
-		searchContainer.setTotal(total);
 		searchContainer.setResults(results);
 
 		setRolesSearchContainerEmptyResultsMessage(searchContainer);
@@ -488,8 +487,9 @@ public class WorkflowTaskDisplayContext {
 		throws PortalException {
 
 		String actorName = getActorName(workflowLog);
-		return new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(
-			workflowLog.getState())
+
+		return new Object[] {
+			HtmlUtil.escape(actorName), HtmlUtil.escape(workflowLog.getState())
 		};
 	}
 
@@ -887,16 +887,14 @@ public class WorkflowTaskDisplayContext {
 	protected WorkflowTaskSearch searchTasksAssignedToMe(boolean completedTasks)
 		throws PortalException {
 
-		int total = 0;
 		List<WorkflowTask> results = null;
+		int total = 0;
 
 		String curParam = SearchContainer.DEFAULT_CUR_PARAM;
 
 		if (!completedTasks) {
 			curParam = "cur1";
 		}
-
-		String[] assetTypes = WorkflowHandlerUtil.getSearchableAssetTypes();
 
 		WorkflowTaskSearch searchContainer = new WorkflowTaskSearch(
 			_renderRequest, curParam, getPortletURL());
@@ -925,19 +923,21 @@ public class WorkflowTaskDisplayContext {
 			total = WorkflowTaskManagerUtil.searchCount(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
-				searchTerms.getKeywords(), assetTypes, completedTasks, false);
+				searchTerms.getKeywords(),
+				WorkflowHandlerUtil.getSearchableAssetTypes(), completedTasks,
+				false);
 
 			searchContainer.setTotal(total);
 
 			results = WorkflowTaskManagerUtil.search(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
-				searchTerms.getKeywords(), assetTypes, completedTasks, false,
-				searchContainer.getStart(), searchContainer.getEnd(),
+				searchTerms.getKeywords(),
+				WorkflowHandlerUtil.getSearchableAssetTypes(), completedTasks,
+				false, searchContainer.getStart(), searchContainer.getEnd(),
 				searchContainer.getOrderByComparator());
 		}
 
-		searchContainer.setTotal(total);
 		searchContainer.setResults(results);
 
 		setUserSearchContainerEmptyResultsMessage(
