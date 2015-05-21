@@ -166,11 +166,11 @@ String scopeAvailableFields = ParamUtil.getString(request, "scopeAvailableFields
 					destroyOnHide: true
 				},
 				eventName: '<portlet:namespace />selectDDMStructure',
+				mvcPath: '/select_structure.jsp',
 				refererPortletName: '<%= PortletKeys.DOCUMENT_LIBRARY %>',
 				showAncestorScopes: true,
 				showManageTemplates: false,
 				showToolbar: true,
-				mvcPath: '/select_structure.jsp',
 				title: '<%= UnicodeLanguageUtil.get(request, "metadata-sets") %>'
 			},
 			function(event) {
