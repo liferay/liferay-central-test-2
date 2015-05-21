@@ -16,7 +16,6 @@
 
 <liferay-ui:search-container searchContainer="<%= workflowTaskSearch %>"
 >
-
 	<liferay-ui:search-container-results results="<%= workflowTaskSearch.getResults() %>"
 		total="<%= workflowTaskSearch.getTotal() %>">
 	</liferay-ui:search-container-results>
