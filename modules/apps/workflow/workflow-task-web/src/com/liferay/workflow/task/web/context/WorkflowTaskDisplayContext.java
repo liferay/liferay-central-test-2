@@ -311,6 +311,9 @@ public class WorkflowTaskDisplayContext {
 				_workflowTaskRequestHelper.getUserId(), searchTerms.getName(),
 				searchTerms.getType(), null, null, null, false, true,
 				searchTerms.isAndOperator());
+
+			searchContainer.setTotal(total);
+
 			results = WorkflowTaskManagerUtil.search(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(), searchTerms.getName(),
@@ -324,6 +327,9 @@ public class WorkflowTaskDisplayContext {
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
 				searchTerms.getKeywords(), assetTypes, false, true);
+
+			searchContainer.setTotal(total);
+
 			results = WorkflowTaskManagerUtil.search(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
