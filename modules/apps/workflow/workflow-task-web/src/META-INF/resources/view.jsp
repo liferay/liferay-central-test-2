@@ -37,11 +37,11 @@ PortletURL portletURL = workflowTaskDisplayContext.getPortletURL();
 				autoFocus="<%= workflowTaskDisplayContext.getWindowState().equals(WindowState.MAXIMIZED) %>"
 				buttonLabel="search"
 				displayTerms="<%= workflowTaskDisplayTerms %>"
-				id="toggle_id_workflow_task_search">
+				id="toggle_id_workflow_task_search"
+			>
+				<aui:input inlineField="<%= true %>" label="task" name="name" size="20" value="<%= workflowTaskDisplayTerms.getName() %>" />
 
-					<aui:input inlineField="<%= true %>" label="task" name="name" size="20" value="<%= workflowTaskDisplayTerms.getName() %>" />
 				<aui:fieldset>
-
 					<aui:select inlineField="<%= true %>" name="type">
 
 						<%
