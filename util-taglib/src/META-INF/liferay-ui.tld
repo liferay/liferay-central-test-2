@@ -3311,7 +3311,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>layout-template-list</name>
+		<name>layout-templates-list</name>
 		<tag-class>com.liferay.taglib.ui.LayoutTemplatesListTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>

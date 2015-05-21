@@ -53,13 +53,13 @@ public class LayoutTemplatesListTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-ui:layout-template-list:layoutTemplateId",
+			"liferay-ui:layout-templates-list:layoutTemplateId",
 			_layoutTemplateId);
 		request.setAttribute(
-			"liferay-ui:layout-template-list:layoutTemplateIdPrefix",
+			"liferay-ui:layout-templates-list:layoutTemplateIdPrefix",
 			_layoutTemplateIdPrefix);
 		request.setAttribute(
-			"liferay-ui:layout-template-list:layoutTemplates",
+			"liferay-ui:layout-templates-list:layoutTemplates",
 			_layoutTemplates);
 	}
 

@@ -24,7 +24,7 @@ String layoutTemplateId = GetterUtil.getString(typeSettingsProperties.getPropert
 
 <h5><%= LanguageUtil.get(request, "layout-template") %></h5>
 
-<liferay-ui:layout-template-list
+<liferay-ui:layout-templates-list
 	layoutTemplateId="<%= layoutTemplateId %>"
 	layoutTemplates="<%= LayoutTemplateLocalServiceUtil.getLayoutTemplates() %>"
 />

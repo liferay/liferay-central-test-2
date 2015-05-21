@@ -129,7 +129,7 @@ String[] types = LayoutTypeControllerTracker.getTypes();
 							</div>
 
 							<div class="lfr-page-template-options toggler-content toggler-content-expanded">
-								<liferay-ui:layout-template-list
+								<liferay-ui:layout-templates-list
 									layoutTemplateId="<%= PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID %>"
 									layoutTemplateIdPrefix="addLayout"
 									layoutTemplates="<%= LayoutTemplateLocalServiceUtil.getLayoutTemplates(layout.getThemeId()) %>"
