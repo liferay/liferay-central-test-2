@@ -804,9 +804,9 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public boolean isCompletedTabSelected() {
-		String selectedTab = getTabs1();
+		String tabs1 = getTabs1();
 
-		if (selectedTab.equals("completed")) {
+		if (tabs1.equals("completed")) {
 			return true;
 		}
 
@@ -814,9 +814,9 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public boolean isPendingTabSelected() {
-		String selectedTab = getTabs1();
+		String tabs1 = getTabs1();
 
-		if (selectedTab.equals("pending")) {
+		if (tabs1.equals("pending")) {
 			return true;
 		}
 
