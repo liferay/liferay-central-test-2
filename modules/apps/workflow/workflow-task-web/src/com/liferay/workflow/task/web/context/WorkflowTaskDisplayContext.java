@@ -118,7 +118,7 @@ public class WorkflowTaskDisplayContext {
 		return ArrayUtil.toLongArray(pooledActorIdsList);
 	}
 
-	public AssetEntry getAssetEntryFromRequest() throws PortalException {
+	public AssetEntry getAssetEntry() throws PortalException {
 		long assetEntryId = ParamUtil.getLong(_renderRequest, "assetEntryId");
 
 		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
@@ -143,7 +143,7 @@ public class WorkflowTaskDisplayContext {
 			type);
 	}
 
-	public AssetRenderer getAssetRendererFromRequest() throws PortalException {
+	public AssetRenderer getAssetRenderer() throws PortalException {
 		long assetEntryVersionId = ParamUtil.getLong(
 			_workflowTaskRequestHelper.getRequest(), "assetEntryVersionId");
 

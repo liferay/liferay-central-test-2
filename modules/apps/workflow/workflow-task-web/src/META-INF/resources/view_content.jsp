@@ -17,8 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-AssetEntry assetEntry = workflowTaskDisplayContext.getAssetEntryFromRequest();
-AssetRenderer assetRenderer = workflowTaskDisplayContext.getAssetRendererFromRequest();
+AssetEntry assetEntry = workflowTaskDisplayContext.getAssetEntry();
+AssetRenderer assetRenderer = workflowTaskDisplayContext.getAssetRenderer();
 AssetRendererFactory assetRendererFactory = workflowTaskDisplayContext.getAssetRendererFactory();
 
 request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
