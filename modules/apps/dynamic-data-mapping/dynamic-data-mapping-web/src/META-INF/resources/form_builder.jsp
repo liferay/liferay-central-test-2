@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String fieldsJSONArrayString = ParamUtil.getString(request, "fieldsJSONArrayString");
-String script = ParamUtil.getString(request, "script");
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
+String script = ParamUtil.getString(request, "script");
+String fieldsJSONArrayString = ParamUtil.getString(request, "fieldsJSONArrayString");
 %>
 
 <%@ include file="/form_builder.jspf" %>
