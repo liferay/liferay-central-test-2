@@ -193,7 +193,9 @@ public class WorkflowInstanceViewDisplayContext
 	}
 
 	protected boolean isShowCompletedInstances() {
-		if ("completed".equals(getTabs2())) {
+		String tabs2 = getTabs2();
+
+		if (tabs2.equals("completed")) {
 			return true;
 		}
 
