@@ -139,9 +139,9 @@ public class WorkflowTaskDisplayContext {
 	public AssetRenderer getAssetRenderer(WorkflowTask workflowTask)
 		throws PortalException, PortletException {
 
-		long classPK = getWorkflowContextEntryClassPK(workflowTask);
-
 		WorkflowHandler<?> workflowHandler = getWorkflowHandler(workflowTask);
+
+		long classPK = getWorkflowContextEntryClassPK(workflowTask);
 
 		return workflowHandler.getAssetRenderer(classPK);
 	}
