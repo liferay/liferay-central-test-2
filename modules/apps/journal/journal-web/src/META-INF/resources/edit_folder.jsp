@@ -338,9 +338,9 @@ if (workflowEnabled) {
 				},
 				eventName: '<portlet:namespace />selectStructure',
 				groupId: <%= scopeGroupId %>,
+				mvcPath: '/select_structure.jsp',
 				refererPortletName: '<%= JournalPortletKeys.JOURNAL %>',
 				showAncestorScopes: true,
-				mvcPath: '/select_structure.jsp',
 				title: '<%= UnicodeLanguageUtil.get(request, "structures") %>'
 			},
 			function(event) {
