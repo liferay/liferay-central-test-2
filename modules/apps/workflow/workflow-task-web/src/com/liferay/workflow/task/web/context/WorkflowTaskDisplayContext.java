@@ -190,6 +190,7 @@ public class WorkflowTaskDisplayContext {
 		throws PortalException {
 
 		String actorName = getActorName(workflowLog);
+
 		return new Object[] {
 			HtmlUtil.escape(
 				PortalUtil.getUserName(
@@ -294,7 +295,6 @@ public class WorkflowTaskDisplayContext {
 		throws PortalException {
 
 		int total = 0;
-
 		List<WorkflowTask> results = null;
 
 		String[] assetTypes = WorkflowHandlerUtil.getSearchableAssetTypes();
@@ -311,7 +311,6 @@ public class WorkflowTaskDisplayContext {
 				_workflowTaskRequestHelper.getUserId(), searchTerms.getName(),
 				searchTerms.getType(), null, null, null, false, true,
 				searchTerms.isAndOperator());
-
 			results = WorkflowTaskManagerUtil.search(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(), searchTerms.getName(),
@@ -325,7 +324,6 @@ public class WorkflowTaskDisplayContext {
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
 				searchTerms.getKeywords(), assetTypes, false, true);
-
 			results = WorkflowTaskManagerUtil.search(
 				_workflowTaskRequestHelper.getCompanyId(),
 				_workflowTaskRequestHelper.getUserId(),
@@ -443,6 +441,7 @@ public class WorkflowTaskDisplayContext {
 		editPortletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		sb.append(HtmlUtil.escapeJS(editPortletURL.toString()));
+
 		sb.append("'});");
 
 		return sb.toString();
@@ -472,6 +471,7 @@ public class WorkflowTaskDisplayContext {
 		viewDiffsPortletURL.setPortletMode(PortletMode.VIEW);
 
 		sb.append(HtmlUtil.escapeJS(viewDiffsPortletURL.toString()));
+
 		sb.append("'});");
 
 		return sb.toString();
@@ -530,10 +530,12 @@ public class WorkflowTaskDisplayContext {
 		throws PortalException {
 
 		String actorName = getActorName(workflowLog);
-		return new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(
-			workflowLog.getPreviousState()),
+
+		return new Object[] {
+			HtmlUtil.escape(actorName),
+			HtmlUtil.escape(workflowLog.getPreviousState()),
 			HtmlUtil.escape(workflowLog.getState())
-			};
+		};
 	}
 
 	public List<String> getTransitionNames(WorkflowTask workflowTask)
@@ -784,8 +786,13 @@ public class WorkflowTaskDisplayContext {
 			curUser = _users.get(workflowLog.getUserId());
 		}
 
-		return (curUser != null) &&
-			(workflowLog.getAuditUserId() == curUser.getUserId());
+		if ((curUser != null) &&
+			(workflowLog.getAuditUserId() == curUser.getUserId())) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isCompletedTabSelected() {
