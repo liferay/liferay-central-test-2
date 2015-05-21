@@ -255,16 +255,17 @@ public class WorkflowTaskDisplayContext {
 	public String getHeaderTitle(WorkflowTask workflowTask)
 		throws PortalException {
 
-		String headerTitle = LanguageUtil.get(
+		String taskName = LanguageUtil.get(
 			_workflowTaskRequestHelper.getRequest(), workflowTask.getName());
 
 		WorkflowHandler<?> workflowHandler = getWorkflowHandler(workflowTask);
 
 		long classPK = getWorkflowContextEntryClassPK(workflowTask);
 
-		return headerTitle.concat(
-			StringPool.COLON + StringPool.SPACE + workflowHandler.getTitle(
-				classPK, _workflowTaskRequestHelper.getLocale()));
+		String title = workflowHandler.getTitle(
+			classPK, _workflowTaskRequestHelper.getLocale());
+
+		return taskName + ": " + title;
 	}
 
 	public String getLastActivityDate(WorkflowTask workflowTask)
