@@ -2088,8 +2088,8 @@ public class PortalImpl implements Portal {
 				try {
 					throw clazz.newInstance();
 				}
-				catch (PortalException e) {
-					throw e;
+				catch (PortalException pe) {
+					throw pe;
 				}
 				catch (Exception e) {
 					throw new PortalException(e);
