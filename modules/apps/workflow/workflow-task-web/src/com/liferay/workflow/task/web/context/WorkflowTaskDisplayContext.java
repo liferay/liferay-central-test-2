@@ -176,9 +176,9 @@ public class WorkflowTaskDisplayContext {
 	public String getAssignedTheTaskMessageKey(WorkflowLog workflowLog)
 		throws PortalException {
 
-		User curUser = _users.get(workflowLog.getUserId());
+		User user = _users.get(workflowLog.getUserId());
 
-		if (curUser.isMale()) {
+		if (user.isMale()) {
 			return "x-assigned-the-task-to-himself";
 		}
 		else {
@@ -521,6 +521,7 @@ public class WorkflowTaskDisplayContext {
 		throws PortalException {
 
 		String actorName = getActorName(workflowLog);
+
 		return HtmlUtil.escape(actorName);
 	}
 
@@ -554,9 +555,9 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public String getUserFullName(WorkflowLog workflowLog) {
-		User curUser = _users.get(workflowLog.getUserId());
+		User user = _users.get(workflowLog.getUserId());
 
-		return HtmlUtil.escape(curUser.getFullName());
+		return HtmlUtil.escape(user.getFullName());
 	}
 
 	public PortletURL getViewDiffsPortletURL(WorkflowTask workflowTask)
@@ -786,14 +787,14 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public boolean isAuditUser(WorkflowLog workflowLog) {
-		User curUser = null;
+		User user = null;
 
 		if (workflowLog.getUserId() != 0) {
-			curUser = _users.get(workflowLog.getUserId());
+			user = _users.get(workflowLog.getUserId());
 		}
 
-		if ((curUser != null) &&
-			(workflowLog.getAuditUserId() == curUser.getUserId())) {
+		if ((user != null) &&
+			(workflowLog.getAuditUserId() == user.getUserId())) {
 
 			return true;
 		}
