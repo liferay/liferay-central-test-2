@@ -81,7 +81,6 @@ public class RSSPortletDisplayTemplateHandler
 		templateVariableGroup.addVariable(
 			"rss-display-context", RSSDisplayContext.class,
 			"rssDisplayContext");
-
 		templateVariableGroup.addCollectionVariable(
 			"rss-feeds", List.class, PortletDisplayTemplateConstants.ENTRIES,
 			"rss-feed", RSSFeed.class, "curEntry", "getSyndFeed().getTitle()");

@@ -91,7 +91,6 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 			"asset-categories-navigation-display-context",
 			AssetCategoriesNavigationDisplayContext.class,
 			"assetCategoriesNavigationDisplayContext");
-
 		templateVariableGroup.addCollectionVariable(
 			"vocabularies", List.class, PortletDisplayTemplateConstants.ENTRIES,
 			"vocabulary", AssetVocabulary.class, "curVocabulary", "name");
