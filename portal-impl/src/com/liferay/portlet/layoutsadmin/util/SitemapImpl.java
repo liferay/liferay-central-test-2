@@ -18,37 +18,28 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.DateUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalArticleConstants;
-import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 
 import java.text.DateFormat;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Jorge Ferrer
@@ -199,138 +190,28 @@ public class SitemapImpl implements Sitemap {
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-		visitLayouts(rootElement, layouts, themeDisplay);
+		List<SitemapURLProvider> sitemapURLProviders =
+			SitemapURLProviderRegistryUtil.getSitemapURLProviders();
+
+		visitLayouts(rootElement, layouts, sitemapURLProviders, themeDisplay);
 
 		return document.asXML();
 	}
 
-	protected void visitArticles(
-			Element element, Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		List<JournalArticle> journalArticles =
-			JournalArticleServiceUtil.getArticlesByLayoutUuid(
-				layout.getGroupId(), layout.getUuid());
-
-		if (journalArticles.isEmpty()) {
-			return;
-		}
-
-		Set<String> processedArticleIds = new HashSet<>();
-
-		for (JournalArticle journalArticle : journalArticles) {
-			if (processedArticleIds.contains(
-					journalArticle.getArticleId()) ||
-				(journalArticle.getStatus() !=
-					WorkflowConstants.STATUS_APPROVED)) {
-
-				continue;
-			}
-
-			String portalURL = PortalUtil.getPortalURL(layout, themeDisplay);
-
-			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
-				LayoutSetLocalServiceUtil.getLayoutSet(
-					journalArticle.getGroupId(), false),
-				themeDisplay);
-
-			StringBundler sb = new StringBundler(4);
-
-			if (!groupFriendlyURL.startsWith(portalURL)) {
-				sb.append(portalURL);
-			}
-
-			sb.append(groupFriendlyURL);
-			sb.append(JournalArticleConstants.CANONICAL_URL_SEPARATOR);
-			sb.append(journalArticle.getUrlTitle());
-
-			String articleURL = PortalUtil.getCanonicalURL(
-				sb.toString(), themeDisplay, layout);
-
-			addURLElement(
-				element, articleURL, null, journalArticle.getModifiedDate(),
-				articleURL, getAlternateURLs(articleURL, themeDisplay, layout));
-
-			Set<Locale> availableLocales = LanguageUtil.getAvailableLocales(
-				layout.getGroupId());
-
-			if (availableLocales.size() > 1) {
-				Locale defaultLocale = LocaleUtil.getSiteDefault();
-
-				for (Locale availableLocale : availableLocales) {
-					if (!availableLocale.equals(defaultLocale)) {
-						String alternateURL = PortalUtil.getAlternateURL(
-							articleURL, themeDisplay, availableLocale, layout);
-
-						addURLElement(
-							element, alternateURL, null,
-							journalArticle.getModifiedDate(), articleURL,
-							getAlternateURLs(articleURL, themeDisplay, layout));
-					}
-				}
-			}
-
-			processedArticleIds.add(journalArticle.getArticleId());
-		}
-	}
-
-	protected void visitLayout(
-			Element element, Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		if (!PortalUtil.isLayoutSitemapable(layout) ||
-			!GetterUtil.getBoolean(
-				typeSettingsProperties.getProperty("sitemap-include"), true)) {
-
-			return;
-		}
-
-		String layoutFullURL = PortalUtil.getLayoutFullURL(
-			layout, themeDisplay);
-
-		layoutFullURL = PortalUtil.getCanonicalURL(
-			layoutFullURL, themeDisplay, layout);
-
-		addURLElement(
-			element, layoutFullURL, typeSettingsProperties,
-			layout.getModifiedDate(), layoutFullURL,
-			getAlternateURLs(layoutFullURL, themeDisplay, layout));
-
-		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales(
-			layout.getGroupId());
-
-		if (availableLocales.size() > 1) {
-			Locale defaultLocale = LocaleUtil.getSiteDefault();
-
-			for (Locale availableLocale : availableLocales) {
-				if (availableLocale.equals(defaultLocale)) {
-					continue;
-				}
-
-				String alternateURL = PortalUtil.getAlternateURL(
-					layoutFullURL, themeDisplay, availableLocale, layout);
-
-				addURLElement(
-					element, alternateURL, typeSettingsProperties,
-					layout.getModifiedDate(), layoutFullURL,
-					getAlternateURLs(layoutFullURL, themeDisplay, layout));
-			}
-		}
-	}
-
 	protected void visitLayouts(
-			Element element, List<Layout> layouts, ThemeDisplay themeDisplay)
+			Element element, List<Layout> layouts,
+			List<SitemapURLProvider> sitemapURLProviders,
+			ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		for (Layout layout : layouts) {
-			visitLayout(element, layout, themeDisplay);
+			for (SitemapURLProvider sitemapURLProvider : sitemapURLProviders) {
+				sitemapURLProvider.visitLayout(element, layout, themeDisplay);
+			}
 
-			visitArticles(element, layout, themeDisplay);
-
-			visitLayouts(element, layout.getChildren(), themeDisplay);
+			visitLayouts(
+				element, layout.getChildren(), sitemapURLProviders,
+				themeDisplay);
 		}
 	}
 
