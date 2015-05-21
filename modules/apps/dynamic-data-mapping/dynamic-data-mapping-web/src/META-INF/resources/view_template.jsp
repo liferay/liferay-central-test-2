@@ -41,12 +41,12 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
+portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteTemplate");
 portletURL.setParameter("mvcPath", "/view_template.jsp");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("classNameId", String.valueOf(classNameId));
 portletURL.setParameter("classPK", String.valueOf(classPK));
 portletURL.setParameter("resourceClassNameId", String.valueOf(resourceClassNameId));
-portletURL.setParameter(ActionRequest.ACTION_NAME, "deleteTemplate");
 
 boolean controlPanel = false;
 
