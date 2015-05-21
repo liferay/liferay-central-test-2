@@ -95,17 +95,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 	@Activate
 	protected void activate(Map<String, Object> properties) {
-		ClassLoader moduleClassLoader = getClass().getClassLoader();
-
-		if (!moduleClassLoader.equals(PortalClassLoaderUtil.getClassLoader())) {
-			_scriptingExecutorClassLoader =
-				AggregateClassLoader.getAggregateClassLoader(
-					PortalClassLoaderUtil.getClassLoader(),
-					getClass().getClassLoader());
-		}
-		else {
-			_scriptingExecutorClassLoader = moduleClassLoader;
-		}
+		initScriptingExecutorClassLoader();
 	}
 
 	protected GroovyShell getGroovyShell(ClassLoader[] classLoaders) {
@@ -123,7 +113,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 		ClassLoader aggregateClassLoader =
 			AggregateClassLoader.getAggregateClassLoader(
-				_scriptingExecutorClassLoader, classLoaders);
+				getScriptingExecutorClassLoader(), classLoaders);
 
 		GroovyShell groovyShell = _groovyShells.get(aggregateClassLoader);
 
@@ -145,6 +135,5 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 	private final ConcurrentMap<ClassLoader, GroovyShell> _groovyShells =
 		new ConcurrentReferenceKeyHashMap<>(
 			FinalizeManager.WEAK_REFERENCE_FACTORY);
-	private ClassLoader _scriptingExecutorClassLoader;
 
 }

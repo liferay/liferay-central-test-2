@@ -64,7 +64,7 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 			if (ArrayUtil.isNotEmpty(classLoaders)) {
 				ClassLoader aggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(
-						_scriptingExecutorClassLoader, classLoaders);
+						getScriptingExecutorClassLoader(), classLoaders);
 
 				interpreter.setClassLoader(aggregateClassLoader);
 			}
@@ -100,19 +100,7 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 
 	@Activate
 	protected void activate(Map<String, Object> properties) {
-		ClassLoader moduleClassLoader = getClass().getClassLoader();
-
-		if (!moduleClassLoader.equals(PortalClassLoaderUtil.getClassLoader())) {
-			_scriptingExecutorClassLoader =
-				AggregateClassLoader.getAggregateClassLoader(
-					PortalClassLoaderUtil.getClassLoader(),
-					getClass().getClassLoader());
-		}
-		else {
-			_scriptingExecutorClassLoader = moduleClassLoader;
-		}
+		initScriptingExecutorClassLoader();
 	}
-
-	private ClassLoader _scriptingExecutorClassLoader;
 
 }
