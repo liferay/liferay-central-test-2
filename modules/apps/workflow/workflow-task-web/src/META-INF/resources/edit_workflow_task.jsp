@@ -28,7 +28,6 @@ long classPK = workflowTaskDisplayContext.getWorkflowContextEntryClassPK(workflo
 WorkflowHandler<?> workflowHandler = workflowTaskDisplayContext.getWorkflowHandler(workflowTask);
 
 AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
-
 AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
 
 AssetEntry assetEntry = null;
