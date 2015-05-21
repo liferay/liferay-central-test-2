@@ -223,9 +223,9 @@ if (Validator.isNotNull(requestUpdateStructureURL)) {
 					destroyOnHide: true
 				},
 				eventName: '<portlet:namespace />selectParentStructure',
+				mvcPath: '/select_structure.jsp',
 				showAncestorScopes: true,
 				showManageTemplates: false,
-				mvcPath: '/select_structure.jsp',
 				title: '<%= HtmlUtil.escapeJS(scopeTitle) %>'
 			},
 			function(event) {
