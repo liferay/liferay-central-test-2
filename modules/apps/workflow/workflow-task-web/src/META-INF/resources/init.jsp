@@ -54,8 +54,9 @@ page import="com.liferay.workflow.task.web.search.WorkflowTaskSearch" %>
 <%@ page import="javax.portlet.PortletURL" %><%@
 page import="javax.portlet.WindowState" %>
 
-<liferay-theme:defineObjects />
 <portlet:defineObjects />
+
+<liferay-theme:defineObjects />
 
 <%
 WorkflowTaskDisplayContext workflowTaskDisplayContext = new WorkflowTaskDisplayContext(renderRequest, renderResponse);
