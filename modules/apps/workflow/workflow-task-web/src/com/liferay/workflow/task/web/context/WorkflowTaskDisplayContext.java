@@ -431,6 +431,7 @@ public class WorkflowTaskDisplayContext {
 		sb.append(
 			LanguageUtil.format(
 				_workflowTaskRequestHelper.getRequest(), "edit-x", assetTitle));
+
 		sb.append("', uri:'");
 
 		PortletURL editPortletURL = getEditPortletURL(workflowTask);
@@ -466,6 +467,7 @@ public class WorkflowTaskDisplayContext {
 			_workflowTaskRequestHelper.getRequest(), "diffs");
 
 		sb.append(HtmlUtil.escapeJS(title));
+
 		sb.append("', uri:'");
 
 		PortletURL viewDiffsPortletURL = getViewDiffsPortletURL(workflowTask);
