@@ -58,36 +58,7 @@ import java.util.Set;
 public class SitemapImpl implements Sitemap {
 
 	@Override
-	public String encodeXML(String input) {
-		return StringUtil.replace(
-			input,
-			new String[] {"&", "<", ">", "'", "\""},
-			new String[] {"&amp;", "&lt;", "&gt;", "&apos;", "&quot;"});
-	}
-
-	@Override
-	public String getSitemap(
-			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		Document document = SAXReaderUtil.createDocument();
-
-		document.setXMLEncoding(StringPool.UTF8);
-
-		Element rootElement = document.addElement(
-			"urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
-
-		rootElement.addAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-		visitLayouts(rootElement, layouts, themeDisplay);
-
-		return document.asXML();
-	}
-
-	protected void addURLElement(
+	public void addURLElement(
 		Element element, String url, UnicodeProperties typeSettingsProperties,
 		Date modifiedDate, String canonicalURL,
 		Map<Locale, String> alternateURLs) {
@@ -184,7 +155,16 @@ public class SitemapImpl implements Sitemap {
 		}
 	}
 
-	protected Map<Locale, String> getAlternateURLs(
+	@Override
+	public String encodeXML(String input) {
+		return StringUtil.replace(
+				input,
+				new String[] {"&", "<", ">", "'", "\""},
+				new String[] {"&amp;", "&lt;", "&gt;", "&apos;", "&quot;"});
+	}
+
+	@Override
+	public Map<Locale, String> getAlternateURLs(
 			String canonicalURL, ThemeDisplay themeDisplay, Layout layout)
 		throws PortalException {
 
@@ -200,6 +180,28 @@ public class SitemapImpl implements Sitemap {
 		}
 
 		return alternateURLs;
+	}
+
+	@Override
+	public String getSitemap(
+			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		Document document = SAXReaderUtil.createDocument();
+
+		document.setXMLEncoding(StringPool.UTF8);
+
+		Element rootElement = document.addElement(
+			"urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+		rootElement.addAttribute("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+
+		visitLayouts(rootElement, layouts, themeDisplay);
+
+		return document.asXML();
 	}
 
 	protected void visitArticles(
