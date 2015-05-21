@@ -684,11 +684,11 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public WorkflowTask getWorkflowTask() {
-		ResultRow row = (ResultRow)_renderRequest.getAttribute(
+		ResultRow resultRow = (ResultRow)_renderRequest.getAttribute(
 			WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-		if (Validator.isNotNull(row)) {
-			return (WorkflowTask)row.getParameter("workflowTask");
+		if (Validator.isNotNull(resultRow)) {
+			return (WorkflowTask)resultRow.getParameter("workflowTask");
 		}
 		else {
 			return (WorkflowTask)_renderRequest.getAttribute(
@@ -716,10 +716,10 @@ public class WorkflowTaskDisplayContext {
 	public String getWorkflowTaskRandomId() {
 		String randomId = StringPool.BLANK;
 
-		ResultRow row = (ResultRow)_renderRequest.getAttribute(
+		ResultRow resultRow = (ResultRow)_renderRequest.getAttribute(
 			WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-		if (row != null) {
+		if (resultRow != null) {
 			randomId = StringUtil.randomId();
 		}
 
