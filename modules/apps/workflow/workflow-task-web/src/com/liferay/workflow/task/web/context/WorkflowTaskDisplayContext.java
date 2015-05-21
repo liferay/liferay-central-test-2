@@ -398,10 +398,6 @@ public class WorkflowTaskDisplayContext {
 		return searchableAssetsWorkflowHandlers;
 	}
 
-	public String getTabs1() {
-		return ParamUtil.getString(_renderRequest, "tabs1", "pending");
-	}
-
 	public String getState(WorkflowTask workflowTask) throws PortalException {
 		long companyId = getWorkflowCompanyId(workflowTask);
 		long groupId = getWorkflowGroupId(workflowTask);
@@ -412,6 +408,10 @@ public class WorkflowTaskDisplayContext {
 			companyId, groupId, className, classPK);
 
 		return LanguageUtil.get(_workflowTaskRequestHelper.getRequest(), state);
+	}
+
+	public String getTabs1() {
+		return ParamUtil.getString(_renderRequest, "tabs1", "pending");
 	}
 
 	public String getTaglibEditURL(WorkflowTask workflowTask)
