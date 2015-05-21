@@ -330,28 +330,9 @@
 			<var name="entryTitle" value="${entryTitle}" />
 		</execute>
 
-		<if>
-			<not>
-				<and>
-					<isset var="entryAuthorFirstName" />
-					<isset var="entryAuthorLastName" />
-				</and>
-			</not>
-			<then>
-				<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_AUTHOR" value1="Test Test" />
-			</then>
-			<else>
-				<if>
-					<isset var="entryAuthorMiddleName" />
-					<then>
-						<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_AUTHOR" value1="By ${entryAuthorFirstName} ${entryAuthorMiddleName} ${entryAuthorLastName}" />
-					</then>
-					<else>
-						<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_AUTHOR" value1="By ${entryAuthorFirstName} ${entryAuthorLastName}" />
-					</else>
-				</if>
-			</else>
-		</if>
+		<execute macro="BlogsEntry#viewEntryAuthor">
+			<var name="entryAuthorFullName" value="${entryAuthorFullName}" />
+		</execute>
 
 		<execute macro="BlogsEntry#viewEntry">
 			<var name="entryContent" value="${entryContent}" />
