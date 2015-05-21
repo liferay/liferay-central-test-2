@@ -25,9 +25,9 @@
 			<zipfileset excludes="OSGI-INF/permissions.perm" src="lib/org.apache.felix.configadmin.jar" />
 		</jar>
 
-		<move file="${tstamp.value}.jar" tofile="lib/org.apache.felix.configadmin.jar" />
-
 		<delete dir="${tstamp.value}" />
+
+		<move file="${tstamp.value}.jar" tofile="lib/org.apache.felix.configadmin.jar" />
 
 		<copy file="lib/org.apache.felix.configadmin.jar" tofile="${plugin.file}" />
 	</target>
