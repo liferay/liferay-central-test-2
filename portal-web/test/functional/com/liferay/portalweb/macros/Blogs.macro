@@ -1,16 +1,4 @@
 <definition>
-	<command name="add">
-		<execute function="AssertClick" locator1="Blogs#ADD_BLOGS_ENTRY" value1="Add" />
-
-		<execute macro="BlogsEntry#addEntryContent">
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entrySubtitle" value="${entrySubtitle}" />
-			<var name="entryTitle" value="${entryTitle}" />
-		</execute>
-
-		<execute macro="BlogsEntry#publish" />
-	</command>
-
 	<command name="addDraft">
 		<execute function="AssertClick" locator1="Blogs#ADD_BLOGS_ENTRY" value1="Add" />
 
@@ -33,6 +21,18 @@
 		</execute>
 
 		<execute macro="BlogsEntry#autoSaveDraft" />
+	</command>
+
+	<command name="addEntry">
+		<execute function="AssertClick" locator1="Blogs#ADD_BLOGS_ENTRY" value1="Add" />
+
+		<execute macro="BlogsEntry#addEntryContent">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entrySubtitle" value="${entrySubtitle}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="BlogsEntry#publish" />
 	</command>
 
 	<command name="addScheduled">
