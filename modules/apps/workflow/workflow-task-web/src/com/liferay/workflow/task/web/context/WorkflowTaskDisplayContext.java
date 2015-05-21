@@ -357,7 +357,7 @@ public class WorkflowTaskDisplayContext {
 	public PortletURL getPortletURL() {
 		PortletURL portletURL = _renderResponse.createRenderURL();
 
-		portletURL.setParameter("tabs1", getSelectedTab());
+		portletURL.setParameter("tabs1", getTabs1());
 
 		return portletURL;
 	}
@@ -398,7 +398,7 @@ public class WorkflowTaskDisplayContext {
 		return searchableAssetsWorkflowHandlers;
 	}
 
-	public String getSelectedTab() {
+	public String getTabs1() {
 		return ParamUtil.getString(_renderRequest, "tabs1", "pending");
 	}
 
@@ -804,7 +804,7 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public boolean isCompletedTabSelected() {
-		String selectedTab = getSelectedTab();
+		String selectedTab = getTabs1();
 
 		if (selectedTab.equals("completed")) {
 			return true;
@@ -814,7 +814,7 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public boolean isPendingTabSelected() {
-		String selectedTab = getSelectedTab();
+		String selectedTab = getTabs1();
 
 		if (selectedTab.equals("pending")) {
 			return true;

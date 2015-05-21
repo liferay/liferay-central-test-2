@@ -96,5 +96,5 @@ PortletURL portletURL = workflowTaskDisplayContext.getPortletURL();
 </aui:form>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, workflowTaskDisplayContext.getSelectedTab()), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, workflowTaskDisplayContext.getTabs1()), currentURL);
 %>
