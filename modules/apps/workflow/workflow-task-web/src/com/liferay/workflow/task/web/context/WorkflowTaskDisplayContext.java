@@ -84,20 +84,17 @@ public class WorkflowTaskDisplayContext {
 	public WorkflowTaskDisplayContext(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
+		_renderRequest = renderRequest;
+		_renderResponse = renderResponse;
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		_dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
 			themeDisplay.getLocale(), themeDisplay.getTimeZone());
 
-		_renderRequest = renderRequest;
-		_renderResponse = renderResponse;
-
 		_workflowTaskRequestHelper = new WorkflowTaskRequestHelper(
 			renderRequest);
-
-		_roleMap = new HashMap<>();
-		_userMap = new HashMap<>();
 	}
 
 	public String getActorName(long actorId) {
@@ -981,8 +978,8 @@ public class WorkflowTaskDisplayContext {
 	private final Format _dateFormatDateTime;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
-	private final Map<Long, Role> _roleMap;
-	private final Map<Long, User> _userMap;
+	private final Map<Long, Role> _roleMap = new HashMap<>();
+	private final Map<Long, User> _userMap = new HashMap<>();
 	private final WorkflowTaskRequestHelper _workflowTaskRequestHelper;
 
 }
