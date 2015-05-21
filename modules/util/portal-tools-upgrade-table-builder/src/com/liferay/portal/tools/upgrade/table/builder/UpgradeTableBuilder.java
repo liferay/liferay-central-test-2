@@ -166,8 +166,7 @@ public class UpgradeTableBuilder {
 
 				@Override
 				public FileVisitResult visitFile(
-						Path filePath, BasicFileAttributes basicFileAttributes)
-					throws IOException {
+					Path filePath, BasicFileAttributes basicFileAttributes) {
 
 					if (pathMatcher.matches(filePath)) {
 						paths.add(filePath);
@@ -213,7 +212,7 @@ public class UpgradeTableBuilder {
 		return addIndexes.toArray(new String[addIndexes.size()]);
 	}
 
-	private String _getAuthor(String content) throws IOException {
+	private String _getAuthor(String content) {
 		int x = content.indexOf("* @author ");
 
 		if (x != -1) {
