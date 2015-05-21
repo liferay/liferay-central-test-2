@@ -176,7 +176,7 @@ public class WorkflowTaskDisplayContext {
 	public String getAssignedTheTaskMessageKey(WorkflowLog workflowLog)
 		throws PortalException {
 
-		User curUser = _userMap.get(workflowLog.getUserId());
+		User curUser = _users.get(workflowLog.getUserId());
 
 		if (curUser.isMale()) {
 			return "x-assigned-the-task-to-himself";
@@ -546,7 +546,7 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	public String getUserFullName(WorkflowLog workflowLog) {
-		User curUser = _userMap.get(workflowLog.getUserId());
+		User curUser = _users.get(workflowLog.getUserId());
 
 		return HtmlUtil.escape(curUser.getFullName());
 	}
@@ -781,7 +781,7 @@ public class WorkflowTaskDisplayContext {
 		User curUser = null;
 
 		if (workflowLog.getUserId() != 0) {
-			curUser = _userMap.get(workflowLog.getUserId());
+			curUser = _users.get(workflowLog.getUserId());
 		}
 
 		return (curUser != null) &&
@@ -839,24 +839,24 @@ public class WorkflowTaskDisplayContext {
 	}
 
 	protected Role getRole(long roleId) throws PortalException {
-		Role role = _roleMap.get(roleId);
+		Role role = _roles.get(roleId);
 
 		if (role == null) {
 			role = RoleLocalServiceUtil.getRole(roleId);
 
-			_roleMap.put(roleId, role);
+			_roles.put(roleId, role);
 		}
 
 		return role;
 	}
 
 	protected User getUser(long userId) throws PortalException {
-		User user = _userMap.get(userId);
+		User user = _users.get(userId);
 
 		if (user == null) {
 			user = UserLocalServiceUtil.getUser(userId);
 
-			_userMap.put(userId, user);
+			_users.put(userId, user);
 		}
 
 		return user;
@@ -978,8 +978,8 @@ public class WorkflowTaskDisplayContext {
 	private final Format _dateFormatDateTime;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
-	private final Map<Long, Role> _roleMap = new HashMap<>();
-	private final Map<Long, User> _userMap = new HashMap<>();
+	private final Map<Long, Role> _roles = new HashMap<>();
+	private final Map<Long, User> _users = new HashMap<>();
 	private final WorkflowTaskRequestHelper _workflowTaskRequestHelper;
 
 }
