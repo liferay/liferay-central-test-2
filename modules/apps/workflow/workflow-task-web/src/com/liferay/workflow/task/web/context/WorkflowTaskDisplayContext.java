@@ -105,17 +105,17 @@ public class WorkflowTaskDisplayContext {
 	public long[] getActorsIds(WorkflowTask workflowTask)
 		throws PortalException {
 
-		long[] pooledActorsIds = getPooledActorsIds(workflowTask);
+		List<Long> pooledActorIdsList = new ArrayList<>();
 
-		List<Long> actors = new ArrayList<>();
+		long[] pooledActorsIds = getPooledActorsIds(workflowTask);
 
 		for (long pooledActorId : pooledActorsIds) {
 			if (pooledActorId != _workflowTaskRequestHelper.getUserId()) {
-				actors.add(pooledActorId);
+				pooledActorIdsList.add(pooledActorId);
 			}
 		}
 
-		return ArrayUtil.toLongArray(actors);
+		return ArrayUtil.toLongArray(pooledActorIdsList);
 	}
 
 	public AssetEntry getAssetEntryFromRequest() throws PortalException {
