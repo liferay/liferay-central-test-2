@@ -2,6 +2,8 @@
 <#assign liferay_portlet = taglibLiferayHash["/WEB-INF/tld/liferay-portlet.tld"] />
 <#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
+<#assign rssPortletInstanceConfiguration = rssDisplayContext.getRSSPortletInstanceConfiguration() />
+
 <style>
 	.portlet-rss .feed-entry-content {
 		margin-bottom: 20px;
@@ -11,8 +13,6 @@
 
 <#if entries?has_content>
 	<#assign dateFormat = "dd MMM yyyy - HH:mm:ss" />
-
-	<#assign rssPortletInstanceConfiguration = rssDisplayContext.getRSSPortletInstanceConfiguration() />
 
 	<div class="container-fluid">
 		<div class="row" id="<@liferay_portlet.namespace />feedsTab">
