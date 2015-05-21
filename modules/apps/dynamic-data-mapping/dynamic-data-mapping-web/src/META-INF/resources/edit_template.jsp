@@ -328,8 +328,8 @@ boolean showCacheableInput = ParamUtil.getBoolean(request, "showCacheableInput")
 					classPK: 0,
 					eventName: '<portlet:namespace />selectStructure',
 					groupId: <%= groupId %>,
-					showAncestorScopes: true,
 					mvcPath: '/select_structure.jsp',
+					showAncestorScopes: true,
 					title: '<%= UnicodeLanguageUtil.get(request, "structures") %>'
 				},
 				function(event) {
