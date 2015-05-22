@@ -428,7 +428,9 @@ public class HookHotDeployListener
 		}
 
 		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
-			StoreFactory.setStoreInstance(null);
+			StoreFactory storeFactory = StoreFactory.getInstance();
+
+			storeFactory.setStoreInstance(null);
 		}
 
 		Set<String> liferayFilterClassNames =
@@ -1542,7 +1544,9 @@ public class HookHotDeployListener
 			Store store = (Store)newInstance(
 				portletClassLoader, Store.class, storeClassName);
 
-			StoreFactory.setStoreInstance(store);
+			StoreFactory storeFactory = StoreFactory.getInstance();
+
+			storeFactory.setStoreInstance(store);
 		}
 
 		if (portalProperties.containsKey(
