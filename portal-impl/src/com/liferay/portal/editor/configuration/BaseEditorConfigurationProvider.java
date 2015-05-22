@@ -46,7 +46,7 @@ public abstract class BaseEditorConfigurationProvider<T> {
 			editorName = "null";
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(portletName);
 		sb.append(StringPool.PERIOD);
