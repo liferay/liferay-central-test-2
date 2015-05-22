@@ -428,7 +428,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#exportLayoutsAsFile(
+	 *             com.liferay.portal.service.ExportImportService#exportLayoutsAsFile(
 	 *             ExportImportConfiguration)}
 	 */
 	@Deprecated
@@ -487,7 +487,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#exportLayoutsAsFileInBackground(
+	 *             com.liferay.portal.service.ExportImportService#exportLayoutsAsFileInBackground(
 	 *             ExportImportConfiguration)}
 	 */
 	@Deprecated
@@ -506,7 +506,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#exportLayoutsAsFileInBackground(
+	 *             com.liferay.portal.service.ExportImportService#exportLayoutsAsFileInBackground(
 	 *             long)}
 	 */
 	@Deprecated
@@ -624,7 +624,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#exportPortletInfoAsFile(
+	 *             com.liferay.portal.service.ExportImportService#exportPortletInfoAsFile(
 	 *             ExportImportConfiguration)}
 	 */
 	@Deprecated
@@ -1008,7 +1008,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#importLayouts(
+	 *             com.liferay.portal.service.ExportImportService#importLayouts(
 	 *             ExportImportConfiguration, File)}
 	 */
 	@Deprecated
@@ -1031,7 +1031,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#importLayouts(
+	 *             com.liferay.portal.service.ExportImportService#importLayouts(
 	 *             ExportImportConfiguration, InputStream)}
 	 */
 	@Deprecated
@@ -1180,7 +1180,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#importPortletInfo(
+	 *             com.liferay.portal.service.ExportImportService#importPortletInfo(
 	 *             ExportImportConfiguration, File)} (
 	 */
 	@Deprecated
@@ -1203,7 +1203,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#importPortletInfo(
+	 *             com.liferay.portal.service.ExportImportService#importPortletInfo(
 	 *             ExportImportConfiguration, InputStream)} (
 	 */
 	@Deprecated
@@ -2052,7 +2052,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#validateImportLayoutsFile(
+	 *             com.liferay.portal.service.ExportImportService#validateImportLayoutsFile(
 	 *             ExportImportConfiguration, File)}
 	 */
 	@Deprecated
@@ -2076,7 +2076,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#validateImportLayoutsFile(
+	 *             com.liferay.portal.service.ExportImportService#validateImportLayoutsFile(
 	 *             ExportImportConfiguration, InputStream)}
 	 */
 	@Deprecated
@@ -2137,7 +2137,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#validateImportPortletInfo(
+	 *             com.liferay.portal.service.ExportImportService#validateImportPortletInfo(
 	 *             ExportImportConfiguration, File)}
 	 */
 	@Deprecated
@@ -2162,7 +2162,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.service.ExportImportServiceUtil#validateImportPortletInfo(
+	 *             com.liferay.portal.service.ExportImportService#validateImportPortletInfo(
 	 *             ExportImportConfiguration, InputStream)}
 	 */
 	@Deprecated
