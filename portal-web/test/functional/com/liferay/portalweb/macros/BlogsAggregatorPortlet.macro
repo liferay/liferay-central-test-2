@@ -8,7 +8,9 @@
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
 
 		<execute function="Select" locator1="PGBlogsAggregatorConfiguration#SELECTION_METHOD_SELECT" value1="${selectionMethod}" />
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
+
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="You have successfully updated the setup." />
 
 		<execute function="SelectFrame" value1="relative=top" />
@@ -33,8 +35,10 @@
 	<command name="viewEntryAsGuestViaBlogsAggregatorPG">
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="BlogsAggregator#ENTRY_READ_MORE" value1="Read More" />
 
-		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
-		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+		<execute macro="BlogsEntry#viewEntry">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
 	</command>
 
 	<command name="viewEntryViaBlogsAggregatorPG">
@@ -42,8 +46,10 @@
 
 		<execute function="AssertClick#assertPartialTextClickAt" locator1="BlogsAggregator#ENTRY_READ_MORE" value1="Read More" />
 
-		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
-		<execute function="AssertTextEquals" locator1="BlogsEntry#CONTENT" value1="${entryContent}" />
+		<execute macro="BlogsEntry#viewEntry">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
 	</command>
 
 	<command name="viewNoEntryViaBlogsAggregatorPG">
@@ -60,6 +66,7 @@
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
 		<execute function="SelectFrame" value1="relative=top" />
+
 		<execute function="SelectFrame" locator1="UsersAndOrganizationsSelectOrganization#SELECT_ORGANIZATION_IFRAME" />
 
 		<var name="key_orgName" value="${subOrgName}" />
@@ -80,6 +87,7 @@
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
 		<execute function="SelectFrame" value1="relative=top" />
+
 		<execute function="SelectFrame" locator1="UsersAndOrganizationsSelectOrganization#SELECT_ORGANIZATION_IFRAME" />
 
 		<var name="key_orgName" value="${orgName}" />
@@ -98,6 +106,7 @@
 		<execute function="AssertTextPresent" locator1="Portlet#TITLE" value1="Blogs Aggregator" />
 
 		<execute function="SelectFrame" locator1="IFrame#CONFIGURATION" />
+
 		<execute function="AssertClick" locator1="Configuration#NAVIGATION_SETUP" value1="Setup" />
 
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
