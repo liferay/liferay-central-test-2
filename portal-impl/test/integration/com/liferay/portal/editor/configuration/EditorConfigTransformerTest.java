@@ -298,9 +298,9 @@ public class EditorConfigTransformerTest {
 			ThemeDisplay themeDisplay,
 			LiferayPortletResponse liferayPortletResponse) {
 
-			jsonObject.put("version", "basic");
 			jsonObject.put("textMode", "html");
 			jsonObject.put("toolbar", "HTMLToolbar");
+			jsonObject.put("version", "basic");
 		}
 
 	}
