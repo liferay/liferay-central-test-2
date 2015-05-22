@@ -125,6 +125,9 @@
 			<bean class="com.liferay.portal.diff.DiffImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactory" class="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactoryUtil">
+		<property name="editorConfigurationFactory" ref="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactoryImpl" />
+	</bean>
 	<bean id="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactoryImpl" class="com.liferay.portal.editor.configuration.EditorConfigurationFactoryImpl">
 		<property name="editorConfigProvider">
 			<bean class="com.liferay.portal.editor.configuration.EditorConfigProvider" />
@@ -132,9 +135,6 @@
 		<property name="editorOptionsProvider">
 			<bean class="com.liferay.portal.editor.configuration.EditorOptionsProvider" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactory" class="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactoryUtil">
-		<property name="editorConfigurationFactory" ref="com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactoryImpl" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.image.GhostscriptUtil" class="com.liferay.portal.kernel.image.GhostscriptUtil">
 		<property name="ghostscript">

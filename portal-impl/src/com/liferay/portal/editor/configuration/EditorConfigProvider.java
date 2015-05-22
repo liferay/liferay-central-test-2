@@ -67,7 +67,8 @@ public class EditorConfigProvider
 	}
 
 	private static final ServiceReferenceMapper<String, EditorConfigContributor>
-		_serviceReferenceMapper = new EditorServiceReferenceMapper();
+		_serviceReferenceMapper =
+			new EditorServiceReferenceMapper<EditorConfigContributor>();
 	private static final ServiceTrackerMap
 		<String, List<EditorConfigContributor>>
 			_serviceTrackerMap = ServiceTrackerCollections.multiValueMap(
