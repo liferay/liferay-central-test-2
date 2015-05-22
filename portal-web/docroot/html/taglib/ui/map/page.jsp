@@ -42,12 +42,12 @@ if (Validator.isNull(apiKey) || Validator.isNull(provider)) {
 
 	PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(company.getCompanyId());
 
-	if (Validator.isNull(provider)) {
-		provider = groupTypeSettings.getProperty("mapsAPIProvider", companyPortletPreferences.getValue("mapsAPIProvider", "Google"));
-	}
-
 	if (Validator.isNull(apiKey)) {
 		apiKey = groupTypeSettings.getProperty("googleMapsAPIKey", companyPortletPreferences.getValue("googleMapsAPIKey", null));
+	}
+
+	if (Validator.isNull(provider)) {
+		provider = groupTypeSettings.getProperty("mapsAPIProvider", companyPortletPreferences.getValue("mapsAPIProvider", "Google"));
 	}
 }
 
