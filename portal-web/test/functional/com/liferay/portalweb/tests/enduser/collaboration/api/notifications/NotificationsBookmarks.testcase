@@ -57,6 +57,8 @@
 		<execute macro="BookmarksFolder#tearDownCP" />
 
 		<execute macro="Page#tearDownPG" />
+
+		<execute macro="User#tearDownCP" />
 	</tear-down>
 
 	<command name="ViewWebsiteNotificationForNewBookmarkInFolder" priority="5">
