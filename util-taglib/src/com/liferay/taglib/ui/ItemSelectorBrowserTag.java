@@ -60,12 +60,12 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 
 	public enum ReturnType {
 
-		BASE64(Base64.class), FILE_ENTRY(FileEntry.class),
+		BASE_64(Base64.class), FILE_ENTRY(FileEntry.class),
 		URL (java.net.URL.class);
 
 		public static ReturnType parse(Class<?> value) {
-			if (BASE64.getValue().equals(value)) {
-				return BASE64;
+			if (BASE_64.getValue().equals(value)) {
+				return BASE_64;
 			}
 
 			if (FILE_ENTRY.getValue().equals(value)) {
@@ -90,7 +90,7 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 			}
 
 			throw new IllegalArgumentException(
-				"No valid value found in the set");
+				"No return type found for value " + value);
 		}
 
 		public ObjectValuePair<String, String> getReturnTypeAndValue(
@@ -99,7 +99,7 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 
 			Class<?> clazz = this.getValue();
 
-			if (this == BASE64) {
+			if (this == BASE_64) {
 				return new ObjectValuePair<>(clazz.getName(), StringPool.BLANK);
 			}
 			else if (this == FILE_ENTRY) {
