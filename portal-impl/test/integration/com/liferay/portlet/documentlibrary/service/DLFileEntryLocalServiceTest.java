@@ -74,7 +74,7 @@ public class DLFileEntryLocalServiceTest {
 	}
 
 	@Test
-	public void testDeleteFileEntriesIteration() throws Exception {
+	public void testDeleteFileEntries() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
