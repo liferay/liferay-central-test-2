@@ -464,6 +464,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#exportLayoutsAsFile(
 	ExportImportConfiguration)}
@@ -500,6 +501,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#exportLayoutsAsFileInBackground(
 	long, ExportImportConfiguration)}
@@ -510,6 +512,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#exportLayoutsAsFileInBackground(
 	long, long)}
@@ -519,6 +522,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		long exportImportConfigurationId) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -530,6 +534,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -541,6 +546,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.lang.String fileName) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -576,6 +582,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -586,6 +593,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#exportPortletInfoAsFile(
 	ExportImportConfiguration)}}
@@ -622,6 +630,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#exportPortletInfoAsFileInBackground(
 	long, ExportImportConfiguration)}}
@@ -632,6 +641,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#exportPortletInfoAsFileInBackground(
 	long, long)}}
@@ -641,6 +651,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		long exportImportConfigurationId) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -652,6 +663,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.lang.String fileName) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1074,6 +1086,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importLayouts(
 	ExportImportConfiguration, File)}}
@@ -1084,6 +1097,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importLayouts(
 	ExportImportConfiguration, InputStream)}}
@@ -1157,6 +1171,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.InputStream is) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importLayoutsDataDeletions(
 	ExportImportConfiguration, File)}
@@ -1167,6 +1182,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importLayoutsInBackground(
 	long, ExportImportConfiguration, File)}
@@ -1177,6 +1193,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importLayoutsInBackground(
 	long, long, File)}
@@ -1187,6 +1204,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1196,6 +1214,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1205,6 +1224,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.InputStream is) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importPortletDataDeletions(
 	ExportImportConfiguration, File)}
@@ -1215,6 +1235,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importPortletInfo(
 	ExportImportConfiguration, File)}
@@ -1225,6 +1246,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importPortletInfo(
 	ExportImportConfiguration, InputStream)}
@@ -1281,6 +1303,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.InputStream is) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1289,6 +1312,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1297,6 +1321,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.InputStream is) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importPortletInfoInBackground(
 	long, ExportImportConfiguration, File)}
@@ -1307,6 +1332,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#importPortletInfoInBackground(
 	long, long, File)}
@@ -1317,6 +1343,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1327,6 +1354,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1337,6 +1365,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.InputStream is) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1346,6 +1375,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
@@ -1772,6 +1802,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#validateImportLayoutsFile(
 	ExportImportConfiguration, File)}
@@ -1782,6 +1813,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#validateImportLayoutsFile(
 	ExportImportConfiguration, InputStream)}
@@ -1812,6 +1844,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.InputStream inputStream) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#validateImportPortletInfo(
 	ExportImportConfiguration, File)}
@@ -1822,6 +1855,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, replaced by {@link
 	com.liferay.portal.service.ExportImportLocalService#validateImportPortletInfo(
 	ExportImportConfiguration, InputStream)}
@@ -1842,6 +1876,7 @@ public interface LayoutLocalService extends BaseLocalService,
 		java.io.File file) throws PortalException;
 
 	/**
+	* @throws PortalException
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
 	@java.lang.Deprecated
