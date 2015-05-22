@@ -89,8 +89,7 @@ public class ItemSelectorBrowserTag extends IncludeTag {
 				}
 			}
 
-			throw new IllegalArgumentException(
-				"No return type found for value " + value);
+			throw new IllegalArgumentException("Invalid value " + value);
 		}
 
 		public ObjectValuePair<String, String> getReturnTypeAndValue(
