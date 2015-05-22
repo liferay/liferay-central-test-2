@@ -1411,7 +1411,8 @@
 
 					var selectorButtons = currentWindow.all('.lfr-search-container .selector-button');
 
-					selectorButtons.some(
+					A.some(
+						selectorButtons,
 						function(item, index) {
 							var assetEntryId = item.attr('data-assetentryid');
 
