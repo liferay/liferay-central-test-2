@@ -1,4 +1,6 @@
 <definition>
+	<var name="entryAuthorFullName" value="Test Test" />
+
 	<command name="addAbstractDescriptionPG">
 		<if>
 			<condition function="IsElementPresent#pauseIsElementPresent" locator1="PGBlogsAdd#ABSTRACT_DROPDOWN_COLLAPSED" />
