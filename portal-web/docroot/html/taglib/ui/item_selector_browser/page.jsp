@@ -26,7 +26,7 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 %>
 
 <div class="lfr-item-viewer" id="<%= idPrefix %>ItemSelectorContainer">
-	<c:if test="<%= returnType == ReturnType.BASE_64 %>">
+	<c:if test="<%= ReturnType.BASE_64.equals(returnType) %>">
 		<div class="drop-zone">
 			<label class="btn btn-primary" for="<%= idPrefix %>InputFile"><liferay-ui:message key="select-file" /></label>
 
