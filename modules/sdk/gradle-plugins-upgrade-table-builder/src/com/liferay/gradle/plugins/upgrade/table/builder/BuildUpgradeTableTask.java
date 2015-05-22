@@ -79,9 +79,8 @@ public class BuildUpgradeTableTask extends JavaExec {
 
 	@Override
 	public String getMain() {
-		return
-			"com.liferay.portal.tools.upgrade.table.builder." +
-				"UpgradeTableBuilder";
+		return "com.liferay.portal.tools.upgrade.table.builder." +
+			"UpgradeTableBuilder";
 	}
 
 	public String getUpgradeTableDirName() {
