@@ -1559,7 +1559,7 @@
 		<execute function="AssertElementPresent" locator1="PGBlogsEntry#ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
-	<command name="viewEntryAuthor">
+	<command name="viewEntryAuthorPG">
 		<execute function="AssertTextEquals" locator1="BlogsEntry#ENTRY_AUTHOR" value1="${entryAuthorFullName}" />
 	</command>
 

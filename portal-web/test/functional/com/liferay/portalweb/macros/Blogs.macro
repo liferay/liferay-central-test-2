@@ -330,7 +330,7 @@
 			<var name="entryTitle" value="${entryTitle}" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewEntryAuthor">
+		<execute macro="BlogsEntry#viewEntryAuthorPG">
 			<var name="entryAuthorFullName" value="${entryAuthorFullName}" />
 		</execute>
 
