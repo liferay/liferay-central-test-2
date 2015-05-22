@@ -87,7 +87,10 @@ public abstract class BaseEditorConfigurationProvider<T> {
 		getServiceTrackerMap();
 
 	protected void populateContributor(List<T> contributors, String key) {
-		List<T> curContributors = getServiceTrackerMap().getService(key);
+		ServiceTrackerMap<String, List<T>> serviceTrackerMap =
+			getServiceTrackerMap();
+
+		List<T> curContributors = serviceTrackerMap.getService(key);
 
 		if (ListUtil.isNotEmpty(curContributors)) {
 			contributors.addAll(curContributors);
