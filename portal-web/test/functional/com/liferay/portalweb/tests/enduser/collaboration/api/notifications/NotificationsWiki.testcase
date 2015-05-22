@@ -72,6 +72,17 @@
 			<var name="wikiNodeName" value="Main" />
 		</execute>
 
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
+		</execute>
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -83,8 +94,15 @@
 			<var name="wikiPageTitle" value="Wiki Page Title" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
 		<execute macro="Notifications#viewCountAlert">
@@ -94,9 +112,9 @@
 		<execute macro="Notifications#gotoDockbar" />
 
 		<execute macro="Notifications#viewNewContent">
-			<var name="assetType" value="Wiki Page" />
+			<var name="assetType" value="wiki page" />
 			<var name="contentBody" value="Wiki Page Title" />
-			<var name="user" value="Test Test" />
+			<var name="user" value="userfn userln" />
 		</execute>
 
 		<execute macro="Notifications#navigateToContent">
@@ -133,6 +151,17 @@
 			<var name="wikiNodeName" value="Main" />
 		</execute>
 
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
+		</execute>
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -145,8 +174,15 @@
 			<var name="wikiPageTitle" value="Wiki Page Title" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
 		<execute macro="Notifications#viewCountAlert">
@@ -156,9 +192,9 @@
 		<execute macro="Notifications#gotoDockbar" />
 
 		<execute macro="Notifications#viewUpdatedContent">
-			<var name="assetType" value="Wiki Page" />
+			<var name="assetType" value="wiki page" />
 			<var name="contentBody" value="Wiki Page Title" />
-			<var name="user" value="Test Test" />
+			<var name="user" value="userfn userln" />
 		</execute>
 
 		<execute macro="Notifications#navigateToContent">

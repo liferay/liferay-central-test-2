@@ -80,6 +80,17 @@
 			<var name="folderName" value="Bookmarks Folder Name" />
 		</execute>
 
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
+		</execute>
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -93,6 +104,17 @@
 			<var name="bookmarkURL" value="http://www.liferay.com" />
 		</execute>
 
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -104,9 +126,9 @@
 		<execute macro="Notifications#gotoDockbar" />
 
 		<execute macro="Notifications#viewNewContent">
-			<var name="assetType" value="Bookmarks Entry" />
+			<var name="assetType" value="bookmarks entry" />
 			<var name="contentBody" value="Bookmark Name" />
-			<var name="user" value="Test Test" />
+			<var name="user" value="userfn userln" />
 		</execute>
 
 		<execute macro="Notifications#navigateToContent">
@@ -133,6 +155,11 @@
 			<var name="folderName" value="Bookmarks Folder Name" />
 		</execute>
 
+		<execute macro="BookmarksFolder#subscribePG">
+			<var name="folderDescription" value="Bookmarks Folder Description" />
+			<var name="folderName" value="Bookmarks Folder Name" />
+		</execute>
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -146,13 +173,15 @@
 			<var name="bookmarkURL" value="http://www.liferay.com" />
 		</execute>
 
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
 		</execute>
 
-		<execute macro="BookmarksFolder#subscribePG">
-			<var name="folderDescription" value="Bookmarks Folder Description" />
-			<var name="folderName" value="Bookmarks Folder Name" />
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -170,6 +199,17 @@
 			<var name="bookmarkURLEdit" value="http://www.liferay.com" />
 		</execute>
 
+		<execute macro="Notifications#viewCount">
+			<var name="notificationCount" value="0" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="User#loginUserPG">
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -181,9 +221,9 @@
 		<execute macro="Notifications#gotoDockbar" />
 
 		<execute macro="Notifications#viewUpdatedContent">
-			<var name="assetType" value="Bookmarks Entry" />
+			<var name="assetType" value="bookmarks entry" />
 			<var name="contentBody" value="Bookmark Name Edit" />
-			<var name="user" value="Test Test" />
+			<var name="user" value="userfn userln" />
 		</execute>
 
 		<execute macro="Notifications#navigateToContent">
