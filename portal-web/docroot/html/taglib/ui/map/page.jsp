@@ -28,19 +28,6 @@ String points = GetterUtil.getString(request.getAttribute("liferay-ui:map:points
 String provider = GetterUtil.getString((String)request.getAttribute("liferay-ui:map:provider"));
 
 if (Validator.isNull(apiKey) || Validator.isNull(provider)) {
-	PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(company.getCompanyId());
-
-	String googleMapsAPIKey = null;
-	String mapsAPIProvider = null;
-
-	if (Validator.isNull(apiKey)) {
-		googleMapsAPIKey = companyPortletPreferences.getValue("googleMapsAPIKey", null);
-	}
-
-	if (Validator.isNull(provider)) {
-		mapsAPIProvider = companyPortletPreferences.getValue("mapsAPIProvider", "Google");
-	}
-
 	Group group = themeDisplay.getSiteGroup();
 
 	if (group.isStagingGroup()) {
@@ -53,12 +40,16 @@ if (Validator.isNull(apiKey) || Validator.isNull(provider)) {
 		groupTypeSettings = group.getTypeSettingsProperties();
 	}
 
-	if (Validator.isNull(apiKey)) {
-		apiKey = groupTypeSettings.getProperty("googleMapsAPIKey", googleMapsAPIKey);
+	if (Validator.isNull(provider)) {
+		PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(company.getCompanyId());
+
+		provider = groupTypeSettings.getProperty("mapsAPIProvider", companyPortletPreferences.getValue("mapsAPIProvider", "Google"));
 	}
 
-	if (Validator.isNull(provider)) {
-		provider = groupTypeSettings.getProperty("mapsAPIProvider", mapsAPIProvider);
+	if (Validator.isNull(apiKey)) {
+		PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(company.getCompanyId());
+
+		apiKey = groupTypeSettings.getProperty("googleMapsAPIKey", companyPortletPreferences.getValue("googleMapsAPIKey", null));
 	}
 }
 
