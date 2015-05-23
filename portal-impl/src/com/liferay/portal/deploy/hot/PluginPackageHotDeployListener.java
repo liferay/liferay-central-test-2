@@ -290,13 +290,15 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
-		String singleVMLocation = portletPropertiesConfiguration.get(
-			PropsKeys.EHCACHE_SINGLE_VM_CONFIG_LOCATION);
-		String multiVMLocation = portletPropertiesConfiguration.get(
-			PropsKeys.EHCACHE_MULTI_VM_CONFIG_LOCATION);
+		String singleVMConfigurationLocation =
+			portletPropertiesConfiguration.get(
+				PropsKeys.EHCACHE_SINGLE_VM_CONFIG_LOCATION);
+		String multiVMConfigurationLocation =
+			portletPropertiesConfiguration.get(
+				PropsKeys.EHCACHE_MULTI_VM_CONFIG_LOCATION);
 
-		if (Validator.isNull(singleVMLocation) &&
-			Validator.isNull(multiVMLocation)) {
+		if (Validator.isNull(singleVMConfigurationLocation) &&
+			Validator.isNull(multiVMConfigurationLocation)) {
 
 			return;
 		}
@@ -306,7 +308,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		ServiceRegistrar<PortalCacheConfiguratorSettings> serviceRegistrar =
 			registry.getServiceRegistrar(PortalCacheConfiguratorSettings.class);
 
-		if (Validator.isNotNull(singleVMLocation)) {
+		if (Validator.isNotNull(singleVMConfigurationLocation)) {
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put(
@@ -315,11 +317,11 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			serviceRegistrar.registerService(
 				PortalCacheConfiguratorSettings.class,
 				new PortalCacheConfiguratorSettings(
-					classLoader, singleVMLocation),
+					classLoader, singleVMConfigurationLocation),
 				properties);
 		}
 
-		if (Validator.isNotNull(multiVMLocation)) {
+		if (Validator.isNotNull(multiVMConfigurationLocation)) {
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put(
@@ -328,7 +330,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			serviceRegistrar.registerService(
 				PortalCacheConfiguratorSettings.class,
 				new PortalCacheConfiguratorSettings(
-					classLoader, multiVMLocation),
+					classLoader, multiVMConfigurationLocation),
 				properties);
 		}
 
