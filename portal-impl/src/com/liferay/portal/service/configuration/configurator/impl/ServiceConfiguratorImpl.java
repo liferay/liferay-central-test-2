@@ -217,13 +217,13 @@ public class ServiceConfiguratorImpl implements ServiceConfigurator {
 			return;
 		}
 		
-		String singleVMLocation = configuration.get(
+		String singleVMConfigurationLocation = configuration.get(
 			PropsKeys.EHCACHE_SINGLE_VM_CONFIG_LOCATION);
-		String multiVMLocation = configuration.get(
+		String multiVMConfigurationLocation = configuration.get(
 			PropsKeys.EHCACHE_MULTI_VM_CONFIG_LOCATION);
 
-		if (Validator.isNull(singleVMLocation) &&
-			Validator.isNull(multiVMLocation)) {
+		if (Validator.isNull(singleVMConfigurationLocation) &&
+			Validator.isNull(multiVMConfigurationLocation)) {
 			
 			return;
 		}
@@ -235,7 +235,7 @@ public class ServiceConfiguratorImpl implements ServiceConfigurator {
 				PortalCacheConfiguratorSettings.class);
 		}
 
-		if (Validator.isNotNull(singleVMLocation)) {
+		if (Validator.isNotNull(singleVMConfigurationLocation)) {
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put(
@@ -244,11 +244,11 @@ public class ServiceConfiguratorImpl implements ServiceConfigurator {
 			_serviceRegistrar.registerService(
 				PortalCacheConfiguratorSettings.class,
 				new PortalCacheConfiguratorSettings(
-					classLoader, singleVMLocation),
+					classLoader, singleVMConfigurationLocation),
 				properties);
 		}
 
-		if (Validator.isNotNull(multiVMLocation)) {
+		if (Validator.isNotNull(multiVMConfigurationLocation)) {
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put(
@@ -257,7 +257,7 @@ public class ServiceConfiguratorImpl implements ServiceConfigurator {
 			_serviceRegistrar.registerService(
 				PortalCacheConfiguratorSettings.class,
 				new PortalCacheConfiguratorSettings(
-					classLoader, multiVMLocation),
+					classLoader, multiVMConfigurationLocation),
 				properties);
 		}
 	}
