@@ -186,8 +186,6 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 			_configFile = _defaultConfigFile;
 		}
 
-		_usingDefault = _configFile.equals(_defaultConfigFile);
-
 		URL configFileURL = EhcacheConfigurationHelperUtil.class.getResource(
 			_configFile);
 
@@ -196,6 +194,8 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 
 			configFileURL = classLoader.getResource(_configFile);
 		}
+
+		_usingDefault = _configFile.equals(_defaultConfigFile);
 
 		_configurationPair = EhcacheConfigurationHelperUtil.getConfiguration(
 			configFileURL, isClusterAware(), _usingDefault, props);
