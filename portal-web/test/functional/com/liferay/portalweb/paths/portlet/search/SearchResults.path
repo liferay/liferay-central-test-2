@@ -13,6 +13,11 @@
 	<td>//span[contains(.,'${key_searchFacetValue}')]/a[contains(@class,'icon-remove')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--SCOPE_FACET-->
 <tr>
 	<td>SCOPE_FACET_SEARCH_SCOPES_BOX</td>
