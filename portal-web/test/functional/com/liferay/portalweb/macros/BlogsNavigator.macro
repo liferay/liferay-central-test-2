@@ -7,8 +7,6 @@
 
 		<execute function="Pause" locator1="1000" />
 
-		<var name="entryComment" value="${entryComment}" />
-
 		<execute function="Click" locator1="Comments#COMMENT_FIELD" />
 	</command>
 
