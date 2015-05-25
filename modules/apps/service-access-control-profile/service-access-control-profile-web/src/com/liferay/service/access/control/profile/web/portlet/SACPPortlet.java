@@ -71,11 +71,12 @@ public class SACPPortlet extends MVCPortlet {
 		throws Exception {
 
 		long sacpEntryId = ParamUtil.getLong(actionRequest, "sacpEntryId");
+
+		String allowedServices = ParamUtil.getString(
+			actionRequest, "allowedServices");
 		String name = ParamUtil.getString(actionRequest, "name");
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "title");
-		String allowedServices = ParamUtil.getString(
-			actionRequest, "allowedServices");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
