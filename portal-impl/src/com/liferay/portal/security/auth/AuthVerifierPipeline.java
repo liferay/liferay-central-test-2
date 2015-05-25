@@ -128,8 +128,6 @@ public class AuthVerifierPipeline {
 		AuthVerifierConfiguration authVerifierConfiguration,
 		String requestURI) {
 
-		AuthVerifier authVerifier = authVerifierConfiguration.getAuthVerifier();
-
 		Properties properties = authVerifierConfiguration.getProperties();
 
 		String[] urlsExcludes = StringUtil.split(
