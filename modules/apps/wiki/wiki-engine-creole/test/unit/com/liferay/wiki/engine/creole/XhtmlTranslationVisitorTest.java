@@ -659,9 +659,8 @@ public class XhtmlTranslationVisitorTest {
 	@Test
 	public void testParseTableEmptyCells() {
 		Assert.assertEquals(
-			"<table><tr><th>H1</th><th>H2</th></tr>" +
-				"<tr><td> </td><td> </td></tr><tr><td> </td><td> </td>" +
-					"</tr></table>",
+			"<table><tr><th>H1</th><th>H2</th></tr><tr><td> </td><td> </td>" +
+				"</tr><tr><td> </td><td> </td></tr></table>",
 			translate("table-5.creole"));
 	}
 
