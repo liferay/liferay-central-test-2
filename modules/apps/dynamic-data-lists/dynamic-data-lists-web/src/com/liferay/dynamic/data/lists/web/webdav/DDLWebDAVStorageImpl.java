@@ -38,7 +38,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Juan Fernández
  */
 @Component(
-	immediate = true, property = {"javax.portlet.name=" + DDLPortletKeys.DDL},
+	immediate = true,
+	property = {"javax.portlet.name=" + DDLPortletKeys.DYNAMIC_DATA_LISTS},
 	service = WebDAVStorage.class
 )
 public class DDLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
