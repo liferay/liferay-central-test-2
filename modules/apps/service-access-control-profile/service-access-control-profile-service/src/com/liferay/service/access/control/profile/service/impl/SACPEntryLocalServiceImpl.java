@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -49,9 +50,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 
 		// Service access control profile entry
 
-		if (name != null) {
-			name = name.trim();
-		}
+		name = StringUtil.trim(name);
 
 		validate(name, titleMap);
 
@@ -141,9 +140,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 
 		// Service access control profile entry
 
-		if (name != null) {
-			name = name.trim();
-		}
+		name = StringUtil.trim(name);
 
 		validate(name, titleMap);
 
@@ -164,7 +161,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		sacpEntry.setAllowedServices(allowedServices);
 		sacpEntry.setName(name);
 		sacpEntry.setTitleMap(titleMap);
-		sacpEntry.setModifiedDate(now);
+		sacpEntry.setModifiedDate(new Date());
 
 		sacpEntry = sacpEntryPersistence.update(sacpEntry, serviceContext);
 
