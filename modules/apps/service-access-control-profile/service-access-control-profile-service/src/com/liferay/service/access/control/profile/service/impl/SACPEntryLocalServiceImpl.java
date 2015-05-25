@@ -173,13 +173,10 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		}
 
 		for (int i = 0; i < name.length(); i++) {
-			char character = name.charAt(i);
+			char c = name.charAt(i);
 
-			if (SACPEntryConstants.NAME_ALLOWED_CHARACTERS.indexOf(
-					character) < 0) {
-
-				throw new SACPEntryNameException(
-					"SACPEntry name contains disallowed character");
+			if (SACPEntryConstants.NAME_ALLOWED_CHARACTERS.indexOf(c) < 0) {
+				throw new SACPEntryNameException("Invalid character " + c);
 			}
 		}
 
