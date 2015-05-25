@@ -174,8 +174,8 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 	protected void validate(String name, Map<Locale, String> titleMap)
 		throws PortalException {
 
-		if (Validator.isNull(name) || (name.trim().length() == 0)) {
-			throw new SACPEntryNameException("SACPEntry name is required");
+		if (Validator.isNull(name)) {
+			throw new SACPEntryNameException();
 		}
 
 		for (int i = 0; i < name.length(); i++) {
