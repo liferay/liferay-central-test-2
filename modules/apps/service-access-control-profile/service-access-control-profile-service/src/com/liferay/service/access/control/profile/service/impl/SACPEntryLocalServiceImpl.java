@@ -23,11 +23,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.service.access.control.profile.constants.SACPEntryConstants;
 import com.liferay.service.access.control.profile.exception.DuplicateSACPEntryNameException;
 import com.liferay.service.access.control.profile.exception.SACPEntryNameException;
 import com.liferay.service.access.control.profile.exception.SACPEntryTitleException;
 import com.liferay.service.access.control.profile.model.SACPEntry;
+import com.liferay.service.access.control.profile.model.SACPEntryConstants;
 import com.liferay.service.access.control.profile.service.base.SACPEntryLocalServiceBaseImpl;
 
 import java.util.Date;

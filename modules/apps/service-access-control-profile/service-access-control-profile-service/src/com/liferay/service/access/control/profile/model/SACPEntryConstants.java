@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.constants;
+package com.liferay.service.access.control.profile.model;
 
 /**
  * @author Mika Koivisto
