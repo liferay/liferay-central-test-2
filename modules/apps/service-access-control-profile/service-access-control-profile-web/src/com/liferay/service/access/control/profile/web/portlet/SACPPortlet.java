@@ -86,8 +86,7 @@ public class SACPPortlet extends MVCPortlet {
 		}
 		else {
 			_sacpEntryService.addSACPEntry(
-				serviceContext.getCompanyId(), allowedServices, name, titleMap,
-				serviceContext);
+				allowedServices, name, titleMap, serviceContext);
 		}
 	}
 
