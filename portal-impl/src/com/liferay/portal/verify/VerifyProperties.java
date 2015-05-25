@@ -211,8 +211,7 @@ public class VerifyProperties extends VerifyProcess {
 
 	private static final String[][] _MIGRATED_PORTAL_KEYS = new String[][] {
 		new String[] {
-			"cookie.http.only.names.excludes",
-			"cookie.http.only.names.excludes"
+			"cookie.http.only.names.excludes", "cookie.http.only.names.excludes"
 		},
 		new String[] {
 			"finalize.manager.thread.enabled",
