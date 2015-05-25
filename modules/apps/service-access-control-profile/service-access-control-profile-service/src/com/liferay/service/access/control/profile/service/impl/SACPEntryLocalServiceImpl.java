@@ -150,13 +150,11 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		SACPEntry sacpEntry = sacpEntryPersistence.findByPrimaryKey(
 			sacpEntryId);
 
-		long companyId = sacpEntry.getCompanyId();
+		SACPEntry existingSACPEntry = sacpEntryPersistence.fetchByC_N(
+			sacpEntry.getCompanyId(), name);
 
-		SACPEntry duplicateEntry = sacpEntryPersistence.fetchByC_N(
-			companyId, name);
-
-		if ((duplicateEntry != null) &&
-			(duplicateEntry.getSacpEntryId() != sacpEntryId)) {
+		if ((existingSACPEntry != null) &&
+			(existingSACPEntry.getSacpEntryId() != sacpEntryId)) {
 
 			throw new DuplicateSACPEntryNameException();
 		}
