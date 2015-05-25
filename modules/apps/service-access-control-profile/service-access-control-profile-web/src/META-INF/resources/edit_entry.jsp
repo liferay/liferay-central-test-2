@@ -39,14 +39,13 @@ if (sacpEntryId > 0) {
 
 <aui:form action="<%= updateSACPEntryURL %>">
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="sacpEntryId" type="hidden" value="<%= sacpEntryId %>" />
 
 	<liferay-ui:error exception="<%= DuplicateSACPEntryNameException.class %>" message="please-enter-a-unique-service-access-control-profile-name" />
 	<liferay-ui:error exception="<%= SACPEntryNameException.class %>" message="service-access-control-profile-name-is-required" />
 	<liferay-ui:error exception="<%= SACPEntryTitleException.class %>" message="service-access-control-profile-title-is-required" />
 
 	<aui:model-context bean="<%= sacpEntry %>" model="<%= SACPEntry.class %>" />
-
-	<aui:input name="sacpEntryId" type="hidden" />
 
 	<aui:input name="name" required="<%= true %>">
 		<aui:validator errorMessage="this-field-is-required-and-must-contain-only-following-characters" name="custom">
