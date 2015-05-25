@@ -50,11 +50,10 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 
 		// Service access control profile entry
 
+		User user = userPersistence.findByPrimaryKey(userId);
 		name = StringUtil.trim(name);
 
 		validate(name, titleMap);
-
-		User user = userPersistence.findByPrimaryKey(userId);
 
 		if (sacpEntryPersistence.fetchByC_N(user.getCompanyId(), name) !=
 				null) {
