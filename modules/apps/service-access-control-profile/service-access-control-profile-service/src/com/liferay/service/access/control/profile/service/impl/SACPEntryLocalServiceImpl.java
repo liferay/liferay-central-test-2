@@ -31,7 +31,6 @@ import com.liferay.service.access.control.profile.model.SACPEntry;
 import com.liferay.service.access.control.profile.model.SACPEntryConstants;
 import com.liferay.service.access.control.profile.service.base.SACPEntryLocalServiceBaseImpl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -185,13 +184,13 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 			Locale defaultLocale = LocaleUtil.getDefault();
 			String defaultTitle = titleMap.get(defaultLocale);
 
-			if ((defaultTitle != null) && (defaultTitle.trim().length() > 0)) {
+			if (Validator.isNotNull(defaultTitle)) {
 				titleExists = true;
 			}
 		}
 
 		if (!titleExists) {
-			throw new SACPEntryTitleException("SACPEntry title is required");
+			throw new SACPEntryTitleException();
 		}
 	}
 
