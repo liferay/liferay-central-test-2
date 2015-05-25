@@ -155,8 +155,7 @@ public class EditExportConfigurationAction extends PortletAction {
 
 		PortletRequestDispatcher portletRequestDispatcher =
 			portletContext.getRequestDispatcher(
-				"/html/portlet/export_import/" +
-					"export_layouts_processes.jsp");
+				"/html/portlet/export_import/export_layouts_processes.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
