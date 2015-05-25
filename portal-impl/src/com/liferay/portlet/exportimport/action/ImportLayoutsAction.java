@@ -195,13 +195,11 @@ public class ImportLayoutsAction extends PortletAction {
 
 		if (cmd.equals(Constants.IMPORT)) {
 			portletRequestDispatcher = portletContext.getRequestDispatcher(
-				"/html/portlet/export_import/" +
-					"import_layouts_processes.jsp");
+				"/html/portlet/export_import/import_layouts_processes.jsp");
 		}
 		else {
 			portletRequestDispatcher = portletContext.getRequestDispatcher(
-				"/html/portlet/export_import/" +
-					"import_layouts_resources.jsp");
+				"/html/portlet/export_import/import_layouts_resources.jsp");
 		}
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);

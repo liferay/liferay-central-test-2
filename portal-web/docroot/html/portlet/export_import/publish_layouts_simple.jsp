@@ -17,11 +17,7 @@
 <%@ include file="/html/portlet/export_import/init.jsp" %>
 
 <%
-GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHelper(request);
-
-boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-
-String redirectURL = ParamUtil.getString(request, "redirect");
+String redirect = ParamUtil.getString(request, "redirect");
 
 long exportImportConfigurationId = GetterUtil.getLong(request.getAttribute("exportImportConfigurationId"));
 
@@ -34,18 +30,22 @@ if (exportImportConfiguration.getType() == ExportImportConfigurationConstants.TY
 	cmd = Constants.PUBLISH_TO_REMOTE;
 	publishActionKey = "publish-to-remote-live";
 }
+
+boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+
+GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHelper(request);
 %>
 
 <portlet:actionURL var="confirmedActionURL">
 	<portlet:param name="struts_action" value='<%= cmd.equals(Constants.EXPORT) ? "/export_import/edit_export_configuration" : "/export_import/edit_publish_configuration" %>' />
-	<portlet:param name="redirect" value="<%= redirectURL %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="exportImportConfigurationId" value="<%= String.valueOf(exportImportConfiguration.getExportImportConfigurationId()) %>" />
 	<portlet:param name="quickPublish" value="<%= Boolean.TRUE.toString() %>" />
 </portlet:actionURL>
 
 <aui:form action='<%= confirmedActionURL.toString() + "&etag=0&strip=0" %>' cssClass="lfr-export-dialog" method="post" name="fm2">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="exportImportConfigurationId" type="hidden" value="<%= exportImportConfigurationId %>" />
 
 	<div class="export-dialog-tree">
