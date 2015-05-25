@@ -95,15 +95,14 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 		SACPEntryPermission.check(
 			getPermissionChecker(), sacpEntryId, ActionKeys.VIEW);
 
-		return sacpEntryLocalService.getSACPEntry(sacpEntryId);
+		return sacpEntryPersistence.findByPrimaryKey(sacpEntryId);
 	}
 
 	@Override
 	public SACPEntry getSACPEntry(long companyId, String name)
 		throws PortalException {
 
-		SACPEntry sacpEntry = sacpEntryLocalService.getSACPEntry(
-			companyId, name);
+		SACPEntry sacpEntry = sacpEntryPersistence.findByC_N(companyId, name);
 
 		SACPEntryPermission.check(
 			getPermissionChecker(), sacpEntry, ActionKeys.VIEW);
