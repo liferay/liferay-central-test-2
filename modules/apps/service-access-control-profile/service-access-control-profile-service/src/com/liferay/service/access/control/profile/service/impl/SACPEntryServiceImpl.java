@@ -39,8 +39,8 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 
 	@Override
 	public SACPEntry addSACPEntry(
-			long companyId, String allowedServices, String name,
-			Map<Locale, String> titleMap, ServiceContext serviceContext)
+			String allowedServices, String name, Map<Locale, String> titleMap,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		PortletPermissionUtil.check(
