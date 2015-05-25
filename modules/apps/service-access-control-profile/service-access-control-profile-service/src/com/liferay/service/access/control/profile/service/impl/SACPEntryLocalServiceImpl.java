@@ -47,19 +47,19 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
 
+		// Service access control profile entry
+
 		if (name != null) {
 			name = name.trim();
 		}
 
 		validate(name, titleMap);
 
-		// Service access control profile entry
+		User user = userPersistence.findByPrimaryKey(userId);
 
-		User user = userLocalService.getUserById(userId);
+		if (sacpEntryPersistence.fetchByC_N(user.getCompanyId(), name) !=
+				null) {
 
-		long companyId = user.getCompanyId();
-
-		if (sacpEntryPersistence.fetchByC_N(companyId, name) != null) {
 			throw new DuplicateSACPEntryNameException();
 		}
 
@@ -68,7 +68,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		SACPEntry sacpEntry = sacpEntryPersistence.create(sacpEntryId);
 
 		sacpEntry.setUuid(serviceContext.getUuid());
-		sacpEntry.setCompanyId(companyId);
+		sacpEntry.setCompanyId(user.getCompanyId());
 		sacpEntry.setUserId(userId);
 		sacpEntry.setUserName(user.getFullName());
 		sacpEntry.setAllowedServices(allowedServices);
