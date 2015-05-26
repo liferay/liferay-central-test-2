@@ -35,8 +35,9 @@ public class UserGroupServiceWrapper implements UserGroupService,
 	*
 	* @param groupId the primary key of the group
 	* @param userGroupIds the primary keys of the user groups
-	* @throws PortalException if the user did not have permission to assign
-	group members
+	* @throws PortalException if a group or user group with the primary key
+	could not be found, or if the user did not have permission to
+	assign group members
 	*/
 	@Override
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
@@ -49,8 +50,9 @@ public class UserGroupServiceWrapper implements UserGroupService,
 	*
 	* @param teamId the primary key of the team
 	* @param userGroupIds the primary keys of the user groups
-	* @throws PortalException if the user did not have permission to assign
-	team members
+	* @throws PortalException if a team or user group with the primary key
+	could not be found, or if the user did not have permission to
+	assign team members
 	*/
 	@Override
 	public void addTeamUserGroups(long teamId, long[] userGroupIds)
@@ -121,14 +123,6 @@ public class UserGroupServiceWrapper implements UserGroupService,
 		_userGroupService.deleteUserGroup(userGroupId);
 	}
 
-	/**
-	* Fetches the user group with the primary key.
-	*
-	* @param userGroupId the primary key of the user group
-	* @return the user group with the primary key
-	* @throws PortalException if the user did not have permission to view the
-	user group
-	*/
 	@Override
 	public com.liferay.portal.model.UserGroup fetchUserGroup(long userGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -149,7 +143,7 @@ public class UserGroupServiceWrapper implements UserGroupService,
 	* Returns the user group with the name.
 	*
 	* @param name the user group's name
-	* @return the user group with the name
+	* @return Returns the user group with the name
 	* @throws PortalException if a user group with the name could not be found
 	or if the user did not have permission to view the user group
 	*/
@@ -164,7 +158,7 @@ public class UserGroupServiceWrapper implements UserGroupService,
 	* Returns the user group with the primary key.
 	*
 	* @param userGroupId the primary key of the user group
-	* @return the user group with the primary key
+	* @return Returns the user group with the primary key
 	* @throws PortalException if a user group with the primary key could not be
 	found or if the user did not have permission to view the user
 	group
