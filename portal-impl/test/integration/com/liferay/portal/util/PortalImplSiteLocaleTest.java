@@ -155,25 +155,26 @@ public class PortalImplSiteLocaleTest {
 		mockServletContext.setContextPath(StringPool.BLANK);
 		mockServletContext.setServletContextName(StringPool.BLANK);
 
+		_i18nServlet.init(new MockServletConfig(mockServletContext));
+
 		MockHttpServletRequest mockHttpServletRequest = createHttpRequest(
 			mockServletContext, i18nLanguageId, pathInfo);
 
-		MockHttpServletResponse httpServletResponse =
+		mockHttpServletRequest.setAttribute(WebKeys.LAYOUT, _layout);
+
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		_i18nServlet.init(new MockServletConfig(mockServletContext));
+		mockHttpServletRequest.setCookies(mockHttpServletResponse.getCookies());
 
-		_i18nServlet.service(mockHttpServletRequest, httpServletResponse);
-
-		mockHttpServletRequest.setAttribute(WebKeys.LAYOUT, _layout);
-		mockHttpServletRequest.setCookies(httpServletResponse.getCookies());
+		_i18nServlet.service(mockHttpServletRequest, mockHttpServletResponse);
 
 		Locale actualLocale = _portalImpl.getLocale(
-			mockHttpServletRequest, httpServletResponse, false);
+			mockHttpServletRequest, mockHttpServletResponse, false);
 
 		Assert.assertEquals(expectedLocale, actualLocale);
 
-		return httpServletResponse;
+		return mockHttpServletResponse;
 	}
 
 	@DeleteAfterTestRun
