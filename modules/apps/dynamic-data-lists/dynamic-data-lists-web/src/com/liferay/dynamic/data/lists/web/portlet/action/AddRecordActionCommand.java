@@ -59,14 +59,14 @@ public class AddRecordActionCommand extends BaseActionCommand {
 	public void setDDLRecordSetService(
 		DDLRecordSetService ddlRecordSetService) {
 
-		this._ddlRecordSetService = ddlRecordSetService;
+		_ddlRecordSetService = ddlRecordSetService;
 	}
 
 	@Reference
 	public void setDDMFormValuesFactory(
 		DDMFormValuesJSONDeserializer ddmFormValuesJSONDeserializer) {
 
-		this._ddmFormValuesJSONDeserializer = ddmFormValuesJSONDeserializer;
+		_ddmFormValuesJSONDeserializer = ddmFormValuesJSONDeserializer;
 	}
 
 	@Override
