@@ -2558,16 +2558,12 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersionLocalService.getLatestFileVersion(
 				fileEntryId, !checkedOut);
 
-		String uuid = serviceContext.getUuid();
-
-		// Put uuid back to serviceContext as it gets deleted by getUuid()
-
-		serviceContext.setUuid(uuid);
-
 		boolean autoCheckIn = false;
 
 		if (!checkedOut && dlFileVersion.isApproved() &&
-			!Validator.equals(dlFileVersion.getUuid(), uuid)) {
+			!Validator.equals(
+				dlFileVersion.getUuid(),
+				serviceContext.getUuidWithoutReset())) {
 
 			autoCheckIn = true;
 		}
