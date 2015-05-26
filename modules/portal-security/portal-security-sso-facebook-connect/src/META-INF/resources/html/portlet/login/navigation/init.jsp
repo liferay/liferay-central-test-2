@@ -20,4 +20,4 @@
 
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
 page import="com.liferay.portal.kernel.util.HttpUtil" %><%@
-page import="com.liferay.portal.sso.facebook.connect.constants.FacebookConnectWebKeys" %>
+page import="com.liferay.portal.security.sso.facebook.connect.constants.FacebookConnectWebKeys" %>
