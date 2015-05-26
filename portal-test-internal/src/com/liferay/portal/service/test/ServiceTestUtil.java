@@ -160,7 +160,7 @@ public class ServiceTestUtil {
 		// Scheduler
 
 		ServiceDependencyManager schedulerServiceDependencyManager =
-					new ServiceDependencyManager();
+			new ServiceDependencyManager();
 
 		schedulerServiceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
@@ -188,8 +188,8 @@ public class ServiceTestUtil {
 				"QuartzSchemaManager)");
 
 		schedulerServiceDependencyManager.registerDependencies(
-			new Class[]{SchedulerEngineHelper.class},
-			new Filter[]{filter});
+			new Class[] {SchedulerEngineHelper.class},
+			new Filter[] {filter});
 
 		// Verify
 
