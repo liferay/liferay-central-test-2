@@ -33,6 +33,7 @@ page import="com.liferay.wiki.service.WikiPageResourceLocalServiceUtil" %>
 <%@ page import="javax.portlet.PortletURL" %>
 
 <portlet:defineObjects />
+
 <liferay-theme:defineObjects />
 
 <%

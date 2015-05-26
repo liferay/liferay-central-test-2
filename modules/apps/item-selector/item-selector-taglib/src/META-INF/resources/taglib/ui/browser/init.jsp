@@ -37,4 +37,5 @@ page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
 page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 
 <portlet:defineObjects />
+
 <liferay-theme:defineObjects/>
