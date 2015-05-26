@@ -52,6 +52,7 @@ public class RevertRecordActionCommand extends AddRecordActionCommand {
 		throws Exception {
 
 		long recordId = ParamUtil.getLong(portletRequest, "recordId");
+
 		String version = ParamUtil.getString(portletRequest, "version");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
