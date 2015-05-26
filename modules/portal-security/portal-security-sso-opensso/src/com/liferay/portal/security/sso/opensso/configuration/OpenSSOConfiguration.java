@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.opensso.configuration.OpenSSOConfiguration",
+	id = "com.liferay.portal.security.sso.opensso.configuration.OpenSSOConfiguration",
 	localization = "content/Language"
 )
 public interface OpenSSOConfiguration {

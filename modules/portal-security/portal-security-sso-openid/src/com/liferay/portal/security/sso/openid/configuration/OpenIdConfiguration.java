@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.openid.configuration.OpenIdConfiguration"
+	id = "com.liferay.portal.security.sso.openid.configuration.OpenIdConfiguration"
 )
 public interface OpenIdConfiguration {
 

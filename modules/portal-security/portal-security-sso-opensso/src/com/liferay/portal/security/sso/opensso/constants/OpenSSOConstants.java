@@ -19,6 +19,6 @@ package com.liferay.portal.security.sso.opensso.constants;
  */
 public class OpenSSOConstants {
 
-	public static final String SERVICE_NAME = "com.liferay.portal.sso.opensso";
+	public static final String SERVICE_NAME = "com.liferay.portal.security.sso.opensso";
 
 }

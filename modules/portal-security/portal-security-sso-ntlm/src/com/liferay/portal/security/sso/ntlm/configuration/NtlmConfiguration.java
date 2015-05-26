@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.ntlm.configuration.NtlmConfiguration",
+	id = "com.liferay.portal.security.sso.ntlm.configuration.NtlmConfiguration",
 	localization = "content/Language"
 )
 public interface NtlmConfiguration {

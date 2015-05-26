@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Daeyoung Song
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.cas.configuration.CASConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.cas.configuration.CASConfiguration",
 	immediate = true, service = AutoLogin.class
 )
 public class CASAutoLogin extends BaseAutoLogin {

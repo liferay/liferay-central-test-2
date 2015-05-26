@@ -53,7 +53,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Zsolt Balogh
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.cas.configuration.CASConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.cas.configuration.CASConfiguration",
 	immediate = true,
 	property = {
 		"dispatcher=FORWARD", "dispatcher=REQUEST", "servlet-context-name=",

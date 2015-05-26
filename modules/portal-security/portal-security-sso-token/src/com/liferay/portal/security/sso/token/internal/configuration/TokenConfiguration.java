@@ -23,7 +23,7 @@ import com.liferay.portal.security.sso.token.security.auth.TokenLocation;
  * @author Mika Koivisto
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.token.internal.configuration.TokenConfiguration"
+	id = "com.liferay.portal.security.sso.token.internal.configuration.TokenConfiguration"
 )
 public interface TokenConfiguration {
 

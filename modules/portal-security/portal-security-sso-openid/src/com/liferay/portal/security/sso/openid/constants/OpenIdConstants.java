@@ -19,6 +19,6 @@ package com.liferay.portal.security.sso.openid.constants;
  */
 public class OpenIdConstants {
 
-	public static final String SERVICE_NAME = "com.liferay.portal.sso.openid";
+	public static final String SERVICE_NAME = "com.liferay.portal.security.sso.openid";
 
 }

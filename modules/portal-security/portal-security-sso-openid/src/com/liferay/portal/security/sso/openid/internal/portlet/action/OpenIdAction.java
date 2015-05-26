@@ -87,7 +87,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Jorge Ferrer
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.openid.configuration.OpenIdConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.openid.configuration.OpenIdConfiguration",
 	immediate = true,
 	property = {
 		"path=/login/open_id", "portlet.login.login=portlet.login.login",

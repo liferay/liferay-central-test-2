@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.opensso.configuration.OpenSSOConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.opensso.configuration.OpenSSOConfiguration",
 	immediate = true, service = SSO.class
 )
 public class SSOImpl implements SSO {

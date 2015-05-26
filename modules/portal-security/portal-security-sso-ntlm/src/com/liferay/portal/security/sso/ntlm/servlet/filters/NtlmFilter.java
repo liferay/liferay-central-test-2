@@ -61,7 +61,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Michael C. Han
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.ntlm.configuration.NtlmConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.ntlm.configuration.NtlmConfiguration",
 	immediate = true,
 	property = {
 		"dispatcher=FORWARD", "dispatcher=REQUEST", "servlet-context-name=",

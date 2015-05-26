@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.sso.facebook.connect.configuration.FacebookConnectConfiguration"
+	id = "com.liferay.portal.security.sso.facebook.connect.configuration.FacebookConnectConfiguration"
 )
 public interface FacebookConnectConfiguration {
 

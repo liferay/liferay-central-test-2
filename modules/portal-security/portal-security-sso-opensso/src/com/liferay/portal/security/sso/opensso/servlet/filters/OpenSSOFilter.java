@@ -45,7 +45,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Hugo Huijser
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.opensso.configuration.OpenSSOConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.opensso.configuration.OpenSSOConfiguration",
 	immediate = true,
 	property = {
 		"dispatcher=FORWARD", "dispatcher=REQUEST", "servlet-context-name=",

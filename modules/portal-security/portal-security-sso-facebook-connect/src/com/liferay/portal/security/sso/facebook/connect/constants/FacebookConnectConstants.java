@@ -20,6 +20,6 @@ package com.liferay.portal.security.sso.facebook.connect.constants;
 public class FacebookConnectConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.portal.sso.facebook.connect";
+		"com.liferay.portal.security.sso.facebook.connect";
 
 }

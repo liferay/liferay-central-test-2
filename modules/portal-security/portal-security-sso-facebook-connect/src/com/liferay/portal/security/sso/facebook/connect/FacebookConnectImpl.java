@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Mika Koivisto
  */
 @Component(
-	configurationPid = "com.liferay.portal.sso.facebook.connect.configuration.FacebookConnectConfiguration",
+	configurationPid = "com.liferay.portal.security.sso.facebook.connect.configuration.FacebookConnectConfiguration",
 	immediate = true, service = FacebookConnect.class
 )
 public class FacebookConnectImpl implements FacebookConnect {
