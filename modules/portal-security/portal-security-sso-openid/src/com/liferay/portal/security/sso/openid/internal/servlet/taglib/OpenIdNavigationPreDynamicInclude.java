@@ -85,7 +85,9 @@ public class OpenIdNavigationPreDynamicInclude extends BaseDynamicInclude {
 		_openId = openId;
 	}
 
-	@Reference(target = "(osgi.web.symbolicname=com.liferay.portal.sso.openid)")
+	@Reference(
+		target = "(osgi.web.symbolicname=com.liferay.portal.security.sso.openid)"
+	)
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
 	}

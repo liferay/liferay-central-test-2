@@ -64,7 +64,9 @@ public class OpenIdLoginDynamicInclude extends BaseDynamicInclude {
 		dynamicIncludeRegistry.register("/html/portlet/login/open_id.jsp");
 	}
 
-	@Reference(target = "(osgi.web.symbolicname=com.liferay.portal.sso.openid)")
+	@Reference(
+		target = "(osgi.web.symbolicname=com.liferay.portal.security.sso.openid)"
+	)
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
 	}
