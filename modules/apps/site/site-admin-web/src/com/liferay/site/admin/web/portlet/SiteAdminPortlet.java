@@ -279,9 +279,9 @@ public class SiteAdminPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		if (SessionErrors.contains(
-				renderRequest, NoSuchGroupException.class.getName()) ||
-			SessionErrors.contains(
 				renderRequest, NoSuchBackgroundTaskException.class.getName()) ||
+			SessionErrors.contains(
+				renderRequest, NoSuchGroupException.class.getName()) ||
 			SessionErrors.contains(
 				renderRequest, PrincipalException.class.getName())) {
 
