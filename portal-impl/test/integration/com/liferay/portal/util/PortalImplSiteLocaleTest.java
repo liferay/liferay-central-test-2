@@ -162,16 +162,16 @@ public class PortalImplSiteLocaleTest {
 			new MockHttpServletResponse();
 
 		_i18nServlet.init(new MockServletConfig(mockServletContext));
+
 		_i18nServlet.service(httpServletRequest, httpServletResponse);
 
+		httpServletRequest.setAttribute(WebKeys.LAYOUT, _layout);
 		httpServletRequest.setCookies(httpServletResponse.getCookies());
 
-		httpServletRequest.setAttribute(WebKeys.LAYOUT, _layout);
-
-		Locale calculatedLocale = _portalImpl.getLocale(
+		Locale actualLocale = _portalImpl.getLocale(
 			httpServletRequest, httpServletResponse, false);
 
-		Assert.assertEquals(expectedLocale, calculatedLocale);
+		Assert.assertEquals(expectedLocale, actualLocale);
 
 		return httpServletResponse;
 	}
