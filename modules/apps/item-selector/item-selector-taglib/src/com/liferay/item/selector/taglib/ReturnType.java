@@ -46,7 +46,8 @@ public enum ReturnType {
 		for (Class<?> clazz : value) {
 			try {
 				return parse(clazz);
-			} catch (IllegalArgumentException iae) {
+			}
+			catch (IllegalArgumentException iae) {
 			}
 		}
 
