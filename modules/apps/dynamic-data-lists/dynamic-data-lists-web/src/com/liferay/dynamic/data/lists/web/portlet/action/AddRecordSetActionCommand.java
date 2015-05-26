@@ -167,7 +167,6 @@ public class AddRecordSetActionCommand extends BaseActionCommand {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-
 		String workflowDefinition = ParamUtil.getString(
 			portletRequest, "workflowDefinition");
 
