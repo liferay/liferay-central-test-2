@@ -42,16 +42,16 @@ public enum ReturnType {
 		throw new IllegalArgumentException("Invalid value " + value.getName());
 	}
 
-	public static ReturnType parseFirst(Set<Class<?>> value) {
-		for (Class<?> clazz : value) {
+	public static ReturnType parseFirst(Set<Class<?>> values) {
+		for (Class<?> value : values) {
 			try {
-				return parse(clazz);
+				return parse(value);
 			}
 			catch (IllegalArgumentException iae) {
 			}
 		}
 
-		throw new IllegalArgumentException("Invalid value " + value);
+		throw new IllegalArgumentException("Invalid values " + values);
 	}
 
 	public Class<?> getValue() {
