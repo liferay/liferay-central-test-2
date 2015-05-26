@@ -282,6 +282,8 @@ public class DBUpgrader {
 
 		CacheRegistryUtil.setActive(true);
 
+		// Register release service
+
 		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceRegistrar<Release> serviceRegistrar =
