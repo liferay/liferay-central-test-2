@@ -3530,26 +3530,25 @@ public class PortletImpl extends PortletBaseImpl {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		synchronized (_serviceRegistrarMap) {
+		synchronized (_serviceRegistrars) {
 			if (ready) {
-				ServiceRegistrar<Portlet> portletServiceRegistrar =
+				ServiceRegistrar<Portlet> serviceRegistrar =
 					registry.getServiceRegistrar(Portlet.class);
 
 				Map<String, Object> properties = new HashMap<>();
 
 				properties.put("javax.portlet.name", getPortletName());
 
-				portletServiceRegistrar.registerService(
+				serviceRegistrar.registerService(
 					Portlet.class, this, properties);
 
-				_serviceRegistrarMap.put(
-					getRootPortletId(), portletServiceRegistrar);
+				_serviceRegistrars.put(getRootPortletId(), serviceRegistrar);
 			}
 			else {
-				ServiceRegistrar<Portlet> portletServiceRegistrar =
-					_serviceRegistrarMap.remove(getRootPortletId());
+				ServiceRegistrar<Portlet> serviceRegistrar =
+					_serviceRegistrars.remove(getRootPortletId());
 
-				portletServiceRegistrar.destroy();
+				serviceRegistrar.destroy();
 			}
 		}
 	}
@@ -4000,11 +3999,11 @@ public class PortletImpl extends PortletBaseImpl {
 	public void unsetReady() {
 		_readyMap.remove(getRootPortletId());
 
-		synchronized (_serviceRegistrarMap) {
-			ServiceRegistrar<Portlet> portletServiceRegistrar =
-				_serviceRegistrarMap.remove(getRootPortletId());
+		synchronized (_serviceRegistrars) {
+			ServiceRegistrar<Portlet> serviceRegistrar =
+				_serviceRegistrars.remove(getRootPortletId());
 
-			portletServiceRegistrar.destroy();
+			serviceRegistrar.destroy();
 		}
 	}
 
@@ -4020,7 +4019,7 @@ public class PortletImpl extends PortletBaseImpl {
 		new ConcurrentHashMap<>();
 
 	private static final Map<String, ServiceRegistrar<Portlet>>
-		_serviceRegistrarMap = new HashMap<>();
+		_serviceRegistrars = new HashMap<>();
 
 	/**
 	 * The action timeout of the portlet.
