@@ -925,6 +925,7 @@ public class PortletTracker
 			bundle, portalPortletModel, _httpServiceEndpoint);
 
 		createContext(bundle, bundlePortletApp, serviceRegistrations);
+
 		initLogger(classLoader);
 
 		serviceRegistrations.setBundlePortletApp(bundlePortletApp);
