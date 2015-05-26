@@ -17,17 +17,17 @@
 <%@ include file="/html/portlet/export_import/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
+
 GroupDisplayContextHelper groupDisplayContextHelper = new GroupDisplayContextHelper(request);
 
-String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
+Group liveGroup = groupDisplayContextHelper.getLiveGroup();
 
 boolean privateLayout = false;
 
 if (tabs1.equals("private-pages")) {
 	privateLayout = true;
 }
-
-Group liveGroup = groupDisplayContextHelper.getLiveGroup();
 
 String rootNodeName = liveGroup.getLayoutRootNodeName(privateLayout, themeDisplay.getLocale());
 %>
