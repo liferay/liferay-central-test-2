@@ -19,6 +19,7 @@ import com.liferay.portal.security.sso.ntlm.msrpc.NetlogonAuthenticator;
 import java.io.IOException;
 
 import jcifs.dcerpc.DcerpcHandle;
+
 import jcifs.util.Encdec;
 
 /**

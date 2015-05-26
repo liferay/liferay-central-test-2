@@ -28,12 +28,16 @@ import com.liferay.portal.security.sso.ntlm.msrpc.NetrServerAuthenticate3;
 import com.liferay.portal.security.sso.ntlm.msrpc.NetrServerReqChallenge;
 
 import java.io.IOException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import java.util.Arrays;
 
 import jcifs.dcerpc.DcerpcHandle;
+
 import jcifs.smb.NtlmPasswordAuthentication;
+
 import jcifs.util.HMACT64;
 import jcifs.util.MD4;
 

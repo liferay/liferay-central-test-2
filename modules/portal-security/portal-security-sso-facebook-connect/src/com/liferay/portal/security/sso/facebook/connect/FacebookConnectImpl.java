@@ -33,6 +33,7 @@ import com.liferay.portal.security.sso.facebook.connect.constants.FacebookConnec
 import com.liferay.portal.util.PortalUtil;
 
 import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
