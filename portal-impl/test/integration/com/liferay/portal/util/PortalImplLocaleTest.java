@@ -56,7 +56,7 @@ import org.springframework.mock.web.MockServletContext;
 /**
  * @author Filipe Afonso
  */
-public class PortalImplSiteLocaleTest {
+public class PortalImplLocaleTest {
 
 	@ClassRule
 	@Rule
