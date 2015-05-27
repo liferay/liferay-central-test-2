@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.editor;
 /**
  * @author Julio Camarero
  */
-public class EditorUtil {
+public class EditorModeUtil {
 
 	public static String getEditorMode(String langType) {
 		String editorMode = "php";
