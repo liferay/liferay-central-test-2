@@ -43,17 +43,6 @@ import java.util.List;
 public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 	@Override
-	public Image moveImage(long imageId, byte[] bytes) throws PortalException {
-		Image image = updateImage(counterLocalService.increment(), bytes);
-
-		if (imageId > 0) {
-			ImageLocalServiceUtil.deleteImage(imageId);
-		}
-
-		return image;
-	}
-
-	@Override
 	public Image deleteImage(long imageId) throws PortalException {
 		if (imageId <= 0) {
 			return null;
@@ -141,6 +130,17 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	@Override
 	public List<Image> getImagesBySize(int size) {
 		return imagePersistence.findByLtSize(size);
+	}
+
+	@Override
+	public Image moveImage(long imageId, byte[] bytes) throws PortalException {
+		Image image = updateImage(counterLocalService.increment(), bytes);
+
+		if (imageId > 0) {
+			ImageLocalServiceUtil.deleteImage(imageId);
+		}
+
+		return image;
 	}
 
 	@Override
