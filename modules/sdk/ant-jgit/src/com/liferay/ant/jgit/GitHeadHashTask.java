@@ -90,10 +90,14 @@ public class GitHeadHashTask extends Task {
 
 				treeWalk.addTree(revCommit.getTree());
 				treeWalk.setRecursive(true);
-				treeWalk.setFilter(
-					AndTreeFilter.create(
-						PathFilter.create(relativePath + "/" + _ignoreFileName),
-						TreeFilter.ANY_DIFF));
+
+				if (_ignoreFileName != null) {
+					treeWalk.setFilter(
+						AndTreeFilter.create(
+							PathFilter.create(
+								relativePath + "/" + _ignoreFileName),
+							TreeFilter.ANY_DIFF));
+				}
 
 				if (!treeWalk.next()) {
 					Project currentProject = getProject();
@@ -129,7 +133,7 @@ public class GitHeadHashTask extends Task {
 	}
 
 	private File _gitDir;
-	private String _ignoreFileName = "snapshot.properties";
+	private String _ignoreFileName;
 	private String _path;
 	private String _property;
 
