@@ -2436,8 +2436,9 @@ public class PortalUtil {
 	}
 
 	public static PortletMode updatePortletMode(
-		String portletId, User user, Layout layout, PortletMode portletMode,
-		HttpServletRequest request) throws PortalException {
+			String portletId, User user, Layout layout, PortletMode portletMode,
+			HttpServletRequest request)
+		throws PortalException {
 
 		return getPortal().updatePortletMode(
 			portletId, user, layout, portletMode, request);
