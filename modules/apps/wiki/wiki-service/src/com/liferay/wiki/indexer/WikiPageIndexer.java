@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.repository.RepositoryProvider;
 import com.liferay.portal.kernel.repository.capabilities.RelatedModelCapability;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BaseRelatedEntryIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -32,6 +33,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.RelatedEntryIndexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
@@ -64,7 +66,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(immediate = true, service = Indexer.class)
-public class WikiPageIndexer extends BaseIndexer {
+public class WikiPageIndexer
+	extends BaseIndexer implements RelatedEntryIndexer {
 
 	public static final String CLASS_NAME = WikiPage.class.getName();
 
@@ -75,6 +78,14 @@ public class WikiPageIndexer extends BaseIndexer {
 			Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID, Field.TITLE, Field.UID);
 		setFilterSearch(true);
 		setPermissionAware(true);
+	}
+
+	@Override
+	public void addRelatedClassNames(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		_relatedEntryIndexer.addRelatedClassNames(contextQuery, searchContext);
 	}
 
 	@Override
@@ -162,6 +173,10 @@ public class WikiPageIndexer extends BaseIndexer {
 
 			contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
 		}
+	}
+
+	@Override
+	public void updateFullQuery(SearchContext searchContext) {
 	}
 
 	@Override
@@ -327,6 +342,8 @@ public class WikiPageIndexer extends BaseIndexer {
 		_repositoryProvider = repositoryProvider;
 	}
 
+	private final RelatedEntryIndexer _relatedEntryIndexer =
+		new BaseRelatedEntryIndexer();
 	private RepositoryProvider _repositoryProvider;
 
 }
