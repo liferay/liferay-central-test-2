@@ -31,7 +31,7 @@ public class CKEditorBBCodeEditor extends BaseEditor {
 	}
 
 	@Override
-	protected String getEditorJspPath() {
+	protected String getJspPath() {
 		return "/editors/ckeditor_bbcode.jsp";
 	}
 

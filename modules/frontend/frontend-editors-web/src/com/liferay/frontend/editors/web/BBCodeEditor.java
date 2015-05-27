@@ -31,7 +31,7 @@ public class BBCodeEditor extends BaseEditor {
 	}
 
 	@Override
-	protected String getEditorJspPath() {
+	protected String getJspPath() {
 		return "/editors/bbcode.jsp";
 	}
 

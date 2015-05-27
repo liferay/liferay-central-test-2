@@ -31,7 +31,7 @@ public class CKEditorCreoleEditor extends BaseEditor {
 	}
 
 	@Override
-	protected String getEditorJspPath() {
+	protected String getJspPath() {
 		return "/editors/ckeditor_creole.jsp";
 	}
 

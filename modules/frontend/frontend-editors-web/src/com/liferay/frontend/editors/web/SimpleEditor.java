@@ -31,7 +31,7 @@ public class SimpleEditor extends BaseEditor {
 	}
 
 	@Override
-	protected String getEditorJspPath() {
+	protected String getJspPath() {
 		return "/editors/simple.jsp";
 	}
 

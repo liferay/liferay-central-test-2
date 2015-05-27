@@ -293,7 +293,7 @@ public class InputEditorTag extends IncludeTag {
 	protected String getPage() {
 		Editor editor = getEditor(request);
 
-		return editor.getEditorJspPath(request);
+		return editor.getJspPath(request);
 	}
 
 	@Override

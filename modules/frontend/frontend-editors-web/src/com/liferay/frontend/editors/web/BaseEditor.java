@@ -26,13 +26,13 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseEditor implements Editor {
 
 	@Override
-	public String getEditorJspPath(HttpServletRequest request) {
+	public String getJspPath(HttpServletRequest request) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return themeDisplay.getPathEditors() + getEditorJspPath();
+		return themeDisplay.getPathEditors() + getJspPath();
 	}
 
-	protected abstract String getEditorJspPath();
+	protected abstract String getJspPath();
 
 }

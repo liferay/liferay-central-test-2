@@ -31,7 +31,7 @@ public class TinyMCEEditor extends BaseEditor {
 	}
 
 	@Override
-	protected String getEditorJspPath() {
+	protected String getJspPath() {
 		return "/editors/tinymce.jsp";
 	}
 

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface Editor {
 
-	public String getEditorJspPath(HttpServletRequest request);
+	public String getJspPath(HttpServletRequest request);
 
 	public String getName();
 

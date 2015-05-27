@@ -31,7 +31,7 @@ public class CKEditorEditor extends BaseEditor {
 	}
 
 	@Override
-	protected String getEditorJspPath() {
+	protected String getJspPath() {
 		return "/editors/ckeditor.jsp";
 	}
 
