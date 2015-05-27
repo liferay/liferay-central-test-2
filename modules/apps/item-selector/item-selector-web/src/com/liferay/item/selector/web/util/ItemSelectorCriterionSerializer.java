@@ -48,7 +48,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 		_itemSelectorCriterion = itemSelectorCriterion;
 		_prefix = prefix;
 
-		_initExternalProperties();
+		_initExternalPropertyKeys();
 	}
 
 	public Map<String, String[]> getProperties() {
@@ -57,7 +57,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 
 		String[] serializableFields = ArrayUtil.append(
-			_externalProperties, "desiredReturnTypes");
+			_externalPropertyKeys, "desiredReturnTypes");
 
 		jsonSerializer.include(serializableFields);
 
@@ -77,11 +77,11 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 
 			Map<String, ?> map = jsonDeserializer.deserialize(json);
 
-			for (String externalProperty : _externalProperties) {
+			for (String externalPropertyKey : _externalPropertyKeys) {
 				Class<?> serializableFieldClass = PropertyUtils.getPropertyType(
-					_itemSelectorCriterion, externalProperty);
+					_itemSelectorCriterion, externalPropertyKey);
 
-				Object value = map.get(externalProperty);
+				Object value = map.get(externalPropertyKey);
 
 				if (serializableFieldClass.isArray() &&
 					List.class.isInstance(value)) {
@@ -95,7 +95,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 				}
 
 				PropertyUtils.setProperty(
-					_itemSelectorCriterion, externalProperty, value);
+					_itemSelectorCriterion, externalPropertyKey, value);
 			}
 
 			_setDesiredReturnTypes(map);
@@ -107,7 +107,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 		}
 	}
 
-	private void _initExternalProperties() {
+	private void _initExternalPropertyKeys() {
 		List<String> list = new ArrayList<>();
 
 		try {
@@ -130,7 +130,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 			throw new SystemException(e);
 		}
 
-		_externalProperties = list.toArray(new String[list.size()]);
+		_externalPropertyKeys = list.toArray(new String[list.size()]);
 	}
 
 	private boolean _isInternalProperty(String name) {
@@ -168,7 +168,7 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ItemSelectorCriterionSerializer.class);
 
-	private String[] _externalProperties;
+	private String[] _externalPropertyKeys;
 	private final T _itemSelectorCriterion;
 	private final String _prefix;
 
