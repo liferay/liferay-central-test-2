@@ -52,11 +52,11 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
-		setUpServiceTrackerMap();
 		setUpFastDateFormatFactoryUtil();
 		setUpPortalUtil();
 		setUpPropsUtil();
 		setUpRegistryUtil();
+		setUpServiceTrackerMap();
 	}
 
 	protected void assertEmptyFileEntryTuples(SearchResult searchResult) {
