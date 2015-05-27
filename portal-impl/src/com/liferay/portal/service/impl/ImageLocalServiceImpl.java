@@ -137,7 +137,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		Image image = updateImage(counterLocalService.increment(), bytes);
 
 		if (imageId > 0) {
-			ImageLocalServiceUtil.deleteImage(imageId);
+			deleteImage(imageId);
 		}
 
 		return image;
