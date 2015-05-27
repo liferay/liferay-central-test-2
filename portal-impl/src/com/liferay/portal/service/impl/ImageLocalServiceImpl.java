@@ -43,10 +43,14 @@ import java.util.List;
 public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 	@Override
-	public Image addImage(byte[] bytes) throws PortalException {
-		long imageId = counterLocalService.increment();
+	public Image moveImage(long imageId, byte[] bytes) throws PortalException {
+		Image image = updateImage(counterLocalService.increment(), bytes);
 
-		return updateImage(imageId, bytes);
+		if (imageId > 0) {
+			ImageLocalServiceUtil.deleteImage(imageId);
+		}
+
+		return image;
 	}
 
 	@Override

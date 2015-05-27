@@ -7144,14 +7144,10 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		Image image = ImageLocalServiceUtil.addImage(bytes);
+		Image image = ImageLocalServiceUtil.moveImage(imageId, bytes);
 
 		BeanPropertiesUtil.setProperty(
 			baseModel, fieldName, image.getImageId());
-
-		if (imageId > 0) {
-			ImageLocalServiceUtil.deleteImage(imageId);
-		}
 	}
 
 	@Override
