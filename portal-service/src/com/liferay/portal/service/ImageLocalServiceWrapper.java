@@ -30,12 +30,6 @@ public class ImageLocalServiceWrapper implements ImageLocalService,
 		_imageLocalService = imageLocalService;
 	}
 
-	@Override
-	public com.liferay.portal.model.Image addImage(byte[] bytes)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _imageLocalService.addImage(bytes);
-	}
-
 	/**
 	* Adds the image to the database. Also notifies the appropriate model listeners.
 	*
@@ -264,6 +258,12 @@ public class ImageLocalServiceWrapper implements ImageLocalService,
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _imageLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public com.liferay.portal.model.Image moveImage(long imageId, byte[] bytes)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _imageLocalService.moveImage(imageId, bytes);
 	}
 
 	/**

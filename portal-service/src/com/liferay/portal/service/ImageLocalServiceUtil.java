@@ -40,10 +40,6 @@ public class ImageLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.ImageLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portal.model.Image addImage(byte[] bytes)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().addImage(bytes);
-	}
 
 	/**
 	* Adds the image to the database. Also notifies the appropriate model listeners.
@@ -251,6 +247,12 @@ public class ImageLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static com.liferay.portal.model.Image moveImage(long imageId,
+		byte[] bytes)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().moveImage(imageId, bytes);
 	}
 
 	/**
