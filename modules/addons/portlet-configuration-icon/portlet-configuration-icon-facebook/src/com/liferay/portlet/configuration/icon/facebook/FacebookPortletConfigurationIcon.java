@@ -61,8 +61,8 @@ public class FacebookPortletConfigurationIcon
 		String lfrFacebookAPIKey = portletSetup.getValue(
 			"lfrFacebookApiKey", StringPool.BLANK);
 
-		return "http://www.facebook.com/add.php?api_key=" +
-			lfrFacebookAPIKey + "&ref=pd";
+		return "http://www.facebook.com/add.php?api_key=" + lfrFacebookAPIKey +
+			"&ref=pd";
 	}
 
 	@Override

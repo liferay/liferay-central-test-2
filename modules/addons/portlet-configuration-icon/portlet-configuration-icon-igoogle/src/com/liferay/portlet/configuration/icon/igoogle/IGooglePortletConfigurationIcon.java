@@ -36,8 +36,6 @@ public class IGooglePortletConfigurationIcon
 
 	public IGooglePortletConfigurationIcon(HttpServletRequest request) {
 		super(request);
-
-		_portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 	}
 
 	@Override
@@ -60,8 +58,11 @@ public class IGooglePortletConfigurationIcon
 	@Override
 	public String getURL() {
 		try {
+			Portlet portlet = (Portlet)request.getAttribute(
+				WebKeys.RENDER_PORTLET);
+
 			return "http://fusion.google.com/add?source=atgs&moduleurl=" +
-				PortalUtil.getGoogleGadgetURL(_portlet, themeDisplay);
+				PortalUtil.getGoogleGadgetURL(portlet, themeDisplay);
 		}
 		catch (PortalException pe) {
 			return StringPool.BLANK;
@@ -91,7 +92,5 @@ public class IGooglePortletConfigurationIcon
 
 		return false;
 	}
-
-	private final Portlet _portlet;
 
 }
