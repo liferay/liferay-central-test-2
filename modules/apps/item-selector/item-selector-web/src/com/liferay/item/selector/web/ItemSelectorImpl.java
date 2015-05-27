@@ -130,9 +130,6 @@ public class ItemSelectorImpl implements ItemSelector {
 		PortletResponse portletResponse, String itemSelectedEventName,
 		ItemSelectorCriterion... itemSelectorCriteria) {
 
-		Map<String, String[]> parameters = getItemSelectorParameters(
-			itemSelectedEventName, itemSelectorCriteria);
-
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;
 
@@ -154,6 +151,9 @@ public class ItemSelectorImpl implements ItemSelector {
 		}
 
 		portletURL.setParameter(ActionRequest.ACTION_NAME, "showItemSelector");
+
+		Map<String, String[]> parameters = getItemSelectorParameters(
+			itemSelectedEventName, itemSelectorCriteria);
 
 		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
 			portletURL.setParameter(entry.getKey(), entry.getValue());

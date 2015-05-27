@@ -19,7 +19,6 @@
 <%
 DLItemSelectorCriterion dlItemSelectorCriterion = (DLItemSelectorCriterion)request.getAttribute(DLItemSelectorView.DL_ITEM_SELECTOR_CRITERION);
 String itemSelectedEventName = HtmlUtil.escape(ParamUtil.getString(request, DLItemSelectorView.ITEM_SELECTED_EVENT_NAME));
-
 PortletURL portletURL = (PortletURL)request.getAttribute(DLItemSelectorView.PORTLET_URL);
 
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);

@@ -68,11 +68,11 @@ public class WikiAttachmentItemSelectorView
 			PortletURL portletURL, String itemSelectedEventName)
 		throws IOException, ServletException {
 
+		request.setAttribute(ITEM_SELECTED_EVENT_NAME, itemSelectedEventName);
 		request.setAttribute(PORTLET_URL, portletURL);
 		request.setAttribute(
 			WIKI_ATTACHMENT_ITEM_SELECTOR_CRITERION,
 			wikiAttachmentItemSelectorCriterion);
-		request.setAttribute(ITEM_SELECTED_EVENT_NAME, itemSelectedEventName);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 			"/o/wiki-item-selector-web/attachments.jsp");

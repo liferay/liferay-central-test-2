@@ -64,9 +64,9 @@ public class LayoutItemSelectorView
 			PortletURL portletURL, String itemSelectedEventName)
 		throws IOException, ServletException {
 
+		request.setAttribute(ITEM_SELECTED_EVENT_NAME, itemSelectedEventName);
 		request.setAttribute(
 			LAYOUT_ITEM_SELECTOR_CRITERION, layoutItemSelectorCriterion);
-		request.setAttribute(ITEM_SELECTED_EVENT_NAME, itemSelectedEventName);
 		request.setAttribute(PORTLET_URL, portletURL);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(

@@ -27,8 +27,6 @@ Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 request.setAttribute(WebKeys.GROUP, group);
 
 boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector");
-
-String ckEditorFuncNum = ParamUtil.getString(request, "CKEditorFuncNum");
 %>
 
 <c:if test="<%= showGroupsSelector %>">
@@ -154,6 +152,11 @@ if (group.getPrivateLayoutsPageCount() > 0) {
 			Util.getOpener().Liferay.fire(
 				'<%= itemSelectedEventName %>',
 				{
+
+					<%
+					String ckEditorFuncNum = ParamUtil.getString(request, "CKEditorFuncNum");
+					%>
+
 					ckeditorfuncnum: <%= ckEditorFuncNum %>,
 					layoutpath: event.target.getAttribute('data-layoutpath'),
 					returnType : event.target.getAttribute('data-returnType'),
