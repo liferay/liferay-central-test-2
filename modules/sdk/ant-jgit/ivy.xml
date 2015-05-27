@@ -17,8 +17,8 @@
 	</publications>
 
 	<dependencies defaultconf="default">
-		<dependency conf="default->master" name="ant" org="org.apache.ant" rev="1.9.4" />
 		<dependency name="org.eclipse.jgit" org="org.eclipse.jgit" rev="4.0.0.201505050340-m2" />
 		<dependency name="slf4j-log4j12" org="org.slf4j" rev="1.7.2" />
+		<dependency conf="default->master" name="ant" org="org.apache.ant" rev="1.9.4" />
 	</dependencies>
 </ivy-module>
