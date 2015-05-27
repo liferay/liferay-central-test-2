@@ -14,13 +14,6 @@
 
 package com.liferay.portal.kernel.editor;
 
-import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.Validator;
-
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Julio Camarero
  */
@@ -40,30 +33,5 @@ public class EditorUtil {
 
 		return editorMode;
 	}
-
-	/**
-	 * @deprecated As of 7.0.0, with no direct replacement
-	 */
-	@Deprecated
-	public static String getEditorValue(
-		HttpServletRequest request, String editorImpl) {
-
-		if (Validator.isNotNull(editorImpl)) {
-			editorImpl = PropsUtil.get(editorImpl);
-		}
-
-		if (!BrowserSnifferUtil.isRtf(request)) {
-			editorImpl = "simple";
-		}
-
-		if (Validator.isNull(editorImpl)) {
-			editorImpl = _EDITOR_WYSIWYG_DEFAULT;
-		}
-
-		return editorImpl;
-	}
-
-	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
-		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
 }
