@@ -60,6 +60,7 @@ public class GitHeadHashTask extends Task {
 			new FileRepositoryBuilder();
 
 		fileRepositoryBuilder.readEnvironment();
+
 		fileRepositoryBuilder.findGitDir(_gitDir);
 
 		String relativePath = PathUtil.toRelativePath(
@@ -73,13 +74,12 @@ public class GitHeadHashTask extends Task {
 			RevCommit headRevCommit = revWalk.lookupCommit(
 				repository.resolve(Constants.HEAD));
 
+			revWalk.markStart(headRevCommit);
+			revWalk.setRevFilter(MaxCountRevFilter.create(2));
 			revWalk.setTreeFilter(
 				AndTreeFilter.create(
 					PathFilter.create(relativePath), TreeFilter.ANY_DIFF
 				));
-
-			revWalk.setRevFilter(MaxCountRevFilter.create(2));
-			revWalk.markStart(headRevCommit);
 
 			Iterator<RevCommit> iterator = revWalk.iterator();
 
