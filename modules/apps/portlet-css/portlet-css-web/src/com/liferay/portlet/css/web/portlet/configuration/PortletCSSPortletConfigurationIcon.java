@@ -32,9 +32,7 @@ public class PortletCSSPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public PortletCSSPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
-
-		_request = request;
+		super(request);
 	}
 
 	@Override
@@ -57,15 +55,15 @@ public class PortletCSSPortletConfigurationIcon
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		PortletURL baseActionURL = PortletURLFactoryUtil.create(
-			_request, PortletCSSPortletKeys.PORTLET_CSS, themeDisplay.getPlid(),
+			request, PortletCSSPortletKeys.PORTLET_CSS, themeDisplay.getPlid(),
 			PortletRequest.ACTION_PHASE);
 
 		PortletURL baseRenderURL = PortletURLFactoryUtil.create(
-			_request, PortletCSSPortletKeys.PORTLET_CSS, themeDisplay.getPlid(),
+			request, PortletCSSPortletKeys.PORTLET_CSS, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
 		PortletURL baseResourceURL = PortletURLFactoryUtil.create(
-			_request, PortletCSSPortletKeys.PORTLET_CSS, themeDisplay.getPlid(),
+			request, PortletCSSPortletKeys.PORTLET_CSS, themeDisplay.getPlid(),
 			PortletRequest.RESOURCE_PHASE);
 
 		StringBundler sb = new StringBundler(9);
@@ -101,7 +99,5 @@ public class PortletCSSPortletConfigurationIcon
 	public boolean isToolTip() {
 		return false;
 	}
-
-	private final HttpServletRequest _request;
 
 }

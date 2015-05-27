@@ -26,7 +26,7 @@ public class ClosePortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public ClosePortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

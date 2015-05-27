@@ -26,7 +26,7 @@ public class PrintPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public PrintPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

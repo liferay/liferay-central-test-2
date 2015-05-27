@@ -28,7 +28,7 @@ public class ConfigurationPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public ConfigurationPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

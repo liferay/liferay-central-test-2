@@ -32,7 +32,7 @@ public class FacebookPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public FacebookPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

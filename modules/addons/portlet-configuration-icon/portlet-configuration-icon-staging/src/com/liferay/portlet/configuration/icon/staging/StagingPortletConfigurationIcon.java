@@ -29,7 +29,7 @@ public class StagingPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public StagingPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

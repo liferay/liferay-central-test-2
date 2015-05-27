@@ -26,7 +26,7 @@ public class RefreshPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public RefreshPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

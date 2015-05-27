@@ -29,7 +29,7 @@ public class ExportImportPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public ExportImportPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

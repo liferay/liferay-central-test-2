@@ -35,7 +35,7 @@ public class IGooglePortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public IGooglePortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 
 		_portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 	}

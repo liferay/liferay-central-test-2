@@ -27,7 +27,7 @@ public class MaximizePortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public MaximizePortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class EditDefaultsPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public EditDefaultsPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

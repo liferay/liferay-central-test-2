@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 public class EditPortletConfigurationIcon extends BasePortletConfigurationIcon {
 
 	public EditPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class EditGuestPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public EditGuestPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
+		super(request);
 	}
 
 	@Override

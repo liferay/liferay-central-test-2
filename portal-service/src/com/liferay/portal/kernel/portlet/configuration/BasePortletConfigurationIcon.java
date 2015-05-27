@@ -27,6 +27,13 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BasePortletConfigurationIcon
 	implements PortletConfigurationIcon {
 
+	public BasePortletConfigurationIcon(HttpServletRequest request) {
+		this.request = request;
+
+		themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+	}
+
 	@Override
 	public String getAlt() {
 		return null;
@@ -112,11 +119,6 @@ public abstract class BasePortletConfigurationIcon
 		return null;
 	}
 
-	public void init(HttpServletRequest request) {
-		themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-	}
-
 	@Override
 	public boolean isLabel() {
 		return false;
@@ -137,6 +139,7 @@ public abstract class BasePortletConfigurationIcon
 		return false;
 	}
 
+	protected HttpServletRequest request;
 	protected ThemeDisplay themeDisplay;
 
 }

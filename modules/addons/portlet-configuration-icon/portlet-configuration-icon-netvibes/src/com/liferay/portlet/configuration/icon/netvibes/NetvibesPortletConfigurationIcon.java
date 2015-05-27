@@ -40,9 +40,7 @@ public class NetvibesPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
 
 	public NetvibesPortletConfigurationIcon(HttpServletRequest request) {
-		init(request);
-
-		_request = request;
+		super(request);
 	}
 
 	@Override
@@ -63,11 +61,11 @@ public class NetvibesPortletConfigurationIcon
 	@Override
 	public String getURL() {
 		try {
-			Portlet portlet = (Portlet)_request.getAttribute(
+			Portlet portlet = (Portlet)request.getAttribute(
 				WebKeys.RENDER_PORTLET);
 
 			PortletURL basePortletURL = PortletURLFactoryUtil.create(
-				_request, PortletKeys.PORTLET_SHARING, themeDisplay.getPlid(),
+				request, PortletKeys.PORTLET_SHARING, themeDisplay.getPlid(),
 				PortletRequest.RESOURCE_PHASE);
 
 			StringBundler sb = new StringBundler(5);
@@ -108,7 +106,5 @@ public class NetvibesPortletConfigurationIcon
 
 		return false;
 	}
-
-	private final HttpServletRequest _request;
 
 }
