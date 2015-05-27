@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.editors.web;
 
-import com.liferay.portal.kernel.editor.LiferayEditor;
+import com.liferay.portal.kernel.editor.Editor;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -22,8 +22,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Raymond Augé
  * @author Roberto Díaz
  */
-@Component(service = LiferayEditor.class)
-public class TinyMCESimpleEditor extends BaseLiferayEditor {
+@Component(service = Editor.class)
+public class TinyMCESimpleEditor extends BaseEditor {
 
 	@Override
 	public String getName() {

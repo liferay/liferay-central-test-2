@@ -14,7 +14,7 @@
 
 package com.liferay.frontend.editors.web;
 
-import com.liferay.portal.kernel.editor.LiferayEditor;
+import com.liferay.portal.kernel.editor.Editor;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Roberto Díaz
  */
-public abstract class BaseLiferayEditor implements LiferayEditor {
+public abstract class BaseEditor implements Editor {
 
 	@Override
 	public String getEditorJspPath(HttpServletRequest request) {

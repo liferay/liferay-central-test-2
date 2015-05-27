@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.editor.LiferayEditor;
+import com.liferay.portal.kernel.editor.Editor;
 import com.liferay.portal.kernel.editor.configuration.EditorConfiguration;
 import com.liferay.portal.kernel.editor.configuration.EditorConfigurationFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -265,7 +265,7 @@ public class InputEditorTag extends IncludeTag {
 		return data;
 	}
 
-	protected LiferayEditor getEditor(HttpServletRequest request) {
+	protected Editor getEditor(HttpServletRequest request) {
 		String editorName = _editorName;
 
 		if (!BrowserSnifferUtil.isRtf(request)) {
@@ -284,14 +284,14 @@ public class InputEditorTag extends IncludeTag {
 	}
 
 	protected String getEditorName(HttpServletRequest request) {
-		LiferayEditor editor = getEditor(request);
+		Editor editor = getEditor(request);
 
 		return editor.getName();
 	}
 
 	@Override
 	protected String getPage() {
-		LiferayEditor editor = getEditor(request);
+		Editor editor = getEditor(request);
 
 		return editor.getEditorJspPath(request);
 	}
@@ -357,23 +357,23 @@ public class InputEditorTag extends IncludeTag {
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
 		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
-	private static final ServiceTrackerMap<String, LiferayEditor>
-		_serviceTrackerMap = ServiceTrackerCollections.singleValueMap(
-			LiferayEditor.class, null,
-			new ServiceReferenceMapper<String, LiferayEditor>() {
+	private static final ServiceTrackerMap<String, Editor> _serviceTrackerMap =
+		ServiceTrackerCollections.singleValueMap(
+			Editor.class, null,
+			new ServiceReferenceMapper<String, Editor>() {
 
 				@Override
 				public void map(
-					ServiceReference<LiferayEditor> serviceReference,
+					ServiceReference<Editor> serviceReference,
 					Emitter<String> emitter) {
 
 					Registry registry = RegistryUtil.getRegistry();
 
-					LiferayEditor editor = registry.getService(
-						serviceReference);
+					Editor editor = registry.getService(serviceReference);
 
 					emitter.emit(editor.getName());
 				}
+
 			});
 
 	static {
