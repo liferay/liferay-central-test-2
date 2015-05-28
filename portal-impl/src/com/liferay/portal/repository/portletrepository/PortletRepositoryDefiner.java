@@ -54,10 +54,8 @@ public class PortletRepositoryDefiner extends BaseRepositoryDefiner {
 			new LiferayRelatedModelCapability(
 				new RepositoryEntryConverter(),
 				new RepositoryEntryChecker(documentRepository)));
-
 		capabilityRegistry.addExportedCapability(
 			TrashCapability.class, new LiferayTrashCapability());
-
 		capabilityRegistry.addExportedCapability(
 			WorkflowCapability.class, new MinimalWorkflowCapability());
 	}
