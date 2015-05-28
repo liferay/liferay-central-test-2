@@ -54,7 +54,7 @@ public class UndeployedPortlet extends GenericPortlet {
 	@Override
 	public void serveResource(
 			ResourceRequest request, ResourceResponse response)
-		throws IOException, PortletException {
+		throws IOException {
 
 		HttpServletRequest httpServletRequest =
 			PortalUtil.getHttpServletRequest(request);
