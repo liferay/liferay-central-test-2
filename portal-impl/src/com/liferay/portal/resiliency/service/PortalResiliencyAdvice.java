@@ -18,16 +18,14 @@ import com.liferay.portal.bean.IdentifiableBeanInvokerUtil;
 import com.liferay.portal.kernel.nio.intraband.rpc.IntrabandRPCUtil;
 import com.liferay.portal.kernel.resiliency.spi.SPI;
 import com.liferay.portal.kernel.resiliency.spi.SPIRegistryUtil;
+import com.liferay.portal.kernel.security.access.control.AccessControl;
+import com.liferay.portal.kernel.security.access.control.AccessControlThreadLocal;
+import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.util.ClassLoaderPool;
-import com.liferay.portal.security.ac.AccessControl;
-import com.liferay.portal.security.ac.AccessControlThreadLocal;
-import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.io.Serializable;
-
 import java.lang.reflect.Method;
-
 import java.util.concurrent.Future;
 
 import org.aopalliance.intercept.MethodInvocation;
