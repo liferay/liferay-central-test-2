@@ -22,6 +22,7 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 
+	@Override
 	public void addRelatedClassNames(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
