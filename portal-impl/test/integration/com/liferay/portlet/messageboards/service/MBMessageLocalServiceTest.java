@@ -82,7 +82,8 @@ public class MBMessageLocalServiceTest {
 		MBMessage message = addMessage(null, false);
 
 		MBMessageLocalServiceUtil.addMessageAttachment(
-			message.getMessageId(), "test", _testAttachment, "image/png", true);
+			TestPropsValues.getUserId(), message.getMessageId(), "test",
+			_testAttachment, "image/png");
 
 		Assert.assertEquals(1, message.getAttachmentsFileEntriesCount());
 	}
@@ -151,7 +152,8 @@ public class MBMessageLocalServiceTest {
 		MBMessage message = addMessage(null, false);
 
 		MBMessageLocalServiceUtil.addMessageAttachment(
-			message.getMessageId(), "test", _testAttachment, "image/png", true);
+			TestPropsValues.getUserId(), message.getMessageId(), "test",
+			_testAttachment, "image/png");
 
 		Assert.assertEquals(1, message.getAttachmentsFileEntriesCount());
 
