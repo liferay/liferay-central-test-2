@@ -16,7 +16,7 @@ package com.liferay.service.access.control.profile.service.security;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.ac.ServiceAccessControlProfile;
-import com.liferay.portal.kernel.security.ac.ServiceAccessControlProfileService;
+import com.liferay.portal.kernel.security.ac.ServiceAccessControlProfileManager;
 import com.liferay.service.access.control.profile.model.SACPEntry;
 import com.liferay.service.access.control.profile.service.SACPEntryService;
 
@@ -29,9 +29,9 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Mika Koivisto
  */
-@Component(immediate = true, service = ServiceAccessControlProfileService.class)
-public class ServiceAccessControlProfileServiceImpl
-	implements ServiceAccessControlProfileService {
+@Component(immediate = true, service = ServiceAccessControlProfileManager.class)
+public class ServiceAccessControlProfileManagerImpl
+	implements ServiceAccessControlProfileManager {
 
 	@Override
 	public ServiceAccessControlProfile getServiceAccessControlProfile(

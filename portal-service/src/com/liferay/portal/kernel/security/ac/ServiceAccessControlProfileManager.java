@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @author Mika Koivisto
  */
-public interface ServiceAccessControlProfileService {
+public interface ServiceAccessControlProfileManager {
 
 	public ServiceAccessControlProfile getServiceAccessControlProfile(
 		long companyId, String name);
