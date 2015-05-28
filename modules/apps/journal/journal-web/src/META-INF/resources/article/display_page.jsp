@@ -109,9 +109,9 @@ ItemSelector itemSelector = (ItemSelector)request.getAttribute("itemSelector");
 		</c:if>
 
 		<%
-		LayoutItemSelectorCriterion layoutItemSelectorCriterion = new LayoutItemSelectorCriterion(scopeGroupId);
-
 		String eventName = liferayPortletResponse.getNamespace() + "selectDisplayPage";
+
+		LayoutItemSelectorCriterion layoutItemSelectorCriterion = new LayoutItemSelectorCriterion(scopeGroupId);
 
 		PortletURL itemSelectorURL = itemSelector.getItemSelectorURL(liferayPortletResponse, eventName, layoutItemSelectorCriterion);
 		%>
