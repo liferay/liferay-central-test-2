@@ -130,7 +130,6 @@ public class MBDiscussionPermission implements BaseModelPermissionChecker {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 		String className = message.getClassName();
-		long classPK = message.getClassPK();
 
 		if (className.equals(WorkflowInstance.class.getName())) {
 			return permissionChecker.hasPermission(
@@ -157,7 +156,7 @@ public class MBDiscussionPermission implements BaseModelPermissionChecker {
 
 		return contains(
 			permissionChecker, message.getCompanyId(), message.getGroupId(),
-			className, classPK, actionId);
+			className, message.getClassPK(), actionId);
 	}
 
 	@Override
