@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
  */
 public interface ThumbnailCapability extends Capability {
 
-	public FileEntry fetchImageFileEntry(long imageId) throws PortalException;
+	public FileEntry fetchImageFileEntry(long imageId);
 
 	public long getCustom1ImageId(FileEntry fileEntry);
 
