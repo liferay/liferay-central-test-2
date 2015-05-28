@@ -23,13 +23,13 @@ import java.io.PrintWriter;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -44,9 +44,11 @@ public class UndeployedPortlet extends GenericPortlet {
 	@Override
 	public void render(RenderRequest request, RenderResponse response)
 		throws IOException, PortletException {
+		
+		PortletContext portletContext = getPortletContext();
 
 		PortletRequestDispatcher portletRequestDispatcher =
-			getPortletContext().getRequestDispatcher(_JSP);
+			portletContext.getRequestDispatcher(_JSP);
 
 		portletRequestDispatcher.include(request, response);
 	}
