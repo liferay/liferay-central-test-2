@@ -79,7 +79,6 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 
 		RepositoryEntryConverter repositoryEntryConverter =
 			new RepositoryEntryConverter();
-
 		RepositoryEntryChecker repositoryEntryChecker =
 			new RepositoryEntryChecker(documentRepository);
 
@@ -87,7 +86,6 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 			RelatedModelCapability.class,
 			new LiferayRelatedModelCapability(
 				repositoryEntryConverter, repositoryEntryChecker));
-
 		capabilityRegistry.addExportedCapability(
 			ThumbnailCapability.class,
 			new LiferayThumbnailCapability(
@@ -96,16 +94,16 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		capabilityRegistry.addExportedCapability(
 			WorkflowCapability.class, _workflowCapability);
 
+		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
+			capabilityRegistry.addSupportedCapability(
+				CommentCapability.class, _commentCapability);
+		}
+
 		capabilityRegistry.addSupportedCapability(
 			ProcessorCapability.class, _processorCapability);
 		capabilityRegistry.addSupportedCapability(
 			SyncCapability.class,
 			new LiferaySyncCapability(bulkOperationCapability));
-
-		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
-			capabilityRegistry.addSupportedCapability(
-				CommentCapability.class, _commentCapability);
-		}
 	}
 
 	@Override
