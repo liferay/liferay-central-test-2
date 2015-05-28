@@ -108,9 +108,9 @@ public class GitHeadHashTask extends Task {
 				}
 			}
 
-			String hash = revCommit.name();
-
 			Project currentProject = getProject();
+
+			String hash = revCommit.name();
 
 			currentProject.setNewProperty(_property, hash);
 

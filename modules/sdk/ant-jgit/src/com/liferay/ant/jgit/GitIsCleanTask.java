@@ -64,9 +64,8 @@ public class GitIsCleanTask extends Task implements Condition {
 
 			StatusCommand statusCommand = git.status();
 
-			statusCommand.setIgnoreSubmodules(IgnoreSubmoduleMode.ALL);
-
 			statusCommand.addPath(relativePath);
+			statusCommand.setIgnoreSubmodules(IgnoreSubmoduleMode.ALL);
 
 			Status status = statusCommand.call();
 
