@@ -338,20 +338,20 @@ public class ImageProcessorImpl
 			return type;
 		}
 
-		String contentType = fileVersion.getMimeType();
+		String mimeType = fileVersion.getMimeType();
 
-		if (contentType.contains(ImageTool.TYPE_BMP)) {
+		if (mimeType.contains(ImageTool.TYPE_BMP)) {
 			type = ImageTool.TYPE_BMP;
 		}
-		else if (contentType.contains(ImageTool.TYPE_GIF)) {
+		else if (mimeType.contains(ImageTool.TYPE_GIF)) {
 			type = ImageTool.TYPE_GIF;
 		}
-		else if (contentType.contains(ImageTool.TYPE_JPEG) ||
-				 contentType.contains("jpeg")) {
+		else if (mimeType.contains(ImageTool.TYPE_JPEG) ||
+				 mimeType.contains("jpeg")) {
 
 			type = ImageTool.TYPE_JPEG;
 		}
-		else if (contentType.contains(ImageTool.TYPE_PNG)) {
+		else if (mimeType.contains(ImageTool.TYPE_PNG)) {
 			type = ImageTool.TYPE_PNG;
 		}
 		else if (!_previewGenerationRequired(fileVersion)) {
@@ -383,9 +383,9 @@ public class ImageProcessorImpl
 	}
 
 	private boolean _previewGenerationRequired(FileVersion fileVersion) {
-		String contentType = fileVersion.getMimeType();
+		String mimeType = fileVersion.getMimeType();
 
-		if (contentType.contains("tiff") || contentType.contains("tif")) {
+		if (mimeType.contains("tiff") || mimeType.contains("tif")) {
 			return true;
 		}
 		else {
