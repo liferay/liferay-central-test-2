@@ -15,7 +15,6 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +29,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Tomas Polesovsky
@@ -46,7 +44,7 @@ public class UndeployedPortlet extends GenericPortlet {
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
-		
+
 		PortletContext portletContext = getPortletContext();
 
 		PortletRequestDispatcher portletRequestDispatcher =
@@ -61,12 +59,10 @@ public class UndeployedPortlet extends GenericPortlet {
 			ResourceRequest renderRequest, ResourceResponse renderResponse)
 		throws IOException {
 
-		HttpServletRequest httpServletRequest =
-			PortalUtil.getHttpServletRequest(renderRequest);
-
 		PrintWriter printWriter = renderResponse.getWriter();
 
-		printWriter.write(LanguageUtil.get(httpServletRequest, "undeployed"));
+		printWriter.write(
+			LanguageUtil.get(renderRequest.getLocale(), "undeployed"));
 	}
 
 }
