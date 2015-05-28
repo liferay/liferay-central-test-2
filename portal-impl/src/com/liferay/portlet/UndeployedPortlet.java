@@ -48,7 +48,8 @@ public class UndeployedPortlet extends GenericPortlet {
 		PortletContext portletContext = getPortletContext();
 
 		PortletRequestDispatcher portletRequestDispatcher =
-			portletContext.getRequestDispatcher(_JSP);
+			portletContext.getRequestDispatcher(
+				"/html/portal/undeployed_portlet.jsp");
 
 		portletRequestDispatcher.include(request, response);
 	}
@@ -65,7 +66,5 @@ public class UndeployedPortlet extends GenericPortlet {
 
 		printWriter.write(LanguageUtil.get(httpServletRequest, "undeployed"));
 	}
-
-	private static final String _JSP = "/html/portal/undeployed_portlet.jsp";
 
 }
