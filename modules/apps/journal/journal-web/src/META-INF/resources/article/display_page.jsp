@@ -24,8 +24,6 @@ long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
 boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_article.jsp-changeStructure"));
-
-ItemSelector itemSelector = (ItemSelector)request.getAttribute("itemSelector");
 %>
 
 <c:choose>
@@ -110,6 +108,8 @@ ItemSelector itemSelector = (ItemSelector)request.getAttribute("itemSelector");
 
 		<%
 		String eventName = liferayPortletResponse.getNamespace() + "selectDisplayPage";
+
+		ItemSelector itemSelector = (ItemSelector)request.getAttribute(JournalWebKeys.ITEM_SELECTOR);
 
 		LayoutItemSelectorCriterion layoutItemSelectorCriterion = new LayoutItemSelectorCriterion(scopeGroupId);
 

@@ -17,6 +17,7 @@ package com.liferay.journal.web.portlet;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.journal.web.asset.JournalArticleAssetRenderer;
 import com.liferay.journal.web.constants.JournalPortletKeys;
+import com.liferay.journal.web.constants.JournalWebKeys;
 import com.liferay.journal.web.portlet.action.ActionUtil;
 import com.liferay.journal.web.upgrade.JournalWebUpgrade;
 import com.liferay.journal.web.util.JournalRSSUtil;
@@ -379,7 +380,8 @@ public class JournalPortlet extends MVCPortlet {
 		String path = getPath(renderRequest);
 
 		if (Validator.equals(path, "/edit_article.jsp")) {
-			renderRequest.setAttribute("itemSelector", _itemSelector);
+			renderRequest.setAttribute(
+				JournalWebKeys.ITEM_SELECTOR, _itemSelector);
 		}
 
 		super.render(renderRequest, renderResponse);
