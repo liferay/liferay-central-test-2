@@ -42,17 +42,8 @@ public class PathUtil {
 		}
 
 		if (projectDir == null) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("Unable to locate .git folder.\n");
-			sb.append("You need to at least do one of the followings :\n");
-			sb.append(
-				"1) Set \"gitDir\" attribute explicitly on the ant task\n");
-			sb.append("2) For portal project, set property \"project.dir\"\n");
-			sb.append(
-				"3) For SDK project, set property \"lp.portal.project.dir\"\n");
-
-			throw new BuildException(sb.toString(), location);
+			throw new BuildException(
+				"Unable to locate .git directory", location);
 		}
 
 		return new File(projectDir, ".git");
