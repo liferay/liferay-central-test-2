@@ -833,9 +833,11 @@ public class PoshiRunnerValidation {
 				List<Element> tdElements = trElement.elements();
 
 				Element locatorElement = tdElements.get(1);
-				Element locatorKeyElement = tdElements.get(0);
 
 				String locator = locatorElement.getText();
+
+				Element locatorKeyElement = tdElements.get(0);
+
 				String locatorKey = locatorKeyElement.getText();
 
 				if (Validator.isNull(locator) && Validator.isNull(locatorKey)) {
