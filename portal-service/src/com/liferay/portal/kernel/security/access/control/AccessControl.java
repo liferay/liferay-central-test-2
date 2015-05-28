@@ -12,14 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.security.ac;
+package com.liferay.portal.kernel.security.access.control;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.AuthVerifierResult;
 
 import java.lang.annotation.Annotation;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;

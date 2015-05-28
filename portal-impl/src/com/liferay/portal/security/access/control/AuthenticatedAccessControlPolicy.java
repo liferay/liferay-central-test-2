@@ -12,8 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.security.ac;
+package com.liferay.portal.security.access.control;
 
+import com.liferay.portal.kernel.security.access.control.AccessControlled;
+import com.liferay.portal.kernel.security.access.control.BaseAccessControlPolicy;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 

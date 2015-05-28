@@ -12,9 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.security.ac;
+package com.liferay.portal.security.access.control;
 
 import org.aopalliance.intercept.MethodInvocation;
+
+import com.liferay.portal.kernel.security.access.control.AccessControlled;
 
 /**
  * @author Michael C. Han
