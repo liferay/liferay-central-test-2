@@ -44,7 +44,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().addFileEntry(
+		return documentRepository.addFileEntry(
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, file, serviceContext);
 	}
@@ -58,7 +58,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().addFileEntry(
+		return documentRepository.addFileEntry(
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, is, size, serviceContext);
 	}
@@ -71,7 +71,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().addFileShortcut(
+		return documentRepository.addFileShortcut(
 			userId, folderId, toFileEntryId, serviceContext);
 	}
 
@@ -83,7 +83,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().addFolder(
+		return documentRepository.addFolder(
 			userId, parentFolderId, name, description, serviceContext);
 	}
 
@@ -95,7 +95,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		getDocumentRepository().checkInFileEntry(
+		documentRepository.checkInFileEntry(
 			userId, fileEntryId, major, changeLog, serviceContext);
 	}
 
@@ -107,7 +107,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		getDocumentRepository().checkInFileEntry(
+		documentRepository.checkInFileEntry(
 			userId, fileEntryId, lockUuid, serviceContext);
 	}
 
@@ -119,7 +119,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().copyFileEntry(
+		return documentRepository.copyFileEntry(
 			userId, groupId, fileEntryId, destFolderId, serviceContext);
 	}
 
@@ -127,42 +127,42 @@ public abstract class InitializedDocumentRepository
 	public void deleteAll() throws PortalException {
 		checkDocumentRepository();
 
-		getDocumentRepository().deleteAll();
+		documentRepository.deleteAll();
 	}
 
 	@Override
 	public void deleteFileEntry(long fileEntryId) throws PortalException {
 		checkDocumentRepository();
 
-		getDocumentRepository().deleteFileEntry(fileEntryId);
+		documentRepository.deleteFileEntry(fileEntryId);
 	}
 
 	@Override
 	public void deleteFileShortcut(long fileShortcutId) throws PortalException {
 		checkDocumentRepository();
 
-		getDocumentRepository().deleteFileShortcut(fileShortcutId);
+		documentRepository.deleteFileShortcut(fileShortcutId);
 	}
 
 	@Override
 	public void deleteFileShortcuts(long toFileEntryId) throws PortalException {
 		checkDocumentRepository();
 
-		getDocumentRepository().deleteFileShortcuts(toFileEntryId);
+		documentRepository.deleteFileShortcuts(toFileEntryId);
 	}
 
 	@Override
 	public void deleteFolder(long folderId) throws PortalException {
 		checkDocumentRepository();
 
-		getDocumentRepository().deleteFolder(folderId);
+		documentRepository.deleteFolder(folderId);
 	}
 
 	@Override
 	public <C extends Capability> C getCapability(Class<C> capabilityClass) {
 		checkDocumentRepository();
 
-		return getDocumentRepository().getCapability(capabilityClass);
+		return documentRepository.getCapability(capabilityClass);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntries(
+		return documentRepository.getFileEntries(
 			folderId, status, start, end, obc);
 	}
 
@@ -184,14 +184,14 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntries(folderId, start, end, obc);
+		return documentRepository.getFileEntries(folderId, start, end, obc);
 	}
 
 	@Override
 	public int getFileEntriesCount(long folderId) throws PortalException {
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntriesCount(folderId);
+		return documentRepository.getFileEntriesCount(folderId);
 	}
 
 	@Override
@@ -200,14 +200,14 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntriesCount(folderId, status);
+		return documentRepository.getFileEntriesCount(folderId, status);
 	}
 
 	@Override
 	public FileEntry getFileEntry(long fileEntryId) throws PortalException {
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntry(fileEntryId);
+		return documentRepository.getFileEntry(fileEntryId);
 	}
 
 	@Override
@@ -216,14 +216,14 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntry(folderId, title);
+		return documentRepository.getFileEntry(folderId, title);
 	}
 
 	@Override
 	public FileEntry getFileEntryByUuid(String uuid) throws PortalException {
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileEntryByUuid(uuid);
+		return documentRepository.getFileEntryByUuid(uuid);
 	}
 
 	@Override
@@ -232,7 +232,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileShortcut(fileShortcutId);
+		return documentRepository.getFileShortcut(fileShortcutId);
 	}
 
 	@Override
@@ -241,14 +241,14 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFileVersion(fileVersionId);
+		return documentRepository.getFileVersion(fileVersionId);
 	}
 
 	@Override
 	public Folder getFolder(long folderId) throws PortalException {
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFolder(folderId);
+		return documentRepository.getFolder(folderId);
 	}
 
 	@Override
@@ -257,7 +257,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getFolder(parentFolderId, name);
+		return documentRepository.getFolder(parentFolderId, name);
 	}
 
 	@Override
@@ -268,7 +268,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().getRepositoryFileEntries(
+		return documentRepository.getRepositoryFileEntries(
 			userId, rootFolderId, start, end, obc);
 	}
 
@@ -276,7 +276,7 @@ public abstract class InitializedDocumentRepository
 	public long getRepositoryId() {
 		checkDocumentRepository();
 
-		return getDocumentRepository().getRepositoryId();
+		return documentRepository.getRepositoryId();
 	}
 
 	@Override
@@ -285,7 +285,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().isCapabilityProvided(capabilityClass);
+		return documentRepository.isCapabilityProvided(capabilityClass);
 	}
 
 	@Override
@@ -296,7 +296,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().moveFileEntry(
+		return documentRepository.moveFileEntry(
 			userId, fileEntryId, newFolderId, serviceContext);
 	}
 
@@ -308,7 +308,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().moveFolder(
+		return documentRepository.moveFolder(
 			userId, folderId, parentFolderId, serviceContext);
 	}
 
@@ -320,17 +320,17 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		getDocumentRepository().revertFileEntry(
+		documentRepository.revertFileEntry(
 			userId, fileEntryId, version, serviceContext);
 	}
 
-	public final void setDocumentRepository(T documentRepository) {
-		if (_documentRepository != null) {
+	public void setDocumentRepository(T documentRepository) {
+		if (this.documentRepository != null) {
 			throw new IllegalStateException(
 				"Unable to initialize an initialized document repository");
 		}
 
-		_documentRepository = documentRepository;
+		this.documentRepository = documentRepository;
 	}
 
 	@Override
@@ -342,7 +342,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().updateFileEntry(
+		return documentRepository.updateFileEntry(
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, file, serviceContext);
 	}
@@ -357,7 +357,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().updateFileEntry(
+		return documentRepository.updateFileEntry(
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
 	}
@@ -370,7 +370,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().updateFileShortcut(
+		return documentRepository.updateFileShortcut(
 			userId, fileShortcutId, folderId, toFileEntryId, serviceContext);
 	}
 
@@ -381,7 +381,7 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		getDocumentRepository().updateFileShortcuts(
+		documentRepository.updateFileShortcuts(
 			oldToFileEntryId, newToFileEntryId);
 	}
 
@@ -393,21 +393,17 @@ public abstract class InitializedDocumentRepository
 
 		checkDocumentRepository();
 
-		return getDocumentRepository().updateFolder(
+		return documentRepository.updateFolder(
 			folderId, parentFolderId, name, description, serviceContext);
 	}
 
 	protected void checkDocumentRepository() {
-		if (getDocumentRepository() == null) {
+		if (documentRepository == null) {
 			throw new IllegalStateException(
 				"Document repositry is not initialized");
 		}
 	}
 
-	protected T getDocumentRepository() {
-		return _documentRepository;
-	}
-
-	private T _documentRepository;
+	protected T documentRepository;
 
 }
