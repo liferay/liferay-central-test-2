@@ -28,6 +28,7 @@ import java.util.List;
 @ProviderType
 public class SACPEntryImpl extends SACPEntryBaseImpl {
 
+	@Override
 	public List<String> getAllowedServicesList() {
 		String[] allowedServices = StringUtil.split(
 			getAllowedServices(), StringPool.NEW_LINE);
