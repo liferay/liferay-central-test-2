@@ -38,11 +38,13 @@ import javax.servlet.http.HttpServletRequest;
 public class UndeployedPortlet extends GenericPortlet {
 
 	@Override
-	public void processAction(ActionRequest request, ActionResponse response) {
+	public void processAction(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
 	}
 
 	@Override
-	public void render(RenderRequest request, RenderResponse response)
+	public void render(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 		
 		PortletContext portletContext = getPortletContext();
@@ -51,18 +53,18 @@ public class UndeployedPortlet extends GenericPortlet {
 			portletContext.getRequestDispatcher(
 				"/html/portal/undeployed_portlet.jsp");
 
-		portletRequestDispatcher.include(request, response);
+		portletRequestDispatcher.include(renderRequest, renderResponse);
 	}
 
 	@Override
 	public void serveResource(
-			ResourceRequest request, ResourceResponse response)
+			ResourceRequest renderRequest, ResourceResponse renderResponse)
 		throws IOException {
 
 		HttpServletRequest httpServletRequest =
-			PortalUtil.getHttpServletRequest(request);
+			PortalUtil.getHttpServletRequest(renderRequest);
 
-		PrintWriter printWriter = response.getWriter();
+		PrintWriter printWriter = renderResponse.getWriter();
 
 		printWriter.write(LanguageUtil.get(httpServletRequest, "undeployed"));
 	}
