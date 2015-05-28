@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
@@ -340,18 +341,16 @@ public class ImageProcessorImpl
 
 		String mimeType = fileVersion.getMimeType();
 
-		if (mimeType.contains(ImageTool.TYPE_BMP)) {
+		if (mimeType.equals(ContentTypes.IMAGE_BMP)) {
 			type = ImageTool.TYPE_BMP;
 		}
-		else if (mimeType.contains(ImageTool.TYPE_GIF)) {
+		else if (mimeType.equals(ContentTypes.IMAGE_GIF)) {
 			type = ImageTool.TYPE_GIF;
 		}
-		else if (mimeType.contains(ImageTool.TYPE_JPEG) ||
-				 mimeType.contains("jpeg")) {
-
+		else if (mimeType.equals(ContentTypes.IMAGE_JPEG)) {
 			type = ImageTool.TYPE_JPEG;
 		}
-		else if (mimeType.contains(ImageTool.TYPE_PNG)) {
+		else if (mimeType.equals(ContentTypes.IMAGE_PNG)) {
 			type = ImageTool.TYPE_PNG;
 		}
 		else if (!_previewGenerationRequired(fileVersion)) {
