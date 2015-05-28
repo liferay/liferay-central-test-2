@@ -83,7 +83,7 @@ public class MBMessageLocalServiceTest {
 
 		MBMessageLocalServiceUtil.addMessageAttachment(
 			TestPropsValues.getUserId(), message.getMessageId(), "test",
-			_testAttachment, "image/png");
+			_attachmentFile, "image/png");
 
 		Assert.assertEquals(1, message.getAttachmentsFileEntriesCount());
 	}
@@ -153,7 +153,7 @@ public class MBMessageLocalServiceTest {
 
 		MBMessageLocalServiceUtil.addMessageAttachment(
 			TestPropsValues.getUserId(), message.getMessageId(), "test",
-			_testAttachment, "image/png");
+			_attachmentFile, "image/png");
 
 		Assert.assertEquals(1, message.getAttachmentsFileEntriesCount());
 
@@ -260,7 +260,7 @@ public class MBMessageLocalServiceTest {
 			false, serviceContext);
 	}
 
-	private static final File _testAttachment = new File(
+	private static final File _attachmentFile = new File(
 		"portal-impl/test/integration/com/liferay/portlet/messageboards" +
 			"/attachments/dependencies/company_logo.png");
 
