@@ -14,9 +14,9 @@
 
 package com.liferay.portal.security.access.control;
 
-import org.aopalliance.intercept.MethodInvocation;
-
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
+
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * @author Michael C. Han
