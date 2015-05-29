@@ -348,7 +348,7 @@ public class InitGradleTask extends DefaultTask {
 
 			if (Validator.isNotNull(autoUpdateXml)) {
 				contents.add(
-					wrapProperty("autoUpdateXml", autoUpdateXml, 1, false));
+					wrapProperty(1, "autoUpdateXml", false, autoUpdateXml));
 			}
 		}
 
@@ -356,12 +356,12 @@ public class InitGradleTask extends DefaultTask {
 			String themeParent = getBuildXmlProperty("theme.parent");
 
 			if (Validator.isNotNull(themeParent)) {
-				contents.add(wrapProperty("themeParent", themeParent, 1));
+				contents.add(wrapProperty(1, "themeParent", themeParent));
 			}
 
 			String themeType = getBuildXmlProperty("theme.type", "vm");
 
-			contents.add(wrapProperty("themeType", themeType, 1));
+			contents.add(wrapProperty(1, "themeType", themeType));
 		}
 
 		if (!contents.isEmpty()) {
@@ -378,13 +378,13 @@ public class InitGradleTask extends DefaultTask {
 		String javacSource = getBuildXmlProperty("javac.source");
 
 		if (Validator.isNotNull(javacSource)) {
-			contents.add(wrapProperty("sourceCompatibility", javacSource, 0));
+			contents.add(wrapProperty(0, "sourceCompatibility", javacSource));
 		}
 
 		String javacTarget = getBuildXmlProperty("javac.target");
 
 		if (Validator.isNotNull(javacSource)) {
-			contents.add(wrapProperty("targetCompatibility", javacTarget, 0));
+			contents.add(wrapProperty(0, "targetCompatibility", javacTarget));
 		}
 
 		String pluginVersion = getBuildXmlProperty("plugin.version");
@@ -394,7 +394,7 @@ public class InitGradleTask extends DefaultTask {
 				contents.add("");
 			}
 
-			contents.add(wrapProperty("version", pluginVersion, 0));
+			contents.add(wrapProperty(0, "version", pluginVersion));
 		}
 
 		return contents;
@@ -552,12 +552,12 @@ public class InitGradleTask extends DefaultTask {
 		return sb.toString();
 	}
 
-	protected String wrapProperty(String name, String value, int indentCount) {
-		return wrapProperty(name, value, indentCount, true);
+	protected String wrapProperty(int indentCount, String name, String value) {
+		return wrapProperty(indentCount, name, true, value);
 	}
 
 	protected String wrapProperty(
-		String name, String value, int indentCount, boolean quoteValue) {
+		int indentCount, String name, boolean quoteValue, String value) {
 
 		StringBuilder sb = new StringBuilder();
 
