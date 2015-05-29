@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.impl;
+package com.liferay.portal.security.auth.internal;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
