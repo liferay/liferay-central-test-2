@@ -837,12 +837,10 @@ public class ServicePreAction extends Action {
 
 		if (portalWebResources != null) {
 
-			// It's really strange that this is here since the only consumer is
-			// the frontend-* modules.
+			// Temporary workaround for LPS-56017
 
-			String editorsPath = portalWebResources.getContextPath();
-
-			themeDisplay.setPathEditors(editorsPath.concat("/html"));
+			themeDisplay.setPathEditors(
+				portalWebResources.getContextPath() + "/html");
 		}
 
 		String javaScriptPath = PortalWebResourcesUtil.getContextPath(
