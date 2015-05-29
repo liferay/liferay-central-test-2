@@ -44,14 +44,15 @@ public class WebArchiveBuilder {
 
 			process.waitFor();
 
-			BufferedReader reader = new BufferedReader(
+			BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(process.getInputStream()));
 
-			String line = reader.readLine();
+			String line = bufferedReader.readLine();
+
 			while (line != null) {
 				_logger.debug(line);
 
-				line = reader.readLine();
+				line = bufferedReader.readLine();
 			}
 		}
 		catch (Exception e) {
