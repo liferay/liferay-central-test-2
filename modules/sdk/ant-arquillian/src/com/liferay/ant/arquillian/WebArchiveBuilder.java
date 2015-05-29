@@ -37,7 +37,7 @@ public class WebArchiveBuilder {
 		try {
 			ProcessBuilder processBuilder = new ProcessBuilder(
 				"ant", "direct-deploy",
-				"-Dapp.server.deploy.dir=" + tempDir.getAbsolutePath() ,
+				"-Dapp.server.deploy.dir=" + tempDir.getAbsolutePath(),
 				"-Dauto.deploy.unpack.war=false");
 
 			Process process = processBuilder.start();
@@ -85,6 +85,7 @@ public class WebArchiveBuilder {
 		return project;
 	}
 
-	private static Logger _logger = Logger.getLogger(WebArchiveBuilder.class);
+	private static final Logger _logger = Logger.getLogger(
+		WebArchiveBuilder.class);
 
 }
