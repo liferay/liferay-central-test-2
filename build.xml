@@ -209,6 +209,7 @@
 						clean.delete.ivy.md5=true
 						clean.delete.lib=true
 						ivy.home=${ivy.home}
+						ivy.log.level=${ivy.log.level}
 						junit.test.excludes=${junit.test.excludes}
 						liferay.home=${liferay.home}
 						lp.portal.project.dir=${project.dir}
