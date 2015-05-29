@@ -403,7 +403,7 @@ public class VerifyProperties extends VerifyProcess {
 			"display.templates.config", "com.liferay.asset.tags.navigation.web"
 		},
 
-		// Auth Verifiers
+		// Authentication Verifier
 
 		new String[] {
 			"auth.verifier.BasicAuthHeaderAutoLogin.basic_auth",
@@ -495,7 +495,7 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.security.auth"
 		},
 
-		// Auto Logins
+		// Request Header
 
 		new String[] {
 			"request.header.auth.hosts.allowed",
