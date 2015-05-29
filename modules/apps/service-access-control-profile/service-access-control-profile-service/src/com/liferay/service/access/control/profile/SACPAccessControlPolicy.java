@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.security;
+package com.liferay.service.access.control.profile;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.ac.ServiceAccessControlProfileThreadLocal;
 import com.liferay.portal.kernel.security.access.control.AccessControlPolicy;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.security.access.control.BaseAccessControlPolicy;
+import com.liferay.portal.kernel.security.access.control.profile.ServiceAccessControlProfileThreadLocal;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -27,7 +27,6 @@ import com.liferay.service.access.control.profile.model.SACPEntry;
 import com.liferay.service.access.control.profile.service.SACPEntryLocalService;
 
 import java.lang.reflect.Method;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

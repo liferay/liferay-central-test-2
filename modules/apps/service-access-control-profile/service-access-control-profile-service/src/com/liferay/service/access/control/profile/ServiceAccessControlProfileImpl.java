@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.security;
+package com.liferay.service.access.control.profile;
 
-import com.liferay.portal.kernel.security.ac.ServiceAccessControlProfile;
+import com.liferay.portal.kernel.security.access.control.profile.ServiceAccessControlProfile;
 import com.liferay.service.access.control.profile.model.SACPEntry;
 
 import java.util.List;

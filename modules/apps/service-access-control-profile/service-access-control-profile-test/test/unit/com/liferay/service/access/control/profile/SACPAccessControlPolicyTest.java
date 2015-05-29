@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.security;
+package com.liferay.service.access.control.profile;
 
 import org.junit.Assert;
 import org.junit.Before;
