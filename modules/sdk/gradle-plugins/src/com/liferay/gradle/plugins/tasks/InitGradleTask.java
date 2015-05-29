@@ -144,7 +144,7 @@ public class InitGradleTask extends DefaultTask {
 				contents.add(
 					wrapDependency(
 						JavaPlugin.COMPILE_CONFIGURATION_NAME, group, name,
-						version, transitive, optional));
+						optional, transitive, version));
 			}
 		}
 
@@ -237,7 +237,7 @@ public class InitGradleTask extends DefaultTask {
 				contents.add(
 					wrapDependency(
 						ProvidedBasePlugin.getPROVIDED_CONFIGURATION_NAME(),
-						group, name, version, false));
+						group, name, false, version));
 			}
 		}
 
@@ -279,7 +279,7 @@ public class InitGradleTask extends DefaultTask {
 
 					contents.add(
 						wrapDependency(
-							configurationName, group, name, version, false));
+							configurationName, group, name, false, version));
 				}
 			}
 		}
@@ -311,7 +311,7 @@ public class InitGradleTask extends DefaultTask {
 				contents.add(
 					wrapDependency(
 						JavaPlugin.TEST_COMPILE_CONFIGURATION_NAME, group, name,
-						version, true));
+						true, version));
 			}
 		}
 
@@ -501,16 +501,8 @@ public class InitGradleTask extends DefaultTask {
 	}
 
 	protected String wrapDependency(
-		String configurationName, String group, String name, String version,
-		boolean transitive) {
-
-		return wrapDependency(
-			configurationName, group, name, version, transitive, false);
-	}
-
-	protected String wrapDependency(
-		String configurationName, String group, String name, String version,
-		boolean transitive, boolean optional) {
+		String configurationName, String group, String name, boolean optional,
+		boolean transitive, String version) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -520,20 +512,29 @@ public class InitGradleTask extends DefaultTask {
 		sb.append(group);
 		sb.append("\", name: \"");
 		sb.append(name);
-		sb.append("\", version: \"");
-		sb.append(version);
-		sb.append('\"');
-
-		if (!transitive) {
-			sb.append(", transitive: false");
-		}
 
 		if (optional) {
 			sb.append(", ");
 			sb.append(OptionalBasePlugin.getOPTIONAL_IDENTIFIER());
 		}
 
+		if (!transitive) {
+			sb.append(", transitive: false");
+		}
+
+		sb.append("\", version: \"");
+		sb.append(version);
+		sb.append('\"');
+
 		return sb.toString();
+	}
+
+	protected String wrapDependency(
+		String configurationName, String group, String name, boolean transitive,
+		String version) {
+
+		return wrapDependency(
+			configurationName, group, name, false, transitive, version);
 	}
 
 	protected String wrapProjectDependency(
