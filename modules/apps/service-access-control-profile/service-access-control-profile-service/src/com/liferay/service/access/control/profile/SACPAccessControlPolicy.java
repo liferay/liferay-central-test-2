@@ -100,82 +100,91 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 	protected boolean matches(
 		String className, String methodName, String allowedService) {
 
-		String allowedClass = null;
-		String allowedMethod = null;
+		String allowedClassName = null;
+		String allowedMethodName = null;
 
 		int index = allowedService.indexOf(CharPool.POUND);
 
 		if (index > -1) {
-			allowedClass = allowedService.substring(0, index);
-			allowedMethod = allowedService.substring(index + 1);
+			allowedClassName = allowedService.substring(0, index);
+			allowedMethodName = allowedService.substring(index + 1);
 		}
 		else {
-			allowedClass = allowedService;
+			allowedClassName = allowedService;
 		}
 
 		boolean wildcardMatchClass = false;
 
-		if (Validator.isNotNull(allowedClass) &&
-			allowedClass.endsWith(StringPool.STAR)) {
+		if (Validator.isNotNull(allowedClassName) &&
+			allowedClassName.endsWith(StringPool.STAR)) {
 
+			allowedClassName = allowedClassName.substring(
+				0, allowedClassName.length() - 1);
 			wildcardMatchClass = true;
-			allowedClass = allowedClass.substring(0, allowedClass.length() - 1);
 		}
 
 		boolean wildcardMatchMethod = false;
 
-		if (Validator.isNotNull(allowedMethod) &&
-			allowedMethod.endsWith(StringPool.STAR)) {
+		if (Validator.isNotNull(allowedMethodName) &&
+			allowedMethodName.endsWith(StringPool.STAR)) {
 
+			allowedMethodName = allowedMethodName.substring(
+				0, allowedMethodName.length() - 1);
 			wildcardMatchMethod = true;
-			allowedMethod = allowedMethod.substring(
-				0, allowedMethod.length() - 1);
 		}
 
-		if (Validator.isNotNull(allowedClass) &&
-			Validator.isNotNull(allowedMethod)) {
+		if (Validator.isNotNull(allowedClassName) &&
+			Validator.isNotNull(allowedMethodName)) {
 
-			if (wildcardMatchClass && !className.startsWith(allowedClass)) {
+			if (wildcardMatchClass && !className.startsWith(allowedClassName)) {
 				return false;
 			}
-			else if (!wildcardMatchClass && !className.equals(allowedClass)) {
+			else if (!wildcardMatchClass &&
+					 !className.equals(allowedClassName)) {
+
 				return false;
 			}
 
-			if (wildcardMatchMethod && !methodName.startsWith(allowedMethod)) {
+			if (wildcardMatchMethod &&
+				!methodName.startsWith(allowedMethodName)) {
+
 				return false;
 			}
 			else if (!wildcardMatchMethod &&
-					 !methodName.equals(allowedMethod)) {
+					 !methodName.equals(allowedMethodName)) {
 
 				return false;
 			}
 
 			return true;
 		}
-		else if (Validator.isNotNull(allowedClass)) {
-			if (wildcardMatchClass && !className.startsWith(allowedClass)) {
+		else if (Validator.isNotNull(allowedClassName)) {
+			if (wildcardMatchClass && !className.startsWith(allowedClassName)) {
 				return false;
 			}
-			else if (!wildcardMatchClass && !className.equals(allowedClass)) {
+			else if (!wildcardMatchClass &&
+					 !className.equals(allowedClassName)) {
+
 				return false;
 			}
 
 			return true;
 		}
-		else if (Validator.isNotNull(allowedMethod)) {
-			if (wildcardMatchMethod && !methodName.startsWith(allowedMethod)) {
+		else if (Validator.isNotNull(allowedMethodName)) {
+			if (wildcardMatchMethod &&
+				!methodName.startsWith(allowedMethodName)) {
+
 				return false;
 			}
 			else if (!wildcardMatchMethod &&
-					 !methodName.equals(allowedMethod)) {
+					 !methodName.equals(allowedMethodName)) {
 
 				return false;
 			}
 
 			return true;
 		}
-		else if (wildcardMatchClass && Validator.isNull(allowedClass)) {
+		else if (wildcardMatchClass && Validator.isNull(allowedClassName)) {
 			return true;
 		}
 
