@@ -51,16 +51,14 @@ public class DefaultDDMStructureUtil {
 
 	public static void addDDMStructures(
 			long userId, long groupId, long classNameId,
-			ClassLoader classLoader, String filePath,
+			ClassLoader classLoader, String fileName,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		Locale locale = PortalUtil.getSiteDefaultLocale(groupId);
 
 		List<Element> structureElements = getDDMStructures(
-			classLoader, filePath, locale);
-
-		String templateFilePath = FileUtil.getPath(filePath) + StringPool.SLASH;
+			classLoader, fileName, locale);
 
 		for (Element structureElement : structureElements) {
 			boolean dynamicStructure = GetterUtil.getBoolean(
@@ -134,30 +132,32 @@ public class DefaultDDMStructureUtil {
 
 			String templateFileName = templateElement.elementText("file-name");
 
-			boolean templateCacheable = GetterUtil.getBoolean(
-				templateElement.elementText("cacheable"));
+			String script = StringUtil.read(
+				classLoader,
+				FileUtil.getPath(fileName) + StringPool.SLASH +
+					templateFileName);
 
-			String templateContent = StringUtil.read(
-				classLoader, templateFilePath + templateFileName);
+			boolean cacheable = GetterUtil.getBoolean(
+				templateElement.elementText("cacheable"));
 
 			DDMTemplateLocalServiceUtil.addTemplate(
 				userId, groupId, PortalUtil.getClassNameId(DDMStructure.class),
 				ddmStructure.getStructureId(), ddmStructure.getClassNameId(),
 				null, nameMap, null, DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY,
 				DDMTemplateConstants.TEMPLATE_MODE_CREATE,
-				TemplateConstants.LANG_TYPE_FTL, templateContent,
-				templateCacheable, false, StringPool.BLANK, null,
+				TemplateConstants.LANG_TYPE_FTL, script,
+				cacheable, false, StringPool.BLANK, null,
 				serviceContext);
 		}
 	}
 
 	public static String getDynamicDDMStructureDefinition(
-			ClassLoader classLoader, String filePath,
+			ClassLoader classLoader, String fileName,
 			String dynamicDDMStructureName, Locale locale)
 		throws Exception {
 
 		List<Element> structureElements = getDDMStructures(
-			classLoader, filePath, locale);
+			classLoader, fileName, locale);
 
 		for (Element structureElement : structureElements) {
 			boolean dynamicStructure = GetterUtil.getBoolean(
@@ -183,10 +183,10 @@ public class DefaultDDMStructureUtil {
 	}
 
 	protected static List<Element> getDDMStructures(
-			ClassLoader classLoader, String filePath, Locale locale)
+			ClassLoader classLoader, String fileName, Locale locale)
 		throws Exception {
 
-		String xml = StringUtil.read(classLoader, filePath);
+		String xml = StringUtil.read(classLoader, fileName);
 
 		xml = StringUtil.replace(xml, "[$LOCALE_DEFAULT$]", locale.toString());
 

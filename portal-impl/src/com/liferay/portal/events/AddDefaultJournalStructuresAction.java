@@ -58,11 +58,9 @@ public class AddDefaultJournalStructuresAction extends SimpleAction {
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(JournalArticle.class),
 			AddDefaultJournalStructuresAction.class.getClassLoader(),
-			_STRUCTURES_FILE_PATH, serviceContext);
+			"com/liferay/portal/events/dependencies" +
+				"/basic-web-content-structure.xml",
+			serviceContext);
 	}
-
-	private static final String _STRUCTURES_FILE_PATH =
-		"com/liferay/portal/events/dependencies/" +
-			"basic-web-content-structure.xml";
 
 }

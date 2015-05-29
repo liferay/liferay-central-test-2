@@ -104,7 +104,9 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			DefaultDDMStructureUtil.getDynamicDDMStructureDefinition(
 				AddDefaultDocumentLibraryStructuresAction.class.
 					getClassLoader(),
-				_STRUCTURES_FILE_PATH, languageKey, locale);
+				"com/liferay/portal/events/dependencies" +
+					"/document-library-structures.xml",
+				languageKey, locale);
 
 		DDMForm ddmForm = DDMFormXSDDeserializerUtil.deserialize(definition);
 
@@ -321,7 +323,9 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(DLFileEntryMetadata.class),
 			AddDefaultDocumentLibraryStructuresAction.class.getClassLoader(),
-			_STRUCTURES_FILE_PATH, serviceContext);
+			"com/liferay/portal/events/dependencies" +
+				"/document-library-structures.xml",
+			serviceContext);
 		addDLFileEntryTypes(defaultUserId, group.getGroupId(), serviceContext);
 		addDLRawMetadataStructures(
 			defaultUserId, group.getGroupId(), serviceContext);
@@ -346,9 +350,5 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		return localizationMap;
 	}
-
-	private static final String _STRUCTURES_FILE_PATH =
-		"com/liferay/portal/events/dependencies/" +
-			"document-library-structures.xml";
 
 }
