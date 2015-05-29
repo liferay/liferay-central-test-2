@@ -839,13 +839,13 @@ public abstract class BaseIndexer implements Indexer {
 			String keywords)
 		throws Exception {
 
+		Map<String, Query> expandoQueries = new HashMap<>();
+
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			searchContext.getCompanyId(), getClassName(searchContext));
 
 		Set<String> attributeNames = SetUtil.fromEnumeration(
 			expandoBridge.getAttributeNames());
-
-		Map<String, Query> expandoQueries = new HashMap<>();
 
 		for (String attributeName : attributeNames) {
 			UnicodeProperties properties = expandoBridge.getAttributeProperties(
@@ -947,10 +947,10 @@ public abstract class BaseIndexer implements Indexer {
 
 		Map<String, Query> queries = new HashMap<>();
 
-		Query nonLocalizedQuery = addSearchTerm(
+		Query query = addSearchTerm(
 			searchQuery, searchContext, field, like);
 
-		queries.put(field, nonLocalizedQuery);
+		queries.put(field, query);
 
 		String localizedFieldName = DocumentImpl.getLocalizedName(
 			searchContext.getLocale(), field);
