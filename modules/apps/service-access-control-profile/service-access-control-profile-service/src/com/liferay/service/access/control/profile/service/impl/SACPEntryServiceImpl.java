@@ -40,8 +40,7 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 	@Override
 	public SACPEntry addSACPEntry(
 			String allowedServiceSignatures, String name,
-			Map<Locale, String> titleMap,
-			ServiceContext serviceContext)
+			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
 
 		PortletPermissionUtil.check(

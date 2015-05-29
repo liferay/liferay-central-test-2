@@ -64,6 +64,16 @@ public class ServiceAccessControlProfileManagerImpl
 		_sacpEntryService = sacpEntryService;
 	}
 
+	protected ServiceAccessControlProfile toServiceAccessControlProfile(
+		SACPEntry sacpEntry) {
+
+		if (sacpEntry != null) {
+			return new ServiceAccessControlProfileImpl(sacpEntry);
+		}
+
+		return null;
+	}
+
 	protected List<ServiceAccessControlProfile> toServiceAccessControlProfiles(
 		List<SACPEntry> sacpEntries) {
 
@@ -80,16 +90,6 @@ public class ServiceAccessControlProfileManagerImpl
 		}
 
 		return serviceAccessControlProfiles;
-	}
-
-	protected ServiceAccessControlProfile toServiceAccessControlProfile(
-		SACPEntry sacpEntry) {
-
-		if (sacpEntry != null) {
-			return new ServiceAccessControlProfileImpl(sacpEntry);
-		}
-
-		return null;
 	}
 
 	private SACPEntryService _sacpEntryService;
