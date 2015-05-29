@@ -200,10 +200,9 @@ public class Field implements Serializable {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 index time boosting is highly inflexible and thus feature is
-	 *             replaced by query time boosting instead
-	 * @return
+	 * @deprecated As of 7.0.0, replaced by {@link Query#getBoost}
 	 */
+	@Deprecated
 	public float getBoost() {
 		return _boost;
 	}
@@ -279,9 +278,7 @@ public class Field implements Serializable {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 index time boosting is highly inflexible and thus feature is
-	 *             replaced by query time boosting instead
-	 * @param boost
+	 * @deprecated As of 7.0.0, replaced by {@link Query#setBoost(float)}
 	 */
 	@Deprecated
 	public void setBoost(float boost) {
