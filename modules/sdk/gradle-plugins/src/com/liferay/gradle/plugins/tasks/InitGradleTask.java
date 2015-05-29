@@ -127,19 +127,20 @@ public class InitGradleTask extends DefaultTask {
 
 				String group = (String)dependencyNode.attribute("org");
 				String name = (String)dependencyNode.attribute("name");
-				String version = (String)dependencyNode.attribute("rev");
 
 				boolean optional = false;
 				boolean transitive = true;
 
 				if (Validator.isNotNull(conf)) {
-					if (conf.equals("default->master")) {
-						transitive = false;
-					}
-					else if (conf.equals("internal->master")) {
+					if (conf.equals("internal->master")) {
 						optional = true;
 					}
+					else if (conf.equals("default->master")) {
+						transitive = false;
+					}
 				}
+
+				String version = (String)dependencyNode.attribute("rev");
 
 				contents.add(
 					wrapDependency(
