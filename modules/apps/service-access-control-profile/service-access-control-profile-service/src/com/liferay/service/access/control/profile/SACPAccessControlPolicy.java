@@ -56,14 +56,15 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		Set<String> allowedServices = new HashSet<>();
+		Set<String> allowedServiceSignatures = new HashSet<>();
 
 		for (String name : serviceAccessControlProfileNames) {
 			try {
 				SACPEntry sacpEntry = _sacpEntryLocalService.getSACPEntry(
 					companyId, name);
 
-				allowedServices.addAll(sacpEntry.getAllowedServiceSignaturesList());
+				allowedServiceSignatures.addAll(
+					sacpEntry.getAllowedServiceSignaturesList());
 			}
 			catch (PortalException pe) {
 				throw new SecurityException(pe);
@@ -74,7 +75,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		String className = clazz.getName();
 
-		if (allowedServices.contains(className)) {
+		if (allowedServiceSignatures.contains(className)) {
 			return;
 		}
 
@@ -83,11 +84,11 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 		String classNameAndMethodName = className.concat(
 			StringPool.POUND).concat(methodName);
 
-		if (allowedServices.contains(classNameAndMethodName)) {
+		if (allowedServiceSignatures.contains(classNameAndMethodName)) {
 			return;
 		}
 
-		for (String allowedService : allowedServices) {
+		for (String allowedService : allowedServiceSignatures) {
 			if (matches(className, methodName, allowedService)) {
 				return;
 			}
@@ -98,19 +99,19 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 	}
 
 	protected boolean matches(
-		String className, String methodName, String allowedService) {
+		String className, String methodName, String allowedServiceSignature) {
 
 		String allowedClassName = null;
 		String allowedMethodName = null;
 
-		int index = allowedService.indexOf(CharPool.POUND);
+		int index = allowedServiceSignature.indexOf(CharPool.POUND);
 
 		if (index > -1) {
-			allowedClassName = allowedService.substring(0, index);
-			allowedMethodName = allowedService.substring(index + 1);
+			allowedClassName = allowedServiceSignature.substring(0, index);
+			allowedMethodName = allowedServiceSignature.substring(index + 1);
 		}
 		else {
-			allowedClassName = allowedService;
+			allowedClassName = allowedServiceSignature;
 		}
 
 		boolean wildcardMatchClass = false;
