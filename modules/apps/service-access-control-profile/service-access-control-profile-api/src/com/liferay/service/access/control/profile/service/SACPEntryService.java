@@ -48,7 +48,7 @@ public interface SACPEntryService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link SACPEntryServiceUtil} to access the s a c p entry remote service. Add custom service methods to {@link com.liferay.service.access.control.profile.service.impl.SACPEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
-		java.lang.String allowedServices, java.lang.String name,
+		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws PortalException;
@@ -95,7 +95,7 @@ public interface SACPEntryService extends BaseService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
-		long sacpEntryId, java.lang.String allowedServices,
+		long sacpEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
