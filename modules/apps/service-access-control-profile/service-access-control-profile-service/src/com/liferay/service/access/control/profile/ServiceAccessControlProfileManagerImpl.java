@@ -50,7 +50,7 @@ public class ServiceAccessControlProfileManagerImpl
 	public List<ServiceAccessControlProfile> getServiceAccessControlProfiles(
 		long companyId, int start, int end) {
 
-		return toServiceAccessControlProfile(
+		return toServiceAccessControlProfiles(
 			_sacpEntryService.getCompanySACPEntries(companyId, start, end));
 	}
 
@@ -64,7 +64,7 @@ public class ServiceAccessControlProfileManagerImpl
 		_sacpEntryService = sacpEntryService;
 	}
 
-	protected List<ServiceAccessControlProfile> toServiceAccessControlProfile(
+	protected List<ServiceAccessControlProfile> toServiceAccessControlProfiles(
 		List<SACPEntry> sacpEntries) {
 
 		if (sacpEntries == null) {

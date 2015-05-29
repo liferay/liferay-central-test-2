@@ -46,11 +46,11 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			AccessControlled accessControlled)
 		throws SecurityException {
 
-		List<String> serviceAccessProfileNames =
+		List<String> serviceAccessControlProfileNames =
 			ServiceAccessControlProfileThreadLocal.
 				getActiveServiceAccessControlProfileNames();
 
-		if (serviceAccessProfileNames == null) {
+		if (serviceAccessControlProfileNames == null) {
 			return;
 		}
 
@@ -58,7 +58,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		Set<String> allowedServices = new HashSet<>();
 
-		for (String name : serviceAccessProfileNames) {
+		for (String name : serviceAccessControlProfileNames) {
 			try {
 				SACPEntry sacpEntry = _sacpEntryLocalService.getSACPEntry(
 					companyId, name);
@@ -70,18 +70,20 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			}
 		}
 
-		Class<?> declaringClass = method.getDeclaringClass();
-		String className = declaringClass.getName();
-		String methodName = method.getName();
+		Class<?> clazz = method.getDeclaringClass();
 
-		String classAndMethod = className.concat(
-			StringPool.POUND).concat(methodName);
+		String className = clazz.getName();
 
-		if (allowedServices.contains(classAndMethod)) {
+		if (allowedServices.contains(className)) {
 			return;
 		}
 
-		if (allowedServices.contains(className)) {
+		String methodName = method.getName();
+
+		String classNameAndMethodName = className.concat(
+			StringPool.POUND).concat(methodName);
+
+		if (allowedServices.contains(classNameAndMethodName)) {
 			return;
 		}
 
@@ -91,7 +93,8 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			}
 		}
 
-		throw new SecurityException("Access denied to " + classAndMethod);
+		throw new SecurityException(
+			"Access denied to " + classNameAndMethodName);
 	}
 
 	protected boolean matches(
@@ -100,11 +103,11 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 		String allowedClass = null;
 		String allowedMethod = null;
 
-		int idx = allowedService.indexOf(CharPool.POUND);
+		int index = allowedService.indexOf(CharPool.POUND);
 
-		if (idx > -1) {
-			allowedClass = allowedService.substring(0, idx);
-			allowedMethod = allowedService.substring(idx + 1);
+		if (index > -1) {
+			allowedClass = allowedService.substring(0, index);
+			allowedMethod = allowedService.substring(index + 1);
 		}
 		else {
 			allowedClass = allowedService;
