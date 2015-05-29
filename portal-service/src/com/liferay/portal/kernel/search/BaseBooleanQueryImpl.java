@@ -85,14 +85,14 @@ public abstract class BaseBooleanQueryImpl
 		for (String field : fields) {
 			List<String> valuesList = termFieldsValuesMap.get(field);
 
-			List<Query> queryList = new ArrayList<>(valuesList.size());
+			List<Query> queriesList = new ArrayList<>(valuesList.size());
 
-			queries.put(field, queryList);
+			queries.put(field, queriesList);
 
 			for (String value : valuesList) {
 				Query query = addTerm(field, value);
 
-				queryList.add(query);
+				queriesList.add(query);
 			}
 		}
 

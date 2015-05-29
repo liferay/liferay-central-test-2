@@ -368,12 +368,12 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	public Collection<Query> addTerm(
 		String field, String value, boolean like, boolean parseKeywords) {
 
+		List<Query> queries = new ArrayList<>();
+
 		if (like) {
 			value = StringUtil.replace(
 				value, StringPool.PERCENT, StringPool.BLANK);
 		}
-
-		List<Query> queries = new ArrayList<>();
 
 		if (parseKeywords) {
 			String[] keywords = parseKeywords(value);
