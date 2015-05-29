@@ -29,11 +29,11 @@ import java.util.List;
 public class SACPEntryImpl extends SACPEntryBaseImpl {
 
 	@Override
-	public List<String> getAllowedServicesList() {
-		String[] allowedServices = StringUtil.split(
-			getAllowedServices(), StringPool.NEW_LINE);
+	public List<String> getAllowedServiceSignaturesList() {
+		String[] allowedServiceSignatures = StringUtil.split(
+			getAllowedServiceSignatures(), StringPool.NEW_LINE);
 
-		return ListUtil.toList(allowedServices);
+		return ListUtil.toList(allowedServiceSignatures);
 	}
 
 }

@@ -31,8 +31,8 @@ public class ServiceAccessControlProfileImpl
 	}
 
 	@Override
-	public List<String> getAllowedServicesList() {
-		return _sacpEntry.getAllowedServicesList();
+	public List<String> getAllowedServiceSignaturesList() {
+		return _sacpEntry.getAllowedServiceSignaturesList();
 	}
 
 	@Override

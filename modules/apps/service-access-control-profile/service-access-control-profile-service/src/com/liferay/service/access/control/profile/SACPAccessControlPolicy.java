@@ -63,7 +63,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 				SACPEntry sacpEntry = _sacpEntryLocalService.getSACPEntry(
 					companyId, name);
 
-				allowedServices.addAll(sacpEntry.getAllowedServicesList());
+				allowedServices.addAll(sacpEntry.getAllowedServiceSignaturesList());
 			}
 			catch (PortalException pe) {
 				throw new SecurityException(pe);

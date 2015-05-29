@@ -22,7 +22,7 @@ import java.util.Locale;
  */
 public interface ServiceAccessControlProfile {
 
-	public List<String> getAllowedServicesList();
+	public List<String> getAllowedServiceSignaturesList();
 
 	public String getName();
 
