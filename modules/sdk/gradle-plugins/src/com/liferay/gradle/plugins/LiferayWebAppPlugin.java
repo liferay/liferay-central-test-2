@@ -31,7 +31,6 @@ import com.liferay.gradle.util.Validator;
 import groovy.lang.Closure;
 
 import java.io.File;
-
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.Callable;
@@ -305,6 +304,7 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 		}
 	}
 
+	@Override
 	protected void configureTaskBuildXSDInputDir(BuildXSDTask buildXSDTask) {
 		File inputDir = new File(
 			getWebAppDir(buildXSDTask.getProject()), "WEB-INF/xsd");

@@ -551,6 +551,7 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 		directDeployTask.setWebAppFile(warFile);
 	}
 
+	@Override
 	protected void configureTaskBuildCssRootDirs(BuildCssTask buildCssTask) {
 		FileCollection rootDirs = buildCssTask.getRootDirs();
 
@@ -592,6 +593,7 @@ public class LiferayOSGiPlugin extends LiferayJavaPlugin {
 		buildServiceTask.setSpringNamespaces(new String[] {"beans", "osgi"});
 	}
 
+	@Override
 	protected void configureTaskBuildXSD(Project project) {
 		Zip zip = (Zip)GradleUtil.getTask(
 			project, XSDBuilderPlugin.BUILD_XSD_TASK_NAME);
