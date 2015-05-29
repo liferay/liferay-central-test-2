@@ -824,12 +824,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathApplet(contextPath.concat("/applets"));
 		themeDisplay.setPathCms(contextPath.concat("/cms"));
 		themeDisplay.setPathContext(contextPath);
-		themeDisplay.setPathFlash(contextPath.concat("/flash"));
-		themeDisplay.setPathFriendlyURLPrivateGroup(
-			friendlyURLPrivateGroupPath);
-		themeDisplay.setPathFriendlyURLPrivateUser(friendlyURLPrivateUserPath);
-		themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
-		themeDisplay.setPathImage(imagePath);
 
 		PortalWebResources portalWebResources =
 			PortalWebResourcesUtil.getPortalWebResources(
@@ -842,6 +836,13 @@ public class ServicePreAction extends Action {
 			themeDisplay.setPathEditors(
 				portalWebResources.getContextPath() + "/html");
 		}
+
+		themeDisplay.setPathFlash(contextPath.concat("/flash"));
+		themeDisplay.setPathFriendlyURLPrivateGroup(
+			friendlyURLPrivateGroupPath);
+		themeDisplay.setPathFriendlyURLPrivateUser(friendlyURLPrivateUserPath);
+		themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
+		themeDisplay.setPathImage(imagePath);
 
 		String javaScriptPath = PortalWebResourcesUtil.getContextPath(
 			PortalWebResourceConstants.RESOURCE_TYPE_JS);
