@@ -39,7 +39,8 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 
 	@Override
 	public SACPEntry addSACPEntry(
-			String allowedServices, String name, Map<Locale, String> titleMap,
+			String allowedServiceSignatures, String name,
+			Map<Locale, String> titleMap,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -48,7 +49,8 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 			SACPActionKeys.ACTION_ADD_SACP_ENTRY);
 
 		return sacpEntryLocalService.addSACPEntry(
-			getUserId(), allowedServices, name, titleMap, serviceContext);
+			getUserId(), allowedServiceSignatures, name, titleMap,
+			serviceContext);
 	}
 
 	@Override
@@ -112,7 +114,7 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 
 	@Override
 	public SACPEntry updateSACPEntry(
-			long sacpEntryId, String allowedServices, String name,
+			long sacpEntryId, String allowedServiceSignatures, String name,
 			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -120,7 +122,8 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 			getPermissionChecker(), sacpEntryId, ActionKeys.UPDATE);
 
 		return sacpEntryLocalService.updateSACPEntry(
-			sacpEntryId, allowedServices, name, titleMap, serviceContext);
+			sacpEntryId, allowedServiceSignatures, name, titleMap,
+			serviceContext);
 	}
 
 }
