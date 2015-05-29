@@ -145,9 +145,8 @@ public class DefaultDDMStructureUtil {
 				ddmStructure.getStructureId(), ddmStructure.getClassNameId(),
 				null, nameMap, null, DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY,
 				DDMTemplateConstants.TEMPLATE_MODE_CREATE,
-				TemplateConstants.LANG_TYPE_FTL, script,
-				cacheable, false, StringPool.BLANK, null,
-				serviceContext);
+				TemplateConstants.LANG_TYPE_FTL, script, cacheable, false,
+				StringPool.BLANK, null, serviceContext);
 		}
 	}
 
