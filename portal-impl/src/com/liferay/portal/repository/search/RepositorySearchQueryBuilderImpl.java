@@ -79,7 +79,8 @@ public class RepositorySearchQueryBuilderImpl
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			BooleanClause[] booleanClauses = searchContext.getBooleanClauses();
+			BooleanClause<Query>[] booleanClauses =
+				searchContext.getBooleanClauses();
 
 			if (booleanClauses != null) {
 				for (BooleanClause<Query> booleanClause : booleanClauses) {
