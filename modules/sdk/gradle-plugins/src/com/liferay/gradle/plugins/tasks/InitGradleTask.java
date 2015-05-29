@@ -552,10 +552,6 @@ public class InitGradleTask extends DefaultTask {
 		return sb.toString();
 	}
 
-	protected String wrapProperty(int indentCount, String name, String value) {
-		return wrapProperty(indentCount, name, true, value);
-	}
-
 	protected String wrapProperty(
 		int indentCount, String name, boolean quoteValue, String value) {
 
@@ -579,6 +575,10 @@ public class InitGradleTask extends DefaultTask {
 		}
 
 		return sb.toString();
+	}
+
+	protected String wrapProperty(int indentCount, String name, String value) {
+		return wrapProperty(indentCount, name, true, value);
 	}
 
 	protected String wrapPropertyFile(String name, String value) {
