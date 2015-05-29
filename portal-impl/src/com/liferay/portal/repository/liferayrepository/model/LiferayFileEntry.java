@@ -594,7 +594,8 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		}
 		catch (PortalException pe) {
 			throw new SystemException(
-				"Cannot get repository for file entry " + getFileEntryId(), pe);
+				"Unable to get repository for file entry " + getFileEntryId(),
+				pe);
 		}
 	}
 

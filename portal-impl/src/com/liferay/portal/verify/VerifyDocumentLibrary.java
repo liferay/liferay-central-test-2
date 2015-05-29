@@ -405,9 +405,6 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 			return;
 		}
 
-		DLFileVersionVersionComparator comparator =
-			new DLFileVersionVersionComparator();
-
 		List<DLFileVersion> dlFileVersions = dlFileEntry.getFileVersions(
 			WorkflowConstants.STATUS_APPROVED);
 
@@ -424,7 +421,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		dlFileVersions = ListUtil.copy(dlFileVersions);
 
-		Collections.sort(dlFileVersions, comparator);
+		Collections.sort(dlFileVersions, new DLFileVersionVersionComparator());
 
 		DLFileVersion dlFileVersion = dlFileVersions.get(0);
 
