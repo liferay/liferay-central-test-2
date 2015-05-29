@@ -132,11 +132,11 @@ public class InitGradleTask extends DefaultTask {
 				boolean transitive = true;
 
 				if (Validator.isNotNull(conf)) {
-					if (conf.equals("internal->master")) {
-						optional = true;
-					}
-					else if (conf.equals("default->master")) {
+					if (conf.equals("default->master")) {
 						transitive = false;
+					}
+					else if (conf.equals("internal->master")) {
+						optional = true;
 					}
 				}
 
