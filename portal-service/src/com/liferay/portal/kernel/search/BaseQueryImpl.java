@@ -45,7 +45,7 @@ public abstract class BaseQueryImpl implements Query {
 
 	@Override
 	public boolean isDefaultBoost() {
-		if (_boost == DEFAULT_BOOST) {
+		if (_boost == BOOST_DEFAULT) {
 			return true;
 		}
 
@@ -62,7 +62,7 @@ public abstract class BaseQueryImpl implements Query {
 		_queryConfig = queryConfig;
 	}
 
-	private float _boost = DEFAULT_BOOST;
+	private float _boost = BOOST_DEFAULT;
 	private QueryConfig _queryConfig;
 
 }
