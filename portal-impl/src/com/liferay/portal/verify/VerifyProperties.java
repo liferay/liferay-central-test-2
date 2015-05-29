@@ -495,14 +495,6 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.security.auth"
 		},
 
-		// Request Header
-
-		new String[] {
-			"request.header.auth.hosts.allowed",
-			"request.header.auth.hosts.allowed",
-			"com.liferay.portal.security.auth"
-		},
-
 		// Bookmarks
 
 		new String[] {
@@ -1092,6 +1084,14 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"polls.publish.to.live.by.default", "publish.to.live.by.default",
 			"com.liferay.polls.service"
+		},
+
+		// Request Header
+
+		new String[] {
+			"request.header.auth.hosts.allowed",
+			"request.header.auth.hosts.allowed",
+			"com.liferay.portal.security.auth"
 		},
 
 		// RSS
