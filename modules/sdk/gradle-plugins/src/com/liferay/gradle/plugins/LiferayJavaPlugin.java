@@ -939,8 +939,8 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 
 			super(null);
 
-			_configurationNames = configurationNames;
 			_project = project;
+			_configurationNames = configurationNames;
 		}
 
 		public String doCall(String name) {
