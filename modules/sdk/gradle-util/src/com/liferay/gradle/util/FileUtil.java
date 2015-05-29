@@ -53,9 +53,11 @@ public class FileUtil {
 
 	public static boolean isChild(File file, File parentFile) {
 		Path path = file.toPath();
-		Path parentPath = parentFile.toPath();
 
 		path = path.toAbsolutePath();
+
+		Path parentPath = parentFile.toPath();
+
 		parentPath = parentPath.toAbsolutePath();
 
 		if (path.startsWith(parentPath)) {
