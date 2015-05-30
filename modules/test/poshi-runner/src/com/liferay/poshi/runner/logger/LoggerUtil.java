@@ -47,35 +47,35 @@ public final class LoggerUtil {
 			return;
 		}
 
-		StringBuilder defaultAttr = new StringBuilder();
+		StringBuilder parentSB = new StringBuilder();
 
-		defaultAttr.append("{");
-		defaultAttr.append("cssClass : '");
-		defaultAttr.append(
+		parentSB.append("{");
+		parentSB.append("cssClass : '");
+		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(
 				childLoggerElement.getClassName()));
-		defaultAttr.append("',");
-		defaultAttr.append("id : '");
-		defaultAttr.append(
+		parentSB.append("',");
+		parentSB.append("id : '");
+		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(childLoggerElement.getID()));
-		defaultAttr.append("',");
-		defaultAttr.append("innerHTML : '");
-		defaultAttr.append(
+		parentSB.append("',");
+		parentSB.append("innerHTML : '");
+		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(childLoggerElement.getText()));
-		defaultAttr.append("',");
-		defaultAttr.append("name : '");
-		defaultAttr.append(
+		parentSB.append("',");
+		parentSB.append("name : '");
+		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(childLoggerElement.getName()));
-		defaultAttr.append("',");
-		defaultAttr.append("parentId : '");
-		defaultAttr.append(
+		parentSB.append("',");
+		parentSB.append("parentId : '");
+		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(parentLoggerElement.getID()));
-		defaultAttr.append("'");
-		defaultAttr.append("}");
+		parentSB.append("'");
+		parentSB.append("}");
 
-		StringBuilder extraAttr = new StringBuilder();
+		StringBuilder childSB = new StringBuilder();
 
-		extraAttr.append("{");
+		childSB.append("{");
 
 		List<String> attributeNames = childLoggerElement.getAttributeNames();
 
@@ -89,19 +89,19 @@ public final class LoggerUtil {
 			String escapedAttributeValue = StringEscapeUtils.escapeEcmaScript(
 				childLoggerElement.getAttributeValue(attributeName));
 
-			extraAttr.append(
+			childSB.append(
 				"'" + escapedAttributeName + "' : '" + escapedAttributeValue +
 					"'");
 
 			if (iterator.hasNext()) {
-				extraAttr.append(",");
+				childSB.append(",");
 			}
 		}
 
-		extraAttr.append("}");
+		childSB.append("}");
 
 		_javascriptExecutor.executeScript(
-			"addChildLoggerElement(" + defaultAttr + ", " + extraAttr + ");");
+			"addChildLoggerElement(" + parentSB + ", " + childSB + ");");
 	}
 
 	public static void executeJavaScript(String script) {
