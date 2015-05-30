@@ -24,8 +24,6 @@ import java.util.TimeZone;
  */
 public class DateRangeTermFilter extends RangeTermFilter {
 
-	public static final String DATE_FORMAT_DEFAULT = "yyyyMMddHHmmss";
-
 	public DateRangeTermFilter(
 		String fieldName, boolean includesLower, boolean includesUpper,
 		String startDate, String endDate) {
@@ -69,7 +67,7 @@ public class DateRangeTermFilter extends RangeTermFilter {
 		return sb.toString();
 	}
 
-	private String _dateFormat = DATE_FORMAT_DEFAULT;
+	private String _dateFormat = "yyyyMMddHHmmss";
 	private TimeZone _timeZone = TimeZoneUtil.getDefault();
 
 }

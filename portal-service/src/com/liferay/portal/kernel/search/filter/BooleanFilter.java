@@ -220,9 +220,14 @@ public class BooleanFilter extends BaseFilter {
 	}
 
 	public boolean hasClauses() {
-		return (!_mustBooleanClauses.isEmpty() ||
+		if (!_mustBooleanClauses.isEmpty() ||
 			!_mustNotBooleanClauses.isEmpty() ||
-			!_shouldBooleanClauses.isEmpty());
+			!_shouldBooleanClauses.isEmpty()) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -236,7 +241,6 @@ public class BooleanFilter extends BaseFilter {
 		sb.append("), SHOULD(");
 		sb.append(getBooleanClauseString(_shouldBooleanClauses));
 		sb.append("), ");
-
 		sb.append(super.toString());
 		sb.append("}");
 

@@ -43,14 +43,12 @@ public abstract class BaseFilter implements Filter {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("(");
-		sb.append("executionOption=");
-		sb.append(_executionOption);
-		sb.append(", ");
-		sb.append("cached=");
+		sb.append("(cached=");
 		sb.append(_cached);
+		sb.append(", executionOption=");
+		sb.append(_executionOption);
 		sb.append(")");
 
 		return sb.toString();
