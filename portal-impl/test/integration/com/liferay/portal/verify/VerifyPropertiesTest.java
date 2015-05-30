@@ -53,7 +53,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 			ReflectionTestUtil.getFieldValue(
 				VerifyProperties.class, "_MIGRATED_PORTAL_KEYS");
 
-		String migratedPortalKey = getFirstExistPortalPropertyName();
+		String migratedPortalKey = getFirstPortalPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_MIGRATED_PORTAL_KEYS",
@@ -93,7 +93,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 			ReflectionTestUtil.getFieldValue(
 				VerifyProperties.class, "_MIGRATED_SYSTEM_KEYS");
 
-		String migratedSystemKey = getFirstExistSystemPropertyName();
+		String migratedSystemKey = getFirstSystemPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_MIGRATED_SYSTEM_KEYS",
@@ -133,7 +133,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 			ReflectionTestUtil.getFieldValue(
 				VerifyProperties.class, "_MODULARIZED_PORTAL_KEYS");
 
-		String modularizedPortalKey = getFirstExistPortalPropertyName();
+		String modularizedPortalKey = getFirstPortalPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_MODULARIZED_PORTAL_KEYS",
@@ -175,7 +175,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 		String[] originalObsoletePortalKeys = ReflectionTestUtil.getFieldValue(
 			VerifyProperties.class, "_OBSOLETE_PORTAL_KEYS");
 
-		String obsoletePortalKey = getFirstExistPortalPropertyName();
+		String obsoletePortalKey = getFirstPortalPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_OBSOLETE_PORTAL_KEYS",
@@ -211,7 +211,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 		String[] originalObsoleteSystemKeys = ReflectionTestUtil.getFieldValue(
 			VerifyProperties.class, "_OBSOLETE_SYSTEM_KEYS");
 
-		String obsoleteSystemKey = getFirstExistSystemPropertyName();
+		String obsoleteSystemKey = getFirstSystemPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_OBSOLETE_SYSTEM_KEYS",
@@ -247,7 +247,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 		String[][] originalRenamedPortalKeys = ReflectionTestUtil.getFieldValue(
 			VerifyProperties.class, "_RENAMED_PORTAL_KEYS");
 
-		String renamedPortalKey = getFirstExistPortalPropertyName();
+		String renamedPortalKey = getFirstPortalPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_RENAMED_PORTAL_KEYS",
@@ -283,7 +283,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 		String[][] originalRenamedSystemKeys = ReflectionTestUtil.getFieldValue(
 			VerifyProperties.class, "_RENAMED_SYSTEM_KEYS");
 
-		String renamedSystemKey = getFirstExistSystemPropertyName();
+		String renamedSystemKey = getFirstSystemPropertyKey();
 
 		ReflectionTestUtil.setFieldValue(
 			VerifyProperties.class, "_RENAMED_SYSTEM_KEYS",
@@ -330,7 +330,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 		}
 	}
 
-	protected String getFirstExistPortalPropertyName() {
+	protected String getFirstPortalPropertyKey() {
 		VerifyProperties verifyProperties = getVerifyProcess();
 
 		Properties portalProperties = verifyProperties.loadPortalProperties();
@@ -344,7 +344,7 @@ public class VerifyPropertiesTest extends BaseVerifyProcessTestCase {
 		return iterator.next();
 	}
 
-	protected String getFirstExistSystemPropertyName() {
+	protected String getFirstSystemPropertyKey() {
 		Properties systemProperties = SystemProperties.getProperties();
 
 		Set<String> propertyNames = systemProperties.stringPropertyNames();
