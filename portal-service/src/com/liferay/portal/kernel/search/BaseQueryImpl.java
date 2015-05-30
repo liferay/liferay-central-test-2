@@ -33,7 +33,7 @@ public abstract class BaseQueryImpl implements Query {
 	}
 
 	@Override
-	public BooleanFilter getPreFilter() {
+	public BooleanFilter getPreBooleanFilter() {
 		return _preFilter;
 	}
 
@@ -64,7 +64,7 @@ public abstract class BaseQueryImpl implements Query {
 	}
 
 	@Override
-	public void setPreFilter(BooleanFilter preFilter) {
+	public void setPreBooleanFilter(BooleanFilter preFilter) {
 		_preFilter = preFilter;
 	}
 

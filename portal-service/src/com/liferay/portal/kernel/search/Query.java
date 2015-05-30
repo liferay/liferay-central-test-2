@@ -30,7 +30,7 @@ public interface Query extends Serializable {
 
 	public float getBoost();
 
-	public BooleanFilter getPreFilter();
+	public BooleanFilter getPreBooleanFilter();
 
 	public QueryConfig getQueryConfig();
 
@@ -40,7 +40,7 @@ public interface Query extends Serializable {
 
 	public void setBoost(float boost);
 
-	public void setPreFilter(BooleanFilter preFilter);
+	public void setPreBooleanFilter(BooleanFilter preBooleanFilter);
 
 	public void setQueryConfig(QueryConfig queryConfig);
 
