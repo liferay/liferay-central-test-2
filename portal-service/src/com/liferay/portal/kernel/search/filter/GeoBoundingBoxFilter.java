@@ -22,12 +22,12 @@ import com.liferay.portal.kernel.search.geolocation.GeoLocationPoint;
 public class GeoBoundingBoxFilter extends BaseFilter {
 
 	public GeoBoundingBoxFilter(
-		String fieldName, GeoLocationPoint topLeft,
-		GeoLocationPoint bottomRight) {
+		String fieldName, GeoLocationPoint topLeftGeoLocationPoint,
+		GeoLocationPoint bottomRightGeoLocationPoint) {
 
 		_fieldName = fieldName;
-		_topLeft = topLeft;
-		_bottomRight = bottomRight;
+		_topLeftGeoLocationPoint = topLeftGeoLocationPoint;
+		_bottomRightGeoLocationPoint = bottomRightGeoLocationPoint;
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class GeoBoundingBoxFilter extends BaseFilter {
 		return filterVisitor.visit(this);
 	}
 
-	public GeoLocationPoint getBottomRight() {
-		return _bottomRight;
+	public GeoLocationPoint getBottomRightGeoLocationPoint() {
+		return _bottomRightGeoLocationPoint;
 	}
 
 	public String getFieldName() {
@@ -48,12 +48,12 @@ public class GeoBoundingBoxFilter extends BaseFilter {
 		return 120;
 	}
 
-	public GeoLocationPoint getTopLeft() {
-		return _topLeft;
+	public GeoLocationPoint getTopLeftGeoLocationPoint() {
+		return _topLeftGeoLocationPoint;
 	}
 
-	private final GeoLocationPoint _bottomRight;
+	private final GeoLocationPoint _bottomRightGeoLocationPoint;
 	private final String _fieldName;
-	private final GeoLocationPoint _topLeft;
+	private final GeoLocationPoint _topLeftGeoLocationPoint;
 
 }
