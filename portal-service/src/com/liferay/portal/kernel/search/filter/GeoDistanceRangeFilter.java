@@ -24,13 +24,13 @@ public class GeoDistanceRangeFilter extends RangeTermFilter {
 
 	public GeoDistanceRangeFilter(
 		String fieldName, boolean includesLower, boolean includesUpper,
-		GeoDistance lowerBoundGeoDistance, GeoLocationPoint pinLocation,
+		GeoDistance lowerBoundGeoDistance, GeoLocationPoint pinGeoLocationPoint,
 		GeoDistance upperBoundGeoDistance) {
 
 		super(fieldName, includesLower, includesUpper);
 
 		_lowerBoundGeoDistance = lowerBoundGeoDistance;
-		_pinLocation = pinLocation;
+		_pinGeoLocationPoint = pinGeoLocationPoint;
 		_upperBoundGeoDistance = upperBoundGeoDistance;
 	}
 
@@ -43,8 +43,8 @@ public class GeoDistanceRangeFilter extends RangeTermFilter {
 		return _lowerBoundGeoDistance;
 	}
 
-	public GeoLocationPoint getPinLocation() {
-		return _pinLocation;
+	public GeoLocationPoint getPinGeoLocationPoint() {
+		return _pinGeoLocationPoint;
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class GeoDistanceRangeFilter extends RangeTermFilter {
 	}
 
 	private final GeoDistance _lowerBoundGeoDistance;
-	private final GeoLocationPoint _pinLocation;
+	private final GeoLocationPoint _pinGeoLocationPoint;
 	private final GeoDistance _upperBoundGeoDistance;
 
 }
