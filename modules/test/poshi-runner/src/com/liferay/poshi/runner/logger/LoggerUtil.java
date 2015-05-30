@@ -50,24 +50,24 @@ public final class LoggerUtil {
 		StringBuilder parentSB = new StringBuilder();
 
 		parentSB.append("{");
-		parentSB.append("cssClass : '");
+		parentSB.append("cssClass: '");
 		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(
 				childLoggerElement.getClassName()));
-		parentSB.append("',");
-		parentSB.append("id : '");
+		parentSB.append("', ");
+		parentSB.append("id: '");
 		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(childLoggerElement.getID()));
-		parentSB.append("',");
-		parentSB.append("innerHTML : '");
+		parentSB.append("', ");
+		parentSB.append("innerHTML: '");
 		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(childLoggerElement.getText()));
-		parentSB.append("',");
-		parentSB.append("name : '");
+		parentSB.append("', ");
+		parentSB.append("name: '");
 		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(childLoggerElement.getName()));
-		parentSB.append("',");
-		parentSB.append("parentId : '");
+		parentSB.append("', ");
+		parentSB.append("parentId: '");
 		parentSB.append(
 			StringEscapeUtils.escapeEcmaScript(parentLoggerElement.getID()));
 		parentSB.append("'");
@@ -90,11 +90,11 @@ public final class LoggerUtil {
 				childLoggerElement.getAttributeValue(attributeName));
 
 			childSB.append(
-				"'" + escapedAttributeName + "' : '" + escapedAttributeValue +
+				"'" + escapedAttributeName + "': '" + escapedAttributeValue +
 					"'");
 
 			if (iterator.hasNext()) {
-				childSB.append(",");
+				childSB.append(", ");
 			}
 		}
 
