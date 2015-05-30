@@ -57,15 +57,15 @@ public class GeoLocationPoint {
 
 	@Override
 	public int hashCode() {
-		long temp = Double.doubleToLongBits(_latitude);
+		long value = Double.doubleToLongBits(_latitude);
 
-		int result = (int) (temp ^ (temp >>> 32));
+		int hashCode = (int) (value ^ (value >>> 32));
 
-		temp = Double.doubleToLongBits(_longitude);
+		value = Double.doubleToLongBits(_longitude);
 
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		hashCode = 31 * hashCode + (int) (value ^ (value >>> 32));
 
-		return result;
+		return hashCode;
 	}
 
 	private final double _latitude;
