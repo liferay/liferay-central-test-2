@@ -100,7 +100,7 @@ public class RangeTermFilter extends BaseFilter {
 		sb.append(_lowerBoundOperator);
 		sb.append(_fieldName);
 		sb.append(_upperBoundOperator);
-		sb.append(_lowerBound);
+		sb.append(_upperBound);
 		sb.append("), ");
 		sb.append(super.toString());
 		sb.append("}");
