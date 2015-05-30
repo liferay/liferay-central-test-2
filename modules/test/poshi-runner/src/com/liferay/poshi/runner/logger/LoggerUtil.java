@@ -283,18 +283,18 @@ public final class LoggerUtil {
 			FileUtil.write(
 				_CURRENT_DIR + "/test-results/css/main.css", mainCSSContent);
 
-			String mainJSContent = _readResource(
-				"META-INF/resources/js/main.js");
-
-			FileUtil.write(
-				_CURRENT_DIR + "/test-results/js/main.js", mainJSContent);
-
 			String componentJSContent = _readResource(
 				"META-INF/resources/js/component.js");
 
 			FileUtil.write(
 				_CURRENT_DIR + "/test-results/js/component.js",
 				componentJSContent);
+
+			String mainJSContent = _readResource(
+				"META-INF/resources/js/main.js");
+
+			FileUtil.write(
+				_CURRENT_DIR + "/test-results/js/main.js", mainJSContent);
 		}
 
 		String htmlContent = _readResource(
