@@ -114,19 +114,18 @@ public class RangeTermFilter extends BaseFilter {
 
 		@Override
 		public String toString() {
-			if (name().equals(GT.name())) {
+			String name = name();
+
+			if (name.equals(GT.name())) {
 				return StringPool.GREATER_THAN;
 			}
-
-			if (name().equals(GTE.name())) {
+			else if (name.equals(GTE.name())) {
 				return StringPool.GREATER_THAN_OR_EQUAL;
 			}
-
-			if (name().equals(LT.name())) {
+			else if (name.equals(LT.name())) {
 				return StringPool.LESS_THAN;
 			}
-
-			if (name().equals(LTE.name())) {
+			else if (name.equals(LTE.name())) {
 				return StringPool.GREATER_THAN_OR_EQUAL;
 			}
 
