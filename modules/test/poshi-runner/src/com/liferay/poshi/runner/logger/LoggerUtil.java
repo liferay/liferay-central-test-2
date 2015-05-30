@@ -248,17 +248,6 @@ public final class LoggerUtil {
 		FileUtil.write(
 			_CURRENT_DIR + "/test-results/css/main.css", mainCSSContent);
 
-		String mainJSContent = _readResource("META-INF/resources/js/main.js");
-
-		FileUtil.write(
-			_CURRENT_DIR + "/test-results/js/main.js", mainJSContent);
-
-		String componentJSContent = _readResource(
-			"META-INF/resources/js/component.js");
-
-		FileUtil.write(
-			_CURRENT_DIR + "/test-results/js/component.js", componentJSContent);
-
 		String htmlContent = _readResource(
 			"META-INF/resources/html/index.html");
 
@@ -271,6 +260,17 @@ public final class LoggerUtil {
 			XMLLoggerHandler.getXMLLogText());
 
 		FileUtil.write(_getHtmlFilePath(), htmlContent);
+
+		String mainJSContent = _readResource("META-INF/resources/js/main.js");
+
+		FileUtil.write(
+			_CURRENT_DIR + "/test-results/js/main.js", mainJSContent);
+
+		String componentJSContent = _readResource(
+			"META-INF/resources/js/component.js");
+
+		FileUtil.write(
+			_CURRENT_DIR + "/test-results/js/component.js", componentJSContent);
 
 		_webDriver.get("file://" + _getHtmlFilePath());
 	}
