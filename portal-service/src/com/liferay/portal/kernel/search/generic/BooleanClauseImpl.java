@@ -50,14 +50,13 @@ public class BooleanClauseImpl<T> implements BooleanClause<T> {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{");
 		sb.append(_booleanClauseOccur);
 		sb.append("(");
 		sb.append(_t);
-		sb.append(")");
-		sb.append("}");
+		sb.append(")}");
 
 		return sb.toString();
 	}
