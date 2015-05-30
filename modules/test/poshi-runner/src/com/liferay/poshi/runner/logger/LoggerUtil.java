@@ -313,11 +313,11 @@ public final class LoggerUtil {
 				"<link href=\"" + sb.toString() + "/css/.sass-cache/" +
 					"main.css\"");
 			htmlContent = StringUtil.replace(
-				htmlContent, "<script src=\"../js/main.js\"",
-				"<script src=\"" + sb.toString() + "/js/main.js\"");
-			htmlContent = StringUtil.replace(
 				htmlContent, "<script src=\"../js/component.js\"",
 				"<script src=\"" + sb.toString() + "/js/component.js\"");
+			htmlContent = StringUtil.replace(
+				htmlContent, "<script src=\"../js/main.js\"",
+				"<script src=\"" + sb.toString() + "/js/main.js\"");
 		}
 
 		FileUtil.write(_getHtmlFilePath(), htmlContent);
