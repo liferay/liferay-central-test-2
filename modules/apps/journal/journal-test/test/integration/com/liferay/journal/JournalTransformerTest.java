@@ -45,6 +45,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -165,9 +166,9 @@ public class JournalTransformerTest {
 		Assert.assertEquals("Joe Bloggs", content);
 	}
 
+	@Ignore
 	@Test
 	public void testRegexTransformerListener() throws Exception {
-		/*
 		Map<String, String> tokens = getTokens();
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
@@ -182,7 +183,6 @@ public class JournalTransformerTest {
 
 		Assert.assertEquals(
 			"Hello Joe Bloggs, Welcome to production.sample.com.", content);
-		*/
 	}
 
 	@Test
