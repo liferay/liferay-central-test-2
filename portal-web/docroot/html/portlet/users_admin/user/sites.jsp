@@ -107,10 +107,6 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "sites"
 
 		var searchContainerContentBox = searchContainer.get('contentBox');
 
-		<%
-		String eventName = liferayPortletResponse.getNamespace() + "selectSite";
-		%>
-
 		var handleOnSelect = A.one('#<portlet:namespace />selectSiteLink').on(
 			'click',
 			function(event) {
@@ -120,16 +116,22 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "sites"
 							constrain: true,
 							modal: true
 						},
+
+						<%
+						String eventName = liferayPortletResponse.getNamespace() + "selectSite";
+						%>
+
 						id: '<%= eventName %>',
+
 						title: '<liferay-ui:message arguments="site" key="select-x" />',
 
 						<%
 						PortletURL groupSelectorURL = PortletProviderUtil.getPortletURL(request, Group.class.getName(), PortletProvider.Action.BROWSE);
 
 						groupSelectorURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
-						groupSelectorURL.setParameter("eventName", eventName);
 						groupSelectorURL.setParameter("includeCurrentGroup", Boolean.FALSE.toString());
 						groupSelectorURL.setParameter("manualMembership", Boolean.TRUE.toString());
+						groupSelectorURL.setParameter("eventName", eventName);
 						groupSelectorURL.setWindowState(LiferayWindowState.POP_UP);
 						%>
 
