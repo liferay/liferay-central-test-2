@@ -2,9 +2,9 @@
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 	<info organisation="com.liferay"
 		module="com.liferay.portal.tools.wsdd.builder"
-		revision="1.0.0"
+		revision="1.0.1"
 		status="release"
-		publication="20150430105530"
+		publication="20150601145202"
 	>
 		<license name="LGPL 2.1" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" />
 		<description homepage="">
@@ -25,11 +25,11 @@
 	</configurations>
 	<publications>
 		<artifact name="com.liferay.portal.tools.wsdd.builder" type="jar" ext="jar" conf="master"/>
-		<artifact name="com.liferay.portal.tools.wsdd.builder" type="source" ext="jar" conf="sources" m:classifier="sources"/>
+		<artifact name="com.liferay.portal.tools.wsdd.builder" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc"/>
 	</publications>
 	<dependencies>
 		<dependency org="javax.activation" name="activation" rev="1.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
-		<dependency org="org.apache.ant" name="ant" rev="1.9.3" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="org.apache.ant" name="ant" rev="1.9.4" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.apache.axis" name="axis-ant" rev="1.4" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.apache.axis" name="axis-jaxrpc" rev="1.4" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.apache.axis" name="axis-saaj" rev="1.4" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
@@ -40,5 +40,6 @@
 		<dependency org="log4j" name="log4j" rev="1.2.17" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="javax.mail" name="mail" rev="1.4" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="com.liferay" name="org.apache.axis" rev="1.4.LIFERAY-PATCHED-1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="org.apache.maven" name="maven-plugin-api" rev="3.0.4" force="true" conf="provided->compile(*),provided(*),runtime(*),master(*)"/>
 	</dependencies>
 </ivy-module>
