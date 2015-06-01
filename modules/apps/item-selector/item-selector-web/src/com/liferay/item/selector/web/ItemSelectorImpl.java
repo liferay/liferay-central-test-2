@@ -318,7 +318,7 @@ public class ItemSelectorImpl implements ItemSelector {
 			itemSelectorCriterionClass.getName());
 	}
 
-	private void populateItemSelectorCriteria(
+	protected void populateItemSelectorCriteria(
 		Map<String, String[]> parameters,
 		ItemSelectorCriterion[] itemSelectorCriteria) {
 
