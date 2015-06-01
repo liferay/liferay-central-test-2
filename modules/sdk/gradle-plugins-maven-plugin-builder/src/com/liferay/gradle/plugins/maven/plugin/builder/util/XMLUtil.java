@@ -36,13 +36,13 @@ public class XMLUtil {
 	public static void appendElement(
 		Document document, Element parentElement, String name, String text) {
 
-		Element childEl = document.createElement(name);
+		Element childElement = document.createElement(name);
 
 		if (Validator.isNotNull(text)) {
-			childEl.setTextContent(text);
+			childElement.setTextContent(text);
 		}
 
-		parentElement.appendChild(childEl);
+		parentElement.appendChild(childElement);
 	}
 
 	public static Document createDocument() throws Exception {
