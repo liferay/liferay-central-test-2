@@ -55,11 +55,11 @@ page import="com.liferay.portlet.exportimport.search.ExportImportConfigurationSe
 page import="com.liferay.portlet.layoutsadmin.context.GroupDisplayContextHelper" %>
 
 <%
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
-
-PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
