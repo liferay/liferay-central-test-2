@@ -290,6 +290,23 @@ public class ItemSelectorImpl implements ItemSelector {
 			new String[] {ArrayUtil.toString(itemSelectorCriteria, accessor)});
 	}
 
+	protected void populateItemSelectorCriteria(
+		Map<String, String[]> parameters,
+		ItemSelectorCriterion[] itemSelectorCriteria) {
+
+		for (int i = 0; i < itemSelectorCriteria.length; i++) {
+			ItemSelectorCriterion itemSelectorCriterion =
+				itemSelectorCriteria[i];
+
+			ItemSelectorCriterionSerializer<ItemSelectorCriterion>
+				itemSelectorCriterionSerializer =
+					new ItemSelectorCriterionSerializer<>(
+						itemSelectorCriterion, i + "_");
+
+			parameters.putAll(itemSelectorCriterionSerializer.getProperties());
+		}
+	}
+
 	@Reference(
 		cardinality = ReferenceCardinality.MULTIPLE,
 		policy = ReferencePolicy.DYNAMIC
@@ -316,23 +333,6 @@ public class ItemSelectorImpl implements ItemSelector {
 
 		_itemSelectionCriterionHandlers.remove(
 			itemSelectorCriterionClass.getName());
-	}
-
-	protected void populateItemSelectorCriteria(
-		Map<String, String[]> parameters,
-		ItemSelectorCriterion[] itemSelectorCriteria) {
-
-		for (int i = 0; i < itemSelectorCriteria.length; i++) {
-			ItemSelectorCriterion itemSelectorCriterion =
-				itemSelectorCriteria[i];
-
-			ItemSelectorCriterionSerializer<ItemSelectorCriterion>
-				itemSelectorCriterionSerializer =
-					new ItemSelectorCriterionSerializer<>(
-						itemSelectorCriterion, i + "_");
-
-			parameters.putAll(itemSelectorCriterionSerializer.getProperties());
-		}
 	}
 
 	private final ConcurrentMap
