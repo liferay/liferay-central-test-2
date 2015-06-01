@@ -946,6 +946,7 @@ AUI.add(
 						};
 
 						portletURL.setParameter('0_json', JSON.stringify(criterionJSON));
+
 						portletURL.setPortletId(Liferay.PortletKeys.ITEM_SELECTOR);
 						portletURL.setPortletMode('view');
 						portletURL.setWindowState('pop_up');

@@ -112,6 +112,7 @@ sb.append(scopeGroupId);
 sb.append("}");
 
 itemSelectorURL.setParameter("0_json", sb.toString());
+
 itemSelectorURL.setPortletMode(PortletMode.VIEW);
 itemSelectorURL.setWindowState(LiferayWindowState.POP_UP);
 
