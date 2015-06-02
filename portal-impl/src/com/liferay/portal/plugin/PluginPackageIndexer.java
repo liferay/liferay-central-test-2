@@ -264,14 +264,14 @@ public class PluginPackageIndexer extends BaseIndexer {
 				PluginPackageImpl.
 					STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
 
-			BooleanFilter statusFilter = new BooleanFilter();
+			BooleanFilter statusBooleanFilter = new BooleanFilter();
 
-			statusFilter.addTerm(
+			statusBooleanFilter.addTerm(
 				Field.STATUS, PluginPackageImpl.STATUS_NOT_INSTALLED);
-			statusFilter.addTerm(
+			statusBooleanFilter.addTerm(
 				Field.STATUS, PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
 
-			booleanFilter.add(statusFilter, BooleanClauseOccur.MUST);
+			booleanFilter.add(statusBooleanFilter, BooleanClauseOccur.MUST);
 		}
 		else {
 			booleanFilter.addRequiredTerm(Field.STATUS, status);
