@@ -913,8 +913,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			</if>
 
 			<exec executable="${sdk.dir}/tools/gradle/gradlew${gradlew.suffix}" failonerror="true">
-				<arg value="-PpluginsExcludes=${plugins.excludes}" />
-				<arg value="-PpluginsIncludes=${plugins.includes}" />
 				<args />
 				<arg value="@{task}" />
 			</exec>
