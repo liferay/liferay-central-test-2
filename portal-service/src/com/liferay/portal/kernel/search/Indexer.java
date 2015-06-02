@@ -107,12 +107,12 @@ public interface Indexer {
 	public boolean isVisibleRelatedEntry(long classPK, int status)
 		throws Exception;
 
-	public void postProcessContextFilter(
+	public void postProcessContextBooleanFilter(
 			BooleanFilter booleanFilter, SearchContext searchContext)
 		throws Exception;
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #postProcessContextFilter(
+	 * @deprecated As of 7.0.0, replaced by {@link #postProcessContextBooleanFilter(
 	 *             BooleanFilter, SearchContext)}
 	 */
 	@Deprecated

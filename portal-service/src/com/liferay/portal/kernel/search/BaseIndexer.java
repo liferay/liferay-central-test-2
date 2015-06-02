@@ -182,9 +182,9 @@ public abstract class BaseIndexer implements Indexer {
 			String className, SearchContext searchContext)
 		throws Exception {
 
-		BooleanFilter facetFilter = new BooleanFilter();
+		BooleanFilter facetBooleanFilter = new BooleanFilter();
 
-		facetFilter.addTerm(Field.ENTRY_CLASS_NAME, className);
+		facetBooleanFilter.addTerm(Field.ENTRY_CLASS_NAME, className);
 
 		if (searchContext.getUserId() > 0) {
 			SearchPermissionChecker searchPermissionChecker =
@@ -199,23 +199,26 @@ public abstract class BaseIndexer implements Indexer {
 				groupIds = new long[] {groupId};
 			}
 
-			BooleanQuery permissionQuery =
+			BooleanQuery permissionBooleanQuery =
 				(BooleanQuery)searchPermissionChecker.getPermissionQuery(
 					searchContext.getCompanyId(), groupIds,
 					searchContext.getUserId(), className, null, searchContext);
 
-			if ((permissionQuery != null) && permissionQuery.hasClauses()) {
-				QueryFilter queryFilter = new QueryFilter(permissionQuery);
+			if ((permissionBooleanQuery != null) &&
+				permissionBooleanQuery.hasClauses()) {
 
-				facetFilter.add(queryFilter, BooleanClauseOccur.MUST);
+				QueryFilter queryFilter = new QueryFilter(
+					permissionBooleanQuery);
+
+				facetBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 			}
 		}
 
-		return facetFilter;
+		return facetBooleanFilter;
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getFacetFilter}
+	 * @deprecated As of 7.0.0, replaced by {@link #getFacetBooleanFilter}
 	 */
 	@Deprecated
 	@Override
@@ -466,13 +469,13 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	@Override
-	public void postProcessContextFilter(
+	public void postProcessContextBooleanFilter(
 			BooleanFilter booleanFilter, SearchContext searchContext)
 		throws Exception {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #postProcessContextFilter(
+	 * @deprecated As of 7.0.0, replaced by {@link #postProcessContextBooleanFilter(
 	 *             BooleanFilter, SearchContext)}
 	 */
 	@Deprecated
@@ -1247,41 +1250,43 @@ public abstract class BaseIndexer implements Indexer {
 
 		Map<String, Facet> facets = searchContext.getFacets();
 
-		BooleanFilter facetFilter = new BooleanFilter();
+		BooleanFilter facetBooleanFilter = new BooleanFilter();
 
 		for (Facet facet : facets.values()) {
-			BooleanClause<Filter> facetFilterClause =
+			BooleanClause<Filter> filterBooleanClause =
 				facet.getFacetFilterBooleanClause();
 
-			if (facetFilterClause != null) {
-				facetFilter.add(
-					facetFilterClause.getClause(),
-					facetFilterClause.getBooleanClauseOccur());
+			if (filterBooleanClause != null) {
+				facetBooleanFilter.add(
+					filterBooleanClause.getClause(),
+					filterBooleanClause.getBooleanClauseOccur());
 			}
 		}
 
-		doAddFacetClause(searchContext, facetFilter, facets.values());
+		doAddFacetClause(searchContext, facetBooleanFilter, facets.values());
 
-		BooleanFilter fullQueryFilter = new BooleanFilter();
+		BooleanFilter fullQueryBooleanFilter = new BooleanFilter();
 
-		if (facetFilter.hasClauses()) {
-			fullQueryFilter.add(facetFilter, BooleanClauseOccur.MUST);
+		if (facetBooleanFilter.hasClauses()) {
+			fullQueryBooleanFilter.add(
+				facetBooleanFilter, BooleanClauseOccur.MUST);
 		}
 
-		BooleanQuery fullQuery = BooleanQueryFactoryUtil.create(searchContext);
+		BooleanQuery fullBooleanQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
 
 		if (contextQuery.hasClauses()) {
 			QueryFilter queryFilter = new QueryFilter(contextQuery);
 
-			fullQueryFilter.add(queryFilter, BooleanClauseOccur.MUST);
+			fullQueryBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 		}
 
-		if (fullQueryFilter.hasClauses()) {
-			fullQuery.setPreBooleanFilter(fullQueryFilter);
+		if (fullQueryBooleanFilter.hasClauses()) {
+			fullBooleanQuery.setPreBooleanFilter(fullQueryBooleanFilter);
 		}
 
 		if (searchQuery.hasClauses()) {
-			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+			fullBooleanQuery.add(searchQuery, BooleanClauseOccur.MUST);
 		}
 
 		BooleanClause<Query>[] booleanClauses =
@@ -1289,21 +1294,21 @@ public abstract class BaseIndexer implements Indexer {
 
 		if (booleanClauses != null) {
 			for (BooleanClause<Query> booleanClause : booleanClauses) {
-				fullQuery.add(
+				fullBooleanQuery.add(
 					booleanClause.getClause(),
 					booleanClause.getBooleanClauseOccur());
 			}
 		}
 
-		postProcessFullQuery(fullQuery, searchContext);
+		postProcessFullQuery(fullBooleanQuery, searchContext);
 
 		for (IndexerPostProcessor indexerPostProcessor :
 				_indexerPostProcessors) {
 
-			indexerPostProcessor.postProcessFullQuery(fullQuery, searchContext);
+			indexerPostProcessor.postProcessFullQuery(fullBooleanQuery, searchContext);
 		}
 
-		return fullQuery;
+		return fullBooleanQuery;
 	}
 
 	protected Summary createSummary(Document document) {
@@ -1362,29 +1367,30 @@ public abstract class BaseIndexer implements Indexer {
 	 */
 	@Deprecated
 	protected void doAddFacetClause(
-			SearchContext searchContext, BooleanFilter facetFilter,
+			SearchContext searchContext, BooleanFilter facetBooleanFilter,
 			Collection<Facet> facets)
 		throws ParseException {
 
-		BooleanQuery facetQuery = BooleanQueryFactoryUtil.create(searchContext);
+		BooleanQuery facetBooleanQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
 
 		for (Facet facet : facets) {
-			BooleanClause<Query> facetClause = facet.getFacetClause();
+			BooleanClause<Query> facetBooleanClause = facet.getFacetClause();
 
-			if (facetClause != null) {
-				facetQuery.add(
-					facetClause.getClause(),
-					facetClause.getBooleanClauseOccur());
+			if (facetBooleanClause != null) {
+				facetBooleanQuery.add(
+					facetBooleanClause.getClause(),
+					facetBooleanClause.getBooleanClauseOccur());
 			}
 		}
 
-		if (!facetQuery.hasClauses()) {
+		if (!facetBooleanQuery.hasClauses()) {
 			return;
 		}
 
-		QueryFilter queryFilter = new QueryFilter(facetQuery);
+		QueryFilter queryFilter = new QueryFilter(facetBooleanQuery);
 
-		facetFilter.add(queryFilter, BooleanClauseOccur.MUST);
+		facetBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected abstract void doDelete(Object obj) throws Exception;

@@ -94,7 +94,7 @@ public class AssetEntriesFacet extends MultiValueFacet {
 				entityBooleanFilter.add(
 					indexerBooleanFilter, BooleanClauseOccur.MUST);
 
-				indexer.postProcessContextFilter(
+				indexer.postProcessContextBooleanFilter(
 					entityBooleanFilter, searchContext);
 
 				for (IndexerPostProcessor indexerPostProcessor :
