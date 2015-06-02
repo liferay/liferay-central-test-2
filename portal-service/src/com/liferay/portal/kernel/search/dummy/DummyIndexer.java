@@ -70,7 +70,7 @@ public class DummyIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getFacetFilter}
+	 * @deprecated As of 7.0.0, replaced by {@link #getFacetBooleanFilter}
 	 */
 	@Deprecated
 	@Override

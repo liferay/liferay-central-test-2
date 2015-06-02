@@ -35,7 +35,7 @@ public abstract class BaseFacet implements Facet {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getFacetFilterClause}
+	 * @deprecated As of 7.0.0, replaced by {@link #getFacetFilterBooleanClause}
 	 */
 	@Deprecated
 	@Override
