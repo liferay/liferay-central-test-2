@@ -69,12 +69,12 @@
 			<if>
 				<not>
 					<uptodate>
-						<mapper to="${project.dir}/tools/sdk" type="merge" />
+						<mapper to="${sdk.dir}" type="merge" />
 						<srcfiles dir="${project.dir}/tools" includes="liferay-plugins-sdk-7.0.0.zip*" />
 					</uptodate>
 				</not>
 				<then>
-					<delete dir="${project.dir}/tools/sdk" />
+					<delete dir="${sdk.dir}" />
 
 					<unzip
 						dest="${project.dir}/tools"
@@ -113,7 +113,7 @@
 
 							<echo
 								append="true"
-								file="${project.dir}/tools/sdk/build.${env.COMPUTERNAME}.properties"
+								file="${sdk.dir}/build.${env.COMPUTERNAME}.properties"
 							>
 								app.@{app.server.dir.property}.dir=${temp.app.server.dir}
 							</echo>
@@ -150,7 +150,7 @@
 
 									<echo
 										append="true"
-										file="${project.dir}/tools/sdk/build.${env.COMPUTERNAME}.properties"
+										file="${sdk.dir}/build.${env.COMPUTERNAME}.properties"
 									>
 										ivy.pom.@{ivy.pom.property}=${temp.ivy.pom}
 									</echo>
@@ -189,7 +189,7 @@
 
 									<echo
 										append="true"
-										file="${project.dir}/tools/sdk/build.${env.COMPUTERNAME}.properties"
+										file="${sdk.dir}/build.${env.COMPUTERNAME}.properties"
 									>
 										sonatype.@{sonatype.property}=${temp.sonatype}
 									</echo>
@@ -202,7 +202,7 @@
 
 					<echo
 						append="true"
-						file="${project.dir}/tools/sdk/build.${env.COMPUTERNAME}.properties"
+						file="${sdk.dir}/build.${env.COMPUTERNAME}.properties"
 					>
 						app.server.type=${app.server.type}
 						auto.deploy.dir=${liferay.home}/osgi/apps
@@ -224,8 +224,8 @@
 						-releaserepo=${-releaserepo}
 					</echo>
 
-					<copy file="${project.dir}/tools/sdk/build.${env.COMPUTERNAME}.properties" tofile="${project.dir}/tools/sdk/build.${env.HOST}.properties" />
-					<copy file="${project.dir}/tools/sdk/build.${env.COMPUTERNAME}.properties" tofile="${project.dir}/tools/sdk/build.${env.HOSTNAME}.properties" />
+					<copy file="${sdk.dir}/build.${env.COMPUTERNAME}.properties" tofile="${sdk.dir}/build.${env.HOST}.properties" />
+					<copy file="${sdk.dir}/build.${env.COMPUTERNAME}.properties" tofile="${sdk.dir}/build.${env.HOSTNAME}.properties" />
 				</then>
 			</if>
 		</sequential>
@@ -258,7 +258,7 @@
 			<ant dir="sql" target="clean" inheritAll="false" />
 
 			<sequential>
-				<delete dir="tools/sdk" />
+				<delete dir="${sdk.dir}" />
 
 				<setup-sdk />
 
@@ -1008,7 +1008,7 @@
 
 	<target name="sort-xml-attributes">
 		<path id="source.formatter.classpath">
-			<fileset dir="${project.dir}/tools/sdk/dependencies/com.liferay.source.formatter/lib" includes="*.jar" />
+			<fileset dir="${sdk.dir}/dependencies/com.liferay.source.formatter/lib" includes="*.jar" />
 		</path>
 
 		<java

@@ -12,6 +12,8 @@
 		<path location="${project.dir.native}" />
 	</pathconvert>
 
+	<property name="sdk.dir" value="${project.dir}/tools/sdk" />
+
 	<property name="test.properties" value="com/liferay/portal/tools/dependencies/portal-tools.properties" />
 
 	<property environment="env" />
@@ -512,7 +514,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<sequential>
 			<delete file="app.server.${user.name}.properties" />
 
-			<delete file="${project.dir}/tools/sdk/build.${user.name}.properties" />
+			<delete file="${sdk.dir}/build.${user.name}.properties" />
 		</sequential>
 	</macrodef>
 
@@ -522,7 +524,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<sequential>
 			<echo file="app.server.${user.name}.properties">@{properties.content}</echo>
 
-			<echo file="${project.dir}/tools/sdk/build.${user.name}.properties">@{properties.content}</echo>
+			<echo file="${sdk.dir}/build.${user.name}.properties">@{properties.content}</echo>
 		</sequential>
 	</macrodef>
 
@@ -1378,7 +1380,7 @@ rerun your task.
 		<echo>Run "ant compile compile-test" before using format-javadoc to generate @Override tags.</echo>
 
 		<path id="javadoc.formatter.classpath">
-			<fileset dir="${project.dir}/tools/sdk/dependencies/com.liferay.javadoc.formatter/lib" includes="*.jar" />
+			<fileset dir="${sdk.dir}/dependencies/com.liferay.javadoc.formatter/lib" includes="*.jar" />
 			<path refid="project.classpath" />
 		</path>
 
@@ -1402,13 +1404,13 @@ rerun your task.
 	</target>
 
 	<target name="run-cpd">
-		<ant antfile="build-common.xml" dir="${project.dir}/tools/sdk" inheritRefs="true" target="run-cpd">
+		<ant antfile="build-common.xml" dir="${sdk.dir}" inheritRefs="true" target="run-cpd">
 			<property name="cpd.basedir" value="${basedir}" />
 		</ant>
 	</target>
 
 	<target name="run-pmd">
-		<ant antfile="build-common.xml" dir="${project.dir}/tools/sdk" inheritRefs="true" target="run-pmd">
+		<ant antfile="build-common.xml" dir="${sdk.dir}" inheritRefs="true" target="run-pmd">
 			<property name="pmd.basedir" value="${basedir}" />
 		</ant>
 	</target>
