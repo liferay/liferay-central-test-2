@@ -55,10 +55,10 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 
 		_writer = _pageContext.getOut();
 
+		Layout selLayout = null;
+
 		long selPlid = ParamUtil.getLong(
 			request, "selPlid", LayoutConstants.DEFAULT_PLID);
-
-		Layout selLayout = null;
 
 		if (selPlid != LayoutConstants.DEFAULT_PLID) {
 			selLayout = LayoutLocalServiceUtil.fetchLayout(selPlid);
