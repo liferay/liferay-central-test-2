@@ -14,7 +14,6 @@
 
 package com.liferay.portal.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.servlet.JSPSupportServlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -44,8 +43,7 @@ import javax.servlet.jsp.tagext.Tag;
 public class CustomizationSettingsProcessor implements ColumnProcessor {
 
 	public CustomizationSettingsProcessor(
-			HttpServletRequest request, HttpServletResponse response)
-		throws PortalException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		JspFactory jspFactory = JspFactory.getDefaultFactory();
 
