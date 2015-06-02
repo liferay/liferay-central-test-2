@@ -190,7 +190,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 							<c:when test="<%= !deltaConfigurable || themeDisplay.isFacebook() %>">
 								&mdash;
 
-								<liferay-ui:message arguments="<%= delta %>" key="x-items-per-page">
+								<liferay-ui:message arguments="<%= delta %>" key="x-items-per-page" />
 							</c:when>
 							<c:otherwise>
 								<liferay-ui:icon-menu
