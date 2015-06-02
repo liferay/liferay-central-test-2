@@ -91,8 +91,8 @@ public class ResourceActionsImpl implements ResourceActions {
 			_portalModelResources.add(resource);
 		}
 
-		_portletResourceActionsBagMap = new HashMap<>();
-		_modelResourceActionsBagMap = new HashMap<>();
+		_portletResourceActionsBags = new HashMap<>();
+		_modelResourceActionsBags = new HashMap<>();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -207,7 +207,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 	@Override
 	public List<String> getModelNames() {
-		return ListUtil.fromMapKeys(_modelResourceActionsBagMap);
+		return ListUtil.fromMapKeys(_modelResourceActionsBags);
 	}
 
 	@Override
@@ -354,7 +354,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 	@Override
 	public List<String> getPortletNames() {
-		return ListUtil.fromMapKeys(_portletResourceActionsBagMap);
+		return ListUtil.fromMapKeys(_portletResourceActionsBags);
 	}
 
 	@Override
@@ -753,14 +753,14 @@ public class ResourceActionsImpl implements ResourceActions {
 		String modelName) {
 
 		ModelResourceActionsBag modelResourceActionsBag =
-			_modelResourceActionsBagMap.get(modelName);
+			_modelResourceActionsBags.get(modelName);
 
 		if (modelResourceActionsBag != null) {
 			return modelResourceActionsBag;
 		}
 
-		synchronized(_modelResourceActionsBagMap) {
-			modelResourceActionsBag = _modelResourceActionsBagMap.get(
+		synchronized(_modelResourceActionsBags) {
+			modelResourceActionsBag = _modelResourceActionsBags.get(
 				modelName);
 
 			if (modelResourceActionsBag != null) {
@@ -769,7 +769,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 			modelResourceActionsBag = new ModelResourceActionsBagImpl();
 
-			_modelResourceActionsBagMap.put(modelName, modelResourceActionsBag);
+			_modelResourceActionsBags.put(modelName, modelResourceActionsBag);
 		}
 
 		return modelResourceActionsBag;
@@ -830,14 +830,14 @@ public class ResourceActionsImpl implements ResourceActions {
 		String portletName) {
 
 		PortletResourceActionsBag portletResourceActionsBag =
-			_portletResourceActionsBagMap.get(portletName);
+			_portletResourceActionsBags.get(portletName);
 
 		if (portletResourceActionsBag != null) {
 			return portletResourceActionsBag;
 		}
 
-		synchronized(_portletResourceActionsBagMap) {
-			portletResourceActionsBag = _portletResourceActionsBagMap.get(
+		synchronized(_portletResourceActionsBags) {
+			portletResourceActionsBag = _portletResourceActionsBags.get(
 				portletName);
 
 			if (portletResourceActionsBag != null) {
@@ -846,7 +846,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 			portletResourceActionsBag = new PortletResourceActionsBagImpl();
 
-			_portletResourceActionsBagMap.put(
+			_portletResourceActionsBags.put(
 				portletName, portletResourceActionsBag);
 		}
 
@@ -1195,10 +1195,10 @@ public class ResourceActionsImpl implements ResourceActions {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ResourceActionsImpl.class);
 
-	private Map<String, ModelResourceActionsBag> _modelResourceActionsBagMap;
+	private Map<String, ModelResourceActionsBag> _modelResourceActionsBags;
 	private Set<String> _organizationModelResources;
 	private Set<String> _portalModelResources;
 	private Map<String, PortletResourceActionsBag>
-		_portletResourceActionsBagMap;
+		_portletResourceActionsBags;
 
 }
