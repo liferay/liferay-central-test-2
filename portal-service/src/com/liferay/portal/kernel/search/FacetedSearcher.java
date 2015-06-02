@@ -142,7 +142,7 @@ public class FacetedSearcher extends BaseSearcher {
 			}
 		}
 
-		doAddFacetClause(searchContext, facetBooleanFilter, facets.values());
+		addFacetClause(searchContext, facetBooleanFilter, facets.values());
 
 		BooleanFilter fullQueryBooleanFilter = new BooleanFilter();
 

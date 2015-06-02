@@ -1263,7 +1263,7 @@ public abstract class BaseIndexer implements Indexer {
 			}
 		}
 
-		doAddFacetClause(searchContext, facetBooleanFilter, facets.values());
+		addFacetClause(searchContext, facetBooleanFilter, facets.values());
 
 		BooleanFilter fullQueryBooleanFilter = new BooleanFilter();
 
@@ -1366,7 +1366,7 @@ public abstract class BaseIndexer implements Indexer {
 	 * @deprecated As of 7.0.0
 	 */
 	@Deprecated
-	protected void doAddFacetClause(
+	protected void addFacetClause(
 			SearchContext searchContext, BooleanFilter facetBooleanFilter,
 			Collection<Facet> facets)
 		throws ParseException {
