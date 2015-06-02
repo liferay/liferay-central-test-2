@@ -129,34 +129,34 @@ public class FacetedSearcher extends BaseSearcher {
 
 		Map<String, Facet> facets = searchContext.getFacets();
 
-		BooleanFilter facetFilter = new BooleanFilter();
+		BooleanFilter facetBooleanFilter = new BooleanFilter();
 
 		for (Facet facet : facets.values()) {
 			BooleanClause<Filter> facetClause =
 				facet.getFacetFilterBooleanClause();
 
 			if (facetClause != null) {
-				facetFilter.add(
+				facetBooleanFilter.add(
 					facetClause.getClause(),
 					facetClause.getBooleanClauseOccur());
 			}
 		}
 
-		doAddFacetClause(searchContext, facetFilter, facets.values());
+		doAddFacetClause(searchContext, facetBooleanFilter, facets.values());
 
-		BooleanFilter fullQueryFilter = new BooleanFilter();
+		BooleanFilter fullQueryBooleanFilter = new BooleanFilter();
 
-		fullQueryFilter.add(facetFilter, BooleanClauseOccur.MUST);
+		fullQueryBooleanFilter.add(facetBooleanFilter, BooleanClauseOccur.MUST);
 
 		BooleanQuery fullQuery = BooleanQueryFactoryUtil.create(searchContext);
 
 		if (contextQuery.hasClauses()) {
 			QueryFilter queryFilter = new QueryFilter(contextQuery);
 
-			fullQueryFilter.add(queryFilter, BooleanClauseOccur.MUST);
+			fullQueryBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 		}
 
-		fullQuery.setPreBooleanFilter(fullQueryFilter);
+		fullQuery.setPreBooleanFilter(fullQueryBooleanFilter);
 
 		if (searchQuery.hasClauses()) {
 			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
