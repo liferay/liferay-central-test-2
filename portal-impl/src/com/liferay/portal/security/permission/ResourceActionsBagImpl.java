@@ -41,22 +41,27 @@ public class ResourceActionsBagImpl implements Cloneable, ResourceActionsBag {
 		return new ResourceActionsBagImpl(this);
 	}
 
+	@Override
 	public Set<String> getResourceActions() {
 		return _resourceActions;
 	}
 
+	@Override
 	public Set<String> getResourceGroupDefaultActions() {
 		return _resourceGroupDefaultActions;
 	}
 
+	@Override
 	public Set<String> getResourceGuestDefaultActions() {
 		return _resourceGuestDefaultActions;
 	}
 
+	@Override
 	public Set<String> getResourceGuestUnsupportedActions() {
 		return _resourceGuestUnsupportedActions;
 	}
 
+	@Override
 	public Set<String> getResources() {
 		return _resources;
 	}
