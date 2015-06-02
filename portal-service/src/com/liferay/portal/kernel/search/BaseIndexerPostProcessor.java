@@ -25,13 +25,13 @@ import java.util.Locale;
 public class BaseIndexerPostProcessor implements IndexerPostProcessor {
 
 	@Override
-	public void postProcessContextFilter(
+	public void postProcessContextBooleanFilter(
 			BooleanFilter booleanFilter, SearchContext searchContext)
 		throws Exception {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #postProcessContextFilter(
+	 * @deprecated As of 7.0.0, replaced by {@link #postProcessContextBooleanFilter(
 	 *             BooleanFilter, SearchContext)}
 	 */
 	@Deprecated

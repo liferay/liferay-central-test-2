@@ -37,7 +37,7 @@ public class TestSingleEntityIndexerPostProcessor
 	implements IndexerPostProcessor {
 
 	@Override
-	public void postProcessContextFilter(
+	public void postProcessContextBooleanFilter(
 			BooleanFilter booleanFilter, SearchContext searchContext)
 		throws Exception {
 	}

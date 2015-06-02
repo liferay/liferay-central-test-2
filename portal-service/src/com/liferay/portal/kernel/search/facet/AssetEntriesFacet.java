@@ -80,7 +80,7 @@ public class AssetEntriesFacet extends MultiValueFacet {
 			}
 
 			try {
-				BooleanFilter indexerBooleanFilter = indexer.getFacetFilter(
+				BooleanFilter indexerBooleanFilter = indexer.getFacetBooleanFilter(
 					entryClassName, searchContext);
 
 				if ((indexerBooleanFilter == null) ||
@@ -89,37 +89,42 @@ public class AssetEntriesFacet extends MultiValueFacet {
 					continue;
 				}
 
-				BooleanFilter entityFilter = new BooleanFilter();
+				BooleanFilter entityBooleanFilter = new BooleanFilter();
 
-				entityFilter.add(indexerBooleanFilter, BooleanClauseOccur.MUST);
+				entityBooleanFilter.add(
+					indexerBooleanFilter, BooleanClauseOccur.MUST);
 
-				indexer.postProcessContextFilter(entityFilter, searchContext);
+				indexer.postProcessContextFilter(
+					entityBooleanFilter, searchContext);
 
 				for (IndexerPostProcessor indexerPostProcessor :
 						indexer.getIndexerPostProcessors()) {
 
-					indexerPostProcessor.postProcessContextFilter(
-						entityFilter, searchContext);
+					indexerPostProcessor.postProcessContextBooleanFilter(
+						entityBooleanFilter, searchContext);
 				}
 
-				postProcessContextQuery(entityFilter, searchContext, indexer);
+				postProcessContextQuery(
+					entityBooleanFilter, searchContext, indexer);
 
 				if (indexer.isStagingAware()) {
 					if (!searchContext.isIncludeLiveGroups() &&
 						searchContext.isIncludeStagingGroups()) {
 
-						entityFilter.addRequiredTerm(Field.STAGING_GROUP, true);
+						entityBooleanFilter.addRequiredTerm(
+							Field.STAGING_GROUP, true);
 					}
 					else if (searchContext.isIncludeLiveGroups() &&
 							 !searchContext.isIncludeStagingGroups()) {
 
-						entityFilter.addRequiredTerm(
+						entityBooleanFilter.addRequiredTerm(
 							Field.STAGING_GROUP, false);
 					}
 				}
 
-				if (entityFilter.hasClauses()) {
-					facetFilter.add(entityFilter, BooleanClauseOccur.SHOULD);
+				if (entityBooleanFilter.hasClauses()) {
+					facetFilter.add(
+						entityBooleanFilter, BooleanClauseOccur.SHOULD);
 				}
 			}
 			catch (Exception e) {
@@ -196,20 +201,20 @@ public class AssetEntriesFacet extends MultiValueFacet {
 			Indexer indexer)
 		throws Exception {
 
-		BooleanQuery entityQuery = BooleanQueryFactoryUtil.create(
+		BooleanQuery entityBooleanQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		indexer.postProcessContextQuery(entityQuery, searchContext);
+		indexer.postProcessContextQuery(entityBooleanQuery, searchContext);
 
 		for (IndexerPostProcessor indexerPostProcessor :
 				indexer.getIndexerPostProcessors()) {
 
 			indexerPostProcessor.postProcessContextQuery(
-				entityQuery, searchContext);
+				entityBooleanQuery, searchContext);
 		}
 
-		if (entityQuery.hasClauses()) {
-			QueryFilter queryFilter = new QueryFilter(entityQuery);
+		if (entityBooleanQuery.hasClauses()) {
+			QueryFilter queryFilter = new QueryFilter(entityBooleanQuery);
 
 			entityFilter.add(queryFilter, BooleanClauseOccur.MUST);
 		}

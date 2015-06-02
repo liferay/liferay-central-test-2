@@ -63,7 +63,7 @@ public class DummyIndexer implements Indexer {
 	}
 
 	@Override
-	public BooleanFilter getFacetFilter(
+	public BooleanFilter getFacetBooleanFilter(
 		String className, SearchContext searchContext) {
 
 		return null;

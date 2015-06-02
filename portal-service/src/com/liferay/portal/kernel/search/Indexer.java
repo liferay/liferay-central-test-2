@@ -45,12 +45,12 @@ public interface Indexer {
 
 	public Document getDocument(Object obj) throws SearchException;
 
-	public BooleanFilter getFacetFilter(
+	public BooleanFilter getFacetBooleanFilter(
 			String className, SearchContext searchContext)
 		throws Exception;
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getFacetFilter}
+	 * @deprecated As of 7.0.0, replaced by {@link #getFacetBooleanFilter}
 	 */
 	@Deprecated
 	public BooleanQuery getFacetQuery(

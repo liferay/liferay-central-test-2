@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Component;
 public class TestSingleIndexerPostProcessor implements IndexerPostProcessor {
 
 	@Override
-	public void postProcessContextFilter(
+	public void postProcessContextBooleanFilter(
 			BooleanFilter booleanFilter, SearchContext searchContext)
 		throws Exception {
 	}
