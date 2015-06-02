@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>org.gradle.gradle-core</artifactId>
-  <version>2.3</version>
+  <artifactId>org.gradle.gradle-base-services-groovy</artifactId>
+  <version>2.4</version>
   <description>POM was created by Sonatype Nexus</description>
 </project>
