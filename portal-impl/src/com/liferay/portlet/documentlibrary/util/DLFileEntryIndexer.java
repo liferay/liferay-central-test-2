@@ -85,7 +85,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -192,6 +191,10 @@ public class DLFileEntryIndexer
 		return true;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)

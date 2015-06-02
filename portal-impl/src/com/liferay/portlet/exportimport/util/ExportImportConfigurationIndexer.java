@@ -33,7 +33,6 @@ import com.liferay.portal.model.ExportImportConfiguration;
 import com.liferay.portal.service.ExportImportConfigurationLocalServiceUtil;
 
 import java.io.Serializable;
-
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
@@ -61,6 +60,10 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 		return CLASS_NAME;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
