@@ -764,6 +764,37 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
+	protected void addFacetClause(
+			SearchContext searchContext, BooleanFilter facetBooleanFilter,
+			Collection<Facet> facets)
+		throws ParseException {
+
+		BooleanQuery facetBooleanQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
+
+		for (Facet facet : facets) {
+			BooleanClause<Query> facetBooleanClause = facet.getFacetClause();
+
+			if (facetBooleanClause != null) {
+				facetBooleanQuery.add(
+					facetBooleanClause.getClause(),
+					facetBooleanClause.getBooleanClauseOccur());
+			}
+		}
+
+		if (!facetBooleanQuery.hasClauses()) {
+			return;
+		}
+
+		QueryFilter queryFilter = new QueryFilter(facetBooleanQuery);
+
+		facetBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
+	}
+
 	protected void addFacetSelectedFieldNames(
 		SearchContext searchContext, QueryConfig queryConfig) {
 
@@ -1305,7 +1336,8 @@ public abstract class BaseIndexer implements Indexer {
 		for (IndexerPostProcessor indexerPostProcessor :
 				_indexerPostProcessors) {
 
-			indexerPostProcessor.postProcessFullQuery(fullBooleanQuery, searchContext);
+			indexerPostProcessor.postProcessFullQuery(
+				fullBooleanQuery, searchContext);
 		}
 
 		return fullBooleanQuery;
@@ -1360,37 +1392,6 @@ public abstract class BaseIndexer implements Indexer {
 		SearchEngineUtil.deleteDocument(
 			getSearchEngineId(), companyId, document.get(Field.UID),
 			_commitImmediately);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0
-	 */
-	@Deprecated
-	protected void addFacetClause(
-			SearchContext searchContext, BooleanFilter facetBooleanFilter,
-			Collection<Facet> facets)
-		throws ParseException {
-
-		BooleanQuery facetBooleanQuery = BooleanQueryFactoryUtil.create(
-			searchContext);
-
-		for (Facet facet : facets) {
-			BooleanClause<Query> facetBooleanClause = facet.getFacetClause();
-
-			if (facetBooleanClause != null) {
-				facetBooleanQuery.add(
-					facetBooleanClause.getClause(),
-					facetBooleanClause.getBooleanClauseOccur());
-			}
-		}
-
-		if (!facetBooleanQuery.hasClauses()) {
-			return;
-		}
-
-		QueryFilter queryFilter = new QueryFilter(facetBooleanQuery);
-
-		facetBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected abstract void doDelete(Object obj) throws Exception;

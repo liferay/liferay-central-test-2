@@ -80,8 +80,9 @@ public class AssetEntriesFacet extends MultiValueFacet {
 			}
 
 			try {
-				BooleanFilter indexerBooleanFilter = indexer.getFacetBooleanFilter(
-					entryClassName, searchContext);
+				BooleanFilter indexerBooleanFilter =
+					indexer.getFacetBooleanFilter(
+						entryClassName, searchContext);
 
 				if ((indexerBooleanFilter == null) ||
 					!indexerBooleanFilter.hasClauses()) {
