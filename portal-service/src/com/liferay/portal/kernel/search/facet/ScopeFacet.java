@@ -82,7 +82,7 @@ public class ScopeFacet extends MultiValueFacet {
 	}
 
 	@Override
-	protected BooleanClause<Filter> doGetFacetFilterClause() {
+	protected BooleanClause<Filter> doGetFacetFilterBooleanClause() {
 		SearchContext searchContext = getSearchContext();
 
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
@@ -120,16 +120,16 @@ public class ScopeFacet extends MultiValueFacet {
 			return null;
 		}
 
-		BooleanFilter facetFilter = new BooleanFilter();
+		BooleanFilter facetBooleanFilter = new BooleanFilter();
 
 		long ownerUserId = searchContext.getOwnerUserId();
 
 		if (ownerUserId > 0) {
-			facetFilter.addRequiredTerm(Field.USER_ID, ownerUserId);
+			facetBooleanFilter.addRequiredTerm(Field.USER_ID, ownerUserId);
 		}
 
-		BooleanFilter groupIdsFilter = new BooleanFilter();
-		BooleanFilter scopeGroupIdsFilter = new BooleanFilter();
+		BooleanFilter groupIdsBooleanFilter = new BooleanFilter();
+		BooleanFilter scopeGroupIdsBooleanFilter = new BooleanFilter();
 
 		for (int i = 0; i < groupIds.length; i ++) {
 			long groupId = groupIds[i];
@@ -151,12 +151,13 @@ public class ScopeFacet extends MultiValueFacet {
 					parentGroupId = group.getParentGroupId();
 				}
 
-				groupIdsFilter.addTerm(Field.GROUP_ID, parentGroupId);
+				groupIdsBooleanFilter.addTerm(Field.GROUP_ID, parentGroupId);
 
 				groupIds[i] = parentGroupId;
 
 				if (group.isLayout() || searchContext.isScopeStrict()) {
-					scopeGroupIdsFilter.addTerm(Field.SCOPE_GROUP_ID, groupId);
+					scopeGroupIdsBooleanFilter.addTerm(
+						Field.SCOPE_GROUP_ID, groupId);
 				}
 			}
 			catch (Exception e) {
@@ -168,16 +169,18 @@ public class ScopeFacet extends MultiValueFacet {
 
 		searchContext.setGroupIds(groupIds);
 
-		if (groupIdsFilter.hasClauses()) {
-			facetFilter.add(groupIdsFilter, BooleanClauseOccur.MUST);
+		if (groupIdsBooleanFilter.hasClauses()) {
+			facetBooleanFilter.add(
+				groupIdsBooleanFilter, BooleanClauseOccur.MUST);
 		}
 
-		if (scopeGroupIdsFilter.hasClauses()) {
-			facetFilter.add(scopeGroupIdsFilter, BooleanClauseOccur.MUST);
+		if (scopeGroupIdsBooleanFilter.hasClauses()) {
+			facetBooleanFilter.add(
+				scopeGroupIdsBooleanFilter, BooleanClauseOccur.MUST);
 		}
 
 		return BooleanClauseFactoryUtil.createFilter(
-			searchContext, facetFilter, BooleanClauseOccur.MUST);
+			searchContext, facetBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(ScopeFacet.class);

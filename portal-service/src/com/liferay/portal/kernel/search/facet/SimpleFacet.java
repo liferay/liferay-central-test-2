@@ -35,7 +35,7 @@ public class SimpleFacet extends BaseFacet {
 	}
 
 	@Override
-	protected BooleanClause<Filter> doGetFacetFilterClause() {
+	protected BooleanClause<Filter> doGetFacetFilterBooleanClause() {
 		SearchContext searchContext = getSearchContext();
 
 		FacetConfiguration facetConfiguration = getFacetConfiguration();

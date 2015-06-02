@@ -128,7 +128,7 @@ public class MultiValueFacet extends BaseFacet {
 	}
 
 	@Override
-	protected BooleanClause<Filter> doGetFacetFilterClause() {
+	protected BooleanClause<Filter> doGetFacetFilterBooleanClause() {
 		SearchContext searchContext = getSearchContext();
 
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
@@ -158,7 +158,7 @@ public class MultiValueFacet extends BaseFacet {
 			return null;
 		}
 
-		BooleanFilter facetFilter = new BooleanFilter();
+		BooleanFilter facetBooleanFilter = new BooleanFilter();
 
 		for (String value : values) {
 			FacetValueValidator facetValueValidator = getFacetValueValidator();
@@ -171,15 +171,15 @@ public class MultiValueFacet extends BaseFacet {
 
 			TermFilter termFilter = new TermFilter(getFieldName(), value);
 
-			facetFilter.add(termFilter, BooleanClauseOccur.SHOULD);
+			facetBooleanFilter.add(termFilter, BooleanClauseOccur.SHOULD);
 		}
 
-		if (!facetFilter.hasClauses()) {
+		if (!facetBooleanFilter.hasClauses()) {
 			return null;
 		}
 
 		return BooleanClauseFactoryUtil.createFilter(
-			searchContext, facetFilter, BooleanClauseOccur.MUST);
+			searchContext, facetBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected void doSetValues(JSONArray valuesJSONArray) {

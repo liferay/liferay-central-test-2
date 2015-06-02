@@ -132,7 +132,8 @@ public class FacetedSearcher extends BaseSearcher {
 		BooleanFilter facetFilter = new BooleanFilter();
 
 		for (Facet facet : facets.values()) {
-			BooleanClause<Filter> facetClause = facet.getFacetFilterClause();
+			BooleanClause<Filter> facetClause =
+				facet.getFacetFilterBooleanClause();
 
 			if (facetClause != null) {
 				facetFilter.add(

@@ -37,7 +37,7 @@ public interface Facet {
 
 	public FacetConfiguration getFacetConfiguration();
 
-	public BooleanClause<Filter> getFacetFilterClause();
+	public BooleanClause<Filter> getFacetFilterBooleanClause();
 
 	public FacetValueValidator getFacetValueValidator();
 

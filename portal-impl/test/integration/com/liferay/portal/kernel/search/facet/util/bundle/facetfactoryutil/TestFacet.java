@@ -47,7 +47,7 @@ public class TestFacet implements Facet {
 	}
 
 	@Override
-	public BooleanClause<Filter> getFacetFilterClause() {
+	public BooleanClause<Filter> getFacetFilterBooleanClause() {
 		return null;
 	}
 

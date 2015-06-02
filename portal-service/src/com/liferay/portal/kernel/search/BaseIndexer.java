@@ -1251,7 +1251,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		for (Facet facet : facets.values()) {
 			BooleanClause<Filter> facetFilterClause =
-				facet.getFacetFilterClause();
+				facet.getFacetFilterBooleanClause();
 
 			if (facetFilterClause != null) {
 				facetFilter.add(

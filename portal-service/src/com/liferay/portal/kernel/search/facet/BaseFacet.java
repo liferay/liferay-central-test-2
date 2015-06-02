@@ -54,8 +54,8 @@ public abstract class BaseFacet implements Facet {
 	}
 
 	@Override
-	public BooleanClause<Filter> getFacetFilterClause() {
-		return doGetFacetFilterClause();
+	public BooleanClause<Filter> getFacetFilterBooleanClause() {
+		return doGetFacetFilterBooleanClause();
 	}
 
 	@Override
@@ -116,14 +116,14 @@ public abstract class BaseFacet implements Facet {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #doGetFacetFilterClause}
+	 * @deprecated As of 7.0.0, replaced by {@link #doGetFacetFilterBooleanClause}
 	 */
 	@Deprecated
 	protected BooleanClause<Query> doGetFacetClause() {
 		return null;
 	}
 
-	protected abstract BooleanClause<Filter> doGetFacetFilterClause();
+	protected abstract BooleanClause<Filter> doGetFacetFilterBooleanClause();
 
 	private FacetCollector _facetCollector;
 	private FacetConfiguration _facetConfiguration = new FacetConfiguration();

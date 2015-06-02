@@ -59,7 +59,7 @@ public class AssetEntriesFacet extends MultiValueFacet {
 	}
 
 	@Override
-	protected BooleanClause<Filter> doGetFacetFilterClause() {
+	protected BooleanClause<Filter> doGetFacetFilterBooleanClause() {
 		SearchContext searchContext = getSearchContext();
 
 		String[] entryClassNames = searchContext.getEntryClassNames();
