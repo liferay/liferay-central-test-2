@@ -896,6 +896,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</macrodef>
 
 	<macrodef name="gradle-execute">
+		<attribute default="true" name="failonerror" />
 		<attribute name="task" />
 		<element implicit="true" name="args" optional="true" />
 
@@ -912,7 +913,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				</else>
 			</if>
 
-			<exec executable="${sdk.dir}/tools/gradle/gradlew${gradlew.suffix}" failonerror="true">
+			<exec executable="${sdk.dir}/tools/gradle/gradlew${gradlew.suffix}" failonerror="@{failonerror}">
 				<args />
 				<arg value="@{task}" />
 			</exec>
