@@ -101,7 +101,7 @@ public class SecureXMLFactoryProviderImpl implements SecureXMLFactoryProvider {
 	@Override
 	public XMLReader newXMLReader() {
 		Class<?> clazz = getClass();
-	
+
 		ClassLoader classLoader = clazz.getClassLoader();
 
 		ClassLoader contextClassLoader =
