@@ -61,6 +61,36 @@
 
 		<execute function="AssertClick" locator1="DockbarAddpanelpage#PAGE_TAB" value1="Page" />
 
+		<execute function="AssertClick" locator1="CPSitepages#TOOLBAR_ADD_PAGE" value1="Add Page" />
+
+		<execute function="Type#mouseOverFocusType" locator1="CPSitepagesAddpage#ADD_PAGE_NAME_FIELD" value1="${sitePageName}" />
+
+		<var name="key_pageType" value="${pageTemplateName}" />
+
+		<if>
+			<isset var="pageTemplateName" />
+			<then>
+				<execute function="AssertTextEquals" locator1="CPSitepagesAddpage#PAGE_TYPE_LABEL" value1="${pageTemplateName}" />
+
+				<execute function="Click" locator1="CPSitepagesAddpage#PAGE_TYPE_RADIO" />
+				<execute function="AssertTextEquals" locator1="CPSitepagesAddpage#PAGE_TYPE_TEMPLATE_AUTOMATICALLY_APPLY_CHANGES_LABEL"  value1="Automatically apply changes done to the page template." />
+				<execute function="Check" locator1="CPSitepagesAddpage#PAGE_TYPE_TEMPLATE_AUTOMATICALLY_APPLY_CHANGES_CHECKBOX" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="sitePageType" />
+			<then>
+				<execute macro="SitePage#selectSitePageTypeRadioCP">
+					<var name="sitePageType" value="${sitePageType}" />
+				</execute>
+			</then>
+		</if>
+
+		<execute function="AssertClick" locator1="CPSitepagesAddpage#ADD_PAGE_BUTTON" value1="Add Page" />
+
+		<execute function="AssertTextEquals" locator1="CPSitepages#SUCCESS_MESSAGE" value1="Your request completed successfully." />
+
 		<var name="key_pageName" value="${pageName}" />
 
 		<if>
