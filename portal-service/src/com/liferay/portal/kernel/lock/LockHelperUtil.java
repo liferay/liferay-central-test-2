@@ -130,7 +130,7 @@ public class LockHelperUtil {
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
-				"Unable to initialize lock helper util", e);
+				"Unable to initialize lock manager util", e);
 		}
 		finally {
 			serviceTracker.close();
