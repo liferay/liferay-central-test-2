@@ -226,12 +226,14 @@ public abstract class BaseMobileDriverImpl
 	@Override
 	public void clickAndWait(String locator) {
 		super.click(locator);
+
 		super.waitForPageToLoad("30000");
 	}
 
 	@Override
 	public void clickAtAndWait(String locator, String coordString) {
 		super.clickAt(locator, coordString);
+
 		super.waitForPageToLoad("30000");
 	}
 
@@ -341,6 +343,7 @@ public abstract class BaseMobileDriverImpl
 	@Override
 	public void goBackAndWait() {
 		super.goBack();
+
 		super.waitForPageToLoad("30000");
 	}
 
@@ -510,6 +513,7 @@ public abstract class BaseMobileDriverImpl
 	@Override
 	public void selectAndWait(String selectLocator, String optionLocator) {
 		super.select(selectLocator, optionLocator);
+
 		super.waitForPageToLoad("30000");
 	}
 
