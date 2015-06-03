@@ -216,9 +216,19 @@ public class SyncWatchEventProcessor implements Runnable {
 		}
 		else if (Files.exists(sourceFilePath)) {
 			try {
-				SyncFileService.addFileSyncFile(
-					targetFilePath, parentSyncFile.getTypePK(),
-					parentSyncFile.getRepositoryId(), _syncAccountId);
+				if ((Files.size(targetFilePath) == 0) ||
+					FileUtil.isModified(syncFile, targetFilePath) ||
+					isInErrorState(targetFilePath)) {
+
+					SyncFileService.addFileSyncFile(
+						targetFilePath, parentSyncFile.getTypePK(),
+						parentSyncFile.getRepositoryId(), _syncAccountId);
+				}
+				else {
+					SyncFileService.copySyncFile(
+						syncFile, targetFilePath, parentSyncFile.getTypePK(),
+						parentSyncFile.getRepositoryId(), _syncAccountId);
+				}
 			}
 			catch (Exception e) {
 				if (_logger.isTraceEnabled()) {
