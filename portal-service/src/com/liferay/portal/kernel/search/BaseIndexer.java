@@ -921,7 +921,8 @@ public abstract class BaseIndexer implements Indexer {
 			classTypeIdsBooleanFilter.addTerm(Field.CLASS_TYPE_ID, classTypeId);
 		}
 
-		return contextBooleanFilter.add(classTypeIdsBooleanFilter, BooleanClauseOccur.MUST);
+		return contextBooleanFilter.add(
+			classTypeIdsBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected void addSearchEntryClassNames(

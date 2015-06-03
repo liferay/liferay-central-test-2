@@ -196,8 +196,7 @@ public class MBMessageIndexer
 				}
 				catch (Exception e) {
 					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Unable to get category " + categoryId, e);
+						_log.debug("Unable to get category " + categoryId, e);
 					}
 
 					continue;
