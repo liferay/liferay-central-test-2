@@ -165,8 +165,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 				}
 				else {
 					dynamicContent = DynamicCSSUtil.parseSass(
-						currentServletContext, request, requestPath,
-						content);
+						currentServletContext, request, requestPath, content);
 				}
 
 				response.setContentType(ContentTypes.TEXT_CSS);
