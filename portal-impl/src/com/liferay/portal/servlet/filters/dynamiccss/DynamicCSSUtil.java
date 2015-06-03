@@ -34,7 +34,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.CSSBuilderUtil;
+import com.liferay.portal.tools.CSSBuilderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.sass.compiler.SassCompiler;
@@ -42,11 +42,9 @@ import com.liferay.sass.compiler.jni.internal.JniSassCompiler;
 import com.liferay.sass.compiler.ruby.internal.RubySassCompiler;
 
 import java.io.File;
-
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

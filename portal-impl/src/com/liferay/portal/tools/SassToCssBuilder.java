@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.sass.SassFile;
 import com.liferay.portal.tools.sass.SassFileWithMediaQuery;
 import com.liferay.portal.tools.sass.SassString;
-import com.liferay.portal.util.CSSBuilderUtil;
 import com.liferay.portal.util.FastDateFormatFactoryImpl;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsImpl;
@@ -38,7 +37,6 @@ import com.liferay.sass.compiler.jni.internal.JniSassCompiler;
 import com.liferay.sass.compiler.ruby.internal.RubySassCompiler;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

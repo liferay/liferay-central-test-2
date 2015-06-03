@@ -19,11 +19,10 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.dynamiccss.RTLCSSUtil;
+import com.liferay.portal.tools.CSSBuilderUtil;
 import com.liferay.portal.util.AggregateUtil;
-import com.liferay.portal.util.CSSBuilderUtil;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
