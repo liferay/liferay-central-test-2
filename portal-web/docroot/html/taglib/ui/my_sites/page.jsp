@@ -225,7 +225,6 @@ List<Group> mySiteGroups = user.getMySiteGroups(classNames, includeControlPanel,
 						String privateAddPageHREF = null;
 
 						if ((mySiteGroup.isSite() || mySiteGroup.isUser()) && GroupPermissionUtil.contains(permissionChecker, mySiteGroup, ActionKeys.ADD_LAYOUT)) {
-
 							PortletURL publicAddPageURL = PortletProviderUtil.getPortletURL(request, Layout.class.getName(), PortletProvider.Action.VIEW);
 
 							publicAddPageURL.setParameter("tabs1", "public-pages");
