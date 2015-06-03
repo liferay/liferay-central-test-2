@@ -117,10 +117,11 @@ public class DLFileEntryIndexer
 
 	@Override
 	public void addRelatedClassNames(
-			BooleanFilter contextFilter, SearchContext searchContext)
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		_relatedEntryIndexer.addRelatedClassNames(contextFilter, searchContext);
+		_relatedEntryIndexer.addRelatedClassNames(
+			contextBooleanFilter, searchContext);
 	}
 
 	@Override
@@ -253,16 +254,17 @@ public class DLFileEntryIndexer
 		String[] mimeTypes = (String[])searchContext.getAttribute("mimeTypes");
 
 		if (ArrayUtil.isNotEmpty(mimeTypes)) {
-			BooleanFilter mimeTypesFilter = new BooleanFilter();
+			BooleanFilter mimeTypesBooleanFilter = new BooleanFilter();
 
 			for (String mimeType : mimeTypes) {
-				mimeTypesFilter.addTerm(
+				mimeTypesBooleanFilter.addTerm(
 					"mimeType",
 					StringUtil.replace(
 						mimeType, CharPool.FORWARD_SLASH, CharPool.UNDERLINE));
 			}
 
-			contextBooleanFilter.add(mimeTypesFilter, BooleanClauseOccur.MUST);
+			contextBooleanFilter.add(
+				mimeTypesBooleanFilter, BooleanClauseOccur.MUST);
 		}
 	}
 

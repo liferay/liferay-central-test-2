@@ -169,15 +169,15 @@ public class UserIndexer extends BaseIndexer {
 			if (value instanceof Long[]) {
 				Long[] values = (Long[])value;
 
-				BooleanFilter userGroupsFilter = new BooleanFilter();
+				BooleanFilter userGroupsBooleanFilter = new BooleanFilter();
 
 				for (long groupId : values) {
-					userGroupsFilter.addTerm("groupIds", groupId);
+					userGroupsBooleanFilter.addTerm("groupIds", groupId);
 				}
 
-				if (userGroupsFilter.hasClauses()) {
+				if (userGroupsBooleanFilter.hasClauses()) {
 					contextFilter.add(
-						userGroupsFilter, BooleanClauseOccur.MUST);
+						userGroupsBooleanFilter, BooleanClauseOccur.MUST);
 				}
 			}
 			else {

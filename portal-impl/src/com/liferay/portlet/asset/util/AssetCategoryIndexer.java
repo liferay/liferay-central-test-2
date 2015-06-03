@@ -106,14 +106,15 @@ public class AssetCategoryIndexer extends BaseIndexer {
 			Field.ASSET_VOCABULARY_IDS);
 
 		if (!ArrayUtil.isEmpty(vocabularyIds)) {
-			BooleanFilter vocabularyFilter = new BooleanFilter();
+			BooleanFilter vocabularyBooleanFilter = new BooleanFilter();
 
 			for (long vocabularyId : vocabularyIds) {
-				vocabularyFilter.addTerm(
+				vocabularyBooleanFilter.addTerm(
 					Field.ASSET_VOCABULARY_ID, String.valueOf(vocabularyId));
 			}
 
-			contextBooleanFilter.add(vocabularyFilter, BooleanClauseOccur.MUST);
+			contextBooleanFilter.add(
+				vocabularyBooleanFilter, BooleanClauseOccur.MUST);
 		}
 	}
 

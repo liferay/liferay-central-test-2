@@ -275,18 +275,18 @@ public abstract class BaseIndexer implements Indexer {
 
 			searchContext.setEntryClassNames(entryClassNames);
 
-			BooleanFilter fullQueryFilter = new BooleanFilter();
+			BooleanFilter fullQueryBooleanFilter = new BooleanFilter();
 
-			addSearchAssetCategoryIds(fullQueryFilter, searchContext);
-			addSearchAssetTagNames(fullQueryFilter, searchContext);
-			addSearchEntryClassNames(fullQueryFilter, searchContext);
-			addSearchFolderId(fullQueryFilter, searchContext);
-			addSearchGroupId(fullQueryFilter, searchContext);
-			addSearchLayout(fullQueryFilter, searchContext);
-			addSearchUserId(fullQueryFilter, searchContext);
+			addSearchAssetCategoryIds(fullQueryBooleanFilter, searchContext);
+			addSearchAssetTagNames(fullQueryBooleanFilter, searchContext);
+			addSearchEntryClassNames(fullQueryBooleanFilter, searchContext);
+			addSearchFolderId(fullQueryBooleanFilter, searchContext);
+			addSearchGroupId(fullQueryBooleanFilter, searchContext);
+			addSearchLayout(fullQueryBooleanFilter, searchContext);
+			addSearchUserId(fullQueryBooleanFilter, searchContext);
 
 			BooleanQuery fullQuery = createFullQuery(
-				fullQueryFilter, searchContext);
+				fullQueryBooleanFilter, searchContext);
 
 			fullQuery.setQueryConfig(searchContext.getQueryConfig());
 
@@ -801,9 +801,9 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		QueryFilter queryFilter = new QueryFilter(facetBooleanQuery);
+		QueryFilter queryBooleanFilter = new QueryFilter(facetBooleanQuery);
 
-		facetBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
+		facetBooleanFilter.add(queryBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected void addFacetSelectedFieldNames(
@@ -832,7 +832,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchAssetCategoryIds(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
@@ -893,7 +893,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchAssetTagNames(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
@@ -925,7 +925,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchEntryClassNames(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		Facet facet = new AssetEntriesFacet(searchContext);
@@ -979,7 +979,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchFolderId(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
@@ -999,7 +999,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchGroupId(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		Facet facet = new ScopeFacet(searchContext);
@@ -1030,7 +1030,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchLayout(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
@@ -1117,7 +1117,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addSearchUserId(
-			BooleanFilter queryFilter, SearchContext searchContext)
+			BooleanFilter queryBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);

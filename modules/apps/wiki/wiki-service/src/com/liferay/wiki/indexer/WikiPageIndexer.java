@@ -80,10 +80,11 @@ public class WikiPageIndexer
 
 	@Override
 	public void addRelatedClassNames(
-			BooleanFilter contextFilter, SearchContext searchContext)
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		_relatedEntryIndexer.addRelatedClassNames(contextFilter, searchContext);
+		_relatedEntryIndexer.addRelatedClassNames(
+			contextBooleanFilter, searchContext);
 	}
 
 	@Override
@@ -152,7 +153,7 @@ public class WikiPageIndexer
 		long[] nodeIds = searchContext.getNodeIds();
 
 		if (ArrayUtil.isNotEmpty(nodeIds)) {
-			BooleanFilter nodesIdFilter = new BooleanFilter();
+			BooleanFilter nodesIdBooleanFilter = new BooleanFilter();
 
 			for (long nodeId : nodeIds) {
 				try {
@@ -160,18 +161,18 @@ public class WikiPageIndexer
 				}
 				catch (Exception e) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Error retrieving node: " + nodeId, e);
+						_log.debug("Unable to get node " + nodeId, e);
 					}
 
 					continue;
 				}
 
-				nodesIdFilter.addTerm(Field.NODE_ID, nodeId);
+				nodesIdBooleanFilter.addTerm(Field.NODE_ID, nodeId);
 			}
 
-			if (nodesIdFilter.hasClauses()) {
+			if (nodesIdBooleanFilter.hasClauses()) {
 				contextBooleanFilter.add(
-					nodesIdFilter, BooleanClauseOccur.MUST);
+					nodesIdBooleanFilter, BooleanClauseOccur.MUST);
 			}
 		}
 	}
