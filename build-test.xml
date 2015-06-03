@@ -5987,7 +5987,7 @@ Ant GC log:
 ${ant-gc-log}</echo>
 			</then>
 			<else>
-				<echo>Unable to find /tmp/ant-gc.log</echo>
+				<echo>Unable to read /tmp/ant-gc.log</echo>
 			</else>
 		</if>
 	</target>
