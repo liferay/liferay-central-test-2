@@ -56,7 +56,7 @@ public class LockHelperImpl implements LockHelper {
 			return new LockImpl(LockLocalServiceUtil.getLock(className, key));
 		}
 		catch (PortalException pe) {
-			throw transfer(pe);
+			throw translate(pe);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class LockHelperImpl implements LockHelper {
 			return new LockImpl(LockLocalServiceUtil.getLock(className, key));
 		}
 		catch (PortalException pe) {
-			throw transfer(pe);
+			throw translate(pe);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class LockHelperImpl implements LockHelper {
 					uuid, companyId));
 		}
 		catch (PortalException pe) {
-			throw transfer(pe);
+			throw translate(pe);
 		}
 	}
 
@@ -117,7 +117,7 @@ public class LockHelperImpl implements LockHelper {
 					expirationTime));
 		}
 		catch (PortalException pe) {
-			throw transfer(pe);
+			throw translate(pe);
 		}
 	}
 
@@ -134,7 +134,7 @@ public class LockHelperImpl implements LockHelper {
 					expirationTime));
 		}
 		catch (PortalException pe) {
-			throw transfer(pe);
+			throw translate(pe);
 		}
 	}
 
@@ -162,7 +162,7 @@ public class LockHelperImpl implements LockHelper {
 				LockLocalServiceUtil.refresh(uuid, companyId, expirationTime));
 		}
 		catch (PortalException pe) {
-			throw transfer(pe);
+			throw translate(pe);
 		}
 	}
 
@@ -187,7 +187,7 @@ public class LockHelperImpl implements LockHelper {
 		LockLocalServiceUtil.clear();
 	}
 
-	protected PortalException transfer(PortalException portalException) {
+	protected PortalException translate(PortalException portalException) {
 		if (portalException instanceof
 				com.liferay.portal.DuplicateLockException) {
 
