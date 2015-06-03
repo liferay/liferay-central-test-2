@@ -69,12 +69,13 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 	@Override
 	public void reconfigureCaches(URL configurationURL) {
 		ObjectValuePair<Configuration, PortalCacheManagerConfiguration>
-			configurationPair = EhcacheConfigurationHelperUtil.getConfiguration(
-				configurationURL, isClusterAware(), _usingDefault, props);
+			configurationObjectValuePair =
+				EhcacheConfigurationHelperUtil.getConfigurationObjectValuePair(
+					configurationURL, isClusterAware(), _usingDefault, props);
 
-		reconfigEhcache(configurationPair.getKey());
+		reconfigEhcache(configurationObjectValuePair.getKey());
 
-		reconfigPortalCache(configurationPair.getValue());
+		reconfigPortalCache(configurationObjectValuePair.getValue());
 	}
 
 	public void setConfigFile(String configFile) {
@@ -211,12 +212,14 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 		_usingDefault = _configFile.equals(_defaultConfigFile);
 
 		ObjectValuePair<Configuration, PortalCacheManagerConfiguration>
-			configurationPair = EhcacheConfigurationHelperUtil.getConfiguration(
-				configFileURL, isClusterAware(), _usingDefault, props);
+			configurationObjectValuePair =
+				EhcacheConfigurationHelperUtil.getConfigurationObjectValuePair(
+					configFileURL, isClusterAware(), _usingDefault, props);
 
-		_cacheManager = new CacheManager(configurationPair.getKey());
+		_cacheManager = new CacheManager(configurationObjectValuePair.getKey());
 
-		_portalCacheManagerConfiguration = configurationPair.getValue();
+		_portalCacheManagerConfiguration =
+			configurationObjectValuePair.getValue();
 
 		_cacheManager.setName(getName());
 

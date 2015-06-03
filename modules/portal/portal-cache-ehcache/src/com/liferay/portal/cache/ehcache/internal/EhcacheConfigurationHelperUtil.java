@@ -61,7 +61,7 @@ import net.sf.ehcache.event.NotificationScope;
 public class EhcacheConfigurationHelperUtil {
 
 	public static ObjectValuePair
-		<Configuration, PortalCacheManagerConfiguration> getConfiguration(
+		<Configuration, PortalCacheManagerConfiguration> getConfigurationObjectValuePair(
 			URL configurationURL, boolean clusterAware, boolean usingDefault,
 			Props props) {
 
