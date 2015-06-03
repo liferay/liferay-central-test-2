@@ -29,7 +29,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Peter Fellwock
  */
 @Component(immediate = true, service = PortalWebResources.class)
-public class CssPortalWebResources implements PortalWebResources {
+public class CSSPortalWebResources implements PortalWebResources {
 
 	@Override
 	public String getContextPath() {
