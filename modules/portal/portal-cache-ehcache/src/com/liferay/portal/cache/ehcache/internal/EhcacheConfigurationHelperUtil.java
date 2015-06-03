@@ -234,9 +234,6 @@ public class EhcacheConfigurationHelperUtil {
 				PortalCacheConfiguration.DEFAULT_PORTAL_CACHE_NAME;
 		}
 
-		boolean requireSerialization = _requireSerialization(
-			cacheConfiguration, clusterAware, clusterEnabled);
-
 		Map<CallbackConfiguration, CacheListenerScope>
 			cacheListenerConfigurations = new HashMap<>();
 
@@ -332,6 +329,9 @@ public class EhcacheConfigurationHelperUtil {
 
 			cacheConfiguration.addBootstrapCacheLoaderFactory(null);
 		}
+
+		boolean requireSerialization = _requireSerialization(
+			cacheConfiguration, clusterAware, clusterEnabled);
 
 		return new EhcachePortalCacheConfiguration(
 			portalCacheName, cacheListenerConfigurations,
