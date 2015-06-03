@@ -358,7 +358,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 						String.valueOf(group.getGroupId()), role.getRoleId(),
 						ActionKeys.VIEW)) {
 
-					groupsBooleanFilter.addTerm(Field.GROUP_ID, group.getGroupId());
+					groupsBooleanFilter.addTerm(
+						Field.GROUP_ID, group.getGroupId());
 				}
 
 				if ((role.getType() != RoleConstants.TYPE_REGULAR) &&

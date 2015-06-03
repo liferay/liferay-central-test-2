@@ -199,8 +199,9 @@ public abstract class BaseIndexer implements Indexer {
 				groupIds = new long[] {groupId};
 			}
 
-			facetBooleanFilter = searchPermissionChecker.getPermissionBooleanFilter(
-				searchContext.getCompanyId(), groupIds,
+			facetBooleanFilter =
+				searchPermissionChecker.getPermissionBooleanFilter(
+					searchContext.getCompanyId(), groupIds,
 				searchContext.getUserId(), className, facetBooleanFilter,
 				searchContext);
 		}

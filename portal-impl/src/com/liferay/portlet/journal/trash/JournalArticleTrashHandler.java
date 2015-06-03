@@ -101,13 +101,13 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 
 	@Override
 	public Filter getExcludeFilter(SearchContext searchContext) {
-		BooleanFilter excludeFilter = new BooleanFilter();
+		BooleanFilter excludeBooleanFilter = new BooleanFilter();
 
-		excludeFilter.addRequiredTerm(
+		excludeBooleanFilter.addRequiredTerm(
 			Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
-		excludeFilter.addRequiredTerm("head", false);
+		excludeBooleanFilter.addRequiredTerm("head", false);
 
-		return excludeFilter;
+		return excludeBooleanFilter;
 	}
 
 	@Override

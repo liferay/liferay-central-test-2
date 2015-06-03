@@ -101,13 +101,13 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 
 	@Override
 	public Filter getExcludeFilter(SearchContext searchContext) {
-		BooleanFilter excludeFilter = new BooleanFilter();
+		BooleanFilter excludeBooleanFilter = new BooleanFilter();
 
-		excludeFilter.addRequiredTerm(
+		excludeBooleanFilter.addRequiredTerm(
 			Field.ENTRY_CLASS_NAME, DLFileEntryConstants.getClassName());
-		excludeFilter.addRequiredTerm(Field.HIDDEN, true);
+		excludeBooleanFilter.addRequiredTerm(Field.HIDDEN, true);
 
-		return excludeFilter;
+		return excludeBooleanFilter;
 	}
 
 	@Override
