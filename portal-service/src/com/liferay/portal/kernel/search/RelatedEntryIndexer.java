@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.search.filter.BooleanFilter;
 public interface RelatedEntryIndexer {
 
 	public void addRelatedClassNames(
-			BooleanFilter contextFilter, SearchContext searchContext)
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception;
 
 	public void addRelatedEntryFields(Document document, Object obj)

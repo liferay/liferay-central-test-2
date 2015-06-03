@@ -906,7 +906,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected Filter addSearchClassTypeIds(
-			BooleanFilter contextFilter, SearchContext searchContext)
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		long[] classTypeIds = searchContext.getClassTypeIds();
@@ -921,7 +921,7 @@ public abstract class BaseIndexer implements Indexer {
 			classTypeIdsFilter.addTerm(Field.CLASS_TYPE_ID, classTypeId);
 		}
 
-		return contextFilter.add(classTypeIdsFilter, BooleanClauseOccur.MUST);
+		return contextBooleanFilter.add(classTypeIdsFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected void addSearchEntryClassNames(
@@ -1175,7 +1175,7 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addStatus(
-			BooleanFilter contextFilter, SearchContext searchContext)
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		int status = GetterUtil.getInteger(
@@ -1183,10 +1183,10 @@ public abstract class BaseIndexer implements Indexer {
 			WorkflowConstants.STATUS_APPROVED);
 
 		if (status != WorkflowConstants.STATUS_ANY) {
-			contextFilter.addRequiredTerm(Field.STATUS, status);
+			contextBooleanFilter.addRequiredTerm(Field.STATUS, status);
 		}
 		else {
-			contextFilter.addTerm(
+			contextBooleanFilter.addTerm(
 				Field.STATUS, String.valueOf(WorkflowConstants.STATUS_IN_TRASH),
 				BooleanClauseOccur.MUST_NOT);
 		}
