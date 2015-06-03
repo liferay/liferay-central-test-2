@@ -61,9 +61,11 @@ import net.sf.ehcache.event.NotificationScope;
 public class EhcacheConfigurationHelperUtil {
 
 	public static ObjectValuePair
-		<Configuration, PortalCacheManagerConfiguration> getConfigurationObjectValuePair(
-			URL configurationURL, boolean clusterAware, boolean usingDefault,
-			Props props) {
+		<Configuration, PortalCacheManagerConfiguration>
+			getConfigurationObjectValuePair(
+				URL configurationURL, boolean clusterAware,
+				boolean usingDefault,
+				Props props) {
 
 		if (configurationURL == null) {
 			throw new NullPointerException("Configuration path is null");
