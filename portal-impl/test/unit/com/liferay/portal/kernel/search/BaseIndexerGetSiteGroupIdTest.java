@@ -62,10 +62,10 @@ public class BaseIndexerGetSiteGroupIdTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetSiteGroupIdExisting() throws Exception {
+	public void testGetSiteGroupId() throws Exception {
 		long groupId = RandomTestUtil.randomLong();
 
-		setUpExistingGroup(groupId);
+		setUpGroup(groupId);
 
 		Assert.assertEquals(groupId, _indexer.getSiteGroupId(groupId));
 	}
@@ -81,19 +81,19 @@ public class BaseIndexerGetSiteGroupIdTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetSiteGroupIdMissing() throws Exception {
+	public void testGetSiteGroupIdNonexistent() throws Exception {
 		long groupId = RandomTestUtil.randomLong();
 
-		setUpMissingGroup(groupId);
+		setUpNonexistentGroup(groupId);
 
 		Assert.assertEquals(groupId, _indexer.getSiteGroupId(groupId));
 	}
 
 	@Test
-	public void testIsStagingGroupExisting() throws Exception {
+	public void testIsStagingGroup() throws Exception {
 		long groupId = RandomTestUtil.randomLong();
 
-		Group group = setUpExistingGroup(groupId);
+		Group group = setUpGroup(groupId);
 
 		Mockito.when(
 			group.isStagingGroup()
@@ -121,15 +121,15 @@ public class BaseIndexerGetSiteGroupIdTest extends PowerMockito {
 	}
 
 	@Test
-	public void testIsStagingGroupMissing() throws Exception {
+	public void testIsStagingGroupNonexistent() throws Exception {
 		long groupId = RandomTestUtil.randomLong();
 
-		setUpMissingGroup(groupId);
+		setUpNonexistentGroup(groupId);
 
 		Assert.assertEquals(false, _indexer.isStagingGroup(groupId));
 	}
 
-	protected Group setUpExistingGroup(long groupId) throws Exception {
+	protected Group setUpGroup(long groupId) throws Exception {
 		Group group = Mockito.mock(Group.class);
 
 		Mockito.when(
@@ -160,6 +160,8 @@ public class BaseIndexerGetSiteGroupIdTest extends PowerMockito {
 	protected Group setUpLayoutGroup(long groupId, long parentGroupId)
 		throws PortalException {
 
+		Group group = Mockito.mock(Group.class);
+
 		Group parentGroup = Mockito.mock(Group.class);
 
 		Mockito.when(
@@ -167,8 +169,6 @@ public class BaseIndexerGetSiteGroupIdTest extends PowerMockito {
 		).thenReturn(
 			parentGroupId
 		);
-
-		Group group = Mockito.mock(Group.class);
 
 		Mockito.when(
 			group.getParentGroup()
@@ -203,7 +203,7 @@ public class BaseIndexerGetSiteGroupIdTest extends PowerMockito {
 		return parentGroup;
 	}
 
-	protected void setUpMissingGroup(long groupId) throws PortalException {
+	protected void setUpNonexistentGroup(long groupId) throws PortalException {
 		Mockito.doThrow(
 			new NoSuchGroupException()
 		).when(
