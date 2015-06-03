@@ -79,11 +79,12 @@ public class SassToCssBuilder {
 
 		String docrootDirName = arguments.get("sass.docroot.dir");
 		String portalCommonDirName = arguments.get("sass.portal.common.dir");
-		String sassCompilerImpl = arguments.get("sass.compiler.impl");
+		String sassCompilerClassName = arguments.get(
+			"sass.compiler.class.name");
 
 		try {
 			SassToCssBuilder sassToCssBuilder = new SassToCssBuilder(
-				docrootDirName, portalCommonDirName, sassCompilerImpl);
+				docrootDirName, portalCommonDirName, sassCompilerClassName);
 
 			sassToCssBuilder.execute(dirNames);
 		}
@@ -94,7 +95,7 @@ public class SassToCssBuilder {
 
 	public SassToCssBuilder(
 			String docrootDirName, String portalCommonDirName,
-			String sassCompilerImpl)
+			String sassCompilerClassName)
 		throws Exception {
 
 		_docrootDirName = docrootDirName;
@@ -102,7 +103,7 @@ public class SassToCssBuilder {
 
 		_initUtil();
 
-		_initCompiler(sassCompilerImpl);
+		_initSassCompiler(sassCompilerClassName);
 	}
 
 	public void execute(List<String> dirNames) throws Exception {
@@ -219,14 +220,18 @@ public class SassToCssBuilder {
 		return sb.toString();
 	}
 
-	private void _initCompiler(String sassCompilerImpl) throws Exception {
-		if ((sassCompilerImpl == null) || sassCompilerImpl.equals("jni")) {
+	private void _initSassCompiler(String sassCompilerClassName)
+		throws Exception {
+
+		if ((sassCompilerClassName == null) ||
+			sassCompilerClassName.equals("jni")) {
+
 			try {
 				_sassCompiler = new JniSassCompiler();
 			}
 			catch (Throwable t) {
 				System.out.println(
-					"Unable to load native compiler, falling back to ruby");
+					"Unable to load native compiler, falling back to Ruby");
 
 				_sassCompiler = new RubySassCompiler(
 					PropsValues.SCRIPTING_JRUBY_COMPILE_MODE,
@@ -241,7 +246,7 @@ public class SassToCssBuilder {
 			}
 			catch (Exception e) {
 				System.out.println(
-					"Unable to load ruby compiler, falling back to native");
+					"Unable to load Ruby compiler, falling back to native");
 
 				_sassCompiler = new JniSassCompiler();
 			}
@@ -249,10 +254,6 @@ public class SassToCssBuilder {
 	}
 
 	private void _initUtil() {
-		Class<?> clazz = getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
-
 		FastDateFormatFactoryUtil fastDateFormatFactoryUtil =
 			new FastDateFormatFactoryUtil();
 
@@ -262,6 +263,10 @@ public class SassToCssBuilder {
 		FileUtil fileUtil = new FileUtil();
 
 		fileUtil.setFile(new FileImpl());
+
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		PortalClassLoaderUtil.setClassLoader(classLoader);
 
