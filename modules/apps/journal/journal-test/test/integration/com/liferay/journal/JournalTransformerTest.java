@@ -175,7 +175,7 @@ public class JournalTransformerTest {
 
 	@Test
 	public void testRegexTransformerListener() throws Exception {
-		loadRegexTransformerListenerTestProperties();
+		initRegexTransformerUtil();
 
 		Map<String, String> tokens = getTokens();
 
@@ -297,7 +297,12 @@ public class JournalTransformerTest {
 		return tokens;
 	}
 
-	protected void loadRegexTransformerListenerTestProperties() {
+	protected void initRegexTransformerUtil() {
+		Object instance = ReflectionTestUtil.getFieldValue(
+			RegexTransformerUtil.class, "_instance");
+
+		CacheRegistryUtil.setActive(true);
+
 		List<Pattern> patterns = new ArrayList<>();
 		List<String> replacements = new ArrayList<>();
 
@@ -314,11 +319,6 @@ public class JournalTransformerTest {
 			patterns.add(Pattern.compile(regex));
 			replacements.add(replacement);
 		}
-
-		Object instance = ReflectionTestUtil.getFieldValue(
-			RegexTransformerUtil.class, "_instance");
-
-		CacheRegistryUtil.setActive(true);
 
 		ReflectionTestUtil.setFieldValue(instance, "_patterns", patterns);
 		ReflectionTestUtil.setFieldValue(
