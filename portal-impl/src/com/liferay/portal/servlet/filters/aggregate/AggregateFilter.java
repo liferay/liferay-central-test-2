@@ -313,8 +313,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 		}
 		else {
 			content = aggregateJavaScript(
-				new ServletPaths(jsServletContext, bundleDirName),
-				fileNames);
+				new ServletPaths(jsServletContext, bundleDirName), fileNames);
 		}
 
 		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);

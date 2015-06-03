@@ -91,18 +91,6 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 
 		return String.valueOf(cacheKeyGenerator.finish());
 	}
-	
-	protected String getRequestPath(HttpServletRequest request) {
-		String requestPath = request.getRequestURI();
-
-		String contextPath = request.getContextPath();
-
-		if (!contextPath.equals(StringPool.SLASH)) {
-			requestPath = requestPath.substring(contextPath.length());
-		}
-		
-		return requestPath;
-	}
 
 	protected Object getDynamicContent(
 			HttpServletRequest request, HttpServletResponse response,
@@ -221,6 +209,18 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 		}
 
 		return dynamicContent;
+	}
+
+	protected String getRequestPath(HttpServletRequest request) {
+		String requestPath = request.getRequestURI();
+
+		String contextPath = request.getContextPath();
+
+		if (!contextPath.equals(StringPool.SLASH)) {
+			requestPath = requestPath.substring(contextPath.length());
+		}
+
+		return requestPath;
 	}
 
 	@Override
