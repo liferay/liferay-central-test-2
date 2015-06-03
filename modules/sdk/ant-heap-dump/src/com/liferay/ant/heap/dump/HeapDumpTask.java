@@ -40,7 +40,7 @@ public class HeapDumpTask extends Task {
 
 			future.get();
 
-			log("Successfully dumpped heap at :" + dumpFile.getCanonicalPath());
+			log("Successfully dumped heap at " + dumpFile.getCanonicalPath());
 		}
 		catch (Exception e) {
 			throw new BuildException(e);
