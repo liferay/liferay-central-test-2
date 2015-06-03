@@ -21,8 +21,8 @@ import java.util.Date;
  */
 public class LockImpl implements Lock {
 
-	public LockImpl(com.liferay.portal.model.Lock innerLock) {
-		_innerLock = innerLock;
+	public LockImpl(com.liferay.portal.model.Lock lock) {
+		_lock = lock;
 	}
 
 	@Override
@@ -37,109 +37,109 @@ public class LockImpl implements Lock {
 
 		LockImpl lockImpl = (LockImpl)object;
 
-		return _innerLock.equals(lockImpl._innerLock);
+		return _lock.equals(lockImpl._lock);
 	}
 
 	@Override
 	public String getClassName() {
-		return _innerLock.getClassName();
+		return _lock.getClassName();
 	}
 
 	@Override
 	public long getCompanyId() {
-		return _innerLock.getCompanyId();
+		return _lock.getCompanyId();
 	}
 
 	@Override
 	public Date getCreateDate() {
-		return _innerLock.getCreateDate();
+		return _lock.getCreateDate();
 	}
 
 	@Override
 	public Date getExpirationDate() {
-		return _innerLock.getExpirationDate();
+		return _lock.getExpirationDate();
 	}
 
 	@Override
 	public long getExpirationTime() {
-		return _innerLock.getExpirationTime();
+		return _lock.getExpirationTime();
 	}
 
 	@Override
 	public boolean getInheritable() {
-		return _innerLock.getInheritable();
+		return _lock.getInheritable();
 	}
 
 	@Override
 	public String getKey() {
-		return _innerLock.getKey();
+		return _lock.getKey();
 	}
 
 	@Override
 	public long getLockId() {
-		return _innerLock.getLockId();
+		return _lock.getLockId();
 	}
 
 	@Override
 	public String getOwner() {
-		return _innerLock.getOwner();
+		return _lock.getOwner();
 	}
 
 	@Override
 	public long getUserId() {
-		return _innerLock.getUserId();
+		return _lock.getUserId();
 	}
 
 	@Override
 	public String getUserName() {
-		return _innerLock.getUserName();
+		return _lock.getUserName();
 	}
 
 	@Override
 	public String getUserUuid() {
-		return _innerLock.getUserUuid();
+		return _lock.getUserUuid();
 	}
 
 	@Override
 	public String getUuid() {
-		return _innerLock.getUuid();
+		return _lock.getUuid();
 	}
 
 	@Override
 	public int hashCode() {
-		return _innerLock.hashCode();
+		return _lock.hashCode();
 	}
 
 	@Override
 	public boolean isCachedModel() {
-		return _innerLock.isCachedModel();
+		return _lock.isCachedModel();
 	}
 
 	@Override
 	public boolean isEscapedModel() {
-		return _innerLock.isEscapedModel();
+		return _lock.isEscapedModel();
 	}
 
 	@Override
 	public boolean isExpired() {
-		return _innerLock.isExpired();
+		return _lock.isExpired();
 	}
 
 	@Override
 	public boolean isInheritable() {
-		return _innerLock.isInheritable();
+		return _lock.isInheritable();
 	}
 
 	@Override
 	public boolean isNeverExpires() {
-		return _innerLock.isNeverExpires();
+		return _lock.isNeverExpires();
 	}
 
 	@Override
 	public boolean isNew() {
-		return _innerLock.isNew();
+		return _lock.isNew();
 	}
 
-	private final com.liferay.portal.model.Lock _innerLock;
+	private final com.liferay.portal.model.Lock _lock;
 
 }
