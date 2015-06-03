@@ -100,7 +100,9 @@ public class SecureXMLFactoryProviderImpl implements SecureXMLFactoryProvider {
 
 	@Override
 	public XMLReader newXMLReader() {
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+	
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		ClassLoader contextClassLoader =
 			ClassLoaderUtil.getContextClassLoader();
@@ -108,7 +110,7 @@ public class SecureXMLFactoryProviderImpl implements SecureXMLFactoryProvider {
 		XMLReader xmlReader = null;
 
 		try {
-			if (contextClassLoader != classLoader) {
+			if (classLoader != contextClassLoader) {
 				ClassLoaderUtil.setContextClassLoader(classLoader);
 			}
 
@@ -118,7 +120,7 @@ public class SecureXMLFactoryProviderImpl implements SecureXMLFactoryProvider {
 			throw new SystemException(re);
 		}
 		finally {
-			if (contextClassLoader != classLoader) {
+			if (classLoader != contextClassLoader) {
 				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
