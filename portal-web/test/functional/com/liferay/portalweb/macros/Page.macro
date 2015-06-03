@@ -93,6 +93,24 @@
 
 		<execute function="AssertTextEquals" locator1="CPSitepages#SUCCESS_MESSAGE" value1="Your request completed successfully." />
 
+		<if>
+			<isset var="nodePort" />
+			<then>
+				<execute function="Open" locator1="http://localhost:${nodePort}" />
+			</then>
+			<elseif>
+				<not>
+					<and>
+						<isset var="defaultURL" />
+						<equals arg1="${defaultURL}" arg2="false" />
+					</and>
+				</not>
+				<then>
+					<execute macro="Page#openURL" />
+				</then>
+			</elseif>
+		</if>
+
 		<var name="key_pageName" value="${pageName}" />
 
 		<if>
