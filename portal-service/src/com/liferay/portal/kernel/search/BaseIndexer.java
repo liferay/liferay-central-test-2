@@ -801,9 +801,9 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		QueryFilter queryBooleanFilter = new QueryFilter(facetBooleanQuery);
+		QueryFilter queryFilter = new QueryFilter(facetBooleanQuery);
 
-		facetBooleanFilter.add(queryBooleanFilter, BooleanClauseOccur.MUST);
+		facetBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected void addFacetSelectedFieldNames(
