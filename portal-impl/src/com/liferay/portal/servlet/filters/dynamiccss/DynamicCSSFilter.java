@@ -91,12 +91,8 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 
 		return String.valueOf(cacheKeyGenerator.finish());
 	}
-
-	protected Object getDynamicContent(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws Exception {
-
+	
+	protected String getRequestPath(HttpServletRequest request) {
 		String requestPath = request.getRequestURI();
 
 		String contextPath = request.getContextPath();
@@ -104,12 +100,21 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 		if (!contextPath.equals(StringPool.SLASH)) {
 			requestPath = requestPath.substring(contextPath.length());
 		}
+		
+		return requestPath;
+	}
 
-		URL resourceURL = _servletContext.getResource(requestPath);
-
-		ServletContext currentServletContext = _servletContext;
+	protected Object getDynamicContent(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
 
 		boolean bundleResource = false;
+		ServletContext currentServletContext = _servletContext;
+
+		String requestPath = getRequestPath(request);
+
+		URL resourceURL = _servletContext.getResource(requestPath);
 
 		if (resourceURL == null) {
 			resourceURL = PortalWebResourcesUtil.getServletContextResource(
@@ -119,10 +124,9 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 				return null;
 			}
 
+			bundleResource = true;
 			currentServletContext = PortalWebResourcesUtil.getServletContext(
 				PortalWebResourceConstants.RESOURCE_TYPE_CSS);
-
-			bundleResource = true;
 		}
 
 		String cacheCommonFileName = getCacheFileName(request);
