@@ -65,7 +65,7 @@
 
 		<execute function="AssertClick" locator1="CPSitepages#TOOLBAR_ADD_PAGE" value1="Add Page" />
 
-		<execute function="Type#mouseOverFocusType" locator1="CPSitepagesAddpage#ADD_PAGE_NAME_FIELD" value1="${sitePageName}" />
+		<execute function="Type#mouseOverFocusType" locator1="CPSitepagesAddpage#ADD_PAGE_NAME_FIELD" value1="${pageName}" />
 
 		<var name="key_pageType" value="${pageTemplateName}" />
 
@@ -81,10 +81,10 @@
 		</if>
 
 		<if>
-			<isset var="sitePageType" />
+			<isset var="pageType" />
 			<then>
 				<execute macro="SitePage#selectSitePageTypeRadioCP">
-					<var name="sitePageType" value="${sitePageType}" />
+					<var name="sitePageType" value="${pageType}" />
 				</execute>
 			</then>
 		</if>
