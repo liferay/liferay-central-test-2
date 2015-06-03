@@ -61,6 +61,8 @@
 
 		<execute function="AssertClick" locator1="DockbarAddpanelpage#PAGE_TAB" value1="Page" />
 
+		<execute function="AssertClick" locator1="Link#NEW_PAGE" value1="New Page" />
+
 		<execute function="AssertClick" locator1="CPSitepages#TOOLBAR_ADD_PAGE" value1="Add Page" />
 
 		<execute function="Type#mouseOverFocusType" locator1="CPSitepagesAddpage#ADD_PAGE_NAME_FIELD" value1="${sitePageName}" />
