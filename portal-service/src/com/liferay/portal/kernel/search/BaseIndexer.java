@@ -915,13 +915,13 @@ public abstract class BaseIndexer implements Indexer {
 			return null;
 		}
 
-		BooleanFilter classTypeIdsFilter = new BooleanFilter();
+		BooleanFilter classTypeIdsBooleanFilter = new BooleanFilter();
 
 		for (long classTypeId : classTypeIds) {
-			classTypeIdsFilter.addTerm(Field.CLASS_TYPE_ID, classTypeId);
+			classTypeIdsBooleanFilter.addTerm(Field.CLASS_TYPE_ID, classTypeId);
 		}
 
-		return contextBooleanFilter.add(classTypeIdsFilter, BooleanClauseOccur.MUST);
+		return contextBooleanFilter.add(classTypeIdsBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	protected void addSearchEntryClassNames(
