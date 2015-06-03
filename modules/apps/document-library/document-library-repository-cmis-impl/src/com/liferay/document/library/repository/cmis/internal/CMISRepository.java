@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelper;
+import com.liferay.portal.kernel.lock.LockManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.RepositoryException;
@@ -130,12 +130,12 @@ public class CMISRepository extends BaseCmisRepository {
 	public CMISRepository(
 		CMISRepositoryConfiguration cmisRepositoryConfiguration,
 		CMISRepositoryHandler cmisRepositoryHandler,
-		CMISSearchQueryBuilder cmisSearchQueryBuilder, LockHelper lockHelper) {
+		CMISSearchQueryBuilder cmisSearchQueryBuilder, LockManager lockManager) {
 
 		_cmisRepositoryConfiguration = cmisRepositoryConfiguration;
 		_cmisRepositoryHandler = cmisRepositoryHandler;
 		_cmisSearchQueryBuilder = cmisSearchQueryBuilder;
-		_lockHelper = lockHelper;
+		_lockManager = lockManager;
 	}
 
 	@Override
@@ -2176,7 +2176,7 @@ public class CMISRepository extends BaseCmisRepository {
 
 		FileEntry fileEntry = new CMISFileEntry(
 			this, repositoryEntry.getUuid(),
-			repositoryEntry.getRepositoryEntryId(), document, _lockHelper);
+			repositoryEntry.getRepositoryEntryId(), document, _lockManager);
 
 		FileVersion fileVersion = null;
 
@@ -2367,7 +2367,7 @@ public class CMISRepository extends BaseCmisRepository {
 	private CMISRepositoryDetector _cmisRepositoryDetector;
 	private final CMISRepositoryHandler _cmisRepositoryHandler;
 	private final CMISSearchQueryBuilder _cmisSearchQueryBuilder;
-	private final LockHelper _lockHelper;
+	private final LockManager _lockManager;
 	private String _sessionKey;
 
 }

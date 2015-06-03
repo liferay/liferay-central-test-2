@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelper;
+import com.liferay.portal.kernel.lock.LockManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.Repository;
@@ -73,19 +73,19 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public CMISFileEntry(
 		CMISRepository cmisRepository, String uuid, long fileEntryId,
-		Document document, LockHelper lockHelper) {
+		Document document, LockManager lockManager) {
 
 		_cmisRepository = cmisRepository;
 		_uuid = uuid;
 		_fileEntryId = fileEntryId;
 		_document = document;
-		_lockHelper = lockHelper;
+		_lockManager = lockManager;
 	}
 
 	@Override
 	public Object clone() {
 		CMISFileEntry cmisFileEntry = new CMISFileEntry(
-			_cmisRepository, _uuid, _fileEntryId, _document, _lockHelper);
+			_cmisRepository, _uuid, _fileEntryId, _document, _lockManager);
 
 		cmisFileEntry.setCompanyId(getCompanyId());
 		cmisFileEntry.setFileEntryId(getFileEntryId());
@@ -339,7 +339,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 			userName = user.getFullName();
 		}
 
-		return _lockHelper.createLock(0, getCompanyId(), userId, userName);
+		return _lockManager.createLock(0, getCompanyId(), userId, userName);
 	}
 
 	@Override
@@ -741,7 +741,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	private Document _document;
 	private long _fileEntryId;
 	private FileVersion _latestFileVersion;
-	private final LockHelper _lockHelper;
+	private final LockManager _lockManager;
 	private final String _uuid;
 
 }

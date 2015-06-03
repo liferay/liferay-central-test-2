@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.concurrent.NoticeableFuture;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelper;
+import com.liferay.portal.kernel.lock.LockManager;
 import com.liferay.portal.kernel.test.CaptureHandler;
 import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 import com.liferay.portal.kernel.test.ReflectionTestUtil;
@@ -91,7 +91,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 		// Test 2, cluster event listener is invoked when lock is changed
 
-		_mockLockHelper.setLock(otherClusterNodeId);
+		_mockLockManager.setLock(otherClusterNodeId);
 
 		clusterEventListener.processClusterEvent(null);
 
@@ -156,12 +156,12 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 			mockClusterExecutor.getClusterEventListeners();
 
 		Assert.assertEquals(1, clusterEventListeners.size());
-		Assert.assertNotNull(_mockLockHelper.getLock());
+		Assert.assertNotNull(_mockLockManager.getLock());
 
 		clusterMasterExecutorImpl.deactivate();
 
 		Assert.assertTrue(clusterEventListeners.isEmpty());
-		Assert.assertNull(_mockLockHelper.getLock());
+		Assert.assertNull(_mockLockManager.getLock());
 
 		// Test 2, destory when cluster link is disabled
 
@@ -188,7 +188,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 		clusterMasterExecutorImpl.activate();
 
-		_mockLockHelper.setUnlockError(true);
+		_mockLockManager.setUnlockError(true);
 
 		try (CaptureHandler captureHandler =
 				JDKLoggerTestUtil.configureJDKLogger(
@@ -373,7 +373,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 		clusterMasterExecutorImpl.addClusterMasterTokenTransitionListener(
 			mockClusterMasterTokenTransitionListener);
 
-		_mockLockHelper.setLock(otherClusterNodeId);
+		_mockLockManager.setLock(otherClusterNodeId);
 
 		clusterMasterExecutorImpl.getMasterClusterNodeId(true);
 
@@ -384,7 +384,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 		// Test 2, slave to master
 
-		_mockLockHelper.setLock(mockClusterExecutor.getLocalClusterNodeId());
+		_mockLockManager.setLock(mockClusterExecutor.getLocalClusterNodeId());
 
 		clusterMasterExecutorImpl.getMasterClusterNodeId(true);
 
@@ -414,7 +414,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 			String otherClusterNodeId = "otherClusterNodeId";
 
-			_mockLockHelper.setLock(otherClusterNodeId);
+			_mockLockManager.setLock(otherClusterNodeId);
 
 			Assert.assertEquals(
 				mockClusterExecutor.getLocalClusterNodeId(),
@@ -443,7 +443,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 				JDKLoggerTestUtil.configureJDKLogger(
 					ClusterMasterExecutorImpl.class.getName(), Level.INFO)) {
 
-			_mockLockHelper.setLock(null);
+			_mockLockManager.setLock(null);
 
 			Assert.assertEquals(
 				mockClusterExecutor.getLocalClusterNodeId(),
@@ -472,7 +472,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 				JDKLoggerTestUtil.configureJDKLogger(
 					ClusterMasterExecutorImpl.class.getName(), Level.OFF)) {
 
-			_mockLockHelper.setLock(null);
+			_mockLockManager.setLock(null);
 
 			Assert.assertEquals(
 				mockClusterExecutor.getLocalClusterNodeId(),
@@ -502,7 +502,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 		// Test 2, initialize when cluster link is enabled and lock is null
 
-		Assert.assertNull(_mockLockHelper.getLock());
+		Assert.assertNull(_mockLockManager.getLock());
 
 		clusterMasterExecutorImpl = createMasterExecutorImpl(true);
 
@@ -520,9 +520,9 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 		String otherClusterNodeId = mockClusterExecutor.addClusterNode();
 
-		_mockLockHelper.setLock(otherClusterNodeId);
+		_mockLockManager.setLock(otherClusterNodeId);
 
-		Assert.assertNotNull(_mockLockHelper.getLock());
+		Assert.assertNotNull(_mockLockManager.getLock());
 
 		clusterMasterExecutorImpl = createMasterExecutorImpl(true);
 
@@ -628,7 +628,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 			}
 		});
 
-		clusterMasterExecutorImpl.setLockHelper(_mockLockHelper);
+		clusterMasterExecutorImpl.setLockManager(_mockLockManager);
 
 		return clusterMasterExecutorImpl;
 	}
@@ -639,7 +639,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 	private static final MethodKey _TEST_METHOD = new MethodKey(
 		TestBean.class, "testMethod1", String.class);
 
-	private final MockLockHelper _mockLockHelper = new MockLockHelper();
+	private final MockLockManager _mockLockManager = new MockLockManager();
 
 	private static class MockClusterExecutor extends ClusterExecutorImpl {
 
@@ -918,7 +918,7 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 
 	}
 
-	private static class MockLockHelper implements LockHelper {
+	private static class MockLockManager implements LockManager {
 
 		@Override
 		public void clear() {

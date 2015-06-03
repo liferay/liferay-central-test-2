@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.concurrent.NoticeableFuture;
 import com.liferay.portal.kernel.concurrent.NoticeableFutureConverter;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelper;
+import com.liferay.portal.kernel.lock.LockManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.resiliency.spi.SPIUtil;
@@ -174,7 +174,7 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 				_clusterExecutor.removeClusterEventListener(
 					_clusterEventListener);
 
-				_lockHelper.unlock(
+				_lockManager.unlock(
 					_LOCK_CLASS_NAME, _LOCK_CLASS_NAME, _localClusterNodeId);
 			}
 			catch (SystemException se) {
@@ -198,12 +198,12 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 				Lock lock = null;
 
 				if (owner == null) {
-					lock = _lockHelper.lock(
+					lock = _lockManager.lock(
 						_LOCK_CLASS_NAME, _LOCK_CLASS_NAME,
 						_localClusterNodeId);
 				}
 				else {
-					lock = _lockHelper.lock(
+					lock = _lockManager.lock(
 						_LOCK_CLASS_NAME, _LOCK_CLASS_NAME, owner,
 						_localClusterNodeId);
 				}
@@ -274,8 +274,8 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 	}
 
 	@Reference(unbind = "-")
-	protected void setLockHelper(LockHelper lockHelper) {
-		_lockHelper = lockHelper;
+	protected void setLockManager(LockManager lockManager) {
+		_lockManager = lockManager;
 	}
 
 	@Reference(target = "(servlet.context.name=portal)", unbind = "-")
@@ -296,7 +296,7 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 		_clusterMasterTokenTransitionListeners = new HashSet<>();
 	private boolean _enabled;
 	private volatile String _localClusterNodeId;
-	private volatile LockHelper _lockHelper;
+	private volatile LockManager _lockManager;
 
 	private class ClusterMasterTokenClusterEventListener
 		implements ClusterEventListener {

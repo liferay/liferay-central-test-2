@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.ldap.LDAPUtil;
-import com.liferay.portal.kernel.lock.LockHelper;
+import com.liferay.portal.kernel.lock.LockManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -359,7 +359,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 				companyId);
 
-			if (_lockHelper.hasLock(
+			if (_lockManager.hasLock(
 					defaultUserId, UserImporterUtil.class.getName(),
 					companyId)) {
 
@@ -372,7 +372,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 				return;
 			}
 
-			_lockHelper.lock(
+			_lockManager.lock(
 				defaultUserId, UserImporterUtil.class.getName(), companyId,
 				LDAPUserImporterImpl.class.getName(), false,
 				_ldapConfiguration.importLockExpirationTime());
@@ -399,7 +399,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 			}
 		}
 		finally {
-			_lockHelper.unlock(UserImporterUtil.class.getName(), companyId);
+			_lockManager.unlock(UserImporterUtil.class.getName(), companyId);
 
 			ShardUtil.popCompanyService();
 		}
@@ -1185,8 +1185,8 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 	}
 
 	@Reference(unbind = "-")
-	protected void setLockHelper(LockHelper lockHelper) {
-		_lockHelper = lockHelper;
+	protected void setLockManager(LockManager lockManager) {
+		_lockManager = lockManager;
 	}
 
 	protected void setProperty(
@@ -1397,7 +1397,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 	private volatile LDAPConfiguration _ldapConfiguration;
 	private LDAPToPortalConverter _ldapToPortalConverter;
 	private Set<String> _ldapUserIgnoreAttributes;
-	private volatile LockHelper _lockHelper;
+	private volatile LockManager _lockManager;
 	private PortalCache<String, Long> _portalCache;
 
 }
