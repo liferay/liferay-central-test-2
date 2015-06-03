@@ -33,9 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
-
 import java.net.URL;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -330,7 +328,7 @@ public class EhcacheConfigurationHelperUtil {
 			cacheConfiguration.addBootstrapCacheLoaderFactory(null);
 		}
 
-		boolean requireSerialization = _requireSerialization(
+		boolean requireSerialization = _isRequireSerialization(
 			cacheConfiguration, clusterAware, clusterEnabled);
 
 		return new EhcachePortalCacheConfiguration(
@@ -416,7 +414,8 @@ public class EhcacheConfigurationHelperUtil {
 		return properties;
 	}
 
-	private static boolean _requireSerialization(
+	@SuppressWarnings("deprecation")
+	private static boolean _isRequireSerialization(
 		CacheConfiguration cacheConfiguration, boolean clusterAware,
 		boolean clusterEnabled) {
 
