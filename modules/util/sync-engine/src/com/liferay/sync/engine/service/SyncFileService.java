@@ -298,6 +298,21 @@ public class SyncFileService {
 		}
 	}
 
+	public static SyncFile fetchSyncFile(String checksum, int state)
+		throws SQLException {
+
+		try {
+			return _syncFilePersistence.fetchByC_S(checksum, state);
+		}
+		catch (SQLException sqle) {
+			if (_logger.isDebugEnabled()) {
+				_logger.debug(sqle.getMessage(), sqle);
+			}
+
+			return null;
+		}
+	}
+
 	public static List<SyncFile> findSyncFiles(long syncAccountId) {
 		try {
 			return _syncFilePersistence.findBySyncAccountId(syncAccountId);
