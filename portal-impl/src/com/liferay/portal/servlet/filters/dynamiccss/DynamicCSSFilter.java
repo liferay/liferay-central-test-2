@@ -110,7 +110,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 		throws Exception {
 
 		boolean bundleResource = false;
-		ServletContext currentServletContext = _servletContext;
+		ServletContext servletContext = _servletContext;
 
 		String requestPath = getRequestPath(request);
 
@@ -125,7 +125,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 			}
 
 			bundleResource = true;
-			currentServletContext = PortalWebResourcesUtil.getServletContext(
+			servletContext = PortalWebResourcesUtil.getServletContext(
 				PortalWebResourceConstants.RESOURCE_TYPE_CSS);
 		}
 
@@ -163,11 +163,11 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 
 				if (bundleResource) {
 					dynamicContent = DynamicCSSUtil.replaceToken(
-						currentServletContext, request, content);
+						servletContext, request, content);
 				}
 				else {
 					dynamicContent = DynamicCSSUtil.parseSass(
-						currentServletContext, request, requestPath, content);
+						servletContext, request, requestPath, content);
 				}
 
 				response.setContentType(ContentTypes.TEXT_CSS);
@@ -191,7 +191,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 				content = bufferCacheServletResponse.getString();
 
 				dynamicContent = DynamicCSSUtil.parseSass(
-					currentServletContext, request, requestPath, content);
+					servletContext, request, requestPath, content);
 
 				FileUtil.write(
 					cacheContentTypeFile,
