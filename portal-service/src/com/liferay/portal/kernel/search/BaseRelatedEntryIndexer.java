@@ -26,7 +26,7 @@ public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 
 	@Override
 	public void addRelatedClassNames(
-			BooleanFilter contextFilter, SearchContext searchContext)
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
 		searchContext.setAttribute("relatedClassName", Boolean.TRUE);
@@ -38,7 +38,7 @@ public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 			return;
 		}
 
-		BooleanFilter relatedFilters = new BooleanFilter();
+		BooleanFilter relatedBooleanFilters = new BooleanFilter();
 
 		for (String relatedEntryClassName : relatedEntryClassNames) {
 			Indexer indexer = IndexerRegistryUtil.getIndexer(
@@ -48,29 +48,32 @@ public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 				continue;
 			}
 
-			BooleanFilter relatedFilter = new BooleanFilter();
+			BooleanFilter relatedBooleanFilter = new BooleanFilter();
 
 			indexer.postProcessContextBooleanFilter(
-				relatedFilter, searchContext);
+				relatedBooleanFilter, searchContext);
 
 			for (IndexerPostProcessor indexerPostProcessor :
 					indexer.getIndexerPostProcessors()) {
 
 				indexerPostProcessor.postProcessContextBooleanFilter(
-					relatedFilter, searchContext);
+					relatedBooleanFilter, searchContext);
 			}
 
-			postProcessContextQuery(relatedFilter, searchContext, indexer);
+			postProcessContextQuery(
+				relatedBooleanFilter, searchContext, indexer);
 
-			relatedFilter.addRequiredTerm(
+			relatedBooleanFilter.addRequiredTerm(
 				Field.CLASS_NAME_ID,
 				PortalUtil.getClassNameId(relatedEntryClassName));
 
-			relatedFilters.add(relatedFilter, BooleanClauseOccur.SHOULD);
+			relatedBooleanFilters.add(
+				relatedBooleanFilter, BooleanClauseOccur.SHOULD);
 		}
 
-		if (relatedFilters.hasClauses()) {
-			contextFilter.add(relatedFilters, BooleanClauseOccur.MUST);
+		if (relatedBooleanFilters.hasClauses()) {
+			contextBooleanFilter.add(
+				relatedBooleanFilters, BooleanClauseOccur.MUST);
 		}
 
 		searchContext.setAttribute("relatedClassName", Boolean.FALSE);
@@ -92,7 +95,7 @@ public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 	 */
 	@Deprecated
 	protected void postProcessContextQuery(
-			BooleanFilter relatedFilter, SearchContext searchContext,
+			BooleanFilter relatedBooleanFilter, SearchContext searchContext,
 			Indexer indexer)
 		throws Exception {
 
@@ -111,7 +114,7 @@ public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 		if (entityQuery.hasClauses()) {
 			QueryFilter queryFilter = new QueryFilter(entityQuery);
 
-			relatedFilter.add(queryFilter, BooleanClauseOccur.MUST);
+			relatedBooleanFilter.add(queryFilter, BooleanClauseOccur.MUST);
 		}
 	}
 

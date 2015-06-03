@@ -63,13 +63,14 @@ public class FolderSearcher extends BaseSearcher {
 
 		long[] folderIds = searchContext.getFolderIds();
 
-		BooleanFilter entryClassPKFilter = new BooleanFilter();
+		BooleanFilter entryClassPKBooleanFilter = new BooleanFilter();
 
 		for (long folderId : folderIds) {
-			entryClassPKFilter.addTerm(Field.ENTRY_CLASS_PK, folderId);
+			entryClassPKBooleanFilter.addTerm(Field.ENTRY_CLASS_PK, folderId);
 		}
 
-		fullQueryBooleanFilter.add(entryClassPKFilter, BooleanClauseOccur.MUST);
+		fullQueryBooleanFilter.add(
+			entryClassPKBooleanFilter, BooleanClauseOccur.MUST);
 
 		return super.createFullQuery(fullQueryBooleanFilter, searchContext);
 	}
