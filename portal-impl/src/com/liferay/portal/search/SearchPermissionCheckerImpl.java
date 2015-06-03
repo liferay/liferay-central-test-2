@@ -301,7 +301,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		Set<UserGroupRole> userGroupRoles = new LinkedHashSet<>();
 		Map<Long, List<Role>> groupIdsToRoles = new HashMap<>();
 
-		retrieveUserGroupsAndRoles(
+		populate(
 			companyId, groupIds, userId, advancedPermissionChecker,
 			permissionCheckerBag, groups, roles, userGroupRoles,
 			groupIdsToRoles);
@@ -462,7 +462,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 	}
 
-	protected void retrieveUserGroupsAndRoles(
+	protected void populate(
 			long companyId, long[] groupIds, long userId,
 			AdvancedPermissionChecker advancedPermissionChecker,
 			PermissionCheckerBag permissionCheckerBag, Set<Group> groups,
