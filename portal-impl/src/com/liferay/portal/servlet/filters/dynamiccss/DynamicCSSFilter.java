@@ -97,9 +97,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		String requestURI = request.getRequestURI();
-
-		String requestPath = requestURI;
+		String requestPath = request.getRequestURI();
 
 		String contextPath = request.getContextPath();
 
