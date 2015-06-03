@@ -64,8 +64,7 @@ public class EhcacheConfigurationHelperUtil {
 		<Configuration, PortalCacheManagerConfiguration>
 			getConfigurationObjectValuePair(
 				URL configurationURL, boolean clusterAware,
-				boolean usingDefault,
-				Props props) {
+				boolean usingDefault, Props props) {
 
 		if (configurationURL == null) {
 			throw new NullPointerException("Configuration path is null");
