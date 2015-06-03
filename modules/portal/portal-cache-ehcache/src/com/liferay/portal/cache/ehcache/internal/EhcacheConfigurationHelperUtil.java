@@ -33,7 +33,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
+
 import java.net.URL;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -214,6 +216,37 @@ public class EhcacheConfigurationHelperUtil {
 				_getPropertiesString(
 					properties, factoryConfiguration.getPropertySeparator()));
 		}
+	}
+
+	@SuppressWarnings("deprecation")
+	private static boolean _isRequireSerialization(
+		CacheConfiguration cacheConfiguration, boolean clusterAware,
+		boolean clusterEnabled) {
+
+		if (clusterAware && clusterEnabled) {
+			return true;
+		}
+
+		if (cacheConfiguration.isOverflowToDisk() ||
+			cacheConfiguration.isOverflowToOffHeap() ||
+			cacheConfiguration.isDiskPersistent()) {
+
+			return true;
+		}
+
+		PersistenceConfiguration persistenceConfiguration =
+			cacheConfiguration.getPersistenceConfiguration();
+
+		if (persistenceConfiguration != null) {
+			PersistenceConfiguration.Strategy strategy =
+				persistenceConfiguration.getStrategy();
+
+			if (!strategy.equals(PersistenceConfiguration.Strategy.NONE)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static PortalCacheConfiguration _parseCacheConfiguration(
@@ -412,37 +445,6 @@ public class EhcacheConfigurationHelperUtil {
 		}
 
 		return properties;
-	}
-
-	@SuppressWarnings("deprecation")
-	private static boolean _isRequireSerialization(
-		CacheConfiguration cacheConfiguration, boolean clusterAware,
-		boolean clusterEnabled) {
-
-		if (clusterAware && clusterEnabled) {
-			return true;
-		}
-
-		if (cacheConfiguration.isOverflowToDisk() ||
-			cacheConfiguration.isOverflowToOffHeap() ||
-			cacheConfiguration.isDiskPersistent()) {
-
-			return true;
-		}
-
-		PersistenceConfiguration persistenceConfiguration =
-			cacheConfiguration.getPersistenceConfiguration();
-
-		if (persistenceConfiguration != null) {
-			PersistenceConfiguration.Strategy strategy =
-				persistenceConfiguration.getStrategy();
-
-			if (!strategy.equals(PersistenceConfiguration.Strategy.NONE)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private static String _unescape(String text) {
