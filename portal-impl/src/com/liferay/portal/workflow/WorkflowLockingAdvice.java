@@ -14,7 +14,7 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -47,7 +47,7 @@ public class WorkflowLockingAdvice {
 			String key = _encodeKey(
 				workflowDefinitionName, workflowDefinitionVersion);
 
-			if (LockHelperUtil.isLocked(className, key)) {
+			if (LockManagerUtil.isLocked(className, key)) {
 				throw new WorkflowException(
 					"Workflow definition name " + workflowDefinitionName +
 						" and version " + workflowDefinitionVersion +
@@ -69,21 +69,21 @@ public class WorkflowLockingAdvice {
 		String className = WorkflowDefinition.class.getName();
 		String key = _encodeKey(name, version);
 
-		if (LockHelperUtil.isLocked(className, key)) {
+		if (LockManagerUtil.isLocked(className, key)) {
 			throw new WorkflowException(
 				"Workflow definition name " + name + " and version " + version +
 					" is being undeployed");
 		}
 
 		try {
-			LockHelperUtil.lock(
+			LockManagerUtil.lock(
 				userId, className, key, String.valueOf(userId), false,
 				Time.HOUR);
 
 			return proceedingJoinPoint.proceed();
 		}
 		finally {
-			LockHelperUtil.unlock(className, key);
+			LockManagerUtil.unlock(className, key);
 		}
 	}
 

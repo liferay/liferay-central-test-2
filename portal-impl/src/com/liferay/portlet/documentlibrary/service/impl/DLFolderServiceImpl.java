@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lock.ExpiredLockException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.lock.NoSuchLockException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -417,7 +417,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	@Override
 	public boolean hasFolderLock(long folderId) throws PortalException {
-		return LockHelperUtil.hasLock(
+		return LockManagerUtil.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);
 	}
 
@@ -426,7 +426,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		boolean inheritable = false;
 
 		try {
-			Lock lock = LockHelperUtil.getLock(
+			Lock lock = LockManagerUtil.getLock(
 				DLFolder.class.getName(), folderId);
 
 			inheritable = lock.isInheritable();
@@ -441,7 +441,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	@Override
 	public boolean isFolderLocked(long folderId) {
-		return LockHelperUtil.isLocked(DLFolder.class.getName(), folderId);
+		return LockManagerUtil.isLocked(DLFolder.class.getName(), folderId);
 	}
 
 	@Override
@@ -490,7 +490,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			String lockUuid, long companyId, long expirationTime)
 		throws PortalException {
 
-		return LockHelperUtil.refresh(lockUuid, companyId, expirationTime);
+		return LockManagerUtil.refresh(lockUuid, companyId, expirationTime);
 	}
 
 	@Override
@@ -588,7 +588,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		boolean verified = false;
 
 		try {
-			Lock lock = LockHelperUtil.getLock(
+			Lock lock = LockManagerUtil.getLock(
 				DLFolder.class.getName(), folderId);
 
 			if (!lock.isInheritable()) {

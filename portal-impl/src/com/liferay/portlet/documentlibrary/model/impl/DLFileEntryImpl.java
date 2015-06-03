@@ -17,7 +17,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -240,7 +240,7 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 	@Override
 	public Lock getLock() {
 		try {
-			return LockHelperUtil.getLock(
+			return LockManagerUtil.getLock(
 				DLFileEntry.class.getName(), getFileEntryId());
 		}
 		catch (Exception e) {

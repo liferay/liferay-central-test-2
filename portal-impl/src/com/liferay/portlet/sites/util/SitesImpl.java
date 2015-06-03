@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.lar.exportimportconfiguration.ExportImportConfigurationConstants;
 import com.liferay.portal.kernel.lar.exportimportconfiguration.ExportImportConfigurationSettingsMapFactory;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.MergeLayoutPrototypesThreadLocal;
@@ -1280,7 +1280,7 @@ public class SitesImpl implements Sites {
 		String owner = PortalUUIDUtil.generate();
 
 		try {
-			Lock lock = LockHelperUtil.lock(
+			Lock lock = LockManagerUtil.lock(
 				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 				String.valueOf(layoutSet.getLayoutSetId()), owner);
 
@@ -1294,7 +1294,7 @@ public class SitesImpl implements Sites {
 
 					// Acquire lock if the lock is older than the lock max time
 
-					lock = LockHelperUtil.lock(
+					lock = LockManagerUtil.lock(
 						LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 						String.valueOf(layoutSet.getLayoutSetId()),
 						lock.getOwner(), owner);
@@ -1352,7 +1352,7 @@ public class SitesImpl implements Sites {
 		finally {
 			MergeLayoutPrototypesThreadLocal.setInProgress(false);
 
-			LockHelperUtil.unlock(
+			LockManagerUtil.unlock(
 				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 				String.valueOf(layoutSet.getLayoutSetId()), owner);
 		}
@@ -1636,7 +1636,7 @@ public class SitesImpl implements Sites {
 		String owner = PortalUUIDUtil.generate();
 
 		try {
-			Lock lock = LockHelperUtil.lock(
+			Lock lock = LockManagerUtil.lock(
 				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 				String.valueOf(layout.getPlid()), owner);
 
@@ -1648,7 +1648,7 @@ public class SitesImpl implements Sites {
 
 					// Acquire lock if the lock is older than the lock max time
 
-					lock = LockHelperUtil.lock(
+					lock = LockManagerUtil.lock(
 						LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 						String.valueOf(layout.getPlid()), lock.getOwner(),
 						owner);
@@ -1687,7 +1687,7 @@ public class SitesImpl implements Sites {
 		finally {
 			MergeLayoutPrototypesThreadLocal.setInProgress(false);
 
-			LockHelperUtil.unlock(
+			LockManagerUtil.unlock(
 				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 				String.valueOf(layout.getPlid()), owner);
 		}

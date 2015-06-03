@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.lar.ExportImportThreadLocal;
 import com.liferay.portal.kernel.lock.ExpiredLockException;
 import com.liferay.portal.kernel.lock.InvalidLockException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.lock.NoSuchLockException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -798,7 +798,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	@Override
 	public boolean hasFolderLock(long userId, long folderId) {
-		return LockHelperUtil.hasLock(
+		return LockManagerUtil.hasLock(
 			userId, DLFolder.class.getName(), folderId);
 	}
 
@@ -820,7 +820,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			expirationTime = DLFolderImpl.LOCK_EXPIRATION_TIME;
 		}
 
-		return LockHelperUtil.lock(
+		return LockManagerUtil.lock(
 			userId, DLFolder.class.getName(), folderId, owner, inheritable,
 			expirationTime);
 	}
@@ -955,7 +955,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
-				Lock lock = LockHelperUtil.getLock(
+				Lock lock = LockManagerUtil.getLock(
 					DLFolder.class.getName(), folderId);
 
 				if (!lockUuid.equals(lock.getUuid())) {
@@ -972,7 +972,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			}
 		}
 
-		LockHelperUtil.unlock(DLFolder.class.getName(), folderId);
+		LockManagerUtil.unlock(DLFolder.class.getName(), folderId);
 	}
 
 	/**

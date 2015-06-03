@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Tina Tian
  */
-public interface LockHelper {
+public interface LockManager {
 
 	public void clear();
 

@@ -22,7 +22,7 @@ import com.liferay.registry.ServiceTracker;
 /**
  * @author Tina Tian
  */
-public class LockHelperUtil {
+public class LockManagerUtil {
 
 	public static void clear() {
 		_instance._clear();
@@ -115,13 +115,13 @@ public class LockHelperUtil {
 		_instance._unlock(className, key, owner);
 	}
 
-	private LockHelperUtil() {
+	private LockManagerUtil() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		registry.registerService(LockHelper.class, new LockHelperImpl());
+		registry.registerService(LockManager.class, new LockManagerImpl());
 
-		ServiceTracker<LockHelper, LockHelper> serviceTracker =
-			registry.trackServices(LockHelper.class);
+		ServiceTracker<LockManager, LockManager> serviceTracker =
+			registry.trackServices(LockManager.class);
 
 		serviceTracker.open();
 
@@ -224,8 +224,8 @@ public class LockHelperUtil {
 		_lockHelper.unlock(className, key, owner);
 	}
 
-	private static final LockHelperUtil _instance = new LockHelperUtil();
+	private static final LockManagerUtil _instance = new LockManagerUtil();
 
-	private final LockHelper _lockHelper;
+	private final LockManager _lockHelper;
 
 }

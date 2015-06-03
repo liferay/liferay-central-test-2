@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.lar.ExportImportThreadLocal;
 import com.liferay.portal.kernel.lock.ExpiredLockException;
 import com.liferay.portal.kernel.lock.InvalidLockException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.lock.NoSuchLockException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -418,7 +418,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
-				Lock lock = LockHelperUtil.getLock(
+				Lock lock = LockManagerUtil.getLock(
 					DLFileEntry.class.getName(), fileEntryId);
 
 				if (!Validator.equals(lock.getUuid(), lockUuid)) {
@@ -493,7 +493,7 @@ public class DLFileEntryLocalServiceImpl
 				expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
 			}
 
-			LockHelperUtil.lock(
+			LockManagerUtil.lock(
 				userId, DLFileEntry.class.getName(), fileEntryId, owner, false,
 				expirationTime);
 		}
@@ -1520,7 +1520,7 @@ public class DLFileEntryLocalServiceImpl
 
 		long folderId = dlFileEntry.getFolderId();
 
-		boolean hasLock = LockHelperUtil.hasLock(
+		boolean hasLock = LockManagerUtil.hasLock(
 			userId, DLFileEntry.class.getName(), fileEntryId);
 
 		if (!hasLock &&
@@ -1588,11 +1588,11 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException {
 
 		if (hasFileEntryLock(userId, fileEntryId)) {
-			return LockHelperUtil.getLock(
+			return LockManagerUtil.getLock(
 				DLFileEntry.class.getName(), fileEntryId);
 		}
 
-		return LockHelperUtil.lock(
+		return LockManagerUtil.lock(
 			userId, DLFileEntry.class.getName(), fileEntryId, null, false,
 			DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
@@ -1792,7 +1792,7 @@ public class DLFileEntryLocalServiceImpl
 
 	@Override
 	public void unlockFileEntry(long fileEntryId) {
-		LockHelperUtil.unlock(DLFileEntry.class.getName(), fileEntryId);
+		LockManagerUtil.unlock(DLFileEntry.class.getName(), fileEntryId);
 	}
 
 	@Override
@@ -2052,7 +2052,7 @@ public class DLFileEntryLocalServiceImpl
 		boolean lockVerified = false;
 
 		try {
-			Lock lock = LockHelperUtil.getLock(
+			Lock lock = LockManagerUtil.getLock(
 				DLFileEntry.class.getName(), fileEntryId);
 
 			if (Validator.equals(lock.getUuid(), lockUuid)) {

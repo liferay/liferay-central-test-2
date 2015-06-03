@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.lar.exportimportconfiguration.ExportImportConfi
 import com.liferay.portal.kernel.lar.exportimportconfiguration.ExportImportConfigurationSettingsMapFactory;
 import com.liferay.portal.kernel.lock.DuplicateLockException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -1200,14 +1200,14 @@ public class StagingImpl implements Staging {
 	@Deprecated
 	@Override
 	public void lockGroup(long userId, long groupId) throws PortalException {
-		if (LockHelperUtil.isLocked(Staging.class.getName(), groupId)) {
-			Lock lock = LockHelperUtil.getLock(
+		if (LockManagerUtil.isLocked(Staging.class.getName(), groupId)) {
+			Lock lock = LockManagerUtil.getLock(
 				Staging.class.getName(), groupId);
 
 			throw new DuplicateLockException(lock);
 		}
 
-		LockHelperUtil.lock(
+		LockManagerUtil.lock(
 			userId, Staging.class.getName(), String.valueOf(groupId),
 			StagingImpl.class.getName(), false,
 			StagingConstants.LOCK_EXPIRATION_TIME);
@@ -1651,7 +1651,7 @@ public class StagingImpl implements Staging {
 	@Deprecated
 	@Override
 	public void unlockGroup(long groupId) {
-		LockHelperUtil.unlock(Staging.class.getName(), groupId);
+		LockManagerUtil.unlock(Staging.class.getName(), groupId);
 	}
 
 	@Override

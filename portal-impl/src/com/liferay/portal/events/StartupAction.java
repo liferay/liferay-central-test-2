@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.cluster.ClusterMasterExecutor;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.executor.PortalExecutorManager;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -126,7 +126,7 @@ public class StartupAction extends SimpleAction {
 		}
 
 		try {
-			LockHelperUtil.clear();
+			LockManagerUtil.clear();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

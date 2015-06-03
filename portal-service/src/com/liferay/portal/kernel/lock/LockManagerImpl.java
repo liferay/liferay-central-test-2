@@ -27,8 +27,8 @@ import org.osgi.service.component.annotations.Modified;
 /**
  * @author Tina Tian
  */
-@Component(immediate = true, service = LockHelper.class)
-public class LockHelperImpl implements LockHelper {
+@Component(immediate = true, service = LockManager.class)
+public class LockManagerImpl implements LockManager {
 
 	@Override
 	public void clear() {

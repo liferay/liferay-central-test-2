@@ -17,7 +17,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lock.Lock;
-import com.liferay.portal.kernel.lock.LockHelperUtil;
+import com.liferay.portal.kernel.lock.LockManagerUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -77,7 +77,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public DLFileVersion cancelCheckOut(long fileEntryId)
 		throws PortalException {
 
-		boolean locked = LockHelperUtil.isLocked(
+		boolean locked = LockManagerUtil.isLocked(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		try {
@@ -99,7 +99,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		boolean isLocked = LockHelperUtil.isLocked(
+		boolean isLocked = LockManagerUtil.isLocked(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		try {
@@ -416,7 +416,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	@Override
 	public Lock getFileEntryLock(long fileEntryId) {
 		try {
-			return LockHelperUtil.getLock(
+			return LockManagerUtil.getLock(
 				DLFileEntry.class.getName(), fileEntryId);
 		}
 		catch (Exception e) {
@@ -587,7 +587,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		long folderId = dlFileEntry.getFolderId();
 
-		boolean hasLock = LockHelperUtil.hasLock(
+		boolean hasLock = LockManagerUtil.hasLock(
 			getUserId(), DLFileEntry.class.getName(), fileEntryId);
 
 		if (!hasLock &&
@@ -629,7 +629,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			String lockUuid, long companyId, long expirationTime)
 		throws PortalException {
 
-		return LockHelperUtil.refresh(lockUuid, companyId, expirationTime);
+		return LockManagerUtil.refresh(lockUuid, companyId, expirationTime);
 	}
 
 	@Override
