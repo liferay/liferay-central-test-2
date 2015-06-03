@@ -264,12 +264,11 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 		String bundleDirName = PropsUtil.get(
 			PropsKeys.JAVASCRIPT_BUNDLE_DIR, new Filter(bundleId));
 
-		ServletContext portalWebResourcesServletContext =
+		ServletContext jsServletContext =
 			PortalWebResourcesUtil.getServletContext(
 				PortalWebResourceConstants.RESOURCE_TYPE_JS);
 
-		URL bundleDirURL = portalWebResourcesServletContext.getResource(
-			bundleDirName);
+		URL bundleDirURL = jsServletContext.getResource(bundleDirName);
 
 		if (bundleDirURL == null) {
 			return null;
@@ -286,7 +285,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 			for (String fileName : fileNames) {
 				long lastModified = FileTimestampUtil.getTimestamp(
-					portalWebResourcesServletContext,
+					jsServletContext,
 					bundleDirName.concat(StringPool.SLASH).concat(fileName));
 
 				if (lastModified > cacheFile.lastModified()) {
@@ -314,8 +313,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 		}
 		else {
 			content = aggregateJavaScript(
-				new ServletPaths(
-					portalWebResourcesServletContext, bundleDirName),
+				new ServletPaths(jsServletContext, bundleDirName),
 				fileNames);
 		}
 
@@ -470,21 +468,20 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 		String resourcePath, String content) {
 
 		try {
-			ServletContext cssResourcesServletContext = null;
+			ServletContext cssServletContext = null;
 
 			String requestURI = request.getRequestURI();
 
 			if (PortalWebResourcesUtil.isResourceContextPath(requestURI)) {
-				cssResourcesServletContext =
-					PortalWebResourcesUtil.getServletContext(
-						PortalWebResourceConstants.RESOURCE_TYPE_CSS);
+				cssServletContext = PortalWebResourcesUtil.getServletContext(
+					PortalWebResourceConstants.RESOURCE_TYPE_CSS);
 			}
 			else {
-				cssResourcesServletContext = _servletContext;
+				cssServletContext = _servletContext;
 			}
 
 			content = DynamicCSSUtil.parseSass(
-				cssResourcesServletContext, request, resourcePath, content);
+				cssServletContext, request, resourcePath, content);
 		}
 		catch (Exception e) {
 			_log.error("Unable to parse SASS on CSS " + resourcePath, e);
