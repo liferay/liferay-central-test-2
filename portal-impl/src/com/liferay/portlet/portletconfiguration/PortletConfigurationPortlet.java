@@ -208,9 +208,7 @@ public class PortletConfigurationPortlet extends MVCPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		Portlet portlet = null;
-
-		portlet = ActionUtil.getPortlet(actionRequest);
+		Portlet portlet = ActionUtil.getPortlet(actionRequest);
 
 		PortletPreferences portletPreferences =
 			ActionUtil.getLayoutPortletSetup(actionRequest, portlet);
