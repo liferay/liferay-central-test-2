@@ -130,7 +130,8 @@ public class CMISRepository extends BaseCmisRepository {
 	public CMISRepository(
 		CMISRepositoryConfiguration cmisRepositoryConfiguration,
 		CMISRepositoryHandler cmisRepositoryHandler,
-		CMISSearchQueryBuilder cmisSearchQueryBuilder, LockManager lockManager) {
+		CMISSearchQueryBuilder cmisSearchQueryBuilder,
+		LockManager lockManager) {
 
 		_cmisRepositoryConfiguration = cmisRepositoryConfiguration;
 		_cmisRepositoryHandler = cmisRepositoryHandler;
