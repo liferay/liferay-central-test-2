@@ -21,7 +21,7 @@ String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 PortletURL portletURL = (PortletURL)request.getAttribute(DLItemSelectorView.PORTLET_URL);
 
-SearchContainer documentsSearchContainer = new SearchContainer(renderRequest, null, null, "curDocuments", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "curDocuments", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
 DLItemSelectorCriterion dlItemSelectorCriterion = (DLItemSelectorCriterion)request.getAttribute(DLItemSelectorView.DL_ITEM_SELECTOR_CRITERION);
 
@@ -29,8 +29,8 @@ long repositoryId = dlItemSelectorCriterion.getRepositoryId();
 long folderId = dlItemSelectorCriterion.getFolderId();
 String[] mimeTypes = dlItemSelectorCriterion.getMimeTypes();
 
-documentsSearchContainer.setTotal(DLAppServiceUtil.getFileEntriesCount(repositoryId, folderId, mimeTypes));
-documentsSearchContainer.setResults(DLAppServiceUtil.getFileEntries(repositoryId, folderId, mimeTypes, documentsSearchContainer.getStart(), documentsSearchContainer.getEnd(), documentsSearchContainer.getOrderByComparator()));
+searchContainer.setTotal(DLAppServiceUtil.getFileEntriesCount(repositoryId, folderId, mimeTypes));
+searchContainer.setResults(DLAppServiceUtil.getFileEntries(repositoryId, folderId, mimeTypes, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()));
 %>
 
 <item-selector-ui:browser
@@ -38,6 +38,6 @@ documentsSearchContainer.setResults(DLAppServiceUtil.getFileEntries(repositoryId
 	idPrefix="documents"
 	itemSelectedEventName="<%= GetterUtil.getString(request.getAttribute(DLItemSelectorView.ITEM_SELECTED_EVENT_NAME)) %>"
 	returnType="<%= ReturnType.parseFirst(dlItemSelectorCriterion.getDesiredReturnTypes()) %>"
-	searchContainer="<%= documentsSearchContainer %>"
+	searchContainer="<%= searchContainer %>"
 	tabName="documents"
 />
