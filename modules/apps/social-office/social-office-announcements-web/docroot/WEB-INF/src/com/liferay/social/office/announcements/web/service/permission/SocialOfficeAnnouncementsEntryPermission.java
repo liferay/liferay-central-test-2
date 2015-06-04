@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.so.announcements.service.permission;
+package com.liferay.social.office.announcements.web.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -21,7 +21,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 /**
  * @author Istvan Andras Dezsi
  */
-public class AnnouncementsEntryPermission {
+public class SocialOfficeAnnouncementsEntryPermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, AnnouncementsEntry entry,

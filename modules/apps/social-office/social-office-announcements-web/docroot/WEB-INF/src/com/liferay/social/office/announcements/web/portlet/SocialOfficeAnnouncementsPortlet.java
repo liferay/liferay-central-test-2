@@ -15,7 +15,7 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.so.announcements.portlet;
+package com.liferay.social.office.announcements.web.portlet;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -46,7 +46,7 @@ import javax.portlet.PortletURL;
  * @author Raymond Augé
  * @author Evan Thibodeau
  */
-public class AnnouncementsPortlet extends MVCPortlet {
+public class SocialOfficeAnnouncementsPortlet extends MVCPortlet {
 
 	public void deleteEntry(
 			ActionRequest actionRequest, ActionResponse actionResponse)

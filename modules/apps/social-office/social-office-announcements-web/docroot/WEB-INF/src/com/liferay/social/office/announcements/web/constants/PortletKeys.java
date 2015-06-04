@@ -15,7 +15,7 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.so.announcements.util;
+package com.liferay.social.office.announcements.web.constants;
 
 /**
  * @author Jonathan Lee

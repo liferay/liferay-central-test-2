@@ -15,7 +15,7 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.so.announcements.util;
+package com.liferay.social.office.announcements.web.util;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * @author Lin Cui
  */
-public class SOAnnouncementsUtil {
+public class SocialOfficeAnnouncementsUtil {
 
 	public static List<Group> getGroups(ThemeDisplay themeDisplay)
 		throws Exception {
