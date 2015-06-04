@@ -993,6 +993,7 @@
 			<bean class="com.liferay.portlet.dynamicdatamapping.storage.query.ConditionFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDM" class="com.liferay.portlet.dynamicdatamapping.util.DDMImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDMFormValuesToFieldsConverter" class="com.liferay.portlet.dynamicdatamapping.util.DDMFormValuesToFieldsConverterImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDMFormValuesToFieldsConverterUtil" class="com.liferay.portlet.dynamicdatamapping.util.DDMFormValuesToFieldsConverterUtil">
 		<property name="DDMFormValuesToFieldsConverter" ref="com.liferay.portlet.dynamicdatamapping.util.DDMFormValuesToFieldsConverter" />
@@ -1006,7 +1007,6 @@
 			<bean class="com.liferay.portlet.dynamicdatamapping.util.DDMTemplateHelperImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDM" class="com.liferay.portlet.dynamicdatamapping.util.DDMImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDMUtil" class="com.liferay.portlet.dynamicdatamapping.util.DDMUtil">
 		<property name="DDM" ref="com.liferay.portlet.dynamicdatamapping.util.DDM" />
 	</bean>
