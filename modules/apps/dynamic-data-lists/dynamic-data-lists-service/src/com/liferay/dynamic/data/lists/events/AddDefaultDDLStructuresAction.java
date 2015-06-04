@@ -87,8 +87,8 @@ public class AddDefaultDDLStructuresAction extends SimpleAction {
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(DDLRecordSet.class),
 			AddDefaultDDLStructuresAction.class.getClassLoader(),
-			"com/liferay/dynamic/data/lists/events/dependencies/" +
-				"default-dynamic-data-lists-structures.xml",
+			"com/liferay/dynamic/data/lists/events/dependencies" +
+				"/default-dynamic-data-lists-structures.xml",
 			serviceContext);
 	}
 
