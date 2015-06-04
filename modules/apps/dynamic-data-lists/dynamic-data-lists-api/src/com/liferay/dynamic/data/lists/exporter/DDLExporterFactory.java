@@ -40,8 +40,7 @@ public class DDLExporterFactory {
 
 		if (ddlExporter == null) {
 			throw new IllegalArgumentException(
-				"There is no DDLExporter registered that supports the format " +
-					format);
+				"No DDL exporter exists for the format " + format);
 		}
 
 		return ddlExporter;
