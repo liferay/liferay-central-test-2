@@ -757,7 +757,6 @@ public class LayoutExporter {
 		throws PortalException {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		ZipWriter zipWriter = ExportImportHelperUtil.getLayoutSetZipWriter(
 			groupId);
 

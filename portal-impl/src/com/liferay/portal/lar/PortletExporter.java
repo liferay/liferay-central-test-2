@@ -1140,7 +1140,6 @@ public class PortletExporter {
 		throws PortalException {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
 		ZipWriter zipWriter = ExportImportHelperUtil.getPortletZipWriter(
 			portletId);
 
