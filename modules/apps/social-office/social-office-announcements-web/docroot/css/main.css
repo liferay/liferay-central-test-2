@@ -1,6 +1,6 @@
 @import "mixins";
 
-.so-announcements-portlet {
+.social-office-announcements-portlet {
 	.back-link {
 		float: right;
 		font-weight: bold;
@@ -210,7 +210,7 @@
 	}
 }
 
-.dialog-iframe-popup .so-announcements-portlet {
+.dialog-iframe-popup .social-office-announcements-portlet {
 	select {
 		margin: 0;
 	}
@@ -249,7 +249,7 @@
 		margin-bottom: 0;
 	}
 
-	#_1_WAR_soannouncementsportlet_ocerSearchContainerSearchContainer td.last {
+	#_1_WAR_socialofficeannouncementsweb_ocerSearchContainerSearchContainer td.last {
 		white-space: nowrap;
 	}
 
@@ -271,14 +271,14 @@
 
 /* ---------- Extras ---------- */
 
-.so-announcements-portlet .announcement-collapsed .entry-footer-toolbar {
+.social-office-announcements-portlet .announcement-collapsed .entry-footer-toolbar {
 	box-shadow: 0 -1px 15px -5px rgba(0, 0, 0, 0.8);
 }
 
 /* ---------- Responsive ---------- */
 
 @include respond-to(phone) {
-	.so-announcements-portlet {
+	.social-office-announcements-portlet {
 		.user-portrait {
 			position: relative;
 		}

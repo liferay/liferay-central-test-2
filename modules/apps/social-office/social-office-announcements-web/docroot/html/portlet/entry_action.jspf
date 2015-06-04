@@ -19,10 +19,10 @@
 
 <div class="entry-footer-toolbar">
 	<div class="edit-actions">
-		<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
+		<c:if test="<%= SocialOfficeAnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 			<span class="action edit-entry">
 				<portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-					<portlet:param name="mvcPath" value="/edit_entry.jsp" />
+					<portlet:param name="mvcPath" value="/html/portlet/edit_entry.jsp" />
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:renderURL>
 
@@ -34,7 +34,7 @@
 			</span>
 		</c:if>
 
-		<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+		<c:if test="<%= SocialOfficeAnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 			<span class="action delete-entry">
 				<a href="javascript:;">
 					<i class="icon-remove"></i>

@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 boolean readEntries = ParamUtil.getBoolean(request, "readEntries", true);
@@ -88,7 +88,7 @@ List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries
 				%>
 
 				<div class="content toggler-content toggler-content-<%= expanded ? "expanded" : "collapsed" %>">
-					<%@ include file="/entry_iterator.jspf" %>
+					<%@ include file="/html/portlet/entry_iterator.jspf" %>
 				</div>
 
 				<aui:script>
@@ -114,7 +114,7 @@ List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries
 			</c:if>
 		</c:when>
 		<c:otherwise>
-			<%@ include file="/entry_iterator.jspf" %>
+			<%@ include file="/html/portlet/entry_iterator.jspf" %>
 		</c:otherwise>
 	</c:choose>
 </div>

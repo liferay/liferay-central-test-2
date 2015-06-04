@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 String distributionScope = ParamUtil.getString(request, "distributionScope");
@@ -52,7 +52,7 @@ if ((classNameId == 0) && (classPK == 0) && !PortalPermissionUtil.contains(permi
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("mvcPath", "/manage_entries.jsp");
+portletURL.setParameter("mvcPath", "/html/portlet/manage_entries.jsp");
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 %>
 
@@ -69,7 +69,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 		boolean submitOnChange = true;
 		%>
 
-		<%@ include file="/entry_select_scope.jspf" %>
+		<%@ include file="/html/portlet/entry_select_scope.jspf" %>
 
 	</aui:fieldset>
 
@@ -81,7 +81,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 		<%
 		PortletURL iteratorURL = renderResponse.createRenderURL();
 
-		iteratorURL.setParameter("mvcPath", "/manage_entries.jsp");
+		iteratorURL.setParameter("mvcPath", "/html/portlet/manage_entries.jsp");
 		iteratorURL.setParameter("distributionScope", distributionScope);
 
 		List<String> headerNames = new ArrayList<String>();
@@ -115,7 +115,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setParameter("mvcPath", "/edit_entry.jsp");
+			rowURL.setParameter("mvcPath", "/html/portlet/edit_entry.jsp");
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 			rowURL.setWindowState(LiferayWindowState.POP_UP);
@@ -148,7 +148,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 			// Action
 
-			row.addJSP("/manage_entries_entry_action.jsp", application, request, response);
+			row.addJSP("/html/portlet/manage_entries_entry_action.jsp", application, request, response);
 
 			// Add result row
 
@@ -214,7 +214,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 		<%
 		PortletURL addEntryURL = renderResponse.createRenderURL();
 
-		addEntryURL.setParameter("mvcPath", "/edit_entry.jsp");
+		addEntryURL.setParameter("mvcPath", "/html/portlet/edit_entry.jsp");
 		addEntryURL.setParameter("redirect", currentURL);
 		addEntryURL.setWindowState(LiferayWindowState.POP_UP);
 		%>

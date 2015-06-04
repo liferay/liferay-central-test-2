@@ -4,10 +4,10 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<display-name>Social Office Announcements</display-name>
-		<portlet-class>com.liferay.so.announcements.portlet.AnnouncementsPortlet</portlet-class>
+		<portlet-class>com.liferay.social.office.announcements.web.portlet.SocialOfficeAnnouncementsPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/view.jsp</value>
+			<value>/html/portlet/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

@@ -4,13 +4,13 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>1</portlet-name>
-		<icon>/icon.png</icon>
+		<icon>/html/icons/social_office_announcements.png</icon>
 		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
-		<user-notification-definitions>com/liferay/so/announcements/portlet/so-announcements-user-notification-definitions.xml</user-notification-definitions>
-		<user-notification-handler-class>com.liferay.so.announcements.notifications.SOAnnouncementsUserNotificationHandler</user-notification-handler-class>
+		<user-notification-definitions>com/liferay/social/office/announcements/web/portlet/social-office-announcements-user-notification-definitions.xml</user-notification-definitions>
+		<user-notification-handler-class>com.liferay.social.office.announcements.web.notifications.SocialOfficeAnnouncementsUserNotificationHandler</user-notification-handler-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-		<css-class-wrapper>so-announcements-portlet</css-class-wrapper>
+		<css-class-wrapper>social-office-announcements-portlet</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<role-mapper>

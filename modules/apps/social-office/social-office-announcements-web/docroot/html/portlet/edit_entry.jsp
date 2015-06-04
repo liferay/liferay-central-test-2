@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -47,14 +47,14 @@ if (entry == null) {
 	<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
 
 	<aui:fieldset>
-		<c:if test='<%= redirectMvcPath.equals("/manage_entries.jsp") %>'>
+		<c:if test='<%= redirectMvcPath.equals("/html/portlet/manage_entries.jsp") %>'>
 			<span class="back-link"><a href="<%= HtmlUtil.escape(redirect) %>">&laquo; Back</a></span>
 		</c:if>
 
 		<c:choose>
 			<c:when test="<%= entry != null %>">
 
-				<%@ include file="/entry_scope.jspf" %>
+				<%@ include file="/html/portlet/entry_scope.jspf" %>
 
 				<aui:input name="scope" type="hidden" value="<%= scopeName %>" />
 			</c:when>
@@ -81,7 +81,7 @@ if (entry == null) {
 				%>
 
 				<div class="distribution-scope-container">
-					<%@ include file="/entry_select_scope.jspf" %>
+					<%@ include file="/html/portlet/entry_select_scope.jspf" %>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -281,7 +281,7 @@ if (entry == null) {
 								message.html('<span class="alert alert-danger">' + responseData.message + '</span>');
 							}
 						}
-						else if (<%= redirectMvcPath.equals("/manage_entries.jsp") %>) {
+						else if (<%= redirectMvcPath.equals("/html/portlet/manage_entries.jsp") %>) {
 							window.location.href = responseData.redirect;
 						}
 						else {

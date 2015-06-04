@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/entry_scope.jspf" %>
+<%@ include file="/html/portlet/entry_scope.jspf" %>
 
 <%
 boolean readEntry = false;
@@ -104,7 +104,7 @@ if (entry.getPriority() > 0) {
 		</div>
 
 		<div class="entry-footer">
-			<%@ include file="/entry_action.jspf" %>
+			<%@ include file="/html/portlet/entry_action.jspf" %>
 		</div>
 	</div>
 </div>

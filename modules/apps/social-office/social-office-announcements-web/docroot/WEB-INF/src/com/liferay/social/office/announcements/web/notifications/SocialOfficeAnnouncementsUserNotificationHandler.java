@@ -34,7 +34,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
-import com.liferay.so.announcements.util.PortletKeys;
+import com.liferay.social.office.announcements.web.constants.SocialOfficeAnnouncementsPortletKeys;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -47,7 +47,8 @@ public class SocialOfficeAnnouncementsUserNotificationHandler
 	extends BaseUserNotificationHandler {
 
 	public SocialOfficeAnnouncementsUserNotificationHandler() {
-		setPortletId(PortletKeys.SO_ANNOUNCEMENTS);
+		setPortletId(
+			SocialOfficeAnnouncementsPortletKeys.SOCIAL_OFFICE_ANNOUNCEMENTS);
 	}
 
 	@Override
@@ -116,14 +117,16 @@ public class SocialOfficeAnnouncementsUserNotificationHandler
 		Group group = user.getGroup();
 
 		long portletPlid = PortalUtil.getPlidFromPortletId(
-			group.getGroupId(), true, PortletKeys.SO_ANNOUNCEMENTS);
+			group.getGroupId(), true,
+			SocialOfficeAnnouncementsPortletKeys.SOCIAL_OFFICE_ANNOUNCEMENTS);
 
 		PortletURL portletURL = null;
 
 		if (portletPlid != 0) {
 			portletURL = PortletURLFactoryUtil.create(
 				serviceContext.getLiferayPortletRequest(),
-				PortletKeys.SO_ANNOUNCEMENTS, portletPlid,
+				SocialOfficeAnnouncementsPortletKeys.
+					SOCIAL_OFFICE_ANNOUNCEMENTS, portletPlid,
 				PortletRequest.RENDER_PHASE);
 		}
 		else {
@@ -131,7 +134,8 @@ public class SocialOfficeAnnouncementsUserNotificationHandler
 				serviceContext.getLiferayPortletResponse();
 
 			portletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.SO_ANNOUNCEMENTS);
+				SocialOfficeAnnouncementsPortletKeys.
+					SOCIAL_OFFICE_ANNOUNCEMENTS);
 
 			portletURL.setParameter("mvcPath", "/view.jsp");
 			portletURL.setWindowState(WindowState.MAXIMIZED);

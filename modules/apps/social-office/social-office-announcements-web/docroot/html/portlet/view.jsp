@@ -17,13 +17,13 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 boolean showManageEntries = GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS);
 
 if (group.isUser() && !showManageEntries) {
-	showManageEntries = SOAnnouncementsUtil.hasGroups(themeDisplay) || SOAnnouncementsUtil.hasOrganizations(themeDisplay) || SOAnnouncementsUtil.hasRoles(themeDisplay) || SOAnnouncementsUtil.hasUserGroups(themeDisplay);
+	showManageEntries = SocialOfficeAnnouncementsUtil.hasGroups(themeDisplay) || SocialOfficeAnnouncementsUtil.hasOrganizations(themeDisplay) || SocialOfficeAnnouncementsUtil.hasRoles(themeDisplay) || SocialOfficeAnnouncementsUtil.hasUserGroups(themeDisplay);
 
 }
 %>
@@ -50,7 +50,7 @@ if (group.isUser() && !showManageEntries) {
 	Liferay.Announcements.init(
 		{
 			namespace: '<portlet:namespace />',
-			viewEntriesURL: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcPath" value="/view_entries.jsp" /></portlet:renderURL>'
+			viewEntriesURL: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcPath" value="/html/portlet/view_entries.jsp" /></portlet:renderURL>'
 		}
 	);
 
@@ -125,7 +125,7 @@ if (group.isUser() && !showManageEntries) {
 <aui:script>
 	function <portlet:namespace />addEntry() {
 		<portlet:renderURL var="addEntryURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-			<portlet:param name="mvcPath" value="/edit_entry.jsp" />
+			<portlet:param name="mvcPath" value="/html/portlet/edit_entry.jsp" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
@@ -161,7 +161,7 @@ if (group.isUser() && !showManageEntries) {
 	}
 
 	function <portlet:namespace />manageEntries() {
-		<portlet:renderURL var="manageEntriesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/manage_entries.jsp" /></portlet:renderURL>
+		<portlet:renderURL var="manageEntriesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/html/portlet/manage_entries.jsp" /></portlet:renderURL>
 
 		<portlet:namespace />openWindow('<%= manageEntriesURL %>', '<%= UnicodeLanguageUtil.get(request, "manage-entries") %>', true, 800);
 	}

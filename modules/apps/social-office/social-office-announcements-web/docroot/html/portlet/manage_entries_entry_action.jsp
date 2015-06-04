@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -25,10 +25,10 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 AnnouncementsEntry entry = (AnnouncementsEntry)row.getObject();
 %>
 
-<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
+<c:if test="<%= SocialOfficeAnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 	<span class="action edit-entry">
 		<portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-			<portlet:param name="mvcPath" value="/edit_entry.jsp" />
+			<portlet:param name="mvcPath" value="/html/portlet/edit_entry.jsp" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:renderURL>
@@ -41,7 +41,7 @@ AnnouncementsEntry entry = (AnnouncementsEntry)row.getObject();
 	</span>
 </c:if>
 
-<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+<c:if test="<%= SocialOfficeAnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 	<span class="action delete-entry" data-entryId="<%= String.valueOf(entry.getEntryId()) %>">
 		<a href="javascript:;">
 			<i class="icon-remove"></i>

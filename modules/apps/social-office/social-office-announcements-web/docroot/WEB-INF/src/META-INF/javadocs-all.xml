@@ -3,7 +3,7 @@
 <javadocs>
 	<javadoc>
 		<name>SOAnnouncementsUserNotificationHandler</name>
-		<type>com.liferay.so.announcements.notifications.SOAnnouncementsUserNotificationHandler</type>
+		<type>com.liferay.social.office.announcements.web.notifications.SOAnnouncementsUserNotificationHandler</type>
 		<author><![CDATA[Jonathan Lee]]></author>
 		<method>
 			<name>SOAnnouncementsUserNotificationHandler</name>
@@ -53,7 +53,7 @@
 	</javadoc>
 	<javadoc>
 		<name>AnnouncementsPortlet</name>
-		<type>com.liferay.so.announcements.portlet.AnnouncementsPortlet</type>
+		<type>com.liferay.social.office.announcements.web.portlet.AnnouncementsPortlet</type>
 		<author><![CDATA[Raymond Augé]]></author>
 		<author><![CDATA[Evan Thibodeau]]></author>
 		<method>
@@ -131,7 +131,7 @@
 	</javadoc>
 	<javadoc>
 		<name>AnnouncementsEntryPermission</name>
-		<type>com.liferay.so.announcements.service.permission.AnnouncementsEntryPermission</type>
+		<type>com.liferay.social.office.announcements.web.service.permission.AnnouncementsEntryPermission</type>
 		<author><![CDATA[Istvan Andras Dezsi]]></author>
 		<method>
 			<name>contains</name>
@@ -162,7 +162,7 @@
 	</javadoc>
 	<javadoc>
 		<name>SOAnnouncementsUtil</name>
-		<type>com.liferay.so.announcements.util.SOAnnouncementsUtil</type>
+		<type>com.liferay.social.office.announcements.web.util.SOAnnouncementsUtil</type>
 		<author><![CDATA[Lin Cui]]></author>
 		<method>
 			<name>getGroups</name>

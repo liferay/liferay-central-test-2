@@ -38,7 +38,7 @@ for (int i = 0; i < results.size(); i++) {
 	}
 %>
 
-	<%@ include file="/view_entry.jspf" %>
+	<%@ include file="/html/portlet/view_entry.jspf" %>
 
 <%
 }
