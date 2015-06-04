@@ -18,11 +18,11 @@
 package com.liferay.social.office.announcements.web.constants;
 
 /**
- * @author Jonathan Lee
+* @author Jonathan Lee
  */
-public class PortletKeys extends com.liferay.portal.util.PortletKeys {
+public class SocialOfficeAnnouncementsPortletKeys {
 
-	public static final String SO_ANNOUNCEMENTS =
-		"1_WAR_soannouncementsportlet";
+	public static final String SOCIAL_OFFICE_ANNOUNCEMENTS =
+		"1_WAR_socialofficeannouncementsweb";
 
 }
