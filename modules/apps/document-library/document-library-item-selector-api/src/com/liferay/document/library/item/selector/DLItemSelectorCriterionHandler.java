@@ -53,15 +53,13 @@ public class DLItemSelectorCriterionHandler
 
 					@Override
 					public boolean filter(ItemSelectorView itemSelectorView) {
-
 						Class itemSelectorCriterionClass =
 							itemSelectorView.getItemSelectorCriterionClass();
 
 						return itemSelectorCriterionClass.isAssignableFrom(
 							DLItemSelectorCriterion.class);
 					}
-				}
-			)
-		);
+
+				}));
 
 }
