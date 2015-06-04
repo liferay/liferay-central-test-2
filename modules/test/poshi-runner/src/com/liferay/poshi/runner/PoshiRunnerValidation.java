@@ -1178,6 +1178,7 @@ public class PoshiRunnerValidation {
 	}
 
 	private static void _validateVarElement(Element element, String filePath) {
+		_validateHasNoChildElements(element, filePath);
 		_validateRequiredAttributeNames(
 			element, Arrays.asList("name"), filePath);
 
@@ -1198,6 +1199,32 @@ public class PoshiRunnerValidation {
 
 		_validatePossibleAttributeNames(
 			element, possibleAttributeNames, filePath);
+
+		if (Validator.isNotNull(element.attributeValue("attribute"))) {
+			List<String> attributeNames = Arrays.asList(
+				"attribute", "line-number", "locator", "name");
+
+			_validatePossibleAttributeNames(element, attributeNames, filePath);
+			_validateRequiredAttributeNames(element, attributeNames, filePath);
+		}
+		else if (Validator.isNotNull(element.attributeValue("group")) ||
+				 Validator.isNotNull(element.attributeValue("input")) ||
+				 Validator.isNotNull(element.attributeValue("pattern"))) {
+
+			List<String> attributeNames = Arrays.asList(
+				"group", "line-number", "input", "name", "pattern");
+
+			_validatePossibleAttributeNames(element, attributeNames, filePath);
+			_validateRequiredAttributeNames(element, attributeNames, filePath);
+		}
+		else if (Validator.isNotNull(element.attributeValue("locator")) ||
+				 Validator.isNotNull(element.attributeValue("method")) ||
+				 Validator.isNotNull(
+					 element.attributeValue("property-value")) ||
+				 Validator.isNotNull(element.attributeValue("var"))) {
+
+			_validateNumberofAttributes(element, 3, filePath);
+		}
 	}
 
 	private static void _validateWhileElement(
