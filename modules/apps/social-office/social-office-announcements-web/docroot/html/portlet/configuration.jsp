@@ -44,7 +44,7 @@ if (!roles.isEmpty()) {
 <aui:form action="<%= configurationActionURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveConfigurations();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-	<liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL">
+	<liferay-portlet:renderURL portletConfiguration="<%= true %>" var="configurationRenderURL">
 		<portlet:param name="tabs1" value="<%= tabs1 %>" />
 	</liferay-portlet:renderURL>
 
