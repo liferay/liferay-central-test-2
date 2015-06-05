@@ -1382,6 +1382,7 @@ public class DDMTemplateLocalServiceImpl
 			WorkflowConstants.STATUS_DRAFT);
 
 		templateVersion.setStatus(status);
+
 		templateVersion.setStatusByUserId(user.getUserId());
 		templateVersion.setStatusByUserName(user.getFullName());
 		templateVersion.setStatusDate(template.getModifiedDate());
