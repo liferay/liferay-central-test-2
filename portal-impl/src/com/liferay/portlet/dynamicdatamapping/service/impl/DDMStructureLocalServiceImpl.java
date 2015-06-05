@@ -1426,6 +1426,7 @@ public class DDMStructureLocalServiceImpl
 			WorkflowConstants.STATUS_DRAFT);
 
 		structureVersion.setStatus(status);
+
 		structureVersion.setStatusByUserId(user.getUserId());
 		structureVersion.setStatusByUserName(user.getFullName());
 		structureVersion.setStatusDate(structure.getModifiedDate());
