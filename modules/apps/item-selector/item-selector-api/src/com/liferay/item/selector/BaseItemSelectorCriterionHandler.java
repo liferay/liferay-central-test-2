@@ -45,7 +45,6 @@ public abstract class
 
 					@Override
 					public boolean filter(ItemSelectorView itemSelectorView) {
-
 						Class itemSelectorCriterionClass =
 							itemSelectorView.getItemSelectorCriterionClass();
 
@@ -53,8 +52,7 @@ public abstract class
 							BaseItemSelectorCriterionHandler.this.
 								getItemSelectorCriterionClass());
 					}
-				}
-			)
-		);
+
+				}));
 
 }
