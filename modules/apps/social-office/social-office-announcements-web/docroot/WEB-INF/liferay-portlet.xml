@@ -6,7 +6,7 @@
 		<portlet-name>1</portlet-name>
 		<icon>/html/icons/social_office_announcements.png</icon>
 		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
-		<user-notification-definitions>com/liferay/social/office/announcements/web/portlet/social-office-announcements-user-notification-definitions.xml</user-notification-definitions>
+		<user-notification-definitions>com/liferay/social/office/announcements/web/notifications/social-office-announcements-user-notification-definitions.xml</user-notification-definitions>
 		<user-notification-handler-class>com.liferay.social.office.announcements.web.notifications.SocialOfficeAnnouncementsUserNotificationHandler</user-notification-handler-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
