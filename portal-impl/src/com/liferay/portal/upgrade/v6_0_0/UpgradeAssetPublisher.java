@@ -70,13 +70,13 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(5);
 
 			sb.append("select JournalArticleResource.uuid_ from ");
-			sb.append("JournalArticleResource inner join JournalArticle ");
-			sb.append("on JournalArticle.resourcePrimKey = ");
-			sb.append("JournalArticleResource.resourcePrimKey ");
-			sb.append("where JournalArticle.uuid_ = ?");
+			sb.append("JournalArticleResource inner join JournalArticle on ");
+			sb.append("JournalArticle.resourcePrimKey = ");
+			sb.append("JournalArticleResource.resourcePrimKey where ");
+			sb.append("JournalArticle.uuid_ = ?");
 
 			ps = con.prepareStatement(sb.toString());
 
