@@ -203,13 +203,14 @@ public class UserIndexer extends BaseIndexer {
 				String[] organizationIdsStrings = ArrayUtil.toStringArray(
 					values);
 
-				organizationsTermsFilter.addValues(organizationIdsStrings);
 				ancestorOrgsTermsFilter.addValues(organizationIdsStrings);
+
+				organizationsTermsFilter.addValues(organizationIdsStrings);
 
 				BooleanFilter userOrgsBooleanFilter = new BooleanFilter();
 
-				userOrgsBooleanFilter.add(organizationsTermsFilter);
 				userOrgsBooleanFilter.add(ancestorOrgsTermsFilter);
+				userOrgsBooleanFilter.add(organizationsTermsFilter);
 
 				contextFilter.add(
 					userOrgsBooleanFilter, BooleanClauseOccur.MUST);
