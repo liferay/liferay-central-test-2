@@ -15,7 +15,6 @@
 package com.liferay.portal.lock.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.lock.upgrade.v1_0_0.UpgradeTable;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -52,11 +51,6 @@ public class LockServiceUpgrade {
 		_releaseLocalService = releaseLocalService;
 	}
 
-	@Reference(unbind = "-")
-	protected void setSettingsFactory(SettingsFactory settingsFactory) {
-		_settingsFactory = settingsFactory;
-	}
-
 	@Activate
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
@@ -68,6 +62,5 @@ public class LockServiceUpgrade {
 	}
 
 	private ReleaseLocalService _releaseLocalService;
-	private SettingsFactory _settingsFactory;
 
 }
