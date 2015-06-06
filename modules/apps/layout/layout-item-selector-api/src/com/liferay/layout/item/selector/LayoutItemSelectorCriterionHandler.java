@@ -54,7 +54,7 @@ public class LayoutItemSelectorCriterionHandler
 
 					@Override
 					public boolean filter(ItemSelectorView itemSelectorView) {
-						Class itemSelectorCriterionClass =
+						Class<?> itemSelectorCriterionClass =
 							itemSelectorView.getItemSelectorCriterionClass();
 
 						return itemSelectorCriterionClass.isAssignableFrom(
