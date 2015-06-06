@@ -16,7 +16,7 @@ package com.liferay.portal.lock.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.lock.upgrade.v1_0_0.UpgradeTable;
+import com.liferay.portal.lock.upgrade.v1_0_0.UpgradeLock;
 import com.liferay.portal.service.ReleaseLocalService;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class LockServiceUpgrade {
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
-		upgradeProcesses.add(new UpgradeTable());
+		upgradeProcesses.add(new UpgradeLock());
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.portal.lock.service", upgradeProcesses, 1, 1, false);

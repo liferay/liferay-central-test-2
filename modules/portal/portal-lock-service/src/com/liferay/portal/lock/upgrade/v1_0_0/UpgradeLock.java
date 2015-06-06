@@ -22,7 +22,7 @@ import java.sql.SQLException;
 /**
  * @author Miguel Pastor
  */
-public class UpgradeTable extends UpgradeProcess {
+public class UpgradeLock extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
