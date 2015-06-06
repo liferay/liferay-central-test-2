@@ -14,7 +14,7 @@
 
 package com.liferay.portal.lock.service.configuration.configurator;
 
-import com.liferay.portal.lock.upgrade.LockServicesUpgrade;
+import com.liferay.portal.lock.upgrade.LockServiceUpgrade;
 import com.liferay.portal.service.configuration.ServiceComponentConfiguration;
 import com.liferay.portal.service.configuration.configurator.ServiceConfigurator;
 import com.liferay.portal.spring.extender.loader.ModuleResourceLoader;
@@ -56,8 +56,8 @@ public class LockServiceConfigurator {
 	}
 
 	@Reference(unbind = "-")
-	protected void setLockServicesUpgrade(
-		LockServicesUpgrade lockServicesUpgrade) {
+	protected void setLockServiceUpgrade(
+		LockServiceUpgrade lockServiceUpgrade) {
 	}
 
 	@Reference(unbind = "-")

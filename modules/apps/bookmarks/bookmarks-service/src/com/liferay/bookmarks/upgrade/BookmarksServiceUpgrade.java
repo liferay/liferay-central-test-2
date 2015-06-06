@@ -34,8 +34,8 @@ import org.springframework.context.ApplicationContext;
 /**
  * @author Miguel Pastor
  */
-@Component(immediate = true, service = BookmarksServicesUpgrade.class)
-public class BookmarksServicesUpgrade {
+@Component(immediate = true, service = BookmarksServiceUpgrade.class)
+public class BookmarksServiceUpgrade {
 
 	@Reference(
 		target =

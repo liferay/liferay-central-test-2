@@ -32,8 +32,8 @@ import org.springframework.context.ApplicationContext;
 /**
  * @author Miguel Pastor
  */
-@Component(immediate = true, service = LockServicesUpgrade.class)
-public class LockServicesUpgrade {
+@Component(immediate = true, service = LockServiceUpgrade.class)
+public class LockServiceUpgrade {
 
 	@Reference(
 		target =
