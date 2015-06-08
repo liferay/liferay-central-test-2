@@ -393,7 +393,7 @@ public class PoshiRunnerValidation {
 				new Exception(
 					"Invalid " + conditionElementName + " element\n" +
 						filePath + ":" +
-						element.attributeValue("line-number")));
+							element.attributeValue("line-number")));
 		}
 
 		Element thenElement = element.element("then");
