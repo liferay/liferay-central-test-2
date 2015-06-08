@@ -133,12 +133,12 @@ public class FileEventUtil {
 	}
 
 	public static void copyFile(
-		long sourceTypePK, long folderId, long repositoryId, long syncAccountId,
-		String name, SyncFile syncFile) {
+		long sourceFileEntryId, long folderId, long repositoryId, 
+		long syncAccountId, String name, SyncFile syncFile) {
 
 		Map<String, Object> parameters = new HashMap<>();
 
-		parameters.put("sourceFileEntryId", sourceTypePK);
+		parameters.put("sourceFileEntryId", sourceFileEntryId);
 		parameters.put("folderId", folderId);
 		parameters.put("repositoryId", repositoryId);
 		parameters.put("sourceFileName", name);
