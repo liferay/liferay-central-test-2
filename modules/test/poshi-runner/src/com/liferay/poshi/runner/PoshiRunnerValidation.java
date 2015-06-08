@@ -1108,7 +1108,7 @@ public class PoshiRunnerValidation {
 					new Exception(
 						"Invalid " + childElementName + " element\n" +
 							filePath + ":" +
-							childElement.attributeValue("line-number")));
+								childElement.attributeValue("line-number")));
 			}
 
 			if (childElementName.equals("command")) {
