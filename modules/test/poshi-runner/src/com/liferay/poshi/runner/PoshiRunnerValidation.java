@@ -790,7 +790,7 @@ public class PoshiRunnerValidation {
 		}
 	}
 
-	private static void _validateNumberofAttributes(
+	private static void _validateNumberOfAttributes(
 		Element element, int number, String filePath) {
 
 		List<Attribute> attributes = element.attributes();
@@ -1223,7 +1223,7 @@ public class PoshiRunnerValidation {
 					 element.attributeValue("property-value")) ||
 				 Validator.isNotNull(element.attributeValue("var"))) {
 
-			_validateNumberofAttributes(element, 3, filePath);
+			_validateNumberOfAttributes(element, 3, filePath);
 		}
 	}
 
