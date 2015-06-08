@@ -1124,7 +1124,7 @@
 		<sequential>
 			<if>
 				<and>
-					<istrue value="${enable.testable.tomcat.logging}" />
+					<equals arg1="@{testable.tomcat.debug.logging}" arg2="on" />
 					<not>
 						<resourcecontains resource="${app.server.tomcat.dir}/conf/logging.properties" substring="org.apache.catalina.level" />
 					</not>
