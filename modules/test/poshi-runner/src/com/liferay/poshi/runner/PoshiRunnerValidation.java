@@ -197,7 +197,7 @@ public class PoshiRunnerValidation {
 				new Exception(
 					"Invalid " + classType + " class " + className + "\n" +
 						filePath + ":" +
-						element.attributeValue("line-number")));
+							element.attributeValue("line-number")));
 		}
 
 		String commandElementKey = classType + "#" + classCommandName;
