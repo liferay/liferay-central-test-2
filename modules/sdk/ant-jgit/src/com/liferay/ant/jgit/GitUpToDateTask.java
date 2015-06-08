@@ -195,7 +195,7 @@ public class GitUpToDateTask extends Task implements Condition {
 			Files.delete(cacheFilePath);
 
 			log(
-				"Deleted left over cache file from previous ant process" +
+				"Deleted left over cache file from previous Ant process" +
 					_cacheFileName,
 				Project.MSG_WARN);
 
