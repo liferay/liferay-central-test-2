@@ -175,7 +175,7 @@ public class LoggerElement {
 		_id = id;
 
 		if (_writtenToLogger) {
-			LoggerUtil.setID(id, oldID);
+			LoggerUtil.setID(oldID, id);
 		}
 	}
 
