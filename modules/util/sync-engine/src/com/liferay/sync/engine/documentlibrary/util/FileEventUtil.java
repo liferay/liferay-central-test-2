@@ -133,7 +133,7 @@ public class FileEventUtil {
 	}
 
 	public static void copyFile(
-		long sourceFileEntryId, long folderId, long repositoryId, 
+		long sourceFileEntryId, long folderId, long repositoryId,
 		long syncAccountId, String name, SyncFile syncFile) {
 
 		Map<String, Object> parameters = new HashMap<>();
