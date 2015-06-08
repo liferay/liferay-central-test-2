@@ -14,6 +14,9 @@
 
 package com.liferay.sync.engine.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.j256.ormlite.field.DatabaseField;
 
 /**
@@ -29,6 +32,18 @@ public abstract class BaseModel {
 
 	public void setUiEvent(int uiEvent) {
 		this.uiEvent = uiEvent;
+	}
+
+	@Override
+	public String toString() {
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		try {
+			return objectMapper.writeValueAsString(this);
+		}
+		catch (JsonProcessingException jpe) {
+			return super.toString();
+		}
 	}
 
 	@DatabaseField(index = true, useGetSet = true)
