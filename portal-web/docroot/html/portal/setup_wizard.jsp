@@ -54,9 +54,9 @@
 
 			long emailAddressId = ParamUtil.getLong(request, "emailAddressId");
 
-			EmailAddress emailAddressObj = EmailAddressServiceUtil.fetchEmailAddress(emailAddressId);
+			EmailAddress emailAddresModel = EmailAddressServiceUtil.fetchEmailAddress(emailAddressId);
 
-			String emailAddress = (emailAddressObj == null) ? defaultEmailAddress : emailAddressObj.getAddress();
+			String emailAddress = (emailAddresModel == null) ? defaultEmailAddress : emailAddresModel.getAddress();
 
 			UnicodeProperties unicodeProperties = (UnicodeProperties)session.getAttribute(WebKeys.SETUP_WIZARD_PROPERTIES);
 			%>
