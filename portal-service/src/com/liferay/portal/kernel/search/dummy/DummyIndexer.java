@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerPostProcessor;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.util.StringPool;
@@ -191,10 +190,14 @@ public class DummyIndexer implements Indexer {
 		SearchContext searchContext) {
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #postProcessSearchQuery(
+	 *             BooleanQuery, BooleanFilter, SearchContext)}
+	 */
+	@Deprecated
 	@Override
 	public void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
+		BooleanQuery searchQuery, SearchContext searchContext) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -229,9 +232,7 @@ public class DummyIndexer implements Indexer {
 	}
 
 	@Override
-	public long searchCount(SearchContext searchContext)
-		throws SearchException {
-
+	public long searchCount(SearchContext searchContext) {
 		return 0;
 	}
 
