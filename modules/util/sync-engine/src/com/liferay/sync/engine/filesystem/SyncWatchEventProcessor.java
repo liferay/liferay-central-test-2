@@ -81,6 +81,11 @@ public class SyncWatchEventProcessor implements Runnable {
 
 					for (SyncWatchEvent syncWatchEvent : syncWatchEvents) {
 						try {
+							_logger.debug(
+								"Processing queued event {} {}",
+								syncWatchEvent.getFilePathName(),
+								syncWatchEvent.getEventType());
+
 							processSyncWatchEvent(syncWatchEvent);
 						}
 						catch (Exception e) {
@@ -678,6 +683,10 @@ public class SyncWatchEventProcessor implements Runnable {
 				return;
 			}
 		}
+
+		_logger.debug(
+			"Queueing event {} {}", syncWatchEvent.getEventType(),
+			syncWatchEvent.getFilePathName());
 
 		syncWatchEvents.add(syncWatchEvent);
 	}
