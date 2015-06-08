@@ -298,7 +298,7 @@ public class PoshiRunnerValidation {
 		else if (elementName.equals("not")) {
 			_validateHasChildElements(element, filePath);
 			_validateHasNoAttributes(element, filePath);
-			_validateNumberofChildElements(element, 1, filePath);
+			_validateNumberOfChildElements(element, 1, filePath);
 
 			List<Element> childElements = element.elements();
 
@@ -373,7 +373,7 @@ public class PoshiRunnerValidation {
 
 		_validateHasChildElements(element, filePath);
 		_validateHasNoAttributes(element, filePath);
-		_validateNumberofChildElements(element, 2, filePath);
+		_validateNumberOfChildElements(element, 2, filePath);
 
 		List<Element> childElements = element.elements();
 
@@ -785,7 +785,7 @@ public class PoshiRunnerValidation {
 		}
 	}
 
-	private static void _validateNumberofChildElements(
+	private static void _validateNumberOfChildElements(
 		Element element, int number, String filePath) {
 
 		List<Element> childElements = element.elements();
@@ -823,14 +823,14 @@ public class PoshiRunnerValidation {
 		}
 
 		_validateHasChildElements(element, filePath);
-		_validateNumberofChildElements(element, 2, filePath);
+		_validateNumberOfChildElements(element, 2, filePath);
 		_validateRequiredChildElementNames(
 			element, Arrays.asList("body", "head"), filePath);
 
 		Element bodyElement = element.element("body");
 
 		_validateHasChildElements(bodyElement, filePath);
-		_validateNumberofChildElements(bodyElement, 1, filePath);
+		_validateNumberOfChildElements(bodyElement, 1, filePath);
 		_validateRequiredChildElementName(bodyElement, "table", filePath);
 
 		Element tableElement = bodyElement.element("table");
@@ -839,7 +839,7 @@ public class PoshiRunnerValidation {
 			"border", "cellpadding", "cellspacing", "line-number");
 
 		_validateHasChildElements(tableElement, filePath);
-		_validateNumberofChildElements(tableElement, 2, filePath);
+		_validateNumberOfChildElements(tableElement, 2, filePath);
 		_validateRequiredAttributeNames(
 			tableElement, requiredTableAttributeNames, filePath);
 		_validateRequiredChildElementNames(
@@ -855,7 +855,7 @@ public class PoshiRunnerValidation {
 
 			for (Element trElement : trElements) {
 				_validateHasChildElements(trElement, filePath);
-				_validateNumberofChildElements(trElement, 3, filePath);
+				_validateNumberOfChildElements(trElement, 3, filePath);
 				_validateRequiredChildElementName(trElement, "td", filePath);
 
 				List<Element> tdElements = trElement.elements();
@@ -887,13 +887,13 @@ public class PoshiRunnerValidation {
 		Element theadElement = tableElement.element("thead");
 
 		_validateHasChildElements(theadElement, filePath);
-		_validateNumberofChildElements(theadElement, 1, filePath);
+		_validateNumberOfChildElements(theadElement, 1, filePath);
 		_validateRequiredChildElementName(theadElement, "tr", filePath);
 
 		Element trElement = theadElement.element("tr");
 
 		_validateHasChildElements(trElement, filePath);
-		_validateNumberofChildElements(trElement, 1, filePath);
+		_validateNumberOfChildElements(trElement, 1, filePath);
 		_validateRequiredChildElementName(trElement, "td", filePath);
 
 		Element tdElement = trElement.element("td");
@@ -920,7 +920,7 @@ public class PoshiRunnerValidation {
 		Element headElement = element.element("head");
 
 		_validateHasChildElements(headElement, filePath);
-		_validateNumberofChildElements(headElement, 1, filePath);
+		_validateNumberOfChildElements(headElement, 1, filePath);
 		_validateRequiredChildElementName(headElement, "title", filePath);
 
 		Element titleElement = headElement.element("title");
