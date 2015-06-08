@@ -429,8 +429,8 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 
 					try (InputStream inputStream =
 							classLoader.getResourceAsStream(
-								"com/liferay/gradle/plugins/dependencies/" +
-									"touch.jsp")) {
+								"com/liferay/gradle/plugins/dependencies" +
+									"/touch.jsp")) {
 
 						File touchJspFile = new File(
 							task.getTemporaryDir(), "touch.jsp");
@@ -485,7 +485,7 @@ public class LiferayWebAppPlugin extends LiferayJavaPlugin {
 			};
 
 		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(
-			jspDir.toPath(), filter)) {
+				jspDir.toPath(), filter)) {
 
 			Closure<Void> closure = new Closure<Void>(null) {
 
