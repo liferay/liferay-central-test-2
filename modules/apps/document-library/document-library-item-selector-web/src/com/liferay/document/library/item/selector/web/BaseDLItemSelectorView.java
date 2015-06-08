@@ -43,6 +43,9 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 			PortletURL portletURL, String itemSelectedEventName)
 		throws IOException, ServletException {
 
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+			"/o/document-library-item-selector-web/documents.jsp");
+
 		DLItemSelectorViewDisplayContext dlItemSelectorViewDisplayContext =
 			new DLItemSelectorViewDisplayContext(
 				t, this, itemSelectedEventName, portletURL);
@@ -50,9 +53,6 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 		request.setAttribute(
 			DL_ITEM_SELECTOR_VIEW_DISPLAY_CONTEXT,
 			dlItemSelectorViewDisplayContext);
-
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-			"/o/document-library-item-selector-web/documents.jsp");
 
 		requestDispatcher.include(request, response);
 	}
