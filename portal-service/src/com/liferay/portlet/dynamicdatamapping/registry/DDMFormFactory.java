@@ -28,7 +28,7 @@ public class DDMFormFactory {
 	public static DDMForm create(Class<?> clazz) {
 		if (!clazz.isAnnotationPresent(_DDM_FORM_ANNOTATION)) {
 			throw new IllegalArgumentException(
-				"The provided type is not supported.");
+				"Unsupported class " + clazz.getName());
 		}
 
 		DDMForm ddmForm = new DDMForm();
