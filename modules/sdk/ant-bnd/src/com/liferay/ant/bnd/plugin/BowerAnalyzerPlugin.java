@@ -192,17 +192,17 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	protected void appendRange(StringBuilder sb, String group1, String group2) {
 		sb.append("(&");
 
-		Matcher prefixRange = VERSION_PREFIX_RANGE_PATTERN.matcher(group1);
+		Matcher matcher = VERSION_PREFIX_RANGE_PATTERN.matcher(group1);
 
-		prefixRange.matches();
+		matcher.matches();
 
-		appendPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
+		appendPrefixRange(sb, matcher.group(1), matcher.group(2));
 
-		prefixRange = VERSION_PREFIX_RANGE_PATTERN.matcher(group2);
+		matcher = VERSION_PREFIX_RANGE_PATTERN.matcher(group2);
 
-		prefixRange.matches();
+		matcher.matches();
 
-		appendPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
+		appendPrefixRange(sb, matcher.group(1), matcher.group(2));
 
 		sb.append(")");
 	}
@@ -330,7 +330,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			Matcher rangeMatcher = VERSION_RANGE_PATTERN.matcher(comparatorSet);
 			Matcher prefixRangeMatcher = VERSION_PREFIX_RANGE_PATTERN.matcher(
 				comparatorSet);
-			Matcher versionMatcherMatcher = VERSION_NAMED_PATTERN.matcher(
+			Matcher versionMatcher = VERSION_NAMED_PATTERN.matcher(
 				comparatorSet);
 
 			if (inclusiveMatcher.matches()) {
@@ -345,8 +345,8 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 					sb, prefixRangeMatcher.group(1),
 					prefixRangeMatcher.group(2));
 			}
-			else if (versionMatcherMatcher.matches()) {
-				appendVersion(sb, versionMatcherMatcher);
+			else if (versionMatcher.matches()) {
+				appendVersion(sb, versionMatcher);
 			}
 		}
 
