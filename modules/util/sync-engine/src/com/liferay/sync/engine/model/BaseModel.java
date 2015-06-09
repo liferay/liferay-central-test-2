@@ -14,10 +14,11 @@
 
 package com.liferay.sync.engine.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.j256.ormlite.field.DatabaseField;
+
+import com.liferay.sync.engine.util.JSONUtil;
+
+import java.io.IOException;
 
 /**
  * @author Shinn Lok
@@ -36,12 +37,10 @@ public abstract class BaseModel {
 
 	@Override
 	public String toString() {
-		ObjectMapper objectMapper = new ObjectMapper();
-
 		try {
-			return objectMapper.writeValueAsString(this);
+			return JSONUtil.writeValueAsString(this);
 		}
-		catch (JsonProcessingException jpe) {
+		catch (IOException ioe) {
 			return super.toString();
 		}
 	}
