@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.imageselector.BaseImageSelectorUploadHandler;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.PortletJSONResponseUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.JSONResponseUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -133,7 +133,7 @@ public abstract class BaseBlogsImageSelectorUploadHandler
 			jsonObject.put("error", errorJSONObject);
 
 			try {
-				JSONResponseUtil.writeJSON(
+				PortletJSONResponseUtil.writeJSON(
 					portletRequest, portletResponse, jsonObject);
 			}
 			catch (IOException ioe) {

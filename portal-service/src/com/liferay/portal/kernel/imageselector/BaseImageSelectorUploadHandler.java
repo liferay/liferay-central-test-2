@@ -19,11 +19,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.PortletJSONResponseUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.upload.LiferayFileItemException;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.util.JSONResponseUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -92,7 +92,7 @@ public abstract class BaseImageSelectorUploadHandler
 
 			jsonObject.put("image", imageJSONObject);
 
-			JSONResponseUtil.writeJSON(
+			PortletJSONResponseUtil.writeJSON(
 				portletRequest, portletResponse, jsonObject);
 		}
 		catch (IOException ioe) {

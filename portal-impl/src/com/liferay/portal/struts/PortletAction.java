@@ -17,12 +17,12 @@ package com.liferay.portal.struts;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.PortletJSONResponseUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.JSONResponseUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -56,7 +56,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -461,7 +460,7 @@ public class PortletAction extends Action {
 			Object json)
 		throws IOException {
 
-		JSONResponseUtil.writeJSON(portletRequest, actionResponse, json);
+		PortletJSONResponseUtil.writeJSON(portletRequest, actionResponse, json);
 
 		setForward(portletRequest, ActionConstants.COMMON_NULL);
 	}
@@ -471,7 +470,7 @@ public class PortletAction extends Action {
 			Object json)
 		throws IOException {
 
-		JSONResponseUtil.writeJSON(portletRequest, mimeResponse, json);
+		PortletJSONResponseUtil.writeJSON(portletRequest, mimeResponse, json);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = true;

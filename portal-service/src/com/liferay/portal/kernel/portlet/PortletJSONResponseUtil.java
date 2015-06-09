@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
@@ -24,14 +24,13 @@ import java.io.IOException;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Adolfo Pérez
  */
-public class JSONResponseUtil {
+public class PortletJSONResponseUtil {
 
 	public static void writeJSON(
 			PortletRequest portletRequest, MimeResponse mimeResponse,
