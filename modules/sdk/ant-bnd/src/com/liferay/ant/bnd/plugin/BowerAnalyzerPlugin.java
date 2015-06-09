@@ -250,7 +250,9 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		return minor;
 	}
 
-	protected void doInclusive(StringBuilder sb, String group1, String group2) {
+	protected void appendInclusive(
+		StringBuilder sb, String group1, String group2) {
+
 		sb.append("(&(version>=");
 
 		Matcher matcher = VERSION_NAMED_PATTERN.matcher(group1);
@@ -334,7 +336,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				comparatorSet);
 
 			if (inclusiveMatcher.matches()) {
-				doInclusive(
+				appendInclusive(
 					sb, inclusiveMatcher.group(1), inclusiveMatcher.group(9));
 			}
 			else if (rangeMatcher.matches()) {
