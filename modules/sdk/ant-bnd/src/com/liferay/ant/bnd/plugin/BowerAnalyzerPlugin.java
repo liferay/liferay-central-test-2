@@ -115,51 +115,6 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		return minor;
 	}
 
-	protected void doInclusive(StringBuilder sb, String group1, String group2) {
-		sb.append("(&(version>=");
-
-		Matcher matcher = VERSION_NAMED_PATTERN.matcher(group1);
-
-		matcher.matches();
-
-		String major = matcher.group("major");
-		String minor = matcher.group("minor");
-		String micro = matcher.group("micro");
-		String qualifier = matcher.group("qualifier");
-
-		sb.append(toVersion(major, minor, micro, qualifier));
-
-		matcher = VERSION_NAMED_PATTERN.matcher(group2);
-
-		matcher.matches();
-
-		major = matcher.group("major");
-		minor = matcher.group("minor");
-		micro = matcher.group("micro");
-		qualifier = matcher.group("qualifier");
-
-		if (minor == null) {
-			major = Integer.parseInt(major) + 1 + "";
-
-			sb.append(")(!(version>=");
-			sb.append(major);
-			sb.append(".0.0)");
-		}
-		else if (micro == null) {
-			sb.append(")(version<=");
-			sb.append(major);
-			sb.append(".");
-			sb.append(Integer.parseInt(minor) + 1);
-			sb.append(".0");
-		}
-		else {
-			sb.append(")(version<=");
-			sb.append(toVersion(major, minor, micro, qualifier));
-		}
-
-		sb.append("))");
-	}
-
 	protected void appendPrefixRange(
 		StringBuilder sb, String prefix, String version) {
 
@@ -293,6 +248,51 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
+	}
+
+	protected void doInclusive(StringBuilder sb, String group1, String group2) {
+		sb.append("(&(version>=");
+
+		Matcher matcher = VERSION_NAMED_PATTERN.matcher(group1);
+
+		matcher.matches();
+
+		String major = matcher.group("major");
+		String minor = matcher.group("minor");
+		String micro = matcher.group("micro");
+		String qualifier = matcher.group("qualifier");
+
+		sb.append(toVersion(major, minor, micro, qualifier));
+
+		matcher = VERSION_NAMED_PATTERN.matcher(group2);
+
+		matcher.matches();
+
+		major = matcher.group("major");
+		minor = matcher.group("minor");
+		micro = matcher.group("micro");
+		qualifier = matcher.group("qualifier");
+
+		if (minor == null) {
+			major = Integer.parseInt(major) + 1 + "";
+
+			sb.append(")(!(version>=");
+			sb.append(major);
+			sb.append(".0.0)");
+		}
+		else if (micro == null) {
+			sb.append(")(version<=");
+			sb.append(major);
+			sb.append(".");
+			sb.append(Integer.parseInt(minor) + 1);
+			sb.append(".0");
+		}
+		else {
+			sb.append(")(version<=");
+			sb.append(toVersion(major, minor, micro, qualifier));
+		}
+
+		sb.append("))");
 	}
 
 	protected BowerModule getBowerModule(InputStream inputStream)
