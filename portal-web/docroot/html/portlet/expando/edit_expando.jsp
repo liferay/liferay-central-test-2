@@ -22,13 +22,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 String modelResource = ParamUtil.getString(request, "modelResource");
 String modelResourceName = ResourceActionsUtil.getModelResource(request, modelResource);
 
-ExpandoColumn column = null;
-int type = 0;
-
 long columnId = ParamUtil.getLong(request, "columnId");
+
+ExpandoColumn column = null;
 
 if (columnId > 0) {
 	column = ExpandoColumnServiceUtil.fetchExpandoColumn(columnId);
+}
+
+int type = 0;
+
+if (column != null) {
 	type = column.getType();
 }
 
