@@ -157,7 +157,7 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 
 		SearchResultManager searchResultManager = new SearchResultManagerImpl(
 			classNameLocalService, dlAppLocalService, mbMessageLocalService);
-		
+
 		searchResultManagerUtil.setSearchResultManager(searchResultManager);
 	}
 
