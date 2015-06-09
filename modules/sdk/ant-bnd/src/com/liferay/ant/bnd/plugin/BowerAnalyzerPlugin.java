@@ -38,38 +38,38 @@ import java.util.regex.Pattern;
  */
 public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
-	public static final String BOWER_JSON = "bower.json";
+	private static final String _BOWER_JSON = "bower.json";
 
-	public static final String OSGI_WEBRESOURCE = "osgi.webresource";
+	private static final String _OSGI_WEBRESOURCE = "osgi.webresource";
 
-	public static final String VERSION =
+	private static final String _VERSION =
 		"((\\d{1,9})(\\.([\\dx\\*]{1,9})(\\.([\\dx\\*]{1,9})" +
 			"([\\.-]([-_\\da-zA-Z]+))?)?)?)";
 
-	public static final String VERSION_INCLUSIVE_RANGE =
-		VERSION + "\\s*-\\s*" + VERSION;
+	private static final String _VERSION_INCLUSIVE_RANGE =
+		_VERSION + "\\s*-\\s*" + _VERSION;
 
-	public static final Pattern VERSION_INCLUSIVE_RANGE_PATTERN =
-		Pattern.compile(VERSION_INCLUSIVE_RANGE);
+	private static final Pattern _VERSION_INCLUSIVE_RANGE_PATTERN =
+		Pattern.compile(_VERSION_INCLUSIVE_RANGE);
 
-	public static final String VERSION_NAMED =
+	private static final String _VERSION_NAMED =
 		"(?<major>\\d{1,9})(\\.(?<minor>[\\dx\\*]{1,9})" +
 			"(\\.(?<micro>[\\dx\\*]{1,9})" +
 				"([\\.-](?<qualifier>[-_\\da-zA-Z]+))?)?)?";
 
-	public static final Pattern VERSION_NAMED_PATTERN = Pattern.compile(
-		VERSION_NAMED);
+	private static final Pattern _VERSION_NAMED_PATTERN = Pattern.compile(
+		_VERSION_NAMED);
 
-	public static final String VERSION_PREFIX_RANGE = "(<|<=|>|>=|=|~|\\^|v)";
+	private static final String _VERSION_PREFIX_RANGE = "(<|<=|>|>=|=|~|\\^|v)";
 
-	public static final Pattern VERSION_PREFIX_RANGE_PATTERN = Pattern.compile(
-		VERSION_PREFIX_RANGE + VERSION);
+	private static final Pattern _VERSION_PREFIX_RANGE_PATTERN = Pattern.compile(
+		_VERSION_PREFIX_RANGE + _VERSION);
 
-	public static final String VERSION_RANGE =
-		"(" + VERSION_PREFIX_RANGE + VERSION + ")\\s+(" + VERSION_PREFIX_RANGE +
-			VERSION + ")";
+	private static final String VERSION_RANGE =
+		"(" + _VERSION_PREFIX_RANGE + _VERSION + ")\\s+(" + _VERSION_PREFIX_RANGE +
+			_VERSION + ")";
 
-	public static final Pattern VERSION_RANGE_PATTERN = Pattern.compile(
+	private static final Pattern _VERSION_RANGE_PATTERN = Pattern.compile(
 		VERSION_RANGE);
 
 	public static final String WEB_CONTEXT_PATH = "Web-ContextPath";
@@ -78,7 +78,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
 		Jar jar = analyzer.getJar();
 
-		Resource bowerJSONResource = jar.getResource(BOWER_JSON);
+		Resource bowerJSONResource = jar.getResource(_BOWER_JSON);
 
 		if (bowerJSONResource == null) {
 			return false;
@@ -106,7 +106,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		sb.append("(&(version>=");
 
-		Matcher matcher = VERSION_NAMED_PATTERN.matcher(group1);
+		Matcher matcher = _VERSION_NAMED_PATTERN.matcher(group1);
 
 		matcher.matches();
 
@@ -117,7 +117,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		sb.append(toVersion(major, minor, micro, qualifier));
 
-		matcher = VERSION_NAMED_PATTERN.matcher(group2);
+		matcher = _VERSION_NAMED_PATTERN.matcher(group2);
 
 		matcher.matches();
 
@@ -151,7 +151,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	protected void appendPrefixRange(
 		StringBuilder sb, String prefix, String version) {
 
-		Matcher matcher = VERSION_NAMED_PATTERN.matcher(version);
+		Matcher matcher = _VERSION_NAMED_PATTERN.matcher(version);
 
 		matcher.matches();
 
@@ -235,13 +235,13 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	protected void appendRange(StringBuilder sb, String group1, String group2) {
 		sb.append("(&");
 
-		Matcher matcher = VERSION_PREFIX_RANGE_PATTERN.matcher(group1);
+		Matcher matcher = _VERSION_PREFIX_RANGE_PATTERN.matcher(group1);
 
 		matcher.matches();
 
 		appendPrefixRange(sb, matcher.group(1), matcher.group(2));
 
-		matcher = VERSION_PREFIX_RANGE_PATTERN.matcher(group2);
+		matcher = _VERSION_PREFIX_RANGE_PATTERN.matcher(group2);
 
 		matcher.matches();
 
@@ -323,12 +323,12 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				comparatorSet = ">=0";
 			}
 
-			Matcher inclusiveMatcher = VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
+			Matcher inclusiveMatcher = _VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
 				comparatorSet);
-			Matcher rangeMatcher = VERSION_RANGE_PATTERN.matcher(comparatorSet);
-			Matcher prefixRangeMatcher = VERSION_PREFIX_RANGE_PATTERN.matcher(
+			Matcher rangeMatcher = _VERSION_RANGE_PATTERN.matcher(comparatorSet);
+			Matcher prefixRangeMatcher = _VERSION_PREFIX_RANGE_PATTERN.matcher(
 				comparatorSet);
-			Matcher versionMatcher = VERSION_NAMED_PATTERN.matcher(
+			Matcher versionMatcher = _VERSION_NAMED_PATTERN.matcher(
 				comparatorSet);
 
 			if (inclusiveMatcher.matches()) {
@@ -398,13 +398,13 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				'/' + bowerName + "-" + analyzer.getBundleVersion());
 		}
 
-		attrs.put(OSGI_WEBRESOURCE, bowerName);
+		attrs.put(_OSGI_WEBRESOURCE, bowerName);
 
 		attrs.put(
 			Constants.VERSION_ATTRIBUTE + ":Version",
 			analyzer.getBundleVersion());
 
-		parameters.add(OSGI_WEBRESOURCE, attrs);
+		parameters.add(_OSGI_WEBRESOURCE, attrs);
 
 		setCapabilities(analyzer, Constants.PROVIDE_CAPABILITY, parameters);
 
@@ -425,7 +425,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("(&(");
-			sb.append(OSGI_WEBRESOURCE);
+			sb.append(_OSGI_WEBRESOURCE);
 			sb.append("=");
 
 			String name = entry.getKey();
@@ -444,7 +444,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 			attrs.put(Constants.FILTER_DIRECTIVE, sb.toString());
 
-			parameters.add(OSGI_WEBRESOURCE, attrs);
+			parameters.add(_OSGI_WEBRESOURCE, attrs);
 		}
 
 		setCapabilities(analyzer, Constants.REQUIRE_CAPABILITY, parameters);
