@@ -138,9 +138,9 @@ public class FileEventUtil {
 
 		Map<String, Object> parameters = new HashMap<>();
 
-		parameters.put("sourceFileEntryId", sourceFileEntryId);
 		parameters.put("folderId", folderId);
 		parameters.put("repositoryId", repositoryId);
+		parameters.put("sourceFileEntryId", sourceFileEntryId);
 		parameters.put("sourceFileName", name);
 		parameters.put("syncFile", syncFile);
 		parameters.put("title", name);
