@@ -272,7 +272,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		analyzer.setProperty(capabilityType, parameters.toString());
 	}
 
-	private String _deSugar(String minor) {
+	private String _desugar(String minor) {
 		if ((minor == null) || minor.equalsIgnoreCase("x") ||
 			minor.equals("*")) {
 
@@ -399,12 +399,12 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 					 micro.equalsIgnoreCase("x") || micro.equals("*")) {
 
 				sb.append("0.");
-				sb.append(Integer.parseInt(_deSugar(minor)) + 1);
+				sb.append(Integer.parseInt(_desugar(minor)) + 1);
 				sb.append(".0");
 			}
 			else {
 				sb.append("0.0.");
-				sb.append(Integer.parseInt(_deSugar(micro)) + 1);
+				sb.append(Integer.parseInt(_desugar(micro)) + 1);
 			}
 
 			sb.append(")))");
