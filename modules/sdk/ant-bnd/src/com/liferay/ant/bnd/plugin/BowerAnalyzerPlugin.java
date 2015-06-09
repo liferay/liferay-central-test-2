@@ -105,173 +105,6 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 	}
 
-	protected BowerModule getBowerModule(InputStream inputStream)
-		throws Exception {
-
-		JSONCodec jsonCodec = new JSONCodec();
-
-		Decoder decoder = jsonCodec.dec();
-
-		decoder = decoder.from(inputStream);
-
-		return decoder.get(BowerModule.class);
-	}
-
-	protected String getBowerVersionFilter(String version) {
-		StringBuilder sb = new StringBuilder();
-
-		String[] comparatorSets = version.split("\\|\\|");
-
-		// Comparator sets are OR'd together
-
-		if (comparatorSets.length > 1) {
-			sb.append("(|");
-		}
-
-		for (String comparatorSet : comparatorSets) {
-			comparatorSet = comparatorSet.trim();
-
-			if ((comparatorSet.length() == 0) || comparatorSet.equals("*")) {
-				comparatorSet = ">=0";
-			}
-
-			Matcher inclusiveMatcher = VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
-				comparatorSet);
-			Matcher rangeMatcher = VERSION_RANGE_PATTERN.matcher(comparatorSet);
-			Matcher prefixRangeMatcher = VERSION_PREFIX_RANGE_PATTERN.matcher(
-				comparatorSet);
-			Matcher versionMatcherMatcher = VERSION_NAMED_PATTERN.matcher(
-				comparatorSet);
-
-			if (inclusiveMatcher.matches()) {
-				doInclusive(
-					sb, inclusiveMatcher.group(1), inclusiveMatcher.group(9));
-			}
-			else if (rangeMatcher.matches()) {
-				doRange(sb, rangeMatcher.group(1), rangeMatcher.group(11));
-			}
-			else if (prefixRangeMatcher.matches()) {
-				doPrefixRange(
-					sb, prefixRangeMatcher.group(1),
-					prefixRangeMatcher.group(2));
-			}
-			else if (versionMatcherMatcher.matches()) {
-				doVersion(sb, versionMatcherMatcher);
-			}
-		}
-
-		if (comparatorSets.length > 1) {
-			sb.append(")");
-		}
-
-		return sb.toString();
-	}
-
-	protected BowerModule processBowerJsonResource(
-			Analyzer analyzer, Resource bowerJSONResource)
-		throws Exception {
-
-		BowerModule bowerModule = getBowerModule(
-			bowerJSONResource.openInputStream());
-
-		String bundleVersion = analyzer.getBundleVersion();
-
-		if (bundleVersion == null) {
-			Version version = null;
-
-			try {
-				version = new Version(bowerModule.version);
-			}
-			catch (IllegalArgumentException iae) {
-				String sanitizedQualifier = bowerModule.version.replaceAll(
-					"[^-_\\da-zA-Z]", "");
-
-				version = new Version("0.0.0." + sanitizedQualifier);
-			}
-
-			analyzer.setBundleVersion(version.toString());
-		}
-
-		String bowerName = bowerModule.name;
-		String webContextPath = analyzer.getProperty(WEB_CONTEXTPATH);
-
-		if ((webContextPath == null) && (bowerName != null)) {
-			if (bowerName.indexOf('/') == 0) {
-				bowerName = bowerName.substring(1);
-			}
-
-			analyzer.setProperty(
-				WEB_CONTEXTPATH,
-				'/' + bowerName + "-" + analyzer.getBundleVersion());
-		}
-
-		Parameters parameters = new Parameters();
-
-		Attrs attrs = new Attrs();
-
-		attrs.put(OSGI_WEBRESOURCE, bowerName);
-		attrs.put(
-			Constants.VERSION_ATTRIBUTE + ":Version",
-			analyzer.getBundleVersion());
-
-		parameters.add(OSGI_WEBRESOURCE, attrs);
-
-		setCapabilities(analyzer, Constants.PROVIDE_CAPABILITY, parameters);
-
-		return bowerModule;
-	}
-
-	protected void processDepedencies(
-			Analyzer analyzer, BowerModule bowerModule)
-		throws Exception {
-
-		if (bowerModule.runtime == null) {
-			return;
-		}
-
-		Parameters parameters = new Parameters();
-
-		for (Entry<String, String> entry : bowerModule.runtime.entrySet()) {
-			String name = entry.getKey();
-			String version = entry.getValue();
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("(&(");
-			sb.append(OSGI_WEBRESOURCE);
-			sb.append("=");
-			sb.append(name);
-			sb.append(")");
-			sb.append(getBowerVersionFilter(version));
-			sb.append(")");
-
-			Attrs attrs = new Attrs();
-
-			attrs.put(Constants.FILTER_DIRECTIVE, sb.toString());
-
-			parameters.add(OSGI_WEBRESOURCE, attrs);
-		}
-
-		setCapabilities(analyzer, Constants.REQUIRE_CAPABILITY, parameters);
-	}
-
-	protected void setCapabilities(
-		Analyzer analyzer, String capabilityType, Parameters parameters) {
-
-		if (parameters.isEmpty()) {
-			return;
-		}
-
-		Parameters headerParameters = new Parameters(
-			analyzer.getProperty(capabilityType));
-
-		if (!headerParameters.isEmpty()) {
-			parameters.mergeWith(headerParameters, false);
-		}
-
-		analyzer.setProperty(capabilityType, parameters.toString());
-	}
-
 	protected String _desugar(String minor) {
 		if ((minor == null) || minor.equalsIgnoreCase("x") ||
 			minor.equals("*")) {
@@ -460,6 +293,173 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
+	}
+
+	protected BowerModule getBowerModule(InputStream inputStream)
+		throws Exception {
+
+		JSONCodec jsonCodec = new JSONCodec();
+
+		Decoder decoder = jsonCodec.dec();
+
+		decoder = decoder.from(inputStream);
+
+		return decoder.get(BowerModule.class);
+	}
+
+	protected String getBowerVersionFilter(String version) {
+		StringBuilder sb = new StringBuilder();
+
+		String[] comparatorSets = version.split("\\|\\|");
+
+		// Comparator sets are OR'd together
+
+		if (comparatorSets.length > 1) {
+			sb.append("(|");
+		}
+
+		for (String comparatorSet : comparatorSets) {
+			comparatorSet = comparatorSet.trim();
+
+			if ((comparatorSet.length() == 0) || comparatorSet.equals("*")) {
+				comparatorSet = ">=0";
+			}
+
+			Matcher inclusiveMatcher = VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
+				comparatorSet);
+			Matcher rangeMatcher = VERSION_RANGE_PATTERN.matcher(comparatorSet);
+			Matcher prefixRangeMatcher = VERSION_PREFIX_RANGE_PATTERN.matcher(
+				comparatorSet);
+			Matcher versionMatcherMatcher = VERSION_NAMED_PATTERN.matcher(
+				comparatorSet);
+
+			if (inclusiveMatcher.matches()) {
+				doInclusive(
+					sb, inclusiveMatcher.group(1), inclusiveMatcher.group(9));
+			}
+			else if (rangeMatcher.matches()) {
+				doRange(sb, rangeMatcher.group(1), rangeMatcher.group(11));
+			}
+			else if (prefixRangeMatcher.matches()) {
+				doPrefixRange(
+					sb, prefixRangeMatcher.group(1),
+					prefixRangeMatcher.group(2));
+			}
+			else if (versionMatcherMatcher.matches()) {
+				doVersion(sb, versionMatcherMatcher);
+			}
+		}
+
+		if (comparatorSets.length > 1) {
+			sb.append(")");
+		}
+
+		return sb.toString();
+	}
+
+	protected BowerModule processBowerJsonResource(
+			Analyzer analyzer, Resource bowerJSONResource)
+		throws Exception {
+
+		BowerModule bowerModule = getBowerModule(
+			bowerJSONResource.openInputStream());
+
+		String bundleVersion = analyzer.getBundleVersion();
+
+		if (bundleVersion == null) {
+			Version version = null;
+
+			try {
+				version = new Version(bowerModule.version);
+			}
+			catch (IllegalArgumentException iae) {
+				String sanitizedQualifier = bowerModule.version.replaceAll(
+					"[^-_\\da-zA-Z]", "");
+
+				version = new Version("0.0.0." + sanitizedQualifier);
+			}
+
+			analyzer.setBundleVersion(version.toString());
+		}
+
+		String bowerName = bowerModule.name;
+		String webContextPath = analyzer.getProperty(WEB_CONTEXTPATH);
+
+		if ((webContextPath == null) && (bowerName != null)) {
+			if (bowerName.indexOf('/') == 0) {
+				bowerName = bowerName.substring(1);
+			}
+
+			analyzer.setProperty(
+				WEB_CONTEXTPATH,
+				'/' + bowerName + "-" + analyzer.getBundleVersion());
+		}
+
+		Parameters parameters = new Parameters();
+
+		Attrs attrs = new Attrs();
+
+		attrs.put(OSGI_WEBRESOURCE, bowerName);
+		attrs.put(
+			Constants.VERSION_ATTRIBUTE + ":Version",
+			analyzer.getBundleVersion());
+
+		parameters.add(OSGI_WEBRESOURCE, attrs);
+
+		setCapabilities(analyzer, Constants.PROVIDE_CAPABILITY, parameters);
+
+		return bowerModule;
+	}
+
+	protected void processDepedencies(
+			Analyzer analyzer, BowerModule bowerModule)
+		throws Exception {
+
+		if (bowerModule.runtime == null) {
+			return;
+		}
+
+		Parameters parameters = new Parameters();
+
+		for (Entry<String, String> entry : bowerModule.runtime.entrySet()) {
+			String name = entry.getKey();
+			String version = entry.getValue();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("(&(");
+			sb.append(OSGI_WEBRESOURCE);
+			sb.append("=");
+			sb.append(name);
+			sb.append(")");
+			sb.append(getBowerVersionFilter(version));
+			sb.append(")");
+
+			Attrs attrs = new Attrs();
+
+			attrs.put(Constants.FILTER_DIRECTIVE, sb.toString());
+
+			parameters.add(OSGI_WEBRESOURCE, attrs);
+		}
+
+		setCapabilities(analyzer, Constants.REQUIRE_CAPABILITY, parameters);
+	}
+
+	protected void setCapabilities(
+		Analyzer analyzer, String capabilityType, Parameters parameters) {
+
+		if (parameters.isEmpty()) {
+			return;
+		}
+
+		Parameters headerParameters = new Parameters(
+			analyzer.getProperty(capabilityType));
+
+		if (!headerParameters.isEmpty()) {
+			parameters.mergeWith(headerParameters, false);
+		}
+
+		analyzer.setProperty(capabilityType, parameters.toString());
 	}
 
 	protected String toVersion(
