@@ -144,19 +144,19 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				comparatorSet);
 
 			if (inclusiveMatcher.matches()) {
-				_doInclusive(
+				doInclusive(
 					sb, inclusiveMatcher.group(1), inclusiveMatcher.group(9));
 			}
 			else if (rangeMatcher.matches()) {
-				_doRange(sb, rangeMatcher.group(1), rangeMatcher.group(11));
+				doRange(sb, rangeMatcher.group(1), rangeMatcher.group(11));
 			}
 			else if (prefixRangeMatcher.matches()) {
-				_doPrefixRange(
+				doPrefixRange(
 					sb, prefixRangeMatcher.group(1),
 					prefixRangeMatcher.group(2));
 			}
 			else if (versionMatcherMatcher.matches()) {
-				_doVersion(sb, versionMatcherMatcher);
+				doVersion(sb, versionMatcherMatcher);
 			}
 		}
 
@@ -272,7 +272,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		analyzer.setProperty(capabilityType, parameters.toString());
 	}
 
-	private String _desugar(String minor) {
+	protected String _desugar(String minor) {
 		if ((minor == null) || minor.equalsIgnoreCase("x") ||
 			minor.equals("*")) {
 
@@ -282,7 +282,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		return minor;
 	}
 
-	private void _doInclusive(StringBuilder sb, String group1, String group2) {
+	protected void doInclusive(StringBuilder sb, String group1, String group2) {
 		sb.append("(&(version>=");
 
 		Matcher matcher = VERSION_NAMED_PATTERN.matcher(group1);
@@ -294,7 +294,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		String micro = matcher.group("micro");
 		String qualifier = matcher.group("qualifier");
 
-		sb.append(_toVersion(major, minor, micro, qualifier));
+		sb.append(toVersion(major, minor, micro, qualifier));
 
 		matcher = VERSION_NAMED_PATTERN.matcher(group2);
 
@@ -321,13 +321,13 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 		else {
 			sb.append(")(version<=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 		}
 
 		sb.append("))");
 	}
 
-	private void _doPrefixRange(
+	protected void doPrefixRange(
 		StringBuilder sb, String prefix, String version) {
 
 		Matcher matcher = VERSION_NAMED_PATTERN.matcher(version);
@@ -341,34 +341,34 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		if (prefix.equals("v") || prefix.equals("=")) {
 			sb.append("(version=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 		else if (prefix.equals("<")) {
 			sb.append("(!(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append("))");
 		}
 		else if (prefix.equals("<=")) {
 			sb.append("(version<=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 		else if (prefix.equals(">")) {
 			sb.append("(&(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")))");
 		}
 		else if (prefix.equals(">=")) {
 			sb.append("(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 		else if (prefix.equals("~")) {
 			sb.append("(&(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 
 			if (minor != null) {
@@ -386,7 +386,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 		else if (prefix.equals("^")) {
 			sb.append("(&(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 
 			if (!major.equals("0") || minor.equalsIgnoreCase("x") ||
@@ -411,25 +411,25 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 	}
 
-	private void _doRange(StringBuilder sb, String group1, String group2) {
+	protected void doRange(StringBuilder sb, String group1, String group2) {
 		sb.append("(&");
 
 		Matcher prefixRange = VERSION_PREFIX_RANGE_PATTERN.matcher(group1);
 
 		prefixRange.matches();
 
-		_doPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
+		doPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
 
 		prefixRange = VERSION_PREFIX_RANGE_PATTERN.matcher(group2);
 
 		prefixRange.matches();
 
-		_doPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
+		doPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
 
 		sb.append(")");
 	}
 
-	private void _doVersion(StringBuilder sb, Matcher matcher) {
+	protected void doVersion(StringBuilder sb, Matcher matcher) {
 		String major = matcher.group("major");
 		String minor = matcher.group("minor");
 		String micro = matcher.group("micro");
@@ -439,7 +439,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			minor.equals("*")) {
 
 			sb.append("(&(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 			sb.append(Integer.parseInt(major) + 1);
 			sb.append(".0.0)))");
@@ -448,7 +448,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				 micro.equals("*")) {
 
 			sb.append("(&(version>=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 			sb.append(major);
 			sb.append(".");
@@ -457,12 +457,12 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 		else {
 			sb.append("(version=");
-			sb.append(_toVersion(major, minor, micro, qualifier));
+			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 	}
 
-	private String _toVersion(
+	protected String toVersion(
 		String major, String minor, String micro, String qualifier) {
 
 		StringBuilder sb = new StringBuilder();
