@@ -89,17 +89,16 @@ public class SearchResultUtilMBMessageTest
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_PK,
 			searchResult.getClassPK());
 
-		List<RelatedSearchResult<Comment>> commentRelatedSearchResults =
+		List<RelatedSearchResult<Comment>> relatedSearchResults =
 			searchResult.getCommentRelatedSearchResults();
 
 		RelatedSearchResult<Comment> relatedSearchResult =
-			commentRelatedSearchResults.get(0);
+			relatedSearchResults.get(0);
 
 		Comment comment = relatedSearchResult.getModel();
 
 		Assert.assertSame(_mbMessage.getMessageId(), comment.getCommentId());
-		Assert.assertEquals(1, commentRelatedSearchResults.size());
-
+		Assert.assertEquals(1, relatedSearchResults.size());
 		Assert.assertNull(searchResult.getSummary());
 
 		assertEmptyFileEntryRelatedSearchResults(searchResult);
