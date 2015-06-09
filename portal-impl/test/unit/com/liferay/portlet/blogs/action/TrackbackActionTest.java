@@ -71,7 +71,10 @@ public class TrackbackActionTest extends PowerMockito {
 		setUpActionRequest();
 		setUpActionUtil();
 		setUpBlogsEntry();
-		setUpPortal();
+		setUpHttpUtil();
+		setUpPortalUtil();
+		setUpPortletPreferencesFactoryUtil();
+		setUpPropsUtil();
 	}
 
 	@Test
@@ -232,7 +235,15 @@ public class TrackbackActionTest extends PowerMockito {
 		);
 	}
 
-	protected void setUpPortal() throws Exception {
+	protected void setUpHttpUtil() throws Exception {
+		HttpUtil httpUtil = new HttpUtil();
+
+		httpUtil.setHttp(_http);
+	}
+
+	protected void setUpPortalUtil() throws Exception {
+		PortalUtil portalUtil = new PortalUtil();
+
 		Portal portal = mock(Portal.class);
 
 		when(
@@ -253,11 +264,12 @@ public class TrackbackActionTest extends PowerMockito {
 			_mockHttpServletResponse
 		);
 
-		PortalUtil portalUtil = new PortalUtil();
-
 		portalUtil.setPortal(portal);
+	}
 
-		PropsUtil.setProps(mock(Props.class));
+	protected void setUpPortletPreferencesFactoryUtil() throws Exception {
+		PortletPreferencesFactoryUtil portletPreferencesFactoryUtil =
+			new PortletPreferencesFactoryUtil();
 
 		PortletPreferencesFactory portletPreferencesFactory = mock(
 			PortletPreferencesFactory.class);
@@ -269,15 +281,12 @@ public class TrackbackActionTest extends PowerMockito {
 			_portletPreferences
 		);
 
-		PortletPreferencesFactoryUtil portletPreferencesFactoryUtil =
-			new PortletPreferencesFactoryUtil();
-
 		portletPreferencesFactoryUtil.setPortletPreferencesFactory(
 			portletPreferencesFactory);
+	}
 
-		HttpUtil httpUtil = new HttpUtil();
-
-		httpUtil.setHttp(_http);
+	protected void setUpPropsUtil() throws Exception {
+		PropsUtil.setProps(mock(Props.class));
 	}
 
 	protected void whenGetEntryThenThrow(Throwable toBeThrown)
