@@ -82,14 +82,14 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
 		Jar jar = analyzer.getJar();
 
-		Resource bowerJsonResource = jar.getResource(BOWER_JSON);
+		Resource bowerJSONResource = jar.getResource(BOWER_JSON);
 
-		if (bowerJsonResource == null) {
+		if (bowerJSONResource == null) {
 			return false;
 		}
 
 		BowerModule bowerModule = processBowerJsonResource(
-			analyzer, bowerJsonResource);
+			analyzer, bowerJSONResource);
 
 		processDepedencies(analyzer, bowerModule);
 
@@ -122,7 +122,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		String[] comparatorSets = version.split("\\|\\|");
 
-		// comparator sets are OR'd together
+		// Comparator sets are OR'd together
 
 		if (comparatorSets.length > 1) {
 			sb.append("(|");
@@ -135,25 +135,28 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				comparatorSet = ">=0";
 			}
 
-			Matcher inclusive = VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
+			Matcher inclusiveMatcher = VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
 				comparatorSet);
-			Matcher range = VERSION_RANGE_PATTERN.matcher(comparatorSet);
-			Matcher prefixRange = VERSION_PREFIX_RANGE_PATTERN.matcher(
+			Matcher rangeMatcher = VERSION_RANGE_PATTERN.matcher(comparatorSet);
+			Matcher prefixRangeMatcher = VERSION_PREFIX_RANGE_PATTERN.matcher(
 				comparatorSet);
-			Matcher versionMatcher = VERSION_NAMED_PATTERN.matcher(
+			Matcher versionMatcherMatcher = VERSION_NAMED_PATTERN.matcher(
 				comparatorSet);
 
-			if (inclusive.matches()) {
-				_doInclusive(sb, inclusive.group(1), inclusive.group(9));
+			if (inclusiveMatcher.matches()) {
+				_doInclusive(
+					sb, inclusiveMatcher.group(1), inclusiveMatcher.group(9));
 			}
-			else if (range.matches()) {
-				_doRange(sb, range.group(1), range.group(11));
+			else if (rangeMatcher.matches()) {
+				_doRange(sb, rangeMatcher.group(1), rangeMatcher.group(11));
 			}
-			else if (prefixRange.matches()) {
-				_doPrefixRange(sb, prefixRange.group(1), prefixRange.group(2));
+			else if (prefixRangeMatcher.matches()) {
+				_doPrefixRange(
+					sb, prefixRangeMatcher.group(1),
+					prefixRangeMatcher.group(2));
 			}
-			else if (versionMatcher.matches()) {
-				_doVersion(sb, versionMatcher);
+			else if (versionMatcherMatcher.matches()) {
+				_doVersion(sb, versionMatcherMatcher);
 			}
 		}
 
@@ -165,11 +168,11 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	}
 
 	protected BowerModule processBowerJsonResource(
-			Analyzer analyzer, Resource bowerJsonResource)
+			Analyzer analyzer, Resource bowerJSONResource)
 		throws Exception {
 
 		BowerModule bowerModule = getBowerModule(
-			bowerJsonResource.openInputStream());
+			bowerJSONResource.openInputStream());
 
 		String bundleVersion = analyzer.getBundleVersion();
 
@@ -202,14 +205,14 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				'/' + bowerName + "-" + analyzer.getBundleVersion());
 		}
 
+		Parameters parameters = new Parameters();
+
 		Attrs attrs = new Attrs();
 
 		attrs.put(OSGI_WEBRESOURCE, bowerName);
 		attrs.put(
 			Constants.VERSION_ATTRIBUTE + ":Version",
 			analyzer.getBundleVersion());
-
-		Parameters parameters = new Parameters();
 
 		parameters.add(OSGI_WEBRESOURCE, attrs);
 
@@ -280,6 +283,8 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	}
 
 	private void _doInclusive(StringBuilder sb, String group1, String group2) {
+		sb.append("(&(version>=");
+
 		Matcher matcher = VERSION_NAMED_PATTERN.matcher(group1);
 
 		matcher.matches();
@@ -289,7 +294,6 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		String micro = matcher.group("micro");
 		String qualifier = matcher.group("qualifier");
 
-		sb.append("(&(version>=");
 		sb.append(_versionString(major, minor, micro, qualifier));
 
 		matcher = VERSION_NAMED_PATTERN.matcher(group2);
@@ -302,20 +306,17 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		qualifier = matcher.group("qualifier");
 
 		if (minor == null) {
-			int value = Integer.parseInt(major);
-			major = value + 1 + "";
+			major = Integer.parseInt(major) + 1 + "";
 
 			sb.append(")(!(version>=");
 			sb.append(major);
 			sb.append(".0.0)");
 		}
 		else if (micro == null) {
-			int value = Integer.parseInt(minor);
-
 			sb.append(")(version<=");
 			sb.append(major);
 			sb.append(".");
-			sb.append(value + 1);
+			sb.append(Integer.parseInt(minor) + 1);
 			sb.append(".0");
 		}
 		else {
@@ -371,17 +372,13 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(")(!(version>=");
 
 			if (minor != null) {
-				int value = Integer.parseInt(minor);
-
 				sb.append(major);
 				sb.append(".");
-				sb.append(value + 1);
+				sb.append(Integer.parseInt(minor) + 1);
 				sb.append(".0");
 			}
 			else {
-				int value = Integer.parseInt(major);
-
-				sb.append(value + 1);
+				sb.append(Integer.parseInt(major) + 1);
 				sb.append(".0.0");
 			}
 
@@ -395,25 +392,19 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			if (!"0".equals(major) || "x".equalsIgnoreCase(minor) ||
 				"*".equals(minor)) {
 
-				int value = Integer.parseInt(major);
-
-				sb.append(value + 1);
+				sb.append(Integer.parseInt(major) + 1);
 				sb.append(".0.0");
 			}
 			else if (!"0".equals(minor) || "x".equalsIgnoreCase(micro) ||
 					 "*".equals(micro) || (micro == null)) {
 
-				int value = Integer.parseInt(_deSugar(minor));
-
 				sb.append("0.");
-				sb.append(value + 1);
+				sb.append(Integer.parseInt(_deSugar(minor)) + 1);
 				sb.append(".0");
 			}
 			else {
-				int value = Integer.parseInt(_deSugar(micro));
-
 				sb.append("0.0.");
-				sb.append(value + 1);
+				sb.append(Integer.parseInt(_deSugar(micro)) + 1);
 			}
 
 			sb.append(")))");
@@ -450,10 +441,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append("(&(version>=");
 			sb.append(_versionString(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
-
-			int value = Integer.parseInt(major);
-
-			sb.append(value + 1);
+			sb.append(Integer.parseInt(major) + 1);
 			sb.append(".0.0)))");
 		}
 		else if ((micro == null) || "x".equalsIgnoreCase(micro) ||
@@ -464,10 +452,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(")(!(version>=");
 			sb.append(major);
 			sb.append(".");
-
-			int value = Integer.parseInt(minor);
-
-			sb.append(value + 1);
+			sb.append(Integer.parseInt(minor) + 1);
 			sb.append(".0)))");
 		}
 		else {
