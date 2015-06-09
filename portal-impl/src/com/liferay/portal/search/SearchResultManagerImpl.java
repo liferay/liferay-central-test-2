@@ -224,11 +224,11 @@ public class SearchResultManagerImpl implements SearchResultManager {
 			MBMessage mbMessage = mbMessageLocalService.getMessage(
 				entryClassPK);
 
+			Comment comment = new MBCommentImpl(mbMessage);
+
 			Summary summary = new Summary(null, mbMessage.getBody());
 
 			summary.setEscape(false);
-
-			Comment comment = new MBCommentImpl(mbMessage);
 
 			searchResult.addComment(comment, summary);
 		}
