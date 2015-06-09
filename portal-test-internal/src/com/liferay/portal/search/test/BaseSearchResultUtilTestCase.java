@@ -62,13 +62,13 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 
+		setUpClassNameLocalService();
 		setUpFastDateFormatFactoryUtil();
 		setUpPortalUtil();
 		setUpPropsUtil();
 		setUpRegistryUtil();
 		setUpServiceTrackerMap();
 		setUpSearchResultManagerUtil();
-		setUpClassNameLocalService();
 		setUpSearchResultManagerUtil();
 	}
 
