@@ -158,7 +158,7 @@ public class SearchResultUtilTest extends BaseSearchResultUtilTestCase {
 		Assert.assertEquals(0L, searchResult.getClassPK());
 
 		assertEmptyFileEntryRelatedSearchResults(searchResult);
-		assertEmptyCommentRelatedResults(searchResult);
+		assertEmptyCommentRelatedSearchResults(searchResult);
 		assertEmptyVersions(searchResult);
 	}
 

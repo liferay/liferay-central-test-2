@@ -71,7 +71,9 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 		setUpSearchResultManagerUtil();
 	}
 
-	protected void assertEmptyCommentRelatedResults(SearchResult searchResult) {
+	protected void assertEmptyCommentRelatedSearchResults(
+		SearchResult searchResult) {
+
 		List<RelatedSearchResult<Comment>> commentRelatedSearchResults =
 			searchResult.getCommentRelatedSearchResults();
 

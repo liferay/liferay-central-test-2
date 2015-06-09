@@ -70,7 +70,7 @@ public class SearchResultUtilDLFileEntryTest
 
 		verifyZeroInteractions(dlAppLocalService);
 
-		assertEmptyCommentRelatedResults(searchResult);
+		assertEmptyCommentRelatedSearchResults(searchResult);
 		assertEmptyVersions(searchResult);
 	}
 
@@ -211,7 +211,7 @@ public class SearchResultUtilDLFileEntryTest
 		Assert.assertEquals(content, relatedSearchResultSummary.getContent());
 		Assert.assertEquals(title, relatedSearchResultSummary.getTitle());
 
-		assertEmptyCommentRelatedResults(searchResult);
+		assertEmptyCommentRelatedSearchResults(searchResult);
 		assertEmptyVersions(searchResult);
 	}
 
@@ -253,7 +253,7 @@ public class SearchResultUtilDLFileEntryTest
 		IndexerRegistryUtil.getIndexer(
 			SearchTestUtil.ATTACHMENT_OWNER_CLASS_NAME);
 
-		assertEmptyCommentRelatedResults(searchResult);
+		assertEmptyCommentRelatedSearchResults(searchResult);
 		assertEmptyVersions(searchResult);
 	}
 
@@ -316,7 +316,7 @@ public class SearchResultUtilDLFileEntryTest
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
 
-		assertEmptyCommentRelatedResults(searchResult);
+		assertEmptyCommentRelatedSearchResults(searchResult);
 		assertEmptyVersions(searchResult);
 	}
 
