@@ -105,16 +105,6 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 	}
 
-	protected String desugar(String minor) {
-		if ((minor == null) || minor.equalsIgnoreCase("x") ||
-			minor.equals("*")) {
-
-			return "0";
-		}
-
-		return minor;
-	}
-
 	protected void appendPrefixRange(
 		StringBuilder sb, String prefix, String version) {
 
@@ -248,6 +238,16 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
+	}
+
+	protected String desugar(String minor) {
+		if ((minor == null) || minor.equalsIgnoreCase("x") ||
+			minor.equals("*")) {
+
+			return "0";
+		}
+
+		return minor;
 	}
 
 	protected void doInclusive(StringBuilder sb, String group1, String group2) {
