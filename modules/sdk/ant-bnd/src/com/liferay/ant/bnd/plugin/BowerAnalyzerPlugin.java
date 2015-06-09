@@ -38,40 +38,6 @@ import java.util.regex.Pattern;
  */
 public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
-	private static final String _BOWER_JSON = "bower.json";
-
-	private static final String _OSGI_WEBRESOURCE = "osgi.webresource";
-
-	private static final String _VERSION =
-		"((\\d{1,9})(\\.([\\dx\\*]{1,9})(\\.([\\dx\\*]{1,9})" +
-			"([\\.-]([-_\\da-zA-Z]+))?)?)?)";
-
-	private static final String _VERSION_INCLUSIVE_RANGE =
-		_VERSION + "\\s*-\\s*" + _VERSION;
-
-	private static final Pattern _VERSION_INCLUSIVE_RANGE_PATTERN =
-		Pattern.compile(_VERSION_INCLUSIVE_RANGE);
-
-	private static final String _VERSION_NAMED =
-		"(?<major>\\d{1,9})(\\.(?<minor>[\\dx\\*]{1,9})" +
-			"(\\.(?<micro>[\\dx\\*]{1,9})" +
-				"([\\.-](?<qualifier>[-_\\da-zA-Z]+))?)?)?";
-
-	private static final Pattern _VERSION_NAMED_PATTERN = Pattern.compile(
-		_VERSION_NAMED);
-
-	private static final String _VERSION_PREFIX_RANGE = "(<|<=|>|>=|=|~|\\^|v)";
-
-	private static final Pattern _VERSION_PREFIX_RANGE_PATTERN = Pattern.compile(
-		_VERSION_PREFIX_RANGE + _VERSION);
-
-	private static final String VERSION_RANGE =
-		"(" + _VERSION_PREFIX_RANGE + _VERSION + ")\\s+(" + _VERSION_PREFIX_RANGE +
-			_VERSION + ")";
-
-	private static final Pattern _VERSION_RANGE_PATTERN = Pattern.compile(
-		VERSION_RANGE);
-
 	public static final String WEB_CONTEXT_PATH = "Web-ContextPath";
 
 	@Override
@@ -325,7 +291,8 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 			Matcher inclusiveMatcher = _VERSION_INCLUSIVE_RANGE_PATTERN.matcher(
 				comparatorSet);
-			Matcher rangeMatcher = _VERSION_RANGE_PATTERN.matcher(comparatorSet);
+			Matcher rangeMatcher = _VERSION_RANGE_PATTERN.matcher(
+				comparatorSet);
 			Matcher prefixRangeMatcher = _VERSION_PREFIX_RANGE_PATTERN.matcher(
 				comparatorSet);
 			Matcher versionMatcher = _VERSION_NAMED_PATTERN.matcher(
@@ -504,5 +471,39 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		return sb.toString();
 	}
+
+	private static final String _BOWER_JSON = "bower.json";
+
+	private static final String _OSGI_WEBRESOURCE = "osgi.webresource";
+
+	private static final String _VERSION =
+		"((\\d{1,9})(\\.([\\dx\\*]{1,9})(\\.([\\dx\\*]{1,9})" +
+			"([\\.-]([-_\\da-zA-Z]+))?)?)?)";
+
+	private static final String _VERSION_INCLUSIVE_RANGE =
+		_VERSION + "\\s*-\\s*" + _VERSION;
+
+	private static final Pattern _VERSION_INCLUSIVE_RANGE_PATTERN =
+		Pattern.compile(_VERSION_INCLUSIVE_RANGE);
+
+	private static final String _VERSION_NAMED =
+		"(?<major>\\d{1,9})(\\.(?<minor>[\\dx\\*]{1,9})" +
+			"(\\.(?<micro>[\\dx\\*]{1,9})" +
+				"([\\.-](?<qualifier>[-_\\da-zA-Z]+))?)?)?";
+
+	private static final Pattern _VERSION_NAMED_PATTERN = Pattern.compile(
+		_VERSION_NAMED);
+
+	private static final String _VERSION_PREFIX_RANGE = "(<|<=|>|>=|=|~|\\^|v)";
+
+	private static final Pattern _VERSION_PREFIX_RANGE_PATTERN =
+		Pattern.compile(_VERSION_PREFIX_RANGE + _VERSION);
+
+	private static final String _VERSION_RANGE =
+		"(" + _VERSION_PREFIX_RANGE + _VERSION + ")\\s+(" +
+			_VERSION_PREFIX_RANGE + _VERSION + ")";
+
+	private static final Pattern _VERSION_RANGE_PATTERN = Pattern.compile(
+		_VERSION_RANGE);
 
 }
