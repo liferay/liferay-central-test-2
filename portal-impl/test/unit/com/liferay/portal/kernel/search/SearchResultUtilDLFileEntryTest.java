@@ -193,13 +193,13 @@ public class SearchResultUtilDLFileEntryTest
 		Assert.assertEquals(
 			SearchTestUtil.SUMMARY_TITLE, searchResultSummary.getTitle());
 
-		List<RelatedSearchResult<FileEntry>> fileEntryRelatedSearchResults =
+		List<RelatedSearchResult<FileEntry>> relatedSearchResults =
 			searchResult.getFileEntryRelatedSearchResults();
 
-		Assert.assertEquals(1, fileEntryRelatedSearchResults.size());
+		Assert.assertEquals(1, relatedSearchResults.size());
 
 		RelatedSearchResult<FileEntry> relatedSearchResult =
-			fileEntryRelatedSearchResults.get(0);
+			relatedSearchResults.get(0);
 
 		FileEntry relatedSearchResultFileEntry = relatedSearchResult.getModel();
 
