@@ -74,7 +74,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	public static final Pattern VERSION_RANGE_PATTERN = Pattern.compile(
 		VERSION_RANGE);
 
-	public static final String WEB_CONTEXTPATH = "Web-ContextPath";
+	public static final String WEB_CONTEXT_PATH = "Web-ContextPath";
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
@@ -388,7 +388,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		String bowerName = bowerModule.name;
 
-		String webContextPath = analyzer.getProperty(WEB_CONTEXTPATH);
+		String webContextPath = analyzer.getProperty(WEB_CONTEXT_PATH);
 
 		if ((webContextPath == null) && (bowerName != null)) {
 			if (bowerName.indexOf('/') == 0) {
@@ -396,7 +396,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			}
 
 			analyzer.setProperty(
-				WEB_CONTEXTPATH,
+				WEB_CONTEXT_PATH,
 				'/' + bowerName + "-" + analyzer.getBundleVersion());
 		}
 

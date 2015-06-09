@@ -306,7 +306,7 @@ public class BowerAnalyzerPluginTest {
 		Assert.assertEquals("1.2.4", analyzer.getBundleVersion());
 		Assert.assertEquals(
 			"/liferay-1.2.4",
-			analyzer.getProperty(BowerAnalyzerPlugin.WEB_CONTEXTPATH));
+			analyzer.getProperty(BowerAnalyzerPlugin.WEB_CONTEXT_PATH));
 
 		String property = analyzer.getProperty(Constants.PROVIDE_CAPABILITY);
 
@@ -343,7 +343,7 @@ public class BowerAnalyzerPluginTest {
 		Assert.assertEquals("0.0.0.1word-cha_rs", analyzer.getBundleVersion());
 		Assert.assertEquals(
 			"/liferay-0.0.0.1word-cha_rs",
-			analyzer.getProperty(BowerAnalyzerPlugin.WEB_CONTEXTPATH));
+			analyzer.getProperty(BowerAnalyzerPlugin.WEB_CONTEXT_PATH));
 
 		String property = analyzer.getProperty(Constants.PROVIDE_CAPABILITY);
 
