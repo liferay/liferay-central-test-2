@@ -17,7 +17,7 @@ package com.liferay.portal.struts;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletJSONResponseUtil;
+import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -461,7 +461,7 @@ public class PortletAction extends Action {
 			Object json)
 		throws IOException {
 
-		PortletJSONResponseUtil.writeJSON(portletRequest, actionResponse, json);
+		JSONPortletResponseUtil.writeJSON(portletRequest, actionResponse, json);
 
 		setForward(portletRequest, ActionConstants.COMMON_NULL);
 	}
@@ -471,7 +471,7 @@ public class PortletAction extends Action {
 			Object json)
 		throws IOException {
 
-		PortletJSONResponseUtil.writeJSON(portletRequest, mimeResponse, json);
+		JSONPortletResponseUtil.writeJSON(portletRequest, mimeResponse, json);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = true;
