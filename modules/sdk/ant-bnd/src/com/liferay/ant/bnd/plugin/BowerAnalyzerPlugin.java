@@ -294,7 +294,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		String micro = matcher.group("micro");
 		String qualifier = matcher.group("qualifier");
 
-		sb.append(_versionString(major, minor, micro, qualifier));
+		sb.append(_toVersion(major, minor, micro, qualifier));
 
 		matcher = VERSION_NAMED_PATTERN.matcher(group2);
 
@@ -321,7 +321,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 		else {
 			sb.append(")(version<=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 		}
 
 		sb.append("))");
@@ -341,34 +341,34 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		if (prefix.equals("v") || prefix.equals("=")) {
 			sb.append("(version=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 		else if (prefix.equals("<")) {
 			sb.append("(!(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append("))");
 		}
 		else if (prefix.equals("<=")) {
 			sb.append("(version<=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 		else if (prefix.equals(">")) {
 			sb.append("(&(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")))");
 		}
 		else if (prefix.equals(">=")) {
 			sb.append("(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 		else if (prefix.equals("~")) {
 			sb.append("(&(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 
 			if (minor != null) {
@@ -386,7 +386,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 		else if (prefix.equals("^")) {
 			sb.append("(&(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 
 			if (!"0".equals(major) || "x".equalsIgnoreCase(minor) ||
@@ -439,7 +439,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			"*".equals(minor)) {
 
 			sb.append("(&(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 			sb.append(Integer.parseInt(major) + 1);
 			sb.append(".0.0)))");
@@ -448,7 +448,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				 "*".equals(micro)) {
 
 			sb.append("(&(version>=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 			sb.append(major);
 			sb.append(".");
@@ -457,12 +457,12 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		}
 		else {
 			sb.append("(version=");
-			sb.append(_versionString(major, minor, micro, qualifier));
+			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")");
 		}
 	}
 
-	private Object _versionString(
+	private String _toVersion(
 		String major, String minor, String micro, String qualifier) {
 
 		StringBuilder sb = new StringBuilder();
