@@ -38,16 +38,7 @@ public class PortletJSONResponseUtil {
 			Object json)
 		throws IOException {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		String contentType = ContentTypes.APPLICATION_JSON;
-
-		if (BrowserSnifferUtil.isIe(request)) {
-			contentType = ContentTypes.TEXT_HTML;
-		}
-
-		mimeResponse.setContentType(contentType);
+		mimeResponse.setContentType(_getContentType(portletRequest));
 
 		PortletResponseUtil.write(mimeResponse, json.toString());
 
@@ -59,23 +50,27 @@ public class PortletJSONResponseUtil {
 			Object json)
 		throws IOException {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		String contentType = ContentTypes.APPLICATION_JSON;
-
-		if (BrowserSnifferUtil.isIe(request)) {
-			contentType = ContentTypes.TEXT_HTML;
-		}
-
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
 
-		response.setContentType(contentType);
+		response.setContentType(_getContentType(portletRequest));
 
 		ServletResponseUtil.write(response, json.toString());
 
 		response.flushBuffer();
 	}
+	
+	private static String _getContentType(PortletRequest portletRequest) {
+		String contentType = ContentTypes.APPLICATION_JSON;
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		if (BrowserSnifferUtil.isIe(request)) {
+			contentType = ContentTypes.TEXT_HTML;
+		}
+
+		return contentType;
+	} 
 
 }
