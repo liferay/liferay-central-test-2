@@ -60,7 +60,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	public static final Pattern VERSION_NAMED_PATTERN = Pattern.compile(
 		VERSION_NAMED);
 
-	public static final Pattern VERSION_PATTERN = Pattern.compile(VERSION);
+	//public static final Pattern VERSION_PATTERN = Pattern.compile(VERSION);
 
 	public static final String VERSION_PREFIX_RANGE = "(<|<=|>|>=|=|~|\\^|v)";
 
