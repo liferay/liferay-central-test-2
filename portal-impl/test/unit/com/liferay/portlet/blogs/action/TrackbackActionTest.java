@@ -259,8 +259,8 @@ public class TrackbackActionTest extends PowerMockito {
 
 		PropsUtil.setProps(mock(Props.class));
 
-		PortletPreferencesFactory portletPreferencesFactory =
-			mock(PortletPreferencesFactory.class);
+		PortletPreferencesFactory portletPreferencesFactory = mock(
+			PortletPreferencesFactory.class);
 
 		when(
 			portletPreferencesFactory.getExistingPortletSetup(
