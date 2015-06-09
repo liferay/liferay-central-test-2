@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.blogs.action;
+package com.liferay.portlet.blogs.image.selector;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -23,7 +23,7 @@ import com.liferay.portlet.blogs.CoverImageSizeException;
  * @author Sergio González
  * @author Adolfo Pérez
  */
-public class CoverImageSelectorUploadHandler
+public class SmallImageSelectorUploadHandler
 	extends BaseBlogsImageSelectorUploadHandler {
 
 	@Override
