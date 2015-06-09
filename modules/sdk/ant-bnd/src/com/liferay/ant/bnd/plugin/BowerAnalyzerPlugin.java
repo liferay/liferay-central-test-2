@@ -389,14 +389,14 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(_toVersion(major, minor, micro, qualifier));
 			sb.append(")(!(version>=");
 
-			if (!"0".equals(major) || "x".equalsIgnoreCase(minor) ||
-				"*".equals(minor)) {
+			if (!major.equals("0") || minor.equalsIgnoreCase("x") ||
+				minor.equals("*")) {
 
 				sb.append(Integer.parseInt(major) + 1);
 				sb.append(".0.0");
 			}
-			else if (!"0".equals(minor) || "x".equalsIgnoreCase(micro) ||
-					 "*".equals(micro) || (micro == null)) {
+			else if (!minor.equals("0") || (micro == null) ||
+					 micro.equalsIgnoreCase("x") || micro.equals("*")) {
 
 				sb.append("0.");
 				sb.append(Integer.parseInt(_deSugar(minor)) + 1);
@@ -435,8 +435,8 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		String micro = matcher.group("micro");
 		String qualifier = matcher.group("qualifier");
 
-		if ((minor == null) || "x".equalsIgnoreCase(minor) ||
-			"*".equals(minor)) {
+		if ((minor == null) || minor.equalsIgnoreCase("x") ||
+			minor.equals("*")) {
 
 			sb.append("(&(version>=");
 			sb.append(_toVersion(major, minor, micro, qualifier));
@@ -444,8 +444,8 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			sb.append(Integer.parseInt(major) + 1);
 			sb.append(".0.0)))");
 		}
-		else if ((micro == null) || "x".equalsIgnoreCase(micro) ||
-				 "*".equals(micro)) {
+		else if ((micro == null) || micro.equalsIgnoreCase("x") ||
+				 micro.equals("*")) {
 
 			sb.append("(&(version>=");
 			sb.append(_toVersion(major, minor, micro, qualifier));
