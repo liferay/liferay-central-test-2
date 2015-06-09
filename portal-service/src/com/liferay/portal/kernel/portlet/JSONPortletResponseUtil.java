@@ -59,7 +59,7 @@ public class JSONPortletResponseUtil {
 
 		response.flushBuffer();
 	}
-	
+
 	private static String _getContentType(PortletRequest portletRequest) {
 		String contentType = ContentTypes.APPLICATION_JSON;
 
@@ -71,6 +71,6 @@ public class JSONPortletResponseUtil {
 		}
 
 		return contentType;
-	} 
+	}
 
 }
