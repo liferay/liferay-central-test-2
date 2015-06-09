@@ -556,7 +556,7 @@ public class SearchEngineUtil {
 		return _indexReadOnly;
 	}
 
-	public static void partialUpdateDocument(
+	public static void partiallyUpdateDocument(
 			String searchEngineId, long companyId, Document document,
 			boolean commitImmediately)
 		throws SearchException {
@@ -581,10 +581,10 @@ public class SearchEngineUtil {
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
-		indexWriter.partialUpdateDocument(searchContext, document);
+		indexWriter.partiallyUpdateDocument(searchContext, document);
 	}
 
-	public static void partialUpdateDocuments(
+	public static void partiallyUpdateDocuments(
 			String searchEngineId, long companyId,
 			Collection<Document> documents, boolean commitImmediately)
 		throws SearchException {
@@ -611,7 +611,7 @@ public class SearchEngineUtil {
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
-		indexWriter.partialUpdateDocuments(searchContext, documents);
+		indexWriter.partiallyUpdateDocuments(searchContext, documents);
 	}
 
 	public synchronized static void removeBackup(

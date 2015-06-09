@@ -81,12 +81,12 @@ public class DummyIndexWriter implements IndexWriter {
 	}
 
 	@Override
-	public void partialUpdateDocument(
+	public void partiallyUpdateDocument(
 		SearchContext searchContext, Document document) {
 	}
 
 	@Override
-	public void partialUpdateDocuments(
+	public void partiallyUpdateDocuments(
 		SearchContext searchContext, Collection<Document> documents) {
 	}
 
