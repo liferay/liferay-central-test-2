@@ -370,16 +370,19 @@ public class BowerAnalyzerPluginTest {
 		bowerAnalyzerPlugin.analyzeJar(analyzer);
 	}
 
-	protected void assertVersionFilter(String version, String expected) {
+	protected void assertVersionFilter(
+		String version, String expectedFilterString) {
+
 		BowerAnalyzerPlugin bowerAnalyzerPlugin = new BowerAnalyzerPlugin();
 
-		String filter = bowerAnalyzerPlugin.getBowerVersionFilter(version);
+		String filterString = bowerAnalyzerPlugin.getBowerVersionFilter(
+			version);
 
-		Assert.assertEquals(expected, filter);
+		Assert.assertEquals(expectedFilterString, filterString);
 
-		Filter f = new Filter(filter);
+		Filter filter = new Filter(filterString);
 
-		Assert.assertNull(f.verify());
+		Assert.assertNull(filter.verify());
 	}
 
 	protected URL getResource(String path) {
