@@ -118,8 +118,7 @@ public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 
 	@Override
 	public void partialUpdateDocuments(
-			SearchContext searchContext, Collection<Document> documents)
-		throws SearchException {
+		SearchContext searchContext, Collection<Document> documents) {
 	}
 
 	@Override

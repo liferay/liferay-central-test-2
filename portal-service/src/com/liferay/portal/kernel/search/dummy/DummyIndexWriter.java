@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.search.dummy;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
 
 import java.util.Collection;
 
@@ -83,14 +82,12 @@ public class DummyIndexWriter implements IndexWriter {
 
 	@Override
 	public void partialUpdateDocument(
-			SearchContext searchContext, Document document)
-		throws SearchException {
+		SearchContext searchContext, Document document) {
 	}
 
 	@Override
 	public void partialUpdateDocuments(
-			SearchContext searchContext, Collection<Document> documents)
-		throws SearchException {
+		SearchContext searchContext, Collection<Document> documents) {
 	}
 
 	@Override
