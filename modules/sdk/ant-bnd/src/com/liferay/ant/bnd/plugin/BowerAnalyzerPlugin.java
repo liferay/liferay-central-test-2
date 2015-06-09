@@ -40,8 +40,6 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 	public static final String BOWER_JSON = "bower.json";
 
-	public static final String DEPENDENCIES = "dependencies";
-
 	public static final String OSGI_WEBRESOURCE = "osgi.webresource";
 
 	public static final String VERSION =
@@ -384,7 +382,12 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 			analyzer.setBundleVersion(version.toString());
 		}
 
+		Parameters parameters = new Parameters();
+
+		Attrs attrs = new Attrs();
+
 		String bowerName = bowerModule.name;
+
 		String webContextPath = analyzer.getProperty(WEB_CONTEXTPATH);
 
 		if ((webContextPath == null) && (bowerName != null)) {
@@ -397,11 +400,8 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 				'/' + bowerName + "-" + analyzer.getBundleVersion());
 		}
 
-		Parameters parameters = new Parameters();
-
-		Attrs attrs = new Attrs();
-
 		attrs.put(OSGI_WEBRESOURCE, bowerName);
+
 		attrs.put(
 			Constants.VERSION_ATTRIBUTE + ":Version",
 			analyzer.getBundleVersion());
