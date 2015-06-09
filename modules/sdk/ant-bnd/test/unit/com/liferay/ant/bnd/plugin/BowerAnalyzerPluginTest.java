@@ -65,64 +65,64 @@ public class BowerAnalyzerPluginTest {
 	}
 
 	@Test
-	public void testParseVersions_carrot_1() throws Exception {
+	public void testParseVersionsCaret1() throws Exception {
 		assertVersionFilter("^1.2.3", "(&(version>=1.2.3)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_2() throws Exception {
+	public void testParseVersionsCaret2() throws Exception {
 		assertVersionFilter("^0.2.3", "(&(version>=0.2.3)(!(version>=0.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_3() throws Exception {
+	public void testParseVersionsCaret3() throws Exception {
 		assertVersionFilter("^0.0.3", "(&(version>=0.0.3)(!(version>=0.0.4)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_4() throws Exception {
+	public void testParseVersionsCaret4() throws Exception {
 		assertVersionFilter(
 			"^1.2.3-beta_2", "(&(version>=1.2.3.beta_2)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_5() throws Exception {
+	public void testParseVersionsCaret5() throws Exception {
 		assertVersionFilter(
 			"^0.0.3-beta", "(&(version>=0.0.3.beta)(!(version>=0.0.4)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_6() throws Exception {
+	public void testParseVersionsCaret6() throws Exception {
 		assertVersionFilter("^1.2.x", "(&(version>=1.2.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_7() throws Exception {
+	public void testParseVersionsCaret7() throws Exception {
 		assertVersionFilter("^0.0.x", "(&(version>=0.0.0)(!(version>=0.1.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_8() throws Exception {
+	public void testParseVersionsCaret8() throws Exception {
 		assertVersionFilter("^0.0", "(&(version>=0.0.0)(!(version>=0.1.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_9() throws Exception {
+	public void testParseVersionsCaret9() throws Exception {
 		assertVersionFilter("^1.x", "(&(version>=1.0.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_10() throws Exception {
+	public void testParseVersionsCaret10() throws Exception {
 		assertVersionFilter("^0.x", "(&(version>=0.0.0)(!(version>=1.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_11() throws Exception {
+	public void testParseVersionsCaret11() throws Exception {
 		assertVersionFilter("^0.*", "(&(version>=0.0.0)(!(version>=1.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_carrot_12() throws Exception {
+	public void testParseVersionsCaret12() throws Exception {
 		assertVersionFilter("^0.0.*", "(&(version>=0.0.0)(!(version>=0.1.0)))");
 	}
 
