@@ -127,162 +127,162 @@ public class BowerAnalyzerPluginTest {
 	}
 
 	@Test
-	public void testParseVersions_hyphenrange_1() throws Exception {
+	public void testParseVersionsHyphenRange1() throws Exception {
 		assertVersionFilter(
 			"1.2.3 - 2.3.4", "(&(version>=1.2.3)(version<=2.3.4))");
 	}
 
 	@Test
-	public void testParseVersions_hyphenrange_2() throws Exception {
+	public void testParseVersionsHyphenRange2() throws Exception {
 		assertVersionFilter(
 			"1.2 - 2.3.4", "(&(version>=1.2.0)(version<=2.3.4))");
 	}
 
 	@Test
-	public void testParseVersions_hyphenrange_3() throws Exception {
+	public void testParseVersionsHyphenRange3() throws Exception {
 		assertVersionFilter(
 			"1.2.3 - 2.3", "(&(version>=1.2.3)(version<=2.4.0))");
 	}
 
 	@Test
-	public void testParseVersions_hyphenrange_4() throws Exception {
+	public void testParseVersionsHyphenRange4() throws Exception {
 		assertVersionFilter(
 			"1.2.3 - 2", "(&(version>=1.2.3)(!(version>=3.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_prefix_1() throws Exception {
+	public void testParseVersionsPrefix1() throws Exception {
 		assertVersionFilter("<2.1.0", "(!(version>=2.1.0))");
 	}
 
 	@Test
-	public void testParseVersions_prefix_2() throws Exception {
+	public void testParseVersionsPrefix2() throws Exception {
 		assertVersionFilter("<=2.1.0", "(version<=2.1.0)");
 	}
 
 	@Test
-	public void testParseVersions_prefix_3() throws Exception {
+	public void testParseVersionsPrefix3() throws Exception {
 		assertVersionFilter(">2.1.0", "(&(version>=2.1.0)(!(version=2.1.0)))");
 	}
 
 	@Test
-	public void testParseVersions_prefix_4() throws Exception {
+	public void testParseVersionsPrefix4() throws Exception {
 		assertVersionFilter(">=2.1.0", "(version>=2.1.0)");
 	}
 
 	@Test
-	public void testParseVersions_range_1() throws Exception {
+	public void testParseVersionsRange1() throws Exception {
 		assertVersionFilter("1.x", "(&(version>=1.0.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_2() throws Exception {
+	public void testParseVersionsRange2() throws Exception {
 		assertVersionFilter("1.2.x", "(&(version>=1.2.0)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_3() throws Exception {
+	public void testParseVersionsRange3() throws Exception {
 		assertVersionFilter("1.*", "(&(version>=1.0.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_4() throws Exception {
+	public void testParseVersionsRange4() throws Exception {
 		assertVersionFilter("1.2.*", "(&(version>=1.2.0)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_5() throws Exception {
+	public void testParseVersionsRange5() throws Exception {
 		assertVersionFilter("1.x.x", "(&(version>=1.0.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_6() throws Exception {
+	public void testParseVersionsRange6() throws Exception {
 		assertVersionFilter("1", "(&(version>=1.0.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_7() throws Exception {
+	public void testParseVersionsRange7() throws Exception {
 		assertVersionFilter("1.2", "(&(version>=1.2.0)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_8() throws Exception {
+	public void testParseVersionsRange8() throws Exception {
 		assertVersionFilter(
 			">=1.2.7 <1.3.0", "(&(version>=1.2.7)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_range_9() throws Exception {
+	public void testParseVersionsRange9() throws Exception {
 		assertVersionFilter(
 			">=1.2.7 <1.3", "(&(version>=1.2.7)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_sets_1() throws Exception {
+	public void testParseVersionsSet1() throws Exception {
 		assertVersionFilter(
 			"v2.0.0 || v3.0.0", "(|(version=2.0.0)(version=3.0.0))");
 	}
 
 	@Test
-	public void testParseVersions_sets_2() throws Exception {
+	public void testParseVersionsSet2() throws Exception {
 		assertVersionFilter(
 			"v2.0.0 || v2.2.0 || v2.4.0",
 			"(|(version=2.0.0)(version=2.2.0)(version=2.4.0))");
 	}
 
 	@Test
-	public void testParseVersions_sets_3() throws Exception {
+	public void testParseVersionsSet3() throws Exception {
 		assertVersionFilter(
 			"v2.0.0 || 1.2",
 			"(|(version=2.0.0)(&(version>=1.2.0)(!(version>=1.3.0))))");
 	}
 
 	@Test
-	public void testParseVersions_sets_4() throws Exception {
+	public void testParseVersionsSet4() throws Exception {
 		assertVersionFilter(
 			"v2.0.0 || >2.1.0",
 			"(|(version=2.0.0)(&(version>=2.1.0)(!(version=2.1.0))))");
 	}
 
 	@Test
-	public void testParseVersions_sets_5() throws Exception {
+	public void testParseVersionsSet5() throws Exception {
 		assertVersionFilter(
 			"v2.0.0 || ^2.2.x",
 			"(|(version=2.0.0)(&(version>=2.2.0)(!(version>=3.0.0))))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_1() throws Exception {
+	public void testParseVersionsTilde1() throws Exception {
 		assertVersionFilter("~1.2.3", "(&(version>=1.2.3)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_2() throws Exception {
+	public void testParseVersionsTilde2() throws Exception {
 		assertVersionFilter("~1.2", "(&(version>=1.2.0)(!(version>=1.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_3() throws Exception {
+	public void testParseVersionsTilde3() throws Exception {
 		assertVersionFilter("~1", "(&(version>=1.0.0)(!(version>=2.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_4() throws Exception {
+	public void testParseVersionsTilde4() throws Exception {
 		assertVersionFilter("~0.2.3", "(&(version>=0.2.3)(!(version>=0.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_5() throws Exception {
+	public void testParseVersionsTilde5() throws Exception {
 		assertVersionFilter("~0.2", "(&(version>=0.2.0)(!(version>=0.3.0)))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_6() throws Exception {
+	public void testParseVersionsTilde6() throws Exception {
 		assertVersionFilter("~0", "(&(version>=0.0.0)(!(version>=1.0.0)))");
 	}
 
 	@Test
-	public void testParseVersions_tilde_7() throws Exception {
+	public void testParseVersionsTilde7() throws Exception {
 		assertVersionFilter(
 			"~1.2.3-beta_2", "(&(version>=1.2.3.beta_2)(!(version>=1.3.0)))");
 	}
