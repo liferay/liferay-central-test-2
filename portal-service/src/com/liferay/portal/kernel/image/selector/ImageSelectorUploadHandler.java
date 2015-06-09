@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.imageselector;
+package com.liferay.portal.kernel.image.selector;
 
 import com.liferay.portal.kernel.exception.PortalException;
 

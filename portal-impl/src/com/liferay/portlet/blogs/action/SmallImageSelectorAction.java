@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.blogs.action;
 
-import com.liferay.portal.kernel.imageselector.ImageSelectorUploadHandler;
+import com.liferay.portal.kernel.image.selector.ImageSelectorUploadHandler;
 import com.liferay.portal.struts.PortletAction;
 
 import javax.portlet.ActionRequest;
