@@ -69,7 +69,6 @@ public abstract class BaseSearchResultUtilTestCase extends PowerMockito {
 		setUpRegistryUtil();
 		setUpServiceTrackerMap();
 		setUpSearchResultManagerUtil();
-		setUpSearchResultManagerUtil();
 	}
 
 	protected void assertEmptyCommentRelatedResults(SearchResult searchResult) {
