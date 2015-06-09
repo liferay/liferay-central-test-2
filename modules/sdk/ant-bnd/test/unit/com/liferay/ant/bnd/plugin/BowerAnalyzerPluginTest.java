@@ -50,17 +50,17 @@ public class BowerAnalyzerPluginTest {
 	}
 
 	@Test
-	public void testParseVersions_basic_1() throws Exception {
+	public void testParseVersionsBasic1() throws Exception {
 		assertVersionFilter("", "(version>=0.0.0)");
 	}
 
 	@Test
-	public void testParseVersions_basic_2() throws Exception {
+	public void testParseVersionsBasic2() throws Exception {
 		assertVersionFilter("*", "(version>=0.0.0)");
 	}
 
 	@Test
-	public void testParseVersions_basic_3() throws Exception {
+	public void testParseVersionsBasic3() throws Exception {
 		assertVersionFilter("v2.0.0", "(version=2.0.0)");
 	}
 
