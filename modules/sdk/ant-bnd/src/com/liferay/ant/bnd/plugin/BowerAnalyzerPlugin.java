@@ -105,7 +105,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 	}
 
-	protected String _desugar(String minor) {
+	protected String desugar(String minor) {
 		if ((minor == null) || minor.equalsIgnoreCase("x") ||
 			minor.equals("*")) {
 
@@ -187,12 +187,12 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 					 micro.equalsIgnoreCase("x") || micro.equals("*")) {
 
 				sb.append("0.");
-				sb.append(Integer.parseInt(_desugar(minor)) + 1);
+				sb.append(Integer.parseInt(desugar(minor)) + 1);
 				sb.append(".0");
 			}
 			else {
 				sb.append("0.0.");
-				sb.append(Integer.parseInt(_desugar(micro)) + 1);
+				sb.append(Integer.parseInt(desugar(micro)) + 1);
 			}
 
 			sb.append(")))");
