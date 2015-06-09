@@ -499,7 +499,8 @@ public class PoshiRunnerValidation {
 
 		if (!childElements.isEmpty()) {
 			primaryAttributeNames = Arrays.asList(
-				"function", "macro", "macro-desktop", "macro-mobile");
+				"function", "macro", "macro-desktop", "macro-mobile",
+				"test-case");
 
 			_validateHasPrimaryAttributeName(
 				element, multiplePrimaryAttributeNames, primaryAttributeNames,
