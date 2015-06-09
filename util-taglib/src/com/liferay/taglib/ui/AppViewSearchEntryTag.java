@@ -124,6 +124,7 @@ public class AppViewSearchEntryTag extends IncludeTag {
 	@Override
 	protected void cleanUp() {
 		_actionJsp = null;
+		_commentRelatedSearchResults = null;
 		_containerName = null;
 		_containerType = null;
 		_cssClass = null;
@@ -131,7 +132,6 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		_fileEntryRelatedSearchResults = null;
 		_highlightEnabled = _HIGHLIGHT_ENABLED;
 		_locked = false;
-		_commentRelatedSearchResults = null;
 		_queryTerms = null;
 		_rowCheckerId = null;
 		_rowCheckerName = null;
@@ -169,6 +169,9 @@ public class AppViewSearchEntryTag extends IncludeTag {
 			"liferay-ui:app-view-entry:actionJspServletContext",
 			getActionJspServletContext());
 		request.setAttribute(
+			"liferay-ui:app-view-search-entry:commentRelatedSearchResults",
+			_commentRelatedSearchResults);
+		request.setAttribute(
 			"liferay-ui:app-view-search-entry:containerName", _containerName);
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:containerType", _containerType);
@@ -184,9 +187,6 @@ public class AppViewSearchEntryTag extends IncludeTag {
 			_highlightEnabled);
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:locked", _locked);
-		request.setAttribute(
-			"liferay-ui:app-view-search-entry:commentRelatedSearchResults",
-			_commentRelatedSearchResults);
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:queryTerms", _queryTerms);
 		request.setAttribute(
