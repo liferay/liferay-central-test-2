@@ -44,7 +44,7 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
 		Jar jar = analyzer.getJar();
 
-		Resource bowerJSONResource = jar.getResource(_BOWER_JSON);
+		Resource bowerJSONResource = jar.getResource("bower.json");
 
 		if (bowerJSONResource == null) {
 			return false;
@@ -470,8 +470,6 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 
 		return sb.toString();
 	}
-
-	private static final String _BOWER_JSON = "bower.json";
 
 	private static final String _OSGI_WEBRESOURCE = "osgi.webresource";
 
