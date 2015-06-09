@@ -422,17 +422,22 @@ public class BowerAnalyzerPlugin implements AnalyzerPlugin {
 		Parameters parameters = new Parameters();
 
 		for (Entry<String, String> entry : bowerModule.runtime.entrySet()) {
-			String name = entry.getKey();
-			String version = entry.getValue();
-
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("(&(");
 			sb.append(OSGI_WEBRESOURCE);
 			sb.append("=");
+
+			String name = entry.getKey();
+
 			sb.append(name);
+
 			sb.append(")");
+
+			String version = entry.getValue();
+
 			sb.append(getBowerVersionFilter(version));
+
 			sb.append(")");
 
 			Attrs attrs = new Attrs();
