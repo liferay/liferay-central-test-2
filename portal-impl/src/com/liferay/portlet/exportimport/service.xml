@@ -9,7 +9,6 @@
 
 		<reference package-path="com.liferay.portal" entity="BackgroundTask" />
 		<reference package-path="com.liferay.portal" entity="Layout" />
-		<reference package-path="com.liferay.portlet.exportimport" entity="ExportImportConfiguration" />
 	</entity>
 	<entity name="ExportImportConfiguration" local-service="true" remote-service="true" trash-enabled="true">
 
@@ -82,7 +81,6 @@
 		<reference package-path="com.liferay.portal" entity="LayoutRevision" />
 		<reference package-path="com.liferay.portal" entity="LayoutSet" />
 		<reference package-path="com.liferay.portal" entity="LayoutSetBranch" />
-		<reference package-path="com.liferay.portlet.exportimport" entity="ExportImport" />
 	</entity>
 	<exceptions>
 		<exception>LARFile</exception>
