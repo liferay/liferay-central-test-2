@@ -56,7 +56,6 @@ backURL.setParameter("classPK", String.valueOf(structure.getStructureId()));
 			keyProperty="structureVersionId"
 			modelVar="structureVersion"
 		>
-
 			<portlet:renderURL var="rowURL">
 				<portlet:param name="mvcPath" value="/view_structure.jsp" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
