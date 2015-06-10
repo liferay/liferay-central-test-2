@@ -1099,7 +1099,7 @@ public class DDMStructureLocalServiceImpl
 
 		if (!structureVersion.isApproved()) {
 			throw new InvalidStructureVersionException(
-				"Cannot revert from an unapproved file version");
+				"Unable to revert from an unapproved file version");
 		}
 
 		DDMStructure structure = structureVersion.getStructure();
