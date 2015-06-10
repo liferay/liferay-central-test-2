@@ -41,12 +41,7 @@ String viewMode = ParamUtil.getString(request, "viewMode");
 %>
 
 <div class="content-metadata-entry content-metadata-ratings">
-
-	<%
-	int discussionMessagesCount = CommentManagerUtil.getCommentsCount(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
-	%>
-
-	<c:if test="<%= discussionMessagesCount > 0 %>">
+	<c:if test="<%= CommentManagerUtil.getCommentsCount(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey()) > 0 %>">
 		<liferay-ui:header
 			title="comments"
 		/>
