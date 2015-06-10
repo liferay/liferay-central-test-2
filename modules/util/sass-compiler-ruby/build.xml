@@ -15,14 +15,14 @@
 				<mkdir dir="test/unit/com/liferay/sass/compiler/ruby/internal/dependencies/sass-spec" />
 
 				<mirrors-get
-						dest="sass-spec.zip"
-						src="https://github.com/sass/sass-spec/archive/3818b9d686765461add05e996d990b085e15a348.zip"
-						/>
+					dest="sass-spec.zip"
+					src="https://github.com/sass/sass-spec/archive/3818b9d686765461add05e996d990b085e15a348.zip"
+				/>
 
 				<unzip
-						dest="test/unit/com/liferay/sass/compiler/ruby/internal/dependencies/sass-spec"
-						src="sass-spec.zip"
-						>
+					dest="test/unit/com/liferay/sass/compiler/ruby/internal/dependencies/sass-spec"
+					src="sass-spec.zip"
+				>
 					<patternset>
 						<include name="**/spec/basic/**" />
 					</patternset>
@@ -34,7 +34,7 @@
 		</if>
 
 		<compile
-				module.dir="${basedir}"
-				/>
+			module.dir="${basedir}"
+		/>
 	</target>
 </project>
