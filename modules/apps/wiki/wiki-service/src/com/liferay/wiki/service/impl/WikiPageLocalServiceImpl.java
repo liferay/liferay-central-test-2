@@ -652,7 +652,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		assetEntryLocalService.deleteEntry(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
-		// Comments
+		// Comment
 
 		CommentManagerUtil.deleteDiscussion(
 			WikiPage.class.getName(), page.getResourcePrimKey());

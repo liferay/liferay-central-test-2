@@ -434,6 +434,14 @@ public class JournalArticleLocalServiceImpl
 			serviceContext.getAssetTagNames(),
 			serviceContext.getAssetLinkEntryIds());
 
+		// Comment
+
+		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
+			CommentManagerUtil.addDiscussion(
+				userId, groupId, JournalArticle.class.getName(),
+				resourcePrimKey, article.getUserName());
+		}
+
 		// Dynamic data mapping
 
 		if (classNameLocalService.getClassNameId(DDMStructure.class) ==
@@ -444,14 +452,6 @@ public class JournalArticleLocalServiceImpl
 		}
 		else {
 			updateDDMLinks(id, groupId, ddmStructureKey, ddmTemplateKey, true);
-		}
-
-		// Message boards
-
-		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
-			CommentManagerUtil.addDiscussion(
-				userId, groupId, JournalArticle.class.getName(),
-				resourcePrimKey, article.getUserName());
 		}
 
 		// Email
