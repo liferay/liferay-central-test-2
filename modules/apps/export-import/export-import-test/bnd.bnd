@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Export Import Test
-Bundle-SymbolicName: com.liferay.exportimport.test
+Bundle-SymbolicName: com.liferay.export.import.test
 Bundle-Version: 1.0.0
 Import-Package: *;resolution:=optional
 Include-Resource:\

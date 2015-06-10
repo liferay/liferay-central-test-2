@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.exportimport;
+package com.liferay.export.import;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.portal.kernel.language.LanguageUtil;
