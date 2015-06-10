@@ -60,7 +60,7 @@ backURL.setParameter("classPK", String.valueOf(structure.getStructureId()));
 				<portlet:param name="mvcPath" value="/view_structure.jsp" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 				<portlet:param name="structureVersionId" value="<%= String.valueOf(structureVersion.getStructureVersionId()) %>" />
-				<portlet:param name="formBuilderReadOnly" value="<%= String.valueOf(Boolean.TRUE) %>" />
+				<portlet:param name="formBuilderReadOnly" value="<%= Boolean.TRUE.toString() %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text
