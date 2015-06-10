@@ -47,7 +47,6 @@ backURL.setParameter("classPK", String.valueOf(structure.getStructureId()));
 		searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 		total="<%= DDMStructureVersionServiceUtil.getStructureVersionsCount(structureId) %>"
 	>
-
 		<liferay-ui:search-container-results
 			results="<%= DDMStructureVersionServiceUtil.getStructureVersions(structureId, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
 		/>
