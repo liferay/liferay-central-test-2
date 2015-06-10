@@ -276,7 +276,7 @@ public class JspServlet extends HttpServlet {
 
 	private static final Class<?>[] _INTERFACES = {ServletContext.class};
 
-	private static final Pattern _ORIGINAL_JSP = Pattern.compile(
+	private static final Pattern _originalJspPattern = Pattern.compile(
 		"^(?<file>.*)(\\.(portal|original))(?<extension>\\.(jsp|jspf))$");
 
 	private Bundle[] _allParticipatingBundles;
@@ -317,7 +317,7 @@ public class JspServlet extends HttpServlet {
 		}
 
 		private URL getExtension(String path) {
-			Matcher matcher = _ORIGINAL_JSP.matcher(path);
+			Matcher matcher = _originalJspPattern.matcher(path);
 
 			if (matcher.matches()) {
 				path = matcher.group("file") + matcher.group("extension");
