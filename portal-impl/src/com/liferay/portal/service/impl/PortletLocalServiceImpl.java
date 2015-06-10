@@ -723,13 +723,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			Set<String> liferayPortletIds = _readLiferayPortletXML(
-				StringPool.BLANK, xmls[2], portletsMap,
-				servletContext.getClassLoader());
+				StringPool.BLANK, servletContext.getClassLoader(), xmls[2],
+				portletsMap);
 
 			liferayPortletIds.addAll(
 				_readLiferayPortletXML(
-					StringPool.BLANK, xmls[3], portletsMap,
-					servletContext.getClassLoader()));
+					StringPool.BLANK, servletContext.getClassLoader(), xmls[3],
+					portletsMap));
 
 			// Check for missing entries in liferay-portlet.xml
 
@@ -804,8 +804,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					servletURLPatterns, pluginPackage));
 
 			Set<String> liferayPortletIds = _readLiferayPortletXML(
-				servletContextName, xmls[2], portletsMap,
-				servletContext.getClassLoader());
+				servletContextName, servletContext.getClassLoader(), xmls[2],
+				portletsMap);
 
 			// Check for missing entries in liferay-portlet.xml
 
@@ -1786,8 +1786,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private Set<String> _readLiferayPortletXML(
-			String servletContextName, String xml,
-			Map<String, Portlet> portletsMap, ClassLoader classLoader)
+			String servletContextName, ClassLoader classLoader,
+			String xml, Map<String, Portlet> portletsMap)
 		throws Exception {
 
 		Set<String> liferayPortletIds = new HashSet<>();
