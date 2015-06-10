@@ -1031,9 +1031,10 @@
 					<loadfile property="ant-gc-log" srcFile="/tmp/ant-gc.log" />
 
 					<echo>
-	Ant GC log:
+Ant GC log:
 
-	${ant-gc-log}</echo>
+${ant-gc-log}
+					</echo>
 				</then>
 				<else>
 					<echo>Unable to read /tmp/ant-gc.log</echo>
@@ -1046,9 +1047,10 @@
 					<loadfile property="tomcat-gc-log" srcFile="/tmp/tomcat-gc.log" />
 
 					<echo>
-	Tomcat GC log:
+Tomcat GC log:
 
-	${tomcat-gc-log}</echo>
+${tomcat-gc-log}
+					</echo>
 				</then>
 				<else>
 					<echo>Unable to read /tmp/tomcat-gc.log</echo>
