@@ -652,14 +652,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		assetEntryLocalService.deleteEntry(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
-		// Expando
-
-		expandoRowLocalService.deleteRows(page.getPrimaryKey());
-
 		// Comments
 
 		CommentManagerUtil.deleteDiscussion(
 			WikiPage.class.getName(), page.getResourcePrimKey());
+
+		// Expando
+
+		expandoRowLocalService.deleteRows(page.getPrimaryKey());
 
 		// Trash
 
