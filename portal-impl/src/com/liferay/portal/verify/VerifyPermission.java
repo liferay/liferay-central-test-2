@@ -278,13 +278,13 @@ public class VerifyPermission extends VerifyProcess {
 	protected boolean isPrivateLayout(String name, String primKey)
 		throws Exception {
 
-		boolean isLayout = primKey.contains(PortletConstants.LAYOUT_SEPARATOR);
+		boolean layout = primKey.contains(PortletConstants.LAYOUT_SEPARATOR);
 
-		if (!name.equals(Layout.class.getName()) && !isLayout) {
+		if (!name.equals(Layout.class.getName()) && !layout) {
 			return false;
 		}
 
-		if (isLayout) {
+		if (layout) {
 			primKey = StringUtil.extractFirst(
 				primKey, PortletConstants.LAYOUT_SEPARATOR);
 		}
