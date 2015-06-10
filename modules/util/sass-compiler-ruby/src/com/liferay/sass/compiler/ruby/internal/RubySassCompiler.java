@@ -114,15 +114,16 @@ public class RubySassCompiler implements AutoCloseable, SassCompiler {
 		throws RubySassCompilerException {
 
 		try {
-			String includeDirNames =
-				includeDirName + File.pathSeparator + new File(
-					inputFileName).getParent();
-
 			Path path = Paths.get(inputFileName);
 
 			String input = new String(Files.readAllBytes(path));
 
-			return compileString(input, includeDirNames, imgDirName);
+			File inputFile = new File(inputFileName);
+
+			return compileString(
+				input,
+				includeDirName + File.pathSeparator + inputFile.getParent(),
+				imgDirName);
 		}
 		catch (Exception e) {
 			throw new RubySassCompilerException(
