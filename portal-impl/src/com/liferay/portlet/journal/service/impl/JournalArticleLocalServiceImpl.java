@@ -1008,25 +1008,25 @@ public class JournalArticleLocalServiceImpl
 
 		if (articlesCount == 1) {
 
-			// Ratings
-
-			ratingsStatsLocalService.deleteStats(
-				JournalArticle.class.getName(), article.getResourcePrimKey());
-
-			// Comments
-
-			CommentManagerUtil.deleteDiscussion(
-				JournalArticle.class.getName(), article.getResourcePrimKey());
-
 			// Asset
 
 			assetEntryLocalService.deleteEntry(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+
+			// Comment
+
+			CommentManagerUtil.deleteDiscussion(
 				JournalArticle.class.getName(), article.getResourcePrimKey());
 
 			// Content searches
 
 			journalContentSearchLocalService.deleteArticleContentSearches(
 				article.getGroupId(), article.getArticleId());
+
+			// Ratings
+
+			ratingsStatsLocalService.deleteStats(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
 
 			// Small image
 
