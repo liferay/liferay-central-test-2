@@ -2,30 +2,46 @@
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 	<info organisation="org.elasticsearch"
 		module="elasticsearch"
-		revision="1.5.1"
+		revision="1.6.0"
 		status="release"
-		publication="20150409064055"
+		publication="20150609083511"
 	>
 		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
 		<description homepage="">
 		Elasticsearch - Open Source, Distributed, RESTful Search Engine
 		</description>
-		<m:properties__es.logger.level>INFO</m:properties__es.logger.level>
-		<m:properties__tests.shuffle>true</m:properties__tests.shuffle>
-		<m:properties__lucene.version>4.10.4</m:properties__lucene.version>
-		<m:properties__tests.output>onerror</m:properties__tests.output>
-		<m:properties__tests.jvms>auto</m:properties__tests.jvms>
-		<m:properties__execution.hint.file>.local-${project.version}-execution-hints.log</m:properties__execution.hint.file>
-		<m:properties__tests.locale>random</m:properties__tests.locale>
-		<m:properties__tests.timezone>random</m:properties__tests.timezone>
-		<m:properties__tests.bwc.path>${project.basedir}/backwards</m:properties__tests.bwc.path>
-		<m:properties__tests.heapdump.path>${basedir}/logs/</m:properties__tests.heapdump.path>
-		<m:properties__tests.topn>5</m:properties__tests.topn>
 		<m:properties__tests.heap.size>512m</m:properties__tests.heap.size>
-		<m:properties__lucene.maven.version>4.10.4</m:properties__lucene.maven.version>
-		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__tests.timezone>random</m:properties__tests.timezone>
+		<m:properties__tests.heapdump.path>${basedir}/logs/</m:properties__tests.heapdump.path>
+		<m:properties__packaging.elasticsearch.home.dir>/usr/share/elasticsearch</m:properties__packaging.elasticsearch.home.dir>
+		<m:properties__packaging.elasticsearch.group>elasticsearch</m:properties__packaging.elasticsearch.group>
+		<m:properties__packaging.elasticsearch.user>elasticsearch</m:properties__packaging.elasticsearch.user>
+		<m:properties__packaging.elasticsearch.systemd.sysctl.dir>/usr/lib/sysctl.d</m:properties__packaging.elasticsearch.systemd.sysctl.dir>
+		<m:properties__tests.locale>random</m:properties__tests.locale>
 		<m:properties__sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</m:properties__sonatypeOssDistMgmtSnapshotsUrl>
-		<m:maven.plugins>org.apache.maven.plugins__maven-enforcer-plugin__1.0|org.apache.maven.plugins__maven-enforcer-plugin__1.0|null__maven-enforcer-plugin__1.3.1|null__maven-compiler-plugin__3.1|com.carrotsearch.randomizedtesting__junit4-maven-plugin__2.1.2|null__maven-antrun-plugin__1.7|null__maven-surefire-plugin__2.16|null__maven-source-plugin__2.2.1|null__maven-shade-plugin__2.3|null__maven-resources-plugin__2.6|null__maven-assembly-plugin__2.4|org.codehaus.mojo__buildnumber-maven-plugin__1.2|null__maven-dependency-plugin__2.8|org.vafer__jdeb__1.0.1|org.codehaus.mojo__rpm-maven-plugin__2.1-alpha-3|de.thetaphi__forbiddenapis__1.7|null__maven-jar-plugin__2.4</m:maven.plugins>
+		<m:properties__tests.jvms>auto</m:properties__tests.jvms>
+		<m:maven.plugins>org.apache.maven.plugins__maven-enforcer-plugin__1.0|org.apache.maven.plugins__maven-enforcer-plugin__1.0|org.codehaus.mojo__exec-maven-plugin__1.4.0|null__maven-enforcer-plugin__1.3.1|null__maven-compiler-plugin__3.1|com.carrotsearch.randomizedtesting__junit4-maven-plugin__2.1.2|null__maven-antrun-plugin__1.7|null__maven-surefire-plugin__2.16|null__maven-source-plugin__2.2.1|null__maven-shade-plugin__2.3|null__maven-resources-plugin__2.6|null__maven-assembly-plugin__2.4|org.codehaus.mojo__buildnumber-maven-plugin__1.2|null__maven-dependency-plugin__2.8|org.vafer__jdeb__1.4|org.codehaus.mojo__rpm-maven-plugin__2.1.2|de.thetaphi__forbiddenapis__1.8|null__maven-jar-plugin__2.4</m:maven.plugins>
+		<m:properties__lucene.maven.version>4.10.4</m:properties__lucene.maven.version>
+		<m:properties__tests.topn>5</m:properties__tests.topn>
+		<m:properties__execution.hint.file>.local-${project.version}-execution-hints.log</m:properties__execution.hint.file>
+		<m:properties__packaging.elasticsearch.log.dir>/var/log/elasticsearch</m:properties__packaging.elasticsearch.log.dir>
+		<m:properties__packaging.elasticsearch.work.dir>/tmp/elasticsearch</m:properties__packaging.elasticsearch.work.dir>
+		<m:properties__packaging.elasticsearch.pid.dir>/var/run/elasticsearch</m:properties__packaging.elasticsearch.pid.dir>
+		<m:properties__packaging.elasticsearch.plugins.dir>${packaging.elasticsearch.home.dir}/plugins</m:properties__packaging.elasticsearch.plugins.dir>
+		<m:properties__packaging.elasticsearch.systemd.dir>/usr/lib/systemd/system</m:properties__packaging.elasticsearch.systemd.dir>
+		<m:properties__packaging.elasticsearch.bin.dir>/usr/share/elasticsearch/bin</m:properties__packaging.elasticsearch.bin.dir>
+		<m:properties__deb.sign>false</m:properties__deb.sign>
+		<m:properties__lucene.version>4.10.4</m:properties__lucene.version>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__tests.shuffle>true</m:properties__tests.shuffle>
+		<m:properties__packaging.elasticsearch.data.dir>/var/lib/elasticsearch</m:properties__packaging.elasticsearch.data.dir>
+		<m:properties__deb.sign.method>dpkg-sig</m:properties__deb.sign.method>
+		<m:properties__tests.output>onerror</m:properties__tests.output>
+		<m:properties__jvm.executable>${java.home}${file.separator}bin${file.separator}java</m:properties__jvm.executable>
+		<m:properties__es.logger.level>INFO</m:properties__es.logger.level>
+		<m:properties__tests.bwc.path>${project.basedir}/backwards</m:properties__tests.bwc.path>
+		<m:properties__packaging.elasticsearch.conf.dir>/etc/elasticsearch</m:properties__packaging.elasticsearch.conf.dir>
+		<m:properties__packaging.elasticsearch.tmpfilesd.dir>/usr/lib/tmpfiles.d</m:properties__packaging.elasticsearch.tmpfilesd.dir>
 	</info>
 	<configurations>
 		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
@@ -68,6 +84,7 @@
 		</dependency>
 		<dependency org="com.spatial4j" name="spatial4j" rev="0.4.1" force="true" conf="optional->compile(*),master(*)"/>
 		<dependency org="com.vividsolutions" name="jts" rev="1.13" force="true" conf="optional->compile(*),master(*)"/>
+		<dependency org="org.yaml" name="snakeyaml" rev="1.12" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.codehaus.groovy" name="groovy-all" rev="2.4.0" force="true" conf="optional->compile(*),master(*)"/>
 		<dependency org="log4j" name="log4j" rev="1.2.17" force="true" conf="optional->compile(*),master(*)"/>
 		<dependency org="log4j" name="apache-log4j-extras" rev="1.2.17" force="true" conf="optional->compile(*),master(*)"/>
