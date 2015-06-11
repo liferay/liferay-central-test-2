@@ -942,8 +942,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	protected String[] checkTags(
-			String className, long classPK, String[] tagNames)
-		throws PortalException {
+		String className, long classPK, String[] tagNames) {
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
