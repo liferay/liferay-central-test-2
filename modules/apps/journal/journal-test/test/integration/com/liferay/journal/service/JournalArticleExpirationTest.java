@@ -178,14 +178,15 @@ public class JournalArticleExpirationTest {
 
 		article = updateArticle(article, mode);
 
-		Date expirationDate = article.getExpirationDate();
-
 		// Simulate automatic expiration
+
+		Date expirationDate = article.getExpirationDate();
 
 		article.setExpirationDate(
 			new Date(expirationDate.getTime() - (Time.HOUR * 2)));
 
 		JournalArticleLocalServiceUtil.updateJournalArticle(article);
+
 		JournalArticleLocalServiceUtil.checkArticles();
 
 		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
