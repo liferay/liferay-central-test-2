@@ -270,8 +270,8 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.Group</model-name>
 		<portlet-ref>
-			<portlet-name>com_liferay_site_admin_web_portlet_SiteAdminPortlet</portlet-name>
 			<portlet-name>com_liferay_layout_admin_web_portlet_GroupPagesPortlet</portlet-name>
+			<portlet-name>com_liferay_site_admin_web_portlet_SiteAdminPortlet</portlet-name>
 			<portlet-name>com_liferay_site_admin_web_portlet_SiteSettingsPortlet</portlet-name>
 			<portlet-name>com_liferay_site_memberships_web_portlet_SiteMembershipsPortlet</portlet-name>
 		</portlet-ref>

@@ -172,8 +172,8 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 
 			<portlet:actionURL name="enable" var="enableLayoutURL">
 				<portlet:param name="mvcPath" value="/view.jsp" />
-				<portlet:param name="incompleteLayoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
 				<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
+				<portlet:param name="incompleteLayoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
 			</portlet:actionURL>
 
 			<aui:script use="aui-base">
@@ -261,8 +261,8 @@ redirectURL.setParameter("selPlid", String.valueOf(selLayout.getParentPlid()));
 
 <portlet:actionURL name="deleteLayout" var="deleteLayoutURL">
 	<portlet:param name="mvcPath" value="/view.jsp" />
-	<portlet:param name="plid" value="<%= String.valueOf(layoutsAdminDisplayContext.getSelPlid()) %>" />
 	<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
+	<portlet:param name="plid" value="<%= String.valueOf(layoutsAdminDisplayContext.getSelPlid()) %>" />
 </portlet:actionURL>
 
 <aui:script use="aui-base">
