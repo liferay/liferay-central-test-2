@@ -1031,13 +1031,13 @@ public class PortletTracker
 
 			String key = keys.nextElement();
 
-			if (!key.startsWith(_JSP_SERVLET_INIT_PARAM)) {
+			if (!key.startsWith(_JSP_SERVLET_INIT_PARAM_PREFIX)) {
 				continue;
 			}
 
 			String paramName =
-				_SERVLET_INIT_PARAM +
-					key.substring(_JSP_SERVLET_INIT_PARAM.length());
+				_SERVLET_INIT_PARAM_PREFIX +
+					key.substring(_JSP_SERVLET_INIT_PARAM_PREFIX.length());
 
 			properties.put(paramName, componentProperties.get(key));
 		}
@@ -1237,12 +1237,12 @@ public class PortletTracker
 		}
 	}
 
-	private static final String _JSP_SERVLET_INIT_PARAM =
+	private static final String _JSP_SERVLET_INIT_PARAM_PREFIX =
 		"jsp.servlet.init.param.";
 
 	private static final String _NAMESPACE = "com.liferay.portlet.";
 
-	private static final String _SERVLET_INIT_PARAM =
+	private static final String _SERVLET_INIT_PARAM_PREFIX =
 		HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_INIT_PARAM_PREFIX;
 
 	private static final Log _log = LogFactoryUtil.getLog(PortletTracker.class);
