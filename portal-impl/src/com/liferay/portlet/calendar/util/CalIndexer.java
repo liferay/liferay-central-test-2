@@ -119,9 +119,7 @@ public class CalIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					CalEvent event = (CalEvent)object;
 
 					try {
@@ -129,12 +127,12 @@ public class CalIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index calendar event " +
 									event.getEventId(),
-								e);
+								pe);
 						}
 					}
 				}

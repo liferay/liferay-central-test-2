@@ -180,9 +180,7 @@ public class BookmarksFolderIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					BookmarksFolder folder = (BookmarksFolder)object;
 
 					try {
@@ -190,12 +188,12 @@ public class BookmarksFolderIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index bookmarks folder " +
 									folder.getFolderId(),
-								e);
+								pe);
 						}
 					}
 				}

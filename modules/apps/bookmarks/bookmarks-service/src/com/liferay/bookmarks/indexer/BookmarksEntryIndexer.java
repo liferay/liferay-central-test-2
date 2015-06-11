@@ -188,9 +188,7 @@ public class BookmarksEntryIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					BookmarksEntry entry = (BookmarksEntry)object;
 
 					try {
@@ -198,12 +196,12 @@ public class BookmarksEntryIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index bookmarks entry " +
 									entry.getEntryId(),
-								e);
+								pe);
 						}
 					}
 				}

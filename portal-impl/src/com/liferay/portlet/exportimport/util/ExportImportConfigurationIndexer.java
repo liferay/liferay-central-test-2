@@ -296,9 +296,7 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					ExportImportConfiguration exportImportConfiguration =
 						(ExportImportConfiguration)object;
 
@@ -308,13 +306,13 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index export import configuration " +
 									exportImportConfiguration.
 										getExportImportConfigurationId(),
-								e);
+								pe);
 						}
 					}
 				}

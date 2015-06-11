@@ -166,9 +166,7 @@ public class WikiNodeIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					WikiNode node = (WikiNode)object;
 
 					try {
@@ -176,11 +174,11 @@ public class WikiNodeIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index wiki node " + node.getNodeId(),
-								e);
+								pe);
 						}
 					}
 				}

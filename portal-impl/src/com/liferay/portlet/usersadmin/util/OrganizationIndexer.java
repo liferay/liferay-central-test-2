@@ -299,9 +299,7 @@ public class OrganizationIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					Organization organization = (Organization)object;
 
 					try {
@@ -309,12 +307,12 @@ public class OrganizationIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index organization " +
 									organization.getOrganizationId(),
-								e);
+								pe);
 						}
 					}
 				}

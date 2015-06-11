@@ -173,9 +173,7 @@ public class JournalFolderIndexer extends BaseIndexer implements FolderIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					JournalFolder folder = (JournalFolder)object;
 
 					try {
@@ -185,12 +183,12 @@ public class JournalFolderIndexer extends BaseIndexer implements FolderIndexer {
 							actionableDynamicQuery.addDocument(document);
 						}
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index journal folder " +
 									folder.getFolderId(),
-								e);
+								pe);
 						}
 					}
 				}

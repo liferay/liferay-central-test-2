@@ -741,9 +741,7 @@ public class JournalArticleIndexer
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					JournalArticle article = (JournalArticle)object;
 
 					if (!PropsValues.JOURNAL_ARTICLE_INDEX_ALL_VERSIONS) {
@@ -763,12 +761,12 @@ public class JournalArticleIndexer
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index journal article " +
 									article.getId(),
-								e);
+								pe);
 						}
 					}
 				}

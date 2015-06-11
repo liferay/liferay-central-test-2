@@ -186,9 +186,7 @@ public class BlogsIndexer extends BaseIndexer {
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					BlogsEntry entry = (BlogsEntry)object;
 
 					try {
@@ -196,12 +194,12 @@ public class BlogsIndexer extends BaseIndexer {
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index blogs entry " +
 									entry.getEntryId(),
-								e);
+								pe);
 						}
 					}
 				}

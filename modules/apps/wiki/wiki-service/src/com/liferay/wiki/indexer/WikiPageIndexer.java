@@ -322,9 +322,7 @@ public class WikiPageIndexer
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
-				public void performAction(Object object)
-					throws PortalException {
-
+				public void performAction(Object object) {
 					WikiPage page = (WikiPage)object;
 
 					try {
@@ -332,11 +330,11 @@ public class WikiPageIndexer
 
 						actionableDynamicQuery.addDocument(document);
 					}
-					catch (PortalException e) {
+					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Unable to index wiki page " + page.getPageId(),
-								e);
+								pe);
 						}
 					}
 				}
