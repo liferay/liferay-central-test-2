@@ -283,7 +283,7 @@ public class JspServlet extends HttpServlet {
 			_serviceRegistrations.add(serviceRegistration);
 		}
 		catch (Exception e) {
-			log("Error creating listener " + listenerClassName, e);
+			log("Unable to create listener " + listenerClassName, e);
 		}
 	}
 
@@ -340,8 +340,8 @@ public class JspServlet extends HttpServlet {
 
 		if (classNames.isEmpty()) {
 			throw new IllegalArgumentException(
-				clazz.getName() + " must implement one of the supported " +
-					"EventListener types.");
+				clazz.getName() + " does not implement one of the supported " +
+					"servlet listener interfaces");
 		}
 
 		return classNames.toArray(new String[classNames.size()]);
@@ -373,23 +373,25 @@ public class JspServlet extends HttpServlet {
 		while (urls.hasMoreElements()) {
 			URL url = urls.nextElement();
 
-			try (InputStream stream = url.openStream()) {
+			try (InputStream inputStream = url.openStream()) {
 				ParserUtils parserUtils = new ParserUtils(true);
-				TreeNode tld = parserUtils.parseXMLDocument(
-					url.getPath(), stream, false);
 
-				Iterator<TreeNode>listenerNodes = tld.findChildren("listener");
+				TreeNode treeNode = parserUtils.parseXMLDocument(
+					url.getPath(), inputStream, false);
 
-				while (listenerNodes.hasNext()) {
-					TreeNode listener = listenerNodes.next();
-					TreeNode listenerClass = listener.findChild(
+				Iterator<TreeNode>iterator = treeNode.findChildren("listener");
+
+				while (iterator.hasNext()) {
+					TreeNode listenerTreeNode = iterator.next();
+
+					TreeNode listenerClassTreeNode = listenerTreeNode.findChild(
 						"listener-class");
 
-					if (listenerClass == null) {
+					if (listenerClassTreeNode == null) {
 						continue;
 					}
 
-					String listenerClassName = listenerClass.getBody();
+					String listenerClassName = listenerClassTreeNode.getBody();
 
 					if (listenerClassName == null) {
 						continue;
