@@ -189,10 +189,8 @@ public class JournalFeedStagedModelDataHandler
 
 		boolean privateLayout = false;
 
-		String servletMapping = StringPool.SLASH + friendlyURLParts[1];
-
-		if (!servletMapping.equals(
-				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
+		if (!PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING.equals(
+				StringPool.SLASH + friendlyURLParts[1])) {
 
 			privateLayout = true;
 		}
