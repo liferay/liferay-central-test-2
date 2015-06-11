@@ -22,7 +22,6 @@ long[] selectedGroupIds = StringUtil.split(ParamUtil.getString(request, "selecte
 long refererAssetEntryId = ParamUtil.getLong(request, "refererAssetEntryId");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 long subtypeSelectionId = ParamUtil.getLong(request, "subtypeSelectionId");
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectAsset");
 
 Boolean listable = null;
 
@@ -32,17 +31,20 @@ if (Validator.isNotNull(listableValue)) {
 	listable = ParamUtil.getBoolean(request, "listable", true);
 }
 
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectAsset");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("selectedGroupIds", StringUtil.merge(selectedGroupIds));
 portletURL.setParameter("refererAssetEntryId", String.valueOf(refererAssetEntryId));
 portletURL.setParameter("typeSelection", typeSelection);
 portletURL.setParameter("subtypeSelectionId", String.valueOf(subtypeSelectionId));
-portletURL.setParameter("eventName", eventName);
 
 if (listable != null) {
 	portletURL.setParameter("listable", String.valueOf(listable));
 }
+
+portletURL.setParameter("eventName", eventName);
 
 request.setAttribute("view.jsp-portletURL", portletURL);
 %>
