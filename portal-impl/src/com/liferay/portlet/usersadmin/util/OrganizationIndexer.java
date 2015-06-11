@@ -312,9 +312,8 @@ public class OrganizationIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to organization: " +
-									organization.getOrganizationId() + " - " +
-									organization.getName(),
+								"Unable to index organization " +
+									organization.getOrganizationId(),
 								e);
 						}
 					}

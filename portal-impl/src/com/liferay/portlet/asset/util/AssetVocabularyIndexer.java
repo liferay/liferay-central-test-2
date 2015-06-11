@@ -195,9 +195,8 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index vocabulary: " +
-									assetVocabulary.getVocabularyId() + " - " +
-									assetVocabulary.getName(),
+								"Unable to index asset vocabulary " +
+									assetVocabulary.getVocabularyId(),
 								e);
 						} }
 				}

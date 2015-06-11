@@ -638,9 +638,8 @@ public class DLFileEntryIndexer
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index file entry: " +
-									dlFileEntry.getFileEntryId() + " - " +
-									dlFileEntry.getTitle(),
+								"Unable to index document library file entry " +
+									dlFileEntry.getFileEntryId(),
 								e);
 						}
 					}

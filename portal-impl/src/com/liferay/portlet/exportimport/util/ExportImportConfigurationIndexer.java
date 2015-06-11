@@ -311,12 +311,9 @@ public class ExportImportConfigurationIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index export import " +
-									"configuration: " +
+								"Unable to index export import configuration " +
 									exportImportConfiguration.
-										getExportImportConfigurationId() +
-									" - " +
-									exportImportConfiguration.getName(),
+										getExportImportConfigurationId(),
 								e);
 						}
 					}

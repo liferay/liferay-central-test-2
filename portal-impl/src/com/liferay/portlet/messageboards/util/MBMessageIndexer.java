@@ -198,7 +198,10 @@ public class MBMessageIndexer
 				}
 				catch (Exception e) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Unable to get category " + categoryId, e);
+						_log.debug(
+							"Unable to get message boards category " +
+								categoryId,
+							e);
 					}
 
 					continue;
@@ -461,7 +464,7 @@ public class MBMessageIndexer
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index message: " +
+								"Unable to index message boards message " +
 									message.getMessageId(),
 								e);
 						}

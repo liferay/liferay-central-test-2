@@ -199,9 +199,8 @@ public class BlogsIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index blog: " +
-									entry.getEntryId() + " - " +
-									entry.getTitle(),
+								"Unable to index blogs entry " +
+									entry.getEntryId(),
 								e);
 						}
 					}

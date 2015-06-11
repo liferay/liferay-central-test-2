@@ -219,9 +219,8 @@ public class SCIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to product entry: " +
-									productEntry.getProductEntryId() + " - " +
-									productEntry.getName(),
+								"Unable to software catalog product entry " +
+									productEntry.getProductEntryId(),
 								e);
 						}
 					}

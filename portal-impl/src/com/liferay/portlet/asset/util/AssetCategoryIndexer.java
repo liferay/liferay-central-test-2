@@ -249,9 +249,8 @@ public class AssetCategoryIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index category: " +
-									category.getCategoryId() + " - " +
-									category.getName(),
+								"Unable to index asset category " +
+									category.getCategoryId(),
 								e);
 						}
 					}

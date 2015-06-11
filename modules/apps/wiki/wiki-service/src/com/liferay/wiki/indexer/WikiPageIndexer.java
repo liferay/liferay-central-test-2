@@ -162,7 +162,7 @@ public class WikiPageIndexer
 				}
 				catch (Exception e) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Unable to get node " + nodeId, e);
+						_log.debug("Unable to get wiki node " + nodeId, e);
 					}
 
 					continue;
@@ -335,8 +335,7 @@ public class WikiPageIndexer
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to page: " + page.getPageId() + " - " +
-									page.getTitle(),
+								"Unable to index wiki page " + page.getPageId(),
 								e);
 						}
 					}

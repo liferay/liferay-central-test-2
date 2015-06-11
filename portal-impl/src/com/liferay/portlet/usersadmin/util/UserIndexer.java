@@ -466,9 +466,7 @@ public class UserIndexer extends BaseIndexer {
 						catch (PortalException e) {
 							if (_log.isWarnEnabled()) {
 								_log.warn(
-									"Unable to index user: " +
-										user.getUserId() + " - " +
-										user.getScreenName(),
+									"Unable to index user " + user.getUserId(),
 									e);
 							}
 						}

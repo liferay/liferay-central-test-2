@@ -213,9 +213,8 @@ public class DLFolderIndexer extends BaseIndexer implements FolderIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index file entry: " +
-									dlFolder.getFolderId() + " - " +
-									dlFolder.getName(),
+								"Unable to index document library folder " +
+									dlFolder.getFolderId(),
 								e);
 						}
 					}

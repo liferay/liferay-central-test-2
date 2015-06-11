@@ -292,9 +292,8 @@ public class DDLIndexer extends BaseIndexer {
 			catch (SearchException e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to index ddl record: " +
-							record.getRecordId() + " - " +
-							record.getVersion(),
+						"Unable to index dynamic data lists record " +
+							record.getRecordId()
 						e);
 				}
 			}

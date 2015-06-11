@@ -193,9 +193,8 @@ public class BookmarksFolderIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index bookmark folder: " +
-									folder.getFolderId() + " - " +
-									folder.getName(),
+								"Unable to index bookmarks folder " +
+									folder.getFolderId(),
 								e);
 						}
 					}

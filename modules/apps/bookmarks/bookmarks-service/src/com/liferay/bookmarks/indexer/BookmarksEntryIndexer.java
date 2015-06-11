@@ -201,9 +201,8 @@ public class BookmarksEntryIndexer extends BaseIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index bookmark entry: " +
-									entry.getEntryId() + " - " +
-									entry.getName(),
+								"Unable to index bookmarks entry " +
+									entry.getEntryId(),
 								e);
 						}
 					}

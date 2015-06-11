@@ -188,9 +188,8 @@ public class JournalFolderIndexer extends BaseIndexer implements FolderIndexer {
 					catch (PortalException e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index folder: " +
-									folder.getFolderId() + " - " +
-									folder.getName(),
+								"Unable to index journal folder " +
+									folder.getFolderId(),
 								e);
 						}
 					}
