@@ -72,13 +72,13 @@ public class DDMFormLayoutValidatorImpl implements DDMFormLayoutValidator {
 				for (DDMFormLayoutColumn ddmFormLayoutColumn :
 						ddmFormLayoutRow.getDDMFormLayoutColumns()) {
 
-					Set<String> intersect = SetUtil.intersect(
+					Set<String> intersectDDMFormFieldNames = SetUtil.intersect(
 						ddmFormFieldNames,
 						ddmFormLayoutColumn.getDDMFormFieldNames());
 
-					if (!intersect.isEmpty()) {
+					if (!intersectDDMFormFieldNames.isEmpty()) {
 						throw new DDMFormLayoutValidationException(
-							"Field names " + intersect +
+							"Field names " + intersectDDMFormFieldNames +
 								" were defined more than once");
 					}
 
