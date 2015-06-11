@@ -47,8 +47,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase
-	implements WhenIsIndexableBaseModel {
+public class WikiPageTrashHandlerTest
+	extends BaseTrashHandlerTestCase implements WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

@@ -50,8 +50,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class JournalFolderTrashHandlerTest extends BaseTrashHandlerTestCase
-	implements WhenIsIndexableBaseModel {
+public class JournalFolderTrashHandlerTest
+	extends BaseTrashHandlerTestCase implements WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

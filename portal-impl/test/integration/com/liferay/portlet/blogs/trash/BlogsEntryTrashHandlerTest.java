@@ -40,8 +40,8 @@ import org.junit.Test;
  * @author Julio Camarero
  */
 @Sync
-public class BlogsEntryTrashHandlerTest extends BaseTrashHandlerTestCase
-	implements WhenIsIndexableBaseModel {
+public class BlogsEntryTrashHandlerTest
+	extends BaseTrashHandlerTestCase implements WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

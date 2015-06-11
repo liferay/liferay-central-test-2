@@ -59,8 +59,8 @@ import org.junit.Test;
  * @author Eduardo Garcia
  */
 @Sync
-public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase
-	implements WhenIsIndexableBaseModel {
+public class MBThreadTrashHandlerTest
+	extends BaseTrashHandlerTestCase implements WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

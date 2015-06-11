@@ -46,8 +46,8 @@ import org.junit.Test;
  * @author Eudaldo Alonso
  */
 @Sync
-public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase
-	implements WhenIsIndexableBaseModel {
+public class DLFolderTrashHandlerTest
+	extends BaseTrashHandlerTestCase implements WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule
