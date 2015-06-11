@@ -266,7 +266,7 @@ public class JspServlet extends HttpServlet {
 		try {
 			Class<?> clazz = _bundle.loadClass(listenerClassName);
 
-			String[] classNames = getListenerClasses(clazz);
+			String[] classNames = getListenerClassNames(clazz);
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -311,7 +311,7 @@ public class JspServlet extends HttpServlet {
 		}
 	}
 
-	protected String[] getListenerClasses(Class<?> clazz) {
+	protected String[] getListenerClassNames(Class<?> clazz) {
 		List<String> classNames = new ArrayList<>();
 
 		if (ServletContextListener.class.isAssignableFrom(clazz)) {
