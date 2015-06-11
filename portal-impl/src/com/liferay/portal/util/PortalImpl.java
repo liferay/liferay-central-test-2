@@ -1107,11 +1107,11 @@ public class PortalImpl implements Portal {
 			}
 
 			if ((pos > 0) && (pos < canonicalURL.length())) {
+				boolean replaceFriendlyURL = true;
+
 				String currentURL = canonicalURL.substring(pos);
 
 				int[] friendlyURLIndex = getGroupFriendlyURLIndex(currentURL);
-
-				boolean replaceFriendlyURL = true;
 
 				if (friendlyURLIndex != null) {
 					int y = friendlyURLIndex[1];
