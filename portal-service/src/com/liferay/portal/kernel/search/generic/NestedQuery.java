@@ -43,7 +43,11 @@ public class NestedQuery extends BaseQueryImpl {
 
 	@Override
 	public boolean hasChildren() {
-		return (_query == null);
+		if (_query == null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private final String _path;
