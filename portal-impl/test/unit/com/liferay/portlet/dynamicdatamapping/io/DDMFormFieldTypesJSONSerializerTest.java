@@ -64,14 +64,14 @@ public class DDMFormFieldTypesJSONSerializerTest extends BaseDDMTestCase {
 
 		DDMFormFieldType ddmFormFieldType = mock(DDMFormFieldType.class);
 
+		whenDDMFormFieldTypeGetDDMFormFieldTypeSettings(
+			ddmFormFieldType, DDMFormFieldTypeSettings.class);
 		whenDDMFormFieldTypeGetIcon(ddmFormFieldType, "my-icon");
-		whenDDMFormFieldTypeGetName(ddmFormFieldType, "Text");
 		whenDDMFormFieldTypeGetJavaScriptClass(
 			ddmFormFieldType, "myJavaScriptClass");
 		whenDDMFormFieldTypeGetJavaScriptModule(
 			ddmFormFieldType, "myJavaScriptModule");
-		whenDDMFormFieldTypeGetDDMFormFieldTypeSettings(
-			ddmFormFieldType, DDMFormFieldTypeSettings.class);
+		whenDDMFormFieldTypeGetName(ddmFormFieldType, "Text");
 
 		DDMFormFieldRenderer ddmFormFieldRenderer = mock(
 			DDMFormFieldRenderer.class);
