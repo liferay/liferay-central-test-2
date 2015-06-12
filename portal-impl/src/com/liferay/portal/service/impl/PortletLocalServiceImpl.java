@@ -305,7 +305,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
 		throws PortalException {
 
-		return deployRemotePortlet(portlet, new String[]{categoryName});
+		return deployRemotePortlet(portlet, new String[] {categoryName});
 	}
 
 	@Override
@@ -789,6 +789,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		PluginPackage pluginPackage) {
 
 		Map<String, Portlet> portletsMap = null;
+
 		Set<String> liferayPortletIds = null;
 
 		try {
@@ -828,9 +829,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		// Check for missing entries in portlet.xml
 
 		for (String portletId : liferayPortletIds) {
-			if (_log.isWarnEnabled() &&
-				!portletsMap.containsKey(portletId)) {
-
+			if (_log.isWarnEnabled() && !portletsMap.containsKey(portletId)) {
 				_log.warn(
 					"Portlet with the name " + portletId +
 						" is described in liferay-portlet.xml but does " +
@@ -876,7 +875,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			// Clean up portlets added prior to error.
+			// Clean up portlets added prior to error
 
 			for (Map.Entry<String, Portlet> entry : portletsMap.entrySet()) {
 				Portlet portlet = _portletsMap.remove(entry.getKey());

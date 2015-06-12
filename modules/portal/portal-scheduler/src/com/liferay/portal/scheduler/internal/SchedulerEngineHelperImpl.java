@@ -894,8 +894,8 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 
 				return schedulerEntry;
 			}
-			catch (SchedulerException e) {
-				_log.error(e, e);
+			catch (SchedulerException se) {
+				_log.error(se, se);
 			}
 
 			return null;
@@ -930,8 +930,8 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 			try {
 				unschedule(schedulerEntry, storageType);
 			}
-			catch (SchedulerException e) {
-				_log.error(e, e);
+			catch (SchedulerException se) {
+				_log.error(se, se);
 			}
 		}
 
