@@ -976,7 +976,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 							<basename file="@{test.results.file}" property="test.results.file.class.name" suffix=".xml" />
 
-							<xmltask source="@{test.results.file}" dest="test-results/@{test.type}/TEST-${test.results.file.class.name}-${database.type}.xml">
+							<xmltask dest="test-results/@{test.type}/TEST-${test.results.file.class.name}-${database.type}.xml" source="@{test.results.file}">
 								<replace path="/testsuite/@name" withText="${test.results.file.class.name}-${database.type}" />
 							</xmltask>
 
