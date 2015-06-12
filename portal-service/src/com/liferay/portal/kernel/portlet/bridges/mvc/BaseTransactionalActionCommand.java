@@ -45,6 +45,7 @@ public abstract class BaseTransactionalActionCommand implements ActionCommand {
 
 					return SessionErrors.isEmpty(portletRequest);
 				}
+
 			};
 
 			return TransactionInvokerUtil.invoke(

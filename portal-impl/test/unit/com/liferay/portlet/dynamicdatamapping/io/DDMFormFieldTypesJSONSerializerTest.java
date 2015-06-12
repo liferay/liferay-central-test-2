@@ -153,6 +153,7 @@ public class DDMFormFieldTypesJSONSerializerTest extends BaseDDMTestCase {
 
 					return returnDDMFormFieldTypeSettings;
 				}
+
 			}
 		);
 	}
