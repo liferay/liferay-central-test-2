@@ -34,8 +34,8 @@ DDMTemplateVersion templateVersion = template.getTemplateVersion();
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="closeRedirect" type="hidden" value="<%= closeRedirect %>" />
 	<aui:input name="templateId" type="hidden" value="<%= String.valueOf(templateId) %>" />
-	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 	<aui:input name="status" type="hidden" value="<%= templateVersion.getStatus() %>" />
+	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 
 	<liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
 

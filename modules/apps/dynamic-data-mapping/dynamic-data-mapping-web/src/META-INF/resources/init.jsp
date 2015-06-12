@@ -188,7 +188,7 @@ else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
 <%@ include file="/init-ext.jsp" %>
 
 <%!
-public void _addFormTemplateFieldAttributes(DDMStructure structure, JSONArray jsonArray) throws Exception {
+private void _addFormTemplateFieldAttributes(DDMStructure structure, JSONArray jsonArray) throws Exception {
 	for (int i = 0; i < jsonArray.length(); i++) {
 		JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -203,7 +203,7 @@ public void _addFormTemplateFieldAttributes(DDMStructure structure, JSONArray js
 	}
 }
 
-public JSONArray _getFieldReadOnlyAttributes(DDMStructure structure, String fieldName) throws Exception {
+private JSONArray _getFieldReadOnlyAttributes(DDMStructure structure, String fieldName) throws Exception {
 	JSONArray readOnlyAttributesJSONArray = JSONFactoryUtil.createJSONArray();
 
 	readOnlyAttributesJSONArray.put("indexType");
@@ -220,7 +220,7 @@ public JSONArray _getFieldReadOnlyAttributes(DDMStructure structure, String fiel
 	return readOnlyAttributesJSONArray;
 }
 
-public JSONArray _getFormTemplateFieldsJSONArray(DDMStructure structure, String script) throws Exception {
+private JSONArray _getFormTemplateFieldsJSONArray(DDMStructure structure, String script) throws Exception {
 	JSONArray jsonArray = DDMUtil.getDDMFormFieldsJSONArray(structure, script);
 
 	_addFormTemplateFieldAttributes(structure, jsonArray);

@@ -29,7 +29,7 @@ DDMTemplateVersion templateVersion = (DDMTemplateVersion)row.getObject();
 		<portlet:param name="mvcPath" value="/view_template_version.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="templateVersionId" value="<%= String.valueOf(templateVersion.getTemplateVersionId()) %>" />
-		<portlet:param name="formBuilderReadOnly" value="<%= String.valueOf(Boolean.TRUE) %>" />
+		<portlet:param name="formBuilderReadOnly" value="<%= Boolean.TRUE.toString() %>" />
 	</liferay-portlet:renderURL>
 
 	<liferay-ui:icon

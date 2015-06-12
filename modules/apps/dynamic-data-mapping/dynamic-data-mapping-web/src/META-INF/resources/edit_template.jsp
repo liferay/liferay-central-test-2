@@ -28,12 +28,6 @@ String portletResourceNamespace = ParamUtil.getString(request, "portletResourceN
 
 DDMTemplate template = (DDMTemplate)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_TEMPLATE);
 
-DDMTemplateVersion templateVersion = null;
-
-if (template != null) {
-	templateVersion = template.getTemplateVersion();
-}
-
 long templateId = BeanParamUtil.getLong(template, request, "templateId");
 
 long groupId = BeanParamUtil.getLong(template, request, "groupId", scopeGroupId);
@@ -68,6 +62,12 @@ if (Validator.isNull(script) && type.equals(DDMTemplateConstants.TEMPLATE_TYPE_D
 	else {
 		script = ContentUtil.get(PropsUtil.get(PropsKeys.DYNAMIC_DATA_MAPPING_TEMPLATE_LANGUAGE_CONTENT, new Filter(language)));
 	}
+}
+
+DDMTemplateVersion templateVersion = null;
+
+if (template != null) {
+	templateVersion = template.getTemplateVersion();
 }
 
 String structureAvailableFields = ParamUtil.getString(request, "structureAvailableFields");
