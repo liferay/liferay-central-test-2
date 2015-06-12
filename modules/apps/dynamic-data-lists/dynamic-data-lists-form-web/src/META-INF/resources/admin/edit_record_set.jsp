@@ -21,8 +21,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 DDLRecordSet recordSet = ddlFormAdminDisplayContext.getRecordSet();
 
-long groupId = BeanParamUtil.getLong(recordSet, request, "groupId", scopeGroupId);
 long recordSetId = BeanParamUtil.getLong(recordSet, request, "recordSetId");
+long groupId = BeanParamUtil.getLong(recordSet, request, "groupId", scopeGroupId);
 long ddmStructureId = BeanParamUtil.getLong(recordSet, request, "DDMStructureId");
 String name = BeanParamUtil.getString(recordSet, request, "name");
 String description = BeanParamUtil.getString(recordSet, request, "description");
@@ -38,8 +38,8 @@ String description = BeanParamUtil.getString(recordSet, request, "description");
 
 <aui:form action="<%= (recordSet == null) ? addRecordSetURL : updateRecordSetURL %>" cssClass="ddl-form-builder-form" method="post" name="editForm">
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="ddmStructureId" type="hidden" value="<%= ddmStructureId %>" />
 
 	<liferay-ui:error exception="<%= RecordSetNameException.class %>" message="please-enter-a-valid-form-name" />
@@ -48,13 +48,17 @@ String description = BeanParamUtil.getString(recordSet, request, "description");
 
 	<aui:fieldset cssClass="ddl-form-builder-basic-info">
 		<div class="ddl-form-builder-name">
-			<h2><liferay-ui:input-editor contents="<%= LocalizationUtil.getLocalization(name, themeDisplay.getLanguageId()) %>" editorName="alloyeditor" name="nameEditor" placeholder="name" showSource="<%= false %>" /></h2>
+			<h2>
+				<liferay-ui:input-editor contents="<%= LocalizationUtil.getLocalization(name, themeDisplay.getLanguageId()) %>" editorName="alloyeditor" name="nameEditor" placeholder="name" showSource="<%= false %>" />
+			</h2>
 		</div>
 
 		<aui:input name="name" type="hidden" />
 
 		<div class="ddl-form-builder-description">
-			<h4><liferay-ui:input-editor contents="<%= LocalizationUtil.getLocalization(description, themeDisplay.getLanguageId()) %>" editorName="alloyeditor" name="descriptionEditor" placeholder="description" showSource="<%= false %>" /></h4>
+			<h4>
+				<liferay-ui:input-editor contents="<%= LocalizationUtil.getLocalization(description, themeDisplay.getLanguageId()) %>" editorName="alloyeditor" name="descriptionEditor" placeholder="description" showSource="<%= false %>" />
+			</h4>
 		</div>
 
 		<aui:input name="description" type="hidden" />

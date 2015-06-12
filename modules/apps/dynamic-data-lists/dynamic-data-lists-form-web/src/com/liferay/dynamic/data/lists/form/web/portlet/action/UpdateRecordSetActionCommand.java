@@ -164,6 +164,7 @@ public class UpdateRecordSetActionCommand
 			WebKeys.THEME_DISPLAY);
 
 		long recordSetId = ParamUtil.getLong(portletRequest, "recordSetId");
+
 		String name = ParamUtil.getString(portletRequest, "name");
 		String description = ParamUtil.getString(portletRequest, "description");
 

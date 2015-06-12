@@ -50,13 +50,13 @@ page import="javax.portlet.WindowState" %>
 <portlet:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
 
 DDLFormAdminDisplayContext ddlFormAdminDisplayContext = new DDLFormAdminDisplayContext(renderRequest, renderResponse);
-
-WindowState windowState = liferayPortletRequest.getWindowState();
 %>
 
 <%@ include file="/admin/init-ext.jsp" %>

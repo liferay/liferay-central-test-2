@@ -53,11 +53,11 @@ public class DDLFormAdminDisplayContext {
 	public DDLFormAdminDisplayContext(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		_ddlFormAdminRequestHelper = new DDLFormAdminRequestHelper(
-			renderRequest);
-
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
+
+		_ddlFormAdminRequestHelper = new DDLFormAdminRequestHelper(
+			renderRequest);
 	}
 
 	public JSONArray getDDMFormFieldTypesJSONArray() throws PortalException {
