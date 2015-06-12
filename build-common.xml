@@ -964,7 +964,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<isset property="database.type" />
 				</and>
 				<then>
-					<for param="results.file">
+					<for param="test.results.file">
 						<path>
 							<fileset dir="test-results/@{test.type}">
 								<include name="TEST-*.xml" />
@@ -972,15 +972,15 @@ Please set the environment variable ANT_OPTS to the recommended value of
 							</fileset>
 						</path>
 						<sequential>
-							<local name="class.name" />
+							<local name="test.results.file.class.name" />
 
-							<basename file="@{results.file}" property="class.name" suffix=".xml" />
+							<basename file="@{test.results.file}" property="test.results.file.class.name" suffix=".xml" />
 
-							<xmltask source="@{results.file}" dest="test-results/@{test.type}/TEST-${class.name}-${database.type}.xml">
-								<replace path="/testsuite/@name" withText="${class.name}-${database.type}" />
+							<xmltask source="@{test.results.file}" dest="test-results/@{test.type}/TEST-${test.results.file.class.name}-${database.type}.xml">
+								<replace path="/testsuite/@name" withText="${test.results.file.class.name}-${database.type}" />
 							</xmltask>
 
-							<delete file="@{results.file}" />
+							<delete file="@{test.results.file}" />
 						</sequential>
 					</for>
 				</then>
