@@ -877,7 +877,7 @@ public class DDMTemplateLocalServiceImpl
 
 		if (!templateVersion.isApproved()) {
 			throw new InvalidTemplateVersionException(
-				"Unable to revert from an unapproved file version");
+				"Unable to revert from an unapproved template version");
 		}
 
 		DDMTemplate template = templateVersion.getTemplate();
