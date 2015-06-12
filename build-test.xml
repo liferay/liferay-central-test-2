@@ -109,6 +109,7 @@
 	<macrodef name="generate-jdbc-properties">
 		<attribute name="properties.file" />
 		<element name="post-action" optional="true" />
+
 		<sequential>
 			<get-database-property property.name="database.driver" />
 			<get-database-property property.name="database.password" />
@@ -128,6 +129,7 @@ jdbc.default.password=${database.password}]]></echo>
 	<macrodef name="database-test-for-each-action">
 		<attribute name="database.test.sequence" />
 		<element name="action" />
+
 		<sequential>
 			<for list="@{database.test.sequence}" param="database.type">
 				<sequential>
@@ -148,6 +150,7 @@ jdbc.default.password=${database.password}]]></echo>
 	<macrodef name="database-test-run-test">
 		<attribute name="database.test.sequence" />
 		<element name="test-action" />
+
 		<sequential>
 			<database-test-for-each-action database.test.sequence="@{database.test.sequence}">
 				<action>
