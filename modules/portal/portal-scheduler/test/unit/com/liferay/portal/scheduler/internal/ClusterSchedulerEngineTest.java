@@ -95,44 +95,19 @@ public class ClusterSchedulerEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_clusterLink = Mockito.mock(ClusterLink.class);
-
-		Mockito.when(
-			_clusterLink.isEnabled()
-		).thenReturn(
-			true
-		);
-
-		setUpPortalUUIDUtil();
-
 		setUpProps();
 
-		setUpSchedulerEngineHelper(setUpJSONFactory());
-
+		setUpClusterLink();
 		setUpClusterSchedulerEngine();
-
-		_componentContext = Mockito.mock(ComponentContext.class);
-
-		BundleContext bundleContext = Mockito.mock(BundleContext.class);
-
-		Mockito.when(
-			_componentContext.getBundleContext()
-		).thenReturn(
-			bundleContext
-		);
-
-		Mockito.when(
-			bundleContext.createFilter(Mockito.anyString())
-		).thenReturn(
-			Mockito.mock(Filter.class)
-		);
+		setUpClusterInvokeAcceptor();
+		setUpComponentContext();
+		setUpPortalUUIDUtil();
+		setUpSchedulerEngineHelper(setUpJSONFactory());
 
 		_schedulerEngineHelperImpl.setSchedulerEngine(_clusterSchedulerEngine);
 
 		_clusterSchedulerEngine.setSchedulerEngineHelper(
 			_schedulerEngineHelperImpl);
-
-		setUpClusterInvokeAcceptor();
 	}
 
 	@Test
@@ -1860,6 +1835,16 @@ public class ClusterSchedulerEngineTest {
 		_clusterInvokeAcceptor = constructor.newInstance();
 	}
 
+	protected void setUpClusterLink() throws Exception {
+		_clusterLink = Mockito.mock(ClusterLink.class);
+
+		Mockito.when(
+			_clusterLink.isEnabled()
+		).thenReturn(
+			true
+		);
+	}
+
 	protected void setUpClusterSchedulerEngine() {
 		_mockSchedulerEngine = new MockSchedulerEngine();
 
@@ -1872,6 +1857,24 @@ public class ClusterSchedulerEngineTest {
 
 		_memoryClusteredJobs = ReflectionTestUtil.getFieldValue(
 			_clusterSchedulerEngine, "_memoryClusteredJobs");
+	}
+
+	protected void setUpComponentContext() throws Exception {
+		_componentContext = Mockito.mock(ComponentContext.class);
+
+		BundleContext bundleContext = Mockito.mock(BundleContext.class);
+
+		Mockito.when(
+			bundleContext.createFilter(Mockito.anyString())
+		).thenReturn(
+			Mockito.mock(Filter.class)
+		);
+
+		Mockito.when(
+			_componentContext.getBundleContext()
+		).thenReturn(
+			bundleContext
+		);
 	}
 
 	protected JSONFactory setUpJSONFactory() {
