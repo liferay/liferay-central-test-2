@@ -47,13 +47,13 @@ public class CSSBuilderTest {
 
 		Path path = Paths.get(url.toURI());
 
-		_DOCROOT_DIR_NAME = path.toString();
+		_docrootDirName = path.toString();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		Files.walkFileTree(
-			Paths.get(_DOCROOT_DIR_NAME + _DIR_NAME + _SASS_CACHE_DIR_NAME),
+			Paths.get(_docrootDirName + "/css/.sass-cache"),
 			new SimpleFileVisitor<Path>() {
 
 				@Override
@@ -82,23 +82,22 @@ public class CSSBuilderTest {
 	@Test
 	public void testSassToCssBuilder() throws Exception {
 		CSSBuilder cssBuilder = new CSSBuilder(
-			_DOCROOT_DIR_NAME, "../../../portal-web/docroot/html/css/common",
+			_docrootDirName, "../../../portal-web/docroot/html/css/common",
 			new String[0], "jni");
 
-		cssBuilder.execute(Arrays.asList(new String[] {_DIR_NAME}));
+		cssBuilder.execute(Arrays.asList(new String[] {"/css"}));
 
 		String expectedCacheContent = _read(
-			_DOCROOT_DIR_NAME + _EXPECTED_DIR_NAME + _FILE_NAME);
+			_docrootDirName + "/expected/test.css");
 		String actualCacheContent = _read(
-			_DOCROOT_DIR_NAME + _DIR_NAME + _SASS_CACHE_DIR_NAME + _FILE_NAME);
+			_docrootDirName + "/css/.sass-cache/test.css");
 
 		Assert.assertEquals(expectedCacheContent, actualCacheContent);
 
 		String expectedRtlCacheContent = _read(
-			_DOCROOT_DIR_NAME + _EXPECTED_DIR_NAME + _RTL_FILE_NAME);
+			_docrootDirName + "/expected/test_rtl.css");
 		String actualRtlCacheContent = _read(
-			_DOCROOT_DIR_NAME + _DIR_NAME + _SASS_CACHE_DIR_NAME +
-				_RTL_FILE_NAME);
+			_docrootDirName + "/css/.sass-cache/test_rtl.css");
 
 		Assert.assertEquals(expectedRtlCacheContent, actualRtlCacheContent);
 	}
@@ -112,16 +111,6 @@ public class CSSBuilderTest {
 			s, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 	}
 
-	private static final String _DIR_NAME = "/css";
-
-	private static String _DOCROOT_DIR_NAME;
-
-	private static final String _EXPECTED_DIR_NAME = "/expected";
-
-	private static final String _FILE_NAME = "/test.css";
-
-	private static final String _RTL_FILE_NAME = "/test_rtl.css";
-
-	private static final String _SASS_CACHE_DIR_NAME = "/.sass-cache";
+	private static String _docrootDirName;
 
 }
