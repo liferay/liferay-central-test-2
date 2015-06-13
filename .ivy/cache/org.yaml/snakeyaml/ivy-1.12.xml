@@ -4,7 +4,7 @@
 		module="snakeyaml"
 		revision="1.12"
 		status="release"
-		publication="20130302164606"
+		publication="20130302144606"
 	>
 		<license name="Apache License Version 2.0" url="LICENSE.txt" />
 		<description homepage="http://www.snakeyaml.org">
