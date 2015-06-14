@@ -357,11 +357,10 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
+		long assetCategoryId = ParamUtil.getLong(renderRequest, "categoryId");
+		String assetCategoryName = ParamUtil.getString(renderRequest, "tag");
 
-		String tag = ParamUtil.getString(renderRequest, "tag");
-
-		if ((categoryId > 0) || Validator.isNotNull(tag)) {
+		if ((assetCategoryId > 0) || Validator.isNotNull(assetCategoryName)) {
 			return actionMapping.findForward("portlet.blogs.view");
 		}
 
