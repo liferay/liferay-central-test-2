@@ -26,10 +26,11 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class ServiceContextAdvice extends ChainableMethodAdvice {
 
+	@Override
 	public Object before(MethodInvocation methodInvocation) {
 		Object[] arguments = methodInvocation.getArguments();
 
-		LinkedList<Boolean> stack = _popServiceContext.get();
+		LinkedList<Boolean> linkedList = _popServiceContext.get();
 
 		if (arguments != null) {
 			for (int i = arguments.length - 1; i >= 0; i--) {
@@ -38,13 +39,13 @@ public class ServiceContextAdvice extends ChainableMethodAdvice {
 						(ServiceContext)arguments[i];
 
 					if (serviceContext == null) {
-						stack.push(false);
+						linkedList.push(false);
 					}
 					else {
 						ServiceContextThreadLocal.pushServiceContext(
 							serviceContext);
 
-						stack.push(true);
+						linkedList.push(true);
 					}
 
 					return null;
@@ -52,7 +53,7 @@ public class ServiceContextAdvice extends ChainableMethodAdvice {
 			}
 		}
 
-		stack.push(false);
+		linkedList.push(false);
 
 		serviceBeanAopCacheManager.removeMethodInterceptor(
 			methodInvocation, this);
@@ -60,10 +61,11 @@ public class ServiceContextAdvice extends ChainableMethodAdvice {
 		return null;
 	}
 
+	@Override
 	public void duringFinally(MethodInvocation methodInvocation) {
-		LinkedList<Boolean> stack = _popServiceContext.get();
+		LinkedList<Boolean> linkedList = _popServiceContext.get();
 
-		if (stack.pop()) {
+		if (linkedList.pop()) {
 			ServiceContextThreadLocal.popServiceContext();
 		}
 	}
