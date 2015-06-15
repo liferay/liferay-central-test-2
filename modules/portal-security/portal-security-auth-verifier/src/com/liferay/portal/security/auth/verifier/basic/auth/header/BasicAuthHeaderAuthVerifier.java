@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.auth.verifier.basic.auth.header;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifierResult;
 import com.liferay.portal.kernel.security.auto.login.AutoLoginException;
@@ -106,8 +104,5 @@ public class BasicAuthHeaderAuthVerifier
 
 	private static final String _BASIC_REALM =
 		"Basic realm=\"" + Portal.PORTAL_REALM + "\"";
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		BasicAuthHeaderAuthVerifier.class);
 
 }
