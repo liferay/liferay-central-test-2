@@ -448,15 +448,15 @@ public class FileEntryStagedModelDataHandler
 
 				boolean indexEnabled = serviceContext.isIndexingEnabled();
 
-				boolean updateFileEntry = false;
 				boolean deleteFileEntry = false;
+				boolean updateFileEntry = false;
 
 				if (!Validator.equals(
 						fileVersion.getUuid(),
 						latestExistingFileVersion.getUuid())) {
 
-					updateFileEntry = true;
 					deleteFileEntry = true;
+					updateFileEntry = true;
 				}
 				else {
 					InputStream existingFileVersionInputStream = null;
