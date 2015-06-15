@@ -109,18 +109,41 @@ public class RequestHeaderAutoLogin extends BaseAutoLogin {
 		return credentials;
 	}
 
+	protected RequestHeaderAutoLoginConfiguration
+		getRequestHeaderAutoLoginConfiguration(long companyId) {
+
+		try {
+			RequestHeaderAutoLoginConfiguration
+				requestHeaderAutoLoginConfiguration =
+					_settingsFactory.getSettings(
+						RequestHeaderAutoLoginConfiguration.class,
+						new CompanyServiceSettingsLocator(
+							companyId,
+							RequestHeaderAutoLoginConstants.SERVICE_NAME));
+
+			return requestHeaderAutoLoginConfiguration;
+		}
+		catch (SettingsException se) {
+			_log.error(
+				"Unable to get request header auto login configuration", se);
+		}
+
+		return null;
+	}
+
 	protected boolean isAccessAllowed(
 		long companyId, HttpServletRequest request) {
 
-		RequestHeaderAutoLoginConfiguration configuration = _getConfiguration(
-			companyId);
+		RequestHeaderAutoLoginConfiguration
+			requestHeaderAutoLoginConfiguration =
+				getRequestHeaderAutoLoginConfiguration(companyId);
 
-		if (configuration == null) {
+		if (requestHeaderAutoLoginConfiguration == null) {
 			return false;
 		}
 
 		String[] hostsAllowedArray = StringUtil.split(
-			configuration.authHostsAllowed());
+			requestHeaderAutoLoginConfiguration.authHostsAllowed());
 
 		Set<String> hostsAllowed = new HashSet<>();
 
@@ -132,51 +155,32 @@ public class RequestHeaderAutoLogin extends BaseAutoLogin {
 	}
 
 	protected boolean isEnabled(long companyId) {
-		RequestHeaderAutoLoginConfiguration configuration = _getConfiguration(
-			companyId);
+		RequestHeaderAutoLoginConfiguration
+			requestHeaderAutoLoginConfiguration =
+				getRequestHeaderAutoLoginConfiguration(companyId);
 
-		if (configuration == null) {
+		if (requestHeaderAutoLoginConfiguration == null) {
 			return false;
 		}
 
-		return configuration.enabled();
+		return requestHeaderAutoLoginConfiguration.enabled();
 	}
 
 	protected boolean isLDAPImportEnabled(long companyId) {
-		RequestHeaderAutoLoginConfiguration configuration = _getConfiguration(
-			companyId);
+		RequestHeaderAutoLoginConfiguration
+			requestHeaderAutoLoginConfiguration =
+				getRequestHeaderAutoLoginConfiguration(companyId);
 
-		if (configuration == null) {
+		if (requestHeaderAutoLoginConfiguration == null) {
 			return false;
 		}
 
-		return configuration.importFromLDAP();
+		return requestHeaderAutoLoginConfiguration.importFromLDAP();
 	}
 
 	@Reference
 	protected void setSettingsFactory(SettingsFactory settingsFactory) {
 		_settingsFactory = settingsFactory;
-	}
-
-	private RequestHeaderAutoLoginConfiguration _getConfiguration(
-		long companyId) {
-
-		try {
-			RequestHeaderAutoLoginConfiguration configuration =
-				_settingsFactory.getSettings(
-					RequestHeaderAutoLoginConfiguration.class,
-					new CompanyServiceSettingsLocator(
-						companyId,
-						RequestHeaderAutoLoginConstants.SERVICE_NAME));
-
-			return configuration;
-		}
-		catch (SettingsException se) {
-			_log.error(
-				"Unable to get request header auto login configuration", se);
-		}
-
-		return null;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

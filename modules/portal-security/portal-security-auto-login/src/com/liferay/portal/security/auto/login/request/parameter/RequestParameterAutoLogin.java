@@ -127,34 +127,19 @@ public class RequestParameterAutoLogin extends BaseAutoLogin {
 		return _PASSWORD_PARAM;
 	}
 
-	protected boolean isEnabled(long companyId) {
-		RequestParameterAutoLoginConfiguration configuration =
-			_getConfiguration(companyId);
-
-		if (configuration == null) {
-			return false;
-		}
-
-		return configuration.enabled();
-	}
-
-	@Reference
-	protected void setSettingsFactory(SettingsFactory settingsFactory) {
-		_settingsFactory = settingsFactory;
-	}
-
-	private RequestParameterAutoLoginConfiguration _getConfiguration(
-		long companyId) {
+	protected RequestParameterAutoLoginConfiguration
+		getRequestParameterAutoLoginConfiguration(long companyId) {
 
 		try {
-			RequestParameterAutoLoginConfiguration configuration =
-				_settingsFactory.getSettings(
-					RequestParameterAutoLoginConfiguration.class,
-					new CompanyServiceSettingsLocator(
-						companyId,
-						RequestParameterAutoLoginConstants.SERVICE_NAME));
+			RequestParameterAutoLoginConfiguration
+				requestParameterAutoLoginConfiguration =
+					_settingsFactory.getSettings(
+						RequestParameterAutoLoginConfiguration.class,
+						new CompanyServiceSettingsLocator(
+							companyId,
+							RequestParameterAutoLoginConstants.SERVICE_NAME));
 
-			return configuration;
+			return requestParameterAutoLoginConfiguration;
 		}
 		catch (SettingsException se) {
 			_log.error(
@@ -162,6 +147,23 @@ public class RequestParameterAutoLogin extends BaseAutoLogin {
 		}
 
 		return null;
+	}
+
+	protected boolean isEnabled(long companyId) {
+		RequestParameterAutoLoginConfiguration
+			requestParameterAutoLoginConfiguration =
+				getRequestParameterAutoLoginConfiguration(companyId);
+
+		if (requestParameterAutoLoginConfiguration == null) {
+			return false;
+		}
+
+		return requestParameterAutoLoginConfiguration.enabled();
+	}
+
+	@Reference
+	protected void setSettingsFactory(SettingsFactory settingsFactory) {
+		_settingsFactory = settingsFactory;
 	}
 
 	private static final String _LOGIN_PARAM = "parameterAutoLoginLogin";

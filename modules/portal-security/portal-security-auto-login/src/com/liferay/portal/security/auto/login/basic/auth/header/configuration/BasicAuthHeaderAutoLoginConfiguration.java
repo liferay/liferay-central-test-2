@@ -23,11 +23,7 @@ import aQute.bnd.annotation.metatype.Meta;
 	id = "com.liferay.portal.security.auto.login.basic.auth.header.configuration.BasicAuthHeaderAutoLoginConfiguration"
 )public interface BasicAuthHeaderAutoLoginConfiguration {
 
-	@Meta.AD(
-		deflt = "false",
-		description = "Set this to true to enable BasicAuthHeaderAutoLogin",
-		required = false
-	)
+	@Meta.AD(deflt = "false", required = false)
 	public boolean enabled();
 
 }

@@ -147,23 +147,6 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 		return credentials;
 	}
 
-	protected boolean isEnabled(long companyId) {
-		BasicAuthHeaderAutoLoginConfiguration
-			basicAuthHeaderAutoLoginConfiguration =
-				getBasicAuthHeaderAutoLoginConfiguration(companyId);
-
-		if (basicAuthHeaderAutoLoginConfiguration == null) {
-			return false;
-		}
-
-		return basicAuthHeaderAutoLoginConfiguration.enabled();
-	}
-
-	@Reference
-	protected void setSettingsFactory(SettingsFactory settingsFactory) {
-		_settingsFactory = settingsFactory;
-	}
-
 	protected BasicAuthHeaderAutoLoginConfiguration
 		getBasicAuthHeaderAutoLoginConfiguration(long companyId) {
 
@@ -183,6 +166,23 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 		}
 
 		return null;
+	}
+
+	protected boolean isEnabled(long companyId) {
+		BasicAuthHeaderAutoLoginConfiguration
+			basicAuthHeaderAutoLoginConfiguration =
+				getBasicAuthHeaderAutoLoginConfiguration(companyId);
+
+		if (basicAuthHeaderAutoLoginConfiguration == null) {
+			return false;
+		}
+
+		return basicAuthHeaderAutoLoginConfiguration.enabled();
+	}
+
+	@Reference
+	protected void setSettingsFactory(SettingsFactory settingsFactory) {
+		_settingsFactory = settingsFactory;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

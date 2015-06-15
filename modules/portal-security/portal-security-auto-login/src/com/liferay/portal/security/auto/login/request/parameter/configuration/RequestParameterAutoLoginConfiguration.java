@@ -23,11 +23,7 @@ import aQute.bnd.annotation.metatype.Meta;
 	id = "com.liferay.portal.security.auto.login.request.parameter.configuration.RequestParameterAutoLoginConfiguration"
 )public interface RequestParameterAutoLoginConfiguration {
 
-	@Meta.AD(
-		deflt = "false",
-		description = "Set this to true to enable RequestParameterAutoLogin",
-		required = false
-	)
+	@Meta.AD(deflt = "false", required = false)
 	public boolean enabled();
 
 }
