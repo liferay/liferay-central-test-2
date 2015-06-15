@@ -412,10 +412,11 @@ public class AuthVerifierPipeline {
 
 			if (urlsIncludes.length == 0) {
 				if (_log.isWarnEnabled()) {
+					String authVerifierClassName =
+						authVerifierConfiguration.getAuthVerifierClassName();
+
 					_log.warn(
-						"Auth verifier " +
-							authVerifierConfiguration.
-								getAuthVerifierClassName() +
+						"Auth verifier " + authVerifierClassName +
 							" does not have URLs configured");
 				}
 
