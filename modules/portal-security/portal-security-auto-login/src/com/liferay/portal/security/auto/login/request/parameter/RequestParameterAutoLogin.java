@@ -158,7 +158,7 @@ public class RequestParameterAutoLogin extends BaseAutoLogin {
 		}
 		catch (SettingsException se) {
 			_log.error(
-				"Unable to get RequestParameterAutoLogin configuration", se);
+				"Unable to get request parameter auto login configuration", se);
 		}
 
 		return null;

@@ -173,7 +173,7 @@ public class RequestHeaderAutoLogin extends BaseAutoLogin {
 		}
 		catch (SettingsException se) {
 			_log.error(
-				"Unable to get RequestHeaderAutoLogin configuration", se);
+				"Unable to get request header auto login configuration", se);
 		}
 
 		return null;

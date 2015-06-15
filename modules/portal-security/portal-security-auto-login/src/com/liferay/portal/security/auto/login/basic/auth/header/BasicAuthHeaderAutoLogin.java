@@ -148,14 +148,15 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 	}
 
 	protected boolean isEnabled(long companyId) {
-		BasicAuthHeaderAutoLoginConfiguration configuration = _getConfiguration(
-			companyId);
+		BasicAuthHeaderAutoLoginConfiguration
+			basicAuthHeaderAutoLoginConfiguration =
+				getBasicAuthHeaderAutoLoginConfiguration(companyId);
 
-		if (configuration == null) {
+		if (basicAuthHeaderAutoLoginConfiguration == null) {
 			return false;
 		}
 
-		return configuration.enabled();
+		return basicAuthHeaderAutoLoginConfiguration.enabled();
 	}
 
 	@Reference
@@ -163,22 +164,22 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 		_settingsFactory = settingsFactory;
 	}
 
-	private BasicAuthHeaderAutoLoginConfiguration _getConfiguration(
-		long companyId) {
+	protected BasicAuthHeaderAutoLoginConfiguration
+		getBasicAuthHeaderAutoLoginConfiguration(long companyId) {
 
 		try {
-			BasicAuthHeaderAutoLoginConfiguration configuration =
-				_settingsFactory.getSettings(
-					BasicAuthHeaderAutoLoginConfiguration.class,
-					new CompanyServiceSettingsLocator(
-						companyId,
-						BasicAuthHeaderAutoLoginConstants.SERVICE_NAME));
+			BasicAuthHeaderAutoLoginConfiguration
+				basicAuthHeaderAutoLoginConfiguration =
+					_settingsFactory.getSettings(
+						BasicAuthHeaderAutoLoginConfiguration.class,
+						new CompanyServiceSettingsLocator(
+							companyId,
+							BasicAuthHeaderAutoLoginConstants.SERVICE_NAME));
 
-			return configuration;
+			return basicAuthHeaderAutoLoginConfiguration;
 		}
 		catch (SettingsException se) {
-			_log.error(
-				"Unable to get BasicAuthHeaderAutoLogin configuration", se);
+			_log.error("Unable to get basic auth header configuration", se);
 		}
 
 		return null;
