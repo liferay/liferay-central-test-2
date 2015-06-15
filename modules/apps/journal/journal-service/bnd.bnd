@@ -6,6 +6,7 @@ Export-Package:\
 	com.liferay.journal.lar,\
 	com.liferay.journal.model.impl,\
 	com.liferay.journal.model.listener,\
+	com.liferay.journal.search,\
 	com.liferay.journal.service.model.listener,\
 	com.liferay.journal.trash,\
 	com.liferay.journal.util,\
