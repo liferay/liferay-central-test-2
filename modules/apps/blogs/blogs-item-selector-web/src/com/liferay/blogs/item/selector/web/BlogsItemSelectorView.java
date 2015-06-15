@@ -80,10 +80,10 @@ public class BlogsItemSelectorView
 			PortletURL portletURL, String itemSelectedEventName)
 		throws IOException, ServletException {
 
-		request.setAttribute(ITEM_SELECTED_EVENT_NAME, itemSelectedEventName);
-		request.setAttribute(PORTLET_URL, portletURL);
 		request.setAttribute(
 			BLOGS_ITEM_SELECTOR_CRITERION, blogsItemSelectorCriterion);
+		request.setAttribute(ITEM_SELECTED_EVENT_NAME, itemSelectedEventName);
+		request.setAttribute(PORTLET_URL, portletURL);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 			"/o/blogs-item-selector-web/blogs_attachments.jsp");
