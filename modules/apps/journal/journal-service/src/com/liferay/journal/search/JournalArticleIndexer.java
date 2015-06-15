@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.util;
+package com.liferay.journal.search;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
