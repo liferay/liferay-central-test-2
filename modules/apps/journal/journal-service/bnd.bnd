@@ -10,5 +10,4 @@ Export-Package:\
 	com.liferay.journal.trash,\
 	com.liferay.journal.util,\
 	com.liferay.journal.workflow
-Include-Resource:\
-	classes
+Include-Resource: classes
