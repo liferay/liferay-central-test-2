@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Blogs Item Selector Web
-Bundle-SymbolicName: com.blogs.item.selector.web
+Bundle-SymbolicName: com.liferay.blogs.item.selector.web
 Bundle-Version: 1.0.0
 Import-Package:\
 	com.liferay.blogs.item.selector.criterion,\
