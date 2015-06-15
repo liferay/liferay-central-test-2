@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wiki.indexer;
+package com.liferay.wiki.search;
 
 import com.liferay.portal.kernel.comment.Comment;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;

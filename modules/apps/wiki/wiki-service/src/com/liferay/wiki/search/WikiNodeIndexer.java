@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.bookmarks.indexer;
+package com.liferay.wiki.search;
 
-import com.liferay.bookmarks.model.BookmarksFolder;
-import com.liferay.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.bookmarks.service.permission.BookmarksFolderPermissionChecker;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -26,15 +26,15 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.filter.BooleanFilter;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.wiki.model.WikiNode;
+import com.liferay.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.wiki.service.permission.WikiNodePermissionChecker;
 
 import java.util.Locale;
 
@@ -44,19 +44,19 @@ import javax.portlet.PortletResponse;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Eduardo Garcia
+ * @author Eudaldo Alonso
  */
 @Component(immediate = true, service = Indexer.class)
-public class BookmarksFolderIndexer extends BaseIndexer {
+public class WikiNodeIndexer extends BaseIndexer {
 
-	public static final String CLASS_NAME = BookmarksFolder.class.getName();
+	public static final String CLASS_NAME = WikiNode.class.getName();
 
-	public BookmarksFolderIndexer() {
+	public WikiNodeIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.TITLE, Field.UID);
-		setFilterSearch(true);
-		setPermissionAware(true);
+			Field.UID);
+		setFilterSearch(false);
+		setPermissionAware(false);
 	}
 
 	@Override
@@ -70,129 +70,114 @@ public class BookmarksFolderIndexer extends BaseIndexer {
 			long entryClassPK, String actionId)
 		throws Exception {
 
-		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(
-			entryClassPK);
+		WikiNode node = WikiNodeLocalServiceUtil.getNode(entryClassPK);
 
-		return BookmarksFolderPermissionChecker.contains(
-			permissionChecker, folder, ActionKeys.VIEW);
-	}
-
-	@Override
-	public void postProcessContextBooleanFilter(
-			BooleanFilter contextBooleanFilter, SearchContext searchContext)
-		throws Exception {
-
-		addStatus(contextBooleanFilter, searchContext);
+		return WikiNodePermissionChecker.contains(
+			permissionChecker, node, ActionKeys.VIEW);
 	}
 
 	@Override
 	protected void doDelete(Object obj) throws Exception {
-		BookmarksFolder folder = (BookmarksFolder)obj;
+		WikiNode node = (WikiNode)obj;
 
 		Document document = new DocumentImpl();
 
-		document.addUID(CLASS_NAME, folder.getFolderId(), folder.getName());
+		document.addUID(CLASS_NAME, node.getNodeId(), node.getName());
 
 		SearchEngineUtil.deleteDocument(
-			getSearchEngineId(), folder.getCompanyId(), document.get(Field.UID),
+			getSearchEngineId(), node.getCompanyId(), document.get(Field.UID),
 			isCommitImmediately());
 	}
 
 	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
-		BookmarksFolder folder = (BookmarksFolder)obj;
+		WikiNode node = (WikiNode)obj;
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing folder " + folder);
-		}
+		Document document = getBaseModelDocument(CLASS_NAME, node);
 
-		Document document = getBaseModelDocument(CLASS_NAME, folder);
+		document.addUID(CLASS_NAME, node.getNodeId(), node.getName());
 
-		document.addText(Field.DESCRIPTION, folder.getDescription());
-		document.addKeyword(Field.FOLDER_ID, folder.getParentFolderId());
-		document.addText(Field.TITLE, folder.getName());
-		document.addKeyword(
-			Field.TREE_PATH,
-			StringUtil.split(folder.getTreePath(), CharPool.SLASH));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + folder + " indexed successfully");
-		}
+		document.addText(Field.DESCRIPTION, node.getDescription());
+		document.addText(Field.TITLE, node.getName());
 
 		return document;
 	}
 
 	@Override
 	protected Summary doGetSummary(
-		Document document, Locale locale, String snippet,
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+			Document document, Locale locale, String snippet,
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws Exception {
 
-		Summary summary = createSummary(
-			document, Field.TITLE, Field.DESCRIPTION);
-
-		summary.setMaxContentLength(200);
-
-		return summary;
+		return null;
 	}
 
 	@Override
 	protected void doReindex(Object obj) throws Exception {
-		BookmarksFolder folder = (BookmarksFolder)obj;
+		WikiNode node = (WikiNode)obj;
 
-		Document document = getDocument(folder);
+		Document document = getDocument(obj);
 
-		if (!folder.isApproved() && !folder.isInTrash()) {
+		if (!node.isInTrash()) {
+			SearchEngineUtil.deleteDocument(
+				getSearchEngineId(), node.getCompanyId(),
+				document.get(Field.UID), isCommitImmediately());
+
 			return;
 		}
 
-		if (document != null) {
-			SearchEngineUtil.updateDocument(
-				getSearchEngineId(), folder.getCompanyId(), document,
-				isCommitImmediately());
-		}
-
 		SearchEngineUtil.updateDocument(
-			getSearchEngineId(), folder.getCompanyId(), document,
+			getSearchEngineId(), node.getCompanyId(), document,
 			isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(
-			classPK);
+		WikiNode node = WikiNodeLocalServiceUtil.getNode(classPK);
 
-		doReindex(folder);
+		doReindex(node);
 	}
 
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexFolders(companyId);
+		reindexEntries(companyId);
 	}
 
-	protected void reindexFolders(long companyId) throws PortalException {
+	protected void reindexEntries(long companyId) throws PortalException {
 		final ActionableDynamicQuery actionableDynamicQuery =
-			BookmarksFolderLocalServiceUtil.getActionableDynamicQuery();
+			WikiNodeLocalServiceUtil.getActionableDynamicQuery();
 
+		actionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					Property property = PropertyFactoryUtil.forName("status");
+
+					dynamicQuery.add(
+						property.eq(WorkflowConstants.STATUS_IN_TRASH));
+				}
+
+			});
 		actionableDynamicQuery.setCompanyId(companyId);
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
 				@Override
 				public void performAction(Object object) {
-					BookmarksFolder folder = (BookmarksFolder)object;
+					WikiNode node = (WikiNode)object;
 
 					try {
-						Document document = getDocument(folder);
+						Document document = getDocument(node);
 
 						actionableDynamicQuery.addDocument(document);
 					}
 					catch (PortalException pe) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Unable to index bookmarks folder " +
-									folder.getFolderId(),
+								"Unable to index wiki node " + node.getNodeId(),
 								pe);
 						}
 					}
@@ -205,6 +190,6 @@ public class BookmarksFolderIndexer extends BaseIndexer {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		BookmarksFolderIndexer.class);
+		WikiNodeIndexer.class);
 
 }
