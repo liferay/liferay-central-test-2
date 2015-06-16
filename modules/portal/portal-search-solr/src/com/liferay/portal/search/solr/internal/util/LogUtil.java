@@ -17,8 +17,6 @@ package com.liferay.portal.search.solr.internal.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.util.StringBundler;
 
-import java.io.IOException;
-
 import org.apache.solr.client.solrj.response.SolrResponseBase;
 
 /**
@@ -27,8 +25,7 @@ import org.apache.solr.client.solrj.response.SolrResponseBase;
 public class LogUtil {
 
 	public static void logSolrResponseBase(
-			Log log, SolrResponseBase solrResponseBase)
-		throws IOException {
+		Log log, SolrResponseBase solrResponseBase) {
 
 		if (log.isInfoEnabled()) {
 			return;
