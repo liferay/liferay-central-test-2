@@ -149,6 +149,7 @@ public class SolrIndexSearcher extends BaseIndexSearcher {
 		}
 	}
 
+	@Override
 	public long searchCount(SearchContext searchContext, Query query)
 		throws SearchException {
 

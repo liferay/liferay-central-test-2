@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.search.BaseSearchEngine;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.StringPool;
@@ -49,9 +48,7 @@ import org.osgi.service.component.annotations.Reference;
 public class SolrSearchEngine extends BaseSearchEngine {
 
 	@Override
-	public synchronized String backup(long companyId, String backupName)
-		throws SearchException {
-
+	public synchronized String backup(long companyId, String backupName) {
 		return StringPool.BLANK;
 	}
 
@@ -61,8 +58,7 @@ public class SolrSearchEngine extends BaseSearchEngine {
 	}
 
 	@Override
-	public synchronized void removeBackup(long companyId, String backupName)
-		throws SearchException {
+	public synchronized void removeBackup(long companyId, String backupName) {
 	}
 
 	@Override
@@ -71,8 +67,7 @@ public class SolrSearchEngine extends BaseSearchEngine {
 	}
 
 	@Override
-	public synchronized void restore(long companyId, String backupName)
-		throws SearchException {
+	public synchronized void restore(long companyId, String backupName) {
 	}
 
 	@Override
