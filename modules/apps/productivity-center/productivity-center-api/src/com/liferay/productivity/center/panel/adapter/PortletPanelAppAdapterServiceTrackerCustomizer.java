@@ -31,12 +31,8 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 /**
  * @author Adolfo Pérez
  */
-class PortletPanelAppAdapterServiceTrackerCustomizer
+public class PortletPanelAppAdapterServiceTrackerCustomizer
 	implements ServiceTrackerCustomizer<Portlet, PanelApp> {
-
-	private final
-		Map<ServiceReference<Portlet>, ServiceRegistration<PanelApp>>
-			_serviceRegistrations;
 
 	public PortletPanelAppAdapterServiceTrackerCustomizer(
 		BundleContext bundleContext,
@@ -85,29 +81,12 @@ class PortletPanelAppAdapterServiceTrackerCustomizer
 		return portletPanelAppAdapter;
 	}
 
-	protected Integer getServiceRanking(
-		ServiceReference<Portlet> serviceReference) {
-
-		String controlPanelEntryWeight = (String)serviceReference.getProperty(
-			"com.liferay.portlet.control-panel-entry-weight");
-
-		if (Validator.isNotNull(controlPanelEntryWeight)) {
-			try {
-				return (int)Math.ceil(
-					Double.parseDouble(controlPanelEntryWeight) * 100);
-			}
-			catch (NumberFormatException e) {
-			}
-		}
-
-		return null;
-	}
-
 	@Override
 	public void modifiedService(
 		ServiceReference<Portlet> serviceReference, PanelApp panelApp) {
 
 		removedService(serviceReference, panelApp);
+
 		addingService(serviceReference);
 	}
 
@@ -121,6 +100,26 @@ class PortletPanelAppAdapterServiceTrackerCustomizer
 		serviceRegistration.unregister();
 	}
 
+	protected Integer getServiceRanking(
+		ServiceReference<Portlet> serviceReference) {
+
+		String controlPanelEntryWeight = (String)serviceReference.getProperty(
+			"com.liferay.portlet.control-panel-entry-weight");
+
+		if (Validator.isNotNull(controlPanelEntryWeight)) {
+			try {
+				return (int)Math.ceil(
+					Double.parseDouble(controlPanelEntryWeight) * 100);
+			}
+			catch (NumberFormatException nfe) {
+			}
+		}
+
+		return null;
+	}
+
 	private final BundleContext _bundleContext;
+	private final Map<ServiceReference<Portlet>, ServiceRegistration<PanelApp>>
+		_serviceRegistrations;
 
 }
