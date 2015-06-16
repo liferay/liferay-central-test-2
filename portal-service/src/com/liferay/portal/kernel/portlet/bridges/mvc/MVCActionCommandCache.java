@@ -66,8 +66,9 @@ public class MVCActionCommandCache {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(mvc.command.name=*)(javax.portlet.name=" + portletName +
-				")(objectClass=" + MVCActionCommand.class.getName() + "))");
+			"(&(javax.portlet.name=" + portletName +
+				")(mvc.command.name=*)(objectClass=" +
+					MVCActionCommand.class.getName() + "))");
 
 		_serviceTracker = registry.trackServices(
 			filter, new MVCActionCommandServiceTrackerCustomizer());
