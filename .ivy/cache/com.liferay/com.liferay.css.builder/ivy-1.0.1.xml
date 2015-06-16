@@ -2,9 +2,9 @@
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 	<info organisation="com.liferay"
 		module="com.liferay.css.builder"
-		revision="1.0.0"
+		revision="1.0.1"
 		status="release"
-		publication="20150612201935"
+		publication="20150616102415"
 	>
 		<license name="LGPL 2.1" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" />
 		<description homepage="">
@@ -33,5 +33,6 @@
 		<dependency org="com.liferay" name="com.liferay.sass.compiler.jni" rev="1.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="com.liferay" name="com.liferay.sass.compiler.ruby" rev="1.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.2" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="org.apache.maven" name="maven-plugin-api" rev="3.0.4" force="true" conf="provided->compile(*),provided(*),runtime(*),master(*)"/>
 	</dependencies>
 </ivy-module>
