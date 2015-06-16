@@ -2208,8 +2208,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException {
 
 		if (Validator.isNull(title)) {
-			throw new EntryTitleException(
-				"Blogs entry title must be a non null string");
+			throw new EntryTitleException("Title is null");
 		}
 
 		int titleMaxLength = ModelHintsUtil.getMaxLength(
@@ -2217,13 +2216,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		if (title.length() > titleMaxLength) {
 			throw new EntryTitleException(
-				"Blogs entry title must be a non null string with length " +
-					"smaller or equal than " + titleMaxLength);
+				"Title has more than " + titleMaxLength + " characters");
 		}
 
 		if (Validator.isNull(content)) {
-			throw new EntryContentException(
-				"Blogs entry content must be a non null string");
+			throw new EntryContentException("Content is null");
 		}
 
 		int contentMaxLength = ModelHintsUtil.getMaxLength(
@@ -2231,8 +2228,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		if (content.length() > contentMaxLength) {
 			throw new EntryContentException(
-				"Blogs entry content must be a non null string with length " +
-					"smaller or equal than " + contentMaxLength);
+				"Content has more than " + contentMaxLength + " characters");
 		}
 	}
 
