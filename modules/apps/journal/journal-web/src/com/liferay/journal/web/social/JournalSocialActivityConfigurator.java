@@ -31,12 +31,14 @@ public class JournalSocialActivityConfigurator {
 
 	@Activate
 	protected void activate() throws Exception {
+		Class<?> clazz = getClass();
+
 		String xml = new String(
 			FileUtil.getBytes(
 				getClass(), "/META-INF/social/liferay-social.xml"));
 
 		SocialConfigurationUtil.read(
-			getClass().getClassLoader(), new String[] {xml});
+			clazz.getClassLoader(), new String[] {xml});
 	}
 
 	@Reference(target = "(original.bean=*)", unbind = "-")
