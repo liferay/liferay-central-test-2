@@ -14,6 +14,7 @@
 
 package com.liferay.productivity.center.panel.adapter;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.productivity.center.panel.PanelApp;
@@ -107,12 +108,8 @@ public class PortletPanelAppAdapterServiceTrackerCustomizer
 			"com.liferay.portlet.control-panel-entry-weight");
 
 		if (Validator.isNotNull(controlPanelEntryWeight)) {
-			try {
-				return (int)Math.ceil(
-					Double.parseDouble(controlPanelEntryWeight) * 100);
-			}
-			catch (NumberFormatException nfe) {
-			}
+			return (int)Math.ceil(
+				GetterUtil.getDouble(controlPanelEntryWeight) * 100);
 		}
 
 		return null;
