@@ -139,8 +139,8 @@ public final class PoshiRunnerStackTraceUtil {
 			printStackTrace();
 
 			throw new Exception(
-				"Missing (function|macro|macro-desktop|macro-mobile|" +
-					"test-case) attribute");
+				"Missing (function|macro|macro-desktop|macro-mobile" +
+					"|test-case) attribute");
 		}
 
 		_pushFilePath(classCommandName, classType);
