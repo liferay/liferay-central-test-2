@@ -84,14 +84,20 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 	}
 
 	public SyncFile fetchByC_S(String checksum, int state) throws SQLException {
-		Map<String, Object> fieldValues = new HashMap<>();
+		QueryBuilder<SyncFile, Long> queryBuilder = queryBuilder();
 
-		fieldValues.put("checksum", checksum);
-		fieldValues.put("state", state);
+		queryBuilder.limit(1L);
 
-		List<SyncFile> syncFiles = queryForFieldValues(fieldValues);
+		Where<SyncFile, Long> where = queryBuilder.where();
 
-		if ((syncFiles == null) || syncFiles.isEmpty()) {
+		where.eq("checksum", checksum);
+		where.eq("state", state);
+
+		where.and(2);
+
+		List<SyncFile> syncFiles = where.query();
+
+		if (syncFiles.isEmpty()) {
 			return null;
 		}
 
