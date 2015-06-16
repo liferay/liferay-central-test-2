@@ -104,7 +104,7 @@ public class CopyStructureMVCActionCommand extends DDMBaseMVCActionCommand {
 	}
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

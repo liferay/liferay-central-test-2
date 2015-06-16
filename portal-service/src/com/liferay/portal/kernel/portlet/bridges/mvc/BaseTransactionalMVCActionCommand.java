@@ -32,7 +32,7 @@ public abstract class BaseTransactionalMVCActionCommand
 	implements MVCActionCommand {
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 			final PortletRequest portletRequest,
 			final PortletResponse portletResponse)
 		throws PortletException {

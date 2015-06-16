@@ -44,7 +44,7 @@ public class MVCActionCommandCache {
 	public static final MVCActionCommand EMPTY = new MVCActionCommand() {
 
 		@Override
-		public boolean processCommand(
+		public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse) {
 
 			return false;

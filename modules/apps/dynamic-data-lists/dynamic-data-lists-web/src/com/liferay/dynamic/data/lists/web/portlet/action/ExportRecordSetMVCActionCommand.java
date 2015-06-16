@@ -53,7 +53,7 @@ import org.osgi.service.component.annotations.Reference;
 public class ExportRecordSetMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

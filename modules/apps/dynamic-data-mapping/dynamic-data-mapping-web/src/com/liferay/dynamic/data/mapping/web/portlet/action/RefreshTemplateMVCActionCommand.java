@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Component;
 public class RefreshTemplateMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

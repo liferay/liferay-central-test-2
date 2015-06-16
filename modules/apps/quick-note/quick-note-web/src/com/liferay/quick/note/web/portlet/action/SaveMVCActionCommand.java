@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Component;
 public class SaveMVCActionCommand implements MVCActionCommand {
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException {
 

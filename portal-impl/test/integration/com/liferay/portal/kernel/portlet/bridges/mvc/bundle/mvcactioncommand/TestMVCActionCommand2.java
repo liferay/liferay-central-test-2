@@ -41,7 +41,7 @@ public class TestMVCActionCommand2 implements MVCActionCommand {
 		"TEST_MVC_ACTION_COMMAND_NAME";
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		portletRequest.setAttribute(

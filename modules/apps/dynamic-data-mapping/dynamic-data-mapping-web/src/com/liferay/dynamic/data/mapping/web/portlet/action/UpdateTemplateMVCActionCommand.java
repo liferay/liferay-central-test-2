@@ -53,7 +53,7 @@ public class UpdateTemplateMVCActionCommand
 	extends AddTemplateMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

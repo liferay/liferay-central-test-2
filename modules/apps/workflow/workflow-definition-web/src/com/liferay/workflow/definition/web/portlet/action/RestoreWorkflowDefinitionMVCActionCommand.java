@@ -42,7 +42,7 @@ public class RestoreWorkflowDefinitionMVCActionCommand
 	extends BaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

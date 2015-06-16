@@ -78,7 +78,7 @@ public class DeleteWorkflowInstanceMVCActionCommand
 	}
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

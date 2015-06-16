@@ -23,7 +23,7 @@ import javax.portlet.PortletResponse;
  */
 public interface MVCActionCommand {
 
-	public boolean processCommand(
+	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException;
 

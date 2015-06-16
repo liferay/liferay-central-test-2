@@ -73,13 +73,14 @@ public class MVCActionCommandTest {
 	}
 
 	@Test
-	public void testProcessActionMultipleMVCActionCommands() throws Exception {
+	public void testMultipleMVCActionCommands() throws Exception {
 		MockActionRequest mockActionRequest = new MockActionRequest();
 
 		mockActionRequest.addParameter(
 			ActionRequest.ACTION_NAME,
-			TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_NAME + StringPool.COMMA +
-				TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_NAME);
+			TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_NAME +
+				StringPool.COMMA +
+					TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_NAME);
 
 		_genericPortlet.processAction(
 			mockActionRequest, new MockActionResponse());
@@ -101,7 +102,7 @@ public class MVCActionCommandTest {
 	}
 
 	@Test
-	public void testProcessActionOneMVCActionCommand() throws Exception {
+	public void testSingleMVCActionCommand() throws Exception {
 		MockActionRequest mockActionRequest = new MockActionRequest();
 
 		mockActionRequest.addParameter(

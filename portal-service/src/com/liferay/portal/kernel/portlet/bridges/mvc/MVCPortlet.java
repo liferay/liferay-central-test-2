@@ -274,7 +274,7 @@ public class MVCPortlet extends LiferayPortlet {
 				_mvcActionCommandCache.getMVCActionCommand(actionName);
 
 			if (mvcActionCommand != MVCActionCommandCache.EMPTY) {
-				return mvcActionCommand.processCommand(
+				return mvcActionCommand.processAction(
 					actionRequest, actionResponse);
 			}
 		}
@@ -284,7 +284,7 @@ public class MVCPortlet extends LiferayPortlet {
 
 			if (!mvcActionCommands.isEmpty()) {
 				for (MVCActionCommand mvcActionCommand : mvcActionCommands) {
-					if (!mvcActionCommand.processCommand(
+					if (!mvcActionCommand.processAction(
 							actionRequest, actionResponse)) {
 
 						return false;
@@ -318,7 +318,7 @@ public class MVCPortlet extends LiferayPortlet {
 				_mvcActionCommandCache.getMVCActionCommand(actionName);
 
 			if (mvcActionCommand != MVCActionCommandCache.EMPTY) {
-				return mvcActionCommand.processCommand(
+				return mvcActionCommand.processAction(
 					resourceRequest, resourceResponse);
 			}
 		}
@@ -328,7 +328,7 @@ public class MVCPortlet extends LiferayPortlet {
 
 			if (!mvcActionCommands.isEmpty()) {
 				for (MVCActionCommand mvcActionCommand : mvcActionCommands) {
-					if (!mvcActionCommand.processCommand(
+					if (!mvcActionCommand.processAction(
 							resourceRequest, resourceResponse)) {
 
 						return false;

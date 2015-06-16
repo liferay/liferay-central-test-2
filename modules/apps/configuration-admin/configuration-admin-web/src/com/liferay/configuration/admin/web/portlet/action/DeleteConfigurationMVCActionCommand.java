@@ -50,7 +50,7 @@ import org.osgi.service.metatype.MetaTypeService;
 public class DeleteConfigurationMVCActionCommand implements MVCActionCommand {
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException {
 

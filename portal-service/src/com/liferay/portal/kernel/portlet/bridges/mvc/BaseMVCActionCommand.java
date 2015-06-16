@@ -26,12 +26,12 @@ import javax.portlet.PortletResponse;
 public abstract class BaseMVCActionCommand implements MVCActionCommand {
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException {
 
 		try {
-			doProcessCommand(portletRequest, portletResponse);
+			doProcessAction(portletRequest, portletResponse);
 
 			return SessionErrors.isEmpty(portletRequest);
 		}
@@ -43,7 +43,7 @@ public abstract class BaseMVCActionCommand implements MVCActionCommand {
 		}
 	}
 
-	protected abstract void doProcessCommand(
+	protected abstract void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception;
 

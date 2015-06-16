@@ -65,7 +65,7 @@ import org.osgi.service.metatype.MetaTypeService;
 public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException {
 

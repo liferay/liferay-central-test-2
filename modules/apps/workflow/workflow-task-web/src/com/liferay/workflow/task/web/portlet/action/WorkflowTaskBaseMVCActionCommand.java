@@ -34,12 +34,12 @@ public abstract class WorkflowTaskBaseMVCActionCommand
 	implements MVCActionCommand {
 
 	@Override
-	public boolean processCommand(
+	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException {
 
 		try {
-			doProcessCommand(portletRequest, portletResponse);
+			doProcessAction(portletRequest, portletResponse);
 
 			setRedirectAttribute(portletRequest);
 
@@ -53,7 +53,7 @@ public abstract class WorkflowTaskBaseMVCActionCommand
 		}
 	}
 
-	protected abstract void doProcessCommand(
+	protected abstract void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception;
 

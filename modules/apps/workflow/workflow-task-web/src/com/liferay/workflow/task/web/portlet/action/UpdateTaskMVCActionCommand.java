@@ -46,7 +46,7 @@ public class UpdateTaskMVCActionCommand
 	extends WorkflowTaskBaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

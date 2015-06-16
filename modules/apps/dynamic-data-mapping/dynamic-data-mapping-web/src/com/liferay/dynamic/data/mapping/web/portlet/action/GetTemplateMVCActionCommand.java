@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 public class GetTemplateMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 public class DeleteStructureMVCActionCommand extends DDMBaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 

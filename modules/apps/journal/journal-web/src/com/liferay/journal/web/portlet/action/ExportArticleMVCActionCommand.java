@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Component;
 public class ExportArticleMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
-	protected void doProcessCommand(
+	protected void doProcessAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
