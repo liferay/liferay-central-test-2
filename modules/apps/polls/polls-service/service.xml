@@ -73,8 +73,8 @@
 		<column name="title" type="String" localized="true" />
 		<column name="description" type="String" localized="true" />
 		<column name="expirationDate" type="Date" />
-		<column name="lastVoteDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="lastVoteDate" type="Date" />
 
 		<!-- Order -->
 
@@ -118,8 +118,8 @@
 
 		<column name="questionId" type="long" />
 		<column name="choiceId" type="long" />
-		<column name="voteDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="voteDate" type="Date" />
 
 		<!-- Finder methods -->
 
