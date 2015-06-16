@@ -365,7 +365,8 @@ public class SolrQuerySuggester extends BaseQuerySuggester {
 
 	private static final int _MAX_QUERY_RESULTS = 500;
 
-	private static Log _log = LogFactoryUtil.getLog(SolrQuerySuggester.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		SolrQuerySuggester.class);
 
 	private double _distanceThreshold;
 	private NGramQueryBuilder _nGramQueryBuilder;

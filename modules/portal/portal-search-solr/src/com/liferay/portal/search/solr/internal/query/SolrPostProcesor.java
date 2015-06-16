@@ -125,9 +125,9 @@ public class SolrPostProcesor {
 	private int _firstQuoteIndex;
 	private boolean _hasQuestionMark;
 	private int _index;
-	private String _keywords;
-	private String _query;
-	private StringBuilder _sb;
+	private final String _keywords;
+	private final String _query;
+	private final StringBuilder _sb;
 	private int _secondQuoteIndex;
 
 }

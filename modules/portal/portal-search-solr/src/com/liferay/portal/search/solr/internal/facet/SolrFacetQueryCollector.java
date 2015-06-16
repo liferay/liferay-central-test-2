@@ -79,8 +79,8 @@ public class SolrFacetQueryCollector implements FacetCollector {
 		return term.substring(_fieldName.length() + 1);
 	}
 
-	private Map<String, Integer> _counts = new HashMap<>();
-	private String _fieldName;
+	private final Map<String, Integer> _counts = new HashMap<>();
+	private final String _fieldName;
 	private List<TermCollector> _termCollectors;
 
 }

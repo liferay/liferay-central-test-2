@@ -141,7 +141,7 @@ public class HttpSolrServer extends BaseHttpSolrServer {
 		_httpClientFactories.remove(auth);
 	}
 
-	private Map<String, HttpClientFactory> _httpClientFactories =
+	private final Map<String, HttpClientFactory> _httpClientFactories =
 		new HashMap<>();
 	private volatile SolrConfiguration _solrConfiguration;
 

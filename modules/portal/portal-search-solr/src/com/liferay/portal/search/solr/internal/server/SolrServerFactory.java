@@ -136,8 +136,8 @@ public class SolrServerFactory {
 		_solrServerSelector = new LoadBalancedSolrServerSelector();
 	}
 
-	private Map<String, SolrServerWrapper> _deadServers = new HashMap<>();
-	private Map<String, SolrServerWrapper> _liveServers = new HashMap<>();
+	private final Map<String, SolrServerWrapper> _deadServers = new HashMap<>();
+	private final Map<String, SolrServerWrapper> _liveServers = new HashMap<>();
 	private SolrServerSelector _solrServerSelector;
 
 }

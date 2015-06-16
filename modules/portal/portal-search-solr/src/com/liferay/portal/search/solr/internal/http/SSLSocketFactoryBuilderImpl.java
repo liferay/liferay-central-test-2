@@ -135,7 +135,7 @@ public class SSLSocketFactoryBuilderImpl implements SSLSocketFactoryBuilder {
 		_keyStoreLoader = keyStoreLoader;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
+	private static final Log _log = LogFactoryUtil.getLog(
 		SSLSocketFactoryBuilderImpl.class);
 
 	private KeyStoreLoader _keyStoreLoader;

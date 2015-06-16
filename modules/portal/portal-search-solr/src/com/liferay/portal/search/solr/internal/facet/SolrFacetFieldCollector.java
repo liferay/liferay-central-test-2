@@ -86,8 +86,8 @@ public class SolrFacetFieldCollector implements FacetCollector {
 		return _termCollectors;
 	}
 
-	private Map<String, Count> _counts = new LinkedHashMap<>();
-	private String _fieldName;
+	private final Map<String, Count> _counts = new LinkedHashMap<>();
+	private final String _fieldName;
 	private List<TermCollector> _termCollectors;
 
 }

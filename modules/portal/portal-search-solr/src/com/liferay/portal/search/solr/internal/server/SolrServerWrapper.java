@@ -88,9 +88,9 @@ public class SolrServerWrapper {
 		_solrServerFactory = solrServerFactory;
 	}
 
-	private String _id;
-	private AtomicInteger _invocationCount = new AtomicInteger(0);
-	private SolrServer _solrServer;
+	private final String _id;
+	private final AtomicInteger _invocationCount = new AtomicInteger(0);
+	private final SolrServer _solrServer;
 	private SolrServerFactory _solrServerFactory;
 
 }

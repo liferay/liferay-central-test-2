@@ -148,7 +148,7 @@ public abstract class BasePoolingHttpClientFactory
 	protected abstract PoolingClientConnectionManager
 		createPoolingClientConnectionManager() throws Exception;
 
-	private static Log _log = LogFactoryUtil.getLog(
+	private static final Log _log = LogFactoryUtil.getLog(
 		BasePoolingHttpClientFactory.class);
 
 	private Integer _defaultMaxConnectionsPerRoute;

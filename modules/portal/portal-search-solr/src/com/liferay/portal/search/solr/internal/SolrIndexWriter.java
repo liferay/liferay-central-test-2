@@ -201,7 +201,8 @@ public class SolrIndexWriter extends BaseIndexWriter {
 		_solrUpdateDocumentCommand = solrUpdateDocumentCommand;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SolrIndexWriter.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		SolrIndexWriter.class);
 
 	private SolrServer _solrServer;
 	private SolrUpdateDocumentCommand _solrUpdateDocumentCommand;

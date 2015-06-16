@@ -185,7 +185,8 @@ public class BaseHttpSolrServer extends SolrServer {
 		_httpSolrServer = httpSolrServer;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BaseHttpSolrServer.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		BaseHttpSolrServer.class);
 
 	private Boolean _allowCompression;
 	private String _baseURL;
@@ -195,7 +196,7 @@ public class BaseHttpSolrServer extends SolrServer {
 	private Integer _maxRetries;
 	private ResponseParser _responseParser;
 	private Integer _soTimeout;
-	private AtomicBoolean _stopped = new AtomicBoolean(false);
+	private final AtomicBoolean _stopped = new AtomicBoolean(false);
 	private String _url;
 
 }

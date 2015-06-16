@@ -136,6 +136,7 @@ public class KeyStoreLoaderImpl implements KeyStoreLoader {
 		return new FileInputStream(fileName);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(KeyStoreLoaderImpl.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		KeyStoreLoaderImpl.class);
 
 }
