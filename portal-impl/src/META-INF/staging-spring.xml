@@ -8,6 +8,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
+	<bean id="com.liferay.portal.model.adapter.builder.StagedGroupModelAdapterBuilder" class="com.liferay.portal.model.adapter.builder.StagedGroupModelAdapterBuilder" />
+	<bean id="com.liferay.portal.model.adapter.builder.StagedThemeModelAdapterBuilder" class="com.liferay.portal.model.adapter.builder.StagedThemeModelAdapterBuilder" />
+	<bean id="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" />
+	<bean id="com.liferay.portal.service.impl.LayoutSetLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.LayoutSetLocalServiceStagingAdvice" />
+	<bean id="com.liferay.portal.service.impl.PortletPreferencesLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.PortletPreferencesLocalServiceStagingAdvice" />
+	<aop:config proxy-target-class="false">
+		<aop:advisor advice-ref="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" pointcut="bean(com.liferay.portal.service.LayoutLocalService)" />
+		<aop:advisor advice-ref="com.liferay.portal.service.impl.LayoutSetLocalServiceStagingAdvice" pointcut="bean(com.liferay.portal.service.LayoutSetLocalService)" />
+		<aop:advisor advice-ref="com.liferay.portal.service.impl.PortletPreferencesLocalServiceStagingAdvice" pointcut="bean(com.liferay.portal.service.PortletPreferencesLocalService)" />
+	</aop:config>
+	<bean id="com.liferay.portlet.asset.model.adapter.builder.StagedAssetTagModelAdapterBuilder" class="com.liferay.portlet.asset.model.adapter.builder.StagedAssetTagModelAdapterBuilder" />
+	<bean id="com.liferay.portlet.documentlibrary.lar.lifecycle.DLIndexingExportImportLifecycleListener" class="com.liferay.portlet.documentlibrary.lar.lifecycle.DLIndexingExportImportLifecycleListener" />
 	<bean id="com.liferay.portlet.exportimport.lar.ExportImportProcessCallbackRegistryUtil" class="com.liferay.portlet.exportimport.lar.ExportImportProcessCallbackRegistryUtil">
 		<property name="exportImportProcessCallbackRegistry">
 			<bean class="com.liferay.portlet.exportimport.lar.ExportImportProcessCallbackRegistryImpl" />
@@ -53,16 +65,4 @@
 	<bean id="com.liferay.portlet.exportimport.lifecycle.IndexingExportImportLifecycleListener" class="com.liferay.portlet.exportimport.lifecycle.IndexingExportImportLifecycleListener" />
 	<bean id="com.liferay.portlet.exportimport.lifecycle.LoggerExportImportLifecycleListener" class="com.liferay.portlet.exportimport.lifecycle.LoggerExportImportLifecycleListener" />
 	<bean id="com.liferay.portlet.exportimport.lar.ExportImportProcessCallbackLifecycleListener" class="com.liferay.portlet.exportimport.lar.ExportImportProcessCallbackLifecycleListener" />
-	<bean id="com.liferay.portal.model.adapter.builder.StagedGroupModelAdapterBuilder" class="com.liferay.portal.model.adapter.builder.StagedGroupModelAdapterBuilder" />
-	<bean id="com.liferay.portal.model.adapter.builder.StagedThemeModelAdapterBuilder" class="com.liferay.portal.model.adapter.builder.StagedThemeModelAdapterBuilder" />
-	<bean id="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" />
-	<bean id="com.liferay.portal.service.impl.LayoutSetLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.LayoutSetLocalServiceStagingAdvice" />
-	<bean id="com.liferay.portal.service.impl.PortletPreferencesLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.PortletPreferencesLocalServiceStagingAdvice" />
-	<aop:config proxy-target-class="false">
-		<aop:advisor advice-ref="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" pointcut="bean(com.liferay.portal.service.LayoutLocalService)" />
-		<aop:advisor advice-ref="com.liferay.portal.service.impl.LayoutSetLocalServiceStagingAdvice" pointcut="bean(com.liferay.portal.service.LayoutSetLocalService)" />
-		<aop:advisor advice-ref="com.liferay.portal.service.impl.PortletPreferencesLocalServiceStagingAdvice" pointcut="bean(com.liferay.portal.service.PortletPreferencesLocalService)" />
-	</aop:config>
-	<bean id="com.liferay.portlet.asset.model.adapter.builder.StagedAssetTagModelAdapterBuilder" class="com.liferay.portlet.asset.model.adapter.builder.StagedAssetTagModelAdapterBuilder" />
-	<bean id="com.liferay.portlet.documentlibrary.lar.lifecycle.DLIndexingExportImportLifecycleListener" class="com.liferay.portlet.documentlibrary.lar.lifecycle.DLIndexingExportImportLifecycleListener" />
 </beans>
