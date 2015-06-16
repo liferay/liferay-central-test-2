@@ -18,10 +18,9 @@ import com.liferay.portal.kernel.io.Deserializer;
 import com.liferay.portal.kernel.io.Serializer;
 
 import java.net.HttpCookie;
-
 import java.nio.ByteBuffer;
-
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -117,9 +116,10 @@ public class CookieUtil {
 
 		Map<String, HttpCookie> httpCookies = new HashMap<>();
 
-		for (HttpCookie httpCookie : HttpCookie.parse(
-			"Set-Cookie2:" + cookieString)) {
+		List<HttpCookie> httpCookiesList = HttpCookie.parse(
+			"Set-Cookie2:" + cookieString);
 
+		for (HttpCookie httpCookie : httpCookiesList) {
 			httpCookies.put(httpCookie.getName(), httpCookie);
 		}
 
