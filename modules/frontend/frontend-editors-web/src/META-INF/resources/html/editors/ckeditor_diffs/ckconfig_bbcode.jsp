@@ -144,7 +144,7 @@ response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 	config.imagesPath = '<%= HtmlUtil.escapeJS(imagesPath) %>/message_boards/';
 
 	config.lang = {
-		code: '<%= UnicodeLanguageUtil.get(locale,"code") %>'
+		code: '<%= UnicodeLanguageUtil.get(request, "code") %>'
 	};
 
 	config.language = '<%= languageId.replace("iw_", "he_") %>';
