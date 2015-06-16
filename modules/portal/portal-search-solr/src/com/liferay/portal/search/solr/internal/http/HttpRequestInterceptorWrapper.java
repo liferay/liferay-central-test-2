@@ -32,14 +32,14 @@ public class HttpRequestInterceptorWrapper
 		HttpRequestInterceptor httpRequestInterceptor, int sortOrder) {
 
 		_httpRequestInterceptor = httpRequestInterceptor;
-		_SORT_ORDER = sortOrder;
+		_sortOrder = sortOrder;
 	}
 
 	@Override
 	public int compareTo(
 		HttpRequestInterceptorWrapper httpRequestInterceptorWrapper) {
 
-		Integer sortOrder = _SORT_ORDER;
+		Integer sortOrder = _sortOrder;
 
 		return sortOrder.compareTo(
 			httpRequestInterceptorWrapper.getSortOrder());
@@ -55,7 +55,7 @@ public class HttpRequestInterceptorWrapper
 	}
 
 	public int getSortOrder() {
-		return _SORT_ORDER;
+		return _sortOrder;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class HttpRequestInterceptorWrapper
 		_httpRequestInterceptor.process(httpRequest, httpContext);
 	}
 
-	private static final int _SORT_ORDER = 0;
+	private static int _sortOrder = 0;
 
 	private final HttpRequestInterceptor _httpRequestInterceptor;
 
