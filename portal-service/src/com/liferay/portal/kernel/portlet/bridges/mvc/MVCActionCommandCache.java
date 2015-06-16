@@ -98,7 +98,7 @@ public class MVCActionCommandCache {
 			sb.append(_packagePrefix);
 			sb.append(Character.toUpperCase(mvcActionCommandName.charAt(0)));
 			sb.append(mvcActionCommandName.substring(1));
-			sb.append(_ACTION_COMMAND_POSTFIX);
+			sb.append("MVCActionCommand");
 
 			className = sb.toString();
 
@@ -161,8 +161,6 @@ public class MVCActionCommandCache {
 	public boolean isEmpty() {
 		return _mvcActionCommandCache.isEmpty();
 	}
-
-	private static final String _ACTION_COMMAND_POSTFIX = "MVCActionCommand";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		MVCActionCommandCache.class);
