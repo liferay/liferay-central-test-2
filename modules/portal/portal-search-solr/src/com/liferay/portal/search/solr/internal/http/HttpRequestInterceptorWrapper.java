@@ -70,8 +70,7 @@ public class HttpRequestInterceptorWrapper
 		_httpRequestInterceptor.process(httpRequest, httpContext);
 	}
 
-	private static int _sortOrder = 0;
-
 	private final HttpRequestInterceptor _httpRequestInterceptor;
+	private final int _sortOrder;
 
 }
