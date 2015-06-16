@@ -113,7 +113,7 @@ public class BlogsEntryLocalServiceTest {
 	}
 
 	@Test(expected = EntryContentException.class)
-	public void testAddEntryWithVeryLargeContent() throws Exception {
+	public void testAddEntryWithVeryLongContent() throws Exception {
 		int maxLength = ModelHintsUtil.getMaxLength(
 			BlogsEntry.class.getName(), "content");
 
@@ -128,7 +128,7 @@ public class BlogsEntryLocalServiceTest {
 	}
 
 	@Test(expected = EntryTitleException.class)
-	public void testAddEntryWithVeryLargeTitle() throws Exception {
+	public void testAddEntryWithVeryLongTitle() throws Exception {
 		int maxLength = ModelHintsUtil.getMaxLength(
 			BlogsEntry.class.getName(), "title");
 
