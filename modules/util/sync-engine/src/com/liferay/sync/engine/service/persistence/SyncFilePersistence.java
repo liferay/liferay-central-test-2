@@ -95,13 +95,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		where.and(2);
 
-		List<SyncFile> syncFiles = where.query();
-
-		if (syncFiles.isEmpty()) {
-			return null;
-		}
-
-		return syncFiles.get(0);
+		return where.queryForFirst();
 	}
 
 	public List<SyncFile> findByParentFilePathName(String parentFilePathName)
@@ -124,36 +118,34 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 	public SyncFile fetchByFilePathName(String filePathName)
 		throws SQLException {
 
-		Map<String, Object> fieldValues = new HashMap<>();
+		QueryBuilder<SyncFile, Long> queryBuilder = queryBuilder();
 
-		fieldValues.put("filePathName", filePathName);
+		queryBuilder.limit(1L);
 
-		List<SyncFile> syncFiles = queryForFieldValuesArgs(fieldValues);
+		Where<SyncFile, Long> where = queryBuilder.where();
 
-		if (syncFiles.isEmpty()) {
-			return null;
-		}
+		where.eq("filePathName", new SelectArg(filePathName));
 
-		return syncFiles.get(0);
+		return where.queryForFirst();
 	}
 
 	public SyncFile fetchByR_S_T(
 			long repositoryId, long syncAccountId, long typePK)
 		throws SQLException {
 
-		Map<String, Object> fieldValues = new HashMap<>();
+		QueryBuilder<SyncFile, Long> queryBuilder = queryBuilder();
 
-		fieldValues.put("repositoryId", repositoryId);
-		fieldValues.put("syncAccountId", syncAccountId);
-		fieldValues.put("typePK", typePK);
+		queryBuilder.limit(1L);
 
-		List<SyncFile> syncFiles = queryForFieldValues(fieldValues);
+		Where<SyncFile, Long> where = queryBuilder.where();
 
-		if (syncFiles.isEmpty()) {
-			return null;
-		}
+		where.eq("repositoryId", repositoryId);
+		where.eq("syncAccountId", syncAccountId);
+		where.eq("typePK", typePK);
 
-		return syncFiles.get(0);
+		where.and(3);
+
+		return where.queryForFirst();
 	}
 
 	public List<SyncFile> findBySyncAccountId(long syncAccountId)

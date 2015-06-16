@@ -61,6 +61,8 @@ public class SyncWatchEventPersistence
 
 		QueryBuilder<SyncWatchEvent, Long> queryBuilder = queryBuilder();
 
+		queryBuilder.limit(1L);
+
 		Where<SyncWatchEvent, Long> where = queryBuilder.where();
 
 		where.eq("eventType", eventType);
@@ -69,13 +71,7 @@ public class SyncWatchEventPersistence
 
 		where.and(3);
 
-		List<SyncWatchEvent> syncWatchEvents = where.query();
-
-		if (syncWatchEvents.isEmpty()) {
-			return null;
-		}
-
-		return syncWatchEvents.get(0);
+		return where.queryForFirst();
 	}
 
 	public List<SyncWatchEvent> findBySyncAccountId(long syncAccountId)
