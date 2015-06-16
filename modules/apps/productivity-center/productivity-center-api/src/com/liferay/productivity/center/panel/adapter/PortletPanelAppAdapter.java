@@ -47,16 +47,16 @@ public class PortletPanelAppAdapter implements PanelApp {
 
 	@Override
 	public String getLabel(Locale locale) {
+		PortletConfig portletConfig = PortletConfigFactoryUtil.get(
+			getPortletId());
+
+		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+
 		Portlet portlet = getPortlet();
 
 		String key =
 			JavaConstants.JAVAX_PORTLET_TITLE + StringPool.PERIOD +
 				portlet.getPortletName();
-
-		PortletConfig portletConfig = PortletConfigFactoryUtil.get(
-			getPortletId());
-
-		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
 		String value = LanguageUtil.get(resourceBundle, key);
 
