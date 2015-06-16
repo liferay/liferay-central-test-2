@@ -28,24 +28,25 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + TestPortlet.PORTLET_NAME,
-		"mvc.command.name=" + TestMVCActionCommand2.TEST_ACTION_COMMAND_NAME
+		"mvc.command.name=" + TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_NAME
 	},
 	service = MVCActionCommand.class
 )
 public class TestMVCActionCommand2 implements MVCActionCommand {
 
-	public static final String TEST_ACTION_COMMAND_ATTRIBUTE =
-		"TEST_ACTION_COMMAND_ATTRIBUTE";
+	public static final String TEST_MVC_ACTION_COMMAND_ATTRIBUTE =
+		"TEST_MVC_ACTION_COMMAND_ATTRIBUTE";
 
-	public static final String TEST_ACTION_COMMAND_NAME =
-		"TEST_ACTION_COMMAND_NAME";
+	public static final String TEST_MVC_ACTION_COMMAND_NAME =
+		"TEST_MVC_ACTION_COMMAND_NAME";
 
 	@Override
 	public boolean processCommand(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		portletRequest.setAttribute(
-			TEST_ACTION_COMMAND_ATTRIBUTE, TEST_ACTION_COMMAND_ATTRIBUTE);
+			TEST_MVC_ACTION_COMMAND_ATTRIBUTE,
+			TEST_MVC_ACTION_COMMAND_ATTRIBUTE);
 
 		return true;
 	}

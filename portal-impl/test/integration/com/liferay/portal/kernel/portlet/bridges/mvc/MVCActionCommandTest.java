@@ -78,26 +78,26 @@ public class MVCActionCommandTest {
 
 		mockActionRequest.addParameter(
 			ActionRequest.ACTION_NAME,
-			TestMVCActionCommand1.TEST_ACTION_COMMAND_NAME + StringPool.COMMA +
-				TestMVCActionCommand2.TEST_ACTION_COMMAND_NAME);
+			TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_NAME + StringPool.COMMA +
+				TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_NAME);
 
 		_genericPortlet.processAction(
 			mockActionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
 			mockActionRequest.getAttribute(
-				TestMVCActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
-			TestMVCActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
+			TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_ATTRIBUTE,
 			mockActionRequest.getAttribute(
-				TestMVCActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertNotNull(
 			mockActionRequest.getAttribute(
-				TestMVCActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
-			TestMVCActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE,
+			TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_ATTRIBUTE,
 			mockActionRequest.getAttribute(
-				TestMVCActionCommand2.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestMVCActionCommand2.TEST_MVC_ACTION_COMMAND_ATTRIBUTE));
 	}
 
 	@Test
@@ -106,18 +106,18 @@ public class MVCActionCommandTest {
 
 		mockActionRequest.addParameter(
 			ActionRequest.ACTION_NAME,
-			TestMVCActionCommand1.TEST_ACTION_COMMAND_NAME);
+			TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_NAME);
 
 		_genericPortlet.processAction(
 			mockActionRequest, new MockActionResponse());
 
 		Assert.assertNotNull(
 			mockActionRequest.getAttribute(
-				TestMVCActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_ATTRIBUTE));
 		Assert.assertEquals(
-			TestMVCActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE,
+			TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_ATTRIBUTE,
 			mockActionRequest.getAttribute(
-				TestMVCActionCommand1.TEST_ACTION_COMMAND_ATTRIBUTE));
+				TestMVCActionCommand1.TEST_MVC_ACTION_COMMAND_ATTRIBUTE));
 	}
 
 	private static GenericPortlet _genericPortlet;
