@@ -14,9 +14,9 @@
 
 package com.liferay.portal.kernel.portlet.bridges.mvc;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand.TestMVCActionCommand1;
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand.TestMVCActionCommand2;
-import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.actioncommand.TestPortlet;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.mvcactioncommand.TestMVCActionCommand1;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.mvcactioncommand.TestMVCActionCommand2;
+import com.liferay.portal.kernel.portlet.bridges.mvc.bundle.mvcactioncommand.TestPortlet;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -50,7 +50,7 @@ public class MVCActionCommandTest {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
-			new SyntheticBundleRule("bundle.actioncommand"));
+			new SyntheticBundleRule("bundle.mvcactioncommand"));
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
