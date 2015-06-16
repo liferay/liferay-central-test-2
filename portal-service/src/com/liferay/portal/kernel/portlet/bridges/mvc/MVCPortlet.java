@@ -192,8 +192,7 @@ public class MVCPortlet extends LiferayPortlet {
 		copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"), true);
 
-		String packagePrefix = getInitParameter(
-			MVCActionCommandCache.ACTION_PACKAGE_NAME);
+		String packagePrefix = getInitParameter("action.package.prefix");
 
 		_mvcActionCommandCache = new MVCActionCommandCache(
 			packagePrefix, getPortletName());

@@ -41,8 +41,6 @@ import javax.portlet.PortletResponse;
  */
 public class MVCActionCommandCache {
 
-	public static final String ACTION_PACKAGE_NAME = "action.package.prefix";
-
 	public static final MVCActionCommand EMPTY = new MVCActionCommand() {
 
 		@Override
