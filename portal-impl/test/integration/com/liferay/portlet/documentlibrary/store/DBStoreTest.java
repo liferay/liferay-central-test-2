@@ -37,7 +37,7 @@ public class DBStoreTest extends BaseStoreTestCase {
 
 	@Override
 	protected Store getStore() {
-		String originalDLStoreImpl = PropsValues.DL_STORE_IMPL;
+		String dlStoreImpl = PropsValues.DL_STORE_IMPL;
 
 		PropsValues.DL_STORE_IMPL = DBStore.class.getName();
 
@@ -47,7 +47,7 @@ public class DBStoreTest extends BaseStoreTestCase {
 			return StoreFactory.getInstance();
 		}
 		finally {
-			PropsValues.DL_STORE_IMPL = originalDLStoreImpl;
+			PropsValues.DL_STORE_IMPL = dlStoreImpl;
 
 			StoreFactory.setInstance(null);
 		}
