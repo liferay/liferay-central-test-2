@@ -90,10 +90,10 @@ public class PollsQuestionCacheModel implements CacheModel<PollsQuestion>,
 		sb.append(description);
 		sb.append(", expirationDate=");
 		sb.append(expirationDate);
-		sb.append(", lastVoteDate=");
-		sb.append(lastVoteDate);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
+		sb.append(", lastVoteDate=");
+		sb.append(lastVoteDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -157,18 +157,18 @@ public class PollsQuestionCacheModel implements CacheModel<PollsQuestion>,
 			pollsQuestionImpl.setExpirationDate(new Date(expirationDate));
 		}
 
-		if (lastVoteDate == Long.MIN_VALUE) {
-			pollsQuestionImpl.setLastVoteDate(null);
-		}
-		else {
-			pollsQuestionImpl.setLastVoteDate(new Date(lastVoteDate));
-		}
-
 		if (lastPublishDate == Long.MIN_VALUE) {
 			pollsQuestionImpl.setLastPublishDate(null);
 		}
 		else {
 			pollsQuestionImpl.setLastPublishDate(new Date(lastPublishDate));
+		}
+
+		if (lastVoteDate == Long.MIN_VALUE) {
+			pollsQuestionImpl.setLastVoteDate(null);
+		}
+		else {
+			pollsQuestionImpl.setLastVoteDate(new Date(lastVoteDate));
 		}
 
 		pollsQuestionImpl.resetOriginalValues();
@@ -189,8 +189,8 @@ public class PollsQuestionCacheModel implements CacheModel<PollsQuestion>,
 		title = objectInput.readUTF();
 		description = objectInput.readUTF();
 		expirationDate = objectInput.readLong();
-		lastVoteDate = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
+		lastVoteDate = objectInput.readLong();
 	}
 
 	@Override
@@ -233,8 +233,8 @@ public class PollsQuestionCacheModel implements CacheModel<PollsQuestion>,
 		}
 
 		objectOutput.writeLong(expirationDate);
-		objectOutput.writeLong(lastVoteDate);
 		objectOutput.writeLong(lastPublishDate);
+		objectOutput.writeLong(lastVoteDate);
 	}
 
 	public String uuid;
@@ -248,6 +248,6 @@ public class PollsQuestionCacheModel implements CacheModel<PollsQuestion>,
 	public String title;
 	public String description;
 	public long expirationDate;
-	public long lastVoteDate;
 	public long lastPublishDate;
+	public long lastVoteDate;
 }

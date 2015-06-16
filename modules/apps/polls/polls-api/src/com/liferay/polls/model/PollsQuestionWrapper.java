@@ -65,8 +65,8 @@ public class PollsQuestionWrapper implements PollsQuestion,
 		attributes.put("title", getTitle());
 		attributes.put("description", getDescription());
 		attributes.put("expirationDate", getExpirationDate());
-		attributes.put("lastVoteDate", getLastVoteDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("lastVoteDate", getLastVoteDate());
 
 		return attributes;
 	}
@@ -139,16 +139,16 @@ public class PollsQuestionWrapper implements PollsQuestion,
 			setExpirationDate(expirationDate);
 		}
 
-		Date lastVoteDate = (Date)attributes.get("lastVoteDate");
-
-		if (lastVoteDate != null) {
-			setLastVoteDate(lastVoteDate);
-		}
-
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		Date lastVoteDate = (Date)attributes.get("lastVoteDate");
+
+		if (lastVoteDate != null) {
+			setLastVoteDate(lastVoteDate);
 		}
 	}
 

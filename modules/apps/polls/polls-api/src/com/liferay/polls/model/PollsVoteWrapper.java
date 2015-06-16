@@ -63,8 +63,8 @@ public class PollsVoteWrapper implements PollsVote, ModelWrapper<PollsVote> {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("questionId", getQuestionId());
 		attributes.put("choiceId", getChoiceId());
-		attributes.put("voteDate", getVoteDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("voteDate", getVoteDate());
 
 		return attributes;
 	}
@@ -131,16 +131,16 @@ public class PollsVoteWrapper implements PollsVote, ModelWrapper<PollsVote> {
 			setChoiceId(choiceId);
 		}
 
-		Date voteDate = (Date)attributes.get("voteDate");
-
-		if (voteDate != null) {
-			setVoteDate(voteDate);
-		}
-
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		Date voteDate = (Date)attributes.get("voteDate");
+
+		if (voteDate != null) {
+			setVoteDate(voteDate);
 		}
 	}
 

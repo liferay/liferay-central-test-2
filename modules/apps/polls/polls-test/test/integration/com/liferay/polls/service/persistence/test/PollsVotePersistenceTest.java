@@ -140,9 +140,9 @@ public class PollsVotePersistenceTest {
 
 		newPollsVote.setChoiceId(RandomTestUtil.nextLong());
 
-		newPollsVote.setVoteDate(RandomTestUtil.nextDate());
-
 		newPollsVote.setLastPublishDate(RandomTestUtil.nextDate());
+
+		newPollsVote.setVoteDate(RandomTestUtil.nextDate());
 
 		_pollsVotes.add(_persistence.update(newPollsVote));
 
@@ -170,11 +170,11 @@ public class PollsVotePersistenceTest {
 		Assert.assertEquals(existingPollsVote.getChoiceId(),
 			newPollsVote.getChoiceId());
 		Assert.assertEquals(Time.getShortTimestamp(
-				existingPollsVote.getVoteDate()),
-			Time.getShortTimestamp(newPollsVote.getVoteDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
 				existingPollsVote.getLastPublishDate()),
 			Time.getShortTimestamp(newPollsVote.getLastPublishDate()));
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingPollsVote.getVoteDate()),
+			Time.getShortTimestamp(newPollsVote.getVoteDate()));
 	}
 
 	@Test
@@ -252,8 +252,8 @@ public class PollsVotePersistenceTest {
 		return OrderByComparatorFactoryUtil.create("PollsVote", "uuid", true,
 			"voteId", true, "groupId", true, "companyId", true, "userId", true,
 			"userName", true, "createDate", true, "modifiedDate", true,
-			"questionId", true, "choiceId", true, "voteDate", true,
-			"lastPublishDate", true);
+			"questionId", true, "choiceId", true, "lastPublishDate", true,
+			"voteDate", true);
 	}
 
 	@Test
@@ -496,9 +496,9 @@ public class PollsVotePersistenceTest {
 
 		pollsVote.setChoiceId(RandomTestUtil.nextLong());
 
-		pollsVote.setVoteDate(RandomTestUtil.nextDate());
-
 		pollsVote.setLastPublishDate(RandomTestUtil.nextDate());
+
+		pollsVote.setVoteDate(RandomTestUtil.nextDate());
 
 		_pollsVotes.add(_persistence.update(pollsVote));
 

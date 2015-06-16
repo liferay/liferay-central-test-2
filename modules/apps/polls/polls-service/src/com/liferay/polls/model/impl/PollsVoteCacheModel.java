@@ -88,10 +88,10 @@ public class PollsVoteCacheModel implements CacheModel<PollsVote>,
 		sb.append(questionId);
 		sb.append(", choiceId=");
 		sb.append(choiceId);
-		sb.append(", voteDate=");
-		sb.append(voteDate);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
+		sb.append(", voteDate=");
+		sb.append(voteDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -137,18 +137,18 @@ public class PollsVoteCacheModel implements CacheModel<PollsVote>,
 		pollsVoteImpl.setQuestionId(questionId);
 		pollsVoteImpl.setChoiceId(choiceId);
 
-		if (voteDate == Long.MIN_VALUE) {
-			pollsVoteImpl.setVoteDate(null);
-		}
-		else {
-			pollsVoteImpl.setVoteDate(new Date(voteDate));
-		}
-
 		if (lastPublishDate == Long.MIN_VALUE) {
 			pollsVoteImpl.setLastPublishDate(null);
 		}
 		else {
 			pollsVoteImpl.setLastPublishDate(new Date(lastPublishDate));
+		}
+
+		if (voteDate == Long.MIN_VALUE) {
+			pollsVoteImpl.setVoteDate(null);
+		}
+		else {
+			pollsVoteImpl.setVoteDate(new Date(voteDate));
 		}
 
 		pollsVoteImpl.resetOriginalValues();
@@ -168,8 +168,8 @@ public class PollsVoteCacheModel implements CacheModel<PollsVote>,
 		modifiedDate = objectInput.readLong();
 		questionId = objectInput.readLong();
 		choiceId = objectInput.readLong();
-		voteDate = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
+		voteDate = objectInput.readLong();
 	}
 
 	@Override
@@ -198,8 +198,8 @@ public class PollsVoteCacheModel implements CacheModel<PollsVote>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(questionId);
 		objectOutput.writeLong(choiceId);
-		objectOutput.writeLong(voteDate);
 		objectOutput.writeLong(lastPublishDate);
+		objectOutput.writeLong(voteDate);
 	}
 
 	public String uuid;
@@ -212,6 +212,6 @@ public class PollsVoteCacheModel implements CacheModel<PollsVote>,
 	public long modifiedDate;
 	public long questionId;
 	public long choiceId;
-	public long voteDate;
 	public long lastPublishDate;
+	public long voteDate;
 }

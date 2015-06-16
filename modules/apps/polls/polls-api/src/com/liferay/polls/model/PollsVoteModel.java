@@ -236,20 +236,6 @@ public interface PollsVoteModel extends BaseModel<PollsVote>, StagedGroupedModel
 	public void setChoiceId(long choiceId);
 
 	/**
-	 * Returns the vote date of this polls vote.
-	 *
-	 * @return the vote date of this polls vote
-	 */
-	public Date getVoteDate();
-
-	/**
-	 * Sets the vote date of this polls vote.
-	 *
-	 * @param voteDate the vote date of this polls vote
-	 */
-	public void setVoteDate(Date voteDate);
-
-	/**
 	 * Returns the last publish date of this polls vote.
 	 *
 	 * @return the last publish date of this polls vote
@@ -262,6 +248,20 @@ public interface PollsVoteModel extends BaseModel<PollsVote>, StagedGroupedModel
 	 * @param lastPublishDate the last publish date of this polls vote
 	 */
 	public void setLastPublishDate(Date lastPublishDate);
+
+	/**
+	 * Returns the vote date of this polls vote.
+	 *
+	 * @return the vote date of this polls vote
+	 */
+	public Date getVoteDate();
+
+	/**
+	 * Sets the vote date of this polls vote.
+	 *
+	 * @param voteDate the vote date of this polls vote
+	 */
+	public void setVoteDate(Date voteDate);
 
 	@Override
 	public boolean isNew();

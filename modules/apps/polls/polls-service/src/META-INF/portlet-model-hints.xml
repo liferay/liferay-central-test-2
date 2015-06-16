@@ -37,8 +37,8 @@
 		<field name="expirationDate" type="Date">
 			<hint name="default-month-delta">1</hint>
 		</field>
-		<field name="lastVoteDate" type="Date" />
 		<field name="lastPublishDate" type="Date" />
+		<field name="lastVoteDate" type="Date" />
 	</model>
 	<model name="com.liferay.polls.model.PollsVote">
 		<field name="uuid" type="String" />
@@ -51,7 +51,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="questionId" type="long" />
 		<field name="choiceId" type="long" />
-		<field name="voteDate" type="Date" />
 		<field name="lastPublishDate" type="Date" />
+		<field name="voteDate" type="Date" />
 	</model>
 </model-hints>

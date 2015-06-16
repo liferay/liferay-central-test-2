@@ -142,9 +142,9 @@ public class PollsQuestionPersistenceTest {
 
 		newPollsQuestion.setExpirationDate(RandomTestUtil.nextDate());
 
-		newPollsQuestion.setLastVoteDate(RandomTestUtil.nextDate());
-
 		newPollsQuestion.setLastPublishDate(RandomTestUtil.nextDate());
+
+		newPollsQuestion.setLastVoteDate(RandomTestUtil.nextDate());
 
 		_pollsQuestions.add(_persistence.update(newPollsQuestion));
 
@@ -176,11 +176,11 @@ public class PollsQuestionPersistenceTest {
 				existingPollsQuestion.getExpirationDate()),
 			Time.getShortTimestamp(newPollsQuestion.getExpirationDate()));
 		Assert.assertEquals(Time.getShortTimestamp(
-				existingPollsQuestion.getLastVoteDate()),
-			Time.getShortTimestamp(newPollsQuestion.getLastVoteDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
 				existingPollsQuestion.getLastPublishDate()),
 			Time.getShortTimestamp(newPollsQuestion.getLastPublishDate()));
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingPollsQuestion.getLastVoteDate()),
+			Time.getShortTimestamp(newPollsQuestion.getLastVoteDate()));
 	}
 
 	@Test
@@ -250,7 +250,7 @@ public class PollsQuestionPersistenceTest {
 			true, "questionId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "title", true, "description", true,
-			"expirationDate", true, "lastVoteDate", true, "lastPublishDate",
+			"expirationDate", true, "lastPublishDate", true, "lastVoteDate",
 			true);
 	}
 
@@ -489,9 +489,9 @@ public class PollsQuestionPersistenceTest {
 
 		pollsQuestion.setExpirationDate(RandomTestUtil.nextDate());
 
-		pollsQuestion.setLastVoteDate(RandomTestUtil.nextDate());
-
 		pollsQuestion.setLastPublishDate(RandomTestUtil.nextDate());
+
+		pollsQuestion.setLastVoteDate(RandomTestUtil.nextDate());
 
 		_pollsQuestions.add(_persistence.update(pollsQuestion));
 
