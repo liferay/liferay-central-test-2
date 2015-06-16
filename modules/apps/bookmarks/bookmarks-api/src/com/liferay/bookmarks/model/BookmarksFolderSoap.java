@@ -47,11 +47,11 @@ public class BookmarksFolderSoap implements Serializable {
 		soapModel.setTreePath(model.getTreePath());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setLastPublishDate(model.getLastPublishDate());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
-		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
 	}
@@ -210,6 +210,14 @@ public class BookmarksFolderSoap implements Serializable {
 		_description = description;
 	}
 
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -242,14 +250,6 @@ public class BookmarksFolderSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	public Date getLastPublishDate() {
-		return _lastPublishDate;
-	}
-
-	public void setLastPublishDate(Date lastPublishDate) {
-		_lastPublishDate = lastPublishDate;
-	}
-
 	private String _uuid;
 	private long _folderId;
 	private long _groupId;
@@ -263,9 +263,9 @@ public class BookmarksFolderSoap implements Serializable {
 	private String _treePath;
 	private String _name;
 	private String _description;
+	private Date _lastPublishDate;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private Date _lastPublishDate;
 }

@@ -67,11 +67,11 @@ public class BookmarksFolderWrapper implements BookmarksFolder,
 		attributes.put("treePath", getTreePath());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
+		attributes.put("lastPublishDate", getLastPublishDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
-		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -156,6 +156,12 @@ public class BookmarksFolderWrapper implements BookmarksFolder,
 			setDescription(description);
 		}
 
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -178,12 +184,6 @@ public class BookmarksFolderWrapper implements BookmarksFolder,
 
 		if (statusDate != null) {
 			setStatusDate(statusDate);
-		}
-
-		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
-
-		if (lastPublishDate != null) {
-			setLastPublishDate(lastPublishDate);
 		}
 	}
 

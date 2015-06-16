@@ -15,11 +15,11 @@ create table BookmarksEntry (
 	description STRING null,
 	visits INTEGER,
 	priority INTEGER,
+	lastPublishDate DATE null,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	lastPublishDate DATE null
+	statusDate DATE null
 );
 
 create table BookmarksFolder (
@@ -36,9 +36,9 @@ create table BookmarksFolder (
 	treePath STRING null,
 	name VARCHAR(75) null,
 	description STRING null,
+	lastPublishDate DATE null,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	lastPublishDate DATE null
+	statusDate DATE null
 );

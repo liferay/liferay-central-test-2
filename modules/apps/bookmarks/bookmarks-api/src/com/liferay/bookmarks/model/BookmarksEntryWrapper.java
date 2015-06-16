@@ -70,11 +70,11 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 		attributes.put("description", getDescription());
 		attributes.put("visits", getVisits());
 		attributes.put("priority", getPriority());
+		attributes.put("lastPublishDate", getLastPublishDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
-		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -177,6 +177,12 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 			setPriority(priority);
 		}
 
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -199,12 +205,6 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 
 		if (statusDate != null) {
 			setStatusDate(statusDate);
-		}
-
-		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
-
-		if (lastPublishDate != null) {
-			setLastPublishDate(lastPublishDate);
 		}
 	}
 

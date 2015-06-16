@@ -50,11 +50,11 @@ public class BookmarksEntrySoap implements Serializable {
 		soapModel.setDescription(model.getDescription());
 		soapModel.setVisits(model.getVisits());
 		soapModel.setPriority(model.getPriority());
+		soapModel.setLastPublishDate(model.getLastPublishDate());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
-		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
 	}
@@ -235,6 +235,14 @@ public class BookmarksEntrySoap implements Serializable {
 		_priority = priority;
 	}
 
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -267,14 +275,6 @@ public class BookmarksEntrySoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	public Date getLastPublishDate() {
-		return _lastPublishDate;
-	}
-
-	public void setLastPublishDate(Date lastPublishDate) {
-		_lastPublishDate = lastPublishDate;
-	}
-
 	private String _uuid;
 	private long _entryId;
 	private long _groupId;
@@ -291,9 +291,9 @@ public class BookmarksEntrySoap implements Serializable {
 	private String _description;
 	private int _visits;
 	private int _priority;
+	private Date _lastPublishDate;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private Date _lastPublishDate;
 }

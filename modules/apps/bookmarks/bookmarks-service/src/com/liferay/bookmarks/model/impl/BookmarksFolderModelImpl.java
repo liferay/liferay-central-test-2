@@ -94,13 +94,13 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 			{ "treePath", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
+			{ "lastPublishDate", Types.TIMESTAMP },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
-			{ "statusDate", Types.TIMESTAMP },
-			{ "lastPublishDate", Types.TIMESTAMP }
+			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,resourceBlockId LONG,parentFolderId LONG,treePath STRING null,name VARCHAR(75) null,description STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,resourceBlockId LONG,parentFolderId LONG,treePath STRING null,name VARCHAR(75) null,description STRING null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table BookmarksFolder";
 	public static final String ORDER_BY_JPQL = " ORDER BY bookmarksFolder.parentFolderId ASC, bookmarksFolder.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BookmarksFolder.parentFolderId ASC, BookmarksFolder.name ASC";
@@ -151,11 +151,11 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		model.setTreePath(soapModel.getTreePath());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
+		model.setLastPublishDate(soapModel.getLastPublishDate());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
 		model.setStatusDate(soapModel.getStatusDate());
-		model.setLastPublishDate(soapModel.getLastPublishDate());
 
 		return model;
 	}
@@ -234,11 +234,11 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		attributes.put("treePath", getTreePath());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
+		attributes.put("lastPublishDate", getLastPublishDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
-		attributes.put("lastPublishDate", getLastPublishDate());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -326,6 +326,12 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 			setDescription(description);
 		}
 
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -348,12 +354,6 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 		if (statusDate != null) {
 			setStatusDate(statusDate);
-		}
-
-		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
-
-		if (lastPublishDate != null) {
-			setLastPublishDate(lastPublishDate);
 		}
 	}
 
@@ -619,6 +619,17 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 	@JSON
 	@Override
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
+	@JSON
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -692,17 +703,6 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
-	}
-
-	@JSON
-	@Override
-	public Date getLastPublishDate() {
-		return _lastPublishDate;
-	}
-
-	@Override
-	public void setLastPublishDate(Date lastPublishDate) {
-		_lastPublishDate = lastPublishDate;
 	}
 
 	@Override
@@ -995,11 +995,11 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		bookmarksFolderImpl.setTreePath(getTreePath());
 		bookmarksFolderImpl.setName(getName());
 		bookmarksFolderImpl.setDescription(getDescription());
+		bookmarksFolderImpl.setLastPublishDate(getLastPublishDate());
 		bookmarksFolderImpl.setStatus(getStatus());
 		bookmarksFolderImpl.setStatusByUserId(getStatusByUserId());
 		bookmarksFolderImpl.setStatusByUserName(getStatusByUserName());
 		bookmarksFolderImpl.setStatusDate(getStatusDate());
-		bookmarksFolderImpl.setLastPublishDate(getLastPublishDate());
 
 		bookmarksFolderImpl.resetOriginalValues();
 
@@ -1179,6 +1179,15 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 			bookmarksFolderCacheModel.description = null;
 		}
 
+		Date lastPublishDate = getLastPublishDate();
+
+		if (lastPublishDate != null) {
+			bookmarksFolderCacheModel.lastPublishDate = lastPublishDate.getTime();
+		}
+		else {
+			bookmarksFolderCacheModel.lastPublishDate = Long.MIN_VALUE;
+		}
+
 		bookmarksFolderCacheModel.status = getStatus();
 
 		bookmarksFolderCacheModel.statusByUserId = getStatusByUserId();
@@ -1198,15 +1207,6 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		}
 		else {
 			bookmarksFolderCacheModel.statusDate = Long.MIN_VALUE;
-		}
-
-		Date lastPublishDate = getLastPublishDate();
-
-		if (lastPublishDate != null) {
-			bookmarksFolderCacheModel.lastPublishDate = lastPublishDate.getTime();
-		}
-		else {
-			bookmarksFolderCacheModel.lastPublishDate = Long.MIN_VALUE;
 		}
 
 		return bookmarksFolderCacheModel;
@@ -1242,6 +1242,8 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", lastPublishDate=");
+		sb.append(getLastPublishDate());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -1250,8 +1252,6 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		sb.append(getStatusByUserName());
 		sb.append(", statusDate=");
 		sb.append(getStatusDate());
-		sb.append(", lastPublishDate=");
-		sb.append(getLastPublishDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -1318,6 +1318,10 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPublishDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
@@ -1332,10 +1336,6 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		sb.append(
 			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
 		sb.append(getStatusDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
-		sb.append(getLastPublishDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -1372,13 +1372,13 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	private String _treePath;
 	private String _name;
 	private String _description;
+	private Date _lastPublishDate;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private Date _lastPublishDate;
 	private long _columnBitmask;
 	private BookmarksFolder _escapedModel;
 }

@@ -100,6 +100,8 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		sb.append(visits);
 		sb.append(", priority=");
 		sb.append(priority);
+		sb.append(", lastPublishDate=");
+		sb.append(lastPublishDate);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -108,8 +110,6 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		sb.append(statusByUserName);
 		sb.append(", statusDate=");
 		sb.append(statusDate);
-		sb.append(", lastPublishDate=");
-		sb.append(lastPublishDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -185,6 +185,14 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 
 		bookmarksEntryImpl.setVisits(visits);
 		bookmarksEntryImpl.setPriority(priority);
+
+		if (lastPublishDate == Long.MIN_VALUE) {
+			bookmarksEntryImpl.setLastPublishDate(null);
+		}
+		else {
+			bookmarksEntryImpl.setLastPublishDate(new Date(lastPublishDate));
+		}
+
 		bookmarksEntryImpl.setStatus(status);
 		bookmarksEntryImpl.setStatusByUserId(statusByUserId);
 
@@ -200,13 +208,6 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		}
 		else {
 			bookmarksEntryImpl.setStatusDate(new Date(statusDate));
-		}
-
-		if (lastPublishDate == Long.MIN_VALUE) {
-			bookmarksEntryImpl.setLastPublishDate(null);
-		}
-		else {
-			bookmarksEntryImpl.setLastPublishDate(new Date(lastPublishDate));
 		}
 
 		bookmarksEntryImpl.resetOriginalValues();
@@ -232,11 +233,11 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		description = objectInput.readUTF();
 		visits = objectInput.readInt();
 		priority = objectInput.readInt();
+		lastPublishDate = objectInput.readLong();
 		status = objectInput.readInt();
 		statusByUserId = objectInput.readLong();
 		statusByUserName = objectInput.readUTF();
 		statusDate = objectInput.readLong();
-		lastPublishDate = objectInput.readLong();
 	}
 
 	@Override
@@ -296,6 +297,7 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 
 		objectOutput.writeInt(visits);
 		objectOutput.writeInt(priority);
+		objectOutput.writeLong(lastPublishDate);
 		objectOutput.writeInt(status);
 		objectOutput.writeLong(statusByUserId);
 
@@ -307,7 +309,6 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		}
 
 		objectOutput.writeLong(statusDate);
-		objectOutput.writeLong(lastPublishDate);
 	}
 
 	public String uuid;
@@ -326,9 +327,9 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 	public String description;
 	public int visits;
 	public int priority;
+	public long lastPublishDate;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
-	public long lastPublishDate;
 }
