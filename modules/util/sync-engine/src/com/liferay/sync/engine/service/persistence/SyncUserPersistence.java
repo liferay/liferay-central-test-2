@@ -40,7 +40,7 @@ public class SyncUserPersistence extends BasePersistenceImpl<SyncUser, Long> {
 
 		List<SyncUser> syncUsers = queryForFieldValues(fieldValues);
 
-		if ((syncUsers == null) || syncUsers.isEmpty()) {
+		if (syncUsers.isEmpty()) {
 			return null;
 		}
 

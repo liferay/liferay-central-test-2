@@ -46,7 +46,7 @@ public class SyncSitePersistence extends BasePersistenceImpl<SyncSite, Long> {
 
 		List<SyncSite> syncSites = queryForFieldValuesArgs(fieldValues);
 
-		if ((syncSites == null) || syncSites.isEmpty()) {
+		if (syncSites.isEmpty()) {
 			return null;
 		}
 
@@ -63,7 +63,7 @@ public class SyncSitePersistence extends BasePersistenceImpl<SyncSite, Long> {
 
 		List<SyncSite> syncSites = queryForFieldValues(fieldValues);
 
-		if ((syncSites == null) || syncSites.isEmpty()) {
+		if (syncSites.isEmpty()) {
 			return null;
 		}
 
@@ -81,7 +81,7 @@ public class SyncSitePersistence extends BasePersistenceImpl<SyncSite, Long> {
 
 		QueryBuilder<SyncSite, Long> queryBuilder = queryBuilder();
 
-		queryBuilder = queryBuilder.selectColumns("syncSiteId");
+		queryBuilder.selectColumns("syncSiteId");
 
 		Where<SyncSite, Long> where = queryBuilder.where();
 

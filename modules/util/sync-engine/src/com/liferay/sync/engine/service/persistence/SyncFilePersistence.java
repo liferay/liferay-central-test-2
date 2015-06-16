@@ -118,7 +118,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		where.like("filePathName", new SelectArg(parentFilePathName + "%"));
 
-		return query(queryBuilder.prepare());
+		return where.query();
 	}
 
 	public SyncFile fetchByFilePathName(String filePathName)
@@ -130,7 +130,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		List<SyncFile> syncFiles = queryForFieldValuesArgs(fieldValues);
 
-		if ((syncFiles == null) || syncFiles.isEmpty()) {
+		if (syncFiles.isEmpty()) {
 			return null;
 		}
 
@@ -149,7 +149,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		List<SyncFile> syncFiles = queryForFieldValues(fieldValues);
 
-		if ((syncFiles == null) || syncFiles.isEmpty()) {
+		if (syncFiles.isEmpty()) {
 			return null;
 		}
 
@@ -185,7 +185,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		where.and(4);
 
-		return query(queryBuilder.prepare());
+		return where.query();
 	}
 
 	public List<SyncFile> findByP_S(long parentFolderId, long syncAccountId)
@@ -217,6 +217,8 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		QueryBuilder<SyncFile, Long> queryBuilder = queryBuilder();
 
+		queryBuilder.orderBy(orderByColumn, ascending);
+
 		Where<SyncFile, Long> where = queryBuilder.where();
 
 		where.eq("syncAccountId", syncAccountId);
@@ -224,9 +226,7 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		where.and(2);
 
-		queryBuilder.orderBy(orderByColumn, ascending);
-
-		return query(queryBuilder.prepare());
+		return where.query();
 	}
 
 	public void renameByFilePathName(
@@ -269,14 +269,14 @@ public class SyncFilePersistence extends BasePersistenceImpl<SyncFile, Long> {
 
 		UpdateBuilder<SyncFile, Long> updateBuilder = updateBuilder();
 
+		updateBuilder.updateColumnValue("state", state);
+		updateBuilder.updateColumnValue("uiEvent", uiEvent);
+
 		Where<SyncFile, Long> where = updateBuilder.where();
 
 		filePathName = StringUtils.replace(filePathName, "\\", "\\\\");
 
 		where.like("filePathName", new SelectArg(filePathName + "%"));
-
-		updateBuilder.updateColumnValue("state", state);
-		updateBuilder.updateColumnValue("uiEvent", uiEvent);
 
 		updateBuilder.update();
 	}
