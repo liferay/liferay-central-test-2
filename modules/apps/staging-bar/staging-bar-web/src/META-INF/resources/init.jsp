@@ -88,6 +88,7 @@ page import="javax.portlet.PortletURL" %>
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
+
 Layout selLayout = layout;
 
 long selPlid = ParamUtil.getLong(request, "selPlid");
