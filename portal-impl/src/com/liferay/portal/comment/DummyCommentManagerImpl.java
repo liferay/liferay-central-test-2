@@ -164,8 +164,8 @@ public class DummyCommentManagerImpl implements CommentManager {
 
 		};
 
-	private static final DiscussionStagingHandler
-		_discussionStagingHandler = new DiscussionStagingHandler() {
+	private static final DiscussionStagingHandler _discussionStagingHandler =
+		new DiscussionStagingHandler() {
 
 			@Override
 			public <T extends StagedModel> void exportReferenceDiscussions(
