@@ -66,6 +66,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 
 		jsonObject.put(
 			"contentsLanguage", contentsLanguageId.replace("iw_", "he_"));
+
 		jsonObject.put(
 			"extraPlugins",
 			"autolink,dragresize,dropimages,placeholder,selectionregion," +
@@ -74,6 +75,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 		String languageId = getLanguageId(themeDisplay);
 
 		jsonObject.put("language", languageId.replace("iw_", "he_"));
+
 		jsonObject.put(
 			"removePlugins",
 			"elementspath,image,link,liststyle,resize,toolbar");
