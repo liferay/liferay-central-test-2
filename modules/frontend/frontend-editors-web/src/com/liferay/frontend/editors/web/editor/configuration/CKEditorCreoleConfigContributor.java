@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Map;
@@ -62,26 +63,23 @@ public class CKEditorCreoleConfigContributor
 		jsonObject.put("attachmentURLPrefix", attachmentURLPrefix);
 
 		jsonObject.put("decodeLinks", Boolean.TRUE);
-
 		jsonObject.put("disableObjectResizing", Boolean.TRUE);
-
 		jsonObject.put(
 			"extraPlugins",
 			"a11yhelpbtn,creole,imageselector,lfrpopup,wikilink");
-
 		jsonObject.put(
 			"filebrowserWindowFeatures",
 			"title=" + LanguageUtil.get(themeDisplay.getLocale(), "browse"));
-
 		jsonObject.put("format_tags", "p;h1;h2;h3;h4;h5;h6;pre");
 
-		String removePlugins =
-			"bidi,colorbutton,colordialog,div,elementspath,flash,font,forms," +
-				"indentblock,justify,keystrokes,link,maximize,newpage," +
-					"pagebreak,preview,print,save,showblocks,smiley," +
-						"stylescombo,templates,video";
+		StringBundler sb = new StringBundler();
+		
+		sb.append("bidi,colorbutton,colordialog,div,elementspath,flash,font,");
+		sb.append("forms,indentblock,justify,keystrokes,link,maximize,");
+		sb.append("newpage,pagebreak,preview,print,save,showblocks,smiley,");
+		sb.append("stylescombo,templates,video");
 
-		jsonObject.put("removePlugins", removePlugins);
+		jsonObject.put("removePlugins", sb.toString());
 
 		jsonObject.put(
 			"toolbar_creole",
@@ -100,18 +98,15 @@ public class CKEditorCreoleConfigContributor
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(toJSONArray("['Bold', 'Italic', '-' ,'RemoveFormat']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']"));
-
 		jsonArray.put(toJSONArray("['Format']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
 
 		String buttons = "['Table', '-',";
 
-		if (includeButtonImage(inputEditorTaglibAttributes)) {
+		if (isIncludeButtonImage(inputEditorTaglibAttributes)) {
 			buttons = buttons.concat("'ImageSelector', '-', ");
 		}
 
@@ -120,12 +115,10 @@ public class CKEditorCreoleConfigContributor
 		jsonArray.put(toJSONArray(buttons));
 
 		jsonArray.put("/");
-
 		jsonArray.put(
 			toJSONArray(
 				"['Cut', 'Copy', 'Paste', '-', 'PasteText', 'PasteFromWord', " +
 					"'-', 'SelectAll', '-', 'Undo', 'Redo']"));
-
 		jsonArray.put(toJSONArray("['Find','Replace']"));
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
@@ -143,12 +136,10 @@ public class CKEditorCreoleConfigContributor
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(toJSONArray("['Bold', 'Italic']"));
-
 		jsonArray.put(toJSONArray("['NumberedList', 'BulletedList']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
 
-		if (includeButtonImage(inputEditorTaglibAttributes)) {
+		if (isIncludeButtonImage(inputEditorTaglibAttributes)) {
 			jsonArray.put(toJSONArray("['ImageSelector']"));
 		}
 
@@ -165,16 +156,13 @@ public class CKEditorCreoleConfigContributor
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(toJSONArray("['Bold', 'Italic']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']"));
-
 		jsonArray.put(toJSONArray("['Format']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
 
-		if (includeButtonImage(inputEditorTaglibAttributes)) {
+		if (isIncludeButtonImage(inputEditorTaglibAttributes)) {
 			jsonArray.put(toJSONArray("['ImageSelector']"));
 		}
 
@@ -185,7 +173,7 @@ public class CKEditorCreoleConfigContributor
 		return jsonArray;
 	}
 
-	protected boolean includeButtonImage(
+	protected boolean isIncludeButtonImage(
 		Map<String, Object> inputEditorTaglibAttributes) {
 
 		Map<String, String> fileBrowserParams =
