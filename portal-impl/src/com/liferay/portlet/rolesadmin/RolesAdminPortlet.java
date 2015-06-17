@@ -366,10 +366,10 @@ public class RolesAdminPortlet extends MVCPortlet {
 		}
 		else if (SessionErrors.contains(
 					renderRequest, DuplicateRoleException.class.getName()) ||
-			SessionErrors.contains(
-				renderRequest, RequiredRoleException.class.getName()) ||
-			SessionErrors.contains(
-				renderRequest, RoleNameException.class.getName())) {
+				 SessionErrors.contains(
+					 renderRequest, RequiredRoleException.class.getName()) ||
+				 SessionErrors.contains(
+					 renderRequest, RoleNameException.class.getName())) {
 
 			include(
 				"/html/portlet/roles_admin/edit_role.jsp", renderRequest,
@@ -377,12 +377,12 @@ public class RolesAdminPortlet extends MVCPortlet {
 		}
 		else if (SessionErrors.contains(
 					renderRequest, PrincipalException.class.getName()) ||
-			SessionErrors.contains(
-				renderRequest, NoSuchRoleException.class.getName()) ||
-			SessionErrors.contains(
-				renderRequest, RoleAssignmentException.class.getName()) ||
-			SessionErrors.contains(
-				renderRequest, RolePermissionsException.class.getName())) {
+				 SessionErrors.contains(
+					 renderRequest, NoSuchRoleException.class.getName()) ||
+				 SessionErrors.contains(
+					 renderRequest, RoleAssignmentException.class.getName()) ||
+				 SessionErrors.contains(
+					 renderRequest, RolePermissionsException.class.getName())) {
 
 			include(
 				"/html/portlet/roles_admin/error.jsp", renderRequest,
