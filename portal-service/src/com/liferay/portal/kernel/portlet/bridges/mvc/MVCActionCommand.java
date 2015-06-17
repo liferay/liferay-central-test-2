@@ -23,6 +23,18 @@ import javax.portlet.PortletResponse;
  */
 public interface MVCActionCommand {
 
+	public static final MVCActionCommand EMPTY = new MVCActionCommand() {
+
+		@Override
+		public boolean processAction(
+				PortletRequest portletRequest, PortletResponse portletResponse)
+			throws PortletException {
+
+			return false;
+		}
+
+	};
+
 	public boolean processAction(
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws PortletException;
