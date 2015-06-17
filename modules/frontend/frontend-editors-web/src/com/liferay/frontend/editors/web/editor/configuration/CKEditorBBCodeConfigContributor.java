@@ -49,7 +49,7 @@ public class CKEditorBBCodeConfigContributor
 			liferayPortletResponse);
 
 		jsonObject.put("allowedContent", Boolean.TRUE);
-		jsonObject.put("enterMode", _CKEDITOR_ENTER_BR);
+		jsonObject.put("enterMode", 2);
 		jsonObject.put(
 			"extraPlugins", "a11yhelpbtn,bbcode,imageselector,wikilink");
 		jsonObject.put("filebrowserBrowseUrl", "");
@@ -166,7 +166,5 @@ public class CKEditorBBCodeConfigContributor
 
 		return jsonArray;
 	}
-
-	private static final Integer _CKEDITOR_ENTER_BR = 2;
 
 }
