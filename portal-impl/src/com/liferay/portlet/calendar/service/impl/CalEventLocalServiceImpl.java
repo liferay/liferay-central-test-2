@@ -1750,14 +1750,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (!Validator.isDate(startDateMonth, startDateDay, startDateYear)) {
 			StringBundler sb = new StringBundler(9);
 
-			sb.append("Invalid date for {title=");
-			sb.append(title);
+			sb.append("Invalid date for {startDateDay=");
+			sb.append(startDateDay);
 			sb.append(", startDateMonth=");
 			sb.append(startDateMonth);
-			sb.append(", startDateDay=");
-			sb.append(startDateDay);
 			sb.append(", startDateYear=");
 			sb.append(startDateYear);
+			sb.append(", title=");
+			sb.append(title);
 			sb.append(StringPool.CLOSE_BRACKET);
 
 			throw new EventStartDateException(sb.toString());
@@ -1766,12 +1766,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (!allDay && (durationHour <= 0) && (durationMinute <= 0)) {
 			StringBundler sb = new StringBundler(7);
 
-			sb.append("Invalid date for {title=");
-			sb.append(title);
-			sb.append(", durationHour=");
+			sb.append("Invalid date for {durationHour=");
 			sb.append(durationHour);
 			sb.append(", durationMinute=");
 			sb.append(durationMinute);
+			sb.append(", title=");
+			sb.append(title);
 			sb.append(StringPool.CLOSE_BRACKET);
 
 			throw new EventDurationException(sb.toString());
