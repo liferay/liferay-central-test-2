@@ -43,7 +43,9 @@ public class CKEditorOnEditorCreateDynamicInclude implements DynamicInclude {
 
 		Bundle bundle = _bundleContext.getBundle();
 
-		URL entryURL = bundle.getEntry(_JS_DIALOG_DEFINITION_INCLUDE_PATH);
+		URL entryURL = bundle.getEntry(
+			"/META-INF/resources/html/editors/ckeditor/extension" +
+				"/dialog_definition.js");
 
 		StreamUtil.transfer(entryURL.openStream(), response.getOutputStream());
 	}
@@ -60,10 +62,6 @@ public class CKEditorOnEditorCreateDynamicInclude implements DynamicInclude {
 	protected void activate(BundleContext bundleContext) {
 		_bundleContext = bundleContext;
 	}
-
-	private static final String _JS_DIALOG_DEFINITION_INCLUDE_PATH =
-		"/META-INF/resources/html/editors/ckeditor/extension/" +
-			"dialog_definition.js";
 
 	private BundleContext _bundleContext;
 
