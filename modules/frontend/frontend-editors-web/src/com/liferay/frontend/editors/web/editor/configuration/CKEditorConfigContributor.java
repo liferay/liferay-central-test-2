@@ -142,18 +142,13 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			toJSONArray(
 				"['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', " +
 					"'Superscript', '-', 'RemoveFormat']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']"));
-
 		jsonArray.put("/");
-
 		jsonArray.put(toJSONArray("['Styles']"));
-
 		jsonArray.put(
 			toJSONArray("['SpellChecker', 'Scayt', '-', 'SpecialChar']"));
-
 		jsonArray.put(toJSONArray("['Undo', 'Redo']"));
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
@@ -174,27 +169,19 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			toJSONArray(
 				"['Bold', 'Italic', 'Underline', 'Strike', '-', " +
 					"'RemoveFormat']"));
-
 		jsonArray.put(toJSONArray("['TextColor', 'BGColor']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['JustifyLeft', 'JustifyCenter', 'JustifyRight', " +
 					"'JustifyBlock']"));
-
 		jsonArray.put(toJSONArray("['FontSize']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
-
 		jsonArray.put(toJSONArray("['ImageSelector']"));
-
 		jsonArray.put("/");
-
 		jsonArray.put(
 			toJSONArray(
 				"['Cut', 'Copy', 'Paste', '-', 'PasteText', 'PasteFromWord', " +
 					"'-', 'SelectAll', '-', 'Undo', 'Redo' ]"));
-
 		jsonArray.put(toJSONArray("['SpellChecker', 'Scayt']"));
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
@@ -215,23 +202,17 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			toJSONArray(
 				"['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', " +
 					"'Superscript', '-', 'RemoveFormat']"));
-
 		jsonArray.put(toJSONArray("['TextColor', 'BGColor']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['JustifyLeft', 'JustifyCenter', 'JustifyRight', " +
 					"'JustifyBlock']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['NumberedList', 'BulletedList', '-' ,'Outdent', 'Indent', " +
 					"'-', 'Blockquote']"));
-
 		jsonArray.put("/");
-
 		jsonArray.put(toJSONArray("['Styles', 'FontSize']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink', 'Anchor']"));
 
 		String buttons = "['Table', '-', 'ImageSelector',";
@@ -240,18 +221,16 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			buttons +=" 'Audio', 'Video',";
 		}
 
-		buttons+= " 'Flash', '-', 'LiferayPageBreak', '-', " +
+		buttons += " 'Flash', '-', 'LiferayPageBreak', '-', " +
 			"'Smiley', 'SpecialChar']";
 
 		jsonArray.put(toJSONArray(buttons));
 
 		jsonArray.put("/");
-
 		jsonArray.put(
 			toJSONArray(
 				"['Cut', 'Copy', 'Paste', '-', 'PasteText', 'PasteFromWord', " +
 					"'-', 'SelectAll' , '-', 'Undo', 'Redo']"));
-
 		jsonArray.put(
 			toJSONArray("['Find', 'Replace', '-', 'SpellChecker', 'Scayt']"));
 
@@ -273,22 +252,16 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			toJSONArray(
 				"['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', " +
 					"'Superscript', '-', 'RemoveFormat']"));
-
 		jsonArray.put(toJSONArray("['TextColor', 'BGColor']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['JustifyLeft', 'JustifyCenter', 'JustifyRight', " +
 					"'JustifyBlock']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']"));
-
 		jsonArray.put("/");
-
 		jsonArray.put(toJSONArray("['Styles', 'FontSize']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink', 'Anchor']"));
 
 		String buttons = "['Table', '-', 'ImageSelector',";
@@ -315,7 +288,6 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			toJSONArray(
 				"['Cut', 'Copy', 'Paste', '-', 'PasteText', 'PasteFromWord', " +
 					"'-', 'SelectAll' , '-', 'Undo', 'Redo']"));
-
 		jsonArray.put(
 			toJSONArray("['Find', 'Replace', '-', 'SpellChecker', 'Scayt']"));
 
@@ -334,11 +306,8 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(toJSONArray("['Bold', 'Italic', 'Underline']"));
-
 		jsonArray.put(toJSONArray("['NumberedList', 'BulletedList']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
-
 		jsonArray.put(toJSONArray("['ImageSelector']"));
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
@@ -354,11 +323,8 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(toJSONArray("['Bold', 'Italic', 'Underline', 'Strike']"));
-
 		jsonArray.put(toJSONArray("['NumberedList', 'BulletedList']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
-
 		jsonArray.put(toJSONArray("['Table', 'ImageSelector']"));
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
@@ -374,18 +340,13 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		jsonArray.put(toJSONArray("['Bold', 'Italic', 'Underline', 'Strike']"));
-
 		jsonArray.put(
 			toJSONArray(
 				"['JustifyLeft', 'JustifyCenter', 'JustifyRight', " +
 					"'JustifyBlock']"));
-
 		jsonArray.put(toJSONArray("['NumberedList', 'BulletedList']"));
-
 		jsonArray.put(toJSONArray("['Styles', 'FontSize']"));
-
 		jsonArray.put(toJSONArray("['Link', 'Unlink']"));
-
 		jsonArray.put(toJSONArray("['ImageSelector']"));
 
 		if (isShowSource(inputEditorTaglibAttributes)) {
