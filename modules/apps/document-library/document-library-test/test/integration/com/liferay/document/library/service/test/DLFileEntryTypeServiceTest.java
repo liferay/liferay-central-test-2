@@ -130,6 +130,7 @@ public class DLFileEntryTypeServiceTest {
 	@After
 	public void tearDown() {
 		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
+
 		PrincipalThreadLocal.setName(_originalName);
 	}
 
@@ -346,7 +347,7 @@ public class DLFileEntryTypeServiceTest {
 					return true;
 				}
 
-		});
+			});
 	}
 
 	protected void setUpPrincipalThreadLocal() throws Exception {

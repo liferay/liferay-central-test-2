@@ -417,7 +417,7 @@ public class DLFileVersionTest {
 					return true;
 				}
 
-		});
+			});
 	}
 
 	protected void setUpPrincipalThreadLocal() throws Exception {
