@@ -155,6 +155,7 @@ public class DLFileVersionTest {
 		ExpandoTableLocalServiceUtil.deleteTable(expandoTable);
 
 		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
+
 		PrincipalThreadLocal.setName(_originalName);
 
 		RoleTestUtil.removeResourcePermission(
