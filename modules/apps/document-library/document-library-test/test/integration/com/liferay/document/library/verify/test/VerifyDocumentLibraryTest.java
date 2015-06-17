@@ -106,6 +106,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 	@After
 	public void tearDown() {
 		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
+
 		PrincipalThreadLocal.setName(_originalName);
 	}
 
@@ -453,7 +454,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 					return true;
 				}
 
-		});
+			});
 	}
 
 	protected void setUpPrincipalThreadLocal() throws Exception {
