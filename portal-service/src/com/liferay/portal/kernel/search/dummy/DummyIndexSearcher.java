@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.search.HitsImpl;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.generic.StringQuery;
 import com.liferay.portal.kernel.search.suggest.Suggester;
@@ -79,8 +78,7 @@ public class DummyIndexSearcher implements IndexSearcher {
 
 	@Override
 	public SuggesterResults suggest(
-			SearchContext searchContext, Suggester suggester)
-		throws SearchException {
+		SearchContext searchContext, Suggester suggester) {
 
 		return new SuggesterResults();
 	}
