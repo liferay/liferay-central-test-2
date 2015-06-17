@@ -25,6 +25,7 @@ boolean allowBrowseDocuments = GetterUtil.getBoolean((String)request.getAttribut
 boolean autoCreate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:autoCreate"));
 String contents = (String)request.getAttribute("liferay-ui:input-editor:contents");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui:input-editor:data");
 String editorName = (String)request.getAttribute("liferay-ui:input-editor:editorName");
 Map<String, String> fileBrowserParamsMap = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:fileBrowserParams");
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
@@ -64,13 +65,23 @@ if (!inlineEdit) {
 	name = namespace + name;
 }
 
-Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui:input-editor:data");
+JSONObject editorConfigJSONObject = null;
 
-JSONObject editorConfigJSONObject = (data != null) ? (JSONObject)data.get("editorConfig") : null;
+if (data != null) {
+	editorConfigJSONObject = (JSONObject)data.get("editorConfig");
+}
 
-EditorOptions editorOptions = (data != null) ? (EditorOptions)data.get("editorOptions") : null;
+EditorOptions editorOptions = null;
 
-Map<String, Object> editorOptionsDynamicAttributes = (editorOptions != null) ? editorOptions.getDynamicAttributes() : null;
+if (data != null) {
+	editorOptions = (EditorOptions)data.get("editorOptions");
+}
+
+Map<String, Object> editorOptionsDynamicAttributes = null;
+
+if (editorOptions != null) {
+	editorOptionsDynamicAttributes = editorOptions.getDynamicAttributes();
+}
 %>
 
 <c:if test="<%= !skipEditorLoading %>">
