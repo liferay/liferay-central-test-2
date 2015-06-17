@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Ambrin Chaudhary
  */
-
 public class BaseCKEditorConfigContributor extends BaseEditorConfigContributor {
 
 	@Override
