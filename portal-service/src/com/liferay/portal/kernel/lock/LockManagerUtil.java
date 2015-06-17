@@ -31,7 +31,8 @@ public class LockManagerUtil {
 	public static Lock createLock(
 		long lockId, long companyId, long userId, String userName) {
 
-		return _getLockManager().createLock(lockId, companyId, userId, userName);
+		return _getLockManager().createLock(
+			lockId, companyId, userId, userName);
 	}
 
 	public static Lock getLock(String className, long key)
@@ -94,7 +95,8 @@ public class LockManagerUtil {
 		String className, String key, String expectedOwner,
 		String updatedOwner) {
 
-		return _getLockManager().lock(className, key, expectedOwner, updatedOwner);
+		return _getLockManager().lock(
+			className, key, expectedOwner, updatedOwner);
 	}
 
 	public static Lock refresh(String uuid, long companyId, long expirationTime)
