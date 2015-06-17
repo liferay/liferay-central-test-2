@@ -69,7 +69,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -389,6 +388,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	 */
 	@Deprecated
 	@Override
+	@SuppressWarnings("unused")
 	public MissingReferences publishStagingRequest(
 			long userId, long stagingRequestId, boolean privateLayout,
 			Map<String, String[]> parameterMap)
