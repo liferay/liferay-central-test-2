@@ -230,7 +230,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 	protected boolean isModuleRequest(HttpServletRequest request) {
 		String requestURI = request.getRequestURI();
 
-		if (PortalWebResourcesUtil.isResourceContextPath(requestURI)) {
+		if (PortalWebResourcesUtil.hasContextPath(requestURI)) {
 			return false;
 		}
 
