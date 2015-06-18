@@ -27,8 +27,7 @@ public interface MVCActionCommand {
 
 		@Override
 		public boolean processAction(
-				PortletRequest portletRequest, PortletResponse portletResponse)
-			throws PortletException {
+			PortletRequest portletRequest, PortletResponse portletResponse) {
 
 			return false;
 		}
