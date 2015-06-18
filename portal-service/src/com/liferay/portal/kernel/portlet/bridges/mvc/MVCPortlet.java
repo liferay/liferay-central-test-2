@@ -193,11 +193,11 @@ public class MVCPortlet extends LiferayPortlet {
 		copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"), true);
 
-		_mvcActionCommandCache = new MVCCommandCache<MVCActionCommand>(
+		_mvcActionCommandCache = new MVCCommandCache(
 			MVCActionCommand.EMPTY, getInitParameter("action.package.prefix"),
 			getPortletName(), MVCActionCommand.class.getName(),
 			"ActionCommand");
-		_mvcResourceCommandCache = new MVCCommandCache<MVCResourceCommand>(
+		_mvcResourceCommandCache = new MVCCommandCache(
 			MVCResourceCommand.EMPTY,
 			getInitParameter("resource.package.prefix"), getPortletName(),
 			MVCResourceCommand.class.getName(), "ResourceCommand");
@@ -276,7 +276,8 @@ public class MVCPortlet extends LiferayPortlet {
 
 		if (!actionName.contains(StringPool.COMMA)) {
 			MVCActionCommand mvcActionCommand =
-				_mvcActionCommandCache.getMVCCommand(actionName);
+				(MVCActionCommand)_mvcActionCommandCache.getMVCCommand(
+					actionName);
 
 			if (mvcActionCommand != MVCActionCommand.EMPTY) {
 				return mvcActionCommand.processAction(
@@ -285,7 +286,8 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 		else {
 			List<MVCActionCommand> mvcActionCommands =
-				_mvcActionCommandCache.getMVCCommands(actionName);
+				(List<MVCActionCommand>)_mvcActionCommandCache.getMVCCommands(
+					actionName);
 
 			if (!mvcActionCommands.isEmpty()) {
 				for (MVCActionCommand mvcActionCommand : mvcActionCommands) {
@@ -320,7 +322,8 @@ public class MVCPortlet extends LiferayPortlet {
 
 		if (!resourceID.contains(StringPool.COMMA)) {
 			MVCResourceCommand mvcResourceCommand =
-				_mvcResourceCommandCache.getMVCCommand(resourceID);
+				(MVCResourceCommand)_mvcResourceCommandCache.getMVCCommand(
+					resourceID);
 
 			if (mvcResourceCommand != MVCResourceCommand.EMPTY) {
 				return mvcResourceCommand.serveResource(
@@ -329,8 +332,8 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 		else {
 			List<MVCResourceCommand> mvcResourceCommands =
-				_mvcResourceCommandCache.getMVCCommands(
-					resourceID);
+				(List<MVCResourceCommand>)
+					_mvcResourceCommandCache.getMVCCommands(resourceID);
 
 			if (!mvcResourceCommands.isEmpty()) {
 				for (MVCResourceCommand mvcResourceCommand :
@@ -517,7 +520,7 @@ public class MVCPortlet extends LiferayPortlet {
 
 	private static final Log _log = LogFactoryUtil.getLog(MVCPortlet.class);
 
-	private MVCCommandCache<MVCActionCommand> _mvcActionCommandCache;
-	private MVCCommandCache<MVCResourceCommand> _mvcResourceCommandCache;
+	private MVCCommandCache _mvcActionCommandCache;
+	private MVCCommandCache _mvcResourceCommandCache;
 
 }
