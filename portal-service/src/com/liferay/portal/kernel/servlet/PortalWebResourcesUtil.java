@@ -37,70 +37,18 @@ public class PortalWebResourcesUtil {
 	public static String getContextPath(String resourceType) {
 		PortalWebResources portalWebResources = getPortalWebResources(
 			resourceType);
-		
+
 		return portalWebResources.getContextPath();
 	}
 
 	public static long getLastModified(String resourceType) {
 		PortalWebResources portalWebResources = getPortalWebResources(
 			resourceType);
-		
+
 		return portalWebResources.getLastModified();
 	}
 
-	public static PortalWebResources getPortalWebResources(
-		String resourceType) {
-
-		for (PortalWebResources portalWebResources :
-				_instance._getPortalWebResourcesList()) {
-
-			if (resourceType.equals(portalWebResources.getResourceType())) {
-				return portalWebResources;
-			}
-		}
-
-		return null;
-	}
-
-	public static URL getResource(
-		ServletContext servletContext, String path) {
-
-		path = stripContextPath(servletContext, path);
-
-		try {
-			URL url = servletContext.getResource(path);
-
-			if (url != null) {
-				return url;
-			}
-		}
-		catch (MalformedURLException murle) {
-		}
-
-		return null;
-	}
-
-	public static URL getResource(String path) {
-		ServletContext servletContext = getPathServletContext(
-			path);
-
-		if (servletContext != null) {
-			return getResource(servletContext, path);
-		}
-
-		return null;
-	}
-
-	public static ServletContext getServletContext(String resourceType) {
-		PortalWebResources portalWebResources = getPortalWebResources(
-			resourceType);
-		
-		return portalWebResources.getServletContext();
-	}
-
-	public static ServletContext getPathServletContext(
-		String path) {
-
+	public static ServletContext getPathServletContext(String path) {
 		for (PortalWebResources portalWebResources :
 				_instance._getPortalWebResourcesList()) {
 
@@ -123,14 +71,51 @@ public class PortalWebResourcesUtil {
 		return null;
 	}
 
-	public static boolean isAvailable(String path) {
-		URL url = getResource(path);
+	public static PortalWebResources getPortalWebResources(
+		String resourceType) {
 
-		if (url != null) {
-			return true;
+		for (PortalWebResources portalWebResources :
+				_instance._getPortalWebResourcesList()) {
+
+			if (resourceType.equals(portalWebResources.getResourceType())) {
+				return portalWebResources;
+			}
 		}
 
-		return false;
+		return null;
+	}
+
+	public static URL getResource(ServletContext servletContext, String path) {
+		path = stripContextPath(servletContext, path);
+
+		try {
+			URL url = servletContext.getResource(path);
+
+			if (url != null) {
+				return url;
+			}
+		}
+		catch (MalformedURLException murle) {
+		}
+
+		return null;
+	}
+
+	public static URL getResource(String path) {
+		ServletContext servletContext = getPathServletContext(path);
+
+		if (servletContext != null) {
+			return getResource(servletContext, path);
+		}
+
+		return null;
+	}
+
+	public static ServletContext getServletContext(String resourceType) {
+		PortalWebResources portalWebResources = getPortalWebResources(
+			resourceType);
+
+		return portalWebResources.getServletContext();
 	}
 
 	public static boolean hasContextPath(String requestURI) {
@@ -140,6 +125,16 @@ public class PortalWebResourcesUtil {
 			if (requestURI.startsWith(portalWebResources.getContextPath())) {
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	public static boolean isAvailable(String path) {
+		URL url = getResource(path);
+
+		if (url != null) {
+			return true;
 		}
 
 		return false;
