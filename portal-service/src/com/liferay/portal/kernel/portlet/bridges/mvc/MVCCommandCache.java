@@ -37,10 +37,10 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Sergio González
  */
-public class MVCCommandCache<T> {
+public class MVCCommandCache {
 
 	public MVCCommandCache(
-		T emptyMVCCommand, String packagePrefix, String portletName,
+		MVCCommand emptyMVCCommand, String packagePrefix, String portletName,
 		String mvcCommandClassName, String mvcCommandPostFix) {
 
 		_emptyMVCCommand = emptyMVCCommand;
@@ -70,11 +70,11 @@ public class MVCCommandCache<T> {
 		_serviceTracker.close();
 	}
 
-	public T getMVCCommand(String mvcCommandName) {
+	public MVCCommand getMVCCommand(String mvcCommandName) {
 		String className = null;
 
 		try {
-			T mvcCommand = _mvcCommandCache.get(mvcCommandName);
+			MVCCommand mvcCommand = _mvcCommandCache.get(mvcCommandName);
 
 			if (mvcCommand != null) {
 				return mvcCommand;
@@ -93,7 +93,7 @@ public class MVCCommandCache<T> {
 
 			className = sb.toString();
 
-			mvcCommand = (T)InstanceFactory.newInstance(className);
+			mvcCommand = (MVCCommand)InstanceFactory.newInstance(className);
 
 			_mvcCommandCache.put(mvcCommandName, mvcCommand);
 
@@ -110,8 +110,8 @@ public class MVCCommandCache<T> {
 		}
 	}
 
-	public List<T> getMVCCommands(String key) {
-		List<T> mvcCommands = _mvcCommands.get(key);
+	public List<? extends MVCCommand> getMVCCommands(String key) {
+		List<MVCCommand> mvcCommands = _mvcCommands.get(key);
 
 		if (mvcCommands != null) {
 			return mvcCommands;
@@ -122,7 +122,7 @@ public class MVCCommandCache<T> {
 		String[] mvcCommandNames = StringUtil.split(key);
 
 		for (String mvcCommandName : mvcCommandNames) {
-			T mvcCommand = getMVCCommand(mvcCommandName);
+			MVCCommand mvcCommand = getMVCCommand(mvcCommandName);
 
 			if (mvcCommand != _emptyMVCCommand) {
 				mvcCommands.add(mvcCommand);
@@ -146,22 +146,25 @@ public class MVCCommandCache<T> {
 	private static final Log _log = LogFactoryUtil.getLog(
 		MVCCommandCache.class);
 
-	private final T _emptyMVCCommand;
+	private final MVCCommand _emptyMVCCommand;
 	private final String _mvcComandPostFix;
-	private final Map<String, T> _mvcCommandCache = new ConcurrentHashMap<>();
-	private final Map<String, List<T>> _mvcCommands =
+	private final Map<String, MVCCommand> _mvcCommandCache =
+		new ConcurrentHashMap<>();
+	private final Map<String, List<MVCCommand>> _mvcCommands =
 		new ConcurrentHashMap<>();
 	private final String _packagePrefix;
-	private final ServiceTracker<T, T> _serviceTracker;
+	private final ServiceTracker<MVCCommand, MVCCommand> _serviceTracker;
 
 	private class MVCCommandServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer<T, T> {
+		implements ServiceTrackerCustomizer<MVCCommand, MVCCommand> {
 
 		@Override
-		public T addingService(ServiceReference<T> serviceReference) {
+		public MVCCommand addingService(
+			ServiceReference<MVCCommand> serviceReference) {
+
 			Registry registry = RegistryUtil.getRegistry();
 
-			T mvcCommand = registry.getService(serviceReference);
+			MVCCommand mvcCommand = registry.getService(serviceReference);
 
 			List<String> mvcCommandNames = StringPlus.asList(
 				serviceReference.getProperty("mvc.command.name"));
@@ -175,12 +178,14 @@ public class MVCCommandCache<T> {
 
 		@Override
 		public void modifiedService(
-			ServiceReference<T> serviceReference, T mvcCommand) {
+			ServiceReference<MVCCommand> serviceReference,
+			MVCCommand mvcCommand) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<T> serviceReference, T mvcCommand) {
+			ServiceReference<MVCCommand> serviceReference,
+			MVCCommand mvcCommand) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
@@ -191,7 +196,7 @@ public class MVCCommandCache<T> {
 
 			_mvcCommandCache.remove(mvcCommandName);
 
-			for (List<T> mvcCommands : _mvcCommands.values()) {
+			for (List<MVCCommand> mvcCommands : _mvcCommands.values()) {
 				mvcCommands.remove(mvcCommand);
 			}
 		}
