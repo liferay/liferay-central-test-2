@@ -55,9 +55,7 @@ public abstract class BasePoolingHttpClientFactory
 
 		configure(httpClientBuilder);
 
-		HttpClient httpClient = httpClientBuilder.build();
-
-		return httpClient;
+		return httpClientBuilder.build();
 	}
 
 	public void setDefaultMaxConnectionsPerRoute(

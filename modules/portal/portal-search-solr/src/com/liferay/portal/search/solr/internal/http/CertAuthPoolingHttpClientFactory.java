@@ -88,14 +88,12 @@ public class CertAuthPoolingHttpClientFactory
 	protected Registry<ConnectionSocketFactory> createSchemeRegistry(
 		SSLConnectionSocketFactory sslConnectionSocketFactory) {
 
-		RegistryBuilder<ConnectionSocketFactory> registeryBuilder =
+		RegistryBuilder<ConnectionSocketFactory> registryBuilder =
 			RegistryBuilder.create();
 
-		registeryBuilder.register("https", sslConnectionSocketFactory);
+		registryBuilder.register("https", sslConnectionSocketFactory);
 
-		Registry<ConnectionSocketFactory> registry = registeryBuilder.build();
-
-		return registry;
+		return registryBuilder.build();
 	}
 
 	@Deactivate
