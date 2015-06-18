@@ -199,7 +199,8 @@ public class MVCPortlet extends LiferayPortlet {
 			getPortletName(), MVCActionCommand.class.getName(),
 			"ActionCommand");
 		_mvcRenderCommandCache = new MVCCommandCache(
-			MVCRenderCommand.EMPTY, getInitParameter("render.package.prefix"),
+			MVCRenderCommand.EMPTY,
+			getInitParameter("mvc.render.command.package.prefix"),
 			getPortletName(), MVCRenderCommand.class.getName(),
 			"RenderCommand");
 		_mvcResourceCommandCache = new MVCCommandCache(
