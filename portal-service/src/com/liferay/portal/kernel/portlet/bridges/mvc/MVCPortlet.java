@@ -245,10 +245,12 @@ public class MVCPortlet extends LiferayPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		String mvcAction = ParamUtil.getString(renderRequest, "mvcAction");
+		String mvcRenderCommandName = ParamUtil.getString(
+			renderRequest, "mvcRenderCommandName");
 
 		MVCRenderCommand mvcRenderCommand =
-			(MVCRenderCommand)_mvcRenderCommandCache.getMVCCommand(mvcAction);
+			(MVCRenderCommand)_mvcRenderCommandCache.getMVCCommand(
+				mvcRenderCommandName);
 
 		if (mvcRenderCommand != MVCRenderCommand.EMPTY) {
 			String mvcPath = mvcRenderCommand.render(
