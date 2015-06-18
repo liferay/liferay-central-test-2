@@ -366,7 +366,7 @@ public class SyncFile extends StateAwareModel {
 	@DatabaseField(defaultValue = "", useGetSet = true)
 	protected String changeLog;
 
-	@DatabaseField(useGetSet = true)
+	@DatabaseField(index = true, useGetSet = true)
 	protected String checksum;
 
 	@DatabaseField(useGetSet = true)
