@@ -94,6 +94,7 @@ public class SSLSocketFactoryBuilderImpl implements SSLSocketFactoryBuilder {
 		}
 
 		SSLContextBuilder sslContextBuilder = SSLContexts.custom();
+
 		sslContextBuilder.loadKeyMaterial(keyStore, _keyStorePassword);
 		sslContextBuilder.loadTrustMaterial(trustStrategy);
 
