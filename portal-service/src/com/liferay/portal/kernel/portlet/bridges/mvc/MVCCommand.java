@@ -14,29 +14,8 @@
 
 package com.liferay.portal.kernel.portlet.bridges.mvc;
 
-import javax.portlet.PortletException;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
-
 /**
- * @author Sergio González
+ * @author Brian Wing Shun Chan
  */
-public interface MVCResourceCommand extends MVCCommand {
-
-	public static final MVCResourceCommand EMPTY = new MVCResourceCommand() {
-
-		@Override
-		public boolean serveResource(
-			ResourceRequest resourceRequest,
-			ResourceResponse resourceResponse) {
-
-			return false;
-		}
-
-	};
-
-	public boolean serveResource(
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws PortletException;
-
+public interface MVCCommand {
 }
