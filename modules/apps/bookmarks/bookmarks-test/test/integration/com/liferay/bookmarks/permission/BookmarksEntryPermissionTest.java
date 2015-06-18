@@ -107,7 +107,10 @@ public class BookmarksEntryPermissionTest {
 	@DeleteAfterTestRun
 	private Group _group;
 
+	@DeleteAfterTestRun
 	private Role _role1;
+
+	@DeleteAfterTestRun
 	private Role _role2;
 
 }
