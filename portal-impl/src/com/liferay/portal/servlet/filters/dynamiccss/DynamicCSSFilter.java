@@ -105,7 +105,7 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 
 		if (resourceURL == null) {
 			ServletContext resourceServletContext =
-				PortalWebResourcesUtil.getServletContextByResource(requestPath);
+				PortalWebResourcesUtil.getPathServletContext(requestPath);
 
 			if (resourceServletContext != null) {
 				resourceURL = PortalWebResourcesUtil.getResource(
