@@ -23,9 +23,8 @@ import org.osgi.service.component.annotations.Component;
  * @author Juergen Kappler
  */
 @Component
-public class
-	JournalContentSearchPortletInstanceConfigurationBeanDeclaration
-		implements ConfigurationBeanDeclaration {
+public class JournalContentSearchPortletInstanceConfigurationBeanDeclaration
+	implements ConfigurationBeanDeclaration {
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {
