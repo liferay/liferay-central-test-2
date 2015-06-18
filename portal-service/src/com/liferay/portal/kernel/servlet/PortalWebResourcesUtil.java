@@ -57,12 +57,12 @@ public class PortalWebResourcesUtil {
 	}
 
 	public static URL getResource(
-		ServletContext servletContext, String resourcePath) {
+		ServletContext servletContext, String path) {
 
-		resourcePath = stripContextPath(servletContext, resourcePath);
+		path = stripContextPath(servletContext, path);
 
 		try {
-			URL url = servletContext.getResource(resourcePath);
+			URL url = servletContext.getResource(path);
 
 			if (url != null) {
 				return url;
@@ -74,12 +74,12 @@ public class PortalWebResourcesUtil {
 		return null;
 	}
 
-	public static URL getResource(String resourcePath) {
+	public static URL getResource(String path) {
 		ServletContext servletContext = getServletContextByResource(
-			resourcePath);
+			path);
 
 		if (servletContext != null) {
-			return getResource(servletContext, resourcePath);
+			return getResource(servletContext, path);
 		}
 
 		return null;
@@ -90,7 +90,7 @@ public class PortalWebResourcesUtil {
 	}
 
 	public static ServletContext getServletContextByResource(
-		String resourcePath) {
+		String path) {
 
 		for (PortalWebResources portalWebResources :
 				_instance._getPortalWebResourcesList()) {
@@ -98,10 +98,10 @@ public class PortalWebResourcesUtil {
 			ServletContext servletContext =
 				portalWebResources.getServletContext();
 
-			resourcePath = stripContextPath(servletContext, resourcePath);
+			path = stripContextPath(servletContext, path);
 
 			try {
-				URL url = servletContext.getResource(resourcePath);
+				URL url = servletContext.getResource(path);
 
 				if (url != null) {
 					return servletContext;
@@ -137,15 +137,15 @@ public class PortalWebResourcesUtil {
 	}
 
 	public static String stripContextPath(
-		ServletContext servletContext, String resourcePath) {
+		ServletContext servletContext, String path) {
 
 		String contextPath = servletContext.getContextPath();
 
-		if (resourcePath.startsWith(contextPath)) {
-			resourcePath = resourcePath.substring(contextPath.length());
+		if (path.startsWith(contextPath)) {
+			path = path.substring(contextPath.length());
 		}
 
-		return resourcePath;
+		return path;
 	}
 
 	private PortalWebResourcesUtil() {
