@@ -32,13 +32,13 @@ public class ServiceContextAdvice extends ChainableMethodAdvice {
 				methodInvocation, this);
 		}
 
-		boolean hasPushedServiceContext = pushServiceContext(methodInvocation);
+		boolean pushedServiceContext = pushServiceContext(methodInvocation);
 
 		try {
 			return methodInvocation.proceed();
 		}
 		finally {
-			if (hasPushedServiceContext) {
+			if (pushedServiceContext) {
 				ServiceContextThreadLocal.popServiceContext();
 			}
 		}

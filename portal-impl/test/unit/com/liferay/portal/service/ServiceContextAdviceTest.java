@@ -56,7 +56,7 @@ public class ServiceContextAdviceTest {
 		_serviceContextAdvice.invoke(methodInvocation);
 
 		Assert.assertFalse(
-			_testServiceBeanAopCacheManager.hasRemovedMethodInterceptor());
+			_testServiceBeanAopCacheManager.isRemovedMethodInterceptor());
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class ServiceContextAdviceTest {
 		_serviceContextAdvice.invoke(methodInvocation);
 
 		Assert.assertTrue(
-			_testServiceBeanAopCacheManager.hasRemovedMethodInterceptor());
+			_testServiceBeanAopCacheManager.isRemovedMethodInterceptor());
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class ServiceContextAdviceTest {
 		_serviceContextAdvice.invoke(methodInvocation);
 
 		Assert.assertFalse(
-			_testServiceBeanAopCacheManager.hasRemovedMethodInterceptor());
+			_testServiceBeanAopCacheManager.isRemovedMethodInterceptor());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class ServiceContextAdviceTest {
 		_serviceContextAdvice.invoke(methodInvocation);
 
 		Assert.assertTrue(
-			_testServiceBeanAopCacheManager.hasRemovedMethodInterceptor());
+			_testServiceBeanAopCacheManager.isRemovedMethodInterceptor());
 	}
 
 	@Test
@@ -101,7 +101,7 @@ public class ServiceContextAdviceTest {
 		_serviceContextAdvice.invoke(methodInvocation);
 
 		Assert.assertFalse(
-			_testServiceBeanAopCacheManager.hasRemovedMethodInterceptor());
+			_testServiceBeanAopCacheManager.isRemovedMethodInterceptor());
 	}
 
 	protected MethodInvocation createMethodInvocation(
@@ -172,8 +172,8 @@ public class ServiceContextAdviceTest {
 	private class TestServiceBeanAopCacheManager
 		extends ServiceBeanAopCacheManager {
 
-		public boolean hasRemovedMethodInterceptor() {
-			return removedMethodInterceptor;
+		public boolean isRemovedMethodInterceptor() {
+			return _removedMethodInterceptor;
 		}
 
 		@Override
@@ -181,10 +181,10 @@ public class ServiceContextAdviceTest {
 			MethodInvocation methodInvocation,
 			MethodInterceptor methodInterceptor) {
 
-			removedMethodInterceptor = true;
+			_removedMethodInterceptor = true;
 		}
 
-		private boolean removedMethodInterceptor = false;
+		private boolean _removedMethodInterceptor;
 
 	}
 
