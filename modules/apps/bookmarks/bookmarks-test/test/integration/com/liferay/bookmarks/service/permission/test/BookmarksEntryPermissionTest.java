@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.permission;
+package com.liferay.bookmarks.service.permission.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.bookmarks.model.BookmarksEntry;
