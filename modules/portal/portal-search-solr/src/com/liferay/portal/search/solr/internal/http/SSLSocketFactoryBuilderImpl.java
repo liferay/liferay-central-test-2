@@ -117,28 +117,28 @@ public class SSLSocketFactoryBuilderImpl implements SSLSocketFactoryBuilder {
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_solrSslSocketFactoryConfiguration = Configurable.createConfigurable(
+		_solrSSLSocketFactoryConfiguration = Configurable.createConfigurable(
 			SolrSSLSocketFactoryConfiguration.class, properties);
 
 		String keyStorePassword =
-			_solrSslSocketFactoryConfiguration.keyStorePassword();
+			_solrSSLSocketFactoryConfiguration.keyStorePassword();
 
 		_keyStorePassword = keyStorePassword.toCharArray();
 
-		_keyStorePath = _solrSslSocketFactoryConfiguration.keyStorePath();
-		_keyStoreType = _solrSslSocketFactoryConfiguration.keyStoreType();
+		_keyStorePath = _solrSSLSocketFactoryConfiguration.keyStorePath();
+		_keyStoreType = _solrSSLSocketFactoryConfiguration.keyStoreType();
 
 		String trustStorePassword =
-			_solrSslSocketFactoryConfiguration.trustStorePassword();
+			_solrSSLSocketFactoryConfiguration.trustStorePassword();
 
 		_trustStorePassword = trustStorePassword.toCharArray();
 
-		_trustStorePath = _solrSslSocketFactoryConfiguration.trustStorePath();
-		_trustStoreType = _solrSslSocketFactoryConfiguration.trustStoreType();
+		_trustStorePath = _solrSSLSocketFactoryConfiguration.trustStorePath();
+		_trustStoreType = _solrSSLSocketFactoryConfiguration.trustStoreType();
 		_verifyServerCertificate =
-			_solrSslSocketFactoryConfiguration.verifyServerCertificate();
+			_solrSSLSocketFactoryConfiguration.verifyServerCertificate();
 		_verifyServerHostname =
-			_solrSslSocketFactoryConfiguration.verifyServerName();
+			_solrSSLSocketFactoryConfiguration.verifyServerName();
 	}
 
 	@Reference(unbind = "-")
@@ -154,7 +154,7 @@ public class SSLSocketFactoryBuilderImpl implements SSLSocketFactoryBuilder {
 	private String _keyStorePath;
 	private String _keyStoreType = KeyStore.getDefaultType();
 	private volatile SolrSSLSocketFactoryConfiguration
-		_solrSslSocketFactoryConfiguration;
+		_solrSSLSocketFactoryConfiguration;
 	private char[] _trustStorePassword;
 	private String _trustStorePath;
 	private String _trustStoreType = KeyStore.getDefaultType();
