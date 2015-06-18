@@ -272,12 +272,12 @@ public class MVCPortlet extends LiferayPortlet {
 			throw new PortletException(e);
 		}
 
-		String actionName = ParamUtil.getString(
+		String mvcActionCommandName = ParamUtil.getString(
 			actionRequest, ActionRequest.ACTION_NAME);
 
-		if (!actionName.contains(StringPool.COMMA)) {
+		if (!mvcActionCommandName.contains(StringPool.COMMA)) {
 			MVCActionCommand mvcActionCommand =
-				_mvcActionCommandCache.getMVCCommand(actionName);
+				_mvcActionCommandCache.getMVCCommand(mvcActionCommandName);
 
 			if (mvcActionCommand != MVCActionCommand.EMPTY) {
 				return mvcActionCommand.processAction(
@@ -286,7 +286,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 		else {
 			List<MVCActionCommand> mvcActionCommands =
-				_mvcActionCommandCache.getMVCCommandChain(actionName);
+				_mvcActionCommandCache.getMVCCommandChain(mvcActionCommandName);
 
 			if (!mvcActionCommands.isEmpty()) {
 				for (MVCActionCommand mvcActionCommand : mvcActionCommands) {
@@ -316,12 +316,12 @@ public class MVCPortlet extends LiferayPortlet {
 			throw new PortletException(e);
 		}
 
-		String resourceName = ParamUtil.getString(
-			resourceRequest, ActionRequest.ACTION_NAME);
+		String mvcResourceCommandName = GetterUtil.getString(
+			resourceRequest.getResourceID());
 
-		if (!resourceName.contains(StringPool.COMMA)) {
+		if (!mvcResourceCommandName.contains(StringPool.COMMA)) {
 			MVCResourceCommand mvcResourceCommand =
-				_mvcResourceCommandCache.getMVCCommand(resourceName);
+				_mvcResourceCommandCache.getMVCCommand(mvcResourceCommandName);
 
 			if (mvcResourceCommand != MVCResourceCommand.EMPTY) {
 				return mvcResourceCommand.serveResource(
@@ -330,7 +330,8 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 		else {
 			List<MVCResourceCommand> mvcResourceCommands =
-				_mvcResourceCommandCache.getMVCCommandChain(resourceName);
+				_mvcResourceCommandCache.getMVCCommandChain(
+					mvcResourceCommandName);
 
 			if (!mvcResourceCommands.isEmpty()) {
 				for (MVCResourceCommand mvcResourceCommand :
