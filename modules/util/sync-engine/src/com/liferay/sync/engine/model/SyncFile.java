@@ -86,6 +86,8 @@ public class SyncFile extends StateAwareModel {
 
 	public static final int UI_EVENT_MOVED_REMOTE = 14;
 
+	public static final int UI_EVENT_PARENT_MISSING = 24;
+
 	public static final int UI_EVENT_RENAMED_LOCAL = 21;
 
 	public static final int UI_EVENT_RENAMED_REMOTE = 22;
