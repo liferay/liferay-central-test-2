@@ -159,9 +159,13 @@ else if (calendar != null) {
 	hasWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), calendarResource.getGroupId(), CalendarBooking.class.getName());
 }
 
-List<Calendar> manageableCalendars = CalendarServiceUtil.search(themeDisplay.getCompanyId(), new long[] {user.getGroupId(), scopeGroupId}, null, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new CalendarNameComparator(true), CalendarActionKeys.MANAGE_BOOKINGS);
+long[] groupIds = user.getGroupIds();
 
-long[] otherCalendarIds = StringUtil.split(SessionClicks.get(request, "com.liferay.calendar.web_otherCalendars", StringPool.BLANK), 0L);
+groupIds = ArrayUtil.append(groupIds, scopeGroupId);
+
+List<Calendar> manageableCalendars = CalendarServiceUtil.search(themeDisplay.getCompanyId(), groupIds, null, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new CalendarNameComparator(true), ActionKeys.MANAGE_BOOKINGS);
+
+long[] otherCalendarIds = StringUtil.split(SessionClicks.get(request, "otherCalendars", StringPool.BLANK), 0L);
 
 for (long otherCalendarId : otherCalendarIds) {
 	Calendar otherCalendar = CalendarServiceUtil.fetchCalendar(otherCalendarId);
