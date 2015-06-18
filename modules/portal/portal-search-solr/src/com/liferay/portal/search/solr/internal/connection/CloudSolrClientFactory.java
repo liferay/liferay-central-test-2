@@ -43,7 +43,7 @@ public class CloudSolrClientFactory implements SolrClientFactory {
 		String zkHost = solrConfiguration.zkHost();
 
 		if (Validator.isNull(zkHost)) {
-			throw new IllegalStateException("Must configure zkHost");
+			throw new IllegalStateException("Must configure Zookeeper host");
 		}
 
 		HttpClient httpClient = httpClientFactory.createInstance();
