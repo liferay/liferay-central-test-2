@@ -21,7 +21,7 @@ import javax.portlet.PortletResponse;
 /**
  * @author Michael C. Han
  */
-public interface MVCActionCommand {
+public interface MVCActionCommand extends MVCCommand {
 
 	public static final MVCActionCommand EMPTY = new MVCActionCommand() {
 
