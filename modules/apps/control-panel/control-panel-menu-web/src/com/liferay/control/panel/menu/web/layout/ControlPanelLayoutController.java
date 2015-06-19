@@ -44,9 +44,7 @@ public class ControlPanelLayoutController
 
 	@Override
 	public String getURL() {
-		return
-			"${liferay:mainPath}/portal/layout?p_l_id=${liferay:plid}&" +
-				"p_v_l_s_g_id=${liferay:pvlsgid}";
+		return _URL;
 	}
 
 	@Override
@@ -124,6 +122,10 @@ public class ControlPanelLayoutController
 	private static final String _EDIT_PAGE = "/layout/edit/control_panel.jsp";
 
 	private static final String _VIEW_PAGE = "/layout/view/control_panel.jsp";
+
+	private static final String _URL =
+		"${liferay:mainPath}/portal/layout?p_l_id=${liferay:plid}" +
+			"&p_v_l_s_g_id=${liferay:pvlsgid}";
 
 	private PanelAppRegistry _panelAppRegistry;
 	private PanelCategoryRegistry _panelCategoryRegistry;
