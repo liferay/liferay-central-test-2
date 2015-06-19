@@ -89,64 +89,64 @@ public class TinyMCEEditorConfigContributor
 		JSONObject styleJSONObject = JSONFactoryUtil.createJSONObject();
 
 		styleJSONObject.put(type, element);
-		styleJSONObject.put("title", styleFormatName);
 		styleJSONObject.put("classes", cssClasses);
+		styleJSONObject.put("title", styleFormatName);
 
 		return styleJSONObject;
 	}
 
 	protected JSONArray getStyleFormatsJSONArray(Locale locale) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
 		ResourceBundle resourceBundle = ResourceBundle.getBundle(
 			"content.Language", locale);
 
-		JSONArray styleFormatsJSONArray = JSONFactoryUtil.createJSONArray();
-
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "normal"), "inline", "p",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "1"), "block",
 				"h1", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "2"), "block",
 				"h2", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "3"), "block",
 				"h3", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "4"), "block",
 				"h4", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "preformatted-text"), "block",
 				"pre", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "cited-work"), "inline",
 				"cite", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "computer-code"), "inline",
 				"code", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "info-message"), "block",
 				"div", "portlet-msg-info"));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "alert-message"), "block",
 				"div", "portlet-msg-alert"));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "error-message"), "block",
 				"div", "portlet-msg-error"));
 
-		return styleFormatsJSONArray;
+		return jsonArray;
 	}
 
 	protected JSONArray getToolbarJSONArray(
