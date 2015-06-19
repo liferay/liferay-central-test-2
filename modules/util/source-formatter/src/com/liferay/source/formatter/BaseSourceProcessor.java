@@ -1246,12 +1246,13 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		String newLine = StringUtil.replace(
 			line,
 			new String[] {
-				"new Boolean(", "new Byte(", "new Character(", "new Integer(",
-				"new Long(", "new Short("
+				"new Boolean(", "new Byte(", "new Character(", "new Double(",
+				"new Float(", "new Integer(", "new Long(", "new Short("
 			},
 			new String[] {
 				"Boolean.valueOf(", "Byte.valueOf(", "Character.valueOf(",
-				"Integer.valueOf(", "Long.valueOf(", "Short.valueOf("
+				"Double.valueOf(", "Float.valueOf(", "Integer.valueOf(",
+				"Long.valueOf(", "Short.valueOf("
 			});
 
 		if (!line.equals(newLine)) {
