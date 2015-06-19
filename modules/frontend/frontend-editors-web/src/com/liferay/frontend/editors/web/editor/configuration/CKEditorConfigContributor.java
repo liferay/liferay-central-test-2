@@ -115,9 +115,6 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 
 		JSONObject styleJSONObject = JSONFactoryUtil.createJSONObject();
 
-		styleJSONObject.put("name", styleFormatName);
-		styleJSONObject.put("element", element);
-
 		if (Validator.isNotNull(cssClass)) {
 			JSONObject attributesJSONObject =
 				JSONFactoryUtil.createJSONObject();
@@ -127,59 +124,62 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 			styleJSONObject.put("attributes", attributesJSONObject);
 		}
 
+		styleJSONObject.put("name", styleFormatName);
+		styleJSONObject.put("element", element);
+
 		return styleJSONObject;
 	}
 
 	protected JSONArray getStyleFormatsJSONArray(Locale locale) {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
 		ResourceBundle resourceBundle = ResourceBundle.getBundle(
 			"content.Language", locale);
 
-		JSONArray styleFormatsJSONArray = JSONFactoryUtil.createJSONArray();
-
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "normal"), "p", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "1"), "h1",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "2"), "h2",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "3"), "h3",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.format(resourceBundle, "heading-x", "4"), "h4",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "preformatted-text"), "pre",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "cited-work"), "cite", null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "computer-code"), "code",
 				null));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "info-message"), "div",
 				"portlet-msg-info"));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "alert-message"), "div",
 				"portlet-msg-alert"));
-		styleFormatsJSONArray.put(
+		jsonArray.put(
 			getStyleFormatJSONObject(
 				LanguageUtil.get(resourceBundle, "error-message"), "div",
 				"portlet-msg-error"));
 
-		return styleFormatsJSONArray;
+		return jsonArray;
 	}
 
 	protected JSONArray getToolbarEditInPlaceJSONArray(
