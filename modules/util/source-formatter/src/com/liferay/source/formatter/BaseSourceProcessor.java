@@ -1243,10 +1243,6 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	protected String replacePrimitiveWrapperInstantiation(
 		String fileName, String line, int lineCount) {
 
-		if (true) {
-			return line;
-		}
-
 		String newLine = StringUtil.replace(
 			line,
 			new String[] {
