@@ -102,7 +102,7 @@ public class JournalArticleAssetRendererFactory
 					WorkflowConstants.STATUS_ANY);
 			}
 
-			if ((article == null) && type == TYPE_LATEST) {
+			if ((article == null) && (type == TYPE_LATEST)) {
 				article = JournalArticleLocalServiceUtil.fetchLatestArticle(
 					classPK, WorkflowConstants.STATUS_ANY);
 			}
