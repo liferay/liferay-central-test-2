@@ -1240,10 +1240,9 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		}
 	}
 
-	protected String replacePrimitiveWrapperInstantiation(
-		String fileName, String line, int lineCount) {
+	protected String replacePrimitiveWrapperInstantiation(String line) {
 
-		String newLine = StringUtil.replace(
+		return StringUtil.replace(
 			line,
 			new String[] {
 				"new Boolean(", "new Byte(", "new Character(", "new Double(",
@@ -1254,13 +1253,6 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 				"Double.valueOf(", "Float.valueOf(", "Integer.valueOf(",
 				"Long.valueOf(", "Short.valueOf("
 			});
-
-		if (!line.equals(newLine)) {
-			processErrorMessage(
-				fileName, "> new Primitive(: " + fileName + " " + lineCount);
-		}
-
-		return newLine;
 	}
 
 	protected String sortAttributes(
