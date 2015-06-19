@@ -119,8 +119,8 @@ public abstract class BasePanelLayoutControllerImpl
 
 			return values.contains(friendlyURL);
 		}
-		catch (SystemException e) {
-			throw new RuntimeException(e);
+		catch (SystemException se) {
+			throw new RuntimeException(se);
 		}
 	}
 
