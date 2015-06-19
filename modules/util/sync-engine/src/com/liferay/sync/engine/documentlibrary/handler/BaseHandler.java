@@ -78,14 +78,23 @@ public class BaseHandler implements Handler<Void> {
 			int statusCode = hre.getStatusCode();
 
 			if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
-				syncAccount.setState(SyncAccount.STATE_DISCONNECTED);
-				syncAccount.setUiEvent(
-					SyncAccount.UI_EVENT_AUTHENTICATION_EXCEPTION);
+				if (syncAccount.getUiEvent() ==
+						SyncAccount.UI_EVENT_AUTHENTICATION_EXCEPTION) {
 
-				SyncAccountService.update(syncAccount);
+					syncAccount.setState(SyncAccount.STATE_DISCONNECTED);
 
-				retryServerConnection(
-					SyncAccount.UI_EVENT_AUTHENTICATION_EXCEPTION, 1);
+					SyncAccountService.update(syncAccount);
+				}
+				else {
+					syncAccount.setState(SyncAccount.STATE_DISCONNECTED);
+					syncAccount.setUiEvent(
+						SyncAccount.UI_EVENT_AUTHENTICATION_EXCEPTION);
+
+					SyncAccountService.update(syncAccount);
+
+					retryServerConnection(
+						SyncAccount.UI_EVENT_AUTHENTICATION_EXCEPTION);
+				}
 
 				return;
 			}
@@ -99,8 +108,7 @@ public class BaseHandler implements Handler<Void> {
 			(e instanceof SocketTimeoutException) ||
 			(e instanceof UnknownHostException)) {
 
-			retryServerConnection(
-				SyncAccount.UI_EVENT_CONNECTION_EXCEPTION, -1);
+			retryServerConnection(SyncAccount.UI_EVENT_CONNECTION_EXCEPTION);
 		}
 		else if (e instanceof FileNotFoundException) {
 			SyncFile syncFile = (SyncFile)getParameterValue("syncFile");
@@ -226,7 +234,7 @@ public class BaseHandler implements Handler<Void> {
 	protected void processFinally() {
 	}
 
-	protected void retryServerConnection(int uiEvent, int maxCount) {
+	protected void retryServerConnection(int uiEvent) {
 		if (!(_event instanceof GetSyncContextEvent) &&
 			ConnectionRetryUtil.retryInProgress(getSyncAccountId())) {
 
@@ -237,12 +245,6 @@ public class BaseHandler implements Handler<Void> {
 			getSyncAccountId());
 
 		int retryCount = ConnectionRetryUtil.getRetryCount(getSyncAccountId());
-
-		if ((maxCount != -1) && (retryCount >= maxCount)) {
-			ConnectionRetryUtil.resetRetry(getSyncAccountId());
-
-			return;
-		}
 
 		if (retryCount > 0) {
 			syncAccount.setState(SyncAccount.STATE_DISCONNECTED);
