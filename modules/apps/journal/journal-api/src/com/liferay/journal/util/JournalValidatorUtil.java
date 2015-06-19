@@ -25,16 +25,16 @@ import com.liferay.registry.ServiceTracker;
 public class JournalValidatorUtil {
 
 	public static boolean isValidName(String name) {
-		return getInstance().isValidName(name);
+		return getJournalValidator().isValidName(name);
 	}
 
 	public static final void validateFolderName(String folderName)
 		throws FolderNameException {
 
-		getInstance().validateFolderName(folderName);
+		getJournalValidator().validateFolderName(folderName);
 	}
 
-	private static JournalValidator getInstance() {
+	private static JournalValidator getJournalValidator() {
 		return _instance._serviceTracker.getService();
 	}
 
