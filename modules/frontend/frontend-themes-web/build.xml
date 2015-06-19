@@ -89,7 +89,10 @@
 			<then>
 				<delete dir="${alloy.bootstrap.deploy.theme.dir}/alloy-font-awesome" />
 
-				<unzip src="${third.party.dir}/${alloy-font-awesome.file}" dest="${alloy.bootstrap.deploy.theme.dir}" />
+				<unzip
+					dest="${alloy.bootstrap.deploy.theme.dir}"
+					src="${third.party.dir}/${alloy-font-awesome.file}"
+				/>
 
 				<delete dir="${alloy.bootstrap.deploy.theme.dir}/alloy-font-awesome/css" />
 				<delete dir="${alloy.bootstrap.deploy.theme.dir}/alloy-font-awesome/less" />
@@ -177,7 +180,10 @@
 			<then>
 				<delete dir="${alloy.bootstrap.deploy.theme.dir}/lexicon" />
 
-				<unzip src="${third.party.dir}/${lexicon.file}" dest="${alloy.bootstrap.deploy.theme.dir}/lexicon" />
+				<unzip
+					dest="${alloy.bootstrap.deploy.theme.dir}/lexicon"
+					src="${third.party.dir}/${lexicon.file}"
+				/>
 			</then>
 		</if>
 	</target>
