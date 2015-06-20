@@ -66,13 +66,7 @@ public class CKEditorBBCodeConfigContributor
 			"imagesPath",
 			HtmlUtil.escape(themeDisplay.getPathThemeImages()) +
 				"/message_boards/");
-
-		JSONObject langJSONObject = JSONFactoryUtil.createJSONObject();
-		langJSONObject.put("code",
-			LanguageUtil.get(
-				getContentsLocale(inputEditorTaglibAttributes), "code"));
-		jsonObject.put("lang", langJSONObject);
-
+		jsonObject.put("lang", getLangJSONObject(inputEditorTaglibAttributes));
 		jsonObject.put("newThreadURL", MBThreadConstants.NEW_THREAD_URL);
 		jsonObject.put(
 			"removePlugins",
@@ -100,6 +94,19 @@ public class CKEditorBBCodeConfigContributor
 		jsonObject.put(
 			"toolbar_tablet",
 			getToolbarsTabletJSONArray(inputEditorTaglibAttributes));
+	}
+
+	protected JSONObject getLangJSONObject(
+		Map<String, Object> inputEditorTaglibAttributes) {
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put(
+			"code",
+			LanguageUtil.get(
+				getContentsLocale(inputEditorTaglibAttributes), "code"));
+
+		return jsonObject;
 	}
 
 	protected JSONArray getToolbarsBBCodeJSONArray(
