@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -155,15 +154,19 @@ public class ServiceContextAdviceTest {
 
 	private class TestInterceptedClass {
 
+		@SuppressWarnings("unused")
 		public void method() {
 		}
 
+		@SuppressWarnings("unused")
 		public void method(Object obj) {
 		}
 
+		@SuppressWarnings("unused")
 		public void method(ServiceContext serviceContext) {
 		}
 
+		@SuppressWarnings("unused")
 		public void method(TestServiceContextWrapper serviceContextWrapper) {
 		}
 
