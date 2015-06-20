@@ -287,7 +287,7 @@ public class SetupTestableTomcatTask
 			project.delete(tomcatZipFile);
 		}
 
-		Document document;
+		Document document = null;
 
 		final File tomcatUsersXmlFile = new File(
 			getTomcatDir(), "conf/tomcat-users.xml");
