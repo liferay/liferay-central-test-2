@@ -44,7 +44,7 @@ public class SQLQueryTableNamesUtilTest {
 	public static void setUpClass() throws Exception {
 		ToolDependencies.wireCaches();
 
-		Class clazz = SQLQueryTableNamesUtil.class;
+		Class<SQLQueryTableNamesUtil> clazz = SQLQueryTableNamesUtil.class;
 
 		String className = clazz.getName();
 
