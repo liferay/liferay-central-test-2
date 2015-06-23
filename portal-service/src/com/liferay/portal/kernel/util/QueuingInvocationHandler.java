@@ -32,7 +32,7 @@ public class QueuingInvocationHandler implements InvocationHandler {
 	public void flush() {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Flush " + _methodHandlers.size() + " events from queue.");
+				"Flush " + _methodHandlers.size() + " events from queue");
 		}
 
 		_methodHandlers.clear();
@@ -52,7 +52,7 @@ public class QueuingInvocationHandler implements InvocationHandler {
 	public void invokeQueued(Object target) throws Exception {
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Processing " + _methodHandlers.size() + " queued requests.");
+				"Processing " + _methodHandlers.size() + " queued requests");
 		}
 
 		MethodHandler methodHandler = null;
@@ -62,7 +62,7 @@ public class QueuingInvocationHandler implements InvocationHandler {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Completed processing queued requests.");
+			_log.info("Completed processing queued requests");
 		}
 	}
 
