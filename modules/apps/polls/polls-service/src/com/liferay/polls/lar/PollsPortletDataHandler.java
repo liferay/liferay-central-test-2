@@ -40,7 +40,10 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import javax.servlet.ServletContext;
+
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Bruno Farache
@@ -209,6 +212,10 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 				portletDataContext);
 
 		voteActionableDynamicQuery.performCount();
+	}
+
+	@Reference(target = "(original.bean=*)", unbind = "-")
+	protected void setServletContext(ServletContext servletContext) {
 	}
 
 }
