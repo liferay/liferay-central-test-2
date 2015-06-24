@@ -82,7 +82,7 @@ public class BaseJSPSettingsConfigurationAction
 			}
 
 			throw new IOException(
-				"Unable to include JSP: " + getJspPath(renderRequest), se);
+				"Unable to include " + getJspPath(renderRequest), se);
 		}
 	}
 
