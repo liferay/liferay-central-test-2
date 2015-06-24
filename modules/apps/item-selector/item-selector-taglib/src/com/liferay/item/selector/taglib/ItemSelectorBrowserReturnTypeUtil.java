@@ -21,6 +21,7 @@ import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
@@ -40,15 +41,14 @@ public class ItemSelectorBrowserReturnTypeUtil
 		for (ItemSelectorReturnType desiredItemSelectorReturnType :
 				desiredItemSelectorReturnTypes) {
 
-			Class<?> desiredItemSelectorReturnTypeClass =
-				desiredItemSelectorReturnType.getClass();
+			String className = ClassUtil.getClassName(
+				desiredItemSelectorReturnType);
 
-			if (desiredItemSelectorReturnTypeClass.getName().equals(
-					_base64Clazz.getName()) ||
-				desiredItemSelectorReturnTypeClass.getName().equals(
-					_fileEntryClazz.getName()) ||
-				desiredItemSelectorReturnTypeClass.getName().equals(
-					_urlClazz.getName())) {
+			if (className.equals(
+					Base64ItemSelectorReturnType.class.getName()) ||
+				className.equals(
+					FileEntryItemSelectorReturnType.class.getName()) ||
+				className.equals(URLItemSelectorReturnType.class.getName())) {
 
 				return desiredItemSelectorReturnType;
 			}
@@ -62,22 +62,20 @@ public class ItemSelectorBrowserReturnTypeUtil
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
+		String className = ClassUtil.getClassName(itemSelectorReturnType);
+
 		Class<?> itemSelectorReturnTypeClass =
 			itemSelectorReturnType.getClass();
 
-		if (_base64Clazz.getName().equals(
-				itemSelectorReturnTypeClass.getName())) {
-
+		if (className.equals(Base64ItemSelectorReturnType.class.getName())) {
 			return StringPool.BLANK;
 		}
-		else if (_fileEntryClazz.getName().equals(
-					itemSelectorReturnTypeClass.getName())) {
+		else if (className.equals(
+					FileEntryItemSelectorReturnType.class.getName())) {
 
 			return getFileEntryValue(fileEntry, themeDisplay);
 		}
-		else if (_urlClazz.getName().equals(
-					itemSelectorReturnTypeClass.getName())) {
-
+		else if (className.equals(URLItemSelectorReturnType.class.getName())) {
 			return getURLValue(fileEntry, themeDisplay);
 		}
 
@@ -106,11 +104,5 @@ public class ItemSelectorBrowserReturnTypeUtil
 
 		return DLUtil.getImagePreviewURL(fileEntry, themeDisplay);
 	}
-
-	private static final Class<?> _base64Clazz =
-		Base64ItemSelectorReturnType.class;
-	private static final Class<?> _fileEntryClazz =
-		FileEntryItemSelectorReturnType.class;
-	private static final Class<?> _urlClazz = URLItemSelectorReturnType.class;
 
 }

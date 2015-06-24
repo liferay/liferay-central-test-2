@@ -41,7 +41,7 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 		</aui:nav-bar>
 	</c:if>
 
-	<c:if test="<%= itemSelectorReturnType.getClass().getName().equals(Base64ItemSelectorReturnType.class.getName()) %>">
+	<c:if test="<%= Validator.equals(ClassUtil.getClassName(itemSelectorReturnType), Base64ItemSelectorReturnType.class.getName()) %>">
 		<div class="drop-enabled drop-zone">
 			<label class="btn btn-primary" for="<%= randomNamespace %>InputFile"><liferay-ui:message key="select-file" /></label>
 
@@ -79,7 +79,7 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 
 						<liferay-ui:search-container-column-text name="title">
 
-							<a class="item-preview" data-returnType="<%= HtmlUtil.escapeAttribute(itemSelectorReturnType.getClass().getName()) %>" data-url="<%= HtmlUtil.escapeAttribute(DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK)) %>" data-value="<%= HtmlUtil.escapeAttribute(ItemSelectorBrowserReturnTypeUtil.getValue(itemSelectorReturnType, fileEntry, themeDisplay)) %>" href="<%= HtmlUtil.escapeHREF(DLUtil.getImagePreviewURL(fileEntry, themeDisplay)) %>" title="<%= HtmlUtil.escapeAttribute(title) %>">
+							<a class="item-preview" data-returnType="<%= HtmlUtil.escapeAttribute(ClassUtil.getClassName(itemSelectorReturnType)) %>" data-url="<%= HtmlUtil.escapeAttribute(DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK)) %>" data-value="<%= HtmlUtil.escapeAttribute(ItemSelectorBrowserReturnTypeUtil.getValue(itemSelectorReturnType, fileEntry, themeDisplay)) %>" href="<%= HtmlUtil.escapeHREF(DLUtil.getImagePreviewURL(fileEntry, themeDisplay)) %>" title="<%= HtmlUtil.escapeAttribute(title) %>">
 
 								<%
 								String iconCssClass = DLUtil.getFileIconCssClass(fileEntry.getExtension());
@@ -135,7 +135,7 @@ String uploadMessage = GetterUtil.getString(request.getAttribute("liferay-ui:ite
 						</div>
 
 						<div class="text-primary">
-							<a class="item-preview" data-returnType="<%= HtmlUtil.escapeAttribute(itemSelectorReturnType.getClass().getName()) %>" data-url="<%= HtmlUtil.escapeAttribute(DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK)) %>" data-value="<%= HtmlUtil.escapeAttribute(ItemSelectorBrowserReturnTypeUtil.getValue(itemSelectorReturnType, fileEntry, themeDisplay)) %>" href="<%= HtmlUtil.escapeHREF(DLUtil.getImagePreviewURL(fileEntry, themeDisplay)) %>" title="<%= HtmlUtil.escapeAttribute(title) %>">
+							<a class="item-preview" data-returnType="<%= HtmlUtil.escapeAttribute(ClassUtil.getClassName(itemSelectorReturnType)) %>" data-url="<%= HtmlUtil.escapeAttribute(DLUtil.getPreviewURL(fileEntry, latestFileVersion, themeDisplay, StringPool.BLANK)) %>" data-value="<%= HtmlUtil.escapeAttribute(ItemSelectorBrowserReturnTypeUtil.getValue(itemSelectorReturnType, fileEntry, themeDisplay)) %>" href="<%= HtmlUtil.escapeHREF(DLUtil.getImagePreviewURL(fileEntry, themeDisplay)) %>" title="<%= HtmlUtil.escapeAttribute(title) %>">
 								<%= HtmlUtil.escape(title) %>
 							</a>
 
