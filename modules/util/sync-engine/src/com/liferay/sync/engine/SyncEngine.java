@@ -172,11 +172,11 @@ public class SyncEngine {
 
 		Path syncAccountFilePath = Paths.get(syncAccount.getFilePathName());
 
-		SyncFile syncFile = SyncFileService.fetchSyncFile(
+		SyncFile syncAccountFile = SyncFileService.fetchSyncFile(
 			syncAccount.getFilePathName());
 
 		if (!FileKeyUtil.hasFileKey(
-				syncAccountFilePath, syncFile.getSyncFileId())) {
+				syncAccountFilePath, syncAccountFile.getSyncFileId())) {
 
 			if (_logger.isTraceEnabled()) {
 				_logger.trace(
