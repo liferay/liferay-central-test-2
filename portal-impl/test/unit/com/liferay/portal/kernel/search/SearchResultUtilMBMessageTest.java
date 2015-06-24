@@ -71,13 +71,7 @@ public class SearchResultUtilMBMessageTest
 	@Test
 	public void testMBMessageAttachment() throws Exception {
 		when(
-			mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
-		).thenReturn(
-			_mbMessage
-		);
-
-		when(
-			_mbMessage.getMessageId()
+			_comment.getCommentId()
 		).thenReturn(
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
@@ -88,15 +82,21 @@ public class SearchResultUtilMBMessageTest
 			_comment
 		);
 
+		mockStatic(
+			IndexerRegistryUtil.class,
+			new ThrowsExceptionClass(IllegalStateException.class));
+
 		when(
-			_comment.getCommentId()
+			_mbMessage.getMessageId()
 		).thenReturn(
 			SearchTestUtil.ENTRY_CLASS_PK
 		);
 
-		mockStatic(
-			IndexerRegistryUtil.class,
-			new ThrowsExceptionClass(IllegalStateException.class));
+		when(
+			mbMessageLocalService.getMessage(SearchTestUtil.ENTRY_CLASS_PK)
+		).thenReturn(
+			_mbMessage
+		);
 
 		SearchResult searchResult = assertOneSearchResult(
 			SearchTestUtil.createAttachmentDocument(_MB_MESSAGE_CLASS_NAME));
