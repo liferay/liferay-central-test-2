@@ -70,9 +70,8 @@ public class WikiServiceUpgrade {
 		upgradeProcesses.add(new UpgradePortletPreferences());
 
 		upgradeProcesses.add(new UpgradeClassNames());
-		upgradeProcesses.add(new UpgradePortletSettings(_settingsFactory));
-
 		upgradeProcesses.add(new UpgradePageResourceGroupId());
+		upgradeProcesses.add(new UpgradePortletSettings(_settingsFactory));
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.wiki.service", upgradeProcesses, 1, 1, false);
