@@ -612,8 +612,8 @@ public class ClusterMasterExecutorImplTest extends BaseClusterTestCase {
 					return NetworkInterface.getByInetAddress(
 						InetAddress.getLoopbackAddress());
 				}
-				catch (SocketException e) {
-					throw new IllegalStateException(e);
+				catch (SocketException se) {
+					throw new IllegalStateException(se);
 				}
 			}
 
