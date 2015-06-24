@@ -82,9 +82,7 @@ public class JournalTransformer {
 	public JournalTransformer(
 		String errorTemplatePropertyKey, boolean restricted) {
 
-		Class<?> clazz = getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
+		ClassLoader classLoader = getClassLoader();
 
 		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
 			classLoader, "portlet");
@@ -110,7 +108,7 @@ public class JournalTransformer {
 
 		this(errorTemplatePropertyKey, restricted);
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		ClassLoader classLoader = getClassLoader();
 
 		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
 			classLoader, "portlet");
@@ -396,6 +394,12 @@ public class JournalTransformer {
 		}
 
 		return output;
+	}
+
+	protected ClassLoader getClassLoader() {
+		Class<?> clazz = getClass();
+
+		return clazz.getClassLoader();
 	}
 
 	protected Company getCompany(ThemeDisplay themeDisplay, long companyId)
