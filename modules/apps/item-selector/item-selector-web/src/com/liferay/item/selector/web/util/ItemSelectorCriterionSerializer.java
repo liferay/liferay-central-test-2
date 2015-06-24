@@ -185,11 +185,11 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 		Set<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new LinkedHashSet<>();
 
-		String[] desiredItemSelectorReturnTypesString = StringUtil.split(
+		String[] desiredItemSelectorReturnTypeNames = StringUtil.split(
 			(String)map.get("desiredItemSelectorReturnTypes"));
 
 		for (String desiredItemSelectorReturnTypeName :
-				desiredItemSelectorReturnTypesString) {
+				desiredItemSelectorReturnTypeNames) {
 
 			List<ItemSelectorReturnType> itemSelectorReturnTypes =
 				_itemSelectorReturnTypes.get(desiredItemSelectorReturnTypeName);
