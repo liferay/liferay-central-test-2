@@ -703,9 +703,7 @@ public abstract class BaseDDMTestCase extends PowerMockito {
 		);
 	}
 
-	protected void whenLanguageIsAvailableLocale(
-		String languageId) {
-
+	protected void whenLanguageIsAvailableLocale(String languageId) {
 		when(
 			_language.isAvailableLocale(Matchers.eq(languageId))
 		).thenReturn(
