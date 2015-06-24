@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Akos Thurzo
  */
-public class UpgradePageResourceGroupId extends UpgradeProcess {
+public class UpgradeWikiPageResource extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
