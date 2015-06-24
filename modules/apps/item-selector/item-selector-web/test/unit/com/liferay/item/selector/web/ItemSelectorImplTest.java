@@ -64,11 +64,11 @@ public class ItemSelectorImplTest extends PowerMockito {
 		_itemSelectorImpl = new ItemSelectorImpl();
 
 		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
+			_testFileEntryItemSelectorReturnType);
+		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
 			_testStringItemSelectorReturnType);
 		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
 			_testURLItemSelectorReturnType);
-		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
-			_testFileEntryItemSelectorReturnType);
 
 		_itemSelectorImpl.setItemSelectorCriterionSerializer(
 			_itemSelectorCriterionSerializer);
