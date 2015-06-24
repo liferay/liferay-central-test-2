@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.message.boards.comment.service;
+package com.liferay.message.boards.comment;
 
 import com.liferay.portal.kernel.comment.Discussion;
 import com.liferay.portal.kernel.comment.DiscussionComment;
