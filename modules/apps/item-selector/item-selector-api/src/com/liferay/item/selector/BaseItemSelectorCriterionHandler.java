@@ -15,6 +15,7 @@
 package com.liferay.item.selector;
 
 import com.liferay.portal.kernel.registry.ServiceTrackerCustomizerFactory;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerList;
@@ -50,13 +51,13 @@ public abstract class BaseItemSelectorCriterionHandler
 				for (ItemSelectorReturnType supportedItemSelectorReturnType :
 						supportedItemSelectorReturnTypes) {
 
-					Class<?> desiredItemSelectorReturnTypeClass =
-						desiredItemSelectorReturnType.getClass();
-					Class<?> supportedItemSelectorReturnTypeClass =
-						supportedItemSelectorReturnType.getClass();
+					String desiredItemSelectorReturnTypeClassName =
+						ClassUtil.getClassName(desiredItemSelectorReturnType);
+					String supportedItemSelectorReturnTypeClassName =
+						ClassUtil.getClassName(supportedItemSelectorReturnType);
 
-					if (desiredItemSelectorReturnTypeClass.getName().equals(
-							supportedItemSelectorReturnTypeClass.getName())) {
+					if (desiredItemSelectorReturnTypeClassName.equals(
+							supportedItemSelectorReturnTypeClassName)) {
 
 						filteredItemSelectedViews.add(itemSelectorView);
 					}
