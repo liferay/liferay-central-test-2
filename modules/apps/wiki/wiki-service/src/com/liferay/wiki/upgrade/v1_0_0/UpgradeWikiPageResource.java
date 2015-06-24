@@ -24,9 +24,9 @@ public class UpgradeWikiPageResource extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		runSQL(
-			"update WikiPageResource wpr set groupId = (select max(groupId) " +
-				"from WikiPage wp where wpr.resourcePrimKey = " +
-					"wp.resourcePrimKey)");
+			"update WikiPageResource set groupId = (select max(groupId) from " +
+				"WikiPage where WikiPage.resourcePrimKey = " +
+					"WikiPageResource.resourcePrimKey)");
 	}
 
 }
