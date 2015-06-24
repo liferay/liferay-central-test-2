@@ -50,16 +50,16 @@ public class ItemSelectorCriterionSerializerTest {
 		_flickrItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
 
-		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
-
-		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
-
+		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
+			_testFileEntryItemSelectorReturnType);
 		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
 			_testStringItemSelectorReturnType);
 		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
 			_testURLItemSelectorReturnType);
-		_itemSelectorCriterionSerializer.addItemSelectorReturnType(
-			_testFileEntryItemSelectorReturnType);
+
+		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
+
+		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 	}
 
 	@Test
