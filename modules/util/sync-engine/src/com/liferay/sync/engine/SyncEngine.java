@@ -239,7 +239,7 @@ public class SyncEngine {
 
 		LoggerUtil.init();
 
-		_logger.info("Starting Sync Engine");
+		_logger.info("Starting Sync engine");
 
 		UpgradeUtil.upgrade();
 
@@ -257,7 +257,7 @@ public class SyncEngine {
 		SyncEngineUtil.fireSyncEngineStateChanged(
 			SyncEngineUtil.SYNC_ENGINE_STATE_STOPPING);
 
-		_logger.info("Stopping Sync Engine");
+		_logger.info("Stopping Sync engine");
 
 		for (long syncAccountId : _syncAccountTasks.keySet()) {
 			cancelSyncAccountTasks(syncAccountId);
