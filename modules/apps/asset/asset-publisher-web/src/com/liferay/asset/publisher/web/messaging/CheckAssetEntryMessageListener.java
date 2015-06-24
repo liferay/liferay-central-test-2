@@ -57,9 +57,7 @@ public class CheckAssetEntryMessageListener
 	}
 
 	@Reference(
-		target =
-			"(javax.portlet.name=" + AssetPublisherPortletKeys.ASSET_PUBLISHER +
-				")"
+		target = "(javax.portlet.name=" + AssetPublisherPortletKeys.ASSET_PUBLISHER + ")"
 	)
 	protected void setPortlet(Portlet portlet) {
 	}
