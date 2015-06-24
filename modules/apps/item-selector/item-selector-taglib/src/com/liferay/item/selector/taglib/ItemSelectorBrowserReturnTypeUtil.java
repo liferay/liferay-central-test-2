@@ -64,9 +64,6 @@ public class ItemSelectorBrowserReturnTypeUtil
 
 		String className = ClassUtil.getClassName(itemSelectorReturnType);
 
-		Class<?> itemSelectorReturnTypeClass =
-			itemSelectorReturnType.getClass();
-
 		if (className.equals(Base64ItemSelectorReturnType.class.getName())) {
 			return StringPool.BLANK;
 		}
