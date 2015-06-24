@@ -82,7 +82,9 @@ public class JournalTransformer {
 	public JournalTransformer(
 		String errorTemplatePropertyKey, boolean restricted) {
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		Configuration configuration = ConfigurationFactoryUtil.getConfiguration(
 			classLoader, "portlet");
