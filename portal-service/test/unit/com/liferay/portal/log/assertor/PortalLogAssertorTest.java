@@ -109,7 +109,7 @@ public class PortalLogAssertorTest {
 
 					String message =
 						"\nPortal log assert failure, see above log for more " +
-							"info : \n";
+							"information: \n";
 
 					for (int j = 0; j < childNodelist.getLength(); j++) {
 						Node childNode = childNodelist.item(j);
@@ -125,7 +125,7 @@ public class PortalLogAssertorTest {
 					}
 
 					System.out.println(
-						"Detected error, dumpping full log for reference :");
+						"Detected error, dumpping full log for reference:");
 
 					Files.copy(
 						Paths.get(
