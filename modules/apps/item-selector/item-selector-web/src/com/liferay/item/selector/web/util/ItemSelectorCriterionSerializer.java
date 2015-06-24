@@ -253,11 +253,11 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 
 		@Override
 		public void transform(JSONContext jsonContext, Object object) {
-			List<ItemSelectorReturnType> desiredItemSelectorReturnTypesList =
+			List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 				new ArrayList<>((Set<ItemSelectorReturnType>)object);
 
 			String desiredItemSelectorReturnTypesString = ListUtil.toString(
-				desiredItemSelectorReturnTypesList,
+				desiredItemSelectorReturnTypes,
 				new Accessor<ItemSelectorReturnType, String>() {
 
 					@Override
