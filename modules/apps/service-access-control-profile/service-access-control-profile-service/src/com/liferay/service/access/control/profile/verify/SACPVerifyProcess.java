@@ -63,7 +63,7 @@ public class SACPVerifyProcess extends VerifyProcess {
 	protected void verifyDefaultProfile() {
 		for (long companyId : PortalInstances.getCompanyIds()) {
 			try {
-				_sacpEntryLocalService.checkDefaultProfile(companyId);
+				_sacpEntryLocalService.checkDefaultSACPEntry(companyId);
 			}
 			catch (PortalException pe) {
 				_log.error(
