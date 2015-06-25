@@ -42,7 +42,7 @@ public class PasswordPolicyModelListener
 		}
 
 		try {
-			_sacpEntryLocalService.checkDefaultProfile(
+			_sacpEntryLocalService.checkDefaultSACPEntry(
 				passwordPolicy.getCompanyId());
 		}
 		catch (PortalException pe) {
