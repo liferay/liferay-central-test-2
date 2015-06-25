@@ -42,9 +42,7 @@ public class SACPVerifyProcess extends VerifyProcess {
 	}
 
 	@Reference(
-		target =
-			"(org.springframework.context.service.name=" +
-				"com.liferay.service.access.control.profile.service)",
+		target = "(org.springframework.context.service.name=com.liferay.service.access.control.profile.service)",
 		unbind = "-"
 	)
 	protected void setApplicationContext(
@@ -70,7 +68,7 @@ public class SACPVerifyProcess extends VerifyProcess {
 			catch (PortalException pe) {
 				_log.error(
 					"Unable to add default service access control profile " +
-					"for companyId " + companyId, pe);
+						"for company " + companyId, pe);
 			}
 		}
 	}
