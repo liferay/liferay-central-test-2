@@ -68,7 +68,8 @@ public class SACPVerifyProcess extends VerifyProcess {
 			catch (PortalException pe) {
 				_log.error(
 					"Unable to add default service access control profile " +
-						"for company " + companyId, pe);
+						"for company " + companyId,
+					pe);
 			}
 		}
 	}
