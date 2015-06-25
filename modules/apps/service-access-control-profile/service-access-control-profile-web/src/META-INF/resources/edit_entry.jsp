@@ -27,10 +27,10 @@ if (sacpEntryId > 0) {
 	sacpEntry = SACPEntryServiceUtil.getSACPEntry(sacpEntryId);
 }
 
-boolean defaultProfile = false;
+boolean defaultSACPEntry = false;
 
 if (sacpEntry != null) {
-	defaultProfile = sacpEntry.isDefaultProfile();
+	defaultSACPEntry = sacpEntry.isDefaultSACPEntry();
 }
 %>
 
@@ -53,7 +53,7 @@ if (sacpEntry != null) {
 
 	<aui:model-context bean="<%= sacpEntry %>" model="<%= SACPEntry.class %>" />
 
-	<aui:input disabled="<%= defaultProfile %>" name="name" required="<%= true %>">
+	<aui:input disabled="<%= defaultSACPEntry %>" name="name" required="<%= true %>">
 		<aui:validator errorMessage="this-field-is-required-and-must-contain-only-following-characters" name="custom">
 			function(val, fieldNode, ruleValue) {
 				var allowedCharacters = '<%= HtmlUtil.escapeJS(SACPEntryConstants.NAME_ALLOWED_CHARACTERS) %>';

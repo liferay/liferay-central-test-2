@@ -89,7 +89,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 				se);
 		}
 
-		if (sacpConfiguration.enableDefaultProfileAlways() ||
+		if (sacpConfiguration.enableDefaultSACPEntryAlways() ||
 			(serviceAccessControlProfileNames == null)) {
 
 			if (serviceAccessControlProfileNames == null) {
@@ -101,7 +101,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			}
 
 			serviceAccessControlProfileNames.add(
-				sacpConfiguration.defaultProfileName());
+				sacpConfiguration.defaultSACPEntryName());
 		}
 
 		long companyId = CompanyThreadLocal.getCompanyId();
