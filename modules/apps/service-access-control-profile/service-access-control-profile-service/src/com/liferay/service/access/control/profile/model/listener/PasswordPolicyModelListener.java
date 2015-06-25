@@ -23,6 +23,8 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.service.access.control.profile.model.SACPEntry;
 import com.liferay.service.access.control.profile.service.SACPEntryLocalService;
 
+import java.util.List;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -59,11 +61,12 @@ public class PasswordPolicyModelListener
 		}
 
 		try {
-			for (SACPEntry sacpEntry :
-					_sacpEntryLocalService.getCompanySACPEntries(
-						passwordPolicy.getCompanyId(), QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS)) {
+			List<SACPEntry> sacpEntries =
+				_sacpEntryLocalService.getCompanySACPEntries(
+					passwordPolicy.getCompanyId(), QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS);
 
+			for (SACPEntry sacpEntry : sacpEntries) {
 				_sacpEntryLocalService.deleteSACPEntry(sacpEntry);
 			}
 		}
