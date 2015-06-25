@@ -93,7 +93,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		return sacpEntry;
 	}
 
-	public void checkDefaultProfile(long companyId) throws PortalException {
+	public void checkDefaultSACPEntry(long companyId) throws PortalException {
 		SACPConfiguration sacpConfiguration = _settingsFactory.getSettings(
 			SACPConfiguration.class,
 			new CompanyServiceSettingsLocator(
