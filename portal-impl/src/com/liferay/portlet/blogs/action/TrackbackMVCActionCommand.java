@@ -264,8 +264,6 @@ public class TrackbackMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		TrackbackMVCActionCommand.class);
 
