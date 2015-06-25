@@ -89,7 +89,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 				se);
 		}
 
-		if (sacpConfiguration.enableDefaultSACPEntryAlways() ||
+		if (sacpConfiguration.requireDefaultSACPEntry() ||
 			(serviceAccessControlProfileNames == null)) {
 
 			if (serviceAccessControlProfileNames == null) {
