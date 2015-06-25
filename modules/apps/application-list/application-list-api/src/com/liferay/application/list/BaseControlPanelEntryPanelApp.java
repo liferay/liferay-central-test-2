@@ -33,7 +33,9 @@ public abstract class BaseControlPanelEntryPanelApp implements PanelApp {
 
 	@Override
 	public String getKey() {
-		return getClass().getName();
+		Class<?> clazz = getClass();
+
+		return clazz.getName();
 	}
 
 	@Override
