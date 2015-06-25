@@ -31,7 +31,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.service.access.control.profile.configuration.SACPConfiguration;
 import com.liferay.service.access.control.profile.constants.SACPConstants;
 import com.liferay.service.access.control.profile.exception.DuplicateSACPEntryNameException;
-import com.liferay.service.access.control.profile.exception.RequiredProfileException;
+import com.liferay.service.access.control.profile.exception.RequiredSACPEntryException;
 import com.liferay.service.access.control.profile.exception.SACPEntryNameException;
 import com.liferay.service.access.control.profile.exception.SACPEntryTitleException;
 import com.liferay.service.access.control.profile.model.SACPEntry;
@@ -134,7 +134,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		if (sacpEntry.isDefaultSACPEntry() &&
 			!CompanyThreadLocal.isDeleteInProcess()) {
 
-			throw new RequiredProfileException();
+			throw new RequiredSACPEntryException();
 		}
 
 		sacpEntry = sacpEntryPersistence.remove(sacpEntry);

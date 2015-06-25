@@ -36,7 +36,7 @@
 	</entity>
 	<exceptions>
 		<exception>DuplicateSACPEntryName</exception>
-		<exception>RequiredProfile</exception>
+		<exception>RequiredSACPEntry</exception>
 		<exception>SACPEntryName</exception>
 		<exception>SACPEntryTitle</exception>
 	</exceptions>
