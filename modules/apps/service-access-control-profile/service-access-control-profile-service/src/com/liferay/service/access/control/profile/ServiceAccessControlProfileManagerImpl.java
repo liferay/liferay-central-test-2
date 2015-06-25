@@ -67,7 +67,7 @@ public class ServiceAccessControlProfileManagerImpl
 		try {
 			return toServiceAccessControlProfile(
 				_sacpEntryLocalService.getSACPEntry(
-					companyId, sacpConfiguration.defaultProfileName()));
+					companyId, sacpConfiguration.defaultSACPEntryName()));
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

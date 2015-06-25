@@ -38,7 +38,7 @@ public class SACPVerifyProcess extends VerifyProcess {
 	@Activate
 	@Override
 	protected void doVerify() throws Exception {
-		verifyDefaultProfile();
+		verifyDefaultSACPEntry();
 	}
 
 	@Reference(
@@ -60,7 +60,7 @@ public class SACPVerifyProcess extends VerifyProcess {
 	protected void setServiceContext(ServletContext serviceContext) {
 	}
 
-	protected void verifyDefaultProfile() {
+	protected void verifyDefaultSACPEntry() {
 		for (long companyId : PortalInstances.getCompanyIds()) {
 			try {
 				_sacpEntryLocalService.checkDefaultSACPEntry(companyId);

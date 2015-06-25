@@ -26,19 +26,19 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface SACPConfiguration {
 
 	@Meta.AD(deflt = "Default Service Access Profile", required = false)
-	public String defaultProfileDescription();
+	public String defaultSACPEntryDescription();
 
 	@Meta.AD(deflt = "DEFAULT", required = false)
-	public String defaultProfileName();
+	public String defaultSACPEntryName();
 
 	@Meta.AD(deflt = "", required = false)
-	public String defaultProfileServiceSignatures();
+	public String defaultSACPEntryServiceSignatures();
 
 	@Meta.AD(
 		deflt = "true",
 		description = "When set to true the default profile is always inherited",
 		required = false
 	)
-	public boolean enableDefaultProfileAlways();
+	public boolean enableDefaultSACPEntryAlways();
 
 }
