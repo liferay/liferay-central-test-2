@@ -52,7 +52,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 	@Override
 	public SACPEntry addSACPEntry(
 			long userId, String allowedServiceSignatures,
-			boolean defaultProfile, String name, Map<Locale, String> titleMap,
+			boolean defaultSACPEntry, String name, Map<Locale, String> titleMap,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -78,7 +78,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		sacpEntry.setUserId(userId);
 		sacpEntry.setUserName(user.getFullName());
 		sacpEntry.setAllowedServiceSignatures(allowedServiceSignatures);
-		sacpEntry.setDefaultProfile(defaultProfile);
+		sacpEntry.setDefaultSACPEntry(defaultSACPEntry);
 		sacpEntry.setName(name);
 		sacpEntry.setTitleMap(titleMap);
 
@@ -100,7 +100,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 				companyId, SACPConstants.SERVICE_NAME));
 
 		SACPEntry sacpEntry = sacpEntryPersistence.fetchByC_N(
-			companyId, sacpConfiguration.defaultProfileName());
+			companyId, sacpConfiguration.defaultSACPEntryName());
 
 		if (sacpEntry == null) {
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
@@ -109,12 +109,12 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 
 			titleMap.put(
 				LocaleUtil.getDefault(),
-				sacpConfiguration.defaultProfileDescription());
+				sacpConfiguration.defaultSACPEntryDescription());
 
 			addSACPEntry(
 				defaultUserId,
-				sacpConfiguration.defaultProfileServiceSignatures(), true,
-				sacpConfiguration.defaultProfileName(), titleMap,
+				sacpConfiguration.defaultSACPEntryServiceSignatures(), true,
+				sacpConfiguration.defaultSACPEntryName(), titleMap,
 				new ServiceContext());
 		}
 	}
@@ -131,7 +131,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 	public SACPEntry deleteSACPEntry(SACPEntry sacpEntry)
 		throws PortalException {
 
-		if (sacpEntry.isDefaultProfile() &&
+		if (sacpEntry.isDefaultSACPEntry() &&
 			!CompanyThreadLocal.isDeleteInProcess()) {
 
 			throw new RequiredProfileException();
@@ -192,7 +192,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 			throw new DuplicateSACPEntryNameException();
 		}
 
-		if (sacpEntry.isDefaultProfile()) {
+		if (sacpEntry.isDefaultSACPEntry()) {
 			name = sacpEntry.getName();
 		}
 
