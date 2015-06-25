@@ -20,7 +20,7 @@
 		<!-- Other fields -->
 
 		<column name="allowedServiceSignatures" type="String" />
-		<column name="defaultProfile" type="boolean" />
+		<column name="defaultSACPEntry" type="boolean" />
 		<column name="name" type="String" />
 		<column name="title" type="String" localized="true" />
 
