@@ -45,7 +45,7 @@ public class ServiceAccessControlProfileManagerImpl
 	public ServiceAccessControlProfile getDefaultServiceAccessControlProfile(
 		long companyId) {
 
-		SACPConfiguration sacpConfiguration;
+		SACPConfiguration sacpConfiguration = null;
 
 		try {
 			sacpConfiguration = _settingsFactory.getSettings(
@@ -58,16 +58,18 @@ public class ServiceAccessControlProfileManagerImpl
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to determine default service access control " +
-					"profile", se);
+						"profile",
+					se);
 			}
 
 			return null;
 		}
 
 		try {
-			return toServiceAccessControlProfile(
-				_sacpEntryLocalService.getSACPEntry(
-					companyId, sacpConfiguration.defaultSACPEntryName()));
+			SACPEntry sacpEntry = _sacpEntryLocalService.getSACPEntry(
+				companyId, sacpConfiguration.defaultSACPEntryName());
+
+			return toServiceAccessControlProfile(sacpEntry);
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

@@ -74,7 +74,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			}
 		}
 
-		SACPConfiguration sacpConfiguration;
+		SACPConfiguration sacpConfiguration = null;
 
 		try {
 			sacpConfiguration = _settingsFactory.getSettings(
