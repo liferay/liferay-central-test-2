@@ -27,7 +27,11 @@
 
 	long classNameId = ParamUtil.getLong(request, "classNameId");
 
-	String className = (classNameId != 0) ? PortalUtil.getClassName(classNameId) : StringPool.BLANK;
+	String className = StringPool.BLANK;
+
+	if (classNameId != 0) {
+		className = PortalUtil.getClassName(classNameId);
+	}
 
 	long classPK = ParamUtil.getLong(request, "classPK");
 
@@ -253,15 +257,13 @@
 								<%
 								TrashHandler curTrashHandler = TrashHandlerRegistryUtil.getTrashHandler(curTrashRenderer.getClassName());
 
-								long curTrashHandlerClassNameId = PortalUtil.getClassNameId(curTrashRenderer.getClassName());
-
 								int curContainerModelsCount = curTrashHandler.getTrashContainerModelsCount(curTrashRenderer.getClassPK());
 								int curBaseModelsCount = curTrashHandler.getTrashContainedModelsCount(curTrashRenderer.getClassPK());
 
 								PortletURL rowURL = renderResponse.createRenderURL();
 
 								rowURL.setParameter("mvcPath", "/view_content.jsp");
-								rowURL.setParameter("classNameId", String.valueOf(curTrashHandlerClassNameId));
+								rowURL.setParameter("classNameId", String.valueOf(PortalUtil.getClassNameId(curTrashRenderer.getClassName())));
 								rowURL.setParameter("classPK", String.valueOf(curTrashRenderer.getClassPK()));
 								%>
 
@@ -317,12 +319,10 @@
 							>
 
 								<%
-								long curTrashHandlerClassNameId = PortalUtil.getClassNameId(curTrashRenderer.getClassName());
-
 								PortletURL rowURL = renderResponse.createRenderURL();
 
 								rowURL.setParameter("mvcPath", "/view_content.jsp");
-								rowURL.setParameter("classNameId", String.valueOf(curTrashHandlerClassNameId));
+								rowURL.setParameter("classNameId", String.valueOf(PortalUtil.getClassNameId(curTrashRenderer.getClassName())));
 								rowURL.setParameter("classPK", String.valueOf(curTrashRenderer.getClassPK()));
 								%>
 
