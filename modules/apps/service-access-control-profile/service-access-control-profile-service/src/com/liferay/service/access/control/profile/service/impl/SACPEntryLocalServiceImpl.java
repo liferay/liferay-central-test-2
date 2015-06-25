@@ -102,21 +102,23 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		SACPEntry sacpEntry = sacpEntryPersistence.fetchByC_N(
 			companyId, sacpConfiguration.defaultSACPEntryName());
 
-		if (sacpEntry == null) {
-			long defaultUserId = userLocalService.getDefaultUserId(companyId);
-
-			Map<Locale, String> titleMap = new HashMap<>();
-
-			titleMap.put(
-				LocaleUtil.getDefault(),
-				sacpConfiguration.defaultSACPEntryDescription());
-
-			addSACPEntry(
-				defaultUserId,
-				sacpConfiguration.defaultSACPEntryServiceSignatures(), true,
-				sacpConfiguration.defaultSACPEntryName(), titleMap,
-				new ServiceContext());
+		if (sacpEntry != null) {
+			return;
 		}
+
+		long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
+		Map<Locale, String> titleMap = new HashMap<>();
+
+		titleMap.put(
+			LocaleUtil.getDefault(),
+			sacpConfiguration.defaultSACPEntryDescription());
+
+		addSACPEntry(
+			defaultUserId,
+			sacpConfiguration.defaultSACPEntryServiceSignatures(), true,
+			sacpConfiguration.defaultSACPEntryName(), titleMap,
+			new ServiceContext());
 	}
 
 	@Override
