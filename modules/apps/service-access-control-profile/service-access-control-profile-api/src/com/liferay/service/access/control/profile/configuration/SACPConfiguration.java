@@ -36,7 +36,6 @@ public interface SACPConfiguration {
 
 	@Meta.AD(
 		deflt = "true",
-		description = "When set to true the default profile is always inherited",
 		required = false
 	)
 	public boolean enableDefaultSACPEntryAlways();
