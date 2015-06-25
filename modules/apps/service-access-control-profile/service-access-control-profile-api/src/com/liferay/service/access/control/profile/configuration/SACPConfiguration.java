@@ -35,6 +35,6 @@ public interface SACPConfiguration {
 	public String defaultSACPEntryServiceSignatures();
 
 	@Meta.AD(deflt = "true", required = false)
-	public boolean enableDefaultSACPEntryAlways();
+	public boolean requireDefaultSACPEntry();
 
 }
