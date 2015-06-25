@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.portlet.bridges.mvc;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 
@@ -57,7 +58,10 @@ public abstract class BaseMVCActionCommand implements MVCActionCommand {
 
 		actionResponse.sendRedirect(redirect);
 
-		SessionMessages.add(actionRequest, "forceSendRedirect");
+		SessionMessages.add(
+			actionRequest,
+			PortalUtil.getPortletId(actionRequest) +
+				SessionMessages.KEY_SUFFIX_FORCE_SEND_REDIRECT);
 	}
 
 }
