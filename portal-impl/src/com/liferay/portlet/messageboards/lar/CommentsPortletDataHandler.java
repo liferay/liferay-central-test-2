@@ -22,9 +22,11 @@ import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.exportimport.lar.BasePortletDataHandler;
+import com.liferay.portlet.exportimport.lar.ExportImportProcessCallbackRegistryUtil;
 import com.liferay.portlet.exportimport.lar.PortletDataContext;
 import com.liferay.portlet.exportimport.lar.PortletDataHandlerBoolean;
 import com.liferay.portlet.exportimport.lar.StagedModelDataHandler;
@@ -41,6 +43,7 @@ import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBPermission;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.portlet.PortletPreferences;
 
@@ -113,19 +116,8 @@ public class CommentsPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		portletDataContext.importPortletPermissions(MBPermission.RESOURCE_NAME);
-
-		if (portletDataContext.getBooleanParameter(NAMESPACE, "comments")) {
-			Element messagesElement =
-				portletDataContext.getImportDataGroupElement(MBMessage.class);
-
-			List<Element> messageElements = messagesElement.elements();
-
-			for (Element messageElement : messageElements) {
-				StagedModelDataHandlerUtil.importStagedModel(
-					portletDataContext, messageElement);
-			}
-		}
+		ExportImportProcessCallbackRegistryUtil.registerCallback(
+			new ImportCommentsCallable(portletDataContext));
 
 		return null;
 	}
@@ -207,6 +199,39 @@ public class CommentsPortletDataHandler extends BasePortletDataHandler {
 			});
 
 		return commentActionableDynamicQuery;
+	}
+
+	private class ImportCommentsCallable implements Callable<Void> {
+
+		public ImportCommentsCallable(PortletDataContext portletDataContext) {
+			_portletDataContext = portletDataContext;
+		}
+
+		@Override
+		public Void call() throws PortalException {
+			_portletDataContext.importPortletPermissions(
+				MBPermission.RESOURCE_NAME);
+
+			if (_portletDataContext.getBooleanParameter(
+					NAMESPACE, "comments")) {
+
+				Element messagesElement =
+					_portletDataContext.getImportDataGroupElement(
+						MBMessage.class);
+
+				List<Element> messageElements = messagesElement.elements();
+
+				for (Element messageElement : messageElements) {
+					StagedModelDataHandlerUtil.importStagedModel(
+						_portletDataContext, messageElement);
+				}
+			}
+
+			return null;
+		}
+
+		private final PortletDataContext _portletDataContext;
+
 	}
 
 }
