@@ -30,10 +30,6 @@ if (author) {
 	imageCssClass += " author";
 }
 
-if (Validator.isNull(url) && (userDisplay != null)) {
-	url = userDisplay.getDisplayURL(themeDisplay);
-}
-
 String taglibSrc = null;
 
 if (userDisplay != null) {
@@ -41,5 +37,9 @@ if (userDisplay != null) {
 }
 else {
 	taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0, null);
+}
+
+if (Validator.isNull(url) && (userDisplay != null)) {
+	url = userDisplay.getDisplayURL(themeDisplay);
 }
 %>
