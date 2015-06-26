@@ -819,7 +819,7 @@ public class RemoteSPITest {
 
 		Assert.assertFalse(processCallable.call());
 
-		// Unable to unregister SPI, due MPI mismatch
+		// Unable to unregister SPI due to MPI mismatch
 
 		MPIHelperUtil.registerSPIProvider(new MockSPIProvider(spiProviderName));
 
