@@ -2,7 +2,7 @@
 <!DOCTYPE project>
 
 <project>
-	<property name="libsass-version" value="3.2.5" />
+	<property name="libsass.version" value="3.2.5" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
@@ -16,30 +16,30 @@
 		<sequential>
 			<if>
 				<not>
-					<available file="libsass-${libsass-version}.zip" />
+					<available file="libsass-${libsass.version}.zip" />
 				</not>
 				<then>
 					<mirrors-get
-						dest="libsass-${libsass-version}.zip"
-						src="https://github.com/sass/libsass/archive/${libsass-version}.zip"
+						dest="libsass-${libsass.version}.zip"
+						src="https://github.com/sass/libsass/archive/${libsass.version}.zip"
 					/>
 				</then>
 			</if>
 
 			<unzip
 				dest="tmp"
-				src="libsass-${libsass-version}.zip"
+				src="libsass-${libsass.version}.zip"
 			/>
 
-			<chmod dir="tmp/libsass-${libsass-version}" perm="a+x"
+			<chmod dir="tmp/libsass-${libsass.version}" perm="a+x"
 				   includes="**/*.sh" />
 
 			<exec
 				command="@{libsass.make.exe}"
-				dir="tmp/libsass-${libsass-version}" />
+				dir="tmp/libsass-${libsass.version}" />
 
 			<copy todir="resources/@{libsass.resources.dir}">
-				<fileset dir="tmp/libsass-${libsass-version}/@{libsass.lib.input.folder}">
+				<fileset dir="tmp/libsass-${libsass.version}/@{libsass.lib.input.folder}">
 					<filename name="@{libsass.lib.input.file}" />
 				</fileset>
 				<filtermapper>
@@ -55,11 +55,11 @@
 	</macrodef>
 
 	<target name="build-libsass-darwin">
-		<touch mkdirs="true" file="tmp/libsass-${libsass-version}/build.sh" />
-		<echo append="true" file="tmp/libsass-${libsass-version}/build.sh">LIBSASS_VERSION=&quot;${libsass-version}&quot;${line.separator}</echo>
-		<echo append="true" file="tmp/libsass-${libsass-version}/build.sh">autoreconf --force --install${line.separator}</echo>
-		<echo append="true" file="tmp/libsass-${libsass-version}/build.sh">./configure --disable-tests --enable-shared${line.separator}</echo>
-		<echo append="true" file="tmp/libsass-${libsass-version}/build.sh">make -j5${line.separator}</echo>
+		<touch mkdirs="true" file="tmp/libsass-${libsass.version}/build.sh" />
+		<echo append="true" file="tmp/libsass-${libsass.version}/build.sh">LIBSASS_VERSION=&quot;${libsass.version}&quot;${line.separator}</echo>
+		<echo append="true" file="tmp/libsass-${libsass.version}/build.sh">autoreconf --force --install${line.separator}</echo>
+		<echo append="true" file="tmp/libsass-${libsass.version}/build.sh">./configure --disable-tests --enable-shared${line.separator}</echo>
+		<echo append="true" file="tmp/libsass-${libsass.version}/build.sh">make -j5${line.separator}</echo>
 
 		<build-libsass
 			libsass.lib.input.file="libsass.dylib"
@@ -113,16 +113,16 @@
 			</not>
 			<then>
 				<mirrors-get
-					dest="libsass-${libsass-version}.zip"
-					src="https://github.com/sass/libsass/archive/${libsass-version}.zip"
+					dest="libsass-${libsass.version}.zip"
+					src="https://github.com/sass/libsass/archive/${libsass.version}.zip"
 				/>
 
 				<unzip
 					dest="tmp"
-					src="libsass-${libsass-version}.zip"
+					src="libsass-${libsass.version}.zip"
 				/>
 
-				<delete file="libsass-${libsass-version}.zip" />
+				<delete file="libsass-${libsass.version}.zip" />
 
 				<mirrors-get
 					dest="jnaerator-0.11-shaded.jar"
@@ -130,7 +130,7 @@
 				/>
 
 				<java
-					dir="tmp/libsass-${libsass-version}"
+					dir="tmp/libsass-${libsass.version}"
 					jar="jnaerator-0.11-shaded.jar"
 					fork="true"
 					failonerror="true"
