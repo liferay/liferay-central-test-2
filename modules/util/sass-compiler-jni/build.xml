@@ -62,8 +62,8 @@
 		<touch file="tmp/libsass-${libsass.version}/build.sh" mkdirs="true" />
 
 		<echo append="true" file="tmp/libsass-${libsass.version}/build.sh">LIBSASS_VERSION=&quot;${libsass.version}&quot;${line.separator}
-autoreconf --force --install${line.separator}</echo>
-./configure --disable-tests --enable-shared${line.separator}</echo>
+autoreconf --force --install${line.separator}
+./configure --disable-tests --enable-shared${line.separator}
 make -j5${line.separator}</echo>
 
 		<build-libsass
