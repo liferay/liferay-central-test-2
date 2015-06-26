@@ -156,9 +156,11 @@ public class UserDisplayTag extends TagSupport {
 
 	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
-			return _BASE_PAGE +
-				(Validator.isNotNull(_view) ? _view : StringPool.BLANK) +
-				_END_PAGE;
+			if (Validator.isNull(_view)) {
+				return _BASE_PAGE + _END_PAGE;
+			}
+
+			return _BASE_PAGE + _view + _END_PAGE;
 		}
 		else {
 			return _endPage;
@@ -167,9 +169,11 @@ public class UserDisplayTag extends TagSupport {
 
 	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
-			return _BASE_PAGE +
-				(Validator.isNotNull(_view) ? _view : StringPool.BLANK) +
-				_START_PAGE;
+			if (Validator.isNull(_view)) {
+				return _BASE_PAGE + _START_PAGE;
+			}
+
+			return _BASE_PAGE + _view + _START_PAGE;
 		}
 		else {
 			return _startPage;
