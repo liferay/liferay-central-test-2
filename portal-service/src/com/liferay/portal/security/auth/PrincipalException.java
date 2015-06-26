@@ -15,8 +15,8 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -49,7 +49,7 @@ public class PrincipalException extends PortalException {
 			super(
 				String.format(
 					"User %s must have permission to perform action %s",
-					Validator.isNull(userId) ? "" : userId,
+					GetterUtil.getString(userId),
 					StringUtil.merge(actionIds, ",")));
 
 			this.actionId = actionIds;
@@ -65,9 +65,9 @@ public class PrincipalException extends PortalException {
 			super(
 				String.format(
 					"User %s must have %s permission for %s %s",
-					Validator.isNull(userId) ? "" : userId,
+					GetterUtil.getString(userId),
 					StringUtil.merge(actionIds, ","), resourceName,
-					Validator.isNull(resourceId) ? "" : resourceId));
+					GetterUtil.getString(resourceId)));
 
 			this.actionId = actionIds;
 			this.resourceName = resourceName;
