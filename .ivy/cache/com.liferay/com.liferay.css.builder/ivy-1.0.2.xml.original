@@ -29,7 +29,7 @@
 		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
 		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
  <dependencies>
   <dependency>
    <groupId>org.apache.ant</groupId>
@@ -46,7 +46,7 @@
   <dependency>
    <groupId>com.liferay</groupId>
    <artifactId>com.liferay.sass.compiler.jni</artifactId>
-   <version>1.0.0</version>
+   <version>1.0.3</version>
    <scope>compile</scope>
   </dependency>
   <dependency>
