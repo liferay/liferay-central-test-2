@@ -383,10 +383,12 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 						return;
 					}
 
+					Class<?> clazz = getClass();
+
 					DynamicQuery versionArticleDynamicQuery =
 						DynamicQueryFactoryUtil.forClass(
 							JournalArticle.class, "versionArticle",
-							getClass().getClassLoader());
+							clazz.getClassLoader());
 
 					versionArticleDynamicQuery.setProjection(
 						ProjectionFactoryUtil.alias(
