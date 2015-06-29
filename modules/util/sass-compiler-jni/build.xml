@@ -65,25 +65,25 @@
 			</if>
 
 			<mirrors-get
-					dest="jnaerator-0.11-shaded.jar"
-					src="https://oss.sonatype.org/content/groups/public/com/nativelibs4java/jnaerator/0.11/jnaerator-0.11-shaded.jar"
-					/>
+				dest="jnaerator-0.11-shaded.jar"
+				src="https://oss.sonatype.org/content/groups/public/com/nativelibs4java/jnaerator/0.11/jnaerator-0.11-shaded.jar"
+			/>
 
 			<java
-					dir="tmp/libsass-${libsass.version}"
-					jar="jnaerator-0.11-shaded.jar"
-					fork="true"
-					failonerror="true"
-					>
+				dir="tmp/libsass-${libsass.version}"
+				jar="jnaerator-0.11-shaded.jar"
+				failonerror="true"
+				fork="true"
+			>
 				<arg line="-f -library liferaysass -mode Directory -o ../../src -package com.liferay.sass.compiler.jni.internal.libsass -runtime JNAerator sass_context.h" />
 			</java>
 
 			<delete file="jnaerator-0.11-shaded.jar" />
 
 			<move
-					file="src/com/liferay/sass/compiler/jni/internal/libsass/LiferaysassLibrary.java"
-					todir="tmp"
-					/>
+				file="src/com/liferay/sass/compiler/jni/internal/libsass/LiferaysassLibrary.java"
+				todir="tmp"
+			/>
 
 			<concat destfile="src/com/liferay/sass/compiler/jni/internal/libsass/LiferaysassLibrary.java">
 				<header >/* @generated */</header>
@@ -173,6 +173,5 @@ make -j5${line.separator}</echo>
 		</unzip>
 
 		<delete file="sass-spec.zip" />
-
 	</target>
 </project>
