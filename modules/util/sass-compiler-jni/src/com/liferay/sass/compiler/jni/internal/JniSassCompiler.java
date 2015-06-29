@@ -141,13 +141,14 @@ public class JniSassCompiler implements SassCompiler {
 		throws JniSassCompilerException {
 
 		try {
-			File temp = File.createTempFile("temp", ".scss");
-			temp.deleteOnExit();
+			File tempFile = File.createTempFile("temp", ".scss");
 
-			write(temp, input);
+			tempFile.deleteOnExit();
+
+			write(tempFile, input);
 
 			return compileFile(
-				temp.getCanonicalPath(), includeDirName, imgDirName);
+				tempFile.getCanonicalPath(), includeDirName, imgDirName);
 		}
 		catch (Exception e) {
 			throw new JniSassCompilerException(e);
