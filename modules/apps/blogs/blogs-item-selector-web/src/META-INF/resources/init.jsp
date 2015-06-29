@@ -35,3 +35,7 @@ page import="java.util.ResourceBundle" %>
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects/>
+
+<%
+ResourceBundle resourceBundle = ResourceBundle.getBundle("content.Language", locale);
+%>
