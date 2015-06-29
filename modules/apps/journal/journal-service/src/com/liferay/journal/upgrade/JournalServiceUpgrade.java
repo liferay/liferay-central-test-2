@@ -38,6 +38,20 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = JournalServiceUpgrade.class)
 public class JournalServiceUpgrade {
 
+	protected void deleteTempImages() throws Exception {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Delete temporary images");
+		}
+
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQL(
+			"delete from Image where imageId IN (SELECT articleImageId FROM " +
+				"JournalArticleImage where tempImage = TRUE)");
+
+		db.runSQL("delete from JournalArticleImage where tempImage = TRUE");
+	}
+
 	@Reference(unbind = "-")
 	protected void setJournalServiceConfigurator(
 		JournalServiceConfigurator journalServiceConfigurator) {
@@ -64,20 +78,6 @@ public class JournalServiceUpgrade {
 			"com.liferay.journal.service", upgradeProcesses, 1, 1, false);
 
 		deleteTempImages();
-	}
-
-	protected void deleteTempImages() throws Exception {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Delete temporary images");
-		}
-
-		DB db = DBFactoryUtil.getDB();
-
-		db.runSQL(
-			"delete from Image where imageId IN (SELECT articleImageId FROM " +
-				"JournalArticleImage where tempImage = TRUE)");
-
-		db.runSQL("delete from JournalArticleImage where tempImage = TRUE");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
