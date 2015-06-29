@@ -1343,6 +1343,7 @@ this task.
 							<replacevalue>
 								<![CDATA[
 									set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT"
+
 									:JAVA_OPTS_SET
 								]]>
 							</replacevalue>
@@ -1355,6 +1356,7 @@ this task.
 							<replacevalue>
 								<![CDATA[
 									set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+
 									:JAVA_OPTS_SET
 								]]>
 							</replacevalue>
