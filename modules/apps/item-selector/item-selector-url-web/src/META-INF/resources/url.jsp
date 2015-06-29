@@ -18,12 +18,10 @@
 
 <%
 ItemSelectorURLViewDisplayContext itemSelectorURLViewDisplayContext = (ItemSelectorURLViewDisplayContext)request.getAttribute(ItemSelectorURLView.ITEM_SELECTOR_URL_VIEW_DISPLAY_CONTEXT);
-
-ResourceBundle resourceBundle = ResourceBundle.getBundle("content/Language", locale);
 %>
 
 <aui:row cssClass="lfr-item-viewer" id="itemSelectorUrlContainer">
-	<aui:col cssClass="col-md-offset-2" width="60">
+	<aui:col cssClass="col-md-offset-2" width="<%= 60 %>">
 		<h4><%= LanguageUtil.get(resourceBundle, "enter-url") %></h4>
 
 		<p><%= LanguageUtil.get(resourceBundle, "enter-url-that-contains-the-image-you-want-to-add") %></p>
