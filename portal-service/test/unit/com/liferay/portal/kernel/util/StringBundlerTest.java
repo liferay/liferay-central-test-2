@@ -709,7 +709,7 @@ public class StringBundlerTest {
 
 		System.setProperty(propertyKey, String.valueOf(Integer.MAX_VALUE));
 
-		doTestToStringWithoutThreadLocalBuffer(propertyKey, propertyValue);
+		testToStringWithoutThreadLocalBuffer(propertyKey, propertyValue);
 	}
 
 	@NewEnv(type = NewEnv.Type.CLASSLOADER)
@@ -722,7 +722,7 @@ public class StringBundlerTest {
 
 		System.clearProperty(propertyKey);
 
-		doTestToStringWithoutThreadLocalBuffer(propertyKey, propertyValue);
+		testToStringWithoutThreadLocalBuffer(propertyKey, propertyValue);
 	}
 
 	@NewEnv(type = NewEnv.Type.CLASSLOADER)
@@ -735,7 +735,7 @@ public class StringBundlerTest {
 
 		System.setProperty(propertyKey, "0");
 
-		doTestToStringWithoutThreadLocalBuffer(propertyKey, propertyValue);
+		testToStringWithoutThreadLocalBuffer(propertyKey, propertyValue);
 	}
 
 	@NewEnv(type = NewEnv.Type.CLASSLOADER)
@@ -830,7 +830,7 @@ public class StringBundlerTest {
 		}
 	}
 
-	protected void doTestToStringWithoutThreadLocalBuffer(
+	protected void testToStringWithoutThreadLocalBuffer(
 		String propertyKey, String propertyValue) {
 
 		try {
