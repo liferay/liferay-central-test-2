@@ -141,7 +141,7 @@ public class JniSassCompiler implements SassCompiler {
 		throws JniSassCompilerException {
 
 		try {
-			File tempFile = File.createTempFile("temp", ".scss");
+			File tempFile = File.createTempFile("tmp", ".scss");
 
 			tempFile.deleteOnExit();
 
