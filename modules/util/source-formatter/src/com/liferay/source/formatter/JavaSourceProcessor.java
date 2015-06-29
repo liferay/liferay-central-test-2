@@ -923,6 +923,10 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				"Do not use PowerMock inside Arquillian tests: " + fileName);
 		}
 
+		// LPS-48156
+
+		newContent = checkPrincipalException(newContent);
+
 		newContent = getCombinedLinesContent(
 			newContent, _combinedLinesPattern1);
 		newContent = getCombinedLinesContent(
