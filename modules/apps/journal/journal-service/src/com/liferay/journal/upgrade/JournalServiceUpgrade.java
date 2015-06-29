@@ -63,26 +63,22 @@ public class JournalServiceUpgrade {
 		_releaseLocalService.updateRelease(
 			"com.liferay.journal.service", upgradeProcesses, 1, 1, false);
 
+		deleteTempImages();
+	}
+
+	protected void deleteTempImages() throws Exception {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete temporary images");
 		}
 
-		_deleteTempImages();
-	}
-
-	private void _deleteTempImages() throws Exception {
 		DB db = DBFactoryUtil.getDB();
 
-		db.runSQL(_DELETE_TEMP_IMAGES_1);
-		db.runSQL(_DELETE_TEMP_IMAGES_2);
+		db.runSQL(
+			"delete from Image where imageId IN (SELECT articleImageId FROM " +
+				"JournalArticleImage where tempImage = TRUE)");
+
+		db.runSQL("delete from JournalArticleImage where tempImage = TRUE");
 	}
-
-	private static final String _DELETE_TEMP_IMAGES_1 =
-		"delete from Image where imageId IN (SELECT articleImageId FROM " +
-			"JournalArticleImage where tempImage = TRUE)";
-
-	private static final String _DELETE_TEMP_IMAGES_2 =
-		"delete from JournalArticleImage where tempImage = TRUE";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalServiceUpgrade.class);
