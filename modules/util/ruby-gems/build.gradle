@@ -41,5 +41,4 @@ downloadGems {
 	onlyIf {
 		!FileUtil.exists(project, "classes/gems")
 	}
-
 }
