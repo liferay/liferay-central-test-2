@@ -156,7 +156,6 @@ public class PermissionExportImportTest {
 
 		final Method getCompanyIdMethod = ReflectionTestUtil.getMethod(
 			PortletDataContext.class, "getCompanyId");
-
 		final Method getGroupIdMethod = ReflectionTestUtil.getMethod(
 			PortletDataContext.class, "getGroupId");
 
