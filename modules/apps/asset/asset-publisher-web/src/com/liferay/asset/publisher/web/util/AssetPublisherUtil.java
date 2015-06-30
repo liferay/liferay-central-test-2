@@ -620,7 +620,7 @@ public class AssetPublisherUtil {
 			allAssetCategoryIds = overrideAllAssetCategoryIds;
 		}
 
-		allAssetCategoryIds = _checkAssetCategories(allAssetCategoryIds);
+		allAssetCategoryIds = _filterAssetCategoryIds(allAssetCategoryIds);
 
 		assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
 
@@ -1306,7 +1306,7 @@ public class AssetPublisherUtil {
 		_assetEntryQueryProcessors.remove(assetEntryQueryProcessor);
 	}
 
-	private static long[] _checkAssetCategories(long[] assetCategoryIds) {
+	private static long[] _filterAssetCategoryIds(long[] assetCategoryIds) {
 		List<Long> assetCategoryIdsList = new ArrayList<>();
 
 		for (long assetCategoryId : assetCategoryIds) {
