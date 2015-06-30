@@ -77,7 +77,7 @@ import org.junit.runner.RunWith;
 public class JournalArticleTrashHandlerTest
 	extends BaseTrashHandlerTestCase
 	implements WhenHasRecentBaseModelCount, WhenIsAssetableBaseModel,
-		WhenIsAssetableParentModel, WhenIsIndexableBaseModel {
+			   WhenIsAssetableParentModel, WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

@@ -73,7 +73,7 @@ import org.junit.Test;
 public class DLFileEntryTrashHandlerTest
 	extends BaseTrashHandlerTestCase
 	implements WhenHasRecentBaseModelCount, WhenIsAssetableBaseModel,
-		WhenIsAssetableParentModel, WhenIsIndexableBaseModel {
+			   WhenIsAssetableParentModel, WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

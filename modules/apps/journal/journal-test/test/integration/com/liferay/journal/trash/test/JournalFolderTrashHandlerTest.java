@@ -55,7 +55,7 @@ import org.junit.runner.RunWith;
 public class JournalFolderTrashHandlerTest
 	extends BaseTrashHandlerTestCase
 	implements WhenIsAssetableBaseModel, WhenIsAssetableParentModel,
-		WhenIsIndexableBaseModel {
+			   WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

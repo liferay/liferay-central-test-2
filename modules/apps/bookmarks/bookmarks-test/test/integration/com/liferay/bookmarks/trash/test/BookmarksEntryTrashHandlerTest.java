@@ -59,7 +59,7 @@ import org.junit.runner.RunWith;
 public class BookmarksEntryTrashHandlerTest
 	extends BaseTrashHandlerTestCase
 	implements WhenHasRecentBaseModelCount, WhenIsAssetableBaseModel,
-		WhenIsAssetableParentModel, WhenIsIndexableBaseModel {
+			   WhenIsAssetableParentModel, WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule

@@ -51,7 +51,7 @@ import org.junit.Test;
 public class DLFolderTrashHandlerTest
 	extends BaseTrashHandlerTestCase
 	implements WhenIsAssetableBaseModel, WhenIsAssetableParentModel,
-		WhenIsIndexableBaseModel {
+			   WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule
