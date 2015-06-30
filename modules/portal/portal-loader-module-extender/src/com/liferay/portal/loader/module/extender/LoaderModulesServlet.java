@@ -73,8 +73,40 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 	service = {LoaderModulesServlet.class, Servlet.class}
 )
 public class LoaderModulesServlet extends HttpServlet
-	implements Servlet, ServiceTrackerCustomizer<
-		ServletContext, ServiceReference<ServletContext>> {
+	implements Servlet, ServiceTrackerCustomizer
+		<ServletContext, ServiceReference<ServletContext>> {
+
+	@Override
+	public ServiceReference<ServletContext> addingService(
+		ServiceReference<ServletContext> serviceReference) {
+
+		String contextPath = (String)serviceReference.getProperty(
+			"osgi.web.contextpath");
+
+		LoaderModule loaderModule = new LoaderModule(
+			serviceReference.getBundle(), contextPath);
+
+		_loaderModules.put(serviceReference, loaderModule);
+
+		return serviceReference;
+	}
+
+	@Override
+	public void modifiedService(
+		ServiceReference<ServletContext> serviceReference,
+		ServiceReference<ServletContext> trackedReference) {
+
+		removedService(serviceReference, trackedReference);
+		addingService(serviceReference);
+	}
+
+	@Override
+	public void removedService(
+		ServiceReference<ServletContext> serviceReference,
+		ServiceReference<ServletContext> trackedReference) {
+
+		_loaderModules.remove(serviceReference);
+	}
 
 	public class LoaderModule {
 
@@ -268,38 +300,6 @@ public class LoaderModulesServlet extends HttpServlet
 		private final String _version;
 		private String _versionedConfig = "";
 
-	}
-
-	@Override
-	public ServiceReference<ServletContext> addingService(
-		ServiceReference<ServletContext> serviceReference) {
-
-		String contextPath = (String)serviceReference.getProperty(
-			"osgi.web.contextpath");
-
-		LoaderModule loaderModule = new LoaderModule(
-			serviceReference.getBundle(), contextPath);
-
-		_loaderModules.put(serviceReference, loaderModule);
-
-		return serviceReference;
-	}
-
-	@Override
-	public void modifiedService(
-		ServiceReference<ServletContext> serviceReference,
-		ServiceReference<ServletContext> trackedReference) {
-
-		removedService(serviceReference, trackedReference);
-		addingService(serviceReference);
-	}
-
-	@Override
-	public void removedService(
-		ServiceReference<ServletContext> serviceReference,
-		ServiceReference<ServletContext> trackedReference) {
-
-		_loaderModules.remove(serviceReference);
 	}
 
 	@Activate
