@@ -181,8 +181,8 @@ public class PortletBagFactory {
 			userNotificationHandlerInstances, webDAVStorageInstances,
 			xmlRpcMethodInstances, controlPanelEntryInstances,
 			assetRendererFactoryInstances, atomCollectionAdapterInstances,
-			customAttributesDisplayInstances, permissionPropagatorInstances, 
-			trashHandlerInstances, workflowHandlerInstances, 
+			customAttributesDisplayInstances, permissionPropagatorInstances,
+			trashHandlerInstances, workflowHandlerInstances,
 			preferencesValidatorInstances);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
