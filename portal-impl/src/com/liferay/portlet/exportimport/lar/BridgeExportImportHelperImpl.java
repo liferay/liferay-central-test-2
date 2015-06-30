@@ -49,13 +49,13 @@ public class BridgeExportImportHelperImpl implements ExportImportHelper {
 	public BridgeExportImportHelperImpl(
 		ExportImportHelper defaultExportImportHelper) {
 
+		_defaultExportImportHelper = defaultExportImportHelper;
+
 		Registry registry = RegistryUtil.getRegistry();
 
 		_serviceTracker = registry.trackServices(ExportImportHelper.class);
 
 		_serviceTracker.open();
-
-		_defaultExportImportHelper = defaultExportImportHelper;
 	}
 
 	@Override
