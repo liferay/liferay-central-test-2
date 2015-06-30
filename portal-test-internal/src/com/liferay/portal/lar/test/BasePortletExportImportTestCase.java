@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
@@ -288,9 +289,7 @@ public abstract class BasePortletExportImportTestCase
 
 		StagedModel stagedModel = addStagedModel(group.getGroupId());
 
-		Thread currentThread = Thread.currentThread();
-
-		currentThread.sleep(4000);
+		Thread.sleep(4000);
 
 		exportImportPortlet(getPortletId());
 
