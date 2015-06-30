@@ -18,7 +18,6 @@
 
 <%
 JournalArticle article = journalContentDisplayContext.getArticle();
-
 AssetRenderer assetRenderer = journalContentDisplayContext.getAssetRenderer();
 %>
 

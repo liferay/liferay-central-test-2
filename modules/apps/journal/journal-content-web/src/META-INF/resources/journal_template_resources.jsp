@@ -18,12 +18,9 @@
 
 <%
 JournalArticle article = journalContentDisplayContext.getArticle();
-
 DDMStructure ddmStructure = journalContentDisplayContext.getDDMStructure();
-
-List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
-
 DDMTemplate ddmTemplate = journalContentDisplayContext.getDDMTemplate();
+List<DDMTemplate> ddmTemplates = journalContentDisplayContext.getDDMTemplates();
 
 String ddmTemplateImageURL = ddmTemplate.getTemplateImageURL(themeDisplay);
 %>
@@ -40,6 +37,7 @@ String ddmTemplateImageURL = ddmTemplate.getTemplateImageURL(themeDisplay);
 	<c:if test="<%= Validator.isNotNull(ddmTemplateImageURL) %>">
 		<img alt="<%= ddmTemplate.getName(locale) %>" class="media-object pull-left template-image" src="<%= ddmTemplateImageURL %>">
 	</c:if>
+
 	<div class="media-body">
 		<h2 class="heading4 template-title"><%= ddmTemplate.getName(locale) %></h2>
 		<p class="template-description"><%= ddmTemplate.getDescription() %></p>
