@@ -99,6 +99,18 @@ public class LayoutCache {
 		return role;
 	}
 
+	protected List<Role> getUserRoles(long userId) {
+		List<Role> userRoles = userRolesMap.get(userId);
+
+		if (userRoles == null) {
+			userRoles = RoleLocalServiceUtil.getUserRoles(userId);
+
+			userRolesMap.put(userId, userRoles);
+		}
+
+		return userRoles;
+	}
+
 	protected Role getUuidRole(long companyId, String uuid)
 		throws PortalException {
 
@@ -116,18 +128,6 @@ public class LayoutCache {
 		}
 
 		return role;
-	}
-
-	protected List<Role> getUserRoles(long userId) {
-		List<Role> userRoles = userRolesMap.get(userId);
-
-		if (userRoles == null) {
-			userRoles = RoleLocalServiceUtil.getUserRoles(userId);
-
-			userRolesMap.put(userId, userRoles);
-		}
-
-		return userRoles;
 	}
 
 	protected Map<Long, List<Role>> groupRolesMap = new HashMap<>();
