@@ -165,19 +165,17 @@ public class BaseExportImportTestCase {
 		throws Exception {
 
 		Assert.assertTrue(
-			String.valueOf(stagedModel.getCreateDate()) + StringPool.SPACE +
+			stagedModel.getCreateDate() + " " +
 				importedStagedModel.getCreateDate(),
 			DateUtil.equals(
 				stagedModel.getCreateDate(),
 				importedStagedModel.getCreateDate(), true));
-
 		Assert.assertTrue(
-			String.valueOf(stagedModel.getModifiedDate()) + StringPool.SPACE +
+			stagedModel.getModifiedDate() + " " +
 				importedStagedModel.getModifiedDate(),
 			DateUtil.equals(
 				stagedModel.getModifiedDate(),
 				importedStagedModel.getModifiedDate(), true));
-
 		Assert.assertEquals(
 			stagedModel.getUuid(), importedStagedModel.getUuid());
 	}
