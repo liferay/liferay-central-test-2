@@ -90,10 +90,10 @@ public class PermissionImporter {
 
 		String uuid = roleElement.attributeValue("uuid");
 
-		role = layoutCache.getRoleByUuid(companyId, uuid);
+		role = layoutCache.getUuidRole(companyId, uuid);
 
 		if (role == null) {
-			role = layoutCache.getRoleByName(companyId, name);
+			role = layoutCache.getNameRole(companyId, name);
 		}
 
 		if (role != null) {
