@@ -91,6 +91,7 @@ if (organization != null) {
 			</c:choose>
 
 			<c:if test="<%= site %>">
+
 				<%
 				LiferayPortletURL editOrganizationSiteURL = (LiferayPortletURL)PortletProviderUtil.getPortletURL(request, Group.class.getName(), PortletProvider.Action.EDIT);
 
