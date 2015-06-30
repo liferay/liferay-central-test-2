@@ -330,7 +330,7 @@ public final class XMLLoggerHandler {
 	private static LoggerElement _getConditionalLoggerElement(Element element)
 		throws Exception {
 
-		LoggerElement loggerElement;
+		LoggerElement loggerElement = null;
 
 		if (_isExecutingFunction(element)) {
 			loggerElement = _getLineGroupLoggerElement(
