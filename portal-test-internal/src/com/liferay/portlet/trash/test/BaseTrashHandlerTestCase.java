@@ -1643,14 +1643,14 @@ public abstract class BaseTrashHandlerTestCase {
 	public void testTrashRecentBaseModel() throws Exception {
 		Assume.assumeTrue(this instanceof WhenHasRecentBaseModelCount);
 
-		WhenHasRecentBaseModelCount whenHasRecentBaseModelCountInstance =
-			(WhenHasRecentBaseModelCount)this;
-
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
 			group, serviceContext);
+
+		WhenHasRecentBaseModelCount whenHasRecentBaseModelCountInstance =
+			(WhenHasRecentBaseModelCount)this;
 
 		int initialBaseModelsCount =
 			whenHasRecentBaseModelCountInstance.getRecentBaseModelsCount(
