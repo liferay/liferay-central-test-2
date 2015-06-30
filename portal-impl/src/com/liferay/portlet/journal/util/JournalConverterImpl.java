@@ -524,6 +524,7 @@ public class JournalConverterImpl implements JournalConverter {
 		throws PortalException {
 
 		int x = url.indexOf("/documents/");
+
 		int y = url.indexOf(StringPool.QUESTION);
 
 		if (y == -1) {
