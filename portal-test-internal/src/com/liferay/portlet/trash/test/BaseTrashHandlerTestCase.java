@@ -1649,25 +1649,25 @@ public abstract class BaseTrashHandlerTestCase {
 		BaseModel<?> parentBaseModel = getParentBaseModel(
 			group, serviceContext);
 
-		WhenHasRecentBaseModelCount whenHasRecentBaseModelCountInstance =
+		WhenHasRecentBaseModelCount whenHasRecentBaseModelCount =
 			(WhenHasRecentBaseModelCount)this;
 
 		int initialBaseModelsCount =
-			whenHasRecentBaseModelCountInstance.getRecentBaseModelsCount(
+			whenHasRecentBaseModelCount.getRecentBaseModelsCount(
 				group.getGroupId());
 
 		addBaseModel(parentBaseModel, true, serviceContext);
 
 		Assert.assertEquals(
 			initialBaseModelsCount + 1,
-			whenHasRecentBaseModelCountInstance.getRecentBaseModelsCount(
+			whenHasRecentBaseModelCount.getRecentBaseModelsCount(
 				group.getGroupId()));
 
 		moveParentBaseModelToTrash((Long)parentBaseModel.getPrimaryKeyObj());
 
 		Assert.assertEquals(
 			initialBaseModelsCount,
-			whenHasRecentBaseModelCountInstance.getRecentBaseModelsCount(
+			whenHasRecentBaseModelCount.getRecentBaseModelsCount(
 				group.getGroupId()));
 	}
 
