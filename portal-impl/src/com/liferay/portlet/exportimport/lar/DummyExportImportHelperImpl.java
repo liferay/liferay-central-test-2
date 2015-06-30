@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.exportimport.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.StringPool;
@@ -284,15 +283,14 @@ public class DummyExportImportHelperImpl implements ExportImportHelper {
 
 	@Override
 	public FileEntry getTempFileEntry(
-			long groupId, long userId, String folderName)
-		throws PortalException {
+		long groupId, long userId, String folderName) {
 
 		return null;
 	}
 
 	@Override
-	public UserIdStrategy getUserIdStrategy(long userId, String userIdStrategy)
-		throws PortalException {
+	public UserIdStrategy getUserIdStrategy(
+		long userId, String userIdStrategy) {
 
 		return null;
 	}
