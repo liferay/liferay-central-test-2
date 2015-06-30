@@ -291,7 +291,6 @@ public class JournalArticleIndexer
 					}
 
 				});
-
 			actionableDynamicQuery.setPerformActionMethod(
 				new ActionableDynamicQuery.PerformActionMethod() {
 
@@ -304,8 +303,8 @@ public class JournalArticleIndexer
 						try {
 							doReindex(article, false);
 						}
-						catch (Exception ex) {
-							throw new PortalException(ex);
+						catch (Exception e) {
+							throw new PortalException(e);
 						}
 					}
 
