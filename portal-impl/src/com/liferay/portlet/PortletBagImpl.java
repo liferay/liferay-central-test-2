@@ -141,7 +141,7 @@ public class PortletBagImpl implements PortletBag {
 			getXmlRpcMethodInstances(), getControlPanelEntryInstances(),
 			getAssetRendererFactoryInstances(),
 			getAtomCollectionAdapterInstances(),
-			getCustomAttributesDisplayInstances(), 
+			getCustomAttributesDisplayInstances(),
 			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
 			getWorkflowHandlerInstances(), getPreferencesValidatorInstances());
 	}

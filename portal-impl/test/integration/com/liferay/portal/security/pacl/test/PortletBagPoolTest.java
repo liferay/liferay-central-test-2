@@ -71,7 +71,7 @@ public class PortletBagPoolTest {
 				new PortletBagImpl(
 					null, null, null, null, null, null, null, null, null, null,
 					null, null, null, null, null, null, null, null, null, null,
-					null, null, null, null, null, null, null, null, null, 
+					null, null, null, null, null, null, null, null, null,
 					null));
 
 			Assert.fail();
