@@ -81,7 +81,7 @@ public class LayoutCache {
 		return users;
 	}
 
-	protected Role getRoleByName(long companyId, String roleName)
+	protected Role getNameRole(long companyId, String roleName)
 		throws PortalException {
 
 		Role role = nameRolesMap.get(roleName);
@@ -99,7 +99,7 @@ public class LayoutCache {
 		return role;
 	}
 
-	protected Role getRoleByUuid(long companyId, String uuid)
+	protected Role getUuidRole(long companyId, String uuid)
 		throws PortalException {
 
 		Role role = uuidRolesMap.get(uuid);
