@@ -162,12 +162,14 @@ String ddmTemplateKey = journalContentDisplayContext.getDDMTemplateKey();
 
 			<%
 			PortletURL selectWebContentURL = PortletProviderUtil.getPortletURL(request, JournalArticle.class.getName(), PortletProvider.Action.BROWSE);
+
 			selectWebContentURL.setParameter("groupId", String.valueOf(scopeGroupId));
 			selectWebContentURL.setParameter("selectedGroupIds", StringUtil.merge(PortalUtil.getSharedContentSiteGroupIds(company.getCompanyId(), scopeGroupId, user.getUserId())));
+			selectWebContentURL.setParameter("refererAssetEntryId", "[$ARTICLE_REFERER_ASSET_ENTRY_ID$]");
 			selectWebContentURL.setParameter("typeSelection", JournalArticle.class.getName());
 			selectWebContentURL.setParameter("eventName", "selectContent");
-			selectWebContentURL.setParameter("refererAssetEntryId", "[$ARTICLE_REFERER_ASSET_ENTRY_ID$]");
 			selectWebContentURL.setWindowState(LiferayWindowState.POP_UP);
+
 			String selectWebContentURI = HttpUtil.addParameter(selectWebContentURL.toString(), "doAsGroupId", scopeGroupId);
 			%>
 
