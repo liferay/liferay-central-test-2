@@ -64,7 +64,7 @@ import org.junit.Test;
 public class MBThreadTrashHandlerTest
 	extends BaseTrashHandlerTestCase
 	implements WhenHasRecentBaseModelCount, WhenIsAssetableBaseModel,
-		WhenIsIndexableBaseModel {
+			   WhenIsIndexableBaseModel {
 
 	@ClassRule
 	@Rule
