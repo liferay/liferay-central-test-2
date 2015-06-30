@@ -266,7 +266,7 @@ public abstract class BasePortletExportImportTestCase
 	}
 
 	@Test
-	public void testVersioning() throws Exception {
+	public void testVersioning1() throws Exception {
 		if (!isVersioningEnabled()) {
 			return;
 		}
@@ -288,7 +288,9 @@ public abstract class BasePortletExportImportTestCase
 
 		StagedModel stagedModel = addStagedModel(group.getGroupId());
 
-		Thread.currentThread().sleep(4000);
+		Thread currentThread = Thread.currentThread();
+
+		currentThread.sleep(4000);
 
 		exportImportPortlet(getPortletId());
 
@@ -633,13 +635,15 @@ public abstract class BasePortletExportImportTestCase
 					AssetEntryLocalServiceUtil.getEntry(
 						importedLink.getEntryId2());
 
-				if (!sourceAssetEntry.getClassUuid().equals(
+				if (!Validator.equals(
+						sourceAssetEntry.getClassUuid(),
 						importedLinkSourceAssetEntry.getClassUuid())) {
 
 					continue;
 				}
 
-				if (!targetAssetEntry.getClassUuid().equals(
+				if (!Validator.equals(
+						targetAssetEntry.getClassUuid(),
 						importedLinkTargetAssetEntry.getClassUuid())) {
 
 					continue;

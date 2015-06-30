@@ -106,7 +106,7 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 	}
 
 	@Test
-	public void testExportImportJournalArticleNoVersionHistory()
+	public void testExportImportJournalArticleWithoutVersionHistory()
 		throws Exception {
 
 		JournalArticle article = (JournalArticle)addStagedModel(
