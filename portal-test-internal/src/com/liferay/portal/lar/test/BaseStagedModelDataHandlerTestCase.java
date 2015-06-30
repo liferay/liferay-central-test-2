@@ -235,7 +235,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 
 		// Make sure the dates are different
 
-		Thread.currentThread().sleep(4000);
+		Thread.sleep(4000);
 
 		exportImportStagedModel(stagedModel);
 
