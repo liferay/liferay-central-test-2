@@ -1306,26 +1306,6 @@ public class AssetPublisherUtil {
 		_assetEntryQueryProcessors.remove(assetEntryQueryProcessor);
 	}
 
-	private static long[] _filterAssetCategoryIds(long[] assetCategoryIds) {
-		List<Long> assetCategoryIdsList = new ArrayList<>();
-
-		for (long assetCategoryId : assetCategoryIds) {
-			AssetCategory category =
-				AssetCategoryLocalServiceUtil.fetchAssetCategory(
-					assetCategoryId);
-
-			if (category == null) {
-				continue;
-			}
-
-			assetCategoryIdsList.add(assetCategoryId);
-		}
-
-		return ArrayUtil.toArray(
-			assetCategoryIdsList.toArray(
-				new Long[assetCategoryIdsList.size()]));
-	}
-
 	private static void _checkAssetEntries(
 			com.liferay.portal.model.PortletPreferences
 				portletPreferencesModel)
@@ -1406,6 +1386,26 @@ public class AssetPublisherUtil {
 		}
 
 		return filteredAssetEntries;
+	}
+
+	private static long[] _filterAssetCategoryIds(long[] assetCategoryIds) {
+		List<Long> assetCategoryIdsList = new ArrayList<>();
+
+		for (long assetCategoryId : assetCategoryIds) {
+			AssetCategory category =
+				AssetCategoryLocalServiceUtil.fetchAssetCategory(
+					assetCategoryId);
+
+			if (category == null) {
+				continue;
+			}
+
+			assetCategoryIdsList.add(assetCategoryId);
+		}
+
+		return ArrayUtil.toArray(
+			assetCategoryIdsList.toArray(
+				new Long[assetCategoryIdsList.size()]));
 	}
 
 	private static List<AssetEntry> _filterAssetTagNamesAssetEntries(
