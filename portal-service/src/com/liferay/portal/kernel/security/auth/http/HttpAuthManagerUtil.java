@@ -32,7 +32,7 @@ public class HttpAuthManagerUtil {
 		HttpServletRequest request, HttpServletResponse response,
 		HttpAuthorizationHeader authorizationHeader) {
 
-		_instance._serviceTracker.getService().generateChallenge(
+		getHttpAuthManager().generateChallenge(
 			request, response, authorizationHeader);
 	}
 
@@ -83,12 +83,15 @@ public class HttpAuthManagerUtil {
 			HttpAuthorizationHeader authorizationHeader)
 		throws PortalException {
 
-		return _instance._serviceTracker.getService().getUserId(
-			request, authorizationHeader);
+		return getHttpAuthManager().getUserId(request, authorizationHeader);
 	}
 
 	public static HttpAuthorizationHeader parse(HttpServletRequest request) {
-		return _instance._serviceTracker.getService().parse(request);
+		return getHttpAuthManager().parse(request);
+	}
+
+	private static HttpAuthManager getHttpAuthManager() {
+		return _instance._serviceTracker.getService();
 	}
 
 	private HttpAuthManagerUtil() {
