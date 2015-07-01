@@ -233,7 +233,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			repositoryId);
 
 		for (DLFolder dlFolder : dlFolders) {
-			deleteFolderEntries(dlFolder, true);
+			deleteFolderDependencies(dlFolder, true);
 
 			repositoryEventTrigger.trigger(
 				RepositoryEventType.Delete.class, Folder.class,
@@ -285,7 +285,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		deleteSubfolders(dlFolder, includeTrashedEntries);
 
-		deleteFolderEntries(dlFolder, includeTrashedEntries);
+		deleteFolderDependencies(dlFolder, includeTrashedEntries);
 
 		return dlFolder;
 	}
@@ -1311,7 +1311,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		addFolderResources(dlFolder, groupPermissions, guestPermissions);
 	}
 
-	protected void deleteFolderEntries(
+	protected void deleteFolderDependencies(
 			DLFolder dlFolder, boolean includeTrashedEntries)
 		throws PortalException {
 
