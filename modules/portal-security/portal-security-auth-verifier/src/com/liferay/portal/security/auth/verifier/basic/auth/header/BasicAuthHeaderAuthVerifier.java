@@ -28,7 +28,6 @@ import com.liferay.portal.util.Portal;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -78,18 +77,14 @@ public class BasicAuthHeaderAuthVerifier
 					accessControlContext.getSettings(), "basic_auth");
 
 				if (forcedBasicAuth) {
-					HttpServletRequest request =
-						accessControlContext.getRequest();
-
-					HttpServletResponse response =
-						accessControlContext.getResponse();
-
 					HttpAuthorizationHeader httpAuthorizationHeader =
 						new HttpAuthorizationHeader(
 							HttpAuthorizationHeader.SCHEME_BASIC);
 
 					HttpAuthManagerUtil.generateChallenge(
-						request, response, httpAuthorizationHeader);
+						accessControlContext.getRequest(),
+						accessControlContext.getResponse(),
+						httpAuthorizationHeader);
 
 					authVerifierResult.setState(
 						AuthVerifierResult.State.INVALID_CREDENTIALS);
