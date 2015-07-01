@@ -35,7 +35,6 @@ import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -329,9 +328,6 @@ public class SecureFilter extends BasePortalFilter {
 
 	private static final String _AUTHENTICATED_USER =
 		SecureFilter.class + "_AUTHENTICATED_USER";
-
-	private static final String _BASIC_REALM =
-		"Basic realm=\"" + Portal.PORTAL_REALM + "\"";
 
 	private static final Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
