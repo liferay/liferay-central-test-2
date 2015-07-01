@@ -28,6 +28,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 import javax.servlet.jsp.tagext.TagData;
@@ -36,6 +37,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Peter Fellwock
  */
 public class DefineObjectsTei extends TagExtraInfo {
 
@@ -84,6 +86,9 @@ public class DefineObjectsTei extends TagExtraInfo {
 		new VariableInfo(
 			"portletDisplay", PortletDisplay.class.getName(), true,
 			VariableInfo.AT_END),
+		new VariableInfo(
+			"resourceBundle", ResourceBundle.class.getName(), true,
+				VariableInfo.AT_END),
 
 		// Deprecated
 
