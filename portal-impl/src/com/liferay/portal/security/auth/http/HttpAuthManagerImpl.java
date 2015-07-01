@@ -16,6 +16,7 @@ package com.liferay.portal.security.auth.http;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.http.HttpAuthManager;
+import com.liferay.portal.kernel.security.auth.http.HttpAuthManagerUtil;
 import com.liferay.portal.kernel.security.auth.http.HttpAuthorizationHeader;
 import com.liferay.portal.kernel.security.auth.session.AuthenticatedSessionManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -95,6 +96,50 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				"Authorization scheme " + authorizationScheme +
 					" is not supported");
 		}
+	}
+
+	@Override
+	public long getBasicUserId(HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		HttpAuthorizationHeader httpAuthorizationHeader =
+			HttpAuthManagerUtil.parse(httpServletRequest);
+
+		if (httpAuthorizationHeader == null) {
+			return 0;
+		}
+
+		String scheme = httpAuthorizationHeader.getScheme();
+
+		if (!StringUtil.equalsIgnoreCase(
+				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
+
+			return 0;
+		}
+
+		return getUserId(httpServletRequest, httpAuthorizationHeader);
+	}
+
+	@Override
+	public long getDigestUserId(HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		HttpAuthorizationHeader httpAuthorizationHeader =
+			HttpAuthManagerUtil.parse(httpServletRequest);
+
+		if (httpAuthorizationHeader == null) {
+			return 0;
+		}
+
+		String scheme = httpAuthorizationHeader.getScheme();
+
+		if (!StringUtil.equalsIgnoreCase(
+				scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
+
+			return 0;
+		}
+
+		return getUserId(httpServletRequest, httpAuthorizationHeader);
 	}
 
 	@Override

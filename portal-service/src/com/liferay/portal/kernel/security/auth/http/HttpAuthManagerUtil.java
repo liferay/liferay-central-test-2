@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.security.auth.http;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceTracker;
@@ -40,43 +39,13 @@ public class HttpAuthManagerUtil {
 	public static long getBasicUserId(HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		HttpAuthorizationHeader httpAuthorizationHeader =
-			HttpAuthManagerUtil.parse(httpServletRequest);
-
-		if (httpAuthorizationHeader == null) {
-			return 0;
-		}
-
-		String scheme = httpAuthorizationHeader.getScheme();
-
-		if (!StringUtil.equalsIgnoreCase(
-				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
-
-			return 0;
-		}
-
-		return getUserId(httpServletRequest, httpAuthorizationHeader);
+		return getHttpAuthManager().getBasicUserId(httpServletRequest);
 	}
 
 	public static long getDigestUserId(HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		HttpAuthorizationHeader httpAuthorizationHeader =
-			HttpAuthManagerUtil.parse(httpServletRequest);
-
-		if (httpAuthorizationHeader == null) {
-			return 0;
-		}
-
-		String scheme = httpAuthorizationHeader.getScheme();
-
-		if (!StringUtil.equalsIgnoreCase(
-				scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
-
-			return 0;
-		}
-
-		return getUserId(httpServletRequest, httpAuthorizationHeader);
+		return getHttpAuthManager().getDigestUserId(httpServletRequest);
 	}
 
 	public static long getUserId(
