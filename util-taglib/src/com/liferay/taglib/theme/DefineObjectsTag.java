@@ -72,8 +72,9 @@ public class DefineObjectsTag extends TagSupport {
 		pageContext.setAttribute("timeZone", themeDisplay.getTimeZone());
 		pageContext.setAttribute("user", themeDisplay.getUser());
 		pageContext.setAttribute(
-			"resourceBundle", ResourceBundle.getBundle("content.Language", 
-					themeDisplay.getLocale()));
+			"resourceBundle",
+			ResourceBundle.getBundle(
+				"content.Language", themeDisplay.getLocale()));
 
 		// Deprecated
 
