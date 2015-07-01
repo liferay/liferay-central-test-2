@@ -29,13 +29,8 @@ page import="com.liferay.portal.kernel.repository.model.Folder" %><%@
 page import="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" %>
 
 <%@ page import="java.util.ArrayList" %><%@
-page import="java.util.List" %><%@
-page import="java.util.ResourceBundle" %>
+page import="java.util.List" %>
 
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects/>
-
-<%
-ResourceBundle resourceBundle = ResourceBundle.getBundle("content.Language", locale);
-%>
