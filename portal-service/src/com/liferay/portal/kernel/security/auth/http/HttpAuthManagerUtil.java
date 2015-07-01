@@ -29,18 +29,18 @@ import javax.servlet.http.HttpServletResponse;
 public class HttpAuthManagerUtil {
 
 	public static void generateChallenge(
-		HttpServletRequest request, HttpServletResponse response,
-		HttpAuthorizationHeader authorizationHeader) {
+		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		getHttpAuthManager().generateChallenge(
-			request, response, authorizationHeader);
+			httpServletRequest, httpServletResponse, httpAuthorizationHeader);
 	}
 
-	public static long getBasicUserId(HttpServletRequest request)
+	public static long getBasicUserId(HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		HttpAuthorizationHeader httpAuthorizationHeader =
-			HttpAuthManagerUtil.parse(request);
+			HttpAuthManagerUtil.parse(httpServletRequest);
 
 		if (httpAuthorizationHeader == null) {
 			return 0;
@@ -54,14 +54,14 @@ public class HttpAuthManagerUtil {
 			return 0;
 		}
 
-		return getUserId(request, httpAuthorizationHeader);
+		return getUserId(httpServletRequest, httpAuthorizationHeader);
 	}
 
-	public static long getDigestUserId(HttpServletRequest request)
+	public static long getDigestUserId(HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		HttpAuthorizationHeader httpAuthorizationHeader =
-			HttpAuthManagerUtil.parse(request);
+			HttpAuthManagerUtil.parse(httpServletRequest);
 
 		if (httpAuthorizationHeader == null) {
 			return 0;
@@ -75,19 +75,19 @@ public class HttpAuthManagerUtil {
 			return 0;
 		}
 
-		return getUserId(request, httpAuthorizationHeader);
+		return getUserId(httpServletRequest, httpAuthorizationHeader);
 	}
 
 	public static long getUserId(
-			HttpServletRequest request,
-			HttpAuthorizationHeader authorizationHeader)
+			HttpServletRequest httpServletRequest,
+			HttpAuthorizationHeader httpAuthorizationHeader)
 		throws PortalException {
 
-		return getHttpAuthManager().getUserId(request, authorizationHeader);
+		return getHttpAuthManager().getUserId(httpServletRequest, httpAuthorizationHeader);
 	}
 
-	public static HttpAuthorizationHeader parse(HttpServletRequest request) {
-		return getHttpAuthManager().parse(request);
+	public static HttpAuthorizationHeader parse(HttpServletRequest httpServletRequest) {
+		return getHttpAuthManager().parse(httpServletRequest);
 	}
 
 	private static HttpAuthManager getHttpAuthManager() {
