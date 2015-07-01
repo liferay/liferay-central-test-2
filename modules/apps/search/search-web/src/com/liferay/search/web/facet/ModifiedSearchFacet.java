@@ -39,7 +39,7 @@ public class ModifiedSearchFacet extends BaseJSPSearchFacet {
 
 	@Override
 	public String getConfigurationJspPath() {
-		return _JSP_CONFIGURATION_PATH;
+		return "/META-INF/resources/facets/configuration/modified.jsp";
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class ModifiedSearchFacet extends BaseJSPSearchFacet {
 
 	@Override
 	public String getDisplayJspPath() {
-		return _JSP_VIEW_PATH;
+		return "/META-INF/resources/facets/view/modified.jsp";
 	}
 
 	public String getFacetClassName() {
@@ -140,12 +140,6 @@ public class ModifiedSearchFacet extends BaseJSPSearchFacet {
 	public void setServletContext(ServletContext servletContext) {
 		super.setServletContext(servletContext);
 	}
-
-	private static final String _JSP_CONFIGURATION_PATH =
-		"/META-INF/resources/facets/configuration/modified.jsp";
-
-	private static final String _JSP_VIEW_PATH =
-		"/META-INF/resources/facets/view/modified.jsp";
 
 	private static final String[] _LABELS = new String[] {
 		"past-hour", "past-24-hours", "past-week", "past-month", "past-year"
