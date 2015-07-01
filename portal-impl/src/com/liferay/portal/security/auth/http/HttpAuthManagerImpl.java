@@ -50,19 +50,19 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 		if (httpServletRequest == null) {
 			throw new IllegalArgumentException(
-				"HttpServletRequest is mandatory");
+				"HTTP servlet request is null");
 		}
 
 		if (httpServletResponse == null) {
 			throw new IllegalArgumentException(
-				"HttpServletResponse is mandatory");
+				"HTTP servlet response is null");
 		}
 
 		if ((httpAuthorizationHeader == null) ||
 			Validator.isBlank(httpAuthorizationHeader.getScheme())) {
 
 			throw new IllegalArgumentException(
-				"AuthorizationHeader scheme is mandatory");
+				"HTTP authorization header scheme is null");
 		}
 
 		String realm = httpAuthorizationHeader.getAuthParameter(
@@ -74,17 +74,17 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				Portal.PORTAL_REALM);
 		}
 
-		String authorizationScheme = httpAuthorizationHeader.getScheme();
+		String scheme = httpAuthorizationHeader.getScheme();
 
 		if (StringUtil.equalsIgnoreCase(
-				authorizationScheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
+				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
 			generateBasicChallenge(
 				httpServletRequest, httpServletResponse,
 				httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					authorizationScheme,
+					scheme,
 					HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			generateDigestChallenge(
@@ -92,9 +92,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				httpAuthorizationHeader);
 		}
 		else {
-			throw new UnsupportedOperationException(
-				"Authorization scheme " + authorizationScheme +
-					" is not supported");
+			throw new UnsupportedOperationException("Scheme " + scheme);
 		}
 	}
 
@@ -150,33 +148,31 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 		if (httpServletRequest == null) {
 			throw new IllegalArgumentException(
-				"HttpServletRequest is mandatory");
+				"HTTP servlet request is null");
 		}
 
 		if ((httpAuthorizationHeader == null) ||
 			Validator.isBlank(httpAuthorizationHeader.getScheme())) {
 
 			throw new IllegalArgumentException(
-				"AuthorizationHeader scheme is mandatory");
+				"HTTP authorization header scheme is null");
 		}
 
-		String authorizationScheme = httpAuthorizationHeader.getScheme();
+		String scheme = httpAuthorizationHeader.getScheme();
 
 		if (StringUtil.equalsIgnoreCase(
-				authorizationScheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
+				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
 			return getBasicUserId(httpServletRequest, httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					authorizationScheme,
+					scheme,
 					HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			return getDigestUserId(httpServletRequest, httpAuthorizationHeader);
 		}
 		else {
-			throw new UnsupportedOperationException(
-				"Authorization scheme " + authorizationScheme +
-					" is not supported");
+			throw new UnsupportedOperationException("Scheme " + scheme);
 		}
 	}
 
@@ -185,38 +181,36 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		HttpServletRequest httpServletRequest) {
 
 		if (httpServletRequest == null) {
-			throw new IllegalArgumentException(
-				"HttpServletRequest is mandatory");
+			throw new IllegalArgumentException("HTTP servlet request is null");
 		}
 
-		String authorizationHeader = httpServletRequest.getHeader(
+		String authorization = httpServletRequest.getHeader(
 			HttpHeaders.AUTHORIZATION);
 
-		if (Validator.isBlank(authorizationHeader)) {
+		if (Validator.isBlank(authorization)) {
 			return null;
 		}
 
-		String[] authorizationHeaderParts = authorizationHeader.split("\\s");
+		String[] authorizationParts = authorization.split("\\s");
 
-		String scheme = authorizationHeaderParts[0];
+		String scheme = authorizationParts[0];
 
 		if (StringUtil.equalsIgnoreCase(
 				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
 			return parseBasic(
-				httpServletRequest, authorizationHeader,
-				authorizationHeaderParts);
+				httpServletRequest, authorization,
+				authorizationParts);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			return parseDigest(
-				httpServletRequest, authorizationHeader,
-				authorizationHeaderParts);
+				httpServletRequest, authorization,
+				authorizationParts);
 		}
 		else {
-			throw new UnsupportedOperationException(
-				"Authorization scheme " + scheme + " is not supported");
+			throw new UnsupportedOperationException("Scheme " + scheme);
 		}
 	}
 
@@ -260,7 +254,6 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 		String login = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_USERNAME);
-
 		String password = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_PASSWORD);
 
@@ -332,11 +325,11 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected HttpAuthorizationHeader parseBasic(
-		HttpServletRequest httpServletRequest, String authorizationHeader,
-		String[] authorizationHeaderParts) {
+		HttpServletRequest httpServletRequest, String authorization,
+		String[] authorizationParts) {
 
 		String credentials = new String(
-			Base64.decode(authorizationHeaderParts[1]));
+			Base64.decode(authorizationParts[1]));
 
 		String[] loginAndPassword = StringUtil.split(
 			credentials, CharPool.COLON);
@@ -362,21 +355,21 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected HttpAuthorizationHeader parseDigest(
-		HttpServletRequest httpServletRequest, String authorizationHeader,
+		HttpServletRequest httpServletRequest, String authorization,
 		String[] authorizationHeaderParts) {
 
 		HttpAuthorizationHeader httpAuthorizationHeader =
 			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_DIGEST);
 
-		authorizationHeader = authorizationHeader.substring(
+		authorization = authorization.substring(
 			HttpAuthorizationHeader.SCHEME_DIGEST.length() + 1);
 
-		authorizationHeader = StringUtil.replace(
-			authorizationHeader, CharPool.COMMA, CharPool.NEW_LINE);
+		authorization = StringUtil.replace(
+			authorization, CharPool.COMMA, CharPool.NEW_LINE);
 
 		UnicodeProperties authorizationProperties = new UnicodeProperties();
 
-		authorizationProperties.fastLoad(authorizationHeader);
+		authorizationProperties.fastLoad(authorization);
 
 		for (Map.Entry<String, String> authorizationProperty :
 				authorizationProperties.entrySet()) {
