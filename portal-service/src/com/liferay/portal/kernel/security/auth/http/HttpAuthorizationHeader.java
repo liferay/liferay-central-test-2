@@ -45,7 +45,7 @@ public class HttpAuthorizationHeader {
 	}
 
 	public HttpAuthorizationHeader(String scheme) {
-		this._scheme = scheme;
+		_scheme = scheme;
 	}
 
 	public String getAuthParameter(String name) {
@@ -65,7 +65,7 @@ public class HttpAuthorizationHeader {
 	}
 
 	public void setScheme(String scheme) {
-		this._scheme = scheme;
+		_scheme = scheme;
 	}
 
 	@Override
@@ -73,16 +73,13 @@ public class HttpAuthorizationHeader {
 		StringBundler sb = new StringBundler(_authParameters.size() * 6 + 1);
 
 		sb.append(_scheme);
-
 		sb.append(StringPool.SPACE);
 
-		for (Map.Entry<String, String> parameterEntry :
-				_authParameters.entrySet()) {
-
-			sb.append(parameterEntry.getKey());
+		for (Map.Entry<String, String> entry : _authParameters.entrySet()) {
+			sb.append(entry.getKey());
 			sb.append(StringPool.EQUAL);
 			sb.append(StringPool.QUOTE);
-			sb.append(parameterEntry.getValue());
+			sb.append(entry.getValue());
 			sb.append(StringPool.QUOTE);
 			sb.append(StringPool.COMMA_AND_SPACE);
 		}
