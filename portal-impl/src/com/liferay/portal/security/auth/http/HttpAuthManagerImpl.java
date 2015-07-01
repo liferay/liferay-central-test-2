@@ -43,47 +43,47 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 	@Override
 	public void generateChallenge(
-		HttpServletRequest request, HttpServletResponse response,
-		HttpAuthorizationHeader authorizationHeader) {
+		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpAuthorizationHeader httpAuthorizationHeader) {
 
-		if (request == null) {
+		if (httpServletRequest == null) {
 			throw new IllegalArgumentException(
 				"HttpServletRequest is mandatory");
 		}
 
-		if (response == null) {
+		if (httpServletResponse == null) {
 			throw new IllegalArgumentException(
 				"HttpServletResponse is mandatory");
 		}
 
-		if ((authorizationHeader == null) ||
-			Validator.isBlank(authorizationHeader.getScheme())) {
+		if ((httpAuthorizationHeader == null) ||
+			Validator.isBlank(httpAuthorizationHeader.getScheme())) {
 
 			throw new IllegalArgumentException(
 				"AuthorizationHeader scheme is mandatory");
 		}
 
-		String realm = authorizationHeader.getAuthParameter(
+		String realm = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_REALM);
 
 		if (Validator.isBlank(realm)) {
-			authorizationHeader.setAuthParameter(
+			httpAuthorizationHeader.setAuthParameter(
 				HttpAuthorizationHeader.AUTH_PARAMETER_REALM,
 				Portal.PORTAL_REALM);
 		}
 
-		String authorizationScheme = authorizationHeader.getScheme();
+		String authorizationScheme = httpAuthorizationHeader.getScheme();
 
 		if (StringUtil.equalsIgnoreCase(
 				authorizationScheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
-			generateBasicChallenge(request, response, authorizationHeader);
+			generateBasicChallenge(httpServletRequest, httpServletResponse, httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					authorizationScheme,
 					HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
-			generateDigestChallenge(request, response, authorizationHeader);
+			generateDigestChallenge(httpServletRequest, httpServletResponse, httpAuthorizationHeader);
 		}
 		else {
 			throw new UnsupportedOperationException(
@@ -94,34 +94,34 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 	@Override
 	public long getUserId(
-			HttpServletRequest request,
-			HttpAuthorizationHeader authorizationHeader)
+			HttpServletRequest httpServletRequest,
+			HttpAuthorizationHeader httpAuthorizationHeader)
 		throws PortalException {
 
-		if (request == null) {
+		if (httpServletRequest == null) {
 			throw new IllegalArgumentException(
 				"HttpServletRequest is mandatory");
 		}
 
-		if ((authorizationHeader == null) ||
-			Validator.isBlank(authorizationHeader.getScheme())) {
+		if ((httpAuthorizationHeader == null) ||
+			Validator.isBlank(httpAuthorizationHeader.getScheme())) {
 
 			throw new IllegalArgumentException(
 				"AuthorizationHeader scheme is mandatory");
 		}
 
-		String authorizationScheme = authorizationHeader.getScheme();
+		String authorizationScheme = httpAuthorizationHeader.getScheme();
 
 		if (StringUtil.equalsIgnoreCase(
 				authorizationScheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
-			return getBasicUserId(request, authorizationHeader);
+			return getBasicUserId(httpServletRequest, httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					authorizationScheme,
 					HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
-			return getDigestUserId(request, authorizationHeader);
+			return getDigestUserId(httpServletRequest, httpAuthorizationHeader);
 		}
 		else {
 			throw new UnsupportedOperationException(
@@ -131,13 +131,13 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	@Override
-	public HttpAuthorizationHeader parse(HttpServletRequest request) {
-		if (request == null) {
+	public HttpAuthorizationHeader parse(HttpServletRequest httpServletRequest) {
+		if (httpServletRequest == null) {
 			throw new IllegalArgumentException(
 				"HttpServletRequest is mandatory");
 		}
 
-		String authorizationHeader = request.getHeader(
+		String authorizationHeader = httpServletRequest.getHeader(
 			HttpHeaders.AUTHORIZATION);
 
 		if (Validator.isBlank(authorizationHeader)) {
@@ -152,13 +152,13 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
 			return parseBasic(
-				request, authorizationHeader, authorizationHeaderParts);
+				httpServletRequest, authorizationHeader, authorizationHeaderParts);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			return parseDigest(
-				request, authorizationHeader, authorizationHeaderParts);
+				httpServletRequest, authorizationHeader, authorizationHeaderParts);
 		}
 		else {
 			throw new UnsupportedOperationException(
@@ -167,45 +167,45 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected void generateBasicChallenge(
-		HttpServletRequest request, HttpServletResponse response,
-		HttpAuthorizationHeader authorizationHeader) {
+		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpAuthorizationHeader httpAuthorizationHeader) {
 
-		response.setHeader(
-			HttpHeaders.WWW_AUTHENTICATE, authorizationHeader.toString());
+		httpServletResponse.setHeader(
+			HttpHeaders.WWW_AUTHENTICATE, httpAuthorizationHeader.toString());
 
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 
 	protected void generateDigestChallenge(
-		HttpServletRequest request, HttpServletResponse response,
-		HttpAuthorizationHeader authorizationHeader) {
+		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		// Must generate a new nonce for each 401 (RFC2617, 3.2.1)
 
-		long companyId = PortalInstances.getCompanyId(request);
+		long companyId = PortalInstances.getCompanyId(httpServletRequest);
 
-		String remoteAddress = request.getRemoteAddr();
+		String remoteAddress = httpServletRequest.getRemoteAddr();
 
 		String nonce = NonceUtil.generate(companyId, remoteAddress);
 
-		authorizationHeader.setAuthParameter(
+		httpAuthorizationHeader.setAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_NONCE, nonce);
 
-		response.setHeader(
-			HttpHeaders.WWW_AUTHENTICATE, authorizationHeader.toString());
+		httpServletResponse.setHeader(
+			HttpHeaders.WWW_AUTHENTICATE, httpAuthorizationHeader.toString());
 
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 
 	protected long getBasicUserId(
-			HttpServletRequest request,
-			HttpAuthorizationHeader authorizationHeader)
+			HttpServletRequest httpServletRequest,
+			HttpAuthorizationHeader httpAuthorizationHeader)
 		throws PortalException {
 
-		String login = authorizationHeader.getAuthParameter(
+		String login = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_USERNAME);
 
-		String password = authorizationHeader.getAuthParameter(
+		String password = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_PASSWORD);
 
 		// Strip @uid and @sn for backwards compatibility
@@ -223,7 +223,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 		try {
 			return AuthenticatedSessionManagerUtil.getAuthenticatedUserId(
-				request, login, password, null);
+				httpServletRequest, login, password, null);
 		}
 		catch (AuthException ae) {
 		}
@@ -232,21 +232,21 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected long getDigestUserId(
-			HttpServletRequest request,
-			HttpAuthorizationHeader authorizationHeader)
+			HttpServletRequest httpServletRequest,
+			HttpAuthorizationHeader httpAuthorizationHeader)
 		throws PortalException {
 
 		long userId = 0;
 
-		String username = authorizationHeader.getAuthParameter(
+		String username = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_USERNAME);
-		String realm = authorizationHeader.getAuthParameter(
+		String realm = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_REALM);
-		String nonce = authorizationHeader.getAuthParameter(
+		String nonce = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_NONCE);
-		String uri = authorizationHeader.getAuthParameter(
+		String uri = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_URI);
-		String response = authorizationHeader.getAuthParameter(
+		String response = httpAuthorizationHeader.getAuthParameter(
 			HttpAuthorizationHeader.AUTH_PARAMETER_RESPONSE);
 
 		if (Validator.isNull(username) || Validator.isNull(realm) ||
@@ -257,7 +257,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		}
 
 		if (!realm.equals(Portal.PORTAL_REALM) ||
-			!uri.equals(request.getRequestURI())) {
+			!uri.equals(httpServletRequest.getRequestURI())) {
 
 			return userId;
 		}
@@ -266,17 +266,17 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 			return userId;
 		}
 
-		long companyId = PortalInstances.getCompanyId(request);
+		long companyId = PortalInstances.getCompanyId(httpServletRequest);
 
 		userId = UserLocalServiceUtil.authenticateForDigest(
-			companyId, username, realm, nonce, request.getMethod(), uri,
+			companyId, username, realm, nonce, httpServletRequest.getMethod(), uri,
 			response);
 
 		return userId;
 	}
 
 	protected HttpAuthorizationHeader parseBasic(
-		HttpServletRequest request, String authorizationHeader,
+		HttpServletRequest httpServletRequest, String authorizationHeader,
 		String[] authorizationHeaderParts) {
 
 		String credentials = new String(
@@ -306,7 +306,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected HttpAuthorizationHeader parseDigest(
-		HttpServletRequest request, String authorizationHeader,
+		HttpServletRequest httpServletRequest, String authorizationHeader,
 		String[] authorizationHeaderParts) {
 
 		HttpAuthorizationHeader httpAuthorizationHeader =
