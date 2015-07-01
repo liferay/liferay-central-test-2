@@ -24,6 +24,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 page import="com.liferay.portal.kernel.util.PrefsPropsUtil" %><%@
 page import="com.liferay.portlet.PortletURLUtil" %>
 
+<%@ page import="java.util.ResourceBundle" %>
+
 <%@ page import="javax.portlet.PortletPreferences" %><%@
 page import="javax.portlet.PortletURL" %>
 
