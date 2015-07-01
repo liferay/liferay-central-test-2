@@ -207,9 +207,6 @@ public class WebServerServlet extends HttpServlet {
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 
-		_dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
-			"d MMM yyyy HH:mm z");
-
 		_lastModified = GetterUtil.getBoolean(
 			servletConfig.getInitParameter("last_modified"), true);
 
@@ -1361,7 +1358,8 @@ public class WebServerServlet extends HttpServlet {
 	private static final Set<String> _acceptRangesMimeTypes = SetUtil.fromArray(
 		PropsValues.WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES);
 
-	private Format _dateFormat;
+	private Format _dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+		"d MMM yyyy HH:mm z");
 	private boolean _lastModified = true;
 	private TemplateResource _templateResource;
 
