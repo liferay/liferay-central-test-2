@@ -103,7 +103,4 @@ public class BasicAuthHeaderAuthVerifier
 		return true;
 	}
 
-	private static final String _BASIC_REALM =
-		"Basic realm=\"" + Portal.PORTAL_REALM + "\"";
-
 }
