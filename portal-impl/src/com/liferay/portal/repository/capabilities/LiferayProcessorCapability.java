@@ -37,7 +37,7 @@ import java.util.concurrent.Callable;
  */
 public class LiferayProcessorCapability
 	implements ProcessorCapability, RepositoryEventAware,
-		RepositoryWrapperAware {
+			   RepositoryWrapperAware {
 
 	@Override
 	public void cleanUp(FileEntry fileEntry) {
