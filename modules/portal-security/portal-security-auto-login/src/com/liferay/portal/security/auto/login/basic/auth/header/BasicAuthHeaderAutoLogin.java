@@ -109,7 +109,7 @@ public class BasicAuthHeaderAutoLogin extends BaseAutoLogin {
 
 		credentials[0] = String.valueOf(userId);
 		credentials[1] = httpAuthorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTH_PARAMETER_PASSWORD);
+			HttpAuthorizationHeader.AUTH_PARAMETER_NAME_PASSWORD);
 
 		credentials[2] = Boolean.TRUE.toString();
 
