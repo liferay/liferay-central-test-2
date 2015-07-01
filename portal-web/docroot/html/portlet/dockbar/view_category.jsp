@@ -64,7 +64,9 @@ for (String portletId : portletIds) {
 		if (portletApp.isWARFile() && Validator.isNull(externalPortletCategory)) {
 			PortletConfig curPortletConfig = PortletConfigFactoryUtil.create(portlet, application);
 
-			externalPortletCategory = ResourceBundleUtil.getString(curPortletConfig.getResourceBundle(locale), portletCategory.getName());
+			ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+
+			externalPortletCategory = ResourceBundleUtil.getString(resourceBundle, portletCategory.getName());
 		}
 	}
 }
