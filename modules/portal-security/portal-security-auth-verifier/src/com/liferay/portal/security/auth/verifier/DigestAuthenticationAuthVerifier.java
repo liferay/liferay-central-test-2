@@ -27,7 +27,6 @@ import com.liferay.portal.security.auth.AuthException;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -70,15 +69,13 @@ public class DigestAuthenticationAuthVerifier implements AuthVerifier {
 					accessControlContext.getSettings(), "digest_auth");
 
 				if (forcedDigestAuth) {
-					HttpServletResponse response =
-						accessControlContext.getResponse();
-
 					HttpAuthorizationHeader httpAuthorizationHeader =
 						new HttpAuthorizationHeader(
 							HttpAuthorizationHeader.SCHEME_DIGEST);
 
 					HttpAuthManagerUtil.generateChallenge(
-						request, response, httpAuthorizationHeader);
+						request, accessControlContext.getResponse(),
+						httpAuthorizationHeader);
 
 					authVerifierResult.setState(
 						AuthVerifierResult.State.INVALID_CREDENTIALS);
@@ -92,8 +89,8 @@ public class DigestAuthenticationAuthVerifier implements AuthVerifier {
 
 			return authVerifierResult;
 		}
-		catch (PortalException se) {
-			throw new AuthException(se);
+		catch (PortalException pe) {
+			throw new AuthException(pe);
 		}
 		catch (SystemException se) {
 			throw new AuthException(se);
