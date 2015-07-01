@@ -88,7 +88,7 @@ public class DefineObjectsTei extends TagExtraInfo {
 			VariableInfo.AT_END),
 		new VariableInfo(
 			"resourceBundle", ResourceBundle.class.getName(), true,
-				VariableInfo.AT_END),
+			VariableInfo.AT_END),
 
 		// Deprecated
 
