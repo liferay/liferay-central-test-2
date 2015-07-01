@@ -29,6 +29,12 @@ public interface HttpAuthManager {
 		HttpServletResponse httpServletResponse,
 		HttpAuthorizationHeader httpAuthorizationHeader);
 
+	public long getBasicUserId(HttpServletRequest httpServletRequest)
+		throws PortalException;
+
+	public long getDigestUserId(HttpServletRequest httpServletRequest)
+		throws PortalException;
+
 	public long getUserId(
 			HttpServletRequest httpServletRequest,
 			HttpAuthorizationHeader httpAuthorizationHeader)
