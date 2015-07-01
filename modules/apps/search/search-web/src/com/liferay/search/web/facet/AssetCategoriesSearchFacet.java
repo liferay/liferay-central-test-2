@@ -37,7 +37,7 @@ public class AssetCategoriesSearchFacet extends BaseJSPSearchFacet {
 
 	@Override
 	public String getConfigurationJspPath() {
-		return _JSP_CONFIGURATION_PATH;
+		return "/META-INF/resources/facets/configuration/asset_categories.jsp";
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class AssetCategoriesSearchFacet extends BaseJSPSearchFacet {
 
 	@Override
 	public String getDisplayJspPath() {
-		return _JSP_VIEW_PATH;
+		return "/META-INF/resources/facets/view/asset_categories.jsp";
 	}
 
 	public String getFacetClassName() {
@@ -111,11 +111,5 @@ public class AssetCategoriesSearchFacet extends BaseJSPSearchFacet {
 	public void setServletContext(ServletContext servletContext) {
 		super.setServletContext(servletContext);
 	}
-
-	private static final String _JSP_CONFIGURATION_PATH =
-		"/META-INF/resources/facets/configuration/asset_categories.jsp";
-
-	private static final String _JSP_VIEW_PATH =
-		"/META-INF/resources/facets/view/asset_categories.jsp";
 
 }

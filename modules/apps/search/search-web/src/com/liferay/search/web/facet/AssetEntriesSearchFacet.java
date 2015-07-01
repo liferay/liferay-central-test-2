@@ -51,7 +51,7 @@ public class AssetEntriesSearchFacet extends BaseJSPSearchFacet {
 
 	@Override
 	public String getConfigurationJspPath() {
-		return _JSP_CONFIGURATION_PATH;
+		return "/META-INF/resources/facets/configuration/asset_entries.jsp";
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class AssetEntriesSearchFacet extends BaseJSPSearchFacet {
 
 	@Override
 	public String getDisplayJspPath() {
-		return _JSP_VIEW_PATH;
+		return "/META-INF/resources/facets/view/asset_entries.jsp";
 	}
 
 	@Override
@@ -168,12 +168,6 @@ public class AssetEntriesSearchFacet extends BaseJSPSearchFacet {
 
 		_assetRendererFactories.remove(assetRendererFactory);
 	}
-
-	private static final String _JSP_CONFIGURATION_PATH =
-		"/META-INF/resources/facets/configuration/asset_entries.jsp";
-
-	private static final String _JSP_VIEW_PATH =
-		"/META-INF/resources/facets/view/asset_entries.jsp";
 
 	private final List<AssetRendererFactory> _assetRendererFactories =
 		new CopyOnWriteArrayList<>();
