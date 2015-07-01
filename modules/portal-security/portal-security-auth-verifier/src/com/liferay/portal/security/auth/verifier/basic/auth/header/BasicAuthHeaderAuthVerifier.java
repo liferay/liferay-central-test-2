@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.security.auth.AccessControlContext;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auto.login.basic.auth.header.BasicAuthHeaderAutoLogin;
-import com.liferay.portal.util.Portal;
 
 import java.util.Properties;
 
