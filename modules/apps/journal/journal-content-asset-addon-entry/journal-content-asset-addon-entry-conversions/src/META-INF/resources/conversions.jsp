@@ -30,8 +30,6 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 
-<%@ page import="java.util.ResourceBundle" %>
-
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
@@ -41,8 +39,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 String extension = (String)request.getAttribute("extension");
 String viewMode = ParamUtil.getString(request, "viewMode");
-
-ResourceBundle resourceBundle = ResourceBundle.getBundle("content.Language", locale);
 %>
 
 <c:if test="<%= !viewMode.equals(Constants.PRINT) %>">

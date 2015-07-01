@@ -30,6 +30,4 @@ page import="com.liferay.portal.kernel.util.PrefsPropsUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 
-<%@ page import="java.util.ResourceBundle" %>
-
 <liferay-theme:defineObjects />
