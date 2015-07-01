@@ -23,7 +23,6 @@ PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(com
 
 String googleAppsAPIKey = PrefsParamUtil.getString(companyPortletPreferences, request, "googleAppsAPIKey");
 String googleClientId = PrefsParamUtil.getString(companyPortletPreferences, request, "googleClientId");
-
 %>
 
 <aui:fieldset>

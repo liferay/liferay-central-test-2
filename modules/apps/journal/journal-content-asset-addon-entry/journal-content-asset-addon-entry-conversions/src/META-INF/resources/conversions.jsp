@@ -41,7 +41,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 String extension = (String)request.getAttribute("extension");
 String viewMode = ParamUtil.getString(request, "viewMode");
-
 %>
 
 <c:if test="<%= !viewMode.equals(Constants.PRINT) %>">
