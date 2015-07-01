@@ -64,11 +64,12 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		}
 
 		String realm = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_REALM);
+			HttpAuthorizationHeader.AUTH_PARAMETER_REALM);
 
 		if (Validator.isBlank(realm)) {
 			authorizationHeader.setAuthParameter(
-				HttpAuthorizationHeader.AUTHPARAM_REALM, Portal.PORTAL_REALM);
+				HttpAuthorizationHeader.AUTH_PARAMETER_REALM,
+				Portal.PORTAL_REALM);
 		}
 
 		String authorizationScheme = authorizationHeader.getScheme();
@@ -188,7 +189,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		String nonce = NonceUtil.generate(companyId, remoteAddress);
 
 		authorizationHeader.setAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_NONCE, nonce);
+			HttpAuthorizationHeader.AUTH_PARAMETER_NONCE, nonce);
 
 		response.setHeader(
 			HttpHeaders.WWW_AUTHENTICATE, authorizationHeader.toString());
@@ -202,10 +203,10 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		throws PortalException {
 
 		String login = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_USERNAME);
+			HttpAuthorizationHeader.AUTH_PARAMETER_USERNAME);
 
 		String password = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_PASSWORD);
+			HttpAuthorizationHeader.AUTH_PARAMETER_PASSWORD);
 
 		// Strip @uid and @sn for backwards compatibility
 
@@ -238,15 +239,15 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		long userId = 0;
 
 		String username = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_USERNAME);
+			HttpAuthorizationHeader.AUTH_PARAMETER_USERNAME);
 		String realm = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_REALM);
+			HttpAuthorizationHeader.AUTH_PARAMETER_REALM);
 		String nonce = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_NONCE);
+			HttpAuthorizationHeader.AUTH_PARAMETER_NONCE);
 		String uri = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_URI);
+			HttpAuthorizationHeader.AUTH_PARAMETER_URI);
 		String response = authorizationHeader.getAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_RESPONSE);
+			HttpAuthorizationHeader.AUTH_PARAMETER_RESPONSE);
 
 		if (Validator.isNull(username) || Validator.isNull(realm) ||
 			Validator.isNull(nonce) || Validator.isNull(uri) ||
@@ -296,10 +297,10 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 			new HttpAuthorizationHeader(HttpAuthorizationHeader.SCHEME_BASIC);
 
 		httpAuthorizationHeader.setAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_USERNAME, login);
+			HttpAuthorizationHeader.AUTH_PARAMETER_USERNAME, login);
 
 		httpAuthorizationHeader.setAuthParameter(
-			HttpAuthorizationHeader.AUTHPARAM_PASSWORD, password);
+			HttpAuthorizationHeader.AUTH_PARAMETER_PASSWORD, password);
 
 		return httpAuthorizationHeader;
 	}

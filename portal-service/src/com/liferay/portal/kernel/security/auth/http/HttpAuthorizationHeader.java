@@ -25,17 +25,17 @@ import java.util.Map;
  */
 public class HttpAuthorizationHeader {
 
-	public static final String AUTHPARAM_NONCE = "nonce";
+	public static final String AUTH_PARAMETER_NONCE = "nonce";
 
-	public static final String AUTHPARAM_PASSWORD = "password";
+	public static final String AUTH_PARAMETER_PASSWORD = "password";
 
-	public static final String AUTHPARAM_REALM = "realm";
+	public static final String AUTH_PARAMETER_REALM = "realm";
 
-	public static final String AUTHPARAM_RESPONSE = "response";
+	public static final String AUTH_PARAMETER_RESPONSE = "response";
 
-	public static final String AUTHPARAM_URI = "uri";
+	public static final String AUTH_PARAMETER_URI = "uri";
 
-	public static final String AUTHPARAM_USERNAME = "username";
+	public static final String AUTH_PARAMETER_USERNAME = "username";
 
 	public static final String SCHEME_BASIC = "Basic";
 

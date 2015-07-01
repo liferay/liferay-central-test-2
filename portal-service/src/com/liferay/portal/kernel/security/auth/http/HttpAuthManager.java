@@ -25,14 +25,15 @@ import javax.servlet.http.HttpServletResponse;
 public interface HttpAuthManager {
 
 	public void generateChallenge(
-		HttpServletRequest request, HttpServletResponse response,
-		HttpAuthorizationHeader authorizationHeader);
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse,
+		HttpAuthorizationHeader httpAuthorizationHeader);
 
 	public long getUserId(
-			HttpServletRequest request,
-			HttpAuthorizationHeader authorizationHeader)
+			HttpServletRequest httpServletRequest,
+			HttpAuthorizationHeader httpAuthorizationHeader)
 		throws PortalException;
 
-	public HttpAuthorizationHeader parse(HttpServletRequest request);
+	public HttpAuthorizationHeader parse(HttpServletRequest httpServletRequest);
 
 }
