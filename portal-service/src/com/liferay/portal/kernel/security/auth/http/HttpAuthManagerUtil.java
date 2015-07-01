@@ -29,7 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 public class HttpAuthManagerUtil {
 
 	public static void generateChallenge(
-		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse,
 		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		getHttpAuthManager().generateChallenge(
@@ -83,10 +84,13 @@ public class HttpAuthManagerUtil {
 			HttpAuthorizationHeader httpAuthorizationHeader)
 		throws PortalException {
 
-		return getHttpAuthManager().getUserId(httpServletRequest, httpAuthorizationHeader);
+		return getHttpAuthManager().getUserId(
+			httpServletRequest, httpAuthorizationHeader);
 	}
 
-	public static HttpAuthorizationHeader parse(HttpServletRequest httpServletRequest) {
+	public static HttpAuthorizationHeader parse(
+		HttpServletRequest httpServletRequest) {
+
 		return getHttpAuthManager().parse(httpServletRequest);
 	}
 

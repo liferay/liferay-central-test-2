@@ -43,7 +43,8 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 
 	@Override
 	public void generateChallenge(
-		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse,
 		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		if (httpServletRequest == null) {
@@ -77,13 +78,17 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		if (StringUtil.equalsIgnoreCase(
 				authorizationScheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
-			generateBasicChallenge(httpServletRequest, httpServletResponse, httpAuthorizationHeader);
+			generateBasicChallenge(
+				httpServletRequest, httpServletResponse,
+				httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					authorizationScheme,
 					HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
-			generateDigestChallenge(httpServletRequest, httpServletResponse, httpAuthorizationHeader);
+			generateDigestChallenge(
+				httpServletRequest, httpServletResponse,
+				httpAuthorizationHeader);
 		}
 		else {
 			throw new UnsupportedOperationException(
@@ -131,7 +136,9 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	@Override
-	public HttpAuthorizationHeader parse(HttpServletRequest httpServletRequest) {
+	public HttpAuthorizationHeader parse(
+		HttpServletRequest httpServletRequest) {
+
 		if (httpServletRequest == null) {
 			throw new IllegalArgumentException(
 				"HttpServletRequest is mandatory");
@@ -152,13 +159,15 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
 			return parseBasic(
-				httpServletRequest, authorizationHeader, authorizationHeaderParts);
+				httpServletRequest, authorizationHeader,
+				authorizationHeaderParts);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			return parseDigest(
-				httpServletRequest, authorizationHeader, authorizationHeaderParts);
+				httpServletRequest, authorizationHeader,
+				authorizationHeaderParts);
 		}
 		else {
 			throw new UnsupportedOperationException(
@@ -167,7 +176,8 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected void generateBasicChallenge(
-		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse,
 		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		httpServletResponse.setHeader(
@@ -177,7 +187,8 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 	}
 
 	protected void generateDigestChallenge(
-		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse,
 		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		// Must generate a new nonce for each 401 (RFC2617, 3.2.1)
@@ -269,8 +280,8 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		long companyId = PortalInstances.getCompanyId(httpServletRequest);
 
 		userId = UserLocalServiceUtil.authenticateForDigest(
-			companyId, username, realm, nonce, httpServletRequest.getMethod(), uri,
-			response);
+			companyId, username, realm, nonce, httpServletRequest.getMethod(),
+			uri, response);
 
 		return userId;
 	}
