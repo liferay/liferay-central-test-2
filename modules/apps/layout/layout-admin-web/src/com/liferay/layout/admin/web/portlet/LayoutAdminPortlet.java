@@ -969,11 +969,11 @@ public class LayoutAdminPortlet extends MVCPortlet {
 			propertyName = "true-robots.txt";
 		}
 
-		String publicRobots = ParamUtil.getString(
+		String robots = ParamUtil.getString(
 			actionRequest, "robots",
 			liveGroup.getTypeSettingsProperty(propertyName));
 
-		typeSettingsProperties.setProperty(propertyName, publicRobots);
+		typeSettingsProperties.setProperty(propertyName, robots);
 
 		GroupServiceUtil.updateGroup(
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
