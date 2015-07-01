@@ -286,13 +286,13 @@ String ddmTemplateKey = journalContentDisplayContext.getDDMTemplateKey();
 					var templateImage = templatePreviewContent.find('.template-image');
 
 					if (event.imageurl !== 'null') {
-						templateImage.attr('src', event.imageurl);
 						templateImage.attr('alt', event.name);
+						templateImage.attr('src', event.imageurl);
 						templateImage.removeClass('hidden');
 					}
 					else {
-						templateImage.attr('src', '');
 						templateImage.attr('alt', '');
+						templateImage.attr('src', '');
 						templateImage.addClass('hidden');
 					}
 
