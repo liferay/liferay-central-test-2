@@ -49,13 +49,11 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		HttpAuthorizationHeader httpAuthorizationHeader) {
 
 		if (httpServletRequest == null) {
-			throw new IllegalArgumentException(
-				"HTTP servlet request is null");
+			throw new IllegalArgumentException("HTTP servlet request is null");
 		}
 
 		if (httpServletResponse == null) {
-			throw new IllegalArgumentException(
-				"HTTP servlet response is null");
+			throw new IllegalArgumentException("HTTP servlet response is null");
 		}
 
 		if ((httpAuthorizationHeader == null) ||
@@ -84,8 +82,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					scheme,
-					HttpAuthorizationHeader.SCHEME_DIGEST)) {
+					scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			generateDigestChallenge(
 				httpServletRequest, httpServletResponse,
@@ -147,8 +144,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		throws PortalException {
 
 		if (httpServletRequest == null) {
-			throw new IllegalArgumentException(
-				"HTTP servlet request is null");
+			throw new IllegalArgumentException("HTTP servlet request is null");
 		}
 
 		if ((httpAuthorizationHeader == null) ||
@@ -166,8 +162,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 			return getBasicUserId(httpServletRequest, httpAuthorizationHeader);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					scheme,
-					HttpAuthorizationHeader.SCHEME_DIGEST)) {
+					scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			return getDigestUserId(httpServletRequest, httpAuthorizationHeader);
 		}
@@ -199,15 +194,13 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 				scheme, HttpAuthorizationHeader.SCHEME_BASIC)) {
 
 			return parseBasic(
-				httpServletRequest, authorization,
-				authorizationParts);
+				httpServletRequest, authorization, authorizationParts);
 		}
 		else if (StringUtil.equalsIgnoreCase(
 					scheme, HttpAuthorizationHeader.SCHEME_DIGEST)) {
 
 			return parseDigest(
-				httpServletRequest, authorization,
-				authorizationParts);
+				httpServletRequest, authorization, authorizationParts);
 		}
 		else {
 			throw new UnsupportedOperationException("Scheme " + scheme);
@@ -328,8 +321,7 @@ public class HttpAuthManagerImpl implements HttpAuthManager {
 		HttpServletRequest httpServletRequest, String authorization,
 		String[] authorizationParts) {
 
-		String credentials = new String(
-			Base64.decode(authorizationParts[1]));
+		String credentials = new String(Base64.decode(authorizationParts[1]));
 
 		String[] loginAndPassword = StringUtil.split(
 			credentials, CharPool.COLON);
