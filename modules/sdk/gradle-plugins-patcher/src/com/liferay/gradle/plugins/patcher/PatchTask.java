@@ -227,8 +227,9 @@ public class PatchTask extends DefaultTask {
 				if (!originalLibSrcDirName.equals(".")) {
 					copySpec.eachFile(
 						new ReplaceLeadingPathAction(
-							Collections.singletonMap(
-								originalLibSrcDirName, "")));
+							new java.util.HashMap<Object, Object>(
+								Collections.singletonMap(
+									originalLibSrcDirName, ""))));
 				}
 
 				copySpec.filter(FixCrLfFilter.class);
