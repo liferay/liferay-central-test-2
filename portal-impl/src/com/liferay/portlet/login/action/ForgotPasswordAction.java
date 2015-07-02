@@ -224,8 +224,7 @@ public class ForgotPasswordAction extends PortletAction {
 		}
 
 		if (!user.isActive()) {
-			throw new UserActiveException(
-				"User {uuid=" + user.getUuid() +"} is not active");
+			throw new UserActiveException("Inactive user " + user.getUuid());
 		}
 
 		UserLocalServiceUtil.checkLockout(user);
@@ -262,7 +261,7 @@ public class ForgotPasswordAction extends PortletAction {
 
 			if (!user.getReminderQueryAnswer().equals(answer)) {
 				throw new UserReminderQueryException(
-					"Reminder query answer provided does not match answer");
+					"Reminder query answer does not match answer");
 			}
 		}
 
