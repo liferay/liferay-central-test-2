@@ -15,35 +15,30 @@
 package com.liferay.portal.js.loader.modules.extender;
 
 import aQute.bnd.osgi.Constants;
-
 import aQute.lib.converter.Converter;
 
 import java.net.URL;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletContext;
 
 import org.json.JSONException;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
 import org.osgi.framework.wiring.BundleCapability;
 import org.osgi.framework.wiring.BundleWire;
 import org.osgi.framework.wiring.BundleWiring;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
-
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletConfig;
@@ -517,21 +512,22 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		@Override
 		public int compareTo(Object object) {
-			MockServiceReference other = (MockServiceReference)object;
+			MockServiceReference mockServiceReference =
+				(MockServiceReference)object;
 
-			if (_ranking != other._ranking) {
-				if (_ranking < other._ranking) {
+			if (_ranking != mockServiceReference._ranking) {
+				if (_ranking < mockServiceReference._ranking) {
 					return -1;
 				}
 
 				return 1;
 			}
 
-			if (_id == other._id) {
+			if (_id == mockServiceReference._id) {
 				return 0;
 			}
 
-			if (_id < other._id) {
+			if (_id < mockServiceReference._id) {
 				return 1;
 			}
 
@@ -550,7 +546,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		@Override
 		public String[] getPropertyKeys() {
-			return _properties.keySet().toArray(new String[0]);
+			Set<String> keys = _properties.keySet();
+
+			return keys.toArray(new String[keys.size()]);
 		}
 
 		@Override
@@ -565,6 +563,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		public void setProperties(Map<String, Object> properties) {
 			_properties.putAll(properties);
+
 			_properties.put("objectClass", _objectClasses);
 			_properties.put("service.id", _id);
 			_properties.put("service.ranking", _ranking);
