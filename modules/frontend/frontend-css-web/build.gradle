@@ -24,7 +24,6 @@ buildAlloyTheme {
 	}
 
 	from "../frontend-js-web/tmp/META-INF/resources/html/js/aui/aui_deprecated.css"
-
 	into "src/META-INF/resources/html/css/portal"
 }
 
@@ -36,11 +35,8 @@ buildBourbon {
 	}
 
 	from zipTree("../../../portal-web/third-party/bourbon-${bourbonVersion}.zip")
-
 	include "bourbon-${bourbonVersion}/app/assets/stylesheets/**/*"
-
 	includeEmptyDirs = false
-
 	into "../../../portal-web/docroot/html/css/common/bourbon"
 }
 

@@ -98,7 +98,6 @@ downloadSassSpec {
 		})
 
 	include "**/spec/basic/**"
-
 	into sassSpecDir
 
 	onlyIf {

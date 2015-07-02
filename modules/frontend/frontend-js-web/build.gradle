@@ -49,11 +49,8 @@ buildAlloy {
 	}
 
 	from zipTree(new File(thirdPartyDir, "alloy-${alloyVersion}.zip"))
-
 	include "build/**"
-
 	includeEmptyDirs = false
-
 	into alloyDestinationDir
 }
 
@@ -65,15 +62,10 @@ buildAlloyBootstrap {
 	}
 
 	eachFile new StripPathSegmentsAction(3)
-
 	exclude "bootstrap-sass-${alloyBootstrapVersion}/assets/javascripts/bootstrap-*.js"
-
 	from zipTree(new File(thirdPartyDir, "bootstrap-sass-${alloyBootstrapVersion}.zip"))
-
 	include "bootstrap-sass-${alloyBootstrapVersion}/assets/javascripts/**"
-
 	includeEmptyDirs = false
-
 	into alloyBootstrapDestinationDir
 }
 

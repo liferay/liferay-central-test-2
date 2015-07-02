@@ -22,9 +22,9 @@ deploy {
 }
 
 jar {
-	destinationDir = sdkDestinationDir
-
 	deleteAllActions()
+
+	destinationDir = sdkDestinationDir
 
 	doLast {
 		Set<File> jarFiles = configurations.compile.files {

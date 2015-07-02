@@ -37,13 +37,9 @@ buildAlloyBootstrapTheme {
 	}
 
 	eachFile new ReplaceLeadingPathAction("bootstrap-sass-${alloyBootstrapVersion}/assets/fonts/bootstrap": "glyphicons/font", "bootstrap-sass-${alloyBootstrapVersion}/assets/stylesheets": "")
-
 	exclude "bootstrap-sass-${alloyBootstrapVersion}/assets/stylesheets/_bootstrap-*.scss"
-
 	from zipTree(new File(thirdPartyDir, "bootstrap-sass-${alloyBootstrapVersion}.zip"))
-
 	includeEmptyDirs = false
-
 	into alloyBootstrapDestinationDir
 }
 
@@ -62,9 +58,7 @@ buildAlloyFontAwesome {
 	exclude "alloy-font-awesome/less/**"
 
 	from zipTree(new File(thirdPartyDir, "alloy-font-awesome-${alloyFontAwesomeVersion}.zip"))
-
 	includeEmptyDirs = false
-
 	into alloyFontAwesomeDestinationDir
 }
 
@@ -84,7 +78,6 @@ buildAlloyTheme {
 	include "build/aui-skin-deprecated/images/**"
 
 	includeEmptyDirs = false
-
 	into alloyThemeDestinationDir
 }
 
@@ -145,7 +138,6 @@ copyFavicon {
 	}
 
 	from new File(themesDestinationDir, "_unstyled/images/favicon.ico")
-
 	into "src/META-INF/resources"
 }
 
@@ -161,15 +153,10 @@ themesDestinationDir.eachDir {
 
 	task(compileThemeTaskName, type: CompileThemeTask) {
 		dependsOn buildThemeThumbnailsTaskName
-
 		diffsDir = new File(themeDir, "_diffs")
-
 		frontendThemesWebDir = "src/META-INF/resources"
-
 		themeParent = "_styled"
-
 		themeRootDir = themeDir
-
 		themeTypes "ftl", "vm"
 	}
 
