@@ -20,7 +20,7 @@ import com.liferay.journal.service.permission.JournalArticlePermission;
 import com.liferay.journal.util.JournalContent;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.index.IndexAccessor;
+import com.liferay.portal.kernel.cache.index.IndexEncoder;
 import com.liferay.portal.kernel.cache.index.PortalCacheIndexer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -69,7 +69,7 @@ public class JournalContentImpl implements JournalContent {
 		long groupId, String articleId, String ddmTemplateKey) {
 
 		_getPortalCacheIndexer().removeKeys(
-			JournalContentKeyIndexAccessor.getIndex(
+			JournalContentKeyIndexEncoder.encode(
 				groupId, articleId, ddmTemplateKey));
 	}
 
@@ -313,7 +313,7 @@ public class JournalContentImpl implements JournalContent {
 
 		if (_portalCacheIndexer == null) {
 			_portalCacheIndexer = new PortalCacheIndexer<>(
-				new JournalContentKeyIndexAccessor(), _getPortalCache());
+				new JournalContentKeyIndexEncoder(), _getPortalCache());
 		}
 
 		return _portalCacheIndexer;
@@ -397,10 +397,10 @@ public class JournalContentImpl implements JournalContent {
 
 	}
 
-	private static class JournalContentKeyIndexAccessor
-		implements IndexAccessor<String, JournalContentKey> {
+	private static class JournalContentKeyIndexEncoder
+		implements IndexEncoder<String, JournalContentKey> {
 
-		public static String getIndex(
+		public static String encode(
 			long groupId, String articleId, String ddmTemplateKey) {
 
 			StringBundler sb = new StringBundler(5);
@@ -415,8 +415,8 @@ public class JournalContentImpl implements JournalContent {
 		}
 
 		@Override
-		public String getIndex(JournalContentKey key) {
-			return getIndex(key._groupId, key._articleId, key._ddmTemplateKey);
+		public String encode(JournalContentKey key) {
+			return encode(key._groupId, key._articleId, key._ddmTemplateKey);
 		}
 
 	}

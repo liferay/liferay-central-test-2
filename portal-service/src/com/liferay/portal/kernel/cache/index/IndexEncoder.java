@@ -19,8 +19,8 @@ import java.io.Serializable;
 /**
  * @author Preston Crary
  */
-public interface IndexAccessor<I, K extends Serializable> {
+public interface IndexEncoder<I, K extends Serializable> {
 
-	public I getIndex(K key);
+	public I encode(K key);
 
 }
