@@ -35,7 +35,6 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -338,7 +337,7 @@ public class LoaderModulesServlet extends HttpServlet
 	@Override
 	protected void service(
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws IOException {
 
 		response.setContentType(Details.CONTENT_TYPE);
 
