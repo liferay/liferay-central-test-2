@@ -12,46 +12,69 @@
  * details.
  */
 
-package com.liferay.calendar.web.listeners;
+package com.liferay.calendar.model.listener;
 
 import com.liferay.calendar.model.CalendarResource;
 import com.liferay.calendar.service.CalendarResourceLocalService;
+import com.liferay.calendar.service.CalendarResourceLocalServiceUtil;
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.model.BaseModelListener;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
-
-import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Antonio Junior
+ * @author Marcellus Tavares
  */
 @Component(immediate = true, service = ModelListener.class)
-public class UserModelListener extends BaseModelListener<User> {
+public class GroupModelListener extends BaseModelListener<Group> {
 
 	@Override
-	public void onAfterUpdate(User user) throws ModelListenerException {
+	public void onAfterRemove(Group group) throws ModelListenerException {
 		try {
-			long classNameId = PortalUtil.getClassNameId(User.class);
+
+			// Global calendar resource
+
+			long classNameId = PortalUtil.getClassNameId(Group.class);
 
 			CalendarResource calendarResource =
 				_calendarResourceLocalService.fetchCalendarResource(
-					classNameId, user.getUserId());
+					classNameId, group.getGroupId());
+
+			if (calendarResource != null) {
+				_calendarResourceLocalService.deleteCalendarResource(
+					calendarResource);
+			}
+
+			// Local calendar resources
+
+			_calendarResourceLocalService.deleteCalendarResources(
+				group.getGroupId());
+		}
+		catch (Exception e) {
+			throw new ModelListenerException(e);
+		}
+	}
+
+	@Override
+	public void onAfterUpdate(Group group) throws ModelListenerException {
+		try {
+			long classNameId = PortalUtil.getClassNameId(Group.class);
+
+			CalendarResource calendarResource =
+				CalendarResourceLocalServiceUtil.fetchCalendarResource(
+					classNameId, group.getGroupId());
 
 			if (calendarResource == null) {
 				return;
 			}
 
-			Locale locale = LocaleUtil.getDefault();
+			calendarResource.setNameMap(group.getNameMap());
 
-			calendarResource.setName(user.getFullName(), locale);
-
-			_calendarResourceLocalService.updateCalendarResource(
+			CalendarResourceLocalServiceUtil.updateCalendarResource(
 				calendarResource);
 		}
 		catch (Exception e) {

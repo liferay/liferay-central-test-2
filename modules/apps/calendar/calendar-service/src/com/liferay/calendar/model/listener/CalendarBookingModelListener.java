@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.calendar.web.listeners;
+package com.liferay.calendar.model.listener;
 
 import com.liferay.calendar.model.CalendarBooking;
 import com.liferay.portal.model.BaseModelListener;

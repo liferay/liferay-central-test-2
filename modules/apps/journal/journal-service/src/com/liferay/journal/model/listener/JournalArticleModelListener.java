@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.service.model.listener;
+package com.liferay.journal.model.listener;
 
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.util.JournalContentUtil;
