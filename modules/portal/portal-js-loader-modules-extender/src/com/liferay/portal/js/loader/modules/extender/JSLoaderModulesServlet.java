@@ -136,7 +136,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 			URL url = _bundle.getEntry(Details.CONFIG_JSON);
 
-			_urlToConfiguration(url, bundleWiring);
+			urlToConfiguration(url, bundleWiring);
 		}
 
 		public String getContextPath() {
@@ -159,7 +159,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 			return _versionedConfiguration;
 		}
 
-		private String _generateConfiguration(
+		protected String generateConfiguration(
 			JSONObject jsonObject, BundleWiring bundleWiring,
 			boolean versionedModuleName) {
 
@@ -219,7 +219,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 						dependenciesJSONArray.put(j, dependencyName);
 					}
 					else {
-						_normalizeDependencies(
+						normalizeDependencies(
 							dependencyName, dependencyPath,
 							dependenciesJSONArray, j, bundleWires);
 					}
@@ -238,7 +238,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 			return jsonObject.toString();
 		}
 
-		private String _normalize(String jsonString) {
+		protected String normalize(String jsonString) {
 			if (jsonString.startsWith("{") && jsonString.endsWith("}")) {
 				jsonString = jsonString.substring(1, jsonString.length() - 1);
 			}
@@ -246,7 +246,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 			return jsonString;
 		}
 
-		private void _normalizeDependencies(
+		protected void normalizeDependencies(
 			String dependencyName, String dependencyPath, JSONArray jsonArray,
 			int index, List<BundleWire> bundleWires) {
 
@@ -275,7 +275,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 			}
 		}
 
-		private void _urlToConfiguration(URL url, BundleWiring bundleWiring) {
+		protected void urlToConfiguration(URL url, BundleWiring bundleWiring) {
 			if (url == null) {
 				return;
 			}
@@ -285,10 +285,10 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 				JSONObject jsonObject = new JSONObject(jsonTokener);
 
-				_unversionedConfiguration = _normalize(
-					_generateConfiguration(jsonObject, bundleWiring, false));
-				_versionedConfiguration = _normalize(
-					_generateConfiguration(jsonObject, bundleWiring, true));
+				_unversionedConfiguration = normalize(
+					generateConfiguration(jsonObject, bundleWiring, false));
+				_versionedConfiguration = normalize(
+					generateConfiguration(jsonObject, bundleWiring, true));
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
