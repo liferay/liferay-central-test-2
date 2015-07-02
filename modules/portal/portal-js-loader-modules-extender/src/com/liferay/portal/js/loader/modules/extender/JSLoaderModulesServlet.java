@@ -119,16 +119,16 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 			BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
-			List<BundleCapability> capabilities = bundleWiring.getCapabilities(
-				Details.OSGI_WEBRESOURCE);
+			List<BundleCapability> bundleCapabilities =
+				bundleWiring.getCapabilities(Details.OSGI_WEBRESOURCE);
 
-			if (capabilities.isEmpty()) {
+			if (bundleCapabilities.isEmpty()) {
 				_name = _bundle.getSymbolicName();
 
 				return;
 			}
 
-			BundleCapability bundleCapability = capabilities.get(0);
+			BundleCapability bundleCapability = bundleCapabilities.get(0);
 
 			Map<String, Object> attributes = bundleCapability.getAttributes();
 
@@ -136,7 +136,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 			URL url = _bundle.getEntry(Details.CONFIG_JSON);
 
-			_urlToConfig(url, bundleWiring);
+			_urlToConfiguration(url, bundleWiring);
 		}
 
 		public String getContextPath() {
@@ -147,16 +147,16 @@ public class JSLoaderModulesServlet extends HttpServlet
 			return _name;
 		}
 
-		public String getUnversionedConfig() {
-			return _unversionedConfig;
+		public String getUnversionedConfiguration() {
+			return _unversionedConfiguration;
 		}
 
 		public String getVersion() {
 			return _version;
 		}
 
-		public String getVersionedConfig() {
-			return _versionedConfig;
+		public String getVersionedConfiguration() {
+			return _versionedConfiguration;
 		}
 
 		private String _generateConfiguration(
@@ -171,13 +171,13 @@ public class JSLoaderModulesServlet extends HttpServlet
 				return jsonObject.toString();
 			}
 
-			List<BundleWire> requiredWires = bundleWiring.getRequiredWires(
+			List<BundleWire> bundleWires = bundleWiring.getRequiredWires(
 				Details.OSGI_WEBRESOURCE);
 
-			JSONArray names = jsonObject.names();
+			JSONArray namesJSONArray = jsonObject.names();
 
-			for (int i = 0; i < names.length(); i++) {
-				String name = (String)names.get(i);
+			for (int i = 0; i < namesJSONArray.length(); i++) {
+				String name = (String)namesJSONArray.get(i);
 
 				int x = name.indexOf('/');
 
@@ -186,20 +186,22 @@ public class JSLoaderModulesServlet extends HttpServlet
 				}
 
 				String moduleName = name.substring(0, x);
-				String modulePath = name.substring(x);
 
 				if (!moduleName.equals(getName())) {
 					continue;
 				}
 
+				String modulePath = name.substring(x);
+
 				moduleName = getName() + "@" + getVersion() + modulePath;
 
-				JSONObject curObject = jsonObject.getJSONObject(name);
+				JSONObject nameJSONObject = jsonObject.getJSONObject(name);
 
-				JSONArray jsonArray = curObject.getJSONArray("dependencies");
+				JSONArray dependenciesJSONArray = nameJSONObject.getJSONArray(
+					"dependencies");
 
-				for (int j = 0; j < jsonArray.length(); j++) {
-					String dependency = jsonArray.getString(j);
+				for (int j = 0; j < dependenciesJSONArray.length(); j++) {
+					String dependency = dependenciesJSONArray.getString(j);
 
 					int y = dependency.indexOf('/');
 
@@ -214,21 +216,22 @@ public class JSLoaderModulesServlet extends HttpServlet
 						dependencyName =
 							getName() + "@" + getVersion() + dependencyPath;
 
-						jsonArray.put(j, dependencyName);
+						dependenciesJSONArray.put(j, dependencyName);
 					}
 					else {
 						_normalizeDependencies(
-							dependencyName, dependencyPath, jsonArray, j,
-							requiredWires);
+							dependencyName, dependencyPath,
+							dependenciesJSONArray, j, bundleWires);
 					}
 				}
 
 				if (versionedModuleName) {
 					jsonObject.remove(name);
-					jsonObject.put(moduleName, curObject);
+
+					jsonObject.put(moduleName, nameJSONObject);
 				}
 				else {
-					jsonObject.put(name, curObject);
+					jsonObject.put(name, nameJSONObject);
 				}
 			}
 
@@ -245,25 +248,26 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 		private void _normalizeDependencies(
 			String dependencyName, String dependencyPath, JSONArray jsonArray,
-			int index, List<BundleWire> requiredWires) {
+			int index, List<BundleWire> bundleWires) {
 
-			for (BundleWire bundleWire : requiredWires) {
-				BundleCapability capability = bundleWire.getCapability();
+			for (BundleWire bundleWire : bundleWires) {
+				BundleCapability bundleCapability = bundleWire.getCapability();
 
-				Map<String, Object> attributes = capability.getAttributes();
+				Map<String, Object> attributes =
+					bundleCapability.getAttributes();
 
-				String requiredWireName = (String)attributes.get(
+				String attributesDependencyName = (String)attributes.get(
 					Details.OSGI_WEBRESOURCE);
 
-				if (!requiredWireName.equals(dependencyName)) {
+				if (!attributesDependencyName.equals(dependencyName)) {
 					continue;
 				}
 
-				Version requiredWireVersion = (Version)attributes.get(
+				Version version = (Version)attributes.get(
 					Constants.VERSION_ATTRIBUTE);
+
 				dependencyName =
-					dependencyName + "@" + requiredWireVersion.toString() +
-						dependencyPath;
+					dependencyName + "@" + version.toString() + dependencyPath;
 
 				jsonArray.put(index, dependencyName);
 
@@ -271,7 +275,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 			}
 		}
 
-		private void _urlToConfig(URL url, BundleWiring bundleWiring) {
+		private void _urlToConfiguration(URL url, BundleWiring bundleWiring) {
 			if (url == null) {
 				return;
 			}
@@ -281,10 +285,9 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 				JSONObject jsonObject = new JSONObject(jsonTokener);
 
-				_unversionedConfig = _normalize(
+				_unversionedConfiguration = _normalize(
 					_generateConfiguration(jsonObject, bundleWiring, false));
-
-				_versionedConfig = _normalize(
+				_versionedConfiguration = _normalize(
 					_generateConfiguration(jsonObject, bundleWiring, true));
 			}
 			catch (IOException ioe) {
@@ -295,9 +298,9 @@ public class JSLoaderModulesServlet extends HttpServlet
 		private final Bundle _bundle;
 		private final String _contextPath;
 		private final String _name;
-		private String _unversionedConfig = "";
+		private String _unversionedConfiguration = "";
 		private final String _version;
-		private String _versionedConfig = "";
+		private String _versionedConfiguration = "";
 
 	}
 
@@ -389,8 +392,8 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 		for (JSLoaderModule loaderModule : values) {
 			String name = loaderModule.getName();
-			String unversionedConfig = loaderModule.getUnversionedConfig();
-			String versionedConfig = loaderModule.getVersionedConfig();
+			String unversionedConfig = loaderModule.getUnversionedConfiguration();
+			String versionedConfig = loaderModule.getVersionedConfiguration();
 
 			if (unversionedConfig.length() == 0) {
 				continue;
