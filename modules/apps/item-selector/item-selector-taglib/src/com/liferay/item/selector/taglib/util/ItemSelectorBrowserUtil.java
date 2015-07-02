@@ -40,26 +40,29 @@ public class ItemSelectorBrowserUtil {
 			FileEntry fileEntry, Locale locale)
 		throws PortalException {
 
-		String title = DLUtil.getTitleWithExtension(fileEntry);
-		FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
+		JSONObject itemMetadataJSONObject = JSONFactoryUtil.createJSONObject();
+
+		JSONArray groupsJSONArray = JSONFactoryUtil.createJSONArray();
 
 		JSONObject firstTabJSONObject = JSONFactoryUtil.createJSONObject();
 
-		firstTabJSONObject.put("title", LanguageUtil.get(locale, "file-info"));
-
 		JSONArray firstTabDataJSONArray = JSONFactoryUtil.createJSONArray();
+
+		FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
 
 		firstTabDataJSONArray.put(
 			_createJSONObject(
 				LanguageUtil.get(locale, "format"),
 				HtmlUtil.escape(latestFileVersion.getExtension())));
+
 		firstTabDataJSONArray.put(
 			_createJSONObject(
 				LanguageUtil.get(locale, "size"),
 				TextFormatter.formatStorageSize(fileEntry.getSize(), locale)));
 		firstTabDataJSONArray.put(
 			_createJSONObject(
-				LanguageUtil.get(locale, "name"), HtmlUtil.escape(title)));
+				LanguageUtil.get(locale, "name"),
+				HtmlUtil.escape(DLUtil.getTitleWithExtension(fileEntry))));
 		firstTabDataJSONArray.put(
 			_createJSONObject(
 				LanguageUtil.get(locale, "modified"),
@@ -76,9 +79,11 @@ public class ItemSelectorBrowserUtil {
 
 		firstTabJSONObject.put("data", firstTabDataJSONArray);
 
-		JSONObject secondTabJSONObject = JSONFactoryUtil.createJSONObject();
+		firstTabJSONObject.put("title", LanguageUtil.get(locale, "file-info"));
 
-		secondTabJSONObject.put("title", LanguageUtil.get(locale, "version"));
+		groupsJSONArray.put(firstTabJSONObject);
+
+		JSONObject secondTabJSONObject = JSONFactoryUtil.createJSONObject();
 
 		JSONArray secondTabDataJSONArray = JSONFactoryUtil.createJSONArray();
 
@@ -94,12 +99,9 @@ public class ItemSelectorBrowserUtil {
 
 		secondTabJSONObject.put("data", secondTabDataJSONArray);
 
-		JSONArray groupsJSONArray = JSONFactoryUtil.createJSONArray();
+		secondTabJSONObject.put("title", LanguageUtil.get(locale, "version"));
 
-		groupsJSONArray.put(firstTabJSONObject);
 		groupsJSONArray.put(secondTabJSONObject);
-
-		JSONObject itemMetadataJSONObject = JSONFactoryUtil.createJSONObject();
 
 		itemMetadataJSONObject.put("groups", groupsJSONArray);
 
