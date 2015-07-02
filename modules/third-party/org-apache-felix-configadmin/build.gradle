@@ -18,9 +18,7 @@ jar {
 		from {
 			copy {
 				from zipTree(configurations.compile.singleFile)
-
 				include "META-INF/MANIFEST.MF"
-
 				into temporaryDir
 			}
 

@@ -49,53 +49,37 @@ make -j5""")
 	}
 
 	inputDirName = ".libs"
-
 	inputFileName = "libsass.dylib"
-
 	makeExecutable = "./build.sh"
-
 	outputFileName = "libliferaysass.dylib"
-
 	resourcesDirName = "darwin"
 }
 
 buildLibSass_Linux_x86 {
 	inputFileName = "libsass.so"
-
 	makeExecutable = "make CXX=g++-4.6 CC=gcc-4.4 shared"
-
 	outputFileName = "libliferaysass.so"
-
 	resourcesDirName = "linux-x86"
 }
 
 buildLibSass_Linux_x86_64 {
 	inputFileName = "libsass.so"
-
 	makeExecutable = "make CXX=g++-4.6 CC=gcc-4.4 shared"
-
 	outputFileName = "libliferaysass.so"
-
 	resourcesDirName = "linux-x86-64"
 }
 
 buildLibSass_Win32_x86 {
 	inputFileName = "sass.dll"
-
 	makeExecutable = "mingw32-make.exe shared"
-
 	outputFileName = "liferaysass.dll"
-
 	resourcesDirName = "win32-x86"
 }
 
 buildLibSass_Win32_x86_64 {
 	inputFileName = "sass.dll"
-
 	makeExecutable = "mingw32-make.exe shared"
-
 	outputFileName = "liferaysass.dll"
-
 	resourcesDirName = "win32-x86-64"
 }
 
@@ -190,7 +174,6 @@ class BuildLibSassTask extends DefaultTask {
 	void buildLibSass() {
 		project.copy {
 			from project.zipTree(FileUtil.get(project, project.libSassUrl))
-
 			into temporaryDir
 		}
 
@@ -210,13 +193,11 @@ class BuildLibSassTask extends DefaultTask {
 			}
 
 			executable = makeExecutableArgs[0]
-
 			workingDir = libSassDir
 		}
 
 		project.copy {
 			from new File(libSassDir, inputDirName + "/" + inputFileName)
-
 			into resourcesDir
 
 			rename {
