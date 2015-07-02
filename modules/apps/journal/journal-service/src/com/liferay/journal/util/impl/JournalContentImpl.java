@@ -415,8 +415,10 @@ public class JournalContentImpl implements JournalContent {
 		}
 
 		@Override
-		public String encode(JournalContentKey key) {
-			return encode(key._groupId, key._articleId, key._ddmTemplateKey);
+		public String encode(JournalContentKey journalContentKey) {
+			return encode(
+				journalContentKey._groupId, journalContentKey._articleId,
+				journalContentKey._ddmTemplateKey);
 		}
 
 	}

@@ -20,8 +20,8 @@ package com.liferay.portal.kernel.cache.index;
 public class TestKeyIndexEncoder implements IndexEncoder<Long, TestKey> {
 
 	@Override
-	public Long encode(TestKey key) {
-		return key.getIndexedLong();
+	public Long encode(TestKey testKey) {
+		return testKey.getIndexedLong();
 	}
 
 }
