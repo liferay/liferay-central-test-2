@@ -21,7 +21,9 @@ compileJava {
 downloadSrc {
 	eachFile new ReplaceLeadingPathAction("gdata/java/lib": "lib", "gdata/java/sample/util/lib": "lib", "gdata/java": "src/com/google/gdata")
 
-	ext.autoClean = false
+	ext {
+		autoClean = false
+	}
 
 	filesMatching("**/*.java") {
 		filter {
