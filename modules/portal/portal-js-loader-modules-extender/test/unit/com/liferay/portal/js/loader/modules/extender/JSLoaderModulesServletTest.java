@@ -307,7 +307,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testUnversionedModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			buildLoaderModulesServlet(
+			buildJSLoaderModulesServlet(
 				Collections.<String, Object>singletonMap(
 					"loader.modules.apply.versioning", Boolean.FALSE));
 
@@ -374,11 +374,11 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	protected JSLoaderModulesServlet buildJSLoaderModulesServlet()
 		throws Exception {
 
-		return buildLoaderModulesServlet(
+		return buildJSLoaderModulesServlet(
 			Collections.<String, Object>emptyMap());
 	}
 
-	protected JSLoaderModulesServlet buildLoaderModulesServlet(
+	protected JSLoaderModulesServlet buildJSLoaderModulesServlet(
 			Map<String, Object> properties)
 		throws Exception {
 
@@ -424,10 +424,10 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		Bundle bundle, String bsn, Version version, URL url,
 		boolean capability) {
 
-		BundleWiring bundleWiring = mock(BundleWiring.class);
 		BundleCapability bundleCapability = mock(BundleCapability.class);
 		BundleWire bundleWire = mock(BundleWire.class);
-		BundleCapability bundleCapabilityJquery = mock(BundleCapability.class);
+		BundleWiring bundleWiring = mock(BundleWiring.class);
+		BundleCapability jQueryBundleCapability = mock(BundleCapability.class);
 
 		doReturn(
 			Collections.<String, Object>singletonMap(
@@ -442,7 +442,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		doReturn(
 			jQueryProperties
-		).when(bundleCapabilityJquery).getAttributes();
+		).when(jQueryBundleCapability).getAttributes();
 
 		doReturn(
 			capability ? Arrays.asList(bundleCapability) :
@@ -454,7 +454,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		).when(bundleWiring).getRequiredWires(Details.OSGI_WEBRESOURCE);
 
 		doReturn(
-			bundleCapabilityJquery
+			jQueryBundleCapability
 		).when(bundleWire).getCapability();
 
 		doReturn(
