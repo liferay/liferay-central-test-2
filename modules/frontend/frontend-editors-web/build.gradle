@@ -58,14 +58,11 @@ buildAlloyEditor {
 
 	from(zipTree(new File(thirdPartyDir, "alloy-editor-${alloyEditorVersion}.zip"))) {
 		eachFile new StripPathSegmentsAction(2)
-
 		include "alloy-editor-${alloyEditorVersion}/alloy-editor/**"
 	}
 
 	from alloyEditorSrcDir
-
 	includeEmptyDirs = false
-
 	into alloyEditorDestinationDir
 }
 
@@ -87,9 +84,7 @@ buildCKEditor {
 	}
 
 	from new File(editorsSrcDir, "ckeditor_diffs")
-
 	includeEmptyDirs = false
-
 	into ckEditorDestinationDir
 }
 
@@ -156,7 +151,6 @@ buildTinyMCE {
 	}
 
 	includeEmptyDirs = false
-
 	into tinyMCEDestinationDir
 }
 
