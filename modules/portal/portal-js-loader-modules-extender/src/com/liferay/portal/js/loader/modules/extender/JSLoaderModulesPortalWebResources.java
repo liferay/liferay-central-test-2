@@ -34,7 +34,7 @@ public class JSLoaderModulesPortalWebResources {
 		try {
 			com.liferay.portal.kernel.servlet.PortalWebResources
 				portalWebResources = new InternalPortalWebResources(
-					_loaderModulesServlet);
+					_jsLoaderModulesServlet);
 
 			_serviceRegistration = bundleContext.registerService(
 				com.liferay.portal.kernel.servlet.PortalWebResources.class,
@@ -53,22 +53,22 @@ public class JSLoaderModulesPortalWebResources {
 	}
 
 	@Reference
-	protected void setLoaderModulesServlet(
-		JSLoaderModulesServlet loaderModulesServlet) {
+	protected void setJSLoaderModulesServlet(
+		JSLoaderModulesServlet jsLoaderModulesServlet) {
 
-		_loaderModulesServlet = loaderModulesServlet;
+		_jsLoaderModulesServlet = jsLoaderModulesServlet;
 	}
 
-	private JSLoaderModulesServlet _loaderModulesServlet;
+	private JSLoaderModulesServlet _jsLoaderModulesServlet;
 	private ServiceRegistration<?> _serviceRegistration;
 
 	private class InternalPortalWebResources
 		implements com.liferay.portal.kernel.servlet.PortalWebResources {
 
 		public InternalPortalWebResources(
-			JSLoaderModulesServlet loaderModulesServlet) {
+			JSLoaderModulesServlet jsLoaderModulesServlet) {
 
-			_loaderModulesServlet = loaderModulesServlet;
+			_jsLoaderModulesServlet = jsLoaderModulesServlet;
 		}
 
 		@Override
@@ -80,7 +80,7 @@ public class JSLoaderModulesPortalWebResources {
 
 		@Override
 		public long getLastModified() {
-			return _loaderModulesServlet.getTrackingCount();
+			return _jsLoaderModulesServlet.getTrackingCount();
 		}
 
 		@Override
@@ -91,10 +91,10 @@ public class JSLoaderModulesPortalWebResources {
 
 		@Override
 		public ServletContext getServletContext() {
-			return _loaderModulesServlet.getServletContext();
+			return _jsLoaderModulesServlet.getServletContext();
 		}
 
-		private JSLoaderModulesServlet _loaderModulesServlet;
+		private JSLoaderModulesServlet _jsLoaderModulesServlet;
 
 	}
 
