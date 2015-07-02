@@ -258,20 +258,20 @@ public class QuartzSchedulerEngineTest {
 
 	@Test
 	public void testGetQuartzTrigger3() throws SchedulerException {
+		IntervalTrigger intervalTrigger = new IntervalTrigger(
+			_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, 0);
+
 		try (CaptureHandler captureHandler =
 				JDKLoggerTestUtil.configureJDKLogger(
 					QuartzSchedulerEngine.class.getName(), Level.WARNING)) {
-
-			List<LogRecord> logRecords = captureHandler.getLogRecords();
-
-			IntervalTrigger intervalTrigger = new IntervalTrigger(
-				_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, 0);
 
 			org.quartz.Trigger trigger =
 				_quartzSchedulerEngine.getQuartzTrigger(
 					intervalTrigger, StorageType.MEMORY);
 
 			Assert.assertNull(trigger);
+
+			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
 			Assert.assertEquals(1, logRecords.size());
 
@@ -467,12 +467,12 @@ public class QuartzSchedulerEngineTest {
 
 		Assert.assertEquals(_DEFAULT_JOB_NUMBER, schedulerResponses.size());
 
+		IntervalTrigger intervalTrigger = new IntervalTrigger(
+			_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, 0);
+
 		try (CaptureHandler captureHandler =
 				JDKLoggerTestUtil.configureJDKLogger(
 					QuartzSchedulerEngine.class.getName(), Level.WARNING)) {
-
-			IntervalTrigger intervalTrigger = new IntervalTrigger(
-				_TEST_JOB_NAME_0, _MEMORY_TEST_GROUP_NAME, 0);
 
 			_quartzSchedulerEngine.schedule(
 				intervalTrigger, StringPool.BLANK, _TEST_DESTINATION_NAME, null,
