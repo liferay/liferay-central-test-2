@@ -74,7 +74,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		catch (Exception e) {
 			_log.error(
 				"Unable to add dynamic data mapping structure link " +
-					"for file entry type ID " + classPK);
+					"for file entry type " + classPK);
 
 			throw e;
 		}
@@ -88,8 +88,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileEntry
 
-		runSQL("alter table DLFileEntry add fileName VARCHAR(255) null");
-
 		updateFileEntryFileNames();
 
 		// DLFileEntryType
@@ -98,11 +96,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		updateFileEntryTypeDDMStructureLinks();
 
-		runSQL("drop table DLFileEntryTypes_DDMStructures");
-
 		// DLFileVersion
-
-		runSQL("alter table DLFileVersion add fileName VARCHAR(255) null");
 
 		updateFileVersionFileNames();
 
@@ -179,6 +173,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateFileEntryFileNames() throws Exception {
+		runSQL("alter table DLFileEntry add fileName VARCHAR(255) null");
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -302,6 +298,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		runSQL("drop table DLFileEntryTypes_DDMStructures");
 	}
 
 	protected void updateFileEntryTypeNamesAndDescriptions() throws Exception {
@@ -524,6 +522,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateFileVersionFileNames() throws Exception {
+		runSQL("alter table DLFileVersion add fileName VARCHAR(255) null");
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
