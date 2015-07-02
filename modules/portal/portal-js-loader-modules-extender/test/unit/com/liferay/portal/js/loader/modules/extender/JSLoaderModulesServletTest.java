@@ -75,7 +75,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	}
 
 	@Test
-	public void testMultipleModuleOutput() throws Exception {
+	public void testMultipleModulesOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			buildJSLoaderModulesServlet();
 
@@ -125,7 +125,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	}
 
 	@Test
-	public void testMultipleVersionModuleOutput() throws Exception {
+	public void testMultipleVersionsModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			buildJSLoaderModulesServlet();
 
@@ -213,7 +213,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	}
 
 	@Test(expected = JSONException.class)
-	public void testSingleModuleOutputEmptyConfig() throws Exception {
+	public void testSingleModuleOutputEmptyConfiguration() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			buildJSLoaderModulesServlet();
 
@@ -266,7 +266,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	}
 
 	@Test(expected = JSONException.class)
-	public void testSingleModuleOutputMalformedConfig() throws Exception {
+	public void testSingleModuleOutputMalformedConfiguration()
+		throws Exception {
+
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			buildJSLoaderModulesServlet();
 
@@ -279,7 +281,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	}
 
 	@Test
-	public void testSingleModuleOutputNoConfig() throws Exception {
+	public void testSingleModuleOutputNoConfiguration() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			buildJSLoaderModulesServlet();
 
