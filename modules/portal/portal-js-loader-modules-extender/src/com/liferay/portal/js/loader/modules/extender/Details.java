@@ -34,9 +34,9 @@ public @interface Details {
 	public static final String OSGI_WEBRESOURCE = "osgi.webresource";
 
 	@Meta.AD(deflt = "true")
-	public boolean loader_modules_apply_versioning() default true;
+	public boolean applyVersioning() default true;
 
 	@Meta.AD(deflt = "Liferay")
-	public String loader_modules_global_js_variable() default "Liferay";
+	public String globalJSVariable() default "Liferay";
 
 }

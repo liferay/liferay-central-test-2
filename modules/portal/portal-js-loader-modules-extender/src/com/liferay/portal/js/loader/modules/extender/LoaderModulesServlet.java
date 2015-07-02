@@ -163,7 +163,7 @@ public class LoaderModulesServlet extends HttpServlet
 			JSONObject jsonObject, BundleWiring bundleWiring,
 			boolean versionedModuleName) {
 
-			if (!_details.loader_modules_apply_versioning()) {
+			if (!_details.applyVersioning()) {
 				if (versionedModuleName) {
 					return "";
 				}
@@ -344,7 +344,7 @@ public class LoaderModulesServlet extends HttpServlet
 		PrintWriter writer = response.getWriter();
 
 		writer.println("(function() {");
-		writer.print(_details.loader_modules_global_js_variable());
+		writer.print(_details.globalJSVariable());
 		writer.println(".PATHS = {");
 
 		Collection<LoaderModule> values = _loaderModules.values();
@@ -381,7 +381,7 @@ public class LoaderModulesServlet extends HttpServlet
 		}
 
 		writer.println("\n};");
-		writer.print(_details.loader_modules_global_js_variable());
+		writer.print(_details.globalJSVariable());
 		writer.println(".MODULES = {");
 
 		_processed = new HashSet<>();
@@ -413,7 +413,7 @@ public class LoaderModulesServlet extends HttpServlet
 		}
 
 		writer.println("\n};");
-		writer.print(_details.loader_modules_global_js_variable());
+		writer.print(_details.globalJSVariable());
 		writer.println(".MAPS = {");
 
 		_processed = new HashSet<>();
