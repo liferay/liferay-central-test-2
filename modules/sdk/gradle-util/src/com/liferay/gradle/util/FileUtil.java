@@ -29,6 +29,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import java.util.HashMap;
 import java.util.List;
@@ -132,7 +133,9 @@ public class FileUtil {
 
 		Files.createDirectories(destinationPath.getParent());
 
-		Files.copy(mirrorsCacheArtifactFile.toPath(), destinationPath);
+		Files.copy(
+			mirrorsCacheArtifactFile.toPath(), destinationPath,
+			StandardCopyOption.REPLACE_EXISTING);
 
 		return destinationPath.toFile();
 	}
