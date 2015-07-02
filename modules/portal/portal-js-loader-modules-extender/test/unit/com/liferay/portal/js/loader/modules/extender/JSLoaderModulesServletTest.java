@@ -432,7 +432,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		doReturn(
 			Collections.<String, Object>singletonMap(
 				Details.OSGI_WEBRESOURCE, bsn)
-		).when(bundleCapability).getAttributes();
+		).when(
+			bundleCapability
+		).getAttributes();
 
 		Map<String, Object> jQueryProperties = new HashMap<>();
 
@@ -442,36 +444,57 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		doReturn(
 			jQueryProperties
-		).when(jQueryBundleCapability).getAttributes();
+		).when(
+			jQueryBundleCapability
+		).getAttributes();
 
 		doReturn(
-			capability ? Arrays.asList(bundleCapability) :
+			capability ?
+				Arrays.asList(bundleCapability) :
 				Collections.emptyList()
-		).when(bundleWiring).getCapabilities(Details.OSGI_WEBRESOURCE);
+		).when(
+			bundleWiring
+		).getCapabilities(
+			Details.OSGI_WEBRESOURCE
+		);
 
 		doReturn(
 			capability ? Arrays.asList(bundleWire) : Collections.emptyList()
-		).when(bundleWiring).getRequiredWires(Details.OSGI_WEBRESOURCE);
+		).when(
+			bundleWiring
+		).getRequiredWires(
+			Details.OSGI_WEBRESOURCE
+		);
 
 		doReturn(
 			jQueryBundleCapability
-		).when(bundleWire).getCapability();
+		).when(
+			bundleWire
+		).getCapability();
 
 		doReturn(
 			bundleWiring
-		).when(bundle).adapt(BundleWiring.class);
+		).when(
+			bundle
+		).adapt(BundleWiring.class);
 
 		doReturn(
 			url
-		).when(bundle).getEntry(Details.CONFIG_JSON);
+		).when(
+			bundle
+		).getEntry(Details.CONFIG_JSON);
 
 		doReturn(
 			bsn
-		).when(bundle).getSymbolicName();
+		).when(
+			bundle
+		).getSymbolicName();
 
 		doReturn(
 			version
-		).when(bundle).getVersion();
+		).when(
+			bundle
+		).getVersion();
 	}
 
 	private final AtomicInteger _counter = new AtomicInteger(0);
