@@ -359,7 +359,7 @@ public class CreateAccountAction extends PortletAction {
 
 		if (anonymousUser.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
 			throw new PrincipalException(
-				"User {uuid=" + anonymousUser.getUuid() + "} cannot be reset");
+				"Unable to reset user " + anonymousUser.getUuid());
 		}
 
 		UserLocalServiceUtil.deleteUser(anonymousUser.getUserId());
