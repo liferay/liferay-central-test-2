@@ -207,7 +207,7 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 	private static final KeyValuePair[] _xFrameOptionKVPs;
 
 	static {
-		String httpHeaderSecureXFrameOptions =
+		String httpHeaderSecureXFrameOptionsKey =
 			"http.header.secure.x.frame.options";
 
 		Properties properties = new SortedProperties(
@@ -222,7 +222,8 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 			},
 			PropertiesUtil.getProperties(
 				SystemProperties.getProperties(),
-				httpHeaderSecureXFrameOptions.concat(StringPool.PERIOD), true));
+				httpHeaderSecureXFrameOptionsKey.concat(StringPool.PERIOD),
+				true));
 
 		List<KeyValuePair> xFrameOptionKVPs = new ArrayList<>(
 			properties.size());
@@ -266,7 +267,7 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 		}
 		else {
 			_X_FRAME_OPTIONS = GetterUtil.getBoolean(
-				SystemProperties.get(httpHeaderSecureXFrameOptions), true);
+				SystemProperties.get(httpHeaderSecureXFrameOptionsKey), true);
 		}
 	}
 
