@@ -310,7 +310,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			buildJSLoaderModulesServlet(
 				Collections.<String, Object>singletonMap(
-					"loader.modules.apply.versioning", Boolean.FALSE));
+					"applyVersioning", Boolean.FALSE));
 
 		ServiceReference<ServletContext> serviceReference =
 			buildServiceReference(
