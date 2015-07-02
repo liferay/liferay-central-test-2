@@ -32,9 +32,9 @@ import java.util.concurrent.ConcurrentMap;
 public class PortalCacheIndexer<I, K extends Serializable, V> {
 
 	public PortalCacheIndexer(
-		IndexAccessor<I, K> indexAccessor, PortalCache<K, V> portalCache) {
+		IndexEncoder<I, K> indexEncoder, PortalCache<K, V> portalCache) {
 
-		_indexAccessor = indexAccessor;
+		_indexEncoder = indexEncoder;
 
 		_portalCache = portalCache;
 
@@ -68,7 +68,7 @@ public class PortalCacheIndexer<I, K extends Serializable, V> {
 	}
 
 	private void _addIndexedCacheKey(K key) {
-		I index = _indexAccessor.getIndex(key);
+		I index = _indexEncoder.encode(key);
 
 		Set<K> keys = _indexedCacheKeys.get(index);
 
@@ -88,7 +88,7 @@ public class PortalCacheIndexer<I, K extends Serializable, V> {
 	}
 
 	private void _removeIndexedCacheKey(K key) {
-		I index = _indexAccessor.getIndex(key);
+		I index = _indexEncoder.encode(key);
 
 		Set<K> keys = _indexedCacheKeys.get(index);
 
@@ -105,9 +105,9 @@ public class PortalCacheIndexer<I, K extends Serializable, V> {
 		}
 	}
 
-	private final IndexAccessor<I, K> _indexAccessor;
 	private final ConcurrentMap<I, Set<K>> _indexedCacheKeys =
 		new ConcurrentHashMap<>();
+	private final IndexEncoder<I, K> _indexEncoder;
 	private final PortalCache<K, V> _portalCache;
 
 	private class IndexerCacheListener implements CacheListener<K, V> {

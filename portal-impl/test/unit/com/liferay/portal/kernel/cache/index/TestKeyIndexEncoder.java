@@ -17,10 +17,10 @@ package com.liferay.portal.kernel.cache.index;
 /**
  * @author Preston Crary
  */
-public class TestKeyIndexAccessor implements IndexAccessor<Long, TestKey> {
+public class TestKeyIndexEncoder implements IndexEncoder<Long, TestKey> {
 
 	@Override
-	public Long getIndex(TestKey key) {
+	public Long encode(TestKey key) {
 		return key.getIndexedLong();
 	}
 
