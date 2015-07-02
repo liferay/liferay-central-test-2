@@ -67,7 +67,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 	immediate = true,
 	property = {
 		"osgi.http.whiteboard.servlet.name=Loader Modules Servlet",
-		"osgi.http.whiteboard.servlet.pattern=/loader_modules",
+		"osgi.http.whiteboard.servlet.pattern=/js_loader_modules",
 		"service.ranking:Integer=" + Details.MAX_VALUE_LESS_1K
 	},
 	service = {LoaderModulesServlet.class, Servlet.class}
