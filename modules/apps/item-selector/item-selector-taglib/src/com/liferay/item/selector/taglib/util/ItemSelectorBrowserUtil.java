@@ -50,18 +50,18 @@ public class ItemSelectorBrowserUtil {
 		JSONArray firstTabDataJSONArray = JSONFactoryUtil.createJSONArray();
 
 		firstTabDataJSONArray.put(
-			getDataJSONObject(
+			_createJSONObject(
 				LanguageUtil.get(locale, "format"),
 				HtmlUtil.escape(latestFileVersion.getExtension())));
 		firstTabDataJSONArray.put(
-			getDataJSONObject(
+			_createJSONObject(
 				LanguageUtil.get(locale, "size"),
 				TextFormatter.formatStorageSize(fileEntry.getSize(), locale)));
 		firstTabDataJSONArray.put(
-			getDataJSONObject(
+			_createJSONObject(
 				LanguageUtil.get(locale, "name"), HtmlUtil.escape(title)));
 		firstTabDataJSONArray.put(
-			getDataJSONObject(
+			_createJSONObject(
 				LanguageUtil.get(locale, "modified"),
 				LanguageUtil.format(
 					locale, "x-ago-by-x",
@@ -83,11 +83,11 @@ public class ItemSelectorBrowserUtil {
 		JSONArray secondTabDataJSONArray = JSONFactoryUtil.createJSONArray();
 
 		secondTabDataJSONArray.put(
-			getDataJSONObject(
+			_createJSONObject(
 				LanguageUtil.get(locale, "version"),
 				HtmlUtil.escape(latestFileVersion.getVersion())));
 		secondTabDataJSONArray.put(
-			getDataJSONObject(
+			_createJSONObject(
 				LanguageUtil.get(locale, "status"),
 				WorkflowConstants.getStatusLabel(
 					latestFileVersion.getStatus())));
@@ -106,7 +106,7 @@ public class ItemSelectorBrowserUtil {
 		return itemMetadataJSONObject;
 	}
 
-	protected static JSONObject getDataJSONObject(String key, String value) {
+	private static JSONObject _createJSONObject(String key, String value) {
 		String json = "{key: " + key + ", value: " + value + "}";
 
 		try {
