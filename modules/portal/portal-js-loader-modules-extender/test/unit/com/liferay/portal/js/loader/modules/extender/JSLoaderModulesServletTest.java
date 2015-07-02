@@ -58,7 +58,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testBasicOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
@@ -76,18 +76,18 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testMultipleModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/config1.js"));
+				getResource("dependencies/config1.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		serviceReference = _buildServiceReference(
+		serviceReference = buildServiceReference(
 			"foo", new Version("13.2.23"), true, 0,
-			_getResource("dependencies/config2.js"));
+			getResource("dependencies/config2.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
@@ -126,18 +126,18 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testMultipleVersionModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/config1.js"));
+				getResource("dependencies/config1.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		serviceReference = _buildServiceReference(
+		serviceReference = buildServiceReference(
 			"test", new Version("1.2.0"), true, 0,
-			_getResource("dependencies/config1.js"));
+			getResource("dependencies/config1.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
@@ -175,12 +175,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testSingleModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/config1.js"));
+				getResource("dependencies/config1.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
@@ -214,12 +214,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test(expected = JSONException.class)
 	public void testSingleModuleOutputEmptyConfig() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/empty.js"));
+				getResource("dependencies/empty.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 	}
@@ -227,12 +227,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testSingleModuleOutputIdempotent() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/config1.js"));
+				getResource("dependencies/config1.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 		jsLoaderModulesServlet.addingService(serviceReference);
@@ -267,12 +267,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test(expected = JSONException.class)
 	public void testSingleModuleOutputMalformedConfig() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/malformed.js"));
+				getResource("dependencies/malformed.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 	}
@@ -280,10 +280,10 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testSingleModuleOutputNoConfig() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildJSLoaderModulesServlet();
+			buildJSLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference("test", new Version("1.0.0"), true, 0, null);
+			buildServiceReference("test", new Version("1.0.0"), true, 0, null);
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
@@ -307,14 +307,14 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 	@Test
 	public void testUnversionedModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
-			_buildLoaderModulesServlet(
+			buildLoaderModulesServlet(
 				Collections.<String, Object>singletonMap(
 					"loader.modules.apply.versioning", Boolean.FALSE));
 
 		ServiceReference<ServletContext> serviceReference =
-			_buildServiceReference(
+			buildServiceReference(
 				"test", new Version("1.0.0"), true, 0,
-				_getResource("dependencies/config1.js"));
+				getResource("dependencies/config1.js"));
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
@@ -371,14 +371,14 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		Assert.assertEquals(occurences, count);
 	}
 
-	private JSLoaderModulesServlet _buildJSLoaderModulesServlet()
+	protected JSLoaderModulesServlet buildJSLoaderModulesServlet()
 		throws Exception {
 
-		return _buildLoaderModulesServlet(
+		return buildLoaderModulesServlet(
 			Collections.<String, Object>emptyMap());
 	}
 
-	private JSLoaderModulesServlet _buildLoaderModulesServlet(
+	protected JSLoaderModulesServlet buildLoaderModulesServlet(
 			Map<String, Object> properties)
 		throws Exception {
 
@@ -396,12 +396,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		return jsLoaderModulesServlet;
 	}
 
-	private ServiceReference<ServletContext> _buildServiceReference(
+	protected ServiceReference<ServletContext> buildServiceReference(
 		String bsn, Version version, boolean capability, int ranking, URL url) {
 
 		Bundle bundle = mock(Bundle.class);
 
-		_mockBundle(bundle, bsn, version, url, capability);
+		mockBundle(bundle, bsn, version, url, capability);
 
 		MockServiceReference mockServiceReference = new MockServiceReference(
 			bundle, new String[] {ServletContext.class.getName()},
@@ -414,13 +414,13 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		return mockServiceReference;
 	}
 
-	private URL _getResource(String resourceName) {
+	protected URL getResource(String name) {
 		Class<?> clazz = getClass();
 
-		return clazz.getResource(resourceName);
+		return clazz.getResource(name);
 	}
 
-	private void _mockBundle(
+	protected void mockBundle(
 		Bundle bundle, String bsn, Version version, URL url,
 		boolean capability) {
 
