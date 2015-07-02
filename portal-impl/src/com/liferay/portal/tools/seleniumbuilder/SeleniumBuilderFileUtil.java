@@ -67,7 +67,7 @@ public class SeleniumBuilderFileUtil {
 			InputStream inputStream = new ByteArrayInputStream(
 				content.getBytes());
 
-			_props.load(inputStream);
+			_properties.load(inputStream);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -417,7 +417,7 @@ public class SeleniumBuilderFileUtil {
 	}
 
 	protected String getProperty(String propertyName) {
-		String propertyValue = _props.getProperty(propertyName);
+		String propertyValue = _properties.getProperty(propertyName);
 
 		if (Validator.isNotNull(propertyValue)) {
 			Matcher matcher = _varElementPattern.matcher(propertyValue);
@@ -2148,7 +2148,7 @@ public class SeleniumBuilderFileUtil {
 		"[A-Za-z0-9\\-]+");
 	private final Pattern _pathTrElementWordPattern2 = Pattern.compile(
 		"[A-Z0-9][A-Za-z0-9\\-]*");
-	private final Properties _props = new Properties();
+	private final Properties _properties = new Properties();
 	private final Pattern _tagPattern = Pattern.compile("<[a-z\\-]+");
 	private final List<String> _testCaseAvailablePropertyNames;
 	private final List<String> _testrayAvailableComponentNames;
