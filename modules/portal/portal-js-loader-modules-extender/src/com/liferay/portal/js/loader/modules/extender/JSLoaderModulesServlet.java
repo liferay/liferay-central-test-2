@@ -344,109 +344,105 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 		response.setContentType(Details.CONTENT_TYPE);
 
-		PrintWriter writer = response.getWriter();
+		PrintWriter printWriter = response.getWriter();
 
-		writer.println("(function() {");
-		writer.print(_details.globalJSVariable());
-		writer.println(".PATHS = {");
+		printWriter.println("(function() {");
+		printWriter.print(_details.globalJSVariable());
+		printWriter.println(".PATHS = {");
 
-		Collection<JSLoaderModule> values = _jsLoaderModules.values();
+		String delimiter = "";
+		Set<String> processedNames = new HashSet<>();
 
-		Set<String> _processed = new HashSet<>();
-		String deliminter = "";
+		Collection<JSLoaderModule> jsLoaderModules = _jsLoaderModules.values();
 
-		for (JSLoaderModule loaderModule : values) {
-			String contextPath = loaderModule.getContextPath();
-			String name = loaderModule.getName();
-			String version = loaderModule.getVersion();
+		for (JSLoaderModule jsLoaderModule : jsLoaderModules) {
+			printWriter.write(delimiter);
+			printWriter.write("'");
+			printWriter.write(jsLoaderModule.getName());
+			printWriter.write('@');
+			printWriter.write(jsLoaderModule.getVersion());
+			printWriter.write("': '");
+			printWriter.write(jsLoaderModule.getContextPath());
+			printWriter.write("'");
 
-			writer.write(deliminter);
-			writer.write("'");
-			writer.write(name);
-			writer.write('@');
-			writer.write(version);
-			writer.write("': '");
-			writer.write(contextPath);
-			writer.write("'");
+			if (!processedNames.contains(jsLoaderModule.getName())) {
+				processedNames.add(jsLoaderModule.getName());
 
-			if (!_processed.contains(name)) {
-				_processed.add(name);
-
-				writer.println(",");
-				writer.write("'");
-				writer.write(name);
-				writer.write("': '");
-				writer.write(contextPath);
-				writer.write("'");
+				printWriter.println(",");
+				printWriter.write("'");
+				printWriter.write(jsLoaderModule.getName());
+				printWriter.write("': '");
+				printWriter.write(jsLoaderModule.getContextPath());
+				printWriter.write("'");
 			}
 
-			deliminter = ",\n";
+			delimiter = ",\n";
 		}
 
-		writer.println("\n};");
-		writer.print(_details.globalJSVariable());
-		writer.println(".MODULES = {");
+		printWriter.println("\n};");
+		printWriter.print(_details.globalJSVariable());
+		printWriter.println(".MODULES = {");
 
-		_processed = new HashSet<>();
-		deliminter = "";
+		delimiter = "";
+		processedNames.clear();
 
-		for (JSLoaderModule loaderModule : values) {
-			String name = loaderModule.getName();
-			String unversionedConfig = loaderModule.getUnversionedConfiguration();
-			String versionedConfig = loaderModule.getVersionedConfiguration();
+		for (JSLoaderModule jsLoaderModule : jsLoaderModules) {
+			String unversionedConfiguration =
+				jsLoaderModule.getUnversionedConfiguration();
 
-			if (unversionedConfig.length() == 0) {
+			if (unversionedConfiguration.length() == 0) {
 				continue;
 			}
 
-			if (!_processed.contains(name)) {
-				_processed.add(name);
+			if (!processedNames.contains(jsLoaderModule.getName())) {
+				processedNames.add(jsLoaderModule.getName());
 
-				writer.write(deliminter);
-				writer.write(unversionedConfig);
-				deliminter = ",\n";
+				printWriter.write(delimiter);
+				printWriter.write(unversionedConfiguration);
+				delimiter = ",\n";
 			}
 
-			if (versionedConfig.length() > 0) {
-				writer.write(deliminter);
-				writer.write(versionedConfig);
+			String versionedConfiguration =
+				jsLoaderModule.getVersionedConfiguration();
 
-				deliminter = ",\n";
+			if (versionedConfiguration.length() > 0) {
+				printWriter.write(delimiter);
+				printWriter.write(versionedConfiguration);
+
+				delimiter = ",\n";
 			}
 		}
 
-		writer.println("\n};");
-		writer.print(_details.globalJSVariable());
-		writer.println(".MAPS = {");
+		printWriter.println("\n};");
+		printWriter.print(_details.globalJSVariable());
+		printWriter.println(".MAPS = {");
 
-		_processed = new HashSet<>();
-		deliminter = "";
+		delimiter = "";
+		processedNames.clear();
 
-		for (JSLoaderModule loaderModule : values) {
-			String name = loaderModule.getName();
-			String version = loaderModule.getVersion();
-
-			if (_processed.contains(name)) {
+		for (JSLoaderModule jsLoaderModule : jsLoaderModules) {
+			if (processedNames.contains(jsLoaderModule.getName())) {
 				continue;
 			}
 
-			_processed.add(name);
+			processedNames.add(jsLoaderModule.getName());
 
-			writer.write(deliminter);
-			writer.write("'");
-			writer.write(name);
-			writer.write("': '");
-			writer.write(name);
-			writer.write('@');
-			writer.write(version);
-			writer.write("'");
+			printWriter.write(delimiter);
+			printWriter.write("'");
+			printWriter.write(jsLoaderModule.getName());
+			printWriter.write("': '");
+			printWriter.write(jsLoaderModule.getName());
+			printWriter.write('@');
+			printWriter.write(jsLoaderModule.getVersion());
+			printWriter.write("'");
 
-			deliminter = ",\n";
+			delimiter = ",\n";
 		}
 
-		writer.println("\n};");
-		writer.println("}());");
-		writer.close();
+		printWriter.println("\n};");
+		printWriter.println("}());");
+
+		printWriter.close();
 	}
 
 	protected void setDetails(Details details) {
