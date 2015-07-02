@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.trash.TrashRenderer;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -183,7 +184,7 @@ public class CalendarBookingAssetRenderer
 		}
 
 		return CalendarPermission.contains(
-			permissionChecker, calendar, CalendarActionKeys.VIEW);
+			permissionChecker, calendar, ActionKeys.VIEW);
 	}
 
 	@Override

@@ -21,6 +21,7 @@ import com.liferay.calendar.service.permission.CalendarPortletPermission;
 import com.liferay.calendar.service.permission.CalendarResourcePermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
@@ -56,8 +57,7 @@ public class CalendarResourceServiceImpl
 		throws PortalException {
 
 		CalendarResourcePermission.check(
-			getPermissionChecker(), calendarResourceId,
-			CalendarActionKeys.DELETE);
+			getPermissionChecker(), calendarResourceId, ActionKeys.DELETE);
 
 		return calendarResourceLocalService.deleteCalendarResource(
 			calendarResourceId);
@@ -76,7 +76,7 @@ public class CalendarResourceServiceImpl
 		}
 
 		CalendarResourcePermission.check(
-			getPermissionChecker(), calendarResource, CalendarActionKeys.VIEW);
+			getPermissionChecker(), calendarResource, ActionKeys.VIEW);
 
 		return calendarResource;
 	}
@@ -86,8 +86,7 @@ public class CalendarResourceServiceImpl
 		throws PortalException {
 
 		CalendarResourcePermission.check(
-			getPermissionChecker(), calendarResourceId,
-			CalendarActionKeys.VIEW);
+			getPermissionChecker(), calendarResourceId, ActionKeys.VIEW);
 
 		return calendarResourcePersistence.findByPrimaryKey(calendarResourceId);
 	}
@@ -142,8 +141,7 @@ public class CalendarResourceServiceImpl
 		throws PortalException {
 
 		CalendarResourcePermission.check(
-			getPermissionChecker(), calendarResourceId,
-			CalendarActionKeys.UPDATE);
+			getPermissionChecker(), calendarResourceId, ActionKeys.UPDATE);
 
 		return calendarResourceLocalService.updateCalendarResource(
 			calendarResourceId, nameMap, descriptionMap, active,

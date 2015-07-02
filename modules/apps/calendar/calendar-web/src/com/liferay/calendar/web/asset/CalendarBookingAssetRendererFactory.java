@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -90,6 +91,7 @@ public class CalendarBookingAssetRendererFactory
 		return TYPE;
 	}
 
+	@Deprecated
 	@Override
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
@@ -153,8 +155,8 @@ public class CalendarBookingAssetRendererFactory
 		CalendarBooking calendarBooking =
 			CalendarBookingLocalServiceUtil.getCalendarBooking(classPK);
 
-		if (actionId.equals(CalendarActionKeys.DELETE) ||
-			actionId.equals(CalendarActionKeys.UPDATE)) {
+		if (actionId.equals(ActionKeys.DELETE) ||
+			actionId.equals(ActionKeys.UPDATE)) {
 
 			actionId = CalendarActionKeys.MANAGE_BOOKINGS;
 		}

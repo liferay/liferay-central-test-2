@@ -26,15 +26,7 @@ public class CalendarActionKeys {
 
 	public static final String ADD_RESOURCE = "ADD_RESOURCE";
 
-	public static final String DELETE = "DELETE";
-
 	public static final String MANAGE_BOOKINGS = "MANAGE_BOOKINGS";
-
-	public static final String PERMISSIONS = "PERMISSIONS";
-
-	public static final String UPDATE = "UPDATE";
-
-	public static final String VIEW = "VIEW";
 
 	public static final String VIEW_BOOKING_DETAILS = "VIEW_BOOKING_DETAILS";
 
