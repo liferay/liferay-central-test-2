@@ -1,3 +1,11 @@
+<#assign finderColConjunction = "">
+
+<#if finderCol_has_next>
+	<#assign finderColConjunction = " AND ">
+<#elseif finder.where?? && validator.isNotNull(finder.getWhere())>
+	<#assign finderColConjunction = " AND " + finder.where>
+</#if>
+
 <#if entity.hasCompoundPK() && finderCol.isPrimary()>
 	<#assign finderFieldName = entity.alias + ".id." + finderColName>
 <#else>
@@ -8,14 +16,6 @@
 	<#assign textFinderFieldName = "CAST_CLOB_TEXT(" + finderFieldName + ")">
 <#else>
 	<#assign textFinderFieldName = finderFieldName>
-</#if>
-
-<#assign finderColConjunction = "">
-
-<#if finderCol_has_next>
-	<#assign finderColConjunction = " AND ">
-<#elseif finder.where?? && validator.isNotNull(finder.getWhere())>
-	<#assign finderColConjunction = " AND " + finder.where>
 </#if>
 
 <#if !finderCol.isPrimitiveType()>
