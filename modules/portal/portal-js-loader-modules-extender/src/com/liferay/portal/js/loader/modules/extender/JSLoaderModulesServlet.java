@@ -399,6 +399,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 				printWriter.write(delimiter);
 				printWriter.write(unversionedConfiguration);
+
 				delimiter = ",\n";
 			}
 
