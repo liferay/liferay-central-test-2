@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.calendar.web.listeners;
+package com.liferay.calendar.web.activation;
 
 import com.liferay.calendar.service.CalendarImporterLocalService;
 import com.liferay.calendar.web.configuration.CalendarWebConfigurationValues;
