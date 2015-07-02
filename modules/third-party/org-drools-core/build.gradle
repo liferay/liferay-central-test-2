@@ -24,6 +24,5 @@ task patch(type: PatchTask)
 
 patch {
 	fileNames "org/drools/base/ClassFieldAccessorCache.java"
-
 	originalLibModuleName = "drools-core"
 }
