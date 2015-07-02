@@ -426,12 +426,6 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		boolean capability) {
 
 		doReturn(
-			mockBundleWiring(bsn, capability)
-		).when(
-			bundle
-		).adapt(BundleWiring.class);
-
-		doReturn(
 			url
 		).when(
 			bundle
@@ -448,6 +442,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		).when(
 			bundle
 		).getVersion();
+
+		doReturn(
+			mockBundleWiring(bsn, capability)
+		).when(
+			bundle
+		).adapt(BundleWiring.class);
 	}
 
 	protected BundleCapability mockBundleCapability(String bsn) {
