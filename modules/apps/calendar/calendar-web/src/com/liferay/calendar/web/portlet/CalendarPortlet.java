@@ -14,7 +14,6 @@
 
 package com.liferay.calendar.web.portlet;
 
-import com.liferay.calendar.constants.CalendarActionKeys;
 import com.liferay.calendar.constants.CalendarPortletKeys;
 import com.liferay.calendar.constants.CalendarWebKeys;
 import com.liferay.calendar.exception.CalendarBookingDurationException;
@@ -89,6 +88,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -550,7 +550,7 @@ public class CalendarPortlet extends MVCPortlet {
 
 		for (Calendar calendar : calendars) {
 			if (!CalendarPermission.contains(
-					permissionChecker, calendar, CalendarActionKeys.VIEW)) {
+					permissionChecker, calendar, ActionKeys.VIEW)) {
 
 				continue;
 			}

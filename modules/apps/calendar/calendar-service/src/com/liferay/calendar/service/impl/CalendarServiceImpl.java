@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.Iterator;
@@ -59,7 +60,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 	@Override
 	public Calendar deleteCalendar(long calendarId) throws PortalException {
 		CalendarPermission.check(
-			getPermissionChecker(), calendarId, CalendarActionKeys.DELETE);
+			getPermissionChecker(), calendarId, ActionKeys.DELETE);
 
 		return calendarLocalService.deleteCalendar(calendarId);
 	}
@@ -84,7 +85,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		}
 
 		CalendarPermission.check(
-			getPermissionChecker(), calendar, CalendarActionKeys.VIEW);
+			getPermissionChecker(), calendar, ActionKeys.VIEW);
 
 		return calendar;
 	}
@@ -92,7 +93,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 	@Override
 	public Calendar getCalendar(long calendarId) throws PortalException {
 		CalendarPermission.check(
-			getPermissionChecker(), calendarId, CalendarActionKeys.VIEW);
+			getPermissionChecker(), calendarId, ActionKeys.VIEW);
 
 		return calendarLocalService.getCalendar(calendarId);
 	}
@@ -103,8 +104,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		throws PortalException {
 
 		CalendarResourcePermission.check(
-			getPermissionChecker(), calendarResourceId,
-			CalendarActionKeys.VIEW);
+			getPermissionChecker(), calendarResourceId, ActionKeys.VIEW);
 
 		return calendarLocalService.getCalendarResourceCalendars(
 			groupId, calendarResourceId);
@@ -116,8 +116,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		throws PortalException {
 
 		CalendarResourcePermission.check(
-			getPermissionChecker(), calendarResourceId,
-			CalendarActionKeys.VIEW);
+			getPermissionChecker(), calendarResourceId, ActionKeys.VIEW);
 
 		return calendarLocalService.getCalendarResourceCalendars(
 			groupId, calendarResourceId, defaultCalendar);
@@ -128,7 +127,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		throws Exception {
 
 		CalendarPermission.check(
-			getPermissionChecker(), calendarId, CalendarActionKeys.UPDATE);
+			getPermissionChecker(), calendarId, ActionKeys.UPDATE);
 
 		calendarLocalService.importCalendar(calendarId, data, type);
 	}
@@ -142,7 +141,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 
 		return search(
 			companyId, groupIds, calendarResourceIds, keywords, andOperator,
-			start, end, orderByComparator, CalendarActionKeys.VIEW);
+			start, end, orderByComparator, ActionKeys.VIEW);
 	}
 
 	@Override
@@ -168,8 +167,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 
 		return search(
 			companyId, groupIds, calendarResourceIds, name, description,
-			andOperator, start, end, orderByComparator,
-			CalendarActionKeys.VIEW);
+			andOperator, start, end, orderByComparator, ActionKeys.VIEW);
 	}
 
 	@Override
@@ -195,7 +193,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 
 		return searchCount(
 			companyId, groupIds, calendarResourceIds, keywords, andOperator,
-			CalendarActionKeys.VIEW);
+			ActionKeys.VIEW);
 	}
 
 	@Override
@@ -220,7 +218,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 
 		return searchCount(
 			companyId, groupIds, calendarResourceIds, name, description,
-			andOperator, CalendarActionKeys.VIEW);
+			andOperator, ActionKeys.VIEW);
 	}
 
 	@Override
@@ -246,7 +244,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		throws PortalException {
 
 		CalendarPermission.check(
-			getPermissionChecker(), calendarId, CalendarActionKeys.UPDATE);
+			getPermissionChecker(), calendarId, ActionKeys.UPDATE);
 
 		return calendarLocalService.updateCalendar(
 			calendarId, nameMap, descriptionMap, color, serviceContext);
@@ -261,7 +259,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		throws PortalException {
 
 		CalendarPermission.check(
-			getPermissionChecker(), calendarId, CalendarActionKeys.UPDATE);
+			getPermissionChecker(), calendarId, ActionKeys.UPDATE);
 
 		return calendarLocalService.updateCalendar(
 			calendarId, nameMap, descriptionMap, timeZoneId, color,
@@ -274,7 +272,7 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 		throws PortalException {
 
 		CalendarPermission.check(
-			getPermissionChecker(), calendarId, CalendarActionKeys.UPDATE);
+			getPermissionChecker(), calendarId, ActionKeys.UPDATE);
 
 		return calendarLocalService.updateColor(
 			calendarId, color, serviceContext);

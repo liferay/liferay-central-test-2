@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -392,8 +393,7 @@ public class CalendarBookingServiceImpl extends CalendarBookingServiceBaseImpl {
 				parentCalendarBookingId, keywords, startTime, endTime,
 				recurring, statuses, start, end, orderByComparator);
 
-		return filterCalendarBookings(
-			calendarBookings, CalendarActionKeys.VIEW);
+		return filterCalendarBookings(calendarBookings, ActionKeys.VIEW);
 	}
 
 	@Override
@@ -413,8 +413,7 @@ public class CalendarBookingServiceImpl extends CalendarBookingServiceBaseImpl {
 				startTime, endTime, recurring, statuses, andOperator, start,
 				end, orderByComparator);
 
-		return filterCalendarBookings(
-			calendarBookings, CalendarActionKeys.VIEW);
+		return filterCalendarBookings(calendarBookings, ActionKeys.VIEW);
 	}
 
 	@AccessControlled(guestAccessEnabled = true)
