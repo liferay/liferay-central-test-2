@@ -21,7 +21,7 @@ import aQute.bnd.annotation.metatype.Meta;
  */
 @Meta.OCD(
 	id = "com.liferay.portal.js.loader.modules.extender.LoaderModulesServlet",
-	name = "%Loader Module Servlet Configuration"
+	name = "%JS Loader Modules Servlet Configuration"
 )
 public @interface Details {
 

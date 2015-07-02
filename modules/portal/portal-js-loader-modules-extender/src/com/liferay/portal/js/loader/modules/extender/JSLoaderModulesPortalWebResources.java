@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(immediate = true)
-public class LoaderModulesPortalWebResources {
+public class JSLoaderModulesPortalWebResources {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
@@ -54,19 +54,19 @@ public class LoaderModulesPortalWebResources {
 
 	@Reference
 	protected void setLoaderModulesServlet(
-		LoaderModulesServlet loaderModulesServlet) {
+		JSLoaderModulesServlet loaderModulesServlet) {
 
 		_loaderModulesServlet = loaderModulesServlet;
 	}
 
-	private LoaderModulesServlet _loaderModulesServlet;
+	private JSLoaderModulesServlet _loaderModulesServlet;
 	private ServiceRegistration<?> _serviceRegistration;
 
 	private class InternalPortalWebResources
 		implements com.liferay.portal.kernel.servlet.PortalWebResources {
 
 		public InternalPortalWebResources(
-			LoaderModulesServlet loaderModulesServlet) {
+			JSLoaderModulesServlet loaderModulesServlet) {
 
 			_loaderModulesServlet = loaderModulesServlet;
 		}
@@ -94,7 +94,7 @@ public class LoaderModulesPortalWebResources {
 			return _loaderModulesServlet.getServletContext();
 		}
 
-		private LoaderModulesServlet _loaderModulesServlet;
+		private JSLoaderModulesServlet _loaderModulesServlet;
 
 	}
 

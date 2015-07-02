@@ -53,11 +53,11 @@ import org.springframework.mock.web.MockServletContext;
  * @author Raymond Augé
  */
 @RunWith(PowerMockRunner.class)
-public class LoaderModulesServletTest extends PowerMockito {
+public class JSLoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testBasicOutput() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		MockHttpServletRequest httpServletRequest =
@@ -74,7 +74,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testMultiModuleOutput() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -121,7 +121,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testMultiVersionModuleOutput() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -167,7 +167,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testSingleModuleOutput() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -205,7 +205,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test(expected = JSONException.class)
 	public void testSingleModuleOutputEmptyConfig() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -218,7 +218,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testSingleModuleOutputIdempotent() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -256,7 +256,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test(expected = JSONException.class)
 	public void testSingleModuleOutputMalformedConfig() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -269,7 +269,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testSingleModuleOutputNoConfig() throws Exception {
-		LoaderModulesServlet loaderModulesServlet =
+		JSLoaderModulesServlet loaderModulesServlet =
 			_buildLoaderModulesServlet();
 
 		ServiceReference<ServletContext> serviceReference =
@@ -295,7 +295,7 @@ public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testUnversionedModuleOutput() throws Exception {
-		LoaderModulesServlet loaderModulesServlet = _buildLoaderModulesServlet(
+		JSLoaderModulesServlet loaderModulesServlet = _buildLoaderModulesServlet(
 			Collections.<String, Object>singletonMap(
 				"loader.modules.apply.versioning", Boolean.FALSE));
 
@@ -359,16 +359,16 @@ public class LoaderModulesServletTest extends PowerMockito {
 		Assert.assertEquals(occurences, count);
 	}
 
-	private LoaderModulesServlet _buildLoaderModulesServlet() throws Exception {
+	private JSLoaderModulesServlet _buildLoaderModulesServlet() throws Exception {
 		return _buildLoaderModulesServlet(
 			Collections.<String, Object>emptyMap());
 	}
 
-	private LoaderModulesServlet _buildLoaderModulesServlet(
+	private JSLoaderModulesServlet _buildLoaderModulesServlet(
 			Map<String, Object> properties)
 		throws Exception {
 
-		LoaderModulesServlet loaderModulesServlet = new LoaderModulesServlet();
+		JSLoaderModulesServlet loaderModulesServlet = new JSLoaderModulesServlet();
 
 		MockServletContext mockServletContext = new MockServletContext();
 
