@@ -295,8 +295,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testUnversionedModuleOutput() throws Exception {
-		JSLoaderModulesServlet loaderModulesServlet = _buildLoaderModulesServlet(
-			Collections.<String, Object>singletonMap(
+		JSLoaderModulesServlet loaderModulesServlet =
+			_buildLoaderModulesServlet(
+				Collections.<String, Object>singletonMap(
 				"loader.modules.apply.versioning", Boolean.FALSE));
 
 		ServiceReference<ServletContext> serviceReference =
@@ -359,7 +360,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		Assert.assertEquals(occurences, count);
 	}
 
-	private JSLoaderModulesServlet _buildLoaderModulesServlet() throws Exception {
+	private JSLoaderModulesServlet _buildLoaderModulesServlet()
+		throws Exception {
+
 		return _buildLoaderModulesServlet(
 			Collections.<String, Object>emptyMap());
 	}
@@ -368,7 +371,8 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 			Map<String, Object> properties)
 		throws Exception {
 
-		JSLoaderModulesServlet loaderModulesServlet = new JSLoaderModulesServlet();
+		JSLoaderModulesServlet loaderModulesServlet =
+			new JSLoaderModulesServlet();
 
 		MockServletContext mockServletContext = new MockServletContext();
 

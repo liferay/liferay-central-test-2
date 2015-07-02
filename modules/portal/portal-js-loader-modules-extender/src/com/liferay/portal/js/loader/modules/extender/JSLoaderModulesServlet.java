@@ -82,10 +82,10 @@ public class JSLoaderModulesServlet extends HttpServlet
 		String contextPath = (String)serviceReference.getProperty(
 			"osgi.web.contextpath");
 
-		LoaderModule loaderModule = new LoaderModule(
+		JSLoaderModule jsLoaderModule = new JSLoaderModule(
 			serviceReference.getBundle(), contextPath);
 
-		_loaderModules.put(serviceReference, loaderModule);
+		_jsLoaderModules.put(serviceReference, jsLoaderModule);
 
 		return serviceReference;
 	}
@@ -93,23 +93,24 @@ public class JSLoaderModulesServlet extends HttpServlet
 	@Override
 	public void modifiedService(
 		ServiceReference<ServletContext> serviceReference,
-		ServiceReference<ServletContext> trackedReference) {
+		ServiceReference<ServletContext> trackedServiceReference) {
 
-		removedService(serviceReference, trackedReference);
+		removedService(serviceReference, trackedServiceReference);
+
 		addingService(serviceReference);
 	}
 
 	@Override
 	public void removedService(
 		ServiceReference<ServletContext> serviceReference,
-		ServiceReference<ServletContext> trackedReference) {
+		ServiceReference<ServletContext> trackedServiceReference) {
 
-		_loaderModules.remove(serviceReference);
+		_jsLoaderModules.remove(serviceReference);
 	}
 
-	public class LoaderModule {
+	public class JSLoaderModule {
 
-		public LoaderModule(Bundle bundle, String contextPath) {
+		public JSLoaderModule(Bundle bundle, String contextPath) {
 			_bundle = bundle;
 			_contextPath = contextPath;
 
@@ -347,12 +348,12 @@ public class JSLoaderModulesServlet extends HttpServlet
 		writer.print(_details.globalJSVariable());
 		writer.println(".PATHS = {");
 
-		Collection<LoaderModule> values = _loaderModules.values();
+		Collection<JSLoaderModule> values = _jsLoaderModules.values();
 
 		Set<String> _processed = new HashSet<>();
 		String deliminter = "";
 
-		for (LoaderModule loaderModule : values) {
+		for (JSLoaderModule loaderModule : values) {
 			String contextPath = loaderModule.getContextPath();
 			String name = loaderModule.getName();
 			String version = loaderModule.getVersion();
@@ -387,7 +388,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 		_processed = new HashSet<>();
 		deliminter = "";
 
-		for (LoaderModule loaderModule : values) {
+		for (JSLoaderModule loaderModule : values) {
 			String name = loaderModule.getName();
 			String unversionedConfig = loaderModule.getUnversionedConfig();
 			String versionedConfig = loaderModule.getVersionedConfig();
@@ -419,7 +420,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 		_processed = new HashSet<>();
 		deliminter = "";
 
-		for (LoaderModule loaderModule : values) {
+		for (JSLoaderModule loaderModule : values) {
 			String name = loaderModule.getName();
 			String version = loaderModule.getVersion();
 
@@ -451,8 +452,8 @@ public class JSLoaderModulesServlet extends HttpServlet
 	}
 
 	private volatile Details _details;
-	private final ConcurrentMap<ServiceReference<ServletContext>, LoaderModule>
-		_loaderModules = new ConcurrentSkipListMap<>();
+	private final Map<ServiceReference <ServletContext>, JSLoaderModule>
+		_jsLoaderModules = new ConcurrentSkipListMap<>();
 	private ServiceTracker<ServletContext, ServiceReference<ServletContext>>
 		_serviceTracker;
 
