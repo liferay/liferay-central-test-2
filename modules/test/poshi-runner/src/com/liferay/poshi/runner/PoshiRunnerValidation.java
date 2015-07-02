@@ -1043,7 +1043,7 @@ public class PoshiRunnerValidation {
 					new Exception(
 						"Invalid " + propertyValue.trim() +
 							" property value\n" + filePath + ":" +
-							element.attributeValue("line-number")));
+								element.attributeValue("line-number")));
 			}
 		}
 	}
