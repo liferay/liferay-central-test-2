@@ -86,7 +86,7 @@ public class LoaderModulesPortalWebResources {
 		@Override
 		public String getResourceType() {
 			return com.liferay.portal.kernel.servlet.PortalWebResourceConstants.
-				RESOURCE_TYPE_LOADER_MODULES;
+				RESOURCE_TYPE_JS_LOADER_MODULES;
 		}
 
 		@Override
