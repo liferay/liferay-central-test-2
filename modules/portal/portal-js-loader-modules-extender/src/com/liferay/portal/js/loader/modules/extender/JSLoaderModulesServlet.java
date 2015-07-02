@@ -65,13 +65,13 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 @Component(
 	immediate = true,
 	property = {
-		"osgi.http.whiteboard.servlet.name=Loader Modules Servlet",
+		"osgi.http.whiteboard.servlet.name=JS Loader Modules Servlet",
 		"osgi.http.whiteboard.servlet.pattern=/js_loader_modules",
 		"service.ranking:Integer=" + Details.MAX_VALUE_LESS_1K
 	},
-	service = {LoaderModulesServlet.class, Servlet.class}
+	service = {JSLoaderModulesServlet.class, Servlet.class}
 )
-public class LoaderModulesServlet extends HttpServlet
+public class JSLoaderModulesServlet extends HttpServlet
 	implements Servlet, ServiceTrackerCustomizer
 		<ServletContext, ServiceReference<ServletContext>> {
 
