@@ -73,8 +73,8 @@ public class PermissionCacheUtil {
 		for (long userId : userIds) {
 			_userPermissionCheckerBagPortalCache.remove(userId);
 
-			_userRolePortalCacheIndexer.removeKeys(userId);
 			_permissionCheckerBagPortalCacheIndexer.removeKeys(userId);
+			_userRolePortalCacheIndexer.removeKeys(userId);
 		}
 
 		_permissionPortalCache.removeAll();
