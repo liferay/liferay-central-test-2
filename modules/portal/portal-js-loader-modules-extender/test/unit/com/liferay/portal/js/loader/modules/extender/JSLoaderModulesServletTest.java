@@ -91,14 +91,15 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
-		MockHttpServletResponse httpServletResponse =
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		jsLoaderModulesServlet.service(httpServletRequest, httpServletResponse);
+		jsLoaderModulesServlet.service(
+			mockHttpServletRequest, mockHttpServletResponse);
 
-		String content = httpServletResponse.getContentAsString();
+		String content = mockHttpServletResponse.getContentAsString();
 
 		content = content.replace('"', '\'');
 
@@ -108,8 +109,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 			"'test/some.es':{'dependencies':['exports','test@1.0.0/other.es']}",
 			content);
 		assertContains(
-			"'test@1.0.0/some.es':" +
-				"{'dependencies':['exports','test@1.0.0/other.es']}", content);
+			"'test@1.0.0/some.es':{'dependencies':['exports'," +
+				"'test@1.0.0/other.es']}",
+			content);
 		assertContains("'foo': '/foo-13.2.23'", content);
 		assertContains("'foo@13.2.23': '/foo-13.2.23'", content);
 		assertContains(
@@ -117,11 +119,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 				"'jquery@2.15.3/jquery.js']}", content);
 		assertContains(
 			"'foo@13.2.23/foo.es':{'dependencies':['exports'," +
-				"'foo@13.2.23/fum.es','jquery@2.15.3/jquery.js']}", content);
+				"'foo@13.2.23/fum.es','jquery@2.15.3/jquery.js']}",
+			content);
 	}
 
 	@Test
-	public void testMultiVersionModuleOutput() throws Exception {
+	public void testMultipleVersionModuleOutput() throws Exception {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			_buildJSLoaderModulesServlet();
 
@@ -138,14 +141,15 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
-		MockHttpServletResponse httpServletResponse =
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		jsLoaderModulesServlet.service(httpServletRequest, httpServletResponse);
+		jsLoaderModulesServlet.service(
+			mockHttpServletRequest, mockHttpServletResponse);
 
-		String content = httpServletResponse.getContentAsString();
+		String content = mockHttpServletResponse.getContentAsString();
 
 		content = content.replace('"', '\'');
 
@@ -160,10 +164,12 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 			content);
 		assertContains(
 			"'test@1.2.0/some.es':{'dependencies':['exports'," +
-				"'test@1.2.0/other.es']}", content);
+				"'test@1.2.0/other.es']}",
+			content);
 		assertContains(
 			"'test@1.0.0/some.es':{'dependencies':['exports'," +
-				"'test@1.0.0/other.es']}", content);
+				"'test@1.0.0/other.es']}",
+			content);
 	}
 
 	@Test
@@ -178,14 +184,15 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
-		MockHttpServletResponse httpServletResponse =
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		jsLoaderModulesServlet.service(httpServletRequest, httpServletResponse);
+		jsLoaderModulesServlet.service(
+			mockHttpServletRequest, mockHttpServletResponse);
 
-		String content = httpServletResponse.getContentAsString();
+		String content = mockHttpServletResponse.getContentAsString();
 
 		content = content.replace('"', '\'');
 
@@ -196,8 +203,8 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 			content);
 		assertContains("'test/other.es':{'dependencies':['exports']}", content);
 		assertContains(
-			"'test@1.0.0/some.es':" +
-				"{'dependencies':['exports','test@1.0.0/other.es']}",
+			"'test@1.0.0/some.es':{'dependencies':['exports'," +
+				"'test@1.0.0/other.es']}",
 			content);
 		assertContains(
 			"'test@1.0.0/other.es':{'dependencies':['exports']}",
@@ -230,14 +237,15 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		jsLoaderModulesServlet.addingService(serviceReference);
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
-		MockHttpServletResponse httpServletResponse =
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		jsLoaderModulesServlet.service(httpServletRequest, httpServletResponse);
+		jsLoaderModulesServlet.service(
+			mockHttpServletRequest, mockHttpServletResponse);
 
-		String content = httpServletResponse.getContentAsString();
+		String content = mockHttpServletResponse.getContentAsString();
 
 		content = content.replace('"', '\'');
 
@@ -249,8 +257,9 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		assertOccurrences(
 			"'test/other.es':{'dependencies':['exports']}", content, 1);
 		assertOccurrences(
-			"'test@1.0.0/some.es':{'dependencies':" +
-				"['exports','test@1.0.0/other.es']}", content, 1);
+			"'test@1.0.0/some.es':{'dependencies':['exports'," +
+				"'test@1.0.0/other.es']}",
+			content, 1);
 		assertOccurrences(
 			"'test@1.0.0/other.es':{'dependencies':['exports']}", content, 1);
 	}
@@ -278,14 +287,15 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
-		MockHttpServletResponse httpServletResponse =
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		jsLoaderModulesServlet.service(httpServletRequest, httpServletResponse);
+		jsLoaderModulesServlet.service(
+			mockHttpServletRequest, mockHttpServletResponse);
 
-		String content = httpServletResponse.getContentAsString();
+		String content = mockHttpServletResponse.getContentAsString();
 
 		content = content.replace('"', '\'');
 
@@ -299,7 +309,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		JSLoaderModulesServlet jsLoaderModulesServlet =
 			_buildLoaderModulesServlet(
 				Collections.<String, Object>singletonMap(
-				"loader.modules.apply.versioning", Boolean.FALSE));
+					"loader.modules.apply.versioning", Boolean.FALSE));
 
 		ServiceReference<ServletContext> serviceReference =
 			_buildServiceReference(
@@ -308,14 +318,15 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		jsLoaderModulesServlet.addingService(serviceReference);
 
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
-		MockHttpServletResponse httpServletResponse =
+		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		jsLoaderModulesServlet.service(httpServletRequest, httpServletResponse);
+		jsLoaderModulesServlet.service(
+			mockHttpServletRequest, mockHttpServletResponse);
 
-		String content = httpServletResponse.getContentAsString();
+		String content = mockHttpServletResponse.getContentAsString();
 
 		content = content.replace('"', '\'');
 
@@ -329,12 +340,11 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 			content);
 		assertContains("'test/other.es':{'dependencies':['exports']}", content);
 		assertNotContains(
-			"'test@1.0.0/some.es':" +
-				"{'dependencies':['exports','test@1.0.0/other.es']}",
+			"'test@1.0.0/some.es':{'dependencies':['exports'," +
+				"'test@1.0.0/other.es']}",
 			content);
 		assertNotContains(
-			"'test@1.0.0/other.es':{'dependencies':['exports']}",
-			content);
+			"'test@1.0.0/other.es':{'dependencies':['exports']}", content);
 	}
 
 	protected void assertContains(String expected, String content) {
