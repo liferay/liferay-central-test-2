@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.loader.module.extender;
+package com.liferay.portal.js.loader.modules.extender;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Raymond Augé
  */
 @Meta.OCD(
-	id = "com.liferay.portal.loader.module.extender.LoaderModulesServlet",
+	id = "com.liferay.portal.js.loader.modules.extender.LoaderModulesServlet",
 	name = "%Loader Module Servlet Configuration"
 )
 public @interface Details {

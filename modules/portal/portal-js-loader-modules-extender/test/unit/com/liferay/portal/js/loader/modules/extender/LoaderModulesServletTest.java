@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.loader.module.extender;
+package com.liferay.portal.js.loader.modules.extender;
 
 import aQute.bnd.osgi.Constants;
 
@@ -53,7 +53,7 @@ import org.springframework.mock.web.MockServletContext;
  * @author Raymond Augé
  */
 @RunWith(PowerMockRunner.class)
-public class LoaderModuleServletTest extends PowerMockito {
+public class LoaderModulesServletTest extends PowerMockito {
 
 	@Test
 	public void testBasicOutput() throws Exception {
