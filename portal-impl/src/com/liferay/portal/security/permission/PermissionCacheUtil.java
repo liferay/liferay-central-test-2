@@ -306,8 +306,8 @@ public class PermissionCacheUtil {
 		implements IndexEncoder<Long, BagKey> {
 
 		@Override
-		public Long encode(BagKey key) {
-			return key._userId;
+		public Long encode(BagKey bagKey) {
+			return bagKey._userId;
 		}
 
 	}
@@ -371,8 +371,8 @@ public class PermissionCacheUtil {
 		implements IndexEncoder<Long, PermissionKey> {
 
 		@Override
-		public Long encode(PermissionKey key) {
-			return key._groupId;
+		public Long encode(PermissionKey permissionKey) {
+			return permissionKey._groupId;
 		}
 
 	}
@@ -385,8 +385,8 @@ public class PermissionCacheUtil {
 		}
 
 		@Override
-		public String encode(PermissionKey key) {
-			return encode(key._name, key._primKey);
+		public String encode(PermissionKey permissionKey) {
+			return encode(permissionKey._name, permissionKey._primKey);
 		}
 
 	}
@@ -454,8 +454,10 @@ public class PermissionCacheUtil {
 		}
 
 		@Override
-		public String encode(ResourceBlockIdsBagKey key) {
-			return encode(key._companyId, key._groupId, key._name);
+		public String encode(ResourceBlockIdsBagKey resourceBlockIdsBagKey) {
+			return encode(
+				resourceBlockIdsBagKey._companyId,
+				resourceBlockIdsBagKey._groupId, resourceBlockIdsBagKey._name);
 		}
 
 	}
@@ -498,8 +500,8 @@ public class PermissionCacheUtil {
 		implements IndexEncoder<Long, UserRoleKey> {
 
 		@Override
-		public Long encode(UserRoleKey key) {
-			return key._userId;
+		public Long encode(UserRoleKey userRoleKey) {
+			return userRoleKey._userId;
 		}
 
 	}
