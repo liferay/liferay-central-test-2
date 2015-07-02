@@ -425,56 +425,8 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		Bundle bundle, String bsn, Version version, URL url,
 		boolean capability) {
 
-		BundleCapability bundleCapability = mock(BundleCapability.class);
-		BundleWire bundleWire = mock(BundleWire.class);
-		BundleWiring bundleWiring = mock(BundleWiring.class);
-		BundleCapability jQueryBundleCapability = mock(BundleCapability.class);
-
 		doReturn(
-			Collections.<String, Object>singletonMap(
-				Details.OSGI_WEBRESOURCE, bsn)
-		).when(
-			bundleCapability
-		).getAttributes();
-
-		Map<String, Object> jQueryProperties = new HashMap<>();
-
-		jQueryProperties.put(Details.OSGI_WEBRESOURCE, "jquery");
-		jQueryProperties.put(
-			Constants.VERSION_ATTRIBUTE, new Version("2.15.3"));
-
-		doReturn(
-			jQueryProperties
-		).when(
-			jQueryBundleCapability
-		).getAttributes();
-
-		doReturn(
-			capability ?
-				Arrays.asList(bundleCapability) :
-				Collections.emptyList()
-		).when(
-			bundleWiring
-		).getCapabilities(
-			Details.OSGI_WEBRESOURCE
-		);
-
-		doReturn(
-			capability ? Arrays.asList(bundleWire) : Collections.emptyList()
-		).when(
-			bundleWiring
-		).getRequiredWires(
-			Details.OSGI_WEBRESOURCE
-		);
-
-		doReturn(
-			jQueryBundleCapability
-		).when(
-			bundleWire
-		).getCapability();
-
-		doReturn(
-			bundleWiring
+			mockBundleWiring(bsn, capability)
 		).when(
 			bundle
 		).adapt(BundleWiring.class);
@@ -496,6 +448,73 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 		).when(
 			bundle
 		).getVersion();
+	}
+
+	protected BundleCapability mockBundleCapability(String bsn) {
+		BundleCapability bundleCapability = mock(BundleCapability.class);
+
+		doReturn(
+			Collections.<String, Object>singletonMap(
+				Details.OSGI_WEBRESOURCE, bsn)
+		).when(
+			bundleCapability
+		).getAttributes();
+
+		return bundleCapability;
+	}
+
+	protected BundleWire mockBundleWire() {
+		BundleWire bundleWire = mock(BundleWire.class);
+
+		doReturn(
+			mockJQueryBundleCapability()
+		).when(
+			bundleWire
+		).getCapability();
+
+		return bundleWire;
+	}
+
+	protected BundleWiring mockBundleWiring(String bsn, boolean capability) {
+		BundleWiring bundleWiring = mock(BundleWiring.class);
+
+		doReturn(
+			capability ?
+				Arrays.asList(mockBundleCapability(bsn)) :
+				Collections.emptyList()
+		).when(
+			bundleWiring
+		).getCapabilities(
+			Details.OSGI_WEBRESOURCE
+		);
+
+		doReturn(
+			capability ?
+				Arrays.asList(mockBundleWire()) : Collections.emptyList()
+		).when(
+			bundleWiring
+		).getRequiredWires(
+			Details.OSGI_WEBRESOURCE
+		);
+
+		return bundleWiring;
+	}
+
+	protected BundleCapability mockJQueryBundleCapability() {
+		BundleCapability bundleCapability = mock(BundleCapability.class);
+
+		Map<String, Object> properties = new HashMap<>();
+
+		properties.put(Details.OSGI_WEBRESOURCE, "jquery");
+		properties.put(Constants.VERSION_ATTRIBUTE, new Version("2.15.3"));
+
+		doReturn(
+			properties
+		).when(
+			bundleCapability
+		).getAttributes();
+
+		return bundleCapability;
 	}
 
 	private final AtomicInteger _counter = new AtomicInteger(0);
