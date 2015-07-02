@@ -404,7 +404,7 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		mockBundle(bundle, bsn, version, url, capability);
 
-		MockServiceReference mockServiceReference = new MockServiceReference(
+		TestServiceReference mockServiceReference = new TestServiceReference(
 			bundle, new String[] {ServletContext.class.getName()},
 			_counter.incrementAndGet(), ranking);
 
@@ -500,10 +500,10 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 	private final AtomicInteger _counter = new AtomicInteger(0);
 
-	private class MockServiceReference
+	private class TestServiceReference
 		implements ServiceReference<ServletContext> {
 
-		public MockServiceReference(
+		public TestServiceReference(
 			Bundle bundle, String[] objectClasses, int id, int ranking) {
 
 			_bundle = bundle;
@@ -518,22 +518,22 @@ public class JSLoaderModulesServletTest extends PowerMockito {
 
 		@Override
 		public int compareTo(Object object) {
-			MockServiceReference mockServiceReference =
-				(MockServiceReference)object;
+			TestServiceReference testServiceReference =
+				(TestServiceReference)object;
 
-			if (_ranking != mockServiceReference._ranking) {
-				if (_ranking < mockServiceReference._ranking) {
+			if (_ranking != testServiceReference._ranking) {
+				if (_ranking < testServiceReference._ranking) {
 					return -1;
 				}
 
 				return 1;
 			}
 
-			if (_id == mockServiceReference._id) {
+			if (_id == testServiceReference._id) {
 				return 0;
 			}
 
-			if (_id < mockServiceReference._id) {
+			if (_id < testServiceReference._id) {
 				return 1;
 			}
 
