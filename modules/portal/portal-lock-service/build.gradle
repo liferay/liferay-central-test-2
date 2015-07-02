@@ -7,15 +7,10 @@ dependencies {
 
 buildService {
 	apiDirName = "../portal-lock-api/src"
-
 	autoNamespaceTables = false
-
 	hbmFileName = "src/META-INF/module-hbm.xml"
-
 	springFileName = "src/META-INF/module-spring.xml"
-
 	sqlDirName = "src/META-INF/sql"
-
 	testDirName = "../portal-lock-test/test/integration"
 }
 
