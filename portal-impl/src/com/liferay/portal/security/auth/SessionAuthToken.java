@@ -90,7 +90,7 @@ public class SessionAuthToken implements AuthToken {
 
 		if (!csrfToken.equals(sessionToken)) {
 			throw new PrincipalException.MustBeAuthenticated(
-				String.valueOf(PortalUtil.getUserId(request)));
+				PortalUtil.getUserId(request));
 		}
 	}
 

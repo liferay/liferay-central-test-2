@@ -445,7 +445,7 @@ public class ServicePreAction extends Action {
 					PropsValues.AUTH_LOGIN_PROMPT_ENABLED) {
 
 					throw new PrincipalException.MustBeAuthenticated(
-						String.valueOf(user.getUserId()));
+						user.getUserId());
 				}
 
 				sb = new StringBundler(6);

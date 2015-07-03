@@ -29,7 +29,7 @@ if (userId > 0) {
 	selUser = UserLocalServiceUtil.getUser(userId);
 
 	if (selUser.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
-		throw new PrincipalException.MustBeAuthenticated(String.valueOf(userId));
+		throw new PrincipalException.MustBeAuthenticated(userId);
 	}
 
 	selContact = selUser.getContact();
