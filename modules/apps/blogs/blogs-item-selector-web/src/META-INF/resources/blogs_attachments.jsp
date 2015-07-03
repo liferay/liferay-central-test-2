@@ -21,8 +21,6 @@ BlogsItemSelectorViewDisplayContext blogsItemSelectorViewDisplayContext = (Blogs
 
 BlogsItemSelectorCriterion blogsItemSelectorCriterion = blogsItemSelectorViewDisplayContext.getBlogsItemSelectorCriterion();
 
-PortletURL searchURL = PortletURLUtil.clone(blogsItemSelectorViewDisplayContext.getPortletURL(), liferayPortletResponse);
-
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "curDocuments", SearchContainer.DEFAULT_DELTA, blogsItemSelectorViewDisplayContext.getPortletURL(), null, LanguageUtil.get(resourceBundle, "there-are-no-blog-attachments"));
 
 Folder folder = blogsItemSelectorViewDisplayContext.fetchAttachmentsFolder(themeDisplay.getUserId(), scopeGroupId);
@@ -83,7 +81,7 @@ searchContainer.setResults(results);
 	displayStyleURL="<%= blogsItemSelectorViewDisplayContext.getPortletURL() %>"
 	itemSelectedEventName="<%= blogsItemSelectorViewDisplayContext.getItemSelectedEventName() %>"
 	searchContainer="<%= searchContainer %>"
-	searchURL="<%= searchURL %>"
+	searchURL="<%= PortletURLUtil.clone(blogsItemSelectorViewDisplayContext.getPortletURL(), liferayPortletResponse) %>"
 	tabName="<%= blogsItemSelectorViewDisplayContext.getTitle(locale) %>"
 />
 
