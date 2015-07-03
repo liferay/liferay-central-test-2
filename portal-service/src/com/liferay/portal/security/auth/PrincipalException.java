@@ -45,14 +45,14 @@ public class PrincipalException extends PortalException {
 
 	public static class MustBeAuthenticated extends PrincipalException {
 
+		public MustBeAuthenticated(long userId) {
+			this(String.valueOf(userId));
+		}
+
 		public MustBeAuthenticated(String login) {
 			super(String.format("User %s must be authenticated", login));
 
 			this.login = login;
-		}
-
-		public MustBeAuthenticated(long userId) {
-			this(String.valueOf(userId));
 		}
 
 		public final String login;
