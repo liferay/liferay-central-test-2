@@ -76,7 +76,7 @@ writeURL=http://localhost:8983/solr/liferay</echo>
 					<http url="http://localhost:8983/solr" />
 				</waitfor>
 
-				<fail message="Solr server failed to initialized." if="solr.server.not.started" />
+				<fail message="Solr server failed to initialize." if="solr.server.not.started" />
 
 				<exec executable="/bin/bash" os="${os.unix}">
 					<arg value="-c" />
@@ -93,7 +93,7 @@ writeURL=http://localhost:8983/solr/liferay</echo>
 					<http url="http://localhost:8983/solr" />
 				</waitfor>
 
-				<fail message="Solr server failed to initialized." if="solr.server.not.started" />
+				<fail message="Solr server failed to initialize." if="solr.server.not.started" />
 
 				<exec executable="cmd" >
 					<arg value="/c" />
