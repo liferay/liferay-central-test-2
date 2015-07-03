@@ -1062,7 +1062,7 @@ public class LiferaySeleniumHelper {
 			return true;
 		}
 
-		// LPS-56767, temporary workaround while WCM devs investigate it
+		// LPS-56767, temporary workaround until Eudaldo Alonso fixes it
 
 		if (line.matches(
 				".*\\java.io.FileNotFoundException: " +
