@@ -21,8 +21,6 @@ WikiAttachmentItemSelectorViewDisplayContext wikiAttachmentItemSelectorViewDispl
 
 WikiAttachmentItemSelectorCriterion wikiAttachmentItemSelectorCriterion = wikiAttachmentItemSelectorViewDisplayContext.getWikiAttachmentItemSelectorCriterion();
 
-PortletURL searchURL = PortletURLUtil.clone(wikiAttachmentItemSelectorViewDisplayContext.getPortletURL(), liferayPortletResponse);
-
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "curPageAttachments", SearchContainer.DEFAULT_DELTA, wikiAttachmentItemSelectorViewDisplayContext.getPortletURL(), null, LanguageUtil.get(request, "there-are-no-wiki-attachments"));
 
 WikiPage wikiPage = wikiAttachmentItemSelectorViewDisplayContext.getWikiPage();
@@ -83,10 +81,10 @@ searchContainer.setResults(results);
 	displayStyleURL="<%= wikiAttachmentItemSelectorViewDisplayContext.getPortletURL() %>"
 	itemSelectedEventName="<%= wikiAttachmentItemSelectorViewDisplayContext.getItemSelectedEventName() %>"
 	searchContainer="<%= searchContainer %>"
-	searchURL="<%= searchURL %>"
+	searchURL="<%= PortletURLUtil.clone(wikiAttachmentItemSelectorViewDisplayContext.getPortletURL(), liferayPortletResponse) %>"
 	tabName="<%= wikiAttachmentItemSelectorViewDisplayContext.getTitle(locale) %>"
 />
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("com_liferay_wiki_web.wiki_page_attachments_jsp");
+private static Log _log = LogFactoryUtil.getLog("com_liferay_wiki_web.html.item.selector.wiki_page_attachments_jsp");
 %>
