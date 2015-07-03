@@ -85,8 +85,7 @@ public class VerifyCalendar extends VerifyProcess {
 		for (com.liferay.portlet.calendar.model.CalEvent event : events) {
 			try {
 				com.liferay.portlet.calendar.service.CalEventLocalServiceUtil.
-					updateAsset(
-						event.getUserId(), event, null, null, null);
+					updateAsset(event.getUserId(), event, null, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
