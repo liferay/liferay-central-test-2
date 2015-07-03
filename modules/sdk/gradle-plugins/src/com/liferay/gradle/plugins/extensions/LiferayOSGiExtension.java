@@ -45,6 +45,12 @@ public class LiferayOSGiExtension extends LiferayExtension {
 
 		map.put(Constants.BUNDLE_SYMBOLICNAME, project.getName());
 		map.put(Constants.BUNDLE_VENDOR, "Liferay, Inc.");
+		map.put(Constants.DONOTCOPY, "(.touch)");
+		map.put(Constants.DSANNOTATIONS, "*");
+		map.put(Constants.METATYPE, "*");
+		map.put(
+			Constants.PLUGIN, StringUtil.merge(_BND_PLUGIN_CLASS_NAMES, ","));
+		map.put(Constants.SOURCES, "false");
 
 		map.put(
 			"Git-Descriptor",
@@ -68,13 +74,6 @@ public class LiferayOSGiExtension extends LiferayExtension {
 		}
 
 		map.put("Javac-Encoding", encoding);
-
-		map.put(Constants.DONOTCOPY, "(.touch)");
-		map.put(Constants.DSANNOTATIONS, "*");
-		map.put(Constants.METATYPE, "*");
-		map.put(
-			Constants.PLUGIN, StringUtil.merge(_BND_PLUGIN_CLASS_NAMES, ","));
-		map.put(Constants.SOURCES, "false");
 
 		map.put("-jsp", "*.jsp,*.jspf");
 		map.put("-sass", "*");
