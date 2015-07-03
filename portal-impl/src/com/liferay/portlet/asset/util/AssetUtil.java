@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortletConstants;
@@ -552,10 +551,7 @@ public class AssetUtil {
 	}
 
 	public static String getDefaultAssetPublisherId(Layout layout) {
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		return typeSettingsProperties.getProperty(
+		return layout.getTypeSettingsProperty(
 			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
 			StringPool.BLANK);
 	}
@@ -594,14 +590,6 @@ public class AssetUtil {
 
 		String defaultAssetPublisherPortletId = getDefaultAssetPublisherId(
 			layout);
-
-		return isDefaultAssetPublisher(
-			defaultAssetPublisherPortletId, portletId, portletResource);
-	}
-
-	public static boolean isDefaultAssetPublisher(
-		String defaultAssetPublisherPortletId, String portletId,
-		String portletResource) {
 
 		if (Validator.isNull(defaultAssetPublisherPortletId)) {
 			return false;
