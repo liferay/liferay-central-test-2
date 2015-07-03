@@ -114,8 +114,8 @@ public class PrincipalException extends PortalException {
 	}
 
 	private static final Class<?>[] _NESTED_CLASSES = {
-		PrincipalException.class, PrincipalException.MustHavePermission.class,
-		PrincipalException.MustBeAuthenticated.class
+		PrincipalException.class, PrincipalException.MustBeAuthenticated.class,
+		PrincipalException.MustHavePermission.class
 	};
 
 }
