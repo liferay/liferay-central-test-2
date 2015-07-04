@@ -45,8 +45,6 @@ page import="com.liferay.wiki.web.item.selector.view.display.context.WikiAttachm
 <%@ page import="java.util.ArrayList" %><%@
 page import="java.util.List" %>
 
-<%@ page import="javax.portlet.PortletURL" %>
-
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
