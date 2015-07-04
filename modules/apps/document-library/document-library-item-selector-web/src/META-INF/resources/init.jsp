@@ -42,8 +42,6 @@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
 <%@ page import="java.util.ArrayList" %><%@
 page import="java.util.List" %>
 
-<%@ page import="javax.portlet.PortletURL" %>
-
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects/>
