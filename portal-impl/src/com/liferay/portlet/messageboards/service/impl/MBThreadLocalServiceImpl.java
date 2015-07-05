@@ -1180,6 +1180,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			MBThread.class);
 
 		indexer.reindex(oldThread);
+
 		indexer.reindex(message.getThread());
 
 		return thread;
