@@ -191,10 +191,9 @@ public class CSSBuilder {
 
 		directoryScanner.setExcludes(
 			new String[] {
-				"**\\_diffs\\**", "**\\.sass-cache*\\**",
+				"**\\_*.scss", "**\\_diffs\\**", "**\\.sass-cache*\\**",
 				"**\\.sass_cache_*\\**", "**\\_sass_cache_*\\**",
-				"**\\_styled\\**", "**\\_unstyled\\**", "**\\tmp\\**",
-				"**\\_*.scss"
+				"**\\_styled\\**", "**\\_unstyled\\**", "**\\tmp\\**"
 			});
 		directoryScanner.setIncludes(new String[] {"**\\*.css", "**\\*.scss"});
 

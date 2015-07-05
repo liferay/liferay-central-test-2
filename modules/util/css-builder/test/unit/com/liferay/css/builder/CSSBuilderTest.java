@@ -108,13 +108,15 @@ public class CSSBuilderTest {
 
 		String expectedCacheContent = _read(
 			_docrootDirName + "/expected/test.css");
-		String testCacheContent = _read(
+		String actualTestCacheContent = _read(
 			_docrootDirName + "/css/.sass-cache/test.css");
-		String mainCacheContent = _read(
+
+		Assert.assertEquals(expectedCacheContent, actualTestCacheContent);
+
+		String actualMainCacheContent = _read(
 			_docrootDirName + "/css/.sass-cache/main.css");
 
-		Assert.assertEquals(expectedCacheContent, testCacheContent);
-		Assert.assertEquals(expectedCacheContent, mainCacheContent);
+		Assert.assertEquals(expectedCacheContent, actualMainCacheContent);
 
 		File file = new File(
 			Paths.get("/css/.sass-cache/_partial.css").toString());
@@ -123,13 +125,15 @@ public class CSSBuilderTest {
 
 		String expectedRtlCacheContent = _read(
 			_docrootDirName + "/expected/test_rtl.css");
-		String testRtlCacheContent = _read(
+		String actualTestRtlCacheContent = _read(
 			_docrootDirName + "/css/.sass-cache/test_rtl.css");
-		String mainRtlCacheContent = _read(
+
+		Assert.assertEquals(expectedRtlCacheContent, actualTestRtlCacheContent);
+
+		String actualMainRtlCacheContent = _read(
 			_docrootDirName + "/css/.sass-cache/main_rtl.css");
 
-		Assert.assertEquals(expectedRtlCacheContent, testRtlCacheContent);
-		Assert.assertEquals(expectedRtlCacheContent, mainRtlCacheContent);
+		Assert.assertEquals(expectedRtlCacheContent, actualMainRtlCacheContent);
 	}
 
 	private static String _docrootDirName;
