@@ -458,8 +458,7 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 		StringBundler sb, Stack<String> tags, BBCodeItem bbCodeItem) {
 
 		String tag = "ul";
-
-		StringBundler listAttributes = new StringBundler();
+		StringBundler attributesSB = new StringBundler();
 
 		Matcher matcher = _attributesPattern.matcher(bbCodeItem.getAttribute());
 
@@ -480,23 +479,23 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 				}
 
 				if (Validator.isNotNull(listStyle)) {
-					listAttributes.append(" style=\"");
-					listAttributes.append(listStyle);
-					listAttributes.append("\"");
+					attributesSB.append(" style=\"");
+					attributesSB.append(listStyle);
+					attributesSB.append("\"");
 				}
 			}
 			else if (Validator.equals(attributeName, "start") &&
 					 Validator.isNumber(attributeValue)) {
 
-				listAttributes.append(" start=\"");
-				listAttributes.append(attributeValue);
-				listAttributes.append("\"");
+				attributesSB.append(" start=\"");
+				attributesSB.append(attributeValue);
+				attributesSB.append("\"");
 			}
 		}
 
 		sb.append("<");
 		sb.append(tag);
-		sb.append(listAttributes);
+		sb.append(attributesSB);
 		sb.append(">");
 
 		tags.push("</" + tag + ">");
