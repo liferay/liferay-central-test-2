@@ -158,7 +158,7 @@ public class IndexerPostProcessorRegistryTest {
 
 	@Test
 	public void testSingleModelIndexerPostProcessor() throws Exception {
-		Indexer contactIndexer = IndexerRegistryUtil.getIndexer(
+		Indexer<Contact> contactIndexer = IndexerRegistryUtil.getIndexer(
 			Contact.class.getName());
 
 		IndexerPostProcessor[] contactIndexerPostProcessors =
