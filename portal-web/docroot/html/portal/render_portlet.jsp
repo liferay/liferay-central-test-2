@@ -165,11 +165,12 @@ String responseContentType = renderRequestImpl.getResponseContentType();
 String currentURL = PortalUtil.getCurrentURL(request);
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-Portlet portletResourcePortlet = null;
 
 if (Validator.isNull(portletResource)) {
 	portletResource = ParamUtil.getString(renderRequestImpl, "portletResource");
 }
+
+Portlet portletResourcePortlet = null;
 
 if (Validator.isNotNull(portletResource)) {
 	portletResourcePortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
@@ -693,7 +694,6 @@ else if (portletDisplay.isModePrint()) {
 	urlBack = urlPrint.toString();
 }
 else if (portletDisplay.isStateMax()) {
-
 	if (portletDisplay.getId().startsWith("WSRP_")) {
 		urlBack = portletDisplay.getURLBack();
 	}
