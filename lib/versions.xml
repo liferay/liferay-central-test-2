@@ -396,10 +396,10 @@
 				<file-name>lib/development/javacpp.jar</file-name>
 				<version>0.9</version>
 				<project-name>JavaCPP</project-name>
-				<project-url>http://bytedeco.org/javacpp/</project-url>
+				<project-url>http://bytedeco.org/javacpp</project-url>
 				<licenses>
 					<license>
-						<license-name>GPLv2 with Classpath exception</license-name>
+						<license-name>GNU Classpath</license-name>
 						<license-url>http://www.gnu.org/software/classpath/license.html</license-url>
 					</license>
 				</licenses>
@@ -480,7 +480,7 @@
 				<licenses>
 					<license>
 						<license-name>BSD Style License</license-name>
-						<license-url>http://www.jcraft.com/jsch/LICENSE.txt</license-url>
+						<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 					</license>
 				</licenses>
 			</library>
@@ -646,12 +646,12 @@
 			<library>
 				<file-name>lib/development/opencv.jar</file-name>
 				<version>2.4.9-0.9</version>
-				<project-name>JavaCPP Presets For OpenCV</project-name>
+				<project-name>JavaCPP Presets for OpenCV</project-name>
 				<project-url>https://github.com/bytedeco/javacpp-presets/tree/master/opencv</project-url>
 				<licenses>
 					<license>
-						<license-name>BSD license</license-name>
-						<license-url>http://www.opencv.org/license.html</license-url>
+						<license-name>BSD Style License</license-name>
+						<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 					</license>
 				</licenses>
 			</library>
@@ -709,24 +709,24 @@
 			<library>
 				<file-name>lib/development/piccolo2d-core.jar</file-name>
 				<version>1.3.1</version>
-				<project-name>Piccolo2D Core</project-name>
-				<project-url>http://code.google.com/p/piccolo2d/</project-url>
+				<project-name>Piccolo2D</project-name>
+				<project-url>http://code.google.com/p/piccolo2d</project-url>
 				<licenses>
 					<license>
-						<license-name>BSD license</license-name>
-						<license-url>http://opensource.org/licenses/BSD-3-Clause</license-url>
+						<license-name>BSD Style License</license-name>
+						<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 					</license>
 				</licenses>
 			</library>
 			<library>
 				<file-name>lib/development/piccolo2d-extras.jar</file-name>
 				<version>1.3.1</version>
-				<project-name>Piccolo2D Extras</project-name>
-				<project-url>http://code.google.com/p/piccolo2d/</project-url>
+				<project-name>Piccolo2D</project-name>
+				<project-url>http://code.google.com/p/piccolo2d</project-url>
 				<licenses>
 					<license>
-						<license-name>BSD license</license-name>
-						<license-url>http://opensource.org/licenses/BSD-3-Clause</license-url>
+						<license-name>BSD Style License</license-name>
+						<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 					</license>
 				</licenses>
 			</library>
