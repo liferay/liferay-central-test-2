@@ -31,8 +31,8 @@ import com.liferay.portlet.portletconfiguration.util.PortletConfigurationApplica
 	},
 	service = ViewPortletProvider.class
 )
-public class PortletConfigurationViewPortletProvider extends BasePortletProvider
-	implements ViewPortletProvider {
+public class PortletConfigurationViewPortletProvider
+	extends BasePortletProvider implements ViewPortletProvider {
 
 	@Override
 	public String getPortletId() {
