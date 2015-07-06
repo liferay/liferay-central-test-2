@@ -19,8 +19,6 @@
 <%
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
 
-String summary = StringUtil.shorten(assetRenderer.getSummary(renderRequest, renderResponse), Integer.MAX_VALUE);
-
 boolean showHeader = ParamUtil.getBoolean(request, "showHeader");
 %>
 
@@ -29,5 +27,9 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader");
 		title="<%= assetRenderer.getTitle(locale) %>"
 	/>
 </c:if>
+
+<%
+String summary = StringUtil.shorten(assetRenderer.getSummary(renderRequest, renderResponse), Integer.MAX_VALUE);
+%>
 
 <%= HtmlUtil.escape(summary) %>
