@@ -125,8 +125,8 @@ public class IndexerRegistryImpl implements IndexerRegistry {
 	private final Indexer<?> _dummyIndexer = new DummyIndexer();
 	private final Map<String, Indexer<? extends Object>> _indexers =
 		new ConcurrentHashMap<>();
-	private final StringServiceRegistrationMap<Indexer<?>> _serviceRegistrations =
-		new StringServiceRegistrationMap<>();
+	private final StringServiceRegistrationMap<Indexer<?>>
+		_serviceRegistrations = new StringServiceRegistrationMap<>();
 	private ServiceTracker<Indexer<?>, Indexer<?>> _serviceTracker;
 
 	private class IndexerServiceTrackerCustomizer
