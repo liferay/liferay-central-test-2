@@ -50,16 +50,13 @@ class ServiceReferenceServiceTupleComparator<S>
 		ServiceReference<S> serviceReference2 =
 			serviceReferenceServiceTuple2.getServiceReference();
 
-		int compare = _comparator.compare(serviceReference1, serviceReference2);
+		int value = _comparator.compare(serviceReference1, serviceReference2);
 
-		// If the provided comparator finds the ServiceReferences to be equal we
-		// resort to the ServiceReference natural order so no one is discarded.
-
-		if (compare == 0) {
+		if (value == 0) {
 			return serviceReference1.compareTo(serviceReference2);
 		}
 
-		return compare;
+		return value;
 	}
 
 	private final Comparator<ServiceReference<S>> _comparator;
