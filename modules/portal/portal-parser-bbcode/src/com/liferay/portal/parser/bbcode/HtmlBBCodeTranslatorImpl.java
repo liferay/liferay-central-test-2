@@ -49,29 +49,6 @@ import org.osgi.service.component.annotations.Component;
 public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 
 	public HtmlBBCodeTranslatorImpl() {
-		_orderedListStyles = new HashMap<>();
-
-		_orderedListStyles.put("a", "list-style: lower-alpha outside;");
-		_orderedListStyles.put("A", "list-style: upper-alpha outside;");
-		_orderedListStyles.put("1", "list-style: decimal outside;");
-		_orderedListStyles.put("i", "list-style: lower-roman outside;");
-		_orderedListStyles.put("I", "list-style: upper-roman outside;");
-
-		_unorderedListStyles = new HashMap<>();
-
-		_unorderedListStyles.put("circle", "list-style: circle outside;");
-		_unorderedListStyles.put("disc", "list-style: disc outside;");
-		_unorderedListStyles.put("square", "list-style: square outside;");
-
-		_excludeNewLineTypes = new HashMap<>();
-
-		_excludeNewLineTypes.put("*", BBCodeParser.TYPE_TAG_START_END);
-		_excludeNewLineTypes.put("li", BBCodeParser.TYPE_TAG_START_END);
-		_excludeNewLineTypes.put("table", BBCodeParser.TYPE_TAG_END);
-		_excludeNewLineTypes.put("td", BBCodeParser.TYPE_TAG_START_END);
-		_excludeNewLineTypes.put("th", BBCodeParser.TYPE_TAG_START_END);
-		_excludeNewLineTypes.put("tr", BBCodeParser.TYPE_TAG_START_END);
-
 		_bbCodeCharacters = new HashMap<>();
 
 		_bbCodeCharacters.put("&", "&amp;");
@@ -107,10 +84,33 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 			emoticon[0] = sb.toString();
 		}
 
+		_excludeNewLineTypes = new HashMap<>();
+
+		_excludeNewLineTypes.put("*", BBCodeParser.TYPE_TAG_START_END);
+		_excludeNewLineTypes.put("li", BBCodeParser.TYPE_TAG_START_END);
+		_excludeNewLineTypes.put("table", BBCodeParser.TYPE_TAG_END);
+		_excludeNewLineTypes.put("td", BBCodeParser.TYPE_TAG_START_END);
+		_excludeNewLineTypes.put("th", BBCodeParser.TYPE_TAG_START_END);
+		_excludeNewLineTypes.put("tr", BBCodeParser.TYPE_TAG_START_END);
+
 		_imageAttributes = new HashSet<String>(
 			Arrays.asList(
 				"alt", "class", "dir", "height", "id", "lang", "longdesc",
 				"style", "title", "width"));
+
+		_orderedListStyles = new HashMap<>();
+
+		_orderedListStyles.put("a", "list-style: lower-alpha outside;");
+		_orderedListStyles.put("A", "list-style: upper-alpha outside;");
+		_orderedListStyles.put("1", "list-style: decimal outside;");
+		_orderedListStyles.put("i", "list-style: lower-roman outside;");
+		_orderedListStyles.put("I", "list-style: upper-roman outside;");
+
+		_unorderedListStyles = new HashMap<>();
+
+		_unorderedListStyles.put("circle", "list-style: circle outside;");
+		_unorderedListStyles.put("disc", "list-style: disc outside;");
+		_unorderedListStyles.put("square", "list-style: square outside;");
 	}
 
 	@Override
