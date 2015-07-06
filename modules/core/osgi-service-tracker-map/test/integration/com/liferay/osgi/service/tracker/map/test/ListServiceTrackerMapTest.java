@@ -164,13 +164,17 @@ public class ListServiceTrackerMapTest {
 			});
 
 		TrackedOne trackedOne1 = new TrackedOne();
-		TrackedOne trackedOne2 = new TrackedOne();
-		TrackedOne trackedOne3 = new TrackedOne();
 
 		ServiceRegistration<TrackedOne> serviceRegistration1 = registerService(
 			trackedOne1);
+
+		TrackedOne trackedOne2 = new TrackedOne();
+
 		ServiceRegistration<TrackedOne> serviceRegistration2 = registerService(
 			trackedOne2);
+
+		TrackedOne trackedOne3 = new TrackedOne();
+
 		ServiceRegistration<TrackedOne> serviceRegistration3 = registerService(
 			trackedOne3);
 
@@ -182,7 +186,6 @@ public class ListServiceTrackerMapTest {
 		// changes
 
 		Assert.assertEquals(2, services.size());
-
 		Assert.assertTrue(services.contains(trackedOne1));
 		Assert.assertTrue(services.contains(trackedOne3));
 
