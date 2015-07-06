@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -95,10 +94,6 @@ public class PermissionsURLTag extends TagSupport {
 			resourceGroupId = String.valueOf(themeDisplay.getScopeGroupId());
 		}
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		Layout layout = themeDisplay.getLayout();
-
 		if (Validator.isNull(redirect) &&
 			(Validator.isNull(windowState) ||
 			 !windowState.equals(LiferayWindowState.POP_UP.toString()))) {
@@ -134,7 +129,10 @@ public class PermissionsURLTag extends TagSupport {
 			}
 		}
 
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
 		portletURL.setParameter("portletResource", portletDisplay.getId());
+
 		portletURL.setParameter("modelResource", modelResource);
 		portletURL.setParameter(
 			"modelResourceDescription", modelResourceDescription);
