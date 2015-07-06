@@ -5243,20 +5243,19 @@ public class PortalImpl implements Portal {
 			if (timestamp == 0) {
 				String portalURL = getPortalURL(request);
 
-				String requestPath = StringUtil.replace(
+				String path = StringUtil.replace(
 					uri, portalURL, StringPool.BLANK);
 
-				if (requestPath.startsWith(StrutsUtil.TEXT_HTML_DIR)) {
+				if (path.startsWith(StrutsUtil.TEXT_HTML_DIR)) {
 					ServletContext servletContext =
 						(ServletContext)request.getAttribute(WebKeys.CTX);
 
 					timestamp = ServletContextUtil.getLastModified(
-						servletContext, requestPath, true);
+						servletContext, path, true);
 				}
-				else if (PortalWebResourcesUtil.hasContextPath(requestPath)) {
+				else if (PortalWebResourcesUtil.hasContextPath(path)) {
 					timestamp = PortalWebResourcesUtil.getLastModified(
-						PortalWebResourcesUtil.getPathResourceType(
-							requestPath));
+						PortalWebResourcesUtil.getPathResourceType(path));
 				}
 				else {
 					timestamp = theme.getTimestamp();
