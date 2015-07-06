@@ -109,8 +109,6 @@ public class ActionUtil {
 				sourcePreferences, targetPreferences, sourcePortletId,
 				themeDisplay.getLanguageId());
 
-			// Fire portlet layout listener event
-
 			Portlet sourcePortlet = PortletLocalServiceUtil.getPortletById(
 				sourceLayout.getCompanyId(), sourcePortletId);
 
