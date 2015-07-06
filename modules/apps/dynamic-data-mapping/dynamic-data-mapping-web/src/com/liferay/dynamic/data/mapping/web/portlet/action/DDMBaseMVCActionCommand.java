@@ -161,8 +161,7 @@ public abstract class DDMBaseMVCActionCommand extends BaseMVCActionCommand {
 				layout, portletId);
 
 		if (portletPreferences instanceof StrictPortletPreferencesImpl) {
-			throw new PortletPreferencesException.MustBeStrictPortlet(
-				portletId);
+			throw new PortletPreferencesException.MustBeStrict(portletId);
 		}
 
 		return portletPreferences;

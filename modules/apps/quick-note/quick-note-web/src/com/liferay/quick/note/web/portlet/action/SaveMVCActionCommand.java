@@ -65,7 +65,7 @@ public class SaveMVCActionCommand implements MVCActionCommand {
 					themeDisplay.getLayout(), themeDisplay.getPpid());
 
 			if (portletPreferences instanceof StrictPortletPreferencesImpl) {
-				throw new PortletPreferencesException.MustBeStrictPortlet(
+				throw new PortletPreferencesException.MustBeStrict(
 					themeDisplay.getPpid());
 			}
 

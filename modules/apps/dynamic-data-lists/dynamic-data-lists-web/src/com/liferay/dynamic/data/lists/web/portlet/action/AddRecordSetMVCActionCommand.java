@@ -116,8 +116,7 @@ public class AddRecordSetMVCActionCommand extends BaseMVCActionCommand {
 				layout, portletId);
 
 		if (portletPreferences instanceof StrictPortletPreferencesImpl) {
-			throw new PortletPreferencesException.MustBeStrictPortlet(
-				portletId);
+			throw new PortletPreferencesException.MustBeStrict(portletId);
 		}
 
 		return portletPreferences;

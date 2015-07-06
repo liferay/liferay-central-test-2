@@ -118,8 +118,7 @@ public class DDLDisplayPortlet extends MVCPortlet {
 				renderRequest, NoSuchRecordSetException.class.getName()) ||
 			SessionErrors.contains(
 				renderRequest,
-				PortletPreferencesException.
-					MustBeStrictPortlet.class.getName()) ||
+				PortletPreferencesException.MustBeStrict.class.getName()) ||
 			SessionErrors.contains(
 				renderRequest, PrincipalException.getNestedClasses())) {
 
