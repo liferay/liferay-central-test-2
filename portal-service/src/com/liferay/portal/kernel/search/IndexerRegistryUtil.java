@@ -57,11 +57,11 @@ public class IndexerRegistryUtil {
 	 * @deprecated As of 7.0.0, replaced by {@link #register(Indexer)}
 	 */
 	@Deprecated
-	public static void register(String className, Indexer indexer) {
+	public static void register(String className, Indexer<?> indexer) {
 		getIndexerRegistry().register(indexer);
 	}
 
-	public static void unregister(Indexer indexer) {
+	public static void unregister(Indexer<?> indexer) {
 		getIndexerRegistry().unregister(indexer);
 	}
 
