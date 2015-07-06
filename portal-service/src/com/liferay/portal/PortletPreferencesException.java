@@ -28,7 +28,8 @@ public class PortletPreferencesException extends PortalException {
 			super(
 				String.format(
 					"Portlet preferences for portlet %s must be an instance " +
-					"of StrictPortletPreferencesImpl", portletId));
+						"of StrictPortletPreferencesImpl",
+					portletId));
 
 			this.portletId = portletId;
 		}
