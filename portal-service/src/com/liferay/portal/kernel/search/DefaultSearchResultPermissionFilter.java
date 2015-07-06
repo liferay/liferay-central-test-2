@@ -94,7 +94,7 @@ public class DefaultSearchResultPermissionFilter
 		return _baseIndexer.doSearch(searchContext);
 	}
 
-	private final BaseIndexer _baseIndexer;
+	private final BaseIndexer<?> _baseIndexer;
 	private final PermissionChecker _permissionChecker;
 
 }

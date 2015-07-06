@@ -97,7 +97,7 @@ public class BaseRelatedEntryIndexer implements RelatedEntryIndexer {
 	@Deprecated
 	protected void postProcessContextQuery(
 			BooleanFilter relatedBooleanFilter, SearchContext searchContext,
-			Indexer indexer)
+			Indexer<?> indexer)
 		throws Exception {
 
 		BooleanQuery entityQuery = new BooleanQueryImpl();
