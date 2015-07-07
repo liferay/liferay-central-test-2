@@ -37,7 +37,6 @@ import com.liferay.portal.model.Region;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RegionModelImpl;
 import com.liferay.portal.service.persistence.RegionPersistence;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
 

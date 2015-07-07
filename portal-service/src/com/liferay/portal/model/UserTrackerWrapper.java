@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -319,8 +318,7 @@ public class UserTrackerWrapper implements UserTracker,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_userTracker.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -447,7 +445,7 @@ public class UserTrackerWrapper implements UserTracker,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.UserTracker> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.UserTracker> toCacheModel() {
 		return _userTracker.toCacheModel();
 	}
 
