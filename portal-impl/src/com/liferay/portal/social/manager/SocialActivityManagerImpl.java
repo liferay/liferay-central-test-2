@@ -100,7 +100,6 @@ public class SocialActivityManagerImpl<T extends ClassedModel & GroupedModel>
 		_serviceTrackerMap.open();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected SocialActivityManager<T> getSocialActivityManager(
 		String className) {
 
@@ -116,15 +115,16 @@ public class SocialActivityManagerImpl<T extends ClassedModel & GroupedModel>
 
 	private final SocialActivityManager<T> _defaultSocialActivityManager;
 
-	@SuppressWarnings("rawtypes")
-	private final ServiceTrackerMap<String, SocialActivityManager>
+	private final ServiceTrackerMap<String, SocialActivityManager<T>>
 		_serviceTrackerMap = ServiceTrackerCollections.singleValueMap(
-			SocialActivityManager.class, "(model.className=*)",
-			new ServiceReferenceMapper<String, SocialActivityManager>() {
+			(Class<SocialActivityManager<T>>)(Class<?>)
+				SocialActivityManager.class,
+			"(model.className=*)",
+			new ServiceReferenceMapper<String, SocialActivityManager<T>>() {
 
 				@Override
 				public void map(
-					ServiceReference<SocialActivityManager> serviceReference,
+					ServiceReference<SocialActivityManager<T>> serviceReference,
 					Emitter<String> emitter) {
 
 					String modelClassName =
