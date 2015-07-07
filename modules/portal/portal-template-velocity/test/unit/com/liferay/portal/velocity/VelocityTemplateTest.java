@@ -405,8 +405,9 @@ public class VelocityTemplateTest {
 			Mockito.when(
 				multiVMPool.getCache(Mockito.anyString())
 			).thenAnswer(
-				new Answer<PortalCache<? extends Serializable,
-				? extends Serializable>>() {
+				new Answer
+					<PortalCache
+						<? extends Serializable, ? extends Serializable>>() {
 
 					@Override
 					public PortalCache
@@ -417,8 +418,8 @@ public class VelocityTemplateTest {
 						return portalCacheManager.getCache(
 							RandomTestUtil.randomString());
 					}
-				}
-			);
+
+				});
 
 			setMultiVMPool(multiVMPool);
 
