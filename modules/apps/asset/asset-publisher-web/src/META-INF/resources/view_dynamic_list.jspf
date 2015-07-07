@@ -17,9 +17,9 @@
 <%
 List<Tuple> assetEntryResults = assetPublisherDisplayContext.getAssetEntryResults(searchContainer);
 
-for (Tuple tuple : assetEntryResults) {
-	String categoryTitle = (String)tuple.getObject(0);
-	List<AssetEntry> results = (List<AssetEntry>)tuple.getObject(1);
+for (Tuple assetEntryResult : assetEntryResults) {
+	String categoryTitle = (String)assetEntryResult.getObject(0);
+	List<AssetEntry> results = (List<AssetEntry>)assetEntryResult.getObject(1);
 %>
 
 	<c:if test="<%= Validator.isNotNull(categoryTitle) %>">
