@@ -30,10 +30,10 @@ import com.liferay.portal.repository.capabilities.util.RepositoryServiceAdapter;
 public class ConfigurationCapabilityImpl implements ConfigurationCapability {
 
 	public ConfigurationCapabilityImpl(
-		DocumentRepository repository,
+		DocumentRepository documentRepository,
 		RepositoryServiceAdapter repositoryServiceAdapter) {
 
-		_repository = repository;
+		_documentRepository = documentRepository;
 		_repositoryServiceAdapter = repositoryServiceAdapter;
 	}
 
@@ -41,7 +41,7 @@ public class ConfigurationCapabilityImpl implements ConfigurationCapability {
 	public String getProperty(Class<? extends Capability> owner, String key) {
 		try {
 			Repository repository = _repositoryServiceAdapter.getRepository(
-				_repository.getRepositoryId());
+				_documentRepository.getRepositoryId());
 
 			UnicodeProperties typeSettingsProperties =
 				repository.getTypeSettingsProperties();
@@ -61,7 +61,7 @@ public class ConfigurationCapabilityImpl implements ConfigurationCapability {
 
 		try {
 			Repository repository = _repositoryServiceAdapter.getRepository(
-				_repository.getRepositoryId());
+				_documentRepository.getRepositoryId());
 
 			UnicodeProperties typeSettingsProperties =
 				repository.getTypeSettingsProperties();
@@ -87,7 +87,7 @@ public class ConfigurationCapabilityImpl implements ConfigurationCapability {
 		return clazz.getName() + StringPool.POUND + key;
 	}
 
-	private final DocumentRepository _repository;
+	private final DocumentRepository _documentRepository;
 	private final RepositoryServiceAdapter _repositoryServiceAdapter;
 
 }
