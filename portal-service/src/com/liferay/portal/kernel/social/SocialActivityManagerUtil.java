@@ -62,14 +62,13 @@ public class SocialActivityManagerUtil {
 		getSocialActivityManager().deleteActivities(classedModel);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T extends ClassedModel & GroupedModel>
 		SocialActivityManager<T> getSocialActivityManager() {
 
 		PortalRuntimePermission.checkGetBeanProperty(
 			SocialActivityManagerUtil.class);
 
-		return _socialActivityManager;
+		return (SocialActivityManager<T>)_socialActivityManager;
 	}
 
 	public static <T extends ClassedModel & GroupedModel>
@@ -90,7 +89,6 @@ public class SocialActivityManagerUtil {
 		_socialActivityManager = socialActivityManager;
 	}
 
-	@SuppressWarnings("rawtypes")
-	private static SocialActivityManager _socialActivityManager;
+	private static SocialActivityManager<?> _socialActivityManager;
 
 }
