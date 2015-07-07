@@ -217,9 +217,6 @@
 			<bean class="com.liferay.portal.repository.util.RepositoryTrashImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.repository.liferayrepository.social.LiferayFileEntrySocialActivityManager" class="com.liferay.portal.repository.liferayrepository.social.LiferayFileEntrySocialActivityManager" />
-	<bean id="com.liferay.portal.repository.liferayrepository.social.LiferayFileShortcutSocialActivityManager" class="com.liferay.portal.repository.liferayrepository.social.LiferayFileShortcutSocialActivityManager" />
-	<bean id="com.liferay.portal.repository.liferayrepository.social.LiferayFolderSocialActivityManager" class="com.liferay.portal.repository.liferayrepository.social.LiferayFolderSocialActivityManager" />
 	<bean id="com.liferay.portal.kernel.resiliency.spi.SPIRegistryUtil" class="com.liferay.portal.kernel.resiliency.spi.SPIRegistryUtil">
 		<property name="sPIRegistry">
 			<bean class="com.liferay.portal.resiliency.spi.SPIRegistryImpl">
@@ -487,6 +484,9 @@
 	<bean id="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" class="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil">
 		<property name="portletFileRepository" ref="com.liferay.portal.portletfilerepository.PortletFileRepository" />
 	</bean>
+	<bean id="com.liferay.portal.repository.liferayrepository.social.LiferayFileEntrySocialActivityManager" class="com.liferay.portal.repository.liferayrepository.social.LiferayFileEntrySocialActivityManager" />
+	<bean id="com.liferay.portal.repository.liferayrepository.social.LiferayFileShortcutSocialActivityManager" class="com.liferay.portal.repository.liferayrepository.social.LiferayFileShortcutSocialActivityManager" />
+	<bean id="com.liferay.portal.repository.liferayrepository.social.LiferayFolderSocialActivityManager" class="com.liferay.portal.repository.liferayrepository.social.LiferayFolderSocialActivityManager" />
 	<bean id="com.liferay.portal.repository.registry.RepositoryClassDefinitionCatalog" class="com.liferay.portal.repository.registry.RepositoryClassDefinitionCatalogImpl" init-method="loadDefaultRepositoryDefiners">
 		<property name="legacyExternalRepositoryFactory">
 			<bean class="com.liferay.portal.repository.external.LegacyExternalRepositoryFactory" />
