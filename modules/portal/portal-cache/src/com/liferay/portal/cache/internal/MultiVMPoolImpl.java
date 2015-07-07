@@ -140,7 +140,8 @@ public class MultiVMPoolImpl implements MultiVMPool {
 
 	private class SPIPortalCacheManagerConfiguratorServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
-		<SPIPortalCacheManagerConfigurator, SPIPortalCacheManagerConfigurator> {
+			<SPIPortalCacheManagerConfigurator,
+				SPIPortalCacheManagerConfigurator> {
 
 		@Override
 		public SPIPortalCacheManagerConfigurator addingService(

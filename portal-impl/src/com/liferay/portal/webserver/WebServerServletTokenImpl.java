@@ -53,8 +53,7 @@ public class WebServerServletTokenImpl implements WebServerServletToken {
 				public void destroy() {
 				}
 
-			}
-		);
+			});
 
 		serviceDependencyManager.registerDependencies(MultiVMPool.class);
 	}

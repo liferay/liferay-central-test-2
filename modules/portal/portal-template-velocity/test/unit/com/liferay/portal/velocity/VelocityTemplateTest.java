@@ -441,8 +441,7 @@ public class VelocityTemplateTest {
 						return portalCacheManager.getCache("test");
 					}
 
-				}
-			);
+				});
 
 			setSingleVMPool(singleVMPool);
 
