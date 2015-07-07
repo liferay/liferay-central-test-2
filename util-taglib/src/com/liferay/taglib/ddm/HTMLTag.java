@@ -87,10 +87,11 @@ public class HTMLTag extends BaseHTMLTag {
 
 	protected String getLogMessage() {
 		if (getClassNameId() == PortalUtil.getClassNameId(DDMTemplate.class)) {
-			return "Unable to retrieve DDM template with ID " + getClassPK();
+			return "Unable to retrieve DDM template with class PK " +
+				getClassPK();
 		}
 
-		return "Unable to retrieve DDM structure with ID " + getClassPK();
+		return "Unable to retrieve DDM structure with class PK " + getClassPK();
 	}
 
 	protected String getMode() {
