@@ -217,8 +217,7 @@ public class LiferayTrashCapability
 	}
 
 	protected void deleteRepositoryTrashEntries(
-			long repositoryId, String className)
-		throws PortalException {
+		long repositoryId, String className) {
 
 		List<TrashEntry> trashEntries = _trashEntryLocalService.getEntries(
 			repositoryId, className);
