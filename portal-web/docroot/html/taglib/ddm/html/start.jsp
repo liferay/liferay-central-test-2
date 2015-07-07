@@ -20,7 +20,6 @@
 	<c:if test="<%= ddmForm != null %>">
 
 		<%
-		
 		long ddmStructureId = classPK;
 
 		if (classNameId == PortalUtil.getClassNameId(DDMTemplate.class)) {
@@ -30,15 +29,15 @@
 		}
 
 		DDMStructure ddmStructure = DDMStructureServiceUtil.getStructure(ddmStructureId);
-		
+
 		Fields fields = null;
 
-		if(ddmFormValues != null){
+		if (ddmFormValues != null) {
 			fields = DDMFormValuesToFieldsConverterUtil.convert(ddmStructure, ddmFormValues);
 		}
-		
+
 		pageContext.setAttribute("checkRequired", checkRequired);
-		
+
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext = new DDMFormFieldRenderingContext();
 
 		ddmFormFieldRenderingContext.setFields(fields);
@@ -68,7 +67,7 @@
 					p_l_id: <%= themeDisplay.getPlid() %>,
 					portletNamespace: '<portlet:namespace />',
 					repeatable: <%= repeatable %>
-					
+
 					<c:if test="<%= ddmFormValues != null %>">
 						, values: <%= DDMFormValuesJSONSerializerUtil.serialize(ddmFormValues) %>
 					</c:if>
