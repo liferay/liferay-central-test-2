@@ -33,14 +33,14 @@ if ((parentComment != null) && parentComment.isRoot()) {
 
 WorkflowableComment workflowableComment = null;
 
-boolean pending = false;
 boolean approved = true;
+boolean pending = false;
 
 if (comment instanceof WorkflowableComment) {
 	workflowableComment = (WorkflowableComment)comment;
 
-	pending = workflowableComment.getStatus() == WorkflowConstants.STATUS_PENDING;
 	approved = workflowableComment.getStatus() == WorkflowConstants.STATUS_APPROVED;
+	pending = workflowableComment.getStatus() == WorkflowConstants.STATUS_PENDING;
 }
 %>
 
