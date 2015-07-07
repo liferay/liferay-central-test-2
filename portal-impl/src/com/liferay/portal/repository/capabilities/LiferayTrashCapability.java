@@ -53,16 +53,16 @@ public class LiferayTrashCapability
 	implements RepositoryEventAware, TrashCapability {
 
 	public LiferayTrashCapability(
-		DLAppServiceAdapter dlAppServiceAdapter,
 		DLAppHelperLocalService dlAppHelperLocalService,
+		DLAppServiceAdapter dlAppServiceAdapter,
 		DLFileEntryServiceAdapter dlFileEntryServiceAdapter,
 		DLFolderServiceAdapter dlFolderServiceAdapter,
 		RepositoryServiceAdapter repositoryServiceAdapter,
 		TrashEntryLocalService trashEntryLocalService,
 		TrashVersionLocalService trashVersionLocalService) {
 
-		_dlAppServiceAdapter = dlAppServiceAdapter;
 		_dlAppHelperLocalService = dlAppHelperLocalService;
+		_dlAppServiceAdapter = dlAppServiceAdapter;
 		_dlFileEntryServiceAdapter = dlFileEntryServiceAdapter;
 		_dlFolderServiceAdapter = dlFolderServiceAdapter;
 		_repositoryServiceAdapter = repositoryServiceAdapter;

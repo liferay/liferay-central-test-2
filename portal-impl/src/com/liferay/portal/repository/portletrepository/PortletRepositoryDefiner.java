@@ -76,7 +76,7 @@ public class PortletRepositoryDefiner extends BaseRepositoryDefiner {
 				new RepositoryEntryChecker(documentRepository)));
 
 		TrashCapability trashCapability = new LiferayTrashCapability(
-			dlAppServiceAdapter, DLAppHelperLocalServiceUtil.getService(),
+			DLAppHelperLocalServiceUtil.getService(), dlAppServiceAdapter,
 			dlFileEntryServiceAdapter, dlFolderServiceAdapter,
 			repositoryServiceAdapter, TrashEntryLocalServiceUtil.getService(),
 			TrashVersionLocalServiceUtil.getService());
