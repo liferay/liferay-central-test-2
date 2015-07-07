@@ -30,8 +30,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" +
-			MarketplaceAppManagerPortletKeys.MARKETPLACE_APP_MANAGER
+		"javax.portlet.name=" + MarketplaceAppManagerPortletKeys.MARKETPLACE_APP_MANAGER
 	},
 	service = ControlPanelEntry.class
 )
