@@ -265,8 +265,7 @@ public class LiferayLocalRepository
 
 	@Override
 	public List<RepositoryEntry> getFileEntriesAndFileShortcuts(
-			long folderId, int status, int start, int end)
-		throws PortalException {
+		long folderId, int status, int start, int end) {
 
 		QueryDefinition<RepositoryEntry> queryDefinition =
 			new QueryDefinition<>(status, start, end, null);
@@ -280,9 +279,7 @@ public class LiferayLocalRepository
 	}
 
 	@Override
-	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
-		throws PortalException {
-
+	public int getFileEntriesAndFileShortcutsCount(long folderId, int status) {
 		QueryDefinition<RepositoryEntry> queryDefinition =
 			new QueryDefinition<>(status);
 
@@ -393,8 +390,8 @@ public class LiferayLocalRepository
 	}
 
 	@Override
-	public int getFoldersCount(long parentFolderId, boolean includeMountfolders)
-		throws PortalException {
+	public int getFoldersCount(
+		long parentFolderId, boolean includeMountfolders) {
 
 		return getFoldersCount(
 			parentFolderId, WorkflowConstants.STATUS_APPROVED,
@@ -403,8 +400,7 @@ public class LiferayLocalRepository
 
 	@Override
 	public int getFoldersCount(
-			long parentFolderId, int status, boolean includeMountfolders)
-		throws PortalException {
+		long parentFolderId, int status, boolean includeMountfolders) {
 
 		return dlFolderLocalService.getFoldersCount(
 			getGroupId(), toFolderId(parentFolderId), status,
