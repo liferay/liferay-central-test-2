@@ -55,7 +55,6 @@ public class WebCachePoolImpl implements WebCachePool {
 
 				@Override
 				public void destroy() {
-
 				}
 
 			}
