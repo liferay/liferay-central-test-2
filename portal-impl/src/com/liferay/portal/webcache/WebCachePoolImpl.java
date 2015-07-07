@@ -57,8 +57,7 @@ public class WebCachePoolImpl implements WebCachePool {
 				public void destroy() {
 				}
 
-			}
-		);
+			});
 
 		serviceDependencyManager.registerDependencies(SingleVMPool.class);
 	}

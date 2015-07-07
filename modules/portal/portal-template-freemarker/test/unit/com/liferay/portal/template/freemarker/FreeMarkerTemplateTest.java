@@ -102,8 +102,7 @@ public class FreeMarkerTemplateTest {
 						RandomTestUtil.randomString());
 				}
 
-			}
-		);
+			});
 
 		freeMarkerTemplateResourceLoader.setMultiVMPool(multiVMPool);
 

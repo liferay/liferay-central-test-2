@@ -81,13 +81,12 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 		_modificationCheckInterval = modificationCheckInterval;
 
+		_multiVMPool = multiVMPool;
+
 		String portalCacheName = TemplateResourceLoader.class.getName();
 
 		portalCacheName = portalCacheName.concat(
 			StringPool.PERIOD).concat(name);
-
-		_multiVMPool = multiVMPool;
-		_singleVMPool = singleVMPool;
 
 		_multiVMPortalCache =
 			(PortalCache<String, TemplateResource>)_multiVMPool.getCache(
@@ -98,6 +97,8 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 		_multiVMPortalCache.registerCacheListener(
 			cacheListener, CacheListenerScope.ALL);
+
+		_singleVMPool = singleVMPool;
 
 		_singleVMPortalCache =
 			(PortalCache<String, TemplateResource>)_singleVMPool.getCache(

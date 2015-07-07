@@ -203,7 +203,7 @@ public class ToolDependencies {
 			_portalCacheManager =
 				(PortalCacheManager
 					<? extends Serializable, ? extends Serializable>)
-				portalCacheManager;
+						portalCacheManager;
 		}
 
 		@Override
