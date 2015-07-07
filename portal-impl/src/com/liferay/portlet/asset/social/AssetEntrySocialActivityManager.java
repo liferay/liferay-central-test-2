@@ -15,10 +15,10 @@
 package com.liferay.portlet.asset.social;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.social.BaseSocialActivityManager;
+import com.liferay.portal.kernel.social.SocialActivityManager;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.social.manager.BaseSocialActivityManager;
-import com.liferay.portlet.social.manager.SocialActivityManager;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 
 /**

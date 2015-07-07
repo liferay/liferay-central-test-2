@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.social.manager;
+package com.liferay.portal.kernel.social;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.ClassedModel;

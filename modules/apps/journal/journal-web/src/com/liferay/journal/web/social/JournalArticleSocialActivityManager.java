@@ -15,8 +15,8 @@
 package com.liferay.journal.web.social;
 
 import com.liferay.journal.model.JournalArticle;
-import com.liferay.portlet.social.manager.BaseSocialActivityManager;
-import com.liferay.portlet.social.manager.SocialActivityManager;
+import com.liferay.portal.kernel.social.BaseSocialActivityManager;
+import com.liferay.portal.kernel.social.SocialActivityManager;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 
 import org.osgi.service.component.annotations.Component;
