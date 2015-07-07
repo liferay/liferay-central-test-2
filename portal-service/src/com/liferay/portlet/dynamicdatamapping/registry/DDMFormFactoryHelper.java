@@ -41,12 +41,13 @@ public class DDMFormFactoryHelper {
 
 	public DDMFormFactoryHelper(Class<?> clazz, Method method) {
 		_clazz = clazz;
-		_ddmForm = clazz.getAnnotation(DDMForm.class);
-		_ddmFormField = method.getAnnotation(DDMFormField.class);
 		_method = method;
 
-		setDefaultLocale();
+		_ddmForm = clazz.getAnnotation(DDMForm.class);
+		_ddmFormField = method.getAnnotation(DDMFormField.class);
+
 		setAvailableLocales();
+		setDefaultLocale();
 	}
 
 	public String getDDMFormFieldDataType() {
