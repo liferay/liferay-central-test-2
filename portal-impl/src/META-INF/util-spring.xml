@@ -1093,11 +1093,11 @@
 		<property name="sites" ref="com.liferay.portlet.sites.util.Sites" />
 	</bean>
 	<bean id="com.liferay.portlet.sitesadmin.lar.StagedGroupStagedModelDataHandler" class="com.liferay.portlet.sitesadmin.lar.StagedGroupStagedModelDataHandler" />
-	<bean id="com.liferay.portlet.social.manager.SocialActivityManagerUtil" class="com.liferay.portlet.social.manager.SocialActivityManagerUtil">
+	<bean id="com.liferay.portal.kernel.social.SocialActivityManagerUtil" class="com.liferay.portal.kernel.social.SocialActivityManagerUtil">
 		<property name="socialActivityManager">
-			<bean class="com.liferay.portlet.social.manager.SocialActivityManagerImpl" init-method="activate">
+			<bean class="com.liferay.portal.kernel.social.SocialActivityManagerImpl" init-method="activate">
 				<constructor-arg>
-					<bean class="com.liferay.portlet.social.manager.DefaultSocialActivityManager" />
+					<bean class="com.liferay.portal.social.DefaultSocialActivityManager" />
 				</constructor-arg>
 			</bean>
 		</property>

@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.portlet.social.manager;
+package com.liferay.portal.social.manager;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.social.SocialActivityManager;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.GroupedModel;
 import com.liferay.registry.ServiceReference;
