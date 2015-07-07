@@ -40,6 +40,7 @@ public class WebCachePoolImpl implements WebCachePool {
 
 		serviceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -54,7 +55,9 @@ public class WebCachePoolImpl implements WebCachePool {
 
 				@Override
 				public void destroy() {
+
 				}
+
 			}
 		);
 

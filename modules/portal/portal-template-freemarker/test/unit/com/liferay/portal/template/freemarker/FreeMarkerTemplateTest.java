@@ -75,12 +75,15 @@ public class FreeMarkerTemplateTest {
 	public void setUp() throws Exception {
 		_configuration = new Configuration();
 
+		FreeMarkerTemplateResourceLoader freeMarkerTemplateResourceLoader =
+			new FreeMarkerTemplateResourceLoader();
+
+		MultiVMPool multiVMPool = Mockito.mock(MultiVMPool.class);
+
 		final PortalCacheManager<? extends Serializable, ? extends Serializable>
 			portalCacheManager =
 				TestPortalCacheManager.createTestPortalCacheManager(
 					RandomTestUtil.randomString());
-
-		MultiVMPool multiVMPool = Mockito.mock(MultiVMPool.class);
 
 		Mockito.when(
 			multiVMPool.getCache(Mockito.anyString())
@@ -98,8 +101,11 @@ public class FreeMarkerTemplateTest {
 					return portalCacheManager.getCache(
 						RandomTestUtil.randomString());
 				}
+
 			}
 		);
+
+		freeMarkerTemplateResourceLoader.setMultiVMPool(multiVMPool);
 
 		SingleVMPool singleVMPool = Mockito.mock(SingleVMPool.class);
 
@@ -118,13 +124,9 @@ public class FreeMarkerTemplateTest {
 
 					return portalCacheManager.getCache("test");
 				}
+
 			}
 		);
-
-		FreeMarkerTemplateResourceLoader freeMarkerTemplateResourceLoader =
-			new FreeMarkerTemplateResourceLoader();
-
-		freeMarkerTemplateResourceLoader.setMultiVMPool(multiVMPool);
 
 		freeMarkerTemplateResourceLoader.setSingleVMPool(singleVMPool);
 

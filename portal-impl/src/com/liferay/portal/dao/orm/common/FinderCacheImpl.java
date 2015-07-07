@@ -66,6 +66,7 @@ public class FinderCacheImpl
 
 		serviceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -74,8 +75,7 @@ public class FinderCacheImpl
 
 					PortalCacheManager
 						<? extends Serializable, ? extends Serializable>
-							portalCacheManager =
-						_multiVMPool.getCacheManager();
+							portalCacheManager = _multiVMPool.getCacheManager();
 
 					portalCacheManager.registerCacheManagerListener(
 						FinderCacheImpl.this);
@@ -84,6 +84,7 @@ public class FinderCacheImpl
 				@Override
 				public void destroy() {
 				}
+
 			}
 		);
 

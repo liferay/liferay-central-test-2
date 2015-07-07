@@ -36,6 +36,7 @@ public class WebServerServletTokenImpl implements WebServerServletToken {
 
 		serviceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -51,6 +52,7 @@ public class WebServerServletTokenImpl implements WebServerServletToken {
 				@Override
 				public void destroy() {
 				}
+
 			}
 		);
 

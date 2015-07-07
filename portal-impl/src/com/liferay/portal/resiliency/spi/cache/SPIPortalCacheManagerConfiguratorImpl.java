@@ -84,9 +84,9 @@ public class SPIPortalCacheManagerConfiguratorImpl
 				stubClass =
 					(Class<? extends PortalCacheManager
 						<? extends Serializable, ? extends Serializable>>)
-					IntrabandProxyUtil.getStubClass(
-						BaseIntrabandPortalCacheManager.class,
-						PortalCacheManager.class.getName());
+							IntrabandProxyUtil.getStubClass(
+								BaseIntrabandPortalCacheManager.class,
+								PortalCacheManager.class.getName());
 
 		stubProxyMethodSignatures = IntrabandProxyUtil.getProxyMethodSignatures(
 			stubClass);

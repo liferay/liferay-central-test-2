@@ -167,7 +167,6 @@ public class ToolDependencies {
 			new TestSingleVMPool(
 				new DummyPortalCacheManager<>(
 					PortalCacheManagerNames.SINGLE_VM)));
-
 		registry.registerService(
 			MultiVMPool.class,
 			new TestMultiVMPool(
@@ -228,8 +227,7 @@ public class ToolDependencies {
 
 		@Override
 		public PortalCacheManager
-			<? extends Serializable, ? extends Serializable>
-				getCacheManager() {
+			<? extends Serializable, ? extends Serializable> getCacheManager() {
 
 			return _portalCacheManager;
 		}
