@@ -417,7 +417,6 @@ public class VelocityTemplateTest {
 						return portalCacheManager.getCache(
 							RandomTestUtil.randomString());
 					}
-
 				}
 			);
 
