@@ -91,8 +91,7 @@ public abstract class BaseSocialActivityManager
 
 	@Override
 	public void updateLastSocialActivity(
-			long userId, T model, int type, Date createDate)
-		throws PortalException {
+		long userId, T model, int type, Date createDate) {
 
 		String className = getClassName(model);
 		long primaryKey = getPrimaryKey(model);
