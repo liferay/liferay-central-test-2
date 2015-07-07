@@ -61,7 +61,7 @@ public class MultiVMPoolUtil {
 
 		if (multiVMPool == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("MultiVMPoolUtil has not been initialized");
+				_log.warn("MultiVMPoolUtil is not initialized");
 			}
 
 			return null;

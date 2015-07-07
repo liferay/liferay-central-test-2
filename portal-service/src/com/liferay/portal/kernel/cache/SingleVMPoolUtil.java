@@ -61,7 +61,7 @@ public class SingleVMPoolUtil {
 
 		if (singleVMPool == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("SingleVMPoolUtil has not been initialized");
+				_log.warn("SingleVMPoolUtil is not initialized");
 			}
 
 			return null;
