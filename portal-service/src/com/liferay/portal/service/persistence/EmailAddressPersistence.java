@@ -17,7 +17,6 @@ package com.liferay.portal.service.persistence;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.model.EmailAddress;
-import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * The persistence interface for the email address service.

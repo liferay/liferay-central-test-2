@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -456,8 +455,7 @@ public class SystemEventWrapper implements SystemEvent,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_systemEvent.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -609,7 +607,7 @@ public class SystemEventWrapper implements SystemEvent,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.SystemEvent> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.SystemEvent> toCacheModel() {
 		return _systemEvent.toCacheModel();
 	}
 

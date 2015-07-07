@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -311,8 +310,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_pluginSetting.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -407,7 +405,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.PluginSetting> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.PluginSetting> toCacheModel() {
 		return _pluginSetting.toCacheModel();
 	}
 

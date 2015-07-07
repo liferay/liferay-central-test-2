@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -445,8 +444,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_emailAddress.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -563,7 +561,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.EmailAddress> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.EmailAddress> toCacheModel() {
 		return _emailAddress.toCacheModel();
 	}
 

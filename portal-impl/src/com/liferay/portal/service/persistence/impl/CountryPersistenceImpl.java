@@ -37,7 +37,6 @@ import com.liferay.portal.model.MVCCModel;
 import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.model.impl.CountryModelImpl;
 import com.liferay.portal.service.persistence.CountryPersistence;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
 

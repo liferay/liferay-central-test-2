@@ -26,7 +26,6 @@ import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ResourceBlock;
 import com.liferay.portal.model.ResourceBlockModel;
 import com.liferay.portal.model.ResourceBlockSoap;
-import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
