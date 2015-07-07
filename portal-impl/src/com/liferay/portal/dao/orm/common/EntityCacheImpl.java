@@ -65,6 +65,7 @@ public class EntityCacheImpl
 
 		serviceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -73,8 +74,7 @@ public class EntityCacheImpl
 
 					PortalCacheManager
 						<? extends Serializable, ? extends Serializable>
-							portalCacheManager =
-						_multiVMPool.getCacheManager();
+							portalCacheManager = _multiVMPool.getCacheManager();
 
 					portalCacheManager.registerCacheManagerListener(
 						EntityCacheImpl.this);
@@ -83,6 +83,7 @@ public class EntityCacheImpl
 				@Override
 				public void destroy() {
 				}
+
 			}
 		);
 

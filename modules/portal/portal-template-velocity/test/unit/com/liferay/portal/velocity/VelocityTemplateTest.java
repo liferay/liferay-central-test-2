@@ -394,13 +394,13 @@ public class VelocityTemplateTest {
 
 		@Override
 		protected void activate(Map<String, Object> properties) {
+			MultiVMPool multiVMPool = Mockito.mock(MultiVMPool.class);
+
 			final PortalCacheManager
 				<? extends Serializable, ? extends Serializable>
 				portalCacheManager =
 					TestPortalCacheManager.createTestPortalCacheManager(
 						RandomTestUtil.randomString());
-
-			MultiVMPool multiVMPool = Mockito.mock(MultiVMPool.class);
 
 			Mockito.when(
 				multiVMPool.getCache(Mockito.anyString())
@@ -417,6 +417,7 @@ public class VelocityTemplateTest {
 						return portalCacheManager.getCache(
 							RandomTestUtil.randomString());
 					}
+
 				}
 			);
 
@@ -439,6 +440,7 @@ public class VelocityTemplateTest {
 
 						return portalCacheManager.getCache("test");
 					}
+
 				}
 			);
 

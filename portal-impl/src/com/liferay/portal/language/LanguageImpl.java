@@ -93,6 +93,7 @@ public class LanguageImpl implements Language, Serializable {
 
 		serviceDependencyManager.addServiceDependencyListener(
 			new ServiceDependencyListener() {
+
 				@Override
 				public void dependenciesFulfilled() {
 					Registry registry = RegistryUtil.getRegistry();
@@ -122,6 +123,7 @@ public class LanguageImpl implements Language, Serializable {
 				@Override
 				public void destroy() {
 				}
+
 			}
 		);
 
