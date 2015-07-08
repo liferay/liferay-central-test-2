@@ -16,8 +16,8 @@ package com.liferay.portal.search.internal;
 
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassedModel;
 
 import java.lang.reflect.Method;
@@ -42,42 +42,21 @@ public class IndexerRequest {
 			return true;
 		}
 
-		if ((object == null) || (getClass() != object.getClass())) {
+		if (!(object instanceof IndexerRequest)) {
 			return false;
 		}
 
 		IndexerRequest indexerRequest = (IndexerRequest)object;
 
-		if (_indexer.equals(indexerRequest._indexer)) {
-			return false;
+		if (Validator.equals(_indexer, indexerRequest._indexer) &&
+			Validator.equals(_modelClass, indexerRequest._modelClass) &&
+			Validator.equals(
+				_methodHandler, indexerRequest._methodHandler)) {
+
+			return true;
 		}
 
-		if (!_modelClass.equals(indexerRequest._modelClass)) {
-			return false;
-		}
-
-		MethodKey thisMethodKey = _methodHandler.getMethodKey();
-
-		MethodKey thatMethodKey = indexerRequest._methodHandler.getMethodKey();
-
-		if (!thisMethodKey.equals(thatMethodKey)) {
-			return false;
-		}
-
-		Object[] thisArguments = _methodHandler.getArguments();
-		Object[] thatArguments = indexerRequest._methodHandler.getArguments();
-
-		if (thisArguments.length != thatArguments.length) {
-			return false;
-		}
-
-		for (int i = 0; i < thisArguments.length; i++) {
-			if (!thisArguments[0].equals(thatArguments[0])) {
-				return false;
-			}
-		}
-
-		return true;
+		return false;
 	}
 
 	public void execute() throws Exception {
