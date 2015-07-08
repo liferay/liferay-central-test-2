@@ -7084,8 +7084,8 @@ public class JournalArticleLocalServiceImpl
 					 emailArticleMovedFromFolderEnabled()) {
 		}
 		else if (action.equals("update") &&
-				 journalGroupServiceConfiguration.emailArticleUpdatedEnabled(
-					 )) {
+				 journalGroupServiceConfiguration.
+					emailArticleUpdatedEnabled()) {
 		}
 		else {
 			return;
