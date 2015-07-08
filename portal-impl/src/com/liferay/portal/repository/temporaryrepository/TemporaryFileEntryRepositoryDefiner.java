@@ -55,14 +55,11 @@ public class TemporaryFileEntryRepositoryDefiner extends BaseRepositoryDefiner {
 		DLFileEntryServiceAdapter dlFileEntryServiceAdapter =
 			DLFileEntryServiceAdapter.create(documentRepository);
 
-		DLFolderServiceAdapter dlFolderServiceAdapter =
-			DLFolderServiceAdapter.create(documentRepository);
-
 		capabilityRegistry.addExportedCapability(
 			BulkOperationCapability.class,
 			new LiferayBulkOperationCapability(
 				documentRepository, dlFileEntryServiceAdapter,
-				dlFolderServiceAdapter));
+				DLFolderServiceAdapter.create(documentRepository)));
 		capabilityRegistry.addExportedCapability(
 			TemporaryFileEntriesCapability.class,
 			new TemporaryFileEntriesCapabilityImpl(documentRepository));
