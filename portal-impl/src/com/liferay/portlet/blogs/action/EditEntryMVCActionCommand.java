@@ -319,13 +319,14 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Exception e) {
+			String mvcPath = "/html/portlet/blogs/edit_entry.jsp";
+
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
-				actionResponse.setRenderParameter(
-					"mvcPath", "/html/portlet/blogs/error.jsp");
+				mvcPath = "/html/portlet/blogs/error.jsp";
 			}
 			else if (e instanceof EntryContentException ||
 					 e instanceof EntryDescriptionException ||
@@ -354,6 +355,8 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 					throw e;
 				}
 			}
+
+			actionResponse.setRenderParameter("mvcPath", mvcPath);
 		}
 		catch (Throwable t) {
 			_log.error(t, t);
