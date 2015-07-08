@@ -23,32 +23,32 @@ import java.util.List;
  */
 public class AssetEntryResult {
 
-	public AssetEntryResult(List<AssetEntry> results) {
-		_results = results;
+	public AssetEntryResult(List<AssetEntry> assetEntries) {
+		_assetEntries = assetEntries;
 	}
 
-	public AssetEntryResult(String title, List<AssetEntry> results) {
+	public AssetEntryResult(String title, List<AssetEntry> assetEntries) {
 		_title = title;
-		_results = results;
+		_assetEntries = assetEntries;
 	}
 
-	public List<AssetEntry> getResults() {
-		return _results;
+	public List<AssetEntry> getAssetEntries() {
+		return _assetEntries;
 	}
 
 	public String getTitle() {
 		return _title;
 	}
 
-	public void setResults(List<AssetEntry> results) {
-		_results = results;
+	public void setAssetEntries(List<AssetEntry> assetEntries) {
+		_assetEntries = assetEntries;
 	}
 
 	public void setTitle(String title) {
 		_title = title;
 	}
 
-	private List<AssetEntry> _results;
+	private List<AssetEntry> _assetEntries;
 	private String _title;
 
 }
