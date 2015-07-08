@@ -249,7 +249,7 @@ public class MVCPortlet extends LiferayPortlet {
 		throws IOException, PortletException {
 
 		String mvcRenderCommandName = ParamUtil.getString(
-			renderRequest, "mvcRenderCommandName");
+			renderRequest, "mvcRenderCommandName", "/");
 
 		MVCRenderCommand mvcRenderCommand =
 			(MVCRenderCommand)_mvcRenderCommandCache.getMVCCommand(
