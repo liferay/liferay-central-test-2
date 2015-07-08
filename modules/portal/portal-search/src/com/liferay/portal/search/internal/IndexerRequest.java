@@ -30,9 +30,10 @@ public class IndexerRequest {
 	public IndexerRequest(
 		Method method, ClassedModel classedModel, Indexer indexer) {
 
+		_indexer = indexer;
+
 		_methodHandler = new MethodHandler(method, classedModel);
 		_modelClass = classedModel.getModelClass();
-		_indexer = indexer;
 	}
 
 	@Override
