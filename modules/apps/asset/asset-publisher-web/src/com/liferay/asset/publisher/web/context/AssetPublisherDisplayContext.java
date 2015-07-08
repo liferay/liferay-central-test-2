@@ -165,10 +165,10 @@ public class AssetPublisherDisplayContext {
 		assetEntryQuery.setEnd(end);
 		assetEntryQuery.setStart(start);
 
-		List<AssetEntry> results = AssetEntryServiceUtil.getEntries(
+		List<AssetEntry> assetEntries = AssetEntryServiceUtil.getEntries(
 			assetEntryQuery);
 
-		return new BaseModelSearchResult<>(results, total);
+		return new BaseModelSearchResult<>(assetEntries, total);
 	}
 
 	public AssetEntryQuery getAssetEntryQuery() throws Exception {
@@ -1151,9 +1151,10 @@ public class AssetPublisherDisplayContext {
 
 			total += groupTotal;
 
-			List<AssetEntry> results = baseModelSearchResult.getBaseModels();
+			List<AssetEntry> assetEntries =
+				baseModelSearchResult.getBaseModels();
 
-			if (!results.isEmpty() && (start < groupTotal)) {
+			if (!assetEntries.isEmpty() && (start < groupTotal)) {
 				AssetRendererFactory groupAssetRendererFactory =
 					AssetRendererFactoryRegistryUtil.
 						getAssetRendererFactoryByClassNameId(classNameId);
@@ -1162,7 +1163,8 @@ public class AssetPublisherDisplayContext {
 					themeDisplay.getLocale(),
 					groupAssetRendererFactory.getClassName());
 
-				assetEntryResults.add(new AssetEntryResult(title, results));
+				assetEntryResults.add(
+					new AssetEntryResult(title, assetEntries));
 			}
 
 			String portletName = getPortletName();
@@ -1214,10 +1216,10 @@ public class AssetPublisherDisplayContext {
 
 		searchContainer.setTotal(total);
 
-		List<AssetEntry> results = baseModelSearchResult.getBaseModels();
+		List<AssetEntry> assetEntries = baseModelSearchResult.getBaseModels();
 
-		if (!results.isEmpty() && (start < total)) {
-			assetEntryResults.add(new AssetEntryResult(results));
+		if (!assetEntries.isEmpty() && (start < total)) {
+			assetEntryResults.add(new AssetEntryResult(assetEntries));
 		}
 
 		return assetEntryResults;
@@ -1260,12 +1262,14 @@ public class AssetPublisherDisplayContext {
 
 			total += groupTotal;
 
-			List<AssetEntry> results = baseModelSearchResult.getBaseModels();
+			List<AssetEntry> assetEntries =
+				baseModelSearchResult.getBaseModels();
 
-			if (!results.isEmpty() && (start < groupTotal)) {
+			if (!assetEntries.isEmpty() && (start < groupTotal)) {
 				String title = assetCategory.getTitle(themeDisplay.getLocale());
 
-				assetEntryResults.add(new AssetEntryResult(title, results));
+				assetEntryResults.add(
+					new AssetEntryResult(title, assetEntries));
 			}
 
 			if (groupTotal > 0) {
