@@ -592,14 +592,12 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateMessageCount(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long categoryId) {
 		return getService().updateMessageCount(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateStatistics(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long categoryId) {
 		return getService().updateStatistics(categoryId);
 	}
 
@@ -610,8 +608,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateThreadCount(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long categoryId) {
 		return getService().updateThreadCount(categoryId);
 	}
 

@@ -655,15 +655,13 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService,
 
 	@Override
 	public com.liferay.portlet.messageboards.model.MBCategory updateMessageCount(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long categoryId) {
 		return _mbCategoryLocalService.updateMessageCount(categoryId);
 	}
 
 	@Override
 	public com.liferay.portlet.messageboards.model.MBCategory updateStatistics(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long categoryId) {
 		return _mbCategoryLocalService.updateStatistics(categoryId);
 	}
 
@@ -676,8 +674,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService,
 
 	@Override
 	public com.liferay.portlet.messageboards.model.MBCategory updateThreadCount(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long categoryId) {
 		return _mbCategoryLocalService.updateThreadCount(categoryId);
 	}
 
