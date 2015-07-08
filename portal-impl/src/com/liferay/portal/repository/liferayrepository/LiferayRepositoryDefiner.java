@@ -78,28 +78,17 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 
 		DocumentRepository documentRepository = capabilityRegistry.getTarget();
 
-		DLAppServiceAdapter dlAppServiceAdapter = DLAppServiceAdapter.create(
-			documentRepository);
-
 		DLFileEntryServiceAdapter dlFileEntryServiceAdapter =
 			DLFileEntryServiceAdapter.create(documentRepository);
-
-		DLFileVersionServiceAdapter dlFileVersionServiceAdapter =
-			DLFileVersionServiceAdapter.create(documentRepository);
-
 		DLFolderServiceAdapter dlFolderServiceAdapter =
 			DLFolderServiceAdapter.create(documentRepository);
 
-		GroupServiceAdapter groupServiceAdapter = GroupServiceAdapter.create(
-			documentRepository);
-
-		RepositoryServiceAdapter repositoryServiceAdapter =
-			RepositoryServiceAdapter.create(documentRepository);
-
 		TrashCapability trashCapability = new LiferayTrashCapability(
-			DLAppHelperLocalServiceUtil.getService(), dlAppServiceAdapter,
+			DLAppHelperLocalServiceUtil.getService(),
+			DLAppServiceAdapter.create(documentRepository),
 			dlFileEntryServiceAdapter, dlFolderServiceAdapter,
-			repositoryServiceAdapter, TrashEntryLocalServiceUtil.getService(),
+			RepositoryServiceAdapter.create(documentRepository),
+			TrashEntryLocalServiceUtil.getService(),
 			TrashVersionLocalServiceUtil.getService());
 
 		capabilityRegistry.addExportedCapability(
@@ -129,7 +118,8 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		capabilityRegistry.addExportedCapability(
 			WorkflowCapability.class,
 			new LiferayWorkflowCapability(
-				dlFileEntryServiceAdapter, dlFileVersionServiceAdapter));
+				dlFileEntryServiceAdapter,
+				DLFileVersionServiceAdapter.create(documentRepository)));
 
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			capabilityRegistry.addSupportedCapability(
@@ -141,7 +131,9 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		capabilityRegistry.addSupportedCapability(
 			SyncCapability.class,
 			new LiferaySyncCapability(
-				groupServiceAdapter, DLSyncEventLocalServiceUtil.getService()));
+				GroupServiceAdapter.create(
+					documentRepository),
+				DLSyncEventLocalServiceUtil.getService()));
 	}
 
 	@Override
