@@ -149,7 +149,8 @@ public class IndexerRegistryImpl implements IndexerRegistry {
 			indexer.getClassName());
 
 		if (proxiedIndexer == null) {
-			List<?> interfaces = ClassUtils.getAllInterfaces(indexer.getClass());
+			List<?> interfaces = ClassUtils.getAllInterfaces(
+				indexer.getClass());
 
 			BufferedIndexerInvocationHandler bufferedIndexerInvocationHandler =
 				new BufferedIndexerInvocationHandler(
