@@ -34,7 +34,7 @@ import java.util.Collection;
 public class BufferedIndexerInvocationHandler implements InvocationHandler {
 
 	public BufferedIndexerInvocationHandler(
-		Indexer indexer,
+		Indexer<?> indexer,
 		IndexerRegistryConfiguration indexerRegistryConfiguration) {
 
 		_indexer = indexer;
@@ -71,13 +71,13 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 			bufferRequest(methodKey, args[0], indexerRequestBuffer);
 		}
 		else {
-			Collection objects = null;
+			Collection<Object> objects = null;
 
 			if (args0Class.isArray()) {
 				objects = Arrays.asList((Object[])args[0]);
 			}
 			else {
-				objects = (Collection)args[0];
+				objects = (Collection<Object>)args[0];
 			}
 
 			for (Object object : objects) {
@@ -103,7 +103,7 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 			IndexerRequestBuffer indexerRequestBuffer)
 		throws Exception {
 
-		BaseModel baseModel = (BaseModel)object;
+		BaseModel<?> baseModel = (BaseModel<?>)object;
 
 		ClassedModel classModel = (ClassedModel)baseModel.clone();
 
@@ -121,7 +121,7 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 		}
 	}
 
-	private final Indexer _indexer;
+	private final Indexer<?> _indexer;
 	private volatile IndexerRegistryConfiguration _indexerRegistryConfiguration;
 
 }

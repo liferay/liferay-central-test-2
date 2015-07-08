@@ -149,7 +149,7 @@ public class IndexerRegistryImpl implements IndexerRegistry {
 			indexer.getClassName());
 
 		if (proxiedIndexer == null) {
-			List interfaces = ClassUtils.getAllInterfaces(indexer.getClass());
+			List<?> interfaces = ClassUtils.getAllInterfaces(indexer.getClass());
 
 			BufferedIndexerInvocationHandler bufferedIndexerInvocationHandler =
 				new BufferedIndexerInvocationHandler(
@@ -158,9 +158,9 @@ public class IndexerRegistryImpl implements IndexerRegistry {
 			_bufferedInvocationHandlers.put(
 				indexer.getClassName(), bufferedIndexerInvocationHandler);
 
-			proxiedIndexer = (Indexer)ProxyUtil.newProxyInstance(
+			proxiedIndexer = (Indexer<?>)ProxyUtil.newProxyInstance(
 				PortalClassLoaderUtil.getClassLoader(),
-				(Class[])interfaces.toArray(new Class[interfaces.size()]),
+				interfaces.toArray(new Class[interfaces.size()]),
 				bufferedIndexerInvocationHandler);
 
 			_proxiedIndexers.put(indexer.getClassName(), proxiedIndexer);
