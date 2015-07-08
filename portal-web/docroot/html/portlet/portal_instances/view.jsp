@@ -46,12 +46,10 @@
 			<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 			<aui:input name="className" type="hidden" />
 
-			<c:if test="<%= showTabs1 %>">
-				<liferay-ui:tabs
-					names="server,instances,plugins"
-					url="<%= portletURL.toString() %>"
-				/>
-			</c:if>
+			<liferay-ui:tabs
+				names="server,instances,plugins"
+				url="<%= portletURL.toString() %>"
+			/>
 
 			<%@ include file="/html/portlet/portal_instances/instances.jspf" %>
 		</aui:form>
