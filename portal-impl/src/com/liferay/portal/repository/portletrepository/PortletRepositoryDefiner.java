@@ -56,29 +56,22 @@ public class PortletRepositoryDefiner extends BaseRepositoryDefiner {
 
 		DocumentRepository documentRepository = capabilityRegistry.getTarget();
 
-		DLAppServiceAdapter dlAppServiceAdapter = DLAppServiceAdapter.create(
-			documentRepository);
-
 		DLFileEntryServiceAdapter dlFileEntryServiceAdapter =
 			DLFileEntryServiceAdapter.create(documentRepository);
 
-		DLFolderServiceAdapter dlFolderServiceAdapter =
-			DLFolderServiceAdapter.create(documentRepository);
-
-		RepositoryServiceAdapter repositoryServiceAdapter =
-			RepositoryServiceAdapter.create(documentRepository);
-
 		capabilityRegistry.addExportedCapability(
 			RelatedModelCapability.class,
-
 			new LiferayRelatedModelCapability(
 				new RepositoryEntryConverter(),
 				new RepositoryEntryChecker(documentRepository)));
 
 		TrashCapability trashCapability = new LiferayTrashCapability(
-			DLAppHelperLocalServiceUtil.getService(), dlAppServiceAdapter,
-			dlFileEntryServiceAdapter, dlFolderServiceAdapter,
-			repositoryServiceAdapter, TrashEntryLocalServiceUtil.getService(),
+			DLAppHelperLocalServiceUtil.getService(),
+			DLAppServiceAdapter.create(documentRepository),
+			dlFileEntryServiceAdapter,
+			DLFolderServiceAdapter.create(documentRepository),
+			RepositoryServiceAdapter.create(documentRepository),
+			TrashEntryLocalServiceUtil.getService(),
 			TrashVersionLocalServiceUtil.getService());
 
 		capabilityRegistry.addExportedCapability(
