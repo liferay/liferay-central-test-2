@@ -59,6 +59,9 @@ public class PortletKeys {
 		"com_liferay_dynamic_data_mapping_web_portlet_" +
 			"DynamicDataMappingPortlet";
 
+	public static final String EXPANDO =
+		"com_liferay_expando_web_portlet_ExpandoPortlet";
+
 	public static final String EXPORT_IMPORT = "200";
 
 	public static final String FAST_LOGIN = "164";

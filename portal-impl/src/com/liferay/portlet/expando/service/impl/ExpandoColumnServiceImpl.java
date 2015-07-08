@@ -17,6 +17,7 @@ package com.liferay.portlet.expando.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.service.base.ExpandoColumnServiceBaseImpl;
 import com.liferay.portlet.expando.service.permission.ExpandoColumnPermissionUtil;
@@ -31,8 +32,7 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		throws PortalException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(),
-			"com_liferay_expando_web_portlet_ExpandoPortlet",
+			getPermissionChecker(), PortletKeys.EXPANDO,
 			ActionKeys.ADD_EXPANDO);
 
 		return expandoColumnLocalService.addColumn(tableId, name, type);
@@ -44,8 +44,7 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		throws PortalException {
 
 		PortletPermissionUtil.check(
-			getPermissionChecker(),
-			"com_liferay_expando_web_portlet_ExpandoPortlet",
+			getPermissionChecker(), PortletKeys.EXPANDO,
 			ActionKeys.ADD_EXPANDO);
 
 		return expandoColumnLocalService.addColumn(
