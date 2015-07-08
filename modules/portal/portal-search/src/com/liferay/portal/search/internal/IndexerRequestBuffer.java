@@ -30,7 +30,7 @@ public class IndexerRequestBuffer {
 
 	public static IndexerRequestBuffer create() {
 		List<IndexerRequestBuffer> indexerRequestBuffers =
-			_indexerRequestBufferListThreadLocal.get();
+			_indexerRequestBuffersThreadLocal.get();
 
 		IndexerRequestBuffer indexerRequestBuffer = new IndexerRequestBuffer();
 
@@ -41,7 +41,7 @@ public class IndexerRequestBuffer {
 
 	public static IndexerRequestBuffer get() {
 		List<IndexerRequestBuffer> indexerRequestBuffers =
-			_indexerRequestBufferListThreadLocal.get();
+			_indexerRequestBuffersThreadLocal.get();
 
 		if (indexerRequestBuffers.isEmpty()) {
 			return null;
@@ -52,7 +52,7 @@ public class IndexerRequestBuffer {
 
 	public static IndexerRequestBuffer remove() {
 		List<IndexerRequestBuffer> indexerRequestBuffers =
-			_indexerRequestBufferListThreadLocal.get();
+			_indexerRequestBuffersThreadLocal.get();
 
 		if (indexerRequestBuffers.isEmpty()) {
 			return null;
@@ -123,10 +123,10 @@ public class IndexerRequestBuffer {
 		IndexerRequestBuffer.class);
 
 	private static final ThreadLocal<List<IndexerRequestBuffer>>
-		_indexerRequestBufferListThreadLocal =
+		_indexerRequestBuffersThreadLocal =
 			new AutoResetThreadLocal<List<IndexerRequestBuffer>>(
 				IndexerRequestBuffer.class +
-					"._indexerRequestBufferListThreadLocal") {
+					"._indexerRequestBuffersThreadLocal") {
 
 				@Override
 				protected List<IndexerRequestBuffer> initialValue() {
