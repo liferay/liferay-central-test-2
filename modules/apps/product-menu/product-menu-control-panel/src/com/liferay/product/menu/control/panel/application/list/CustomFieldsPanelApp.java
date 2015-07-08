@@ -17,6 +17,7 @@ package com.liferay.product.menu.control.panel.application.list;
 import com.liferay.application.list.BaseControlPanelEntryPanelApp;
 import com.liferay.application.list.PanelApp;
 import com.liferay.application.list.constants.PanelCategoryKeys;
+import com.liferay.expando.web.constants.ExpandoPortletKeys;
 import com.liferay.portal.service.PortletLocalService;
 
 import org.osgi.service.component.annotations.Component;
@@ -42,7 +43,7 @@ public class CustomFieldsPanelApp extends BaseControlPanelEntryPanelApp {
 
 	@Override
 	public String getPortletId() {
-		return "com_liferay_expando_web_portlet_ExpandoPortlet";
+		return ExpandoPortletKeys.EXPANDO;
 	}
 
 	@Reference(unbind = "-")
