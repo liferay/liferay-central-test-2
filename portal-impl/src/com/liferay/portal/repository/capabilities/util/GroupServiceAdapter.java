@@ -39,16 +39,15 @@ public class GroupServiceAdapter {
 			GroupLocalServiceUtil.getService(), GroupServiceUtil.getService());
 	}
 
-	public GroupServiceAdapter(GroupLocalService repositoryLocalService) {
-		this(repositoryLocalService, null);
+	public GroupServiceAdapter(GroupLocalService groupLocalService) {
+		this(groupLocalService, null);
 	}
 
 	public GroupServiceAdapter(
-		GroupLocalService repositoryLocalService,
-		GroupService repositoryService) {
+		GroupLocalService groupLocalService, GroupService groupService) {
 
-		_groupLocalService = repositoryLocalService;
-		_groupService = repositoryService;
+		_groupLocalService = groupLocalService;
+		_groupService = groupService;
 	}
 
 	public Group getGroup(long groupId) throws PortalException {
