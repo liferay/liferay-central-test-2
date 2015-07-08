@@ -1280,13 +1280,13 @@ public class LiferaySeleniumHelper {
 			LiferaySelenium liferaySelenium, String image)
 		throws Exception {
 
+		Mouse mouse = new DesktopMouse();
+
 		ScreenRegion screenRegion = new DesktopScreenRegion();
 
 		ImageTarget imageTarget = getImageTarget(liferaySelenium, image);
 
 		screenRegion = screenRegion.find(imageTarget);
-
-		Mouse mouse = new DesktopMouse();
 
 		mouse.click(screenRegion.getCenter());
 	}
