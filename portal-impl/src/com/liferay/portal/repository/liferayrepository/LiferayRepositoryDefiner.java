@@ -83,17 +83,6 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		DLFolderServiceAdapter dlFolderServiceAdapter =
 			DLFolderServiceAdapter.create(documentRepository);
 
-		TrashCapability trashCapability = new LiferayTrashCapability(
-			DLAppHelperLocalServiceUtil.getService(),
-			DLAppServiceAdapter.create(documentRepository),
-			dlFileEntryServiceAdapter, dlFolderServiceAdapter,
-			RepositoryServiceAdapter.create(documentRepository),
-			TrashEntryLocalServiceUtil.getService(),
-			TrashVersionLocalServiceUtil.getService());
-
-		capabilityRegistry.addExportedCapability(
-			TrashCapability.class, trashCapability);
-
 		BulkOperationCapability bulkOperationCapability =
 			new LiferayBulkOperationCapability(
 				documentRepository, dlFileEntryServiceAdapter,
@@ -115,6 +104,18 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 			ThumbnailCapability.class,
 			new LiferayThumbnailCapability(
 				repositoryEntryConverter, repositoryEntryChecker));
+
+		TrashCapability trashCapability = new LiferayTrashCapability(
+			DLAppHelperLocalServiceUtil.getService(),
+			DLAppServiceAdapter.create(documentRepository),
+			dlFileEntryServiceAdapter, dlFolderServiceAdapter,
+			RepositoryServiceAdapter.create(documentRepository),
+			TrashEntryLocalServiceUtil.getService(),
+			TrashVersionLocalServiceUtil.getService());
+
+		capabilityRegistry.addExportedCapability(
+			TrashCapability.class, trashCapability);
+
 		capabilityRegistry.addExportedCapability(
 			WorkflowCapability.class,
 			new LiferayWorkflowCapability(
