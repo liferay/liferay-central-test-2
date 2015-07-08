@@ -132,8 +132,7 @@ public class LiferayRepositoryDefiner extends BaseRepositoryDefiner {
 		capabilityRegistry.addSupportedCapability(
 			SyncCapability.class,
 			new LiferaySyncCapability(
-				GroupServiceAdapter.create(
-					documentRepository),
+				GroupServiceAdapter.create(documentRepository),
 				DLSyncEventLocalServiceUtil.getService()));
 	}
 
