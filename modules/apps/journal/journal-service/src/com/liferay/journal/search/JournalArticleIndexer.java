@@ -305,7 +305,6 @@ public class JournalArticleIndexer
 					}
 
 				});
-
 			actionableDynamicQuery.setPerformActionMethod(
 				new ActionableDynamicQuery.PerformActionMethod() {
 
