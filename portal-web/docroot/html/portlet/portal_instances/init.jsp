@@ -27,8 +27,6 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "instances");
 String tabs2 = ParamUtil.getString(request, "tabs2");
 String tabs3 = ParamUtil.getString(request, "tabs3");
 
-boolean showTabs1 = false;
-
 NumberFormat numberFormat = NumberFormat.getInstance();
 
 numberFormat.setMaximumIntegerDigits(2);
