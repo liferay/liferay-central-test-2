@@ -15,6 +15,7 @@
 package com.liferay.portal.search.internal;
 
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
@@ -82,13 +83,15 @@ public class IndexerRequest {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
-		sb.append("(methodHandler=");
-		sb.append(_methodHandler.toString());
-		sb.append(")(_indexer=");
-		sb.append(_indexer.getClass().getName());
-		sb.append(")");
+		sb.append("{indexer=");
+		sb.append(ClassUtil.getClassName(_indexer));
+		sb.append(", methodHandler=");
+		sb.append(_methodHandler);
+		sb.append(", modelClass=");
+		sb.append(_modelClass);
+		sb.append("}");
 
 		return sb.toString();
 	}
