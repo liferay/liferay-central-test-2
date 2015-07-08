@@ -761,9 +761,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public MBCategory updateMessageCount(long categoryId)
-		throws PortalException {
-
+	public MBCategory updateMessageCount(long categoryId) {
 		MBCategory mbCategory = mbCategoryPersistence.fetchByPrimaryKey(
 			categoryId);
 
@@ -781,7 +779,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public MBCategory updateStatistics(long categoryId) throws PortalException {
+	public MBCategory updateStatistics(long categoryId) {
 		MBCategory mbCategory = mbCategoryPersistence.fetchByPrimaryKey(
 			categoryId);
 
@@ -825,9 +823,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public MBCategory updateThreadCount(long categoryId)
-		throws PortalException {
-
+	public MBCategory updateThreadCount(long categoryId) {
 		MBCategory mbCategory = mbCategoryPersistence.fetchByPrimaryKey(
 			categoryId);
 

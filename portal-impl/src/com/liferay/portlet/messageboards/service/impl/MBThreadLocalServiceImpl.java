@@ -1179,7 +1179,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	@Override
-	public MBThread updateMessageCount(long threadId) throws PortalException {
+	public MBThread updateMessageCount(long threadId) {
 		MBThread mbThread = mbThreadPersistence.fetchByPrimaryKey(threadId);
 
 		if (mbThread == null) {
