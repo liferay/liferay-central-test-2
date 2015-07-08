@@ -862,8 +862,8 @@ public class BeanPropertiesImpl implements BeanProperties {
 	protected boolean isCollectionCopy(
 		Class<?> sourceClazz, Class<?> targetClazz) {
 
-		if ((sourceClazz.equals(Set.class) || sourceClazz.equals(List.class)) &&
-			(targetClazz.equals(Set.class) || targetClazz.equals(List.class))) {
+		if ((sourceClazz.equals(List.class) || sourceClazz.equals(Set.class)) &&
+			(targetClazz.equals(List.class) || targetClazz.equals(Set.class))) {
 
 			return true;
 		}
@@ -884,13 +884,13 @@ public class BeanPropertiesImpl implements BeanProperties {
 			return false;
 		}
 
-		if (sourceClazz.isPrimitive() || sourceClazz.equals(String.class) ||
-			sourceClazz.equals(Long.class) ||
-			sourceClazz.equals(Integer.class) ||
+		if (sourceClazz.isPrimitive() || sourceClazz.equals(Boolean.class) ||
 			sourceClazz.equals(Double.class) ||
 			sourceClazz.equals(Float.class) ||
-			sourceClazz.equals(Boolean.class) ||
-			sourceClazz.equals(Locale.class)) {
+			sourceClazz.equals(Integer.class) ||
+			sourceClazz.equals(Locale.class) ||
+			sourceClazz.equals(Long.class) ||
+			sourceClazz.equals(String.class)) {
 
 			return true;
 		}

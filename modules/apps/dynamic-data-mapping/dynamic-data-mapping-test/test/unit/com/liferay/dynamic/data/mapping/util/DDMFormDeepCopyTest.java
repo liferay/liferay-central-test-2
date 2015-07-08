@@ -51,54 +51,56 @@ public class DDMFormDeepCopyTest extends BaseDDMTestCase {
 		ddmForm.addDDMFormField(nameDDMFormField);
 
 		DDMFormField phoneDDMFormField = new DDMFormField("Phone", "text");
-		DDMFormField contactDDMFormField = new DDMFormField("Name", "text");
 
 		nameDDMFormField.addNestedDDMFormField(phoneDDMFormField);
+
+		DDMFormField contactDDMFormField = new DDMFormField("Name", "text");
+
 		nameDDMFormField.addNestedDDMFormField(contactDDMFormField);
 
 		DDMFormField addressDDMFormField = new DDMFormField("ZipCode", "text");
 
 		contactDDMFormField.addNestedDDMFormField(addressDDMFormField);
 
-		com.liferay.portlet.dynamicdatamapping.DDMForm ddmFormCopy =
+		com.liferay.portlet.dynamicdatamapping.DDMForm copyDDMForm =
 			BeanPropertiesUtil.deepCopyProperties(
 				ddmForm, com.liferay.portlet.dynamicdatamapping.DDMForm.class);
 
 		List<com.liferay.portlet.dynamicdatamapping.DDMFormField>
-			ddmFormFieldsCopy = ddmFormCopy.getDDMFormFields();
+			copyDDMFormFields = copyDDMForm.getDDMFormFields();
 
-		Assert.assertEquals(1, ddmFormFieldsCopy.size());
+		Assert.assertEquals(1, copyDDMFormFields.size());
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormField ddmFormFieldCopy =
-			ddmFormFieldsCopy.get(0);
+		com.liferay.portlet.dynamicdatamapping.DDMFormField copyDDMFormField =
+			copyDDMFormFields.get(0);
 
-		Assert.assertEquals("Name", ddmFormFieldCopy.getName());
-		Assert.assertEquals("textarea", ddmFormFieldCopy.getType());
+		Assert.assertEquals("Name", copyDDMFormField.getName());
+		Assert.assertEquals("textarea", copyDDMFormField.getType());
 
 		List<com.liferay.portlet.dynamicdatamapping.DDMFormField>
-			nestedDDMFormFieldsCopy = ddmFormFieldCopy.getNestedDDMFormFields();
+			copyNestedDDMFormFields = copyDDMFormField.getNestedDDMFormFields();
 
-		Assert.assertEquals(2, nestedDDMFormFieldsCopy.size());
+		Assert.assertEquals(2, copyNestedDDMFormFields.size());
 
 		com.liferay.portlet.dynamicdatamapping.DDMFormField
-			nestedDDMFormFieldCopy = nestedDDMFormFieldsCopy.get(0);
+			copyNestedDDMFormField = copyNestedDDMFormFields.get(0);
 
-		Assert.assertEquals("Phone", nestedDDMFormFieldCopy.getName());
-		Assert.assertEquals("text", nestedDDMFormFieldCopy.getType());
+		Assert.assertEquals("Phone", copyNestedDDMFormField.getName());
+		Assert.assertEquals("text", copyNestedDDMFormField.getType());
 
-		nestedDDMFormFieldCopy = nestedDDMFormFieldsCopy.get(1);
+		copyNestedDDMFormField = copyNestedDDMFormFields.get(1);
 
-		Assert.assertEquals("Name", nestedDDMFormFieldCopy.getName());
-		Assert.assertEquals("text", nestedDDMFormFieldCopy.getType());
+		Assert.assertEquals("Name", copyNestedDDMFormField.getName());
+		Assert.assertEquals("text", copyNestedDDMFormField.getType());
 
 		Assert.assertEquals(
-			1, nestedDDMFormFieldCopy.getNestedDDMFormFields().size());
+			1, copyNestedDDMFormField.getNestedDDMFormFields().size());
 
-		nestedDDMFormFieldCopy =
-			nestedDDMFormFieldCopy.getNestedDDMFormFields().get(0);
+		copyNestedDDMFormField =
+			copyNestedDDMFormField.getNestedDDMFormFields().get(0);
 
-		Assert.assertEquals("ZipCode", nestedDDMFormFieldCopy.getName());
-		Assert.assertEquals("text", nestedDDMFormFieldCopy.getType());
+		Assert.assertEquals("ZipCode", copyNestedDDMFormField.getName());
+		Assert.assertEquals("text", copyNestedDDMFormField.getType());
 	}
 
 	@Test
@@ -147,62 +149,62 @@ public class DDMFormDeepCopyTest extends BaseDDMTestCase {
 
 		nameDDMFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
 
-		com.liferay.portlet.dynamicdatamapping.DDMForm ddmFormCopy =
+		com.liferay.portlet.dynamicdatamapping.DDMForm copyDDMForm =
 			BeanPropertiesUtil.deepCopyProperties(
 				ddmForm, com.liferay.portlet.dynamicdatamapping.DDMForm.class);
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormField ddmFormFieldCopy =
-			ddmFormCopy.getDDMFormFields().get(0);
+		com.liferay.portlet.dynamicdatamapping.DDMFormField copyDDMFormField =
+			copyDDMForm.getDDMFormFields().get(0);
 
-		Assert.assertEquals("Name", ddmFormFieldCopy.getName());
-		Assert.assertEquals("textarea", ddmFormFieldCopy.getType());
-		Assert.assertEquals("namespace", ddmFormFieldCopy.getFieldNamespace());
-		Assert.assertEquals("indexType", ddmFormFieldCopy.getIndexType());
+		Assert.assertEquals("Name", copyDDMFormField.getName());
+		Assert.assertEquals("textarea", copyDDMFormField.getType());
+		Assert.assertEquals("namespace", copyDDMFormField.getFieldNamespace());
+		Assert.assertEquals("indexType", copyDDMFormField.getIndexType());
 
-		com.liferay.portlet.dynamicdatamapping.LocalizedValue labelCopy =
-			ddmFormFieldCopy.getLabel();
+		com.liferay.portlet.dynamicdatamapping.LocalizedValue copyLabel =
+			copyDDMFormField.getLabel();
 
-		Assert.assertEquals(LocaleUtil.BRAZIL, labelCopy.getDefaultLocale());
-		Assert.assertEquals("teste", labelCopy.getString(LocaleUtil.BRAZIL));
+		Assert.assertEquals(LocaleUtil.BRAZIL, copyLabel.getDefaultLocale());
+		Assert.assertEquals("teste", copyLabel.getString(LocaleUtil.BRAZIL));
 
-		Assert.assertTrue(ddmFormFieldCopy.isLocalizable());
-		Assert.assertTrue(ddmFormFieldCopy.isMultiple());
-		Assert.assertTrue(ddmFormFieldCopy.isReadOnly());
-		Assert.assertTrue(ddmFormFieldCopy.isRepeatable());
-		Assert.assertTrue(ddmFormFieldCopy.isRequired());
-		Assert.assertTrue(ddmFormFieldCopy.isShowLabel());
+		Assert.assertTrue(copyDDMFormField.isLocalizable());
+		Assert.assertTrue(copyDDMFormField.isMultiple());
+		Assert.assertTrue(copyDDMFormField.isReadOnly());
+		Assert.assertTrue(copyDDMFormField.isRepeatable());
+		Assert.assertTrue(copyDDMFormField.isRequired());
+		Assert.assertTrue(copyDDMFormField.isShowLabel());
 
-		com.liferay.portlet.dynamicdatamapping.LocalizedValue styleCopy =
-			ddmFormFieldCopy.getStyle();
+		com.liferay.portlet.dynamicdatamapping.LocalizedValue copyStyle =
+			copyDDMFormField.getStyle();
 
-		Assert.assertEquals(LocaleUtil.ENGLISH, styleCopy.getDefaultLocale());
-		Assert.assertEquals("style", styleCopy.getString(LocaleUtil.ENGLISH));
+		Assert.assertEquals(LocaleUtil.ENGLISH, copyStyle.getDefaultLocale());
+		Assert.assertEquals("style", copyStyle.getString(LocaleUtil.ENGLISH));
 
-		com.liferay.portlet.dynamicdatamapping.LocalizedValue tipCopy =
-			ddmFormFieldCopy.getTip();
+		com.liferay.portlet.dynamicdatamapping.LocalizedValue copyTip =
+			copyDDMFormField.getTip();
 
-		Assert.assertEquals(LocaleUtil.FRANCE, tipCopy.getDefaultLocale());
-		Assert.assertEquals("tip", tipCopy.getString(LocaleUtil.FRANCE));
+		Assert.assertEquals(LocaleUtil.FRANCE, copyTip.getDefaultLocale());
+		Assert.assertEquals("tip", copyTip.getString(LocaleUtil.FRANCE));
 
 		Assert.assertEquals(
-			"expression", ddmFormFieldCopy.getVisibilityExpression());
+			"expression", copyDDMFormField.getVisibilityExpression());
 
 		com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions
-			ddmFormFieldOptionsCopy = ddmFormFieldCopy.getDDMFormFieldOptions();
+			copyDDMFormFieldOptions = copyDDMFormField.getDDMFormFieldOptions();
 
 		Assert.assertEquals(
-			LocaleUtil.BRAZIL, ddmFormFieldOptionsCopy.getDefaultLocale());
+			LocaleUtil.BRAZIL, copyDDMFormFieldOptions.getDefaultLocale());
 
 		Map<String, com.liferay.portlet.dynamicdatamapping.LocalizedValue>
-			optionsCopy = ddmFormFieldOptionsCopy.getOptions();
+			copyOptions = copyDDMFormFieldOptions.getOptions();
 
-		Assert.assertTrue(optionsCopy.containsKey("teste"));
+		Assert.assertTrue(copyOptions.containsKey("teste"));
 
 		com.liferay.portlet.dynamicdatamapping.LocalizedValue
-			testeOptionLabelCopy = optionsCopy.get("teste");
+			copyTesteOptionLabel = copyOptions.get("teste");
 
 		Assert.assertEquals(
-			"label", testeOptionLabelCopy.getString(LocaleUtil.ENGLISH));
+			"label", copyTesteOptionLabel.getString(LocaleUtil.ENGLISH));
 	}
 
 	@Test
@@ -216,36 +218,36 @@ public class DDMFormDeepCopyTest extends BaseDDMTestCase {
 		ddmForm.addDDMFormField(nameDDMFormField);
 		ddmForm.addDDMFormField(phoneDDMFormField);
 
-		com.liferay.portlet.dynamicdatamapping.DDMForm ddmFormCopy =
+		com.liferay.portlet.dynamicdatamapping.DDMForm copyDDMForm =
 			BeanPropertiesUtil.deepCopyProperties(
 				ddmForm, com.liferay.portlet.dynamicdatamapping.DDMForm.class);
 
 		List<com.liferay.portlet.dynamicdatamapping.DDMFormField>
-			ddmFormFieldsCopy = ddmFormCopy.getDDMFormFields();
+			copyDDMFormFields = copyDDMForm.getDDMFormFields();
 
-		Assert.assertEquals(2, ddmFormFieldsCopy.size());
+		Assert.assertEquals(2, copyDDMFormFields.size());
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormField ddmFormFieldCopy =
-			ddmFormFieldsCopy.get(0);
+		com.liferay.portlet.dynamicdatamapping.DDMFormField copyDDMFormField =
+			copyDDMFormFields.get(0);
 
-		Assert.assertEquals("Name", ddmFormFieldCopy.getName());
-		Assert.assertEquals("textarea", ddmFormFieldCopy.getType());
+		Assert.assertEquals("Name", copyDDMFormField.getName());
+		Assert.assertEquals("textarea", copyDDMFormField.getType());
 
-		ddmFormFieldCopy = ddmFormFieldsCopy.get(1);
+		copyDDMFormField = copyDDMFormFields.get(1);
 
-		Assert.assertEquals("Phone", ddmFormFieldCopy.getName());
-		Assert.assertEquals("text", ddmFormFieldCopy.getType());
+		Assert.assertEquals("Phone", copyDDMFormField.getName());
+		Assert.assertEquals("text", copyDDMFormField.getType());
 	}
 
 	@Test
 	public void testWithoutFields() throws Exception {
 		DDMForm ddmForm = createDDMForm();
 
-		com.liferay.portlet.dynamicdatamapping.DDMForm ddmFormCopy =
+		com.liferay.portlet.dynamicdatamapping.DDMForm copyDDMForm =
 			BeanPropertiesUtil.deepCopyProperties(
 				ddmForm, com.liferay.portlet.dynamicdatamapping.DDMForm.class);
 
-		Set<Locale> availableLocales = ddmFormCopy.getAvailableLocales();
+		Set<Locale> availableLocales = copyDDMForm.getAvailableLocales();
 
 		Assert.assertFalse(availableLocales.isEmpty());
 		Assert.assertEquals(availableLocales.toArray()[0], LocaleUtil.US);
