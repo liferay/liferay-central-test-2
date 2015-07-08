@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
 public class IndexerRequest {
 
 	public IndexerRequest(
-		Method method, ClassedModel classedModel, Indexer indexer) {
+		Method method, ClassedModel classedModel, Indexer<?> indexer) {
 
 		_indexer = indexer;
 
@@ -114,7 +114,7 @@ public class IndexerRequest {
 		return sb.toString();
 	}
 
-	private final Indexer _indexer;
+	private final Indexer<?> _indexer;
 	private final MethodHandler _methodHandler;
 	private final Class<?> _modelClass;
 
