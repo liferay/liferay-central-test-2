@@ -1063,6 +1063,7 @@ public class DLImpl implements DL {
 		width = width + (2 * margin);
 
 		sb.append(width);
+
 		sb.append("px;");
 
 		return sb.toString();
