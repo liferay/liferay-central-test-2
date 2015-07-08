@@ -17,9 +17,8 @@ package com.liferay.portal.search.internal;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.HashUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassedModel;
 
 import java.lang.reflect.Method;
@@ -32,9 +31,10 @@ public class IndexerRequest {
 	public IndexerRequest(
 		Method method, ClassedModel classedModel, Indexer<?> indexer) {
 
+		_method = method;
+		_classedModel = classedModel;
 		_indexer = indexer;
 
-		_methodHandler = new MethodHandler(method, classedModel);
 		_modelClass = classedModel.getModelClass();
 	}
 
@@ -44,57 +44,31 @@ public class IndexerRequest {
 			return true;
 		}
 
-		if ((object == null) || (getClass() != object.getClass())) {
+		if (!(object instanceof IndexerRequest)) {
 			return false;
 		}
 
 		IndexerRequest indexerRequest = (IndexerRequest)object;
 
-		if (_indexer.equals(indexerRequest._indexer)) {
-			return false;
+		if (Validator.equals(_indexer, indexerRequest._indexer) &&
+			Validator.equals(_modelClass, indexerRequest._modelClass) &&
+			Validator.equals(_method, indexerRequest._method)) {
+
+			return true;
 		}
 
-		if (!_modelClass.equals(indexerRequest._modelClass)) {
-			return false;
-		}
-
-		MethodKey thisMethodKey = _methodHandler.getMethodKey();
-
-		MethodKey thatMethodKey = indexerRequest._methodHandler.getMethodKey();
-
-		if (!thisMethodKey.equals(thatMethodKey)) {
-			return false;
-		}
-
-		Object[] thisArguments = _methodHandler.getArguments();
-		Object[] thatArguments = indexerRequest._methodHandler.getArguments();
-
-		if (thisArguments.length != thatArguments.length) {
-			return false;
-		}
-
-		for (int i = 0; i < thisArguments.length; i++) {
-			if (!thisArguments[0].equals(thatArguments[0])) {
-				return false;
-			}
-		}
-
-		return true;
+		return false;
 	}
 
 	public void execute() throws Exception {
-		_methodHandler.invoke(_indexer);
+		_method.invoke(_indexer, _classedModel);
 	}
 
 	@Override
 	public int hashCode() {
-		int hashCode = 0;
+		int hashCode = HashUtil.hash(0, _classedModel);
 
-		for (Object argument : _methodHandler.getArguments()) {
-			hashCode = HashUtil.hash(hashCode, argument);
-		}
-
-		hashCode = HashUtil.hash(hashCode, _methodHandler.getMethodKey());
+		hashCode = HashUtil.hash(hashCode, _method);
 		hashCode = HashUtil.hash(hashCode, _modelClass);
 
 		return hashCode;
@@ -102,12 +76,14 @@ public class IndexerRequest {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
-		sb.append("{indexer=");
+		sb.append("{classModel=");
+		sb.append(_classedModel);
+		sb.append(", indexer=");
 		sb.append(ClassUtil.getClassName(_indexer));
-		sb.append(", methodHandler=");
-		sb.append(_methodHandler);
+		sb.append(", method=");
+		sb.append(_method);
 		sb.append(", modelClass=");
 		sb.append(_modelClass);
 		sb.append("}");
@@ -115,8 +91,9 @@ public class IndexerRequest {
 		return sb.toString();
 	}
 
+	private final ClassedModel _classedModel;
 	private final Indexer<?> _indexer;
-	private final MethodHandler _methodHandler;
+	private final Method _method;
 	private final Class<?> _modelClass;
 
 }
