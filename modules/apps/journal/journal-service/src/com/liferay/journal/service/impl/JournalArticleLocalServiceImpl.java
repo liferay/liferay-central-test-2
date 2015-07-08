@@ -7085,7 +7085,7 @@ public class JournalArticleLocalServiceImpl
 		}
 		else if (action.equals("update") &&
 				 journalGroupServiceConfiguration.
-					emailArticleUpdatedEnabled()) {
+					 emailArticleUpdatedEnabled()) {
 		}
 		else {
 			return;
