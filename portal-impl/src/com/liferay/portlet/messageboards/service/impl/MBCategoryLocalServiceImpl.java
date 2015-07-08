@@ -791,11 +791,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			mbCategory.getGroupId(), mbCategory.getCategoryId(),
 			WorkflowConstants.STATUS_APPROVED);
 
+		mbCategory.setMessageCount(messageCount);
+
 		int threadCount = mbThreadLocalService.getCategoryThreadsCount(
 			mbCategory.getGroupId(), mbCategory.getCategoryId(),
 			WorkflowConstants.STATUS_APPROVED);
 
-		mbCategory.setMessageCount(messageCount);
 		mbCategory.setThreadCount(threadCount);
 
 		return mbCategoryPersistence.update(mbCategory);
