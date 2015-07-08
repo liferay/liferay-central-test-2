@@ -65,7 +65,8 @@ public class PrincipalException extends PortalException {
 			super(
 				String.format(
 					"User %s must be the company administrator to perform " +
-					"the action", userId));
+						"the action",
+					userId));
 
 			this.userId = userId;
 		}
@@ -84,7 +85,8 @@ public class PrincipalException extends PortalException {
 			super(
 				String.format(
 					"User %s must be a universal administrator to perform " +
-					"the action", userId));
+						"the action",
+					userId));
 
 			this.userId = userId;
 		}
