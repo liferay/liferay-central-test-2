@@ -433,10 +433,10 @@ public class ClusterExecutorImplTest extends BaseClusterTestCase {
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put(
+			ClusterPropsKeys.CHANNEL_NAME_CONTROL, "test-channel-name-control");
+		properties.put(
 			ClusterPropsKeys.CHANNEL_PROPERTIES_CONTROL,
 			"test-channel-properties-control");
-		properties.put(
-			ClusterPropsKeys.CHANNEL_NAME_CONTROL, "test-channel-name-control");
 
 		clusterExecutorImpl.activate(new MockComponentContext(properties));
 

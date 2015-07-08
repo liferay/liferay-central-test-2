@@ -626,7 +626,7 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.security.sso.cas"
 		},
 
-		// Cluster
+		// Cluster Link
 
 		new String[] {
 			"cluster.link.debug.enabled", "cluster.link.debug.enabled",
