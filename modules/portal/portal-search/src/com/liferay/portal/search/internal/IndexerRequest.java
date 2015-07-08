@@ -16,6 +16,7 @@ package com.liferay.portal.search.internal;
 
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
@@ -66,19 +67,16 @@ public class IndexerRequest {
 
 	@Override
 	public int hashCode() {
-		int result = _indexer.hashCode();
+		int hashCode = 0;
 
-		result = 31 * result + _methodHandler.getMethodKey().hashCode();
-
-		result = 31 * result + _modelClass.hashCode();
-
-		Object[] arguments = _methodHandler.getArguments();
-
-		for (Object argument : arguments) {
-			result = 31 * result + argument.hashCode();
+		for (Object argument : _methodHandler.getArguments()) {
+			hashCode = HashUtil.hash(hashCode, argument);
 		}
 
-		return result;
+		hashCode = HashUtil.hash(hashCode, _methodHandler.getMethodKey());
+		hashCode = HashUtil.hash(hashCode, _modelClass);
+
+		return hashCode;
 	}
 
 	@Override
