@@ -52,9 +52,6 @@ import javax.portlet.WindowState;
  */
 public class MVCPortlet extends LiferayPortlet {
 
-	public static final String MVC_PATH =
-		MVCPortlet.class.getName() + "#MVC_PATH";
-
 	@Override
 	public void destroy() {
 		super.destroy();
@@ -264,7 +261,7 @@ public class MVCPortlet extends LiferayPortlet {
 			mvcPath = mvcRenderCommand.render(renderRequest, renderResponse);
 		}
 
-		renderRequest.setAttribute(MVC_PATH, mvcPath);
+		renderRequest.setAttribute(_MVC_PATH, mvcPath);
 
 		super.render(renderRequest, renderResponse);
 	}
@@ -434,7 +431,7 @@ public class MVCPortlet extends LiferayPortlet {
 		String mvcPath = portletRequest.getParameter("mvcPath");
 
 		if (mvcPath == null) {
-			mvcPath = (String)portletRequest.getAttribute(MVC_PATH);
+			mvcPath = (String)portletRequest.getAttribute(_MVC_PATH);
 		}
 
 		// Check deprecated parameter
@@ -555,6 +552,9 @@ public class MVCPortlet extends LiferayPortlet {
 
 		return null;
 	}
+
+	private static final String _MVC_PATH =
+		MVCPortlet.class.getName() + "#MVC_PATH";
 
 	private static final Log _log = LogFactoryUtil.getLog(MVCPortlet.class);
 
