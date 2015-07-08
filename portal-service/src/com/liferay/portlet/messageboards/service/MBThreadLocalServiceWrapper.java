@@ -685,8 +685,7 @@ public class MBThreadLocalServiceWrapper implements MBThreadLocalService,
 
 	@Override
 	public com.liferay.portlet.messageboards.model.MBThread updateMessageCount(
-		long threadId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long threadId) {
 		return _mbThreadLocalService.updateMessageCount(threadId);
 	}
 

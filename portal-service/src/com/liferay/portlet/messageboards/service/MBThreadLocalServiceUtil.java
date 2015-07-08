@@ -619,8 +619,7 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread updateMessageCount(
-		long threadId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long threadId) {
 		return getService().updateMessageCount(threadId);
 	}
 
