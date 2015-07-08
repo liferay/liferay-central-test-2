@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.social.manager;
+package com.liferay.portal.social;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.social.SocialActivityManager;
