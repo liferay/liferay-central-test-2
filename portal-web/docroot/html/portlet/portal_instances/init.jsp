@@ -22,10 +22,4 @@ page import="com.liferay.portal.CompanyWebIdException" %><%@
 page import="com.liferay.portal.RequiredCompanyException" %><%@
 page import="com.liferay.portal.util.PortalInstances" %>
 
-<%
-String tabs1 = ParamUtil.getString(request, "tabs1", "instances");
-String tabs2 = ParamUtil.getString(request, "tabs2");
-String tabs3 = ParamUtil.getString(request, "tabs3");
-%>
-
 <%@ include file="/html/portlet/portal_instances/init-ext.jsp" %>
