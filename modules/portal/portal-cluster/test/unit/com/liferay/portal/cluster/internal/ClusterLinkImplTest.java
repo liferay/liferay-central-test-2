@@ -336,13 +336,13 @@ public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 		for (int i = 0; i < channels; i++) {
 			properties.put(
-				ClusterPropsKeys.CHANNEL_PROPERTIES_TRANSPORT_PREFIX +
-					StringPool.PERIOD + i,
-				"test-channel-properties-transport-" + i);
-			properties.put(
 				ClusterPropsKeys.CHANNEL_NAME_TRANSPORT_PREFIX +
 					StringPool.PERIOD + i,
 				"test-channel-name-transport-" + i);
+			properties.put(
+				ClusterPropsKeys.CHANNEL_PROPERTIES_TRANSPORT_PREFIX +
+					StringPool.PERIOD + i,
+				"test-channel-properties-transport-" + i);
 		}
 
 		clusterLinkImpl.activate(properties);

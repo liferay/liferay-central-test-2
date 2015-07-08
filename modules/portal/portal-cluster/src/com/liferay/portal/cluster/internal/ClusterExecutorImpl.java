@@ -241,7 +241,6 @@ public class ClusterExecutorImpl implements ClusterExecutor {
 
 		String channelPropertiesString = getChannelPropertiesString(
 			componentContext.getProperties());
-
 		String channelName = getChannelName(componentContext.getProperties());
 
 		initialize(channelPropertiesString, channelName);
@@ -436,14 +435,15 @@ public class ClusterExecutorImpl implements ClusterExecutor {
 
 		if (Validator.isNull(channelPropertiesString)) {
 			throw new IllegalStateException(
-				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL + " or " +
-					ClusterPropsKeys.CHANNEL_PROPERTIES_CONTROL + " not set.");
+				"Set \"" + PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL +
+					"\" or \"" + ClusterPropsKeys.CHANNEL_PROPERTIES_CONTROL +
+						"\"");
 		}
 
 		if (Validator.isNull(channelName)) {
 			throw new IllegalStateException(
-				PropsKeys.CLUSTER_LINK_CHANNEL_NAME_CONTROL + " or " +
-					ClusterPropsKeys.CHANNEL_NAME_CONTROL + " not set.");
+				"Set \"" + PropsKeys.CLUSTER_LINK_CHANNEL_NAME_CONTROL +
+					"\" or \"" + ClusterPropsKeys.CHANNEL_NAME_CONTROL + "\"");
 		}
 
 		_executorService = _portalExecutorManager.getPortalExecutor(

@@ -231,10 +231,10 @@ public class ClusterLinkImpl implements ClusterLink {
 		Collections.sort(keys);
 
 		for (String key : keys) {
-			String channelProperties = channelPropertiesStrings.get(key);
+			String channelPropertiesString = channelPropertiesStrings.get(key);
 			String channelName = channelNames.get(key);
 
-			if (Validator.isNull(channelProperties) ||
+			if (Validator.isNull(channelPropertiesString) ||
 				Validator.isNull(channelName)) {
 
 				continue;
@@ -244,11 +244,11 @@ public class ClusterLinkImpl implements ClusterLink {
 
 			ClusterChannel clusterChannel =
 				_clusterChannelFactory.createClusterChannel(
-					channelProperties, channelName, clusterReceiver);
+					channelPropertiesString, channelName, clusterReceiver);
 
+			_clusterChannels.add(clusterChannel);
 			_clusterReceivers.add(clusterReceiver);
 			_localAddresses.add(clusterChannel.getLocalAddress());
-			_clusterChannels.add(clusterChannel);
 		}
 	}
 
