@@ -224,7 +224,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		List<TrashEntry> entries = trashEntryPersistence.findByGroupId(
 			groupId, 0, end + PropsValues.TRASH_SEARCH_LIMIT, obc);
 
-		List<TrashEntry> filteredEntries = filterViewableEntries(entries);
+		List<TrashEntry> filteredEntries = filterEntries(entries);
 
 		int total = filteredEntries.size();
 
@@ -256,7 +256,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		List<TrashEntry> entries = trashEntryPersistence.findByG_C(
 			groupId, classNameId);
 
-		return filterViewableEntries(entries);
+		return filterEntries(entries);
 	}
 
 	/**
@@ -478,7 +478,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		trashHandler.deleteTrashEntry(entry.getClassPK());
 	}
 
-	protected List<TrashEntry> filterViewableEntries(List<TrashEntry> entries)
+	protected List<TrashEntry> filterEntries(List<TrashEntry> entries)
 		throws PrincipalException {
 
 		List<TrashEntry> filteredEntries = new ArrayList<>();
