@@ -55,10 +55,11 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 			return method.invoke(_indexer, args);
 		}
 
+		Class<?> args0Class = args[0].getClass();
+
 		if (!(args[0] instanceof BaseModel) &&
 			!(args[0] instanceof ClassedModel) &&
-			!(args[0].getClass().isArray() ||
-				args[0].getClass().equals(Collection.class))) {
+			!(args0Class.isArray() || args0Class.equals(Collection.class))) {
 
 			return method.invoke(_indexer, args);
 		}
@@ -72,7 +73,7 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 		else {
 			Collection objects = null;
 
-			if (args[0].getClass().isArray()) {
+			if (args0Class.isArray()) {
 				objects = Arrays.asList((Object[])args[0]);
 			}
 			else {
