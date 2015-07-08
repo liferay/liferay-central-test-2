@@ -23,12 +23,12 @@ public interface SassCompiler {
 		throws SassCompilerException;
 
 	public String compileFile(
-			String inputFileName, String includeDirName, boolean sourceMap)
+			String inputFileName, String includeDirName, boolean sourceMaps)
 		throws SassCompilerException;
 
 	public String compileFile(
-			String inputFileName, String includeDirName, boolean sourceMap,
-			String sourceMapFileName)
+			String inputFileName, String includeDirName, boolean sourceMaps,
+			String sourceMapsFileName)
 		throws SassCompilerException;
 
 	public String compileString(
@@ -36,12 +36,12 @@ public interface SassCompiler {
 
 	public String compileString(
 			String input, String inputFileName, String includeDirName,
-			boolean sourceMap)
+			boolean sourceMaps)
 		throws SassCompilerException;
 
 	public String compileString(
 			String input, String inputFileName, String includeDirName,
-			boolean sourceMap, String sourceMapFileName)
+			boolean sourceMaps, String sourceMapsFileName)
 		throws SassCompilerException;
 
 }
