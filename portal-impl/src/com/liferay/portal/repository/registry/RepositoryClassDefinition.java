@@ -179,13 +179,11 @@ public class RepositoryClassDefinition
 		if (!capabilityRegistry.isCapabilityProvided(
 				ConfigurationCapability.class)) {
 
-			RepositoryServiceAdapter repositoryServiceAdapter =
-				RepositoryServiceAdapter.create(documentRepository);
-
 			capabilityRegistry.addExportedCapability(
 				ConfigurationCapability.class,
 				new ConfigurationCapabilityImpl(
-					documentRepository, repositoryServiceAdapter));
+					documentRepository,
+					RepositoryServiceAdapter.create(documentRepository)));
 		}
 
 		if (!capabilityRegistry.isCapabilityProvided(
