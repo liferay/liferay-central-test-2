@@ -57,6 +57,9 @@ public class JournalConfigurationAction
 			long companyId, PortletRequest portletRequest, Settings settings)
 		throws PortalException {
 
+		ModifiableSettings modifiableSettings =
+			settings.getModifiableSettings();
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
@@ -65,9 +68,6 @@ public class JournalConfigurationAction
 
 		JournalGroupServiceConfiguration journalGroupServiceConfiguration =
 			journalWebRequestHelper.getJournalGroupServiceConfiguration();
-
-		ModifiableSettings modifiableSettings =
-			settings.getModifiableSettings();
 
 		removeDefaultValue(
 			portletRequest, modifiableSettings, "emailArticleAddedBody",

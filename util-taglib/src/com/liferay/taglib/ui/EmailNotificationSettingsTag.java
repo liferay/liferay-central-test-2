@@ -144,6 +144,7 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:email-notification-settings:emailBody", emailBody);
+
 		request.setAttribute(
 			"liferay-ui:email-notification-settings:emailDefinitionTerms",
 			_emailDefinitionTerms);
@@ -165,6 +166,7 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:email-notification-settings:emailSubject",
 			emailSubject);
+
 		request.setAttribute(
 			"liferay-ui:email-notification-settings:fieldPrefix", _fieldPrefix);
 		request.setAttribute(

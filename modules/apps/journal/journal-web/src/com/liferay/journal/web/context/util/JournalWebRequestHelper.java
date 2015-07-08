@@ -49,10 +49,6 @@ public class JournalWebRequestHelper {
 				PortletDisplay portletDisplay =
 					themeDisplay.getPortletDisplay();
 
-				String portletResource = portletDisplay.getPortletResource();
-
-				long siteGroupId = themeDisplay.getSiteGroupId();
-
 				JournalServiceComponentProvider journalWebComponentProvider =
 					JournalServiceComponentProvider.
 						getJournalServiceComponentProvider();
@@ -60,21 +56,23 @@ public class JournalWebRequestHelper {
 				SettingsFactory settingsFactory =
 					journalWebComponentProvider.getSettingsFactory();
 
-				if (Validator.isNotNull(portletResource)) {
+				if (Validator.isNotNull(portletDisplay.getPortletResource())) {
 					_journalGroupServiceConfiguration =
 						settingsFactory.getSettings(
 							JournalGroupServiceConfiguration.class,
 						new ParameterMapSettingsLocator(
 							_request.getParameterMap(),
 							new GroupServiceSettingsLocator(
-								siteGroupId, JournalConstants.SERVICE_NAME)));
+								themeDisplay.getSiteGroupId(),
+								JournalConstants.SERVICE_NAME)));
 				}
 				else {
 					_journalGroupServiceConfiguration =
 						settingsFactory.getSettings(
 							JournalGroupServiceConfiguration.class,
-						new GroupServiceSettingsLocator(
-							siteGroupId, JournalConstants.SERVICE_NAME));
+							new GroupServiceSettingsLocator(
+								themeDisplay.getSiteGroupId(),
+								JournalConstants.SERVICE_NAME));
 				}
 			}
 
