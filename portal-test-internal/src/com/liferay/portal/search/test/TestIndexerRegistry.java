@@ -42,7 +42,8 @@ public class TestIndexerRegistry implements IndexerRegistry {
 		Registry registry = RegistryUtil.getRegistry();
 
 		_serviceTracker = registry.trackServices(
-			Indexer.class, new IndexerServiceTrackerCustomizer());
+			(Class<Indexer<?>>)(Class<?>)Indexer.class,
+			new IndexerServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
@@ -61,7 +62,6 @@ public class TestIndexerRegistry implements IndexerRegistry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> Indexer<T> getIndexer(String className) {
 		return (Indexer<T>)_indexers.get(className);
 	}
@@ -79,7 +79,6 @@ public class TestIndexerRegistry implements IndexerRegistry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> Indexer<T> nullSafeGetIndexer(String className) {
 		Indexer<T> indexer = getIndexer(className);
 
@@ -98,8 +97,9 @@ public class TestIndexerRegistry implements IndexerRegistry {
 	public void register(Indexer<?> indexer) {
 		Registry registry = RegistryUtil.getRegistry();
 
-		ServiceRegistration<Indexer> serviceRegistration =
-			registry.registerService(Indexer.class, indexer);
+		ServiceRegistration<Indexer<?>> serviceRegistration =
+			registry.registerService(
+				(Class<Indexer<?>>)(Class<?>)Indexer.class, indexer);
 
 		_serviceRegistrations.put(indexer.getClassName(), serviceRegistration);
 	}
@@ -111,7 +111,7 @@ public class TestIndexerRegistry implements IndexerRegistry {
 
 	@Override
 	public void unregister(String className) {
-		ServiceRegistration<Indexer> serviceRegistration =
+		ServiceRegistration<Indexer<?>> serviceRegistration =
 			_serviceRegistrations.remove(className);
 
 		if (serviceRegistration != null) {
@@ -122,24 +122,23 @@ public class TestIndexerRegistry implements IndexerRegistry {
 	private static final Log _log = LogFactoryUtil.getLog(
 		TestIndexerRegistry.class);
 
-	private final Indexer _dummyIndexer = new DummyIndexer();
+	private final Indexer<?> _dummyIndexer = new DummyIndexer();
 	private final Map<String, Indexer<? extends Object>> _indexers =
 		new ConcurrentHashMap<>();
-	private final StringServiceRegistrationMap<Indexer> _serviceRegistrations =
-		new StringServiceRegistrationMap<>();
-	private ServiceTracker<Indexer, Indexer> _serviceTracker;
+	private final StringServiceRegistrationMap<Indexer<?>>
+		_serviceRegistrations = new StringServiceRegistrationMap<>();
+	private ServiceTracker<Indexer<?>, Indexer<?>> _serviceTracker;
 
 	private class IndexerServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer<Indexer, Indexer> {
+		implements ServiceTrackerCustomizer<Indexer<?>, Indexer<?>> {
 
 		@Override
-		@SuppressWarnings("unchecked")
-		public Indexer addingService(
-			ServiceReference<Indexer> serviceReference) {
+		public Indexer<?> addingService(
+			ServiceReference<Indexer<?>> serviceReference) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			Indexer indexer = registry.getService(serviceReference);
+			Indexer<?> indexer = registry.getService(serviceReference);
 
 			Class<?> clazz = indexer.getClass();
 
@@ -152,12 +151,12 @@ public class TestIndexerRegistry implements IndexerRegistry {
 
 		@Override
 		public void modifiedService(
-			ServiceReference<Indexer> serviceReference, Indexer indexer) {
+			ServiceReference<Indexer<?>> serviceReference, Indexer<?> indexer) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<Indexer> serviceReference, Indexer indexer) {
+			ServiceReference<Indexer<?>> serviceReference, Indexer<?> indexer) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
