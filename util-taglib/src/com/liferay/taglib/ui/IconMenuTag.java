@@ -446,6 +446,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute("liferay-ui:icon-menu:css-class", _cssClass);
+		request.setAttribute("liferay-ui:icon-menu:direction", _direction);
 
 		String message = _message;
 
@@ -454,8 +455,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		}
 
 		request.setAttribute("liferay-ui:icon-menu:message", message);
-
-		request.setAttribute("liferay-ui:icon-menu:direction", _direction);
 	}
 
 	private static final String _AUI_PATH = "../aui/";

@@ -784,8 +784,8 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 
 		setUp(iconOptionsTag);
 
-		iconOptionsTag.setView(view);
 		iconOptionsTag.setDirection(direction);
+		iconOptionsTag.setView(view);
 
 		iconOptionsTag.runTag();
 	}

@@ -25,4 +25,5 @@ String message = (String)request.getAttribute("liferay-ui:icon-menu:message");
 	<a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#1" title="<%= message %>">
 		<span class="icon-ellipsis-vertical icon-monospaced"></span>
 	</a>
+
 	<ul class="dropdown-menu dropdown-menu-<%= direction %>">

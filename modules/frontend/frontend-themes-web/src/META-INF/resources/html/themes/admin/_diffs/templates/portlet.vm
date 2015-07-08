@@ -44,6 +44,7 @@
 
 			<div class="text-center toolbar-group-expand-text">
 				<span class="header-toolbar-title" title="$portlet_title">$portlet_title</span>
+
 				#if ($valid_portlet_description)
 					$theme.iconHelp($portlet_description)
 				#end
@@ -54,5 +55,4 @@
 	<div class="portlet-content">
 		$portlet_display.writeContent($writer)
 	</div>
-
 </section>

@@ -34,6 +34,7 @@ public class IconOptionsTag extends IconTag {
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
+
 		_direction = "down";
 		_showArrow = true;
 	}
@@ -46,9 +47,11 @@ public class IconOptionsTag extends IconTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
+
 		request.setAttribute("liferay-ui:icon:direction", _direction);
 		request.setAttribute(
-			"liferay-ui:icon:showArrow", String.valueOf(_showArrow));	}
+			"liferay-ui:icon:showArrow", String.valueOf(_showArrow));
+	}
 
 	private static String _direction = "down";
 	private static boolean _showArrow = true;
