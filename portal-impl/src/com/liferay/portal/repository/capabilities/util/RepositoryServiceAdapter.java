@@ -92,8 +92,7 @@ public class RepositoryServiceAdapter {
 		throws PrincipalException {
 
 		if (_repositoryService != null) {
-			throw new PrincipalException(
-				"Update is forbidden when using the Repository interface");
+			throw new PrincipalException("Repository service is not null");
 		}
 
 		return _repositoryLocalService.updateRepository(repository);

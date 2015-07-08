@@ -72,9 +72,7 @@ public class DLFolderServiceAdapter {
 		throws PortalException {
 
 		if (_dlFolderService != null) {
-			throw new PrincipalException(
-				"Actionable dynamic query cannot be used with the Repository " +
-					"interface");
+			throw new PrincipalException("DL folder service is not null");
 		}
 
 		return _dlFolderLocalService.getActionableDynamicQuery();
@@ -85,21 +83,22 @@ public class DLFolderServiceAdapter {
 			boolean includeMountFolders, QueryDefinition<?> queryDefinition)
 		throws PortalException {
 
-		List<Object> objects = null;
+		List<Object> foldersAndFileEntriesAndFileShortcuts = null;
 
 		if (_dlFolderService != null) {
-			objects = _dlFolderService.getFoldersAndFileEntriesAndFileShortcuts(
-				groupId, folderId, mimeTypes, includeMountFolders,
-				queryDefinition);
+			foldersAndFileEntriesAndFileShortcuts =
+				_dlFolderService.getFoldersAndFileEntriesAndFileShortcuts(
+					groupId, folderId, mimeTypes, includeMountFolders,
+					queryDefinition);
 		}
 		else {
-			objects =
+			foldersAndFileEntriesAndFileShortcuts =
 				_dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcuts(
 					groupId, folderId, mimeTypes, includeMountFolders,
 					queryDefinition);
 		}
 
-		return objects;
+		return foldersAndFileEntriesAndFileShortcuts;
 	}
 
 	private final DLFolderLocalService _dlFolderLocalService;

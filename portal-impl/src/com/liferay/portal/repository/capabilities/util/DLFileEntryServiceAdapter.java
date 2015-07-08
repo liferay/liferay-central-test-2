@@ -85,9 +85,7 @@ public class DLFileEntryServiceAdapter {
 		throws PortalException {
 
 		if (_dlFileEntryService != null) {
-			throw new PrincipalException(
-				"Actionable dynamic query cannot be used with the Repository " +
-					"interface");
+			throw new PrincipalException("DL file entry service is not null");
 		}
 
 		return _dlFileEntryLocalService.getActionableDynamicQuery();
