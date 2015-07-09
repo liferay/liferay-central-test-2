@@ -786,8 +786,6 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
-		<execute function="AssertClick" locator1="CPSitepages#TOOLBAR_EXPORT" value1="Export" />
-
 		<if>
 			<equals arg1="${exportPermissions}" arg2="true" />
 			<then>
