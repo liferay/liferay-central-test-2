@@ -11,11 +11,11 @@
 		<echo>${jenkins.axis.variable}</echo>
 	</target>
 
-	<target name="integration-postgresql">
+	<target name="integration-oracle">
 		<echo>${jenkins.axis.variable}</echo>
 	</target>
 
-	<target name="integration-oracle">
+	<target name="integration-postgresql">
 		<echo>${jenkins.axis.variable}</echo>
 	</target>
 
