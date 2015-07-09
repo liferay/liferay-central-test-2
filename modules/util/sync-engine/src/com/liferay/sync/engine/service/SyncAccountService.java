@@ -304,7 +304,7 @@ public class SyncAccountService {
 
 		// Sync files
 
-		if (!syncFile.isFile()) {
+		if (syncFile.isFolder()) {
 			SyncFileService.renameSyncFiles(
 				sourceFilePathName, targetFilePathName);
 		}
