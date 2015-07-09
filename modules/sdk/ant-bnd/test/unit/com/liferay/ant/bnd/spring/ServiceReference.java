@@ -12,16 +12,22 @@
  * details.
  */
 
-package com.liferay.ant.bnd.spring.bean;
+package com.liferay.ant.bnd.spring;
 
-import com.liferay.ant.bnd.spring.annotation.ServiceReference;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Miguel Pastor
  */
-public class SampleBean {
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.METHOD})
+public @interface ServiceReference {
 
-	@ServiceReference(type = String.class)
-	protected String s;
+	public Class<?> type() default Object.class;
 
 }

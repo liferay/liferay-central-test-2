@@ -20,8 +20,6 @@ import aQute.bnd.osgi.Resource;
 
 import aQute.lib.io.IO;
 
-import com.liferay.ant.bnd.spring.annotation.ServiceReference;
-
 import java.net.URL;
 
 import java.util.Arrays;

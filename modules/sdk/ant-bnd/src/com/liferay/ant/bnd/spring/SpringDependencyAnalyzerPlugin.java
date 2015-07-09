@@ -77,11 +77,11 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 		public ContextDependencyWriter(
 			Analyzer analyzer, Set<String> serviceReferences) {
 
+			_serviceReferences = serviceReferences;
+
 			Jar jar = analyzer.getJar();
 
 			_resource = jar.getResource("META-INF/spring/context.dependencies");
-
-			_serviceReferences = serviceReferences;
 		}
 
 		@Override
@@ -90,7 +90,10 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 		}
 
 		@Override
-		public void write(OutputStream out) throws Exception {
+		public void write(OutputStream outputStream) throws Exception {
+			PrintWriter printWriter = new PrintWriter(
+				new OutputStreamWriter(outputStream, "UTF-8"));
+
 			String contextDependencies = "";
 
 			if (_resource != null) {
@@ -98,18 +101,15 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 					_resource.openInputStream(), "UTF-8");
 			}
 
-			PrintWriter pw = new PrintWriter
-				(new OutputStreamWriter(out, "UTF-8"));
-
 			if (!contextDependencies.equals("")) {
-				pw.println(contextDependencies);
+				printWriter.println(contextDependencies);
 			}
 
 			for (String serviceReference : _serviceReferences) {
-				pw.println(serviceReference);
+				printWriter.println(serviceReference);
 			}
 
-			pw.flush();
+			printWriter.flush();
 		}
 
 		private final Resource _resource;
