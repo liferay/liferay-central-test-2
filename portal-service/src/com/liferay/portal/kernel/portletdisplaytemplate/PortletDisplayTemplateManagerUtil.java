@@ -117,8 +117,8 @@ public class PortletDisplayTemplateManagerUtil {
 		_dummyPortletDisplayTemplateManagerImpl =
 			new DummyPortletDisplayTemplateManagerImpl();
 
-	private final
-		ServiceTracker<PortletDisplayTemplateManager,
-			PortletDisplayTemplateManager> _serviceTracker;
+	private final ServiceTracker
+		<PortletDisplayTemplateManager, PortletDisplayTemplateManager>
+			_serviceTracker;
 
 }
