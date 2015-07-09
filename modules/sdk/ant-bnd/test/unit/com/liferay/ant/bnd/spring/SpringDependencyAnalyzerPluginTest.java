@@ -41,61 +41,61 @@ public class SpringDependencyAnalyzerPluginTest {
 	@Test
 	public void testDependenciesDefinedInFileAndAnnotations() throws Exception {
 		JarResource jarResource = new JarResource(
-			"META-INF/spring/context.dependencies",
-			"dependencies/META-INF/spring/context.dependencies");
+			"dependencies/META-INF/spring/context.dependencies",
+			"META-INF/spring/context.dependencies");
 
-		Jar jar = analyze(Arrays.asList(_TEST_PACKAGE), jarResource);
+		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME), jarResource);
 
 		Resource resource = jar.getResource(
 			"OSGI-INF/context/context.dependencies");
 
-		String collect = IO.collect(resource.openInputStream());
+		String value = IO.collect(resource.openInputStream());
 
-		Assert.assertEquals("bar.foo.Dependency\njava.lang.String\n", collect);
+		Assert.assertEquals("bar.foo.Dependency\njava.lang.String\n", value);
 	}
 
 	@Test
 	public void testDependenciesDefinedOnlyInAnnotations() throws Exception {
-		Jar jar = analyze(Arrays.asList(_TEST_PACKAGE));
+		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME));
 
 		Resource resource = jar.getResource(
 			"OSGI-INF/context/context.dependencies");
 
-		String collect = IO.collect(resource.openInputStream());
+		String value = IO.collect(resource.openInputStream());
 
-		Assert.assertEquals("java.lang.String\n", collect);
+		Assert.assertEquals("java.lang.String\n", value);
 	}
 
 	@Test
 	public void testDependenciesDefinedOnlyInFile() throws Exception {
 		JarResource jarResource = new JarResource(
-			"META-INF/spring/context.dependencies",
-			"dependencies/META-INF/spring/context.dependencies");
+			"dependencies/META-INF/spring/context.dependencies",
+			"META-INF/spring/context.dependencies");
 
 		Jar jar = analyze(Collections.<String>emptyList(), jarResource);
 
 		Resource resource = jar.getResource(
 			"OSGI-INF/context/context.dependencies");
 
-		String collect = IO.collect(resource.openInputStream());
+		String value = IO.collect(resource.openInputStream());
 
-		Assert.assertEquals("bar.foo.Dependency\n", collect);
+		Assert.assertEquals("bar.foo.Dependency\n", value);
 	}
 
 	@Test
 	public void testEmptyDependencies() throws Exception {
 		JarResource jarResource = new JarResource(
-			"META-INF/spring/context.dependencies",
-			"dependencies/META-INF/spring/empty.dependencies");
+			"dependencies/META-INF/spring/empty.dependencies",
+			"META-INF/spring/context.dependencies");
 
 		Jar jar = analyze(Collections.<String>emptyList(), jarResource);
 
 		Resource resource = jar.getResource(
 			"OSGI-INF/context/context.dependencies");
 
-		String collect = IO.collect(resource.openInputStream());
+		String value = IO.collect(resource.openInputStream());
 
-		Assert.assertEquals("", collect);
+		Assert.assertEquals("", value);
 	}
 
 	protected Jar analyze(List<String> packages, JarResource... jarResources)
@@ -135,13 +135,13 @@ public class SpringDependencyAnalyzerPluginTest {
 		return jar;
 	}
 
-	private static final String _TEST_PACKAGE = "com.liferay.ant.bnd.spring";
+	private static final String _PACKAGE_NAME = "com.liferay.ant.bnd.spring";
 
 	private static final class JarResource {
 
-		public JarResource(String target, String resource) {
+		public JarResource(String resourceName, String target) {
+			_resourceName = resourceName;
 			_target = target;
-			_resource = resource;
 		}
 
 		public String getTarget() {
@@ -151,10 +151,10 @@ public class SpringDependencyAnalyzerPluginTest {
 		public URL getURL() {
 			Class<?> clazz = getClass();
 
-			return clazz.getResource(_resource);
+			return clazz.getResource(_resourceName);
 		}
 
-		private final String _resource;
+		private final String _resourceName;
 		private final String _target;
 
 	}
