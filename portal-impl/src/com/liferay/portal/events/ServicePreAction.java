@@ -710,7 +710,8 @@ public class ServicePreAction extends Action {
 		boolean wapTheme = BrowserSnifferUtil.isWap(request);
 
 		if ((layout != null) &&
-			(group.isControlPanel() || group.isUserPersonalPanel())) {
+			(layout.isTypeControlPanel() || group.isControlPanel() ||
+			 group.isUserPersonalPanel())) {
 
 			String themeId = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
