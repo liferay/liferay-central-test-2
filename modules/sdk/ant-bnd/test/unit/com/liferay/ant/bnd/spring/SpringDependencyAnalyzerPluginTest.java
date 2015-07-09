@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.ant.bnd.plugin.spring;
+package com.liferay.ant.bnd.spring;
 
 import aQute.bnd.osgi.Analyzer;
 import aQute.bnd.osgi.Jar;
@@ -20,7 +20,7 @@ import aQute.bnd.osgi.Resource;
 
 import aQute.lib.io.IO;
 
-import com.liferay.ant.bnd.plugin.spring.annotation.ServiceReference;
+import com.liferay.ant.bnd.spring.annotation.ServiceReference;
 
 import java.net.URL;
 
@@ -137,8 +137,7 @@ public class SpringDependencyAnalyzerPluginTest {
 		return jar;
 	}
 
-	private static final String _TEST_PACKAGE =
-		"com.liferay.ant.bnd.plugin.spring";
+	private static final String _TEST_PACKAGE = "com.liferay.ant.bnd.spring";
 
 	private static final class JarResource {
 
