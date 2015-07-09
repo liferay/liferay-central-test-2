@@ -42,7 +42,7 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 
 	@Override
 	public boolean analyzeJar(Analyzer analyzer) throws Exception {
-		String property = analyzer.getProperty("-service-dependencies");
+		String property = analyzer.getProperty("-spring-dependency");
 
 		Parameters parameters = analyzer.parseHeader(property);
 
