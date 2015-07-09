@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.ant.bnd.plugin.spring.annotation;
+package com.liferay.ant.bnd.spring.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

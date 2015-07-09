@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.ant.bnd.plugin.spring.bean;
+package com.liferay.ant.bnd.spring.bean;
 
-import com.liferay.ant.bnd.plugin.spring.annotation.ServiceReference;
+import com.liferay.ant.bnd.spring.annotation.ServiceReference;
 
 /**
  * @author Miguel Pastor

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.ant.bnd.plugin.spring;
+package com.liferay.ant.bnd.spring;
 
 import aQute.bnd.header.Parameters;
 import aQute.bnd.osgi.Analyzer;
