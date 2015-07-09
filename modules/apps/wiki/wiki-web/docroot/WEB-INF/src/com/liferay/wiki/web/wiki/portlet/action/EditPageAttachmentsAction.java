@@ -272,6 +272,10 @@ public class EditPageAttachmentsAction extends PortletAction {
 		}
 	}
 
+	/**
+	 * TODO: Remove. This should extend from EditFileEntryAction once it is
+	 * modularized.
+	 */
 	protected void addMultipleFileEntries(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -461,6 +465,10 @@ public class EditPageAttachmentsAction extends PortletAction {
 		WikiPageServiceUtil.deleteTrashPageAttachments(nodeId, title);
 	}
 
+	/**
+	 * TODO: Remove. This should extend from EditFileEntryAction once it is
+	 * modularized.
+	 */
 	protected String getAddMultipleFileEntriesErrorMessage(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse, Exception e)
@@ -543,6 +551,10 @@ public class EditPageAttachmentsAction extends PortletAction {
 		return errorMessage;
 	}
 
+	/**
+	 * TODO: Remove. This should extend from EditFileEntryAction once it is
+	 * modularized.
+	 */
 	protected String[] getAllowedFileExtensions(
 			PortletConfig portletConfig, PortletRequest portletRequest,
 			PortletResponse portletResponse)
@@ -576,6 +588,10 @@ public class EditPageAttachmentsAction extends PortletAction {
 		}
 	}
 
+	/**
+	 * TODO: Remove. This should extend from EditFileEntryAction once it is
+	 * modularized.
+	 */
 	protected void handleUploadException(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse, String cmd, Exception e)
