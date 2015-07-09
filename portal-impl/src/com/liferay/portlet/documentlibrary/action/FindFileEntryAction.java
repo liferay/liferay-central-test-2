@@ -42,6 +42,6 @@ public class FindFileEntryAction extends FindFolderAction {
 	}
 
 	private final FindActionHelper _findActionHelper =
-		new DLFindFileEntryActionHelper();
+		new DLFileEntryFindActionHelper();
 
 }

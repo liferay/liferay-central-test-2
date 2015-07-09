@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Sergio González
  */
-public class DLFindFileEntryActionHelper extends DLFindFolderActionHelper {
+public class DLFileEntryFindActionHelper extends DLFolderFindActionHelper {
 
 	@Override
 	public long getGroupId(long primaryKey) throws Exception {

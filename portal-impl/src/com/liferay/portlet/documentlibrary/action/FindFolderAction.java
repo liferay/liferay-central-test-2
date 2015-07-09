@@ -45,6 +45,6 @@ public class FindFolderAction extends BaseStrutsAction {
 	}
 
 	private final FindActionHelper _findActionHelper =
-		new DLFindFolderActionHelper();
+		new DLFolderFindActionHelper();
 
 }
