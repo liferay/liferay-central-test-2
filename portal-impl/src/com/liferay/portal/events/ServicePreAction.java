@@ -355,7 +355,7 @@ public class ServicePreAction extends Action {
 				Group sourceGroup = GroupLocalServiceUtil.getGroup(
 					sourceGroupId);
 
-				if (layout.isPublicLayout() ||
+				if (layout.isTypeControlPanel() || layout.isPublicLayout() ||
 					SitesUtil.isUserGroupLayoutSetViewable(
 						permissionChecker, layout.getGroup())) {
 
