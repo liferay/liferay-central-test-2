@@ -1282,15 +1282,15 @@ public class LiferaySeleniumHelper {
 
 		Mouse mouse = new DesktopMouse();
 
-		ScreenRegion desktopScreenRegion = new DesktopScreenRegion();
+		ScreenRegion screenRegion = new DesktopScreenRegion();
 
 		ImageTarget imageTarget = getImageTarget(liferaySelenium, image);
 
-		List<ScreenRegion> screenRegions = desktopScreenRegion.findAll(
+		List<ScreenRegion> imageTargetScreenRegions = screenRegion.findAll(
 			imageTarget);
 
-		for (ScreenRegion screenRegion : screenRegions) {
-			mouse.click(screenRegion.getCenter());
+		for (ScreenRegion imageTargetScreenRegion : imageTargetScreenRegions) {
+			mouse.click(imageTargetScreenRegion.getCenter());
 		}
 	}
 
