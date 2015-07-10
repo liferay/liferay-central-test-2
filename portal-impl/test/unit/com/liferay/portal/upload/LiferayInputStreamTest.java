@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.servlet.filters.uploadservletrequest.UploadServletRequestFilter;
 
 import java.io.InputStream;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -29,6 +30,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
@@ -154,8 +156,7 @@ public class LiferayInputStreamTest {
 		_mockHttpServletRequest.setContent(content);
 
 		_mockHttpServletRequest.setAttribute(
-			UploadServletRequestFilter.COPY_MULTIPART_STREAM_TO_FILE,
-			readable);
+			UploadServletRequestFilter.COPY_MULTIPART_STREAM_TO_FILE, readable);
 
 		_liferayInputStream = new LiferayInputStream(_mockHttpServletRequest);
 
