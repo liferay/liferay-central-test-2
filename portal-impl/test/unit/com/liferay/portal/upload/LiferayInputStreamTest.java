@@ -102,7 +102,7 @@ public class LiferayInputStreamTest {
 	public void testInitialReadWithUncacheableBytesWithCopying()
 		throws Exception {
 
-		_request.setAttribute(WebKeys.COPY_MULTIPART_STREAM_TO_FILE, false);
+		_mockHttpServletRequest.setAttribute(WebKeys.COPY_MULTIPART_STREAM_TO_FILE, false);
 
 		testInitialRead(_UNCACHEABLE_BYTES);
 	}
@@ -152,11 +152,11 @@ public class LiferayInputStreamTest {
 	protected void testGetCachedInputStream(boolean readable, byte[] content)
 		throws Exception {
 
-		_request.setContent(content);
+		_mockHttpServletRequest.setContent(content);
 
-		_request.setAttribute(WebKeys.COPY_MULTIPART_STREAM_TO_FILE, readable);
+		_mockHttpServletRequest.setAttribute(WebKeys.COPY_MULTIPART_STREAM_TO_FILE, readable);
 
-		_liferayInputStream = new LiferayInputStream(_request);
+		_liferayInputStream = new LiferayInputStream(_mockHttpServletRequest);
 
 		_liferayInputStream.read(new byte[content.length], 0, content.length);
 
@@ -164,9 +164,9 @@ public class LiferayInputStreamTest {
 	}
 
 	protected void testInitialRead(byte[] content) throws Exception {
-		_request.setContent(content);
+		_mockHttpServletRequest.setContent(content);
 
-		_liferayInputStream = new LiferayInputStream(_request);
+		_liferayInputStream = new LiferayInputStream(_mockHttpServletRequest);
 
 		byte[] bytes = new byte[content.length];
 
@@ -177,9 +177,9 @@ public class LiferayInputStreamTest {
 	}
 
 	protected void testTempFile(byte[] content) throws Exception {
-		_request.setContent(content);
+		_mockHttpServletRequest.setContent(content);
 
-		_liferayInputStream = new LiferayInputStream(_request);
+		_liferayInputStream = new LiferayInputStream(_mockHttpServletRequest);
 
 		_liferayInputStream.read(new byte[content.length], 0, content.length);
 	}
@@ -202,7 +202,7 @@ public class LiferayInputStreamTest {
 
 	private java.io.File _file;
 	private LiferayInputStream _liferayInputStream;
-	private final MockHttpServletRequest _request =
+	private final MockHttpServletRequest _mockHttpServletRequest =
 		new MockHttpServletRequest();
 
 }
