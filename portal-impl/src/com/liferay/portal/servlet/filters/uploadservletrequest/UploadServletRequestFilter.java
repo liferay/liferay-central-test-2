@@ -38,6 +38,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UploadServletRequestFilter extends BasePortalFilter {
 
+	public static final String COPY_MULTIPART_STREAM_TO_FILE =
+		UploadServletRequestFilter.class.getName() +
+			"#COPY_MULTIPART_STREAM_TO_FILE";
+
 	@Override
 	public void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
@@ -75,7 +79,9 @@ public class UploadServletRequestFilter extends BasePortalFilter {
 						!liferayPortletConfig.isWARFile()) {
 
 						request.setAttribute(
-							WebKeys.COPY_MULTIPART_STREAM_TO_FILE, false);
+							UploadServletRequestFilter.
+								COPY_MULTIPART_STREAM_TO_FILE,
+							Boolean.FALSE);
 					}
 				}
 			}

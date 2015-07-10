@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.servlet.filters.uploadservletrequest.UploadServletRequestFilter;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
@@ -62,7 +63,9 @@ public class LiferayInputStream extends ServletInputStreamAdapter {
 		_totalSize = totalSize;
 
 		boolean createTempFile = GetterUtil.getBoolean(
-			request.getAttribute(WebKeys.COPY_MULTIPART_STREAM_TO_FILE), true);
+			request.getAttribute(
+				UploadServletRequestFilter.COPY_MULTIPART_STREAM_TO_FILE),
+				Boolean.TRUE);
 
 		if ((_totalSize >= THRESHOLD_SIZE) && createTempFile) {
 			_tempFile = FileUtil.createTempFile();
@@ -70,7 +73,8 @@ public class LiferayInputStream extends ServletInputStreamAdapter {
 		else {
 			_tempFile = null;
 
-			request.removeAttribute(WebKeys.COPY_MULTIPART_STREAM_TO_FILE);
+			request.removeAttribute(
+				UploadServletRequestFilter.COPY_MULTIPART_STREAM_TO_FILE);
 		}
 	}
 
