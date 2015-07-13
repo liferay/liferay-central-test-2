@@ -102,7 +102,7 @@ public class AddLayoutPrototypeAction {
 	}
 
 	@Reference(
-		target = "(javax.portlet.name=com.liferay.blogs.web.blogs.portlet.BlogsPortlet)"
+		target = "(javax.portlet.name=com.liferay.blogs.web.portlet.BlogsPortlet)"
 	)
 	protected void setPortlet(Portlet portlet) {
 	}
