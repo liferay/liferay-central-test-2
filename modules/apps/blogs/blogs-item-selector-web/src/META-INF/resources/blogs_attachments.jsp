@@ -31,10 +31,10 @@ List<FileEntry> results = new ArrayList<FileEntry>();
 String tabName = blogsItemSelectorViewDisplayContext.getTitle(locale);
 
 if (folder != null) {
-	String curTabName = ParamUtil.getString(request, "tabName");
 	String keywords = ParamUtil.getString(request, "keywords");
+	String requestTabName = ParamUtil.getString(request, "tabName");
 
-	if (Validator.isNotNull(keywords) && curTabName.equals(tabName)) {
+	if (Validator.isNotNull(keywords) && requestTabName.equals(tabName)) {
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		searchContext.setEnd(searchContainer.getEnd());
