@@ -68,7 +68,7 @@ PortletURL uploadURL = (PortletURL)request.getAttribute("liferay-ui:item-selecto
 
 	boolean showSearchInfo = false;
 
-	if (requestTabName.equals(tabName) && Validator.isNotNull(keywords)) {
+	if (Validator.isNotNull(keywords) && tabName.equals(requestTabName)) {
 		showSearchInfo = true;
 	}
 

@@ -31,10 +31,9 @@ int total = 0;
 List<FileEntry> results = new ArrayList<FileEntry>();
 
 String keywords = ParamUtil.getString(request, "keywords");
-String requestTabName = ParamUtil.getString(request, "tabName");
-String tabName = wikiAttachmentItemSelectorViewDisplayContext.getTitle(locale);
+String tabName = ParamUtil.getString(request, "tabName");
 
-if (Validator.isNotNull(keywords) && requestTabName.equals(tabName)) {
+if (Validator.isNotNull(keywords) && tabName.equals(wikiAttachmentItemSelectorViewDisplayContext.getTitle(locale))) {
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 	searchContext.setEnd(searchContainer.getEnd());
@@ -84,7 +83,7 @@ searchContainer.setResults(results);
 	itemSelectedEventName="<%= wikiAttachmentItemSelectorViewDisplayContext.getItemSelectedEventName() %>"
 	searchContainer="<%= searchContainer %>"
 	searchURL="<%= wikiAttachmentItemSelectorViewDisplayContext.getPortletURL(request, liferayPortletResponse) %>"
-	tabName="<%= tabName %>"
+	tabName="<%= wikiAttachmentItemSelectorViewDisplayContext.getTitle(locale) %>"
 />
 
 <%!
