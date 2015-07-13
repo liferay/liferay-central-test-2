@@ -103,6 +103,10 @@ public class GlobalShutdownAction extends SimpleAction {
 
 	protected void shutdownLevel1() {
 
+		// Authentication
+
+		AuthPublicPathRegistry.unregister(PropsValues.AUTH_PUBLIC_PATHS);
+
 		// Instant messenger AIM
 
 		try {
@@ -174,10 +178,6 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Plugins
 
 		RequiredPluginsUtil.stopCheckingRequiredPlugins();
-
-		// Authentication
-
-		AuthPublicPathRegistry.unregister(PropsValues.AUTH_PUBLIC_PATHS);
 
 		// Scheduler engine
 
