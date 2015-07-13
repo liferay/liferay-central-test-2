@@ -14,33 +14,11 @@
 
 package com.liferay.wiki.web.wiki.portlet.path;
 
-import com.liferay.portal.kernel.struts.path.AuthPublicPath;
-import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
-
-import java.util.Map;
-
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Modified;
 
 /**
  * @author Roberto Díaz
  */
-@Component(
-	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/edit_page",
-	service = AuthPublicPath.class
-)
-public class EditPageAuthPublicPath extends BaseAuthPublicPath {
-
-	@Activate
-	protected void activate(Map<String, String> properties) {
-		updatePath(properties);
-	}
-
-	@Modified
-	protected void modified(Map<String, String> properties) {
-		updatePath(properties);
-	}
-
+@Component(immediate = true, property = "auth.public.path=/wiki/edit_page")
+public class EditPageAuthPublicPath {
 }
