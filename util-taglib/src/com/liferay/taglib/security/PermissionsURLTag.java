@@ -127,6 +127,9 @@ public class PermissionsURLTag extends TagSupport {
 			}
 		}
 
+		portletURL.setParameter(
+			"portletConfiguration", Boolean.TRUE.toString());
+
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		portletURL.setParameter("portletResource", portletDisplay.getId());
@@ -134,8 +137,6 @@ public class PermissionsURLTag extends TagSupport {
 		portletURL.setParameter("modelResource", modelResource);
 		portletURL.setParameter(
 			"modelResourceDescription", modelResourceDescription);
-		portletURL.setParameter(
-			"portletConfiguration", Boolean.TRUE.toString());
 		portletURL.setParameter(
 			"resourceGroupId", String.valueOf(resourceGroupId));
 		portletURL.setParameter("resourcePrimKey", resourcePrimKey);
