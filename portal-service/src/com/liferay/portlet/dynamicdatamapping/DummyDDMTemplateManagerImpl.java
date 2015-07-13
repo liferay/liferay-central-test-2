@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.dynamicdatamapping;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 
@@ -31,13 +30,12 @@ public class DummyDDMTemplateManagerImpl implements DDMTemplateManager {
 
 	@Override
 	public DDMTemplate addTemplate(
-			long userId, long groupId, long classNameId, long classPK,
-			long resourceClassNameId, String templateKey,
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			String type, String mode, String language, String script,
-			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallImageFile, ServiceContext serviceContext)
-		throws PortalException {
+		long userId, long groupId, long classNameId, long classPK,
+		long resourceClassNameId, String templateKey,
+		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+		String type, String mode, String language, String script,
+		boolean cacheable, boolean smallImage, String smallImageURL,
+		File smallImageFile, ServiceContext serviceContext) {
 
 		return null;
 	}
@@ -50,7 +48,7 @@ public class DummyDDMTemplateManagerImpl implements DDMTemplateManager {
 	}
 
 	@Override
-	public DDMTemplate getTemplate(long templateId) throws PortalException {
+	public DDMTemplate getTemplate(long templateId) {
 		return null;
 	}
 
@@ -63,9 +61,8 @@ public class DummyDDMTemplateManagerImpl implements DDMTemplateManager {
 
 	@Override
 	public boolean hasPermission(
-			PermissionChecker permissionChecker, long groupId, long templateId,
-			String portletId, String actionId)
-		throws PortalException {
+		PermissionChecker permissionChecker, long groupId, long templateId,
+		String portletId, String actionId) {
 
 		return false;
 	}
