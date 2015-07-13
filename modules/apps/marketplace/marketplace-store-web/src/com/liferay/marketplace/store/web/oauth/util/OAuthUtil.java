@@ -50,15 +50,23 @@ import org.scribe.oauth.OAuthService;
 public class OAuthUtil {
 
 	public static void deleteAccessToken(User user) throws PortalException {
-		_instance._expandoValueLocalService.deleteValue(
+		_instance._deleteAccessToken(user);
+	}
+
+	private void _deleteAccessToken(User user) throws PortalException {
+		_expandoValueLocalService.deleteValue(
 			user.getCompanyId(), User.class.getName(), "MP", "secret",
 			user.getUserId());
-		_instance._expandoValueLocalService.deleteValue(
+		_expandoValueLocalService.deleteValue(
 			user.getCompanyId(), User.class.getName(), "MP", "token",
 			user.getUserId());
 	}
 
 	public static Token getAccessToken(User user) throws PortalException {
+		return _instance._getAccessToken(user);
+	}
+
+	private Token _getAccessToken(User user) throws PortalException {
 		ExpandoValue secretExpandoValue =
 			_instance._expandoValueLocalService.getValue(
 				user.getCompanyId(), User.class.getName(), "MP", "secret",
@@ -91,10 +99,16 @@ public class OAuthUtil {
 	public static void updateAccessToken(User user, Token token)
 		throws PortalException {
 
-		_instance._expandoValueLocalService.addValue(
+		_instance._updateAccessToken(user, token);
+	}
+
+	private void _updateAccessToken(User user, Token token)
+		throws PortalException {
+
+		_expandoValueLocalService.addValue(
 			user.getCompanyId(), User.class.getName(), "MP", "secret",
 			user.getUserId(), token.getSecret());
-		_instance._expandoValueLocalService.addValue(
+		_expandoValueLocalService.addValue(
 			user.getCompanyId(), User.class.getName(), "MP", "token",
 			user.getUserId(), token.getToken());
 	}
