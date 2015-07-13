@@ -19,6 +19,14 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Sergio González
  */
-@Component(immediate = true, property = "auth.public.path=/blogs/find_entry")
-public class TrackbackAuthPublicPath {
+@Component(
+	immediate = true,
+	property = {
+		"auth.public.path=/blogs/find_entry", "auth.public.path=/blogs/rss",
+		"auth.public.path=/blogs/trackback",
+		"auth.public.path=/blogs_aggregator/rss"
+	},
+	service = Object.class
+)
+public class AuthPublicPath {
 }
