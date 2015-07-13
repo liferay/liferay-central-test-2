@@ -40,6 +40,7 @@ public interface DDMTemplate extends StagedModel {
 
 	public String getMode();
 
+	@Override
 	public Date getModifiedDate();
 
 	public String getName();
