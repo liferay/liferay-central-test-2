@@ -17,10 +17,16 @@ package com.liferay.bookmarks.web.portlet.path;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Miguel Pastor
+ * @author Sergio González
  */
 @Component(
-	immediate = true, property = "auth.public.path=/bookmarks/find_folder"
+	immediate = true,
+	property = {
+		"auth.public.path=/bookmarks/find_entry",
+		"auth.public.path=/bookmarks/find_folder",
+		"auth.public.path=/bookmarks/open_entry"
+	},
+	service = Object.class
 )
-public class FindFolderAuthPublicPath {
+public class AuthPublicPath {
 }
