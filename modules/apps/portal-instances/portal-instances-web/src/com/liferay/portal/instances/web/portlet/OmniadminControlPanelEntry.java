@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.instances.web.permission;
+package com.liferay.portal.instances.web.portlet;
 
 import com.liferay.portal.instances.web.constants.PortalInstancesPortletKeys;
 import com.liferay.portlet.ControlPanelEntry;
