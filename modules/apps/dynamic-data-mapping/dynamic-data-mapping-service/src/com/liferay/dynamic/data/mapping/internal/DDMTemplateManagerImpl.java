@@ -48,14 +48,14 @@ public class DDMTemplateManagerImpl implements DDMTemplateManager {
 			File smallImageFile, ServiceContext serviceContext)
 		throws PortalException {
 
-		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template =
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate ddmTemplate =
 			_ddmTemplateLocalService.addTemplate(
 				userId, groupId, classNameId, classPK, resourceClassNameId,
 				templateKey, nameMap, descriptionMap, type, mode, language,
 				script, cacheable, smallImage, smallImageURL, smallImageFile,
 				serviceContext);
 
-		return new DDMTemplateImpl(template);
+		return new DDMTemplateImpl(ddmTemplate);
 	}
 
 	@Override

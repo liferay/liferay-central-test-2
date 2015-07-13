@@ -29,216 +29,216 @@ import java.util.Locale;
 public class DDMTemplateImpl implements DDMTemplate {
 
 	public DDMTemplateImpl(
-		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template) {
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate ddmTemplate) {
 
-		_template = template;
+		_ddmTemplate = ddmTemplate;
 	}
 
 	@Override
 	public Object clone() {
 		DDMTemplateImpl ddmTemplateImpl = new DDMTemplateImpl(
 			(com.liferay.portlet.dynamicdatamapping.model.DDMTemplate)
-				_template.clone());
+				_ddmTemplate.clone());
 
 		return ddmTemplateImpl;
 	}
 
 	@Override
 	public boolean getCacheable() {
-		return _template.getCacheable();
+		return _ddmTemplate.getCacheable();
 	}
 
 	@Override
 	public long getClassNameId() {
-		return _template.getClassNameId();
+		return _ddmTemplate.getClassNameId();
 	}
 
 	@Override
 	public long getClassPK() {
-		return _template.getClassPK();
+		return _ddmTemplate.getClassPK();
 	}
 
 	@Override
 	public long getCompanyId() {
-		return _template.getCompanyId();
+		return _ddmTemplate.getCompanyId();
 	}
 
 	@Override
 	public Date getCreateDate() {
-		return _template.getCreateDate();
+		return _ddmTemplate.getCreateDate();
 	}
 
 	@Override
 	public String getDescription() {
-		return _template.getDescription();
+		return _ddmTemplate.getDescription();
 	}
 
 	@Override
 	public String getDescription(Locale locale) {
-		return _template.getDescription(locale);
+		return _ddmTemplate.getDescription(locale);
 	}
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return _template.getExpandoBridge();
+		return _ddmTemplate.getExpandoBridge();
 	}
 
 	@Override
 	public long getGroupId() {
-		return _template.getGroupId();
+		return _ddmTemplate.getGroupId();
 	}
 
 	@Override
 	public String getLanguage() {
-		return _template.getLanguage();
+		return _ddmTemplate.getLanguage();
 	}
 
 	@Override
 	public String getMode() {
-		return _template.getMode();
+		return _ddmTemplate.getMode();
 	}
 
 	@Override
 	public Class<?> getModelClass() {
-		return _template.getModelClass();
+		return _ddmTemplate.getModelClass();
 	}
 
 	@Override
 	public String getModelClassName() {
-		return _template.getModelClassName();
+		return _ddmTemplate.getModelClassName();
 	}
 
 	@Override
 	public Date getModifiedDate() {
-		return _template.getModifiedDate();
+		return _ddmTemplate.getModifiedDate();
 	}
 
 	@Override
 	public String getName() {
-		return _template.getName();
+		return _ddmTemplate.getName();
 	}
 
 	@Override
 	public String getName(Locale locale) {
-		return _template.getName(locale);
+		return _ddmTemplate.getName(locale);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _template.getPrimaryKeyObj();
+		return _ddmTemplate.getPrimaryKeyObj();
 	}
 
 	@Override
 	public long getResourceClassNameId() {
-		return _template.getResourceClassNameId();
+		return _ddmTemplate.getResourceClassNameId();
 	}
 
 	@Override
 	public String getScript() {
-		return _template.getScript();
+		return _ddmTemplate.getScript();
 	}
 
 	@Override
 	public boolean getSmallImage() {
-		return _template.getSmallImage();
+		return _ddmTemplate.getSmallImage();
 	}
 
 	@Override
 	public long getSmallImageId() {
-		return _template.getSmallImageId();
+		return _ddmTemplate.getSmallImageId();
 	}
 
 	@Override
 	public String getSmallImageURL() {
-		return _template.getSmallImageURL();
+		return _ddmTemplate.getSmallImageURL();
 	}
 
 	@Override
 	public StagedModelType getStagedModelType() {
-		return _template.getStagedModelType();
+		return _ddmTemplate.getStagedModelType();
 	}
 
 	@Override
 	public long getTemplateId() {
-		return _template.getTemplateId();
+		return _ddmTemplate.getTemplateId();
 	}
 
 	@Override
 	public String getTemplateKey() {
-		return _template.getTemplateKey();
+		return _ddmTemplate.getTemplateKey();
 	}
 
 	@Override
 	public String getType() {
-		return _template.getType();
+		return _ddmTemplate.getType();
 	}
 
 	@Override
 	public long getUserId() {
-		return _template.getUserId();
+		return _ddmTemplate.getUserId();
 	}
 
 	@Override
 	public String getUserName() {
-		return _template.getUserName();
+		return _ddmTemplate.getUserName();
 	}
 
 	@Override
 	public String getUuid() {
-		return _template.getUuid();
+		return _ddmTemplate.getUuid();
 	}
 
 	@Override
 	public String getVersion() {
-		return _template.getVersion();
+		return _ddmTemplate.getVersion();
 	}
 
 	@Override
 	public long getVersionUserId() {
-		return _template.getVersionUserId();
+		return _ddmTemplate.getVersionUserId();
 	}
 
 	@Override
 	public String getVersionUserName() {
-		return _template.getVersionUserName();
+		return _ddmTemplate.getVersionUserName();
 	}
 
 	@Override
 	public boolean isCacheable() {
-		return _template.isCacheable();
+		return _ddmTemplate.isCacheable();
 	}
 
 	@Override
 	public boolean isSmallImage() {
-		return _template.isSmallImage();
+		return _ddmTemplate.isSmallImage();
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
-		_template.setCompanyId(companyId);
+		_ddmTemplate.setCompanyId(companyId);
 	}
 
 	@Override
 	public void setCreateDate(Date createDate) {
-		_template.setCreateDate(createDate);
+		_ddmTemplate.setCreateDate(createDate);
 	}
 
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
-		_template.setModifiedDate(modifiedDate);
+		_ddmTemplate.setModifiedDate(modifiedDate);
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_template.setPrimaryKeyObj(primaryKeyObj);
+		_ddmTemplate.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	@Override
 	public void setUuid(String uuid) {
-		_template.setUuid(uuid);
+		_ddmTemplate.setUuid(uuid);
 	}
 
 	private final com.liferay.portlet.dynamicdatamapping.model.DDMTemplate
-		_template;
+		_ddmTemplate;
 
 }
