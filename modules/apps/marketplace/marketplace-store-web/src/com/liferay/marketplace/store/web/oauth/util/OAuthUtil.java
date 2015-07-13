@@ -53,35 +53,8 @@ public class OAuthUtil {
 		_instance._deleteAccessToken(user);
 	}
 
-	private void _deleteAccessToken(User user) throws PortalException {
-		_expandoValueLocalService.deleteValue(
-			user.getCompanyId(), User.class.getName(), "MP", "secret",
-			user.getUserId());
-		_expandoValueLocalService.deleteValue(
-			user.getCompanyId(), User.class.getName(), "MP", "token",
-			user.getUserId());
-	}
-
 	public static Token getAccessToken(User user) throws PortalException {
 		return _instance._getAccessToken(user);
-	}
-
-	private Token _getAccessToken(User user) throws PortalException {
-		ExpandoValue secretExpandoValue =
-			_instance._expandoValueLocalService.getValue(
-				user.getCompanyId(), User.class.getName(), "MP", "secret",
-				user.getUserId());
-		ExpandoValue tokenExpandoValue =
-			_instance._expandoValueLocalService.getValue(
-				user.getCompanyId(), User.class.getName(), "MP", "token",
-				user.getUserId());
-
-		if ((secretExpandoValue == null) || (tokenExpandoValue == null)) {
-			return null;
-		}
-
-		return new Token(
-			tokenExpandoValue.getString(), secretExpandoValue.getString());
 	}
 
 	public static OAuthService getOAuthService() {
@@ -100,17 +73,6 @@ public class OAuthUtil {
 		throws PortalException {
 
 		_instance._updateAccessToken(user, token);
-	}
-
-	private void _updateAccessToken(User user, Token token)
-		throws PortalException {
-
-		_expandoValueLocalService.addValue(
-			user.getCompanyId(), User.class.getName(), "MP", "secret",
-			user.getUserId(), token.getSecret());
-		_expandoValueLocalService.addValue(
-			user.getCompanyId(), User.class.getName(), "MP", "token",
-			user.getUserId(), token.getToken());
 	}
 
 	@Activate
@@ -161,6 +123,33 @@ public class OAuthUtil {
 		_expandoValueLocalService = expandoValueLocalService;
 	}
 
+	private void _deleteAccessToken(User user) throws PortalException {
+		_expandoValueLocalService.deleteValue(
+			user.getCompanyId(), User.class.getName(), "MP", "secret",
+			user.getUserId());
+		_expandoValueLocalService.deleteValue(
+			user.getCompanyId(), User.class.getName(), "MP", "token",
+			user.getUserId());
+	}
+
+	private Token _getAccessToken(User user) throws PortalException {
+		ExpandoValue secretExpandoValue =
+			_instance._expandoValueLocalService.getValue(
+				user.getCompanyId(), User.class.getName(), "MP", "secret",
+				user.getUserId());
+		ExpandoValue tokenExpandoValue =
+			_instance._expandoValueLocalService.getValue(
+				user.getCompanyId(), User.class.getName(), "MP", "token",
+				user.getUserId());
+
+		if ((secretExpandoValue == null) || (tokenExpandoValue == null)) {
+			return null;
+		}
+
+		return new Token(
+			tokenExpandoValue.getString(), secretExpandoValue.getString());
+	}
+
 	private void _setupExpando(long companyId) throws Exception {
 		ExpandoTable table = null;
 
@@ -181,6 +170,17 @@ public class OAuthUtil {
 		}
 		catch (DuplicateColumnNameException dcne) {
 		}
+	}
+
+	private void _updateAccessToken(User user, Token token)
+		throws PortalException {
+
+		_expandoValueLocalService.addValue(
+			user.getCompanyId(), User.class.getName(), "MP", "secret",
+			user.getUserId(), token.getSecret());
+		_expandoValueLocalService.addValue(
+			user.getCompanyId(), User.class.getName(), "MP", "token",
+			user.getUserId(), token.getToken());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(OAuthUtil.class);
