@@ -295,7 +295,6 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 			sb.append(" and journal structure ID ");
 			sb.append(structureId);
-			sb.append(".");
 
 			_log.warn(sb.toString());
 		}
@@ -337,8 +336,8 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
 				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
 				long resourcePrimKey = rs.getLong("resourcePrimKey");
 				String structureId = rs.getString("structureId");
 
