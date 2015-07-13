@@ -25,7 +25,6 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Juergen Kappler
  */
-
 @Component(
 	immediate = true,
 	property = {
