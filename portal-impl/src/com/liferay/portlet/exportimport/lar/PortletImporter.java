@@ -195,6 +195,9 @@ public class PortletImporter {
 		ZipReader zipReader = null;
 
 		try {
+
+			// LAR validation
+
 			ExportImportThreadLocal.setPortletDataDeletionImportInProcess(true);
 
 			Map<String, Serializable> settingsMap =
@@ -205,8 +208,6 @@ public class PortletImporter {
 			String portletId = MapUtil.getString(settingsMap, "portletId");
 			long targetPlid = MapUtil.getLong(settingsMap, "targetPlid");
 			long targetGroupId = MapUtil.getLong(settingsMap, "targetGroupId");
-
-			// LAR validation
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(targetPlid);
 

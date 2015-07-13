@@ -172,6 +172,9 @@ public class LayoutImporter {
 		ZipReader zipReader = null;
 
 		try {
+
+			// LAR validation
+
 			ExportImportThreadLocal.setLayoutDataDeletionImportInProcess(true);
 
 			Map<String, Serializable> settingsMap =
@@ -182,8 +185,6 @@ public class LayoutImporter {
 				settingsMap, "privateLayout");
 			Map<String, String[]> parameterMap =
 				(Map<String, String[]>)settingsMap.get("parameterMap");
-
-			// LAR validation
 
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				targetGroupId, privateLayout);
