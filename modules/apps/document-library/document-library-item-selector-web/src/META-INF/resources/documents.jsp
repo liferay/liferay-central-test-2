@@ -30,11 +30,11 @@ long repositoryId = dlItemSelectorViewDisplayContext.getRepositoryId(request);
 long folderId = dlItemSelectorViewDisplayContext.getFolderId(request);
 String[] mimeTypes = dlItemSelectorViewDisplayContext.getMimeTypes();
 
-String curTabName = ParamUtil.getString(request, "tabName");
 String keywords = ParamUtil.getString(request, "keywords");
+String requestTabName = ParamUtil.getString(request, "tabName");
 String tabName = dlItemSelectorViewDisplayContext.getTitle(locale);
 
-if (Validator.isNotNull(keywords) && curTabName.equals(tabName)) {
+if (Validator.isNotNull(keywords) && requestTabName.equals(tabName)) {
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 	searchContext.setAttribute("mimeTypes", mimeTypes);
