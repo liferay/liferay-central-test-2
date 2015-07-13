@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
 		ViewPortletProvider.class
 	}
 )
-public class BlogsAdminAdminPortletProvider
+public class BlogsAdminPortletProvider
 	extends BasePortletProvider
 	implements EditPortletProvider, ManagePortletProvider, ViewPortletProvider {
 
