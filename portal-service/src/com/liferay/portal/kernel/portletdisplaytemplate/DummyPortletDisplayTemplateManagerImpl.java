@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.template.TemplateVariableGroup;
 import com.liferay.portlet.dynamicdatamapping.DDMTemplate;
 import com.liferay.portlet.exportimport.lar.PortletDataContext;
-import com.liferay.portlet.exportimport.lar.PortletDataException;
 
 import java.util.List;
 import java.util.Map;
@@ -34,9 +33,8 @@ public class DummyPortletDisplayTemplateManagerImpl
 
 	@Override
 	public void exportDDMTemplateStagedModel(
-			PortletDataContext portletDataContext, String portletId,
-			DDMTemplate ddmTemplate)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, String portletId,
+		DDMTemplate ddmTemplate) {
 	}
 
 	@Override
