@@ -105,6 +105,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 				unsyncByteArrayOutputStream);
 
 			objectOutputStream.writeObject(source);
+
 			objectOutputStream.flush();
 
 			UnsyncByteArrayInputStream unsyncByteArrayInputStream =
@@ -118,6 +119,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 		finally {
 			objectInputStream.close();
+
 			objectOutputStream.close();
 		}
 	}
