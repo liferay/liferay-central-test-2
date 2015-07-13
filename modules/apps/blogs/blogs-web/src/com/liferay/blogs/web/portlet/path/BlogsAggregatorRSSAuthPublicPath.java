@@ -14,33 +14,13 @@
 
 package com.liferay.blogs.web.portlet.path;
 
-import com.liferay.portal.kernel.struts.path.AuthPublicPath;
-import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
-
-import java.util.Map;
-
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Modified;
 
 /**
  * @author Sergio González
  */
 @Component(
-	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/blogs_aggregator/rss",
-	service = AuthPublicPath.class
+	immediate = true, property = "auth.public.path=/blogs_aggregator/rss"
 )
-public class BlogsAggregatorRSSAuthPublicPath extends BaseAuthPublicPath {
-
-	@Activate
-	protected void activate(Map<String, String> properties) {
-		updatePath(properties);
-	}
-
-	@Modified
-	protected void modified(Map<String, String> properties) {
-		updatePath(properties);
-	}
-
+public class BlogsAggregatorRSSAuthPublicPath {
 }

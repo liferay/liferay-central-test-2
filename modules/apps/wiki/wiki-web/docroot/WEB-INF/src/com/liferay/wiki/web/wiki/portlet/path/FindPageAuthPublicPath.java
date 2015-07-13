@@ -14,33 +14,11 @@
 
 package com.liferay.wiki.web.wiki.portlet.path;
 
-import com.liferay.portal.kernel.struts.path.AuthPublicPath;
-import com.liferay.portal.kernel.struts.path.BaseAuthPublicPath;
-
-import java.util.Map;
-
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Modified;
 
 /**
  * @author Iván Zaera
  */
-@Component(
-	immediate = true,
-	property = BaseAuthPublicPath.AUTH_PUBLIC_PATH + "=/wiki/find_page",
-	service = AuthPublicPath.class
-)
-public class FindPageAuthPublicPath extends BaseAuthPublicPath {
-
-	@Activate
-	protected void activate(Map<String, String> properties) {
-		updatePath(properties);
-	}
-
-	@Modified
-	protected void modified(Map<String, String> properties) {
-		updatePath(properties);
-	}
-
+@Component(immediate = true, property = "auth.public.path=/wiki/find_page")
+public class FindPageAuthPublicPath {
 }
