@@ -21,6 +21,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true, property = "auth.public.path=/polls/view_chart",
-	service = Object.class)
+	service = Object.class
+)
 public class AuthPublicPath {
 }
