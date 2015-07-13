@@ -134,6 +134,7 @@ public abstract class BaseItemSelectorCriterionHandler
 			ItemSelectorView itemSelectorView) {
 
 			removedService(serviceReference, itemSelectorView);
+
 			addingService(serviceReference);
 		}
 
