@@ -24,7 +24,9 @@ import com.liferay.registry.ServiceTrackerCustomizer;
 import com.liferay.registry.collections.StringServiceRegistrationMap;
 import com.liferay.registry.util.StringPlus;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -49,7 +51,9 @@ public class AuthPublicPathRegistry {
 		Registry registry = RegistryUtil.getRegistry();
 
 		_serviceTracker = registry.trackServices(
-			"(auth.public.path=*)", new AuthPublicTrackerCustomizer());
+			registry.getFilter(
+				"(&(auth.public.path=*)(objectClass=java.lang.Object))"),
+			new AuthPublicTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
@@ -62,8 +66,14 @@ public class AuthPublicPathRegistry {
 		Registry registry = RegistryUtil.getRegistry();
 
 		for (String path : paths) {
+			Map<String, Object> properties = new HashMap<>();
+
+			properties.put("auth.public.path", path);
+			properties.put("objectClass", Object.class.getName());
+
 			ServiceRegistration<Object> serviceRegistration =
-				registry.registerService(Object.class, path);
+				registry.registerService(
+					Object.class, new Object(), properties);
 
 			_serviceRegistrations.put(path, serviceRegistration);
 		}
