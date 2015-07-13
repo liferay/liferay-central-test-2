@@ -21,15 +21,12 @@ package com.liferay.marketplace.store.web.configuration;
 public class MarketplaceStoreWebConfigurationValues {
 
 	public static final String MARKETPLACE_KEY =
-		MarketplaceStoreWebConfigurationUtil.get(
-			MarketplaceStoreWebConfigurationKeys.MARKETPLACE_KEY);
+		MarketplaceStoreWebConfigurationUtil.get("marketplace.key");
 
 	public static final String MARKETPLACE_SECRET =
-		MarketplaceStoreWebConfigurationUtil.get(
-			MarketplaceStoreWebConfigurationKeys.MARKETPLACE_SECRET);
+		MarketplaceStoreWebConfigurationUtil.get("marketplace.secret");
 
 	public static final String MARKETPLACE_URL =
-		MarketplaceStoreWebConfigurationUtil.get(
-			MarketplaceStoreWebConfigurationKeys.MARKETPLACE_URL);
+		MarketplaceStoreWebConfigurationUtil.get("marketplace.url");
 
 }
