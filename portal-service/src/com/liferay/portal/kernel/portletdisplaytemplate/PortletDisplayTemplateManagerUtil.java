@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.portletdisplaytemplate;
 
 import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.template.TemplateVariableGroup;
-import com.liferay.portal.kernel.util.ProxyServiceInvocation;
+import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portlet.dynamicdatamapping.DDMTemplate;
 import com.liferay.portlet.exportimport.lar.PortletDataContext;
 import com.liferay.portlet.exportimport.lar.PortletDataException;
@@ -84,7 +84,7 @@ public class PortletDisplayTemplateManagerUtil {
 	}
 
 	private static final PortletDisplayTemplateManager
-		_portletDisplayTemplateManager = ProxyServiceInvocation.newInstance(
+		_portletDisplayTemplateManager = ProxyFactory.newInstance(
 			PortletDisplayTemplateManager.class);
 
 }
