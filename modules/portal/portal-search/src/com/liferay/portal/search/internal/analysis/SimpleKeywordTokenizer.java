@@ -32,6 +32,7 @@ public class SimpleKeywordTokenizer implements KeywordTokenizer {
 	@Override
 	public boolean requiresTokenization(String keyword) {
 		int start = keyword.indexOf(CharPool.QUOTE);
+
 		int end = keyword.indexOf(CharPool.QUOTE, start + 1);
 
 		if (!((keyword.indexOf(CharPool.QUOTE) == 0) &&
@@ -49,6 +50,7 @@ public class SimpleKeywordTokenizer implements KeywordTokenizer {
 		List<String> tokens = new ArrayList<>();
 
 		int start = keyword.indexOf(CharPool.QUOTE);
+
 		int end = keyword.indexOf(CharPool.QUOTE, start + 1);
 
 		tokenize(keyword, tokens, start, end);
@@ -98,6 +100,7 @@ public class SimpleKeywordTokenizer implements KeywordTokenizer {
 		}
 
 		start = keyword.indexOf(CharPool.QUOTE, end + 1);
+
 		end = keyword.indexOf(CharPool.QUOTE, start + 1);
 
 		tokenize(keyword, tokens, start, end);

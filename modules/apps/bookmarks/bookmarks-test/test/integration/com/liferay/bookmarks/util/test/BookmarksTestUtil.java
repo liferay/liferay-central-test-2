@@ -56,9 +56,7 @@ public class BookmarksTestUtil {
 			long folderId, boolean approved, ServiceContext serviceContext)
 		throws Exception {
 
-		String name = "Test Entry";
-
-		return addEntry(name, folderId, approved, serviceContext);
+		return addEntry("Test Entry", folderId, approved, serviceContext);
 	}
 
 	public static BookmarksEntry addEntry(
