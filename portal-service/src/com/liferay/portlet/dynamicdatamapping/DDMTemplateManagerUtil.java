@@ -15,7 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.ProxyServiceInvocation;
+import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 
@@ -75,6 +75,6 @@ public class DDMTemplateManagerUtil {
 	}
 
 	private static final DDMTemplateManager _ddmTemplateManager =
-		ProxyServiceInvocation.newInstance(DDMTemplateManager.class);
+		ProxyFactory.newInstance(DDMTemplateManager.class);
 
 }

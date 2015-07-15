@@ -15,7 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.ProxyServiceInvocation;
+import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
@@ -104,6 +104,6 @@ public class DDMStructureManagerUtil {
 	}
 
 	private static final DDMStructureManager _ddmStructureManager =
-		ProxyServiceInvocation.newInstance(DDMStructureManager.class);
+		ProxyFactory.newInstance(DDMStructureManager.class);
 
 }

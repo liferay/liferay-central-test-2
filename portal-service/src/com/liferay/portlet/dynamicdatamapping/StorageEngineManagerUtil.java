@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.dynamicdatamapping;
 
-import com.liferay.portal.kernel.util.ProxyServiceInvocation;
+import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
 
@@ -57,6 +57,6 @@ public class StorageEngineManagerUtil {
 	}
 
 	private static final StorageEngineManager _storageEngineManager =
-		ProxyServiceInvocation.newInstance(StorageEngineManager.class);
+		ProxyFactory.newInstance(StorageEngineManager.class);
 
 }
