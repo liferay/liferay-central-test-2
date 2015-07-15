@@ -73,11 +73,11 @@ public class DDMStructureLinkManagerImpl implements DDMStructureLinkManager {
 		List<DDMStructureLink> ddmStructureLinks = new ArrayList<>();
 
 		for (com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink
-				structureLink :
+				ddmStructureLink :
 					_ddmStructureLinkLocalService.getStructureLinks(
 						classNameId, classPK)) {
 
-			ddmStructureLinks.add(new DDMStructureLinkImpl(structureLink));
+			ddmStructureLinks.add(new DDMStructureLinkImpl(ddmStructureLink));
 		}
 
 		return ddmStructureLinks;
