@@ -52,7 +52,7 @@ public class DDMStructureLinkImpl implements DDMStructureLink {
 	protected Object clone() {
 		DDMStructureLinkImpl ddmStructureLinkImpl = new DDMStructureLinkImpl(
 			(com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink)
-			_ddmStructureLink.clone());
+				_ddmStructureLink.clone());
 
 		return ddmStructureLinkImpl;
 	}

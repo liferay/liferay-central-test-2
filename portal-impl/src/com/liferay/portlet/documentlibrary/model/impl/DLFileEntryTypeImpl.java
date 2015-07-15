@@ -41,9 +41,9 @@ public class DLFileEntryTypeImpl extends DLFileEntryTypeBaseImpl {
 	@Override
 	public List<DDMStructure> getDDMStructures() {
 		List<DDMStructureLink> ddmStructureLinks =
-				DDMStructureLinkManagerUtil.getStructureLinks(
-						PortalUtil.getClassNameId(DLFileEntryType.class),
-						getFileEntryTypeId());
+			DDMStructureLinkManagerUtil.getStructureLinks(
+				PortalUtil.getClassNameId(DLFileEntryType.class),
+				getFileEntryTypeId());
 
 		return getDDMStructures(ddmStructureLinks);
 	}
