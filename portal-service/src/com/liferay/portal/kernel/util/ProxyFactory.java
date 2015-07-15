@@ -27,10 +27,10 @@ import java.lang.reflect.Method;
  */
 public class ProxyFactory {
 
-	public static <T> T newInstance(Class<T> interfaceClass) {
+	public static <T> T newDummyInstance(Class<T> interfaceClass) {
 		return (T)ProxyUtil.newProxyInstance(
 			interfaceClass.getClassLoader(), new Class[] {interfaceClass},
-			new RegistryInvocationHandler<T>(interfaceClass));
+			new DummyInvocationHandler<T>());
 	}
 
 	public static Object newInstance(
@@ -55,7 +55,49 @@ public class ProxyFactory {
 			new ClassLoaderBeanHandler(instance, classLoader));
 	}
 
-	private static class RegistryInvocationHandler<T>
+	public static <T> T newServiceTrackedInstance(Class<T> interfaceClass) {
+		return (T)ProxyUtil.newProxyInstance(
+			interfaceClass.getClassLoader(), new Class[] {interfaceClass},
+			new ServiceTrackedInvocationHandler<T>(interfaceClass));
+	}
+
+	private static class DummyInvocationHandler<T>
+		implements InvocationHandler {
+
+		@Override
+		public Object invoke(Object proxy, Method method, Object[] arguments)
+			throws Throwable {
+
+			Class<?> returnType = method.getReturnType();
+
+			if (returnType.equals(boolean.class)) {
+				return GetterUtil.DEFAULT_BOOLEAN;
+			}
+			else if (returnType.equals(byte.class)) {
+				return GetterUtil.DEFAULT_BYTE;
+			}
+			else if (returnType.equals(double.class)) {
+				return GetterUtil.DEFAULT_DOUBLE;
+			}
+			else if (returnType.equals(float.class)) {
+				return GetterUtil.DEFAULT_FLOAT;
+			}
+			else if (returnType.equals(int.class)) {
+				return GetterUtil.DEFAULT_INTEGER;
+			}
+			else if (returnType.equals(long.class)) {
+				return GetterUtil.DEFAULT_LONG;
+			}
+			else if (returnType.equals(short.class)) {
+				return GetterUtil.DEFAULT_SHORT;
+			}
+
+			return method.getDefaultValue();
+		}
+
+	}
+
+	private static class ServiceTrackedInvocationHandler<T>
 		implements InvocationHandler {
 
 		@Override
@@ -95,7 +137,7 @@ public class ProxyFactory {
 			return method.getDefaultValue();
 		}
 
-		private RegistryInvocationHandler(Class<T> interfaceClass) {
+		private ServiceTrackedInvocationHandler(Class<T> interfaceClass) {
 			Registry registry = RegistryUtil.getRegistry();
 
 			_serviceTracker = registry.trackServices(interfaceClass);
