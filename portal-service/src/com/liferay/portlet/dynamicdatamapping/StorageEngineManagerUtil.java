@@ -57,6 +57,6 @@ public class StorageEngineManagerUtil {
 	}
 
 	private static final StorageEngineManager _storageEngineManager =
-		ProxyFactory.newInstance(StorageEngineManager.class);
+		ProxyFactory.newServiceTrackedInstance(StorageEngineManager.class);
 
 }

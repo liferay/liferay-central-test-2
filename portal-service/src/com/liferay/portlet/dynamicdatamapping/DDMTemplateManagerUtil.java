@@ -75,6 +75,6 @@ public class DDMTemplateManagerUtil {
 	}
 
 	private static final DDMTemplateManager _ddmTemplateManager =
-		ProxyFactory.newInstance(DDMTemplateManager.class);
+		ProxyFactory.newServiceTrackedInstance(DDMTemplateManager.class);
 
 }

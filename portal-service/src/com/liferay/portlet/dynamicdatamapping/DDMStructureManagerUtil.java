@@ -104,6 +104,6 @@ public class DDMStructureManagerUtil {
 	}
 
 	private static final DDMStructureManager _ddmStructureManager =
-		ProxyFactory.newInstance(DDMStructureManager.class);
+		ProxyFactory.newServiceTrackedInstance(DDMStructureManager.class);
 
 }
