@@ -644,6 +644,9 @@ public abstract class BaseSearchTestCase {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
+			group.getGroupId());
+
 		String keyword1 = getSearchKeywords() + 1;
 		String keyword2 = getSearchKeywords() + 2;
 		String keyword3 = getSearchKeywords() + 3;
@@ -653,13 +656,8 @@ public abstract class BaseSearchTestCase {
 		String keyword7 = getSearchKeywords() + 7;
 
 		String combinedKeywords =
-			keyword1 + StringPool.SPACE + keyword2 + StringPool.SPACE +
-				keyword3 + StringPool.SPACE + keyword4 + StringPool.SPACE +
-				keyword5 + StringPool.SPACE + keyword6 + StringPool.SPACE +
-				keyword7;
-
-		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
-			group.getGroupId());
+			keyword1 + " " + keyword2 + " " + keyword3 + " " + keyword4 + " " +
+				keyword5 + " " + keyword6 + " " + keyword7;
 
 		searchContext.setKeywords(combinedKeywords);
 
@@ -678,18 +676,21 @@ public abstract class BaseSearchTestCase {
 		searchContext = SearchContextTestUtil.getSearchContext(
 			group.getGroupId());
 
-		searchContext.setKeywords(
-			StringPool.QUOTE + keyword1 + StringPool.SPACE + keyword2 +
-				StringPool.QUOTE);
+		searchContext.setKeywords("\"" + keyword1 + " " + keyword2 + "\"");
 
 		assertBaseModelsCount(initialBaseModelsSearchCount + 1, searchContext);
 
 		searchContext = SearchContextTestUtil.getSearchContext(
 			group.getGroupId());
 
-		searchContext.setKeywords(
-			StringPool.QUOTE + keyword2 + StringPool.SPACE + keyword1 +
-				StringPool.QUOTE);
+		searchContext.setKeywords("\"" + keyword2 + " " + keyword1 + "\"");
+
+		assertBaseModelsCount(initialBaseModelsSearchCount, searchContext);
+
+		searchContext = SearchContextTestUtil.getSearchContext(
+			group.getGroupId());
+
+		searchContext.setKeywords("\"" + keyword2 + " " + keyword4 + "\"");
 
 		assertBaseModelsCount(initialBaseModelsSearchCount, searchContext);
 
@@ -697,35 +698,22 @@ public abstract class BaseSearchTestCase {
 			group.getGroupId());
 
 		searchContext.setKeywords(
-			StringPool.QUOTE + keyword2 + StringPool.SPACE + keyword4 +
-				StringPool.QUOTE);
-
-		assertBaseModelsCount(initialBaseModelsSearchCount, searchContext);
-
-		searchContext = SearchContextTestUtil.getSearchContext(
-					group.getGroupId());
-
-		searchContext.setKeywords(
-			keyword1 + StringPool.SPACE + StringPool.QUOTE + keyword2 +
-				StringPool.SPACE + keyword3 + StringPool.QUOTE);
+			keyword1 + " \"" + keyword2 + " " + keyword3 + "\"");
 
 		assertBaseModelsCount(initialBaseModelsSearchCount + 1, searchContext);
 
 		searchContext = SearchContextTestUtil.getSearchContext(
-					group.getGroupId());
+			group.getGroupId());
 
 		searchContext.setKeywords(
-			RandomTestUtil.randomString() + StringPool.SPACE +
-				StringPool.QUOTE + keyword2 + StringPool.SPACE + keyword3 +
-				StringPool.QUOTE + StringPool.SPACE + keyword5);
+			RandomTestUtil.randomString() + " \"" + keyword2 + " " + keyword3 +
+				"\"" + " " + keyword5);
 
 		assertBaseModelsCount(initialBaseModelsSearchCount + 1, searchContext);
 
 		searchContext.setKeywords(
-			RandomTestUtil.randomString() + StringPool.SPACE +
-				StringPool.QUOTE + keyword2 + StringPool.SPACE + keyword5 +
-				StringPool.QUOTE + StringPool.SPACE +
-				RandomTestUtil.randomString());
+			RandomTestUtil.randomString() + " \"" + keyword2 + " " + keyword5 +
+				"\"" + " " + RandomTestUtil.randomString());
 
 		assertBaseModelsCount(initialBaseModelsSearchCount, searchContext);
 	}

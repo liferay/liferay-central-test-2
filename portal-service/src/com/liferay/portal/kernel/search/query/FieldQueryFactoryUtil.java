@@ -30,7 +30,7 @@ public class FieldQueryFactoryUtil {
 		String field, String value, boolean like, boolean splitKeywords) {
 
 		if (_instance._fieldQueryFactory == null) {
-			throw new IllegalStateException("Uninitialized FieldQueryFactory");
+			throw new IllegalStateException("Field query factory is null");
 		}
 
 		return _instance._fieldQueryFactory.createQuery(
