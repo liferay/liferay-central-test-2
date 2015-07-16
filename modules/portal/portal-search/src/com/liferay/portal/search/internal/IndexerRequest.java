@@ -44,11 +44,11 @@ public class IndexerRequest {
 		Long modelPrimaryKey) {
 
 		_method = method;
-		_classedModel = null;
 		_indexer = indexer;
-
 		_modelClassName = modelClassName;
 		_modelPrimaryKey = modelPrimaryKey;
+
+		_classedModel = null;
 	}
 
 	@Override
