@@ -491,7 +491,7 @@ public abstract class BaseIndexer<T> implements Indexer<T> {
 	}
 
 	@Override
-	public void reindex(Collection<T> collection) throws SearchException {
+	public void reindex(Collection<T> collection) {
 		if (SearchEngineUtil.isIndexReadOnly() || !isIndexerEnabled() ||
 			collection.isEmpty()) {
 
