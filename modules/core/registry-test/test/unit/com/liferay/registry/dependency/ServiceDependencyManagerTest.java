@@ -247,7 +247,7 @@ public class ServiceDependencyManagerTest {
 
 		serviceDependencyManager.registerDependencies(filter1, filter2);
 
-		Thread dependencyWaiter = new Thread(
+		Thread dependencyWaiter1 = new Thread(
 			new Runnable() {
 
 				@Override
@@ -257,9 +257,23 @@ public class ServiceDependencyManagerTest {
 
 			});
 
-		dependencyWaiter.setDaemon(true);
+		dependencyWaiter1.setDaemon(true);
 
-		dependencyWaiter.start();
+		dependencyWaiter1.start();
+
+		Thread dependencyWaiter2 = new Thread(
+			new Runnable() {
+
+				@Override
+				public void run() {
+					serviceDependencyManager.waitForDependencies(0);
+				}
+
+			});
+
+		dependencyWaiter2.setDaemon(true);
+
+		dependencyWaiter2.start();
 
 		try {
 			Thread.sleep(250);
@@ -270,8 +284,12 @@ public class ServiceDependencyManagerTest {
 
 			Thread.sleep(250);
 
-			if (dependencyWaiter.isAlive()) {
-				Assert.fail("Dependencies should have been fulfilled");
+			if (dependencyWaiter1.isAlive()) {
+				Assert.fail("Dependencies 1 should have been fulfilled");
+			}
+
+			if (dependencyWaiter2.isAlive()) {
+				Assert.fail("Dependencies 2 should have been fulfilled");
 			}
 
 			Assert.assertTrue(dependenciesSatisfied.get());
