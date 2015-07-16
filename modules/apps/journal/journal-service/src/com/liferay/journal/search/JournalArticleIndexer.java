@@ -278,13 +278,13 @@ public class JournalArticleIndexer
 				ddmStructureKeys[i] = ddmStructure.getStructureKey();
 			}
 
-			final ActionableDynamicQuery actionableDynamicQuery =
-				_journalArticleLocalService.getActionableDynamicQuery();
-
 			final Indexer<JournalArticle> indexer =
 				IndexerRegistryUtil.nullSafeGetIndexer(JournalArticle.class);
 
 			_indexAllVersions.set(false);
+
+			final ActionableDynamicQuery actionableDynamicQuery =
+				_journalArticleLocalService.getActionableDynamicQuery();
 
 			actionableDynamicQuery.setAddCriteriaMethod(
 				new ActionableDynamicQuery.AddCriteriaMethod() {
