@@ -247,16 +247,12 @@ public class ServiceDependencyManagerTest {
 
 		serviceDependencyManager.registerDependencies(filter1, filter2);
 
-		registry.registerService(TrackedOne.class, new TrackedOne());
-		registry.registerService(
-			TrackedTwo.class, new TrackedTwo(new TrackedOne()));
-
 		Thread dependencyWaiter = new Thread(
 			new Runnable() {
 
 				@Override
 				public void run() {
-					serviceDependencyManager.waitForDependencies(100);
+					serviceDependencyManager.waitForDependencies(0);
 				}
 
 			});
@@ -266,6 +262,12 @@ public class ServiceDependencyManagerTest {
 		dependencyWaiter.start();
 
 		try {
+			Thread.sleep(250);
+
+			registry.registerService(TrackedOne.class, new TrackedOne());
+			registry.registerService(
+				TrackedTwo.class, new TrackedTwo(new TrackedOne()));
+
 			Thread.sleep(250);
 
 			if (dependencyWaiter.isAlive()) {
