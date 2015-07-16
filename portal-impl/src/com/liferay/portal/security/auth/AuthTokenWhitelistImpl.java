@@ -63,7 +63,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 
 		_serviceTracker.open();
 
-		_registerPortalProperty();
+		registerPortalProperty();
 	}
 
 	public void destroy() {
@@ -243,7 +243,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 		return false;
 	}
 
-	private void _registerPortalProperty() {
+	protected void registerPortalProperty() {
 		Registry registry = RegistryUtil.getRegistry();
 
 		for (String tokenIgnoreAction : PropsValues.AUTH_TOKEN_IGNORE_ACTIONS) {
