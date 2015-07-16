@@ -88,10 +88,10 @@ public class IndexerRequest {
 
 	@Override
 	public int hashCode() {
-		int hashCode = HashUtil.hash(0, _modelClassName);
+		int hashCode = HashUtil.hash(0, _method.getName());
 
+		hashCode = HashUtil.hash(hashCode, _modelClassName);
 		hashCode = HashUtil.hash(hashCode, _modelPrimaryKey);
-		hashCode = HashUtil.hash(hashCode, _method.getName());
 
 		return hashCode;
 	}
