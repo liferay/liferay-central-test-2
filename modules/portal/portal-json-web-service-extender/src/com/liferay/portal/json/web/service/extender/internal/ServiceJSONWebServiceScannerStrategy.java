@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.json.web.service.extender.internal.jsonwebservice;
+package com.liferay.portal.json.web.service.extender.internal;
 
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceScannerStrategy;
 import com.liferay.portal.kernel.util.ProxyUtil;
