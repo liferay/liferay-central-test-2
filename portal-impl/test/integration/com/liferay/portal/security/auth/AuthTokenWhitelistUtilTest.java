@@ -41,7 +41,7 @@ public class AuthTokenWhitelistUtilTest {
 			new SyntheticBundleRule("bundle.authtokenwhitelistutil"));
 
 	@Test
-	public void testGetPortletCSRFWhitelistActionsDefinedInPortalProperties() {
+	public void testGetPortletCSRFWhitelistActionsFromPortalProperties() {
 		Set<String> portletCSRFWhitelistActions =
 			AuthTokenWhitelistUtil.getPortletCSRFWhitelistActions();
 
@@ -49,20 +49,16 @@ public class AuthTokenWhitelistUtilTest {
 				PropsValues.AUTH_TOKEN_IGNORE_ACTIONS) {
 
 			Assert.assertTrue(
-				"The URL a can't be found in " + portletCSRFWhitelistActions,
 				portletCSRFWhitelistActions.contains(authTokenIgnoreAction));
 		}
 	}
 
 	@Test
-	public void testGetPortletCSRFWhitelistActionsWithBundle() {
+	public void testGetPortletCSRFWhitelistActionsFromBundle() {
 		Set<String> portletCSRFWhitelistActions =
 			AuthTokenWhitelistUtil.getPortletCSRFWhitelistActions();
 
 		Assert.assertTrue(
-			"The URL " +
-				TestAuthTokenIgnoreActions.TEST_AUTH_TOKEN_IGNORE_ACTION_URL +
-				" can't be found in " + portletCSRFWhitelistActions,
 			portletCSRFWhitelistActions.contains(
 				TestAuthTokenIgnoreActions.TEST_AUTH_TOKEN_IGNORE_ACTION_URL));
 	}
