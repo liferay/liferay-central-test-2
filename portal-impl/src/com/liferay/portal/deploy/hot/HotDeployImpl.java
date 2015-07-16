@@ -189,7 +189,7 @@ public class HotDeployImpl implements HotDeploy {
 	public interface PACL {
 
 		public void initPolicy(
-			String contextName, URLContainer urlContext,
+			String contextName, URLContainer urlContainer,
 			ClassLoader classLoader, Properties properties);
 
 		public void unregister(ClassLoader classLoader);
@@ -341,7 +341,7 @@ public class HotDeployImpl implements HotDeploy {
 
 		@Override
 		public void initPolicy(
-			String contextName, URLContainer urlContext,
+			String contextName, URLContainer urlContainer,
 			ClassLoader classLoader, Properties properties) {
 		}
 

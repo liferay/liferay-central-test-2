@@ -32,10 +32,10 @@ import java.util.Properties;
 public class ActivePACLPolicy extends BasePACLPolicy {
 
 	public ActivePACLPolicy(
-		String contextName, URLContainer urlContext, ClassLoader classLoader,
+		String contextName, URLContainer urlContainer, ClassLoader classLoader,
 		Properties properties) {
 
-		super(contextName, urlContext, classLoader, properties);
+		super(contextName, urlContainer, classLoader, properties);
 
 		try {
 			initJNDIChecker();

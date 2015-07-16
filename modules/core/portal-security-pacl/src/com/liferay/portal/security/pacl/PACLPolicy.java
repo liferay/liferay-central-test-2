@@ -46,7 +46,7 @@ public interface PACLPolicy {
 
 	public Set<String> getPropertySet(String key);
 
-	public URLContainer getURLContext();
+	public URLContainer getURLContainer();
 
 	public List<URL> getURLs();
 

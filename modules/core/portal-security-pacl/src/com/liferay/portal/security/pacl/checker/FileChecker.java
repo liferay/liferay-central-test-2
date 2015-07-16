@@ -64,10 +64,10 @@ public class FileChecker extends BaseChecker {
 	public void afterPropertiesSet() {
 		PACLPolicy paclPolicy = getPACLPolicy();
 
-		URLContainer urlContext = paclPolicy.getURLContext();
+		URLContainer urlContainer = paclPolicy.getURLContainer();
 
 		try {
-			URL url = urlContext.getResource(StringPool.SLASH);
+			URL url = urlContainer.getResource(StringPool.SLASH);
 
 			_rootDir = url.getPath();
 		}
