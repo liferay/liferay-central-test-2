@@ -82,7 +82,7 @@ public interface DDMStructureManager {
 			ServiceContext serviceContext)
 		throws PortalException;
 
-	public void updateStructure(long structureId, String structureKey)
+	public void updateStructureKey(long structureId, String structureKey)
 		throws PortalException;
 
 }

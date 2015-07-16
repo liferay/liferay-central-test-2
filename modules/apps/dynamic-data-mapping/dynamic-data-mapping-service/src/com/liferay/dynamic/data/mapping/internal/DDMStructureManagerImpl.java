@@ -199,7 +199,7 @@ public class DDMStructureManagerImpl implements DDMStructureManager {
 	}
 
 	@Override
-	public void updateStructure(long structureId, String structureKey)
+	public void updateStructureKey(long structureId, String structureKey)
 		throws PortalException {
 
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure =

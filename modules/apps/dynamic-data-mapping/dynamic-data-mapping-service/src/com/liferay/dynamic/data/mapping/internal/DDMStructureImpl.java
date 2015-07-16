@@ -36,9 +36,10 @@ import java.util.Set;
 public class DDMStructureImpl implements DDMStructure {
 
 	public DDMStructureImpl(
-		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmTemplate) {
+		com.liferay.portlet.dynamicdatamapping.model.DDMStructure
+			ddmStructure) {
 
-		_ddmStructure = ddmTemplate;
+		_ddmStructure = ddmStructure;
 	}
 
 	@Override
