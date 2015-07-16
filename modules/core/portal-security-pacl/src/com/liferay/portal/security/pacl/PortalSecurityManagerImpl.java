@@ -861,11 +861,11 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 
 		@Override
 		public void initPolicy(
-			String contextName, URLContainer urlContext,
+			String contextName, URLContainer urlContainer,
 			ClassLoader classLoader, Properties properties) {
 
 			PACLPolicy paclPolicy = PACLPolicyManager.buildPACLPolicy(
-				contextName, urlContext, classLoader, properties);
+				contextName, urlContainer, classLoader, properties);
 
 			PACLPolicyManager.register(classLoader, paclPolicy);
 		}

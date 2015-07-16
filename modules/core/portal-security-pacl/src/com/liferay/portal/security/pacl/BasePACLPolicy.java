@@ -54,11 +54,11 @@ import java.util.TreeSet;
 public abstract class BasePACLPolicy implements PACLPolicy {
 
 	public BasePACLPolicy(
-		String contextName, URLContainer urlContext, ClassLoader classLoader,
+		String contextName, URLContainer urlContainer, ClassLoader classLoader,
 		Properties properties) {
 
 		_contextName = contextName;
-		_urlContext = urlContext;
+		_urlContainer = urlContainer;
 		_classLoader = classLoader;
 		_properties = properties;
 
@@ -112,8 +112,8 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 	}
 
 	@Override
-	public URLContainer getURLContext() {
-		return _urlContext;
+	public URLContainer getURLContainer() {
+		return _urlContainer;
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 	}
 
 	protected void initPolicy() throws Exception {
-		URL url = _urlContext.getResource("/WEB-INF/java.policy");
+		URL url = _urlContainer.getResource("/WEB-INF/java.policy");
 
 		if (url == null) {
 			return;
@@ -229,7 +229,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		// plugin can use it in it's Java security policy file for setting the
 		// code base
 
-		URL rootURL = _urlContext.getResource(StringPool.SLASH);
+		URL rootURL = _urlContainer.getResource(StringPool.SLASH);
 
 		String rootDir = rootURL.getPath();
 
@@ -257,7 +257,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 	private final String _contextName;
 	private Policy _policy;
 	private final Properties _properties;
-	private final URLContainer _urlContext;
+	private final URLContainer _urlContainer;
 	private final List<URL> _urls = new ArrayList<>();
 
 }

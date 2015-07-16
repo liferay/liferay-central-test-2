@@ -45,7 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PACLPolicyManager {
 
 	public static PACLPolicy buildPACLPolicy(
-		String contextName, URLContainer urlContext, ClassLoader classLoader,
+		String contextName, URLContainer urlContainer, ClassLoader classLoader,
 		Properties properties) {
 
 		String value = properties.getProperty(
@@ -53,16 +53,16 @@ public class PACLPolicyManager {
 
 		if (value.equals("generate")) {
 			return new GeneratingPACLPolicy(
-				contextName, urlContext, classLoader, properties);
+				contextName, urlContainer, classLoader, properties);
 		}
 
 		if (GetterUtil.getBoolean(value)) {
 			return new ActivePACLPolicy(
-				contextName, urlContext, classLoader, properties);
+				contextName, urlContainer, classLoader, properties);
 		}
 
 		return new InactivePACLPolicy(
-			contextName, urlContext, classLoader, properties);
+			contextName, urlContainer, classLoader, properties);
 	}
 
 	public static PACLPolicy getDefaultPACLPolicy() {
@@ -119,9 +119,9 @@ public class PACLPolicyManager {
 			}
 		}
 
-		URLContainer urlContext = paclPolicy.getURLContext();
+		URLContainer urlContainer = paclPolicy.getURLContainer();
 
-		URL path = urlContext.getResource(StringPool.SLASH);
+		URL path = urlContainer.getResource(StringPool.SLASH);
 
 		String realPath = path.getPath();
 

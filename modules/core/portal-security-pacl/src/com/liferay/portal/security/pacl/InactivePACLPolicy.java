@@ -28,10 +28,10 @@ import java.util.Properties;
 public class InactivePACLPolicy extends BasePACLPolicy {
 
 	public InactivePACLPolicy(
-		String contextName, URLContainer urlContext, ClassLoader classLoader,
+		String contextName, URLContainer urlContainer, ClassLoader classLoader,
 		Properties properties) {
 
-		super(contextName, urlContext, classLoader, properties);
+		super(contextName, urlContainer, classLoader, properties);
 	}
 
 	@Override

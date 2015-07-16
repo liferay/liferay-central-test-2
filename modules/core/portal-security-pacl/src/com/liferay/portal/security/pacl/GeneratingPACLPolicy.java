@@ -45,10 +45,10 @@ import java.util.concurrent.locks.ReentrantLock;
 public class GeneratingPACLPolicy extends ActivePACLPolicy {
 
 	public GeneratingPACLPolicy(
-		String contextName, URLContainer urlContext, ClassLoader classLoader,
+		String contextName, URLContainer urlContainer, ClassLoader classLoader,
 		Properties properties) {
 
-		super(contextName, urlContext, classLoader, properties);
+		super(contextName, urlContainer, classLoader, properties);
 	}
 
 	@Override
