@@ -330,7 +330,8 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 
 		AccessController.doPrivileged(
 			new PermissionAction(
-				_checkPermissionMethodHandle, permission, getSecurityContext()));
+				_checkPermissionMethodHandle, permission,
+				getSecurityContext()));
 	}
 
 	@Override
