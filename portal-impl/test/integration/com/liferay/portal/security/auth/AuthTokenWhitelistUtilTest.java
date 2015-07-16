@@ -41,6 +41,16 @@ public class AuthTokenWhitelistUtilTest {
 			new SyntheticBundleRule("bundle.authtokenwhitelistutil"));
 
 	@Test
+	public void testGetPortletCSRFWhitelistActionsFromBundle() {
+		Set<String> portletCSRFWhitelistActions =
+			AuthTokenWhitelistUtil.getPortletCSRFWhitelistActions();
+
+		Assert.assertTrue(
+			portletCSRFWhitelistActions.contains(
+				TestAuthTokenIgnoreActions.TEST_AUTH_TOKEN_IGNORE_ACTION_URL));
+	}
+
+	@Test
 	public void testGetPortletCSRFWhitelistActionsFromPortalProperties() {
 		Set<String> portletCSRFWhitelistActions =
 			AuthTokenWhitelistUtil.getPortletCSRFWhitelistActions();
@@ -51,16 +61,6 @@ public class AuthTokenWhitelistUtilTest {
 			Assert.assertTrue(
 				portletCSRFWhitelistActions.contains(authTokenIgnoreAction));
 		}
-	}
-
-	@Test
-	public void testGetPortletCSRFWhitelistActionsFromBundle() {
-		Set<String> portletCSRFWhitelistActions =
-			AuthTokenWhitelistUtil.getPortletCSRFWhitelistActions();
-
-		Assert.assertTrue(
-			portletCSRFWhitelistActions.contains(
-				TestAuthTokenIgnoreActions.TEST_AUTH_TOKEN_IGNORE_ACTION_URL));
 	}
 
 }
