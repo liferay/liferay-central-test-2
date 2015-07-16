@@ -12,25 +12,19 @@
  * details.
  */
 
-package com.liferay.item.selector;
+package com.liferay.portlet;
 
-import com.liferay.portlet.RequestBackedPortletURLFactory;
-
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
- * @author Iván Zaera
+ * @author Adolfo Pérez
  */
-public interface ItemSelector {
+public interface RequestBackedPortletURLFactory {
 
-	public ItemSelectorRendering getItemSelectorRendering(
-		PortletRequest portletRequest, PortletResponse portletResponse);
+	public PortletURL createActionURL(String portletId);
 
-	public PortletURL getItemSelectorURL(
-		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
-		String itemSelectedEventName,
-		ItemSelectorCriterion... itemSelectorCriteria);
+	public PortletURL createRenderURL(String portletId);
+
+	public PortletURL createResourceURL(String portletId);
 
 }

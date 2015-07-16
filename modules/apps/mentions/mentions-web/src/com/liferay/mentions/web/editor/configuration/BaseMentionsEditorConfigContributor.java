@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
 
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class BaseMentionsEditorConfigContributor
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory) {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
 		JSONObject autoCompleteConfigJSONObject =
 			JSONFactoryUtil.createJSONObject();
@@ -69,7 +69,7 @@ public class BaseMentionsEditorConfigContributor
 		triggerJSONObject.put("tplResults", sb.toString());
 
 		PortletURL autoCompleteUserURL =
-			requestBasedPortletURLFactory.createResourceURL(
+			requestBackedPortletURLFactory.createResourceURL(
 				MentionsPortletKeys.MENTIONS);
 
 		String source =

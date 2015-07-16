@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.editor.configuration.EditorOptionsContributor;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
 
 import java.util.Map;
 
@@ -48,7 +48,7 @@ public class BlogsContentEditorOptionsContributor
 		EditorOptions editorOptions,
 		Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory) {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
@@ -56,7 +56,7 @@ public class BlogsContentEditorOptionsContributor
 			return;
 		}
 
-		PortletURL portletURL = requestBasedPortletURLFactory.createActionURL(
+		PortletURL portletURL = requestBackedPortletURLFactory.createActionURL(
 			portletDisplay.getId());
 
 		portletURL.setParameter(

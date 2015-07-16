@@ -229,7 +229,7 @@ public class ItemSelectorImplTest extends PowerMockito {
 		).thenReturn(
 			portletResponse
 		);
-		
+
 		return portletRequest;
 	}
 

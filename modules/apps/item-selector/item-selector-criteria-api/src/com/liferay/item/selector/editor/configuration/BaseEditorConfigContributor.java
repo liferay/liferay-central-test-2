@@ -19,7 +19,7 @@ import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public abstract class BaseEditorConfigContributor
 
 	public PortletURL getItemSelectorPortletURL(
 		Map<String, Object> inputEditorTaglibAttributes,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory,
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		boolean allowBrowseDocuments = GetterUtil.getBoolean(
@@ -73,7 +73,7 @@ public abstract class BaseEditorConfigContributor
 		ItemSelector itemSelector = getItemSelector();
 
 		return itemSelector.getItemSelectorURL(
-			requestBasedPortletURLFactory, name + "selectItem",
+			requestBackedPortletURLFactory, name + "selectItem",
 			itemSelectorCriterion);
 	}
 

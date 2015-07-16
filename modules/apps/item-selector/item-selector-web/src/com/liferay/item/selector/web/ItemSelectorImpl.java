@@ -28,7 +28,8 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.Accessor;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactoryUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -74,8 +75,8 @@ public class ItemSelectorImpl implements ItemSelector {
 		String itemSelectedEventName = getValue(
 			parameters, PARAMETER_ITEM_SELECTED_EVENT_NAME);
 
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory =
-			RequestBasedPortletURLFactory.create(portletRequest);
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(portletRequest);
 
 		List<ItemSelectorViewRenderer> itemSelectorViewRenderers =
 			new ArrayList<>();
@@ -107,7 +108,7 @@ public class ItemSelectorImpl implements ItemSelector {
 					itemSelectorViews) {
 
 				PortletURL portletURL = getItemSelectorURL(
-					requestBasedPortletURLFactory, itemSelectedEventName,
+					requestBackedPortletURLFactory, itemSelectedEventName,
 					itemSelectorCriteriaArray);
 
 				portletURL.setParameter(
@@ -128,11 +129,11 @@ public class ItemSelectorImpl implements ItemSelector {
 
 	@Override
 	public PortletURL getItemSelectorURL(
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory,
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
 		String itemSelectedEventName,
 		ItemSelectorCriterion... itemSelectorCriteria) {
 
-		PortletURL portletURL = requestBasedPortletURLFactory.createRenderURL(
+		PortletURL portletURL = requestBackedPortletURLFactory.createRenderURL(
 			ItemSelectorPortletKeys.ITEM_SELECTOR);
 
 		try {
