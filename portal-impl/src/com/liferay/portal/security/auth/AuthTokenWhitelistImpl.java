@@ -251,7 +251,6 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 
 			properties.put(
 				PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS, tokenIgnoreAction);
-
 			properties.put("objectClass", Object.class.getName());
 
 			ServiceRegistration<Object> serviceRegistration =
