@@ -64,14 +64,14 @@ public class IndexerRequest {
 		IndexerRequest indexerRequest = (IndexerRequest)object;
 
 		if (Validator.equals(_indexer, indexerRequest._indexer) &&
-			Validator.equals(_modelClassName, indexerRequest._modelClassName) &&
 			(Validator.equals(_method, indexerRequest._method) ||
 			 (Validator.equals(
 				 _method.getName(), indexerRequest._method.getName()) &&
 			  Validator.equals(
-				  _modelPrimaryKey, indexerRequest._modelPrimaryKey)))) {
+				  _modelPrimaryKey, indexerRequest._modelPrimaryKey))) &&
+			Validator.equals(_modelClassName, indexerRequest._modelClassName)) {
 
-				return true;
+			return true;
 		}
 
 		return false;
