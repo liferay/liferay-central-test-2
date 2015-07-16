@@ -179,12 +179,12 @@ public class PACLPolicyManager {
 	private static final Map<ClassLoader, PACLPolicy> _classLoaderPACLPolicies =
 		new ConcurrentHashMap<>();
 	private static final PACLPolicy _defaultPACLPolicy = new InactivePACLPolicy(
-		StringPool.BLANK, new InactiveURLContext(),
+		StringPool.BLANK, new InactiveURLContainer(),
 		PACLPolicyManager.class.getClassLoader(), new Properties());
 	private static final Map<URLWrapper, PACLPolicy> _urlPACLPolicies =
 		new ConcurrentHashMap<>();
 
-	private static class InactiveURLContext implements URLContainer {
+	private static class InactiveURLContainer implements URLContainer {
 
 		@Override
 		public URL getResource(String name) {
@@ -193,7 +193,7 @@ public class PACLPolicyManager {
 
 		@Override
 		public Set<String> getResources(String path) {
-			return Collections.emptySet();
+			return Collections.<String>emptySet();
 		}
 
 	}
