@@ -46,7 +46,6 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		CompilerOptions compilerOptions = new CompilerOptions();
 
 		compilerOptions.setLanguageIn(LanguageMode.ECMASCRIPT5);
-
 		compilerOptions.setWarningLevel(
 			DiagnosticGroups.NON_STANDARD_JSDOC, CheckLevel.OFF);
 
