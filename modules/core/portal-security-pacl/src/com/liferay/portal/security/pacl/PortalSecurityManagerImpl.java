@@ -146,22 +146,24 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 
 	public PortalSecurityManagerImpl()
 		throws IllegalAccessException, NoSuchMethodException,
-			SecurityException {
+			   SecurityException {
 
 		_originalSecurityManager = System.getSecurityManager();
 
 		Lookup lookup = MethodHandles.lookup();
 
-		Class<?> clazz = getClass().getSuperclass();
+		Class<?> clazz = getClass();
+
+		clazz = clazz.getSuperclass();
 
 		Method method = clazz.getDeclaredMethod(
 			"internalCheckPermission", Permission.class, Object.class);
 
 		method.setAccessible(true);
 
-		MethodHandle checkPermission = lookup.unreflect(method);
+		MethodHandle methodHandle = lookup.unreflect(method);
 
-		_checkPermission = checkPermission.bindTo(this);
+		_checkPermissionMethodHandle = methodHandle.bindTo(this);
 
 		initClasses();
 
@@ -328,7 +330,7 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 
 		AccessController.doPrivileged(
 			new PermissionAction(
-				_checkPermission, permission, getSecurityContext()));
+				_checkPermissionMethodHandle, permission, getSecurityContext()));
 	}
 
 	@Override
@@ -568,7 +570,7 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 	private static final RuntimePermission _checkMemberAccessPermission =
 		new RuntimePermission("accessDeclaredMembers");
 
-	private final MethodHandle _checkPermission;
+	private final MethodHandle _checkPermissionMethodHandle;
 	private SecurityManager _originalSecurityManager;
 	private final PortalPolicy _portalPolicy;
 
@@ -1448,10 +1450,10 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 	private static class PermissionAction implements PrivilegedAction<Void> {
 
 		public PermissionAction(
-			MethodHandle checkPermission, Permission permission,
+			MethodHandle checkPermissionMethodHandle, Permission permission,
 			Object context) {
 
-			_checkPermission = checkPermission;
+			_checkPermissionMethodHandle = checkPermissionMethodHandle;
 			_permission = permission;
 			_context = context;
 		}
@@ -1459,7 +1461,7 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 		@Override
 		public Void run() {
 			try {
-				_checkPermission.invokeExact(_permission, _context);
+				_checkPermissionMethodHandle.invokeExact(_permission, _context);
 			}
 			catch (Throwable t) {
 				ReflectionUtil.throwException(t);
@@ -1468,7 +1470,7 @@ public class PortalSecurityManagerImpl extends EquinoxSecurityManager
 			return null;
 		}
 
-		private final MethodHandle _checkPermission;
+		private final MethodHandle _checkPermissionMethodHandle;
 		private final Object _context;
 		private final Permission _permission;
 
