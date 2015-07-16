@@ -15,21 +15,14 @@
 package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.exception.PortalException;
-<<<<<<< HEAD
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
-=======
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
-import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
-import com.liferay.registry.Registry;
-import com.liferay.registry.RegistryUtil;
-import com.liferay.registry.ServiceTracker;
->>>>>>> LPS-57100 Add new methods to bridge
+
+import java.io.Serializable;
 
 import java.util.List;
 import java.util.Locale;
@@ -44,9 +37,8 @@ public class DDMStructureManagerUtil {
 			long structureId, Document document, DDMFormValues ddmFormValues)
 		throws PortalException {
 
-		DDMStructureManager ddmStructureManager = _getDDMStructureManager();
-
-		ddmStructureManager.addAttributes(structureId, document, ddmFormValues);
+		_ddmStructureManager.addAttributes(
+			structureId, document, ddmFormValues);
 	}
 
 	public static DDMStructure addStructure(
@@ -73,9 +65,7 @@ public class DDMStructureManagerUtil {
 			long structureId, DDMFormValues ddmFormValues, Locale locale)
 		throws PortalException {
 
-		DDMStructureManager ddmStructureManager = _getDDMStructureManager();
-
-		return ddmStructureManager.extractAttributes(
+		return _ddmStructureManager.extractAttributes(
 			structureId, ddmFormValues, locale);
 	}
 
@@ -96,9 +86,7 @@ public class DDMStructureManagerUtil {
 	public static List<DDMStructure> getClassStructures(
 		long companyId, long classNameId) {
 
-		DDMStructureManager ddmStructureManager = _getDDMStructureManager();
-
-		return ddmStructureManager.getClassStructures(companyId, classNameId);
+		return _ddmStructureManager.getClassStructures(companyId, classNameId);
 	}
 
 	public static List<DDMStructure> getClassStructures(
@@ -141,45 +129,13 @@ public class DDMStructureManagerUtil {
 			ddmForm, ddmFormLayout, serviceContext);
 	}
 
-<<<<<<< HEAD
-	private static final DDMStructureManager _ddmStructureManager =
-		ProxyFactory.newServiceTrackedInstance(DDMStructureManager.class);
-=======
-	public static void updateStructure(long structureId, String structureKey)
+	public static void updateStructureKey(long structureId, String structureKey)
 		throws PortalException {
 
-		DDMStructureManager ddmStructureManager = _getDDMStructureManager();
-
-		ddmStructureManager.updateStructure(structureId, structureKey);
+		_ddmStructureManager.updateStructureKey(structureId, structureKey);
 	}
 
-	private static DDMStructureManager _getDDMStructureManager() {
-		DDMStructureManager ddmStructureManager =
-			_instance._serviceTracker.getService();
-
-		if (ddmStructureManager == null) {
-			return _dummyDDMStructureManagerImpl;
-		}
-
-		return ddmStructureManager;
-	}
-
-	private DDMStructureManagerUtil() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		_serviceTracker = registry.trackServices(DDMStructureManager.class);
-
-		_serviceTracker.open();
-	}
-
-	private static final DDMStructureManagerUtil _instance =
-		new DDMStructureManagerUtil();
-
-	private static final DummyDDMStructureManagerImpl
-		_dummyDDMStructureManagerImpl = new DummyDDMStructureManagerImpl();
-
-	private final ServiceTracker<DDMStructureManager, DDMStructureManager>
-		_serviceTracker;
->>>>>>> LPS-57100 Add new methods to bridge
+	private static final DDMStructureManager _ddmStructureManager =
+		ProxyFactory.newServiceTrackedInstance(DDMStructureManager.class);
 
 }

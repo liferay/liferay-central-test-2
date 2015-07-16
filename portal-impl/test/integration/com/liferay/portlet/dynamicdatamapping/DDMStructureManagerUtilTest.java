@@ -248,7 +248,7 @@ public class DDMStructureManagerUtilTest {
 	public void testUpdateStructureKey() throws Exception {
 		DDMStructure expectedStructure = addStructure();
 
-		DDMStructureManagerUtil.updateStructure(
+		DDMStructureManagerUtil.updateStructureKey(
 			expectedStructure.getStructureId(), "NEW_KEY");
 
 		DDMStructure structure = DDMStructureManagerUtil.getStructure(
