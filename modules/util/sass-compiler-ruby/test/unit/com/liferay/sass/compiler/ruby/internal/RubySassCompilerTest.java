@@ -51,8 +51,8 @@ public class RubySassCompilerTest {
 		Assert.assertNotNull(sassCompiler);
 
 		File sassSpecDir = new File(
-			"../sass-compiler-jni/test/unit/com/liferay/sass/compiler/jni/" +
-				"internal/dependencies/sass-spec");
+			"../sass-compiler-jni/test/unit/com/liferay/sass/compiler/jni" +
+				"/internal/dependencies/sass-spec");
 
 		for (File testDir : sassSpecDir.listFiles()) {
 			File inputFile = new File(testDir, "input.scss");
