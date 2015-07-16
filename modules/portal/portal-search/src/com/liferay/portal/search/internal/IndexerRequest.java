@@ -106,7 +106,7 @@ public class IndexerRequest {
 		sb.append(ClassUtil.getClassName(_indexer));
 		sb.append(", method=");
 		sb.append(_method);
-		sb.append(", modelClassNames=");
+		sb.append(", modelClassName=");
 		sb.append(_modelClassName);
 		sb.append("}");
 
