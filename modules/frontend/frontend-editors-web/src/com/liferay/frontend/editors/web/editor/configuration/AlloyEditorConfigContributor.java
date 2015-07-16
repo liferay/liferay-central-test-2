@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory) {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
 		String contentsLanguageDir = getContentsLanguageDir(
 			inputEditorTaglibAttributes);
@@ -95,7 +95,8 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 						"liferay-ui:input-editor:name"));
 
 		populateFileBrowserURL(
-			jsonObject, requestBasedPortletURLFactory, name + "selectDocument");
+			jsonObject, requestBackedPortletURLFactory,
+			name + "selectDocument");
 
 		jsonObject.put("srcNode", name);
 
@@ -305,7 +306,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 
 	protected void populateFileBrowserURL(
 		JSONObject jsonObject,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory,
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
 		String eventName) {
 
 		List<ItemSelectorReturnType> urlDesiredItemSelectorReturnTypes =
@@ -323,7 +324,8 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 			urlDesiredItemSelectorReturnTypes);
 
 		PortletURL layoutItemSelectorURL = _itemSelector.getItemSelectorURL(
-			requestBasedPortletURLFactory, eventName, urlItemSelectorCriterion);
+			requestBackedPortletURLFactory, eventName,
+			urlItemSelectorCriterion);
 
 		jsonObject.put(
 			"filebrowserBrowseUrl", layoutItemSelectorURL.toString());
@@ -340,7 +342,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 			imageDesiredItemSelectorReturnTypes);
 
 		PortletURL dlItemSelectorURL = _itemSelector.getItemSelectorURL(
-			requestBasedPortletURLFactory, eventName,
+			requestBackedPortletURLFactory, eventName,
 			imageItemSelectorCriterion);
 
 		jsonObject.put(

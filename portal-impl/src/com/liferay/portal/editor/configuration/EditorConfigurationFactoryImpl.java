@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.editor.configuration.EditorOptions;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
 
@@ -38,17 +38,17 @@ public class EditorConfigurationFactoryImpl
 		String portletName, String editorConfigKey, String editorName,
 		Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory) {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
 		JSONObject configJSONObject = _editorConfigProvider.getConfigJSONObject(
 			portletName, editorConfigKey, editorName,
 			inputEditorTaglibAttributes, themeDisplay,
-			requestBasedPortletURLFactory);
+			requestBackedPortletURLFactory);
 
 		EditorOptions editorOptions = _editorOptionsProvider.getEditorOptions(
 			portletName, editorConfigKey, editorName,
 			inputEditorTaglibAttributes, themeDisplay,
-			requestBasedPortletURLFactory);
+			requestBackedPortletURLFactory);
 
 		EditorConfigTransformer editorConfigTransformer =
 			_editorConfigTransformerServiceTrackerMap.getService(editorName);
@@ -56,7 +56,7 @@ public class EditorConfigurationFactoryImpl
 		if (editorConfigTransformer != null) {
 			editorConfigTransformer.transform(
 				editorOptions, inputEditorTaglibAttributes, themeDisplay,
-				requestBasedPortletURLFactory, configJSONObject);
+				requestBackedPortletURLFactory, configJSONObject);
 		}
 
 		return new EditorConfigurationImpl(configJSONObject, editorOptions);

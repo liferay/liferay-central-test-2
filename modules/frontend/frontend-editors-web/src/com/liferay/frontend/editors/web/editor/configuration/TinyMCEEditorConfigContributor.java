@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
 
 import java.util.Locale;
 import java.util.Map;
@@ -44,11 +44,11 @@ public class TinyMCEEditorConfigContributor
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
-		RequestBasedPortletURLFactory requestBasedPortletURLFactory) {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
 		super.populateConfigJSONObject(
 			jsonObject, inputEditorTaglibAttributes, themeDisplay,
-			requestBasedPortletURLFactory);
+			requestBackedPortletURLFactory);
 
 		jsonObject.put("mode", "exact");
 		jsonObject.put(

@@ -30,7 +30,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.RequestBasedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactory;
+import com.liferay.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
@@ -45,6 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
@@ -263,7 +265,7 @@ public class InputEditorTag extends IncludeTag {
 		EditorConfiguration editorConfiguration =
 			EditorConfigurationFactoryUtil.getEditorConfiguration(
 				portletId, getConfigKey(), getEditorName(request), attributes,
-				themeDisplay, getRequestBasedPortletURLFactory());
+				themeDisplay, getRequestBackedPortletURLFactory());
 
 		Map<String, Object> data = editorConfiguration.getData();
 
@@ -323,16 +325,17 @@ public class InputEditorTag extends IncludeTag {
 		return editor.getJspPath(request);
 	}
 
-	protected RequestBasedPortletURLFactory getRequestBasedPortletURLFactory() {
-		PortletRequest portletRequest =
-			(PortletRequest)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
+	protected RequestBackedPortletURLFactory
+		getRequestBackedPortletURLFactory() {
+
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest == null) {
-			return RequestBasedPortletURLFactory.create(request);
+			return RequestBackedPortletURLFactoryUtil.create(request);
 		}
 
-		return RequestBasedPortletURLFactory.create(portletRequest);
+		return RequestBackedPortletURLFactoryUtil.create(portletRequest);
 	}
 
 	@Override

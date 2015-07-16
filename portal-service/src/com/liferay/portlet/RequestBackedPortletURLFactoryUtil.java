@@ -29,15 +29,15 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Adolfo Pérez
  */
-public abstract class RequestBasedPortletURLFactory {
+public class RequestBackedPortletURLFactoryUtil {
 
-	public static RequestBasedPortletURLFactory create(
+	public static RequestBackedPortletURLFactory create(
 		HttpServletRequest request) {
 
-		return new HttpServletRequestRequestBasedPortletURLFactory(request);
+		return new HttpServletRequestRequestBackedPortletURLFactory(request);
 	}
 
-	public static RequestBasedPortletURLFactory create(
+	public static RequestBackedPortletURLFactory create(
 		PortletRequest portletRequest) {
 
 		PortletResponse portletResponse =
@@ -48,18 +48,12 @@ public abstract class RequestBasedPortletURLFactory {
 			return create(PortalUtil.getHttpServletRequest(portletRequest));
 		}
 
-		return new LiferayPortletResponseRequestBasedPortletURLFactory(
+		return new LiferayPortletResponseRequestBackedPortletURLFactory(
 			PortalUtil.getLiferayPortletResponse(portletResponse));
 	}
 
-	public abstract PortletURL createActionURL(String portletId);
-
-	public abstract PortletURL createRenderURL(String portletId);
-
-	public abstract PortletURL createResourceURL(String portletId);
-
-	private static class HttpServletRequestRequestBasedPortletURLFactory
-		extends RequestBasedPortletURLFactory {
+	private static class HttpServletRequestRequestBackedPortletURLFactory
+		implements RequestBackedPortletURLFactory {
 
 		@Override
 		public PortletURL createActionURL(String portletId) {
@@ -88,7 +82,7 @@ public abstract class RequestBasedPortletURLFactory {
 				_request, portletId, themeDisplay.getPlid(), lifecycle);
 		}
 
-		private HttpServletRequestRequestBasedPortletURLFactory(
+		private HttpServletRequestRequestBackedPortletURLFactory(
 			HttpServletRequest request) {
 
 			_request = request;
@@ -98,8 +92,8 @@ public abstract class RequestBasedPortletURLFactory {
 
 	}
 
-	private static class LiferayPortletResponseRequestBasedPortletURLFactory
-		extends RequestBasedPortletURLFactory {
+	private static class LiferayPortletResponseRequestBackedPortletURLFactory
+		implements RequestBackedPortletURLFactory {
 
 		@Override
 		public PortletURL createActionURL(String portletId) {
@@ -116,7 +110,7 @@ public abstract class RequestBasedPortletURLFactory {
 			return _liferayPortletResponse.createResourceURL(portletId);
 		}
 
-		private LiferayPortletResponseRequestBasedPortletURLFactory(
+		private LiferayPortletResponseRequestBackedPortletURLFactory(
 			LiferayPortletResponse liferayPortletResponse) {
 
 			_liferayPortletResponse = liferayPortletResponse;
