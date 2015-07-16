@@ -134,10 +134,10 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 
 		sb.append("{active=");
 		sb.append(isActive());
-		sb.append(", hashCode=");
-		sb.append(hashCode());
 		sb.append(", contextName=");
 		sb.append(_contextName);
+		sb.append(", hashCode=");
+		sb.append(hashCode());
 		sb.append("}");
 
 		return sb.toString();
