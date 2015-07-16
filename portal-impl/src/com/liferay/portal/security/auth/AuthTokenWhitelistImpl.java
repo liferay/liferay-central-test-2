@@ -59,7 +59,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 			registry.getFilter(
 				"(&(" + PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS+"=*)" +
 					"(objectClass=java.lang.Object))"),
-			new AuthTokenIgnoreActionsCustomizer());
+			new AuthTokenIgnoreActionsServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 
@@ -274,16 +274,16 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 		new StringServiceRegistrationMap<>();
 	private final ServiceTracker<Object, Object> _serviceTracker;
 
-	private class AuthTokenIgnoreActionsCustomizer
+	private class AuthTokenIgnoreActionsServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Object, Object> {
 
 		@Override
 		public Object addingService(ServiceReference<Object> serviceReference) {
-			List<String> tokenIgnoreActions = StringPlus.asList(
+			List<String> authTokenIgnoreActions = StringPlus.asList(
 				serviceReference.getProperty(
 					PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS));
 
-			_portletCSRFWhitelistActions.addAll(tokenIgnoreActions);
+			_portletCSRFWhitelistActions.addAll(authTokenIgnoreActions);
 
 			Registry registry = RegistryUtil.getRegistry();
 
@@ -303,11 +303,11 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 		public void removedService(
 			ServiceReference<Object> serviceReference, Object object) {
 
-			List<String> tokenIgnoreActions = StringPlus.asList(
+			List<String> authTokenIgnoreActions = StringPlus.asList(
 				serviceReference.getProperty(
 					PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS));
 
-			_portletCSRFWhitelistActions.removeAll(tokenIgnoreActions);
+			_portletCSRFWhitelistActions.removeAll(authTokenIgnoreActions);
 
 			Registry registry = RegistryUtil.getRegistry();
 
