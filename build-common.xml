@@ -852,7 +852,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				</not>
 				<then>
 					<setup-sdk />
-				</then>				
+				</then>
 			</if>
 
 			<if>
