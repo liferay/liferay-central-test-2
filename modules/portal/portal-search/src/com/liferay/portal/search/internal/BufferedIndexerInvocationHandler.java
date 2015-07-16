@@ -17,6 +17,7 @@ package com.liferay.portal.search.internal;
 import com.liferay.portal.kernel.search.Bufferable;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.search.IndexerRequestBufferOverflowHandler;
@@ -61,8 +62,8 @@ public class BufferedIndexerInvocationHandler implements InvocationHandler {
 		if (!(args[0] instanceof BaseModel) &&
 			!(args[0] instanceof ClassedModel) &&
 			!(args0Class.isArray() || args0Class.equals(Collection.class)) &&
-			!((args.length == 2) && args[0] instanceof String &&
-				args[1].getClass().equals(Long.TYPE))) {
+			!((args.length == 2) && (args[0] instanceof String) &&
+			  Validator.equals(args[1].getClass(), Long.TYPE))) {
 
 			return method.invoke(_indexer, args);
 		}
