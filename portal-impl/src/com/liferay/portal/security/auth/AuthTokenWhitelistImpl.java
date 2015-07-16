@@ -246,18 +246,21 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 	protected void registerPortalProperty() {
 		Registry registry = RegistryUtil.getRegistry();
 
-		for (String tokenIgnoreAction : PropsValues.AUTH_TOKEN_IGNORE_ACTIONS) {
+		for (String authTokenIgnoreAction :
+				PropsValues.AUTH_TOKEN_IGNORE_ACTIONS) {
+
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put(
-				PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS, tokenIgnoreAction);
+				PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS, authTokenIgnoreAction);
 			properties.put("objectClass", Object.class.getName());
 
 			ServiceRegistration<Object> serviceRegistration =
 				registry.registerService(
 					Object.class, new Object(), properties);
 
-			_serviceRegistrations.put(tokenIgnoreAction, serviceRegistration);
+			_serviceRegistrations.put(
+				authTokenIgnoreAction, serviceRegistration);
 		}
 	}
 
