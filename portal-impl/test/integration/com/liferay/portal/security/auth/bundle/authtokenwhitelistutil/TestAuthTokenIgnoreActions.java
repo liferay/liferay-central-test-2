@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.bundle.authtokenignoreactions;
+package com.liferay.portal.security.auth.bundle.authtokenwhitelistutil;
 
 import com.liferay.portal.kernel.util.PropsKeys;
 

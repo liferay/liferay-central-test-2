@@ -15,7 +15,7 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.security.auth.bundle.authtokenignoreactions.TestAuthTokenIgnoreActions;
+import com.liferay.portal.security.auth.bundle.authtokenwhitelistutil.TestAuthTokenIgnoreActions;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
@@ -38,7 +38,7 @@ public class AuthTokenWhitelistUtilTest {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
-			new SyntheticBundleRule("bundle.authtokenignoreactions"));
+			new SyntheticBundleRule("bundle.authtokenwhitelistutil"));
 
 	@Test
 	public void testGetPortletCSRFWhitelistActionsDefinedInPortalProperties() {
