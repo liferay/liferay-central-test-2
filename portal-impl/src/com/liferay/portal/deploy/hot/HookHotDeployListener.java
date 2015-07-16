@@ -834,12 +834,12 @@ public class HookHotDeployListener
 			String servletContextName, Properties portalProperties)
 		throws Exception {
 
-		String[] publicPaths = StringUtil.split(
+		String[] authPublicPaths = StringUtil.split(
 			portalProperties.getProperty(AUTH_PUBLIC_PATHS));
 
-		for (String publicPath : publicPaths) {
+		for (String authPublicPath : authPublicPaths) {
 			registerService(
-				servletContextName, AUTH_PUBLIC_PATHS + publicPath,
+				servletContextName, AUTH_PUBLIC_PATHS + authPublicPath,
 				Object.class, new Object());
 		}
 	}
@@ -848,13 +848,13 @@ public class HookHotDeployListener
 			String servletContextName, Properties portalProperties)
 		throws Exception {
 
-		String[] tokenIgnoreActions = StringUtil.split(
+		String[] authTokenIgnoreActions = StringUtil.split(
 			portalProperties.getProperty(AUTH_TOKEN_IGNORE_ACTIONS));
 
-		for (String tokenIgnoreAction : tokenIgnoreActions) {
+		for (String authTokenIgnoreAction : authTokenIgnoreActions) {
 			registerService(
 				servletContextName,
-				AUTH_TOKEN_IGNORE_ACTIONS + tokenIgnoreAction, Object.class,
+				AUTH_TOKEN_IGNORE_ACTIONS + authTokenIgnoreAction, Object.class,
 				new Object());
 		}
 	}
