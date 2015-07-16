@@ -121,28 +121,28 @@ public class PACLPolicyManager {
 
 		URLContainer urlContainer = paclPolicy.getURLContainer();
 
-		URL path = urlContainer.getResource(StringPool.SLASH);
+		URL rootURL = urlContainer.getResource(StringPool.SLASH);
 
-		String realPath = path.getPath();
+		String path = rootURL.getPath();
 
-		if (realPath.endsWith(StringPool.SLASH)) {
-			realPath = realPath.substring(0, realPath.length() - 1);
+		if (path.endsWith(StringPool.SLASH)) {
+			path = path.substring(0, path.length() - 1);
 		}
 
 		try {
-			URL url = new URL("file", "", -1, realPath);
+			URL url = new URL("file", "", -1, path);
 
 			urLs.add(url);
 
 			_urlPACLPolicies.put(new URLWrapper(url), paclPolicy);
 
-			url = new URL("file", "", -1, realPath + StringPool.SLASH);
+			url = new URL("file", "", -1, path + StringPool.SLASH);
 
 			urLs.add(url);
 
 			_urlPACLPolicies.put(new URLWrapper(url), paclPolicy);
 
-			url = new URL("file", "", -1, realPath + "/WEB-INF/classes/*");
+			url = new URL("file", "", -1, path + "/WEB-INF/classes/*");
 
 			urLs.add(url);
 
