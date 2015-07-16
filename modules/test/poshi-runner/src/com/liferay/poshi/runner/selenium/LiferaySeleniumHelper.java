@@ -225,7 +225,7 @@ public class LiferaySeleniumHelper {
 	}
 
 	public static void assertLiferayErrors() throws Exception {
-		String fileName = PropsValues.TEST_CONSOLE_LOG_PATH;
+		String fileName = PropsValues.TEST_CONSOLE_LOG_FILE_NAME;
 
 		if (!FileUtil.exists(fileName)) {
 			return;
@@ -657,7 +657,7 @@ public class LiferaySeleniumHelper {
 	}
 
 	public static boolean isConsoleTextPresent(String text) throws Exception {
-		String fileName = PropsValues.TEST_CONSOLE_LOG_PATH;
+		String fileName = PropsValues.TEST_CONSOLE_LOG_FILE_NAME;
 
 		if (!FileUtil.exists(fileName)) {
 			return false;
