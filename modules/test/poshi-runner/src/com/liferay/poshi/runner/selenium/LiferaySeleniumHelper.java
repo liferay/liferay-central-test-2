@@ -237,13 +237,13 @@ public class LiferaySeleniumHelper {
 			return;
 		}
 
+		SAXReader saxReader = new SAXReader();
+
 		content = "<log4j>" + content + "</log4j>";
 		content = content.replaceAll("log4j:", "");
 
 		InputStream inputStream = new ByteArrayInputStream(
 			content.getBytes("UTF-8"));
-
-		SAXReader saxReader = new SAXReader();
 
 		Document document = saxReader.read(inputStream);
 
@@ -669,13 +669,13 @@ public class LiferaySeleniumHelper {
 			return false;
 		}
 
+		SAXReader saxReader = new SAXReader();
+
 		content = "<log4j>" + content + "</log4j>";
 		content = content.replaceAll("log4j:", "");
 
 		InputStream inputStream = new ByteArrayInputStream(
 			content.getBytes("UTF-8"));
-
-		SAXReader saxReader = new SAXReader();
 
 		Document document = saxReader.read(inputStream);
 
