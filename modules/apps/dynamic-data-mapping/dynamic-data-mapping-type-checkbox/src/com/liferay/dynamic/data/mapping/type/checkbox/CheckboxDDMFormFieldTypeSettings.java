@@ -26,10 +26,10 @@ import com.liferay.portlet.dynamicdatamapping.registry.annotations.DDMFormField;
 public interface CheckboxDDMFormFieldTypeSettings
 	extends DefaultDDMFormFieldTypeSettings {
 
-	@Override
 	@DDMFormField(
 		dataType = "boolean", label = "%predefined-value", type = "checkbox"
 	)
+	@Override
 	public LocalizedValue predefinedValue();
 
 }

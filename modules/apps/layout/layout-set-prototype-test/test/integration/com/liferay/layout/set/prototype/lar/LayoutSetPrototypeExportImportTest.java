@@ -66,8 +66,8 @@ public class LayoutSetPrototypeExportImportTest
 		return LayoutSetPrototypePortletKeys.LAYOUT_SET_PROTOTYPE;
 	}
 
-	@Override
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
