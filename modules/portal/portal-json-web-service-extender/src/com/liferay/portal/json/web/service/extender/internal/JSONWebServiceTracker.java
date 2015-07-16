@@ -14,7 +14,6 @@
 
 package com.liferay.portal.json.web.service.extender.internal;
 
-import com.liferay.portal.json.web.service.extender.internal.jsonwebservice.ServiceJSONWebServiceScannerStrategy;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceRegistrator;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceRegistratorFactory;
