@@ -31,7 +31,7 @@ import org.junit.Test;
 /**
  * @author Cristina González
  */
-public class AuthTokenWhitelistTest {
+public class AuthTokenWhitelistUtilTest {
 
 	@ClassRule
 	@Rule
