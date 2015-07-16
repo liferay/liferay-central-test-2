@@ -289,7 +289,7 @@ public class JavaSecurityTest {
 		try {
 
 			// Simulate the stack length required to set the policy without
-			// actually setting it (in case we fail).
+			// actually setting it (in case we fail)
 
 			Callable<Void> callable = new Callable<Void>() {
 

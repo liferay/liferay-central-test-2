@@ -231,9 +231,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 
 		URL rootURL = _urlContainer.getResource(StringPool.SLASH);
 
-		String rootDir = rootURL.getPath();
-
-		System.setProperty(_contextName, rootDir);
+		System.setProperty(_contextName, rootURL.getPath());
 
 		try {
 			URIParameter parameter = new URIParameter(url.toURI());
