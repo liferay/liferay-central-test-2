@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -12,25 +12,27 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
-import org.junit.Assert;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
+
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Jorge Ferrer
@@ -94,42 +96,8 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 	}
 
 	@Test
-	public void testCreateWithGuestPermissions() throws Exception {
-		String[] groupPermissions = new String[0];
-		String[] guestPermissions = new String[]{"VIEW"};
-
-		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
-			_COMPANY_ID, 1, groupPermissions, guestPermissions);
-
-		List<Role> roles = modelPermissions.getRoles();
-
-		Assert.assertEquals(1, roles.size());
-
-		Role role = roles.get(0);
-
-		Assert.assertEquals(RoleConstants.GUEST, role.getName());
-		Assert.assertEquals(
-			ListUtil.fromArray(guestPermissions),
-			modelPermissions.getActionIds(role));
-	}
-
-	@Test
-	public void testCreateWithGuestAndGroupPermissions() throws Exception {
-		String[] groupPermissions = new String[]{"VIEW"};
-		String[] guestPermissions = new String[]{"VIEW"};
-
-		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
-			_COMPANY_ID, 1, groupPermissions, guestPermissions);
-
-		List<Role> roles = modelPermissions.getRoles();
-
-		Assert.assertEquals(2, roles.size());
-		Assert.assertEquals(2, modelPermissions.getRoles("VIEW").size());
-	}
-
-	@Test
 	public void testCreateWithGroupPermissions() throws Exception {
-		String[] groupPermissions = new String[]{"VIEW"};
+		String[] groupPermissions = new String[] {"VIEW"};
 		String[] guestPermissions = new String[0];
 
 		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
@@ -149,7 +117,7 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 
 	@Test
 	public void testCreateWithGroupPermissionsAndGroupZero() throws Exception {
-		String[] groupPermissions = new String[]{"VIEW"};
+		String[] groupPermissions = new String[] {"VIEW"};
 		String[] guestPermissions = new String[0];
 
 		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
@@ -158,6 +126,40 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 		List<Role> roles = modelPermissions.getRoles();
 
 		Assert.assertEquals(0, roles.size());
+	}
+
+	@Test
+	public void testCreateWithGuestAndGroupPermissions() throws Exception {
+		String[] groupPermissions = new String[] {"VIEW"};
+		String[] guestPermissions = new String[] {"VIEW"};
+
+		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
+			_COMPANY_ID, 1, groupPermissions, guestPermissions);
+
+		List<Role> roles = modelPermissions.getRoles();
+
+		Assert.assertEquals(2, roles.size());
+		Assert.assertEquals(2, modelPermissions.getRoles("VIEW").size());
+	}
+
+	@Test
+	public void testCreateWithGuestPermissions() throws Exception {
+		String[] groupPermissions = new String[0];
+		String[] guestPermissions = new String[] {"VIEW"};
+
+		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
+			_COMPANY_ID, 1, groupPermissions, guestPermissions);
+
+		List<Role> roles = modelPermissions.getRoles();
+
+		Assert.assertEquals(1, roles.size());
+
+		Role role = roles.get(0);
+
+		Assert.assertEquals(RoleConstants.GUEST, role.getName());
+		Assert.assertEquals(
+			ListUtil.fromArray(guestPermissions),
+			modelPermissions.getActionIds(role));
 	}
 
 	@Test
@@ -175,8 +177,8 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 	public void testCreateWithoutParameters() throws Exception {
 		Map<String, String[]> parameterMap = new HashMap<>();
 
-		ModelPermissions modelPermissions =
-			ModelPermissionsFactory.create(parameterMap);
+		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
+			parameterMap);
 
 		List<Role> roles = modelPermissions.getRoles();
 
@@ -194,8 +196,8 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 				RoleConstants.GUEST,
 			permissions);
 
-		ModelPermissions modelPermissions =
-			ModelPermissionsFactory.create(parameterMap);
+		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
+			parameterMap);
 
 		List<Role> roles = modelPermissions.getRoles();
 
@@ -224,8 +226,8 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 				RoleConstants.SITE_MEMBER,
 			permissions);
 
-		ModelPermissions modelPermissions =
-			ModelPermissionsFactory.create(parameterMap);
+		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
+			parameterMap);
 
 		List<Role> roles = modelPermissions.getRoles();
 
