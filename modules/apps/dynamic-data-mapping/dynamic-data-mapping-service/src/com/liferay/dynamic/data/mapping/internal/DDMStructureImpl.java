@@ -218,6 +218,11 @@ public class DDMStructureImpl implements DDMStructure {
 	}
 
 	@Override
+	public int getType() {
+		return _ddmStructure.getType();
+	}
+
+	@Override
 	public long getUserId() {
 		return _ddmStructure.getUserId();
 	}

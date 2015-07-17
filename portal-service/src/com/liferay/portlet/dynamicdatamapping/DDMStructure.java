@@ -81,6 +81,8 @@ public interface DDMStructure extends StagedModel {
 
 	public String getStructureKey();
 
+	public int getType();
+
 	public long getUserId();
 
 	public boolean hasField(String fieldName);
