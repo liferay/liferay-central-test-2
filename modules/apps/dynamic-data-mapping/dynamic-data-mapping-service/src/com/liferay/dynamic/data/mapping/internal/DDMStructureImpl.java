@@ -97,7 +97,7 @@ public class DDMStructureImpl implements DDMStructure {
 
 	@Override
 	public String getDefinition() {
-		return _ddmStructure.getDescription();
+		return _ddmStructure.getDefinition();
 	}
 
 	@Override
