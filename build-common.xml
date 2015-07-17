@@ -1255,7 +1255,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 								append="true"
 								file="${sdk.dir}/build.${env.COMPUTERNAME}.properties"
 							>
-								ivy.custom.settings.file=${sdk.dir}/jenkins-ivy-settings.xml
+								ivy.custom.settings.file=${sdk.dir}/ivy-settings-jenkins.xml
 							</echo>
 						</then>
 					</if>
