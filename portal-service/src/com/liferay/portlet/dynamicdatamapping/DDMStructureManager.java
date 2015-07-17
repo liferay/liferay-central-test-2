@@ -16,10 +16,17 @@ package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.PortletDataException;
+
+import java.io.Serializable;
 
 import java.util.List;
 import java.util.Locale;
@@ -32,9 +39,20 @@ public interface DDMStructureManager {
 
 	public static final long STRUCTURE_DEFAULT_PARENT_STRUCTURE_ID = 0;
 
-	public static final String STRUCTURE_DEFAULT_STORAGE_TYPE = "json";
+	public static final String STRUCTURE_INDEXER_FIELD_NAMESPACE = "ddm";
+
+	public static final String STRUCTURE_INDEXER_FIELD_PREFIX =
+		DDMStructureManager.STRUCTURE_INDEXER_FIELD_NAMESPACE +
+		DDMStructureManager.STRUCTURE_INDEXER_FIELD_SEPARATOR;
+
+	public static final String STRUCTURE_INDEXER_FIELD_SEPARATOR =
+		StringPool.DOUBLE_UNDERLINE;
+
+	public static final int STRUCTURE_TYPE_AUTO = 1;
 
 	public static final int STRUCTURE_TYPE_DEFAULT = 0;
+
+	public static final String STRUCTURE_VERSION_DEFAULT = "1.0";
 
 	public void addAttributes(
 			long structureId, Document document, DDMFormValues ddmFormValues)
@@ -50,9 +68,16 @@ public interface DDMStructureManager {
 
 	public void deleteStructure(long structureId) throws PortalException;
 
+	public <T extends StagedModel> Element exportDDMStructureStagedModel(
+			PortletDataContext portletDataContext, T referrerStagedModel,
+			long structureId, String referenceType)
+		throws PortletDataException;
+
 	public String extractAttributes(
 			long structureId, DDMFormValues ddmFormValues, Locale locale)
 		throws PortalException;
+
+	public DDMStructure fetchStructure(long structureId);
 
 	public DDMStructure fetchStructure(
 		long groupId, long classNameId, String structureKey);
@@ -66,6 +91,14 @@ public interface DDMStructureManager {
 	public List<DDMStructure> getClassStructures(
 		long companyId, long classNameId, int start, int end);
 
+	public Class<?> getDDMStructureModelClass();
+
+	public DDMFormLayout getDefaultDDMFormLayout(DDMForm ddmForm);
+
+	public Serializable getIndexedFieldValue(
+			Serializable fieldValue, String fieldType)
+		throws Exception;
+
 	public DDMStructure getStructure(long structureId) throws PortalException;
 
 	public DDMStructure getStructure(
@@ -74,6 +107,8 @@ public interface DDMStructureManager {
 
 	public DDMStructure getStructureByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException;
+
+	public List<DDMStructure> getStructures(long[] groupIds, long classNameId);
 
 	public DDMStructure updateStructure(
 			long userId, long structureId, long parentStructureId,

@@ -17,10 +17,14 @@ package com.liferay.portlet.dynamicdatamapping;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.ProxyFactory;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.PortletDataException;
 
 import java.io.Serializable;
 
@@ -61,12 +65,26 @@ public class DDMStructureManagerUtil {
 		_ddmStructureManager.deleteStructure(structureId);
 	}
 
+	public static <T extends StagedModel> Element exportDDMStructureStagedModel(
+			PortletDataContext portletDataContext, T referrerStagedModel,
+			long structureId, String referenceType)
+		throws PortletDataException {
+
+		return _ddmStructureManager.exportDDMStructureStagedModel(
+			portletDataContext, referrerStagedModel, structureId,
+			referenceType);
+	}
+
 	public static String extractAttributes(
 			long structureId, DDMFormValues ddmFormValues, Locale locale)
 		throws PortalException {
 
 		return _ddmStructureManager.extractAttributes(
 			structureId, ddmFormValues, locale);
+	}
+
+	public static DDMStructure fetchStructure(long structureId) {
+		return _ddmStructureManager.fetchStructure(structureId);
 	}
 
 	public static DDMStructure fetchStructure(
@@ -96,6 +114,21 @@ public class DDMStructureManagerUtil {
 			companyId, classNameId, start, end);
 	}
 
+	public static Class<?> getDDMStructureModelClass() {
+		return _ddmStructureManager.getDDMStructureModelClass();
+	}
+
+	public static DDMFormLayout getDefaultDDMFormLayout(DDMForm ddmForm) {
+		return _ddmStructureManager.getDefaultDDMFormLayout(ddmForm);
+	}
+
+	public static Serializable getIndexedFieldValue(
+			Serializable fieldValue, String fieldType)
+		throws Exception {
+
+		return _ddmStructureManager.getIndexedFieldValue(fieldValue, fieldType);
+	}
+
 	public static DDMStructure getStructure(long structureId)
 		throws PortalException {
 
@@ -115,6 +148,12 @@ public class DDMStructureManagerUtil {
 		throws PortalException {
 
 		return _ddmStructureManager.getStructureByUuidAndGroupId(uuid, groupId);
+	}
+
+	public static List<DDMStructure> getStructures(
+		long[] groupIds, long classNameId) {
+
+		return _ddmStructureManager.getStructures(groupIds, classNameId);
 	}
 
 	public static DDMStructure updateStructure(

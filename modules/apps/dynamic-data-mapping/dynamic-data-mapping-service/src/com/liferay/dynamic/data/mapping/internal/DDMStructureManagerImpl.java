@@ -16,6 +16,8 @@ package com.liferay.dynamic.data.mapping.internal;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.DDMStructureManager;
@@ -24,6 +26,12 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMFormLayout;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
 import com.liferay.portlet.dynamicdatamapping.util.DDMIndexerUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.PortletDataException;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +82,26 @@ public class DDMStructureManagerImpl implements DDMStructureManager {
 	}
 
 	@Override
+	public <T extends StagedModel> Element exportDDMStructureStagedModel(
+			PortletDataContext portletDataContext, T referrerStagedModel,
+			long structureId, String referenceType)
+		throws PortletDataException {
+
+		try {
+			com.liferay.portlet.dynamicdatamapping.model.DDMStructure
+				ddmStructure = _ddmStructureLocalService.getStructure(
+					structureId);
+
+			return StagedModelDataHandlerUtil.exportReferenceStagedModel(
+				portletDataContext, referrerStagedModel, ddmStructure,
+				referenceType);
+		}
+		catch (PortalException pe) {
+			throw new PortletDataException(pe);
+		}
+	}
+
+	@Override
 	public String extractAttributes(
 			long structureId, DDMFormValues ddmFormValues, Locale locale)
 		throws PortalException {
@@ -83,6 +111,18 @@ public class DDMStructureManagerImpl implements DDMStructureManager {
 
 		return DDMIndexerUtil.extractAttributes(
 			ddmStructure, ddmFormValues, locale);
+	}
+
+	@Override
+	public DDMStructure fetchStructure(long structureId) {
+		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure =
+			_ddmStructureLocalService.fetchDDMStructure(structureId);
+
+		if (ddmStructure == null) {
+			return null;
+		}
+
+		return new DDMStructureImpl(ddmStructure);
 	}
 
 	@Override
@@ -152,6 +192,24 @@ public class DDMStructureManagerImpl implements DDMStructureManager {
 	}
 
 	@Override
+	public Class<?> getDDMStructureModelClass() {
+		return com.liferay.portlet.dynamicdatamapping.model.DDMStructure.class;
+	}
+
+	@Override
+	public DDMFormLayout getDefaultDDMFormLayout(DDMForm ddmForm) {
+		return DDMUtil.getDefaultDDMFormLayout(ddmForm);
+	}
+
+	@Override
+	public Serializable getIndexedFieldValue(
+			Serializable fieldValue, String fieldType)
+		throws Exception {
+
+		return DDMUtil.getIndexedFieldValue(fieldValue, fieldType);
+	}
+
+	@Override
 	public DDMStructure getStructure(long structureId) throws PortalException {
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure =
 			_ddmStructureLocalService.getStructure(structureId);
@@ -180,6 +238,21 @@ public class DDMStructureManagerImpl implements DDMStructureManager {
 				uuid, groupId);
 
 		return new DDMStructureImpl(ddmStructure);
+	}
+
+	@Override
+	public List<DDMStructure> getStructures(long[] groupIds, long classNameId) {
+		List<DDMStructure> ddmStructures = new ArrayList<>();
+
+		for (com.liferay.portlet.dynamicdatamapping.model.DDMStructure
+				ddmStructure :
+					_ddmStructureLocalService.getStructures(
+						groupIds, classNameId)) {
+
+			ddmStructures.add(new DDMStructureImpl(ddmStructure));
+		}
+
+		return ddmStructures;
 	}
 
 	@Override
