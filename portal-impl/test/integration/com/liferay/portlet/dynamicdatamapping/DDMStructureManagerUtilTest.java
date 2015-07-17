@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -173,6 +174,24 @@ public class DDMStructureManagerUtilTest {
 	}
 
 	@Test
+	public void testGetClassStructuresUsingComparator() throws Exception {
+		List<DDMStructure> structures =
+			DDMStructureManagerUtil.getClassStructures(
+				_group.getCompanyId(), _classNameId,
+				DDMStructureManager.COMPARATOR_STRUCTURE_KEY);
+
+		int initialSize = structures.size();
+
+		addStructure();
+
+		structures = DDMStructureManagerUtil.getClassStructures(
+			_group.getCompanyId(), _classNameId,
+			DDMStructureManager.COMPARATOR_STRUCTURE_KEY);
+
+		Assert.assertEquals(initialSize + 1, structures.size());
+	}
+
+	@Test
 	public void testGetClassStructuresWithCompanyAndClassNameId()
 		throws Exception {
 
@@ -188,6 +207,16 @@ public class DDMStructureManagerUtilTest {
 			_group.getCompanyId(), _classNameId);
 
 		Assert.assertEquals(initialSize + 1, structures.size());
+	}
+
+	@Test
+	public void testGetDDMFormFieldsJSONArray() throws Exception {
+		DDMStructure structure = addStructure();
+
+		JSONArray jsonArray = DDMStructureManagerUtil.getDDMFormFieldsJSONArray(
+			structure.getStructureId(), structure.getDefinition());
+
+		Assert.assertEquals(1, jsonArray.length());
 	}
 
 	@Test
@@ -242,6 +271,24 @@ public class DDMStructureManagerUtilTest {
 		Assert.assertEquals(nameMap, actualStructure.getNameMap());
 		Assert.assertEquals(
 			descriptionMap, actualStructure.getDescriptionMap());
+	}
+
+	@Test
+	public void testUpdateStructureDefinition() throws Exception {
+		DDMStructure expectedStructure = addStructure();
+
+		String definition = expectedStructure.getDefinition();
+
+		definition = definition.replaceAll(
+			"(?s)<dynamic-element[^>]*>.*?</dynamic-element>", "");
+
+		DDMStructureManagerUtil.updateStructureDefinition(
+			expectedStructure.getStructureId(), definition);
+
+		DDMStructure structure = DDMStructureManagerUtil.getStructure(
+			expectedStructure.getStructureId());
+
+		Assert.assertEquals(definition, structure.getDefinition());
 	}
 
 	@Test
