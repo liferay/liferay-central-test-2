@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.kernel.xml.Element;
@@ -108,10 +109,26 @@ public class DDMStructureManagerUtil {
 	}
 
 	public static List<DDMStructure> getClassStructures(
+		long companyId, long classNameId, int comparator) {
+
+		return
+			_ddmStructureManager.getClassStructures(
+				companyId, classNameId, comparator);
+	}
+
+	public static List<DDMStructure> getClassStructures(
 		long companyId, long classNameId, int start, int end) {
 
 		return _ddmStructureManager.getClassStructures(
 			companyId, classNameId, start, end);
+	}
+
+	public static JSONArray getDDMFormFieldsJSONArray(
+			long structureId, String script)
+		throws PortalException {
+
+		return _ddmStructureManager.getDDMFormFieldsJSONArray(
+			structureId, script);
 	}
 
 	public static Class<?> getDDMStructureModelClass() {
@@ -166,6 +183,13 @@ public class DDMStructureManagerUtil {
 		return _ddmStructureManager.updateStructure(
 			userId, structureId, parentStructureId, nameMap, descriptionMap,
 			ddmForm, ddmFormLayout, serviceContext);
+	}
+
+	public static void updateStructureDefinition(
+			long structureId, String definition)
+		throws PortalException {
+
+		_ddmStructureManager.updateStructureDefinition(structureId, definition);
 	}
 
 	public static void updateStructureKey(long structureId, String structureKey)

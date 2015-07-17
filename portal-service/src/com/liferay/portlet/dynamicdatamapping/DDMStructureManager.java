@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
@@ -36,6 +37,8 @@ import java.util.Map;
  * @author Leonardo Barros
  */
 public interface DDMStructureManager {
+
+	public static final int COMPARATOR_STRUCTURE_KEY = 1;
 
 	public static final long STRUCTURE_DEFAULT_PARENT_STRUCTURE_ID = 0;
 
@@ -89,7 +92,13 @@ public interface DDMStructureManager {
 		long companyId, long classNameId);
 
 	public List<DDMStructure> getClassStructures(
+		long companyId, long classNameId, int comparator);
+
+	public List<DDMStructure> getClassStructures(
 		long companyId, long classNameId, int start, int end);
+
+	public JSONArray getDDMFormFieldsJSONArray(long structureId, String script)
+		throws PortalException;
 
 	public Class<?> getDDMStructureModelClass();
 
@@ -116,6 +125,9 @@ public interface DDMStructureManager {
 			DDMForm ddmForm, DDMFormLayout ddmFormLayout,
 			ServiceContext serviceContext)
 		throws PortalException;
+
+	public void updateStructureDefinition(
+		long structureId, String definition) throws PortalException;
 
 	public void updateStructureKey(long structureId, String structureKey)
 		throws PortalException;
