@@ -46,20 +46,21 @@ import javax.servlet.http.HttpServletRequest;
 public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 	public void append(
-		String portletId, String content, String modules, ModuleTypes type) {
+		String portletId, String content, String modules,
+		ModuleTypes moduleTypes) {
 
 		PortletData portletData = _getPortletData(portletId);
 
-		portletData.append(content, modules, type);
+		portletData.append(content, modules, moduleTypes);
 	}
 
 	public void append(
 		String portletId, StringBundler contentSB, String modules,
-		ModuleTypes type) {
+		ModuleTypes moduleTypes) {
 
 		PortletData portletData = _getPortletData(portletId);
 
-		portletData.append(contentSB, modules, type);
+		portletData.append(contentSB, modules, moduleTypes);
 	}
 
 	public void mark() {
@@ -124,28 +125,30 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 			Map<String, String> generatedVariables = _generateVariables(
 				es6ModulesSet);
+				
+			Iterator<String> iterator = es6ModulesSet.iterator();
 
-			for (Iterator<String> iterator = es6ModulesSet.iterator();
-				 iterator.hasNext();) {
-					writer.write(StringPool.APOSTROPHE);
-					writer.write(iterator.next());
-					writer.write(StringPool.APOSTROPHE);
+			while (iterator.hasNext()) {
+				writer.write(StringPool.APOSTROPHE);
+				writer.write(iterator.next());
+				writer.write(StringPool.APOSTROPHE);
 
-					if (iterator.hasNext()) {
-						writer.write(StringPool.COMMA_AND_SPACE);
-					}
+				if (iterator.hasNext()) {
+					writer.write(StringPool.COMMA_AND_SPACE);
+				}
 			}
 
 			writer.write(StringPool.COMMA_AND_SPACE);
 			writer.write("function(");
+			
+			iterator = es6ModulesSet.iterator();
 
-			for (Iterator<String> iterator = es6ModulesSet.iterator();
-				 iterator.hasNext();) {
-					writer.write(generatedVariables.get(iterator.next()));
+			while (iterator.hasNext()) {
+				writer.write(generatedVariables.get(iterator.next()));
 
-					if (iterator.hasNext()) {
-						writer.write(StringPool.COMMA_AND_SPACE);
-					}
+				if (iterator.hasNext()) {
+					writer.write(StringPool.COMMA_AND_SPACE);
+				}
 			}
 
 			writer.write(") {\n");
@@ -178,7 +181,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 	public static enum ModuleTypes {
 
-		MODULE_AUI, MODULE_ES6
+		AUI, ES6
 
 	}
 
@@ -304,7 +307,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			else {
 				String[] modulesArray = StringUtil.split(modules);
 
-				if (type == ModuleTypes.MODULE_AUI) {
+				if (type == ModuleTypes.AUI) {
 					_auiCallbackSB.append("(function() {");
 					_auiCallbackSB.append(content);
 					_auiCallbackSB.append("})();");
@@ -334,7 +337,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			else {
 				String[] modulesArray = StringUtil.split(modules);
 
-				if (type == ModuleTypes.MODULE_AUI) {
+				if (type == ModuleTypes.AUI) {
 					_auiCallbackSB.append("(function() {");
 					_auiCallbackSB.append(contentSB);
 					_auiCallbackSB.append("})();");
