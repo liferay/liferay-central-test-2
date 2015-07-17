@@ -29,8 +29,13 @@ import java.util.Map;
 public class ModelPermissions implements Serializable {
 
 	public void addRolePermissions(Role role, String actionId) {
-		getRoles(actionId).add(role);
-		getActionIds(role).add(actionId);
+		List<Role> roles = getRoles(actionId);
+
+		roles.add(role);
+
+		List<String> actionIds = getActionIds(role);
+
+		actionIds.add(actionId);
 
 		_roles.add(role);
 	}
