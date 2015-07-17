@@ -28,6 +28,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService;
 import com.liferay.portlet.dynamicdatamapping.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.DDMStructureManagerUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngine;
 
@@ -89,7 +90,9 @@ public class LegacyGoogleDocsMigration {
 		deleteLegacyGoogleDocsDDMStructureFields();
 	}
 
-	protected void deleteLegacyGoogleDocsDDMStructureFields() {
+	protected void deleteLegacyGoogleDocsDDMStructureFields()
+		throws PortalException {
+
 		DDMStructure legacyDDMStructure =
 			LegacyGoogleDocsMetadataHelper.getGoogleDocsDDMStructure(
 				_dlFileEntryType);
@@ -99,9 +102,8 @@ public class LegacyGoogleDocsMigration {
 		definition = definition.replaceAll(
 			"(?s)<dynamic-element[^>]*>.*?</dynamic-element>", "");
 
-		legacyDDMStructure.setDefinition(definition);
-
-		_ddmStructureLocalService.updateDDMStructure(legacyDDMStructure);
+		DDMStructureManagerUtil.updateStructureDefinition(
+			legacyDDMStructure.getStructureId(), definition);
 	}
 
 	protected void upgradeDLFileEntries() throws PortalException {
