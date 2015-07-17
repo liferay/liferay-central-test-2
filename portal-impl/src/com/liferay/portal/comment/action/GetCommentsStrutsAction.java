@@ -90,7 +90,7 @@ public class GetCommentsStrutsAction extends BaseStrutsAction {
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:rootIndexPage",
 			String.valueOf(rootIndexPage));
-		
+
 		long userId = ParamUtil.getLong(namespacedRequest, "userId");
 
 		namespacedRequest.setAttribute(

@@ -59,7 +59,6 @@ public interface EditorConfigTransformer {
 	 * @param inputEditorTaglibAttributes the attributes specified to the input
 	 *        taglib tag that renders the editor
 	 * @param themeDisplay the theme display
-	 * @param requestBackedPortletURLFactory a portlet URL builder.
 	 * @param configJSONObject the JSON object composed of the entire
 	 *        configuration set by {@link EditorConfigContributor} modules
 	 */
