@@ -44,7 +44,7 @@ public class ServiceAccessControlProfileManagerImpl
 	public String getDefaultApplicationServiceAccessControlProfileName(
 		long companyId) {
 
-		SACPConfiguration sacpConfiguration = getConfiguration(companyId);
+		SACPConfiguration sacpConfiguration = getSACPConfiguration(companyId);
 
 		if (sacpConfiguration != null) {
 			return sacpConfiguration.defaultApplicationSACPEntryName();
@@ -57,7 +57,7 @@ public class ServiceAccessControlProfileManagerImpl
 	public String getDefaultUserServiceAccessControlProfileName(
 		long companyId) {
 
-		SACPConfiguration sacpConfiguration = getConfiguration(companyId);
+		SACPConfiguration sacpConfiguration = getSACPConfiguration(companyId);
 
 		if (sacpConfiguration != null) {
 			return sacpConfiguration.defaultUserSACPEntryName();
@@ -92,7 +92,7 @@ public class ServiceAccessControlProfileManagerImpl
 		return _sacpEntryService.getCompanySACPEntriesCount(companyId);
 	}
 
-	protected SACPConfiguration getConfiguration(long companyId) {
+	protected SACPConfiguration getSACPConfiguration(long companyId) {
 		try {
 			return _settingsFactory.getSettings(
 				SACPConfiguration.class,
@@ -101,10 +101,7 @@ public class ServiceAccessControlProfileManagerImpl
 		}
 		catch (SettingsException se) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to determine default service access control " +
-						"profile",
-					se);
+				_log.warn("Unable to get SACP configuration", se);
 			}
 
 			return null;

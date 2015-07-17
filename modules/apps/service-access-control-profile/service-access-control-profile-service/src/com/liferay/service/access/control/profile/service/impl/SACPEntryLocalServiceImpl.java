@@ -102,29 +102,27 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 			new CompanyServiceSettingsLocator(
 				companyId, SACPConstants.SERVICE_NAME));
 
-		SACPEntry appSacpEntry = sacpEntryPersistence.fetchByC_N(
+		SACPEntry applicationSACPEntry = sacpEntryPersistence.fetchByC_N(
 			companyId, sacpConfiguration.defaultApplicationSACPEntryName());
-
-		SACPEntry userSacpEntry = sacpEntryPersistence.fetchByC_N(
+		SACPEntry userSACPEntry = sacpEntryPersistence.fetchByC_N(
 			companyId, sacpConfiguration.defaultUserSACPEntryName());
 
-		if ((appSacpEntry != null) && (userSacpEntry != null)) {
+		if ((applicationSACPEntry != null) && (userSACPEntry != null)) {
 			return;
 		}
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
-
 		Role guestRole = roleLocalService.getRole(
 			companyId, RoleConstants.GUEST);
 
-		if (appSacpEntry == null) {
+		if (applicationSACPEntry == null) {
 			Map<Locale, String> titleMap = new HashMap<>();
 
 			titleMap.put(
 				LocaleUtil.getDefault(),
 				sacpConfiguration.defaultApplicationSACPEntryDescription());
 
-			appSacpEntry = addSACPEntry(
+			applicationSACPEntry = addSACPEntry(
 				defaultUserId,
 				sacpConfiguration.
 					defaultApplicationSACPEntryServiceSignatures(),
@@ -132,29 +130,29 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 				titleMap, new ServiceContext());
 
 			resourcePermissionLocalService.setResourcePermissions(
-				appSacpEntry.getCompanyId(), SACPEntry.class.getName(),
+				applicationSACPEntry.getCompanyId(), SACPEntry.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(appSacpEntry.getSacpEntryId()),
+				String.valueOf(applicationSACPEntry.getSacpEntryId()),
 				guestRole.getRoleId(), new String[] {ActionKeys.VIEW});
 		}
 
-		if (userSacpEntry == null) {
+		if (userSACPEntry == null) {
 			Map<Locale, String> titleMap = new HashMap<>();
 
 			titleMap.put(
 				LocaleUtil.getDefault(),
 				sacpConfiguration.defaultUserSACPEntryDescription());
 
-			userSacpEntry = addSACPEntry(
+			userSACPEntry = addSACPEntry(
 				defaultUserId,
 				sacpConfiguration.defaultUserSACPEntryServiceSignatures(), true,
 				sacpConfiguration.defaultUserSACPEntryName(), titleMap,
 				new ServiceContext());
 
 			resourcePermissionLocalService.setResourcePermissions(
-				userSacpEntry.getCompanyId(), SACPEntry.class.getName(),
+				userSACPEntry.getCompanyId(), SACPEntry.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(userSacpEntry.getSacpEntryId()),
+				String.valueOf(userSACPEntry.getSacpEntryId()),
 				guestRole.getRoleId(), new String[] {ActionKeys.VIEW});
 		}
 	}
