@@ -270,7 +270,7 @@ public class DDMStructureManagerUtilTest {
 			TestPropsValues.getUserId(), _group.getGroupId(), null,
 			_classNameId, StringUtil.randomString(), nameMap, descriptionMap,
 			createDDMForm(), createDDMFormLayout(),
-			DDMStructureManager.STRUCTURE_DEFAULT_STORAGE_TYPE,
+			StorageEngineManager.DEFAULT_STORAGE_TYPE,
 			DDMStructureManager.STRUCTURE_TYPE_DEFAULT, _serviceContext);
 	}
 
