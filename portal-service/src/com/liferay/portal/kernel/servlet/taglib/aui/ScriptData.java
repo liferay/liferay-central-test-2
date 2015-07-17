@@ -124,7 +124,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 			Map<String, String> generatedVariables = _generateVariables(
 				es6ModulesSet);
-				
+
 			Iterator<String> iterator = es6ModulesSet.iterator();
 
 			while (iterator.hasNext()) {
@@ -139,7 +139,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 			writer.write(StringPool.COMMA_AND_SPACE);
 			writer.write("function(");
-			
+
 			iterator = es6ModulesSet.iterator();
 
 			while (iterator.hasNext()) {
@@ -220,8 +220,8 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			}
 
 			for (int i = 1; i < requiredFileName.length(); i++) {
-				CharSequence currentCharSequence =
-					requiredFileName.subSequence(i, i + 1);
+				CharSequence currentCharSequence = requiredFileName.subSequence(
+					i, i + 1);
 
 				matcher = _validCharactersPattern.matcher(currentCharSequence);
 
