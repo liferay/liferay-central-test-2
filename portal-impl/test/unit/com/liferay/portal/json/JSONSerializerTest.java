@@ -90,10 +90,10 @@ public class JSONSerializerTest {
 
 		String json = JSONFactoryUtil.serialize(serviceContext);
 
-		ServiceContext serviceContextDeserialize =
+		ServiceContext deserializedServiceContext =
 			(ServiceContext)JSONFactoryUtil.deserialize(json);
 
-		Assert.assertNotNull(serviceContextDeserialize.getGroupPermissions());
+		Assert.assertNotNull(deserializedServiceContext.getGroupPermissions());
 	}
 
 	@Test
@@ -105,15 +105,14 @@ public class JSONSerializerTest {
 		serviceContext.setAttribute("groupPermissions", groupPermissions);
 		serviceContext.setGroupPermissions(groupPermissions);
 
-		String jsonString = JSONFactoryUtil.serialize(serviceContext);
+		String json1 = JSONFactoryUtil.serialize(serviceContext);
 
-		ServiceContext serviceContextDeserialize =
-			(ServiceContext)JSONFactoryUtil.deserialize(jsonString);
+		ServiceContext deserializedServiceContext =
+			(ServiceContext)JSONFactoryUtil.deserialize(json1);
 
-		String jsonStringAgain = JSONFactoryUtil.serialize(
-			serviceContextDeserialize);
+		String json2 = JSONFactoryUtil.serialize(deserializedServiceContext);
 
-		Assert.assertEquals(jsonString, jsonStringAgain);
+		Assert.assertEquals(json1, json2);
 	}
 
 }
