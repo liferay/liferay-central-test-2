@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public class ModelPermissionsFactory {
 
-    public static final String MODEL_PERMISSIONS_PREFIX = "modelPermissions.";
+    public static final String MODEL_PERMISSIONS_PREFIX = "modelPermissions";
 
     public static ModelPermissions create(
             long companyId, long groupId, String[] groupPermissions,
