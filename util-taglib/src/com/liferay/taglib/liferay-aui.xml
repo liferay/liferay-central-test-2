@@ -1349,7 +1349,6 @@
 				<defaultValue>false</defaultValue>
 			</attribute>
 			<attribute>
-				<description>AMD modules to be used in the script. Names of multiple modules must be separated by commas.</description>
 				<name>require</name>
 				<inputType>java.lang.String</inputType>
 				<outputType>java.lang.String</outputType>
