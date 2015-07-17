@@ -55,7 +55,8 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.store.BaseStore;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -530,7 +531,9 @@ public class DLFileVersionTest {
 					ddmStructure.getStructureId());
 
 			Fields fields = DDMFormValuesToFieldsConverterUtil.convert(
-				ddmStructure, ddmFormValues);
+				DDMStructureLocalServiceUtil.getDDMStructure(
+					_ddmStructure.getStructureId()),
+				ddmFormValues);
 
 			for (Field field : fields) {
 				String type = field.getType();
