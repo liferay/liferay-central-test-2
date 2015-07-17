@@ -34,6 +34,8 @@
 			<finder-column name="name" case-sensitive="false" />
 		</finder>
 
+		<!-- References -->
+
 		<reference package-path="com.liferay.portal" entity="ResourcePermission" />
 		<reference package-path="com.liferay.portal" entity="Role" />
 	</entity>
