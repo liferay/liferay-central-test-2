@@ -93,6 +93,21 @@ public class ItemSelectorImplTest extends PowerMockito {
 
 		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 
+		Portal portal = mock(Portal.class);
+
+		LiferayPortletResponse liferayPortletResponse =
+			getMockPortletResponse();
+
+		when(
+			portal.getLiferayPortletResponse(Mockito.any(PortletResponse.class))
+		).thenReturn(
+			liferayPortletResponse
+		);
+
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(portal);
+
 		PortletURLFactory portletURLFactory = mock(PortletURLFactory.class);
 
 		LiferayPortletURL mockLiferayPortletURL = mock(LiferayPortletURL.class);
@@ -109,20 +124,6 @@ public class ItemSelectorImplTest extends PowerMockito {
 			new PortletURLFactoryUtil();
 
 		portletURLFactoryUtil.setPortletURLFactory(portletURLFactory);
-
-		Portal portal = mock(Portal.class);
-
-		LiferayPortletResponse mockPortletResponse = getMockPortletResponse();
-
-		when(
-			portal.getLiferayPortletResponse(Mockito.any(PortletResponse.class))
-		).thenReturn(
-			mockPortletResponse
-		);
-
-		PortalUtil portalUtil = new PortalUtil();
-
-		portalUtil.setPortal(portal);
 	}
 
 	@Test
@@ -152,6 +153,7 @@ public class ItemSelectorImplTest extends PowerMockito {
 		setUpItemSelectionCriterionHandlers();
 
 		PortletResponse portletResponse = getMockPortletResponse();
+
 		PortletRequest portletRequest = getMockPortletRequest(portletResponse);
 
 		ItemSelectorRendering itemSelectorRendering =
@@ -203,17 +205,12 @@ public class ItemSelectorImplTest extends PowerMockito {
 	protected PortletRequest getMockPortletRequest(
 		PortletResponse portletResponse) {
 
-		Map<String, String[]> parameters =
-			_itemSelectorImpl.getItemSelectorParameters(
-				"itemSelectedEventName", _mediaItemSelectorCriterion,
-				_flickrItemSelectorCriterion);
-
 		PortletRequest portletRequest = mock(PortletRequest.class);
 
 		when(
-			portletRequest.getParameterMap()
+			portletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE)
 		).thenReturn(
-			parameters
+			portletResponse
 		);
 
 		ThemeDisplay themeDisplay = mock(ThemeDisplay.class);
@@ -224,10 +221,15 @@ public class ItemSelectorImplTest extends PowerMockito {
 			themeDisplay
 		);
 
+		Map<String, String[]> parameters =
+			_itemSelectorImpl.getItemSelectorParameters(
+				"itemSelectedEventName", _mediaItemSelectorCriterion,
+				_flickrItemSelectorCriterion);
+
 		when(
-			portletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE)
+			portletRequest.getParameterMap()
 		).thenReturn(
-			portletResponse
+			parameters
 		);
 
 		return portletRequest;
