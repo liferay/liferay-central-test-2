@@ -75,14 +75,13 @@ public class ModelPermissionsFactory {
     public static ModelPermissions create(Map<String, String[]> parameterMap) {
         ModelPermissions modelPermissions = new ModelPermissions();
 
-        for (String param : parameterMap.keySet()) {
-            if (!param.startsWith(MODEL_PERMISSIONS_PREFIX)) {
+        for (String parameterName : parameterMap.keySet()) {
+            if (!parameterName.startsWith(MODEL_PERMISSIONS_PREFIX)) {
                 continue;
             }
 
-            String roleName = param.substring(
+            String roleName = parameterName.substring(
                 MODEL_PERMISSIONS_PREFIX.length());
-            String[] actionIds = parameterMap.get(param);
 
             Role role = null;
 
@@ -92,13 +91,13 @@ public class ModelPermissionsFactory {
             }
             catch (PortalException pe) {
                 if (_log.isInfoEnabled()) {
-                    _log.info(
-                        "Couldn't find role named " + roleName +
-                            ". Ignoring it.");
+                    _log.info("Unable to get role " + roleName);
                 }
 
                 continue;
             }
+
+            String[] actionIds = parameterMap.get(parameterName);
 
             modelPermissions.addRolePermissions(role, actionIds);
         }
@@ -108,6 +107,5 @@ public class ModelPermissionsFactory {
 
     private static final Log _log = LogFactoryUtil.getLog(
         ModelPermissionsFactory.class);
-
 
 }
