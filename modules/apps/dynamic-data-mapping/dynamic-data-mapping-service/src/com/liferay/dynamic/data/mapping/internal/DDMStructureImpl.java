@@ -193,6 +193,11 @@ public class DDMStructureImpl implements DDMStructure {
 	}
 
 	@Override
+	public long getPrimaryKey() {
+		return _ddmStructure.getPrimaryKey();
+	}
+
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _ddmStructure.getPrimaryKeyObj();
 	}

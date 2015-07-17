@@ -75,6 +75,8 @@ public interface DDMStructure extends StagedModel {
 
 	public long getParentStructureId();
 
+	public long getPrimaryKey();
+
 	public List<String> getRootFieldNames();
 
 	public long getStructureId();
