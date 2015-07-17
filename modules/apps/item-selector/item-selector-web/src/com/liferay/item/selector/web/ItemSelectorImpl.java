@@ -70,13 +70,13 @@ public class ItemSelectorImpl implements ItemSelector {
 	public ItemSelectorRendering getItemSelectorRendering(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(portletRequest);
+
 		Map<String, String[]> parameters = portletRequest.getParameterMap();
 
 		String itemSelectedEventName = getValue(
 			parameters, PARAMETER_ITEM_SELECTED_EVENT_NAME);
-
-		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
-			RequestBackedPortletURLFactoryUtil.create(portletRequest);
 
 		List<ItemSelectorViewRenderer> itemSelectorViewRenderers =
 			new ArrayList<>();
