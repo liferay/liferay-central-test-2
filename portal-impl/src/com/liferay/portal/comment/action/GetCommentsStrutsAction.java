@@ -44,6 +44,8 @@ public class GetCommentsStrutsAction extends BaseStrutsAction {
 		HttpServletRequest namespacedRequest = new NamespaceServletRequest(
 			request, StringPool.BLANK, namespace);
 
+		namespacedRequest.setAttribute("aui:form:portletNamespace", namespace);
+
 		String className = ParamUtil.getString(namespacedRequest, "className");
 
 		namespacedRequest.setAttribute(
@@ -88,8 +90,6 @@ public class GetCommentsStrutsAction extends BaseStrutsAction {
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:rootIndexPage",
 			String.valueOf(rootIndexPage));
-
-		namespacedRequest.setAttribute("aui:form:portletNamespace", namespace);
 		
 		long userId = ParamUtil.getLong(namespacedRequest, "userId");
 
