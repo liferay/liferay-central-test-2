@@ -120,7 +120,7 @@ public class ScriptTag extends BaseScriptTag {
 
 			if ((require != null) && (use != null)) {
 				throw new JspException(
-					"You cannot use both use and require attributes");
+					"Attributes \"require\" and \"use\" are both set");
 			}
 
 			if (getSandbox() || (require != null) || (use != null)) {
@@ -147,12 +147,12 @@ public class ScriptTag extends BaseScriptTag {
 				if (require != null) {
 					scriptData.append(
 						portletId, bodyContentSB, require,
-							ScriptData.ModuleTypes.MODULE_ES6);
+						ScriptData.ModuleTypes.ES6);
 				}
 				else if (use != null) {
 					scriptData.append(
 						portletId, bodyContentSB, use,
-							ScriptData.ModuleTypes.MODULE_AUI);
+						ScriptData.ModuleTypes.AUI);
 				}
 
 				String page = getPage();
@@ -179,12 +179,12 @@ public class ScriptTag extends BaseScriptTag {
 				if (require != null) {
 					scriptData.append(
 						portletId, bodyContentSB, require,
-							ScriptData.ModuleTypes.MODULE_ES6);
+						ScriptData.ModuleTypes.ES6);
 				}
 				else if (use != null) {
 					scriptData.append(
 						portletId, bodyContentSB, use,
-							ScriptData.ModuleTypes.MODULE_AUI);
+						ScriptData.ModuleTypes.AUI);
 				}
 			}
 
