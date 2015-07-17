@@ -47,20 +47,20 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 	public void append(
 		String portletId, String content, String modules,
-		ModuleTypes moduleTypes) {
+		ModulesType modulesType) {
 
 		PortletData portletData = _getPortletData(portletId);
 
-		portletData.append(content, modules, moduleTypes);
+		portletData.append(content, modules, modulesType);
 	}
 
 	public void append(
 		String portletId, StringBundler contentSB, String modules,
-		ModuleTypes moduleTypes) {
+		ModulesType modulesType) {
 
 		PortletData portletData = _getPortletData(portletId);
 
-		portletData.append(contentSB, modules, moduleTypes);
+		portletData.append(contentSB, modules, modulesType);
 	}
 
 	public void mark() {
@@ -179,7 +179,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		}
 	}
 
-	public static enum ModuleTypes {
+	public static enum ModulesType {
 
 		AUI, ES6
 
@@ -300,14 +300,14 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 	private class PortletData implements Serializable {
 
-		public void append(String content, String modules, ModuleTypes type) {
+		public void append(String content, String modules, ModulesType type) {
 			if (Validator.isNull(modules)) {
 				_rawSB.append(content);
 			}
 			else {
 				String[] modulesArray = StringUtil.split(modules);
 
-				if (type == ModuleTypes.AUI) {
+				if (type == ModulesType.AUI) {
 					_auiCallbackSB.append("(function() {");
 					_auiCallbackSB.append(content);
 					_auiCallbackSB.append("})();");
@@ -329,7 +329,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		}
 
 		public void append(
-			StringBundler contentSB, String modules, ModuleTypes type) {
+			StringBundler contentSB, String modules, ModulesType type) {
 
 			if (Validator.isNull(modules)) {
 				_rawSB.append(contentSB);
@@ -337,7 +337,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			else {
 				String[] modulesArray = StringUtil.split(modules);
 
-				if (type == ModuleTypes.AUI) {
+				if (type == ModulesType.AUI) {
 					_auiCallbackSB.append("(function() {");
 					_auiCallbackSB.append(contentSB);
 					_auiCallbackSB.append("})();");

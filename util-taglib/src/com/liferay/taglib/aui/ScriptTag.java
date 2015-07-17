@@ -147,12 +147,12 @@ public class ScriptTag extends BaseScriptTag {
 				if (require != null) {
 					scriptData.append(
 						portletId, bodyContentSB, require,
-						ScriptData.ModuleTypes.ES6);
+						ScriptData.ModulesType.ES6);
 				}
 				else if (use != null) {
 					scriptData.append(
 						portletId, bodyContentSB, use,
-						ScriptData.ModuleTypes.AUI);
+						ScriptData.ModulesType.AUI);
 				}
 
 				String page = getPage();
@@ -179,12 +179,12 @@ public class ScriptTag extends BaseScriptTag {
 				if (require != null) {
 					scriptData.append(
 						portletId, bodyContentSB, require,
-						ScriptData.ModuleTypes.ES6);
+						ScriptData.ModulesType.ES6);
 				}
 				else if (use != null) {
 					scriptData.append(
 						portletId, bodyContentSB, use,
-						ScriptData.ModuleTypes.AUI);
+						ScriptData.ModulesType.AUI);
 				}
 			}
 
