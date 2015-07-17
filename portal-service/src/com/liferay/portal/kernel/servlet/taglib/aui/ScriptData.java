@@ -94,9 +94,8 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		writer.write("<script type=\"text/javascript\">\n// <![CDATA[\n");
 
 		StringBundler auiModulesSB = new StringBundler(_portletDataMap.size());
-		StringBundler es6ModulesSB = new StringBundler(_portletDataMap.size());
-
 		Set<String> auiModulesSet = new HashSet<>();
+		StringBundler es6ModulesSB = new StringBundler(_portletDataMap.size());
 		Set<String> es6ModulesSet = new HashSet<>();
 
 		for (PortletData portletData : _portletDataMap.values()) {
@@ -156,7 +155,6 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			es6ModulesSB.writeTo(writer);
 
 			writer.write("},\nfunction(error) {\nconsole.error(error);\n});");
-
 			writer.write("\n// ]]>\n</script>");
 		}
 		else if (!auiModulesSet.isEmpty()) {
@@ -173,9 +171,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 			auiModulesSB.writeTo(writer);
 
-			writer.write("});");
-
-			writer.write("\n// ]]>\n</script>");
+			writer.write("});\n// ]]>\n</script>");
 		}
 	}
 
@@ -201,47 +197,53 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		}
 	}
 
-	private Map<String, String> _generateVariables(Set<String> requiredFiles) {
-		Map<String, String> generatedVariablesMap = new HashMap<>();
-		Map<String, Integer> variablesIndex = new HashMap<>();
-		Set<String> generatedVariables = new HashSet<>();
+	private Map<String, String> _generateVariables(
+		Set<String> requiredFileNames) {
 
-		for (String requiredFile : requiredFiles) {
+		Map<String, Integer> indexes = new HashMap<>();
+		Set<String> generatedVariables = new HashSet<>();
+		Map<String, String> generatedVariablesMap = new HashMap<>();
+
+		for (String requiredFileName : requiredFileNames) {
 			StringBundler sb = new StringBundler();
-			CharSequence firstCharacter = requiredFile.subSequence(0, 1);
-			Matcher matcher = patternValidFirstCharacter.matcher(
-				firstCharacter);
+
+			CharSequence firstCharSequence = requiredFileName.subSequence(0, 1);
+
+			Matcher matcher = _validFirstCharacterPattern.matcher(
+				firstCharSequence);
 
 			if (!matcher.matches()) {
 				sb.append(StringPool.UNDERLINE);
 			}
 			else {
-				sb.append(firstCharacter);
+				sb.append(firstCharSequence);
 			}
 
-			for (int i = 1; i < requiredFile.length(); i++) {
-				CharSequence curCharacter = requiredFile.subSequence(i, i + 1);
+			for (int i = 1; i < requiredFileName.length(); i++) {
+				CharSequence currentCharSequence =
+					requiredFileName.subSequence(i, i + 1);
 
-				matcher = patternValidCharacters.matcher(curCharacter);
+				matcher = _validCharactersPattern.matcher(currentCharSequence);
 
 				if (!matcher.matches()) {
-					while (++i < requiredFile.length()) {
-						CharSequence nextCharacter = requiredFile.subSequence(
-							i, i + 1);
+					while (++i < requiredFileName.length()) {
+						CharSequence nextCharSequence =
+							requiredFileName.subSequence(i, i + 1);
 
-						matcher = patternValidCharacters.matcher(nextCharacter);
+						matcher = _validCharactersPattern.matcher(
+							nextCharSequence);
 
 						if (matcher.matches()) {
 							sb.append(
 								StringUtil.toUpperCase(
-									nextCharacter.toString()));
+									nextCharSequence.toString()));
 
 							break;
 						}
 					}
 				}
 				else {
-					sb.append(curCharacter);
+					sb.append(currentCharSequence);
 				}
 			}
 
@@ -250,17 +252,17 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			if (generatedVariables.contains(generatedVariable)) {
 				int index = 1;
 
-				if (variablesIndex.containsKey(generatedVariable)) {
-					index = variablesIndex.get(generatedVariable) + 1;
+				if (indexes.containsKey(generatedVariable)) {
+					index = indexes.get(generatedVariable) + 1;
 				}
 
-				variablesIndex.put(generatedVariable, index);
+				indexes.put(generatedVariable, index);
 
 				generatedVariable += index;
 			}
 
 			generatedVariables.add(generatedVariable);
-			generatedVariablesMap.put(requiredFile, generatedVariable);
+			generatedVariablesMap.put(requiredFileName, generatedVariable);
 		}
 
 		return generatedVariablesMap;
@@ -293,21 +295,23 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		new ConcurrentHashMap<>();
 	private final List<ObjectValuePair<StringBundler, Integer>> _sbIndexList =
 		new ArrayList<>();
-	private final Pattern patternValidCharacters = Pattern.compile(
+	private final Pattern _validCharactersPattern = Pattern.compile(
 		"[0-9a-z_$]", Pattern.CASE_INSENSITIVE);
-	private final Pattern patternValidFirstCharacter = Pattern.compile(
+	private final Pattern _validFirstCharacterPattern = Pattern.compile(
 		"[a-z_$]", Pattern.CASE_INSENSITIVE);
 
 	private class PortletData implements Serializable {
 
-		public void append(String content, String modules, ModulesType type) {
+		public void append(
+			String content, String modules, ModulesType modulesType) {
+
 			if (Validator.isNull(modules)) {
 				_rawSB.append(content);
 			}
 			else {
 				String[] modulesArray = StringUtil.split(modules);
 
-				if (type == ModulesType.AUI) {
+				if (modulesType == ModulesType.AUI) {
 					_auiCallbackSB.append("(function() {");
 					_auiCallbackSB.append(content);
 					_auiCallbackSB.append("})();");
@@ -329,7 +333,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		}
 
 		public void append(
-			StringBundler contentSB, String modules, ModulesType type) {
+			StringBundler contentSB, String modules, ModulesType modulesType) {
 
 			if (Validator.isNull(modules)) {
 				_rawSB.append(contentSB);
@@ -337,7 +341,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			else {
 				String[] modulesArray = StringUtil.split(modules);
 
-				if (type == ModulesType.AUI) {
+				if (modulesType == ModulesType.AUI) {
 					_auiCallbackSB.append("(function() {");
 					_auiCallbackSB.append(contentSB);
 					_auiCallbackSB.append("})();");
