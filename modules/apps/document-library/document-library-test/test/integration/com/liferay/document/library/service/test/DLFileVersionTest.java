@@ -416,7 +416,9 @@ public class DLFileVersionTest {
 
 			DDMFormValues ddmFormValues =
 				FieldsToDDMFormValuesConverterUtil.convert(
-					ddmStructure, fields);
+					DDMStructureLocalServiceUtil.getDDMStructure(
+						ddmStructure.getStructureId()),
+					fields);
 
 			serviceContext.setAttribute(
 				DDMFormValues.class.getName() + ddmStructure.getStructureId(),
@@ -530,10 +532,12 @@ public class DLFileVersionTest {
 					DDMFormValues.class.getName() +
 					ddmStructure.getStructureId());
 
+			com.liferay.portlet.dynamicdatamapping.model.DDMStructure
+				structure = DDMStructureLocalServiceUtil.getDDMStructure(
+					ddmStructure.getStructureId());
+
 			Fields fields = DDMFormValuesToFieldsConverterUtil.convert(
-				DDMStructureLocalServiceUtil.getDDMStructure(
-					_ddmStructure.getStructureId()),
-				ddmFormValues);
+				structure, ddmFormValues);
 
 			for (Field field : fields) {
 				String type = field.getType();
@@ -544,7 +548,7 @@ public class DLFileVersionTest {
 			}
 
 			ddmFormValues = FieldsToDDMFormValuesConverterUtil.convert(
-				ddmStructure, fields);
+				structure, fields);
 
 			_serviceContext.setAttribute(
 				DDMFormValues.class.getName() + ddmStructure.getStructureId(),
