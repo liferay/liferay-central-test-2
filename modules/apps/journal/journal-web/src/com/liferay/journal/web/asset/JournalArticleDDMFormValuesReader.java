@@ -39,13 +39,13 @@ final class JournalArticleDDMFormValuesReader extends BaseDDMFormValuesReader {
 	@Override
 	public DDMFormValues getDDMFormValues() throws PortalException {
 		try {
+			JournalConverter journalConverter = getJournalConverter();
+
 			DDMStructure ddmStructure =
 				DDMStructureLocalServiceUtil.getStructure(
 					PortalUtil.getSiteGroupId(_article.getGroupId()),
 					PortalUtil.getClassNameId(JournalArticle.class),
 					_article.getDDMStructureKey(), true);
-
-			JournalConverter journalConverter = getJournalConverter();
 
 			Fields fields = journalConverter.getDDMFields(
 				ddmStructure, _article.getContent());
