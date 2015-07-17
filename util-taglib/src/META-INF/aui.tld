@@ -2426,7 +2426,6 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description><![CDATA[AMD modules to be used in the script. Names of multiple modules must be separated by commas.]]></description>
 			<name>require</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
