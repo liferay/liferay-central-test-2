@@ -45,35 +45,42 @@ public class GetCommentsStrutsAction extends BaseStrutsAction {
 			request, StringPool.BLANK, namespace);
 
 		String className = ParamUtil.getString(namespacedRequest, "className");
-		long classPK = ParamUtil.getLong(namespacedRequest, "classPK");
-		boolean hideControls = ParamUtil.getBoolean(
-			namespacedRequest, "hideControls");
-		boolean ratingsEnabled = ParamUtil.getBoolean(
-			namespacedRequest, "ratingsEnabled");
-		long userId = ParamUtil.getLong(namespacedRequest, "userId");
 
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:className", className);
+
+		long classPK = ParamUtil.getLong(namespacedRequest, "classPK");
+
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:classPK", String.valueOf(classPK));
+
+		boolean hideControls = ParamUtil.getBoolean(
+			namespacedRequest, "hideControls");
+
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:hideControls", String.valueOf(hideControls));
-		namespacedRequest.setAttribute(
-			"liferay-ui:discussion:ratingsEnabled",
-			String.valueOf(ratingsEnabled));
-		namespacedRequest.setAttribute(
-			"liferay-ui:discussion:userId", String.valueOf(userId));
 
 		int index = ParamUtil.getInteger(namespacedRequest, "index");
 
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:index", String.valueOf(index));
 
+		String portletId = ParamUtil.getString(namespacedRequest, "portletId");
+
+		namespacedRequest.setAttribute(WebKeys.PORTLET_ID, portletId);
+
 		String randomNamespace = ParamUtil.getString(
 			namespacedRequest, "randomNamespace");
 
 		namespacedRequest.setAttribute(
 			"liferay-ui:discussion:randomNamespace", randomNamespace);
+
+		boolean ratingsEnabled = ParamUtil.getBoolean(
+			namespacedRequest, "ratingsEnabled");
+
+		namespacedRequest.setAttribute(
+			"liferay-ui:discussion:ratingsEnabled",
+			String.valueOf(ratingsEnabled));
 
 		int rootIndexPage = ParamUtil.getInteger(
 			namespacedRequest, "rootIndexPage");
@@ -83,10 +90,11 @@ public class GetCommentsStrutsAction extends BaseStrutsAction {
 			String.valueOf(rootIndexPage));
 
 		namespacedRequest.setAttribute("aui:form:portletNamespace", namespace);
+		
+		long userId = ParamUtil.getLong(namespacedRequest, "userId");
 
-		String portletId = ParamUtil.getString(namespacedRequest, "portletId");
-
-		namespacedRequest.setAttribute(WebKeys.PORTLET_ID, portletId);
+		namespacedRequest.setAttribute(
+			"liferay-ui:discussion:userId", String.valueOf(userId));
 
 		RequestDispatcher requestDispatcher =
 			namespacedRequest.getRequestDispatcher(
