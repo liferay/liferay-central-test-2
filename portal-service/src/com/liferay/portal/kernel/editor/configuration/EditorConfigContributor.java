@@ -121,7 +121,6 @@ public interface EditorConfigContributor {
 	 * @param inputEditorTaglibAttributes the attributes specified to the input
 	 *        taglib tag that renders the editor
 	 * @param themeDisplay the theme display
-	 * @param requestBackedPortletURLFactory a portlet URL builder.
 	 */
 	public void populateConfigJSONObject(
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
