@@ -881,7 +881,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 				return TestPropsValues.getUserId();
 			}
 			catch (Exception e) {
-				return 0L;
+				return 0;
 			}
 		}
 
