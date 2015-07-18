@@ -680,7 +680,7 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 				if (started) {
 					if (_logger.isDebugEnabled()) {
 						_logger.debug(
-							"App Server " + appServerBinDir +
+							"Application server " + appServerBinDir +
 								" is already started");
 					}
 
@@ -693,8 +693,8 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 					if (startParameter.isParallelProjectExecutionEnabled()) {
 						if (_logger.isDebugEnabled()) {
 							_logger.debug(
-								"Waiting for App Server " + appServerBinDir +
-									" to be reachable");
+								"Waiting for application server " +
+									appServerBinDir + " to be reachable");
 						}
 
 						startAppServerTask.waitForAppServer();
@@ -731,7 +731,7 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 					if (!_startedAppServerBinDirs.contains(appServerBinDir)) {
 						if (_logger.isDebugEnabled()) {
 							_logger.debug(
-								"App Server " + appServerBinDir +
+								"Application server " + appServerBinDir +
 									" is already stopped");
 						}
 
@@ -744,7 +744,7 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 					if (originalCounter > 1) {
 						if (_logger.isDebugEnabled()) {
 							_logger.debug(
-								"App Server " + appServerBinDir +
+								"Application server " + appServerBinDir +
 									" cannot be stopped now, still " +
 										(originalCounter - 1) + " to execute");
 						}

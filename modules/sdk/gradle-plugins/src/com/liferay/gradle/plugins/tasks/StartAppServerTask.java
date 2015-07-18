@@ -173,11 +173,13 @@ public class StartAppServerTask extends DefaultTask implements AppServerTask {
 				callable, getCheckInterval(), getTimeout());
 		}
 		catch (Exception e) {
-			throw new GradleException("Unable to wait for App Server", e);
+			throw new GradleException(
+				"Unable to wait for the application server", e);
 		}
 
 		if (!success) {
-			throw new GradleException("Timeout while starting App Server");
+			throw new GradleException(
+				"Timeout while starting the application server");
 		}
 	}
 
