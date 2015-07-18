@@ -61,11 +61,9 @@ public class LegacyGoogleDocsMetadataHelper {
 
 		try {
 			_ddmStructureLocalService = ddmStructureLocalService;
-
-			_dlFileVersion = dlFileEntry.getFileVersion();
-
 			_storageEngine = storageEngine;
 
+			_dlFileVersion = dlFileEntry.getFileVersion();
 			_ddmStructure = getGoogleDocsDDMStructure(
 				dlFileEntry.getDLFileEntryType());
 		}
