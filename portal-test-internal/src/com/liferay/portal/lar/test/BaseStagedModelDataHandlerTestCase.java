@@ -468,7 +468,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 	}
 
 	protected void initImport() throws Exception {
-		userIdStrategy = new MockUserIdStrategy();
+		userIdStrategy = new TestUserIdStrategy();
 
 		zipReader = ZipReaderFactoryUtil.getZipReader(zipWriter.getFile());
 
@@ -832,7 +832,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 	protected ZipReader zipReader;
 	protected ZipWriter zipWriter;
 
-	protected class MockUserIdStrategy implements UserIdStrategy {
+	protected class TestUserIdStrategy implements UserIdStrategy {
 
 		@Override
 		public long getUserId(String userUuid) {
