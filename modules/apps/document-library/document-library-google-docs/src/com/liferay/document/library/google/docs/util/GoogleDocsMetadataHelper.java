@@ -73,13 +73,10 @@ public class GoogleDocsMetadataHelper {
 
 		try {
 			_ddmStructureLocalService = ddmStructureLocalService;
-
+			_storageEngine = storageEngine;
 			_dlFileEntryMetadataLocalService = dlFileEntryMetadataLocalService;
 
-			_storageEngine = storageEngine;
-
 			_dlFileVersion = dlFileEntry.getFileVersion();
-
 			_ddmStructure = getGoogleDocsDDMStructure(
 				dlFileEntry.getDLFileEntryType());
 		}
