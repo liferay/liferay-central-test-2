@@ -419,9 +419,11 @@ public class DDMStructureManagerUtilTest {
 		ddmFormValues.addAvailableLocale(LocaleUtil.US);
 
 		DDMFormFieldValue ddmFormFieldValue = new DDMFormFieldValue();
+
 		ddmFormFieldValue.setName("fieldName");
 
 		Value value = new LocalizedValue(LocaleUtil.US);
+
 		value.addString(LocaleUtil.US, "name");
 
 		ddmFormFieldValue.setValue(value);

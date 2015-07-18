@@ -54,7 +54,7 @@ public interface DDMStructure extends StagedModel {
 
 	public String getFieldDataType(String fieldName) throws PortalException;
 
-	public Set<java.lang.String> getFieldNames();
+	public Set<String> getFieldNames();
 
 	public String getFieldProperty(String fieldName, String property)
 		throws PortalException;
