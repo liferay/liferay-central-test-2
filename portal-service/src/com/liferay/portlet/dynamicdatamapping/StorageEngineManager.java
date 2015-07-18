@@ -23,7 +23,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues;
  */
 public interface StorageEngineManager {
 
-	public static final String DEFAULT_STORAGE_TYPE = "json";
+	public static final String STORAGE_TYPE_DEFAULT = "json";
 
 	public long create(
 			long companyId, long ddmStructureId, DDMFormValues ddmFormValues,

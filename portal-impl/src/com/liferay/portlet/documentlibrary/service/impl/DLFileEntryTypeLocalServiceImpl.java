@@ -755,7 +755,7 @@ public class DLFileEntryTypeLocalServiceImpl
 					classNameLocalService.getClassNameId(
 						DLFileEntryMetadata.class),
 					ddmStructureKey, nameMap, descriptionMap, ddmForm,
-					ddmFormLayout, StorageEngineManager.DEFAULT_STORAGE_TYPE,
+					ddmFormLayout, StorageEngineManager.STORAGE_TYPE_DEFAULT,
 					DDMStructureManager.STRUCTURE_TYPE_AUTO, serviceContext);
 			}
 			else {
