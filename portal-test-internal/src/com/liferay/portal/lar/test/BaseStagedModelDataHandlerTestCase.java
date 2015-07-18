@@ -832,20 +832,6 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 	protected ZipReader zipReader;
 	protected ZipWriter zipWriter;
 
-	protected class TestUserIdStrategy implements UserIdStrategy {
-
-		@Override
-		public long getUserId(String userUuid) {
-			try {
-				return TestPropsValues.getUserId();
-			}
-			catch (Exception e) {
-				return 0L;
-			}
-		}
-
-	}
-
 	protected class StagedModelAssets implements Serializable {
 
 		public StagedModelAssets(
@@ -884,6 +870,20 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		private AssetCategory _assetCategory;
 		private AssetTag _assetTag;
 		private AssetVocabulary _assetVocabulary;
+
+	}
+
+	protected class TestUserIdStrategy implements UserIdStrategy {
+
+		@Override
+		public long getUserId(String userUuid) {
+			try {
+				return TestPropsValues.getUserId();
+			}
+			catch (Exception e) {
+				return 0L;
+			}
+		}
 
 	}
 
