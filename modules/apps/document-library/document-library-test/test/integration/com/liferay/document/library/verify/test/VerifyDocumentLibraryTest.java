@@ -121,22 +121,22 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 		List<com.liferay.portlet.dynamicdatamapping.DDMStructure>
 			ddmStructures = dlFileEntryType.getDDMStructures();
 
-		com.liferay.portlet.dynamicdatamapping.DDMStructure structure =
+		com.liferay.portlet.dynamicdatamapping.DDMStructure ddmStructure =
 			ddmStructures.get(0);
 
-		DDMStructure ddmStructure =
+		DDMStructure modelDDMStructure =
 			DDMStructureLocalServiceUtil.getDDMStructure(
-				structure.getStructureId());
+				ddmStructure.getStructureId());
 
-		ddmStructure.setCompanyId(12345);
+		modelDDMStructure.setCompanyId(12345);
 
-		DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure);
+		DDMStructureLocalServiceUtil.updateDDMStructure(modelDDMStructure);
 
 		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
 		DLFileEntryMetadata dlFileEntryMetadata =
 			DLFileEntryMetadataLocalServiceUtil.fetchFileEntryMetadata(
-				ddmStructure.getStructureId(),
+				modelDDMStructure.getStructureId(),
 				dlFileVersion.getFileVersionId());
 
 		Assert.assertNotNull(dlFileEntryMetadata);
@@ -145,7 +145,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyProcessTestCase {
 
 		dlFileEntryMetadata =
 			DLFileEntryMetadataLocalServiceUtil.fetchFileEntryMetadata(
-				ddmStructure.getStructureId(),
+				modelDDMStructure.getStructureId(),
 				dlFileVersion.getFileVersionId());
 
 		Assert.assertNull(dlFileEntryMetadata);
