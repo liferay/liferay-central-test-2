@@ -164,7 +164,7 @@ public class ExportImportHelperUtilTest {
 		_portletDataContextImport =
 			PortletDataContextFactoryUtil.createImportPortletDataContext(
 				_liveGroup.getCompanyId(), _liveGroup.getGroupId(),
-				new HashMap<String, String[]>(), new MockUserIdStrategy(),
+				new HashMap<String, String[]>(), new TestUserIdStrategy(),
 				testReaderWriter);
 
 		_portletDataContextImport.setImportDataRootElement(rootElement);
@@ -878,20 +878,6 @@ public class ExportImportHelperUtilTest {
 	private Layout _stagingPrivateLayout;
 	private Layout _stagingPublicLayout;
 
-	private class MockUserIdStrategy implements UserIdStrategy {
-
-		@Override
-		public long getUserId(String userUuid) {
-			try {
-				return TestPropsValues.getUserId();
-			}
-			catch (Exception e) {
-				return 0;
-			}
-		}
-
-	}
-
 	private class TestReaderWriter implements ZipReader, ZipWriter {
 
 		@Override
@@ -971,6 +957,20 @@ public class ExportImportHelperUtilTest {
 
 		private final List<String> _binaryEntries = new ArrayList<>();
 		private final Map<String, String> _entries = new HashMap<>();
+
+	}
+
+	private class TestUserIdStrategy implements UserIdStrategy {
+
+		@Override
+		public long getUserId(String userUuid) {
+			try {
+				return TestPropsValues.getUserId();
+			}
+			catch (Exception e) {
+				return 0;
+			}
+		}
 
 	}
 
