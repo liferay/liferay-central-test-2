@@ -274,8 +274,8 @@ public class PortletImportController implements ImportController {
 
 				sb.append("Do not import portlet data for ");
 				sb.append(portletDataContext.getPortletId());
-				sb.append(" because the portlet does not have a ");
-				sb.append("PortletDataHandler");
+				sb.append(" because the portlet does not have a portlet data ");
+				sb.append("handler");
 
 				_log.debug(sb.toString());
 			}
