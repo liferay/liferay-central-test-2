@@ -244,6 +244,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 		protected String generateMapsConfiguration(String configuration) {
 			JSONObject mapsConfigurationJSONObject = new JSONObject();
+
 			JSONObject configurationJSONObject = new JSONObject(
 				"{" + configuration + "}");
 
@@ -254,20 +255,20 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 				int x = name.indexOf('/');
 
-				String moduleRoot = name.substring(0, x + 1);
+				String moduleRootPath = name.substring(0, x + 1);
 
-				String subModulePath = name.substring(x + 1);
+				String submodulePath = name.substring(x + 1);
 
-				int y = subModulePath.indexOf('/');
+				int y = submodulePath.indexOf('/');
 
 				if (y == -1) {
 					continue;
 				}
 
-				String subModuleName = subModulePath.substring(0, y);
+				String submoduleName = submodulePath.substring(0, y);
 
 				mapsConfigurationJSONObject.put(
-					subModuleName, moduleRoot.concat(subModuleName));
+					submoduleName, moduleRootPath.concat(submoduleName));
 			}
 
 			return mapsConfigurationJSONObject.toString();
@@ -326,8 +327,7 @@ public class JSLoaderModulesServlet extends HttpServlet
 					generateConfiguration(jsonObject, bundleWiring, true));
 
 				_unversionedMapsConfiguration = normalize(
-					generateMapsConfiguration(_unversionedConfiguration)
-				);
+					generateMapsConfiguration(_unversionedConfiguration));
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
@@ -479,12 +479,12 @@ public class JSLoaderModulesServlet extends HttpServlet
 
 			delimiter = ",\n";
 
-			String mapsConfiguration =
+			String unversionedMapsConfiguration =
 				jsLoaderModule.getUnversionedMapsConfiguration();
 
-			if (!mapsConfiguration.equals("")) {
+			if (!unversionedMapsConfiguration.equals("")) {
 				printWriter.write(delimiter);
-				printWriter.write(mapsConfiguration);
+				printWriter.write(unversionedMapsConfiguration);
 			}
 		}
 
