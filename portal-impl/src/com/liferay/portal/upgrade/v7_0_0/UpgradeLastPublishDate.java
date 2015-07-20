@@ -52,7 +52,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 				continue;
 			}
 
-			updateEntitiesLastPublishDates(
+			updateStagedModelLastPublishDates(
 				stagedGroupId, tableName, lastPublishDate);
 		}
 	}
@@ -167,7 +167,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 	}
 
-	private void updateEntitiesLastPublishDates(
+	private void updateStagedModelLastPublishDates(
 			long groupId, String tableName, Date lastPublishDate)
 		throws Exception {
 
