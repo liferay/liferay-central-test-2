@@ -941,7 +941,8 @@ public class DLFileEntryFinderTest {
 
 		String title = dlFileEntry.getTitle();
 
-		Assert.assertTrue((title.equals("FE1.txt") || title.equals("FE1.txt-NewRepository")));
+		Assert.assertTrue(
+			title.equals("FE1.txt") || title.equals("FE1.txt-NewRepository"));
 	}
 
 	@Test
