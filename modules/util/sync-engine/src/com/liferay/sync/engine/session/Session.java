@@ -115,6 +115,7 @@ public class Session {
 		headers.add(header);
 
 		httpClientBuilder.setDefaultHeaders(headers);
+
 		httpClientBuilder.setDefaultRequestConfig(builder.build());
 		httpClientBuilder.setMaxConnPerRoute(maxConnections);
 		httpClientBuilder.setMaxConnTotal(maxConnections);
