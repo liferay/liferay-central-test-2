@@ -75,15 +75,15 @@ page import="java.util.List" %>
 <%@ page import="javax.portlet.PortletURL" %><%@
 page import="javax.portlet.WindowState" %>
 
-<liferay-theme:defineObjects />
 <portlet:defineObjects />
 
-<%
-String currentURL = PortalUtil.getCurrentURL(request);
-WindowState windowState = liferayPortletRequest.getWindowState();
-%>
+<liferay-theme:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
+String currentURL = PortalUtil.getCurrentURL(request);
+
 boolean filterManageableOrganizations = true;
 
 if (permissionChecker.hasPermission(scopeGroupId, User.class.getName(), company.getCompanyId(), ActionKeys.VIEW)) {
