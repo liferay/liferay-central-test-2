@@ -15,12 +15,12 @@
 package com.liferay.calendar.web.upgrade.v1_0_0;
 
 import com.liferay.calendar.constants.CalendarPortletKeys;
-import com.liferay.portal.upgrade.util.UpgradePortletId;
 
 /**
  * @author Marcellus Tavares
  */
-public class UpgradeCalendarPortletId extends UpgradePortletId {
+public class UpgradePortletId
+	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
