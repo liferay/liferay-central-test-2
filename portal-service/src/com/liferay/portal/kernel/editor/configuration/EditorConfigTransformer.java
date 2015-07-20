@@ -53,7 +53,8 @@ public interface EditorConfigTransformer {
 	/**
 	 * Transforms the editor options in configuration that the editor can
 	 * handle, by populating the configuration JSON object.
-	 *  @param editorOptions the {@link EditorOptions} object composed of the
+	 *
+	 * @param editorOptions the {@link EditorOptions} object composed of the
 	 *        options set by {@link EditorOptionsContributor} modules
 	 * @param inputEditorTaglibAttributes the attributes specified to the input
 	 *        taglib tag that renders the editor
