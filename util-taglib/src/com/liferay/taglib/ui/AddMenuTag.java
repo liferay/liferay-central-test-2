@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.servlet.taglib.ui.AddMenuItem;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +31,9 @@ public class AddMenuTag extends IncludeTag {
 
 	@Override
 	public int doEndTag() throws JspException {
-		List<AddMenuItem> addMenuItems = (List)request.getAttribute(
-			"liferay-ui:add-menu:addMenuItems");
+		List<AddMenuItem> addMenuItems =
+			(List<AddMenuItem>)request.getAttribute(
+				"liferay-ui:add-menu:addMenuItems");
 
 		if (ListUtil.isEmpty(addMenuItems)) {
 			return SKIP_BODY;
@@ -54,7 +55,7 @@ public class AddMenuTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
-		_addMenuItems = new ArrayList<>();
+		_addMenuItems = Collections.emptyList();
 	}
 
 	@Override
@@ -64,12 +65,13 @@ public class AddMenuTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		List<AddMenuItem> addMenuItems = (List)request.getAttribute(
-			"liferay-ui:add-menu:addMenuItems");
+		List<AddMenuItem> addMenuItems =
+			(List<AddMenuItem>)request.getAttribute(
+				"liferay-ui:add-menu:addMenuItems");
 
 		request.setAttribute("liferay-ui:add-menu:addMenuItems", addMenuItems);
 	}
 
-	private List<AddMenuItem> _addMenuItems = new ArrayList<>();
+	private List<AddMenuItem> _addMenuItems = Collections.emptyList();
 
 }
