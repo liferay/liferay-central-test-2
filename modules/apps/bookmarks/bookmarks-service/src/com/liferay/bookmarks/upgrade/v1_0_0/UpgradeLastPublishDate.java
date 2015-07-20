@@ -15,12 +15,12 @@
 package com.liferay.bookmarks.upgrade.v1_0_0;
 
 import com.liferay.bookmarks.constants.BookmarksPortletKeys;
-import com.liferay.portal.upgrade.v7_0_0.UpgradeLastPublishDate;
 
 /**
  * @author Mate Thurzo
  */
-public class UpgradeBookmarksLastPublishDate extends UpgradeLastPublishDate {
+public class UpgradeLastPublishDate
+	extends com.liferay.portal.upgrade.v7_0_0.UpgradeLastPublishDate {
 
 	@Override
 	protected void doUpgrade() throws Exception {
