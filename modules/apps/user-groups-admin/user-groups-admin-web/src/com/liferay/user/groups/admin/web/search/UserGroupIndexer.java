@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.user.groups.admin.web.util;
+package com.liferay.user.groups.admin.web.search;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
