@@ -78,11 +78,11 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 
 				settingsProperties.load(rs.getString("settings"));
 
-				String dateString = settingsProperties.getProperty(
+				String lastPublishDateString = settingsProperties.getProperty(
 					"last-publish-date");
 
-				if (Validator.isNotNull(dateString)) {
-					return new Date(GetterUtil.getLong(dateString));
+				if (Validator.isNotNull(lastPublishDateString)) {
+					return new Date(GetterUtil.getLong(lastPublishDateString));
 				}
 			}
 
@@ -104,8 +104,8 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select preferences from PortletPreferences where plid = ?" +
-					" and ownerType = ? and ownerId = ? and portletId = ?");
+				"select preferences from PortletPreferences where plid = ? " +
+					"and ownerType = ? and ownerId = ? and portletId = ?");
 
 			ps.setLong(1, LayoutConstants.DEFAULT_PLID);
 			ps.setInt(2, PortletKeys.PREFS_OWNER_TYPE_GROUP);
@@ -122,10 +122,11 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 						"last-publish-date</name><value>");
 					int y = preferences.indexOf("</value>", x);
 
-					String dateString = preferences.substring(x, y);
+					String lastPublishDateString = preferences.substring(x, y);
 
-					if (Validator.isNotNull(dateString)) {
-						return new Date(GetterUtil.getLong(dateString));
+					if (Validator.isNotNull(lastPublishDateString)) {
+						return new Date(
+							GetterUtil.getLong(lastPublishDateString));
 					}
 				}
 			}
@@ -177,8 +178,8 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update " + entityName + " set lastPublishDate = ? " +
-					"where groupId = ?");
+				"update " + entityName + " set lastPublishDate = ? where " +
+					"groupId = ?");
 
 			ps.setDate(1, new java.sql.Date(lastPublishDate.getTime()));
 			ps.setLong(2, groupId);
