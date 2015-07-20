@@ -72,12 +72,13 @@ public class EhcacheConfigurationHelperUtil {
 
 		Configuration ehcacheConfiguration =
 			ConfigurationFactory.parseConfiguration(configurationURL);
+
+		ehcacheConfiguration.setName(portalCacheManagerName);
+
 		boolean clusterEnabled = GetterUtil.getBoolean(
 			props.get(PropsKeys.CLUSTER_LINK_ENABLED));
 		boolean clusterLinkReplicationEnabled = GetterUtil.getBoolean(
 			props.get(PropsKeys.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED));
-
-		ehcacheConfiguration.setName(portalCacheManagerName);
 
 		_handlePeerFactoryConfigurations(
 			ehcacheConfiguration.
@@ -134,6 +135,8 @@ public class EhcacheConfigurationHelperUtil {
 			return Collections.emptySet();
 		}
 
+		factoryConfiguration.setClass(null);
+
 		Properties properties = _parseProperties(
 			factoryConfiguration.getProperties(),
 			factoryConfiguration.getPropertySeparator(), props);
@@ -142,8 +145,6 @@ public class EhcacheConfigurationHelperUtil {
 			EhcacheConstants.CACHE_MANAGER_LISTENER_FACTORY_CLASS_NAME,
 			_parseFactoryClassName(
 				factoryConfiguration.getFullyQualifiedClassPath(), props));
-
-		factoryConfiguration.setClass(null);
 
 		return Collections.singleton(
 			new CallbackConfiguration(
