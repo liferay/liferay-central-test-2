@@ -11,7 +11,6 @@
 	<short-name>liferay-ui</short-name>
 	<uri>http://liferay.com/tld/ui</uri>
 	<tag>
-		<description>Creates an add menu that contains a list of add menu items.</description>
 		<name>add-menu</name>
 		<tag-class>com.liferay.taglib.ui.AddMenuTag</tag-class>
 		<body-content>JSP</body-content>
@@ -22,7 +21,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates an add menu item.</description>
 		<name>add-menu-item</name>
 		<tag-class>com.liferay.taglib.ui.AddMenuItemTag</tag-class>
 		<body-content>JSP</body-content>
