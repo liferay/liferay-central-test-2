@@ -24,10 +24,10 @@ List<AddMenuItem> addMenuItems = (List<AddMenuItem>)request.getAttribute("lifera
 	<c:when test="<%= addMenuItems.size() == 1 %>">
 
 		<%
-		AddMenuItem menuItem = addMenuItems.get(0);
+		AddMenuItem addMenuItem = addMenuItems.get(0);
 		%>
 
-		<a class="btn btn-action btn-bottom-right btn-primary" data-placement="left" data-toggle="tooltip" href="<%= HtmlUtil.escapeAttribute(menuItem.getUrl()) %>" title="<%= HtmlUtil.escapeAttribute(menuItem.getLabel()) %>">
+		<a class="btn btn-action btn-bottom-right btn-primary" data-placement="left" data-toggle="tooltip" href="<%= HtmlUtil.escapeAttribute(addMenuItem.getUrl()) %>" title="<%= HtmlUtil.escapeAttribute(addMenuItem.getLabel()) %>">
 			<span class="icon-plus"></span>
 		</a>
 
@@ -49,11 +49,11 @@ List<AddMenuItem> addMenuItems = (List<AddMenuItem>)request.getAttribute("lifera
 
 				<%
 				for (int i = 0; i < addMenuItems.size(); i++) {
-					AddMenuItem menuItem = addMenuItems.get(i);
+					AddMenuItem addMenuItem = addMenuItems.get(i);
 				%>
 
 					<li>
-						<a href="<%= HtmlUtil.escapeAttribute(menuItem.getUrl()) %>"><%= HtmlUtil.escape(menuItem.getLabel()) %></a>
+						<a href="<%= HtmlUtil.escapeAttribute(addMenuItem.getUrl()) %>"><%= HtmlUtil.escape(addMenuItem.getLabel()) %></a>
 					</li>
 
 				<%
