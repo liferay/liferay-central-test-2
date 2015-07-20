@@ -52,14 +52,14 @@ public class AddMenuItemTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		List<AddMenuItem> menuItemList =
+		List<AddMenuItem> addMenuItems =
 			(List<AddMenuItem>)request.getAttribute(
 				"liferay-ui:add-menu:addMenuItems");
 
-		if (menuItemList != null) {
-			AddMenuItem menuItem = new AddMenuItem(_title, _url);
+		if (addMenuItems != null) {
+			AddMenuItem addMenuItem = new AddMenuItem(_title, _url);
 
-			menuItemList.add(menuItem);
+			addMenuItems.add(addMenuItem);
 		}
 	}
 
