@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class UpgradeLastPublishDate extends UpgradeProcess {
 
-	protected void updateLastPublishDates(String portletId, String entityName)
+	protected void updateLastPublishDates(String portletId, String tableName)
 		throws Exception {
 
 		List<Long> stagedGroupIds = getStagedGroupIds();
@@ -53,7 +53,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 			}
 
 			updateEntitiesLastPublishDates(
-				stagedGroupId, entityName, lastPublishDate);
+				stagedGroupId, tableName, lastPublishDate);
 		}
 	}
 
@@ -168,7 +168,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 	}
 
 	private void updateEntitiesLastPublishDates(
-			long groupId, String entityName, Date lastPublishDate)
+			long groupId, String tableName, Date lastPublishDate)
 		throws Exception {
 
 		Connection con = null;
@@ -178,7 +178,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update " + entityName + " set lastPublishDate = ? where " +
+				"update " + tableName + " set lastPublishDate = ? where " +
 					"groupId = ?");
 
 			ps.setDate(1, new java.sql.Date(lastPublishDate.getTime()));
