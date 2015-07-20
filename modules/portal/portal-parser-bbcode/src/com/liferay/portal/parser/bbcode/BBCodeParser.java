@@ -146,9 +146,8 @@ public class BBCodeParser {
 		List<BBCodeItem> bbCodeItems, Stack<String> tags,
 		BBCodeToken bbCodeToken) {
 
-		int size = 0;
-
 		String endTag = null;
+		int size = 0;
 
 		if (bbCodeToken != null) {
 			endTag = bbCodeToken.getEndTag();
@@ -190,7 +189,8 @@ public class BBCodeParser {
 					   ((currentTag = tags.lastElement()) != null) &&
 					   _inlineElements.contains(currentTag)) {
 
-					BBCodeToken currentTagBBCodeToken = new BBCodeToken(currentTag);
+					BBCodeToken currentTagBBCodeToken = new BBCodeToken(
+						currentTag);
 
 					handleTagEnd(bbCodeItems, tags, currentTagBBCodeToken);
 				}
@@ -227,8 +227,8 @@ public class BBCodeParser {
 	private final Set<String> _inlineElements;
 	private final Set<String> _selfCloseElements;
 	private final Pattern _tagPattern = Pattern.compile(
-		"^/?(?:b|center|code|colou?r|email|i|img|justify|left|pre|q|quote|" +
-			"right|\\*|s|size|table|tr|th|td|li|list|font|u|url)$",
+		"^/?(?:b|center|code|colou?r|email|font|i|img|justify|left|li|list" +
+			"|pre|q|quote|right|s|size|table|td|th|tr|u|url|\\*)$",
 		Pattern.CASE_INSENSITIVE);
 
 }
