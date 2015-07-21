@@ -129,8 +129,7 @@ public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.comment.web)",
-		unbind = "-"
+		target = "(osgi.web.symbolicname=com.liferay.comment.web)", unbind = "-"
 	)
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
