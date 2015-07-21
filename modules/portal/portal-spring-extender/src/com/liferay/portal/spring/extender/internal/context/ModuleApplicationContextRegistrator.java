@@ -111,10 +111,10 @@ public class ModuleApplicationContextRegistrator {
 		SpringContextHeaderParser springContextHeaderParser =
 			new SpringContextHeaderParser(extendee);
 
-		String[] beanDefinitionFiles =
-			springContextHeaderParser.getBeanDefinitionFiles();
+		String[] beanDefinitionFileNames =
+			springContextHeaderParser.getBeanDefinitionFileNames();
 
-		if (ArrayUtil.isEmpty(beanDefinitionFiles)) {
+		if (ArrayUtil.isEmpty(beanDefinitionFileNames)) {
 			return null;
 		}
 
@@ -127,7 +127,7 @@ public class ModuleApplicationContextRegistrator {
 		ModuleApplicationContext moduleApplicationContext =
 			new ModuleApplicationContext(
 				compositeResourceLoaderBundle, classLoader,
-				beanDefinitionFiles);
+				beanDefinitionFileNames);
 
 		moduleApplicationContext.addBeanFactoryPostProcessor(
 			new ModuleBeanFactoryPostProcessor(
