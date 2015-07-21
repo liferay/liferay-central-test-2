@@ -4,7 +4,7 @@
 		module="com.liferay.portal.spring.extender"
 		revision="1.0.1"
 		status="release"
-		publication="20150710162105"
+		publication="20150721143220"
 	>
 		<license name="LGPL 2.1" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" />
 		<description homepage="">
@@ -28,9 +28,9 @@
 		<artifact name="com.liferay.portal.spring.extender" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc"/>
 	</publications>
 	<dependencies>
-		<dependency org="org.osgi" name="org.osgi.core" rev="5.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.apache.felix" name="org.apache.felix.dependencymanager" rev="3.2.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.apache.felix" name="org.apache.felix.dependencymanager.shell" rev="3.2.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.apache.felix" name="org.apache.felix.utils" rev="1.6.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="org.osgi" name="org.osgi.core" rev="5.0.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 	</dependencies>
 </ivy-module>

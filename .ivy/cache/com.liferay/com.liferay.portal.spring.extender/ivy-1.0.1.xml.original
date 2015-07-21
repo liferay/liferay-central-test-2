@@ -25,18 +25,12 @@
 	<name>com.liferay.portal.spring.extender</name>
 	<packaging>jar</packaging>
 	<scm>
-		<connection>scm:git:git@github.com:liferay/liferay-plugins.git</connection>
-		<developerConnection>scm:git:git@github.com:liferay/liferay-plugins.git</developerConnection>
-		<url>http://github.com/liferay/liferay-plugins</url>
+		<connection>scm:git:git@github.com:liferay/liferay-portal.git</connection>
+		<developerConnection>scm:git:git@github.com:liferay/liferay-portal.git</developerConnection>
+		<url>http://github.com/liferay/liferay-portal</url>
 	</scm>
 	<version>1.0.1</version>
  <dependencies>
-  <dependency>
-   <groupId>org.osgi</groupId>
-   <artifactId>org.osgi.core</artifactId>
-   <version>5.0.0</version>
-   <scope>compile</scope>
-  </dependency>
   <dependency>
    <groupId>org.apache.felix</groupId>
    <artifactId>org.apache.felix.dependencymanager</artifactId>
@@ -53,6 +47,12 @@
    <groupId>org.apache.felix</groupId>
    <artifactId>org.apache.felix.utils</artifactId>
    <version>1.6.0</version>
+   <scope>compile</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.osgi</groupId>
+   <artifactId>org.osgi.core</artifactId>
+   <version>5.0.0</version>
    <scope>compile</scope>
   </dependency>
  </dependencies>
