@@ -37,7 +37,7 @@ import org.osgi.service.component.annotations.Component;
 	property = {"model.class.name=com.liferay.portal.kernel.comment.Comment"},
 	service = ViewPortletProvider.class
 )
-public class CommentsViewPortletProvider implements ViewPortletProvider {
+public class CommentViewPortletProvider implements ViewPortletProvider {
 
 	@Override
 	public String getPortletId() {
