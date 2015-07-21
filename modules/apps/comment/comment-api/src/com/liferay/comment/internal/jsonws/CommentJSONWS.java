@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.comment.manager.jsonws;
+package com.liferay.comment.internal.jsonws;
 
 import com.liferay.portal.kernel.comment.DiscussionComment;
 import com.liferay.portal.kernel.json.JSON;
@@ -23,12 +23,12 @@ import java.util.Date;
  * @author Adolfo Pérez
  */
 @JSON(strict = true)
-public class JSONWSComment {
+public class CommentJSONWS {
 
-	public JSONWSComment() {
+	public CommentJSONWS() {
 	}
 
-	public JSONWSComment(DiscussionComment discussionComment) {
+	public CommentJSONWS(DiscussionComment discussionComment) {
 		setBody(discussionComment.getBody());
 		setCommentId(discussionComment.getCommentId());
 		setCreateDate(discussionComment.getCreateDate());

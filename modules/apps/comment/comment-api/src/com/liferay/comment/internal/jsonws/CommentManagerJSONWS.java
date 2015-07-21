@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.comment.manager.jsonws;
+package com.liferay.comment.internal.jsonws;
 
 import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.comment.Discussion;
@@ -50,10 +50,10 @@ import org.osgi.service.component.annotations.Reference;
 		"json.web.service.context.name=comment",
 		"json.web.service.context.path=Comment"
 	},
-	service = JSONWSCommentManager.class
+	service = CommentManagerJSONWS.class
 )
 @JSONWebService
-public class JSONWSCommentManager extends BaseServiceImpl {
+public class CommentManagerJSONWS extends BaseServiceImpl {
 
 	public long addComment(
 			long groupId, String className, long classPK, String body)
@@ -81,7 +81,7 @@ public class JSONWSCommentManager extends BaseServiceImpl {
 		_commentManager.deleteComment(commentId);
 	}
 
-	public List<JSONWSComment> getComments(
+	public List<CommentJSONWS> getComments(
 			long groupId, String className, long classPK, int start, int end)
 		throws PortalException {
 
@@ -115,18 +115,20 @@ public class JSONWSCommentManager extends BaseServiceImpl {
 			return Collections.emptyList();
 		}
 
-		List<JSONWSComment> comments = new ArrayList<>(commentsCount);
+		List<CommentJSONWS> commentJSONWSs = new ArrayList<>(commentsCount);
 
 		while (threadDiscussionCommentIterator.hasNext() &&
 			   (commentsCount > 0)) {
 
-			comments.add(
-				new JSONWSComment(threadDiscussionCommentIterator.next()));
+			CommentJSONWS commentJSONWS = new CommentJSONWS(
+				threadDiscussionCommentIterator.next());
+
+			commentJSONWSs.add(commentJSONWS);
 
 			commentsCount--;
 		}
 
-		return comments;
+		return commentJSONWSs;
 	}
 
 	public int getCommentsCount(long groupId, String className, long classPK)
@@ -238,17 +240,19 @@ public class JSONWSCommentManager extends BaseServiceImpl {
 		};
 	}
 
-	protected List<JSONWSComment> getAllComments(
+	protected List<CommentJSONWS> getAllComments(
 		DiscussionCommentIterator threadDiscussionCommentIterator) {
 
-		List<JSONWSComment> comments = new ArrayList<>();
+		List<CommentJSONWS> commentJSONWSs = new ArrayList<>();
 
 		while (threadDiscussionCommentIterator.hasNext()) {
-			comments.add(
-				new JSONWSComment(threadDiscussionCommentIterator.next()));
+			CommentJSONWS commentJSONWS = new CommentJSONWS(
+				threadDiscussionCommentIterator.next());
+
+			commentJSONWSs.add(commentJSONWS);
 		}
 
-		return comments;
+		return commentJSONWSs;
 	}
 
 	protected long getCompanyId(long groupId) throws PortalException {
