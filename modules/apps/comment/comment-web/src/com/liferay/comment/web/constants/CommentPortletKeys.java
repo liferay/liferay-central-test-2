@@ -17,9 +17,9 @@ package com.liferay.comment.web.constants;
 /**
  * @author Adolfo Pérez
  */
-public class CommentsPortletKeys {
+public class CommentPortletKeys {
 
 	public static final String COMMENTS =
-		"com_liferay_comment_web_portlet_CommentsPortlet";
+		"com_liferay_comment_web_portlet_CommentPortlet";
 
 }

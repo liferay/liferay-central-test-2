@@ -14,7 +14,7 @@
 
 package com.liferay.comment.web.notifications;
 
-import com.liferay.comment.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentPortletKeys;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -37,14 +37,14 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + CommentsPortletKeys.COMMENTS},
+	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
 	service = UserNotificationHandler.class
 )
 public class CommentsUserNotificationHandler
 	extends BaseModelUserNotificationHandler {
 
 	public CommentsUserNotificationHandler() {
-		setPortletId(CommentsPortletKeys.COMMENTS);
+		setPortletId(CommentPortletKeys.COMMENTS);
 	}
 
 	protected MBDiscussion fetchDiscussion(JSONObject jsonObject) {
