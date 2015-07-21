@@ -149,7 +149,7 @@ public class PortalPreferencesImplTest {
 				Log4JLoggerTestUtil.configureLog4JLogger(
 					DefaultTransactionExecutor.class.getName(), Level.ERROR)) {
 
-			doSynchronousUpdate(
+			updateSynchronously(
 				new FutureTask<>(callable), new FutureTask<>(callable),
 				captureAppender);
 
@@ -201,7 +201,7 @@ public class PortalPreferencesImplTest {
 				Log4JLoggerTestUtil.configureLog4JLogger(
 					DefaultTransactionExecutor.class.getName(), Level.ERROR)) {
 
-			doSynchronousUpdate(futureTask1, futureTask2, captureAppender);
+			updateSynchronously(futureTask1, futureTask2, captureAppender);
 
 			PortalPreferences portalPreferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
@@ -252,7 +252,7 @@ public class PortalPreferencesImplTest {
 				Log4JLoggerTestUtil.configureLog4JLogger(
 					DefaultTransactionExecutor.class.getName(), Level.ERROR)) {
 
-			doSynchronousUpdate(futureTask1, futureTask2, captureAppender);
+			updateSynchronously(futureTask1, futureTask2, captureAppender);
 
 			PortalPreferences portalPreferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
@@ -302,7 +302,7 @@ public class PortalPreferencesImplTest {
 				Log4JLoggerTestUtil.configureLog4JLogger(
 					DefaultTransactionExecutor.class.getName(), Level.ERROR)) {
 
-			doSynchronousUpdate(futureTask1, futureTask2, captureAppender);
+			updateSynchronously(futureTask1, futureTask2, captureAppender);
 
 			PortalPreferences portalPreferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
@@ -353,7 +353,7 @@ public class PortalPreferencesImplTest {
 				Log4JLoggerTestUtil.configureLog4JLogger(
 					DefaultTransactionExecutor.class.getName(), Level.ERROR)) {
 
-			doSynchronousUpdate(futureTask1, futureTask2, captureAppender);
+			updateSynchronously(futureTask1, futureTask2, captureAppender);
 
 			PortalPreferences portalPreferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(
@@ -367,7 +367,7 @@ public class PortalPreferencesImplTest {
 		}
 	}
 
-	protected void doSynchronousUpdate(
+	protected void updateSynchronously(
 			FutureTask<Void> futureTask1, FutureTask<Void> futureTask2,
 			CaptureAppender captureAppender)
 		throws Exception {
@@ -388,6 +388,7 @@ public class PortalPreferencesImplTest {
 		thread2.start();
 
 		futureTask1.get();
+
 		futureTask2.get();
 
 		List<LoggingEvent> loggingEvents = captureAppender.getLoggingEvents();
