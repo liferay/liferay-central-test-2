@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.comment.comments.web.notifications;
+package com.liferay.comment.web.notifications;
 
-import com.liferay.comment.comments.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentsPortletKeys;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.notifications.UserNotificationDeliveryType;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
