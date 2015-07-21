@@ -87,12 +87,12 @@ public class ModuleApplicationContextRegistrator {
 		_serviceConfigurator.destroyServices(
 			new ModuleResourceLoader(_extendeeBundle), _extendeeClassLoader);
 
-		_extendeeBundle = null;
-		_extenderBundle = null;
-
 		_configurableApplicationContext.close();
 
 		_configurableApplicationContext = null;
+
+		_extendeeBundle = null;
+		_extenderBundle = null;
 	}
 
 	private void _cleanInstropectionCaches(Bundle bundle) {
