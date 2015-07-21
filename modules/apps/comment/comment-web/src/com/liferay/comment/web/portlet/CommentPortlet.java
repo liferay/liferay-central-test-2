@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.display-name=Comments",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.name=" + CommentPortletKeys.COMMENTS,
+		"javax.portlet.name=" + CommentPortletKeys.COMMENT,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=guest",
 		"javax.portlet.security-role-ref=power-user",

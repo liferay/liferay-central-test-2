@@ -147,7 +147,7 @@ public class CommentAssetRenderer
 			WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = PortletURLFactoryUtil.create(
-			request, CommentPortletKeys.COMMENTS,
+			request, CommentPortletKeys.COMMENT,
 			getControlPanelPlid(themeDisplay), PortletRequest.RENDER_PHASE);
 
 		editPortletURL.setParameter("mvcPath", "/edit_discussion.jsp");

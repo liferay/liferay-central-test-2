@@ -19,7 +19,7 @@ package com.liferay.comment.web.constants;
  */
 public class CommentPortletKeys {
 
-	public static final String COMMENTS =
+	public static final String COMMENT =
 		"com_liferay_comment_web_portlet_CommentPortlet";
 
 }

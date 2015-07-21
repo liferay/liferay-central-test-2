@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
+	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENT},
 	service = AssetRendererFactory.class
 )
 public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
@@ -55,7 +55,7 @@ public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
 		setCategorizable(false);
 		setClassName(CommentConstants.getDiscussionClassName());
 		setLinkable(true);
-		setPortletId(CommentPortletKeys.COMMENTS);
+		setPortletId(CommentPortletKeys.COMMENT);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
 
 		LiferayPortletURL liferayPortletURL =
 			liferayPortletResponse.createLiferayPortletURL(
-				CommentPortletKeys.COMMENTS, PortletRequest.RENDER_PHASE);
+				CommentPortletKeys.COMMENT, PortletRequest.RENDER_PHASE);
 
 		try {
 			liferayPortletURL.setWindowState(windowState);

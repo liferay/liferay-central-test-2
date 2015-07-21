@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
+	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENT},
 	service = UserNotificationDefinition.class
 )
 public class CommentUpdateEntryUserNotificationDefinition
@@ -34,7 +34,7 @@ public class CommentUpdateEntryUserNotificationDefinition
 
 	public CommentUpdateEntryUserNotificationDefinition() {
 		super(
-			CommentPortletKeys.COMMENTS, 0,
+			CommentPortletKeys.COMMENT, 0,
 			UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY,
 			"receive-a-notification-when-someone-updates-a-comment-you-are-" +
 				"subscribed-to");
