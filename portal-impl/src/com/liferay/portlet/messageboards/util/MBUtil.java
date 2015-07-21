@@ -692,7 +692,7 @@ public class MBUtil {
 		long plid, long categoryId, long threadId, long userId,
 		ThemeDisplay themeDisplay) {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(themeDisplay.getPathMain());
