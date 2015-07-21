@@ -35,17 +35,17 @@ public class SpringContextHeaderParser {
 
 		Dictionary<String, String> headers = _bundle.getHeaders();
 
+		String liferayService = headers.get("Liferay-Service");
+
+		if (liferayService != null) {
+			beanDefinitionFileNames.add("META-INF/spring/parent");
+		}
+
 		String springContext = headers.get("Spring-Context");
 
 		if (springContext != null) {
 			Collections.addAll(
 				beanDefinitionFileNames, springContext.split(","));
-		}
-
-		String liferayService = headers.get("Liferay-Service");
-
-		if (liferayService != null) {
-			beanDefinitionFileNames.add("META-INF/spring/parent");
 		}
 
 		return beanDefinitionFileNames.toArray(
