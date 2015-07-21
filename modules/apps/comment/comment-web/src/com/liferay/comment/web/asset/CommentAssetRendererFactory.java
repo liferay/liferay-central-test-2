@@ -14,7 +14,7 @@
 
 package com.liferay.comment.web.asset;
 
-import com.liferay.comment.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentPortletKeys;
 import com.liferay.portal.kernel.comment.Comment;
 import com.liferay.portal.kernel.comment.CommentConstants;
 import com.liferay.portal.kernel.comment.CommentManagerUtil;
@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + CommentsPortletKeys.COMMENTS},
+	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
 	service = AssetRendererFactory.class
 )
 public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
@@ -55,7 +55,7 @@ public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
 		setCategorizable(false);
 		setClassName(CommentConstants.getDiscussionClassName());
 		setLinkable(true);
-		setPortletId(CommentsPortletKeys.COMMENTS);
+		setPortletId(CommentPortletKeys.COMMENTS);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class CommentAssetRendererFactory extends BaseAssetRendererFactory {
 
 		LiferayPortletURL liferayPortletURL =
 			liferayPortletResponse.createLiferayPortletURL(
-				CommentsPortletKeys.COMMENTS, PortletRequest.RENDER_PHASE);
+				CommentPortletKeys.COMMENTS, PortletRequest.RENDER_PHASE);
 
 		try {
 			liferayPortletURL.setWindowState(windowState);

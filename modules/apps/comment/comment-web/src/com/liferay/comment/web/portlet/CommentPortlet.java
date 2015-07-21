@@ -14,7 +14,7 @@
 
 package com.liferay.comment.web.portlet;
 
-import com.liferay.comment.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.display-name=Comments",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.name=" + CommentsPortletKeys.COMMENTS,
+		"javax.portlet.name=" + CommentPortletKeys.COMMENTS,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=guest",
 		"javax.portlet.security-role-ref=power-user",
@@ -40,5 +40,5 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = Portlet.class
 )
-public class CommentsPortlet extends MVCPortlet {
+public class CommentPortlet extends MVCPortlet {
 }

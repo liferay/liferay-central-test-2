@@ -14,7 +14,7 @@
 
 package com.liferay.comment.web.notifications;
 
-import com.liferay.comment.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentPortletKeys;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.notifications.UserNotificationDeliveryType;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + CommentsPortletKeys.COMMENTS},
+	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
 	service = UserNotificationDefinition.class
 )
 public class CommentsAddEntryUserNotificationDefinition
@@ -34,7 +34,7 @@ public class CommentsAddEntryUserNotificationDefinition
 
 	public CommentsAddEntryUserNotificationDefinition() {
 		super(
-			CommentsPortletKeys.COMMENTS, 0,
+			CommentPortletKeys.COMMENTS, 0,
 			UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY,
 			"receive-a-notification-when-someone-adds-a-new-comment-to-" +
 				"comments-you-are-subscribed-to");

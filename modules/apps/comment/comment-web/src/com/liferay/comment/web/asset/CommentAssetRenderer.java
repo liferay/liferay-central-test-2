@@ -14,7 +14,7 @@
 
 package com.liferay.comment.web.asset;
 
-import com.liferay.comment.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentPortletKeys;
 import com.liferay.portal.kernel.comment.Comment;
 import com.liferay.portal.kernel.comment.CommentManagerUtil;
 import com.liferay.portal.kernel.comment.DiscussionPermission;
@@ -147,7 +147,7 @@ public class CommentAssetRenderer
 			WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = PortletURLFactoryUtil.create(
-			request, CommentsPortletKeys.COMMENTS,
+			request, CommentPortletKeys.COMMENTS,
 			getControlPanelPlid(themeDisplay), PortletRequest.RENDER_PHASE);
 
 		editPortletURL.setParameter("mvcPath", "/edit_discussion.jsp");

@@ -14,7 +14,7 @@
 
 package com.liferay.comment.web.portlet;
 
-import com.liferay.comment.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.ViewPortletProvider;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -41,7 +41,7 @@ public class CommentsViewPortletProvider implements ViewPortletProvider {
 
 	@Override
 	public String getPortletId() {
-		return CommentsPortletKeys.COMMENTS;
+		return CommentPortletKeys.COMMENTS;
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class CommentsViewPortletProvider implements ViewPortletProvider {
 		long plid = PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
 
 		return PortletURLFactoryUtil.create(
-			request, CommentsPortletKeys.COMMENTS, plid,
+			request, CommentPortletKeys.COMMENTS, plid,
 			PortletRequest.RENDER_PHASE);
 	}
 
