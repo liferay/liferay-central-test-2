@@ -68,7 +68,6 @@ public class JournalServiceUpgrade {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
 		upgradeProcesses.add(new UpgradeClassNames());
-
 		upgradeProcesses.add(new UpgradeLastPublishDate());
 
 		_releaseLocalService.updateRelease(
