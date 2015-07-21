@@ -47,6 +47,6 @@ public class FindThreadAction extends BaseStrutsAction {
 	}
 
 	private final FindActionHelper _findActionHelper =
-		new FindThreadActionHelper();
+		new ThreadFindActionHelper();
 
 }

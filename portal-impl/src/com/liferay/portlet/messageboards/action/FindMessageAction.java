@@ -47,6 +47,6 @@ public class FindMessageAction extends BaseStrutsAction {
 	}
 
 	private final FindActionHelper _findActionHelper =
-		new FindMessageActionHelper();
+		new MessageFindActionHelper();
 
 }

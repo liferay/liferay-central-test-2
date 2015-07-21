@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.BaseFindActionHelper;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 
@@ -27,24 +26,28 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Adolfo Pérez
  */
-public class FindThreadActionHelper extends BaseFindActionHelper {
+public class CategoryFindActionHelper extends BaseFindActionHelper {
 
 	@Override
 	public long getGroupId(long primaryKey) throws Exception {
-		MBThread thread = MBThreadLocalServiceUtil.getThread(primaryKey);
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+			primaryKey);
 
-		return thread.getGroupId();
+		return category.getGroupId();
 	}
 
 	@Override
 	public String getPrimaryKeyParameterName() {
-		return "threadId";
+		return "mbCategoryId";
 	}
 
 	@Override
 	public String[] initPortletIds() {
+
+		// Order is important. See LPS-23770.
+
 		return new String[] {
-			PortletKeys.MESSAGE_BOARDS, PortletKeys.MESSAGE_BOARDS_ADMIN
+			PortletKeys.MESSAGE_BOARDS_ADMIN, PortletKeys.MESSAGE_BOARDS
 		};
 	}
 
@@ -53,20 +56,15 @@ public class FindThreadActionHelper extends BaseFindActionHelper {
 			HttpServletRequest request, PortletURL portletURL)
 		throws Exception {
 
-		long threadId = ParamUtil.getLong(
-			request, getPrimaryKeyParameterName());
-
-		MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
-
-		portletURL.setParameter(
-			"messageId", String.valueOf(thread.getRootMessageId()));
-
 		return portletURL;
 	}
 
 	@Override
 	public void setPrimaryKeyParameter(PortletURL portletURL, long primaryKey)
 		throws Exception {
+
+		portletURL.setParameter(
+			getPrimaryKeyParameterName(), String.valueOf(primaryKey));
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class FindThreadActionHelper extends BaseFindActionHelper {
 		HttpServletRequest request, String portletId, PortletURL portletURL) {
 
 		portletURL.setParameter(
-			"mvcRenderCommandName", "message_boards/view_message");
+			"mvcRenderCommandName", "/message_boards/view_message");
 	}
 
 }
