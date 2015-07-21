@@ -29,7 +29,6 @@
 	<classpathentry kind="lib" path="/portal-master/util-java/util-java.jar" />
 	<classpathentry kind="lib" path="/portal-master/util-taglib/util-taglib.jar" />
 	<classpathentry kind="lib" path="lib/com.liferay.comment.comments.web.jar" />
-	<classpathentry kind="lib" path="lib/com.liferay.comments.web.jar" />
 	<classpathentry kind="lib" path="lib/org.osgi.core.jar" />
 	<classpathentry kind="lib" path="/portal-master/.ivy/cache/com.liferay/aQute.bnd/jars/aQute.bnd-2.3.0.jar" />
 	<classpathentry kind="lib" path="/portal-master/.ivy/cache/org.jboss.arquillian.junit/arquillian-junit-core/jars/arquillian-junit-core-1.1.7.Final.jar" />
