@@ -30,24 +30,26 @@ public class SpringContextHeaderParser {
 		_bundle = bundle;
 	}
 
-	public String[] getBeanDefinitionFiles() {
+	public String[] getBeanDefinitionFileNames() {
+		List<String> beanDefinitionFileNames = new ArrayList<>();
+
 		Dictionary<String, String> headers = _bundle.getHeaders();
-		List<String> beanDefinitionFiles = new ArrayList<>();
 
-		String configs = headers.get("Spring-Context");
+		String springContext = headers.get("Spring-Context");
 
-		if (configs != null) {
-			Collections.addAll(beanDefinitionFiles, configs.split(","));
+		if (springContext != null) {
+			Collections.addAll(
+				beanDefinitionFileNames, springContext.split(","));
 		}
 
 		String liferayService = headers.get("Liferay-Service");
 
 		if (liferayService != null) {
-			beanDefinitionFiles.add("META-INF/spring/parent");
+			beanDefinitionFileNames.add("META-INF/spring/parent");
 		}
 
-		return beanDefinitionFiles.toArray(
-			new String[beanDefinitionFiles.size()]);
+		return beanDefinitionFileNames.toArray(
+			new String[beanDefinitionFileNames.size()]);
 	}
 
 	private final Bundle _bundle;
