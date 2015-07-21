@@ -401,9 +401,8 @@ public class PortalPreferencesImplTest {
 			"Application exception overridden by commit exception",
 			loggingEvent.getMessage());
 
-		FinderCacheUtil.clearLocalCache();
-
 		EntityCacheUtil.clearLocalCache();
+		FinderCacheUtil.clearLocalCache();
 	}
 
 	protected static class SynchronizedTransactionExecutor
