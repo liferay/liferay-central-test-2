@@ -39,7 +39,7 @@ public class DLFileEntryMetadataLocalServiceImpl
 	public void deleteFileEntryMetadata(DLFileEntryMetadata fileEntryMetadata)
 		throws PortalException {
 
-		// FileEntry metadata
+		// File entry metadata
 
 		dlFileEntryMetadataPersistence.remove(fileEntryMetadata);
 
