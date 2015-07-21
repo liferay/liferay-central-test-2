@@ -751,12 +751,12 @@ public class LiferaySeleniumHelper {
 
 	public static boolean isIgnorableErrorLine(String line) throws Exception {
 		if (Validator.isNotNull(PropsValues.IGNORE_ERRORS_FILE_NAME)) {
+			SAXReader saxReader = new SAXReader();
+
 			String content = FileUtil.read(PropsValues.IGNORE_ERRORS_FILE_NAME);
 
 			InputStream inputStream = new ByteArrayInputStream(
 				content.getBytes("UTF-8"));
-
-			SAXReader saxReader = new SAXReader();
 
 			Document document = saxReader.read(inputStream);
 
