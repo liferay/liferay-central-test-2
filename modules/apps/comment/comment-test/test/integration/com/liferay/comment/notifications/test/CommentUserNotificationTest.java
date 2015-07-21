@@ -98,7 +98,7 @@ public class CommentUserNotificationTest extends BaseUserNotificationTestCase {
 
 	@Override
 	protected String getPortletId() {
-		return CommentPortletKeys.COMMENTS;
+		return CommentPortletKeys.COMMENT;
 	}
 
 	@Override

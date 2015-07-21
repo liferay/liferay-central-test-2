@@ -41,7 +41,7 @@ public class CommentViewPortletProvider implements ViewPortletProvider {
 
 	@Override
 	public String getPortletId() {
-		return CommentPortletKeys.COMMENTS;
+		return CommentPortletKeys.COMMENT;
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class CommentViewPortletProvider implements ViewPortletProvider {
 		long plid = PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
 
 		return PortletURLFactoryUtil.create(
-			request, CommentPortletKeys.COMMENTS, plid,
+			request, CommentPortletKeys.COMMENT, plid,
 			PortletRequest.RENDER_PHASE);
 	}
 

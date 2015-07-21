@@ -37,14 +37,14 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
+	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENT},
 	service = UserNotificationHandler.class
 )
 public class CommentUserNotificationHandler
 	extends BaseModelUserNotificationHandler {
 
 	public CommentUserNotificationHandler() {
-		setPortletId(CommentPortletKeys.COMMENTS);
+		setPortletId(CommentPortletKeys.COMMENT);
 	}
 
 	protected MBDiscussion fetchDiscussion(JSONObject jsonObject) {
