@@ -40,10 +40,10 @@ import org.osgi.service.component.annotations.Component;
 	property = {"javax.portlet.name=" + CommentPortletKeys.COMMENTS},
 	service = UserNotificationHandler.class
 )
-public class CommentsUserNotificationHandler
+public class CommentUserNotificationHandler
 	extends BaseModelUserNotificationHandler {
 
-	public CommentsUserNotificationHandler() {
+	public CommentUserNotificationHandler() {
 		setPortletId(CommentPortletKeys.COMMENTS);
 	}
 
