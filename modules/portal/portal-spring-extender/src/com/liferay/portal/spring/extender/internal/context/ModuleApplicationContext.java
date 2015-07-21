@@ -37,9 +37,9 @@ public class ModuleApplicationContext extends ClassPathXmlApplicationContext {
 
 		super(configLocations, false, null);
 
-		setClassLoader(classLoader);
-
 		_bundle = bundle;
+
+		setClassLoader(classLoader);
 	}
 
 	public BundleContext getBundleContext() {
