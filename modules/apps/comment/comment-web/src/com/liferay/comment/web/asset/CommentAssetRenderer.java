@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.comment.comments.web.asset;
+package com.liferay.comment.web.asset;
 
-import com.liferay.comment.comments.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentsPortletKeys;
 import com.liferay.portal.kernel.comment.Comment;
 import com.liferay.portal.kernel.comment.CommentManagerUtil;
 import com.liferay.portal.kernel.comment.DiscussionPermission;

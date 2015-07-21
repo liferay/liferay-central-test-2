@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.comment.comments.web.portlet;
+package com.liferay.comment.web.portlet;
 
-import com.liferay.comment.comments.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentsPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.ViewPortletProvider;
 import com.liferay.portal.theme.ThemeDisplay;
