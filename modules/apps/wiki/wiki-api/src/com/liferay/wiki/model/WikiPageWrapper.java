@@ -332,7 +332,7 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	* @return the create date of this wiki page
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _wikiPage.getCreateDate();
 	}
 
@@ -406,7 +406,7 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	* @return the modified date of this wiki page
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _wikiPage.getModifiedDate();
 	}
 
@@ -558,7 +558,7 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	* @return the status date of this wiki page
 	*/
 	@Override
-	public Date getStatusDate() {
+	public java.util.Date getStatusDate() {
 		return _wikiPage.getStatusDate();
 	}
 
@@ -884,7 +884,7 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	* @param createDate the create date of this wiki page
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_wikiPage.setCreateDate(createDate);
 	}
 
@@ -952,7 +952,7 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	* @param modifiedDate the modified date of this wiki page
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_wikiPage.setModifiedDate(modifiedDate);
 	}
 
@@ -1082,7 +1082,7 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	* @param statusDate the status date of this wiki page
 	*/
 	@Override
-	public void setStatusDate(Date statusDate) {
+	public void setStatusDate(java.util.Date statusDate) {
 		_wikiPage.setStatusDate(statusDate);
 	}
 
