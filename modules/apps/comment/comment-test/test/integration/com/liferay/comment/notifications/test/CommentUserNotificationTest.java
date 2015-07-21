@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.comment.comments.notifications.test;
+package com.liferay.comment.notifications.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-import com.liferay.comment.comments.web.constants.CommentsPortletKeys;
+import com.liferay.comment.web.constants.CommentsPortletKeys;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
@@ -50,7 +50,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class CommentsUserNotificationTest extends BaseUserNotificationTestCase {
+public class CommentUserNotificationTest extends BaseUserNotificationTestCase {
 
 	@ClassRule
 	@Rule
