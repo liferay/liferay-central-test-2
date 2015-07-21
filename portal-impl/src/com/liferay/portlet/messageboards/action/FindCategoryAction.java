@@ -47,6 +47,6 @@ public class FindCategoryAction extends BaseStrutsAction {
 	}
 
 	private final FindActionHelper _findActionHelper =
-		new FindCategoryActionHelper();
+		new CategoryFindActionHelper();
 
 }
