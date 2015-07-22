@@ -50,11 +50,12 @@ public class LinkbackMessageListener extends BaseSchedulerEntryMessageListener {
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
+		schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+
 		_blogsSystemConfiguration = Configurable.createConfigurable(
 			BlogsSystemConfiguration.class, properties);
 
-		schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
 		schedulerEntry.setTriggerValue(
 			_blogsSystemConfiguration.linkbackJobInterval());
 	}
