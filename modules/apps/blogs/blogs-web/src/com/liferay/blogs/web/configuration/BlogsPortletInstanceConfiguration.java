@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Sergio González
  */
 @Meta.OCD(
-	id = "com.liferay.iframe.web.configuration.BlogsPortletInstanceConfiguration"
+	id = "com.liferay.blogs.web.configuration.BlogsPortletInstanceConfiguration"
 )
 public interface BlogsPortletInstanceConfiguration {
 
