@@ -93,6 +93,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
+
 		setUpPermissionThreadLocal();
 		setUpPrincipalThreadLocal();
 	}
