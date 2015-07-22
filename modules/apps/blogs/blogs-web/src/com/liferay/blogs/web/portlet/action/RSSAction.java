@@ -116,11 +116,11 @@ public class RSSAction extends BaseRSSStrutsAction {
 	protected boolean isRSSFeedsEnabled(HttpServletRequest request)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		BlogsGroupServiceSettings rssBlogsGroupServiceSettings =
 			settingsFactory.getSettings(

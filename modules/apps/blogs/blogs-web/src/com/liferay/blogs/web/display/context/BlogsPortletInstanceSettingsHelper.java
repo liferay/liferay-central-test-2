@@ -30,7 +30,6 @@ public class BlogsPortletInstanceSettingsHelper {
 		BlogsPortletInstanceConfiguration blogsPortletInstanceConfiguration) {
 
 		_request = request;
-
 		_blogsPortletInstanceConfiguration = blogsPortletInstanceConfiguration;
 	}
 
