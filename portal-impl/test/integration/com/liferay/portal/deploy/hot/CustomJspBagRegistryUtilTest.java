@@ -42,7 +42,7 @@ public class CustomJspBagRegistryUtilTest {
 			new SyntheticBundleRule("bundle.customjspbagregistryutil"));
 
 	@Test
-	public void testRegistered() {
+	public void testGetCustomJspBags() {
 		Map<ServiceReference<CustomJspBag>, CustomJspBag> customJspBags =
 			CustomJspBagRegistryUtil.getCustomJspBags();
 
@@ -54,7 +54,7 @@ public class CustomJspBagRegistryUtilTest {
 			String contextId = GetterUtil.getString(
 				serviceReference.getProperty("context.id"));
 
-			if (!contextId.equals(_TEST_SERVLET_CONTEXT_NAME)) {
+			if (!contextId.equals("TestCustomJspBag")) {
 				continue;
 			}
 
@@ -63,7 +63,5 @@ public class CustomJspBagRegistryUtilTest {
 
 		Assert.fail();
 	}
-
-	private static final String _TEST_SERVLET_CONTEXT_NAME = "test-jsp-bag";
 
 }

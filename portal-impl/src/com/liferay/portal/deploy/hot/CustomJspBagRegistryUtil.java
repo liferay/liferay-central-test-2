@@ -274,11 +274,6 @@ public class CustomJspBagRegistryUtil {
 		public CustomJspBag addingService(
 			ServiceReference<CustomJspBag> serviceReference) {
 
-			String contextId = GetterUtil.getString(
-				serviceReference.getProperty("context.id"));
-			String contextName = GetterUtil.getString(
-				serviceReference.getProperty("context.name"));
-
 			Registry registry = RegistryUtil.getRegistry();
 
 			CustomJspBag customJspBag = registry.getService(serviceReference);
@@ -318,6 +313,9 @@ public class CustomJspBagRegistryUtil {
 				log.debug(sb.toString());
 			}
 
+			String contextId = GetterUtil.getString(
+				serviceReference.getProperty("context.id"));
+
 			if (customJspBag.isCustomJspGlobal() &&
 				!_customJspBagsMap.isEmpty()) {
 
@@ -330,6 +328,9 @@ public class CustomJspBagRegistryUtil {
 			}
 
 			_customJspBagsMap.put(serviceReference, customJspBag);
+
+			String contextName = GetterUtil.getString(
+				serviceReference.getProperty("context.name"));
 
 			try {
 				initCustomJspBag(contextId, contextName, customJspBag);
@@ -355,27 +356,24 @@ public class CustomJspBagRegistryUtil {
 			ServiceReference<CustomJspBag> serviceReference,
 			CustomJspBag customJspBag) {
 
-			String contextId = GetterUtil.getString(
-				serviceReference.getProperty("context.id"));
-
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
 
-			String customJspDir = customJspBag.getCustomJspDir();
-			boolean customJspGlobal = customJspBag.isCustomJspGlobal();
-			List<String> customJsps = customJspBag.getCustomJsps();
+			String contextId = GetterUtil.getString(
+				serviceReference.getProperty("context.id"));
 
-			String portalWebDir = PortalUtil.getPortalWebDir();
+			for (String customJsp : customJspBag.getCustomJsps()) {
+				String customJspDir = customJspBag.getCustomJspDir();
 
-			for (String customJsp : customJsps) {
 				int pos = customJsp.indexOf(customJspDir);
 
 				String portalJsp = customJsp.substring(
 					pos + customJspDir.length());
 
-				if (customJspGlobal) {
-					File portalJspFile = new File(portalWebDir + portalJsp);
+				if (customJspBag.isCustomJspGlobal()) {
+					File portalJspFile = new File(
+						PortalUtil.getPortalWebDir() + portalJsp);
 					File portalJspBackupFile = getPortalJspBackupFile(
 						portalJspFile);
 
@@ -398,7 +396,8 @@ public class CustomJspBagRegistryUtil {
 					portalJsp = CustomJspRegistryUtil.getCustomJspFileName(
 						contextId, portalJsp);
 
-					File portalJspFile = new File(portalWebDir + portalJsp);
+					File portalJspFile = new File(
+						PortalUtil.getPortalWebDir() + portalJsp);
 
 					if (portalJspFile.exists()) {
 						portalJspFile.delete();
@@ -406,7 +405,7 @@ public class CustomJspBagRegistryUtil {
 				}
 			}
 
-			if (!customJspGlobal) {
+			if (!customJspBag.isCustomJspGlobal()) {
 				CustomJspRegistryUtil.unregisterServletContextName(contextId);
 			}
 

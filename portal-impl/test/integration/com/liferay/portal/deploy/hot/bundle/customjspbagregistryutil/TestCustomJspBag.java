@@ -16,9 +16,9 @@ package com.liferay.portal.deploy.hot.bundle.customjspbagregistryutil;
 
 import com.liferay.portal.deploy.hot.CustomJspBag;
 import com.liferay.portal.kernel.url.URLContainer;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"context.id=test-jsp-bag", "context.name=Sample OSGI JSP Overwrite",
+		"context.id=TestCustomJspBag", "context.name=Test Custom JSP Bag",
 		"service.ranking:Integer=" + Integer.MAX_VALUE
 	}
 )
@@ -40,7 +40,7 @@ public class TestCustomJspBag implements CustomJspBag {
 
 	@Override
 	public String getCustomJspDir() {
-		return "/WEB-INF/custom_jsps";
+		return StringPool.BLANK;
 	}
 
 	@Override
@@ -64,12 +64,12 @@ public class TestCustomJspBag implements CustomJspBag {
 
 		@Override
 		public Set<String> getResources(String path) {
-			return Collections.singleton(path + "/html/portlet/nothing.jsp");
+			return Collections.singleton(path);
 		}
 
 		@Override
 		public URL getResource(String name) {
-			return getClass().getResource("dependencies/nothing.jsp");
+			return null;
 		}
 
 	};
