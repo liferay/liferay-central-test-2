@@ -26,11 +26,11 @@ public class UpgradeLastPublishDate
 	protected void doUpgrade() throws Exception {
 		runSQL("alter table WikiNode add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(WikiPortletKeys.WIKI, "WikiNode");
+		updateLastPublishDates(WikiPortletKeys.WIKI, "WikiNode");
 
 		runSQL("alter table WikiPage add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(WikiPortletKeys.WIKI, "WikiPage");
+		updateLastPublishDates(WikiPortletKeys.WIKI, "WikiPage");
 	}
 
 }

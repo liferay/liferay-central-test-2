@@ -26,15 +26,15 @@ public class UpgradeLastPublishDate
 	protected void doUpgrade() throws Exception {
 		runSQL("alter table PollsChoice add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(PollsPortletKeys.POLLS, "PollsChoice");
+		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsChoice");
 
 		runSQL("alter table PollsQuestion add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(PollsPortletKeys.POLLS, "PollsQuestion");
+		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsQuestion");
 
 		runSQL("alter table PollsVote add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(PollsPortletKeys.POLLS, "PollsVote");
+		updateLastPublishDates(PollsPortletKeys.POLLS, "PollsVote");
 	}
 
 }

@@ -26,23 +26,23 @@ public class UpgradeLastPublishDate
 	protected void doUpgrade() throws Exception {
 		runSQL("alter table Calendar add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(CalendarPortletKeys.CALENDAR, "Calendar");
+		updateLastPublishDates(CalendarPortletKeys.CALENDAR, "Calendar");
 
 		runSQL("alter table CalendarBooking add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(
+		updateLastPublishDates(
 			CalendarPortletKeys.CALENDAR, "CalendarBooking");
 
 		runSQL(
 			"alter table CalendarNotificationTemplate add lastPublishDate " +
 				"DATE null");
 
-		super.updateLastPublishDates(
+		updateLastPublishDates(
 			CalendarPortletKeys.CALENDAR, "CalendarNotificationTemplate");
 
 		runSQL("alter table CalendarResource add lastPublishDate DATE null");
 
-		super.updateLastPublishDates(
+		updateLastPublishDates(
 			CalendarPortletKeys.CALENDAR, "CalendarResource");
 	}
 
