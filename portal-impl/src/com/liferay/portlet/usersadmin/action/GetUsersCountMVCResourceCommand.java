@@ -24,6 +24,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 
+import java.io.PrintWriter;
+
 import java.util.LinkedHashMap;
 
 import javax.portlet.PortletException;
@@ -51,8 +53,9 @@ public class GetUsersCountMVCResourceCommand implements MVCResourceCommand {
 		throws PortletException {
 
 		try {
-			resourceResponse.getWriter().write(
-				getText(resourceRequest, resourceResponse));
+			PrintWriter printWriter = resourceResponse.getWriter();
+
+			printWriter.write(getText(resourceRequest, resourceResponse));
 
 			return true;
 		}
@@ -83,10 +86,10 @@ public class GetUsersCountMVCResourceCommand implements MVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		long companyId = PortalUtil.getCompanyId(resourceRequest);
-
 		HttpServletRequest request = PortalUtil.getOriginalServletRequest(
 			PortalUtil.getHttpServletRequest(resourceRequest));
+
+		long companyId = PortalUtil.getCompanyId(request);
 
 		String className = ParamUtil.getString(request, "className");
 		long[] ids = StringUtil.split(ParamUtil.getString(request, "ids"), 0L);

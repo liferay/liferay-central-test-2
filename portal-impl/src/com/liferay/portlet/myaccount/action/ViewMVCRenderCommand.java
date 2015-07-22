@@ -45,8 +45,10 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
+		WindowState windowState = renderRequest.getWindowState();
+
 		if ((renderRequest.getRemoteUser() == null) ||
-			!renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+			!windowState.equals(WindowState.MAXIMIZED)) {
 
 			return "/html/portlet/my_account/view.jsp";
 		}
