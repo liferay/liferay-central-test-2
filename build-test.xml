@@ -2210,6 +2210,7 @@ create database lportal${database.index} character set utf8;</echo>
 							<replacetoken>create database lportal;</replacetoken>
 							<replacevalue>create database lportal pagesize 8192;</replacevalue>
 						</replace>
+
 						<replace file="create.sql">
 							<replacetoken>drop database lportal;</replacetoken>
 							<replacevalue></replacevalue>
