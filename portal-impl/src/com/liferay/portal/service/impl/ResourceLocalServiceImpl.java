@@ -740,13 +740,12 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				for (Role role : modelPermissions.getRoles()) {
 					List<String> actionIds = modelPermissions.getActionIds(
 						role);
-					String[] actionIdsArray = actionIds.toArray(
-						new String[actionIds.size()]);
 
 					resourcePermissionLocalService.setResourcePermissions(
 						resource.getCompanyId(), resource.getName(),
 						resource.getScope(), resource.getPrimKey(),
-						role.getRoleId(), actionIdsArray);
+						role.getRoleId(),
+						actionIds.toArray(new String[actionIds.size()]));
 				}
 			}
 		}
@@ -1123,13 +1122,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		for (Role role : modelPermissions.getRoles()) {
 			List<String> actionIds = modelPermissions.getActionIds(role);
-			String[] actionIdsArray = actionIds.toArray(
-				new String[actionIds.size()]);
 
 			resourcePermissionLocalService.setResourcePermissions(
 				resource.getCompanyId(), resource.getName(),
 				resource.getScope(), resource.getPrimKey(), role.getRoleId(),
-				actionIdsArray);
+				actionIds.toArray(new String[actionIds.size()]));
 		}
 	}
 
