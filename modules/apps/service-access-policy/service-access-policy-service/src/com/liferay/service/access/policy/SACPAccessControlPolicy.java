@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AccessControlContext;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.service.access.policy.configuration.SACPConfiguration;
-import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.constants.SAPConstants;
 import com.liferay.service.access.policy.model.SACPEntry;
 import com.liferay.service.access.policy.service.SACPEntryLocalService;
 
@@ -66,7 +66,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 				SACPConfiguration.class,
 				new CompanyServiceSettingsLocator(
 					CompanyThreadLocal.getCompanyId(),
-					SACPConstants.SERVICE_NAME));
+					SAPConstants.SERVICE_NAME));
 		}
 		catch (SettingsException se) {
 			throw new SecurityException(

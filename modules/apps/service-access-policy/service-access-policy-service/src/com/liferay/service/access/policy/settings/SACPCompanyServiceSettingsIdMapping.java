@@ -16,7 +16,7 @@ package com.liferay.service.access.policy.settings;
 
 import com.liferay.portal.kernel.settings.definition.SettingsIdMapping;
 import com.liferay.service.access.policy.configuration.SACPConfiguration;
-import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.constants.SAPConstants;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -33,7 +33,7 @@ public class SACPCompanyServiceSettingsIdMapping implements SettingsIdMapping {
 
 	@Override
 	public String getSettingsId() {
-		return SACPConstants.SERVICE_NAME;
+		return SAPConstants.SERVICE_NAME;
 	}
 
 }
