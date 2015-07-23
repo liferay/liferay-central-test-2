@@ -1,6 +1,6 @@
 define(
 	["exports"],
-	function (exports) {
+	function(exports) {
 		"use strict";
 
 		Object.defineProperty(
