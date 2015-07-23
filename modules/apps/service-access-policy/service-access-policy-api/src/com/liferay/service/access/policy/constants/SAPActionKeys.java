@@ -17,9 +17,8 @@ package com.liferay.service.access.policy.constants;
 /**
  * @author Mika Koivisto
  */
-public class SACPConstants {
+public class SAPActionKeys {
 
-	public static final String SERVICE_NAME =
-		"com.liferay.service.access.policy";
+	public static String ACTION_ADD_SAP_ENTRY = "ADD_SAP_ENTRY";
 
 }
