@@ -149,8 +149,19 @@ public class DDMIndexerImpl implements DDMIndexer {
 
 						String type = field.getType();
 
-						if (type.equals(DDMImpl.TYPE_RADIO) ||
-							type.equals(DDMImpl.TYPE_SELECT)) {
+						if (type.equals(DDMFormFieldType.GEOLOCATION)) {
+							JSONObject geolocationJSONObject =
+								JSONFactoryUtil.createJSONObject(valueString);
+
+							double latitude = geolocationJSONObject.getDouble(
+								"latitude");
+							double longitude = geolocationJSONObject.getDouble(
+								"longitude");
+
+							document.addGeoLocation(latitude, longitude);
+						}
+						else if (type.equals(DDMImpl.TYPE_RADIO) ||
+								 type.equals(DDMImpl.TYPE_SELECT)) {
 
 							JSONArray jsonArray =
 								JSONFactoryUtil.createJSONArray(valueString);
@@ -164,17 +175,6 @@ public class DDMIndexerImpl implements DDMIndexer {
 							else {
 								document.addTextSortable(name, stringArray);
 							}
-						}
-						else if (type.equals(DDMFormFieldType.GEOLOCATION)) {
-							JSONObject geolocationJSONObject =
-								JSONFactoryUtil.createJSONObject(valueString);
-
-							double latitude = geolocationJSONObject.getDouble(
-								"latitude");
-							double longitude = geolocationJSONObject.getDouble(
-								"longitude");
-
-							document.addGeoLocation(latitude, longitude);
 						}
 						else {
 							if (type.equals(DDMImpl.TYPE_DDM_TEXT_HTML)) {
