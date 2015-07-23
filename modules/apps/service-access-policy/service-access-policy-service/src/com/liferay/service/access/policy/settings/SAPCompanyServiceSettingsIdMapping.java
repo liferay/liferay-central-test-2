@@ -12,28 +12,28 @@
  * details.
  */
 
-package com.liferay.service.access.policy.model.impl;
+package com.liferay.service.access.policy.settings;
 
-import aQute.bnd.annotation.ProviderType;
+import com.liferay.portal.kernel.settings.definition.SettingsIdMapping;
+import com.liferay.service.access.policy.configuration.SAPConfiguration;
+import com.liferay.service.access.policy.constants.SAPConstants;
 
-import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-
-import java.util.List;
+import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Mika Koivisto
  */
-@ProviderType
-public class SACPEntryImpl extends SACPEntryBaseImpl {
+@Component
+public class SAPCompanyServiceSettingsIdMapping implements SettingsIdMapping {
 
 	@Override
-	public List<String> getAllowedServiceSignaturesList() {
-		String[] allowedServiceSignatures = StringUtil.split(
-			getAllowedServiceSignatures(), StringPool.NEW_LINE);
+	public Class<?> getConfigurationBeanClass() {
+		return SAPConfiguration.class;
+	}
 
-		return ListUtil.toList(allowedServiceSignatures);
+	@Override
+	public String getSettingsId() {
+		return SAPConstants.SERVICE_NAME;
 	}
 
 }

@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.BaseModelPermissionChecker;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.service.access.policy.model.SACPEntry;
-import com.liferay.service.access.policy.service.SACPEntryLocalServiceUtil;
+import com.liferay.service.access.policy.model.SAPEntry;
+import com.liferay.service.access.policy.service.SAPEntryLocalServiceUtil;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -28,32 +28,32 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"model.class.name=com.liferay.service.access.policy.model.SACPEntry"
+		"model.class.name=com.liferay.service.access.policy.model.SAPEntry"
 	}
 )
-public class SACPEntryPermission implements BaseModelPermissionChecker {
+public class SAPEntryPermission implements BaseModelPermissionChecker {
 
 	public static void check(
-			PermissionChecker permissionChecker, long sacpEntryId,
+			PermissionChecker permissionChecker, long sapEntryId,
 			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, sacpEntryId, actionId)) {
+		if (!contains(permissionChecker, sapEntryId, actionId)) {
 			throw new PrincipalException.MustHavePermission(
-				permissionChecker, SACPEntry.class.getName(), sacpEntryId,
+				permissionChecker, SAPEntry.class.getName(), sapEntryId,
 				actionId);
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, SACPEntry sacpEntry,
+			PermissionChecker permissionChecker, SAPEntry sapEntry,
 			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, sacpEntry, actionId)) {
+		if (!contains(permissionChecker, sapEntry, actionId)) {
 			throw new PrincipalException.MustHavePermission(
-				permissionChecker, SACPEntry.class.getName(),
-				sacpEntry.getSacpEntryId(), actionId);
+				permissionChecker, SAPEntry.class.getName(),
+				sapEntry.getSacpEntryId(), actionId);
 		}
 	}
 
@@ -61,17 +61,17 @@ public class SACPEntryPermission implements BaseModelPermissionChecker {
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException {
 
-		SACPEntry sacpEntry = SACPEntryLocalServiceUtil.getSACPEntry(classPK);
+		SAPEntry sapEntry = SAPEntryLocalServiceUtil.getSAPEntry(classPK);
 
-		return contains(permissionChecker, sacpEntry, actionId);
+		return contains(permissionChecker, sapEntry, actionId);
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, SACPEntry sacpEntry,
+		PermissionChecker permissionChecker, SAPEntry sapEntry,
 		String actionId) {
 
 		return permissionChecker.hasPermission(
-			0, SACPEntry.class.getName(), sacpEntry.getSacpEntryId(), actionId);
+			0, SAPEntry.class.getName(), sapEntry.getSacpEntryId(), actionId);
 	}
 
 	@Override
