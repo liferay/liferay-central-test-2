@@ -22,20 +22,20 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class DuplicateSACPEntryNameException extends PortalException {
+public class DuplicateSAPEntryNameException extends PortalException {
 
-	public DuplicateSACPEntryNameException() {
+	public DuplicateSAPEntryNameException() {
 	}
 
-	public DuplicateSACPEntryNameException(String msg) {
+	public DuplicateSAPEntryNameException(String msg) {
 		super(msg);
 	}
 
-	public DuplicateSACPEntryNameException(String msg, Throwable cause) {
+	public DuplicateSAPEntryNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public DuplicateSACPEntryNameException(Throwable cause) {
+	public DuplicateSAPEntryNameException(Throwable cause) {
 		super(cause);
 	}
 

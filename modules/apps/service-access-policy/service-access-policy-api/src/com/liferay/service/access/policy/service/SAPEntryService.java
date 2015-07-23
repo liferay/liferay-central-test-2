@@ -27,41 +27,41 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.service.BaseService;
 
 /**
- * Provides the remote service interface for SACPEntry. Methods of this
+ * Provides the remote service interface for SAPEntry. Methods of this
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
- * @see SACPEntryServiceUtil
- * @see com.liferay.service.access.policy.service.base.SACPEntryServiceBaseImpl
- * @see com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl
+ * @see SAPEntryServiceUtil
+ * @see com.liferay.service.access.policy.service.base.SAPEntryServiceBaseImpl
+ * @see com.liferay.service.access.policy.service.impl.SAPEntryServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
 @OSGiBeanProperties(property =  {
-	"json.web.service.context.name=sacp", "json.web.service.context.path=SACPEntry"}, service = SACPEntryService.class)
+	"json.web.service.context.name=sap", "json.web.service.context.path=SAPEntry"}, service = SAPEntryService.class)
 @ProviderType
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface SACPEntryService extends BaseService {
+public interface SAPEntryService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link SACPEntryServiceUtil} to access the s a c p entry remote service. Add custom service methods to {@link com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link SAPEntryServiceUtil} to access the s a p entry remote service. Add custom service methods to {@link com.liferay.service.access.policy.service.impl.SAPEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
+	public com.liferay.service.access.policy.model.SAPEntry addSAPEntry(
 		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.policy.model.SACPEntry sacpEntry)
+	public com.liferay.service.access.policy.model.SAPEntry deleteSAPEntry(
+		com.liferay.service.access.policy.model.SAPEntry sapEntry)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
-		long sacpEntryId)
+	public com.liferay.service.access.policy.model.SAPEntry deleteSAPEntry(
+		long sapEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
@@ -72,25 +72,25 @@ public interface SACPEntryService extends BaseService {
 	public java.lang.String getBeanIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SAPEntry> obc);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCompanySACPEntriesCount(long companyId);
+	public int getCompanySAPEntriesCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
+	public com.liferay.service.access.policy.model.SAPEntry getSAPEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
-		long sacpEntryId)
+	public com.liferay.service.access.policy.model.SAPEntry getSAPEntry(
+		long sapEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
@@ -100,8 +100,8 @@ public interface SACPEntryService extends BaseService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	public com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
-		long sacpEntryId, java.lang.String allowedServiceSignatures,
+	public com.liferay.service.access.policy.model.SAPEntry updateSAPEntry(
+		long sapEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)

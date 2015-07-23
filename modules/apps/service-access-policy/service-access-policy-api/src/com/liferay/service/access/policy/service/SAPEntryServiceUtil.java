@@ -22,46 +22,46 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * Provides the remote service utility for SACPEntry. This utility wraps
- * {@link com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl} and is the
+ * Provides the remote service utility for SAPEntry. This utility wraps
+ * {@link com.liferay.service.access.policy.service.impl.SAPEntryServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Brian Wing Shun Chan
- * @see SACPEntryService
- * @see com.liferay.service.access.policy.service.base.SACPEntryServiceBaseImpl
- * @see com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl
+ * @see SAPEntryService
+ * @see com.liferay.service.access.policy.service.base.SAPEntryServiceBaseImpl
+ * @see com.liferay.service.access.policy.service.impl.SAPEntryServiceImpl
  * @generated
  */
 @ProviderType
-public class SACPEntryServiceUtil {
+public class SAPEntryServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.service.access.policy.service.impl.SAPEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
+	public static com.liferay.service.access.policy.model.SAPEntry addSAPEntry(
 		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addSACPEntry(allowedServiceSignatures, name, titleMap,
+				   .addSAPEntry(allowedServiceSignatures, name, titleMap,
 			serviceContext);
 	}
 
-	public static com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.policy.model.SACPEntry sacpEntry)
+	public static com.liferay.service.access.policy.model.SAPEntry deleteSAPEntry(
+		com.liferay.service.access.policy.model.SAPEntry sapEntry)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deleteSACPEntry(sacpEntry);
+		return getService().deleteSAPEntry(sapEntry);
 	}
 
-	public static com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
-		long sacpEntryId)
+	public static com.liferay.service.access.policy.model.SAPEntry deleteSAPEntry(
+		long sapEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deleteSACPEntry(sacpEntryId);
+		return getService().deleteSAPEntry(sapEntryId);
 	}
 
 	/**
@@ -73,31 +73,31 @@ public class SACPEntryServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
-	public static java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
+	public static java.util.List<com.liferay.service.access.policy.model.SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end) {
-		return getService().getCompanySACPEntries(companyId, start, end);
+		return getService().getCompanySAPEntries(companyId, start, end);
 	}
 
-	public static java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
+	public static java.util.List<com.liferay.service.access.policy.model.SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc) {
-		return getService().getCompanySACPEntries(companyId, start, end, obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SAPEntry> obc) {
+		return getService().getCompanySAPEntries(companyId, start, end, obc);
 	}
 
-	public static int getCompanySACPEntriesCount(long companyId) {
-		return getService().getCompanySACPEntriesCount(companyId);
+	public static int getCompanySAPEntriesCount(long companyId) {
+		return getService().getCompanySAPEntriesCount(companyId);
 	}
 
-	public static com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
+	public static com.liferay.service.access.policy.model.SAPEntry getSAPEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getSACPEntry(companyId, name);
+		return getService().getSAPEntry(companyId, name);
 	}
 
-	public static com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
-		long sacpEntryId)
+	public static com.liferay.service.access.policy.model.SAPEntry getSAPEntry(
+		long sapEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getSACPEntry(sacpEntryId);
+		return getService().getSAPEntry(sapEntryId);
 	}
 
 	/**
@@ -109,18 +109,18 @@ public class SACPEntryServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
-	public static com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
-		long sacpEntryId, java.lang.String allowedServiceSignatures,
+	public static com.liferay.service.access.policy.model.SAPEntry updateSAPEntry(
+		long sapEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateSACPEntry(sacpEntryId, allowedServiceSignatures,
-			name, titleMap, serviceContext);
+				   .updateSAPEntry(sapEntryId, allowedServiceSignatures, name,
+			titleMap, serviceContext);
 	}
 
-	public static SACPEntryService getService() {
+	public static SAPEntryService getService() {
 		return _serviceTracker.getService();
 	}
 
@@ -128,16 +128,16 @@ public class SACPEntryServiceUtil {
 	 * @deprecated As of 6.2.0
 	 */
 	@Deprecated
-	public void setService(SACPEntryService service) {
+	public void setService(SAPEntryService service) {
 	}
 
-	private static ServiceTracker<SACPEntryService, SACPEntryService> _serviceTracker;
+	private static ServiceTracker<SAPEntryService, SAPEntryService> _serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(SACPEntryServiceUtil.class);
+		Bundle bundle = FrameworkUtil.getBundle(SAPEntryServiceUtil.class);
 
-		_serviceTracker = new ServiceTracker<SACPEntryService, SACPEntryService>(bundle.getBundleContext(),
-				SACPEntryService.class, null);
+		_serviceTracker = new ServiceTracker<SAPEntryService, SAPEntryService>(bundle.getBundleContext(),
+				SAPEntryService.class, null);
 
 		_serviceTracker.open();
 	}

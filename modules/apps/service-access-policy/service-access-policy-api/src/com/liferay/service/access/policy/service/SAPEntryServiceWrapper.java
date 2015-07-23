@@ -19,41 +19,41 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * Provides a wrapper for {@link SACPEntryService}.
+ * Provides a wrapper for {@link SAPEntryService}.
  *
  * @author Brian Wing Shun Chan
- * @see SACPEntryService
+ * @see SAPEntryService
  * @generated
  */
 @ProviderType
-public class SACPEntryServiceWrapper implements SACPEntryService,
-	ServiceWrapper<SACPEntryService> {
-	public SACPEntryServiceWrapper(SACPEntryService sacpEntryService) {
-		_sacpEntryService = sacpEntryService;
+public class SAPEntryServiceWrapper implements SAPEntryService,
+	ServiceWrapper<SAPEntryService> {
+	public SAPEntryServiceWrapper(SAPEntryService sapEntryService) {
+		_sapEntryService = sapEntryService;
 	}
 
 	@Override
-	public com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
+	public com.liferay.service.access.policy.model.SAPEntry addSAPEntry(
 		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _sacpEntryService.addSACPEntry(allowedServiceSignatures, name,
+		return _sapEntryService.addSAPEntry(allowedServiceSignatures, name,
 			titleMap, serviceContext);
 	}
 
 	@Override
-	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.policy.model.SACPEntry sacpEntry)
+	public com.liferay.service.access.policy.model.SAPEntry deleteSAPEntry(
+		com.liferay.service.access.policy.model.SAPEntry sapEntry)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _sacpEntryService.deleteSACPEntry(sacpEntry);
+		return _sapEntryService.deleteSAPEntry(sapEntry);
 	}
 
 	@Override
-	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
-		long sacpEntryId)
+	public com.liferay.service.access.policy.model.SAPEntry deleteSAPEntry(
+		long sapEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _sacpEntryService.deleteSACPEntry(sacpEntryId);
+		return _sapEntryService.deleteSAPEntry(sapEntryId);
 	}
 
 	/**
@@ -63,40 +63,39 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	*/
 	@Override
 	public java.lang.String getBeanIdentifier() {
-		return _sacpEntryService.getBeanIdentifier();
+		return _sapEntryService.getBeanIdentifier();
 	}
 
 	@Override
-	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end) {
-		return _sacpEntryService.getCompanySACPEntries(companyId, start, end);
+		return _sapEntryService.getCompanySAPEntries(companyId, start, end);
 	}
 
 	@Override
-	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc) {
-		return _sacpEntryService.getCompanySACPEntries(companyId, start, end,
-			obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SAPEntry> obc) {
+		return _sapEntryService.getCompanySAPEntries(companyId, start, end, obc);
 	}
 
 	@Override
-	public int getCompanySACPEntriesCount(long companyId) {
-		return _sacpEntryService.getCompanySACPEntriesCount(companyId);
+	public int getCompanySAPEntriesCount(long companyId) {
+		return _sapEntryService.getCompanySAPEntriesCount(companyId);
 	}
 
 	@Override
-	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
+	public com.liferay.service.access.policy.model.SAPEntry getSAPEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _sacpEntryService.getSACPEntry(companyId, name);
+		return _sapEntryService.getSAPEntry(companyId, name);
 	}
 
 	@Override
-	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
-		long sacpEntryId)
+	public com.liferay.service.access.policy.model.SAPEntry getSAPEntry(
+		long sapEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _sacpEntryService.getSACPEntry(sacpEntryId);
+		return _sapEntryService.getSAPEntry(sapEntryId);
 	}
 
 	/**
@@ -106,17 +105,17 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	*/
 	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
-		_sacpEntryService.setBeanIdentifier(beanIdentifier);
+		_sapEntryService.setBeanIdentifier(beanIdentifier);
 	}
 
 	@Override
-	public com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
-		long sacpEntryId, java.lang.String allowedServiceSignatures,
+	public com.liferay.service.access.policy.model.SAPEntry updateSAPEntry(
+		long sapEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _sacpEntryService.updateSACPEntry(sacpEntryId,
+		return _sapEntryService.updateSAPEntry(sapEntryId,
 			allowedServiceSignatures, name, titleMap, serviceContext);
 	}
 
@@ -124,27 +123,27 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	@Deprecated
-	public SACPEntryService getWrappedSACPEntryService() {
-		return _sacpEntryService;
+	public SAPEntryService getWrappedSAPEntryService() {
+		return _sapEntryService;
 	}
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
 	@Deprecated
-	public void setWrappedSACPEntryService(SACPEntryService sacpEntryService) {
-		_sacpEntryService = sacpEntryService;
+	public void setWrappedSAPEntryService(SAPEntryService sapEntryService) {
+		_sapEntryService = sapEntryService;
 	}
 
 	@Override
-	public SACPEntryService getWrappedService() {
-		return _sacpEntryService;
+	public SAPEntryService getWrappedService() {
+		return _sapEntryService;
 	}
 
 	@Override
-	public void setWrappedService(SACPEntryService sacpEntryService) {
-		_sacpEntryService = sacpEntryService;
+	public void setWrappedService(SAPEntryService sapEntryService) {
+		_sapEntryService = sapEntryService;
 	}
 
-	private SACPEntryService _sacpEntryService;
+	private SAPEntryService _sapEntryService;
 }
