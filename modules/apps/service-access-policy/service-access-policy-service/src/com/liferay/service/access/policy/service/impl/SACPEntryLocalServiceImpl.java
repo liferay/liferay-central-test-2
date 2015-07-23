@@ -32,13 +32,13 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 import com.liferay.service.access.policy.configuration.SACPConfiguration;
-import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.constants.SAPConstants;
 import com.liferay.service.access.policy.exception.DuplicateSACPEntryNameException;
 import com.liferay.service.access.policy.exception.RequiredSACPEntryException;
 import com.liferay.service.access.policy.exception.SACPEntryNameException;
 import com.liferay.service.access.policy.exception.SACPEntryTitleException;
 import com.liferay.service.access.policy.model.SACPEntry;
-import com.liferay.service.access.policy.model.SACPEntryConstants;
+import com.liferay.service.access.policy.model.SAPEntryConstants;
 import com.liferay.service.access.policy.service.base.SACPEntryLocalServiceBaseImpl;
 
 import java.util.HashMap;
@@ -101,7 +101,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		SACPConfiguration sacpConfiguration = settingsFactory.getSettings(
 			SACPConfiguration.class,
 			new CompanyServiceSettingsLocator(
-				companyId, SACPConstants.SERVICE_NAME));
+				companyId, SAPConstants.SERVICE_NAME));
 
 		SACPEntry applicationSACPEntry = sacpEntryPersistence.fetchByC_N(
 			companyId, sacpConfiguration.defaultApplicationSACPEntryName());
@@ -258,7 +258,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		for (int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
 
-			if (SACPEntryConstants.NAME_ALLOWED_CHARACTERS.indexOf(c) < 0) {
+			if (SAPEntryConstants.NAME_ALLOWED_CHARACTERS.indexOf(c) < 0) {
 				throw new SACPEntryNameException("Invalid character " + c);
 			}
 		}

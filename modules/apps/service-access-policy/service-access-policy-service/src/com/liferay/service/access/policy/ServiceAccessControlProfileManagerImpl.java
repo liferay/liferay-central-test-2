@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.service.access.policy.configuration.SACPConfiguration;
-import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.constants.SAPConstants;
 import com.liferay.service.access.policy.model.SACPEntry;
 import com.liferay.service.access.policy.service.SACPEntryService;
 
@@ -93,7 +93,7 @@ public class ServiceAccessControlProfileManagerImpl
 			return _settingsFactory.getSettings(
 				SACPConfiguration.class,
 				new CompanyServiceSettingsLocator(
-					companyId, SACPConstants.SERVICE_NAME));
+					companyId, SAPConstants.SERVICE_NAME));
 		}
 		catch (SettingsException se) {
 			if (_log.isWarnEnabled()) {
