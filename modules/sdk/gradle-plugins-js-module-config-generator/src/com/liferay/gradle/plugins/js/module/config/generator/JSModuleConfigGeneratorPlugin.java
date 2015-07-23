@@ -84,7 +84,7 @@ public class JSModuleConfigGeneratorPlugin implements Plugin<Project> {
 			project, CONFIG_JS_MODULES_TASK_NAME, ConfigJSModulesTask.class);
 
 		configJSModulesTask.setDescription(
-			"Generates the config file, needed to load AMD files via " +
+			"Generates the config file needed to load AMD files via " +
 				"combobox in Liferay.");
 		configJSModulesTask.setGroup(BasePlugin.BUILD_GROUP);
 		configJSModulesTask.setModuleConfigFile(project.file("bower.json"));
