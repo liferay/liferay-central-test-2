@@ -12,13 +12,15 @@
  * details.
  */
 
-package com.liferay.service.access.policy.constants;
+package com.liferay.service.access.policy.model;
 
 /**
  * @author Mika Koivisto
  */
-public class SACPActionKeys {
+public interface SAPEntryConstants {
 
-	public static String ACTION_ADD_SACP_ENTRY = "ADD_SACP_ENTRY";
+	public static String NAME_ALLOWED_CHARACTERS =
+		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" +
+			"#:@./_-";
 
 }
