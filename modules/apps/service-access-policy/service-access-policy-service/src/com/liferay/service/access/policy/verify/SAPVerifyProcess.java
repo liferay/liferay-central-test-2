@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.verify.VerifyProcess;
-import com.liferay.service.access.policy.service.SACPEntryLocalService;
+import com.liferay.service.access.policy.service.SAPEntryLocalService;
 
 import javax.servlet.ServletContext;
 
@@ -30,30 +30,30 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Mika Koivisto
  */
-@Component(immediate = true, service = SACPVerifyProcess.class)
-public class SACPVerifyProcess extends VerifyProcess {
+@Component(immediate = true, service = SAPVerifyProcess.class)
+public class SAPVerifyProcess extends VerifyProcess {
 
 	@Activate
 	@Override
 	protected void doVerify() throws Exception {
-		verifyDefaultSACPEntry();
+		verifyDefaultSAPEntry();
 	}
 
 	@Reference
-	protected void setSACPEntryLocalService(
-		SACPEntryLocalService sacpEntryLocalService) {
+	protected void setSAPEntryLocalService(
+		SAPEntryLocalService sapEntryLocalService) {
 
-		_sacpEntryLocalService = sacpEntryLocalService;
+		_sapEntryLocalService = sapEntryLocalService;
 	}
 
 	@Reference(target ="(original.bean=true)")
 	protected void setServiceContext(ServletContext serviceContext) {
 	}
 
-	protected void verifyDefaultSACPEntry() {
+	protected void verifyDefaultSAPEntry() {
 		for (long companyId : PortalInstances.getCompanyIds()) {
 			try {
-				_sacpEntryLocalService.checkDefaultSACPEntry(companyId);
+				_sapEntryLocalService.checkDefaultSAPEntry(companyId);
 			}
 			catch (PortalException pe) {
 				_log.error(
@@ -65,8 +65,8 @@ public class SACPVerifyProcess extends VerifyProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SACPVerifyProcess.class);
+		SAPVerifyProcess.class);
 
-	private SACPEntryLocalService _sacpEntryLocalService;
+	private SAPEntryLocalService _sapEntryLocalService;
 
 }

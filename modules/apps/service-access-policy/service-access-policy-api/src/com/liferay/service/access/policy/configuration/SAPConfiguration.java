@@ -20,35 +20,35 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Mika Koivisto
  */
 @Meta.OCD(
-	id = "com.liferay.service.access.policy.configuration.SACPConfiguration",
+	id = "com.liferay.service.access.policy.configuration.SAPConfiguration",
 	localization = "content/Language"
 )
-public interface SACPConfiguration {
+public interface SAPConfiguration {
 
 	@Meta.AD(
 		deflt = "Default Service Access Profile for Applications",
 		required = false
 	)
-	public String defaultApplicationSACPEntryDescription();
+	public String defaultApplicationSAPEntryDescription();
 
 	@Meta.AD(deflt = "DEFAULT_APP", required = false)
-	public String defaultApplicationSACPEntryName();
+	public String defaultApplicationSAPEntryName();
 
 	@Meta.AD(deflt = "", required = false)
-	public String defaultApplicationSACPEntryServiceSignatures();
+	public String defaultApplicationSAPEntryServiceSignatures();
 
 	@Meta.AD(
 		deflt = "Default Service Access Profile for User", required = false
 	)
-	public String defaultUserSACPEntryDescription();
+	public String defaultUserSAPEntryDescription();
 
 	@Meta.AD(deflt = "DEFAULT_USER", required = false)
-	public String defaultUserSACPEntryName();
+	public String defaultUserSAPEntryName();
 
 	@Meta.AD(deflt = "*", required = false)
-	public String defaultUserSACPEntryServiceSignatures();
+	public String defaultUserSAPEntryServiceSignatures();
 
 	@Meta.AD(deflt = "true", required = false)
-	public boolean requireDefaultSACPEntry();
+	public boolean requireDefaultSAPEntry();
 
 }

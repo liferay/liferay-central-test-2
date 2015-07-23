@@ -12,23 +12,28 @@
  * details.
  */
 
-package com.liferay.service.access.policy.settings;
+package com.liferay.service.access.policy.model.impl;
 
-import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
-import com.liferay.service.access.policy.configuration.SACPConfiguration;
+import aQute.bnd.annotation.ProviderType;
 
-import org.osgi.service.component.annotations.Component;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.List;
 
 /**
- * @author Mika Koivisto
+ * @author Brian Wing Shun Chan
  */
-@Component
-public class SACPCompanyServiceConfigurationBeanDeclaration
-	implements ConfigurationBeanDeclaration {
+@ProviderType
+public class SAPEntryImpl extends SAPEntryBaseImpl {
 
 	@Override
-	public Class<?> getConfigurationBeanClass() {
-		return SACPConfiguration.class;
+	public List<String> getAllowedServiceSignaturesList() {
+		String[] allowedServiceSignatures = StringUtil.split(
+			getAllowedServiceSignatures(), StringPool.NEW_LINE);
+
+		return ListUtil.toList(allowedServiceSignatures);
 	}
 
 }

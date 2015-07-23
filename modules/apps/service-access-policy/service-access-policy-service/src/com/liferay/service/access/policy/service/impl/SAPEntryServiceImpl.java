@@ -23,9 +23,9 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.service.access.policy.constants.SAPActionKeys;
 import com.liferay.service.access.policy.constants.SAPConstants;
-import com.liferay.service.access.policy.model.SACPEntry;
-import com.liferay.service.access.policy.service.base.SACPEntryServiceBaseImpl;
-import com.liferay.service.access.policy.service.permission.SACPEntryPermission;
+import com.liferay.service.access.policy.model.SAPEntry;
+import com.liferay.service.access.policy.service.base.SAPEntryServiceBaseImpl;
+import com.liferay.service.access.policy.service.permission.SAPEntryPermission;
 
 import java.util.List;
 import java.util.Locale;
@@ -35,10 +35,10 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
+public class SAPEntryServiceImpl extends SAPEntryServiceBaseImpl {
 
 	@Override
-	public SACPEntry addSACPEntry(
+	public SAPEntry addSAPEntry(
 			String allowedServiceSignatures, String name,
 			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
@@ -47,81 +47,81 @@ public class SACPEntryServiceImpl extends SACPEntryServiceBaseImpl {
 			getPermissionChecker(), SAPConstants.SERVICE_NAME,
 			SAPActionKeys.ACTION_ADD_SAP_ENTRY);
 
-		return sacpEntryLocalService.addSACPEntry(
+		return sapEntryLocalService.addSAPEntry(
 			getUserId(), allowedServiceSignatures, false, name, titleMap,
 			serviceContext);
 	}
 
 	@Override
-	public SACPEntry deleteSACPEntry(long sacpEntryId) throws PortalException {
-		SACPEntryPermission.check(
-			getPermissionChecker(), sacpEntryId, ActionKeys.DELETE);
+	public SAPEntry deleteSAPEntry(long sapEntryId) throws PortalException {
+		SAPEntryPermission.check(
+			getPermissionChecker(), sapEntryId, ActionKeys.DELETE);
 
-		return sacpEntryLocalService.deleteSACPEntry(sacpEntryId);
+		return sapEntryLocalService.deleteSAPEntry(sapEntryId);
 	}
 
 	@Override
-	public SACPEntry deleteSACPEntry(SACPEntry sacpEntry)
+	public SAPEntry deleteSAPEntry(SAPEntry sapEntry)
 		throws PortalException {
 
-		SACPEntryPermission.check(
-			getPermissionChecker(), sacpEntry, ActionKeys.DELETE);
+		SAPEntryPermission.check(
+			getPermissionChecker(), sapEntry, ActionKeys.DELETE);
 
-		return sacpEntryLocalService.deleteSACPEntry(sacpEntry);
+		return sapEntryLocalService.deleteSAPEntry(sapEntry);
 	}
 
 	@Override
-	public List<SACPEntry> getCompanySACPEntries(
+	public List<SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end) {
 
-		return sacpEntryPersistence.filterFindByCompanyId(
+		return sapEntryPersistence.filterFindByCompanyId(
 			companyId, start, end);
 	}
 
 	@Override
-	public List<SACPEntry> getCompanySACPEntries(
-		long companyId, int start, int end, OrderByComparator<SACPEntry> obc) {
+	public List<SAPEntry> getCompanySAPEntries(
+		long companyId, int start, int end, OrderByComparator<SAPEntry> obc) {
 
-		return sacpEntryPersistence.filterFindByCompanyId(
+		return sapEntryPersistence.filterFindByCompanyId(
 			companyId, start, end, obc);
 	}
 
 	@Override
-	public int getCompanySACPEntriesCount(long companyId) {
-		return sacpEntryPersistence.filterCountByCompanyId(companyId);
+	public int getCompanySAPEntriesCount(long companyId) {
+		return sapEntryPersistence.filterCountByCompanyId(companyId);
 	}
 
 	@Override
-	public SACPEntry getSACPEntry(long sacpEntryId) throws PortalException {
-		SACPEntryPermission.check(
-			getPermissionChecker(), sacpEntryId, ActionKeys.VIEW);
+	public SAPEntry getSAPEntry(long sapEntryId) throws PortalException {
+		SAPEntryPermission.check(
+			getPermissionChecker(), sapEntryId, ActionKeys.VIEW);
 
-		return sacpEntryPersistence.findByPrimaryKey(sacpEntryId);
+		return sapEntryPersistence.findByPrimaryKey(sapEntryId);
 	}
 
 	@Override
-	public SACPEntry getSACPEntry(long companyId, String name)
+	public SAPEntry getSAPEntry(long companyId, String name)
 		throws PortalException {
 
-		SACPEntry sacpEntry = sacpEntryPersistence.findByC_N(companyId, name);
+		SAPEntry sapEntry = sapEntryPersistence.findByC_N(companyId, name);
 
-		SACPEntryPermission.check(
-			getPermissionChecker(), sacpEntry, ActionKeys.VIEW);
+		SAPEntryPermission.check(
+			getPermissionChecker(), sapEntry, ActionKeys.VIEW);
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
 	@Override
-	public SACPEntry updateSACPEntry(
-			long sacpEntryId, String allowedServiceSignatures, String name,
+	public SAPEntry updateSAPEntry(
+			long sapEntryId, String allowedServiceSignatures, String name,
 			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
 
-		SACPEntryPermission.check(
-			getPermissionChecker(), sacpEntryId, ActionKeys.UPDATE);
+		SAPEntryPermission.check(
+			getPermissionChecker(), sapEntryId, ActionKeys.UPDATE);
 
-		return sacpEntryLocalService.updateSACPEntry(
-			sacpEntryId, allowedServiceSignatures, name, titleMap,
+		return sapEntryLocalService.updateSAPEntry(
+			sapEntryId, allowedServiceSignatures, name, titleMap,
 			serviceContext);
 	}
 
