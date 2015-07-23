@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.constants;
+package com.liferay.service.access.policy.constants;
 
 /**
  * @author Mika Koivisto
@@ -20,6 +20,6 @@ package com.liferay.service.access.control.profile.constants;
 public class SACPConstants {
 
 	public static final String SERVICE_NAME =
-		"com.liferay.service.access.control.profile";
+		"com.liferay.service.access.policy";
 
 }

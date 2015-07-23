@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile;
+package com.liferay.service.access.policy;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.access.control.AccessControlPolicy;
@@ -29,10 +29,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AccessControlContext;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.service.access.control.profile.configuration.SACPConfiguration;
-import com.liferay.service.access.control.profile.constants.SACPConstants;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.SACPEntryLocalService;
+import com.liferay.service.access.policy.configuration.SACPConfiguration;
+import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.SACPEntryLocalService;
 
 import java.lang.reflect.Method;
 

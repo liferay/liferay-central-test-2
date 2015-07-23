@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service;
+package com.liferay.service.access.policy.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -33,7 +33,7 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
 		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -43,14 +43,14 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry)
+	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
+		com.liferay.service.access.policy.model.SACPEntry sacpEntry)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _sacpEntryService.deleteSACPEntry(sacpEntry);
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
 		long sacpEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _sacpEntryService.deleteSACPEntry(sacpEntryId);
@@ -67,15 +67,15 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	}
 
 	@Override
-	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
 		long companyId, int start, int end) {
 		return _sacpEntryService.getCompanySACPEntries(companyId, start, end);
 	}
 
 	@Override
-	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.control.profile.model.SACPEntry> obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc) {
 		return _sacpEntryService.getCompanySACPEntries(companyId, start, end,
 			obc);
 	}
@@ -86,14 +86,14 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _sacpEntryService.getSACPEntry(companyId, name);
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
 		long sacpEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _sacpEntryService.getSACPEntry(sacpEntryId);
@@ -110,7 +110,7 @@ public class SACPEntryServiceWrapper implements SACPEntryService,
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
 		long sacpEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,

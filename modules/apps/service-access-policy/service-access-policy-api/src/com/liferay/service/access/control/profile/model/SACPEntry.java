@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model;
+package com.liferay.service.access.policy.model;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -23,8 +23,8 @@ import com.liferay.portal.model.PersistedModel;
  *
  * @author Brian Wing Shun Chan
  * @see SACPEntryModel
- * @see com.liferay.service.access.control.profile.model.impl.SACPEntryImpl
- * @see com.liferay.service.access.control.profile.model.impl.SACPEntryModelImpl
+ * @see com.liferay.service.access.policy.model.impl.SACPEntryImpl
+ * @see com.liferay.service.access.policy.model.impl.SACPEntryModelImpl
  * @generated
  */
 @ProviderType
@@ -32,7 +32,7 @@ public interface SACPEntry extends SACPEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.service.access.control.profile.model.impl.SACPEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.service.access.policy.model.impl.SACPEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.util.List<java.lang.String> getAllowedServiceSignaturesList();
 }

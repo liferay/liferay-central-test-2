@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.verify;
+package com.liferay.service.access.policy.verify;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.verify.VerifyProcess;
-import com.liferay.service.access.control.profile.service.SACPEntryLocalService;
+import com.liferay.service.access.policy.service.SACPEntryLocalService;
 
 import javax.servlet.ServletContext;
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.http;
+package com.liferay.service.access.policy.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 
-import com.liferay.service.access.control.profile.service.SACPEntryServiceUtil;
+import com.liferay.service.access.policy.service.SACPEntryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.service.access.control.profile.service.SACPEntryServiceUtil} service utility. The
+ * {@link com.liferay.service.access.policy.service.SACPEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -37,10 +37,10 @@ import java.util.Map;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.service.access.control.profile.model.SACPEntrySoap}.
+ * is translated to an array of {@link com.liferay.service.access.policy.model.SACPEntrySoap}.
  * If the method in the service utility returns a
- * {@link com.liferay.service.access.control.profile.model.SACPEntry}, that is translated to a
- * {@link com.liferay.service.access.control.profile.model.SACPEntrySoap}. Methods that SOAP cannot
+ * {@link com.liferay.service.access.policy.model.SACPEntry}, that is translated to a
+ * {@link com.liferay.service.access.policy.model.SACPEntrySoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -63,13 +63,13 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @see SACPEntryServiceHttp
- * @see com.liferay.service.access.control.profile.model.SACPEntrySoap
- * @see com.liferay.service.access.control.profile.service.SACPEntryServiceUtil
+ * @see com.liferay.service.access.policy.model.SACPEntrySoap
+ * @see com.liferay.service.access.policy.service.SACPEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class SACPEntryServiceSoap {
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap addSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap addSACPEntry(
 		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.lang.String[] titleMapLanguageIds,
 		java.lang.String[] titleMapValues,
@@ -79,11 +79,11 @@ public class SACPEntryServiceSoap {
 			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
 					titleMapValues);
 
-			com.liferay.service.access.control.profile.model.SACPEntry returnValue =
+			com.liferay.service.access.policy.model.SACPEntry returnValue =
 				SACPEntryServiceUtil.addSACPEntry(allowedServiceSignatures,
 					name, titleMap, serviceContext);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModel(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -92,13 +92,13 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap deleteSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap deleteSACPEntry(
 		long sacpEntryId) throws RemoteException {
 		try {
-			com.liferay.service.access.control.profile.model.SACPEntry returnValue =
+			com.liferay.service.access.policy.model.SACPEntry returnValue =
 				SACPEntryServiceUtil.deleteSACPEntry(sacpEntryId);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModel(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,15 +107,15 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap deleteSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntrySoap sacpEntry)
+	public static com.liferay.service.access.policy.model.SACPEntrySoap deleteSACPEntry(
+		com.liferay.service.access.policy.model.SACPEntrySoap sacpEntry)
 		throws RemoteException {
 		try {
-			com.liferay.service.access.control.profile.model.SACPEntry returnValue =
-				SACPEntryServiceUtil.deleteSACPEntry(com.liferay.service.access.control.profile.model.impl.SACPEntryModelImpl.toModel(
+			com.liferay.service.access.policy.model.SACPEntry returnValue =
+				SACPEntryServiceUtil.deleteSACPEntry(com.liferay.service.access.policy.model.impl.SACPEntryModelImpl.toModel(
 						sacpEntry));
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModel(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -124,13 +124,13 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap[] getCompanySACPEntries(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap[] getCompanySACPEntries(
 		long companyId, int start, int end) throws RemoteException {
 		try {
-			java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> returnValue =
+			java.util.List<com.liferay.service.access.policy.model.SACPEntry> returnValue =
 				SACPEntryServiceUtil.getCompanySACPEntries(companyId, start, end);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModels(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -139,16 +139,16 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap[] getCompanySACPEntries(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap[] getCompanySACPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.control.profile.model.SACPEntry> obc)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> returnValue =
+			java.util.List<com.liferay.service.access.policy.model.SACPEntry> returnValue =
 				SACPEntryServiceUtil.getCompanySACPEntries(companyId, start,
 					end, obc);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModels(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -171,13 +171,13 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap getSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap getSACPEntry(
 		long sacpEntryId) throws RemoteException {
 		try {
-			com.liferay.service.access.control.profile.model.SACPEntry returnValue =
+			com.liferay.service.access.policy.model.SACPEntry returnValue =
 				SACPEntryServiceUtil.getSACPEntry(sacpEntryId);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModel(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -186,13 +186,13 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap getSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap getSACPEntry(
 		long companyId, java.lang.String name) throws RemoteException {
 		try {
-			com.liferay.service.access.control.profile.model.SACPEntry returnValue =
+			com.liferay.service.access.policy.model.SACPEntry returnValue =
 				SACPEntryServiceUtil.getSACPEntry(companyId, name);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModel(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -201,7 +201,7 @@ public class SACPEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntrySoap updateSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntrySoap updateSACPEntry(
 		long sacpEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name, java.lang.String[] titleMapLanguageIds,
 		java.lang.String[] titleMapValues,
@@ -211,11 +211,11 @@ public class SACPEntryServiceSoap {
 			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(titleMapLanguageIds,
 					titleMapValues);
 
-			com.liferay.service.access.control.profile.model.SACPEntry returnValue =
+			com.liferay.service.access.policy.model.SACPEntry returnValue =
 				SACPEntryServiceUtil.updateSACPEntry(sacpEntryId,
 					allowedServiceSignatures, name, titleMap, serviceContext);
 
-			return com.liferay.service.access.control.profile.model.SACPEntrySoap.toSoapModel(returnValue);
+			return com.liferay.service.access.policy.model.SACPEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

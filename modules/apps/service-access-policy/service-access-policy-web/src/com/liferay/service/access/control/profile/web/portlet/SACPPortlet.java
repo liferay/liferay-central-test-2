@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.web.portlet;
+package com.liferay.service.access.policy.web.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.service.access.control.profile.service.SACPEntryService;
+import com.liferay.service.access.policy.service.SACPEntryService;
 
 import java.util.Locale;
 import java.util.Map;

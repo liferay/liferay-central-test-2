@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.settings;
+package com.liferay.service.access.policy.settings;
 
 import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
-import com.liferay.service.access.control.profile.configuration.SACPConfiguration;
+import com.liferay.service.access.policy.configuration.SACPConfiguration;
 
 import org.osgi.service.component.annotations.Component;
 

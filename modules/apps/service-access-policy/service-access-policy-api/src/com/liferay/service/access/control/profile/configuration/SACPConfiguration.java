@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.configuration;
+package com.liferay.service.access.policy.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Mika Koivisto
  */
 @Meta.OCD(
-	id = "com.liferay.service.access.control.profile.configuration.SACPConfiguration",
+	id = "com.liferay.service.access.policy.configuration.SACPConfiguration",
 	localization = "content/Language"
 )
 public interface SACPConfiguration {

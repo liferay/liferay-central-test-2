@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model;
+package com.liferay.service.access.policy.model;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -23,10 +23,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.service.access.control.profile.service.http.SACPEntryServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.service.access.policy.service.http.SACPEntryServiceSoap}.
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.service.access.control.profile.service.http.SACPEntryServiceSoap
+ * @see com.liferay.service.access.policy.service.http.SACPEntryServiceSoap
  * @generated
  */
 @ProviderType

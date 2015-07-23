@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model;
+package com.liferay.service.access.policy.model;
 
 /**
  * @author Mika Koivisto

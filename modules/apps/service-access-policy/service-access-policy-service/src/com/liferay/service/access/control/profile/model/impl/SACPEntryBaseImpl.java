@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model.impl;
+package com.liferay.service.access.policy.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.SACPEntryLocalServiceUtil;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.SACPEntryLocalServiceUtil;
 
 /**
  * The extended model base implementation for the SACPEntry service. Represents a row in the &quot;SACPEntry&quot; database table, with each column mapped to a property of this class.
@@ -28,7 +28,7 @@ import com.liferay.service.access.control.profile.service.SACPEntryLocalServiceU
  *
  * @author Brian Wing Shun Chan
  * @see SACPEntryImpl
- * @see com.liferay.service.access.control.profile.model.SACPEntry
+ * @see com.liferay.service.access.policy.model.SACPEntry
  * @generated
  */
 @ProviderType

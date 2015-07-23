@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.util;
+package com.liferay.service.access.policy.service.util;
 
 import aQute.bnd.annotation.ProviderType;
 
