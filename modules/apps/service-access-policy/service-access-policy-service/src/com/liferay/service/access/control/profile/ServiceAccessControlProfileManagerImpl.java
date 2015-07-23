@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile;
+package com.liferay.service.access.policy;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -22,10 +22,10 @@ import com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPol
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactory;
-import com.liferay.service.access.control.profile.configuration.SACPConfiguration;
-import com.liferay.service.access.control.profile.constants.SACPConstants;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.SACPEntryService;
+import com.liferay.service.access.policy.configuration.SACPConfiguration;
+import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.SACPEntryService;
 
 import java.util.ArrayList;
 import java.util.List;

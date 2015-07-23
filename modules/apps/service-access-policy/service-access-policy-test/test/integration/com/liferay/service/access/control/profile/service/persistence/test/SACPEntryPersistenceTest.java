@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.persistence.test;
+package com.liferay.service.access.policy.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 
@@ -36,11 +36,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 
-import com.liferay.service.access.control.profile.exception.NoSuchEntryException;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.SACPEntryLocalServiceUtil;
-import com.liferay.service.access.control.profile.service.persistence.SACPEntryPersistence;
-import com.liferay.service.access.control.profile.service.persistence.SACPEntryUtil;
+import com.liferay.service.access.policy.exception.NoSuchEntryException;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.SACPEntryLocalServiceUtil;
+import com.liferay.service.access.policy.service.persistence.SACPEntryPersistence;
+import com.liferay.service.access.policy.service.persistence.SACPEntryUtil;
 
 import org.junit.After;
 import org.junit.Assert;

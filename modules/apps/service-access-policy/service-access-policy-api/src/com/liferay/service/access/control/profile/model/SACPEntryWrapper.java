@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model;
+package com.liferay.service.access.policy.model;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -146,7 +146,7 @@ public class SACPEntryWrapper implements SACPEntry, ModelWrapper<SACPEntry> {
 
 	@Override
 	public int compareTo(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry) {
+		com.liferay.service.access.policy.model.SACPEntry sacpEntry) {
 		return _sacpEntry.compareTo(sacpEntry);
 	}
 
@@ -638,12 +638,12 @@ public class SACPEntryWrapper implements SACPEntry, ModelWrapper<SACPEntry> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.service.access.control.profile.model.SACPEntry> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.liferay.service.access.policy.model.SACPEntry> toCacheModel() {
 		return _sacpEntry.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry toEscapedModel() {
+	public com.liferay.service.access.policy.model.SACPEntry toEscapedModel() {
 		return new SACPEntryWrapper(_sacpEntry.toEscapedModel());
 	}
 
@@ -653,7 +653,7 @@ public class SACPEntryWrapper implements SACPEntry, ModelWrapper<SACPEntry> {
 	}
 
 	@Override
-	public com.liferay.service.access.control.profile.model.SACPEntry toUnescapedModel() {
+	public com.liferay.service.access.policy.model.SACPEntry toUnescapedModel() {
 		return new SACPEntryWrapper(_sacpEntry.toUnescapedModel());
 	}
 

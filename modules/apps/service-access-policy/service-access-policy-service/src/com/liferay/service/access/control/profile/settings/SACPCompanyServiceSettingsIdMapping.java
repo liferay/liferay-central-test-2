@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.settings;
+package com.liferay.service.access.policy.settings;
 
 import com.liferay.portal.kernel.settings.definition.SettingsIdMapping;
-import com.liferay.service.access.control.profile.configuration.SACPConfiguration;
-import com.liferay.service.access.control.profile.constants.SACPConstants;
+import com.liferay.service.access.policy.configuration.SACPConfiguration;
+import com.liferay.service.access.policy.constants.SACPConstants;
 
 import org.osgi.service.component.annotations.Component;
 

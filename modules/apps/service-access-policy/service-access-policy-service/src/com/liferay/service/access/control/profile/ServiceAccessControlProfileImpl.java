@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile;
+package com.liferay.service.access.policy;
 
 import com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPolicy;
-import com.liferay.service.access.control.profile.model.SACPEntry;
+import com.liferay.service.access.policy.model.SACPEntry;
 
 import java.util.List;
 import java.util.Locale;

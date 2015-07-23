@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model.listener;
+package com.liferay.service.access.policy.model.listener;
 
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.SACPEntryLocalService;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.SACPEntryLocalService;
 
 import java.util.List;
 

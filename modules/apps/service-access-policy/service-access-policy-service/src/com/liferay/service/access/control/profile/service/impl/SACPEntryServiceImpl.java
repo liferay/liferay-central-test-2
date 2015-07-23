@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.impl;
+package com.liferay.service.access.policy.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -21,11 +21,11 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.service.access.control.profile.constants.SACPActionKeys;
-import com.liferay.service.access.control.profile.constants.SACPConstants;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.base.SACPEntryServiceBaseImpl;
-import com.liferay.service.access.control.profile.service.permission.SACPEntryPermission;
+import com.liferay.service.access.policy.constants.SACPActionKeys;
+import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.base.SACPEntryServiceBaseImpl;
+import com.liferay.service.access.policy.service.permission.SACPEntryPermission;
 
 import java.util.List;
 import java.util.Locale;

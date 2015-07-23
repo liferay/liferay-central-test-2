@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service;
+package com.liferay.service.access.policy.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -23,7 +23,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for SACPEntry. This utility wraps
- * {@link com.liferay.service.access.control.profile.service.impl.SACPEntryServiceImpl} and is the
+ * {@link com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
@@ -31,8 +31,8 @@ import org.osgi.util.tracker.ServiceTracker;
  *
  * @author Brian Wing Shun Chan
  * @see SACPEntryService
- * @see com.liferay.service.access.control.profile.service.base.SACPEntryServiceBaseImpl
- * @see com.liferay.service.access.control.profile.service.impl.SACPEntryServiceImpl
+ * @see com.liferay.service.access.policy.service.base.SACPEntryServiceBaseImpl
+ * @see com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl
  * @generated
  */
 @ProviderType
@@ -40,9 +40,9 @@ public class SACPEntryServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.service.access.control.profile.service.impl.SACPEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.service.access.policy.service.impl.SACPEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
 		java.lang.String allowedServiceSignatures, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -52,13 +52,13 @@ public class SACPEntryServiceUtil {
 			serviceContext);
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry)
+	public static com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
+		com.liferay.service.access.policy.model.SACPEntry sacpEntry)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteSACPEntry(sacpEntry);
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
 		long sacpEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteSACPEntry(sacpEntryId);
@@ -73,14 +73,14 @@ public class SACPEntryServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
-	public static java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+	public static java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
 		long companyId, int start, int end) {
 		return getService().getCompanySACPEntries(companyId, start, end);
 	}
 
-	public static java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+	public static java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.control.profile.model.SACPEntry> obc) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc) {
 		return getService().getCompanySACPEntries(companyId, start, end, obc);
 	}
 
@@ -88,13 +88,13 @@ public class SACPEntryServiceUtil {
 		return getService().getCompanySACPEntriesCount(companyId);
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getSACPEntry(companyId, name);
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
 		long sacpEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getSACPEntry(sacpEntryId);
@@ -109,7 +109,7 @@ public class SACPEntryServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
-	public static com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
+	public static com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
 		long sacpEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,

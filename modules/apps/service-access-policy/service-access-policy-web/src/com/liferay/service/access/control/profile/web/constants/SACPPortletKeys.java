@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.web.constants;
+package com.liferay.service.access.policy.web.constants;
 
 /**
  * @author Eudaldo Alonso
@@ -20,6 +20,6 @@ package com.liferay.service.access.control.profile.web.constants;
 public class SACPPortletKeys {
 
 	public static final String SACP =
-		"com_liferay_service_access_control_profile_web_portlet_SACPPortlet";
+		"com_liferay_service_access_policy_web_portlet_SACPPortlet";
 
 }

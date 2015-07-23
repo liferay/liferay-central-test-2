@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.web.application.list;
+package com.liferay.service.access.policy.web.application.list;
 
 import com.liferay.application.list.BaseControlPanelEntryPanelApp;
 import com.liferay.application.list.PanelApp;
 import com.liferay.application.list.constants.PanelCategoryKeys;
 import com.liferay.portal.service.PortletLocalService;
-import com.liferay.service.access.control.profile.web.constants.SACPPortletKeys;
+import com.liferay.service.access.policy.web.constants.SACPPortletKeys;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;

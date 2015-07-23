@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.impl;
+package com.liferay.service.access.policy.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -31,15 +31,15 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.spring.extender.service.ServiceReference;
-import com.liferay.service.access.control.profile.configuration.SACPConfiguration;
-import com.liferay.service.access.control.profile.constants.SACPConstants;
-import com.liferay.service.access.control.profile.exception.DuplicateSACPEntryNameException;
-import com.liferay.service.access.control.profile.exception.RequiredSACPEntryException;
-import com.liferay.service.access.control.profile.exception.SACPEntryNameException;
-import com.liferay.service.access.control.profile.exception.SACPEntryTitleException;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.model.SACPEntryConstants;
-import com.liferay.service.access.control.profile.service.base.SACPEntryLocalServiceBaseImpl;
+import com.liferay.service.access.policy.configuration.SACPConfiguration;
+import com.liferay.service.access.policy.constants.SACPConstants;
+import com.liferay.service.access.policy.exception.DuplicateSACPEntryNameException;
+import com.liferay.service.access.policy.exception.RequiredSACPEntryException;
+import com.liferay.service.access.policy.exception.SACPEntryNameException;
+import com.liferay.service.access.policy.exception.SACPEntryTitleException;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.model.SACPEntryConstants;
+import com.liferay.service.access.policy.service.base.SACPEntryLocalServiceBaseImpl;
 
 import java.util.HashMap;
 import java.util.List;

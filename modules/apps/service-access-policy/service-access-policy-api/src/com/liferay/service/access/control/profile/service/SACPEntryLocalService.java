@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service;
+package com.liferay.service.access.policy.service;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -33,8 +33,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  *
  * @author Brian Wing Shun Chan
  * @see SACPEntryLocalServiceUtil
- * @see com.liferay.service.access.control.profile.service.base.SACPEntryLocalServiceBaseImpl
- * @see com.liferay.service.access.control.profile.service.impl.SACPEntryLocalServiceImpl
+ * @see com.liferay.service.access.policy.service.base.SACPEntryLocalServiceBaseImpl
+ * @see com.liferay.service.access.policy.service.impl.SACPEntryLocalServiceImpl
  * @generated
  */
 @ProviderType
@@ -45,7 +45,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link SACPEntryLocalServiceUtil} to access the s a c p entry local service. Add custom service methods to {@link com.liferay.service.access.control.profile.service.impl.SACPEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link SACPEntryLocalServiceUtil} to access the s a c p entry local service. Add custom service methods to {@link com.liferay.service.access.policy.service.impl.SACPEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
@@ -55,10 +55,10 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @return the s a c p entry that was added
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
-	public com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry);
+	public com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
+		com.liferay.service.access.policy.model.SACPEntry sacpEntry);
 
-	public com.liferay.service.access.control.profile.model.SACPEntry addSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry addSACPEntry(
 		long userId, java.lang.String allowedServiceSignatures,
 		boolean defaultSACPEntry, java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
@@ -74,7 +74,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @param sacpEntryId the primary key for the new s a c p entry
 	* @return the new s a c p entry
 	*/
-	public com.liferay.service.access.control.profile.model.SACPEntry createSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry createSACPEntry(
 		long sacpEntryId);
 
 	/**
@@ -93,8 +93,8 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @throws PortalException
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry)
+	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
+		com.liferay.service.access.policy.model.SACPEntry sacpEntry)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
@@ -105,7 +105,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @throws PortalException if a s a c p entry with the primary key could not be found
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.liferay.service.access.control.profile.model.SACPEntry deleteSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry deleteSACPEntry(
 		long sacpEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -124,7 +124,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.control.profile.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -140,7 +140,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.control.profile.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -175,7 +175,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 		com.liferay.portal.kernel.dao.orm.Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.control.profile.model.SACPEntry fetchSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry fetchSACPEntry(
 		long sacpEntryId);
 
 	/**
@@ -186,7 +186,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @return the matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.control.profile.model.SACPEntry fetchSACPEntryByUuidAndCompanyId(
+	public com.liferay.service.access.policy.model.SACPEntry fetchSACPEntryByUuidAndCompanyId(
 		java.lang.String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -200,13 +200,13 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	public java.lang.String getBeanIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
 		long companyId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getCompanySACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getCompanySACPEntries(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.control.profile.model.SACPEntry> obc);
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.service.access.policy.model.SACPEntry> obc);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCompanySACPEntriesCount(long companyId);
@@ -225,7 +225,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* Returns a range of all the s a c p entries.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.control.profile.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of s a c p entries
@@ -233,7 +233,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @return the range of s a c p entries
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.service.access.control.profile.model.SACPEntry> getSACPEntries(
+	public java.util.List<com.liferay.service.access.policy.model.SACPEntry> getSACPEntries(
 		int start, int end);
 
 	/**
@@ -245,7 +245,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	public int getSACPEntriesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -257,7 +257,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @throws PortalException if a s a c p entry with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.control.profile.model.SACPEntry getSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry getSACPEntry(
 		long sacpEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -270,7 +270,7 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @throws PortalException if a matching s a c p entry could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.service.access.control.profile.model.SACPEntry getSACPEntryByUuidAndCompanyId(
+	public com.liferay.service.access.policy.model.SACPEntry getSACPEntryByUuidAndCompanyId(
 		java.lang.String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -288,10 +288,10 @@ public interface SACPEntryLocalService extends BaseLocalService,
 	* @return the s a c p entry that was updated
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
-	public com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
-		com.liferay.service.access.control.profile.model.SACPEntry sacpEntry);
+	public com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
+		com.liferay.service.access.policy.model.SACPEntry sacpEntry);
 
-	public com.liferay.service.access.control.profile.model.SACPEntry updateSACPEntry(
+	public com.liferay.service.access.policy.model.SACPEntry updateSACPEntry(
 		long sacpEntryId, java.lang.String allowedServiceSignatures,
 		java.lang.String name,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,

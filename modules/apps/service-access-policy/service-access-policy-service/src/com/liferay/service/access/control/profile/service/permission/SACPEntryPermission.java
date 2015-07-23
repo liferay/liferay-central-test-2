@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.service.permission;
+package com.liferay.service.access.policy.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.BaseModelPermissionChecker;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.service.access.control.profile.model.SACPEntry;
-import com.liferay.service.access.control.profile.service.SACPEntryLocalServiceUtil;
+import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.service.SACPEntryLocalServiceUtil;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"model.class.name=com.liferay.service.access.control.profile.model.SACPEntry"
+		"model.class.name=com.liferay.service.access.policy.model.SACPEntry"
 	}
 )
 public class SACPEntryPermission implements BaseModelPermissionChecker {

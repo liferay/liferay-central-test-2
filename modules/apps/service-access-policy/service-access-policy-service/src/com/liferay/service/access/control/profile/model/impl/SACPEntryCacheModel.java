@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.service.access.control.profile.model.impl;
+package com.liferay.service.access.policy.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
-import com.liferay.service.access.control.profile.model.SACPEntry;
+import com.liferay.service.access.policy.model.SACPEntry;
 
 import java.io.Externalizable;
 import java.io.IOException;
