@@ -15,7 +15,7 @@
 package com.liferay.service.access.policy;
 
 import com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPolicy;
-import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.model.SAPEntry;
 
 import java.util.List;
 import java.util.Locale;
@@ -23,27 +23,27 @@ import java.util.Locale;
 /**
  * @author Mika Koivisto
  */
-public class ServiceAccessControlProfileImpl implements ServiceAccessPolicy {
+public class ServiceAccessPolicyImpl implements ServiceAccessPolicy {
 
-	public ServiceAccessControlProfileImpl(SACPEntry sacpEntry) {
-		_sacpEntry = sacpEntry;
+	public ServiceAccessPolicyImpl(SAPEntry sapEntry) {
+		_sapEntry = sapEntry;
 	}
 
 	@Override
 	public List<String> getAllowedServiceSignaturesList() {
-		return _sacpEntry.getAllowedServiceSignaturesList();
+		return _sapEntry.getAllowedServiceSignaturesList();
 	}
 
 	@Override
 	public String getName() {
-		return _sacpEntry.getName();
+		return _sapEntry.getName();
 	}
 
 	@Override
 	public String getTitle(Locale locale) {
-		return _sacpEntry.getTitle(locale);
+		return _sapEntry.getTitle(locale);
 	}
 
-	private final SACPEntry _sacpEntry;
+	private final SAPEntry _sapEntry;
 
 }

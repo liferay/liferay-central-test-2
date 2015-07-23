@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.service.access.policy.model.SACPEntry;
-import com.liferay.service.access.policy.service.SACPEntryLocalService;
+import com.liferay.service.access.policy.model.SAPEntry;
+import com.liferay.service.access.policy.service.SAPEntryLocalService;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class PasswordPolicyModelListener
 		}
 
 		try {
-			_sacpEntryLocalService.checkDefaultSACPEntry(
+			_sapEntryLocalService.checkDefaultSAPEntry(
 				passwordPolicy.getCompanyId());
 		}
 		catch (PortalException pe) {
@@ -61,13 +61,13 @@ public class PasswordPolicyModelListener
 		}
 
 		try {
-			List<SACPEntry> sacpEntries =
-				_sacpEntryLocalService.getCompanySACPEntries(
+			List<SAPEntry> sapEntries =
+				_sapEntryLocalService.getCompanySAPEntries(
 					passwordPolicy.getCompanyId(), QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS);
 
-			for (SACPEntry sacpEntry : sacpEntries) {
-				_sacpEntryLocalService.deleteSACPEntry(sacpEntry);
+			for (SAPEntry sapEntry : sapEntries) {
+				_sapEntryLocalService.deleteSAPEntry(sapEntry);
 			}
 		}
 		catch (PortalException pe) {
@@ -76,12 +76,12 @@ public class PasswordPolicyModelListener
 	}
 
 	@Reference(unbind = "-")
-	protected void setSACPEntryLocalService(
-		SACPEntryLocalService sacpEntryLocalService) {
+	protected void setSAPEntryLocalService(
+		SAPEntryLocalService sapEntryLocalService) {
 
-		_sacpEntryLocalService = sacpEntryLocalService;
+		_sapEntryLocalService = sapEntryLocalService;
 	}
 
-	protected SACPEntryLocalService _sacpEntryLocalService;
+	protected SAPEntryLocalService _sapEntryLocalService;
 
 }

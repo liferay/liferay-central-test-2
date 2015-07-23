@@ -17,9 +17,9 @@ package com.liferay.service.access.policy.web.constants;
 /**
  * @author Eudaldo Alonso
  */
-public class SACPPortletKeys {
+public class SAPPortletKeys {
 
-	public static final String SACP =
-		"com_liferay_service_access_policy_web_portlet_SACPPortlet";
+	public static final String SAP =
+		"com_liferay_service_access_policy_web_portlet_SAPPortlet";
 
 }
