@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseService;
 
 /**
  * Provides the remote service interface for Portlet. Methods of this
@@ -67,5 +66,5 @@ public interface PortletService extends BaseService {
 
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

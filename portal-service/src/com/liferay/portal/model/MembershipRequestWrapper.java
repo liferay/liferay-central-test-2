@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -174,7 +173,7 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	* @return the create date of this membership request
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _membershipRequest.getCreateDate();
 	}
 
@@ -264,7 +263,7 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	* @return the reply date of this membership request
 	*/
 	@Override
-	public Date getReplyDate() {
+	public java.util.Date getReplyDate() {
 		return _membershipRequest.getReplyDate();
 	}
 
@@ -354,13 +353,12 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	* @param createDate the create date of this membership request
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_membershipRequest.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_membershipRequest.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -462,7 +460,7 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	* @param replyDate the reply date of this membership request
 	*/
 	@Override
-	public void setReplyDate(Date replyDate) {
+	public void setReplyDate(java.util.Date replyDate) {
 		_membershipRequest.setReplyDate(replyDate);
 	}
 
@@ -497,7 +495,7 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.MembershipRequest> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.MembershipRequest> toCacheModel() {
 		return _membershipRequest.toCacheModel();
 	}
 

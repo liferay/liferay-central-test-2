@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.model.SystemEventConstants;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for Organization. Methods of this
@@ -58,13 +56,13 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	public void addGroupOrganizations(long groupId,
 		java.util.List<com.liferay.portal.model.Organization> Organizations)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* @throws PortalException
 	*/
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds the organization to the database. Also notifies the appropriate model listeners.
@@ -99,7 +97,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	public com.liferay.portal.model.Organization addOrganization(long userId,
 		long parentOrganizationId, java.lang.String name, boolean site)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds an organization.
@@ -142,7 +140,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		java.lang.String type, boolean recursable, long regionId,
 		long countryId, long statusId, java.lang.String comments, boolean site,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds an organization.
@@ -178,7 +176,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		java.lang.String type, long regionId, long countryId, long statusId,
 		java.lang.String comments, boolean site,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds a resource for each type of permission available on the
@@ -190,7 +188,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	public void addOrganizationResources(long userId,
 		com.liferay.portal.model.Organization organization)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Assigns the password policy to the organizations, removing any other
@@ -243,7 +241,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	the primary key could not be found or if the organization's logo
 	could not be found
 	*/
-	public void deleteLogo(long organizationId) throws PortalException;
+	public void deleteLogo(long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the organization from the database. Also notifies the appropriate model listeners.
@@ -256,7 +255,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	@com.liferay.portal.kernel.systemevent.SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public com.liferay.portal.model.Organization deleteOrganization(
 		com.liferay.portal.model.Organization organization)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the organization with the primary key from the database. Also notifies the appropriate model listeners.
@@ -267,7 +266,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.Organization deleteOrganization(
-		long organizationId) throws PortalException;
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* @throws PortalException
@@ -275,7 +275,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void deleteUserOrganization(long userId,
 		com.liferay.portal.model.Organization organization);
@@ -420,7 +420,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getGroupUserOrganizations(
-		long groupId, long userId) throws PortalException;
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getNoAssetOrganizations();
@@ -436,7 +437,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganization(
-		long companyId, java.lang.String name) throws PortalException;
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the organization with the primary key.
@@ -447,7 +449,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganization(
-		long organizationId) throws PortalException;
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the organization with the matching UUID and company.
@@ -459,7 +462,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Organization getOrganizationByUuidAndCompanyId(
-		java.lang.String uuid, long companyId) throws PortalException;
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the primary key of the organization with the name.
@@ -521,7 +525,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
-		long[] organizationIds) throws PortalException;
+		long[] organizationIds)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns a range of all the organizations.
@@ -542,7 +547,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.Organization> obc)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the number of organizations.
@@ -574,12 +579,14 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getParentOrganizations(
-		long organizationId) throws PortalException;
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the suborganizations of the organization.
@@ -650,7 +657,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long[] getUserOrganizationIds(long userId,
-		boolean includeAdministrative) throws PortalException;
+		boolean includeAdministrative)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
@@ -678,7 +686,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId, boolean includeAdministrative) throws PortalException;
+		long userId, boolean includeAdministrative)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
@@ -774,7 +783,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserOrganization(long userId, long organizationId,
 		boolean inheritSuborganizations, boolean includeSpecifiedOrganization)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserOrganizations(long userId);
@@ -792,7 +801,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 	* @throws PortalException if an organization with the primary key could not
 	be found
 	*/
-	public void rebuildTree(long companyId) throws PortalException;
+	public void rebuildTree(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns an ordered range of all the organizations that match the
@@ -1144,7 +1154,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		long companyId, long parentOrganizationId, java.lang.String keywords,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.model.Organization> searchOrganizations(
@@ -1154,7 +1164,8 @@ public interface OrganizationLocalService extends BaseLocalService,
 		java.lang.String country,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort) throws PortalException;
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Sets the Spring bean ID for this bean.
@@ -1167,7 +1178,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	* @throws PortalException
 	*/
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void setUserOrganizations(long userId, long[] organizationIds);
 
@@ -1179,7 +1190,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	* @throws PortalException if a portal exception occurred
 	*/
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Removes the organizations from the password policy.
@@ -1203,7 +1214,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 	public void updateAsset(long userId,
 		com.liferay.portal.model.Organization organization,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the organization.
@@ -1241,7 +1252,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		long regionId, long countryId, long statusId,
 		java.lang.String comments, boolean site,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the organization.
@@ -1275,7 +1286,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		long countryId, long statusId, java.lang.String comments, boolean logo,
 		byte[] logoBytes, boolean site,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the organization.
@@ -1310,7 +1321,7 @@ public interface OrganizationLocalService extends BaseLocalService,
 		java.lang.String name, java.lang.String type, long regionId,
 		long countryId, long statusId, java.lang.String comments, boolean site,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the organization in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

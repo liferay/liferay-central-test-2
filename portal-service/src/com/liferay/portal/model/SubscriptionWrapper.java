@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -193,7 +192,7 @@ public class SubscriptionWrapper implements Subscription,
 	* @return the create date of this subscription
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _subscription.getCreateDate();
 	}
 
@@ -228,7 +227,7 @@ public class SubscriptionWrapper implements Subscription,
 	* @return the modified date of this subscription
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _subscription.getModifiedDate();
 	}
 
@@ -368,13 +367,12 @@ public class SubscriptionWrapper implements Subscription,
 	* @param createDate the create date of this subscription
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_subscription.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_subscription.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -416,7 +414,7 @@ public class SubscriptionWrapper implements Subscription,
 	* @param modifiedDate the modified date of this subscription
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_subscription.setModifiedDate(modifiedDate);
 	}
 
@@ -491,7 +489,7 @@ public class SubscriptionWrapper implements Subscription,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Subscription> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Subscription> toCacheModel() {
 		return _subscription.toCacheModel();
 	}
 

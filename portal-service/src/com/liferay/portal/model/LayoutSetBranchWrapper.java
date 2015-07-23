@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -252,7 +251,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	* @return the create date of this layout set branch
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _layoutSetBranch.getCreateDate();
 	}
 
@@ -368,7 +367,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	* @return the modified date of this layout set branch
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _layoutSetBranch.getModifiedDate();
 	}
 
@@ -614,7 +613,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	* @param createDate the create date of this layout set branch
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_layoutSetBranch.setCreateDate(createDate);
 	}
 
@@ -639,8 +638,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_layoutSetBranch.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -724,7 +722,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	* @param modifiedDate the modified date of this layout set branch
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_layoutSetBranch.setModifiedDate(modifiedDate);
 	}
 
@@ -855,7 +853,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.LayoutSetBranch> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.LayoutSetBranch> toCacheModel() {
 		return _layoutSetBranch.toCacheModel();
 	}
 

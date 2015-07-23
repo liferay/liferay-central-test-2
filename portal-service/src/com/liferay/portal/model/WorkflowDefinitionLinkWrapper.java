@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -213,7 +212,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	* @return the create date of this workflow definition link
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _workflowDefinitionLink.getCreateDate();
 	}
 
@@ -238,7 +237,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	* @return the modified date of this workflow definition link
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _workflowDefinitionLink.getModifiedDate();
 	}
 
@@ -408,13 +407,12 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	* @param createDate the create date of this workflow definition link
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_workflowDefinitionLink.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_workflowDefinitionLink.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -446,7 +444,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	* @param modifiedDate the modified date of this workflow definition link
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_workflowDefinitionLink.setModifiedDate(modifiedDate);
 	}
 
@@ -552,7 +550,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.WorkflowDefinitionLink> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.WorkflowDefinitionLink> toCacheModel() {
 		return _workflowDefinitionLink.toCacheModel();
 	}
 

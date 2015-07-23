@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -208,7 +207,7 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 	* @return the create date of this website
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _website.getCreateDate();
 	}
 
@@ -223,7 +222,7 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 	* @return the modified date of this website
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _website.getModifiedDate();
 	}
 
@@ -419,13 +418,12 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 	* @param createDate the create date of this website
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_website.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_website.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -447,7 +445,7 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 	* @param modifiedDate the modified date of this website
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_website.setModifiedDate(modifiedDate);
 	}
 
@@ -562,7 +560,7 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Website> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Website> toCacheModel() {
 		return _website.toCacheModel();
 	}
 

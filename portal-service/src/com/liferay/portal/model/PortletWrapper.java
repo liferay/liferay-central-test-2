@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -675,7 +674,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* @return init parameters of the portlet
 	*/
 	@Override
-	public Map<java.lang.String, java.lang.String> getInitParams() {
+	public java.util.Map<java.lang.String, java.lang.String> getInitParams() {
 		return _portlet.getInitParams();
 	}
 
@@ -924,7 +923,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* @return filters of the portlet
 	*/
 	@Override
-	public Map<java.lang.String, com.liferay.portal.model.PortletFilter> getPortletFilters() {
+	public java.util.Map<java.lang.String, com.liferay.portal.model.PortletFilter> getPortletFilters() {
 		return _portlet.getPortletFilters();
 	}
 
@@ -974,7 +973,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* @return portlet modes of the portlet
 	*/
 	@Override
-	public Map<java.lang.String, java.util.Set<java.lang.String>> getPortletModes() {
+	public java.util.Map<java.lang.String, java.util.Set<java.lang.String>> getPortletModes() {
 		return _portlet.getPortletModes();
 	}
 
@@ -1223,7 +1222,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* @return role mappers of the portlet
 	*/
 	@Override
-	public Map<java.lang.String, java.lang.String> getRoleMappers() {
+	public java.util.Map<java.lang.String, java.lang.String> getRoleMappers() {
 		return _portlet.getRoleMappers();
 	}
 
@@ -1680,7 +1679,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* @return window states of the portlet
 	*/
 	@Override
-	public Map<java.lang.String, java.util.Set<java.lang.String>> getWindowStates() {
+	public java.util.Map<java.lang.String, java.util.Set<java.lang.String>> getWindowStates() {
 		return _portlet.getWindowStates();
 	}
 
@@ -2437,8 +2436,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_portlet.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -2659,7 +2657,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	@Override
 	public void setInitParams(
-		Map<java.lang.String, java.lang.String> initParams) {
+		java.util.Map<java.lang.String, java.lang.String> initParams) {
 		_portlet.setInitParams(initParams);
 	}
 
@@ -2840,7 +2838,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	@Override
 	public void setPortletFilters(
-		Map<java.lang.String, com.liferay.portal.model.PortletFilter> portletFilters) {
+		java.util.Map<java.lang.String, com.liferay.portal.model.PortletFilter> portletFilters) {
 		_portlet.setPortletFilters(portletFilters);
 	}
 
@@ -2883,7 +2881,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	@Override
 	public void setPortletModes(
-		Map<java.lang.String, java.util.Set<java.lang.String>> portletModes) {
+		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> portletModes) {
 		_portlet.setPortletModes(portletModes);
 	}
 
@@ -3113,7 +3111,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	@Override
 	public void setRoleMappers(
-		Map<java.lang.String, java.lang.String> roleMappers) {
+		java.util.Map<java.lang.String, java.lang.String> roleMappers) {
 		_portlet.setRoleMappers(roleMappers);
 	}
 
@@ -3435,7 +3433,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	@Override
 	public void setWindowStates(
-		Map<java.lang.String, java.util.Set<java.lang.String>> windowStates) {
+		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> windowStates) {
 		_portlet.setWindowStates(windowStates);
 	}
 
@@ -3464,7 +3462,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Portlet> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Portlet> toCacheModel() {
 		return _portlet.toCacheModel();
 	}
 

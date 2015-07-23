@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -246,8 +245,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_region.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -324,7 +322,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Region> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Region> toCacheModel() {
 		return _region.toCacheModel();
 	}
 

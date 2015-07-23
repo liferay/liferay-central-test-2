@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for Portlet. Methods of this
@@ -62,9 +60,10 @@ public interface PortletLocalService extends BaseLocalService,
 	public void addPortletCategory(long companyId, java.lang.String categoryName);
 
 	public void checkPortlet(com.liferay.portal.model.Portlet portlet)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public void checkPortlets(long companyId) throws PortalException;
+	public void checkPortlets(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@com.liferay.portal.kernel.spring.aop.Skip
 	public void clearCache();
@@ -74,11 +73,11 @@ public interface PortletLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.cluster.Clusterable
 	@java.lang.Deprecated
-	@Transactional(enabled = false)
+	@com.liferay.portal.kernel.transaction.Transactional(enabled = false)
 	public void clearCompanyPortletsPool();
 
 	@com.liferay.portal.kernel.cluster.Clusterable
-	@Transactional(enabled = false)
+	@com.liferay.portal.kernel.transaction.Transactional(enabled = false)
 	public void clearPortletsMap();
 
 	/**
@@ -107,10 +106,10 @@ public interface PortletLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void deletePortlet(long companyId, java.lang.String portletId,
-		long plid) throws PortalException;
+		long plid) throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the portlet with the primary key from the database. Also notifies the appropriate model listeners.
@@ -121,7 +120,7 @@ public interface PortletLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.Portlet deletePortlet(long id)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the portlet from the database. Also notifies the appropriate model listeners.
@@ -134,20 +133,21 @@ public interface PortletLocalService extends BaseLocalService,
 		com.liferay.portal.model.Portlet portlet);
 
 	public void deletePortlets(long companyId, java.lang.String[] portletIds,
-		long plid) throws PortalException;
+		long plid) throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet,
-		java.lang.String[] categoryNames) throws PortalException;
+		java.lang.String[] categoryNames)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet,
 		java.lang.String[] categoryNames, boolean eagerDestroy)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@com.liferay.portal.kernel.spring.aop.Skip
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
@@ -253,7 +253,8 @@ public interface PortletLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the portlet with the primary key.
@@ -264,7 +265,7 @@ public interface PortletLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Portlet getPortlet(long id)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@com.liferay.portal.kernel.spring.aop.Skip
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -360,7 +361,7 @@ public interface PortletLocalService extends BaseLocalService,
 		long companyId);
 
 	@com.liferay.portal.kernel.cluster.Clusterable
-	@Transactional(enabled = false)
+	@com.liferay.portal.kernel.transaction.Transactional(enabled = false)
 	public void removeCompanyPortletsPool(long companyId);
 
 	/**

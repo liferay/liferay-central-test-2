@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -419,7 +418,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the create date of this layout
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _layout.getCreateDate();
 	}
 
@@ -537,7 +536,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the locales and localized descriptions of this layout
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _layout.getDescriptionMap();
 	}
 
@@ -573,7 +572,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the friendly URLs for all configured locales
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getFriendlyURLMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getFriendlyURLMap() {
 		return _layout.getFriendlyURLMap();
 	}
 
@@ -743,7 +742,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the locales and localized keywordses of this layout
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getKeywordsMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getKeywordsMap() {
 		return _layout.getKeywordsMap();
 	}
 
@@ -816,7 +815,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the modified date of this layout
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _layout.getModifiedDate();
 	}
 
@@ -903,7 +902,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the locales and localized names of this layout
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getNameMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
 		return _layout.getNameMap();
 	}
 
@@ -1070,7 +1069,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the locales and localized robotses of this layout
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getRobotsMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getRobotsMap() {
 		return _layout.getRobotsMap();
 	}
 
@@ -1204,7 +1203,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @return the locales and localized titles of this layout
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getTitleMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _layout.getTitleMap();
 	}
 
@@ -1643,7 +1642,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param createDate the create date of this layout
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_layout.setCreateDate(createDate);
 	}
 
@@ -1704,7 +1703,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	*/
 	@Override
 	public void setDescriptionMap(
-		Map<java.util.Locale, java.lang.String> descriptionMap) {
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_layout.setDescriptionMap(descriptionMap);
 	}
 
@@ -1716,14 +1715,13 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	*/
 	@Override
 	public void setDescriptionMap(
-		Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
 		_layout.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_layout.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -1825,7 +1823,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	*/
 	@Override
 	public void setKeywordsMap(
-		Map<java.util.Locale, java.lang.String> keywordsMap) {
+		java.util.Map<java.util.Locale, java.lang.String> keywordsMap) {
 		_layout.setKeywordsMap(keywordsMap);
 	}
 
@@ -1837,7 +1835,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	*/
 	@Override
 	public void setKeywordsMap(
-		Map<java.util.Locale, java.lang.String> keywordsMap,
+		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
 		java.util.Locale defaultLocale) {
 		_layout.setKeywordsMap(keywordsMap, defaultLocale);
 	}
@@ -1884,7 +1882,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param modifiedDate the modified date of this layout
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_layout.setModifiedDate(modifiedDate);
 	}
 
@@ -1943,7 +1941,8 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param nameMap the locales and localized names of this layout
 	*/
 	@Override
-	public void setNameMap(Map<java.util.Locale, java.lang.String> nameMap) {
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
 		_layout.setNameMap(nameMap);
 	}
 
@@ -1954,7 +1953,8 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param defaultLocale the default locale
 	*/
 	@Override
-	public void setNameMap(Map<java.util.Locale, java.lang.String> nameMap,
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Locale defaultLocale) {
 		_layout.setNameMap(nameMap, defaultLocale);
 	}
@@ -2064,7 +2064,8 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param robotsMap the locales and localized robotses of this layout
 	*/
 	@Override
-	public void setRobotsMap(Map<java.util.Locale, java.lang.String> robotsMap) {
+	public void setRobotsMap(
+		java.util.Map<java.util.Locale, java.lang.String> robotsMap) {
 		_layout.setRobotsMap(robotsMap);
 	}
 
@@ -2076,7 +2077,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	*/
 	@Override
 	public void setRobotsMap(
-		Map<java.util.Locale, java.lang.String> robotsMap,
+		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
 		java.util.Locale defaultLocale) {
 		_layout.setRobotsMap(robotsMap, defaultLocale);
 	}
@@ -2147,7 +2148,8 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param titleMap the locales and localized titles of this layout
 	*/
 	@Override
-	public void setTitleMap(Map<java.util.Locale, java.lang.String> titleMap) {
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_layout.setTitleMap(titleMap);
 	}
 
@@ -2158,7 +2160,8 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	* @param defaultLocale the default locale
 	*/
 	@Override
-	public void setTitleMap(Map<java.util.Locale, java.lang.String> titleMap,
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
 		_layout.setTitleMap(titleMap, defaultLocale);
 	}
@@ -2250,7 +2253,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Layout> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Layout> toCacheModel() {
 		return _layout.toCacheModel();
 	}
 

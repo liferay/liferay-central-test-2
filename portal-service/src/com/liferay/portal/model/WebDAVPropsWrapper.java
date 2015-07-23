@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -184,7 +183,7 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	* @return the create date of this web d a v props
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _webDAVProps.getCreateDate();
 	}
 
@@ -199,7 +198,7 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	* @return the modified date of this web d a v props
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _webDAVProps.getModifiedDate();
 	}
 
@@ -338,13 +337,12 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	* @param createDate the create date of this web d a v props
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_webDAVProps.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_webDAVProps.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -366,7 +364,7 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	* @param modifiedDate the modified date of this web d a v props
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_webDAVProps.setModifiedDate(modifiedDate);
 	}
 
@@ -426,7 +424,7 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.WebDAVProps> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.WebDAVProps> toCacheModel() {
 		return _webDAVProps.toCacheModel();
 	}
 

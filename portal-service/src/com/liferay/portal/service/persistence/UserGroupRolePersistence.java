@@ -17,7 +17,6 @@ package com.liferay.portal.service.persistence;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.model.UserGroupRole;
-import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * The persistence interface for the user group role service.
@@ -45,13 +44,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userId the user ID
 	* @return the matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByUserId(long userId);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByUserId(
+		long userId);
 
 	/**
 	* Returns a range of all the user group roles where userId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
@@ -59,14 +59,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param end the upper bound of the range of user group roles (not inclusive)
 	* @return the range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByUserId(long userId, int start,
-		int end);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByUserId(
+		long userId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the user group roles where userId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
@@ -75,9 +75,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByUserId(long userId, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the first user group role in the ordered set where userId = &#63;.
@@ -85,10 +85,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByUserId_First(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -98,8 +99,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByUserId_First(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the last user group role in the ordered set where userId = &#63;.
@@ -107,10 +109,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByUserId_Last(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -120,8 +123,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByUserId_Last(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the user group roles before and after the current user group role in the ordered set where userId = &#63;.
@@ -130,12 +134,12 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole[] findByUserId_PrevAndNext(
+	public com.liferay.portal.model.UserGroupRole[] findByUserId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -159,13 +163,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @return the matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByGroupId(long groupId);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByGroupId(
+		long groupId);
 
 	/**
 	* Returns a range of all the user group roles where groupId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
@@ -173,14 +178,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param end the upper bound of the range of user group roles (not inclusive)
 	* @return the range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByGroupId(long groupId, int start,
-		int end);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByGroupId(
+		long groupId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the user group roles where groupId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
@@ -189,9 +194,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByGroupId(long groupId, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the first user group role in the ordered set where groupId = &#63;.
@@ -199,10 +204,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByGroupId_First(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByGroupId_First(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -212,8 +218,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByGroupId_First(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByGroupId_First(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the last user group role in the ordered set where groupId = &#63;.
@@ -221,10 +228,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByGroupId_Last(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByGroupId_Last(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -234,8 +242,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByGroupId_Last(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByGroupId_Last(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the user group roles before and after the current user group role in the ordered set where groupId = &#63;.
@@ -244,12 +253,12 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole[] findByGroupId_PrevAndNext(
+	public com.liferay.portal.model.UserGroupRole[] findByGroupId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -273,13 +282,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @return the matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByRoleId(long roleId);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByRoleId(
+		long roleId);
 
 	/**
 	* Returns a range of all the user group roles where roleId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param roleId the role ID
@@ -287,14 +297,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param end the upper bound of the range of user group roles (not inclusive)
 	* @return the range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByRoleId(long roleId, int start,
-		int end);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByRoleId(
+		long roleId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the user group roles where roleId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param roleId the role ID
@@ -303,9 +313,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByRoleId(long roleId, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByRoleId(
+		long roleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the first user group role in the ordered set where roleId = &#63;.
@@ -313,10 +323,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByRoleId_First(long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByRoleId_First(
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -326,8 +337,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByRoleId_First(long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByRoleId_First(
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the last user group role in the ordered set where roleId = &#63;.
@@ -335,10 +347,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByRoleId_Last(long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByRoleId_Last(
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -348,8 +361,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByRoleId_Last(long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByRoleId_Last(
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the user group roles before and after the current user group role in the ordered set where roleId = &#63;.
@@ -358,12 +372,12 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole[] findByRoleId_PrevAndNext(
+	public com.liferay.portal.model.UserGroupRole[] findByRoleId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -388,13 +402,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @return the matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByU_G(long userId, long groupId);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByU_G(
+		long userId, long groupId);
 
 	/**
 	* Returns a range of all the user group roles where userId = &#63; and groupId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
@@ -403,14 +418,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param end the upper bound of the range of user group roles (not inclusive)
 	* @return the range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByU_G(long userId, long groupId,
-		int start, int end);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByU_G(
+		long userId, long groupId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the user group roles where userId = &#63; and groupId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
@@ -420,9 +435,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByU_G(long userId, long groupId,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByU_G(
+		long userId, long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the first user group role in the ordered set where userId = &#63; and groupId = &#63;.
@@ -431,10 +446,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByU_G_First(long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByU_G_First(long userId,
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -445,8 +461,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByU_G_First(long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByU_G_First(
+		long userId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the last user group role in the ordered set where userId = &#63; and groupId = &#63;.
@@ -455,10 +472,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByU_G_Last(long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByU_G_Last(long userId,
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -469,8 +487,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByU_G_Last(long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByU_G_Last(long userId,
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the user group roles before and after the current user group role in the ordered set where userId = &#63; and groupId = &#63;.
@@ -480,12 +499,12 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole[] findByU_G_PrevAndNext(
+	public com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -512,13 +531,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @return the matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByG_R(long groupId, long roleId);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByG_R(
+		long groupId, long roleId);
 
 	/**
 	* Returns a range of all the user group roles where groupId = &#63; and roleId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
@@ -527,14 +547,14 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param end the upper bound of the range of user group roles (not inclusive)
 	* @return the range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByG_R(long groupId, long roleId,
-		int start, int end);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByG_R(
+		long groupId, long roleId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the user group roles where groupId = &#63; and roleId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
@@ -544,9 +564,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	*/
-	public java.util.List<UserGroupRole> findByG_R(long groupId, long roleId,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findByG_R(
+		long groupId, long roleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the first user group role in the ordered set where groupId = &#63; and roleId = &#63;.
@@ -555,10 +575,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByG_R_First(long groupId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByG_R_First(
+		long groupId, long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -569,8 +590,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByG_R_First(long groupId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByG_R_First(
+		long groupId, long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the last user group role in the ordered set where groupId = &#63; and roleId = &#63;.
@@ -579,10 +601,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
-	* @throws NoSuchUserGroupRoleException if a matching user group role could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	*/
-	public UserGroupRole findByG_R_Last(long groupId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+	public com.liferay.portal.model.UserGroupRole findByG_R_Last(long groupId,
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -593,8 +616,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role, or <code>null</code> if a matching user group role could not be found
 	*/
-	public UserGroupRole fetchByG_R_Last(long groupId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public com.liferay.portal.model.UserGroupRole fetchByG_R_Last(
+		long groupId, long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Returns the user group roles before and after the current user group role in the ordered set where groupId = &#63; and roleId = &#63;.
@@ -604,12 +628,12 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole[] findByG_R_PrevAndNext(
+	public com.liferay.portal.model.UserGroupRole[] findByG_R_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long groupId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
 	/**
@@ -634,14 +658,16 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userGroupRole the user group role
 	*/
-	public void cacheResult(UserGroupRole userGroupRole);
+	public void cacheResult(
+		com.liferay.portal.model.UserGroupRole userGroupRole);
 
 	/**
 	* Caches the user group roles in the entity cache if it is enabled.
 	*
 	* @param userGroupRoles the user group roles
 	*/
-	public void cacheResult(java.util.List<UserGroupRole> userGroupRoles);
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles);
 
 	/**
 	* Creates a new user group role with the primary key. Does not add the user group role to the database.
@@ -649,7 +675,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userGroupRolePK the primary key for the new user group role
 	* @return the new user group role
 	*/
-	public UserGroupRole create(
+	public com.liferay.portal.model.UserGroupRole create(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK);
 
 	/**
@@ -657,22 +683,23 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userGroupRolePK the primary key of the user group role
 	* @return the user group role that was removed
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole remove(
+	public com.liferay.portal.model.UserGroupRole remove(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
-	public UserGroupRole updateImpl(UserGroupRole userGroupRole);
+	public com.liferay.portal.model.UserGroupRole updateImpl(
+		com.liferay.portal.model.UserGroupRole userGroupRole);
 
 	/**
-	* Returns the user group role with the primary key or throws a {@link NoSuchUserGroupRoleException} if it could not be found.
+	* Returns the user group role with the primary key or throws a {@link com.liferay.portal.NoSuchUserGroupRoleException} if it could not be found.
 	*
 	* @param userGroupRolePK the primary key of the user group role
 	* @return the user group role
-	* @throws NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole findByPrimaryKey(
+	public com.liferay.portal.model.UserGroupRole findByPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.NoSuchUserGroupRoleException;
 
@@ -682,11 +709,11 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userGroupRolePK the primary key of the user group role
 	* @return the user group role, or <code>null</code> if a user group role with the primary key could not be found
 	*/
-	public UserGroupRole fetchByPrimaryKey(
+	public com.liferay.portal.model.UserGroupRole fetchByPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK);
 
 	@Override
-	public java.util.Map<java.io.Serializable, UserGroupRole> fetchByPrimaryKeys(
+	public java.util.Map<java.io.Serializable, com.liferay.portal.model.UserGroupRole> fetchByPrimaryKeys(
 		java.util.Set<java.io.Serializable> primaryKeys);
 
 	/**
@@ -694,26 +721,27 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @return the user group roles
 	*/
-	public java.util.List<UserGroupRole> findAll();
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findAll();
 
 	/**
 	* Returns a range of all the user group roles.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of user group roles
 	* @param end the upper bound of the range of user group roles (not inclusive)
 	* @return the range of user group roles
 	*/
-	public java.util.List<UserGroupRole> findAll(int start, int end);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findAll(
+		int start, int end);
 
 	/**
 	* Returns an ordered range of all the user group roles.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portal.model.impl.UserGroupRoleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of user group roles
@@ -721,8 +749,9 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user group roles
 	*/
-	public java.util.List<UserGroupRole> findAll(int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<UserGroupRole> orderByComparator);
+	public java.util.List<com.liferay.portal.model.UserGroupRole> findAll(
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.model.UserGroupRole> orderByComparator);
 
 	/**
 	* Removes all the user group roles from the database.

@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for Image. Methods of this
@@ -85,7 +83,7 @@ public interface ImageLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.Image deleteImage(long imageId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* @throws PortalException
@@ -93,7 +91,7 @@ public interface ImageLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
@@ -185,7 +183,7 @@ public interface ImageLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Image getImage(long imageId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Image getImageOrDefault(long imageId);
@@ -223,10 +221,11 @@ public interface ImageLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Image moveImage(long imageId, byte[] bytes)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Sets the Spring bean ID for this bean.
@@ -246,19 +245,21 @@ public interface ImageLocalService extends BaseLocalService,
 		com.liferay.portal.model.Image image);
 
 	public com.liferay.portal.model.Image updateImage(long imageId, byte[] bytes)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
-		java.io.File file) throws PortalException;
+		java.io.File file)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
-		java.io.InputStream is) throws PortalException;
+		java.io.InputStream is)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.InputStream is, boolean cleanUpStream)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -215,7 +214,7 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 	* @return the create date of this phone
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _phone.getCreateDate();
 	}
 
@@ -240,7 +239,7 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 	* @return the modified date of this phone
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _phone.getModifiedDate();
 	}
 
@@ -436,13 +435,12 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 	* @param createDate the create date of this phone
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_phone.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_phone.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -474,7 +472,7 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 	* @param modifiedDate the modified date of this phone
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_phone.setModifiedDate(modifiedDate);
 	}
 
@@ -589,7 +587,7 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Phone> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Phone> toCacheModel() {
 		return _phone.toCacheModel();
 	}
 
