@@ -215,8 +215,7 @@ public class BreadcrumbUtil {
 		}
 
 		for (int i = 0; i < breadcrumbEntries.size() - 1; i++) {
-			BreadcrumbEntry portletBreadcrumbEntry =
-				breadcrumbEntries.get(i);
+			BreadcrumbEntry portletBreadcrumbEntry = breadcrumbEntries.get(i);
 
 			String url = portletBreadcrumbEntry.getURL();
 
