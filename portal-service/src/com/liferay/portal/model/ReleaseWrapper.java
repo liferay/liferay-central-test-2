@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -145,7 +144,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	* @return the build date of this release
 	*/
 	@Override
-	public Date getBuildDate() {
+	public java.util.Date getBuildDate() {
 		return _release.getBuildDate();
 	}
 
@@ -165,7 +164,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	* @return the create date of this release
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _release.getCreateDate();
 	}
 
@@ -180,7 +179,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	* @return the modified date of this release
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _release.getModifiedDate();
 	}
 
@@ -300,7 +299,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	* @param buildDate the build date of this release
 	*/
 	@Override
-	public void setBuildDate(Date buildDate) {
+	public void setBuildDate(java.util.Date buildDate) {
 		_release.setBuildDate(buildDate);
 	}
 
@@ -325,13 +324,12 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	* @param createDate the create date of this release
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_release.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_release.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -353,7 +351,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	* @param modifiedDate the modified date of this release
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_release.setModifiedDate(modifiedDate);
 	}
 
@@ -438,7 +436,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Release> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Release> toCacheModel() {
 		return _release.toCacheModel();
 	}
 

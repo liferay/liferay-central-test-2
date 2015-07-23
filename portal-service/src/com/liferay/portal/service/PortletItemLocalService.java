@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for PortletItem. Methods of this
@@ -60,7 +58,8 @@ public interface PortletItemLocalService extends BaseLocalService,
 
 	public com.liferay.portal.model.PortletItem addPortletItem(long userId,
 		long groupId, java.lang.String name, java.lang.String portletId,
-		java.lang.String className) throws PortalException;
+		java.lang.String className)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Creates a new portlet item with the primary key. Does not add the portlet item to the database.
@@ -77,7 +76,7 @@ public interface PortletItemLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the portlet item from the database. Also notifies the appropriate model listeners.
@@ -98,7 +97,8 @@ public interface PortletItemLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.PortletItem deletePortletItem(
-		long portletItemId) throws PortalException;
+		long portletItemId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
@@ -182,12 +182,14 @@ public interface PortletItemLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletItem getPortletItem(long groupId,
 		java.lang.String name, java.lang.String portletId,
-		java.lang.String className) throws PortalException;
+		java.lang.String className)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the portlet item with the primary key.
@@ -198,7 +200,8 @@ public interface PortletItemLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletItem getPortletItem(
-		long portletItemId) throws PortalException;
+		long portletItemId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
@@ -250,5 +253,6 @@ public interface PortletItemLocalService extends BaseLocalService,
 
 	public com.liferay.portal.model.PortletItem updatePortletItem(long userId,
 		long groupId, java.lang.String name, java.lang.String portletId,
-		java.lang.String className) throws PortalException;
+		java.lang.String className)
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

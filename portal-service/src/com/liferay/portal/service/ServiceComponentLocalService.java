@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for ServiceComponent. Methods of this
@@ -73,7 +71,7 @@ public interface ServiceComponentLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the service component from the database. Also notifies the appropriate model listeners.
@@ -94,7 +92,8 @@ public interface ServiceComponentLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.ServiceComponent deleteServiceComponent(
-		long serviceComponentId) throws PortalException;
+		long serviceComponentId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void destroyServiceComponent(
 		com.liferay.portal.service.configuration.ServiceComponentConfiguration serviceComponentConfiguration,
@@ -185,7 +184,8 @@ public interface ServiceComponentLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the service component with the primary key.
@@ -196,7 +196,8 @@ public interface ServiceComponentLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ServiceComponent getServiceComponent(
-		long serviceComponentId) throws PortalException;
+		long serviceComponentId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns a range of all the service components.
@@ -225,7 +226,7 @@ public interface ServiceComponentLocalService extends BaseLocalService,
 		com.liferay.portal.service.configuration.ServiceComponentConfiguration serviceComponentConfiguration,
 		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
 		long buildNumber, long buildDate, boolean buildAutoUpgrade)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Sets the Spring bean ID for this bean.

@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for UserIdMapper. Methods of this
@@ -73,7 +71,7 @@ public interface UserIdMapperLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the user ID mapper from the database. Also notifies the appropriate model listeners.
@@ -94,7 +92,8 @@ public interface UserIdMapperLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.UserIdMapper deleteUserIdMapper(
-		long userIdMapperId) throws PortalException;
+		long userIdMapperId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void deleteUserIdMappers(long userId);
 
@@ -180,11 +179,13 @@ public interface UserIdMapperLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(long userId,
-		java.lang.String type) throws PortalException;
+		java.lang.String type)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the user ID mapper with the primary key.
@@ -195,12 +196,13 @@ public interface UserIdMapperLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(
-		long userIdMapperId) throws PortalException;
+		long userIdMapperId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper getUserIdMapperByExternalUserId(
 		java.lang.String type, java.lang.String externalUserId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns a range of all the user ID mappers.

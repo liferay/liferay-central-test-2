@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -185,7 +184,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	* @return the create date of this ticket
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _ticket.getCreateDate();
 	}
 
@@ -200,7 +199,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	* @return the expiration date of this ticket
 	*/
 	@Override
-	public Date getExpirationDate() {
+	public java.util.Date getExpirationDate() {
 		return _ticket.getExpirationDate();
 	}
 
@@ -345,13 +344,12 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	* @param createDate the create date of this ticket
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_ticket.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_ticket.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -373,7 +371,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	* @param expirationDate the expiration date of this ticket
 	*/
 	@Override
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(java.util.Date expirationDate) {
 		_ticket.setExpirationDate(expirationDate);
 	}
 
@@ -448,7 +446,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Ticket> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Ticket> toCacheModel() {
 		return _ticket.toCacheModel();
 	}
 

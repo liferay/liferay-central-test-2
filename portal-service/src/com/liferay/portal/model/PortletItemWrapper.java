@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -183,7 +182,7 @@ public class PortletItemWrapper implements PortletItem,
 	* @return the create date of this portlet item
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _portletItem.getCreateDate();
 	}
 
@@ -208,7 +207,7 @@ public class PortletItemWrapper implements PortletItem,
 	* @return the modified date of this portlet item
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _portletItem.getModifiedDate();
 	}
 
@@ -358,13 +357,12 @@ public class PortletItemWrapper implements PortletItem,
 	* @param createDate the create date of this portlet item
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_portletItem.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_portletItem.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -396,7 +394,7 @@ public class PortletItemWrapper implements PortletItem,
 	* @param modifiedDate the modified date of this portlet item
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_portletItem.setModifiedDate(modifiedDate);
 	}
 
@@ -491,7 +489,7 @@ public class PortletItemWrapper implements PortletItem,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.PortletItem> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.PortletItem> toCacheModel() {
 		return _portletItem.toCacheModel();
 	}
 

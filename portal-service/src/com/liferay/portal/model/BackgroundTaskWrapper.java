@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import java.io.Serializable;
 
@@ -258,7 +257,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @return the completion date of this background task
 	*/
 	@Override
-	public Date getCompletionDate() {
+	public java.util.Date getCompletionDate() {
 		return _backgroundTask.getCompletionDate();
 	}
 
@@ -268,7 +267,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @return the create date of this background task
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _backgroundTask.getCreateDate();
 	}
 
@@ -293,7 +292,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @return the modified date of this background task
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _backgroundTask.getModifiedDate();
 	}
 
@@ -328,7 +327,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	}
 
 	@Override
-	public Serializable getPrimaryKeyObj() {
+	public java.io.Serializable getPrimaryKeyObj() {
 		return _backgroundTask.getPrimaryKeyObj();
 	}
 
@@ -373,7 +372,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @return the task context map of this background task
 	*/
 	@Override
-	public Map<java.lang.String, Serializable> getTaskContextMap() {
+	public java.util.Map<java.lang.String, java.io.Serializable> getTaskContextMap() {
 		return _backgroundTask.getTaskContextMap();
 	}
 
@@ -498,7 +497,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @param completionDate the completion date of this background task
 	*/
 	@Override
-	public void setCompletionDate(Date completionDate) {
+	public void setCompletionDate(java.util.Date completionDate) {
 		_backgroundTask.setCompletionDate(completionDate);
 	}
 
@@ -508,13 +507,12 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @param createDate the create date of this background task
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_backgroundTask.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_backgroundTask.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -546,7 +544,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	* @param modifiedDate the modified date of this background task
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_backgroundTask.setModifiedDate(modifiedDate);
 	}
 
@@ -586,7 +584,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	}
 
 	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_backgroundTask.setPrimaryKeyObj(primaryKeyObj);
 	}
 
@@ -627,7 +625,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	*/
 	@Override
 	public void setTaskContextMap(
-		Map<java.lang.String, Serializable> taskContextMap) {
+		java.util.Map<java.lang.String, java.io.Serializable> taskContextMap) {
 		_backgroundTask.setTaskContextMap(taskContextMap);
 	}
 
@@ -672,7 +670,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.BackgroundTask> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.BackgroundTask> toCacheModel() {
 		return _backgroundTask.toCacheModel();
 	}
 

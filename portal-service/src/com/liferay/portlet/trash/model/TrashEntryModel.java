@@ -23,7 +23,6 @@ import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.trash.model.TrashEntry;
 
 import java.io.Serializable;
 
@@ -285,19 +284,19 @@ public interface TrashEntryModel extends AttachedModel, BaseModel<TrashEntry> {
 	public Object clone();
 
 	@Override
-	public int compareTo(TrashEntry trashEntry);
+	public int compareTo(com.liferay.portlet.trash.model.TrashEntry trashEntry);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<TrashEntry> toCacheModel();
+	public CacheModel<com.liferay.portlet.trash.model.TrashEntry> toCacheModel();
 
 	@Override
-	public TrashEntry toEscapedModel();
+	public com.liferay.portlet.trash.model.TrashEntry toEscapedModel();
 
 	@Override
-	public TrashEntry toUnescapedModel();
+	public com.liferay.portlet.trash.model.TrashEntry toUnescapedModel();
 
 	@Override
 	public String toString();

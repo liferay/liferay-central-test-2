@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseService;
 
 /**
  * Provides the remote service interface for Permission. Methods of this
@@ -58,9 +57,10 @@ public interface PermissionService extends BaseService {
 	service, if a group with the primary key could not be found or if
 	the permission information was invalid
 	*/
-	@JSONWebService(mode = JSONWebServiceMode.IGNORE)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(mode = JSONWebServiceMode.IGNORE)
 	public void checkPermission(long groupId, java.lang.String name,
-		long primKey) throws PortalException;
+		long primKey)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Checks to see if the group has permission to the service.
@@ -73,7 +73,8 @@ public interface PermissionService extends BaseService {
 	the permission information was invalid
 	*/
 	public void checkPermission(long groupId, java.lang.String name,
-		java.lang.String primKey) throws PortalException;
+		java.lang.String primKey)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the Spring bean ID for this bean.

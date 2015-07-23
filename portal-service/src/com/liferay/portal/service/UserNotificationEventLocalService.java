@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for UserNotificationEvent. Methods of this
@@ -50,12 +48,12 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	public com.liferay.portal.model.UserNotificationEvent addUserNotificationEvent(
 		long userId, boolean actionRequired,
 		com.liferay.portal.kernel.notifications.NotificationEvent notificationEvent)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.UserNotificationEvent addUserNotificationEvent(
 		long userId,
 		com.liferay.portal.kernel.notifications.NotificationEvent notificationEvent)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* @deprecated As of 7.0.0 {@link #addUserNotificationEvent(long, String,
@@ -66,20 +64,20 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 		long userId, java.lang.String type, long timestamp, long deliverBy,
 		java.lang.String payload, boolean archived,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.UserNotificationEvent addUserNotificationEvent(
 		long userId, java.lang.String type, long timestamp, int deliveryType,
 		long deliverBy, java.lang.String payload, boolean actionRequired,
 		boolean archived,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.UserNotificationEvent addUserNotificationEvent(
 		long userId, java.lang.String type, long timestamp, int deliveryType,
 		long deliverBy, java.lang.String payload, boolean archived,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds the user notification event to the database. Also notifies the appropriate model listeners.
@@ -94,7 +92,7 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.UserNotificationEvent> addUserNotificationEvents(
 		long userId,
 		java.util.Collection<com.liferay.portal.kernel.notifications.NotificationEvent> notificationEvents)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Creates a new user notification event with the primary key. Does not add the user notification event to the database.
@@ -111,7 +109,7 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the user notification event from the database. Also notifies the appropriate model listeners.
@@ -132,7 +130,8 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.UserNotificationEvent deleteUserNotificationEvent(
-		long userNotificationEventId) throws PortalException;
+		long userNotificationEventId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void deleteUserNotificationEvent(java.lang.String uuid,
 		long companyId);
@@ -333,7 +332,8 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the user notification event with the primary key.
@@ -344,7 +344,8 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserNotificationEvent getUserNotificationEvent(
-		long userNotificationEventId) throws PortalException;
+		long userNotificationEventId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the user notification event with the matching UUID and company.
@@ -356,7 +357,8 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserNotificationEvent getUserNotificationEventByUuidAndCompanyId(
-		java.lang.String uuid, long companyId) throws PortalException;
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns a range of all the user notification events.
@@ -433,12 +435,12 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 		long userId, java.lang.String portletId, int deliveryType,
 		boolean actionRequired,
 		com.liferay.portal.kernel.json.JSONObject notificationEventJSONObject)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.UserNotificationEvent sendUserNotificationEvents(
 		long userId, java.lang.String portletId, int deliveryType,
 		com.liferay.portal.kernel.json.JSONObject notificationEventJSONObject)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Sets the Spring bean ID for this bean.

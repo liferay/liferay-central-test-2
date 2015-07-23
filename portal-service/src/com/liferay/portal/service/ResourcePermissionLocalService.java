@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * Provides the local service interface for ResourcePermission. Methods of this
@@ -88,7 +86,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	public void addResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
-		java.lang.String actionId) throws PortalException;
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Adds the resource permission to the database. Also notifies the appropriate model listeners.
@@ -135,7 +134,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes the resource permission from the database. Also notifies the appropriate model listeners.
@@ -156,7 +155,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.portal.model.ResourcePermission deleteResourcePermission(
-		long resourcePermissionId) throws PortalException;
+		long resourcePermissionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes all resource permissions at the scope to resources of the type.
@@ -182,7 +182,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	public void deleteResourcePermissions(long companyId,
 		java.lang.String name, int scope, long primKey)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Deletes all resource permissions at the scope to resources of the type.
@@ -208,7 +208,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	public void deleteResourcePermissions(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
@@ -314,7 +314,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey, long roleId,
 		java.util.Collection<java.lang.String> actionIds)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* @deprecated As of 7.0.0, replaced by {@link
@@ -338,7 +338,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj) throws PortalException;
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the resource permission for the role at the scope to perform the
@@ -357,7 +358,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourcePermission getResourcePermission(
 		long companyId, java.lang.String name, int scope,
-		java.lang.String primKey, long roleId) throws PortalException;
+		java.lang.String primKey, long roleId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the resource permission with the primary key.
@@ -368,7 +370,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourcePermission getResourcePermission(
-		long resourcePermissionId) throws PortalException;
+		long resourcePermissionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns all the resource permissions at the scope of the type.
@@ -475,7 +478,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portal.model.Role> getRoles(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey, java.lang.String actionId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns all the resource permissions where scope = any &#63;.
@@ -538,7 +541,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
-		java.lang.String actionId) throws PortalException;
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns <code>true</code> if the roles have permission at the scope to
@@ -566,7 +570,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long[] roleIds,
-		java.lang.String actionId) throws PortalException;
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns <code>true</code> if the roles have permission at the scope to
@@ -591,7 +596,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasResourcePermission(
 		java.util.List<com.liferay.portal.model.Resource> resources,
-		long[] roleIds, java.lang.String actionId) throws PortalException;
+		long[] roleIds, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* @deprecated As of 7.0.0, replaced by {@link #getRoles(long, String, int,
@@ -601,7 +607,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean[] hasResourcePermissions(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
-		long[] roleIds, java.lang.String actionId) throws PortalException;
+		long[] roleIds, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns <code>true</code> if the role has permission at the scope to
@@ -627,7 +634,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasScopeResourcePermission(long companyId,
 		java.lang.String name, int scope, long roleId, java.lang.String actionId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Reassigns all the resource permissions from the source role to the
@@ -638,7 +645,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	* @throws PortalException if a role with the primary key could not be found
 	*/
 	public void mergePermissions(long fromRoleId, long toRoleId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Grants the role default permissions to all the resources of the type and
@@ -652,7 +659,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	key could not be found
 	*/
 	public void reassignPermissions(long resourcePermissionId, long toRoleId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Revokes permission at the scope from the role to perform the action on
@@ -677,7 +684,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	public void removeResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
-		java.lang.String actionId) throws PortalException;
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Revokes all permissions at the scope from the role to perform the action
@@ -696,7 +704,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	public void removeResourcePermissions(long companyId,
 		java.lang.String name, int scope, long roleId, java.lang.String actionId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Sets the Spring bean ID for this bean.
@@ -737,7 +745,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	public void setOwnerResourcePermissions(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		long roleId, long ownerId, java.lang.String[] actionIds)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the role's permissions at the scope, setting the actions that can
@@ -767,7 +775,8 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	*/
 	public void setResourcePermissions(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
-		java.lang.String[] actionIds) throws PortalException;
+		java.lang.String[] actionIds)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the role's permissions at the scope, setting the actions that can
@@ -797,7 +806,7 @@ public interface ResourcePermissionLocalService extends BaseLocalService,
 	public void setResourcePermissions(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey,
 		java.util.Map<java.lang.Long, java.lang.String[]> roleIdsToActionIds)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Updates the resource permission in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseService;
 
 /**
  * Provides the remote service interface for EmailAddress. Methods of this
@@ -55,16 +54,17 @@ public interface EmailAddressService extends BaseService {
 	@java.lang.Deprecated
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, long classPK, java.lang.String address,
-		long typeId, boolean primary) throws PortalException;
+		long typeId, boolean primary)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, long classPK, java.lang.String address,
 		long typeId, boolean primary,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public void deleteEmailAddress(long emailAddressId)
-		throws PortalException;
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the email address with the primary key.
@@ -77,7 +77,8 @@ public interface EmailAddressService extends BaseService {
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.EmailAddress fetchEmailAddress(
-		long emailAddressId) throws PortalException;
+		long emailAddressId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Returns the Spring bean ID for this bean.
@@ -88,11 +89,13 @@ public interface EmailAddressService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
-		long emailAddressId) throws PortalException;
+		long emailAddressId)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
-		java.lang.String className, long classPK) throws PortalException;
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException;
 
 	/**
 	* Sets the Spring bean ID for this bean.
@@ -103,5 +106,6 @@ public interface EmailAddressService extends BaseService {
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
 		long emailAddressId, java.lang.String address, long typeId,
-		boolean primary) throws PortalException;
+		boolean primary)
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

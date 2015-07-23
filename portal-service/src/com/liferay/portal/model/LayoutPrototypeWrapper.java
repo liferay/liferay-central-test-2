@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -188,7 +187,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @return the create date of this layout prototype
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _layoutPrototype.getCreateDate();
 	}
 
@@ -271,7 +270,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @return the locales and localized descriptions of this layout prototype
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _layoutPrototype.getDescriptionMap();
 	}
 
@@ -314,7 +313,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @return the modified date of this layout prototype
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _layoutPrototype.getModifiedDate();
 	}
 
@@ -401,7 +400,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @return the locales and localized names of this layout prototype
 	*/
 	@Override
-	public Map<java.util.Locale, java.lang.String> getNameMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
 		return _layoutPrototype.getNameMap();
 	}
 
@@ -554,7 +553,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @param createDate the create date of this layout prototype
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_layoutPrototype.setCreateDate(createDate);
 	}
 
@@ -605,7 +604,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	*/
 	@Override
 	public void setDescriptionMap(
-		Map<java.util.Locale, java.lang.String> descriptionMap) {
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_layoutPrototype.setDescriptionMap(descriptionMap);
 	}
 
@@ -617,14 +616,13 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	*/
 	@Override
 	public void setDescriptionMap(
-		Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
 		_layoutPrototype.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_layoutPrototype.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -656,7 +654,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @param modifiedDate the modified date of this layout prototype
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_layoutPrototype.setModifiedDate(modifiedDate);
 	}
 
@@ -715,7 +713,8 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @param nameMap the locales and localized names of this layout prototype
 	*/
 	@Override
-	public void setNameMap(Map<java.util.Locale, java.lang.String> nameMap) {
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
 		_layoutPrototype.setNameMap(nameMap);
 	}
 
@@ -726,7 +725,8 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	* @param defaultLocale the default locale
 	*/
 	@Override
-	public void setNameMap(Map<java.util.Locale, java.lang.String> nameMap,
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Locale defaultLocale) {
 		_layoutPrototype.setNameMap(nameMap, defaultLocale);
 	}
@@ -802,7 +802,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.LayoutPrototype> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.LayoutPrototype> toCacheModel() {
 		return _layoutPrototype.toCacheModel();
 	}
 

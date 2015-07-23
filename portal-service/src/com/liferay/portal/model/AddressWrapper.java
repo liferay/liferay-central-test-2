@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -292,7 +291,7 @@ public class AddressWrapper implements Address, ModelWrapper<Address> {
 	* @return the create date of this address
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _address.getCreateDate();
 	}
 
@@ -317,7 +316,7 @@ public class AddressWrapper implements Address, ModelWrapper<Address> {
 	* @return the modified date of this address
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _address.getModifiedDate();
 	}
 
@@ -587,13 +586,12 @@ public class AddressWrapper implements Address, ModelWrapper<Address> {
 	* @param createDate the create date of this address
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_address.setCreateDate(createDate);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_address.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -625,7 +623,7 @@ public class AddressWrapper implements Address, ModelWrapper<Address> {
 	* @param modifiedDate the modified date of this address
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_address.setModifiedDate(modifiedDate);
 	}
 
@@ -770,7 +768,7 @@ public class AddressWrapper implements Address, ModelWrapper<Address> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Address> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Address> toCacheModel() {
 		return _address.toCacheModel();
 	}
 

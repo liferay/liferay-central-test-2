@@ -17,7 +17,6 @@ package com.liferay.portal.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelWrapper;
 
 import com.liferay.portlet.exportimport.lar.StagedModelType;
 
@@ -164,7 +163,7 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 	* @return the create date of this team
 	*/
 	@Override
-	public Date getCreateDate() {
+	public java.util.Date getCreateDate() {
 		return _team.getCreateDate();
 	}
 
@@ -199,7 +198,7 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 	* @return the modified date of this team
 	*/
 	@Override
-	public Date getModifiedDate() {
+	public java.util.Date getModifiedDate() {
 		return _team.getModifiedDate();
 	}
 
@@ -340,7 +339,7 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 	* @param createDate the create date of this team
 	*/
 	@Override
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(java.util.Date createDate) {
 		_team.setCreateDate(createDate);
 	}
 
@@ -355,8 +354,7 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.model.BaseModel<?> baseModel) {
+	public void setExpandoBridgeAttributes(BaseModel<?> baseModel) {
 		_team.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -388,7 +386,7 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 	* @param modifiedDate the modified date of this team
 	*/
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(java.util.Date modifiedDate) {
 		_team.setModifiedDate(modifiedDate);
 	}
 
@@ -483,7 +481,7 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Team> toCacheModel() {
+	public CacheModel<com.liferay.portal.model.Team> toCacheModel() {
 		return _team.toCacheModel();
 	}
 
