@@ -1,13 +1,13 @@
 buildService {
-	apiDirName = "../service-access-control-profile-api/src"
+	apiDirName = "../service-access-policy-api/src"
 	autoNamespaceTables = false
-	testDirName = "../service-access-control-profile-test/test/integration"
+	testDirName = "../service-access-policy-test/test/integration"
 }
 
 dependencies {
 	compile group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "1.0.2"
 	compile group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
-	compile project(":apps:service-access-control-profile:service-access-control-profile-api")
+	compile project(":apps:service-access-policy:service-access-policy-api")
 }
 
 liferay {
