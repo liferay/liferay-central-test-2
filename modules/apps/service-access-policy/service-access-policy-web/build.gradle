@@ -1,7 +1,7 @@
 dependencies {
 	compile group: "org.osgi", name: "org.osgi.compendium", version: "5.0.0"
 	compile project(":apps:application-list:application-list-api")
-	compile project(":apps:service-access-control-profile:service-access-control-profile-service")
+	compile project(":apps:service-access-policy:service-access-policy-service")
 }
 
 liferay {
