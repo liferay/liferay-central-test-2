@@ -96,6 +96,7 @@ public class SACPEntryLocalServiceImpl extends SACPEntryLocalServiceBaseImpl {
 		return sacpEntry;
 	}
 
+	@Override
 	public void checkDefaultSACPEntry(long companyId) throws PortalException {
 		SACPConfiguration sacpConfiguration = settingsFactory.getSettings(
 			SACPConfiguration.class,
