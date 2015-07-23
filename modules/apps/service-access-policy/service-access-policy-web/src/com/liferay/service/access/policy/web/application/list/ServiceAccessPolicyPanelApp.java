@@ -34,8 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = PanelApp.class
 )
-public class ServiceAccessPolicyPanelApp
-	extends BaseControlPanelEntryPanelApp {
+public class ServiceAccessPolicyPanelApp extends BaseControlPanelEntryPanelApp {
 
 	@Override
 	public String getParentCategoryKey() {

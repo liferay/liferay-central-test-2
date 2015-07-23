@@ -66,9 +66,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 
 		validate(name, titleMap);
 
-		if (sapEntryPersistence.fetchByC_N(user.getCompanyId(), name) !=
-				null) {
-
+		if (sapEntryPersistence.fetchByC_N(user.getCompanyId(), name) != null) {
 			throw new DuplicateSAPEntryNameException();
 		}
 
@@ -160,16 +158,13 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 
 	@Override
 	public SAPEntry deleteSAPEntry(long sapEntryId) throws PortalException {
-		SAPEntry sapEntry = sapEntryPersistence.findByPrimaryKey(
-			sapEntryId);
+		SAPEntry sapEntry = sapEntryPersistence.findByPrimaryKey(sapEntryId);
 
 		return deleteSAPEntry(sapEntry);
 	}
 
 	@Override
-	public SAPEntry deleteSAPEntry(SAPEntry sapEntry)
-		throws PortalException {
-
+	public SAPEntry deleteSAPEntry(SAPEntry sapEntry) throws PortalException {
 		if (sapEntry.isDefaultSAPEntry() &&
 			!CompanyThreadLocal.isDeleteInProcess()) {
 
@@ -217,8 +212,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
 
-		SAPEntry sapEntry = sapEntryPersistence.findByPrimaryKey(
-			sapEntryId);
+		SAPEntry sapEntry = sapEntryPersistence.findByPrimaryKey(sapEntryId);
 
 		SAPEntry existingSAPEntry = sapEntryPersistence.fetchByC_N(
 			sapEntry.getCompanyId(), name);

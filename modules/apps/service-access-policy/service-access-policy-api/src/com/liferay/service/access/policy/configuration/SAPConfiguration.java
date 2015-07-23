@@ -37,9 +37,7 @@ public interface SAPConfiguration {
 	@Meta.AD(deflt = "", required = false)
 	public String defaultApplicationSAPEntryServiceSignatures();
 
-	@Meta.AD(
-		deflt = "Default Service Access Policy for User", required = false
-	)
+	@Meta.AD(deflt = "Default Service Access Policy for User", required = false)
 	public String defaultUserSAPEntryDescription();
 
 	@Meta.AD(deflt = "DEFAULT_USER", required = false)

@@ -80,8 +80,7 @@ public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 				serviceAccessPolicyNames = new ArrayList<>();
 
 				ServiceAccessPolicyThreadLocal.
-					setActiveServiceAccessPolicyNames(
-						serviceAccessPolicyNames);
+					setActiveServiceAccessPolicyNames(serviceAccessPolicyNames);
 			}
 
 			boolean passwordBasedAuthentication = false;

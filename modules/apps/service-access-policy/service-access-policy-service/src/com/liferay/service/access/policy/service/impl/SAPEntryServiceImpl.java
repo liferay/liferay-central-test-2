@@ -61,9 +61,7 @@ public class SAPEntryServiceImpl extends SAPEntryServiceBaseImpl {
 	}
 
 	@Override
-	public SAPEntry deleteSAPEntry(SAPEntry sapEntry)
-		throws PortalException {
-
+	public SAPEntry deleteSAPEntry(SAPEntry sapEntry) throws PortalException {
 		SAPEntryPermission.check(
 			getPermissionChecker(), sapEntry, ActionKeys.DELETE);
 
@@ -74,8 +72,7 @@ public class SAPEntryServiceImpl extends SAPEntryServiceBaseImpl {
 	public List<SAPEntry> getCompanySAPEntries(
 		long companyId, int start, int end) {
 
-		return sapEntryPersistence.filterFindByCompanyId(
-			companyId, start, end);
+		return sapEntryPersistence.filterFindByCompanyId(companyId, start, end);
 	}
 
 	@Override
