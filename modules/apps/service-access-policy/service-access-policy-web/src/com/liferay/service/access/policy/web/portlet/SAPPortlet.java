@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.service.access.policy.service.SACPEntryService;
+import com.liferay.service.access.policy.service.SAPEntryService;
 
 import java.util.Locale;
 import java.util.Map;
@@ -38,14 +38,14 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"com.liferay.portlet.control-panel-entry-category=configuration",
 		"com.liferay.portlet.control-panel-entry-weight=11",
-		"com.liferay.portlet.css-class-wrapper=service-access-control-profile-portlet",
+		"com.liferay.portlet.css-class-wrapper=service-access-policy-portlet",
 		"com.liferay.portlet.display-category=category.hidden",
 		"com.liferay.portlet.instanceable=false",
-		"javax.portlet.display-name=Service Access Control Profile",
+		"javax.portlet.display-name=Service Access Policy",
 		"javax.portlet.expiration-cache=0",
-		"javax.portlet.info.keywords=Service Access Control Profile",
-		"javax.portlet.info.short-title=Service Access Control Profile",
-		"javax.portlet.info.title=Service Access Control Profile",
+		"javax.portlet.info.keywords=Service Access Policy",
+		"javax.portlet.info.short-title=Service Access Policy",
+		"javax.portlet.info.title=Service Access Policy",
 		"javax.portlet.init-param.clear-request-parameters=true",
 		"javax.portlet.init-param.copy-request-parameters=true",
 		"javax.portlet.init-param.view-template=/view.jsp",
@@ -55,22 +55,22 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = Portlet.class
 )
-public class SACPPortlet extends MVCPortlet {
+public class SAPPortlet extends MVCPortlet {
 
-	public void deleteSACPEntry(
+	public void deleteSAPEntry(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long sacpEntryId = ParamUtil.getLong(actionRequest, "sacpEntryId");
+		long sapEntryId = ParamUtil.getLong(actionRequest, "sapEntryId");
 
-		_sacpEntryService.deleteSACPEntry(sacpEntryId);
+		_sapEntryService.deleteSAPEntry(sapEntryId);
 	}
 
-	public void updateSACPEntry(
+	public void updateSAPEntry(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long sacpEntryId = ParamUtil.getLong(actionRequest, "sacpEntryId");
+		long sapEntryId = ParamUtil.getLong(actionRequest, "sapEntryId");
 
 		String allowedServiceSignatures = ParamUtil.getString(
 			actionRequest, "allowedServiceSignatures");
@@ -81,22 +81,22 @@ public class SACPPortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		if (sacpEntryId > 0) {
-			_sacpEntryService.updateSACPEntry(
-				sacpEntryId, allowedServiceSignatures, name, titleMap,
+		if (sapEntryId > 0) {
+			_sapEntryService.updateSAPEntry(
+				sapEntryId, allowedServiceSignatures, name, titleMap,
 				serviceContext);
 		}
 		else {
-			_sacpEntryService.addSACPEntry(
+			_sapEntryService.addSAPEntry(
 				allowedServiceSignatures, name, titleMap, serviceContext);
 		}
 	}
 
 	@Reference(unbind = "-")
-	protected void setSACPEntryService(SACPEntryService sacpEntryService) {
-		_sacpEntryService = sacpEntryService;
+	protected void setSAPEntryService(SAPEntryService sapEntryService) {
+		_sapEntryService = sapEntryService;
 	}
 
-	private SACPEntryService _sacpEntryService;
+	private SAPEntryService _sapEntryService;
 
 }

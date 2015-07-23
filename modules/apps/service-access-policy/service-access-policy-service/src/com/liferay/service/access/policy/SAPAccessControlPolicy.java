@@ -29,10 +29,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AccessControlContext;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.service.access.policy.configuration.SACPConfiguration;
+import com.liferay.service.access.policy.configuration.SAPConfiguration;
 import com.liferay.service.access.policy.constants.SAPConstants;
-import com.liferay.service.access.policy.model.SACPEntry;
-import com.liferay.service.access.policy.service.SACPEntryLocalService;
+import com.liferay.service.access.policy.model.SAPEntry;
+import com.liferay.service.access.policy.service.SAPEntryLocalService;
 
 import java.lang.reflect.Method;
 
@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Mika Koivisto
  */
 @Component(service = AccessControlPolicy.class)
-public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
+public class SAPAccessControlPolicy extends BaseAccessControlPolicy {
 
 	@Override
 	public void onServiceRemoteAccess(
@@ -56,33 +56,32 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			AccessControlled accessControlled)
 		throws SecurityException {
 
-		List<String> serviceAccessControlProfileNames =
+		List<String> serviceAccessPolicyNames =
 			ServiceAccessPolicyThreadLocal.getActiveServiceAccessPolicyNames();
 
-		SACPConfiguration sacpConfiguration = null;
+		SAPConfiguration sapConfiguration = null;
 
 		try {
-			sacpConfiguration = _settingsFactory.getSettings(
-				SACPConfiguration.class,
+			sapConfiguration = _settingsFactory.getSettings(
+				SAPConfiguration.class,
 				new CompanyServiceSettingsLocator(
 					CompanyThreadLocal.getCompanyId(),
 					SAPConstants.SERVICE_NAME));
 		}
 		catch (SettingsException se) {
 			throw new SecurityException(
-				"Unable to determine default service access control profile",
-				se);
+				"Unable to get service access policy configuration", se);
 		}
 
-		if (sacpConfiguration.requireDefaultSACPEntry() ||
-			(serviceAccessControlProfileNames == null)) {
+		if (sapConfiguration.requireDefaultSAPEntry() ||
+			(serviceAccessPolicyNames == null)) {
 
-			if (serviceAccessControlProfileNames == null) {
-				serviceAccessControlProfileNames = new ArrayList<>();
+			if (serviceAccessPolicyNames == null) {
+				serviceAccessPolicyNames = new ArrayList<>();
 
 				ServiceAccessPolicyThreadLocal.
 					setActiveServiceAccessPolicyNames(
-						serviceAccessControlProfileNames);
+						serviceAccessPolicyNames);
 			}
 
 			boolean passwordBasedAuthentication = false;
@@ -101,12 +100,12 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			}
 
 			if (passwordBasedAuthentication) {
-				serviceAccessControlProfileNames.add(
-					sacpConfiguration.defaultUserSACPEntryName());
+				serviceAccessPolicyNames.add(
+					sapConfiguration.defaultUserSAPEntryName());
 			}
 			else {
-				serviceAccessControlProfileNames.add(
-					sacpConfiguration.defaultApplicationSACPEntryName());
+				serviceAccessPolicyNames.add(
+					sapConfiguration.defaultApplicationSAPEntryName());
 			}
 		}
 
@@ -114,13 +113,13 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 
 		Set<String> allowedServiceSignatures = new HashSet<>();
 
-		for (String name : serviceAccessControlProfileNames) {
+		for (String name : serviceAccessPolicyNames) {
 			try {
-				SACPEntry sacpEntry = _sacpEntryLocalService.getSACPEntry(
+				SAPEntry sapEntry = _sapEntryLocalService.getSAPEntry(
 					companyId, name);
 
 				allowedServiceSignatures.addAll(
-					sacpEntry.getAllowedServiceSignaturesList());
+					sapEntry.getAllowedServiceSignaturesList());
 			}
 			catch (PortalException pe) {
 				throw new SecurityException(pe);
@@ -253,10 +252,10 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 	}
 
 	@Reference(unbind = "-")
-	protected void setSACPEntryLocalService(
-		SACPEntryLocalService sacpEntryLocalService) {
+	protected void setSAPEntryLocalService(
+		SAPEntryLocalService sapEntryLocalService) {
 
-		_sacpEntryLocalService = sacpEntryLocalService;
+		_sapEntryLocalService = sapEntryLocalService;
 	}
 
 	@Reference
@@ -264,7 +263,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 		_settingsFactory = settingsFactory;
 	}
 
-	private SACPEntryLocalService _sacpEntryLocalService;
+	private SAPEntryLocalService _sapEntryLocalService;
 	private volatile SettingsFactory _settingsFactory;
 
 }

@@ -21,25 +21,25 @@ PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage="there-are-no-service-access-control-profiles"
+	emptyResultsMessage="there-are-no-service-access-policies"
 	headerNames="name"
 	iteratorURL="<%= portletURL %>"
-	total="<%= SACPEntryServiceUtil.getCompanySACPEntriesCount(company.getCompanyId()) %>"
+	total="<%= SAPEntryServiceUtil.getCompanySAPEntriesCount(company.getCompanyId()) %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= SACPEntryServiceUtil.getCompanySACPEntries(company.getCompanyId(), searchContainer.getStart(), searchContainer.getEnd()) %>"
+		results="<%= SAPEntryServiceUtil.getCompanySAPEntries(company.getCompanyId(), searchContainer.getStart(), searchContainer.getEnd()) %>"
 	/>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.service.access.policy.model.SACPEntry"
+		className="com.liferay.service.access.policy.model.SAPEntry"
 		escapedModel="<%= true %>"
-		keyProperty="sacpEntryId"
-		modelVar="sacpEntry"
+		keyProperty="sapEntryId"
+		modelVar="sapEntry"
 	>
 		<portlet:renderURL var="rowURL">
 			<portlet:param name="mvcPath" value="/edit_entry.jsp" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="sacpEntryId" value="<%= String.valueOf(sacpEntry.getSacpEntryId()) %>" />
+			<portlet:param name="sapEntryId" value="<%= String.valueOf(sapEntry.getSapEntryId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:search-container-column-text
@@ -51,7 +51,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
 			name="title"
-			value="<%= sacpEntry.getTitle(locale) %>"
+			value="<%= sapEntry.getTitle(locale) %>"
 
 		/>
 
@@ -64,13 +64,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	</liferay-ui:search-container-row>
 
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, SAPConstants.SERVICE_NAME, SAPActionKeys.ACTION_ADD_SAP_ENTRY) %>">
-		<portlet:renderURL var="addSACPEntryURL">
+		<portlet:renderURL var="addSAPEntryURL">
 			<portlet:param name="mvcPath" value="/edit_entry.jsp" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
 		<aui:button-row>
-			<aui:button href="<%= addSACPEntryURL %>" value="add" />
+			<aui:button href="<%= addSAPEntryURL %>" value="add" />
 		</aui:button-row>
 	</c:if>
 

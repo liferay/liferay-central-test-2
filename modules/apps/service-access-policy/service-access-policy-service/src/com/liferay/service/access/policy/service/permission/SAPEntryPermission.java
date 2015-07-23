@@ -53,7 +53,7 @@ public class SAPEntryPermission implements BaseModelPermissionChecker {
 		if (!contains(permissionChecker, sapEntry, actionId)) {
 			throw new PrincipalException.MustHavePermission(
 				permissionChecker, SAPEntry.class.getName(),
-				sapEntry.getSacpEntryId(), actionId);
+				sapEntry.getSapEntryId(), actionId);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class SAPEntryPermission implements BaseModelPermissionChecker {
 		String actionId) {
 
 		return permissionChecker.hasPermission(
-			0, SAPEntry.class.getName(), sapEntry.getSacpEntryId(), actionId);
+			0, SAPEntry.class.getName(), sapEntry.getSapEntryId(), actionId);
 	}
 
 	@Override

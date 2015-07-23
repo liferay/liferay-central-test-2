@@ -21,52 +21,52 @@ import org.junit.Test;
 /**
  * @author Mika Koivisto
  */
-public class SACPAccessControlPolicyTest {
+public class SAPAccessControlPolicyTest {
 
 	@Before
 	public void setUp() {
-		_sacpAccessControlPolicy = new SACPAccessControlPolicy();
+		_sapAccessControlPolicy = new SAPAccessControlPolicy();
 	}
 
 	@Test
 	public void testMatches() {
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById", "*"));
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portal.service.*"));
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portal.service.UserService"));
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portal.service.UserService#getUserById"));
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portal.service.UserService#get*"));
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portal.service.*#get*"));
 		Assert.assertTrue(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"#get*"));
 		Assert.assertFalse(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portlet.*#get*"));
 		Assert.assertFalse(
-			_sacpAccessControlPolicy.matches(
+			_sapAccessControlPolicy.matches(
 				"com.liferay.portal.service.UserService", "getUserById",
 				"com.liferay.portal.service.*#update*"));
 	}
 
-	private SACPAccessControlPolicy _sacpAccessControlPolicy;
+	private SAPAccessControlPolicy _sapAccessControlPolicy;
 
 }

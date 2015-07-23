@@ -26,7 +26,7 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface SAPConfiguration {
 
 	@Meta.AD(
-		deflt = "Default Service Access Profile for Applications",
+		deflt = "Default Service Access Policy for Applications",
 		required = false
 	)
 	public String defaultApplicationSAPEntryDescription();
@@ -38,7 +38,7 @@ public interface SAPConfiguration {
 	public String defaultApplicationSAPEntryServiceSignatures();
 
 	@Meta.AD(
-		deflt = "Default Service Access Profile for User", required = false
+		deflt = "Default Service Access Policy for User", required = false
 	)
 	public String defaultUserSAPEntryDescription();
 

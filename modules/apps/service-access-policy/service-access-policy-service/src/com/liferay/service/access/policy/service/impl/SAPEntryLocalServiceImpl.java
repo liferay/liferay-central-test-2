@@ -59,7 +59,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		// Service access control profile entry
+		// Service access policy entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		name = StringUtil.trim(name);
@@ -91,7 +91,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 
 		resourceLocalService.addResources(
 			sapEntry.getCompanyId(), 0, userId, SAPEntry.class.getName(),
-			sapEntry.getSacpEntryId(), false, false, false);
+			sapEntry.getSapEntryId(), false, false, false);
 
 		return sapEntry;
 	}
@@ -133,7 +133,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 			resourcePermissionLocalService.setResourcePermissions(
 				applicationSAPEntry.getCompanyId(), SAPEntry.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(applicationSAPEntry.getSacpEntryId()),
+				String.valueOf(applicationSAPEntry.getSapEntryId()),
 				guestRole.getRoleId(), new String[] {ActionKeys.VIEW});
 		}
 
@@ -153,7 +153,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 			resourcePermissionLocalService.setResourcePermissions(
 				userSAPEntry.getCompanyId(), SAPEntry.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(userSAPEntry.getSacpEntryId()),
+				String.valueOf(userSAPEntry.getSapEntryId()),
 				guestRole.getRoleId(), new String[] {ActionKeys.VIEW});
 		}
 	}
@@ -180,7 +180,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			sapEntry.getCompanyId(), SAPEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, sapEntry.getSacpEntryId());
+			ResourceConstants.SCOPE_INDIVIDUAL, sapEntry.getSapEntryId());
 
 		return sapEntry;
 	}
@@ -217,8 +217,6 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 			Map<Locale, String> titleMap, ServiceContext serviceContext)
 		throws PortalException {
 
-		// Service access control profile entry
-
 		SAPEntry sapEntry = sapEntryPersistence.findByPrimaryKey(
 			sapEntryId);
 
@@ -226,7 +224,7 @@ public class SAPEntryLocalServiceImpl extends SAPEntryLocalServiceBaseImpl {
 			sapEntry.getCompanyId(), name);
 
 		if ((existingSAPEntry != null) &&
-			(existingSAPEntry.getSacpEntryId() != sapEntryId)) {
+			(existingSAPEntry.getSapEntryId() != sapEntryId)) {
 
 			throw new DuplicateSAPEntryNameException();
 		}

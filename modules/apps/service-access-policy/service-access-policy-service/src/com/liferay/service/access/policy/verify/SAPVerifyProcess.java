@@ -57,8 +57,8 @@ public class SAPVerifyProcess extends VerifyProcess {
 			}
 			catch (PortalException pe) {
 				_log.error(
-					"Unable to add default service access control profile " +
-						"for company " + companyId,
+					"Unable to add default service access policy for company " +
+						companyId,
 					pe);
 			}
 		}
