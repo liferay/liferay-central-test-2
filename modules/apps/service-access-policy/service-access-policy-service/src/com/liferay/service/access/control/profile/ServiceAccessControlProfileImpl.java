@@ -14,7 +14,7 @@
 
 package com.liferay.service.access.control.profile;
 
-import com.liferay.portal.kernel.security.access.control.profile.ServiceAccessControlProfile;
+import com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPolicy;
 import com.liferay.service.access.control.profile.model.SACPEntry;
 
 import java.util.List;
@@ -23,8 +23,7 @@ import java.util.Locale;
 /**
  * @author Mika Koivisto
  */
-public class ServiceAccessControlProfileImpl
-	implements ServiceAccessControlProfile {
+public class ServiceAccessControlProfileImpl implements ServiceAccessPolicy {
 
 	public ServiceAccessControlProfileImpl(SACPEntry sacpEntry) {
 		_sacpEntry = sacpEntry;
