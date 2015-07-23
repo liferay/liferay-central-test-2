@@ -90,8 +90,8 @@ public class ConfigJSModulesTask extends NodeTask {
 
 					File scriptFile = new File(
 						nodeExtension.getNodeModulesDir(),
-						"node_modules/lfr-module-config-generator/bin/" +
-							"index.js");
+						"node_modules/lfr-module-config-generator/bin" +
+							"/index.js");
 
 					setScript(scriptFile);
 				}
