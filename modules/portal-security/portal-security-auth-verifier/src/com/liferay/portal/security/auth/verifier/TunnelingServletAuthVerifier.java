@@ -16,10 +16,10 @@ package com.liferay.portal.security.auth.verifier;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.access.control.profile.ServiceAccessControlProfileThreadLocal;
 import com.liferay.portal.kernel.security.auth.tunnel.TunnelAuthenticationManagerUtil;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifierResult;
+import com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPolicyThreadLocal;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AccessControlContext;
@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Modified;
 		"auth.verifier.TunnelingServletAuthVerifier.hosts.allowed=255.255.255.255",
 		"auth.verifier.TunnelingServletAuthVerifier.urls.excludes=",
 		"auth.verifier.TunnelingServletAuthVerifier.urls.includes=/api/liferay/do",
-		"service.access.control.profile.name=DEFAULT_USER"
+		"service.access.policy.name=DEFAULT_USER"
 	}
 )
 public class TunnelingServletAuthVerifier implements AuthVerifier {
@@ -78,11 +78,11 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 				authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
 				authVerifierResult.setUserId(Long.valueOf(credentials[0]));
 
-				String profileName = (String) _properties.get(
-					"service.access.control.profile.name");
+				String serviceAccessPolicyName = (String)_properties.get(
+					"service.access.policy.name");
 
-				ServiceAccessControlProfileThreadLocal.
-					addActiveServiceAccessControlProfileName(profileName);
+				ServiceAccessPolicyThreadLocal.addActiveServiceAccessPolicyName(
+					serviceAccessPolicyName);
 			}
 		}
 		catch (AuthException ae) {
