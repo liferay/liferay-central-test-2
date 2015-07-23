@@ -114,14 +114,6 @@ public class ServiceAccessPolicyManagerImpl
 		_settingsFactory = settingsFactory;
 	}
 
-	protected ServiceAccessPolicy toServiceAccessPolicy(SAPEntry sapEntry) {
-		if (sapEntry != null) {
-			return new ServiceAccessPolicyImpl(sapEntry);
-		}
-
-		return null;
-	}
-
 	protected List<ServiceAccessPolicy> toServiceAccessPolicies(
 		List<SAPEntry> sapEntries) {
 
@@ -129,17 +121,25 @@ public class ServiceAccessPolicyManagerImpl
 			return null;
 		}
 
-		List<ServiceAccessPolicy> serviceAccessPolicies =
-			new ArrayList<>(sapEntries.size());
+		List<ServiceAccessPolicy> serviceAccessPolicies = new ArrayList<>(
+			sapEntries.size());
 
 		for (SAPEntry sapEntry : sapEntries) {
-			ServiceAccessPolicy serviceAccessPolicy =
-				toServiceAccessPolicy(sapEntry); 
+			ServiceAccessPolicy serviceAccessPolicy = toServiceAccessPolicy(
+				sapEntry);
 
 			serviceAccessPolicies.add(serviceAccessPolicy);
 		}
 
 		return serviceAccessPolicies;
+	}
+
+	protected ServiceAccessPolicy toServiceAccessPolicy(SAPEntry sapEntry) {
+		if (sapEntry != null) {
+			return new ServiceAccessPolicyImpl(sapEntry);
+		}
+
+		return null;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
