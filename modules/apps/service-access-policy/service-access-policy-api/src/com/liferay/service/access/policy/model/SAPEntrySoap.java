@@ -23,34 +23,34 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.service.access.policy.service.http.SACPEntryServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.service.access.policy.service.http.SAPEntryServiceSoap}.
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.service.access.policy.service.http.SACPEntryServiceSoap
+ * @see com.liferay.service.access.policy.service.http.SAPEntryServiceSoap
  * @generated
  */
 @ProviderType
-public class SACPEntrySoap implements Serializable {
-	public static SACPEntrySoap toSoapModel(SACPEntry model) {
-		SACPEntrySoap soapModel = new SACPEntrySoap();
+public class SAPEntrySoap implements Serializable {
+	public static SAPEntrySoap toSoapModel(SAPEntry model) {
+		SAPEntrySoap soapModel = new SAPEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setSacpEntryId(model.getSacpEntryId());
+		soapModel.setSapEntryId(model.getSapEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setAllowedServiceSignatures(model.getAllowedServiceSignatures());
-		soapModel.setDefaultSACPEntry(model.getDefaultSACPEntry());
+		soapModel.setDefaultSAPEntry(model.getDefaultSAPEntry());
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
 
 		return soapModel;
 	}
 
-	public static SACPEntrySoap[] toSoapModels(SACPEntry[] models) {
-		SACPEntrySoap[] soapModels = new SACPEntrySoap[models.length];
+	public static SAPEntrySoap[] toSoapModels(SAPEntry[] models) {
+		SAPEntrySoap[] soapModels = new SAPEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -59,14 +59,14 @@ public class SACPEntrySoap implements Serializable {
 		return soapModels;
 	}
 
-	public static SACPEntrySoap[][] toSoapModels(SACPEntry[][] models) {
-		SACPEntrySoap[][] soapModels = null;
+	public static SAPEntrySoap[][] toSoapModels(SAPEntry[][] models) {
+		SAPEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new SACPEntrySoap[models.length][models[0].length];
+			soapModels = new SAPEntrySoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new SACPEntrySoap[0][0];
+			soapModels = new SAPEntrySoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -76,25 +76,25 @@ public class SACPEntrySoap implements Serializable {
 		return soapModels;
 	}
 
-	public static SACPEntrySoap[] toSoapModels(List<SACPEntry> models) {
-		List<SACPEntrySoap> soapModels = new ArrayList<SACPEntrySoap>(models.size());
+	public static SAPEntrySoap[] toSoapModels(List<SAPEntry> models) {
+		List<SAPEntrySoap> soapModels = new ArrayList<SAPEntrySoap>(models.size());
 
-		for (SACPEntry model : models) {
+		for (SAPEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new SACPEntrySoap[soapModels.size()]);
+		return soapModels.toArray(new SAPEntrySoap[soapModels.size()]);
 	}
 
-	public SACPEntrySoap() {
+	public SAPEntrySoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _sacpEntryId;
+		return _sapEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setSacpEntryId(pk);
+		setSapEntryId(pk);
 	}
 
 	public String getUuid() {
@@ -105,12 +105,12 @@ public class SACPEntrySoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getSacpEntryId() {
-		return _sacpEntryId;
+	public long getSapEntryId() {
+		return _sapEntryId;
 	}
 
-	public void setSacpEntryId(long sacpEntryId) {
-		_sacpEntryId = sacpEntryId;
+	public void setSapEntryId(long sapEntryId) {
+		_sapEntryId = sapEntryId;
 	}
 
 	public long getCompanyId() {
@@ -161,16 +161,16 @@ public class SACPEntrySoap implements Serializable {
 		_allowedServiceSignatures = allowedServiceSignatures;
 	}
 
-	public boolean getDefaultSACPEntry() {
-		return _defaultSACPEntry;
+	public boolean getDefaultSAPEntry() {
+		return _defaultSAPEntry;
 	}
 
-	public boolean isDefaultSACPEntry() {
-		return _defaultSACPEntry;
+	public boolean isDefaultSAPEntry() {
+		return _defaultSAPEntry;
 	}
 
-	public void setDefaultSACPEntry(boolean defaultSACPEntry) {
-		_defaultSACPEntry = defaultSACPEntry;
+	public void setDefaultSAPEntry(boolean defaultSAPEntry) {
+		_defaultSAPEntry = defaultSAPEntry;
 	}
 
 	public String getName() {
@@ -190,14 +190,14 @@ public class SACPEntrySoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _sacpEntryId;
+	private long _sapEntryId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _allowedServiceSignatures;
-	private boolean _defaultSACPEntry;
+	private boolean _defaultSAPEntry;
 	private String _name;
 	private String _title;
 }

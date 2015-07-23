@@ -40,10 +40,10 @@ import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.service.access.policy.exception.NoSuchEntryException;
-import com.liferay.service.access.policy.model.SACPEntry;
-import com.liferay.service.access.policy.model.impl.SACPEntryImpl;
-import com.liferay.service.access.policy.model.impl.SACPEntryModelImpl;
-import com.liferay.service.access.policy.service.persistence.SACPEntryPersistence;
+import com.liferay.service.access.policy.model.SAPEntry;
+import com.liferay.service.access.policy.model.impl.SAPEntryImpl;
+import com.liferay.service.access.policy.model.impl.SAPEntryModelImpl;
+import com.liferay.service.access.policy.service.persistence.SAPEntryPersistence;
 
 import java.io.Serializable;
 
@@ -57,41 +57,41 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The persistence implementation for the s a c p entry service.
+ * The persistence implementation for the s a p entry service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see SACPEntryPersistence
- * @see com.liferay.service.access.policy.service.persistence.SACPEntryUtil
+ * @see SAPEntryPersistence
+ * @see com.liferay.service.access.policy.service.persistence.SAPEntryUtil
  * @generated
  */
 @ProviderType
-public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
-	implements SACPEntryPersistence {
+public class SAPEntryPersistenceImpl extends BasePersistenceImpl<SAPEntry>
+	implements SAPEntryPersistence {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link SACPEntryUtil} to access the s a c p entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link SAPEntryUtil} to access the s a p entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = SACPEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = SAPEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
 		".List1";
 	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
 		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -99,60 +99,60 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
 			new String[] { String.class.getName() },
-			SACPEntryModelImpl.UUID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			SAPEntryModelImpl.UUID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns all the s a c p entries where uuid = &#63;.
+	 * Returns all the s a p entries where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the matching s a c p entries
+	 * @return the matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByUuid(String uuid) {
+	public List<SAPEntry> findByUuid(String uuid) {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries where uuid = &#63;.
+	 * Returns a range of all the s a p entries where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of matching s a c p entries
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByUuid(String uuid, int start, int end) {
+	public List<SAPEntry> findByUuid(String uuid, int start, int end) {
 		return findByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries where uuid = &#63;.
+	 * Returns an ordered range of all the s a p entries where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching s a c p entries
+	 * @return the ordered range of matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByUuid(String uuid, int start, int end,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> findByUuid(String uuid, int start, int end,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -168,12 +168,12 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			finderArgs = new Object[] { uuid, start, end, orderByComparator };
 		}
 
-		List<SACPEntry> list = (List<SACPEntry>)FinderCacheUtil.getResult(finderPath,
+		List<SAPEntry> list = (List<SAPEntry>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if ((list != null) && !list.isEmpty()) {
-			for (SACPEntry sacpEntry : list) {
-				if (!Validator.equals(uuid, sacpEntry.getUuid())) {
+			for (SAPEntry sapEntry : list) {
+				if (!Validator.equals(uuid, sapEntry.getUuid())) {
 					list = null;
 
 					break;
@@ -192,7 +192,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -214,7 +214,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 			else
 			 if (pagination) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -233,7 +233,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				}
 
 				if (!pagination) {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
@@ -241,7 +241,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 
@@ -263,21 +263,21 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the first s a c p entry in the ordered set where uuid = &#63;.
+	 * Returns the first s a p entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the first matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByUuid_First(String uuid,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry findByUuid_First(String uuid,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByUuid_First(uuid, orderByComparator);
+		SAPEntry sapEntry = fetchByUuid_First(uuid, orderByComparator);
 
-		if (sacpEntry != null) {
-			return sacpEntry;
+		if (sapEntry != null) {
+			return sapEntry;
 		}
 
 		StringBundler msg = new StringBundler(4);
@@ -293,16 +293,16 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the first s a c p entry in the ordered set where uuid = &#63;.
+	 * Returns the first s a p entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the first matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByUuid_First(String uuid,
-		OrderByComparator<SACPEntry> orderByComparator) {
-		List<SACPEntry> list = findByUuid(uuid, 0, 1, orderByComparator);
+	public SAPEntry fetchByUuid_First(String uuid,
+		OrderByComparator<SAPEntry> orderByComparator) {
+		List<SAPEntry> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -312,21 +312,21 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the last s a c p entry in the ordered set where uuid = &#63;.
+	 * Returns the last s a p entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the last matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByUuid_Last(String uuid,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry findByUuid_Last(String uuid,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByUuid_Last(uuid, orderByComparator);
+		SAPEntry sapEntry = fetchByUuid_Last(uuid, orderByComparator);
 
-		if (sacpEntry != null) {
-			return sacpEntry;
+		if (sapEntry != null) {
+			return sapEntry;
 		}
 
 		StringBundler msg = new StringBundler(4);
@@ -342,22 +342,22 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the last s a c p entry in the ordered set where uuid = &#63;.
+	 * Returns the last s a p entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the last matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByUuid_Last(String uuid,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public SAPEntry fetchByUuid_Last(String uuid,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		int count = countByUuid(uuid);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<SACPEntry> list = findByUuid(uuid, count - 1, count,
+		List<SAPEntry> list = findByUuid(uuid, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -368,33 +368,33 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the s a c p entries before and after the current s a c p entry in the ordered set where uuid = &#63;.
+	 * Returns the s a p entries before and after the current s a p entry in the ordered set where uuid = &#63;.
 	 *
-	 * @param sacpEntryId the primary key of the current s a c p entry
+	 * @param sapEntryId the primary key of the current s a p entry
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @return the previous, current, and next s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry[] findByUuid_PrevAndNext(long sacpEntryId, String uuid,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry[] findByUuid_PrevAndNext(long sapEntryId, String uuid,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = findByPrimaryKey(sacpEntryId);
+		SAPEntry sapEntry = findByPrimaryKey(sapEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry[] array = new SACPEntryImpl[3];
+			SAPEntry[] array = new SAPEntryImpl[3];
 
-			array[0] = getByUuid_PrevAndNext(session, sacpEntry, uuid,
+			array[0] = getByUuid_PrevAndNext(session, sapEntry, uuid,
 					orderByComparator, true);
 
-			array[1] = sacpEntry;
+			array[1] = sapEntry;
 
-			array[2] = getByUuid_PrevAndNext(session, sacpEntry, uuid,
+			array[2] = getByUuid_PrevAndNext(session, sapEntry, uuid,
 					orderByComparator, false);
 
 			return array;
@@ -407,9 +407,9 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	protected SACPEntry getByUuid_PrevAndNext(Session session,
-		SACPEntry sacpEntry, String uuid,
-		OrderByComparator<SACPEntry> orderByComparator, boolean previous) {
+	protected SAPEntry getByUuid_PrevAndNext(Session session,
+		SAPEntry sapEntry, String uuid,
+		OrderByComparator<SAPEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -420,7 +420,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_SACPENTRY_WHERE);
+		query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 		boolean bindUuid = false;
 
@@ -492,7 +492,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 		}
 		else {
-			query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+			query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -509,14 +509,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(sacpEntry);
+			Object[] values = orderByComparator.getOrderByConditionValues(sapEntry);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<SACPEntry> list = q.list();
+		List<SAPEntry> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -527,49 +527,49 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns all the s a c p entries that the user has permission to view where uuid = &#63;.
+	 * Returns all the s a p entries that the user has permission to view where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the matching s a c p entries that the user has permission to view
+	 * @return the matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByUuid(String uuid) {
+	public List<SAPEntry> filterFindByUuid(String uuid) {
 		return filterFindByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries that the user has permission to view where uuid = &#63;.
+	 * Returns a range of all the s a p entries that the user has permission to view where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of matching s a c p entries that the user has permission to view
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByUuid(String uuid, int start, int end) {
+	public List<SAPEntry> filterFindByUuid(String uuid, int start, int end) {
 		return filterFindByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries that the user has permissions to view where uuid = &#63;.
+	 * Returns an ordered range of all the s a p entries that the user has permissions to view where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching s a c p entries that the user has permission to view
+	 * @return the ordered range of matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByUuid(String uuid, int start, int end,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> filterFindByUuid(String uuid, int start, int end,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return findByUuid(uuid, start, end, orderByComparator);
 		}
@@ -585,10 +585,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		boolean bindUuid = false;
@@ -606,7 +606,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -621,15 +621,15 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 		else {
 			if (getDB().isSupportsInlineDistinct()) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 			else {
-				query.append(SACPEntryModelImpl.ORDER_BY_SQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_SQL);
 			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
@@ -639,10 +639,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS, SACPEntryImpl.class);
+				q.addEntity(_FILTER_ENTITY_ALIAS, SAPEntryImpl.class);
 			}
 			else {
-				q.addEntity(_FILTER_ENTITY_TABLE, SACPEntryImpl.class);
+				q.addEntity(_FILTER_ENTITY_TABLE, SAPEntryImpl.class);
 			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -651,7 +651,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				qPos.add(uuid);
 			}
 
-			return (List<SACPEntry>)QueryUtil.list(q, getDialect(), start, end);
+			return (List<SAPEntry>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -662,37 +662,37 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the s a c p entries before and after the current s a c p entry in the ordered set of s a c p entries that the user has permission to view where uuid = &#63;.
+	 * Returns the s a p entries before and after the current s a p entry in the ordered set of s a p entries that the user has permission to view where uuid = &#63;.
 	 *
-	 * @param sacpEntryId the primary key of the current s a c p entry
+	 * @param sapEntryId the primary key of the current s a p entry
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @return the previous, current, and next s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry[] filterFindByUuid_PrevAndNext(long sacpEntryId,
-		String uuid, OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry[] filterFindByUuid_PrevAndNext(long sapEntryId,
+		String uuid, OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByUuid_PrevAndNext(sacpEntryId, uuid, orderByComparator);
+			return findByUuid_PrevAndNext(sapEntryId, uuid, orderByComparator);
 		}
 
-		SACPEntry sacpEntry = findByPrimaryKey(sacpEntryId);
+		SAPEntry sapEntry = findByPrimaryKey(sapEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry[] array = new SACPEntryImpl[3];
+			SAPEntry[] array = new SAPEntryImpl[3];
 
-			array[0] = filterGetByUuid_PrevAndNext(session, sacpEntry, uuid,
+			array[0] = filterGetByUuid_PrevAndNext(session, sapEntry, uuid,
 					orderByComparator, true);
 
-			array[1] = sacpEntry;
+			array[1] = sapEntry;
 
-			array[2] = filterGetByUuid_PrevAndNext(session, sacpEntry, uuid,
+			array[2] = filterGetByUuid_PrevAndNext(session, sapEntry, uuid,
 					orderByComparator, false);
 
 			return array;
@@ -705,9 +705,9 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	protected SACPEntry filterGetByUuid_PrevAndNext(Session session,
-		SACPEntry sacpEntry, String uuid,
-		OrderByComparator<SACPEntry> orderByComparator, boolean previous) {
+	protected SAPEntry filterGetByUuid_PrevAndNext(Session session,
+		SAPEntry sapEntry, String uuid,
+		OrderByComparator<SAPEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -719,10 +719,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		boolean bindUuid = false;
@@ -740,7 +740,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -812,15 +812,15 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 		else {
 			if (getDB().isSupportsInlineDistinct()) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 			else {
-				query.append(SACPEntryModelImpl.ORDER_BY_SQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_SQL);
 			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -828,10 +828,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		q.setMaxResults(2);
 
 		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS, SACPEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, SAPEntryImpl.class);
 		}
 		else {
-			q.addEntity(_FILTER_ENTITY_TABLE, SACPEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_TABLE, SAPEntryImpl.class);
 		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -841,14 +841,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(sacpEntry);
+			Object[] values = orderByComparator.getOrderByConditionValues(sapEntry);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<SACPEntry> list = q.list();
+		List<SAPEntry> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -859,23 +859,23 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Removes all the s a c p entries where uuid = &#63; from the database.
+	 * Removes all the s a p entries where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 */
 	@Override
 	public void removeByUuid(String uuid) {
-		for (SACPEntry sacpEntry : findByUuid(uuid, QueryUtil.ALL_POS,
+		for (SAPEntry sapEntry : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
-			remove(sacpEntry);
+			remove(sapEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of s a c p entries where uuid = &#63;.
+	 * Returns the number of s a p entries where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the number of matching s a c p entries
+	 * @return the number of matching s a p entries
 	 */
 	@Override
 	public int countByUuid(String uuid) {
@@ -889,7 +889,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_SACPENTRY_WHERE);
+			query.append(_SQL_COUNT_SAPENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -938,10 +938,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the number of s a c p entries that the user has permission to view where uuid = &#63;.
+	 * Returns the number of s a p entries that the user has permission to view where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the number of matching s a c p entries that the user has permission to view
+	 * @return the number of matching s a p entries that the user has permission to view
 	 */
 	@Override
 	public int filterCountByUuid(String uuid) {
@@ -951,7 +951,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 		StringBundler query = new StringBundler(2);
 
-		query.append(_FILTER_SQL_COUNT_SACPENTRY_WHERE);
+		query.append(_FILTER_SQL_COUNT_SAPENTRY_WHERE);
 
 		boolean bindUuid = false;
 
@@ -968,7 +968,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
@@ -998,14 +998,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "sacpEntry.uuid IS NULL";
-	private static final String _FINDER_COLUMN_UUID_UUID_2 = "sacpEntry.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(sacpEntry.uuid IS NULL OR sacpEntry.uuid = '')";
-	private static final String _FINDER_COLUMN_UUID_UUID_1_SQL = "sacpEntry.uuid_ IS NULL";
-	private static final String _FINDER_COLUMN_UUID_UUID_2_SQL = "sacpEntry.uuid_ = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3_SQL = "(sacpEntry.uuid_ IS NULL OR sacpEntry.uuid_ = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "sapEntry.uuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "sapEntry.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(sapEntry.uuid IS NULL OR sapEntry.uuid = '')";
+	private static final String _FINDER_COLUMN_UUID_UUID_1_SQL = "sapEntry.uuid_ IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2_SQL = "sapEntry.uuid_ = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3_SQL = "(sapEntry.uuid_ IS NULL OR sapEntry.uuid_ = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid_C",
 			new String[] {
 				String.class.getName(), Long.class.getName(),
@@ -1014,66 +1014,66 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				OrderByComparator.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C =
-		new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+		new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid_C",
 			new String[] { String.class.getName(), Long.class.getName() },
-			SACPEntryModelImpl.UUID_COLUMN_BITMASK |
-			SACPEntryModelImpl.COMPANYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_C = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			SAPEntryModelImpl.UUID_COLUMN_BITMASK |
+			SAPEntryModelImpl.COMPANYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_C = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid_C",
 			new String[] { String.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the s a c p entries where uuid = &#63; and companyId = &#63;.
+	 * Returns all the s a p entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the matching s a c p entries
+	 * @return the matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByUuid_C(String uuid, long companyId) {
+	public List<SAPEntry> findByUuid_C(String uuid, long companyId) {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries where uuid = &#63; and companyId = &#63;.
+	 * Returns a range of all the s a p entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of matching s a c p entries
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByUuid_C(String uuid, long companyId, int start,
+	public List<SAPEntry> findByUuid_C(String uuid, long companyId, int start,
 		int end) {
 		return findByUuid_C(uuid, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the s a p entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching s a c p entries
+	 * @return the ordered range of matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByUuid_C(String uuid, long companyId, int start,
-		int end, OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> findByUuid_C(String uuid, long companyId, int start,
+		int end, OrderByComparator<SAPEntry> orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -1093,13 +1093,13 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				};
 		}
 
-		List<SACPEntry> list = (List<SACPEntry>)FinderCacheUtil.getResult(finderPath,
+		List<SAPEntry> list = (List<SAPEntry>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if ((list != null) && !list.isEmpty()) {
-			for (SACPEntry sacpEntry : list) {
-				if (!Validator.equals(uuid, sacpEntry.getUuid()) ||
-						(companyId != sacpEntry.getCompanyId())) {
+			for (SAPEntry sapEntry : list) {
+				if (!Validator.equals(uuid, sapEntry.getUuid()) ||
+						(companyId != sapEntry.getCompanyId())) {
 					list = null;
 
 					break;
@@ -1118,7 +1118,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -1142,7 +1142,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 			else
 			 if (pagination) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -1163,7 +1163,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				qPos.add(companyId);
 
 				if (!pagination) {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
@@ -1171,7 +1171,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 
@@ -1193,23 +1193,23 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the first s a c p entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first s a p entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the first matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByUuid_C_First(String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry findByUuid_C_First(String uuid, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByUuid_C_First(uuid, companyId,
+		SAPEntry sapEntry = fetchByUuid_C_First(uuid, companyId,
 				orderByComparator);
 
-		if (sacpEntry != null) {
-			return sacpEntry;
+		if (sapEntry != null) {
+			return sapEntry;
 		}
 
 		StringBundler msg = new StringBundler(6);
@@ -1228,17 +1228,17 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the first s a c p entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first s a p entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the first matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByUuid_C_First(String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator) {
-		List<SACPEntry> list = findByUuid_C(uuid, companyId, 0, 1,
+	public SAPEntry fetchByUuid_C_First(String uuid, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator) {
+		List<SAPEntry> list = findByUuid_C(uuid, companyId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1249,23 +1249,23 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the last s a c p entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last s a p entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the last matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByUuid_C_Last(String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry findByUuid_C_Last(String uuid, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByUuid_C_Last(uuid, companyId,
+		SAPEntry sapEntry = fetchByUuid_C_Last(uuid, companyId,
 				orderByComparator);
 
-		if (sacpEntry != null) {
-			return sacpEntry;
+		if (sapEntry != null) {
+			return sapEntry;
 		}
 
 		StringBundler msg = new StringBundler(6);
@@ -1284,23 +1284,23 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the last s a c p entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last s a p entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the last matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByUuid_C_Last(String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public SAPEntry fetchByUuid_C_Last(String uuid, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		int count = countByUuid_C(uuid, companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<SACPEntry> list = findByUuid_C(uuid, companyId, count - 1, count,
+		List<SAPEntry> list = findByUuid_C(uuid, companyId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1311,34 +1311,34 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the s a c p entries before and after the current s a c p entry in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the s a p entries before and after the current s a p entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param sacpEntryId the primary key of the current s a c p entry
+	 * @param sapEntryId the primary key of the current s a p entry
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @return the previous, current, and next s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry[] findByUuid_C_PrevAndNext(long sacpEntryId, String uuid,
-		long companyId, OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry[] findByUuid_C_PrevAndNext(long sapEntryId, String uuid,
+		long companyId, OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = findByPrimaryKey(sacpEntryId);
+		SAPEntry sapEntry = findByPrimaryKey(sapEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry[] array = new SACPEntryImpl[3];
+			SAPEntry[] array = new SAPEntryImpl[3];
 
-			array[0] = getByUuid_C_PrevAndNext(session, sacpEntry, uuid,
+			array[0] = getByUuid_C_PrevAndNext(session, sapEntry, uuid,
 					companyId, orderByComparator, true);
 
-			array[1] = sacpEntry;
+			array[1] = sapEntry;
 
-			array[2] = getByUuid_C_PrevAndNext(session, sacpEntry, uuid,
+			array[2] = getByUuid_C_PrevAndNext(session, sapEntry, uuid,
 					companyId, orderByComparator, false);
 
 			return array;
@@ -1351,9 +1351,9 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	protected SACPEntry getByUuid_C_PrevAndNext(Session session,
-		SACPEntry sacpEntry, String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator, boolean previous) {
+	protected SAPEntry getByUuid_C_PrevAndNext(Session session,
+		SAPEntry sapEntry, String uuid, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -1364,7 +1364,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_SACPENTRY_WHERE);
+		query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 		boolean bindUuid = false;
 
@@ -1438,7 +1438,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 		}
 		else {
-			query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+			query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -1457,14 +1457,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(sacpEntry);
+			Object[] values = orderByComparator.getOrderByConditionValues(sapEntry);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<SACPEntry> list = q.list();
+		List<SAPEntry> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1475,54 +1475,54 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns all the s a c p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 * Returns all the s a p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the matching s a c p entries that the user has permission to view
+	 * @return the matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByUuid_C(String uuid, long companyId) {
+	public List<SAPEntry> filterFindByUuid_C(String uuid, long companyId) {
 		return filterFindByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 * Returns a range of all the s a p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of matching s a c p entries that the user has permission to view
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByUuid_C(String uuid, long companyId,
+	public List<SAPEntry> filterFindByUuid_C(String uuid, long companyId,
 		int start, int end) {
 		return filterFindByUuid_C(uuid, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries that the user has permissions to view where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the s a p entries that the user has permissions to view where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching s a c p entries that the user has permission to view
+	 * @return the ordered range of matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByUuid_C(String uuid, long companyId,
-		int start, int end, OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> filterFindByUuid_C(String uuid, long companyId,
+		int start, int end, OrderByComparator<SAPEntry> orderByComparator) {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return findByUuid_C(uuid, companyId, start, end, orderByComparator);
 		}
@@ -1538,10 +1538,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		boolean bindUuid = false;
@@ -1561,7 +1561,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -1576,15 +1576,15 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 		else {
 			if (getDB().isSupportsInlineDistinct()) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 			else {
-				query.append(SACPEntryModelImpl.ORDER_BY_SQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_SQL);
 			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
@@ -1594,10 +1594,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS, SACPEntryImpl.class);
+				q.addEntity(_FILTER_ENTITY_ALIAS, SAPEntryImpl.class);
 			}
 			else {
-				q.addEntity(_FILTER_ENTITY_TABLE, SACPEntryImpl.class);
+				q.addEntity(_FILTER_ENTITY_TABLE, SAPEntryImpl.class);
 			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1608,7 +1608,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 			qPos.add(companyId);
 
-			return (List<SACPEntry>)QueryUtil.list(q, getDialect(), start, end);
+			return (List<SAPEntry>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1619,40 +1619,40 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the s a c p entries before and after the current s a c p entry in the ordered set of s a c p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 * Returns the s a p entries before and after the current s a p entry in the ordered set of s a p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param sacpEntryId the primary key of the current s a c p entry
+	 * @param sapEntryId the primary key of the current s a p entry
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @return the previous, current, and next s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry[] filterFindByUuid_C_PrevAndNext(long sacpEntryId,
+	public SAPEntry[] filterFindByUuid_C_PrevAndNext(long sapEntryId,
 		String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator)
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByUuid_C_PrevAndNext(sacpEntryId, uuid, companyId,
+			return findByUuid_C_PrevAndNext(sapEntryId, uuid, companyId,
 				orderByComparator);
 		}
 
-		SACPEntry sacpEntry = findByPrimaryKey(sacpEntryId);
+		SAPEntry sapEntry = findByPrimaryKey(sapEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry[] array = new SACPEntryImpl[3];
+			SAPEntry[] array = new SAPEntryImpl[3];
 
-			array[0] = filterGetByUuid_C_PrevAndNext(session, sacpEntry, uuid,
+			array[0] = filterGetByUuid_C_PrevAndNext(session, sapEntry, uuid,
 					companyId, orderByComparator, true);
 
-			array[1] = sacpEntry;
+			array[1] = sapEntry;
 
-			array[2] = filterGetByUuid_C_PrevAndNext(session, sacpEntry, uuid,
+			array[2] = filterGetByUuid_C_PrevAndNext(session, sapEntry, uuid,
 					companyId, orderByComparator, false);
 
 			return array;
@@ -1665,9 +1665,9 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	protected SACPEntry filterGetByUuid_C_PrevAndNext(Session session,
-		SACPEntry sacpEntry, String uuid, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator, boolean previous) {
+	protected SAPEntry filterGetByUuid_C_PrevAndNext(Session session,
+		SAPEntry sapEntry, String uuid, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -1679,10 +1679,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		boolean bindUuid = false;
@@ -1702,7 +1702,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -1774,15 +1774,15 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 		else {
 			if (getDB().isSupportsInlineDistinct()) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 			else {
-				query.append(SACPEntryModelImpl.ORDER_BY_SQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_SQL);
 			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -1790,10 +1790,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		q.setMaxResults(2);
 
 		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS, SACPEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, SAPEntryImpl.class);
 		}
 		else {
-			q.addEntity(_FILTER_ENTITY_TABLE, SACPEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_TABLE, SAPEntryImpl.class);
 		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -1805,14 +1805,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(sacpEntry);
+			Object[] values = orderByComparator.getOrderByConditionValues(sapEntry);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<SACPEntry> list = q.list();
+		List<SAPEntry> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1823,25 +1823,25 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Removes all the s a c p entries where uuid = &#63; and companyId = &#63; from the database.
+	 * Removes all the s a p entries where uuid = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 */
 	@Override
 	public void removeByUuid_C(String uuid, long companyId) {
-		for (SACPEntry sacpEntry : findByUuid_C(uuid, companyId,
+		for (SAPEntry sapEntry : findByUuid_C(uuid, companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(sacpEntry);
+			remove(sapEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of s a c p entries where uuid = &#63; and companyId = &#63;.
+	 * Returns the number of s a p entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the number of matching s a c p entries
+	 * @return the number of matching s a p entries
 	 */
 	@Override
 	public int countByUuid_C(String uuid, long companyId) {
@@ -1855,7 +1855,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_SACPENTRY_WHERE);
+			query.append(_SQL_COUNT_SAPENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -1908,11 +1908,11 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the number of s a c p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 * Returns the number of s a p entries that the user has permission to view where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the number of matching s a c p entries that the user has permission to view
+	 * @return the number of matching s a p entries that the user has permission to view
 	 */
 	@Override
 	public int filterCountByUuid_C(String uuid, long companyId) {
@@ -1922,7 +1922,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 		StringBundler query = new StringBundler(3);
 
-		query.append(_FILTER_SQL_COUNT_SACPENTRY_WHERE);
+		query.append(_FILTER_SQL_COUNT_SAPENTRY_WHERE);
 
 		boolean bindUuid = false;
 
@@ -1941,7 +1941,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
@@ -1973,16 +1973,16 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "sacpEntry.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "sacpEntry.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(sacpEntry.uuid IS NULL OR sacpEntry.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_1_SQL = "sacpEntry.uuid_ IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_2_SQL = "sacpEntry.uuid_ = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_3_SQL = "(sacpEntry.uuid_ IS NULL OR sacpEntry.uuid_ = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "sacpEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "sapEntry.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "sapEntry.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(sapEntry.uuid IS NULL OR sapEntry.uuid = '') AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_1_SQL = "sapEntry.uuid_ IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_2_SQL = "sapEntry.uuid_ = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3_SQL = "(sapEntry.uuid_ IS NULL OR sapEntry.uuid_ = '') AND ";
+	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "sapEntry.companyId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
-		new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+		new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -1991,61 +1991,61 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				OrderByComparator.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
-		new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+		new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] { Long.class.getName() },
-			SACPEntryModelImpl.COMPANYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			SAPEntryModelImpl.COMPANYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the s a c p entries where companyId = &#63;.
+	 * Returns all the s a p entries where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
-	 * @return the matching s a c p entries
+	 * @return the matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByCompanyId(long companyId) {
+	public List<SAPEntry> findByCompanyId(long companyId) {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries where companyId = &#63;.
+	 * Returns a range of all the s a p entries where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of matching s a c p entries
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByCompanyId(long companyId, int start, int end) {
+	public List<SAPEntry> findByCompanyId(long companyId, int start, int end) {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries where companyId = &#63;.
+	 * Returns an ordered range of all the s a p entries where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching s a c p entries
+	 * @return the ordered range of matching s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> findByCompanyId(long companyId, int start, int end,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -2061,12 +2061,12 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
-		List<SACPEntry> list = (List<SACPEntry>)FinderCacheUtil.getResult(finderPath,
+		List<SAPEntry> list = (List<SAPEntry>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if ((list != null) && !list.isEmpty()) {
-			for (SACPEntry sacpEntry : list) {
-				if ((companyId != sacpEntry.getCompanyId())) {
+			for (SAPEntry sapEntry : list) {
+				if ((companyId != sapEntry.getCompanyId())) {
 					list = null;
 
 					break;
@@ -2085,7 +2085,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2095,7 +2095,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 			else
 			 if (pagination) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -2112,7 +2112,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				qPos.add(companyId);
 
 				if (!pagination) {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
@@ -2120,7 +2120,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 
@@ -2142,22 +2142,21 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the first s a c p entry in the ordered set where companyId = &#63;.
+	 * Returns the first s a p entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the first matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByCompanyId_First(long companyId,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry findByCompanyId_First(long companyId,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByCompanyId_First(companyId,
-				orderByComparator);
+		SAPEntry sapEntry = fetchByCompanyId_First(companyId, orderByComparator);
 
-		if (sacpEntry != null) {
-			return sacpEntry;
+		if (sapEntry != null) {
+			return sapEntry;
 		}
 
 		StringBundler msg = new StringBundler(4);
@@ -2173,17 +2172,16 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the first s a c p entry in the ordered set where companyId = &#63;.
+	 * Returns the first s a p entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the first matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByCompanyId_First(long companyId,
-		OrderByComparator<SACPEntry> orderByComparator) {
-		List<SACPEntry> list = findByCompanyId(companyId, 0, 1,
-				orderByComparator);
+	public SAPEntry fetchByCompanyId_First(long companyId,
+		OrderByComparator<SAPEntry> orderByComparator) {
+		List<SAPEntry> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2193,21 +2191,21 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the last s a c p entry in the ordered set where companyId = &#63;.
+	 * Returns the last s a p entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the last matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByCompanyId_Last(long companyId,
-		OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry findByCompanyId_Last(long companyId,
+		OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByCompanyId_Last(companyId, orderByComparator);
+		SAPEntry sapEntry = fetchByCompanyId_Last(companyId, orderByComparator);
 
-		if (sacpEntry != null) {
-			return sacpEntry;
+		if (sapEntry != null) {
+			return sapEntry;
 		}
 
 		StringBundler msg = new StringBundler(4);
@@ -2223,22 +2221,22 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the last s a c p entry in the ordered set where companyId = &#63;.
+	 * Returns the last s a p entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the last matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByCompanyId_Last(long companyId,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public SAPEntry fetchByCompanyId_Last(long companyId,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<SACPEntry> list = findByCompanyId(companyId, count - 1, count,
+		List<SAPEntry> list = findByCompanyId(companyId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2249,34 +2247,34 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the s a c p entries before and after the current s a c p entry in the ordered set where companyId = &#63;.
+	 * Returns the s a p entries before and after the current s a p entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param sacpEntryId the primary key of the current s a c p entry
+	 * @param sapEntryId the primary key of the current s a p entry
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @return the previous, current, and next s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry[] findByCompanyId_PrevAndNext(long sacpEntryId,
-		long companyId, OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry[] findByCompanyId_PrevAndNext(long sapEntryId,
+		long companyId, OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = findByPrimaryKey(sacpEntryId);
+		SAPEntry sapEntry = findByPrimaryKey(sapEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry[] array = new SACPEntryImpl[3];
+			SAPEntry[] array = new SAPEntryImpl[3];
 
-			array[0] = getByCompanyId_PrevAndNext(session, sacpEntry,
-					companyId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session, sapEntry, companyId,
+					orderByComparator, true);
 
-			array[1] = sacpEntry;
+			array[1] = sapEntry;
 
-			array[2] = getByCompanyId_PrevAndNext(session, sacpEntry,
-					companyId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session, sapEntry, companyId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -2288,9 +2286,9 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	protected SACPEntry getByCompanyId_PrevAndNext(Session session,
-		SACPEntry sacpEntry, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator, boolean previous) {
+	protected SAPEntry getByCompanyId_PrevAndNext(Session session,
+		SAPEntry sapEntry, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -2301,7 +2299,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_SACPENTRY_WHERE);
+		query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2361,7 +2359,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 		}
 		else {
-			query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+			query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -2376,14 +2374,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(sacpEntry);
+			Object[] values = orderByComparator.getOrderByConditionValues(sapEntry);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<SACPEntry> list = q.list();
+		List<SAPEntry> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -2394,51 +2392,51 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns all the s a c p entries that the user has permission to view where companyId = &#63;.
+	 * Returns all the s a p entries that the user has permission to view where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
-	 * @return the matching s a c p entries that the user has permission to view
+	 * @return the matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByCompanyId(long companyId) {
+	public List<SAPEntry> filterFindByCompanyId(long companyId) {
 		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries that the user has permission to view where companyId = &#63;.
+	 * Returns a range of all the s a p entries that the user has permission to view where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of matching s a c p entries that the user has permission to view
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByCompanyId(long companyId, int start,
+	public List<SAPEntry> filterFindByCompanyId(long companyId, int start,
 		int end) {
 		return filterFindByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries that the user has permissions to view where companyId = &#63;.
+	 * Returns an ordered range of all the s a p entries that the user has permissions to view where companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching s a c p entries that the user has permission to view
+	 * @return the ordered range of matching s a p entries that the user has permission to view
 	 */
 	@Override
-	public List<SACPEntry> filterFindByCompanyId(long companyId, int start,
-		int end, OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> filterFindByCompanyId(long companyId, int start,
+		int end, OrderByComparator<SAPEntry> orderByComparator) {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return findByCompanyId(companyId, start, end, orderByComparator);
 		}
@@ -2454,16 +2452,16 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -2478,15 +2476,15 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 		else {
 			if (getDB().isSupportsInlineDistinct()) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 			else {
-				query.append(SACPEntryModelImpl.ORDER_BY_SQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_SQL);
 			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
@@ -2496,17 +2494,17 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS, SACPEntryImpl.class);
+				q.addEntity(_FILTER_ENTITY_ALIAS, SAPEntryImpl.class);
 			}
 			else {
-				q.addEntity(_FILTER_ENTITY_TABLE, SACPEntryImpl.class);
+				q.addEntity(_FILTER_ENTITY_TABLE, SAPEntryImpl.class);
 			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
 
-			return (List<SACPEntry>)QueryUtil.list(q, getDialect(), start, end);
+			return (List<SAPEntry>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -2517,38 +2515,38 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the s a c p entries before and after the current s a c p entry in the ordered set of s a c p entries that the user has permission to view where companyId = &#63;.
+	 * Returns the s a p entries before and after the current s a p entry in the ordered set of s a p entries that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param sacpEntryId the primary key of the current s a c p entry
+	 * @param sapEntryId the primary key of the current s a p entry
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @return the previous, current, and next s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry[] filterFindByCompanyId_PrevAndNext(long sacpEntryId,
-		long companyId, OrderByComparator<SACPEntry> orderByComparator)
+	public SAPEntry[] filterFindByCompanyId_PrevAndNext(long sapEntryId,
+		long companyId, OrderByComparator<SAPEntry> orderByComparator)
 		throws NoSuchEntryException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByCompanyId_PrevAndNext(sacpEntryId, companyId,
+			return findByCompanyId_PrevAndNext(sapEntryId, companyId,
 				orderByComparator);
 		}
 
-		SACPEntry sacpEntry = findByPrimaryKey(sacpEntryId);
+		SAPEntry sapEntry = findByPrimaryKey(sapEntryId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry[] array = new SACPEntryImpl[3];
+			SAPEntry[] array = new SAPEntryImpl[3];
 
-			array[0] = filterGetByCompanyId_PrevAndNext(session, sacpEntry,
+			array[0] = filterGetByCompanyId_PrevAndNext(session, sapEntry,
 					companyId, orderByComparator, true);
 
-			array[1] = sacpEntry;
+			array[1] = sapEntry;
 
-			array[2] = filterGetByCompanyId_PrevAndNext(session, sacpEntry,
+			array[2] = filterGetByCompanyId_PrevAndNext(session, sapEntry,
 					companyId, orderByComparator, false);
 
 			return array;
@@ -2561,9 +2559,9 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	protected SACPEntry filterGetByCompanyId_PrevAndNext(Session session,
-		SACPEntry sacpEntry, long companyId,
-		OrderByComparator<SACPEntry> orderByComparator, boolean previous) {
+	protected SAPEntry filterGetByCompanyId_PrevAndNext(Session session,
+		SAPEntry sapEntry, long companyId,
+		OrderByComparator<SAPEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -2575,16 +2573,16 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2);
+			query.append(_FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -2656,15 +2654,15 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 		else {
 			if (getDB().isSupportsInlineDistinct()) {
-				query.append(SACPEntryModelImpl.ORDER_BY_JPQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_JPQL);
 			}
 			else {
-				query.append(SACPEntryModelImpl.ORDER_BY_SQL);
+				query.append(SAPEntryModelImpl.ORDER_BY_SQL);
 			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -2672,10 +2670,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		q.setMaxResults(2);
 
 		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS, SACPEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, SAPEntryImpl.class);
 		}
 		else {
-			q.addEntity(_FILTER_ENTITY_TABLE, SACPEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_TABLE, SAPEntryImpl.class);
 		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -2683,14 +2681,14 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(sacpEntry);
+			Object[] values = orderByComparator.getOrderByConditionValues(sapEntry);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<SACPEntry> list = q.list();
+		List<SAPEntry> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -2701,23 +2699,23 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Removes all the s a c p entries where companyId = &#63; from the database.
+	 * Removes all the s a p entries where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
 	 */
 	@Override
 	public void removeByCompanyId(long companyId) {
-		for (SACPEntry sacpEntry : findByCompanyId(companyId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(sacpEntry);
+		for (SAPEntry sapEntry : findByCompanyId(companyId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(sapEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of s a c p entries where companyId = &#63;.
+	 * Returns the number of s a p entries where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
-	 * @return the number of matching s a c p entries
+	 * @return the number of matching s a p entries
 	 */
 	@Override
 	public int countByCompanyId(long companyId) {
@@ -2731,7 +2729,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_SACPENTRY_WHERE);
+			query.append(_SQL_COUNT_SAPENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2766,10 +2764,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns the number of s a c p entries that the user has permission to view where companyId = &#63;.
+	 * Returns the number of s a p entries that the user has permission to view where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
-	 * @return the number of matching s a c p entries that the user has permission to view
+	 * @return the number of matching s a p entries that the user has permission to view
 	 */
 	@Override
 	public int filterCountByCompanyId(long companyId) {
@@ -2779,12 +2777,12 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 		StringBundler query = new StringBundler(2);
 
-		query.append(_FILTER_SQL_COUNT_SACPENTRY_WHERE);
+		query.append(_FILTER_SQL_COUNT_SAPENTRY_WHERE);
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SACPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+				SAPEntry.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
@@ -2812,32 +2810,32 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		}
 	}
 
-	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "sacpEntry.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_N = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, SACPEntryImpl.class,
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "sapEntry.companyId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_N = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, SAPEntryImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_N",
 			new String[] { Long.class.getName(), String.class.getName() },
-			SACPEntryModelImpl.COMPANYID_COLUMN_BITMASK |
-			SACPEntryModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_N = new FinderPath(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			SAPEntryModelImpl.COMPANYID_COLUMN_BITMASK |
+			SAPEntryModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_N = new FinderPath(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_N",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns the s a c p entry where companyId = &#63; and name = &#63; or throws a {@link com.liferay.service.access.policy.NoSuchEntryException} if it could not be found.
+	 * Returns the s a p entry where companyId = &#63; and name = &#63; or throws a {@link com.liferay.service.access.policy.NoSuchEntryException} if it could not be found.
 	 *
 	 * @param companyId the company ID
 	 * @param name the name
-	 * @return the matching s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a c p entry could not be found
+	 * @return the matching s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry findByC_N(long companyId, String name)
+	public SAPEntry findByC_N(long companyId, String name)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByC_N(companyId, name);
+		SAPEntry sapEntry = fetchByC_N(companyId, name);
 
-		if (sacpEntry == null) {
+		if (sapEntry == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
@@ -2857,31 +2855,31 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			throw new NoSuchEntryException(msg.toString());
 		}
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
 	/**
-	 * Returns the s a c p entry where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the s a p entry where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param companyId the company ID
 	 * @param name the name
-	 * @return the matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByC_N(long companyId, String name) {
+	public SAPEntry fetchByC_N(long companyId, String name) {
 		return fetchByC_N(companyId, name, true);
 	}
 
 	/**
-	 * Returns the s a c p entry where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the s a p entry where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param companyId the company ID
 	 * @param name the name
 	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching s a c p entry, or <code>null</code> if a matching s a c p entry could not be found
+	 * @return the matching s a p entry, or <code>null</code> if a matching s a p entry could not be found
 	 */
 	@Override
-	public SACPEntry fetchByC_N(long companyId, String name,
+	public SAPEntry fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] { companyId, name };
 
@@ -2892,11 +2890,11 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					finderArgs, this);
 		}
 
-		if (result instanceof SACPEntry) {
-			SACPEntry sacpEntry = (SACPEntry)result;
+		if (result instanceof SAPEntry) {
+			SAPEntry sapEntry = (SAPEntry)result;
 
-			if ((companyId != sacpEntry.getCompanyId()) ||
-					!Validator.equals(name, sacpEntry.getName())) {
+			if ((companyId != sapEntry.getCompanyId()) ||
+					!Validator.equals(name, sapEntry.getName())) {
 				result = null;
 			}
 		}
@@ -2904,7 +2902,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		if (result == null) {
 			StringBundler query = new StringBundler(4);
 
-			query.append(_SQL_SELECT_SACPENTRY_WHERE);
+			query.append(_SQL_SELECT_SAPENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
@@ -2939,7 +2937,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					qPos.add(StringUtil.toLowerCase(name));
 				}
 
-				List<SACPEntry> list = q.list();
+				List<SAPEntry> list = q.list();
 
 				if (list.isEmpty()) {
 					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
@@ -2948,22 +2946,22 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"SACPEntryPersistenceImpl.fetchByC_N(long, String, boolean) with parameters (" +
+							"SAPEntryPersistenceImpl.fetchByC_N(long, String, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
 
-					SACPEntry sacpEntry = list.get(0);
+					SAPEntry sapEntry = list.get(0);
 
-					result = sacpEntry;
+					result = sapEntry;
 
-					cacheResult(sacpEntry);
+					cacheResult(sapEntry);
 
-					if ((sacpEntry.getCompanyId() != companyId) ||
-							(sacpEntry.getName() == null) ||
-							!sacpEntry.getName().equals(name)) {
+					if ((sapEntry.getCompanyId() != companyId) ||
+							(sapEntry.getName() == null) ||
+							!sapEntry.getName().equals(name)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-							finderArgs, sacpEntry);
+							finderArgs, sapEntry);
 					}
 				}
 			}
@@ -2982,31 +2980,31 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			return null;
 		}
 		else {
-			return (SACPEntry)result;
+			return (SAPEntry)result;
 		}
 	}
 
 	/**
-	 * Removes the s a c p entry where companyId = &#63; and name = &#63; from the database.
+	 * Removes the s a p entry where companyId = &#63; and name = &#63; from the database.
 	 *
 	 * @param companyId the company ID
 	 * @param name the name
-	 * @return the s a c p entry that was removed
+	 * @return the s a p entry that was removed
 	 */
 	@Override
-	public SACPEntry removeByC_N(long companyId, String name)
+	public SAPEntry removeByC_N(long companyId, String name)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = findByC_N(companyId, name);
+		SAPEntry sapEntry = findByC_N(companyId, name);
 
-		return remove(sacpEntry);
+		return remove(sapEntry);
 	}
 
 	/**
-	 * Returns the number of s a c p entries where companyId = &#63; and name = &#63;.
+	 * Returns the number of s a p entries where companyId = &#63; and name = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param name the name
-	 * @return the number of matching s a c p entries
+	 * @return the number of matching s a p entries
 	 */
 	@Override
 	public int countByC_N(long companyId, String name) {
@@ -3020,7 +3018,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_SACPENTRY_WHERE);
+			query.append(_SQL_COUNT_SAPENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
@@ -3072,53 +3070,53 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "sacpEntry.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_NAME_1 = "sacpEntry.name IS NULL";
-	private static final String _FINDER_COLUMN_C_N_NAME_2 = "lower(sacpEntry.name) = ?";
-	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(sacpEntry.name IS NULL OR sacpEntry.name = '')";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "sapEntry.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "sapEntry.name IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "lower(sapEntry.name) = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(sapEntry.name IS NULL OR sapEntry.name = '')";
 
-	public SACPEntryPersistenceImpl() {
-		setModelClass(SACPEntry.class);
+	public SAPEntryPersistenceImpl() {
+		setModelClass(SAPEntry.class);
 	}
 
 	/**
-	 * Caches the s a c p entry in the entity cache if it is enabled.
+	 * Caches the s a p entry in the entity cache if it is enabled.
 	 *
-	 * @param sacpEntry the s a c p entry
+	 * @param sapEntry the s a p entry
 	 */
 	@Override
-	public void cacheResult(SACPEntry sacpEntry) {
-		EntityCacheUtil.putResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryImpl.class, sacpEntry.getPrimaryKey(), sacpEntry);
+	public void cacheResult(SAPEntry sapEntry) {
+		EntityCacheUtil.putResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryImpl.class, sapEntry.getPrimaryKey(), sapEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] { sacpEntry.getCompanyId(), sacpEntry.getName() },
-			sacpEntry);
+			new Object[] { sapEntry.getCompanyId(), sapEntry.getName() },
+			sapEntry);
 
-		sacpEntry.resetOriginalValues();
+		sapEntry.resetOriginalValues();
 	}
 
 	/**
-	 * Caches the s a c p entries in the entity cache if it is enabled.
+	 * Caches the s a p entries in the entity cache if it is enabled.
 	 *
-	 * @param sacpEntries the s a c p entries
+	 * @param sapEntries the s a p entries
 	 */
 	@Override
-	public void cacheResult(List<SACPEntry> sacpEntries) {
-		for (SACPEntry sacpEntry : sacpEntries) {
+	public void cacheResult(List<SAPEntry> sapEntries) {
+		for (SAPEntry sapEntry : sapEntries) {
 			if (EntityCacheUtil.getResult(
-						SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-						SACPEntryImpl.class, sacpEntry.getPrimaryKey()) == null) {
-				cacheResult(sacpEntry);
+						SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+						SAPEntryImpl.class, sapEntry.getPrimaryKey()) == null) {
+				cacheResult(sapEntry);
 			}
 			else {
-				sacpEntry.resetOriginalValues();
+				sapEntry.resetOriginalValues();
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all s a c p entries.
+	 * Clears the cache for all s a p entries.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
@@ -3126,7 +3124,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	 */
 	@Override
 	public void clearCache() {
-		EntityCacheUtil.clearCache(SACPEntryImpl.class);
+		EntityCacheUtil.clearCache(SAPEntryImpl.class);
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
@@ -3134,78 +3132,76 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Clears the cache for the s a c p entry.
+	 * Clears the cache for the s a p entry.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
 	@Override
-	public void clearCache(SACPEntry sacpEntry) {
-		EntityCacheUtil.removeResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryImpl.class, sacpEntry.getPrimaryKey());
+	public void clearCache(SAPEntry sapEntry) {
+		EntityCacheUtil.removeResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryImpl.class, sapEntry.getPrimaryKey());
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache(sacpEntry);
+		clearUniqueFindersCache(sapEntry);
 	}
 
 	@Override
-	public void clearCache(List<SACPEntry> sacpEntries) {
+	public void clearCache(List<SAPEntry> sapEntries) {
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (SACPEntry sacpEntry : sacpEntries) {
-			EntityCacheUtil.removeResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-				SACPEntryImpl.class, sacpEntry.getPrimaryKey());
+		for (SAPEntry sapEntry : sapEntries) {
+			EntityCacheUtil.removeResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+				SAPEntryImpl.class, sapEntry.getPrimaryKey());
 
-			clearUniqueFindersCache(sacpEntry);
+			clearUniqueFindersCache(sapEntry);
 		}
 	}
 
-	protected void cacheUniqueFindersCache(SACPEntry sacpEntry, boolean isNew) {
+	protected void cacheUniqueFindersCache(SAPEntry sapEntry, boolean isNew) {
 		if (isNew) {
 			Object[] args = new Object[] {
-					sacpEntry.getCompanyId(), sacpEntry.getName()
+					sapEntry.getCompanyId(), sapEntry.getName()
 				};
 
 			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args, sacpEntry);
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args, sapEntry);
 		}
 		else {
-			SACPEntryModelImpl sacpEntryModelImpl = (SACPEntryModelImpl)sacpEntry;
+			SAPEntryModelImpl sapEntryModelImpl = (SAPEntryModelImpl)sapEntry;
 
-			if ((sacpEntryModelImpl.getColumnBitmask() &
+			if ((sapEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						sacpEntry.getCompanyId(), sacpEntry.getName()
+						sapEntry.getCompanyId(), sapEntry.getName()
 					};
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
 					Long.valueOf(1));
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args,
-					sacpEntry);
+					sapEntry);
 			}
 		}
 	}
 
-	protected void clearUniqueFindersCache(SACPEntry sacpEntry) {
-		SACPEntryModelImpl sacpEntryModelImpl = (SACPEntryModelImpl)sacpEntry;
+	protected void clearUniqueFindersCache(SAPEntry sapEntry) {
+		SAPEntryModelImpl sapEntryModelImpl = (SAPEntryModelImpl)sapEntry;
 
-		Object[] args = new Object[] {
-				sacpEntry.getCompanyId(), sacpEntry.getName()
-			};
+		Object[] args = new Object[] { sapEntry.getCompanyId(), sapEntry.getName() };
 
 		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
 
-		if ((sacpEntryModelImpl.getColumnBitmask() &
+		if ((sapEntryModelImpl.getColumnBitmask() &
 				FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
 			args = new Object[] {
-					sacpEntryModelImpl.getOriginalCompanyId(),
-					sacpEntryModelImpl.getOriginalName()
+					sapEntryModelImpl.getOriginalCompanyId(),
+					sapEntryModelImpl.getOriginalName()
 				};
 
 			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
@@ -3214,56 +3210,55 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Creates a new s a c p entry with the primary key. Does not add the s a c p entry to the database.
+	 * Creates a new s a p entry with the primary key. Does not add the s a p entry to the database.
 	 *
-	 * @param sacpEntryId the primary key for the new s a c p entry
-	 * @return the new s a c p entry
+	 * @param sapEntryId the primary key for the new s a p entry
+	 * @return the new s a p entry
 	 */
 	@Override
-	public SACPEntry create(long sacpEntryId) {
-		SACPEntry sacpEntry = new SACPEntryImpl();
+	public SAPEntry create(long sapEntryId) {
+		SAPEntry sapEntry = new SAPEntryImpl();
 
-		sacpEntry.setNew(true);
-		sacpEntry.setPrimaryKey(sacpEntryId);
+		sapEntry.setNew(true);
+		sapEntry.setPrimaryKey(sapEntryId);
 
 		String uuid = PortalUUIDUtil.generate();
 
-		sacpEntry.setUuid(uuid);
+		sapEntry.setUuid(uuid);
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
 	/**
-	 * Removes the s a c p entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the s a p entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param sacpEntryId the primary key of the s a c p entry
-	 * @return the s a c p entry that was removed
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @param sapEntryId the primary key of the s a p entry
+	 * @return the s a p entry that was removed
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry remove(long sacpEntryId) throws NoSuchEntryException {
-		return remove((Serializable)sacpEntryId);
+	public SAPEntry remove(long sapEntryId) throws NoSuchEntryException {
+		return remove((Serializable)sapEntryId);
 	}
 
 	/**
-	 * Removes the s a c p entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the s a p entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the s a c p entry
-	 * @return the s a c p entry that was removed
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @param primaryKey the primary key of the s a p entry
+	 * @return the s a p entry that was removed
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry remove(Serializable primaryKey)
-		throws NoSuchEntryException {
+	public SAPEntry remove(Serializable primaryKey) throws NoSuchEntryException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SACPEntry sacpEntry = (SACPEntry)session.get(SACPEntryImpl.class,
+			SAPEntry sapEntry = (SAPEntry)session.get(SAPEntryImpl.class,
 					primaryKey);
 
-			if (sacpEntry == null) {
+			if (sapEntry == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
@@ -3272,7 +3267,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					primaryKey);
 			}
 
-			return remove(sacpEntry);
+			return remove(sapEntry);
 		}
 		catch (NoSuchEntryException nsee) {
 			throw nsee;
@@ -3286,21 +3281,21 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	@Override
-	protected SACPEntry removeImpl(SACPEntry sacpEntry) {
-		sacpEntry = toUnwrappedModel(sacpEntry);
+	protected SAPEntry removeImpl(SAPEntry sapEntry) {
+		sapEntry = toUnwrappedModel(sapEntry);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (!session.contains(sacpEntry)) {
-				sacpEntry = (SACPEntry)session.get(SACPEntryImpl.class,
-						sacpEntry.getPrimaryKeyObj());
+			if (!session.contains(sapEntry)) {
+				sapEntry = (SAPEntry)session.get(SAPEntryImpl.class,
+						sapEntry.getPrimaryKeyObj());
 			}
 
-			if (sacpEntry != null) {
-				session.delete(sacpEntry);
+			if (sapEntry != null) {
+				session.delete(sapEntry);
 			}
 		}
 		catch (Exception e) {
@@ -3310,47 +3305,47 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			closeSession(session);
 		}
 
-		if (sacpEntry != null) {
-			clearCache(sacpEntry);
+		if (sapEntry != null) {
+			clearCache(sapEntry);
 		}
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
 	@Override
-	public SACPEntry updateImpl(
-		com.liferay.service.access.policy.model.SACPEntry sacpEntry) {
-		sacpEntry = toUnwrappedModel(sacpEntry);
+	public SAPEntry updateImpl(
+		com.liferay.service.access.policy.model.SAPEntry sapEntry) {
+		sapEntry = toUnwrappedModel(sapEntry);
 
-		boolean isNew = sacpEntry.isNew();
+		boolean isNew = sapEntry.isNew();
 
-		SACPEntryModelImpl sacpEntryModelImpl = (SACPEntryModelImpl)sacpEntry;
+		SAPEntryModelImpl sapEntryModelImpl = (SAPEntryModelImpl)sapEntry;
 
-		if (Validator.isNull(sacpEntry.getUuid())) {
+		if (Validator.isNull(sapEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
-			sacpEntry.setUuid(uuid);
+			sapEntry.setUuid(uuid);
 		}
 
 		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
-		if (isNew && (sacpEntry.getCreateDate() == null)) {
+		if (isNew && (sapEntry.getCreateDate() == null)) {
 			if (serviceContext == null) {
-				sacpEntry.setCreateDate(now);
+				sapEntry.setCreateDate(now);
 			}
 			else {
-				sacpEntry.setCreateDate(serviceContext.getCreateDate(now));
+				sapEntry.setCreateDate(serviceContext.getCreateDate(now));
 			}
 		}
 
-		if (!sacpEntryModelImpl.hasSetModifiedDate()) {
+		if (!sapEntryModelImpl.hasSetModifiedDate()) {
 			if (serviceContext == null) {
-				sacpEntry.setModifiedDate(now);
+				sapEntry.setModifiedDate(now);
 			}
 			else {
-				sacpEntry.setModifiedDate(serviceContext.getModifiedDate(now));
+				sapEntry.setModifiedDate(serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -3359,13 +3354,13 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		try {
 			session = openSession();
 
-			if (sacpEntry.isNew()) {
-				session.save(sacpEntry);
+			if (sapEntry.isNew()) {
+				session.save(sapEntry);
 
-				sacpEntry.setNew(false);
+				sapEntry.setNew(false);
 			}
 			else {
-				session.merge(sacpEntry);
+				session.merge(sapEntry);
 			}
 		}
 		catch (Exception e) {
@@ -3377,33 +3372,31 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew || !SACPEntryModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (isNew || !SAPEntryModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		else {
-			if ((sacpEntryModelImpl.getColumnBitmask() &
+			if ((sapEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						sacpEntryModelImpl.getOriginalUuid()
-					};
+				Object[] args = new Object[] { sapEntryModelImpl.getOriginalUuid() };
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
 					args);
 
-				args = new Object[] { sacpEntryModelImpl.getUuid() };
+				args = new Object[] { sapEntryModelImpl.getUuid() };
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
 					args);
 			}
 
-			if ((sacpEntryModelImpl.getColumnBitmask() &
+			if ((sapEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						sacpEntryModelImpl.getOriginalUuid(),
-						sacpEntryModelImpl.getOriginalCompanyId()
+						sapEntryModelImpl.getOriginalUuid(),
+						sapEntryModelImpl.getOriginalCompanyId()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
@@ -3411,8 +3404,8 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					args);
 
 				args = new Object[] {
-						sacpEntryModelImpl.getUuid(),
-						sacpEntryModelImpl.getCompanyId()
+						sapEntryModelImpl.getUuid(),
+						sapEntryModelImpl.getCompanyId()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
@@ -3420,10 +3413,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					args);
 			}
 
-			if ((sacpEntryModelImpl.getColumnBitmask() &
+			if ((sapEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						sacpEntryModelImpl.getOriginalCompanyId()
+						sapEntryModelImpl.getOriginalCompanyId()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
@@ -3431,7 +3424,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { sacpEntryModelImpl.getCompanyId() };
+				args = new Object[] { sapEntryModelImpl.getCompanyId() };
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					args);
@@ -3440,55 +3433,55 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 		}
 
-		EntityCacheUtil.putResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SACPEntryImpl.class, sacpEntry.getPrimaryKey(), sacpEntry, false);
+		EntityCacheUtil.putResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SAPEntryImpl.class, sapEntry.getPrimaryKey(), sapEntry, false);
 
-		clearUniqueFindersCache(sacpEntry);
-		cacheUniqueFindersCache(sacpEntry, isNew);
+		clearUniqueFindersCache(sapEntry);
+		cacheUniqueFindersCache(sapEntry, isNew);
 
-		sacpEntry.resetOriginalValues();
+		sapEntry.resetOriginalValues();
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
-	protected SACPEntry toUnwrappedModel(SACPEntry sacpEntry) {
-		if (sacpEntry instanceof SACPEntryImpl) {
-			return sacpEntry;
+	protected SAPEntry toUnwrappedModel(SAPEntry sapEntry) {
+		if (sapEntry instanceof SAPEntryImpl) {
+			return sapEntry;
 		}
 
-		SACPEntryImpl sacpEntryImpl = new SACPEntryImpl();
+		SAPEntryImpl sapEntryImpl = new SAPEntryImpl();
 
-		sacpEntryImpl.setNew(sacpEntry.isNew());
-		sacpEntryImpl.setPrimaryKey(sacpEntry.getPrimaryKey());
+		sapEntryImpl.setNew(sapEntry.isNew());
+		sapEntryImpl.setPrimaryKey(sapEntry.getPrimaryKey());
 
-		sacpEntryImpl.setUuid(sacpEntry.getUuid());
-		sacpEntryImpl.setSacpEntryId(sacpEntry.getSacpEntryId());
-		sacpEntryImpl.setCompanyId(sacpEntry.getCompanyId());
-		sacpEntryImpl.setUserId(sacpEntry.getUserId());
-		sacpEntryImpl.setUserName(sacpEntry.getUserName());
-		sacpEntryImpl.setCreateDate(sacpEntry.getCreateDate());
-		sacpEntryImpl.setModifiedDate(sacpEntry.getModifiedDate());
-		sacpEntryImpl.setAllowedServiceSignatures(sacpEntry.getAllowedServiceSignatures());
-		sacpEntryImpl.setDefaultSACPEntry(sacpEntry.isDefaultSACPEntry());
-		sacpEntryImpl.setName(sacpEntry.getName());
-		sacpEntryImpl.setTitle(sacpEntry.getTitle());
+		sapEntryImpl.setUuid(sapEntry.getUuid());
+		sapEntryImpl.setSapEntryId(sapEntry.getSapEntryId());
+		sapEntryImpl.setCompanyId(sapEntry.getCompanyId());
+		sapEntryImpl.setUserId(sapEntry.getUserId());
+		sapEntryImpl.setUserName(sapEntry.getUserName());
+		sapEntryImpl.setCreateDate(sapEntry.getCreateDate());
+		sapEntryImpl.setModifiedDate(sapEntry.getModifiedDate());
+		sapEntryImpl.setAllowedServiceSignatures(sapEntry.getAllowedServiceSignatures());
+		sapEntryImpl.setDefaultSAPEntry(sapEntry.isDefaultSAPEntry());
+		sapEntryImpl.setName(sapEntry.getName());
+		sapEntryImpl.setTitle(sapEntry.getTitle());
 
-		return sacpEntryImpl;
+		return sapEntryImpl;
 	}
 
 	/**
-	 * Returns the s a c p entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the s a p entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the s a c p entry
-	 * @return the s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @param primaryKey the primary key of the s a p entry
+	 * @return the s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry findByPrimaryKey(Serializable primaryKey)
+	public SAPEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchEntryException {
-		SACPEntry sacpEntry = fetchByPrimaryKey(primaryKey);
+		SAPEntry sapEntry = fetchByPrimaryKey(primaryKey);
 
-		if (sacpEntry == null) {
+		if (sapEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
@@ -3497,57 +3490,56 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				primaryKey);
 		}
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
 	/**
-	 * Returns the s a c p entry with the primary key or throws a {@link com.liferay.service.access.policy.NoSuchEntryException} if it could not be found.
+	 * Returns the s a p entry with the primary key or throws a {@link com.liferay.service.access.policy.NoSuchEntryException} if it could not be found.
 	 *
-	 * @param sacpEntryId the primary key of the s a c p entry
-	 * @return the s a c p entry
-	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a c p entry with the primary key could not be found
+	 * @param sapEntryId the primary key of the s a p entry
+	 * @return the s a p entry
+	 * @throws com.liferay.service.access.policy.NoSuchEntryException if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry findByPrimaryKey(long sacpEntryId)
+	public SAPEntry findByPrimaryKey(long sapEntryId)
 		throws NoSuchEntryException {
-		return findByPrimaryKey((Serializable)sacpEntryId);
+		return findByPrimaryKey((Serializable)sapEntryId);
 	}
 
 	/**
-	 * Returns the s a c p entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the s a p entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the s a c p entry
-	 * @return the s a c p entry, or <code>null</code> if a s a c p entry with the primary key could not be found
+	 * @param primaryKey the primary key of the s a p entry
+	 * @return the s a p entry, or <code>null</code> if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry fetchByPrimaryKey(Serializable primaryKey) {
-		SACPEntry sacpEntry = (SACPEntry)EntityCacheUtil.getResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-				SACPEntryImpl.class, primaryKey);
+	public SAPEntry fetchByPrimaryKey(Serializable primaryKey) {
+		SAPEntry sapEntry = (SAPEntry)EntityCacheUtil.getResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+				SAPEntryImpl.class, primaryKey);
 
-		if (sacpEntry == _nullSACPEntry) {
+		if (sapEntry == _nullSAPEntry) {
 			return null;
 		}
 
-		if (sacpEntry == null) {
+		if (sapEntry == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				sacpEntry = (SACPEntry)session.get(SACPEntryImpl.class,
-						primaryKey);
+				sapEntry = (SAPEntry)session.get(SAPEntryImpl.class, primaryKey);
 
-				if (sacpEntry != null) {
-					cacheResult(sacpEntry);
+				if (sapEntry != null) {
+					cacheResult(sapEntry);
 				}
 				else {
-					EntityCacheUtil.putResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-						SACPEntryImpl.class, primaryKey, _nullSACPEntry);
+					EntityCacheUtil.putResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+						SAPEntryImpl.class, primaryKey, _nullSAPEntry);
 				}
 			}
 			catch (Exception e) {
-				EntityCacheUtil.removeResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-					SACPEntryImpl.class, primaryKey);
+				EntityCacheUtil.removeResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+					SAPEntryImpl.class, primaryKey);
 
 				throw processException(e);
 			}
@@ -3556,38 +3548,38 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			}
 		}
 
-		return sacpEntry;
+		return sapEntry;
 	}
 
 	/**
-	 * Returns the s a c p entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the s a p entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param sacpEntryId the primary key of the s a c p entry
-	 * @return the s a c p entry, or <code>null</code> if a s a c p entry with the primary key could not be found
+	 * @param sapEntryId the primary key of the s a p entry
+	 * @return the s a p entry, or <code>null</code> if a s a p entry with the primary key could not be found
 	 */
 	@Override
-	public SACPEntry fetchByPrimaryKey(long sacpEntryId) {
-		return fetchByPrimaryKey((Serializable)sacpEntryId);
+	public SAPEntry fetchByPrimaryKey(long sapEntryId) {
+		return fetchByPrimaryKey((Serializable)sapEntryId);
 	}
 
 	@Override
-	public Map<Serializable, SACPEntry> fetchByPrimaryKeys(
+	public Map<Serializable, SAPEntry> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, SACPEntry> map = new HashMap<Serializable, SACPEntry>();
+		Map<Serializable, SAPEntry> map = new HashMap<Serializable, SAPEntry>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			SACPEntry sacpEntry = fetchByPrimaryKey(primaryKey);
+			SAPEntry sapEntry = fetchByPrimaryKey(primaryKey);
 
-			if (sacpEntry != null) {
-				map.put(primaryKey, sacpEntry);
+			if (sapEntry != null) {
+				map.put(primaryKey, sapEntry);
 			}
 
 			return map;
@@ -3596,10 +3588,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			SACPEntry sacpEntry = (SACPEntry)EntityCacheUtil.getResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-					SACPEntryImpl.class, primaryKey);
+			SAPEntry sapEntry = (SAPEntry)EntityCacheUtil.getResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+					SAPEntryImpl.class, primaryKey);
 
-			if (sacpEntry == null) {
+			if (sapEntry == null) {
 				if (uncachedPrimaryKeys == null) {
 					uncachedPrimaryKeys = new HashSet<Serializable>();
 				}
@@ -3607,7 +3599,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				uncachedPrimaryKeys.add(primaryKey);
 			}
 			else {
-				map.put(primaryKey, sacpEntry);
+				map.put(primaryKey, sapEntry);
 			}
 		}
 
@@ -3618,7 +3610,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
 				1);
 
-		query.append(_SQL_SELECT_SACPENTRY_WHERE_PKS_IN);
+		query.append(_SQL_SELECT_SAPENTRY_WHERE_PKS_IN);
 
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
 			query.append(String.valueOf(primaryKey));
@@ -3639,17 +3631,17 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 			Query q = session.createQuery(sql);
 
-			for (SACPEntry sacpEntry : (List<SACPEntry>)q.list()) {
-				map.put(sacpEntry.getPrimaryKeyObj(), sacpEntry);
+			for (SAPEntry sapEntry : (List<SAPEntry>)q.list()) {
+				map.put(sapEntry.getPrimaryKeyObj(), sapEntry);
 
-				cacheResult(sacpEntry);
+				cacheResult(sapEntry);
 
-				uncachedPrimaryKeys.remove(sacpEntry.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(sapEntry.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				EntityCacheUtil.putResult(SACPEntryModelImpl.ENTITY_CACHE_ENABLED,
-					SACPEntryImpl.class, primaryKey, _nullSACPEntry);
+				EntityCacheUtil.putResult(SAPEntryModelImpl.ENTITY_CACHE_ENABLED,
+					SAPEntryImpl.class, primaryKey, _nullSAPEntry);
 			}
 		}
 		catch (Exception e) {
@@ -3663,46 +3655,46 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Returns all the s a c p entries.
+	 * Returns all the s a p entries.
 	 *
-	 * @return the s a c p entries
+	 * @return the s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findAll() {
+	public List<SAPEntry> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the s a c p entries.
+	 * Returns a range of all the s a p entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
-	 * @return the range of s a c p entries
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
+	 * @return the range of s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findAll(int start, int end) {
+	public List<SAPEntry> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the s a c p entries.
+	 * Returns an ordered range of all the s a p entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SACPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.service.access.policy.model.impl.SAPEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s a c p entries
-	 * @param end the upper bound of the range of s a c p entries (not inclusive)
+	 * @param start the lower bound of the range of s a p entries
+	 * @param end the upper bound of the range of s a p entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of s a c p entries
+	 * @return the ordered range of s a p entries
 	 */
 	@Override
-	public List<SACPEntry> findAll(int start, int end,
-		OrderByComparator<SACPEntry> orderByComparator) {
+	public List<SAPEntry> findAll(int start, int end,
+		OrderByComparator<SAPEntry> orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -3718,7 +3710,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			finderArgs = new Object[] { start, end, orderByComparator };
 		}
 
-		List<SACPEntry> list = (List<SACPEntry>)FinderCacheUtil.getResult(finderPath,
+		List<SAPEntry> list = (List<SAPEntry>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if (list == null) {
@@ -3729,7 +3721,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				query = new StringBundler(2 +
 						(orderByComparator.getOrderByFields().length * 3));
 
-				query.append(_SQL_SELECT_SACPENTRY);
+				query.append(_SQL_SELECT_SAPENTRY);
 
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 					orderByComparator);
@@ -3737,10 +3729,10 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				sql = query.toString();
 			}
 			else {
-				sql = _SQL_SELECT_SACPENTRY;
+				sql = _SQL_SELECT_SAPENTRY;
 
 				if (pagination) {
-					sql = sql.concat(SACPEntryModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(SAPEntryModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -3752,7 +3744,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
@@ -3760,7 +3752,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<SACPEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<SAPEntry>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 
@@ -3782,20 +3774,20 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 	}
 
 	/**
-	 * Removes all the s a c p entries from the database.
+	 * Removes all the s a p entries from the database.
 	 *
 	 */
 	@Override
 	public void removeAll() {
-		for (SACPEntry sacpEntry : findAll()) {
-			remove(sacpEntry);
+		for (SAPEntry sapEntry : findAll()) {
+			remove(sapEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of s a c p entries.
+	 * Returns the number of s a p entries.
 	 *
-	 * @return the number of s a c p entries
+	 * @return the number of s a p entries
 	 */
 	@Override
 	public int countAll() {
@@ -3808,7 +3800,7 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_SACPENTRY);
+				Query q = session.createQuery(_SQL_COUNT_SAPENTRY);
 
 				count = (Long)q.uniqueResult();
 
@@ -3836,60 +3828,60 @@ public class SACPEntryPersistenceImpl extends BasePersistenceImpl<SACPEntry>
 
 	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
-		return SACPEntryModelImpl.TABLE_COLUMNS_MAP;
+		return SAPEntryModelImpl.TABLE_COLUMNS_MAP;
 	}
 
 	/**
-	 * Initializes the s a c p entry persistence.
+	 * Initializes the s a p entry persistence.
 	 */
 	public void afterPropertiesSet() {
 	}
 
 	public void destroy() {
-		EntityCacheUtil.removeCache(SACPEntryImpl.class.getName());
+		EntityCacheUtil.removeCache(SAPEntryImpl.class.getName());
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	private static final String _SQL_SELECT_SACPENTRY = "SELECT sacpEntry FROM SACPEntry sacpEntry";
-	private static final String _SQL_SELECT_SACPENTRY_WHERE_PKS_IN = "SELECT sacpEntry FROM SACPEntry sacpEntry WHERE sacpEntryId IN (";
-	private static final String _SQL_SELECT_SACPENTRY_WHERE = "SELECT sacpEntry FROM SACPEntry sacpEntry WHERE ";
-	private static final String _SQL_COUNT_SACPENTRY = "SELECT COUNT(sacpEntry) FROM SACPEntry sacpEntry";
-	private static final String _SQL_COUNT_SACPENTRY_WHERE = "SELECT COUNT(sacpEntry) FROM SACPEntry sacpEntry WHERE ";
-	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "sacpEntry.sacpEntryId";
-	private static final String _FILTER_SQL_SELECT_SACPENTRY_WHERE = "SELECT DISTINCT {sacpEntry.*} FROM SACPEntry sacpEntry WHERE ";
-	private static final String _FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {SACPEntry.*} FROM (SELECT DISTINCT sacpEntry.sacpEntryId FROM SACPEntry sacpEntry WHERE ";
-	private static final String _FILTER_SQL_SELECT_SACPENTRY_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN SACPEntry ON TEMP_TABLE.sacpEntryId = SACPEntry.sacpEntryId";
-	private static final String _FILTER_SQL_COUNT_SACPENTRY_WHERE = "SELECT COUNT(DISTINCT sacpEntry.sacpEntryId) AS COUNT_VALUE FROM SACPEntry sacpEntry WHERE ";
-	private static final String _FILTER_ENTITY_ALIAS = "sacpEntry";
-	private static final String _FILTER_ENTITY_TABLE = "SACPEntry";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "sacpEntry.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "SACPEntry.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SACPEntry exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SACPEntry exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(SACPEntryPersistenceImpl.class);
+	private static final String _SQL_SELECT_SAPENTRY = "SELECT sapEntry FROM SAPEntry sapEntry";
+	private static final String _SQL_SELECT_SAPENTRY_WHERE_PKS_IN = "SELECT sapEntry FROM SAPEntry sapEntry WHERE sapEntryId IN (";
+	private static final String _SQL_SELECT_SAPENTRY_WHERE = "SELECT sapEntry FROM SAPEntry sapEntry WHERE ";
+	private static final String _SQL_COUNT_SAPENTRY = "SELECT COUNT(sapEntry) FROM SAPEntry sapEntry";
+	private static final String _SQL_COUNT_SAPENTRY_WHERE = "SELECT COUNT(sapEntry) FROM SAPEntry sapEntry WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "sapEntry.sapEntryId";
+	private static final String _FILTER_SQL_SELECT_SAPENTRY_WHERE = "SELECT DISTINCT {sapEntry.*} FROM SAPEntry sapEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {SAPEntry.*} FROM (SELECT DISTINCT sapEntry.sapEntryId FROM SAPEntry sapEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_SAPENTRY_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN SAPEntry ON TEMP_TABLE.sapEntryId = SAPEntry.sapEntryId";
+	private static final String _FILTER_SQL_COUNT_SAPENTRY_WHERE = "SELECT COUNT(DISTINCT sapEntry.sapEntryId) AS COUNT_VALUE FROM SAPEntry sapEntry WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "sapEntry";
+	private static final String _FILTER_ENTITY_TABLE = "SAPEntry";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "sapEntry.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SAPEntry.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SAPEntry exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SAPEntry exists with the key {";
+	private static final Log _log = LogFactoryUtil.getLog(SAPEntryPersistenceImpl.class);
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
 				"uuid"
 			});
-	private static final SACPEntry _nullSACPEntry = new SACPEntryImpl() {
+	private static final SAPEntry _nullSAPEntry = new SAPEntryImpl() {
 			@Override
 			public Object clone() {
 				return this;
 			}
 
 			@Override
-			public CacheModel<SACPEntry> toCacheModel() {
-				return _nullSACPEntryCacheModel;
+			public CacheModel<SAPEntry> toCacheModel() {
+				return _nullSAPEntryCacheModel;
 			}
 		};
 
-	private static final CacheModel<SACPEntry> _nullSACPEntryCacheModel = new CacheModel<SACPEntry>() {
+	private static final CacheModel<SAPEntry> _nullSAPEntryCacheModel = new CacheModel<SAPEntry>() {
 			@Override
-			public SACPEntry toEntityModel() {
-				return _nullSACPEntry;
+			public SAPEntry toEntityModel() {
+				return _nullSAPEntry;
 			}
 		};
 }

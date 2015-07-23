@@ -19,20 +19,20 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the SACPEntry service. Represents a row in the &quot;SACPEntry&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the SAPEntry service. Represents a row in the &quot;SAPEntry&quot; database table, with each column mapped to a property of this class.
  *
  * @author Brian Wing Shun Chan
- * @see SACPEntryModel
- * @see com.liferay.service.access.policy.model.impl.SACPEntryImpl
- * @see com.liferay.service.access.policy.model.impl.SACPEntryModelImpl
+ * @see SAPEntryModel
+ * @see com.liferay.service.access.policy.model.impl.SAPEntryImpl
+ * @see com.liferay.service.access.policy.model.impl.SAPEntryModelImpl
  * @generated
  */
 @ProviderType
-public interface SACPEntry extends SACPEntryModel, PersistedModel {
+public interface SAPEntry extends SAPEntryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.service.access.policy.model.impl.SACPEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.service.access.policy.model.impl.SAPEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.util.List<java.lang.String> getAllowedServiceSignaturesList();
 }

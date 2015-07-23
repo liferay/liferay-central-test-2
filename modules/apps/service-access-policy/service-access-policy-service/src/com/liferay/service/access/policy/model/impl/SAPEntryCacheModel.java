@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
-import com.liferay.service.access.policy.model.SACPEntry;
+import com.liferay.service.access.policy.model.SAPEntry;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -31,28 +31,27 @@ import java.io.ObjectOutput;
 import java.util.Date;
 
 /**
- * The cache model class for representing SACPEntry in entity cache.
+ * The cache model class for representing SAPEntry in entity cache.
  *
  * @author Brian Wing Shun Chan
- * @see SACPEntry
+ * @see SAPEntry
  * @generated
  */
 @ProviderType
-public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
-	Externalizable {
+public class SAPEntryCacheModel implements CacheModel<SAPEntry>, Externalizable {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
 
-		if (!(obj instanceof SACPEntryCacheModel)) {
+		if (!(obj instanceof SAPEntryCacheModel)) {
 			return false;
 		}
 
-		SACPEntryCacheModel sacpEntryCacheModel = (SACPEntryCacheModel)obj;
+		SAPEntryCacheModel sapEntryCacheModel = (SAPEntryCacheModel)obj;
 
-		if (sacpEntryId == sacpEntryCacheModel.sacpEntryId) {
+		if (sapEntryId == sapEntryCacheModel.sapEntryId) {
 			return true;
 		}
 
@@ -61,7 +60,7 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, sacpEntryId);
+		return HashUtil.hash(0, sapEntryId);
 	}
 
 	@Override
@@ -70,8 +69,8 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", sacpEntryId=");
-		sb.append(sacpEntryId);
+		sb.append(", sapEntryId=");
+		sb.append(sapEntryId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -84,8 +83,8 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 		sb.append(modifiedDate);
 		sb.append(", allowedServiceSignatures=");
 		sb.append(allowedServiceSignatures);
-		sb.append(", defaultSACPEntry=");
-		sb.append(defaultSACPEntry);
+		sb.append(", defaultSAPEntry=");
+		sb.append(defaultSAPEntry);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", title=");
@@ -96,80 +95,80 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 	}
 
 	@Override
-	public SACPEntry toEntityModel() {
-		SACPEntryImpl sacpEntryImpl = new SACPEntryImpl();
+	public SAPEntry toEntityModel() {
+		SAPEntryImpl sapEntryImpl = new SAPEntryImpl();
 
 		if (uuid == null) {
-			sacpEntryImpl.setUuid(StringPool.BLANK);
+			sapEntryImpl.setUuid(StringPool.BLANK);
 		}
 		else {
-			sacpEntryImpl.setUuid(uuid);
+			sapEntryImpl.setUuid(uuid);
 		}
 
-		sacpEntryImpl.setSacpEntryId(sacpEntryId);
-		sacpEntryImpl.setCompanyId(companyId);
-		sacpEntryImpl.setUserId(userId);
+		sapEntryImpl.setSapEntryId(sapEntryId);
+		sapEntryImpl.setCompanyId(companyId);
+		sapEntryImpl.setUserId(userId);
 
 		if (userName == null) {
-			sacpEntryImpl.setUserName(StringPool.BLANK);
+			sapEntryImpl.setUserName(StringPool.BLANK);
 		}
 		else {
-			sacpEntryImpl.setUserName(userName);
+			sapEntryImpl.setUserName(userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
-			sacpEntryImpl.setCreateDate(null);
+			sapEntryImpl.setCreateDate(null);
 		}
 		else {
-			sacpEntryImpl.setCreateDate(new Date(createDate));
+			sapEntryImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			sacpEntryImpl.setModifiedDate(null);
+			sapEntryImpl.setModifiedDate(null);
 		}
 		else {
-			sacpEntryImpl.setModifiedDate(new Date(modifiedDate));
+			sapEntryImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
 		if (allowedServiceSignatures == null) {
-			sacpEntryImpl.setAllowedServiceSignatures(StringPool.BLANK);
+			sapEntryImpl.setAllowedServiceSignatures(StringPool.BLANK);
 		}
 		else {
-			sacpEntryImpl.setAllowedServiceSignatures(allowedServiceSignatures);
+			sapEntryImpl.setAllowedServiceSignatures(allowedServiceSignatures);
 		}
 
-		sacpEntryImpl.setDefaultSACPEntry(defaultSACPEntry);
+		sapEntryImpl.setDefaultSAPEntry(defaultSAPEntry);
 
 		if (name == null) {
-			sacpEntryImpl.setName(StringPool.BLANK);
+			sapEntryImpl.setName(StringPool.BLANK);
 		}
 		else {
-			sacpEntryImpl.setName(name);
+			sapEntryImpl.setName(name);
 		}
 
 		if (title == null) {
-			sacpEntryImpl.setTitle(StringPool.BLANK);
+			sapEntryImpl.setTitle(StringPool.BLANK);
 		}
 		else {
-			sacpEntryImpl.setTitle(title);
+			sapEntryImpl.setTitle(title);
 		}
 
-		sacpEntryImpl.resetOriginalValues();
+		sapEntryImpl.resetOriginalValues();
 
-		return sacpEntryImpl;
+		return sapEntryImpl;
 	}
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
-		sacpEntryId = objectInput.readLong();
+		sapEntryId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		allowedServiceSignatures = objectInput.readUTF();
-		defaultSACPEntry = objectInput.readBoolean();
+		defaultSAPEntry = objectInput.readBoolean();
 		name = objectInput.readUTF();
 		title = objectInput.readUTF();
 	}
@@ -184,7 +183,7 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(sacpEntryId);
+		objectOutput.writeLong(sapEntryId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
@@ -205,7 +204,7 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 			objectOutput.writeUTF(allowedServiceSignatures);
 		}
 
-		objectOutput.writeBoolean(defaultSACPEntry);
+		objectOutput.writeBoolean(defaultSAPEntry);
 
 		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -223,14 +222,14 @@ public class SACPEntryCacheModel implements CacheModel<SACPEntry>,
 	}
 
 	public String uuid;
-	public long sacpEntryId;
+	public long sapEntryId;
 	public long companyId;
 	public long userId;
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
 	public String allowedServiceSignatures;
-	public boolean defaultSACPEntry;
+	public boolean defaultSAPEntry;
 	public String name;
 	public String title;
 }

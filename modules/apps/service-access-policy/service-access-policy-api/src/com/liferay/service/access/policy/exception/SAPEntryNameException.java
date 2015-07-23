@@ -22,20 +22,20 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class SACPEntryTitleException extends PortalException {
+public class SAPEntryNameException extends PortalException {
 
-	public SACPEntryTitleException() {
+	public SAPEntryNameException() {
 	}
 
-	public SACPEntryTitleException(String msg) {
+	public SAPEntryNameException(String msg) {
 		super(msg);
 	}
 
-	public SACPEntryTitleException(String msg, Throwable cause) {
+	public SAPEntryNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public SACPEntryTitleException(Throwable cause) {
+	public SAPEntryNameException(Throwable cause) {
 		super(cause);
 	}
 
