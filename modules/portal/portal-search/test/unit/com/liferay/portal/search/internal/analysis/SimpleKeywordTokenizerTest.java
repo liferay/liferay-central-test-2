@@ -36,8 +36,7 @@ public class SimpleKeywordTokenizerTest {
 			simpleKeywordTokenizer.requiresTokenization(
 				"This \"is a simple\" test"));
 		Assert.assertFalse(
-			simpleKeywordTokenizer.requiresTokenization(
-				"\"is a simple\""));
+			simpleKeywordTokenizer.requiresTokenization("\"is a simple\""));
 	}
 
 	@Test
