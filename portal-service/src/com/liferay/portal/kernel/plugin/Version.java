@@ -276,10 +276,10 @@ public class Version implements Comparable<Version>, Serializable {
 	}
 
 	protected Version(String version) {
-		int pos = version.indexOf(CharPool.DASH);
+		int index = version.indexOf(CharPool.DASH);
 
-		if (pos != -1) {
-			version = version.substring(0, pos);
+		if (index != -1) {
+			version = version.substring(0, index);
 		}
 
 		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
