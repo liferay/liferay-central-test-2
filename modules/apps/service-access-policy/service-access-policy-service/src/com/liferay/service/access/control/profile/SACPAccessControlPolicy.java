@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.security.access.control.AccessControlPolicy;
 import com.liferay.portal.kernel.security.access.control.AccessControlUtil;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.security.access.control.BaseAccessControlPolicy;
-import com.liferay.portal.kernel.security.access.control.profile.ServiceAccessControlProfileThreadLocal;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifierResult;
+import com.liferay.portal.kernel.security.service.access.policy.ServiceAccessPolicyThreadLocal;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactory;
@@ -57,8 +57,7 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 		throws SecurityException {
 
 		List<String> serviceAccessControlProfileNames =
-			ServiceAccessControlProfileThreadLocal.
-				getActiveServiceAccessControlProfileNames();
+			ServiceAccessPolicyThreadLocal.getActiveServiceAccessPolicyNames();
 
 		SACPConfiguration sacpConfiguration = null;
 
@@ -81,8 +80,8 @@ public class SACPAccessControlPolicy extends BaseAccessControlPolicy {
 			if (serviceAccessControlProfileNames == null) {
 				serviceAccessControlProfileNames = new ArrayList<>();
 
-				ServiceAccessControlProfileThreadLocal.
-					setActiveServiceAccessControlProfileNames(
+				ServiceAccessPolicyThreadLocal.
+					setActiveServiceAccessPolicyNames(
 						serviceAccessControlProfileNames);
 			}
 
