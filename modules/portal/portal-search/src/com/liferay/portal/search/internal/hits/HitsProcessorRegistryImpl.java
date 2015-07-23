@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.hits.HitsProcessor;
 import com.liferay.portal.kernel.search.hits.HitsProcessorRegistry;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Map;
@@ -73,12 +74,12 @@ public class HitsProcessorRegistryImpl implements HitsProcessorRegistry {
 	protected void addHitsProcessor(
 		HitsProcessor hitsProcessor, Map<String, Object> properties) {
 
-		String sortOrderStr = (String)properties.get("sort.order");
+		String sortOrderString = (String)properties.get("sort.order");
 
 		Integer sortOrder = null;
 
-		if (Validator.isNotNull(sortOrderStr)) {
-			sortOrder = Integer.parseInt(sortOrderStr);
+		if (Validator.isNotNull(sortOrderString)) {
+			sortOrder = GetterUtil.getInteger(sortOrderString);
 		}
 
 		SortableHitsProcessor sortableHitsProcessor = new SortableHitsProcessor(
@@ -90,12 +91,12 @@ public class HitsProcessorRegistryImpl implements HitsProcessorRegistry {
 	protected void removeHitsProcessor(
 		HitsProcessor hitsProcessor, Map<String, Object> properties) {
 
-		String sortOrderStr = (String)properties.get("sort.order");
+		String sortOrderString = (String)properties.get("sort.order");
 
 		Integer sortOrder = null;
 
-		if (Validator.isNotNull(sortOrderStr)) {
-			sortOrder = Integer.parseInt(sortOrderStr);
+		if (Validator.isNotNull(sortOrderString)) {
+			sortOrder = GetterUtil.getInteger(sortOrderString);
 		}
 
 		SortableHitsProcessor sortableHitsProcessor = new SortableHitsProcessor(
