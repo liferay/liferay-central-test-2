@@ -14,7 +14,7 @@
 
 package com.liferay.mobile.device.rules.web.upgrade;
 
-import com.liferay.mobile.device.rules.web.upgrade.v1_0_0.UpgradeMobileDeviceRulesPortletId;
+import com.liferay.mobile.device.rules.web.upgrade.v1_0_0.UpgradePortletId;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -49,7 +49,7 @@ public class MobileDeviceRulesWebUpgrade {
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
-		upgradeProcesses.add(new UpgradeMobileDeviceRulesPortletId());
+		upgradeProcesses.add(new UpgradePortletId());
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.mobile.device.rules.web", upgradeProcesses, 1, 1,
