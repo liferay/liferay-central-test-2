@@ -3,6 +3,6 @@ Bundle-SymbolicName: com.liferay.mobile.device.rules.service
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.mobile.device.rules.lar,\
-	com.liferay.mobile.device.rules.rulegroup.action,\
-	com.liferay.mobile.device.rules.rulegroup.rule
+	com.liferay.mobile.device.rules.rule.group.action,\
+	com.liferay.mobile.device.rules.rule.group.rule
 Include-Resource: classes
