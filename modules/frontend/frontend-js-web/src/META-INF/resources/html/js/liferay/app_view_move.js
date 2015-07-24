@@ -66,7 +66,7 @@ AUI.add(
 			{
 
 				/**
-				 * A static property used to define the default 
+				 * A static property used to define the default
 				 * attribute configuration for `AppViewMove`.
 				 *
 				 * @property ATTRS
@@ -76,7 +76,7 @@ AUI.add(
 				ATTRS: {
 
 					/**
-					 * The row IDs.
+					 * The id of the all row checkbox.
 					 *
 					 * @attribute allRowIds
 					 * @type String
@@ -154,6 +154,12 @@ AUI.add(
 						validator: Lang.isString
 					},
 
+					/**
+					 * The action used when item is moved to the trash.
+					 *
+					 * @attribute moveToTrashActionName
+					 * @type String
+					 */
 					moveToTrashActionName: {
 						validator: Lang.isString
 					},
@@ -169,7 +175,7 @@ AUI.add(
 					},
 
 					/**
-					 *The portlet container ID.
+					 *The id of the portlet container.
 					 *
 					 * @attribute portletContainerId
 					 * @type String
@@ -179,7 +185,7 @@ AUI.add(
 					},
 
 					/**
-					 * A portlet group.
+					 * The portlet group.
 					 *
 					 * @attribute portletGroup
 					 * @type String
@@ -189,7 +195,7 @@ AUI.add(
 					},
 
 					/**
-					 * Holds the process entry IDs.
+					 * Contains ids of the entries to process.
 					 *
 					 * @attribute processEntryIds
 					 * @type Object
@@ -199,7 +205,7 @@ AUI.add(
 					},
 
 					/**
-					 * Holds the trash link ID.
+					 * The id of the trash link.
 					 *
 					 * @attribute trashLinkId
 					 * @type String
@@ -220,7 +226,7 @@ AUI.add(
 				},
 
 				/**
-				 * Identifies which component is augmented.
+				 * Augment the PortletBase module.
 				 *
 				 * @property AUGMENTS
 				 * @type Object
@@ -229,7 +235,7 @@ AUI.add(
 				AUGMENTS: [Liferay.PortletBase],
 
 				/**
-				 * Identifies which component is extended.
+				 * Extend the AUI Base module.
 				 *
 				 * @property EXTENDS
 				 * @type Object
@@ -238,7 +244,7 @@ AUI.add(
 				EXTENDS: A.Base,
 
 				/**
-				 * Identifies the class.
+				 * Static property provides a string to identify the class.
 				 *
 				 * @property NAME
 				 * @type String
@@ -291,7 +297,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when an entry is edited.
+				 	 * Fires when namespaced `editEntry` event is run.
 				 	 *
 				 	 * @method _editEntry
 					 * @param event
@@ -312,8 +318,9 @@ AUI.add(
 					},
 
 					/**
-				 	 * Gets the move text according to whether a target is
-				 	 * available. Fires when an item is moved.
+				 	 * Return the text to display when moving according to
+				 	 * whether a target is available. Fires when an item is
+				 	 * moved.
 				 	 *
 				 	 * @method _getMoveText
 					 * @param selectedItemsCount
@@ -343,7 +350,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Initialize the drag/drop.  
+				 	 * Initialize the drag/drop.
 				 	 *
 				 	 * @method _initDragDrop
 				 	 * @protected
@@ -470,7 +477,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when a drop target is hit.
+				 	 * Fires when the `drag:drophit` event is run.
 				 	 *
 				 	 * @method _onDragDropHit
 					 * @param event
@@ -504,7 +511,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when an item enters a drop target during drag.
+				 	 * Fires when the `drag:enter` event is run.
 				 	 *
 				 	 * @method _onDragEnter
 					 * @param event
@@ -536,7 +543,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when an item exits a drop target during drag.
+				 	 * Fires when the `drag:exit` event is run.
 				 	 *
 				 	 * @method _onDragExit
 					 * @param event
@@ -561,7 +568,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Triggers when drag starts on an item.
+				 	 * Fires when the `drag:start` event is run.
 				 	 *
 				 	 * @method _onDragStart
 					 * @param event
@@ -613,7 +620,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when an edit, move, or move to trash action occurs on an entry.
+				 	 * Run when the edit, move, or move to trash actions occurs.
 				 	 *
 				 	 * @method _processEntryAction
 					 * @param action
@@ -662,7 +669,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Registers the drag/drop event.
+				 	 * Registers the drag/drop events.
 				 	 *
 				 	 * @method _registerDragDrop
 				 	 * @protected
@@ -678,7 +685,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Update the folder ID redirect URL.
+				 	 * Update the redirect URL for the folder id.
 				 	 *
 				 	 * @method _updateFolderIdRedirectUrl
 					 * @param redirectUrl
