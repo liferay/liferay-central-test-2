@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.css-class-wrapper=mobile-device-rules",
 		"com.liferay.portlet.display-category=category.hidden",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
-		"com.liferay.portlet.icon=/icons/default.png",
+		"com.liferay.portlet.icon=/icons/mobile_device_site_admin.png",
 		"com.liferay.portlet.private-request-attributes=false",
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
