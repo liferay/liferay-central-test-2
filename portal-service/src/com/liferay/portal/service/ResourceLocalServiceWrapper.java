@@ -419,7 +419,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @param name the resource's name, which should be a portlet ID if the
 	resource is a portlet or the resource's class name otherwise
 	* @param primKey the primary key of the resource instance
-	* @param modelPermissions the permissions to be applied
+	* @param modelPermissions the model permissions to be applied
 	* @throws PortalException if a portal exception occurred
 	*/
 	@Override
@@ -440,7 +440,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @param name the resource's name, which should be a portlet ID if the
 	resource is a portlet or the resource's class name otherwise
 	* @param primKey the primary key string of the resource instance
-	* @param modelPermissions the permissions to be applied
+	* @param modelPermissions the model permissions to be applied
 	* @throws PortalException if a portal exception occurred
 	*/
 	@Override
