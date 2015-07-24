@@ -76,7 +76,7 @@ searchContainer.setTotal(total);
 searchContainer.setResults(results);
 %>
 
-<item-selector-ui:browser
+<liferay-item-selector:browser
 	desiredItemSelectorReturnTypes="<%= blogsItemSelectorCriterion.getDesiredItemSelectorReturnTypes() %>"
 	itemSelectedEventName="<%= blogsItemSelectorViewDisplayContext.getItemSelectedEventName() %>"
 	portletURL="<%= blogsItemSelectorViewDisplayContext.getPortletURL(request, liferayPortletResponse) %>"
