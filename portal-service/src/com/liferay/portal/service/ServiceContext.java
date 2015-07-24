@@ -149,8 +149,8 @@ public class ServiceContext implements Cloneable, Serializable {
 		Role defaultGroupRole = RoleLocalServiceUtil.getDefaultGroupRole(
 			siteGroupId);
 
-		List<String> groupPermissions = new ArrayList<>();
-		List<String> guestPermissions = new ArrayList<>();
+		List<String> groupPermissionsList = new ArrayList<>();
+		List<String> guestPermissionsList = new ArrayList<>();
 
 		String[] roleNames = {RoleConstants.GUEST, defaultGroupRole.getName()};
 
@@ -171,27 +171,29 @@ public class ServiceContext implements Cloneable, Serializable {
 					guestDefaultActions.contains(action) &&
 					siteGroup.hasPublicLayouts()) {
 
-					guestPermissions.add(action);
+					guestPermissionsList.add(action);
 				}
 				else if (roleName.equals(defaultGroupRole.getName()) &&
 						 groupDefaultActions.contains(action)) {
 
-					groupPermissions.add(action);
+					groupPermissionsList.add(action);
 				}
 			}
 		}
 
-		String[] groupPermissionsArray = groupPermissions.toArray(
-			new String[groupPermissions.size()]);
-		String[] guestPermissionsArray = guestPermissions.toArray(
-			new String[guestPermissions.size()]);
+		String[] groupPermissions = groupPermissionsList.toArray(
+			new String[groupPermissionsList.size()]);
 
-		setGroupPermissions(groupPermissionsArray);
-		setGuestPermissions(guestPermissionsArray);
+		setGroupPermissions(groupPermissions);
+
+		String[] guestPermissions = guestPermissionsList.toArray(
+			new String[guestPermissionsList.size()]);
+
+		setGuestPermissions(guestPermissions);
 
 		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
-			siteGroup.getCompanyId(), siteGroupId, groupPermissionsArray,
-			guestPermissionsArray);
+			siteGroup.getCompanyId(), siteGroupId, groupPermissions,
+			guestPermissions);
 
 		setModelPermissions(modelPermissions);
 	}
