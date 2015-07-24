@@ -43,6 +43,31 @@ import javax.portlet.ResourceResponse;
  */
 public class ActionUtil {
 
+	public static String getActionEditorJSP(String type) {
+		String editorJSP = null;
+
+		ActionHandler actionHandler = ActionHandlerManagerUtil.getActionHandler(
+			type);
+
+		if (actionHandler != null) {
+			editorJSP = _actionEditorJSPs.get(actionHandler.getClass());
+		}
+
+		if (editorJSP == null) {
+			editorJSP = StringPool.BLANK;
+		}
+
+		return editorJSP;
+	}
+
+	public static String getRuleEditorJSP(String type) {
+		if (type.equals(SimpleRuleHandler.getHandlerType())) {
+			return _SIMPLE_RULE_EDIT_RJSP;
+		}
+
+		return StringPool.BLANK;
+	}
+
 	public static UnicodeProperties getTypeSettingsProperties(
 		ActionRequest actionRequest, Collection<String> propertyNames) {
 
@@ -75,31 +100,6 @@ public class ActionUtil {
 			portletContext.getRequestDispatcher(editorJSP);
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
-	}
-	
-	public static String getActionEditorJSP(String type) {
-		String editorJSP = null;
-
-		ActionHandler actionHandler = ActionHandlerManagerUtil.getActionHandler(
-			type);
-
-		if (actionHandler != null) {
-			editorJSP = _actionEditorJSPs.get(actionHandler.getClass());
-		}
-
-		if (editorJSP == null) {
-			editorJSP = StringPool.BLANK;
-		}
-
-		return editorJSP;
-	}
-
-	public static String getRuleEditorJSP(String type) {
-		if (type.equals(SimpleRuleHandler.getHandlerType())) {
-			return _SIMPLE_RULE_EDIT_RJSP;
-		}
-
-		return StringPool.BLANK;
 	}
 
 	protected static void registerEditorJSP(Class<?> clazz, String jspPrefix) {
