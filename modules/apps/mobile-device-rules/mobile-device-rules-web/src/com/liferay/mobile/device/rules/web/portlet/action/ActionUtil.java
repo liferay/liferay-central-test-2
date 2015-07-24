@@ -102,8 +102,8 @@ public class ActionUtil {
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
-	protected static void registerEditorJSP(Class<?> clazz, String jspPrefix) {
-		_actionEditorJSPs.put(clazz, "/action/" + jspPrefix + ".jsp");
+	protected static void registerEditorJSP(Class<?> clazz, String fileName) {
+		_actionEditorJSPs.put(clazz, "/action/" + fileName + ".jsp");
 	}
 
 	private static final Map<Class<?>, String> _actionEditorJSPs =
