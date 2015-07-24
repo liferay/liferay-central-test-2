@@ -12,20 +12,22 @@
  * details.
  */
 
-package com.liferay.exportimport.web.upgrade.v1_0_0;
+package com.liferay.mobile.device.rules.web.upgrade.v1_0_0;
 
-import com.liferay.exportimport.web.constants.ExportImportPortletKeys;
-import com.liferay.portal.upgrade.util.UpgradePortletId;
+import com.liferay.mobile.device.rules.constants.MDRPortletKeys;
 
 /**
- * @author Daniel Kocsis
+ * @author Mate Thurzo
  */
-public class UpgradeExportImportPortletId extends UpgradePortletId {
+public class UpgradePortletId
+	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {"200", ExportImportPortletKeys.EXPORT_IMPORT}
+			new String[] {
+				"178", MDRPortletKeys.MOBILE_DEVICE_RULES
+			}
 		};
 	}
 
