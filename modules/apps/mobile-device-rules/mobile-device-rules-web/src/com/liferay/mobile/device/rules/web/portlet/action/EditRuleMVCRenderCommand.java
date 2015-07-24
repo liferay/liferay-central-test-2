@@ -26,7 +26,6 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleServiceUtil;
 
-import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -47,8 +46,7 @@ public class EditRuleMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws PortletException {
+		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		try {
 			long ruleId = ParamUtil.getLong(renderRequest, "ruleId");
