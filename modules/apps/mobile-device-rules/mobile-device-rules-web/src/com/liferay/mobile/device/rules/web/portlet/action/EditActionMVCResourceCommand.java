@@ -56,7 +56,7 @@ public class EditActionMVCResourceCommand extends BaseMVCResourceCommand {
 
 		ActionUtil.includeEditorJSP(
 			getPortletConfig(resourceRequest), resourceRequest,
-			resourceResponse, type, ActionUtil.getActionEditorJSPMethod);
+			resourceResponse, ActionUtil.getActionEditorJSP(type));
 	}
 
 }

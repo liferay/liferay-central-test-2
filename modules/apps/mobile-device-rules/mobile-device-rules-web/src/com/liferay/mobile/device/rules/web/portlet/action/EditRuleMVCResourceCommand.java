@@ -58,7 +58,7 @@ public class EditRuleMVCResourceCommand extends BaseMVCResourceCommand {
 
 		ActionUtil.includeEditorJSP(
 			getPortletConfig(resourceRequest), resourceRequest,
-			resourceResponse, type, ActionUtil.getRuleEditorJSPMethod);
+			resourceResponse, ActionUtil.getRuleEditorJSP(type));
 	}
 
 }

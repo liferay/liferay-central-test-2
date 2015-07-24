@@ -64,8 +64,7 @@ public class EditActionMVCRenderCommand implements MVCRenderCommand {
 					MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_TYPE,
 				type);
 
-			String editorJSP = ActionUtil.getActionEditorJSPMethod.getEditorJSP(
-				type);
+			String editorJSP = ActionUtil.getActionEditorJSP(type);
 
 			renderRequest.setAttribute(
 				MDRWebKeys.
