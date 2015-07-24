@@ -26,7 +26,7 @@ public class UpgradeMobileDeviceRulesPortletId extends UpgradePortletId {
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
 			new String[] {
-				"178", MDRPortletKeys.MOBILE_DEVICE_SITE_ADMIN
+				"178", MDRPortletKeys.MOBILE_DEVICE_RULES
 			}
 		};
 	}

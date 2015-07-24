@@ -106,7 +106,7 @@
 					id: '<portlet:namespace />selectRuleGroup',
 					title: '<%= UnicodeLanguageUtil.get(request, "device-families") %>',
 
-					<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" varImpl="selectRuleGroupURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+					<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_RULES %>" varImpl="selectRuleGroupURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 						<portlet:param name="mvcRenderCommandName" value="/mobile_device_rules/select_rule_group" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 						<portlet:param name="className" value="<%= className %>" />
@@ -131,7 +131,7 @@
 					id: '<portlet:namespace />ruleGroupsPriorities',
 					title: '<%= UnicodeLanguageUtil.get(request, "rule-priorities") %>',
 
-					<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" varImpl="managePrioritiesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+					<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_RULES %>" varImpl="managePrioritiesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 						<portlet:param name="mvcRenderCommandName" value="/mobile_device_rules/edit_rule_group_instance" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 						<portlet:param name="className" value="<%= className %>" />

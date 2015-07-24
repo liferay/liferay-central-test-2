@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + MDRPortletKeys.MOBILE_DEVICE_SITE_ADMIN
+		"javax.portlet.name=" + MDRPortletKeys.MOBILE_DEVICE_RULES
 	},
 	service = PortletDataHandler.class
 )
