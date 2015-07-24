@@ -61,11 +61,9 @@ public class EditRuleMVCRenderCommand implements MVCRenderCommand {
 			renderRequest.setAttribute(
 				MDRWebKeys.MOBILE_DEVICE_RULES_RULE_TYPE, type);
 
-			String editorJSP = ActionUtil.getRuleEditorJSPMethod.getEditorJSP(
-				type);
-
 			renderRequest.setAttribute(
-				MDRWebKeys.MOBILE_DEVICE_RULES_RULE_EDITOR_JSP, editorJSP);
+				MDRWebKeys.MOBILE_DEVICE_RULES_RULE_EDITOR_JSP,
+				ActionUtil.getRuleEditorJSP(type));
 
 			long ruleGroupId = BeanParamUtil.getLong(
 				rule, renderRequest, "ruleGroupId");

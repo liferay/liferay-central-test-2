@@ -43,11 +43,6 @@ import javax.portlet.ResourceResponse;
  */
 public class ActionUtil {
 
-	public static GetActionEditorJSPMethod getActionEditorJSPMethod =
-		new GetActionEditorJSPMethod();
-	public static GetRuleEditorJSPMethod getRuleEditorJSPMethod =
-		new GetRuleEditorJSPMethod();
-
 	public static UnicodeProperties getTypeSettingsProperties(
 		ActionRequest actionRequest, Collection<String> propertyNames) {
 
@@ -67,11 +62,8 @@ public class ActionUtil {
 
 	public static void includeEditorJSP(
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
-			ResourceResponse resourceResponse, String type,
-			GetEditorJSPMethod getEditorJSPMethod)
+			ResourceResponse resourceResponse, String editorJSP)
 		throws Exception {
-
-		String editorJSP = getEditorJSPMethod.getEditorJSP(type);
 
 		if (Validator.isNull(editorJSP)) {
 			return;
@@ -84,46 +76,30 @@ public class ActionUtil {
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
+	
+	public static String getActionEditorJSP(String type) {
+		String editorJSP = null;
 
-	public static class GetActionEditorJSPMethod implements GetEditorJSPMethod {
+		ActionHandler actionHandler = ActionHandlerManagerUtil.getActionHandler(
+			type);
 
-		@Override
-		public String getEditorJSP(String type) {
-			ActionHandler actionHandler =
-				ActionHandlerManagerUtil.getActionHandler(type);
-
-			String editorJSP = null;
-
-			if (actionHandler != null) {
-				editorJSP = _actionEditorJSPs.get(actionHandler.getClass());
-			}
-
-			if (editorJSP == null) {
-				editorJSP = StringPool.BLANK;
-			}
-
-			return editorJSP;
+		if (actionHandler != null) {
+			editorJSP = _actionEditorJSPs.get(actionHandler.getClass());
 		}
 
-	}
-
-	public static class GetRuleEditorJSPMethod implements GetEditorJSPMethod {
-
-		@Override
-		public String getEditorJSP(String type) {
-			if (type.equals(SimpleRuleHandler.getHandlerType())) {
-				return _SIMPLE_RULE_EDIT_RJSP;
-			}
-
-			return StringPool.BLANK;
+		if (editorJSP == null) {
+			editorJSP = StringPool.BLANK;
 		}
 
+		return editorJSP;
 	}
 
-	public interface GetEditorJSPMethod {
+	public static String getRuleEditorJSP(String type) {
+		if (type.equals(SimpleRuleHandler.getHandlerType())) {
+			return _SIMPLE_RULE_EDIT_RJSP;
+		}
 
-		public String getEditorJSP(String type);
-
+		return StringPool.BLANK;
 	}
 
 	protected static void registerEditorJSP(Class<?> clazz, String jspPrefix) {
