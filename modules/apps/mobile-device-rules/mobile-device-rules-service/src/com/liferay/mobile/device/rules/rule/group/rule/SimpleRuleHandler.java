@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mobile.device.rules.rulegroup.rule;
+package com.liferay.mobile.device.rules.rule.group.rule;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

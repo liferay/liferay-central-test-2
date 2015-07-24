@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.mobile.device.rules.rulegroup.action;
+package com.liferay.mobile.device.rules.rule.group.action;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.mobile.device.rulegroup.action.ActionHandler;
