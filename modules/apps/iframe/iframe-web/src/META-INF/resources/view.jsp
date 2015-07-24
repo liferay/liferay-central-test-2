@@ -136,11 +136,11 @@
 				var restore = A.one('#p_p_id<portlet:namespace /> a.portlet-icon-back');
 
 				if (restore) {
-					var restoreUrl = restore.attr('href');
+					var restoreHREF = restore.attr('href');
 
-					restoreUrl = restoreUrl.split('#')[0];
+					restoreHREF = restoreHREF.split('#')[0];
 
-					restore.attr('href', restoreUrl + '#' + hash);
+					restore.attr('href', restoreHREF + '#' + hash);
 				}
 
 				// LPS-33951
