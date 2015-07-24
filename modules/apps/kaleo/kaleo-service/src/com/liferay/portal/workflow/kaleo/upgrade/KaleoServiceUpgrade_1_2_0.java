@@ -12,19 +12,21 @@
  * details.
  */
 
-package com.liferay.microblogs.upgrade;
+package com.liferay.portal.workflow.kaleo.upgrade;
 
-import com.liferay.microblogs.upgrade.v1_0_0.UpgradeMicroblogsEntry;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.workflow.kaleo.upgrade.v1_2_0.UpgradeKaleoLog;
+import com.liferay.portal.workflow.kaleo.upgrade.v1_2_0.UpgradeKaleoNotificationRecipient;
 
 /**
- * @author Ryan Park
+ * @author Brian Wing Shun Chan
  */
-public class MicroblogsServiceUpgrade_1_0_0 extends UpgradeProcess {
+public class KaleoServiceUpgrade_1_2_0 extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgrade(new UpgradeMicroblogsEntry());
+		upgrade(new UpgradeKaleoLog());
+		upgrade(new UpgradeKaleoNotificationRecipient());
 	}
 
 }

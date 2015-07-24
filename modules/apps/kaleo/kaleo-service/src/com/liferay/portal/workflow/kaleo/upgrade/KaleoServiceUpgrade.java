@@ -17,10 +17,6 @@ package com.liferay.portal.workflow.kaleo.upgrade;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
-import com.liferay.portal.workflow.kaleo.upgrade.v1_0_0.UpgradeKaleoTaskInstanceToken;
-import com.liferay.portal.workflow.kaleo.upgrade.v1_1_0.UpgradeWorkflowContext;
-import com.liferay.portal.workflow.kaleo.upgrade.v1_2_0.UpgradeKaleoLog;
-import com.liferay.portal.workflow.kaleo.upgrade.v1_2_0.UpgradeKaleoNotificationRecipient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +48,9 @@ public class KaleoServiceUpgrade {
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
-		upgradeProcesses.add(new UpgradeKaleoTaskInstanceToken());
-		upgradeProcesses.add(new UpgradeWorkflowContext());
-		upgradeProcesses.add(new UpgradeKaleoLog());
-		upgradeProcesses.add(new UpgradeKaleoNotificationRecipient());
+		upgradeProcesses.add(new KaleoServiceUpgrade_1_0_0());
+		upgradeProcesses.add(new KaleoServiceUpgrade_1_1_0());
+		upgradeProcesses.add(new KaleoServiceUpgrade_1_2_0());
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.portal.workflow.kaleo.service", upgradeProcesses, 1, 1,
