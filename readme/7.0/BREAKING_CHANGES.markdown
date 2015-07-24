@@ -571,8 +571,8 @@ Old classes:
 
 New classes:
 
-    com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand
     com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand
+    com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand
 
 In addition, `com.liferay.util.bridges.mvc.MVCPortlet` is deprecated, but was
 made to extend `com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet`.
