@@ -14,7 +14,7 @@
 
 package com.liferay.mobile.device.rules.lar;
 
-import com.liferay.mobile.device.rules.rulegroup.action.SiteRedirectActionHandler;
+import com.liferay.mobile.device.rules.rule.group.action.SiteRedirectActionHandler;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
