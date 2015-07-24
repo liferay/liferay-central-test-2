@@ -58,12 +58,12 @@ if (selUser != null) {
 	}
 }
 else {
-	String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
+	String organizationIdsString = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
 
-	if (Validator.isNotNull(organizationIds)) {
-		long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
+	if (Validator.isNotNull(organizationIdsString)) {
+		long[] organizationIds = StringUtil.split(organizationIdsString, 0L);
 
-		organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
+		organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIds);
 	}
 }
 

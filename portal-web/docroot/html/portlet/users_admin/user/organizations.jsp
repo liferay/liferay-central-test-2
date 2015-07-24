@@ -21,7 +21,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 
-String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
+String organizationIdsString = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
 
 currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "organizations");
 %>
@@ -38,7 +38,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "organi
 	/>
 </liferay-util:buffer>
 
-<aui:input name="addOrganizationIds" type="hidden" value="<%= organizationIds %>" />
+<aui:input name="addOrganizationIds" type="hidden" value="<%= organizationIdsString %>" />
 <aui:input name="deleteOrganizationIds" type="hidden" />
 
 <h3><liferay-ui:message key="organizations" /></h3>
