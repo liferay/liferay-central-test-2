@@ -7,11 +7,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 >
 	<tlib-version>1.0</tlib-version>
-	<short-name>application-list-ui</short-name>
-	<uri>http://liferay.com/tld/application-list/ui</uri>
+	<short-name>application-list</short-name>
+	<uri>http://liferay.com/tld/application-list</uri>
 	<tag>
 		<name>panel</name>
-		<tag-class>com.liferay.application.list.taglib.servlet.taglib.ui.PanelTag</tag-class>
+		<tag-class>com.liferay.application.list.taglib.servlet.taglib.PanelTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelCategory</name>
@@ -26,7 +26,7 @@
 	</tag>
 	<tag>
 		<name>panel-app</name>
-		<tag-class>com.liferay.application.list.taglib.servlet.taglib.ui.PanelAppTag</tag-class>
+		<tag-class>com.liferay.application.list.taglib.servlet.taglib.PanelAppTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelApp</name>
@@ -46,7 +46,7 @@
 	</tag>
 	<tag>
 		<name>panel-category</name>
-		<tag-class>com.liferay.application.list.taglib.servlet.taglib.ui.PanelCategoryTag</tag-class>
+		<tag-class>com.liferay.application.list.taglib.servlet.taglib.PanelCategoryTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelCategory</name>
@@ -61,7 +61,7 @@
 	</tag>
 	<tag>
 		<name>panel-category-content</name>
-		<tag-class>com.liferay.application.list.taglib.servlet.taglib.ui.PanelCategoryContentTag</tag-class>
+		<tag-class>com.liferay.application.list.taglib.servlet.taglib.PanelCategoryContentTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>panelCategory</name>
@@ -71,7 +71,7 @@
 	</tag>
 	<tag>
 		<name>panel-content</name>
-		<tag-class>com.liferay.application.list.taglib.servlet.taglib.ui.PanelContentTag</tag-class>
+		<tag-class>com.liferay.application.list.taglib.servlet.taglib.PanelContentTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>portletId</name>

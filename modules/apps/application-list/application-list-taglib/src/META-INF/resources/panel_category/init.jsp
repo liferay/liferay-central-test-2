@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -11,24 +12,6 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+--%>
 
-package com.liferay.application.list.taglib.servlet.taglib.ui;
-
-import com.liferay.application.list.taglib.util.ServletContextUtil;
-import com.liferay.taglib.util.IncludeTag;
-
-import javax.servlet.jsp.PageContext;
-
-/**
- * @author Adolfo Pérez
- */
-public class BasePanelTag extends IncludeTag {
-
-	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
-
-		servletContext = ServletContextUtil.getServletContext();
-	}
-
-}
+<%@ include file="/init.jsp" %>

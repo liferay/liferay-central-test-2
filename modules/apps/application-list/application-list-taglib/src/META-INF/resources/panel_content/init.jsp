@@ -15,9 +15,3 @@
 --%>
 
 <%@ include file="/init.jsp" %>
-
-<%
-PanelCategory panelCategory = (PanelCategory)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY);
-%>
-
-<liferay-application-list:panel panelCategory="<%= panelCategory %>" />

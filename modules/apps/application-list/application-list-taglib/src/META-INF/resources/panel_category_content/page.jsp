@@ -14,11 +14,16 @@
  */
 --%>
 
-<%@ taglib uri="http://liferay.com/tld/application-list/ui" prefix="application-list-ui" %><%@
-taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ include file="/panel_category_content/init.jsp" %>
 
-<%@ page import="com.liferay.application.list.PanelCategory" %><%@
-page import="com.liferay.application.list.PanelCategoryRegistry" %><%@
-page import="com.liferay.application.list.taglib.constants.ApplicationListWebKeys" %><%@
-page import="com.liferay.portal.kernel.util.StringPool" %><%@
-page import="com.liferay.portal.kernel.util.StringUtil" %>
+<%
+PanelCategory panelCategory = (PanelCategory)request.getAttribute("application-list-ui:panel-category-content:panelCategory");
+
+request.setAttribute(ApplicationListWebKeys.PANEL_CATEGORY, panelCategory);
+
+boolean include = panelCategory.include(request, response);
+%>
+
+<c:if test="<%= !include %>">
+	<liferay-application-list:panel panelCategory="<%= panelCategory %>" />
+</c:if>

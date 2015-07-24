@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/taglib/ui/panel_category/init.jsp" %>
+<%@ include file="/panel_category/init.jsp" %>
 
 <%
 PanelAppRegistry panelAppRegistry = (PanelAppRegistry)request.getAttribute(ApplicationListWebKeys.PANEL_APP_REGISTRY);
@@ -43,7 +43,7 @@ String panelPageCategoryId = "panel-manage-" + StringUtil.replace(panelCategory.
 		%>
 
 			<c:if test="<%= panelApp.hasAccessPermission(permissionChecker, themeDisplay.getScopeGroup()) %>">
-				<application-list-ui:panel-app
+				<liferay-application-list:panel-app
 					panelApp="<%= panelApp %>"
 					panelCategory="<%= panelCategory %>"
 				/>

@@ -18,11 +18,20 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
-taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/application-list" prefix="liferay-application-list" %><%@
+taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
+taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.application.list.PanelApp" %><%@
+page import="com.liferay.application.list.PanelAppRegistry" %><%@
+page import="com.liferay.application.list.PanelCategory" %><%@
+page import="com.liferay.application.list.PanelCategoryRegistry" %><%@
+page import="com.liferay.application.list.taglib.constants.ApplicationListWebKeys" %><%@
+page import="com.liferay.application.list.taglib.servlet.taglib.display.context.logic.PanelAppContentHelper" %><%@
+page import="com.liferay.application.list.taglib.servlet.taglib.display.context.logic.PanelCategoryHelper" %><%@
 page import="com.liferay.portal.kernel.util.StringPool" %><%@
+page import="com.liferay.portal.kernel.util.StringUtil" %><%@
 page import="com.liferay.portal.model.Portlet" %><%@
 page import="com.liferay.portal.service.PortletLocalServiceUtil" %><%@
 page import="com.liferay.portal.util.PortalUtil" %>
