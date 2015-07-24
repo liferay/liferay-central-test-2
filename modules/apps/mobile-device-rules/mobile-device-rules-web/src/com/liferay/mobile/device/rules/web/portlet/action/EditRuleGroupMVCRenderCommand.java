@@ -45,9 +45,9 @@ public class EditRuleGroupMVCRenderCommand implements MVCRenderCommand {
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		long ruleGroupId = ParamUtil.getLong(renderRequest, "ruleGroupId");
-
 		try {
+			long ruleGroupId = ParamUtil.getLong(renderRequest, "ruleGroupId");
+
 			MDRRuleGroup ruleGroup = MDRRuleGroupServiceUtil.fetchRuleGroup(
 				ruleGroupId);
 
