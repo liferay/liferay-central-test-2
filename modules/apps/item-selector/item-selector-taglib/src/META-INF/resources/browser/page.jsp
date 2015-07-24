@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/taglib/ui/browser/init.jsp" %>
+<%@ include file="/browser/init.jsp" %>
 
 <%
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_browser_page") + StringPool.UNDERLINE;
@@ -31,7 +31,7 @@ PortletURL uploadURL = (PortletURL)request.getAttribute("liferay-ui:item-selecto
 %>
 
 <liferay-util:html-top>
-	<link href="<%= ServletContextUtil.getContextPath() + "/taglib/css/main.css" %>" rel="stylesheet" type="text/css" />
+	<link href="<%= ServletContextUtil.getContextPath() + "/browser/css/main.css" %>" rel="stylesheet" type="text/css" />
 </liferay-util:html-top>
 
 <div class="lfr-item-viewer" id="<%= randomNamespace %>ItemSelectorContainer">

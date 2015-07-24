@@ -76,7 +76,7 @@ searchContainer.setTotal(total);
 searchContainer.setResults(results);
 %>
 
-<item-selector-ui:browser
+<liferay-item-selector:browser
 	desiredItemSelectorReturnTypes="<%= wikiAttachmentItemSelectorCriterion.getDesiredItemSelectorReturnTypes() %>"
 	itemSelectedEventName="<%= wikiAttachmentItemSelectorViewDisplayContext.getItemSelectedEventName() %>"
 	portletURL="<%= wikiAttachmentItemSelectorViewDisplayContext.getPortletURL(request, liferayPortletResponse) %>"

@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.item.selector.taglib.servlet.taglib.ui;
+package com.liferay.item.selector.taglib.servlet.taglib;
 
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UploadableFileReturnType;
 import com.liferay.item.selector.taglib.ItemSelectorBrowserReturnTypeUtil;
-import com.liferay.item.selector.taglib.util.ServletContextUtil;
+import com.liferay.item.selector.taglib.servlet.ServletContextUtil;
 import com.liferay.item.selector.web.constants.ItemSelectorPortletKeys;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -142,7 +142,7 @@ public class BrowserTag extends IncludeTag {
 
 	@Override
 	protected String getPage() {
-		return _PAGE;
+		return "/browser/page.jsp";
 	}
 
 	protected String getSafeDisplayStyle(String displayStyle) {
@@ -180,8 +180,6 @@ public class BrowserTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:item-selector-browser:uploadURL", _uploadURL);
 	}
-
-	private static final String _PAGE = "/taglib/ui/browser/page.jsp";
 
 	private List<ItemSelectorReturnType> _desiredItemSelectorReturnTypes;
 	private String _displayStyle;
