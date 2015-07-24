@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/taglib/ui/panel/init.jsp" %>
+<%@ include file="/panel/init.jsp" %>
 
 <%
 PanelCategory panelCategory = (PanelCategory)request.getAttribute("application-list-ui:panel:panelCategory");
@@ -34,7 +34,7 @@ PanelCategoryRegistry panelCategoryRegistry = (PanelCategoryRegistry)request.get
 			for (PanelCategory childPanelCategory : panelCategoryRegistry.getChildPanelCategories(panelCategory)) {
 			%>
 
-				<application-list-ui:panel-category panelCategory="<%= childPanelCategory %>" />
+				<liferay-application-list:panel-category panelCategory="<%= childPanelCategory %>" />
 
 			<%
 			}

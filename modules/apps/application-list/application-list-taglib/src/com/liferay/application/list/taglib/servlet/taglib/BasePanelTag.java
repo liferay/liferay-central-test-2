@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -12,25 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ include file="/taglib/ui/panel_content/init.jsp" %>
+package com.liferay.application.list.taglib.servlet.taglib;
 
-<%
-PanelAppContentHelper panelAppContentHelper = new PanelAppContentHelper(request, response);
-%>
+import com.liferay.application.list.taglib.servlet.ServletContextUtil;
+import com.liferay.taglib.util.IncludeTag;
 
-<c:choose>
-	<c:when test="<%= panelAppContentHelper.isValidPortletSelected() %>">
+import javax.servlet.jsp.PageContext;
 
-		<%
-		panelAppContentHelper.writeContent(pageContext.getOut());
-		%>
+/**
+ * @author Adolfo Pérez
+ */
+public class BasePanelTag extends IncludeTag {
 
-	</c:when>
-	<c:otherwise>
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="please-select-a-tool-from-the-left-menu" />
-		</div>
-	</c:otherwise>
-</c:choose>
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		servletContext = ServletContextUtil.getServletContext();
+	}
+
+}

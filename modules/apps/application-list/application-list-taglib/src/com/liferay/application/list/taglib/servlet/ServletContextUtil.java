@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.application.list.taglib.util;
+package com.liferay.application.list.taglib.servlet;
 
 import javax.servlet.ServletContext;
 

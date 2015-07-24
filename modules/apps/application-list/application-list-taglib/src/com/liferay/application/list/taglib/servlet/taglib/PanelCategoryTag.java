@@ -12,17 +12,16 @@
  * details.
  */
 
-package com.liferay.application.list.taglib.servlet.taglib.ui;
+package com.liferay.application.list.taglib.servlet.taglib;
 
 import com.liferay.application.list.PanelCategory;
-import com.liferay.application.list.RootPanelCategory;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Adolfo Pérez
  */
-public class PanelTag extends BasePanelTag {
+public class PanelCategoryTag extends BasePanelTag {
 
 	public void setPanelCategory(PanelCategory panelCategory) {
 		_panelCategory = panelCategory;
@@ -37,20 +36,14 @@ public class PanelTag extends BasePanelTag {
 
 	@Override
 	protected String getPage() {
-		return _PAGE;
+		return "/panel_category/page.jsp";
 	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		if (_panelCategory == null) {
-			_panelCategory = RootPanelCategory.getInstance();
-		}
-
 		request.setAttribute(
-			"application-list-ui:panel:panelCategory", _panelCategory);
+			"application-list-ui:panel-category:panelCategory", _panelCategory);
 	}
-
-	private static final String _PAGE = "/taglib/ui/panel/page.jsp";
 
 	private PanelCategory _panelCategory;
 

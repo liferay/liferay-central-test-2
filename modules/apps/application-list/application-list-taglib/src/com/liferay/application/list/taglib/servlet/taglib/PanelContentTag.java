@@ -12,50 +12,38 @@
  * details.
  */
 
-package com.liferay.application.list.taglib.servlet.taglib.ui;
-
-import com.liferay.application.list.PanelApp;
-import com.liferay.application.list.PanelCategory;
+package com.liferay.application.list.taglib.servlet.taglib;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Adolfo Pérez
  */
-public class PanelAppTag extends BasePanelTag {
+public class PanelContentTag extends BasePanelTag {
 
-	public void setPanelApp(PanelApp panelApp) {
-		_panelApp = panelApp;
-	}
-
-	public void setPanelCategory(PanelCategory panelCategory) {
-		_panelCategory = panelCategory;
+	@Override
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
 	}
 
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_panelApp = null;
-		_panelCategory = null;
+		_portletId = null;
 	}
 
 	@Override
 	protected String getPage() {
-		return _PAGE;
+		return "/panel_content/page.jsp";
 	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"application-list-ui:panel-app:panelApp", _panelApp);
-		request.setAttribute(
-			"application-list-ui:panel-app:panelCategory", _panelCategory);
+			"application-list-ui:panel-content:portletId", _portletId);
 	}
 
-	private static final String _PAGE = "/taglib/ui/panel_app/page.jsp";
-
-	private PanelApp _panelApp;
-	private PanelCategory _panelCategory;
+	private String _portletId;
 
 }
