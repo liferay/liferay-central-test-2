@@ -19,8 +19,8 @@ package com.liferay.mobile.device.rules.constants;
  */
 public class MDRPortletKeys {
 
-	public static final String MOBILE_DEVICE_SITE_ADMIN =
+	public static final String MOBILE_DEVICE_RULES =
 		"com_liferay_mobile_device_rules_web_portlet_" +
-			"MobileDeviceSiteAdminPortlet";
+			"MDRPortlet";
 
 }

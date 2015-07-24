@@ -48,7 +48,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + MDRPortletKeys.MOBILE_DEVICE_SITE_ADMIN,
+		"javax.portlet.name=" + MDRPortletKeys.MOBILE_DEVICE_RULES,
 		"mvc.command.name=/mobile_device_rules/edit_action"
 	},
 	service = MVCActionCommand.class

@@ -86,7 +86,7 @@ public class MDRPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 
 	@Override
 	protected String getPortletId() {
-		return PortletKeys.MOBILE_DEVICE_SITE_ADMIN;
+		return PortletKeys.MOBILE_DEVICE_RULES;
 	}
 
 }
