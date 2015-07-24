@@ -25,7 +25,7 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.mobile.device.rules.rulegroup.rule.SimpleRuleHandler" %><%@
+<%@ page import="com.liferay.mobile.device.rules.rule.group.rule.SimpleRuleHandler" %><%@
 page import="com.liferay.mobile.device.rules.web.constants.MDRWebKeys" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %><%@
