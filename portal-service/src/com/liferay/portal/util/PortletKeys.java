@@ -97,7 +97,7 @@ public class PortletKeys {
 
 	public static final String MESSAGE_BOARDS_ADMIN = "162";
 
-	public static final String MOBILE_DEVICE_SITE_ADMIN =
+	public static final String MOBILE_DEVICE_RULES =
 		"com_liferay_mobile_device_rules_web_portlet_MDRPortlet";
 
 	public static final String MONITORING = "131";
