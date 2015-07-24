@@ -62,7 +62,7 @@ public class ActionUtil {
 
 	public static String getRuleEditorJSP(String type) {
 		if (type.equals(SimpleRuleHandler.getHandlerType())) {
-			return _SIMPLE_RULE_EDIT_RJSP;
+			return "/rule/simple_rule.jsp";
 		}
 
 		return StringPool.BLANK;
@@ -105,9 +105,6 @@ public class ActionUtil {
 	protected static void registerEditorJSP(Class<?> clazz, String jspPrefix) {
 		_actionEditorJSPs.put(clazz, "/action/" + jspPrefix + ".jsp");
 	}
-
-	private static final String _SIMPLE_RULE_EDIT_RJSP =
-		"/rule/simple_rule.jsp";
 
 	private static final Map<Class<?>, String> _actionEditorJSPs =
 		new HashMap<>();
