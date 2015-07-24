@@ -26,7 +26,7 @@ import org.osgi.framework.BundleContext;
 /**
  * @author Raymond Augé
  */
-public class JspFactoryActivator implements BundleActivator {
+public class JspFactoryBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {

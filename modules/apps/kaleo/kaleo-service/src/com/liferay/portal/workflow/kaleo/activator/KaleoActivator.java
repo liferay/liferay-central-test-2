@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.workflow.kaleo.manager;
+package com.liferay.portal.workflow.kaleo.activator;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -22,7 +22,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Michael C. Han
  */
 @Component(immediate = true)
-public class KaleoEngineActivator {
+public class KaleoActivator {
 
 	@Activate
 	protected void activate() throws Exception {
