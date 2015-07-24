@@ -18,8 +18,6 @@ import com.liferay.mobile.device.rules.constants.MDRPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -45,12 +43,8 @@ public class SiteURLLayoutsMVCResourceCommand extends BaseMVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		PortletConfig portletConfig = getPortletConfig(resourceRequest);
-
-		PortletContext portletContext = portletConfig.getPortletContext();
-
 		PortletRequestDispatcher portletRequestDispatcher =
-			portletContext.getRequestDispatcher(_SITE_URL_LAYOUTS_JSP);
+			getPortletRequestDispatcher(resourceRequest, _SITE_URL_LAYOUTS_JSP);
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
