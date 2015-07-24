@@ -173,7 +173,7 @@ public abstract class BaseImageSelectorUploadHandler
 
 		int suffix = 1;
 
-		for (int i = 0; i < _MAX_UNIQUE_FILE_NAME_TRIALS; i++) {
+		for (int i = 0; i < _UNIQUE_FILE_NAME_TRIES; i++) {
 			String curFileName = FileUtil.appendParentheticalSuffix(
 				fileName, String.valueOf(suffix));
 
@@ -187,7 +187,7 @@ public abstract class BaseImageSelectorUploadHandler
 		}
 
 		throw new PortalException(
-			"Cannot find a unique file name for " + fileName);
+			"Unable to get a unique file name for " + fileName);
 	}
 
 	protected abstract void handleUploadException(
@@ -212,9 +212,9 @@ public abstract class BaseImageSelectorUploadHandler
 		}
 	}
 
-	private static final int _MAX_UNIQUE_FILE_NAME_TRIALS = 50;
-
 	private static final String _TEMP_FOLDER_NAME =
 		BaseImageSelectorUploadHandler.class.getName();
+
+	private static final int _UNIQUE_FILE_NAME_TRIES = 50;
 
 }
