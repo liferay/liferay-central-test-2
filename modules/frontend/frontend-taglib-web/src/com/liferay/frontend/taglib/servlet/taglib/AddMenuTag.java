@@ -70,7 +70,7 @@ public class AddMenuTag extends IncludeTag {
 
 	@Override
 	protected String getPage() {
-		return _PAGE;
+		return "/taglib/add_menu/end.jsp";
 	}
 
 	@Override
@@ -82,8 +82,6 @@ public class AddMenuTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-frontend:add-menu:addMenuItems", addMenuItems);
 	}
-
-	private static final String _PAGE = "/taglib/add_menu/end.jsp";
 
 	private List<AddMenuItem> _addMenuItems = Collections.emptyList();
 
