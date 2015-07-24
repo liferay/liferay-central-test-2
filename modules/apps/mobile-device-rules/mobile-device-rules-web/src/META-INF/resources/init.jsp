@@ -107,11 +107,11 @@ page import="javax.portlet.WindowState" %>
 <liferay-theme:defineObjects />
 
 <%
+WindowState windowState = liferayPortletRequest.getWindowState();
+
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 
 String currentURL = currentURLObj.toString();
-
-WindowState windowState = liferayPortletRequest.getWindowState();
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
