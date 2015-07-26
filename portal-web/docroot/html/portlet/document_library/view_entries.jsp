@@ -399,6 +399,8 @@ dlSearchContainer.setResults(results);
 
 							row.setClassName("app-view-entry-taglib entry-display-style selectable");
 
+							Map<String, Object> data = new HashMap<String, Object>();
+
 							boolean draggable = false;
 
 							if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) {
@@ -409,9 +411,8 @@ dlSearchContainer.setResults(results);
 								}
 							}
 
-							Map<String, Object> data = new HashMap<String, Object>();
-
 							data.put("draggable", draggable);
+
 							data.put("title", fileEntry.getTitle());
 
 							row.setData(data);
@@ -494,6 +495,8 @@ dlSearchContainer.setResults(results);
 
 							row.setClassName("app-view-entry-taglib entry-display-style selectable");
 
+							Map<String, Object> data = new HashMap<String, Object>();
+
 							boolean draggable = false;
 
 							if (DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.UPDATE)) {
@@ -504,9 +507,8 @@ dlSearchContainer.setResults(results);
 								}
 							}
 
-							Map<String, Object> data = new HashMap<String, Object>();
-
 							data.put("draggable", draggable);
+
 							data.put("folder", true);
 							data.put("folder-id", curFolder.getFolderId());
 							data.put("title", curFolder.getName());
