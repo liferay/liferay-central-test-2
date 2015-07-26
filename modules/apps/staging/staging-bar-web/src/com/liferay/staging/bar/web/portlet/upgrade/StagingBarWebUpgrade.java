@@ -17,7 +17,7 @@ package com.liferay.staging.bar.web.portlet.upgrade;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
-import com.liferay.staging.bar.web.portlet.upgrade.v1_0_0.UpgradeStagingBarPortletId;
+import com.liferay.staging.bar.web.portlet.upgrade.v1_0_0.UpgradePortletId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class StagingBarWebUpgrade {
 	protected void upgrade() throws PortalException {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
-		upgradeProcesses.add(new UpgradeStagingBarPortletId());
+		upgradeProcesses.add(new UpgradePortletId());
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.staging.bar.web", upgradeProcesses, 1, 1, false);
