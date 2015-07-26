@@ -67,7 +67,7 @@ public class MediaItemSelectorView
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return false;
 	}
 

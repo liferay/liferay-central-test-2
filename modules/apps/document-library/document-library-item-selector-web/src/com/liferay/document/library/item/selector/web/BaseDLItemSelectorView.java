@@ -80,7 +80,7 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return true;
 	}
 

@@ -107,7 +107,7 @@ public class BlogsItemSelectorView
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return true;
 	}
 

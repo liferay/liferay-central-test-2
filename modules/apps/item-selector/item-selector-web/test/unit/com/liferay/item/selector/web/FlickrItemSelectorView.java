@@ -67,7 +67,7 @@ public class FlickrItemSelectorView
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return false;
 	}
 
