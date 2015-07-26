@@ -81,7 +81,7 @@ List<String> titles = localizedItemSelectorRendering.getTitles();
 
 				ItemSelectorView<ItemSelectorCriterion> itemSelectorView = itemSelectorViewRenderer.getItemSelectorView();
 
-				data.put("showSearch", itemSelectorView.supportsSearch());
+				data.put("showSearch", itemSelectorView.isShowSearch());
 			%>
 
 				<liferay-ui:section data="<%= data %>">

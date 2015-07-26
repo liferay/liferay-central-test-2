@@ -99,7 +99,7 @@ public class ItemSelectorURLView
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return false;
 	}
 

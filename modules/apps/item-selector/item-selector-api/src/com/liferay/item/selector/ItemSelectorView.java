@@ -42,6 +42,6 @@ public interface ItemSelectorView<T extends ItemSelectorCriterion> {
 			String itemSelectedEventName)
 		throws IOException, ServletException;
 
-	public boolean supportsSearch();
+	public boolean isShowSearch();
 
 }

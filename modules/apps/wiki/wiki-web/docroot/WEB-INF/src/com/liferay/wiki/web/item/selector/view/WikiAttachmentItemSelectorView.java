@@ -109,7 +109,7 @@ public class WikiAttachmentItemSelectorView
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return true;
 	}
 

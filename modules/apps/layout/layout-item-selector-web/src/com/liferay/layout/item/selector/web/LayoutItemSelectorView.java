@@ -105,7 +105,7 @@ public class LayoutItemSelectorView
 	}
 
 	@Override
-	public boolean supportsSearch() {
+	public boolean isShowSearch() {
 		return false;
 	}
 

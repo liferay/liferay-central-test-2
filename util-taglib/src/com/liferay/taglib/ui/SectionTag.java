@@ -98,7 +98,7 @@ public class SectionTag extends IncludeTag {
 	@Override
 	protected void cleanUp() {
 		_data = null;
-		_sectionSelected = false;
+		_sectionSelected = Boolean.FALSE;
 		_tabsTag = null;
 	}
 
