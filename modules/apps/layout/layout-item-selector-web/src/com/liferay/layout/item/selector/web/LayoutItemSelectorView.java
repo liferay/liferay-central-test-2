@@ -73,6 +73,11 @@ public class LayoutItemSelectorView
 	}
 
 	@Override
+	public boolean isShowSearch() {
+		return false;
+	}
+
+	@Override
 	public void renderHTML(
 			ServletRequest request, ServletResponse response,
 			LayoutItemSelectorCriterion layoutItemSelectorCriterion,
@@ -102,11 +107,6 @@ public class LayoutItemSelectorView
 	)
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
-	}
-
-	@Override
-	public boolean isShowSearch() {
-		return false;
 	}
 
 	private static final List<ItemSelectorReturnType>

@@ -54,6 +54,11 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 	}
 
 	@Override
+	public boolean isShowSearch() {
+		return true;
+	}
+
+	@Override
 	public void renderHTML(
 			ServletRequest request, ServletResponse response, T t,
 			PortletURL portletURL, String itemSelectedEventName)
@@ -77,11 +82,6 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
-	}
-
-	@Override
-	public boolean isShowSearch() {
-		return true;
 	}
 
 	private ServletContext _servletContext;

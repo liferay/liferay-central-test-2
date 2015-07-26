@@ -54,6 +54,11 @@ public class MediaItemSelectorView
 	}
 
 	@Override
+	public boolean isShowSearch() {
+		return false;
+	}
+
+	@Override
 	public void renderHTML(
 			ServletRequest request, ServletResponse response,
 			MediaItemSelectorCriterion mediaItemSelectorCriterion,
@@ -64,11 +69,6 @@ public class MediaItemSelectorView
 
 		printWriter.print(
 			"<html>" + MediaItemSelectorView.class.getName() + "</html>");
-	}
-
-	@Override
-	public boolean isShowSearch() {
-		return false;
 	}
 
 	private static final List<ItemSelectorReturnType>

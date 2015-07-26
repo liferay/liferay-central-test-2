@@ -36,12 +36,12 @@ public interface ItemSelectorView<T extends ItemSelectorCriterion> {
 
 	public String getTitle(Locale locale);
 
+	public boolean isShowSearch();
+
 	public void renderHTML(
 			ServletRequest servletRequest, ServletResponse servletResponse,
 			T itemSelectorCriterion, PortletURL portletURL,
 			String itemSelectedEventName)
 		throws IOException, ServletException;
-
-	public boolean isShowSearch();
 
 }
