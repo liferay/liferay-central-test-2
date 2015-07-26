@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.staging.bar.web.portlet.upgrade;
+package com.liferay.staging.bar.web.upgrade;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
-import com.liferay.staging.bar.web.portlet.upgrade.v1_0_0.UpgradePortletId;
+import com.liferay.staging.bar.web.upgrade.v1_0_0.UpgradePortletId;
 
 import java.util.ArrayList;
 import java.util.List;

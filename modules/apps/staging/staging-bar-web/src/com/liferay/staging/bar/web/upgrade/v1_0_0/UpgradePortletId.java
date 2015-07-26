@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.staging.bar.web.portlet.upgrade.v1_0_0;
+package com.liferay.staging.bar.web.upgrade.v1_0_0;
 
 import com.liferay.staging.bar.web.portlet.constants.StagingBarPortletKeys;
 
