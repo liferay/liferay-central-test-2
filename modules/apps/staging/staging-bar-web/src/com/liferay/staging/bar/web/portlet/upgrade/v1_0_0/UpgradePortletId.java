@@ -14,13 +14,13 @@
 
 package com.liferay.staging.bar.web.portlet.upgrade.v1_0_0;
 
-import com.liferay.portal.upgrade.util.UpgradePortletId;
 import com.liferay.staging.bar.web.portlet.constants.StagingBarPortletKeys;
 
 /**
  * @author Levente Hudák
  */
-public class UpgradeStagingBarPortletId extends UpgradePortletId {
+public class UpgradePortletId
+	extends com.liferay.portal.upgrade.util.UpgradePortletId {
 
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
