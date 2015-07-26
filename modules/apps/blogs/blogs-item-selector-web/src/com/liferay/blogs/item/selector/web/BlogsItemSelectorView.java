@@ -74,6 +74,11 @@ public class BlogsItemSelectorView
 	}
 
 	@Override
+	public boolean isShowSearch() {
+		return true;
+	}
+
+	@Override
 	public void renderHTML(
 			ServletRequest request, ServletResponse response,
 			BlogsItemSelectorCriterion blogsItemSelectorCriterion,
@@ -104,11 +109,6 @@ public class BlogsItemSelectorView
 	)
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
-	}
-
-	@Override
-	public boolean isShowSearch() {
-		return true;
 	}
 
 	private static final List<ItemSelectorReturnType>

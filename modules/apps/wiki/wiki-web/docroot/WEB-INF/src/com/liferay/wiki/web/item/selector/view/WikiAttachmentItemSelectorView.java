@@ -75,6 +75,11 @@ public class WikiAttachmentItemSelectorView
 	}
 
 	@Override
+	public boolean isShowSearch() {
+		return true;
+	}
+
+	@Override
 	public void renderHTML(
 			ServletRequest request, ServletResponse response,
 			WikiAttachmentItemSelectorCriterion
@@ -106,11 +111,6 @@ public class WikiAttachmentItemSelectorView
 	)
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
-	}
-
-	@Override
-	public boolean isShowSearch() {
-		return true;
 	}
 
 	private static final List<ItemSelectorReturnType>

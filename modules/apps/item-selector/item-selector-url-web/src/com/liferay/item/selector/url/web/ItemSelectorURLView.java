@@ -69,6 +69,11 @@ public class ItemSelectorURLView
 	}
 
 	@Override
+	public boolean isShowSearch() {
+		return false;
+	}
+
+	@Override
 	public void renderHTML(
 			ServletRequest request, ServletResponse response,
 			ImageItemSelectorCriterion imageItemSelectorCriterion,
@@ -96,11 +101,6 @@ public class ItemSelectorURLView
 	)
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
-	}
-
-	@Override
-	public boolean isShowSearch() {
-		return false;
 	}
 
 	private static final List<ItemSelectorReturnType>
