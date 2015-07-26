@@ -76,7 +76,7 @@ AUI.add(
 				ATTRS: {
 
 					/**
-					 * The id of the all row checkbox.
+					 * The ID of the all row checkbox.
 					 *
 					 * @attribute allRowIds
 					 * @type String
@@ -155,7 +155,7 @@ AUI.add(
 					},
 
 					/**
-					 * The action used when item is moved to the trash.
+					 * The action used when an item is moved to the trash.
 					 *
 					 * @attribute moveToTrashActionName
 					 * @type String
@@ -175,7 +175,7 @@ AUI.add(
 					},
 
 					/**
-					 *The id of the portlet container.
+					 *The ID of the portlet container.
 					 *
 					 * @attribute portletContainerId
 					 * @type String
@@ -195,7 +195,7 @@ AUI.add(
 					},
 
 					/**
-					 * Contains ids of the entries to process.
+					 * Contains IDs of the entries to process.
 					 *
 					 * @attribute processEntryIds
 					 * @type Object
@@ -205,7 +205,7 @@ AUI.add(
 					},
 
 					/**
-					 * The id of the trash link.
+					 * The ID of the trash link.
 					 *
 					 * @attribute trashLinkId
 					 * @type String
@@ -255,10 +255,10 @@ AUI.add(
 				prototype: {
 
 					/**
-				 	 * Construction logic executed during `AppViewMove` instantiation.
-				 	 * Lifecycle.
-				 	 *
-				 	 * @method initializer
+					 * Construction lifecycle implementation executed during
+					 * `AppViewMove` instantiation.
+					 *
+					 * @method initializer
 					 * @param config
 				 	 * @protected
 				 	 */
@@ -318,7 +318,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Return the text to display when moving according to
+				 	 * Returns the text to display when moving according to
 				 	 * whether a target is available. Fires when an item is
 				 	 * moved.
 				 	 *
@@ -350,7 +350,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Initialize the drag/drop.
+				 	 * Initializes the drag/drop.
 				 	 *
 				 	 * @method _initDragDrop
 				 	 * @protected
@@ -620,7 +620,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Run when the edit, move, or move to trash actions occurs.
+				 	 * Runs when the edit, move, or move to trash actions occur.
 				 	 *
 				 	 * @method _processEntryAction
 					 * @param action
@@ -685,7 +685,7 @@ AUI.add(
 					},
 
 					/**
-				 	 * Update the redirect URL for the folder id.
+				 	 * Updates the redirect URL for the folder ID.
 				 	 *
 				 	 * @method _updateFolderIdRedirectUrl
 					 * @param redirectUrl
