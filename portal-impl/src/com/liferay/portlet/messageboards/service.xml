@@ -74,11 +74,11 @@
 		<column name="threadCount" type="int" />
 		<column name="messageCount" type="int" />
 		<column name="lastPostDate" type="Date" />
+		<column name="lastPublishDate" type="Date" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="lastPublishDate" type="Date" />
 
 		<!-- Order -->
 
@@ -273,11 +273,11 @@
 		<column name="priority" type="double" />
 		<column name="allowPingbacks" type="boolean" />
 		<column name="answer" type="boolean" />
+		<column name="lastPublishDate" type="Date" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="lastPublishDate" type="Date" />
 
 		<!-- Order -->
 
@@ -493,11 +493,11 @@
 		<column name="lastPostDate" type="Date" />
 		<column name="priority" type="double" />
 		<column name="question" type="boolean" />
+		<column name="lastPublishDate" type="Date" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="lastPublishDate" type="Date" />
 
 		<!-- Order -->
 
