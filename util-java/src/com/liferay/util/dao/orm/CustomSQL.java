@@ -151,7 +151,7 @@ public class CustomSQL {
 
 		if (queryDefinition.getOwnerUserId() > 0) {
 			if (queryDefinition.isIncludeOwner()) {
-				StringBundler sb = new StringBundler();
+				StringBundler sb = new StringBundler(7);
 
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(tableName);
