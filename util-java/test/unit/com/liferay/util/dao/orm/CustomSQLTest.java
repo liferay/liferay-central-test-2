@@ -62,27 +62,27 @@ public class CustomSQLTest {
 							Object proxy, Method method, Object[] args)
 						throws Throwable {
 
-						String name = method.getName();
+						String methodName = method.getName();
 
-						if (name.equals("getDataSource")) {
-							return ProxyUtil.newProxyInstance(
-								ClassLoader.getSystemClassLoader(),
-								new Class<?>[] {DataSource.class},
-								new InvocationHandler() {
-
-									@Override
-									public Object invoke(
-											Object proxy, Method method,
-											Object[] args)
-										throws Throwable {
-
-										return null;
-									}
-
-								});
+						if (!methodName.equals("getDataSource")) {
+							return "test";
 						}
 
-						return "test";
+						return ProxyUtil.newProxyInstance(
+							ClassLoader.getSystemClassLoader(),
+							new Class<?>[] {DataSource.class},
+							new InvocationHandler() {
+
+								@Override
+								public Object invoke(
+										Object proxy, Method method,
+										Object[] args)
+									throws Throwable {
+
+									return null;
+								}
+
+							});
 					}
 
 				}));
@@ -252,12 +252,9 @@ public class CustomSQLTest {
 		_queryDefinition.setOwnerUserId(_USER_ID);
 		_queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
-		String expected =
-			"((TestModel.userId = ? AND TestModel.status != ?)  OR  " +
-				"TestModel.status = ?) ";
-
 		Assert.assertEquals(
-			expected, _customSQL.get("test", _queryDefinition, _TABLE_NAME));
+			"((Test.userId = ? AND Test.status != ?)  OR  Test.status = ?) ",
+			_customSQL.get("test", _queryDefinition, "Test"));
 	}
 
 	@Test
@@ -272,8 +269,6 @@ public class CustomSQLTest {
 	private static final String _SQL =
 		"([$OWNER_USER_ID$] [$OWNER_USER_ID_AND_OR_CONNECTOR$] [$STATUS$]) ";
 
-	private static final String _TABLE_NAME = "TestModel";
-
 	private static final long _USER_ID = 1234L;
 
 	private static DataAccess.PACL _pacl;
@@ -281,7 +276,8 @@ public class CustomSQLTest {
 	private static Props _props;
 
 	private CustomSQL _customSQL;
-	private QueryDefinition<Object> _queryDefinition = new QueryDefinition<>();
+	private final QueryDefinition<Object> _queryDefinition =
+		new QueryDefinition<>();
 
 	private class TestCustomSQL extends CustomSQL {
 
