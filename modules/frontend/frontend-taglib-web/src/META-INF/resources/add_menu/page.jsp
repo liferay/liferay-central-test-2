@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/taglib/add_menu/init.jsp" %>
+<%@ include file="/add_menu/init.jsp" %>
 
 <%
 List<AddMenuItem> addMenuItems = (List<AddMenuItem>)request.getAttribute("liferay-frontend:add-menu:addMenuItems");

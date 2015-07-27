@@ -69,7 +69,7 @@ public class AddMenuTag extends IncludeTag {
 
 	@Override
 	protected String getPage() {
-		return "/taglib/add_menu/end.jsp";
+		return "/add_menu/page.jsp";
 	}
 
 	@Override
