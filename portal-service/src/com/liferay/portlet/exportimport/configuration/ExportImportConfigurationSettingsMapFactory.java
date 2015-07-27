@@ -129,13 +129,6 @@ public class ExportImportConfigurationSettingsMapFactory {
 			StringPool.BLANK, null, 0, null, locale, timeZone, null);
 	}
 
-	/**
-	 * @return An <code>exportLayoutSettingsMap</code> if the <code>type ==
-	 *         ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT</code>,
-	 *         otherwise a <code>publishLayoutLocalSettingsMap</code> or a
-	 *         <code>publishLayoutRemoteSettingsMap</code> depending on the type
-	 *         of Staging.
-	 */
 	public static Map<String, Serializable> buildSettingsMap(
 			PortletRequest portletRequest, long groupId, int type)
 		throws PortalException {
