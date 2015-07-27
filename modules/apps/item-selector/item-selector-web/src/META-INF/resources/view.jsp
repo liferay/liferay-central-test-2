@@ -43,19 +43,20 @@ List<String> titles = localizedItemSelectorRendering.getTitles();
 		</div>
 	</c:when>
 	<c:otherwise>
+
+		<%
+		String selectedTab = localizedItemSelectorRendering.getSelectedTab();
+
+		if (Validator.isNull(selectedTab)) {
+			selectedTab = titles.get(0);
+		}
+		%>
+
 		<div class="form-search" id="<portlet:namespace />formSearch">
 			<aui:form action="<%= currentURL %>" cssClass="basic-search input-group"  name="searchFm">
 				<div class="input-group-input">
 					<div class="basic-search-slider">
 						<button class="basic-search-close btn btn-default" type="button"><span class="icon-remove"></span></button>
-
-						<%
-						String selectedTab = localizedItemSelectorRendering.getSelectedTab();
-
-						if (Validator.isNull(selectedTab)) {
-							selectedTab = titles.get(0);
-						}
-						%>
 
 						<aui:input name="selectedTab" type="hidden" value="<%= selectedTab %>" />
 
