@@ -66,8 +66,8 @@ AUI.add(
 			{
 
 				/**
-				 * A static property used to define the default
-				 * attribute configuration for `AppViewMove`.
+				 * A static property used to define the default attribute
+				 * configuration for `AppViewMove`.
 				 *
 				 * @property ATTRS
 				 * @type Object
@@ -260,8 +260,8 @@ AUI.add(
 					 *
 					 * @method initializer
 					 * @param config
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					initializer: function(config) {
 						var instance = this;
 
@@ -281,11 +281,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Destructor lifecycle implementation for the `AppViewMove` class.
-				 	 *
-				 	 * @method destructor
-				 	 * @protected
-				 	 */
+					 * Destructor lifecycle implementation for the `AppViewMove`
+					 * class.
+					 *
+					 * @method destructor
+					 * @protected
+					 */
 					destructor: function() {
 						var instance = this;
 
@@ -297,12 +298,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when namespaced `editEntry` event is run.
-				 	 *
-				 	 * @method _editEntry
+					 * Fires when namespaced `editEntry` event is run.
+					 *
+					 * @method _editEntry
 					 * @param event
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_editEntry: function(event) {
 						var instance = this;
 
@@ -318,16 +319,16 @@ AUI.add(
 					},
 
 					/**
-				 	 * Returns the text to display when moving according to
-				 	 * whether a target is available. Fires when an item is
-				 	 * moved.
-				 	 *
-				 	 * @method _getMoveText
+					 * Returns the text to display when moving according to
+					 * whether a target is available. Fires when an item is
+					 * moved.
+					 *
+					 * @method _getMoveText
 					 * @param selectedItemsCount
 					 * @param targetAvailable
-				 	 * @protected
+					 * @protected
 					 * @return moveText
-				 	 */
+					 */
 					_getMoveText: function(selectedItemsCount, targetAvailable) {
 						var moveText = STR_BLANK;
 
@@ -350,11 +351,11 @@ AUI.add(
 					},
 
 					/**
-				 	 * Initializes the drag/drop.
-				 	 *
-				 	 * @method _initDragDrop
-				 	 * @protected
-				 	 */
+					 * Initializes the drag/drop.
+					 *
+					 * @method _initDragDrop
+					 * @protected
+					 */
 					_initDragDrop: function() {
 						var instance = this;
 
@@ -422,11 +423,11 @@ AUI.add(
 					},
 
 					/**
-				 	 * Initializes the drop targets.
-				 	 *
-				 	 * @method _initDropTargets
-				 	 * @protected
-				 	 */
+					 * Initializes the drop targets.
+					 *
+					 * @method _initDropTargets
+					 * @protected
+					 */
 					_initDropTargets: function() {
 						var instance = this;
 
@@ -448,12 +449,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Moves entries.
-				 	 *
-				 	 * @method _moveEntries
+					 * Moves entries.
+					 *
+					 * @method _moveEntries
 					 * @param folderId
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_moveEntries: function(folderId) {
 						var instance = this;
 
@@ -465,11 +466,11 @@ AUI.add(
 					},
 
 					/**
-				 	 * Moves entries to the trash.
-				 	 *
-				 	 * @method _moveEntriesToTrash
-				 	 * @protected
-				 	 */
+					 * Moves entries to the trash.
+					 *
+					 * @method _moveEntriesToTrash
+					 * @protected
+					 */
 					_moveEntriesToTrash: function() {
 						var instance = this;
 
@@ -477,12 +478,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when the `drag:drophit` event is run.
-				 	 *
-				 	 * @method _onDragDropHit
+					 * Fires when the `drag:drophit` event is run.
+					 *
+					 * @method _onDragDropHit
 					 * @param event
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_onDragDropHit: function(event) {
 						var instance = this;
 
@@ -511,12 +512,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when the `drag:enter` event is run.
-				 	 *
-				 	 * @method _onDragEnter
+					 * Fires when the `drag:enter` event is run.
+					 *
+					 * @method _onDragEnter
 					 * @param event
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_onDragEnter: function(event) {
 						var instance = this;
 
@@ -543,12 +544,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when the `drag:exit` event is run.
-				 	 *
-				 	 * @method _onDragExit
+					 * Fires when the `drag:exit` event is run.
+					 *
+					 * @method _onDragExit
 					 * @param event
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_onDragExit: function(event) {
 						var instance = this;
 
@@ -568,12 +569,12 @@ AUI.add(
 					},
 
 					/**
-				 	 * Fires when the `drag:start` event is run.
-				 	 *
-				 	 * @method _onDragStart
+					 * Fires when the `drag:start` event is run.
+					 *
+					 * @method _onDragStart
 					 * @param event
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_onDragStart: function(event) {
 						var instance = this;
 
@@ -620,13 +621,13 @@ AUI.add(
 					},
 
 					/**
-				 	 * Runs when the edit, move, or move to trash actions occur.
-				 	 *
-				 	 * @method _processEntryAction
+					 * Runs when the edit, move, or move to trash actions occur.
+					 *
+					 * @method _processEntryAction
 					 * @param action
 					 * @param url
-				 	 * @protected
-				 	 */
+					 * @protected
+					 */
 					_processEntryAction: function(action, url) {
 						var instance = this;
 
@@ -669,11 +670,11 @@ AUI.add(
 					},
 
 					/**
-				 	 * Registers the drag/drop events.
-				 	 *
-				 	 * @method _registerDragDrop
-				 	 * @protected
-				 	 */
+					 * Registers the drag/drop events.
+					 *
+					 * @method _registerDragDrop
+					 * @protected
+					 */
 					_registerDragDrop: function() {
 						var instance = this;
 
@@ -685,13 +686,13 @@ AUI.add(
 					},
 
 					/**
-				 	 * Updates the redirect URL for the folder ID.
-				 	 *
-				 	 * @method _updateFolderIdRedirectUrl
+					 * Updates the redirect URL for the folder ID.
+					 *
+					 * @method _updateFolderIdRedirectUrl
 					 * @param redirectUrl
-				 	 * @protected
+					 * @protected
 					 * @return redirectUrl
-				 	 */
+					 */
 					_updateFolderIdRedirectUrl: function(redirectUrl) {
 						var instance = this;
 
