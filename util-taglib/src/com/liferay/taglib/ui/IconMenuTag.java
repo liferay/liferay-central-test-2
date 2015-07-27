@@ -96,6 +96,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				_localizeMessage = true;
 				_maxDisplayItems = _DEFAULT_MAX_DISPLAY_ITEMS;
 				_message = "actions";
+				_scroll = false;
 				_select = false;
 				_showArrow = true;
 				_showExpanded = false;
