@@ -45,50 +45,6 @@ public class CustomSQLTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		Field props = ReflectionUtil.getDeclaredField(
-			PropsUtil.class, "_props");
-
-		_props = (Props)props.get(null);
-
-		props.set(
-			null,
-			ProxyUtil.newProxyInstance(
-				ClassLoader.getSystemClassLoader(),
-				new Class<?>[] {Props.class},
-				new InvocationHandler() {
-
-					@Override
-					public Object invoke(
-							Object proxy, Method method, Object[] args)
-						throws Throwable {
-
-						return "test";
-					}
-
-				}));
-
-		Field portal = ReflectionUtil.getDeclaredField(
-			PortalUtil.class, "_portal");
-
-		_portal = (Portal)portal.get(null);
-
-		portal.set(
-			null,
-			ProxyUtil.newProxyInstance(
-				ClassLoader.getSystemClassLoader(),
-				new Class<?>[] {Portal.class},
-				new InvocationHandler() {
-
-					@Override
-					public Object invoke(
-							Object proxy, Method method, Object[] args)
-						throws Throwable {
-
-						return "test";
-					}
-
-				}));
-
 		Field pacl = ReflectionUtil.getDeclaredField(DataAccess.class, "_pacl");
 
 		_pacl = (DataAccess.PACL)pacl.get(null);
@@ -129,23 +85,67 @@ public class CustomSQLTest {
 					}
 
 				}));
+
+		Field portal = ReflectionUtil.getDeclaredField(
+			PortalUtil.class, "_portal");
+
+		_portal = (Portal)portal.get(null);
+
+		portal.set(
+			null,
+			ProxyUtil.newProxyInstance(
+				ClassLoader.getSystemClassLoader(),
+				new Class<?>[] {Portal.class},
+				new InvocationHandler() {
+
+					@Override
+					public Object invoke(
+							Object proxy, Method method, Object[] args)
+						throws Throwable {
+
+						return "test";
+					}
+
+				}));
+
+		Field props = ReflectionUtil.getDeclaredField(
+			PropsUtil.class, "_props");
+
+		_props = (Props)props.get(null);
+
+		props.set(
+			null,
+			ProxyUtil.newProxyInstance(
+				ClassLoader.getSystemClassLoader(),
+				new Class<?>[] {Props.class},
+				new InvocationHandler() {
+
+					@Override
+					public Object invoke(
+							Object proxy, Method method, Object[] args)
+						throws Throwable {
+
+						return "test";
+					}
+
+				}));
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		Field props = ReflectionUtil.getDeclaredField(
-			PropsUtil.class, "_props");
+		Field pacl = ReflectionUtil.getDeclaredField(DataAccess.class, "_pacl");
 
-		props.set(null, _props);
+		pacl.set(null, _pacl);
 
 		Field portal = ReflectionUtil.getDeclaredField(
 			PortalUtil.class, "_portal");
 
 		portal.set(null, _portal);
 
-		Field pacl = ReflectionUtil.getDeclaredField(DataAccess.class, "_pacl");
+		Field props = ReflectionUtil.getDeclaredField(
+			PropsUtil.class, "_props");
 
-		pacl.set(null, _pacl);
+		props.set(null, _props);
 	}
 
 	@Before
