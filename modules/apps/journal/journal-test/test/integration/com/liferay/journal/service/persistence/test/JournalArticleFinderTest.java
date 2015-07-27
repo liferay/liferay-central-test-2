@@ -84,8 +84,6 @@ public class JournalArticleFinderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_articles.clear();
-
 		_group = GroupTestUtil.addGroup();
 
 		_ddmStructure = DDMStructureTestUtil.addStructure(
