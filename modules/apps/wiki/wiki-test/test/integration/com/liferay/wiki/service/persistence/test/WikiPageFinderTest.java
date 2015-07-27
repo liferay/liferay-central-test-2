@@ -63,11 +63,11 @@ public class WikiPageFinderTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_user = UserTestUtil.addGroupUser(_group, RoleConstants.USER);
-
 		_node = WikiTestUtil.addNode(_group.getGroupId());
 
 		WikiTestUtil.addPage(_group.getGroupId(), _node.getNodeId(), true);
+
+		_user = UserTestUtil.addGroupUser(_group, RoleConstants.USER);
 
 		WikiTestUtil.addPage(
 			_user.getUserId(), _group.getGroupId(), _node.getNodeId(),
