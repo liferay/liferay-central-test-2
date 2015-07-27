@@ -25,12 +25,10 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 WikiPage wikiPage = wikiAttachmentItemSelectorViewDisplayContext.getWikiPage();
 
-long folderId = wikiPage.getAttachmentsFolderId();
-
 int total = 0;
 List<FileEntry> results = new ArrayList<FileEntry>();
 
-if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+if (wikiPage.getAttachmentsFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	String keywords = ParamUtil.getString(request, "keywords");
 	String selectedTab = ParamUtil.getString(request, "selectedTab");
 
@@ -38,10 +36,10 @@ if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		searchContext.setEnd(searchContainer.getEnd());
-		searchContext.setFolderIds(new long[] {folderId});
+		searchContext.setFolderIds(new long[] {wikiPage.getAttachmentsFolderId()});
 		searchContext.setStart(searchContainer.getStart());
 
-		Folder folder = DLAppServiceUtil.getFolder(folderId);
+		Folder folder = DLAppServiceUtil.getFolder(wikiPage.getAttachmentsFolderId());
 
 		Hits hits = PortletFileRepositoryUtil.searchPortletFileEntries(folder.getRepositoryId(), searchContext);
 
