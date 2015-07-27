@@ -398,6 +398,15 @@ public class JournalArticleFinderImpl
 	}
 
 	@Override
+	public List<JournalArticle> filterFindByG_F_C(
+		long groupId, List<Long> folderIds, long classNameId,
+		QueryDefinition<JournalArticle> queryDefinition) {
+
+		return doFindByG_F_C(
+			groupId, folderIds, classNameId, queryDefinition, true);
+	}
+
+	@Override
 	public List<JournalArticle> filterFindByG_C_S(
 		long groupId, long classNameId, String ddmStructureKey,
 		QueryDefinition<JournalArticle> queryDefinition) {
@@ -405,15 +414,6 @@ public class JournalArticleFinderImpl
 		return doFindByG_C_S(
 			groupId, classNameId, new String[] {ddmStructureKey},
 			queryDefinition, true);
-	}
-
-	@Override
-	public List<JournalArticle> filterFindByG_F_C(
-		long groupId, List<Long> folderIds, long classNameId,
-		QueryDefinition<JournalArticle> queryDefinition) {
-
-		return doFindByG_F_C(
-			groupId, folderIds, classNameId, queryDefinition, true);
 	}
 
 	@Override
@@ -705,6 +705,15 @@ public class JournalArticleFinderImpl
 	}
 
 	@Override
+	public List<JournalArticle> findByG_F_C(
+		long groupId, List<Long> folderIds, long classNameId,
+		QueryDefinition<JournalArticle> queryDefinition) {
+
+		return doFindByG_F_C(
+			groupId, folderIds, classNameId, queryDefinition, false);
+	}
+
+	@Override
 	public List<JournalArticle> findByG_C_S(
 		long groupId, long classNameId, String ddmStructureKey,
 		QueryDefinition<JournalArticle> queryDefinition) {
@@ -712,15 +721,6 @@ public class JournalArticleFinderImpl
 		return doFindByG_C_S(
 			groupId, classNameId, new String[] {ddmStructureKey},
 			queryDefinition, false);
-	}
-
-	@Override
-	public List<JournalArticle> findByG_F_C(
-		long groupId, List<Long> folderIds, long classNameId,
-		QueryDefinition<JournalArticle> queryDefinition) {
-
-		return doFindByG_F_C(
-			groupId, folderIds, classNameId, queryDefinition, false);
 	}
 
 	@Override
