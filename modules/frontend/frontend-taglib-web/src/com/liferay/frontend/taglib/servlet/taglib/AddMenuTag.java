@@ -14,7 +14,6 @@
 
 package com.liferay.frontend.taglib.servlet.taglib;
 
-import com.liferay.frontend.taglib.servlet.taglib.util.AddMenuItem;
 import com.liferay.frontend.taglib.util.ServletContextUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.taglib.util.IncludeTag;

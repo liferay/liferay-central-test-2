@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.frontend.taglib.servlet.taglib.util;
+package com.liferay.frontend.taglib.servlet.taglib;
 
 import com.liferay.portal.kernel.servlet.taglib.ui.MenuItem;
 

@@ -18,7 +18,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page import="com.liferay.frontend.taglib.servlet.taglib.util.AddMenuItem" %><%@
+<%@ page import="com.liferay.frontend.taglib.servlet.taglib.AddMenuItem" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 
 <%@ page import="java.util.List" %>
