@@ -35,9 +35,7 @@ public class KaleoActivator {
 	}
 
 	@Reference(
-		target =
-			"(org.springframework.context.service.name=" +
-				"com.liferay.portal.workflow.kaleo.service)",
+		target = "(org.springframework.context.service.name=com.liferay.portal.workflow.kaleo.service)",
 		unbind = "-"
 	)
 	protected void setApplicationContext(
