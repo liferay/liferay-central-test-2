@@ -35,6 +35,33 @@ import java.util.List;
  */
 public class UpgradeLastPublishDate extends UpgradeProcess {
 
+	@Override
+	protected void doUpgrade() throws Exception {
+		upgradeAddress();
+		upgradeEmailAddress();
+		upgradeLayout();
+		upgradeLayoutFriendlyURL();
+		upgradePasswordPolicy();
+		upgradePhone();
+		upgradeRepository();
+		upgradeRepositoryEntry();
+		upgradeRole();
+		upgradeUser();
+		upgradeBlogsEntry();
+		upgradeCalEvent();
+		upgradeDLFileEntry();
+		upgradeDLFileEntryType();
+		upgradeDLFileShortcut();
+		upgradeDLFolder();
+		upgradeDDMStructure();
+		upgradeDDMTemplate();
+		upgradeMBBan();
+		upgradeMBCategory();
+		upgradeMBDiscussion();
+		upgradeMBMessage();
+		upgradeMBThreadFlag();
+	}
+
 	protected void updateLastPublishDates(String portletId, String tableName)
 		throws Exception {
 
@@ -189,6 +216,99 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps);
 		}
+	}
+
+	private void upgradeAddress() throws Exception {
+		updateLastPublishDates(PortletKeys.USERS_ADMIN, "Address");
+	}
+
+	private void upgradeBlogsEntry() throws Exception {
+		updateLastPublishDates(PortletKeys.BLOGS, "BlogsEntry");
+	}
+
+	private void upgradeCalEvent() throws Exception {
+		updateLastPublishDates(PortletKeys.CALENDAR, "CalEvent");
+	}
+
+	private void upgradeDDMStructure() throws Exception {
+		updateLastPublishDates(
+			PortletKeys.DYNAMIC_DATA_MAPPING, "DDMStructure");
+	}
+
+	private void upgradeDDMTemplate() throws Exception {
+		updateLastPublishDates(PortletKeys.DYNAMIC_DATA_MAPPING, "DDMTemplate");
+	}
+
+	private void upgradeDLFileEntry() throws Exception {
+		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "DLFileEntry");
+	}
+
+	private void upgradeDLFileEntryType() throws Exception {
+		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "DLFileEntryType");
+	}
+
+	private void upgradeDLFileShortcut() throws Exception {
+		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "DLFileShortcut");
+	}
+
+	private void upgradeDLFolder() throws Exception {
+		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "DLFolder");
+	}
+
+	private void upgradeEmailAddress() throws Exception {
+		updateLastPublishDates(PortletKeys.USERS_ADMIN, "EmailAddress");
+	}
+
+	private void upgradeLayout() throws Exception {
+		updateLastPublishDates(PortletKeys.LAYOUTS_ADMIN, "Layout");
+	}
+
+	private void upgradeLayoutFriendlyURL() throws Exception {
+		updateLastPublishDates(PortletKeys.LAYOUTS_ADMIN, "LayoutFriendlyURL");
+	}
+
+	private void upgradeMBBan() throws Exception {
+		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBBan");
+	}
+
+	private void upgradeMBCategory() throws Exception {
+		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBCategory");
+	}
+
+	private void upgradeMBDiscussion() throws Exception {
+		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBDiscussion");
+	}
+
+	private void upgradeMBMessage() throws Exception {
+		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBMessage");
+	}
+
+	private void upgradeMBThreadFlag() throws Exception {
+		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBThreadFlag");
+	}
+
+	private void upgradePasswordPolicy() throws Exception {
+		updateLastPublishDates(PortletKeys.ROLES_ADMIN, "PasswordPolicy");
+	}
+
+	private void upgradePhone() throws Exception {
+		updateLastPublishDates(PortletKeys.USERS_ADMIN, "Phone");
+	}
+
+	private void upgradeRepository() throws Exception {
+		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "Repository");
+	}
+
+	private void upgradeRepositoryEntry() throws Exception {
+		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "RepositoryEntry");
+	}
+
+	private void upgradeRole() throws Exception {
+		updateLastPublishDates(PortletKeys.ROLES_ADMIN, "Role");
+	}
+
+	private void upgradeUser() throws Exception {
+		updateLastPublishDates(PortletKeys.USERS_ADMIN, "User");
 	}
 
 }
