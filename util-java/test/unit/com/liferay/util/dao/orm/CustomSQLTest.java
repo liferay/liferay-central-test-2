@@ -45,11 +45,12 @@ public class CustomSQLTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		Field pacl = ReflectionUtil.getDeclaredField(DataAccess.class, "_pacl");
+		Field paclField = ReflectionUtil.getDeclaredField(
+			DataAccess.class, "_pacl");
 
-		_pacl = (DataAccess.PACL)pacl.get(null);
+		_pacl = (DataAccess.PACL)paclField.get(null);
 
-		pacl.set(
+		paclField.set(
 			null,
 			ProxyUtil.newProxyInstance(
 				ClassLoader.getSystemClassLoader(),
@@ -86,12 +87,12 @@ public class CustomSQLTest {
 
 				}));
 
-		Field portal = ReflectionUtil.getDeclaredField(
+		Field portalField = ReflectionUtil.getDeclaredField(
 			PortalUtil.class, "_portal");
 
-		_portal = (Portal)portal.get(null);
+		_portal = (Portal)portalField.get(null);
 
-		portal.set(
+		portalField.set(
 			null,
 			ProxyUtil.newProxyInstance(
 				ClassLoader.getSystemClassLoader(),
@@ -108,12 +109,12 @@ public class CustomSQLTest {
 
 				}));
 
-		Field props = ReflectionUtil.getDeclaredField(
+		Field propsField = ReflectionUtil.getDeclaredField(
 			PropsUtil.class, "_props");
 
-		_props = (Props)props.get(null);
+		_props = (Props)propsField.get(null);
 
-		props.set(
+		propsField.set(
 			null,
 			ProxyUtil.newProxyInstance(
 				ClassLoader.getSystemClassLoader(),
@@ -133,19 +134,20 @@ public class CustomSQLTest {
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		Field pacl = ReflectionUtil.getDeclaredField(DataAccess.class, "_pacl");
+		Field paclField = ReflectionUtil.getDeclaredField(
+			DataAccess.class, "_pacl");
 
-		pacl.set(null, _pacl);
+		paclField.set(null, _pacl);
 
-		Field portal = ReflectionUtil.getDeclaredField(
+		Field portalField = ReflectionUtil.getDeclaredField(
 			PortalUtil.class, "_portal");
 
-		portal.set(null, _portal);
+		portalField.set(null, _portal);
 
-		Field props = ReflectionUtil.getDeclaredField(
+		Field propsField = ReflectionUtil.getDeclaredField(
 			PropsUtil.class, "_props");
 
-		props.set(null, _props);
+		propsField.set(null, _props);
 	}
 
 	@Before
