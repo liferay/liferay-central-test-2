@@ -108,14 +108,16 @@ JSONObject itemSelectorUploadParamJSONObject = JSONFactoryUtil.createJSONObject(
 
 itemSelectorUploadParamJSONObject.put("desiredItemSelectorReturnTypes", "com.liferay.item.selector.criteria.UploadableFileReturnType");
 
+itemSelectorURL.setParameter("0_json", itemSelectorJSONParamJSONObject.toString());
+itemSelectorURL.setParameter("1_json", itemSelectorJSONParamJSONObject.toString());
+
 PortletURL uploadItemSelectorCriterionUploadURL = liferayPortletResponse.createActionURL(PortletKeys.BLOGS);
-uploadItemSelectorCriterionUploadURL.setParameter(javax.portlet.ActionRequest.ACTION_NAME, "/blogs/upload_editor_image");
+
+uploadItemSelectorCriterionUploadURL.setParameter(ActionRequest.ACTION_NAME, "/blogs/upload_editor_image");
 
 itemSelectorUploadParamJSONObject.put("url", uploadItemSelectorCriterionUploadURL.toString());
 itemSelectorUploadParamJSONObject.put("repositoryName", LanguageUtil.get(locale, "blogs"));
 
-itemSelectorURL.setParameter("0_json", itemSelectorJSONParamJSONObject.toString());
-itemSelectorURL.setParameter("1_json", itemSelectorJSONParamJSONObject.toString());
 itemSelectorURL.setParameter("2_json", itemSelectorUploadParamJSONObject.toString());
 
 itemSelectorURL.setPortletMode(PortletMode.VIEW);
