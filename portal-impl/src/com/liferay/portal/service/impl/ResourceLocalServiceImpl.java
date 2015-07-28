@@ -1080,8 +1080,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (roleName.equals(RoleConstants.DEFAULT_GROUP_ROLE)) {
 			if (groupId == 0) {
 				throw new NoSuchRoleException(
-					"Must specify a groupId different than 0 to use role " +
-						"name " + RoleConstants.DEFAULT_GROUP_ROLE);
+					"Specify a group ID other than 0 for role name " +
+						RoleConstants.DEFAULT_GROUP_ROLE);
 			}
 
 			return roleLocalService.getDefaultGroupRole(groupId);
