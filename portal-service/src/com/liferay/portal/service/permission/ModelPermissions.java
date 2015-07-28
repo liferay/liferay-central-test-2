@@ -17,11 +17,11 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.kernel.util.ListUtil;
 
 import java.io.Serializable;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -67,7 +67,8 @@ public class ModelPermissions implements Cloneable, Serializable {
 	@Override
 	public Object clone() {
 		return new ModelPermissions(
-			(HashMap)_actionsMap.clone(), (HashMap)_roleNamesMap.clone());
+			new HashMap<String, Set<String>>(_actionsMap),
+			new HashMap<String, Set<String>>(_roleNamesMap));
 	}
 
 	public String[] getActionIds(String roleName) {
@@ -105,7 +106,7 @@ public class ModelPermissions implements Cloneable, Serializable {
 		_roleNamesMap.putAll(roleNamesMap);
 	}
 
-	private final HashMap<String, Set<String>> _actionsMap = new HashMap<>();
-	private final HashMap<String, Set<String>> _roleNamesMap = new HashMap<>();
+	private final Map<String, Set<String>> _actionsMap = new HashMap<>();
+	private final Map<String, Set<String>> _roleNamesMap = new HashMap<>();
 
 }
