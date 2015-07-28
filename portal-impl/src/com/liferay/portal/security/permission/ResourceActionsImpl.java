@@ -868,6 +868,41 @@ public class ResourceActionsImpl implements ResourceActions {
 		return portletResourceActionsBag;
 	}
 
+	protected String getResourceBundlesString(
+		HttpServletRequest request, String key) {
+
+		Locale locale = RequestUtils.getUserLocale(request, null);
+
+		return getResourceBundlesString(locale, key);
+	}
+
+	protected String getResourceBundlesString(Locale locale, String key) {
+		if ((locale == null) || (key == null)) {
+			return null;
+		}
+
+		List<ResourceBundle> resourceBundles = null;
+
+		try {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			resourceBundles = _resourceBundles.getService(languageId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
+
+		for (ResourceBundle resourceBundle : resourceBundles) {
+			if (resourceBundle.containsKey(key)) {
+				return resourceBundle.getString(key);
+			}
+		}
+
+		return null;
+	}
+
 	protected int[] getRoleTypes(
 		long companyId, Group group, String modelResource) {
 
@@ -905,41 +940,6 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 
 		return types;
-	}
-
-	protected String getResourceBundlesString(
-		HttpServletRequest request, String key) {
-
-		Locale locale = RequestUtils.getUserLocale(request, null);
-
-		return getResourceBundlesString(locale, key);
-	}
-
-	protected String getResourceBundlesString(Locale locale, String key) {
-		if ((locale == null) || (key == null)) {
-			return null;
-		}
-
-		List<ResourceBundle> resourceBundles = null;
-
-		try {
-			String languageId = LocaleUtil.toLanguageId(locale);
-
-			resourceBundles = _resourceBundles.getService(languageId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return null;
-		}
-
-		for (ResourceBundle resourceBundle : resourceBundles) {
-			if (resourceBundle.containsKey(key)) {
-				return resourceBundle.getString(key);
-			}
-		}
-
-		return null;
 	}
 
 	protected void read(String servletContextName, Document document)
