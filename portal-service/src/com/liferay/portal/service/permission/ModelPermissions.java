@@ -33,22 +33,22 @@ public class ModelPermissions implements Cloneable, Serializable {
 	}
 
 	public void addRolePermissions(String roleName, String actionId) {
-		Set<String> roleNames = _actionsMap.get(actionId);
+		Set<String> roleNames = _roleNamesMap.get(actionId);
 
 		if (roleNames == null) {
 			roleNames = new HashSet<>();
 
-			_actionsMap.put(actionId, roleNames);
+			_roleNamesMap.put(actionId, roleNames);
 		}
 
 		roleNames.add(roleName);
 
-		Set<String> actionIds = _roleNamesMap.get(roleName);
+		Set<String> actionIds = _actionIdsMap.get(roleName);
 
 		if (actionIds == null) {
 			actionIds = new HashSet<>();
 
-			_roleNamesMap.put(roleName, actionIds);
+			_actionIdsMap.put(roleName, actionIds);
 		}
 
 		actionIds.add(actionId);
@@ -67,8 +67,8 @@ public class ModelPermissions implements Cloneable, Serializable {
 	@Override
 	public Object clone() {
 		return new ModelPermissions(
-			new HashMap<String, Set<String>>(_actionsMap),
-			new HashMap<String, Set<String>>(_roleNamesMap));
+			new HashMap<String, Set<String>>(_roleNamesMap),
+			new HashMap<String, Set<String>>(_actionIdsMap));
 	}
 
 	public String[] getActionIds(String roleName) {
@@ -78,17 +78,17 @@ public class ModelPermissions implements Cloneable, Serializable {
 	}
 
 	public List<String> getActionIdsList(String roleName) {
-		Set<String> actionIds = _roleNamesMap.get(roleName);
+		Set<String> actionIds = _actionIdsMap.get(roleName);
 
 		return ListUtil.fromCollection(actionIds);
 	}
 
 	public Collection<String> getRoleNames() {
-		return _roleNamesMap.keySet();
+		return _actionIdsMap.keySet();
 	}
 
 	public Set<String> getRolesWithPermission(String actionId) {
-		Set<String> roles = _actionsMap.get(actionId);
+		Set<String> roles = _roleNamesMap.get(actionId);
 
 		if (roles == null) {
 			roles = new HashSet<>();
@@ -98,18 +98,18 @@ public class ModelPermissions implements Cloneable, Serializable {
 	}
 
 	public boolean isEmpty() {
-		return _roleNamesMap.isEmpty();
+		return _actionIdsMap.isEmpty();
 	}
 
 	protected ModelPermissions(
-		Map<String, Set<String>> actionsMap,
-		Map<String, Set<String>> roleNamesMap) {
+		Map<String, Set<String>> roleNamesMap,
+		Map<String, Set<String>> actionIdsMap) {
 
-		_actionsMap.putAll(actionsMap);
 		_roleNamesMap.putAll(roleNamesMap);
+		_actionIdsMap.putAll(actionIdsMap);
 	}
 
-	private final Map<String, Set<String>> _actionsMap = new HashMap<>();
 	private final Map<String, Set<String>> _roleNamesMap = new HashMap<>();
+	private final Map<String, Set<String>> _actionIdsMap = new HashMap<>();
 
 }
