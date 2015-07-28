@@ -81,8 +81,7 @@ public class ModelPermissionsFactory {
 	}
 
 	public static ModelPermissions create(
-			String[] groupPermissions, String[] guestPermissions)
-		throws PortalException {
+		String[] groupPermissions, String[] guestPermissions) {
 
 		ModelPermissions modelPermissions = new ModelPermissions();
 
