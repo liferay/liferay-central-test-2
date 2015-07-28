@@ -70,10 +70,6 @@
 		width: 100%;
 	}
 
-	.url-view {
-		margin: 15px;
-	}
-
 	.upload-view {
 		display: table;
 		height: 400px;
@@ -83,6 +79,10 @@
 			display: table-cell;
 			vertical-align: middle;
 		}
+	}
+
+	.url-view {
+		margin: 15px;
 	}
 
 	&.uploading > .progress-container {
