@@ -20,7 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Michael C. Han
  */
 @Meta.OCD(
-	id = "com.liferay.portal.scripting.ruby.configuration.JRubyScriptingConfiguration"
+	id = "com.liferay.portal.scripting.ruby.configuration.RubyScriptingConfiguration"
 )
 public interface RubyScriptingConfiguration {
 
