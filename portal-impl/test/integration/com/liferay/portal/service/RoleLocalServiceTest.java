@@ -64,6 +64,13 @@ public class RoleLocalServiceTest {
 		IndexerRegistryUtil.unregister(Organization.class.getName());
 	}
 
+	@Test(expected = RoleNameException.class)
+	public void testAddRoleWithPlaceholderName() throws Exception {
+		RoleTestUtil.addRole(
+			RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE,
+			RoleConstants.TYPE_REGULAR);
+	}
+
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Test
 	public void testGetGroupRelatedRoles() throws Exception {
@@ -139,13 +146,6 @@ public class RoleLocalServiceTest {
 	@Test(expected = NoSuchGroupException.class)
 	public void testGetTeamRoleMapWithInvalidGroupId() throws Exception {
 		RoleLocalServiceUtil.getTeamRoleMap(0L);
-	}
-
-	@Test(expected = RoleNameException.class)
-	public void testGetPlaceHolderRole() throws Exception {
-		RoleTestUtil.addRole(
-			RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE,
-			RoleConstants.TYPE_REGULAR);
 	}
 
 	@Test
