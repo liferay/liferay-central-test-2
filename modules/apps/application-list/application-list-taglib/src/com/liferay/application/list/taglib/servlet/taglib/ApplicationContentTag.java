@@ -35,7 +35,7 @@ public class ApplicationContentTag extends BasePanelTag {
 
 	@Override
 	protected String getPage() {
-		return _PAGE;
+		return "/application_content/page.jsp";
 	}
 
 	@Override
@@ -43,8 +43,6 @@ public class ApplicationContentTag extends BasePanelTag {
 		request.setAttribute(
 			"application-list-ui:application-content:portletId", _portletId);
 	}
-
-	private static final String _PAGE = "/application_content/page.jsp";
 
 	private String _portletId;
 
