@@ -46,8 +46,8 @@ public class ItemSelectorUploadViewDisplayContext {
 		return _itemSelectorUploadView.getTitle(locale);
 	}
 
-	public String getUrl() {
-		return _uploadItemSelectorCriterion.getUrl();
+	public String getURL() {
+		return _uploadItemSelectorCriterion.getURL();
 	}
 
 	private final String _itemSelectedEventName;
