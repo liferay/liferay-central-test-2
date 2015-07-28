@@ -41,7 +41,8 @@ public class ApplicationContentTag extends BasePanelTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-application-list:application-content:portletId", _portletId);
+			"liferay-application-list:application-content:portletId",
+			_portletId);
 	}
 
 	private String _portletId;

@@ -171,12 +171,10 @@ public class BrowserTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-item-selector:browser:portletURL", _portletURL);
 		request.setAttribute(
-			"liferay-item-selector:browser:searchContainer",
-			_searchContainer);
+			"liferay-item-selector:browser:searchContainer", _searchContainer);
 		request.setAttribute(
 			"liferay-item-selector:browser:showBreadcrumb", _showBreadcrumb);
-		request.setAttribute(
-			"liferay-item-selector:browser:tabName", _tabName);
+		request.setAttribute("liferay-item-selector:browser:tabName", _tabName);
 		request.setAttribute(
 			"liferay-item-selector:browser:uploadURL", _uploadURL);
 	}
