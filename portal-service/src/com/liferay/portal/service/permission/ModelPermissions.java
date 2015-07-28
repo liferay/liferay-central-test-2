@@ -88,14 +88,14 @@ public class ModelPermissions implements Cloneable, Serializable {
 		return _actionIdsMap.keySet();
 	}
 
-	public Set<String> getRolesWithPermission(String actionId) {
-		Set<String> roles = _roleNamesMap.get(actionId);
+	public Collection<String> getRoleNames(String actionId) {
+		Set<String> roleNames = _roleNamesMap.get(actionId);
 
-		if (roles == null) {
-			roles = new HashSet<>();
+		if (roleNames == null) {
+			roleNames = new HashSet<>();
 		}
 
-		return roles;
+		return roleNames;
 	}
 
 	public boolean isEmpty() {
