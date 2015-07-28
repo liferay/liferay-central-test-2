@@ -77,7 +77,7 @@ public class ModelPermissions implements Cloneable, Serializable {
 		return actionIds.toArray(new String[actionIds.size()]);
 	}
 
-	public List getActionIdsList(String roleName) {
+	public List<String> getActionIdsList(String roleName) {
 		Set<String> actionIds = _roleNamesMap.get(roleName);
 
 		return ListUtil.fromCollection(actionIds);
@@ -101,7 +101,10 @@ public class ModelPermissions implements Cloneable, Serializable {
 		return _roleNamesMap.isEmpty();
 	}
 
-	protected ModelPermissions(HashMap actionsMap, HashMap roleNamesMap) {
+	protected ModelPermissions(
+		Map<String, Set<String>> actionsMap,
+		Map<String, Set<String>> roleNamesMap) {
+
 		_actionsMap.putAll(actionsMap);
 		_roleNamesMap.putAll(roleNamesMap);
 	}
