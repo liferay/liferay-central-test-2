@@ -17,6 +17,7 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.kernel.util.ListUtil;
 
 import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -109,7 +110,7 @@ public class ModelPermissions implements Cloneable, Serializable {
 		_actionIdsMap.putAll(actionIdsMap);
 	}
 
-	private final Map<String, Set<String>> _roleNamesMap = new HashMap<>();
 	private final Map<String, Set<String>> _actionIdsMap = new HashMap<>();
+	private final Map<String, Set<String>> _roleNamesMap = new HashMap<>();
 
 }
