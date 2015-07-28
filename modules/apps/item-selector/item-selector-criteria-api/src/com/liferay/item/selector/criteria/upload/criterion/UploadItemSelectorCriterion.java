@@ -25,17 +25,17 @@ public class UploadItemSelectorCriterion extends BaseItemSelectorCriterion {
 	}
 
 	public UploadItemSelectorCriterion(
-		String uploadURL, String repositoryName) {
+		String url, String repositoryName) {
 
+		_url = url;
 		_repositoryName = repositoryName;
-		_url = uploadURL;
 	}
 
 	public String getRepositoryName() {
 		return _repositoryName;
 	}
 
-	public String getUrl() {
+	public String getURL() {
 		return _url;
 	}
 
@@ -43,7 +43,7 @@ public class UploadItemSelectorCriterion extends BaseItemSelectorCriterion {
 		_repositoryName = repositoryName;
 	}
 
-	public void setUrl(String url) {
+	public void setURL(String url) {
 		_url = url;
 	}
 
