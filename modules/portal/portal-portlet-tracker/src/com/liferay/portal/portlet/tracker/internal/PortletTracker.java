@@ -296,8 +296,7 @@ public class PortletTracker
 
 			checkResourceBundles(
 				bundle.getBundleContext(), bundleWiring.getClassLoader(),
-				portletModel.getResourceBundle(), portletModel.getPortletId(),
-				serviceRegistrations);
+				portletModel, serviceRegistrations);
 
 			List<Company> companies = _companyLocalService.getCompanies();
 
@@ -341,20 +340,21 @@ public class PortletTracker
 
 	protected void checkResourceBundles(
 		BundleContext bundleContext, ClassLoader classLoader,
-		String languageBundleName, String portletId,
+		com.liferay.portal.model.Portlet portletModel,
 		ServiceRegistrations serviceRegistrations) {
 
-		if (Validator.isBlank(languageBundleName)) {
+		if (Validator.isBlank(portletModel.getResourceBundle())) {
 			return;
 		}
 
 		for (Locale locale : LanguageUtil.getAvailableLocales()) {
 			ResourceBundle resourceBundle = ResourceBundle.getBundle(
-				languageBundleName, locale, classLoader, UTF8Control.INSTANCE);
+				portletModel.getResourceBundle(), locale, classLoader,
+				UTF8Control.INSTANCE);
 
 			Dictionary<String, Object> properties = new HashMapDictionary<>();
 
-			properties.put("javax.portlet.name", portletId);
+			properties.put("javax.portlet.name", portletModel.getPortletId());
 			properties.put("language.id", LocaleUtil.toLanguageId(locale));
 
 			ServiceRegistration<ResourceBundle> serviceRegistration =

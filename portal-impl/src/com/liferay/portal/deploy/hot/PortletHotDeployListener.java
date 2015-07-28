@@ -172,9 +172,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void checkResourceBundles(
-		ClassLoader classLoader, String languageBundleName, String portletId) {
+		ClassLoader classLoader, Portlet portlet) {
 
-		if (Validator.isNull(languageBundleName)) {
+		if (Validator.isNull(portlet.getResourceBundle())) {
 			return;
 		}
 
@@ -182,12 +182,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (Locale locale : LanguageUtil.getAvailableLocales()) {
 			ResourceBundle resourceBundle = ResourceBundle.getBundle(
-				languageBundleName, locale, classLoader, UTF8Control.INSTANCE);
+				portlet.getResourceBundle(), locale, classLoader,
+				UTF8Control.INSTANCE);
 
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put("language.id", LocaleUtil.toLanguageId(locale));
-			properties.put("javax.portlet.name", portletId);
+			properties.put("javax.portlet.name", portlet.getPortletId());
 
 			ServiceRegistration<ResourceBundle> serviceRegistration =
 				registry.registerService(
@@ -360,9 +361,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			ResourceActionLocalServiceUtil.checkResourceActions(
 				portlet.getPortletId(), portletActions);
 
-			checkResourceBundles(
-				classLoader, portlet.getResourceBundle(),
-				portlet.getPortletId());
+			checkResourceBundles(classLoader, portlet);
 
 			for (String modelName : modelNames) {
 				List<String> modelActions =
