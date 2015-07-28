@@ -49,6 +49,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadFactory;
 
 import org.jruby.Ruby;
+import org.jruby.RubyException;
 import org.jruby.RubyInstanceConfig;
 import org.jruby.RubyInstanceConfig.CompileMode;
 import org.jruby.embed.LocalContextScope;
@@ -196,8 +197,10 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			return outputObjects;
 		}
 		catch (RaiseException re) {
+			RubyException rubyException = re.getException();
+
 			throw new ScriptingException(
-				re.getException().message.asJavaString() + "\n\n", re);
+				rubyException.message.asJavaString() + "\n\n", re);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new ScriptingException(fnfe);
@@ -263,14 +266,12 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		RubyInstanceConfig rubyInstanceConfig =
 			localContextProvider.getRubyInstanceConfig();
 
-		if (_rubyScriptingConfiguration.compileMode().equals(
-				_COMPILE_MODE_FORCE)) {
+		String compileMode = _rubyScriptingConfiguration.compileMode();
 
+		if (compileMode.equals(_COMPILE_MODE_FORCE)) {
 			rubyInstanceConfig.setCompileMode(CompileMode.FORCE);
 		}
-		else if (_rubyScriptingConfiguration.compileMode().equals(
-					_COMPILE_MODE_JIT)) {
-
+		else if (compileMode.equals(_COMPILE_MODE_JIT)) {
 			rubyInstanceConfig.setCompileMode(CompileMode.JIT);
 		}
 
@@ -279,7 +280,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		rubyInstanceConfig.setLoader(getScriptingExecutorClassLoader());
 
 		String[] loadPaths = StringUtil.split(
-			_rubyScriptingConfiguration.loadPaths(), StringPool.COMMA);
+			_rubyScriptingConfiguration.loadPaths());
 
 		_loadPaths = new ArrayList<>(Arrays.asList(loadPaths));
 
