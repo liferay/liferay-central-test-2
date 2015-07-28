@@ -110,7 +110,8 @@ public class ModelPermissionsFactoryTest extends PowerMockito {
 
 		String roleName = roleNames.iterator().next();
 
-		Assert.assertEquals(RoleConstants.DEFAULT_GROUP_ROLE, roleName);
+		Assert.assertEquals(
+			RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE, roleName);
 		Assert.assertEquals(
 			ListUtil.fromArray(groupPermissions),
 			modelPermissions.getActionIdsList(roleName));

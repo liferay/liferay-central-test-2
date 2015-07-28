@@ -24,8 +24,6 @@ public class RoleConstants {
 
 	public static final String ADMINISTRATOR = "Administrator";
 
-	public static final String DEFAULT_GROUP_ROLE = "DEFAULT_GROUP_ROLE";
-
 	public static final String GUEST = "Guest";
 
 	public static final String ORGANIZATION_ADMINISTRATOR =
@@ -36,6 +34,9 @@ public class RoleConstants {
 	public static final String ORGANIZATION_USER = "Organization User";
 
 	public static final String OWNER = "Owner";
+
+	public static final String PLACEHOLDER_DEFAULT_GROUP_ROLE =
+		"PLACEHOLDER_DEFAULT_GROUP_ROLE";
 
 	public static final String PORTAL_CONTENT_REVIEWER =
 		"Portal Content Reviewer";
