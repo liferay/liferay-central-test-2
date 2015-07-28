@@ -141,7 +141,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		String value = LanguageUtil.get(request, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = getStringFromResourceBundles(request, key);
+			value = getResourceBundlesString(request, key);
 		}
 
 		if (value == null) {
@@ -158,7 +158,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		String value = LanguageUtil.get(locale, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = getStringFromResourceBundles(locale, key);
+			value = getResourceBundlesString(locale, key);
 		}
 
 		if (value == null) {
@@ -241,7 +241,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		String value = LanguageUtil.get(request, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = getStringFromResourceBundles(request, key);
+			value = getResourceBundlesString(request, key);
 		}
 
 		if (value == null) {
@@ -258,7 +258,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		String value = LanguageUtil.get(locale, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = getStringFromResourceBundles(locale, key);
+			value = getResourceBundlesString(locale, key);
 		}
 
 		if (value == null) {
@@ -907,24 +907,24 @@ public class ResourceActionsImpl implements ResourceActions {
 		return types;
 	}
 
-	protected String getStringFromResourceBundles(
+	protected String getResourceBundlesString(
 		HttpServletRequest request, String key) {
 
 		Locale locale = RequestUtils.getUserLocale(request, null);
 
-		return getStringFromResourceBundles(locale, key);
+		return getResourceBundlesString(locale, key);
 	}
 
-	protected String getStringFromResourceBundles(Locale locale, String key) {
+	protected String getResourceBundlesString(Locale locale, String key) {
 		if ((locale == null) || (key == null)) {
 			return null;
 		}
 
-		String languageId = LocaleUtil.toLanguageId(locale);
-
 		List<ResourceBundle> resourceBundles = null;
 
 		try {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
 			resourceBundles = _resourceBundles.getService(languageId);
 		}
 		catch (Exception e) {
