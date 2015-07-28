@@ -1077,11 +1077,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	protected Role getRole(long companyId, long groupId, String roleName)
 		throws PortalException {
 
-		if (roleName.equals(RoleConstants.DEFAULT_GROUP_ROLE)) {
+		if (roleName.equals(RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE)) {
 			if (groupId == 0) {
 				throw new NoSuchRoleException(
 					"Specify a group ID other than 0 for role name " +
-						RoleConstants.DEFAULT_GROUP_ROLE);
+						RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE);
 			}
 
 			return roleLocalService.getDefaultGroupRole(groupId);

@@ -87,7 +87,7 @@ public class ModelPermissionsFactory {
 
 		if ((groupPermissions != null) && (groupPermissions.length > 0)) {
 			modelPermissions.addRolePermissions(
-				RoleConstants.DEFAULT_GROUP_ROLE, groupPermissions);
+				RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE, groupPermissions);
 		}
 
 		if ((guestPermissions != null) && (guestPermissions.length > 0)) {

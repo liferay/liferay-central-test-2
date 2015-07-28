@@ -383,7 +383,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	 * @return the specific group permissions
 	 */
 	public String[] getGroupPermissions() {
-		return _modelPermissions.getActionIds(RoleConstants.DEFAULT_GROUP_ROLE);
+		return _modelPermissions.getActionIds(
+			RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE);
 	}
 
 	/**
@@ -1273,7 +1274,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	 */
 	public void setGroupPermissions(String[] groupPermissions) {
 		_modelPermissions.addRolePermissions(
-			RoleConstants.DEFAULT_GROUP_ROLE, groupPermissions);
+			RoleConstants.PLACEHOLDER_DEFAULT_GROUP_ROLE, groupPermissions);
 	}
 
 	/**
