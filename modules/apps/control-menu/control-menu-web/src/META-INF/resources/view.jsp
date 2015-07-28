@@ -37,7 +37,7 @@ if (user.isSetupComplete() || themeDisplay.isImpersonated()) {
 }
 %>
 
-<c:if test="<%= !layout.isTypeControlPanel() && !group.isControlPanel() && !layout.isTypeUserPersonalPanel() && !group.isUserPersonalPanel() && userSetupComplete %>">
+<c:if test="<%= !group.isControlPanel() && !group.isUserPersonalPanel() && !layout.isTypeControlPanel() && !layout.isTypeUserPersonalPanel() && userSetupComplete %>">
 	<ul class="control-menu" data-namespace="<portlet:namespace />" id="<portlet:namespace />controlMenu">
 		<li class="left pull-left">
 			<ul>
