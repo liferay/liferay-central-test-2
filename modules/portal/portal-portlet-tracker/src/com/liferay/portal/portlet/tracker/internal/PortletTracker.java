@@ -353,6 +353,7 @@ public class PortletTracker
 				languageBundleName, locale, classLoader, UTF8Control.INSTANCE);
 
 			Dictionary<String, Object> properties = new HashMapDictionary<>();
+
 			properties.put("javax.portlet.name", portletId);
 			properties.put("language.id", LocaleUtil.toLanguageId(locale));
 
