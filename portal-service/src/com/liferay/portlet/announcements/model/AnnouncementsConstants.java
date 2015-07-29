@@ -19,7 +19,7 @@ package com.liferay.portlet.announcements.model;
  */
 public class AnnouncementsConstants {
 
-	public static final String ALERTS_CLASSNAME =
+	public static final String CLASS_NAME_ALERTS =
 		"com.liferay.portlet.announcements.model.AlertsEntry";
 
 }
