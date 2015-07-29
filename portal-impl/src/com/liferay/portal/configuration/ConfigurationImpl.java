@@ -98,7 +98,7 @@ public class ConfigurationImpl
 				(List<Configuration>)field1.get(classLoaderAggregateProperties);
 
 			MapConfiguration newConfiguration = new MapConfiguration(
-				(Map)properties);
+				properties);
 
 			newConfiguration.setTrimmingDisabled(true);
 
@@ -326,7 +326,7 @@ public class ConfigurationImpl
 				MapConfiguration mapConfiguration =
 					(MapConfiguration)configuration;
 
-				if (mapConfiguration.getMap() == (Map)properties) {
+				if (mapConfiguration.getMap() == (Map<?, ?>)properties) {
 					itr.remove();
 
 					classLoaderAggregateProperties.removeConfiguration(
