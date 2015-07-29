@@ -58,7 +58,7 @@ public class AnnouncementsEntryServiceImpl
 
 		if (alert) {
 			String portletId = PortletProviderUtil.getPortletId(
-				AnnouncementsConstants.CLASS_NAME_ALERTS,
+				AnnouncementsConstants.CLASS_NAME_ALERTS_ENTRY,
 				PortletProvider.Action.MANAGE);
 
 			AnnouncementsEntryPermission.check(
