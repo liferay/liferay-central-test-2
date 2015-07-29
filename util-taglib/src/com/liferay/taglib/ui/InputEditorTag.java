@@ -199,7 +199,7 @@ public class InputEditorTag extends IncludeTag {
 		_resizable = true;
 		_showSource = true;
 		_skipEditorLoading = false;
-		_toolbarSet = _DEFAULT_TOOLBAR_SET;
+		_toolbarSet = _TOOLBAR_SET_DEFAULT;
 		_width = null;
 	}
 
@@ -337,7 +337,7 @@ public class InputEditorTag extends IncludeTag {
 			return _toolbarSet;
 		}
 
-		return _DEFAULT_TOOLBAR_SET;
+		return _TOOLBAR_SET_DEFAULT;
 	}
 
 	@Override
@@ -391,7 +391,7 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:data", getData());
 	}
 
-	private static final String _DEFAULT_TOOLBAR_SET = "liferay";
+	private static final String _TOOLBAR_SET_DEFAULT = "liferay";
 
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
 		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
@@ -442,7 +442,7 @@ public class InputEditorTag extends IncludeTag {
 	private boolean _resizable = true;
 	private boolean _showSource = true;
 	private boolean _skipEditorLoading;
-	private String _toolbarSet = _DEFAULT_TOOLBAR_SET;
+	private String _toolbarSet = _TOOLBAR_SET_DEFAULT;
 	private String _width;
 
 }
