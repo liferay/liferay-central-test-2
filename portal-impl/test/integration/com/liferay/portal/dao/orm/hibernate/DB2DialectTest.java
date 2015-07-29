@@ -79,7 +79,9 @@ public class DB2DialectTest {
 		testPaging(_SQL, 10, 5, 0);
 	}
 
-	protected void testPaging(String sql, int start, int end, int expected) {
+	protected void testPaging(
+		String sql, int start, int end, int expectedResultSize) {
+
 		Session session = null;
 
 		try {
@@ -91,7 +93,7 @@ public class DB2DialectTest {
 				q, _sessionFactory.getDialect(), start, end);
 
 			Assert.assertNotNull(result);
-			Assert.assertEquals(expected, result.size());
+			Assert.assertEquals(expectedResultSize, result.size());
 		}
 		finally {
 			_sessionFactory.closeSession(session);
