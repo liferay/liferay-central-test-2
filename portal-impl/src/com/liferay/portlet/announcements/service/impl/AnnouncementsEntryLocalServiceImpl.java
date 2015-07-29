@@ -572,6 +572,7 @@ public class AnnouncementsEntryLocalServiceImpl
 			AnnouncementsEntry.class.getName(), PortletProvider.Action.VIEW);
 
 		subscriptionSender.setPortletId(portletId);
+
 		subscriptionSender.setScopeGroupId(entry.getGroupId());
 		subscriptionSender.setSubject(subject);
 
