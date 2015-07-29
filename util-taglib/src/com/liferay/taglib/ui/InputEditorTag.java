@@ -391,10 +391,10 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:data", getData());
 	}
 
-	private static final String _TOOLBAR_SET_DEFAULT = "liferay";
-
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
 		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
+
+	private static final String _TOOLBAR_SET_DEFAULT = "liferay";
 
 	private static final ServiceTrackerMap<String, Editor> _serviceTrackerMap =
 		ServiceTrackerCollections.singleValueMap(
