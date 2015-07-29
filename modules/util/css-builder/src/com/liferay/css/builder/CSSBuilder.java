@@ -245,7 +245,7 @@ public class CSSBuilder {
 			sassCompilerClassName.equals("jni")) {
 
 			try {
-				System.setProperty("jna.nosys", Boolean.toString(true));
+				System.setProperty("jna.nosys", Boolean.TRUE.toString());
 
 				_sassCompiler = new JniSassCompiler();
 
@@ -268,7 +268,7 @@ public class CSSBuilder {
 				System.out.println(
 					"Unable to load Ruby compiler, falling back to native");
 
-				System.setProperty("jna.nosys", Boolean.toString(true));
+				System.setProperty("jna.nosys", Boolean.TRUE.toString());
 
 				_sassCompiler = new JniSassCompiler();
 			}

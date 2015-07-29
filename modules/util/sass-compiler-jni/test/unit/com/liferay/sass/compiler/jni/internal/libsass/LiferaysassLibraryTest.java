@@ -28,7 +28,7 @@ public class LiferaysassLibraryTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		System.setProperty("jna.nosys", Boolean.toString(true));
+		System.setProperty("jna.nosys", Boolean.TRUE.toString());
 
 		JniSassCompilerTestUtil.addSearchPath();
 	}
