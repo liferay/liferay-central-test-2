@@ -104,7 +104,7 @@ String selectedScopeOrganizationIds = PrefsParamUtil.getString(portletPreference
 String selectedScopeRoleIds = PrefsParamUtil.getString(portletPreferences, request, "selectedScopeRoleIds", "");
 String selectedScopeUserGroupIds = PrefsParamUtil.getString(portletPreferences, request, "selectedScopeUserGroupIds", "");
 
-Format dateFormatDate = FastDateFormatFactoryUtil.getDate(DateFormat.FULL, themeDisplay.getLocale(), themeDisplay.getTimeZone());
+String viewAlertsPortletId = PortletProviderUtil.getPortletId(AnnouncementsConstants.CLASS_NAME_ALERTS, PortletProvider.Action.VIEW);
 
-String viewAlertsPortletId = PortletProviderUtil.getPortletId(AnnouncementsConstants.ALERTS_CLASSNAME, PortletProvider.Action.VIEW);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(DateFormat.FULL, themeDisplay.getLocale(), themeDisplay.getTimeZone());
 %>
