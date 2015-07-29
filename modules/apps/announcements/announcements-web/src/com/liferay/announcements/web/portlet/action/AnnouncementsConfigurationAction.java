@@ -18,10 +18,7 @@ import com.liferay.announcements.web.constants.AnnouncementsPortletKeys;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 
-import javax.servlet.ServletContext;
-
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
@@ -33,14 +30,4 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class AnnouncementsConfigurationAction
 	extends DefaultConfigurationAction {
-
-	@Override
-	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.announcements.web)",
-		unbind = "-"
-	)
-	public void setServletContext(ServletContext servletContext) {
-		super.setServletContext(servletContext);
-	}
-
 }
