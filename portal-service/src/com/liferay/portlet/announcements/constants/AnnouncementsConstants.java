@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.announcements.model;
+package com.liferay.portlet.announcements.constants;
 
 /**
  * @author Adolfo Pérez
