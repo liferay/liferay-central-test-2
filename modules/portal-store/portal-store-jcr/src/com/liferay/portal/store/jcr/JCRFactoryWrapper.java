@@ -122,7 +122,7 @@ public class JCRFactoryWrapper {
 			JCRFactoryWrapper.class + "._sessions",
 			new HashMap<String, Session>());
 
-	private final JCRStoreConfiguration _jcrStoreConfiguration;
 	private final JCRFactory _jcrFactory;
+	private final JCRStoreConfiguration _jcrStoreConfiguration;
 
 }

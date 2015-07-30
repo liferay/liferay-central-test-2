@@ -60,7 +60,7 @@ public class JCRFactoryImpl implements JCRFactory {
 
 		if (_log.isInfoEnabled()) {
 			StringBundler sb = new StringBundler(4);
-			
+
 			sb.append("Jackrabbit JCR intialized with config file path ");
 			sb.append(_jcrStoreConfiguration.jackrabbitConfigFilePath());
 			sb.append(" and repository home ");
@@ -173,8 +173,8 @@ public class JCRFactoryImpl implements JCRFactory {
 
 	private static final Log _log = LogFactoryUtil.getLog(JCRFactoryImpl.class);
 
-	private final JCRStoreConfiguration _jcrStoreConfiguration;
 	private boolean _initialized;
+	private final JCRStoreConfiguration _jcrStoreConfiguration;
 	private final TransientRepository _transientRepository;
 
 }
