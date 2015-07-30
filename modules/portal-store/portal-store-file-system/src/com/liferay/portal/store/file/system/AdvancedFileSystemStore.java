@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.store.file.system.configuration.AdvancedFileSystemConfiguration;
+import com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.store.Store;
@@ -54,7 +54,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Manuel de la Peña
  */
 @Component(
-	configurationPid = "com.liferay.portal.store.file.system.configuration.AdvancedFileSystemConfiguration",
+	configurationPid = "com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = "store.type=com.liferay.portal.store.file.system.AdvancedFileSystemStore",
 	service = Store.class
@@ -111,23 +111,25 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 	@Activate
 	@Override
 	protected void activate(Map<String, Object> properties) {
-		_advancedFileSystemConfiguration = Configurable.createConfigurable(
-			AdvancedFileSystemConfiguration.class, properties);
+		_advancedFileSystemStoreConfiguration = Configurable.createConfigurable(
+			AdvancedFileSystemStoreConfiguration.class, properties);
 
-		if (Validator.isBlank(_advancedFileSystemConfiguration.rootDir())) {
+		if (Validator.isBlank(
+				_advancedFileSystemStoreConfiguration.rootDir())) {
+
 			throw new IllegalArgumentException(
 				"Advanced File System Root Dir is not set",
 				new FileSystemStoreRootDirException());
 		}
 
-		FileSystemConfigurationValidator fileSystemConfigurationValidator =
-			new FileSystemConfigurationValidator();
+		FileSystemStoreConfigurationValidator fileSystemStoreConfigurationValidator =
+			new FileSystemStoreConfigurationValidator();
 
-		fileSystemConfigurationValidator.validate(
+		fileSystemStoreConfigurationValidator.validate(
 			"com.liferay.portal.store.file.system.configuration." +
-				"FileSystemConfiguration",
+				"FileSystemStoreConfiguration",
 			"com.liferay.portal.store.file.system.configuration." +
-				"AdvancedFileSystemConfiguration");
+				"AdvancedFileSystemStoreConfiguration");
 
 		initializeRootDir();
 	}
@@ -339,7 +341,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 	@Override
 	protected String getRootDirName() {
-		return _advancedFileSystemConfiguration.rootDir();
+		return _advancedFileSystemStoreConfiguration.rootDir();
 	}
 
 	@Reference(unbind = "-")
@@ -377,7 +379,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 	private static final String _HOOK_EXTENSION = "afsh";
 
-	private static volatile AdvancedFileSystemConfiguration
-		_advancedFileSystemConfiguration;
+	private static volatile AdvancedFileSystemStoreConfiguration
+		_advancedFileSystemStoreConfiguration;
 
 }

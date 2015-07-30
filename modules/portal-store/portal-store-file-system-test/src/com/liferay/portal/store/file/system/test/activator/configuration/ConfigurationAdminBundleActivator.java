@@ -41,34 +41,34 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 			bundleContext.getServiceReference(ConfigurationAdmin.class);
 
 		try {
-			_advancedFileSystemConfiguration = getConfiguration(
+			_advancedFileSystemStoreConfiguration = getConfiguration(
 				bundleContext, serviceReference,
 				"com.liferay.portal.store.file.system.configuration." +
-					"AdvancedFileSystemConfiguration");
+					"AdvancedFileSystemStoreConfiguration");
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
 			properties.put("rootDir", _ADVANCED_ROOT_DIR);
 
-			_advancedFileSystemConfiguration.update(properties);
+			_advancedFileSystemStoreConfiguration.update(properties);
 
 			waitForService(
-				bundleContext, _advancedFileSystemConfiguration,
+				bundleContext, _advancedFileSystemStoreConfiguration,
 				"com.liferay.portal.store.file.system.AdvancedFileSystemStore");
 
-			_fileSystemConfiguration = getConfiguration(
+			_fileSystemStoreConfiguration = getConfiguration(
 				bundleContext, serviceReference,
 				"com.liferay.portal.store.file.system.configuration." +
-					"FileSystemConfiguration");
+					"FileSystemStoreConfiguration");
 
 			properties = new Hashtable<>();
 
 			properties.put("rootDir", _ROOT_DIR);
 
-			_fileSystemConfiguration.update(properties);
+			_fileSystemStoreConfiguration.update(properties);
 
 			waitForService(
-				bundleContext, _fileSystemConfiguration,
+				bundleContext, _fileSystemStoreConfiguration,
 				"com.liferay.portal.store.file.system.FileSystemStore");
 		}
 		finally {
@@ -79,11 +79,11 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 	@Override
 	public void stop(BundleContext bundleContext) {
 		try {
-			_advancedFileSystemConfiguration.delete();
+			_advancedFileSystemStoreConfiguration.delete();
 
 			FileUtil.deltree(_ADVANCED_ROOT_DIR);
 
-			_fileSystemConfiguration.delete();
+			_fileSystemStoreConfiguration.delete();
 
 			FileUtil.deltree(_ROOT_DIR);
 		}
@@ -137,7 +137,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 	private static final String _ROOT_DIR =
 		PropsUtil.get(PropsKeys.LIFERAY_HOME) + "/test/store/file_system";
 
-	private Configuration _advancedFileSystemConfiguration;
-	private Configuration _fileSystemConfiguration;
+	private Configuration _advancedFileSystemStoreConfiguration;
+	private Configuration _fileSystemStoreConfiguration;
 
 }

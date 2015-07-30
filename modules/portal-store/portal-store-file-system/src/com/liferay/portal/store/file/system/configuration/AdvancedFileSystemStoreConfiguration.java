@@ -20,11 +20,11 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Manuel de la Peña
  */
 @Meta.OCD(
-	id = "com.liferay.portal.store.file.system.configuration.FileSystemConfiguration",
+	id = "com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration",
 	localization = "content/Language",
-	name = "%file.system.store.configuration.name"
+	name = "%advanced.file.system.store.configuration.name"
 )
-public interface FileSystemConfiguration {
+public interface AdvancedFileSystemStoreConfiguration {
 
 	@Meta.AD(
 		deflt = "data/document_library",

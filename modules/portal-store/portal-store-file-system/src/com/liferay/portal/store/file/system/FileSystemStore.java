@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.store.file.system.configuration.FileSystemConfiguration;
+import com.liferay.portal.store.file.system.configuration.FileSystemStoreConfiguration;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.store.BaseStore;
@@ -59,7 +59,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Manuel de la Peña
  */
 @Component(
-	configurationPid = "com.liferay.portal.store.file.system.configuration.FileSystemConfiguration",
+	configurationPid = "com.liferay.portal.store.file.system.configuration.FileSystemStoreConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = "store.type=com.liferay.portal.store.file.system.FileSystemStore",
 	service = Store.class
@@ -443,23 +443,23 @@ public class FileSystemStore extends BaseStore {
 
 	@Activate
 	protected void activate(Map<String, Object> properties) {
-		_fileSystemConfiguration = Configurable.createConfigurable(
-			FileSystemConfiguration.class, properties);
+		_fileSystemStoreConfiguration = Configurable.createConfigurable(
+			FileSystemStoreConfiguration.class, properties);
 
-		if (Validator.isBlank(_fileSystemConfiguration.rootDir())) {
+		if (Validator.isBlank(_fileSystemStoreConfiguration.rootDir())) {
 			throw new IllegalArgumentException(
 				"File System Root Directory Configuration is not set",
 				new FileSystemStoreRootDirException());
 		}
 
-		FileSystemConfigurationValidator fileSystemConfigurationValidator =
-			new FileSystemConfigurationValidator();
+		FileSystemStoreConfigurationValidator fileSystemStoreConfigurationValidator =
+			new FileSystemStoreConfigurationValidator();
 
-		fileSystemConfigurationValidator.validate(
+		fileSystemStoreConfigurationValidator.validate(
 			"com.liferay.portal.store.file.system.configuration." +
-				"FileSystemConfiguration",
+				"FileSystemStoreConfiguration",
 			"com.liferay.portal.store.file.system.configuration." +
-				"AdvancedFileSystemConfiguration");
+				"AdvancedFileSystemStoreConfiguration");
 
 		initializeRootDir();
 	}
@@ -610,7 +610,7 @@ public class FileSystemStore extends BaseStore {
 	}
 
 	protected String getRootDirName() {
-		return _fileSystemConfiguration.rootDir();
+		return _fileSystemStoreConfiguration.rootDir();
 	}
 
 	protected void initializeRootDir() {
@@ -639,23 +639,23 @@ public class FileSystemStore extends BaseStore {
 
 	protected ConfigurationAdmin configurationAdmin;
 
-	protected class FileSystemConfigurationValidator {
+	protected class FileSystemStoreConfigurationValidator {
 
 		public void validate(
 			String fileSystemPid, String advancedFileSystemPid) {
 
 			try {
-				Configuration advancedFileSystemConfiguration =
+				Configuration advancedFileSystemStoreConfiguration =
 					configurationAdmin.getConfiguration(advancedFileSystemPid);
 
-				Configuration fileSystemConfiguration =
+				Configuration fileSystemStoreConfiguration =
 					configurationAdmin.getConfiguration(fileSystemPid);
 
 				Dictionary<String, Object> advancedFileSystemDictionary =
-					advancedFileSystemConfiguration.getProperties();
+					advancedFileSystemStoreConfiguration.getProperties();
 
 				Dictionary<String, Object> fileSystemDictionary =
-					fileSystemConfiguration.getProperties();
+					fileSystemStoreConfiguration.getProperties();
 
 				if ((advancedFileSystemDictionary != null) &&
 					(fileSystemDictionary != null)) {
@@ -683,7 +683,7 @@ public class FileSystemStore extends BaseStore {
 
 	}
 
-	private static volatile FileSystemConfiguration _fileSystemConfiguration;
+	private static volatile FileSystemStoreConfiguration _fileSystemStoreConfiguration;
 
 	private final Map<RepositoryDirKey, File> _repositoryDirs =
 		new ConcurrentHashMap<>();
