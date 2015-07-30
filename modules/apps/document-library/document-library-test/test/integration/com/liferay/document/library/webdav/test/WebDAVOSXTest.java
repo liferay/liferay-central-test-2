@@ -64,8 +64,8 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
-			WebDAVEnvironmentConfigTestRule.INSTANCE,
-			SynchronousDestinationTestRule.INSTANCE);
+			SynchronousDestinationTestRule.INSTANCE,
+			WebDAVEnvironmentConfigTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {
