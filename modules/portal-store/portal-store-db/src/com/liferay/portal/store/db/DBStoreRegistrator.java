@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class DBStoreRegistrator {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		Hashtable<String, String> properties = new Hashtable<>();
+		Dictionary<String, String> properties = new Hashtable<>();
 
 		properties.put("store.type", "com.liferay.portal.store.db.DBStore");
 
