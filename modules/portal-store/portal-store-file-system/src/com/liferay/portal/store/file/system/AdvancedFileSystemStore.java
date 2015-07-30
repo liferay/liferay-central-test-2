@@ -122,15 +122,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 				new FileSystemStoreRootDirException());
 		}
 
-		FileSystemStoreConfigurationValidator
-			fileSystemStoreConfigurationValidator =
-				new FileSystemStoreConfigurationValidator();
-
-		fileSystemStoreConfigurationValidator.validate(
-			"com.liferay.portal.store.file.system.configuration." +
-				"FileSystemStoreConfiguration",
-			"com.liferay.portal.store.file.system.configuration." +
-				"AdvancedFileSystemStoreConfiguration");
+		validate();
 
 		initializeRootDir();
 	}
