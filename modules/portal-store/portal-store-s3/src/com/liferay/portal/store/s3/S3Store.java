@@ -811,6 +811,7 @@ public class S3Store extends BaseStore {
 		throws ServiceException {
 
 		deactivate();
+
 		activate(properties);
 	}
 

@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.store.cmis.configuration.CMISConfiguration;
+import com.liferay.portal.store.cmis.configuration.CMISStoreConfiguration;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.store.BaseStore;
@@ -76,7 +76,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Manuel de la Peña
  */
 @Component(
-	configurationPid = "com.liferay.portal.store.cmis.configuration.CMISConfiguration",
+	configurationPid = "com.liferay.portal.store.cmis.configuration.CMISStoreConfiguration",
 	configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true,
 	property = "store.type=com.liferay.portal.store.cmis.CMISStore",
 	service = Store.class
@@ -447,22 +447,22 @@ public class CMISStore extends BaseStore {
 	protected void activate(
 		BundleContext bundleContext, Map<String, Object> properties) {
 
-		_cmisConfiguration = Configurable.createConfigurable(
-			CMISConfiguration.class, properties);
+		_cmisStoreConfiguration = Configurable.createConfigurable(
+			CMISStoreConfiguration.class, properties);
 		_operationContext = createOperationContext();
-
 		_sessionFactory = SessionFactoryImpl.newInstance();
 
 		_session = createSession(
-			bundleContext.getBundle(), _cmisConfiguration, _operationContext,
-			_sessionFactory);
+			bundleContext.getBundle(), _cmisStoreConfiguration,
+			_operationContext, _sessionFactory);
 
 		_systemRootDir = getFolder(
-			_session.getRootFolder(), _cmisConfiguration.systemRootDir());
+			_session.getRootFolder(), _cmisStoreConfiguration.systemRootDir());
 
 		if (_systemRootDir == null) {
 			_systemRootDir = createFolder(
-				_session.getRootFolder(), _cmisConfiguration.systemRootDir());
+				_session.getRootFolder(),
+				_cmisStoreConfiguration.systemRootDir());
 		}
 	}
 
@@ -531,13 +531,14 @@ public class CMISStore extends BaseStore {
 	}
 
 	protected Session createSession(
-		Bundle bundle, CMISConfiguration cmisConfiguration,
+		Bundle bundle, CMISStoreConfiguration cmisStoreConfiguration,
 		OperationContext operationContext, SessionFactory sessionFactory) {
 
 		Map<String, String> parameters = new HashMap<>();
 
 		parameters.put(
-			SessionParameter.ATOMPUB_URL, cmisConfiguration.repositoryUrl());
+			SessionParameter.ATOMPUB_URL,
+			cmisStoreConfiguration.repositoryUrl());
 		parameters.put(
 			SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
 		parameters.put(SessionParameter.COMPRESSION, Boolean.TRUE.toString());
@@ -549,9 +550,11 @@ public class CMISStore extends BaseStore {
 		parameters.put(
 			SessionParameter.LOCALE_ISO639_LANGUAGE, locale.getLanguage());
 		parameters.put(
-			SessionParameter.PASSWORD, cmisConfiguration.credentialsPassword());
+			SessionParameter.PASSWORD,
+			cmisStoreConfiguration.credentialsPassword());
 		parameters.put(
-			SessionParameter.USER, cmisConfiguration.credentialsUsername());
+			SessionParameter.USER,
+			cmisStoreConfiguration.credentialsUsername());
 
 		Thread thread = Thread.currentThread();
 
@@ -741,10 +744,11 @@ public class CMISStore extends BaseStore {
 		BundleContext bundleContext, Map<String, Object> properties) {
 
 		deactivate();
+
 		activate(bundleContext, properties);
 	}
 
-	private CMISConfiguration _cmisConfiguration;
+	private CMISStoreConfiguration _cmisStoreConfiguration;
 	private OperationContext _operationContext;
 	private Session _session;
 	private SessionFactory _sessionFactory;
