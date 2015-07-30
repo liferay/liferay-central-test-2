@@ -9,4 +9,4 @@ Include-Resource:\
 	META-INF/resources=src/META-INF/resources
 Provide-Capability:\
 	osgi.extender;osgi.extender="jsp.taglib";uri="http://liferay.com/tld/ddm";version:Version="1.0.0"
-Web-ContextPath: /ddm-taglib
+Web-ContextPath: /dynamic-data-mapping-taglib
