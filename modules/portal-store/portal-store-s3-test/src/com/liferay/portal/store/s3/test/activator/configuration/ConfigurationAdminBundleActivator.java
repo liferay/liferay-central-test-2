@@ -58,9 +58,9 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 			properties.put("accessKey", "");
 			properties.put("bucketName", "");
 			properties.put("httpClientMaxConnections", "50");
-			properties.put("s3serviceDefaultBucketLocation", "US");
-			properties.put("s3serviceDefaultStorageClass", "STANDARD");
-			properties.put("s3serviceS3Endpoint", "s3.amazonws.com");
+			properties.put("s3ServiceDefaultBucketLocation", "US");
+			properties.put("s3ServiceDefaultStorageClass", "STANDARD");
+			properties.put("s3ServiceS3Endpoint", "s3.amazonws.com");
 			properties.put("secretKey", "");
 			properties.put("tempDirCleanUpExpunge", "7");
 			properties.put("tempDirCleanUpFrequency", "100");
