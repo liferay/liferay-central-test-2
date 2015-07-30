@@ -79,15 +79,15 @@ public class ConvertDocumentLibrary
 	public String[] getParameterNames() {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
-		String[] storeTypes = storeFactory.getStoreTypes();
-
-		StringBundler sb = new StringBundler(storeTypes.length * 2 + 2);
-
 		Store store = storeFactory.getStore();
 
 		if (store == null) {
 			return null;
 		}
+
+		String[] storeTypes = storeFactory.getStoreTypes();
+
+		StringBundler sb = new StringBundler(storeTypes.length * 2 + 2);
 
 		sb.append(PropsKeys.DL_STORE_IMPL);
 		sb.append(StringPool.EQUAL);

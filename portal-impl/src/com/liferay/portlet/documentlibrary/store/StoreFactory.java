@@ -131,9 +131,9 @@ public class StoreFactory {
 	}
 
 	public String[] getStoreTypes() {
-		Set<String> keySet = _storeServiceTrackerMap.keySet();
+		Set<String> storeTypes = _storeServiceTrackerMap.keySet();
 
-		return keySet.toArray(new String[keySet.size()]);
+		return storeTypes.toArray(new String[storeTypes.size()]);
 	}
 
 	public void setStore(String key) {
