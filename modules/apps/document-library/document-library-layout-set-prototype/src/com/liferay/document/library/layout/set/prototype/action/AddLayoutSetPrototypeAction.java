@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.message.boards.layout.set.prototype;
+package com.liferay.document.library.layout.set.prototype.action;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -28,10 +28,10 @@ import com.liferay.portal.util.DefaultLayoutPrototypesUtil;
 import com.liferay.portal.util.DefaultLayoutSetPrototypesUtil;
 import com.liferay.portal.util.PortletKeys;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
-
-import javax.portlet.Portlet;
 
 import javax.servlet.ServletContext;
 
@@ -58,12 +58,12 @@ public class AddLayoutSetPrototypeAction {
 					company.getCompanyId(), null, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null);
 
-			addPublicSite(
+			addPrivateSite(
 				company.getCompanyId(), defaultUserId, layoutSetPrototypes);
 		}
 	}
 
-	protected void addPublicSite(
+	protected void addPrivateSite(
 			long companyId, long defaultUserId,
 			List<LayoutSetPrototype> layoutSetPrototypes)
 		throws Exception {
@@ -75,11 +75,10 @@ public class AddLayoutSetPrototypeAction {
 			DefaultLayoutSetPrototypesUtil.addLayoutSetPrototype(
 				companyId, defaultUserId,
 				LanguageUtil.get(
-					resourceBundle,
-					"layout-set-prototype-community-site-title"),
+					resourceBundle, "layout-set-prototype-intranet-site-title"),
 				LanguageUtil.get(
 					resourceBundle,
-					"layout-set-prototype-community-site-description"),
+					"layout-set-prototype-intranet-site-description"),
 				layoutSetPrototypes);
 
 		if (layoutSet == null) {
@@ -88,29 +87,23 @@ public class AddLayoutSetPrototypeAction {
 
 		// Home layout
 
-		Layout layout = DefaultLayoutPrototypesUtil.addLayout(
-			layoutSet, "home", "/home", "2_columns_iii");
-
-		DefaultLayoutPrototypesUtil.addPortletId(
-			layout, PortletKeys.MESSAGE_BOARDS, "column-1");
-
-		DefaultLayoutPrototypesUtil.addPortletId(
-			layout, PortletKeys.USER_STATISTICS, "column-2");
-
-		// Wiki layout
-
 		DefaultLayoutPrototypesUtil.addLayout(
-			layoutSet, "wiki", "/wiki", "2_columns_iii");
-	}
+			layoutSet, "home", "/home", "2_columns_i");
 
-	protected void doRun(long companyId) throws Exception {
-		long defaultUserId = _userLocalService.getDefaultUserId(companyId);
+		// Documents layout
 
-		List<LayoutSetPrototype> layoutSetPrototypes =
-			_layoutSetPrototypeLocalService.search(
-				companyId, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		Layout layout = DefaultLayoutPrototypesUtil.addLayout(
+			layoutSet, "documents-and-media", "/documents", "1_column");
 
-		addPublicSite(companyId, defaultUserId, layoutSetPrototypes);
+		String portletId = DefaultLayoutPrototypesUtil.addPortletId(
+			layout, PortletKeys.DOCUMENT_LIBRARY, "column-1");
+
+		Map<String, String> preferences = new HashMap<>();
+
+		preferences.put("portletSetupShowBorders", Boolean.FALSE.toString());
+
+		DefaultLayoutPrototypesUtil.updatePortletSetup(
+			layout, portletId, preferences);
 	}
 
 	@Reference(unbind = "-")
@@ -125,13 +118,6 @@ public class AddLayoutSetPrototypeAction {
 		LayoutSetPrototypeLocalService layoutSetPrototypeLocalService) {
 
 		_layoutSetPrototypeLocalService = layoutSetPrototypeLocalService;
-	}
-
-	@Reference(
-		target = "(javax.portlet.name=com_liferay_layout_set_prototype_web_portlet_LayoutSetPrototypePortlet)",
-		unbind = "-"
-	)
-	protected void setPortlet(Portlet portlet) {
 	}
 
 	@Reference(target = "(original.bean=*)", unbind = "-")
