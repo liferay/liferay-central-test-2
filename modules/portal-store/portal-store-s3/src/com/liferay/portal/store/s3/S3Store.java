@@ -656,13 +656,13 @@ public class S3Store extends BaseStore {
 			"httpclient.max-connections",
 			_s3Configuration.httpClientMaxConnections());
 		properties.put(
-			"s3service.default-bucket-location",
-			_s3Configuration.s3serviceDefaultBucketLocation());
+			"s3Service.default-bucket-location",
+			_s3Configuration.s3ServiceDefaultBucketLocation());
 		properties.put(
-			"s3service.default-storage-class",
-			_s3Configuration.s3serviceDefaultStorageClass());
+			"s3Service.default-storage-class",
+			_s3Configuration.s3ServiceDefaultStorageClass());
 		properties.put(
-			"s3service.s3-endpoint", _s3Configuration.s3serviceS3Endpoint());
+			"s3Service.s3-endpoint", _s3Configuration.s3ServiceS3Endpoint());
 
 		Jets3tProperties jets3tProperties = new Jets3tProperties();
 

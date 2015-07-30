@@ -35,13 +35,13 @@ public interface S3Configuration {
 	public String httpClientMaxConnections();
 
 	@Meta.AD(deflt = "US", required = false)
-	public String s3serviceDefaultBucketLocation();
+	public String s3ServiceDefaultBucketLocation();
 
 	@Meta.AD(deflt = "STANDARD", required = false)
-	public String s3serviceDefaultStorageClass();
+	public String s3ServiceDefaultStorageClass();
 
 	@Meta.AD(deflt = "s3.amazonws.com", required = false)
-	public String s3serviceS3Endpoint();
+	public String s3ServiceS3Endpoint();
 
 	@Meta.AD(required = true)
 	public String secretKey();
