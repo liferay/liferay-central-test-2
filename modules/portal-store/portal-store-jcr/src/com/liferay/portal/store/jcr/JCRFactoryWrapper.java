@@ -33,12 +33,12 @@ import javax.jcr.Session;
  */
 public class JCRFactoryWrapper {
 
-	public JCRFactoryWrapper(JCRStoreConfiguration configuration)
+	public JCRFactoryWrapper(JCRStoreConfiguration jcrStoreConfiguration)
 		throws RepositoryException {
 
-		_configuration = configuration;
+		_jcrStoreConfiguration = jcrStoreConfiguration;
 
-		_jcrFactory = new JCRFactoryImpl(configuration);
+		_jcrFactory = new JCRFactoryImpl(jcrStoreConfiguration);
 	}
 
 	public void closeSession(Session session) {
@@ -55,10 +55,10 @@ public class JCRFactoryWrapper {
 		throws RepositoryException {
 
 		if (workspaceName == null) {
-			workspaceName = _configuration.workspaceName();
+			workspaceName = _jcrStoreConfiguration.workspaceName();
 		}
 
-		if (!_configuration.wrapSession()) {
+		if (!_jcrStoreConfiguration.wrapSession()) {
 			JCRFactory jcrFactory = getJCRFactory();
 
 			return jcrFactory.createSession(workspaceName);
@@ -122,7 +122,7 @@ public class JCRFactoryWrapper {
 			JCRFactoryWrapper.class + "._sessions",
 			new HashMap<String, Session>());
 
-	private final JCRStoreConfiguration _configuration;
+	private final JCRStoreConfiguration _jcrStoreConfiguration;
 	private final JCRFactory _jcrFactory;
 
 }

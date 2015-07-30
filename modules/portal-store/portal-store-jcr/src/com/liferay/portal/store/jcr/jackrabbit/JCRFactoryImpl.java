@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Time;
@@ -41,15 +42,15 @@ import org.apache.jackrabbit.core.TransientRepository;
  */
 public class JCRFactoryImpl implements JCRFactory {
 
-	public JCRFactoryImpl(JCRStoreConfiguration configuration)
+	public JCRFactoryImpl(JCRStoreConfiguration jcrStoreConfiguration)
 		throws RepositoryException {
 
-		_configuration = configuration;
+		_jcrStoreConfiguration = jcrStoreConfiguration;
 
 		try {
 			_transientRepository = new TransientRepository(
-				_configuration.jackrabbitConfigFilePath(),
-				_configuration.jackrabbitRepositoryHome());
+				_jcrStoreConfiguration.jackrabbitConfigFilePath(),
+				_jcrStoreConfiguration.jackrabbitRepositoryHome());
 		}
 		catch (Exception e) {
 			_log.error("Problem initializing Jackrabbit JCR.", e);
@@ -58,11 +59,14 @@ public class JCRFactoryImpl implements JCRFactory {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Jackrabbit JCR intialized with config file path " +
-					_configuration.jackrabbitConfigFilePath() +
-					" and repository home " +
-					_configuration.jackrabbitRepositoryHome());
+			StringBundler sb = new StringBundler(4);
+			
+			sb.append("Jackrabbit JCR intialized with config file path ");
+			sb.append(_jcrStoreConfiguration.jackrabbitConfigFilePath());
+			sb.append(" and repository home ");
+			sb.append(_jcrStoreConfiguration.jackrabbitRepositoryHome());
+
+			_log.info(sb.toString());
 		}
 	}
 
@@ -70,12 +74,12 @@ public class JCRFactoryImpl implements JCRFactory {
 	public Session createSession(String workspaceName)
 		throws RepositoryException {
 
-		char[] credentialsPassword =
-			_configuration.jackrabbitCredentialsPassword().toCharArray();
+		String credentialsPassword =
+			_jcrStoreConfiguration.jackrabbitCredentialsPassword();
 
 		Credentials credentials = new SimpleCredentials(
-			_configuration.jackrabbitCredentialsUsername(),
-			credentialsPassword);
+			_jcrStoreConfiguration.jackrabbitCredentialsUsername(),
+			credentialsPassword.toCharArray());
 
 		Session session = null;
 
@@ -83,7 +87,7 @@ public class JCRFactoryImpl implements JCRFactory {
 			session = _transientRepository.login(credentials, workspaceName);
 		}
 		catch (RepositoryException re) {
-			_log.error("Could not login to the workspace " + workspaceName);
+			_log.error("Unable to login to the workspace " + workspaceName);
 
 			throw re;
 		}
@@ -99,7 +103,7 @@ public class JCRFactoryImpl implements JCRFactory {
 			session = createSession(null);
 		}
 		catch (RepositoryException re) {
-			_log.error("Could not initialize Jackrabbit");
+			_log.error("Unable to initialize Jackrabbit");
 
 			throw re;
 		}
@@ -115,7 +119,7 @@ public class JCRFactoryImpl implements JCRFactory {
 	@Override
 	public void prepare() throws RepositoryException {
 		try {
-			String path = _configuration.jackrabbitRepositoryRoot();
+			String path = _jcrStoreConfiguration.jackrabbitRepositoryRoot();
 
 			File repositoryRoot = new File(path);
 
@@ -131,27 +135,28 @@ public class JCRFactoryImpl implements JCRFactory {
 					File.separator + Time.getTimestamp());
 
 			String repositoryXmlPath =
-				"com/liferay/portal/store/jcr/jackrabbit/dependencies/" +
-					"repository-ext.xml";
+				"com/liferay/portal/store/jcr/jackrabbit/dependencies" +
+					"/repository-ext.xml";
 
 			ClassLoader classLoader = getClass().getClassLoader();
 
 			if (classLoader.getResource(repositoryXmlPath) == null) {
 				repositoryXmlPath =
-					"com/liferay/portal/store/jcr/jackrabbit/dependencies/" +
-						"repository.xml";
+					"com/liferay/portal/store/jcr/jackrabbit/dependencies" +
+						"/repository.xml";
 			}
 
 			FileUtil.write(
 				tempFile, classLoader.getResourceAsStream(repositoryXmlPath));
 
 			FileUtil.copyFile(
-				tempFile, new File(_configuration.jackrabbitConfigFilePath()));
+				tempFile,
+				new File(_jcrStoreConfiguration.jackrabbitConfigFilePath()));
 
 			tempFile.delete();
 		}
 		catch (IOException ioe) {
-			_log.error("Could not prepare Jackrabbit directory");
+			_log.error("Unable to prepare Jackrabbit directory");
 
 			throw new RepositoryException(ioe);
 		}
@@ -168,7 +173,7 @@ public class JCRFactoryImpl implements JCRFactory {
 
 	private static final Log _log = LogFactoryUtil.getLog(JCRFactoryImpl.class);
 
-	private final JCRStoreConfiguration _configuration;
+	private final JCRStoreConfiguration _jcrStoreConfiguration;
 	private boolean _initialized;
 	private final TransientRepository _transientRepository;
 
