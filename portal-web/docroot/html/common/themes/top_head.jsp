@@ -198,6 +198,8 @@ StringBundler pageTopSB = OutputTag.getData(request, WebKeys.PAGE_TOP);
 	</style>
 </c:if>
 
+<liferay-util:dynamic-include key="/html/common/themes/top_head.jsp#post" />
+
 <%!
 private String _escapeCssBlock(String css) {
 	return StringUtil.replace(
