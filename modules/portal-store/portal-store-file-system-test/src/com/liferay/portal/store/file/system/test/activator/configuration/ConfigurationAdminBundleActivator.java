@@ -43,7 +43,8 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 		try {
 			_advancedFileSystemConfiguration = _getConfiguration(
 				bundleContext, serviceReference,
-				_ADVANCED_FILE_SYSTEM_CONFIGURATION_PID);
+				"com.liferay.portal.store.file.system.configuration." +
+					"AdvancedFileSystemConfiguration");
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -57,7 +58,8 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			_fileSystemConfiguration = _getConfiguration(
 				bundleContext, serviceReference,
-				_FILE_SYSTEM_CONFIGURATION_PID);
+				"com.liferay.portal.store.file.system.configuration." +
+					"FileSystemConfiguration");
 
 			properties = new Hashtable<>();
 
@@ -128,16 +130,8 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 		}
 	}
 
-	private static final String _ADVANCED_FILE_SYSTEM_CONFIGURATION_PID =
-		"com.liferay.portal.store.file.system.configuration." +
-			"AdvancedFileSystemConfiguration";
-
 	private static final String _ADVANCED_ROOT_DIR =
 		PropsUtil.get(PropsKeys.LIFERAY_HOME) + "/advanced-filesystem";
-
-	private static final String _FILE_SYSTEM_CONFIGURATION_PID =
-		"com.liferay.portal.store.file.system.configuration." +
-			"FileSystemConfiguration";
 
 	private static final String _ROOT_DIR =
 		PropsUtil.get(PropsKeys.LIFERAY_HOME) + "/filesystem";

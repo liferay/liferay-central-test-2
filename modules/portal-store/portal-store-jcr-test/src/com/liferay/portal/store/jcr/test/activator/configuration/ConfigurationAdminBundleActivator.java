@@ -41,12 +41,10 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 			ConfigurationAdmin configurationAdmin = bundleContext.getService(
 				serviceReference);
 
-			String jcrConfigurationPid =
-				"com.liferay.portal.store.jcr.configuration." +
-					"JCRStoreConfiguration";
-
 			_jcrConfiguration = configurationAdmin.getConfiguration(
-				jcrConfigurationPid, null);
+				"com.liferay.portal.store.jcr.configuration." +
+					"JCRStoreConfiguration",
+				null);
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -80,7 +78,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 				_jcrConfiguration.delete();
 
 				throw new IllegalStateException(
-					"JCRStore was not registered within 10 seconds");
+					"JCR store was not registered within 10 seconds");
 			}
 		}
 		finally {

@@ -38,9 +38,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		String dlStoreImpl = PropsUtil.get(PropsKeys.DL_STORE_IMPL);
 
-		String s3StoreClassName = "com.liferay.portal.store.s3.S3Store";
-
-		if (!dlStoreImpl.equals(s3StoreClassName)) {
+		if (!dlStoreImpl.equals("com.liferay.portal.store.s3.S3Store")) {
 			return;
 		}
 
@@ -86,7 +84,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 				_s3Configuration.delete();
 
 				throw new IllegalStateException(
-					"S3Store was not registered within 10 seconds");
+					"S3 store was not registered within 10 seconds");
 			}
 		}
 		finally {
