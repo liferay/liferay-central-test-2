@@ -662,7 +662,8 @@ public class S3Store extends BaseStore {
 			"s3Service.default-storage-class",
 			_s3StoreConfiguration.s3ServiceDefaultStorageClass());
 		properties.put(
-			"s3Service.s3-endpoint", _s3StoreConfiguration.s3ServiceS3Endpoint());
+			"s3Service.s3-endpoint",
+			_s3StoreConfiguration.s3ServiceS3Endpoint());
 
 		Jets3tProperties jets3tProperties = new Jets3tProperties();
 
