@@ -41,7 +41,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 			bundleContext.getServiceReference(ConfigurationAdmin.class);
 
 		try {
-			_advancedFileSystemConfiguration = _getConfiguration(
+			_advancedFileSystemConfiguration = getConfiguration(
 				bundleContext, serviceReference,
 				"com.liferay.portal.store.file.system.configuration." +
 					"AdvancedFileSystemConfiguration");
@@ -52,11 +52,11 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			_advancedFileSystemConfiguration.update(properties);
 
-			_waitForService(
+			waitForService(
 				bundleContext, _advancedFileSystemConfiguration,
 				"com.liferay.portal.store.file.system.AdvancedFileSystemStore");
 
-			_fileSystemConfiguration = _getConfiguration(
+			_fileSystemConfiguration = getConfiguration(
 				bundleContext, serviceReference,
 				"com.liferay.portal.store.file.system.configuration." +
 					"FileSystemConfiguration");
@@ -67,7 +67,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 
 			_fileSystemConfiguration.update(properties);
 
-			_waitForService(
+			waitForService(
 				bundleContext, _fileSystemConfiguration,
 				"com.liferay.portal.store.file.system.FileSystemStore");
 		}
@@ -91,7 +91,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 		}
 	}
 
-	private Configuration _getConfiguration(
+	protected Configuration getConfiguration(
 			BundleContext bundleContext,
 			ServiceReference<ConfigurationAdmin> serviceReference,
 			String configurationPid)
@@ -103,7 +103,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 		return configurationAdmin.getConfiguration(configurationPid, null);
 	}
 
-	private void _waitForService(
+	protected void waitForService(
 			BundleContext bundleContext, Configuration configuration,
 			String storeType)
 		throws Exception {
