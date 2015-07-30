@@ -1024,17 +1024,15 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		String name = modelResourceElement.elementTextTrim("model-name");
 
-		boolean organizationModelResource = GetterUtil.getBoolean(
-			modelResourceElement.attributeValue("organization"));
+		if (GetterUtil.getBoolean(
+				modelResourceElement.attributeValue("organization"))) {
 
-		if (organizationModelResource) {
 			_organizationModelResources.add(name);
 		}
 
-		boolean portalModelResource = GetterUtil.getBoolean(
-			modelResourceElement.attributeValue("portal"));
+		if (GetterUtil.getBoolean(
+				modelResourceElement.attributeValue("portal"))) {
 
-		if (portalModelResource) {
 			_portalModelResources.add(name);
 		}
 
