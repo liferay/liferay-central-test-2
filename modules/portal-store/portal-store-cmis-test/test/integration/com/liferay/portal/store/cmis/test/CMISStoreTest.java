@@ -65,8 +65,8 @@ public class CMISStoreTest extends BaseStoreTestCase {
 		String cmisStoreClassName = "com.liferay.portal.store.cmis.CMISStore";
 
 		Assume.assumeTrue(
-			"Property '" + PropsKeys.DL_STORE_IMPL + "' must be equals to '" +
-				cmisStoreClassName + "'",
+			"Property \"" + PropsKeys.DL_STORE_IMPL + "\" is not set to \"" +
+				cmisStoreClassName + "\"",
 			dlStoreImpl.equals(cmisStoreClassName));
 	}
 
@@ -89,22 +89,22 @@ public class CMISStoreTest extends BaseStoreTestCase {
 	protected User getCMISAdminUser() throws Exception {
 		User user = UserLocalServiceUtil.fetchUserByScreenName(
 			TestPropsValues.getCompanyId(),
-			ConfigurationAdminBundleActivator.STORE_CMIS_CREDENTIALS_USERNAME);
+			ConfigurationAdminBundleActivator.CREDENTIALS_USERNAME);
 
 		if (user != null) {
 			return user;
 		}
 
 		String password =
-			ConfigurationAdminBundleActivator.STORE_CMIS_CREDENTIALS_PASSWORD;
+			ConfigurationAdminBundleActivator.CREDENTIALS_PASSWORD;
 		String emailAddress =
-			ConfigurationAdminBundleActivator.STORE_CMIS_CREDENTIALS_USERNAME +
+			ConfigurationAdminBundleActivator.CREDENTIALS_USERNAME +
 				"@liferay.com";
 
 		user = UserLocalServiceUtil.addUser(
 			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(), false,
 			password, password, false,
-			ConfigurationAdminBundleActivator.STORE_CMIS_CREDENTIALS_USERNAME,
+			ConfigurationAdminBundleActivator.CREDENTIALS_USERNAME,
 			emailAddress, 0, StringPool.BLANK, LocaleUtil.getDefault(),
 			RandomTestUtil.randomString(), StringPool.BLANK,
 			RandomTestUtil.randomString(), 0, 0, true, Calendar.JANUARY, 1,

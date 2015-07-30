@@ -34,17 +34,15 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class ConfigurationAdminBundleActivator implements BundleActivator {
 
-	public static final String STORE_CMIS_CREDENTIALS_PASSWORD = "test";
+	public static final String CREDENTIALS_PASSWORD = "test";
 
-	public static final String STORE_CMIS_CREDENTIALS_USERNAME = "test";
+	public static final String CREDENTIALS_USERNAME = "test";
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		String dlStoreImpl = PropsUtil.get(PropsKeys.DL_STORE_IMPL);
 
-		String cmisStoreClassName = "com.liferay.portal.store.cmis.CMISStore";
-
-		if (!dlStoreImpl.equals(cmisStoreClassName)) {
+		if (!dlStoreImpl.equals("com.liferay.portal.store.cmis.CMISStore")) {
 			return;
 		}
 
@@ -55,18 +53,16 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 			ConfigurationAdmin configurationAdmin = bundleContext.getService(
 				serviceReference);
 
-			String cmisConfigurationPid =
-				"com.liferay.portal.store.cmis.configuration.CMISConfiguration";
-
 			_cmisConfiguration = configurationAdmin.getConfiguration(
-				cmisConfigurationPid, null);
+				"com.liferay.portal.store.cmis.configuration.CMISConfiguration",
+				null);
 
 			Dictionary<String, Object> properties = new Hashtable<>();
 
 			properties.put(
-				"credentialsPassword", STORE_CMIS_CREDENTIALS_PASSWORD);
+				"credentialsPassword", CREDENTIALS_PASSWORD);
 			properties.put(
-				"credentialsUsername", STORE_CMIS_CREDENTIALS_USERNAME);
+				"credentialsUsername", CREDENTIALS_USERNAME);
 			properties.put(
 				"repositoryUrl",
 				"http://alfresco.liferay.org.es/alfresco/service/api/cmis");
@@ -91,7 +87,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 				_cmisConfiguration.delete();
 
 				throw new IllegalStateException(
-					"CMISStore was not registered within 10 seconds");
+					"CMIS store was not registered within 10 seconds");
 			}
 		}
 		finally {
