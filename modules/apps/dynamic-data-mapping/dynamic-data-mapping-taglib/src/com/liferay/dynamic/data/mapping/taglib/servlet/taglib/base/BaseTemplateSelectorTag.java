@@ -155,8 +155,7 @@ public abstract class BaseTemplateSelectorTag extends com.liferay.taglib.util.In
 
 	protected static final String _ATTRIBUTE_NAMESPACE = "liferay-ddm:template-selector:";
 
-	private static final String _PAGE =
-		"/taglib/template_selector/page.jsp";
+	private static final String _PAGE = "/template_selector/page.jsp";
 
 	private java.lang.String _className = null;
 	private java.lang.String _defaultDisplayStyle = null;

@@ -14,6 +14,6 @@
  */
 --%>
 
-<%@ include file="/taglib/html/init.jsp" %>
+<%@ include file="/html/init.jsp" %>
 
 </div>

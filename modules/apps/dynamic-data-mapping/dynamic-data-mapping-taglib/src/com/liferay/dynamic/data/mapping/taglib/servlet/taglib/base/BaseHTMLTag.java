@@ -160,11 +160,9 @@ public abstract class BaseHTMLTag extends com.liferay.taglib.util.IncludeTag {
 
 	protected static final String _ATTRIBUTE_NAMESPACE = "liferay-ddm:html:";
 
-	private static final String _END_PAGE =
-		"/taglib/html/end.jsp";
+	private static final String _END_PAGE = "/html/end.jsp";
 
-	private static final String _START_PAGE =
-		"/taglib/html/start.jsp";
+	private static final String _START_PAGE = "/html/start.jsp";
 
 	private boolean _checkRequired = true;
 	private long _classNameId = 0;
