@@ -365,7 +365,7 @@
 
 <script type="text/javascript">
 	(function() {
-		<liferay-util:dynamic-include key="com.liferay.frontend.js.web#Loader#configModules" />
+		<liferay-util:dynamic-include key="com.liferay.frontend.js.web#loader#configModules" />
 	}());
 </script>
 
