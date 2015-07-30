@@ -71,7 +71,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 	}
 
-	private Date getLayoutSetLastPublishDate(long groupId) throws Exception {
+	protected Date getLayoutSetLastPublishDate(long groupId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -107,7 +107,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 	}
 
-	private Date getPortletLastPublishDate(long groupId, String portletId)
+	protected Date getPortletLastPublishDate(long groupId, String portletId)
 		throws Exception {
 
 		Connection con = null;
@@ -152,7 +152,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 	}
 
-	private List<Long> getStagedGroupIds() throws Exception {
+	protected List<Long> getStagedGroupIds() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -181,7 +181,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 	}
 
-	private void updateStagedModelLastPublishDates(
+	protected void updateStagedModelLastPublishDates(
 			long groupId, String tableName, Date lastPublishDate)
 		throws Exception {
 
@@ -205,7 +205,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 	}
 
-	private void upgradeAssetCategoriesAdmin() throws Exception {
+	protected void upgradeAssetCategoriesAdmin() throws Exception {
 		runSQL("alter table AssetCategory add lastPublishDate DATE null");
 
 		updateLastPublishDates("147", "AssetCategory");
@@ -219,13 +219,13 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates("147", "AssetVocabulary");
 	}
 
-	private void upgradeBlogs() throws Exception {
+	protected void upgradeBlogs() throws Exception {
 		runSQL("alter table BlogsEntry add lastPublishDate DATE null");
 
 		updateLastPublishDates(PortletKeys.BLOGS, "BlogsEntry");
 	}
 
-	private void upgradeDocumentLibrary() throws Exception {
+	protected void upgradeDocumentLibrary() throws Exception {
 		runSQL("alter table DLFileEntry add lastPublishDate DATE null");
 
 		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "DLFileEntry");
@@ -251,7 +251,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates(PortletKeys.DOCUMENT_LIBRARY, "RepositoryEntry");
 	}
 
-	private void upgradeDynamicDataMapping() throws Exception {
+	protected void upgradeDynamicDataMapping() throws Exception {
 		runSQL("alter table DDMStructure add lastPublishDate DATE null");
 
 		updateLastPublishDates(
@@ -262,7 +262,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates(PortletKeys.DYNAMIC_DATA_MAPPING, "DDMTemplate");
 	}
 
-	private void upgradeLayoutsAdmin() throws Exception {
+	protected void upgradeLayoutsAdmin() throws Exception {
 		runSQL("alter table Layout add lastPublishDate DATE null");
 
 		updateLastPublishDates(PortletKeys.LAYOUTS_ADMIN, "Layout");
@@ -272,7 +272,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates(PortletKeys.LAYOUTS_ADMIN, "LayoutFriendlyURL");
 	}
 
-	private void upgradeMessageBoards() throws Exception {
+	protected void upgradeMessageBoards() throws Exception {
 		runSQL("alter table MBBan add lastPublishDate DATE null");
 
 		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBBan");
@@ -294,7 +294,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates(PortletKeys.MESSAGE_BOARDS, "MBThreadFlag");
 	}
 
-	private void upgradeMobileDeviceRules() throws Exception {
+	protected void upgradeMobileDeviceRules() throws Exception {
 		runSQL("alter table MDRAction add lastPublishDate DATE null");
 
 		updateLastPublishDates("178", "MDRAction");
@@ -313,13 +313,13 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates("178", "MDRRuleGroupInstance");
 	}
 
-	private void upgradeRatings() throws Exception {
+	protected void upgradeRatings() throws Exception {
 		runSQL("alter table RatingsEntry add lastPublishDate DATE null");
 
 		updateLastPublishDates("108", "RatingsEntry");
 	}
 
-	private void upgradeRolesAdmin() throws Exception {
+	protected void upgradeRolesAdmin() throws Exception {
 		runSQL("alter table PasswordPolicy add lastPublishDate DATE null");
 
 		updateLastPublishDates(PortletKeys.ROLES_ADMIN, "PasswordPolicy");
@@ -329,7 +329,7 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		updateLastPublishDates(PortletKeys.ROLES_ADMIN, "Role_");
 	}
 
-	private void upgradeUsersAdmin() throws Exception {
+	protected void upgradeUsersAdmin() throws Exception {
 		runSQL("alter table Address add lastPublishDate DATE null");
 
 		updateLastPublishDates(PortletKeys.USERS_ADMIN, "Address");
