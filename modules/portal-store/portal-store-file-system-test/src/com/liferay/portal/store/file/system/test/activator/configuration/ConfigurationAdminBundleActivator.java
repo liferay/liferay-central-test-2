@@ -131,10 +131,11 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 	}
 
 	private static final String _ADVANCED_ROOT_DIR =
-		PropsUtil.get(PropsKeys.LIFERAY_HOME) + "/advanced-filesystem";
+		PropsUtil.get(PropsKeys.LIFERAY_HOME) +
+			"/test/store/advanced_file_system";
 
 	private static final String _ROOT_DIR =
-		PropsUtil.get(PropsKeys.LIFERAY_HOME) + "/filesystem";
+		PropsUtil.get(PropsKeys.LIFERAY_HOME) + "/test/store/file_system";
 
 	private Configuration _advancedFileSystemConfiguration;
 	private Configuration _fileSystemConfiguration;
