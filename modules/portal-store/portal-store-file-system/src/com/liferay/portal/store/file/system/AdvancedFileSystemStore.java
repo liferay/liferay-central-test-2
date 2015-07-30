@@ -118,12 +118,13 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 				_advancedFileSystemStoreConfiguration.rootDir())) {
 
 			throw new IllegalArgumentException(
-				"Advanced File System Root Dir is not set",
+				"Advanced file system root directory is not set",
 				new FileSystemStoreRootDirException());
 		}
 
-		FileSystemStoreConfigurationValidator fileSystemStoreConfigurationValidator =
-			new FileSystemStoreConfigurationValidator();
+		FileSystemStoreConfigurationValidator
+			fileSystemStoreConfigurationValidator =
+				new FileSystemStoreConfigurationValidator();
 
 		fileSystemStoreConfigurationValidator.validate(
 			"com.liferay.portal.store.file.system.configuration." +
