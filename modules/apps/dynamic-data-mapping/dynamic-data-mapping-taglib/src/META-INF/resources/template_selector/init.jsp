@@ -32,4 +32,4 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 Map<String, Object> scopedAttributes = (Map<String, Object>)request.getAttribute("liferay-ddm:template-selector:scopedAttributes");
 %>
 
-<%@ include file="/taglib/template_selector/init-ext.jspf" %>
+<%@ include file="/template_selector/init-ext.jspf" %>

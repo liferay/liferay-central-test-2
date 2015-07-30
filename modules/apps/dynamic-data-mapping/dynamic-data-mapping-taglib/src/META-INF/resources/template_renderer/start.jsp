@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/taglib/template_renderer/init.jsp" %>
+<%@ include file="/template_renderer/init.jsp" %>
 
 <%
 DDMTemplate portletDisplayDDMTemplate = (DDMTemplate)request.getAttribute("liferay-ddm:template-renderer:portletDisplayDDMTemplate");
