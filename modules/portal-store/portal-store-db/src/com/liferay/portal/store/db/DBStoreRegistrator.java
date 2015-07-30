@@ -62,22 +62,18 @@ public class DBStoreRegistrator {
 
 		properties.put("store.type", "com.liferay.portal.store.db.DBStore");
 
-		_dbStore = _wrapDatabaseStore(_dbStore);
+		_dbStore = prepare(_dbStore);
 
-		_storeServiceRegistration = bundleContext.registerService(
+		_serviceRegistration = bundleContext.registerService(
 			Store.class, _dbStore, properties);
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_storeServiceRegistration.unregister();
+		_serviceRegistration.unregister();
 	}
 
-	@Reference(target = "(original.bean=true)", unbind = "-")
-	protected void setServletContext(ServletContext servletContext) {
-	}
-
-	private Store _wrapDatabaseStore(Store store) {
+	protected Store prepare(Store store) {
 		DB db = DBFactoryUtil.getDB();
 
 		String dbType = db.getType();
@@ -92,28 +88,30 @@ public class DBStoreRegistrator {
 			(MethodInterceptor)PortalBeanLocatorUtil.locate(
 				"transactionAdvice");
 
-		MethodInterceptor tempFileMethodInterceptor =
-			new TempFileMethodInterceptor();
-
 		List<MethodInterceptor> methodInterceptors = Arrays.asList(
-			transactionAdviceMethodInterceptor, tempFileMethodInterceptor);
+			transactionAdviceMethodInterceptor,
+			new TempFileMethodInterceptor());
 
 		store = (Store)ProxyUtil.newProxyInstance(
 			classLoader, new Class<?>[] {Store.class},
 			new MethodInterceptorInvocationHandler(store, methodInterceptors));
 
-		return new ProxyDelegatorDBStore(store);
+		return new DelegatorDBStore(store);
+	}
+
+	@Reference(target = "(original.bean=true)", unbind = "-")
+	protected void setServletContext(ServletContext servletContext) {
 	}
 
 	private Store _dbStore;
-	private ServiceRegistration<Store> _storeServiceRegistration;
+	private ServiceRegistration<Store> _serviceRegistration;
 
 	/**
-	 * This class must only delegate the methods that DBStore overrides
+	 * This class must only delegate the methods that DBStore overrides.
 	 */
-	private static class ProxyDelegatorDBStore extends BaseStore {
+	private static class DelegatorDBStore extends BaseStore {
 
-		public ProxyDelegatorDBStore(Store store) {
+		public DelegatorDBStore(Store store) {
 			_store = store;
 		}
 
