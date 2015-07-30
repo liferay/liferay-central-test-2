@@ -37,7 +37,7 @@ public class StoreFactoryTest {
 			new SyntheticBundleRule("bundle.storefactory"));
 
 	@Test
-	public void testGetStoreInstance() throws Exception {
+	public void testGetInstance() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
