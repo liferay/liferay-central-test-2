@@ -452,15 +452,7 @@ public class FileSystemStore extends BaseStore {
 				new FileSystemStoreRootDirException());
 		}
 
-		FileSystemStoreConfigurationValidator
-			fileSystemStoreConfigurationValidator =
-				new FileSystemStoreConfigurationValidator();
-
-		fileSystemStoreConfigurationValidator.validate(
-			"com.liferay.portal.store.file.system.configuration." +
-				"FileSystemStoreConfiguration",
-			"com.liferay.portal.store.file.system.configuration." +
-				"AdvancedFileSystemStoreConfiguration");
+		validate();
 
 		initializeRootDir();
 	}
@@ -638,51 +630,49 @@ public class FileSystemStore extends BaseStore {
 		this.configurationAdmin = configurationAdmin;
 	}
 
-	protected ConfigurationAdmin configurationAdmin;
+	protected void validate() {
+		try {
+			Configuration fileSystemStoreConfiguration =
+				configurationAdmin.getConfiguration(
+					"com.liferay.portal.store.file.system.configuration." +
+						"FileSystemStoreConfiguration");
 
-	protected class FileSystemStoreConfigurationValidator {
+			Dictionary<String, Object> fileSystemDictionary =
+				fileSystemStoreConfiguration.getProperties();
 
-		public void validate(
-			String fileSystemPid, String advancedFileSystemPid) {
+			Configuration advancedFileSystemStoreConfiguration =
+				configurationAdmin.getConfiguration(
+					"com.liferay.portal.store.file.system.configuration." +
+						"AdvancedFileSystemStoreConfiguration");
 
-			try {
-				Configuration fileSystemStoreConfiguration =
-					configurationAdmin.getConfiguration(fileSystemPid);
+			Dictionary<String, Object> advancedFileSystemDictionary =
+				advancedFileSystemStoreConfiguration.getProperties();
 
-				Dictionary<String, Object> fileSystemDictionary =
-					fileSystemStoreConfiguration.getProperties();
+			if ((fileSystemDictionary != null) &&
+				(advancedFileSystemDictionary != null)) {
 
-				Configuration advancedFileSystemStoreConfiguration =
-					configurationAdmin.getConfiguration(advancedFileSystemPid);
+				String fileSystemRootDir = (String)fileSystemDictionary.get(
+					"rootdir");
 
-				Dictionary<String, Object> advancedFileSystemDictionary =
-					advancedFileSystemStoreConfiguration.getProperties();
+				String advancedFileSystemRootDir =
+					(String)advancedFileSystemDictionary.get("rootdir");
 
-				if ((fileSystemDictionary != null) &&
-					(advancedFileSystemDictionary != null)) {
+				if (Validator.equals(
+						fileSystemRootDir, advancedFileSystemRootDir)) {
 
-					String fileSystemRootDir = (String)fileSystemDictionary.get(
-						"rootdir");
-
-					String advancedFileSystemRootDir =
-						(String)advancedFileSystemDictionary.get("rootdir");
-
-					if (Validator.equals(
-							fileSystemRootDir, advancedFileSystemRootDir)) {
-
-						throw new IllegalArgumentException(
-							"File system root directory and advanced file " +
-								"system root directory are identical",
-							new FileSystemStoreRootDirException());
-					}
+					throw new IllegalArgumentException(
+						"File system root directory and advanced file " +
+							"system root directory are identical",
+						new FileSystemStoreRootDirException());
 				}
 			}
-			catch (IOException ioe) {
-				throw new IllegalArgumentException(ioe);
-			}
 		}
-
+		catch (IOException ioe) {
+			throw new IllegalArgumentException(ioe);
+		}
 	}
+
+	protected ConfigurationAdmin configurationAdmin;
 
 	private static volatile FileSystemStoreConfiguration
 		_fileSystemStoreConfiguration;
