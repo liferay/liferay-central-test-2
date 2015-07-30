@@ -81,9 +81,9 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 		try {
 			_advancedFileSystemConfiguration.delete();
 
-			_fileSystemConfiguration.delete();
-
 			FileUtil.deltree(_ADVANCED_ROOT_DIR);
+
+			_fileSystemConfiguration.delete();
 
 			FileUtil.deltree(_ROOT_DIR);
 		}
