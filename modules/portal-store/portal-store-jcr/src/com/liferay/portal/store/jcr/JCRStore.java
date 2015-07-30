@@ -1012,6 +1012,7 @@ public class JCRStore extends BaseStore {
 		throws RepositoryException {
 
 		deactivate();
+
 		activate(properties);
 	}
 

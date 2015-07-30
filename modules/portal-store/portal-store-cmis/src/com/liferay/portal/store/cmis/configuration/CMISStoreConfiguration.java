@@ -20,10 +20,10 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Manuel de la Peña
  */
 @Meta.OCD(
-	id = "com.liferay.portal.store.cmis.configuration.CMISConfiguration",
+	id = "com.liferay.portal.store.cmis.configuration.CMISStoreConfiguration",
 	localization = "content/Language", name = "%cmis.store.configuration.name"
 )
-public interface CMISConfiguration {
+public interface CMISStoreConfiguration {
 
 	@Meta.AD(deflt = "none", required = true)
 	public String credentialsPassword();
