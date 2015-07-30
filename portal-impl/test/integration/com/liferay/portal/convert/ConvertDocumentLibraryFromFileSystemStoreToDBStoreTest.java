@@ -100,7 +100,7 @@ public class ConvertDocumentLibraryFromFileSystemStoreToDBStoreTest {
 			ConvertDocumentLibrary.class.getName());
 
 		_convertProcess.setParameterValues(
-			new String[] {_DB_STORE_CLASS_NAME, Boolean.TRUE.toString()});
+			new String[] {_CLASS_NAME_DB_STORE, Boolean.TRUE.toString()});
 	}
 
 	@After
@@ -177,7 +177,7 @@ public class ConvertDocumentLibraryFromFileSystemStoreToDBStoreTest {
 	public void testStoreUpdatedAfterConversion() throws Exception {
 		_convertProcess.convert();
 
-		Assert.assertEquals(_DB_STORE_CLASS_NAME, PropsValues.DL_STORE_IMPL);
+		Assert.assertEquals(_CLASS_NAME_DB_STORE, PropsValues.DL_STORE_IMPL);
 	}
 
 	protected FileEntry addFileEntry(
@@ -235,7 +235,7 @@ public class ConvertDocumentLibraryFromFileSystemStoreToDBStoreTest {
 		throws Exception {
 
 		_convertProcess.setParameterValues(
-			new String[] {_DB_STORE_CLASS_NAME, delete.toString()});
+			new String[] {_CLASS_NAME_DB_STORE, delete.toString()});
 
 		FileEntry rootFileEntry = addFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
@@ -301,7 +301,7 @@ public class ConvertDocumentLibraryFromFileSystemStoreToDBStoreTest {
 			dlFileEntry.getName());
 	}
 
-	private static final String _DB_STORE_CLASS_NAME =
+	private static final String _CLASS_NAME_DB_STORE =
 		"com.liferay.portal.store.db.DBStore";
 
 	private static StoreFactory _storeFactory;
