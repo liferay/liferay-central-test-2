@@ -448,12 +448,13 @@ public class FileSystemStore extends BaseStore {
 
 		if (Validator.isBlank(_fileSystemStoreConfiguration.rootDir())) {
 			throw new IllegalArgumentException(
-				"File System Root Directory Configuration is not set",
+				"File system root directory is not set",
 				new FileSystemStoreRootDirException());
 		}
 
-		FileSystemStoreConfigurationValidator fileSystemStoreConfigurationValidator =
-			new FileSystemStoreConfigurationValidator();
+		FileSystemStoreConfigurationValidator
+			fileSystemStoreConfigurationValidator =
+				new FileSystemStoreConfigurationValidator();
 
 		fileSystemStoreConfigurationValidator.validate(
 			"com.liferay.portal.store.file.system.configuration." +
@@ -645,33 +646,33 @@ public class FileSystemStore extends BaseStore {
 			String fileSystemPid, String advancedFileSystemPid) {
 
 			try {
-				Configuration advancedFileSystemStoreConfiguration =
-					configurationAdmin.getConfiguration(advancedFileSystemPid);
-
 				Configuration fileSystemStoreConfiguration =
 					configurationAdmin.getConfiguration(fileSystemPid);
-
-				Dictionary<String, Object> advancedFileSystemDictionary =
-					advancedFileSystemStoreConfiguration.getProperties();
 
 				Dictionary<String, Object> fileSystemDictionary =
 					fileSystemStoreConfiguration.getProperties();
 
-				if ((advancedFileSystemDictionary != null) &&
-					(fileSystemDictionary != null)) {
+				Configuration advancedFileSystemStoreConfiguration =
+					configurationAdmin.getConfiguration(advancedFileSystemPid);
 
-					String advancedFileSystemRootDir =
-						(String)advancedFileSystemDictionary.get("rootdir");
+				Dictionary<String, Object> advancedFileSystemDictionary =
+					advancedFileSystemStoreConfiguration.getProperties();
+
+				if ((fileSystemDictionary != null) &&
+					(advancedFileSystemDictionary != null)) {
 
 					String fileSystemRootDir = (String)fileSystemDictionary.get(
 						"rootdir");
 
+					String advancedFileSystemRootDir =
+						(String)advancedFileSystemDictionary.get("rootdir");
+
 					if (Validator.equals(
-							advancedFileSystemRootDir, fileSystemRootDir)) {
+							fileSystemRootDir, advancedFileSystemRootDir)) {
 
 						throw new IllegalArgumentException(
-							"Advanced File System Root Dir and File System" +
-								" Root Dir have the same value",
+							"File system root directory and advanced file " +
+								"system root directory are identical",
 							new FileSystemStoreRootDirException());
 					}
 				}
@@ -683,7 +684,8 @@ public class FileSystemStore extends BaseStore {
 
 	}
 
-	private static volatile FileSystemStoreConfiguration _fileSystemStoreConfiguration;
+	private static volatile FileSystemStoreConfiguration
+		_fileSystemStoreConfiguration;
 
 	private final Map<RepositoryDirKey, File> _repositoryDirs =
 		new ConcurrentHashMap<>();
