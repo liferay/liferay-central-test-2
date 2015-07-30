@@ -49,28 +49,6 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		upgradeUsersAdmin();
 	}
 
-	protected void updateLastPublishDates(String portletId, String tableName)
-		throws Exception {
-
-		List<Long> stagedGroupIds = getStagedGroupIds();
-
-		for (long stagedGroupId : stagedGroupIds) {
-			Date lastPublishDate = getPortletLastPublishDate(
-				stagedGroupId, portletId);
-
-			if (lastPublishDate == null) {
-				lastPublishDate = getLayoutSetLastPublishDate(stagedGroupId);
-			}
-
-			if (lastPublishDate == null) {
-				continue;
-			}
-
-			updateStagedModelLastPublishDates(
-				stagedGroupId, tableName, lastPublishDate);
-		}
-	}
-
 	protected Date getLayoutSetLastPublishDate(long groupId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -178,6 +156,28 @@ public class UpgradeLastPublishDate extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateLastPublishDates(String portletId, String tableName)
+		throws Exception {
+
+		List<Long> stagedGroupIds = getStagedGroupIds();
+
+		for (long stagedGroupId : stagedGroupIds) {
+			Date lastPublishDate = getPortletLastPublishDate(
+				stagedGroupId, portletId);
+
+			if (lastPublishDate == null) {
+				lastPublishDate = getLayoutSetLastPublishDate(stagedGroupId);
+			}
+
+			if (lastPublishDate == null) {
+				continue;
+			}
+
+			updateStagedModelLastPublishDates(
+				stagedGroupId, tableName, lastPublishDate);
 		}
 	}
 
