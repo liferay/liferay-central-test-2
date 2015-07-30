@@ -18,7 +18,6 @@
 			module.dir="${basedir}"
 		/>
 
-		<delete dir="temp" />
 		<delete file="jenkins-war-${original.lib.version}.war" />
 		<delete file="jenkins-war-${plugin.full.version}.war" />
 	</target>
