@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.portal.store.s3.configuration.S3Configuration;
+import com.liferay.portal.store.s3.configuration.S3StoreConfiguration;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.store.BaseStore;
@@ -76,7 +76,7 @@ import org.osgi.service.component.annotations.Modified;
  * @author Manuel de la Peña
  */
 @Component(
-	configurationPid = "com.liferay.portal.store.s3.configuration.S3Configuration",
+	configurationPid = "com.liferay.portal.store.s3.configuration.S3StoreConfiguration",
 	configurationPolicy = ConfigurationPolicy.REQUIRE, immediate = true,
 	property = "store.type=com.liferay.portal.store.s3.S3Store",
 	service = Store.class
@@ -495,8 +495,8 @@ public class S3Store extends BaseStore {
 
 	@Activate
 	protected void activate(Map<String, Object> properties) {
-		_s3Configuration = Configurable.createConfigurable(
-			S3Configuration.class, properties);
+		_s3StoreConfiguration = Configurable.createConfigurable(
+			S3StoreConfiguration.class, properties);
 
 		try {
 			_s3Service = getS3Service();
@@ -511,7 +511,7 @@ public class S3Store extends BaseStore {
 		_calledGetFileCount++;
 
 		Integer tempDirCleanUpFrequency = Integer.valueOf(
-			_s3Configuration.tempDirCleanUpFrequency());
+			_s3StoreConfiguration.tempDirCleanUpFrequency());
 
 		if (_calledGetFileCount < tempDirCleanUpFrequency) {
 			return;
@@ -532,7 +532,7 @@ public class S3Store extends BaseStore {
 			long lastModified = System.currentTimeMillis();
 
 			Integer tempDirCleanUpExpunge = Integer.valueOf(
-				_s3Configuration.tempDirCleanUpExpunge());
+				_s3StoreConfiguration.tempDirCleanUpExpunge());
 
 			lastModified -= (tempDirCleanUpExpunge * Time.DAY);
 
@@ -576,13 +576,13 @@ public class S3Store extends BaseStore {
 		}
 
 		_s3Bucket = null;
-		_s3Configuration = null;
 		_s3Service = null;
+		_s3StoreConfiguration = null;
 	}
 
 	protected AWSCredentials getAWSCredentials() throws S3ServiceException {
-		String accessKey = _s3Configuration.accessKey();
-		String secretKey = _s3Configuration.secretKey();
+		String accessKey = _s3StoreConfiguration.accessKey();
+		String secretKey = _s3StoreConfiguration.secretKey();
 
 		if (Validator.isNull(accessKey) || Validator.isNull(secretKey)) {
 			throw new S3ServiceException(
@@ -654,15 +654,15 @@ public class S3Store extends BaseStore {
 
 		properties.put(
 			"httpclient.max-connections",
-			_s3Configuration.httpClientMaxConnections());
+			_s3StoreConfiguration.httpClientMaxConnections());
 		properties.put(
 			"s3Service.default-bucket-location",
-			_s3Configuration.s3ServiceDefaultBucketLocation());
+			_s3StoreConfiguration.s3ServiceDefaultBucketLocation());
 		properties.put(
 			"s3Service.default-storage-class",
-			_s3Configuration.s3ServiceDefaultStorageClass());
+			_s3StoreConfiguration.s3ServiceDefaultStorageClass());
 		properties.put(
-			"s3Service.s3-endpoint", _s3Configuration.s3ServiceS3Endpoint());
+			"s3Service.s3-endpoint", _s3StoreConfiguration.s3ServiceS3Endpoint());
 
 		Jets3tProperties jets3tProperties = new Jets3tProperties();
 
@@ -724,7 +724,7 @@ public class S3Store extends BaseStore {
 	}
 
 	protected S3Bucket getS3Bucket() throws S3ServiceException {
-		String bucketName = _s3Configuration.bucketName();
+		String bucketName = _s3StoreConfiguration.bucketName();
 
 		if (Validator.isNull(bucketName)) {
 			throw new S3ServiceException("S3 bucket name is not set");
@@ -823,7 +823,7 @@ public class S3Store extends BaseStore {
 
 	private int _calledGetFileCount;
 	private S3Bucket _s3Bucket;
-	private volatile S3Configuration _s3Configuration;
 	private S3Service _s3Service;
+	private volatile S3StoreConfiguration _s3StoreConfiguration;
 
 }
