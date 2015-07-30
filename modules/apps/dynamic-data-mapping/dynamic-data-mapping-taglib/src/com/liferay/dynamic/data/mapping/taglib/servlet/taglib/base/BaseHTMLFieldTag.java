@@ -61,7 +61,7 @@ public abstract class BaseHTMLFieldTag extends com.liferay.taglib.util.IncludeTa
 	public boolean getShowEmptyFieldLabel() {
 		return _showEmptyFieldLabel;
 	}
-	
+
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 
@@ -109,7 +109,7 @@ public abstract class BaseHTMLFieldTag extends com.liferay.taglib.util.IncludeTa
 
 		setScopedAttribute("showEmptyFieldLabel", showEmptyFieldLabel);
 	}
-	
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
