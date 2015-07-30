@@ -119,7 +119,7 @@ public abstract class BaseTemplateSelectorTag extends com.liferay.taglib.util.In
 
 		setScopedAttribute("showEmptyOption", showEmptyOption);
 	}
-	
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();

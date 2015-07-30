@@ -79,7 +79,7 @@ public abstract class BaseTemplateRendererTag extends com.liferay.taglib.util.In
 
 		setScopedAttribute("entries", entries);
 	}
-	
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();

@@ -119,7 +119,7 @@ public abstract class BaseHTMLTag extends com.liferay.taglib.util.IncludeTag {
 
 		setScopedAttribute("showEmptyFieldLabel", showEmptyFieldLabel);
 	}
-	
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
