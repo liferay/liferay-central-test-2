@@ -20,17 +20,15 @@
 PanelAppRegistry panelAppRegistry = (PanelAppRegistry)request.getAttribute(ApplicationListWebKeys.PANEL_APP_REGISTRY);
 PanelCategoryRegistry panelCategoryRegistry = (PanelCategoryRegistry)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_REGISTRY);
 
-String portletId = themeDisplay.getPpid();
-
 PanelCategory firstChildPanelCategory = panelCategoryRegistry.getFirstChildPanelCategory(PanelCategoryKeys.ROOT);
 
 String rootPanelCategoryKey = firstChildPanelCategory.getKey();
 
-if (Validator.isNotNull(portletId)) {
+if (Validator.isNotNull(themeDisplay.getPpid())) {
 	PanelCategoryHelper panelCategoryHelper = new PanelCategoryHelper(panelAppRegistry, panelCategoryRegistry);
 
 	for (PanelCategory panelCategory : panelCategoryRegistry.getChildPanelCategories(PanelCategoryKeys.ROOT)) {
-		if (panelCategoryHelper.containsPortlet(portletId, panelCategory)) {
+		if (panelCategoryHelper.containsPortlet(themeDisplay.getPpid(), panelCategory)) {
 			rootPanelCategoryKey = panelCategory.getKey();
 
 			break;
@@ -51,17 +49,17 @@ if (Validator.isNotNull(portletId)) {
 <ul class="nav nav-tabs product-menu-tabs">
 
 	<%
-	for (PanelCategory curPanelCategory : panelCategoryRegistry.getChildPanelCategories(PanelCategoryKeys.ROOT)) {
+	for (PanelCategory childPanelCategory : panelCategoryRegistry.getChildPanelCategories(PanelCategoryKeys.ROOT)) {
 	%>
 
-		<li class="col-xs-4 <%= rootPanelCategoryKey.equals(curPanelCategory.getKey()) ? "active" : StringPool.BLANK %>">
-			<a aria-expanded="true" data-toggle="tab" href="#<%= curPanelCategory.getKey() %>">
+		<li class="col-xs-4 <%= rootPanelCategoryKey.equals(childPanelCategory.getKey()) ? "active" : StringPool.BLANK %>">
+			<a aria-expanded="true" data-toggle="tab" href="#<%= childPanelCategory.getKey() %>">
 				<div class="product-menu-tab-icon">
-					<span class="<%= curPanelCategory.getIconCssClass() %> icon-monospaced"></span>
+					<span class="<%= childPanelCategory.getIconCssClass() %> icon-monospaced"></span>
 				</div>
 
 				<div class="product-menu-tab-text">
-					<%= curPanelCategory.getLabel(locale) %>
+					<%= childPanelCategory.getLabel(locale) %>
 				</div>
 			</a>
 		</li>
@@ -76,11 +74,11 @@ if (Validator.isNotNull(portletId)) {
 	<div class="tab-content">
 
 		<%
-		for (PanelCategory curPanelCategory : panelCategoryRegistry.getChildPanelCategories(PanelCategoryKeys.ROOT)) {
+		for (PanelCategory childPanelCategory : panelCategoryRegistry.getChildPanelCategories(PanelCategoryKeys.ROOT)) {
 		%>
 
-			<div class="fade in tab-pane <%= rootPanelCategoryKey.equals(curPanelCategory.getKey()) ? "active" : StringPool.BLANK %>" id="<%= curPanelCategory.getKey() %>">
-				<liferay-application-list:panel-content panelCategory="<%= curPanelCategory %>" />
+			<div class="fade in tab-pane <%= rootPanelCategoryKey.equals(childPanelCategory.getKey()) ? "active" : StringPool.BLANK %>" id="<%= childPanelCategory.getKey() %>">
+				<liferay-application-list:panel-content panelCategory="<%= childPanelCategory %>" />
 			</div>
 
 		<%
