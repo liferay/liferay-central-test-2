@@ -22,10 +22,10 @@ long[] selectedGroupIds = StringUtil.split(ParamUtil.getString(request, "selecte
 
 Boolean privateLayout = null;
 
-String privateLayoutValue = ParamUtil.getString(request, "privateLayout", null);
+String privateLayoutString = request.getParameter("privateLayout");
 
-if (Validator.isNotNull(privateLayoutValue)) {
-	privateLayout = GetterUtil.getBoolean(privateLayoutValue, false);
+if (Validator.isNotNull(privateLayoutString)) {
+	privateLayout = GetterUtil.getBoolean(privateLayoutString);
 }
 
 String type = ParamUtil.getString(request, "type");
@@ -280,7 +280,6 @@ portletURL.setParameter("target", target);
 </aui:form>
 
 <%!
-
 private List<Group> _filterLayoutGroups(List<Group> groups, Boolean privateLayout) throws Exception {
 	List<Group> filteredGroups = new ArrayList();
 
@@ -289,7 +288,13 @@ private List<Group> _filterLayoutGroups(List<Group> groups, Boolean privateLayou
 	}
 
 	for (Group group : groups) {
-		if (group.isLayout() && (LayoutLocalServiceUtil.getLayout(group.getClassPK()).isPrivateLayout() == privateLayout)) {
+		if (!group.isLayout()) {
+			continue;
+		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+
+		if (layout.isPrivateLayout() == privateLayout) {
 			filteredGroups.add(group);
 		}
 	}
