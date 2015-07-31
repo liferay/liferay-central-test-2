@@ -78,13 +78,13 @@ public abstract class BaseControlPanelEntryPanelApp implements PanelApp {
 				controlPanelGroup.getGroupId(), true,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-			VirtualLayout manage = new VirtualLayout(
+			VirtualLayout virtualLayout = new VirtualLayout(
 				controlPanelLayout, themeDisplay.getScopeGroup());
 
-			request.setAttribute(WebKeys.LAYOUT, manage);
+			request.setAttribute(WebKeys.LAYOUT, virtualLayout);
 
 			LiferayPortletURL portletURL = PortletURLFactoryUtil.create(
-				request, getPortletId(), manage.getPlid(),
+				request, getPortletId(), virtualLayout.getPlid(),
 				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
