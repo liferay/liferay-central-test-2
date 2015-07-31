@@ -73,8 +73,8 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 
 		jsonObject.put(
 			"extraPlugins",
-			"ae_autolink,ae_dragresize,ae_addimages,ae_placeholder,ae_" +
-				"selectionregion,ae_tableresize,ae_tabletools,ae_uicore");
+			"ae_autolink,ae_dragresize,ae_addimages,ae_placeholder," +
+				"ae_selectionregion,ae_tableresize,ae_tabletools,ae_uicore");
 
 		String languageId = getLanguageId(themeDisplay);
 
