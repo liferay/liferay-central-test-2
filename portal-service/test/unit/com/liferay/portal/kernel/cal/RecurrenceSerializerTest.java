@@ -28,7 +28,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testDailyRecurrence() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.DAILY);
+			_recurrenceCalendar, Recurrence.DAILY);
 
 		Assert.assertEquals("0 4 3 1/1 * ? *", toCronText(recurrence));
 
@@ -40,13 +40,13 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testDailyRecurrenceByDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.DAILY);
+			_recurrenceCalendar, Recurrence.DAILY);
 
-		recurrence.setByDay(_FIRST_MONDAY);
+		recurrence.setByDay(_firstMondayDayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? * 2 *", toCronText(recurrence));
 
-		recurrence.setByDay(_FIRST_MONDAY_AND_FIRST_FRIDAY);
+		recurrence.setByDay(_firstMondayDayAndFirstFridayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? * 2,6 *", toCronText(recurrence));
 	}
@@ -54,7 +54,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testMonthlyRecurrence() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.MONTHLY);
+			_recurrenceCalendar, Recurrence.MONTHLY);
 
 		Assert.assertEquals("0 4 3 ? 1/1 ? *", toCronText(recurrence));
 
@@ -66,9 +66,9 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testMonthlyRecurrenceByFirstDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.MONTHLY);
+			_recurrenceCalendar, Recurrence.MONTHLY);
 
-		recurrence.setByDay(_FIRST_MONDAY);
+		recurrence.setByDay(_firstMondayDayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? 1/1 2#0 *", toCronText(recurrence));
 
@@ -80,9 +80,9 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testMonthlyRecurrenceByLastDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.MONTHLY);
+			_recurrenceCalendar, Recurrence.MONTHLY);
 
-		recurrence.setByDay(_LAST_MONDAY);
+		recurrence.setByDay(_lastMondayDayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? 1/1 2L *", toCronText(recurrence));
 
@@ -94,7 +94,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testMonthlyRecurrenceByMonthDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.MONTHLY);
+			_recurrenceCalendar, Recurrence.MONTHLY);
 
 		recurrence.setByMonthDay(new int[] {15});
 
@@ -108,7 +108,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testNoRecurrence() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.NO_RECURRENCE);
+			_recurrenceCalendar, Recurrence.NO_RECURRENCE);
 
 		Assert.assertEquals("0 4 3 2 1 ? 2010", toCronText(recurrence));
 
@@ -120,7 +120,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testWeeklyRecurrence() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.WEEKLY);
+			_recurrenceCalendar, Recurrence.WEEKLY);
 
 		Assert.assertEquals("0 4 3 ? * 7/1 *", toCronText(recurrence));
 
@@ -132,13 +132,13 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testWeeklyRecurrenceByDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.WEEKLY);
+			_recurrenceCalendar, Recurrence.WEEKLY);
 
-		recurrence.setByDay(_FIRST_MONDAY);
+		recurrence.setByDay(_firstMondayDayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? * 2/1 *", toCronText(recurrence));
 
-		recurrence.setByDay(_FIRST_MONDAY_AND_FIRST_FRIDAY);
+		recurrence.setByDay(_firstMondayDayAndFirstFridayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? * 2,6/1 *", toCronText(recurrence));
 
@@ -150,7 +150,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testYearlyRecurrence() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.YEARLY);
+			_recurrenceCalendar, Recurrence.YEARLY);
 
 		Assert.assertEquals("0 4 3 ? 1 ? 2010/1", toCronText(recurrence));
 
@@ -162,10 +162,10 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testYearlyRecurrenceByFirstDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.YEARLY);
+			_recurrenceCalendar, Recurrence.YEARLY);
 
 		recurrence.setByMonth(new int[] {0});
-		recurrence.setByDay(_FIRST_MONDAY);
+		recurrence.setByDay(_firstMondayDayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? 1 2#0 2010/1", toCronText(recurrence));
 
@@ -177,10 +177,10 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testYearlyRecurrenceByLastDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.YEARLY);
+			_recurrenceCalendar, Recurrence.YEARLY);
 
 		recurrence.setByMonth(new int[] {0});
-		recurrence.setByDay(_LAST_MONDAY);
+		recurrence.setByDay(_lastMondayDayAndPositions);
 
 		Assert.assertEquals("0 4 3 ? 1 2L 2010/1", toCronText(recurrence));
 
@@ -192,7 +192,7 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 	@Test
 	public void testYearlyRecurrenceByMonthDay() throws Exception {
 		Recurrence recurrence = getRecurrence(
-			_RECURRENCE_CALENDAR, Recurrence.YEARLY);
+			_recurrenceCalendar, Recurrence.YEARLY);
 
 		recurrence.setByMonth(new int[] {0});
 		recurrence.setByMonthDay(new int[] {15});
@@ -209,19 +209,20 @@ public class RecurrenceSerializerTest extends RecurrenceSerializer {
 			calendar, new Duration(1, 0, 0, 0), recurrenceType);
 	}
 
-	private static final DayAndPosition[] _FIRST_MONDAY =
+	private static final DayAndPosition[] _firstMondayDayAndPositions =
 		new DayAndPosition[] {new DayAndPosition(Calendar.MONDAY, 0)};
 
-	private static final DayAndPosition[] _FIRST_MONDAY_AND_FIRST_FRIDAY =
-		new DayAndPosition[] {
-			new DayAndPosition(Calendar.MONDAY, 0),
-			new DayAndPosition(Calendar.FRIDAY, 0)
-		};
+	private static final DayAndPosition[]
+		_firstMondayDayAndFirstFridayAndPositions =
+			new DayAndPosition[] {
+				new DayAndPosition(Calendar.MONDAY, 0),
+				new DayAndPosition(Calendar.FRIDAY, 0)
+			};
 
-	private static final DayAndPosition[] _LAST_MONDAY =
+	private static final DayAndPosition[] _lastMondayDayAndPositions =
 		new DayAndPosition[] {new DayAndPosition(Calendar.MONDAY, -1)};
 
-	private static final Calendar _RECURRENCE_CALENDAR = new GregorianCalendar(
+	private static final Calendar _recurrenceCalendar = new GregorianCalendar(
 		2010, 0, 2, 3, 4, 5);
 
 }
