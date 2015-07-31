@@ -276,9 +276,7 @@ public class EditDiscussionStrutsAction extends BaseStrutsAction {
 				themeDisplay.getPermissionChecker());
 
 		if (discussionPermission == null) {
-			throw new PrincipalException(
-				"No DiscussionPermission is available for the active Comment " +
-					"API implementation");
+			throw new PrincipalException("Discussion permission is null");
 		}
 
 		return discussionPermission;
