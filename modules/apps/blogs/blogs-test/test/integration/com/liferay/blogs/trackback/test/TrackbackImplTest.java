@@ -84,14 +84,10 @@ public class TrackbackImplTest {
 
 		themeDisplay.setCompany(company);
 
-		String excerpt = StringUtil.randomString();
-		String url = StringUtil.randomString();
-		String blogName = StringUtil.randomString();
-		String title = StringUtil.randomString();
-
 		trackback.addTrackback(
-			blogsEntry, themeDisplay, excerpt, url, blogName, title,
-			serviceContextFunction);
+			blogsEntry, themeDisplay, StringUtil.randomString(),
+			StringUtil.randomString(), StringUtil.randomString(),
+			StringUtil.randomString(), serviceContextFunction);
 
 		Assert.assertEquals(
 			initialCommentsCount + 1,
