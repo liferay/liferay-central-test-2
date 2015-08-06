@@ -82,8 +82,7 @@ public class ConfigurationPersistenceManager
 							return null;
 						}
 
-					}
-				);
+					});
 			}
 			catch (PrivilegedActionException pae) {
 				throw (IOException)pae.getException();
