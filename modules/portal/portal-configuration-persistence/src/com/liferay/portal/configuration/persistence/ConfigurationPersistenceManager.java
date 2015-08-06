@@ -61,14 +61,12 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		Constants.SERVICE_RANKING + ":Integer=" + ConfigurationPersistenceManager.ALMOST_MAX_VALUE
+		Constants.SERVICE_RANKING + ":Integer=" + (Integer.MAX_VALUE - 1000)
 	},
 	service = {PersistenceManager.class, ReloadablePersitenceManager.class}
 )
 public class ConfigurationPersistenceManager
 	implements NotCachablePersistenceManager, ReloadablePersitenceManager {
-
-	public static final int ALMOST_MAX_VALUE = (Integer.MAX_VALUE - 1000);
 
 	@Override
 	public void delete(final String pid) throws IOException {
