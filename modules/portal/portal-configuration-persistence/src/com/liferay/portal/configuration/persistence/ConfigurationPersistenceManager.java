@@ -59,9 +59,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true, property = {
-		Constants.SERVICE_RANKING + ":Integer=" +
-			ConfigurationPersistenceManager.ALMOST_MAX_VALUE
+	immediate = true,
+	property = {
+		Constants.SERVICE_RANKING + ":Integer=" + ConfigurationPersistenceManager.ALMOST_MAX_VALUE
 	},
 	service = {PersistenceManager.class, ReloadablePersitenceManager.class}
 )
