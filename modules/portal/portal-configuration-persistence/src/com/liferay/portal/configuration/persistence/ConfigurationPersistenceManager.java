@@ -145,7 +145,7 @@ public class ConfigurationPersistenceManager
 			_dictionaryMap.remove(pid);
 
 			if (hasPid(pid)) {
-				Dictionary<?, ?> dictionary = loadFromDB(pid);
+				Dictionary<?, ?> dictionary = loadPid(pid);
 
 				_dictionaryMap.put(pid, dictionary);
 			}
@@ -259,8 +259,8 @@ public class ConfigurationPersistenceManager
 		try {
 			connection = _dataSource.getConnection();
 
-			preparedStatement = connection.prepareStatement(
-				buildSQL(_TEST_CONFIGURATION_TABLE_EXISTS));
+			preparedStatement = prepareStatement(
+				connection, "select count(*) from Configuration_");
 
 			resultSet = preparedStatement.executeQuery();
 
@@ -294,7 +294,10 @@ public class ConfigurationPersistenceManager
 
 			statement = connection.createStatement();
 
-			statement.executeUpdate(buildSQL(_TABLE_SQL_CREATE));
+			statement.executeUpdate(
+				buildSQL(
+					"create table Configuration_ (configurationId " +
+						"VARCHAR(255) not null primary key, dictionary TEXT)"));
 		}
 		catch (IOException | SQLException e) {
 			ReflectionUtil.throwException(e);
@@ -308,6 +311,13 @@ public class ConfigurationPersistenceManager
 	protected void deactivate() {
 		_dictionaryMap.clear();
 	}
+	
+	protected PreparedStatement prepareStatement(
+			Connection connection, String sql)
+		throws IOException, SQLException {
+
+		return connection.prepareStatement(buildSQL(sql));
+	}
 
 	protected void deleteFromDatabase(String pid) throws IOException {
 		Connection connection = null;
@@ -316,15 +326,16 @@ public class ConfigurationPersistenceManager
 		try {
 			connection = _dataSource.getConnection();
 
-			preparedStatement = connection.prepareStatement(
-				buildSQL(_DELETE_CONFIGURATION_SQL));
+			preparedStatement = prepareStatement(
+				connection,
+				"delete from Configuration_ where configurationId = ?");
 
 			preparedStatement.setString(1, pid);
 
 			preparedStatement.executeUpdate();
 		}
-		catch (SQLException se) {
-			throw new IOException(se);
+		catch (SQLException sqle) {
+			throw new IOException(sqle);
 		}
 		finally {
 			cleanUp(connection, preparedStatement, null);
@@ -332,22 +343,26 @@ public class ConfigurationPersistenceManager
 	}
 
 	protected boolean hasPid(String pid) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int count = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = _dataSource.getConnection();
+			connection = _dataSource.getConnection();
 
-			ps = con.prepareStatement(buildSQL(_COUNT_CONFIGURATION_SQL));
+			preparedStatement = prepareStatement(
+				connection,
+				"select count(*) from Configuration_ where " +
+					"configurationId = ?");
 
-			ps.setString(1, pid);
+			preparedStatement.setString(1, pid);
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-			if (rs.next()) {
-				count = rs.getInt(1);
+			int count = 0;
+
+			if (resultSet.next()) {
+				count = resultSet.getInt(1);
 			}
 
 			if (count > 0) {
@@ -356,31 +371,33 @@ public class ConfigurationPersistenceManager
 
 			return false;
 		}
-		catch (IOException | SQLException se) {
-			return ReflectionUtil.throwException(se);
+		catch (IOException | SQLException e) {
+			return ReflectionUtil.throwException(e);
 		}
 		finally {
-			cleanUp(con, ps, rs);
+			cleanUp(connection, preparedStatement, resultSet);
 		}
 	}
 
 	protected void loadAllRecords() {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = _dataSource.getConnection();
+			connection = _dataSource.getConnection();
 
-			ps = con.prepareStatement(
-				buildSQL(_RETRIEVE_ALL_CONFIGURATION_SQL),
+			preparedStatement = connection.prepareStatement(
+				buildSQL(
+					"select configurationId, dictionary from Configuration_ " +
+						"ORDER BY configurationId ASC"),
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-			while (rs.next()) {
-				String pid = rs.getString(1);
-				String configuration = rs.getString(2);
+			while (resultSet.next()) {
+				String pid = resultSet.getString(1);
+				String configuration = resultSet.getString(2);
 
 				_dictionaryMap.putIfAbsent(pid, read(configuration));
 			}
@@ -389,35 +406,38 @@ public class ConfigurationPersistenceManager
 			ReflectionUtil.throwException(e);
 		}
 		finally {
-			cleanUp(con, ps, rs);
+			cleanUp(connection, preparedStatement, resultSet);
 		}
 	}
 
-	protected Dictionary<?, ?> loadFromDB(String pid) throws IOException {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	protected Dictionary<?, ?> loadPid(String pid) throws IOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = _dataSource.getConnection();
+			connection = _dataSource.getConnection();
 
-			ps = con.prepareStatement(buildSQL(_RETRIEVE_CONFIGURATION_SQL));
+			preparedStatement = prepareStatement(
+				connection,
+				"select dictionary from Configuration_ where " +
+					"configurationId = ?");
 
-			ps.setString(1, pid);
+			preparedStatement.setString(1, pid);
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-			if (rs.next()) {
-				return read(rs.getString(1));
+			if (resultSet.next()) {
+				return read(resultSet.getString(1));
 			}
 
-			return _EMPTY_DICTIONARY;
+			return _emptyDictionary;
 		}
 		catch (SQLException se) {
 			return ReflectionUtil.throwException(se);
 		}
 		finally {
-			cleanUp(con, ps, rs);
+			cleanUp(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -455,42 +475,46 @@ public class ConfigurationPersistenceManager
 
 		ConfigurationHandler.write(outputStream, dictionary);
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = _dataSource.getConnection();
-			con.setAutoCommit(false);
+			connection = _dataSource.getConnection();
+			connection.setAutoCommit(false);
 
-			ps = con.prepareStatement(
-				buildSQL(_RETRIEVE_CONFIGURATION_SQL_FOR_UPDATE),
+			preparedStatement = connection.prepareStatement(
+				buildSQL(
+					"select configurationId, dictionary from Configuration_ " +
+						"where configurationId = ?"),
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 
-			ps.setString(1, pid);
+			preparedStatement.setString(1, pid);
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-			if (rs.next()) {
-				rs.updateString(2, outputStream.toString());
-				rs.updateRow();
+			if (resultSet.next()) {
+				resultSet.updateString(2, outputStream.toString());
+				resultSet.updateRow();
 			}
 			else {
-				ps = con.prepareStatement(
-					buildSQL(_INSERT_INTO_CONFIGURATION_SQL));
+				preparedStatement = prepareStatement(
+					connection,
+					"insert into Configuration_ (configurationId, " +
+						"dictionary) values (?, ?)");
 
-				ps.setString(1, pid);
-				ps.setString(2, outputStream.toString());
-				ps.executeUpdate();
+				preparedStatement.setString(1, pid);
+				preparedStatement.setString(2, outputStream.toString());
+				preparedStatement.executeUpdate();
 			}
 
-			con.commit();
+			connection.commit();
 		}
-		catch (SQLException se) {
-			ReflectionUtil.throwException(se);
+		catch (SQLException sqle) {
+			ReflectionUtil.throwException(sqle);
 		}
 		finally {
-			cleanUp(con, ps, rs);
+			cleanUp(connection, preparedStatement, resultSet);
 
 			outputStream.close();
 		}
@@ -531,35 +555,7 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	private static final String _COUNT_CONFIGURATION_SQL =
-		"select count(*) from Configuration_ where configurationId = ?";
-
-	private static final String _DELETE_CONFIGURATION_SQL =
-		"delete from Configuration_ where configurationId = ?";
-
-	private static final Dictionary<?, ?> _EMPTY_DICTIONARY = new Hashtable<>();
-
-	private static final String _INSERT_INTO_CONFIGURATION_SQL =
-		"insert into Configuration_ (configurationId, dictionary) values " +
-			"(?, ?)";
-
-	private static final String _RETRIEVE_ALL_CONFIGURATION_SQL =
-		"select configurationId, dictionary from Configuration_ ORDER BY " +
-			"configurationId ASC";
-
-	private static final String _RETRIEVE_CONFIGURATION_SQL =
-		"select dictionary from Configuration_ where configurationId = ?";
-
-	private static final String _RETRIEVE_CONFIGURATION_SQL_FOR_UPDATE =
-		"select configurationId, dictionary from Configuration_ where " +
-			"configurationId = ?";
-
-	private static final String _TABLE_SQL_CREATE =
-		"create table Configuration_ (configurationId VARCHAR(255) not null " +
-			"primary key, dictionary TEXT)";
-
-	private static final String _TEST_CONFIGURATION_TABLE_EXISTS =
-		"select count(*) from Configuration_";
+	private static final Dictionary<?, ?> _emptyDictionary = new Hashtable<>();
 
 	private DataSource _dataSource;
 	private final ConcurrentMap<String, Dictionary<?, ?>> _dictionaryMap =
