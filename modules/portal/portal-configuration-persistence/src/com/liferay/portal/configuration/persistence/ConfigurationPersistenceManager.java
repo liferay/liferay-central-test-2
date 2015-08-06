@@ -111,7 +111,7 @@ public class ConfigurationPersistenceManager
 	}
 
 	@Override
-	public Enumeration<?> getDictionaries() throws IOException {
+	public Enumeration<?> getDictionaries() {
 		ReadLock readLock = _readWriteLock.readLock();
 
 		try {
@@ -125,7 +125,7 @@ public class ConfigurationPersistenceManager
 	}
 
 	@Override
-	public Dictionary<?, ?> load(String pid) throws IOException {
+	public Dictionary<?, ?> load(String pid) {
 		ReadLock readLock = _readWriteLock.readLock();
 
 		try {
@@ -424,7 +424,7 @@ public class ConfigurationPersistenceManager
 	}
 
 	protected Dictionary<?, ?> read(String configuration)
-		throws IOException, SQLException {
+		throws IOException {
 
 		ReaderInputStream readerInputStream = new ReaderInputStream(
 			new StringReader(configuration));
