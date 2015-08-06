@@ -173,8 +173,7 @@ public class ConfigurationPersistenceManager
 							return null;
 						}
 
-					}
-				);
+					});
 			}
 			catch (PrivilegedActionException pae) {
 				throw (IOException)pae.getException();
@@ -193,7 +192,7 @@ public class ConfigurationPersistenceManager
 		try {
 			readLock.lock();
 
-			if (!configurationTableExists()) {
+			if (!hasConfigurationTable()) {
 				readLock.unlock();
 				writeLock.lock();
 
@@ -227,8 +226,8 @@ public class ConfigurationPersistenceManager
 				resultSet.close();
 			}
 		}
-		catch (SQLException se) {
-			ReflectionUtil.throwException(se);
+		catch (SQLException sqle) {
+			ReflectionUtil.throwException(sqle);
 		}
 		finally {
 			try {
@@ -236,8 +235,8 @@ public class ConfigurationPersistenceManager
 					statement.close();
 				}
 			}
-			catch (SQLException se) {
-				ReflectionUtil.throwException(se);
+			catch (SQLException sqle) {
+				ReflectionUtil.throwException(sqle);
 			}
 			finally {
 				try {
@@ -245,29 +244,29 @@ public class ConfigurationPersistenceManager
 						connection.close();
 					}
 				}
-				catch (SQLException se) {
-					ReflectionUtil.throwException(se);
+				catch (SQLException sqle) {
+					ReflectionUtil.throwException(sqle);
 				}
 			}
 		}
 	}
 
-	protected boolean configurationTableExists() {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	protected boolean hasConfigurationTable() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		int count = 0;
 
 		try {
-			con = _dataSource.getConnection();
+			connection = _dataSource.getConnection();
 
-			ps = con.prepareStatement(
+			preparedStatement = connection.prepareStatement(
 				buildSQL(_TEST_CONFIGURATION_TABLE_EXISTS));
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-			if (rs.next()) {
-				count = rs.getInt(1);
+			if (resultSet.next()) {
+				count = resultSet.getInt(1);
 			}
 
 			if (count >= 0) {
@@ -276,11 +275,11 @@ public class ConfigurationPersistenceManager
 
 			return false;
 		}
-		catch (IOException | SQLException se) {
+		catch (IOException | SQLException e) {
 			return false;
 		}
 		finally {
-			cleanUp(con, ps, rs);
+			cleanUp(connection, preparedStatement, resultSet);
 		}
 	}
 
