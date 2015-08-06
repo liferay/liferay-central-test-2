@@ -144,7 +144,7 @@ public class ConfigurationPersistenceManager
 
 			_dictionaryMap.remove(pid);
 
-			if (existsInDB(pid)) {
+			if (hasPid(pid)) {
 				Dictionary<?, ?> dictionary = loadFromDB(pid);
 
 				_dictionaryMap.put(pid, dictionary);
@@ -255,7 +255,6 @@ public class ConfigurationPersistenceManager
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		int count = 0;
 
 		try {
 			connection = _dataSource.getConnection();
@@ -264,6 +263,8 @@ public class ConfigurationPersistenceManager
 				buildSQL(_TEST_CONFIGURATION_TABLE_EXISTS));
 
 			resultSet = preparedStatement.executeQuery();
+
+			int count = 0;
 
 			if (resultSet.next()) {
 				count = resultSet.getInt(1);
@@ -284,22 +285,22 @@ public class ConfigurationPersistenceManager
 	}
 
 	protected void createConfigurationTable() {
-		Connection con = null;
-		Statement s = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = _dataSource.getConnection();
+			connection = _dataSource.getConnection();
 
-			s = con.createStatement();
+			statement = connection.createStatement();
 
-			s.executeUpdate(buildSQL(_TABLE_SQL_CREATE));
+			statement.executeUpdate(buildSQL(_TABLE_SQL_CREATE));
 		}
-		catch (IOException | SQLException se) {
-			ReflectionUtil.throwException(se);
+		catch (IOException | SQLException e) {
+			ReflectionUtil.throwException(e);
 		}
 		finally {
-			cleanUp(con, s, rs);
+			cleanUp(connection, statement, resultSet);
 		}
 	}
 
@@ -308,28 +309,29 @@ public class ConfigurationPersistenceManager
 		_dictionaryMap.clear();
 	}
 
-	protected void deleteFromDB(String pid) throws IOException {
-		Connection con = null;
-		PreparedStatement ps = null;
+	protected void deleteFromDatabase(String pid) throws IOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 
 		try {
-			con = _dataSource.getConnection();
+			connection = _dataSource.getConnection();
 
-			ps = con.prepareStatement(buildSQL(_DELETE_CONFIGURATION_SQL));
+			preparedStatement = connection.prepareStatement(
+				buildSQL(_DELETE_CONFIGURATION_SQL));
 
-			ps.setString(1, pid);
+			preparedStatement.setString(1, pid);
 
-			ps.executeUpdate();
+			preparedStatement.executeUpdate();
 		}
 		catch (SQLException se) {
 			throw new IOException(se);
 		}
 		finally {
-			cleanUp(con, ps, null);
+			cleanUp(connection, preparedStatement, null);
 		}
 	}
 
-	protected boolean existsInDB(String pid) {
+	protected boolean hasPid(String pid) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -502,8 +504,8 @@ public class ConfigurationPersistenceManager
 
 			Dictionary<?, ?> dictionary = _dictionaryMap.remove(pid);
 
-			if ((dictionary != null) && existsInDB(pid)) {
-				deleteFromDB(pid);
+			if ((dictionary != null) && hasPid(pid)) {
+				deleteFromDatabase(pid);
 			}
 		}
 		finally {
