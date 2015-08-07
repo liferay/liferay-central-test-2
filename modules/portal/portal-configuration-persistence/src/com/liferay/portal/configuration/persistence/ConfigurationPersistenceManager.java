@@ -96,52 +96,52 @@ public class ConfigurationPersistenceManager
 
 	@Override
 	public boolean exists(String pid) {
-		Lock readLock = _readWriteLock.readLock();
+		Lock lock = _readWriteLock.readLock();
 
 		try {
-			readLock.lock();
+			lock.lock();
 
 			return _dictionaries.containsKey(pid);
 		}
 		finally {
-			readLock.unlock();
+			lock.unlock();
 		}
 	}
 
 	@Override
 	public Enumeration<?> getDictionaries() {
-		Lock readLock = _readWriteLock.readLock();
+		Lock lock = _readWriteLock.readLock();
 
 		try {
-			readLock.lock();
+			lock.lock();
 
 			return Collections.enumeration(_dictionaries.values());
 		}
 		finally {
-			readLock.unlock();
+			lock.unlock();
 		}
 	}
 
 	@Override
 	public Dictionary<?, ?> load(String pid) {
-		Lock readLock = _readWriteLock.readLock();
+		Lock lock = _readWriteLock.readLock();
 
 		try {
-			readLock.lock();
+			lock.lock();
 
 			return _dictionaries.get(pid);
 		}
 		finally {
-			readLock.unlock();
+			lock.unlock();
 		}
 	}
 
 	@Override
 	public void reload(String pid) throws IOException {
-		Lock writeLock = _readWriteLock.writeLock();
+		Lock lock = _readWriteLock.writeLock();
 
 		try {
-			writeLock.lock();
+			lock.lock();
 
 			_dictionaries.remove(pid);
 
@@ -152,7 +152,7 @@ public class ConfigurationPersistenceManager
 			}
 		}
 		finally {
-			writeLock.unlock();
+			lock.unlock();
 		}
 	}
 
@@ -304,10 +304,10 @@ public class ConfigurationPersistenceManager
 	}
 
 	protected void doDelete(String pid) throws IOException {
-		Lock writeLock = _readWriteLock.writeLock();
+		Lock lock = _readWriteLock.writeLock();
 
 		try {
-			writeLock.lock();
+			lock.lock();
 
 			Dictionary<?, ?> dictionary = _dictionaries.remove(pid);
 
@@ -316,7 +316,7 @@ public class ConfigurationPersistenceManager
 			}
 		}
 		finally {
-			writeLock.unlock();
+			lock.unlock();
 		}
 	}
 
@@ -324,17 +324,17 @@ public class ConfigurationPersistenceManager
 			String pid, @SuppressWarnings("rawtypes") Dictionary dictionary)
 		throws IOException {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		Lock lock = _readWriteLock.writeLock();
 
 		try {
-			writeLock.lock();
+			lock.lock();
 
 			storeInDB(pid, dictionary);
 
 			_dictionaries.put(pid, dictionary);
 		}
 		finally {
-			writeLock.unlock();
+			lock.unlock();
 		}
 	}
 
