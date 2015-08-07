@@ -58,16 +58,16 @@ public class ConfigurationPersistenceManagerTest {
 
 		_configurationAdminServiceTracker.open();
 
-		_configurationAdmin =
-			_configurationAdminServiceTracker.waitForService(5000);
+		_configurationAdmin = _configurationAdminServiceTracker.waitForService(
+			5000);
 
 		_persistenceManagerServiceTracker = new ServiceTracker<>(
 			bundleContext, PersistenceManager.class, null);
 
 		_persistenceManagerServiceTracker.open();
 
-		_persistenceManager =
-			_persistenceManagerServiceTracker.waitForService(5000);
+		_persistenceManager = _persistenceManagerServiceTracker.waitForService(
+			5000);
 	}
 
 	@After
@@ -75,6 +75,21 @@ public class ConfigurationPersistenceManagerTest {
 		_configurationAdminServiceTracker.close();
 
 		_persistenceManagerServiceTracker.close();
+	}
+
+	@Test
+	public void testConfigurationPersistenceManager() throws Exception {
+		Assert.assertEquals(
+			ConfigurationPersistenceManager.class,
+			_persistenceManager.getClass());
+	}
+
+	@Test
+	public void testCreateFactoryConfiguration() throws Exception {
+		Configuration configuration =
+			_configurationAdmin.createFactoryConfiguration("test.pid");
+
+		assertConfiguration(configuration);
 	}
 
 	@Test
@@ -90,24 +105,9 @@ public class ConfigurationPersistenceManagerTest {
 	}
 
 	@Test
-	public void testConfigurationPersistenceManager() throws Exception {
-		Assert.assertEquals(
-			ConfigurationPersistenceManager.class,
-			_persistenceManager.getClass());
-	}
-
-	@Test
 	public void testGetConfiguration() throws Exception {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"test.pid");
-
-		assertConfiguration(configuration);
-	}
-
-	@Test
-	public void testCreateFactoryConfiguration() throws Exception {
-		Configuration configuration =
-			_configurationAdmin.createFactoryConfiguration("test.pid");
 
 		assertConfiguration(configuration);
 	}
@@ -143,9 +143,9 @@ public class ConfigurationPersistenceManagerTest {
 		Assert.assertFalse(_persistenceManager.exists(pid));
 	}
 
+	private ConfigurationAdmin _configurationAdmin;
 	private ServiceTracker<ConfigurationAdmin, ConfigurationAdmin>
 		_configurationAdminServiceTracker;
-	private ConfigurationAdmin _configurationAdmin;
 	private PersistenceManager _persistenceManager;
 	private ServiceTracker<PersistenceManager, PersistenceManager>
 		_persistenceManagerServiceTracker;
