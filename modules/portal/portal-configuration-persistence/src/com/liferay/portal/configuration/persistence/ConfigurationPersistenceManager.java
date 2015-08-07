@@ -339,6 +339,37 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
+	protected Dictionary<?, ?> getDictionary(String pid) throws IOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = _dataSource.getConnection();
+
+			preparedStatement = prepareStatement(
+				connection,
+				"select dictionary from Configuration_ where " +
+					"configurationId = ?");
+
+			preparedStatement.setString(1, pid);
+
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				return read(resultSet.getString(1));
+			}
+
+			return _emptyDictionary;
+		}
+		catch (SQLException se) {
+			return ReflectionUtil.throwException(se);
+		}
+		finally {
+			cleanUp(connection, preparedStatement, resultSet);
+		}
+	}
+
 	protected boolean hasConfigurationTable() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -434,37 +465,6 @@ public class ConfigurationPersistenceManager
 		}
 		catch (IOException | SQLException e) {
 			ReflectionUtil.throwException(e);
-		}
-		finally {
-			cleanUp(connection, preparedStatement, resultSet);
-		}
-	}
-
-	protected Dictionary<?, ?> getDictionary(String pid) throws IOException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-
-		try {
-			connection = _dataSource.getConnection();
-
-			preparedStatement = prepareStatement(
-				connection,
-				"select dictionary from Configuration_ where " +
-					"configurationId = ?");
-
-			preparedStatement.setString(1, pid);
-
-			resultSet = preparedStatement.executeQuery();
-
-			if (resultSet.next()) {
-				return read(resultSet.getString(1));
-			}
-
-			return _emptyDictionary;
-		}
-		catch (SQLException se) {
-			return ReflectionUtil.throwException(se);
 		}
 		finally {
 			cleanUp(connection, preparedStatement, resultSet);
