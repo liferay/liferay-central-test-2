@@ -332,7 +332,7 @@ public class ConfigurationPersistenceManager
 		try {
 			lock.lock();
 
-			storeInDB(pid, dictionary);
+			storeInDatabase(pid, dictionary);
 
 			_dictionaries.put(pid, dictionary);
 		}
@@ -495,7 +495,7 @@ public class ConfigurationPersistenceManager
 		resultSet.updateString(2, outputStream.toString());
 	}
 
-	protected void storeInDB(String pid, Dictionary<?, ?> dictionary)
+	protected void storeInDatabase(String pid, Dictionary<?, ?> dictionary)
 		throws IOException {
 
 		UnsyncByteArrayOutputStream outputStream =
@@ -523,6 +523,7 @@ public class ConfigurationPersistenceManager
 
 			if (resultSet.next()) {
 				resultSet.updateString(2, outputStream.toString());
+
 				resultSet.updateRow();
 			}
 			else {
@@ -533,6 +534,7 @@ public class ConfigurationPersistenceManager
 
 				preparedStatement.setString(1, pid);
 				preparedStatement.setString(2, outputStream.toString());
+
 				preparedStatement.executeUpdate();
 			}
 
