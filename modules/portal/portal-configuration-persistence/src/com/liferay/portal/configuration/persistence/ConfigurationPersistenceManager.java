@@ -21,18 +21,17 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
-
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -48,7 +47,6 @@ import javax.sql.DataSource;
 import org.apache.felix.cm.NotCachablePersistenceManager;
 import org.apache.felix.cm.PersistenceManager;
 import org.apache.felix.cm.file.ConfigurationHandler;
-
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -357,7 +355,7 @@ public class ConfigurationPersistenceManager
 			resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-				return read(resultSet.getString(1));
+				return toDictionary(resultSet.getString(1));
 			}
 
 			return _emptyDictionary;
@@ -458,9 +456,9 @@ public class ConfigurationPersistenceManager
 
 			while (resultSet.next()) {
 				String pid = resultSet.getString(1);
-				String configuration = resultSet.getString(2);
+				String dictionaryString = resultSet.getString(2);
 
-				_dictionaries.putIfAbsent(pid, read(configuration));
+				_dictionaries.putIfAbsent(pid, toDictionary(dictionaryString));
 			}
 		}
 		catch (IOException | SQLException e) {
@@ -478,11 +476,13 @@ public class ConfigurationPersistenceManager
 		return connection.prepareStatement(buildSQL(sql));
 	}
 
-	protected Dictionary<?, ?> read(String configuration) throws IOException {
-		ReaderInputStream readerInputStream = new ReaderInputStream(
-			new StringReader(configuration));
+	protected Dictionary<?, ?> toDictionary(String dictionaryString)
+		throws IOException {
 
-		return ConfigurationHandler.read(readerInputStream);
+		InputStream inputStream = new ReaderInputStream(
+			new StringReader(dictionaryString));
+
+		return ConfigurationHandler.read(inputStream);
 	}
 
 	@Reference(target = "(bean.id=liferayDataSource)")
@@ -493,15 +493,13 @@ public class ConfigurationPersistenceManager
 	protected void store(ResultSet resultSet, Dictionary<?, ?> dictionary)
 		throws IOException, SQLException {
 
-		UnsyncByteArrayOutputStream outputStream =
-			new UnsyncByteArrayOutputStream();
+		OutputStream outputStream = new UnsyncByteArrayOutputStream();
 
 		ConfigurationHandler.write(outputStream, dictionary);
 
 		resultSet.updateString(2, outputStream.toString());
 	}
 
-	@SuppressWarnings("resource")
 	protected void storeInDB(String pid, Dictionary<?, ?> dictionary)
 		throws IOException {
 
