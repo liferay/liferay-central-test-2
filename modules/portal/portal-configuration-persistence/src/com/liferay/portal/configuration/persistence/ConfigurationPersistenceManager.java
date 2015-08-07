@@ -22,33 +22,29 @@ import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
-
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import javax.sql.DataSource;
 
 import org.apache.felix.cm.NotCachablePersistenceManager;
 import org.apache.felix.cm.PersistenceManager;
 import org.apache.felix.cm.file.ConfigurationHandler;
-
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -95,7 +91,7 @@ public class ConfigurationPersistenceManager
 
 	@Override
 	public boolean exists(String pid) {
-		ReadLock readLock = _readWriteLock.readLock();
+		Lock readLock = _readWriteLock.readLock();
 
 		try {
 			readLock.lock();
@@ -109,7 +105,7 @@ public class ConfigurationPersistenceManager
 
 	@Override
 	public Enumeration<?> getDictionaries() {
-		ReadLock readLock = _readWriteLock.readLock();
+		Lock readLock = _readWriteLock.readLock();
 
 		try {
 			readLock.lock();
@@ -123,7 +119,7 @@ public class ConfigurationPersistenceManager
 
 	@Override
 	public Dictionary<?, ?> load(String pid) {
-		ReadLock readLock = _readWriteLock.readLock();
+		Lock readLock = _readWriteLock.readLock();
 
 		try {
 			readLock.lock();
@@ -137,7 +133,7 @@ public class ConfigurationPersistenceManager
 
 	@Override
 	public void reload(String pid) throws IOException {
-		WriteLock writeLock = _readWriteLock.writeLock();
+		Lock writeLock = _readWriteLock.writeLock();
 
 		try {
 			writeLock.lock();
@@ -186,8 +182,8 @@ public class ConfigurationPersistenceManager
 
 	@Activate
 	protected void activate() {
-		ReadLock readLock = _readWriteLock.readLock();
-		WriteLock writeLock = _readWriteLock.writeLock();
+		Lock readLock = _readWriteLock.readLock();
+		Lock writeLock = _readWriteLock.writeLock();
 
 		try {
 			readLock.lock();
@@ -521,7 +517,7 @@ public class ConfigurationPersistenceManager
 	}
 
 	protected void doDelete(String pid) throws IOException {
-		WriteLock writeLock = _readWriteLock.writeLock();
+		Lock writeLock = _readWriteLock.writeLock();
 
 		try {
 			writeLock.lock();
@@ -541,7 +537,7 @@ public class ConfigurationPersistenceManager
 			String pid, @SuppressWarnings("rawtypes") Dictionary dictionary)
 		throws IOException {
 
-		WriteLock writeLock = _readWriteLock.writeLock();
+		Lock writeLock = _readWriteLock.writeLock();
 
 		try {
 			writeLock.lock();
@@ -560,7 +556,7 @@ public class ConfigurationPersistenceManager
 	private DataSource _dataSource;
 	private final ConcurrentMap<String, Dictionary<?, ?>> _dictionaries =
 		new ConcurrentHashMap<>();
-	private final ReentrantReadWriteLock _readWriteLock =
+	private final ReadWriteLock _readWriteLock =
 		new ReentrantReadWriteLock(true);
 
 }
