@@ -24,14 +24,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
+
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -47,6 +50,7 @@ import javax.sql.DataSource;
 import org.apache.felix.cm.NotCachablePersistenceManager;
 import org.apache.felix.cm.PersistenceManager;
 import org.apache.felix.cm.file.ConfigurationHandler;
+
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -476,15 +480,6 @@ public class ConfigurationPersistenceManager
 		return connection.prepareStatement(buildSQL(sql));
 	}
 
-	protected Dictionary<?, ?> toDictionary(String dictionaryString)
-		throws IOException {
-
-		InputStream inputStream = new ReaderInputStream(
-			new StringReader(dictionaryString));
-
-		return ConfigurationHandler.read(inputStream);
-	}
-
 	@Reference(target = "(bean.id=liferayDataSource)")
 	protected void setDataSource(DataSource dataSource) {
 		_dataSource = dataSource;
@@ -551,6 +546,15 @@ public class ConfigurationPersistenceManager
 
 			outputStream.close();
 		}
+	}
+
+	protected Dictionary<?, ?> toDictionary(String dictionaryString)
+		throws IOException {
+
+		InputStream inputStream = new ReaderInputStream(
+			new StringReader(dictionaryString));
+
+		return ConfigurationHandler.read(inputStream);
 	}
 
 	private static final Dictionary<?, ?> _emptyDictionary = new Hashtable<>();
