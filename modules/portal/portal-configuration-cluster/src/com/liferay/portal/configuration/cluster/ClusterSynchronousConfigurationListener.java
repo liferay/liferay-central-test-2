@@ -33,7 +33,7 @@ public class ClusterSynchronousConfigurationListener
 	implements SynchronousConfigurationListener {
 
 	@Override
-	public void configurationEvent(ConfigurationEvent event) {
+	public void configurationEvent(ConfigurationEvent configurationEvent) {
 		if (ClusterThreadLocal.isLocalUpdate()) {
 			return;
 		}
@@ -42,16 +42,16 @@ public class ClusterSynchronousConfigurationListener
 
 		message.setDestinationName("liferay/configuration");
 
-		String factoryPid = event.getFactoryPid();
+		String factoryPid = configurationEvent.getFactoryPid();
 
 		if (factoryPid != null) {
 			message.put(ConfigurationAdmin.SERVICE_FACTORYPID, factoryPid);
 		}
 		else {
-			message.put(Constants.SERVICE_PID, event.getPid());
+			message.put(Constants.SERVICE_PID, configurationEvent.getPid());
 		}
 
-		message.put("cm.type", event.getType());
+		message.put("cm.type", configurationEvent.getType());
 
 		_clusterLink.sendMulticastMessage(message, Priority.LEVEL10);
 	}
