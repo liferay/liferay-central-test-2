@@ -80,7 +80,7 @@ public class ConfigurationMessageListener extends BaseMessageListener {
 				return;
 			}
 
-			int type = message.getInteger("cm.type");
+			int type = message.getInteger("configuration.event.type");
 
 			for (Configuration configuration : configurations) {
 				if (type == ConfigurationEvent.CM_DELETED) {

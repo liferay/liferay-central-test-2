@@ -51,7 +51,7 @@ public class ConfigurationSynchronousConfigurationListener
 			message.put(Constants.SERVICE_PID, configurationEvent.getPid());
 		}
 
-		message.put("cm.type", configurationEvent.getType());
+		message.put("configuration.event.type", configurationEvent.getType());
 
 		_clusterLink.sendMulticastMessage(message, Priority.LEVEL10);
 	}
