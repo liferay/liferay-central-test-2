@@ -146,7 +146,7 @@ public class ConfigurationPersistenceManager
 			_dictionaries.remove(pid);
 
 			if (hasPid(pid)) {
-				Dictionary<?, ?> dictionary = loadPid(pid);
+				Dictionary<?, ?> dictionary = getDictionary(pid);
 
 				_dictionaries.put(pid, dictionary);
 			}
@@ -206,7 +206,7 @@ public class ConfigurationPersistenceManager
 				}
 			}
 
-			loadAllRecords();
+			populateDictionaries();
 		}
 		finally {
 			readLock.unlock();
@@ -408,7 +408,7 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	protected void loadAllRecords() {
+	protected void populateDictionaries() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -439,7 +439,7 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	protected Dictionary<?, ?> loadPid(String pid) throws IOException {
+	protected Dictionary<?, ?> getDictionary(String pid) throws IOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
