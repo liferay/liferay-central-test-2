@@ -29,7 +29,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(immediate = true)
-public class ClusterEventHandler implements SynchronousConfigurationListener {
+public class ClusterSynchronousConfigurationListener
+	implements SynchronousConfigurationListener {
 
 	@Override
 	public void configurationEvent(ConfigurationEvent event) {
