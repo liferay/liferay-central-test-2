@@ -77,7 +77,7 @@ public class ConfigurationPersistenceManager
 
 						@Override
 						public Void run() throws Exception {
-							_delete(pid);
+							doDelete(pid);
 
 							return null;
 						}
@@ -89,7 +89,7 @@ public class ConfigurationPersistenceManager
 			}
 		}
 		else {
-			_delete(pid);
+			doDelete(pid);
 		}
 	}
 
@@ -168,7 +168,7 @@ public class ConfigurationPersistenceManager
 
 						@Override
 						public Void run() throws Exception {
-							_store(pid, dictionary);
+							doStore(pid, dictionary);
 
 							return null;
 						}
@@ -180,7 +180,7 @@ public class ConfigurationPersistenceManager
 			}
 		}
 		else {
-			_store(pid, dictionary);
+			doStore(pid, dictionary);
 		}
 	}
 
@@ -520,7 +520,7 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	private void _delete(String pid) throws IOException {
+	protected void doDelete(String pid) throws IOException {
 		WriteLock writeLock = _readWriteLock.writeLock();
 
 		try {
@@ -537,7 +537,7 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	private void _store(
+	protected void doStore(
 			String pid, @SuppressWarnings("rawtypes") Dictionary dictionary)
 		throws IOException {
 
