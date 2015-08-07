@@ -100,7 +100,7 @@ public class ConfigurationPersistenceManager
 		try {
 			readLock.lock();
 
-			return _dictionaryMap.containsKey(pid);
+			return _dictionaries.containsKey(pid);
 		}
 		finally {
 			readLock.unlock();
@@ -114,7 +114,7 @@ public class ConfigurationPersistenceManager
 		try {
 			readLock.lock();
 
-			return Collections.enumeration(_dictionaryMap.values());
+			return Collections.enumeration(_dictionaries.values());
 		}
 		finally {
 			readLock.unlock();
@@ -128,7 +128,7 @@ public class ConfigurationPersistenceManager
 		try {
 			readLock.lock();
 
-			return _dictionaryMap.get(pid);
+			return _dictionaries.get(pid);
 		}
 		finally {
 			readLock.unlock();
@@ -142,12 +142,12 @@ public class ConfigurationPersistenceManager
 		try {
 			writeLock.lock();
 
-			_dictionaryMap.remove(pid);
+			_dictionaries.remove(pid);
 
 			if (hasPid(pid)) {
 				Dictionary<?, ?> dictionary = loadPid(pid);
 
-				_dictionaryMap.put(pid, dictionary);
+				_dictionaries.put(pid, dictionary);
 			}
 		}
 		finally {
@@ -309,7 +309,7 @@ public class ConfigurationPersistenceManager
 
 	@Deactivate
 	protected void deactivate() {
-		_dictionaryMap.clear();
+		_dictionaries.clear();
 	}
 	
 	protected PreparedStatement prepareStatement(
@@ -399,7 +399,7 @@ public class ConfigurationPersistenceManager
 				String pid = resultSet.getString(1);
 				String configuration = resultSet.getString(2);
 
-				_dictionaryMap.putIfAbsent(pid, read(configuration));
+				_dictionaries.putIfAbsent(pid, read(configuration));
 			}
 		}
 		catch (IOException | SQLException e) {
@@ -526,7 +526,7 @@ public class ConfigurationPersistenceManager
 		try {
 			writeLock.lock();
 
-			Dictionary<?, ?> dictionary = _dictionaryMap.remove(pid);
+			Dictionary<?, ?> dictionary = _dictionaries.remove(pid);
 
 			if ((dictionary != null) && hasPid(pid)) {
 				deleteFromDatabase(pid);
@@ -548,7 +548,7 @@ public class ConfigurationPersistenceManager
 
 			storeInDB(pid, dictionary);
 
-			_dictionaryMap.put(pid, dictionary);
+			_dictionaries.put(pid, dictionary);
 		}
 		finally {
 			writeLock.unlock();
@@ -558,7 +558,7 @@ public class ConfigurationPersistenceManager
 	private static final Dictionary<?, ?> _emptyDictionary = new Hashtable<>();
 
 	private DataSource _dataSource;
-	private final ConcurrentMap<String, Dictionary<?, ?>> _dictionaryMap =
+	private final ConcurrentMap<String, Dictionary<?, ?>> _dictionaries =
 		new ConcurrentHashMap<>();
 	private final ReentrantReadWriteLock _readWriteLock =
 		new ReentrantReadWriteLock(true);
