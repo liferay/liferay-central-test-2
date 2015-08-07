@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = {EditPortletProvider.class, ViewPortletProvider.class}
 )
-public class DDMEditPortletProvider extends BasePortletProvider
+public class DynamicDataMappingEditPortletProvider extends BasePortletProvider
 	implements EditPortletProvider, ViewPortletProvider {
 
 	@Override
