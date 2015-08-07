@@ -22,14 +22,17 @@ import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
+
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -45,6 +48,7 @@ import javax.sql.DataSource;
 import org.apache.felix.cm.NotCachablePersistenceManager;
 import org.apache.felix.cm.PersistenceManager;
 import org.apache.felix.cm.file.ConfigurationHandler;
+
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -57,7 +61,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		Constants.SERVICE_RANKING + ":Integer=" + (Integer.MAX_VALUE - 1000)
+		Constants.SERVICE_RANKING + ":Integer=" + (Integer.MAX_VALUE - 1000
+)
 	},
 	service = {PersistenceManager.class, ReloadablePersitenceManager.class}
 )
@@ -247,6 +252,92 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
+	protected void createConfigurationTable() {
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = _dataSource.getConnection();
+
+			statement = connection.createStatement();
+
+			statement.executeUpdate(
+				buildSQL(
+					"create table Configuration_ (configurationId " +
+						"VARCHAR(255) not null primary key, dictionary TEXT)"));
+		}
+		catch (IOException | SQLException e) {
+			ReflectionUtil.throwException(e);
+		}
+		finally {
+			cleanUp(connection, statement, resultSet);
+		}
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		_dictionaries.clear();
+	}
+
+	protected void deleteFromDatabase(String pid) throws IOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = _dataSource.getConnection();
+
+			preparedStatement = prepareStatement(
+				connection,
+				"delete from Configuration_ where configurationId = ?");
+
+			preparedStatement.setString(1, pid);
+
+			preparedStatement.executeUpdate();
+		}
+		catch (SQLException sqle) {
+			throw new IOException(sqle);
+		}
+		finally {
+			cleanUp(connection, preparedStatement, null);
+		}
+	}
+
+	protected void doDelete(String pid) throws IOException {
+		Lock writeLock = _readWriteLock.writeLock();
+
+		try {
+			writeLock.lock();
+
+			Dictionary<?, ?> dictionary = _dictionaries.remove(pid);
+
+			if ((dictionary != null) && hasPid(pid)) {
+				deleteFromDatabase(pid);
+			}
+		}
+		finally {
+			writeLock.unlock();
+		}
+	}
+
+	protected void doStore(
+			String pid, @SuppressWarnings("rawtypes") Dictionary dictionary)
+		throws IOException {
+
+		Lock writeLock = _readWriteLock.writeLock();
+
+		try {
+			writeLock.lock();
+
+			storeInDB(pid, dictionary);
+
+			_dictionaries.put(pid, dictionary);
+		}
+		finally {
+			writeLock.unlock();
+		}
+	}
+
 	protected boolean hasConfigurationTable() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -277,64 +368,6 @@ public class ConfigurationPersistenceManager
 		}
 		finally {
 			cleanUp(connection, preparedStatement, resultSet);
-		}
-	}
-
-	protected void createConfigurationTable() {
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
-		try {
-			connection = _dataSource.getConnection();
-
-			statement = connection.createStatement();
-
-			statement.executeUpdate(
-				buildSQL(
-					"create table Configuration_ (configurationId " +
-						"VARCHAR(255) not null primary key, dictionary TEXT)"));
-		}
-		catch (IOException | SQLException e) {
-			ReflectionUtil.throwException(e);
-		}
-		finally {
-			cleanUp(connection, statement, resultSet);
-		}
-	}
-
-	@Deactivate
-	protected void deactivate() {
-		_dictionaries.clear();
-	}
-	
-	protected PreparedStatement prepareStatement(
-			Connection connection, String sql)
-		throws IOException, SQLException {
-
-		return connection.prepareStatement(buildSQL(sql));
-	}
-
-	protected void deleteFromDatabase(String pid) throws IOException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		try {
-			connection = _dataSource.getConnection();
-
-			preparedStatement = prepareStatement(
-				connection,
-				"delete from Configuration_ where configurationId = ?");
-
-			preparedStatement.setString(1, pid);
-
-			preparedStatement.executeUpdate();
-		}
-		catch (SQLException sqle) {
-			throw new IOException(sqle);
-		}
-		finally {
-			cleanUp(connection, preparedStatement, null);
 		}
 	}
 
@@ -437,9 +470,14 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	protected Dictionary<?, ?> read(String configuration)
-		throws IOException {
+	protected PreparedStatement prepareStatement(
+			Connection connection, String sql)
+		throws IOException, SQLException {
 
+		return connection.prepareStatement(buildSQL(sql));
+	}
+
+	protected Dictionary<?, ?> read(String configuration) throws IOException {
 		ReaderInputStream readerInputStream = new ReaderInputStream(
 			new StringReader(configuration));
 
@@ -516,47 +554,12 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
-	protected void doDelete(String pid) throws IOException {
-		Lock writeLock = _readWriteLock.writeLock();
-
-		try {
-			writeLock.lock();
-
-			Dictionary<?, ?> dictionary = _dictionaries.remove(pid);
-
-			if ((dictionary != null) && hasPid(pid)) {
-				deleteFromDatabase(pid);
-			}
-		}
-		finally {
-			writeLock.unlock();
-		}
-	}
-
-	protected void doStore(
-			String pid, @SuppressWarnings("rawtypes") Dictionary dictionary)
-		throws IOException {
-
-		Lock writeLock = _readWriteLock.writeLock();
-
-		try {
-			writeLock.lock();
-
-			storeInDB(pid, dictionary);
-
-			_dictionaries.put(pid, dictionary);
-		}
-		finally {
-			writeLock.unlock();
-		}
-	}
-
 	private static final Dictionary<?, ?> _emptyDictionary = new Hashtable<>();
 
 	private DataSource _dataSource;
 	private final ConcurrentMap<String, Dictionary<?, ?>> _dictionaries =
 		new ConcurrentHashMap<>();
-	private final ReadWriteLock _readWriteLock =
-		new ReentrantReadWriteLock(true);
+	private final ReadWriteLock _readWriteLock = new ReentrantReadWriteLock(
+		true);
 
 }
