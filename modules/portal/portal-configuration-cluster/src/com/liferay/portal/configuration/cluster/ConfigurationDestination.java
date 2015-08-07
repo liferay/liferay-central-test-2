@@ -14,23 +14,17 @@
 
 package com.liferay.portal.configuration.cluster;
 
-import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.ParallelDestination;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
-public class ClusterThreadLocal {
-
-	public static boolean isLocalUpdate() {
-		return _localUpdate.get();
-	}
-
-	public static void setLocalUpdate(boolean localUpdate) {
-		_localUpdate.set(localUpdate);
-	}
-
-	private static final ThreadLocal<Boolean> _localUpdate =
-		new InitialThreadLocal<>(
-			InitialThreadLocal.class + "._localUpdate", false);
-
+@Component(
+	immediate = true, property = {"destination.name=liferay/configuration"},
+	service = {ConfigurationDestination.class, Destination.class}
+)
+public class ConfigurationDestination extends ParallelDestination {
 }

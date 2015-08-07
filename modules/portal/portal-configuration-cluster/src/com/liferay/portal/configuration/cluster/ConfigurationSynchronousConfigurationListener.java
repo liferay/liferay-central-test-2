@@ -29,12 +29,12 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(immediate = true)
-public class ClusterSynchronousConfigurationListener
+public class ConfigurationSynchronousConfigurationListener
 	implements SynchronousConfigurationListener {
 
 	@Override
 	public void configurationEvent(ConfigurationEvent configurationEvent) {
-		if (ClusterThreadLocal.isLocalUpdate()) {
+		if (ConfigurationThreadLocal.isLocalUpdate()) {
 			return;
 		}
 
@@ -58,7 +58,7 @@ public class ClusterSynchronousConfigurationListener
 
 	@Reference
 	protected void setClusterDestination(
-		ClusterDestination clusterDestination) {
+		ConfigurationDestination clusterDestination) {
 	}
 
 	@Reference

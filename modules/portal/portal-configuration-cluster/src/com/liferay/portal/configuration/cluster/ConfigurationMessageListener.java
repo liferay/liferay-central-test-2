@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true, property = {"destination.name=liferay/configuration"},
 	service = MessageListener.class
 )
-public class ClusterMessageListener extends BaseMessageListener {
+public class ConfigurationMessageListener extends BaseMessageListener {
 
 	@Reference
 	public void setReloadablePersitenceManager(
@@ -71,7 +71,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 		_reloadablePersitenceManager.reload(pid);
 
 		try {
-			ClusterThreadLocal.setLocalUpdate(true);
+			ConfigurationThreadLocal.setLocalUpdate(true);
 
 			Configuration[] configurations =
 				_configurationAdmin.listConfigurations(sb.toString());
@@ -92,7 +92,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 			}
 		}
 		finally {
-			ClusterThreadLocal.setLocalUpdate(false);
+			ConfigurationThreadLocal.setLocalUpdate(false);
 		}
 	}
 
