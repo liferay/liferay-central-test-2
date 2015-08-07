@@ -18,6 +18,7 @@ import com.liferay.portal.configuration.persistence.ReloadablePersitenceManager;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import org.osgi.framework.Constants;
 import org.osgi.service.cm.Configuration;
@@ -44,7 +45,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("(");
 
