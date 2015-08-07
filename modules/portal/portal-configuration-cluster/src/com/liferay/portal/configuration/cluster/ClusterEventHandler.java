@@ -33,7 +33,7 @@ public class ClusterEventHandler implements SynchronousConfigurationListener {
 
 	@Override
 	public void configurationEvent(ConfigurationEvent event) {
-		if (ClusterThreadLocal.isLocalUpdateOnly()) {
+		if (ClusterThreadLocal.isLocalUpdate()) {
 			return;
 		}
 

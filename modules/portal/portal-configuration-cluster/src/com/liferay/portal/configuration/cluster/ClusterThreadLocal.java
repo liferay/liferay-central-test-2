@@ -21,16 +21,16 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
  */
 public class ClusterThreadLocal {
 
-	public static boolean isLocalUpdateOnly() {
-		return _localUpdateOnly.get();
+	public static boolean isLocalUpdate() {
+		return _localUpdate.get();
 	}
 
-	public static void setLocalUpdateOnly(boolean localUpdateOnly) {
-		_localUpdateOnly.set(localUpdateOnly);
+	public static void setLocalUpdate(boolean localUpdate) {
+		_localUpdate.set(localUpdate);
 	}
 
-	private static final ThreadLocal<Boolean> _localUpdateOnly =
+	private static final ThreadLocal<Boolean> _localUpdate =
 		new InitialThreadLocal<>(
-			InitialThreadLocal.class + "._localUpdateOnly", false);
+			InitialThreadLocal.class + "._localUpdate", false);
 
 }

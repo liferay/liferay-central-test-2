@@ -70,7 +70,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 		_reloadablePersitenceManager.reload(pid);
 
 		try {
-			ClusterThreadLocal.setLocalUpdateOnly(true);
+			ClusterThreadLocal.setLocalUpdate(true);
 
 			Configuration[] configurations =
 				_configurationAdmin.listConfigurations(sb.toString());
@@ -91,7 +91,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 			}
 		}
 		finally {
-			ClusterThreadLocal.setLocalUpdateOnly(false);
+			ClusterThreadLocal.setLocalUpdate(false);
 		}
 	}
 
