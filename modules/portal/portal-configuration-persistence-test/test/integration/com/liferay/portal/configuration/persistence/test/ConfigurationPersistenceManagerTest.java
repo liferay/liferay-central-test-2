@@ -73,48 +73,46 @@ public class ConfigurationPersistenceManagerTest {
 	@After
 	public void tearDown() throws Exception {
 		_configurationAdminServiceTracker.close();
+
 		_persistenceManagerServiceTracker.close();
 	}
 
 	@Test
-	public void testCreateAndDeleteConfiguration() throws Exception {
-		String testPid = "test.pid";
-
+	public void testExists() throws Exception {
 		Configuration configuration = _configurationAdmin.getConfiguration(
-			testPid);
+			"test.pid");
 
-		Assert.assertTrue(_persistenceManager.exists(testPid));
+		Assert.assertTrue(_persistenceManager.exists("test.pid"));
 
 		configuration.delete();
 
-		Assert.assertFalse(_persistenceManager.exists(testPid));
+		Assert.assertFalse(_persistenceManager.exists("test.pid"));
 	}
 
 	@Test
-	public void testPortalPersistenceManager() throws Exception {
+	public void testConfigurationPersistenceManager() throws Exception {
 		Assert.assertEquals(
 			ConfigurationPersistenceManager.class,
 			_persistenceManager.getClass());
 	}
 
 	@Test
-	public void testSetConfigurationProperties() throws Exception {
+	public void testGetConfiguration() throws Exception {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"test.pid");
 
-		doConfigurationChecks(configuration);
+		assertConfiguration(configuration);
 	}
 
 	@Test
-	public void testSetFactoryConfigurationProperties() throws Exception {
+	public void testCreateFactoryConfiguration() throws Exception {
 		Configuration configuration =
 			_configurationAdmin.createFactoryConfiguration("test.pid");
 
-		doConfigurationChecks(configuration);
+		assertConfiguration(configuration);
 	}
 
-	@SuppressWarnings("unchecked")
-	protected void doConfigurationChecks(Configuration configuration)
+	protected void assertConfiguration(Configuration configuration)
 		throws IOException {
 
 		String pid = configuration.getPid();
