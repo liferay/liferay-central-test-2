@@ -17,17 +17,20 @@ package com.liferay.portal.configuration.cluster;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  */
-public interface Details {
+public class ClusterThreadLocal {
 
-	public static final String CONFIGURATION_DESTINATION =
-		"liferay/configuration";
+	public static boolean isLocalUpdateOnly() {
+		return _localUpdateOnly.get();
+	}
 
-	public static final String DESTINATION_NAME = "destination.name";
+	public static void setLocalUpdateOnly(boolean localUpdateOnly) {
+		_localUpdateOnly.set(localUpdateOnly);
+	}
 
-	public static final ThreadLocal<Boolean> localUpdateOnly =
+	private static final ThreadLocal<Boolean> _localUpdateOnly =
 		new InitialThreadLocal<>(
-			Details.class.getName() + ".localUpdateOnly", Boolean.FALSE);
+			InitialThreadLocal.class + "._localUpdateOnly", false);
 
 }

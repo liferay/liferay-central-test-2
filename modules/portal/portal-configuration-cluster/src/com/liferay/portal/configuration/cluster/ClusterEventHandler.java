@@ -33,13 +33,13 @@ public class ClusterEventHandler implements SynchronousConfigurationListener {
 
 	@Override
 	public void configurationEvent(ConfigurationEvent event) {
-		if (Details.localUpdateOnly.get()) {
+		if (ClusterThreadLocal.isLocalUpdateOnly()) {
 			return;
 		}
 
 		Message message = new Message();
 
-		message.setDestinationName(Details.CONFIGURATION_DESTINATION);
+		message.setDestinationName("liferay/configuration");
 
 		String factoryPid = event.getFactoryPid();
 

@@ -23,10 +23,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true,
-	property = {
-		Details.DESTINATION_NAME + "=" + Details.CONFIGURATION_DESTINATION
-	},
+	immediate = true, property = {"destination.name=liferay/configuration"},
 	service = {ClusterDestination.class, Destination.class}
 )
 public class ClusterDestination extends ParallelDestination {

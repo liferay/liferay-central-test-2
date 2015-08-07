@@ -30,10 +30,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true,
-	property = {
-		Details.DESTINATION_NAME + "=" + Details.CONFIGURATION_DESTINATION
-	},
+	immediate = true, property = {"destination.name=liferay/configuration"},
 	service = MessageListener.class
 )
 public class ClusterMessageListener extends BaseMessageListener {
@@ -73,7 +70,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 		_reloadablePersitenceManager.reload(pid);
 
 		try {
-			Details.localUpdateOnly.set(Boolean.TRUE);
+			ClusterThreadLocal.setLocalUpdateOnly(true);
 
 			Configuration[] configurations =
 				_configurationAdmin.listConfigurations(sb.toString());
@@ -94,7 +91,7 @@ public class ClusterMessageListener extends BaseMessageListener {
 			}
 		}
 		finally {
-			Details.localUpdateOnly.set(Boolean.FALSE);
+			ClusterThreadLocal.setLocalUpdateOnly(false);
 		}
 	}
 
