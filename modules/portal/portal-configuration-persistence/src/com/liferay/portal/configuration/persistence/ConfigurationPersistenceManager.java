@@ -364,8 +364,8 @@ public class ConfigurationPersistenceManager
 
 			return _emptyDictionary;
 		}
-		catch (SQLException se) {
-			return ReflectionUtil.throwException(se);
+		catch (SQLException sqle) {
+			return ReflectionUtil.throwException(sqle);
 		}
 		finally {
 			cleanUp(connection, preparedStatement, resultSet);
