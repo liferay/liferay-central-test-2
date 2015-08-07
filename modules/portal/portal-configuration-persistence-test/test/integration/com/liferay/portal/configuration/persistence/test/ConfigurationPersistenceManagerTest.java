@@ -53,22 +53,27 @@ public class ConfigurationPersistenceManagerTest {
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
-		_configAdminTracker = new ServiceTracker<>(
+		_configurationAdminServiceTracker = new ServiceTracker<>(
 			bundleContext, ConfigurationAdmin.class, null);
-		_persistenceManagerTracker = new ServiceTracker<>(
+
+		_configurationAdminServiceTracker.open();
+
+		_configurationAdmin =
+			_configurationAdminServiceTracker.waitForService(5000);
+
+		_persistenceManagerServiceTracker = new ServiceTracker<>(
 			bundleContext, PersistenceManager.class, null);
 
-		_configAdminTracker.open();
-		_persistenceManagerTracker.open();
+		_persistenceManagerServiceTracker.open();
 
-		_configurationAdmin = _configAdminTracker.waitForService(5000);
-		_persistenceManager = _persistenceManagerTracker.waitForService(5000);
+		_persistenceManager =
+			_persistenceManagerServiceTracker.waitForService(5000);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		_configAdminTracker.close();
-		_persistenceManagerTracker.close();
+		_configurationAdminServiceTracker.close();
+		_persistenceManagerServiceTracker.close();
 	}
 
 	@Test
@@ -141,10 +146,10 @@ public class ConfigurationPersistenceManagerTest {
 	}
 
 	private ServiceTracker<ConfigurationAdmin, ConfigurationAdmin>
-		_configAdminTracker;
+		_configurationAdminServiceTracker;
 	private ConfigurationAdmin _configurationAdmin;
 	private PersistenceManager _persistenceManager;
 	private ServiceTracker<PersistenceManager, PersistenceManager>
-		_persistenceManagerTracker;
+		_persistenceManagerServiceTracker;
 
 }
