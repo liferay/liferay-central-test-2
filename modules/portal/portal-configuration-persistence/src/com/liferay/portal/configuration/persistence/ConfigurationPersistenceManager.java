@@ -67,7 +67,8 @@ import org.osgi.service.component.annotations.Reference;
 	service = {PersistenceManager.class, ReloadablePersitenceManager.class}
 )
 public class ConfigurationPersistenceManager
-	implements NotCachablePersistenceManager, ReloadablePersitenceManager {
+	implements NotCachablePersistenceManager, PersistenceManager,
+			   ReloadablePersitenceManager {
 
 	@Override
 	public void delete(final String pid) throws IOException {
