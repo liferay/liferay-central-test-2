@@ -69,12 +69,13 @@ public class DLFileEntryActivityInterpreter
 
 		StringBundler sb = new StringBundler(3);
 
-		AssetRendererFactory<?> assetRendererFactory =
+		AssetRendererFactory<FileEntry> assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				DLFileEntry.class.getName());
 
-		AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(
-			fileEntry.getFileEntryId());
+		AssetRenderer<FileEntry> assetRenderer =
+			assetRendererFactory.getAssetRenderer(
+				fileEntry.getFileEntryId());
 
 		String fileEntryLink = assetRenderer.getURLDownload(
 			serviceContext.getThemeDisplay());
