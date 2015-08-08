@@ -128,7 +128,6 @@ public class AssetRendererFactoryRegistryUtil {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private AssetRendererFactoryRegistryUtil() {
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -175,7 +174,6 @@ public class AssetRendererFactoryRegistryUtil {
 				companyId, _assetRenderFactoriesMapByClassName, false));
 	}
 
-	@SuppressWarnings("unchecked")
 	private <T> AssetRendererFactory<T> _getAssetRendererFactoryByClass(
 		Class<T> clazz) {
 
@@ -227,7 +225,6 @@ public class AssetRendererFactoryRegistryUtil {
 		return classNameIds;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void _register(AssetRendererFactory<?> assetRendererFactory) {
 		Registry registry = RegistryUtil.getRegistry();
 
