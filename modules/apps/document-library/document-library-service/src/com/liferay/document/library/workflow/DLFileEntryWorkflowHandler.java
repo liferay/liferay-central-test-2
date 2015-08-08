@@ -58,9 +58,10 @@ public class DLFileEntryWorkflowHandler
 	extends BaseWorkflowHandler<DLFileEntry> {
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public AssetRenderer getAssetRenderer(long classPK) throws PortalException {
-		AssetRendererFactory<?> assetRendererFactory =
+	public AssetRenderer<DLFileEntry> getAssetRenderer(long classPK)
+		throws PortalException {
+
+		AssetRendererFactory<DLFileEntry> assetRendererFactory =
 			getAssetRendererFactory();
 
 		if (assetRendererFactory != null) {
@@ -73,10 +74,10 @@ public class DLFileEntryWorkflowHandler
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public AssetRendererFactory getAssetRendererFactory() {
-		return AssetRendererFactoryRegistryUtil.
-			getAssetRendererFactoryByClassName(getClassName());
+	public AssetRendererFactory<DLFileEntry> getAssetRendererFactory() {
+		return (AssetRendererFactory<DLFileEntry>)
+			AssetRendererFactoryRegistryUtil.
+				getAssetRendererFactoryByClassName(getClassName());
 	}
 
 	@Override
