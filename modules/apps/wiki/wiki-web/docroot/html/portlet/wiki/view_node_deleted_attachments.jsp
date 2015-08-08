@@ -87,9 +87,9 @@ iteratorURL.setParameter("viewTrashAttachments", Boolean.TRUE.toString());
 		>
 
 			<%
-			AssetRendererFactory<FileEntry> assetRendererFactory = (AssetRendererFactory<FileEntry>)AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+			AssetRendererFactory<?> assetRendererFactory = (AssetRendererFactory<?>)AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
-			AssetRenderer<FileEntry> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+			AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
 			%>
 
 			<liferay-ui:icon
