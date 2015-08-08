@@ -113,9 +113,6 @@ public class NavigationMenuDisplayContext {
 			return _displayStyleGroupId;
 		}
 
-		_displayStyleGroupId =
-			_navigationMenuPortletInstanceConfiguration.displayStyleGroupId();
-
 		_displayStyleGroupId = ParamUtil.getLong(
 			_request, "displayStyleGroupId",
 			_navigationMenuPortletInstanceConfiguration.displayStyleGroupId());
