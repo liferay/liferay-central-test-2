@@ -81,7 +81,10 @@ public class NavigationMenuDisplayContext {
 		String displayStyle = getDisplayStyle();
 
 		if (displayStyle != null) {
-			_ddmTemplateKey = getPortletDisplayTemplate().getDDMTemplateKey(
+			PortletDisplayTemplate portletDisplayTemplate =
+				getPortletDisplayTemplate();
+
+			_ddmTemplateKey = portletDisplayTemplate.getDDMTemplateKey(
 				displayStyle);
 		}
 
@@ -118,7 +121,7 @@ public class NavigationMenuDisplayContext {
 			_navigationMenuPortletInstanceConfiguration.displayStyleGroupId());
 
 		if (_displayStyleGroupId <= 0) {
-			ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			_displayStyleGroupId = themeDisplay.getSiteGroupId();
