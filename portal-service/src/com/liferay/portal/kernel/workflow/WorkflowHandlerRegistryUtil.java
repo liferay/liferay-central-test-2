@@ -57,7 +57,6 @@ public class WorkflowHandlerRegistryUtil {
 		return _instance._getScopeableWorkflowHandlers();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> WorkflowHandler<T> getWorkflowHandler(String className) {
 		return (WorkflowHandler<T>)_instance._getWorkflowHandler(className);
 	}
@@ -76,7 +75,6 @@ public class WorkflowHandlerRegistryUtil {
 		_instance._register(workflowHandler);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
 			long classPK, T model, ServiceContext serviceContext)
@@ -195,7 +193,6 @@ public class WorkflowHandlerRegistryUtil {
 		return updatedModel;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> void startWorkflowInstance(
 			long companyId, long userId, String className, long classPK,
 			T model, ServiceContext serviceContext)
@@ -251,7 +248,6 @@ public class WorkflowHandlerRegistryUtil {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	private WorkflowHandlerRegistryUtil() {
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -297,7 +293,6 @@ public class WorkflowHandlerRegistryUtil {
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void _register(WorkflowHandler<?> workflowHandler) {
 		Registry registry = RegistryUtil.getRegistry();
 

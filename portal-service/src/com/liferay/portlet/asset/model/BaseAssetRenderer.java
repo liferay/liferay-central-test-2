@@ -67,7 +67,6 @@ public abstract class BaseAssetRenderer<T> implements AssetRenderer<T> {
 		return StringPool.BLANK;
 	}
 
-	@SuppressWarnings("unchecked")
 	public AssetRendererFactory<T> getAssetRendererFactory() {
 		if (_assetRendererFactory != null) {
 			return _assetRendererFactory;

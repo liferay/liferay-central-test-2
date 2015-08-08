@@ -285,7 +285,6 @@ public class PortletBagFactory {
 			properties);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<AssetRendererFactory<?>> newAssetRendererFactoryInstances(
 			Portlet portlet)
 		throws Exception {

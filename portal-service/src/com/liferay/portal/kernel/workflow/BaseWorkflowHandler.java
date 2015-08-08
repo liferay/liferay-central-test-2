@@ -55,7 +55,6 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class BaseWorkflowHandler<T> implements WorkflowHandler<T> {
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public AssetRenderer<T> getAssetRenderer(long classPK)
 		throws PortalException {
 
@@ -72,7 +71,6 @@ public abstract class BaseWorkflowHandler<T> implements WorkflowHandler<T> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public AssetRendererFactory<T> getAssetRendererFactory() {
 		return (AssetRendererFactory<T>)AssetRendererFactoryRegistryUtil.
 			getAssetRendererFactoryByClassName(getClassName());
