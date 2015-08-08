@@ -74,7 +74,8 @@ public class DLFileEntryActivityInterpreter
 				DLFileEntry.class.getName());
 
 		AssetRenderer<FileEntry> assetRenderer =
-			assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+			assetRendererFactory.getAssetRenderer(
+				fileEntry.getFileEntryId());
 
 		String fileEntryLink = assetRenderer.getURLDownload(
 			serviceContext.getThemeDisplay());
