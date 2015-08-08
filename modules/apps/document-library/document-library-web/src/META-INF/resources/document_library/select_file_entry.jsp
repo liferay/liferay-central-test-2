@@ -85,9 +85,9 @@ if (folder != null) {
 				rowURL = null;
 			}
 
-			AssetRendererFactory<Folder> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
+			AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
 
-			AssetRenderer<Folder> assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
+			AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 			%>
 
 			<liferay-ui:search-container-column-text
@@ -137,9 +137,9 @@ if (folder != null) {
 			>
 
 				<%
-				AssetRendererFactory<FileEntry> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+				AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
-				AssetRenderer<FileEntry> assetRenderer = assetRendererFactory.getAssetRenderer(curFile.getFileEntryId());
+				AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(curFile.getFileEntryId());
 				%>
 
 				<liferay-ui:icon iconCssClass="<%= assetRenderer.getIconCssClass() %>" label="<%= true %>" message="<%= HtmlUtil.escape(curFile.getTitle()) %>" />

@@ -87,9 +87,9 @@ iteratorURL.setParameter("messageId", String.valueOf(messageId));
 		>
 
 			<%
-			AssetRendererFactory<FileEntry> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+			AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
-			AssetRenderer<FileEntry> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+			AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
 			%>
 
 			<liferay-ui:icon

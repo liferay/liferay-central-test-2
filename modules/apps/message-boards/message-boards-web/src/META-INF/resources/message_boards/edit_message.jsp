@@ -349,9 +349,9 @@ else {
 									<aui:input id='<%= "existingPath" + (i + 1) %>' name='<%= "existingPath" + (i + 1) %>' type="hidden" value="<%= fileEntry.getFileEntryId() %>" />
 
 									<%
-									AssetRendererFactory<FileEntry> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+									AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
-									AssetRenderer<FileEntry> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+									AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
 									%>
 
 									<liferay-ui:icon
