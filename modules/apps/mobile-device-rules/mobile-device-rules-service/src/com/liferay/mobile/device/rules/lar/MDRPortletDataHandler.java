@@ -148,8 +148,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		portletDataContext.importPortletPermissions(
-			MDRConstants.SERVICE_NAME);
+		portletDataContext.importPortletPermissions(MDRConstants.SERVICE_NAME);
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "rules")) {
 			Element rulesElement = portletDataContext.getImportDataGroupElement(
