@@ -344,9 +344,9 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 										sb.append(TextFormatter.formatStorageSize(fileEntry.getSize(), locale));
 										sb.append(StringPool.CLOSE_PARENTHESIS);
 
-										AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+										AssetRendererFactory<FileEntry> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
-										AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+										AssetRenderer<FileEntry> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
 										%>
 
 										<liferay-ui:icon

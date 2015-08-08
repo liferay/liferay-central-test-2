@@ -424,9 +424,9 @@ dlSearchContainer.setResults(results);
 								>
 
 									<%
-									AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+									AssetRendererFactory<FileEntry> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
-									AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+									AssetRenderer<FileEntry> assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
 
 									PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
@@ -522,7 +522,7 @@ dlSearchContainer.setResults(results);
 								>
 
 									<%
-									AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
+									AssetRendererFactory<Folder> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
 
 									AssetRenderer<?> assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 
