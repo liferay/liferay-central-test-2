@@ -76,8 +76,8 @@ public class DLFileEntryWorkflowHandler
 	@Override
 	public AssetRendererFactory<DLFileEntry> getAssetRendererFactory() {
 		return (AssetRendererFactory<DLFileEntry>)
-			AssetRendererFactoryRegistryUtil.
-				getAssetRendererFactoryByClassName(getClassName());
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				getClassName());
 	}
 
 	@Override
