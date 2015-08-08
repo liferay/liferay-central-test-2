@@ -172,7 +172,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 
 	@Override
 	public TrashRenderer getTrashRenderer(long classPK) throws PortalException {
-		AssetRendererFactory<Folder> assetRendererFactory =
+		AssetRendererFactory<?> assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				DLFolder.class.getName());
 
