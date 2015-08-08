@@ -292,7 +292,8 @@ public class PortletBagFactory {
 		ServiceTrackerList<AssetRendererFactory<?>>
 			assetRendererFactoryInstances = getServiceTrackerList(
 				(Class<AssetRendererFactory<?>>)(Class<?>)
-					AssetRendererFactory.class, portlet);
+					AssetRendererFactory.class,
+				portlet);
 
 		for (String assetRendererFactoryClass :
 				portlet.getAssetRendererFactoryClasses()) {

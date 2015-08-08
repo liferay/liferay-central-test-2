@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Reference;
 public class MBDiscussionWorkflowHandler extends MBMessageWorkflowHandler {
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings("rawtypes")
 	public AssetRendererFactory getAssetRendererFactory() {
 		return AssetRendererFactoryRegistryUtil.
 			getAssetRendererFactoryByClassName(getClassName());
@@ -57,6 +57,7 @@ public class MBDiscussionWorkflowHandler extends MBMessageWorkflowHandler {
 		return _mbMessageLocalService;
 	}
 
+	@Override
 	@Reference(unbind = "-")
 	protected void setMBMessageLocalService(
 		MBMessageLocalService mbMessageLocalService) {
