@@ -42,10 +42,10 @@ repositories {
 	}
 }
 
-task setupPortalTools(type: Copy)
+task setUpPortalTools(type: Copy)
 task wrapper(type: Wrapper)
 
-setupPortalTools {
+setUpPortalTools {
 	from configurations.portalTools
 	into rootProject.file("../tools/sdk/tmp/portal-tools")
 
