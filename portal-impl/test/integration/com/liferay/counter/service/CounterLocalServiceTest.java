@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
@@ -39,9 +40,6 @@ import com.liferay.registry.BasicRegistryImpl;
 import com.liferay.registry.RegistryUtil;
 
 import java.io.File;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,16 +86,18 @@ public class CounterLocalServiceTest {
 		String classPath = ClassPathUtil.getJVMClassPath(true);
 
 		if (PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER.equals("hikaricp")) {
-			String jarName = PropsUtil.get(
-				PropsKeys.SETUP_LIFERAY_POOL_PROVIDER_JAR_NAME,
-				new Filter("hikaricp"));
+			StringBundler sb = new StringBundler(5);
 
-			Path path = Paths.get(PropsValues.LIFERAY_LIB_PORTAL_DIR, jarName);
+			sb.append(classPath);
+			sb.append(File.pathSeparator);
+			sb.append(PropsValues.LIFERAY_LIB_PORTAL_DIR);
+			sb.append(File.separator);
+			sb.append(
+				PropsUtil.get(
+					PropsKeys.SETUP_LIFERAY_POOL_PROVIDER_JAR_NAME,
+					new Filter("hikaricp")));
 
-			path = path.toAbsolutePath();
-
-			classPath = classPath.concat(File.pathSeparator).concat(
-				path.toString());
+			classPath = sb.toString();
 		}
 
 		Builder builder = new Builder();
