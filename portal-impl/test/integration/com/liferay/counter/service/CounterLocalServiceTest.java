@@ -83,22 +83,7 @@ public class CounterLocalServiceTest {
 
 	@Test
 	public void testConcurrentIncrement() throws Exception {
-		String classPath = ClassPathUtil.getJVMClassPath(true);
-
-		if (PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER.equals("hikaricp")) {
-			StringBundler sb = new StringBundler(5);
-
-			sb.append(classPath);
-			sb.append(File.pathSeparator);
-			sb.append(PropsValues.LIFERAY_LIB_PORTAL_DIR);
-			sb.append(File.separator);
-			sb.append(
-				PropsUtil.get(
-					PropsKeys.SETUP_LIFERAY_POOL_PROVIDER_JAR_NAME,
-					new Filter("hikaricp")));
-
-			classPath = sb.toString();
-		}
+		String classPath = _getClassPath();
 
 		Builder builder = new Builder();
 
@@ -143,6 +128,27 @@ public class CounterLocalServiceTest {
 
 			Assert.assertEquals(i + 1, id.intValue());
 		}
+	}
+
+	private String _getClassPath() {
+		String classPath = ClassPathUtil.getJVMClassPath(true);
+
+		if (PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER.equals("hikaricp")) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append(classPath);
+			sb.append(File.pathSeparator);
+			sb.append(PropsValues.LIFERAY_LIB_PORTAL_DIR);
+			sb.append(File.separator);
+			sb.append(
+				PropsUtil.get(
+					PropsKeys.SETUP_LIFERAY_POOL_PROVIDER_JAR_NAME,
+					new Filter("hikaricp")));
+
+			classPath = sb.toString();
+		}
+
+		return classPath;
 	}
 
 	private static String _COUNTER_NAME;
