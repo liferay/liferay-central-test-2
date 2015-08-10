@@ -164,24 +164,24 @@ public class NestedPortletsPortlet extends MVCPortlet {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String portletId = portletDisplay.getId();
-
 		renderRequest.setAttribute(
-			NestedPortletsConfiguration.TEMPLATE_ID + portletId, templateId);
+			NestedPortletsConfiguration.TEMPLATE_ID + portletDisplay.getId(),
+			templateId);
 		renderRequest.setAttribute(
-			NestedPortletsConfiguration.TEMPLATE_CONTENT + portletId,
+			NestedPortletsConfiguration.TEMPLATE_CONTENT +
+				portletDisplay.getId(),
 			templateContent);
 
 		Map<String, Object> vmVariables =
 			(Map<String, Object>)renderRequest.getAttribute(
-				WebKeys.VM_VARIABLES + portletId);
+				WebKeys.VM_VARIABLES + portletDisplay.getId());
 
 		if (vmVariables != null) {
 			vmVariables.putAll(columnIds);
 		}
 		else {
 			renderRequest.setAttribute(
-				WebKeys.VM_VARIABLES + portletId, columnIds);
+				WebKeys.VM_VARIABLES + portletDisplay.getId(), columnIds);
 		}
 
 		renderRequest.setAttribute(
