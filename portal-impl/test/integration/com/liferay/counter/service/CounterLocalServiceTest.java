@@ -83,7 +83,7 @@ public class CounterLocalServiceTest {
 
 	@Test
 	public void testConcurrentIncrement() throws Exception {
-		String classPath = _getClassPath();
+		String classPath = getClassPath();
 
 		Builder builder = new Builder();
 
@@ -130,7 +130,7 @@ public class CounterLocalServiceTest {
 		}
 	}
 
-	private String _getClassPath() {
+	protected String getClassPath() {
 		String classPath = ClassPathUtil.getJVMClassPath(true);
 
 		if (PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER.equals("hikaricp")) {
