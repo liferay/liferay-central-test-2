@@ -106,11 +106,8 @@ public class DLFileEntryMetadataLocalServiceTest {
 		_ddmStructure = DDMStructureLocalServiceUtil.getStructure(
 			ddmStructures.get(0).getStructureId());
 
-		Map<String,
-			com.liferay.portlet.dynamicdatamapping.storage.DDMFormValues>
-
-			ddmFormValuesMap = setUpDDMFormValuesMap(
-				_ddmStructure.getStructureKey(), user.getLocale());
+		Map<String, DDMFormValues> ddmFormValuesMap = setUpDDMFormValuesMap(
+			_ddmStructure.getStructureKey(), user.getLocale());
 
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
 			RandomTestUtil.randomBytes(
