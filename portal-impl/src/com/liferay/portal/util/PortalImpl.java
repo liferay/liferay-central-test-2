@@ -4949,7 +4949,8 @@ public class PortalImpl implements Portal {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String, long, String)}
+	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
+	 *             long, String)}
 	 */
 	@Deprecated
 	@Override
@@ -4968,7 +4969,8 @@ public class PortalImpl implements Portal {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String, long, String)}
+	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
+	 *             long, String)}
 	 */
 	@Deprecated
 	@Override
@@ -4986,7 +4988,8 @@ public class PortalImpl implements Portal {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String, long, String)}
+	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
+	 *             long, String)}
 	 */
 	@Deprecated
 	@Override
@@ -5005,7 +5008,8 @@ public class PortalImpl implements Portal {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String, long, String)}
+	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
+	 *             long, String)}
 	 */
 	@Deprecated
 	@Override
