@@ -14,19 +14,24 @@
  */
 --%>
 
-<%@ include file="/html/portlet/plugins_admin/init.jsp" %>
+<liferay-ui:tabs
+	names="portlet-plugins,theme-plugins,layout-template-plugins"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
 
-<%
-String tabs2 = ParamUtil.getString(request, "tabs2");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/plugins_admin/view");
-portletURL.setParameter("tabs2", tabs2);
-
-PortletURL marketplaceURL = null;
-
-boolean showEditPluginHREF = true;
-%>
-
-<%@ include file="/html/portlet/plugins_admin/plugins.jspf" %>
+<c:choose>
+	<c:when test='<%= tabs2.equals("theme-plugins") %>'>
+		<%@ include file="/themes.jspf" %>
+	</c:when>
+	<c:when test='<%= tabs2.equals("layout-template-plugins") %>'>
+		<%@ include file="/layout_templates.jspf" %>
+	</c:when>
+	<c:when test='<%= tabs2.equals("hook-plugins") %>'>
+	</c:when>
+	<c:when test='<%= tabs2.equals("web-plugins") %>'>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/portlets.jspf" %>
+	</c:otherwise>
+</c:choose>
