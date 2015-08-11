@@ -274,8 +274,7 @@ public class ExportImportLocalServiceImpl
 				LayoutImportBackgroundTaskExecutor.class, taskContextMap,
 				new ServiceContext());
 
-		backgroundTask.addBackgroundTaskAttachment(
-			userId, file.getName(), file);
+		backgroundTask.addAttachment(userId, file.getName(), file);
 
 		return backgroundTask.getBackgroundTaskId();
 	}
@@ -445,8 +444,7 @@ public class ExportImportLocalServiceImpl
 				PortletImportBackgroundTaskExecutor.class, taskContextMap,
 				new ServiceContext());
 
-		backgroundTask.addBackgroundTaskAttachment(
-			userId, file.getName(), file);
+		backgroundTask.addAttachment(userId, file.getName(), file);
 
 		return backgroundTask.getBackgroundTaskId();
 	}

@@ -40,25 +40,23 @@ public class BackgroundTaskImpl implements BackgroundTask {
 	}
 
 	@Override
-	public Folder addAttachmentsFolder() throws PortalException {
-		return _backgroundTask.addAttachmentsFolder();
-	}
-
-	@Override
-	public void addBackgroundTaskAttachment(
-			long userId, String fileName, File file)
+	public void addAttachment(long userId, String fileName, File file)
 		throws PortalException {
 
-		_backgroundTask.addBackgroundTaskAttachment(userId, fileName, file);
+		_backgroundTask.addAttachment(userId, fileName, file);
 	}
 
 	@Override
-	public void addBackgroundTaskAttachment(
+	public void addAttachment(
 			long userId, String fileName, InputStream inputStream)
 		throws PortalException {
 
-		_backgroundTask.addBackgroundTaskAttachment(
-			userId, fileName, inputStream);
+		_backgroundTask.addAttachment(userId, fileName, inputStream);
+	}
+
+	@Override
+	public Folder addAttachmentsFolder() throws PortalException {
+		return _backgroundTask.addAttachmentsFolder();
 	}
 
 	@Override

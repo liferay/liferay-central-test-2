@@ -32,15 +32,14 @@ import java.util.Map;
  */
 public interface BackgroundTask {
 
-	public Folder addAttachmentsFolder() throws PortalException;
-
-	public void addBackgroundTaskAttachment(
-			long userId, String fileName, File file)
+	public void addAttachment(long userId, String fileName, File file)
 		throws PortalException;
 
-	public void addBackgroundTaskAttachment(
+	public void addAttachment(
 			long userId, String fileName, InputStream inputStream)
 		throws PortalException;
+
+	public Folder addAttachmentsFolder() throws PortalException;
 
 	public List<FileEntry> getAttachmentsFileEntries() throws PortalException;
 

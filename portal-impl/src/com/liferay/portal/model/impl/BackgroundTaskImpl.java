@@ -44,6 +44,23 @@ import java.util.List;
 public class BackgroundTaskImpl extends BackgroundTaskBaseImpl {
 
 	@Override
+	public void addAttachment(long userId, String fileName, File file)
+		throws PortalException {
+
+		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
+			userId, getBackgroundTaskId(), fileName, file);
+	}
+
+	@Override
+	public void addAttachment(
+			long userId, String fileName, InputStream inputStream)
+		throws PortalException {
+
+		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
+			userId, getBackgroundTaskId(), fileName, inputStream);
+	}
+
+	@Override
 	public Folder addAttachmentsFolder() throws PortalException {
 		if (_attachmentsFolderId !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -68,24 +85,6 @@ public class BackgroundTaskImpl extends BackgroundTaskBaseImpl {
 		_attachmentsFolderId = folder.getFolderId();
 
 		return folder;
-	}
-
-	@Override
-	public void addBackgroundTaskAttachment(
-			long userId, String fileName, File file)
-		throws PortalException {
-
-		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
-			userId, getBackgroundTaskId(), fileName, file);
-	}
-
-	@Override
-	public void addBackgroundTaskAttachment(
-			long userId, String fileName, InputStream inputStream)
-		throws PortalException {
-
-		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
-			userId, getBackgroundTaskId(), fileName, inputStream);
 	}
 
 	@Override
