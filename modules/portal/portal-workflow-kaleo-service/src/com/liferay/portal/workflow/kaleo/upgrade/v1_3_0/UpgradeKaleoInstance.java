@@ -44,10 +44,10 @@ public class UpgradeKaleoInstance extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		deleteOrphanedWorkflowInstanceLinks(
 			"KaleoInstance", "className",
-			"\"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess\"");
+			"'com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess'");
 		deleteOrphanedWorkflowInstanceLinks(
 			"KaleoInstanceToken", "className",
-			"\"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess\"");
+			"'com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess'");
 		deleteOrphanedWorkflowInstanceLinks(
 			"WorkflowInstanceLink", "classNameId",
 			PortalUtil.getClassNameId(
