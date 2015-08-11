@@ -545,6 +545,7 @@ public class ResultRow
 		return _className;
 	}
 
+	@Override
 	public String getCssClass() {
 		return _cssClass;
 	}
@@ -628,6 +629,7 @@ public class ResultRow
 		_className = className;
 	}
 
+	@Override
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
