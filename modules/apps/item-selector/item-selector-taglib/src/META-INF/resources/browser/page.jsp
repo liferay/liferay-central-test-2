@@ -429,10 +429,11 @@ PortletURL uploadURL = (PortletURL)request.getAttribute("liferay-item-selector:b
 					Liferay.Util.getOpener().Liferay.fire('<%= itemSelectedEventName %>', event);
 				}
 			},
-			rootNode: '#<%= randomNamespace %>ItemSelectorContainer',
+			rootNode: '#<%= randomNamespace %>ItemSelectorContainer'
+
 			<c:if test="<%= (draggableFileReturnType != null) %>">
-			uploadItemReturnType: '<%= HtmlUtil.escapeAttribute(ClassUtil.getClassName(draggableFileReturnType)) %>',
-			uploadItemUrl: '<%= uploadURL.toString() %>'
+				, uploadItemReturnType: '<%= HtmlUtil.escapeAttribute(ClassUtil.getClassName(draggableFileReturnType)) %>',
+				uploadItemUrl: '<%= uploadURL.toString() %>'
 			</c:if>
 		}
 	);
