@@ -166,13 +166,9 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			_log.error(e, e);
 		}
 
-		tryCloseDataSource(
-			(DataSourceWrapper)PortalBeanLocatorUtil.locate(
-				"counterDataSourceWrapper"));
+		closeDataSource("counterDataSourceWrapper");
 
-		tryCloseDataSource(
-			(DataSourceWrapper)PortalBeanLocatorUtil.locate(
-				"liferayDataSourceWrapper"));
+		closeDataSource("liferayDataSourceWrapper");
 
 		try {
 			super.contextDestroyed(servletContextEvent);
@@ -395,23 +391,28 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 	}
 
-	protected void initListeners(ServletContext servletContext) {
-		if (PropsValues.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE) {
-			servletContext.addListener(
-				SerializableSessionAttributeListener.class);
-		}
-	}
+	protected void closeDataSource(String name) {
+		DataSourceWrapper dataSourceWrapper =
+			(DataSourceWrapper)PortalBeanLocatorUtil.locate(name);
 
-	protected void tryCloseDataSource(DataSourceWrapper dataSourceWrapper) {
 		DataSource dataSource = dataSourceWrapper.getWrappedDataSource();
 
 		if (dataSource instanceof Closeable) {
 			try {
-				((Closeable)dataSource).close();
+				Closeable closeable = (Closeable)dataSource;
+
+				closeable.close();
 			}
 			catch (IOException e) {
 				_log.error(e, e);
 			}
+		}
+	}
+
+	protected void initListeners(ServletContext servletContext) {
+		if (PropsValues.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE) {
+			servletContext.addListener(
+				SerializableSessionAttributeListener.class);
 		}
 	}
 
