@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.portlet.pluginsadmin.action;
+package com.liferay.pluginsadmin.web.portlet.action;
 
 import com.liferay.pluginsadmin.web.constants.PluginsAdminPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -33,13 +32,15 @@ import java.util.Arrays;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Peter Fellwock
  */
 
-@OSGiBeanProperties(
+@Component(
 	property = {
 		"javax.portlet.name=" + PluginsAdminPortletKeys.PLUGINS_ADMIN,
 		"mvc.command.name=/plugins_admin/edit_plugin"
@@ -60,9 +61,7 @@ public class EditPluginActionCommand extends BaseMVCActionCommand {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass());
 
-				sendRedirect(
-					actionRequest, actionResponse,
-					"/html/portlet/plugins_admin/error.jsp");
+				sendRedirect(actionRequest, actionResponse, "/error.jsp");
 			}
 			else {
 				throw e;
