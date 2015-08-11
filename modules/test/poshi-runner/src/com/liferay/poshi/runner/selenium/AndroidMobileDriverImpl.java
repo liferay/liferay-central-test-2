@@ -50,7 +50,7 @@ public class AndroidMobileDriverImpl extends BaseMobileDriverImpl {
 
 		Runtime runtime = Runtime.getRuntime();
 
-		StringBuilder sb = new StringBuilder(6);
+		StringBuilder sb = new StringBuilder(4);
 
 		sb.append(PropsValues.MOBILE_ANDROID_HOME);
 		sb.append("/platform-tools/");
@@ -76,7 +76,6 @@ public class AndroidMobileDriverImpl extends BaseMobileDriverImpl {
 		for (int i = 0; i < 25; i++) {
 			int viewportPositionBottom =
 				WebDriverHelper.getViewportPositionBottom(this);
-
 			int viewportPositionTop = WebDriverHelper.getScrollOffsetY(this);
 
 			StringBuilder sb = new StringBuilder(4);
@@ -86,10 +85,10 @@ public class AndroidMobileDriverImpl extends BaseMobileDriverImpl {
 
 			if (elementPositionCenterY >= viewportPositionBottom) {
 				try {
+					Runtime runtime = Runtime.getRuntime();
+
 					sb.append("adb -s emulator-5554 shell ");
 					sb.append("/data/local/swipe_up.sh");
-
-					Runtime runtime = Runtime.getRuntime();
 
 					runtime.exec(sb.toString());
 				}
@@ -99,10 +98,10 @@ public class AndroidMobileDriverImpl extends BaseMobileDriverImpl {
 			}
 			else if (elementPositionCenterY <= viewportPositionTop ) {
 				try {
+					Runtime runtime = Runtime.getRuntime();
+
 					sb.append("adb -s emulator-5554 shell ");
 					sb.append("/data/local/swipe_down.sh");
-
-					Runtime runtime = Runtime.getRuntime();
 
 					runtime.exec(sb.toString());
 				}
