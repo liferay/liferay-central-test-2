@@ -33,9 +33,9 @@ public class UpgradeKaleoInstance extends UpgradeProcess {
 		sb.append(tableName);
 		sb.append(" where ");
 		sb.append(columnName);
-		sb.append(" = '");
+		sb.append(" = ");
 		sb.append(columnValue);
-		sb.append("' and classPK not in (select recordId from DDLRecord)");
+		sb.append(" and classPK not in (select recordId from DDLRecord)");
 
 		runSQL(sb.toString());
 	}
@@ -44,10 +44,10 @@ public class UpgradeKaleoInstance extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		deleteOrphanedWorkflowInstanceLinks(
 			"KaleoInstance", "className",
-			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess");
+			"\"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess\"");
 		deleteOrphanedWorkflowInstanceLinks(
 			"KaleoInstanceToken", "className",
-			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess");
+			"\"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess\"");
 		deleteOrphanedWorkflowInstanceLinks(
 			"WorkflowInstanceLink", "classNameId",
 			PortalUtil.getClassNameId(
