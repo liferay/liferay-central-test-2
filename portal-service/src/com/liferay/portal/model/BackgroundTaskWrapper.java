@@ -177,24 +177,23 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	}
 
 	@Override
+	public void addAttachment(long userId, java.lang.String fileName,
+		java.io.File file)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_backgroundTask.addAttachment(userId, fileName, file);
+	}
+
+	@Override
+	public void addAttachment(long userId, java.lang.String fileName,
+		java.io.InputStream inputStream)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_backgroundTask.addAttachment(userId, fileName, inputStream);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.repository.model.Folder addAttachmentsFolder()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _backgroundTask.addAttachmentsFolder();
-	}
-
-	@Override
-	public void addBackgroundTaskAttachment(long userId,
-		java.lang.String fileName, java.io.File file)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_backgroundTask.addBackgroundTaskAttachment(userId, fileName, file);
-	}
-
-	@Override
-	public void addBackgroundTaskAttachment(long userId,
-		java.lang.String fileName, java.io.InputStream inputStream)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_backgroundTask.addBackgroundTaskAttachment(userId, fileName,
-			inputStream);
 	}
 
 	@Override
