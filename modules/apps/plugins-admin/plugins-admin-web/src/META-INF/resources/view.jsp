@@ -14,8 +14,19 @@
  */
 --%>
 
-<%@ include file="/html/portlet/plugins_admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
-<liferay-ui:error-header />
+<%
+String tabs2 = ParamUtil.getString(request, "tabs2");
 
-<liferay-ui:error-principal />
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/plugins_admin/view");
+portletURL.setParameter("tabs2", tabs2);
+
+PortletURL marketplaceURL = null;
+
+boolean showEditPluginHREF = true;
+%>
+
+<%@ include file="/plugins.jspf" %>

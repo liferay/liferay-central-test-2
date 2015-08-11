@@ -14,8 +14,8 @@
  */
 --%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
-<%@ page import="com.liferay.portal.util.comparator.RoleRoleIdComparator" %>
+<liferay-ui:error-header />
 
-<%@ include file="/html/portlet/plugins_admin/init-ext.jsp" %>
+<liferay-ui:error-principal />
