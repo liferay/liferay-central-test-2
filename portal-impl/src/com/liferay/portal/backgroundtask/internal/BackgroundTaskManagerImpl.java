@@ -17,8 +17,7 @@ package com.liferay.portal.backgroundtask.internal;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTask;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -28,7 +27,6 @@ import com.liferay.portlet.backgroundtask.util.comparator.BackgroundTaskCreateDa
 import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -468,18 +466,9 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 				BackgroundTaskCreateDateComparator(
 					orderByComparator.isAscending());
 		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"No comparator available to convert: " +
-						orderByComparator.getClass().getName());
-			}
-		}
 
-		return null;
+		throw new IllegalArgumentException(
+			"Invalid class " + ClassUtil.getClassName(orderByComparator));
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		BackgroundTaskManagerImpl.class);
 
 }
