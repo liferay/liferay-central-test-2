@@ -47,12 +47,12 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.addBackgroundTask(
 				userId, groupId, name, servletContextNames, taskExecutorClass,
 				taskContextMap, serviceContext);
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -80,11 +80,11 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			long backgroundTaskId, Map<String, Serializable> taskContextMap,
 			int status, ServiceContext serviceContext) {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
 				backgroundTaskId, taskContextMap, status, serviceContext);
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -93,12 +93,12 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			long backgroundTaskId, Map<String, Serializable> taskContextMap,
 			int status, String statusMessage, ServiceContext serviceContext) {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
 				backgroundTaskId, taskContextMap, status, statusMessage,
 				serviceContext);
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -119,11 +119,11 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			deleteBackgroundTask(long backgroundTaskId)
 		throws PortalException {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.deleteBackgroundTask(
 				backgroundTaskId);
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -144,15 +144,15 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 	public BackgroundTask
 		fetchBackgroundTask(long backgroundTaskId) {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
 				backgroundTaskId);
 
-		if (backgroundTaskModel == null) {
+		if (backgroundTask == null) {
 			return null;
 		}
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -161,16 +161,16 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			long groupId, String taskExecutorClassName, boolean completed,
 			OrderByComparator<BackgroundTask> orderByComparator) {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.fetchFirstBackgroundTask(
 				groupId, taskExecutorClassName, completed,
 				convert(orderByComparator));
 
-		if (backgroundTaskModel == null) {
+		if (backgroundTask == null) {
 			return null;
 		}
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -194,15 +194,15 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			String taskExecutorClassName, int status,
 			OrderByComparator<BackgroundTask> orderByComparator) {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.fetchFirstBackgroundTask(
 				taskExecutorClassName, status, convert(orderByComparator));
 
-		if (backgroundTaskModel == null) {
+		if (backgroundTask == null) {
 			return null;
 		}
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
@@ -210,40 +210,40 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 			getBackgroundTask(long backgroundTaskId)
 		throws PortalException {
 
-		com.liferay.portal.model.BackgroundTask backgroundTaskModel =
+		com.liferay.portal.model.BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.getBackgroundTask(backgroundTaskId);
 
-		return new BackgroundTaskImpl(backgroundTaskModel);
+		return new BackgroundTaskImpl(backgroundTask);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(long groupId, int status) {
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(groupId, status);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 		long groupId, String taskExecutorClassName) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, taskExecutorClassName);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 		long groupId, String taskExecutorClassName, int status) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, taskExecutorClassName, status);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
@@ -251,12 +251,12 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		long groupId, String taskExecutorClassName, int start, int end,
 		OrderByComparator<BackgroundTask> orderByComparator) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, taskExecutorClassName, start, end,
 				convert(orderByComparator));
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
@@ -264,34 +264,34 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		long groupId, String name, String taskExecutorClassName, int start,
 		int end, OrderByComparator<BackgroundTask> orderByComparator) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, name, taskExecutorClassName, start, end,
 				convert(orderByComparator));
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 		long groupId, String[] taskExecutorClassNames) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, taskExecutorClassNames);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 		long groupId, String[] taskExecutorClassNames, int status) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, taskExecutorClassNames, status);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
@@ -299,23 +299,23 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		long groupId, String[] taskExecutorClassNames, int start, int end,
 		OrderByComparator<BackgroundTask> orderByComparator) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				groupId, taskExecutorClassNames, start, end,
 				convert(orderByComparator));
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 		String taskExecutorClassName, int status) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				taskExecutorClassName, status);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
@@ -323,23 +323,23 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		String taskExecutorClassName, int status, int start, int end,
 		OrderByComparator<BackgroundTask> orderByComparator) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				taskExecutorClassName, status, start, end,
 				convert(orderByComparator));
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 		String[] taskExecutorClassNames, int status) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				taskExecutorClassNames, status);
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
@@ -347,12 +347,12 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		String[] taskExecutorClassNames, int status, int start, int end,
 		OrderByComparator<BackgroundTask> orderByComparator) {
 
-		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels =
+		List<com.liferay.portal.model.BackgroundTask> backgroundTasks =
 			BackgroundTaskLocalServiceUtil.getBackgroundTasks(
 				taskExecutorClassNames, status, start, end,
 				convert(orderByComparator));
 
-		return convert(backgroundTaskModels);
+		return convert(backgroundTasks);
 	}
 
 	@Override
@@ -432,10 +432,8 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		return new BackgroundTaskImpl(backgroundTaskModel);
 	}
 
-	protected List<BackgroundTask>
-		convert(
-			List<com.liferay.portal.model.BackgroundTask>
-				backgroundTaskModels) {
+	protected List<BackgroundTask> convert(
+		List<com.liferay.portal.model.BackgroundTask> backgroundTaskModels) {
 
 		if (backgroundTaskModels.isEmpty()) {
 			return Collections.emptyList();
