@@ -37,35 +37,28 @@ public class BaseJSONHandlerTest {
 				"/sync-web.syncdlobject/get-sync-context and method POST" +
 					"for sync-web\",\"type\":\"java.lang.RuntimeException\"}}";
 
-		String exception1 = handler.getException(response1);
-
-		Assert.assertEquals(expectedException, exception1);
+		Assert.assertEquals(expectedException, handler.getException(response1));
 
 		String response2 =
 			"{\"message\":\"No JSON web service action associated with path" +
 				"/sync-web.syncdlobject/get-sync-context and method POST for" +
 					"sync-web\",\"exception\":\"java.lang.RuntimeException\"}";
 
-		String exception2 = handler.getException(response2);
-
-		Assert.assertEquals(expectedException, exception2);
+		Assert.assertEquals(expectedException, handler.getException(response2));
 
 		String response3 =
 			"{\"exception\":\"No JSON web service action associated with path" +
 				"/sync-web.syncdlobject/get-sync-context and method POST for" +
 					"sync-web\"}";
 
-		String exception3 = handler.getException(response3);
-
-		Assert.assertEquals(expectedException, exception3);
+		Assert.assertEquals(expectedException, handler.getException(response3));
 
 		String response4 =
 			"{\"message\":\"Foo\",\"exception\":" +
 				"\"java.lang.RuntimeException\"}";
 
-		String exception4 = handler.getException(response4);
-
-		Assert.assertNotEquals(expectedException, exception4);
+		Assert.assertNotEquals(
+			expectedException, handler.getException(response4));
 	}
 
 }
