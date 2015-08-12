@@ -96,7 +96,6 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, "doActionAfterLogin");
 
 			if (doActionAfterLogin) {
-				//setForward - PETER
 				actionResponse.setRenderParameter(
 					"mvcPath", "/html/portlet/login/login_redirect.jsp");
 			}
