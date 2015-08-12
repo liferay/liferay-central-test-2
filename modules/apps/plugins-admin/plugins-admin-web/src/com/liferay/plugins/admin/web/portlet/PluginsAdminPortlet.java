@@ -26,28 +26,28 @@ import org.osgi.service.component.annotations.Component;
  */
 
 @Component(
-		immediate = true,
-		property = {
-			"com.liferay.portlet.control-panel-entry-category=apps",
-			"com.liferay.portlet.control-panel-entry-weight=4.0",
-			"com.liferay.portlet.css-class-wrapper=portlet-users-admin",
-			"com.liferay.portlet.display-category=category.hidden",
-			"com.liferay.portlet.icon=/icons/plugins_admin.png",
-			"com.liferay.portlet.preferences-owned-by-group=true",
-			"com.liferay.portlet.private-request-attributes=false",
-			"com.liferay.portlet.private-session-attributes=false",
-			"com.liferay.portlet.render-weight=50",
-			"com.liferay.portlet.struts-path=plugins_admin",
-			"com.liferay.portlet.use-default-template=true",
-			"javax.portlet.display-name=Plugins Configuration",
-			"javax.portlet.expiration-cache=0",
-			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.name=" + PluginsAdminPortletKeys.PLUGINS_ADMIN,
-			"javax.portlet.resource-bundle=content.Language",
-			"javax.portlet.security-role-ref=administrator",
-			"javax.portlet.supports.mime-type=text/html"
-		},
-		service = Portlet.class
-	)
+	immediate = true,
+	property = {
+		"com.liferay.portlet.control-panel-entry-category=apps",
+		"com.liferay.portlet.control-panel-entry-weight=4.0",
+		"com.liferay.portlet.css-class-wrapper=portlet-users-admin",
+		"com.liferay.portlet.display-category=category.hidden",
+		"com.liferay.portlet.icon=/icons/plugins_admin.png",
+		"com.liferay.portlet.preferences-owned-by-group=true",
+		"com.liferay.portlet.private-request-attributes=false",
+		"com.liferay.portlet.private-session-attributes=false",
+		"com.liferay.portlet.render-weight=50",
+		"com.liferay.portlet.struts-path=plugins_admin",
+		"com.liferay.portlet.use-default-template=true",
+		"javax.portlet.display-name=Plugins Configuration",
+		"javax.portlet.expiration-cache=0",
+		"javax.portlet.init-param.template-path=/",
+		"javax.portlet.name=" + PluginsAdminPortletKeys.PLUGINS_ADMIN,
+		"javax.portlet.resource-bundle=content.Language",
+		"javax.portlet.security-role-ref=administrator",
+		"javax.portlet.supports.mime-type=text/html"
+	},
+	service = Portlet.class
+)
 public class PluginsAdminPortlet extends MVCPortlet {
 }
