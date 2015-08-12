@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.pluginsadmin.web.application.list;
+package com.liferay.plugins.admin.web.application.list;
 
 import com.liferay.application.list.BaseControlPanelEntryPanelApp;
 import com.liferay.application.list.PanelApp;
 import com.liferay.application.list.constants.PanelCategoryKeys;
-import com.liferay.pluginsadmin.web.constants.PluginsAdminPortletKeys;
+import com.liferay.plugins.admin.web.constants.PluginsAdminPortletKeys;
 import com.liferay.portal.service.PortletLocalService;
 
 import org.osgi.service.component.annotations.Component;
