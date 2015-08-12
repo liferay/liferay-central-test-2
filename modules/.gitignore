@@ -42,9 +42,6 @@ uptodate.properties
 /*/*/*/*/test-coverage
 /*/*/*/*/test-results
 /*/*/*/*/tmp
-/*/*/*/*/*/favicon.ico
-/*/*/*/*/*/portal/aui_deprecated.css
-/*/*/*/*/*/portal/bootstrap.css
 /*/*/*/*/*/_unstyled/css/aui
 /*/*/*/*/*/_unstyled/images/aui
 /*/*/*/*/*/admin/css
@@ -68,5 +65,8 @@ uptodate.properties
 /*/*/*/*/*/control_panel/javascript
 /*/*/*/*/*/control_panel/js
 /*/*/*/*/*/control_panel/templates
+/*/*/*/*/*/favicon.ico
 /*/*/*/*/*/genesis
+/*/*/*/*/*/portal/aui_deprecated.css
+/*/*/*/*/*/portal/bootstrap.css
 /*/*/*/*/*/*/*/*/npm-debug.log
