@@ -119,14 +119,14 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 				}
 			}
 			else if (e instanceof CompanyMaxUsersException ||
-					e instanceof CookieNotSupportedException ||
-					e instanceof NoSuchUserException ||
-					e instanceof PasswordExpiredException ||
-					e instanceof UserEmailAddressException ||
-					e instanceof UserIdException ||
-					e instanceof UserLockoutException ||
-					e instanceof UserPasswordException ||
-					e instanceof UserScreenNameException) {
+					 e instanceof CookieNotSupportedException ||
+					 e instanceof NoSuchUserException ||
+					 e instanceof PasswordExpiredException ||
+					 e instanceof UserEmailAddressException ||
+					 e instanceof UserIdException ||
+					 e instanceof UserLockoutException ||
+					 e instanceof UserPasswordException ||
+					 e instanceof UserScreenNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}

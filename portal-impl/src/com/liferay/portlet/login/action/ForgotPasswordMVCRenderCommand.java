@@ -24,7 +24,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-
 /**
  * @author Peter Fellwock
  */
@@ -40,7 +39,6 @@ public class ForgotPasswordMVCRenderCommand implements MVCRenderCommand {
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
-
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);

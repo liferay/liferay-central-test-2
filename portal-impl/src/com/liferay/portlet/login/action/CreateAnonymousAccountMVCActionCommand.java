@@ -77,105 +77,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CreateAnonymousAccountMVCActionCommand
 	extends BaseMVCActionCommand {
 
-	@Override
-	protected void doProcessAction(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isStrangers()) {
-			throw new PrincipalException.MustBeEnabled(
-				company.getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS);
-		}
-
-		PortletConfig portletConfig = (PortletConfig)actionRequest.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
-
-		String portletName = portletConfig.getPortletName();
-
-		if (!portletName.equals(PortletKeys.FAST_LOGIN)) {
-			throw new PrincipalException("Unable to create anonymous account");
-		}
-
-		if (actionRequest.getRemoteUser() != null) {
-			actionResponse.sendRedirect(themeDisplay.getPathMain());
-
-			return;
-		}
-
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			actionRequest, PortletKeys.FAST_LOGIN, themeDisplay.getPlid(),
-			PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "/login/login_redirect");
-		portletURL.setParameter("emailAddress", emailAddress);
-		portletURL.setParameter("anonymousUser", Boolean.TRUE.toString());
-		portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		try {
-			if (cmd.equals(Constants.ADD)) {
-				addAnonymousUser(actionRequest, actionResponse);
-
-				sendRedirect(
-					actionRequest, actionResponse, portletURL.toString());
-			}
-			else if (cmd.equals(Constants.UPDATE)) {
-				jsonObject = updateIncompleteUser(
-					actionRequest, actionResponse);
-
-				writeJSON(actionRequest, actionResponse, jsonObject);
-			}
-		}
-		catch (Exception e) {
-			if (cmd.equals(Constants.UPDATE)) {
-				jsonObject.putException(e);
-
-				writeJSON(actionRequest, actionResponse, jsonObject);
-			}
-			else if (e instanceof CaptchaConfigurationException ||
-					e instanceof CaptchaTextException ||
-					e instanceof CompanyMaxUsersException ||
-					e instanceof ContactNameException ||
-					e instanceof EmailAddressException ||
-					e instanceof GroupFriendlyURLException ||
-					e instanceof UserEmailAddressException) {
-
-				SessionErrors.add(actionRequest, e.getClass(), e);
-			}
-			else if (e instanceof
-						UserEmailAddressException.MustNotBeDuplicate) {
-
-				User user = UserLocalServiceUtil.getUserByEmailAddress(
-					themeDisplay.getCompanyId(), emailAddress);
-
-				if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
-					SessionErrors.add(actionRequest, e.getClass());
-				}
-				else {
-					sendRedirect(
-						actionRequest, actionResponse, portletURL.toString());
-				}
-			}
-			else {
-				_log.error("Unable to create anonymous account", e);
-
-				PortalUtil.sendError(e, actionRequest, actionResponse);
-			}
-		}
-	}
-
 	protected void addAnonymousUser(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -252,6 +153,105 @@ public class CreateAnonymousAccountMVCActionCommand
 		}
 	}
 
+	@Override
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		if (!company.isStrangers()) {
+			throw new PrincipalException.MustBeEnabled(
+				company.getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS);
+		}
+
+		PortletConfig portletConfig = (PortletConfig)actionRequest.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		String portletName = portletConfig.getPortletName();
+
+		if (!portletName.equals(PortletKeys.FAST_LOGIN)) {
+			throw new PrincipalException("Unable to create anonymous account");
+		}
+
+		if (actionRequest.getRemoteUser() != null) {
+			actionResponse.sendRedirect(themeDisplay.getPathMain());
+
+			return;
+		}
+
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			actionRequest, PortletKeys.FAST_LOGIN, themeDisplay.getPlid(),
+			PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "/login/login_redirect");
+		portletURL.setParameter("emailAddress", emailAddress);
+		portletURL.setParameter("anonymousUser", Boolean.TRUE.toString());
+		portletURL.setWindowState(LiferayWindowState.POP_UP);
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		try {
+			if (cmd.equals(Constants.ADD)) {
+				addAnonymousUser(actionRequest, actionResponse);
+
+				sendRedirect(
+					actionRequest, actionResponse, portletURL.toString());
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				jsonObject = updateIncompleteUser(
+					actionRequest, actionResponse);
+
+				writeJSON(actionRequest, actionResponse, jsonObject);
+			}
+		}
+		catch (Exception e) {
+			if (cmd.equals(Constants.UPDATE)) {
+				jsonObject.putException(e);
+
+				writeJSON(actionRequest, actionResponse, jsonObject);
+			}
+			else if (e instanceof CaptchaConfigurationException ||
+					 e instanceof CaptchaTextException ||
+					 e instanceof CompanyMaxUsersException ||
+					 e instanceof ContactNameException ||
+					 e instanceof EmailAddressException ||
+					 e instanceof GroupFriendlyURLException ||
+					 e instanceof UserEmailAddressException) {
+
+				SessionErrors.add(actionRequest, e.getClass(), e);
+			}
+			else if (e instanceof
+						UserEmailAddressException.MustNotBeDuplicate) {
+
+				User user = UserLocalServiceUtil.getUserByEmailAddress(
+					themeDisplay.getCompanyId(), emailAddress);
+
+				if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
+					SessionErrors.add(actionRequest, e.getClass());
+				}
+				else {
+					sendRedirect(
+						actionRequest, actionResponse, portletURL.toString());
+				}
+			}
+			else {
+				_log.error("Unable to create anonymous account", e);
+
+				PortalUtil.sendError(e, actionRequest, actionResponse);
+			}
+		}
+	}
+
 	protected JSONObject updateIncompleteUser(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -303,14 +303,13 @@ public class CreateAnonymousAccountMVCActionCommand
 		return jsonObject;
 	}
 
-
-	private void writeJSON(ActionRequest actionRequest,
-			ActionResponse actionResponse, JSONObject jsonObject)
+	private void writeJSON(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			JSONObject jsonObject)
 		throws IOException {
 
 		JSONPortletResponseUtil.writeJSON(
 			actionRequest, actionResponse, jsonObject);
-
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

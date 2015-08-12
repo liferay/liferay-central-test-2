@@ -62,60 +62,6 @@ import javax.portlet.PortletSession;
 )
 public class ForgotPasswordMVCActionCommand extends BaseMVCActionCommand {
 
-	@Override
-	protected void doProcessAction(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
-			throw new PrincipalException.MustBeEnabled(
-				company.getCompanyId(),
-				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
-				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK);
-		}
-
-		try {
-			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
-				checkReminderQueries(actionRequest, actionResponse);
-			}
-			else {
-				checkCaptcha(actionRequest);
-
-				sendPassword(actionRequest, actionResponse);
-			}
-		}
-		catch (Exception e) {
-			if (e instanceof CaptchaConfigurationException ||
-				e instanceof CaptchaTextException ||
-				e instanceof UserEmailAddressException) {
-
-				SessionErrors.add(actionRequest, e.getClass());
-			}
-			else if (e instanceof NoSuchUserException ||
-					e instanceof RequiredReminderQueryException ||
-					e instanceof SendPasswordException ||
-					e instanceof UserActiveException ||
-					e instanceof UserLockoutException ||
-					e instanceof UserReminderQueryException) {
-
-				if (PropsValues.LOGIN_SECURE_FORGOT_PASSWORD) {
-					sendRedirect(actionRequest, actionResponse, null);
-				}
-				else {
-					SessionErrors.add(actionRequest, e.getClass(), e);
-				}
-			}
-			else {
-				PortalUtil.sendError(e, actionRequest, actionResponse);
-			}
-		}
-	}
-
 	protected void checkCaptcha(ActionRequest actionRequest)
 		throws CaptchaException {
 
@@ -166,6 +112,60 @@ public class ForgotPasswordMVCActionCommand extends BaseMVCActionCommand {
 				WebKeys.FORGOT_PASSWORD_REMINDER_ATTEMPTS, reminderAttempts);
 
 			sendPassword(actionRequest, actionResponse);
+		}
+	}
+
+	@Override
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
+			throw new PrincipalException.MustBeEnabled(
+				company.getCompanyId(),
+				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
+				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK);
+		}
+
+		try {
+			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+				checkReminderQueries(actionRequest, actionResponse);
+			}
+			else {
+				checkCaptcha(actionRequest);
+
+				sendPassword(actionRequest, actionResponse);
+			}
+		}
+		catch (Exception e) {
+			if (e instanceof CaptchaConfigurationException ||
+				e instanceof CaptchaTextException ||
+				e instanceof UserEmailAddressException) {
+
+				SessionErrors.add(actionRequest, e.getClass());
+			}
+			else if (e instanceof NoSuchUserException ||
+					 e instanceof RequiredReminderQueryException ||
+					 e instanceof SendPasswordException ||
+					 e instanceof UserActiveException ||
+					 e instanceof UserLockoutException ||
+					 e instanceof UserReminderQueryException) {
+
+				if (PropsValues.LOGIN_SECURE_FORGOT_PASSWORD) {
+					sendRedirect(actionRequest, actionResponse, null);
+				}
+				else {
+					SessionErrors.add(actionRequest, e.getClass(), e);
+				}
+			}
+			else {
+				PortalUtil.sendError(e, actionRequest, actionResponse);
+			}
 		}
 	}
 

@@ -58,7 +58,7 @@ public abstract class BaseMVCActionCommand implements MVCActionCommand {
 			throw new PortletException(e);
 		}
 	}
-	
+
 	protected void addSuccessMessage(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
 
