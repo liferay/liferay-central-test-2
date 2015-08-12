@@ -38,11 +38,11 @@ public class IconSearchEntry extends TextSearchEntry {
 
 	@Override
 	public Object clone() {
-		IconSearchEntry jspSearchEntry = new IconSearchEntry();
+		IconSearchEntry iconSearchEntry = new IconSearchEntry();
 
-		BeanPropertiesUtil.copyProperties(this, jspSearchEntry);
+		BeanPropertiesUtil.copyProperties(this, iconSearchEntry);
 
-		return jspSearchEntry;
+		return iconSearchEntry;
 	}
 
 	@Override
