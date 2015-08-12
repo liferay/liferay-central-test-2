@@ -211,14 +211,16 @@ public class CreateAnonymousAccountMVCActionCommand
 				jsonObject = updateIncompleteUser(
 					actionRequest, actionResponse);
 
-				writeJSON(actionRequest, actionResponse, jsonObject);
+				JSONPortletResponseUtil.writeJSON(
+					actionRequest, actionResponse, jsonObject);
 			}
 		}
 		catch (Exception e) {
 			if (cmd.equals(Constants.UPDATE)) {
 				jsonObject.putException(e);
 
-				writeJSON(actionRequest, actionResponse, jsonObject);
+				JSONPortletResponseUtil.writeJSON(
+					actionRequest, actionResponse, jsonObject);
 			}
 			else if (e instanceof CaptchaConfigurationException ||
 					 e instanceof CaptchaTextException ||
@@ -301,15 +303,6 @@ public class CreateAnonymousAccountMVCActionCommand
 		}
 
 		return jsonObject;
-	}
-
-	private void writeJSON(
-			ActionRequest actionRequest, ActionResponse actionResponse,
-			JSONObject jsonObject)
-		throws IOException {
-
-		JSONPortletResponseUtil.writeJSON(
-			actionRequest, actionResponse, jsonObject);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
