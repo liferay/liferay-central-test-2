@@ -143,9 +143,15 @@ cobertura.ser
 /portal-web/test-output
 /portal-web/test-results
 
+/portal-web/docroot/aui
 /portal-web/docroot/dtd
+
+/portal-web/docroot/editor/alloyeditor
+/portal-web/docroot/editor/ckeditor
+/portal-web/docroot/editor/codepress
+/portal-web/docroot/editor/tiny_mce
+
 /portal-web/docroot/favicon.ico
-/portal-web/docroot/wsrp
 
 /portal-web/docroot/html/ALLOY_ZIP
 
@@ -155,13 +161,6 @@ cobertura.ser
 /portal-web/docroot/html/css/portal/bootstrap.css
 
 /portal-web/docroot/html/icons/_sprite.*
-
-/portal-web/docroot/aui
-
-/portal-web/docroot/editor/alloyeditor
-/portal-web/docroot/editor/ckeditor
-/portal-web/docroot/editor/codepress
-/portal-web/docroot/editor/tiny_mce
 
 /portal-web/docroot/html/themes/_unstyled/css/aui
 /portal-web/docroot/html/themes/_unstyled/images/aui
@@ -195,6 +194,8 @@ cobertura.ser
 /portal-web/docroot/WEB-INF/tld/aui.tld
 /portal-web/docroot/WEB-INF/tld/ddm.tld
 /portal-web/docroot/WEB-INF/tld/liferay-*.tld
+
+/portal-web/docroot/wsrp
 
 /portal-web/test/test-portal-web-ext.properties
 
