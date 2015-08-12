@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.captcha.CaptchaException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,36 +36,35 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletSession;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Tibor Kovacs
+ * @author Peter Fellwock
  */
-public class ForgotPasswordAction extends PortletAction {
+@OSGiBeanProperties(
+	property = {
+		"javax.portlet.name=" + PortletKeys.FAST_LOGIN,
+		"javax.portlet.name=" + PortletKeys.LOGIN,
+		"mvc.command.name=/login/forgot_password"
+	}
+)
+public class ForgotPasswordMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
-	public void processAction(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -96,14 +97,14 @@ public class ForgotPasswordAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else if (e instanceof NoSuchUserException ||
-					 e instanceof RequiredReminderQueryException ||
-					 e instanceof SendPasswordException ||
-					 e instanceof UserActiveException ||
-					 e instanceof UserLockoutException ||
-					 e instanceof UserReminderQueryException) {
+					e instanceof RequiredReminderQueryException ||
+					e instanceof SendPasswordException ||
+					e instanceof UserActiveException ||
+					e instanceof UserLockoutException ||
+					e instanceof UserReminderQueryException) {
 
 				if (PropsValues.LOGIN_SECURE_FORGOT_PASSWORD) {
-					sendRedirect(actionRequest, actionResponse);
+					sendRedirect(actionRequest, actionResponse, null);
 				}
 				else {
 					SessionErrors.add(actionRequest, e.getClass(), e);
@@ -113,27 +114,6 @@ public class ForgotPasswordAction extends PortletAction {
 				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}
 		}
-	}
-
-	@Override
-	public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
-			return actionMapping.findForward("portlet.login.login");
-		}
-
-		renderResponse.setTitle(themeDisplay.translate("forgot-password"));
-
-		return actionMapping.findForward("portlet.login.forgot_password");
 	}
 
 	protected void checkCaptcha(ActionRequest actionRequest)
@@ -236,11 +216,6 @@ public class ForgotPasswordAction extends PortletAction {
 		return user;
 	}
 
-	@Override
-	protected boolean isCheckMethodOnProcessAction() {
-		return _CHECK_METHOD_ON_PROCESS_ACTION;
-	}
-
 	protected void sendPassword(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -294,9 +269,7 @@ public class ForgotPasswordAction extends PortletAction {
 			actionRequest, emailFromName, emailFromAddress, emailToAddress,
 			subject, body);
 
-		sendRedirect(actionRequest, actionResponse);
+		sendRedirect(actionRequest, actionResponse, null);
 	}
-
-	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }
