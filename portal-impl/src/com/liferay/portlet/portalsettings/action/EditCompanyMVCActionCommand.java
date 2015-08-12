@@ -28,10 +28,6 @@ import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.WebsiteURLException;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.ldap.DuplicateLDAPServerNameException;
-import com.liferay.portal.kernel.ldap.LDAPServerNameException;
-import com.liferay.portal.kernel.ldap.LDAPUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -42,7 +38,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
@@ -53,12 +48,9 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
-
-import java.io.IOException;
 
 import java.util.List;
 
@@ -258,48 +250,6 @@ public class EditCompanyMVCActionCommand extends BaseMVCActionCommand {
 			SessionErrors.add(
 				actionRequest, "ldapExportAndImportOnPasswordAutogeneration");
 		}
-	}
-
-	protected void validateLDAPServerName(
-			long ldapServerId, long companyId, UnicodeProperties properties)
-		throws Exception {
-
-		String ldapServerName = properties.getProperty(
-			"ldap.server.name." + ldapServerId);
-
-		if (Validator.isNull(ldapServerName)) {
-			throw new LDAPServerNameException();
-		}
-
-		long[] existingLDAPServerIds = StringUtil.split(
-			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
-
-		for (long existingLDAPServerId : existingLDAPServerIds) {
-			if (ldapServerId == existingLDAPServerId) {
-				continue;
-			}
-
-			String existingLDAPServerName = PrefsPropsUtil.getString(
-				companyId, "ldap.server.name." + existingLDAPServerId);
-
-			if (ldapServerName.equals(existingLDAPServerName)) {
-				throw new DuplicateLDAPServerNameException();
-			}
-		}
-	}
-
-	protected void validateSearchFilters(ActionRequest actionRequest)
-		throws Exception {
-
-		String userFilter = ParamUtil.getString(
-			actionRequest, "importUserSearchFilter");
-
-		LDAPUtil.validateFilter(userFilter, "importUserSearchFilter");
-
-		String groupFilter = ParamUtil.getString(
-			actionRequest, "importGroupSearchFilter");
-
-		LDAPUtil.validateFilter(groupFilter, "importGroupSearchFilter");
 	}
 
 	protected void validateSocialInteractions(ActionRequest actionRequest) {
