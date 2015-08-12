@@ -233,12 +233,14 @@ public class EditCompanyMVCActionCommand extends BaseMVCActionCommand {
 
 		if (Validator.isNotNull(casServiceURL) &&
 			!Validator.isUrl(casServiceURL)) {
-				SessionErrors.add(actionRequest, "casServiceURLInvalid");
+
+			SessionErrors.add(actionRequest, "casServiceURLInvalid");
 		}
 
 		if (Validator.isNotNull(casNoSuchUserRedirectURL) &&
 			!Validator.isUrl(casNoSuchUserRedirectURL)) {
-				SessionErrors.add(actionRequest, "casNoSuchUserURLInvalid");
+
+			SessionErrors.add(actionRequest, "casNoSuchUserURLInvalid");
 		}
 	}
 
