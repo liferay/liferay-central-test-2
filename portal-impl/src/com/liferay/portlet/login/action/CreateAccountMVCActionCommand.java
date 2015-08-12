@@ -97,114 +97,6 @@ import javax.servlet.http.HttpSession;
 )
 public class CreateAccountMVCActionCommand extends BaseMVCActionCommand {
 
-	@Override
-	protected void doProcessAction(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isStrangers()) {
-			throw new PrincipalException.MustBeEnabled(
-				company.getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS);
-		}
-
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		try {
-			if (cmd.equals(Constants.ADD)) {
-				if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
-					CaptchaUtil.check(actionRequest);
-				}
-
-				addUser(actionRequest, actionResponse);
-			}
-			else if (cmd.equals(Constants.RESET)) {
-				resetUser(actionRequest, actionResponse);
-			}
-			else if (cmd.equals(Constants.UPDATE)) {
-				updateIncompleteUser(actionRequest, actionResponse);
-			}
-		}
-		catch (Exception e) {
-			if (e instanceof AddressCityException ||
-				e instanceof AddressStreetException ||
-				e instanceof AddressZipException ||
-				e instanceof CaptchaConfigurationException ||
-				e instanceof CaptchaMaxChallengesException ||
-				e instanceof CaptchaTextException ||
-				e instanceof CompanyMaxUsersException ||
-				e instanceof ContactBirthdayException ||
-				e instanceof ContactNameException ||
-				e instanceof DuplicateOpenIdException ||
-				e instanceof EmailAddressException ||
-				e instanceof GroupFriendlyURLException ||
-				e instanceof NoSuchCountryException ||
-				e instanceof NoSuchListTypeException ||
-				e instanceof NoSuchOrganizationException ||
-				e instanceof NoSuchRegionException ||
-				e instanceof OrganizationParentException ||
-				e instanceof PhoneNumberException ||
-				e instanceof RequiredFieldException ||
-				e instanceof RequiredUserException ||
-				e instanceof TermsOfUseException ||
-				e instanceof UserEmailAddressException ||
-				e instanceof UserIdException ||
-				e instanceof UserPasswordException ||
-				e instanceof UserScreenNameException ||
-				e instanceof UserSmsException ||
-				e instanceof WebsiteURLException) {
-
-				SessionErrors.add(actionRequest, e.getClass(), e);
-			}
-			else if (e instanceof
-						UserEmailAddressException.MustNotBeDuplicate ||
-					e instanceof UserScreenNameException.MustNotBeDuplicate) {
-
-				String emailAddress = ParamUtil.getString(
-					actionRequest, "emailAddress");
-
-				User user = UserLocalServiceUtil.fetchUserByEmailAddress(
-					themeDisplay.getCompanyId(), emailAddress);
-
-				if ((user == null) ||
-					(user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE)) {
-
-					SessionErrors.add(actionRequest, e.getClass(), e);
-				}
-				else {
-					//sendRedirect(
-					//	actionRequest, actionResponse,
-					//	"/portlet/login/update_account.jsp");
-					actionResponse.setRenderParameter(
-						"mvcPath", "/html/portlet/login/update_account.jsp");
-				}
-			}
-			else {
-				throw e;
-			}
-		}
-
-		if (Validator.isNull(PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
-			return;
-		}
-
-		try {
-			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-				themeDisplay.getScopeGroupId(), false,
-				PropsValues.COMPANY_SECURITY_STRANGERS_URL);
-
-			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
-
-			sendRedirect(actionRequest, actionResponse, redirect);
-		}
-		catch (NoSuchLayoutException nsle) {
-		}
-	}
-
 	protected void addUser(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -317,6 +209,114 @@ public class CreateAccountMVCActionCommand extends BaseMVCActionCommand {
 		sendRedirect(
 			actionRequest, actionResponse, themeDisplay, login,
 			user.getPasswordUnencrypted());
+	}
+
+	@Override
+	protected void doProcessAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		if (!company.isStrangers()) {
+			throw new PrincipalException.MustBeEnabled(
+				company.getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS);
+		}
+
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		try {
+			if (cmd.equals(Constants.ADD)) {
+				if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
+					CaptchaUtil.check(actionRequest);
+				}
+
+				addUser(actionRequest, actionResponse);
+			}
+			else if (cmd.equals(Constants.RESET)) {
+				resetUser(actionRequest, actionResponse);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				updateIncompleteUser(actionRequest, actionResponse);
+			}
+		}
+		catch (Exception e) {
+			if (e instanceof AddressCityException ||
+				e instanceof AddressStreetException ||
+				e instanceof AddressZipException ||
+				e instanceof CaptchaConfigurationException ||
+				e instanceof CaptchaMaxChallengesException ||
+				e instanceof CaptchaTextException ||
+				e instanceof CompanyMaxUsersException ||
+				e instanceof ContactBirthdayException ||
+				e instanceof ContactNameException ||
+				e instanceof DuplicateOpenIdException ||
+				e instanceof EmailAddressException ||
+				e instanceof GroupFriendlyURLException ||
+				e instanceof NoSuchCountryException ||
+				e instanceof NoSuchListTypeException ||
+				e instanceof NoSuchOrganizationException ||
+				e instanceof NoSuchRegionException ||
+				e instanceof OrganizationParentException ||
+				e instanceof PhoneNumberException ||
+				e instanceof RequiredFieldException ||
+				e instanceof RequiredUserException ||
+				e instanceof TermsOfUseException ||
+				e instanceof UserEmailAddressException ||
+				e instanceof UserIdException ||
+				e instanceof UserPasswordException ||
+				e instanceof UserScreenNameException ||
+				e instanceof UserSmsException ||
+				e instanceof WebsiteURLException) {
+
+				SessionErrors.add(actionRequest, e.getClass(), e);
+			}
+			else if (e instanceof
+						UserEmailAddressException.MustNotBeDuplicate ||
+					 e instanceof UserScreenNameException.MustNotBeDuplicate) {
+
+				String emailAddress = ParamUtil.getString(
+					actionRequest, "emailAddress");
+
+				User user = UserLocalServiceUtil.fetchUserByEmailAddress(
+					themeDisplay.getCompanyId(), emailAddress);
+
+				if ((user == null) ||
+					(user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE)) {
+
+					SessionErrors.add(actionRequest, e.getClass(), e);
+				}
+				else {
+					//sendRedirect(
+					//	actionRequest, actionResponse,
+					//	"/portlet/login/update_account.jsp");
+					actionResponse.setRenderParameter(
+						"mvcPath", "/html/portlet/login/update_account.jsp");
+				}
+			}
+			else {
+				throw e;
+			}
+		}
+
+		if (Validator.isNull(PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
+			return;
+		}
+
+		try {
+			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+				themeDisplay.getScopeGroupId(), false,
+				PropsValues.COMPANY_SECURITY_STRANGERS_URL);
+
+			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+
+			sendRedirect(actionRequest, actionResponse, redirect);
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 	}
 
 	protected boolean isAutoScreenName() {
