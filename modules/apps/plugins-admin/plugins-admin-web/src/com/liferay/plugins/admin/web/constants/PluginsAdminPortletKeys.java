@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.pluginsadmin.web.constants;
+package com.liferay.plugins.admin.web.constants;
 
 public class PluginsAdminPortletKeys {
 

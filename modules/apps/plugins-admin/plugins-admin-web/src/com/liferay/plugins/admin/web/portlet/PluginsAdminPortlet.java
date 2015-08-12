@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.pluginsadmin.web.portlet;
+package com.liferay.plugins.admin.web.portlet;
 
-import com.liferay.pluginsadmin.web.constants.PluginsAdminPortletKeys;
+import com.liferay.plugins.admin.web.constants.PluginsAdminPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;

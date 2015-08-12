@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.pluginsadmin.web.upgrade;
+package com.liferay.plugins.admin.web.upgrade;
 
-import com.liferay.pluginsadmin.web.constants.PluginsAdminPortletKeys;
+import com.liferay.plugins.admin.web.constants.PluginsAdminPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
@@ -62,7 +62,7 @@ public class PluginsAdminWebUpgrade {
 		};
 
 		_releaseLocalService.updateRelease(
-			"com.liferay.pluginsadmin.web",
+			"com.liferay.plugins.admin.web",
 			Collections.<UpgradeProcess>singletonList(upgradePortletId), 1, 1,
 			false);
 	}
