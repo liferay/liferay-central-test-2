@@ -144,9 +144,7 @@ public class EditCompanyMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	protected void updateCompany(ActionRequest actionRequest)
-		throws IOException, PortalException {
-
+	protected void updateCompany(ActionRequest actionRequest) throws Exception {
 		long companyId = PortalUtil.getCompanyId(actionRequest);
 
 		String virtualHostname = ParamUtil.getString(
