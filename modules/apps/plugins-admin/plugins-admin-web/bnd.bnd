@@ -4,4 +4,4 @@ Bundle-Version: 1.0.0
 Include-Resource:\
 	classes,\
 	META-INF/resources=src/META-INF/resources,\
-	WEB-INF=src/WEB-INF,\
+	WEB-INF=src/WEB-INF
