@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.staging.portletdatahandler;
+package com.liferay.staging.portlet.data.handler;
 
 import com.liferay.portlet.exportimport.lar.DefaultConfigurationPortletDataHandler;
 import com.liferay.portlet.exportimport.lar.PortletDataHandler;
