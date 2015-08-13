@@ -29,9 +29,10 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCRenderCommand.class
 )
-public class AdminViewMVCRenderCommand extends BaseViewMVCRenderCommand {
+public class MessageBoardsAdminViewMVCRenderCommand
+	extends BaseViewMVCRenderCommand {
 
-	public AdminViewMVCRenderCommand() {
+	public MessageBoardsAdminViewMVCRenderCommand() {
 		super("/message_boards_admin/view.jsp");
 	}
 
