@@ -46,16 +46,6 @@
 /lib/development/ojdbc5.jar
 /lib/development/ojdbc6.jar
 /nbproject/private
-/osgi/bootstrap/classes
-/osgi/bootstrap/osgi-bootstrap.jar
-/osgi/modules/*/*.jar
-/osgi/modules/*/classes
-/osgi/modules/*/docroot/WEB-INF/classes
-/osgi/modules/*/lib/*.jar
-/osgi/modules/*/test-classes
-/osgi/modules/*/test-coverage
-/osgi/modules/*/test-results
-/osgi/modules/*/woven-classes
 /out
 /portal-client/*.iml
 /portal-client/*.ipr
