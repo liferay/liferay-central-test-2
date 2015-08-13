@@ -82,9 +82,7 @@ public class JournalArticleIndexableTest {
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		int initialEntries = 0;
-
-		assertCount(initialEntries, assetEntryQuery, searchContext);
+		assertCount(0, assetEntryQuery, searchContext);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(), RandomTestUtil.randomString(),
@@ -92,7 +90,7 @@ public class JournalArticleIndexableTest {
 
 		Assert.assertTrue(article.isIndexable());
 
-		assertCount(initialEntries + 1, assetEntryQuery, searchContext);
+		assertCount(1, assetEntryQuery, searchContext);
 	}
 
 	@Test
@@ -109,9 +107,7 @@ public class JournalArticleIndexableTest {
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		int initialEntries = 0;
-
-		assertCount(initialEntries, assetEntryQuery, searchContext);
+		assertCount(0, assetEntryQuery, searchContext);
 
 		JournalTestUtil.addArticle(
 			_group.getGroupId(),
@@ -122,7 +118,7 @@ public class JournalArticleIndexableTest {
 			true,
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
-		assertCount(initialEntries, assetEntryQuery, searchContext);
+		assertCount(0, assetEntryQuery, searchContext);
 	}
 
 	protected void assertCount(

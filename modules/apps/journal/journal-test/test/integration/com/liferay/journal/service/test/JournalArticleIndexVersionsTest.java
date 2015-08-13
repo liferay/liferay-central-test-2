@@ -89,40 +89,36 @@ public class JournalArticleIndexVersionsTest {
 
 	@Test
 	public void testDeleteAllArticleVersions() throws Exception {
-		long initialSearchCount = 0;
-
-		assertSearchCount(initialSearchCount, true);
+		assertSearchCount(0, true);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalArticle updateArticle = JournalTestUtil.updateArticle(
 			article, article.getTitleMap(), article.getContent(), true, true,
 			ServiceContextTestUtil.getServiceContext());
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalArticleLocalServiceUtil.deleteArticle(
 			_group.getGroupId(), updateArticle.getArticleId(),
 			ServiceContextTestUtil.getServiceContext());
 
-		assertSearchCount(initialSearchCount, true);
+		assertSearchCount(0, true);
 	}
 
 	@Test
 	public void testDeleteArticleVersion() throws Exception {
-		long initialSearchCount = 0;
-
-		assertSearchCount(initialSearchCount, true);
+		assertSearchCount(0, true);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext();
@@ -131,77 +127,69 @@ public class JournalArticleIndexVersionsTest {
 			article, article.getTitleMap(), article.getContent(), true, true,
 			serviceContext);
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalArticleLocalServiceUtil.deleteArticle(
 			updateArticle, updateArticle.getUrlTitle(), serviceContext);
 
-		assertSearchArticle(initialSearchCount + 1, article);
+		assertSearchArticle(1, article);
 	}
 
 	@Test
 	public void testExpireAllArticleVersions() throws Exception {
-		long initialSearchCount = 0;
+		assertSearchCount(0, true);
 
-		assertSearchCount(initialSearchCount, true);
-
-		long initialNonheadSearchCount = 0;
-
-		assertSearchCount(initialNonheadSearchCount, false);
+		assertSearchCount(0, false);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalArticle updateArticle = JournalTestUtil.updateArticle(
 			article, article.getTitleMap(), article.getContent(), true, true,
 			ServiceContextTestUtil.getServiceContext());
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalTestUtil.expireArticle(_group.getGroupId(), updateArticle);
 
-		assertSearchCount(initialSearchCount, true);
-		assertSearchCount(initialNonheadSearchCount + 1, false);
+		assertSearchCount(0, true);
+		assertSearchCount(1, false);
 	}
 
 	@Test
 	public void testExpireArticleVersion() throws Exception {
-		long initialSearchCount = 0;
-
-		assertSearchCount(initialSearchCount, true);
+		assertSearchCount(0, true);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalArticle updateArticle = JournalTestUtil.updateArticle(
 			article, article.getTitleMap(), article.getContent(), true, true,
 			ServiceContextTestUtil.getServiceContext());
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		JournalTestUtil.expireArticle(
 			_group.getGroupId(), updateArticle, updateArticle.getVersion());
 
-		assertSearchArticle(initialSearchCount + 1, article);
+		assertSearchArticle(1, article);
 	}
 
 	@Test
 	public void testIndexableArticle() throws Exception {
-		long initialSearchCount = 0;
-
-		assertSearchCount(initialSearchCount, true);
+		assertSearchCount(0, true);
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 
 		article.setIndexable(false);
 
@@ -209,7 +197,7 @@ public class JournalArticleIndexVersionsTest {
 			article, article.getTitleMap(), article.getContent(), true, true,
 			ServiceContextTestUtil.getServiceContext());
 
-		assertSearchCount(initialSearchCount, true);
+		assertSearchCount(0, true);
 
 		article.setIndexable(true);
 
@@ -217,7 +205,7 @@ public class JournalArticleIndexVersionsTest {
 			article, article.getTitleMap(), article.getContent(), true, true,
 			ServiceContextTestUtil.getServiceContext());
 
-		assertSearchCount(initialSearchCount + 1, true);
+		assertSearchCount(1, true);
 	}
 
 	protected void assertSearchArticle(
