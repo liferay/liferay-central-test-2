@@ -35,8 +35,8 @@ public class IdempotentRetryAssert {
 			TimeUnit pauseTimeUnit, Callable<T> callable)
 		throws Exception {
 
-		long deadline = System.currentTimeMillis() + timeoutTimeUnit.toMillis(
-			timeout);
+		long deadline =
+			System.currentTimeMillis() + timeoutTimeUnit.toMillis(timeout);
 
 		while (true) {
 			try {

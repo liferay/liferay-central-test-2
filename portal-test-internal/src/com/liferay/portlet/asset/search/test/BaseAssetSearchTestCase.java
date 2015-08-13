@@ -1432,15 +1432,15 @@ public abstract class BaseAssetSearchTestCase {
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		BaseModel<?>[] baseModels = new BaseModel[titles.length];
-
 		long createDate = 0;
 
-		for (int i = 0; i < titles.length; i++) {
-			long to1Second = 1000 - (System.currentTimeMillis() - createDate);
+		BaseModel<?>[] baseModels = new BaseModel[titles.length];
 
-			if (to1Second > 0) {
-				Thread.sleep(to1Second);
+		for (int i = 0; i < titles.length; i++) {
+			long delta = 1000 - (System.currentTimeMillis() - createDate);
+
+			if (delta > 0) {
+				Thread.sleep(delta);
 			}
 
 			createDate = System.currentTimeMillis();
