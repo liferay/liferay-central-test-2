@@ -158,7 +158,8 @@ public class ModuleApplicationContextRegistrator {
 			_logger.log(
 				Logger.LOG_ERROR,
 				"Unable to refresh " + applicationContext.getDisplayName() +
-					". This may cause memory leaks on multiple redeployments.");
+					". This may result in memory leaks on multiple " +
+						"redeployments.");
 		}
 	}
 
