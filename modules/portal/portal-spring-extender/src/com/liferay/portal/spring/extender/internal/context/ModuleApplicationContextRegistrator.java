@@ -81,9 +81,7 @@ public class ModuleApplicationContextRegistrator {
 		catch (Exception e) {
 			_logger.log(
 				Logger.LOG_ERROR,
-				"Unexpected error while starting: " +
-					_extendeeBundle.getSymbolicName(),
-				e);
+				"Unable to start " + _extendeeBundle.getSymbolicName(), e);
 
 			throw e;
 		}
@@ -159,9 +157,8 @@ public class ModuleApplicationContextRegistrator {
 		catch (Exception e) {
 			_logger.log(
 				Logger.LOG_ERROR,
-				"Unexpected error while refreshing " +
-					applicationContext.getDisplayName() + " may cause memory " +
-						"leaks on multiple redeployments");
+				"Unable to refresh " + applicationContext.getDisplayName() +
+					". This may cause memory leaks on multiple redeployments.");
 		}
 	}
 
