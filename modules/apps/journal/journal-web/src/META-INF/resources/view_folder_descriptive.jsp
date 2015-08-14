@@ -52,6 +52,6 @@ rowURL.setParameter("folderId", String.valueOf(folder.getFolderId()));
 	thumbnailSrc='<%= themeDisplay.getPathThemeImages() + "/file_system/large/" + folderImage + ".png" %>'
 	thumbnailStyle="max-height: 128px; max-width: 128px;"
 	title="<%= HtmlUtil.escape(folder.getName()) %>"
-	url="<%= rowURL != null ? rowURL.toString() : null %>"
+	url="<%= (rowURL != null) ? rowURL.toString() : null %>"
 	view="lexicon"
 />

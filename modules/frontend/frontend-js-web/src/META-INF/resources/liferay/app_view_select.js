@@ -43,10 +43,6 @@ AUI.add(
 						validator: Array.isArray
 					},
 
-					toggleSelector: {
-						validator: Lang.isString
-					},
-
 					displayStyle: {
 						validator: Lang.isString
 					},
@@ -69,6 +65,10 @@ AUI.add(
 					},
 
 					selector: {
+						validator: Lang.isString
+					},
+
+					toggleSelector: {
 						validator: Lang.isString
 					}
 				},
