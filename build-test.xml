@@ -117,18 +117,19 @@
 			<get-database-property property.name="database.username" />
 
 			<echo file="@{properties.file}"><![CDATA[liferay.home=${project.dir}
+
 jdbc.default.driverClassName=${database.driver}
 jdbc.default.url=${database.url}
 jdbc.default.username=${database.username}
 jdbc.default.password=${database.password}
 
-counter.jdbc.prefix=jdbc.counter.
+jdbc.default.maximumPoolSize=20
+jdbc.default.minimumIdle=0
 
 jdbc.counter.maximumPoolSize=5
 jdbc.counter.minimumIdle=0
 
-jdbc.default.maximumPoolSize=20
-jdbc.default.minimumIdle=0]]></echo>
+counter.jdbc.prefix=jdbc.counter.]]></echo>
 
 			<post-action />
 		</sequential>
