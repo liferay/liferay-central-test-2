@@ -6127,6 +6127,9 @@ public class JournalArticleLocalServiceImpl
 			displayDate, WorkflowConstants.STATUS_SCHEDULED);
 
 		for (JournalArticle article : articles) {
+			long userId = PortalUtil.getValidUserId(
+				article.getCompanyId(), article.getUserId());
+
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setCommand(Constants.UPDATE);
@@ -6137,9 +6140,6 @@ public class JournalArticleLocalServiceImpl
 			serviceContext.setLayoutFullURL(layoutFullURL);
 
 			serviceContext.setScopeGroupId(article.getGroupId());
-
-			long userId = PortalUtil.getValidUserId(
-				article.getCompanyId(), article.getUserId());
 
 			journalArticleLocalService.updateStatus(
 				userId, article, WorkflowConstants.STATUS_APPROVED, null,
