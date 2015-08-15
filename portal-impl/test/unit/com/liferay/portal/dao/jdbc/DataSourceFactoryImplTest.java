@@ -64,8 +64,8 @@ public class DataSourceFactoryImplTest {
 	@BeforeClass
 	public static void setUpClass() throws IOException {
 
-		// Run before testing jvm starts to ensure the dynamic download actually
-		// happens during the test run.
+		// Run before the test JVM starts to ensure the dynamic download
+		// actually happens during the test run
 
 		PropsUtil.setProps(new PropsImpl());
 
