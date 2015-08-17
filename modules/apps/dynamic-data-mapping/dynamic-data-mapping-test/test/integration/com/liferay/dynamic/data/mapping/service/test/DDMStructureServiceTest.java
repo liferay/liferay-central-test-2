@@ -240,7 +240,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testGetChildDDMFormAfterParentUpdate() throws Exception {
+	public void testGetFullHierarchyDDMFormFieldsMap() throws Exception {
 		DDMForm parentDDMForm = DDMFormTestUtil.createDDMForm();
 
 		DDMFormField nameDDMFormField = DDMFormTestUtil.createTextDDMFormField(
@@ -278,7 +278,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 		Assert.assertTrue(
 			childFullHierarchyDDMFormFieldsMap.containsKey("Description"));
 
-		// Update parent DDMForm to have just the Name field
+		// Update parent DDM form to have just the Name field
 
 		DDMForm parentDDMFormUpdated = DDMFormTestUtil.createDDMForm();
 
@@ -288,7 +288,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 
 		DDMStructureLocalServiceUtil.updateDDMStructure(parentStructure);
 
-		// Assert the child DDMForm have the full hierarchy updated
+		// Assert that the child DDM form has the full hierarchy updated
 
 		childStructure = DDMStructureLocalServiceUtil.getStructure(
 			childStructure.getStructureId());
