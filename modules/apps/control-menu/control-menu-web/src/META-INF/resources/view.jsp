@@ -40,6 +40,7 @@ if (user.isSetupComplete() || themeDisplay.isImpersonated()) {
 <c:if test="<%= !layout.isTypeControlPanel() && !group.isControlPanel() && userSetupComplete %>">
 	<div class="control-menu">
 		<div class="control-menu-level-2"></div>
+
 		<div class="control-menu-level-1">
 			<div class="container-fluid-1280">
 				<ul class="control-menu-nav" data-namespace="<portlet:namespace />" id="<portlet:namespace />controlMenu">
