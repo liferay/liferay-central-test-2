@@ -193,7 +193,7 @@ public class CXFEndpointPublisher {
 				"authVerifierProperties");
 
 			if (authVerifierPropertiesObject != null) {
-				String[] authVerifierProperties =
+				String[] authVerifierPropertiesArray =
 					(String[])authVerifierPropertiesObject;
 
 				properties = new Hashtable<>();
@@ -208,7 +208,9 @@ public class CXFEndpointPublisher {
 					HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_SERVLET,
 					"CXFServlet");
 
-				for (String authVerifierProperty : authVerifierProperties) {
+				for (String authVerifierProperty :
+						authVerifierPropertiesArray) {
+
 					String[] authVerifierPropertyParts =
 						authVerifierProperty.split("=");
 
