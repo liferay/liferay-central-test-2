@@ -36,7 +36,7 @@ import java.util.Enumeration;
  * @author Sergio González
  * @author Iván Zaera
  */
-public class UpgradePortletSettings extends UpgradeProcess {
+public abstract class UpgradePortletSettings extends UpgradeProcess {
 
 	public UpgradePortletSettings() {
 		_settingsFactory = SettingsFactoryUtil.getSettingsFactory();
@@ -128,10 +128,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		finally {
 			DataAccess.deepCleanUp(rs);
 		}
-	}
-
-	@Override
-	protected void doUpgrade() throws Exception {
 	}
 
 	protected long getGroupId(long plid) throws Exception {
