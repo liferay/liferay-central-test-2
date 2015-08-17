@@ -50,7 +50,6 @@ public class ShoppingWebUpgrade {
 		List<UpgradeProcess> upgradeProcesses = new ArrayList<>();
 
 		upgradeProcesses.add(new UpgradeAdminPortlets());
-		//upgradeProcesses.add(new UpgradePortletPreferences());
 
 		_releaseLocalService.updateRelease(
 			"com.liferay.shopping.web", upgradeProcesses, 1, 1, false);
