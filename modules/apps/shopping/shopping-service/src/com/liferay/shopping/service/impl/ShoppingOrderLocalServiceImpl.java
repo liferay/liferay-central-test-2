@@ -139,7 +139,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		shoppingOrderPersistence.update(order);
 
-		// Comments
+		// Comment
 
 		if (PropsValues.SHOPPING_ORDER_COMMENTS_ENABLED) {
 			CommentManagerUtil.addDiscussion(
@@ -254,7 +254,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		shoppingOrderItemPersistence.removeByOrderId(order.getOrderId());
 
-		// Comments
+		// Comment
 
 		CommentManagerUtil.deleteDiscussion(
 			ShoppingOrder.class.getName(), order.getOrderId());
