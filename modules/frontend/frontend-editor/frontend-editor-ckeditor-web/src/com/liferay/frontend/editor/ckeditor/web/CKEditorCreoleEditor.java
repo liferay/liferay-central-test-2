@@ -38,7 +38,7 @@ public class CKEditorCreoleEditor implements Editor {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_CKEDITOR;
+		return PortalWebResourceConstants.RESOURCE_TYPE_EDITOR_CKEDITOR;
 	}
 
 }
