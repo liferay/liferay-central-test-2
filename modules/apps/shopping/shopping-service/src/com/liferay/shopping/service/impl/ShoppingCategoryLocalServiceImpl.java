@@ -36,8 +36,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 @OSGiBeanProperties(
-		property = {"model.class.name=com.liferay.shopping.model.ShoppingItem"}
-	)
+	property = {"model.class.name=com.liferay.shopping.model.ShoppingItem"}
+)
 public class ShoppingCategoryLocalServiceImpl
 	extends ShoppingCategoryLocalServiceBaseImpl {
 
@@ -52,6 +52,7 @@ public class ShoppingCategoryLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
+		Date now = new Date();
 
 		validate(name);
 
@@ -59,8 +60,6 @@ public class ShoppingCategoryLocalServiceImpl
 
 		ShoppingCategory category = shoppingCategoryPersistence.create(
 			categoryId);
-
-		Date now = new Date();
 
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
