@@ -1009,9 +1009,9 @@ public class LayoutStagedModelDataHandler
 
 			if (importedLinkedLayout == null) {
 				throw new NoSuchLayoutException(
-					"Layout with id " + linkToLayoutId +
-						" that is linked from " + layout.getLayoutId() +
-						" does not exists.");
+					"Layout with layout id " + linkToLayoutId +
+						" that is linked from layout with layout id " +
+							layout.getLayoutId() + " does not exist");
 			}
 
 			typeSettingsProperties.setProperty(
