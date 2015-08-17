@@ -11,8 +11,6 @@
 		<portlet id="187" />
 		<portlet id="188" />
 	</category>
-	<category name="category.entertainment" />
-	<category name="category.finance" />
 	<category name="category.hidden">
 		<portlet id="9" />
 		<portlet id="104" />
@@ -31,7 +29,6 @@
 	<category name="category.sample">
 		<portlet id="47" />
 	</category>
-	<category name="category.social" />
 	<category name="category.tools">
 		<portlet id="58" />
 		<portlet id="98" />
