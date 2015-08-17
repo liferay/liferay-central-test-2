@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.shopping.upgrade.v1_0_0.UpgradeClassNames;
 import com.liferay.shopping.upgrade.v1_0_0.UpgradePortletId;
+import com.liferay.shopping.upgrade.v1_0_0.UpgradeShopping;
+import com.liferay.shopping.upgrade.v1_0_0.UpgradeShoppingPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +55,7 @@ public class ShoppingServiceUpgrade {
 		upgradeProcesses.add(new UpgradePortletId());
 
 		upgradeProcesses.add(new UpgradeClassNames());
-
 		upgradeProcesses.add(new UpgradeShopping());
-
 		upgradeProcesses.add(new UpgradeShoppingPreferences());
 
 		_releaseLocalService.updateRelease(
