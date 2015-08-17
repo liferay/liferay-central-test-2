@@ -38,7 +38,7 @@ public class TinyMCESimpleEditor implements Editor {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_TINYMCEEDITOR;
+		return PortalWebResourceConstants.RESOURCE_TYPE_EDITOR_TINYMCEEDITOR;
 	}
 
 }

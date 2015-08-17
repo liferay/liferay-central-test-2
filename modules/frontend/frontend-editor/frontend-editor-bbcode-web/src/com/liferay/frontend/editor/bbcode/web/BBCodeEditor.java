@@ -38,7 +38,7 @@ public class BBCodeEditor implements Editor {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_BBCODEEDITOR;
+		return PortalWebResourceConstants.RESOURCE_TYPE_EDITOR_BBCODEEDITOR;
 	}
 
 }

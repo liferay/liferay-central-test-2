@@ -38,7 +38,7 @@ public class AlloyEditorEditor implements Editor {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_ALLOYEDITOR;
+		return PortalWebResourceConstants.RESOURCE_TYPE_EDITOR_ALLOYEDITOR;
 	}
 
 }

@@ -38,7 +38,7 @@ public class SimpleEditor implements Editor {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_SIMPLEEDITOR;
+		return PortalWebResourceConstants.RESOURCE_TYPE_EDITOR_SIMPLEEDITOR;
 	}
 
 }
