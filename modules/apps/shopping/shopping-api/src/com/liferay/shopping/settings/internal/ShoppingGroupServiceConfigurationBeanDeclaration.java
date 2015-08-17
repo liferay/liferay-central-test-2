@@ -27,7 +27,7 @@ public class ShoppingGroupServiceConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
 	@Override
-	public Class getConfigurationBeanClass() {
+	public Class<?> getConfigurationBeanClass() {
 		return ShoppingGroupServiceConfiguration.class;
 	}
 
