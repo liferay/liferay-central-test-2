@@ -1628,9 +1628,6 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"shopping.tax.rate", "tax.rate", "com.liferay.shopping.service"
 		},
-		new String[] {
-			"shopping.tax.state", "tax.state", "com.liferay.shopping.service"
-		},
 
 		// Scripting
 
