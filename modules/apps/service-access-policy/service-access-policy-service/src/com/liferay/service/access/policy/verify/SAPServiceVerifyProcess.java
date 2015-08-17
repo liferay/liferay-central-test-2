@@ -30,8 +30,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Mika Koivisto
  */
-@Component(immediate = true, service = SAPVerifyProcess.class)
-public class SAPVerifyProcess extends VerifyProcess {
+@Component(immediate = true, service = SAPServiceVerifyProcess.class)
+public class SAPServiceVerifyProcess extends VerifyProcess {
 
 	@Activate
 	@Override
@@ -65,7 +65,7 @@ public class SAPVerifyProcess extends VerifyProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SAPVerifyProcess.class);
+		SAPServiceVerifyProcess.class);
 
 	private SAPEntryLocalService _sapEntryLocalService;
 
