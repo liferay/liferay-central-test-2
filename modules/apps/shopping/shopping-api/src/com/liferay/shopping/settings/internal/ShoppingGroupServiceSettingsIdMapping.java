@@ -28,7 +28,7 @@ public class ShoppingGroupServiceSettingsIdMapping
 	implements SettingsIdMapping {
 
 	@Override
-	public Class getConfigurationBeanClass() {
+	public Class<?> getConfigurationBeanClass() {
 		return ShoppingGroupServiceConfiguration.class;
 	}
 
