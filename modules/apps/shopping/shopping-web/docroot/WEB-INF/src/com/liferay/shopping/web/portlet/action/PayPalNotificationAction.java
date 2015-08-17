@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.shopping.web.action;
+package com.liferay.shopping.web.portlet.action;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;

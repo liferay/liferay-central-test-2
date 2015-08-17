@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.shopping.web.action;
+package com.liferay.shopping.web.portlet.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
