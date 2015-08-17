@@ -302,7 +302,7 @@ public class ShoppingOrderLocalServiceImpl
 		Map<ShoppingCartItem, Integer> items = cart.getItems();
 
 		ShoppingGroupServiceSettings shoppingGroupServiceSettings =
-			getShoppingGroupServiceSettings(cart.getGroupId());
+			_getShoppingGroupServiceSettings(cart.getGroupId());
 
 		if (!ShoppingUtil.meetsMinOrder(shoppingGroupServiceSettings, items)) {
 			throw new CartMinOrderException();
@@ -418,7 +418,7 @@ public class ShoppingOrderLocalServiceImpl
 		throws PortalException {
 
 		ShoppingGroupServiceSettings shoppingGroupServiceSettings =
-			getShoppingGroupServiceSettings(order.getGroupId());
+			_getShoppingGroupServiceSettings(order.getGroupId());
 
 		if (emailType.equals("confirmation") &&
 			shoppingGroupServiceSettings.isEmailOrderConfirmationEnabled()) {
@@ -510,7 +510,7 @@ public class ShoppingOrderLocalServiceImpl
 			orderId);
 
 		ShoppingGroupServiceSettings shoppingGroupServiceSettings =
-			getShoppingGroupServiceSettings(order.getGroupId());
+			_getShoppingGroupServiceSettings(order.getGroupId());
 
 		validate(
 			shoppingGroupServiceSettings, billingFirstName, billingLastName,
@@ -762,8 +762,9 @@ public class ShoppingOrderLocalServiceImpl
 		}
 	}
 
-	private static ShoppingGroupServiceSettings
-		getShoppingGroupServiceSettings(long groupId) throws SettingsException {
+	private ShoppingGroupServiceSettings _getShoppingGroupServiceSettings(
+			long groupId)
+		throws SettingsException {
 
 		ShoppingServiceComponentProvider shoppingServiceComponentProvider =
 			ShoppingServiceComponentProvider.
