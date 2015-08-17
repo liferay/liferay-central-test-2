@@ -1529,10 +1529,6 @@ public class VerifyProperties extends VerifyProcess {
 		// Shopping
 
 		new String[] {
-			"shopping.credit.card.types", "credit.card.types",
-			"com.liferay.shopping.service"
-		},
-		new String[] {
 			"shopping.cart.min.qty.multiple", "cart.min.qty.multiple",
 			"com.liferay.shopping.service"
 		},
@@ -1543,6 +1539,10 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"shopping.category.show.special.items",
 			"category.show.special.items", "com.liferay.shopping.service"
+		},
+		new String[] {
+			"shopping.credit.card.types", "credit.card.types",
+			"com.liferay.shopping.service"
 		},
 		new String[] {
 			"shopping.currency.id", "currency.id",
