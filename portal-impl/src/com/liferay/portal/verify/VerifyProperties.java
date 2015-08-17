@@ -372,11 +372,11 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.asset.publisher.web"
 		},
 		new String[] {
-			"asset.publisher.email.from.name", "email.from.name",
+			"asset.publisher.email.from.address", "email.from.address",
 			"com.liferay.asset.publisher.web"
 		},
 		new String[] {
-			"asset.publisher.email.from.address", "email.from.address",
+			"asset.publisher.email.from.name", "email.from.name",
 			"com.liferay.asset.publisher.web"
 		},
 		new String[] {
@@ -998,11 +998,11 @@ public class VerifyProperties extends VerifyProcess {
 			"journal.display.views", "display.views", "com.liferay.journal.web"
 		},
 		new String[] {
-			"journal.email.from.name", "email.from.name",
+			"journal.email.from.address", "email.from.address",
 			"com.liferay.journal.service"
 		},
 		new String[] {
-			"journal.email.from.address", "email.from.address",
+			"journal.email.from.name", "email.from.name",
 			"com.liferay.journal.service"
 		},
 		new String[] {
@@ -1549,11 +1549,11 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.shopping.service"
 		},
 		new String[] {
-			"shopping.email.from.name", "email.from.name",
+			"shopping.email.from.address", "email.from.address",
 			"com.liferay.shopping.service"
 		},
 		new String[] {
-			"shopping.email.from.address", "email.from.address",
+			"shopping.email.from.name", "email.from.name",
 			"com.liferay.shopping.service"
 		},
 		new String[] {
