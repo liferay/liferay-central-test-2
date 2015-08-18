@@ -1,6 +1,5 @@
 @import "mixins";
 
-
 body.open,
 body.sidenav-transition {
 	@include sm() {
