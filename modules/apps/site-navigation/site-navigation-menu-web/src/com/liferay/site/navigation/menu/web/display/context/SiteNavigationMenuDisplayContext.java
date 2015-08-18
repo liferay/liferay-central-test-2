@@ -24,32 +24,32 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.display.template.PortletDisplayTemplate;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
-import com.liferay.site.navigation.menu.web.configuration.NavigationMenuPortletInstanceConfiguration;
-import com.liferay.site.navigation.menu.web.configuration.NavigationMenuWebConfiguration;
+import com.liferay.site.navigation.menu.web.configuration.SiteNavigationMenuPortletInstanceConfiguration;
+import com.liferay.site.navigation.menu.web.configuration.SiteNavigationMenuWebConfiguration;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Juergen Kappler
  */
-public class NavigationMenuDisplayContext {
+public class SiteNavigationMenuDisplayContext {
 
-	public NavigationMenuDisplayContext(
+	public SiteNavigationMenuDisplayContext(
 			HttpServletRequest request,
-			NavigationMenuWebConfiguration navigationMenuWebConfiguration)
+			SiteNavigationMenuWebConfiguration navigationMenuWebConfiguration)
 		throws SettingsException {
 
 		_request = request;
-		_navigationMenuWebConfiguration = navigationMenuWebConfiguration;
+		_siteNavigationMenuWebConfiguration = navigationMenuWebConfiguration;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		_navigationMenuPortletInstanceConfiguration =
+		_siteNavigationMenuPortletInstanceConfiguration =
 			portletDisplay.getPortletInstanceConfiguration(
-				NavigationMenuPortletInstanceConfiguration.class);
+				SiteNavigationMenuPortletInstanceConfiguration.class);
 	}
 
 	public String getBulletStyle() {
@@ -59,7 +59,7 @@ public class NavigationMenuDisplayContext {
 
 		_bulletStyle = ParamUtil.getString(
 			_request, "bulletStyle",
-			_navigationMenuPortletInstanceConfiguration.bulletStyle());
+			_siteNavigationMenuPortletInstanceConfiguration.bulletStyle());
 
 		if (Validator.isNull(_bulletStyle)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
@@ -67,7 +67,7 @@ public class NavigationMenuDisplayContext {
 
 			_bulletStyle = GetterUtil.getString(
 				themeDisplay.getThemeSetting("bullet-style"),
-				_navigationMenuWebConfiguration.defaultBulletStyle());
+				_siteNavigationMenuWebConfiguration.defaultBulletStyle());
 		}
 
 		return _bulletStyle;
@@ -98,11 +98,11 @@ public class NavigationMenuDisplayContext {
 
 		_displayStyle = ParamUtil.getString(
 			_request, "displayStyle",
-			_navigationMenuPortletInstanceConfiguration.displayStyle());
+			_siteNavigationMenuPortletInstanceConfiguration.displayStyle());
 
 		if (Validator.isNull(_displayStyle )) {
 			_displayStyle =
-				_navigationMenuWebConfiguration.defaultDisplayStyle();
+				_siteNavigationMenuWebConfiguration.defaultDisplayStyle();
 		}
 
 		return _displayStyle;
@@ -115,7 +115,8 @@ public class NavigationMenuDisplayContext {
 
 		_displayStyleGroupId = ParamUtil.getLong(
 			_request, "displayStyleGroupId",
-			_navigationMenuPortletInstanceConfiguration.displayStyleGroupId());
+			_siteNavigationMenuPortletInstanceConfiguration.
+				displayStyleGroupId());
 
 		if (_displayStyleGroupId <= 0) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
@@ -134,7 +135,7 @@ public class NavigationMenuDisplayContext {
 
 		_headerType = ParamUtil.getString(
 			_request, "headerType",
-			_navigationMenuPortletInstanceConfiguration.headerType());
+			_siteNavigationMenuPortletInstanceConfiguration.headerType());
 
 		return _headerType;
 	}
@@ -146,7 +147,7 @@ public class NavigationMenuDisplayContext {
 
 		_includedLayouts = ParamUtil.getString(
 			_request, "includedLayouts",
-			_navigationMenuPortletInstanceConfiguration.includedLayouts());
+			_siteNavigationMenuPortletInstanceConfiguration.includedLayouts());
 
 		return _includedLayouts;
 	}
@@ -158,7 +159,7 @@ public class NavigationMenuDisplayContext {
 
 		_rootLayoutLevel = ParamUtil.getInteger(
 			_request, "rootLayoutLevel",
-			_navigationMenuPortletInstanceConfiguration.rootLayoutLevel());
+			_siteNavigationMenuPortletInstanceConfiguration.rootLayoutLevel());
 
 		return _rootLayoutLevel;
 	}
@@ -170,7 +171,7 @@ public class NavigationMenuDisplayContext {
 
 		_rootLayoutType = ParamUtil.getString(
 			_request, "rootLayoutType",
-			_navigationMenuPortletInstanceConfiguration.rootLayoutType());
+			_siteNavigationMenuPortletInstanceConfiguration.rootLayoutType());
 
 		return _rootLayoutType;
 	}
@@ -182,7 +183,7 @@ public class NavigationMenuDisplayContext {
 
 		_nestedChildren = ParamUtil.getBoolean(
 			_request, "nestedChildren",
-			_navigationMenuPortletInstanceConfiguration.nestedChildren());
+			_siteNavigationMenuPortletInstanceConfiguration.nestedChildren());
 
 		return _nestedChildren;
 	}
@@ -194,7 +195,7 @@ public class NavigationMenuDisplayContext {
 
 		_preview = ParamUtil.getBoolean(
 			_request, "preview",
-			_navigationMenuPortletInstanceConfiguration.preview());
+			_siteNavigationMenuPortletInstanceConfiguration.preview());
 
 		return _preview;
 	}
@@ -211,14 +212,14 @@ public class NavigationMenuDisplayContext {
 	private long _displayStyleGroupId;
 	private String _headerType;
 	private String _includedLayouts;
-	private final NavigationMenuPortletInstanceConfiguration
-		_navigationMenuPortletInstanceConfiguration;
-	private final NavigationMenuWebConfiguration
-		_navigationMenuWebConfiguration;
 	private Boolean _nestedChildren;
 	private Boolean _preview;
 	private final HttpServletRequest _request;
 	private Integer _rootLayoutLevel;
 	private String _rootLayoutType;
+	private final SiteNavigationMenuPortletInstanceConfiguration
+		_siteNavigationMenuPortletInstanceConfiguration;
+	private final SiteNavigationMenuWebConfiguration
+		_siteNavigationMenuWebConfiguration;
 
 }
