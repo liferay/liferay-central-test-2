@@ -205,6 +205,7 @@ public class PoshiRunnerPlugin implements Plugin<Project> {
 		};
 
 		copy.from(closure);
+
 		copy.into(getExpandedPoshiRunnerDir(project));
 	}
 
