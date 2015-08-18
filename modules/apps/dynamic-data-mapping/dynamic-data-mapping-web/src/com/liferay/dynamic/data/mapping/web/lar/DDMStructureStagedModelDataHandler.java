@@ -348,17 +348,16 @@ public class DDMStructureStagedModelDataHandler
 	protected boolean isModifiedStructure(
 		DDMStructure existingStructure, DDMStructure structure) {
 
-		// Most likely the modified date alone can decide if it's modified
+		// Check modified date first
 
-		if (DateUtil.compareTo(
-				existingStructure.getModifiedDate(),
-				structure.getModifiedDate()) < 0) {
+		if value = DateUtil.compareTo(
+			existingStructure.getModifiedDate(), structure.getModifiedDate());
 
+		if (value < 0) {
 			return true;
 		}
 
-		// If the modified date wasn't enough check other attributes of the
-		// DDMStructure
+		// Check other attributes 
 
 		if (!Validator.equals(
 				existingStructure.getDefinition(), structure.getDefinition())) {
