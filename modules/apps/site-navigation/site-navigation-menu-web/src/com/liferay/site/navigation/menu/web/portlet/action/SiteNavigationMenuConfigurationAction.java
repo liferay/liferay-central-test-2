@@ -18,8 +18,8 @@ import aQute.bnd.annotation.metatype.Configurable;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
-import com.liferay.site.navigation.menu.web.configuration.NavigationMenuWebConfiguration;
-import com.liferay.site.navigation.menu.web.constants.NavigationMenuPortletKeys;
+import com.liferay.site.navigation.menu.web.configuration.SiteNavigationMenuWebConfiguration;
+import com.liferay.site.navigation.menu.web.constants.SiteNavigationMenuPortletKeys;
 
 import java.util.Map;
 
@@ -41,12 +41,12 @@ import org.osgi.service.component.annotations.Reference;
  * @author Raymond Augé
  */
 @Component(
-	configurationPid = "com.liferay.site.navigation.menu.web.configuration.NavigationMenuWebConfiguration",
+	configurationPid = "com.liferay.site.navigation.menu.web.configuration.SiteNavigationMenuWebConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
-	property = {"javax.portlet.name=" + NavigationMenuPortletKeys.NAVIGATION},
+	property = {"javax.portlet.name=" + SiteNavigationMenuPortletKeys.SITE_NAVIGATION_MENU},
 	service = ConfigurationAction.class
 )
-public class NavigationMenuConfigurationAction
+public class SiteNavigationMenuConfigurationAction
 	extends DefaultConfigurationAction {
 
 	@Override
@@ -61,8 +61,8 @@ public class NavigationMenuConfigurationAction
 		throws Exception {
 
 		request.setAttribute(
-			NavigationMenuWebConfiguration.class.getName(),
-			_navigationMenuWebConfiguration);
+			SiteNavigationMenuWebConfiguration.class.getName(),
+			_siteNavigationMenuWebConfiguration);
 
 		super.include(portletConfig, request, response);
 	}
@@ -79,11 +79,11 @@ public class NavigationMenuConfigurationAction
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_navigationMenuWebConfiguration = Configurable.createConfigurable(
-			NavigationMenuWebConfiguration.class, properties);
+		_siteNavigationMenuWebConfiguration = Configurable.createConfigurable(
+			SiteNavigationMenuWebConfiguration.class, properties);
 	}
 
-	private volatile NavigationMenuWebConfiguration
-		_navigationMenuWebConfiguration;
+	private volatile SiteNavigationMenuWebConfiguration
+		_siteNavigationMenuWebConfiguration;
 
 }
