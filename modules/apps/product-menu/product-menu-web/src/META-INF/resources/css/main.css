@@ -1,7 +1,6 @@
 @import "mixins";
 
-body.open,
-body.sidenav-transition {
+body.open, body.sidenav-transition {
 	@include sm() {
 		overflow-x: hidden;
 	}
