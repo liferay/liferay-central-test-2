@@ -350,14 +350,14 @@ public class DDMStructureStagedModelDataHandler
 
 		// Check modified date first
 
-		if value = DateUtil.compareTo(
+		int value = DateUtil.compareTo(
 			existingStructure.getModifiedDate(), structure.getModifiedDate());
 
 		if (value < 0) {
 			return true;
 		}
 
-		// Check other attributes 
+		// Check other attributes
 
 		if (!Validator.equals(
 				existingStructure.getDefinition(), structure.getDefinition())) {
