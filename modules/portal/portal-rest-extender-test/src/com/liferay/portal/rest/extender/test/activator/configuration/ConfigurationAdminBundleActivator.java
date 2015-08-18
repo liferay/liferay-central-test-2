@@ -14,6 +14,7 @@
 
 package com.liferay.portal.rest.extender.test.activator.configuration;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.rest.extender.test.service.Greeter;
 
 import java.util.Dictionary;
@@ -152,7 +153,7 @@ public class ConfigurationAdminBundleActivator implements BundleActivator {
 							HttpWhiteboardConstants.
 								HTTP_WHITEBOARD_CONTEXT_NAME);
 
-						if ("rest-test".equals(contextName)) {
+						if (Validator.equals(contextName, "rest-test")) {
 							countDownLatch.countDown();
 
 							close();
