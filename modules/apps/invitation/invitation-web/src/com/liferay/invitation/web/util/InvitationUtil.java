@@ -83,8 +83,8 @@ public class InvitationUtil {
 				LocaleUtil.getDefault(),
 				ContentUtil.get(
 					InvitationUtil.class.getClassLoader(),
-					"com/liferay/invitation/web/util/dependencies/" +
-						"email_message_body.tmpl"));
+					"com/liferay/invitation/web/util/dependencies" +
+						"/email_message_body.tmpl"));
 		}
 
 		return map;
@@ -111,8 +111,8 @@ public class InvitationUtil {
 				LocaleUtil.getDefault(),
 				ContentUtil.get(
 					InvitationUtil.class.getClassLoader(),
-					"com/liferay/invitation/web/util/dependencies/" +
-						"email_message_subject.tmpl"));
+					"com/liferay/invitation/web/util/dependencies" +
+						"/email_message_subject.tmpl"));
 		}
 
 		return map;
