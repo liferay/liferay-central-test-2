@@ -164,7 +164,6 @@ public class CardTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-frontend:card:actionJspServletContext",
 			getActionJspServletContext());
-		request.setAttribute("liferay-frontend:card:footer", _footer);
 		request.setAttribute(
 			"liferay-frontend:card:checkboxCSSClass", _checkboxCSSClass);
 		request.setAttribute("liferay-frontend:card:checkboxId", _checkboxId);
@@ -174,10 +173,11 @@ public class CardTag extends IncludeTag {
 			"liferay-frontend:card:checkboxValue", _checkboxValue);
 		request.setAttribute("liferay-frontend:card:cssClass", _cssClass);
 		request.setAttribute("liferay-frontend:card:data", _data);
+		request.setAttribute("liferay-frontend:card:footer", _footer);
 		request.setAttribute("liferay-frontend:card:header", _header);
-		request.setAttribute("liferay-frontend:card:imageUrl", _imageUrl);
 		request.setAttribute(
 			"liferay-frontend:card:imageCSSClass", _imageCSSClass);
+		request.setAttribute("liferay-frontend:card:imageUrl", _imageUrl);
 		request.setAttribute(
 			"liferay-frontend:card:showCheckbox", _showCheckbox);
 		request.setAttribute(
