@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.backgroundtask.BackgroundTaskLockHelperUtil;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Validator;
@@ -32,7 +33,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = {"destination.name=liferay/background_task_status"},
+	property = {"destination.name=" + DestinationNames.BACKGROUND_TASK_STATUS},
 	service = MessageListener.class
 )
 public class BackgroundTaskQueuingMessageListener extends BaseMessageListener {
@@ -76,7 +77,7 @@ public class BackgroundTaskQueuingMessageListener extends BaseMessageListener {
 	}
 
 	@Reference(
-		target = "(destination.name=liferay/background_task_status)",
+		target = "(destination.name=" + DestinationNames.BACKGROUND_TASK_STATUS + ")",
 		unbind = "-"
 	)
 	protected void setDestination(Destination destination) {
