@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.backgroundtask.BackgroundTask;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.DestinationConfiguration;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -438,14 +439,14 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 		ServiceRegistration<DestinationConfiguration>
 			backgroundTaskServiceRegistration = registerDestinationConfig(
 				DestinationConfiguration.DESTINATION_TYPE_PARALLEL,
-				"liferay/background_task");
+				DestinationNames.BACKGROUND_TASK);
 
 		_serviceRegistrations.add(backgroundTaskServiceRegistration);
 
 		ServiceRegistration<DestinationConfiguration>
 			backgroundTaskStatusServiceRegistration = registerDestinationConfig(
 				DestinationConfiguration.DESTINATION_TYPE_PARALLEL,
-				"liferay/background_task_status");
+				DestinationNames.BACKGROUND_TASK_STATUS);
 
 		_serviceRegistrations.add(backgroundTaskStatusServiceRegistration);
 	}
