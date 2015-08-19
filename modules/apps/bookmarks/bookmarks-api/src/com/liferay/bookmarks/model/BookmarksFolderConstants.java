@@ -27,7 +27,7 @@ public class BookmarksFolderConstants {
 
 	public static final String NAME_INVALID_CHARACTERS =
 		StringPool.DOUBLE_SLASH + StringPool.SPACE +
-		StringPool.DOUBLE_BACK_SLASH;
+			StringPool.DOUBLE_BACK_SLASH;
 
 	public static final String NAME_LABEL = "folder-name";
 

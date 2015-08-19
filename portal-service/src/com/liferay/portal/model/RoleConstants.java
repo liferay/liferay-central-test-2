@@ -105,17 +105,18 @@ public class RoleConstants {
 	public static final String USER = "User";
 
 	public static String getNameGeneralRestrictions(
-		Locale locale, boolean roleNameAllowNumeric) {
+		Locale locale, boolean allowNumeric) {
 
-		String roleNameGeneralRestrictions = StringUtil.toLowerCase(
+		String nameGeneralRestrictions = StringUtil.toLowerCase(
 			LanguageUtil.get(locale, "blank"));
 
-		if (!roleNameAllowNumeric) {
-			roleNameGeneralRestrictions += StringPool.COMMA_AND_SPACE +
-				StringUtil.toLowerCase(LanguageUtil.get(locale, "numeric"));
+		if (!allowNumeric) {
+			nameGeneralRestrictions +=
+				StringPool.COMMA_AND_SPACE +
+					StringUtil.toLowerCase(LanguageUtil.get(locale, "numeric"));
 		}
 
-		return roleNameGeneralRestrictions;
+		return nameGeneralRestrictions;
 	}
 
 	public static String getTypeLabel(int type) {
