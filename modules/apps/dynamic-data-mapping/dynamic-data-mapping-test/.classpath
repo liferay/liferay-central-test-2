@@ -38,7 +38,6 @@
 	<classpathentry kind="lib" path="lib/com.liferay.portal.spring.extender.jar" />
 	<classpathentry kind="lib" path="lib/commons-compiler.jar" />
 	<classpathentry kind="lib" path="lib/janino.jar" />
-	<classpathentry kind="lib" path="lib/javax.ws.rs-api.jar" />
 	<classpathentry kind="lib" path="lib/json.jar" />
 	<classpathentry kind="lib" path="lib/jsonassert.jar" />
 	<classpathentry kind="lib" path="lib/org.apache.felix.dependencymanager.jar" />
