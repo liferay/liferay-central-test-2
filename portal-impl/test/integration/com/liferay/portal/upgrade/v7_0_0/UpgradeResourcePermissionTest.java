@@ -74,7 +74,7 @@ public class UpgradeResourcePermissionTest extends UpgradeResourcePermission {
 		long resourcePermissionId1 = addResourcePermission(
 			primKey1, actionIds1);
 
-		String primKey2 = "987_INSTANCE_WOW";
+		String primKey2 = "987_INSTANCE_ABCD";
 		long actionIds2 = 3;
 
 		long resourcePermissionId2 = addResourcePermission(
@@ -99,7 +99,7 @@ public class UpgradeResourcePermissionTest extends UpgradeResourcePermission {
 
 		Assert.assertEquals(
 			(actionIds2 % 2 == 1), resourcePermission2.getViewActionId());
-		Assert.assertEquals(resourcePermission2.getPrimKeyId(), 0L);
+		Assert.assertEquals(resourcePermission2.getPrimKeyId(), 0);
 	}
 
 	protected long addResourcePermission(String primKey, long actionIds) {
@@ -110,10 +110,11 @@ public class UpgradeResourcePermissionTest extends UpgradeResourcePermission {
 
 		resourcePermission.setResourcePermissionId(resourcePermissionId);
 		resourcePermission.setCompanyId(_user.getCompanyId());
-		resourcePermission.setName("com.liferay.rocks");
+		resourcePermission.setName(
+			UpgradeResourcePermissionTest.class.getName());
 		resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 		resourcePermission.setPrimKey(primKey);
-		resourcePermission.setPrimKeyId(-1L);
+		resourcePermission.setPrimKeyId(-1);
 		resourcePermission.setOwnerId(_user.getUserId());
 		resourcePermission.setActionIds(actionIds);
 		resourcePermission.setViewActionId(actionIds % 2!= 1);
