@@ -16,7 +16,7 @@
 
 <%@ include file="/html/taglib/ui/user_display/init.jsp" %>
 
-<liferay-util:buffer var="avatar">
+<liferay-util:buffer var="html">
 	<div class="<%= userIconCssClass %> user-icon user-icon-lg">
 		<img alt="thumbnail" class="img-responsive <%= imageCssClass %>" src="<%= HtmlUtil.escape(taglibSrc) %>">
 	</div>
@@ -27,7 +27,7 @@
 		<div class="profile-header">
 			<div class="nameplate">
 				<div class="nameplate-field">
-					<%= avatar %>
+					<%= html %>
 				</div>
 
 				<c:if test="<%= showUserName %>">
@@ -45,6 +45,6 @@
 				</c:if>
 	</c:when>
 	<c:otherwise>
-		<%= avatar %>
+		<%= html %>
 	</c:otherwise>
 </c:choose>
