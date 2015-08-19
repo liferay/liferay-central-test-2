@@ -892,8 +892,8 @@ public class PoshiRunnerExecutor {
 		return null;
 	}
 
-	private static Element _functionExecuteElement = null;
-	private static String _functionWarningMessage = null;
+	private static Element _functionExecuteElement;
+	private static String _functionWarningMessage;
 	private static final Pattern _locatorKeyPattern = Pattern.compile(
 		"\\S#\\S");
 	private static Object _returnObject;
