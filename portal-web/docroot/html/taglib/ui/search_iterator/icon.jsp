@@ -56,9 +56,9 @@ JSONArray primaryKeysJSONArray = JSONFactoryUtil.createJSONArray();
 <ul class="list-unstyled <%= searchContainer.getCssClass() %> <%= resultRows.isEmpty() ? "hide" : StringPool.BLANK %>" id="<%= namespace + id %>SearchContainer">
 
 	<%
-	boolean allRowsIsChecked = true;
-
 	request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_CHECKER, rowChecker);
+
+	boolean allRowsIsChecked = true;
 
 	for (int i = 0; i < resultRows.size(); i++) {
 		com.liferay.portal.kernel.dao.search.ResultRow row = (com.liferay.portal.kernel.dao.search.ResultRow)resultRows.get(i);
@@ -84,24 +84,24 @@ JSONArray primaryKeysJSONArray = JSONFactoryUtil.createJSONArray();
 		Map<String, Object> data = row.getData();
 	%>
 
-	<li class="<%= GetterUtil.getString(row.getClassName()) %> <%= row.getCssClass() %> <%= rowIsChecked ? "active" : StringPool.BLANK %>"  <%= AUIUtil.buildData(data) %>>
+		<li class="<%= GetterUtil.getString(row.getClassName()) %> <%= row.getCssClass() %> <%= rowIsChecked ? "active" : StringPool.BLANK %>"  <%= AUIUtil.buildData(data) %>>
 
-				<%
-				for (int j = 0; j < entries.size(); j++) {
-					com.liferay.portal.kernel.dao.search.SearchEntry entry = (com.liferay.portal.kernel.dao.search.SearchEntry)entries.get(j);
+			<%
+			for (int j = 0; j < entries.size(); j++) {
+				com.liferay.portal.kernel.dao.search.SearchEntry entry = (com.liferay.portal.kernel.dao.search.SearchEntry)entries.get(j);
 
-					entry.setIndex(j);
+				entry.setIndex(j);
 
-					request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
-				%>
+				request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
+			%>
 
-						<%
-						entry.print(pageContext.getOut(), request, response);
-						%>
+					<%
+					entry.print(pageContext.getOut(), request, response);
+					%>
 
-				<%
-				}
-				%>
+			<%
+			}
+			%>
 
 		</li>
 
