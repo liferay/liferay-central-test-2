@@ -351,6 +351,78 @@ echo "Sent notification."]]>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="prepare-test-build-dist">
+		<attribute name="app.server.type" />
+
+		<sequential>
+			<record-git-commit-portal />
+
+			<antcall target="compile" inheritAll="false" />
+
+			<ant antfile="build-dist.xml" target="build-dist-@{app.server.type}" inheritAll="false" />
+
+			<antcall target="prepare-portal-ext-properties" />
+
+			<antcall target="prepare-system-ext-properties" />
+
+			<if>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<then>
+					<setup-testable-tomcat />
+
+					<replace file="${app.server.tomcat.bin.dir}/setenv${file.suffix.bat}">
+						<replacetoken><![CDATA[-Xmx1024m -XX:MaxPermSize=256m]]></replacetoken>
+						<replacevalue><![CDATA[-verbose:gc -Xloggc:/tmp/tomcat-gc.log -Xms512m -Xmx512m -XX:MaxNewSize=32m -XX:MaxPermSize=200m -XX:MaxTenuringThreshold=0 -XX:NewSize=32m -XX:ParallelGCThreads=2 -XX:PermSize=200m -XX:+PrintGCCause -XX:+PrintGCDetails -XX:SurvivorRatio=65536 -XX:TargetSurvivorRatio=0 -XX:+UseParNewGC]]></replacevalue>
+					</replace>
+				</then>
+			</if>
+
+			<prepare-elasticsearch-configuration />
+
+			<antcall target="compile-test" inheritAll="false" />
+
+			<echo file="${project.dir}/.gitignore">/.ivy/
+/app.server.*.properties
+/build.*.properties
+/release.*.properties
+/sql/sql.*.properties
+/test.*.properties
+/tools/cobertura-agent/classes
+/tools/liferay-doclet
+/tools/maven/*.asc
+/tools/node*
+/tools/selenium/*.exe
+/tools/selenium/extensions/ide.*.js
+/tools/tck
+/tools/zip_tmpl/license</echo>
+
+			<echo file="${project.dir}/modules/.gitignore">tmp
+/*/*/ivy.xml.MD5
+/*/*/javadoc
+/*/*/lib
+/*/*/tmp
+/*/*/*/ivy.xml.MD5
+/*/*/*/javadoc
+/*/*/*/lib
+/*/*/*/tmp
+/*/*/*/*/ivy.xml.MD5
+/*/*/*/*/javadoc
+/*/*/*/*/lib
+/*/*/*/*/tmp</echo>
+
+			<execute>
+				<![CDATA[
+					rm bundles/*.zip
+
+					git add -A
+
+					git diff --binary --cached bundles/ > liferay-portal-bundle-@{app.server.type}.diff
+					git diff --binary --cached --name-only | grep -v '^bundles/' | xargs git diff --binary --cached -- > liferay-portal-source.diff
+				]]>
+			</execute>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="prepare-test-build-unit">
 		<sequential>
 			<antcall target="prepare-test-build-unit">
@@ -527,6 +599,10 @@ echo "Sent notification."]]>
 				<test-action>
 					<database-test-run-test database.type="@{database.type}" database.version="@{database.version}">
 						<test-action>
+							<antcall target="record-test-class-file-names" inheritAll="false">
+								<param name="test.class.groups.size" value="${test.batch.size}" />
+							</antcall>
+
 							<print-test-class-group test.class.group.index="${axis.variable}" />
 
 							<ant dir="portal-impl" target="test-class-group" inheritAll="false">
@@ -553,6 +629,10 @@ echo "Sent notification."]]>
 				<test-action>
 					<database-test-run-test database.type="@{database.type}" stop.app.server="true">
 						<test-action>
+							<antcall target="record-test-class-file-names" inheritAll="false">
+								<param name="test.class.groups.size" value="${test.batch.size}" />
+							</antcall>
+
 							<print-test-class-group test.class.group.index="${axis.variable}" />
 
 							<antcall target="prepare-log4j-ext-xml" inheritAll="false">
@@ -704,6 +784,10 @@ echo "Sent notification."]]>
 	<target name="modules-unit-jdk7">
 		<run-batch-test>
 			<test-action>
+				<antcall target="record-test-class-file-names" inheritAll="false">
+					<param name="test.class.groups.size" value="${test.batch.size}" />
+				</antcall>
+
 				<gradle-execute dir="modules" task="test">
 					<arg value="-Dtest.class.group.index=${axis.variable}" />
 				</gradle-execute>
@@ -755,6 +839,10 @@ ${output.content}</echo>
 	<target name="plugins-compile-jdk7">
 		<run-batch-test>
 			<test-action>
+				<antcall target="record-test-plugin-names" inheritAll="false">
+					<param name="test.plugin.groups.size" value="${test.batch.size}" />
+				</antcall>
+
 				<ant antfile="build-test-plugins.xml" target="test-plugin-group">
 					<property name="test.plugin.group.index" value="${axis.variable}" />
 				</ant>
@@ -1010,6 +1098,10 @@ ${output.content}</echo>
 	<target name="unit-jdk7">
 		<run-batch-test>
 			<test-action>
+				<antcall target="record-test-class-file-names" inheritAll="false">
+					<param name="test.class.groups.size" value="${test.batch.size}" />
+				</antcall>
+
 				<ant dir="portal-kernel" target="test-class-group" inheritAll="false">
 					<property name="test.class.group.index" value="${axis.variable}" />
 				</ant>
