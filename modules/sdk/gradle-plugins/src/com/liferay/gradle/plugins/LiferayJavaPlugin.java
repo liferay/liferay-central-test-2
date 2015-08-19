@@ -874,10 +874,10 @@ public class LiferayJavaPlugin implements Plugin<Project> {
 		GradleUtil.applyPlugin(project, ProvidedBasePlugin.class);
 
 		GradleUtil.applyPlugin(project, CSSBuilderPlugin.class);
-		GradleUtil.applyPlugin(project, JSModuleConfigGeneratorPlugin.class);
-		GradleUtil.applyPlugin(project, JSTranspilerPlugin.class);
 		GradleUtil.applyPlugin(project, JavadocFormatterPlugin.class);
+		GradleUtil.applyPlugin(project, JSModuleConfigGeneratorPlugin.class);
 		GradleUtil.applyPlugin(project, JspCPlugin.class);
+		GradleUtil.applyPlugin(project, JSTranspilerPlugin.class);
 		GradleUtil.applyPlugin(project, LangBuilderPlugin.class);
 		GradleUtil.applyPlugin(project, ServiceBuilderPlugin.class);
 		GradleUtil.applyPlugin(project, SourceFormatterPlugin.class);
