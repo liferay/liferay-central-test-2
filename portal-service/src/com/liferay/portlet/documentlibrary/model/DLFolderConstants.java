@@ -75,31 +75,26 @@ public class DLFolderConstants {
 		}
 	}
 
-	public static String getNameInvalidCharacters(
-		String[] documentLibraryCharBlacklist) {
-
-		return StringUtil.merge(documentLibraryCharBlacklist, StringPool.SPACE);
+	public static String getNameInvalidCharacters(String[] charBlacklist) {
+		return StringUtil.merge(charBlacklist, StringPool.SPACE);
 	}
 
 	public static String getNameInvalidEndCharacters(
-		String[] documentLibraryCharLastBlacklist) {
+		String[] charLastBlacklist) {
 
-		StringBundler sb = new StringBundler(
-			documentLibraryCharLastBlacklist.length * 2);
+		StringBundler sb = new StringBundler(charLastBlacklist.length * 2);
 
 		sb.append(StringPool.BLANK);
 
-		for (int i = 0; i < documentLibraryCharLastBlacklist.length; i++) {
-			String blacklistLastChar = documentLibraryCharLastBlacklist[i];
-
-			if (blacklistLastChar.startsWith("\\u")) {
-				blacklistLastChar = UnicodeFormatter.parseString(
-					blacklistLastChar);
+		for (int i = 0; i < charLastBlacklist.length; i++) {
+			if (charLastBlacklist[i].startsWith("\\u")) {
+				sb.append(UnicodeFormatter.parseString(charLastBlacklist[i]));
+			}
+			else {
+				sb.append(charLastBlacklist[i]);
 			}
 
-			sb.append(blacklistLastChar);
-
-			if ((i + 1) < documentLibraryCharLastBlacklist.length) {
+			if ((i + 1) < charLastBlacklist.length) {
 				sb.append(StringPool.SPACE);
 			}
 		}
@@ -107,11 +102,9 @@ public class DLFolderConstants {
 		return sb.toString();
 	}
 
-	public static String getNameReservedWords(
-		String[] documentLibraryNameBlacklist) {
-
-		return StringPool.NULL + StringPool.COMMA_AND_SPACE + StringUtil.merge(
-			documentLibraryNameBlacklist, StringPool.COMMA_AND_SPACE);
+	public static String getNameReservedWords(String[] nameBlacklist) {
+		return StringPool.NULL + StringPool.COMMA_AND_SPACE +
+			StringUtil.merge(nameBlacklist, StringPool.COMMA_AND_SPACE);
 	}
 
 }
