@@ -35,17 +35,18 @@ public class UserGroupConstants {
 	public static final String NAME_RESERVED_WORDS = StringPool.NULL;
 
 	public static String getNameGeneralRestrictions(
-		Locale locale, boolean userGroupNameAllowNumeric) {
+		Locale locale, boolean allowNumeric) {
 
-		String userGroupNameGeneralRestrictions = StringUtil.toLowerCase(
+		String nameGeneralRestrictions = StringUtil.toLowerCase(
 			LanguageUtil.get(locale, "blank"));
 
-		if (!userGroupNameAllowNumeric) {
-			userGroupNameGeneralRestrictions += StringPool.COMMA_AND_SPACE +
-				StringUtil.toLowerCase(LanguageUtil.get(locale, "numeric"));
+		if (!allowNumeric) {
+			nameGeneralRestrictions +=
+				StringPool.COMMA_AND_SPACE +
+					StringUtil.toLowerCase(LanguageUtil.get(locale, "numeric"));
 		}
 
-		return userGroupNameGeneralRestrictions;
+		return nameGeneralRestrictions;
 	}
 
 }

@@ -37,9 +37,9 @@ public class JournalFolderConstants {
 	public static final int RESTRICTION_TYPE_WORKFLOW = 2;
 
 	public static String getNameInvalidCharacters(
-		String[] journalCharBlacklist) {
+		String[] charBlacklist) {
 
-		return StringUtil.merge(journalCharBlacklist, StringPool.SPACE);
+		return StringUtil.merge(charBlacklist, StringPool.SPACE);
 	}
 
 }

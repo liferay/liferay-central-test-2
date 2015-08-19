@@ -37,8 +37,8 @@ public class SiteConstants {
 
 	public static String getNameGeneralRestrictions(Locale locale) {
 		return StringUtil.toLowerCase(LanguageUtil.get(locale, "blank")) +
-			StringPool.COMMA_AND_SPACE + StringUtil.toLowerCase(
-				LanguageUtil.get(locale, "numeric"));
+			StringPool.COMMA_AND_SPACE +
+				StringUtil.toLowerCase(LanguageUtil.get(locale, "numeric"));
 	}
 
 }
