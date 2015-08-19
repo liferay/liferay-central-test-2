@@ -207,7 +207,8 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 	}
 
 	@Reference(
-		target = "(destination.name=liferay/background_task)", unbind = "-"
+		target = "(destination.name=" + DestinationNames.BACKGROUND_TASK + ")",
+		unbind = "-"
 	)
 	protected void setDestination(Destination destination) {
 	}
