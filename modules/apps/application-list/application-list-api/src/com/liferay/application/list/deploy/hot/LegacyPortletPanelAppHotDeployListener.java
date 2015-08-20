@@ -144,30 +144,31 @@ public class LegacyPortletPanelAppHotDeployListener
 			String controlPanelEntryCategory = portletElement.elementText(
 				"control-panel-entry-category");
 
-			if (Validator.isNotNull(controlPanelEntryCategory)) {
-				String portletName = portletElement.elementText("portlet-name");
-
-				String portletId = getPortletId(
-					hotDeployEvent.getServletContextName(), portletName);
-
-				Dictionary<String, Object> properties =
-					new HashMapDictionary<>();
-
-				properties.put("panel.app.portlet.id", portletId);
-				properties.put("panel.category.key", controlPanelEntryCategory);
-
-				String controlPanelEntryWeight = portletElement.elementText(
-					"control-panel-entry-weight");
-
-				if (Validator.isNotNull(controlPanelEntryWeight)) {
-					int serviceRanking = (int)Math.ceil(
-						GetterUtil.getDouble(controlPanelEntryWeight) * 100);
-
-					properties.put("service.ranking", serviceRanking);
-				}
-
-				propertiesList.add(properties);
+			if (Validator.isNull(controlPanelEntryCategory)) {
+				continue;
 			}
+
+			String portletName = portletElement.elementText("portlet-name");
+
+			String portletId = getPortletId(
+				hotDeployEvent.getServletContextName(), portletName);
+
+			Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+			properties.put("panel.app.portlet.id", portletId);
+			properties.put("panel.category.key", controlPanelEntryCategory);
+
+			String controlPanelEntryWeight = portletElement.elementText(
+				"control-panel-entry-weight");
+
+			if (Validator.isNotNull(controlPanelEntryWeight)) {
+				int serviceRanking = (int)Math.ceil(
+					GetterUtil.getDouble(controlPanelEntryWeight) * 100);
+
+				properties.put("service.ranking", serviceRanking);
+			}
+
+			propertiesList.add(properties);
 		}
 
 		return propertiesList;
