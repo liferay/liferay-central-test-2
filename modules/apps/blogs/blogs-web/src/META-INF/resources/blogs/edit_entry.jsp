@@ -71,6 +71,7 @@ long smallImageFileEntryId = BeanParamUtil.getLong(entry, request, "smallImageFi
 			</c:if>
 
 			<aui:button cssClass="hide icon-monospaced" icon="icon-pencil" id="editIcon" />
+
 			<aui:button cssClass="icon-monospaced" icon="icon-cog" id="settingsIcon" />
 		</div>
 
