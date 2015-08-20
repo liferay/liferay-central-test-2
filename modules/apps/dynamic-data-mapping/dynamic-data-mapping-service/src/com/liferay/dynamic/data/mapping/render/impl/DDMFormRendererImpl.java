@@ -61,14 +61,12 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 	protected void clearDDMFieldsCounter(
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
 
-		String portletNamespace =
-			ddmFormFieldRenderingContext.getPortletNamespace();
-		String namespace = ddmFormFieldRenderingContext.getNamespace();
-
 		HttpServletRequest request =
 			ddmFormFieldRenderingContext.getHttpServletRequest();
 
-		String fieldsCounterKey = portletNamespace + namespace + "fieldsCount";
+		String fieldsCounterKey =
+			ddmFormFieldRenderingContext.getPortletNamespace() +
+				ddmFormFieldRenderingContext.getNamespace() + "fieldsCount";
 
 		DDMFieldsCounter ddmFieldsCounter =
 			(DDMFieldsCounter)request.getAttribute(fieldsCounterKey);
