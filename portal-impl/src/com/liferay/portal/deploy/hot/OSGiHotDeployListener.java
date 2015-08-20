@@ -27,16 +27,20 @@ import com.liferay.registry.collections.ServiceTrackerList;
 public class OSGiHotDeployListener extends BaseHotDeployListener {
 
 	@Override
-	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeDeploy(HotDeployEvent hotDeployEvent)
+		throws HotDeployException {
+
 		for (HotDeployListener hotDeployListener : _serviceTrackerList) {
-			hotDeployListener.invokeDeploy(event);
+			hotDeployListener.invokeDeploy(hotDeployEvent);
 		}
 	}
 
 	@Override
-	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
+		throws HotDeployException {
+
 		for (HotDeployListener hotDeployListener : _serviceTrackerList) {
-			hotDeployListener.invokeUndeploy(event);
+			hotDeployListener.invokeUndeploy(hotDeployEvent);
 		}
 	}
 
