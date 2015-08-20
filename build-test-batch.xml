@@ -706,6 +706,10 @@ echo "Sent notification."]]>
 		</run-batch-test>
 	</target>
 
+	<target name="dist-jdk7">
+		<prepare-test-build-dist app.server.type="${axis.variable}" />
+	</target>
+
 	<target name="functional-bundle-tomcat-mysql56-jdk7">
 		<set-tomcat-version-number liferay.portal.bundle="${test.portal.bundle.version}" />
 
