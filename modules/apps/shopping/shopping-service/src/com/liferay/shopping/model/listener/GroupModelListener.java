@@ -36,8 +36,11 @@ public class GroupModelListener extends BaseModelListener<Group> {
 	public void onAfterRemove(Group group) throws ModelListenerException {
 		try {
 			_shoppingCartLocalService.deleteGroupCarts(group.getGroupId());
+
 			_shoppingCategoryLocalService.deleteCategories(group.getGroupId());
+
 			_shoppingCouponLocalService.deleteCoupons(group.getGroupId());
+
 			_shoppingOrderLocalService.deleteOrders(group.getGroupId());
 		}
 		catch (Exception e) {
