@@ -31,7 +31,7 @@ import javax.portlet.PortletConfig;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ShoppingConfigurationActionImpl
+public class ShoppingConfigurationAction
 	extends BaseJSPSettingsConfigurationAction {
 
 	@Override
