@@ -136,11 +136,10 @@ public class LegacyPortletPanelAppHotDeployListener
 
 		Element rootElement = document.getRootElement();
 
-		Iterator<Element> portletElementIterator = rootElement.elementIterator(
-			"portlet");
+		Iterator<Element> iterator = rootElement.elementIterator("portlet");
 
-		while (portletElementIterator.hasNext()) {
-			Element portletElement = portletElementIterator.next();
+		while (iterator.hasNext()) {
+			Element portletElement = iterator.next();
 
 			String controlPanelEntryCategory = portletElement.elementText(
 				"control-panel-entry-category");
