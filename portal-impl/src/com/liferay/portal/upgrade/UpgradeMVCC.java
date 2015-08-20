@@ -37,23 +37,23 @@ import java.util.List;
  */
 public class UpgradeMVCC extends UpgradeProcess {
 
-	public void upgradeMVCC(DatabaseMetaData databaseMetaData, String table)
+	public void upgradeMVCC(DatabaseMetaData databaseMetaData, String tableName)
 		throws Exception {
 
-		table = normalizeName(table, databaseMetaData);
+		tableName = normalizeName(tableName, databaseMetaData);
 
 		ResultSet tableResultSet = databaseMetaData.getTables(
-			null, null, table, null);
+			null, null, tableName, null);
 
 		try {
 			if (!tableResultSet.next()) {
-				_log.error("Table " + table + " does not exist");
+				_log.error("Table " + tableName + " does not exist");
 
 				return;
 			}
 
 			ResultSet columnResultSet = databaseMetaData.getColumns(
-				null, null, table,
+				null, null, tableName,
 				normalizeName("mvccVersion", databaseMetaData));
 
 			try {
@@ -62,10 +62,12 @@ public class UpgradeMVCC extends UpgradeProcess {
 				}
 
 				runSQL(
-					"alter table " + table + " add mvccVersion LONG default 0");
+					"alter table " + tableName +
+						" add mvccVersion LONG default 0");
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Added column mvccVersion to table " + table);
+					_log.debug(
+						"Added column mvccVersion to table " + tableName);
 				}
 			}
 			finally {
@@ -135,9 +137,9 @@ public class UpgradeMVCC extends UpgradeProcess {
 			DatabaseMetaData databaseMetaData, Element classElement)
 		throws Exception {
 
-		String table = classElement.attributeValue("table");
+		String tableName = classElement.attributeValue("table");
 
-		upgradeMVCC(databaseMetaData, table);
+		upgradeMVCC(databaseMetaData, tableName);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeMVCC.class);
