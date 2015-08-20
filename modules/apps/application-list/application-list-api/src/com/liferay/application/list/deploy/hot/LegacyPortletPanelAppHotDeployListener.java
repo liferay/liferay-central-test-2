@@ -56,10 +56,12 @@ public class LegacyPortletPanelAppHotDeployListener
 	extends BaseHotDeployListener {
 
 	@Override
-	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeDeploy(HotDeployEvent hotDeployEvent)
+		throws HotDeployException {
+
 		try {
 			for (Dictionary<String, Object> properties :
-					getRegisterableProperties(event)) {
+					getRegisterableProperties(hotDeployEvent)) {
 
 				String portletId = (String)properties.get(
 					"panel.app.portlet.id");
@@ -78,10 +80,12 @@ public class LegacyPortletPanelAppHotDeployListener
 	}
 
 	@Override
-	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
+		throws HotDeployException {
+
 		try {
 			for (Dictionary<String, Object> properties :
-					getRegisterableProperties(event)) {
+					getRegisterableProperties(hotDeployEvent)) {
 
 				String portletId = (String)properties.get(
 					"panel.app.portlet.id");
@@ -114,10 +118,10 @@ public class LegacyPortletPanelAppHotDeployListener
 	}
 
 	protected Iterable<Dictionary<String, Object>> getRegisterableProperties(
-			HotDeployEvent event)
+			HotDeployEvent hotDeployEvent)
 		throws DocumentException, IOException {
 
-		ServletContext servletContext = event.getServletContext();
+		ServletContext servletContext = hotDeployEvent.getServletContext();
 
 		String xml = HttpUtil.URLtoString(
 			servletContext.getResource("/WEB-INF/liferay-portlet.xml"));
@@ -146,7 +150,7 @@ public class LegacyPortletPanelAppHotDeployListener
 				String portletName = portletElement.elementText("portlet-name");
 
 				String portletId = getPortletId(
-					event.getServletContextName(), portletName);
+					hotDeployEvent.getServletContextName(), portletName);
 
 				Dictionary<String, Object> properties =
 					new HashMapDictionary<>();
