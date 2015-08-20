@@ -61,7 +61,7 @@ public class LegacyPortletPanelAppHotDeployListener
 
 		try {
 			for (Dictionary<String, Object> properties :
-					getProperties(hotDeployEvent)) {
+					getPropertiesList(hotDeployEvent)) {
 
 				String portletId = (String)properties.get(
 					"panel.app.portlet.id");
@@ -85,7 +85,7 @@ public class LegacyPortletPanelAppHotDeployListener
 
 		try {
 			for (Dictionary<String, Object> properties :
-					getProperties(hotDeployEvent)) {
+					getPropertiesList(hotDeployEvent)) {
 
 				String portletId = (String)properties.get(
 					"panel.app.portlet.id");
@@ -117,7 +117,7 @@ public class LegacyPortletPanelAppHotDeployListener
 			portletName + PortletConstants.WAR_SEPARATOR + servletContextName);
 	}
 
-	protected Iterable<Dictionary<String, Object>> getProperties(
+	protected List<Dictionary<String, Object>> getPropertiesList(
 			HotDeployEvent hotDeployEvent)
 		throws DocumentException, IOException {
 
