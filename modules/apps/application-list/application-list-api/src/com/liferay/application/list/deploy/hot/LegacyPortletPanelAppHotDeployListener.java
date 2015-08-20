@@ -102,7 +102,7 @@ public class LegacyPortletPanelAppHotDeployListener
 		_bundleContext = bundleContext;
 	}
 
-	protected String getPluginPortletId(
+	protected String getPortletId(
 		String servletContextName, String portletName) {
 
 		if (servletContextName == null) {
@@ -145,7 +145,7 @@ public class LegacyPortletPanelAppHotDeployListener
 			if (Validator.isNotNull(controlPanelEntryCategory)) {
 				String portletName = portletElement.elementText("portlet-name");
 
-				String portletId = getPluginPortletId(
+				String portletId = getPortletId(
 					event.getServletContextName(), portletName);
 
 				Dictionary<String, Object> properties =
