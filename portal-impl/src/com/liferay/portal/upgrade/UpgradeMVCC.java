@@ -97,6 +97,12 @@ public class UpgradeMVCC extends UpgradeProcess {
 
 		String table = classElement.attributeValue("table");
 
+		upgradeMVCC(databaseMetaData, table);
+	}
+
+	protected void upgradeMVCC(DatabaseMetaData databaseMetaData, String table)
+		throws Exception {
+
 		table = normalizeName(table, databaseMetaData);
 
 		ResultSet tableResultSet = databaseMetaData.getTables(
