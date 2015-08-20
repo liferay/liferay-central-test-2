@@ -148,14 +148,15 @@ public class LegacyPortletPanelAppHotDeployListener
 				continue;
 			}
 
+			Dictionary<String, Object> properties = new HashMapDictionary<>();
+
 			String portletName = portletElement.elementText("portlet-name");
 
 			String portletId = getPortletId(
 				hotDeployEvent.getServletContextName(), portletName);
 
-			Dictionary<String, Object> properties = new HashMapDictionary<>();
-
 			properties.put("panel.app.portlet.id", portletId);
+
 			properties.put("panel.category.key", controlPanelEntryCategory);
 
 			String controlPanelEntryWeight = portletElement.elementText(
