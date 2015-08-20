@@ -564,9 +564,7 @@ echo "Sent notification."]]>
 							</antcall>
 						</then>
 						<else>
-							<antcall target="compile" />
-
-							<ant antfile="build-dist.xml" target="build-dist-${app.server.type}" />
+							<prepare-test-environment app.server.type="${app.server.type}" />
 
 							<if>
 								<equals arg1="${app.server.type}" arg2="tomcat" />
@@ -633,7 +631,7 @@ echo "Sent notification."]]>
 				</test-action>
 
 				<test-set-up>
-					<prepare-test-build />
+					<prepare-test-environment />
 				</test-set-up>
 			</run-batch-test>
 		</sequential>
@@ -676,7 +674,7 @@ echo "Sent notification."]]>
 				</test-action>
 
 				<test-set-up>
-					<prepare-test-build />
+					<prepare-test-environment />
 				</test-set-up>
 			</run-batch-test>
 		</sequential>
@@ -703,7 +701,7 @@ echo "Sent notification."]]>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build />
+				<prepare-test-environment />
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -812,7 +810,7 @@ echo "Sent notification."]]>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build />
+				<prepare-test-environment />
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -867,7 +865,7 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build />
+				<prepare-test-environment />
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -908,7 +906,7 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build />
+				<prepare-test-environment />
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -979,7 +977,7 @@ information. Make sure to commit in all build services results.
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build />
+				<prepare-test-environment />
 			</test-set-up>
 		</run-batch-test>
 	</target>
@@ -1102,7 +1100,7 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build />
+				<prepare-test-environment />
 
 				<antcall target="prepare-portal-ext-properties">
 					<param name="hot.deploy.dependency.management.enabled" value="false" />
@@ -1135,7 +1133,7 @@ ${output.content}</echo>
 			</test-action>
 
 			<test-set-up>
-				<prepare-test-build-unit />
+				<prepare-test-environment />
 			</test-set-up>
 		</run-batch-test>
 	</target>
