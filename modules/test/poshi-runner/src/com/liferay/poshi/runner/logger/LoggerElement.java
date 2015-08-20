@@ -79,9 +79,11 @@ public class LoggerElement {
 	public LoggerElement copy() {
 		LoggerElement loggerElement = new LoggerElement();
 
-		loggerElement.setClassName(getClassName());
-		loggerElement.setName(getName());
-		loggerElement.setText(getText());
+		List<LoggerElement> childLoggerElements = loggerElements();
+
+		for (LoggerElement childLoggerElement : childLoggerElements) {
+			loggerElement.addChildLoggerElement(childLoggerElement.copy());
+		}
 
 		List<String> attributeNames = getAttributeNames();
 
@@ -90,11 +92,9 @@ public class LoggerElement {
 				attributeName, getAttributeValue(attributeName));
 		}
 
-		List<LoggerElement> childLoggerElements = loggerElements();
-
-		for (LoggerElement childLoggerElement : childLoggerElements) {
-			loggerElement.addChildLoggerElement(childLoggerElement.copy());
-		}
+		loggerElement.setClassName(getClassName());
+		loggerElement.setName(getName());
+		loggerElement.setText(getText());
 
 		return loggerElement;
 	}
