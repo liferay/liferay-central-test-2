@@ -34,10 +34,10 @@ import com.liferay.portal.util.PortalUtil;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -130,8 +130,7 @@ public class LegacyPortletPanelAppHotDeployListener
 			return Collections.emptyList();
 		}
 
-		Collection<Dictionary<String, Object>> propertiesList =
-			new ArrayList<>();
+		List<Dictionary<String, Object>> propertiesList = new ArrayList<>();
 
 		Document document = UnsecureSAXReaderUtil.read(xml, true);
 
