@@ -63,6 +63,7 @@ public class PanelCategoryContentTag extends BasePanelTag {
 		super.cleanUp();
 
 		_panelCategory = null;
+		_showOpen = false;
 	}
 
 	@Override
@@ -84,6 +85,6 @@ public class PanelCategoryContentTag extends BasePanelTag {
 		PanelCategoryContentTag.class);
 
 	private PanelCategory _panelCategory;
-	private boolean _showOpen = false;
+	private boolean _showOpen;
 
 }
