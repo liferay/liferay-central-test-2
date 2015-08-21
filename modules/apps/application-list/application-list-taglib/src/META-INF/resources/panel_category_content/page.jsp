@@ -18,7 +18,6 @@
 
 <%
 PanelCategory panelCategory = (PanelCategory)request.getAttribute("liferay-application-list:panel-category-content:panelCategory");
-
 boolean showOpen = GetterUtil.getBoolean(request.getAttribute("liferay-application-list:panel-category-content:showOpen"));
 %>
 
