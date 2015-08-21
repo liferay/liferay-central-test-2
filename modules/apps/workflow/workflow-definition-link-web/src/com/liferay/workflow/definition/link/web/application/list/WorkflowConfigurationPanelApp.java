@@ -39,9 +39,8 @@ public class WorkflowConfigurationPanelApp
 
 	@Override
 	public String getPortletId() {
-		return
-			WorkflowDefinitionLinkPortletKeys.
-				WORKFLOW_DEFINITION_LINK_CONTROL_PANEL;
+		return WorkflowDefinitionLinkPortletKeys.
+			WORKFLOW_DEFINITION_LINK_CONTROL_PANEL;
 	}
 
 	@Reference(unbind = "-")
