@@ -25,7 +25,8 @@ public class UpgradePortletId
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			new String[] {"180",
+			new String[] {
+				"180",
 				SocialUserStatisticsPortletKeys.SOCIAL_USER_STATISTICS
 			}
 		};
