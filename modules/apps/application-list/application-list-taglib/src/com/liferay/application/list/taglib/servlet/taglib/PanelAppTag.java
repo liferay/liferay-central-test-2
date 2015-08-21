@@ -104,21 +104,6 @@ public class PanelAppTag extends BasePanelTag {
 
 		request.setAttribute("liferay-application-list:panel-app:data", _data);
 
-		if (Validator.isNull(_url)) {
-			PortletURL portletURL = null;
-
-			try {
-				portletURL = _panelApp.getPortletURL(request);
-			}
-			catch (PortalException pe) {
-				_log.error(pe);
-			}
-
-			_url = portletURL.toString();
-		}
-
-		request.setAttribute("liferay-application-list:panel-app:url", _url);
-
 		if (Validator.isNull(_id)) {
 			_id = "portlet_" + _panelApp.getPortletId();
 		}
@@ -138,6 +123,21 @@ public class PanelAppTag extends BasePanelTag {
 
 		request.setAttribute(
 			"liferay-application-list:panel-app:panelApp", _panelApp);
+
+		if (Validator.isNull(_url)) {
+			PortletURL portletURL = null;
+
+			try {
+				portletURL = _panelApp.getPortletURL(request);
+			}
+			catch (PortalException pe) {
+				_log.error(pe);
+			}
+
+			_url = portletURL.toString();
+		}
+
+		request.setAttribute("liferay-application-list:panel-app:url", _url);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(PanelAppTag.class);
