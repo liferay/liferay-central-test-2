@@ -238,14 +238,16 @@ final DLViewFileVersionDisplayContext dlViewFileVersionDisplayContext = DLDispla
 				<c:if test="<%= PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED %>">
 
 					<%
-					PortalIncludeUtil.include(pageContext, new PortalIncludeUtil.HTMLRenderer() {
+					PortalIncludeUtil.include(
+						pageContext,
+						new PortalIncludeUtil.HTMLRenderer() {
 
-						@Override
-						public void renderHTML(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-							dlViewFileVersionDisplayContext.renderPreview(request, response);
-						}
+							@Override
+							public void renderHTML(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+								dlViewFileVersionDisplayContext.renderPreview(request, response);
+							}
 
-					});
+						});
 					%>
 
 				</c:if>
