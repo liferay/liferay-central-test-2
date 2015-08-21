@@ -22,5 +22,5 @@
 	</a>
 
 	<div class="collapse <%= active ? "in" : StringPool.BLANK %>" id="<%= id %>">
-			<div class="list-group-item">
+		<div class="list-group-item">
 </c:if>
