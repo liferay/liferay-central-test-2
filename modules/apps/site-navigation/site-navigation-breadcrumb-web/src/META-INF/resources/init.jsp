@@ -31,7 +31,7 @@ page import="com.liferay.site.navigation.breadcrumb.web.context.SiteNavigationBr
 <portlet:defineObjects/>
 
 <%
-SiteNavigationBreadcrumbDisplayContext breadcrumbDisplayContext = new SiteNavigationBreadcrumbDisplayContext(request);
+SiteNavigationBreadcrumbDisplayContext siteNavigationBreadcrumbDisplayContext = new SiteNavigationBreadcrumbDisplayContext(request);
 %>
 
 <%@ include file="/init-ext.jsp" %>

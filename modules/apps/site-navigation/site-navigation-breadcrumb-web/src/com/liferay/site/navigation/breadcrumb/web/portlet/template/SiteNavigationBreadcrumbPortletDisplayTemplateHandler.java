@@ -68,7 +68,8 @@ public class SiteNavigationBreadcrumbPortletDisplayTemplateHandler
 
 	@Override
 	public String getDefaultTemplateKey() {
-		return _breadcrumbWebConfiguration.ddmTemplateKeyDefault();
+		return _siteNavigationBreadcrumbWebConfiguration.
+			ddmTemplateKeyDefault();
 	}
 
 	@Override
@@ -125,8 +126,9 @@ public class SiteNavigationBreadcrumbPortletDisplayTemplateHandler
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_breadcrumbWebConfiguration = Configurable.createConfigurable(
-			SiteNavigationBreadcrumbWebConfiguration.class, properties);
+		_siteNavigationBreadcrumbWebConfiguration =
+			Configurable.createConfigurable(
+				SiteNavigationBreadcrumbWebConfiguration.class, properties);
 	}
 
 	@Override
@@ -136,6 +138,6 @@ public class SiteNavigationBreadcrumbPortletDisplayTemplateHandler
 	}
 
 	private volatile SiteNavigationBreadcrumbWebConfiguration
-		_breadcrumbWebConfiguration;
+		_siteNavigationBreadcrumbWebConfiguration;
 
 }

@@ -53,7 +53,7 @@ public class SiteNavigationBreadcrumbPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
 	protected void setSiteNavigationBreadcrumbWebUpgrade(
-		SiteNavigationBreadcrumbWebUpgrade breadcrumbWebUpgrade) {
+		SiteNavigationBreadcrumbWebUpgrade siteNavigationBreadcrumbWebUpgrade) {
 	}
 
 }

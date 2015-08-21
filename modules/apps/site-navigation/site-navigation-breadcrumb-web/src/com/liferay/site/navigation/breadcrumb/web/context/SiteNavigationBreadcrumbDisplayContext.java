@@ -43,7 +43,7 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		_breadcrumbPortletInstanceConfiguration =
+		_siteNavigationBreadcrumbPortletInstanceConfiguration =
 			portletDisplay.getPortletInstanceConfiguration(
 				SiteNavigationBreadcrumbPortletInstanceConfiguration.class);
 	}
@@ -70,7 +70,8 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		_displayStyle = ParamUtil.getString(
 			_request, "displayStyle",
-			_breadcrumbPortletInstanceConfiguration.displayStyle());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				displayStyle());
 
 		return _displayStyle;
 	}
@@ -81,11 +82,13 @@ public class SiteNavigationBreadcrumbDisplayContext {
 		}
 
 		_displayStyleGroupId =
-			_breadcrumbPortletInstanceConfiguration.displayStyleGroupId();
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				displayStyleGroupId();
 
 		_displayStyleGroupId = ParamUtil.getLong(
 			_request, "displayStyleGroupId",
-			_breadcrumbPortletInstanceConfiguration.displayStyleGroupId());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				displayStyleGroupId());
 
 		if (_displayStyleGroupId <= 0) {
 			ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
@@ -114,7 +117,8 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		_showCurrentGroup = ParamUtil.getBoolean(
 			_request, "showCurrentGroup",
-			_breadcrumbPortletInstanceConfiguration.showCurrentGroup());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				showCurrentGroup());
 
 		return _showCurrentGroup;
 	}
@@ -126,7 +130,8 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		_showGuestGroup = ParamUtil.getBoolean(
 			_request, "showGuestGroup",
-			_breadcrumbPortletInstanceConfiguration.showGuestGroup());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				showGuestGroup());
 
 		return _showGuestGroup;
 	}
@@ -138,7 +143,7 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		_showLayout = ParamUtil.getBoolean(
 			_request, "showLayout",
-			_breadcrumbPortletInstanceConfiguration.showLayout());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.showLayout());
 
 		return _showLayout;
 	}
@@ -150,7 +155,8 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		_showParentGroups = ParamUtil.getBoolean(
 			_request, "showParentGroups",
-			_breadcrumbPortletInstanceConfiguration.showParentGroups());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				showParentGroups());
 
 		return _showParentGroups;
 	}
@@ -162,7 +168,8 @@ public class SiteNavigationBreadcrumbDisplayContext {
 
 		_showPortletBreadcrumb = ParamUtil.getBoolean(
 			_request, "showPortletBreadcrumb",
-			_breadcrumbPortletInstanceConfiguration.showPortletBreadcrumb());
+			_siteNavigationBreadcrumbPortletInstanceConfiguration.
+				showPortletBreadcrumb());
 
 		return _showPortletBreadcrumb;
 	}
@@ -176,8 +183,6 @@ public class SiteNavigationBreadcrumbDisplayContext {
 	private static final Log _log = LogFactoryUtil.getLog(
 		SiteNavigationBreadcrumbDisplayContext.class);
 
-	private final SiteNavigationBreadcrumbPortletInstanceConfiguration
-		_breadcrumbPortletInstanceConfiguration;
 	private String _ddmTemplateKey;
 	private String _displayStyle;
 	private long _displayStyleGroupId;
@@ -188,5 +193,7 @@ public class SiteNavigationBreadcrumbDisplayContext {
 	private Boolean _showLayout;
 	private Boolean _showParentGroups;
 	private Boolean _showPortletBreadcrumb;
+	private final SiteNavigationBreadcrumbPortletInstanceConfiguration
+		_siteNavigationBreadcrumbPortletInstanceConfiguration;
 
 }
