@@ -51,7 +51,7 @@ public class SocialGroupStatisticsPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
 	protected void setSocialGroupStatisticsWebUpgrade(
-		SocialGroupStatisticsWebUpgrade groupStatisticsWebUpgrade) {
+		SocialGroupStatisticsWebUpgrade socialGroupStatisticsWebUpgrade) {
 	}
 
 }
