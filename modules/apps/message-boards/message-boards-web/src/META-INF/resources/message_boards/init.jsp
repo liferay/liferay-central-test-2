@@ -181,14 +181,6 @@ page import="javax.portlet.WindowState" %>
 <liferay-theme:defineObjects />
 
 <%
-MBRequestHelper mbRequestHelper = new MBRequestHelper(request);
-
-MBWebComponentProvider mbWebComponentProvider = MBWebComponentProvider.getMBWebComponentProvider();
-
-MBDisplayContextProvider mbDisplayContextProvider = mbWebComponentProvider.getMBDisplayContextProvider();
-
-MBHomeDisplayContext mbHomeDisplayContext = mbDisplayContextProvider.getMBHomeDisplayContext(request, response);
-
 WindowState windowState = liferayPortletRequest.getWindowState();
 
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
@@ -225,6 +217,14 @@ boolean threadsPanelExtended = true;
 boolean childrenMessagesTaggable = true;
 boolean includeFormTag = true;
 boolean showSearch = true;
+
+MBRequestHelper mbRequestHelper = new MBRequestHelper(request);
+
+MBWebComponentProvider mbWebComponentProvider = MBWebComponentProvider.getMBWebComponentProvider();
+
+MBDisplayContextProvider mbDisplayContextProvider = mbWebComponentProvider.getMBDisplayContextProvider();
+
+MBHomeDisplayContext mbHomeDisplayContext = mbDisplayContextProvider.getMBHomeDisplayContext(request, response);
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
