@@ -52,9 +52,6 @@ public class PanelTag extends BasePanelTag {
 			_panelCategory = RootPanelCategory.getInstance();
 		}
 
-		request.setAttribute(
-			"liferay-application-list:panel:panelCategory", _panelCategory);
-
 		PanelCategoryRegistry panelCategoryRegistry =
 			(PanelCategoryRegistry)request.getAttribute(
 				ApplicationListWebKeys.PANEL_CATEGORY_REGISTRY);
@@ -70,6 +67,9 @@ public class PanelTag extends BasePanelTag {
 		request.setAttribute(
 			"liferay-application-list:panel:childPanelCategories",
 			childPanelCategories);
+
+		request.setAttribute(
+			"liferay-application-list:panel:panelCategory", _panelCategory);
 	}
 
 	private PanelCategory _panelCategory;
