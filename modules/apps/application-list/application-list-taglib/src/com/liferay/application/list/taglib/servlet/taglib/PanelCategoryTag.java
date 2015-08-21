@@ -95,30 +95,26 @@ public class PanelCategoryTag extends BasePanelTag {
 		request.setAttribute(
 			"liferay-application-list:panel-category:active", active);
 
-		String id =
-			"panel-manage-" +
-				StringUtil.replace(
-					_panelCategory.getKey(), StringPool.PERIOD,
-					StringPool.UNDERLINE);
+		String id = StringUtil.replace(
+			_panelCategory.getKey(), StringPool.PERIOD, StringPool.UNDERLINE);
+
+		id = "panel-manage-" + id;
 
 		request.setAttribute("liferay-application-list:panel-category:id", id);
 
 		request.setAttribute(
 			"liferay-application-list:panel-category:panelApps", panelApps);
-
 		request.setAttribute(
 			"liferay-application-list:panel-category:panelCategory",
 			_panelCategory);
-
 		request.setAttribute(
 			"liferay-application-list:panel-category:showHeader", _showHeader);
-
 		request.setAttribute(
 			"liferay-application-list:panel-category:showOpen", _showOpen);
 	}
 
 	private PanelCategory _panelCategory;
-	private boolean _showHeader = false;
-	private boolean _showOpen = false;
+	private boolean _showHeader;
+	private boolean _showOpen;
 
 }
