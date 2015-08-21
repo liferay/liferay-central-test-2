@@ -18,10 +18,10 @@
 
 <%
 boolean active = GetterUtil.getBoolean(request.getAttribute("liferay-application-list:panel-app:active"));
-String url = (String)request.getAttribute("liferay-application-list:panel-app:url");
+Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-application-list:panel-app:data");
 String id = (String)request.getAttribute("liferay-application-list:panel-app:id");
 String label = (String)request.getAttribute("liferay-application-list:panel-app:label");
-Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-application-list:panel-app:data");
+String url = (String)request.getAttribute("liferay-application-list:panel-app:url");
 %>
 
 <c:if test="<%= Validator.isNotNull(url) %>">
