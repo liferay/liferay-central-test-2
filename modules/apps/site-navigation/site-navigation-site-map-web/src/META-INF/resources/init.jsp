@@ -40,9 +40,9 @@ page import="java.util.Map" %>
 <liferay-theme:defineObjects />
 
 <%
-SiteNavigationSiteMapDisplayContext siteMapDisplayContext = new SiteNavigationSiteMapDisplayContext(request);
+SiteNavigationSiteMapDisplayContext siteNavigationSiteMapDisplayContext = new SiteNavigationSiteMapDisplayContext(request);
 
-SiteNavigationSiteMapPortletInstanceConfiguration siteMapPortletInstanceConfiguration = siteMapDisplayContext.getSiteNavigationSiteMapPortletInstanceConfiguration();
+SiteNavigationSiteMapPortletInstanceConfiguration siteNavigationSiteMapPortletInstanceConfiguration = siteNavigationSiteMapDisplayContext.getSiteNavigationSiteMapPortletInstanceConfiguration();
 %>
 
 <%@ include file="/init-ext.jsp" %>
