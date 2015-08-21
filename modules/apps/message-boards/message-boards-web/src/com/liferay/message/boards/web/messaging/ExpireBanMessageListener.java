@@ -52,11 +52,10 @@ public class ExpireBanMessageListener
 		schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
 		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
 
-		_messageBoardsConfiguration = Configurable.createConfigurable(
+		_mbConfiguration = Configurable.createConfigurable(
 			MBConfiguration.class, properties);
 
-		schedulerEntry.setTriggerValue(
-			_messageBoardsConfiguration.expireBanJobInterval());
+		schedulerEntry.setTriggerValue(_mbConfiguration.expireBanJobInterval());
 	}
 
 	@Override
@@ -76,6 +75,6 @@ public class ExpireBanMessageListener
 	protected void setPortlet(Portlet portlet) {
 	}
 
-	private volatile MBConfiguration _messageBoardsConfiguration;
+	private volatile MBConfiguration _mbConfiguration;
 
 }
