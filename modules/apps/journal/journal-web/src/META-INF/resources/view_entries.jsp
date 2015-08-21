@@ -360,11 +360,11 @@ String displayStyle = journalDisplayContext.getDisplayStyle();
 				%>
 
 				<c:choose>
-					<c:when test='<%= displayStyle.equals("icon") %>'>
-						<%@ include file="/folder_columns_icon.jspf" %>
-					</c:when>
 					<c:when test='<%= displayStyle.equals("descriptive") %>'>
 						<%@ include file="/folder_columns_descriptive.jspf" %>
+					</c:when>
+					<c:when test='<%= displayStyle.equals("icon") %>'>
+						<%@ include file="/folder_columns_icon.jspf" %>
 					</c:when>
 					<c:otherwise>
 						<%@ include file="/folder_columns_list.jspf" %>
