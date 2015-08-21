@@ -62,7 +62,7 @@ page import="java.util.Map" %>
 <%
 SettingsFactory settingsFactory = SettingsFactoryUtil.getSettingsFactory();
 
-SocialUserStatisticsPortletInstanceConfiguration userStatisticsPortletInstanceConfiguration = settingsFactory.getSettings(SocialUserStatisticsPortletInstanceConfiguration.class, new PortletInstanceSettingsLocator(themeDisplay.getLayout(), portletDisplay.getId()));
+SocialUserStatisticsPortletInstanceConfiguration socialUserStatisticsPortletInstanceConfiguration = settingsFactory.getSettings(SocialUserStatisticsPortletInstanceConfiguration.class, new PortletInstanceSettingsLocator(themeDisplay.getLayout(), portletDisplay.getId()));
 %>
 
 <%@ include file="/init-ext.jsp" %>
