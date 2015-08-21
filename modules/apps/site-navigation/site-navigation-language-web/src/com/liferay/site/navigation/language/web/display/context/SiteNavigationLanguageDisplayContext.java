@@ -52,7 +52,7 @@ public class SiteNavigationLanguageDisplayContext {
 
 		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
 
-		_languagePortletInstanceConfiguration =
+		_siteNavigationLanguagePortletInstanceConfiguration =
 			portletDisplay.getPortletInstanceConfiguration(
 				SiteNavigationLanguagePortletInstanceConfiguration.class);
 	}
@@ -118,7 +118,7 @@ public class SiteNavigationLanguageDisplayContext {
 		}
 
 		String displayStyle =
-			_languagePortletInstanceConfiguration.displayStyle();
+			_siteNavigationLanguagePortletInstanceConfiguration.displayStyle();
 
 		if (displayStyle != null) {
 			_ddmTemplateKey =
@@ -134,7 +134,8 @@ public class SiteNavigationLanguageDisplayContext {
 		}
 
 		_displayStyleGroupId =
-			_languagePortletInstanceConfiguration.displayStyleGroupId();
+			_siteNavigationLanguagePortletInstanceConfiguration.
+				displayStyleGroupId();
 
 		if (_displayStyleGroupId <= 0) {
 			_displayStyleGroupId = _themeDisplay.getSiteGroupId();
@@ -149,7 +150,7 @@ public class SiteNavigationLanguageDisplayContext {
 		}
 
 		_languageIds = StringUtil.split(
-			_languagePortletInstanceConfiguration.languageIds());
+			_siteNavigationLanguagePortletInstanceConfiguration.languageIds());
 
 		if (ArrayUtil.isEmpty(_languageIds)) {
 			_languageIds = getAvailableLanguageIds();
@@ -161,7 +162,7 @@ public class SiteNavigationLanguageDisplayContext {
 	public SiteNavigationLanguagePortletInstanceConfiguration
 		getSiteNavigationLanguagePortletInstanceConfiguration() {
 
-		return _languagePortletInstanceConfiguration;
+		return _siteNavigationLanguagePortletInstanceConfiguration;
 	}
 
 	protected PortletDisplayTemplate getPortletDisplayTemplate() {
@@ -175,7 +176,7 @@ public class SiteNavigationLanguageDisplayContext {
 	private long _displayStyleGroupId;
 	private String[] _languageIds;
 	private final SiteNavigationLanguagePortletInstanceConfiguration
-		_languagePortletInstanceConfiguration;
+		_siteNavigationLanguagePortletInstanceConfiguration;
 	private final ThemeDisplay _themeDisplay;
 
 }

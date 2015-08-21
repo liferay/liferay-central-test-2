@@ -52,7 +52,7 @@ public class SiteNavigationLanguagePortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
 	protected void setSiteNavigationLanguageWebUpgrade(
-		SiteNavigationLanguageWebUpgrade SiteNavigationLanguageWebUpgrade) {
+		SiteNavigationLanguageWebUpgrade siteNavigationLanguageWebUpgrade) {
 	}
 
 }

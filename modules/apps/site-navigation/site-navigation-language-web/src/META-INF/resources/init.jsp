@@ -32,9 +32,9 @@ page import="com.liferay.site.navigation.language.web.display.context.SiteNaviga
 <liferay-theme:defineObjects />
 
 <%
-SiteNavigationLanguageDisplayContext languageDisplayContext = new SiteNavigationLanguageDisplayContext(request);
+SiteNavigationLanguageDisplayContext siteNavigationLanguageDisplayContext = new SiteNavigationLanguageDisplayContext(request);
 
-SiteNavigationLanguagePortletInstanceConfiguration languagePortletInstanceConfiguration = languageDisplayContext.getSiteNavigationLanguagePortletInstanceConfiguration();
+SiteNavigationLanguagePortletInstanceConfiguration languagePortletInstanceConfiguration = siteNavigationLanguageDisplayContext.getSiteNavigationLanguagePortletInstanceConfiguration();
 %>
 
 <%@ include file="/init-ext.jsp" %>

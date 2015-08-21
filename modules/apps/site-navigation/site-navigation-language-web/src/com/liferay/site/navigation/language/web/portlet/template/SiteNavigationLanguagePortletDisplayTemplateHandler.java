@@ -57,7 +57,7 @@ public class SiteNavigationLanguagePortletDisplayTemplateHandler
 
 	@Override
 	public String getDefaultTemplateKey() {
-		return _languageWebConfiguration.ddmTemplateKey();
+		return _siteNavigationLanguageWebConfiguration.ddmTemplateKey();
 	}
 
 	@Override
@@ -101,8 +101,9 @@ public class SiteNavigationLanguagePortletDisplayTemplateHandler
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
-		_languageWebConfiguration = Configurable.createConfigurable(
-			SiteNavigationLanguageWebConfiguration.class, properties);
+		_siteNavigationLanguageWebConfiguration =
+			Configurable.createConfigurable(
+				SiteNavigationLanguageWebConfiguration.class, properties);
 	}
 
 	@Override
@@ -112,6 +113,6 @@ public class SiteNavigationLanguagePortletDisplayTemplateHandler
 	}
 
 	private volatile SiteNavigationLanguageWebConfiguration
-		_languageWebConfiguration;
+		_siteNavigationLanguageWebConfiguration;
 
 }
