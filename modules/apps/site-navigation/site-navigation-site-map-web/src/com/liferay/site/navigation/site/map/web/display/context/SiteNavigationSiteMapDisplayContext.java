@@ -52,7 +52,7 @@ public class SiteNavigationSiteMapDisplayContext {
 
 		PortletDisplay portletDisplay = _themeDisplay.getPortletDisplay();
 
-		_siteMapPortletInstanceConfiguration =
+		_siteNavigationSiteMapPortletInstanceConfiguration =
 			portletDisplay.getPortletInstanceConfiguration(
 				SiteNavigationSiteMapPortletInstanceConfiguration.class);
 	}
@@ -63,11 +63,13 @@ public class SiteNavigationSiteMapDisplayContext {
 		_buildSiteMap(
 			_themeDisplay.getLayout(), getRootLayouts(), getRootLayout(),
 			isIncludeRootInTree(),
-			_siteMapPortletInstanceConfiguration.displayDepth(),
-			_siteMapPortletInstanceConfiguration.showCurrentPage(),
-			_siteMapPortletInstanceConfiguration.useHtmlTitle(),
-			_siteMapPortletInstanceConfiguration.showHiddenPages(), 1,
-			_themeDisplay, sb);
+			_siteNavigationSiteMapPortletInstanceConfiguration.displayDepth(),
+			_siteNavigationSiteMapPortletInstanceConfiguration.
+				showCurrentPage(),
+			_siteNavigationSiteMapPortletInstanceConfiguration.useHtmlTitle(),
+			_siteNavigationSiteMapPortletInstanceConfiguration.
+				showHiddenPages(),
+			1, _themeDisplay, sb);
 
 		return sb.toString();
 	}
@@ -78,7 +80,8 @@ public class SiteNavigationSiteMapDisplayContext {
 		}
 
 		_displayStyleGroupId =
-			_siteMapPortletInstanceConfiguration.displayStyleGroupId();
+			_siteNavigationSiteMapPortletInstanceConfiguration.
+				displayStyleGroupId();
 
 		if (_displayStyleGroupId <= 0) {
 			_displayStyleGroupId = _themeDisplay.getSiteGroupId();
@@ -103,7 +106,7 @@ public class SiteNavigationSiteMapDisplayContext {
 		}
 
 		String rootLayoutUuid =
-			_siteMapPortletInstanceConfiguration.rootLayoutUuid();
+			_siteNavigationSiteMapPortletInstanceConfiguration.rootLayoutUuid();
 
 		if (Validator.isNotNull(rootLayoutUuid)) {
 			Layout layout = _themeDisplay.getLayout();
@@ -124,7 +127,8 @@ public class SiteNavigationSiteMapDisplayContext {
 		Layout rootLayout = getRootLayout();
 
 		if (Validator.isNotNull(
-				_siteMapPortletInstanceConfiguration.rootLayoutUuid()) &&
+				_siteNavigationSiteMapPortletInstanceConfiguration.
+					rootLayoutUuid()) &&
 			Validator.isNotNull(rootLayout)) {
 
 			_rootLayoutId = rootLayout.getLayoutId();
@@ -146,7 +150,7 @@ public class SiteNavigationSiteMapDisplayContext {
 	public SiteNavigationSiteMapPortletInstanceConfiguration
 		getSiteNavigationSiteMapPortletInstanceConfiguration() {
 
-		return _siteMapPortletInstanceConfiguration;
+		return _siteNavigationSiteMapPortletInstanceConfiguration;
 	}
 
 	public Boolean isIncludeRootInTree() {
@@ -155,10 +159,12 @@ public class SiteNavigationSiteMapDisplayContext {
 		}
 
 		_includeRootInTree =
-			_siteMapPortletInstanceConfiguration.includeRootInTree();
+			_siteNavigationSiteMapPortletInstanceConfiguration.
+				includeRootInTree();
 
 		if (Validator.isNull(
-				_siteMapPortletInstanceConfiguration.rootLayoutUuid()) ||
+				_siteNavigationSiteMapPortletInstanceConfiguration.
+					rootLayoutUuid()) ||
 			(getRootLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
 
 			_includeRootInTree = false;
@@ -290,7 +296,7 @@ public class SiteNavigationSiteMapDisplayContext {
 	private Layout _rootLayout;
 	private Long _rootLayoutId;
 	private final SiteNavigationSiteMapPortletInstanceConfiguration
-		_siteMapPortletInstanceConfiguration;
+		_siteNavigationSiteMapPortletInstanceConfiguration;
 	private final ThemeDisplay _themeDisplay;
 
 }

@@ -53,7 +53,7 @@ public class SiteNavigationSiteMapPortlet extends MVCPortlet {
 
 	@Reference(unbind = "-")
 	protected void setSiteNavigationSiteMapWebUpgrade(
-		SiteNavigationSiteMapWebUpgrade siteMapWebUpgrade) {
+		SiteNavigationSiteMapWebUpgrade siteNavigationSiteMapWebUpgrade) {
 	}
 
 }

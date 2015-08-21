@@ -52,7 +52,8 @@ public class SiteNavigationSiteMapWebUpgrade {
 			@Override
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
-					new String[] {"85",
+					new String[] {
+						"85",
 						SiteNavigationSiteMapPortletKeys.
 							SITE_NAVIGATION_SITE_MAP
 					}
