@@ -105,8 +105,8 @@ if (Validator.isNotNull(roleTypesParam)) {
 
 LiferayPortletURL definePermissionsURL = (LiferayPortletURL)PortletProviderUtil.getPortletURL(request, Role.class.getName(), PortletProvider.Action.MANAGE);
 
-definePermissionsURL.setParameter("backURL", currentURL);
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
+definePermissionsURL.setParameter("backURL", currentURL);
 definePermissionsURL.setPortletMode(PortletMode.VIEW);
 definePermissionsURL.setRefererPlid(plid);
 definePermissionsURL.setWindowState(LiferayWindowState.POP_UP);
