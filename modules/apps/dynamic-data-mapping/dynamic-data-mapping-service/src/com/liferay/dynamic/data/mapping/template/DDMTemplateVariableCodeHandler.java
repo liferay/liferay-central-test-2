@@ -95,13 +95,7 @@ public class DDMTemplateVariableCodeHandler
 			dataType = "common";
 		}
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(getTemplatePath());
-		sb.append(dataType);
-		sb.append(".ftl");
-
-		return sb.toString();
+		return getTemplatePath() + dataType + ".ftl";
 	}
 
 	protected String getTemplatePath() {
