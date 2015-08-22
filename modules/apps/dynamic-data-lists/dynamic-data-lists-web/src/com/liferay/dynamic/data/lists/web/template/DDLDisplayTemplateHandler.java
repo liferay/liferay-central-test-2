@@ -110,6 +110,9 @@ public class DDLDisplayTemplateHandler extends BaseDDMTemplateHandler {
 			new LinkedHashMap<>();
 
 		addTemplateVariableGroup(
+			templateVariableGroups,
+			getDDLUtilVariablesTemplateVariableGroups());
+		addTemplateVariableGroup(
 			templateVariableGroups, getDDLVariablesTemplateVariableGroups());
 		addTemplateVariableGroup(
 			templateVariableGroups, getGeneralVariablesTemplateVariableGroup());
@@ -122,10 +125,6 @@ public class DDLDisplayTemplateHandler extends BaseDDMTemplateHandler {
 
 		addTemplateVariableGroup(
 			templateVariableGroups, structureFieldsTemplateVariableGroup);
-
-		addTemplateVariableGroup(
-			templateVariableGroups,
-			getDDLUtilVariablesTemplateVariableGroups());
 
 		addTemplateVariableGroup(
 			templateVariableGroups, getUtilTemplateVariableGroup());
