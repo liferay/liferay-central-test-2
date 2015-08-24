@@ -301,10 +301,10 @@ public class EhcacheConfigurationHelperUtil {
 							factoryClassName);
 					}
 
-					properties.put(PortalCacheReplicator.REPLICATOR, true);
 					properties.put(
 						PortalCacheConfiguration.PORTAL_CACHE_LISTENER_SCOPE,
 						portalCacheListenerScope);
+					properties.put(PortalCacheReplicator.REPLICATOR, true);
 
 					portalCacheListenerPropertiesSet.add(properties);
 				}
