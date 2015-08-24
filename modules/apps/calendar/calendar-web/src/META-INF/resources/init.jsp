@@ -118,9 +118,6 @@ page import="java.util.TimeZone" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 
-<%@ page import="org.osgi.framework.Bundle" %><%@
-page import="org.osgi.framework.FrameworkUtil" %>
-
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
