@@ -314,8 +314,8 @@ public class EhcacheConfigurationHelperUtil {
 					EhcacheConstants.CACHE_EVENT_LISTENER_FACTORY_CLASS_NAME,
 					factoryClassName);
 				properties.put(
-						PortalCacheConfiguration.PORTAL_CACHE_LISTENER_SCOPE,
-						portalCacheListenerScope);
+					PortalCacheConfiguration.PORTAL_CACHE_LISTENER_SCOPE,
+					portalCacheListenerScope);
 
 				portalCacheListenerPropertiesSet.add(properties);
 			}
