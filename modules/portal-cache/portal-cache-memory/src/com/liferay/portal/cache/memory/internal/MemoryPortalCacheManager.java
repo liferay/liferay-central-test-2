@@ -130,10 +130,10 @@ public class MemoryPortalCacheManager<K extends Serializable, V>
 
 			Properties properties = new Properties();
 
-			properties.put(PortalCacheReplicator.REPLICATOR, true);
 			properties.put(
 				PortalCacheConfiguration.PORTAL_CACHE_LISTENER_SCOPE,
 				PortalCacheListenerScope.ALL);
+			properties.put(PortalCacheReplicator.REPLICATOR, true);
 
 			portalCacheListenerPropertiesSet = Collections.singleton(
 				properties);
