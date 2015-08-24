@@ -44,7 +44,7 @@ public class KaleoTaskInstanceTokenServiceTest {
 		new LiferayIntegrationTestRule();
 
 	@Test
-	public void testSearchByUserRolesWithoutAnyRole() throws Exception {
+	public void testSearchCount() throws Exception {
 		User user = null;
 
 		try {
