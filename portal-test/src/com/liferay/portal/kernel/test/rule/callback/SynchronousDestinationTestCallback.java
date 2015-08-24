@@ -69,8 +69,8 @@ public class SynchronousDestinationTestCallback
 			boolean hasSyncedMethod = false;
 
 			for (Method method : testClass.getMethods()) {
-				if ((method.getAnnotation(Test.class) != null) &&
-					(method.getAnnotation(Sync.class) != null)) {
+				if ((method.getAnnotation(Sync.class) != null) &&
+					(method.getAnnotation(Test.class) != null)) {
 
 					hasSyncedMethod = true;
 
