@@ -34,7 +34,7 @@
 
 <liferay-application-list:panel panelCategory="<%= panelCategory %>" />
 
-<c:if test="<%= showHeader || !panelApps.isEmpty() %>">
+<c:if test="<%= !panelApps.isEmpty() || showHeader %>">
 		</div>
 	</div>
 </c:if>
