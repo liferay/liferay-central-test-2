@@ -122,8 +122,8 @@ public class DefaultMessageBus implements MessageBus {
 
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Destination " + destinationName + " is not configured, " +
-					"queuing MessageListener until destination is added.");
+				"Queuing message listener until destination " +
+					destinationName + " is added");
 		}
 
 		return false;
@@ -272,8 +272,8 @@ public class DefaultMessageBus implements MessageBus {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Registering " + messageListeners.size() +
-					" queued MessageListeners for " +
-					destination.getName());
+					" queued message listeners for destination " +
+						destination.getName());
 		}
 
 		for (MessageListener messageListener : messageListeners) {
