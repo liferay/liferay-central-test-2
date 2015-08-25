@@ -54,7 +54,7 @@ public class SyncFile extends StateAwareModel {
 
 	public static final String TYPE_FOLDER = "folder";
 
-	public static final String TYPE_PWC = "privateWorkingCopy";
+	public static final String TYPE_PRIVATE_WORKING_COPY = "privateWorkingCopy";
 
 	public static final String TYPE_SYSTEM = "system";
 
@@ -250,15 +250,15 @@ public class SyncFile extends StateAwareModel {
 	}
 
 	public boolean isFolder() {
-		if (!isFile() && !isPWC()) {
+		if (!isFile() && !isPrivateWorkingCopy()) {
 			return true;
 		}
 
 		return false;
 	}
 
-	public boolean isPWC() {
-		return type.equals(TYPE_PWC);
+	public boolean isPrivateWorkingCopy() {
+		return type.equals(TYPE_PRIVATE_WORKING_COPY);
 	}
 
 	public boolean isSystem() {
