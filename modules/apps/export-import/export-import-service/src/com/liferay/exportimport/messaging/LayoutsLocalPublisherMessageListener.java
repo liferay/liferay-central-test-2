@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"destination.name=" + DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
-		"status.destination.name=" + DestinationNames.MESSAGE_BUS_MESSAGE_STATUS
+		"message.status.destination.name=" + DestinationNames.MESSAGE_BUS_MESSAGE_STATUS
 	},
 	service = LayoutsLocalPublisherMessageListener.class
 )
