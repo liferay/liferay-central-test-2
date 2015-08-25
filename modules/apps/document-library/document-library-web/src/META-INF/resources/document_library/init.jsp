@@ -19,8 +19,6 @@
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
 
-DLDisplayContextProvider dlDisplayContextProvider = dlWebComponentProvider.getDLDisplayContextProvider();
-
 DLRequestHelper dlRequestHelper = new DLRequestHelper(request);
 
 String portletId = dlRequestHelper.getResourcePortletId();

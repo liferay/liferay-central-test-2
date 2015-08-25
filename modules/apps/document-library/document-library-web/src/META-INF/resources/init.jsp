@@ -253,10 +253,12 @@ PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, life
 
 String currentURL = currentURLObj.toString();
 
+DLWebComponentProvider dlWebComponentProvider = DLWebComponentProvider.getDLWebComponentProvider();
+
+DLDisplayContextProvider dlDisplayContextProvider = dlWebComponentProvider.getDLDisplayContextProvider();
+
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-DLWebComponentProvider dlWebComponentProvider = DLWebComponentProvider.getDLWebComponentProvider();
 %>
 
 <%@ include file="/init-ext.jsp" %>
