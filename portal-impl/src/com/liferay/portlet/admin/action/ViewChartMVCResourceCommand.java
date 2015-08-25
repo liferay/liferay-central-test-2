@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.admin.action;
 
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -28,10 +29,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
-import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -56,12 +53,12 @@ import org.jfree.data.general.ValueDataset;
 	},
 	service = MVCResourceCommand.class
 )
-public class ViewChartMVCResourceCommand implements MVCResourceCommand {
+public class ViewChartMVCResourceCommand extends BaseMVCResourceCommand {
 
 	@Override
-	public boolean serveResource(
+	protected void doServeResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws PortletException {
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -99,17 +96,8 @@ public class ViewChartMVCResourceCommand implements MVCResourceCommand {
 
 		resourceResponse.setContentType(ContentTypes.IMAGE_PNG);
 
-		try {
-			OutputStream outputStream =
-				resourceResponse.getPortletOutputStream();
-
-			ChartUtilities.writeChartAsPNG(outputStream, jFreeChart, 280, 180);
-		}
-		catch (IOException ioe) {
-			throw new PortletException(ioe);
-		}
-
-		return true;
+		ChartUtilities.writeChartAsPNG(
+			resourceResponse.getPortletOutputStream(), jFreeChart, 280, 180);
 	}
 
 	protected JFreeChart getJFreeChart(String title, MeterPlot meterPlot) {
