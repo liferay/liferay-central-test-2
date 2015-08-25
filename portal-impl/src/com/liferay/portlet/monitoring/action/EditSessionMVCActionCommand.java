@@ -71,6 +71,7 @@ public class EditSessionMVCActionCommand extends BaseMVCActionCommand {
 		invalidateSession(actionRequest);
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
 		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
