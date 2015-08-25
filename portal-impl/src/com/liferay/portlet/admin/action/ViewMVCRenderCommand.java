@@ -31,7 +31,7 @@ import javax.portlet.RenderResponse;
 		"mvc.command.name=/admin/view"
 	}
 )
-public class AdminViewMVCRenderCommand implements MVCRenderCommand {
+public class ViewMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
