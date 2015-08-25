@@ -356,7 +356,7 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, actionResponse, jsonObject);
 
 			actionResponse.setRenderParameter(
-							"mvcPath", ActionConstants.COMMON_NULL);
+				"mvcPath", ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -368,7 +368,7 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, actionResponse, jsonObject);
 
 			actionResponse.setRenderParameter(
-							"mvcPath", ActionConstants.COMMON_NULL);
+				"mvcPath", ActionConstants.COMMON_NULL);
 		}
 
 		progressTracker.finish(actionRequest);

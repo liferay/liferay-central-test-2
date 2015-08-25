@@ -60,6 +60,7 @@ public class EditDocumentLibraryExtraSettingsMVCActionCommand
 		}
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
 		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
