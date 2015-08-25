@@ -152,7 +152,7 @@ public class JSONWebServiceServiceActionTest
 	public void testMultipartRequest() throws Exception {
 		registerActionClass(FooService.class);
 
-		Map<String, FileItem[]> fileParams = new HashMap();
+		Map<String, FileItem[]> fileParams = new HashMap<String, FileItem[]>();
 
 		fileParams.put("fileName", null);
 
