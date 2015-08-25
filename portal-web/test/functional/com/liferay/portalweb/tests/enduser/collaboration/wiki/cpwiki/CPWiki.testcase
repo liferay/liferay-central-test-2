@@ -220,6 +220,8 @@
 		</execute>
 
 		<execute macro="WikiNode#editCP">
+			<var name="wikiNodeDescription" value="Wiki Node Description" />
+			<var name="wikiNodeDescriptionEdit" value="Wiki Node Description Edit" />
 			<var name="wikiNodeName" value="Wiki Node Name" />
 			<var name="wikiNodeNameEdit" value="Wiki Node Name Edit" />
 		</execute>
