@@ -56,12 +56,13 @@ public abstract class BasePublisherMessageListener
 		Dictionary<String, Object> properties =
 			componentContext.getProperties();
 
-		String statusDestinationName = (String)properties.get(
-			"status.destination.name");
+		String messageStatusDestinationName = (String)properties.get(
+			"message.status.destination.name");
 
 		SingleDestinationMessageSender singleDestinationMessageSender =
 			SingleDestinationMessageSenderFactoryUtil.
-				createSingleDestinationMessageSender(statusDestinationName);
+				createSingleDestinationMessageSender(
+					messageStatusDestinationName);
 
 		setStatusSender(singleDestinationMessageSender);
 
