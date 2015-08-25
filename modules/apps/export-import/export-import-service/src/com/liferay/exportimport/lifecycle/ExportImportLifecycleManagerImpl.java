@@ -56,7 +56,6 @@ public class ExportImportLifecycleManagerImpl
 		_messageBus.sendMessage(
 			DestinationNames.EXPORT_IMPORT_LIFECYCLE_EVENT_ASYNC,
 			message.clone());
-
 		_messageBus.sendMessage(
 			DestinationNames.EXPORT_IMPORT_LIFECYCLE_EVENT_SYNC,
 			message.clone());
@@ -64,11 +63,10 @@ public class ExportImportLifecycleManagerImpl
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		registerDestinationConfig(
+		registerDestinationConfiguration(
 			bundleContext, DestinationConfiguration.DESTINATION_TYPE_SERIAL,
 			DestinationNames.EXPORT_IMPORT_LIFECYCLE_EVENT_ASYNC);
-
-		registerDestinationConfig(
+		registerDestinationConfiguration(
 			bundleContext,
 			DestinationConfiguration.DESTINATION_TYPE_SYNCHRONOUS,
 			DestinationNames.EXPORT_IMPORT_LIFECYCLE_EVENT_SYNC);
@@ -84,7 +82,7 @@ public class ExportImportLifecycleManagerImpl
 	}
 
 	protected ServiceRegistration<DestinationConfiguration>
-		registerDestinationConfig(
+		registerDestinationConfiguration(
 			BundleContext bundleContext, String destinationType,
 			String destinationName) {
 

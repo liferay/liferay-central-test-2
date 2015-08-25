@@ -70,6 +70,7 @@ public abstract class BasePublisherMessageListener
 				new SchedulerEventMessageListenerWrapper();
 
 		schedulerEventMessageListenerWrapper.setMessageListener(this);
+
 		schedulerEventMessageListenerWrapper.afterPropertiesSet();
 
 		serviceRegistration = bundleContext.registerService(
