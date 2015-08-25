@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -75,6 +76,11 @@ public class LayoutTypeControllerImpl implements LayoutTypeController {
 			PropsUtil.get(PropsKeys.LAYOUT_URL_FRIENDLIABLE, filter), true);
 		_viewPage = GetterUtil.getString(
 			PropsUtil.get(PropsKeys.LAYOUT_VIEW_PAGE, filter));
+	}
+
+	@Override
+	public String getBaseLayoutType() {
+		return StringPool.BLANK;
 	}
 
 	@Override
