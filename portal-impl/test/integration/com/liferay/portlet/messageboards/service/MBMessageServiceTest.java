@@ -189,8 +189,8 @@ public class MBMessageServiceTest {
 				Assert.assertTrue(message.contains("Your server command"));
 				Assert.assertTrue(
 					message.contains(
-						"encountered a deadlock situation. " +
-							"Please re-run your command."));
+						"encountered a deadlock situation. Please re-run " +
+							"your command."));
 			}
 		}
 
