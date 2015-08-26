@@ -35,11 +35,11 @@ public class ServiceTrackerCustomizers {
 
 			@Override
 			public ServiceWrapper<S> addingService(
-				final ServiceReference<S> reference) {
+				final ServiceReference<S> serviceReference) {
 
 				Registry registry = RegistryUtil.getRegistry();
 
-				final S service = registry.getService(reference);
+				final S service = registry.getService(serviceReference);
 
 				if (service == null) {
 					return null;
@@ -48,9 +48,10 @@ public class ServiceTrackerCustomizers {
 				try {
 					final Map<String, Object> properties =
 						Collections.unmodifiableMap(
-							createPropertyMap(reference));
+							createPropertyMap(serviceReference));
 
 					return new ServiceWrapper<S>() {
+
 						@Override
 						public Map<String, Object> getProperties() {
 							return properties;
@@ -60,11 +61,11 @@ public class ServiceTrackerCustomizers {
 						public S getService() {
 							return service;
 						}
+
 					};
 				}
-
 				catch (Throwable t) {
-					registry.ungetService(reference);
+					registry.ungetService(serviceReference);
 
 					throw t;
 				}
@@ -72,23 +73,25 @@ public class ServiceTrackerCustomizers {
 
 			@Override
 			public void modifiedService(
-				ServiceReference<S> reference,
+				ServiceReference<S> serviceReference,
 				ServiceWrapper<S> serviceWrapper) {
 			}
 
 			@Override
 			public void removedService(
-				ServiceReference<S> reference,
+				ServiceReference<S> serviceReference,
 				ServiceWrapper<S> serviceWrapper) {
 
 				Registry registry = RegistryUtil.getRegistry();
 
-				registry.ungetService(reference);
+				registry.ungetService(serviceReference);
 			}
+
 		};
 	}
 
 	public interface ServiceWrapper<S> {
+
 		public Map<String, Object> getProperties();
 
 		public S getService();

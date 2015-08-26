@@ -14,6 +14,7 @@
 
 package com.liferay.registry.internal.test;
 
+import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceRegistration;
 import com.liferay.registry.collections.ServiceTrackerCollections;
@@ -37,7 +38,7 @@ import org.junit.runner.RunWith;
 public class ServiceTrackerCustomizersTest {
 
 	@Test
-	public void testServiceWrapperCustomizer() {
+	public void testServiceWrapper() {
 		ServiceTrackerMap<String, ServiceWrapper<TrackedOne>>
 			serviceTrackerMap = ServiceTrackerCollections.singleValueMap(
 				TrackedOne.class, "target",
@@ -53,8 +54,10 @@ public class ServiceTrackerCustomizersTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
+			Registry registry = RegistryUtil.getRegistry();
+
 			ServiceRegistration<TrackedOne> serviceRegistration =
-				RegistryUtil.getRegistry().registerService(
+				registry.registerService(
 					TrackedOne.class, trackedOne, properties);
 
 			ServiceWrapper<TrackedOne> serviceWrapper =
@@ -62,13 +65,15 @@ public class ServiceTrackerCustomizersTest {
 
 			Assert.assertEquals(trackedOne, serviceWrapper.getService());
 
-			Map<String, Object> propertiesMap = serviceWrapper.getProperties();
+			Map<String, Object> serviceWrapperProperties =
+				serviceWrapper.getProperties();
 
-			Assert.assertTrue(propertiesMap.containsKey("property"));
-			Assert.assertTrue(propertiesMap.containsKey("target"));
-
-			Assert.assertEquals("aProperty", propertiesMap.get("property"));
-			Assert.assertEquals("aTarget", propertiesMap.get("target"));
+			Assert.assertTrue(serviceWrapperProperties.containsKey("property"));
+			Assert.assertTrue(serviceWrapperProperties.containsKey("target"));
+			Assert.assertEquals(
+				"aProperty", serviceWrapperProperties.get("property"));
+			Assert.assertEquals(
+				"aTarget", serviceWrapperProperties.get("target"));
 
 			serviceRegistration.unregister();
 		}
