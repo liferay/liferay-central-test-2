@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.DoAsUserThread;
@@ -180,13 +181,14 @@ public class MBMessageServiceTest {
 
 					String message = loggingEvent.getRenderedMessage();
 
-					Assert.assertTrue(
-						message.startsWith(
-							"com.liferay.portal.kernel.exception." +
-								"SystemException: com.liferay.portal.kernel." +
-									"dao.orm.ORMException: org.hibernate." +
-										"exception.GenericJDBCException: " +
-											"Could not execute"));
+					StringBundler sb = new StringBundler();
+
+					sb.append("com.liferay.portal.kernel.exception.");
+					sb.append("SystemException: com.liferay.portal.kernel.");
+					sb.append("dao.orm.ORMException: org.hibernate.exception.");
+					sb.append("GenericJDBCException: Could not execute");
+
+					Assert.assertTrue(message.startsWith(sb.toString()));
 				}
 
 				for (LoggingEvent loggingEvent :
