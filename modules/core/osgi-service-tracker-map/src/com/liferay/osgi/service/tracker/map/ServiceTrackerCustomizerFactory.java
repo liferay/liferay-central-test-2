@@ -14,7 +14,6 @@
 
 package com.liferay.osgi.service.tracker.map;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,9 +42,8 @@ public class ServiceTrackerCustomizerFactory {
 				}
 
 				try {
-					final Map<String, Object> properties =
-						Collections.unmodifiableMap(
-							createPropertyMap(serviceReference));
+					final Map<String, Object> properties = _getProperties(
+						serviceReference);
 
 					return new ServiceWrapper<S>() {
 
@@ -93,7 +91,7 @@ public class ServiceTrackerCustomizerFactory {
 
 	}
 
-	private static <S> Map<String, Object> createPropertyMap(
+	private static <S> Map<String, Object> _getProperties(
 		final ServiceReference<S> serviceReference) {
 
 		Map<String, Object> properties = new HashMap<>();
