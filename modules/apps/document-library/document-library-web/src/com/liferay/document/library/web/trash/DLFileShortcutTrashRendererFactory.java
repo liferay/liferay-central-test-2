@@ -36,10 +36,10 @@ public class DLFileShortcutTrashRendererFactory
 
 	@Override
 	public TrashRenderer getTrashRenderer(long classPK) throws PortalException {
-		DLFileShortcut fileShortcut =
+		DLFileShortcut dlFileShortcut =
 			_dlFileShortcutLocalService.getFileShortcut(classPK);
 
-		return new DLFileShortcutTrashRenderer(fileShortcut);
+		return new DLFileShortcutTrashRenderer(dlFileShortcut);
 	}
 
 	@Reference(unbind = "-")
