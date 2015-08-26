@@ -35,6 +35,9 @@ public class BasePortletConfigurationIconFactory
 		return 0;
 	}
 
+	/**
+	 * @throws IOException
+	 */
 	@Override
 	public boolean include(
 			HttpServletRequest request, HttpServletResponse response)
