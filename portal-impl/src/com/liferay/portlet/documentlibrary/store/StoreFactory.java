@@ -168,8 +168,6 @@ public class StoreFactory {
 		_storeWrapperServiceTrackerMap.open();
 	}
 
-	private static final String _KEY_NAME = "store.type";
-
 	private static final Log _log = LogFactoryUtil.getLog(StoreFactory.class);
 
 	private static StoreFactory _storeFactory;
@@ -178,12 +176,12 @@ public class StoreFactory {
 	private volatile Store _store = null;
 	private final ServiceTrackerMap<String, Store> _storeServiceTrackerMap =
 		ServiceTrackerCollections.singleValueMap(
-			Store.class, _KEY_NAME, new StoreServiceTrackerCustomizer());
+			Store.class, "store.type", new StoreServiceTrackerCustomizer());
 	private String _storeType = null;
 	private final ServiceTrackerMap<String, StoreWrapper>
 		_storeWrapperServiceTrackerMap =
 			ServiceTrackerCollections.singleValueMap(
-				StoreWrapper.class, _KEY_NAME);
+				StoreWrapper.class, "store.type");
 
 	private class StoreServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Store, Store> {
@@ -216,7 +214,7 @@ public class StoreFactory {
 		}
 
 		protected void invalidate(ServiceReference<Store> serviceReference) {
-			String key = (String)serviceReference.getProperty(_KEY_NAME);
+			String key = (String)serviceReference.getProperty("store.type");
 
 			if (Validator.isNotNull(_storeType) && _storeType.equals(key)) {
 				_store = null;
