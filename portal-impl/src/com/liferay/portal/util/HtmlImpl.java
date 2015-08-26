@@ -67,13 +67,10 @@ public class HtmlImpl implements Html {
 		StringBundler sb = new StringBundler(data.size() * 5);
 
 		for (Map.Entry<String, Object> entry : data.entrySet()) {
-			String dataKey = entry.getKey();
-			String dataValue = String.valueOf(entry.getValue());
-
 			sb.append("data-");
-			sb.append(dataKey);
+			sb.append(entry.getKey());
 			sb.append("=\"");
-			sb.append(escapeAttribute(dataValue));
+			sb.append(escapeAttribute(String.valueOf(entry.getValue())));
 			sb.append("\" ");
 		}
 
