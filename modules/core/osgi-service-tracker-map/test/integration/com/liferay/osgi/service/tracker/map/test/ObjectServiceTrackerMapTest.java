@@ -592,7 +592,9 @@ public class ObjectServiceTrackerMapTest {
 	}
 
 	@Test
-	public void testServiceWrapperCustomizer() throws InvalidSyntaxException {
+	public void testServiceWrapperServiceTrackerCustomizer()
+		throws InvalidSyntaxException {
+
 		ServiceTrackerMap<String, ServiceWrapper<TrackedOne>>
 			serviceTrackerMap = ServiceTrackerMapFactory.singleValueMap(
 				_bundleContext, TrackedOne.class, "target",
@@ -618,13 +620,15 @@ public class ObjectServiceTrackerMapTest {
 
 			Assert.assertEquals(trackedOne, serviceWrapper.getService());
 
-			Map<String, Object> propertiesMap = serviceWrapper.getProperties();
+			Map<String, Object> serviceWrapperProperties =
+				serviceWrapper.getProperties();
 
-			Assert.assertTrue(propertiesMap.containsKey("property"));
-			Assert.assertTrue(propertiesMap.containsKey("target"));
-
-			Assert.assertEquals("aProperty", propertiesMap.get("property"));
-			Assert.assertEquals("aTarget", propertiesMap.get("target"));
+			Assert.assertTrue(serviceWrapperProperties.containsKey("property"));
+			Assert.assertTrue(serviceWrapperProperties.containsKey("target"));
+			Assert.assertEquals(
+				"aProperty", serviceWrapperProperties.get("property"));
+			Assert.assertEquals(
+				"aTarget", serviceWrapperProperties.get("target"));
 
 			serviceRegistration.unregister();
 		}
