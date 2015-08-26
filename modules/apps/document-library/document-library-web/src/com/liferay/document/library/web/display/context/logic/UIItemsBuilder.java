@@ -194,9 +194,15 @@ public class UIItemsBuilder {
 	public void addDeleteMenuItem(List<MenuItem> menuItems)
 		throws PortalException {
 
-		String cmd = _getDeleteCommand();
+		String cmd = null;
 
-		if (cmd == null) {
+		if (isDeleteActionAvailable()) {
+			cmd = Constants.DELETE;
+		}
+		else if (isMoveToTheRecycleBinActionAvailable()) {
+			cmd = Constants.MOVE_TO_TRASH;
+		}
+		else {
 			return;
 		}
 
@@ -204,7 +210,7 @@ public class UIItemsBuilder {
 
 		deleteMenuItem.setKey(DLUIItemKeys.DELETE);
 
-		if (Constants.MOVE_TO_TRASH.equals(cmd)) {
+		if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 			deleteMenuItem.setTrash(true);
 		}
 
@@ -556,18 +562,6 @@ public class UIItemsBuilder {
 			new URLMenuItem(), menuItems, "icon-search",
 			DLUIItemKeys.VIEW_ORIGINAL_FILE, "view-original-file",
 			portletURL.toString());
-	}
-
-	protected String _getDeleteCommand() throws PortalException {
-		if (isDeleteActionAvailable()) {
-			return Constants.DELETE;
-		}
-
-		if (isMoveToTheRecycleBinActionAvailable()) {
-			return Constants.MOVE_TO_TRASH;
-		}
-
-		return null;
 	}
 
 	protected String getNamespace() {
