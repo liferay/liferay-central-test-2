@@ -434,11 +434,10 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		registerDestinationConfig(
+		registerDestinationConfiguration(
 			bundleContext, DestinationConfiguration.DESTINATION_TYPE_PARALLEL,
 			DestinationNames.BACKGROUND_TASK);
-
-		registerDestinationConfig(
+		registerDestinationConfiguration(
 			bundleContext, DestinationConfiguration.DESTINATION_TYPE_PARALLEL,
 			DestinationNames.BACKGROUND_TASK_STATUS);
 	}
@@ -453,7 +452,7 @@ public class BackgroundTaskManagerImpl implements BackgroundTaskManager {
 	}
 
 	protected ServiceRegistration<DestinationConfiguration>
-		registerDestinationConfig(
+		registerDestinationConfiguration(
 			BundleContext bundleContext, String destinationType,
 			String destinationName) {
 
