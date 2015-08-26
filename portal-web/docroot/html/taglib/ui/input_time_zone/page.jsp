@@ -36,6 +36,8 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:if>
 
 	<%
+	long currentTime = System.currentTimeMillis();
+
 	Set<TimeZone> timeZones = new TreeSet<TimeZone>(new TimeZoneComparator());
 
 	for (String timeZoneId : PropsUtil.getArray(PropsKeys.TIME_ZONES)) {
@@ -43,8 +45,6 @@ numberFormat.setMinimumIntegerDigits(2);
 
 		timeZones.add(curTimeZone);
 	}
-
-	long currentTime = System.currentTimeMillis();
 
 	for (TimeZone curTimeZone : timeZones) {
 		String offset = StringPool.BLANK;
