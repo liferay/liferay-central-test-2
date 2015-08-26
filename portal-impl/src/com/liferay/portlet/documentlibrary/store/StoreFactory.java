@@ -173,11 +173,11 @@ public class StoreFactory {
 	private static StoreFactory _storeFactory;
 	private static boolean _warned;
 
-	private volatile Store _store = null;
+	private volatile Store _store;
 	private final ServiceTrackerMap<String, Store> _storeServiceTrackerMap =
 		ServiceTrackerCollections.singleValueMap(
 			Store.class, "store.type", new StoreServiceTrackerCustomizer());
-	private String _storeType = null;
+	private String _storeType;
 	private final ServiceTrackerMap<String, StoreWrapper>
 		_storeWrapperServiceTrackerMap =
 			ServiceTrackerCollections.singleValueMap(
@@ -188,7 +188,7 @@ public class StoreFactory {
 
 		@Override
 		public Store addingService(ServiceReference<Store> serviceReference) {
-			invalidate(serviceReference);
+			cleanUp(serviceReference);
 
 			Registry registry = RegistryUtil.getRegistry();
 
@@ -199,21 +199,21 @@ public class StoreFactory {
 		public void modifiedService(
 			ServiceReference<Store> serviceReference, Store service) {
 
-			invalidate(serviceReference);
+			cleanUp(serviceReference);
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<Store> serviceReference, Store service) {
 
-			invalidate(serviceReference);
+			cleanUp(serviceReference);
 
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
 		}
 
-		protected void invalidate(ServiceReference<Store> serviceReference) {
+		protected void cleanUp(ServiceReference<Store> serviceReference) {
 			String key = (String)serviceReference.getProperty("store.type");
 
 			if (Validator.isNotNull(_storeType) && _storeType.equals(key)) {
