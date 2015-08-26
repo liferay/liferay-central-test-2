@@ -57,28 +57,28 @@ public final class SummaryLoggerHandler {
 			"META-INF/resources/html/summary.html");
 
 		summaryHTMLContent = StringUtil.replace(
-			summaryHTMLContent, "<ul id=\"summaryTitleContainer\"></ul>",
+			summaryHTMLContent, "<ul id=\"summaryTitleContainer\" />",
 			_summaryTitleContainerLoggerElement.toString());
 
 		_summaryContentWrapperLoggerElement.addChildLoggerElement(
 			_getSummaryContentLoggerElement());
 
 		summaryHTMLContent = StringUtil.replace(
-			summaryHTMLContent, "<div id=\"summaryContentContainer\"></div>",
+			summaryHTMLContent, "<div id=\"summaryContentContainer\" />",
 			_summaryContentContainerLoggerElement.toString());
 
 		LoggerElement summaryTestNameLoggerElement =
 			_getSummaryTestNameLoggerElement();
 
 		summaryHTMLContent = StringUtil.replace(
-			summaryHTMLContent, "<h3 id=\"summaryTestName\"></h3>",
+			summaryHTMLContent, "<h3 id=\"summaryTestName\" />",
 			summaryTestNameLoggerElement.toString());
 
 		LoggerElement summaryTestDescriptionLoggerElement =
 			_getSummaryTestDescriptionLoggerElement();
 
 		summaryHTMLContent = StringUtil.replace(
-			summaryHTMLContent, "<p id=\"summaryTestDescription\"></p>",
+			summaryHTMLContent, "<p id=\"summaryTestDescription\" />",
 			summaryTestDescriptionLoggerElement.toString());
 
 		return summaryHTMLContent;
