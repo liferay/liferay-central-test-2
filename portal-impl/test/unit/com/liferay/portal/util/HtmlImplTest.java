@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -34,7 +34,7 @@ public class HtmlImplTest {
 	public void testBuildData() {
 		Assert.assertEquals(StringPool.BLANK, _htmlImpl.buildData(null));
 
-		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> data = new LinkedHashMap<>();
 
 		Assert.assertEquals(StringPool.BLANK, _htmlImpl.buildData(data));
 
@@ -45,7 +45,7 @@ public class HtmlImplTest {
 		data.put("key2", "value2");
 
 		Assert.assertEquals(
-			"data-key2=\"value2\" data-key1=\"value1\" ",
+			"data-key1=\"value1\" data-key2=\"value2\" ",
 			_htmlImpl.buildData(data));
 	}
 
