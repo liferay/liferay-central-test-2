@@ -322,7 +322,7 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
-	public void testPublishDraftCalendarBookingShouldResultInPendingChild()
+	public void testPublishDraftCalendarBookingResultsInPendingChild()
 		throws PortalException {
 
 		ServiceContext serviceContext = createServiceContext();
