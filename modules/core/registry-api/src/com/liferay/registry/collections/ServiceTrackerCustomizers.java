@@ -19,8 +19,6 @@ import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceTrackerCustomizer;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -47,8 +45,7 @@ public class ServiceTrackerCustomizers {
 
 				try {
 					final Map<String, Object> properties =
-						Collections.unmodifiableMap(
-							createPropertyMap(serviceReference));
+						serviceReference.getProperties();
 
 					return new ServiceWrapper<S>() {
 
@@ -96,21 +93,6 @@ public class ServiceTrackerCustomizers {
 
 		public S getService();
 
-	}
-
-	private static <S> Map<String, Object> createPropertyMap(
-		final ServiceReference<S> serviceReference) {
-
-		Map<String, Object> properties = new HashMap<>();
-
-		String[] propertyKeys = serviceReference.getPropertyKeys();
-
-		for (String propertyKey : propertyKeys) {
-			properties.put(
-				propertyKey, serviceReference.getProperty(propertyKey));
-		}
-
-		return properties;
 	}
 
 }
