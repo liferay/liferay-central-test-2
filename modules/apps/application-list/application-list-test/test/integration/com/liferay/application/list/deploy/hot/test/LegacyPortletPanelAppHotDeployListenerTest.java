@@ -124,17 +124,17 @@ public class LegacyPortletPanelAppHotDeployListenerTest {
 			serviceCount, _hotDeployListener.getServiceRegistrationsSize());
 	}
 
-	protected HotDeployEvent getHotDeployEvent(String liferayPortletDescriptor)
+	protected HotDeployEvent getHotDeployEvent(String location)
 		throws Exception {
 
 		Class<?> clazz = getClass();
 
 		ClassLoader classLoader = clazz.getClassLoader();
 
-		ResourceLoader resourceLoader = new ConstantResourceLoader(
-			liferayPortletDescriptor, classLoader);
+		ResourceLoader resourceLoader = new TestResourceLoader(
+			location, classLoader);
 
-		ServletContext servletContext = new RandomlyNamedMockServletContext(
+		ServletContext servletContext = new TestServletContext(
 			"/", resourceLoader);
 
 		return new HotDeployEvent(servletContext, classLoader);
@@ -152,11 +152,9 @@ public class LegacyPortletPanelAppHotDeployListenerTest {
 	private LegacyPortletPanelAppHotDeployListener _hotDeployListener;
 	private ServiceReference<HotDeployListener> _serviceReference;
 
-	private static class ConstantResourceLoader extends DefaultResourceLoader {
+	private static class TestResourceLoader extends DefaultResourceLoader {
 
-		public ConstantResourceLoader(
-			String location, ClassLoader classLoader) {
-
+		public TestResourceLoader(String location, ClassLoader classLoader) {
 			super(classLoader);
 
 			_location = location;
@@ -185,10 +183,9 @@ public class LegacyPortletPanelAppHotDeployListenerTest {
 
 	}
 
-	private static class RandomlyNamedMockServletContext
-		extends MockServletContext {
+	private static class TestServletContext extends MockServletContext {
 
-		public RandomlyNamedMockServletContext(
+		public TestServletContext(
 			String resourceBasePath, ResourceLoader resourceLoader) {
 
 			super(resourceBasePath, resourceLoader);
