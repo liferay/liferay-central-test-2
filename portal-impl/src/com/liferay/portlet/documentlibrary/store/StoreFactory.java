@@ -214,9 +214,12 @@ public class StoreFactory {
 		}
 
 		protected void cleanUp(ServiceReference<Store> serviceReference) {
-			String key = (String)serviceReference.getProperty("store.type");
+			String storeType = (String)serviceReference.getProperty(
+				"store.type");
 
-			if (Validator.isNotNull(_storeType) && _storeType.equals(key)) {
+			if (Validator.isNotNull(_storeType) &&
+				_storeType.equals(storeType)) {
+
 				_store = null;
 			}
 		}
