@@ -73,7 +73,7 @@ public class SerializableObjectWrapper implements Serializable {
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		currentThread.setContextClassLoader(_CLASS_LOADER);
+		currentThread.setContextClassLoader(_classLoader);
 
 		try {
 			int size = objectInputStream.readInt();
@@ -98,7 +98,7 @@ public class SerializableObjectWrapper implements Serializable {
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		currentThread.setContextClassLoader(_CLASS_LOADER);
+		currentThread.setContextClassLoader(_classLoader);
 
 		try {
 			Serializer serializer = new Serializer();
@@ -117,12 +117,12 @@ public class SerializableObjectWrapper implements Serializable {
 		}
 	}
 
-	private static final ClassLoader _CLASS_LOADER;
+	private static final ClassLoader _classLoader;
 
 	static {
 		Thread currentThread = Thread.currentThread();
 
-		_CLASS_LOADER = AggregateClassLoader.getAggregateClassLoader(
+		_classLoader = AggregateClassLoader.getAggregateClassLoader(
 			currentThread.getContextClassLoader(),
 			SerializableObjectWrapper.class.getClassLoader());
 	}
