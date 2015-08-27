@@ -309,7 +309,7 @@ public abstract class AbstractMessagingConfigurator
 			operatingClassLoader);
 
 		if ((servletContextName != null) &&
-			!servletContextName.equals(StringPool.IS_NULL)) {
+			!servletContextName.equals(StringPool.NULL)) {
 
 			MessagingConfiguratorRegistry.registerMessagingConfigurator(
 				servletContextName, this);
