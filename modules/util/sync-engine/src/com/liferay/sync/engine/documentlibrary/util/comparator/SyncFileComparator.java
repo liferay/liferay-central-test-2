@@ -25,10 +25,10 @@ public class SyncFileComparator implements Comparator<SyncFile> {
 
 	@Override
 	public int compare(SyncFile syncFile1, SyncFile syncFile2) {
+		int value = 0;
+
 		long size1 = syncFile1.getSize();
 		long size2 = syncFile2.getSize();
-
-		int value = 0;
 
 		if (size1 < size2) {
 			value = -1;
