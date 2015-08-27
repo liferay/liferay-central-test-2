@@ -2097,14 +2097,10 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
-	 * Returns the name of the WebDAV storage class of the portlet as defined in
-	 * the 'liferay-portlet.xml' file.
-	 *
-	 * Please note that the class may be different from the one defined in the
-	 * WebDAVStorage when it is implemented as an OSGi service.
+	 * Returns the name of the WebDAV storage class of the portlet.
 	 *
 	 * @return the name of the WebDAV storage class of the portlet
-	 * @deprecated As of 7.0.0 replaced by 'getWebDAVStorageInstance().getClass().getName()'
+	 * @deprecated As of 7.0.0, replaced by {@link #getWebDAVStorageInstance}
 	 */
 	@Deprecated
 	@Override
