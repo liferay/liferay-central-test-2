@@ -17,7 +17,6 @@ package com.liferay.microblogs.util;
 import com.liferay.microblogs.constants.MicroblogsPortletKeys;
 import com.liferay.microblogs.model.MicroblogsEntry;
 import com.liferay.microblogs.model.MicroblogsEntryConstants;
-import com.liferay.microblogs.notifications.MicroblogsUserNotificationDefinition;
 import com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -117,10 +116,9 @@ public class MicroblogsUtil {
 				microblogsEntry.getMicroblogsEntryId(), false, userId) &&
 			UserNotificationManagerUtil.isDeliver(
 				userId, MicroblogsPortletKeys.MICROBLOGS, 0,
-				MicroblogsUserNotificationDefinition.NOTIFICATION_TYPE_TAG,
-				deliveryType)) {
+				MicroblogsEntryConstants.NOTIFICATION_TYPE_TAG, deliveryType)) {
 
-			return MicroblogsUserNotificationDefinition.NOTIFICATION_TYPE_TAG;
+			return MicroblogsEntryConstants.NOTIFICATION_TYPE_TAG;
 		}
 		else if (microblogsEntry.getType() ==
 					MicroblogsEntryConstants.TYPE_REPLY) {
@@ -131,37 +129,35 @@ public class MicroblogsUtil {
 			if ((getRootMicroblogsUserId(microblogsEntry) == userId) &&
 				UserNotificationManagerUtil.isDeliver(
 					userId, MicroblogsPortletKeys.MICROBLOGS, 0,
-					MicroblogsUserNotificationDefinition.
-						NOTIFICATION_TYPE_REPLY,
+					MicroblogsEntryConstants.NOTIFICATION_TYPE_REPLY,
 					deliveryType)) {
 
-				return MicroblogsUserNotificationDefinition.
-					NOTIFICATION_TYPE_REPLY;
+				return MicroblogsEntryConstants.NOTIFICATION_TYPE_REPLY;
 			}
 			else if (hasReplied(rootMicroblogsEntryId, userId) &&
 					 UserNotificationManagerUtil.isDeliver(
 						 userId, MicroblogsPortletKeys.MICROBLOGS, 0,
-						 MicroblogsUserNotificationDefinition.
+						 MicroblogsEntryConstants.
 							 NOTIFICATION_TYPE_REPLY_TO_REPLIED,
 						 deliveryType)) {
 
-				return MicroblogsUserNotificationDefinition.
+				return MicroblogsEntryConstants.
 					NOTIFICATION_TYPE_REPLY_TO_REPLIED;
 			}
 			else if (MicroblogsUtil.isTaggedUser(
 						rootMicroblogsEntryId, true, userId) &&
 					 UserNotificationManagerUtil.isDeliver(
 						 userId, MicroblogsPortletKeys.MICROBLOGS, 0,
-						 MicroblogsUserNotificationDefinition.
+						 MicroblogsEntryConstants.
 							 NOTIFICATION_TYPE_REPLY_TO_TAGGED,
 						 deliveryType)) {
 
-				return MicroblogsUserNotificationDefinition.
+				return MicroblogsEntryConstants.
 					NOTIFICATION_TYPE_REPLY_TO_TAGGED;
 			}
 		}
 
-		return MicroblogsUserNotificationDefinition.NOTIFICATION_TYPE_UNKNOWN;
+		return MicroblogsEntryConstants.NOTIFICATION_TYPE_UNKNOWN;
 	}
 
 	public static String getProcessedContent(
