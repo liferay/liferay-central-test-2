@@ -35,6 +35,8 @@ public class ClusterLinkPortalCacheReplicator
 	public ClusterLinkPortalCacheReplicator(
 		Properties properties, PortalCacheClusterLink portalCacheClusterLink) {
 
+		_portalCacheClusterLink = portalCacheClusterLink;
+
 		_replicatePuts = GetterUtil.getBoolean(
 			properties.getProperty(PortalCacheReplicator.REPLICATE_PUTS),
 			PortalCacheReplicator.DEFAULT_REPLICATE_PUTS);
@@ -52,8 +54,6 @@ public class ClusterLinkPortalCacheReplicator
 			properties.getProperty(
 				PortalCacheReplicator.REPLICATE_UPDATES_VIA_COPY),
 			PortalCacheReplicator.DEFAULT_REPLICATE_UPDATES_VIA_COPY);
-
-		_portalCacheClusterLink = portalCacheClusterLink;
 	}
 
 	@Override
