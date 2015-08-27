@@ -229,11 +229,8 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 	}
 
 	protected DDMFormFieldOptions translate(
-		com.
-			liferay.
-				portlet.
-					dynamicdatamapping.
-						DDMFormFieldOptions ddmFormFieldOptions) {
+		com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions
+			ddmFormFieldOptions) {
 
 		if (ddmFormFieldOptions == null) {
 			return null;
