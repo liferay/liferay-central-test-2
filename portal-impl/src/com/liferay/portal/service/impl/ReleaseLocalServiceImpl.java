@@ -82,6 +82,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		return release;
 	}
 
+	@Override
 	public Release addRelease(String servletContextName, String version) {
 		Release release = null;
 
@@ -102,7 +103,6 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		release.setCreateDate(now);
 		release.setModifiedDate(now);
 		release.setServletContextName(servletContextName);
-		release.setBuildNumber(0);
 		release.setVersion(version);
 
 		if (servletContextName.equals(
@@ -331,25 +331,26 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	@Override
 	public void updateRelease(
-			String servletContextName, String version, String previousVersion)
-		throws PortalException {
+		String servletContextName, String version, String previousVersion) {
 
 		Release release = releaseLocalService.fetchRelease(servletContextName);
 
 		if (release == null) {
-			if ("0.0.0".equals(previousVersion)) {
+			if (previousVersion.equals("0.0.0")) {
 				release = releaseLocalService.addRelease(
 					servletContextName, previousVersion);
 			}
 			else {
 				throw new IllegalStateException(
-					"Refusing to upgrade from a non existent release");
+					"Unable to update release because it does not exist");
 			}
 		}
 
-		if (!release.getVersion().equals(previousVersion)) {
+		if (!previousVersion.equals(release.getVersion())) {
 			throw new IllegalStateException(
-				"Refusing to upgrade because previousVersion does not match!");
+				"Unable to update release because the previous version " +
+					previousVersion + " does not match the expected version " +
+						release.getVersion());
 		}
 
 		release.setVersion(version);
