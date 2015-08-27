@@ -45,5 +45,5 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = Portlet.class
 )
-public class MicroblogsStatusUpdatePortlet extends BaseMicroblogsPortlet {
+public class MicroblogsStatusUpdatePortlet extends MicroblogsPortlet {
 }
