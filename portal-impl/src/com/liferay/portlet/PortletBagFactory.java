@@ -858,7 +858,8 @@ public class PortletBagFactory {
 			Map<String, Object> properties = new HashMap<>();
 
 			properties.put("javax.portlet.name", portlet.getPortletId());
-			properties.put("token", portlet.getWebDAVStorageToken());
+			properties.put(
+				"webdav.storage.token", portlet.getWebDAVStorageToken());
 
 			webDAVStorageInstances.add(webDAVStorageInstance, properties);
 		}

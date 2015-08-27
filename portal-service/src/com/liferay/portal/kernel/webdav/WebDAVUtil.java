@@ -367,7 +367,7 @@ public class WebDAVUtil {
 			ServiceTrackerMapFactoryUtil.getServiceTrackerMapFactory();
 
 		_storages = serviceTrackerMapFactory.singleValueMap(
-			WebDAVStorage.class, "token",
+			WebDAVStorage.class, "webdav.storage.token",
 			new ServiceTrackerCustomizer<WebDAVStorage, WebDAVStorage>() {
 
 				@Override
@@ -403,7 +403,7 @@ public class WebDAVUtil {
 					WebDAVStorage webDAVStorage) {
 
 					String token = (String)serviceReference.getProperty(
-						"token");
+						"webdav.storage.token");
 
 					webDAVStorage.setToken(token);
 				}
