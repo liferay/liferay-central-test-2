@@ -24,8 +24,6 @@ import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portal.util.test.AtomicState;
 
-import java.net.MalformedURLException;
-
 import javax.servlet.ServletContext;
 
 import org.junit.After;
@@ -62,7 +60,7 @@ public class OSGiHotDeployListenerTest {
 	}
 
 	@Before
-	public void setUp() throws MalformedURLException {
+	public void setUp() {
 		_dependencyManagerEnabled = DependencyManagementThreadLocal.isEnabled();
 
 		DependencyManagementThreadLocal.setEnabled(false);
