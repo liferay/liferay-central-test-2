@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.cache.cluster.internal.clusterlink;
+package com.liferay.portal.cache.cluster.internal.cluster.link;
 
 import com.liferay.portal.cache.cluster.internal.PortalCacheClusterEvent;
 import com.liferay.portal.kernel.cluster.ClusterLink;

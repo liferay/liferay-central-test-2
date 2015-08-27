@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.cache.cluster.internal.clusterlink.messaging;
+package com.liferay.portal.cache.cluster.internal.cluster.link.messaging;
 
 import com.liferay.portal.cache.cluster.internal.DestinationNames;
 import com.liferay.portal.cache.cluster.internal.PortalCacheClusterEvent;
