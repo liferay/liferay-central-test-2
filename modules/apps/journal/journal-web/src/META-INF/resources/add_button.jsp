@@ -37,7 +37,11 @@ if (JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, 
 	addFolderURL.setParameter("groupId", String.valueOf(scopeGroupId));
 	addFolderURL.setParameter("parentFolderId", String.valueOf(folderId));
 
-	String label = (folder != null) ? "subfolder" : "folder";
+	String label = "folder";
+
+	if (folder != null) {
+		label = "subfolder";
+	}
 
 	addMenuItems.add(new AddMenuItem(LanguageUtil.get(request, label), addFolderURL.toString()));
 }
@@ -53,7 +57,6 @@ if (JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, 
 		addArticleURL.setParameter("groupId", String.valueOf(scopeGroupId));
 		addArticleURL.setParameter("folderId", String.valueOf(folderId));
 		addArticleURL.setParameter("ddmStructureKey", ddmStructure.getStructureKey());
-
 		addArticleURL.setWindowState(LiferayWindowState.MAXIMIZED);
 
 		addMenuItems.add(new AddMenuItem(HtmlUtil.escape(ddmStructure.getUnambiguousName(ddmStructures, themeDisplay.getScopeGroupId(), locale)), addArticleURL.toString()));
