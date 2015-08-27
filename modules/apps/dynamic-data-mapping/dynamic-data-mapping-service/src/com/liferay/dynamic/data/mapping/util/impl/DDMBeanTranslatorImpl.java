@@ -163,9 +163,10 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 			return null;
 		}
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormField translatedDDMFormField =
-			new com.liferay.portlet.dynamicdatamapping.DDMFormField(
-				ddmFormField.getName(), ddmFormField.getType());
+		com.liferay.portlet.dynamicdatamapping.DDMFormField
+			translatedDDMFormField =
+				new com.liferay.portlet.dynamicdatamapping.DDMFormField(
+					ddmFormField.getName(), ddmFormField.getType());
 
 		translatedDDMFormField.setDataType(ddmFormField.getDataType());
 		translatedDDMFormField.setFieldNamespace(
@@ -209,9 +210,10 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 		com.liferay.portlet.dynamicdatamapping.DDMForm translatedDDMForm =
 			translate(ddmFormValues.getDDMForm());
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormValues translatedDDMFormValues =
-			new com.liferay.portlet.dynamicdatamapping.DDMFormValues(
-				translatedDDMForm);
+		com.liferay.portlet.dynamicdatamapping.DDMFormValues
+			translatedDDMFormValues =
+				new com.liferay.portlet.dynamicdatamapping.DDMFormValues(
+					translatedDDMForm);
 
 		translatedDDMFormValues.setAvailableLocales(
 			ddmFormValues.getAvailableLocales());
@@ -300,15 +302,16 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 		}
 	}
 
-	protected com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions translate(
-		DDMFormFieldOptions ddmFormFieldOptions) {
+	protected com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions
+		translate(DDMFormFieldOptions ddmFormFieldOptions) {
 
 		if (ddmFormFieldOptions == null) {
 			return null;
 		}
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions translatedDDMFormFieldOptions =
-			new com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions();
+		com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions
+			translatedDDMFormFieldOptions =
+				new com.liferay.portlet.dynamicdatamapping.DDMFormFieldOptions();
 
 		translatedDDMFormFieldOptions.setDefaultLocale(
 			ddmFormFieldOptions.getDefaultLocale());
@@ -327,15 +330,17 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 		return translatedDDMFormFieldOptions;
 	}
 
-	protected com.liferay.portlet.dynamicdatamapping.DDMFormFieldValue translate(
-		DDMFormFieldValue ddmFormFieldValue) {
+	protected com.liferay.portlet.dynamicdatamapping.DDMFormFieldValue
+		translate(
+			DDMFormFieldValue ddmFormFieldValue) {
 
 		if (ddmFormFieldValue == null) {
 			return null;
 		}
 
-		com.liferay.portlet.dynamicdatamapping.DDMFormFieldValue translatedDDMFormFieldValue =
-			new com.liferay.portlet.dynamicdatamapping.DDMFormFieldValue();
+		com.liferay.portlet.dynamicdatamapping.DDMFormFieldValue
+			translatedDDMFormFieldValue =
+				new com.liferay.portlet.dynamicdatamapping.DDMFormFieldValue();
 
 		translatedDDMFormFieldValue.setInstanceId(
 			ddmFormFieldValue.getInstanceId());
@@ -388,15 +393,16 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 		return translatedLocalizedValue;
 	}
 
-	protected com.liferay.portlet.dynamicdatamapping.LocalizedValue translateLocalizedValue(
-		Value value) {
+	protected com.liferay.portlet.dynamicdatamapping.LocalizedValue
+		translateLocalizedValue(Value value) {
 
 		if (value == null) {
 			return null;
 		}
 
-		com.liferay.portlet.dynamicdatamapping.LocalizedValue translatedLocalizedValue =
-			new com.liferay.portlet.dynamicdatamapping.LocalizedValue();
+		com.liferay.portlet.dynamicdatamapping.LocalizedValue
+			translatedLocalizedValue =
+				new com.liferay.portlet.dynamicdatamapping.LocalizedValue();
 
 		translatedLocalizedValue.setDefaultLocale(value.getDefaultLocale());
 
@@ -419,8 +425,8 @@ public class DDMBeanTranslatorImpl implements DDMBeanTranslator {
 		return new UnlocalizedValue(value.getString(value.getDefaultLocale()));
 	}
 
-	protected com.liferay.portlet.dynamicdatamapping.UnlocalizedValue translateUnlocalizedValue(
-		Value value) {
+	protected com.liferay.portlet.dynamicdatamapping.UnlocalizedValue
+		translateUnlocalizedValue(Value value) {
 
 		if (value == null) {
 			return null;
