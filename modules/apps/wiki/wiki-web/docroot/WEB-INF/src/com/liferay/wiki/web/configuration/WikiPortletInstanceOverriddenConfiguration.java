@@ -23,5 +23,5 @@ import com.liferay.wiki.web.configuration.definition.WikiPortletInstanceConfigur
 @Settings.OverrideClass(WikiPortletInstanceConfigurationOverrideImpl.class)
 public interface WikiPortletInstanceOverriddenConfiguration
 	extends WikiPortletInstanceConfiguration,
-	WikiPortletInstanceConfigurationOverride {
+			WikiPortletInstanceConfigurationOverride {
 }
