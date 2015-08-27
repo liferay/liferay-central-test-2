@@ -15,7 +15,6 @@
 package com.liferay.portal.deploy.hot.bundle.osgihotdeploylistener;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
-import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
@@ -31,12 +30,12 @@ import org.osgi.service.component.annotations.Reference;
 public class TestHotDeployListener implements HotDeployListener {
 
 	@Override
-	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeDeploy(HotDeployEvent event) {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 
 	@Override
-	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeUndeploy(HotDeployEvent event) {
 		_atomicReference.set(StackTraceUtil.getCallerKey());
 	}
 
