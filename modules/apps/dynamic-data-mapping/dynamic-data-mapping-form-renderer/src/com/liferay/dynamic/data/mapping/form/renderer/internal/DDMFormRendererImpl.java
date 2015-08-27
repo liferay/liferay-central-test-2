@@ -106,7 +106,9 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_SOY, _templateResource, false);
 
-		if (ddmFormLayout.getPaginationMode().equals("tabs")) {
+		String paginationMode = ddmFormLayout.getPaginationMode();
+
+		if (paginationMode.equals("tabs")) {
 			template.put(TemplateConstants.NAMESPACE, "ddm.tabbed_form");
 		}
 		else {
