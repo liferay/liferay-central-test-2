@@ -379,7 +379,7 @@ public class WebDAVUtil {
 					WebDAVStorage webDAVStorage = registry.getService(
 						serviceReference);
 
-					_setToken(serviceReference, webDAVStorage);
+					setToken(serviceReference, webDAVStorage);
 
 					return webDAVStorage;
 				}
@@ -389,7 +389,7 @@ public class WebDAVUtil {
 					ServiceReference<WebDAVStorage> serviceReference,
 					WebDAVStorage webDAVStorage) {
 
-					_setToken(serviceReference, webDAVStorage);
+					setToken(serviceReference, webDAVStorage);
 				}
 
 				@Override
@@ -398,7 +398,7 @@ public class WebDAVUtil {
 					WebDAVStorage webDAVStorage) {
 				}
 
-				private void _setToken(
+				protected void setToken(
 					ServiceReference<WebDAVStorage> serviceReference,
 					WebDAVStorage webDAVStorage) {
 
