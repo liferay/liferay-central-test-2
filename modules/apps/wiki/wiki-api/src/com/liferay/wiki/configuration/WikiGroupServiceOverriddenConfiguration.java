@@ -23,5 +23,5 @@ import com.liferay.wiki.configuration.definition.WikiGroupServiceConfigurationOv
 @Settings.OverrideClass(WikiGroupServiceConfigurationOverrideImpl.class)
 public interface WikiGroupServiceOverriddenConfiguration
 	extends WikiGroupServiceConfiguration,
-		WikiGroupServiceConfigurationOverride {
+			WikiGroupServiceConfigurationOverride {
 }
