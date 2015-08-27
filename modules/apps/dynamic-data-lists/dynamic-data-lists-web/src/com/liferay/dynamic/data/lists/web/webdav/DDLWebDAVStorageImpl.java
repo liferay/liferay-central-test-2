@@ -41,7 +41,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + DDLPortletKeys.DYNAMIC_DATA_LISTS,
-		"token=dynamic_data_lists"
+		"webdav.storage.token=dynamic_data_lists"
 	},
 	service = WebDAVStorage.class
 )

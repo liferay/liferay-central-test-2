@@ -42,7 +42,8 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + JournalPortletKeys.JOURNAL, "token=journal"
+		"javax.portlet.name=" + JournalPortletKeys.JOURNAL,
+		"webdav.storage.token=journal"
 	},
 	service = WebDAVStorage.class
 )
