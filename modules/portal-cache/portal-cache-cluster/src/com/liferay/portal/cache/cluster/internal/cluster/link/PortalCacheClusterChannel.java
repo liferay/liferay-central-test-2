@@ -12,21 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.cache.cluster.internal.clusterlink;
+package com.liferay.portal.cache.cluster.internal.cluster.link;
 
 import com.liferay.portal.cache.cluster.internal.PortalCacheClusterEvent;
-
-import java.util.List;
 
 /**
  * @author Shuyang Zhou
  */
-public interface PortalCacheClusterChannelSelector {
+public interface PortalCacheClusterChannel {
 
-	public long getSelectedNumber();
+	public void destroy();
 
-	public PortalCacheClusterChannel select(
-		List<PortalCacheClusterChannel> portalCacheClusterChannels,
-		PortalCacheClusterEvent portalCacheClusterEvent);
+	public long getCoalescedEventNumber();
+
+	public int getPendingEventNumber();
+
+	public long getSentEventNumber();
+
+	public void sendEvent(PortalCacheClusterEvent portalCacheClusterEvent);
 
 }
