@@ -655,24 +655,21 @@ public class SerializerTest {
 		ByteBuffer byteBuffer = serializer.toByteBuffer();
 
 		String className = clazz.getName();
-		String servletContextName = StringPool.NULL;
-		byte[] servletContextNameBytes = servletContextName.getBytes(
-			StringPool.UTF8);
+		String contextName = StringPool.NULL;
+		byte[] contextNameBytes = contextName.getBytes(StringPool.UTF8);
 
 		Assert.assertEquals(
-			className.length() + servletContextName.length() + 11,
-			byteBuffer.limit());
+			className.length() + contextName.length() + 11, byteBuffer.limit());
 		Assert.assertEquals(SerializationConstants.TC_CLASS, byteBuffer.get());
 		Assert.assertEquals(1, byteBuffer.get());
-		Assert.assertEquals(servletContextName.length(), byteBuffer.getInt());
+		Assert.assertEquals(contextName.length(), byteBuffer.getInt());
 		Assert.assertEquals(
-			servletContextName,
+			contextName,
 			new String(
 				byteBuffer.array(), byteBuffer.position(),
-				servletContextNameBytes.length, StringPool.UTF8));
+				contextNameBytes.length, StringPool.UTF8));
 
-		byteBuffer.position(
-			byteBuffer.position() + servletContextNameBytes.length);
+		byteBuffer.position(byteBuffer.position() + contextNameBytes.length);
 
 		Assert.assertEquals(1, byteBuffer.get());
 		Assert.assertEquals(className.length(), byteBuffer.getInt());

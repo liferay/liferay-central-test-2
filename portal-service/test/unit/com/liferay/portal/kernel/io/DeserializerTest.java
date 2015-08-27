@@ -366,15 +366,15 @@ public class DeserializerTest {
 
 		String className = clazz.getName();
 
-		String servletContextName = StringPool.NULL;
+		String contextName = StringPool.NULL;
 
 		ByteBuffer byteBuffer = ByteBuffer.allocate(
-			className.length() + servletContextName.length() + 11);
+			className.length() + contextName.length() + 11);
 
 		byteBuffer.put(SerializationConstants.TC_CLASS);
 		byteBuffer.put((byte)1);
-		byteBuffer.putInt(servletContextName.length());
-		byteBuffer.put(servletContextName.getBytes(StringPool.UTF8));
+		byteBuffer.putInt(contextName.length());
+		byteBuffer.put(contextName.getBytes(StringPool.UTF8));
 		byteBuffer.put((byte)1);
 		byteBuffer.putInt(className.length());
 		byteBuffer.put(className.getBytes(StringPool.UTF8));
