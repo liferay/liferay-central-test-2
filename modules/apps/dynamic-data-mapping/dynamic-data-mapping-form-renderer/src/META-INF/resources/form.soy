@@ -99,7 +99,7 @@
 {/template}
 
 /**
- * Prints a form with pagination
+ * Prints a form with pagination.
  *
  * @param containerId
  * @param definition
@@ -115,7 +115,9 @@
 				{foreach $page in $pages}
 					<li {if isFirst($page)}class="active"{/if}>
 						<div class="progress-bar-title">{$page.title|noAutoescape}</div>
+
 						<div class="divider"></div>
+
 						<div class="progress-bar-step">{index($page) + 1}</div>
 					</li>
 				{/foreach}
@@ -142,7 +144,9 @@
 
 		<div class="lfr-ddm-form-pagination-controls">
 			<button class="btn btn-primary hide lfr-ddm-form-pagination-prev" type="button">Prev</button>
+
 			<button class="btn btn-primary{if length($pages) == 1} hide{/if} lfr-ddm-form-pagination-next pull-right" type="button">Next</button>
+
 			<button class="btn btn-primary{if length($pages) > 1} hide{/if} lfr-ddm-form-submit pull-right" type="submit">Submit</button>
 		</div>
 	</div>
@@ -187,7 +191,7 @@
 {/template}
 
 /**
- * Prints a form with tabs
+ * Prints a form with tabs.
  *
  * @param containerId
  * @param definition
@@ -206,6 +210,7 @@
 					</li>
 				{/foreach}
 			</ul>
+
 			<div class="tab-content">
 				{foreach $page in $pages}
 					<div class="tab-pane {if isFirst($page)}active{/if}">
