@@ -32,9 +32,15 @@ if ((folder == null) && (folderId != JournalFolderConstants.DEFAULT_PARENT_FOLDE
 	}
 }
 
-int total = JournalFolderServiceUtil.getFoldersAndArticlesCount(scopeGroupId, folderId, WorkflowConstants.STATUS_ANY);
+String keywords = ParamUtil.getString(request, "keywords");
+
+boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisplayTerms.ADVANCED_SEARCH);
+
+boolean search = Validator.isNotNull(keywords) || advancedSearch;
 
 boolean showSelectAll = false;
+
+int total = JournalFolderServiceUtil.getFoldersAndArticlesCount(scopeGroupId, folderId, WorkflowConstants.STATUS_ANY);
 
 if (total > 0) {
 	showSelectAll = true;
@@ -43,12 +49,6 @@ if (total > 0) {
 request.setAttribute("view.jsp-folder", folder);
 
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
-
-String keywords = ParamUtil.getString(request, "keywords");
-
-boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisplayTerms.ADVANCED_SEARCH);
-
-boolean search = Validator.isNotNull(keywords) || advancedSearch;
 %>
 
 <portlet:actionURL name="restoreTrashEntries" var="restoreTrashEntriesURL" />
