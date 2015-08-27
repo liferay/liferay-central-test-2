@@ -178,16 +178,16 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 				response, SyncDLObjectUpdate.class);
 		}
 
-		List<SyncFile> syncDLObjects = _syncDLObjectUpdate.getSyncDLObjects();
+		List<SyncFile> syncFiles = _syncDLObjectUpdate.getSyncDLObjects();
 
-		if (syncDLObjects.isEmpty()) {
+		if (syncFiles.isEmpty()) {
 			return;
 		}
 
-		Collections.sort(syncDLObjects, _syncFileComparator);
+		Collections.sort(syncFiles, _syncFileComparator);
 
-		for (SyncFile targetSyncFile : syncDLObjects) {
-			processSyncFile(targetSyncFile);
+		for (SyncFile syncFile : syncFiles) {
+			processSyncFile(syncFile);
 		}
 
 		if (getParameterValue("parentFolderId") == null) {
