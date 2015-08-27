@@ -39,7 +39,6 @@ public class ClusterLinkPortalCacheClusterChannel
 		Message message = new Message();
 
 		message.setDestinationName(_destinationName);
-
 		message.setPayload(SerializableUtil.serialize(portalCacheClusterEvent));
 
 		_clusterLink.sendMulticastMessage(message, _priority);
