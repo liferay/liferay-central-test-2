@@ -2155,7 +2155,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (NotificationThreadLocal.isEnabled() &&
 				(!page.isMinorEdit() ||
 				 wikiGroupServiceOverriddenConfiguration.
-					pageMinorEditSendEmail())) {
+					 pageMinorEditSendEmail())) {
 
 				notifySubscribers(
 					userId, page,
