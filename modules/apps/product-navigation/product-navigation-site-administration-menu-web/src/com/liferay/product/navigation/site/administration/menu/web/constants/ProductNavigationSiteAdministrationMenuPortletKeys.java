@@ -19,7 +19,7 @@ package com.liferay.product.navigation.site.administration.menu.web.constants;
  */
 public class ProductNavigationSiteAdministrationMenuPortletKeys {
 
-	public static final String SITE_ADMINISTRATION_MENU =
+	public static final String PRODUCT_NAVIGATION_SITE_ADMINISTRATION_MENU =
 		"com_liferay_product_navigation_site_administration_menu_web_portlet_" +
 			"ProductNavigationSiteAdministrationMenuPortlet";
 
