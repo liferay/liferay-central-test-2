@@ -85,7 +85,7 @@ public class MySitesPanelCategory extends BaseJSPPanelCategory {
 
 	@Override
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.product.menu.site.administration.service)",
+		target = "(osgi.web.symbolicname=com.liferay.product.navigation.site.administration)",
 		unbind = "-"
 	)
 	public void setServletContext(ServletContext servletContext) {
