@@ -1328,7 +1328,7 @@ public class ResourcePermissionLocalServiceImpl
 			}
 
 			TransactionCommitCallbackUtil.registerCallback(
-				new UpdateResourcePermissionCallable(primKey, name));
+				new UpdateResourcePermissionCallable(name, primKey));
 		}
 		finally {
 			PermissionThreadLocal.setFlushResourcePermissionEnabled(
@@ -1513,17 +1513,17 @@ public class ResourcePermissionLocalServiceImpl
 	private class UpdateResourcePermissionCallable implements Callable<Void> {
 
 		public UpdateResourcePermissionCallable(
-			String primKey, String resourceName) {
+			String name, String primKey) {
 
+			_name = name;
 			_primKey = primKey;
-			_resourceName = resourceName;
 		}
 
 		@Override
 		public Void call() {
 			PermissionUpdateHandler permissionUpdateHandler =
 				PermissionUpdateHandlerRegistryUtil.getPermissionUpdateHandler(
-					_resourceName);
+					_name);
 
 			if (permissionUpdateHandler == null) {
 				return null;
@@ -1534,8 +1534,8 @@ public class ResourcePermissionLocalServiceImpl
 			return null;
 		}
 
+		private final String _name;
 		private final String _primKey;
-		private final String _resourceName;
 
 	}
 
