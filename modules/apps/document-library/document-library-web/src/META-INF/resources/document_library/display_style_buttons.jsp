@@ -19,6 +19,8 @@
 <%
 String navigation = ParamUtil.getString(request, "navigation", "home");
 
+int deltaEntry = ParamUtil.getInteger(request, "deltaEntry");
+
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
@@ -31,20 +33,19 @@ if (Validator.isNull(displayStyle)) {
 
 String keywords = ParamUtil.getString(request, "keywords");
 
-int deltaEntry = ParamUtil.getInteger(request, "deltaEntry");
-
 PortletURL displayStyleURL = renderResponse.createRenderURL();
 
 displayStyleURL.setParameter("mvcRenderCommandName", Validator.isNull(keywords) ? "/document_library/view" : "/document_library/search");
 displayStyleURL.setParameter("navigation", HtmlUtil.escapeJS(navigation));
+
+if (deltaEntry > 0) {
+	displayStyleURL.setParameter("deltaEntry", String.valueOf(deltaEntry));
+}
+
 displayStyleURL.setParameter("folderId", String.valueOf(folderId));
 
 if (fileEntryTypeId != -1) {
 	displayStyleURL.setParameter("fileEntryTypeId", String.valueOf(fileEntryTypeId));
-}
-
-if (deltaEntry > 0) {
-	displayStyleURL.setParameter("deltaEntry", String.valueOf(deltaEntry));
 }
 %>
 
