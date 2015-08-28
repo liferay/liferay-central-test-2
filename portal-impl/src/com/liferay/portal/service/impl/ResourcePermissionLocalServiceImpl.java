@@ -1512,9 +1512,7 @@ public class ResourcePermissionLocalServiceImpl
 
 	private class UpdateResourcePermissionCallable implements Callable<Void> {
 
-		public UpdateResourcePermissionCallable(
-			String name, String primKey) {
-
+		public UpdateResourcePermissionCallable(String name, String primKey) {
 			_name = name;
 			_primKey = primKey;
 		}
