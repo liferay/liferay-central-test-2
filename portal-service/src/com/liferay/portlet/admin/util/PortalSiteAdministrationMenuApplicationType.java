@@ -24,7 +24,7 @@ public class PortalSiteAdministrationMenuApplicationType {
 		public static final String CLASS_NAME =
 			"com.liferay.portlet.admin.util." +
 				"PortalSiteAdministrationMenuApplicationType$" +
-				"SiteAdministrationMenu";
+					"SiteAdministrationMenu";
 
 	}
 
