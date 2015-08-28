@@ -262,13 +262,9 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 	</target>
 
 	<target name="build-lang-cmd">
-		<path id="lang.builder.classpath">
-			<fileset dir="${sdk.dir}/dependencies/com.liferay.lang.builder/lib" includes="*.jar" />
-		</path>
-
 		<java
 			classname="com.liferay.lang.builder.LangBuilder"
-			classpathref="lang.builder.classpath"
+			classpathref="portal.tools.classpath"
 			fork="true"
 			newenvironment="true"
 		>
