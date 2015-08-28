@@ -63,12 +63,10 @@ public class AddLayoutPrototypeAction {
 			List<LayoutPrototype> layoutPrototypes)
 		throws Exception {
 
-		Class<?> clazz = AddLayoutPrototypeAction.class;
-
 		Layout layout = DefaultLayoutPrototypesUtil.addLayoutPrototype(
 			companyId, defaultUserId, "layout-prototype-blog-title",
 			"layout-prototype-blog-description", "2_columns_iii",
-			layoutPrototypes, clazz.getClassLoader());
+			layoutPrototypes, AddLayoutPrototypeAction.class.getClassLoader());
 
 		if (layout == null) {
 			return;

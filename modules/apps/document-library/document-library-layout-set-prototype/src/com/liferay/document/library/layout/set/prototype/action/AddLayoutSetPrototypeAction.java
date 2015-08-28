@@ -65,14 +65,13 @@ public class AddLayoutSetPrototypeAction {
 			List<LayoutSetPrototype> layoutSetPrototypes)
 		throws Exception {
 
-		Class<?> clazz = AddLayoutSetPrototypeAction.class;
-
 		LayoutSet layoutSet =
 			DefaultLayoutSetPrototypesUtil.addLayoutSetPrototype(
 				companyId, defaultUserId,
 				"layout-set-prototype-intranet-site-title",
 				"layout-set-prototype-intranet-site-description",
-				layoutSetPrototypes, clazz.getClassLoader());
+				layoutSetPrototypes,
+				AddLayoutSetPrototypeAction.class.getClassLoader());
 
 		if (layoutSet == null) {
 			return;
