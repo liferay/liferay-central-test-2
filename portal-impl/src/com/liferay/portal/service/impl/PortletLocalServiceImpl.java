@@ -1664,7 +1664,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portletModel.setAutopropagatedParameters(autopropagatedParameters);
 
 		boolean defaultRequiresNamespacedParameters = GetterUtil.getBoolean(
-			servletContext.getInitParameter("requires-namespaced-parameters"),
+			servletContext.getInitParameter(
+				"portlet-requires-namespaced-parameters"),
 			portletModel.isRequiresNamespacedParameters());
 
 		portletModel.setRequiresNamespacedParameters(
