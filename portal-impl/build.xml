@@ -813,7 +813,7 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 
 	<target name="build-wsdd" depends="compile">
 		<path id="wsdd.builder.classpath">
-			<fileset dir="${sdk.dir}/dependencies/com.liferay.portal.tools.wsdd.builder/lib" includes="*.jar" />
+			<path refid="portal.tools.classpath" />
 			<path refid="project.classpath" />
 		</path>
 
