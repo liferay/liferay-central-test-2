@@ -39,9 +39,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PermissionUpdateHandlerRegistryUtil {
 
 	public static PermissionUpdateHandler getPermissionUpdateHandler(
-		String className) {
+		String modelClassName) {
 
-		return _instance._getPermissionUpdateHandler(className);
+		return _instance._getPermissionUpdateHandler(modelClassName);
 	}
 
 	public static List<PermissionUpdateHandler> getPermissionUpdateHandlers() {
@@ -82,9 +82,9 @@ public class PermissionUpdateHandlerRegistryUtil {
 	}
 
 	private PermissionUpdateHandler _getPermissionUpdateHandler(
-		String className) {
+		String modelClassName) {
 
-		return _permissionUpdateHandlers.get(className);
+		return _permissionUpdateHandlers.get(modelClassName);
 	}
 
 	private List<PermissionUpdateHandler> _getPermissionUpdateHandlers() {
