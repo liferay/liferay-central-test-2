@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.private-request-attributes=false",
 		"com.liferay.portlet.use-default-template=false",
 		"javax.portlet.init-param.view-template=/portlet/view.jsp",
-		"javax.portlet.name=" + ProductNavigationControlPanelMenuPortletKeys.CONTROL_PANEL_MENU,
+		"javax.portlet.name=" + ProductNavigationControlPanelMenuPortletKeys.PRODUCT_NAVIGATION_CONTROL_PANEL_MENU,
 		"javax.portlet.supports.mime-type=text/html"
 	},
 	service = Portlet.class

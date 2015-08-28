@@ -37,7 +37,7 @@ public class ProductNavigationSiteAdministrationMenuViewPortletProvider
 	@Override
 	public String getPortletId() {
 		return ProductNavigationSiteAdministrationMenuPortletKeys.
-			SITE_ADMINISTRATION_MENU;
+			PRODUCT_NAVIGATION_SITE_ADMINISTRATION_MENU;
 	}
 
 }
