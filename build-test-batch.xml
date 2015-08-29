@@ -1084,7 +1084,7 @@ go</echo>
 					<arg value="${database.username}" />
 				</exec>
 
-				<echo>Header injection return code: ${return.code}
+				<echo>Return code: ${return.code}
 Output content:
 ${output.content}</echo>
 
@@ -1096,7 +1096,7 @@ ${output.content}</echo>
 					<then>
 						<clean-restart-sybase retry="true" />
 
-						<fail message="Error output content: ${output.content}" />
+						<fail message="Output content: ${output.content}" />
 					</then>
 				</if>
 
@@ -1107,7 +1107,7 @@ ${output.content}</echo>
 					<then>
 						<clean-restart-sybase retry="true" />
 
-						<fail message="Error return code: ${return.code}"  />
+						<fail message="Return code: ${return.code}"  />
 					</then>
 				</if>
 			</sequential>
