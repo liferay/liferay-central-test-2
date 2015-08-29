@@ -192,9 +192,10 @@ public class DynamicQueryTest {
 	private static final int _BATCH_SIZE = 50;
 
 	private List<ClassName> _allClassNames;
-	private int _oldClassNameCount;
 
 	@DeleteAfterTestRun
 	private final List<ClassName> _newClassNames = new ArrayList<>();
+
+	private int _oldClassNameCount;
 
 }
