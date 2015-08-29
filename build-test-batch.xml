@@ -194,47 +194,6 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="clean-testray-results">
-		<attribute name="test.results.file" />
-
-		<sequential>
-			<replaceregexp
-				file="@{test.results.file}"
-				flags="gm"
-				match="^\s*&lt;/?attachments[^&gt;]*&gt;[\s]"
-				replace=""
-			/>
-
-			<replaceregexp
-				file="@{test.results.file}"
-				flags="gm"
-				match="^\s*&lt;/?environment[^&gt;]*&gt;[\s]"
-				replace=""
-			/>
-
-			<replaceregexp
-				file="@{test.results.file}"
-				flags="gm"
-				match="^\s*&lt;/?file[^&gt;]*&gt;[\s]"
-				replace=""
-			/>
-
-			<replaceregexp
-				file="@{test.results.file}"
-				flags="gm"
-				match="^\s*&lt;/?propert[^&gt;]*&gt;[\s]"
-				replace=""
-			/>
-
-			<replaceregexp
-				file="@{test.results.file}"
-				flags="gm"
-				match="&lt;testcase[^&lt;]*?&lt;skipped[\s\S]*?testcase&gt;"
-				replace=""
-			/>
-		</sequential>
-	</macrodef>
-
 	<macrodef name="clean-restart-sybase">
 		<attribute name="retry" default="false" />
 		<sequential>
@@ -282,6 +241,47 @@
 			</waitfor>
 
 			<sleep if:true="@{retry}" seconds="10" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="clean-testray-results">
+		<attribute name="test.results.file" />
+
+		<sequential>
+			<replaceregexp
+				file="@{test.results.file}"
+				flags="gm"
+				match="^\s*&lt;/?attachments[^&gt;]*&gt;[\s]"
+				replace=""
+			/>
+
+			<replaceregexp
+				file="@{test.results.file}"
+				flags="gm"
+				match="^\s*&lt;/?environment[^&gt;]*&gt;[\s]"
+				replace=""
+			/>
+
+			<replaceregexp
+				file="@{test.results.file}"
+				flags="gm"
+				match="^\s*&lt;/?file[^&gt;]*&gt;[\s]"
+				replace=""
+			/>
+
+			<replaceregexp
+				file="@{test.results.file}"
+				flags="gm"
+				match="^\s*&lt;/?propert[^&gt;]*&gt;[\s]"
+				replace=""
+			/>
+
+			<replaceregexp
+				file="@{test.results.file}"
+				flags="gm"
+				match="&lt;testcase[^&lt;]*?&lt;skipped[\s\S]*?testcase&gt;"
+				replace=""
+			/>
 		</sequential>
 	</macrodef>
 
