@@ -202,7 +202,8 @@ public class JSLoaderModulesServlet extends HttpServlet {
 				try (InputStream inputStream = jsConfigURL.openStream()) {
 					servletOutputStream.println("try {");
 
-					StreamUtil.transfer(inputStream, servletOutputStream, false);
+					StreamUtil.transfer(
+						inputStream, servletOutputStream, false);
 
 					servletOutputStream.println("} catch (error) {");
 					servletOutputStream.println("console.error(error);");
