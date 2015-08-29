@@ -3054,6 +3054,12 @@ go]]></replacevalue>
 		</if>
 	</target>
 
+	<target name="clean-up-logs">
+		<delete failonerror="false" file="log" />
+
+		<delete failonerror="false" file="portal-web/test-ant-scripts/log" />
+	</target>
+
 	<target name="clean-up-sybase-processes">
 		<if>
 			<os family="unix" />
@@ -3078,12 +3084,6 @@ go]]></replacevalue>
 				<delete file="clean_up_sybase_processes.sh" />
 			</then>
 		</if>
-	</target>
-
-	<target name="clean-up-logs">
-		<delete failonerror="false" file="log" />
-
-		<delete failonerror="false" file="portal-web/test-ant-scripts/log" />
 	</target>
 
 	<target name="clean-up-sikuli-temp-files">
