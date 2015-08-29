@@ -228,7 +228,7 @@
 					</echo>
 				</then>
 				<else>
-					<fail message="Unable to reset sybase installation due to missing /opt/sybase.tar.gz" />
+					<fail message="Unable to reset Sybase installation due to missing /opt/sybase.tar.gz." />
 				</else>
 			</if>
 
