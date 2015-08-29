@@ -36,7 +36,8 @@ public class ProductNavigationUserMenuViewPortletProvider
 
 	@Override
 	public String getPortletId() {
-		return ProductNavigationUserMenuPortletKeys.PRODUCT_NAVIGATION_USER_MENU;
+		return ProductNavigationUserMenuPortletKeys.
+			PRODUCT_NAVIGATION_USER_MENU;
 	}
 
 }
