@@ -61,6 +61,7 @@ public class DynamicQueryTest {
 					UniqueStringRandomizerBumper.INSTANCE));
 
 			_newClassNames.add(className);
+
 			_allClassNames.add(className);
 		}
 	}
