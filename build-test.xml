@@ -3060,6 +3060,10 @@ go]]></replacevalue>
 		<delete failonerror="false" file="portal-web/test-ant-scripts/log" />
 	</target>
 
+	<target name="clean-up-sikuli-temp-files">
+		<delete dir="lib/development/libs" />
+	</target>
+
 	<target name="clean-up-sybase-processes">
 		<if>
 			<os family="unix" />
@@ -3084,10 +3088,6 @@ go]]></replacevalue>
 				<delete file="clean_up_sybase_processes.sh" />
 			</then>
 		</if>
-	</target>
-
-	<target name="clean-up-sikuli-temp-files">
-		<delete dir="lib/development/libs" />
 	</target>
 
 	<target name="clean-up-web-xml">
