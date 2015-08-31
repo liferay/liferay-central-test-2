@@ -131,7 +131,7 @@ public class ReleaseManager {
 			new UpgradeServiceTrackerCustomizer(bundleContext),
 			Collections.reverseOrder(
 				new PropertyServiceReferenceComparator<UpgradeStep>(
-					UpgradeStepConstants.FROM)));
+					"upgrade.from")));
 
 		_serviceTrackerMap.open();
 	}
@@ -246,25 +246,25 @@ public class ReleaseManager {
 		public UpgradeInfo addingService(
 			ServiceReference<UpgradeStep> serviceReference) {
 
-			String from = (String)serviceReference.getProperty(
-				UpgradeStepConstants.FROM);
-			String to = (String)serviceReference.getProperty(
-				UpgradeStepConstants.TO);
+			String fromVersionString = (String)serviceReference.getProperty(
+				"upgrade.from.version");
+			String toVersionString = (String)serviceReference.getProperty(
+				"upgrade.to.version");
 
-			UpgradeStep upgradeStepProcess = _bundleContext.getService(
+			UpgradeStep upgradeStep = _bundleContext.getService(
 				serviceReference);
 
-			if (upgradeStepProcess == null) {
+			if (upgradeStep == null) {
 				_logger.log(
 					Logger.LOG_WARNING,
-					"Service " + serviceReference + " is registered as " +
-						"an upgrade but it is not implementing Upgrade " +
-							"interface. Not tracking.");
+					"Not tracking service " + serviceReference +
+						" because it does not implement UpgradeStep");
 
 				return null;
 			}
 
-			return new UpgradeInfo(from, to, upgradeStepProcess);
+			return new UpgradeInfo(
+				fromVersionString, toVersionString, upgradeStep);
 		}
 
 		@Override
