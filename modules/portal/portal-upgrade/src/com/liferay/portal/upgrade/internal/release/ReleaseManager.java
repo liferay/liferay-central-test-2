@@ -90,8 +90,8 @@ public class ReleaseManager {
 	}
 
 	public void list() {
-		for (String key : _serviceTrackerMap.keySet()) {
-			list(key);
+		for (String bundleSymbolicName : _serviceTrackerMap.keySet()) {
+			list(bundleSymbolicName);
 		}
 	}
 
@@ -100,8 +100,8 @@ public class ReleaseManager {
 			bundleSymbolicName);
 
 		System.out.println(
-			"Registered upgrade commands for bundle " + bundleSymbolicName +
-				" (" + getVersion(bundleSymbolicName) + ")");
+			"Registered upgrade processes for " + bundleSymbolicName + " " +
+				getVersion(bundleSymbolicName));
 
 		for (UpgradeInfo upgradeProcess : upgradeProcesses) {
 			System.out.println("\t" + upgradeProcess);
@@ -153,7 +153,8 @@ public class ReleaseManager {
 				getOutputStreamContainerFactory();
 
 		OutputStreamContainer outputStreamContainer =
-			outputStreamContainerFactory.create("upgrade-" + bundleSymbolicName);
+			outputStreamContainerFactory.create(
+				"upgrade-" + bundleSymbolicName);
 
 		final OutputStream outputStream =
 			outputStreamContainer.getOutputStream();
