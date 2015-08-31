@@ -24,11 +24,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 public class UpgradeInfo {
 
 	public UpgradeInfo(
-		String fromVersionString, String toVersionString, UpgradeStep upgrade) {
+		String fromVersionString, String toVersionString,
+		UpgradeStep upgradeStep) {
 
 		_fromVersionString = fromVersionString;
 		_toVersionString = toVersionString;
-		_upgrade = upgrade;
+		_upgradeStep = upgradeStep;
 	}
 
 	public String getFromVersionString() {
@@ -40,7 +41,7 @@ public class UpgradeInfo {
 	}
 
 	public UpgradeStep getUpgradeStep() {
-		return _upgrade;
+		return _upgradeStep;
 	}
 
 	@Override
@@ -51,8 +52,8 @@ public class UpgradeInfo {
 		sb.append(_fromVersionString);
 		sb.append(", toVersionString=");
 		sb.append(_toVersionString);
-		sb.append(", upgrade=");
-		sb.append(_upgrade);
+		sb.append(", upgradeStep=");
+		sb.append(_upgradeStep);
 		sb.append("}");
 
 		return sb.toString();
@@ -60,6 +61,6 @@ public class UpgradeInfo {
 
 	private final String _fromVersionString;
 	private final String _toVersionString;
-	private final UpgradeStep _upgrade;
+	private final UpgradeStep _upgradeStep;
 
 }
