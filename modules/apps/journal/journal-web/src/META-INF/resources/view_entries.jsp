@@ -170,7 +170,7 @@ int total = 0;
 
 		articleSearchContainer.setTotal(total);
 
-		OrderByComparator<Object> folderArticleOrderByComparator = null;
+		OrderByComparator<Object> folderOrderByComparator = null;
 
 		boolean orderByAsc = false;
 
@@ -179,13 +179,13 @@ int total = 0;
 		}
 
 		if (orderByCol.equals("display-date")) {
-			folderArticleOrderByComparator = new FolderArticleDisplayDateComparator(orderByAsc);
+			folderOrderByComparator = new FolderArticleDisplayDateComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("modified-date")) {
-			folderArticleOrderByComparator = new FolderArticleModifiedDateComparator(orderByAsc);
+			folderOrderByComparator = new FolderArticleModifiedDateComparator(orderByAsc);
 		}
 
-		results = JournalFolderServiceUtil.getFoldersAndArticles(scopeGroupId, themeDisplay.getUserId(), folderId, status, articleSearchContainer.getStart(), articleSearchContainer.getEnd(), folderArticleOrderByComparator);
+		results = JournalFolderServiceUtil.getFoldersAndArticles(scopeGroupId, themeDisplay.getUserId(), folderId, status, articleSearchContainer.getStart(), articleSearchContainer.getEnd(), folderOrderByComparator);
 		%>
 
 	</c:otherwise>
