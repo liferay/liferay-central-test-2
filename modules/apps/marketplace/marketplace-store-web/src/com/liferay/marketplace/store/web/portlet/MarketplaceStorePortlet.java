@@ -18,9 +18,9 @@ import com.liferay.marketplace.model.App;
 import com.liferay.marketplace.service.AppLocalServiceUtil;
 import com.liferay.marketplace.service.AppServiceUtil;
 import com.liferay.marketplace.store.web.configuration.MarketplaceStoreWebConfigurationValues;
+import com.liferay.marketplace.store.web.constants.MarketplaceConstants;
 import com.liferay.marketplace.store.web.constants.MarketplaceStorePortletKeys;
 import com.liferay.marketplace.store.web.constants.MarketplaceStoreWebKeys;
-import com.liferay.marketplace.store.web.constants.MarketplaceConstants;
 import com.liferay.marketplace.store.web.oauth.util.OAuthManager;
 import com.liferay.marketplace.store.web.util.MarketplaceLicenseUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -47,6 +49,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -376,6 +380,24 @@ public class MarketplaceStorePortlet extends RemoteMVCPortlet {
 		return
 			MarketplaceStoreWebConfigurationValues.MARKETPLACE_URL +
 				"/osb-portlet/mp_server";
+	}
+
+	@Override
+	protected void processPortletParameterMap(
+		PortletRequest portletRequest, PortletResponse portletResponse,
+		Map<String, String[]> parameterMap) {
+
+		parameterMap.put(
+			"clientId",
+			new String[] {String.valueOf(MarketplaceConstants.CLIENT_BUILD)});
+		parameterMap.put(
+			"compatibility",
+			new String[] {String.valueOf(ReleaseInfo.getBuildNumber())});
+		parameterMap.put(
+			"supportsHotDeploy",
+			new String[] {
+				String.valueOf(ServerDetector.isSupportsHotDeploy())
+			});
 	}
 
 	@Override
