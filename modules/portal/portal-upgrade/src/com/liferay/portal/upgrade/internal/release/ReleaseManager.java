@@ -18,17 +18,18 @@ import com.liferay.osgi.service.tracker.map.PropertyServiceReferenceComparator;
 import com.liferay.osgi.service.tracker.map.PropertyServiceReferenceMapper;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMapFactory;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBContext;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
-import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.RunnableUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.report.stream.OutputStreamProvider;
-import com.liferay.portal.report.stream.OutputStreamProviderTracker;
+import com.liferay.portal.output.stream.container.OutputStreamContainer;
+import com.liferay.portal.output.stream.container.OutputStreamContainerFactory;
+import com.liferay.portal.output.stream.container.OutputStreamContainerFactoryTracker;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.constants.UpgradeStepConstants;
 import com.liferay.portal.upgrade.internal.UpgradeInfo;
@@ -118,16 +119,18 @@ public class ReleaseManager {
 
 	@Reference
 	public void setOutputStreamTracker(
-		OutputStreamProviderTracker outputStreamProviderTracker) {
+		OutputStreamContainerFactoryTracker
+			outputStreamContainerFactoryTracker) {
 
-		_outputStreamProviderTracker = outputStreamProviderTracker;
+		_outputStreamContainerFactoryTracker =
+			outputStreamContainerFactoryTracker;
 	}
 
 	@Activate
 	protected void activate(final BundleContext bundleContext)
 		throws InvalidSyntaxException, UpgradeException {
 
-		_log = new Logger(bundleContext);
+		_logger = new Logger(bundleContext);
 
 		_serviceTrackerMap = ServiceTrackerMapFactory.multiValueMap(
 			bundleContext, UpgradeStep.class,
@@ -154,45 +157,49 @@ public class ReleaseManager {
 	protected void executeUpgradePath(
 		final String componentName, final List<UpgradeInfo> upgradeInfos) {
 
-		OutputStreamProvider outputStreamProvider =
-			_outputStreamProviderTracker.getDefaultOutputStreamProvider();
+		OutputStreamContainerFactory outputStreamContainerFactory =
+			_outputStreamContainerFactoryTracker.
+				getOutputStreamContainerFactory();
 
-		OutputStreamProvider.OutputStreamInformation outputStreamInformation =
-			outputStreamProvider.create("upgrade-" + componentName);
+		OutputStreamContainer outputStreamContainer =
+			outputStreamContainerFactory.create("upgrade-" + componentName);
 
 		final OutputStream outputStream =
-			outputStreamInformation.getOutputStream();
+			outputStreamContainer.getOutputStream();
 
-		StreamUtil.withStdOut(outputStream, new Runnable() {
-			@Override
-			public void run() {
-				for (UpgradeInfo upgradeInfo : upgradeInfos) {
-					UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
+		RunnableUtil.runWithSwappedSystemOut(
+			new Runnable() {
 
-					try {
-						upgradeStep.upgrade(new DBProcessContext() {
+				@Override
+				public void run() {
+					for (UpgradeInfo upgradeInfo : upgradeInfos) {
+						UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
 
-							@Override
-							public DBContext getDBContext() {
-								return new DBContext();
-							}
+						try {
+							upgradeStep.upgrade(new DBProcessContext() {
 
-							@Override
-							public OutputStream getOutputStream() {
-								return outputStream;
-							}
-						});
+								@Override
+								public DBContext getDBContext() {
+									return new DBContext();
+								}
 
-						_releaseLocalService.updateRelease(
-							componentName, upgradeInfo.getToVersionString(),
-							upgradeInfo.getFromVersionString());
-					}
-					catch (Exception e) {
-						throw new RuntimeException(e);
+								@Override
+								public OutputStream getOutputStream() {
+									return outputStream;
+								}
+							});
+
+							_releaseLocalService.updateRelease(
+								componentName, upgradeInfo.getToVersionString(),
+								upgradeInfo.getFromVersionString());
+						}
+						catch (Exception e) {
+							throw new RuntimeException(e);
+						}
 					}
 				}
-			}
-		});
+
+			}, outputStream);
 
 		try {
 			outputStream.close();
@@ -231,9 +238,10 @@ public class ReleaseManager {
 		}
 	}
 
-	private static Logger _log;
+	private static Logger _logger;
 
-	private OutputStreamProviderTracker _outputStreamProviderTracker;
+	private OutputStreamContainerFactoryTracker
+		_outputStreamContainerFactoryTracker;
 	private ReleaseLocalService _releaseLocalService;
 	private ReleasePublisher _releasePublisher;
 	private ServiceTrackerMap<String, List<UpgradeInfo>> _serviceTrackerMap;
@@ -258,7 +266,7 @@ public class ReleaseManager {
 				serviceReference);
 
 			if (upgradeStepProcess == null) {
-				_log.log(
+				_logger.log(
 					Logger.LOG_WARNING,
 					"Service " + serviceReference + " is registered as " +
 						"an upgrade but it is not implementing Upgrade " +
