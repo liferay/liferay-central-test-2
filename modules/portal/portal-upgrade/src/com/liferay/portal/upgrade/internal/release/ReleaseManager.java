@@ -21,8 +21,6 @@ import com.liferay.osgi.service.tracker.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.dao.db.DBContext;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
 import com.liferay.portal.kernel.util.RunnableUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -66,7 +64,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 )
 public class ReleaseManager {
 
-	public void execute(String bundleSymbolicName) throws PortalException {
+	public void execute(String bundleSymbolicName) {
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
 			_serviceTrackerMap.getService(bundleSymbolicName));
 
@@ -76,9 +74,7 @@ public class ReleaseManager {
 			bundleSymbolicName, releaseGraphManager.getUpgradeInfos(version));
 	}
 
-	public void execute(String bundleSymbolicName, String to)
-		throws PortalException {
-
+	public void execute(String bundleSymbolicName, String to) {
 		String version = getVersion(bundleSymbolicName);
 
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
@@ -119,7 +115,7 @@ public class ReleaseManager {
 
 	@Activate
 	protected void activate(final BundleContext bundleContext)
-		throws InvalidSyntaxException, UpgradeException {
+		throws InvalidSyntaxException {
 
 		_logger = new Logger(bundleContext);
 
