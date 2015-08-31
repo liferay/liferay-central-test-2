@@ -79,6 +79,21 @@ public class StreamUtil {
 		cleanUp(true, closeables);
 	}
 
+	public static void runWithSwappedSystemOut(
+		OutputStream outputStream, Runnable runnable) {
+
+		PrintStream printStream = System.out;
+
+		System.setOut(new PrintStream(outputStream));
+
+		try {
+			runnable.run();
+		}
+		finally {
+			System.setOut(printStream);
+		}
+	}
+
 	public static void transfer(
 			InputStream inputStream, OutputStream outputStream)
 		throws IOException {
@@ -182,21 +197,6 @@ public class StreamUtil {
 			}
 
 		};
-	}
-
-	public static void withStdOut(
-		OutputStream outputStream, Runnable runnable) {
-
-		PrintStream out = System.out;
-
-		System.setOut(new PrintStream(outputStream));
-
-		try {
-			runnable.run();
-		}
-		finally {
-			System.setOut(out);
-		}
 	}
 
 	protected static void transferByteArray(
