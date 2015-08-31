@@ -39,6 +39,10 @@ public class JournalArticlePermissionUpdateHandler
 		JournalArticle article = _journalArticleLocalService.fetchLatestArticle(
 			GetterUtil.getLong(primKey));
 
+		if (article == null) {
+			return;
+		}
+
 		article.setModifiedDate(new Date());
 
 		_journalArticleLocalService.updateJournalArticle(article);

@@ -39,6 +39,10 @@ public class JournalFolderPermissionUpdateHandler
 		JournalFolder folder = _journalFolderLocalService.fetchJournalFolder(
 			GetterUtil.getLong(primKey));
 
+		if (folder == null) {
+			return;
+		}
+
 		folder.setModifiedDate(new Date());
 
 		_journalFolderLocalService.updateJournalFolder(folder);
