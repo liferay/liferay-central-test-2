@@ -16,6 +16,7 @@ package com.liferay.journal.service.permission;
 
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.service.JournalFolderLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.permission.PermissionUpdateHandler;
 
 import java.util.Date;
@@ -36,7 +37,7 @@ public class JournalFolderPermissionUpdateHandler
 	@Override
 	public void updatedPermission(String primKey) {
 		JournalFolder folder = _journalFolderLocalService.fetchJournalFolder(
-			Long.valueOf(primKey));
+			GetterUtil.getLong(primKey));
 
 		folder.setModifiedDate(new Date());
 
