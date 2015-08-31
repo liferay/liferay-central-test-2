@@ -16,6 +16,7 @@ package com.liferay.journal.service.permission;
 
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.permission.PermissionUpdateHandler;
 
 import java.util.Date;
@@ -36,7 +37,7 @@ public class JournalArticlePermissionUpdateHandler
 	@Override
 	public void updatedPermission(String primKey) {
 		JournalArticle article = _journalArticleLocalService.fetchLatestArticle(
-			Long.valueOf(primKey));
+			GetterUtil.getLong(primKey));
 
 		article.setModifiedDate(new Date());
 
