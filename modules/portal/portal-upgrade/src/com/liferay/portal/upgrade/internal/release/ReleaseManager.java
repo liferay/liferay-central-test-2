@@ -66,26 +66,27 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 )
 public class ReleaseManager {
 
-	public void execute(String componentName) throws PortalException {
+	public void execute(String bundleSymbolicName) throws PortalException {
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
-			_serviceTrackerMap.getService(componentName));
+			_serviceTrackerMap.getService(bundleSymbolicName));
 
-		String version = getVersion(componentName);
+		String version = getVersion(bundleSymbolicName);
 
 		executeUpgradeInfos(
-			componentName, releaseGraphManager.getUpgradeInfos(version));
+			bundleSymbolicName, releaseGraphManager.getUpgradeInfos(version));
 	}
 
-	public void execute(String componentName, String to)
+	public void execute(String bundleSymbolicName, String to)
 		throws PortalException {
 
-		String version = getVersion(componentName);
+		String version = getVersion(bundleSymbolicName);
 
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
-			_serviceTrackerMap.getService(componentName));
+			_serviceTrackerMap.getService(bundleSymbolicName));
 
 		executeUpgradeInfos(
-			componentName, releaseGraphManager.getUpgradeInfos(version, to));
+			bundleSymbolicName,
+			releaseGraphManager.getUpgradeInfos(version, to));
 	}
 
 	public void list() {
@@ -94,13 +95,13 @@ public class ReleaseManager {
 		}
 	}
 
-	public void list(String componentName) {
+	public void list(String bundleSymbolicName) {
 		List<UpgradeInfo> upgradeProcesses = _serviceTrackerMap.getService(
-			componentName);
+			bundleSymbolicName);
 
 		System.out.println(
-			"Registered upgrade commands for component " + componentName +
-				" (" + getVersion(componentName) + ")");
+			"Registered upgrade commands for bundle " + bundleSymbolicName +
+				" (" + getVersion(bundleSymbolicName) + ")");
 
 		for (UpgradeInfo upgradeProcess : upgradeProcesses) {
 			System.out.println("\t" + upgradeProcess);
@@ -145,14 +146,14 @@ public class ReleaseManager {
 	}
 
 	protected void executeUpgradeInfos(
-		final String componentName, final List<UpgradeInfo> upgradeInfos) {
+		final String bundleSymbolicName, final List<UpgradeInfo> upgradeInfos) {
 
 		OutputStreamContainerFactory outputStreamContainerFactory =
 			_outputStreamContainerFactoryTracker.
 				getOutputStreamContainerFactory();
 
 		OutputStreamContainer outputStreamContainer =
-			outputStreamContainerFactory.create("upgrade-" + componentName);
+			outputStreamContainerFactory.create("upgrade-" + bundleSymbolicName);
 
 		final OutputStream outputStream =
 			outputStreamContainer.getOutputStream();
@@ -182,7 +183,7 @@ public class ReleaseManager {
 								});
 
 							_releaseLocalService.updateRelease(
-								componentName, upgradeInfo.getToVersionString(),
+								bundleSymbolicName, upgradeInfo.getToVersionString(),
 								upgradeInfo.getFromVersionString());
 						}
 						catch (Exception e) {
@@ -200,15 +201,15 @@ public class ReleaseManager {
 			throw new RuntimeException(ioe);
 		}
 
-		Release release = _releaseLocalService.fetchRelease(componentName);
+		Release release = _releaseLocalService.fetchRelease(bundleSymbolicName);
 
 		if (release != null) {
 			_releasePublisher.publish(release);
 		}
 	}
 
-	protected String getVersion(String servletContextName) {
-		Release release = _releaseLocalService.fetchRelease(servletContextName);
+	protected String getVersion(String bundleSymbolicName) {
+		Release release = _releaseLocalService.fetchRelease(bundleSymbolicName);
 
 		if ((release == null) || Validator.isNull(release.getVersion())) {
 			return "0.0.0";

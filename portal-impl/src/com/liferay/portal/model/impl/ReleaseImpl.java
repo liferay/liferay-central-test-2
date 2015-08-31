@@ -18,4 +18,9 @@ package com.liferay.portal.model.impl;
  * @author Brian Wing Shun Chan
  */
 public class ReleaseImpl extends ReleaseBaseImpl {
+
+	public String getBundleSymbolicName() {
+		return getServletContextName();
+	}
+
 }
