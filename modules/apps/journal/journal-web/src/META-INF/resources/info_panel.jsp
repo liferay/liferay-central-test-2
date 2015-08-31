@@ -34,7 +34,9 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 
 	<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(request, "home") %></h4>
 
-	<div><liferay-ui:message key="folder" /></div>
+	<div>
+		<liferay-ui:message key="folder" />
+	</div>
 </div>
 
 <aui:nav-bar>
@@ -49,11 +51,15 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 <div class="sidebar-body">
 	<h5><liferay-ui:message key="num-of-items" /></h5>
 
-	<p><%= JournalFolderServiceUtil.getFoldersAndArticlesCount(scopeGroupId, folderId, WorkflowConstants.STATUS_ANY) %></p>
+	<p>
+		<%= JournalFolderServiceUtil.getFoldersAndArticlesCount(scopeGroupId, folderId, WorkflowConstants.STATUS_ANY) %>
+	</p>
 
 	<c:if test="<%= folder != null %>">
 		<h5><liferay-ui:message key="created" /></h5>
 
-		<p><%= folder.getUserName() %></p>
+		<p>
+			<%= folder.getUserName() %>
+		</p>
 	</c:if>
 </div>
