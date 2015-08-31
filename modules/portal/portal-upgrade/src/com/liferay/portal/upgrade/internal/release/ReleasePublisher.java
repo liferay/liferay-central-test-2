@@ -42,25 +42,24 @@ import org.osgi.service.component.annotations.Reference;
 public final class ReleasePublisher {
 
 	public void publish(Release release) {
-		Dictionary<String, Object> properties = new Hashtable<>();
-
-		String servletContextName = release.getServletContextName();
-
 		ServiceRegistration<Release> oldServiceRegistration =
-			_serviceConfiguratorRegistrations.get(servletContextName);
+			_serviceConfiguratorRegistrations.get(
+				release.getServletContextName());
 
 		if (oldServiceRegistration != null) {
 			oldServiceRegistration.unregister();
 		}
 
-		properties.put("component.name", servletContextName);
+		Dictionary<String, Object> properties = new Hashtable<>();
+
+		properties.put("component.name", release.getServletContextName());
 		properties.put("release.version", release.getVersion());
 
 		ServiceRegistration<Release> newServiceRegistration =
 			_bundleContext.registerService(Release.class, release, properties);
 
 		_serviceConfiguratorRegistrations.put(
-			servletContextName, newServiceRegistration);
+			release.getServletContextName(), newServiceRegistration);
 	}
 
 	@Activate
@@ -69,7 +68,7 @@ public final class ReleasePublisher {
 
 		_bundleContext = bundleContext;
 
-		_logger  = new Logger(bundleContext);
+		_logger = new Logger(bundleContext);
 
 		List<Release> releases = _releaseLocalService.getReleases(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -96,7 +95,7 @@ public final class ReleasePublisher {
 	}
 
 	private BundleContext _bundleContext;
-	private Logger _logger ;
+	private Logger _logger;
 	private ReleaseLocalService _releaseLocalService;
 	private final Map<String, ServiceRegistration<Release>>
 		_serviceConfiguratorRegistrations = new HashMap<>();
