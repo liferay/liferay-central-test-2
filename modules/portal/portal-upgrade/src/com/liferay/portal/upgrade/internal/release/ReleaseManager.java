@@ -154,42 +154,43 @@ public class ReleaseManager {
 
 		final OutputStream outputStream =
 			outputStreamContainer.getOutputStream();
+			
+		Runnable runnable = new Runnable() {
 
-		RunnableUtil.runWithSwappedSystemOut(
-			new Runnable() {
+			@Override
+			public void run() {
+				for (UpgradeInfo upgradeInfo : upgradeInfos) {
+					UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
 
-				@Override
-				public void run() {
-					for (UpgradeInfo upgradeInfo : upgradeInfos) {
-						UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
+					try {
+						upgradeStep.upgrade(
+							new DBProcessContext() {
 
-						try {
-							upgradeStep.upgrade(
-								new DBProcessContext() {
+								@Override
+								public DBContext getDBContext() {
+									return new DBContext();
+								}
 
-									@Override
-									public DBContext getDBContext() {
-										return new DBContext();
-									}
+								@Override
+								public OutputStream getOutputStream() {
+									return outputStream;
+								}
 
-									@Override
-									public OutputStream getOutputStream() {
-										return outputStream;
-									}
+							});
 
-								});
-
-							_releaseLocalService.updateRelease(
-								bundleSymbolicName, upgradeInfo.getToVersionString(),
-								upgradeInfo.getFromVersionString());
-						}
-						catch (Exception e) {
-							throw new RuntimeException(e);
-						}
+						_releaseLocalService.updateRelease(
+							bundleSymbolicName, upgradeInfo.getToVersionString(),
+							upgradeInfo.getFromVersionString());
+					}
+					catch (Exception e) {
+						throw new RuntimeException(e);
 					}
 				}
+			}
 
-			}, outputStream);
+		};
+
+		RunnableUtil.runWithSwappedSystemOut(runnable, outputStream);
 
 		try {
 			outputStream.close();
