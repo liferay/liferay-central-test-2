@@ -74,18 +74,19 @@ public class AccessControlAdvice
 		}
 
 		Map<String, Object> settings = accessControlContext.getSettings();
-		Integer serviceDepthCounter = (Integer)settings.get(
-			AccessControlContext.Settings.SERVICE_DEPTH_COUNTER.toString());
 
-		if (serviceDepthCounter == null) {
+		Integer serviceDepth = (Integer)settings.get(
+			AccessControlContext.Settings.SERVICE_DEPTH.toString());
+
+		if (serviceDepth == null) {
 			return;
 		}
 
-		serviceDepthCounter--;
+		serviceDepth--;
 
 		settings.put(
-			AccessControlContext.Settings.SERVICE_DEPTH_COUNTER.toString(),
-			serviceDepthCounter);
+			AccessControlContext.Settings.SERVICE_DEPTH.toString(),
+			serviceDepth);
 	}
 
 	protected void incrementServiceDepth() {
@@ -97,19 +98,19 @@ public class AccessControlAdvice
 		}
 
 		Map<String, Object> settings = accessControlContext.getSettings();
-		Integer serviceDepthCounter = (Integer)settings.get(
-			AccessControlContext.Settings.SERVICE_DEPTH_COUNTER.toString());
+		Integer serviceDepth = (Integer)settings.get(
+			AccessControlContext.Settings.SERVICE_DEPTH.toString());
 
-		if (serviceDepthCounter == null) {
-			serviceDepthCounter = Integer.valueOf(1);
+		if (serviceDepth == null) {
+			serviceDepth = Integer.valueOf(1);
 		}
 		else {
-			serviceDepthCounter ++;
+			serviceDepth ++;
 		}
 
 		settings.put(
-			AccessControlContext.Settings.SERVICE_DEPTH_COUNTER.toString(),
-			serviceDepthCounter);
+			AccessControlContext.Settings.SERVICE_DEPTH.toString(),
+			serviceDepth);
 	}
 
 	private AccessControlAdvisor _accessControlAdvisor;

@@ -47,10 +47,10 @@ public class AuthenticatedAccessControlPolicy extends BaseAccessControlPolicy {
 		if (accessControlContext != null) {
 			Map<String, Object> settings = accessControlContext.getSettings();
 
-			int serviceDepthCounter = (Integer)settings.get(
-				AccessControlContext.Settings.SERVICE_DEPTH_COUNTER.toString());
+			int serviceDepth = (Integer)settings.get(
+				AccessControlContext.Settings.SERVICE_DEPTH.toString());
 
-			if (serviceDepthCounter > 1) {
+			if (serviceDepth > 1) {
 				return;
 			}
 		}
