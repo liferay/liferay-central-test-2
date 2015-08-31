@@ -58,7 +58,7 @@ public class AccessControlContext {
 
 	public static enum Settings {
 
-		SERVICE_DEPTH_COUNTER
+		SERVICE_DEPTH
 
 	}
 
