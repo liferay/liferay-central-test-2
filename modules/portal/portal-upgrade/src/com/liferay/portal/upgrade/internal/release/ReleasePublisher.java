@@ -52,7 +52,8 @@ public final class ReleasePublisher {
 
 		Dictionary<String, Object> properties = new Hashtable<>();
 
-		properties.put("component.name", release.getServletContextName());
+		properties.put(
+			"release.bundle.symbolic.name", release.getBundleSymbolicName());
 		properties.put("release.version", release.getVersion());
 
 		ServiceRegistration<Release> newServiceRegistration =
