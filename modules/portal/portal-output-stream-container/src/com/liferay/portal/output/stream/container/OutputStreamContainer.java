@@ -12,36 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.report.stream.internal;
-
-import com.liferay.portal.kernel.util.StreamUtil;
-import com.liferay.portal.report.stream.OutputStreamProvider;
+package com.liferay.portal.output.stream.container;
 
 import java.io.OutputStream;
-
-import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = {"name=console"})
-public class SystemOutputStreamProvider implements OutputStreamProvider {
+public interface OutputStreamContainer {
 
-	@Override
-	public OutputStreamInformation create(String hint) {
-		return new OutputStreamInformation() {
+	public String getDescription();
 
-			@Override
-			public String getDescription() {
-				return "the console";
-			}
-
-			@Override
-			public OutputStream getOutputStream() {
-				return StreamUtil.uncloseable(System.out);
-			}
-
-		};
-	}
+	public OutputStream getOutputStream();
 
 }
