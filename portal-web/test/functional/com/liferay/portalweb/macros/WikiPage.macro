@@ -482,7 +482,7 @@
 
 		<execute function="AssertClick" locator1="Wiki#LINK_MOVE" value1="Move" />
 
-		<execute function="AssertClick" locator1="Wiki|PAGE_TABS_CHANGE_PARENT" value1="Change Parent" />
+		<execute function="AssertClick" locator1="Wiki#PAGE_TABS_CHANGE_PARENT" value1="Change Parent" />
 
 		<var name="key_wikiPageTitle" value="${wikiPage1Title}" />
 
