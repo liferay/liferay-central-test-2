@@ -1066,10 +1066,6 @@
 		<var name="key_wikiPageTitle" value="${wikiPage2Title}" />
 
 		<execute function="AssertTextEquals" locator1="Portlet#H3_HEADER" value1="${wikiPage2Title}" />
-
-		<var name="key_wikiPageTitle" value="${wikiPage1Title}" />
-
-		<execute function="AssertTextEquals" locator1="Portlet#H3_HEADER" value1="${wikiPage1Title}" />
 		<execute function="AssertTextEquals" locator1="Wiki#BODY" value1="${wikiPage2Content}" />
 		<execute function="AssertClick" locator1="Wiki#LINK_DETAILS" value1="Details" />
 
