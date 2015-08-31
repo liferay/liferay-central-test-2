@@ -14,14 +14,36 @@
 
 package com.liferay.portal.kernel.dao.db;
 
-import java.io.OutputStream;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
- * @author Carlos Sierra Andrés
- */
-public interface DatabaseProcessContext {
-	public DatabaseContext getDatabaseContext();
+* @author Carlos Sierra Andrés
+*/
+public class DBContext {
 
-	public OutputStream getOutputStream();
+	public Connection getDataAccess() {
+		try {
+			return DataAccess.getUpgradeOptimizedConnection();
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public DBFactory getDBFactory() {
+		return DBFactoryUtil.getDBFactory();
+	}
+
+	public Connection getUpgradeOptimizedConnection() {
+		try {
+			return DataAccess.getUpgradeOptimizedConnection();
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }
