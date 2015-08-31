@@ -56,11 +56,11 @@ public final class ReleasePublisher {
 		properties.put("component.name", servletContextName);
 		properties.put("release.version", release.getVersion());
 
-		ServiceRegistration<Release> serviceRegistration =
+		ServiceRegistration<Release> newServiceRegistration =
 			_bundleContext.registerService(Release.class, release, properties);
 
 		_serviceConfiguratorRegistrations.put(
-			servletContextName, serviceRegistration);
+			servletContextName, newServiceRegistration);
 	}
 
 	@Activate
