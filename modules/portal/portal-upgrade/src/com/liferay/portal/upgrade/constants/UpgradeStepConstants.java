@@ -28,8 +28,4 @@ public interface UpgradeStepConstants {
 
 	public String DATABASES_ALL_PROPERTY = DATABASE + "=" + ALL_DATABASES;
 
-	public String FROM = "from";
-
-	public String TO = "to";
-
 }
