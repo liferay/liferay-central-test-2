@@ -67,35 +67,25 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class ReleaseManager {
 
 	public void execute(String componentName) throws PortalException {
-		List<UpgradeInfo> upgradeInfos = _serviceTrackerMap.getService(
-			componentName);
-
-		String version = _getVersion(componentName);
-
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
-			upgradeInfos);
+			_serviceTrackerMap.getService(componentName));
 
-		List<UpgradeInfo> upgradePath = releaseGraphManager.getUpgradeInfos(
-			version);
+		String version = getVersion(componentName);
 
-		executeUpgradePath(componentName, upgradePath);
+		executeUpgradeInfos(
+			componentName, releaseGraphManager.getUpgradeInfos(version));
 	}
 
 	public void execute(String componentName, String to)
 		throws PortalException {
 
-		List<UpgradeInfo> upgradeInfos = _serviceTrackerMap.getService(
-			componentName);
-
-		String version = _getVersion(componentName);
+		String version = getVersion(componentName);
 
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
-			upgradeInfos);
+			_serviceTrackerMap.getService(componentName));
 
-		List<UpgradeInfo> upgradePath = releaseGraphManager.getUpgradeInfos(
-			version, to);
-
-		executeUpgradePath(componentName, upgradePath);
+		executeUpgradeInfos(
+			componentName, releaseGraphManager.getUpgradeInfos(version, to));
 	}
 
 	public void list() {
@@ -110,7 +100,7 @@ public class ReleaseManager {
 
 		System.out.println(
 			"Registered upgrade commands for component " + componentName +
-				" (" + _getVersion(componentName) + ")");
+				" (" + getVersion(componentName) + ")");
 
 		for (UpgradeInfo upgradeProcess : upgradeProcesses) {
 			System.out.println("\t" + upgradeProcess);
@@ -141,7 +131,7 @@ public class ReleaseManager {
 								")))",
 			new PropertyServiceReferenceMapper<String, UpgradeStep>(
 				UpgradeStepConstants.APPLICATION_NAME),
-			new UpgradeCustomizer(bundleContext),
+			new UpgradeServiceTrackerCustomizer(bundleContext),
 			Collections.reverseOrder(
 				new PropertyServiceReferenceComparator<UpgradeStep>(
 					UpgradeStepConstants.FROM)));
@@ -154,7 +144,7 @@ public class ReleaseManager {
 		_serviceTrackerMap.close();
 	}
 
-	protected void executeUpgradePath(
+	protected void executeUpgradeInfos(
 		final String componentName, final List<UpgradeInfo> upgradeInfos) {
 
 		OutputStreamContainerFactory outputStreamContainerFactory =
@@ -176,18 +166,20 @@ public class ReleaseManager {
 						UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
 
 						try {
-							upgradeStep.upgrade(new DBProcessContext() {
+							upgradeStep.upgrade(
+								new DBProcessContext() {
 
-								@Override
-								public DBContext getDBContext() {
-									return new DBContext();
-								}
+									@Override
+									public DBContext getDBContext() {
+										return new DBContext();
+									}
 
-								@Override
-								public OutputStream getOutputStream() {
-									return outputStream;
-								}
-							});
+									@Override
+									public OutputStream getOutputStream() {
+										return outputStream;
+									}
+
+								});
 
 							_releaseLocalService.updateRelease(
 								componentName, upgradeInfo.getToVersionString(),
@@ -215,6 +207,16 @@ public class ReleaseManager {
 		}
 	}
 
+	protected String getVersion(String servletContextName) {
+		Release release = _releaseLocalService.fetchRelease(servletContextName);
+
+		if ((release == null) || Validator.isNull(release.getVersion())) {
+			return "0.0.0";
+		}
+
+		return release.getVersion();
+	}
+
 	@Reference
 	protected void setReleaseLocalService(
 		ReleaseLocalService releaseLocalService) {
@@ -227,17 +229,6 @@ public class ReleaseManager {
 		_releasePublisher = releasePublisher;
 	}
 
-	private String _getVersion(String servletContextName) {
-		Release release = _releaseLocalService.fetchRelease(servletContextName);
-
-		if ((release == null) || Validator.isNull(release.getVersion())) {
-			return "0.0.0";
-		}
-		else {
-			return release.getVersion();
-		}
-	}
-
 	private static Logger _logger;
 
 	private OutputStreamContainerFactoryTracker
@@ -246,10 +237,10 @@ public class ReleaseManager {
 	private ReleasePublisher _releasePublisher;
 	private ServiceTrackerMap<String, List<UpgradeInfo>> _serviceTrackerMap;
 
-	private static class UpgradeCustomizer
-			implements ServiceTrackerCustomizer<UpgradeStep, UpgradeInfo> {
+	private class UpgradeServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer<UpgradeStep, UpgradeInfo> {
 
-		public UpgradeCustomizer(BundleContext bundleContext) {
+		public UpgradeServiceTrackerCustomizer(BundleContext bundleContext) {
 			_bundleContext = bundleContext;
 		}
 
