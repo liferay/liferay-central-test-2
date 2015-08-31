@@ -69,8 +69,8 @@ public class DownloadNodeTask extends DefaultTask {
 		if (nodeUrl.endsWith(".tar.gz")) {
 			project.delete(nodeDir);
 
-			// Because of GRADLE-2844, we cannot use project.tarTree to extract
-			// the tarball.
+			// Avoid using project#tarTree to extract the tarball because of
+			// GRADLE-2844
 
 			project.exec(
 				new Action<ExecSpec>() {
