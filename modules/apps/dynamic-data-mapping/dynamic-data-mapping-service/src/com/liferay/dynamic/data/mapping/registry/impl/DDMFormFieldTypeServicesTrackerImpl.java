@@ -47,13 +47,13 @@ public class DDMFormFieldTypeServicesTrackerImpl
 
 	@Override
 	public DDMFormFieldRenderer getDDMFormFieldRenderer(String name) {
-		return _ddmFormFieldRendererTracker.getService(name);
+		return _ddmFormFieldRendererServiceTrackerMap.getService(name);
 	}
 
 	@Override
 	public DDMFormFieldType getDDMFormFieldType(String name) {
 		ServiceWrapper<DDMFormFieldType> ddmFormFieldTypeServiceWrapper =
-			_ddmFormFieldTypeTracker.getService(name);
+			_ddmFormFieldTypeServiceTrackerMap.getService(name);
 
 		if (ddmFormFieldTypeServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
@@ -69,13 +69,13 @@ public class DDMFormFieldTypeServicesTrackerImpl
 
 	@Override
 	public Set<String> getDDMFormFieldTypeNames() {
-		return _ddmFormFieldTypeTracker.keySet();
+		return _ddmFormFieldTypeServiceTrackerMap.keySet();
 	}
 
 	@Override
 	public Map<String, Object> getDDMFormFieldTypeProperties(String name) {
 		ServiceWrapper<DDMFormFieldType> ddmFormFieldTypeServiceWrapper =
-			_ddmFormFieldTypeTracker.getService(name);
+			_ddmFormFieldTypeServiceTrackerMap.getService(name);
 
 		if (ddmFormFieldTypeServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
@@ -94,7 +94,7 @@ public class DDMFormFieldTypeServicesTrackerImpl
 		List<DDMFormFieldType> ddmFormFieldTypes = new ArrayList<>();
 
 		for (ServiceWrapper<DDMFormFieldType> ddmFormFieldTypeServiceWrapper :
-				_ddmFormFieldTypeTracker.values()) {
+				_ddmFormFieldTypeServiceTrackerMap.values()) {
 
 			ddmFormFieldTypes.add(ddmFormFieldTypeServiceWrapper.getService());
 		}
@@ -106,67 +106,70 @@ public class DDMFormFieldTypeServicesTrackerImpl
 	public <T> DDMFormFieldValueAccessor<T> getDDMFormFieldValueAccessor(
 		String name) {
 
-		return _ddmFormFieldValueAccessorTracker.getService(name);
+		return _ddmFormFieldValueAccessorServiceTrackerMap.getService(name);
 	}
 
 	@Override
 	public DDMFormFieldValueRenderer getDDMFormFieldValueRenderer(String name) {
-		return _ddmFormFieldValueRendererTracker.getService(name);
+		return _ddmFormFieldValueRendererServiceTrackerMap.getService(name);
 	}
 
 	@Activate
 	protected void activate(BundleContext bundleContext)
 		throws InvalidSyntaxException {
 
-		_ddmFormFieldRendererTracker = ServiceTrackerMapFactory.singleValueMap(
-			bundleContext, DDMFormFieldRenderer.class,
+		_ddmFormFieldRendererServiceTrackerMap =
+			ServiceTrackerMapFactory.singleValueMap(
+				bundleContext, DDMFormFieldRenderer.class,
 			"ddm.form.field.type.name");
 
-		_ddmFormFieldRendererTracker.open();
+		_ddmFormFieldRendererServiceTrackerMap.open();
 
-		_ddmFormFieldTypeTracker = ServiceTrackerMapFactory.singleValueMap(
-			bundleContext, DDMFormFieldType.class, "ddm.form.field.type.name",
+		_ddmFormFieldTypeServiceTrackerMap =
+			ServiceTrackerMapFactory.singleValueMap(
+				bundleContext, DDMFormFieldType.class,
+				"ddm.form.field.type.name",
 			ServiceTrackerCustomizerFactory.<DDMFormFieldType>serviceWrapper(
 				bundleContext));
 
-		_ddmFormFieldTypeTracker.open();
+		_ddmFormFieldTypeServiceTrackerMap.open();
 
-		_ddmFormFieldValueAccessorTracker =
+		_ddmFormFieldValueAccessorServiceTrackerMap =
 			ServiceTrackerMapFactory.singleValueMap(
 				bundleContext, DDMFormFieldValueAccessor.class,
 				"ddm.form.field.type.name");
 
-		_ddmFormFieldValueAccessorTracker.open();
+		_ddmFormFieldValueAccessorServiceTrackerMap.open();
 
-		_ddmFormFieldValueRendererTracker =
+		_ddmFormFieldValueRendererServiceTrackerMap =
 			ServiceTrackerMapFactory.singleValueMap(
 				bundleContext, DDMFormFieldValueRenderer.class,
 				"ddm.form.field.type.name");
 
-		_ddmFormFieldValueRendererTracker.open();
+		_ddmFormFieldValueRendererServiceTrackerMap.open();
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_ddmFormFieldRendererTracker.close();
+		_ddmFormFieldRendererServiceTrackerMap.close();
 
-		_ddmFormFieldTypeTracker.close();
+		_ddmFormFieldTypeServiceTrackerMap.close();
 
-		_ddmFormFieldValueAccessorTracker.close();
+		_ddmFormFieldValueAccessorServiceTrackerMap.close();
 
-		_ddmFormFieldValueRendererTracker.close();
+		_ddmFormFieldValueRendererServiceTrackerMap.close();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DDMFormFieldTypeServicesTrackerImpl.class);
 
 	private ServiceTrackerMap<String, DDMFormFieldRenderer>
-		_ddmFormFieldRendererTracker;
+		_ddmFormFieldRendererServiceTrackerMap;
 	private ServiceTrackerMap<String, ServiceWrapper<DDMFormFieldType>>
-		_ddmFormFieldTypeTracker;
+		_ddmFormFieldTypeServiceTrackerMap;
 	private ServiceTrackerMap<String, DDMFormFieldValueAccessor>
-		_ddmFormFieldValueAccessorTracker;
+		_ddmFormFieldValueAccessorServiceTrackerMap;
 	private ServiceTrackerMap<String, DDMFormFieldValueRenderer>
-		_ddmFormFieldValueRendererTracker;
+		_ddmFormFieldValueRendererServiceTrackerMap;
 
 }
