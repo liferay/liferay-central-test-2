@@ -39,6 +39,10 @@ public class JournalFeedPermissionUpdateHandler
 		JournalFeed feed = _journalFeedLocalService.fetchJournalFeed(
 			GetterUtil.getLong(primKey));
 
+		if (feed == null) {
+			return;
+		}
+
 		feed.setModifiedDate(new Date());
 
 		_journalFeedLocalService.updateJournalFeed(feed);
