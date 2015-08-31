@@ -79,12 +79,12 @@ public class DDLRecordSearchTest {
 
 	@Before
 	public void setUp() throws Exception {
+		setUpPermissionThreadLocal();
+		setUpPrincipalThreadLocal();
+
 		_group = GroupTestUtil.addGroup();
 
 		DDLRecordSet recordSet = addRecordSet();
-
-		setUpPermissionThreadLocal();
-		setUpPrincipalThreadLocal();
 
 		_recordTestHelper = new DDLRecordTestHelper(_group, recordSet);
 		_searchContext = getSearchContext(_group, recordSet);
