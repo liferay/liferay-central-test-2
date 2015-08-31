@@ -19,8 +19,8 @@ import com.liferay.osgi.service.tracker.map.PropertyServiceReferenceMapper;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
-import com.liferay.portal.kernel.dao.db.DatabaseContext;
-import com.liferay.portal.kernel.dao.db.DatabaseProcessContext;
+import com.liferay.portal.kernel.dao.db.DBContext;
+import com.liferay.portal.kernel.dao.db.DBProcessContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
@@ -170,11 +170,11 @@ public class ReleaseManager {
 					UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
 
 					try {
-						upgradeStep.upgrade(new DatabaseProcessContext() {
+						upgradeStep.upgrade(new DBProcessContext() {
 
 							@Override
-							public DatabaseContext getDatabaseContext() {
-								return new DatabaseContext();
+							public DBContext getDBContext() {
+								return new DBContext();
 							}
 
 							@Override
