@@ -12,23 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.report.stream;
-
-import java.io.OutputStream;
+package com.liferay.portal.output.stream.container;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public interface OutputStreamProvider {
+public interface OutputStreamContainerFactory {
 
-	public OutputStreamInformation create(String hint);
-
-	public interface OutputStreamInformation {
-
-		public String getDescription();
-
-		public OutputStream getOutputStream();
-
-	}
+	public OutputStreamContainer create(String hint);
 
 }

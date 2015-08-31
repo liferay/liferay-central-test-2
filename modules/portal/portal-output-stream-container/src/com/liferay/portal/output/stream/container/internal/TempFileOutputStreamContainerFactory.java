@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.report.stream.internal;
+package com.liferay.portal.output.stream.container.internal;
 
 import com.liferay.portal.kernel.util.StreamUtil;
-import com.liferay.portal.report.stream.OutputStreamProvider;
+import com.liferay.portal.output.stream.container.OutputStreamContainer;
+import com.liferay.portal.output.stream.container.OutputStreamContainerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,39 +31,42 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = {"name=tempfile"})
-public class TempFileOutputStreamProvider implements OutputStreamProvider {
+@Component(immediate = true, property = {"name=temp_file"})
+public class TempFileOutputStreamContainerFactory
+	implements OutputStreamContainerFactory {
 
 	@Override
-	public OutputStreamProvider.OutputStreamInformation create(String hint) {
+	public OutputStreamContainer create(String hint) {
 		try {
-			Path tempDirectory = Files.createTempDirectory("tempDir");
+			Path tempDirectoryPath = Files.createTempDirectory("tempDir");
 
-			final Path tempFile = Files.createTempFile(
-				tempDirectory, hint, ".log");
+			final Path tempFilePath = Files.createTempFile(
+				tempDirectoryPath, hint, ".log");
 
-			return new OutputStreamInformation() {
+			return new OutputStreamContainer() {
 
 				@Override
 				public String getDescription() {
-					return tempFile.toAbsolutePath().toString();
+					Path absolutePath = tempFilePath.toAbsolutePath();
+
+					return absolutePath.toString();
 				}
 
 				@Override
 				public OutputStream getOutputStream() {
 					try {
 						return StreamUtil.uncloseable(
-							new FileOutputStream(tempFile.toFile()));
+							new FileOutputStream(tempFilePath.toFile()));
 					}
-					catch (FileNotFoundException e) {
-						throw new RuntimeException(e);
+					catch (FileNotFoundException fnfe) {
+						throw new RuntimeException(fnfe);
 					}
 				}
 
 			};
 		}
-		catch (IOException e) {
-			throw new RuntimeException(e);
+		catch (IOException ioe) {
+			throw new RuntimeException(ioe);
 		}
 	}
 
