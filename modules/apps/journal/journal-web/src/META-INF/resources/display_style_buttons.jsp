@@ -35,23 +35,23 @@ if (!ddmStructureKey.equals("0")) {
 for (String displayStyle : journalDisplayContext.getDisplayViews()) {
 	displayStyleURL.setParameter("displayStyle", displayStyle);
 
-	String displayStyleIcon = displayStyle;
+	String iconCssClass = "icon-";
 
 	if (displayStyle.equals("descriptive")) {
-		displayStyleIcon = "th-list";
+		iconCssClass += "th-list";
 	}
 	else if (displayStyle.equals("icon")) {
-		displayStyleIcon = "th-large";
+		iconCssClass += "th-large";
 	}
 	else if (displayStyle.equals("list")) {
-		displayStyleIcon = "align-justify";
+		iconCssClass += "align-justify";
 	}
 %>
 
 	<aui:a
 		cssClass='<%= displayStyle.equals(journalDisplayContext.getDisplayStyle()) ? "active btn" : "btn" %>'
 		href="<%= displayStyleURL.toString() %>"
-		iconCssClass='<%= "icon-" + HtmlUtil.escapeAttribute(displayStyleIcon) %>'
+		iconCssClass="<%= iconCssClass %>"
 	/>
 
 <%
