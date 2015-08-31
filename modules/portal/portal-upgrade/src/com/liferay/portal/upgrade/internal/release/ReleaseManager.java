@@ -18,6 +18,7 @@ import com.liferay.osgi.service.tracker.map.PropertyServiceReferenceComparator;
 import com.liferay.osgi.service.tracker.map.PropertyServiceReferenceMapper;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.map.ServiceTrackerMapFactory;
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBContext;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
@@ -29,7 +30,6 @@ import com.liferay.portal.output.stream.container.OutputStreamContainer;
 import com.liferay.portal.output.stream.container.OutputStreamContainerFactory;
 import com.liferay.portal.output.stream.container.OutputStreamContainerFactoryTracker;
 import com.liferay.portal.service.ReleaseLocalService;
-import com.liferay.portal.upgrade.constants.UpgradeStepConstants;
 import com.liferay.portal.upgrade.internal.UpgradeInfo;
 import com.liferay.portal.upgrade.internal.graph.ReleaseGraphManager;
 
@@ -119,19 +119,18 @@ public class ReleaseManager {
 
 		_logger = new Logger(bundleContext);
 
+		DB db = DBFactoryUtil.getDB();
+
 		_serviceTrackerMap = ServiceTrackerMapFactory.multiValueMap(
 			bundleContext, UpgradeStep.class,
-				"(&(" + UpgradeStepConstants.APPLICATION_NAME +
-					"=*)(|(database=" +
-						UpgradeStepConstants.ALL_DATABASES +
-							")(database=" + DBFactoryUtil.getDB().getType() +
-								")))",
+			"(&(upgrade.bundle.symbolic.name=*)(|(upgrade.db.type=any)" +
+				"(upgrade.db.type=" + db.getType() + ")))",
 			new PropertyServiceReferenceMapper<String, UpgradeStep>(
-				UpgradeStepConstants.APPLICATION_NAME),
+				"upgrade.bundle.symbolic.name"),
 			new UpgradeServiceTrackerCustomizer(bundleContext),
 			Collections.reverseOrder(
 				new PropertyServiceReferenceComparator<UpgradeStep>(
-					"upgrade.from")));
+					"upgrade.from.version")));
 
 		_serviceTrackerMap.open();
 	}
@@ -154,7 +153,7 @@ public class ReleaseManager {
 
 		final OutputStream outputStream =
 			outputStreamContainer.getOutputStream();
-			
+
 		Runnable runnable = new Runnable() {
 
 			@Override
@@ -179,7 +178,8 @@ public class ReleaseManager {
 							});
 
 						_releaseLocalService.updateRelease(
-							bundleSymbolicName, upgradeInfo.getToVersionString(),
+							bundleSymbolicName,
+							upgradeInfo.getToVersionString(),
 							upgradeInfo.getFromVersionString());
 					}
 					catch (Exception e) {
@@ -258,7 +258,7 @@ public class ReleaseManager {
 			if (upgradeStep == null) {
 				_logger.log(
 					Logger.LOG_WARNING,
-					"Not tracking service " + serviceReference +
+					"Not tracking service reference " + serviceReference +
 						" because it does not implement UpgradeStep");
 
 				return null;
