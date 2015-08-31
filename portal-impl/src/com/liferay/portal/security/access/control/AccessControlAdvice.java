@@ -98,6 +98,7 @@ public class AccessControlAdvice
 		}
 
 		Map<String, Object> settings = accessControlContext.getSettings();
+
 		Integer serviceDepth = (Integer)settings.get(
 			AccessControlContext.Settings.SERVICE_DEPTH.toString());
 
@@ -105,7 +106,7 @@ public class AccessControlAdvice
 			serviceDepth = Integer.valueOf(1);
 		}
 		else {
-			serviceDepth ++;
+			serviceDepth++;
 		}
 
 		settings.put(
