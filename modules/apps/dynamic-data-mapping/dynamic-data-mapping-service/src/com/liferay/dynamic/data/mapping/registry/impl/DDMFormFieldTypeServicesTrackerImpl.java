@@ -57,7 +57,8 @@ public class DDMFormFieldTypeServicesTrackerImpl
 
 		if (ddmFormFieldTypeServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No DDMFormFieldType registered with name " + name);
+				_log.debug(
+					"No DDM form field type registered with name " + name);
 			}
 
 			return null;
@@ -78,7 +79,8 @@ public class DDMFormFieldTypeServicesTrackerImpl
 
 		if (ddmFormFieldTypeServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No DDMFormFieldType registered with name " + name);
+				_log.debug(
+					"No DDM form field type registered with name " + name);
 			}
 
 			return null;
