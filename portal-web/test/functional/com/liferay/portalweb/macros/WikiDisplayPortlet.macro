@@ -27,19 +27,9 @@
 	</command>
 
 	<command name="configureSetupPG">
-		<if>
-			<condition function="IsElementPresent#isVisible" locator1="Message#INFO_1" />
-			<then>
-				<execute function="AssertClick" locator1="Message#INFO_1" value1="Please configure this portlet to make it visible to all users." />
-			</then>
-			<elseif>
-				<condition function="IsElementNotPresent" locator1="Message#INFO_1" />
-				<then>
-					<execute function="Click" locator1="PGWikidisplay#OPTIONS_ICON"  />
-					<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
-				</then>
-			</elseif>
-		</if>
+		<execute function="Click" locator1="Icon#COG"  />
+
+		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
 
 		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
 		<execute function="Select" locator1="WikiConfiguration#COMMUNICATION_SELECT_NODE_ID" value1="${wikiNodeName}" />
