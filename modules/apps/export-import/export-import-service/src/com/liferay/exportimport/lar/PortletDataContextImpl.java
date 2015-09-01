@@ -188,6 +188,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             BaseStagedModelDataHandler#exportAssetTags(
+	 *             PortletDataContext, StagedModel)}
+	 */
 	@Deprecated
 	@Override
 	public void addAssetTags(Class<?> clazz, long classPK) {
