@@ -68,21 +68,22 @@ public class ReleaseManager {
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
 			_serviceTrackerMap.getService(bundleSymbolicName));
 
-		String version = getVersion(bundleSymbolicName);
+		String versionString = getVersionString(bundleSymbolicName);
 
 		executeUpgradeInfos(
-			bundleSymbolicName, releaseGraphManager.getUpgradeInfos(version));
+			bundleSymbolicName,
+			releaseGraphManager.getUpgradeInfos(versionString));
 	}
 
-	public void execute(String bundleSymbolicName, String to) {
-		String version = getVersion(bundleSymbolicName);
+	public void execute(String bundleSymbolicName, String toVersionString) {
+		String version = getVersionString(bundleSymbolicName);
 
 		ReleaseGraphManager releaseGraphManager = new ReleaseGraphManager(
 			_serviceTrackerMap.getService(bundleSymbolicName));
 
 		executeUpgradeInfos(
 			bundleSymbolicName,
-			releaseGraphManager.getUpgradeInfos(version, to));
+			releaseGraphManager.getUpgradeInfos(version, toVersionString));
 	}
 
 	public void list() {
@@ -97,7 +98,7 @@ public class ReleaseManager {
 
 		System.out.println(
 			"Registered upgrade processes for " + bundleSymbolicName + " " +
-				getVersion(bundleSymbolicName));
+				getVersionString(bundleSymbolicName));
 
 		for (UpgradeInfo upgradeProcess : upgradeProcesses) {
 			System.out.println("\t" + upgradeProcess);
@@ -172,7 +173,7 @@ public class ReleaseManager {
 		}
 	}
 
-	protected String getVersion(String bundleSymbolicName) {
+	protected String getVersionString(String bundleSymbolicName) {
 		Release release = _releaseLocalService.fetchRelease(bundleSymbolicName);
 
 		if ((release == null) || Validator.isNull(release.getVersion())) {
@@ -272,7 +273,7 @@ public class ReleaseManager {
 			if (upgradeStep == null) {
 				_logger.log(
 					Logger.LOG_WARNING,
-					"Not tracking service reference " + serviceReference +
+					"Skipping service " + serviceReference +
 						" because it does not implement UpgradeStep");
 
 				return null;
