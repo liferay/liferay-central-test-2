@@ -46,6 +46,7 @@ int startTimeMonth = ParamUtil.getInteger(request, "startTimeMonth", startTimeJC
 int startTimeDay = ParamUtil.getInteger(request, "startTimeDay", startTimeJCalendar.get(java.util.Calendar.DAY_OF_MONTH));
 int startTimeHour = ParamUtil.getInteger(request, "startTimeHour", startTimeJCalendar.get(java.util.Calendar.HOUR_OF_DAY));
 int startTimeMinute = ParamUtil.getInteger(request, "startTimeMinute", startTimeJCalendar.get(java.util.Calendar.MINUTE));
+
 int startTimeAmPm = ParamUtil.getInteger(request, "startTimeAmPm");
 
 if (startTimeAmPm == java.util.Calendar.PM) {
@@ -71,6 +72,7 @@ int endTimeMonth = ParamUtil.getInteger(request, "endTimeMonth", endTimeJCalenda
 int endTimeDay = ParamUtil.getInteger(request, "endTimeDay", endTimeJCalendar.get(java.util.Calendar.DAY_OF_MONTH));
 int endTimeHour = ParamUtil.getInteger(request, "endTimeHour", endTimeJCalendar.get(java.util.Calendar.HOUR_OF_DAY));
 int endTimeMinute = ParamUtil.getInteger(request, "endTimeMinute", endTimeJCalendar.get(java.util.Calendar.MINUTE));
+
 int endTimeAmPm = ParamUtil.getInteger(request, "endTimeAmPm");
 
 if (endTimeAmPm == java.util.Calendar.PM) {
