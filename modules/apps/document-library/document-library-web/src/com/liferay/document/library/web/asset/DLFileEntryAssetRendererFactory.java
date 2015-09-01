@@ -91,7 +91,7 @@ public class DLFileEntryAssetRendererFactory
 		}
 		else {
 			throw new IllegalArgumentException(
-				"Unknown AssetRenderer type " + type);
+				"Unknown asset renderer type " + type);
 		}
 
 		DLFileEntryAssetRenderer dlFileEntryAssetRenderer =
