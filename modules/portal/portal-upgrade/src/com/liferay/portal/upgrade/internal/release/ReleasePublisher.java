@@ -64,6 +64,10 @@ public final class ReleasePublisher {
 	protected void activate(BundleContext bundleContext) {
 		_bundleContext = bundleContext;
 
+		if (true) {
+			return;
+		}
+
 		List<Release> releases = _releaseLocalService.getReleases(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
