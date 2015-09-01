@@ -1,11 +1,12 @@
 'use strict';
 
 var gulp = require('gulp');
-var metal = require('gulp-metal');
 
 gulp.task('default', ['build:amd:jquery']);
 
-metal.registerTasks(
+var gulpMetal = require('gulp-metal');
+
+gulpMetal.registerTasks(
 	{
 		buildAmdJqueryDest: 'classes/META-INF/resources',
 		buildSrc: 'bower_components/crystal-*/src/**/*.js',
