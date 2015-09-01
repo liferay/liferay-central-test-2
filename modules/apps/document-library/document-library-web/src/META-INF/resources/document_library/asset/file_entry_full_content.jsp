@@ -23,7 +23,7 @@ boolean showExtraInfo = ParamUtil.getBoolean(request, "showExtraInfo");
 %>
 
 <c:choose>
-	<c:when test="<%= PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED && !showExtraInfo && !fileEntry.isEmpty() %>">
+	<c:when test="<%= PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED && !showExtraInfo && (fileEntry.getSize() > 0) %>">
 		<liferay-util:include page="/document_library/view_file_entry_simple_view.jsp" servletContext="<%= application %>" />
 	</c:when>
 	<c:otherwise>
