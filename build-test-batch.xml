@@ -561,9 +561,9 @@
 
 					int milliseconds = Integer.parseInt(project.getProperty("test.batch.duration"));
 
-					int seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds) % 60;
-					int minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds) % 60;
 					int hours = TimeUnit.MILLISECONDS.toHours(milliseconds);
+					int minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds) % 60;
+					int seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds) % 60;
 
 					StringBuilder sb = new StringBuilder();
 
