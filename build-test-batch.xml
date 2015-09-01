@@ -1117,7 +1117,12 @@
 				<if>
 					<contains string="${build.services.output.txt.content}" substring="Writing " />
 					<then>
-						<fail>Detected build services changes see above build services log for more detail. Make sure to commit in all build services results.</fail>
+						<fail>
+.
+
+Detected build services changes. See above build services log for more
+information. Make sure to commit in all build services results.
+						</fail>
 					</then>
 				</if>
 			</test-action>
