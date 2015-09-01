@@ -38,7 +38,9 @@ public class TempFileOutputStreamContainerFactory
 	@Override
 	public OutputStreamContainer create(String hint) {
 		try {
-			Path tempDirectoryPath = Files.createTempDirectory("tempDir");
+			Path tempDirectoryPath = Files.createTempDirectory(
+				"com_liferay_portal_output_stream_container_internal_" +
+					"TempFileOutputStreamContainerFactory");
 
 			final Path tempFilePath = Files.createTempFile(
 				tempDirectoryPath, hint, ".log");
