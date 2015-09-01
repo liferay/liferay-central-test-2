@@ -76,7 +76,9 @@ public class CMISAtomPubRepository extends CMISRepositoryHandler {
 
 		ClassLoader contextClassLoader = thread.getContextClassLoader();
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		thread.setContextClassLoader(classLoader);
 
