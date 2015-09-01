@@ -1803,13 +1803,18 @@ public class DLAppHelperLocalServiceImpl
 		DLGroupServiceSettings dlGroupServiceSettings =
 			DLGroupServiceSettings.getInstance(fileVersion.getGroupId());
 
-		boolean isCommandUpdate = serviceContext.isCommandUpdate() ||
-			(Constants.CHECKIN.equals(serviceContext.getCommand()));
+		boolean commandUpdate = false;
+
+		if (serviceContext.isCommandUpdate() ||
+			Constants.CHECKIN.equals(serviceContext.getCommand())) {
+
+			commandUpdate = true;
+		}
 
 		if (serviceContext.isCommandAdd() &&
 			dlGroupServiceSettings.isEmailFileEntryAddedEnabled()) {
 		}
-		else if (isCommandUpdate &&
+		else if (commandUpdate &&
 				 dlGroupServiceSettings.isEmailFileEntryUpdatedEnabled()) {
 		}
 		else {
@@ -1824,7 +1829,7 @@ public class DLAppHelperLocalServiceImpl
 		LocalizedValuesMap subjectLocalizedValuesMap = null;
 		LocalizedValuesMap bodyLocalizedValuesMap = null;
 
-		if (isCommandUpdate) {
+		if (commandUpdate) {
 			subjectLocalizedValuesMap =
 				dlGroupServiceSettings.getEmailFileEntryUpdatedSubject();
 			bodyLocalizedValuesMap =
@@ -1890,7 +1895,7 @@ public class DLAppHelperLocalServiceImpl
 		int notificationType =
 			UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY;
 
-		if (isCommandUpdate) {
+		if (commandUpdate) {
 			notificationType =
 				UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY;
 		}
