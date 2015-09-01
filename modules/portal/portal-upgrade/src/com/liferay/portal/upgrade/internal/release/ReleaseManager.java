@@ -151,46 +151,12 @@ public class ReleaseManager {
 			outputStreamContainerFactory.create(
 				"upgrade-" + bundleSymbolicName);
 
-		final OutputStream outputStream =
-			outputStreamContainer.getOutputStream();
+		OutputStream outputStream = outputStreamContainer.getOutputStream();
 
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				for (UpgradeInfo upgradeInfo : upgradeInfos) {
-					UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
-
-					try {
-						upgradeStep.upgrade(
-							new DBProcessContext() {
-
-								@Override
-								public DBContext getDBContext() {
-									return new DBContext();
-								}
-
-								@Override
-								public OutputStream getOutputStream() {
-									return outputStream;
-								}
-
-							});
-
-						_releaseLocalService.updateRelease(
-							bundleSymbolicName,
-							upgradeInfo.getToVersionString(),
-							upgradeInfo.getFromVersionString());
-					}
-					catch (Exception e) {
-						throw new RuntimeException(e);
-					}
-				}
-			}
-
-		};
-
-		RunnableUtil.runWithSwappedSystemOut(runnable, outputStream);
+		RunnableUtil.runWithSwappedSystemOut(
+			new UpgradeInfosRunnable(
+				bundleSymbolicName, upgradeInfos, outputStream),
+			outputStream);
 
 		try {
 			outputStream.close();
@@ -235,6 +201,54 @@ public class ReleaseManager {
 	private ReleaseLocalService _releaseLocalService;
 	private ReleasePublisher _releasePublisher;
 	private ServiceTrackerMap<String, List<UpgradeInfo>> _serviceTrackerMap;
+
+	private class UpgradeInfosRunnable implements Runnable {
+
+		public UpgradeInfosRunnable(
+			String bundleSymbolicName, List<UpgradeInfo> upgradeInfos,
+			OutputStream outputStream) {
+
+			_bundleSymbolicName = bundleSymbolicName;
+			_upgradeInfos = upgradeInfos;
+			_outputStream = outputStream;
+		}
+
+		@Override
+		public void run() {
+			for (UpgradeInfo upgradeInfo : _upgradeInfos) {
+				UpgradeStep upgradeStep = upgradeInfo.getUpgradeStep();
+
+				try {
+					upgradeStep.upgrade(
+						new DBProcessContext() {
+
+							@Override
+							public DBContext getDBContext() {
+								return new DBContext();
+							}
+
+							@Override
+							public OutputStream getOutputStream() {
+								return _outputStream;
+							}
+
+						});
+
+					_releaseLocalService.updateRelease(
+						_bundleSymbolicName, upgradeInfo.getToVersionString(),
+						upgradeInfo.getFromVersionString());
+				}
+				catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+
+		private final String _bundleSymbolicName;
+		private final OutputStream _outputStream;
+		private final List<UpgradeInfo> _upgradeInfos;
+
+	};
 
 	private class UpgradeServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<UpgradeStep, UpgradeInfo> {
