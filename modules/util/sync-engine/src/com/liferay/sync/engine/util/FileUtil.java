@@ -384,18 +384,21 @@ public class FileUtil {
 		}
 
 		try {
-			FileTime fileTime = Files.getLastModifiedTime(filePath);
+			if (syncFile.getSize() > 0) {
+				FileTime fileTime = Files.getLastModifiedTime(filePath);
 
-			long modifiedTime = syncFile.getModifiedTime();
+				long modifiedTime = syncFile.getModifiedTime();
 
-			if (OSDetector.isUnix()) {
-				modifiedTime = modifiedTime / 1000 * 1000;
-			}
+				if (OSDetector.isUnix()) {
+					modifiedTime = modifiedTime / 1000 * 1000;
+				}
 
-			if ((fileTime.toMillis() <= modifiedTime) &&
-				FileKeyUtil.hasFileKey(filePath, syncFile.getSyncFileId())) {
+				if ((fileTime.toMillis() <= modifiedTime) &&
+					FileKeyUtil.hasFileKey(
+						filePath, syncFile.getSyncFileId())) {
 
-				return false;
+					return false;
+				}
 			}
 		}
 		catch (IOException ioe) {
