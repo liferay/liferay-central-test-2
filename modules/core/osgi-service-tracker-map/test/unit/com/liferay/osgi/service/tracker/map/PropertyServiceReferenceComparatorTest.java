@@ -34,22 +34,16 @@ public class PropertyServiceReferenceComparatorTest {
 			new PropertyServiceReferenceComparator<>("ranking");
 
 		ServiceReference<Object> sr1 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 1);
-			}});
+			"ranking", 1);
 		ServiceReference<Object> sr2 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 2);
-			}});
+			"ranking", 2);
 
 		Assert.assertTrue(comparator.compare(sr2, sr1) < 0);
 		Assert.assertEquals(
 			comparator.compare(sr1, sr2), -comparator.compare(sr2, sr1));
 
 		ServiceReference<Object> sr3 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 1);
-			}});
+			"ranking", 1);
 
 		Assert.assertEquals(0, comparator.compare(sr1, sr3));
 	}
@@ -60,17 +54,11 @@ public class PropertyServiceReferenceComparatorTest {
 			new PropertyServiceReferenceComparator<>("ranking");
 
 		ServiceReference<Object> lower = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", -1);
-			}});
+			"ranking", -1);
 		ServiceReference<Object> zero = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 0);
-			}});
+			"ranking", 0);
 		ServiceReference<Object> higher = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 1);
-			}});
+			"ranking", 1);
 
 		Assert.assertTrue(comparator.compare(null, lower) > 0);
 		Assert.assertTrue(comparator.compare(lower, zero) > 0);
@@ -87,20 +75,12 @@ public class PropertyServiceReferenceComparatorTest {
 			new PropertyServiceReferenceComparator<>("ranking");
 
 		ServiceReference<Object> lower = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", -1);
-			}});
+			"ranking", -1);
 		ServiceReference<Object> zero = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 0);
-			}});
+			"ranking", 0);
 		ServiceReference<Object> higher = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 1);
-			}});
-		ServiceReference<Object> nullRef = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-			}});
+			"ranking", 1);
+		ServiceReference<Object> nullRef = new TestServiceReference<>();
 
 		Assert.assertTrue(comparator.compare(nullRef, lower) > 0);
 		Assert.assertTrue(comparator.compare(lower, zero) > 0);
@@ -117,9 +97,8 @@ public class PropertyServiceReferenceComparatorTest {
 			new PropertyServiceReferenceComparator<>("ranking");
 
 		ServiceReference<Object> sr1 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 1);
-			}});
+			"ranking", 1);
+
 
 		Assert.assertEquals(0, comparator.compare(null, null));
 		Assert.assertTrue(comparator.compare(sr1, null) < 0);
@@ -133,20 +112,15 @@ public class PropertyServiceReferenceComparatorTest {
 			new PropertyServiceReferenceComparator<>("ranking");
 
 		ServiceReference<Object> sr1 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-				put("ranking", 1);
-			}});
-		ServiceReference<Object> sr2 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-			}});
+			"ranking", 1);
+
+		ServiceReference<Object> sr2 = new TestServiceReference<>();
 
 		Assert.assertTrue(comparator.compare(sr1, sr2) < 0);
 		Assert.assertEquals(
 			comparator.compare(sr1, sr2), -comparator.compare(sr2, sr1));
 
-		ServiceReference<Object> sr3 = new TestServiceReference<>(
-			new HashMap<String, Object>() { {
-			}});
+		ServiceReference<Object> sr3 = new TestServiceReference<>();
 
 		Assert.assertEquals(0, comparator.compare(sr2, sr3));
 		Assert.assertEquals(
@@ -155,7 +129,16 @@ public class PropertyServiceReferenceComparatorTest {
 
 	private class TestServiceReference<S> implements ServiceReference<S> {
 
-		public TestServiceReference(Map<String, Object> properties) {
+		public TestServiceReference(Object... arguments) {
+			Map<String, Object> properties = new HashMap<>();
+				
+			for (int i = 0; i < arguments.length; i += 2) {
+				String key = String.valueOf(arguments[i]);	
+				Object value = arguments[i + 1];
+
+				properties.put(key, value);
+			}			
+			
 			_properties = properties;
 		}
 
