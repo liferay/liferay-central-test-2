@@ -59,40 +59,7 @@ public class PropertyServiceReferenceComparatorTest {
 	}
 
 	@Test
-	public void testCompareIsTransitiveWithNulls() {
-		PropertyServiceReferenceComparator<Object>
-			propertyServiceReferenceComparator =
-				new PropertyServiceReferenceComparator<>("ranking");
-
-		ServiceReference<Object> serviceReference1 = new TestServiceReference<>(
-			"ranking", -1);
-		ServiceReference<Object> serviceReference2 = new TestServiceReference<>(
-			"ranking", 0);
-		ServiceReference<Object> serviceReference3 = new TestServiceReference<>(
-			"ranking", 1);
-
-		Assert.assertTrue(
-			propertyServiceReferenceComparator.compare(
-				null, serviceReference1) > 0);
-		Assert.assertTrue(
-			propertyServiceReferenceComparator.compare(
-				serviceReference1, serviceReference2) > 0);
-		Assert.assertTrue(
-			propertyServiceReferenceComparator.compare(
-				null, serviceReference2) > 0);
-		Assert.assertTrue(
-			propertyServiceReferenceComparator.compare(
-				null, serviceReference2) > 0);
-		Assert.assertTrue(
-			propertyServiceReferenceComparator.compare(
-				serviceReference2, serviceReference3) > 0);
-		Assert.assertTrue(
-			propertyServiceReferenceComparator.compare(
-				null, serviceReference3) > 0);
-	}
-
-	@Test
-	public void testCompareIsTransitiveWithNullValues() {
+	public void testCompareIsTransitiveWhenServiceReferencePropertiesAreNull() {
 		PropertyServiceReferenceComparator<Object>
 			propertyServiceReferenceComparator =
 				new PropertyServiceReferenceComparator<>("ranking");
@@ -127,27 +94,40 @@ public class PropertyServiceReferenceComparatorTest {
 	}
 
 	@Test
-	public void testCompareWithNulls() {
+	public void testCompareIsTransitiveWhenServiceReferencesAreNull() {
 		PropertyServiceReferenceComparator<Object>
 			propertyServiceReferenceComparator =
 				new PropertyServiceReferenceComparator<>("ranking");
 
 		ServiceReference<Object> serviceReference1 = new TestServiceReference<>(
+			"ranking", -1);
+		ServiceReference<Object> serviceReference2 = new TestServiceReference<>(
+			"ranking", 0);
+		ServiceReference<Object> serviceReference3 = new TestServiceReference<>(
 			"ranking", 1);
 
-		Assert.assertEquals(
-			0, propertyServiceReferenceComparator.compare(null, null));
 		Assert.assertTrue(
 			propertyServiceReferenceComparator.compare(
-				serviceReference1, null) < 0);
-		Assert.assertEquals(
-			propertyServiceReferenceComparator.compare(serviceReference1, null),
-			-propertyServiceReferenceComparator.compare(
-				null, serviceReference1));
+				null, serviceReference1) > 0);
+		Assert.assertTrue(
+			propertyServiceReferenceComparator.compare(
+				serviceReference1, serviceReference2) > 0);
+		Assert.assertTrue(
+			propertyServiceReferenceComparator.compare(
+				null, serviceReference2) > 0);
+		Assert.assertTrue(
+			propertyServiceReferenceComparator.compare(
+				null, serviceReference2) > 0);
+		Assert.assertTrue(
+			propertyServiceReferenceComparator.compare(
+				serviceReference2, serviceReference3) > 0);
+		Assert.assertTrue(
+			propertyServiceReferenceComparator.compare(
+				null, serviceReference3) > 0);
 	}
 
 	@Test
-	public void testCompareWithNullValues() {
+	public void testCompareWhenServiceReferencePropertiesAreNull() {
 		PropertyServiceReferenceComparator<Object>
 			propertyServiceReferenceComparator =
 				new PropertyServiceReferenceComparator<>("ranking");
@@ -178,6 +158,26 @@ public class PropertyServiceReferenceComparatorTest {
 				serviceReference2, serviceReference3),
 			-propertyServiceReferenceComparator.compare(
 				serviceReference3, serviceReference2));
+	}
+
+	@Test
+	public void testCompareWhenServiceReferencesAreNull() {
+		PropertyServiceReferenceComparator<Object>
+			propertyServiceReferenceComparator =
+				new PropertyServiceReferenceComparator<>("ranking");
+
+		ServiceReference<Object> serviceReference1 = new TestServiceReference<>(
+			"ranking", 1);
+
+		Assert.assertEquals(
+			0, propertyServiceReferenceComparator.compare(null, null));
+		Assert.assertTrue(
+			propertyServiceReferenceComparator.compare(
+				serviceReference1, null) < 0);
+		Assert.assertEquals(
+			propertyServiceReferenceComparator.compare(serviceReference1, null),
+			-propertyServiceReferenceComparator.compare(
+				null, serviceReference1));
 	}
 
 	private class TestServiceReference<S> implements ServiceReference<S> {
