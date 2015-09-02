@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <aui:fieldset>
 	<liferay-ui:panel-container extended="<%= true %>" id="adminMailServerSettingsPanelContainer" persistState="<%= true %>">

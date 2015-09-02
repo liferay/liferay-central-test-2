@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <liferay-ui:error key="shutdownMinutes" message="please-enter-the-number-of-minutes" />
 

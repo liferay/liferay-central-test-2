@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 Collection<ConvertProcess> convertProcesses = ConvertProcessUtil.getEnabledConvertProcesses();

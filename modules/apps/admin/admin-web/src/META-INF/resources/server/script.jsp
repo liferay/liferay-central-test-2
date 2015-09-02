@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 String language = ParamUtil.getString(renderRequest, "language", "javascript");
