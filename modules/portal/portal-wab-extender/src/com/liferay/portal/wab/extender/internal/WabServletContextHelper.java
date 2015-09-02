@@ -77,45 +77,42 @@ public class WabServletContextHelper extends ServletContextHelper {
 	public boolean handleSecurity(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		String targetPath = null;
+		String path = null;
 
 		if (request.getDispatcherType() == DispatcherType.INCLUDE) {
-			targetPath = (String)request.getAttribute(
+			path = (String)request.getAttribute(
 				RequestDispatcher.INCLUDE_SERVLET_PATH);
 
 			String pathInfo = (String)request.getAttribute(
 				RequestDispatcher.INCLUDE_PATH_INFO);
 
 			if (pathInfo != null) {
-				targetPath = targetPath + pathInfo;
+				path = path + pathInfo;
 			}
 		}
 		else {
-			targetPath = request.getPathInfo();
+			path = request.getPathInfo();
 		}
 
-		if (targetPath == null) {
+		if (path == null) {
 			return true;
 		}
 
-		if (targetPath.indexOf('/') != 0) {
-			targetPath = '/' + targetPath;
+		if (path.indexOf('/') != 0) {
+			path = '/' + path;
 		}
 
-		if (targetPath.startsWith("/META-INF/") ||
-			targetPath.startsWith("/OSGI-INF/") ||
-			targetPath.startsWith("/OSGI-OPT/") ||
-			targetPath.startsWith("/WEB-INF/")) {
+		if (path.startsWith("/META-INF/") || path.startsWith("/OSGI-INF/") ||
+			path.startsWith("/OSGI-OPT/") || path.startsWith("/WEB-INF/")) {
 
 			try {
 				ServletContext servletContext = request.getServletContext();
 
 				servletContext.log(
-					"[WAB ERROR] Attempt to load illegal path " + targetPath +
+					"[WAB ERROR] Attempt to load illegal path " + path +
 						" in " + toString());
 
-				response.sendError(
-					HttpServletResponse.SC_FORBIDDEN, targetPath);
+				response.sendError(HttpServletResponse.SC_FORBIDDEN, path);
 			}
 			catch (IOException ioe) {
 				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
