@@ -143,7 +143,7 @@ public class EditServerMVCActionCommand extends BaseMVCActionCommand {
 				PrincipalException.MustBeOmniadmin.class.getName());
 
 			actionResponse.setRenderParameter(
-				"mvcPath", "/html/portlet/admin/error.jsp" );
+				"mvcPath", "/error.jsp" );
 
 			return;
 		}

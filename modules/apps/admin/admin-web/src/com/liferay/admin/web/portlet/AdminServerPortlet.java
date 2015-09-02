@@ -14,12 +14,12 @@
 
 package com.liferay.admin.web.portlet;
 
+import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+
 import javax.portlet.Portlet;
 
 import org.osgi.service.component.annotations.Component;
-
-import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 /**
  * @author Philip Jones
@@ -37,8 +37,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.use-default-template=true",
-		"javax.portlet.display-name=Admin", 
-		"javax.portlet.expiration-cache=0",
+		"javax.portlet.display-name=Admin", "javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + ServerAdministrationPortletKeys.SERVER_ADMINISTRATION,

@@ -14,11 +14,11 @@
 
 package com.liferay.admin.web.portlet.route;
 
-import org.osgi.service.component.annotations.Component;
-
 import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Philip Jones
@@ -30,8 +30,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 	},
 	service = FriendlyURLMapper.class
 )
-public class AdminServerFriendlyURLMapper
-	extends DefaultFriendlyURLMapper {
+public class AdminServerFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 	@Override
 	public String getMapping() {

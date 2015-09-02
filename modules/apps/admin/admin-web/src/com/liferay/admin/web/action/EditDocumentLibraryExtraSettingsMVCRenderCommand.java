@@ -39,7 +39,7 @@ public class EditDocumentLibraryExtraSettingsMVCRenderCommand
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/html/portlet/admin/edit_document_library_extra_settings.jsp";
+		return "/edit_document_library_extra_settings.jsp";
 	}
 
 }
