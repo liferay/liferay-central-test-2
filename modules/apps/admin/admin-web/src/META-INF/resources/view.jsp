@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <c:choose>
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
@@ -53,7 +53,7 @@
 
 			<c:choose>
 				<c:when test='<%= tabs1.equals("server") %>'>
-					<liferay-util:include page="/html/portlet/admin/server.jsp" />
+					<liferay-util:include page="/server.jsp" />
 
 					<aui:script use="liferay-admin">
 						new Liferay.Portlet.Admin(
