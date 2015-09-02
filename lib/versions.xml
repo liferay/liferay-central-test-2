@@ -303,7 +303,6 @@
 					</license>
 				</licenses>
 				<comments>
-					This is a customized build from HSQLDB 2.3.3 release to include debug info in classes.
 					See LPS-58322.
 				</comments>
 			</library>
