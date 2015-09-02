@@ -253,10 +253,10 @@ public class FileUtil {
 			return 0;
 		}
 
-		FileTime lastModifiedTime = Files.getLastModifiedTime(
+		FileTime fileTime = Files.getLastModifiedTime(
 			filePath, LinkOption.NOFOLLOW_LINKS);
 
-		return lastModifiedTime.toMillis();
+		return fileTime.toMillis();
 	}
 
 	public static String getNextFilePathName(String filePathName) {
