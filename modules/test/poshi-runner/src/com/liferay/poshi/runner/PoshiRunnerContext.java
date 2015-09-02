@@ -706,11 +706,11 @@ public class PoshiRunnerContext {
 				classCommandNames.size() /
 					PropsValues.TEST_BATCH_MAX_GROUP_SIZE;
 
-			int uncompleteGroupCount =
+			int incompleteGroupCount =
 				classCommandNames.size() %
 					PropsValues.TEST_BATCH_MAX_GROUP_SIZE;
 
-			if (uncompleteGroupCount > 0) {
+			if (incompleteGroupCount > 0) {
 				totalGroupCount++;
 			}
 
