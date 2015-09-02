@@ -16,10 +16,10 @@ package com.liferay.osgi.service.tracker.map;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 
@@ -147,7 +147,9 @@ public class PropertyServiceReferenceComparatorTest {
 				return 1;
 			}
 
-			return toString().compareTo(object.toString());
+			String s = toString();
+			
+			return s.compareTo(object.toString());
 		}
 
 		@Override
@@ -162,7 +164,9 @@ public class PropertyServiceReferenceComparatorTest {
 
 		@Override
 		public String[] getPropertyKeys() {
-			return _properties.keySet().toArray(new String[0]);
+			Set<String> keys = _properties.keySet();
+			
+			return keys.toArray(new String[keys.size()]);
 		}
 
 		@Override
