@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.portlet.admin.action;
+package com.liferay.admin.web.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -33,11 +32,13 @@ import com.liferay.portlet.expando.util.ExpandoPresetUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Alexander Chow
  * @author Philip Jones
  */
-@OSGiBeanProperties(
+@Component(
 	property = {
 		"javax.portlet.name=" + PortletKeys.ADMIN,
 		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,

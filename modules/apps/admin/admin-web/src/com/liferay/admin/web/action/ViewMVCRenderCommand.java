@@ -12,33 +12,33 @@
  * details.
  */
 
-package com.liferay.portlet.admin.action;
+package com.liferay.admin.web.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.util.PortletKeys;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Philip Jones
  */
-@OSGiBeanProperties(
+@Component(
 	property = {
 		"javax.portlet.name=" + PortletKeys.ADMIN,
 		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,
-		"mvc.command.name=/admin_server/edit_document_library_extra_settings"
+		"mvc.command.name=/admin/view"
 	}
 )
-public class EditDocumentLibraryExtraSettingsMVCRenderCommand
-	implements MVCRenderCommand {
+public class ViewMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/html/portlet/admin/edit_document_library_extra_settings.jsp";
+		return "/html/portlet/admin/view.jsp";
 	}
 
 }
