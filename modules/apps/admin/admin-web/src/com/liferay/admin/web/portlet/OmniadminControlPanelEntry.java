@@ -12,12 +12,20 @@
  * details.
  */
 
-package com.liferay.portlet.admin.portlet;
+package com.liferay.admin.web.portlet;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import org.osgi.service.component.annotations.Component;
+
+import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
+import com.liferay.portlet.ControlPanelEntry;
 
 /**
  * @author Philip Jones
  */
-public class AdminPortlet extends MVCPortlet {
+@Component(
+	property = {"javax.portlet.name=" + ServerAdministrationPortletKeys.SERVER_ADMINISTRATION},
+	service = ControlPanelEntry.class
+)
+public class OmniadminControlPanelEntry
+	extends com.liferay.portlet.OmniadminControlPanelEntry {
 }

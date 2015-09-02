@@ -12,12 +12,14 @@
  * details.
  */
 
-package com.liferay.portlet.admin.portlet;
-
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+package com.liferay.admin.web.constants;
 
 /**
  * @author Philip Jones
  */
-public class AdminServerPortlet extends MVCPortlet {
+public class ServerAdministrationPortletKeys {
+
+	public static final String SERVER_ADMINISTRATION =
+		"com_liferay_admin_web_portlet_ServerAdministrationPortlet";
+
 }
