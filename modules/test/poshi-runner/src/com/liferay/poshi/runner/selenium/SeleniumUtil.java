@@ -63,14 +63,6 @@ public class SeleniumUtil extends PropsValues {
 
 				_selenium = new FirefoxWebDriverImpl(projectDirName, portalURL);
 			}
-			else if (BROWSER_TYPE.equals("*googlechrome")) {
-				System.setProperty(
-					"webdriver.chrome.driver",
-					SELENIUM_EXECUTABLE_DIR_NAME +
-						SELENIUM_CHROME_DRIVER_EXECUTABLE);
-
-				_selenium = new ChromeWebDriverImpl(projectDirName, portalURL);
-			}
 			else if (BROWSER_TYPE.equals("*edge") &&
 					 !SELENIUM_REMOTE_DRIVER_ENABLED) {
 
@@ -81,6 +73,14 @@ public class SeleniumUtil extends PropsValues {
 
 				_selenium = new EdgeRemoteWebDriverImpl(
 					projectDirName, portalURL);
+			}
+			else if (BROWSER_TYPE.equals("*googlechrome")) {
+				System.setProperty(
+					"webdriver.chrome.driver",
+					SELENIUM_EXECUTABLE_DIR_NAME +
+						SELENIUM_CHROME_DRIVER_EXECUTABLE);
+
+				_selenium = new ChromeWebDriverImpl(projectDirName, portalURL);
 			}
 			else if ((BROWSER_TYPE.equals("*iehta") ||
 					  BROWSER_TYPE.equals("*iexplore")) &&

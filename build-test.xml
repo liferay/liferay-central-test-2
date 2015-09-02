@@ -4715,17 +4715,17 @@ module.framework.properties.osgi.console=11312</echo>
 
 	<target name="prepare-selenium-browser-properties">
 		<if>
-			<equals arg1="${browser.type}" arg2="firefox" />
+			<equals arg1="${browser.type}" arg2="edge" />
 			<then>
 				<echo append="true" file="${test.ext.properties.file}">
-					browser.type=*chrome
+					browser.type=*edge
 				</echo>
 			</then>
 			<elseif>
-				<equals arg1="${browser.type}" arg2="edge" />
+				<equals arg1="${browser.type}" arg2="firefox" />
 				<then>
 					<echo append="true" file="${test.ext.properties.file}">
-						browser.type=*edge
+						browser.type=*chrome
 					</echo>
 				</then>
 			</elseif>
