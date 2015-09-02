@@ -246,29 +246,29 @@ public class JspServlet extends HttpServlet {
 			if (_DEBUG.equals(
 					_jspServlet.getInitParameter("logVerbosityLevel"))) {
 
-				String jspUri = (String)request.getAttribute(
+				String path = (String)request.getAttribute(
 					RequestDispatcher.INCLUDE_SERVLET_PATH);
 
-				if (jspUri != null) {
+				if (path != null) {
 					String pathInfo = (String)request.getAttribute(
 						RequestDispatcher.INCLUDE_PATH_INFO);
 
 					if (pathInfo != null) {
-						jspUri += pathInfo;
+						path += pathInfo;
 					}
 				}
 				else {
-					jspUri = request.getServletPath();
+					path = request.getServletPath();
 
 					String pathInfo = request.getPathInfo();
 
 					if (pathInfo != null) {
-						jspUri += pathInfo;
+						path += pathInfo;
 					}
 				}
 
 				_jspServletContext.log(
-					"[JSP DEBUG] " + _bundle + " invoking " + jspUri);
+					"[JSP DEBUG] " + _bundle + " invoking " + path);
 			}
 
 			_jspServlet.service(request, response);

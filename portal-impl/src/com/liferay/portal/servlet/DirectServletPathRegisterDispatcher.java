@@ -53,6 +53,7 @@ public class DirectServletPathRegisterDispatcher implements RequestDispatcher {
 		servletRequest.setAttribute(RequestDispatcher.INCLUDE_PATH_INFO, null);
 		servletRequest.setAttribute(
 			RequestDispatcher.INCLUDE_SERVLET_PATH, _path);
+
 		servletRequest.setAttribute(WebKeys.SERVLET_PATH, _path);
 
 		_requestDispatcher.include(servletRequest, servletResponse);

@@ -57,6 +57,7 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 		servletRequest.setAttribute(RequestDispatcher.INCLUDE_PATH_INFO, null);
 		servletRequest.setAttribute(
 			RequestDispatcher.INCLUDE_SERVLET_PATH, _path);
+
 		servletRequest = DynamicServletRequest.addQueryString(
 			(HttpServletRequest)servletRequest, _queryString);
 
