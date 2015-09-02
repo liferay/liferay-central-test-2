@@ -14,10 +14,10 @@
 
 package com.liferay.admin.web.portlet;
 
-import org.osgi.service.component.annotations.Component;
-
 import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
 import com.liferay.portlet.ControlPanelEntry;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Philip Jones
