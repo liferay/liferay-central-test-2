@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.admin.action;
+package com.liferay.admin.web.action;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.captcha.CaptchaImpl;
@@ -48,7 +48,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.DirectServletRegistryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -110,12 +109,14 @@ import javax.portlet.WindowState;
 
 import org.apache.log4j.Level;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  * @author Philip Jones
  */
-@OSGiBeanProperties(
+@Component(
 	property = {
 		"javax.portlet.name=" + PortletKeys.ADMIN,
 		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,

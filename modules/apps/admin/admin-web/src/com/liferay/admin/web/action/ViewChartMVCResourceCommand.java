@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.portlet.admin.action;
+package com.liferay.admin.web.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -41,11 +40,13 @@ import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Matthew Kong
  * @author Philip Jones
  */
-@OSGiBeanProperties(
+@Component(
 	property = {
 		"javax.portlet.name=" + PortletKeys.ADMIN,
 		"javax.portlet.name=" + PortletKeys.ADMIN_SERVER,
