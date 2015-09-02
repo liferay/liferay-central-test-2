@@ -33,11 +33,11 @@ public class PropertyServiceReferenceComparatorTest {
 		PropertyServiceReferenceComparator<Object> comparator =
 			new PropertyServiceReferenceComparator<>("ranking");
 
-		ServiceReference<Object> sr1 = new MockServiceReference<>(
+		ServiceReference<Object> sr1 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 1);
 			}});
-		ServiceReference<Object> sr2 = new MockServiceReference<>(
+		ServiceReference<Object> sr2 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 2);
 			}});
@@ -46,7 +46,7 @@ public class PropertyServiceReferenceComparatorTest {
 		Assert.assertEquals(
 			comparator.compare(sr1, sr2), -comparator.compare(sr2, sr1));
 
-		ServiceReference<Object> sr3 = new MockServiceReference<>(
+		ServiceReference<Object> sr3 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 1);
 			}});
@@ -59,15 +59,15 @@ public class PropertyServiceReferenceComparatorTest {
 		PropertyServiceReferenceComparator<Object> comparator =
 			new PropertyServiceReferenceComparator<>("ranking");
 
-		ServiceReference<Object> lower = new MockServiceReference<>(
+		ServiceReference<Object> lower = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", -1);
 			}});
-		ServiceReference<Object> zero = new MockServiceReference<>(
+		ServiceReference<Object> zero = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 0);
 			}});
-		ServiceReference<Object> higher = new MockServiceReference<>(
+		ServiceReference<Object> higher = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 1);
 			}});
@@ -86,19 +86,19 @@ public class PropertyServiceReferenceComparatorTest {
 		PropertyServiceReferenceComparator<Object> comparator =
 			new PropertyServiceReferenceComparator<>("ranking");
 
-		ServiceReference<Object> lower = new MockServiceReference<>(
+		ServiceReference<Object> lower = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", -1);
 			}});
-		ServiceReference<Object> zero = new MockServiceReference<>(
+		ServiceReference<Object> zero = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 0);
 			}});
-		ServiceReference<Object> higher = new MockServiceReference<>(
+		ServiceReference<Object> higher = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 1);
 			}});
-		ServiceReference<Object> nullRef = new MockServiceReference<>(
+		ServiceReference<Object> nullRef = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 			}});
 
@@ -116,7 +116,7 @@ public class PropertyServiceReferenceComparatorTest {
 		PropertyServiceReferenceComparator<Object> comparator =
 			new PropertyServiceReferenceComparator<>("ranking");
 
-		ServiceReference<Object> sr1 = new MockServiceReference<>(
+		ServiceReference<Object> sr1 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 1);
 			}});
@@ -132,11 +132,11 @@ public class PropertyServiceReferenceComparatorTest {
 		PropertyServiceReferenceComparator<Object> comparator =
 			new PropertyServiceReferenceComparator<>("ranking");
 
-		ServiceReference<Object> sr1 = new MockServiceReference<>(
+		ServiceReference<Object> sr1 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 				put("ranking", 1);
 			}});
-		ServiceReference<Object> sr2 = new MockServiceReference<>(
+		ServiceReference<Object> sr2 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 			}});
 
@@ -144,7 +144,7 @@ public class PropertyServiceReferenceComparatorTest {
 		Assert.assertEquals(
 			comparator.compare(sr1, sr2), -comparator.compare(sr2, sr1));
 
-		ServiceReference<Object> sr3 = new MockServiceReference<>(
+		ServiceReference<Object> sr3 = new TestServiceReference<>(
 			new HashMap<String, Object>() { {
 			}});
 
@@ -153,9 +153,9 @@ public class PropertyServiceReferenceComparatorTest {
 			comparator.compare(sr2, sr3), -comparator.compare(sr3, sr2));
 	}
 
-	private class MockServiceReference<S> implements ServiceReference<S> {
+	private class TestServiceReference<S> implements ServiceReference<S> {
 
-		public MockServiceReference(Map<String, Object> properties) {
+		public TestServiceReference(Map<String, Object> properties) {
 			_properties = properties;
 		}
 
