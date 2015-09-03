@@ -60,12 +60,10 @@ DDLRecordVersion latestRecordVersion = record.getLatestRecordVersion();
 	}
 
 	long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
 	long classPK = ddmStructure.getPrimaryKey();
 
 	if (formDDMTemplateId > 0) {
 		classNameId = PortalUtil.getClassNameId(DDMTemplate.class);
-
 		classPK = formDDMTemplateId;
 	}
 	%>
