@@ -28,12 +28,11 @@ if (stagedModel != null) {
 	modifiedDate = stagedModel.getModifiedDate();
 }
 
-group = themeDisplay.getScopeGroup();
-
-String portletId = portletDisplay.getId();
-
-boolean stagedPortlet = group.isInStagingPortlet(portletId);
 boolean published = false;
+
+Group themeDisplayScopeGroup = themeDisplay.getScopeGroup();
+
+boolean stagedPortlet = group.isInStagingPortlet(portletDisplay.getId());
 
 if (stagedPortlet) {
 	if (lastPublishDate == null) {
