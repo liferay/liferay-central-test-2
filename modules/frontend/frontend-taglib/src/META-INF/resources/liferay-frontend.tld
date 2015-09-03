@@ -180,6 +180,11 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>management-bar-buttons</name>
+		<tag-class>com.liferay.frontend.taglib.servlet.taglib.ManagementBarButtonsTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
 		<name>management-bar-display-buttons</name>
 		<tag-class>com.liferay.frontend.taglib.servlet.taglib.ManagementBarDisplayButtonsTag</tag-class>
 		<body-content>JSP</body-content>
@@ -198,11 +203,6 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
-	</tag>
-	<tag>
-		<name>management-bar-buttons</name>
-		<tag-class>com.liferay.frontend.taglib.servlet.taglib.ManagementBarButtonsTag</tag-class>
-		<body-content>JSP</body-content>
 	</tag>
 	<tag>
 		<name>management-bar-filters</name>
