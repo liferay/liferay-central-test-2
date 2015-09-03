@@ -624,6 +624,70 @@
 		</for>
 	</command>
 
+	<command name="CancelAddPage" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute macro="WikiEntry#cancel" />
+
+		<execute macro="WikiTable#viewNoEntry">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+	</command>
+
+	<command name="CancelEditPage" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute macro="WikiEntry#publish" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute macro="WikiTable#gotoEntryEdit">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Edited " />
+		</execute>
+
+		<execute macro="WikiEntry#cancel" />
+
+		<execute macro="WikiPage#viewPageContentBody">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+	</command>
+
 	<command name="CompareVersionEditFrontPage" priority="4">
 		<var name="wikiPageContent" value="Wiki Front Page Content" />
 		<var name="wikiPageContentEdit" value="Wiki Front Page Content Edit" />
@@ -679,6 +743,64 @@
 			<var name="wikiPageVersionDiff" value="Wiki Front Page Content Edit" />
 			<var name="wikiPageVersionNew" value="${wikiPageVersionNew}" />
 			<var name="wikiPageVersionOld" value="${wikiPageVersionOld}" />
+		</execute>
+	</command>
+
+	<command name="CopyPage" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute macro="WikiEntry#publish" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute macro="WikiTable#gotoEntryCopy">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Copied Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Copied " />
+		</execute>
+
+		<execute macro="WikiEntry#publish" />
+
+		<execute macro="WikiTable#viewEntry">
+			<var name="draftStatus" value="Approved" />
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiTable#viewEntry">
+			<var name="draftStatus" value="Approved" />
+			<var name="wikiPageTitle" value="Copied Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiTable#gotoEntry">
+			<var name="wikiPageTitle" value="Copied Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiPage#viewPageContentBody">
+			<var name="wikiPageContent" value="Copied Wiki Page Content" />
 		</execute>
 	</command>
 
@@ -739,6 +861,61 @@
 
 		<execute macro="WikiPage#viewNoPagePG">
 			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+		</execute>
+	</command>
+
+	<command name="EditDraftPage" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute macro="WikiEntry#saveAsDraft" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoDraftPages" />
+
+		<execute macro="WikiTable#gotoEntryEdit">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Edited " />
+		</execute>
+
+		<execute macro="WikiEntry#publish" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute macro="WikiTable#viewEntry">
+			<var name="draftStatus" value="Approved" />
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiTable#gotoEntry">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiPage#viewPageContentBody">
+			<var name="wikiPageContent" value="Edited Wiki Page Content" />
 		</execute>
 	</command>
 
@@ -837,6 +1014,78 @@
 		<execute macro="WikiPage#viewPG">
 			<var name="wikiPageContent" value="Wiki Page2 Content" />
 			<var name="wikiPageTitle" value="Wiki Page2 Title" />
+		</execute>
+	</command>
+
+	<command name="PreviewEditedPage" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute macro="WikiEntry#publish" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute macro="WikiTable#gotoEntryEdit">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Edited " />
+		</execute>
+
+		<execute function="AssertClick" locator1="Button#PREVIEW" value1="Preview" />
+
+		<execute macro="WikiEntry#previewPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#previewPageContent">
+			<var name="wikiPageContent" value="Edited Wiki Page Content" />
+		</execute>
+	</command>
+
+	<command name="PreviewPage" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute function="AssertClick" locator1="Button#PREVIEW" value1="Preview" />
+
+		<execute macro="WikiEntry#previewPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#previewPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
 		</execute>
 	</command>
 
@@ -1118,6 +1367,61 @@
 		<execute macro="WikiPage#viewPG">
 			<var name="wikiPageContent" value="${wikiPageContent}" />
 			<var name="wikiPageTitle" value="${wikiPageTitle}" />
+		</execute>
+	</command>
+
+	<command name="SaveEditedPageAsDraft" priority="4">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
+
+		<execute macro="WikiEntry#addPageTitle">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Wiki Page Content" />
+		</execute>
+
+		<execute macro="WikiEntry#publish" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoAllPages" />
+
+		<execute macro="WikiTable#gotoEntryEdit">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#addPageContent">
+			<var name="wikiPageContent" value="Edited " />
+		</execute>
+
+		<execute macro="WikiEntry#saveAsDraft" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Wiki Test Page" />
+		</execute>
+
+		<execute macro="WikiNavigator#gotoDraftPages" />
+
+		<execute macro="WikiTable#viewEntry">
+			<var name="draftStatus" value="Draft" />
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiTable#gotoEntry">
+			<var name="wikiPageTitle" value="Wiki Page Title" />
+		</execute>
+
+		<execute macro="WikiEntry#viewPageContentBody">
+			<var name="wikiPageContent" value="Edited Wiki Page Content" />
 		</execute>
 	</command>
 </definition>
