@@ -438,7 +438,7 @@ public class PortletTracker
 		serviceRegistrations.addServiceRegistration(
 			createPortletServlet(bundleContext, contextName, classLoader));
 		serviceRegistrations.addServiceRegistration(
-			createRestrictServletFilter(
+			createRestrictPortletServletRequestFilter(
 				bundleContext, contextName, classLoader));
 	}
 
@@ -1158,7 +1158,7 @@ public class PortletTracker
 			Servlet.class, new PortletServletWrapper(), properties);
 	}
 
-	protected ServiceRegistration<?> createRestrictServletFilter(
+	protected ServiceRegistration<?> createRestrictPortletServletRequestFilter(
 		BundleContext bundleContext, String contextName,
 		ClassLoader classLoader) {
 
@@ -1182,7 +1182,8 @@ public class PortletTracker
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_PATTERN, "/*");
 
 		return bundleContext.registerService(
-			Filter.class, new RestrictServletFilter(), properties);
+			Filter.class, new RestrictPortletServletRequestFilter(),
+			properties);
 	}
 
 	@Deactivate
@@ -1396,17 +1397,18 @@ public class PortletTracker
 
 		@Override
 		protected void service(
-				HttpServletRequest request, HttpServletResponse response)
+				HttpServletRequest httpServletRequest,
+				HttpServletResponse httpServletResponse)
 			throws IOException, ServletException {
 
-			_servlet.service(request, response);
+			_servlet.service(httpServletRequest, httpServletResponse);
 		}
 
 		private final Servlet _servlet = new PortletServlet();
 
 	}
 
-	private class RestrictServletFilter implements Filter {
+	private class RestrictPortletServletRequestFilter implements Filter {
 
 		@Override
 		public void destroy() {
@@ -1414,16 +1416,16 @@ public class PortletTracker
 
 		@Override
 		public void doFilter(
-				ServletRequest request, ServletResponse response,
+				ServletRequest servletRequest, ServletResponse servletResponse,
 				FilterChain filterChain)
 			throws IOException, ServletException {
 
 			try {
-				filterChain.doFilter(request, response);
+				filterChain.doFilter(servletRequest, servletResponse);
 			}
 			finally {
 				PortletRequest portletRequest =
-					(PortletRequest)request.getAttribute(
+					(PortletRequest)servletRequest.getAttribute(
 						JavaConstants.JAVAX_PORTLET_REQUEST);
 
 				if (portletRequest == null) {
@@ -1434,10 +1436,11 @@ public class PortletTracker
 					new RestrictPortletServletRequest(
 						PortalUtil.getHttpServletRequest(portletRequest));
 
-				for (Enumeration<String> names = request.getAttributeNames();
-						names.hasMoreElements();) {
+				Enumeration<String> enumeration =
+					servletRequest.getAttributeNames();
 
-					String name = names.nextElement();
+				while (enumeration.hasMoreElements()) {
+					String name = enumeration.nextElement();
 
 					if (!RestrictPortletServletRequest.isSharedRequestAttribute(
 							name)) {
@@ -1446,7 +1449,7 @@ public class PortletTracker
 					}
 
 					restrictPortletServletRequest.setAttribute(
-						name, request.getAttribute(name));
+						name, servletRequest.getAttribute(name));
 				}
 
 				restrictPortletServletRequest.mergeSharedAttributes();
