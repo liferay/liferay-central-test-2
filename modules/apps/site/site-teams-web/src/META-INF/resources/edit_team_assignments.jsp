@@ -68,10 +68,10 @@ request.setAttribute("edit_team_assignments.jsp-organization", organization);
 
 request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 
-renderResponse.setTitle(HtmlUtil.escape(team.getName()));
-
-portletDisplay.setURLBack(redirect);
 portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(redirect);
+
+renderResponse.setTitle(HtmlUtil.escape(team.getName()));
 %>
 
 <liferay-ui:tabs
