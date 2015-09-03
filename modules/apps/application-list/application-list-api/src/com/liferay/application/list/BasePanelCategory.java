@@ -45,9 +45,8 @@ public abstract class BasePanelCategory implements PanelCategory {
 		if (Validator.equals(getKey(), panelCategory.getKey())) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	@Override
