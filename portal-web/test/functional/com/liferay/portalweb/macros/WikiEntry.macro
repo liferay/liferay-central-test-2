@@ -19,6 +19,16 @@
 		<execute function="Confirm" value1="You may lose some formatting when switching from Creole to MediaWiki. Do you want to continue?" />
 	</command>
 
+	<command name="previewPageContent">
+		<execute function="AssertTextEquals" locator1="Wiki#BODY" value1="${wikiPageContent}" />
+	</command>
+
+	<command name="previewPageTitle">
+		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Wiki#PAGE_HEADER" value1="${wikiPageTitle}" />
+	</command>
+
 	<command name="publish">
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
 
