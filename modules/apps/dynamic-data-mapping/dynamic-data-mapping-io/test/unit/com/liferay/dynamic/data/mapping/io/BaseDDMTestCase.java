@@ -215,6 +215,7 @@ public class BaseDDMTestCase extends PowerMockito {
 
 					return languageIds;
 				}
+
 			}
 		);
 	}
