@@ -27,8 +27,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Philip Jones
  */
 @Component(
-		immediate = true, property = {"service.ranking:Integer=70"},
-		service = FormNavigatorEntry.class
+	immediate = true, property = {"service.ranking:Integer=70"},
+	service = FormNavigatorEntry.class
 )
 public class CompanySettingsAuthenticationFormNavigatorEntry
 	extends BaseCompanySettingsFormNavigatorEntry {
