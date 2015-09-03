@@ -26,7 +26,6 @@ import org.osgi.service.component.annotations.Reference;
  * @author Pei-Jung Lan
  * @author Philip Jones
  */
-
 @Component(
 	immediate = true, property = {"service.ranking:Integer=20"},
 	service = FormNavigatorEntry.class

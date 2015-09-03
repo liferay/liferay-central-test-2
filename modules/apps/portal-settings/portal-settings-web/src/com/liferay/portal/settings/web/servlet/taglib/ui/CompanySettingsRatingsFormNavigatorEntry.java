@@ -33,8 +33,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Philip Jones
  */
 @Component(
-		immediate = true, property = {"service.ranking:Integer=10"},
-		service = FormNavigatorEntry.class
+	immediate = true, property = {"service.ranking:Integer=10"},
+	service = FormNavigatorEntry.class
 )
 public class CompanySettingsRatingsFormNavigatorEntry
 	extends BaseCompanySettingsFormNavigatorEntry {
