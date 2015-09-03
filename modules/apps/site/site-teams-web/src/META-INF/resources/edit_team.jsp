@@ -29,10 +29,10 @@ long teamId = ParamUtil.getLong(request, "teamId");
 
 Team team = TeamLocalServiceUtil.fetchTeam(teamId);
 
-renderResponse.setTitle(((team == null) ? LanguageUtil.get(request, "new-team") : HtmlUtil.escape(team.getName())));
-
-portletDisplay.setURLBack(redirect);
 portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(redirect);
+
+renderResponse.setTitle(((team == null) ? LanguageUtil.get(request, "new-team") : HtmlUtil.escape(team.getName())));
 %>
 
 <portlet:actionURL name="editTeam" var="editTeamURL">
