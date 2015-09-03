@@ -16,7 +16,7 @@
 
 <%@ include file="/status/init.jsp" %>
 
-<c:if test="<%= group.isStagingGroup() %>">
+<c:if test="<%= themeDisplayScopeGroup.isStagingGroup() %>">
 	<c:choose>
 		<c:when test="<%= stagedPortlet %>">
 			<span class="label <%= cssClass %>">
