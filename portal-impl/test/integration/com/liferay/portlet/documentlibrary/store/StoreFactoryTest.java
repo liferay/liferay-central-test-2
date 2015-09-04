@@ -57,16 +57,6 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testGetStoreReturnsStoreWrapperDelegate() throws Exception {
-		StoreFactory storeFactory = StoreFactory.getInstance();
-
-		Store store = storeFactory.getStore("test");
-
-		Assert.assertTrue(
-			isAssignableFrom(store, StoreWrapperDelegate.class.getName()));
-	}
-
-	@Test
 	public void testGetStoreReturnsFirstTestStoreWrapperDelegate()
 		throws Exception {
 
@@ -77,6 +67,16 @@ public class StoreFactoryTest {
 		Assert.assertTrue(
 			isAssignableFrom(
 				store, FirstTestStoreWrapper.Delegate.class.getName()));
+	}
+
+	@Test
+	public void testGetStoreReturnsStoreWrapperDelegate() throws Exception {
+		StoreFactory storeFactory = StoreFactory.getInstance();
+
+		Store store = storeFactory.getStore("test");
+
+		Assert.assertTrue(
+			isAssignableFrom(store, StoreWrapperDelegate.class.getName()));
 	}
 
 	@Test
