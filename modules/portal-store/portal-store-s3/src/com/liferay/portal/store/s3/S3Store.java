@@ -629,9 +629,7 @@ public class S3Store extends BaseStore {
 	}
 
 	@Modified
-	protected void modified(Map<String, Object> properties)
-		throws PortalException {
-
+	protected void modified(Map<String, Object> properties) {
 		deactivate();
 
 		activate(properties);
