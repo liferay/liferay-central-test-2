@@ -25,9 +25,7 @@ import aQute.bnd.annotation.metatype.Meta;
 )
 public interface S3StoreConfiguration {
 
-	@Meta.AD(
-		required = false
-	)
+	@Meta.AD(required = false)
 	public String accessKey();
 
 	@Meta.AD(required = true)
@@ -36,10 +34,7 @@ public interface S3StoreConfiguration {
 	@Meta.AD(deflt = "50", required = false)
 	public int httpClientMaxConnections();
 
-	@Meta.AD(
-		deflt = "us-east-1",
-		required = false
-	)
+	@Meta.AD(deflt = "us-east-1", required = false)
 	public String s3Region();
 
 	@Meta.AD(
@@ -48,9 +43,7 @@ public interface S3StoreConfiguration {
 	)
 	public String s3StorageClass();
 
-	@Meta.AD(
-		required = false
-	)
+	@Meta.AD(required = false)
 	public String secretKey();
 
 	@Meta.AD(deflt = "7", required = false)
