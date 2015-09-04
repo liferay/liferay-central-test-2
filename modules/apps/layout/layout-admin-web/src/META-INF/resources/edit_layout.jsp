@@ -242,14 +242,12 @@ String displayStyle = ParamUtil.getString(request, "displayStyle");
 				</c:if>
 			</c:if>
 
-			<c:if test="<%= !selGroup.hasLocalOrRemoteStagingGroup() || selGroup.isStagingGroup() %>">
-				<liferay-ui:form-navigator
-					displayStyle="<%= displayStyle %>"
-					formModelBean="<%= selLayout %>"
-					id="<%= FormNavigatorConstants.FORM_NAVIGATOR_ID_LAYOUT %>"
-					showButtons="<%= (selLayout.getGroupId() == layoutsAdminDisplayContext.getGroupId()) && SitesUtil.isLayoutUpdateable(selLayout) && LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.UPDATE) %>"
-				/>
-			</c:if>
+			<liferay-ui:form-navigator
+				displayStyle="<%= displayStyle %>"
+				formModelBean="<%= selLayout %>"
+				id="<%= FormNavigatorConstants.FORM_NAVIGATOR_ID_LAYOUT %>"
+				showButtons="<%= (selLayout.getGroupId() == layoutsAdminDisplayContext.getGroupId()) && SitesUtil.isLayoutUpdateable(selLayout) && LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.UPDATE) %>"
+			/>
 		</aui:form>
 	</c:otherwise>
 </c:choose>
