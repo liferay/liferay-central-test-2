@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
-import com.liferay.portlet.documentlibrary.store.bundle.storefactory.StoreWrapperDelegate;
 import com.liferay.portlet.documentlibrary.store.bundle.storefactory.FirstTestStoreWrapper;
+import com.liferay.portlet.documentlibrary.store.bundle.storefactory.StoreWrapperDelegate;
 
 import java.lang.reflect.Method;
 
