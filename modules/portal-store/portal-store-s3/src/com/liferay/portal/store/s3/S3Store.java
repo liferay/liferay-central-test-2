@@ -619,10 +619,14 @@ public class S3Store extends BaseStore {
 	protected void moveObjects(String oldPrefix, String newPrefix)
 		throws DuplicateFileException {
 
-		ObjectListing targetPrefix = _amazonS3.listObjects(
+		ObjectListing objectListing = _amazonS3.listObjects(
 			_bucketName, newPrefix);
 
-		if (targetPrefix.getObjectSummaries().size() > 0) {
+
+		List<S3ObjectSummary> newS3ObjectSummaries =
+			objectListing.getObjectSummaries();
+
+		if (!newS3ObjectSummaries.isEmpty()) {
 			throw new DuplicateFileException(
 				"Duplicate S3 object found when moving files from " +
 					oldPrefix + " to " + newPrefix);
@@ -633,6 +637,7 @@ public class S3Store extends BaseStore {
 
 		for (S3ObjectSummary s3ObjectSummary : oldS3ObjectSummaries) {
 			String oldKey = s3ObjectSummary.getKey();
+
 			String newKey = _s3KeyTransformer.moveKey(
 				oldKey, oldPrefix, newPrefix);
 
