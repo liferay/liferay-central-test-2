@@ -216,10 +216,10 @@ public class S3Store extends BaseStore {
 
 		List<S3ObjectSummary> s3ObjectSummaries = listObjects(key);
 
-		String[] fileNames = new String[s3ObjectSummaries.size()];
-
 		Iterator<S3ObjectSummary> iterator =
 			s3ObjectSummaries.iterator();
+
+		String[] fileNames = new String[s3ObjectSummaries.size()];
 
 		for (int i = 0; i < fileNames.length; i++) {
 			S3ObjectSummary s3ObjectSummary = iterator.next();
@@ -525,15 +525,15 @@ public class S3Store extends BaseStore {
 			String versionLabel)
 		throws NoSuchFileException {
 
-		if (Validator.isNull(versionLabel)) {
-			versionLabel = getHeadVersionLabel(
-				companyId, repositoryId, fileName);
-		}
-
-		String key = _s3KeyTransformer.getFileVersionKey(
-			companyId, repositoryId, fileName, versionLabel);
-
 		try {
+			if (Validator.isNull(versionLabel)) {
+				versionLabel = getHeadVersionLabel(
+					companyId, repositoryId, fileName);
+			}
+	
+			String key = _s3KeyTransformer.getFileVersionKey(
+				companyId, repositoryId, fileName, versionLabel);
+
 			GetObjectRequest getObjectRequest = new GetObjectRequest(
 				_bucketName, key);
 
