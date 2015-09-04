@@ -590,9 +590,7 @@ public class S3Store extends BaseStore {
 			List<S3ObjectSummary> s3ObjectSummaries = new ArrayList<>(
 				objectListing.getMaxKeys());
 
-			boolean hasMore = true;
-
-			while (hasMore) {
+			while (true) {
 				List<S3ObjectSummary> batchS3ObjectSummaries =
 					objectListing.getObjectSummaries();
 
@@ -603,7 +601,7 @@ public class S3Store extends BaseStore {
 						objectListing);
 				}
 				else {
-					hasMore = false;
+					break;
 				}
 			}
 
