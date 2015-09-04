@@ -36,12 +36,12 @@ if (selGroup.isLayoutSetPrototype()) {
 
 if (privateLayout) {
 	if (group != null) {
-		pagesCount = group.getPrivateLayoutsPageCount();
+		pagesCount = selGroup.getPrivateLayoutsPageCount();
 	}
 }
 else {
 	if (group != null) {
-		pagesCount = group.getPublicLayoutsPageCount();
+		pagesCount = selGroup.getPublicLayoutsPageCount();
 	}
 }
 %>
@@ -70,7 +70,7 @@ else {
 
 <aui:form action="<%= editLayoutSetURL %>" cssClass="edit-layoutset-form" enctype="multipart/form-data" method="post" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= redirectURL.toString() %>" />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="groupId" type="hidden" value="<%= selGroup.getGroupId() %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= layoutsAdminDisplayContext.getStagingGroupId() %>" />
 	<aui:input name="selPlid" type="hidden" value="<%= layoutsAdminDisplayContext.getSelPlid() %>" />
