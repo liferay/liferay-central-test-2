@@ -97,6 +97,16 @@ public class DelegatorStore extends BaseStore {
 		_store.deleteFile(companyId, repositoryId, fileName, versionLabel);
 	}
 
+	public int getDelegatorStoresCount() {
+		if (!(_store instanceof DelegatorStore)) {
+			return 1;
+		}
+
+		DelegatorStore delegatorStore = (DelegatorStore)_store;
+
+		return delegatorStore.getDelegatorStoresCount() + 1;
+	}
+
 	@Override
 	public File getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException {
@@ -166,16 +176,6 @@ public class DelegatorStore extends BaseStore {
 		throws PortalException {
 
 		return _store.getFileSize(companyId, repositoryId, fileName);
-	}
-
-	public int getDelegatorStoresCount() {
-		if (!(_store instanceof DelegatorStore)) {
-			return 1;
-		}
-
-		DelegatorStore delegatorStore = (DelegatorStore)_store;
-
-		return delegatorStore.getDelegatorStoresCount() + 1;
 	}
 
 	@Override

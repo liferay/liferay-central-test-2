@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
-import com.liferay.portlet.documentlibrary.store.bundle.storefactory.FirstStoreWrapper;
 import com.liferay.portlet.documentlibrary.store.bundle.storefactory.DelegatorStore;
+import com.liferay.portlet.documentlibrary.store.bundle.storefactory.FirstStoreWrapper;
 
 import java.lang.reflect.Method;
 
@@ -43,6 +43,15 @@ public class StoreFactoryTest {
 			new SyntheticBundleRule("bundle.storefactory"));
 
 	@Test
+	public void testGetDelegatorStoresCount() throws Exception {
+		StoreFactory storeFactory = StoreFactory.getInstance();
+
+		Store store = storeFactory.getStore("test");
+
+		Assert.assertEquals(2, getDelegatorStoresCount(store));
+	}
+
+	@Test
 	public void testGetStore() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
@@ -57,19 +66,6 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testGetStoreReturnsFirstDelegatorStore()
-		throws Exception {
-
-		StoreFactory storeFactory = StoreFactory.getInstance();
-
-		Store store = storeFactory.getStore("test");
-
-		Assert.assertTrue(
-			isAssignableFrom(
-				store, FirstStoreWrapper.FirstDelegatorStore.class.getName()));
-	}
-
-	@Test
 	public void testGetStoreReturnsDelegatorStore() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
@@ -80,12 +76,14 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testGetDelegatorStoresCount() throws Exception {
+	public void testGetStoreReturnsFirstDelegatorStore() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
-		Assert.assertEquals(2, getDelegatorStoresCount(store));
+		Assert.assertTrue(
+			isAssignableFrom(
+				store, FirstStoreWrapper.FirstDelegatorStore.class.getName()));
 	}
 
 	protected int getDelegatorStoresCount(Store store) throws Exception {
