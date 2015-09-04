@@ -191,7 +191,7 @@ public class GitUtil {
 		}
 
 		System.out.println(
-			"Cannot retrieve files because .git directory is missing.");
+			"Unable to retrieve files because .git directory is missing.");
 
 		return -1;
 	}
