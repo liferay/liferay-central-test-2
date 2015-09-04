@@ -168,7 +168,7 @@ public class StoreWrapperDelegate extends BaseStore {
 		return _store.getFileSize(companyId, repositoryId, fileName);
 	}
 
-	public int getStoreWrapperDelegateChainLengthForTest() {
+	public int getStoreWrapperDelegatesCount() {
 		if (!(_store instanceof StoreWrapperDelegate)) {
 			return 1;
 		}
@@ -176,10 +176,7 @@ public class StoreWrapperDelegate extends BaseStore {
 		StoreWrapperDelegate storeWrapperDelegate =
 			(StoreWrapperDelegate)_store;
 
-		int innerStoreWrapperChainLength =
-			storeWrapperDelegate.getStoreWrapperDelegateChainLengthForTest();
-
-		return 1 + innerStoreWrapperChainLength;
+		return storeWrapperDelegate.getStoreWrapperDelegatesCount() + 1;
 	}
 
 	@Override
