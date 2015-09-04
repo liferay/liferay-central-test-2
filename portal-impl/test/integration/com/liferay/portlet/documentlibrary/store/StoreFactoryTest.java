@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
-import com.liferay.portlet.documentlibrary.store.bundle.storefactory.DelegatingTestStore;
+import com.liferay.portlet.documentlibrary.store.bundle.storefactory.StoreWrapperDelegate;
 import com.liferay.portlet.documentlibrary.store.bundle.storefactory.TopTestStoreWrapper;
 
 import java.lang.reflect.Method;
@@ -56,51 +56,56 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testInstanceIsWrapped() throws Exception {
+	public void testInstanceIsStoreWrapperDelegate() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
 		Assert.assertTrue(
-			isWrapper(store, DelegatingTestStore.class.getName()));
+			isStoreWrapperDelegate(
+				store, StoreWrapperDelegate.class.getName()));
 	}
 
 	@Test
-	public void testWrapperChain() throws Exception {
+	public void testStoreWrapperDelegateChainLength() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
-		Assert.assertEquals(2, getWrapperChainLength(store));
+		Assert.assertEquals(2, getStoreWrapperDelegateChainLength(store));
 	}
 
 	@Test
-	public void testWrapperPriority() throws Exception {
+	public void testStoreWrapperDelegatePriority() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
 		Assert.assertTrue(
-			isWrapper(store, TopTestStoreWrapper.Wrapper.class.getName()));
+			isStoreWrapperDelegate(
+				store, TopTestStoreWrapper.Delegate.class.getName()));
 	}
 
-	protected int getWrapperChainLength(Store store) throws Exception {
+	protected int getStoreWrapperDelegateChainLength(Store store)
+		throws Exception {
+
 		try {
 			Class<? extends Store> storeClass = store.getClass();
 
 			Method method = storeClass.getMethod(
-				"getWrapperChainLengthForTest");
+				"getStoreWrapperDelegateChainLengthForTest");
 
 			return (Integer)method.invoke(store);
 		}
 		catch (NoSuchMethodException nsme) {
 			throw new IllegalArgumentException(
-				store.getClass() + " is not an instance of DelegatingTestStore",
+				store.getClass() +
+					" is not an subclass of StoreWrapperDelegate",
 				nsme);
 		}
 	}
 
-	private boolean isWrapper(Store store, String className)
+	private boolean isStoreWrapperDelegate(Store store, String className)
 		throws ClassNotFoundException {
 
 		Class<? extends Store> storeClass = store.getClass();
