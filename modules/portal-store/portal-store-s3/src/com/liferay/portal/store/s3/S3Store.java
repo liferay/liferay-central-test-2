@@ -103,7 +103,7 @@ public class S3Store extends BaseStore {
 		}
 
 		try {
-			ObjectMetadata objectMetadata = constructMetadata(fileName);
+			ObjectMetadata objectMetadata = new ObjectMetadata();
 
 			String objectKey = _s3KeyTransformer.getFileVersionKey(
 				companyId, repositoryId, fileName, VERSION_DEFAULT);
@@ -338,7 +338,7 @@ public class S3Store extends BaseStore {
 		}
 
 		try {
-			ObjectMetadata objectMetadata = constructMetadata(fileName);
+			ObjectMetadata objectMetadata = new ObjectMetadata();
 
 			String objectKey = _s3KeyTransformer.getFileVersionKey(
 				companyId, repositoryId, fileName, versionLabel);
@@ -383,10 +383,6 @@ public class S3Store extends BaseStore {
 				_log.warn(iae);
 			}
 		}
-	}
-
-	protected ObjectMetadata constructMetadata(String filename) {
-		return new ObjectMetadata();
 	}
 
 	protected SystemException convertAWSException(
