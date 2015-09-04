@@ -578,12 +578,12 @@ public class S3Store extends BaseStore {
 	}
 
 	protected List<S3ObjectSummary> listObjects(String prefix) {
-		ListObjectsRequest listObjectsRequest = new ListObjectsRequest();
-
-		listObjectsRequest.withBucketName(_bucketName);
-		listObjectsRequest.withPrefix(prefix);
-
 		try {
+			ListObjectsRequest listObjectsRequest = new ListObjectsRequest();
+	
+			listObjectsRequest.withBucketName(_bucketName);
+			listObjectsRequest.withPrefix(prefix);
+
 			ObjectListing objectListing = _amazonS3.listObjects(
 				listObjectsRequest);
 
