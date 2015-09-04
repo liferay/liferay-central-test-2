@@ -60,7 +60,6 @@ private List<String> _getMvnCommand(String command) {
 	if (OSDetector.windows) {
 		return ["cmd.exe", "/c", "mvn ${command}"]
 	}
-	else {
-		return ["/bin/sh", "-c", "mvn ${command}"]
-	}
+
+	return ["/bin/sh", "-c", "mvn ${command}"]
 }
