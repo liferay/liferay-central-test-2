@@ -380,21 +380,21 @@ public class S3Store extends BaseStore {
 		AmazonClientException amazonClientException) {
 
 		if (amazonClientException instanceof AmazonServiceException) {
-			AmazonServiceException ase =
+			AmazonServiceException amazonServiceException =
 				(AmazonServiceException)amazonClientException;
 
 			StringBundler sb = new StringBundler(11);
 
 			sb.append("{errorCode=");
-			sb.append(ase.getErrorCode());
+			sb.append(amazonServiceException.getErrorCode());
 			sb.append(", errorType=");
-			sb.append(ase.getErrorType());
+			sb.append(amazonServiceException.getErrorType());
 			sb.append(", message=");
-			sb.append(ase.getMessage());
+			sb.append(amazonServiceException.getMessage());
 			sb.append(", requestId=");
-			sb.append(ase.getRequestId());
+			sb.append(amazonServiceException.getRequestId());
 			sb.append(", statusCode=");
-			sb.append(ase.getStatusCode());
+			sb.append(amazonServiceException.getStatusCode());
 			sb.append("}");
 
 			return new SystemException(sb.toString());
