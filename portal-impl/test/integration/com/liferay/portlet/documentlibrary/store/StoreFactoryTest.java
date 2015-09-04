@@ -15,11 +15,12 @@
 package com.liferay.portlet.documentlibrary.store;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portlet.documentlibrary.store.bundle.storefactory.StoreWrapperDelegate;
-import com.liferay.portlet.documentlibrary.store.bundle.storefactory.TopTestStoreWrapper;
+import com.liferay.portlet.documentlibrary.store.bundle.storefactory.FirstTestStoreWrapper;
 
 import java.lang.reflect.Method;
 
@@ -67,7 +68,7 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testGetStoreShouldReturnTopPriorityStoreWrapper()
+	public void testGetStoreShouldReturnFirstPriorityStoreWrapper()
 		throws Exception {
 
 		StoreFactory storeFactory = StoreFactory.getInstance();
@@ -76,7 +77,7 @@ public class StoreFactoryTest {
 
 		Assert.assertTrue(
 			isStoreWrapperDelegate(
-				store, TopTestStoreWrapper.Delegate.class.getName()));
+				store, FirstTestStoreWrapper.Delegate.class.getName()));
 	}
 
 	@Test
@@ -85,24 +86,22 @@ public class StoreFactoryTest {
 
 		Store store = storeFactory.getStore("test");
 
-		Assert.assertEquals(2, getStoreWrapperDelegateChainLength(store));
+		Assert.assertEquals(2, getStoreWrapperDelegatesCount(store));
 	}
 
-	protected int getStoreWrapperDelegateChainLength(Store store)
-		throws Exception {
-
+	protected int getStoreWrapperDelegatesCount(Store store) throws Exception {
 		try {
 			Class<? extends Store> storeClass = store.getClass();
 
 			Method method = storeClass.getMethod(
-				"getStoreWrapperDelegateChainLengthForTest");
+				"getStoreWrapperDelegatesCount");
 
 			return (Integer)method.invoke(store);
 		}
 		catch (NoSuchMethodException nsme) {
 			throw new IllegalArgumentException(
-				store.getClass() +
-					" is not an subclass of StoreWrapperDelegate",
+				ClassUtil.getClassName(store) +
+					" does not implement StoreWrapperDelegate",
 				nsme);
 		}
 	}

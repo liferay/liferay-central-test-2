@@ -20,26 +20,18 @@ import com.liferay.portlet.documentlibrary.store.StoreWrapper;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Adolfo Pérez
+ * @author Manuel de la Peña
  */
 @Component(
 	immediate = true,
-	property = {"service.ranking:Integer=1", "store.type=test"},
+	property = {"service.ranking:Integer=999", "store.type=test"},
 	service = StoreWrapper.class
 )
-public class TopTestStoreWrapper implements StoreWrapper {
+public class LastTestStoreWrapper implements StoreWrapper {
 
 	@Override
 	public Store wrap(Store store) {
-		return new Delegate(store);
-	}
-
-	public static class Delegate extends StoreWrapperDelegate {
-
-		public Delegate(Store store) {
-			super(store);
-		}
-
+		return new StoreWrapperDelegate(store);
 	}
 
 }
