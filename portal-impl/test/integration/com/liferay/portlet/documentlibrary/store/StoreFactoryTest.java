@@ -57,18 +57,17 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testGetStoreIsStoreWrapperDelegate() throws Exception {
+	public void testGetStoreReturnsStoreWrapperDelegate() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
 		Assert.assertTrue(
-			isStoreWrapperDelegate(
-				store, StoreWrapperDelegate.class.getName()));
+			isAssignableFrom(store, StoreWrapperDelegate.class.getName()));
 	}
 
 	@Test
-	public void testGetStoreShouldReturnFirstPriorityStoreWrapper()
+	public void testGetStoreReturnsFirstTestStoreWrapperDelegate()
 		throws Exception {
 
 		StoreFactory storeFactory = StoreFactory.getInstance();
@@ -76,12 +75,12 @@ public class StoreFactoryTest {
 		Store store = storeFactory.getStore("test");
 
 		Assert.assertTrue(
-			isStoreWrapperDelegate(
+			isAssignableFrom(
 				store, FirstTestStoreWrapper.Delegate.class.getName()));
 	}
 
 	@Test
-	public void testGetStoreWrapperDelegateChainLength() throws Exception {
+	public void testGetStoreWrapperDelegatesCount() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
@@ -106,7 +105,7 @@ public class StoreFactoryTest {
 		}
 	}
 
-	private boolean isStoreWrapperDelegate(Store store, String className)
+	private boolean isAssignableFrom(Store store, String className)
 		throws ClassNotFoundException {
 
 		Class<? extends Store> storeClass = store.getClass();
