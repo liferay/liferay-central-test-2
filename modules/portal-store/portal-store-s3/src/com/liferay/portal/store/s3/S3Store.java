@@ -214,7 +214,7 @@ public class S3Store extends BaseStore {
 				companyId, repositoryId, dirName);
 		}
 
-		List<S3ObjectSummary> s3ObjectSummaries = listObjects(key);
+		List<S3ObjectSummary> s3ObjectSummaries = getS3ObjectSummaries(key);
 
 		Iterator<S3ObjectSummary> iterator =
 			s3ObjectSummaries.iterator();
@@ -417,7 +417,7 @@ public class S3Store extends BaseStore {
 		try {
 			String[] keys = new String[_DELETE_MAX];
 
-			List<S3ObjectSummary> s3ObjectSummaries = listObjects(prefix);
+			List<S3ObjectSummary> s3ObjectSummaries = getS3ObjectSummaries(prefix);
 
 			Iterator<S3ObjectSummary> iterator =
 				s3ObjectSummaries.iterator();
@@ -495,7 +495,7 @@ public class S3Store extends BaseStore {
 		String key = _s3KeyTransformer.getFileKey(
 			companyId, repositoryId, fileName);
 
-		List<S3ObjectSummary> s3ObjectSummaries = listObjects(key);
+		List<S3ObjectSummary> s3ObjectSummaries = getS3ObjectSummaries(key);
 
 		Iterator<S3ObjectSummary> iterator = s3ObjectSummaries.iterator();
 
@@ -577,7 +577,7 @@ public class S3Store extends BaseStore {
 		return false;
 	}
 
-	protected List<S3ObjectSummary> listObjects(String prefix) {
+	protected List<S3ObjectSummary> getS3ObjectSummaries(String prefix) {
 		try {
 			ListObjectsRequest listObjectsRequest = new ListObjectsRequest();
 	
@@ -591,10 +591,7 @@ public class S3Store extends BaseStore {
 				objectListing.getMaxKeys());
 
 			while (true) {
-				List<S3ObjectSummary> batchS3ObjectSummaries =
-					objectListing.getObjectSummaries();
-
-				s3ObjectSummaries.addAll(batchS3ObjectSummaries);
+				s3ObjectSummaries.addAll(objectListing.getObjectSummaries());
 
 				if (objectListing.isTruncated()) {
 					objectListing = _amazonS3.listNextBatchOfObjects(
@@ -631,7 +628,7 @@ public class S3Store extends BaseStore {
 					oldPrefix + " to " + newPrefix);
 		}
 
-		List<S3ObjectSummary> oldS3ObjectSummaries = listObjects(
+		List<S3ObjectSummary> oldS3ObjectSummaries = getS3ObjectSummaries(
 			oldPrefix);
 
 		for (S3ObjectSummary s3ObjectSummary : oldS3ObjectSummaries) {
