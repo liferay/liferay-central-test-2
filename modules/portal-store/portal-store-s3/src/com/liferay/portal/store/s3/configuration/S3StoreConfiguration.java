@@ -26,11 +26,6 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface S3StoreConfiguration {
 
 	@Meta.AD(
-		description =
-			"Optional. Must be provided here," +
-				" in the AWS_ACCESS_KEY_ID system environment variable," +
-				" the aws.accessKeyId Java system property," +
-				" or the EC2 instance must be configured with an IAM Role.",
 		required = false
 	)
 	public String accessKey();
@@ -43,26 +38,17 @@ public interface S3StoreConfiguration {
 
 	@Meta.AD(
 		deflt = "us-east-1",
-		description =
-			"AWS region name. See http://docs.aws.amazon.com/" +
-				"general/latest/gr/rande.html#s3_region",
 		required = false
 	)
 	public String s3Region();
 
 	@Meta.AD(
-		deflt = "STANDARD", description = "AWS S3 storage class",
-		optionValues = {"REDUCED_REDUNDANCY", "STANDARD"},
+		deflt = "STANDARD", optionValues = {"REDUCED_REDUNDANCY", "STANDARD"},
 		required = false
 	)
 	public String s3StorageClass();
 
 	@Meta.AD(
-		description =
-			"Optional. Must be provided here," +
-				" in the AWS_SECRET_ACCESS_KEY system environment variable," +
-				" the aws.secretKey Java system property," +
-				" or the EC2 instance must be configured with an IAM Role.",
 		required = false
 	)
 	public String secretKey();
