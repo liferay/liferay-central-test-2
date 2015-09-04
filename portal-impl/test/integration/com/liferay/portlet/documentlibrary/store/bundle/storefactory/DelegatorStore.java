@@ -24,9 +24,9 @@ import java.io.InputStream;
 /**
  * @author Adolfo Pérez
  */
-public class StoreWrapperDelegate extends BaseStore {
+public class DelegatorStore extends BaseStore {
 
-	public StoreWrapperDelegate(Store store) {
+	public DelegatorStore(Store store) {
 		_store = store;
 	}
 
@@ -168,15 +168,14 @@ public class StoreWrapperDelegate extends BaseStore {
 		return _store.getFileSize(companyId, repositoryId, fileName);
 	}
 
-	public int getStoreWrapperDelegatesCount() {
-		if (!(_store instanceof StoreWrapperDelegate)) {
+	public int getDelegatorStoresCount() {
+		if (!(_store instanceof DelegatorStore)) {
 			return 1;
 		}
 
-		StoreWrapperDelegate storeWrapperDelegate =
-			(StoreWrapperDelegate)_store;
+		DelegatorStore delegatorStore = (DelegatorStore)_store;
 
-		return storeWrapperDelegate.getStoreWrapperDelegatesCount() + 1;
+		return delegatorStore.getDelegatorStoresCount() + 1;
 	}
 
 	@Override

@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
-import com.liferay.portlet.documentlibrary.store.bundle.storefactory.FirstTestStoreWrapper;
-import com.liferay.portlet.documentlibrary.store.bundle.storefactory.StoreWrapperDelegate;
+import com.liferay.portlet.documentlibrary.store.bundle.storefactory.FirstStoreWrapper;
+import com.liferay.portlet.documentlibrary.store.bundle.storefactory.DelegatorStore;
 
 import java.lang.reflect.Method;
 
@@ -57,7 +57,7 @@ public class StoreFactoryTest {
 	}
 
 	@Test
-	public void testGetStoreReturnsFirstTestStoreWrapperDelegate()
+	public void testGetStoreReturnsFirstDelegatorStore()
 		throws Exception {
 
 		StoreFactory storeFactory = StoreFactory.getInstance();
@@ -66,41 +66,40 @@ public class StoreFactoryTest {
 
 		Assert.assertTrue(
 			isAssignableFrom(
-				store, FirstTestStoreWrapper.Delegate.class.getName()));
+				store, FirstStoreWrapper.FirstDelegatorStore.class.getName()));
 	}
 
 	@Test
-	public void testGetStoreReturnsStoreWrapperDelegate() throws Exception {
+	public void testGetStoreReturnsDelegatorStore() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
 		Assert.assertTrue(
-			isAssignableFrom(store, StoreWrapperDelegate.class.getName()));
+			isAssignableFrom(store, DelegatorStore.class.getName()));
 	}
 
 	@Test
-	public void testGetStoreWrapperDelegatesCount() throws Exception {
+	public void testGetDelegatorStoresCount() throws Exception {
 		StoreFactory storeFactory = StoreFactory.getInstance();
 
 		Store store = storeFactory.getStore("test");
 
-		Assert.assertEquals(2, getStoreWrapperDelegatesCount(store));
+		Assert.assertEquals(2, getDelegatorStoresCount(store));
 	}
 
-	protected int getStoreWrapperDelegatesCount(Store store) throws Exception {
+	protected int getDelegatorStoresCount(Store store) throws Exception {
 		try {
 			Class<? extends Store> storeClass = store.getClass();
 
-			Method method = storeClass.getMethod(
-				"getStoreWrapperDelegatesCount");
+			Method method = storeClass.getMethod("getDelegatorStoresCount");
 
 			return (Integer)method.invoke(store);
 		}
 		catch (NoSuchMethodException nsme) {
 			throw new IllegalArgumentException(
 				ClassUtil.getClassName(store) +
-					" does not implement StoreWrapperDelegate",
+					" does not implement DelegatorStore",
 				nsme);
 		}
 	}
