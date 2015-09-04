@@ -40,6 +40,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.model.StorageClass;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -58,6 +59,7 @@ import com.liferay.portlet.documentlibrary.store.Store;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -206,8 +208,7 @@ public class S3Store extends BaseStore {
 		String key = null;
 
 		if (Validator.isNull(dirName)) {
-			key = _s3KeyTransformer.getRepositoryKey(
-				companyId, repositoryId);
+			key = _s3KeyTransformer.getRepositoryKey(companyId, repositoryId);
 		}
 		else {
 			key = _s3KeyTransformer.getDirectoryKey(
@@ -216,8 +217,7 @@ public class S3Store extends BaseStore {
 
 		List<S3ObjectSummary> s3ObjectSummaries = getS3ObjectSummaries(key);
 
-		Iterator<S3ObjectSummary> iterator =
-			s3ObjectSummaries.iterator();
+		Iterator<S3ObjectSummary> iterator = s3ObjectSummaries.iterator();
 
 		String[] fileNames = new String[s3ObjectSummaries.size()];
 
@@ -376,35 +376,6 @@ public class S3Store extends BaseStore {
 		}
 	}
 
-	protected SystemException transform(
-		AmazonClientException amazonClientException) {
-
-		if (amazonClientException instanceof AmazonServiceException) {
-			AmazonServiceException amazonServiceException =
-				(AmazonServiceException)amazonClientException;
-
-			StringBundler sb = new StringBundler(11);
-
-			sb.append("{errorCode=");
-			sb.append(amazonServiceException.getErrorCode());
-			sb.append(", errorType=");
-			sb.append(amazonServiceException.getErrorType());
-			sb.append(", message=");
-			sb.append(amazonServiceException.getMessage());
-			sb.append(", requestId=");
-			sb.append(amazonServiceException.getRequestId());
-			sb.append(", statusCode=");
-			sb.append(amazonServiceException.getStatusCode());
-			sb.append("}");
-
-			return new SystemException(sb.toString());
-		}
-		else {
-			return new SystemException(
-				amazonClientException.getMessage(), amazonClientException);
-		}
-	}
-
 	@Deactivate
 	protected void deactivate() {
 		_amazonS3 = null;
@@ -417,10 +388,10 @@ public class S3Store extends BaseStore {
 		try {
 			String[] keys = new String[_DELETE_MAX];
 
-			List<S3ObjectSummary> s3ObjectSummaries = getS3ObjectSummaries(prefix);
+			List<S3ObjectSummary> s3ObjectSummaries = getS3ObjectSummaries(
+				prefix);
 
-			Iterator<S3ObjectSummary> iterator =
-				s3ObjectSummaries.iterator();
+			Iterator<S3ObjectSummary> iterator = s3ObjectSummaries.iterator();
 
 			while (iterator.hasNext()) {
 				DeleteObjectsRequest deleteObjectsRequest =
@@ -530,7 +501,7 @@ public class S3Store extends BaseStore {
 				versionLabel = getHeadVersionLabel(
 					companyId, repositoryId, fileName);
 			}
-	
+
 			String key = _s3KeyTransformer.getFileVersionKey(
 				companyId, repositoryId, fileName, versionLabel);
 
@@ -557,30 +528,10 @@ public class S3Store extends BaseStore {
 		}
 	}
 
-	protected boolean isFileNotFound(
-		AmazonClientException amazonClientException) {
-
-		if (amazonClientException instanceof AmazonServiceException) {
-			AmazonServiceException amazonServiceException =
-				(AmazonServiceException)amazonClientException;
-				
-			String errorCode = amazonServiceException.getErrorCode();
-
-			if (errorCode.equals(_ERROR_CODE_FILE_NOT_FOUND) &&
-				(amazonServiceException.getStatusCode() ==
-					_STATUS_CODE_FILE_NOT_FOUND)) {
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	protected List<S3ObjectSummary> getS3ObjectSummaries(String prefix) {
 		try {
 			ListObjectsRequest listObjectsRequest = new ListObjectsRequest();
-	
+
 			listObjectsRequest.withBucketName(_bucketName);
 			listObjectsRequest.withPrefix(prefix);
 
@@ -609,6 +560,26 @@ public class S3Store extends BaseStore {
 		}
 	}
 
+	protected boolean isFileNotFound(
+		AmazonClientException amazonClientException) {
+
+		if (amazonClientException instanceof AmazonServiceException) {
+			AmazonServiceException amazonServiceException =
+				(AmazonServiceException)amazonClientException;
+
+			String errorCode = amazonServiceException.getErrorCode();
+
+			if (errorCode.equals(_ERROR_CODE_FILE_NOT_FOUND) &&
+				(amazonServiceException.getStatusCode() ==
+					_STATUS_CODE_FILE_NOT_FOUND)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	@Modified
 	protected void modified(Map<String, Object> properties) {
 		deactivate();
@@ -621,7 +592,6 @@ public class S3Store extends BaseStore {
 
 		ObjectListing objectListing = _amazonS3.listObjects(
 			_bucketName, newPrefix);
-
 
 		List<S3ObjectSummary> newS3ObjectSummaries =
 			objectListing.getObjectSummaries();
@@ -667,11 +637,40 @@ public class S3Store extends BaseStore {
 		_s3KeyTransformer = s3KeyTransformer;
 	}
 
+	protected SystemException transform(
+		AmazonClientException amazonClientException) {
+
+		if (amazonClientException instanceof AmazonServiceException) {
+			AmazonServiceException amazonServiceException =
+				(AmazonServiceException)amazonClientException;
+
+			StringBundler sb = new StringBundler(11);
+
+			sb.append("{errorCode=");
+			sb.append(amazonServiceException.getErrorCode());
+			sb.append(", errorType=");
+			sb.append(amazonServiceException.getErrorType());
+			sb.append(", message=");
+			sb.append(amazonServiceException.getMessage());
+			sb.append(", requestId=");
+			sb.append(amazonServiceException.getRequestId());
+			sb.append(", statusCode=");
+			sb.append(amazonServiceException.getStatusCode());
+			sb.append("}");
+
+			return new SystemException(sb.toString());
+		}
+		else {
+			return new SystemException(
+				amazonClientException.getMessage(), amazonClientException);
+		}
+	}
+
+	private static final int _DELETE_MAX = 1000;
+
 	private static final String _ERROR_CODE_FILE_NOT_FOUND = "NoSuchKey";
 
 	private static final int _STATUS_CODE_FILE_NOT_FOUND = 404;
-
-	private static final int _DELETE_MAX = 1000;
 
 	private static final Log _log = LogFactoryUtil.getLog(S3Store.class);
 
