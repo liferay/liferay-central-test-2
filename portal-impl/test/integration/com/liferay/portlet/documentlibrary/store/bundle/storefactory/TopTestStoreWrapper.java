@@ -31,12 +31,12 @@ public class TopTestStoreWrapper implements StoreWrapper {
 
 	@Override
 	public Store wrap(Store store) {
-		return new Wrapper(store);
+		return new Delegate(store);
 	}
 
-	public static class Wrapper extends DelegatingTestStore {
+	public static class Delegate extends StoreWrapperDelegate {
 
-		public Wrapper(Store store) {
+		public Delegate(Store store) {
 			super(store);
 		}
 

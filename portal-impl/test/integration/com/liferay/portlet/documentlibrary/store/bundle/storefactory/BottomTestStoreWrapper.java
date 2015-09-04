@@ -31,7 +31,7 @@ public class BottomTestStoreWrapper implements StoreWrapper {
 
 	@Override
 	public Store wrap(Store store) {
-		return new DelegatingTestStore(store);
+		return new StoreWrapperDelegate(store);
 	}
 
 }
