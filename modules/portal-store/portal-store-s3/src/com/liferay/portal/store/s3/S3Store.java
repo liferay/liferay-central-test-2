@@ -557,12 +557,6 @@ public class S3Store extends BaseStore {
 		}
 	}
 
-	/**
-	 *	Note: AWS 1.10.11 API docs state that attempting to fetch a file for a
-	 *	key that does not exist should result in a null being returned. However,
-	 *	actual behavior results in an AmazonClientException of status code 404
-	 *	and error code NoSuchKey.
-	 */
 	protected boolean isFileNotFound(AmazonClientException clientException) {
 		if (clientException instanceof AmazonServiceException) {
 			AmazonServiceException amazonServiceException =
