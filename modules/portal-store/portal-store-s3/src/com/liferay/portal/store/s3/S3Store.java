@@ -415,7 +415,7 @@ public class S3Store extends BaseStore {
 
 	protected void deleteObjects(String prefix) {
 		try {
-			String[] keys = new String[_MAX_AWS_MULTI_DELETE_SIZE];
+			String[] keys = new String[_DELETE_MAX];
 
 			List<S3ObjectSummary> s3ObjectSummaries = listObjects(prefix);
 
@@ -557,15 +557,18 @@ public class S3Store extends BaseStore {
 		}
 	}
 
-	protected boolean isFileNotFound(AmazonClientException clientException) {
-		if (clientException instanceof AmazonServiceException) {
-			AmazonServiceException amazonServiceException =
-				(AmazonServiceException)clientException;
+	protected boolean isFileNotFound(
+		AmazonClientException amazonClientException) {
 
-			if ((amazonServiceException.getStatusCode() ==
-					_AWS_FILE_NOT_FOUND_STATUS_CODE) &&
-				amazonServiceException.getErrorCode().equals(
-					_AWS_FILE_NOT_FOUND_ERROR_CODE)) {
+		if (amazonClientException instanceof AmazonServiceException) {
+			AmazonServiceException amazonServiceException =
+				(AmazonServiceException)amazonClientException;
+				
+			String errorCode = amazonServiceException.getErrorCode();
+
+			if (errorCode.equals(_ERROR_CODE_FILE_NOT_FOUND) &&
+				(amazonServiceException.getStatusCode() ==
+					_STATUS_CODE_FILE_NOT_FOUND)) {
 
 				return true;
 			}
@@ -664,11 +667,11 @@ public class S3Store extends BaseStore {
 		_s3KeyTransformer = s3KeyTransformer;
 	}
 
-	private static final String _AWS_FILE_NOT_FOUND_ERROR_CODE = "NoSuchKey";
+	private static final String _ERROR_CODE_FILE_NOT_FOUND = "NoSuchKey";
 
-	private static final int _AWS_FILE_NOT_FOUND_STATUS_CODE = 404;
+	private static final int _STATUS_CODE_FILE_NOT_FOUND = 404;
 
-	private static final int _MAX_AWS_MULTI_DELETE_SIZE = 1000;
+	private static final int _DELETE_MAX = 1000;
 
 	private static final Log _log = LogFactoryUtil.getLog(S3Store.class);
 
