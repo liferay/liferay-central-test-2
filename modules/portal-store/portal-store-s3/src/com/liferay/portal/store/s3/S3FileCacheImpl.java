@@ -132,14 +132,14 @@ public class S3FileCacheImpl implements S3FileCache {
 
 		sb.append(lastModifiedDate.getTime());
 
-		String tempFileName = sb.toString();
+		String cacheFileName = sb.toString();
 
-		File tempFile = new File(tempFileName);
+		File cacheFile = new File(cacheFileName);
 
-		if (tempFile.exists() &&
-			(tempFile.lastModified() >= lastModifiedDate.getTime())) {
+		if (cacheFile.exists() &&
+			(cacheFile.lastModified() >= lastModifiedDate.getTime())) {
 
-			return tempFile;
+			return cacheFile;
 		}
 
 		InputStream inputStream = s3Object.getObjectContent();
@@ -151,11 +151,11 @@ public class S3FileCacheImpl implements S3FileCache {
 		OutputStream outputStream = null;
 
 		try {
-			File parentFile = tempFile.getParentFile();
+			File parentFile = cacheFile.getParentFile();
 
 			FileUtil.mkdirs(parentFile);
 
-			outputStream = new FileOutputStream(tempFile);
+			outputStream = new FileOutputStream(cacheFile);
 
 			StreamUtil.transfer(inputStream, outputStream);
 		}
@@ -163,7 +163,7 @@ public class S3FileCacheImpl implements S3FileCache {
 			StreamUtil.cleanUp(inputStream, outputStream);
 		}
 
-		return tempFile;
+		return cacheFile;
 	}
 
 	@Activate
@@ -180,9 +180,9 @@ public class S3FileCacheImpl implements S3FileCache {
 
 	@Deactivate
 	protected void deactivate() {
-		File tempDir = new File(getCacheDirName());
+		File cacheDir = new File(getCacheDirName());
 
-		boolean deleted = tempDir.delete();
+		boolean deleted = cacheDir.delete();
 
 		if (!deleted) {
 			if (_log.isWarnEnabled()) {
