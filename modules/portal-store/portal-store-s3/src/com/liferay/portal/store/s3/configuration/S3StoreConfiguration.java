@@ -47,9 +47,9 @@ public interface S3StoreConfiguration {
 	public String secretKey();
 
 	@Meta.AD(deflt = "7", required = false)
-	public int tempDirCleanUpExpunge();
+	public int cacheDirCleanUpExpunge();
 
 	@Meta.AD(deflt = "100", required = false)
-	public int tempDirCleanUpFrequency();
+	public int cacheDirCleanUpFrequency();
 
 }
