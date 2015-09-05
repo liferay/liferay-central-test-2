@@ -86,8 +86,7 @@ public class S3FileCacheImpl implements S3FileCache {
 		}
 	}
 
-	@Override
-	public void cleanUpCacheFiles(File file, long lastModified) {
+	protected void cleanUpCacheFiles(File file, long lastModified) {
 		if (!file.isDirectory()) {
 			return;
 		}
