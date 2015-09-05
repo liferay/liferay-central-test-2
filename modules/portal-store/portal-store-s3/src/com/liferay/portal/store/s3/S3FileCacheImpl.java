@@ -59,18 +59,20 @@ public class S3FileCacheImpl implements S3FileCache {
 
 	@Override
 	public void cleanUpCacheFiles() {
-		_calledGetFileCount++;
+		_calledCleanUpCacheFilesCount++;
 
-		if (_calledGetFileCount < _cacheDirCleanUpFrequency.intValue()) {
+		if (_calledCleanUpCacheFilesCount <
+				_cacheDirCleanUpFrequency.intValue()) {
+
 			return;
 		}
 
 		synchronized (this) {
-			if (_calledGetFileCount == 0) {
+			if (_calledCleanUpCacheFilesCount == 0) {
 				return;
 			}
 
-			_calledGetFileCount = 0;
+			_calledCleanUpCacheFilesCount = 0;
 
 			String cacheDirName = getCacheDirName();
 
@@ -207,7 +209,7 @@ public class S3FileCacheImpl implements S3FileCache {
 	private static final Log _log = LogFactoryUtil.getLog(
 		S3FileCacheImpl.class);
 
-	private int _calledGetFileCount;
+	private int _calledCleanUpCacheFilesCount;
 	private S3KeyTransformer _s3KeyTransformer;
 	private volatile S3StoreConfiguration _s3StoreConfiguration;
 	private AtomicInteger _cacheDirCleanUpExpunge;
