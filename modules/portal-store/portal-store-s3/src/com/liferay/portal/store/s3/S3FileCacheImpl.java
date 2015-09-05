@@ -61,7 +61,7 @@ public class S3FileCacheImpl implements S3FileCache {
 	public void cleanUpCacheFiles() {
 		_calledGetFileCount++;
 
-		if (_calledGetFileCount < _tempDirCleanUpFrequency.intValue()) {
+		if (_calledGetFileCount < _cacheDirCleanUpFrequency.intValue()) {
 			return;
 		}
 
@@ -72,15 +72,15 @@ public class S3FileCacheImpl implements S3FileCache {
 
 			_calledGetFileCount = 0;
 
-			String tempDirName = getCacheDirName();
+			String cacheDirName = getCacheDirName();
 
-			File tempDir = new File(tempDirName);
+			File cacheDir = new File(cacheDirName);
 
 			long lastModified = System.currentTimeMillis();
 
-			lastModified -= (_tempDirCleanUpExpunge.intValue() * Time.DAY);
+			lastModified -= (_cacheDirCleanUpExpunge.intValue() * Time.DAY);
 
-			cleanUpCacheFiles(tempDir, lastModified);
+			cleanUpCacheFiles(cacheDir, lastModified);
 		}
 	}
 
@@ -172,10 +172,10 @@ public class S3FileCacheImpl implements S3FileCache {
 		_s3StoreConfiguration = Configurable.createConfigurable(
 			S3StoreConfiguration.class, properties);
 
-		_tempDirCleanUpExpunge = new AtomicInteger(
-			_s3StoreConfiguration.tempDirCleanUpExpunge());
-		_tempDirCleanUpFrequency = new AtomicInteger(
-			_s3StoreConfiguration.tempDirCleanUpFrequency());
+		_cacheDirCleanUpExpunge = new AtomicInteger(
+			_s3StoreConfiguration.cacheDirCleanUpExpunge());
+		_cacheDirCleanUpFrequency = new AtomicInteger(
+			_s3StoreConfiguration.cacheDirCleanUpFrequency());
 	}
 
 	@Deactivate
@@ -210,7 +210,7 @@ public class S3FileCacheImpl implements S3FileCache {
 	private int _calledGetFileCount;
 	private S3KeyTransformer _s3KeyTransformer;
 	private volatile S3StoreConfiguration _s3StoreConfiguration;
-	private AtomicInteger _tempDirCleanUpExpunge;
-	private AtomicInteger _tempDirCleanUpFrequency;
+	private AtomicInteger _cacheDirCleanUpExpunge;
+	private AtomicInteger _cacheDirCleanUpFrequency;
 
 }
