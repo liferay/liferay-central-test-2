@@ -45,10 +45,10 @@ public class SessionClicks {
 		String defaultValue) {
 
 		try {
-			PortalPreferences preferences =
+			PortalPreferences portalPreferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			return preferences.getValue(namespace, key, defaultValue);
+			return portalPreferences.getValue(namespace, key, defaultValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,13 +98,13 @@ public class SessionClicks {
 
 		while (true) {
 			try {
-				PortalPreferences preferences =
+				PortalPreferences portalPreferences =
 					PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-				int size = preferences.size();
+				int size = portalPreferences.size();
 
 				if (size <= _SESSION_CLICKS_MAX_ALLOWED_VALUES) {
-					preferences.setValue(namespace, key, value);
+					portalPreferences.setValue(namespace, key, value);
 				}
 				else {
 					if (_log.isWarnEnabled()) {
