@@ -2283,9 +2283,9 @@ New:
 
 #### Why was this change made?
 
-To stay consistent with other taglibs provided by Liferay, the AUI `.tld`
-file was modified to start with the prefix `liferay-`. Due to this change, the
-XML files used to automatically generate the AUI taglib were modified, changing
-the AUI URI declaration.
+To stay consistent with other taglibs provided by Liferay, the AUI `.tld` file
+was modified to start with the prefix `liferay-`. Due to this change, the XML
+files used to automatically generate the AUI taglib were modified, changing the
+AUI URI declaration.
 
 ---------------------------------------
