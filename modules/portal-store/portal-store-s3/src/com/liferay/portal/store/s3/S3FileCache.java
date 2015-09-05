@@ -24,11 +24,11 @@ import java.io.IOException;
  */
 public interface S3FileCache {
 
-	public void cleanUpTempFiles();
+	public void cleanUpCacheFiles();
 
-	public void cleanUpTempFiles(File file, long lastModified);
+	public void cleanUpCacheFiles(File file, long lastModified);
 
-	public File getTempFile(S3Object s3Object, String fileName)
+	public File getCacheFile(S3Object s3Object, String fileName)
 		throws IOException;
 
 }

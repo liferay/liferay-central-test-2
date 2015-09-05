@@ -58,7 +58,7 @@ import org.osgi.service.component.annotations.Reference;
 public class S3FileCacheImpl implements S3FileCache {
 
 	@Override
-	public void cleanUpTempFiles() {
+	public void cleanUpCacheFiles() {
 		_calledGetFileCount++;
 
 		if (_calledGetFileCount < _tempDirCleanUpFrequency.intValue()) {
@@ -72,7 +72,7 @@ public class S3FileCacheImpl implements S3FileCache {
 
 			_calledGetFileCount = 0;
 
-			String tempDirName = getTempDirName();
+			String tempDirName = getCacheDirName();
 
 			File tempDir = new File(tempDirName);
 
@@ -80,12 +80,12 @@ public class S3FileCacheImpl implements S3FileCache {
 
 			lastModified -= (_tempDirCleanUpExpunge.intValue() * Time.DAY);
 
-			cleanUpTempFiles(tempDir, lastModified);
+			cleanUpCacheFiles(tempDir, lastModified);
 		}
 	}
 
 	@Override
-	public void cleanUpTempFiles(File file, long lastModified) {
+	public void cleanUpCacheFiles(File file, long lastModified) {
 		if (!file.isDirectory()) {
 			return;
 		}
@@ -101,7 +101,7 @@ public class S3FileCacheImpl implements S3FileCache {
 		}
 		else {
 			for (String fileName : fileNames) {
-				cleanUpTempFiles(new File(file, fileName), lastModified);
+				cleanUpCacheFiles(new File(file, fileName), lastModified);
 			}
 
 			String[] subfileNames = file.list();
@@ -115,19 +115,20 @@ public class S3FileCacheImpl implements S3FileCache {
 	}
 
 	@Override
-	public File getTempFile(S3Object s3Object, String fileName)
+	public File getCacheFile(S3Object s3Object, String fileName)
 		throws IOException {
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(getTempDirName());
+		sb.append(getCacheDirName());
 		sb.append(
-				DateUtil.getCurrentDate(
-					_TEMP_DIR_PATTERN, LocaleUtil.getDefault()));
+			DateUtil.getCurrentDate(
+				_CACHE_DIR_PATTERN, LocaleUtil.getDefault()));
 		sb.append(_s3KeyTransformer.getNormalizedFileName(fileName));
 
-		ObjectMetadata metadata = s3Object.getObjectMetadata();
-		Date lastModifiedDate = metadata.getLastModified();
+		ObjectMetadata objectMetadata = s3Object.getObjectMetadata();
+
+		Date lastModifiedDate = objectMetadata.getLastModified();
 
 		sb.append(lastModifiedDate.getTime());
 
@@ -173,26 +174,25 @@ public class S3FileCacheImpl implements S3FileCache {
 
 		_tempDirCleanUpExpunge = new AtomicInteger(
 			_s3StoreConfiguration.tempDirCleanUpExpunge());
-
 		_tempDirCleanUpFrequency = new AtomicInteger(
 			_s3StoreConfiguration.tempDirCleanUpFrequency());
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		File tempDir = new File(getTempDirName());
+		File tempDir = new File(getCacheDirName());
 
 		boolean deleted = tempDir.delete();
 
 		if (!deleted) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to delete: " + getTempDirName());
+				_log.warn("Unable to delete " + getCacheDirName());
 			}
 		}
 	}
 
-	protected String getTempDirName() {
-		return SystemProperties.get(SystemProperties.TMP_DIR) + _TEMP_DIR_NAME;
+	protected String getCacheDirName() {
+		return SystemProperties.get(SystemProperties.TMP_DIR) + _CACHE_DIR_NAME;
 	}
 
 	@Reference(unbind = "-")
@@ -200,9 +200,9 @@ public class S3FileCacheImpl implements S3FileCache {
 		_s3KeyTransformer = s3KeyTransformer;
 	}
 
-	private static final String _TEMP_DIR_NAME = "/liferay/s3";
+	private static final String _CACHE_DIR_NAME = "/liferay/s3";
 
-	private static final String _TEMP_DIR_PATTERN = "/yyyy/MM/dd/HH/";
+	private static final String _CACHE_DIR_PATTERN = "/yyyy/MM/dd/HH/";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		S3FileCacheImpl.class);

@@ -173,9 +173,9 @@ public class S3Store extends BaseStore {
 			S3Object s3Object = getS3Object(
 				companyId, repositoryId, fileName, versionLabel);
 
-			File file = _s3FileCache.getTempFile(s3Object, fileName);
+			File file = _s3FileCache.getCacheFile(s3Object, fileName);
 
-			_s3FileCache.cleanUpTempFiles();
+			_s3FileCache.cleanUpCacheFiles();
 
 			return file;
 		}
