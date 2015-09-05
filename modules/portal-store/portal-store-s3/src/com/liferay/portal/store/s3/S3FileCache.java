@@ -26,8 +26,6 @@ public interface S3FileCache {
 
 	public void cleanUpCacheFiles();
 
-	public void cleanUpCacheFiles(File file, long lastModified);
-
 	public File getCacheFile(S3Object s3Object, String fileName)
 		throws IOException;
 
