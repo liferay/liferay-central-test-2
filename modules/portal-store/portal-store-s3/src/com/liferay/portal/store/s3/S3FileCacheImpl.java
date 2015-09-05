@@ -86,35 +86,6 @@ public class S3FileCacheImpl implements S3FileCache {
 		}
 	}
 
-	protected void cleanUpCacheFiles(File file, long lastModified) {
-		if (!file.isDirectory()) {
-			return;
-		}
-
-		String[] fileNames = FileUtil.listDirs(file);
-
-		if (fileNames.length == 0) {
-			if (file.lastModified() < lastModified) {
-				FileUtil.deltree(file);
-
-				return;
-			}
-		}
-		else {
-			for (String fileName : fileNames) {
-				cleanUpCacheFiles(new File(file, fileName), lastModified);
-			}
-
-			String[] subfileNames = file.list();
-
-			if (subfileNames.length == 0) {
-				FileUtil.deltree(file);
-
-				return;
-			}
-		}
-	}
-
 	@Override
 	public File getCacheFile(S3Object s3Object, String fileName)
 		throws IOException {
@@ -177,6 +148,35 @@ public class S3FileCacheImpl implements S3FileCache {
 			_s3StoreConfiguration.cacheDirCleanUpExpunge());
 		_cacheDirCleanUpFrequency = new AtomicInteger(
 			_s3StoreConfiguration.cacheDirCleanUpFrequency());
+	}
+
+	protected void cleanUpCacheFiles(File file, long lastModified) {
+		if (!file.isDirectory()) {
+			return;
+		}
+
+		String[] fileNames = FileUtil.listDirs(file);
+
+		if (fileNames.length == 0) {
+			if (file.lastModified() < lastModified) {
+				FileUtil.deltree(file);
+
+				return;
+			}
+		}
+		else {
+			for (String fileName : fileNames) {
+				cleanUpCacheFiles(new File(file, fileName), lastModified);
+			}
+
+			String[] subfileNames = file.list();
+
+			if (subfileNames.length == 0) {
+				FileUtil.deltree(file);
+
+				return;
+			}
+		}
 	}
 
 	@Deactivate
