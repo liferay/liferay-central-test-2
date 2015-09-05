@@ -285,7 +285,7 @@ public class S3Store extends BaseStore {
 			}
 			catch (IOException ioe) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Uanble to to close S3Object", ioe);
+					_log.warn("Uanble to to close S3 object", ioe);
 				}
 			}
 		}
