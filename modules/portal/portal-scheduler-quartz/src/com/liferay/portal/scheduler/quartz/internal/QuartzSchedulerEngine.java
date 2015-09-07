@@ -729,10 +729,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return triggerBuilder.build();
 		}
 
-		ObjectValuePair<Integer, TimeUnit> triggerContent =
+		ObjectValuePair<Integer, TimeUnit> objectValuePair =
 			(ObjectValuePair<Integer, TimeUnit>)trigger.getTriggerContent();
 
-		int interval = triggerContent.getKey();
+		int interval = objectValuePair.getKey();
 
 		if (interval < 0) {
 			if (_log.isWarnEnabled()) {
@@ -750,7 +750,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		CalendarIntervalScheduleBuilder calendarIntervalScheduleBuilder =
 			CalendarIntervalScheduleBuilder.calendarIntervalSchedule();
 
-		TimeUnit timeUnit = triggerContent.getValue();
+		TimeUnit timeUnit = objectValuePair.getValue();
 
 		calendarIntervalScheduleBuilder.withInterval(
 			interval, IntervalUnit.valueOf(timeUnit.name()));
