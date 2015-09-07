@@ -32,12 +32,6 @@ import java.sql.ResultSet;
  */
 public class VerifyAsset extends VerifyProcess {
 
-	@Override
-	protected void doVerify() throws Exception {
-		deleteOrphanedAssetEntries();
-		rebuildTree();
-	}
-
 	protected void deleteOrphanedAssetEntries() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -76,6 +70,12 @@ public class VerifyAsset extends VerifyProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	@Override
+	protected void doVerify() throws Exception {
+		deleteOrphanedAssetEntries();
+		rebuildTree();
 	}
 
 	protected void rebuildTree() throws Exception {
