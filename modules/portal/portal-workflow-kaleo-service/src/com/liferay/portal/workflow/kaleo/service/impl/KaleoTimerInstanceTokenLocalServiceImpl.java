@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.Trigger;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.kaleo.definition.DelayDuration;
@@ -288,7 +289,8 @@ public class KaleoTimerInstanceTokenLocalServiceImpl
 
 		DelayDuration delayDuration = new DelayDuration(
 			kaleoTimer.getDuration(),
-			DurationScale.parse(kaleoTimer.getScale()));
+			DurationScale.valueOf(
+				StringUtil.toUpperCase(kaleoTimer.getScale())));
 
 		DueDateCalculator dueDateCalculator = new DefaultDueDateCalculator();
 
@@ -300,14 +302,16 @@ public class KaleoTimerInstanceTokenLocalServiceImpl
 		if (kaleoTimer.isRecurring()) {
 			DelayDuration recurrenceDelayDuration = new DelayDuration(
 				kaleoTimer.getRecurrenceDuration(),
-				DurationScale.parse(kaleoTimer.getRecurrenceScale()));
+				DurationScale.valueOf(
+					StringUtil.toUpperCase(kaleoTimer.getRecurrenceScale())));
 
 			DurationScale durationScale =
 				recurrenceDelayDuration.getDurationScale();
 
 			interval = (int)recurrenceDelayDuration.getDuration();
 
-			timeUnit = TimeUnit.parse(durationScale.getValue());
+			timeUnit = TimeUnit.valueOf(
+				StringUtil.toLowerCase(durationScale.getValue()));
 		}
 
 		Trigger trigger = new IntervalTrigger(

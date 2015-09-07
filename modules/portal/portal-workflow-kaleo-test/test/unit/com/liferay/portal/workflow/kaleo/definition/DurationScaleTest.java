@@ -14,6 +14,8 @@
 
 package com.liferay.portal.workflow.kaleo.definition;
 
+import com.liferay.portal.kernel.util.StringUtil;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,13 +30,14 @@ public class DurationScaleTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testParseInvalidScale() throws Exception {
-		DurationScale.parse("random text");
+		DurationScale.valueOf("random text");
 	}
 
 	@Test
 	public void testParseValidScales() throws Exception {
 		for (String scale : SCALES) {
-			DurationScale durationScale = DurationScale.parse(scale);
+			DurationScale durationScale = DurationScale.valueOf(
+				StringUtil.toUpperCase(scale));
 
 			Assert.assertEquals(scale, durationScale.getValue());
 		}

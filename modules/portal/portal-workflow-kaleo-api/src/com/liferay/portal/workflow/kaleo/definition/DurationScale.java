@@ -23,16 +23,6 @@ public enum DurationScale {
 	DAY("day"), HOUR("hour"), MINUTE("minute"), MONTH("month"),
 	SECOND("second"), WEEK("week"), YEAR("year");
 
-	public static DurationScale parse(String value) {
-		for (DurationScale durationScale : DurationScale.values()) {
-			if (durationScale.getValue().equals(value)) {
-				return durationScale;
-			}
-		}
-
-		throw new IllegalArgumentException("Invalid value " + value);
-	}
-
 	public String getValue() {
 		return _value;
 	}
