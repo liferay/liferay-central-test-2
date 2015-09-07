@@ -19,8 +19,8 @@ package com.liferay.portal.kernel.scheduler;
  */
 public enum TimeUnit {
 
-	DAY("day"), HOUR("hour"), MINUTE("minute"), MONTH("month"),
-	SECOND("second"), WEEK("week"), YEAR("year");
+	DAY("day"), HOUR("hour"), MILLISECOND("millisecond"), MINUTE("minute"),
+	MONTH("month"), SECOND("second"), WEEK("week"), YEAR("year");
 
 	public String getValue() {
 		return _value;

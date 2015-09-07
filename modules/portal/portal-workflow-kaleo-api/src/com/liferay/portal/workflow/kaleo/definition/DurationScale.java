@@ -20,8 +20,8 @@ package com.liferay.portal.workflow.kaleo.definition;
  */
 public enum DurationScale {
 
-	DAY("day"), HOUR("hour"), MINUTE("minute"), MONTH("month"),
-	SECOND("second"), WEEK("week"), YEAR("year");
+	DAY("day"), HOUR("hour"), MILLISECOND("millisecond"), MINUTE("minute"),
+	MONTH("month"), SECOND("second"), WEEK("week"), YEAR("year");
 
 	public String getValue() {
 		return _value;
