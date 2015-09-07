@@ -35,7 +35,7 @@ public class VerifyAsset extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		rebuildTree();
-		removeOrphanedAssetEntries();
+		deleteOrphanedAssetEntries();
 	}
 
 	protected void rebuildTree() throws Exception {
@@ -63,7 +63,7 @@ public class VerifyAsset extends VerifyProcess {
 		}
 	}
 
-	protected void removeOrphanedAssetEntries() throws Exception {
+	protected void deleteOrphanedAssetEntries() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
