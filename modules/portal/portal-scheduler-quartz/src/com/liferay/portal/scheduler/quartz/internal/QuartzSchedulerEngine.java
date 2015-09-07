@@ -74,7 +74,7 @@ import org.quartz.CalendarIntervalScheduleBuilder;
 import org.quartz.CalendarIntervalTrigger;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
-import org.quartz.DateBuilder;
+import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -733,7 +733,6 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			(ObjectValuePair<Integer, TimeUnit>)trigger.getTriggerContent();
 
 		int interval = triggerContent.getKey();
-		TimeUnit timeUnit = triggerContent.getValue();
 
 		if (interval < 0) {
 			if (_log.isWarnEnabled()) {
@@ -751,42 +750,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		CalendarIntervalScheduleBuilder calendarIntervalScheduleBuilder =
 			CalendarIntervalScheduleBuilder.calendarIntervalSchedule();
 
-		switch (timeUnit) {
-			case SECOND:
-				calendarIntervalScheduleBuilder.withIntervalInSeconds(interval);
+		TimeUnit timeUnit = triggerContent.getValue();
 
-				break;
-
-			case MINUTE:
-				calendarIntervalScheduleBuilder.withIntervalInMinutes(interval);
-
-				break;
-
-			case HOUR:
-				calendarIntervalScheduleBuilder.withIntervalInHours(interval);
-
-				break;
-
-			case DAY:
-				calendarIntervalScheduleBuilder.withIntervalInDays(interval);
-
-				break;
-
-			case WEEK:
-				calendarIntervalScheduleBuilder.withIntervalInWeeks(interval);
-
-				break;
-
-			case MONTH:
-				calendarIntervalScheduleBuilder.withIntervalInMonths(interval);
-
-				break;
-
-			case YEAR:
-				calendarIntervalScheduleBuilder.withIntervalInYears(interval);
-
-				break;
-		}
+		calendarIntervalScheduleBuilder.withInterval(
+			interval, IntervalUnit.valueOf(timeUnit.name()));
 
 		triggerBuilder.withSchedule(calendarIntervalScheduleBuilder);
 
@@ -872,7 +839,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				schedulerResponse.setMessage(message);
 				schedulerResponse.setStorageType(storageType);
 
-				DateBuilder.IntervalUnit intervalUnit =
+				IntervalUnit intervalUnit =
 					calendarIntervalTrigger.getRepeatIntervalUnit();
 
 				schedulerResponse.setTrigger(
@@ -881,7 +848,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 						calendarIntervalTrigger.getStartTime(),
 						calendarIntervalTrigger.getEndTime(),
 						calendarIntervalTrigger.getRepeatInterval(),
-						TimeUnit.valueOf(intervalUnit.toString())));
+						TimeUnit.valueOf(intervalUnit.name())));
 			}
 		}
 
