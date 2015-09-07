@@ -966,6 +966,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				SynchronousDestinationTestRule.INSTANCE);
 
 		@Before
+		@Override
 		public void setUp() throws Exception {
 			super.setUp();
 
@@ -1011,6 +1012,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		}
 
 		@After
+		@Override
 		public void tearDown() throws Exception {
 			DLAppServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());
 
