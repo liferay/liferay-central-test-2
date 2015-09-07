@@ -853,7 +853,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 					fileName);
 		}
 
-		// LPS-56706 & LPS-57722
+		// LPS-56706 and LPS-57722
 
 		if (portalSource && isModulesFile(absolutePath) &&
 			fileName.endsWith("Test.java")) {
