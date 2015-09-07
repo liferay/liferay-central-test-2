@@ -49,11 +49,10 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 				_eventListenerClass, _eventListenerClass, _triggerValue);
 		}
 		else if (_triggerType.equals(TriggerType.SIMPLE)) {
-			int intervalTime = GetterUtil.getInteger(_triggerValue);
+			int interval = GetterUtil.getInteger(_triggerValue);
 
 			_trigger = new IntervalTrigger(
-				_eventListenerClass, _eventListenerClass, intervalTime,
-				_timeUnit);
+				_eventListenerClass, _eventListenerClass, interval, _timeUnit);
 		}
 		else {
 			throw new SchedulerException(
