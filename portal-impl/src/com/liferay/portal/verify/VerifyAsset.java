@@ -38,31 +38,6 @@ public class VerifyAsset extends VerifyProcess {
 		rebuildTree();
 	}
 
-	protected void rebuildTree() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select distinct groupId from AssetCategory where " +
-					"(leftCategoryId is null) or (rightCategoryId is null)");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long groupId = rs.getLong("groupId");
-
-				AssetCategoryLocalServiceUtil.rebuildTree(groupId, true);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	protected void deleteOrphanedAssetEntries() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -96,6 +71,31 @@ public class VerifyAsset extends VerifyProcess {
 				if (dlFileEntry == null) {
 					AssetEntryLocalServiceUtil.deleteAssetEntry(entryId);
 				}
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void rebuildTree() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select distinct groupId from AssetCategory where " +
+					"(leftCategoryId is null) or (rightCategoryId is null)");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+
+				AssetCategoryLocalServiceUtil.rebuildTree(groupId, true);
 			}
 		}
 		finally {
