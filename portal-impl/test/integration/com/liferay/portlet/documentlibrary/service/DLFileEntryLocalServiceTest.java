@@ -104,7 +104,7 @@ public class DLFileEntryLocalServiceTest {
 				PortalUtil.getDefaultCompanyId(), DLFileEntry.class.getName());
 
 		ExpandoColumnLocalServiceUtil.addColumn(
-			expandoTable.getTableId(), _EXPANDO_ATTRIBUTE_NAME,
+			expandoTable.getTableId(), "ExpandoAttributeName",
 			ExpandoColumnConstants.STRING, StringPool.BLANK);
 
 		try {
@@ -123,7 +123,7 @@ public class DLFileEntryLocalServiceTest {
 			Map<String, Serializable> expandoBridgeAttributes = new HashMap<>();
 
 			expandoBridgeAttributes.put(
-				_EXPANDO_ATTRIBUTE_NAME, _EXPANDO_ATTRIBUTE_VALUE);
+				"ExpandoAttributeName", "ExpandoAttributeValue");
 
 			serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
 
@@ -137,7 +137,7 @@ public class DLFileEntryLocalServiceTest {
 			serviceContext = ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
 
-			Folder destFolder = DLAppServiceUtil.addFolder(
+			Folder destinationFolder = DLAppServiceUtil.addFolder(
 				_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				serviceContext);
@@ -146,14 +146,14 @@ public class DLFileEntryLocalServiceTest {
 				DLFileEntryLocalServiceUtil.copyFileEntry(
 					TestPropsValues.getUserId(), _group.getGroupId(),
 					_group.getGroupId(), fileEntry.getFileEntryId(),
-					destFolder.getFolderId(), serviceContext);
+					destinationFolder.getFolderId(), serviceContext);
 
 			ExpandoBridge expandoBridge = copyFileEntry.getExpandoBridge();
 
 			String attributeValue = GetterUtil.getString(
-				expandoBridge.getAttribute(_EXPANDO_ATTRIBUTE_NAME));
+				expandoBridge.getAttribute("ExpandoAttributeName"));
 
-			Assert.assertEquals(_EXPANDO_ATTRIBUTE_VALUE, attributeValue);
+			Assert.assertEquals("ExpandoAttributeValue", attributeValue);
 			Assert.assertEquals(
 				fileEntryTypeId, copyFileEntry.getFileEntryTypeId());
 
@@ -385,7 +385,6 @@ public class DLFileEntryLocalServiceTest {
 		DDMForm ddmForm = new DDMForm();
 
 		ddmForm.addAvailableLocale(LocaleUtil.US);
-		ddmForm.setDefaultLocale(LocaleUtil.US);
 
 		DDMFormField ddmFormField = new DDMFormField("Text1", "text");
 
@@ -400,11 +399,17 @@ public class DLFileEntryLocalServiceTest {
 
 		ddmForm.addDDMFormField(ddmFormField);
 
+		ddmForm.setDefaultLocale(LocaleUtil.US);
+
 		return ddmForm;
 	}
 
 	protected DDMFormValues createDDMFormValues() throws Exception {
 		DDMForm ddmForm = createDDMForm();
+
+		DDMFormValues ddmFormValues = new DDMFormValues(ddmForm);
+
+		ddmFormValues.addAvailableLocale(LocaleUtil.US);
 
 		DDMFormFieldValue ddmFormFieldValue = new DDMFormFieldValue();
 
@@ -412,12 +417,9 @@ public class DLFileEntryLocalServiceTest {
 		ddmFormFieldValue.setName("Text1");
 		ddmFormFieldValue.setValue(new UnlocalizedValue("Text 1 Value"));
 
-		DDMFormValues ddmFormValues = new DDMFormValues(ddmForm);
-
-		ddmFormValues.addAvailableLocale(LocaleUtil.US);
-		ddmFormValues.setDefaultLocale(LocaleUtil.US);
-
 		ddmFormValues.addDDMFormFieldValue(ddmFormFieldValue);
+
+		ddmFormValues.setDefaultLocale(LocaleUtil.US);
 
 		return ddmFormValues;
 	}
@@ -447,10 +449,6 @@ public class DLFileEntryLocalServiceTest {
 
 		return dlFileEntryType.getFileEntryTypeId();
 	}
-
-	private static final String _EXPANDO_ATTRIBUTE_NAME = "Expando";
-
-	private static final String _EXPANDO_ATTRIBUTE_VALUE = "ExpandoValue";
 
 	@DeleteAfterTestRun
 	private Group _group;
