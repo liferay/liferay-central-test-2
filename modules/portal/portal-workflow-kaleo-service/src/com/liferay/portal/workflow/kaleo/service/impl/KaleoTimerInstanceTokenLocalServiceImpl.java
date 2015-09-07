@@ -305,10 +305,10 @@ public class KaleoTimerInstanceTokenLocalServiceImpl
 				DurationScale.valueOf(
 					StringUtil.toUpperCase(kaleoTimer.getRecurrenceScale())));
 
+			interval = (int)recurrenceDelayDuration.getDuration();
+
 			DurationScale durationScale =
 				recurrenceDelayDuration.getDurationScale();
-
-			interval = (int)recurrenceDelayDuration.getDuration();
 
 			timeUnit = TimeUnit.valueOf(
 				StringUtil.toLowerCase(durationScale.getValue()));
