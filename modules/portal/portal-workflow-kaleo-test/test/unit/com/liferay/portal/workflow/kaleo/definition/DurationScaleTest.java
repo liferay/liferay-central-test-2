@@ -25,7 +25,8 @@ import org.junit.Test;
 public class DurationScaleTest {
 
 	public static final String[] SCALES = {
-		"second", "minute", "hour", "day", "week", "month", "year"
+		"second", "millisecond", "minute", "hour", "day", "week", "month",
+		"year"
 	};
 
 	@Test(expected = IllegalArgumentException.class)
@@ -45,7 +46,7 @@ public class DurationScaleTest {
 
 	@Test
 	public void testScaleNum() throws Exception {
-		Assert.assertEquals(7, DurationScale.values().length);
+		Assert.assertEquals(8, DurationScale.values().length);
 	}
 
 }
