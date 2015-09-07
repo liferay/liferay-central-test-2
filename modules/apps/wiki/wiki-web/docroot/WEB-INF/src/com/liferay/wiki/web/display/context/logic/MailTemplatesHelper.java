@@ -39,9 +39,9 @@ public class MailTemplatesHelper {
 	}
 
 	public Map<String, String> getEmailFromDefinitionTerms() {
-		ResourceBundle resourceBundle = getResourceBundle();
-
 		Map<String, String> definitionTerms = new LinkedHashMap<>();
+
+		ResourceBundle resourceBundle = getResourceBundle();
 
 		definitionTerms.put(
 			"[$COMPANY_ID$]",
@@ -77,9 +77,9 @@ public class MailTemplatesHelper {
 	}
 
 	public Map<String, String> getEmailNotificationDefinitionTerms() {
-		ResourceBundle resourceBundle = getResourceBundle();
-
 		Map<String, String> definitionTerms = new LinkedHashMap<>();
+
+		ResourceBundle resourceBundle = getResourceBundle();
 
 		definitionTerms.put(
 			"[$COMPANY_ID$]",
@@ -171,7 +171,6 @@ public class MailTemplatesHelper {
 	protected ResourceBundle getResourceBundle() {
 		ResourceBundle bundleResourceBundle = ResourceBundle.getBundle(
 			"content.Language", _wikiRequestHelper.getLocale());
-
 		ResourceBundle portalResourceBundle =
 			LanguageResources.getResourceBundle(_wikiRequestHelper.getLocale());
 
