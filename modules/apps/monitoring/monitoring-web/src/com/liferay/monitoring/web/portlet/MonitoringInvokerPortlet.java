@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.monitoring.web.filter;
+package com.liferay.monitoring.web.portlet;
 
 import aQute.bnd.annotation.ProviderType;
 
