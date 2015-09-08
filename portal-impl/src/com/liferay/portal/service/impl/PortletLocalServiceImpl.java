@@ -1672,6 +1672,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getBoolean(
 				portletElement.elementText("requires-namespaced-parameters"),
 				defaultRequiresNamespacedParameters));
+
 		portletModel.setActionTimeout(
 			GetterUtil.getInteger(
 				portletElement.elementText("action-timeout"),
