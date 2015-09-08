@@ -45,13 +45,13 @@ public class ImageEditorConfigContributor extends BaseEditorConfigContributor {
 		ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
-		boolean allowBrowseDocuments = GetterUtil.getBoolean(
-			inputEditorTaglibAttributes.get(
-				"liferay-ui:input-editor:allowBrowseDocuments"));
-
 		List<ItemSelectorCriterion> itemSelectorCriteria = new ArrayList<>();
 
 		itemSelectorCriteria.add(new URLItemSelectorCriterion());
+
+		boolean allowBrowseDocuments = GetterUtil.getBoolean(
+			inputEditorTaglibAttributes.get(
+				"liferay-ui:input-editor:allowBrowseDocuments"));
 
 		if (allowBrowseDocuments) {
 			itemSelectorCriteria.add(new ImageItemSelectorCriterion());
