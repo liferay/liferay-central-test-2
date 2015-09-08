@@ -49,11 +49,10 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		_pool = new ConcurrentHashMap<>();
 
 		Registry registry = RegistryUtil.getRegistry();
+
 		Filter filter = registry.getFilter(
-			"(&(javax.portlet.name=" +
-			"com_liferay_monitoring_web_filter_" +
-			"MonitoringInvokerPortletFactoryImpl)" +
-			"(objectClass=" + InvokerPortletFactory.class.getName() + "))");
+			"(&(javax.portlet.name=com_liferay_monitoring_web_filter_MonitoringInvokerPortletFactoryImpl)" +
+				"(objectClass=" + InvokerPortletFactory.class.getName() + "))");
 
 		_serviceTracker = registry.trackServices(
 			filter, new InvokerPortletFactoryTrackerCustomizer());
