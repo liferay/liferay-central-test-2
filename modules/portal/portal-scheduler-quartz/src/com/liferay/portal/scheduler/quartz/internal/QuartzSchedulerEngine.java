@@ -784,23 +784,30 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return null;
 		}
 
+		SchedulerResponse schedulerResponse = new SchedulerResponse();
+
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
 		String description = jobDataMap.getString(SchedulerEngine.DESCRIPTION);
+
+		schedulerResponse.setDescription(description);
+
 		String destinationName = jobDataMap.getString(
 			SchedulerEngine.DESTINATION_NAME);
+
+		schedulerResponse.setDestinationName(destinationName);
+
 		Message message = getMessage(jobDataMap);
+
 		JobState jobState = getJobState(jobDataMap);
-		StorageType storageType = StorageType.valueOf(
-			jobDataMap.getString(SchedulerEngine.STORAGE_TYPE));
 
 		message.put(SchedulerEngine.JOB_STATE, jobState);
 
-		SchedulerResponse schedulerResponse = new SchedulerResponse();
-
-		schedulerResponse.setDescription(description);
-		schedulerResponse.setDestinationName(destinationName);
 		schedulerResponse.setMessage(message);
+
+		StorageType storageType = StorageType.valueOf(
+			jobDataMap.getString(SchedulerEngine.STORAGE_TYPE));
+
 		schedulerResponse.setStorageType(storageType);
 
 		String jobName = jobKey.getName();
