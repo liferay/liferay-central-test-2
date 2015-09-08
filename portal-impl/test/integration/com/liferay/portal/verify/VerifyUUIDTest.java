@@ -56,18 +56,18 @@ public class VerifyUUIDTest extends BaseVerifyProcessTestCase {
 				expectedType = ExpectedType.PREFIX
 			),
 			@ExpectedLog(
-				dbType = DB.TYPE_MYSQL,
-				expectedLog =
-					"Unable to process runnable: Unknown column 'Unknown' " +
-						"in 'field list'",
-				expectedType = ExpectedType.EXACT
-			),
-			@ExpectedLog(
 				dbType = DB.TYPE_HYPERSONIC,
 				expectedLog =
 					"Unable to process runnable: user lacks privilege or " +
 						"object not found:",
 				expectedType = ExpectedType.PREFIX
+			),
+			@ExpectedLog(
+				dbType = DB.TYPE_MYSQL,
+				expectedLog =
+					"Unable to process runnable: Unknown column 'Unknown' " +
+						"in 'field list'",
+				expectedType = ExpectedType.EXACT
 			),
 			@ExpectedLog(
 				dbType = DB.TYPE_ORACLE,
