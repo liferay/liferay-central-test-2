@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.settings.web.action;
+package com.liferay.portal.settings.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
@@ -28,16 +28,16 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/test_ldap_groups"
+		"mvc.command.name=/portal_settings/test_ldap_users"
 	}
 )
-public class TestLDAPGroupsMVCRenderCommand implements MVCRenderCommand {
+public class TestLDAPUsersMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/test_ldap_groups.jsp";
+		return "/test_ldap_users.jsp";
 	}
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.settings.web.action;
+package com.liferay.portal.settings.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
@@ -28,16 +28,17 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/view"
+		"mvc.command.name=/portal_settings/test_opensso_configuration"
 	}
 )
-public class EditCompanyMVCRenderCommand implements MVCRenderCommand {
+public class TestOpenSSOConfigurationMVCRenderCommand
+	implements MVCRenderCommand {
 
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/edit_company.jsp";
+		return "/test_opensso_configuration.jsp";
 	}
 
 }
