@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ClassLoaderUtil;
+import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
@@ -51,7 +52,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(javax.portlet.name=com_liferay_monitoring_web_filter_MonitoringInvokerPortletFactoryImpl)" +
+			"(&(javax.portlet.name=" + PortletKeys.MONITORING_INVOKER + ")" +
 				"(objectClass=" + InvokerPortletFactory.class.getName() + "))");
 
 		_serviceTracker = registry.trackServices(
