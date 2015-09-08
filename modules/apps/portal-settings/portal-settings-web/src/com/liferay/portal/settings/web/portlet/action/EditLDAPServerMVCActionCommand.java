@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.settings.web.action;
+package com.liferay.portal.settings.web.portlet.action;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.ldap.DuplicateLDAPServerNameException;

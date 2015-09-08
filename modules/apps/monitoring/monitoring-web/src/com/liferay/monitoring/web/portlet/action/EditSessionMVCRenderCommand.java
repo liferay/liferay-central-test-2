@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.monitoring.web.action;
+package com.liferay.monitoring.web.portlet.action;
 
 import com.liferay.monitoring.web.constants.MonitoringPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;

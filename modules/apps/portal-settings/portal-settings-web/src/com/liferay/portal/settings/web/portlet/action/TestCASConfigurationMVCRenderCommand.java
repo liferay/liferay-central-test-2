@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.monitoring.web.action;
+package com.liferay.portal.settings.web.portlet.action;
 
-import com.liferay.monitoring.web.constants.MonitoringPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -27,17 +27,17 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + MonitoringPortletKeys.MONITORING,
-		"mvc.command.name=/monitoring/view"
+		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
+		"mvc.command.name=/portal_settings/test_cas_configuration"
 	}
 )
-public class MonitoringViewMVCRenderCommand implements MVCRenderCommand {
+public class TestCASConfigurationMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/view.jsp";
+		return "/test_cas_configuration.jsp";
 	}
 
 }

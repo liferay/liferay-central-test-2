@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.settings.web.action;
+package com.liferay.monitoring.web.portlet.action;
 
+import com.liferay.monitoring.web.constants.MonitoringPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -27,17 +27,17 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
-		"mvc.command.name=/portal_settings/test_ldap_connection"
+		"javax.portlet.name=" + MonitoringPortletKeys.MONITORING,
+		"mvc.command.name=/monitoring/view"
 	}
 )
-public class TestLDAPConnectionMVCRenderCommand implements MVCRenderCommand {
+public class MonitoringViewMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		return "/test_ldap_connection.jsp";
+		return "/view.jsp";
 	}
 
 }
