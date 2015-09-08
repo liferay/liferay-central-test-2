@@ -106,12 +106,6 @@ public class BlogsContentEditorConfigContributor
 		imageItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			blogsContentEditorDesiredItemSelectorReturnTypes);
 
-		PortletURL uploadURL = requestBackedPortletURLFactory.createActionURL(
-			PortletKeys.BLOGS);
-
-		uploadURL.setParameter(
-			ActionRequest.ACTION_NAME, "/blogs/upload_image");
-
 		ItemSelectorCriterion urlItemSelectorCriterion =
 			new URLItemSelectorCriterion();
 
@@ -122,6 +116,12 @@ public class BlogsContentEditorConfigContributor
 
 		urlItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			urlDesiredItemSelectorReturnTypes);
+
+		PortletURL uploadURL = requestBackedPortletURLFactory.createActionURL(
+			PortletKeys.BLOGS);
+
+		uploadURL.setParameter(
+			ActionRequest.ACTION_NAME, "/blogs/upload_image");
 
 		ItemSelectorCriterion uploadItemSelectorCriterion =
 			new UploadItemSelectorCriterion(
