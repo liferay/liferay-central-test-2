@@ -84,7 +84,7 @@ public class EditorConfigContributorTest {
 				ModuleFrameworkUtilAdapter.startBundle(bundleId);
 			}
 			catch (Exception e) {
-				_log.error("Could not start bundle " + bundleId, e);
+				_log.error("Unable to start bundle " + bundleId, e);
 			}
 		}
 	}
