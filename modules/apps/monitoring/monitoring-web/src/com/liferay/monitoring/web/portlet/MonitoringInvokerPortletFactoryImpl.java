@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.monitoring.web.filter;
+package com.liferay.monitoring.web.portlet;
 
 import com.liferay.portal.kernel.monitoring.PortletMonitoringControl;
 import com.liferay.portlet.InvokerFilterContainer;
