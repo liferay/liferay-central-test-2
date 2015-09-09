@@ -19,8 +19,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
-
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
 AssetCategory category = null;
@@ -47,6 +45,8 @@ if (Validator.isNull(redirect)) {
 
 	redirect = backURL.toString();
 }
+
+String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 String keywords = ParamUtil.getString(request, "keywords");
 
@@ -90,7 +90,7 @@ AssetCategoryUtil.addPortletBreadcrumbEntry(vocabulary, category, request, rende
 
 			<liferay-frontend:management-bar-display-buttons
 				displayStyleURL="<%= displayStyleURL %>"
-				displayViews='<%= new String[]{"list"} %>'
+				displayViews='<%= new String[] {"list"} %>'
 				selectedDisplayStyle="<%= displayStyle %>"
 			/>
 		</liferay-frontend:management-bar-buttons>
