@@ -15,6 +15,7 @@
 package com.liferay.monitoring.web.portlet;
 
 import com.liferay.portal.kernel.monitoring.PortletMonitoringControl;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.InvokerFilterContainer;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.InvokerPortletFactory;
@@ -35,8 +36,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" +
-		"com_liferay_monitoring_web_filter_MonitoringInvokerPortletFactoryImpl"
+		"javax.portlet.name=" + PortletKeys.MONITORING_INVOKER
 	},
 	service = InvokerPortletFactory.class
 )
