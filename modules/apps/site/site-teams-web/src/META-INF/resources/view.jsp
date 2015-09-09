@@ -19,13 +19,13 @@
 <%
 Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
-SearchContainer teamSearchContainer = new TeamSearch(renderRequest, portletURL);
-
-TeamDisplayTerms searchTerms = (TeamDisplayTerms)teamSearchContainer.getSearchTerms();
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 pageContext.setAttribute("portletURL", portletURL);
+
+SearchContainer teamSearchContainer = new TeamSearch(renderRequest, portletURL);
+
+TeamDisplayTerms searchTerms = (TeamDisplayTerms)teamSearchContainer.getSearchTerms();
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" view="lexicon">
