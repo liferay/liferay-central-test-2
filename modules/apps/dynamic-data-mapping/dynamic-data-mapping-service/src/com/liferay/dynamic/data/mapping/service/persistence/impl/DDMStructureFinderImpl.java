@@ -49,11 +49,11 @@ public class DDMStructureFinderImpl
 	public static final String COUNT_BY_C_G_C_N_D_S_T_S =
 		DDMStructureFinder.class.getName() + ".countByC_G_C_N_D_S_T_S";
 
-	public static final String FIND_BY_C_G_C_N_D_S_T_R =
-		DDMStructureFinder.class.getName() + ".findByC_G_C_N_D_S_T_S";
-
 	public static final String FIND_BY_AND_STRUCTURE_VERSION_STATUS =
 		DDMStructureFinder.class.getName() + ".findByAndStructureVersionStatus";
+
+	public static final String FIND_BY_C_G_C_N_D_S_T_R =
+		DDMStructureFinder.class.getName() + ".findByC_G_C_N_D_S_T_S";
 
 	@Override
 	public int countByKeywords(
@@ -275,7 +275,6 @@ public class DDMStructureFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = StringUtil.replace(sql, "[$STATUS$]", getStatus(status));
-
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(CAST_TEXT(name))", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -352,7 +351,6 @@ public class DDMStructureFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = StringUtil.replace(sql, "[$STATUS$]", getStatus(status));
-
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(CAST_TEXT(DDMStructure.name))", StringPool.LIKE,
 				false, names);
