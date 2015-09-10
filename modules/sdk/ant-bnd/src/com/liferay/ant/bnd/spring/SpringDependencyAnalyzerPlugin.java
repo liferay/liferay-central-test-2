@@ -167,10 +167,10 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 
 			fqn = typeRef.getFQN();
 
-			Object filterStringObject = annotation.get("filterString");
+			Object filterString = annotation.get("filterString");
 
-			if (filterStringObject != null) {
-				fqn += " " + filterStringObject.toString();
+			if (filterString != null) {
+				fqn += " " + filterString;
 			}
 
 			_serviceReferences.add(fqn);
