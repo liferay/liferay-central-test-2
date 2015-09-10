@@ -88,10 +88,9 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 		sb.append(Object.class.getName());
 		sb.append(" (&(release.bundle.symbolic.name=");
 
-		Map.Entry<String, Attrs> bundleSymbolicName =
-			analyzer.getBundleSymbolicName();
+		Map.Entry<String, Attrs> entry = analyzer.getBundleSymbolicName();
 
-		sb.append(bundleSymbolicName.getKey());
+		sb.append(entry.getKey());
 
 		sb.append(")(release.schema.version=");
 		sb.append(property);
