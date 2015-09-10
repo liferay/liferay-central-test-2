@@ -87,14 +87,14 @@ List<String> titles = localizedItemSelectorRendering.getTitles();
 
 				ItemSelectorView<ItemSelectorCriterion> itemSelectorView = curItemSelectorViewRenderer.getItemSelectorView();
 
-				data.put("showSearch", itemSelectorView.isShowSearch());
-
 				if (selectedTab.equals(itemSelectorView.getTitle(locale))) {
 					data.put("portletURL", currentURL);
 				}
 				else {
 					data.put("portletURL", itemSelectorViewRenderer.getPortletURL());
 				}
+
+				data.put("showSearch", itemSelectorView.isShowSearch());
 			%>
 
 				<liferay-ui:section data="<%= data %>">
