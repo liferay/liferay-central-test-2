@@ -27,21 +27,8 @@ DDMStructure structure = (DDMStructure)request.getAttribute(DDMWebKeys.DYNAMIC_D
 
 DDMStructureVersion structureVersion = null;
 
-String script = null;
-
-JSONArray fieldsJSONArray = null;
-
 if (structure != null) {
 	structureVersion = structure.getLatestStructureVersion();
-
-	script = BeanParamUtil.getString(structureVersion, request, "definition");
-
-	fieldsJSONArray = DDMUtil.getDDMFormFieldsJSONArray(structureVersion, script);
-}
-else {
-	script = BeanParamUtil.getString(structure, request, "definition");
-
-	fieldsJSONArray = DDMUtil.getDDMFormFieldsJSONArray(structure, script);
 }
 
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
@@ -61,6 +48,24 @@ catch (NoSuchStructureException nsee) {
 long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 long classPK = BeanParamUtil.getLong(structure, request, "structureId");
 String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
+
+String script = null;
+
+if (structure != null) {
+	script = BeanParamUtil.getString(structureVersion, request, "definition");
+}
+else {
+	script = BeanParamUtil.getString(structure, request, "definition");
+}
+
+JSONArray fieldsJSONArray = null;
+
+if (structure != null) {
+	fieldsJSONArray = DDMUtil.getDDMFormFieldsJSONArray(structureVersion, script);
+}
+else {
+	fieldsJSONArray = DDMUtil.getDDMFormFieldsJSONArray(structure, script);
+}
 
 String fieldsJSONArrayString = StringPool.BLANK;
 
