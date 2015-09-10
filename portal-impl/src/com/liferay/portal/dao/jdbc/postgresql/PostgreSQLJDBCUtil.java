@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.dao.jdbc.util;
+package com.liferay.portal.dao.jdbc.postgresql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ import org.postgresql.largeobject.LargeObjectManager;
 /**
  * @author Istvan Andras Dezsi
  */
-public class PostgresUtil {
+public class PostgreSQLJDBCUtil {
 
 	public static byte[] getLargeObject(ResultSet resultSet, String name)
 		throws SQLException {
@@ -41,19 +41,19 @@ public class PostgresUtil {
 
 		try {
 			PGConnection pgConnection = connection.unwrap(PGConnection.class);
-	
+
 			LargeObjectManager largeObjectManager =
 				pgConnection.getLargeObjectAPI();
-	
+
 			long id = resultSet.getLong(name);
-	
+
 			LargeObject largeObject = largeObjectManager.open(
 				id, LargeObjectManager.READ);
-	
+
 			byte[] bytes = new byte[largeObject.size()];
-	
+
 			largeObject.read(bytes, 0, largeObject.size());
-	
+
 			largeObject.close();
 
 			return bytes;
@@ -83,20 +83,20 @@ public class PostgresUtil {
 
 		try {
 			PGConnection pgConnection = connection.unwrap(PGConnection.class);
-	
+
 			LargeObjectManager largeObjectManager =
 				pgConnection.getLargeObjectAPI();
-	
+
 			long id = largeObjectManager.createLO(
 				LargeObjectManager.READ | LargeObjectManager.WRITE);
-	
+
 			LargeObject largeObject = largeObjectManager.open(
 				id, LargeObjectManager.WRITE);
-	
+
 			largeObject.write(bytes);
-	
+
 			largeObject.close();
-	
+
 			preparedStatement.setLong(index, id);
 		}
 		finally {
