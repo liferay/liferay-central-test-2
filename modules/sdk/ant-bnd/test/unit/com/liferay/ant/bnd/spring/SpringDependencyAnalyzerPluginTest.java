@@ -39,12 +39,12 @@ import org.junit.Test;
 public class SpringDependencyAnalyzerPluginTest {
 
 	@Test
-	public void testDependenciesDefinedInFileAndAnnotations() throws Exception {
+	public void testDependenciesDefinedInFileAndAnnotation() throws Exception {
 		JarResource jarResource = new JarResource(
 			"dependencies/META-INF/spring/context.dependencies",
 			"META-INF/spring/context.dependencies");
 
-		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME), jarResource);
+		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME_BEAN), jarResource);
 
 		Resource resource = jar.getResource(
 			"OSGI-INF/context/context.dependencies");
@@ -57,8 +57,8 @@ public class SpringDependencyAnalyzerPluginTest {
 	}
 
 	@Test
-	public void testDependenciesDefinedOnlyInAnnotations() throws Exception {
-		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME));
+	public void testDependenciesDefinedOnlyInAnnotation() throws Exception {
+		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME_BEAN));
 
 		Resource resource = jar.getResource(
 			"OSGI-INF/context/context.dependencies");
@@ -69,7 +69,7 @@ public class SpringDependencyAnalyzerPluginTest {
 	}
 
 	@Test
-	public void testDependenciesDefinedOnlyInAnnotationsWithFilterString()
+	public void testDependenciesDefinedOnlyInAnnotationWithFilterString()
 		throws Exception {
 
 		Jar jar = analyze(Arrays.asList(_PACKAGE_NAME_FILTER));
@@ -155,7 +155,7 @@ public class SpringDependencyAnalyzerPluginTest {
 		return jar;
 	}
 
-	private static final String _PACKAGE_NAME =
+	private static final String _PACKAGE_NAME_BEAN =
 		"com.liferay.ant.bnd.spring.bean";
 
 	private static final String _PACKAGE_NAME_FILTER =
