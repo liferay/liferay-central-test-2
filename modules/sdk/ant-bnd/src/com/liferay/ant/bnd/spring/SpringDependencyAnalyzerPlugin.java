@@ -67,7 +67,7 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 				serviceReferenceCollector.getServiceReferences());
 		}
 
-		serviceReferences.add(_generateReleaseInfo(analyzer));
+		serviceReferences.add(getReleaseInfo(analyzer));
 
 		jar.putResource(
 			"OSGI-INF/context/context.dependencies",
@@ -76,7 +76,7 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 		return false;
 	}
 
-	private String _generateReleaseInfo(Analyzer analyzer) {
+	protected String getReleaseInfo(Analyzer analyzer) {
 		String property = analyzer.getProperty("Require-SchemaVersion");
 
 		if (property == null) {
