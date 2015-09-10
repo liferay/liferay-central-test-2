@@ -49,9 +49,6 @@ public class DDMStructureFinderImpl
 	public static final String COUNT_BY_C_G_C_N_D_S_T_S =
 		DDMStructureFinder.class.getName() + ".countByC_G_C_N_D_S_T_S";
 
-	public static final String FIND_BY_AND_STRUCTURE_VERSION_STATUS =
-		DDMStructureFinder.class.getName() + ".findByAndStructureVersionStatus";
-
 	public static final String FIND_BY_C_G_C_N_D_S_T_R =
 		DDMStructureFinder.class.getName() + ".findByC_G_C_N_D_S_T_S";
 
@@ -424,7 +421,15 @@ public class DDMStructureFinderImpl
 			return StringPool.BLANK;
 		}
 
-		return CustomSQLUtil.get(FIND_BY_AND_STRUCTURE_VERSION_STATUS);
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("AND EXISTS (SELECT 1 FROM DDMStructureVersion WHERE ");
+		sb.append("(DDMStructureVersion.structureId = ");
+		sb.append("DDMStructure.structureId) AND ");
+		sb.append("(DDMStructureVersion.version = DDMStructure.version) AND ");
+		sb.append("(DDMStructureVersion.status = ?))");
+
+		return sb.toString();
 	}
 
 }
