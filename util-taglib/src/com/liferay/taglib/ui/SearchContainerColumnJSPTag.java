@@ -54,7 +54,7 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 			jspSearchEntry.setAlign(getAlign());
 			jspSearchEntry.setColspan(getColspan());
 			jspSearchEntry.setCssClass(getCssClass());
-			jspSearchEntry.setHref((String)getHref());
+			jspSearchEntry.setHref(String.valueOf(getHref()));
 			jspSearchEntry.setPath(getPath());
 			jspSearchEntry.setRequest(
 				(HttpServletRequest)pageContext.getRequest());
