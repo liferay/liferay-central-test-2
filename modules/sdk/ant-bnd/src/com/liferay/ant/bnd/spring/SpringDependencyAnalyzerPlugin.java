@@ -86,7 +86,7 @@ public class SpringDependencyAnalyzerPlugin implements AnalyzerPlugin {
 		StringBuffer sb = new StringBuffer(6);
 
 		sb.append(Object.class.getName());
-		sb.append(" (&(release.version=");
+		sb.append(" (&(release.schema.version=");
 		sb.append(property);
 		sb.append(")(release.bundle.symbolic.name=");
 
