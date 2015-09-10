@@ -1600,12 +1600,6 @@
 		<tag-class>com.liferay.taglib.aui.IconTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>view</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
 			<description><![CDATA[A class to give to the container of the icon, to provide an implementation for the icon. Note that the preferred method of setting the icon's image is via the <code>image</code> attribute.]]></description>
 			<name>cssClass</name>
 			<required>false</required>
@@ -1656,6 +1650,12 @@
 		<attribute>
 			<description><![CDATA[A URL navigated to when the icon is clicked.]]></description>
 			<name>url</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>view</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
