@@ -14,7 +14,7 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.dao.jdbc.util.PostgresUtil;
+import com.liferay.portal.dao.jdbc.postgresql.PostgreSQLJDBCUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -38,6 +38,7 @@ import com.liferay.portal.util.PropsUtil;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -46,7 +47,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
+
 import java.text.DateFormat;
+
 import java.util.Date;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -363,13 +366,13 @@ public class Table {
 		}
 		else if ((t == Types.BLOB) || (t == Types.LONGVARBINARY)) {
 			DB db = DBFactoryUtil.getDB();
-			
+
 			String dbType = db.getType();
 
 			if (dbType.equals(DB.TYPE_POSTGRESQL) &&
-				PostgresUtil.isPGStatement(rs.getStatement())) {
+				PostgreSQLJDBCUtil.isPGStatement(rs.getStatement())) {
 
-				value = PostgresUtil.getLargeObject(rs, name);
+				value = PostgreSQLJDBCUtil.getLargeObject(rs, name);
 			}
 			else {
 				value = rs.getBytes(name);
@@ -581,8 +584,8 @@ public class Table {
 			ps.setLong(paramIndex, GetterUtil.getLong(value));
 		}
 		else if ((t == Types.BLOB) || (t == Types.LONGVARBINARY)) {
-			if (PostgresUtil.isPGStatement(ps)) {
-				PostgresUtil.setLargeObject(
+			if (PostgreSQLJDBCUtil.isPGStatement(ps)) {
+				PostgreSQLJDBCUtil.setLargeObject(
 					ps, paramIndex, Base64.decode(value));
 			}
 			else {
