@@ -250,45 +250,44 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		final ExportActionableDynamicQuery exportActionableDynamicQuery =
 			new ExportActionableDynamicQuery();
 
-		exportActionableDynamicQuery.setBaseLocalService(this);
-		exportActionableDynamicQuery.setClass(AssetLink.class);
-		exportActionableDynamicQuery.setClassLoader(getClassLoader());
-
-		exportActionableDynamicQuery.setPrimaryKeyPropertyName("linkId");
-
 		exportActionableDynamicQuery.setAddCriteriaMethod(
 			new ActionableDynamicQuery.AddCriteriaMethod() {
 
-			@Override
-			public void addCriteria(DynamicQuery dynamicQuery) {
-				Criterion createDateCriterion =
-					portletDataContext.getDateRangeCriteria("createDate");
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					Criterion createDateCriterion =
+						portletDataContext.getDateRangeCriteria("createDate");
 
-				if (createDateCriterion != null) {
-					dynamicQuery.add(createDateCriterion);
+					if (createDateCriterion != null) {
+						dynamicQuery.add(createDateCriterion);
+					}
 				}
-			}
-		});
 
+			});
+		exportActionableDynamicQuery.setBaseLocalService(this);
+		exportActionableDynamicQuery.setClass(AssetLink.class);
+		exportActionableDynamicQuery.setClassLoader(getClassLoader());
 		exportActionableDynamicQuery.setCompanyId(
 			portletDataContext.getCompanyId());
 		exportActionableDynamicQuery.setGroupId(
 			portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
-			@Override
-			public void performAction(Object object) throws PortalException {
-				StagedAssetLink stagedAssetLink = ModelAdapterUtil.adapt(
-					(AssetLink)object, AssetLink.class, StagedAssetLink.class);
+				@Override
+				public void performAction(Object object)
+					throws PortalException {
 
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, stagedAssetLink);
-			}
+					StagedAssetLink stagedAssetLink = ModelAdapterUtil.adapt(
+						(AssetLink)object, AssetLink.class,
+						StagedAssetLink.class);
 
-		});
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, stagedAssetLink);
+				}
 
+			});
+		exportActionableDynamicQuery.setPrimaryKeyPropertyName("linkId");
 		exportActionableDynamicQuery.setStagedModelType(
 			new StagedModelType(StagedModelType.class));
 
