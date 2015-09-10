@@ -30,38 +30,43 @@ import org.postgresql.largeobject.LargeObjectManager;
  */
 public class PostgresUtil {
 
-	public static byte[] getLargeObject(ResultSet rs, String name)
+	public static byte[] getLargeObject(ResultSet resultSet, String name)
 		throws SQLException {
 
-		Statement statement = rs.getStatement();
+		Statement statement = resultSet.getStatement();
 
 		Connection connection = statement.getConnection();
 
 		connection.setAutoCommit(false);
 
-		PGConnection pgConnection = connection.unwrap(PGConnection.class);
+		try {
+			PGConnection pgConnection = connection.unwrap(PGConnection.class);
+	
+			LargeObjectManager largeObjectManager =
+				pgConnection.getLargeObjectAPI();
+	
+			long id = resultSet.getLong(name);
+	
+			LargeObject largeObject = largeObjectManager.open(
+				id, LargeObjectManager.READ);
+	
+			byte[] bytes = new byte[largeObject.size()];
+	
+			largeObject.read(bytes, 0, largeObject.size());
+	
+			largeObject.close();
 
-		LargeObjectManager largeObjectManager =
-			pgConnection.getLargeObjectAPI();
-
-		long oid = rs.getLong(name);
-
-		LargeObject largeObject = largeObjectManager.open(
-			oid, LargeObjectManager.READ);
-
-		byte buffer[] = new byte[largeObject.size()];
-
-		largeObject.read(buffer, 0, largeObject.size());
-
-		largeObject.close();
-
-		connection.setAutoCommit(true);
-
-		return buffer;
+			return bytes;
+		}
+		finally {
+			connection.setAutoCommit(true);
+		}
 	}
 
-	public static boolean isPostgreSQL(ResultSet rs) throws SQLException {
-		Statement statement = rs.getStatement();
+	public static boolean isPostgreSQL(ResultSet resultSet)
+		throws SQLException {
+
+		Statement statement = resultSet.getStatement();
 
 		return isPostgreSQL(statement);
 	}
@@ -77,31 +82,34 @@ public class PostgresUtil {
 	}
 
 	public static void setLargeObject(
-			PreparedStatement ps, int paramIndex, byte[] value)
+			PreparedStatement preparedStatement, int index, byte[] bytes)
 		throws SQLException {
 
-		Connection connection = ps.getConnection();
+		Connection connection = preparedStatement.getConnection();
 
 		connection.setAutoCommit(false);
 
-		PGConnection pgConnection = connection.unwrap(PGConnection.class);
-
-		LargeObjectManager largeObjectManager =
-			pgConnection.getLargeObjectAPI();
-
-		long oid = largeObjectManager.createLO(
-			LargeObjectManager.READ | LargeObjectManager.WRITE);
-
-		LargeObject largeObject = largeObjectManager.open(
-			oid, LargeObjectManager.WRITE);
-
-		largeObject.write(value);
-
-		largeObject.close();
-
-		ps.setLong(paramIndex, oid);
-
-		connection.setAutoCommit(true);
+		try {
+			PGConnection pgConnection = connection.unwrap(PGConnection.class);
+	
+			LargeObjectManager largeObjectManager =
+				pgConnection.getLargeObjectAPI();
+	
+			long id = largeObjectManager.createLO(
+				LargeObjectManager.READ | LargeObjectManager.WRITE);
+	
+			LargeObject largeObject = largeObjectManager.open(
+				id, LargeObjectManager.WRITE);
+	
+			largeObject.write(bytes);
+	
+			largeObject.close();
+	
+			preparedStatement.setLong(index, id);
+		}
+		finally {
+			connection.setAutoCommit(true);
+		}
 	}
 
 }
