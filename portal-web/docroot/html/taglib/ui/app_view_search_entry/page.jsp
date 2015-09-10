@@ -38,17 +38,17 @@ String title = (String)request.getAttribute("liferay-ui:app-view-search-entry:ti
 String url = (String)request.getAttribute("liferay-ui:app-view-search-entry:url");
 List<String> versions = (List<String>)request.getAttribute("liferay-ui:app-view-search-entry:versions");
 
-Summary summary = new Summary(title, description);
-
-summary.setEscape(escape);
-summary.setHighlight(highlightEnabled);
-summary.setQueryTerms(queryTerms);
-
 String linkTitle = title;
 
 if (Validator.isNotNull(description)) {
 	linkTitle += " - " + description;
 }
+
+Summary summary = new Summary(title, description);
+
+summary.setEscape(escape);
+summary.setHighlight(highlightEnabled);
+summary.setQueryTerms(queryTerms);
 %>
 
 <div class="app-view-entry app-view-search-entry-taglib entry-display-style <%= showCheckbox ? "selectable" : StringPool.BLANK %> <%= cssClass %>" data-title="<%= HtmlUtil.escapeAttribute(StringUtil.shorten(title, 60)) %>">
