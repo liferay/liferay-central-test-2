@@ -63,15 +63,7 @@ public class PostgresUtil {
 		}
 	}
 
-	public static boolean isPostgreSQL(ResultSet resultSet)
-		throws SQLException {
-
-		Statement statement = resultSet.getStatement();
-
-		return isPostgreSQL(statement);
-	}
-
-	public static boolean isPostgreSQL(Statement statement)
+	public static boolean isPGStatement(Statement statement)
 		throws SQLException {
 
 		if (statement.isWrapperFor(PGStatement.class)) {
