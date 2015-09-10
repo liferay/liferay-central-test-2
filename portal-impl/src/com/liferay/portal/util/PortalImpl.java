@@ -7780,10 +7780,9 @@ public class PortalImpl implements Portal {
 					user = UserLocalServiceUtil.getUser(
 						themeDisplay.getUserId());
 				}
-				catch (PortalException e) {
+				catch (PortalException pe) {
 					_log.error(
-						"can not find user with id " +
-							themeDisplay.getUserId());
+						"Unable to get user " + themeDisplay.getUserId());
 				}
 
 				group = user.getGroup();
