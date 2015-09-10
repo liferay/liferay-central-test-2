@@ -506,11 +506,11 @@ public class LayoutSetBranchLocalServiceImpl
 			return mergeBranchName;
 		}
 
-		String originalLayoutBranchName = StringUtil.appendParentheticalSuffix(
+		String defaultLayoutBranchName = StringUtil.appendParentheticalSuffix(
 			LanguageUtil.get(locale, mergeBranchName),
 			LanguageUtil.get(locale, mergeLayoutSetBranchName));
 
-		String layoutBranchName = originalLayoutBranchName;
+		String layoutBranchName = defaultLayoutBranchName;
 
 		for (int i = 1;; i++) {
 			layoutBranch = layoutBranchPersistence.fetchByL_P_N(
@@ -520,7 +520,7 @@ public class LayoutSetBranchLocalServiceImpl
 				break;
 			}
 
-			layoutBranchName = originalLayoutBranchName + StringPool.SPACE + i;
+			layoutBranchName = defaultLayoutBranchName + StringPool.SPACE + i;
 		}
 
 		return layoutBranchName;
