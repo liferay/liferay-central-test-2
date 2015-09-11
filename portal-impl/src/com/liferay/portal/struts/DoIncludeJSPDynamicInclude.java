@@ -37,12 +37,12 @@ public class DoIncludeJSPDynamicInclude extends BaseDynamicInclude {
 	public void include(
 		HttpServletRequest request, HttpServletResponse response, String key) {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		ComponentContext componentContext =
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		if (componentContext == null) {
 			themeDisplay.setTilesSelectable(true);
