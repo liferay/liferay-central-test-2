@@ -135,8 +135,6 @@ List<String> titles = localizedItemSelectorRendering.getTitles();
 
 					var searchFm = A.one('#<portlet:namespace />searchFm');
 
-					debugger;
-
 					searchFm.setAttribute('action', tabSection.getData('portletURL'));
 				}
 			}
