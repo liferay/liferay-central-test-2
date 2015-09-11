@@ -30,6 +30,7 @@ if (assetEntryId > 0) {
 	<div class="taglib-asset-links">
 		<h2 class="asset-links-title">
 			<aui:icon image="link" />
+
 			<liferay-ui:message key="related-assets" />:
 		</h2>
 
