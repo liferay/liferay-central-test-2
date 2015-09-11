@@ -119,6 +119,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>LIST_VERTICAL_ELLIPSIS</td>
+	<td>//tr[contains(@class,'info')]//span[contains(@class,'icon-ellipsis-vertical')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>LOCALIZED_FLAG</td>
 	<td>//li[@role='menuitem' and @data-value='${key_localizationName}']/a</td>
 	<td></td>
