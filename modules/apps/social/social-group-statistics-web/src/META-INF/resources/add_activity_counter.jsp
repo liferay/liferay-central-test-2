@@ -17,18 +17,18 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+String portletResourceNamespace = PortalUtil.getPortletNamespace(portletResource);
+
+int index = ParamUtil.getInteger(request, "index");
+
 socialGroupStatisticsPortletInstanceConfiguration = ConfigurationFactoryUtil.getConfiguration(SocialGroupStatisticsPortletInstanceConfiguration.class, new ParameterMapSettingsLocator(request.getParameterMap(), new PortletInstanceSettingsLocator(themeDisplay.getLayout(), portletDisplay.getPortletResource())));
 
 String displayActivityCounterName = "";
 String chartType = "";
 int chartWidth = 35;
 String dataRange = "";
-
-int index = ParamUtil.getInteger(request, "index");
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-String portletResourceNamespace = PortalUtil.getPortletNamespace(portletResource);
 
 String[] displayActivityCounterNames = socialGroupStatisticsPortletInstanceConfiguration.displayActivityCounterName();
 
