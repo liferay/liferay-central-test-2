@@ -17,9 +17,8 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
-PortletURL portletURL = ddlFormAdminDisplayContext.getPortletURL();
-
 String displayStyle = ddlFormAdminDisplayContext.getDisplayStyle();
+PortletURL portletURL = ddlFormAdminDisplayContext.getPortletURL();
 
 RecordSetSearch recordSetSearch = new RecordSetSearch(renderRequest, portletURL);
 
