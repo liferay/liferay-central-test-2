@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%= ReleaseInfo.getReleaseInfo() %><br />
 
@@ -56,34 +56,34 @@ serverURL.setParameter("tabs3", tabs3);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("log-levels") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/log_levels.jsp" />
+				<liferay-util:include page="/server/log_levels.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("properties") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/properties.jsp" />
+				<liferay-util:include page="/server/properties.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("captcha") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/captcha.jsp" />
+				<liferay-util:include page="/server/captcha.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("data-migration") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/data_migration.jsp" />
+				<liferay-util:include page="/server/data_migration.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/file_uploads.jsp" />
+				<liferay-util:include page="/server/file_uploads.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("mail") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/mail.jsp" />
+				<liferay-util:include page="/server/mail.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("external-services") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/external_services.jsp" />
+				<liferay-util:include page="/server/external_services.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("script") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/script.jsp" />
+				<liferay-util:include page="/server/script.jsp" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
-				<liferay-util:include page="/html/portlet/admin/server/shutdown.jsp" />
+				<liferay-util:include page="/server/shutdown.jsp" />
 			</c:when>
 			<c:otherwise>
-				<liferay-util:include page="/html/portlet/admin/server/resources.jsp" />
+				<liferay-util:include page="/server/resources.jsp" />
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

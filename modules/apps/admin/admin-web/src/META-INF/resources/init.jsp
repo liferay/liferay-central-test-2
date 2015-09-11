@@ -118,4 +118,4 @@ numberFormat.setMaximumIntegerDigits(2);
 numberFormat.setMinimumIntegerDigits(2);
 %>
 
-<%@ include file="/html/portlet/admin/init-ext.jsp" %>
+<%@ include file="/init-ext.jsp" %>

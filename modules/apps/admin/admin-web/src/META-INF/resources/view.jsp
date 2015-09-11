@@ -102,6 +102,6 @@
 		</aui:script>
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
+		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" servletContext="<%= application %>"/>
 	</c:otherwise>
 </c:choose>
