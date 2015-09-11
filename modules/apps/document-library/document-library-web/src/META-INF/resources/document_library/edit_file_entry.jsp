@@ -19,8 +19,6 @@
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EDIT);
 
-String fileTitleErrorId = "fileTitleError";
-
 String redirect = ParamUtil.getString(request, "redirect");
 String uploadExceptionRedirect = ParamUtil.getString(request, "uploadExceptionRedirect", currentURL);
 
@@ -321,7 +319,7 @@ else {
 			</c:if>
 		</div>
 
-		<div class="alert alert-danger hide" id="<portlet:namespace /><%= fileTitleErrorId %>">
+		<div class="alert alert-danger hide" id="<portlet:namespace />fileTitleError">
 			<liferay-ui:message key="you-must-specify-a-file-or-a-title" />
 		</div>
 
@@ -533,7 +531,7 @@ else {
 
 		var className = 'alert alert-danger';
 
-		var fileTitleErrorNode = $('#<portlet:namespace /><%= HtmlUtil.escape(fileTitleErrorId) %>');
+		var fileTitleErrorNode = $('#<portlet:namespace /fileTitleError');
 
 		var form = $(document.<portlet:namespace />fm);
 
@@ -559,7 +557,7 @@ else {
 		else {
 			fileTitleErrorNode.addClass(className + ' show');
 
-			window.location.hash = '<portlet:namespace /><%= HtmlUtil.escape(fileTitleErrorId) %>';
+			window.location.hash = '<portlet:namespace />fileTitleError';
 		}
 	}
 
