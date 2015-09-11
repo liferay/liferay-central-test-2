@@ -47,8 +47,8 @@ if (displayActivityCounterNameIndexCount == 0) {
 					<div class="lfr-form-row">
 						<div class="row-fields">
 							<liferay-util:include page="/add_activity_counter.jsp" servletContext="<%= application %>">
-								<liferay-util:param name="index" value="<%= String.valueOf(displayActivityCounterNameIndex) %>" />
 								<liferay-util:param name="portletResource" value="<%= portletName %>" />
+								<liferay-util:param name="index" value="<%= String.valueOf(displayActivityCounterNameIndex) %>" />
 							</liferay-util:include>
 						</div>
 					</div>
