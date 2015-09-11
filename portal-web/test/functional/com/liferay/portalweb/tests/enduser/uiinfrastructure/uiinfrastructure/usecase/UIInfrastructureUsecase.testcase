@@ -87,7 +87,9 @@
 			<var name="portletName" value="Hello World" />
 		</execute>
 
-		<execute function="Click" locator1="Icon#CLOSE" summary="Close the Add Panel" />
+		<task summary="Close the Add Panel">
+			<execute function="Click" locator1="Icon#CLOSE" />
+		</task>
 
 		<task summary="Assert the 'Configuration' iframe of the Hello World portlet">
 			<execute macro="Portlet#gotoPortletOptions">
