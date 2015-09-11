@@ -14,11 +14,11 @@
 
 package com.liferay.admin.web.upgrade;
 
-import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
+import com.liferay.portal.util.PortletKeys;
 
 import java.util.Collections;
 
@@ -53,8 +53,7 @@ public class ServerAdministrationWebUpgrade {
 			protected String[][] getRenamePortletIdsArray() {
 				return new String[][] {
 					new String[] {
-						"137",
-						ServerAdministrationPortletKeys.SERVER_ADMINISTRATION
+						"137", PortletKeys.ADMIN_SERVER
 					}
 				};
 			}
