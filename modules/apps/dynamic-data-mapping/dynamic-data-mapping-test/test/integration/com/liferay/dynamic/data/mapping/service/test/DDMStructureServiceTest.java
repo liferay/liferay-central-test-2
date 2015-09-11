@@ -406,7 +406,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testSearchByKeywords() throws Exception {
+	public void testSearchByKeywords1() throws Exception {
 		DDMStructure structure = addStructure(_CLASS_NAME_ID, "Events");
 
 		addStructure(_CLASS_NAME_ID, "Event");
@@ -434,7 +434,6 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			QueryUtil.ALL_POS, new StructureIdComparator(true));
 
 		Assert.assertEquals(2, structures.size());
-
 		Assert.assertEquals("To Do", getStructureName(structures.get(0)));
 		Assert.assertEquals("To Doing", getStructureName(structures.get(1)));
 	}
