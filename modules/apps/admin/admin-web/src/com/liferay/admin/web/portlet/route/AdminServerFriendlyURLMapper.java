@@ -14,9 +14,9 @@
 
 package com.liferay.admin.web.portlet.route;
 
-import com.liferay.admin.web.constants.ServerAdministrationPortletKeys;
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.util.PortletKeys;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {
 		"com.liferay.portlet.friendly-url-routes=META-INF/friendly-url-routes/routes.xml",
-		"javax.portlet.name=" + ServerAdministrationPortletKeys.SERVER_ADMINISTRATION
+		"javax.portlet.name=" + PortletKeys.ADMIN
 	},
 	service = FriendlyURLMapper.class
 )
