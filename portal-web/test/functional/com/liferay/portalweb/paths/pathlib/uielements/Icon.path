@@ -55,7 +55,7 @@
 </tr>
 <tr>
 	<td>DELETE</td>
-	<td>//a[contains(@href,'deleteEntries')]</td>
+	<td>//a/span[contains(@class,'icon-trash')]</td>
 	<td></td>
 </tr>
 <tr>
