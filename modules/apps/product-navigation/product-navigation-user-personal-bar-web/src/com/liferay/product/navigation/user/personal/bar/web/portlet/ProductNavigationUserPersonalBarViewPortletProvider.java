@@ -36,9 +36,8 @@ public class ProductNavigationUserPersonalBarViewPortletProvider
 
 	@Override
 	public String getPortletId() {
-		return
-			ProductNavigationUserPersonalBarPortletKeys.
-				PRODUCT_NAVIGATION_USER_PERSONAL_BAR;
+		return ProductNavigationUserPersonalBarPortletKeys.
+			PRODUCT_NAVIGATION_USER_PERSONAL_BAR;
 	}
 
 }
