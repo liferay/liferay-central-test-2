@@ -85,8 +85,8 @@ public class SocialActivitiesTag extends IncludeTag {
 		_feedType = feedType;
 	}
 
-	public void setFeedURL(String url) {
-		_feedURL = url;
+	public void setFeedURL(String feedURL) {
+		_feedURL = feedURL;
 	}
 
 	public void setFeedURLMessage(String feedURLMessage) {
