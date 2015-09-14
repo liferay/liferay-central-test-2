@@ -137,6 +137,7 @@ if (layout != null) {
 						<i class="icon-circle-blank icon-monospaced"></i>
 
 						<span class="hide-accessible taglib-text"></span>
+
 						<span class="control-menu-icon-label">
 							<liferay-ui:message key="live" />
 						</span>
