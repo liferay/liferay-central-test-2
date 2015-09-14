@@ -135,7 +135,7 @@ public class CKEditorConfigContributor extends BaseCKEditorConfigContributor {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		jsonArray.put(
 			getStyleFormatJSONObject(

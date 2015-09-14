@@ -43,7 +43,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 String extension = (String)request.getAttribute("extension");
 String viewMode = ParamUtil.getString(request, "viewMode");
 
-ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass().getClassLoader());
+ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass());
 %>
 
 <c:if test="<%= !viewMode.equals(Constants.PRINT) %>">

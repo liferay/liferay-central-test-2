@@ -36,7 +36,7 @@ public abstract class BaseMentionsFormNavigatorEntry
 	@Override
 	public String getLabel(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		return resourceBundle.getString("mentions");
 	}

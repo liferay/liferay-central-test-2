@@ -74,7 +74,7 @@ public class AssetPublisherPortletDisplayTemplateHandler
 	@Override
 	public String getName(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		String portletTitle = PortalUtil.getPortletTitle(
 			AssetPublisherPortletKeys.ASSET_PUBLISHER, resourceBundle);

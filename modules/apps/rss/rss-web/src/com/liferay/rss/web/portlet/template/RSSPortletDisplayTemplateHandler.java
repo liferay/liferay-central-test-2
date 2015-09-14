@@ -52,7 +52,7 @@ public class RSSPortletDisplayTemplateHandler
 	@Override
 	public String getName(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", getClass().getClassLoader());
+			"content.Language", getClass());
 
 		String portletTitle = PortalUtil.getPortletTitle(
 			RSSPortletKeys.RSS, resourceBundle);

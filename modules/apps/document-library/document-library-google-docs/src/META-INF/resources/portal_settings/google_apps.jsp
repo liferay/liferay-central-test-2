@@ -24,7 +24,7 @@ PortletPreferences companyPortletPreferences = PrefsPropsUtil.getPreferences(com
 String googleAppsAPIKey = PrefsParamUtil.getString(companyPortletPreferences, request, "googleAppsAPIKey");
 String googleClientId = PrefsParamUtil.getString(companyPortletPreferences, request, "googleClientId");
 
-ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass().getClassLoader());
+ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass());
 %>
 
 <aui:fieldset>
