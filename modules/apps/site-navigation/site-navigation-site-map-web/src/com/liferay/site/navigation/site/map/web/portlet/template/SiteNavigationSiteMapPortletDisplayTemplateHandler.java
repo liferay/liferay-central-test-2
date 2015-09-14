@@ -54,7 +54,7 @@ public class SiteNavigationSiteMapPortletDisplayTemplateHandler
 	@Override
 	public String getName(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		String portletTitle = PortalUtil.getPortletTitle(
 			SiteNavigationSiteMapPortletKeys.SITE_NAVIGATION_SITE_MAP,

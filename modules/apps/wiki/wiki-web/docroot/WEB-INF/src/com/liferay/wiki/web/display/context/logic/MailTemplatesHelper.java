@@ -172,7 +172,7 @@ public class MailTemplatesHelper {
 	protected ResourceBundle getResourceBundle() {
 		ResourceBundle bundleResourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", _wikiRequestHelper.getLocale(),
-			getClass().getClassLoader());
+			getClass());
 		ResourceBundle portalResourceBundle =
 			LanguageResources.getResourceBundle(_wikiRequestHelper.getLocale());
 

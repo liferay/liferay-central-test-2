@@ -49,7 +49,7 @@ public abstract class BaseConvertionUserToolAssetAddonEntry
 	@Override
 	public String getLabel(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		return LanguageUtil.format(
 			resourceBundle, "download-as-x",

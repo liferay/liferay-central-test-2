@@ -31,5 +31,5 @@ page import="com.liferay.portal.kernel.util.ResourceBundleUtil" %>
 <liferay-theme:defineObjects/>
 
 <%
-ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content/Language", locale, getClass().getClassLoader());
+ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content/Language", locale, getClass());
 %>

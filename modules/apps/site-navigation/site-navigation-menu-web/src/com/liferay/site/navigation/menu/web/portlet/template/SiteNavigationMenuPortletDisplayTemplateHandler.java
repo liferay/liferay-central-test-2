@@ -76,7 +76,7 @@ public class SiteNavigationMenuPortletDisplayTemplateHandler
 	@Override
 	public String getName(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		String portletTitle = PortalUtil.getPortletTitle(
 			SiteNavigationMenuPortletKeys.SITE_NAVIGATION_MENU, resourceBundle);

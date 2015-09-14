@@ -106,7 +106,7 @@ public class AlloyEditorConfigContributor extends BaseEditorConfigContributor {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		jsonArray.put(
 			getStyleFormatJSONObject(

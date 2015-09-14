@@ -47,7 +47,7 @@ public class WikiPortletDisplayTemplateHandler
 	@Override
 	public String getName(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass().getClassLoader());
+			"content.Language", locale, getClass());
 
 		String portletTitle = PortalUtil.getPortletTitle(
 			WikiPortletKeys.WIKI, resourceBundle);

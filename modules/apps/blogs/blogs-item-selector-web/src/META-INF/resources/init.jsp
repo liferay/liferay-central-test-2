@@ -48,5 +48,5 @@ page import="java.util.ResourceBundle" %>
 <liferay-theme:defineObjects/>
 
 <%
-ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass().getClassLoader());
+ResourceBundle resourceBundle = ResourceBundleUtil.getBundle("content.Language", locale, getClass());
 %>
