@@ -70,7 +70,7 @@ public class ResourceUtil {
 
 	public static ResourceBundle getResourceBundle(Locale locale) {
 		return ResourceBundleUtil.getBundle(
-			"content.Language", locale, ResourceUtil.class.getClassLoader());
+			"content.Language", locale, ResourceUtil.class);
 	}
 
 }

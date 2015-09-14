@@ -196,8 +196,7 @@ public class DDMFormFactoryHelper {
 	protected ResourceBundle getResourceBundle(Locale locale) {
 		try {
 			return ResourceBundleUtil.getBundle(
-				getResourceBundleBaseName(_clazz), locale,
-				_clazz.getClassLoader());
+				getResourceBundleBaseName(_clazz), locale, _clazz);
 		}
 		catch (Exception e) {
 			return ResourceBundleUtil.getBundle(
