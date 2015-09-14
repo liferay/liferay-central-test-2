@@ -47,7 +47,7 @@ if (user.isSetupComplete() || themeDisplay.isImpersonated()) {
 						<%
 						String renderPortletBoundary = GetterUtil.getString(request.getAttribute(WebKeys.RENDER_PORTLET_BOUNDARY));
 
-						request.setAttribute(WebKeys.RENDER_PORTLET_BOUNDARY, String.valueOf(false));
+						request.setAttribute(WebKeys.RENDER_PORTLET_BOUNDARY, Boolean.FALSE.toString());
 						%>
 
 						<liferay-portlet:runtime portletName="<%= PortletKeys.STAGING_BAR %>" />
