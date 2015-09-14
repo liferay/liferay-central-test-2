@@ -140,6 +140,7 @@ TeamDisplayTerms searchTerms = (TeamDisplayTerms)teamSearchContainer.getSearchTe
 								<%= team.getName() %>
 							</a>
 						</h5>
+
 						<h6 class="text-default">
 							<span><%= team.getDescription() %></span>
 						</h6>
