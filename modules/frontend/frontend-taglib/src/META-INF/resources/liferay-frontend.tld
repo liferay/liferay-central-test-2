@@ -76,7 +76,7 @@
 		</attribute>
 		<attribute>
 			<description>Whether to disable the checkbox input. The default value is <![CDATA[<code>false</code>]]>.</description>
-			<name>checkboxDisabled</name>                                 
+			<name>checkboxDisabled</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
