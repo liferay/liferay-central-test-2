@@ -29,17 +29,17 @@ import java.util.ResourceBundle;
 public class ResourceBundleUtil {
 
 	public static ResourceBundle getBundle(
-		String baseName, ClassLoader loader) {
+		String baseName, ClassLoader classLoader) {
 
 		return ResourceBundle.getBundle(
-			baseName, Locale.getDefault(), loader, UTF8Control.INSTANCE);
+			baseName, Locale.getDefault(), classLoader, UTF8Control.INSTANCE);
 	}
 
 	public static ResourceBundle getBundle(
-		String baseName, Locale locale, ClassLoader loader) {
+		String baseName, Locale locale, ClassLoader classLoader) {
 
 		return ResourceBundle.getBundle(
-			baseName, locale, loader, UTF8Control.INSTANCE);
+			baseName, locale, classLoader, UTF8Control.INSTANCE);
 	}
 
 	public static String getString(
