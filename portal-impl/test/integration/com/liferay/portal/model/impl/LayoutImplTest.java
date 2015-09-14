@@ -184,7 +184,7 @@ public class LayoutImplTest {
 
 			_layout.setType(type);
 
-			Assert.assertFalse(_layout.isTypePanel());
+			Assert.assertFalse(_layout.isTypePortlet());
 		}
 	}
 
