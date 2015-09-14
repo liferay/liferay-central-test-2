@@ -55,122 +55,112 @@ public class LayoutImplTest {
 	}
 
 	@Test
-	public void testGetTypeShouldReturnBlank() {
+	public void testGetTypeReturnsBlank() {
 		_layout.setType(null);
 
 		Assert.assertEquals(StringPool.BLANK, _layout.getType());
 	}
 
 	@Test
-	public void testGetTypeShouldReturnType() {
-		String randomType = RandomTestUtil.randomString();
+	public void testGetTypeReturnsType() {
+		String type = RandomTestUtil.randomString();
 
-		_layout.setType(randomType);
+		_layout.setType(type);
 
-		Assert.assertEquals(randomType, _layout.getType());
+		Assert.assertEquals(type, _layout.getType());
 	}
 
 	@Test
-	public void
-		testIsSupportsEmbeddedPortletsShouldBeTrueIfLayoutTypeIsEmbedded() {
-
+	public void testIsSupportsEmbeddedPortletsWithTypeEmbedded() {
 		_layout.setType(LayoutConstants.TYPE_EMBEDDED);
 
 		Assert.assertTrue(_layout.isSupportsEmbeddedPortlets());
 	}
 
 	@Test
-	public void
-		testIsSupportsEmbeddedPortletsShouldBeTrueIfLayoutTypeIsPanel() {
-
+	public void testIsSupportsEmbeddedPortletsWithTypePanel() {
 		_layout.setType(LayoutConstants.TYPE_PANEL);
 
 		Assert.assertTrue(_layout.isSupportsEmbeddedPortlets());
 	}
 
 	@Test
-	public void
-		testIsSupportsEmbeddedPortletsShouldBeTrueIfLayoutTypeIsPortlet() {
-
+	public void testIsSupportsEmbeddedPortletsWithTypePortlet() {
 		_layout.setType(LayoutConstants.TYPE_PORTLET);
 
 		Assert.assertTrue(_layout.isSupportsEmbeddedPortlets());
 	}
 
 	@Test
-	public void testIsTypeEmbeddedShouldReturnFalse() {
-		for (String layoutType : _TYPES) {
-			if (layoutType.equals(LayoutConstants.TYPE_EMBEDDED)) {
+	public void testIsTypeEmbeddedReturnsFalse() {
+		for (String type : _TYPES) {
+			if (type.equals(LayoutConstants.TYPE_EMBEDDED)) {
 				continue;
 			}
 
-			_layout.setType(layoutType);
+			_layout.setType(type);
 
 			Assert.assertFalse(_layout.isTypeEmbedded());
 		}
 	}
 
 	@Test
-	public void testIsTypeEmbeddedShouldReturnTrue() {
+	public void testIsTypeEmbeddedReturnsTrue() {
 		_layout.setType(LayoutConstants.TYPE_EMBEDDED);
 
 		Assert.assertTrue(_layout.isTypeEmbedded());
 	}
 
 	@Test
-	public void testIsTypeEmbeddedShouldReturnTrueIfControllerTypeIsEmbedded()
-		throws Exception {
-
+	public void testIsTypeEmbeddedWithLayoutTypeController() throws Exception {
 		LayoutType layoutType = _layout.getLayoutType();
 
-		Field declaredField = ReflectionUtil.getDeclaredField(
+		Field field = ReflectionUtil.getDeclaredField(
 			LayoutTypeImpl.class, "_layoutTypeController");
 
-		declaredField.set(
+		field.set(
 			layoutType,
 			new LayoutTypeControllerImpl(LayoutConstants.TYPE_EMBEDDED));
 
-		for (String layoutTypeValue : _TYPES) {
-			if (layoutTypeValue.equals(LayoutConstants.TYPE_EMBEDDED)) {
+		for (String type : _TYPES) {
+			if (type.equals(LayoutConstants.TYPE_EMBEDDED)) {
 				continue;
 			}
 
-			_layout.setType(layoutTypeValue);
+			_layout.setType(type);
 
 			Assert.assertTrue(_layout.isTypeEmbedded());
 		}
 	}
 
 	@Test
-	public void testIsTypePanelShouldReturnFalse() {
-		for (String layoutType : _TYPES) {
-			if (layoutType.equals(LayoutConstants.TYPE_PANEL)) {
+	public void testIsTypePanelReturnsFalse() {
+		for (String type : _TYPES) {
+			if (type.equals(LayoutConstants.TYPE_PANEL)) {
 				continue;
 			}
 
-			_layout.setType(layoutType);
+			_layout.setType(type);
 
 			Assert.assertFalse(_layout.isTypePanel());
 		}
 	}
 
 	@Test
-	public void testIsTypePanelShouldReturnTrue() {
+	public void testIsTypePanelReturnsTrue() {
 		_layout.setType(LayoutConstants.TYPE_PANEL);
 
 		Assert.assertTrue(_layout.isTypePanel());
 	}
 
 	@Test
-	public void testIsTypePanelShouldReturnTrueIfControllerTypeIsPanel()
-		throws Exception {
-
+	public void testIsTypePanelWithLayoutTypeController() throws Exception {
 		LayoutType layoutType = _layout.getLayoutType();
 
-		Field declaredField = ReflectionUtil.getDeclaredField(
+		Field field = ReflectionUtil.getDeclaredField(
 			LayoutTypeImpl.class, "_layoutTypeController");
 
-		declaredField.set(
+		field.set(
 			layoutType,
 			new LayoutTypeControllerImpl(LayoutConstants.TYPE_PANEL));
 
@@ -186,43 +176,43 @@ public class LayoutImplTest {
 	}
 
 	@Test
-	public void testIsTypePortletShouldReturnFalse() throws Exception {
+	public void testIsTypePortletReturnsFalse() throws Exception {
 		LayoutType layoutType = _layout.getLayoutType();
 
-		Field declaredField = ReflectionUtil.getDeclaredField(
+		Field field = ReflectionUtil.getDeclaredField(
 			LayoutTypeImpl.class, "_layoutTypeController");
 
-		for (String layoutTypeValue : _TYPES) {
-			if (layoutTypeValue.equals(LayoutConstants.TYPE_PORTLET)) {
+		for (String type : _TYPES) {
+			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				continue;
 			}
 
-			declaredField.set(
-				layoutType, new LayoutTypeControllerImpl(layoutTypeValue));
+			field.set(
+				layoutType, new LayoutTypeControllerImpl(type));
 
-			_layout.setType(layoutTypeValue);
+			_layout.setType(type);
 
 			Assert.assertFalse(_layout.isTypePortlet());
 		}
 	}
 
 	@Test
-	public void testIsTypePortletShouldReturnTrue() {
+	public void testIsTypePortletReturnsTrue() {
 		_layout.setType(LayoutConstants.TYPE_PORTLET);
 
 		Assert.assertTrue(_layout.isTypePortlet());
 	}
 
 	@Test
-	public void testIsTypePortletShouldReturnTrueIfControllerTypeIsPortlet()
+	public void testIsTypePortletWithLayoutTypeController()
 		throws Exception {
 
 		LayoutType layoutType = _layout.getLayoutType();
 
-		Field declaredField = ReflectionUtil.getDeclaredField(
+		Field field = ReflectionUtil.getDeclaredField(
 			LayoutTypeImpl.class, "_layoutTypeController");
 
-		declaredField.set(
+		field.set(
 			layoutType,
 			new LayoutTypeControllerImpl(LayoutConstants.TYPE_PORTLET));
 
