@@ -73,59 +73,55 @@ public class PermissionCheckerTest {
 
 		PermissionChecker permissionChecker = _getPermissionChecker(_user);
 
-		String exceptionPortledId =
+		String withExceptionPortletId =
 			"com_liferay_blogs_web_portlet_BlogsAdminPortlet";
-		String exceptionActionId = "ADD_TO_PAGE";
+		String withExceptionActionId = "ADD_TO_PAGE";
+		String withoutExceptionPortletId = "11";
+		String withoutExceptionActionId = "VIEW";
 
-		String nonExceptionPortledId = "11";
-		String nonExceptionActionId = "VIEW";
-
-		/** verify hasPermission does not throw exception **/
 		try {
 			Assert.assertFalse(
 				permissionChecker.hasPermission(
-					_group.getGroupId(), exceptionPortledId,
-					_group.getGroupId(), exceptionActionId));
+					_group.getGroupId(), withExceptionPortletId,
+					_group.getGroupId(), withExceptionActionId));
 
 			Assert.assertFalse(
 				permissionChecker.hasPermission(
-					_group.getGroupId(), nonExceptionPortledId,
-					_group.getGroupId(), nonExceptionActionId));
+					_group.getGroupId(), withoutExceptionPortletId,
+					_group.getGroupId(), withoutExceptionActionId));
 		}
 		catch (Exception e) {
 			Assert.fail();
 		}
 
-		/** verify hasPermission correct exception message **/
+		boolean hasWithException = false;
+		boolean hasWithoutException = false;
 
-		String exceptionErrorMessage =
-			exceptionPortledId +
-			" does not have guest permission to resource:" + exceptionActionId;
-
-		String nonExceptionErrorMessage =
-			nonExceptionPortledId +
-			" does not have guest permission to resource:" +
-			nonExceptionActionId;
-
-		boolean foundException = false;
-		boolean foundNonException = false;
+		String withExceptionMessage =
+			"Guest does not have permission to " + withExceptionActionId +
+				" on " + withExceptionPortletId + " with primary key " +
+					_group.getGroupId();
+		String withoutExceptionMessage =
+			"Guest does not have permission to " + withoutExceptionActionId +
+				" on " + withoutExceptionPortletId + " with primary key " +
+					_group.getGroupId();
 
 		List<LoggingEvent> loggingEvents = _captureAppender.getLoggingEvents();
 
 		for (LoggingEvent loggingEvent : loggingEvents) {
 			String message = loggingEvent.getRenderedMessage();
 
-			if (exceptionErrorMessage.equals(message)) {
-				foundException = true;
+			if (message.equals(withExceptionMessage)) {
+				hasWithException = true;
 			}
 
-			if (nonExceptionErrorMessage.equals(message)) {
-				foundNonException = true;
+			if (message.equals(withoutExceptionMessage)) {
+				hasWithoutException = true;
 			}
 		}
 
-		Assert.assertTrue(foundException);
-		Assert.assertFalse(foundNonException);
+		Assert.assertTrue(hasWithException);
+		Assert.assertFalse(hasWithoutException);
 	}
 
 	@Test

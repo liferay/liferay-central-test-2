@@ -912,8 +912,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					name + " does not have guest permission to resource:" +
-					actionId);
+					"Guest does not have permission to " + actionId + " on " +
+						name + " with primary key " + primKey);
 			}
 
 			return false;
