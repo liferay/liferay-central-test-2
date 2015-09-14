@@ -28,11 +28,21 @@ import java.util.ResourceBundle;
  */
 public class ResourceBundleUtil {
 
+	public static ResourceBundle getBundle(String baseName, Class<?> clazz) {
+		return getBundle(baseName, clazz.getClassLoader());
+	}
+
 	public static ResourceBundle getBundle(
 		String baseName, ClassLoader classLoader) {
 
 		return ResourceBundle.getBundle(
 			baseName, Locale.getDefault(), classLoader, UTF8Control.INSTANCE);
+	}
+
+	public static ResourceBundle getBundle(
+		String baseName, Locale locale, Class<?> clazz) {
+
+		return getBundle(baseName, locale, clazz.getClassLoader());
 	}
 
 	public static ResourceBundle getBundle(
