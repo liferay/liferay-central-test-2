@@ -196,9 +196,7 @@ public class LayoutImplTest {
 	}
 
 	@Test
-	public void testIsTypePortletWithLayoutTypeController()
-		throws Exception {
-
+	public void testIsTypePortletWithLayoutTypeController() throws Exception {
 		LayoutType layoutType = _layout.getLayoutType();
 
 		Field field = ReflectionUtil.getDeclaredField(
