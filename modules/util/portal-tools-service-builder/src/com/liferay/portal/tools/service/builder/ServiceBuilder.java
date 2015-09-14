@@ -4178,8 +4178,8 @@ public class ServiceBuilder {
 		}
 
 		throw new IllegalArgumentException(
-			"No entity column exist with db name :" + columnDBName +
-				" on entity :" + entity.getName());
+			"No entity column exist with column database name " + columnDBName +
+				" for entity " + entity.getName());
 	}
 
 	private JavaClass _getJavaClass(String fileName) throws IOException {
