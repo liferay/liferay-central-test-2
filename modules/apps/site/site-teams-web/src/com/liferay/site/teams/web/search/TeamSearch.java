@@ -57,7 +57,7 @@ public class TeamSearch extends SearchContainer<Team> {
 		String orderByType = ParamUtil.getString(
 			portletRequest, "orderByType", "asc");
 
-		OrderByComparator<Team> orderByComparator = getTeamOrderByComparator(
+		OrderByComparator<Team> orderByComparator = getOrderByComparator(
 			orderByCol, orderByType);
 
 		setOrderByCol(orderByCol);
@@ -65,16 +65,16 @@ public class TeamSearch extends SearchContainer<Team> {
 		setOrderByComparator(orderByComparator);
 	}
 
-	protected static OrderByComparator<Team> getTeamOrderByComparator(
+	protected static OrderByComparator<Team> getOrderByComparator(
 		String orderByCol, String orderByType) {
+
+		OrderByComparator<Team> orderByComparator = null;
 
 		boolean orderByAsc = false;
 
 		if (orderByType.equals("asc")) {
 			orderByAsc = true;
 		}
-
-		OrderByComparator<Team> orderByComparator = null;
 
 		if (orderByCol.equals("name")) {
 			orderByComparator = new TeamNameComparator(orderByAsc);
