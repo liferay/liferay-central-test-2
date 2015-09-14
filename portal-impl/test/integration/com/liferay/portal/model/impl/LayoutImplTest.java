@@ -99,7 +99,7 @@ public class LayoutImplTest {
 
 	@Test
 	public void testIsTypeEmbeddedShouldReturnFalse() {
-		for (String layoutType : _LAYOUT_TYPES) {
+		for (String layoutType : _TYPES) {
 			if (layoutType.equals(LayoutConstants.TYPE_EMBEDDED)) {
 				continue;
 			}
@@ -130,7 +130,7 @@ public class LayoutImplTest {
 			layoutType,
 			new LayoutTypeControllerImpl(LayoutConstants.TYPE_EMBEDDED));
 
-		for (String layoutTypeValue : _LAYOUT_TYPES) {
+		for (String layoutTypeValue : _TYPES) {
 			if (layoutTypeValue.equals(LayoutConstants.TYPE_EMBEDDED)) {
 				continue;
 			}
@@ -143,7 +143,7 @@ public class LayoutImplTest {
 
 	@Test
 	public void testIsTypePanelShouldReturnFalse() {
-		for (String layoutType : _LAYOUT_TYPES) {
+		for (String layoutType : _TYPES) {
 			if (layoutType.equals(LayoutConstants.TYPE_PANEL)) {
 				continue;
 			}
@@ -174,7 +174,7 @@ public class LayoutImplTest {
 			layoutType,
 			new LayoutTypeControllerImpl(LayoutConstants.TYPE_PANEL));
 
-		for (String layoutTypeValue : _LAYOUT_TYPES) {
+		for (String layoutTypeValue : _TYPES) {
 			if (layoutTypeValue.equals(LayoutConstants.TYPE_PANEL)) {
 				continue;
 			}
@@ -192,7 +192,7 @@ public class LayoutImplTest {
 		Field declaredField = ReflectionUtil.getDeclaredField(
 			LayoutTypeImpl.class, "_layoutTypeController");
 
-		for (String layoutTypeValue : _LAYOUT_TYPES) {
+		for (String layoutTypeValue : _TYPES) {
 			if (layoutTypeValue.equals(LayoutConstants.TYPE_PORTLET)) {
 				continue;
 			}
@@ -226,18 +226,18 @@ public class LayoutImplTest {
 			layoutType,
 			new LayoutTypeControllerImpl(LayoutConstants.TYPE_PORTLET));
 
-		for (String layoutTypeValues : _LAYOUT_TYPES) {
-			if (layoutTypeValues.equals(LayoutConstants.TYPE_PORTLET)) {
+		for (String type : _TYPES) {
+			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				continue;
 			}
 
-			_layout.setType(layoutTypeValues);
+			_layout.setType(type);
 
 			Assert.assertTrue(_layout.isTypePortlet());
 		}
 	}
 
-	private static final String[] _LAYOUT_TYPES = {
+	private static final String[] _TYPES = {
 		LayoutConstants.TYPE_ARTICLE, LayoutConstants.TYPE_CONTROL_PANEL,
 		LayoutConstants.TYPE_EMBEDDED, LayoutConstants.TYPE_LINK_TO_LAYOUT,
 		LayoutConstants.TYPE_PANEL, LayoutConstants.TYPE_PORTLET,
