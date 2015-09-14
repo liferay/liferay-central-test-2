@@ -61,8 +61,8 @@ if (group != null) {
 	PortletURL headerBackURL = renderResponse.createRenderURL();
 
 	if (parentGroupId > 0) {
-		headerBackURL.setParameter("groupId", String.valueOf(parentGroupId));
 		headerBackURL.setParameter("mvcPath", "/view.jsp");
+		headerBackURL.setParameter("groupId", String.valueOf(parentGroupId));
 		headerBackURL.setParameter("sitesListView", SiteConstants.LIST_VIEW_TREE);
 	}
 	%>

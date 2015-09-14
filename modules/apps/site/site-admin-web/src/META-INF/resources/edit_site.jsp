@@ -18,6 +18,7 @@
 
 <%
 String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
+
 String redirect = ParamUtil.getString(request, "redirect", viewOrganizationsRedirect);
 
 if (Validator.isNull(redirect)) {
