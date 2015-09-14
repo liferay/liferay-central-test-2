@@ -6,7 +6,7 @@
 
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-parent</artifactId>
-    <version>1.5.0</version>
+    <version>1.7.0</version>
     <packaging>pom</packaging>
     <name>Elasticsearch Parent POM</name>
     <description>Elasticsearch Parent POM</description>
@@ -34,24 +34,27 @@
 
     <properties>
         <!-- elasticsearch stack -->
-        <elasticsearch.version>1.5.0</elasticsearch.version>
+        <elasticsearch.version>1.7.0</elasticsearch.version>
 
         <!-- libraries -->
         <lucene.version>4.10.4</lucene.version>
         <lucene.maven.version>4.10.4</lucene.maven.version>
-        <jackson.version>2.4.2</jackson.version>
+        <testframework.version>2.1.14</testframework.version>
+        <jackson.version>2.5.3</jackson.version>
         <slf4j.version>1.6.2</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
         <!-- Test properties -->
         <tests.jvms>auto</tests.jvms>
+        <java.permGenSpace>-XX:MaxPermSize=128m</java.permGenSpace>
         <tests.shuffle>true</tests.shuffle>
         <tests.output>onerror</tests.output>
         <tests.client.ratio></tests.client.ratio>
         <tests.bwc.path>${project.basedir}/backwards</tests.bwc.path>
         <tests.locale>random</tests.locale>
         <tests.timezone>random</tests.timezone>
-        <es.logger.level>INFO</es.logger.level>
+        <tests.slow>false</tests.slow>
+        <es.logger.level>ERROR</es.logger.level>
         <tests.heap.size>512m</tests.heap.size>
         <tests.heapdump.path>${basedir}/logs/</tests.heapdump.path>
         <tests.topn>5</tests.topn>
@@ -63,7 +66,6 @@
         <tests.bwc.path></tests.bwc.path>
         <tests.bwc.version></tests.bwc.version>
         <tests.jvm.argline></tests.jvm.argline>
-        <tests.processors></tests.processors>
         <tests.appendseed></tests.appendseed>
         <tests.iters></tests.iters>
         <tests.maxfailures></tests.maxfailures>
@@ -91,9 +93,14 @@
 
     <repositories>
         <repository>
-            <id>codehaus-snapshots</id>
-            <name>Codehaus Snapshots</name>
-            <url>http://repository.codehaus.org/</url>
+            <id>elasticsearch-releases</id>
+            <url>http://maven.elasticsearch.org/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>lucene-snapshots</id>
@@ -118,7 +125,7 @@
             <dependency>
                 <groupId>com.carrotsearch.randomizedtesting</groupId>
                 <artifactId>randomizedtesting-runner</artifactId>
-                <version>2.1.11</version>
+                <version>${testframework.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -145,6 +152,13 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>4.3.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.jimfs</groupId>
+                <artifactId>jimfs</artifactId>
+                <version>1.0</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -327,7 +341,7 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty</artifactId>
-                <version>3.10.0.Final</version>
+                <version>3.10.3.Final</version>
             </dependency>
 
             <dependency>
@@ -359,7 +373,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>2.4.0</version>
+                <version>2.4.4</version>
                 <classifier>indy</classifier>
                 <optional>true</optional>
             </dependency>
@@ -477,7 +491,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.2</version>
+                    <version>3.3</version>
                     <configuration>
                         <source>1.7</source>
                         <target>1.7</target>
@@ -498,7 +512,7 @@
                 <plugin>
                     <groupId>com.carrotsearch.randomizedtesting</groupId>
                     <artifactId>junit4-maven-plugin</artifactId>
-                    <version>2.1.11</version>
+                    <version>${testframework.version}</version>
                     <executions>
                         <execution>
                             <id>tests</id>
@@ -510,6 +524,7 @@
                                 <heartbeat>20</heartbeat>
                                 <jvmOutputAction>pipe,warn</jvmOutputAction>
                                 <leaveTemporary>true</leaveTemporary>
+                                <ifNoTests>fail</ifNoTests>
                                 <listeners>
                                     <report-ant-xml mavenExtensions="true"
                                                     dir="${project.build.directory}/surefire-reports"/>
@@ -522,8 +537,20 @@
                                             showStatusFailure="true"
                                             showStatusIgnored="true"
                                             showSuiteSummary="true"
-                                            timestamps="false"/>
-                                    <report-execution-times historyLength="20" file="${basedir}/${execution.hint.file}"/>
+                                            timestamps="false">
+                                      <filtertrace>
+                                         <!-- custom filters: we carefully only omit test infra noise here -->
+                                         <containsstring contains=".SlaveMain." />
+                                         <containsregex pattern="^(\s+at )(org\.junit\.)" />
+                                         <!-- also includes anonymous classes inside these two: -->
+                                         <containsregex pattern="^(\s+at )(com\.carrotsearch\.randomizedtesting.RandomizedRunner)" />
+                                         <containsregex pattern="^(\s+at )(com\.carrotsearch\.randomizedtesting.ThreadLeakControl)" />
+                                         <containsregex pattern="^(\s+at )(com\.carrotsearch\.randomizedtesting.rules\.)" />
+                                         <containsregex pattern="^(\s+at )(org\.apache\.lucene.util\.TestRule)" />
+                                         <containsregex pattern="^(\s+at )(org\.apache\.lucene.util\.AbstractBeforeAfterRule)" />
+                                      </filtertrace>
+                                    </report-text>
+                                <report-execution-times historyLength="20" file="${basedir}/${execution.hint.file}"/>
                                 </listeners>
                                 <assertions>
                                     <enable/>
@@ -547,7 +574,8 @@
                                 <jvmArgs>
                                     <param>-Xmx${tests.heap.size}</param>
                                     <param>-Xms${tests.heap.size}</param>
-                                    <param>-XX:MaxPermSize=128m</param>
+                                    <param>${java.permGenSpace}</param>
+                                    <param>-Djava.library.path=${project.basedir}/lib/sigar</param>
                                     <param>-XX:MaxDirectMemorySize=512m</param>
                                     <param>-Des.logger.prefix=</param>
                                     <param>-XX:+HeapDumpOnOutOfMemoryError</param>
@@ -559,14 +587,13 @@
                                 <haltOnFailure>${tests.failfast}</haltOnFailure>
                                 <uniqueSuiteNames>false</uniqueSuiteNames>
                                 <systemProperties>
-                                    <java.io.tmpdir>.</java.io.tmpdir>
-                                    <!-- we use '.' since this is different per JVM-->
+                                    <!-- we use './temp' since this is per JVM and tests are forbidden from writing to CWD -->
+                                    <java.io.tmpdir>./temp</java.io.tmpdir>
                                     <!-- RandomizedTesting library system properties -->
                                     <tests.bwc>${tests.bwc}</tests.bwc>
                                     <tests.bwc.path>${tests.bwc.path}</tests.bwc.path>
                                     <tests.bwc.version>${tests.bwc.version}</tests.bwc.version>
                                     <tests.jvm.argline>${tests.jvm.argline}</tests.jvm.argline>
-                                    <tests.processors>${tests.processors}</tests.processors>
                                     <tests.appendseed>${tests.appendseed}</tests.appendseed>
                                     <tests.iters>${tests.iters}</tests.iters>
                                     <tests.maxfailures>${tests.maxfailures}</tests.maxfailures>
@@ -596,6 +623,8 @@
                                     <tests.version>${elasticsearch.version}</tests.version>
                                     <tests.locale>${tests.locale}</tests.locale>
                                     <tests.timezone>${tests.timezone}</tests.timezone>
+                                    <project.basedir>${project.basedir}</project.basedir>
+                                    <m2.repository>${settings.localRepository}</m2.repository>
                                     <es.node.local>${env.ES_TEST_LOCAL}</es.node.local>
                                     <es.node.mode>${es.node.mode}</es.node.mode>
                                     <es.logger.level>${es.logger.level}</es.logger.level>
@@ -655,7 +684,7 @@
                     <!-- We just declare which plugin version to use. Each project can have then its own settings -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.5.3</version>
+                    <version>2.5.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -697,7 +726,7 @@
                     <!-- We just declare which plugin version to use. Each project can have then its own settings -->
                     <groupId>de.thetaphi</groupId>
                     <artifactId>forbiddenapis</artifactId>
-                    <version>1.7</version>
+                    <version>1.8</version>
                 </plugin>
                 <plugin>
                     <!-- We just declare which plugin version to use. Each project can have then its own settings -->
@@ -778,6 +807,45 @@
                                         <execute/>
                                     </action>
                                 </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-antrun-plugin</artifactId>
+                                        <versionRange>[1.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>run</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-resources-plugin</artifactId>
+                                        <versionRange>[1.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>copy-resources</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.mycila</groupId>
+                                        <artifactId>license-maven-plugin</artifactId>
+                                        <versionRange>[1.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>check</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
                     </configuration>
@@ -788,6 +856,7 @@
                     <version>2.9</version>
                     <configuration>
                         <buildOutputDirectory>eclipse-build</buildOutputDirectory>
+                        <downloadSources>true</downloadSources>
                     </configuration>
                 </plugin>
 
@@ -844,7 +913,29 @@
                         </excludes>
                     </configuration>
                 </plugin>
-
+                <plugin>
+                    <!-- We just declare which plugin version to use. Each project can have then its own settings -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-invoker-plugin</artifactId>
+                    <version>1.10</version>
+                </plugin>
+                <plugin>
+                    <!-- We just declare which plugin version to use. Each project can have then its own settings -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.3</version>
+                </plugin>
+                <plugin>
+                    <!-- We just declare which plugin version to use. Each project can have then its own settings -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-verifier-plugin</artifactId>
+                    <version>1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>2.15</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
