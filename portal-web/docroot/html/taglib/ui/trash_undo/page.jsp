@@ -40,9 +40,9 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 			trashedEntriesCount = primaryKeys.length;
 		}
 
-		Map<String, Object> trashAnchorData = new HashMap<String, Object>();
+		Map<String, Object> trashData = new HashMap<String, Object>();
 
-		trashAnchorData.put("navigation", Boolean.TRUE.toString());
+		trashData.put("navigation", Boolean.TRUE.toString());
 %>
 
 		<div class="alert alert-success taglib-trash-undo">
@@ -61,7 +61,7 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 							}
 							%>
 
-							<aui:a data="<%= trashAnchorData %>" href="<%= trashURLString %>" label="the-recycle-bin" />
+							<aui:a data="<%= trashData %>" href="<%= trashURLString %>" label="the-recycle-bin" />
 						</c:when>
 						<c:otherwise>
 							<liferay-ui:message key="the-recycle-bin" />
@@ -122,7 +122,7 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 									}
 									%>
 
-									<em class="delete-entry-title"><aui:a data="<%= trashAnchorData %>" href="<%= trashURLString %>" label="<%= HtmlUtil.escape(title) %>" /></em>
+									<em class="delete-entry-title"><aui:a data="<%= trashData %>" href="<%= trashURLString %>" label="<%= HtmlUtil.escape(title) %>" /></em>
 								</c:when>
 								<c:when test="<%= Validator.isNotNull(title) %>">
 									<em class="delete-entry-title"><%= HtmlUtil.escape(title) %></em>
