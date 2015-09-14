@@ -81,8 +81,7 @@ public class MentionsUserNotificationHandler
 			serviceContext.getLocale());
 
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", serviceContext.getLocale(),
-			getClass());
+			"content.Language", serviceContext.getLocale(), getClass());
 
 		if ((mbMessage != null) && mbMessage.isDiscussion()) {
 			return LanguageUtil.format(

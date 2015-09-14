@@ -27,10 +27,8 @@ public abstract class BaseCMISRepositoryDefiner extends BaseRepositoryDefiner {
 
 	@Override
 	public String getRepositoryTypeLabel(Locale locale) {
-		ClassLoader classLoader = getClass();
-
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, classLoader);
+			"content.Language", locale, getClass());
 
 		return resourceBundle.getString(
 			_MODEL_RESOURCE_NAME_PREFIX + getClassName());

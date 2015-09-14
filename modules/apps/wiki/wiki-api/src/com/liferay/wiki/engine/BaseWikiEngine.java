@@ -55,10 +55,8 @@ public abstract class BaseWikiEngine implements WikiEngine {
 	@Override
 	public String getFormatLabel(Locale locale) {
 		try {
-			Class<?> clazz = getClass();
-
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-				"content/Language", locale, clazz.getClassLoader());
+				"content/Language", locale, getClass());
 
 			return resourceBundle.getString(getFormat());
 		}
