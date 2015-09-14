@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.notifications;
 
-import com.liferay.portal.kernel.language.UTF8Control;
+import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -55,9 +55,8 @@ public class UserNotificationDefinition {
 
 	public String getDescription(Locale locale) {
 		try {
-			ResourceBundle resourceBundle = ResourceBundle.getBundle(
-				"content.Language", locale, getClass().getClassLoader(),
-				UTF8Control.INSTANCE);
+			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+				"content.Language", locale, getClass());
 
 			return resourceBundle.getString(_description);
 		}
