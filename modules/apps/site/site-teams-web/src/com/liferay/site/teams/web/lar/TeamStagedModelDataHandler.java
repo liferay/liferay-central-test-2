@@ -197,12 +197,7 @@ public class TeamStagedModelDataHandler
 			return team;
 		}
 
-		try {
-			return TeamLocalServiceUtil.getTeam(groupId, name);
-		}
-		catch (PortalException pe) {
-			return null;
-		}
+		return TeamLocalServiceUtil.fetchTeam(groupId, name);
 	}
 
 	@Override
