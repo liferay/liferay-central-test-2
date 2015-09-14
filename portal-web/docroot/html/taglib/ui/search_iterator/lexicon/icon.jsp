@@ -51,7 +51,7 @@ JSONArray primaryKeysJSONArray = JSONFactoryUtil.createJSONArray();
 	</div>
 </c:if>
 
-<ul class="<%= resultRows.isEmpty() ? "hide" : StringPool.BLANK %> list-unstyled <%= searchContainer.getCssClass() %>" id="<%= namespace + id %>SearchContainer">
+<ul class="<%= searchContainer.getCssClass() %> <%= resultRows.isEmpty() ? "hide" : StringPool.BLANK %> list-unstyled" id="<%= namespace + id %>SearchContainer">
 
 	<%
 	request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_CHECKER, rowChecker);
