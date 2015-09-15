@@ -187,8 +187,7 @@ public class LayoutImplTest {
 				continue;
 			}
 
-			field.set(
-				layoutType, new LayoutTypeControllerImpl(type));
+			field.set(layoutType, new LayoutTypeControllerImpl(type));
 
 			_layout.setType(type);
 
