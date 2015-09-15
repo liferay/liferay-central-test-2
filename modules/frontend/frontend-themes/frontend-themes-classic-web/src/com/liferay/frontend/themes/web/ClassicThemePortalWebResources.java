@@ -43,7 +43,7 @@ public class ClassicThemePortalWebResources implements PortalWebResources {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_CLASSIC_THEME;
+		return PortalWebResourceConstants.RESOURCE_TYPE_THEME_CLASSIC;
 	}
 
 	@Override
