@@ -140,7 +140,7 @@ public class OAuthManager {
 
 		for (Company company : companys) {
 			try {
-				_setupExpando(company.getCompanyId());
+				setupExpando(company.getCompanyId());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -185,7 +185,7 @@ public class OAuthManager {
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
-	private void _setupExpando(long companyId) throws Exception {
+	protected void setupExpando(long companyId) throws Exception {
 		ExpandoTable table = null;
 
 		try {
