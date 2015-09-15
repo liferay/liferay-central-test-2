@@ -177,10 +177,18 @@ public class LayoutImplTest {
 
 	@Test
 	public void testIsTypePortletReturnsFalse() throws Exception {
+		LayoutType layoutType = _layout.getLayoutType();
+
+		Field field = ReflectionUtil.getDeclaredField(
+			LayoutTypeImpl.class, "_layoutTypeController");
+
 		for (String type : _TYPES) {
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				continue;
 			}
+
+			field.set(
+				layoutType, new LayoutTypeControllerImpl(type));
 
 			_layout.setType(type);
 
