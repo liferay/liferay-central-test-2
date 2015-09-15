@@ -206,7 +206,6 @@ public class DDLFormViewRecordsDisplayContext {
 
 	protected void updateSearchContainerResults() {
 		List<DDLRecord> results = null;
-
 		int total = 0;
 
 		DisplayTerms displayTerms = _recordSearchContainer.getDisplayTerms();
@@ -219,7 +218,6 @@ public class DDLFormViewRecordsDisplayContext {
 				_recordSearchContainer.getStart(),
 				_recordSearchContainer.getEnd(),
 				_recordSearchContainer.getOrderByComparator());
-
 			total = DDLRecordLocalServiceUtil.getRecordsCount(
 				_recordSet.getRecordSetId(), status);
 		}
@@ -238,12 +236,10 @@ public class DDLFormViewRecordsDisplayContext {
 				DDLRecordLocalServiceUtil.searchDDLRecords(searchContext);
 
 			results = baseModelSearchResult.getBaseModels();
-
 			total = baseModelSearchResult.getLength();
 		}
 
 		_recordSearchContainer.setResults(results);
-
 		_recordSearchContainer.setTotal(total);
 	}
 
