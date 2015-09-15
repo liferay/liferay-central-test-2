@@ -58,7 +58,7 @@ public interface Hits extends Serializable {
 
 	public Map<String, StatsResults> getStatsResults();
 
-	public boolean isGroupedHits();
+	public boolean hasGroupedHits();
 
 	public float score(int n);
 
