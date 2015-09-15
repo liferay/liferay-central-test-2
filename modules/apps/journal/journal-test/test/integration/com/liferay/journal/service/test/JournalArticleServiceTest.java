@@ -109,8 +109,8 @@ public class JournalArticleServiceTest {
 	public void tearDown() throws Exception {
 		if (_article != null) {
 			JournalArticleLocalServiceUtil.deleteArticle(
-					_group.getGroupId(), _article.getArticleId(),
-					new ServiceContext());
+				_group.getGroupId(), _article.getArticleId(),
+				new ServiceContext());
 		}
 
 		PortalRunMode.setTestMode(_testMode);
