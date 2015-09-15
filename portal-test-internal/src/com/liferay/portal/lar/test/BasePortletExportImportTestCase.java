@@ -546,7 +546,6 @@ public abstract class BasePortletExportImportTestCase
 		}
 
 		String className = templateHandler.getClassName();
-
 		long resourceClassNameId = PortalUtil.getClassNameId(
 			"com.liferay.portlet.display.template.PortletDisplayTemplate");
 

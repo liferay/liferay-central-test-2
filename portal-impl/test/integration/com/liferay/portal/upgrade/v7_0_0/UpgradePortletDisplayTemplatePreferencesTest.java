@@ -58,7 +58,6 @@ public class UpgradePortletDisplayTemplatePreferencesTest
 		_group = GroupTestUtil.addGroup();
 
 		long[] classNameIds = TemplateHandlerRegistryUtil.getClassNameIds();
-
 		long resourceClassNameId = PortalUtil.getClassNameId(
 			"com.liferay.portlet.display.template.PortletDisplayTemplate");
 
