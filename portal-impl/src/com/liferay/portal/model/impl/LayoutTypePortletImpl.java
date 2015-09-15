@@ -251,7 +251,7 @@ public class LayoutTypePortletImpl
 
 	@Override
 	public List<Portlet> getAllPortlets() {
-		List<Portlet> explicitlyAddedPortlets = getExplicitelyAddedPortlets();
+		List<Portlet> explicitlyAddedPortlets = getExplicitlyAddedPortlets();
 
 		List<Portlet> staticPortlets = getStaticPortlets(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_ALL);
@@ -308,7 +308,7 @@ public class LayoutTypePortletImpl
 
 	@Override
 	public List<Portlet> getEmbeddedPortlets() {
-		List<Portlet> explicitlyAddedPortlets = getExplicitelyAddedPortlets();
+		List<Portlet> explicitlyAddedPortlets = getExplicitlyAddedPortlets();
 
 		List<Portlet> staticPortlets = getStaticPortlets(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_ALL);
@@ -1528,7 +1528,7 @@ public class LayoutTypePortletImpl
 		return _embeddedPortlets;
 	}
 
-	protected List<Portlet> getExplicitelyAddedPortlets() {
+	protected List<Portlet> getExplicitlyAddedPortlets() {
 		List<Portlet> portlets = new ArrayList<>();
 
 		List<String> columns = getColumns();
