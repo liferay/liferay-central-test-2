@@ -102,9 +102,6 @@ default value is false.
 	portal CDATA #IMPLIED
 >
 
-<!--
-The composite-model-name element is the name of the model.
--->
 <!ELEMENT composite-model-name (model-name+) >
 
 <!--
