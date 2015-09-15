@@ -43,7 +43,7 @@ public class AdminThemePortalWebResources implements PortalWebResources {
 
 	@Override
 	public String getResourceType() {
-		return PortalWebResourceConstants.RESOURCE_TYPE_ADMIN_THEME;
+		return PortalWebResourceConstants.RESOURCE_TYPE_THEME_ADMIN;
 	}
 
 	@Override
