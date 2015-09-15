@@ -187,8 +187,8 @@ public class RowChecker {
 		sb.append("onClick=\"");
 		sb.append("Liferay.Util.checkAll(");
 		sb.append("AUI().one(this).ancestor('.table'),");
-		sb.append(checkBoxRowIds + ",");
-		sb.append("this,");
+		sb.append(checkBoxRowIds);
+		sb.append(",this,");
 		sb.append("'tr:not(.lfr-template)'");
 		sb.append(");");
 		sb.append("\">");
