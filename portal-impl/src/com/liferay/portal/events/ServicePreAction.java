@@ -382,9 +382,9 @@ public class ServicePreAction extends Action {
 			}
 
 			if ((Validator.isNull(controlPanelCategory) ||
+				 controlPanelCategory.equals(PortletCategoryKeys.PORTLET) ||
 				 controlPanelCategory.equals(
-					 PortletCategoryKeys.USER_MY_ACCOUNT) ||
-				 controlPanelCategory.equals(PortletCategoryKeys.PORTLET)) &&
+					PortletCategoryKeys.USER_MY_ACCOUNT)) &&
 				Validator.isNotNull(ppid) &&
 				(LiferayWindowState.isPopUp(request) ||
 				 LiferayWindowState.isExclusive(request))) {
@@ -1791,9 +1791,9 @@ public class ServicePreAction extends Action {
 					return true;
 				}
 			}
-			else if (controlPanelCategory.equals(
-						PortletCategoryKeys.USER_MY_ACCOUNT) ||
-					 controlPanelCategory.equals(PortletCategoryKeys.PORTLET)) {
+			else if (controlPanelCategory.equals(PortletCategoryKeys.PORTLET) ||
+					 controlPanelCategory.equals(
+						PortletCategoryKeys.USER_MY_ACCOUNT)) {
 
 				return true;
 			}
