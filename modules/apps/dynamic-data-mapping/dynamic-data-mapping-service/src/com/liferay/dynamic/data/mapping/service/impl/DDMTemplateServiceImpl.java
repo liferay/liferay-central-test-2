@@ -353,7 +353,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		long companyId, long groupId, long classNameId,
 		long resourceClassNameId) {
 
-		return doGetTemplates(
+		return getTemplates(
 			companyId, new long[] {groupId}, resourceClassNameId, 0,
 			resourceClassNameId, null, null);
 	}
@@ -363,7 +363,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		long companyId, long groupId, long classNameId, long classPK,
 		long resourceClassNameId) {
 
-		return doGetTemplates(
+		return getTemplates(
 			companyId, new long[] {groupId}, classNameId, classPK,
 			resourceClassNameId, null, null);
 	}
@@ -377,7 +377,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		List<DDMTemplate> ddmTemplates = new ArrayList<>();
 
 		ddmTemplates.addAll(
-			doGetTemplates(
+			getTemplates(
 				companyId, new long[] {groupId}, classNameId, classPK,
 				resourceClassNameId, null, null));
 
@@ -386,7 +386,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		}
 
 		ddmTemplates.addAll(
-			doGetTemplates(
+			getTemplates(
 				companyId, PortalUtil.getAncestorSiteGroupIds(groupId),
 				classNameId, classPK, resourceClassNameId, null, null));
 
@@ -410,7 +410,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		long companyId, long groupId, long classNameId, long classPK,
 		long resourceClassNameId, String type) {
 
-		return doGetTemplates(
+		return getTemplates(
 			companyId, new long[] {groupId}, classNameId, classPK,
 			resourceClassNameId, type, null);
 	}
@@ -420,7 +420,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		long companyId, long groupId, long classNameId, long classPK,
 		long resourceClassNameId, String type, String mode) {
 
-		return doGetTemplates(
+		return getTemplates(
 			companyId, new long[] {groupId}, classNameId, classPK,
 			resourceClassNameId, type, mode);
 	}
@@ -436,7 +436,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 	public List<DDMTemplate> getTemplatesByClassPK(
 		long companyId, long groupId, long classPK, long resourceClassNameIs) {
 
-		return doGetTemplates(
+		return getTemplates(
 			companyId, new long[] {groupId}, 0, classPK, resourceClassNameIs,
 			null, null);
 	}
@@ -939,7 +939,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			mode, language, script, cacheable, serviceContext);
 	}
 
-	protected List<DDMTemplate> doGetTemplates(
+	protected List<DDMTemplate> getTemplates(
 		long companyId, long[] groupIds, long classNameId, long classPK,
 		long resourceClassNameId, String type, String mode) {
 
