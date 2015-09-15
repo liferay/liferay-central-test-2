@@ -229,7 +229,7 @@ public class RowChecker {
 		String name, String value, String checkBoxRowIds,
 		String checkBoxAllRowIds, String checkBoxPostOnClick) {
 
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(20);
 
 		sb.append("<input ");
 
@@ -252,14 +252,12 @@ public class RowChecker {
 		sb.append("\" ");
 
 		if (Validator.isNotNull(_allRowIds)) {
-			sb.append("onClick=\"");
-			sb.append("Liferay.Util.rowCheckerCheckAllBox(");
-				sb.append("AUI().one(this).ancestor('.table'),");
-				sb.append("AUI().one(this).ancestor('tr:not(.lfr-template)'),");
-				sb.append(checkBoxRowIds + ",");
-				sb.append(checkBoxAllRowIds + ",");
-				sb.append("'info'");
-			sb.append(");");
+			sb.append("onClick=\"Liferay.Util.rowCheckerCheckAllBox(AUI().");
+			sb.append("one(this).ancestor('.table'), AUI().one(this).");
+			sb.append("ancestor('tr:not(.lfr-template)'),");
+			sb.append(checkBoxRowIds + ",");
+			sb.append(checkBoxAllRowIds + ",");
+			sb.append("'info');");
 
 			if (Validator.isNotNull(checkBoxPostOnClick)) {
 				sb.append(checkBoxPostOnClick);
