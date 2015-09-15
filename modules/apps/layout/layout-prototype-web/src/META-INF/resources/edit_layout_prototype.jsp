@@ -36,13 +36,13 @@ if (layoutPrototype == null) {
 	layoutPrototype.setActive(true);
 }
 
+request.setAttribute("edit_layout_prototype.jsp-layoutPrototype", layoutPrototype);
+request.setAttribute("edit_layout_prototype.jsp-redirect", redirect);
+
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
 renderResponse.setTitle(layoutPrototype.isNew() ? LanguageUtil.get(request, "new-page-template") : layoutPrototype.getName(locale));
-
-request.setAttribute("edit_layout_prototype.jsp-layoutPrototype", layoutPrototype);
-request.setAttribute("edit_layout_prototype.jsp-redirect", redirect);
 %>
 
 <liferay-util:include page="/merge_alert.jsp" servletContext="<%= application %>" />
