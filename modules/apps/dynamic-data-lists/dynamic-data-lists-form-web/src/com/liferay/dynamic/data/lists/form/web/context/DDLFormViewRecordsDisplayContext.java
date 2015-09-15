@@ -144,7 +144,7 @@ public class DDLFormViewRecordsDisplayContext {
 
 		List<DDMFormField> ddmFormfields = ddmStructure.getDDMFormFields(false);
 
-		int totalColumns = _MAX_COLUMNS_SIZE;
+		int totalColumns = _MAX_COLUMNS;
 
 		if (ddmFormfields.size() < totalColumns) {
 			totalColumns = ddmFormfields.size();
@@ -243,7 +243,7 @@ public class DDLFormViewRecordsDisplayContext {
 		_recordSearchContainer.setTotal(total);
 	}
 
-	private static final int _MAX_COLUMNS_SIZE = 5;
+	private static final int _MAX_COLUMNS = 5;
 
 	private final List<DDMFormField> _ddmFormFields = new ArrayList<>();
 	private final LiferayPortletRequest _liferayPortletRequest;
