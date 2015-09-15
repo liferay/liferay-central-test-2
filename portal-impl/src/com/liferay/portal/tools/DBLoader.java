@@ -48,7 +48,7 @@ public class DBLoader {
 
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(
-					new UnsyncStringReader(_getFileContent(fileName)))) {
+					new UnsyncStringReader(_read(fileName)))) {
 
 			StringBundler sb = new StringBundler();
 
@@ -117,7 +117,7 @@ public class DBLoader {
 		}
 	}
 
-	private static String _getFileContent(String fileName) throws IOException {
+	private static String _read(String fileName) throws IOException {
 		String content = _fileUtil.read(fileName);
 
 		Matcher matcher = _columnLengthPattern.matcher(content);
@@ -174,7 +174,7 @@ public class DBLoader {
 	private void _loadDerby(Connection con, String fileName) throws Exception {
 		try (UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(
-					new UnsyncStringReader(_getFileContent(fileName)))) {
+					new UnsyncStringReader(_read(fileName)))) {
 
 			StringBundler sb = new StringBundler();
 
