@@ -53,7 +53,7 @@
 
 			<c:choose>
 				<c:when test='<%= tabs1.equals("server") %>'>
-					<liferay-util:include page="/server.jsp" />
+					<liferay-util:include page="/server.jsp" servletContext="<%= application %>"/>
 
 					<aui:script use="liferay-admin">
 						new Liferay.Portlet.Admin(
@@ -102,6 +102,6 @@
 		</aui:script>
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" servletContext="<%= application %>"/>
+		<liferay-util:include page="/portlet_access_denied.jsp" servletContext="<%= application %>"/>
 	</c:otherwise>
 </c:choose>

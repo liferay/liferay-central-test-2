@@ -56,34 +56,34 @@ serverURL.setParameter("tabs3", tabs3);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("log-levels") %>'>
-				<liferay-util:include page="/server/log_levels.jsp" />
+				<liferay-util:include page="/server/log_levels.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("properties") %>'>
-				<liferay-util:include page="/server/properties.jsp" />
+				<liferay-util:include page="/server/properties.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("captcha") %>'>
-				<liferay-util:include page="/server/captcha.jsp" />
+				<liferay-util:include page="/server/captcha.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("data-migration") %>'>
-				<liferay-util:include page="/server/data_migration.jsp" />
+				<liferay-util:include page="/server/data_migration.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
-				<liferay-util:include page="/server/file_uploads.jsp" />
+				<liferay-util:include page="/server/file_uploads.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("mail") %>'>
-				<liferay-util:include page="/server/mail.jsp" />
+				<liferay-util:include page="/server/mail.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("external-services") %>'>
-				<liferay-util:include page="/server/external_services.jsp" />
+				<liferay-util:include page="/server/external_services.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("script") %>'>
-				<liferay-util:include page="/server/script.jsp" />
+				<liferay-util:include page="/server/script.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
-				<liferay-util:include page="/server/shutdown.jsp" />
+				<liferay-util:include page="/server/shutdown.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:otherwise>
-				<liferay-util:include page="/server/resources.jsp" />
+				<liferay-util:include page="/server/resources.jsp" servletContext="<%= application %>"/>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
