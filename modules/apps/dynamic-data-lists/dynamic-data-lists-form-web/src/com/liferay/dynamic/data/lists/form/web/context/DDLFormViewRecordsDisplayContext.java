@@ -72,7 +72,6 @@ public class DDLFormViewRecordsDisplayContext {
 		_liferayPortletRequest = liferayPortletRequest;
 		_liferayPortletResponse = liferayPortletResponse;
 		_recordSet = recordSet;
-		_ddmFormFields = new ArrayList<>();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)_liferayPortletRequest.getAttribute(
@@ -250,7 +249,7 @@ public class DDLFormViewRecordsDisplayContext {
 
 	private static final int _MAX_COLUMNS_SIZE = 5;
 
-	private final List<DDMFormField> _ddmFormFields;
+	private final List<DDMFormField> _ddmFormFields = new ArrayList<>();
 	private final LiferayPortletRequest _liferayPortletRequest;
 	private final LiferayPortletResponse _liferayPortletResponse;
 	private RecordSearch _recordSearchContainer;
