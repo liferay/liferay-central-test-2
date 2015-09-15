@@ -95,7 +95,7 @@ public class RecordSearch extends SearchContainer<DDLRecord> {
 			setOrderByComparator(orderByComparator);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
