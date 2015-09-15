@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.servlet.taglib.ui.Menu;
 import com.liferay.portal.kernel.servlet.taglib.ui.MenuItem;
 import com.liferay.portal.kernel.servlet.taglib.ui.ToolbarItem;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.display.context.DLViewFileVersionDisplayContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
@@ -102,21 +103,25 @@ public class DefaultDLViewFileVersionDisplayContext
 		String direction = "left-side";
 
 		if (_dlVisualizationHelper.isShowMinimalActionsButton() &&
-			_dlVisualizationHelper.getDisplayStyle().equals("icon")) {
+			Validator.equals(
+				_dlVisualizationHelper.getDisplayStyle(), "icon")) {
 
 			direction = "down";
 		}
 
 		menu.setDirection(direction);
 
-		if (!_dlVisualizationHelper.getDisplayStyle().equals("icon")) {
+		if (!Validator.equals(
+				_dlVisualizationHelper.getDisplayStyle(), "icon")) {
+
 			menu.setShowExpanded(true);
 		}
 
 		boolean extended = true;
 
 		if (_dlVisualizationHelper.isShowMinimalActionsButton() ||
-			!_dlVisualizationHelper.getDisplayStyle().equals("icon")) {
+			!Validator.equals(
+				_dlVisualizationHelper.getDisplayStyle(), "icon")) {
 
 			extended = false;
 		}
@@ -141,18 +146,24 @@ public class DefaultDLViewFileVersionDisplayContext
 
 		menu.setMessage(message);
 
-		if (!_dlVisualizationHelper.getDisplayStyle().equals("icon")) {
+		if (!Validator.equals(
+				_dlVisualizationHelper.getDisplayStyle(), "icon")) {
+
 			menu.setScroll(true);
 		}
 
 		menu.setShowWhenSingleIcon(
 			_dlVisualizationHelper.isShowWhenSingleIconActionButton());
 
-		if (_dlVisualizationHelper.getDisplayStyle().equals("icon")) {
+		if (Validator.equals(
+				_dlVisualizationHelper.getDisplayStyle(), "icon")) {
+
 			menu.setTriggerCssClass("btn btn-default");
 		}
 
-		if (!_dlVisualizationHelper.getDisplayStyle().equals("icon")) {
+		if (!Validator.equals(
+				_dlVisualizationHelper.getDisplayStyle(), "icon")) {
+
 			menu.setMarkupView("lexicon");
 		}
 
