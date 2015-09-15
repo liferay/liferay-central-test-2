@@ -97,8 +97,7 @@ public class PortletInstanceSettingsLocator implements SettingsLocator {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)_layout.getLayoutType();
 
-			_embeddedPortlet = layoutTypePortlet.isPortletEmbedded(
-				_settingsId);
+			_embeddedPortlet = layoutTypePortlet.isPortletEmbedded(_settingsId);
 		}
 
 		return _embeddedPortlet;
