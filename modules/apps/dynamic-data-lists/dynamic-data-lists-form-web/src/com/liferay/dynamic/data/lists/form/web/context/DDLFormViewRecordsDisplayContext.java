@@ -161,11 +161,11 @@ public class DDLFormViewRecordsDisplayContext {
 				label.getString(_liferayPortletRequest.getLocale()));
 		}
 
-		PortletURL currentURL = PortletURLUtil.getCurrent(
+		PortletURL portletURL = PortletURLUtil.getCurrent(
 			_liferayPortletRequest, _liferayPortletResponse);
 
 		_recordSearchContainer = new RecordSearch(
-			_liferayPortletRequest, currentURL, headerNames);
+			_liferayPortletRequest, portletURL, headerNames);
 
 		String orderByCol = ParamUtil.getString(
 			_liferayPortletRequest, "orderByCol");
