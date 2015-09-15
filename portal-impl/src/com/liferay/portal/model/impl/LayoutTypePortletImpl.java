@@ -1566,7 +1566,7 @@ public class LayoutTypePortletImpl
 			group = layout.getGroup();
 		}
 		catch (PortalException e) {
-			_log.error("Cannot find group with id " + layout.getGroupId());
+			_log.error("Unable to get group " + layout.getGroupId());
 
 			return new String[0];
 		}
