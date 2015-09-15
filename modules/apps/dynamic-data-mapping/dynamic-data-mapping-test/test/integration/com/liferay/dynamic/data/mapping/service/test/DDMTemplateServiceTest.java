@@ -61,7 +61,6 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	@BeforeClass
 	public static void setUpClass() {
 		_classNameId = PortalUtil.getClassNameId(DDL_RECORD_CLASS_NAME);
-
 		_resourceClassNameId = PortalUtil.getClassNameId(
 			DDL_RECORD_SET_CLASS_NAME);
 	}
@@ -491,7 +490,6 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	private static long _classNameId;
-
 	private static long _resourceClassNameId;
 
 }
