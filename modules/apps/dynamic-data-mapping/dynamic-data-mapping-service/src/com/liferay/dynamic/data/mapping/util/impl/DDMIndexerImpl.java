@@ -212,6 +212,8 @@ public class DDMIndexerImpl implements DDMIndexer {
 			Locale locale)
 		throws Exception {
 
+		BooleanQuery booleanQuery = new BooleanQueryImpl();
+
 		String[] ddmStructureFieldNameParts = StringUtil.split(
 			ddmStructureFieldName, DDMIndexer.DDM_FIELD_SEPARATOR);
 
@@ -227,8 +229,6 @@ public class DDMIndexerImpl implements DDMIndexer {
 			ddmStructureFieldValue = DDMUtil.getIndexedFieldValue(
 				ddmStructureFieldValue, structure.getFieldType(fieldName));
 		}
-
-		BooleanQuery booleanQuery = new BooleanQueryImpl();
 
 		booleanQuery.addRequiredTerm(
 			ddmStructureFieldName,
