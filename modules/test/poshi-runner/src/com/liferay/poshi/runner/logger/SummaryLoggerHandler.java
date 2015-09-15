@@ -326,6 +326,7 @@ public final class SummaryLoggerHandler {
 		sb.append(".jpg");
 
 		loggerElement.setAttribute("href", sb.toString());
+
 		loggerElement.setAttribute("title", "After Failure");
 		loggerElement.setName("a");
 
@@ -338,14 +339,16 @@ public final class SummaryLoggerHandler {
 	private static LoggerElement _getScreenshotsAfterThumbnailLoggerElement() {
 		LoggerElement loggerElement = new LoggerElement();
 
+		loggerElement.setAttribute("alt", "After Failure");
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("screenshots/after");
 		sb.append(CommandLoggerHandler.getErrorLinkId());
 		sb.append(".jpg");
 
-		loggerElement.setAttribute("alt", "After Failure");
 		loggerElement.setAttribute("src", sb.toString());
+
 		loggerElement.setClassName("screenshots-thumbnail");
 		loggerElement.setName("img");
 
@@ -371,6 +374,7 @@ public final class SummaryLoggerHandler {
 		sb.append(".jpg");
 
 		loggerElement.setAttribute("href", sb.toString());
+
 		loggerElement.setAttribute("title", "Before Failure");
 		loggerElement.setName("a");
 
@@ -383,14 +387,16 @@ public final class SummaryLoggerHandler {
 	private static LoggerElement _getScreenshotsBeforeThumbnailLoggerElement() {
 		LoggerElement loggerElement = new LoggerElement();
 
+		loggerElement.setAttribute("alt", "Before Failure");
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("screenshots/before");
 		sb.append(CommandLoggerHandler.getErrorLinkId());
 		sb.append(".jpg");
 
-		loggerElement.setAttribute("alt", "Before Failure");
 		loggerElement.setAttribute("src", sb.toString());
+
 		loggerElement.setClassName("screenshots-thumbnail");
 		loggerElement.setName("img");
 
