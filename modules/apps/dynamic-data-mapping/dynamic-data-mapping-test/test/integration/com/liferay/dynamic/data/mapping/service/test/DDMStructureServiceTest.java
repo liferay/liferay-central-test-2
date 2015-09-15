@@ -328,22 +328,21 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 	@Test
 	public void testSearchByAnyStatus() throws Exception {
 		addStructure(
-			0, _classNameId, null, StringUtil.randomString(),
-			StringPool.BLANK, read("test-structure.xsd"),
-			StorageType.JSON.getValue(), DDMStructureConstants.TYPE_DEFAULT,
+			0, _classNameId, null, StringUtil.randomString(), StringPool.BLANK,
+			read("test-structure.xsd"), StorageType.JSON.getValue(),
+			DDMStructureConstants.TYPE_DEFAULT,
 			WorkflowConstants.STATUS_APPROVED);
 
 		addStructure(
-			0, _classNameId, null, StringUtil.randomString(),
-			StringPool.BLANK, read("test-structure.xsd"),
-			StorageType.JSON.getValue(), DDMStructureConstants.TYPE_DEFAULT,
-			WorkflowConstants.STATUS_DRAFT);
+			0, _classNameId, null, StringUtil.randomString(), StringPool.BLANK,
+			read("test-structure.xsd"), StorageType.JSON.getValue(),
+			DDMStructureConstants.TYPE_DEFAULT, WorkflowConstants.STATUS_DRAFT);
 
 		List<DDMStructure> structures = DDMStructureLocalServiceUtil.search(
 			TestPropsValues.getCompanyId(), new long[] {group.getGroupId()},
-			_classNameId, null, null, null,
-			DDMStructureConstants.TYPE_DEFAULT, WorkflowConstants.STATUS_ANY,
-			true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			_classNameId, null, null, null, DDMStructureConstants.TYPE_DEFAULT,
+			WorkflowConstants.STATUS_ANY, true, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(2, structures.size());
 	}
@@ -356,8 +355,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 
 		List<DDMStructure> structures = DDMStructureLocalServiceUtil.search(
 			TestPropsValues.getCompanyId(), new long[] {group.getGroupId()},
-			_classNameId, null, null, null,
-			DDMStructureConstants.TYPE_DEFAULT,
+			_classNameId, null, null, null, DDMStructureConstants.TYPE_DEFAULT,
 			WorkflowConstants.STATUS_APPROVED, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
@@ -385,22 +383,21 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 	@Test
 	public void testSearchByDraftStatus() throws Exception {
 		addStructure(
-			0, _classNameId, null, StringUtil.randomString(),
-			StringPool.BLANK, read("test-structure.xsd"),
-			StorageType.JSON.getValue(), DDMStructureConstants.TYPE_DEFAULT,
+			0, _classNameId, null, StringUtil.randomString(), StringPool.BLANK,
+			read("test-structure.xsd"), StorageType.JSON.getValue(),
+			DDMStructureConstants.TYPE_DEFAULT,
 			WorkflowConstants.STATUS_APPROVED);
 
 		addStructure(
-			0, _classNameId, null, StringUtil.randomString(),
-			StringPool.BLANK, read("test-structure.xsd"),
-			StorageType.JSON.getValue(), DDMStructureConstants.TYPE_DEFAULT,
-			WorkflowConstants.STATUS_DRAFT);
+			0, _classNameId, null, StringUtil.randomString(), StringPool.BLANK,
+			read("test-structure.xsd"), StorageType.JSON.getValue(),
+			DDMStructureConstants.TYPE_DEFAULT, WorkflowConstants.STATUS_DRAFT);
 
 		List<DDMStructure> structures = DDMStructureLocalServiceUtil.search(
 			TestPropsValues.getCompanyId(), new long[] {group.getGroupId()},
-			_classNameId, null, null, null,
-			DDMStructureConstants.TYPE_DEFAULT, WorkflowConstants.STATUS_DRAFT,
-			true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			_classNameId, null, null, null, DDMStructureConstants.TYPE_DEFAULT,
+			WorkflowConstants.STATUS_DRAFT, true, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(1, structures.size());
 	}
