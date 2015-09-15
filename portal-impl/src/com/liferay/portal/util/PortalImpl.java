@@ -3784,8 +3784,7 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public long getPlidFromPortletId(
-			long groupId, boolean privateLayout, String portletId)
-		throws PortalException {
+		long groupId, boolean privateLayout, String portletId) {
 
 		long plid = LayoutConstants.DEFAULT_PLID;
 
@@ -3844,9 +3843,7 @@ public class PortalImpl implements Portal {
 	}
 
 	@Override
-	public long getPlidFromPortletId(long groupId, String portletId)
-		throws PortalException {
-
+	public long getPlidFromPortletId(long groupId, String portletId) {
 		long plid = getPlidFromPortletId(groupId, false, portletId);
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
@@ -7559,8 +7556,7 @@ public class PortalImpl implements Portal {
 	}
 
 	protected long doGetPlidFromPortletId(
-			long groupId, boolean privateLayout, String portletId)
-		throws PortalException {
+		long groupId, boolean privateLayout, String portletId) {
 
 		long scopeGroupId = groupId;
 
