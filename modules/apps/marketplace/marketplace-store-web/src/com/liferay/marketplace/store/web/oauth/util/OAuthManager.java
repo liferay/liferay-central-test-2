@@ -204,7 +204,6 @@ public class OAuthManager {
 			_expandoColumnLocalService.addColumn(
 				table.getTableId(), "accessToken",
 				ExpandoColumnConstants.STRING);
-
 			_expandoColumnLocalService.addColumn(
 				table.getTableId(), "requestSecret",
 				ExpandoColumnConstants.STRING);
