@@ -118,34 +118,25 @@ public class Stats implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(19);
 
-		sb.append("{");
-		sb.append("(_count=");
+		sb.append("{count=");
 		sb.append(_count);
-		sb.append("), ");
-		sb.append("(_field=");
+		sb.append(", field=");
 		sb.append(_field);
-		sb.append("), ");
-		sb.append("(_max=");
+		sb.append(", max=");
 		sb.append(_max);
-		sb.append("), ");
-		sb.append("(_mean=");
+		sb.append(", mean=");
 		sb.append(_mean);
-		sb.append("), ");
-		sb.append("(_min=");
+		sb.append(", min=");
 		sb.append(_min);
-		sb.append("), ");
-		sb.append("(_missing=");
+		sb.append(", missing=");
 		sb.append(_missing);
-		sb.append("), ");
-		sb.append("(_standardDeviation=");
+		sb.append(", standardDeviation=");
 		sb.append(_standardDeviation);
-		sb.append("), ");
-		sb.append("(_sum=");
+		sb.append(", sum=");
 		sb.append(_sum);
-		sb.append("), ");
-		sb.append("(_sumOfSquares=");
+		sb.append(", sumOfSquares=");
 		sb.append(_sumOfSquares);
 		sb.append("}");
 
