@@ -40,7 +40,6 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 
 	<%
 	long classPK = 0;
-
 	double priority = 0;
 
 	if (article != null) {
@@ -51,7 +50,6 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 
 			if (assetEntry != null) {
 				classPK = article.getPrimaryKey();
-
 				priority = assetEntry.getPriority();
 			}
 		}
