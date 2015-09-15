@@ -507,6 +507,8 @@ dlSearchContainer.setResults(results);
 						<c:otherwise>
 
 							<%
+							Map<String, Object> rowData = new HashMap<String, Object>();
+
 							boolean draggable = false;
 
 							if (DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.UPDATE)) {
@@ -517,14 +519,14 @@ dlSearchContainer.setResults(results);
 								}
 							}
 
-							Map<String, Object> rowData = new HashMap<String, Object>();
-
 							rowData.put("draggable", draggable);
+
 							rowData.put("folder", true);
 							rowData.put("folder-id", curFolder.getFolderId());
 							rowData.put("title", curFolder.getName());
 
 							row.setData(rowData);
+
 							row.setPrimaryKey(String.valueOf(curFolder.getPrimaryKey()));
 							%>
 
