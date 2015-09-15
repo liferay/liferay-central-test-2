@@ -87,24 +87,24 @@ public class PortletInstanceSettingsLocator implements SettingsLocator {
 	}
 
 	protected boolean isEmbeddedPortlet() {
-		if (_isEmbeddedPortlet != null) {
-			return _isEmbeddedPortlet;
+		if (_embeddedPortlet != null) {
+			return _embeddedPortlet;
 		}
 
-		_isEmbeddedPortlet = false;
+		_embeddedPortlet = false;
 
 		if (_layout.isSupportsEmbeddedPortlets()) {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)_layout.getLayoutType();
 
-			_isEmbeddedPortlet = layoutTypePortlet.isPortletEmbedded(
+			_embeddedPortlet = layoutTypePortlet.isPortletEmbedded(
 				_settingsId);
 		}
 
-		return _isEmbeddedPortlet;
+		return _embeddedPortlet;
 	}
 
-	private Boolean _isEmbeddedPortlet = null;
+	private Boolean _embeddedPortlet = null;
 	private final Layout _layout;
 	private final String _settingsId;
 	private final SettingsLocatorHelper _settingsLocatorHelper =
