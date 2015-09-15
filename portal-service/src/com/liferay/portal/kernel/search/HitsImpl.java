@@ -139,7 +139,7 @@ public class HitsImpl implements Hits {
 	}
 
 	@Override
-	public boolean isGroupedHits() {
+	public boolean hasGroupedHits() {
 		return !_groupedHits.isEmpty();
 	}
 
