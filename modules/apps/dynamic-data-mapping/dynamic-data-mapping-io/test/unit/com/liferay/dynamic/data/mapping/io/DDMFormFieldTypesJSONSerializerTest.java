@@ -144,7 +144,7 @@ public class DDMFormFieldTypesJSONSerializerTest extends BaseDDMTestCase {
 
 	protected void setUpDDMFormFieldTypesJSONSerializer() throws Exception {
 
-		// DDMFormFieldType Services Tracker
+		// DDM form field type services tracker
 
 		Field field = ReflectionUtil.getDeclaredField(
 			DDMFormFieldTypesJSONSerializerImpl.class,
@@ -154,7 +154,7 @@ public class DDMFormFieldTypesJSONSerializerTest extends BaseDDMTestCase {
 			_ddmFormFieldTypesJSONSerializer,
 			getMockedDDMFormFieldTypeServicesTracker());
 
-		// DDMForm JSON Serializer
+		// DDM form JSON serializer
 
 		field = ReflectionUtil.getDeclaredField(
 			DDMFormFieldTypesJSONSerializerImpl.class,
@@ -163,7 +163,7 @@ public class DDMFormFieldTypesJSONSerializerTest extends BaseDDMTestCase {
 		field.set(
 			_ddmFormFieldTypesJSONSerializer, new DDMFormJSONSerializerImpl());
 
-		// DDMFormLayout JSON Serializer
+		// DDM form layout JSON serializer
 
 		field = ReflectionUtil.getDeclaredField(
 			DDMFormFieldTypesJSONSerializerImpl.class,
