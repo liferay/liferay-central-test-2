@@ -16,7 +16,6 @@ package com.liferay.sync.engine;
 
 import com.j256.ormlite.support.ConnectionSource;
 
-import com.liferay.sync.engine.documentlibrary.event.GetSyncDLObjectUpdateEvent;
 import com.liferay.sync.engine.documentlibrary.util.BatchDownloadEvent;
 import com.liferay.sync.engine.documentlibrary.util.BatchEventManager;
 import com.liferay.sync.engine.documentlibrary.util.FileEventUtil;
@@ -362,17 +361,9 @@ public class SyncEngine {
 						continue;
 					}
 
-					Map<String, Object> parameters = new HashMap<>();
-
-					parameters.put("companyId", syncSite.getCompanyId());
-					parameters.put("repositoryId", syncSite.getGroupId());
-					parameters.put("syncSite", syncSite);
-
-					GetSyncDLObjectUpdateEvent getSyncDLObjectUpdateEvent =
-						new GetSyncDLObjectUpdateEvent(
-							syncAccount.getSyncAccountId(), parameters);
-
-					getSyncDLObjectUpdateEvent.run();
+					FileEventUtil.getUpdates(
+						syncSite.getCompanyId(), syncSite.getGroupId(),
+						syncAccount.getSyncAccountId(), syncSite);
 				}
 
 				BatchDownloadEvent batchDownloadEvent =
