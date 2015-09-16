@@ -727,11 +727,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		if ((classNames == null) ||
 			ArrayUtil.contains(classNames, Organization.class.getName())) {
 
+			int filteredUserSiteGroupsCount = 0;
+
 			List<Organization> userOrgs =
 				organizationLocalService.getOrganizations(
 					userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-			int filteredUserSiteGroupsCount = 0;
 
 			for (Organization organization : userOrgs) {
 				if (filteredUserSiteGroupsCount == max) {
