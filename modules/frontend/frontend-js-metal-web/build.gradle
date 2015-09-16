@@ -2,7 +2,7 @@ import com.liferay.gradle.plugins.node.tasks.DownloadNodeModuleTask
 import com.liferay.gradle.plugins.node.tasks.ExecuteNodeTask
 import com.liferay.gradle.plugins.node.tasks.ExecuteNpmTask
 
-apply plugin: "com.liferay.task-cache"
+apply plugin: "com.liferay.cache"
 
 task downloadBower(type: DownloadNodeModuleTask)
 task downloadGulp(type: DownloadNodeModuleTask)

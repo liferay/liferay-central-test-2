@@ -3,7 +3,7 @@ import com.liferay.gradle.util.FileUtil
 import com.liferay.gradle.util.copy.ReplaceLeadingPathAction
 import com.liferay.gradle.util.copy.StripPathSegmentsAction
 
-apply plugin: "com.liferay.task-cache"
+apply plugin: "com.liferay.cache"
 
 task buildAlloy(type: Copy)
 task buildAlloyBootstrap(type: Copy)

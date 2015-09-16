@@ -1,6 +1,6 @@
 import com.liferay.gradle.plugins.node.tasks.DownloadNodeModuleTask
 
-apply plugin: "com.liferay.task-cache"
+apply plugin: "com.liferay.cache"
 
 task buildBabelCore(type: Copy)
 task downloadBabelCore(type: DownloadNodeModuleTask)
