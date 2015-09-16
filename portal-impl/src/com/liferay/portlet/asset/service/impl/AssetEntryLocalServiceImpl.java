@@ -421,12 +421,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	@Override
 	public Hits search(
 		long companyId, long[] groupIds, long userId, String className,
-		long classTypeId, String keywords, boolean showNonIndexable, int status,
+		long classTypeId, String keywords, boolean showNonindexable, int status,
 		int start, int end) {
 
 		return search(
 			companyId, groupIds, userId, className, classTypeId, keywords,
-			keywords, keywords, null, null, showNonIndexable, status, false,
+			keywords, keywords, null, null, showNonindexable, status, false,
 			start, end);
 	}
 
@@ -444,7 +444,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	public Hits search(
 		long companyId, long[] groupIds, long userId, String className,
 		long classTypeId, String userName, String title, String description,
-		String assetCategoryIds, String assetTagNames, boolean showNonIndexable,
+		String assetCategoryIds, String assetTagNames, boolean showNonindexable,
 		int status, boolean andSearch, int start, int end) {
 
 		try {
@@ -473,8 +473,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				searchContext.setClassTypeIds(new long[] {classTypeId});
 			}
 
-			if (showNonIndexable) {
-				searchContext.setAttribute("showNonIndexable", Boolean.TRUE);
+			if (showNonindexable) {
+				searchContext.setAttribute("showNonindexable", Boolean.TRUE);
 			}
 
 			searchContext.setCompanyId(companyId);
