@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -398,6 +397,7 @@ public class MetaInfoCacheServletResponseTest {
 			metaInfoCacheServletResponse.getResponse());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testFinishResponse() throws IOException {
 		final AtomicLong contentLengthReference = new AtomicLong();
