@@ -22,12 +22,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 public class UnsupportedCapabilityException extends SystemException {
 
 	public UnsupportedCapabilityException(
-		Class<? extends Capability> capabilityClass, String providerKey) {
+		Class<? extends Capability> capabilityClass,
+		String providerDescription) {
 
 		super(
 			String.format(
-				"Capability %s is not supported by provider %s",
-				capabilityClass.getName(), providerKey));
+				"%s does not support capability %s",
+				providerDescription, capabilityClass.getName()));
 	}
 
 }
