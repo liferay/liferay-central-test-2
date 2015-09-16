@@ -516,13 +516,13 @@ public class JournalArticleIndexer
 			StringUtil.split(journalArticle.getTreePath(), CharPool.SLASH));
 		document.addKeyword(Field.VERSION, journalArticle.getVersion());
 
-		document.addKeyword("headListable", isHeadListable(journalArticle));
 		document.addKeyword(
 			"ddmStructureKey", journalArticle.getDDMStructureKey());
 		document.addKeyword(
 			"ddmTemplateKey", journalArticle.getDDMTemplateKey());
 		document.addDate("displayDate", journalArticle.getDisplayDate());
 		document.addKeyword("head", isHead(journalArticle));
+		document.addKeyword("headListable", isHeadListable(journalArticle));
 
 		addDDMStructureAttributes(document, journalArticle);
 
