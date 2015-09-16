@@ -21,8 +21,8 @@ long groupId = ParamUtil.getLong(request, "groupId");
 long[] selectedGroupIds = StringUtil.split(ParamUtil.getString(request, "selectedGroupIds"), 0L);
 long refererAssetEntryId = ParamUtil.getLong(request, "refererAssetEntryId");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
-boolean showNonindexable = ParamUtil.getBoolean(request, "showNonindexable");
 long subtypeSelectionId = ParamUtil.getLong(request, "subtypeSelectionId");
+boolean showNonindexable = ParamUtil.getBoolean(request, "showNonindexable");
 
 Boolean listable = null;
 
