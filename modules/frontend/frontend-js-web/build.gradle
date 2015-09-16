@@ -3,7 +3,7 @@ import com.liferay.gradle.util.FileUtil
 import com.liferay.gradle.util.copy.ReplaceLeadingPathAction
 import com.liferay.gradle.util.copy.StripPathSegmentsAction
 
-apply plugin: "com.liferay.cache"
+apply plugin: "com.liferay.task-cache"
 
 task buildAlloy(type: Copy)
 task buildAlloyBootstrap(type: Copy)
@@ -127,7 +127,7 @@ buildLfrAMDLoader {
 cache {
 	task(buildLfrAMDLoader) {
 		baseDir = buildLfrAMDLoader.destinationDir
-		cacheDir = ".cache"
+		cacheDir = ".task-cache"
 		include "loader.js"
 		testFile "build.gradle"
 	}
