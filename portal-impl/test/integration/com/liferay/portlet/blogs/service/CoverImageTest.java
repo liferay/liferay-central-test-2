@@ -362,7 +362,7 @@ public class CoverImageTest {
 	}
 
 	protected BlogsEntry updateBlogsEntry(
-			long entryId, ImageSelector coverImageSelector)
+			long blogsEntryId, ImageSelector coverImageSelector)
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -372,14 +372,15 @@ public class CoverImageTest {
 		ImageSelector smallImageSelector = null;
 
 		return BlogsEntryLocalServiceUtil.updateEntry(
-			_user.getUserId(), entryId, RandomTestUtil.randomString(),
+			_user.getUserId(), blogsEntryId, RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), new Date(), true, true,
 			new String[0], StringPool.BLANK, coverImageSelector,
 			smallImageSelector, serviceContext);
 	}
 
-	protected BlogsEntry updateBlogsEntry(long entryId, String coverImageTitle)
+	protected BlogsEntry updateBlogsEntry(
+			long blogsEntryId, String coverImageTitle)
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -392,7 +393,7 @@ public class CoverImageTest {
 		ImageSelector coverImageSelector = new ImageSelector(
 			fileEntry.getFileEntryId(), StringPool.BLANK, _IMAGE_CROP_REGION);
 
-		return updateBlogsEntry(entryId, coverImageSelector);
+		return updateBlogsEntry(blogsEntryId, coverImageSelector);
 	}
 
 	private static final String _IMAGE_CROP_REGION =
