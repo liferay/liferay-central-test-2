@@ -26,8 +26,8 @@
 			},
 			"type": "checkbox",
 			"validation": {
-				"expression": "Boolean2282",
-				"errorMessage": "You must check this box to continue."
+				"errorMessage": "You must check this box to continue.",
+				"expression": "Boolean2282"
 			},
 			"visibilityExpression": "true"
 		},
