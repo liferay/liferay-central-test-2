@@ -94,9 +94,9 @@ public class WikiNodeTrashHandler extends BaseWikiTrashHandler {
 			PortletRequest portletRequest, long classPK)
 		throws PortalException {
 
-		PortletURL portletURL = getRestoreURL(portletRequest, classPK, false);
-
 		WikiNode node = WikiNodeLocalServiceUtil.getNode(classPK);
+
+		PortletURL portletURL = getRestoreURL(portletRequest, classPK, false);
 
 		portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
@@ -209,10 +209,11 @@ public class WikiNodeTrashHandler extends BaseWikiTrashHandler {
 	}
 
 	protected PortletURL getRestoreURL(
-			PortletRequest portletRequest, long classPK, boolean containerModel)
+			PortletRequest portletRequest, long classPK,
+			boolean isContainerModel)
 		throws PortalException {
 
-		PortletURL portletURL = null;
+		String portletId = WikiPortletKeys.WIKI;
 
 		WikiNode node = WikiNodeLocalServiceUtil.getNode(classPK);
 
@@ -220,23 +221,22 @@ public class WikiNodeTrashHandler extends BaseWikiTrashHandler {
 			node.getGroupId(), WikiPortletKeys.WIKI);
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
-			portletURL = PortalUtil.getControlPanelPortletURL(
-				portletRequest, WikiPortletKeys.WIKI_ADMIN, 0,
-				PortletRequest.RENDER_PHASE);
+			portletId = WikiPortletKeys.WIKI_ADMIN;
 
-			if (!containerModel) {
-				portletURL.setParameter(
-					"struts_action", "/wiki_admin/view_all_pages");
-			}
+			plid = PortalUtil.getControlPanelPlid(portletRequest);
 		}
-		else {
-			portletURL = PortletURLFactoryUtil.create(
-				portletRequest, WikiPortletKeys.WIKI, plid,
-				PortletRequest.RENDER_PHASE);
 
-			if (!containerModel) {
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
+
+		if (!isContainerModel) {
+			if (portletId.equals(WikiPortletKeys.WIKI)) {
 				portletURL.setParameter(
 					"struts_action", "/wiki/view_all_pages");
+			}
+			else {
+				portletURL.setParameter(
+					"struts_action", "/wiki_admin/view_all_pages");
 			}
 		}
 

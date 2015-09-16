@@ -453,9 +453,9 @@ if (Validator.isNotNull(scriptContent)) {
 		function(event) {
 			var form = A.one('#<portlet:namespace />fm');
 
-			<portlet:renderURL var="refreshTemplateURL">
+			<portlet:actionURL name="refreshTemplate" var="refreshTemplateURL">
 				<portlet:param name="mvcPath" value="/edit_template.jsp" />
-			</portlet:renderURL>
+			</portlet:actionURL>
 
 			form.attr('action', '<%= refreshTemplateURL %>');
 

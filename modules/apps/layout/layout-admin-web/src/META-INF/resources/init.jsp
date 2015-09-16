@@ -109,6 +109,7 @@ page import="com.liferay.portal.util.PropsValues" %><%@
 page import="com.liferay.portal.util.RobotsUtil" %><%@
 page import="com.liferay.portal.util.WebKeys" %><%@
 page import="com.liferay.portal.webserver.WebServerServletTokenUtil" %><%@
+page import="com.liferay.portlet.PortletURLFactoryUtil" %><%@
 page import="com.liferay.portlet.PortletURLUtil" %><%@
 page import="com.liferay.portlet.documentlibrary.FileSizeException" %><%@
 page import="com.liferay.portlet.exportimport.lar.PortletDataHandlerKeys" %><%@
@@ -131,7 +132,6 @@ page import="java.util.HashSet" %><%@
 page import="java.util.List" %><%@
 page import="java.util.Locale" %><%@
 page import="java.util.Map" %><%@
-page import="java.util.ResourceBundle" %><%@
 page import="java.util.Set" %>
 
 <%@ page import="javax.portlet.PortletRequest" %><%@

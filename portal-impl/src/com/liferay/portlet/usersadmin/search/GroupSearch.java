@@ -17,13 +17,11 @@ package com.liferay.portlet.usersadmin.search;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
@@ -72,9 +70,6 @@ public class GroupSearch extends SearchContainer<Group> {
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					portletRequest);
 
-			String portletId = PortletProviderUtil.getPortletId(
-				User.class.getName(), PortletProvider.Action.VIEW);
-
 			String orderByCol = ParamUtil.getString(
 				portletRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
@@ -84,15 +79,16 @@ public class GroupSearch extends SearchContainer<Group> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					portletId, "groups-order-by-col", orderByCol);
+					PortletKeys.USERS_ADMIN, "groups-order-by-col", orderByCol);
 				preferences.setValue(
-					portletId, "groups-order-by-type", orderByType);
+					PortletKeys.USERS_ADMIN, "groups-order-by-type",
+					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					portletId, "groups-order-by-col", "name");
+					PortletKeys.USERS_ADMIN, "groups-order-by-col", "name");
 				orderByType = preferences.getValue(
-					portletId, "groups-order-by-type", "asc");
+					PortletKeys.USERS_ADMIN, "groups-order-by-type", "asc");
 			}
 
 			OrderByComparator<Group> orderByComparator =

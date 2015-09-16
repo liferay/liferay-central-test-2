@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -227,8 +228,9 @@ public abstract class BaseDDMDisplay implements DDMDisplay {
 		String portletId = PortletProviderUtil.getPortletId(
 			DDMStructure.class.getName(), PortletProvider.Action.VIEW);
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, portletId, 0, PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
+			getControlPanelPlid(liferayPortletRequest), portletId,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcPath", "/view.jsp");
 
@@ -289,6 +291,13 @@ public abstract class BaseDDMDisplay implements DDMDisplay {
 		return false;
 	}
 
+	protected long getControlPanelPlid(
+			LiferayPortletRequest liferayPortletRequest)
+		throws PortalException {
+
+		return PortalUtil.getControlPanelPlid(liferayPortletRequest);
+	}
+
 	protected String getDefaultEditTemplateTitle(Locale locale) {
 		return LanguageUtil.get(locale, "new-template");
 	}
@@ -306,8 +315,9 @@ public abstract class BaseDDMDisplay implements DDMDisplay {
 		String portletId = PortletProviderUtil.getPortletId(
 			DDMStructure.class.getName(), PortletProvider.Action.VIEW);
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, portletId, 0, PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
+			getControlPanelPlid(liferayPortletRequest), portletId,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcPath", "/view_template.jsp");
 		portletURL.setParameter("classNameId", String.valueOf(classNameId));

@@ -21,62 +21,56 @@ PanelAppRegistry panelAppRegistry = (PanelAppRegistry)request.getAttribute(Appli
 PanelCategory panelCategory = (PanelCategory)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY);
 PanelCategoryRegistry panelCategoryRegistry = (PanelCategoryRegistry)request.getAttribute(ApplicationListWebKeys.PANEL_CATEGORY_REGISTRY);
 
-List<PanelCategory> childPanelCategories = panelCategoryRegistry.getChildPanelCategories(panelCategory, permissionChecker, themeDisplay.getScopeGroup());
+String sitesPanelCategoryKey = PanelCategoryKeys.SITE_ADMINISTRATION;
+
+if (Validator.isNotNull(themeDisplay.getPpid())) {
+	PanelCategoryHelper panelCategoryHelper = new PanelCategoryHelper(panelAppRegistry, panelCategoryRegistry);
+
+	for (PanelCategory curPanelCategory : panelCategoryRegistry.getChildPanelCategories(panelCategory)) {
+		if (panelCategoryHelper.containsPortlet(themeDisplay.getPpid(), curPanelCategory)) {
+			sitesPanelCategoryKey = curPanelCategory.getKey();
+
+			break;
+		}
+	}
+}
 %>
 
-<c:if test="<%= !childPanelCategories.isEmpty() %>">
+<ul class="hide nav nav-tabs">
 
 	<%
-	PanelCategory firstPanelCategory = childPanelCategories.get(0);
-
-	String sitesPanelCategoryKey = firstPanelCategory.getKey();
-
-	if ((childPanelCategories.size() > 1) && Validator.isNotNull(themeDisplay.getPpid())) {
-		PanelCategoryHelper panelCategoryHelper = new PanelCategoryHelper(panelAppRegistry, panelCategoryRegistry);
-
-		for (PanelCategory curPanelCategory : childPanelCategories) {
-			if (panelCategoryHelper.containsPortlet(themeDisplay.getPpid(), curPanelCategory)) {
-				sitesPanelCategoryKey = curPanelCategory.getKey();
-
-				break;
-			}
+	for (PanelCategory childPanelCategory : panelCategoryRegistry.getChildPanelCategories(panelCategory)) {
+		if (!childPanelCategory.hasAccessPermission(permissionChecker, themeDisplay.getScopeGroup())) {
+			continue;
 		}
+	%>
+
+		<li class="col-xs-4 <%= sitesPanelCategoryKey.equals(childPanelCategory.getKey()) ? "active" : StringPool.BLANK %>">
+			<a aria-expanded="true" data-toggle="tab" href="#<portlet:namespace /><%= childPanelCategory.getKey() %>" id="<portlet:namespace /><%= childPanelCategory.getKey() %>TabLink">
+				<div class="product-menu-tab-text">
+					<%= childPanelCategory.getLabel(locale) %>
+				</div>
+			</a>
+		</li>
+
+	<%
 	}
 	%>
 
-	<ul class="hide nav nav-tabs">
+</ul>
 
-		<%
-		for (PanelCategory childPanelCategory : childPanelCategories) {
-		%>
+<div class="tab-content">
 
-			<li class="col-xs-4 <%= (sitesPanelCategoryKey.equals(childPanelCategory.getKey())) ? "active" : StringPool.BLANK %>">
-				<a aria-expanded="true" data-toggle="tab" href="#<portlet:namespace /><%= childPanelCategory.getKey() %>" id="<portlet:namespace /><%= childPanelCategory.getKey() %>TabLink">
-					<div class="product-menu-tab-text">
-						<%= childPanelCategory.getLabel(locale) %>
-					</div>
-				</a>
-			</li>
+	<%
+	for (PanelCategory childPanelCategory : panelCategoryRegistry.getChildPanelCategories(panelCategory)) {
+	%>
 
-		<%
-		}
-		%>
+		<div class="fade in tab-pane <%= sitesPanelCategoryKey.equals(childPanelCategory.getKey()) ? "active" : StringPool.BLANK %>" id="<portlet:namespace /><%= childPanelCategory.getKey() %>">
+			<liferay-application-list:panel-content panelCategory="<%= childPanelCategory %>" />
+		</div>
 
-	</ul>
+	<%
+	}
+	%>
 
-	<div class="tab-content">
-
-		<%
-		for (PanelCategory childPanelCategory : childPanelCategories) {
-		%>
-
-			<div class="fade in tab-pane <%= (sitesPanelCategoryKey.equals(childPanelCategory.getKey())) ? "active" : StringPool.BLANK %>" id="<portlet:namespace /><%= childPanelCategory.getKey() %>">
-				<liferay-application-list:panel-content panelCategory="<%= childPanelCategory %>" />
-			</div>
-
-		<%
-		}
-		%>
-
-	</div>
-</c:if>
+</div>

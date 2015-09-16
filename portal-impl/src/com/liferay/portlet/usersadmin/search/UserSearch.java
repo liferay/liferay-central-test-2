@@ -17,14 +17,13 @@ package com.liferay.portlet.usersadmin.search;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
@@ -83,11 +82,9 @@ public class UserSearch extends SearchContainer<User> {
 		UserDisplayTerms displayTerms = (UserDisplayTerms)getDisplayTerms();
 		UserSearchTerms searchTerms = (UserSearchTerms)getSearchTerms();
 
-		String portletId = PortletProviderUtil.getPortletId(
-			User.class.getName(), PortletProvider.Action.VIEW);
 		String portletName = portletConfig.getPortletName();
 
-		if (!portletId.equals(portletName)) {
+		if (!portletName.equals(PortletKeys.USERS_ADMIN)) {
 			displayTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 			searchTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 		}
@@ -128,15 +125,16 @@ public class UserSearch extends SearchContainer<User> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					portletId, "users-order-by-col", orderByCol);
+					PortletKeys.USERS_ADMIN, "users-order-by-col", orderByCol);
 				preferences.setValue(
-					portletId, "users-order-by-type", orderByType);
+					PortletKeys.USERS_ADMIN, "users-order-by-type",
+					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					portletId, "users-order-by-col", "last-name");
+					PortletKeys.USERS_ADMIN, "users-order-by-col", "last-name");
 				orderByType = preferences.getValue(
-					portletId, "users-order-by-type", "asc");
+					PortletKeys.USERS_ADMIN, "users-order-by-type", "asc");
 			}
 
 			OrderByComparator<User> orderByComparator =

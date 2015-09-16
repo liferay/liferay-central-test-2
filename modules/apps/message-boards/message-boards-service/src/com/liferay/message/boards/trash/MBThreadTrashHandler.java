@@ -123,9 +123,9 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 			PortletRequest portletRequest, long classPK)
 		throws PortalException {
 
-		PortletURL portletURL = getRestoreURL(portletRequest, classPK, false);
-
 		MBThread thread = _mbThreadLocalService.getThread(classPK);
+
+		PortletURL portletURL = getRestoreURL(portletRequest, classPK, false);
 
 		portletURL.setParameter(
 			"mbCategoryId", String.valueOf(thread.getCategoryId()));
@@ -246,14 +246,14 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 	}
 
 	protected PortletURL getRestoreURL(
-			PortletRequest portletRequest, long classPK, boolean containerModel)
+			PortletRequest portletRequest, long classPK,
+			boolean isContainerModel)
 		throws PortalException {
 
-		PortletURL portletURL = null;
-
-		MBThread thread = _mbThreadLocalService.getThread(classPK);
 		String portletId = PortletProviderUtil.getPortletId(
 			MBThread.class.getName(), PortletProvider.Action.EDIT);
+
+		MBThread thread = _mbThreadLocalService.getThread(classPK);
 
 		long plid = PortalUtil.getPlidFromPortletId(
 			thread.getGroupId(), portletId);
@@ -262,15 +262,13 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 			portletId = PortletProviderUtil.getPortletId(
 				MBThread.class.getName(), PortletProvider.Action.MANAGE);
 
-			portletURL = PortalUtil.getControlPanelPortletURL(
-				portletRequest, portletId, 0, PortletRequest.RENDER_PHASE);
-		}
-		else {
-			portletURL = PortletURLFactoryUtil.create(
-				portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
+			plid = PortalUtil.getControlPanelPlid(portletRequest);
 		}
 
-		if (containerModel) {
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
+
+		if (isContainerModel) {
 			portletURL.setParameter(
 				"mvcRenderCommandName", "/message_boards/view");
 		}

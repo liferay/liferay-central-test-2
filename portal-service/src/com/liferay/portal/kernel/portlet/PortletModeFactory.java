@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.util.Validator;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,10 +43,6 @@ public class PortletModeFactory {
 	}
 
 	private PortletMode _getPortletMode(String name) {
-		if (Validator.isNull(name)) {
-			return PortletMode.VIEW;
-		}
-
 		PortletMode portletMode = _portletModes.get(name);
 
 		if (portletMode == null) {

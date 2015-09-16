@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.ServiceContext;
@@ -27,6 +28,7 @@ import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -171,16 +173,19 @@ public abstract class BaseWorkflowHandler<T> implements WorkflowHandler<T> {
 		throws PortalException {
 
 		try {
-			PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-				serviceContext.getRequest(), PortletKeys.MY_WORKFLOW_TASK, 0,
+			LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
+				serviceContext.getRequest(), PortletKeys.MY_WORKFLOW_TASK,
+				PortalUtil.getControlPanelPlid(serviceContext.getCompanyId()),
 				PortletRequest.RENDER_PHASE);
 
-			portletURL.setParameter("mvcPath", "/edit_workflow_task.jsp");
-			portletURL.setParameter(
+			liferayPortletURL.setControlPanelCategory("my");
+			liferayPortletURL.setParameter(
+				"mvcPath", "/edit_workflow_task.jsp");
+			liferayPortletURL.setParameter(
 				"workflowTaskId", String.valueOf(workflowTaskId));
-			portletURL.setWindowState(WindowState.MAXIMIZED);
+			liferayPortletURL.setWindowState(WindowState.MAXIMIZED);
 
-			return portletURL.toString();
+			return liferayPortletURL.toString();
 		}
 		catch (WindowStateException wse) {
 			throw new PortalException(wse);

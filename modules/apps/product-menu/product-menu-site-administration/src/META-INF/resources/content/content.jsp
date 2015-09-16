@@ -42,67 +42,57 @@ String panelPageCategoryId = "panel-manage-" + StringUtil.replace(panelCategory.
 
 		scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curSite.getGroupId(), false));
 		scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curSite.getGroupId(), true));
+
+		String scopeLabel = null;
+
+		Group curScopeGroup = themeDisplay.getScopeGroup();
+
+		if (curScopeGroup.isLayout()) {
+			Layout scopeLayout = LayoutLocalServiceUtil.getLayout(curScopeGroup.getClassPK());
+
+			scopeLabel = StringUtil.shorten(scopeLayout.getName(locale), 20);
+		}
+		else {
+			scopeLabel = LanguageUtil.get(request, "default");
+		}
 		%>
 
 		<c:if test="<%= !scopeLayouts.isEmpty() %>">
-			<ul class="nav nav-equal-height nav-nested">
-				<li>
-					<div class="nav-equal-height-heading">
+			<div class="lfr-title-scope-selector nobr">
+				<liferay-ui:message key="scope" />:
+				<liferay-ui:icon-menu direction="down" icon="" message="<%= scopeLabel %>">
 
-						<%
-						String scopeLabel = null;
+					<%
+					Map<String, Object> data = new HashMap<String, Object>();
 
-						Group curScopeGroup = themeDisplay.getScopeGroup();
+					data.put("navigation", Boolean.TRUE.toString());
+					%>
 
-						if (curScopeGroup.isLayout()) {
-							scopeLabel = StringUtil.shorten(curScopeGroup.getDescriptiveName(locale), 20);
-						}
-						else {
-							scopeLabel = LanguageUtil.get(request, "default-scope");
-						}
-						%>
+					<liferay-ui:icon
+						data="<%= data %>"
+						iconCssClass="<%= curSite.getIconCssClass() %>"
+						message="default"
+						url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curSite.getGroupId()) %>'
+					/>
 
-						<span><%= scopeLabel %></span>
+					<%
+					for (Layout curScopeLayout : scopeLayouts) {
+						Group scopeGroup = curScopeLayout.getScopeGroup();
+					%>
 
-						<span class="nav-equal-height-heading-field">
-							<liferay-ui:icon-menu direction="down" icon="../aui/cog" message="" showArrow="<%= false %>">
+						<liferay-ui:icon
+							data="<%= data %>"
+							iconCssClass="<%= scopeGroup.getIconCssClass() %>"
+							message="<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>"
+							url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", scopeGroup.getGroupId()) %>'
+						/>
 
-								<%
-								Map<String, Object> data = new HashMap<String, Object>();
+					<%
+					}
+					%>
 
-								data.put("navigation", Boolean.TRUE.toString());
-
-								PortletURL portletURL = PortalUtil.getControlPanelPortletURL(request, curSite, themeDisplay.getPpid(), 0, PortletRequest.RENDER_PHASE);
-								%>
-
-								<liferay-ui:icon
-									data="<%= data %>"
-									iconCssClass="<%= curSite.getIconCssClass() %>"
-									message="default-scope"
-									url="<%= portletURL.toString() %>"
-								/>
-
-								<%
-								for (Layout curScopeLayout : scopeLayouts) {
-									Group scopeGroup = curScopeLayout.getScopeGroup();
-
-									portletURL = PortalUtil.getControlPanelPortletURL(request, scopeGroup, themeDisplay.getPpid(), 0, PortletRequest.RENDER_PHASE);
-								%>
-
-									<liferay-ui:icon
-										data="<%= data %>"
-										iconCssClass="<%= scopeGroup.getIconCssClass() %>"
-										message="<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>"
-										url="<%= portletURL.toString() %>"
-									/>
-
-								<%
-								}
-								%>
-
-							</liferay-ui:icon-menu>
-						</span>
-					</div>
+				</liferay-ui:icon-menu>
+			</div>
 		</c:if>
 
 		<ul aria-labelledby="<%= panelPageCategoryId %>" class="nav nav-equal-height" role="menu">
@@ -123,10 +113,5 @@ String panelPageCategoryId = "panel-manage-" + StringUtil.replace(panelCategory.
 			%>
 
 		</ul>
-
-		<c:if test="<%= !scopeLayouts.isEmpty() %>">
-				</ul>
-			</li>
-		</c:if>
 	</div>
 </div>

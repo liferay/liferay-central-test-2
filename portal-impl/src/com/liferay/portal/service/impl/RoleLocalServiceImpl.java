@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.cache.ThreadLocalCache;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
@@ -63,7 +61,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.admin.util.PortalMyAccountApplicationType;
 import com.liferay.portlet.exportimport.lar.ExportImportThreadLocal;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
@@ -1429,12 +1426,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	protected String[] getDefaultControlPanelPortlets() {
-		String myAccountPortletId = PortletProviderUtil.getPortletId(
-			PortalMyAccountApplicationType.MyAccount.CLASS_NAME,
-			PortletProvider.Action.VIEW);
-
 		return new String[] {
-			myAccountPortletId, PortletKeys.MY_PAGES,
+			PortletKeys.MY_ACCOUNT, PortletKeys.MY_PAGES,
 			PortletKeys.MY_WORKFLOW_INSTANCE, PortletKeys.MY_WORKFLOW_TASK
 		};
 	}

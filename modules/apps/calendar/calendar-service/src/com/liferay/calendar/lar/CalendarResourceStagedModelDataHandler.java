@@ -228,11 +228,11 @@ public class CalendarResourceStagedModelDataHandler
 			CalendarResource calendarResource)
 		throws Exception {
 
-		Group sourceGroup = GroupLocalServiceUtil.fetchGroup(
-			portletDataContext.getSourceGroupId());
-
 		String calendarResourceName = calendarResource.getName(
 			LocaleUtil.getDefault());
+
+		Group sourceGroup = GroupLocalServiceUtil.fetchGroup(
+			portletDataContext.getSourceGroupId());
 
 		if ((sourceGroup == null) ||
 			!calendarResourceName.equals(sourceGroup.getDescriptiveName())) {
@@ -246,7 +246,7 @@ public class CalendarResourceStagedModelDataHandler
 			portletDataContext.getScopeGroupId());
 
 		calendarResourceNameMap.put(
-			LocaleUtil.getDefault(), scopeGroup.getDescriptiveName());
+			LocaleUtil.getDefault(), scopeGroup.getName());
 
 		return calendarResourceNameMap;
 	}

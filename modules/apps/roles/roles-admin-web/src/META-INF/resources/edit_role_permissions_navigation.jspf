@@ -53,9 +53,7 @@
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_ORGANIZATION %>">
 
 					<%
-					String portletId = PortletProviderUtil.getPortletId(User.class.getName(), PortletProvider.Action.VIEW);
-
-					Portlet usersAdminPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
+					Portlet usersAdminPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.USERS_ADMIN);
 
 					editPermissionsResourceURL.setParameter("portletResource", usersAdminPortlet.getPortletId());
 

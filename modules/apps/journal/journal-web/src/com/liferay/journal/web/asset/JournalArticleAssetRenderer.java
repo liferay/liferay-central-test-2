@@ -223,9 +223,9 @@ public class JournalArticleAssetRenderer
 			LiferayPortletResponse liferayPortletResponse)
 		throws Exception {
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, JournalPortletKeys.JOURNAL, 0,
-			PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
+			getControlPanelPlid(liferayPortletRequest),
+			JournalPortletKeys.JOURNAL, PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcPath", "/edit_article.jsp");
 		portletURL.setParameter(
@@ -243,11 +243,10 @@ public class JournalArticleAssetRenderer
 			LiferayPortletResponse liferayPortletResponse)
 		throws Exception {
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, JournalPortletKeys.JOURNAL, 0,
-			PortletRequest.RESOURCE_PHASE);
-
-		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
+		LiferayPortletURL liferayPortletURL =
+			liferayPortletResponse.createLiferayPortletURL(
+				getControlPanelPlid(liferayPortletRequest),
+				JournalPortletKeys.JOURNAL, PortletRequest.RESOURCE_PHASE);
 
 		liferayPortletURL.setParameter(
 			"groupId", String.valueOf(_article.getGroupId()));
@@ -268,9 +267,9 @@ public class JournalArticleAssetRenderer
 			LiferayPortletResponse liferayPortletResponse)
 		throws Exception {
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, JournalPortletKeys.JOURNAL, 0,
-			PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
+			getControlPanelPlid(liferayPortletRequest),
+			JournalPortletKeys.JOURNAL, PortletRequest.RENDER_PHASE);
 
 		JournalArticle previousApprovedArticle =
 			JournalArticleLocalServiceUtil.getPreviousApprovedArticle(_article);

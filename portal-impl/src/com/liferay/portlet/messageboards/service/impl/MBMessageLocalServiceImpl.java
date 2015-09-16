@@ -70,6 +70,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.SubscriptionSender;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
@@ -1975,11 +1976,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"message_boards/view_message/" + message.getMessageId();
 		}
 		else {
+			long controlPanelPlid = PortalUtil.getControlPanelPlid(
+				serviceContext.getCompanyId());
+
 			portletId = PortletProviderUtil.getPortletId(
 				MBMessage.class.getName(), PortletProvider.Action.MANAGE);
 
-			PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-				request, portletId, 0, PortletRequest.RENDER_PHASE);
+			PortletURL portletURL = PortletURLFactoryUtil.create(
+				request, portletId, controlPanelPlid,
+				PortletRequest.RENDER_PHASE);
 
 			portletURL.setParameter(
 				"mvcRenderCommandName", "/message_boards_admin/view_message");

@@ -17,12 +17,10 @@ package com.liferay.trash.web.search;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.trash.model.TrashEntry;
@@ -70,9 +68,6 @@ public class EntrySearch extends SearchContainer<TrashEntry> {
 				PortletPreferencesFactoryUtil.getPortalPreferences(
 					portletRequest);
 
-			String portletId = PortletProviderUtil.getPortletId(
-				User.class.getName(), PortletProvider.Action.VIEW);
-
 			String orderByCol = ParamUtil.getString(
 				portletRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
@@ -82,15 +77,18 @@ public class EntrySearch extends SearchContainer<TrashEntry> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					portletId, "entries-order-by-col", orderByCol);
+					PortletKeys.USERS_ADMIN, "entries-order-by-col",
+					orderByCol);
 				preferences.setValue(
-					portletId, "entries-order-by-type", orderByType);
+					PortletKeys.USERS_ADMIN, "entries-order-by-type",
+					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					portletId, "entries-order-by-col", "removed-date");
+					PortletKeys.USERS_ADMIN, "entries-order-by-col",
+					"removed-date");
 				orderByType = preferences.getValue(
-					portletId, "entries-order-by-type", "asc");
+					PortletKeys.USERS_ADMIN, "entries-order-by-type", "asc");
 			}
 
 			OrderByComparator<TrashEntry> orderByComparator =

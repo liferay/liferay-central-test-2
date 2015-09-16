@@ -209,10 +209,12 @@ public class SiteAdminPortlet extends MVCPortlet {
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
 		if (liveGroupId <= 0) {
+			themeDisplay.setScopeGroupId(group.getGroupId());
+
 			PortletURL siteAdministrationURL =
-				PortalUtil.getControlPanelPortletURL(
-					actionRequest, group, SiteAdminPortletKeys.SITE_SETTINGS, 0,
-					PortletRequest.RENDER_PHASE);
+				PortalUtil.getSiteAdministrationURL(
+					actionRequest, themeDisplay,
+					SiteAdminPortletKeys.SITE_SETTINGS);
 
 			String controlPanelURL = HttpUtil.setParameter(
 				themeDisplay.getURLControlPanel(), "p_p_id",

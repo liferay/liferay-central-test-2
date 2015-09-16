@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseJSPAssetRenderer;
@@ -172,9 +171,9 @@ public class BookmarksFolderAssetRenderer
 			LiferayPortletResponse liferayPortletResponse)
 		throws Exception {
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, BookmarksPortletKeys.BOOKMARKS_ADMIN, 0,
-			PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
+			getControlPanelPlid(liferayPortletRequest),
+			BookmarksPortletKeys.BOOKMARKS_ADMIN, PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/bookmarks/edit_folder");
 		portletURL.setParameter(

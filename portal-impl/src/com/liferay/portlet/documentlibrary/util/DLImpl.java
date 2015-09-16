@@ -214,13 +214,19 @@ public class DLImpl implements DL {
 
 	@Override
 	public String getDLFileEntryControlPanelLink(
-		PortletRequest portletRequest, long fileEntryId) {
+			PortletRequest portletRequest, long fileEntryId)
+		throws PortalException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String portletId = PortletProviderUtil.getPortletId(
 			FileEntry.class.getName(), PortletProvider.Action.MANAGE);
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			portletRequest, portletId, 0, PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			portletRequest, portletId,
+			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(
 			"mvcRenderCommandName", "/document_library/view_file_entry");
@@ -231,13 +237,19 @@ public class DLImpl implements DL {
 
 	@Override
 	public String getDLFolderControlPanelLink(
-		PortletRequest portletRequest, long folderId) {
+			PortletRequest portletRequest, long folderId)
+		throws PortalException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String portletId = PortletProviderUtil.getPortletId(
 			Folder.class.getName(), PortletProvider.Action.MANAGE);
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			portletRequest, portletId, 0, PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			portletRequest, portletId,
+			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(
 			"mvcRenderCommandName", "/document_library/view");
@@ -1118,24 +1130,25 @@ public class DLImpl implements DL {
 			return StringPool.BLANK;
 		}
 
-		PortletURL portletURL = null;
-
 		long plid = serviceContext.getPlid();
+
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
+
 		String portletId = PortletProviderUtil.getPortletId(
 			FileEntry.class.getName(), PortletProvider.Action.VIEW);
 
-		if ((plid == controlPanelPlid) ||
-			(plid == LayoutConstants.DEFAULT_PLID)) {
+		if (plid == controlPanelPlid) {
+			plid = PortalUtil.getPlidFromPortletId(
+				dlFileVersion.getGroupId(), portletId);
+		}
 
-			portletURL = PortalUtil.getControlPanelPortletURL(
-				request, portletId, 0, PortletRequest.RENDER_PHASE);
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			plid = controlPanelPlid;
 		}
-		else {
-			portletURL = PortletURLFactoryUtil.create(
-				request, portletId, plid, PortletRequest.RENDER_PHASE);
-		}
+
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			request, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(
 			"mvcRenderCommandName", "/document_library/view_file_entry");

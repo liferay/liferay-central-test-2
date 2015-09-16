@@ -51,9 +51,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			<%
 			String rowURL = null;
 
-			Group group = layoutSetPrototype.getGroup();
+			ThemeDisplay siteThemeDisplay = (ThemeDisplay)themeDisplay.clone();
 
-			PortletURL siteAdministrationURL = group.getAdministrationURL(themeDisplay);
+			siteThemeDisplay.setScopeGroupId(layoutSetPrototype.getGroupId());
+
+			PortletURL siteAdministrationURL = PortalUtil.getSiteAdministrationURL(request, siteThemeDisplay);
 
 			if (siteAdministrationURL != null) {
 				rowURL = siteAdministrationURL.toString();

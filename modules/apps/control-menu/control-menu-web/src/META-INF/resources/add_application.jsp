@@ -163,11 +163,13 @@ refererURL.setParameter("updateLayout", "true");
 		<c:if test="<%= !layout.isTypePanel() && permissionChecker.isOmniadmin() && PortletLocalServiceUtil.hasPortlet(themeDisplay.getCompanyId(), PortletKeys.MARKETPLACE_STORE) %>">
 
 			<%
-			PortletURL marketplaceURL = PortalUtil.getControlPanelPortletURL(request, PortletKeys.MARKETPLACE_STORE, 0, PortletRequest.RENDER_PHASE);
+			long controlPanelPlid = PortalUtil.getControlPanelPlid(company.getCompanyId());
+
+			PortletURLImpl marketplaceURL = new PortletURLImpl(request, PortletKeys.MARKETPLACE_STORE, controlPanelPlid, PortletRequest.RENDER_PHASE);
 			%>
 
 			<p class="lfr-install-more">
-				<aui:a cssClass="btn btn-primary" href="<%= marketplaceURL.toString() %>" label="install-more-applications" />
+				<aui:a cssClass="btn btn-primary" href='<%= HttpUtil.removeParameter(marketplaceURL.toString(), "controlPanelCategory") %>' label="install-more-applications" />
 			</p>
 		</c:if>
 	</div>

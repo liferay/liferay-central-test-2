@@ -50,8 +50,6 @@ public class LayoutTypeControllerImpl implements LayoutTypeController {
 
 		Filter filter = new Filter(type);
 
-		_browsable = GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.LAYOUT_BROWSABLE, filter), true);
 		_configurationActionDelete = StringUtil.split(
 			GetterUtil.getString(
 				PropsUtil.get(
@@ -173,11 +171,6 @@ public class LayoutTypeControllerImpl implements LayoutTypeController {
 	}
 
 	@Override
-	public boolean isBrowsable() {
-		return _browsable;
-	}
-
-	@Override
 	public boolean isFirstPageable() {
 		return _firstPageable;
 	}
@@ -217,7 +210,6 @@ public class LayoutTypeControllerImpl implements LayoutTypeController {
 		return StrutsUtil.TEXT_HTML_DIR + _editPage;
 	}
 
-	private final boolean _browsable;
 	private final String[] _configurationActionDelete;
 	private final String[] _configurationActionUpdate;
 	private final String _editPage;

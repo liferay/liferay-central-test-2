@@ -47,7 +47,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.admin.util.PortalMyAccountApplicationType;
 import com.liferay.portlet.exportimport.staging.StagingUtil;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 
@@ -919,12 +918,9 @@ public class ThemeDisplay
 	@JSON(include = false)
 	public PortletURL getURLMyAccount() {
 		if (_urlMyAccount == null) {
-			String portletId = PortletProviderUtil.getPortletId(
-				PortalMyAccountApplicationType.MyAccount.CLASS_NAME,
-				PortletProvider.Action.VIEW);
-
 			_urlMyAccount = PortalUtil.getControlPanelPortletURL(
-				getRequest(), portletId, 0, PortletRequest.RENDER_PHASE);
+				getRequest(), PortletKeys.MY_ACCOUNT, 0,
+				PortletRequest.RENDER_PHASE);
 		}
 
 		return _urlMyAccount;

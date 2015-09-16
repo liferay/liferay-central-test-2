@@ -25,17 +25,9 @@
 	</style>
 
 	<div class="breadcrumb breadcrumb-horizontal">
-	    <ul class="breadcrumb">
+	    <ul>
 		    <#list entries as entry>
-				<li>
-					<a
-
-					<#if entry.isBrowsable()>
-						href="${entry.getURL()!""}"
-					</#if>
-
-					>${htmlUtil.escape(entry.getTitle())}</a>
-				</li>
+			    <li><a href="${entry.getURL()!""}">${htmlUtil.escape(entry.getTitle())}</a></li>
 		    </#list>
 		</ul>
 	</div>

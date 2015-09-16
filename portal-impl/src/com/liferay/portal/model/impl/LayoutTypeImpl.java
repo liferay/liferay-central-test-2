@@ -93,11 +93,6 @@ public class LayoutTypeImpl implements LayoutType {
 	}
 
 	@Override
-	public boolean isBrowsable() {
-		return _layoutTypeController.isBrowsable();
-	}
-
-	@Override
 	public boolean isFirstPageable() {
 		return _layoutTypeController.isFirstPageable();
 	}

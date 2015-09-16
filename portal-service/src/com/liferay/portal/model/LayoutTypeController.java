@@ -40,8 +40,6 @@ public interface LayoutTypeController extends Serializable {
 			Layout layout)
 		throws Exception;
 
-	public boolean isBrowsable();
-
 	public boolean isFirstPageable();
 
 	public boolean isParentable();

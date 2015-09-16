@@ -665,35 +665,19 @@ public class PortalUtil {
 	}
 
 	public static PortletURL getControlPanelPortletURL(
-		HttpServletRequest request, Group group, String portletId,
-		long refererPlid, String lifecycle) {
-
-		return getPortal().getControlPanelPortletURL(
-			request, group, portletId, refererPlid, lifecycle);
-	}
-
-	public static PortletURL getControlPanelPortletURL(
-		HttpServletRequest request, String portletId, long refererPlid,
+		HttpServletRequest request, String portletId, long referrerPlid,
 		String lifecycle) {
 
 		return getPortal().getControlPanelPortletURL(
-			request, portletId, refererPlid, lifecycle);
+			request, portletId, referrerPlid, lifecycle);
 	}
 
 	public static PortletURL getControlPanelPortletURL(
-		PortletRequest portletRequest, Group group, String portletId,
-		long refererPlid, String lifecycle) {
-
-		return getPortal().getControlPanelPortletURL(
-			portletRequest, group, portletId, refererPlid, lifecycle);
-	}
-
-	public static PortletURL getControlPanelPortletURL(
-		PortletRequest portletRequest, String portletId, long refererPlid,
+		PortletRequest portletRequest, String portletId, long referrerPlid,
 		String lifecycle) {
 
 		return getPortal().getControlPanelPortletURL(
-			portletRequest, portletId, refererPlid, lifecycle);
+			portletRequest, portletId, referrerPlid, lifecycle);
 	}
 
 	public static String getCreateAccountURL(
@@ -1814,36 +1798,38 @@ public class PortalUtil {
 		return getPortal().getSiteAdministrationCategoriesMap(request);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
-	 *             long, String)}
-	 */
-	@Deprecated
 	public static PortletURL getSiteAdministrationURL(
 		HttpServletRequest request, ThemeDisplay themeDisplay) {
 
 		return getPortal().getSiteAdministrationURL(request, themeDisplay);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
-	 *             long, String)}
-	 */
-	@Deprecated
 	public static PortletURL getSiteAdministrationURL(
 		HttpServletRequest request, ThemeDisplay themeDisplay,
-		String portletId) {
+		String portletName) {
 
 		return getPortal().getSiteAdministrationURL(
-			request, themeDisplay, portletId);
+			request, themeDisplay, portletName);
+	}
+
+	public static PortletURL getSiteAdministrationURL(
+		PortletRequest portletRequest, ThemeDisplay themeDisplay) {
+
+		return getPortal().getSiteAdministrationURL(
+			portletRequest, themeDisplay);
+	}
+
+	public static PortletURL getSiteAdministrationURL(
+		PortletRequest portletRequest, ThemeDisplay themeDisplay,
+		String portletName) {
+
+		return getPortal().getSiteAdministrationURL(
+			portletRequest, themeDisplay, portletName);
 	}
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
-	 *             long, String)}
+	 *             #getSiteAdministrationURL(PortletRequest, themeDisplay)}
 	 */
 	@Deprecated
 	public static PortletURL getSiteAdministrationURL(
@@ -1855,8 +1841,8 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getControlPanelPortletURL(PortletRequest, Group, String,
-	 *             long, String)}
+	 *             #getSiteAdministrationURL(PortletRequest, themeDisplay,
+	 *             String)}
 	 */
 	@Deprecated
 	public static PortletURL getSiteAdministrationURL(

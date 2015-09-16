@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -76,8 +77,12 @@ public class BookmarksUtil {
 			PortletRequest portletRequest, long folderId)
 		throws PortalException {
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			portletRequest, BookmarksPortletKeys.BOOKMARKS_ADMIN, 0,
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			portletRequest, BookmarksPortletKeys.BOOKMARKS_ADMIN,
+			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/bookmarks/view");

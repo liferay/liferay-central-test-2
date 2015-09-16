@@ -3,7 +3,6 @@
 
 <project>
 	<path id="plugins.includes.path">
-		<dirset dir="layout-type-controller" includes="*" />
 		<dirset dir="portlet-configuration-icon" includes="*" />
 	</path>
 

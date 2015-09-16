@@ -3,7 +3,6 @@
 
 <project>
 	<path id="plugins.includes.path">
-		<dirset dir="addons/layout-type-controller" includes="*" />
 		<dirset dir="addons/portlet-configuration-icon" includes="*" />
 		<dirset dir="apps/amazon-rankings" includes="*" />
 		<dirset dir="apps/announcements" includes="*" />
@@ -15,6 +14,7 @@
 		<dirset dir="apps/comment" includes="*" />
 		<dirset dir="apps/configuration-admin" includes="*" />
 		<dirset dir="apps/control-menu" includes="*" />
+		<dirset dir="apps/control-panel" includes="*" />
 		<dirset dir="apps/currency-converter" includes="*" />
 		<dirset dir="apps/dictionary" includes="*" />
 		<dirset dir="apps/document-library" includes="*" />
@@ -36,7 +36,6 @@
 		<dirset dir="apps/message-boards" includes="*" />
 		<dirset dir="apps/microblogs" includes="*" />
 		<dirset dir="apps/mobile-device-rules" includes="*" />
-		<dirset dir="apps/my-account" includes="*" />
 		<dirset dir="apps/nested-portlets" includes="*" />
 		<dirset dir="apps/network-utilities" includes="*" />
 		<dirset dir="apps/password-generator" includes="*" />
