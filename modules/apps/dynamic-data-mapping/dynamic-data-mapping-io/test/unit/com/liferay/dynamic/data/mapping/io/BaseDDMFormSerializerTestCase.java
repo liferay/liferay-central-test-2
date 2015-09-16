@@ -139,11 +139,10 @@ public abstract class BaseDDMFormSerializerTestCase extends BaseDDMTestCase {
 		DDMFormFieldValidation ddmFormFieldValidation =
 			new DDMFormFieldValidation();
 
-		ddmFormFieldValidation.setExpression(
-			"!" + ddmFormField.getName() + ".isEmpty()");
-
 		ddmFormFieldValidation.setErrorMessage(
 			"Field " + ddmFormField.getName() + " must not be empty.");
+		ddmFormFieldValidation.setExpression(
+			"!" + ddmFormField.getName() + ".isEmpty()");
 
 		ddmFormField.setDDMFormFieldValidation(ddmFormFieldValidation);
 	}
