@@ -467,15 +467,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		blogsEntryPersistence.remove(entry);
 
-		// Cover Image
-
-		long coverImageFileEntryId = entry.getCoverImageFileEntryId();
-
-		if (coverImageFileEntryId != 0) {
-			PortletFileRepositoryUtil.deletePortletFileEntry(
-				coverImageFileEntryId);
-		}
-
 		// Resources
 
 		resourceLocalService.deleteResource(
@@ -501,6 +492,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		assetEntryLocalService.deleteEntry(
 			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Attachments
+
+		long coverImageFileEntryId = entry.getCoverImageFileEntryId();
+
+		if (coverImageFileEntryId != 0) {
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				coverImageFileEntryId);
+		}
 
 		// Comment
 
