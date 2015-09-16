@@ -2291,7 +2291,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	protected CommentManager commentManager =
 		CommentManagerUtil.getCommentManager();
 
-	private static final String _COVER_IMAGE_FOLDER_NAME = "CoverImage";
+	private static final String _COVER_IMAGE_FOLDER_NAME = "Cover Image";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		BlogsEntryLocalServiceImpl.class);
