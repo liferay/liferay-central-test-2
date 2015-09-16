@@ -33,8 +33,8 @@
 					},
 					"type": "ddm-integer",
 					"validation" : {
-						"expression": "Integer == 0",
-						"errorMessage": "Integer must be equal to zero."
+						"errorMessage": "Integer must be equal to zero.",
+						"expression": "Integer == 0"
 					},
 					"visibilityExpression": "false"
 				}
@@ -51,8 +51,8 @@
 			},
 			"type": "text",
 			"validation" : {
-				"expression": "false",
-				"errorMessage": "This field is never valid."
+				"errorMessage": "This field is never valid.",
+				"expression": "false"
 			},
 			"visibilityExpression": "true"
 		},
@@ -77,8 +77,8 @@
 			},
 			"type": "checkbox",
 			"validation" : {
-				"expression": "Boolean",
-				"errorMessage": "This field must be checked."
+				"errorMessage": "This field must be checked.",
+				"expression": "Boolean"
 			},
 			"visibilityExpression": "!Boolean"
 		}
