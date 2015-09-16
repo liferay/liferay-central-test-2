@@ -27,8 +27,8 @@ public class UnsupportedCapabilityException extends SystemException {
 
 		super(
 			String.format(
-				"%s does not support capability %s",
-				providerDescription, capabilityClass.getName()));
+				"%s does not support capability %s", providerDescription,
+				capabilityClass.getName()));
 	}
 
 }
