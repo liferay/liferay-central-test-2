@@ -396,7 +396,7 @@ public class CoverImageTest {
 	}
 
 	private static final String _IMAGE_CROP_REGION =
-		"{\"height\":10,\"width\":10,\"x\":0,\"y\":0}";
+		"{\"height\": 10, \"width\": 10, \"x\": 0, \"y\": 0}";
 
 	@DeleteAfterTestRun
 	private Group _group;
