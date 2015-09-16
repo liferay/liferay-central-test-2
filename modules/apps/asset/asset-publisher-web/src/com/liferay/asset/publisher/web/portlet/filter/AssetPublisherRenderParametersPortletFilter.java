@@ -59,14 +59,14 @@ public class AssetPublisherRenderParametersPortletFilter
 			FilterChain filterChain)
 		throws IOException, PortletException {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+		HttpServletRequest httpServletRequest =
+			PortalUtil.getHttpServletRequest(renderRequest);
 
 		long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
 		String tag = ParamUtil.getString(renderRequest, "tag");
 
-		if ((categoryId > 0) ||	Validator.isNotNull(tag)) {
-			clearRenderRequestParameters(renderRequest, request);
+		if ((categoryId > 0) || Validator.isNotNull(tag)) {
+			clearRenderRequestParameters(renderRequest, httpServletRequest);
 		}
 
 		filterChain.doFilter(renderRequest, renderResponse);
@@ -77,14 +77,15 @@ public class AssetPublisherRenderParametersPortletFilter
 	}
 
 	protected void clearRenderRequestParameters(
-		RenderRequest renderRequest, HttpServletRequest request) {
+		RenderRequest renderRequest, HttpServletRequest httpServletRequest) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		String portletId = PortalUtil.getPortletId(renderRequest);
 
-		RenderParametersPool.clear(request, themeDisplay.getPlid(), portletId);
+		RenderParametersPool.clear(
+			httpServletRequest, themeDisplay.getPlid(), portletId);
 	}
 
 }
