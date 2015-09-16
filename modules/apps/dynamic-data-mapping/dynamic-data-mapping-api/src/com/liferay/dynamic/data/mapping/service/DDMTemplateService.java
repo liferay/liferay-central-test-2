@@ -292,13 +292,10 @@ public interface DDMTemplateService extends BaseService {
 	* Returns all the templates matching the class name ID, class PK, type, and
 	* mode.
 	*
-	* @param companyId the primary key of the template's company
 	* @param groupId the primary key of the group
 	* @param classNameId the primary key of the class name for template's
 	related model
 	* @param classPK the primary key of the template's related entity
-	* @param resourceClassNameId the primary key of the class name for
-	template's resource model
 	* @param type the template's type. For more information, see {@link
 	com.liferay.dynamic.data.mapping.model.DDMTemplateConstants}.
 	* @return the matching templates
@@ -320,11 +317,8 @@ public interface DDMTemplateService extends BaseService {
 	/**
 	* Returns all the templates matching the group and class PK.
 	*
-	* @param companyId the primary key of the template's company
 	* @param groupId the primary key of the group
 	* @param classPK the primary key of the template's related entity
-	* @param resourceClassNameId the primary key of the class name for
-	template's resource model
 	* @return the matching templates
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
