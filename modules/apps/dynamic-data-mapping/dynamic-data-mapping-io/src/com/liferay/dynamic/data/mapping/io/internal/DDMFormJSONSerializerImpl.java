@@ -220,9 +220,9 @@ public class DDMFormJSONSerializerImpl implements DDMFormJSONSerializer {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("expression", ddmFormFieldValidation.getExpression());
 		jsonObject.put(
 			"errorMessage", ddmFormFieldValidation.getErrorMessage());
+		jsonObject.put("expression", ddmFormFieldValidation.getExpression());
 
 		return jsonObject;
 	}
