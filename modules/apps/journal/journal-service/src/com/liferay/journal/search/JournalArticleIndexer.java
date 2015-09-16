@@ -200,17 +200,17 @@ public class JournalArticleIndexer
 		boolean head = GetterUtil.getBoolean(
 			searchContext.getAttribute("head"), Boolean.TRUE);
 
-		boolean showNonIndexable = GetterUtil.getBoolean(
-			searchContext.getAttribute("showNonIndexable"), Boolean.FALSE);
+		boolean showNonindexable = GetterUtil.getBoolean(
+			searchContext.getAttribute("showNonindexable"), Boolean.FALSE);
 
 		boolean relatedClassName = GetterUtil.getBoolean(
 			searchContext.getAttribute("relatedClassName"));
 
-		if (!showNonIndexable && head && !relatedClassName) {
+		if (!showNonindexable && head && !relatedClassName) {
 			contextBooleanFilter.addRequiredTerm("head", Boolean.TRUE);
 		}
 
-		if (!relatedClassName && showNonIndexable) {
+		if (!relatedClassName && showNonindexable) {
 			contextBooleanFilter.addRequiredTerm("headListable", Boolean.TRUE);
 		}
 	}
