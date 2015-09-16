@@ -119,7 +119,7 @@ public class DLFileEntryAssetRendererFactory
 	}
 
 	@Override
-	public String getSubTypeTitle(Locale locale) {
+	public String getSubtypeTitle(Locale locale) {
 		return LanguageUtil.get(locale, "type");
 	}
 

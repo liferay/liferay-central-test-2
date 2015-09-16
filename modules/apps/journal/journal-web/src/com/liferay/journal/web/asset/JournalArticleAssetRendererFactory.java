@@ -147,7 +147,7 @@ public class JournalArticleAssetRendererFactory
 	}
 
 	@Override
-	public String getSubTypeTitle(Locale locale) {
+	public String getSubtypeTitle(Locale locale) {
 		return LanguageUtil.get(locale, "structures");
 	}
 

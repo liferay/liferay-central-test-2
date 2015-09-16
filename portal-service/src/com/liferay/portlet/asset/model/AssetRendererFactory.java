@@ -100,7 +100,7 @@ public interface AssetRendererFactory<T> {
 
 	public String getPortletId();
 
-	public String getSubTypeTitle(Locale locale);
+	public String getSubtypeTitle(Locale locale);
 
 	public String getType();
 

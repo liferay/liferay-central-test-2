@@ -185,7 +185,7 @@ public abstract class BaseAssetRendererFactory<T>
 	}
 
 	@Override
-	public String getSubTypeTitle(Locale locale) {
+	public String getSubtypeTitle(Locale locale) {
 		return LanguageUtil.get(locale, "subtype");
 	}
 
