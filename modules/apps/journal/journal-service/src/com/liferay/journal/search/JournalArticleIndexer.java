@@ -202,7 +202,7 @@ public class JournalArticleIndexer
 		boolean relatedClassName = GetterUtil.getBoolean(
 			searchContext.getAttribute("relatedClassName"));
 		boolean showNonindexable = GetterUtil.getBoolean(
-			searchContext.getAttribute("showNonindexable"), Boolean.FALSE);
+			searchContext.getAttribute("showNonindexable"));
 
 		if (head && !relatedClassName && !showNonindexable) {
 			contextBooleanFilter.addRequiredTerm("head", Boolean.TRUE);
