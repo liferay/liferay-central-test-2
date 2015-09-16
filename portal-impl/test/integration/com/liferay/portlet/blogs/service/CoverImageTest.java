@@ -68,13 +68,13 @@ public class CoverImageTest {
 
 	@Test
 	public void testAddCoverImage() throws Exception {
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
 				blogsEntry.getCoverImageFileEntryId());
 
-		Assert.assertEquals("image.jpg", coverImageFileEntry.getTitle());
+		Assert.assertEquals("image1.jpg", coverImageFileEntry.getTitle());
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class CoverImageTest {
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
 				_group.getGroupId(), folder.getFolderId());
 
-		addBlogsEntry("image.jpg");
+		addBlogsEntry("image1.jpg");
 
 		int portletFileEntriesCount =
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
@@ -96,7 +96,7 @@ public class CoverImageTest {
 			initialFolderFileEntriesCount + 1, portletFileEntriesCount);
 
 		PortletFileRepositoryUtil.getPortletFileEntry(
-			_group.getGroupId(), folder.getFolderId(), "image.jpg");
+			_group.getGroupId(), folder.getFolderId(), "image1.jpg");
 	}
 
 	@Test
@@ -110,7 +110,7 @@ public class CoverImageTest {
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
 				_group.getGroupId(), folder.getFolderId());
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		updateBlogsEntry(blogsEntry.getEntryId(), "image2.jpg");
 
@@ -127,7 +127,7 @@ public class CoverImageTest {
 
 	@Test(expected = NoSuchFileEntryException.class)
 	public void testCoverImageDeletedWhenDeletingBlogsEntry() throws Exception {
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -143,7 +143,7 @@ public class CoverImageTest {
 	public void testCoverImageDeletedWhenEmptyCoverImageSelector()
 		throws Exception {
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -165,7 +165,7 @@ public class CoverImageTest {
 	public void testCoverImageNotChangedWhenNullCoverImageSelector()
 		throws Exception {
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -184,7 +184,7 @@ public class CoverImageTest {
 			_user.getUserId(), _group.getGroupId());
 
 		PortletFileRepositoryUtil.getPortletFileEntry(
-			_group.getGroupId(), folder.getFolderId(), "image.jpg");
+			_group.getGroupId(), folder.getFolderId(), "image1.jpg");
 
 		PortletFileRepositoryUtil.getPortletFileEntry(
 			coverImageFileEntry.getFileEntryId());
@@ -192,7 +192,7 @@ public class CoverImageTest {
 
 	@Test
 	public void testCoverImageStoredInBlogsRepository() throws Exception {
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -206,7 +206,7 @@ public class CoverImageTest {
 
 	@Test
 	public void testCoverImageStoredInCoverImageFolder() throws Exception {
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -222,7 +222,7 @@ public class CoverImageTest {
 	public void testOriginalCoverImageNotDeletedWhenEmptyCoverImageSelector()
 		throws Exception {
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		ImageSelector coverImageSelector = new ImageSelector(
 			0, StringPool.BLANK, StringPool.BLANK);
@@ -233,7 +233,7 @@ public class CoverImageTest {
 			_user.getUserId(), _group.getGroupId());
 
 		PortletFileRepositoryUtil.getPortletFileEntry(
-			_group.getGroupId(), folder.getFolderId(), "image.jpg");
+			_group.getGroupId(), folder.getFolderId(), "image1.jpg");
 	}
 
 	@Test
@@ -247,7 +247,7 @@ public class CoverImageTest {
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
 				_group.getGroupId(), folder.getFolderId());
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		ImageSelector coverImageSelector = null;
 
@@ -261,14 +261,14 @@ public class CoverImageTest {
 			initialFolderFileEntriesCount + 1, portletFileEntriesCount);
 
 		PortletFileRepositoryUtil.getPortletFileEntry(
-			_group.getGroupId(), folder.getFolderId(), "image.jpg");
+			_group.getGroupId(), folder.getFolderId(), "image1.jpg");
 	}
 
 	@Test
 	public void testOriginalCoverImageStoredInBlogsRepository()
 		throws Exception {
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -284,7 +284,7 @@ public class CoverImageTest {
 	public void testPreviousCoverImageDeletedWhenChangingCoverImage()
 		throws Exception {
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		FileEntry coverImageFileEntry =
 			PortletFileRepositoryUtil.getPortletFileEntry(
@@ -300,7 +300,7 @@ public class CoverImageTest {
 	public void testPreviousOriginalCoverImageNotDeletedWhenChangingCoverImage()
 		throws Exception {
 
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		updateBlogsEntry(blogsEntry.getEntryId(), "image2.jpg");
 
@@ -308,12 +308,12 @@ public class CoverImageTest {
 			_user.getUserId(), _group.getGroupId());
 
 		PortletFileRepositoryUtil.getPortletFileEntry(
-			_group.getGroupId(), folder.getFolderId(), "image.jpg");
+			_group.getGroupId(), folder.getFolderId(), "image1.jpg");
 	}
 
 	@Test
 	public void testUpdateCoverImage() throws Exception {
-		BlogsEntry blogsEntry = addBlogsEntry("image.jpg");
+		BlogsEntry blogsEntry = addBlogsEntry("image1.jpg");
 
 		blogsEntry = updateBlogsEntry(blogsEntry.getEntryId(), "image2.jpg");
 
