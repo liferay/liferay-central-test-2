@@ -17,22 +17,18 @@
 <%@ include file="/init.jsp" %>
 
 <%
-LayoutItemSelectorViewDisplayContext layoutItemSelectorViewDisplayContext = (LayoutItemSelectorViewDisplayContext)request.getAttribute(LayoutItemSelectorView.LAYOUT_ITEM_SELECTOR_VIEW_DISPLAY_CONTEXT);
-
-LayoutItemSelectorCriterion layoutItemSelectorCriterion = layoutItemSelectorViewDisplayContext.getLayoutItemSelectorCriterion();
-
 long groupId = themeDisplay.getScopeGroupId();
 
 Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
 request.setAttribute(WebKeys.GROUP, group);
 
-int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
+LayoutItemSelectorViewDisplayContext layoutItemSelectorViewDisplayContext = (LayoutItemSelectorViewDisplayContext)request.getAttribute(LayoutItemSelectorView.LAYOUT_ITEM_SELECTOR_VIEW_DISPLAY_CONTEXT);
 
-int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();
+LayoutItemSelectorCriterion layoutItemSelectorCriterion = layoutItemSelectorViewDisplayContext.getLayoutItemSelectorCriterion();
 %>
 
-<liferay-ui:tabs names="<%= ((publicLayoutsPageCount > 0) && (privateLayoutsPageCount > 0)) ? "public-pages,private-pages" : null %>" refresh="<%= false %>">
+<liferay-ui:tabs names='<%= ((group.getPublicLayoutsPageCount() > 0) && (group.getPrivateLayoutsPageCount() > 0)) ? "public-pages,private-pages" : null %>' refresh="<%= false %>">
 
 	<%
 	boolean checkContentDisplayPage = layoutItemSelectorCriterion.isCheckDisplayPage();

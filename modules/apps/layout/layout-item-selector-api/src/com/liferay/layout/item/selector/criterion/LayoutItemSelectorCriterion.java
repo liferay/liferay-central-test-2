@@ -30,4 +30,5 @@ public class LayoutItemSelectorCriterion extends BaseItemSelectorCriterion {
 	}
 
 	private boolean _checkDisplayPage;
+
 }
