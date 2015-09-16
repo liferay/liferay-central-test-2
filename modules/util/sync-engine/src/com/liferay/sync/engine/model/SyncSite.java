@@ -28,10 +28,6 @@ import com.liferay.sync.engine.service.persistence.BasePersistenceImpl;
 @JsonIgnoreProperties(ignoreUnknown = true, value = "active")
 public class SyncSite extends StateAwareModel {
 
-	public static final int STATE_CONNECTED = 1;
-
-	public static final int STATE_DISCONNECTED = 0;
-
 	public static final int TYPE_OPEN = 1;
 
 	public static final int TYPE_PRIVATE = 3;
