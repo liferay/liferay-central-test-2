@@ -1,6 +1,6 @@
 import com.liferay.gradle.plugins.node.tasks.DownloadNodeModuleTask
 
-apply plugin: "com.liferay.cache"
+apply plugin: "com.liferay.task-cache"
 
 task buildBabelCore(type: Copy)
 task downloadBabelCore(type: DownloadNodeModuleTask)
@@ -16,7 +16,7 @@ buildBabelCore {
 cache {
 	task(buildBabelCore) {
 		baseDir = buildBabelCore.destinationDir
-		cacheDir = ".cache"
+		cacheDir = ".task-cache"
 		include "browser-polyfill.min.js"
 		testFile "build.gradle"
 	}
