@@ -560,7 +560,9 @@ public class BlogsEntryLocalServiceTest {
 			long userId, ServiceContext serviceContext)
 		throws Exception {
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			"com/liferay/portal/util/dependencies/test.jpg");
