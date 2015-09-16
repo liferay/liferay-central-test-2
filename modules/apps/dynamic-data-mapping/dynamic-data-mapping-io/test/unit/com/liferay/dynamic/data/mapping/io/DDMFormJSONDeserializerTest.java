@@ -53,7 +53,6 @@ public class DDMFormJSONDeserializerTest
 			ddmFormField.getDDMFormFieldValidation();
 
 		Assert.assertNotNull(ddmFormFieldValidation);
-
 		Assert.assertEquals(
 			"Boolean2282", ddmFormFieldValidation.getExpression());
 		Assert.assertEquals(
