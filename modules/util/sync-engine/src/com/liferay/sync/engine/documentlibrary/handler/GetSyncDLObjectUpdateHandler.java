@@ -200,6 +200,7 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 			}
 
 			syncSite.setRemoteSyncTime(_syncDLObjectUpdate.getLastAccessTime());
+			syncSite.setState(SyncSite.STATE_SYNCED);
 
 			SyncSiteService.update(syncSite);
 		}

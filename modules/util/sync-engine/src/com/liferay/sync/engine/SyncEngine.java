@@ -200,6 +200,10 @@ public class SyncEngine {
 		List<SyncSite> syncSites = SyncSiteService.findSyncSites(syncAccountId);
 
 		for (SyncSite syncSite : syncSites) {
+			syncSite.setState(SyncSite.STATE_SYNCED);
+
+			SyncSiteService.update(syncSite);
+
 			if (!syncSite.isActive() || (syncSite.getRemoteSyncTime() == -1)) {
 				continue;
 			}
@@ -353,6 +357,10 @@ public class SyncEngine {
 				for (long syncSiteId : new HashSet<Long>(syncSiteIds)) {
 					SyncSite syncSite = SyncSiteService.fetchSyncSite(
 						syncSiteId);
+
+					if (syncSite.getState() == SyncSite.STATE_IN_PROGRESS) {
+						continue;
+					}
 
 					Map<String, Object> parameters = new HashMap<>();
 
