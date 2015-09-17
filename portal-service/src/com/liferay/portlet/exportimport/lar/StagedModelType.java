@@ -191,11 +191,11 @@ public class StagedModelType {
 		if (referrerClassNameId == 0) {
 			_referrerClassName = null;
 		}
-		else if (referrerClassNameId == REFERRER_CLASS_NAME_ID_ANY) {
-			_referrerClassName = REFERRER_CLASS_NAME_ANY;
-		}
 		else if (referrerClassNameId == REFERRER_CLASS_NAME_ID_ALL) {
 			_referrerClassName = REFERRER_CLASS_NAME_ALL;
+		}
+		else if (referrerClassNameId == REFERRER_CLASS_NAME_ID_ANY) {
+			_referrerClassName = REFERRER_CLASS_NAME_ANY;
 		}
 		else if (referrerClassNameId > 0) {
 			_referrerClassName = PortalUtil.getClassName(referrerClassNameId);
