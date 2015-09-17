@@ -558,13 +558,13 @@ public class JournalArticleIndexer
 		String localizedTitleName = DocumentImpl.getLocalizedName(
 			locale, Field.TITLE);
 
-		Locale defaultLanguageId = LocaleUtil.fromLanguageId(
+		Locale defaultLocale = LocaleUtil.fromLanguageId(
 			document.get("defaultLanguageId"));
 
 		if ((snippetLocale == null) &&
 			(document.getField(localizedTitleName) == null)) {
 
-			snippetLocale = defaultLanguageId;
+			snippetLocale = defaultLocale;
 		}
 		else {
 			snippetLocale = locale;
@@ -575,10 +575,10 @@ public class JournalArticleIndexer
 			Field.TITLE);
 
 		if (Validator.isNull(title) &&
-			!snippetLocale.equals(defaultLanguageId)) {
+			!snippetLocale.equals(defaultLocale)) {
 
 			title = document.get(
-				defaultLanguageId,
+				defaultLocale,
 				Field.SNIPPET + StringPool.UNDERLINE + Field.TITLE,
 				Field.TITLE);
 		}
@@ -587,10 +587,10 @@ public class JournalArticleIndexer
 			document, snippetLocale, portletRequest, portletResponse);
 
 		if (Validator.isNull(content) &&
-			!snippetLocale.equals(defaultLanguageId)) {
+			!snippetLocale.equals(defaultLocale)) {
 
 			content = getDDMContentSummary(
-				document, defaultLanguageId, portletRequest, portletResponse);
+				document, defaultLocale, portletRequest, portletResponse);
 		}
 
 		Summary summary = new Summary(snippetLocale, title, content);
