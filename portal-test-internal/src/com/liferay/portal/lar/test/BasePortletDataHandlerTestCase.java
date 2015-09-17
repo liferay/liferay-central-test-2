@@ -105,10 +105,10 @@ public abstract class BasePortletDataHandlerTestCase {
 
 			Assert.assertFalse(
 				manifestSummaryKey.endsWith(
-					StagedModelType.REFERRER_CLASS_NAME_ANY));
+					StagedModelType.REFERRER_CLASS_NAME_ALL));
 			Assert.assertFalse(
 				manifestSummaryKey.endsWith(
-					StagedModelType.REFERRER_CLASS_NAME_ALL));
+					StagedModelType.REFERRER_CLASS_NAME_ANY));
 		}
 
 		for (String manifestSummaryKey :
