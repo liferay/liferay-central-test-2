@@ -5578,7 +5578,7 @@ public class PortalImpl implements Portal {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(e);
+						_log.warn(e, e);
 					}
 				}
 			}
