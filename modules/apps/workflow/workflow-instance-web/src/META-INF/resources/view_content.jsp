@@ -17,8 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String redirect = ParamUtil.getString(request, "redirect");
+
+long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String type = ParamUtil.getString(request, "type");
 
 AssetRendererFactory<?> assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByType(type);

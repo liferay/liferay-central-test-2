@@ -50,14 +50,15 @@ public class MyWorkflowInstanceViewDisplayContext
 
 	@Override
 	protected List<WorkflowInstance> getSearchContainerResults(
-			int start, int end, OrderByComparator<WorkflowInstance> comparator)
+			int start, int end,
+			OrderByComparator<WorkflowInstance> orderByComparator)
 		throws PortalException {
 
 		return WorkflowInstanceManagerUtil.getWorkflowInstances(
 			workflowInstanceRequestHelper.getCompanyId(),
 			workflowInstanceRequestHelper.getUserId(),
 			WorkflowHandlerUtil.getSearchableAssetTypes(),
-			isShowCompletedInstances(), start, end, comparator);
+			isShowCompletedInstances(), start, end, orderByComparator);
 	}
 
 	@Override

@@ -31,7 +31,6 @@ else {
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
 	<aui:nav cssClass="navbar-nav">
-
 		<portlet:renderURL var="viewPendingURL">
 			<portlet:param name="mvcPath" value="/view.jsp" />
 			<portlet:param name="tabs2" value="pending" />
@@ -75,9 +74,9 @@ else {
 
 			<portlet:renderURL var="rowURL">
 				<portlet:param name="mvcPath" value="/edit_workflow_instance.jsp" />
+				<portlet:param name="tabs2" value="<%= tabs2 %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="workflowInstanceId" value="<%= String.valueOf(workflowInstance.getWorkflowInstanceId()) %>" />
-				<portlet:param name="tabs2" value="<%= tabs2 %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text
@@ -125,5 +124,4 @@ else {
 
 		<liferay-ui:search-iterator displayStyle="list" markupView="lexicon" />
 	</liferay-ui:search-container>
-
 </div>
