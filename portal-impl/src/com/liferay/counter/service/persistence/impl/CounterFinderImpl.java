@@ -61,6 +61,7 @@ public class CounterFinderImpl
 		CacheRegistryUtil.register(this);
 	}
 
+	@Override
 	public void destroy() {
 		CacheRegistryUtil.unregister(getRegistryName());
 	}
