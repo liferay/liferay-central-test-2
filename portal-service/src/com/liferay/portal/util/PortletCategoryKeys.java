@@ -110,6 +110,7 @@ public class PortletCategoryKeys {
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link #CONTROL_PANEL_SITES}
 	 */
+	@Deprecated
 	public static final String SITES = "sites";
 
 	public static final String USER_MY_ACCOUNT = "user.my_account";
