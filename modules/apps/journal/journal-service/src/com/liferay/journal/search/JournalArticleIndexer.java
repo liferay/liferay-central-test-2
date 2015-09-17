@@ -553,13 +553,13 @@ public class JournalArticleIndexer
 		Document document, Locale locale, String snippet,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
+		Locale defaultLocale = LocaleUtil.fromLanguageId(
+			document.get("defaultLanguageId"));
+
 		Locale snippetLocale = getSnippetLocale(document, locale);
 
 		String localizedTitleName = DocumentImpl.getLocalizedName(
 			locale, Field.TITLE);
-
-		Locale defaultLocale = LocaleUtil.fromLanguageId(
-			document.get("defaultLanguageId"));
 
 		if ((snippetLocale == null) &&
 			(document.getField(localizedTitleName) == null)) {
