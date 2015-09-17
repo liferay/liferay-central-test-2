@@ -38,6 +38,7 @@ addMenuItems.add(new AddMenuItem(HtmlUtil.escape(LanguageUtil.get(request, "uplo
 
 	<%
 	String taglibHREF = "javascript:Liferay.Util.getOpener()." + renderResponse.getNamespace() + "openKaleoDesigner('', '0', '', Liferay.Util.getWindowName());";
+
 	addMenuItems.add(new AddMenuItem(LanguageUtil.format(request, "add-new-x", "definition"), taglibHREF));
 	%>
 

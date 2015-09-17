@@ -54,11 +54,11 @@ public class WorkflowInstanceViewDisplayContext
 
 		super(renderRequest, renderResponse);
 
-		PortletURL currentURLObj = PortletURLUtil.getCurrent(
+		PortletURL portletURL = PortletURLUtil.getCurrent(
 			renderRequest, renderResponse);
 
 		_searchContainer = new WorkflowInstanceSearch(
-			renderRequest, currentURLObj);
+			renderRequest, portletURL);
 		_searchContainer.setEmptyResultsMessage(
 			getSearchContainerEmptyResultsMessage());
 
