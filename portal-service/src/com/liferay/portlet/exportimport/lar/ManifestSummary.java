@@ -377,9 +377,9 @@ public class ManifestSummary implements Serializable {
 
 		if (Validator.isNull(referrerClassName) ||
 			(!referrerClassName.equals(
-				StagedModelType.REFERRER_CLASS_NAME_ANY) &&
+				StagedModelType.REFERRER_CLASS_NAME_ALL) &&
 			 !referrerClassName.equals(
-				 StagedModelType.REFERRER_CLASS_NAME_ALL))) {
+				 StagedModelType.REFERRER_CLASS_NAME_ANY))) {
 
 			String manifestSummaryKey = getManifestSummaryKey(
 				className, referrerClassName);
@@ -418,9 +418,9 @@ public class ManifestSummary implements Serializable {
 
 		if (Validator.isNull(referrerClassName) ||
 			(!referrerClassName.equals(
-				StagedModelType.REFERRER_CLASS_NAME_ANY) &&
+				StagedModelType.REFERRER_CLASS_NAME_ALL) &&
 			 !referrerClassName.equals(
-				 StagedModelType.REFERRER_CLASS_NAME_ALL))) {
+				 StagedModelType.REFERRER_CLASS_NAME_ANY))) {
 
 			String manifestSummaryKey = getManifestSummaryKey(
 				className, referrerClassName);
