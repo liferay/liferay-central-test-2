@@ -574,9 +574,7 @@ public class JournalArticleIndexer
 			snippetLocale, Field.SNIPPET + StringPool.UNDERLINE + Field.TITLE,
 			Field.TITLE);
 
-		if (Validator.isNull(title) &&
-			!snippetLocale.equals(defaultLocale)) {
-
+		if (Validator.isNull(title) && !snippetLocale.equals(defaultLocale)) {
 			title = document.get(
 				defaultLocale,
 				Field.SNIPPET + StringPool.UNDERLINE + Field.TITLE,
@@ -586,9 +584,7 @@ public class JournalArticleIndexer
 		String content = getDDMContentSummary(
 			document, snippetLocale, portletRequest, portletResponse);
 
-		if (Validator.isNull(content) &&
-			!snippetLocale.equals(defaultLocale)) {
-
+		if (Validator.isNull(content) && !snippetLocale.equals(defaultLocale)) {
 			content = getDDMContentSummary(
 				document, defaultLocale, portletRequest, portletResponse);
 		}
