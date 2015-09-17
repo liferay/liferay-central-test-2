@@ -104,7 +104,7 @@ renderResponse.setTitle(headerTitle);
 				<aui:col width="<%= 50 %>">
 					<aui:input name="createDate" type="resource" value="<%= workflowTaskDisplayContext.getCreateDate(workflowTask) %>" />
 
-					<aui:input inlineField="<%= true %>" name="dueDate" type="resource" value="<%= workflowTaskDisplayContext.getDueDateAsString(workflowTask) %>" />
+					<aui:input inlineField="<%= true %>" name="dueDate" type="resource" value="<%= workflowTaskDisplayContext.getDueDateString(workflowTask) %>" />
 
 					<c:if test="<%= !workflowTask.isCompleted() %>">
 						<portlet:actionURL name="updateWorkflowTask" var="updateDueDateURL">

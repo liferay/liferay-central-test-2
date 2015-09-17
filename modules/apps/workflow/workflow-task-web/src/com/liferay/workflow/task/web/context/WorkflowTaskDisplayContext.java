@@ -231,7 +231,7 @@ public class WorkflowTaskDisplayContext {
 		return workflowTask.getDueDate();
 	}
 
-	public String getDueDateAsString(WorkflowTask workflowTask) {
+	public String getDueDateString(WorkflowTask workflowTask) {
 		if (workflowTask.getDueDate() == null) {
 			return LanguageUtil.get(
 				_workflowTaskRequestHelper.getRequest(), "never");
