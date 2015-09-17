@@ -217,10 +217,10 @@ public class StagedAssetLinkStagedModelDataHandler
 		long companyId, long groupId, String assetEntry1Uuid,
 		String assetEntry2Uuid) {
 
+		// Asset entry 1 dynamic query
+
 		Projection entryIdProjection = ProjectionFactoryUtil.property(
 			"entryId");
-
-		// Asset Entry 1 Dynamic Query
 
 		DynamicQuery assetEntry1DynamicQuery =
 			_assetEntryLocalService.dynamicQuery();
@@ -231,7 +231,7 @@ public class StagedAssetLinkStagedModelDataHandler
 
 		assetEntry1DynamicQuery.add(classUuidProperty.eq(assetEntry1Uuid));
 
-		// Asset Entry 2 Dynamic Query
+		// Asset entry 2 dynamic query
 
 		DynamicQuery assetEntry2DynamicQuery =
 			_assetEntryLocalService.dynamicQuery();
@@ -240,7 +240,7 @@ public class StagedAssetLinkStagedModelDataHandler
 
 		assetEntry2DynamicQuery.add(classUuidProperty.eq(assetEntry2Uuid));
 
-		// Asset Link Dynamic Query
+		// Asset link dynamic query
 
 		DynamicQuery dynamicQuery = _assetLinkLocalService.dynamicQuery();
 
@@ -252,7 +252,7 @@ public class StagedAssetLinkStagedModelDataHandler
 
 		dynamicQuery.add(entryId2IdProperty.eq(assetEntry2DynamicQuery));
 
-		// Company Id
+		// Company ID
 
 		if (companyId > 0) {
 			Property companyIdProperty = PropertyFactoryUtil.forName(
@@ -265,7 +265,7 @@ public class StagedAssetLinkStagedModelDataHandler
 			dynamicQuery.add(companyIdCriterion);
 		}
 
-		// Group Id
+		// Group ID
 
 		if (groupId > 0) {
 			Property groupIdProperty = PropertyFactoryUtil.forName("groupId");
