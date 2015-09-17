@@ -174,11 +174,11 @@ public class StagedModelType {
 		if (Validator.isNull(referrerClassName)) {
 			_referrerClassNameId = 0;
 		}
-		else if (referrerClassName.equals(REFERRER_CLASS_NAME_ANY)) {
-			_referrerClassNameId = REFERRER_CLASS_NAME_ID_ANY;
-		}
 		else if (referrerClassName.equals(REFERRER_CLASS_NAME_ALL)) {
 			_referrerClassNameId = REFERRER_CLASS_NAME_ID_ALL;
+		}
+		else if (referrerClassName.equals(REFERRER_CLASS_NAME_ANY)) {
+			_referrerClassNameId = REFERRER_CLASS_NAME_ID_ANY;
 		}
 		else {
 			_referrerClassNameId = PortalUtil.getClassNameId(referrerClassName);
