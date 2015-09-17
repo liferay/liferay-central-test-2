@@ -285,12 +285,6 @@ public class SQLTransformer {
 		return newSQL.replaceAll("(?i)replace\\(", "str_replace(");
 	}
 
-	private String _replaceUnion(String sql) {
-		Matcher matcher = _unionAllPattern.matcher(sql);
-
-		return matcher.replaceAll("$1 $2");
-	}
-
 	private String _transform(String sql) {
 		if (sql == null) {
 			return sql;
@@ -444,8 +438,6 @@ public class SQLTransformer {
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern _negativeComparisonPattern = Pattern.compile(
 		"(!?=)( -([0-9]+)?)", Pattern.CASE_INSENSITIVE);
-	private static final Pattern _unionAllPattern = Pattern.compile(
-		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 
 	private DB _db;
 	private Map<String, String> _transformedSqls;
