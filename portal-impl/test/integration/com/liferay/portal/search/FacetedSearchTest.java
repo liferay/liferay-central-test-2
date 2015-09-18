@@ -67,7 +67,7 @@ public class FacetedSearchTest {
 
 		_group = GroupTestUtil.addGroup();
 
-		addUserAsset(_group.getGroupId(), _TAG_NAME);
+		updateUser(_group.getGroupId(), _TAG_NAME);
 	}
 
 	@Test
@@ -84,17 +84,17 @@ public class FacetedSearchTest {
 
 		searchContext.addFacet(multiValueFacet);
 
-		Indexer facetedSearcher = FacetedSearcher.getInstance();
+		Indexer<?> indexer = FacetedSearcher.getInstance();
 
-		Hits hits = facetedSearcher.search(searchContext);
+		Hits hits = indexer.search(searchContext);
 
 		Assert.assertNotEquals(0, hits.getLength());
 
 		Map<String, Facet> facets = searchContext.getFacets();
 
-		Facet assetTagNameFacet = facets.get(Field.ASSET_TAG_NAMES);
+		Facet facet = facets.get(Field.ASSET_TAG_NAMES);
 
-		FacetCollector facetCollector = assetTagNameFacet.getFacetCollector();
+		FacetCollector facetCollector = facet.getFacetCollector();
 
 		List<TermCollector> termCollectors = facetCollector.getTermCollectors();
 
@@ -106,7 +106,7 @@ public class FacetedSearchTest {
 		Assert.assertEquals(1, termCollector.getFrequency());
 	}
 
-	protected void addUserAsset(long groupId, String assetTagName)
+	protected void updateUser(long groupId, String assetTagName)
 		throws Exception {
 
 		ServiceContext serviceContext =
