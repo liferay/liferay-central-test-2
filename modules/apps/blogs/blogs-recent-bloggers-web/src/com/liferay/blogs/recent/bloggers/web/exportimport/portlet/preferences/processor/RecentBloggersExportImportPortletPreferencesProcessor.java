@@ -76,7 +76,7 @@ public class RecentBloggersExportImportPortletPreferencesProcessor
 		}
 		catch (Exception e) {
 			throw new PortletDataException(
-				"Could not update portlet preferences during export", e);
+				"Unable to update portlet preferences during export", e);
 		}
 	}
 
@@ -92,7 +92,7 @@ public class RecentBloggersExportImportPortletPreferencesProcessor
 		}
 		catch (Exception e) {
 			throw new PortletDataException(
-				"Could not update portlet preferences during import", e);
+				"Unable to update portlet preferences during import", e);
 		}
 	}
 
