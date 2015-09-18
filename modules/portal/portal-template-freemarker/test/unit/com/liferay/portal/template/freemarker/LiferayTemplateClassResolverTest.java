@@ -40,9 +40,9 @@ public class LiferayTemplateClassResolverTest {
 	public void testResolveAllowedClass() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("restrictedClasses", "");
 		properties.put(
 			"allowedClasses", "freemarker.template.utility.ClassUtil");
+		properties.put("restrictedClasses", "");
 
 		_liferayTemplateClassResolver.activate(properties);
 
