@@ -43,6 +43,7 @@ public class LiferayTemplateClassResolverTest {
 		properties.put("restrictedClasses", "");
 		properties.put(
 			"allowedClasses", "freemarker.template.utility.ClassUtil");
+
 		_liferayTemplateClassResolver.activate(properties);
 
 		_liferayTemplateClassResolver.resolve(
@@ -53,8 +54,9 @@ public class LiferayTemplateClassResolverTest {
 	public void testResolveAllowedWildcardClass() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("restrictedClasses", "");
 		properties.put("allowedClasses", "freemarker.template.utility.*");
+		properties.put("restrictedClasses", "");
+
 		_liferayTemplateClassResolver.activate(properties);
 
 		_liferayTemplateClassResolver.resolve(
@@ -79,8 +81,9 @@ public class LiferayTemplateClassResolverTest {
 
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("restrictedClasses", "");
 		properties.put("allowedClasses", "freemarker.template.utility.*");
+		properties.put("restrictedClasses", "");
+
 		_liferayTemplateClassResolver.activate(properties);
 
 		_liferayTemplateClassResolver.resolve(
@@ -91,8 +94,8 @@ public class LiferayTemplateClassResolverTest {
 	public void testResolveRestrictedWildcardClass() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
-		properties.put("restrictedClasses", "com.liferay.portal.model.*");
 		properties.put("allowedClasses", "com.liferay.portal.model.User");
+		properties.put("restrictedClasses", "com.liferay.portal.model.*");
 
 		_liferayTemplateClassResolver.activate(properties);
 
