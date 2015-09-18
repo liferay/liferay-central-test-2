@@ -122,8 +122,7 @@ public final class DLValidatorImpl implements DLValidator {
 
 		if (!DLWebDAVUtil.isRepresentableTitle(fileName)) {
 			throw new FileNameException(
-				"File name '" + fileName + "' " +
-					"cannot be represented using WebDAV");
+				"Unrepresentable WebDAV title for file name " + fileName);
 		}
 	}
 
