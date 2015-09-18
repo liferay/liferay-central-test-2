@@ -366,15 +366,15 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 							dlFileEntry.getTitle())) {
 
 						try {
-							dlFileEntry = makeTitleRepresentable(dlFileEntry);
+							dlFileEntry = renameWithRepresentableTitle(
+								dlFileEntry);
 						}
 						catch (Exception e) {
 							if (_log.isWarnEnabled()) {
 								_log.warn(
 									"Unable to rename file entry " +
 										dlFileEntry.getFileEntryId() +
-											" which has a non-representable" +
-												" title for WebDAV",
+											" with a WebDAV title",
 									e);
 							}
 						}
@@ -517,13 +517,13 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 		return mimeType;
 	}
 
-	protected DLFileEntry makeTitleRepresentable(DLFileEntry dlFileEntry)
+	protected DLFileEntry renameWithRepresentableTitle(DLFileEntry dlFileEntry)
 		throws PortalException {
 
 		String title = dlFileEntry.getTitle();
 
 		for (int i = 0;; i++) {
-			String newTitle = DLWebDAVUtil.makeRepresentableTitle(title, i);
+			String newTitle = DLWebDAVUtil.getRepresentableTitle(title, i);
 
 			try {
 				return renameTitle(dlFileEntry, newTitle);

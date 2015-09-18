@@ -37,7 +37,7 @@ public class DLWebDAVUtil {
 		return !title.contains(PropsValues.DL_WEBDAV_SUBSTITUTION_CHAR);
 	}
 
-	public static String makeRepresentableTitle(String title, int i) {
+	public static String getRepresentableTitle(String title, int i) {
 		return StringUtil.replace(
 			title, PropsValues.DL_WEBDAV_SUBSTITUTION_CHAR,
 			StringPool.UNDERLINE + String.valueOf(i) + StringPool.UNDERLINE);
