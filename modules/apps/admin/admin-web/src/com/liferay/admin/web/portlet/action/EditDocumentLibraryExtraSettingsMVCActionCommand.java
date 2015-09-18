@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.admin.web.action;
+package com.liferay.admin.web.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
