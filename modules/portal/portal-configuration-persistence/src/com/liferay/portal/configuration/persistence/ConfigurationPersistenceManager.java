@@ -145,6 +145,10 @@ public class ConfigurationPersistenceManager
 		}
 	}
 
+	public void setDataSource(DataSource dataSource) {
+		_dataSource = dataSource;
+	}
+
 	public void start() {
 		Lock readLock = _readWriteLock.readLock();
 		Lock writeLock = _readWriteLock.writeLock();
@@ -462,10 +466,6 @@ public class ConfigurationPersistenceManager
 		throws IOException, SQLException {
 
 		return connection.prepareStatement(buildSQL(sql));
-	}
-
-	protected void setDataSource(DataSource dataSource) {
-		_dataSource = dataSource;
 	}
 
 	protected void store(ResultSet resultSet, Dictionary<?, ?> dictionary)
