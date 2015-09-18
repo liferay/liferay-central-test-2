@@ -54,10 +54,10 @@ public class ConfigurationPersistenceBundleActivator
 		Iterator<ServiceReference<DataSource>> iterator =
 			serviceReferences.iterator();
 
-		_dataSourceServiceReference = iterator.next();
+		_serviceReference = iterator.next();
 
 		_configurationPersistenceManager.setDataSource(
-			bundleContext.getService(_dataSourceServiceReference));
+			bundleContext.getService(_serviceReference));
 
 		_configurationPersistenceManager.start();
 
@@ -78,13 +78,13 @@ public class ConfigurationPersistenceBundleActivator
 
 		_configurationPersistenceManager.stop();
 
-		if (_dataSourceServiceReference != null) {
-			bundleContext.ungetService(_dataSourceServiceReference);
+		if (_serviceReference != null) {
+			bundleContext.ungetService(_serviceReference);
 		}
 	}
 
 	private ConfigurationPersistenceManager _configurationPersistenceManager;
-	private ServiceReference<DataSource> _dataSourceServiceReference;
+	private ServiceReference<DataSource> _serviceReference;
 	private ServiceRegistration<?> _serviceRegistration;
 
 }
