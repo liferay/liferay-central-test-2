@@ -517,22 +517,6 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 		return mimeType;
 	}
 
-	protected DLFileEntry renameWithRepresentableTitle(DLFileEntry dlFileEntry)
-		throws PortalException {
-
-		String title = dlFileEntry.getTitle();
-
-		for (int i = 0;; i++) {
-			String newTitle = DLWebDAVUtil.getRepresentableTitle(title, i);
-
-			try {
-				return renameTitle(dlFileEntry, newTitle);
-			}
-			catch (DuplicateFileException dfe) {
-			}
-		}
-	}
-
 	protected void renameDuplicateTitle(DLFileEntry dlFileEntry)
 		throws PortalException {
 
@@ -610,6 +594,22 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 		}
 
 		return renamedDLFileEntry;
+	}
+
+	protected DLFileEntry renameWithRepresentableTitle(DLFileEntry dlFileEntry)
+		throws PortalException {
+
+		String title = dlFileEntry.getTitle();
+
+		for (int i = 0;; i++) {
+			String newTitle = DLWebDAVUtil.getRepresentableTitle(title, i);
+
+			try {
+				return renameTitle(dlFileEntry, newTitle);
+			}
+			catch (DuplicateFileException dfe) {
+			}
+		}
 	}
 
 	@Reference(
