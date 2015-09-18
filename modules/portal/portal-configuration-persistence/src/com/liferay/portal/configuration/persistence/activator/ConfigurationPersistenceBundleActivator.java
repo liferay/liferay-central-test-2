@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.configuration.persistence;
+package com.liferay.portal.configuration.persistence.activator;
 
 import java.util.Collection;
 import java.util.Dictionary;
