@@ -12,16 +12,21 @@
  * details.
  */
 
-package com.liferay.portlet.admin.messaging;
+package com.liferay.admin.web.messaging;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.security.exportimport.UserImporterUtil;
 import com.liferay.portal.util.PropsValues;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Shuyang Zhou
+ * @author Philip Jones
  */
+@Component(immediate = true, service = MessageListener.class)
 public class LDAPImportMessageListener extends BaseMessageListener {
 
 	@Override
