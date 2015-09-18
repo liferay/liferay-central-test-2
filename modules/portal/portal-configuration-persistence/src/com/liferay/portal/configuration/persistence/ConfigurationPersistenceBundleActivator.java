@@ -32,7 +32,8 @@ import org.osgi.framework.ServiceRegistration;
 /**
  * @author Carlos Sierra Andrés
  */
-public class PersistenceBundleActivator implements BundleActivator {
+public class ConfigurationPersistenceBundleActivator
+	implements BundleActivator {
 
 	@Override
 	public void start(final BundleContext bundleContext) throws Exception {
