@@ -589,12 +589,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			(LiferayPortletURL)PortletProviderUtil.getPortletURL(
 				request, className, action);
 
-		portletURL.setPortletMode(PortletMode.VIEW);
-		portletURL.setWindowState(WindowState.MAXIMIZED);
-
 		long plid = getPlid(request, portletURL.getPortletId(), scopeGroupId);
 
 		portletURL.setPlid(plid);
+
+		portletURL.setPortletMode(PortletMode.VIEW);
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
 		return portletURL;
 	}
