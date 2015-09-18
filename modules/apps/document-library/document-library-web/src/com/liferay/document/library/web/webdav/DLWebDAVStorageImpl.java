@@ -1037,9 +1037,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		for (FileEntry fileEntry : fileEntries) {
 			if (!DLWebDAVUtil.isRepresentableTitle(fileEntry.getTitle())) {
 				_log.error(
-					"File entry with title '" + fileEntry.getTitle() + "' " +
-						"cannot be accessed using WebDAV because its " +
-							"title is not representable as a WebDAV URL");
+					"Unrepresentable WebDAV title for file name " +
+						fileEntry.getTitle());
 
 				continue;
 			}
