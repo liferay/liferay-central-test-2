@@ -14,6 +14,8 @@
 
 package com.liferay.portal.configuration.persistence.activator;
 
+import com.liferay.portal.configuration.persistence.ConfigurationPersistenceManager;
+
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -42,16 +44,17 @@ public class ConfigurationPersistenceBundleActivator
 				DataSource.class, "(bean.id=liferayDataSource)");
 
 		if ((serviceReferences == null) || serviceReferences.isEmpty()) {
-			throw new IllegalStateException("LiferayDataSource is needed");
+			throw new IllegalStateException(
+				"Liferay data source is not available");
 		}
+
+		_configurationPersistenceManager =
+			new ConfigurationPersistenceManager();
 
 		Iterator<ServiceReference<DataSource>> iterator =
 			serviceReferences.iterator();
 
 		_dataSourceServiceReference = iterator.next();
-
-		_configurationPersistenceManager =
-			new ConfigurationPersistenceManager();
 
 		_configurationPersistenceManager.setDataSource(
 			bundleContext.getService(_dataSourceServiceReference));
