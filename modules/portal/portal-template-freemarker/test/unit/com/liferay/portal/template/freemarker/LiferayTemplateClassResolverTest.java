@@ -76,9 +76,7 @@ public class LiferayTemplateClassResolverTest {
 	}
 
 	@Test(expected = TemplateException.class)
-	public void testResolveRestrictedClass2()
-		throws Exception {
-
+	public void testResolveRestrictedClass2() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("allowedClasses", "freemarker.template.utility.*");
