@@ -37,7 +37,7 @@ public class LiferayTemplateClassResolverTest {
 	}
 
 	@Test()
-	public void testResolveAllowedClass() throws Exception {
+	public void testResolveAllowedClass1() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put(
@@ -51,7 +51,7 @@ public class LiferayTemplateClassResolverTest {
 	}
 
 	@Test()
-	public void testResolveAllowedWildcardClass() throws Exception {
+	public void testResolveAllowedClass2() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("allowedClasses", "freemarker.template.utility.*");
@@ -70,13 +70,13 @@ public class LiferayTemplateClassResolverTest {
 	}
 
 	@Test(expected = TemplateException.class)
-	public void testResolveRestrictedClass() throws Exception {
+	public void testResolveRestrictedClass1() throws Exception {
 		_liferayTemplateClassResolver.resolve(
 			"freemarker.template.utility.Execute", null, null);
 	}
 
 	@Test(expected = TemplateException.class)
-	public void testResolveRestrictedClassAllowedWildcardClass()
+	public void testResolveRestrictedClass2()
 		throws Exception {
 
 		Map<String, Object> properties = new HashMap<>();
@@ -91,7 +91,7 @@ public class LiferayTemplateClassResolverTest {
 	}
 
 	@Test(expected = TemplateException.class)
-	public void testResolveRestrictedWildcardClass() throws Exception {
+	public void testResolveRestrictedClass3() throws Exception {
 		Map<String, Object> properties = new HashMap<>();
 
 		properties.put("allowedClasses", "com.liferay.portal.model.User");
