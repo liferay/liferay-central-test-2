@@ -50,7 +50,7 @@ import javax.portlet.filter.ResourceFilter;
 /**
  * @author Michael C. Han
  * @author Karthik Sudarshan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Philip Jones
  */
 @ProviderType
