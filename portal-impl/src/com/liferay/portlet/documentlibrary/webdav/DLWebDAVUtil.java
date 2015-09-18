@@ -33,14 +33,14 @@ public class DLWebDAVUtil {
 		return HttpUtil.encodeURL(escapeRawTitle(title), true);
 	}
 
-	public static boolean isRepresentableTitle(String title) {
-		return !title.contains(PropsValues.DL_WEBDAV_SUBSTITUTION_CHAR);
-	}
-
 	public static String getRepresentableTitle(String title, int i) {
 		return StringUtil.replace(
 			title, PropsValues.DL_WEBDAV_SUBSTITUTION_CHAR,
 			StringPool.UNDERLINE + String.valueOf(i) + StringPool.UNDERLINE);
+	}
+
+	public static boolean isRepresentableTitle(String title) {
+		return !title.contains(PropsValues.DL_WEBDAV_SUBSTITUTION_CHAR);
 	}
 
 	public static String unescapeRawTitle(String escapedTitle) {
