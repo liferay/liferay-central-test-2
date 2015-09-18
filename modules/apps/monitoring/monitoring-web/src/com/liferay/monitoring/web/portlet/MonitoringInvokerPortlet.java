@@ -48,6 +48,9 @@ import javax.portlet.filter.RenderFilter;
 import javax.portlet.filter.ResourceFilter;
 
 /**
+ * @author Michael C. Han
+ * @author Karthik Sudarshan
+ * @author Raymond Augé
  * @author Philip Jones
  */
 @ProviderType
