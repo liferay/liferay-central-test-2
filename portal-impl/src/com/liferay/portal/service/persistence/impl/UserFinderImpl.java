@@ -166,7 +166,7 @@ public class UserFinderImpl
 			StringBundler sb = null;
 
 			DB db = getDB();
-			
+
 			String dbType = db.getType();
 
 			boolean sybase = dbType.equals(DB.TYPE_SYBASE);
