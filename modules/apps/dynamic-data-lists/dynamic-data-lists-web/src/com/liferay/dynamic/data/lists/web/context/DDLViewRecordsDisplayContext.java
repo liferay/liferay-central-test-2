@@ -55,7 +55,7 @@ public class DDLViewRecordsDisplayContext {
 			List<DDMFormField> ddmFormfields = _ddmStructure.getDDMFormFields(
 				false);
 
-			int totalColumns = _MAX_COLUMNS;
+			int totalColumns = _TOTAL_COLUMNS;
 
 			if (ddmFormfields.size() < totalColumns) {
 				totalColumns = ddmFormfields.size();
@@ -77,7 +77,7 @@ public class DDLViewRecordsDisplayContext {
 		return "list";
 	}
 
-	private static final int _MAX_COLUMNS = 5;
+	private static final int _TOTAL_COLUMNS = 5;
 
 	private final DDLRecordSet _ddlRecordSet;
 	private List<DDMFormField> _ddmFormFields;
