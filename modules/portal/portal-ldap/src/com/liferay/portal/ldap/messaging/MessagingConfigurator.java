@@ -69,12 +69,12 @@ public class MessagingConfigurator {
 				UserImportMessageListener.class.getName(),
 				StorageType.MEMORY_CLUSTERED);
 		}
-		catch (SchedulerException e) {
+		catch (SchedulerException se) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to unschedule " +
 						UserImportMessageListener.class.getName(),
-					e);
+					se);
 			}
 		}
 
