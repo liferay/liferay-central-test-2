@@ -159,15 +159,19 @@ public class UserFinderImpl
 		Session session = null;
 
 		try {
+			Map<Long, Integer> counts = new HashMap<>();
+
 			session = openSession();
-
-			DB db = getDB();
-
-			boolean isSybase = DB.TYPE_SYBASE.equals(db.getType());
 
 			StringBundler sb = null;
 
-			if (isSybase) {
+			DB db = getDB();
+			
+			String dbType = db.getType();
+
+			boolean sybase = dbType.equals(DB.TYPE_SYBASE);
+
+			if (sybase) {
 				sb = new StringBundler(19);
 			}
 			else {
@@ -176,7 +180,7 @@ public class UserFinderImpl
 
 			sb.append("SELECT groupId, COUNT(DISTINCT userId) FROM (");
 
-			if (isSybase) {
+			if (sybase) {
 				sb.append("SELECT userId, groupId FROM ");
 			}
 
@@ -184,13 +188,13 @@ public class UserFinderImpl
 			sb.append(CustomSQLUtil.get(FIND_BY_USERS_GROUPS));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			if (isSybase) {
+			if (sybase) {
 				sb.append(" USERS_GROUPS");
 			}
 
 			sb.append(" UNION ALL ");
 
-			if (isSybase) {
+			if (sybase) {
 				sb.append("SELECT userId, groupId FROM ");
 			}
 
@@ -198,13 +202,13 @@ public class UserFinderImpl
 			sb.append(CustomSQLUtil.get(FIND_BY_USERS_ORGS));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			if (isSybase) {
+			if (sybase) {
 				sb.append(" USERS_ORGS");
 			}
 
 			sb.append(" UNION ALL ");
 
-			if (isSybase) {
+			if (sybase) {
 				sb.append("SELECT userId, groupId FROM ");
 			}
 
@@ -212,7 +216,7 @@ public class UserFinderImpl
 			sb.append(CustomSQLUtil.get(FIND_BY_USERS_USER_GROUPS));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			if (isSybase) {
+			if (sybase) {
 				sb.append(" USERS_USER_GROUPS");
 			}
 
@@ -243,16 +247,14 @@ public class UserFinderImpl
 			List<Object[]> list = (List<Object[]>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			Map<Long, Integer> map = new HashMap<>();
-
 			for (Object[] objects : list) {
 				Number groupId = (Number)objects[0];
 				Number count = (Number)objects[1];
 
-				map.put(groupId.longValue(), count.intValue());
+				counts.put(groupId.longValue(), count.intValue());
 			}
 
-			return map;
+			return counts;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
