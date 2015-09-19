@@ -53,10 +53,10 @@ public class UserImportMessageListener extends BaseMessageListener {
 		for (Company company : companies) {
 			long companyId = company.getCompanyId();
 
-			LDAPConfiguration ldapCompanyServiceSettings =
+			LDAPConfiguration ldapConfiguration =
 				_ldapConfigurationSettingsUtil.getLDAPConfiguration(companyId);
 
-			if (time >= ldapCompanyServiceSettings.importInterval()) {
+			if (time >= ldapConfiguration.importInterval()) {
 				_ldapUserImporter.importUsers(companyId);
 			}
 		}
