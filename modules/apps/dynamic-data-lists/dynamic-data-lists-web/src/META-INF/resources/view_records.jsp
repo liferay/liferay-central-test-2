@@ -62,11 +62,7 @@ if (hasUpdatePermission) {
 
 headerNames.add(StringPool.BLANK);
 
-SearchContainer recordSearchContainer = new SearchContainer(
-	renderRequest, new DisplayTerms(request), null,
-	SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA,
-	portletURL, headerNames, LanguageUtil.format(request, "no-x-records-were-found",
-	HtmlUtil.escape(ddmStructure.getName(locale)), false));
+SearchContainer recordSearchContainer = new SearchContainer(renderRequest, new DisplayTerms(request), null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(request, "no-x-records-were-found", HtmlUtil.escape(ddmStructure.getName(locale)), false));
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "modified-date");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
@@ -117,11 +113,9 @@ recordSearchContainer.setOrderByType(orderByType);
 
 <div class="container-fluid-1280" id="<portlet:namespace />formContainer">
 	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-
 		<liferay-ui:search-container
 			searchContainer="<%= recordSearchContainer %>"
 		>
-
 			<liferay-ui:search-container-results>
 				<%@ include file="/record_search_results.jspf" %>
 			</liferay-ui:search-container-results>
