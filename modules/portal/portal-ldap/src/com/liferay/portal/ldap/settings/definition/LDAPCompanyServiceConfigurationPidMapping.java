@@ -16,7 +16,7 @@ package com.liferay.portal.ldap.settings.definition;
 
 import com.liferay.portal.kernel.settings.definition.ConfigurationPidMapping;
 import com.liferay.portal.ldap.configuration.LDAPConfiguration;
-import com.liferay.portal.ldap.settings.SettingsConstants;
+import com.liferay.portal.ldap.constants.LDAPConstants;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -34,7 +34,7 @@ public class LDAPCompanyServiceConfigurationPidMapping
 
 	@Override
 	public String getConfigurationPid() {
-		return SettingsConstants.SERVICE_NAME;
+		return LDAPConstants.SERVICE_NAME;
 	}
 
 }

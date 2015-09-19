@@ -446,8 +446,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 				}
 			}
 
-			attributeIds[0] = _getNextRange(
-				ldapConfiguration, attributeIds[0]);
+			attributeIds[0] = _getNextRange(ldapConfiguration, attributeIds[0]);
 		}
 
 		return attribute;
@@ -858,8 +857,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 					ldapContext.setRequestControls(
 						new Control[] {
 							new PagedResultsControl(
-								ldapConfiguration.pageSize(),
-								Control.CRITICAL)
+								ldapConfiguration.pageSize(), Control.CRITICAL)
 						});
 				}
 				else {

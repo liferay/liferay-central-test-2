@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationFactory;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.ldap.configuration.LDAPConfiguration;
+import com.liferay.portal.ldap.constants.LDAPConstants;
 import com.liferay.portal.model.CompanyConstants;
 
 import org.osgi.service.component.annotations.Component;
@@ -39,7 +40,7 @@ public class LDAPConfigurationSettingsUtil {
 				_configurationFactory.getConfiguration(
 					LDAPConfiguration.class,
 					new CompanyServiceSettingsLocator(
-						companyId, SettingsConstants.SERVICE_NAME));
+						companyId, LDAPConstants.SERVICE_NAME));
 
 			return ldapConfiguration;
 		}

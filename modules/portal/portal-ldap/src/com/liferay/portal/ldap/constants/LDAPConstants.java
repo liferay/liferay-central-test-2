@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.ldap.settings;
+package com.liferay.portal.ldap.constants;
 
 /**
  * @author Michael C. Han
  */
-public class SettingsConstants {
+public class LDAPConstants {
 
 	public static final String SERVICE_NAME = "com.liferay.portal.ldap";
 
