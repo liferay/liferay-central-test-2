@@ -98,7 +98,6 @@ recordSetSearch.setOrderByType(orderByType);
 						<liferay-ui:search-container-column-jsp
 							path="/record_set_action.jsp"
 						/>
-
 					</c:when>
 					<c:otherwise>
 
