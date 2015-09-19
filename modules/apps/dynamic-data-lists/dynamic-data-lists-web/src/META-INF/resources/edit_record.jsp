@@ -72,12 +72,10 @@ if (translating) {
 	redirect = currentURL;
 }
 
-String title = (record != null) ? LanguageUtil.format(request, "edit-x", ddmStructure.getName(locale), false) : LanguageUtil.format(request, "new-x", ddmStructure.getName(locale), false);
-
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
-renderResponse.setTitle(title);
+renderResponse.setTitle((record != null) ? LanguageUtil.format(request, "edit-x", ddmStructure.getName(locale), false) : LanguageUtil.format(request, "new-x", ddmStructure.getName(locale), false));
 %>
 
 <portlet:actionURL name="addRecord" var="addRecordURL">
