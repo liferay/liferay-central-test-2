@@ -83,9 +83,6 @@ public class UserFinderImpl
 	public static final String FIND_BY_SOCIAL_USERS =
 		UserFinder.class.getName() + ".findBySocialUsers";
 
-	public static final String FIND_BY_C_FN_MN_LN_SN_EA_S =
-		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_S";
-
 	public static final String FIND_BY_USERS_GROUPS =
 		UserFinder.class.getName() + ".findByUsersGroups";
 
@@ -94,6 +91,9 @@ public class UserFinderImpl
 
 	public static final String FIND_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".findByUsersUserGroups";
+
+	public static final String FIND_BY_C_FN_MN_LN_SN_EA_S =
+		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_S";
 
 	public static final String JOIN_BY_CONTACT_TWITTER_SN =
 		UserFinder.class.getName() + ".joinByContactTwitterSN";
