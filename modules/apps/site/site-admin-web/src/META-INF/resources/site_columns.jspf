@@ -100,7 +100,7 @@
 >
 
 	<%
-	int usersCount = GetterUtil.getInteger(membersCounts.get(curGroup.getGroupId()));
+	int usersCount = GetterUtil.getInteger(groupUsersCounts.get(curGroup.getGroupId()));
 	%>
 
 	<c:if test="<%= usersCount > 0 %>">
