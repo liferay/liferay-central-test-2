@@ -100,7 +100,6 @@ renderResponse.setTitle(LanguageUtil.format(request, "view-x", ddmStructure.getN
 			<aui:button href="<%= redirect %>" name="cancelButton" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
-
 </div>
 
 <%

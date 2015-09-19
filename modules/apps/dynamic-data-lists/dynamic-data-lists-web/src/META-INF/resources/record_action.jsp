@@ -79,6 +79,5 @@ if (hasUpdatePermission) {
 			message="delete"
 			url="<%= deleteRecordURL %>"
 		/>
-
 	</c:if>
 </liferay-ui:icon-menu>
