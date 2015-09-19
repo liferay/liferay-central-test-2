@@ -55,10 +55,8 @@ public class ExportDDLRecordSetPortletConfigurationIcon
 	public boolean isShow() {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String namespace = portletDisplay.getNamespace();
-
 		long recordSetId = ParamUtil.getLong(
-			request, namespace + "recordSetId");
+			request, portletDisplay.getNamespace() + "recordSetId");
 
 		if (recordSetId == 0) {
 			return false;
