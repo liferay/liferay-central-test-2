@@ -16,14 +16,10 @@
 
 <%@ include file="/init.jsp" %>
 
-<%
-String taglibOnClick = renderResponse.getNamespace() + "manageDDMStructuresLink()";
-%>
-
 <liferay-ui:icon
 	iconCssClass="icon-th-large"
 	message="manage-data-definitions"
-	onClick="<%= taglibOnClick %>"
+	onClick='<%= renderResponse.getNamespace() + "manageDDMStructuresLink();" %>'
 	url="javascript:;"
 />
 
