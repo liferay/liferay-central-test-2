@@ -45,12 +45,10 @@ if (ddmStructureId > 0) {
 	}
 }
 
-String title = (recordSet == null) ? LanguageUtil.get(request, "new-list") : recordSet.getName(locale);
-
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
-renderResponse.setTitle(title);
+renderResponse.setTitle((recordSet == null) ? LanguageUtil.get(request, "new-list") : recordSet.getName(locale));
 %>
 
 <portlet:actionURL name="addRecordSet" var="addRecordSetURL">

@@ -33,12 +33,10 @@ portletURL.setParameter("mvcPath", "/view_record_history.jsp");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("recordId", String.valueOf(record.getRecordId()));
 
-String title = LanguageUtil.format(request, "x-history", ddmStructure.getName(locale), false);
-
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
-renderResponse.setTitle(title);
+renderResponse.setTitle(LanguageUtil.format(request, "x-history", ddmStructure.getName(locale), false));
 %>
 
 <aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
