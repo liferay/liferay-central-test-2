@@ -67,7 +67,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 			groupParams.put("active", Boolean.TRUE);
 		}
 
-		Map<Long, Integer> membersCounts = Collections.emptyMap();
+		Map<Long, Integer> groupUsersCounts = Collections.emptyMap();
 		%>
 
 		<liferay-ui:search-container-results>
@@ -92,7 +92,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 
 			long[] groupIds = ListUtil.toLongArray(results, Group.GROUP_ID_ACCESSOR);
 
-			membersCounts = UserLocalServiceUtil.searchCounts(company.getCompanyId(), WorkflowConstants.STATUS_APPROVED, groupIds);
+			groupUsersCounts = UserLocalServiceUtil.searchCounts(company.getCompanyId(), WorkflowConstants.STATUS_APPROVED, groupIds);
 			%>
 
 		</liferay-ui:search-container-results>
@@ -145,7 +145,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 
 			<liferay-ui:search-container-column-text
 				name="members"
-				value="<%= String.valueOf(membersCounts.get(group.getGroupId())) %>"
+				value="<%= String.valueOf(groupUsersCounts.get(group.getGroupId())) %>"
 			/>
 
 			<c:if test='<%= tabs1.equals("my-sites") && PropsValues.LIVE_USERS_ENABLED %>'>
