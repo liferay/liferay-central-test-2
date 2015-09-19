@@ -25,12 +25,10 @@ long displayDDMTemplateId = ParamUtil.getLong(request, "displayDDMTemplateId");
 
 boolean spreadsheet = ParamUtil.getBoolean(request, "spreadsheet");
 
-String title = recordSet.getName(locale);
-
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
-renderResponse.setTitle(title);
+renderResponse.setTitle(recordSet.getName(locale));
 %>
 
 <c:choose>
