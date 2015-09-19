@@ -43,8 +43,8 @@ public class LDAPConfigurationSettingsUtil {
 
 			return ldapConfiguration;
 		}
-		catch (ConfigurationException e) {
-			throw new IllegalStateException(e);
+		catch (ConfigurationException ce) {
+			throw new IllegalStateException(ce);
 		}
 	}
 
