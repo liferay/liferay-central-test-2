@@ -102,19 +102,19 @@ public class DefaultPortalLDAP implements PortalLDAP {
 			String credentials)
 		throws Exception {
 
-		LDAPConfiguration ldapCompanyServiceSettings =
+		LDAPConfiguration ldapConfiguration =
 			_ldapConfigurationSettingsUtil.getLDAPConfiguration(companyId);
 
 		Properties environmentProperties = new Properties();
 
 		environmentProperties.put(
 			Context.INITIAL_CONTEXT_FACTORY,
-			ldapCompanyServiceSettings.factoryInitial());
+			ldapConfiguration.factoryInitial());
 		environmentProperties.put(Context.PROVIDER_URL, providerURL);
 		environmentProperties.put(Context.SECURITY_PRINCIPAL, principal);
 		environmentProperties.put(Context.SECURITY_CREDENTIALS, credentials);
 		environmentProperties.put(
-			Context.REFERRAL, ldapCompanyServiceSettings.referral());
+			Context.REFERRAL, ldapConfiguration.referral());
 
 		Properties ldapConnectionProperties = PropsUtil.getProperties(
 			PropsKeys.LDAP_CONNECTION_PROPERTY_PREFIX, true);
@@ -391,11 +391,11 @@ public class DefaultPortalLDAP implements PortalLDAP {
 			return attribute;
 		}
 
-		LDAPConfiguration ldapCompanyServiceSettings =
+		LDAPConfiguration ldapConfiguration =
 			_ldapConfigurationSettingsUtil.getLDAPConfiguration(companyId);
 
 		String[] attributeIds = {
-			_getNextRange(ldapCompanyServiceSettings, attribute.getID())
+			_getNextRange(ldapConfiguration, attribute.getID())
 		};
 
 		while (true) {
@@ -435,7 +435,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 				if (StringUtil.endsWith(
 						curAttribute.getID(), StringPool.STAR) ||
 					(curAttribute.size() <
-						ldapCompanyServiceSettings.rangeSize())) {
+						ldapConfiguration.rangeSize())) {
 
 					break;
 				}
@@ -447,7 +447,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 			}
 
 			attributeIds[0] = _getNextRange(
-				ldapCompanyServiceSettings, attributeIds[0]);
+				ldapConfiguration, attributeIds[0]);
 		}
 
 		return attribute;
@@ -850,7 +850,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 
 		try {
 			if (cookie != null) {
-				LDAPConfiguration ldapCompanyServiceSettings =
+				LDAPConfiguration ldapConfiguration =
 					_ldapConfigurationSettingsUtil.getLDAPConfiguration(
 						companyId);
 
@@ -858,7 +858,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 					ldapContext.setRequestControls(
 						new Control[] {
 							new PagedResultsControl(
-								ldapCompanyServiceSettings.pageSize(),
+								ldapConfiguration.pageSize(),
 								Control.CRITICAL)
 						});
 				}
@@ -866,7 +866,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 					ldapContext.setRequestControls(
 						new Control[] {
 							new PagedResultsControl(
-								ldapCompanyServiceSettings.pageSize(), cookie,
+								ldapConfiguration.pageSize(), cookie,
 								Control.CRITICAL)
 						});
 				}
@@ -992,7 +992,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 	}
 
 	private String _getNextRange(
-		LDAPConfiguration ldapCompanyServiceSettings, String attributeId) {
+		LDAPConfiguration ldapConfiguration, String attributeId) {
 
 		String originalAttributeId = null;
 		int start = 0;
@@ -1002,7 +1002,7 @@ public class DefaultPortalLDAP implements PortalLDAP {
 
 		if (x < 0) {
 			originalAttributeId = attributeId;
-			end = ldapCompanyServiceSettings.rangeSize() - 1;
+			end = ldapConfiguration.rangeSize() - 1;
 		}
 		else {
 			int y = attributeId.indexOf(CharPool.EQUAL, x);
@@ -1012,8 +1012,8 @@ public class DefaultPortalLDAP implements PortalLDAP {
 			start = GetterUtil.getInteger(attributeId.substring(y + 1, z));
 			end = GetterUtil.getInteger(attributeId.substring(z + 1));
 
-			start += ldapCompanyServiceSettings.rangeSize();
-			end += ldapCompanyServiceSettings.rangeSize();
+			start += ldapConfiguration.rangeSize();
+			end += ldapConfiguration.rangeSize();
 		}
 
 		StringBundler sb = new StringBundler(6);
