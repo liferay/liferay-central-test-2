@@ -53,10 +53,10 @@ public class Summary {
 		}
 
 		if (!ArrayUtil.isEmpty(_queryTerms)) {
-			int beginPos = StringUtil.indexOfAny(_content, _queryTerms);
+			int index = StringUtil.indexOfAny(_content, _queryTerms);
 
-			if (beginPos > _maxContentLength) {
-				_content = _content.substring(beginPos);
+			if (index > _maxContentLength) {
+				_content = _content.substring(index);
 			}
 		}
 
