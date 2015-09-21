@@ -184,7 +184,6 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 		addDisplayTemplate(
 				_classNameId, 0, _resourceClassNameId, "Event", null,
 				WorkflowConstants.STATUS_APPROVED);
-
 		addDisplayTemplate(
 			_classNameId, 0, _resourceClassNameId, "Contact", null,
 			WorkflowConstants.STATUS_DRAFT);
@@ -229,7 +228,6 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 		addDisplayTemplate(
 			_classNameId, 0, _resourceClassNameId, "Event", null,
 			WorkflowConstants.STATUS_APPROVED);
-
 		addDisplayTemplate(
 			_classNameId, 0, _resourceClassNameId, "Contact", null,
 			WorkflowConstants.STATUS_DRAFT);
