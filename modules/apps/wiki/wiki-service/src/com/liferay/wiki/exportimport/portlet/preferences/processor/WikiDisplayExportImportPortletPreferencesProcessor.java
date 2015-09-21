@@ -79,7 +79,7 @@ public class WikiDisplayExportImportPortletPreferencesProcessor
 		if (nodeId <= 0) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No node id found in preferences of portlet " + portletId);
+					"No node ID found in preferences of portlet " + portletId);
 			}
 
 			return portletPreferences;
@@ -199,8 +199,7 @@ public class WikiDisplayExportImportPortletPreferencesProcessor
 					dynamicQuery.add(property.eq(nodeId));
 				}
 
-		});
-
+			});
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod() {
 
@@ -214,7 +213,7 @@ public class WikiDisplayExportImportPortletPreferencesProcessor
 						portletDataContext, portletId, page);
 				}
 
-		});
+			});
 
 		return actionableDynamicQuery;
 	}
