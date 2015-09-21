@@ -82,8 +82,10 @@ public class DDLDisplayExportImportPortletPreferencesProcessor
 			portletPreferences.getValue("recordSetId", null), 0);
 
 		if (recordSetId == 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to get record set " + recordSetId);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Record set ID is not set for preferences of portlet " +
+						portletId);
 			}
 
 			return portletPreferences;
