@@ -2,24 +2,24 @@
 	"availableLanguageIds": [
 		"en_US"
 	],
-	"defaultLanguageId":"en_US",
+	"defaultLanguageId": "en_US",
 	"fields": [
 		{
-			"validation":{},
-			"localizable":true,
-			"label":{
-				"en_US":"Content"
+			"dataType": "html",
+			"fieldNamespace": "ddm",
+			"indexType": "keyword",
+			"label": {
+				"en_US": "Content"
 			},
-			"type":"ddm-text-html",
-			"fieldNamespace":"ddm",
-			"indexType":"keyword",
-			"dataType":"html",
-			"readOnly":false,
-			"visibilityExpression":"",
-			"showLabel":true,
-			"name":"content",
-			"repeatable":false,
-			"required":false
+			"localizable": true,
+			"name": "content",
+			"readOnly": false,
+			"repeatable": false,
+			"required": false,
+			"showLabel": true,
+			"type": "ddm-text-html",
+			"validation": {},
+			"visibilityExpression": ""
 		}
 	]
 }
