@@ -17,6 +17,8 @@ package com.liferay.admin.web.messaging;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.plugin.PluginPackageUtil;
 
 import org.osgi.service.component.annotations.Component;
