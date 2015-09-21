@@ -35,7 +35,11 @@ if (calendarResource == null) {
 	calendarResource = calendar.getCalendarResource();
 }
 
-String calendarName = (calendar != null) ? calendar.getName(locale) : null;
+String calendarName = null;
+
+if (calendar != null) {
+	calendarName = calendar.getName(locale);
+}
 
 String calendarResourceName = calendarResource.getName(locale);
 
