@@ -83,7 +83,7 @@ public class DDLDisplayExportImportPortletPreferencesProcessor
 
 		if (recordSetId == 0) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to get record set with ID " + portletId);
+				_log.debug("Unable to get record set " + recordSetId);
 			}
 
 			return portletPreferences;
