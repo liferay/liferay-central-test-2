@@ -29,8 +29,6 @@ String displayStyle = ParamUtil.getString(request, "displayStyle", "list");
 
 String keywords = ParamUtil.getString(request, "keywords");
 
-boolean showInfoPanel = Validator.isNull(keywords) && (group != null);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("groupId", String.valueOf(groupId));
@@ -69,7 +67,7 @@ if (group != null) {
 	includeCheckBox="<%= true %>"
 >
 	<liferay-frontend:management-bar-buttons>
-		<c:if test="<%= showInfoPanel %>">
+		<c:if test="<%= Validator.isNull(keywords) && (group != null) %>">
 			<aui:a cssClass="btn infoPanelToggler" href="javascript:;" iconCssClass="icon-info-sign" />
 		</c:if>
 
@@ -97,7 +95,7 @@ if (group != null) {
 <div class="closed container-fluid-1280 sidenav-container sidenav-right" id="<portlet:namespace />infoPanelId">
 	<div class="sidenav-menu-slider">
 		<div class="sidebar sidebar-default sidenav-menu">
-			<c:if test="<%= showInfoPanel %>">
+			<c:if test="<%= Validator.isNull(keywords) && (group != null) %>">
 				<liferay-util:include page="/view_site_info.jsp" servletContext="<%= application %>" />
 			</c:if>
 		</div>

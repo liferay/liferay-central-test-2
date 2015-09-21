@@ -45,16 +45,6 @@ userGroupParams.put("userGroupsGroups", Long.valueOf(groupId));
 
 int userGroupsCount = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), null, userGroupParams);
 
-int pendingRequests = 0;
-
-if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
-	pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
-}
-
-String portletId = PortletProviderUtil.getPortletId(MembershipRequest.class.getName(), PortletProvider.Action.VIEW);
-
-LayoutSet layoutSet = group.getPublicLayoutSet();
-
 request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 request.setAttribute("view_entries.jspf-site", group);
@@ -77,6 +67,11 @@ request.setAttribute("view_entries.jspf-site", group);
 </aui:nav-bar>
 
 <div class="sidebar-body">
+
+	<%
+	LayoutSet layoutSet = group.getPublicLayoutSet();
+	%>
+
 	<img alt="<%= HtmlUtil.escapeAttribute(group.getDescriptiveName()) %>" class="center-block img-responsive" src='<%= themeDisplay.getPathImage() + "/layout_set_logo?img_id=" + layoutSet.getLogoId() + "&t=" + WebServerServletTokenUtil.getToken(layoutSet.getLogoId()) %>' />
 
 	<c:if test="<%= group.isOrganization() %>">
@@ -97,6 +92,10 @@ request.setAttribute("view_entries.jspf-site", group);
 			<liferay-ui:message key="none" />
 		</p>
 	</c:if>
+
+	<%
+	String portletId = PortletProviderUtil.getPortletId(MembershipRequest.class.getName(), PortletProvider.Action.VIEW);
+	%>
 
 	<liferay-portlet:renderURL doAsGroupId="<%= groupId %>" portletName="<%= portletId %>" var="assignMembersURL">
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -119,6 +118,14 @@ request.setAttribute("view_entries.jspf-site", group);
 			<aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "user-groups") %>' label='<%= LanguageUtil.format(request, (userGroupsCount == 1) ? "x-user-groups" : "x-user-groups", userGroupsCount, false) %>' />
 		</p>
 	</c:if>
+
+	<%
+	int pendingRequests = 0;
+
+	if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
+		pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
+	}
+	%>
 
 	<c:if test="<%= pendingRequests > 0 %>">
 		<h5><liferay-ui:message key="request-pending" /></h5>
