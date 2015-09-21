@@ -79,7 +79,8 @@ public class WikiDisplayExportImportPortletPreferencesProcessor
 		if (nodeId <= 0) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No node ID found in preferences of portlet " + portletId);
+					"Node ID is not set for preferences of portlet " +
+						portletId);
 			}
 
 			return portletPreferences;
@@ -90,7 +91,7 @@ public class WikiDisplayExportImportPortletPreferencesProcessor
 		if (title == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No title found in preferences of portlet " + portletId);
+					"Title is not set for preferences of portlet " + portletId);
 			}
 
 			return portletPreferences;

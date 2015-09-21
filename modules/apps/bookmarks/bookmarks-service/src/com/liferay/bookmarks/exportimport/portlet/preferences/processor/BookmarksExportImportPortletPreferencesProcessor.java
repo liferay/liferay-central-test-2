@@ -123,7 +123,7 @@ public class BookmarksExportImportPortletPreferencesProcessor
 		}
 		catch (ReadOnlyException roe) {
 			throw new PortletDataException(
-				"Could not update rootFolderId preference value", roe);
+				"Unable to update preference \"rootFolderId\"", roe);
 		}
 
 		return portletPreferences;
