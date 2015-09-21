@@ -75,7 +75,7 @@ if (group != null) {
 
 		<liferay-frontend:management-bar-display-buttons
 			displayStyleURL="<%= portletURL %>"
-			displayViews='<%= new String[]{"list"} %>'
+			displayViews='<%= new String[] {"list"} %>'
 			selectedDisplayStyle="<%= displayStyle %>"
 		/>
 	</liferay-frontend:management-bar-buttons>
@@ -84,7 +84,7 @@ if (group != null) {
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= groupSearch.getOrderByCol() %>"
 			orderByType="<%= groupSearch.getOrderByType() %>"
-			orderColumns='<%= new String[]{"name"} %>'
+			orderColumns='<%= new String[] {"name"} %>'
 			portletURL="<%= portletURL %>"
 		/>
 	</liferay-frontend:management-bar-filters>

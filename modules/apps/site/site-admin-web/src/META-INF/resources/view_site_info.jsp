@@ -85,13 +85,17 @@ request.setAttribute("view_entries.jspf-site", group);
 		Organization groupOrganization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 		%>
 
-		<p><liferay-ui:message arguments="<%= new String[] {groupOrganization.getName(), LanguageUtil.get(request, groupOrganization.getType())} %>" key="this-site-belongs-to-x-which-is-an-organization-of-type-x" translateArguments="<%= false %>" /></p>
+		<p>
+			<liferay-ui:message arguments="<%= new String[] {groupOrganization.getName(), LanguageUtil.get(request, groupOrganization.getType())} %>" key="this-site-belongs-to-x-which-is-an-organization-of-type-x" translateArguments="<%= false %>" />
+		</p>
 	</c:if>
 
 	<h5><liferay-ui:message key="members" /></h5>
 
 	<c:if test="<%= (usersCount == 0) && (organizationsCount == 0) && (userGroupsCount == 0) %>">
-		<p><liferay-ui:message key="none" /></p>
+		<p>
+			<liferay-ui:message key="none" />
+		</p>
 	</c:if>
 
 	<liferay-portlet:renderURL doAsGroupId="<%= groupId %>" portletName="<%= portletId %>" var="assignMembersURL">
@@ -99,15 +103,21 @@ request.setAttribute("view_entries.jspf-site", group);
 	</liferay-portlet:renderURL>
 
 	<c:if test="<%= usersCount > 0 %>">
-		<p><aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "users") %>' label='<%= LanguageUtil.format(request, (usersCount == 1) ? "x-user" : "x-users", usersCount, false) %>' /></p>
+		<p>
+			<aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "users") %>' label='<%= LanguageUtil.format(request, (usersCount == 1) ? "x-user" : "x-users", usersCount, false) %>' />
+		</p>
 	</c:if>
 
 	<c:if test="<%= organizationsCount > 0 %>">
-		<p><aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "organizations") %>' label='<%= LanguageUtil.format(request, (organizationsCount == 1) ? "x-organization" : "x-organizations", organizationsCount, false) %>' /></p>
+		<p>
+			<aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "organizations") %>' label='<%= LanguageUtil.format(request, (organizationsCount == 1) ? "x-organization" : "x-organizations", organizationsCount, false) %>' />
+		</p>
 	</c:if>
 
 	<c:if test="<%= userGroupsCount > 0 %>">
-		<p><aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "user-groups") %>' label='<%= LanguageUtil.format(request, (userGroupsCount == 1) ? "x-user-groups" : "x-user-groups", userGroupsCount, false) %>' /></p>
+		<p>
+			<aui:a href='<%= HttpUtil.addParameter(assignMembersURL.toString(), "tabs1", "user-groups") %>' label='<%= LanguageUtil.format(request, (userGroupsCount == 1) ? "x-user-groups" : "x-user-groups", userGroupsCount, false) %>' />
+		</p>
 	</c:if>
 
 	<c:if test="<%= pendingRequests > 0 %>">
@@ -126,12 +136,16 @@ request.setAttribute("view_entries.jspf-site", group);
 
 	<h5><liferay-ui:message key="membership-type" /></h5>
 
-	<p><liferay-ui:message key="<%= GroupConstants.getTypeLabel(group.getType()) %>" /></p>
+	<p>
+		<liferay-ui:message key="<%= GroupConstants.getTypeLabel(group.getType()) %>" />
+	</p>
 
 	<c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
 		<h5><liferay-ui:message key="description" /></h5>
 
-		<p><%= HtmlUtil.escape(group.getDescription()) %></p>
+		<p>
+			<%= HtmlUtil.escape(group.getDescription()) %>
+		</p>
 	</c:if>
 
 	<liferay-ui:asset-categories-summary
