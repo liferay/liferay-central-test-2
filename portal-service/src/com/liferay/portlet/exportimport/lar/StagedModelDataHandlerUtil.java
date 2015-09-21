@@ -184,18 +184,18 @@ public class StagedModelDataHandlerUtil {
 	}
 
 	/**
-	 * Import a staged model being referenced by a portlet. To import a staged
-	 * model referenced by an other staged model use {@link
+	 * Imports the staged model that is referenced by a portlet. To import a
+	 * staged model referenced by another staged model, use {@link
 	 * #importReferenceStagedModel(PortletDataContext, StagedModel, Class,
-	 * long)}
+	 * long)}.
 	 *
 	 * @param  portletDataContext the portlet data context of the current
 	 *         process
-	 * @param  stagedModelClass the class of the referenced staged model needs
-	 *         to be improted
-	 * @param  classPK the class pk of the referenced staged model needs to be
+	 * @param  stagedModelClass the class of the referenced staged model to be
 	 *         imported
-	 * @throws PortletDataException
+	 * @param  classPK the primary key of the referenced staged model to be
+	 *         imported
+	 * @throws PortletDataException if a portlet data exception occurred
 	 */
 	public static void importReferenceStagedModel(
 			PortletDataContext portletDataContext, Class<?> stagedModelClass,
@@ -207,18 +207,18 @@ public class StagedModelDataHandlerUtil {
 	}
 
 	/**
-	 * Import a staged model being referenced by a portlet. To import a staged
-	 * model referenced by an other staged model use {@link
+	 * Imports the staged model that is referenced by a portlet. To import a
+	 * staged model referenced by another staged model, use {@link
 	 * #importReferenceStagedModel(PortletDataContext, StagedModel, String,
-	 * long)}
+	 * long)}.
 	 *
 	 * @param  portletDataContext the portlet data context of the current
 	 *         process
 	 * @param  stagedModelClassName the class name of the referenced staged
-	 *         model needs to be imported
-	 * @param  classPK the class pk of the referenced staged model needs to be
+	 *         model to be imported
+	 * @param  classPK the primary key of the referenced staged model to be
 	 *         imported
-	 * @throws PortletDataException
+	 * @throws PortletDataException if a portlet data exception occurred
 	 */
 	public static void importReferenceStagedModel(
 			PortletDataContext portletDataContext, String stagedModelClassName,
@@ -233,19 +233,19 @@ public class StagedModelDataHandlerUtil {
 	}
 
 	/**
-	 * Import a staged model being referenced by an other staged model. To
-	 * import a staged model referenced by a portlet use {@link
-	 * #importReferenceStagedModel(PortletDataContext, Class, long)}
+	 * Imports the staged model that is referenced by another staged model. To
+	 * import a staged model referenced by a portlet, use {@link
+	 * #importReferenceStagedModel(PortletDataContext, Class, long)}.
 	 *
 	 * @param  portletDataContext the portlet data context of the current
 	 *         process
-	 * @param  referrerStagedModel the staged model referencing the one we want
-	 *         to import
-	 * @param  stagedModelClass the class of the referenced staged model needs
-	 *         to be imported
-	 * @param  classPK the class pk of the referenced staged model needs to be
+	 * @param  referrerStagedModel the staged model that references the staged
+	 *         model to be imported
+	 * @param  stagedModelClass the class of the referenced staged model to be
 	 *         imported
-	 * @throws PortletDataException
+	 * @param  classPK the primary key of the referenced staged model to be
+	 *         imported
+	 * @throws PortletDataException if a portlet data exception occurred
 	 */
 	public static <T extends StagedModel> void importReferenceStagedModel(
 			PortletDataContext portletDataContext, T referrerStagedModel,
@@ -258,19 +258,19 @@ public class StagedModelDataHandlerUtil {
 	}
 
 	/**
-	 * Import a staged model being referenced by an other staged model. To
-	 * import a staged model referenced by a portlet use {@link
-	 * #importReferenceStagedModel(PortletDataContext, String, long)}
+	 * Imports the staged model that is referenced by another staged model. To
+	 * import a staged model referenced by a portlet, use {@link
+	 * #importReferenceStagedModel(PortletDataContext, String, long)}.
 	 *
 	 * @param  portletDataContext the portlet data context of the current
 	 *         process
-	 * @param  referrerStagedModel the staged model referencing the one we want
-	 *         to import
+	 * @param  referrerStagedModel the staged model that references the staged
+	 *         model to be imported
 	 * @param  stagedModelClassName the class name of the referenced staged
-	 *         model needs to be imported
-	 * @param  classPK the class pk of the referenced staged model needs to be
+	 *         model to be imported
+	 * @param  classPK the primary key of the referenced staged model to be
 	 *         imported
-	 * @throws PortletDataException
+	 * @throws PortletDataException if a portlet data exception occurred
 	 */
 	public static <T extends StagedModel> void importReferenceStagedModel(
 			PortletDataContext portletDataContext, T referrerStagedModel,
