@@ -84,6 +84,9 @@ if (layoutSetPrototypeId > 0) {
 }
 
 if (!portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS)) {
+	portletDisplay.setShowBackIcon(true);
+	portletDisplay.setURLBack(backURL.toString());
+
 	String title = StringPool.BLANK;
 
 	if (group != null) {
@@ -98,9 +101,6 @@ if (!portletName.equals(SiteAdminPortletKeys.SITE_SETTINGS)) {
 	else {
 		title = LanguageUtil.get(request, "new-site");
 	}
-
-	portletDisplay.setShowBackIcon(true);
-	portletDisplay.setURLBack(backURL.toString());
 
 	renderResponse.setTitle(HtmlUtil.escape(title));
 
