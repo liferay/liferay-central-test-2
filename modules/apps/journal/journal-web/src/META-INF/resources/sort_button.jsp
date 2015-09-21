@@ -49,6 +49,6 @@ else {
 <liferay-frontend:management-bar-sort
 	orderByCol="<%= orderByCol %>"
 	orderByType="<%= orderByType %>"
-	orderColumns='<%= new String[]{"display-date", "modified-date"} %>'
+	orderColumns='<%= new String[] {"display-date", "modified-date"} %>'
 	portletURL="<%= portletURL %>"
 />
