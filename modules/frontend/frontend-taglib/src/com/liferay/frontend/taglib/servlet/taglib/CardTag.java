@@ -223,6 +223,7 @@ public class CardTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-frontend:card:showCheckbox", _showCheckbox);
+
 		request.setAttribute(
 			"liferay-frontend:card:smallImageCSSClass", _smallImageCSSClass);
 		request.setAttribute(
