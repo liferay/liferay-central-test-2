@@ -33,12 +33,12 @@ public class RepositoryModelModifiedDateComparator<T>
 
 	public static final String ORDER_BY_ASC = "modifiedDate ASC";
 
-	public static final String ORDER_BY_ASC_MODEL =
+	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, modifiedDate ASC";
 
 	public static final String ORDER_BY_DESC = "modifiedDate DESC";
 
-	public static final String ORDER_BY_DESC_MODEL =
+	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, modifiedDate DESC";
 
 	public static final String[] ORDER_BY_FIELDS = {"modifiedDate"};
@@ -98,10 +98,10 @@ public class RepositoryModelModifiedDateComparator<T>
 	public String getOrderBy() {
 		if (_orderByModel) {
 			if (_ascending) {
-				return ORDER_BY_ASC_MODEL;
+				return ORDER_BY_MODEL_ASC;
 			}
 			else {
-				return ORDER_BY_DESC_MODEL;
+				return ORDER_BY_MODEL_DESC;
 			}
 		}
 		else {

@@ -30,12 +30,12 @@ public class RepositoryModelTitleComparator<T> extends OrderByComparator<T> {
 
 	public static final String ORDER_BY_ASC = "title ASC";
 
-	public static final String ORDER_BY_ASC_MODEL =
+	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, title ASC";
 
 	public static final String ORDER_BY_DESC = "title DESC";
 
-	public static final String ORDER_BY_DESC_MODEL =
+	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, title DESC";
 
 	public static final String[] ORDER_BY_FIELDS = {"title"};
@@ -95,10 +95,10 @@ public class RepositoryModelTitleComparator<T> extends OrderByComparator<T> {
 	public String getOrderBy() {
 		if (_orderByModel) {
 			if (_ascending) {
-				return ORDER_BY_ASC_MODEL;
+				return ORDER_BY_MODEL_ASC;
 			}
 			else {
-				return ORDER_BY_DESC_MODEL;
+				return ORDER_BY_MODEL_DESC;
 			}
 		}
 		else {
