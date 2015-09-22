@@ -20,18 +20,12 @@
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 String assetTagName = ParamUtil.getString(request, "tag");
 
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("mvcRenderCommandName", "/blogs_admin/view");
-
 String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
-PortletURL displayStyleURL = renderResponse.createRenderURL();
+PortletURL portletURL = renderResponse.createRenderURL();
 
-String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
-
-RowChecker rowChecker = new EmptyOnClickRowChecker(renderResponse);
+portletURL.setParameter("mvcRenderCommandName", "/blogs_admin/view");
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
@@ -54,6 +48,13 @@ RowChecker rowChecker = new EmptyOnClickRowChecker(renderResponse);
 	includeCheckBox="<%= true %>"
 >
 	<liferay-frontend:management-bar-buttons>
+
+		<%
+		PortletURL displayStyleURL = renderResponse.createRenderURL();
+
+		String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
+		%>
+
 		<liferay-frontend:management-bar-display-buttons
 			displayStyleURL="<%= displayStyleURL %>"
 			displayViews='<%= new String[] {"icon", "list"} %>'
@@ -101,7 +102,7 @@ RowChecker rowChecker = new EmptyOnClickRowChecker(renderResponse);
 	<liferay-ui:search-container
 		id="blogEntries"
 		orderByComparator="<%= BlogsUtil.getOrderByComparator(orderByCol, orderByType) %>"
-		rowChecker="<%= rowChecker %>"
+		rowChecker="<%= new EmptyOnClickRowChecker(renderResponse) %>"
 		searchContainer="<%= new EntrySearch(renderRequest, portletURL) %>"
 	>
 
