@@ -1371,7 +1371,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				schedulerEntryImpl.setTrigger(
 					TriggerFactoryUtil.createTrigger(
 						eventListenerClass, eventListenerClass,
-						Integer.parseInt(intervalString),
+						GetterUtil.getInteger(intervalString),
 						TimeUnit.valueOf(timeUnitString)));
 			}
 
