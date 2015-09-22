@@ -515,7 +515,7 @@ public class QuartzSchedulerEngineTest {
 		Trigger trigger = schedulerResponse.getTrigger();
 
 		CalendarIntervalTrigger calendarIntervalTrigger =
-			(CalendarIntervalTrigger)trigger.getRealTrigger();
+			(CalendarIntervalTrigger)trigger.getWrappedTrigger();
 
 		Assert.assertEquals(
 			_DEFAULT_INTERVAL, calendarIntervalTrigger.getRepeatInterval());
@@ -532,7 +532,7 @@ public class QuartzSchedulerEngineTest {
 		trigger = schedulerResponse.getTrigger();
 
 		calendarIntervalTrigger =
-			(CalendarIntervalTrigger)trigger.getRealTrigger();
+			(CalendarIntervalTrigger)trigger.getWrappedTrigger();
 
 		Assert.assertEquals(
 			_DEFAULT_INTERVAL * 2, calendarIntervalTrigger.getRepeatInterval());
@@ -547,7 +547,7 @@ public class QuartzSchedulerEngineTest {
 		Trigger trigger = schedulerResponse.getTrigger();
 
 		CalendarIntervalTrigger calendarIntervalTrigger =
-			(CalendarIntervalTrigger)trigger.getRealTrigger();
+			(CalendarIntervalTrigger)trigger.getWrappedTrigger();
 
 		Assert.assertEquals(
 			_DEFAULT_INTERVAL, calendarIntervalTrigger.getRepeatInterval());
@@ -565,7 +565,7 @@ public class QuartzSchedulerEngineTest {
 
 		trigger = schedulerResponse.getTrigger();
 
-		CronTrigger cronTrigger = (CronTrigger)trigger.getRealTrigger();
+		CronTrigger cronTrigger = (CronTrigger)trigger.getWrappedTrigger();
 
 		Assert.assertEquals(cronExpression, cronTrigger.getCronExpression());
 	}
@@ -872,7 +872,7 @@ public class QuartzSchedulerEngineTest {
 
 				addJob(
 					_TEST_JOB_NAME_PREFIX + i, defaultGroupName, storageType,
-					(org.quartz.Trigger)trigger.getRealTrigger());
+					(org.quartz.Trigger)trigger.getWrappedTrigger());
 			}
 		}
 

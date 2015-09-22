@@ -2408,7 +2408,7 @@ public class ClusterSchedulerEngineTest {
 		}
 
 		@Override
-		public Serializable getRealTrigger() {
+		public Serializable getWrappedTrigger() {
 			return null;
 		}
 
