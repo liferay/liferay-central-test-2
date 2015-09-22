@@ -330,8 +330,10 @@ public abstract class BaseBlogsEntryImageTestCase {
 	protected FileEntry getFileEntry(
 			long userId, String title, ServiceContext serviceContext)
 		throws PortalException {
+		
+		Class<?> clazz = getClass();
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			"com/liferay/portal/util/dependencies/test.jpg");
@@ -349,7 +351,9 @@ public abstract class BaseBlogsEntryImageTestCase {
 			long userId, String title, ServiceContext serviceContext)
 		throws PortalException {
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			"com/liferay/portal/util/dependencies/test.jpg");
