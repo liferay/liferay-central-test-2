@@ -49,13 +49,13 @@ public class QuartzTrigger implements Trigger {
 	}
 
 	@Override
-	public org.quartz.Trigger getWrappedTrigger() {
-		return _trigger;
+	public Date getStartDate() {
+		return _trigger.getStartTime();
 	}
 
 	@Override
-	public Date getStartDate() {
-		return _trigger.getStartTime();
+	public org.quartz.Trigger getWrappedTrigger() {
+		return _trigger;
 	}
 
 	private static final long serialVersionUID = 1L;

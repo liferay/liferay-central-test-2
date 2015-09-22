@@ -2408,17 +2408,17 @@ public class ClusterSchedulerEngineTest {
 		}
 
 		@Override
-		public Serializable getWrappedTrigger() {
-			return null;
-		}
-
-		@Override
 		public Date getStartDate() {
 			return _startDate;
 		}
 
 		public TimeUnit getTimeUnit() {
 			return _timeUnit;
+		}
+
+		@Override
+		public Serializable getWrappedTrigger() {
+			return null;
 		}
 
 		private final Date _endDate;
