@@ -59,7 +59,7 @@ public abstract class BaseStagedModelRepository<T extends StagedModel>
 
 		try {
 
-			// Try to fetch the existing staged model from the parent sites
+			// Try to fetch the existing staged model from parent sites
 
 			Group originalGroup = GroupLocalServiceUtil.getGroup(groupId);
 
