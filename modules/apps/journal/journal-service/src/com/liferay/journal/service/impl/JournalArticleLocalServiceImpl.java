@@ -1281,10 +1281,10 @@ public class JournalArticleLocalServiceImpl
 
 		long classNameId = classNameLocalService.getClassNameId(className);
 
-		for (JournalArticle article :
-				journalArticlePersistence.findByG_C_C(
-					groupId, classNameId, classPK)) {
+		List<JournalArticle> articles = journalArticlePersistence.findByG_C_C(
+			groupId, classNameId, classPK);
 
+		for (JournalArticle article : articles) {
 			journalArticleLocalService.deleteArticle(article, null, null);
 		}
 	}
