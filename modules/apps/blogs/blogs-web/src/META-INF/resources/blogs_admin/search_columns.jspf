@@ -45,7 +45,7 @@
 				header='<%= LanguageUtil.format(request, "x-ago-by-x", new String[] {LanguageUtil.getTimeDescription(locale, System.currentTimeMillis() - entry.getModifiedDate().getTime(), true), HtmlUtil.escape(entry.getUserName())}, false) %>'
 				imageUrl='<%= Validator.isNotNull(entryImageURL) ? entryImageURL : themeDisplay.getPathThemeImages() + "/file_system/large/article.png" %>'
 				resultRow="<%= row %>"
-				rowChecker="<%= rowChecker %>"
+				rowChecker="<%= searchContainer.getRowChecker() %>"
 				smallImageCSSClass="user-icon user-icon-lg"
 				smallImageUrl="<%= userDisplay != null ? userDisplay.getPortraitURL(themeDisplay) : UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0, null) %>"
 				title="<%= HtmlUtil.escape(entry.getTitle()) %>"
