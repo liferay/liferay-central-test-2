@@ -30,15 +30,15 @@ public class RepositoryModelTitleComparator<T> extends OrderByComparator<T> {
 
 	public static final String ORDER_BY_ASC = "title ASC";
 
+	public static final String ORDER_BY_DESC = "title DESC";
+
+	public static final String[] ORDER_BY_FIELDS = {"title"};
+
 	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, title ASC";
 
-	public static final String ORDER_BY_DESC = "title DESC";
-
 	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, title DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"title"};
 
 	public RepositoryModelTitleComparator() {
 		this(false);

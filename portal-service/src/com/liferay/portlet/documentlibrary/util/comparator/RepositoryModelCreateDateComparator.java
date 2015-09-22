@@ -32,15 +32,15 @@ public class RepositoryModelCreateDateComparator<T>
 
 	public static final String ORDER_BY_ASC = "createDate ASC";
 
+	public static final String ORDER_BY_DESC = "createDate DESC";
+
+	public static final String[] ORDER_BY_FIELDS = {"createDate"};
+
 	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, createDate ASC";
 
-	public static final String ORDER_BY_DESC = "createDate DESC";
-
 	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, createDate DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"createDate"};
 
 	public RepositoryModelCreateDateComparator() {
 		this(false);

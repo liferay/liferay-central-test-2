@@ -33,15 +33,15 @@ public class RepositoryModelModifiedDateComparator<T>
 
 	public static final String ORDER_BY_ASC = "modifiedDate ASC";
 
+	public static final String ORDER_BY_DESC = "modifiedDate DESC";
+
+	public static final String[] ORDER_BY_FIELDS = {"modifiedDate"};
+
 	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, modifiedDate ASC";
 
-	public static final String ORDER_BY_DESC = "modifiedDate DESC";
-
 	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, modifiedDate DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"modifiedDate"};
 
 	public RepositoryModelModifiedDateComparator() {
 		this(false);
