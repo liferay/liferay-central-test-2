@@ -30,12 +30,12 @@ public class RepositoryModelSizeComparator<T> extends OrderByComparator<T> {
 
 	public static final String ORDER_BY_ASC = "size_ ASC";
 
-	public static final String ORDER_BY_ASC_MODEL =
+	public static final String ORDER_BY_MODEL_ASC =
 		"modelFolder DESC, size_ ASC";
 
 	public static final String ORDER_BY_DESC = "size_ DESC";
 
-	public static final String ORDER_BY_DESC_MODEL =
+	public static final String ORDER_BY_MODEL_DESC =
 		"modelFolder DESC, size_ DESC";
 
 	public static final String[] ORDER_BY_FIELDS = {"size"};
@@ -95,10 +95,10 @@ public class RepositoryModelSizeComparator<T> extends OrderByComparator<T> {
 	public String getOrderBy() {
 		if (_orderByModel) {
 			if (_ascending) {
-				return ORDER_BY_ASC_MODEL;
+				return ORDER_BY_MODEL_ASC;
 			}
 			else {
-				return ORDER_BY_DESC_MODEL;
+				return ORDER_BY_MODEL_DESC;
 			}
 		}
 		else {
