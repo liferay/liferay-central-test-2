@@ -98,15 +98,10 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						<%
 						Hits hits = null;
 
-						int[] statuses = new int[] {
-							WorkflowConstants.STATUS_APPROVED
-						};
+						int[] statuses = {WorkflowConstants.STATUS_APPROVED};
 
 						if (showScheduled) {
-							statuses = new int[] {
-								WorkflowConstants.STATUS_APPROVED,
-								WorkflowConstants.STATUS_SCHEDULED
-							};
+							statuses = new int[] {WorkflowConstants.STATUS_APPROVED, WorkflowConstants.STATUS_SCHEDULED};
 						}
 
 						if (searchTerms.isAdvancedSearch()) {
