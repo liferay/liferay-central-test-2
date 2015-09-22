@@ -60,10 +60,10 @@ public class RepositoryModelCreateDateComparator<T>
 
 	@Override
 	public int compare(T t1, T t2 ) {
+		int value = 0;
+
 		Date createDate1 = getCreateDate(t1);
 		Date createDate2 = getCreateDate(t2);
-
-		int value = 0;
 
 		if (_orderByModel) {
 			if (((t1 instanceof DLFolder) || (t1 instanceof Folder)) &&
