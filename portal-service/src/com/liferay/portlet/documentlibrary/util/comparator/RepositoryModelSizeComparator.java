@@ -58,10 +58,10 @@ public class RepositoryModelSizeComparator<T> extends OrderByComparator<T> {
 
 	@Override
 	public int compare(T t1, T t2) {
+		int value = 0;
+
 		Long size1 = getSize(t1);
 		Long size2 = getSize(t2);
-
-		int value = 0;
 
 		if (_orderByModel) {
 			if (((t1 instanceof DLFolder) || (t1 instanceof Folder)) &&

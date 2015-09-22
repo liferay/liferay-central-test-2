@@ -61,10 +61,10 @@ public class RepositoryModelModifiedDateComparator<T>
 
 	@Override
 	public int compare(T t1, T t2) {
+		int value = 0;
+
 		Date modifiedDate1 = getModifiedDate(t1);
 		Date modifiedDate2 = getModifiedDate(t2);
-
-		int value = 0;
 
 		if (_orderByModel) {
 			if (((t1 instanceof DLFolder) || (t1 instanceof Folder)) &&

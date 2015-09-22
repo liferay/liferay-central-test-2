@@ -60,10 +60,10 @@ public class RepositoryModelReadCountComparator<T>
 
 	@Override
 	public int compare(T t1, T t2) {
+		int value = 0;
+
 		Long readCount1 = getReadCount(t1);
 		Long readCount2 = getReadCount(t2);
-
-		int value = 0;
 
 		if (_orderByModel) {
 			if (((t1 instanceof DLFolder) || (t1 instanceof Folder)) &&
