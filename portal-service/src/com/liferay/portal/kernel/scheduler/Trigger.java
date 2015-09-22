@@ -29,7 +29,7 @@ public interface Trigger extends Serializable {
 
 	public String getJobName();
 
-	public Serializable getRealTrigger();
+	public Serializable getWrappedTrigger();
 
 	public Date getStartDate();
 

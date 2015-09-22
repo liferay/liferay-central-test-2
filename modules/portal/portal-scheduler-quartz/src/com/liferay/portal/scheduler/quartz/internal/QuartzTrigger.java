@@ -49,7 +49,7 @@ public class QuartzTrigger implements Trigger {
 	}
 
 	@Override
-	public org.quartz.Trigger getRealTrigger() {
+	public org.quartz.Trigger getWrappedTrigger() {
 		return _trigger;
 	}
 

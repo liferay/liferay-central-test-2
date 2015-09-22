@@ -403,7 +403,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		try {
 			Scheduler scheduler = getScheduler(storageType);
 
-			Trigger quartzTrigger = (Trigger)trigger.getRealTrigger();
+			Trigger quartzTrigger = (Trigger)trigger.getWrappedTrigger();
 
 			if (quartzTrigger == null) {
 				return;
@@ -1176,7 +1176,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			StorageType storageType)
 		throws Exception {
 
-		Trigger quartzTrigger = (Trigger)trigger.getRealTrigger();
+		Trigger quartzTrigger = (Trigger)trigger.getWrappedTrigger();
 
 		if (quartzTrigger == null) {
 			return;
