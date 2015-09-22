@@ -9,7 +9,7 @@ var soyImport = "'use strict';\n\nimport soyutils from 'module:soyutils';"
 var soyRegex = /'use strict';(\s*import\s+soyutils\s+from\s+'module:soyutils';)?/
 
 gulp.task('addSoyImport', function(done) {
-    return gulp.src(path.join(soyFolder, 'SoyComponent.js'))
+	return gulp.src(path.join(soyFolder, 'SoyComponent.js'))
 		.pipe(replace(soyRegex, soyImport))
 		.pipe(gulp.dest(soyFolder));
 });
