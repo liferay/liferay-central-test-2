@@ -272,10 +272,10 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 			LayoutTypeControllerTracker.getLayoutTypeController(type);
 
 		if (!layoutTypeController.isInstanceable()) {
-			boolean allowNonInstaceableLayout = GetterUtil.getBoolean(
-				serviceContext.getAttribute("allow.non.instanceable.layout"));
+			boolean allowNoninstaceableLayout = GetterUtil.getBoolean(
+				serviceContext.getAttribute("allow.noninstanceable.layout"));
 
-			if (!allowNonInstaceableLayout) {
+			if (!allowNoninstaceableLayout) {
 				throw new LayoutTypeException(
 					LayoutTypeException.NOT_INSTANCEABLE);
 			}
