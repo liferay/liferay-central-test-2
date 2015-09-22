@@ -120,11 +120,10 @@ public class POPServerUtil {
 		}
 
 		try {
-			String eventListenerClass =
-				POPNotificationsMessageListener.class.getName();
+			String className = POPNotificationsMessageListener.class.getName();
 
 			Trigger trigger = TriggerFactoryUtil.createTrigger(
-				eventListenerClass, eventListenerClass,
+				className, className,
 				PropsValues.POP_SERVER_NOTIFICATIONS_INTERVAL, TimeUnit.MINUTE);
 
 			SchedulerEntryImpl schedulerEntryImpl = new SchedulerEntryImpl();
@@ -132,7 +131,7 @@ public class POPServerUtil {
 			schedulerEntryImpl.setEventListenerClass(
 				POPNotificationsMessageListener.class.getName());
 			schedulerEntryImpl.setTrigger(trigger);
-			schedulerEntryImpl.setEventListenerClass(eventListenerClass);
+			schedulerEntryImpl.setEventListenerClass(className);
 
 			SchedulerEngineHelperUtil.schedule(
 				schedulerEntryImpl, StorageType.MEMORY_CLUSTERED, null, 0);
