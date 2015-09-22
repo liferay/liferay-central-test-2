@@ -19,6 +19,7 @@
 <%
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 String assetTagName = ParamUtil.getString(request, "tag");
+String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "title");
 String orderByType = ParamUtil.getString(request, "orderByType", "asc");
@@ -48,15 +49,8 @@ portletURL.setParameter("mvcRenderCommandName", "/blogs_admin/view");
 	includeCheckBox="<%= true %>"
 >
 	<liferay-frontend:management-bar-buttons>
-
-		<%
-		PortletURL displayStyleURL = renderResponse.createRenderURL();
-
-		String displayStyle = ParamUtil.getString(request, "displayStyle", "icon");
-		%>
-
 		<liferay-frontend:management-bar-display-buttons
-			displayStyleURL="<%= displayStyleURL %>"
+			displayStyleURL="<%= renderResponse.createRenderURL() %>"
 			displayViews='<%= new String[] {"icon", "list"} %>'
 			selectedDisplayStyle="<%= displayStyle %>"
 		/>
