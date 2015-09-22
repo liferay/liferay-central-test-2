@@ -159,9 +159,7 @@ else if (calendar != null) {
 	hasWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), calendarResource.getGroupId(), CalendarBooking.class.getName());
 }
 
-long[] groupIds = user.getGroupIds();
-
-groupIds = ArrayUtil.append(groupIds, scopeGroupId);
+long[] groupIds = ArrayUtil.append(user.getGroupIds(), new long[] {user.getGroupId(), scopeGroupId});
 
 List<Calendar> manageableCalendars = CalendarServiceUtil.search(themeDisplay.getCompanyId(), groupIds, null, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new CalendarNameComparator(true), CalendarActionKeys.MANAGE_BOOKINGS);
 
