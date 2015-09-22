@@ -872,6 +872,7 @@ public class DLAppHelperLocalServiceImpl
 	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #restoreDependentsFromTrash(DLFolder)}
 	 */
+	@Deprecated
 	@Override
 	public void restoreDependentsFromTrash(
 			List<Object> dlFileEntriesAndDLFolders)
