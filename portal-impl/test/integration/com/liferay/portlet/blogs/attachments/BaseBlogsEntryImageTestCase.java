@@ -83,7 +83,7 @@ public abstract class BaseBlogsEntryImageTestCase {
 		Folder folder = BlogsEntryLocalServiceUtil.addAttachmentsFolder(
 			user.getUserId(), group.getGroupId());
 
-		int initialFolderFileEntriesCount =
+		int initialFileEntriesCount =
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
 				group.getGroupId(), folder.getFolderId());
 
@@ -92,7 +92,7 @@ public abstract class BaseBlogsEntryImageTestCase {
 		updateBlogsEntry(blogsEntry.getEntryId(), "image2.jpg");
 
 		Assert.assertEquals(
-			initialFolderFileEntriesCount + 2,
+			initialFileEntriesCount + 2,
 			PortletFileRepositoryUtil.getPortletFileEntriesCount(
 				group.getGroupId(), folder.getFolderId()));
 
