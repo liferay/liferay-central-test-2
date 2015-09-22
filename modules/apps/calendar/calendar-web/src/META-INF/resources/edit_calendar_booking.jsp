@@ -163,6 +163,10 @@ long[] groupIds = ArrayUtil.append(user.getGroupIds(), new long[] {user.getGroup
 
 List<Calendar> manageableCalendars = CalendarServiceUtil.search(themeDisplay.getCompanyId(), groupIds, null, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new CalendarNameComparator(true), CalendarActionKeys.MANAGE_BOOKINGS);
 
+CalendarResource guestCalendarResource = CalendarResourceUtil.fetchGuestCalendarResource(themeDisplay.getCompanyId());
+
+manageableCalendars.remove(guestCalendarResource.getDefaultCalendar());
+
 long[] otherCalendarIds = StringUtil.split(SessionClicks.get(request, "com.liferay.calendar.web_otherCalendars", StringPool.BLANK), 0L);
 
 for (long otherCalendarId : otherCalendarIds) {
